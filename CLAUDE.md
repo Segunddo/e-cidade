@@ -612,7 +612,11 @@ incompatibilidades. Foram portadas depois (mesma receita); a árvore inteira (46
 passa `php -l` no 8.5.
 
 Detalhes operacionais:
-- As cópias em `file/sync/user/<login>/` estão **vazias (0 bytes)** — quem executa é `cache/`.
+- **A árvore é versionada** (desde o commit `88c53b8`). Só `extension/modification/log`
+  segue no `.gitignore`. O motivo: as correções feitas nas cópias de `cache/` se perderiam
+  numa limpeza da pasta, e o sistema voltaria a quebrar em PHP 8 mesmo com o porte aplicado.
+- As cópias em `file/sync/user/<login>/` estão **vazias (0 bytes)** — quem executa é `cache/`,
+  e ele **não é reproduzível** a partir do `sync`: é a única cópia dessas customizações.
 - Os arquivos de `cache/` pertencem a `root`; para editá-los:
   `docker exec -u root ecidade_php56 chmod 666 /var/www/html/<caminho>`
 - **Toda varredura e todo porte precisam incluir `extension/modification/`.** Medir só a
