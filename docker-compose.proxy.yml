@@ -1,0 +1,30 @@
+# Proxy reverso do strangler fig: os dois runtimes sob uma única origem.
+#
+#   http://localhost:8090   <- use ESTE endereço
+#        /tra1_*, /tra_*  ->  PHP 8.5  (módulo migrado)
+#        /*               ->  PHP 5.6  (login, Laravel, demais módulos)
+#
+# As portas 8080 e 8085 continuam existindo para depuração isolada de cada runtime.
+#
+# Pré-requisitos (nesta ordem):
+#   docker volume create ecidade_sessions
+#   docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
+#   docker compose -f docker-compose.php85.yml up -d --build
+#   docker compose -f docker-compose.proxy.yml up -d
+
+services:
+
+  ecidade_proxy:
+    image: nginx:1.27-alpine
+    container_name: ecidade_proxy
+    ports:
+      - "8090:80"
+    volumes:
+      - ./docker/proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - ecidade
+
+networks:
+  ecidade:
+    external: true
+    name: e-cidade_ecidade

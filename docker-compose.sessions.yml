@@ -1,0 +1,27 @@
+# Sessão compartilhada entre os dois runtimes (requisito do strangler fig).
+#
+# O login do e-cidade passa pelo Laravel 5.4, que NÃO roda em PHP 8. Enquanto o
+# framework não subir a escada de versões, a autenticação precisa permanecer no
+# runtime 5.6 — e o runtime 8.5 precisa enxergar a MESMA sessão para servir os
+# módulos já migrados. É exatamente o que o proxy reverso do desenho prevê.
+#
+# Este arquivo é um OVERLAY: não altera o docker-compose.yml de referência,
+# apenas acrescenta o volume de sessão ao container 5.6.
+#
+# Uso (o -f do arquivo base vem primeiro; a ordem importa):
+#   docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
+#
+# O container 8.5 monta o mesmo volume pelo docker-compose.php85.yml.
+#
+# Cookies de `localhost` são compartilhados entre portas, então a sessão criada
+# ao logar em :8080 é automaticamente enviada para :8085.
+
+services:
+
+  ecidade_php56:
+    volumes:
+      - ecidade_sessions:/var/lib/php/sessions
+
+volumes:
+  ecidade_sessions:
+    external: true

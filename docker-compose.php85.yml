@@ -1,0 +1,47 @@
+# Ambiente PARALELO de migração (PHP 8.5) — não substitui o docker-compose.yml.
+#
+# Sobe apenas o runtime novo e o conecta ao MESMO PostgreSQL já usado pelo ambiente
+# PHP 5.6. Isso é deliberado: mantém o banco como constante para que a única variável
+# do experimento seja a versão do PHP. A migração do PostgreSQL é uma fase separada.
+#
+#   PHP 5.6 (referência) -> http://localhost:8080
+#   PHP 8.5 (migração)   -> http://localhost:8085
+#
+# Uso:
+#   docker compose -f docker-compose.php85.yml up -d --build
+#   docker compose -f docker-compose.php85.yml down
+#
+# Requer o ambiente de referência no ar (fornece a rede e o banco):
+#   docker compose up -d
+
+services:
+
+  ecidade_php85:
+    build:
+      context: ./docker/php85-apache
+    container_name: ecidade_php85
+    ports:
+      - "8085:80"
+    environment:
+      DB_HOST: ecidade_database
+      DB_PORT: 5432
+      DB_DATABASE: ecidade
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+    volumes:
+      - ./:/var/www/html/
+      # Sessão compartilhada com o runtime 5.6: o login roda no Laravel 5.4, que não
+      # funciona em PHP 8, então autentica-se em :8080 e navega-se o módulo migrado
+      # em :8085 com a mesma sessão. Ver docker-compose.sessions.yml.
+      - ecidade_sessions:/var/lib/php/sessions
+    networks:
+      - ecidade
+
+networks:
+  ecidade:
+    external: true
+    name: e-cidade_ecidade
+
+volumes:
+  ecidade_sessions:
+    external: true
