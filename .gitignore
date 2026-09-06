@@ -2,7 +2,7 @@
 /.settings
 /cache
 /extension/data
-/extension/modification
+/extension/modification/log
 /extension/log
 
 config/application.php
