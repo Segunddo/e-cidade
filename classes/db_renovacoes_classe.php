@@ -64,7 +64,7 @@ class cl_renovacoes {
                  cm07_d_vencimento = date = Vencimento
                  ";
    //funcao construtor da classe
-   function cl_renovacoes() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("renovacoes");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,9 +81,9 @@ class cl_renovacoes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm07_i_codigo = ($this->cm07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm07_i_codigo"]:$this->cm07_i_codigo);
-       $this->cm07_i_sepultamento = ($this->cm07_i_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm07_i_sepultamento"]:$this->cm07_i_sepultamento);
-       $this->cm07_i_renovante = ($this->cm07_i_renovante == ""?@$GLOBALS["HTTP_POST_VARS"]["cm07_i_renovante"]:$this->cm07_i_renovante);
+       $this->cm07_i_codigo = (($this->cm07_i_codigo === 0 || $this->cm07_i_codigo === 0.0 || $this->cm07_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm07_i_codigo"]:$this->cm07_i_codigo);
+       $this->cm07_i_sepultamento = (($this->cm07_i_sepultamento === 0 || $this->cm07_i_sepultamento === 0.0 || $this->cm07_i_sepultamento == "")?@$GLOBALS["HTTP_POST_VARS"]["cm07_i_sepultamento"]:$this->cm07_i_sepultamento);
+       $this->cm07_i_renovante = (($this->cm07_i_renovante === 0 || $this->cm07_i_renovante === 0.0 || $this->cm07_i_renovante == "")?@$GLOBALS["HTTP_POST_VARS"]["cm07_i_renovante"]:$this->cm07_i_renovante);
        $this->cm07_c_motivo = ($this->cm07_c_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm07_c_motivo"]:$this->cm07_c_motivo);
        if($this->cm07_d_ultima == ""){
          $this->cm07_d_ultima_dia = ($this->cm07_d_ultima_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm07_d_ultima_dia"]:$this->cm07_d_ultima_dia);
@@ -102,7 +102,7 @@ class cl_renovacoes {
          }
        }
      }else{
-       $this->cm07_i_codigo = ($this->cm07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm07_i_codigo"]:$this->cm07_i_codigo);
+       $this->cm07_i_codigo = (($this->cm07_i_codigo === 0 || $this->cm07_i_codigo === 0.0 || $this->cm07_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm07_i_codigo"]:$this->cm07_i_codigo);
      }
    }
    // funcao para inclusao
@@ -162,7 +162,7 @@ class cl_renovacoes {
          $this->cm07_i_codigo = $cm07_i_codigo;
        }
      }
-     if(($this->cm07_i_codigo == null) || ($this->cm07_i_codigo == "") ){
+     if(($this->cm07_i_codigo == null) || (($this->cm07_i_codigo === 0 || $this->cm07_i_codigo === 0.0 || $this->cm07_i_codigo == "")) ){
        $this->erro_sql = " Campo cm07_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -467,7 +467,7 @@ class cl_renovacoes {
    function sql_query ( $cm07_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -497,7 +497,7 @@ class cl_renovacoes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_renovacoes {
    function sql_query_file ( $cm07_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -530,7 +530,7 @@ class cl_renovacoes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

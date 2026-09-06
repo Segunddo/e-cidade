@@ -1360,7 +1360,7 @@ class cl_db_estrut{
 
     $codigo = str_replace(".","",$codigo);
     $tamanho02   = strlen(str_replace(".","",$mascara));
-    $arr_mascara = split("\.",$mascara);
+    $arr_mascara = explode(".",$mascara);
     $tamanho =  count($arr_mascara);
 
     //rotina que salva em array onde inicia e qual o tamanho de cada nivel
@@ -1412,7 +1412,7 @@ class cl_db_estrut{
 
   function db_monta($codigo,$mascara,$nivel){
     $codigo = str_replace(".","",$codigo);
-    $arr_mascara = split("\.",$mascara);
+    $arr_mascara = explode(".",$mascara);
     $tamanho =  count($arr_mascara);
     $tamanho02   = strlen(str_replace(".","",$mascara));
 
@@ -1447,7 +1447,7 @@ class cl_db_estrut{
 
   function db_estrutformata($codigo,$mascara){
     $codigo = str_replace(".","",$codigo);
-    $arr_mascara = split("\.",$mascara);
+    $arr_mascara = explode(".",$mascara);
     $tamanho =  count($arr_mascara);
     $tamanho02   = strlen(str_replace(".","",$mascara));
 

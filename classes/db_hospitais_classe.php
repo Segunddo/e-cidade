@@ -48,7 +48,7 @@ class cl_hospitais {
                  cm18_i_hospital = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_hospitais() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("hospitais"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -65,16 +65,16 @@ class cl_hospitais {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm18_i_hospital = ($this->cm18_i_hospital == ""?@$GLOBALS["HTTP_POST_VARS"]["cm18_i_hospital"]:$this->cm18_i_hospital);
+       $this->cm18_i_hospital = (($this->cm18_i_hospital === 0 || $this->cm18_i_hospital === 0.0 || $this->cm18_i_hospital == "")?@$GLOBALS["HTTP_POST_VARS"]["cm18_i_hospital"]:$this->cm18_i_hospital);
      }else{
-       $this->cm18_i_hospital = ($this->cm18_i_hospital == ""?@$GLOBALS["HTTP_POST_VARS"]["cm18_i_hospital"]:$this->cm18_i_hospital);
+       $this->cm18_i_hospital = (($this->cm18_i_hospital === 0 || $this->cm18_i_hospital === 0.0 || $this->cm18_i_hospital == "")?@$GLOBALS["HTTP_POST_VARS"]["cm18_i_hospital"]:$this->cm18_i_hospital);
      }
    }
    // funcao para inclusao
    function incluir ($cm18_i_hospital){ 
       $this->atualizacampos();
        $this->cm18_i_hospital = $cm18_i_hospital; 
-     if(($this->cm18_i_hospital == null) || ($this->cm18_i_hospital == "") ){ 
+     if(($this->cm18_i_hospital == null) || (($this->cm18_i_hospital === 0 || $this->cm18_i_hospital === 0.0 || $this->cm18_i_hospital == "")) ){ 
        $this->erro_sql = " Campo cm18_i_hospital nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -274,7 +274,7 @@ class cl_hospitais {
    function sql_query ( $cm18_i_hospital=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -296,7 +296,7 @@ class cl_hospitais {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -308,7 +308,7 @@ class cl_hospitais {
    function sql_query_file ( $cm18_i_hospital=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_hospitais {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

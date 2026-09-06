@@ -110,14 +110,16 @@ function db_sel_pessal($tabela,$cmp_=null,$where=null){
 
   $vircula = "";
   if($cmp_ != null || $cmp_ != ""){
-     $cmp_ =  strtoupper(split(",",$cmp_));
+     $cmp_ =  strtoupper(explode(",",$cmp_));
      for($index=0; $index<$count($cmp_); $index++){
        $cmp .= $vircula." ".$campos[$cmp_[$index]]." AS ".$cmp_[$index];
        $vircula = ",";
      }
   }else {
      reset($campos);
-     while (list($key, $val) = each($campos)) {
+     while (($key = key($campos)) !== null) {
+       $val = current($campos);
+       next($campos);
        $cmp .= $vircula." ".$key." AS ".$val;
        $vircula = ",";
      }
@@ -127,7 +129,9 @@ function db_sel_pessal($tabela,$cmp_=null,$where=null){
   if($where == null || $where == ""){
     $where = "";
   }else{
-     while (list($key, $val) = each($campos)) {
+     while (($key = key($campos)) !== null) {
+       $val = current($campos);
+       next($campos);
        $where =  str_replace($key,$val,$where);
      }
     

@@ -52,7 +52,7 @@ class cl_legista {
                  cm32_i_crm = int8 = Crm/Cro 
                  ";
    //funcao construtor da classe 
-   function cl_legista() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("legista"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_legista {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm32_i_codigo = ($this->cm32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_codigo"]:$this->cm32_i_codigo);
-       $this->cm32_i_numcgm = ($this->cm32_i_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_numcgm"]:$this->cm32_i_numcgm);
-       $this->cm32_i_crm = ($this->cm32_i_crm == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_crm"]:$this->cm32_i_crm);
+       $this->cm32_i_codigo = (($this->cm32_i_codigo === 0 || $this->cm32_i_codigo === 0.0 || $this->cm32_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_codigo"]:$this->cm32_i_codigo);
+       $this->cm32_i_numcgm = (($this->cm32_i_numcgm === 0 || $this->cm32_i_numcgm === 0.0 || $this->cm32_i_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_numcgm"]:$this->cm32_i_numcgm);
+       $this->cm32_i_crm = (($this->cm32_i_crm === 0 || $this->cm32_i_crm === 0.0 || $this->cm32_i_crm == "")?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_crm"]:$this->cm32_i_crm);
      }else{
-       $this->cm32_i_codigo = ($this->cm32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_codigo"]:$this->cm32_i_codigo);
+       $this->cm32_i_codigo = (($this->cm32_i_codigo === 0 || $this->cm32_i_codigo === 0.0 || $this->cm32_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_codigo"]:$this->cm32_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_legista {
          $this->cm32_i_codigo = $cm32_i_codigo; 
        }
      }
-     if(($this->cm32_i_codigo == null) || ($this->cm32_i_codigo == "") ){ 
+     if(($this->cm32_i_codigo == null) || (($this->cm32_i_codigo === 0 || $this->cm32_i_codigo === 0.0 || $this->cm32_i_codigo == "")) ){ 
        $this->erro_sql = " Campo cm32_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_legista {
    function sql_query ( $cm32_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_legista {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_legista {
    function sql_query_file ( $cm32_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_legista {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

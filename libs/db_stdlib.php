@@ -140,19 +140,19 @@ function db_dias_mes($ano,$mes,$ret_data = false){
  * Função para validar PIS
  */
 function checkPIS($pis){
-    $pis = str_pad(ereg_replace('[^0-9]', '', $pis), 11, '0', STR_PAD_LEFT);
+    $pis = str_pad(preg_replace('/[^0-9]/', '', $pis), 11, '0', STR_PAD_LEFT);
 
     if (strlen($pis) != 11 || intval($pis) == 0) {
         return false;
     } else {
         for ($d = 0, $p = 3, $c = 0; $c < 10; $c++) {
-            $d += $pis{$c} * $p;
+            $d += $pis[$c] * $p;
             $p = ($p < 3) ? 9 : --$p;
         }
 
         $d = ((10 * $d) % 11) % 10;
 
-        return ($pis{$c} == $d) ? true : false;
+        return ($pis[$c] == $d) ? true : false;
     }
 }
 
@@ -1317,6 +1317,13 @@ function db_fieldsmemory($recordset, $indice, $formatar = "", $mostravar = false
     //#99#//Exemplo:
     //#99#//db_fieldsmemory($result,0);
     //#99#//Cria todas as variáveis com o conteúdo de cada uma sendo o valor do campo
+    // COMPAT PHP 8: no 5.6, pg_numfields(false) so emitia warning e a funcao
+    // seguia sem criar variavel nenhuma. No PHP 8 e TypeError fatal. Um recordset
+    // falso vem de sql_record() quando a consulta traz zero linhas (tabela vazia).
+    // O retorno antecipado reproduz exatamente o efeito que a funcao tinha no 5.6.
+    if (!$recordset) {
+        return;
+    }
     $fm_numfields = pg_numfields($recordset);
     $fm_numrows = pg_numrows($recordset);
     //if(pg_numrows($recordset)==0){
@@ -1782,7 +1789,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
 
         db_putsession("dblov_query_inicial", $query);
 
-        $$tot_registros = pg_result($tot, 0, 0);
+        $$tot_registros = $tot ? pg_result($tot, 0, 0) : 0;
 
         if ($$tot_registros == 0) {
             $Dd2 = "disabled";
@@ -1930,7 +1937,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
 
     $query .= " limit $numlinhas offset " . $$offset;
     $result = db_query($query);
-    $NumRows = pg_numrows($result);
+    $NumRows = $result ? pg_numrows($result) : 0;
 
     if ($NumRows == 0) {
 
@@ -1962,7 +1969,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
                 $tot = db_query("select count(*) from ({$query_anterior}) as temp");
             }
 
-            $$tot_registros = pg_result($tot, 0, 0);
+            $$tot_registros = $tot ? pg_result($tot, 0, 0) : 0;
 
             $query = $query_anterior . " limit $numlinhas offset " . $$offset;
             $result = db_query($query);
@@ -1999,7 +2006,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
                 $tot = db_query("select count(*) from ({$query_novo_filtro}) as temp");
             }
 
-            $$tot_registros = pg_result($tot, 0, 0);
+            $$tot_registros = $tot ? pg_result($tot, 0, 0) : 0;
 
             if ($$tot_registros == 0) {
                 $Dd2 = "disabled";
@@ -2623,7 +2630,7 @@ function db_lov($query, $numlinhas,
     if (empty ($$tot_registros)) {
         $Dd1 = "disabled";
         $tot = db_query("select count(*) from ($query) as temp");
-        $$tot_registros = pg_result($tot, 0, 0);
+        $$tot_registros = $tot ? pg_result($tot, 0, 0) : 0;
     }
     // testa qual botao foi pressionado
     if (isset ($HTTP_POST_VARS["pri" . $NomeForm])) {
@@ -2658,7 +2665,7 @@ function db_lov($query, $numlinhas,
     // executa a query e cria a tabela
     $query .= " limit $numlinhas offset " . $$offset;
     $result = db_query($query);
-    $NumRows = pg_numrows($result);
+    $NumRows = $result ? pg_numrows($result) : 0;
     $NumFields = pg_numfields($result);
     if ($NumRows < $numlinhas) {
         $Dd1 = $Dd2 = "disabled";
@@ -3020,7 +3027,7 @@ function db_extenso($valor = 0, $maiusculas = false)
                   Rodrigo Cerqueira, rodrigobc@fte.com.br
                   */
     if ($rt)
-      $rt = ereg_replace(" E ", " e ", ucwords($rt));
+      $rt = str_replace(" E ", " e ", ucwords($rt));
       return (($rt) ? ($rt) : "Zero");
   }
 
@@ -3072,7 +3079,7 @@ function print_vars($obj)
     $arr = get_object_vars($obj);
     echo "<table border=0 bgcolor=#AAAAFF style='border:1px solid'>";
     echo "<tr><td colspan=3>Debug da classe " . get_class($obj) . " </td></tr>";
-  while (list ($prop, $val) = each($arr))
+  foreach ($arr as $prop => $val)
       echo "<tr><td>&nbsp; </td><td align=left>var $$prop </td><td> $val </td>";
 }
 
@@ -3888,16 +3895,16 @@ function db_removeAcentuacao($sRemover)
 
     $var = $sRemover;
 
-    $var = ereg_replace("[ÁÀÂÃ]", "A", $var);
-    $var = ereg_replace("[áàâãª]", "a", $var);
-    $var = ereg_replace("[ÉÈÊ]", "E", $var);
-    $var = ereg_replace("[éèê]", "e", $var);
-    $var = ereg_replace("[íì]", "i", $var);
-    $var = ereg_replace("[ÍÌ]", "I", $var);
-    $var = ereg_replace("[ÓÒÔÕ]", "O", $var);
-    $var = ereg_replace("[óòôõº]", "o", $var);
-    $var = ereg_replace("[ÚÙÛ]", "U", $var);
-  $var = ereg_replace("[úùû]","u",$var);
+    $var = preg_replace("/[ÁÀÂÃ]/", "A", $var);
+    $var = preg_replace("/[áàâãª]/", "a", $var);
+    $var = preg_replace("/[ÉÈÊ]/", "E", $var);
+    $var = preg_replace("/[éèê]/", "e", $var);
+    $var = preg_replace("/[íì]/", "i", $var);
+    $var = preg_replace("/[ÍÌ]/", "I", $var);
+    $var = preg_replace("/[ÓÒÔÕ]/", "O", $var);
+    $var = preg_replace("/[óòôõº]/", "o", $var);
+    $var = preg_replace("/[ÚÙÛ]/", "U", $var);
+  $var = preg_replace("/[úùû]/","u",$var);
   $var = str_replace("'","",$var);
   $var = str_replace("Ç","C",$var);
   $var = str_replace("ç","c",$var);

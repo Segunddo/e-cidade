@@ -48,7 +48,7 @@ class cl_cemiterio {
                  cm14_i_codigo = int4 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_cemiterio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cemiterio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -65,9 +65,9 @@ class cl_cemiterio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm14_i_codigo = ($this->cm14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm14_i_codigo"]:$this->cm14_i_codigo);
+       $this->cm14_i_codigo = (($this->cm14_i_codigo === 0 || $this->cm14_i_codigo === 0.0 || $this->cm14_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm14_i_codigo"]:$this->cm14_i_codigo);
      }else{
-       $this->cm14_i_codigo = ($this->cm14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm14_i_codigo"]:$this->cm14_i_codigo);
+       $this->cm14_i_codigo = (($this->cm14_i_codigo === 0 || $this->cm14_i_codigo === 0.0 || $this->cm14_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm14_i_codigo"]:$this->cm14_i_codigo);
      }
    }
    // funcao para inclusao
@@ -97,7 +97,7 @@ class cl_cemiterio {
          $this->cm14_i_codigo = $cm14_i_codigo; 
        }
      }
-     if(($this->cm14_i_codigo == null) || ($this->cm14_i_codigo == "") ){ 
+     if(($this->cm14_i_codigo == null) || (($this->cm14_i_codigo === 0 || $this->cm14_i_codigo === 0.0 || $this->cm14_i_codigo == "")) ){ 
        $this->erro_sql = " Campo cm14_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -297,7 +297,7 @@ class cl_cemiterio {
    function sql_query ( $cm14_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -321,7 +321,7 @@ class cl_cemiterio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -333,7 +333,7 @@ class cl_cemiterio {
    function sql_query_file ( $cm14_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -354,7 +354,7 @@ class cl_cemiterio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

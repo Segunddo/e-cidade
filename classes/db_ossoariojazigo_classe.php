@@ -58,7 +58,7 @@ class cl_ossoariojazigo {
                  cm25_c_tipo = char(1) = Tipo
                  ";
    //funcao construtor da classe
-   function cl_ossoariojazigo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ossoariojazigo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_ossoariojazigo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm25_i_codigo = ($this->cm25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_codigo"]:$this->cm25_i_codigo);
+       $this->cm25_i_codigo = (($this->cm25_i_codigo === 0 || $this->cm25_i_codigo === 0.0 || $this->cm25_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_codigo"]:$this->cm25_i_codigo);
        $this->cm25_c_numero = ($this->cm25_c_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_c_numero"]:$this->cm25_c_numero);
-       $this->cm25_i_lotecemit = ($this->cm25_i_lotecemit == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_lotecemit"]:$this->cm25_i_lotecemit);
-       $this->cm25_f_comprimento = ($this->cm25_f_comprimento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_f_comprimento"]:$this->cm25_f_comprimento);
-       $this->cm25_f_largura = ($this->cm25_f_largura == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_f_largura"]:$this->cm25_f_largura);
+       $this->cm25_i_lotecemit = (($this->cm25_i_lotecemit === 0 || $this->cm25_i_lotecemit === 0.0 || $this->cm25_i_lotecemit == "")?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_lotecemit"]:$this->cm25_i_lotecemit);
+       $this->cm25_f_comprimento = (($this->cm25_f_comprimento === 0 || $this->cm25_f_comprimento === 0.0 || $this->cm25_f_comprimento == "")?@$GLOBALS["HTTP_POST_VARS"]["cm25_f_comprimento"]:$this->cm25_f_comprimento);
+       $this->cm25_f_largura = (($this->cm25_f_largura === 0 || $this->cm25_f_largura === 0.0 || $this->cm25_f_largura == "")?@$GLOBALS["HTTP_POST_VARS"]["cm25_f_largura"]:$this->cm25_f_largura);
        $this->cm25_c_tipo = ($this->cm25_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_c_tipo"]:$this->cm25_c_tipo);
      }else{
-       $this->cm25_i_codigo = ($this->cm25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_codigo"]:$this->cm25_i_codigo);
+       $this->cm25_i_codigo = (($this->cm25_i_codigo === 0 || $this->cm25_i_codigo === 0.0 || $this->cm25_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_codigo"]:$this->cm25_i_codigo);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_ossoariojazigo {
          $this->cm25_i_codigo = $cm25_i_codigo;
        }
      }
-     if(($this->cm25_i_codigo == null) || ($this->cm25_i_codigo == "") ){
+     if(($this->cm25_i_codigo == null) || (($this->cm25_i_codigo === 0 || $this->cm25_i_codigo === 0.0 || $this->cm25_i_codigo == "")) ){
        $this->erro_sql = " Campo cm25_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -437,7 +437,7 @@ class cl_ossoariojazigo {
    function sql_query ( $cm25_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ $sql .= "  left join protprocesso   on  protprocesso.p58_codproc           =  pr
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -485,7 +485,7 @@ $sql .= "  left join protprocesso   on  protprocesso.p58_codproc           =  pr
    function sql_query_file ( $cm25_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -506,7 +506,7 @@ $sql .= "  left join protprocesso   on  protprocesso.p58_codproc           =  pr
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

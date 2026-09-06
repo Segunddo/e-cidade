@@ -83,7 +83,7 @@ class cl_jazigos {
                  cm03_f_metragem2 = float8 = Metragem 2 
                  ";
    //funcao construtor da classe 
-   function cl_jazigos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("jazigos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -100,8 +100,8 @@ class cl_jazigos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm03_i_codigo = ($this->cm03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_i_codigo"]:$this->cm03_i_codigo);
-       $this->cm03_i_proprietario = ($this->cm03_i_proprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_i_proprietario"]:$this->cm03_i_proprietario);
+       $this->cm03_i_codigo = (($this->cm03_i_codigo === 0 || $this->cm03_i_codigo === 0.0 || $this->cm03_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm03_i_codigo"]:$this->cm03_i_codigo);
+       $this->cm03_i_proprietario = (($this->cm03_i_proprietario === 0 || $this->cm03_i_proprietario === 0.0 || $this->cm03_i_proprietario == "")?@$GLOBALS["HTTP_POST_VARS"]["cm03_i_proprietario"]:$this->cm03_i_proprietario);
        $this->cm03_c_termo = ($this->cm03_c_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_c_termo"]:$this->cm03_c_termo);
        if($this->cm03_d_datatermo == ""){
          $this->cm03_d_datatermo_dia = ($this->cm03_d_datatermo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_d_datatermo_dia"]:$this->cm03_d_datatermo_dia);
@@ -132,11 +132,11 @@ class cl_jazigos {
        $this->cm03_c_estrutura = ($this->cm03_c_estrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_c_estrutura"]:$this->cm03_c_estrutura);
        $this->cm03_c_pronto = ($this->cm03_c_pronto == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_c_pronto"]:$this->cm03_c_pronto);
        $this->cm03_c_quadra = ($this->cm03_c_quadra == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_c_quadra"]:$this->cm03_c_quadra);
-       $this->cm03_i_lote = ($this->cm03_i_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_i_lote"]:$this->cm03_i_lote);
-       $this->cm03_f_metragem1 = ($this->cm03_f_metragem1 == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_f_metragem1"]:$this->cm03_f_metragem1);
-       $this->cm03_f_metragem2 = ($this->cm03_f_metragem2 == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_f_metragem2"]:$this->cm03_f_metragem2);
+       $this->cm03_i_lote = (($this->cm03_i_lote === 0 || $this->cm03_i_lote === 0.0 || $this->cm03_i_lote == "")?@$GLOBALS["HTTP_POST_VARS"]["cm03_i_lote"]:$this->cm03_i_lote);
+       $this->cm03_f_metragem1 = (($this->cm03_f_metragem1 === 0 || $this->cm03_f_metragem1 === 0.0 || $this->cm03_f_metragem1 == "")?@$GLOBALS["HTTP_POST_VARS"]["cm03_f_metragem1"]:$this->cm03_f_metragem1);
+       $this->cm03_f_metragem2 = (($this->cm03_f_metragem2 === 0 || $this->cm03_f_metragem2 === 0.0 || $this->cm03_f_metragem2 == "")?@$GLOBALS["HTTP_POST_VARS"]["cm03_f_metragem2"]:$this->cm03_f_metragem2);
      }else{
-       $this->cm03_i_codigo = ($this->cm03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm03_i_codigo"]:$this->cm03_i_codigo);
+       $this->cm03_i_codigo = (($this->cm03_i_codigo === 0 || $this->cm03_i_codigo === 0.0 || $this->cm03_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm03_i_codigo"]:$this->cm03_i_codigo);
      }
    }
    // funcao para inclusao
@@ -283,7 +283,7 @@ class cl_jazigos {
          $this->cm03_i_codigo = $cm03_i_codigo; 
        }
      }
-     if(($this->cm03_i_codigo == null) || ($this->cm03_i_codigo == "") ){ 
+     if(($this->cm03_i_codigo == null) || (($this->cm03_i_codigo === 0 || $this->cm03_i_codigo === 0.0 || $this->cm03_i_codigo == "")) ){ 
        $this->erro_sql = " Campo cm03_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -772,7 +772,7 @@ class cl_jazigos {
    function sql_query ( $cm03_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -794,7 +794,7 @@ class cl_jazigos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -806,7 +806,7 @@ class cl_jazigos {
    function sql_query_file ( $cm03_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -827,7 +827,7 @@ class cl_jazigos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

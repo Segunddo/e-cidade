@@ -40,7 +40,7 @@ require_once(modification("classes/db_ossoariojazigo_classe.php"));
 require_once(modification("classes/db_restosgavetas_classe.php"));
 require_once(modification("classes/db_gavetas_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clsepultamentos  = new cl_sepultamentos;

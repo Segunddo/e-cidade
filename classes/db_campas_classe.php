@@ -50,7 +50,7 @@ class cl_campas {
                  cm19_c_descr = char(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_campas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("campas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_campas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm19_i_codigo = ($this->cm19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm19_i_codigo"]:$this->cm19_i_codigo);
+       $this->cm19_i_codigo = (($this->cm19_i_codigo === 0 || $this->cm19_i_codigo === 0.0 || $this->cm19_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm19_i_codigo"]:$this->cm19_i_codigo);
        $this->cm19_c_descr = ($this->cm19_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["cm19_c_descr"]:$this->cm19_c_descr);
      }else{
-       $this->cm19_i_codigo = ($this->cm19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm19_i_codigo"]:$this->cm19_i_codigo);
+       $this->cm19_i_codigo = (($this->cm19_i_codigo === 0 || $this->cm19_i_codigo === 0.0 || $this->cm19_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm19_i_codigo"]:$this->cm19_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_campas {
          $this->cm19_i_codigo = $cm19_i_codigo; 
        }
      }
-     if(($this->cm19_i_codigo == null) || ($this->cm19_i_codigo == "") ){ 
+     if(($this->cm19_i_codigo == null) || (($this->cm19_i_codigo === 0 || $this->cm19_i_codigo === 0.0 || $this->cm19_i_codigo == "")) ){ 
        $this->erro_sql = " Campo cm19_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_campas {
    function sql_query ( $cm19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_campas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_campas {
    function sql_query_file ( $cm19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_campas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -75,7 +75,7 @@ class cl_itenserv {
                  cm10_f_valortaxa = float8 = Valor Taxa 
                  ";
    //funcao construtor da classe 
-   function cl_itenserv() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itenserv"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,8 +92,8 @@ class cl_itenserv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm10_i_codigo = ($this->cm10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_i_codigo"]:$this->cm10_i_codigo);
-       $this->cm10_i_numpre = ($this->cm10_i_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_i_numpre"]:$this->cm10_i_numpre);
+       $this->cm10_i_codigo = (($this->cm10_i_codigo === 0 || $this->cm10_i_codigo === 0.0 || $this->cm10_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm10_i_codigo"]:$this->cm10_i_codigo);
+       $this->cm10_i_numpre = (($this->cm10_i_numpre === 0 || $this->cm10_i_numpre === 0.0 || $this->cm10_i_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["cm10_i_numpre"]:$this->cm10_i_numpre);
        if($this->cm10_d_data == ""){
          $this->cm10_d_data_dia = ($this->cm10_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_d_data_dia"]:$this->cm10_d_data_dia);
          $this->cm10_d_data_mes = ($this->cm10_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_d_data_mes"]:$this->cm10_d_data_mes);
@@ -102,8 +102,8 @@ class cl_itenserv {
             $this->cm10_d_data = $this->cm10_d_data_ano."-".$this->cm10_d_data_mes."-".$this->cm10_d_data_dia;
          }
        }
-       $this->cm10_i_taxaserv = ($this->cm10_i_taxaserv == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_i_taxaserv"]:$this->cm10_i_taxaserv);
-       $this->cm10_f_valor = ($this->cm10_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_f_valor"]:$this->cm10_f_valor);
+       $this->cm10_i_taxaserv = (($this->cm10_i_taxaserv === 0 || $this->cm10_i_taxaserv === 0.0 || $this->cm10_i_taxaserv == "")?@$GLOBALS["HTTP_POST_VARS"]["cm10_i_taxaserv"]:$this->cm10_i_taxaserv);
+       $this->cm10_f_valor = (($this->cm10_f_valor === 0 || $this->cm10_f_valor === 0.0 || $this->cm10_f_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["cm10_f_valor"]:$this->cm10_f_valor);
        if($this->cm10_d_privenc == ""){
          $this->cm10_d_privenc_dia = ($this->cm10_d_privenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_d_privenc_dia"]:$this->cm10_d_privenc_dia);
          $this->cm10_d_privenc_mes = ($this->cm10_d_privenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_d_privenc_mes"]:$this->cm10_d_privenc_mes);
@@ -113,7 +113,7 @@ class cl_itenserv {
          }
        }
        $this->cm10_t_obs = ($this->cm10_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_t_obs"]:$this->cm10_t_obs);
-       $this->cm10_i_usuario = ($this->cm10_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_i_usuario"]:$this->cm10_i_usuario);
+       $this->cm10_i_usuario = (($this->cm10_i_usuario === 0 || $this->cm10_i_usuario === 0.0 || $this->cm10_i_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["cm10_i_usuario"]:$this->cm10_i_usuario);
        if($this->cm10_d_dtlanc == ""){
          $this->cm10_d_dtlanc_dia = ($this->cm10_d_dtlanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_d_dtlanc_dia"]:$this->cm10_d_dtlanc_dia);
          $this->cm10_d_dtlanc_mes = ($this->cm10_d_dtlanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_d_dtlanc_mes"]:$this->cm10_d_dtlanc_mes);
@@ -122,9 +122,9 @@ class cl_itenserv {
             $this->cm10_d_dtlanc = $this->cm10_d_dtlanc_ano."-".$this->cm10_d_dtlanc_mes."-".$this->cm10_d_dtlanc_dia;
          }
        }
-       $this->cm10_f_valortaxa = ($this->cm10_f_valortaxa == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_f_valortaxa"]:$this->cm10_f_valortaxa);
+       $this->cm10_f_valortaxa = (($this->cm10_f_valortaxa === 0 || $this->cm10_f_valortaxa === 0.0 || $this->cm10_f_valortaxa == "")?@$GLOBALS["HTTP_POST_VARS"]["cm10_f_valortaxa"]:$this->cm10_f_valortaxa);
      }else{
-       $this->cm10_i_codigo = ($this->cm10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm10_i_codigo"]:$this->cm10_i_codigo);
+       $this->cm10_i_codigo = (($this->cm10_i_codigo === 0 || $this->cm10_i_codigo === 0.0 || $this->cm10_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm10_i_codigo"]:$this->cm10_i_codigo);
      }
    }
    // funcao para inclusao
@@ -226,7 +226,7 @@ class cl_itenserv {
          $this->cm10_i_codigo = $cm10_i_codigo; 
        }
      }
-     if(($this->cm10_i_codigo == null) || ($this->cm10_i_codigo == "") ){ 
+     if(($this->cm10_i_codigo == null) || (($this->cm10_i_codigo === 0 || $this->cm10_i_codigo === 0.0 || $this->cm10_i_codigo == "")) ){ 
        $this->erro_sql = " Campo cm10_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -631,7 +631,7 @@ class cl_itenserv {
    function sql_query ( $cm10_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -663,7 +663,7 @@ class cl_itenserv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -676,7 +676,7 @@ class cl_itenserv {
    function sql_query_file ( $cm10_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -697,7 +697,7 @@ class cl_itenserv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

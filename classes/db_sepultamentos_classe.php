@@ -96,7 +96,7 @@ class cl_sepultamentos {
                  cm01_c_nomefuneraria = varchar(60) = Funerária
                  ";
    //funcao construtor da classe
-   function cl_sepultamentos() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sepultamentos");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -113,14 +113,14 @@ class cl_sepultamentos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm01_i_codigo = ($this->cm01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_codigo"]:$this->cm01_i_codigo);
-       $this->cm01_i_medico = ($this->cm01_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_medico"]:$this->cm01_i_medico);
-       $this->cm01_i_hospital = ($this->cm01_i_hospital == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_hospital"]:$this->cm01_i_hospital);
-       $this->cm01_i_funeraria = ($this->cm01_i_funeraria == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_funeraria"]:$this->cm01_i_funeraria);
-       $this->cm01_i_causa = ($this->cm01_i_causa == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_causa"]:$this->cm01_i_causa);
-       $this->cm01_i_funcionario = ($this->cm01_i_funcionario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_funcionario"]:$this->cm01_i_funcionario);
-       $this->cm01_i_cemiterio = ($this->cm01_i_cemiterio == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_cemiterio"]:$this->cm01_i_cemiterio);
-       $this->cm01_i_declarante = ($this->cm01_i_declarante == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_declarante"]:$this->cm01_i_declarante);
+       $this->cm01_i_codigo = (($this->cm01_i_codigo === 0 || $this->cm01_i_codigo === 0.0 || $this->cm01_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_codigo"]:$this->cm01_i_codigo);
+       $this->cm01_i_medico = (($this->cm01_i_medico === 0 || $this->cm01_i_medico === 0.0 || $this->cm01_i_medico == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_medico"]:$this->cm01_i_medico);
+       $this->cm01_i_hospital = (($this->cm01_i_hospital === 0 || $this->cm01_i_hospital === 0.0 || $this->cm01_i_hospital == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_hospital"]:$this->cm01_i_hospital);
+       $this->cm01_i_funeraria = (($this->cm01_i_funeraria === 0 || $this->cm01_i_funeraria === 0.0 || $this->cm01_i_funeraria == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_funeraria"]:$this->cm01_i_funeraria);
+       $this->cm01_i_causa = (($this->cm01_i_causa === 0 || $this->cm01_i_causa === 0.0 || $this->cm01_i_causa == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_causa"]:$this->cm01_i_causa);
+       $this->cm01_i_funcionario = (($this->cm01_i_funcionario === 0 || $this->cm01_i_funcionario === 0.0 || $this->cm01_i_funcionario == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_funcionario"]:$this->cm01_i_funcionario);
+       $this->cm01_i_cemiterio = (($this->cm01_i_cemiterio === 0 || $this->cm01_i_cemiterio === 0.0 || $this->cm01_i_cemiterio == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_cemiterio"]:$this->cm01_i_cemiterio);
+       $this->cm01_i_declarante = (($this->cm01_i_declarante === 0 || $this->cm01_i_declarante === 0.0 || $this->cm01_i_declarante == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_declarante"]:$this->cm01_i_declarante);
        $this->cm01_c_conjuge = ($this->cm01_c_conjuge == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_c_conjuge"]:$this->cm01_c_conjuge);
        $this->cm01_c_cor = ($this->cm01_c_cor == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_c_cor"]:$this->cm01_c_cor);
        if($this->cm01_d_falecimento == ""){
@@ -134,8 +134,8 @@ class cl_sepultamentos {
        $this->cm01_c_local = ($this->cm01_c_local == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_c_local"]:$this->cm01_c_local);
        $this->cm01_c_cartorio = ($this->cm01_c_cartorio == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_c_cartorio"]:$this->cm01_c_cartorio);
        $this->cm01_c_livro = ($this->cm01_c_livro == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_c_livro"]:$this->cm01_c_livro);
-       $this->cm01_i_folha = ($this->cm01_i_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_folha"]:$this->cm01_i_folha);
-       $this->cm01_i_registro = ($this->cm01_i_registro == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_registro"]:$this->cm01_i_registro);
+       $this->cm01_i_folha = (($this->cm01_i_folha === 0 || $this->cm01_i_folha === 0.0 || $this->cm01_i_folha == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_folha"]:$this->cm01_i_folha);
+       $this->cm01_i_registro = (($this->cm01_i_registro === 0 || $this->cm01_i_registro === 0.0 || $this->cm01_i_registro == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_registro"]:$this->cm01_i_registro);
        if($this->cm01_d_cadastro == ""){
          $this->cm01_d_cadastro_dia = ($this->cm01_d_cadastro_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_d_cadastro_dia"]:$this->cm01_d_cadastro_dia);
          $this->cm01_d_cadastro_mes = ($this->cm01_d_cadastro_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_d_cadastro_mes"]:$this->cm01_d_cadastro_mes);
@@ -150,7 +150,7 @@ class cl_sepultamentos {
        $this->cm01_c_nomehospital = ($this->cm01_c_nomehospital == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_c_nomehospital"]:$this->cm01_c_nomehospital);
        $this->cm01_c_nomefuneraria = ($this->cm01_c_nomefuneraria == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_c_nomefuneraria"]:$this->cm01_c_nomefuneraria);
      }else{
-       $this->cm01_i_codigo = ($this->cm01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_codigo"]:$this->cm01_i_codigo);
+       $this->cm01_i_codigo = (($this->cm01_i_codigo === 0 || $this->cm01_i_codigo === 0.0 || $this->cm01_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm01_i_codigo"]:$this->cm01_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -258,7 +258,7 @@ class cl_sepultamentos {
        return false;
      }
        $this->cm01_i_codigo = $cm01_i_codigo;
-     if(($this->cm01_i_codigo == null) || ($this->cm01_i_codigo == "") ){
+     if(($this->cm01_i_codigo == null) || (($this->cm01_i_codigo === 0 || $this->cm01_i_codigo === 0.0 || $this->cm01_i_codigo == "")) ){
        $this->erro_sql = " Campo cm01_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -842,7 +842,7 @@ class cl_sepultamentos {
    function sql_query ( $cm01_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -877,7 +877,7 @@ class cl_sepultamentos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -912,7 +912,7 @@ class cl_sepultamentos {
 
     if($campos != "*" ) {
 
-      $campos_sql = split("#", $campos);
+      $campos_sql = explode("#", $campos);
 
       $virgula = "";
 
@@ -965,7 +965,7 @@ class cl_sepultamentos {
     if($ordem != null) {
 
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = explode("#", $ordem);
       $virgula = "";
 
       for($i = 0; $i < sizeof($campos_sql); $i++) {

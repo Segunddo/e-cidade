@@ -51,7 +51,7 @@ class db_utils
     /**
      * Construtor da Classe
      */
-    function db_utils()
+    function __construct()
     {
     }
 

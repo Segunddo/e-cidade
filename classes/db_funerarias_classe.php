@@ -48,7 +48,7 @@ class cl_funerarias {
                  cm17_i_funeraria = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_funerarias() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("funerarias"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -65,16 +65,16 @@ class cl_funerarias {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm17_i_funeraria = ($this->cm17_i_funeraria == ""?@$GLOBALS["HTTP_POST_VARS"]["cm17_i_funeraria"]:$this->cm17_i_funeraria);
+       $this->cm17_i_funeraria = (($this->cm17_i_funeraria === 0 || $this->cm17_i_funeraria === 0.0 || $this->cm17_i_funeraria == "")?@$GLOBALS["HTTP_POST_VARS"]["cm17_i_funeraria"]:$this->cm17_i_funeraria);
      }else{
-       $this->cm17_i_funeraria = ($this->cm17_i_funeraria == ""?@$GLOBALS["HTTP_POST_VARS"]["cm17_i_funeraria"]:$this->cm17_i_funeraria);
+       $this->cm17_i_funeraria = (($this->cm17_i_funeraria === 0 || $this->cm17_i_funeraria === 0.0 || $this->cm17_i_funeraria == "")?@$GLOBALS["HTTP_POST_VARS"]["cm17_i_funeraria"]:$this->cm17_i_funeraria);
      }
    }
    // funcao para inclusao
    function incluir ($cm17_i_funeraria){ 
       $this->atualizacampos();
        $this->cm17_i_funeraria = $cm17_i_funeraria; 
-     if(($this->cm17_i_funeraria == null) || ($this->cm17_i_funeraria == "") ){ 
+     if(($this->cm17_i_funeraria == null) || (($this->cm17_i_funeraria === 0 || $this->cm17_i_funeraria === 0.0 || $this->cm17_i_funeraria == "")) ){ 
        $this->erro_sql = " Campo cm17_i_funeraria nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -274,7 +274,7 @@ class cl_funerarias {
    function sql_query ( $cm17_i_funeraria=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -296,7 +296,7 @@ class cl_funerarias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -308,7 +308,7 @@ class cl_funerarias {
    function sql_query_file ( $cm17_i_funeraria=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_funerarias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

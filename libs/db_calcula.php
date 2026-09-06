@@ -118,7 +118,7 @@ class Crypt_HCEMD5 {
      *
      * @access public
      */
-	function Crypt_HCEMD5($key, $rand = null) {
+	function __construct($key, $rand = null) {
         $this->key = $key;
         
         if (!isset($rand)) {

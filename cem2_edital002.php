@@ -29,7 +29,7 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_renovacoes_classe.php"));
 include(modification("classes/db_sepulta_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 $clrenovacoes = new cl_renovacoes;
 $clsepulta = new cl_sepulta;
 
@@ -84,7 +84,7 @@ $sql = "select distinct z01_nome,
           order by z01_nome,cm07_d_vencimento";       
 
 $result = db_query($sql);
-if(pg_numrows($result) == 0){
+if(!$result || pg_numrows($result) == 0){
  echo "<table width='100%'>
        <tr>
         <td align='center'>

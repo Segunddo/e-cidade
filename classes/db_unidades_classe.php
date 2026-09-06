@@ -101,7 +101,7 @@ class cl_unidades {
                  sd02_cnpjcpf = varchar(14) = CNPJ/CPF 
                  ";
    //funcao construtor da classe 
-   function cl_unidades() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("unidades"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -118,22 +118,22 @@ class cl_unidades {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd02_i_codigo = ($this->sd02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_codigo"]:$this->sd02_i_codigo);
-       $this->sd02_i_numcgm = ($this->sd02_i_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_numcgm"]:$this->sd02_i_numcgm);
-       $this->sd02_i_situacao = ($this->sd02_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_situacao"]:$this->sd02_i_situacao);
+       $this->sd02_i_codigo = (($this->sd02_i_codigo === 0 || $this->sd02_i_codigo === 0.0 || $this->sd02_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_codigo"]:$this->sd02_i_codigo);
+       $this->sd02_i_numcgm = (($this->sd02_i_numcgm === 0 || $this->sd02_i_numcgm === 0.0 || $this->sd02_i_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_numcgm"]:$this->sd02_i_numcgm);
+       $this->sd02_i_situacao = (($this->sd02_i_situacao === 0 || $this->sd02_i_situacao === 0.0 || $this->sd02_i_situacao == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_situacao"]:$this->sd02_i_situacao);
        $this->sd02_v_cnes = ($this->sd02_v_cnes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_v_cnes"]:$this->sd02_v_cnes);
-       $this->sd02_i_cidade = ($this->sd02_i_cidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cidade"]:$this->sd02_i_cidade);
-       $this->sd02_i_regiao = ($this->sd02_i_regiao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_regiao"]:$this->sd02_i_regiao);
+       $this->sd02_i_cidade = (($this->sd02_i_cidade === 0 || $this->sd02_i_cidade === 0.0 || $this->sd02_i_cidade == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cidade"]:$this->sd02_i_cidade);
+       $this->sd02_i_regiao = (($this->sd02_i_regiao === 0 || $this->sd02_i_regiao === 0.0 || $this->sd02_i_regiao == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_regiao"]:$this->sd02_i_regiao);
        $this->sd02_v_microreg = ($this->sd02_v_microreg == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_v_microreg"]:$this->sd02_v_microreg);
        $this->sd02_v_distsant = ($this->sd02_v_distsant == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_v_distsant"]:$this->sd02_v_distsant);
        $this->sd02_v_distadmin = ($this->sd02_v_distadmin == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_v_distadmin"]:$this->sd02_v_distadmin);
-       $this->sd02_i_distrito = ($this->sd02_i_distrito == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_distrito"]:$this->sd02_i_distrito);
+       $this->sd02_i_distrito = (($this->sd02_i_distrito === 0 || $this->sd02_i_distrito === 0.0 || $this->sd02_i_distrito == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_distrito"]:$this->sd02_i_distrito);
        $this->sd02_c_siasus = ($this->sd02_c_siasus == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_c_siasus"]:$this->sd02_c_siasus);
-       $this->sd02_i_cod_esfadm = ($this->sd02_i_cod_esfadm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cod_esfadm"]:$this->sd02_i_cod_esfadm);
-       $this->sd02_i_cod_ativ = ($this->sd02_i_cod_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cod_ativ"]:$this->sd02_i_cod_ativ);
-       $this->sd02_i_reten_trib = ($this->sd02_i_reten_trib == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_reten_trib"]:$this->sd02_i_reten_trib);
-       $this->sd02_i_cod_natorg = ($this->sd02_i_cod_natorg == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cod_natorg"]:$this->sd02_i_cod_natorg);
-       $this->sd02_i_cod_client = ($this->sd02_i_cod_client == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cod_client"]:$this->sd02_i_cod_client);
+       $this->sd02_i_cod_esfadm = (($this->sd02_i_cod_esfadm === 0 || $this->sd02_i_cod_esfadm === 0.0 || $this->sd02_i_cod_esfadm == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cod_esfadm"]:$this->sd02_i_cod_esfadm);
+       $this->sd02_i_cod_ativ = (($this->sd02_i_cod_ativ === 0 || $this->sd02_i_cod_ativ === 0.0 || $this->sd02_i_cod_ativ == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cod_ativ"]:$this->sd02_i_cod_ativ);
+       $this->sd02_i_reten_trib = (($this->sd02_i_reten_trib === 0 || $this->sd02_i_reten_trib === 0.0 || $this->sd02_i_reten_trib == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_reten_trib"]:$this->sd02_i_reten_trib);
+       $this->sd02_i_cod_natorg = (($this->sd02_i_cod_natorg === 0 || $this->sd02_i_cod_natorg === 0.0 || $this->sd02_i_cod_natorg == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cod_natorg"]:$this->sd02_i_cod_natorg);
+       $this->sd02_i_cod_client = (($this->sd02_i_cod_client === 0 || $this->sd02_i_cod_client === 0.0 || $this->sd02_i_cod_client == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cod_client"]:$this->sd02_i_cod_client);
        $this->sd02_v_num_alvara = ($this->sd02_v_num_alvara == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_v_num_alvara"]:$this->sd02_v_num_alvara);
        if($this->sd02_d_data_exped == ""){
          $this->sd02_d_data_exped_dia = ($this->sd02_d_data_exped_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_d_data_exped_dia"]:$this->sd02_d_data_exped_dia);
@@ -144,15 +144,15 @@ class cl_unidades {
          }
        }
        $this->sd02_v_ind_orgexp = ($this->sd02_v_ind_orgexp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_v_ind_orgexp"]:$this->sd02_v_ind_orgexp);
-       $this->sd02_i_tp_unid_id = ($this->sd02_i_tp_unid_id == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_tp_unid_id"]:$this->sd02_i_tp_unid_id);
-       $this->sd02_i_cod_turnat = ($this->sd02_i_cod_turnat == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cod_turnat"]:$this->sd02_i_cod_turnat);
-       $this->sd02_i_codnivhier = ($this->sd02_i_codnivhier == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_codnivhier"]:$this->sd02_i_codnivhier);
-       $this->sd02_i_diretor = ($this->sd02_i_diretor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_diretor"]:$this->sd02_i_diretor);
+       $this->sd02_i_tp_unid_id = (($this->sd02_i_tp_unid_id === 0 || $this->sd02_i_tp_unid_id === 0.0 || $this->sd02_i_tp_unid_id == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_tp_unid_id"]:$this->sd02_i_tp_unid_id);
+       $this->sd02_i_cod_turnat = (($this->sd02_i_cod_turnat === 0 || $this->sd02_i_cod_turnat === 0.0 || $this->sd02_i_cod_turnat == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_cod_turnat"]:$this->sd02_i_cod_turnat);
+       $this->sd02_i_codnivhier = (($this->sd02_i_codnivhier === 0 || $this->sd02_i_codnivhier === 0.0 || $this->sd02_i_codnivhier == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_codnivhier"]:$this->sd02_i_codnivhier);
+       $this->sd02_i_diretor = (($this->sd02_i_diretor === 0 || $this->sd02_i_diretor === 0.0 || $this->sd02_i_diretor == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_diretor"]:$this->sd02_i_diretor);
        $this->sd02_v_diretorreg = ($this->sd02_v_diretorreg == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_v_diretorreg"]:$this->sd02_v_diretorreg);
        $this->sd02_c_centralagenda = ($this->sd02_c_centralagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_c_centralagenda"]:$this->sd02_c_centralagenda);
        $this->sd02_cnpjcpf = ($this->sd02_cnpjcpf == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_cnpjcpf"]:$this->sd02_cnpjcpf);
      }else{
-       $this->sd02_i_codigo = ($this->sd02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_codigo"]:$this->sd02_i_codigo);
+       $this->sd02_i_codigo = (($this->sd02_i_codigo === 0 || $this->sd02_i_codigo === 0.0 || $this->sd02_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["sd02_i_codigo"]:$this->sd02_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -213,7 +213,7 @@ class cl_unidades {
        $this->sd02_c_centralagenda = "N";
      }
        $this->sd02_i_codigo = $sd02_i_codigo; 
-     if(($this->sd02_i_codigo == null) || ($this->sd02_i_codigo == "") ){ 
+     if(($this->sd02_i_codigo == null) || (($this->sd02_i_codigo === 0 || $this->sd02_i_codigo === 0.0 || $this->sd02_i_codigo == "")) ){ 
        $this->erro_sql = " Campo sd02_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -801,7 +801,7 @@ class cl_unidades {
     $sql = "select ";
     if ($campos != "*" ) {
       
-      $campos_sql = split("#",$campos);
+      $campos_sql = explode("#",$campos);
       $virgula    = "";
       
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -828,7 +828,7 @@ class cl_unidades {
     if ($ordem != null) {
       
       $sql       .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = explode("#",$ordem);
       $virgula    = "";
       
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
