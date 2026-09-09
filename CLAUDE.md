@@ -380,6 +380,91 @@ núcleo universal (20). É uma fatia vertical provadamente limpa — não existe
 Escopo do piloto = **núcleo (22.007 linhas) + `tra` (27.090 linhas) ≈ 49k linhas**, ~0,6% da base.
 Segunda opção, caso `tra` se mostre pobre em regras de negócio: `cem` (resíduo 4).
 
+## TRABALHO RELACIONADO: TCC do módulo Educação (LTD/UFPB)
+
+`https://github.com/ltdufpb/e-cidade` — branch **`tcc-gerson-banca`**, fork de
+`DBSeller/e-cidade`, **32 commits** à frente do `master` deles. Outro TCC do mesmo
+laboratório, migrando o módulo **Educação**. Analisado pela API do GitHub (o repositório tem
+488 MB; não vale clonar — `curl` na API de comparação e nos arquivos crus resolve).
+
+### Convergência: chegaram às mesmas categorias, por outro caminho
+
+Validação independente do nosso catálogo. Os commits deles mostram:
+
+```
+PHP8-10-hotfix3    construtores PHP 4 -> __construct
+PHP8-11            construtores PHP 4 remanescentes (27 arquivos, 2a passada)
+PHP8-15 / PHP8-18  parse_str de 1 argumento
+PHP8-16 / 19 / 20  guardas pg_num*/pg_fetch_array contra resultado false
+PHP8-17            acesso a string por chaves {} -> []
+PHP8-21            restaura acentos ISO-8859-1 corrompidos por editor UTF-8 (7 arquivos)
+```
+
+O PHP8-21 é exatamente a armadilha de encoding documentada aqui — eles foram mordidos por
+ela. A guarda de `pg_num*` deles é equivalente à nossa, só mais explícita:
+
+```php
+$numrows = ($result === false || $result === null) ? 0 : pg_numrows($result);
+```
+
+### Evidência empírica contra transformação em massa
+
+Eles usaram **Rector** intensivamente. A sequência de hotfixes que se seguiu é o argumento
+mais concreto a favor da decisão de corrigir pontualmente — e vem de fora deste projeto:
+
+```
+hotfix2   remove #[Override] aplicado erroneamente em propriedades
+PHP8-12   remove use duplicado FATAL introduzido pelo withImportNames
+PHP8-14   restaura shim de superglobais REESCRITO pelo Rector
+hotfix9   corrige bug CATASTROFICO do shim - parou de sobrescrever $_SESSION
+```
+
+Quatro quebras causadas pela própria ferramenta de automação, incluindo a reescrita do shim
+que eles mesmos haviam criado.
+
+### Estratégia oposta — material direto para o capítulo de comparação
+
+| | TCC Educação | Este trabalho |
+|---|---|---|
+| Alvo | PHP **8.4** | PHP **8.5** |
+| Abordagem | **big-bang**: Docker atualizado de 5.6 → 8.4 | **strangler fig**: dois runtimes convivendo |
+| Short tags | convertidas em **11.108 arquivos / 37.345 tags** | mantido `short_open_tag = On` (zero arquivos) |
+| `$HTTP_*_VARS` | shim de superglobais (causou o bug catastrófico) | intocados (já emulados por `emulateRegisterLongArrays`) |
+| Compatibilidade | roda só em 8.4 | roda em 5.6 **e** 8.5 |
+| Verificação | não documentada nos commits | 113 páginas comparadas byte-a-byte entre runtimes |
+
+### Achado nosso ausente no trabalho deles: `0 == ""` nas classes de dados
+
+Medido na branch `tcc-gerson-banca` — reproduzível com:
+
+```bash
+curl -sf "https://raw.githubusercontent.com/ltdufpb/e-cidade/tcc-gerson-banca/classes/db_turma_classe.php" -o /tmp/t.php
+python3 -c '
+import re
+b=open("/tmp/t.php","rb").read()
+props={m.group(1) for m in re.finditer(rb"(?:var|public)\s+\$(\w+)\s*=\s*-?\d+\s*;", b)}
+print("props int:", len(props),
+      "| com == \"\":", sum(len(re.findall(rb"\$this->"+re.escape(p)+rb"\s*==\s*[\"\x27]{2}", b)) for p in props),
+      "| corrigidas:", len(re.findall(rb"===\s*0\s*\|\|", b)))'
+```
+
+
+| Classe | Props inteiras | Comparadas com `== ""` | Corrigidas |
+|---|---|---|---|
+| `classes/db_turma_classe.php` | 17 | 14 | **0** |
+| `classes/db_matricula_classe.php` | 11 | 9 | **0** |
+| `classes/db_alunoalt_classe.php` | 9 | 7 | **0** |
+| `classes/db_calendario_classe.php` | 11 | 9 | **0** |
+
+O idioma `$this->ed57_i_escola == "" ? le_do_POST : mantem` continua intacto, com a
+propriedade declarada como `public $ed57_i_escola = 0;`. É o mesmo defeito que travou a
+inclusão em "Cemitério → Tipos de isenção": no PHP 8 o valor do formulário **nunca é lido**
+e a validação seguinte acusa "campo não informado".
+
+Eles corrigiram uma manifestação vizinha — contadores locais `$conta = ""` → `0` no PHP8-20 —
+mas não a das classes de dados. Como é o mesmo laboratório, vale comunicar: são formulários
+de Educação gravando dado errado em silêncio.
+
 ## Workflow acordado
 
 - **Fase 0 — Linha de base.** Ambiente PHP 8.5 + PG 18 em paralelo (sem tocar no 5.6), medir
