@@ -63,6 +63,40 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 # e-cidade — Projeto de Migração
 
+## ⏱ ESTADO ATUAL — leia primeiro ao retomar
+
+**Onde paramos:** migrando a **área Tributário** módulo a módulo. 2 de 16 concluídos.
+
+| | |
+|---|---|
+| Módulos portados | `cem` Cemitério (187 arq.) · `itb`/`itbi` ITBI (192 arq.) |
+| Também portado | `tra` — órfão no menu, sem uso prático |
+| Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|tra)[0-9]?_` |
+| **Próximo módulo** | **`agu` Água (221 arq.)**, depois `arr` → `div` → `jur` → pequenos → `fis` (353) → `iss` (400) |
+
+**Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
+
+```bash
+docker volume create ecidade_sessions
+docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
+chmod -R 777 storage bootstrap/cache && chmod 777 extension/log
+docker compose -f docker-compose.php85.yml up -d
+docker compose -f docker-compose.proxy.yml up -d
+```
+
+**Use `http://localhost:8090`** (origem única). Login `dbseller`/`dbseller`. O cabeçalho
+`X-Ecidade-Runtime` em cada resposta diz qual runtime a serviu.
+
+**Para migrar o próximo módulo:** seguir a receita de 9 passos na seção *ESTRATÉGIA ADOTADA*.
+
+**Pendências conhecidas:** 3 telas do ITBI e 3 do Cemitério com conteúdo divergente ainda sem
+caracterização; 4+1 telas que quebram no **5.6** (defeito pré-existente da referência, não da
+migração). Nada disso bloqueia o avanço.
+
+**Fora de escopo até aqui:** Laravel continua 5.4 (não roda em PHP 8, por isso o login fica
+no runtime 5.6) e PostgreSQL continua 16 em LATIN1. São as Fases 1-3 do workflow.
+
 ## Contexto do trabalho
 
 Projeto final da disciplina **Engenharia de Software** (Ciência da Computação, UFPB).
@@ -602,8 +636,9 @@ comparações `0 == ""`. **Nenhuma categoria nova** além das já catalogadas.
 
 ## Workflow acordado
 
-- **Fase 0 — Linha de base.** Ambiente PHP 8.5 + PG 18 em paralelo (sem tocar no 5.6), medir
-  superfície de erro real por módulo. ✅ Grafo de dependências concluído — piloto definido: `tra`.
+- **Fase 0 — Linha de base.** ✅ **CONCLUÍDA.** Ambiente PHP 8.5 paralelo, grafo de
+  dependências, catálogo de incompatibilidades medido. (O piloto foi `tra`, depois
+  descartado por ser código órfão — ver a correção na seção do grafo.)
 - **Fase 1 — Escada PHP + Laravel.** 5.6→7.4 com Rector, Laravel 5.4→5.5→…→8; depois
   PHP 7.4→8.2+ e Laravel 8→atual. Um major por vez, suíte rodando a cada passo.
 - **Fase 2 — Substituir dependências mortas** (silex, dbal 2.x, symfony 3.2, zend-eventmanager).
