@@ -54,6 +54,11 @@ Para tarefas com múltiplas etapas, descreva um plano conciso:
 3. [Etapa] → verificar: [critério]
 ```
 
+## 5. Memória
+
+Documente tudo que seja importante para a conclusão do projeto nesse arquivo. Não deixe
+tópicos importantes de fora
+
 Critérios de sucesso sólidos permitem que você trabalhe de forma independente. Critérios vagos ("fazer funcionar") exigem esclarecimentos constantes.
 
 # e-cidade — Projeto de Migração
@@ -464,6 +469,116 @@ e a validação seguinte acusa "campo não informado".
 Eles corrigiram uma manifestação vizinha — contadores locais `$conta = ""` → `0` no PHP8-20 —
 mas não a das classes de dados. Como é o mesmo laboratório, vale comunicar: são formulários
 de Educação gravando dado errado em silêncio.
+
+## ESTRATÉGIA ADOTADA: migrar a ÁREA Tributário, módulo a módulo
+
+Decisão tomada após o piloto Cemitério: em vez de módulos isolados, focar numa **área**
+inteira — mesma forma do TCC de Educação (trabalho relacionado), o que torna os dois
+diretamente comparáveis.
+
+### Por que Tributário
+
+A área é definida no banco por `configuracoes.atendcadarea` + `atendcadareamod`:
+
+| Área | Módulos |
+|---|---|
+| **DB:TRIBUTÁRIO** | **16** ← esta |
+| DB:PATRIMONIAL | 8 |
+| DB:SAÚDE | 8 |
+| DB:FINANCEIRO | 6 |
+| DB:EDUCAÇÃO | 5 ← o TCC de referência |
+
+É a maior área do sistema, **3× a Educação**, e o Cemitério (já portado) pertence a ela.
+Seus 16 módulos somam **1.024 telas** no menu.
+
+### A distinção central: PORTAR ≠ ROTEAR
+
+**O menu lista apenas ~1/3 dos arquivos de um módulo.** Medido:
+
+| prefixo | arquivos | no menu | fora do menu |
+|---|---|---|---|
+| `cem` | 116 | 40 (34%) | **76** |
+| `iss` | 400 | 165 (41%) | **235** |
+| `fis` | 353 | 92 (26%) | **261** |
+| `cad` | 523 | 162 (31%) | **361** |
+
+Os outros dois terços são popups abertos por `window.open`, endpoints `.RPC.php` chamados
+por AJAX e subtelas. **No Cemitério isso passou despercebido por sorte**: enumerei por
+prefixo, não pelo menu. Com a lista do menu, 76 arquivos teriam ficado sem correção.
+
+Regra que decorre disso:
+- **Portar → sempre por prefixo** (`re.IGNORECASE`), senão fica 2/3 do módulo para trás.
+- **Rotear → é onde a fronteira da área importa.**
+
+### Prefixos exclusivos vs. compartilhados
+
+Consulta que revela a colisão:
+
+```sql
+SELECT lower(substring(di.funcao from '^[A-Za-z]+')) AS prefixo,
+       count(DISTINCT a.at25_descr) AS n_areas
+FROM configuracoes.atendcadareamod am
+JOIN configuracoes.atendcadarea a ON a.at26_sequencial = am.at26_codarea
+JOIN configuracoes.db_modulos m ON m.id_item = am.at26_id_item
+JOIN configuracoes.db_menu dm ON dm.modulo = m.id_item
+JOIN configuracoes.db_itensmenu di ON di.id_item = dm.id_item_filho
+WHERE di.funcao ~ '^[A-Za-z]+[0-9]*_.*\.php$'
+GROUP BY 1 HAVING count(DISTINCT a.at25_descr) > 1;
+```
+
+**Prefixos de arquivo NÃO respeitam a fronteira das áreas** — `con` aparece em 6 áreas,
+`pro` em 5, `cai` em 4, `cad` em 3. "Área" é agrupamento de *menu*, não de *código*.
+
+**EXCLUSIVOS de Tributário — 1.800 arquivos, roteamento trivial por prefixo:**
+
+```
+iss 400   fis 353   agu 221   arr 162   div 148   jur 145
+cem 116✓  itb 110   mar  35   tri  33   dvr  33   inf  30   not 14
+```
+
+**COMPARTILHADOS — 3.244 arquivos, exigem lista explícita:**
+
+```
+con 1559   cai 740   cad 523   pro 337   pre 54   amb 31
+```
+
+### Plano em fases
+
+**Fase A — os 12 prefixos exclusivos restantes (1.684 arquivos).** Cobre 12 dos 16 módulos:
+ISSQN, Fiscal, Água, Arrecadação, Dívida Ativa, Jurídico, ITBI, Marcas e Sinais, Diversos,
+Inflat, Notificações — mais o Cemitério pronto. Roteamento em uma linha:
+
+```nginx
+location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|not)[0-9]?_
+```
+
+**Fase B — os 6 prefixos compartilhados**, só se houver tempo. Aí entra um `map` do nginx
+gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
+Financeiro e Patrimonial junto.
+
+**Ordem dentro da Fase A:** `itb` (110, tamanho parecido com o Cemitério — segunda validação
+da receita) → `agu` → `arr` → `div` → `jur` → `mar`/`tri`/`dvr`/`inf`/`not` → e por último os
+grandes, `fis` (353) e `iss` (400).
+
+### Receita por módulo (validada no Cemitério)
+
+Cada prefixo é um lote independente, com commit próprio e revertível:
+
+```
+1. enumerar com re.IGNORECASE      -> verificar: bate com `ls | grep -iE '^<pref>[0-9]*_'`
+2. varrer as categorias conhecidas -> verificar: inventário fechado
+3. classificar cada ocorrência     -> verificar: nenhum falso-positivo de JavaScript
+4. aplicar em nível de byte        -> verificar: zero remanescentes
+5. php -l nos DOIS runtimes        -> verificar: 100% OK em 5.6 e 8.5
+6. instanciar as classes           -> verificar: estado idêntico entre runtimes
+7. comparar as telas com sessão    -> verificar: byte-a-byte, normalizando ids aleatórios
+8. acrescentar o prefixo ao nginx  -> verificar: X-Ecidade-Runtime = PHP-8.5
+9. commit
+```
+
+Estimativa da área inteira: **1.804 arquivos no universo, 775 precisando de alteração (43%)**
+— 1.823 `split(`, 276 `parse_str` de 1 argumento, 431 arquivos com construtor PHP 4 e 3.040
+comparações `0 == ""`. **Nenhuma categoria nova** além das já catalogadas.
 
 ## Workflow acordado
 
