@@ -32,7 +32,7 @@ $clrotulo->label("z01_nome");
 $clrotulo->label("it01_guia");
 include(modification("dbforms/db_classesgenericas.php"));
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_comp.location.href='itb1_itbicgm002.php?chavepesquisa=$it02_guia&chavepesquisa1=$it02_numcgm'</script>";

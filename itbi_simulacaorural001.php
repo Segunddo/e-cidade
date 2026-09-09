@@ -39,7 +39,7 @@ include(modification("classes/db_itbiavalia_classe.php"));
 include(modification("classes/db_itbiavaliaformapagamentovalor_classe.php"));
 include(modification("classes/db_paritbi_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($_POST);
 db_postmemory($_GET);
 

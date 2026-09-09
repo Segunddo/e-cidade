@@ -54,7 +54,7 @@ class cl_itbinumpre {
                  it15_ultimaguia = bool = Ultima Guia Emitida 
                  ";
    //funcao construtor da classe 
-   public function  cl_itbinumpre() { 
+   public function  __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbinumpre"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_itbinumpre {
    // funcao para atualizar campos
    public function  atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it15_guia = ($this->it15_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it15_guia"]:$this->it15_guia);
-       $this->it15_numpre = ($this->it15_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["it15_numpre"]:$this->it15_numpre);
-       $this->it15_sequencial = ($this->it15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it15_sequencial"]:$this->it15_sequencial);
+       $this->it15_guia = (($this->it15_guia === 0 || $this->it15_guia === 0.0 || $this->it15_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it15_guia"]:$this->it15_guia);
+       $this->it15_numpre = (($this->it15_numpre === 0 || $this->it15_numpre === 0.0 || $this->it15_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["it15_numpre"]:$this->it15_numpre);
+       $this->it15_sequencial = (($this->it15_sequencial === 0 || $this->it15_sequencial === 0.0 || $this->it15_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it15_sequencial"]:$this->it15_sequencial);
        $this->it15_ultimaguia = ($this->it15_ultimaguia == "" ?@$GLOBALS["HTTP_POST_VARS"]["it15_ultimaguia"]:$this->it15_ultimaguia);
      }else{
-       $this->it15_sequencial = ($this->it15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it15_sequencial"]:$this->it15_sequencial);
+       $this->it15_sequencial = (($this->it15_sequencial === 0 || $this->it15_sequencial === 0.0 || $this->it15_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it15_sequencial"]:$this->it15_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_itbinumpre {
          $this->it15_sequencial = $it15_sequencial; 
        }
      }
-     if(($this->it15_sequencial == null) || ($this->it15_sequencial == "") ){ 
+     if(($this->it15_sequencial == null) || (($this->it15_sequencial === 0 || $this->it15_sequencial === 0.0 || $this->it15_sequencial == "")) ){ 
        $this->erro_sql = " Campo it15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

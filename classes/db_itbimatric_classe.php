@@ -50,7 +50,7 @@ class cl_itbimatric {
                  it06_matric = int4 = Inscrição Imóvel 
                  ";
    //funcao construtor da classe 
-   function cl_itbimatric() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbimatric"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_itbimatric {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it06_guia = ($this->it06_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_guia"]:$this->it06_guia);
-       $this->it06_matric = ($this->it06_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_matric"]:$this->it06_matric);
+       $this->it06_guia = (($this->it06_guia === 0 || $this->it06_guia === 0.0 || $this->it06_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it06_guia"]:$this->it06_guia);
+       $this->it06_matric = (($this->it06_matric === 0 || $this->it06_matric === 0.0 || $this->it06_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["it06_matric"]:$this->it06_matric);
      }else{
-       $this->it06_guia = ($this->it06_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_guia"]:$this->it06_guia);
-       $this->it06_matric = ($this->it06_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_matric"]:$this->it06_matric);
+       $this->it06_guia = (($this->it06_guia === 0 || $this->it06_guia === 0.0 || $this->it06_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it06_guia"]:$this->it06_guia);
+       $this->it06_matric = (($this->it06_matric === 0 || $this->it06_matric === 0.0 || $this->it06_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["it06_matric"]:$this->it06_matric);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_itbimatric {
       $this->atualizacampos();
        $this->it06_guia = $it06_guia; 
        $this->it06_matric = $it06_matric; 
-     if(($this->it06_guia == null) || ($this->it06_guia == "") ){ 
+     if(($this->it06_guia == null) || (($this->it06_guia === 0 || $this->it06_guia === 0.0 || $this->it06_guia == "")) ){ 
        $this->erro_sql = " Campo it06_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_itbimatric {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->it06_matric == null) || ($this->it06_matric == "") ){ 
+     if(($this->it06_matric == null) || (($this->it06_matric === 0 || $this->it06_matric === 0.0 || $this->it06_matric == "")) ){ 
        $this->erro_sql = " Campo it06_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_itbimatric {
    function sql_query ( $it06_guia=null,$it06_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -352,7 +352,7 @@ class cl_itbimatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_itbimatric {
    function sql_query_file ( $it06_guia=null,$it06_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_itbimatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_itbimatric {
    function sql_query_propri ( $it06_guia=null,$it06_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_itbimatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_itbimatric {
    function sql_query_outros_propri ( $it06_guia=null,$it06_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -485,7 +485,7 @@ class cl_itbimatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

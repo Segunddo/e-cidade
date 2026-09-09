@@ -57,7 +57,7 @@ class cl_itbicancela {
                  it16_id_usuario = int4 = Identificador do Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_itbicancela() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbicancela"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,7 +74,7 @@ class cl_itbicancela {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it16_guia = ($this->it16_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it16_guia"]:$this->it16_guia);
+       $this->it16_guia = (($this->it16_guia === 0 || $this->it16_guia === 0.0 || $this->it16_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it16_guia"]:$this->it16_guia);
        if($this->it16_data == ""){
          $this->it16_data_dia = ($this->it16_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["it16_data_dia"]:$this->it16_data_dia);
          $this->it16_data_mes = ($this->it16_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["it16_data_mes"]:$this->it16_data_mes);
@@ -84,9 +84,9 @@ class cl_itbicancela {
          }
        }
        $this->it16_obs = ($this->it16_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["it16_obs"]:$this->it16_obs);
-       $this->it16_id_usuario = ($this->it16_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["it16_id_usuario"]:$this->it16_id_usuario);
+       $this->it16_id_usuario = (($this->it16_id_usuario === 0 || $this->it16_id_usuario === 0.0 || $this->it16_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["it16_id_usuario"]:$this->it16_id_usuario);
      }else{
-       $this->it16_guia = ($this->it16_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it16_guia"]:$this->it16_guia);
+       $this->it16_guia = (($this->it16_guia === 0 || $this->it16_guia === 0.0 || $this->it16_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it16_guia"]:$this->it16_guia);
      }
    }
    // funcao para inclusao
@@ -111,7 +111,7 @@ class cl_itbicancela {
        return false;
      }
        $this->it16_guia = $it16_guia; 
-     if(($this->it16_guia == null) || ($this->it16_guia == "") ){ 
+     if(($this->it16_guia == null) || (($this->it16_guia === 0 || $this->it16_guia === 0.0 || $this->it16_guia == "")) ){ 
        $this->erro_sql = " Campo it16_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -396,7 +396,7 @@ class cl_itbicancela {
    function sql_query ( $it16_guia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_itbicancela {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_itbicancela {
    function sql_query_file ( $it16_guia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -455,7 +455,7 @@ class cl_itbicancela {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

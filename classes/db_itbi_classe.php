@@ -96,7 +96,7 @@ class cl_itbi {
                  it01_cartorioextra = integer = Código do Cartório
                  ";
    //funcao construtor da classe
-   public function  cl_itbi() {
+   public function  __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbi");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -113,7 +113,7 @@ class cl_itbi {
    // funcao para atualizar campos
    public function  atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it01_guia = ($this->it01_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_guia"]:$this->it01_guia);
+       $this->it01_guia = (($this->it01_guia === 0 || $this->it01_guia === 0.0 || $this->it01_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_guia"]:$this->it01_guia);
        if($this->it01_data == ""){
          $this->it01_data_dia = ($this->it01_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_data_dia"]:$this->it01_data_dia);
          $this->it01_data_mes = ($this->it01_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_data_mes"]:$this->it01_data_mes);
@@ -123,28 +123,28 @@ class cl_itbi {
          }
        }
        $this->it01_hora = ($this->it01_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_hora"]:$this->it01_hora);
-       $this->it01_tipotransacao = ($this->it01_tipotransacao == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_tipotransacao"]:$this->it01_tipotransacao);
-       $this->it01_areaterreno = ($this->it01_areaterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_areaterreno"]:$this->it01_areaterreno);
-       $this->it01_areaedificada = ($this->it01_areaedificada == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_areaedificada"]:$this->it01_areaedificada);
+       $this->it01_tipotransacao = (($this->it01_tipotransacao === 0 || $this->it01_tipotransacao === 0.0 || $this->it01_tipotransacao == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_tipotransacao"]:$this->it01_tipotransacao);
+       $this->it01_areaterreno = (($this->it01_areaterreno === 0 || $this->it01_areaterreno === 0.0 || $this->it01_areaterreno == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_areaterreno"]:$this->it01_areaterreno);
+       $this->it01_areaedificada = (($this->it01_areaedificada === 0 || $this->it01_areaedificada === 0.0 || $this->it01_areaedificada == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_areaedificada"]:$this->it01_areaedificada);
        $this->it01_obs = ($this->it01_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_obs"]:$this->it01_obs);
-       $this->it01_valortransacao = ($this->it01_valortransacao == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_valortransacao"]:$this->it01_valortransacao);
-       $this->it01_areatrans = ($this->it01_areatrans == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_areatrans"]:$this->it01_areatrans);
+       $this->it01_valortransacao = (($this->it01_valortransacao === 0 || $this->it01_valortransacao === 0.0 || $this->it01_valortransacao == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_valortransacao"]:$this->it01_valortransacao);
+       $this->it01_areatrans = (($this->it01_areatrans === 0 || $this->it01_areatrans === 0.0 || $this->it01_areatrans == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_areatrans"]:$this->it01_areatrans);
        $this->it01_mail = ($this->it01_mail == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_mail"]:$this->it01_mail);
        $this->it01_finalizado = ($this->it01_finalizado == "f"?@$GLOBALS["HTTP_POST_VARS"]["it01_finalizado"]:$this->it01_finalizado);
-       $this->it01_origem = ($this->it01_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_origem"]:$this->it01_origem);
-       $this->it01_id_usuario = ($this->it01_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_id_usuario"]:$this->it01_id_usuario);
-       $this->it01_coddepto = ($this->it01_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_coddepto"]:$this->it01_coddepto);
-       $this->it01_valorterreno = ($this->it01_valorterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_valorterreno"]:$this->it01_valorterreno);
-       $this->it01_valorconstr = ($this->it01_valorconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_valorconstr"]:$this->it01_valorconstr);
+       $this->it01_origem = (($this->it01_origem === 0 || $this->it01_origem === 0.0 || $this->it01_origem == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_origem"]:$this->it01_origem);
+       $this->it01_id_usuario = (($this->it01_id_usuario === 0 || $this->it01_id_usuario === 0.0 || $this->it01_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_id_usuario"]:$this->it01_id_usuario);
+       $this->it01_coddepto = (($this->it01_coddepto === 0 || $this->it01_coddepto === 0.0 || $this->it01_coddepto == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_coddepto"]:$this->it01_coddepto);
+       $this->it01_valorterreno = (($this->it01_valorterreno === 0 || $this->it01_valorterreno === 0.0 || $this->it01_valorterreno == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_valorterreno"]:$this->it01_valorterreno);
+       $this->it01_valorconstr = (($this->it01_valorconstr === 0 || $this->it01_valorconstr === 0.0 || $this->it01_valorconstr == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_valorconstr"]:$this->it01_valorconstr);
        $this->it01_envia = ($this->it01_envia == "f"?@$GLOBALS["HTTP_POST_VARS"]["it01_envia"]:$this->it01_envia);
-       $this->it01_percentualareatransmitida = ($this->it01_percentualareatransmitida == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_percentualareatransmitida"]:$this->it01_percentualareatransmitida);
+       $this->it01_percentualareatransmitida = (($this->it01_percentualareatransmitida === 0 || $this->it01_percentualareatransmitida === 0.0 || $this->it01_percentualareatransmitida == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_percentualareatransmitida"]:$this->it01_percentualareatransmitida);
        $this->it01_dtprocesso = ($this->it01_dtprocesso == null ?@$GLOBALS["HTTP_POST_VARS"]["it01_dtprocesso"]:$this->it01_dtprocesso);
        $this->it01_processo = ($this->it01_processo == null ?@$GLOBALS["HTTP_POST_VARS"]["it01_processo"]:$this->it01_processo);
        $this->it01_tituprocesso = ($this->it01_tituprocesso == null ?@$GLOBALS["HTTP_POST_VARS"]["it01_tituprocesso"]:$this->it01_tituprocesso);
        $this->it01_notificado = ($this->it01_notificado == null ?@$GLOBALS["HTTP_POST_VARS"]["it01_notificado"]:$this->it01_notificado);
        $this->it01_cartorioextra = ($this->it01_cartorioextra == null ?@$GLOBALS["HTTP_POST_VARS"]["it01_cartorioextra"]:$this->it01_cartorioextra);
      }else{
-       $this->it01_guia = ($this->it01_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it01_guia"]:$this->it01_guia);
+       $this->it01_guia = (($this->it01_guia === 0 || $this->it01_guia === 0.0 || $this->it01_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it01_guia"]:$this->it01_guia);
      }
    }
    // funcao para inclusao
@@ -286,7 +286,7 @@ class cl_itbi {
          $this->it01_guia = $it01_guia;
        }
      }
-     if(($this->it01_guia == null) || ($this->it01_guia == "") ){
+     if(($this->it01_guia == null) || (($this->it01_guia === 0 || $this->it01_guia === 0.0 || $this->it01_guia == "")) ){
        $this->erro_sql = " Campo it01_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -52,7 +52,7 @@ class cl_itbinomecgm {
                  it21_numcgm = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   public function cl_itbinomecgm() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbinomecgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_itbinomecgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it21_sequencial = ($this->it21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it21_sequencial"]:$this->it21_sequencial);
-       $this->it21_itbinome = ($this->it21_itbinome == ""?@$GLOBALS["HTTP_POST_VARS"]["it21_itbinome"]:$this->it21_itbinome);
-       $this->it21_numcgm = ($this->it21_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["it21_numcgm"]:$this->it21_numcgm);
+       $this->it21_sequencial = (($this->it21_sequencial === 0 || $this->it21_sequencial === 0.0 || $this->it21_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it21_sequencial"]:$this->it21_sequencial);
+       $this->it21_itbinome = (($this->it21_itbinome === 0 || $this->it21_itbinome === 0.0 || $this->it21_itbinome == "")?@$GLOBALS["HTTP_POST_VARS"]["it21_itbinome"]:$this->it21_itbinome);
+       $this->it21_numcgm = (($this->it21_numcgm === 0 || $this->it21_numcgm === 0.0 || $this->it21_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["it21_numcgm"]:$this->it21_numcgm);
      }else{
-       $this->it21_sequencial = ($this->it21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it21_sequencial"]:$this->it21_sequencial);
+       $this->it21_sequencial = (($this->it21_sequencial === 0 || $this->it21_sequencial === 0.0 || $this->it21_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it21_sequencial"]:$this->it21_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_itbinomecgm {
          $this->it21_sequencial = $it21_sequencial; 
        }
      }
-     if(($this->it21_sequencial == null) || ($this->it21_sequencial == "") ){ 
+     if(($this->it21_sequencial == null) || (($this->it21_sequencial === 0 || $this->it21_sequencial === 0.0 || $this->it21_sequencial == "")) ){ 
        $this->erro_sql = " Campo it21_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -42,7 +42,7 @@ include(modification("classes/db_itbidadosimovel_classe.php"));
 include(modification("classes/db_itbinome_classe.php"));
 include(modification("classes/db_itbinomecgm_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($_POST);
 
 if(!isset($abas)){
@@ -99,8 +99,8 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
       $sqlerro = true;
     }
     if(isset($codigo) && isset($valor) && $codigo != "" && $valor != "" && $sqlerro == false){
-      $cod = split(",",$codigo);
-      $val = split(",",$valor);
+      $cod = explode(",",$codigo);
+      $val = explode(",",$valor);
       for($i=0;$i<sizeof($cod);$i++){
         $clitbiruralcaract->it19_guia = $clitbi->it01_guia;
         $clitbiruralcaract->it19_codigo = $cod[$i];

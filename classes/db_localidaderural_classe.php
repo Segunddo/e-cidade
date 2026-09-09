@@ -54,7 +54,7 @@ class cl_localidaderural {
                  j137_valormaximo = float8 = Valor Máximo 
                  ";
    //funcao construtor da classe 
-   function cl_localidaderural() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("localidaderural"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_localidaderural {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j137_sequencial = ($this->j137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_sequencial"]:$this->j137_sequencial);
+       $this->j137_sequencial = (($this->j137_sequencial === 0 || $this->j137_sequencial === 0.0 || $this->j137_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["j137_sequencial"]:$this->j137_sequencial);
        $this->j137_descricao = ($this->j137_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_descricao"]:$this->j137_descricao);
-       $this->j137_valorminimo = ($this->j137_valorminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_valorminimo"]:$this->j137_valorminimo);
-       $this->j137_valormaximo = ($this->j137_valormaximo == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_valormaximo"]:$this->j137_valormaximo);
+       $this->j137_valorminimo = (($this->j137_valorminimo === 0 || $this->j137_valorminimo === 0.0 || $this->j137_valorminimo == "")?@$GLOBALS["HTTP_POST_VARS"]["j137_valorminimo"]:$this->j137_valorminimo);
+       $this->j137_valormaximo = (($this->j137_valormaximo === 0 || $this->j137_valormaximo === 0.0 || $this->j137_valormaximo == "")?@$GLOBALS["HTTP_POST_VARS"]["j137_valormaximo"]:$this->j137_valormaximo);
      }else{
-       $this->j137_sequencial = ($this->j137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_sequencial"]:$this->j137_sequencial);
+       $this->j137_sequencial = (($this->j137_sequencial === 0 || $this->j137_sequencial === 0.0 || $this->j137_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["j137_sequencial"]:$this->j137_sequencial);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_localidaderural {
          $this->j137_sequencial = $j137_sequencial; 
        }
      }
-     if(($this->j137_sequencial == null) || ($this->j137_sequencial == "") ){ 
+     if(($this->j137_sequencial == null) || (($this->j137_sequencial === 0 || $this->j137_sequencial === 0.0 || $this->j137_sequencial == "")) ){ 
        $this->erro_sql = " Campo j137_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -449,7 +449,7 @@ class cl_localidaderural {
    function sql_query ( $j137_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_localidaderural {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -483,7 +483,7 @@ class cl_localidaderural {
    function sql_query_file ( $j137_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_localidaderural {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

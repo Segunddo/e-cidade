@@ -52,7 +52,7 @@ class cl_itbilocalidaderural {
                  it33_localidaderural = int4 = Codigo sequencial 
                  ";
    //funcao construtor da classe 
-   function cl_itbilocalidaderural() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbilocalidaderural"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_itbilocalidaderural {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it33_sequencial = ($this->it33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it33_sequencial"]:$this->it33_sequencial);
-       $this->it33_guia = ($this->it33_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it33_guia"]:$this->it33_guia);
-       $this->it33_localidaderural = ($this->it33_localidaderural == ""?@$GLOBALS["HTTP_POST_VARS"]["it33_localidaderural"]:$this->it33_localidaderural);
+       $this->it33_sequencial = (($this->it33_sequencial === 0 || $this->it33_sequencial === 0.0 || $this->it33_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it33_sequencial"]:$this->it33_sequencial);
+       $this->it33_guia = (($this->it33_guia === 0 || $this->it33_guia === 0.0 || $this->it33_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it33_guia"]:$this->it33_guia);
+       $this->it33_localidaderural = (($this->it33_localidaderural === 0 || $this->it33_localidaderural === 0.0 || $this->it33_localidaderural == "")?@$GLOBALS["HTTP_POST_VARS"]["it33_localidaderural"]:$this->it33_localidaderural);
      }else{
-       $this->it33_sequencial = ($this->it33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it33_sequencial"]:$this->it33_sequencial);
+       $this->it33_sequencial = (($this->it33_sequencial === 0 || $this->it33_sequencial === 0.0 || $this->it33_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it33_sequencial"]:$this->it33_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_itbilocalidaderural {
          $this->it33_sequencial = $it33_sequencial; 
        }
      }
-     if(($this->it33_sequencial == null) || ($this->it33_sequencial == "") ){ 
+     if(($this->it33_sequencial == null) || (($this->it33_sequencial === 0 || $this->it33_sequencial === 0.0 || $this->it33_sequencial == "")) ){ 
        $this->erro_sql = " Campo it33_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_itbilocalidaderural {
    function sql_query ( $it33_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -408,7 +408,7 @@ class cl_itbilocalidaderural {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_itbilocalidaderural {
    function sql_query_file ( $it33_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -442,7 +442,7 @@ class cl_itbilocalidaderural {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

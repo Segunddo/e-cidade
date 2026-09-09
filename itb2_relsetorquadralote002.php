@@ -252,7 +252,7 @@ $sSql .= "           ) as x                                                     
 $sSql .= "           {$sWhereLograd}                                                                                \n"; 
 
 $rsSql     = db_query($sSql);
-$iNumRows  = pg_num_rows($rsSql);
+$iNumRows  = $rsSql ? pg_num_rows($rsSql) : 0;
 
 
 $aRetorno  = db_utils::getCollectionByRecord($rsSql);

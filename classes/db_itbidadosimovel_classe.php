@@ -68,7 +68,7 @@ class cl_itbidadosimovel {
                  it22_loteri = varchar(4) = Lote no RI 
                  ";
    //funcao construtor da classe 
-   function cl_itbidadosimovel() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbidadosimovel"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,19 +85,19 @@ class cl_itbidadosimovel {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it22_sequencial = ($this->it22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_sequencial"]:$this->it22_sequencial);
-       $this->it22_itbi = ($this->it22_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_itbi"]:$this->it22_itbi);
+       $this->it22_sequencial = (($this->it22_sequencial === 0 || $this->it22_sequencial === 0.0 || $this->it22_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it22_sequencial"]:$this->it22_sequencial);
+       $this->it22_itbi = (($this->it22_itbi === 0 || $this->it22_itbi === 0.0 || $this->it22_itbi == "")?@$GLOBALS["HTTP_POST_VARS"]["it22_itbi"]:$this->it22_itbi);
        $this->it22_setor = ($this->it22_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_setor"]:$this->it22_setor);
        $this->it22_quadra = ($this->it22_quadra == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_quadra"]:$this->it22_quadra);
        $this->it22_lote = ($this->it22_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_lote"]:$this->it22_lote);
        $this->it22_descrlograd = ($this->it22_descrlograd == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_descrlograd"]:$this->it22_descrlograd);
-       $this->it22_numero = ($this->it22_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_numero"]:$this->it22_numero);
+       $this->it22_numero = (($this->it22_numero === 0 || $this->it22_numero === 0.0 || $this->it22_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["it22_numero"]:$this->it22_numero);
        $this->it22_compl = ($this->it22_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_compl"]:$this->it22_compl);
        $this->it22_matricri = ($this->it22_matricri == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_matricri"]:$this->it22_matricri);
        $this->it22_quadrari = ($this->it22_quadrari == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_quadrari"]:$this->it22_quadrari);
        $this->it22_loteri = ($this->it22_loteri == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_loteri"]:$this->it22_loteri);
      }else{
-       $this->it22_sequencial = ($this->it22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it22_sequencial"]:$this->it22_sequencial);
+       $this->it22_sequencial = (($this->it22_sequencial === 0 || $this->it22_sequencial === 0.0 || $this->it22_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it22_sequencial"]:$this->it22_sequencial);
      }
    }
    // funcao para inclusao
@@ -153,7 +153,7 @@ class cl_itbidadosimovel {
          $this->it22_sequencial = $it22_sequencial; 
        }
      }
-     if(($this->it22_sequencial == null) || ($this->it22_sequencial == "") ){ 
+     if(($this->it22_sequencial == null) || (($this->it22_sequencial === 0 || $this->it22_sequencial === 0.0 || $this->it22_sequencial == "")) ){ 
        $this->erro_sql = " Campo it22_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -470,7 +470,7 @@ class cl_itbidadosimovel {
    function sql_query ( $it22_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -495,7 +495,7 @@ class cl_itbidadosimovel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -508,7 +508,7 @@ class cl_itbidadosimovel {
    function sql_query_file ( $it22_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -529,7 +529,7 @@ class cl_itbidadosimovel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -542,7 +542,7 @@ class cl_itbidadosimovel {
    function sql_query_dados( $it22_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -571,7 +571,7 @@ class cl_itbidadosimovel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

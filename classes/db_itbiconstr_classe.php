@@ -60,7 +60,7 @@ class cl_itbiconstr {
                  it08_coordenadas = varchar(50) = Longitude/Latitude 
                  ";
    //funcao construtor da classe 
-   public function cl_itbiconstr() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbiconstr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_itbiconstr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it08_codigo = ($this->it08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it08_codigo"]:$this->it08_codigo);
-       $this->it08_guia = ($this->it08_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it08_guia"]:$this->it08_guia);
-       $this->it08_area = ($this->it08_area == ""?@$GLOBALS["HTTP_POST_VARS"]["it08_area"]:$this->it08_area);
-       $this->it08_areatrans = ($this->it08_areatrans == ""?@$GLOBALS["HTTP_POST_VARS"]["it08_areatrans"]:$this->it08_areatrans);
-       $this->it08_ano = ($this->it08_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["it08_ano"]:$this->it08_ano);
+       $this->it08_codigo = (($this->it08_codigo === 0 || $this->it08_codigo === 0.0 || $this->it08_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["it08_codigo"]:$this->it08_codigo);
+       $this->it08_guia = (($this->it08_guia === 0 || $this->it08_guia === 0.0 || $this->it08_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it08_guia"]:$this->it08_guia);
+       $this->it08_area = (($this->it08_area === 0 || $this->it08_area === 0.0 || $this->it08_area == "")?@$GLOBALS["HTTP_POST_VARS"]["it08_area"]:$this->it08_area);
+       $this->it08_areatrans = (($this->it08_areatrans === 0 || $this->it08_areatrans === 0.0 || $this->it08_areatrans == "")?@$GLOBALS["HTTP_POST_VARS"]["it08_areatrans"]:$this->it08_areatrans);
+       $this->it08_ano = (($this->it08_ano === 0 || $this->it08_ano === 0.0 || $this->it08_ano == "")?@$GLOBALS["HTTP_POST_VARS"]["it08_ano"]:$this->it08_ano);
        $this->it08_obs = ($this->it08_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["it08_obs"]:$this->it08_obs);
        $this->it08_coordenadas = ($this->it08_coordenadas == ""?@$GLOBALS["HTTP_POST_VARS"]["it08_coordenadas"]:$this->it08_coordenadas);
      }else{
-       $this->it08_codigo = ($this->it08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it08_codigo"]:$this->it08_codigo);
+       $this->it08_codigo = (($this->it08_codigo === 0 || $this->it08_codigo === 0.0 || $this->it08_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["it08_codigo"]:$this->it08_codigo);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_itbiconstr {
          $this->it08_codigo = $it08_codigo; 
        }
      }
-     if(($this->it08_codigo == null) || ($this->it08_codigo == "") ){ 
+     if(($this->it08_codigo == null) || (($this->it08_codigo === 0 || $this->it08_codigo === 0.0 || $this->it08_codigo == "")) ){ 
        $this->erro_sql = " Campo it08_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

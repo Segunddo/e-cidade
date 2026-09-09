@@ -396,7 +396,7 @@ function db_verifica_ip_banco()
             or  ( db46_datafinal = '".date('Y-m-d')."' and db46_horafinal >= '".date("G:i")."' ))
             ";
     $result = db_query($sql);
-    $numrows = pg_numrows($result);
+    $numrows = ($result ? pg_numrows($result) : 0);
     for ($i = 0; $i < $numrows; $i++) {
         db_fieldsmemory($result, $i);
         if ($db48_ip == "") {
@@ -431,7 +431,7 @@ function db_verifica_ip_banco()
             or  ( db46_dtinicio = '".date('Y-m-d')."' and db46_horaini   <= '".date("H:i")."' )
             or  ( db46_datafinal = '".date('Y-m-d')."' and db46_horafinal >= '".date("H:i")."' ))";
     $result = db_query($sql);
-    $numrows = pg_numrows($result);
+    $numrows = ($result ? pg_numrows($result) : 0);
     for ($i = 0; $i < $numrows; $i++) {
         db_fieldsmemory($result, $i);
         if ($db48_ip == $db_ip) {
@@ -722,7 +722,7 @@ class rotulolov
             $result = db_query("select c.descricao,c.rotulo,c.tamanho
                            from db_syscampo c
                           where c.nomecam = '${sCampoTrim}'");
-            $numrows = pg_numrows($result);
+            $numrows = ($result ? pg_numrows($result) : 0);
             if ($numrows != 0) {
                 $this->titulo = ucfirst(pg_result($result, 0, "rotulo"));
                 $this->title = ucfirst(pg_result($result, 0, "descricao"));
@@ -794,7 +794,7 @@ function db_criatabela($result, $columns = array())
     //#20#//result  : Record set gerado
     //#20#//columns : Array com nomes das colunas a exibir, se nao passar nada mostra todas colunas do recordset
 
-    $numrows = pg_numrows($result);
+    $numrows = ($result ? pg_numrows($result) : 0);
     if (count($columns) == 0) {
         $numcols = pg_numfields($result);
         $bycolumn = false;
@@ -1973,7 +1973,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
 
             $query = $query_anterior . " limit $numlinhas offset " . $$offset;
             $result = db_query($query);
-            $NumRows = pg_numrows($result);
+            $NumRows = ($result ? pg_numrows($result) : 0);
             $filtroquery = $query_anterior;
         }
     } else {
@@ -2014,7 +2014,9 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
         }
     }
 
-    $NumFields = pg_numfields($result);
+    // COMPAT PHP 8: no 5.6, pg_* recebendo false so emitia warning; no PHP 8 e
+    // TypeError. Resultado falso vem de consulta com zero linhas ou que falhou.
+    $NumFields = $result ? pg_numfields($result) : 0;
 
     if (($NumRows < $numlinhas) && ($numlinhas < ($$tot_registros - $$offset - $numlinhas ) ) ) {
     $Dd1 = @ $Dd2 = "disabled";
@@ -2595,7 +2597,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
 
     if ($automatico == true) {
 
-        if (pg_numrows($result) == 1 && $$offset == 0) {
+        if (($result ? pg_numrows($result) : 0) == 1 && $$offset == 0) {
             $sHtml .= "<script>".@$resultadoRetorno."</script>";
     }
   }
@@ -2666,7 +2668,9 @@ function db_lov($query, $numlinhas,
     $query .= " limit $numlinhas offset " . $$offset;
     $result = db_query($query);
     $NumRows = $result ? pg_numrows($result) : 0;
-    $NumFields = pg_numfields($result);
+    // COMPAT PHP 8: no 5.6, pg_* recebendo false so emitia warning; no PHP 8 e
+    // TypeError. Resultado falso vem de consulta com zero linhas ou que falhou.
+    $NumFields = $result ? pg_numfields($result) : 0;
     if ($NumRows < $numlinhas) {
         $Dd1 = $Dd2 = "disabled";
     }
@@ -2733,7 +2737,7 @@ function db_logs($string = '', $codcam = 0, $chave = 0)
             $wheremod limit 1 ";
 
     $result = db_query($sql);
-    if ($result != false && pg_numrows($result) > 0) {
+    if ($result != false && ($result ? pg_numrows($result) : 0) > 0) {
         $item = pg_result($result, 0, 0);
 
         $sql = "select nextval('db_logsacessa_codsequen_seq')";
@@ -2895,7 +2899,7 @@ function db_menu($usuario = null, $modulo = null, $anousu = null, $instit = null
             $iCodigoDepartamento = db_getsession("DB_coddepto");
             $result = @ db_query("select descrdepto from db_depart where coddepto = " . db_getsession("DB_coddepto"));
 
-            if ($result != false && pg_numrows($result) > 0) {
+            if ($result != false && ($result ? pg_numrows($result) : 0) > 0) {
                 $descrdep = "[<strong>" . db_getsession("DB_coddepto") . "-" . substr(pg_result($result, 0,
                         'descrdepto'), 0, 40) . "</strong>]";
             } else {

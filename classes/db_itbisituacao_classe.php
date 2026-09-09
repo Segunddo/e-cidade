@@ -50,7 +50,7 @@ class cl_itbisituacao {
                  it07_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_itbisituacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbisituacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_itbisituacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it07_codigo = ($this->it07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it07_codigo"]:$this->it07_codigo);
+       $this->it07_codigo = (($this->it07_codigo === 0 || $this->it07_codigo === 0.0 || $this->it07_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["it07_codigo"]:$this->it07_codigo);
        $this->it07_descr = ($this->it07_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["it07_descr"]:$this->it07_descr);
      }else{
-       $this->it07_codigo = ($this->it07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it07_codigo"]:$this->it07_codigo);
+       $this->it07_codigo = (($this->it07_codigo === 0 || $this->it07_codigo === 0.0 || $this->it07_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["it07_codigo"]:$this->it07_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_itbisituacao {
          $this->it07_codigo = $it07_codigo; 
        }
      }
-     if(($this->it07_codigo == null) || ($this->it07_codigo == "") ){ 
+     if(($this->it07_codigo == null) || (($this->it07_codigo === 0 || $this->it07_codigo === 0.0 || $this->it07_codigo == "")) ){ 
        $this->erro_sql = " Campo it07_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_itbisituacao {
    function sql_query ( $it07_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_itbisituacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_itbisituacao {
    function sql_query_file ( $it07_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_itbisituacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

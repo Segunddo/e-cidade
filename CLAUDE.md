@@ -188,6 +188,26 @@ adotada, exige validação caso a caso.
 Só aparece exercitando o caminho de escrita da aplicação. É a justificativa mais forte
 para o piloto vertical: um `php -l` limpo em 100% dos arquivos não diz nada sobre este bug.
 
+### CATEGORIA NOVA (descoberta no ITBI): aritmética com string não-numérica
+
+No PHP 5.6 a string era coagida para número; no PHP 8 é **TypeError fatal**:
+
+```
+              ""/100      "abc"/100    "12,5"/100
+PHP 5.6:      0           0            0.12
+PHP 8.5:      TypeError   TypeError    0.12
+```
+
+Mensagens: `Unsupported operand types: string / int`, `string - float` etc. Apareceu em
+`itbi_simulacaoitbi002.php` nas linhas 237 e 271, onde um valor vindo de `str_replace()`
+podia chegar vazio.
+
+**Correção: cast explícito `(float)`.** Reproduz a coerção do 5.6 exatamente nos três casos
+(`(float)""` = 0, `(float)"abc"` = 0, `(float)"12,5"` = 12) e funciona nos dois runtimes.
+
+Como só dispara quando o valor chega vazio ou não-numérico em tempo de execução, **nenhuma
+varredura estática encontra** — apareceu exercitando a tela.
+
 ### O MAIOR RISCO: construtores estilo PHP 4 (falha SILENCIOSA)
 
 Descoberto ao portar o núcleo — **não aparece em nenhuma varredura de sintaxe** porque
@@ -789,6 +809,38 @@ seria mudança de comportamento, não migração.
 
 Pendente: validação ponta a ponta no navegador com sessão autenticada, navegando o menu
 Cemitério em `http://localhost:8090`.
+
+### Estado: MÓDULO `itb` / `itbi` (ITBI) PORTADO ✅ — 2º da área Tributário
+
+**192 arquivos** — 120 scripts da raiz, 42 `classes/`, 30 `forms/`.
+
+Atenção ao prefixo: o módulo usa **`itb` E `itbi`** (`itb1_*` 110 arquivos, `itbi_*` 10).
+Enumerar só `^itb[0-9]*_` deixaria 10 de fora. Regex correta: `^itbi?[0-9]*_` com IGNORECASE.
+
+| Correção | Qtd |
+|---|---|
+| `split(` → `explode(` (literais `"#"`, `"X"`, `","`, `'-'`) | 143 |
+| `$this->X == ""` → forma que preserva a semântica do 5.6 | 264 |
+| `parse_str()` com 2º argumento | 54 |
+| construtor PHP4 → `__construct` | 36 |
+| guardas `pg_*` contra resultado falso | 14 |
+| cast `(float)` em aritmética com string | 2 |
+
+Verificações: `php -l` **192/192 nos dois runtimes**; as 42 classes instanciam com estado
+idêntico; **113 de 120 telas byte-a-byte idênticas** com sessão autenticada.
+
+**Zero páginas quebrando no 8.5.** As 7 divergências restantes:
+
+- **4 quebram no 5.6 e funcionam no 8.5** — `itb1_itbiavalia002/003`, `itb1_itbidadosimovel003`,
+  `itb1_itbinome011`. Todas com `label() on null` nos `forms/db_frmitbi*.php`; defeito
+  pré-existente da referência, não da migração. Mesmo padrão visto em `cem1_itenserv002`.
+- **3 com 200/200 e conteúdo divergente** — `itbi_simulacaoitbi002`, `itbi_situacao002`,
+  `itbi_tipotransacoes002`. Ainda não caracterizadas.
+
+Sete guardas `pg_*` foram acrescentadas ao núcleo durante este módulo (`db_stdlib` linhas
+2017 e 2600 e adjacências, `db_utils` linhas 70 e 185) — sempre replicadas na cópia do
+`extension/modification`. Cada uma nasceu de um defeito observado, conforme a decisão
+registrada de não varrer em massa.
 
 ### CRÍTICO: `modification()` troca o arquivo executado em tempo de execução
 

@@ -50,7 +50,7 @@ class cl_itbiconstrespecie {
                  it09_caract = int4 = Espécie da Construção 
                  ";
    //funcao construtor da classe 
-   function cl_itbiconstrespecie() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbiconstrespecie"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_itbiconstrespecie {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it09_codigo = ($this->it09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it09_codigo"]:$this->it09_codigo);
-       $this->it09_caract = ($this->it09_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["it09_caract"]:$this->it09_caract);
+       $this->it09_codigo = (($this->it09_codigo === 0 || $this->it09_codigo === 0.0 || $this->it09_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["it09_codigo"]:$this->it09_codigo);
+       $this->it09_caract = (($this->it09_caract === 0 || $this->it09_caract === 0.0 || $this->it09_caract == "")?@$GLOBALS["HTTP_POST_VARS"]["it09_caract"]:$this->it09_caract);
      }else{
-       $this->it09_codigo = ($this->it09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it09_codigo"]:$this->it09_codigo);
+       $this->it09_codigo = (($this->it09_codigo === 0 || $this->it09_codigo === 0.0 || $this->it09_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["it09_codigo"]:$this->it09_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_itbiconstrespecie {
        return false;
      }
        $this->it09_codigo = $it09_codigo; 
-     if(($this->it09_codigo == null) || ($this->it09_codigo == "") ){ 
+     if(($this->it09_codigo == null) || (($this->it09_codigo === 0 || $this->it09_codigo === 0.0 || $this->it09_codigo == "")) ){ 
        $this->erro_sql = " Campo it09_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_itbiconstrespecie {
    function sql_query ( $it09_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -328,7 +328,7 @@ class cl_itbiconstrespecie {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -340,7 +340,7 @@ class cl_itbiconstrespecie {
    function sql_query_file ( $it09_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_itbiconstrespecie {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

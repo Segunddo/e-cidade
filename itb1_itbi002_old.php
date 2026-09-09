@@ -25,7 +25,7 @@
  *                                licenca/licenca_pt.txt 
  */
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 if(!isset($abas)){
   echo "<script>location.href='itb1_itbi005.php?db_opcao=2'</script>";
   exit;
@@ -39,7 +39,7 @@ include(modification("classes/db_itburbano_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_itbirural_classe.php"));
 include(modification("classes/db_itbiruralcaract_classe.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clitbi = new cl_itbi;
 $clitburbano = new cl_itburbano;
@@ -59,8 +59,8 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Alterar
     $clitbirural->it18_guia = $it01_guia;
     $clitbirural->alterar($it01_guia);
     if(isset($codigo) && isset($valor) && $codigo != "" && $valor != ""){
-      $cod = split(",",$codigo);
-      $val = split(",",$valor);
+      $cod = explode(",",$codigo);
+      $val = explode(",",$valor);
       for($i=0;$i<sizeof($cod);$i++){
         $clitbiruralcaract->it19_guia = $clitbi->it01_guia;
         $clitbiruralcaract->it19_codigo = $cod[$i];

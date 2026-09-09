@@ -54,7 +54,7 @@ class cl_itbiformapagamentovalor {
                  it26_valor = float4 = Valor
                  ";
    //funcao construtor da classe
-   function cl_itbiformapagamentovalor() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbiformapagamentovalor");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_itbiformapagamentovalor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it26_sequencial = ($this->it26_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it26_sequencial"]:$this->it26_sequencial);
-       $this->it26_itbitransacaoformapag = ($this->it26_itbitransacaoformapag == ""?@$GLOBALS["HTTP_POST_VARS"]["it26_itbitransacaoformapag"]:$this->it26_itbitransacaoformapag);
-       $this->it26_guia = ($this->it26_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it26_guia"]:$this->it26_guia);
-       $this->it26_valor = ($this->it26_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["it26_valor"]:$this->it26_valor);
+       $this->it26_sequencial = (($this->it26_sequencial === 0 || $this->it26_sequencial === 0.0 || $this->it26_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it26_sequencial"]:$this->it26_sequencial);
+       $this->it26_itbitransacaoformapag = (($this->it26_itbitransacaoformapag === 0 || $this->it26_itbitransacaoformapag === 0.0 || $this->it26_itbitransacaoformapag == "")?@$GLOBALS["HTTP_POST_VARS"]["it26_itbitransacaoformapag"]:$this->it26_itbitransacaoformapag);
+       $this->it26_guia = (($this->it26_guia === 0 || $this->it26_guia === 0.0 || $this->it26_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it26_guia"]:$this->it26_guia);
+       $this->it26_valor = (($this->it26_valor === 0 || $this->it26_valor === 0.0 || $this->it26_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["it26_valor"]:$this->it26_valor);
      }else{
-       $this->it26_sequencial = ($this->it26_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it26_sequencial"]:$this->it26_sequencial);
+       $this->it26_sequencial = (($this->it26_sequencial === 0 || $this->it26_sequencial === 0.0 || $this->it26_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it26_sequencial"]:$this->it26_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_itbiformapagamentovalor {
          $this->it26_sequencial = $it26_sequencial;
        }
      }
-     if(($this->it26_sequencial == null) || ($this->it26_sequencial == "") ){
+     if(($this->it26_sequencial == null) || (($this->it26_sequencial === 0 || $this->it26_sequencial === 0.0 || $this->it26_sequencial == "")) ){
        $this->erro_sql = " Campo it26_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_itbiformapagamentovalor {
    function sql_query ( $it26_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_itbiformapagamentovalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_itbiformapagamentovalor {
    function sql_query_file ( $it26_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -453,7 +453,7 @@ class cl_itbiformapagamentovalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -59,7 +59,7 @@ $clrotulo->label("");
 			        <?
 			          if ( isset($it01_data) && $it01_data != "" ){
 
-			            $data = split('-',$it01_data);
+			            $data = explode('-',$it01_data);
 			            $dia  = $data[2];
 			            $mes  = $data[1];
 			            $ano  = $data[0];
@@ -77,7 +77,7 @@ $clrotulo->label("");
 			        <?
 			          if ( isset($it14_dtvenc) && $it14_dtvenc != "" ) {
 
-			            $data = split('-',$it14_dtvenc);
+			            $data = explode('-',$it14_dtvenc);
 			            $dia1 = $data[2];
 			            $mes1 = $data[1];
 			            $ano1 = $data[0];
@@ -95,7 +95,7 @@ $clrotulo->label("");
 			        <?
 			          if ( isset($it14_dtliber) && $it14_dtliber != "" ){
 
-			            $data = split('-',$it14_dtliber);
+			            $data = explode('-',$it14_dtliber);
 			            $dia2 = $data[2];
 			            $mes2 = $data[1];
 			            $ano2 = $data[0];

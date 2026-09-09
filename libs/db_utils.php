@@ -67,8 +67,9 @@ class db_utils
     static function fieldsMemory($rs, $idx, $formata = false, $mostra = false, $lEncode = false)
     {
         $oFields = new stdClass();
-        $numFields = pg_num_fields($rs);
-        $iTotalLinhas = pg_num_rows($rs);
+        // COMPAT PHP 8: no 5.6 pg_* com false so avisava; agora e TypeError.
+        $numFields = $rs ? pg_num_fields($rs) : 0;
+        $iTotalLinhas = $rs ? pg_num_rows($rs) : 0;
         for ($i = 0; $i < $numFields; $i++) {
             $sValor = "";
             $sFieldName = @pg_field_name($rs, $i);
@@ -182,7 +183,7 @@ class db_utils
      */
     static function getCollectionByRecord($rsRecordset, $lFormata = false, $lMostra = false, $lEncode = false)
     {
-        $iINumRows = @pg_num_rows($rsRecordset);
+        $iINumRows = $rsRecordset ? @pg_num_rows($rsRecordset) : 0;
         $aDButils = array();
 
         if ($iINumRows > 0) {

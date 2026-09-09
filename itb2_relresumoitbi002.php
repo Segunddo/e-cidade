@@ -297,7 +297,7 @@ $sSql .= "           order by {$sOrdem} {$oGet->modo}  ,recibo.k00_numpre {$oGet
 $sSql .= "           ) as x                                                                                           ";
 $sSql .= "           {$sWhereLograd}                                                                                  ";
 $rsSql     = db_query($sSql);
-$iNumRows  = pg_num_rows($rsSql);
+$iNumRows  = $rsSql ? pg_num_rows($rsSql) : 0;
 
 $aRetorno  = db_utils::getCollectionByRecord($rsSql);
 

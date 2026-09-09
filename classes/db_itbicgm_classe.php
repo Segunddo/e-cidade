@@ -50,7 +50,7 @@ class cl_itbicgm {
                  it02_numcgm = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_itbicgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbicgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_itbicgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it02_guia = ($this->it02_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_guia"]:$this->it02_guia);
-       $this->it02_numcgm = ($this->it02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_numcgm"]:$this->it02_numcgm);
+       $this->it02_guia = (($this->it02_guia === 0 || $this->it02_guia === 0.0 || $this->it02_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it02_guia"]:$this->it02_guia);
+       $this->it02_numcgm = (($this->it02_numcgm === 0 || $this->it02_numcgm === 0.0 || $this->it02_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["it02_numcgm"]:$this->it02_numcgm);
      }else{
-       $this->it02_guia = ($this->it02_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_guia"]:$this->it02_guia);
-       $this->it02_numcgm = ($this->it02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_numcgm"]:$this->it02_numcgm);
+       $this->it02_guia = (($this->it02_guia === 0 || $this->it02_guia === 0.0 || $this->it02_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it02_guia"]:$this->it02_guia);
+       $this->it02_numcgm = (($this->it02_numcgm === 0 || $this->it02_numcgm === 0.0 || $this->it02_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["it02_numcgm"]:$this->it02_numcgm);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_itbicgm {
       $this->atualizacampos();
        $this->it02_guia = $it02_guia; 
        $this->it02_numcgm = $it02_numcgm; 
-     if(($this->it02_guia == null) || ($this->it02_guia == "") ){ 
+     if(($this->it02_guia == null) || (($this->it02_guia === 0 || $this->it02_guia === 0.0 || $this->it02_guia == "")) ){ 
        $this->erro_sql = " Campo it02_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_itbicgm {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->it02_numcgm == null) || ($this->it02_numcgm == "") ){ 
+     if(($this->it02_numcgm == null) || (($this->it02_numcgm === 0 || $this->it02_numcgm === 0.0 || $this->it02_numcgm == "")) ){ 
        $this->erro_sql = " Campo it02_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_itbicgm {
    function sql_query ( $it02_guia=null,$it02_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_itbicgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_itbicgm {
    function sql_query_file ( $it02_guia=null,$it02_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_itbicgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
