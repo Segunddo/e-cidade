@@ -839,6 +839,28 @@ enquanto `/w/2/extension/desktop/...` e `/w/2/skins/estilos.php` continuam no 5.
 Para descobrir as URLs reais de um módulo, o log do proxy é a fonte definitiva:
 `docker logs ecidade_proxy 2>&1 | grep -aoE '"(GET|POST) [^ ]+'`
 
+**ARMADILHA MAIÚSCULAS — vale para o roteamento E para a enumeração.** O e-cidade tem
+arquivos com o prefixo de módulo **capitalizado**: `Cem1_legista001.php`, `Con1_*`, `Cai1_*`,
+`Amb1_*`, `Cus1_*`. São **29 na raiz** (Con1 9, Cai1 6, Amb1 6, Cus1 5, Cem1 3), de 15.694.
+
+Poucos, mas causam duas falhas silenciosas distintas:
+
+1. **Roteamento:** `location ~ ` é sensível a caso, então essas telas continuam no 5.6
+   mesmo com o módulo portado — sem erro, só o `X-Ecidade-Runtime` denunciando. Corrigido
+   usando **`location ~*`** (insensível a caso).
+2. **Enumeração:** o levantamento do módulo com `re.match(r"^cem[0-9]*_", f)` também é
+   sensível a caso e **deixou 3 arquivos fora do porte** — dois deles ainda com `parse_str`
+   de 1 argumento. Detectado pelo usuário navegando a tela, não pelas verificações.
+
+**Ao enumerar um módulo, usar sempre `re.IGNORECASE`:**
+```python
+re.match(r"^cem[0-9]*_", f, re.IGNORECASE)
+```
+
+Lição: uma verificação que só testa os nomes que a própria enumeração gerou nunca encontra
+o que a enumeração deixou de fora. Vale conferir `ls | grep -iE '^<prefixo>[0-9]*_'` contra
+a lista enumerada antes de dar o módulo por concluído.
+
 **ARMADILHA `Host $host` vs `$http_host`:** o e-cidade monta URLs absolutas a partir de
 `HTTP_HOST` (ver `$DB_URL_ABS` em `libs/db_stdlib.php`). A variável `$host` do nginx
 **descarta a porta**; com ela o sistema gerava `http://localhost/skins/estilos.php?...`,
