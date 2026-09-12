@@ -567,6 +567,40 @@ Regra que decorre disso:
 - **Portar → sempre por prefixo** (`re.IGNORECASE`), senão fica 2/3 do módulo para trás.
 - **Rotear → é onde a fronteira da área importa.**
 
+### 3ª LACUNA: arquivos abertos por JavaScript não entram no fecho de dependências
+
+Descoberta no ITBI, reportada pelo usuário (o campo "Forma de Pagamento" não aceitava
+digitação). O fecho transitivo só segue `include`/`require`. Mas as telas abrem *lookups* e
+subjanelas por **JavaScript**, que é uma requisição HTTP nova, invisível ao analisador:
+
+```javascript
+js_OpenJanelaIframe('','db_iframe_...','func_itbiformapagamento.php?funcao_js=...');
+```
+
+No ITBI havia **13 arquivos** nessa condição (9 deles quebrados em PHP 8, todos com
+`parse_str` de 1 argumento): `func_itbi.php`, `func_itbiformapagamento.php`,
+`func_itbiliberado.php`, `func_itbitransacao.php`, `func_matricitbi.php`, `func_tabdesc.php`,
+`func_taxasitbi.php`, `func_taxaslancadas.php` e `cad3_conscadastro_002.php`.
+
+**Passo a acrescentar à receita de enumeração** — varrer os scripts do módulo atrás de
+nomes de arquivo `.php` citados em strings (o JS os referencia como texto):
+
+```python
+alvo = re.compile(rb"([A-Za-z0-9_]+\.(?:RPC\.)?php)")
+# para cada script do modulo, coletar os nomes citados que existam em disco
+# e NAO casem com o prefixo do modulo -> sao candidatos abertos por JS
+```
+
+Detalhe de roteamento: esses `func_*` **continuam servidos pelo 5.6** (o prefixo `func_` é
+compartilhado por todos os módulos e não pode ir para o 8.5 isoladamente). Como as correções
+são compatíveis com os dois runtimes, isso não é problema — mas eles **precisam ser portados
+mesmo assim**, senão quebram quando o módulo que os usa for roteado.
+
+**Lição, terceira da mesma família:** as três lacunas do porte — maiúsculas, menu × prefixo,
+e agora JavaScript — têm a mesma raiz. Toda verificação partia da lista que a própria
+enumeração gerou, e nenhuma delas podia encontrar o que a enumeração não incluiu. As três
+foram descobertas pelo usuário navegando o sistema, não pelas baterias automatizadas.
+
 ### Prefixos exclusivos vs. compartilhados
 
 Consulta que revela a colisão:

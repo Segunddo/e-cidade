@@ -35,7 +35,7 @@ use ECidade\Tributario\Arrecadacao\Model\TaxasLancadasDepart;
 use ECidade\Tributario\Arrecadacao\Repository\TaxasLancadasDepartRepository;
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 
 $clrotulo = new rotulocampo;
 $clrotulo->label("ar44_sequencial");
