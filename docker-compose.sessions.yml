@@ -21,7 +21,26 @@ services:
   ecidade_php56:
     volumes:
       - ecidade_sessions:/var/lib/php/sessions
+      # /tmp COMPARTILHADO — ver o bloco de comentário abaixo.
+      - ecidade_tmp:/tmp
 
 volumes:
   ecidade_sessions:
     external: true
+  ecidade_tmp:
+    external: true
+
+# POR QUE O /tmp PRECISA SER COMPARTILHADO
+#
+# dbforms/db_classesgenericas.php usa tempnam() para gerar /tmp/iframe<aleatorio>.php,
+# e a tela devolve ao navegador um iframe apontando para
+#   dbforms/db_classes_iframe_alterar_excluir.php?arquivo=<base64 do caminho>
+#
+# Com dois runtimes, isso quebra: a tela do módulo migrado é servida pelo 8.5 e grava o
+# temporário no /tmp DELE, mas `dbforms/` não casa com o regex do proxy e a requisição do
+# iframe vai para o 5.6 — que não encontra o arquivo. O iframe erra e repete, gerando um
+# LOOP INFINITO de POSTs (observado: 6.717 requisições e 7.847 temporários órfãos no 8.5).
+#
+# Sintoma enganoso: parece defeito da migração do módulo, e é estado de runtime não
+# compartilhado. Mesma família do problema da sessão — os runtimes compartilham banco e
+# sessão, e precisam compartilhar também o /tmp.

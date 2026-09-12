@@ -34,6 +34,10 @@ services:
       # funciona em PHP 8, então autentica-se em :8080 e navega-se o módulo migrado
       # em :8085 com a mesma sessão. Ver docker-compose.sessions.yml.
       - ecidade_sessions:/var/lib/php/sessions
+      # /tmp compartilhado com o 5.6: os iframes gerados por tempnam() em
+      # dbforms/db_classesgenericas.php são criados por um runtime e lidos pelo outro.
+      # Sem isso o iframe entra em loop infinito. Ver docker-compose.sessions.yml.
+      - ecidade_tmp:/tmp
     networks:
       - ecidade
 
@@ -44,4 +48,6 @@ networks:
 
 volumes:
   ecidade_sessions:
+    external: true
+  ecidade_tmp:
     external: true

@@ -78,8 +78,9 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
 
 ```bash
-docker volume create ecidade_sessions
+docker volume create ecidade_sessions && docker volume create ecidade_tmp
 docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
+docker exec ecidade_php56 chmod 1777 /tmp      # o volume nasce root:root 755
 chmod -R 777 storage bootstrap/cache && chmod 777 extension/log
 docker compose -f docker-compose.php85.yml up -d
 docker compose -f docker-compose.proxy.yml up -d
@@ -1154,6 +1155,38 @@ enganoso: parece falha de migração e é configuração de proxy.
 Nota operacional: o nginx.conf entra por bind mount de **arquivo único**; editar o arquivo no
 host cria um inode novo e o container continua com o antigo. Depois de editar, use
 `docker compose -f docker-compose.proxy.yml up -d --force-recreate` (um `nginx -s reload` não basta).
+
+### `/tmp` COMPARTILHADO — obrigatório, como a sessão (montado e verificado)
+
+Volume Docker externo `ecidade_tmp`, montado em `/tmp` nos **dois** containers.
+
+**Por que:** `dbforms/db_classesgenericas.php` usa `tempnam()` para gerar
+`/tmp/iframe<aleatório>.php` e devolve ao navegador um iframe apontando para
+`dbforms/db_classes_iframe_alterar_excluir.php?arquivo=<base64 do caminho>`.
+
+Com dois runtimes isso quebra de forma espetacular: a tela do módulo migrado é servida pelo
+**8.5** e grava o temporário no `/tmp` dele, mas `dbforms/` **não casa com o regex do proxy**
+e a requisição do iframe vai para o **5.6**, que não encontra o arquivo. O iframe erra e
+repete — **loop infinito de POSTs**.
+
+Sintomas medidos antes da correção:
+
+```
+6.717 requisições a itb1_itbitransacao111.php no log do proxy
+7.847 arquivos /tmp/iframe*.php órfãos no container 8.5   (contra 69 no 5.6)
+```
+
+No navegador: primeira requisição GET com iniciador `subdocument`, seguida de dezenas de
+POSTs com iniciador `db_classes_iframe_alterar_excluir.php`. **Não acontece no :8080 puro** —
+só na origem mista, o que o torna um falso "defeito da migração do módulo".
+
+Verificado depois da correção: o mesmo fluxo devolve **HTTP 200 / 3.057 bytes idênticos**
+pelo `:8080` (puro 5.6) e pelo `:8090` (misto).
+
+**Regra geral que decorre disso:** os dois runtimes precisam compartilhar **todo estado de
+runtime**, não só o banco. Já são três: banco, sessão (`/var/lib/php/sessions`) e agora
+`/tmp`. Ao encontrar comportamento estranho que só ocorre no `:8090`, suspeitar primeiro de
+estado não compartilhado, antes de procurar defeito de porte.
 
 ### Sessão compartilhada entre os runtimes (montada e verificada)
 
