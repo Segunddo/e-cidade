@@ -289,8 +289,11 @@ Lista completa de arquivos afetados: `scratchpad/afetados.txt`.
 - **`doctrine/dbal 2.*`** — incompatível com PHP 8+.
 - **`symfony/* ~3.2`** — EOL.
 - **`zendframework/zend-eventmanager 2.2.10`** — projeto descontinuado/renomeado.
-- **`dbseller/session`** — vem de `git@github.com:DBSeller/Session.git`, **repositório privado**.
-  Sem acesso, o `composer install` pode nem completar. *Verificar isso antes de qualquer coisa.*
+- ~~**`dbseller/session`** — repositório privado~~ **VERIFICADO: NÃO é bloqueador.**
+  O `composer.json` o declara por SSH (`git@github.com:DBSeller/Session.git`), o que dá
+  aparência de privado, mas o repositório **é público por HTTPS** (`git ls-remote` responde).
+  Além disso o `composer.lock` existe (340 KB) e o pacote já está em `vendor/`. A escada de
+  versões do Laravel pode começar quando se quiser.
 - Outros pacotes DBSeller: `dbseller/legacy`, `dbseller/phinx_postgres`, `dbseller/sdk-api-pix-bb`.
 - **Banco em LATIN1** → conversão para UTF-8 é trilha de risco própria (acentuação pt-BR).
 
@@ -940,6 +943,50 @@ inclusive — em `ErrorException` fatal. Por isso uma simples deprecation derrub
 escada de versões (Fase 1/2). Isso **valida a arquitetura strangler fig** em vez de contradizê-la:
 autenticação e rotas `/v4/*` permanecem no runtime 5.6, os módulos migrados vão para o 8.5, e os
 dois compartilham sessão. O proxy reverso deixa de ser desenho e passa a ser requisito.
+
+### DIMENSIONAMENTO DO LARAVEL — o problema é menor do que parece
+
+Medido, e desfaz duas impressões erradas:
+
+| | |
+|---|---|
+| `app/` (código Laravel de verdade) | 1.259 arquivos, **771 usam Laravel (61%)** |
+| `src/` (framework V3 **próprio** deles) | 2.651 arquivos, **apenas 44 usam Laravel (1%)** |
+| Rotas servidas pelo Laravel | **138** (60 web + 78 api) |
+| Núcleo legado que toca Laravel | **1 arquivo**: `libs/db_conecta.php:83` |
+
+**Achado central: `illuminate/database` (o Capsule do Eloquent) JÁ FUNCIONA em PHP 8.5.**
+Verificado conectando e consultando pelo runtime 8.5:
+
+```bash
+docker exec ecidade_php85 php -r '
+require "/var/www/html/vendor/autoload.php";
+$c = new Illuminate\Database\Capsule\Manager;
+$c->addConnection(["driver"=>"pgsql","host"=>"ecidade_database","port"=>5432,
+  "database"=>"ecidade","username"=>"postgres","password"=>"postgres"]);
+$c->setAsGlobal(); $c->bootEloquent();
+print_r($c->getConnection()->select("select count(*) from configuracoes.db_modulos"));'
+```
+
+Isso separa o "migrar o Laravel" em **dois problemas independentes**:
+
+1. **Eloquent/Capsule** — usado pelo núcleo legado (`db_conecta.php`). **Já funciona no 8.5**,
+   não bloqueia nada. É por isso que os módulos migrados funcionam.
+2. **O stack HTTP do Laravel** — serve só as 138 rotas `/v4/*` e o login. É o único que falha
+   em PHP 8 (`ReflectionParameter::getClass()`, `PriorityQueue::count()`).
+
+**Consequência estratégica: o Laravel não bloqueia a migração dos módulos.** Ele só bloqueia
+"desligar o container 5.6", que é o último passo de todos. Por isso está corretamente nas
+Fases 1/2, depois dos módulos — e não antes.
+
+Dois caminhos possíveis quando chegar a hora:
+
+- **Escada de versões** 5.4→5.5→…→12: ~8 saltos, cada um com guia oficial de upgrade. Caminho
+  "correto", mas cada degrau é um projeto, e arrasta a substituição de `silex`, `doctrine/dbal 2`,
+  `symfony ~3.2`, `zend-eventmanager`, `passport 4`, `lcobucci/jwt 3.3.3` e `fractal 0.11`.
+- **Reescrever a camada HTTP**: são 138 rotas e 771 arquivos sobre um Laravel novo. Como o
+  legado **não depende** do stack HTTP (só do Eloquent, que já funciona), pode sair mais barato
+  que oito degraus de upgrade. Exige decisão de escopo, não é trabalho de disciplina.
 
 Pendência para demonstrar o piloto no navegador: **sessão compartilhada entre os dois runtimes**
 (hoje 5.6 grava em `/var/lib/php/sessions` e 8.5 em `/tmp`, isolados). O cookie não é obstáculo —
