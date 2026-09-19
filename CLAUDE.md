@@ -443,7 +443,99 @@ núcleo universal (20). É uma fatia vertical provadamente limpa — não existe
 Escopo do piloto = **núcleo (22.007 linhas) + `tra` (27.090 linhas) ≈ 49k linhas**, ~0,6% da base.
 Segunda opção, caso `tra` se mostre pobre em regras de negócio: `cem` (resíduo 4).
 
-## TRABALHO RELACIONADO: TCC do módulo Educação (LTD/UFPB)
+## TRABALHO RELACIONADO — A MONOGRAFIA (lida na íntegra)
+
+ARAUJO, Gerson Junior Fragoso de. **Relato de experiência da migração assistida por
+inteligência artificial generativa do módulo de educação do E-Cidade do PHP 5.6 para
+PHP 8.4.** TCC (Graduação em Ciência da Computação) — UFPB, João Pessoa, 2026.
+Orientador: Prof. Dr. Alan Kelon Oliveira de Moraes. 20 f.
+
+**Método:** estudo de caso único (RUNESON; HÖST, 2009), no formato relato de experiência.
+Duas questões de pesquisa: quais passos foram necessários (QP1) e qual o papel do
+ferramental automatizado e da IA generativa (QP2). Sem grupo de controle e sem migração
+equivalente sem IA — o autor declara explicitamente que **não mede ganho de produtividade**.
+
+**Números do trabalho dele:**
+
+| | |
+|---|---|
+| Período | 24/mai a 07/jul de 2026 · **31 commits** (9 deles *hotfixes*) |
+| Telas do módulo (`edu*.php`) | 1.211 |
+| Escopo inicial do Rector (por diretório) | 532 arquivos, 279 modificados |
+| **Escopo após descobrir dependências transitivas** | **4.073 arquivos, 3.073 modificados** |
+| Validação | `php -l` + catálogo de 11 verificações de regressão + **520 telas navegadas à mão** |
+| Ferramenta construída | `rector-helper` (descobre dependências, aplica correções, registra regressões) |
+
+### Convergências — validação independente do nosso catálogo
+
+As categorias que ele lista no Quadro 1 são exatamente as nossas: marcadores curtos,
+`parse_str` de 1 argumento, construtores estilo PHP 4, acesso a string com chaves, regex
+POSIX. A correção de `parse_str` dele é idêntica à nossa, com `EXTR_SKIP` a mais.
+
+Três achados dele batem com lacunas que descobrimos de forma independente:
+
+1. **"O prefixo do módulo não define sua fronteira técnica"** (Conclusão). O escopo dele
+   cresceu **7,7×** (532 → 4.073) ao seguir inclusões dinâmicas. É a mesma descoberta que nos
+   custou três lacunas (maiúsculas, menu × prefixo, JavaScript).
+2. **A variante em maiúsculas escapou**: "uma variante em maiúsculas ainda falhou", sobre
+   `<?PHP`. Mesma família da nossa armadilha de `Cem1_legista001.php`.
+3. **Deriva de enumeração**: "os 225 usos restantes de `split` ocorreram porque arquivos de
+   Alimentação Escolar foram adicionados após a última execução do Rector".
+
+### A diferença central: o critério de validação
+
+O critério dele, nas palavras do próprio texto:
+
+> "Uma tela atingiu o critério técnico quando carregou sem erro fatal, tela em branco, código
+> exibido ou interrupção visível. **Isso não comprova regras de negócio.**"
+
+E na seção 5.3:
+
+> "O critério verificou compatibilidade visível, **não equivalência**, uma tela pode carregar
+> e produzir dados errados. Avançar requer base mínima, **cenários iguais antes e depois** e
+> participação de especialista no domínio."
+
+**"Cenários iguais antes e depois" é precisamente o que este trabalho construiu.** A
+comparação byte-a-byte entre os dois runtimes só é possível porque o strangler fig mantém o
+5.6 **vivo como referência** — no big-bang dele, o "antes" deixou de existir no momento em que
+o Docker subiu para 8.4.
+
+E é essa diferença que produz o achado do `0 == ""`: a tela carrega, não dá erro, e grava
+dado errado. Passa no critério dele; falha no nosso.
+
+### A conclusão dele descreve nossa agenda
+
+> "Trabalhos futuros devem **migrar o Laravel**, **preparar dados e testes executáveis** e
+> **aplicar o processo a outros módulos**."
+
+Os três itens são o que estamos fazendo: o dimensionamento do Laravel está medido, a
+comparação de 113/120 telas é o teste executável, e a área Tributário é a aplicação a outros
+módulos.
+
+### O que vale adotar do trabalho dele
+
+1. **Separar as regras em três grupos** (seção 5.1): (a) exigidas pela versão de destino,
+   (b) construções depreciadas, (c) modernizações opcionais. Ele misturou os três na
+   configuração cumulativa do Rector e relata que isso "ampliou o volume de alterações e
+   dificultou a identificação das causas das regressões". **Nós só aplicamos o grupo (a)** —
+   convergência que vale registrar como decisão validada por evidência externa.
+2. **"Versão configurada, runtime e regras habilitadas devem ser verificados juntos."** O caso
+   `#[\Override]` dele: ambiente em 8.4, Rector declarando 8.5, atributo aplicado a
+   propriedades, classes interrompidas — e o diagnóstico inicial, apoiado pela IA, culpou a
+   ferramenta errada.
+3. **Catálogo nomeado de regressões.** Ele manteve 11 verificações repetíveis. Nossa bateria
+   de 113 telas é mais forte, mas não é um catálogo nomeado — nomear cada classe de regressão
+   facilita o relatório.
+
+### Requisito formal do curso
+
+O TCC traz uma seção **"7 DECLARAÇÃO DE USO DE FERRAMENTAS DE INTELIGÊNCIA ARTIFICIAL"**,
+nomeando os modelos usados, para quê (investigação de erros, implementação, organização e
+revisão de código, análise de resultados, revisão gramatical) e declarando que todo o conteúdo
+foi analisado, testado, revisado e editado pelo autor, que assume responsabilidade integral.
+**Este trabalho precisará de uma seção equivalente.**
+
+## Análise inicial pelos commits (anterior à leitura da monografia)
 
 `https://github.com/ltdufpb/e-cidade` — branch **`tcc-gerson-banca`**, fork de
 `DBSeller/e-cidade`, **32 commits** à frente do `master` deles. Outro TCC do mesmo
