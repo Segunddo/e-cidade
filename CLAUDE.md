@@ -1007,6 +1007,53 @@ Sete guardas `pg_*` foram acrescentadas ao núcleo durante este módulo (`db_std
 `extension/modification`. Cada uma nasceu de um defeito observado, conforme a decisão
 registrada de não varrer em massa.
 
+### ARMADILHA DE DIAGNÓSTICO: tabelas vazias no banco de exemplo
+
+**Já gerou dois alarmes falsos de migração.** O banco de exemplo tem várias tabelas dos
+módulos portados sem nenhum registro:
+
+```
+itbi                 0        itbitransacao       10
+sepultamentos        0        itbiformapagamento   5
+ossoario             0        causa                3
+renovacoes           0        campas               2
+legista              0        cemiterio            1
+funerarias           0
+```
+
+Uma tela que consulta tabela vazia pode falhar de **duas formas muito diferentes**, e
+distinguí-las é o que separa dado de defeito:
+
+**1. Vazio TRATADO — não é defeito.** O código verifica `numrows` e emite mensagem de
+negócio. Comporta-se **igual nos dois runtimes**, que é exatamente o critério de migração
+fiel. Exemplo: `reciboitbi.php:184` (ITBI → Relatórios → Emite Guia):
+
+```php
+$rsItbi = $clitbi->sql_record($clitbi->sql_query(null, "*", null,
+    "it01_guia = {$itbi} and it01_coddepto = " . db_getsession("DB_coddepto")));
+if ($clitbi->numrows == 0) {
+  $sMensagemErro = 'ITBI não encontrada para o departamento!';
+```
+
+Com `itbi` vazia, qualquer guia informada cai nesse ramo. O `:8080` e o `:8085` devolvem
+**4.048 bytes idênticos**. Nada a corrigir.
+
+**2. Vazio que vira FATAL — é regressão.** O código passa o resultado falso adiante para
+`pg_*`, que o 5.6 tolerava e o PHP 8 rejeita com `TypeError`. Foi a causa das 8 telas do
+Cemitério que quebravam só no 8.5, e das guardas que fomos acrescentando ao núcleo.
+
+**Como distinguir, em um passo:** reproduzir a mesma tela no `:8080`.
+
+| Resultado | Conclusão |
+|---|---|
+| Falha **igual** nos dois | dado ausente ou defeito pré-existente — **não mexer** |
+| Falha **só no `:8085`** | regressão de migração — ler `extension/log/error.log` e corrigir |
+
+Corolário para a validação: uma tela "sem erro" cuja tabela está vazia **não foi exercitada
+de verdade**. A bateria de comparação prova equivalência entre runtimes, não que o caminho
+de dados foi percorrido. Para exercitar de fato é preciso cadastrar registros pelo próprio
+sistema.
+
 ### CRÍTICO: `modification()` troca o arquivo executado em tempo de execução
 
 **O arquivo que você edita em `libs/` pode NÃO ser o que roda.**
