@@ -65,15 +65,16 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** migrando a **área Tributário** módulo a módulo. 2 de 16 concluídos.
+**Onde paramos:** migrando a **área Tributário** módulo a módulo. 3 de 16 concluídos.
 
 | | |
 |---|---|
-| Módulos portados | `cem` Cemitério (187 arq.) · `itb`/`itbi` ITBI (192 arq.) |
+| Módulos portados | `cem` Cemitério (187 arq.) · `itb`/`itbi` ITBI (192 arq.) · `agu` Água (224 telas) |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|tra)[0-9]?_` |
-| **Próximo módulo** | **`agu` Água (221 arq.)**, depois `arr` → `div` → `jur` → pequenos → `fis` (353) → `iss` (400) |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|tra)[0-9]?_` |
+| **Próximo módulo** | **`arr` Arrecadação (162 arq.)**, depois `div` → `jur` → pequenos → `fis` (353) → `iss` (400) |
+| **Dívida técnica aberta** | `dbagata/` nunca foi enumerado — **11 arquivos quebram no 8.5**. Ver *5ª LACUNA*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
 
@@ -91,9 +92,11 @@ docker compose -f docker-compose.proxy.yml up -d
 
 **Para migrar o próximo módulo:** seguir a receita de 9 passos na seção *ESTRATÉGIA ADOTADA*.
 
-**Pendências conhecidas:** 3 telas do ITBI e 3 do Cemitério com conteúdo divergente ainda sem
-caracterização; 4+1 telas que quebram no **5.6** (defeito pré-existente da referência, não da
-migração). Nada disso bloqueia o avanço.
+**Pendências conhecidas:** todas as divergências de `cem`, `itb` e `agu` estão caracterizadas
+(ver as seções de cada módulo). As que restam são de três tipos, nenhum deles defeito de
+migração: telas que quebram **no 5.6** e funcionam no 8.5 (defeito pré-existente da
+referência), fragmentos de include que não são telas, e relatórios que falham **igualmente**
+nos dois runtimes por `tmp/` não ser gravável. A dívida real aberta é `dbagata/`.
 
 **Fora de escopo até aqui:** Laravel continua 5.4 (não roda em PHP 8, por isso o login fica
 no runtime 5.6) e PostgreSQL continua 16 em LATIN1. São as Fases 1-3 do workflow.
@@ -260,10 +263,16 @@ PHP 8.5  ->  construtor rodou? NAO
 | | Classes |
 |---|---|
 | Com construtor PHP4 **e** `__construct` (já seguras) | 12 |
-| **Com APENAS construtor PHP4 (quebram em silêncio)** | **3.560** |
+| **Com APENAS construtor PHP4 (quebram em silêncio)** | **3.587** |
 | Destas, com chamada explícita ao nome antigo (exigem cuidado extra) | 7 |
 
-Distribuição: `classes/` **3.417**, `dbagata/` 70, `libs/` 37, raiz 28, demais 8.
+Distribuição: `classes/` **3.417**, `dbagata/` **224**, `libs/` 37, raiz 28, demais 8.
+
+**Correção de medição:** o número aqui era 3.560 e a fatia do `dbagata/` era 70, porque a
+varredura só olhava `*.php`. O `dbagata/` usa as extensões **`.class` e `.inc`**, invisíveis
+para aquele filtro. Incluindo-as, são **3.587 classes em 3.436 arquivos** (+59 classes em
+45 arquivos). Vale para qualquer medição nova: filtrar por `*.php` nesta base deixa
+`dbagata/` inteiro de fora.
 
 Ou seja: **praticamente toda a camada de acesso a dados** instancia objetos não
 inicializados no PHP 8. Objetos que parecem funcionar e produzem resultado errado —
@@ -740,25 +749,41 @@ location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|n
 gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
 Financeiro e Patrimonial junto.
 
+**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ — restam 9 prefixos.
+
 **Ordem dentro da Fase A:** `itb` (110, tamanho parecido com o Cemitério — segunda validação
 da receita) → `agu` → `arr` → `div` → `jur` → `mar`/`tri`/`dvr`/`inf`/`not` → e por último os
 grandes, `fis` (353) e `iss` (400).
 
-### Receita por módulo (validada no Cemitério)
+### Receita por módulo (validada em `cem`, `itb` e `agu`)
 
 Cada prefixo é um lote independente, com commit próprio e revertível:
 
 ```
-1. enumerar com re.IGNORECASE      -> verificar: bate com `ls | grep -iE '^<pref>[0-9]*_'`
+1. enumerar, em CINCO frentes      -> verificar: cada frente fecha (ver abaixo)
 2. varrer as categorias conhecidas -> verificar: inventário fechado
 3. classificar cada ocorrência     -> verificar: nenhum falso-positivo de JavaScript
 4. aplicar em nível de byte        -> verificar: zero remanescentes
-5. php -l nos DOIS runtimes        -> verificar: 100% OK em 5.6 e 8.5
+5. php -l nos DOIS runtimes        -> verificar: 100% OK em 5.6 e 8.5 (com </dev/null!)
 6. instanciar as classes           -> verificar: estado idêntico entre runtimes
 7. comparar as telas com sessão    -> verificar: byte-a-byte, normalizando ids aleatórios
 8. acrescentar o prefixo ao nginx  -> verificar: X-Ecidade-Runtime = PHP-8.5
 9. commit
 ```
+
+**O passo 1 é o que mais falhou.** Cinco lacunas distintas já foram encontradas ali, todas
+com a mesma assinatura: a verificação partia da lista que a própria enumeração gerou, então
+não podia achar o que a enumeração deixou de fora. As cinco frentes:
+
+| Frente | Como | Lacuna que fecha |
+|---|---|---|
+| prefixo | `re.IGNORECASE`, e aceitar sufixos de letra (`itbi`, `agua`) | maiúsculas; sub-prefixos |
+| fecho de includes | `include(modification(...))` transitivo | — |
+| citados em strings | nomes `*.php` dentro do código (o JS os abre) | 3ª: `window.open` |
+| autoload | classes `cl_*` instanciadas, resolvidas em `classes/` | 4ª: `spl_autoload_register` |
+| bibliotecas vendorizadas | `dbagata/`, incluindo `*.class` e `*.inc` | 5ª: `dbagata/` |
+
+Conferir o total contra `ls | grep -iE '^<pref>[0-9]*_'` **antes** de dar o módulo por pronto.
 
 Estimativa da área inteira: **1.804 arquivos no universo, 775 precisando de alteração (43%)**
 — 1.823 `split(`, 276 `parse_str` de 1 argumento, 431 arquivos com construtor PHP 4 e 3.040
@@ -908,8 +933,29 @@ Verificações (todas passaram):
 
 Metodologia que finalmente encontra defeitos reais: restaurar uma sessão válida antes de
 cada requisição e comparar as 113 páginas byte-a-byte entre `:8080` (5.6) e `:8085` (8.5),
-**normalizando identificadores aleatórios** (`sid=`, `arquivo=<base64>`, `wname<n>`) — sem
-normalizar, nomes de arquivo temporário geram ~6 falsos positivos.
+**normalizando identificadores aleatórios**. A lista completa de regras, cada uma nascida de
+um falso positivo real:
+
+| Regra | Por quê |
+|---|---|
+| `sid=<hex>` | id de sessão, muda a cada requisição |
+| `arquivo=<base64>` | caminho do iframe temporário |
+| `wname<n>` | nome da janela do desktop v3 |
+| `iframe<rnd>.php` | temporário de `tempnam()` |
+| `<hex de 32>` | md5 de nomes de arquivo |
+| `tmp/<nome>.pdf` | PDF temporário: o nome carrega **PID e timestamp** |
+| `localhost:8080` / `:8085` | a **página de erro** monta URL absoluta a partir de `HTTP_HOST` (ver `$DB_URL_ABS`), então carrega a porta do runtime que a serviu |
+
+As duas últimas foram descobertas no `agu` e valem retroativamente: sem elas, telas de
+relatório e telas de erro aparecem como divergentes de forma **intermitente**, porque só
+divergem quando o PID ou o segundo do relógio mudam entre as duas requisições. Falso positivo
+intermitente é o pior tipo — ele some quando se vai investigar.
+
+**Teto de saída obrigatório no comparador.** Uma página com laço infinito (ver a categoria
+`-1 >= ""`) devolve centenas de MB e o gerenciador de memória mata o comparador com SIGKILL,
+sem traceback. O sintoma é a bateria morrer sempre no mesmo ponto e parecer travamento.
+Truncar em ~5 MB resolve: a página truncada perde o marcador de status e cai como divergente,
+que é o desfecho correto.
 
 ```bash
 SID=<sessao com DB_modulo>   # achar com: grep -la DB_modulo /var/lib/php/sessions/sess_*
@@ -928,15 +974,16 @@ Evolução: **14 divergentes → 4**, com 5 defeitos reais corrigidos no caminho
 | `pg_result(false)` → TypeError | `db_stdlib` 2×, `db_libsys` 1× | operador ternário |
 | `"" == 0` no `db_select()` | `dbforms/db_funcoes.php` (núcleo) | condição extra para string vazia |
 
-**Divergências restantes (4), todas caracterizadas:**
+**Divergências restantes: 2 (bateria refeita após o porte do `agu`) — 115 de 116 idênticas.**
 
 - `cem1_itenserv002.php` — **quebra no 5.6 (500) e funciona no 8.5 (200)**. Defeito
   pré-existente da referência (`label() on null` em `forms/db_frmitenserv.php:29`), não da migração.
-- `cem3_sepultamentos004.php` — 8.5 trunca a saída (417 vs 5.566 bytes); `pg_numrows(false)`
-  em caminho ainda não coberto.
-- `cem2_emitecertisen002.php` — ambos falham ao gerar o relatório; difere só o prefixo
-  `<b>Mensagem: </b>` na saída de erro.
-- `cem2_renovacoes.php` — saída binária (relatório), diferença não caracterizada.
+- `cem2_emitecertisen002.php` — ambos falham ao gerar o relatório e redirecionam para a
+  **mesma** mensagem; o 5.6 emite antes um `<b>Mensagem: </b>` vazio. Causa: o diálogo de erro
+  do `dbagata/`, cujos construtores PHP 4 não rodam no 8.5. Ver *5ª LACUNA*.
+
+`cem3_sepultamentos004.php` e `cem2_renovacoes.php`, antes divergentes, ficaram **idênticas**
+— foram resolvidas pelas guardas `pg_*` acrescentadas ao núcleo depois.
 
 ### PENDÊNCIA DE DECISÃO: 140 chamadas `pg_*` sem verificação no núcleo
 
@@ -992,15 +1039,18 @@ Enumerar só `^itb[0-9]*_` deixaria 10 de fora. Regex correta: `^itbi?[0-9]*_` c
 | cast `(float)` em aritmética com string | 2 |
 
 Verificações: `php -l` **192/192 nos dois runtimes**; as 42 classes instanciam com estado
-idêntico; **113 de 120 telas byte-a-byte idênticas** com sessão autenticada.
+idêntico; **118 de 120 telas byte-a-byte idênticas** com sessão autenticada (bateria refeita
+após o porte do `agu`; era 113 antes das correções de autoload e das guardas do núcleo).
 
-**Zero páginas quebrando no 8.5.** As 7 divergências restantes:
+**Zero páginas quebrando no 8.5.** As 2 divergências restantes **quebram no 5.6 e funcionam
+no 8.5** — `itb1_itbiavalia002/003` e `itb1_itbidadosimovel003`/`itb1_itbinome011`, todas com
+`label() on null` nos `forms/db_frmitbi*.php`: defeito pré-existente da referência, não da
+migração. Mesmo padrão visto em `cem1_itenserv002`.
 
-- **4 quebram no 5.6 e funcionam no 8.5** — `itb1_itbiavalia002/003`, `itb1_itbidadosimovel003`,
-  `itb1_itbinome011`. Todas com `label() on null` nos `forms/db_frmitbi*.php`; defeito
-  pré-existente da referência, não da migração. Mesmo padrão visto em `cem1_itenserv002`.
-- **3 com 200/200 e conteúdo divergente** — `itbi_simulacaoitbi002`, `itbi_situacao002`,
-  `itbi_tipotransacoes002`. Ainda não caracterizadas.
+As 3 que estavam "sem caracterização" foram resolvidas: `itbi_simulacaoitbi002` e
+`itbi_tipotransacoes002` ficaram **idênticas**, e `itbi_situacao002` era **falso positivo do
+comparador** — o nome do PDF temporário (`tmp/rp<pid>_<timestamp>.pdf`) muda a cada
+requisição. Os dois runtimes falham igual ali, por `tmp/` não ser gravável.
 
 Sete guardas `pg_*` foram acrescentadas ao núcleo durante este módulo (`db_stdlib` linhas
 2017 e 2600 e adjacências, `db_utils` linhas 70 e 185) — sempre replicadas na cópia do
@@ -1053,6 +1103,158 @@ Corolário para a validação: uma tela "sem erro" cuja tabela está vazia **nã
 de verdade**. A bateria de comparação prova equivalência entre runtimes, não que o caminho
 de dados foi percorrido. Para exercitar de fato é preciso cadastrar registros pelo próprio
 sistema.
+
+### Estado: MÓDULO `agu` (Água) PORTADO ✅ — 3º da área Tributário
+
+**224 telas**, enumeradas por `^agua?[0-9]*_` com `re.IGNORECASE`. Atenção ao prefixo: além
+de `agu1_`…`agu4_` o módulo tem três arquivos `agua_*.RPC.php`. Uma regex `^agu[0-9]*_` os
+deixaria de fora — é a mesma armadilha do `itb`/`itbi`.
+
+| Correção | Qtd |
+|---|---|
+| `$this->X == ""` → forma que preserva a semântica do 5.6 | 895 |
+| `split(` → `explode(` | 285 |
+| `parse_str()` com 2º argumento | 83 |
+| construtor PHP4 → `__construct` | 74 |
+| guardas `pg_*` contra resultado falso | 18 |
+| cast `(float)` em aritmética com string | 4 |
+
+Verificações: 171 arquivos alterados passam `php -l` **nos dois runtimes**; **222 de 224
+telas byte-a-byte idênticas** com sessão autenticada.
+
+As 2 restantes **não são telas** — são fragmentos de include, ausentes do menu, que nenhuma
+navegação requisita diretamente. `agu1_aguaconsumo999.php` é um fragmento de DBtxt incluído
+por `agu1_aguaconsumo001/002/003`; `agu4_cancelaleituras_classe.php` define
+`cl_cancelaleituras` e é incluído por `agu4_expdadoscoletores_003.php`. O 500 no 8.5 é
+artefato do harness, que requisita *todo* arquivo do prefixo.
+
+### CATEGORIA NOVA (agu): argumentos faltando viram fatal
+
+```php
+function db_fieldsmemory($recordset, $indice, ...)   // $indice e OBRIGATORIO
+...
+db_fieldsmemory($resultano);                          // chamada com 1 argumento
+```
+
+No PHP 5.6 isso era *Warning: Missing argument 2* e o parâmetro virava `null`; no PHP 8 é
+**`ArgumentCountError` fatal**. Escala na base inteira: **4 ocorrências em 3 arquivos**
+(`agu2_agualancpago001.php` ×2, `cai4_processadebconta001.php`, `mat2_controlest002.php`).
+Corrigidas só as 2 do módulo, conforme a decisão de corrigir na aparição.
+
+Correção: passar explicitamente o valor que o 5.6 produzia. Aqui é `0` — `pg_result()`
+coagia o `null` do argumento ausente para a linha 0 —, o que além de fiel evita a
+deprecation de `null` em parâmetro inteiro introduzida no PHP 8.1.
+
+### CATEGORIA NOVA (agu): comparação de ORDEM entre número e string — LAÇO INFINITO
+
+A RFC "Saner string to number comparisons" já estava catalogada aqui na forma `==`. **Ela
+também mudou `>=`, `<=`, `>` e `<`**, e nessa forma o modo de falha é muito pior.
+
+```
+              -1 >= ""
+PHP 5.6:      false     (a string vira numero: -1 >= 0)
+PHP 8.5:      TRUE      (o numero vira string: "-1" >= "")
+```
+
+Manifestação real: a tabela `aguacalc` está **vazia**, então `$anoini`/`$anofim` ficam `""`,
+e o idioma do e-cidade para montar um `<select>` de exercícios é
+
+```php
+for ($i = $anoini; $i >= $anofim; $i--) {
+    echo "<option value=$i>$i</option>\n";
+}
+```
+
+No 5.6 o laço dá **uma volta** e para (`""--` vira `-1`, e `-1 >= ""` é false). No 8.5 ele
+**nunca termina**: a página passou de 200 MB e o comparador foi morto com SIGKILL pelo
+gerenciador de memória. Observado contando até `-54590`.
+
+**Isto não é dado errado — é exaustão de memória no servidor.** É o argumento mais forte do
+catálogo contra confiar em varredura estática: o código é válido nas duas versões, o defeito
+depende do estado do banco em tempo de execução, e a falha é de disponibilidade.
+
+Correção: `(float)$i >= (float)$anofim`, que restaura a comparação numérica nos dois
+runtimes. O módulo inteiro tem **apenas 2 laços decrescentes**, ambos corrigidos — os outros
+82 laços comparam com `sizeof()`/`numrows`, que são numéricos e não correm risco.
+
+### CATEGORIA NOVA (agu): `fputs`/`fclose` sobre handle falso
+
+`model/configuracao/DBLogTXT.model.php` guarda o retorno de `fopen()` e o usa sem verificar.
+Quando o diretório não é gravável — a assimetria de permissões pré-existente deste ambiente —
+o handle é `false`. No 5.6 era warning e a execução seguia; no PHP 8 é `TypeError` fatal e a
+página é **truncada no meio** (198.643 bytes no 5.6 contra 67.267 no 8.5).
+
+É a mesma família das guardas `pg_*`: valor falso repassado a função que passou a checar tipo.
+Corrigido com a guarda que reproduz o retorno do 5.6 (`false`).
+
+### 4ª LACUNA: classes carregadas por AUTOLOAD não aparecem em nenhum `include`
+
+`libs/db_autoload.php` registra `spl_autoload_register('db_autoload')`, que carrega as classes
+`cl_*` **sem nenhuma declaração de include**. O fecho transitivo de dependências não as vê, e
+a enumeração por prefixo também não — elas ficam em `classes/`.
+
+Impacto medido, e ele alcança módulos que eu já havia declarado concluídos:
+
+| módulo | classes não portadas | com construtor PHP4 |
+|---|---|---|
+| `agu` | 57 | 4 |
+| `itb` | 4 | 3 ← módulo declarado pronto |
+| `cem` | 2 | 1 ← módulo declarado pronto |
+
+As 62 foram portadas (30 `split`, 8 construtores, 463 comparações `== ""`), e as baterias de
+`cem` e `itb` foram refeitas depois.
+
+**Passo a acrescentar à receita:** para cada script do módulo, resolver também os nomes de
+classe `cl_*` instanciados (`new cl_x`) e conferir se o arquivo correspondente em `classes/`
+entrou na lista.
+
+### 5ª LACUNA: `dbagata/` nunca foi enumerado — e o NÚCLEO o alcança
+
+`std/db_stdClass.php` (núcleo) chama `$api->parseOpenOffice(...)`, que vive em
+`dbagata/classes/core/AgataAPI.class`. Ou seja, `dbagata/` está no fecho de dependências do
+núcleo e deveria ter sido portado com ele. **Não foi.**
+
+Medição por `php -l` nos dois runtimes sobre os 216 arquivos de `dbagata/`:
+
+| | Arquivos com erro de sintaxe |
+|---|---|
+| PHP 5.6 | 5 (pré-existentes) |
+| **PHP 8.5** | **16** |
+| **Só quebram no 8.5** | **11** |
+
+Os 11: `classes/fpdf151/fpdf.php`, `classes/fpdf151/teste.php`, `classes/util/nusoap.php`,
+`classes/util/editor.class`, e sete do `jpgraph` (`gd_image.inc.php`, `jpgraph.php`,
+`jpgraph_gantt.php`, `jpgraph_pie.php`, `jpgraph_plotmark.inc.php`, `jpgraph_radar.php`,
+`jpgraph_spider.php`). Causa dominante: `=& new`, que é *parse error* no PHP 7+.
+
+Categorias medidas em `dbagata/`: 61 `ereg*`, 22 offsets `{}`, 18 `=& new`, 9 `split(`,
+8 `magic_quotes`, 5 `each(`, 1 `create_function(`, e **224 classes com apenas construtor
+PHP 4, em 114 arquivos**.
+
+Por que não apareceu antes: essas bibliotecas são de gráfico, PDF e SOAP, e as 460 telas
+comparadas de `cem`+`itb`+`agu` não as exercitam — os relatórios falham antes, por `tmp/`
+não ser gravável. **A falha está latente, não ausente.**
+
+Defeito concreto já observado: em `cem2_emitecertisen002.php`, o 5.6 emite
+`<b>Mensagem: </b>` (o diálogo de erro do dbagata) e o 8.5 não. Renomear os construtores de
+`MemoArea` e `AgataQuery` **não** resolveu — a cadeia real passa por mais classes —, então as
+duas alterações foram revertidas para manter o commit do `agu` cirúrgico. `dbagata/` é um
+lote próprio, a ser portado com verificação própria.
+
+### ARMADILHA DE MEDIÇÃO: `php -l` dentro de `while read` engole a lista
+
+```bash
+while read f; do php -l "$f" | grep -q "No syntax errors" || echo "$f"; done < lista.txt
+```
+
+**Isto não verifica a lista.** O `php` (e o `docker exec`) herdam o stdin do laço e consomem
+o resto do arquivo. O laço dá uma volta só, e o resultado é um tranquilizador "0 arquivos com
+erro" — foi exatamente o que a primeira medição de `dbagata/` devolveu, escondendo os 11.
+
+Correção: `php -l "$f" </dev/null` (e `docker exec -i` com o redirecionamento explícito).
+
+Mesma família das outras armadilhas deste arquivo: **uma verificação que falha em silêncio é
+pior que verificação nenhuma**, porque encerra a investigação.
 
 ### CRÍTICO: `modification()` troca o arquivo executado em tempo de execução
 
