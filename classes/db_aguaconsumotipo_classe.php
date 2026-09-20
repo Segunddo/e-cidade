@@ -54,7 +54,7 @@ class cl_aguaconsumotipo {
                  x25_codhist = int4 = Historico 
                  ";
    //funcao construtor da classe 
-   function cl_aguaconsumotipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguaconsumotipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_aguaconsumotipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x25_codconsumotipo = ($this->x25_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_codconsumotipo"]:$this->x25_codconsumotipo);
-       $this->x25_receit = ($this->x25_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_receit"]:$this->x25_receit);
+       $this->x25_codconsumotipo = (($this->x25_codconsumotipo === 0 || $this->x25_codconsumotipo === 0.0 || ($this->x25_codconsumotipo === 0 || $this->x25_codconsumotipo === 0.0 || $this->x25_codconsumotipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x25_codconsumotipo"]:$this->x25_codconsumotipo);
+       $this->x25_receit = (($this->x25_receit === 0 || $this->x25_receit === 0.0 || ($this->x25_receit === 0 || $this->x25_receit === 0.0 || $this->x25_receit == ""))?@$GLOBALS["HTTP_POST_VARS"]["x25_receit"]:$this->x25_receit);
        $this->x25_descr = ($this->x25_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_descr"]:$this->x25_descr);
-       $this->x25_codhist = ($this->x25_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_codhist"]:$this->x25_codhist);
+       $this->x25_codhist = (($this->x25_codhist === 0 || $this->x25_codhist === 0.0 || ($this->x25_codhist === 0 || $this->x25_codhist === 0.0 || $this->x25_codhist == ""))?@$GLOBALS["HTTP_POST_VARS"]["x25_codhist"]:$this->x25_codhist);
      }else{
-       $this->x25_codconsumotipo = ($this->x25_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_codconsumotipo"]:$this->x25_codconsumotipo);
+       $this->x25_codconsumotipo = (($this->x25_codconsumotipo === 0 || $this->x25_codconsumotipo === 0.0 || ($this->x25_codconsumotipo === 0 || $this->x25_codconsumotipo === 0.0 || $this->x25_codconsumotipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x25_codconsumotipo"]:$this->x25_codconsumotipo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_aguaconsumotipo {
          $this->x25_codconsumotipo = $x25_codconsumotipo; 
        }
      }
-     if(($this->x25_codconsumotipo == null) || ($this->x25_codconsumotipo == "") ){ 
+     if(($this->x25_codconsumotipo == null) || (($this->x25_codconsumotipo === 0 || $this->x25_codconsumotipo === 0.0 || ($this->x25_codconsumotipo === 0 || $this->x25_codconsumotipo === 0.0 || $this->x25_codconsumotipo == ""))) ){ 
        $this->erro_sql = " Campo x25_codconsumotipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_aguaconsumotipo {
    function sql_query ( $x25_codconsumotipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_aguaconsumotipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_aguaconsumotipo {
    function sql_query_file ( $x25_codconsumotipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_aguaconsumotipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

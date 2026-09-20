@@ -54,7 +54,7 @@ class cl_db_documento {
                  db03_instit = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_db_documento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_documento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_db_documento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db03_docum = ($this->db03_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_docum"]:$this->db03_docum);
+       $this->db03_docum = (($this->db03_docum === 0 || $this->db03_docum === 0.0 || $this->db03_docum == "")?@$GLOBALS["HTTP_POST_VARS"]["db03_docum"]:$this->db03_docum);
        $this->db03_descr = ($this->db03_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_descr"]:$this->db03_descr);
-       $this->db03_tipodoc = ($this->db03_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_tipodoc"]:$this->db03_tipodoc);
-       $this->db03_instit = ($this->db03_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_instit"]:$this->db03_instit);
+       $this->db03_tipodoc = (($this->db03_tipodoc === 0 || $this->db03_tipodoc === 0.0 || $this->db03_tipodoc == "")?@$GLOBALS["HTTP_POST_VARS"]["db03_tipodoc"]:$this->db03_tipodoc);
+       $this->db03_instit = (($this->db03_instit === 0 || $this->db03_instit === 0.0 || $this->db03_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["db03_instit"]:$this->db03_instit);
      }else{
-       $this->db03_docum = ($this->db03_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_docum"]:$this->db03_docum);
+       $this->db03_docum = (($this->db03_docum === 0 || $this->db03_docum === 0.0 || $this->db03_docum == "")?@$GLOBALS["HTTP_POST_VARS"]["db03_docum"]:$this->db03_docum);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_db_documento {
          $this->db03_docum = $db03_docum; 
        }
      }
-     if(($this->db03_docum == null) || ($this->db03_docum == "") ){ 
+     if(($this->db03_docum == null) || (($this->db03_docum === 0 || $this->db03_docum === 0.0 || $this->db03_docum == "")) ){ 
        $this->erro_sql = " Campo db03_docum nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_db_documento {
    function sql_query ( $db03_docum=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_db_documento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_db_documento {
    function sql_query_file ( $db03_docum=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_db_documento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

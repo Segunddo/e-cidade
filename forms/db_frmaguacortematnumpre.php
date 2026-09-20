@@ -115,7 +115,7 @@ $clrotulo->label("x44_total");
 
 	//db_lovrot($sql2, 15, "()", "", "");
 	$result = db_query($sql2);
-	$rows   = pg_num_rows($result);
+	$rows   = ($result ? pg_num_rows($result) : 0);
 	
 	db_fieldsmemory($result, 0);
 

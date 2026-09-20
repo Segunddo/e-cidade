@@ -158,7 +158,7 @@ $sSql .= "  ORDER BY {$orderby}                                     \n";
 
 $rSql = db_query($sSql);
 
-if (pg_num_rows($rSql) == 0) {
+if (($rSql ? pg_num_rows($rSql) : 0) == 0) {
   db_redireciona('db_erros.php?fechar=true&db_erro=Nao existem matriculas.');
 }
 
@@ -177,7 +177,7 @@ $alt     = 4;
 $totalog = 0;
 $p       = 0;
 
-for ($i = 0; $i < pg_num_rows($rSql); $i++) {
+for ($i = 0; $i < ($rSql ? pg_num_rows($rSql) : 0); $i++) {
   
   $oSql = db_utils::fieldsMemory($rSql, $i, true);
    

@@ -29,7 +29,7 @@
   include(modification("libs/db_sql.php"));
   $clrotulo = new rotulocampo;
   $clrotulo->label('');
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
   
   $where = "";
   $and   = "";

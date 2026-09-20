@@ -54,7 +54,7 @@ class cl_agualeiturasaldoutilizado {
                  x34_saldoutilizado = float8 = Saldo Utilizado 
                  ";
    //funcao construtor da classe 
-   function cl_agualeiturasaldoutilizado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("agualeiturasaldoutilizado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_agualeiturasaldoutilizado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x34_sequencial = ($this->x34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_sequencial"]:$this->x34_sequencial);
-       $this->x34_agualeitura = ($this->x34_agualeitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_agualeitura"]:$this->x34_agualeitura);
-       $this->x34_agualeiturautilizada = ($this->x34_agualeiturautilizada == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_agualeiturautilizada"]:$this->x34_agualeiturautilizada);
-       $this->x34_saldoutilizado = ($this->x34_saldoutilizado == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_saldoutilizado"]:$this->x34_saldoutilizado);
+       $this->x34_sequencial = (($this->x34_sequencial === 0 || $this->x34_sequencial === 0.0 || $this->x34_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["x34_sequencial"]:$this->x34_sequencial);
+       $this->x34_agualeitura = (($this->x34_agualeitura === 0 || $this->x34_agualeitura === 0.0 || $this->x34_agualeitura == "")?@$GLOBALS["HTTP_POST_VARS"]["x34_agualeitura"]:$this->x34_agualeitura);
+       $this->x34_agualeiturautilizada = (($this->x34_agualeiturautilizada === 0 || $this->x34_agualeiturautilizada === 0.0 || $this->x34_agualeiturautilizada == "")?@$GLOBALS["HTTP_POST_VARS"]["x34_agualeiturautilizada"]:$this->x34_agualeiturautilizada);
+       $this->x34_saldoutilizado = (($this->x34_saldoutilizado === 0 || $this->x34_saldoutilizado === 0.0 || $this->x34_saldoutilizado == "")?@$GLOBALS["HTTP_POST_VARS"]["x34_saldoutilizado"]:$this->x34_saldoutilizado);
      }else{
-       $this->x34_sequencial = ($this->x34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_sequencial"]:$this->x34_sequencial);
+       $this->x34_sequencial = (($this->x34_sequencial === 0 || $this->x34_sequencial === 0.0 || $this->x34_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["x34_sequencial"]:$this->x34_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_agualeiturasaldoutilizado {
          $this->x34_sequencial = $x34_sequencial; 
        }
      }
-     if(($this->x34_sequencial == null) || ($this->x34_sequencial == "") ){ 
+     if(($this->x34_sequencial == null) || (($this->x34_sequencial === 0 || $this->x34_sequencial === 0.0 || $this->x34_sequencial == "")) ){ 
        $this->erro_sql = " Campo x34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_agualeiturasaldoutilizado {
    function sql_query ( $x34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_agualeiturasaldoutilizado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_agualeiturasaldoutilizado {
    function sql_query_file ( $x34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_agualeiturasaldoutilizado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

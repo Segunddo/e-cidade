@@ -72,7 +72,7 @@ class cl_iptucalc {
                  j23_tipocalculo = int8 = Tipo de calculo 
                  ";
    //funcao construtor da classe 
-   function cl_iptucalc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptucalc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,22 +89,22 @@ class cl_iptucalc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j23_anousu = ($this->j23_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_anousu"]:$this->j23_anousu);
-       $this->j23_matric = ($this->j23_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_matric"]:$this->j23_matric);
-       $this->j23_testad = ($this->j23_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_testad"]:$this->j23_testad);
-       $this->j23_arealo = ($this->j23_arealo == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_arealo"]:$this->j23_arealo);
-       $this->j23_areafr = ($this->j23_areafr == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_areafr"]:$this->j23_areafr);
-       $this->j23_areaed = ($this->j23_areaed == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_areaed"]:$this->j23_areaed);
-       $this->j23_m2terr = ($this->j23_m2terr == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_m2terr"]:$this->j23_m2terr);
-       $this->j23_vlrter = ($this->j23_vlrter == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_vlrter"]:$this->j23_vlrter);
-       $this->j23_aliq = ($this->j23_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_aliq"]:$this->j23_aliq);
-       $this->j23_vlrisen = ($this->j23_vlrisen == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_vlrisen"]:$this->j23_vlrisen);
+       $this->j23_anousu = (($this->j23_anousu === 0 || $this->j23_anousu === 0.0 || $this->j23_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_anousu"]:$this->j23_anousu);
+       $this->j23_matric = (($this->j23_matric === 0 || $this->j23_matric === 0.0 || $this->j23_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_matric"]:$this->j23_matric);
+       $this->j23_testad = (($this->j23_testad === 0 || $this->j23_testad === 0.0 || $this->j23_testad == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_testad"]:$this->j23_testad);
+       $this->j23_arealo = (($this->j23_arealo === 0 || $this->j23_arealo === 0.0 || $this->j23_arealo == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_arealo"]:$this->j23_arealo);
+       $this->j23_areafr = (($this->j23_areafr === 0 || $this->j23_areafr === 0.0 || $this->j23_areafr == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_areafr"]:$this->j23_areafr);
+       $this->j23_areaed = (($this->j23_areaed === 0 || $this->j23_areaed === 0.0 || $this->j23_areaed == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_areaed"]:$this->j23_areaed);
+       $this->j23_m2terr = (($this->j23_m2terr === 0 || $this->j23_m2terr === 0.0 || $this->j23_m2terr == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_m2terr"]:$this->j23_m2terr);
+       $this->j23_vlrter = (($this->j23_vlrter === 0 || $this->j23_vlrter === 0.0 || $this->j23_vlrter == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_vlrter"]:$this->j23_vlrter);
+       $this->j23_aliq = (($this->j23_aliq === 0 || $this->j23_aliq === 0.0 || $this->j23_aliq == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_aliq"]:$this->j23_aliq);
+       $this->j23_vlrisen = (($this->j23_vlrisen === 0 || $this->j23_vlrisen === 0.0 || $this->j23_vlrisen == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_vlrisen"]:$this->j23_vlrisen);
        $this->j23_tipoim = ($this->j23_tipoim == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_tipoim"]:$this->j23_tipoim);
        $this->j23_manual = ($this->j23_manual == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_manual"]:$this->j23_manual);
-       $this->j23_tipocalculo = ($this->j23_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_tipocalculo"]:$this->j23_tipocalculo);
+       $this->j23_tipocalculo = (($this->j23_tipocalculo === 0 || $this->j23_tipocalculo === 0.0 || $this->j23_tipocalculo == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_tipocalculo"]:$this->j23_tipocalculo);
      }else{
-       $this->j23_anousu = ($this->j23_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_anousu"]:$this->j23_anousu);
-       $this->j23_matric = ($this->j23_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_matric"]:$this->j23_matric);
+       $this->j23_anousu = (($this->j23_anousu === 0 || $this->j23_anousu === 0.0 || $this->j23_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_anousu"]:$this->j23_anousu);
+       $this->j23_matric = (($this->j23_matric === 0 || $this->j23_matric === 0.0 || $this->j23_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j23_matric"]:$this->j23_matric);
      }
    }
    // funcao para inclusao
@@ -211,7 +211,7 @@ class cl_iptucalc {
      }
        $this->j23_anousu = $j23_anousu; 
        $this->j23_matric = $j23_matric; 
-     if(($this->j23_anousu == null) || ($this->j23_anousu == "") ){ 
+     if(($this->j23_anousu == null) || (($this->j23_anousu === 0 || $this->j23_anousu === 0.0 || $this->j23_anousu == "")) ){ 
        $this->erro_sql = " Campo j23_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -219,7 +219,7 @@ class cl_iptucalc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j23_matric == null) || ($this->j23_matric == "") ){ 
+     if(($this->j23_matric == null) || (($this->j23_matric === 0 || $this->j23_matric === 0.0 || $this->j23_matric == "")) ){ 
        $this->erro_sql = " Campo j23_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -659,7 +659,7 @@ class cl_iptucalc {
    function sql_query ( $j23_anousu=null,$j23_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -691,7 +691,7 @@ class cl_iptucalc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -703,7 +703,7 @@ class cl_iptucalc {
    function sql_query_file ( $j23_anousu=null,$j23_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -732,7 +732,7 @@ class cl_iptucalc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

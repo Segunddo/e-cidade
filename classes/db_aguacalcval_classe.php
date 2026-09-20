@@ -52,7 +52,7 @@ class cl_aguacalcval {
                  x23_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_aguacalcval() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacalcval"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_aguacalcval {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x23_codcalc = ($this->x23_codcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["x23_codcalc"]:$this->x23_codcalc);
-       $this->x23_codconsumotipo = ($this->x23_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x23_codconsumotipo"]:$this->x23_codconsumotipo);
-       $this->x23_valor = ($this->x23_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["x23_valor"]:$this->x23_valor);
+       $this->x23_codcalc = (($this->x23_codcalc === 0 || $this->x23_codcalc === 0.0 || ($this->x23_codcalc === 0 || $this->x23_codcalc === 0.0 || $this->x23_codcalc == ""))?@$GLOBALS["HTTP_POST_VARS"]["x23_codcalc"]:$this->x23_codcalc);
+       $this->x23_codconsumotipo = (($this->x23_codconsumotipo === 0 || $this->x23_codconsumotipo === 0.0 || ($this->x23_codconsumotipo === 0 || $this->x23_codconsumotipo === 0.0 || $this->x23_codconsumotipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x23_codconsumotipo"]:$this->x23_codconsumotipo);
+       $this->x23_valor = (($this->x23_valor === 0 || $this->x23_valor === 0.0 || ($this->x23_valor === 0 || $this->x23_valor === 0.0 || $this->x23_valor == ""))?@$GLOBALS["HTTP_POST_VARS"]["x23_valor"]:$this->x23_valor);
      }else{
-       $this->x23_codcalc = ($this->x23_codcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["x23_codcalc"]:$this->x23_codcalc);
-       $this->x23_codconsumotipo = ($this->x23_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x23_codconsumotipo"]:$this->x23_codconsumotipo);
+       $this->x23_codcalc = (($this->x23_codcalc === 0 || $this->x23_codcalc === 0.0 || ($this->x23_codcalc === 0 || $this->x23_codcalc === 0.0 || $this->x23_codcalc == ""))?@$GLOBALS["HTTP_POST_VARS"]["x23_codcalc"]:$this->x23_codcalc);
+       $this->x23_codconsumotipo = (($this->x23_codconsumotipo === 0 || $this->x23_codconsumotipo === 0.0 || ($this->x23_codconsumotipo === 0 || $this->x23_codconsumotipo === 0.0 || $this->x23_codconsumotipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x23_codconsumotipo"]:$this->x23_codconsumotipo);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_aguacalcval {
      }
        $this->x23_codcalc = $x23_codcalc; 
        $this->x23_codconsumotipo = $x23_codconsumotipo; 
-     if(($this->x23_codcalc == null) || ($this->x23_codcalc == "") ){ 
+     if(($this->x23_codcalc == null) || (($this->x23_codcalc === 0 || $this->x23_codcalc === 0.0 || ($this->x23_codcalc === 0 || $this->x23_codcalc === 0.0 || $this->x23_codcalc == ""))) ){ 
        $this->erro_sql = " Campo x23_codcalc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_aguacalcval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x23_codconsumotipo == null) || ($this->x23_codconsumotipo == "") ){ 
+     if(($this->x23_codconsumotipo == null) || (($this->x23_codconsumotipo === 0 || $this->x23_codconsumotipo === 0.0 || ($this->x23_codconsumotipo === 0 || $this->x23_codconsumotipo === 0.0 || $this->x23_codconsumotipo == ""))) ){ 
        $this->erro_sql = " Campo x23_codconsumotipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_aguacalcval {
    function sql_query ( $x23_codcalc=null,$x23_codconsumotipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_aguacalcval {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_aguacalcval {
    function sql_query_file ( $x23_codcalc=null,$x23_codconsumotipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_aguacalcval {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -51,7 +51,7 @@ $sSql      = $oAguaBase->GetAguaLeituraSQL();
 
 $rSql      = db_query($sSql);
 
-if(pg_num_rows($rSql) == 0) {
+if(($rSql ? pg_num_rows($rSql) : 0) == 0) {
   
   db_redireciona('db_erros.php?fechar=true&db_erro=Nenhum registro encontrado.');
   
@@ -70,7 +70,7 @@ $oPdf->setfillcolor(235);
 $oPdf->setfont('arial','b',8);
 //$oPdf->DefOrientation = "L";
 
-for($i = 0; $i < pg_num_rows($rSql); $i++) {
+for($i = 0; $i < ($rSql ? pg_num_rows($rSql) : 0); $i++) {
   
   $oLeituras = db_utils::fieldsMemory($rSql, $i, true);
   

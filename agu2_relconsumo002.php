@@ -163,7 +163,7 @@ $troca = 1;
 $alt   = 4;
 $total = 0;
 
-for($i = 0; $i < pg_numrows($rSql); $i++) {
+for($i = 0; $i < ($rSql ? pg_numrows($rSql) : 0); $i++) {
   
   $oSql = db_utils::fieldsMemory($rSql, $i, true);
   

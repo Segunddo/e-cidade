@@ -61,7 +61,7 @@ class cl_aguacoletorexportadadosfoto {
                  x53_hora = varchar(5) = Hora 
                  ";
    //funcao construtor da classe 
-   function cl_aguacoletorexportadadosfoto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacoletorexportadadosfoto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,10 +78,10 @@ class cl_aguacoletorexportadadosfoto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x53_sequencial = ($this->x53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x53_sequencial"]:$this->x53_sequencial);
-       $this->x53_usuario = ($this->x53_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x53_usuario"]:$this->x53_usuario);
-       $this->x53_aguacoletorexportadados = ($this->x53_aguacoletorexportadados == ""?@$GLOBALS["HTTP_POST_VARS"]["x53_aguacoletorexportadados"]:$this->x53_aguacoletorexportadados);
-       $this->x53_oidfoto = ($this->x53_oidfoto == ""?@$GLOBALS["HTTP_POST_VARS"]["x53_oidfoto"]:$this->x53_oidfoto);
+       $this->x53_sequencial = (($this->x53_sequencial === 0 || $this->x53_sequencial === 0.0 || ($this->x53_sequencial === 0 || $this->x53_sequencial === 0.0 || $this->x53_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["x53_sequencial"]:$this->x53_sequencial);
+       $this->x53_usuario = (($this->x53_usuario === 0 || $this->x53_usuario === 0.0 || ($this->x53_usuario === 0 || $this->x53_usuario === 0.0 || $this->x53_usuario == ""))?@$GLOBALS["HTTP_POST_VARS"]["x53_usuario"]:$this->x53_usuario);
+       $this->x53_aguacoletorexportadados = (($this->x53_aguacoletorexportadados === 0 || $this->x53_aguacoletorexportadados === 0.0 || ($this->x53_aguacoletorexportadados === 0 || $this->x53_aguacoletorexportadados === 0.0 || $this->x53_aguacoletorexportadados == ""))?@$GLOBALS["HTTP_POST_VARS"]["x53_aguacoletorexportadados"]:$this->x53_aguacoletorexportadados);
+       $this->x53_oidfoto = (($this->x53_oidfoto === 0 || $this->x53_oidfoto === 0.0 || ($this->x53_oidfoto === 0 || $this->x53_oidfoto === 0.0 || $this->x53_oidfoto == ""))?@$GLOBALS["HTTP_POST_VARS"]["x53_oidfoto"]:$this->x53_oidfoto);
        if($this->x53_data == ""){
          $this->x53_data_dia = ($this->x53_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x53_data_dia"]:$this->x53_data_dia);
          $this->x53_data_mes = ($this->x53_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x53_data_mes"]:$this->x53_data_mes);
@@ -92,7 +92,7 @@ class cl_aguacoletorexportadadosfoto {
        }
        $this->x53_hora = ($this->x53_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["x53_hora"]:$this->x53_hora);
      }else{
-       $this->x53_sequencial = ($this->x53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x53_sequencial"]:$this->x53_sequencial);
+       $this->x53_sequencial = (($this->x53_sequencial === 0 || $this->x53_sequencial === 0.0 || ($this->x53_sequencial === 0 || $this->x53_sequencial === 0.0 || $this->x53_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["x53_sequencial"]:$this->x53_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_aguacoletorexportadadosfoto {
          $this->x53_sequencial = $x53_sequencial; 
        }
      }
-     if(($this->x53_sequencial == null) || ($this->x53_sequencial == "") ){ 
+     if(($this->x53_sequencial == null) || (($this->x53_sequencial === 0 || $this->x53_sequencial === 0.0 || ($this->x53_sequencial === 0 || $this->x53_sequencial === 0.0 || $this->x53_sequencial == ""))) ){ 
        $this->erro_sql = " Campo x53_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -477,7 +477,7 @@ class cl_aguacoletorexportadadosfoto {
    function sql_query ( $x53_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_aguacoletorexportadadosfoto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -522,7 +522,7 @@ class cl_aguacoletorexportadadosfoto {
    function sql_query_file ( $x53_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -543,7 +543,7 @@ class cl_aguacoletorexportadadosfoto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_aguahidromatricleitura {
                  x05_codleitura = int4 = Leitura 
                  ";
    //funcao construtor da classe 
-   function cl_aguahidromatricleitura() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguahidromatricleitura"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_aguahidromatricleitura {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x05_codigo = ($this->x05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x05_codigo"]:$this->x05_codigo);
-       $this->x05_codhidrometro = ($this->x05_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x05_codhidrometro"]:$this->x05_codhidrometro);
-       $this->x05_codleitura = ($this->x05_codleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x05_codleitura"]:$this->x05_codleitura);
+       $this->x05_codigo = (($this->x05_codigo === 0 || $this->x05_codigo === 0.0 || ($this->x05_codigo === 0 || $this->x05_codigo === 0.0 || $this->x05_codigo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x05_codigo"]:$this->x05_codigo);
+       $this->x05_codhidrometro = (($this->x05_codhidrometro === 0 || $this->x05_codhidrometro === 0.0 || ($this->x05_codhidrometro === 0 || $this->x05_codhidrometro === 0.0 || $this->x05_codhidrometro == ""))?@$GLOBALS["HTTP_POST_VARS"]["x05_codhidrometro"]:$this->x05_codhidrometro);
+       $this->x05_codleitura = (($this->x05_codleitura === 0 || $this->x05_codleitura === 0.0 || ($this->x05_codleitura === 0 || $this->x05_codleitura === 0.0 || $this->x05_codleitura == ""))?@$GLOBALS["HTTP_POST_VARS"]["x05_codleitura"]:$this->x05_codleitura);
      }else{
-       $this->x05_codigo = ($this->x05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x05_codigo"]:$this->x05_codigo);
+       $this->x05_codigo = (($this->x05_codigo === 0 || $this->x05_codigo === 0.0 || ($this->x05_codigo === 0 || $this->x05_codigo === 0.0 || $this->x05_codigo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x05_codigo"]:$this->x05_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aguahidromatricleitura {
          $this->x05_codigo = $x05_codigo; 
        }
      }
-     if(($this->x05_codigo == null) || ($this->x05_codigo == "") ){ 
+     if(($this->x05_codigo == null) || (($this->x05_codigo === 0 || $this->x05_codigo === 0.0 || ($this->x05_codigo === 0 || $this->x05_codigo === 0.0 || $this->x05_codigo == ""))) ){ 
        $this->erro_sql = " Campo x05_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_aguahidromatricleitura {
    function sql_query ( $x05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_aguahidromatricleitura {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_aguahidromatricleitura {
    function sql_query_file ( $x05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_aguahidromatricleitura {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

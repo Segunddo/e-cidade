@@ -64,7 +64,7 @@ class cl_db_reciboweb {
                  k99_origem = int4 = Origem da Geração 
                  ";
    //funcao construtor da classe 
-   function cl_db_reciboweb() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_reciboweb"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,19 +81,19 @@ class cl_db_reciboweb {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k99_numpre = ($this->k99_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_numpre"]:$this->k99_numpre);
-       $this->k99_numpar = ($this->k99_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_numpar"]:$this->k99_numpar);
-       $this->k99_numpre_n = ($this->k99_numpre_n == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_numpre_n"]:$this->k99_numpre_n);
-       $this->k99_codbco = ($this->k99_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_codbco"]:$this->k99_codbco);
+       $this->k99_numpre = (($this->k99_numpre === 0 || $this->k99_numpre === 0.0 || ($this->k99_numpre === 0 || $this->k99_numpre === 0.0 || $this->k99_numpre == ""))?@$GLOBALS["HTTP_POST_VARS"]["k99_numpre"]:$this->k99_numpre);
+       $this->k99_numpar = (($this->k99_numpar === 0 || $this->k99_numpar === 0.0 || ($this->k99_numpar === 0 || $this->k99_numpar === 0.0 || $this->k99_numpar == ""))?@$GLOBALS["HTTP_POST_VARS"]["k99_numpar"]:$this->k99_numpar);
+       $this->k99_numpre_n = (($this->k99_numpre_n === 0 || $this->k99_numpre_n === 0.0 || ($this->k99_numpre_n === 0 || $this->k99_numpre_n === 0.0 || $this->k99_numpre_n == ""))?@$GLOBALS["HTTP_POST_VARS"]["k99_numpre_n"]:$this->k99_numpre_n);
+       $this->k99_codbco = (($this->k99_codbco === 0 || $this->k99_codbco === 0.0 || ($this->k99_codbco === 0 || $this->k99_codbco === 0.0 || $this->k99_codbco == ""))?@$GLOBALS["HTTP_POST_VARS"]["k99_codbco"]:$this->k99_codbco);
        $this->k99_codage = ($this->k99_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_codage"]:$this->k99_codage);
        $this->k99_numbco = ($this->k99_numbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_numbco"]:$this->k99_numbco);
-       $this->k99_desconto = ($this->k99_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_desconto"]:$this->k99_desconto);
-       $this->k99_tipo = ($this->k99_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_tipo"]:$this->k99_tipo);
-       $this->k99_origem = ($this->k99_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_origem"]:$this->k99_origem);
+       $this->k99_desconto = (($this->k99_desconto === 0 || $this->k99_desconto === 0.0 || ($this->k99_desconto === 0 || $this->k99_desconto === 0.0 || $this->k99_desconto == ""))?@$GLOBALS["HTTP_POST_VARS"]["k99_desconto"]:$this->k99_desconto);
+       $this->k99_tipo = (($this->k99_tipo === 0 || $this->k99_tipo === 0.0 || ($this->k99_tipo === 0 || $this->k99_tipo === 0.0 || $this->k99_tipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["k99_tipo"]:$this->k99_tipo);
+       $this->k99_origem = (($this->k99_origem === 0 || $this->k99_origem === 0.0 || ($this->k99_origem === 0 || $this->k99_origem === 0.0 || $this->k99_origem == ""))?@$GLOBALS["HTTP_POST_VARS"]["k99_origem"]:$this->k99_origem);
      }else{
-       $this->k99_numpre = ($this->k99_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_numpre"]:$this->k99_numpre);
-       $this->k99_numpar = ($this->k99_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_numpar"]:$this->k99_numpar);
-       $this->k99_numpre_n = ($this->k99_numpre_n == ""?@$GLOBALS["HTTP_POST_VARS"]["k99_numpre_n"]:$this->k99_numpre_n);
+       $this->k99_numpre = (($this->k99_numpre === 0 || $this->k99_numpre === 0.0 || ($this->k99_numpre === 0 || $this->k99_numpre === 0.0 || $this->k99_numpre == ""))?@$GLOBALS["HTTP_POST_VARS"]["k99_numpre"]:$this->k99_numpre);
+       $this->k99_numpar = (($this->k99_numpar === 0 || $this->k99_numpar === 0.0 || ($this->k99_numpar === 0 || $this->k99_numpar === 0.0 || $this->k99_numpar == ""))?@$GLOBALS["HTTP_POST_VARS"]["k99_numpar"]:$this->k99_numpar);
+       $this->k99_numpre_n = (($this->k99_numpre_n === 0 || $this->k99_numpre_n === 0.0 || ($this->k99_numpre_n === 0 || $this->k99_numpre_n === 0.0 || $this->k99_numpre_n == ""))?@$GLOBALS["HTTP_POST_VARS"]["k99_numpre_n"]:$this->k99_numpre_n);
      }
    }
    // funcao para inclusao
@@ -150,7 +150,7 @@ class cl_db_reciboweb {
        $this->k99_numpre = $k99_numpre; 
        $this->k99_numpar = $k99_numpar; 
        $this->k99_numpre_n = $k99_numpre_n; 
-     if(($this->k99_numpre == null) || ($this->k99_numpre == "") ){ 
+     if(($this->k99_numpre == null) || (($this->k99_numpre === 0 || $this->k99_numpre === 0.0 || ($this->k99_numpre === 0 || $this->k99_numpre === 0.0 || $this->k99_numpre == ""))) ){ 
        $this->erro_sql = " Campo k99_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -158,7 +158,7 @@ class cl_db_reciboweb {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k99_numpar == null) || ($this->k99_numpar == "") ){ 
+     if(($this->k99_numpar == null) || (($this->k99_numpar === 0 || $this->k99_numpar === 0.0 || ($this->k99_numpar === 0 || $this->k99_numpar === 0.0 || $this->k99_numpar == ""))) ){ 
        $this->erro_sql = " Campo k99_numpar nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -166,7 +166,7 @@ class cl_db_reciboweb {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k99_numpre_n == null) || ($this->k99_numpre_n == "") ){ 
+     if(($this->k99_numpre_n == null) || (($this->k99_numpre_n === 0 || $this->k99_numpre_n === 0.0 || ($this->k99_numpre_n === 0 || $this->k99_numpre_n === 0.0 || $this->k99_numpre_n == ""))) ){ 
        $this->erro_sql = " Campo k99_numpre_n nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -537,7 +537,7 @@ class cl_db_reciboweb {
    function sql_query ( $k99_numpre=null,$k99_numpar=null,$k99_numpre_n=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -574,7 +574,7 @@ class cl_db_reciboweb {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -587,7 +587,7 @@ class cl_db_reciboweb {
    function sql_query_file ( $k99_numpre=null,$k99_numpar=null,$k99_numpre_n=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -624,7 +624,7 @@ class cl_db_reciboweb {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

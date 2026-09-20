@@ -32,7 +32,7 @@
   include(modification("classes/db_aguarotarua_classe.php"));
   include(modification("classes/db_aguarota_classe.php"));
   include(modification("dbforms/db_funcoes.php"));
-  parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+  parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
   db_postmemory($_POST);
 
   $claguarotarua = new cl_aguarotarua;

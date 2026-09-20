@@ -52,7 +52,7 @@ class cl_aguacoletor {
                  x46_observacao = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_aguacoletor() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacoletor"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_aguacoletor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x46_sequencial = ($this->x46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x46_sequencial"]:$this->x46_sequencial);
+       $this->x46_sequencial = (($this->x46_sequencial === 0 || $this->x46_sequencial === 0.0 || ($this->x46_sequencial === 0 || $this->x46_sequencial === 0.0 || $this->x46_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["x46_sequencial"]:$this->x46_sequencial);
        $this->x46_descricao = ($this->x46_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["x46_descricao"]:$this->x46_descricao);
        $this->x46_observacao = ($this->x46_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x46_observacao"]:$this->x46_observacao);
      }else{
-       $this->x46_sequencial = ($this->x46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x46_sequencial"]:$this->x46_sequencial);
+       $this->x46_sequencial = (($this->x46_sequencial === 0 || $this->x46_sequencial === 0.0 || ($this->x46_sequencial === 0 || $this->x46_sequencial === 0.0 || $this->x46_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["x46_sequencial"]:$this->x46_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aguacoletor {
          $this->x46_sequencial = $x46_sequencial; 
        }
      }
-     if(($this->x46_sequencial == null) || ($this->x46_sequencial == "") ){ 
+     if(($this->x46_sequencial == null) || (($this->x46_sequencial === 0 || $this->x46_sequencial === 0.0 || ($this->x46_sequencial === 0 || $this->x46_sequencial === 0.0 || $this->x46_sequencial == ""))) ){ 
        $this->erro_sql = " Campo x46_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_aguacoletor {
    function sql_query ( $x46_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_aguacoletor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_aguacoletor {
    function sql_query_file ( $x46_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_aguacoletor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -73,7 +73,7 @@ class cl_aguacorte {
                  x40_tipomatricula = int4 = Considerar matriculas 
                  ";
    //funcao construtor da classe 
-   function cl_aguacorte() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacorte"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,7 +90,7 @@ class cl_aguacorte {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x40_codcorte = ($this->x40_codcorte == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_codcorte"]:$this->x40_codcorte);
+       $this->x40_codcorte = (($this->x40_codcorte === 0 || $this->x40_codcorte === 0.0 || ($this->x40_codcorte === 0 || $this->x40_codcorte === 0.0 || $this->x40_codcorte == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_codcorte"]:$this->x40_codcorte);
        if($this->x40_dtinc == ""){
          $this->x40_dtinc_dia = ($this->x40_dtinc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_dtinc_dia"]:$this->x40_dtinc_dia);
          $this->x40_dtinc_mes = ($this->x40_dtinc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_dtinc_mes"]:$this->x40_dtinc_mes);
@@ -99,18 +99,18 @@ class cl_aguacorte {
             $this->x40_dtinc = $this->x40_dtinc_ano."-".$this->x40_dtinc_mes."-".$this->x40_dtinc_dia;
          }
        }
-       $this->x40_usuario = ($this->x40_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_usuario"]:$this->x40_usuario);
-       $this->x40_anoini = ($this->x40_anoini == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_anoini"]:$this->x40_anoini);
-       $this->x40_anofim = ($this->x40_anofim == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_anofim"]:$this->x40_anofim);
-       $this->x40_entrega = ($this->x40_entrega == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_entrega"]:$this->x40_entrega);
-       $this->x40_rua = ($this->x40_rua == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_rua"]:$this->x40_rua);
-       $this->x40_vlrminimo = ($this->x40_vlrminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_vlrminimo"]:$this->x40_vlrminimo);
+       $this->x40_usuario = (($this->x40_usuario === 0 || $this->x40_usuario === 0.0 || ($this->x40_usuario === 0 || $this->x40_usuario === 0.0 || $this->x40_usuario == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_usuario"]:$this->x40_usuario);
+       $this->x40_anoini = (($this->x40_anoini === 0 || $this->x40_anoini === 0.0 || ($this->x40_anoini === 0 || $this->x40_anoini === 0.0 || $this->x40_anoini == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_anoini"]:$this->x40_anoini);
+       $this->x40_anofim = (($this->x40_anofim === 0 || $this->x40_anofim === 0.0 || ($this->x40_anofim === 0 || $this->x40_anofim === 0.0 || $this->x40_anofim == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_anofim"]:$this->x40_anofim);
+       $this->x40_entrega = (($this->x40_entrega === 0 || $this->x40_entrega === 0.0 || ($this->x40_entrega === 0 || $this->x40_entrega === 0.0 || $this->x40_entrega == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_entrega"]:$this->x40_entrega);
+       $this->x40_rua = (($this->x40_rua === 0 || $this->x40_rua === 0.0 || ($this->x40_rua === 0 || $this->x40_rua === 0.0 || $this->x40_rua == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_rua"]:$this->x40_rua);
+       $this->x40_vlrminimo = (($this->x40_vlrminimo === 0 || $this->x40_vlrminimo === 0.0 || ($this->x40_vlrminimo === 0 || $this->x40_vlrminimo === 0.0 || $this->x40_vlrminimo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_vlrminimo"]:$this->x40_vlrminimo);
        $this->x40_sql = ($this->x40_sql == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_sql"]:$this->x40_sql);
-       $this->x40_codsituacao = ($this->x40_codsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_codsituacao"]:$this->x40_codsituacao);
-       $this->x40_zona = ($this->x40_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_zona"]:$this->x40_zona);
-       $this->x40_tipomatricula = ($this->x40_tipomatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_tipomatricula"]:$this->x40_tipomatricula);
+       $this->x40_codsituacao = (($this->x40_codsituacao === 0 || $this->x40_codsituacao === 0.0 || ($this->x40_codsituacao === 0 || $this->x40_codsituacao === 0.0 || $this->x40_codsituacao == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_codsituacao"]:$this->x40_codsituacao);
+       $this->x40_zona = (($this->x40_zona === 0 || $this->x40_zona === 0.0 || ($this->x40_zona === 0 || $this->x40_zona === 0.0 || $this->x40_zona == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_zona"]:$this->x40_zona);
+       $this->x40_tipomatricula = (($this->x40_tipomatricula === 0 || $this->x40_tipomatricula === 0.0 || ($this->x40_tipomatricula === 0 || $this->x40_tipomatricula === 0.0 || $this->x40_tipomatricula == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_tipomatricula"]:$this->x40_tipomatricula);
      }else{
-       $this->x40_codcorte = ($this->x40_codcorte == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_codcorte"]:$this->x40_codcorte);
+       $this->x40_codcorte = (($this->x40_codcorte === 0 || $this->x40_codcorte === 0.0 || ($this->x40_codcorte === 0 || $this->x40_codcorte === 0.0 || $this->x40_codcorte == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_codcorte"]:$this->x40_codcorte);
      }
    }
    // funcao para inclusao
@@ -194,7 +194,7 @@ class cl_aguacorte {
          $this->x40_codcorte = $x40_codcorte; 
        }
      }
-     if(($this->x40_codcorte == null) || ($this->x40_codcorte == "") ){ 
+     if(($this->x40_codcorte == null) || (($this->x40_codcorte === 0 || $this->x40_codcorte === 0.0 || ($this->x40_codcorte === 0 || $this->x40_codcorte === 0.0 || $this->x40_codcorte == ""))) ){ 
        $this->erro_sql = " Campo x40_codcorte nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -573,7 +573,7 @@ class cl_aguacorte {
    function sql_query ( $x40_codcorte=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -599,7 +599,7 @@ class cl_aguacorte {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -612,7 +612,7 @@ class cl_aguacorte {
    function sql_query_file ( $x40_codcorte=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -633,7 +633,7 @@ class cl_aguacorte {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

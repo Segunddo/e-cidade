@@ -60,7 +60,7 @@ class cl_itbiintermediador {
                  it35_principal = bool = Principal
                  ";
    //funcao construtor da classe
-   function cl_itbiintermediador() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbiintermediador");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_itbiintermediador {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it35_sequencial = ($this->it35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it35_sequencial"]:$this->it35_sequencial);
-       $this->it35_itbi = ($this->it35_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["it35_itbi"]:$this->it35_itbi);
-       $this->it35_cgm = ($this->it35_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["it35_cgm"]:$this->it35_cgm);
+       $this->it35_sequencial = (($this->it35_sequencial === 0 || $this->it35_sequencial === 0.0 || $this->it35_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it35_sequencial"]:$this->it35_sequencial);
+       $this->it35_itbi = (($this->it35_itbi === 0 || $this->it35_itbi === 0.0 || $this->it35_itbi == "")?@$GLOBALS["HTTP_POST_VARS"]["it35_itbi"]:$this->it35_itbi);
+       $this->it35_cgm = (($this->it35_cgm === 0 || $this->it35_cgm === 0.0 || $this->it35_cgm == "")?@$GLOBALS["HTTP_POST_VARS"]["it35_cgm"]:$this->it35_cgm);
        $this->it35_nome = ($this->it35_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["it35_nome"]:$this->it35_nome);
        $this->it35_cnpj_cpf = ($this->it35_cnpj_cpf == ""?@$GLOBALS["HTTP_POST_VARS"]["it35_cnpj_cpf"]:$this->it35_cnpj_cpf);
        $this->it35_creci = ($this->it35_creci == ""?@$GLOBALS["HTTP_POST_VARS"]["it35_creci"]:$this->it35_creci);
        $this->it35_principal = ($this->it35_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["it35_principal"]:$this->it35_principal);
      }else{
-       $this->it35_sequencial = ($this->it35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it35_sequencial"]:$this->it35_sequencial);
+       $this->it35_sequencial = (($this->it35_sequencial === 0 || $this->it35_sequencial === 0.0 || $this->it35_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it35_sequencial"]:$this->it35_sequencial);
      }
    }
    // funcao para Inclusão
@@ -136,7 +136,7 @@ class cl_itbiintermediador {
          $this->it35_sequencial = $it35_sequencial;
        }
      }
-     if(($this->it35_sequencial == null) || ($this->it35_sequencial == "") ){
+     if(($this->it35_sequencial == null) || (($this->it35_sequencial === 0 || $this->it35_sequencial === 0.0 || $this->it35_sequencial == "")) ){
        $this->erro_sql = " Campo it35_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

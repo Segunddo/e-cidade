@@ -65,7 +65,7 @@ class cl_ruas {
                  j14_obs = text = Observação
                  ";
    //funcao construtor da classe
-   function cl_ruas() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ruas");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,7 +82,7 @@ class cl_ruas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j14_codigo = ($this->j14_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j14_codigo"]:$this->j14_codigo);
+       $this->j14_codigo = (($this->j14_codigo === 0 || $this->j14_codigo === 0.0 || ($this->j14_codigo === 0 || $this->j14_codigo === 0.0 || $this->j14_codigo == ""))?@$GLOBALS["HTTP_POST_VARS"]["j14_codigo"]:$this->j14_codigo);
        $this->j14_nome = ($this->j14_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["j14_nome"]:$this->j14_nome);
        $this->j14_tipo = ($this->j14_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j14_tipo"]:$this->j14_tipo);
        $this->j14_rural = ($this->j14_rural == "f"?@$GLOBALS["HTTP_POST_VARS"]["j14_rural"]:$this->j14_rural);
@@ -98,7 +98,7 @@ class cl_ruas {
        $this->j14_bairro = ($this->j14_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["j14_bairro"]:$this->j14_bairro);
        $this->j14_obs = ($this->j14_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["j14_obs"]:$this->j14_obs);
      }else{
-       $this->j14_codigo = ($this->j14_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j14_codigo"]:$this->j14_codigo);
+       $this->j14_codigo = (($this->j14_codigo === 0 || $this->j14_codigo === 0.0 || ($this->j14_codigo === 0 || $this->j14_codigo === 0.0 || $this->j14_codigo == ""))?@$GLOBALS["HTTP_POST_VARS"]["j14_codigo"]:$this->j14_codigo);
      }
    }
    // funcao para inclusao
@@ -144,7 +144,7 @@ class cl_ruas {
        $this->j14_dtlei = "null";
      }
        $this->j14_codigo = $j14_codigo;
-     if(($this->j14_codigo == null) || ($this->j14_codigo == "") ){
+     if(($this->j14_codigo == null) || (($this->j14_codigo === 0 || $this->j14_codigo === 0.0 || ($this->j14_codigo === 0 || $this->j14_codigo === 0.0 || $this->j14_codigo == ""))) ){
        $this->erro_sql = " Campo j14_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

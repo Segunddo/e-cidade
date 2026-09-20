@@ -121,7 +121,7 @@ if(empty($x40_codcorte)) {
 
       if($iNumRowsRecibo > 0) {
         db_fieldsmemory($rsReciboPaga, 0);
-        list($iAno, $iMes, $iDia) = split("-", $x99_dtoper);
+        list($iAno, $iMes, $iDia) = explode("-", $x99_dtoper);
         $dtOper = "{$iDia}/{$iMes}/{$iAno}";
 
         $sHist .= $sSep."RECIBO [Numpre: {$x99_numnov}  Vencimento: {$dtOper}] )";

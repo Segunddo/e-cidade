@@ -52,7 +52,7 @@ class cl_aguaisencaotipo {
                  x29_tipo = int4 = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_aguaisencaotipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguaisencaotipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_aguaisencaotipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x29_codisencaotipo = ($this->x29_codisencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_codisencaotipo"]:$this->x29_codisencaotipo);
+       $this->x29_codisencaotipo = (($this->x29_codisencaotipo === 0 || $this->x29_codisencaotipo === 0.0 || $this->x29_codisencaotipo == "")?@$GLOBALS["HTTP_POST_VARS"]["x29_codisencaotipo"]:$this->x29_codisencaotipo);
        $this->x29_descr = ($this->x29_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_descr"]:$this->x29_descr);
-       $this->x29_tipo = ($this->x29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_tipo"]:$this->x29_tipo);
+       $this->x29_tipo = (($this->x29_tipo === 0 || $this->x29_tipo === 0.0 || $this->x29_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["x29_tipo"]:$this->x29_tipo);
      }else{
-       $this->x29_codisencaotipo = ($this->x29_codisencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_codisencaotipo"]:$this->x29_codisencaotipo);
+       $this->x29_codisencaotipo = (($this->x29_codisencaotipo === 0 || $this->x29_codisencaotipo === 0.0 || $this->x29_codisencaotipo == "")?@$GLOBALS["HTTP_POST_VARS"]["x29_codisencaotipo"]:$this->x29_codisencaotipo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aguaisencaotipo {
          $this->x29_codisencaotipo = $x29_codisencaotipo; 
        }
      }
-     if(($this->x29_codisencaotipo == null) || ($this->x29_codisencaotipo == "") ){ 
+     if(($this->x29_codisencaotipo == null) || (($this->x29_codisencaotipo === 0 || $this->x29_codisencaotipo === 0.0 || $this->x29_codisencaotipo == "")) ){ 
        $this->erro_sql = " Campo x29_codisencaotipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_aguaisencaotipo {
    function sql_query ( $x29_codisencaotipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_aguaisencaotipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_aguaisencaotipo {
    function sql_query_file ( $x29_codisencaotipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_aguaisencaotipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

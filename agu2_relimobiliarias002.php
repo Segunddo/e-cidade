@@ -83,7 +83,7 @@ $troca = 1;
 $alt   = 4;
 $total = 0;
 
-for($i = 0; $i < pg_num_rows($rSql); $i++) {
+for($i = 0; $i < ($rSql ? pg_num_rows($rSql) : 0); $i++) {
   
   $oRelatorio = db_utils::fieldsMemory($rSql, $i, true);
   

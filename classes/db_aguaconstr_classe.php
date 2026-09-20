@@ -64,7 +64,7 @@ class cl_aguaconstr {
                  x11_tipo = char(1) = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_aguaconstr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguaconstr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_aguaconstr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x11_codconstr = ($this->x11_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_codconstr"]:$this->x11_codconstr);
-       $this->x11_matric = ($this->x11_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_matric"]:$this->x11_matric);
-       $this->x11_area = ($this->x11_area == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_area"]:$this->x11_area);
+       $this->x11_codconstr = (($this->x11_codconstr === 0 || $this->x11_codconstr === 0.0 || ($this->x11_codconstr === 0 || $this->x11_codconstr === 0.0 || $this->x11_codconstr == ""))?@$GLOBALS["HTTP_POST_VARS"]["x11_codconstr"]:$this->x11_codconstr);
+       $this->x11_matric = (($this->x11_matric === 0 || $this->x11_matric === 0.0 || ($this->x11_matric === 0 || $this->x11_matric === 0.0 || $this->x11_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["x11_matric"]:$this->x11_matric);
+       $this->x11_area = (($this->x11_area === 0 || $this->x11_area === 0.0 || ($this->x11_area === 0 || $this->x11_area === 0.0 || $this->x11_area == ""))?@$GLOBALS["HTTP_POST_VARS"]["x11_area"]:$this->x11_area);
        $this->x11_pavimento = ($this->x11_pavimento == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_pavimento"]:$this->x11_pavimento);
-       $this->x11_numero = ($this->x11_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_numero"]:$this->x11_numero);
-       $this->x11_qtdfamilia = ($this->x11_qtdfamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_qtdfamilia"]:$this->x11_qtdfamilia);
-       $this->x11_qtdpessoas = ($this->x11_qtdpessoas == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_qtdpessoas"]:$this->x11_qtdpessoas);
+       $this->x11_numero = (($this->x11_numero === 0 || $this->x11_numero === 0.0 || ($this->x11_numero === 0 || $this->x11_numero === 0.0 || $this->x11_numero == ""))?@$GLOBALS["HTTP_POST_VARS"]["x11_numero"]:$this->x11_numero);
+       $this->x11_qtdfamilia = (($this->x11_qtdfamilia === 0 || $this->x11_qtdfamilia === 0.0 || ($this->x11_qtdfamilia === 0 || $this->x11_qtdfamilia === 0.0 || $this->x11_qtdfamilia == ""))?@$GLOBALS["HTTP_POST_VARS"]["x11_qtdfamilia"]:$this->x11_qtdfamilia);
+       $this->x11_qtdpessoas = (($this->x11_qtdpessoas === 0 || $this->x11_qtdpessoas === 0.0 || ($this->x11_qtdpessoas === 0 || $this->x11_qtdpessoas === 0.0 || $this->x11_qtdpessoas == ""))?@$GLOBALS["HTTP_POST_VARS"]["x11_qtdpessoas"]:$this->x11_qtdpessoas);
        $this->x11_complemento = ($this->x11_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_complemento"]:$this->x11_complemento);
        $this->x11_tipo = ($this->x11_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_tipo"]:$this->x11_tipo);
      }else{
-       $this->x11_codconstr = ($this->x11_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_codconstr"]:$this->x11_codconstr);
+       $this->x11_codconstr = (($this->x11_codconstr === 0 || $this->x11_codconstr === 0.0 || ($this->x11_codconstr === 0 || $this->x11_codconstr === 0.0 || $this->x11_codconstr == ""))?@$GLOBALS["HTTP_POST_VARS"]["x11_codconstr"]:$this->x11_codconstr);
      }
    }
    // funcao para inclusao
@@ -184,7 +184,7 @@ class cl_aguaconstr {
          $this->x11_codconstr = $x11_codconstr; 
        }
      }
-     if(($this->x11_codconstr == null) || ($this->x11_codconstr == "") ){ 
+     if(($this->x11_codconstr == null) || (($this->x11_codconstr === 0 || $this->x11_codconstr === 0.0 || ($this->x11_codconstr === 0 || $this->x11_codconstr === 0.0 || $this->x11_codconstr == ""))) ){ 
        $this->erro_sql = " Campo x11_codconstr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -527,7 +527,7 @@ class cl_aguaconstr {
    function sql_query ( $x11_codconstr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_aguaconstr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -564,7 +564,7 @@ class cl_aguaconstr {
    function sql_query_file ( $x11_codconstr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -585,7 +585,7 @@ class cl_aguaconstr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

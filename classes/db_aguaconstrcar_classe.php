@@ -50,7 +50,7 @@ class cl_aguaconstrcar {
                  x12_codigo = int8 = Caracteristica 
                  ";
    //funcao construtor da classe 
-   function cl_aguaconstrcar() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguaconstrcar"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_aguaconstrcar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x12_codconstr = ($this->x12_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codconstr"]:$this->x12_codconstr);
-       $this->x12_codigo = ($this->x12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codigo"]:$this->x12_codigo);
+       $this->x12_codconstr = (($this->x12_codconstr === 0 || $this->x12_codconstr === 0.0 || ($this->x12_codconstr === 0 || $this->x12_codconstr === 0.0 || $this->x12_codconstr == ""))?@$GLOBALS["HTTP_POST_VARS"]["x12_codconstr"]:$this->x12_codconstr);
+       $this->x12_codigo = (($this->x12_codigo === 0 || $this->x12_codigo === 0.0 || ($this->x12_codigo === 0 || $this->x12_codigo === 0.0 || $this->x12_codigo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x12_codigo"]:$this->x12_codigo);
      }else{
-       $this->x12_codconstr = ($this->x12_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codconstr"]:$this->x12_codconstr);
-       $this->x12_codigo = ($this->x12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codigo"]:$this->x12_codigo);
+       $this->x12_codconstr = (($this->x12_codconstr === 0 || $this->x12_codconstr === 0.0 || ($this->x12_codconstr === 0 || $this->x12_codconstr === 0.0 || $this->x12_codconstr == ""))?@$GLOBALS["HTTP_POST_VARS"]["x12_codconstr"]:$this->x12_codconstr);
+       $this->x12_codigo = (($this->x12_codigo === 0 || $this->x12_codigo === 0.0 || ($this->x12_codigo === 0 || $this->x12_codigo === 0.0 || $this->x12_codigo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x12_codigo"]:$this->x12_codigo);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_aguaconstrcar {
       $this->atualizacampos();
        $this->x12_codigo = $x12_codigo; 
        $this->x12_codconstr = $x12_codconstr; 
-     if(($this->x12_codigo == null) || ($this->x12_codigo == "") ){ 
+     if(($this->x12_codigo == null) || (($this->x12_codigo === 0 || $this->x12_codigo === 0.0 || ($this->x12_codigo === 0 || $this->x12_codigo === 0.0 || $this->x12_codigo == ""))) ){ 
        $this->erro_sql = " Campo x12_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_aguaconstrcar {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x12_codconstr == null) || ($this->x12_codconstr == "") ){ 
+     if(($this->x12_codconstr == null) || (($this->x12_codconstr === 0 || $this->x12_codconstr === 0.0 || ($this->x12_codconstr === 0 || $this->x12_codconstr === 0.0 || $this->x12_codconstr == ""))) ){ 
        $this->erro_sql = " Campo x12_codconstr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_aguaconstrcar {
    function sql_query ( $x12_codigo=null,$x12_codconstr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -351,7 +351,7 @@ class cl_aguaconstrcar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_aguaconstrcar {
    function sql_query_file ( $x12_codigo=null,$x12_codconstr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_aguaconstrcar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -116,7 +116,7 @@ class cl_arretipo
                  ";
     //funcao construtor da classe
     //funcao construtor da classe
-    function cl_arretipo()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("arretipo");
@@ -138,9 +138,9 @@ class cl_arretipo
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->k00_codbco = ($this->k00_codbco == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_codbco"] : $this->k00_codbco);
+            $this->k00_codbco = (($this->k00_codbco === 0 || $this->k00_codbco === 0.0 || ($this->k00_codbco === 0 || $this->k00_codbco === 0.0 || $this->k00_codbco == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_codbco"] : $this->k00_codbco);
             $this->k00_codage = ($this->k00_codage == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_codage"] : $this->k00_codage);
-            $this->k00_tipo = ($this->k00_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_tipo"] : $this->k00_tipo);
+            $this->k00_tipo = (($this->k00_tipo === 0 || $this->k00_tipo === 0.0 || ($this->k00_tipo === 0 || $this->k00_tipo === 0.0 || $this->k00_tipo == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_tipo"] : $this->k00_tipo);
             $this->k00_descr = ($this->k00_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_descr"] : $this->k00_descr);
             $this->k00_emrec = ($this->k00_emrec == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k00_emrec"] : $this->k00_emrec);
             $this->k00_agnum = ($this->k00_agnum == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k00_agnum"] : $this->k00_agnum);
@@ -152,16 +152,16 @@ class cl_arretipo
             $this->k00_msgparcvenc = ($this->k00_msgparcvenc == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_msgparcvenc"] : $this->k00_msgparcvenc);
             $this->k00_msgparcvenc2 = ($this->k00_msgparcvenc2 == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_msgparcvenc2"] : $this->k00_msgparcvenc2);
             $this->k00_msgrecibo = ($this->k00_msgrecibo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_msgrecibo"] : $this->k00_msgrecibo);
-            $this->k00_tercdigcarneunica = ($this->k00_tercdigcarneunica == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_tercdigcarneunica"] : $this->k00_tercdigcarneunica);
-            $this->k00_tercdigcarnenormal = ($this->k00_tercdigcarnenormal == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_tercdigcarnenormal"] : $this->k00_tercdigcarnenormal);
-            $this->k00_tercdigrecunica = ($this->k00_tercdigrecunica == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_tercdigrecunica"] : $this->k00_tercdigrecunica);
-            $this->k00_tercdigrecnormal = ($this->k00_tercdigrecnormal == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_tercdigrecnormal"] : $this->k00_tercdigrecnormal);
-            $this->k00_txban = ($this->k00_txban == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_txban"] : $this->k00_txban);
-            $this->k00_rectx = ($this->k00_rectx == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_rectx"] : $this->k00_rectx);
-            $this->codmodelo = ($this->codmodelo == "" ? @$GLOBALS["HTTP_POST_VARS"]["codmodelo"] : $this->codmodelo);
+            $this->k00_tercdigcarneunica = (($this->k00_tercdigcarneunica === 0 || $this->k00_tercdigcarneunica === 0.0 || ($this->k00_tercdigcarneunica === 0 || $this->k00_tercdigcarneunica === 0.0 || $this->k00_tercdigcarneunica == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_tercdigcarneunica"] : $this->k00_tercdigcarneunica);
+            $this->k00_tercdigcarnenormal = (($this->k00_tercdigcarnenormal === 0 || $this->k00_tercdigcarnenormal === 0.0 || ($this->k00_tercdigcarnenormal === 0 || $this->k00_tercdigcarnenormal === 0.0 || $this->k00_tercdigcarnenormal == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_tercdigcarnenormal"] : $this->k00_tercdigcarnenormal);
+            $this->k00_tercdigrecunica = (($this->k00_tercdigrecunica === 0 || $this->k00_tercdigrecunica === 0.0 || ($this->k00_tercdigrecunica === 0 || $this->k00_tercdigrecunica === 0.0 || $this->k00_tercdigrecunica == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_tercdigrecunica"] : $this->k00_tercdigrecunica);
+            $this->k00_tercdigrecnormal = (($this->k00_tercdigrecnormal === 0 || $this->k00_tercdigrecnormal === 0.0 || ($this->k00_tercdigrecnormal === 0 || $this->k00_tercdigrecnormal === 0.0 || $this->k00_tercdigrecnormal == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_tercdigrecnormal"] : $this->k00_tercdigrecnormal);
+            $this->k00_txban = (($this->k00_txban === 0 || $this->k00_txban === 0.0 || ($this->k00_txban === 0 || $this->k00_txban === 0.0 || $this->k00_txban == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_txban"] : $this->k00_txban);
+            $this->k00_rectx = (($this->k00_rectx === 0 || $this->k00_rectx === 0.0 || ($this->k00_rectx === 0 || $this->k00_rectx === 0.0 || $this->k00_rectx == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_rectx"] : $this->k00_rectx);
+            $this->codmodelo = (($this->codmodelo === 0 || $this->codmodelo === 0.0 || ($this->codmodelo === 0 || $this->codmodelo === 0.0 || $this->codmodelo == "")) ? @$GLOBALS["HTTP_POST_VARS"]["codmodelo"] : $this->codmodelo);
             $this->k00_impval = ($this->k00_impval == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k00_impval"] : $this->k00_impval);
-            $this->k00_vlrmin = ($this->k00_vlrmin == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_vlrmin"] : $this->k00_vlrmin);
-            $this->k03_tipo = ($this->k03_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_tipo"] : $this->k03_tipo);
+            $this->k00_vlrmin = (($this->k00_vlrmin === 0 || $this->k00_vlrmin === 0.0 || ($this->k00_vlrmin === 0 || $this->k00_vlrmin === 0.0 || $this->k00_vlrmin == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_vlrmin"] : $this->k00_vlrmin);
+            $this->k03_tipo = (($this->k03_tipo === 0 || $this->k03_tipo === 0.0 || ($this->k03_tipo === 0 || $this->k03_tipo === 0.0 || $this->k03_tipo == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k03_tipo"] : $this->k03_tipo);
             $this->k00_marcado = ($this->k00_marcado == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_marcado"] : $this->k00_marcado);
             $this->k00_hist1 = ($this->k00_hist1 == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_hist1"] : $this->k00_hist1);
             $this->k00_hist2 = ($this->k00_hist2 == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_hist2"] : $this->k00_hist2);
@@ -171,12 +171,12 @@ class cl_arretipo
             $this->k00_hist6 = ($this->k00_hist6 == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_hist6"] : $this->k00_hist6);
             $this->k00_hist7 = ($this->k00_hist7 == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_hist7"] : $this->k00_hist7);
             $this->k00_hist8 = ($this->k00_hist8 == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_hist8"] : $this->k00_hist8);
-            $this->k00_tipoagrup = ($this->k00_tipoagrup == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_tipoagrup"] : $this->k00_tipoagrup);
-            $this->k00_recibodbpref = ($this->k00_recibodbpref == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_recibodbpref"] : $this->k00_recibodbpref);
-            $this->k00_instit = ($this->k00_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_instit"] : $this->k00_instit);
-            $this->k00_formemissao = ($this->k00_formemissao == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_formemissao"] : $this->k00_formemissao);
-            $this->k00_receitacredito = ($this->k00_receitacredito == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_receitacredito"] : $this->k00_receitacredito);
-            $this->k00_exercicioscarne = ($this->k00_exercicioscarne == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_exercicioscarne"] : $this->k00_exercicioscarne);
+            $this->k00_tipoagrup = (($this->k00_tipoagrup === 0 || $this->k00_tipoagrup === 0.0 || ($this->k00_tipoagrup === 0 || $this->k00_tipoagrup === 0.0 || $this->k00_tipoagrup == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_tipoagrup"] : $this->k00_tipoagrup);
+            $this->k00_recibodbpref = (($this->k00_recibodbpref === 0 || $this->k00_recibodbpref === 0.0 || ($this->k00_recibodbpref === 0 || $this->k00_recibodbpref === 0.0 || $this->k00_recibodbpref == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_recibodbpref"] : $this->k00_recibodbpref);
+            $this->k00_instit = (($this->k00_instit === 0 || $this->k00_instit === 0.0 || ($this->k00_instit === 0 || $this->k00_instit === 0.0 || $this->k00_instit == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_instit"] : $this->k00_instit);
+            $this->k00_formemissao = (($this->k00_formemissao === 0 || $this->k00_formemissao === 0.0 || ($this->k00_formemissao === 0 || $this->k00_formemissao === 0.0 || $this->k00_formemissao == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_formemissao"] : $this->k00_formemissao);
+            $this->k00_receitacredito = (($this->k00_receitacredito === 0 || $this->k00_receitacredito === 0.0 || ($this->k00_receitacredito === 0 || $this->k00_receitacredito === 0.0 || $this->k00_receitacredito == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_receitacredito"] : $this->k00_receitacredito);
+            $this->k00_exercicioscarne = (($this->k00_exercicioscarne === 0 || $this->k00_exercicioscarne === 0.0 || ($this->k00_exercicioscarne === 0 || $this->k00_exercicioscarne === 0.0 || $this->k00_exercicioscarne == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_exercicioscarne"] : $this->k00_exercicioscarne);
             $this->k00_dtvencimento = ($this->k00_dtvencimento == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_dtvencimento"] : $this->k00_dtvencimento);
             $this->k00_horainicial = ($this->k00_horainicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_horainicial"] : $this->k00_horainicial);
             $this->k00_horafinal = ($this->k00_horafinal == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_horafinal"] : $this->k00_horafinal);
@@ -187,7 +187,7 @@ class cl_arretipo
             $this->k00_liberacarnepref = (($this->k00_liberacarnepref == "" OR !empty($GLOBALS["HTTP_POST_VARS"]["k00_liberacarnepref"])) ?@$GLOBALS["HTTP_POST_VARS"]["k00_liberacarnepref"]:$this->k00_liberacarnepref);
 
         } else {
-            $this->k00_tipo = ($this->k00_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k00_tipo"] : $this->k00_tipo);
+            $this->k00_tipo = (($this->k00_tipo === 0 || $this->k00_tipo === 0.0 || ($this->k00_tipo === 0 || $this->k00_tipo === 0.0 || $this->k00_tipo == "")) ? @$GLOBALS["HTTP_POST_VARS"]["k00_tipo"] : $this->k00_tipo);
         }
     }
     // funcao para Inclusão
@@ -455,7 +455,7 @@ class cl_arretipo
                 $this->k00_tipo = $k00_tipo;
             }
         }
-        if (($this->k00_tipo == null) || ($this->k00_tipo == "")) {
+        if (($this->k00_tipo == null) || (($this->k00_tipo === 0 || $this->k00_tipo === 0.0 || ($this->k00_tipo === 0 || $this->k00_tipo === 0.0 || $this->k00_tipo == "")))) {
             $this->erro_sql = " Campo k00_tipo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

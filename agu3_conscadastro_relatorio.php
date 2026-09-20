@@ -34,7 +34,7 @@ $pdf->Open();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 require(modification("libs/db_conectapdf.php"));
-for ($totalRegistos=0;$totalRegistos<sizeof($parametro);$totalRegistos++){
+for ($totalRegistos=0;$totalRegistos<sizeof((array)$parametro);$totalRegistos++){
   // $parametro recebe cod_matricula
 $sql = "
   select proprietario.* , c.z01_nome as promitente,

@@ -53,7 +53,7 @@ class cl_aguacalc {
                  x22_responsavelpagamento = int4 = Responsável Pagamento 
                  ";
    //funcao construtor da classe 
-   function cl_aguacalc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacalc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -70,15 +70,15 @@ class cl_aguacalc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x22_codcalc = ($this->x22_codcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_codcalc"]:$this->x22_codcalc);
-       $this->x22_codconsumo = ($this->x22_codconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_codconsumo"]:$this->x22_codconsumo);
-       $this->x22_exerc = ($this->x22_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_exerc"]:$this->x22_exerc);
-       $this->x22_mes = ($this->x22_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_mes"]:$this->x22_mes);
-       $this->x22_matric = ($this->x22_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_matric"]:$this->x22_matric);
-       $this->x22_area = ($this->x22_area == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_area"]:$this->x22_area);
-       $this->x22_numpre = ($this->x22_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_numpre"]:$this->x22_numpre);
+       $this->x22_codcalc = (($this->x22_codcalc === 0 || $this->x22_codcalc === 0.0 || ($this->x22_codcalc === 0 || $this->x22_codcalc === 0.0 || $this->x22_codcalc == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_codcalc"]:$this->x22_codcalc);
+       $this->x22_codconsumo = (($this->x22_codconsumo === 0 || $this->x22_codconsumo === 0.0 || ($this->x22_codconsumo === 0 || $this->x22_codconsumo === 0.0 || $this->x22_codconsumo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_codconsumo"]:$this->x22_codconsumo);
+       $this->x22_exerc = (($this->x22_exerc === 0 || $this->x22_exerc === 0.0 || ($this->x22_exerc === 0 || $this->x22_exerc === 0.0 || $this->x22_exerc == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_exerc"]:$this->x22_exerc);
+       $this->x22_mes = (($this->x22_mes === 0 || $this->x22_mes === 0.0 || ($this->x22_mes === 0 || $this->x22_mes === 0.0 || $this->x22_mes == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_mes"]:$this->x22_mes);
+       $this->x22_matric = (($this->x22_matric === 0 || $this->x22_matric === 0.0 || ($this->x22_matric === 0 || $this->x22_matric === 0.0 || $this->x22_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_matric"]:$this->x22_matric);
+       $this->x22_area = (($this->x22_area === 0 || $this->x22_area === 0.0 || ($this->x22_area === 0 || $this->x22_area === 0.0 || $this->x22_area == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_area"]:$this->x22_area);
+       $this->x22_numpre = (($this->x22_numpre === 0 || $this->x22_numpre === 0.0 || ($this->x22_numpre === 0 || $this->x22_numpre === 0.0 || $this->x22_numpre == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_numpre"]:$this->x22_numpre);
        $this->x22_manual = ($this->x22_manual == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_manual"]:$this->x22_manual);
-       $this->x22_tipo = ($this->x22_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_tipo"]:$this->x22_tipo);
+       $this->x22_tipo = (($this->x22_tipo === 0 || $this->x22_tipo === 0.0 || ($this->x22_tipo === 0 || $this->x22_tipo === 0.0 || $this->x22_tipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_tipo"]:$this->x22_tipo);
        if($this->x22_data == ""){
          $this->x22_data_dia = ($this->x22_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_data_dia"]:$this->x22_data_dia);
          $this->x22_data_mes = ($this->x22_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_data_mes"]:$this->x22_data_mes);
@@ -88,12 +88,12 @@ class cl_aguacalc {
          }
        }
        $this->x22_hora = ($this->x22_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_hora"]:$this->x22_hora);
-       $this->x22_usuario = ($this->x22_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_usuario"]:$this->x22_usuario);
-       $this->x22_aguacontrato = ($this->x22_aguacontrato == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_aguacontrato"]:$this->x22_aguacontrato);
-       $this->x22_aguacontratoeconomia = ($this->x22_aguacontratoeconomia == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_aguacontratoeconomia"]:$this->x22_aguacontratoeconomia);
+       $this->x22_usuario = (($this->x22_usuario === 0 || $this->x22_usuario === 0.0 || ($this->x22_usuario === 0 || $this->x22_usuario === 0.0 || $this->x22_usuario == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_usuario"]:$this->x22_usuario);
+       $this->x22_aguacontrato = (($this->x22_aguacontrato === 0 || $this->x22_aguacontrato === 0.0 || ($this->x22_aguacontrato === 0 || $this->x22_aguacontrato === 0.0 || $this->x22_aguacontrato == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_aguacontrato"]:$this->x22_aguacontrato);
+       $this->x22_aguacontratoeconomia = (($this->x22_aguacontratoeconomia === 0 || $this->x22_aguacontratoeconomia === 0.0 || ($this->x22_aguacontratoeconomia === 0 || $this->x22_aguacontratoeconomia === 0.0 || $this->x22_aguacontratoeconomia == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_aguacontratoeconomia"]:$this->x22_aguacontratoeconomia);
        $this->x22_responsavelpagamento = ($this->x22_responsavelpagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_responsavelpagamento"]:$this->x22_responsavelpagamento);
      }else{
-       $this->x22_codcalc = ($this->x22_codcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["x22_codcalc"]:$this->x22_codcalc);
+       $this->x22_codcalc = (($this->x22_codcalc === 0 || $this->x22_codcalc === 0.0 || ($this->x22_codcalc === 0 || $this->x22_codcalc === 0.0 || $this->x22_codcalc == ""))?@$GLOBALS["HTTP_POST_VARS"]["x22_codcalc"]:$this->x22_codcalc);
      }
    }
    // funcao para Inclusão
@@ -201,7 +201,7 @@ class cl_aguacalc {
          $this->x22_codcalc = $x22_codcalc; 
        }
      }
-     if(($this->x22_codcalc == null) || ($this->x22_codcalc == "") ){ 
+     if(($this->x22_codcalc == null) || (($this->x22_codcalc === 0 || $this->x22_codcalc === 0.0 || ($this->x22_codcalc === 0 || $this->x22_codcalc === 0.0 || $this->x22_codcalc == ""))) ){ 
        $this->erro_sql = " Campo x22_codcalc não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -33,7 +33,7 @@
   include(modification("classes/db_aguabase_classe.php"));
   
   db_postmemory($HTTP_POST_VARS);
-  parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+  parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 
   $claguabase = new cl_aguabase;
   $claguabase->rotulo->label("x01_matric");

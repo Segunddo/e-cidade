@@ -60,7 +60,7 @@ class cl_aguarotarua {
                  x07_orientacao = char(1) = Orientação
                  ";
    //funcao construtor da classe 
-   function cl_aguarotarua() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguarotarua"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,16 +77,16 @@ class cl_aguarotarua {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if ($exclusao == false) {
-       $this->x07_codrotarua = ($this->x07_codrotarua == ""?@$GLOBALS["HTTP_POST_VARS"]["x07_codrotarua"]:$this->x07_codrotarua);
-       $this->x07_codrota = ($this->x07_codrota == ""?@$GLOBALS["HTTP_POST_VARS"]["x07_codrota"]:$this->x07_codrota);
-       $this->x07_codrua = ($this->x07_codrua == ""?@$GLOBALS["HTTP_POST_VARS"]["x07_codrua"]:$this->x07_codrua);
-       $this->x07_ordem = ($this->x07_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["x07_ordem"]:$this->x07_ordem);
-       $this->x07_nroini = ($this->x07_nroini == ""?@$GLOBALS["HTTP_POST_VARS"]["x07_nroini"]:$this->x07_nroini);
-       $this->x07_nrofim = ($this->x07_nrofim == ""?@$GLOBALS["HTTP_POST_VARS"]["x07_nrofim"]:$this->x07_nrofim);
+       $this->x07_codrotarua = (($this->x07_codrotarua === 0 || $this->x07_codrotarua === 0.0 || ($this->x07_codrotarua === 0 || $this->x07_codrotarua === 0.0 || $this->x07_codrotarua == ""))?@$GLOBALS["HTTP_POST_VARS"]["x07_codrotarua"]:$this->x07_codrotarua);
+       $this->x07_codrota = (($this->x07_codrota === 0 || $this->x07_codrota === 0.0 || ($this->x07_codrota === 0 || $this->x07_codrota === 0.0 || $this->x07_codrota == ""))?@$GLOBALS["HTTP_POST_VARS"]["x07_codrota"]:$this->x07_codrota);
+       $this->x07_codrua = (($this->x07_codrua === 0 || $this->x07_codrua === 0.0 || ($this->x07_codrua === 0 || $this->x07_codrua === 0.0 || $this->x07_codrua == ""))?@$GLOBALS["HTTP_POST_VARS"]["x07_codrua"]:$this->x07_codrua);
+       $this->x07_ordem = (($this->x07_ordem === 0 || $this->x07_ordem === 0.0 || ($this->x07_ordem === 0 || $this->x07_ordem === 0.0 || $this->x07_ordem == ""))?@$GLOBALS["HTTP_POST_VARS"]["x07_ordem"]:$this->x07_ordem);
+       $this->x07_nroini = (($this->x07_nroini === 0 || $this->x07_nroini === 0.0 || ($this->x07_nroini === 0 || $this->x07_nroini === 0.0 || $this->x07_nroini == ""))?@$GLOBALS["HTTP_POST_VARS"]["x07_nroini"]:$this->x07_nroini);
+       $this->x07_nrofim = (($this->x07_nrofim === 0 || $this->x07_nrofim === 0.0 || ($this->x07_nrofim === 0 || $this->x07_nrofim === 0.0 || $this->x07_nrofim == ""))?@$GLOBALS["HTTP_POST_VARS"]["x07_nrofim"]:$this->x07_nrofim);
        $this->x07_orientacao = ($this->x07_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x07_orientacao"]:$this->x07_orientacao);
      }else{
-       $this->x07_codrotarua = ($this->x07_codrotarua == ""?@$GLOBALS["HTTP_POST_VARS"]["x07_codrotarua"]:$this->x07_codrotarua);
-       $this->x07_codrota = ($this->x07_codrota == ""?@$GLOBALS["HTTP_POST_VARS"]["x07_codrota"]:$this->x07_codrota);
+       $this->x07_codrotarua = (($this->x07_codrotarua === 0 || $this->x07_codrotarua === 0.0 || ($this->x07_codrotarua === 0 || $this->x07_codrotarua === 0.0 || $this->x07_codrotarua == ""))?@$GLOBALS["HTTP_POST_VARS"]["x07_codrotarua"]:$this->x07_codrotarua);
+       $this->x07_codrota = (($this->x07_codrota === 0 || $this->x07_codrota === 0.0 || ($this->x07_codrota === 0 || $this->x07_codrota === 0.0 || $this->x07_codrota == ""))?@$GLOBALS["HTTP_POST_VARS"]["x07_codrota"]:$this->x07_codrota);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_aguarotarua {
          $this->x07_codrotarua = $x07_codrotarua; 
        }
      }
-     if(($this->x07_codrotarua == null) || ($this->x07_codrotarua == "") ){ 
+     if(($this->x07_codrotarua == null) || (($this->x07_codrotarua === 0 || $this->x07_codrotarua === 0.0 || ($this->x07_codrotarua === 0 || $this->x07_codrotarua === 0.0 || $this->x07_codrotarua == ""))) ){ 
        $this->erro_sql = " Campo x07_codrotarua nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -459,7 +459,7 @@ class cl_aguarotarua {
    function sql_query ( $x07_codrotarua=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_aguarotarua {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -495,7 +495,7 @@ class cl_aguarotarua {
    function sql_query_file ( $x07_codrotarua=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -516,7 +516,7 @@ class cl_aguarotarua {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

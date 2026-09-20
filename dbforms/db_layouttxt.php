@@ -130,7 +130,7 @@ class db_layouttxt
      */
     private $lQuebraAutomatica = true;
 
-    function db_layouttxt($layout = 0, $arquivo = "", $usartipo = "", $formatoArquivo = 1, $lUsaChar = false)
+    function __construct($layout = 0, $arquivo = "", $usartipo = "", $formatoArquivo = 1, $lUsaChar = false)
     {
 
         $this->_lUsaChar = $lUsaChar;

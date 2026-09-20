@@ -71,7 +71,7 @@ class cl_aguacortetipodebito {
                  x45_dtopfim = date = Data Final Operação 
                  ";
    //funcao construtor da classe 
-   function cl_aguacortetipodebito() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacortetipodebito"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -88,9 +88,9 @@ class cl_aguacortetipodebito {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x45_codcorte = ($this->x45_codcorte == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_codcorte"]:$this->x45_codcorte);
-       $this->x45_tipo = ($this->x45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_tipo"]:$this->x45_tipo);
-       $this->x45_parcelas = ($this->x45_parcelas == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_parcelas"]:$this->x45_parcelas);
+       $this->x45_codcorte = (($this->x45_codcorte === 0 || $this->x45_codcorte === 0.0 || ($this->x45_codcorte === 0 || $this->x45_codcorte === 0.0 || $this->x45_codcorte == ""))?@$GLOBALS["HTTP_POST_VARS"]["x45_codcorte"]:$this->x45_codcorte);
+       $this->x45_tipo = (($this->x45_tipo === 0 || $this->x45_tipo === 0.0 || ($this->x45_tipo === 0 || $this->x45_tipo === 0.0 || $this->x45_tipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x45_tipo"]:$this->x45_tipo);
+       $this->x45_parcelas = (($this->x45_parcelas === 0 || $this->x45_parcelas === 0.0 || ($this->x45_parcelas === 0 || $this->x45_parcelas === 0.0 || $this->x45_parcelas == ""))?@$GLOBALS["HTTP_POST_VARS"]["x45_parcelas"]:$this->x45_parcelas);
        if($this->x45_dtvenc == ""){
          $this->x45_dtvenc_dia = ($this->x45_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_dtvenc_dia"]:$this->x45_dtvenc_dia);
          $this->x45_dtvenc_mes = ($this->x45_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_dtvenc_mes"]:$this->x45_dtvenc_mes);
@@ -99,8 +99,8 @@ class cl_aguacortetipodebito {
             $this->x45_dtvenc = $this->x45_dtvenc_ano."-".$this->x45_dtvenc_mes."-".$this->x45_dtvenc_dia;
          }
        }
-       $this->x45_vlrminimo = ($this->x45_vlrminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_vlrminimo"]:$this->x45_vlrminimo);
-       $this->x45_codcortetipodebito = ($this->x45_codcortetipodebito == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_codcortetipodebito"]:$this->x45_codcortetipodebito);
+       $this->x45_vlrminimo = (($this->x45_vlrminimo === 0 || $this->x45_vlrminimo === 0.0 || ($this->x45_vlrminimo === 0 || $this->x45_vlrminimo === 0.0 || $this->x45_vlrminimo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x45_vlrminimo"]:$this->x45_vlrminimo);
+       $this->x45_codcortetipodebito = (($this->x45_codcortetipodebito === 0 || $this->x45_codcortetipodebito === 0.0 || ($this->x45_codcortetipodebito === 0 || $this->x45_codcortetipodebito === 0.0 || $this->x45_codcortetipodebito == ""))?@$GLOBALS["HTTP_POST_VARS"]["x45_codcortetipodebito"]:$this->x45_codcortetipodebito);
        if($this->x45_dtopini == ""){
          $this->x45_dtopini_dia = ($this->x45_dtopini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_dtopini_dia"]:$this->x45_dtopini_dia);
          $this->x45_dtopini_mes = ($this->x45_dtopini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_dtopini_mes"]:$this->x45_dtopini_mes);
@@ -118,8 +118,8 @@ class cl_aguacortetipodebito {
          }
        }
      }else{
-       $this->x45_codcorte = ($this->x45_codcorte == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_codcorte"]:$this->x45_codcorte);
-       $this->x45_codcortetipodebito = ($this->x45_codcortetipodebito == ""?@$GLOBALS["HTTP_POST_VARS"]["x45_codcortetipodebito"]:$this->x45_codcortetipodebito);
+       $this->x45_codcorte = (($this->x45_codcorte === 0 || $this->x45_codcorte === 0.0 || ($this->x45_codcorte === 0 || $this->x45_codcorte === 0.0 || $this->x45_codcorte == ""))?@$GLOBALS["HTTP_POST_VARS"]["x45_codcorte"]:$this->x45_codcorte);
+       $this->x45_codcortetipodebito = (($this->x45_codcortetipodebito === 0 || $this->x45_codcortetipodebito === 0.0 || ($this->x45_codcortetipodebito === 0 || $this->x45_codcortetipodebito === 0.0 || $this->x45_codcortetipodebito == ""))?@$GLOBALS["HTTP_POST_VARS"]["x45_codcortetipodebito"]:$this->x45_codcortetipodebito);
      }
    }
    // funcao para inclusao
@@ -185,7 +185,7 @@ class cl_aguacortetipodebito {
          $this->x45_codcortetipodebito = $x45_codcortetipodebito; 
        }
      }
-     if(($this->x45_codcortetipodebito == null) || ($this->x45_codcortetipodebito == "") ){ 
+     if(($this->x45_codcortetipodebito == null) || (($this->x45_codcortetipodebito === 0 || $this->x45_codcortetipodebito === 0.0 || ($this->x45_codcortetipodebito === 0 || $this->x45_codcortetipodebito === 0.0 || $this->x45_codcortetipodebito == ""))) ){ 
        $this->erro_sql = " Campo x45_codcortetipodebito nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -518,7 +518,7 @@ class cl_aguacortetipodebito {
    function sql_query ( $x45_codcortetipodebito=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_aguacortetipodebito {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -557,7 +557,7 @@ class cl_aguacortetipodebito {
    function sql_query_file ( $x45_codcortetipodebito=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -578,7 +578,7 @@ class cl_aguacortetipodebito {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

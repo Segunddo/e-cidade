@@ -61,7 +61,7 @@ class cl_agualeituracancela {
                  x47_motivo = text = Motivo Cancelamento 
                  ";
    //funcao construtor da classe 
-   function cl_agualeituracancela() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("agualeituracancela"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,9 +78,9 @@ class cl_agualeituracancela {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x47_sequencial = ($this->x47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_sequencial"]:$this->x47_sequencial);
-       $this->x47_agualeitura = ($this->x47_agualeitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_agualeitura"]:$this->x47_agualeitura);
-       $this->x47_usuario = ($this->x47_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_usuario"]:$this->x47_usuario);
+       $this->x47_sequencial = (($this->x47_sequencial === 0 || $this->x47_sequencial === 0.0 || ($this->x47_sequencial === 0 || $this->x47_sequencial === 0.0 || $this->x47_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["x47_sequencial"]:$this->x47_sequencial);
+       $this->x47_agualeitura = (($this->x47_agualeitura === 0 || $this->x47_agualeitura === 0.0 || ($this->x47_agualeitura === 0 || $this->x47_agualeitura === 0.0 || $this->x47_agualeitura == ""))?@$GLOBALS["HTTP_POST_VARS"]["x47_agualeitura"]:$this->x47_agualeitura);
+       $this->x47_usuario = (($this->x47_usuario === 0 || $this->x47_usuario === 0.0 || ($this->x47_usuario === 0 || $this->x47_usuario === 0.0 || $this->x47_usuario == ""))?@$GLOBALS["HTTP_POST_VARS"]["x47_usuario"]:$this->x47_usuario);
        if($this->x47_data == ""){
          $this->x47_data_dia = ($this->x47_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_data_dia"]:$this->x47_data_dia);
          $this->x47_data_mes = ($this->x47_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_data_mes"]:$this->x47_data_mes);
@@ -92,7 +92,7 @@ class cl_agualeituracancela {
        $this->x47_hora = ($this->x47_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_hora"]:$this->x47_hora);
        $this->x47_motivo = ($this->x47_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_motivo"]:$this->x47_motivo);
      }else{
-       $this->x47_sequencial = ($this->x47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_sequencial"]:$this->x47_sequencial);
+       $this->x47_sequencial = (($this->x47_sequencial === 0 || $this->x47_sequencial === 0.0 || ($this->x47_sequencial === 0 || $this->x47_sequencial === 0.0 || $this->x47_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["x47_sequencial"]:$this->x47_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_agualeituracancela {
          $this->x47_sequencial = $x47_sequencial; 
        }
      }
-     if(($this->x47_sequencial == null) || ($this->x47_sequencial == "") ){ 
+     if(($this->x47_sequencial == null) || (($this->x47_sequencial === 0 || $this->x47_sequencial === 0.0 || ($this->x47_sequencial === 0 || $this->x47_sequencial === 0.0 || $this->x47_sequencial == ""))) ){ 
        $this->erro_sql = " Campo x47_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -477,7 +477,7 @@ class cl_agualeituracancela {
    function sql_query ( $x47_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_agualeituracancela {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -517,7 +517,7 @@ class cl_agualeituracancela {
    function sql_query_file ( $x47_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_agualeituracancela {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

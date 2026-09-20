@@ -55,7 +55,7 @@ class cl_aguabasevenc {
                  x27_dtvenc = date = Vencimento 
                  ";
    //funcao construtor da classe 
-   function cl_aguabasevenc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguabasevenc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,8 +72,8 @@ class cl_aguabasevenc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x27_matric = ($this->x27_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_matric"]:$this->x27_matric);
-       $this->x27_parcela = ($this->x27_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_parcela"]:$this->x27_parcela);
+       $this->x27_matric = (($this->x27_matric === 0 || $this->x27_matric === 0.0 || ($this->x27_matric === 0 || $this->x27_matric === 0.0 || $this->x27_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["x27_matric"]:$this->x27_matric);
+       $this->x27_parcela = (($this->x27_parcela === 0 || $this->x27_parcela === 0.0 || ($this->x27_parcela === 0 || $this->x27_parcela === 0.0 || $this->x27_parcela == ""))?@$GLOBALS["HTTP_POST_VARS"]["x27_parcela"]:$this->x27_parcela);
        if($this->x27_dtvenc == ""){
          $this->x27_dtvenc_dia = ($this->x27_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_dtvenc_dia"]:$this->x27_dtvenc_dia);
          $this->x27_dtvenc_mes = ($this->x27_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_dtvenc_mes"]:$this->x27_dtvenc_mes);
@@ -83,8 +83,8 @@ class cl_aguabasevenc {
          }
        }
      }else{
-       $this->x27_matric = ($this->x27_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_matric"]:$this->x27_matric);
-       $this->x27_parcela = ($this->x27_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_parcela"]:$this->x27_parcela);
+       $this->x27_matric = (($this->x27_matric === 0 || $this->x27_matric === 0.0 || ($this->x27_matric === 0 || $this->x27_matric === 0.0 || $this->x27_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["x27_matric"]:$this->x27_matric);
+       $this->x27_parcela = (($this->x27_parcela === 0 || $this->x27_parcela === 0.0 || ($this->x27_parcela === 0 || $this->x27_parcela === 0.0 || $this->x27_parcela == ""))?@$GLOBALS["HTTP_POST_VARS"]["x27_parcela"]:$this->x27_parcela);
      }
    }
    // funcao para inclusao
@@ -101,7 +101,7 @@ class cl_aguabasevenc {
      }
        $this->x27_matric = $x27_matric; 
        $this->x27_parcela = $x27_parcela; 
-     if(($this->x27_matric == null) || ($this->x27_matric == "") ){ 
+     if(($this->x27_matric == null) || (($this->x27_matric === 0 || $this->x27_matric === 0.0 || ($this->x27_matric === 0 || $this->x27_matric === 0.0 || $this->x27_matric == ""))) ){ 
        $this->erro_sql = " Campo x27_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -109,7 +109,7 @@ class cl_aguabasevenc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x27_parcela == null) || ($this->x27_parcela == "") ){ 
+     if(($this->x27_parcela == null) || (($this->x27_parcela === 0 || $this->x27_parcela === 0.0 || ($this->x27_parcela === 0 || $this->x27_parcela === 0.0 || $this->x27_parcela == ""))) ){ 
        $this->erro_sql = " Campo x27_parcela nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -373,7 +373,7 @@ class cl_aguabasevenc {
    function sql_query ( $x27_matric=null,$x27_parcela=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_aguabasevenc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_aguabasevenc {
    function sql_query_file ( $x27_matric=null,$x27_parcela=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_aguabasevenc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

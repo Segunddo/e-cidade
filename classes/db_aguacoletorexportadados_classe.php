@@ -146,7 +146,7 @@ class cl_aguacoletorexportadados {
                  x50_avisoleiturista = text = Aviso Leiturista
                  ";
    //funcao construtor da classe
-   function cl_aguacoletorexportadados() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacoletorexportadados");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -163,31 +163,31 @@ class cl_aguacoletorexportadados {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x50_sequencial = ($this->x50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_sequencial"]:$this->x50_sequencial);
-       $this->x50_aguacoletorexportadados = ($this->x50_aguacoletorexportadados == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_aguacoletorexportadados"]:$this->x50_aguacoletorexportadados);
-       $this->x50_aguacoletorexporta = ($this->x50_aguacoletorexporta == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_aguacoletorexporta"]:$this->x50_aguacoletorexporta);
-       $this->x50_matric = ($this->x50_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_matric"]:$this->x50_matric);
-       $this->x50_rota = ($this->x50_rota == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_rota"]:$this->x50_rota);
-       $this->x50_tipo = ($this->x50_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_tipo"]:$this->x50_tipo);
-       $this->x50_codlogradouro = ($this->x50_codlogradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_codlogradouro"]:$this->x50_codlogradouro);
-       $this->x50_codbairro = ($this->x50_codbairro == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_codbairro"]:$this->x50_codbairro);
-       $this->x50_codhidrometro = ($this->x50_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_codhidrometro"]:$this->x50_codhidrometro);
-       $this->x50_zona = ($this->x50_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_zona"]:$this->x50_zona);
-       $this->x50_ordem = ($this->x50_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_ordem"]:$this->x50_ordem);
+       $this->x50_sequencial = (($this->x50_sequencial === 0 || $this->x50_sequencial === 0.0 || ($this->x50_sequencial === 0 || $this->x50_sequencial === 0.0 || $this->x50_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_sequencial"]:$this->x50_sequencial);
+       $this->x50_aguacoletorexportadados = (($this->x50_aguacoletorexportadados === 0 || $this->x50_aguacoletorexportadados === 0.0 || ($this->x50_aguacoletorexportadados === 0 || $this->x50_aguacoletorexportadados === 0.0 || $this->x50_aguacoletorexportadados == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_aguacoletorexportadados"]:$this->x50_aguacoletorexportadados);
+       $this->x50_aguacoletorexporta = (($this->x50_aguacoletorexporta === 0 || $this->x50_aguacoletorexporta === 0.0 || ($this->x50_aguacoletorexporta === 0 || $this->x50_aguacoletorexporta === 0.0 || $this->x50_aguacoletorexporta == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_aguacoletorexporta"]:$this->x50_aguacoletorexporta);
+       $this->x50_matric = (($this->x50_matric === 0 || $this->x50_matric === 0.0 || ($this->x50_matric === 0 || $this->x50_matric === 0.0 || $this->x50_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_matric"]:$this->x50_matric);
+       $this->x50_rota = (($this->x50_rota === 0 || $this->x50_rota === 0.0 || ($this->x50_rota === 0 || $this->x50_rota === 0.0 || $this->x50_rota == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_rota"]:$this->x50_rota);
+       $this->x50_tipo = (($this->x50_tipo === 0 || $this->x50_tipo === 0.0 || ($this->x50_tipo === 0 || $this->x50_tipo === 0.0 || $this->x50_tipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_tipo"]:$this->x50_tipo);
+       $this->x50_codlogradouro = (($this->x50_codlogradouro === 0 || $this->x50_codlogradouro === 0.0 || ($this->x50_codlogradouro === 0 || $this->x50_codlogradouro === 0.0 || $this->x50_codlogradouro == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_codlogradouro"]:$this->x50_codlogradouro);
+       $this->x50_codbairro = (($this->x50_codbairro === 0 || $this->x50_codbairro === 0.0 || ($this->x50_codbairro === 0 || $this->x50_codbairro === 0.0 || $this->x50_codbairro == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_codbairro"]:$this->x50_codbairro);
+       $this->x50_codhidrometro = (($this->x50_codhidrometro === 0 || $this->x50_codhidrometro === 0.0 || ($this->x50_codhidrometro === 0 || $this->x50_codhidrometro === 0.0 || $this->x50_codhidrometro == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_codhidrometro"]:$this->x50_codhidrometro);
+       $this->x50_zona = (($this->x50_zona === 0 || $this->x50_zona === 0.0 || ($this->x50_zona === 0 || $this->x50_zona === 0.0 || $this->x50_zona == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_zona"]:$this->x50_zona);
+       $this->x50_ordem = (($this->x50_ordem === 0 || $this->x50_ordem === 0.0 || ($this->x50_ordem === 0 || $this->x50_ordem === 0.0 || $this->x50_ordem == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_ordem"]:$this->x50_ordem);
        $this->x50_responsavel = ($this->x50_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_responsavel"]:$this->x50_responsavel);
        $this->x50_nomelogradouro = ($this->x50_nomelogradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_nomelogradouro"]:$this->x50_nomelogradouro);
-       $this->x50_numero = ($this->x50_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_numero"]:$this->x50_numero);
+       $this->x50_numero = (($this->x50_numero === 0 || $this->x50_numero === 0.0 || ($this->x50_numero === 0 || $this->x50_numero === 0.0 || $this->x50_numero == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_numero"]:$this->x50_numero);
        $this->x50_letra = ($this->x50_letra == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_letra"]:$this->x50_letra);
        $this->x50_complemento = ($this->x50_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_complemento"]:$this->x50_complemento);
        $this->x50_nomebairro = ($this->x50_nomebairro == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_nomebairro"]:$this->x50_nomebairro);
        $this->x50_cidade = ($this->x50_cidade == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_cidade"]:$this->x50_cidade);
        $this->x50_estado = ($this->x50_estado == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_estado"]:$this->x50_estado);
-       $this->x50_quadra = ($this->x50_quadra == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_quadra"]:$this->x50_quadra);
-       $this->x50_economias = ($this->x50_economias == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_economias"]:$this->x50_economias);
+       $this->x50_quadra = (($this->x50_quadra === 0 || $this->x50_quadra === 0.0 || ($this->x50_quadra === 0 || $this->x50_quadra === 0.0 || $this->x50_quadra == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_quadra"]:$this->x50_quadra);
+       $this->x50_economias = (($this->x50_economias === 0 || $this->x50_economias === 0.0 || ($this->x50_economias === 0 || $this->x50_economias === 0.0 || $this->x50_economias == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_economias"]:$this->x50_economias);
        $this->x50_categorias = ($this->x50_categorias == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_categorias"]:$this->x50_categorias);
-       $this->x50_areaconstruida = ($this->x50_areaconstruida == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_areaconstruida"]:$this->x50_areaconstruida);
+       $this->x50_areaconstruida = (($this->x50_areaconstruida === 0 || $this->x50_areaconstruida === 0.0 || ($this->x50_areaconstruida === 0 || $this->x50_areaconstruida === 0.0 || $this->x50_areaconstruida == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_areaconstruida"]:$this->x50_areaconstruida);
        $this->x50_nrohidro = ($this->x50_nrohidro == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_nrohidro"]:$this->x50_nrohidro);
-       $this->x50_numpre = ($this->x50_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_numpre"]:$this->x50_numpre);
+       $this->x50_numpre = (($this->x50_numpre === 0 || $this->x50_numpre === 0.0 || ($this->x50_numpre === 0 || $this->x50_numpre === 0.0 || $this->x50_numpre == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_numpre"]:$this->x50_numpre);
        $this->x50_natureza = ($this->x50_natureza == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_natureza"]:$this->x50_natureza);
        if($this->x50_dtleituraatual == ""){
          $this->x50_dtleituraatual_dia = ($this->x50_dtleituraatual_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_dtleituraatual_dia"]:$this->x50_dtleituraatual_dia);
@@ -197,7 +197,7 @@ class cl_aguacoletorexportadados {
             $this->x50_dtleituraatual = $this->x50_dtleituraatual_ano."-".$this->x50_dtleituraatual_mes."-".$this->x50_dtleituraatual_dia;
          }
        }
-       $this->x50_diasleitura = ($this->x50_diasleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_diasleitura"]:$this->x50_diasleitura);
+       $this->x50_diasleitura = (($this->x50_diasleitura === 0 || $this->x50_diasleitura === 0.0 || ($this->x50_diasleitura === 0 || $this->x50_diasleitura === 0.0 || $this->x50_diasleitura == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_diasleitura"]:$this->x50_diasleitura);
        if($this->x50_dtleituraanterior == ""){
          $this->x50_dtleituraanterior_dia = ($this->x50_dtleituraanterior_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_dtleituraanterior_dia"]:$this->x50_dtleituraanterior_dia);
          $this->x50_dtleituraanterior_mes = ($this->x50_dtleituraanterior_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_dtleituraanterior_mes"]:$this->x50_dtleituraanterior_mes);
@@ -206,10 +206,10 @@ class cl_aguacoletorexportadados {
             $this->x50_dtleituraanterior = $this->x50_dtleituraanterior_ano."-".$this->x50_dtleituraanterior_mes."-".$this->x50_dtleituraanterior_dia;
          }
        }
-       $this->x50_consumo = ($this->x50_consumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_consumo"]:$this->x50_consumo);
-       $this->x50_mediadiaria = ($this->x50_mediadiaria == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_mediadiaria"]:$this->x50_mediadiaria);
-       $this->x50_consumopadrao = ($this->x50_consumopadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_consumopadrao"]:$this->x50_consumopadrao);
-       $this->x50_consumomaximo = ($this->x50_consumomaximo == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_consumomaximo"]:$this->x50_consumomaximo);
+       $this->x50_consumo = (($this->x50_consumo === 0 || $this->x50_consumo === 0.0 || ($this->x50_consumo === 0 || $this->x50_consumo === 0.0 || $this->x50_consumo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_consumo"]:$this->x50_consumo);
+       $this->x50_mediadiaria = (($this->x50_mediadiaria === 0 || $this->x50_mediadiaria === 0.0 || ($this->x50_mediadiaria === 0 || $this->x50_mediadiaria === 0.0 || $this->x50_mediadiaria == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_mediadiaria"]:$this->x50_mediadiaria);
+       $this->x50_consumopadrao = (($this->x50_consumopadrao === 0 || $this->x50_consumopadrao === 0.0 || ($this->x50_consumopadrao === 0 || $this->x50_consumopadrao === 0.0 || $this->x50_consumopadrao == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_consumopadrao"]:$this->x50_consumopadrao);
+       $this->x50_consumomaximo = (($this->x50_consumomaximo === 0 || $this->x50_consumomaximo === 0.0 || ($this->x50_consumomaximo === 0 || $this->x50_consumomaximo === 0.0 || $this->x50_consumomaximo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_consumomaximo"]:$this->x50_consumomaximo);
        if($this->x50_vencimento == ""){
          $this->x50_vencimento_dia = ($this->x50_vencimento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_vencimento_dia"]:$this->x50_vencimento_dia);
          $this->x50_vencimento_mes = ($this->x50_vencimento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_vencimento_mes"]:$this->x50_vencimento_mes);
@@ -218,20 +218,20 @@ class cl_aguacoletorexportadados {
             $this->x50_vencimento = $this->x50_vencimento_ano."-".$this->x50_vencimento_mes."-".$this->x50_vencimento_dia;
          }
        }
-       $this->x50_valoracrescimo = ($this->x50_valoracrescimo == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_valoracrescimo"]:$this->x50_valoracrescimo);
-       $this->x50_valordesconto = ($this->x50_valordesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_valordesconto"]:$this->x50_valordesconto);
-       $this->x50_valortotal = ($this->x50_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_valortotal"]:$this->x50_valortotal);
+       $this->x50_valoracrescimo = (($this->x50_valoracrescimo === 0 || $this->x50_valoracrescimo === 0.0 || ($this->x50_valoracrescimo === 0 || $this->x50_valoracrescimo === 0.0 || $this->x50_valoracrescimo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_valoracrescimo"]:$this->x50_valoracrescimo);
+       $this->x50_valordesconto = (($this->x50_valordesconto === 0 || $this->x50_valordesconto === 0.0 || ($this->x50_valordesconto === 0 || $this->x50_valordesconto === 0.0 || $this->x50_valordesconto == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_valordesconto"]:$this->x50_valordesconto);
+       $this->x50_valortotal = (($this->x50_valortotal === 0 || $this->x50_valortotal === 0.0 || ($this->x50_valortotal === 0 || $this->x50_valortotal === 0.0 || $this->x50_valortotal == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_valortotal"]:$this->x50_valortotal);
        $this->x50_linhadigitavel = ($this->x50_linhadigitavel == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_linhadigitavel"]:$this->x50_linhadigitavel);
        $this->x50_codigobarras = ($this->x50_codigobarras == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_codigobarras"]:$this->x50_codigobarras);
-       $this->x50_imprimeconta = ($this->x50_imprimeconta == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_imprimeconta"]:$this->x50_imprimeconta);
-       $this->x50_valor_m3_excesso = ($this->x50_valor_m3_excesso == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_valor_m3_excesso"]:$this->x50_valor_m3_excesso);
-       $this->x50_leituracoletada = ($this->x50_leituracoletada == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_leituracoletada"]:$this->x50_leituracoletada);
+       $this->x50_imprimeconta = (($this->x50_imprimeconta === 0 || $this->x50_imprimeconta === 0.0 || ($this->x50_imprimeconta === 0 || $this->x50_imprimeconta === 0.0 || $this->x50_imprimeconta == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_imprimeconta"]:$this->x50_imprimeconta);
+       $this->x50_valor_m3_excesso = (($this->x50_valor_m3_excesso === 0 || $this->x50_valor_m3_excesso === 0.0 || ($this->x50_valor_m3_excesso === 0 || $this->x50_valor_m3_excesso === 0.0 || $this->x50_valor_m3_excesso == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_valor_m3_excesso"]:$this->x50_valor_m3_excesso);
+       $this->x50_leituracoletada = (($this->x50_leituracoletada === 0 || $this->x50_leituracoletada === 0.0 || ($this->x50_leituracoletada === 0 || $this->x50_leituracoletada === 0.0 || $this->x50_leituracoletada == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_leituracoletada"]:$this->x50_leituracoletada);
        $this->x50_observacao = ($this->x50_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_observacao"]:$this->x50_observacao);
-       $this->x50_contaimpressa = ($this->x50_contaimpressa == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_contaimpressa"]:$this->x50_contaimpressa);
+       $this->x50_contaimpressa = (($this->x50_contaimpressa === 0 || $this->x50_contaimpressa === 0.0 || ($this->x50_contaimpressa === 0 || $this->x50_contaimpressa === 0.0 || $this->x50_contaimpressa == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_contaimpressa"]:$this->x50_contaimpressa);
        $this->x50_avisoleiturista = ($this->x50_avisoleiturista == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_avisoleiturista"]:$this->x50_avisoleiturista);
 
      }else{
-       $this->x50_sequencial = ($this->x50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x50_sequencial"]:$this->x50_sequencial);
+       $this->x50_sequencial = (($this->x50_sequencial === 0 || $this->x50_sequencial === 0.0 || ($this->x50_sequencial === 0 || $this->x50_sequencial === 0.0 || $this->x50_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["x50_sequencial"]:$this->x50_sequencial);
      }
    }
    // funcao para inclusao
@@ -387,7 +387,7 @@ class cl_aguacoletorexportadados {
          $this->x50_sequencial = $x50_sequencial;
        }
      }
-     if(($this->x50_sequencial == null) || ($this->x50_sequencial == "") ){
+     if(($this->x50_sequencial == null) || (($this->x50_sequencial === 0 || $this->x50_sequencial === 0.0 || ($this->x50_sequencial === 0 || $this->x50_sequencial === 0.0 || $this->x50_sequencial == ""))) ){
        $this->erro_sql = " Campo x50_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -1162,7 +1162,7 @@ class cl_aguacoletorexportadados {
    function sql_query ( $x50_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1209,7 +1209,7 @@ class cl_aguacoletorexportadados {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1222,7 +1222,7 @@ class cl_aguacoletorexportadados {
    function sql_query_file ( $x50_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1243,7 +1243,7 @@ class cl_aguacoletorexportadados {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1352,7 +1352,7 @@ class cl_aguacoletorexportadados {
 	function sql_query_dados ( $x50_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
 		$sql = "select ";
 		if($campos != "*" ){
-			$campos_sql = split("#",$campos);
+			$campos_sql = explode("#",$campos);
 			$virgula = "";
 			for($i=0;$i<sizeof($campos_sql);$i++){
 				$sql .= $virgula.$campos_sql[$i];
@@ -1389,7 +1389,7 @@ class cl_aguacoletorexportadados {
 		$sql .= $sql2;
 		if($ordem != null ){
 			$sql .= " order by ";
-			$campos_sql = split("#",$ordem);
+			$campos_sql = explode("#",$ordem);
 			$virgula = "";
 			for($i=0;$i<sizeof($campos_sql);$i++){
 				$sql .= $virgula.$campos_sql[$i];

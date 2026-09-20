@@ -50,7 +50,7 @@ class cl_aguahidrodiametro {
                  x15_diametro = varchar(10) = Diâmetro 
                  ";
    //funcao construtor da classe 
-   function cl_aguahidrodiametro() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguahidrodiametro"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_aguahidrodiametro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x15_coddiametro = ($this->x15_coddiametro == ""?@$GLOBALS["HTTP_POST_VARS"]["x15_coddiametro"]:$this->x15_coddiametro);
+       $this->x15_coddiametro = (($this->x15_coddiametro === 0 || $this->x15_coddiametro === 0.0 || ($this->x15_coddiametro === 0 || $this->x15_coddiametro === 0.0 || $this->x15_coddiametro == ""))?@$GLOBALS["HTTP_POST_VARS"]["x15_coddiametro"]:$this->x15_coddiametro);
        $this->x15_diametro = ($this->x15_diametro == ""?@$GLOBALS["HTTP_POST_VARS"]["x15_diametro"]:$this->x15_diametro);
      }else{
-       $this->x15_coddiametro = ($this->x15_coddiametro == ""?@$GLOBALS["HTTP_POST_VARS"]["x15_coddiametro"]:$this->x15_coddiametro);
+       $this->x15_coddiametro = (($this->x15_coddiametro === 0 || $this->x15_coddiametro === 0.0 || ($this->x15_coddiametro === 0 || $this->x15_coddiametro === 0.0 || $this->x15_coddiametro == ""))?@$GLOBALS["HTTP_POST_VARS"]["x15_coddiametro"]:$this->x15_coddiametro);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_aguahidrodiametro {
          $this->x15_coddiametro = $x15_coddiametro; 
        }
      }
-     if(($this->x15_coddiametro == null) || ($this->x15_coddiametro == "") ){ 
+     if(($this->x15_coddiametro == null) || (($this->x15_coddiametro === 0 || $this->x15_coddiametro === 0.0 || ($this->x15_coddiametro === 0 || $this->x15_coddiametro === 0.0 || $this->x15_coddiametro == ""))) ){ 
        $this->erro_sql = " Campo x15_coddiametro nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_aguahidrodiametro {
    function sql_query ( $x15_coddiametro=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_aguahidrodiametro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_aguahidrodiametro {
    function sql_query_file ( $x15_coddiametro=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_aguahidrodiametro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

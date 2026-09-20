@@ -36,8 +36,8 @@ class libparagrafo {
   var $oParag         = null;
   var $aParametros    = array();
 
-  //function libparagrafo( $oParag, $aParametros ) {
-  function libparagrafo( $oParag ) {
+  //function __construct( $oParag, $aParametros ) {
+  function __construct( $oParag ) {
 
     $this->oParag      = $oParag;
 //    $this->aParametros = $aParametros;

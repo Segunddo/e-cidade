@@ -73,7 +73,7 @@ class cl_aguacortematnumpre {
                  x44_receit = int4 = Receita 
                  ";
    //funcao construtor da classe 
-   function cl_aguacortematnumpre() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacortematnumpre"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,10 +90,10 @@ class cl_aguacortematnumpre {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x44_codcortematnumpre = ($this->x44_codcortematnumpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_codcortematnumpre"]:$this->x44_codcortematnumpre);
-       $this->x44_codcortemat = ($this->x44_codcortemat == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_codcortemat"]:$this->x44_codcortemat);
-       $this->x44_numpre = ($this->x44_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_numpre"]:$this->x44_numpre);
-       $this->x44_numpar = ($this->x44_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_numpar"]:$this->x44_numpar);
+       $this->x44_codcortematnumpre = (($this->x44_codcortematnumpre === 0 || $this->x44_codcortematnumpre === 0.0 || ($this->x44_codcortematnumpre === 0 || $this->x44_codcortematnumpre === 0.0 || $this->x44_codcortematnumpre == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_codcortematnumpre"]:$this->x44_codcortematnumpre);
+       $this->x44_codcortemat = (($this->x44_codcortemat === 0 || $this->x44_codcortemat === 0.0 || ($this->x44_codcortemat === 0 || $this->x44_codcortemat === 0.0 || $this->x44_codcortemat == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_codcortemat"]:$this->x44_codcortemat);
+       $this->x44_numpre = (($this->x44_numpre === 0 || $this->x44_numpre === 0.0 || ($this->x44_numpre === 0 || $this->x44_numpre === 0.0 || $this->x44_numpre == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_numpre"]:$this->x44_numpre);
+       $this->x44_numpar = (($this->x44_numpar === 0 || $this->x44_numpar === 0.0 || ($this->x44_numpar === 0 || $this->x44_numpar === 0.0 || $this->x44_numpar == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_numpar"]:$this->x44_numpar);
        if($this->x44_dtvenc == ""){
          $this->x44_dtvenc_dia = ($this->x44_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_dtvenc_dia"]:$this->x44_dtvenc_dia);
          $this->x44_dtvenc_mes = ($this->x44_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_dtvenc_mes"]:$this->x44_dtvenc_mes);
@@ -102,16 +102,16 @@ class cl_aguacortematnumpre {
             $this->x44_dtvenc = $this->x44_dtvenc_ano."-".$this->x44_dtvenc_mes."-".$this->x44_dtvenc_dia;
          }
        }
-       $this->x44_tipo = ($this->x44_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_tipo"]:$this->x44_tipo);
-       $this->x44_vlrhis = ($this->x44_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_vlrhis"]:$this->x44_vlrhis);
-       $this->x44_vlrcor = ($this->x44_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_vlrcor"]:$this->x44_vlrcor);
-       $this->x44_juros = ($this->x44_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_juros"]:$this->x44_juros);
-       $this->x44_multa = ($this->x44_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_multa"]:$this->x44_multa);
-       $this->x44_desconto = ($this->x44_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_desconto"]:$this->x44_desconto);
-       $this->x44_receit = ($this->x44_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_receit"]:$this->x44_receit);
+       $this->x44_tipo = (($this->x44_tipo === 0 || $this->x44_tipo === 0.0 || ($this->x44_tipo === 0 || $this->x44_tipo === 0.0 || $this->x44_tipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_tipo"]:$this->x44_tipo);
+       $this->x44_vlrhis = (($this->x44_vlrhis === 0 || $this->x44_vlrhis === 0.0 || ($this->x44_vlrhis === 0 || $this->x44_vlrhis === 0.0 || $this->x44_vlrhis == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_vlrhis"]:$this->x44_vlrhis);
+       $this->x44_vlrcor = (($this->x44_vlrcor === 0 || $this->x44_vlrcor === 0.0 || ($this->x44_vlrcor === 0 || $this->x44_vlrcor === 0.0 || $this->x44_vlrcor == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_vlrcor"]:$this->x44_vlrcor);
+       $this->x44_juros = (($this->x44_juros === 0 || $this->x44_juros === 0.0 || ($this->x44_juros === 0 || $this->x44_juros === 0.0 || $this->x44_juros == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_juros"]:$this->x44_juros);
+       $this->x44_multa = (($this->x44_multa === 0 || $this->x44_multa === 0.0 || ($this->x44_multa === 0 || $this->x44_multa === 0.0 || $this->x44_multa == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_multa"]:$this->x44_multa);
+       $this->x44_desconto = (($this->x44_desconto === 0 || $this->x44_desconto === 0.0 || ($this->x44_desconto === 0 || $this->x44_desconto === 0.0 || $this->x44_desconto == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_desconto"]:$this->x44_desconto);
+       $this->x44_receit = (($this->x44_receit === 0 || $this->x44_receit === 0.0 || ($this->x44_receit === 0 || $this->x44_receit === 0.0 || $this->x44_receit == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_receit"]:$this->x44_receit);
      }else{
-       $this->x44_codcortematnumpre = ($this->x44_codcortematnumpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_codcortematnumpre"]:$this->x44_codcortematnumpre);
-       $this->x44_codcortemat = ($this->x44_codcortemat == ""?@$GLOBALS["HTTP_POST_VARS"]["x44_codcortemat"]:$this->x44_codcortemat);
+       $this->x44_codcortematnumpre = (($this->x44_codcortematnumpre === 0 || $this->x44_codcortematnumpre === 0.0 || ($this->x44_codcortematnumpre === 0 || $this->x44_codcortematnumpre === 0.0 || $this->x44_codcortematnumpre == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_codcortematnumpre"]:$this->x44_codcortematnumpre);
+       $this->x44_codcortemat = (($this->x44_codcortemat === 0 || $this->x44_codcortemat === 0.0 || ($this->x44_codcortemat === 0 || $this->x44_codcortemat === 0.0 || $this->x44_codcortemat == ""))?@$GLOBALS["HTTP_POST_VARS"]["x44_codcortemat"]:$this->x44_codcortemat);
      }
    }
    // funcao para inclusao
@@ -231,7 +231,7 @@ class cl_aguacortematnumpre {
          $this->x44_codcortematnumpre = $x44_codcortematnumpre; 
        }
      }
-     if(($this->x44_codcortematnumpre == null) || ($this->x44_codcortematnumpre == "") ){ 
+     if(($this->x44_codcortematnumpre == null) || (($this->x44_codcortematnumpre === 0 || $this->x44_codcortematnumpre === 0.0 || ($this->x44_codcortematnumpre === 0 || $this->x44_codcortematnumpre === 0.0 || $this->x44_codcortematnumpre == ""))) ){ 
        $this->erro_sql = " Campo x44_codcortematnumpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -654,7 +654,7 @@ class cl_aguacortematnumpre {
    function sql_query ( $x44_codcortematnumpre=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -682,7 +682,7 @@ class cl_aguacortematnumpre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -694,7 +694,7 @@ class cl_aguacortematnumpre {
    function sql_query_file ( $x44_codcortematnumpre=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -715,7 +715,7 @@ class cl_aguacortematnumpre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

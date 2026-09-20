@@ -266,7 +266,7 @@ class db_impcarne extends cl_assinatura {
   var $cnpj             = null;         // cpf ou cnpj do credor
 
 /// variaveis para a nota de empenho
-  function db_impcarne($objpdf){
+  function __construct($objpdf){
     $this->objpdf = $objpdf;
 
 

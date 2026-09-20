@@ -69,7 +69,7 @@ $sSql = "
 
 $result = db_query($sSql);
 
-if(pg_numrows($result) == 0) {
+if(($result ? pg_numrows($result) : 0) == 0) {
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
   exit;
 }
@@ -87,7 +87,7 @@ $sSql2   = "select j31_descr from caracter where j31_codigo in ($oGet->lista)";
 $result2 = db_query($sSql2);
 
 $head2 = "";
-for($h = 0; $h < pg_numrows($result2); $h++) {
+for($h = 0; $h < ($result2 ? pg_numrows($result2) : 0); $h++) {
   if($h > 7) {
     continue;
   }
@@ -104,7 +104,7 @@ $troca = 1;
 $alt   = 4;
 $total = 0;
 
-for($i = 0; $i < pg_numrows($result); $i++) {
+for($i = 0; $i < ($result ? pg_numrows($result) : 0); $i++) {
   $objResult = db_utils::fieldsMemory($result, $i);
   
   if ($oPdf->gety() > $oPdf->h - 30 || $troca != 0 ){
