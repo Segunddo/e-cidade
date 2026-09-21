@@ -1707,7 +1707,43 @@ parâmetros (o corpo os usa) e herda os parâmetros extras opcionais.
 manipulados por handle, então remover o `&` é equivalente.
 
 Como não são detectáveis por grep, a forma de medi-las na base inteira é rodar
-`php -l` sob PHP 8.5 em todos os arquivos — medição ainda não feita.
+`php -l` sob PHP 8.5 em todos os arquivos.
+
+### ✅ MEDIÇÃO FEITA: `php -l` nos dois runtimes, na base inteira
+
+**33.057 arquivos PHP** (excluindo `vendor/`, `node_modules/`, `.git`), com `</dev/null` para
+o `php` não engolir a lista:
+
+| | Arquivos com erro de sintaxe |
+|---|---|
+| PHP 5.6 | 101 (pré-existentes) |
+| PHP 8.5 | 187 |
+| **Só quebram no 8.5** | **87 — 0,26% da base** |
+
+Distribuição: raiz **51**, `dbagata/` 10, `app/` 5, `src/` 4, `fpdf151/` 4, `model/` 3,
+`libs/` 3, demais 7. Apenas **2** são da área Tributário ainda não portada.
+
+Causas:
+
+| Causa | Arquivos |
+|---|---|
+| `unexpected token "{"` — offset de string com chaves | 26 |
+| `Invalid numeric literal` — octal inválido (`08`, `09`) | 6 |
+| `unexpected token ";"` / `"["` | 9 |
+| nome totalmente qualificado / `namespace` inesperado | 6 |
+| **`Unparenthesized a ? b : c ? d : e`** — associatividade removida no PHP 8.0 | 3 |
+| **`The (real) cast has been removed`** — PHP 8.0 | 1 |
+| `Unterminated comment` | 1 |
+| demais | 35 |
+
+**Este número é o argumento central do trabalho, em uma linha.** A incompatibilidade que uma
+ferramenta de sintaxe encontra na base inteira são **87 arquivos**. As categorias que
+realmente custam — `0 == ""` (19.401 ocorrências), construtores PHP 4 (3.587 classes),
+`sizeof(null)`, comparação de ordem com string — **não aparecem em nenhuma delas**. Um
+`php -l` limpo em 100% da base não diria nada sobre o sistema calcular tributo errado.
+
+Duas categorias novas apareceram só aqui, ambas fatais de compilação no PHP 8.0 e invisíveis
+ao grep: **ternário aninhado sem parênteses** (`a ? b : c ? d : e`) e **cast `(real)`**.
 
 ### Decisões de porte tomadas (e o porquê)
 
