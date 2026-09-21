@@ -1331,6 +1331,29 @@ Com `itbi` vazia, qualquer guia informada cai nesse ramo. O `:8080` e o `:8085` 
 `pg_*`, que o 5.6 tolerava e o PHP 8 rejeita com `TypeError`. Foi a causa das 8 telas do
 Cemitério que quebravam só no 8.5, e das guardas que fomos acrescentando ao núcleo.
 
+**Variante: a tabela com UMA linha, e ela é justamente o valor óbvio de teste.** Terceiro
+alarme falso vindo dos dados deste banco. Em *Jurídico → Advogados → Inclusão*, a inclusão
+recusa o CGM 1 dizendo que já existe. Está correto: `advog` tem **uma única linha**, e é o
+CGM 1. A tabela tem `PRIMARY KEY (v57_numcgm)` e `FOREIGN KEY → cgm(z01_numcgm)` — a FK é por
+que só se aceita CGM existente, e a PK é por que o 1 é recusado. O banco inteiro tem **3 CGMs**
+(1 ocupado, 19 e 20 livres), então o valor mais natural de testar é exatamente o que falha.
+
+A mensagem nem vem do PHP: é a violação de unicidade do PostgreSQL, repassada por
+`erro_banco`. Comprovável sem alterar dado, com transação revertida:
+
+```sql
+BEGIN;
+INSERT INTO advog VALUES (19,'OAB123','M1');   -- INSERT 0 1        (aceito)
+SAVEPOINT s1;
+INSERT INTO advog VALUES (1,'OAB999','M2');    -- viola advog_numc_pk
+ROLLBACK TO s1; ROLLBACK;
+```
+
+**Limite da bateria de comparação, que isto expõe:** ela faz só `GET`. Caminhos de escrita —
+inclusão, alteração, exclusão — **não são exercitados**, então 144/145 telas idênticas não
+dizem nada sobre o `incluir()` das classes. É por isso que estes casos aparecem quando o
+usuário navega, e não nas verificações automatizadas.
+
 **Como distinguir, em um passo:** reproduzir a mesma tela no `:8080`.
 
 | Resultado | Conclusão |
