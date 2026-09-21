@@ -50,7 +50,7 @@ class cl_vistorianumpre {
                  y69_numpre = int4 = Numpre da Vistoria 
                  ";
    //funcao construtor da classe 
-   function cl_vistorianumpre() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vistorianumpre"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_vistorianumpre {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y69_codvist = ($this->y69_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y69_codvist"]:$this->y69_codvist);
-       $this->y69_numpre = ($this->y69_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["y69_numpre"]:$this->y69_numpre);
+       $this->y69_codvist = (($this->y69_codvist === 0 || $this->y69_codvist === 0.0 || $this->y69_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y69_codvist"]:$this->y69_codvist);
+       $this->y69_numpre = (($this->y69_numpre === 0 || $this->y69_numpre === 0.0 || $this->y69_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["y69_numpre"]:$this->y69_numpre);
      }else{
-       $this->y69_codvist = ($this->y69_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y69_codvist"]:$this->y69_codvist);
+       $this->y69_codvist = (($this->y69_codvist === 0 || $this->y69_codvist === 0.0 || $this->y69_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y69_codvist"]:$this->y69_codvist);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_vistorianumpre {
        return false;
      }
        $this->y69_codvist = $y69_codvist; 
-     if(($this->y69_codvist == null) || ($this->y69_codvist == "") ){ 
+     if(($this->y69_codvist == null) || (($this->y69_codvist === 0 || $this->y69_codvist === 0.0 || $this->y69_codvist == "")) ){ 
        $this->erro_sql = " Campo y69_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_vistorianumpre {
    function sql_query ( $y69_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -331,7 +331,7 @@ class cl_vistorianumpre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -343,7 +343,7 @@ class cl_vistorianumpre {
    function sql_query_file ( $y69_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_vistorianumpre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

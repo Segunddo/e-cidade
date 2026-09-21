@@ -63,12 +63,12 @@ if (isset($cancelar)&&isset($chaves)&&$chaves!=""){
   $numpar     = "";
   $receita    = "";
   $vir        = "";
-  $info       = split('#',$chaves);
+  $info       = explode('#',$chaves);
   db_inicio_transacao();
   $aDebitos = array();
   for ( $w=0; $w < count($info); $w++ ) {
   	
-    $dados          = split('-',$info[$w]);
+    $dados          = explode('-',$info[$w]);
     $numpre         = $dados[0];
     $numpar         = $dados[1];
     $receita        = $dados[2];

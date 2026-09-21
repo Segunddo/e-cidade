@@ -49,7 +49,7 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("q177_setorfiscal");
 $clrotulo->label("q02_protocolojuntacomercial");
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 
 if(isset($cpfCnpj)){
     $cpfCnpj = trim(stripslashes($cpfCnpj));

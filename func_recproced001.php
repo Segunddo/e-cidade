@@ -47,8 +47,8 @@ if(isset($cod_k02_codigo) && trim($cod_k02_codigo)!="" && isset($cod_v03_codigo)
 //die($clarrecad->sql_query_file(null,"*",null," k00_tipo=1 limit 100"));
   $result_pesq_divida = $clarrecad->sql_record($clarrecad->sql_query_file(null,"*",null," k00_tipo=1 limit 100"));
   $numrows = $clarrecad->numrows;
-  $codigo_k02 = split(",",$cod_k02_codigo);
-  $codigo_v03 = split(",",$cod_v03_codigo);
+  $codigo_k02 = explode(",",$cod_k02_codigo);
+  $codigo_v03 = explode(",",$cod_v03_codigo);
   $sqlerro=false;
   db_inicio_transacao();
   for($i=0;$i<$numrows;$i++){
@@ -72,10 +72,10 @@ if(isset($cod_k02_codigo) && trim($cod_k02_codigo)!="" && isset($cod_v03_codigo)
 	$cldivida->v01_obs     =  "";
 	$cldivida->v01_livro   =  "";
 	$cldivida->v01_folha   =  "";
-	$dt_venc=split("/",$k00_dtvenc);
+	$dt_venc=explode("/",$k00_dtvenc);
 	$dt_venc_data = $dt_venc[2]."-".$dt_venc[1]."-".$dt_venc[0];
 	$cldivida->v01_dtvenc  = $dt_venc_data;
-	$dt_oper=split("/",$k00_dtoper);
+	$dt_oper=explode("/",$k00_dtoper);
 	$dt_oper_data = $dt_oper[2]."-".$dt_oper[1]."-".$dt_oper[0];
 	$cldivida->v01_dtoper  = $dt_oper_data;
 	$cldivida->v01_valor   = $k00_valor;

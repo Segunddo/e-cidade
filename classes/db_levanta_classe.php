@@ -73,7 +73,7 @@ class cl_levanta {
                  y60_espontaneo = bool = Levantamento Espontâneo
                  ";
    //funcao construtor da classe
-   function cl_levanta() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("levanta");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,7 +90,7 @@ class cl_levanta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y60_codlev = ($this->y60_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_codlev"]:$this->y60_codlev);
+       $this->y60_codlev = (($this->y60_codlev === 0 || $this->y60_codlev === 0.0 || $this->y60_codlev == "")?@$GLOBALS["HTTP_POST_VARS"]["y60_codlev"]:$this->y60_codlev);
        if($this->y60_data == ""){
          $this->y60_data_dia = ($this->y60_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_data_dia"]:$this->y60_data_dia);
          $this->y60_data_mes = ($this->y60_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_data_mes"]:$this->y60_data_mes);
@@ -118,10 +118,10 @@ class cl_levanta {
        }
        $this->y60_obs = ($this->y60_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_obs"]:$this->y60_obs);
        $this->y60_importado = ($this->y60_importado == "f"?@$GLOBALS["HTTP_POST_VARS"]["y60_importado"]:$this->y60_importado);
-       $this->y60_proces = ($this->y60_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_proces"]:$this->y60_proces);
+       $this->y60_proces = (($this->y60_proces === 0 || $this->y60_proces === 0.0 || $this->y60_proces == "")?@$GLOBALS["HTTP_POST_VARS"]["y60_proces"]:$this->y60_proces);
        $this->y60_espontaneo = ($this->y60_espontaneo == "f"?@$GLOBALS["HTTP_POST_VARS"]["y60_espontaneo"]:$this->y60_espontaneo);
      }else{
-       $this->y60_codlev = ($this->y60_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_codlev"]:$this->y60_codlev);
+       $this->y60_codlev = (($this->y60_codlev === 0 || $this->y60_codlev === 0.0 || $this->y60_codlev == "")?@$GLOBALS["HTTP_POST_VARS"]["y60_codlev"]:$this->y60_codlev);
      }
    }
    // funcao para inclusao
@@ -202,7 +202,7 @@ class cl_levanta {
          $this->y60_codlev = $y60_codlev;
        }
      }
-     if(($this->y60_codlev == null) || ($this->y60_codlev == "") ){
+     if(($this->y60_codlev == null) || (($this->y60_codlev === 0 || $this->y60_codlev === 0.0 || $this->y60_codlev == "")) ){
        $this->erro_sql = " Campo y60_codlev nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

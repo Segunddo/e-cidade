@@ -33,7 +33,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_cgm_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("libs/db_sql.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 $clcgm = new cl_cgm;
 $clcgm->rotulo->label();
 $clrotulo = new rotulocampo;
@@ -246,7 +246,7 @@ a.nome:hover {
                           <input class="btcols" type="text" name="z01_numcgm" value="<?=@$z01_numcgm?>" size="5" readonly> 
                           &nbsp;&nbsp;&nbsp; 
                           <?
-					  parse_str($arg);
+					  parse_str($arg, $__qs); extract($__qs);
 					  if(isset($matric))
 					    $Label = "<a href='' onclick='js_mostrabic_matricula();return false;'>Matrícula:</a>";
 					  else if(isset($inscr))

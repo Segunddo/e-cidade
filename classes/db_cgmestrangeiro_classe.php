@@ -30,7 +30,7 @@ class cl_cgmestrangeiro {
                  z09_cidade = varchar(50) = Cidade 
                  ";
    //funcao construtor da classe 
-   function cl_cgmestrangeiro() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgmestrangeiro"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_cgmestrangeiro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z09_sequencial = ($this->z09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z09_sequencial"]:$this->z09_sequencial);
-       $this->z09_numcgm = ($this->z09_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z09_numcgm"]:$this->z09_numcgm);
+       $this->z09_sequencial = (($this->z09_sequencial === 0 || $this->z09_sequencial === 0.0 || $this->z09_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["z09_sequencial"]:$this->z09_sequencial);
+       $this->z09_numcgm = (($this->z09_numcgm === 0 || $this->z09_numcgm === 0.0 || $this->z09_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["z09_numcgm"]:$this->z09_numcgm);
        $this->z09_documento = ($this->z09_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["z09_documento"]:$this->z09_documento);
        $this->z09_pais = ($this->z09_pais == ""?@$GLOBALS["HTTP_POST_VARS"]["z09_pais"]:$this->z09_pais);
        $this->z09_cidade = ($this->z09_cidade == ""?@$GLOBALS["HTTP_POST_VARS"]["z09_cidade"]:$this->z09_cidade);
      }else{
-       $this->z09_sequencial = ($this->z09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z09_sequencial"]:$this->z09_sequencial);
+       $this->z09_sequencial = (($this->z09_sequencial === 0 || $this->z09_sequencial === 0.0 || $this->z09_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["z09_sequencial"]:$this->z09_sequencial);
      }
    }
    // funcao para Inclusão
@@ -119,7 +119,7 @@ class cl_cgmestrangeiro {
          $this->z09_sequencial = $z09_sequencial; 
        }
      }
-     if(($this->z09_sequencial == null) || ($this->z09_sequencial == "") ){ 
+     if(($this->z09_sequencial == null) || (($this->z09_sequencial === 0 || $this->z09_sequencial === 0.0 || $this->z09_sequencial == "")) ){ 
        $this->erro_sql = " Campo z09_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

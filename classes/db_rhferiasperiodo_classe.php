@@ -55,7 +55,7 @@ class cl_rhferiasperiodo {
                  rh110_diaspecunia = int4 = Dias em Pecúnia 
                  ";
    //funcao construtor da classe 
-   function cl_rhferiasperiodo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhferiasperiodo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,8 +72,8 @@ class cl_rhferiasperiodo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh110_sequencial = ($this->rh110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_sequencial"]:$this->rh110_sequencial);
-       $this->rh110_rhferias = ($this->rh110_rhferias == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_rhferias"]:$this->rh110_rhferias);
+       $this->rh110_sequencial = (($this->rh110_sequencial === 0 || $this->rh110_sequencial === 0.0 || $this->rh110_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["rh110_sequencial"]:$this->rh110_sequencial);
+       $this->rh110_rhferias = (($this->rh110_rhferias === 0 || $this->rh110_rhferias === 0.0 || $this->rh110_rhferias == "")?@$GLOBALS["HTTP_POST_VARS"]["rh110_rhferias"]:$this->rh110_rhferias);
        $this->rh110_dias = ($this->rh110_dias === ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_dias"]:$this->rh110_dias);
        if($this->rh110_datainicial == ""){
          $this->rh110_datainicial_dia = ($this->rh110_datainicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_datainicial_dia"]:$this->rh110_datainicial_dia);
@@ -92,17 +92,17 @@ class cl_rhferiasperiodo {
          }
        }
        $this->rh110_observacao = ($this->rh110_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_observacao"]:$this->rh110_observacao);
-         $this->rh110_anopagamento = ($this->rh110_anopagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_anopagamento"]:$this->rh110_anopagamento);
-       $this->rh110_mespagamento = ($this->rh110_mespagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_mespagamento"]:$this->rh110_mespagamento);
-         $this->rh110_diasabono = ($this->rh110_diasabono == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_diasabono"]:$this->rh110_diasabono);
+         $this->rh110_anopagamento = (($this->rh110_anopagamento === 0 || $this->rh110_anopagamento === 0.0 || $this->rh110_anopagamento == "")?@$GLOBALS["HTTP_POST_VARS"]["rh110_anopagamento"]:$this->rh110_anopagamento);
+       $this->rh110_mespagamento = (($this->rh110_mespagamento === 0 || $this->rh110_mespagamento === 0.0 || $this->rh110_mespagamento == "")?@$GLOBALS["HTTP_POST_VARS"]["rh110_mespagamento"]:$this->rh110_mespagamento);
+         $this->rh110_diasabono = (($this->rh110_diasabono === 0 || $this->rh110_diasabono === 0.0 || $this->rh110_diasabono == "")?@$GLOBALS["HTTP_POST_VARS"]["rh110_diasabono"]:$this->rh110_diasabono);
          $this->rh110_pagaterco = ($this->rh110_pagaterco == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh110_pagaterco"]:$this->rh110_pagaterco);
          $this->rh110_tipoponto = ($this->rh110_tipoponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_tipoponto"]:$this->rh110_tipoponto);
-         $this->rh110_situacao = ($this->rh110_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_situacao"]:$this->rh110_situacao);
-       $this->rh110_diaspagar = ($this->rh110_diaspagar == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_diaspagar"]:$this->rh110_diaspagar);
+         $this->rh110_situacao = (($this->rh110_situacao === 0 || $this->rh110_situacao === 0.0 || $this->rh110_situacao == "")?@$GLOBALS["HTTP_POST_VARS"]["rh110_situacao"]:$this->rh110_situacao);
+       $this->rh110_diaspagar = (($this->rh110_diaspagar === 0 || $this->rh110_diaspagar === 0.0 || $this->rh110_diaspagar == "")?@$GLOBALS["HTTP_POST_VARS"]["rh110_diaspagar"]:$this->rh110_diaspagar);
        $this->rh110_temdireitotercoabono = ($this->rh110_temdireitotercoabono == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh110_temdireitotercoabono"]:$this->rh110_temdireitotercoabono);
        $this->rh110_diaspecunia = ($this->rh110_diaspecunia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_diaspecunia"]:$this->rh110_diaspecunia);
      }else{
-       $this->rh110_sequencial = ($this->rh110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh110_sequencial"]:$this->rh110_sequencial);
+       $this->rh110_sequencial = (($this->rh110_sequencial === 0 || $this->rh110_sequencial === 0.0 || $this->rh110_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["rh110_sequencial"]:$this->rh110_sequencial);
      }
    }
    // funcao para Inclusão
@@ -225,7 +225,7 @@ class cl_rhferiasperiodo {
          $this->rh110_sequencial = $rh110_sequencial; 
        }
      }
-     if(($this->rh110_sequencial == null) || ($this->rh110_sequencial == "") ){ 
+     if(($this->rh110_sequencial == null) || (($this->rh110_sequencial === 0 || $this->rh110_sequencial === 0.0 || $this->rh110_sequencial == "")) ){ 
        $this->erro_sql = " Campo rh110_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -70,7 +70,7 @@ class cl_termodiv {
                  vlrdescmul = float8 = Desconto Multa
                  ";
    //funcao construtor da classe
-   function cl_termodiv() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termodiv");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,21 +87,21 @@ class cl_termodiv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->parcel = ($this->parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["parcel"]:$this->parcel);
-       $this->coddiv = ($this->coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["coddiv"]:$this->coddiv);
-       $this->valor = ($this->valor == ""?@$GLOBALS["HTTP_POST_VARS"]["valor"]:$this->valor);
-       $this->juros = ($this->juros == ""?@$GLOBALS["HTTP_POST_VARS"]["juros"]:$this->juros);
-       $this->multa = ($this->multa == ""?@$GLOBALS["HTTP_POST_VARS"]["multa"]:$this->multa);
-       $this->desconto = ($this->desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["desconto"]:$this->desconto);
-       $this->total = ($this->total == ""?@$GLOBALS["HTTP_POST_VARS"]["total"]:$this->total);
-       $this->numpreant = ($this->numpreant == ""?@$GLOBALS["HTTP_POST_VARS"]["numpreant"]:$this->numpreant);
-       $this->v77_perc = ($this->v77_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["v77_perc"]:$this->v77_perc);
-       $this->vlrcor = ($this->vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrcor"]:$this->vlrcor);
-       $this->vlrdescjur = ($this->vlrdescjur == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrdescjur"]:$this->vlrdescjur);
-       $this->vlrdescmul = ($this->vlrdescmul == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrdescmul"]:$this->vlrdescmul);
+       $this->parcel = (($this->parcel === 0 || $this->parcel === 0.0 || $this->parcel == "")?@$GLOBALS["HTTP_POST_VARS"]["parcel"]:$this->parcel);
+       $this->coddiv = (($this->coddiv === 0 || $this->coddiv === 0.0 || $this->coddiv == "")?@$GLOBALS["HTTP_POST_VARS"]["coddiv"]:$this->coddiv);
+       $this->valor = (($this->valor === 0 || $this->valor === 0.0 || $this->valor == "")?@$GLOBALS["HTTP_POST_VARS"]["valor"]:$this->valor);
+       $this->juros = (($this->juros === 0 || $this->juros === 0.0 || $this->juros == "")?@$GLOBALS["HTTP_POST_VARS"]["juros"]:$this->juros);
+       $this->multa = (($this->multa === 0 || $this->multa === 0.0 || $this->multa == "")?@$GLOBALS["HTTP_POST_VARS"]["multa"]:$this->multa);
+       $this->desconto = (($this->desconto === 0 || $this->desconto === 0.0 || $this->desconto == "")?@$GLOBALS["HTTP_POST_VARS"]["desconto"]:$this->desconto);
+       $this->total = (($this->total === 0 || $this->total === 0.0 || $this->total == "")?@$GLOBALS["HTTP_POST_VARS"]["total"]:$this->total);
+       $this->numpreant = (($this->numpreant === 0 || $this->numpreant === 0.0 || $this->numpreant == "")?@$GLOBALS["HTTP_POST_VARS"]["numpreant"]:$this->numpreant);
+       $this->v77_perc = (($this->v77_perc === 0 || $this->v77_perc === 0.0 || $this->v77_perc == "")?@$GLOBALS["HTTP_POST_VARS"]["v77_perc"]:$this->v77_perc);
+       $this->vlrcor = (($this->vlrcor === 0 || $this->vlrcor === 0.0 || $this->vlrcor == "")?@$GLOBALS["HTTP_POST_VARS"]["vlrcor"]:$this->vlrcor);
+       $this->vlrdescjur = (($this->vlrdescjur === 0 || $this->vlrdescjur === 0.0 || $this->vlrdescjur == "")?@$GLOBALS["HTTP_POST_VARS"]["vlrdescjur"]:$this->vlrdescjur);
+       $this->vlrdescmul = (($this->vlrdescmul === 0 || $this->vlrdescmul === 0.0 || $this->vlrdescmul == "")?@$GLOBALS["HTTP_POST_VARS"]["vlrdescmul"]:$this->vlrdescmul);
      }else{
-       $this->parcel = ($this->parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["parcel"]:$this->parcel);
-       $this->coddiv = ($this->coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["coddiv"]:$this->coddiv);
+       $this->parcel = (($this->parcel === 0 || $this->parcel === 0.0 || $this->parcel == "")?@$GLOBALS["HTTP_POST_VARS"]["parcel"]:$this->parcel);
+       $this->coddiv = (($this->coddiv === 0 || $this->coddiv === 0.0 || $this->coddiv == "")?@$GLOBALS["HTTP_POST_VARS"]["coddiv"]:$this->coddiv);
      }
    }
    // funcao para inclusao
@@ -199,7 +199,7 @@ class cl_termodiv {
      }
        $this->parcel = $parcel;
        $this->coddiv = $coddiv;
-     if(($this->parcel == null) || ($this->parcel == "") ){
+     if(($this->parcel == null) || (($this->parcel === 0 || $this->parcel === 0.0 || $this->parcel == "")) ){
        $this->erro_sql = " Campo parcel nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -207,7 +207,7 @@ class cl_termodiv {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->coddiv == null) || ($this->coddiv == "") ){
+     if(($this->coddiv == null) || (($this->coddiv === 0 || $this->coddiv === 0.0 || $this->coddiv == "")) ){
        $this->erro_sql = " Campo coddiv nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -628,7 +628,7 @@ class cl_termodiv {
    function sql_query ( $parcel=null,$coddiv=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -658,7 +658,7 @@ class cl_termodiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -671,7 +671,7 @@ class cl_termodiv {
   function sql_query_file( $parcel=null,$coddiv=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -700,7 +700,7 @@ class cl_termodiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -713,7 +713,7 @@ class cl_termodiv {
   function sql_query_arreold ( $parcel=null,$coddiv=null,$campos="*",$ordem=null,$dbwhere="", $groupBy = ""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -744,7 +744,7 @@ class cl_termodiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

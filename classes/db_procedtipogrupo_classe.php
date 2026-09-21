@@ -50,7 +50,7 @@ class cl_procedtipogrupo {
                  v29_descricao = varchar(50) = Descricao 
                  ";
    //funcao construtor da classe 
-   function cl_procedtipogrupo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procedtipogrupo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_procedtipogrupo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v29_sequencial = ($this->v29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v29_sequencial"]:$this->v29_sequencial);
+       $this->v29_sequencial = (($this->v29_sequencial === 0 || $this->v29_sequencial === 0.0 || $this->v29_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v29_sequencial"]:$this->v29_sequencial);
        $this->v29_descricao = ($this->v29_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["v29_descricao"]:$this->v29_descricao);
      }else{
-       $this->v29_sequencial = ($this->v29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v29_sequencial"]:$this->v29_sequencial);
+       $this->v29_sequencial = (($this->v29_sequencial === 0 || $this->v29_sequencial === 0.0 || $this->v29_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v29_sequencial"]:$this->v29_sequencial);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_procedtipogrupo {
        return false;
      }
        $this->v29_sequencial = $v29_sequencial; 
-     if(($this->v29_sequencial == null) || ($this->v29_sequencial == "") ){ 
+     if(($this->v29_sequencial == null) || (($this->v29_sequencial === 0 || $this->v29_sequencial === 0.0 || $this->v29_sequencial == "")) ){ 
        $this->erro_sql = " Campo v29_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -306,7 +306,7 @@ class cl_procedtipogrupo {
    function sql_query ( $v29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -327,7 +327,7 @@ class cl_procedtipogrupo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -340,7 +340,7 @@ class cl_procedtipogrupo {
    function sql_query_file ( $v29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_procedtipogrupo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

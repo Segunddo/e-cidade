@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+"""Passos 1-3 da receita de porte: enumera o universo de um modulo pelas SEIS
+frentes, faz o inventario das categorias conhecidas e grava a lista de alvos.
+
+Le tudo em BYTES -- 64% da base e LATIN-1 e o grep a pula em silencio.
+
+Uso:  python3 scratchpad/enumera.py <prefixo>
+Saida: tmp/<prefixo>_universo.txt  e  tmp/<prefixo>_alvos.txt
+"""
+import os, re, sys, collections, subprocess
+
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PREF = sys.argv[1]
+
+NUCLEO = {
+ "libs/db_stdlib.php","libs/db_conecta.php","libs/db_sessoes.php","libs/db_usuariosonline.php",
+ "libs/db_acessa.php","libs/db_calcula.php","libs/db_libpessoal.php","libs/db_utils.php",
+ "libs/db_sql.php","libs/db_app.utils.php","libs/JSON.php","dbforms/db_funcoes.php",
+ "dbforms/db_classesgenericas.php","std/DBString.php","std/db_stdClass.php",
+ "config/ecidade_config.php","fpdf151/fpdf.php","fpdf151/pdf.php",
+ "model/pessoal/std/DBPessoal.model.php","model/configuracao/mensagem/DBMensagem.model.php",
+ "classes/db_cgm_classe.php"}
+PORTADO = {l.strip() for l in subprocess.run(
+    ["git","log","--name-only","--format=","--grep=^Porta "],
+    capture_output=True, text=True).stdout.splitlines() if l.strip().endswith(".php")}
+PAGO = NUCLEO | PORTADO
+
+RX_INC = re.compile(rb'(?:include|require)(?:_once)?\s*\(?\s*(?:modification\s*\(\s*)?["\']([^"\']+\.php)["\']')
+RX_NEW = re.compile(rb'new\s+(cl_\w+)')
+RX_STR = re.compile(rb'["\']([A-Za-z0-9_]+\.(?:RPC\.)?php)["\']')
+
+_c = {}
+def diretas(p):
+    if p in _c: return _c[p]
+    out = set()
+    try: b = open(p, "rb").read()
+    except OSError: _c[p] = out; return out
+    for m in RX_INC.finditer(b):
+        q = m.group(1).decode("latin1").lstrip("./")
+        if os.path.isfile(q): out.add(q)
+    for m in RX_NEW.finditer(b):                       # 4a lacuna: autoload
+        q = f"classes/db_{m.group(1).decode('latin1')[3:]}_classe.php"
+        if os.path.isfile(q): out.add(q)
+    _c[p] = out
+    return out
+
+def citados(p):                                        # 3a lacuna: aberto por JavaScript
+    try: b = open(p, "rb").read()
+    except OSError: return set()
+    return {q for q in (m.group(1).decode("latin1") for m in RX_STR.finditer(b))
+            if os.path.isfile(q) and q != os.path.basename(p)}
+
+rx = re.compile(r'^' + PREF + r'[0-9]*_', re.IGNORECASE)   # 1a lacuna: maiusculas
+telas = sorted(f for f in os.listdir(".") if os.path.isfile(f) and f.endswith(".php") and rx.match(f))
+js = set().union(*[citados(f) for f in telas]) - set(telas)
+universo, fila = set(telas) | js, list(telas) + sorted(js)
+while fila:
+    for d in diretas(fila.pop()):
+        if d not in universo: universo.add(d); fila.append(d)
+universo = sorted(universo)
+
+CAT = {
+ 'split(':            re.compile(rb'(?<![A-Za-z0-9_>$.])split\s*\('),
+ 'each(':             re.compile(rb'(?<![A-Za-z0-9_>$.])each\s*\('),
+ 'ereg*(':            re.compile(rb'(?<![A-Za-z0-9_>$.])(?:ereg|eregi|ereg_replace|eregi_replace)\s*\('),
+ # cobre $v{..}, $v[..]{..}, $v->p{..} e $v[$i]->p{..} -- a forma com ->prop
+ # escapou no div e so o php -l do 8.5 a pegou (model/cda.model.php:1226)
+ 'offset {}':         re.compile(rb'\$\w+(?:\[[^\]\n]*\])*(?:\s*->\s*\w+(?:\[[^\]\n]*\])*)*\{\s*[^{}\n;]{1,25}?\s*\}'),
+ '=& new':            re.compile(rb'=\s*&\s*new\b'),
+ 'create_function':   re.compile(rb'create_function\s*\('),
+ 'magic_quotes':      re.compile(rb'(?:get|set)_magic_quotes\w*\s*\('),
+ 'cast (real)':       re.compile(rb'\(\s*real\s*\)'),
+ 'db_fieldsmemory 1': re.compile(rb'db_fieldsmemory\(\s*\$\w+\s*\)'),
+}
+def parse_str_1arg(b):
+    """Conta parse_str de 1 argumento contando virgulas no NIVEL SUPERIOR.
+    Um regex [^,()] nao enxerga chamada aninhada -- foi assim que duas telas do
+    jur ficaram fatais depois do porte."""
+    n = 0
+    for m in re.finditer(rb'parse_str\s*\(', b):
+        i, prof, virg = m.end(), 1, False
+        while i < len(b) and prof:
+            c = b[i:i+1]
+            if c == b'(': prof += 1
+            elif c == b')': prof -= 1
+            elif c == b',' and prof == 1: virg = True
+            i += 1
+        if not virg: n += 1
+    return n
+
+alvos, tot = set(), collections.Counter()
+arq = collections.defaultdict(set)
+for p in universo:
+    if p in PAGO: continue
+    b = open(p, "rb").read()
+    for k, r in CAT.items():
+        n = len(r.findall(b))
+        if n: tot[k] += n; arq[k].add(p); alvos.add(p)
+    n = parse_str_1arg(b)
+    if n: tot['parse_str 1 arg'] += n; arq['parse_str 1 arg'].add(p); alvos.add(p)
+    has5 = re.search(rb'function\s+__construct\s*\(', b, re.I)
+    for m in re.finditer(rb'\bclass\s+(\w+)', b):
+        if re.search(rb'function\s+'+re.escape(m.group(1))+rb'\s*\(', b, re.I) and not has5:
+            tot['construtor PHP4'] += 1; arq['construtor PHP4'].add(p); alvos.add(p); break
+    props = {m.group(1) for m in re.finditer(rb'(?:var|public)\s+\$(\w+)\s*=\s*-?\d+\s*;', b)}
+    n = sum(len(re.findall(rb'\$this->'+re.escape(x)+rb'\s*==\s*["\']{2}', b)) for x in props)
+    if n: tot['$this->X == ""'] += n; arq['$this->X == ""'].add(p); alvos.add(p)
+
+os.makedirs("tmp", exist_ok=True)
+open(f"tmp/{PREF}_universo.txt","w").write("\n".join(universo))
+open(f"tmp/{PREF}_alvos.txt","w").write("\n".join(sorted(alvos)))
+print(f"  telas (prefixo {PREF}[0-9]*_) : {len(telas)}")
+print(f"  universo (6 frentes)        : {len(universo)}   | ja pago: {len([p for p in universo if p in PAGO])}")
+print(f"  {'':28}| A ALTERAR: {len(alvos)}\n")
+for k, n in tot.most_common():
+    print(f"    {k:22s} {n:6d} ocorrencias em {len(arq[k]):4d} arquivos")

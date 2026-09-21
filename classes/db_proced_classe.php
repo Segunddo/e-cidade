@@ -84,14 +84,14 @@ class cl_proced
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->v03_codigo = ($this->v03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
+       $this->v03_codigo = (($this->v03_codigo === 0 || $this->v03_codigo === 0.0 || $this->v03_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
        $this->v03_descr = ($this->v03_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_descr"]:$this->v03_descr);
        $this->v03_dcomp = ($this->v03_dcomp == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_dcomp"]:$this->v03_dcomp);
-       $this->v03_receit = ($this->v03_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_receit"]:$this->v03_receit);
+       $this->v03_receit = (($this->v03_receit === 0 || $this->v03_receit === 0.0 || $this->v03_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["v03_receit"]:$this->v03_receit);
        $this->k00_hist = ($this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
-       $this->v03_tributaria = ($this->v03_tributaria == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_tributaria"]:$this->v03_tributaria);
-       $this->v03_instit = ($this->v03_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_instit"]:$this->v03_instit);
-       $this->v03_procedtipo = ($this->v03_procedtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_procedtipo"]:$this->v03_procedtipo);
+       $this->v03_tributaria = (($this->v03_tributaria === 0 || $this->v03_tributaria === 0.0 || $this->v03_tributaria == "")?@$GLOBALS["HTTP_POST_VARS"]["v03_tributaria"]:$this->v03_tributaria);
+       $this->v03_instit = (($this->v03_instit === 0 || $this->v03_instit === 0.0 || $this->v03_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["v03_instit"]:$this->v03_instit);
+       $this->v03_procedtipo = (($this->v03_procedtipo === 0 || $this->v03_procedtipo === 0.0 || $this->v03_procedtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["v03_procedtipo"]:$this->v03_procedtipo);
        if($this->v03_limite == ""){
          $this->v03_limite_dia = ($this->v03_limite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_limite_dia"]:$this->v03_limite_dia);
          $this->v03_limite_mes = ($this->v03_limite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_limite_mes"]:$this->v03_limite_mes);
@@ -101,7 +101,7 @@ class cl_proced
          }
        }
      }else{
-       $this->v03_codigo = ($this->v03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
+       $this->v03_codigo = (($this->v03_codigo === 0 || $this->v03_codigo === 0.0 || $this->v03_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
      }
    }
 
@@ -196,7 +196,7 @@ class cl_proced
          $this->v03_codigo = $v03_codigo; 
        }
      }
-     if(($this->v03_codigo == null) || ($this->v03_codigo == "") ){ 
+     if(($this->v03_codigo == null) || (($this->v03_codigo === 0 || $this->v03_codigo === 0.0 || $this->v03_codigo == "")) ){ 
        $this->erro_sql = " Campo v03_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

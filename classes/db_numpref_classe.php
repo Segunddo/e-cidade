@@ -221,85 +221,85 @@ class cl_numpref
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->k03_anousu = ($this->k03_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_anousu"] : $this->k03_anousu);
-            $this->k03_instit = ($this->k03_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_instit"] : $this->k03_instit);
-            $this->k03_numpre = ($this->k03_numpre == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_numpre"] : $this->k03_numpre);
-            $this->k03_defope = ($this->k03_defope == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_defope"] : $this->k03_defope);
-            $this->k03_recjur = ($this->k03_recjur == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_recjur"] : $this->k03_recjur);
-            $this->k03_numsli = ($this->k03_numsli == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_numsli"] : $this->k03_numsli);
+            $this->k03_anousu = (($this->k03_anousu === 0 || $this->k03_anousu === 0.0 || $this->k03_anousu == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_anousu"] : $this->k03_anousu);
+            $this->k03_instit = (($this->k03_instit === 0 || $this->k03_instit === 0.0 || $this->k03_instit == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_instit"] : $this->k03_instit);
+            $this->k03_numpre = (($this->k03_numpre === 0 || $this->k03_numpre === 0.0 || $this->k03_numpre == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_numpre"] : $this->k03_numpre);
+            $this->k03_defope = (($this->k03_defope === 0 || $this->k03_defope === 0.0 || $this->k03_defope == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_defope"] : $this->k03_defope);
+            $this->k03_recjur = (($this->k03_recjur === 0 || $this->k03_recjur === 0.0 || $this->k03_recjur == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_recjur"] : $this->k03_recjur);
+            $this->k03_numsli = (($this->k03_numsli === 0 || $this->k03_numsli === 0.0 || $this->k03_numsli == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_numsli"] : $this->k03_numsli);
             $this->k03_impend = ($this->k03_impend == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k03_impend"] : $this->k03_impend);
             $this->k03_unipri = ($this->k03_unipri == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k03_unipri"] : $this->k03_unipri);
-            $this->k03_codbco = ($this->k03_codbco == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_codbco"] : $this->k03_codbco);
+            $this->k03_codbco = (($this->k03_codbco === 0 || $this->k03_codbco === 0.0 || $this->k03_codbco == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_codbco"] : $this->k03_codbco);
             $this->k03_codage = ($this->k03_codage == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_codage"] : $this->k03_codage);
-            $this->k03_recmul = ($this->k03_recmul == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_recmul"] : $this->k03_recmul);
+            $this->k03_recmul = (($this->k03_recmul === 0 || $this->k03_recmul === 0.0 || $this->k03_recmul == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_recmul"] : $this->k03_recmul);
             $this->k03_calrec = ($this->k03_calrec == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k03_calrec"] : $this->k03_calrec);
             $this->k03_msg = ($this->k03_msg == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_msg"] : $this->k03_msg);
             $this->k03_msgcarne = ($this->k03_msgcarne == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_msgcarne"] : $this->k03_msgcarne);
             $this->k03_msgbanco = ($this->k03_msgbanco == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_msgbanco"] : $this->k03_msgbanco);
             $this->k03_certissvar = ($this->k03_certissvar == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k03_certissvar"] : $this->k03_certissvar);
-            $this->k03_diasjust = ($this->k03_diasjust == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diasjust"] : $this->k03_diasjust);
+            $this->k03_diasjust = (($this->k03_diasjust === 0 || $this->k03_diasjust === 0.0 || $this->k03_diasjust == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diasjust"] : $this->k03_diasjust);
             $this->k03_reccert = ($this->k03_reccert == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k03_reccert"] : $this->k03_reccert);
-            $this->k03_taxagrupo = ($this->k03_taxagrupo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_taxagrupo"] : $this->k03_taxagrupo);
-            $this->k03_tipocodcert = ($this->k03_tipocodcert == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_tipocodcert"] : $this->k03_tipocodcert);
-            $this->k03_reciboprot = ($this->k03_reciboprot == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_reciboprot"] : $this->k03_reciboprot);
-            $this->k03_regracnd = ($this->k03_regracnd == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_regracnd"] : $this->k03_regracnd);
-            $this->k03_reciboprotretencao = ($this->k03_reciboprotretencao == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_reciboprotretencao"] : $this->k03_reciboprotretencao);
-            $this->k03_tipocertidao = ($this->k03_tipocertidao == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_tipocertidao"] : $this->k03_tipocertidao);
-            $this->k03_separajurmulparc = ($this->k03_separajurmulparc == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_separajurmulparc"] : $this->k03_separajurmulparc);
-            $this->k03_respcgm = ($this->k03_respcgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_respcgm"] : $this->k03_respcgm);
-            $this->k03_respcargo = ($this->k03_respcargo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_respcargo"] : $this->k03_respcargo);
+            $this->k03_taxagrupo = (($this->k03_taxagrupo === 0 || $this->k03_taxagrupo === 0.0 || $this->k03_taxagrupo == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_taxagrupo"] : $this->k03_taxagrupo);
+            $this->k03_tipocodcert = (($this->k03_tipocodcert === 0 || $this->k03_tipocodcert === 0.0 || $this->k03_tipocodcert == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_tipocodcert"] : $this->k03_tipocodcert);
+            $this->k03_reciboprot = (($this->k03_reciboprot === 0 || $this->k03_reciboprot === 0.0 || $this->k03_reciboprot == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_reciboprot"] : $this->k03_reciboprot);
+            $this->k03_regracnd = (($this->k03_regracnd === 0 || $this->k03_regracnd === 0.0 || $this->k03_regracnd == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_regracnd"] : $this->k03_regracnd);
+            $this->k03_reciboprotretencao = (($this->k03_reciboprotretencao === 0 || $this->k03_reciboprotretencao === 0.0 || $this->k03_reciboprotretencao == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_reciboprotretencao"] : $this->k03_reciboprotretencao);
+            $this->k03_tipocertidao = (($this->k03_tipocertidao === 0 || $this->k03_tipocertidao === 0.0 || $this->k03_tipocertidao == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_tipocertidao"] : $this->k03_tipocertidao);
+            $this->k03_separajurmulparc = (($this->k03_separajurmulparc === 0 || $this->k03_separajurmulparc === 0.0 || $this->k03_separajurmulparc == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_separajurmulparc"] : $this->k03_separajurmulparc);
+            $this->k03_respcgm = (($this->k03_respcgm === 0 || $this->k03_respcgm === 0.0 || $this->k03_respcgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_respcgm"] : $this->k03_respcgm);
+            $this->k03_respcargo = (($this->k03_respcargo === 0 || $this->k03_respcargo === 0.0 || $this->k03_respcargo == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_respcargo"] : $this->k03_respcargo);
             $this->k03_msgautent = ($this->k03_msgautent == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_msgautent"] : $this->k03_msgautent);
-            $this->k03_toleranciapgtoparc = ($this->k03_toleranciapgtoparc == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_toleranciapgtoparc"] : $this->k03_toleranciapgtoparc);
+            $this->k03_toleranciapgtoparc = (($this->k03_toleranciapgtoparc === 0 || $this->k03_toleranciapgtoparc === 0.0 || $this->k03_toleranciapgtoparc == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_toleranciapgtoparc"] : $this->k03_toleranciapgtoparc);
             $this->k03_pgtoparcial = ($this->k03_pgtoparcial == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k03_pgtoparcial"] : $this->k03_pgtoparcial);
             $this->k03_reemissaorecibo = ($this->k03_reemissaorecibo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k03_reemissaorecibo"] : $this->k03_reemissaorecibo);
             $this->k03_opcaoemissparcela = ($this->k03_opcaoemissparcela == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_opcaoemissparcela"] : $this->k03_opcaoemissparcela);
-            $this->k03_numprepgtoparcial = ($this->k03_numprepgtoparcial == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_numprepgtoparcial"] : $this->k03_numprepgtoparcial);
-            $this->k03_agrupadorarquivotxtbaixabanco = ($this->k03_agrupadorarquivotxtbaixabanco == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_agrupadorarquivotxtbaixabanco"] : $this->k03_agrupadorarquivotxtbaixabanco);
-            $this->k03_receitapadraocredito = ($this->k03_receitapadraocredito == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_receitapadraocredito"] : $this->k03_receitapadraocredito);
-            $this->k03_templatecertidao_cgm = ($this->k03_templatecertidao_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidao_cgm"] : $this->k03_templatecertidao_cgm);
-            $this->k03_templatecertidao_matric = ($this->k03_templatecertidao_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidao_matric"] : $this->k03_templatecertidao_matric);
-            $this->k03_templatecertidao_inscr = ($this->k03_templatecertidao_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidao_inscr"] : $this->k03_templatecertidao_inscr);
-            $this->k03_templatecertidaopositiva_cgm = ($this->k03_templatecertidaopositiva_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositiva_cgm"] : $this->k03_templatecertidaopositiva_cgm);
-            $this->k03_templatecertidaopositiva_matric = ($this->k03_templatecertidaopositiva_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositiva_matric"] : $this->k03_templatecertidaopositiva_matric);
-            $this->k03_templatecertidaopositiva_inscr = ($this->k03_templatecertidaopositiva_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositiva_inscr"] : $this->k03_templatecertidaopositiva_inscr);
-            $this->k03_templatecertidaonegativa_cgm = ($this->k03_templatecertidaonegativa_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativa_cgm"] : $this->k03_templatecertidaonegativa_cgm);
-            $this->k03_templatecertidaonegativa_matric = ($this->k03_templatecertidaonegativa_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativa_matric"] : $this->k03_templatecertidaonegativa_matric);
-            $this->k03_templatecertidaonegativa_inscr = ($this->k03_templatecertidaonegativa_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativa_inscr"] : $this->k03_templatecertidaonegativa_inscr);
-            $this->k03_templatecertidaoweb_cgm = ($this->k03_templatecertidaoweb_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaoweb_cgm"] : $this->k03_templatecertidaoweb_cgm);
-            $this->k03_templatecertidaoweb_matric = ($this->k03_templatecertidaoweb_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaoweb_matric"] : $this->k03_templatecertidaoweb_matric);
-            $this->k03_templatecertidaoweb_inscr = ($this->k03_templatecertidaoweb_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaoweb_inscr"] : $this->k03_templatecertidaoweb_inscr);
-            $this->k03_templatecertidaopositivaweb_cgm = ($this->k03_templatecertidaopositivaweb_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositivaweb_cgm"] : $this->k03_templatecertidaopositivaweb_cgm);
-            $this->k03_templatecertidaopositivaweb_matric = ($this->k03_templatecertidaopositivaweb_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositivaweb_matric"] : $this->k03_templatecertidaopositivaweb_matric);
-            $this->k03_templatecertidaopositivaweb_inscr = ($this->k03_templatecertidaopositivaweb_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositivaweb_inscr"] : $this->k03_templatecertidaopositivaweb_inscr);
-            $this->k03_templatecertidaonegativaweb_cgm = ($this->k03_templatecertidaonegativaweb_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativaweb_cgm"] : $this->k03_templatecertidaonegativaweb_cgm);
-            $this->k03_templatecertidaonegativaweb_matric = ($this->k03_templatecertidaonegativaweb_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativaweb_matric"] : $this->k03_templatecertidaonegativaweb_matric);
-            $this->k03_templatecertidaonegativaweb_inscr = ($this->k03_templatecertidaonegativaweb_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativaweb_inscr"] : $this->k03_templatecertidaonegativaweb_inscr);
-            $this->k03_diascertidregular_cgm = ($this->k03_diascertidregular_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregular_cgm"] : $this->k03_diascertidregular_cgm);
-            $this->k03_diascertidregular_matric = ($this->k03_diascertidregular_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregular_matric"] : $this->k03_diascertidregular_matric);
-            $this->k03_diascertidregular_inscr = ($this->k03_diascertidregular_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregular_inscr"] : $this->k03_diascertidregular_inscr);
-            $this->k03_diascertidpositiva_cgm = ($this->k03_diascertidpositiva_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositiva_cgm"] : $this->k03_diascertidpositiva_cgm);
-            $this->k03_diascertidpositiva_matric = ($this->k03_diascertidpositiva_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositiva_matric"] : $this->k03_diascertidpositiva_matric);
-            $this->k03_diascertidpositiva_inscr = ($this->k03_diascertidpositiva_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositiva_inscr"] : $this->k03_diascertidpositiva_inscr);
-            $this->k03_diascertidnegativa_cgm = ($this->k03_diascertidnegativa_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativa_cgm"] : $this->k03_diascertidnegativa_cgm);
-            $this->k03_diascertidnegativa_matric = ($this->k03_diascertidnegativa_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativa_matric"] : $this->k03_diascertidnegativa_matric);
-            $this->k03_diascertidnegativa_inscr = ($this->k03_diascertidnegativa_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativa_inscr"] : $this->k03_diascertidnegativa_inscr);
-            $this->k03_diascertidregularweb_cgm = ($this->k03_diascertidregularweb_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregularweb_cgm"] : $this->k03_diascertidregularweb_cgm);
-            $this->k03_diascertidregularweb_matric = ($this->k03_diascertidregularweb_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregularweb_matric"] : $this->k03_diascertidregularweb_matric);
-            $this->k03_diascertidregularweb_inscr = ($this->k03_diascertidregularweb_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregularweb_inscr"] : $this->k03_diascertidregularweb_inscr);
-            $this->k03_diascertidpositivaweb_cgm = ($this->k03_diascertidpositivaweb_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositivaweb_cgm"] : $this->k03_diascertidpositivaweb_cgm);
-            $this->k03_diascertidpositivaweb_matric = ($this->k03_diascertidpositivaweb_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositivaweb_matric"] : $this->k03_diascertidpositivaweb_matric);
-            $this->k03_diascertidpositivaweb_inscr = ($this->k03_diascertidpositivaweb_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositivaweb_inscr"] : $this->k03_diascertidpositivaweb_inscr);
-            $this->k03_diascertidnegativaweb_cgm = ($this->k03_diascertidnegativaweb_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativaweb_cgm"] : $this->k03_diascertidnegativaweb_cgm);
-            $this->k03_diascertidnegativaweb_matric = ($this->k03_diascertidnegativaweb_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativaweb_matric"] : $this->k03_diascertidnegativaweb_matric);
-            $this->k03_diascertidnegativaweb_inscr = ($this->k03_diascertidnegativaweb_inscr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativaweb_inscr"] : $this->k03_diascertidnegativaweb_inscr);
-            $this->k03_diasreemissaocertidao = ($this->k03_diasreemissaocertidao == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_diasreemissaocertidao"] : $this->k03_diasreemissaocertidao);
+            $this->k03_numprepgtoparcial = (($this->k03_numprepgtoparcial === 0 || $this->k03_numprepgtoparcial === 0.0 || $this->k03_numprepgtoparcial == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_numprepgtoparcial"] : $this->k03_numprepgtoparcial);
+            $this->k03_agrupadorarquivotxtbaixabanco = (($this->k03_agrupadorarquivotxtbaixabanco === 0 || $this->k03_agrupadorarquivotxtbaixabanco === 0.0 || $this->k03_agrupadorarquivotxtbaixabanco == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_agrupadorarquivotxtbaixabanco"] : $this->k03_agrupadorarquivotxtbaixabanco);
+            $this->k03_receitapadraocredito = (($this->k03_receitapadraocredito === 0 || $this->k03_receitapadraocredito === 0.0 || $this->k03_receitapadraocredito == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_receitapadraocredito"] : $this->k03_receitapadraocredito);
+            $this->k03_templatecertidao_cgm = (($this->k03_templatecertidao_cgm === 0 || $this->k03_templatecertidao_cgm === 0.0 || $this->k03_templatecertidao_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidao_cgm"] : $this->k03_templatecertidao_cgm);
+            $this->k03_templatecertidao_matric = (($this->k03_templatecertidao_matric === 0 || $this->k03_templatecertidao_matric === 0.0 || $this->k03_templatecertidao_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidao_matric"] : $this->k03_templatecertidao_matric);
+            $this->k03_templatecertidao_inscr = (($this->k03_templatecertidao_inscr === 0 || $this->k03_templatecertidao_inscr === 0.0 || $this->k03_templatecertidao_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidao_inscr"] : $this->k03_templatecertidao_inscr);
+            $this->k03_templatecertidaopositiva_cgm = (($this->k03_templatecertidaopositiva_cgm === 0 || $this->k03_templatecertidaopositiva_cgm === 0.0 || $this->k03_templatecertidaopositiva_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositiva_cgm"] : $this->k03_templatecertidaopositiva_cgm);
+            $this->k03_templatecertidaopositiva_matric = (($this->k03_templatecertidaopositiva_matric === 0 || $this->k03_templatecertidaopositiva_matric === 0.0 || $this->k03_templatecertidaopositiva_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositiva_matric"] : $this->k03_templatecertidaopositiva_matric);
+            $this->k03_templatecertidaopositiva_inscr = (($this->k03_templatecertidaopositiva_inscr === 0 || $this->k03_templatecertidaopositiva_inscr === 0.0 || $this->k03_templatecertidaopositiva_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositiva_inscr"] : $this->k03_templatecertidaopositiva_inscr);
+            $this->k03_templatecertidaonegativa_cgm = (($this->k03_templatecertidaonegativa_cgm === 0 || $this->k03_templatecertidaonegativa_cgm === 0.0 || $this->k03_templatecertidaonegativa_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativa_cgm"] : $this->k03_templatecertidaonegativa_cgm);
+            $this->k03_templatecertidaonegativa_matric = (($this->k03_templatecertidaonegativa_matric === 0 || $this->k03_templatecertidaonegativa_matric === 0.0 || $this->k03_templatecertidaonegativa_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativa_matric"] : $this->k03_templatecertidaonegativa_matric);
+            $this->k03_templatecertidaonegativa_inscr = (($this->k03_templatecertidaonegativa_inscr === 0 || $this->k03_templatecertidaonegativa_inscr === 0.0 || $this->k03_templatecertidaonegativa_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativa_inscr"] : $this->k03_templatecertidaonegativa_inscr);
+            $this->k03_templatecertidaoweb_cgm = (($this->k03_templatecertidaoweb_cgm === 0 || $this->k03_templatecertidaoweb_cgm === 0.0 || $this->k03_templatecertidaoweb_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaoweb_cgm"] : $this->k03_templatecertidaoweb_cgm);
+            $this->k03_templatecertidaoweb_matric = (($this->k03_templatecertidaoweb_matric === 0 || $this->k03_templatecertidaoweb_matric === 0.0 || $this->k03_templatecertidaoweb_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaoweb_matric"] : $this->k03_templatecertidaoweb_matric);
+            $this->k03_templatecertidaoweb_inscr = (($this->k03_templatecertidaoweb_inscr === 0 || $this->k03_templatecertidaoweb_inscr === 0.0 || $this->k03_templatecertidaoweb_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaoweb_inscr"] : $this->k03_templatecertidaoweb_inscr);
+            $this->k03_templatecertidaopositivaweb_cgm = (($this->k03_templatecertidaopositivaweb_cgm === 0 || $this->k03_templatecertidaopositivaweb_cgm === 0.0 || $this->k03_templatecertidaopositivaweb_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositivaweb_cgm"] : $this->k03_templatecertidaopositivaweb_cgm);
+            $this->k03_templatecertidaopositivaweb_matric = (($this->k03_templatecertidaopositivaweb_matric === 0 || $this->k03_templatecertidaopositivaweb_matric === 0.0 || $this->k03_templatecertidaopositivaweb_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositivaweb_matric"] : $this->k03_templatecertidaopositivaweb_matric);
+            $this->k03_templatecertidaopositivaweb_inscr = (($this->k03_templatecertidaopositivaweb_inscr === 0 || $this->k03_templatecertidaopositivaweb_inscr === 0.0 || $this->k03_templatecertidaopositivaweb_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaopositivaweb_inscr"] : $this->k03_templatecertidaopositivaweb_inscr);
+            $this->k03_templatecertidaonegativaweb_cgm = (($this->k03_templatecertidaonegativaweb_cgm === 0 || $this->k03_templatecertidaonegativaweb_cgm === 0.0 || $this->k03_templatecertidaonegativaweb_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativaweb_cgm"] : $this->k03_templatecertidaonegativaweb_cgm);
+            $this->k03_templatecertidaonegativaweb_matric = (($this->k03_templatecertidaonegativaweb_matric === 0 || $this->k03_templatecertidaonegativaweb_matric === 0.0 || $this->k03_templatecertidaonegativaweb_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativaweb_matric"] : $this->k03_templatecertidaonegativaweb_matric);
+            $this->k03_templatecertidaonegativaweb_inscr = (($this->k03_templatecertidaonegativaweb_inscr === 0 || $this->k03_templatecertidaonegativaweb_inscr === 0.0 || $this->k03_templatecertidaonegativaweb_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_templatecertidaonegativaweb_inscr"] : $this->k03_templatecertidaonegativaweb_inscr);
+            $this->k03_diascertidregular_cgm = (($this->k03_diascertidregular_cgm === 0 || $this->k03_diascertidregular_cgm === 0.0 || $this->k03_diascertidregular_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregular_cgm"] : $this->k03_diascertidregular_cgm);
+            $this->k03_diascertidregular_matric = (($this->k03_diascertidregular_matric === 0 || $this->k03_diascertidregular_matric === 0.0 || $this->k03_diascertidregular_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregular_matric"] : $this->k03_diascertidregular_matric);
+            $this->k03_diascertidregular_inscr = (($this->k03_diascertidregular_inscr === 0 || $this->k03_diascertidregular_inscr === 0.0 || $this->k03_diascertidregular_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregular_inscr"] : $this->k03_diascertidregular_inscr);
+            $this->k03_diascertidpositiva_cgm = (($this->k03_diascertidpositiva_cgm === 0 || $this->k03_diascertidpositiva_cgm === 0.0 || $this->k03_diascertidpositiva_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositiva_cgm"] : $this->k03_diascertidpositiva_cgm);
+            $this->k03_diascertidpositiva_matric = (($this->k03_diascertidpositiva_matric === 0 || $this->k03_diascertidpositiva_matric === 0.0 || $this->k03_diascertidpositiva_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositiva_matric"] : $this->k03_diascertidpositiva_matric);
+            $this->k03_diascertidpositiva_inscr = (($this->k03_diascertidpositiva_inscr === 0 || $this->k03_diascertidpositiva_inscr === 0.0 || $this->k03_diascertidpositiva_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositiva_inscr"] : $this->k03_diascertidpositiva_inscr);
+            $this->k03_diascertidnegativa_cgm = (($this->k03_diascertidnegativa_cgm === 0 || $this->k03_diascertidnegativa_cgm === 0.0 || $this->k03_diascertidnegativa_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativa_cgm"] : $this->k03_diascertidnegativa_cgm);
+            $this->k03_diascertidnegativa_matric = (($this->k03_diascertidnegativa_matric === 0 || $this->k03_diascertidnegativa_matric === 0.0 || $this->k03_diascertidnegativa_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativa_matric"] : $this->k03_diascertidnegativa_matric);
+            $this->k03_diascertidnegativa_inscr = (($this->k03_diascertidnegativa_inscr === 0 || $this->k03_diascertidnegativa_inscr === 0.0 || $this->k03_diascertidnegativa_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativa_inscr"] : $this->k03_diascertidnegativa_inscr);
+            $this->k03_diascertidregularweb_cgm = (($this->k03_diascertidregularweb_cgm === 0 || $this->k03_diascertidregularweb_cgm === 0.0 || $this->k03_diascertidregularweb_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregularweb_cgm"] : $this->k03_diascertidregularweb_cgm);
+            $this->k03_diascertidregularweb_matric = (($this->k03_diascertidregularweb_matric === 0 || $this->k03_diascertidregularweb_matric === 0.0 || $this->k03_diascertidregularweb_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregularweb_matric"] : $this->k03_diascertidregularweb_matric);
+            $this->k03_diascertidregularweb_inscr = (($this->k03_diascertidregularweb_inscr === 0 || $this->k03_diascertidregularweb_inscr === 0.0 || $this->k03_diascertidregularweb_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidregularweb_inscr"] : $this->k03_diascertidregularweb_inscr);
+            $this->k03_diascertidpositivaweb_cgm = (($this->k03_diascertidpositivaweb_cgm === 0 || $this->k03_diascertidpositivaweb_cgm === 0.0 || $this->k03_diascertidpositivaweb_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositivaweb_cgm"] : $this->k03_diascertidpositivaweb_cgm);
+            $this->k03_diascertidpositivaweb_matric = (($this->k03_diascertidpositivaweb_matric === 0 || $this->k03_diascertidpositivaweb_matric === 0.0 || $this->k03_diascertidpositivaweb_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositivaweb_matric"] : $this->k03_diascertidpositivaweb_matric);
+            $this->k03_diascertidpositivaweb_inscr = (($this->k03_diascertidpositivaweb_inscr === 0 || $this->k03_diascertidpositivaweb_inscr === 0.0 || $this->k03_diascertidpositivaweb_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidpositivaweb_inscr"] : $this->k03_diascertidpositivaweb_inscr);
+            $this->k03_diascertidnegativaweb_cgm = (($this->k03_diascertidnegativaweb_cgm === 0 || $this->k03_diascertidnegativaweb_cgm === 0.0 || $this->k03_diascertidnegativaweb_cgm == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativaweb_cgm"] : $this->k03_diascertidnegativaweb_cgm);
+            $this->k03_diascertidnegativaweb_matric = (($this->k03_diascertidnegativaweb_matric === 0 || $this->k03_diascertidnegativaweb_matric === 0.0 || $this->k03_diascertidnegativaweb_matric == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativaweb_matric"] : $this->k03_diascertidnegativaweb_matric);
+            $this->k03_diascertidnegativaweb_inscr = (($this->k03_diascertidnegativaweb_inscr === 0 || $this->k03_diascertidnegativaweb_inscr === 0.0 || $this->k03_diascertidnegativaweb_inscr == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diascertidnegativaweb_inscr"] : $this->k03_diascertidnegativaweb_inscr);
+            $this->k03_diasreemissaocertidao = (($this->k03_diasreemissaocertidao === 0 || $this->k03_diasreemissaocertidao === 0.0 || $this->k03_diasreemissaocertidao == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_diasreemissaocertidao"] : $this->k03_diasreemissaocertidao);
             $this->k03_filtrardepart = ($this->k03_filtrardepart == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_filtrardepart"] : 'f');
             $this->k03_apenastiporenuncia = ($this->k03_apenastiporenuncia == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_apenastiporenuncia"] : 't');
             $this->k03_filtrarreceita = ($this->k03_filtrarreceita == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_filtrarreceita"] : 'f');
             $this->k03_imprimecancdebitos = ($this->k03_imprimecancdebitos == "f"?@$GLOBALS["HTTP_POST_VARS"]["k03_imprimecancdebitos"]:$this->k03_imprimecancdebitos);
         } else {
-            $this->k03_anousu = ($this->k03_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_anousu"] : $this->k03_anousu);
-            $this->k03_instit = ($this->k03_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["k03_instit"] : $this->k03_instit);
+            $this->k03_anousu = (($this->k03_anousu === 0 || $this->k03_anousu === 0.0 || $this->k03_anousu == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_anousu"] : $this->k03_anousu);
+            $this->k03_instit = (($this->k03_instit === 0 || $this->k03_instit === 0.0 || $this->k03_instit == "") ? @$GLOBALS["HTTP_POST_VARS"]["k03_instit"] : $this->k03_instit);
         }
     }
 
@@ -595,7 +595,7 @@ class cl_numpref
                 $this->k03_numpre = $k03_numpre;
             }
         }
-        if (($this->k03_anousu == null) || ($this->k03_anousu == "")) {
+        if (($this->k03_anousu == null) || (($this->k03_anousu === 0 || $this->k03_anousu === 0.0 || $this->k03_anousu == ""))) {
             $this->erro_sql = " Campo k03_anousu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -603,7 +603,7 @@ class cl_numpref
             $this->erro_status = "0";
             return false;
         }
-        if (($this->k03_instit == null) || ($this->k03_instit == "")) {
+        if (($this->k03_instit == null) || (($this->k03_instit === 0 || $this->k03_instit === 0.0 || $this->k03_instit == ""))) {
             $this->erro_sql = " Campo k03_instit nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

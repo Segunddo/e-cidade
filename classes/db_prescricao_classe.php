@@ -63,7 +63,7 @@ class cl_prescricao {
                  k31_situacao = int4 = Situação 
                  ";
    //funcao construtor da classe 
-   function cl_prescricao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prescricao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,7 +80,7 @@ class cl_prescricao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k31_codigo = ($this->k31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_codigo"]:$this->k31_codigo);
+       $this->k31_codigo = (($this->k31_codigo === 0 || $this->k31_codigo === 0.0 || $this->k31_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["k31_codigo"]:$this->k31_codigo);
        if($this->k31_data == ""){
          $this->k31_data_dia = ($this->k31_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_data_dia"]:$this->k31_data_dia);
          $this->k31_data_mes = ($this->k31_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_data_mes"]:$this->k31_data_mes);
@@ -90,12 +90,12 @@ class cl_prescricao {
          }
        }
        $this->k31_hora = ($this->k31_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_hora"]:$this->k31_hora);
-       $this->k31_usuario = ($this->k31_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_usuario"]:$this->k31_usuario);
+       $this->k31_usuario = (($this->k31_usuario === 0 || $this->k31_usuario === 0.0 || $this->k31_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["k31_usuario"]:$this->k31_usuario);
        $this->k31_obs = ($this->k31_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_obs"]:$this->k31_obs);
-       $this->k31_instit = ($this->k31_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_instit"]:$this->k31_instit);
-       $this->k31_situacao = ($this->k31_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_situacao"]:$this->k31_situacao);
+       $this->k31_instit = (($this->k31_instit === 0 || $this->k31_instit === 0.0 || $this->k31_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["k31_instit"]:$this->k31_instit);
+       $this->k31_situacao = (($this->k31_situacao === 0 || $this->k31_situacao === 0.0 || $this->k31_situacao == "")?@$GLOBALS["HTTP_POST_VARS"]["k31_situacao"]:$this->k31_situacao);
      }else{
-       $this->k31_codigo = ($this->k31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_codigo"]:$this->k31_codigo);
+       $this->k31_codigo = (($this->k31_codigo === 0 || $this->k31_codigo === 0.0 || $this->k31_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["k31_codigo"]:$this->k31_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_prescricao {
          $this->k31_codigo = $k31_codigo; 
        }
      }
-     if(($this->k31_codigo == null) || ($this->k31_codigo == "") ){ 
+     if(($this->k31_codigo == null) || (($this->k31_codigo === 0 || $this->k31_codigo === 0.0 || $this->k31_codigo == "")) ){ 
        $this->erro_sql = " Campo k31_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -508,7 +508,7 @@ class cl_prescricao {
    function sql_query ( $k31_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_prescricao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_prescricao {
    function sql_query_file ( $k31_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -566,7 +566,7 @@ class cl_prescricao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

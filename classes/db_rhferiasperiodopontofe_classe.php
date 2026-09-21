@@ -64,7 +64,7 @@ class cl_rhferiasperiodopontofe {
                  rh112_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_rhferiasperiodopontofe() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhferiasperiodopontofe"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_rhferiasperiodopontofe {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh112_sequencial = ($this->rh112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh112_sequencial"]:$this->rh112_sequencial);
-       $this->rh112_rhferiasperiodo = ($this->rh112_rhferiasperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh112_rhferiasperiodo"]:$this->rh112_rhferiasperiodo);
-       $this->rh112_anousu = ($this->rh112_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh112_anousu"]:$this->rh112_anousu);
-       $this->rh112_mesusu = ($this->rh112_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh112_mesusu"]:$this->rh112_mesusu);
-       $this->rh112_regist = ($this->rh112_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh112_regist"]:$this->rh112_regist);
+       $this->rh112_sequencial = (($this->rh112_sequencial === 0 || $this->rh112_sequencial === 0.0 || $this->rh112_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["rh112_sequencial"]:$this->rh112_sequencial);
+       $this->rh112_rhferiasperiodo = (($this->rh112_rhferiasperiodo === 0 || $this->rh112_rhferiasperiodo === 0.0 || $this->rh112_rhferiasperiodo == "")?@$GLOBALS["HTTP_POST_VARS"]["rh112_rhferiasperiodo"]:$this->rh112_rhferiasperiodo);
+       $this->rh112_anousu = (($this->rh112_anousu === 0 || $this->rh112_anousu === 0.0 || $this->rh112_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["rh112_anousu"]:$this->rh112_anousu);
+       $this->rh112_mesusu = (($this->rh112_mesusu === 0 || $this->rh112_mesusu === 0.0 || $this->rh112_mesusu == "")?@$GLOBALS["HTTP_POST_VARS"]["rh112_mesusu"]:$this->rh112_mesusu);
+       $this->rh112_regist = (($this->rh112_regist === 0 || $this->rh112_regist === 0.0 || $this->rh112_regist == "")?@$GLOBALS["HTTP_POST_VARS"]["rh112_regist"]:$this->rh112_regist);
        $this->rh112_rubric = ($this->rh112_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh112_rubric"]:$this->rh112_rubric);
        $this->rh112_tpp = ($this->rh112_tpp == ""?@$GLOBALS["HTTP_POST_VARS"]["rh112_tpp"]:$this->rh112_tpp);
-       $this->rh112_quantidade = ($this->rh112_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh112_quantidade"]:$this->rh112_quantidade);
-       $this->rh112_valor = ($this->rh112_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh112_valor"]:$this->rh112_valor);
+       $this->rh112_quantidade = (($this->rh112_quantidade === 0 || $this->rh112_quantidade === 0.0 || $this->rh112_quantidade == "")?@$GLOBALS["HTTP_POST_VARS"]["rh112_quantidade"]:$this->rh112_quantidade);
+       $this->rh112_valor = (($this->rh112_valor === 0 || $this->rh112_valor === 0.0 || $this->rh112_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["rh112_valor"]:$this->rh112_valor);
      }else{
-       $this->rh112_sequencial = ($this->rh112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh112_sequencial"]:$this->rh112_sequencial);
+       $this->rh112_sequencial = (($this->rh112_sequencial === 0 || $this->rh112_sequencial === 0.0 || $this->rh112_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["rh112_sequencial"]:$this->rh112_sequencial);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_rhferiasperiodopontofe {
          $this->rh112_sequencial = $rh112_sequencial; 
        }
      }
-     if(($this->rh112_sequencial == null) || ($this->rh112_sequencial == "") ){ 
+     if(($this->rh112_sequencial == null) || (($this->rh112_sequencial === 0 || $this->rh112_sequencial === 0.0 || $this->rh112_sequencial == "")) ){ 
        $this->erro_sql = " Campo rh112_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -568,7 +568,7 @@ class cl_rhferiasperiodopontofe {
    function sql_query ( $rh112_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -591,7 +591,7 @@ class cl_rhferiasperiodopontofe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -604,7 +604,7 @@ class cl_rhferiasperiodopontofe {
    function sql_query_file ( $rh112_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -625,7 +625,7 @@ class cl_rhferiasperiodopontofe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

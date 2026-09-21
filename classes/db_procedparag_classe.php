@@ -52,7 +52,7 @@ class cl_procedparag {
                  v80_docmetcalculo = int4 = Cód. Met. Cálculo 
                  ";
    //funcao construtor da classe 
-   function cl_procedparag() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procedparag"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_procedparag {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v80_proced = ($this->v80_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_proced"]:$this->v80_proced);
-       $this->v80_docum = ($this->v80_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_docum"]:$this->v80_docum);
-       $this->v80_docmetcalculo = ($this->v80_docmetcalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_docmetcalculo"]:$this->v80_docmetcalculo);
+       $this->v80_proced = (($this->v80_proced === 0 || $this->v80_proced === 0.0 || $this->v80_proced == "")?@$GLOBALS["HTTP_POST_VARS"]["v80_proced"]:$this->v80_proced);
+       $this->v80_docum = (($this->v80_docum === 0 || $this->v80_docum === 0.0 || $this->v80_docum == "")?@$GLOBALS["HTTP_POST_VARS"]["v80_docum"]:$this->v80_docum);
+       $this->v80_docmetcalculo = (($this->v80_docmetcalculo === 0 || $this->v80_docmetcalculo === 0.0 || $this->v80_docmetcalculo == "")?@$GLOBALS["HTTP_POST_VARS"]["v80_docmetcalculo"]:$this->v80_docmetcalculo);
      }else{
-       $this->v80_proced = ($this->v80_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_proced"]:$this->v80_proced);
+       $this->v80_proced = (($this->v80_proced === 0 || $this->v80_proced === 0.0 || $this->v80_proced == "")?@$GLOBALS["HTTP_POST_VARS"]["v80_proced"]:$this->v80_proced);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_procedparag {
        return false;
      }
        $this->v80_proced = $v80_proced; 
-     if(($this->v80_proced == null) || ($this->v80_proced == "") ){ 
+     if(($this->v80_proced == null) || (($this->v80_proced === 0 || $this->v80_proced === 0.0 || $this->v80_proced == "")) ){ 
        $this->erro_sql = " Campo v80_proced nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -337,7 +337,7 @@ class cl_procedparag {
    function sql_query ( $v80_proced=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_procedparag {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -378,7 +378,7 @@ class cl_procedparag {
 	function sql_query_duplo ( $v80_proced=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_procedparag {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_procedparag {
    function sql_query_file ( $v80_proced=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_procedparag {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

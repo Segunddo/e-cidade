@@ -80,7 +80,7 @@ class cl_fiscal {
                  y30_instit = int4 = Cod. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_fiscal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -97,7 +97,7 @@ class cl_fiscal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y30_codnoti = ($this->y30_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_codnoti"]:$this->y30_codnoti);
+       $this->y30_codnoti = (($this->y30_codnoti === 0 || $this->y30_codnoti === 0.0 || $this->y30_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y30_codnoti"]:$this->y30_codnoti);
        if($this->y30_data == ""){
          $this->y30_data_dia = ($this->y30_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_data_dia"]:$this->y30_data_dia);
          $this->y30_data_mes = ($this->y30_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_data_mes"]:$this->y30_data_mes);
@@ -108,7 +108,7 @@ class cl_fiscal {
        }
        $this->y30_hora = ($this->y30_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_hora"]:$this->y30_hora);
        $this->y30_obs = ($this->y30_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_obs"]:$this->y30_obs);
-       $this->y30_setor = ($this->y30_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_setor"]:$this->y30_setor);
+       $this->y30_setor = (($this->y30_setor === 0 || $this->y30_setor === 0.0 || $this->y30_setor == "")?@$GLOBALS["HTTP_POST_VARS"]["y30_setor"]:$this->y30_setor);
        $this->y30_nome = ($this->y30_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_nome"]:$this->y30_nome);
        if($this->y30_dtvenc == ""){
          $this->y30_dtvenc_dia = ($this->y30_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_dtvenc_dia"]:$this->y30_dtvenc_dia);
@@ -135,9 +135,9 @@ class cl_fiscal {
             $this->y30_dtlanc = $this->y30_dtlanc_ano."-".$this->y30_dtlanc_mes."-".$this->y30_dtlanc_dia;
          }
        }
-       $this->y30_instit = ($this->y30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_instit"]:$this->y30_instit);
+       $this->y30_instit = (($this->y30_instit === 0 || $this->y30_instit === 0.0 || $this->y30_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["y30_instit"]:$this->y30_instit);
      }else{
-       $this->y30_codnoti = ($this->y30_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_codnoti"]:$this->y30_codnoti);
+       $this->y30_codnoti = (($this->y30_codnoti === 0 || $this->y30_codnoti === 0.0 || $this->y30_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y30_codnoti"]:$this->y30_codnoti);
      }
    }
    // funcao para inclusao
@@ -236,7 +236,7 @@ class cl_fiscal {
          $this->y30_codnoti = $y30_codnoti; 
        }
      }
-     if(($this->y30_codnoti == null) || ($this->y30_codnoti == "") ){ 
+     if(($this->y30_codnoti == null) || (($this->y30_codnoti === 0 || $this->y30_codnoti === 0.0 || $this->y30_codnoti == "")) ){ 
        $this->erro_sql = " Campo y30_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -637,7 +637,7 @@ class cl_fiscal {
    function sql_query ( $y30_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -662,7 +662,7 @@ class cl_fiscal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -763,7 +763,7 @@ class cl_fiscal {
    function sql_query_cons ( $y30_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -793,7 +793,7 @@ class cl_fiscal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -921,7 +921,7 @@ from fiscal
    function sql_query_file ( $y30_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -942,7 +942,7 @@ from fiscal
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

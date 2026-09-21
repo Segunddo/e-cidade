@@ -60,7 +60,7 @@ class cl_isscalc {
                  q01_manual = text = Log do calculo
                  ";
    //funcao construtor da classe
-   function cl_isscalc() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isscalc");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,19 +77,19 @@ class cl_isscalc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q01_anousu = ($this->q01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_anousu"]:$this->q01_anousu);
-       $this->q01_inscr = ($this->q01_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_inscr"]:$this->q01_inscr);
-       $this->q01_cadcal = ($this->q01_cadcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_cadcal"]:$this->q01_cadcal);
-       $this->q01_recei = ($this->q01_recei == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_recei"]:$this->q01_recei);
-       $this->q01_numpre = ($this->q01_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_numpre"]:$this->q01_numpre);
-       $this->q01_valor = ($this->q01_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_valor"]:$this->q01_valor);
+       $this->q01_anousu = (($this->q01_anousu === 0 || $this->q01_anousu === 0.0 || $this->q01_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_anousu"]:$this->q01_anousu);
+       $this->q01_inscr = (($this->q01_inscr === 0 || $this->q01_inscr === 0.0 || $this->q01_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_inscr"]:$this->q01_inscr);
+       $this->q01_cadcal = (($this->q01_cadcal === 0 || $this->q01_cadcal === 0.0 || $this->q01_cadcal == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_cadcal"]:$this->q01_cadcal);
+       $this->q01_recei = (($this->q01_recei === 0 || $this->q01_recei === 0.0 || $this->q01_recei == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_recei"]:$this->q01_recei);
+       $this->q01_numpre = (($this->q01_numpre === 0 || $this->q01_numpre === 0.0 || $this->q01_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_numpre"]:$this->q01_numpre);
+       $this->q01_valor = (($this->q01_valor === 0 || $this->q01_valor === 0.0 || $this->q01_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_valor"]:$this->q01_valor);
        $this->q01_manual = ($this->q01_manual == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_manual"]:$this->q01_manual);
      }else{
-       $this->q01_anousu = ($this->q01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_anousu"]:$this->q01_anousu);
-       $this->q01_inscr = ($this->q01_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_inscr"]:$this->q01_inscr);
-       $this->q01_cadcal = ($this->q01_cadcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_cadcal"]:$this->q01_cadcal);
-       $this->q01_recei = ($this->q01_recei == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_recei"]:$this->q01_recei);
-       $this->q01_numpre = ($this->q01_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_numpre"]:$this->q01_numpre);
+       $this->q01_anousu = (($this->q01_anousu === 0 || $this->q01_anousu === 0.0 || $this->q01_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_anousu"]:$this->q01_anousu);
+       $this->q01_inscr = (($this->q01_inscr === 0 || $this->q01_inscr === 0.0 || $this->q01_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_inscr"]:$this->q01_inscr);
+       $this->q01_cadcal = (($this->q01_cadcal === 0 || $this->q01_cadcal === 0.0 || $this->q01_cadcal == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_cadcal"]:$this->q01_cadcal);
+       $this->q01_recei = (($this->q01_recei === 0 || $this->q01_recei === 0.0 || $this->q01_recei == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_recei"]:$this->q01_recei);
+       $this->q01_numpre = (($this->q01_numpre === 0 || $this->q01_numpre === 0.0 || $this->q01_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["q01_numpre"]:$this->q01_numpre);
      }
    }
    // funcao para inclusao
@@ -118,7 +118,7 @@ class cl_isscalc {
        $this->q01_cadcal = $q01_cadcal;
        $this->q01_recei = $q01_recei;
        $this->q01_numpre = $q01_numpre;
-     if(($this->q01_anousu == null) || ($this->q01_anousu == "") ){
+     if(($this->q01_anousu == null) || (($this->q01_anousu === 0 || $this->q01_anousu === 0.0 || $this->q01_anousu == "")) ){
        $this->erro_sql = " Campo q01_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -126,7 +126,7 @@ class cl_isscalc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q01_inscr == null) || ($this->q01_inscr == "") ){
+     if(($this->q01_inscr == null) || (($this->q01_inscr === 0 || $this->q01_inscr === 0.0 || $this->q01_inscr == "")) ){
        $this->erro_sql = " Campo q01_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -134,7 +134,7 @@ class cl_isscalc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q01_cadcal == null) || ($this->q01_cadcal == "") ){
+     if(($this->q01_cadcal == null) || (($this->q01_cadcal === 0 || $this->q01_cadcal === 0.0 || $this->q01_cadcal == "")) ){
        $this->erro_sql = " Campo q01_cadcal nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -142,7 +142,7 @@ class cl_isscalc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q01_recei == null) || ($this->q01_recei == "") ){
+     if(($this->q01_recei == null) || (($this->q01_recei === 0 || $this->q01_recei === 0.0 || $this->q01_recei == "")) ){
        $this->erro_sql = " Campo q01_recei nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -150,7 +150,7 @@ class cl_isscalc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q01_numpre == null) || ($this->q01_numpre == "") ){
+     if(($this->q01_numpre == null) || (($this->q01_numpre === 0 || $this->q01_numpre === 0.0 || $this->q01_numpre == "")) ){
        $this->erro_sql = " Campo q01_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -512,7 +512,7 @@ class cl_isscalc {
    function sql_query ( $q01_anousu=null,$q01_inscr=null,$q01_cadcal=null,$q01_recei=null,$q01_numpre=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -572,7 +572,7 @@ class cl_isscalc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -584,7 +584,7 @@ class cl_isscalc {
    function sql_query_arrecad ( $q01_anousu=null,$q01_inscr=null,$q01_cadcal=null,$q01_recei=null,$q01_numpre=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -638,7 +638,7 @@ class cl_isscalc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -650,7 +650,7 @@ class cl_isscalc {
    function sql_query_file ( $q01_anousu=null,$q01_inscr=null,$q01_cadcal=null,$q01_recei=null,$q01_numpre=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -703,7 +703,7 @@ class cl_isscalc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

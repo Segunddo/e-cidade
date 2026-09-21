@@ -40,7 +40,7 @@ require_once(modification("classes/db_proced_classe.php"));
 require_once(modification("classes/db_arrecad_classe.php"));
 require_once(modification("classes/db_certdiv_classe.php"));
 require_once(modification("classes/db_dividaprotprocesso_classe.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $oPost                  = db_utils::postMemory($_POST);
 $oGet                   = db_utils::postMemory($_GET);

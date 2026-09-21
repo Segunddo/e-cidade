@@ -50,7 +50,7 @@ class cl_recparproc {
                  v03_codigo = int4 = Código da procedencia 
                  ";
    //funcao construtor da classe 
-   function cl_recparproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("recparproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_recparproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->receita = ($this->receita == ""?@$GLOBALS["HTTP_POST_VARS"]["receita"]:$this->receita);
-       $this->v03_codigo = ($this->v03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
+       $this->receita = (($this->receita === 0 || $this->receita === 0.0 || $this->receita == "")?@$GLOBALS["HTTP_POST_VARS"]["receita"]:$this->receita);
+       $this->v03_codigo = (($this->v03_codigo === 0 || $this->v03_codigo === 0.0 || $this->v03_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
      }else{
-       $this->v03_codigo = ($this->v03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
+       $this->v03_codigo = (($this->v03_codigo === 0 || $this->v03_codigo === 0.0 || $this->v03_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_recparproc {
        return false;
      }
        $this->v03_codigo = $v03_codigo; 
-     if(($this->v03_codigo == null) || ($this->v03_codigo == "") ){ 
+     if(($this->v03_codigo == null) || (($this->v03_codigo === 0 || $this->v03_codigo === 0.0 || $this->v03_codigo == "")) ){ 
        $this->erro_sql = " Campo v03_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_recparproc {
    function sql_query ( $v03_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_recparproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_recparproc {
    function sql_query_file ( $v03_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_recparproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

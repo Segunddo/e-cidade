@@ -63,7 +63,7 @@ class cl_varfixval {
                  q34_dtval = date = data do valor
                  ";
    //funcao construtor da classe
-   function cl_varfixval() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("varfixval");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,11 +80,11 @@ class cl_varfixval {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q34_codigo = ($this->q34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_codigo"]:$this->q34_codigo);
-       $this->q34_numpar = ($this->q34_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_numpar"]:$this->q34_numpar);
-       $this->q34_mes = ($this->q34_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_mes"]:$this->q34_mes);
-       $this->q34_ano = ($this->q34_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_ano"]:$this->q34_ano);
-       $this->q34_valor = ($this->q34_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_valor"]:$this->q34_valor);
+       $this->q34_codigo = (($this->q34_codigo === 0 || $this->q34_codigo === 0.0 || $this->q34_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["q34_codigo"]:$this->q34_codigo);
+       $this->q34_numpar = (($this->q34_numpar === 0 || $this->q34_numpar === 0.0 || $this->q34_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["q34_numpar"]:$this->q34_numpar);
+       $this->q34_mes = (($this->q34_mes === 0 || $this->q34_mes === 0.0 || $this->q34_mes == "")?@$GLOBALS["HTTP_POST_VARS"]["q34_mes"]:$this->q34_mes);
+       $this->q34_ano = (($this->q34_ano === 0 || $this->q34_ano === 0.0 || $this->q34_ano == "")?@$GLOBALS["HTTP_POST_VARS"]["q34_ano"]:$this->q34_ano);
+       $this->q34_valor = (($this->q34_valor === 0 || $this->q34_valor === 0.0 || $this->q34_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["q34_valor"]:$this->q34_valor);
        $this->q34_inflat = ($this->q34_inflat == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_inflat"]:$this->q34_inflat);
        if($this->q34_dtval == ""){
          $this->q34_dtval_dia = ($this->q34_dtval_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_dtval_dia"]:$this->q34_dtval_dia);
@@ -419,7 +419,7 @@ class cl_varfixval {
    function sql_query ( $oid = null,$campos="varfixval.oid,*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_varfixval {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_varfixval {
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -474,7 +474,7 @@ class cl_varfixval {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

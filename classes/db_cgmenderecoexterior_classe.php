@@ -57,17 +57,17 @@ class cl_cgmenderecoexterior
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->z19_sequencial = ($this->z19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z19_sequencial"]:$this->z19_sequencial);
-       $this->z19_numcgm = ($this->z19_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z19_numcgm"]:$this->z19_numcgm);
-       $this->z19_pais = ($this->z19_pais == ""?@$GLOBALS["HTTP_POST_VARS"]["z19_pais"]:$this->z19_pais);
+       $this->z19_sequencial = (($this->z19_sequencial === 0 || $this->z19_sequencial === 0.0 || $this->z19_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["z19_sequencial"]:$this->z19_sequencial);
+       $this->z19_numcgm = (($this->z19_numcgm === 0 || $this->z19_numcgm === 0.0 || $this->z19_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["z19_numcgm"]:$this->z19_numcgm);
+       $this->z19_pais = (($this->z19_pais === 0 || $this->z19_pais === 0.0 || $this->z19_pais == "")?@$GLOBALS["HTTP_POST_VARS"]["z19_pais"]:$this->z19_pais);
        $this->z19_logradouro = ($this->z19_logradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["z19_logradouro"]:$this->z19_logradouro);
-       $this->z19_numero = ($this->z19_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["z19_numero"]:$this->z19_numero);
+       $this->z19_numero = (($this->z19_numero === 0 || $this->z19_numero === 0.0 || $this->z19_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["z19_numero"]:$this->z19_numero);
        $this->z19_complemento = ($this->z19_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["z19_complemento"]:$this->z19_complemento);
        $this->z19_bairro = ($this->z19_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["z19_bairro"]:$this->z19_bairro);
        $this->z19_cidade = ($this->z19_cidade == ""?@$GLOBALS["HTTP_POST_VARS"]["z19_cidade"]:$this->z19_cidade);
        $this->z19_codigopostal = ($this->z19_codigopostal == ""?@$GLOBALS["HTTP_POST_VARS"]["z19_codigopostal"]:$this->z19_codigopostal);
      }else{
-       $this->z19_sequencial = ($this->z19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z19_sequencial"]:$this->z19_sequencial);
+       $this->z19_sequencial = (($this->z19_sequencial === 0 || $this->z19_sequencial === 0.0 || $this->z19_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["z19_sequencial"]:$this->z19_sequencial);
      }
    }
 
@@ -155,7 +155,7 @@ class cl_cgmenderecoexterior
          $this->z19_sequencial = $z19_sequencial; 
        }
      }
-     if(($this->z19_sequencial == null) || ($this->z19_sequencial == "") ){ 
+     if(($this->z19_sequencial == null) || (($this->z19_sequencial === 0 || $this->z19_sequencial === 0.0 || $this->z19_sequencial == "")) ){ 
        $this->erro_sql = " Campo z19_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

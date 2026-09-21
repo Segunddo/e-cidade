@@ -409,8 +409,8 @@ if (isset ($procreg) && $procreg == 't') {
 		if (isset ($numrows) && $numrows == 0) {
 			db_msgbox("Nenhum registro para o filtro selecionado !");
 		}
-		$codigo_k02 = split(",", $codreceita);
-		$codigo_v03 = split(",", $cod_v03_codigo);
+		$codigo_k02 = explode(",", $codreceita);
+		$codigo_v03 = explode(",", $cod_v03_codigo);
 		$sqlerro    = false;
 		$dataini    = date("Y-m-d", db_getsession('DB_datausu'));
 		$horaini    = db_hora();
@@ -565,7 +565,7 @@ if (isset ($procreg) && $procreg == 't') {
             $dt_venc_data = $k00_dtvenc;
           }
 
-					$dt_oper = split("/", $k00_dtoper);
+					$dt_oper = explode("/", $k00_dtoper);
 					$dt_oper_data =  $dt_oper[2]."-".$dt_oper[1]."-".$dt_oper[0];
 
 					if (isset ($uni) && $uni == 'p') {

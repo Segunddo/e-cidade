@@ -75,7 +75,7 @@ class cl_evolucaodividaativa {
                  v30_instituicao = int4 = Instituição
                  ";
    //funcao construtor da classe
-   function cl_evolucaodividaativa() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("evolucaodividaativa");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,8 +92,8 @@ class cl_evolucaodividaativa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v30_sequencial = ($this->v30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_sequencial"]:$this->v30_sequencial);
-       $this->v30_receita = ($this->v30_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_receita"]:$this->v30_receita);
+       $this->v30_sequencial = (($this->v30_sequencial === 0 || $this->v30_sequencial === 0.0 || $this->v30_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_sequencial"]:$this->v30_sequencial);
+       $this->v30_receita = (($this->v30_receita === 0 || $this->v30_receita === 0.0 || $this->v30_receita == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_receita"]:$this->v30_receita);
        if($this->v30_datageracao == ""){
          $this->v30_datageracao_dia = ($this->v30_datageracao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_datageracao_dia"]:$this->v30_datageracao_dia);
          $this->v30_datageracao_mes = ($this->v30_datageracao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_datageracao_mes"]:$this->v30_datageracao_mes);
@@ -102,18 +102,18 @@ class cl_evolucaodividaativa {
             $this->v30_datageracao = $this->v30_datageracao_ano."-".$this->v30_datageracao_mes."-".$this->v30_datageracao_dia;
          }
        }
-       $this->v30_valorhistorico = ($this->v30_valorhistorico == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_valorhistorico"]:$this->v30_valorhistorico);
-       $this->v30_valorcorrecao = ($this->v30_valorcorrecao == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_valorcorrecao"]:$this->v30_valorcorrecao);
-       $this->v30_valorpagoparcialhistorico = ($this->v30_valorpagoparcialhistorico == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_valorpagoparcialhistorico"]:$this->v30_valorpagoparcialhistorico);
-       $this->v30_valorpagoparcial = ($this->v30_valorpagoparcial == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_valorpagoparcial"]:$this->v30_valorpagoparcial);
-       $this->v30_valorpago = ($this->v30_valorpago == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_valorpago"]:$this->v30_valorpago);
-       $this->v30_valorcancelado = ($this->v30_valorcancelado == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_valorcancelado"]:$this->v30_valorcancelado);
-       $this->v30_valordesconto = ($this->v30_valordesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_valordesconto"]:$this->v30_valordesconto);
-       $this->v30_valorpagohistorico = ($this->v30_valorpagohistorico == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_valorpagohistorico"]:$this->v30_valorpagohistorico);
-       $this->v30_valorcanceladohistorico = ($this->v30_valorcanceladohistorico == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_valorcanceladohistorico"]:$this->v30_valorcanceladohistorico);
-       $this->v30_instituicao = ($this->v30_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_instituicao"]:$this->v30_instituicao);
+       $this->v30_valorhistorico = (($this->v30_valorhistorico === 0 || $this->v30_valorhistorico === 0.0 || $this->v30_valorhistorico == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_valorhistorico"]:$this->v30_valorhistorico);
+       $this->v30_valorcorrecao = (($this->v30_valorcorrecao === 0 || $this->v30_valorcorrecao === 0.0 || $this->v30_valorcorrecao == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_valorcorrecao"]:$this->v30_valorcorrecao);
+       $this->v30_valorpagoparcialhistorico = (($this->v30_valorpagoparcialhistorico === 0 || $this->v30_valorpagoparcialhistorico === 0.0 || $this->v30_valorpagoparcialhistorico == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_valorpagoparcialhistorico"]:$this->v30_valorpagoparcialhistorico);
+       $this->v30_valorpagoparcial = (($this->v30_valorpagoparcial === 0 || $this->v30_valorpagoparcial === 0.0 || $this->v30_valorpagoparcial == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_valorpagoparcial"]:$this->v30_valorpagoparcial);
+       $this->v30_valorpago = (($this->v30_valorpago === 0 || $this->v30_valorpago === 0.0 || $this->v30_valorpago == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_valorpago"]:$this->v30_valorpago);
+       $this->v30_valorcancelado = (($this->v30_valorcancelado === 0 || $this->v30_valorcancelado === 0.0 || $this->v30_valorcancelado == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_valorcancelado"]:$this->v30_valorcancelado);
+       $this->v30_valordesconto = (($this->v30_valordesconto === 0 || $this->v30_valordesconto === 0.0 || $this->v30_valordesconto == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_valordesconto"]:$this->v30_valordesconto);
+       $this->v30_valorpagohistorico = (($this->v30_valorpagohistorico === 0 || $this->v30_valorpagohistorico === 0.0 || $this->v30_valorpagohistorico == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_valorpagohistorico"]:$this->v30_valorpagohistorico);
+       $this->v30_valorcanceladohistorico = (($this->v30_valorcanceladohistorico === 0 || $this->v30_valorcanceladohistorico === 0.0 || $this->v30_valorcanceladohistorico == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_valorcanceladohistorico"]:$this->v30_valorcanceladohistorico);
+       $this->v30_instituicao = (($this->v30_instituicao === 0 || $this->v30_instituicao === 0.0 || $this->v30_instituicao == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_instituicao"]:$this->v30_instituicao);
      }else{
-       $this->v30_sequencial = ($this->v30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v30_sequencial"]:$this->v30_sequencial);
+       $this->v30_sequencial = (($this->v30_sequencial === 0 || $this->v30_sequencial === 0.0 || $this->v30_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v30_sequencial"]:$this->v30_sequencial);
      }
    }
    // funcao para Inclusão
@@ -197,7 +197,7 @@ class cl_evolucaodividaativa {
          $this->v30_sequencial = $v30_sequencial;
        }
      }
-     if(($this->v30_sequencial == null) || ($this->v30_sequencial == "") ){
+     if(($this->v30_sequencial == null) || (($this->v30_sequencial === 0 || $this->v30_sequencial === 0.0 || $this->v30_sequencial == "")) ){
        $this->erro_sql = " Campo v30_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

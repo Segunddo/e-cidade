@@ -1500,7 +1500,7 @@ function db_vencimento($dt = "")
     if (empty ($dt)) {
         $dt = db_getsession("DB_datausu");
     }
-    $data = date("Y-m-d", $dt);
+    $data = date("Y-m-d", (int)$dt);
     /*
 if ( (date("H",$dt) >= "16" ) ) {
 $data = verifica_data(date("d",$dt)+1,date("m",$dt),date("Y",$dt));
@@ -2123,7 +2123,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
 
         if (count($totalizacao) > 0) {
 
-            $totNumfields = pg_numfields($tot);
+            $totNumfields = ($tot ? pg_numfields($tot) : 0);
             for ($totrep = 1; $totrep < $totNumfields; $totrep++) {
 
                 $sHtml .= "<input type=\"hidden\"";

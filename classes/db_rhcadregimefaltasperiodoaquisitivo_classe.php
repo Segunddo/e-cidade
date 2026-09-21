@@ -56,7 +56,7 @@ class cl_rhcadregimefaltasperiodoaquisitivo {
                  rh125_diasdesconto = int4 = Dias descontados 
                  ";
    //funcao construtor da classe 
-   function cl_rhcadregimefaltasperiodoaquisitivo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhcadregimefaltasperiodoaquisitivo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_rhcadregimefaltasperiodoaquisitivo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh125_sequencial = ($this->rh125_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh125_sequencial"]:$this->rh125_sequencial);
-       $this->rh125_rhcadregime = ($this->rh125_rhcadregime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh125_rhcadregime"]:$this->rh125_rhcadregime);
-       $this->rh125_faixainicial = ($this->rh125_faixainicial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh125_faixainicial"]:$this->rh125_faixainicial);
-       $this->rh125_faixafinal = ($this->rh125_faixafinal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh125_faixafinal"]:$this->rh125_faixafinal);
-       $this->rh125_diasdesconto = ($this->rh125_diasdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh125_diasdesconto"]:$this->rh125_diasdesconto);
+       $this->rh125_sequencial = (($this->rh125_sequencial === 0 || $this->rh125_sequencial === 0.0 || $this->rh125_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["rh125_sequencial"]:$this->rh125_sequencial);
+       $this->rh125_rhcadregime = (($this->rh125_rhcadregime === 0 || $this->rh125_rhcadregime === 0.0 || $this->rh125_rhcadregime == "")?@$GLOBALS["HTTP_POST_VARS"]["rh125_rhcadregime"]:$this->rh125_rhcadregime);
+       $this->rh125_faixainicial = (($this->rh125_faixainicial === 0 || $this->rh125_faixainicial === 0.0 || $this->rh125_faixainicial == "")?@$GLOBALS["HTTP_POST_VARS"]["rh125_faixainicial"]:$this->rh125_faixainicial);
+       $this->rh125_faixafinal = (($this->rh125_faixafinal === 0 || $this->rh125_faixafinal === 0.0 || $this->rh125_faixafinal == "")?@$GLOBALS["HTTP_POST_VARS"]["rh125_faixafinal"]:$this->rh125_faixafinal);
+       $this->rh125_diasdesconto = (($this->rh125_diasdesconto === 0 || $this->rh125_diasdesconto === 0.0 || $this->rh125_diasdesconto == "")?@$GLOBALS["HTTP_POST_VARS"]["rh125_diasdesconto"]:$this->rh125_diasdesconto);
      }else{
-       $this->rh125_sequencial = ($this->rh125_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh125_sequencial"]:$this->rh125_sequencial);
+       $this->rh125_sequencial = (($this->rh125_sequencial === 0 || $this->rh125_sequencial === 0.0 || $this->rh125_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["rh125_sequencial"]:$this->rh125_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_rhcadregimefaltasperiodoaquisitivo {
          $this->rh125_sequencial = $rh125_sequencial; 
        }
      }
-     if(($this->rh125_sequencial == null) || ($this->rh125_sequencial == "") ){ 
+     if(($this->rh125_sequencial == null) || (($this->rh125_sequencial === 0 || $this->rh125_sequencial === 0.0 || $this->rh125_sequencial == "")) ){ 
        $this->erro_sql = " Campo rh125_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -432,7 +432,7 @@ class cl_rhcadregimefaltasperiodoaquisitivo {
    function sql_query ( $rh125_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -454,7 +454,7 @@ class cl_rhcadregimefaltasperiodoaquisitivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -467,7 +467,7 @@ class cl_rhcadregimefaltasperiodoaquisitivo {
    function sql_query_file ( $rh125_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_rhcadregimefaltasperiodoaquisitivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

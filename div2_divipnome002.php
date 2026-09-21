@@ -35,7 +35,7 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('v01_numcgm');
 $clrotulo->label('z01_nome');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 
 $chaves = str_replace("X",",",$chaves);
 $where  =" where ";

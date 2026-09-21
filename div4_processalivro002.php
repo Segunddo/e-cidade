@@ -70,7 +70,7 @@ $clrotulo->label('v01_vlrhis');
 $clrotulo->label('v01_numpar');
 $clrotulo->label('v03_receit');
 
-parse_str($HTTP_SERVER_VARS ['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS ['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS); //exit;
 $valor = 0;
 $alt = "5";
@@ -169,7 +169,7 @@ $resultexec = db_query($sqldata);
 db_fieldsmemory($resultexec, 0);
 $datainscr = $v01_dtinsc;
 
-list ( $ano, $mes, $dia ) = split('-', $datainscr);
+list ( $ano, $mes, $dia ) = explode('-', $datainscr);
 $mes1 = db_mes($mes, 2);
 $datacompleta = "$munic, $dia de $mes1 de $ano";
 

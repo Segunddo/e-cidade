@@ -32,7 +32,7 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('');
 $clrotulo->label('z01_nome');
 db_postmemory($HTTP_SERVER_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $chaves1 = db_getsession('chaves1');
 db_destroysession('chaves1');
@@ -56,9 +56,9 @@ if( $rsCriaTabela == false ){
 }
 $where = " where ";
 $or = ""; 
-$arr_info = split("XVX",$chaves1);
+$arr_info = explode("XVX",$chaves1);
 for ($w=0;$w<count($arr_info);$w++){
-	$arr_dados = split("-",$arr_info[$w]);
+	$arr_dados = explode("-",$arr_info[$w]);
 	$numpre1 = $arr_dados[0];
 	$numpar1 = $arr_dados[1];
 	//$where .= $or." (listadeb.k61_numpre = $numpre and listadeb.k61_numpar= $numpar)  ";

@@ -50,7 +50,7 @@ class cl_arrenumcgm {
                  k00_numpre = int4 = Numpre 
                  ";
    //funcao construtor da classe 
-   public function cl_arrenumcgm() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("arrenumcgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_arrenumcgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numcgm = ($this->k00_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numcgm"]:$this->k00_numcgm);
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numcgm = (($this->k00_numcgm === 0 || $this->k00_numcgm === 0.0 || $this->k00_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numcgm"]:$this->k00_numcgm);
+       $this->k00_numpre = (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
      }else{
-       $this->k00_numcgm = ($this->k00_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numcgm"]:$this->k00_numcgm);
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numcgm = (($this->k00_numcgm === 0 || $this->k00_numcgm === 0.0 || $this->k00_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numcgm"]:$this->k00_numcgm);
+       $this->k00_numpre = (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_arrenumcgm {
       $this->atualizacampos();
        $this->k00_numcgm = $k00_numcgm; 
        $this->k00_numpre = $k00_numpre; 
-     if(($this->k00_numcgm == null) || ($this->k00_numcgm == "") ){ 
+     if(($this->k00_numcgm == null) || (($this->k00_numcgm === 0 || $this->k00_numcgm === 0.0 || $this->k00_numcgm == "")) ){ 
        $this->erro_sql = " Campo k00_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_arrenumcgm {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k00_numpre == null) || ($this->k00_numpre == "") ){ 
+     if(($this->k00_numpre == null) || (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")) ){ 
        $this->erro_sql = " Campo k00_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

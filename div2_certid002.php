@@ -51,7 +51,7 @@ $clrotulo->label('v01_dtinsc');
 $clrotulo->label('v51_certidao');
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $dd    = 0;

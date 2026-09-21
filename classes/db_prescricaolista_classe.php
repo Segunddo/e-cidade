@@ -52,7 +52,7 @@ class cl_prescricaolista {
                  k122_prescricao = int4 = Prescrição 
                  ";
    //funcao construtor da classe 
-   function cl_prescricaolista() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prescricaolista"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_prescricaolista {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k122_sequencial = ($this->k122_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k122_sequencial"]:$this->k122_sequencial);
-       $this->k122_lista = ($this->k122_lista == ""?@$GLOBALS["HTTP_POST_VARS"]["k122_lista"]:$this->k122_lista);
-       $this->k122_prescricao = ($this->k122_prescricao == ""?@$GLOBALS["HTTP_POST_VARS"]["k122_prescricao"]:$this->k122_prescricao);
+       $this->k122_sequencial = (($this->k122_sequencial === 0 || $this->k122_sequencial === 0.0 || $this->k122_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k122_sequencial"]:$this->k122_sequencial);
+       $this->k122_lista = (($this->k122_lista === 0 || $this->k122_lista === 0.0 || $this->k122_lista == "")?@$GLOBALS["HTTP_POST_VARS"]["k122_lista"]:$this->k122_lista);
+       $this->k122_prescricao = (($this->k122_prescricao === 0 || $this->k122_prescricao === 0.0 || $this->k122_prescricao == "")?@$GLOBALS["HTTP_POST_VARS"]["k122_prescricao"]:$this->k122_prescricao);
      }else{
-       $this->k122_sequencial = ($this->k122_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k122_sequencial"]:$this->k122_sequencial);
+       $this->k122_sequencial = (($this->k122_sequencial === 0 || $this->k122_sequencial === 0.0 || $this->k122_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k122_sequencial"]:$this->k122_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_prescricaolista {
          $this->k122_sequencial = $k122_sequencial; 
        }
      }
-     if(($this->k122_sequencial == null) || ($this->k122_sequencial == "") ){ 
+     if(($this->k122_sequencial == null) || (($this->k122_sequencial === 0 || $this->k122_sequencial === 0.0 || $this->k122_sequencial == "")) ){ 
        $this->erro_sql = " Campo k122_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_prescricaolista {
    function sql_query ( $k122_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_prescricaolista {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_prescricaolista {
    function sql_query_file ( $k122_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_prescricaolista {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_prescricaolista {
    function sql_query_divida ( $k122_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_prescricaolista {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

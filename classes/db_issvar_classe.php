@@ -70,7 +70,7 @@ class cl_issvar {
                  ";
 
    //funcao construtor da classe
-   function cl_issvar() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issvar");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,18 +87,18 @@ class cl_issvar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q05_codigo = ($this->q05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_codigo"]:$this->q05_codigo);
-       $this->q05_numpre = ($this->q05_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_numpre"]:$this->q05_numpre);
-       $this->q05_numpar = ($this->q05_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_numpar"]:$this->q05_numpar);
-       $this->q05_valor = ($this->q05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_valor"]:$this->q05_valor);
-       $this->q05_ano = ($this->q05_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_ano"]:$this->q05_ano);
-       $this->q05_mes = ($this->q05_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_mes"]:$this->q05_mes);
+       $this->q05_codigo = (($this->q05_codigo === 0 || $this->q05_codigo === 0.0 || $this->q05_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["q05_codigo"]:$this->q05_codigo);
+       $this->q05_numpre = (($this->q05_numpre === 0 || $this->q05_numpre === 0.0 || $this->q05_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["q05_numpre"]:$this->q05_numpre);
+       $this->q05_numpar = (($this->q05_numpar === 0 || $this->q05_numpar === 0.0 || $this->q05_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["q05_numpar"]:$this->q05_numpar);
+       $this->q05_valor = (($this->q05_valor === 0 || $this->q05_valor === 0.0 || $this->q05_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["q05_valor"]:$this->q05_valor);
+       $this->q05_ano = (($this->q05_ano === 0 || $this->q05_ano === 0.0 || $this->q05_ano == "")?@$GLOBALS["HTTP_POST_VARS"]["q05_ano"]:$this->q05_ano);
+       $this->q05_mes = (($this->q05_mes === 0 || $this->q05_mes === 0.0 || $this->q05_mes == "")?@$GLOBALS["HTTP_POST_VARS"]["q05_mes"]:$this->q05_mes);
        $this->q05_histor = ($this->q05_histor == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_histor"]:$this->q05_histor);
-       $this->q05_aliq = ($this->q05_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_aliq"]:$this->q05_aliq);
-       $this->q05_bruto = ($this->q05_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_bruto"]:$this->q05_bruto);
-       $this->q05_vlrinf = ($this->q05_vlrinf == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_vlrinf"]:$this->q05_vlrinf);
+       $this->q05_aliq = (($this->q05_aliq === 0 || $this->q05_aliq === 0.0 || $this->q05_aliq == "")?@$GLOBALS["HTTP_POST_VARS"]["q05_aliq"]:$this->q05_aliq);
+       $this->q05_bruto = (($this->q05_bruto === 0 || $this->q05_bruto === 0.0 || $this->q05_bruto == "")?@$GLOBALS["HTTP_POST_VARS"]["q05_bruto"]:$this->q05_bruto);
+       $this->q05_vlrinf = (($this->q05_vlrinf === 0 || $this->q05_vlrinf === 0.0 || $this->q05_vlrinf == "")?@$GLOBALS["HTTP_POST_VARS"]["q05_vlrinf"]:$this->q05_vlrinf);
      }else{
-       $this->q05_codigo = ($this->q05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_codigo"]:$this->q05_codigo);
+       $this->q05_codigo = (($this->q05_codigo === 0 || $this->q05_codigo === 0.0 || $this->q05_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["q05_codigo"]:$this->q05_codigo);
      }
    }
    // funcao para inclusao
@@ -200,7 +200,7 @@ class cl_issvar {
          $this->q05_codigo = $q05_codigo;
        }
      }
-     if(($this->q05_codigo == null) || ($this->q05_codigo == "") ){
+     if(($this->q05_codigo == null) || (($this->q05_codigo === 0 || $this->q05_codigo === 0.0 || $this->q05_codigo == "")) ){
        $this->erro_sql = " Campo q05_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -669,7 +669,7 @@ class cl_issvar {
          $chave=key($vt);
          if(substr($chave,0,6)=="linha_"){
            $sqlerro=false;
-           $matri= split("#",$vt[$chave]);
+           $matri= explode("#",$vt[$chave]);
            $this->q05_histor.=$vir.$matri[0];
            $vir=",";
          }
@@ -694,7 +694,7 @@ class cl_issvar {
        for($i=0; $i<$ta; $i++){
          $chave=key($vt);
          if(substr($chave,0,6)=="linha_"){
-           $matri= split("#",$vt[$chave]);
+           $matri= explode("#",$vt[$chave]);
            $sql = "select max(q06_seq) +1 as seq from issvarnotas where issvarnotas.q06_codigo = $codigo ";
            $result55 = db_query($sql);
            $seq = pg_result($result55,0,"seq");
@@ -895,7 +895,7 @@ class cl_issvar {
 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -916,7 +916,7 @@ class cl_issvar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -928,7 +928,7 @@ class cl_issvar {
    function sql_query_arrecad ( $q05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -952,7 +952,7 @@ class cl_issvar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -964,7 +964,7 @@ class cl_issvar {
    function sql_query_arreinscr ( $q05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -989,7 +989,7 @@ class cl_issvar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1001,7 +1001,7 @@ class cl_issvar {
    function sql_query_arrenumcgm ( $q05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = explode("#",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1025,7 +1025,7 @@ class cl_issvar {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = explode("#",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1037,7 +1037,7 @@ class cl_issvar {
    function sql_query_arretivprinc ( $q05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = explode("#",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1067,7 +1067,7 @@ class cl_issvar {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = explode("#",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1079,7 +1079,7 @@ class cl_issvar {
    function sql_query_file ( $q05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = explode("#",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1100,7 +1100,7 @@ class cl_issvar {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = explode("#",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1112,7 +1112,7 @@ class cl_issvar {
    function sql_query_lev ( $q05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = explode("#",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1133,7 +1133,7 @@ class cl_issvar {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = explode("#",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1145,7 +1145,7 @@ class cl_issvar {
    function sql_query_pesq ( $q05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = explode("#",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1168,7 +1168,7 @@ class cl_issvar {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = explode("#",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1252,7 +1252,7 @@ class cl_issvar {
         $chave=key($vt);
         if(substr($chave,0,6)=="linha_"){
           $sqlerro=false;
-          $matri= split("#",$vt[$chave]);
+          $matri= explode("#",$vt[$chave]);
           $this->q05_histor.=$vir.$matri[0];
           $vir=",";
         }
@@ -1277,7 +1277,7 @@ class cl_issvar {
       for($i=0; $i<$ta; $i++){
         $chave=key($vt);
         if(substr($chave,0,6)=="linha_"){
-          $matri= split("#",$vt[$chave]);
+          $matri= explode("#",$vt[$chave]);
           $sql = "select max(q06_seq) +1 as seq from issvarnotas where issvarnotas.q06_codigo = $codigo ";
           $result55 = db_query($sql);
           $seq = pg_result($result55,0,"seq");

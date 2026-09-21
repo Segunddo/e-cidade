@@ -55,7 +55,7 @@ class cl_issnotaavulsatomador {
                  q53_dtservico = date = Data do  Serviço 
                  ";
    //funcao construtor da classe 
-   function cl_issnotaavulsatomador() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issnotaavulsatomador"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,8 +72,8 @@ class cl_issnotaavulsatomador {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q53_sequencial = ($this->q53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q53_sequencial"]:$this->q53_sequencial);
-       $this->q53_issnotaavulsa = ($this->q53_issnotaavulsa == ""?@$GLOBALS["HTTP_POST_VARS"]["q53_issnotaavulsa"]:$this->q53_issnotaavulsa);
+       $this->q53_sequencial = (($this->q53_sequencial === 0 || $this->q53_sequencial === 0.0 || $this->q53_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q53_sequencial"]:$this->q53_sequencial);
+       $this->q53_issnotaavulsa = (($this->q53_issnotaavulsa === 0 || $this->q53_issnotaavulsa === 0.0 || $this->q53_issnotaavulsa == "")?@$GLOBALS["HTTP_POST_VARS"]["q53_issnotaavulsa"]:$this->q53_issnotaavulsa);
        if($this->q53_dtservico == ""){
          $this->q53_dtservico_dia = ($this->q53_dtservico_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q53_dtservico_dia"]:$this->q53_dtservico_dia);
          $this->q53_dtservico_mes = ($this->q53_dtservico_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q53_dtservico_mes"]:$this->q53_dtservico_mes);
@@ -83,7 +83,7 @@ class cl_issnotaavulsatomador {
          }
        }
      }else{
-       $this->q53_sequencial = ($this->q53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q53_sequencial"]:$this->q53_sequencial);
+       $this->q53_sequencial = (($this->q53_sequencial === 0 || $this->q53_sequencial === 0.0 || $this->q53_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q53_sequencial"]:$this->q53_sequencial);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_issnotaavulsatomador {
          $this->q53_sequencial = $q53_sequencial; 
        }
      }
-     if(($this->q53_sequencial == null) || ($this->q53_sequencial == "") ){ 
+     if(($this->q53_sequencial == null) || (($this->q53_sequencial === 0 || $this->q53_sequencial === 0.0 || $this->q53_sequencial == "")) ){ 
        $this->erro_sql = " Campo q53_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -383,7 +383,7 @@ class cl_issnotaavulsatomador {
    function sql_query ( $q53_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_issnotaavulsatomador {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_issnotaavulsatomador {
    function sql_query_file ( $q53_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -440,7 +440,7 @@ class cl_issnotaavulsatomador {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_issnotaavulsatomador {
    function sql_query_tomador ( $q53_issnotaavulsa=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = " select "; 
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_issnotaavulsatomador {
      $sql .= " ) as x"; 
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

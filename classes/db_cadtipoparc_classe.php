@@ -105,7 +105,7 @@ class cl_cadtipoparc {
                  k40_controlavencimento = bool = Controla Vencimento até o fim do ano
                  ";
    //funcao construtor da classe 
-   function cl_cadtipoparc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadtipoparc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -122,7 +122,7 @@ class cl_cadtipoparc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k40_codigo = ($this->k40_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_codigo"]:$this->k40_codigo);
+       $this->k40_codigo = (($this->k40_codigo === 0 || $this->k40_codigo === 0.0 || $this->k40_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_codigo"]:$this->k40_codigo);
        $this->k40_descr = ($this->k40_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_descr"]:$this->k40_descr);
        if($this->k40_datalanc == ""){
          $this->k40_datalanc_dia = ($this->k40_datalanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_datalanc_dia"]:$this->k40_datalanc_dia);
@@ -150,13 +150,13 @@ class cl_cadtipoparc {
        }
        $this->k40_todasmarc = ($this->k40_todasmarc == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_todasmarc"]:$this->k40_todasmarc);
        $this->k40_permvalparc = ($this->k40_permvalparc == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_permvalparc"]:$this->k40_permvalparc);
-       $this->k40_vctopadrao = ($this->k40_vctopadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_vctopadrao"]:$this->k40_vctopadrao);
-       $this->k40_diapulames = ($this->k40_diapulames == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_diapulames"]:$this->k40_diapulames);
-       $this->k40_forma = ($this->k40_forma == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_forma"]:$this->k40_forma);
-       $this->k40_instit = ($this->k40_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_instit"]:$this->k40_instit);
-       $this->k40_aplicacao = ($this->k40_aplicacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_aplicacao"]:$this->k40_aplicacao);
-       $this->k40_db_documento = ($this->k40_db_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_db_documento"]:$this->k40_db_documento);
-       $this->k40_ordem = ($this->k40_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_ordem"]:$this->k40_ordem);
+       $this->k40_vctopadrao = (($this->k40_vctopadrao === 0 || $this->k40_vctopadrao === 0.0 || $this->k40_vctopadrao == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_vctopadrao"]:$this->k40_vctopadrao);
+       $this->k40_diapulames = (($this->k40_diapulames === 0 || $this->k40_diapulames === 0.0 || $this->k40_diapulames == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_diapulames"]:$this->k40_diapulames);
+       $this->k40_forma = (($this->k40_forma === 0 || $this->k40_forma === 0.0 || $this->k40_forma == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_forma"]:$this->k40_forma);
+       $this->k40_instit = (($this->k40_instit === 0 || $this->k40_instit === 0.0 || $this->k40_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_instit"]:$this->k40_instit);
+       $this->k40_aplicacao = (($this->k40_aplicacao === 0 || $this->k40_aplicacao === 0.0 || $this->k40_aplicacao == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_aplicacao"]:$this->k40_aplicacao);
+       $this->k40_db_documento = (($this->k40_db_documento === 0 || $this->k40_db_documento === 0.0 || $this->k40_db_documento == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_db_documento"]:$this->k40_db_documento);
+       $this->k40_ordem = (($this->k40_ordem === 0 || $this->k40_ordem === 0.0 || $this->k40_ordem == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_ordem"]:$this->k40_ordem);
        if($this->k40_dtreparc == ""){
          $this->k40_dtreparc_dia = ($this->k40_dtreparc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_dtreparc_dia"]:$this->k40_dtreparc_dia);
          $this->k40_dtreparc_mes = ($this->k40_dtreparc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_dtreparc_mes"]:$this->k40_dtreparc_mes);
@@ -165,16 +165,16 @@ class cl_cadtipoparc {
             $this->k40_dtreparc = $this->k40_dtreparc_ano."-".$this->k40_dtreparc_mes."-".$this->k40_dtreparc_dia;
          }
        }
-       $this->k40_qtdreparc = ($this->k40_qtdreparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_qtdreparc"]:$this->k40_qtdreparc);
-       $this->k40_permanula = ($this->k40_permanula == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_permanula"]:$this->k40_permanula);
-       $this->k40_regraunif = ($this->k40_regraunif == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_regraunif"]:$this->k40_regraunif);
+       $this->k40_qtdreparc = (($this->k40_qtdreparc === 0 || $this->k40_qtdreparc === 0.0 || $this->k40_qtdreparc == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_qtdreparc"]:$this->k40_qtdreparc);
+       $this->k40_permanula = (($this->k40_permanula === 0 || $this->k40_permanula === 0.0 || $this->k40_permanula == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_permanula"]:$this->k40_permanula);
+       $this->k40_regraunif = (($this->k40_regraunif === 0 || $this->k40_regraunif === 0.0 || $this->k40_regraunif == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_regraunif"]:$this->k40_regraunif);
        $this->k40_bloqueio = ($this->k40_bloqueio == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_bloqueio"]:$this->k40_bloqueio);
        $this->k40_tipoanulacao = ($this->k40_tipoanulacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_tipoanulacao"]:$this->k40_tipoanulacao);
        $this->k40_permvalcadparc = ($this->k40_permvalcadparc == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_permvalcadparc"]:$this->k40_permvalcadparc);
        $this->k40_permdataparc = ($this->k40_permdataparc == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_permdataparc"]:$this->k40_permdataparc);
        $this->k40_controlavencimento = ($this->k40_controlavencimento == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_controlavencimento"]:$this->k40_controlavencimento);
      }else{
-       $this->k40_codigo = ($this->k40_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k40_codigo"]:$this->k40_codigo);
+       $this->k40_codigo = (($this->k40_codigo === 0 || $this->k40_codigo === 0.0 || $this->k40_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_codigo"]:$this->k40_codigo);
      }
    }
    // funcao para inclusao
@@ -406,7 +406,7 @@ class cl_cadtipoparc {
          $this->k40_codigo = $k40_codigo; 
        }
      }
-     if(($this->k40_codigo == null) || ($this->k40_codigo == "") ){ 
+     if(($this->k40_codigo == null) || (($this->k40_codigo === 0 || $this->k40_codigo === 0.0 || $this->k40_codigo == "")) ){ 
        $this->erro_sql = " Campo k40_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -1077,7 +1077,7 @@ class cl_cadtipoparc {
    function sql_query ( $k40_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1103,7 +1103,7 @@ class cl_cadtipoparc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1116,7 +1116,7 @@ class cl_cadtipoparc {
    function sql_query_file ( $k40_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1137,7 +1137,7 @@ class cl_cadtipoparc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1149,7 +1149,7 @@ class cl_cadtipoparc {
   function sql_query_alt ( $k40_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1174,7 +1174,7 @@ class cl_cadtipoparc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

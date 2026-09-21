@@ -206,10 +206,10 @@ class cl_cgm {
    function atualizacampos($exclusao=false) {
 
      if($exclusao==false){
-       $this->z01_numcgm = ($this->z01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_numcgm"]:$this->z01_numcgm);
+       $this->z01_numcgm = (($this->z01_numcgm === 0 || $this->z01_numcgm === 0.0 || $this->z01_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["z01_numcgm"]:$this->z01_numcgm);
        $this->z01_nome = ($this->z01_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_nome"]:$this->z01_nome);
        $this->z01_ender = ($this->z01_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_ender"]:$this->z01_ender);
-       $this->z01_numero = ($this->z01_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_numero"]:$this->z01_numero);
+       $this->z01_numero = (($this->z01_numero === 0 || $this->z01_numero === 0.0 || $this->z01_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["z01_numero"]:$this->z01_numero);
        $this->z01_compl = ($this->z01_compl == "" && isset($GLOBALS["HTTP_POST_VARS"]["z01_compl"]) ? $GLOBALS["HTTP_POST_VARS"]["z01_compl"] : $this->z01_compl);
        $this->z01_bairro = ($this->z01_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_bairro"]:$this->z01_bairro);
        $this->z01_munic = ($this->z01_munic == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_munic"]:$this->z01_munic);
@@ -226,12 +226,12 @@ class cl_cgm {
        }
        $this->z01_telef = (is_null($this->z01_telef)?@$GLOBALS["HTTP_POST_VARS"]["z01_telef"]:$this->z01_telef);
        $this->z01_ident = ($this->z01_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_ident"]:$this->z01_ident);
-       $this->z01_login = ($this->z01_login == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_login"]:$this->z01_login);
+       $this->z01_login = (($this->z01_login === 0 || $this->z01_login === 0.0 || $this->z01_login == "")?@$GLOBALS["HTTP_POST_VARS"]["z01_login"]:$this->z01_login);
        $this->z01_incest = (is_null($this->z01_incest)?@$GLOBALS["HTTP_POST_VARS"]["z01_incest"]:$this->z01_incest);
        $this->z01_telcel = (is_null($this->z01_telcel)?@$GLOBALS["HTTP_POST_VARS"]["z01_telcel"]:$this->z01_telcel);
        $this->z01_email = (is_null($this->z01_email)?@$GLOBALS["HTTP_POST_VARS"]["z01_email"]:$this->z01_email);
        $this->z01_endcon = ($this->z01_endcon == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_endcon"]:$this->z01_endcon);
-       $this->z01_numcon = ($this->z01_numcon == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_numcon"]:$this->z01_numcon);
+       $this->z01_numcon = (($this->z01_numcon === 0 || $this->z01_numcon === 0.0 || $this->z01_numcon == "")?@$GLOBALS["HTTP_POST_VARS"]["z01_numcon"]:$this->z01_numcon);
        $this->z01_comcon = ($this->z01_comcon == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_comcon"]:$this->z01_comcon);
        $this->z01_baicon = ($this->z01_baicon == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_baicon"]:$this->z01_baicon);
        $this->z01_muncon = ($this->z01_muncon == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_muncon"]:$this->z01_muncon);
@@ -241,10 +241,10 @@ class cl_cgm {
        $this->z01_telcon = (is_null($this->z01_telcon)?@$GLOBALS["HTTP_POST_VARS"]["z01_telcon"]:$this->z01_telcon);
        $this->z01_celcon = (is_null($this->z01_celcon)?@$GLOBALS["HTTP_POST_VARS"]["z01_celcon"]:$this->z01_celcon);
        $this->z01_emailc = (is_null($this->z01_emailc)?@$GLOBALS["HTTP_POST_VARS"]["z01_emailc"]:$this->z01_emailc);
-       $this->z01_nacion = ($this->z01_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_nacion"]:$this->z01_nacion);
-       $this->z01_estciv = ($this->z01_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_estciv"]:$this->z01_estciv);
+       $this->z01_nacion = (($this->z01_nacion === 0 || $this->z01_nacion === 0.0 || $this->z01_nacion == "")?@$GLOBALS["HTTP_POST_VARS"]["z01_nacion"]:$this->z01_nacion);
+       $this->z01_estciv = (($this->z01_estciv === 0 || $this->z01_estciv === 0.0 || $this->z01_estciv == "")?@$GLOBALS["HTTP_POST_VARS"]["z01_estciv"]:$this->z01_estciv);
        $this->z01_profis = ($this->z01_profis == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_profis"]:$this->z01_profis);
-       $this->z01_tipcre = ($this->z01_tipcre == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_tipcre"]:$this->z01_tipcre);
+       $this->z01_tipcre = (($this->z01_tipcre === 0 || $this->z01_tipcre === 0.0 || $this->z01_tipcre == "")?@$GLOBALS["HTTP_POST_VARS"]["z01_tipcre"]:$this->z01_tipcre);
        $this->z01_cgccpf = ($this->z01_cgccpf == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_cgccpf"]:$this->z01_cgccpf);
        $this->z01_fax = (is_null($this->z01_fax)?@$GLOBALS["HTTP_POST_VARS"]["z01_fax"]:$this->z01_fax);
 
@@ -319,13 +319,13 @@ class cl_cgm {
        }
        $this->z01_identorgao = ($this->z01_identorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_identorgao"]:$this->z01_identorgao);
        $this->z01_localtrabalho = ($this->z01_localtrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_localtrabalho"]:$this->z01_localtrabalho);
-       $this->z01_renda = ($this->z01_renda == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_renda"]:$this->z01_renda);
+       $this->z01_renda = (($this->z01_renda === 0 || $this->z01_renda === 0.0 || $this->z01_renda == "")?@$GLOBALS["HTTP_POST_VARS"]["z01_renda"]:$this->z01_renda);
        $this->z01_trabalha = ($this->z01_trabalha == "f"?@$GLOBALS["HTTP_POST_VARS"]["z01_trabalha"]:$this->z01_trabalha);
        $this->z01_pis = ($this->z01_pis == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_pis"]:$this->z01_pis);
        $this->z01_obs = ($this->z01_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_obs"]:$this->z01_obs);
-       $this->z01_genero = ($this->z01_genero == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_genero"]:$this->z01_genero);
+       $this->z01_genero = (($this->z01_genero === 0 || $this->z01_genero === 0.0 || $this->z01_genero == "")?@$GLOBALS["HTTP_POST_VARS"]["z01_genero"]:$this->z01_genero);
      }else{
-       $this->z01_numcgm = ($this->z01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_numcgm"]:$this->z01_numcgm);
+       $this->z01_numcgm = (($this->z01_numcgm === 0 || $this->z01_numcgm === 0.0 || $this->z01_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["z01_numcgm"]:$this->z01_numcgm);
      }
    }
    // funcao para inclusao
@@ -424,7 +424,7 @@ class cl_cgm {
          $this->z01_numcgm = $z01_numcgm;
        }
      }
-     if(($this->z01_numcgm == null) || ($this->z01_numcgm == "") ){
+     if(($this->z01_numcgm == null) || (($this->z01_numcgm === 0 || $this->z01_numcgm === 0.0 || $this->z01_numcgm == "")) ){
        $this->erro_sql = " Campo z01_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

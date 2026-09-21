@@ -69,11 +69,11 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 | | |
 |---|---|
-| Módulos portados | `cem` Cemitério · `itb`/`itbi` ITBI · `agu` Água · `jur` Jurídico (145 telas) — **4 de 16** |
+| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` Dívida Ativa — **5 de 16** |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|tra)[0-9]*_` |
-| **Próximo módulo** | **`div` Dívida Ativa (148 telas)**, depois pequenos → `arr` → `fis` → `iss`. Ordem revista por métrica — ver *ORDEM REVISTA*. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|tra)[0-9]*_` |
+| **Próximo módulo** | os pequenos (`mar` 35, `tri` 33, `dvr` 33, `inf` 30, `not` 14) → `arr` → `fis` → `iss`. Ver *ORDEM REVISTA*. |
 | **Dívida técnica aberta** | `dbagata/` (1 arquivo alcançável, pré-requisito do `iss`) e `fpdf151/` (28 arquivos). Ver *6ª LACUNA*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
@@ -757,7 +757,7 @@ location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|n
 gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
 Financeiro e Patrimonial junto.
 
-**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ — restam 8 prefixos.
+**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ — restam 7 prefixos.
 
 ### ⚠ ORDEM REVISTA: `jur` antes de `div`, e `arr` por último
 
@@ -1031,6 +1031,103 @@ O sintoma foi um falso positivo: três classes "com erro" que instanciam perfeit
 testadas isoladamente. **Era o instrumento que quebrava, não o código medido.** A assinatura
 passou a descrever objetos pelo nome da classe em vez de serializá-los
 (`scratchpad/instancia_classes.php`).
+
+### Estado: MÓDULO `div` (Dívida Ativa) PORTADO ✅ — 5º da área Tributário
+
+**148 telas** (`^div[0-9]*_`, sem variante de letra). Universo pelas seis frentes: **392
+arquivos**, 90 já pagos. **158 alterados.**
+
+| Correção | Qtd |
+|---|---|
+| `$this->X == ""` → forma que preserva a semântica do 5.6 | 752 + 11 no núcleo |
+| `split(` → `explode(` (todos literais) | 381 |
+| construtor PHP4 → `__construct` | 80 |
+| `parse_str()` com 2º argumento | 62 |
+| guardas `pg_*` contra resultado falso | 9 |
+| offsets `{}` → `[]` | 2 |
+| cast `(int)` em aritmética com string | 1 |
+| `date()` com timestamp string → `(int)` | 1 |
+
+**148 de 148 telas byte-a-byte idênticas — o primeiro módulo sem nenhuma divergência.**
+As 84+150 classes instanciam com estado idêntico; `php -l` limpo nos dois runtimes em
+158/158 alterados e 391/391 do universo.
+
+### ⚠ ACHADO GRAVE: o núcleo `db_cgm_classe.php` estava sem as guardas `0 == ""`
+
+Descoberto pela verificação de remanescentes do `div`: **12 arquivos já tocados por commits
+`Porta ...` ainda tinham o idioma perigoso sem guarda — 52 ocorrências.**
+
+| Arquivo | Ocorrências |
+|---|---|
+| `classes/db_acidentes_classe.php` e mais 10 do `tra` | 42 |
+| **`classes/db_cgm_classe.php` — NÚCLEO** | **10** |
+
+Causa: o `tra` e o núcleo foram portados **antes** de a categoria `0 == ""` ser descoberta
+(ela apareceu no Cemitério). O `CLAUDE.md` registra `db_cgm_classe.php` apenas sob
+"construtor PHP4 → `__construct`" — as comparações nunca foram tratadas.
+
+Gravidade: `db_cgm_classe.php` é o registro de cidadãos, **puxado por qualquer módulo com
+pessoas**. O idioma afetado é exatamente o que quebrou o formulário do Cemitério:
+
+```php
+$this->z01_numcgm = ($this->z01_numcgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_numcgm"] : ...);
+```
+
+**Corrigido** (11 comparações). As 42 do `tra` ficam registradas e **não corrigidas**: o
+módulo é órfão no menu, nenhuma tela leva até ele.
+
+**Por que nenhuma bateria pegou isso:** o comparador faz só `GET`, e este idioma só dispara
+no `POST`. É o mesmo limite que a dúvida sobre a inclusão de advogados expôs.
+
+### CATEGORIA NOVA (div): `date()` com timestamp em string
+
+```
+                     date("Y-m-d", "2024-01-01")
+PHP 5.6:             "1969-12-31"   (coage para int)
+PHP 8.5:             TypeError: Argument #2 ($timestamp) must be of type ?int
+```
+
+Em `libs/db_stdlib.php:1503` (`db_vencimento()`, núcleo). Correção: `date("Y-m-d", (int)$dt)`,
+que reproduz o 5.6 **exatamente** — inclusive o resultado sem sentido `1969-12-31`, que é
+comportamento pré-existente e não cabe à migração corrigir.
+
+### `(int)` vs `(float)` em aritmética com string
+
+O catálogo registra `(float)` como correção da aritmética com string, escolhida num contexto
+monetário. Em `classes/db_divida_classe.php:2373` o valor é um **exercício** (ano) vindo de
+`explode("-", ...)`, e ali `(int)` é estritamente mais fiel: o 5.6 devolve `int` para
+`"2024" - 1`, e `(float)` preservaria o valor mas mudaria o tipo.
+
+**Regra:** casar o cast com o tipo que o 5.6 produzia naquele ponto, não aplicar `(float)` por
+hábito.
+
+### LACUNA DE DETECÇÃO (div): offset `{}` sobre PROPRIEDADE
+
+Meu regex de offset cobria `$v{...}` e `$v[...]{...}`, mas **não `$v->prop{...}`**:
+
+```php
+if ($aDebitos[$i]->origem{0} == 'M')      // model/cda.model.php:1226
+```
+
+Escapou da varredura e só o `php -l` do 8.5 pegou. O regex do `enumera.py` foi corrigido para
+cobrir as quatro formas.
+
+### FERRAMENTAL versionado (`scratchpad/`)
+
+Depois de reescrever as mesmas rotinas em cada módulo — e de perder duas vezes o comparador —
+os quatro instrumentos passaram a ser versionados:
+
+| Arquivo | Passos da receita |
+|---|---|
+| `enumera.py` | 1–3: universo pelas seis frentes + inventário + lista de alvos |
+| `porta.py` | 4: transformações mecânicas |
+| `instancia_classes.php` | 6: estado das classes nos dois runtimes |
+| `cmp.py` | 7: comparação das telas |
+
+`porta.py` **usa a mesma detecção de `enumera.py`** — em especial a de `parse_str`, que conta
+vírgulas no nível superior. Foi a divergência entre as duas que deixou duas telas do `jur`
+fatais depois do porte. E ele **aborta** diante de caso que exige decisão humana (separador de
+`split()` com metacaractere, arquivo com mais de uma classe), em vez de transformar errado.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

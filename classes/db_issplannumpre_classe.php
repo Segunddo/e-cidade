@@ -61,7 +61,7 @@ class cl_issplannumpre {
                  q32_status = int4 = Status 
                  ";
    //funcao construtor da classe 
-   function cl_issplannumpre() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issplannumpre"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,9 +78,9 @@ class cl_issplannumpre {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q32_sequencial = ($this->q32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q32_sequencial"]:$this->q32_sequencial);
-       $this->q32_planilha = ($this->q32_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q32_planilha"]:$this->q32_planilha);
-       $this->q32_numpre = ($this->q32_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q32_numpre"]:$this->q32_numpre);
+       $this->q32_sequencial = (($this->q32_sequencial === 0 || $this->q32_sequencial === 0.0 || $this->q32_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q32_sequencial"]:$this->q32_sequencial);
+       $this->q32_planilha = (($this->q32_planilha === 0 || $this->q32_planilha === 0.0 || $this->q32_planilha == "")?@$GLOBALS["HTTP_POST_VARS"]["q32_planilha"]:$this->q32_planilha);
+       $this->q32_numpre = (($this->q32_numpre === 0 || $this->q32_numpre === 0.0 || $this->q32_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["q32_numpre"]:$this->q32_numpre);
        if($this->q32_dataop == ""){
          $this->q32_dataop_dia = ($this->q32_dataop_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q32_dataop_dia"]:$this->q32_dataop_dia);
          $this->q32_dataop_mes = ($this->q32_dataop_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q32_dataop_mes"]:$this->q32_dataop_mes);
@@ -90,9 +90,9 @@ class cl_issplannumpre {
          }
        }
        $this->q32_horaop = ($this->q32_horaop == ""?@$GLOBALS["HTTP_POST_VARS"]["q32_horaop"]:$this->q32_horaop);
-       $this->q32_status = ($this->q32_status == ""?@$GLOBALS["HTTP_POST_VARS"]["q32_status"]:$this->q32_status);
+       $this->q32_status = (($this->q32_status === 0 || $this->q32_status === 0.0 || $this->q32_status == "")?@$GLOBALS["HTTP_POST_VARS"]["q32_status"]:$this->q32_status);
      }else{
-       $this->q32_sequencial = ($this->q32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q32_sequencial"]:$this->q32_sequencial);
+       $this->q32_sequencial = (($this->q32_sequencial === 0 || $this->q32_sequencial === 0.0 || $this->q32_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q32_sequencial"]:$this->q32_sequencial);
      }
    }
    // funcao para inclusao
@@ -152,7 +152,7 @@ class cl_issplannumpre {
          $this->q32_sequencial = $q32_sequencial; 
        }
      }
-     if(($this->q32_sequencial == null) || ($this->q32_sequencial == "") ){ 
+     if(($this->q32_sequencial == null) || (($this->q32_sequencial === 0 || $this->q32_sequencial === 0.0 || $this->q32_sequencial == "")) ){ 
        $this->erro_sql = " Campo q32_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -434,7 +434,7 @@ class cl_issplannumpre {
    function sql_query ( $q32_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_issplannumpre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_issplannumpre {
    function sql_query_file ( $q32_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -490,7 +490,7 @@ class cl_issplannumpre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

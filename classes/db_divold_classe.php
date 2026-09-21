@@ -56,7 +56,7 @@ class cl_divold {
                  k10_receita = int4 = codigo da receita(antes) 
                  ";
    //funcao construtor da classe 
-   function cl_divold() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("divold"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_divold {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k10_sequencial = ($this->k10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_sequencial"]:$this->k10_sequencial);
-       $this->k10_coddiv = ($this->k10_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_coddiv"]:$this->k10_coddiv);
-       $this->k10_numpre = ($this->k10_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_numpre"]:$this->k10_numpre);
-       $this->k10_numpar = ($this->k10_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_numpar"]:$this->k10_numpar);
-       $this->k10_receita = ($this->k10_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_receita"]:$this->k10_receita);
+       $this->k10_sequencial = (($this->k10_sequencial === 0 || $this->k10_sequencial === 0.0 || $this->k10_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k10_sequencial"]:$this->k10_sequencial);
+       $this->k10_coddiv = (($this->k10_coddiv === 0 || $this->k10_coddiv === 0.0 || $this->k10_coddiv == "")?@$GLOBALS["HTTP_POST_VARS"]["k10_coddiv"]:$this->k10_coddiv);
+       $this->k10_numpre = (($this->k10_numpre === 0 || $this->k10_numpre === 0.0 || $this->k10_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k10_numpre"]:$this->k10_numpre);
+       $this->k10_numpar = (($this->k10_numpar === 0 || $this->k10_numpar === 0.0 || $this->k10_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["k10_numpar"]:$this->k10_numpar);
+       $this->k10_receita = (($this->k10_receita === 0 || $this->k10_receita === 0.0 || $this->k10_receita == "")?@$GLOBALS["HTTP_POST_VARS"]["k10_receita"]:$this->k10_receita);
      }else{
-       $this->k10_sequencial = ($this->k10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_sequencial"]:$this->k10_sequencial);
+       $this->k10_sequencial = (($this->k10_sequencial === 0 || $this->k10_sequencial === 0.0 || $this->k10_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k10_sequencial"]:$this->k10_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_divold {
          $this->k10_sequencial = $k10_sequencial; 
        }
      }
-     if(($this->k10_sequencial == null) || ($this->k10_sequencial == "") ){ 
+     if(($this->k10_sequencial == null) || (($this->k10_sequencial === 0 || $this->k10_sequencial === 0.0 || $this->k10_sequencial == "")) ){ 
        $this->erro_sql = " Campo k10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_divold {
    function sql_query ( $k10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_divold {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_divold {
    function sql_query_file ( $k10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_divold {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_divold {
    function sql_query_old ( $k10_coddiv=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -514,7 +514,7 @@ class cl_divold {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -72,7 +72,7 @@ class cl_issnotaavulsa {
                  q51_obs = varchar(200) = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_issnotaavulsa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issnotaavulsa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,10 +89,10 @@ class cl_issnotaavulsa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q51_sequencial = ($this->q51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_sequencial"]:$this->q51_sequencial);
-       $this->q51_numnota = ($this->q51_numnota == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_numnota"]:$this->q51_numnota);
-       $this->q51_inscr = ($this->q51_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_inscr"]:$this->q51_inscr);
-       $this->q51_usuario = ($this->q51_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_usuario"]:$this->q51_usuario);
+       $this->q51_sequencial = (($this->q51_sequencial === 0 || $this->q51_sequencial === 0.0 || $this->q51_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q51_sequencial"]:$this->q51_sequencial);
+       $this->q51_numnota = (($this->q51_numnota === 0 || $this->q51_numnota === 0.0 || $this->q51_numnota == "")?@$GLOBALS["HTTP_POST_VARS"]["q51_numnota"]:$this->q51_numnota);
+       $this->q51_inscr = (($this->q51_inscr === 0 || $this->q51_inscr === 0.0 || $this->q51_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q51_inscr"]:$this->q51_inscr);
+       $this->q51_usuario = (($this->q51_usuario === 0 || $this->q51_usuario === 0.0 || $this->q51_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["q51_usuario"]:$this->q51_usuario);
        if($this->q51_dtemiss == ""){
          $this->q51_dtemiss_dia = ($this->q51_dtemiss_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_dtemiss_dia"]:$this->q51_dtemiss_dia);
          $this->q51_dtemiss_mes = ($this->q51_dtemiss_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_dtemiss_mes"]:$this->q51_dtemiss_mes);
@@ -111,10 +111,10 @@ class cl_issnotaavulsa {
          }
        }
        $this->q51_codautent = ($this->q51_codautent == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_codautent"]:$this->q51_codautent);
-       $this->q51_pdfnota = ($this->q51_pdfnota == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_pdfnota"]:$this->q51_pdfnota);
+       $this->q51_pdfnota = (($this->q51_pdfnota === 0 || $this->q51_pdfnota === 0.0 || $this->q51_pdfnota == "")?@$GLOBALS["HTTP_POST_VARS"]["q51_pdfnota"]:$this->q51_pdfnota);
        $this->q51_obs = ($this->q51_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_obs"]:$this->q51_obs);
      }else{
-       $this->q51_sequencial = ($this->q51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_sequencial"]:$this->q51_sequencial);
+       $this->q51_sequencial = (($this->q51_sequencial === 0 || $this->q51_sequencial === 0.0 || $this->q51_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q51_sequencial"]:$this->q51_sequencial);
      }
    }
    // funcao para inclusao
@@ -207,7 +207,7 @@ class cl_issnotaavulsa {
          $this->q51_sequencial = $q51_sequencial; 
        }
      }
-     if(($this->q51_sequencial == null) || ($this->q51_sequencial == "") ){ 
+     if(($this->q51_sequencial == null) || (($this->q51_sequencial === 0 || $this->q51_sequencial === 0.0 || $this->q51_sequencial == "")) ){ 
        $this->erro_sql = " Campo q51_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -779,7 +779,7 @@ class cl_issnotaavulsa {
    function sql_query ( $q51_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -803,7 +803,7 @@ class cl_issnotaavulsa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -815,7 +815,7 @@ class cl_issnotaavulsa {
    function sql_query_baixa ( $q51_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -844,7 +844,7 @@ class cl_issnotaavulsa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -856,7 +856,7 @@ class cl_issnotaavulsa {
    function sql_query_cancelados ( $q51_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -883,7 +883,7 @@ class cl_issnotaavulsa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -895,7 +895,7 @@ class cl_issnotaavulsa {
    function sql_query_emitidos ( $q51_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -922,7 +922,7 @@ class cl_issnotaavulsa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -934,7 +934,7 @@ class cl_issnotaavulsa {
    function sql_query_file ( $q51_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -955,7 +955,7 @@ class cl_issnotaavulsa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

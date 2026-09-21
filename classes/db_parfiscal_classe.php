@@ -98,7 +98,7 @@ class cl_parfiscal {
                  y32_tipodatavencimento = int4 = Tipo Data Vencimento 
                  ";
    //funcao construtor da classe
-   function cl_parfiscal() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parfiscal");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -115,34 +115,34 @@ class cl_parfiscal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y32_instit = ($this->y32_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_instit"]:$this->y32_instit);
-       $this->y32_tipo = ($this->y32_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_tipo"]:$this->y32_tipo);
-       $this->y32_hist = ($this->y32_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_hist"]:$this->y32_hist);
+       $this->y32_instit = (($this->y32_instit === 0 || $this->y32_instit === 0.0 || $this->y32_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_instit"]:$this->y32_instit);
+       $this->y32_tipo = (($this->y32_tipo === 0 || $this->y32_tipo === 0.0 || $this->y32_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_tipo"]:$this->y32_tipo);
+       $this->y32_hist = (($this->y32_hist === 0 || $this->y32_hist === 0.0 || $this->y32_hist == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_hist"]:$this->y32_hist);
        $this->y32_impdatas = ($this->y32_impdatas == "f"?@$GLOBALS["HTTP_POST_VARS"]["y32_impdatas"]:$this->y32_impdatas);
        $this->y32_impcodativ = ($this->y32_impcodativ == "f"?@$GLOBALS["HTTP_POST_VARS"]["y32_impcodativ"]:$this->y32_impcodativ);
        $this->y32_impobs = ($this->y32_impobs == "f"?@$GLOBALS["HTTP_POST_VARS"]["y32_impobs"]:$this->y32_impobs);
        $this->y32_impobslanc = ($this->y32_impobslanc == "f"?@$GLOBALS["HTTP_POST_VARS"]["y32_impobslanc"]:$this->y32_impobslanc);
-       $this->y32_modalvara = ($this->y32_modalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_modalvara"]:$this->y32_modalvara);
-       $this->y32_modaidof = ($this->y32_modaidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_modaidof"]:$this->y32_modaidof);
-       $this->y32_receit = ($this->y32_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_receit"]:$this->y32_receit);
-       $this->y32_receitexp = ($this->y32_receitexp == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_receitexp"]:$this->y32_receitexp);
-       $this->y32_proced = ($this->y32_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_proced"]:$this->y32_proced);
-       $this->y32_procedexp = ($this->y32_procedexp == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_procedexp"]:$this->y32_procedexp);
-       $this->y32_formvist = ($this->y32_formvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_formvist"]:$this->y32_formvist);
-       $this->y32_sanidepto = ($this->y32_sanidepto == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_sanidepto"]:$this->y32_sanidepto);
-       $this->y32_sanbaixadiv = ($this->y32_sanbaixadiv == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_sanbaixadiv"]:$this->y32_sanbaixadiv);
-       $this->y32_tipoprocpadrao = ($this->y32_tipoprocpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_tipoprocpadrao"]:$this->y32_tipoprocpadrao);
+       $this->y32_modalvara = (($this->y32_modalvara === 0 || $this->y32_modalvara === 0.0 || $this->y32_modalvara == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_modalvara"]:$this->y32_modalvara);
+       $this->y32_modaidof = (($this->y32_modaidof === 0 || $this->y32_modaidof === 0.0 || $this->y32_modaidof == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_modaidof"]:$this->y32_modaidof);
+       $this->y32_receit = (($this->y32_receit === 0 || $this->y32_receit === 0.0 || $this->y32_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_receit"]:$this->y32_receit);
+       $this->y32_receitexp = (($this->y32_receitexp === 0 || $this->y32_receitexp === 0.0 || $this->y32_receitexp == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_receitexp"]:$this->y32_receitexp);
+       $this->y32_proced = (($this->y32_proced === 0 || $this->y32_proced === 0.0 || $this->y32_proced == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_proced"]:$this->y32_proced);
+       $this->y32_procedexp = (($this->y32_procedexp === 0 || $this->y32_procedexp === 0.0 || $this->y32_procedexp == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_procedexp"]:$this->y32_procedexp);
+       $this->y32_formvist = (($this->y32_formvist === 0 || $this->y32_formvist === 0.0 || $this->y32_formvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_formvist"]:$this->y32_formvist);
+       $this->y32_sanidepto = (($this->y32_sanidepto === 0 || $this->y32_sanidepto === 0.0 || $this->y32_sanidepto == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_sanidepto"]:$this->y32_sanidepto);
+       $this->y32_sanbaixadiv = (($this->y32_sanbaixadiv === 0 || $this->y32_sanbaixadiv === 0.0 || $this->y32_sanbaixadiv == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_sanbaixadiv"]:$this->y32_sanbaixadiv);
+       $this->y32_tipoprocpadrao = (($this->y32_tipoprocpadrao === 0 || $this->y32_tipoprocpadrao === 0.0 || $this->y32_tipoprocpadrao == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_tipoprocpadrao"]:$this->y32_tipoprocpadrao);
        $this->y32_calcvistanosanteriores = ($this->y32_calcvistanosanteriores == "f"?@$GLOBALS["HTTP_POST_VARS"]["y32_calcvistanosanteriores"]:$this->y32_calcvistanosanteriores);
-       $this->y32_procprotbaixaauto = ($this->y32_procprotbaixaauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_procprotbaixaauto"]:$this->y32_procprotbaixaauto);
+       $this->y32_procprotbaixaauto = (($this->y32_procprotbaixaauto === 0 || $this->y32_procprotbaixaauto === 0.0 || $this->y32_procprotbaixaauto == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_procprotbaixaauto"]:$this->y32_procprotbaixaauto);
        $this->y32_utilizacalculoporteatividade = ($this->y32_utilizacalculoporteatividade == "f"?@$GLOBALS["HTTP_POST_VARS"]["y32_utilizacalculoporteatividade"]:$this->y32_utilizacalculoporteatividade);
-       $this->y32_templatealvarasanitariopermanente = ($this->y32_templatealvarasanitariopermanente == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_templatealvarasanitariopermanente"]:$this->y32_templatealvarasanitariopermanente);
-       $this->y32_templatealvarasanitarioprovisorio = ($this->y32_templatealvarasanitarioprovisorio == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_templatealvarasanitarioprovisorio"]:$this->y32_templatealvarasanitarioprovisorio);
-       $this->y32_templateautoinfracao = ($this->y32_templateautoinfracao == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_templateautoinfracao"]:$this->y32_templateautoinfracao);
+       $this->y32_templatealvarasanitariopermanente = (($this->y32_templatealvarasanitariopermanente === 0 || $this->y32_templatealvarasanitariopermanente === 0.0 || $this->y32_templatealvarasanitariopermanente == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_templatealvarasanitariopermanente"]:$this->y32_templatealvarasanitariopermanente);
+       $this->y32_templatealvarasanitarioprovisorio = (($this->y32_templatealvarasanitarioprovisorio === 0 || $this->y32_templatealvarasanitarioprovisorio === 0.0 || $this->y32_templatealvarasanitarioprovisorio == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_templatealvarasanitarioprovisorio"]:$this->y32_templatealvarasanitarioprovisorio);
+       $this->y32_templateautoinfracao = (($this->y32_templateautoinfracao === 0 || $this->y32_templateautoinfracao === 0.0 || $this->y32_templateautoinfracao == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_templateautoinfracao"]:$this->y32_templateautoinfracao);
        $this->y32_calculavistoriamei = ($this->y32_calculavistoriamei == "f"?@$GLOBALS["HTTP_POST_VARS"]["y32_calculavistoriamei"]:$this->y32_calculavistoriamei);
-       $this->y32_tipodataoperacao = ($this->y32_tipodataoperacao == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_tipodataoperacao"]:$this->y32_tipodataoperacao);
-       $this->y32_tipodatavencimento = ($this->y32_tipodatavencimento == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_tipodatavencimento"]:$this->y32_tipodatavencimento);
+       $this->y32_tipodataoperacao = (($this->y32_tipodataoperacao === 0 || $this->y32_tipodataoperacao === 0.0 || $this->y32_tipodataoperacao == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_tipodataoperacao"]:$this->y32_tipodataoperacao);
+       $this->y32_tipodatavencimento = (($this->y32_tipodatavencimento === 0 || $this->y32_tipodatavencimento === 0.0 || $this->y32_tipodatavencimento == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_tipodatavencimento"]:$this->y32_tipodatavencimento);
      }else{
-       $this->y32_instit = ($this->y32_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_instit"]:$this->y32_instit);
+       $this->y32_instit = (($this->y32_instit === 0 || $this->y32_instit === 0.0 || $this->y32_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_instit"]:$this->y32_instit);
      }
    }
    // funcao para Inclusão
@@ -350,7 +350,7 @@ class cl_parfiscal {
        return false;
      }
        $this->y32_instit = $y32_instit;
-     if(($this->y32_instit == null) || ($this->y32_instit == "") ){
+     if(($this->y32_instit == null) || (($this->y32_instit === 0 || $this->y32_instit === 0.0 || $this->y32_instit == "")) ){
        $this->erro_sql = " Campo y32_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -1033,7 +1033,7 @@ class cl_parfiscal {
    function sql_query ( $y32_instit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1069,7 +1069,7 @@ class cl_parfiscal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1081,7 +1081,7 @@ class cl_parfiscal {
    function sql_query_param ( $y32_instit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1118,7 +1118,7 @@ class cl_parfiscal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1131,7 +1131,7 @@ class cl_parfiscal {
    function sql_query_file ( $y32_instit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1152,7 +1152,7 @@ class cl_parfiscal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -137,10 +137,10 @@ class cl_rhpessoal {
   // funcao para atualizar campos
   function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->rh01_regist = ($this->rh01_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_regist"]:$this->rh01_regist);
-      $this->rh01_numcgm = ($this->rh01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_numcgm"]:$this->rh01_numcgm);
-      $this->rh01_funcao = ($this->rh01_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_funcao"]:$this->rh01_funcao);
-      $this->rh01_lotac = ($this->rh01_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_lotac"]:$this->rh01_lotac);
+      $this->rh01_regist = (($this->rh01_regist === 0 || $this->rh01_regist === 0.0 || $this->rh01_regist == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_regist"]:$this->rh01_regist);
+      $this->rh01_numcgm = (($this->rh01_numcgm === 0 || $this->rh01_numcgm === 0.0 || $this->rh01_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_numcgm"]:$this->rh01_numcgm);
+      $this->rh01_funcao = (($this->rh01_funcao === 0 || $this->rh01_funcao === 0.0 || $this->rh01_funcao == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_funcao"]:$this->rh01_funcao);
+      $this->rh01_lotac = (($this->rh01_lotac === 0 || $this->rh01_lotac === 0.0 || $this->rh01_lotac == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_lotac"]:$this->rh01_lotac);
       if($this->rh01_admiss == ""){
         $this->rh01_admiss_dia = ($this->rh01_admiss_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_admiss_dia"]:$this->rh01_admiss_dia);
         $this->rh01_admiss_mes = ($this->rh01_admiss_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_admiss_mes"]:$this->rh01_admiss_mes);
@@ -157,14 +157,14 @@ class cl_rhpessoal {
           $this->rh01_nasc = $this->rh01_nasc_ano."-".$this->rh01_nasc_mes."-".$this->rh01_nasc_dia;
         }
       }
-      $this->rh01_nacion = ($this->rh01_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_nacion"]:$this->rh01_nacion);
-      $this->rh01_anoche = ($this->rh01_anoche == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_anoche"]:$this->rh01_anoche);
-      $this->rh01_instru = ($this->rh01_instru == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_instru"]:$this->rh01_instru);
+      $this->rh01_nacion = (($this->rh01_nacion === 0 || $this->rh01_nacion === 0.0 || $this->rh01_nacion == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_nacion"]:$this->rh01_nacion);
+      $this->rh01_anoche = (($this->rh01_anoche === 0 || $this->rh01_anoche === 0.0 || $this->rh01_anoche == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_anoche"]:$this->rh01_anoche);
+      $this->rh01_instru = (($this->rh01_instru === 0 || $this->rh01_instru === 0.0 || $this->rh01_instru == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_instru"]:$this->rh01_instru);
       $this->rh01_sexo = ($this->rh01_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_sexo"]:$this->rh01_sexo);
-      $this->rh01_estciv = ($this->rh01_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_estciv"]:$this->rh01_estciv);
-      $this->rh01_tipadm = ($this->rh01_tipadm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_tipadm"]:$this->rh01_tipadm);
+      $this->rh01_estciv = (($this->rh01_estciv === 0 || $this->rh01_estciv === 0.0 || $this->rh01_estciv == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_estciv"]:$this->rh01_estciv);
+      $this->rh01_tipadm = (($this->rh01_tipadm === 0 || $this->rh01_tipadm === 0.0 || $this->rh01_tipadm == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_tipadm"]:$this->rh01_tipadm);
       $this->rh01_natura = ($this->rh01_natura == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_natura"]:$this->rh01_natura);
-      $this->rh01_raca = ($this->rh01_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_raca"]:$this->rh01_raca);
+      $this->rh01_raca = (($this->rh01_raca === 0 || $this->rh01_raca === 0.0 || $this->rh01_raca == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_raca"]:$this->rh01_raca);
       $this->rh01_clas1 = ($this->rh01_clas1 == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_clas1"]:$this->rh01_clas1);
       if($this->rh01_clas2 == ""){
         $this->rh01_clas2_dia = ($this->rh01_clas2_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_clas2_dia"]:$this->rh01_clas2_dia);
@@ -190,17 +190,17 @@ class cl_rhpessoal {
           $this->rh01_progres = $this->rh01_progres_ano."-".$this->rh01_progres_mes."-".$this->rh01_progres_dia;
         }
       }
-      $this->rh01_instit = ($this->rh01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_instit"]:$this->rh01_instit);
+      $this->rh01_instit = (($this->rh01_instit === 0 || $this->rh01_instit === 0.0 || $this->rh01_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_instit"]:$this->rh01_instit);
       $this->rh01_vale = ($this->rh01_vale == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_vale"]:$this->rh01_vale);
-      $this->rh01_ponto = ($this->rh01_ponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_ponto"]:$this->rh01_ponto);
-      $this->rh01_depirf = ($this->rh01_depirf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_depirf"]:$this->rh01_depirf);
-      $this->rh01_depsf = ($this->rh01_depsf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_depsf"]:$this->rh01_depsf);
+      $this->rh01_ponto = (($this->rh01_ponto === 0 || $this->rh01_ponto === 0.0 || $this->rh01_ponto == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_ponto"]:$this->rh01_ponto);
+      $this->rh01_depirf = (($this->rh01_depirf === 0 || $this->rh01_depirf === 0.0 || $this->rh01_depirf == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_depirf"]:$this->rh01_depirf);
+      $this->rh01_depsf = (($this->rh01_depsf === 0 || $this->rh01_depsf === 0.0 || $this->rh01_depsf == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_depsf"]:$this->rh01_depsf);
       $this->rh01_observacao = ($this->rh01_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_observacao"]:$this->rh01_observacao);
-      $this->rh01_rhsindicato = ($this->rh01_rhsindicato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_rhsindicato"]:$this->rh01_rhsindicato);
-      $this->rh01_reajusteparidade = ($this->rh01_reajusteparidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_reajusteparidade"]:$this->rh01_reajusteparidade);
+      $this->rh01_rhsindicato = (($this->rh01_rhsindicato === 0 || $this->rh01_rhsindicato === 0.0 || $this->rh01_rhsindicato == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_rhsindicato"]:$this->rh01_rhsindicato);
+      $this->rh01_reajusteparidade = (($this->rh01_reajusteparidade === 0 || $this->rh01_reajusteparidade === 0.0 || $this->rh01_reajusteparidade == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_reajusteparidade"]:$this->rh01_reajusteparidade);
       $this->rh01_registrapontoeletronico = ($this->rh01_registrapontoeletronico == "t"?@$GLOBALS["HTTP_POST_VARS"]["rh01_registrapontoeletronico"]:$this->rh01_registrapontoeletronico);
     }else{
-      $this->rh01_regist = ($this->rh01_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh01_regist"]:$this->rh01_regist);
+      $this->rh01_regist = (($this->rh01_regist === 0 || $this->rh01_regist === 0.0 || $this->rh01_regist == "")?@$GLOBALS["HTTP_POST_VARS"]["rh01_regist"]:$this->rh01_regist);
     }
   }
   // funcao para inclusao
@@ -354,7 +354,7 @@ class cl_rhpessoal {
       return false;
     }
     $this->rh01_regist = $rh01_regist;
-    if(($this->rh01_regist == null) || ($this->rh01_regist == "") ){
+    if(($this->rh01_regist == null) || (($this->rh01_regist === 0 || $this->rh01_regist === 0.0 || $this->rh01_regist == "")) ){
       $this->erro_sql = " Campo rh01_regist nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
