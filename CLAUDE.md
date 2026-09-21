@@ -73,7 +73,7 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|tra)[0-9]?_` |
-| **Próximo módulo** | **`arr` Arrecadação (162 arq.)**, depois `div` → `jur` → pequenos → `fis` (353) → `iss` (400) |
+| **Próximo módulo** | **`jur` Jurídico (145 telas, 137 arq. a alterar)**, depois `div` → pequenos → `arr` → `fis` → `iss`. Ordem revista por métrica — ver *ORDEM REVISTA*. |
 | **Dívida técnica aberta** | `dbagata/` (1 arquivo alcançável, pré-requisito do `iss`) e `fpdf151/` (28 arquivos). Ver *6ª LACUNA*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
@@ -759,9 +759,61 @@ Financeiro e Patrimonial junto.
 
 **Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ — restam 9 prefixos.
 
-**Ordem dentro da Fase A:** `itb` (110, tamanho parecido com o Cemitério — segunda validação
-da receita) → `agu` → `arr` → `div` → `jur` → `mar`/`tri`/`dvr`/`inf`/`not` → e por último os
-grandes, `fis` (353) e `iss` (400).
+### ⚠ ORDEM REVISTA: `jur` antes de `div`, e `arr` por último
+
+A ordem anterior (`arr` → `div` → `jur`) foi herdada da tabela de resíduo original, que era
+**anterior aos três portes** e usava um fecho de dependências só de `include`. Recomputada com
+a enumeração completa da receita (includes + autoload + citados em strings) e descontando o que
+os portes já pagaram, ela se inverte. Analisador: `scratchpad/residuo.py`.
+
+| | `jur` Jurídico | `div` Dívida Ativa | `arr` Arrecadação |
+|---|---|---|---|
+| Telas (prefixo, IGNORECASE) | 145 | 148 | 162 |
+| Itens de menu ligados | 57 de 64 (89%) | 63 de 64 (98%) | 85 de 88 (97%) |
+| Dependências no fecho | 170 | 244 | 509 |
+| Já pagas (núcleo + portados) | 42 | 53 | 48 |
+| Exclusivas do módulo | 35 | 42 | 37 |
+| **Resíduo** | **93** | **149** | **424** |
+| Resíduo que precisa de alteração | 76 | 124 | 301 |
+| **Arquivos a alterar (total)** | **137** | **198** | **343** |
+
+Calibração contra o que já foi feito — arquivos efetivamente alterados por lote: `itb` **105**,
+`cem` **124**, `agu` **171**. Ou seja: `jur` (137) cai **dentro da faixa já provada**, `div`
+(198) fica acima do maior lote já executado, e `arr` (343) é **o dobro** dele.
+
+O que cada um arrasta de módulos não portados (só os arquivos que precisam de alteração):
+
+```
+jur   func:69   cai:52   div:38   arr:36   cad:28
+div   func:112  cai:86   iss:63   arr:61   cad:59
+arr   func:285  cai:252  con:212  emp:208  pes:203
+```
+
+**`arr` é o único que rompe a fronteira da área.** Ele arrasta 212 arquivos de `con`
+(Contabilidade, 1.559 scripts) e 203 de `pes` (RH) — módulos de *outras* áreas. `jur` e `div`
+arrastam sobretudo `func` (compartilhado por todos, inevitável) e módulos da própria área.
+
+**Efeito de ordem:** a soma é invariante — 559 arquivos para os três, em qualquer ordem. Logo a
+ordem **não muda o custo total**, muda o tamanho do primeiro lote e portanto a velocidade do
+ciclo de verificação:
+
+```
+jur -> div -> arr     137 + 157 + 265
+arr -> div -> jur     343 + 132 +  84
+```
+
+**Ordem adotada:** `jur` → `div` → `mar`/`tri`/`dvr`/`inf`/`not` → `arr` → `fis` (353) →
+`iss` (400). O `arr` desce para perto do fim, junto dos grandes.
+
+**RESSALVA IMPORTANTE — resíduo não é bloqueador.** Os três módulos já portados deixaram
+resíduo não portado (`cem` 20, `itb` 24, `agu` 29 arquivos que precisariam de alteração) e
+mesmo assim verificam byte-a-byte: 114/116, 116/120 e 222/224. Esses arquivos não estão nos
+caminhos exercitados. Resíduo mede **contaminação de escopo** — quanto de outros módulos o
+porte encosta —, não risco de quebra.
+
+Os números desta tabela **não são comparáveis** com a tabela de resíduo histórica (onde `tra`
+tinha 0 e `cem` tinha 4): aquela usava fecho só de `include`, que não enxerga autoload nem os
+arquivos abertos por JavaScript.
 
 ### Receita por módulo (validada em `cem`, `itb` e `agu`)
 
