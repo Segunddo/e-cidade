@@ -54,7 +54,7 @@ class cl_favorecido {
                  v86_containterna = varchar(50) = Conta Interna 
                  ";
    //funcao construtor da classe 
-   function cl_favorecido() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("favorecido"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_favorecido {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v86_sequencial = ($this->v86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v86_sequencial"]:$this->v86_sequencial);
-       $this->v86_contabancaria = ($this->v86_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["v86_contabancaria"]:$this->v86_contabancaria);
-       $this->v86_numcgm = ($this->v86_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v86_numcgm"]:$this->v86_numcgm);
+       $this->v86_sequencial = (($this->v86_sequencial === 0 || $this->v86_sequencial === 0.0 || $this->v86_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v86_sequencial"]:$this->v86_sequencial);
+       $this->v86_contabancaria = (($this->v86_contabancaria === 0 || $this->v86_contabancaria === 0.0 || $this->v86_contabancaria == "")?@$GLOBALS["HTTP_POST_VARS"]["v86_contabancaria"]:$this->v86_contabancaria);
+       $this->v86_numcgm = (($this->v86_numcgm === 0 || $this->v86_numcgm === 0.0 || $this->v86_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["v86_numcgm"]:$this->v86_numcgm);
        $this->v86_containterna = ($this->v86_containterna == ""?@$GLOBALS["HTTP_POST_VARS"]["v86_containterna"]:$this->v86_containterna);
      }else{
-       $this->v86_sequencial = ($this->v86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v86_sequencial"]:$this->v86_sequencial);
+       $this->v86_sequencial = (($this->v86_sequencial === 0 || $this->v86_sequencial === 0.0 || $this->v86_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v86_sequencial"]:$this->v86_sequencial);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_favorecido {
          $this->v86_sequencial = $v86_sequencial; 
        }
      }
-     if(($this->v86_sequencial == null) || ($this->v86_sequencial == "") ){ 
+     if(($this->v86_sequencial == null) || (($this->v86_sequencial === 0 || $this->v86_sequencial === 0.0 || $this->v86_sequencial == "")) ){ 
        $this->erro_sql = " Campo v86_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -373,7 +373,7 @@ class cl_favorecido {
    function sql_query ( $v86_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_favorecido {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -410,7 +410,7 @@ class cl_favorecido {
    function sql_query_file ( $v86_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_favorecido {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_favorecido {
    function sql_query_dados ( $v86_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -476,7 +476,7 @@ class cl_favorecido {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

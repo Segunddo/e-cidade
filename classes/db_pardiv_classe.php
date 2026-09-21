@@ -97,7 +97,7 @@ class cl_pardiv {
                  v04_cobrarjurosmultacda = bool = Juros e multa até o vencimento do recibo 
                  ";
    //funcao construtor da classe 
-   function cl_pardiv() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pardiv"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -114,34 +114,34 @@ class cl_pardiv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ultcoddiv = ($this->ultcoddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["ultcoddiv"]:$this->ultcoddiv);
-       $this->codbco = ($this->codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["codbco"]:$this->codbco);
+       $this->ultcoddiv = (($this->ultcoddiv === 0 || $this->ultcoddiv === 0.0 || $this->ultcoddiv == "")?@$GLOBALS["HTTP_POST_VARS"]["ultcoddiv"]:$this->ultcoddiv);
+       $this->codbco = (($this->codbco === 0 || $this->codbco === 0.0 || $this->codbco == "")?@$GLOBALS["HTTP_POST_VARS"]["codbco"]:$this->codbco);
        $this->codage = ($this->codage == ""?@$GLOBALS["HTTP_POST_VARS"]["codage"]:$this->codage);
-       $this->ultcertid = ($this->ultcertid == ""?@$GLOBALS["HTTP_POST_VARS"]["ultcertid"]:$this->ultcertid);
+       $this->ultcertid = (($this->ultcertid === 0 || $this->ultcertid === 0.0 || $this->ultcertid == "")?@$GLOBALS["HTTP_POST_VARS"]["ultcertid"]:$this->ultcertid);
        $this->qv = ($this->qv == "f"?@$GLOBALS["HTTP_POST_VARS"]["qv"]:$this->qv);
        $this->inflat = ($this->inflat == ""?@$GLOBALS["HTTP_POST_VARS"]["inflat"]:$this->inflat);
-       $this->ultparcel = ($this->ultparcel == ""?@$GLOBALS["HTTP_POST_VARS"]["ultparcel"]:$this->ultparcel);
-       $this->k00_hist = ($this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
-       $this->v04_recparini = ($this->v04_recparini == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_recparini"]:$this->v04_recparini);
-       $this->v04_docum = ($this->v04_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_docum"]:$this->v04_docum);
-       $this->v04_histpadparc = ($this->v04_histpadparc == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_histpadparc"]:$this->v04_histpadparc);
-       $this->v04_peticaoinicial = ($this->v04_peticaoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_peticaoinicial"]:$this->v04_peticaoinicial);
-       $this->v04_ordemendcda = ($this->v04_ordemendcda == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_ordemendcda"]:$this->v04_ordemendcda);
-       $this->v04_histjuros = ($this->v04_histjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_histjuros"]:$this->v04_histjuros);
-       $this->v04_instit = ($this->v04_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_instit"]:$this->v04_instit);
-       $this->v04_tipoinicial = ($this->v04_tipoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_tipoinicial"]:$this->v04_tipoinicial);
-       $this->v04_tipocertidao = ($this->v04_tipocertidao == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_tipocertidao"]:$this->v04_tipocertidao);
-       $this->v04_envolcdaiptu = ($this->v04_envolcdaiptu == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_envolcdaiptu"]:$this->v04_envolcdaiptu);
-       $this->v04_envolcdaiss = ($this->v04_envolcdaiss == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_envolcdaiss"]:$this->v04_envolcdaiss);
+       $this->ultparcel = (($this->ultparcel === 0 || $this->ultparcel === 0.0 || $this->ultparcel == "")?@$GLOBALS["HTTP_POST_VARS"]["ultparcel"]:$this->ultparcel);
+       $this->k00_hist = (($this->k00_hist === 0 || $this->k00_hist === 0.0 || $this->k00_hist == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
+       $this->v04_recparini = (($this->v04_recparini === 0 || $this->v04_recparini === 0.0 || $this->v04_recparini == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_recparini"]:$this->v04_recparini);
+       $this->v04_docum = (($this->v04_docum === 0 || $this->v04_docum === 0.0 || $this->v04_docum == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_docum"]:$this->v04_docum);
+       $this->v04_histpadparc = (($this->v04_histpadparc === 0 || $this->v04_histpadparc === 0.0 || $this->v04_histpadparc == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_histpadparc"]:$this->v04_histpadparc);
+       $this->v04_peticaoinicial = (($this->v04_peticaoinicial === 0 || $this->v04_peticaoinicial === 0.0 || $this->v04_peticaoinicial == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_peticaoinicial"]:$this->v04_peticaoinicial);
+       $this->v04_ordemendcda = (($this->v04_ordemendcda === 0 || $this->v04_ordemendcda === 0.0 || $this->v04_ordemendcda == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_ordemendcda"]:$this->v04_ordemendcda);
+       $this->v04_histjuros = (($this->v04_histjuros === 0 || $this->v04_histjuros === 0.0 || $this->v04_histjuros == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_histjuros"]:$this->v04_histjuros);
+       $this->v04_instit = (($this->v04_instit === 0 || $this->v04_instit === 0.0 || $this->v04_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_instit"]:$this->v04_instit);
+       $this->v04_tipoinicial = (($this->v04_tipoinicial === 0 || $this->v04_tipoinicial === 0.0 || $this->v04_tipoinicial == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_tipoinicial"]:$this->v04_tipoinicial);
+       $this->v04_tipocertidao = (($this->v04_tipocertidao === 0 || $this->v04_tipocertidao === 0.0 || $this->v04_tipocertidao == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_tipocertidao"]:$this->v04_tipocertidao);
+       $this->v04_envolcdaiptu = (($this->v04_envolcdaiptu === 0 || $this->v04_envolcdaiptu === 0.0 || $this->v04_envolcdaiptu == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_envolcdaiptu"]:$this->v04_envolcdaiptu);
+       $this->v04_envolcdaiss = (($this->v04_envolcdaiss === 0 || $this->v04_envolcdaiss === 0.0 || $this->v04_envolcdaiss == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_envolcdaiss"]:$this->v04_envolcdaiss);
        $this->v04_envolprinciptu = ($this->v04_envolprinciptu == "f"?@$GLOBALS["HTTP_POST_VARS"]["v04_envolprinciptu"]:$this->v04_envolprinciptu);
        $this->v04_imphistcda = ($this->v04_imphistcda == "f"?@$GLOBALS["HTTP_POST_VARS"]["v04_imphistcda"]:$this->v04_imphistcda);
        $this->v04_expfalecimentocda = ($this->v04_expfalecimentocda == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_expfalecimentocda"]:$this->v04_expfalecimentocda);
        $this->v04_implivrofolha = ($this->v04_implivrofolha == "f"?@$GLOBALS["HTTP_POST_VARS"]["v04_implivrofolha"]:$this->v04_implivrofolha);
-       $this->v04_confexpfalec = ($this->v04_confexpfalec == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_confexpfalec"]:$this->v04_confexpfalec);
-       $this->v04_formgeracda = ($this->v04_formgeracda == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_formgeracda"]:$this->v04_formgeracda);
+       $this->v04_confexpfalec = (($this->v04_confexpfalec === 0 || $this->v04_confexpfalec === 0.0 || $this->v04_confexpfalec == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_confexpfalec"]:$this->v04_confexpfalec);
+       $this->v04_formgeracda = (($this->v04_formgeracda === 0 || $this->v04_formgeracda === 0.0 || $this->v04_formgeracda == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_formgeracda"]:$this->v04_formgeracda);
        $this->v04_cobrarjurosmultacda = ($this->v04_cobrarjurosmultacda == "f"?@$GLOBALS["HTTP_POST_VARS"]["v04_cobrarjurosmultacda"]:$this->v04_cobrarjurosmultacda);
      }else{
-       $this->v04_instit = ($this->v04_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_instit"]:$this->v04_instit);
+       $this->v04_instit = (($this->v04_instit === 0 || $this->v04_instit === 0.0 || $this->v04_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["v04_instit"]:$this->v04_instit);
      }
    }
    // funcao para Inclusão
@@ -301,7 +301,7 @@ class cl_pardiv {
        return false;
      }
        $this->v04_instit = $v04_instit; 
-     if(($this->v04_instit == null) || ($this->v04_instit == "") ){ 
+     if(($this->v04_instit == null) || (($this->v04_instit === 0 || $this->v04_instit === 0.0 || $this->v04_instit == "")) ){ 
        $this->erro_sql = " Campo v04_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -966,7 +966,7 @@ class cl_pardiv {
    function sql_query_param ( $v04_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1001,7 +1001,7 @@ class cl_pardiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

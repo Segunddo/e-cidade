@@ -50,7 +50,7 @@ class cl_inicialnomes {
                  v58_numcgm = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_inicialnomes() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("inicialnomes"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_inicialnomes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v58_inicial = ($this->v58_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v58_inicial"]:$this->v58_inicial);
-       $this->v58_numcgm = ($this->v58_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v58_numcgm"]:$this->v58_numcgm);
+       $this->v58_inicial = (($this->v58_inicial === 0 || $this->v58_inicial === 0.0 || $this->v58_inicial == "")?@$GLOBALS["HTTP_POST_VARS"]["v58_inicial"]:$this->v58_inicial);
+       $this->v58_numcgm = (($this->v58_numcgm === 0 || $this->v58_numcgm === 0.0 || $this->v58_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["v58_numcgm"]:$this->v58_numcgm);
      }else{
-       $this->v58_inicial = ($this->v58_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v58_inicial"]:$this->v58_inicial);
-       $this->v58_numcgm = ($this->v58_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v58_numcgm"]:$this->v58_numcgm);
+       $this->v58_inicial = (($this->v58_inicial === 0 || $this->v58_inicial === 0.0 || $this->v58_inicial == "")?@$GLOBALS["HTTP_POST_VARS"]["v58_inicial"]:$this->v58_inicial);
+       $this->v58_numcgm = (($this->v58_numcgm === 0 || $this->v58_numcgm === 0.0 || $this->v58_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["v58_numcgm"]:$this->v58_numcgm);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_inicialnomes {
       $this->atualizacampos();
        $this->v58_inicial = $v58_inicial; 
        $this->v58_numcgm = $v58_numcgm; 
-     if(($this->v58_inicial == null) || ($this->v58_inicial == "") ){ 
+     if(($this->v58_inicial == null) || (($this->v58_inicial === 0 || $this->v58_inicial === 0.0 || $this->v58_inicial == "")) ){ 
        $this->erro_sql = " Campo v58_inicial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_inicialnomes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->v58_numcgm == null) || ($this->v58_numcgm == "") ){ 
+     if(($this->v58_numcgm == null) || (($this->v58_numcgm === 0 || $this->v58_numcgm === 0.0 || $this->v58_numcgm == "")) ){ 
        $this->erro_sql = " Campo v58_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_inicialnomes {
    function sql_query ( $v58_inicial=null,$v58_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -352,7 +352,7 @@ class cl_inicialnomes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_inicialnomes {
    function sql_query_file ( $v58_inicial=null,$v58_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_inicialnomes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

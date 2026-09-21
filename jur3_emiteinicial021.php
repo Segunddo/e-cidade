@@ -196,7 +196,7 @@ function js_volta(){
 					  <td>&nbsp;</td>
             <td valign="top"  align="left">
               <? 
-                $matriz=split("#",@$chave);
+                $matriz=explode("#",@$chave);
                	for($y=0;$y<sizeof($matriz);$y++){
                	  if($matriz[$y]!=""){
            	        echo "<label>";

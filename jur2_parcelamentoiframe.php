@@ -40,7 +40,7 @@ require_once(modification("classes/db_propri_classe.php"));
 require_once(modification("classes/db_jurpeticoes_classe.php"));
 require_once(modification("classes/db_parjuridico_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clinicial             = new cl_inicial;
@@ -66,7 +66,7 @@ $dadosini="";
 
 if(isset($iniciais)){
   
-  $matriz = split("x",$iniciais);
+  $matriz = explode("x",$iniciais);
   for($s=0; $s < sizeof($matriz); $s++){
     $inicial=$matriz[$s];
     if($inicial!=""){

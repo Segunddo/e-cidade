@@ -50,7 +50,7 @@ class cl_inicialcert {
                  v51_certidao = int4 = Certidão
                  ";
    //funcao construtor da classe
-   function cl_inicialcert() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("inicialcert");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_inicialcert {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v51_inicial = ($this->v51_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v51_inicial"]:$this->v51_inicial);
-       $this->v51_certidao = ($this->v51_certidao == ""?@$GLOBALS["HTTP_POST_VARS"]["v51_certidao"]:$this->v51_certidao);
+       $this->v51_inicial = (($this->v51_inicial === 0 || $this->v51_inicial === 0.0 || $this->v51_inicial == "")?@$GLOBALS["HTTP_POST_VARS"]["v51_inicial"]:$this->v51_inicial);
+       $this->v51_certidao = (($this->v51_certidao === 0 || $this->v51_certidao === 0.0 || $this->v51_certidao == "")?@$GLOBALS["HTTP_POST_VARS"]["v51_certidao"]:$this->v51_certidao);
      }else{
-       $this->v51_inicial = ($this->v51_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v51_inicial"]:$this->v51_inicial);
-       $this->v51_certidao = ($this->v51_certidao == ""?@$GLOBALS["HTTP_POST_VARS"]["v51_certidao"]:$this->v51_certidao);
+       $this->v51_inicial = (($this->v51_inicial === 0 || $this->v51_inicial === 0.0 || $this->v51_inicial == "")?@$GLOBALS["HTTP_POST_VARS"]["v51_inicial"]:$this->v51_inicial);
+       $this->v51_certidao = (($this->v51_certidao === 0 || $this->v51_certidao === 0.0 || $this->v51_certidao == "")?@$GLOBALS["HTTP_POST_VARS"]["v51_certidao"]:$this->v51_certidao);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_inicialcert {
       $this->atualizacampos();
        $this->v51_inicial = $v51_inicial;
        $this->v51_certidao = $v51_certidao;
-     if(($this->v51_inicial == null) || ($this->v51_inicial == "") ){
+     if(($this->v51_inicial == null) || (($this->v51_inicial === 0 || $this->v51_inicial === 0.0 || $this->v51_inicial == "")) ){
        $this->erro_sql = " Campo v51_inicial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_inicialcert {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->v51_certidao == null) || ($this->v51_certidao == "") ){
+     if(($this->v51_certidao == null) || (($this->v51_certidao === 0 || $this->v51_certidao === 0.0 || $this->v51_certidao == "")) ){
        $this->erro_sql = " Campo v51_certidao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -64,7 +64,7 @@ class cl_rhlota {
                  r70_concarpeculiar = varchar(100) = Caracteristica Peculiar 
                  ";
    //funcao construtor da classe 
-   function cl_rhlota() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhlota"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_rhlota {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r70_codigo = ($this->r70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r70_codigo"]:$this->r70_codigo);
-       $this->r70_codestrut = ($this->r70_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["r70_codestrut"]:$this->r70_codestrut);
+       $this->r70_codigo = (($this->r70_codigo === 0 || $this->r70_codigo === 0.0 || $this->r70_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["r70_codigo"]:$this->r70_codigo);
+       $this->r70_codestrut = (($this->r70_codestrut === 0 || $this->r70_codestrut === 0.0 || $this->r70_codestrut == "")?@$GLOBALS["HTTP_POST_VARS"]["r70_codestrut"]:$this->r70_codestrut);
        $this->r70_estrut = ($this->r70_estrut == ""?@$GLOBALS["HTTP_POST_VARS"]["r70_estrut"]:$this->r70_estrut);
        $this->r70_descr = ($this->r70_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r70_descr"]:$this->r70_descr);
        $this->r70_analitica = ($this->r70_analitica == "f"?@$GLOBALS["HTTP_POST_VARS"]["r70_analitica"]:$this->r70_analitica);
-       $this->r70_instit = ($this->r70_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r70_instit"]:$this->r70_instit);
+       $this->r70_instit = (($this->r70_instit === 0 || $this->r70_instit === 0.0 || $this->r70_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["r70_instit"]:$this->r70_instit);
        $this->r70_ativo = ($this->r70_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["r70_ativo"]:$this->r70_ativo);
-       $this->r70_numcgm = ($this->r70_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r70_numcgm"]:$this->r70_numcgm);
+       $this->r70_numcgm = (($this->r70_numcgm === 0 || $this->r70_numcgm === 0.0 || $this->r70_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["r70_numcgm"]:$this->r70_numcgm);
        $this->r70_concarpeculiar = ($this->r70_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["r70_concarpeculiar"]:$this->r70_concarpeculiar);
      }else{
-       $this->r70_codigo = ($this->r70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r70_codigo"]:$this->r70_codigo);
+       $this->r70_codigo = (($this->r70_codigo === 0 || $this->r70_codigo === 0.0 || $this->r70_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["r70_codigo"]:$this->r70_codigo);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_rhlota {
          $this->r70_codigo = $r70_codigo; 
        }
      }
-     if(($this->r70_codigo == null) || ($this->r70_codigo == "") ){ 
+     if(($this->r70_codigo == null) || (($this->r70_codigo === 0 || $this->r70_codigo === 0.0 || $this->r70_codigo == "")) ){ 
        $this->erro_sql = " Campo r70_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -764,7 +764,7 @@ class cl_rhlota {
   function sql_query_usuarios ( $r70_codigo=null,$campos="*",$ordem=null,$dbwhere="") {
       $sql = "select ";
       if($campos != "*" ){
-          $campos_sql = split("#",$campos);
+          $campos_sql = explode("#",$campos);
           $virgula = "";
           for($i=0;$i<sizeof($campos_sql);$i++){
               $sql .= $virgula.$campos_sql[$i];
@@ -790,7 +790,7 @@ class cl_rhlota {
       $sql .= $sql2;
       if($ordem != null ){
           $sql .= " order by ";
-          $campos_sql = split("#",$ordem);
+          $campos_sql = explode("#",$ordem);
           $virgula = "";
           for($i=0;$i<sizeof($campos_sql);$i++){
               $sql .= $virgula.$campos_sql[$i];

@@ -72,7 +72,7 @@ class cl_termoini
                  ";
 
     //funcao construtor da classe
-    function cl_termoini()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("termoini");
@@ -94,21 +94,21 @@ class cl_termoini
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->inicial = ($this->inicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["inicial"] : $this->inicial);
-            $this->parcel = ($this->parcel == "" ? @$GLOBALS["HTTP_POST_VARS"]["parcel"] : $this->parcel);
-            $this->numpreant = ($this->numpreant == "" ? @$GLOBALS["HTTP_POST_VARS"]["numpreant"] : $this->numpreant);
-            $this->valor = ($this->valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["valor"] : $this->valor);
-            $this->juros = ($this->juros == "" ? @$GLOBALS["HTTP_POST_VARS"]["juros"] : $this->juros);
-            $this->multa = ($this->multa == "" ? @$GLOBALS["HTTP_POST_VARS"]["multa"] : $this->multa);
-            $this->desconto = ($this->desconto == "" ? @$GLOBALS["HTTP_POST_VARS"]["desconto"] : $this->desconto);
-            $this->total = ($this->total == "" ? @$GLOBALS["HTTP_POST_VARS"]["total"] : $this->total);
-            $this->vlrcor = ($this->vlrcor == "" ? @$GLOBALS["HTTP_POST_VARS"]["vlrcor"] : $this->vlrcor);
-            $this->v61_perc = ($this->v61_perc == "" ? @$GLOBALS["HTTP_POST_VARS"]["v61_perc"] : $this->v61_perc);
-            $this->vlrdescjur = ($this->vlrdescjur == "" ? @$GLOBALS["HTTP_POST_VARS"]["vlrdescjur"] : $this->vlrdescjur);
-            $this->vlrdescmul = ($this->vlrdescmul == "" ? @$GLOBALS["HTTP_POST_VARS"]["vlrdescmul"] : $this->vlrdescmul);
+            $this->inicial = (($this->inicial === 0 || $this->inicial === 0.0 || $this->inicial == "") ? @$GLOBALS["HTTP_POST_VARS"]["inicial"] : $this->inicial);
+            $this->parcel = (($this->parcel === 0 || $this->parcel === 0.0 || $this->parcel == "") ? @$GLOBALS["HTTP_POST_VARS"]["parcel"] : $this->parcel);
+            $this->numpreant = (($this->numpreant === 0 || $this->numpreant === 0.0 || $this->numpreant == "") ? @$GLOBALS["HTTP_POST_VARS"]["numpreant"] : $this->numpreant);
+            $this->valor = (($this->valor === 0 || $this->valor === 0.0 || $this->valor == "") ? @$GLOBALS["HTTP_POST_VARS"]["valor"] : $this->valor);
+            $this->juros = (($this->juros === 0 || $this->juros === 0.0 || $this->juros == "") ? @$GLOBALS["HTTP_POST_VARS"]["juros"] : $this->juros);
+            $this->multa = (($this->multa === 0 || $this->multa === 0.0 || $this->multa == "") ? @$GLOBALS["HTTP_POST_VARS"]["multa"] : $this->multa);
+            $this->desconto = (($this->desconto === 0 || $this->desconto === 0.0 || $this->desconto == "") ? @$GLOBALS["HTTP_POST_VARS"]["desconto"] : $this->desconto);
+            $this->total = (($this->total === 0 || $this->total === 0.0 || $this->total == "") ? @$GLOBALS["HTTP_POST_VARS"]["total"] : $this->total);
+            $this->vlrcor = (($this->vlrcor === 0 || $this->vlrcor === 0.0 || $this->vlrcor == "") ? @$GLOBALS["HTTP_POST_VARS"]["vlrcor"] : $this->vlrcor);
+            $this->v61_perc = (($this->v61_perc === 0 || $this->v61_perc === 0.0 || $this->v61_perc == "") ? @$GLOBALS["HTTP_POST_VARS"]["v61_perc"] : $this->v61_perc);
+            $this->vlrdescjur = (($this->vlrdescjur === 0 || $this->vlrdescjur === 0.0 || $this->vlrdescjur == "") ? @$GLOBALS["HTTP_POST_VARS"]["vlrdescjur"] : $this->vlrdescjur);
+            $this->vlrdescmul = (($this->vlrdescmul === 0 || $this->vlrdescmul === 0.0 || $this->vlrdescmul == "") ? @$GLOBALS["HTTP_POST_VARS"]["vlrdescmul"] : $this->vlrdescmul);
         } else {
-            $this->inicial = ($this->inicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["inicial"] : $this->inicial);
-            $this->parcel = ($this->parcel == "" ? @$GLOBALS["HTTP_POST_VARS"]["parcel"] : $this->parcel);
+            $this->inicial = (($this->inicial === 0 || $this->inicial === 0.0 || $this->inicial == "") ? @$GLOBALS["HTTP_POST_VARS"]["inicial"] : $this->inicial);
+            $this->parcel = (($this->parcel === 0 || $this->parcel === 0.0 || $this->parcel == "") ? @$GLOBALS["HTTP_POST_VARS"]["parcel"] : $this->parcel);
         }
     }
 
@@ -218,7 +218,7 @@ class cl_termoini
         }
         $this->parcel = $parcel;
         $this->inicial = $inicial;
-        if (($this->parcel == null) || ($this->parcel == "")) {
+        if (($this->parcel == null) || (($this->parcel === 0 || $this->parcel === 0.0 || $this->parcel == ""))) {
             $this->erro_sql = " Campo parcel nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -227,7 +227,7 @@ class cl_termoini
             $this->erro_status = "0";
             return false;
         }
-        if (($this->inicial == null) || ($this->inicial == "")) {
+        if (($this->inicial == null) || (($this->inicial === 0 || $this->inicial === 0.0 || $this->inicial == ""))) {
             $this->erro_sql = " Campo inicial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

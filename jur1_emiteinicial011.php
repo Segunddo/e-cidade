@@ -352,7 +352,7 @@ $numrows = 0;
 if ($veinclu == false ) {
 
   $resulta = @db_query( $sSql );
-  $numrows = @pg_numrows( $resulta );
+  $numrows = ( $resulta ? @pg_numrows( $resulta ) : 0 );
 
   if ( $numrows == 0 && $veinclu == false ) {
     db_redireciona("jur1_emiteinicial001.php?invalido=true");

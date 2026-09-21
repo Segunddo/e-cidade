@@ -61,7 +61,7 @@ class cl_averba {
                  j55_numcgm = int4 = Número Cgm 
                  ";
    //funcao construtor da classe 
-   function cl_averba() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("averba"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,8 +78,8 @@ class cl_averba {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j55_codave = ($this->j55_codave == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_codave"]:$this->j55_codave);
-       $this->j55_matric = ($this->j55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_matric"]:$this->j55_matric);
+       $this->j55_codave = (($this->j55_codave === 0 || $this->j55_codave === 0.0 || $this->j55_codave == "")?@$GLOBALS["HTTP_POST_VARS"]["j55_codave"]:$this->j55_codave);
+       $this->j55_matric = (($this->j55_matric === 0 || $this->j55_matric === 0.0 || $this->j55_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j55_matric"]:$this->j55_matric);
        if($this->j55_data == ""){
          $this->j55_data_dia = ($this->j55_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_data_dia"]:$this->j55_data_dia);
          $this->j55_data_mes = ($this->j55_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_data_mes"]:$this->j55_data_mes);
@@ -90,9 +90,9 @@ class cl_averba {
        }
        $this->j55_regimo = ($this->j55_regimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_regimo"]:$this->j55_regimo);
        $this->j55_cidade = ($this->j55_cidade == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_cidade"]:$this->j55_cidade);
-       $this->j55_numcgm = ($this->j55_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_numcgm"]:$this->j55_numcgm);
+       $this->j55_numcgm = (($this->j55_numcgm === 0 || $this->j55_numcgm === 0.0 || $this->j55_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["j55_numcgm"]:$this->j55_numcgm);
      }else{
-       $this->j55_codave = ($this->j55_codave == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_codave"]:$this->j55_codave);
+       $this->j55_codave = (($this->j55_codave === 0 || $this->j55_codave === 0.0 || $this->j55_codave == "")?@$GLOBALS["HTTP_POST_VARS"]["j55_codave"]:$this->j55_codave);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_averba {
          $this->j55_codave = $j55_codave; 
        }
      }
-     if(($this->j55_codave == null) || ($this->j55_codave == "") ){ 
+     if(($this->j55_codave == null) || (($this->j55_codave === 0 || $this->j55_codave === 0.0 || $this->j55_codave == "")) ){ 
        $this->erro_sql = " Campo j55_codave nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_averba {
    function sql_query ( $j55_codave=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_averba {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -513,7 +513,7 @@ class cl_averba {
    function sql_query_file ( $j55_codave=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_averba {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -546,7 +546,7 @@ class cl_averba {
    function sql_query_nomeant ( $j55_codave=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -568,7 +568,7 @@ class cl_averba {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

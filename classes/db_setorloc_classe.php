@@ -52,7 +52,7 @@ class cl_setorloc {
                  j05_codigoproprio = varchar(10) = Código Próprio
                  ";
    //funcao construtor da classe
-   public function cl_setorloc() {
+   public function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("setorloc");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_setorloc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j05_codigo = ($this->j05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_codigo"]:$this->j05_codigo);
+       $this->j05_codigo = (($this->j05_codigo === 0 || $this->j05_codigo === 0.0 || $this->j05_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["j05_codigo"]:$this->j05_codigo);
        $this->j05_descr = ($this->j05_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_descr"]:$this->j05_descr);
        $this->j05_codigoproprio = ($this->j05_codigoproprio == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_codigoproprio"]:$this->j05_codigoproprio);
      }else{
-       $this->j05_codigo = ($this->j05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_codigo"]:$this->j05_codigo);
+       $this->j05_codigo = (($this->j05_codigo === 0 || $this->j05_codigo === 0.0 || $this->j05_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["j05_codigo"]:$this->j05_codigo);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_setorloc {
        return false;
      }
        $this->j05_codigo = $j05_codigo;
-     if(($this->j05_codigo == null) || ($this->j05_codigo == "") ){
+     if(($this->j05_codigo == null) || (($this->j05_codigo === 0 || $this->j05_codigo === 0.0 || $this->j05_codigo == "")) ){
        $this->erro_sql = " Campo j05_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

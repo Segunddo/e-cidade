@@ -54,7 +54,7 @@ class cl_db_documentotemplatepadrao {
                  db81_descricao = varchar(50) = Documento
                  ";
    //funcao construtor da classe
-   function cl_db_documentotemplatepadrao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_documentotemplatepadrao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_db_documentotemplatepadrao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db81_sequencial = ($this->db81_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db81_sequencial"]:$this->db81_sequencial);
-       $this->db81_templatetipo = ($this->db81_templatetipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db81_templatetipo"]:$this->db81_templatetipo);
+       $this->db81_sequencial = (($this->db81_sequencial === 0 || $this->db81_sequencial === 0.0 || $this->db81_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["db81_sequencial"]:$this->db81_sequencial);
+       $this->db81_templatetipo = (($this->db81_templatetipo === 0 || $this->db81_templatetipo === 0.0 || $this->db81_templatetipo == "")?@$GLOBALS["HTTP_POST_VARS"]["db81_templatetipo"]:$this->db81_templatetipo);
        $this->db81_nomearquivo = ($this->db81_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["db81_nomearquivo"]:$this->db81_nomearquivo);
        $this->db81_descricao = ($this->db81_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db81_descricao"]:$this->db81_descricao);
      }else{
-       $this->db81_sequencial = ($this->db81_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db81_sequencial"]:$this->db81_sequencial);
+       $this->db81_sequencial = (($this->db81_sequencial === 0 || $this->db81_sequencial === 0.0 || $this->db81_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["db81_sequencial"]:$this->db81_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_db_documentotemplatepadrao {
          $this->db81_sequencial = $db81_sequencial;
        }
      }
-     if(($this->db81_sequencial == null) || ($this->db81_sequencial == "") ){
+     if(($this->db81_sequencial == null) || (($this->db81_sequencial === 0 || $this->db81_sequencial === 0.0 || $this->db81_sequencial == "")) ){
        $this->erro_sql = " Campo db81_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

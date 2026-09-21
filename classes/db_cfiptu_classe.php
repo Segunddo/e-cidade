@@ -119,7 +119,7 @@ class cl_cfiptu {
 		 j18_utilizaareaprivativa = bool = Utiliza Área Privativa 
                  ";
    //funcao construtor da classe
-   function cl_cfiptu() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cfiptu");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -136,8 +136,8 @@ class cl_cfiptu {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j18_anousu = ($this->j18_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_anousu"]:$this->j18_anousu);
-       $this->j18_vlrref = ($this->j18_vlrref == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_vlrref"]:$this->j18_vlrref);
+       $this->j18_anousu = (($this->j18_anousu === 0 || $this->j18_anousu === 0.0 || $this->j18_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_anousu"]:$this->j18_anousu);
+       $this->j18_vlrref = (($this->j18_vlrref === 0 || $this->j18_vlrref === 0.0 || $this->j18_vlrref == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_vlrref"]:$this->j18_vlrref);
        if($this->j18_dtoper == ""){
          $this->j18_dtoper_dia = ($this->j18_dtoper_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_dtoper_dia"]:$this->j18_dtoper_dia);
          $this->j18_dtoper_mes = ($this->j18_dtoper_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_dtoper_mes"]:$this->j18_dtoper_mes);
@@ -146,40 +146,40 @@ class cl_cfiptu {
             $this->j18_dtoper = $this->j18_dtoper_ano."-".$this->j18_dtoper_mes."-".$this->j18_dtoper_dia;
          }
        }
-       $this->j18_rterri = ($this->j18_rterri == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_rterri"]:$this->j18_rterri);
-       $this->j18_rpredi = ($this->j18_rpredi == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_rpredi"]:$this->j18_rpredi);
-       $this->j18_vencim = ($this->j18_vencim == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_vencim"]:$this->j18_vencim);
+       $this->j18_rterri = (($this->j18_rterri === 0 || $this->j18_rterri === 0.0 || $this->j18_rterri == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_rterri"]:$this->j18_rterri);
+       $this->j18_rpredi = (($this->j18_rpredi === 0 || $this->j18_rpredi === 0.0 || $this->j18_rpredi == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_rpredi"]:$this->j18_rpredi);
+       $this->j18_vencim = (($this->j18_vencim === 0 || $this->j18_vencim === 0.0 || $this->j18_vencim == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_vencim"]:$this->j18_vencim);
        $this->j18_logradauto = ($this->j18_logradauto == "f"?@$GLOBALS["HTTP_POST_VARS"]["j18_logradauto"]:$this->j18_logradauto);
-       $this->j18_segundavia = ($this->j18_segundavia == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_segundavia"]:$this->j18_segundavia);
+       $this->j18_segundavia = (($this->j18_segundavia === 0 || $this->j18_segundavia === 0.0 || $this->j18_segundavia == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_segundavia"]:$this->j18_segundavia);
        $this->j18_infla = ($this->j18_infla == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_infla"]:$this->j18_infla);
        $this->j18_utilizasetfisc = ($this->j18_utilizasetfisc == "f"?@$GLOBALS["HTTP_POST_VARS"]["j18_utilizasetfisc"]:$this->j18_utilizasetfisc);
        $this->j18_testadanumero = ($this->j18_testadanumero == "f"?@$GLOBALS["HTTP_POST_VARS"]["j18_testadanumero"]:$this->j18_testadanumero);
        $this->j18_excconscalc = ($this->j18_excconscalc == "f"?@$GLOBALS["HTTP_POST_VARS"]["j18_excconscalc"]:$this->j18_excconscalc);
        $this->j18_textoprom = ($this->j18_textoprom == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_textoprom"]:$this->j18_textoprom);
-       $this->j18_calcvenc = ($this->j18_calcvenc == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_calcvenc"]:$this->j18_calcvenc);
+       $this->j18_calcvenc = (($this->j18_calcvenc === 0 || $this->j18_calcvenc === 0.0 || $this->j18_calcvenc == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_calcvenc"]:$this->j18_calcvenc);
        $this->j18_utilizaloc = ($this->j18_utilizaloc == "f"?@$GLOBALS["HTTP_POST_VARS"]["j18_utilizaloc"]:$this->j18_utilizaloc);
-       $this->j18_permvenc = ($this->j18_permvenc == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_permvenc"]:$this->j18_permvenc);
+       $this->j18_permvenc = (($this->j18_permvenc === 0 || $this->j18_permvenc === 0.0 || $this->j18_permvenc == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_permvenc"]:$this->j18_permvenc);
        $this->j18_utidadosdiver = ($this->j18_utidadosdiver == "f"?@$GLOBALS["HTTP_POST_VARS"]["j18_utidadosdiver"]:$this->j18_utidadosdiver);
-       $this->j18_dadoscertisen = ($this->j18_dadoscertisen == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_dadoscertisen"]:$this->j18_dadoscertisen);
-       $this->j18_formatsetor = ($this->j18_formatsetor == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_formatsetor"]:$this->j18_formatsetor);
-       $this->j18_formatquadra = ($this->j18_formatquadra == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_formatquadra"]:$this->j18_formatquadra);
-       $this->j18_formatlote = ($this->j18_formatlote == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_formatlote"]:$this->j18_formatlote);
-       $this->j18_utilpontos = ($this->j18_utilpontos == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_utilpontos"]:$this->j18_utilpontos);
-       $this->j18_ordendent = ($this->j18_ordendent == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_ordendent"]:$this->j18_ordendent);
-       $this->j18_iptuhistisen = ($this->j18_iptuhistisen == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_iptuhistisen"]:$this->j18_iptuhistisen);
-       $this->j18_db_sysfuncoes = ($this->j18_db_sysfuncoes == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_db_sysfuncoes"]:$this->j18_db_sysfuncoes);
-       $this->j18_tipoisen = ($this->j18_tipoisen == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_tipoisen"]:$this->j18_tipoisen);
-       $this->j18_perccorrepadrao = ($this->j18_perccorrepadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_perccorrepadrao"]:$this->j18_perccorrepadrao);
-       $this->j18_templatecertidaoexitencia = ($this->j18_templatecertidaoexitencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_templatecertidaoexitencia"]:$this->j18_templatecertidaoexitencia);
+       $this->j18_dadoscertisen = (($this->j18_dadoscertisen === 0 || $this->j18_dadoscertisen === 0.0 || $this->j18_dadoscertisen == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_dadoscertisen"]:$this->j18_dadoscertisen);
+       $this->j18_formatsetor = (($this->j18_formatsetor === 0 || $this->j18_formatsetor === 0.0 || $this->j18_formatsetor == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_formatsetor"]:$this->j18_formatsetor);
+       $this->j18_formatquadra = (($this->j18_formatquadra === 0 || $this->j18_formatquadra === 0.0 || $this->j18_formatquadra == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_formatquadra"]:$this->j18_formatquadra);
+       $this->j18_formatlote = (($this->j18_formatlote === 0 || $this->j18_formatlote === 0.0 || $this->j18_formatlote == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_formatlote"]:$this->j18_formatlote);
+       $this->j18_utilpontos = (($this->j18_utilpontos === 0 || $this->j18_utilpontos === 0.0 || $this->j18_utilpontos == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_utilpontos"]:$this->j18_utilpontos);
+       $this->j18_ordendent = (($this->j18_ordendent === 0 || $this->j18_ordendent === 0.0 || $this->j18_ordendent == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_ordendent"]:$this->j18_ordendent);
+       $this->j18_iptuhistisen = (($this->j18_iptuhistisen === 0 || $this->j18_iptuhistisen === 0.0 || $this->j18_iptuhistisen == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_iptuhistisen"]:$this->j18_iptuhistisen);
+       $this->j18_db_sysfuncoes = (($this->j18_db_sysfuncoes === 0 || $this->j18_db_sysfuncoes === 0.0 || $this->j18_db_sysfuncoes == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_db_sysfuncoes"]:$this->j18_db_sysfuncoes);
+       $this->j18_tipoisen = (($this->j18_tipoisen === 0 || $this->j18_tipoisen === 0.0 || $this->j18_tipoisen == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_tipoisen"]:$this->j18_tipoisen);
+       $this->j18_perccorrepadrao = (($this->j18_perccorrepadrao === 0 || $this->j18_perccorrepadrao === 0.0 || $this->j18_perccorrepadrao == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_perccorrepadrao"]:$this->j18_perccorrepadrao);
+       $this->j18_templatecertidaoexitencia = (($this->j18_templatecertidaoexitencia === 0 || $this->j18_templatecertidaoexitencia === 0.0 || $this->j18_templatecertidaoexitencia == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_templatecertidaoexitencia"]:$this->j18_templatecertidaoexitencia);
        $this->j18_templatecertidaoisencao = ($this->j18_templatecertidaoisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_templatecertidaoisencao"]:$this->j18_templatecertidaoisencao);
        $this->j18_receitacreditorecalculo = ($this->j18_receitacreditorecalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_receitacreditorecalculo"]:$this->j18_receitacreditorecalculo);
        $this->j18_tipodebitorecalculo = ($this->j18_tipodebitorecalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_tipodebitorecalculo"]:$this->j18_tipodebitorecalculo);
-       $this->j18_taxaseparada = ($this->j18_taxaseparada == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_taxaseparada"]:$this->j18_taxaseparada);
+       $this->j18_taxaseparada = (($this->j18_taxaseparada === 0 || $this->j18_taxaseparada === 0.0 || $this->j18_taxaseparada == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_taxaseparada"]:$this->j18_taxaseparada);
        $this->j18_permitectmcgf = ($this->j18_permitectmcgf == "f"?@$GLOBALS["HTTP_POST_VARS"]["j18_permitectmcgf"]:$this->j18_permitectmcgf);
        $this->j18_bicmarcasigilo = ($this->j18_bicmarcasigilo == "f"?@$GLOBALS["HTTP_POST_VARS"]["j18_bicmarcasigilo"]:$this->j18_bicmarcasigilo);
        $this->j18_utilizaareaprivativa = ($this->j18_utilizaareaprivativa == "f"?@$GLOBALS["HTTP_POST_VARS"]["j18_utilizaareaprivativa"]:$this->j18_utilizaareaprivativa);
      }else{
-       $this->j18_anousu = ($this->j18_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j18_anousu"]:$this->j18_anousu);
+       $this->j18_anousu = (($this->j18_anousu === 0 || $this->j18_anousu === 0.0 || $this->j18_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["j18_anousu"]:$this->j18_anousu);
      }
    }
    // funcao para Inclusão
@@ -429,7 +429,7 @@ class cl_cfiptu {
        return false;
      }
        $this->j18_anousu = $j18_anousu;
-     if(($this->j18_anousu == null) || ($this->j18_anousu == "") ){
+     if(($this->j18_anousu == null) || (($this->j18_anousu === 0 || $this->j18_anousu === 0.0 || $this->j18_anousu == "")) ){
        $this->erro_sql = " Campo j18_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -1368,7 +1368,7 @@ class cl_cfiptu {
    function sql_query_param ( $j18_anousu=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1392,7 +1392,7 @@ class cl_cfiptu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

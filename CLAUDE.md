@@ -69,11 +69,11 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 | | |
 |---|---|
-| Módulos portados | `cem` Cemitério (187 arq.) · `itb`/`itbi` ITBI (192 arq.) · `agu` Água (224 telas) |
+| Módulos portados | `cem` Cemitério · `itb`/`itbi` ITBI · `agu` Água · `jur` Jurídico (145 telas) — **4 de 16** |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|tra)[0-9]?_` |
-| **Próximo módulo** | **`jur` Jurídico (145 telas, 137 arq. a alterar)**, depois `div` → pequenos → `arr` → `fis` → `iss`. Ordem revista por métrica — ver *ORDEM REVISTA*. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|tra)[0-9]*_` |
+| **Próximo módulo** | **`div` Dívida Ativa (148 telas)**, depois pequenos → `arr` → `fis` → `iss`. Ordem revista por métrica — ver *ORDEM REVISTA*. |
 | **Dívida técnica aberta** | `dbagata/` (1 arquivo alcançável, pré-requisito do `iss`) e `fpdf151/` (28 arquivos). Ver *6ª LACUNA*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
@@ -757,7 +757,7 @@ location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|n
 gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
 Financeiro e Patrimonial junto.
 
-**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ — restam 9 prefixos.
+**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ — restam 8 prefixos.
 
 ### ⚠ ORDEM REVISTA: `jur` antes de `div`, e `arr` por último
 
@@ -927,6 +927,110 @@ ONLY="tela1.php,tela2.php" python3 scratchpad/cmp.py <SID> '^x_'   # subconjunto
 ```
 
 Quem for regerar as outras ferramentas: commitá-las também.
+
+### Estado: MÓDULO `jur` (Jurídico) PORTADO ✅ — 4º da área Tributário
+
+**145 telas**, enumeradas por `^jur[0-9]*_` com `re.IGNORECASE`. O módulo tem **seis** variantes
+de prefixo: `jur1_`…`jur4_`, mais `jur01_` (4 arquivos) e `jur_` (1). Universo total com as seis
+frentes de enumeração: **315 arquivos**, dos quais 42 já pagos pelo núcleo e pelos portes
+anteriores. **137 arquivos alterados.**
+
+| Correção | Qtd |
+|---|---|
+| `$this->X == ""` → forma que preserva a semântica do 5.6 | 517 |
+| `split(` → `explode(` (padrão literal) | 239 |
+| `parse_str()` com 2º argumento | 62 |
+| construtor PHP4 → `__construct` | 60 |
+| `ereg*(` → `preg_*(` | 31 |
+| `each(` → `foreach` | 10 |
+| `sizeof(null)` → `sizeof((array)…)` | 4 |
+| guardas `pg_*` contra resultado falso | 3 |
+| `split(` com padrão **regex** → `preg_split` / `explode("\|")` | 3 |
+| `break` fora de laço removido | 1 |
+
+Verificações: `php -l` **nos dois runtimes** em 137/137 alterados e em 315/315 do universo;
+as **84 classes instanciam com estado idêntico**; **144 de 145 telas byte-a-byte idênticas**.
+
+**Zero telas quebrando no 8.5** — o melhor resultado até aqui. A única divergência,
+`jur_enviarremessatj.php`, **quebra no 5.6 (500) e funciona no 8.5 (200)**: o código pede
+`db_app::load(... "pades.js")` e esse arquivo **não existe no repositório** (só
+`scripts/pades-signer-sdk.min.js`). Defeito pré-existente da referência, mesma família de
+`cem1_itenserv002` e das 4 telas do ITBI.
+
+Roteamento: `jur` acrescentado ao nginx, e **`[0-9]?` virou `[0-9]*`** — com um dígito só,
+as 4 telas `jur01_*` ficariam silenciosamente no 5.6. Mesma família da armadilha de maiúsculas.
+
+### CATEGORIA NOVA (jur): `split()` com padrão REGEX, não literal
+
+Nos três módulos anteriores **todos** os `split()` usavam separador literal (`"#"`, `","`), e a
+conversão para `explode()` era mecânica. O `jur` tem três que **não** são:
+
+```php
+split(" +", $regs[2])    // POSIX: "um ou mais espacos"  -> preg_split("/ +/", ...)
+split("\|", $funcao_js)  // POSIX: pipe escapado = literal -> explode("|", ...)
+```
+
+Comprovado no 5.6: `split(" +", "um   dois")` devolve `["um","dois"]`, e
+`explode(" +", "um   dois")` devolve `["um   dois"]` — **a string inteira, sem separar**.
+Trocar por `explode` aqui produziria dado errado em silêncio, sem erro nenhum.
+
+**Regra:** antes de converter em massa, classificar o primeiro argumento. Se contiver
+metacaractere de regex (`+ * ? [ ] ( ) | . ^ $ \`), vai para `preg_split`, não para `explode`.
+
+### CATEGORIA NOVA (jur): `break` fora de laço ou `switch`
+
+Era *warning* no PHP 5.6 e é **erro fatal de COMPILAÇÃO desde o PHP 7.0**.
+
+```
+jur1_emiteinicial002.php:114   Fatal error: 'break' not in the 'loop' or 'switch' context
+```
+
+Não aparece em varredura textual — só o `php -l` sob 8.5 a revela, como as categorias LSP e
+`=& new`. Ali o `break` era **inalcançável** (a linha anterior chama `db_redireciona()`, que
+termina em `exit` — `libs/db_stdlib.php:1545`), então removê-lo preserva a semântica exata.
+
+### CATEGORIA NOVA (jur): `sizeof(null)`
+
+No 5.6 era warning e devolvia 0; no PHP 8 é `TypeError: must be of type Countable|array`.
+Ocorre quando o array só é atribuído dentro de um `if` que não entrou:
+
+```php
+if (isset($dadosini) && $dadosini != "") { $matriz = explode("xx", $dadosini); }
+for ($q = 0; $q < sizeof($matriz); $q++) {      // $matriz indefinida -> null
+```
+
+Correção: `sizeof((array)$matriz)`. Reproduz o 5.6 nos três casos — `(array)null` = `[]` (0),
+`(array)"x"` = `["x"]` (1, que era o que `sizeof` de escalar devolvia), e array continua igual.
+
+### LACUNA DE DETECÇÃO (jur): `parse_str` com chamada aninhada
+
+Duas telas continuaram fatais depois do porte:
+
+```php
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+```
+
+O regex de detecção era `parse_str\s*\(\s*[^,()]+\)` — o `[^,()]` **não casa com parênteses
+internos**, então a chamada aninhada nunca foi detectada, os arquivos não entraram na lista de
+alvos, e a transformação nem rodou neles.
+
+**É a mesma falha de método das seis lacunas de enumeração:** agir sobre a lista que a própria
+detecção produziu. A detecção correta conta vírgulas **no nível superior**, percorrendo os
+parênteses com contador de profundidade.
+
+### ARMADILHA DE FERRAMENTAL: `serialize()` de objeto interno é fatal no PHP 8
+
+O harness que compara o estado das classes usava `md5(serialize($props))`. Três classes do `jur`
+guardam um `DOMElement`, e **serializá-lo é fatal no PHP 8** (o 5.6 permitia):
+
+```
+Exception: Serialization of 'DOMElement' is not allowed
+```
+
+O sintoma foi um falso positivo: três classes "com erro" que instanciam perfeitamente quando
+testadas isoladamente. **Era o instrumento que quebrava, não o código medido.** A assinatura
+passou a descrever objetos pelo nome da classe em vez de serializá-los
+(`scratchpad/instancia_classes.php`).
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

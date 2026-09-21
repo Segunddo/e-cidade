@@ -39,7 +39,7 @@ require_once(modification("classes/db_processoforoinicial_classe.php"));
 $get = (object)filter_input_array(INPUT_GET);
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 
 $oPost  = db_utils::postMemory($_POST);
 $oGet   = db_utils::postMemory($_GET);

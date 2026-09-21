@@ -26,7 +26,7 @@ class cl_advog {
                  v57_matriculaadvogado = varchar(20) = Matrícula do Advogado 
                  ";
    //funcao construtor da classe 
-   function cl_advog() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("advog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_advog {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v57_numcgm = ($this->v57_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v57_numcgm"]:$this->v57_numcgm);
+       $this->v57_numcgm = (($this->v57_numcgm === 0 || $this->v57_numcgm === 0.0 || $this->v57_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["v57_numcgm"]:$this->v57_numcgm);
        $this->v57_oab = ($this->v57_oab == ""?@$GLOBALS["HTTP_POST_VARS"]["v57_oab"]:$this->v57_oab);
        $this->v57_matriculaadvogado = ($this->v57_matriculaadvogado == ""?@$GLOBALS["HTTP_POST_VARS"]["v57_matriculaadvogado"]:$this->v57_matriculaadvogado);
      }else{
-       $this->v57_numcgm = ($this->v57_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v57_numcgm"]:$this->v57_numcgm);
+       $this->v57_numcgm = (($this->v57_numcgm === 0 || $this->v57_numcgm === 0.0 || $this->v57_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["v57_numcgm"]:$this->v57_numcgm);
      }
    }
    // funcao para inclusao
@@ -63,7 +63,7 @@ class cl_advog {
        return false;
      }
        $this->v57_numcgm = $v57_numcgm; 
-     if(($this->v57_numcgm == null) || ($this->v57_numcgm == "") ){ 
+     if(($this->v57_numcgm == null) || (($this->v57_numcgm === 0 || $this->v57_numcgm === 0.0 || $this->v57_numcgm == "")) ){ 
        $this->erro_sql = " Campo v57_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -315,7 +315,7 @@ class cl_advog {
    function sql_query ( $v57_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -337,7 +337,7 @@ class cl_advog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_advog {
    function sql_query_file ( $v57_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -371,7 +371,7 @@ class cl_advog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_advog {
     function sql_query_advog_inicial ( $v57_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = explode("#",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_advog {
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = explode("#",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];

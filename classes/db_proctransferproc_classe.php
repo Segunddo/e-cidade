@@ -67,11 +67,11 @@ class cl_proctransferproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p63_codtran = ($this->p63_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["p63_codtran"]:$this->p63_codtran);
-       $this->p63_codproc = ($this->p63_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p63_codproc"]:$this->p63_codproc);
+       $this->p63_codtran = (($this->p63_codtran === 0 || $this->p63_codtran === 0.0 || $this->p63_codtran == "")?@$GLOBALS["HTTP_POST_VARS"]["p63_codtran"]:$this->p63_codtran);
+       $this->p63_codproc = (($this->p63_codproc === 0 || $this->p63_codproc === 0.0 || $this->p63_codproc == "")?@$GLOBALS["HTTP_POST_VARS"]["p63_codproc"]:$this->p63_codproc);
      }else{
-       $this->p63_codtran = ($this->p63_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["p63_codtran"]:$this->p63_codtran);
-       $this->p63_codproc = ($this->p63_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p63_codproc"]:$this->p63_codproc);
+       $this->p63_codtran = (($this->p63_codtran === 0 || $this->p63_codtran === 0.0 || $this->p63_codtran == "")?@$GLOBALS["HTTP_POST_VARS"]["p63_codtran"]:$this->p63_codtran);
+       $this->p63_codproc = (($this->p63_codproc === 0 || $this->p63_codproc === 0.0 || $this->p63_codproc == "")?@$GLOBALS["HTTP_POST_VARS"]["p63_codproc"]:$this->p63_codproc);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_proctransferproc {
       $this->atualizacampos();
        $this->p63_codtran = $p63_codtran;
        $this->p63_codproc = $p63_codproc;
-     if(($this->p63_codtran == null) || ($this->p63_codtran == "") ){
+     if(($this->p63_codtran == null) || (($this->p63_codtran === 0 || $this->p63_codtran === 0.0 || $this->p63_codtran == "")) ){
        $this->erro_sql = " Campo p63_codtran nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_proctransferproc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p63_codproc == null) || ($this->p63_codproc == "") ){
+     if(($this->p63_codproc == null) || (($this->p63_codproc === 0 || $this->p63_codproc === 0.0 || $this->p63_codproc == "")) ){
        $this->erro_sql = " Campo p63_codproc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

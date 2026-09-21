@@ -42,7 +42,7 @@ $clrotulo->label('v56_codsit');
 $clrotulo->label('z01_nome');
 $instit = db_getsession('DB_instit');
 $mostra = false;
-// parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+// parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 
 db_postmemory($_GET);
 
@@ -166,7 +166,7 @@ if($linhaspar>0){
 
 $sql = ($clinicial->sql_query_inform(null,$sCampos,$db_ordem,$db_where));
 $result= db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : 0);
 if ($linhas == 0){
 
   $sMsg = _M('tributario.juridico.jur2_relinicial002.nao_existem_registros');

@@ -50,7 +50,7 @@ class cl_jurtipopet {
                  v59_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_jurtipopet() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("jurtipopet"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_jurtipopet {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v59_codpet = ($this->v59_codpet == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_codpet"]:$this->v59_codpet);
+       $this->v59_codpet = (($this->v59_codpet === 0 || $this->v59_codpet === 0.0 || $this->v59_codpet == "")?@$GLOBALS["HTTP_POST_VARS"]["v59_codpet"]:$this->v59_codpet);
        $this->v59_descr = ($this->v59_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_descr"]:$this->v59_descr);
      }else{
-       $this->v59_codpet = ($this->v59_codpet == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_codpet"]:$this->v59_codpet);
+       $this->v59_codpet = (($this->v59_codpet === 0 || $this->v59_codpet === 0.0 || $this->v59_codpet == "")?@$GLOBALS["HTTP_POST_VARS"]["v59_codpet"]:$this->v59_codpet);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_jurtipopet {
          $this->v59_codpet = $v59_codpet; 
        }
      }
-     if(($this->v59_codpet == null) || ($this->v59_codpet == "") ){ 
+     if(($this->v59_codpet == null) || (($this->v59_codpet === 0 || $this->v59_codpet === 0.0 || $this->v59_codpet == "")) ){ 
        $this->erro_sql = " Campo v59_codpet nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_jurtipopet {
    function sql_query ( $v59_codpet=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_jurtipopet {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_jurtipopet {
    function sql_query_file ( $v59_codpet=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_jurtipopet {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

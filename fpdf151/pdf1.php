@@ -158,7 +158,10 @@ function Footer() {
     */         
       $sSqlMenuAcess = "SELECT fc_montamenu(funcao) as menu from db_itensmenu where id_item =".db_getsession("DB_itemmenu_acessado");
       $rsMenuAcess   = db_query($sSqlMenuAcess);
-      $sMenuAcess    = substr(pg_result($rsMenuAcess,0,"menu"),0,50);
+      // COMPAT PHP 8: db_query pode devolver false e pg_result(false) e TypeError.
+    // No 5.6 era warning e devolvia false -- por isso o fallback e false, e nao "",
+    // que difere sob ===.
+    $sMenuAcess    = substr(($rsMenuAcess ? pg_result($rsMenuAcess,0,"menu") : false),0,50);
 	
     $this->Cell(0,10,$url. '  '.$sMenuAcess.'  '.$nome.'  Emissor: '.substr(ucwords(strtolower($emissor)),0,30).'  Exercício: '.db_getsession("DB_anousu").
                          '   Data: '.date("d-m-Y",db_getsession("DB_datausu"))." - ".date("H:i:s"),"T",0,'L');    
@@ -174,7 +177,7 @@ function Footer() {
         $this->wLine=$w;
         $this->hLine=$h;
         $this->Text=trim($txt);
-        $this->Text=ereg_replace("\n|\r|\t","",$this->Text);
+        $this->Text=preg_replace("#\n|\r|\t#","",$this->Text);
         $this->border=$border;
         $this->align=$align;
         $this->fill=$fill;
@@ -225,7 +228,7 @@ function Footer() {
 
     function Padding()
     {
-        if(ereg("^.+,",$this->Padding)) {
+        if(preg_match("#^.+,#",$this->Padding)) {
             $tab=explode(",",$this->Padding);
             $this->lPadding=$tab[0];
             $this->tPadding=$tab[1];
@@ -304,7 +307,7 @@ function Footer() {
         else
         {
             reset($this->PileStyle);
-            while(list($k,$val)=each($this->PileStyle))
+            foreach ($this->PileStyle as $k => $val)
             {
                 $val=trim($val);
                 if($this->TagStyle[$val]['family']!="") {
@@ -320,7 +323,7 @@ function Footer() {
         else
         {
             reset($this->PileStyle);
-            while(list($k,$val)=each($this->PileStyle))
+            foreach ($this->PileStyle as $k => $val)
             {
                 $val=trim($val);
                 $style1=strtoupper($this->TagStyle[$val]['style']);
@@ -328,11 +331,11 @@ function Footer() {
                     break;
                 else
                 {
-                    if(ereg("B",$style1))
+                    if(preg_match("#B#",$style1))
                         $style['b']="B";
-                    if(ereg("I",$style1))
+                    if(preg_match("#I#",$style1))
                         $style['i']="I";
-                    if(ereg("U",$style1))
+                    if(preg_match("#U#",$style1))
                         $style['u']="U";
                 } 
             }
@@ -345,7 +348,7 @@ function Footer() {
         else
         {
             reset($this->PileStyle);
-            while(list($k,$val)=each($this->PileStyle))
+            foreach ($this->PileStyle as $k => $val)
             {
                 $val=trim($val);
                 if($this->TagStyle[$val]['size']!=0) {
@@ -361,7 +364,7 @@ function Footer() {
         else
         {
             reset($this->PileStyle);
-            while(list($k,$val)=each($this->PileStyle))
+            foreach ($this->PileStyle as $k => $val)
             {
                 $val=trim($val);
                 if($this->TagStyle[$val]['color']!="") {
@@ -384,21 +387,21 @@ function Footer() {
     {
         $tab=array();
         // Closing tag
-        if(ereg("^(</([^>]+)>).*",$text,$regs)) {
+        if(preg_match("#^(</([^>]+)>).*#",$text,$regs)) {
             $tab[1]="c";
             $tab[2]=trim($regs[2]);
         }
         // Opening tag
-        else if(ereg("^(<([^>]+)>).*",$text,$regs)) {
-            $regs[2]=ereg_replace("^a","a ",$regs[2]);
+        else if(preg_match("#^(<([^>]+)>).*#",$text,$regs)) {
+            $regs[2]=preg_replace("#^a#","a ",$regs[2]);
             $tab[1]="o";
             $tab[2]=trim($regs[2]);
 
             // Presence of attributes
-            if(ereg("(.+) (.+)='(.+)' *",$regs[2])) {
-                $tab1=split(" +",$regs[2]);
+            if(preg_match("#(.+) (.+)='(.+)' *#",$regs[2])) {
+                $tab1=preg_split("/ +/",$regs[2]);
                 $tab[2]=trim($tab1[0]);
-                while(list($i,$couple)=each($tab1))
+                foreach ($tab1 as $i => $couple)
                 {
                     if($i>0) {
                         $tab2=explode("=",$couple);
@@ -411,12 +414,12 @@ function Footer() {
             }
         }
          // Space
-         else if(ereg("^( ).*",$text,$regs)) {
+         else if(preg_match("#^( ).*#",$text,$regs)) {
             $tab[1]="s";
             $tab[2]=$regs[1];
         }
         // Text
-        else if(ereg("^([^< ]+).*",$text,$regs)) {
+        else if(preg_match("#^([^< ]+).*#",$text,$regs)) {
             $tab[1]="t";
             $tab[2]=trim($regs[1]);
         }
@@ -524,8 +527,8 @@ function Footer() {
             $i=0;
         }
         else {
-            ereg("^(( *(<([^>]+)>)* *)*)(.*)",$this->Text,$regs);
-            $regs[1]=ereg_replace(" ", "", $regs[1]);
+            preg_match("#^(( *(<([^>]+)>)* *)*)(.*)#",$this->Text,$regs);
+            $regs[1]=preg_replace("# #", "", $regs[1]);
             $this->Text=$regs[1].$regs[5];
             $i=-1;
         }
@@ -678,7 +681,7 @@ $ru) ? " e " : "").$ru;
 	                 Trocando o " E " por " e ", fica muito + apresentável! 
                      Rodrigo Cerqueira, rodrigobc@fte.com.br
                     */
-			  if ($rt) $rt=ereg_replace(" E "," e ",ucwords($rt));
+			  if ($rt) $rt=preg_replace("# E #"," e ",ucwords($rt));
                           return (($rt) ? ($rt) : "Zero"); 
          } 
 

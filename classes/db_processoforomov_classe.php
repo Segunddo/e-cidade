@@ -63,7 +63,7 @@ class cl_processoforomov {
                  v73_hora = char(5) = Hora 
                  ";
    //funcao construtor da classe
-   function cl_processoforomov() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("processoforomov");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,10 +80,10 @@ class cl_processoforomov {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v73_sequencial = ($this->v73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v73_sequencial"]:$this->v73_sequencial);
-       $this->v73_processoforomovsituacao = ($this->v73_processoforomovsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["v73_processoforomovsituacao"]:$this->v73_processoforomovsituacao);
-       $this->v73_id_usuario = ($this->v73_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v73_id_usuario"]:$this->v73_id_usuario);
-       $this->v73_processoforo = ($this->v73_processoforo == ""?@$GLOBALS["HTTP_POST_VARS"]["v73_processoforo"]:$this->v73_processoforo);
+       $this->v73_sequencial = (($this->v73_sequencial === 0 || $this->v73_sequencial === 0.0 || $this->v73_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v73_sequencial"]:$this->v73_sequencial);
+       $this->v73_processoforomovsituacao = (($this->v73_processoforomovsituacao === 0 || $this->v73_processoforomovsituacao === 0.0 || $this->v73_processoforomovsituacao == "")?@$GLOBALS["HTTP_POST_VARS"]["v73_processoforomovsituacao"]:$this->v73_processoforomovsituacao);
+       $this->v73_id_usuario = (($this->v73_id_usuario === 0 || $this->v73_id_usuario === 0.0 || $this->v73_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["v73_id_usuario"]:$this->v73_id_usuario);
+       $this->v73_processoforo = (($this->v73_processoforo === 0 || $this->v73_processoforo === 0.0 || $this->v73_processoforo == "")?@$GLOBALS["HTTP_POST_VARS"]["v73_processoforo"]:$this->v73_processoforo);
        $this->v73_obs = ($this->v73_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["v73_obs"]:$this->v73_obs);
        if($this->v73_data == ""){
          $this->v73_data_dia = ($this->v73_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v73_data_dia"]:$this->v73_data_dia);
@@ -95,7 +95,7 @@ class cl_processoforomov {
        }
        $this->v73_hora = ($this->v73_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["v73_hora"]:$this->v73_hora);
      }else{
-       $this->v73_sequencial = ($this->v73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v73_sequencial"]:$this->v73_sequencial);
+       $this->v73_sequencial = (($this->v73_sequencial === 0 || $this->v73_sequencial === 0.0 || $this->v73_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v73_sequencial"]:$this->v73_sequencial);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_processoforomov {
          $this->v73_sequencial = $v73_sequencial;
        }
      }
-     if(($this->v73_sequencial == null) || ($this->v73_sequencial == "") ){
+     if(($this->v73_sequencial == null) || (($this->v73_sequencial === 0 || $this->v73_sequencial === 0.0 || $this->v73_sequencial == "")) ){
        $this->erro_sql = " Campo v73_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

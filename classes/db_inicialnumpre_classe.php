@@ -52,7 +52,7 @@ class cl_inicialnumpre
                  ";
 
     //funcao construtor da classe
-    function cl_inicialnumpre()
+    function __construct()
     {
      //classes dos rotulos dos campos
         $this->rotulo = new rotulo("inicialnumpre");
@@ -72,11 +72,11 @@ class cl_inicialnumpre
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v59_inicial = ($this->v59_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_inicial"]:$this->v59_inicial);
-       $this->v59_numpre = ($this->v59_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_numpre"]:$this->v59_numpre);
+       $this->v59_inicial = (($this->v59_inicial === 0 || $this->v59_inicial === 0.0 || $this->v59_inicial == "")?@$GLOBALS["HTTP_POST_VARS"]["v59_inicial"]:$this->v59_inicial);
+       $this->v59_numpre = (($this->v59_numpre === 0 || $this->v59_numpre === 0.0 || $this->v59_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["v59_numpre"]:$this->v59_numpre);
      }else{
-       $this->v59_inicial = ($this->v59_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_inicial"]:$this->v59_inicial);
-       $this->v59_numpre = ($this->v59_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_numpre"]:$this->v59_numpre);
+       $this->v59_inicial = (($this->v59_inicial === 0 || $this->v59_inicial === 0.0 || $this->v59_inicial == "")?@$GLOBALS["HTTP_POST_VARS"]["v59_inicial"]:$this->v59_inicial);
+       $this->v59_numpre = (($this->v59_numpre === 0 || $this->v59_numpre === 0.0 || $this->v59_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["v59_numpre"]:$this->v59_numpre);
      }
    }
    // funcao para inclusao
@@ -85,7 +85,7 @@ class cl_inicialnumpre
        $this->atualizacampos();
         //$this->v59_inicial = $v59_inicial;
         // $this->v59_numpre  = $v59_numpre;
-        if (($this->v59_inicial == null) || ($this->v59_inicial == "")) {
+        if (($this->v59_inicial == null) || (($this->v59_inicial === 0 || $this->v59_inicial === 0.0 || $this->v59_inicial == ""))) {
        $this->erro_sql = " Campo v59_inicial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -93,7 +93,7 @@ class cl_inicialnumpre
        $this->erro_status = "0";
        return false;
      }
-        if (($this->v59_numpre == null) || ($this->v59_numpre == "")) {
+        if (($this->v59_numpre == null) || (($this->v59_numpre === 0 || $this->v59_numpre === 0.0 || $this->v59_numpre == ""))) {
        $this->erro_sql = " Campo v59_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -303,7 +303,7 @@ class cl_inicialnumpre
     {
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -328,7 +328,7 @@ class cl_inicialnumpre
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_inicialnumpre
     {
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -360,7 +360,7 @@ class cl_inicialnumpre
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

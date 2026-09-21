@@ -67,7 +67,7 @@ class cl_inicial
                  ";
 
     //funcao construtor da classe
-    function cl_inicial()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("inicial");
@@ -89,8 +89,8 @@ class cl_inicial
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->v50_inicial = ($this->v50_inicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["v50_inicial"] : $this->v50_inicial);
-            $this->v50_advog = ($this->v50_advog == "" ? @$GLOBALS["HTTP_POST_VARS"]["v50_advog"] : $this->v50_advog);
+            $this->v50_inicial = (($this->v50_inicial === 0 || $this->v50_inicial === 0.0 || $this->v50_inicial == "") ? @$GLOBALS["HTTP_POST_VARS"]["v50_inicial"] : $this->v50_inicial);
+            $this->v50_advog = (($this->v50_advog === 0 || $this->v50_advog === 0.0 || $this->v50_advog == "") ? @$GLOBALS["HTTP_POST_VARS"]["v50_advog"] : $this->v50_advog);
             if ($this->v50_data == "") {
                 $this->v50_data_dia = ($this->v50_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["v50_data_dia"] : $this->v50_data_dia);
                 $this->v50_data_mes = ($this->v50_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["v50_data_mes"] : $this->v50_data_mes);
@@ -99,13 +99,13 @@ class cl_inicial
                     $this->v50_data = $this->v50_data_ano . "-" . $this->v50_data_mes . "-" . $this->v50_data_dia;
                 }
             }
-            $this->v50_id_login = ($this->v50_id_login == "" ? @$GLOBALS["HTTP_POST_VARS"]["v50_id_login"] : $this->v50_id_login);
-            $this->v50_codlocal = ($this->v50_codlocal == "" ? @$GLOBALS["HTTP_POST_VARS"]["v50_codlocal"] : $this->v50_codlocal);
-            $this->v50_codmov = ($this->v50_codmov == "" ? @$GLOBALS["HTTP_POST_VARS"]["v50_codmov"] : $this->v50_codmov);
-            $this->v50_instit = ($this->v50_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["v50_instit"] : $this->v50_instit);
-            $this->v50_situacao = ($this->v50_situacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["v50_situacao"] : $this->v50_situacao);
+            $this->v50_id_login = (($this->v50_id_login === 0 || $this->v50_id_login === 0.0 || $this->v50_id_login == "") ? @$GLOBALS["HTTP_POST_VARS"]["v50_id_login"] : $this->v50_id_login);
+            $this->v50_codlocal = (($this->v50_codlocal === 0 || $this->v50_codlocal === 0.0 || $this->v50_codlocal == "") ? @$GLOBALS["HTTP_POST_VARS"]["v50_codlocal"] : $this->v50_codlocal);
+            $this->v50_codmov = (($this->v50_codmov === 0 || $this->v50_codmov === 0.0 || $this->v50_codmov == "") ? @$GLOBALS["HTTP_POST_VARS"]["v50_codmov"] : $this->v50_codmov);
+            $this->v50_instit = (($this->v50_instit === 0 || $this->v50_instit === 0.0 || $this->v50_instit == "") ? @$GLOBALS["HTTP_POST_VARS"]["v50_instit"] : $this->v50_instit);
+            $this->v50_situacao = (($this->v50_situacao === 0 || $this->v50_situacao === 0.0 || $this->v50_situacao == "") ? @$GLOBALS["HTTP_POST_VARS"]["v50_situacao"] : $this->v50_situacao);
         } else {
-            $this->v50_inicial = ($this->v50_inicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["v50_inicial"] : $this->v50_inicial);
+            $this->v50_inicial = (($this->v50_inicial === 0 || $this->v50_inicial === 0.0 || $this->v50_inicial == "") ? @$GLOBALS["HTTP_POST_VARS"]["v50_inicial"] : $this->v50_inicial);
         }
     }
 
@@ -209,7 +209,7 @@ class cl_inicial
                 $this->v50_inicial = $v50_inicial;
             }
         }
-        if (($this->v50_inicial == null) || ($this->v50_inicial == "")) {
+        if (($this->v50_inicial == null) || (($this->v50_inicial === 0 || $this->v50_inicial === 0.0 || $this->v50_inicial == ""))) {
             $this->erro_sql = " Campo v50_inicial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

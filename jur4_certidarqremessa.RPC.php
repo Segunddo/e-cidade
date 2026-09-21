@@ -679,7 +679,7 @@ switch($oParam->exec) {
           
           $sDataNasc = "";
           if (!empty($oDadosEnvol->z01_nasc)) {
-            $aDataNasc    = split("-",$oDadosEnvol->z01_nasc);
+            $aDataNasc    = explode("-",$oDadosEnvol->z01_nasc);
             $sDataNasc    = $aDataNasc[2].$aDataNasc[1].$aDataNasc[0];
           }
                     
@@ -689,9 +689,9 @@ switch($oParam->exec) {
           $oDadosLinha3->fixo_3                   = "3";
           $oDadosLinha3->codigo_processo          = str_pad($oDados->v50_inicial                                                , 14, " ", STR_PAD_LEFT);
           $oDadosLinha3->nome_executado           = str_pad($oDadosEnvol->z01_nome                                              , 90, " ", STR_PAD_RIGHT);
-          $oDadosLinha3->cpf                      = str_pad(substr(ereg_replace("[./-]","",trim($sCPF)),0,11)                   , 11, " ", STR_PAD_LEFT);
-          $oDadosLinha3->cgc                      = str_pad(substr(ereg_replace("[./-]","",trim($sCGC)),0,14)                   , 14, " ", STR_PAD_LEFT);
-          $oDadosLinha3->rg                       = str_pad(substr(ereg_replace("[./-]","",trim($oDadosEnvol->z01_ident)),0,12) , 12, " ", STR_PAD_LEFT);
+          $oDadosLinha3->cpf                      = str_pad(substr(preg_replace("#[./-]#","",trim($sCPF)),0,11)                   , 11, " ", STR_PAD_LEFT);
+          $oDadosLinha3->cgc                      = str_pad(substr(preg_replace("#[./-]#","",trim($sCGC)),0,14)                   , 14, " ", STR_PAD_LEFT);
+          $oDadosLinha3->rg                       = str_pad(substr(preg_replace("#[./-]#","",trim($oDadosEnvol->z01_ident)),0,12) , 12, " ", STR_PAD_LEFT);
           $oDadosLinha3->orgao_expeditor_rg       = str_pad(substr(trim($oDadosEnvol->z01_identorgao),0,12)                     , 12, " ", STR_PAD_LEFT);
           $oDadosLinha3->nome_pai                 = str_pad(substr(trim($oDadosEnvol->z01_pai),0,40)                            , 40, " ", STR_PAD_RIGHT);
           $oDadosLinha3->nome_mae                 = str_pad(substr(trim($oDadosEnvol->z01_mae),0,40)                            , 40, " ", STR_PAD_RIGHT);

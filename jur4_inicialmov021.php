@@ -123,7 +123,7 @@ function js_gerar(){
     </td>  
     <td valign="top" width="30%" valign="top" align="left">
           <? 
-            $matriz=split("#",$chave);
+            $matriz=explode("#",$chave);
        	    for($y=0;$y<sizeof($matriz);$y++){
        	      if($matriz[$y]!=""){
    	        echo "<small>";

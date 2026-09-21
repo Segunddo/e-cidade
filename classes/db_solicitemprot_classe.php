@@ -50,7 +50,7 @@ class cl_solicitemprot {
                  pc49_protprocesso = int4 = Código do processo 
                  ";
    //funcao construtor da classe 
-   function cl_solicitemprot() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("solicitemprot"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_solicitemprot {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc49_solicitem = ($this->pc49_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc49_solicitem"]:$this->pc49_solicitem);
-       $this->pc49_protprocesso = ($this->pc49_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["pc49_protprocesso"]:$this->pc49_protprocesso);
+       $this->pc49_solicitem = (($this->pc49_solicitem === 0 || $this->pc49_solicitem === 0.0 || $this->pc49_solicitem == "")?@$GLOBALS["HTTP_POST_VARS"]["pc49_solicitem"]:$this->pc49_solicitem);
+       $this->pc49_protprocesso = (($this->pc49_protprocesso === 0 || $this->pc49_protprocesso === 0.0 || $this->pc49_protprocesso == "")?@$GLOBALS["HTTP_POST_VARS"]["pc49_protprocesso"]:$this->pc49_protprocesso);
      }else{
-       $this->pc49_solicitem = ($this->pc49_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc49_solicitem"]:$this->pc49_solicitem);
+       $this->pc49_solicitem = (($this->pc49_solicitem === 0 || $this->pc49_solicitem === 0.0 || $this->pc49_solicitem == "")?@$GLOBALS["HTTP_POST_VARS"]["pc49_solicitem"]:$this->pc49_solicitem);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_solicitemprot {
        return false;
      }
        $this->pc49_solicitem = $pc49_solicitem; 
-     if(($this->pc49_solicitem == null) || ($this->pc49_solicitem == "") ){ 
+     if(($this->pc49_solicitem == null) || (($this->pc49_solicitem === 0 || $this->pc49_solicitem === 0.0 || $this->pc49_solicitem == "")) ){ 
        $this->erro_sql = " Campo pc49_solicitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_solicitemprot {
    function sql_query ( $pc49_solicitem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -333,7 +333,7 @@ class cl_solicitemprot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -345,7 +345,7 @@ class cl_solicitemprot {
    function sql_query_and ( $pc49_solicitem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -375,7 +375,7 @@ class cl_solicitemprot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_solicitemprot {
    function sql_query_andam ( $pc49_solicitem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_solicitemprot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_solicitemprot {
    function sql_query_file ( $pc49_solicitem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_solicitemprot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_solicitemprot {
    function sql_query_transf ( $pc49_solicitem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -485,7 +485,7 @@ class cl_solicitemprot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

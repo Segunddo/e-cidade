@@ -52,7 +52,7 @@ class cl_favorecidotaxa {
                  v87_taxa = int4 = Cod. Taxa 
                  ";
    //funcao construtor da classe 
-   function cl_favorecidotaxa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("favorecidotaxa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_favorecidotaxa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v87_sequencial = ($this->v87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_sequencial"]:$this->v87_sequencial);
-       $this->v87_favorecido = ($this->v87_favorecido == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_favorecido"]:$this->v87_favorecido);
-       $this->v87_taxa = ($this->v87_taxa == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_taxa"]:$this->v87_taxa);
+       $this->v87_sequencial = (($this->v87_sequencial === 0 || $this->v87_sequencial === 0.0 || $this->v87_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v87_sequencial"]:$this->v87_sequencial);
+       $this->v87_favorecido = (($this->v87_favorecido === 0 || $this->v87_favorecido === 0.0 || $this->v87_favorecido == "")?@$GLOBALS["HTTP_POST_VARS"]["v87_favorecido"]:$this->v87_favorecido);
+       $this->v87_taxa = (($this->v87_taxa === 0 || $this->v87_taxa === 0.0 || $this->v87_taxa == "")?@$GLOBALS["HTTP_POST_VARS"]["v87_taxa"]:$this->v87_taxa);
      }else{
-       $this->v87_sequencial = ($this->v87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_sequencial"]:$this->v87_sequencial);
+       $this->v87_sequencial = (($this->v87_sequencial === 0 || $this->v87_sequencial === 0.0 || $this->v87_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v87_sequencial"]:$this->v87_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_favorecidotaxa {
          $this->v87_sequencial = $v87_sequencial; 
        }
      }
-     if(($this->v87_sequencial == null) || ($this->v87_sequencial == "") ){ 
+     if(($this->v87_sequencial == null) || (($this->v87_sequencial === 0 || $this->v87_sequencial === 0.0 || $this->v87_sequencial == "")) ){ 
        $this->erro_sql = " Campo v87_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_favorecidotaxa {
    function sql_query ( $v87_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_favorecidotaxa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_favorecidotaxa {
    function sql_query_file ( $v87_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_favorecidotaxa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

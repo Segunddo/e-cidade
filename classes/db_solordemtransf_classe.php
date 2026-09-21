@@ -54,7 +54,7 @@ class cl_solordemtransf {
                  pc41_ordem = int4 = Ordem de Destino 
                  ";
    //funcao construtor da classe 
-   function cl_solordemtransf() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("solordemtransf"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_solordemtransf {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc41_codigo = ($this->pc41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc41_codigo"]:$this->pc41_codigo);
-       $this->pc41_solicitem = ($this->pc41_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc41_solicitem"]:$this->pc41_solicitem);
-       $this->pc41_codtran = ($this->pc41_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["pc41_codtran"]:$this->pc41_codtran);
-       $this->pc41_ordem = ($this->pc41_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc41_ordem"]:$this->pc41_ordem);
+       $this->pc41_codigo = (($this->pc41_codigo === 0 || $this->pc41_codigo === 0.0 || $this->pc41_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["pc41_codigo"]:$this->pc41_codigo);
+       $this->pc41_solicitem = (($this->pc41_solicitem === 0 || $this->pc41_solicitem === 0.0 || $this->pc41_solicitem == "")?@$GLOBALS["HTTP_POST_VARS"]["pc41_solicitem"]:$this->pc41_solicitem);
+       $this->pc41_codtran = (($this->pc41_codtran === 0 || $this->pc41_codtran === 0.0 || $this->pc41_codtran == "")?@$GLOBALS["HTTP_POST_VARS"]["pc41_codtran"]:$this->pc41_codtran);
+       $this->pc41_ordem = (($this->pc41_ordem === 0 || $this->pc41_ordem === 0.0 || $this->pc41_ordem == "")?@$GLOBALS["HTTP_POST_VARS"]["pc41_ordem"]:$this->pc41_ordem);
      }else{
-       $this->pc41_codigo = ($this->pc41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc41_codigo"]:$this->pc41_codigo);
+       $this->pc41_codigo = (($this->pc41_codigo === 0 || $this->pc41_codigo === 0.0 || $this->pc41_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["pc41_codigo"]:$this->pc41_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_solordemtransf {
          $this->pc41_codigo = $pc41_codigo; 
        }
      }
-     if(($this->pc41_codigo == null) || ($this->pc41_codigo == "") ){ 
+     if(($this->pc41_codigo == null) || (($this->pc41_codigo === 0 || $this->pc41_codigo === 0.0 || $this->pc41_codigo == "")) ){ 
        $this->erro_sql = " Campo pc41_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_solordemtransf {
    function sql_query ( $pc41_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_solordemtransf {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_solordemtransf {
    function sql_query_file ( $pc41_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_solordemtransf {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

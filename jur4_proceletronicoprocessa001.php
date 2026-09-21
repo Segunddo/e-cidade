@@ -34,7 +34,7 @@ $clrotulo->label('k31_situacao');
 $clrotulo->label('am14_mensagem');
 $instit = db_getsession("DB_instit");
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_app::load("scripts.js");
 db_app::load("prototype.js");
 db_app::load("strings.js");

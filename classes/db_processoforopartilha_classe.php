@@ -66,7 +66,7 @@ class cl_processoforopartilha {
                  v76_datapartilha = date = Data da Partilha
                  ";
    //funcao construtor da classe
-   function cl_processoforopartilha() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("processoforopartilha");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,9 +83,9 @@ class cl_processoforopartilha {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v76_sequencial = ($this->v76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_sequencial"]:$this->v76_sequencial);
-       $this->v76_processoforo = ($this->v76_processoforo == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_processoforo"]:$this->v76_processoforo);
-       $this->v76_tipolancamento = ($this->v76_tipolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_tipolancamento"]:$this->v76_tipolancamento);
+       $this->v76_sequencial = (($this->v76_sequencial === 0 || $this->v76_sequencial === 0.0 || $this->v76_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v76_sequencial"]:$this->v76_sequencial);
+       $this->v76_processoforo = (($this->v76_processoforo === 0 || $this->v76_processoforo === 0.0 || $this->v76_processoforo == "")?@$GLOBALS["HTTP_POST_VARS"]["v76_processoforo"]:$this->v76_processoforo);
+       $this->v76_tipolancamento = (($this->v76_tipolancamento === 0 || $this->v76_tipolancamento === 0.0 || $this->v76_tipolancamento == "")?@$GLOBALS["HTTP_POST_VARS"]["v76_tipolancamento"]:$this->v76_tipolancamento);
        if($this->v76_dtpagamento == ""){
          $this->v76_dtpagamento_dia = ($this->v76_dtpagamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_dtpagamento_dia"]:$this->v76_dtpagamento_dia);
          $this->v76_dtpagamento_mes = ($this->v76_dtpagamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_dtpagamento_mes"]:$this->v76_dtpagamento_mes);
@@ -95,7 +95,7 @@ class cl_processoforopartilha {
          }
        }
        $this->v76_obs = ($this->v76_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_obs"]:$this->v76_obs);
-       $this->v76_valorpartilha = ($this->v76_valorpartilha == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_valorpartilha"]:$this->v76_valorpartilha);
+       $this->v76_valorpartilha = (($this->v76_valorpartilha === 0 || $this->v76_valorpartilha === 0.0 || $this->v76_valorpartilha == "")?@$GLOBALS["HTTP_POST_VARS"]["v76_valorpartilha"]:$this->v76_valorpartilha);
        if($this->v76_datapartilha == ""){
          $this->v76_datapartilha_dia = ($this->v76_datapartilha_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_datapartilha_dia"]:$this->v76_datapartilha_dia);
          $this->v76_datapartilha_mes = ($this->v76_datapartilha_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_datapartilha_mes"]:$this->v76_datapartilha_mes);
@@ -105,7 +105,7 @@ class cl_processoforopartilha {
          }
        }
      }else{
-       $this->v76_sequencial = ($this->v76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_sequencial"]:$this->v76_sequencial);
+       $this->v76_sequencial = (($this->v76_sequencial === 0 || $this->v76_sequencial === 0.0 || $this->v76_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v76_sequencial"]:$this->v76_sequencial);
      }
    }
    // funcao para inclusao
@@ -174,7 +174,7 @@ class cl_processoforopartilha {
          $this->v76_sequencial = $v76_sequencial;
        }
      }
-     if(($this->v76_sequencial == null) || ($this->v76_sequencial == "") ){
+     if(($this->v76_sequencial == null) || (($this->v76_sequencial === 0 || $this->v76_sequencial === 0.0 || $this->v76_sequencial == "")) ){
        $this->erro_sql = " Campo v76_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -490,7 +490,7 @@ class cl_processoforopartilha {
    function sql_query ( $v76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -518,7 +518,7 @@ class cl_processoforopartilha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -531,7 +531,7 @@ class cl_processoforopartilha {
    function sql_query_file ( $v76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_processoforopartilha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

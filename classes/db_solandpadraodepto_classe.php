@@ -50,7 +50,7 @@ class cl_solandpadraodepto {
                  pc48_depto = int4 = Depart. 
                  ";
    //funcao construtor da classe 
-   function cl_solandpadraodepto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("solandpadraodepto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_solandpadraodepto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc48_solandpadrao = ($this->pc48_solandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc48_solandpadrao"]:$this->pc48_solandpadrao);
-       $this->pc48_depto = ($this->pc48_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc48_depto"]:$this->pc48_depto);
+       $this->pc48_solandpadrao = (($this->pc48_solandpadrao === 0 || $this->pc48_solandpadrao === 0.0 || $this->pc48_solandpadrao == "")?@$GLOBALS["HTTP_POST_VARS"]["pc48_solandpadrao"]:$this->pc48_solandpadrao);
+       $this->pc48_depto = (($this->pc48_depto === 0 || $this->pc48_depto === 0.0 || $this->pc48_depto == "")?@$GLOBALS["HTTP_POST_VARS"]["pc48_depto"]:$this->pc48_depto);
      }else{
-       $this->pc48_solandpadrao = ($this->pc48_solandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc48_solandpadrao"]:$this->pc48_solandpadrao);
+       $this->pc48_solandpadrao = (($this->pc48_solandpadrao === 0 || $this->pc48_solandpadrao === 0.0 || $this->pc48_solandpadrao == "")?@$GLOBALS["HTTP_POST_VARS"]["pc48_solandpadrao"]:$this->pc48_solandpadrao);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_solandpadraodepto {
        return false;
      }
        $this->pc48_solandpadrao = $pc48_solandpadrao; 
-     if(($this->pc48_solandpadrao == null) || ($this->pc48_solandpadrao == "") ){ 
+     if(($this->pc48_solandpadrao == null) || (($this->pc48_solandpadrao === 0 || $this->pc48_solandpadrao === 0.0 || $this->pc48_solandpadrao == "")) ){ 
        $this->erro_sql = " Campo pc48_solandpadrao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_solandpadraodepto {
    function sql_query ( $pc48_solandpadrao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_solandpadraodepto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_solandpadraodepto {
    function sql_query_file ( $pc48_solandpadrao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_solandpadraodepto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

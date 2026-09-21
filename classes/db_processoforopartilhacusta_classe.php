@@ -57,7 +57,7 @@ class cl_processoforopartilhacusta {
                  v77_dispensalancamentorecibo = bool = Dispensa cobrança
                  ";
    //funcao construtor da classe
-   function cl_processoforopartilhacusta() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("processoforopartilhacusta");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,14 +74,14 @@ class cl_processoforopartilhacusta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v77_sequencial = ($this->v77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v77_sequencial"]:$this->v77_sequencial);
-       $this->v77_taxa = ($this->v77_taxa == ""?@$GLOBALS["HTTP_POST_VARS"]["v77_taxa"]:$this->v77_taxa);
-       $this->v77_processoforopartilha = ($this->v77_processoforopartilha == ""?@$GLOBALS["HTTP_POST_VARS"]["v77_processoforopartilha"]:$this->v77_processoforopartilha);
-       $this->v77_valor = ($this->v77_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["v77_valor"]:$this->v77_valor);
-       $this->v77_numnov = ($this->v77_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["v77_numnov"]:$this->v77_numnov);
+       $this->v77_sequencial = (($this->v77_sequencial === 0 || $this->v77_sequencial === 0.0 || $this->v77_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v77_sequencial"]:$this->v77_sequencial);
+       $this->v77_taxa = (($this->v77_taxa === 0 || $this->v77_taxa === 0.0 || $this->v77_taxa == "")?@$GLOBALS["HTTP_POST_VARS"]["v77_taxa"]:$this->v77_taxa);
+       $this->v77_processoforopartilha = (($this->v77_processoforopartilha === 0 || $this->v77_processoforopartilha === 0.0 || $this->v77_processoforopartilha == "")?@$GLOBALS["HTTP_POST_VARS"]["v77_processoforopartilha"]:$this->v77_processoforopartilha);
+       $this->v77_valor = (($this->v77_valor === 0 || $this->v77_valor === 0.0 || $this->v77_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["v77_valor"]:$this->v77_valor);
+       $this->v77_numnov = (($this->v77_numnov === 0 || $this->v77_numnov === 0.0 || $this->v77_numnov == "")?@$GLOBALS["HTTP_POST_VARS"]["v77_numnov"]:$this->v77_numnov);
        $this->v77_dispensalancamentorecibo = ($this->v77_dispensalancamentorecibo == ""?@$GLOBALS["HTTP_POST_VARS"]["v77_dispensalancamentorecibo"]:$this->v77_dispensalancamentorecibo);
      }else{
-       $this->v77_sequencial = ($this->v77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v77_sequencial"]:$this->v77_sequencial);
+       $this->v77_sequencial = (($this->v77_sequencial === 0 || $this->v77_sequencial === 0.0 || $this->v77_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v77_sequencial"]:$this->v77_sequencial);
      }
    }
    // funcao para inclusao
@@ -150,7 +150,7 @@ class cl_processoforopartilhacusta {
          $this->v77_sequencial = $v77_sequencial;
        }
      }
-     if(($this->v77_sequencial == null) || ($this->v77_sequencial == "") ){
+     if(($this->v77_sequencial == null) || (($this->v77_sequencial === 0 || $this->v77_sequencial === 0.0 || $this->v77_sequencial == "")) ){
        $this->erro_sql = " Campo v77_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -656,7 +656,7 @@ function getProcessoForoByNumpreRecibo($iNumpreRecibo) {
 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -695,7 +695,7 @@ function getProcessoForoByNumpreRecibo($iNumpreRecibo) {
 
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -815,7 +815,7 @@ function getProcessoForoByNumpreRecibo($iNumpreRecibo) {
 
     if ( $sCampos != "*" ) {
 
-      $campos_sql = split("#", $sCampos);
+      $campos_sql = explode("#", $sCampos);
       $virgula    = "";
 
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -865,7 +865,7 @@ function getProcessoForoByNumpreRecibo($iNumpreRecibo) {
     if ( $sOrdem != null ) {
 
       $sSql       .= " order by ";
-      $campos_sql = split("#", $sOrdem);
+      $campos_sql = explode("#", $sOrdem);
       $virgula    = "";
 
       for ($i = 0; $i < sizeof($campos_sql); $i++) {

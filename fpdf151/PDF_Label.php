@@ -123,7 +123,7 @@ class PDF_Label extends FPDF {
 	}
 
 	// Constructor
-	function PDF_Label ($format, $unit='mm', $posX=1, $posY=1) {
+	function __construct($format, $unit='mm', $posX=1, $posY=1) {
 		if (is_array($format)) {
 			// Custom format
 			$Tformat = $format;

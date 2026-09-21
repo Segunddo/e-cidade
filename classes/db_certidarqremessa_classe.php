@@ -57,7 +57,7 @@ class cl_certidarqremessa {
                  v83_dtgeracao = date = Data de Geração 
                  ";
    //funcao construtor da classe 
-   function cl_certidarqremessa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("certidarqremessa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,9 +74,9 @@ class cl_certidarqremessa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v83_sequencial = ($this->v83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_sequencial"]:$this->v83_sequencial);
+       $this->v83_sequencial = (($this->v83_sequencial === 0 || $this->v83_sequencial === 0.0 || $this->v83_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v83_sequencial"]:$this->v83_sequencial);
        $this->v83_nomearq = ($this->v83_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_nomearq"]:$this->v83_nomearq);
-       $this->v83_lista = ($this->v83_lista == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_lista"]:$this->v83_lista);
+       $this->v83_lista = (($this->v83_lista === 0 || $this->v83_lista === 0.0 || $this->v83_lista == "")?@$GLOBALS["HTTP_POST_VARS"]["v83_lista"]:$this->v83_lista);
        if($this->v83_dtgeracao == ""){
          $this->v83_dtgeracao_dia = ($this->v83_dtgeracao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_dtgeracao_dia"]:$this->v83_dtgeracao_dia);
          $this->v83_dtgeracao_mes = ($this->v83_dtgeracao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_dtgeracao_mes"]:$this->v83_dtgeracao_mes);
@@ -86,7 +86,7 @@ class cl_certidarqremessa {
          }
        }
      }else{
-       $this->v83_sequencial = ($this->v83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_sequencial"]:$this->v83_sequencial);
+       $this->v83_sequencial = (($this->v83_sequencial === 0 || $this->v83_sequencial === 0.0 || $this->v83_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v83_sequencial"]:$this->v83_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_certidarqremessa {
          $this->v83_sequencial = $v83_sequencial; 
        }
      }
-     if(($this->v83_sequencial == null) || ($this->v83_sequencial == "") ){ 
+     if(($this->v83_sequencial == null) || (($this->v83_sequencial === 0 || $this->v83_sequencial === 0.0 || $this->v83_sequencial == "")) ){ 
        $this->erro_sql = " Campo v83_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -415,7 +415,7 @@ class cl_certidarqremessa {
    function sql_query ( $v83_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_certidarqremessa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_certidarqremessa {
    function sql_query_file ( $v83_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_certidarqremessa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

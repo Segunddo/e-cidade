@@ -26,7 +26,7 @@ class cl_db_usuariosrhlota {
                  rh157_lotacao = int4 = Lotação do Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_db_usuariosrhlota() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_usuariosrhlota"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_db_usuariosrhlota {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh157_sequencial = ($this->rh157_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh157_sequencial"]:$this->rh157_sequencial);
-       $this->rh157_usuario = ($this->rh157_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh157_usuario"]:$this->rh157_usuario);
-       $this->rh157_lotacao = ($this->rh157_lotacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh157_lotacao"]:$this->rh157_lotacao);
+       $this->rh157_sequencial = (($this->rh157_sequencial === 0 || $this->rh157_sequencial === 0.0 || $this->rh157_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["rh157_sequencial"]:$this->rh157_sequencial);
+       $this->rh157_usuario = (($this->rh157_usuario === 0 || $this->rh157_usuario === 0.0 || $this->rh157_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["rh157_usuario"]:$this->rh157_usuario);
+       $this->rh157_lotacao = (($this->rh157_lotacao === 0 || $this->rh157_lotacao === 0.0 || $this->rh157_lotacao == "")?@$GLOBALS["HTTP_POST_VARS"]["rh157_lotacao"]:$this->rh157_lotacao);
      }else{
-       $this->rh157_sequencial = ($this->rh157_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh157_sequencial"]:$this->rh157_sequencial);
+       $this->rh157_sequencial = (($this->rh157_sequencial === 0 || $this->rh157_sequencial === 0.0 || $this->rh157_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["rh157_sequencial"]:$this->rh157_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_db_usuariosrhlota {
          $this->rh157_sequencial = $rh157_sequencial; 
        }
      }
-     if(($this->rh157_sequencial == null) || ($this->rh157_sequencial == "") ){ 
+     if(($this->rh157_sequencial == null) || (($this->rh157_sequencial === 0 || $this->rh157_sequencial === 0.0 || $this->rh157_sequencial == "")) ){ 
        $this->erro_sql = " Campo rh157_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

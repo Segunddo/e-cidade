@@ -80,7 +80,7 @@ class cl_padroes {
                  r02_padraopai_instit = int4 = Padrão vinculado 
                  ";
    //funcao construtor da classe 
-   function cl_padroes() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("padroes"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -97,28 +97,28 @@ class cl_padroes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r02_instit = ($this->r02_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_instit"]:$this->r02_instit);
-       $this->r02_anousu = ($this->r02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_anousu"]:$this->r02_anousu);
-       $this->r02_mesusu = ($this->r02_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_mesusu"]:$this->r02_mesusu);
-       $this->r02_regime = ($this->r02_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_regime"]:$this->r02_regime);
+       $this->r02_instit = (($this->r02_instit === 0 || $this->r02_instit === 0.0 || $this->r02_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_instit"]:$this->r02_instit);
+       $this->r02_anousu = (($this->r02_anousu === 0 || $this->r02_anousu === 0.0 || $this->r02_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_anousu"]:$this->r02_anousu);
+       $this->r02_mesusu = (($this->r02_mesusu === 0 || $this->r02_mesusu === 0.0 || $this->r02_mesusu == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_mesusu"]:$this->r02_mesusu);
+       $this->r02_regime = (($this->r02_regime === 0 || $this->r02_regime === 0.0 || $this->r02_regime == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_regime"]:$this->r02_regime);
        $this->r02_codigo = ($this->r02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_codigo"]:$this->r02_codigo);
        $this->r02_descr = ($this->r02_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_descr"]:$this->r02_descr);
-       $this->r02_valor = ($this->r02_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_valor"]:$this->r02_valor);
-       $this->r02_hrssem = ($this->r02_hrssem == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_hrssem"]:$this->r02_hrssem);
-       $this->r02_hrsmen = ($this->r02_hrsmen == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_hrsmen"]:$this->r02_hrsmen);
+       $this->r02_valor = (($this->r02_valor === 0 || $this->r02_valor === 0.0 || $this->r02_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_valor"]:$this->r02_valor);
+       $this->r02_hrssem = (($this->r02_hrssem === 0 || $this->r02_hrssem === 0.0 || $this->r02_hrssem == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_hrssem"]:$this->r02_hrssem);
+       $this->r02_hrsmen = (($this->r02_hrsmen === 0 || $this->r02_hrsmen === 0.0 || $this->r02_hrsmen == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_hrsmen"]:$this->r02_hrsmen);
        $this->r02_tipo = ($this->r02_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_tipo"]:$this->r02_tipo);
        $this->r02_form = ($this->r02_form == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_form"]:$this->r02_form);
        $this->r02_minimo = ($this->r02_minimo == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_minimo"]:$this->r02_minimo);
        $this->r02_nivel = ($this->r02_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_nivel"]:$this->r02_nivel);
        $this->r02_classe = ($this->r02_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_classe"]:$this->r02_classe);
-       $this->r02_padraopai_regime = ($this->r02_padraopai_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_padraopai_regime"]:$this->r02_padraopai_regime);
-       $this->r02_padraopai_codigo = ($this->r02_padraopai_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_padraopai_codigo"]:$this->r02_padraopai_codigo);
-       $this->r02_padraopai_instit = ($this->r02_padraopai_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_padraopai_instit"]:$this->r02_padraopai_instit);
+       $this->r02_padraopai_regime = (($this->r02_padraopai_regime === 0 || $this->r02_padraopai_regime === 0.0 || $this->r02_padraopai_regime == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_padraopai_regime"]:$this->r02_padraopai_regime);
+       $this->r02_padraopai_codigo = (($this->r02_padraopai_codigo === 0 || $this->r02_padraopai_codigo === 0.0 || $this->r02_padraopai_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_padraopai_codigo"]:$this->r02_padraopai_codigo);
+       $this->r02_padraopai_instit = (($this->r02_padraopai_instit === 0 || $this->r02_padraopai_instit === 0.0 || $this->r02_padraopai_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_padraopai_instit"]:$this->r02_padraopai_instit);
      }else{
-       $this->r02_instit = ($this->r02_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_instit"]:$this->r02_instit);
-       $this->r02_anousu = ($this->r02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_anousu"]:$this->r02_anousu);
-       $this->r02_mesusu = ($this->r02_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_mesusu"]:$this->r02_mesusu);
-       $this->r02_regime = ($this->r02_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_regime"]:$this->r02_regime);
+       $this->r02_instit = (($this->r02_instit === 0 || $this->r02_instit === 0.0 || $this->r02_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_instit"]:$this->r02_instit);
+       $this->r02_anousu = (($this->r02_anousu === 0 || $this->r02_anousu === 0.0 || $this->r02_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_anousu"]:$this->r02_anousu);
+       $this->r02_mesusu = (($this->r02_mesusu === 0 || $this->r02_mesusu === 0.0 || $this->r02_mesusu == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_mesusu"]:$this->r02_mesusu);
+       $this->r02_regime = (($this->r02_regime === 0 || $this->r02_regime === 0.0 || $this->r02_regime == "")?@$GLOBALS["HTTP_POST_VARS"]["r02_regime"]:$this->r02_regime);
        $this->r02_codigo = ($this->r02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r02_codigo"]:$this->r02_codigo);
      }
    }
@@ -157,7 +157,7 @@ class cl_padroes {
        $this->r02_regime = $r02_regime; 
        $this->r02_codigo = $r02_codigo; 
        $this->r02_instit = $r02_instit; 
-     if(($this->r02_anousu == null) || ($this->r02_anousu == "") ){ 
+     if(($this->r02_anousu == null) || (($this->r02_anousu === 0 || $this->r02_anousu === 0.0 || $this->r02_anousu == "")) ){ 
        $this->erro_sql = " Campo r02_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -165,7 +165,7 @@ class cl_padroes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r02_mesusu == null) || ($this->r02_mesusu == "") ){ 
+     if(($this->r02_mesusu == null) || (($this->r02_mesusu === 0 || $this->r02_mesusu === 0.0 || $this->r02_mesusu == "")) ){ 
        $this->erro_sql = " Campo r02_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -173,7 +173,7 @@ class cl_padroes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r02_regime == null) || ($this->r02_regime == "") ){ 
+     if(($this->r02_regime == null) || (($this->r02_regime === 0 || $this->r02_regime === 0.0 || $this->r02_regime == "")) ){ 
        $this->erro_sql = " Campo r02_regime nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -189,7 +189,7 @@ class cl_padroes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r02_instit == null) || ($this->r02_instit == "") ){ 
+     if(($this->r02_instit == null) || (($this->r02_instit === 0 || $this->r02_instit === 0.0 || $this->r02_instit == "")) ){ 
        $this->erro_sql = " Campo r02_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

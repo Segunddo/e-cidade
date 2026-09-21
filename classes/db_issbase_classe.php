@@ -98,7 +98,7 @@ class cl_issbase {
                  q02_protocolojuntacomercial = varchar(100) = Protocolo Junta Comercial
                  ";
    //funcao construtor da classe
-   function cl_issbase() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issbase");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -115,8 +115,8 @@ class cl_issbase {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q02_inscr = ($this->q02_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q02_inscr"]:$this->q02_inscr);
-       $this->q02_numcgm = ($this->q02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q02_numcgm"]:$this->q02_numcgm);
+       $this->q02_inscr = (($this->q02_inscr === 0 || $this->q02_inscr === 0.0 || $this->q02_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q02_inscr"]:$this->q02_inscr);
+       $this->q02_numcgm = (($this->q02_numcgm === 0 || $this->q02_numcgm === 0.0 || $this->q02_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["q02_numcgm"]:$this->q02_numcgm);
        $this->q02_memo = ($this->q02_memo == ""?@$GLOBALS["HTTP_POST_VARS"]["q02_memo"]:$this->q02_memo);
        $this->q02_tiplic = ($this->q02_tiplic == ""?@$GLOBALS["HTTP_POST_VARS"]["q02_tiplic"]:$this->q02_tiplic);
        $this->q02_regjuc = ($this->q02_regjuc == ""?@$GLOBALS["HTTP_POST_VARS"]["q02_regjuc"]:$this->q02_regjuc);
@@ -146,7 +146,7 @@ class cl_issbase {
             $this->q02_dtbaix = $this->q02_dtbaix_ano."-".$this->q02_dtbaix_mes."-".$this->q02_dtbaix_dia;
          }
        }
-       $this->q02_capit = ($this->q02_capit == ""?@$GLOBALS["HTTP_POST_VARS"]["q02_capit"]:$this->q02_capit);
+       $this->q02_capit = (($this->q02_capit === 0 || $this->q02_capit === 0.0 || $this->q02_capit == "")?@$GLOBALS["HTTP_POST_VARS"]["q02_capit"]:$this->q02_capit);
        $this->q02_cep = ($this->q02_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["q02_cep"]:$this->q02_cep);
        if($this->q02_dtjunta == ""){
          $this->q02_dtjunta_dia = ($this->q02_dtjunta_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q02_dtjunta_dia"]:$this->q02_dtjunta_dia);
@@ -173,7 +173,7 @@ class cl_issbase {
          }
        }
      }else{
-       $this->q02_inscr = ($this->q02_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q02_inscr"]:$this->q02_inscr);
+       $this->q02_inscr = (($this->q02_inscr === 0 || $this->q02_inscr === 0.0 || $this->q02_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q02_inscr"]:$this->q02_inscr);
      }
      $this->q02_formalocalvara = ($this->q02_formalocalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q02_formalocalvara"]:$this->q02_formalocalvara);
 
@@ -285,7 +285,7 @@ class cl_issbase {
          $this->q02_inscr = $q02_inscr;
        }
      }
-     if(($this->q02_inscr == null) || ($this->q02_inscr == "") ){
+     if(($this->q02_inscr == null) || (($this->q02_inscr === 0 || $this->q02_inscr === 0.0 || $this->q02_inscr == "")) ){
        $this->erro_sql = " Campo q02_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -1356,7 +1356,7 @@ $sql = "select ";
   		$this->erro_status = "0";
   		return false;
     }
-  	if($q02_inscr == "" || $q02_inscr == null || $this->q02_inscr == null || $this->q02_inscr == "") {
+  	if($q02_inscr == "" || $q02_inscr == null || $this->q02_inscr == null || ($this->q02_inscr === 0 || $this->q02_inscr === 0.0 || $this->q02_inscr == "")) {
 
   		if(!$this->getNumeroContinuo()) {
 

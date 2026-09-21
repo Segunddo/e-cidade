@@ -30,7 +30,7 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); extract($__qs);
 
 if(isset($retorno)) {
   $sql = "select j.v50_codigo,j.v50_numero,to_char(j.v50_dataen,'DD') as data_dia,to_char(j.v50_dataen,'MM') as data_mes,
@@ -69,7 +69,7 @@ if(isset($HTTP_POST_VARS["enviar"])) {
 						v50_movim = '$v50_movim'
 					WHERE v50_codigo = $v50_codigo") or die("Erro(43) atualizando juridico");
   $result = db_query("DELETE FROM autproc WHERE v55_proces = $v50_codigo") or die("Erro(44) deletando autproc");
-  $aux_autor = split("#",$aux_autor);
+  $aux_autor = explode("#",$aux_autor);
   $tam = sizeof($aux_autor);
   for($i = 1;$i < $tam;$i++)
     $result = db_query("INSERT INTO autproc VALUES($v50_codigo,'".$aux_autor[$i]."',$i)") or die("Erro(48) inserindo em autproc");

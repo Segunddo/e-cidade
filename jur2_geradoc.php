@@ -43,7 +43,7 @@ include(modification("classes/db_averba_classe.php"));
 include(modification("fpdf151/pdf1.php"));
 include(modification("classes/db_db_docparag_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 
 $clinicialdoc           = new cl_inicialdoc;
 $clinicial              = new cl_inicial;
@@ -69,11 +69,11 @@ $pdf->AliasNbPages();
 $grupodocumento = 0;
 
 if (isset ($dadosini) && $dadosini != "") {
-	$matriz = split("xx", $dadosini);
+	$matriz = explode("xx", $dadosini);
 }
-for ($q = 0; $q < sizeof($matriz); $q ++) {
+for ($q = 0; $q < sizeof((array)$matriz); $q ++) {
 	if ($matriz[$q] != "") {
-		$dadosi = split("ww", $matriz[$q]);
+		$dadosi = explode("ww", $matriz[$q]);
 		$inicial = $dadosi[0];
 		$chave = $dadosi[1];
 		$modo = $dadosi[2];
@@ -118,7 +118,7 @@ for ($q = 0; $q < sizeof($matriz); $q ++) {
 		db_fieldsmemory($resul, 0); //pega o dados da prefa
 
 		$datac = date("d-m-Y");
-		$dat = split("-", $datac);
+		$dat = explode("-", $datac);
 		$mes = db_mes($dat[1]);
 		$data = $dat[0]." de ".$mes." de ".$dat[2].".";
 
@@ -204,7 +204,7 @@ for ($q = 0; $q < sizeof($matriz); $q ++) {
 					}
 				}
 				if (isset ($cgmatu)) {
-					$matricgm = split("x", $cgmatu);
+					$matricgm = explode("x", $cgmatu);
 					$outrospropri = "";
 					$xe = "";
 					$inic = false;
@@ -296,10 +296,10 @@ for ($q = 0; $q < sizeof($matriz); $q ++) {
 			$pdf->SetX($db02_alinha);
 			$texto = db_geratexto($db02_texto);
 			if ($texto == "*tabela01*") {
-				$cgms = split("x", $nums);
+				$cgms = explode("x", $nums);
 				for ($t = 0; $t < sizeof($cgms); $t ++) {
 					if ($cgms[$t] != "") {
-						$numcgm = split("y", $cgms[$t]);
+						$numcgm = explode("y", $cgms[$t]);
 						$tipos = array ("PROPRIETÁRIO PRINCIPAL", "OUTRO PROPRIETÁRIO", "PROMITENTE COMPRADOR", "PROMITENTE COMPRADOR PRINCIPAL", "SÓCIO");
 						$reiptu = $clcgm->sql_record($clcgm->sql_query_file($numcgm[0], "z01_nome as nome,z01_numcgm,z01_ender as endereco,z01_numero as numero,z01_cep,z01_munic,z01_uf,z01_compl,z01_bairro,z01_cep,z01_cgccpf,z01_cxpostal"));
 
@@ -320,7 +320,7 @@ for ($q = 0; $q < sizeof($matriz); $q ++) {
 					if ($texto == "*atupropri*") {
 						$cgm = $cgmatu;
 					}
-					$matricgm = split("x", $cgm);
+					$matricgm = explode("x", $cgm);
 					$outrospropri = "";
 					$xe = "";
 					$inic = false;
@@ -356,7 +356,7 @@ for ($q = 0; $q < sizeof($matriz); $q ++) {
 					}
 				}
 			elseif ($texto == "*antpropri*") {
-				$matricgm = split("x", $cgmant);
+				$matricgm = explode("x", $cgmant);
 				$outrospropri = "";
 				$xe = "";
 				$inic = false;

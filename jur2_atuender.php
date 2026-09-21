@@ -39,7 +39,7 @@ include(modification("classes/db_propri_classe.php"));
 include(modification("classes/db_socios_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 db_postmemory($HTTP_POST_VARS);
 

@@ -50,7 +50,7 @@ class cl_vara {
                  v53_descr = char(40) = Descrição da Vara 
                  ";
    //funcao construtor da classe 
-   function cl_vara() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vara"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_vara {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v53_codvara = ($this->v53_codvara == ""?@$GLOBALS["HTTP_POST_VARS"]["v53_codvara"]:$this->v53_codvara);
+       $this->v53_codvara = (($this->v53_codvara === 0 || $this->v53_codvara === 0.0 || $this->v53_codvara == "")?@$GLOBALS["HTTP_POST_VARS"]["v53_codvara"]:$this->v53_codvara);
        $this->v53_descr = ($this->v53_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["v53_descr"]:$this->v53_descr);
      }else{
-       $this->v53_codvara = ($this->v53_codvara == ""?@$GLOBALS["HTTP_POST_VARS"]["v53_codvara"]:$this->v53_codvara);
+       $this->v53_codvara = (($this->v53_codvara === 0 || $this->v53_codvara === 0.0 || $this->v53_codvara == "")?@$GLOBALS["HTTP_POST_VARS"]["v53_codvara"]:$this->v53_codvara);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_vara {
          $this->v53_codvara = $v53_codvara; 
        }
      }
-     if(($this->v53_codvara == null) || ($this->v53_codvara == "") ){ 
+     if(($this->v53_codvara == null) || (($this->v53_codvara === 0 || $this->v53_codvara === 0.0 || $this->v53_codvara == "")) ){ 
        $this->erro_sql = " Campo v53_codvara nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_vara {
    function sql_query ( $v53_codvara=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_vara {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_vara {
    function sql_query_file ( $v53_codvara=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_vara {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

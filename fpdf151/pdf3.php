@@ -153,7 +153,7 @@ $this->Ln(1);
         $this->wLine=$w;
         $this->hLine=$h;
         $this->Text=trim($txt);
-        $this->Text=ereg_replace("\n|\r|\t","",$this->Text);
+        $this->Text=preg_replace("#\n|\r|\t#","",$this->Text);
         $this->border=$border;
         $this->align=$align;
         $this->fill=$fill;
@@ -204,7 +204,7 @@ $this->Ln(1);
 
     function Padding()
     {
-        if(ereg("^.+,",$this->Padding)) {
+        if(preg_match("#^.+,#",$this->Padding)) {
             $tab=explode(",",$this->Padding);
             $this->lPadding=$tab[0];
             $this->tPadding=$tab[1];
@@ -283,7 +283,7 @@ $this->Ln(1);
         else
         {
             reset($this->PileStyle);
-            while(list($k,$val)=each($this->PileStyle))
+            foreach ($this->PileStyle as $k => $val)
             {
                 $val=trim($val);
                 if($this->TagStyle[$val]['family']!="") {
@@ -299,7 +299,7 @@ $this->Ln(1);
         else
         {
             reset($this->PileStyle);
-            while(list($k,$val)=each($this->PileStyle))
+            foreach ($this->PileStyle as $k => $val)
             {
                 $val=trim($val);
                 $style1=strtoupper($this->TagStyle[$val]['style']);
@@ -307,11 +307,11 @@ $this->Ln(1);
                     break;
                 else
                 {
-                    if(ereg("B",$style1))
+                    if(preg_match("#B#",$style1))
                         $style['b']="B";
-                    if(ereg("I",$style1))
+                    if(preg_match("#I#",$style1))
                         $style['i']="I";
-                    if(ereg("U",$style1))
+                    if(preg_match("#U#",$style1))
                         $style['u']="U";
                 }
             }
@@ -324,7 +324,7 @@ $this->Ln(1);
         else
         {
             reset($this->PileStyle);
-            while(list($k,$val)=each($this->PileStyle))
+            foreach ($this->PileStyle as $k => $val)
             {
                 $val=trim($val);
                 if($this->TagStyle[$val]['size']!=0) {
@@ -340,7 +340,7 @@ $this->Ln(1);
         else
         {
             reset($this->PileStyle);
-            while(list($k,$val)=each($this->PileStyle))
+            foreach ($this->PileStyle as $k => $val)
             {
                 $val=trim($val);
                 if($this->TagStyle[$val]['color']!="") {
@@ -363,21 +363,21 @@ $this->Ln(1);
     {
         $tab=array();
         // Closing tag
-        if(ereg("^(</([^>]+)>).*",$text,$regs)) {
+        if(preg_match("#^(</([^>]+)>).*#",$text,$regs)) {
             $tab[1]="c";
             $tab[2]=trim($regs[2]);
         }
         // Opening tag
-        else if(ereg("^(<([^>]+)>).*",$text,$regs)) {
-            $regs[2]=ereg_replace("^a","a ",$regs[2]);
+        else if(preg_match("#^(<([^>]+)>).*#",$text,$regs)) {
+            $regs[2]=preg_replace("#^a#","a ",$regs[2]);
             $tab[1]="o";
             $tab[2]=trim($regs[2]);
 
             // Presence of attributes
-            if(ereg("(.+) (.+)='(.+)' *",$regs[2])) {
-                $tab1=split(" +",$regs[2]);
+            if(preg_match("#(.+) (.+)='(.+)' *#",$regs[2])) {
+                $tab1=preg_split("/ +/",$regs[2]);
                 $tab[2]=trim($tab1[0]);
-                while(list($i,$couple)=each($tab1))
+                foreach ($tab1 as $i => $couple)
                 {
                     if($i>0) {
                         $tab2=explode("=",$couple);
@@ -390,12 +390,12 @@ $this->Ln(1);
             }
         }
          // Space
-         else if(ereg("^( ).*",$text,$regs)) {
+         else if(preg_match("#^( ).*#",$text,$regs)) {
             $tab[1]="s";
             $tab[2]=$regs[1];
         }
         // Text
-        else if(ereg("^([^< ]+).*",$text,$regs)) {
+        else if(preg_match("#^([^< ]+).*#",$text,$regs)) {
             $tab[1]="t";
             $tab[2]=trim($regs[1]);
         }
@@ -503,8 +503,8 @@ $this->Ln(1);
             $i=0;
         }
         else {
-            ereg("^(( *(<([^>]+)>)* *)*)(.*)",$this->Text,$regs);
-            $regs[1]=ereg_replace(" ", "", $regs[1]);
+            preg_match("#^(( *(<([^>]+)>)* *)*)(.*)#",$this->Text,$regs);
+            $regs[1]=preg_replace("# #", "", $regs[1]);
             $this->Text=$regs[1].$regs[5];
             $i=-1;
         }
@@ -657,7 +657,7 @@ $ru) ? " e " : "").$ru;
 	                 Trocando o " E " por " e ", fica muito + apresentável!
                      Rodrigo Cerqueira, rodrigobc@fte.com.br
                     */
-			  if ($rt) $rt=ereg_replace(" E "," e ",ucwords($rt));
+			  if ($rt) $rt=preg_replace("# E #"," e ",ucwords($rt));
                           return (($rt) ? ($rt) : "Zero");
          }
 

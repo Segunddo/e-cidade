@@ -54,7 +54,7 @@ class cl_loteloc {
                  j06_lote = varchar(5) = Lote de Localização 
                  ";
    //funcao construtor da classe 
-   function cl_loteloc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("loteloc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_loteloc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j06_idbql = ($this->j06_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_idbql"]:$this->j06_idbql);
-       $this->j06_setorloc = ($this->j06_setorloc == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_setorloc"]:$this->j06_setorloc);
+       $this->j06_idbql = (($this->j06_idbql === 0 || $this->j06_idbql === 0.0 || $this->j06_idbql == "")?@$GLOBALS["HTTP_POST_VARS"]["j06_idbql"]:$this->j06_idbql);
+       $this->j06_setorloc = (($this->j06_setorloc === 0 || $this->j06_setorloc === 0.0 || $this->j06_setorloc == "")?@$GLOBALS["HTTP_POST_VARS"]["j06_setorloc"]:$this->j06_setorloc);
        $this->j06_quadraloc = ($this->j06_quadraloc == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_quadraloc"]:$this->j06_quadraloc);
        $this->j06_lote = ($this->j06_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_lote"]:$this->j06_lote);
      }else{
-       $this->j06_idbql = ($this->j06_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_idbql"]:$this->j06_idbql);
+       $this->j06_idbql = (($this->j06_idbql === 0 || $this->j06_idbql === 0.0 || $this->j06_idbql == "")?@$GLOBALS["HTTP_POST_VARS"]["j06_idbql"]:$this->j06_idbql);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_loteloc {
        return false;
      }
        $this->j06_idbql = $j06_idbql; 
-     if(($this->j06_idbql == null) || ($this->j06_idbql == "") ){ 
+     if(($this->j06_idbql == null) || (($this->j06_idbql === 0 || $this->j06_idbql === 0.0 || $this->j06_idbql == "")) ){ 
        $this->erro_sql = " Campo j06_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -367,7 +367,7 @@ class cl_loteloc {
    function sql_query ( $j06_idbql=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_loteloc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_loteloc {
    function sql_query_file ( $j06_idbql=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_loteloc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

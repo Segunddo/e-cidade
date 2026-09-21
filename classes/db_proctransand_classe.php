@@ -67,8 +67,8 @@ class cl_proctransand {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p64_codandam = ($this->p64_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["p64_codandam"]:$this->p64_codandam);
-       $this->p64_codtran = ($this->p64_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["p64_codtran"]:$this->p64_codtran);
+       $this->p64_codandam = (($this->p64_codandam === 0 || $this->p64_codandam === 0.0 || $this->p64_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["p64_codandam"]:$this->p64_codandam);
+       $this->p64_codtran = (($this->p64_codtran === 0 || $this->p64_codtran === 0.0 || $this->p64_codtran == "")?@$GLOBALS["HTTP_POST_VARS"]["p64_codtran"]:$this->p64_codtran);
      }else{
      }
    }
