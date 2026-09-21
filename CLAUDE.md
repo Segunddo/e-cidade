@@ -74,7 +74,7 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|tra)[0-9]?_` |
 | **Próximo módulo** | **`arr` Arrecadação (162 arq.)**, depois `div` → `jur` → pequenos → `fis` (353) → `iss` (400) |
-| **Dívida técnica aberta** | `dbagata/` nunca foi enumerado — **11 arquivos quebram no 8.5**. Ver *5ª LACUNA*. |
+| **Dívida técnica aberta** | `dbagata/` (1 arquivo alcançável, pré-requisito do `iss`) e `fpdf151/` (28 arquivos). Ver *6ª LACUNA*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
 
@@ -83,6 +83,7 @@ docker volume create ecidade_sessions && docker volume create ecidade_tmp
 docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
 docker exec ecidade_php56 chmod 1777 /tmp      # o volume nasce root:root 755
 chmod -R 777 storage bootstrap/cache && chmod 777 extension/log
+chmod 777 tmp arquivos                        # SEM isto, 11% das telas falham antes de executar
 docker compose -f docker-compose.php85.yml up -d
 docker compose -f docker-compose.proxy.yml up -d
 ```
@@ -91,6 +92,11 @@ docker compose -f docker-compose.proxy.yml up -d
 `X-Ecidade-Runtime` em cada resposta diz qual runtime a serviu.
 
 **Para migrar o próximo módulo:** seguir a receita de 9 passos na seção *ESTRATÉGIA ADOTADA*.
+
+**Regime de permissões (MUDOU):** `tmp/` e `arquivos/` agora são **777**. Antes eram 775 e
+nenhum container conseguia escrever, o que fazia **11% das telas da área falharem antes de
+executar** — e aparecerem como "idênticas" nas baterias por falharem igual. Toda medição
+anterior a esta mudança carrega esse ponto cego; as posteriores, não.
 
 **Pendências conhecidas:** todas as divergências de `cem`, `itb` e `agu` estão caracterizadas
 (ver as seções de cada módulo). As que restam são de três tipos, nenhum deles defeito de
@@ -156,7 +162,8 @@ Consequências práticas, válidas para todo o projeto:
 
 ## Superfície de incompatibilidade com PHP 8 (medição corrigida)
 
-Números obtidos com varredura byte-a-byte em Python (`scratchpad/incompat.py`), não com grep.
+Números obtidos com varredura byte-a-byte em Python, não com grep (o script `incompat.py` que
+os produziu **não sobreviveu** — ver a nota sobre `scratchpad/` abaixo).
 **Uma medição anterior feita com grep subestimou tudo isso em uma ordem de grandeza.**
 
 | Construção removida | Removida em | Arquivos | Ocorrências |
@@ -291,7 +298,7 @@ Outros padrões legados de grande escala (não são erro fatal, mas afetam a mig
 | `$HTTP_*_VARS` (removidos no PHP 5.4) | 10.355 | 22.042 |
 | `var $prop` (sintaxe de classe pré-PHP5) | 3.629 | 70.916 |
 
-Lista completa de arquivos afetados: `scratchpad/afetados.txt`.
+Lista completa de arquivos afetados: `afetados.txt` — **arquivo perdido**, precisa ser regerado.
 
 ## Bloqueadores duros (não se resolvem com `composer update`)
 
@@ -358,7 +365,8 @@ Código já modernizado (parcialmente) convive na mesma árvore: `app/` (Laravel
 
 ## Grafo de dependências (CONCLUÍDO)
 
-Analisador em `scratchpad/depgraph.py` + `esforco.py`. Extrai includes do idioma legado
+Analisador em `depgraph.py` + `esforco.py` (**ambos perdidos**, ver a nota sobre `scratchpad/`).
+Extraía includes do idioma legado
 `include(modification("caminho"))`, faz fecho transitivo por script e agrupa por prefixo
 de módulo. Cobertura: **5.310 arquivos alcançados**, apenas 54 includes dinâmicos e
 121 caminhos não resolvidos (~97% de precisão). 41 módulos com ≥40 scripts.
@@ -760,7 +768,7 @@ grandes, `fis` (353) e `iss` (400).
 Cada prefixo é um lote independente, com commit próprio e revertível:
 
 ```
-1. enumerar, em CINCO frentes      -> verificar: cada frente fecha (ver abaixo)
+1. enumerar, em SEIS frentes       -> verificar: cada frente fecha (ver abaixo)
 2. varrer as categorias conhecidas -> verificar: inventário fechado
 3. classificar cada ocorrência     -> verificar: nenhum falso-positivo de JavaScript
 4. aplicar em nível de byte        -> verificar: zero remanescentes
@@ -771,9 +779,9 @@ Cada prefixo é um lote independente, com commit próprio e revertível:
 9. commit
 ```
 
-**O passo 1 é o que mais falhou.** Cinco lacunas distintas já foram encontradas ali, todas
+**O passo 1 é o que mais falhou.** Seis lacunas distintas já foram encontradas ali, todas
 com a mesma assinatura: a verificação partia da lista que a própria enumeração gerou, então
-não podia achar o que a enumeração deixou de fora. As cinco frentes:
+não podia achar o que a enumeração deixou de fora. As seis frentes:
 
 | Frente | Como | Lacuna que fecha |
 |---|---|---|
@@ -782,6 +790,7 @@ não podia achar o que a enumeração deixou de fora. As cinco frentes:
 | citados em strings | nomes `*.php` dentro do código (o JS os abre) | 3ª: `window.open` |
 | autoload | classes `cl_*` instanciadas, resolvidas em `classes/` | 4ª: `spl_autoload_register` |
 | bibliotecas vendorizadas | `dbagata/`, incluindo `*.class` e `*.inc` | 5ª: `dbagata/` |
+| **pasta inteira da lib** | se um arquivo de uma pasta-biblioteca entrou, **varrer a pasta toda** | 6ª: `fpdf151/` (2 de 194 portados) |
 
 Conferir o total contra `ls | grep -iE '^<pref>[0-9]*_'` **antes** de dar o módulo por pronto.
 
@@ -847,10 +856,76 @@ Requisito para as pastas de runtime:
 chmod 777 extension/log && chmod 666 extension/log/*.log
 ```
 
-**Assimetria pré-existente conhecida** (não introduzida pela migração): `tmp/`, `storage/` e
-`arquivos/` são `775 diego`, portanto **não graváveis por nenhum dos dois containers** (uid 33).
-Isso é a linha de base do ambiente e foi deixado como está. Se alguma tela precisar gravar
-nesses diretórios, ela falhará **igualmente** nos dois — o que preserva a comparabilidade.
+### FERRAMENTAL: só `scratchpad/cmp.py` é versionado — o resto se perdeu
+
+`scratchpad/` **não está no `.gitignore`, mas também nunca foi commitado**. Os scripts que
+produziram os números deste arquivo — `incompat.py`, `depgraph.py`, `esforco.py`,
+`afetados.txt` — **não existem mais em disco**. As medições continuam válidas (estão
+registradas aqui), mas não são reproduzíveis sem reescrever as ferramentas.
+
+O comparador de telas foi reescrito do zero **duas vezes** pelo mesmo motivo. Como as regras de
+normalização dele *são* a metodologia acumulada — cada uma nasceu de um falso positivo real —
+ele passou a ser versionado em **`scratchpad/cmp.py`**:
+
+```bash
+# restaura a sessao antes de cada requisicao e compara as duas portas
+cd /home/diego/e-cidade
+python3 scratchpad/cmp.py <SID> '^agua?[0-9]*_' divergentes.txt
+ONLY="tela1.php,tela2.php" python3 scratchpad/cmp.py <SID> '^x_'   # subconjunto
+```
+
+Quem for regerar as outras ferramentas: commitá-las também.
+
+### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
+
+O texto anterior desta seção dizia que `tmp/`, `storage/` e `arquivos/` eram `775 diego`,
+"não graváveis por nenhum dos dois containers", e que isso fora **deixado como está** porque
+a falha igual nos dois "preserva a comparabilidade".
+
+**O argumento estava errado e custou cobertura de teste.** `tmp/` é bind mount compartilhado e
+os dois containers rodam como uid 33 — liberá-lo afeta os dois **igualmente**, exatamente como
+deixá-lo travado. A diferença é que travado eles falham antes de executar.
+
+Escala do que isso escondia:
+
+| | |
+|---|---|
+| Telas da área Tributário que tocam o caminho de relatório | **211 de 1.813 (11%)** |
+| Destas, nos três módulos já portados | **40 de 460 (8%)** |
+
+Essas 40 apareciam como "idênticas" nas baterias, mas eram idênticas **no erro**:
+
+```
+itbi_situacao002    5.6=18.668 B  8.5=18.669 B   ambos: "Unable to create output file: tmp/..."
+agu2_relconsumo002  5.6=18.681 B  8.5=18.681 B   idem
+```
+
+Comparabilidade sem cobertura — o tipo mais barato e menos útil de equivalência.
+
+**Depois de `chmod 777 tmp arquivos`:** os relatórios passam a ser gerados de verdade (resposta
+termina em `%%EOF`, PDFs reais aparecem em `tmp/`) e as três baterias foram refeitas:
+
+| Módulo | Antes (tmp/ 775) | Depois (tmp/ 777) |
+|---|---|---|
+| `cem` | 114/116 | **114/116** |
+| `itb` | 116/120 | **116/120** |
+| `agu` | 222/224 | **222/224** |
+
+**Zero regressões novas no 8.5.** O conjunto de divergências é exatamente o mesmo — o caminho
+FPDF do núcleo está correto no PHP 8.5. O ganho não é ter achado defeito; é que agora **existe
+prova** onde antes havia só ausência de prova.
+
+`storage/` continua em 777 (necessário para o login do Laravel, ver seção própria).
+
+**Efeito colateral previsto e verificado:** `dbforms/db_classesgenericas.php:522` usa
+`tempnam("tmp/", "iframe")` — o `tmp/` **do projeto**, não o `/tmp` do sistema. Enquanto não era
+gravável, o PHP caía no diretório temporário do sistema, que foi o que motivou o volume
+`ecidade_tmp` compartilhado e a correção do loop infinito de iframes. Agora os temporários caem
+no bind mount, que também é compartilhado. Verificado: `itb1_itbitransacao111.php` pelo `:8090`
+responde **1 requisição, HTTP 200** (o loop devolvia milhares). O volume `ecidade_tmp` foi
+mantido — outros pontos ainda usam o `/tmp` do sistema.
+
+Reversível com `chmod 775 tmp arquivos`; nenhuma alteração de código.
 
 ### Estado atual: NÚCLEO PORTADO ✅
 
@@ -945,6 +1020,14 @@ um falso positivo real:
 | `<hex de 32>` | md5 de nomes de arquivo |
 | `tmp/<nome>.pdf` | PDF temporário: o nome carrega **PID e timestamp** |
 | `localhost:8080` / `:8085` | a **página de erro** monta URL absoluta a partir de `HTTP_HOST` (ver `$DB_URL_ABS`), então carrega a porta do runtime que a serviu |
+| `/CreationDate (D:…)` | data gravada dentro do PDF pelo FPDF; só passou a aparecer quando `tmp/` virou gravável e os relatórios começaram a ser gerados de fato |
+
+**Normalizar não basta: é preciso CONFIRMAR antes de acusar.** Os relatórios carregam um
+horário **dentro do fluxo comprimido** (`FlateDecode`) do PDF, fora do alcance de qualquer
+regex. Se as duas requisições caírem em segundos diferentes, os bytes mudam — às vezes
+mantendo o mesmo tamanho, o que faz a divergência parecer conteúdo diferente. O comparador
+refaz o par uma vez antes de registrar: **uma regressão real é persistente, um flake não.**
+Sem isso, `agu2_relconsumo002` aparecia e sumia entre execuções.
 
 As duas últimas foram descobertas no `agu` e valem retroativamente: sem elas, telas de
 relatório e telas de erro aparecem como divergentes de forma **intermitente**, porque só
@@ -974,7 +1057,7 @@ Evolução: **14 divergentes → 4**, com 5 defeitos reais corrigidos no caminho
 | `pg_result(false)` → TypeError | `db_stdlib` 2×, `db_libsys` 1× | operador ternário |
 | `"" == 0` no `db_select()` | `dbforms/db_funcoes.php` (núcleo) | condição extra para string vazia |
 
-**Divergências restantes: 2 (bateria refeita após o porte do `agu`) — 115 de 116 idênticas.**
+**Divergências restantes: 2 — 114 de 116 idênticas.**
 
 - `cem1_itenserv002.php` — **quebra no 5.6 (500) e funciona no 8.5 (200)**. Defeito
   pré-existente da referência (`label() on null` em `forms/db_frmitenserv.php:29`), não da migração.
@@ -1039,8 +1122,8 @@ Enumerar só `^itb[0-9]*_` deixaria 10 de fora. Regex correta: `^itbi?[0-9]*_` c
 | cast `(float)` em aritmética com string | 2 |
 
 Verificações: `php -l` **192/192 nos dois runtimes**; as 42 classes instanciam com estado
-idêntico; **118 de 120 telas byte-a-byte idênticas** com sessão autenticada (bateria refeita
-após o porte do `agu`; era 113 antes das correções de autoload e das guardas do núcleo).
+idêntico; **116 de 120 telas byte-a-byte idênticas** com sessão autenticada (era 113 antes
+das correções de autoload e das guardas do núcleo).
 
 **Zero páginas quebrando no 8.5.** As 2 divergências restantes **quebram no 5.6 e funcionam
 no 8.5** — `itb1_itbiavalia002/003` e `itb1_itbidadosimovel003`/`itb1_itbinome011`, todas com
@@ -1231,9 +1314,64 @@ Categorias medidas em `dbagata/`: 61 `ereg*`, 22 offsets `{}`, 18 `=& new`, 9 `s
 8 `magic_quotes`, 5 `each(`, 1 `create_function(`, e **224 classes com apenas construtor
 PHP 4, em 114 arquivos**.
 
-Por que não apareceu antes: essas bibliotecas são de gráfico, PDF e SOAP, e as 460 telas
-comparadas de `cem`+`itb`+`agu` não as exercitam — os relatórios falham antes, por `tmp/`
-não ser gravável. **A falha está latente, não ausente.**
+**REFINAMENTO (após liberar `tmp/` e rastrear a alcançabilidade): dos 11, apenas 1 importa.**
+
+Rastreando os includes a partir de `libs/db_libsys.php:108` (`class cl_dbagata`):
+
+| Caminho | Arquivos de `dbagata/` carregados | Algum dos 11? |
+|---|---|---|
+| `parseOpenOffice` — usado pelo núcleo em `std/db_stdClass.php` | ~22 | **nenhum** |
+| `generateReport` — `cl_dbagata` faz `setFormat('pdf')` por padrão | +`reports/AgataPdf.class` | **sim**: `AgataPdf.class:40` inclui `dbagata/classes/fpdf151/fpdf.php` |
+
+Os outros 10 são **inalcançáveis**: jpgraph só entra por `AgataGraph.class` (via
+`generateGraph()`, que **nenhuma tela do e-cidade chama**), e `nusoap.php`/`editor.class` só
+por `AgataInterface.class`, a GUI GTK do Agata, que **nada no repositório inclui**.
+
+Quem chama `generateReport()` (24 call sites fora de `dbagata/`), por módulo:
+
+```
+orc 7   iss 4   cai 3   sys 2   pes 2   pro 1   con 1   model 1
+```
+
+**Nenhuma das 460 telas de `cem`+`itb`+`agu` está nessa lista** — por isso as baterias passam
+limpas mesmo com `tmp/` liberado. Mas **`iss` está**, com 4 call sites.
+
+**Consequência prática: `dbagata/` não é urgente agora, e é pré-requisito duro do `iss`** —
+o último e maior módulo da área (400 arquivos). Portá-lo antes do `iss` evita descobrir o
+problema no módulo mais caro.
+
+Nota: existe um jpgraph **fora** do dbagata, em `libs/jpgraph/` (versão 1.14, contra 1.26.1-dev
+do dbagata — são versões diferentes, não cópias). Esse já foi portado no commit `04159b411`.
+
+### 6ª LACUNA: `fpdf151/` do núcleo tem 28 arquivos não portados
+
+O `CLAUDE.md` lista `fpdf151/fpdf.php` e `fpdf151/pdf.php` entre os 24 arquivos do núcleo.
+**A pasta tem 194 arquivos**, e eu portei dois.
+
+Medição (`php -l` nos dois runtimes + varredura byte-a-byte):
+
+| | |
+|---|---|
+| Arquivos em `fpdf151/` | 194 |
+| Erro de sintaxe no 5.6 | 0 |
+| **Erro de sintaxe no 8.5** | **4** — `impmodelos/mod_imprime{10,12,13,1333}.php` |
+| `split(` | 23 ocorrências em 22 arquivos |
+| `each(` | 20 em 4 — `pdf1.php`…`pdf4.php` |
+| construtor PHP 4 | 4 |
+| offsets `{}` | 4 |
+| **União a portar** | **28 arquivos** |
+
+`each()` **não aparece no `php -l`** — é fatal só em execução (`Call to undefined function`).
+Por isso os 4 arquivos com `each()` passam no lint e quebrariam na tela.
+
+Alcance: `fpdf151/pdf1.php` é incluído por 25 arquivos, `pdf3.php` por 8, `pdf2.php` por 6;
+`impmodelos/` é usado por `pes2_analitica002.php`, `pes1_cfpess002.php` e
+`pes2_termorescisaomodimprime80.php` — todos do módulo **Pessoal**, ainda não portado.
+
+**Lição, a mesma das cinco anteriores:** a lista do núcleo foi montada pelo grafo de
+dependências, que enxerga o que é incluído *estaticamente pelos módulos analisados*. Uma pasta
+de biblioteca entra no núcleo pelos dois ou três arquivos que o grafo viu, e os outros 192
+ficam invisíveis — até que um módulo que os usa seja portado.
 
 Defeito concreto já observado: em `cem2_emitecertisen002.php`, o 5.6 emite
 `<b>Mensagem: </b>` (o diálogo de erro do dbagata) e o 8.5 não. Renomear os construtores de
@@ -1552,6 +1690,8 @@ docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d   # :8
 # permissões exigidas por Laravel e pelo logger (senão /v4/oauth/token dá 500)
 chmod -R 777 storage bootstrap/cache
 chmod 777 extension/log
+# sem isto os relatórios não são gerados e 11% das telas falham antes de executar
+chmod 777 tmp arquivos
 
 # ambiente de migração (PHP 8.5)
 docker compose -f docker-compose.php85.yml up -d --build # :8085
