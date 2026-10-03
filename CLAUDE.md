@@ -2150,9 +2150,42 @@ mecânico:
 - a chave costuma vir como **argumento** de `incluir($chave)`, não pelo idioma do POST — por
   isso `advog` e `aguahidromarca` não exercitam o defeito, mesmo tendo guardas.
 
-**Consequência prática:** o nível 3 vale como **teste dirigido** às telas cujo formulário posta
-um campo inteiro não-chave, não como bateria varrendo todas as telas de um módulo. Para achar
-essas telas, o nível 1 (`escrita.php`) é o filtro barato: ele aponta a classe e o campo.
+**Consequência prática:** o que limita o nível 3 é **montar o payload**, não o custo de
+execução. Medido: **5 s por ciclo** (2 POSTs + 2 restores), o que daria **~12 min** para as
+148 telas de um módulo — viável como bateria, não só como teste dirigido. O nível 1
+(`escrita.php`) continua sendo o filtro barato que aponta a classe e o campo onde dirigi-lo
+primeiro.
+
+#### Por que NÃO um banco por runtime
+
+Pergunta levantada e medida, em vez de respondida por intuição.
+
+| | DB compartilhado + restore (adotado) | DB por runtime |
+|---|---|---|
+| Custo por tela | **5 s** | ~2 s |
+| Disco extra | 0 | 1.075 MB |
+| Configuração | `log_statement`, um toggle | override de `libs/db_conn.php` por container |
+| Invariante do GET | preservada de graça | exige ressincronizar os dois bancos |
+| Observável | SQL emitido — **completo** com `log_statement='all'` | linhas + SQL |
+| Modo de falha | restore barrado por FK → **aborta** | bancos derivam em silêncio |
+
+Três razões para ficar com o compartilhado:
+
+1. **O observável não melhora.** Com `log_statement='all'` todo SQL é capturado; comparar
+   linhas não acrescenta cobertura.
+2. **Quebraria a invariante da bateria GET.** Hoje "mesmos dados, só o PHP difere" é garantido
+   por construção; com dois bancos vira uma condição que pode derivar sem aviso.
+3. **`libs/db_conn.php` fixa `$DB_BASE`, está no `.gitignore` e é lido pelos dois containers
+   pelo mesmo bind mount.** Separar exige editar arquivo não versionado ou acrescentar bind
+   mount de arquivo único ao compose do 8.5.
+
+Medição que sustenta a escolha: **as tabelas de negócio do Tributário têm no máximo 252
+linhas** — o restore é barato. As tabelas de milhão de linhas (`ceplogradouros`,
+`cadenderrua*`) são dados de referência de endereço, que nenhum formulário escreve e que
+portanto nunca entram num conjunto de restore.
+
+**Quando dois bancos seria melhor:** tabelas de negócio grandes, ou bateria de escrita rodando
+continuamente em CI. Nenhuma das duas é o caso aqui.
 
 #### O que o nível 1 NÃO cobre
 
