@@ -128,6 +128,28 @@ um construtor estilo PHP 4 **nunca executa**, sem erro nem aviso.
 **Um diff vazio de dois arquivos vazios não é aprovação.** Confirme que houve saída antes de
 declarar equivalência.
 
+## Passo 6b — Exercitar o CAMINHO DE ESCRITA
+
+A bateria do passo 7 faz só `GET`, e o idioma `$this->X == <literal> ? POST : $this->X` só
+dispara no `POST`. Sem este passo, a maior categoria de correções do porte fica sem verificação.
+
+```bash
+grep '^classes/' tmp/<pref>_universo.txt > tmp/<pref>_classlist.txt
+for v in 56 85; do
+  docker exec ecidade_php$v php -d display_errors=0 \
+    /var/www/html/scratchpad/escrita.php /var/www/html/tmp/<pref>_classlist.txt \
+    2>/dev/null | sort > /tmp/esc$v.txt
+done
+diff /tmp/esc56.txt /tmp/esc85.txt      # qualquer linha e defeito
+```
+
+Ele popula `HTTP_POST_VARS`, chama `atualizacampos()` e compara o estado — sem HTTP e sem
+tocar no banco. Divergência significa que o 5.6 lê o valor do formulário e o 8.5 mantém `0`:
+**dado errado gravado em silêncio**.
+
+Atenção ao literal: além de `== ""` existe `== "f"` e `== " "`. Qualquer literal
+**não-numérico** tem o mesmo defeito, porque o 5.6 o coagia para 0.
+
 ## Passo 7 — Comparar as telas
 
 ```bash

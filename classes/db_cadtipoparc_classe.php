@@ -169,7 +169,7 @@ class cl_cadtipoparc {
        $this->k40_permanula = (($this->k40_permanula === 0 || $this->k40_permanula === 0.0 || $this->k40_permanula == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_permanula"]:$this->k40_permanula);
        $this->k40_regraunif = (($this->k40_regraunif === 0 || $this->k40_regraunif === 0.0 || $this->k40_regraunif == "")?@$GLOBALS["HTTP_POST_VARS"]["k40_regraunif"]:$this->k40_regraunif);
        $this->k40_bloqueio = ($this->k40_bloqueio == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_bloqueio"]:$this->k40_bloqueio);
-       $this->k40_tipoanulacao = ($this->k40_tipoanulacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_tipoanulacao"]:$this->k40_tipoanulacao);
+       $this->k40_tipoanulacao = (($this->k40_tipoanulacao === 0 || $this->k40_tipoanulacao === 0.0 || $this->k40_tipoanulacao == "f")?@$GLOBALS["HTTP_POST_VARS"]["k40_tipoanulacao"]:$this->k40_tipoanulacao);
        $this->k40_permvalcadparc = ($this->k40_permvalcadparc == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_permvalcadparc"]:$this->k40_permvalcadparc);
        $this->k40_permdataparc = ($this->k40_permdataparc == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_permdataparc"]:$this->k40_permdataparc);
        $this->k40_controlavencimento = ($this->k40_controlavencimento == "f"?@$GLOBALS["HTTP_POST_VARS"]["k40_controlavencimento"]:$this->k40_controlavencimento);

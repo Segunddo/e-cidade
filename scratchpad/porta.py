@@ -85,9 +85,16 @@ for p in alvos:
             b, n = re.subn(rb'function\s+'+re.escape(mc.group(1))+rb'\s*\(', b'function __construct(', b, flags=re.I)
             cnt['construtor PHP4'] += n
     for x in {m.group(1) for m in re.finditer(rb'(?:var|public)\s+\$(\w+)\s*=\s*-?\d+\s*;', b)}:
-        b, n = re.subn(rb'\$this->'+re.escape(x)+rb'\s*==\s*""',
-                       rb'($this->'+x+rb' === 0 || $this->'+x+rb' === 0.0 || $this->'+x+rb' == "")', b)
-        cnt['$this->X == ""'] += n
+        # Qualquer literal NAO-NUMERICO, nao so "": no 5.6 a string nao-numerica
+        # era coagida para 0. Literal numerico e seguro nos dois e fica intocado.
+        def guarda(m, _x=x):
+            lit = m.group(1)
+            if lit.strip().isdigit():
+                return m.group(0)
+            return (b'($this->'+_x+b' === 0 || $this->'+_x+b' === 0.0 || $this->'+_x
+                    + b' == '+m.group(0).split(b'==')[1].strip()+b')')
+        b, n = re.subn(rb'\$this->'+re.escape(x)+rb'\s*==\s*["\']([^"\']{0,3})["\']', guarda, b)
+        cnt['$this->X == <literal>'] += n
     if b != b0: open(p, "wb").write(b)
 
 for k, v in cnt.most_common(): print(f"  {k:24s} {v:6d}")

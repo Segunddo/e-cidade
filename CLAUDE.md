@@ -2015,6 +2015,82 @@ Reproduzir: a montagem está em `tmp/rector/` (gitignored). O passo que importa 
 estado pré-porte com `git show <commit>^:<arquivo>` e comparar **três** árvores, não duas —
 sem a original não dá para saber quem mudou o quê.
 
+### ✅ COBERTURA DOS CAMINHOS DE ESCRITA — o maior ponto cego, agora medido
+
+A bateria de telas faz só `GET`. O idioma `$this->X == "" ? POST : $this->X` vive em
+`atualizacampos()`, que lê `HTTP_POST_VARS` — **nunca populado num GET**. Resultado: **763 das
+837 correções** que sobram ao ferramental próprio nunca eram exercitadas por nenhuma
+verificação. Era o maior risco em aberto do projeto.
+
+Três níveis possíveis de cobertura, com custos muito diferentes:
+
+| Nível | O que faz | Custo | Cobre |
+|---|---|---|---|
+| **1. Estado do objeto** | popula `HTTP_POST_VARS`, chama `atualizacampos()`, compara o estado entre runtimes | trivial — extensão do harness que já existia | as 763 guardas (**91%** do que falta) |
+| 2. SQL gerado | compara o SQL que cada runtime montaria, sem executar | médio — o método que monta SQL varia por classe | + validações da classe |
+| 3. POST real | requisição de verdade nos dois, comparando resposta **e** efeito no banco | alto — exige restaurar o estado do banco entre os dois lados | tudo, inclusive guardas `pg_*` e validação da tela |
+
+**Nível 1 implementado e provado** — `scratchpad/escrita.php`:
+
+```bash
+php scratchpad/escrita.php <arquivo com a lista de classes>   # nos DOIS runtimes, depois diff
+```
+
+Prova de conceito contra o defeito já conhecido de `classes/db_cgm_classe.php`:
+
+```
+versao ANTES das 11 guardas  ->  18 linhas divergentes entre 5.6 e 8.5
+versao DEPOIS                ->  0 divergentes
+
+    z01_numcgm='1012'   |   z01_numcgm=0        <- 5.6 le o POST, 8.5 mantem 0
+```
+
+**Ele teria apanhado esse defeito do núcleo automaticamente** — eu o encontrei por acaso, na
+verificação de remanescentes do `div`.
+
+#### O que ele achou na primeira execução real
+
+Rodado sobre as **311 classes** dos cinco módulos portados, **9.817 campos** comparados:
+**64 linhas divergentes em 12 classes**. Onze são do `tra` (órfão, já registradas como não
+corrigidas). A décima segunda era nova — e revelou uma **variante do idioma que o catálogo não
+tinha**:
+
+```php
+var $k40_tipoanulacao = 0;                                    // INTEIRO
+$this->k40_tipoanulacao = ($this->k40_tipoanulacao == "f" ? POST : $this->k40_tipoanulacao);
+```
+
+Compara com **`"f"`**, não com `""`. Mesma falha:
+
+```
+0 == "f"      PHP 5.6: true        PHP 8.5: false
+```
+
+Causa: no 5.6 a string **não-numérica** era coagida para 0 e casava com a propriedade inteira;
+no PHP 8 vira comparação de string. Vale para **qualquer literal não-numérico** — literal
+numérico (`"0"`, `"5"`) é seguro nos dois.
+
+Escala na base inteira: **13 ocorrências em 5 arquivos**.
+
+| Arquivo | Literal | Módulo |
+|---|---|---|
+| `classes/db_rechumano_classe.php` (8) | `" "` | Educação |
+| `classes/db_aluno_classe.php` (2) | `" "` | Educação |
+| `classes/db_cadtipoparc_classe.php` | `"f"` | Caixa — **corrigido** (estava no universo do `div`) |
+| `classes/db_tipoproc_classe.php` | `"f"` | Protocolo |
+| `classes/db_inscricaorestosapagar_classe.php` | `"f"` | Contabilidade |
+
+Duas delas são de **Educação** — o módulo do TCC de referência, mais um defeito que o critério
+deles ("a tela carrega") não encontraria.
+
+`enumera.py` e `porta.py` foram estendidos para tratar qualquer literal não-numérico, não só `""`.
+
+#### O que o nível 1 NÃO cobre
+
+As outras 74 correções — `parse_str`, guardas `pg_*`, casts, `sizeof(null)` — vivem no código
+**da tela**, não da classe, e só o nível 3 as exercita. Continua valendo a regra: *uma tela
+"sem erro" cuja tabela está vazia não foi exercitada de verdade*.
+
 ### Decisões de porte tomadas (e o porquê)
 
 - **`each()` → ponteiro explícito, não `foreach`.** Em `db_libpessoal.php` há dois laços

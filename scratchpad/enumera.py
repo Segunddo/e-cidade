@@ -103,8 +103,16 @@ for p in universo:
         if re.search(rb'function\s+'+re.escape(m.group(1))+rb'\s*\(', b, re.I) and not has5:
             tot['construtor PHP4'] += 1; arq['construtor PHP4'].add(p); alvos.add(p); break
     props = {m.group(1) for m in re.finditer(rb'(?:var|public)\s+\$(\w+)\s*=\s*-?\d+\s*;', b)}
-    n = sum(len(re.findall(rb'\$this->'+re.escape(x)+rb'\s*==\s*["\']{2}', b)) for x in props)
-    if n: tot['$this->X == ""'] += n; arq['$this->X == ""'].add(p); alvos.add(p)
+    # Inclui literal NAO-NUMERICO, nao so "". No 5.6 a string nao-numerica era
+    # coagida para 0 e casava com a propriedade inteira; no PHP 8 vira comparacao
+    # de string. Variante achada pelo harness de escrita: `== "f"` em
+    # db_cadtipoparc_classe.php. Literal numerico ("0", "5") e seguro nos dois.
+    n = 0
+    for x in props:
+        for m in re.finditer(rb'\$this->'+re.escape(x)+rb'\s*==\s*["\']([^"\']{0,3})["\']', b):
+            v = m.group(1)
+            if v == b'' or not v.strip().isdigit(): n += 1
+    if n: tot['$this->X == <literal>'] += n; arq['$this->X == <literal>'].add(p); alvos.add(p)
 
 os.makedirs("tmp", exist_ok=True)
 open(f"tmp/{PREF}_universo.txt","w").write("\n".join(universo))
