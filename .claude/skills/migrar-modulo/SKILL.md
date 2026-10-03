@@ -150,6 +150,24 @@ tocar no banco. Divergência significa que o 5.6 lê o valor do formulário e o 
 Atenção ao literal: além de `== ""` existe `== "f"` e `== " "`. Qualquer literal
 **não-numérico** tem o mesmo defeito, porque o 5.6 o coagia para 0.
 
+### Nível 3: POST real (dirigido, não em bateria)
+
+Quando o passo 6b apontar uma classe com campo inteiro não-chave, vale confirmar com um `POST`
+de verdade, que compara o **SQL emitido** pelos dois runtimes:
+
+```bash
+docker exec ecidade_database psql -U postgres -c "ALTER DATABASE ecidade SET log_statement='all';"
+python3 scratchpad/escrita_post.py <SID> <tela.php> <tabelas,virgula> '<payload>'
+docker exec ecidade_database psql -U postgres -c "ALTER DATABASE ecidade RESET log_statement;"
+```
+
+Ele faz snapshot das tabelas **e das sequências**, roda nos dois lados restaurando entre eles,
+e separa escrita de negócio da de auditoria. Se a FK barrar o `DELETE` do restore, acrescente
+a tabela filha ao conjunto (ordem: filho→pai) — nunca force `TRUNCATE CASCADE`.
+
+Montar o payload é a parte cara: o botão se chama `incluir`/`alterar`/`excluir` (não
+`db_opcao`), e há campos obrigatórios que não aparecem no form.
+
 ## Passo 7 — Comparar as telas
 
 ```bash

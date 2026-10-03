@@ -2085,6 +2085,75 @@ deles ("a tela carrega") não encontraria.
 
 `enumera.py` e `porta.py` foram estendidos para tratar qualquer literal não-numérico, não só `""`.
 
+#### ✅ NÍVEL 3 IMPLEMENTADO — `scratchpad/escrita_post.py`
+
+**O problema central:** os dois runtimes compartilham o banco, então o primeiro `POST` muda o
+estado que o segundo veria. A saída não é comparar o estado final — é comparar **o SQL que
+cada runtime emite**, que é exatamente onde o defeito se manifesta, com snapshot/restore entre
+os dois lados.
+
+```bash
+# exige log_statement ligado:
+docker exec ecidade_database psql -U postgres -c "ALTER DATABASE ecidade SET log_statement='all';"
+
+python3 scratchpad/escrita_post.py <SID> <tela.php> <tabelas,virgula> '<payload>'
+
+# e desligar ao terminar:
+docker exec ecidade_database psql -U postgres -c "ALTER DATABASE ecidade RESET log_statement;"
+```
+
+Fluxo: snapshot das tabelas **e das sequências** → `POST` no `:8080`, captura o SQL do log →
+restore → `POST` no `:8085`, captura → restore → compara.
+
+**Prova no defeito original do catálogo** (`cm34_tipo`, Cemitério → Tipos de isenção):
+
+```
+COM a guarda:
+  5.6> insert into cemiterioisencao(...) values ( 11 ,'TESTE_N3' ,2 ,'2026-12-31' ,'X' )
+  8.5> insert into cemiterioisencao(...) values ( 11 ,'TESTE_N3' ,2 ,'2026-12-31' ,'X' )
+  == IDENTICO ==
+
+SEM a guarda:
+  5.6> insert into cemiterioisencao(...) values ( 11 ,'TESTE_N3' ,2 ,... )
+  8.5> <ausente>                      <- nao insere nada: cm34_tipo fica 0 e a validacao recusa
+  == DIVERGE ==
+```
+
+É o sintoma exato que o usuário reportou quando a categoria foi descoberta.
+
+#### Três detalhes que o nível 3 obrigou a resolver
+
+**1. Restaurar a tabela não basta — tem que restaurar a SEQUÊNCIA.** Sem isso o segundo
+runtime recebe o próximo número e o `INSERT` diverge por motivo benigno (`values ( 6 ...)`
+contra `( 7 ...)`). E `pg_get_serial_sequence` **não enxerga** as sequências do e-cidade,
+porque elas são criadas sem `OWNED BY` — o harness casa pelo nome (`<tabela>_%_seq`).
+
+**2. `DELETE`, nunca `TRUNCATE CASCADE`.** O `DELETE` respeita a chave estrangeira e **falha**
+se alguém referencia a tabela — que é a rede de segurança. `TRUNCATE CASCADE` apagaria as
+tabelas vizinhas em silêncio. Quando a FK barra, a resposta é acrescentar a tabela filha ao
+conjunto (apagar filho→pai, repovoar pai→filho), não forçar.
+
+**3. Separar escrita de NEGÓCIO da de INFRAESTRUTURA.** Cada requisição emite ~36 statements,
+dos quais ~10 são de escrita, e quase todos são auditoria (`db_acount*`, `db_logsacessa`) ou
+sessão (`db_usuariosonline`). Esses carregam sequência e relógio e divergem **por construção**.
+Filtrados, sobra 1 statement — o que importa.
+
+#### A limitação real do nível 3: o payload
+
+O harness está pronto; o custo que resta é **construir um `POST` válido por tela**. Não é
+mecânico:
+
+- o botão de submit muda de nome conforme a operação (`incluir`/`alterar`/`excluir`), não é
+  `db_opcao` como o código sugere;
+- campos obrigatórios não aparecem no `db_input` do form (a data do exemplo é montada de
+  `_dia`/`_mes`/`_ano`);
+- a chave costuma vir como **argumento** de `incluir($chave)`, não pelo idioma do POST — por
+  isso `advog` e `aguahidromarca` não exercitam o defeito, mesmo tendo guardas.
+
+**Consequência prática:** o nível 3 vale como **teste dirigido** às telas cujo formulário posta
+um campo inteiro não-chave, não como bateria varrendo todas as telas de um módulo. Para achar
+essas telas, o nível 1 (`escrita.php`) é o filtro barato: ele aponta a classe e o campo.
+
 #### O que o nível 1 NÃO cobre
 
 As outras 74 correções — `parse_str`, guardas `pg_*`, casts, `sizeof(null)` — vivem no código
