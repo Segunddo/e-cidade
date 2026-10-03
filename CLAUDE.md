@@ -1923,6 +1923,70 @@ Exatamente a mudança registrada aqui como **não-mudança deliberada**: nesse a
 `$HTTP_*_VARS` estão indefinidos (removidos no PHP 5.4) e o código se protege disso; trocá-los
 **popula valores hoje vazios**. É mudança de comportamento, não migração.
 
+#### SEGUNDA RODADA: a lista curada funciona — e o custo dela está medido
+
+A pergunta seguinte era "então o Rector com regras escolhidas seria melhor?". Também medi.
+
+Partindo dos conjuntos por versão e **excluindo 14 regras**, uma a uma com motivo:
+
+| Motivo da exclusão | Regras | Efeito no 5.6 |
+|---|---|---|
+| emitem sintaxe de PHP 7+ | `IfToNullCoalescingAssign`, `ClosureToArrowFunction`, `TernaryToNullCoalescing`, `NullCoalescingOperator`, `ListToArrayDestruct`, `ClassPropertyAssignToConstructorPromotion`, `ChangeSwitchToMatch`, `ClassOnObject`, `StringableForToString`, `RemoveUnusedVariableInCatch` | *parse error* |
+| emitem **função** que não existe no 5.6 | `StrStartsWithRector` (`str_starts_with`), `RandomFunctionRector` (`random_int`) | **fatal só em execução** |
+| mudam comportamento | `ReplaceHttpServerVarsByServerRector`, `ParseStrWithResultArgumentRector` | silencioso |
+
+Resultado: **129 arquivos alterados, 0 erro de sintaxe no 5.6 e no 8.5, 0 função ausente.**
+A lista curada **satisfaz a restrição de dois runtimes.** A resposta é sim.
+
+#### O que a lista curada cobre, e o que sobra
+
+| | ANTES | CURADO | MEU |
+|---|---|---|---|
+| `split(` restante | 381 | **1** (é comentário) | 0 |
+| construtor PHP 4 | 80 | **0** | 0 |
+| offset `{}` | 2 | **0** | 0 |
+| `parse_str` de 1 arg | 62 | **62** | 0 |
+| guarda `0 == ""` | 0 | **0** | 763 |
+
+Equivalência verificada nos dois runtimes para as 381 conversões — o Rector gera
+`preg_split("#\##m", $x)` onde eu gero `explode("#", $x)`, e o resultado é `===` idêntico.
+
+#### O custo que a pergunta esconde
+
+**1. Duas das regras perigosas são invisíveis ao `php -l`.** `str_starts_with` e `random_int`
+compilam no 5.6 e explodem em execução. Achei-as não por inspeção, mas perguntando ao próprio
+runtime quais funções ele não conhece — **passo de verificação novo**, hoje na skill:
+
+```bash
+# funcoes que aparecem SO na saida do Rector, conferidas contra o 5.6
+docker exec ecidade_php56 php -r 'foreach(file("lista.txt",2) as $f)
+  if(!function_exists(trim($f))) echo trim($f),"\n";'
+```
+
+Sem ele, o lint diria "0 erros" e 93 arquivos quebrariam na tela.
+
+**2. A exclusão é uma *denylist*, e denylist é frágil.** Uma atualização do Rector pode
+acrescentar regras aos conjuntos por versão e reintroduzir o problema **em silêncio**. Um
+`withRules()` (allowlist) seria mais seguro, mas exige reconfigurar regras como
+`RenameFunctionRector`, que os conjuntos alimentam com o mapa de funções removidas.
+
+**3. Uma das regras não é só desabilitável — precisa ser substituída.** Com
+`ParseStrWithResultArgumentRector` excluída, os 62 `parse_str` ficam **intocados**: o
+ferramental próprio continua necessário para eles. A ferramenta não sai de cena.
+
+#### Resposta à pergunta, com o escopo certo
+
+**Sim, para a camada sintática, e vale a pena a partir de `fis` (353) e `iss` (400)** — onde
+o volume paga a montagem da lista. Para os sete prefixos pequenos restantes, montar e validar
+a lista custa mais do que as poucas dezenas de correções sintáticas que ela faria.
+
+E não substitui nada da camada semântica: as 763 guardas `0 == ""`, as guardas `pg_*`, os
+casts e o `sizeof(null)` continuam sem regra equivalente.
+
+**Portão de verificação obrigatório ao usar o Rector aqui**, nesta ordem: `php -l` nos dois
+runtimes → conferência de funções contra o 5.6 → bateria byte-a-byte. O segundo é o que
+nenhuma ferramenta de sintaxe faz por você.
+
 #### Ressalva honesta: isto não prova que o Rector é inútil aqui
 
 Os problemas 2 e 4 vêm dos **conjuntos por versão**, que misturam o que é exigido com o que é

@@ -94,6 +94,18 @@ done
 laço, consome a lista, o laço dá uma volta só e o resultado é um tranquilizador "0 erros" —
 foi assim que 11 arquivos quebrados de `dbagata/` passaram despercebidos.
 
+### Se usar Rector: conferir FUNÇÕES, não só sintaxe
+
+`php -l` não pega função que não existe no runtime. O Rector pode emitir `str_starts_with`
+(PHP 8) e `random_int` (PHP 7), que compilam no 5.6 e explodem em execução — foram 93 arquivos
+num teste real, todos com lint limpo. Perguntar ao próprio 5.6:
+
+```bash
+# coletar as funcoes que aparecem SO na saida transformada, depois:
+docker exec ecidade_php56 php -r 'foreach(file("/var/www/html/tmp/fn.txt",2) as $f)
+  if(!function_exists(trim($f))) echo trim($f),"\n";'
+```
+
 Rodar também no **universo inteiro**, não só nos alterados: pega erro pré-existente e as
 categorias que nenhuma varredura textual encontra (LSP, `=& new`, `break` fora de laço,
 ternário aninhado, cast `(real)`).
