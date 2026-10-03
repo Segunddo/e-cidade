@@ -29,7 +29,7 @@ services:
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
     volumes:
-      - ./:/var/www/html/
+      - ./ecidade:/var/www/html/
       # Sessão compartilhada com o runtime 5.6: o login roda no Laravel 5.4, que não
       # funciona em PHP 8, então autentica-se em :8080 e navega-se o módulo migrado
       # em :8085 com a mesma sessão. Ver docker-compose.sessions.yml.

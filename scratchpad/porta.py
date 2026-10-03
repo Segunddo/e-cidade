@@ -17,7 +17,9 @@ Uso:  python3 scratchpad/porta.py <prefixo>
 """
 import os, re, sys, collections
 
-os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# O projeto passou a viver em ecidade/ (reorganizacao upstream 2169884a8);
+# scratchpad/ continua na raiz, ao lado dele.
+os.chdir(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'ecidade'))
 PREF = sys.argv[1]
 alvos = [l.strip() for l in open(f"tmp/{PREF}_alvos.txt") if l.strip()]
 META = set(b'+*?[]().|^$\\{}')

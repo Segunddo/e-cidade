@@ -7,6 +7,9 @@ falsos positivos -- alguns deles INTERMITENTES, que e o pior tipo.
 """
 import re, subprocess, sys, os
 
+# O projeto vive em ecidade/; sem isto o os.listdir('.') abaixo nao acha as telas.
+os.chdir(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'ecidade'))
+
 SID  = sys.argv[1]
 PREF = sys.argv[2]
 OUT  = sys.argv[3] if len(sys.argv) > 3 else None

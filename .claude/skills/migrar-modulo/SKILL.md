@@ -18,8 +18,12 @@ O ambiente precisa estar no ar (ver *Como subir o ambiente* no `CLAUDE.md`). Con
 
 ```bash
 docker ps --filter name=ecidade --format '{{.Names}}\t{{.Status}}'   # 4 containers
-stat -c '%n %A' tmp arquivos                                         # ambos 777
+stat -c '%n %A' ecidade/tmp ecidade/arquivos                         # ambos 777
 ```
+
+**O projeto vive em `ecidade/`.** O compose monta `./ecidade` em `/var/www/html`, então os
+caminhos DENTRO do container não mudam. Os scripts do `scratchpad/` já fazem `chdir` para lá —
+rode-os sempre da raiz do repositório, nunca de dentro de `ecidade/`.
 
 Sem `tmp/` gravável, 11% das telas falham **antes de executar** e passam na bateria por
 falharem igual nos dois. Comparabilidade sem cobertura.

@@ -9,7 +9,9 @@ Saida: tmp/<prefixo>_universo.txt  e  tmp/<prefixo>_alvos.txt
 """
 import os, re, sys, collections, subprocess
 
-os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# O projeto passou a viver em ecidade/ (reorganizacao upstream 2169884a8);
+# scratchpad/ continua na raiz, ao lado dele.
+os.chdir(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'ecidade'))
 PREF = sys.argv[1]
 
 NUCLEO = {
@@ -20,7 +22,11 @@ NUCLEO = {
  "config/ecidade_config.php","fpdf151/fpdf.php","fpdf151/pdf.php",
  "model/pessoal/std/DBPessoal.model.php","model/configuracao/mensagem/DBMensagem.model.php",
  "classes/db_cgm_classe.php"}
-PORTADO = {l.strip() for l in subprocess.run(
+# Os commits anteriores a reorganizacao registram "classes/x.php"; os
+# posteriores registrarao "ecidade/classes/x.php". Como o universo e relativo a
+# ecidade/, normaliza-se o prefixo -- senao o proximo modulo veria tudo como
+# nao-pago e o porta.py re-aplicaria guardas JA aplicadas.
+PORTADO = {l.strip().removeprefix("ecidade/") for l in subprocess.run(
     ["git","log","--name-only","--format=","--grep=^Porta "],
     capture_output=True, text=True).stdout.splitlines() if l.strip().endswith(".php")}
 PAGO = NUCLEO | PORTADO

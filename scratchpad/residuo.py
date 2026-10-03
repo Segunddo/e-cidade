@@ -21,7 +21,9 @@ Uso:  python3 scratchpad/residuo.py arr div jur
 """
 import os, re, sys, subprocess, collections
 
-os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# O projeto passou a viver em ecidade/ (reorganizacao upstream 2169884a8);
+# scratchpad/ continua na raiz, ao lado dele.
+os.chdir(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'ecidade'))
 
 NUCLEO = {
  "libs/db_stdlib.php","libs/db_conecta.php","libs/db_sessoes.php","libs/db_usuariosonline.php",
@@ -35,7 +37,11 @@ NUCLEO = {
 if os.path.isdir("libs/exceptions"):
     NUCLEO |= {f"libs/exceptions/{x}" for x in os.listdir("libs/exceptions")}
 
-PORTADO = {l.strip() for l in subprocess.run(
+# Os commits anteriores a reorganizacao registram "classes/x.php"; os
+# posteriores registrarao "ecidade/classes/x.php". Como o universo e relativo a
+# ecidade/, normaliza-se o prefixo -- senao o proximo modulo veria tudo como
+# nao-pago e o porta.py re-aplicaria guardas JA aplicadas.
+PORTADO = {l.strip().removeprefix("ecidade/") for l in subprocess.run(
     ["git","log","--name-only","--format=","--grep=^Porta "],
     capture_output=True, text=True).stdout.splitlines() if l.strip().endswith(".php")}
 PAGO = NUCLEO | PORTADO

@@ -82,8 +82,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 docker volume create ecidade_sessions && docker volume create ecidade_tmp
 docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
 docker exec ecidade_php56 chmod 1777 /tmp      # o volume nasce root:root 755
-chmod -R 777 storage bootstrap/cache && chmod 777 extension/log
-chmod 777 tmp arquivos                        # SEM isto, 11% das telas falham antes de executar
+chmod -R 777 ecidade/storage ecidade/bootstrap/cache && chmod 777 ecidade/extension/log
+chmod 777 ecidade/tmp ecidade/arquivos        # SEM isto, 11% das telas falham antes de executar
 docker compose -f docker-compose.php85.yml up -d
 docker compose -f docker-compose.proxy.yml up -d
 ```
@@ -110,6 +110,52 @@ nos dois runtimes por `tmp/` não ser gravável. A dívida real aberta é `dbaga
 
 **Fora de escopo até aqui:** Laravel continua 5.4 (não roda em PHP 8, por isso o login fica
 no runtime 5.6) e PostgreSQL continua 16 em LATIN1. São as Fases 1-3 do workflow.
+
+## ⚠ ESTRUTURA: o projeto vive em `ecidade/` desde a reorganização upstream
+
+Em **22/07/2026** a DBSeller reorganizou o repositório (`2169884a8`, PR #5): **44.053 arquivos
+foram movidos para dentro de `ecidade/`**, para a página do GitHub não listar 15 mil fontes.
+O clone local era de **29/08/2025** e seguiu na estrutura antiga — a divergência só apareceu
+quando se foi publicar o trabalho.
+
+```
+RAIZ HOJE:  .claude/  CLAUDE.md  docker/  docker-compose*.yml  ecidade/  README.md  scratchpad/
+                                                               └── todo o sistema aqui
+```
+
+**O ponto de montagem NÃO mudou:** o compose monta `./ecidade` em `/var/www/html`. Por isso
+tudo que roda **dentro do container** (os harnesses PHP, os caminhos em `include`) atravessou a
+mudança sem alteração. Só o que roda **no host** precisou saber onde o projeto está — os quatro
+scripts Python do `scratchpad/`, com um `chdir` cada.
+
+Reconciliação feita por merge: **zero conflitos**, porque o git seguiu as 44 mil renomeações
+sozinho. O que ele não podia seguir eram os arquivos **criados depois** da reorganização e os
+**ignorados pelo git**, que ficaram órfãos na raiz e tiveram de ser movidos à mão:
+
+| Órfão na raiz | Por quê | Destino |
+|---|---|---|
+| `vendor/` (13.046) | gitignored | `ecidade/vendor/` |
+| `libs/db_conn.php`, `config/*.php` | gitignored (config local) | `ecidade/` |
+| `extension/modification/` (59) | criados por mim **depois** da reorganização | `ecidade/extension/` |
+| `storage/`, `bootstrap/`, `tmp/`, `.env` | runtime e config | `ecidade/` |
+
+**Sem mover `vendor/` e `libs/db_conn.php` a aplicação não sobe** — não há autoload nem conexão.
+
+Dois arquivos o merge **deletou** e precisaram ser restaurados de `13da3de45`, porque a
+reorganização os removeu do versionamento (são gitignored) mas a aplicação os exige:
+
+- `libs/db_acessa.php` — incluído por `db_conecta.php` e `db_stdlib.php`, do núcleo
+- `config/require_extensions.xml` — sem ele `login.php:103` redireciona para `index.php`
+  com "Instalação de extensões pendentes". O sintoma parece defeito de migração e é arquivo
+  de configuração faltando.
+
+Verificado depois da adoção: `login.php` volta aos **12.009 bytes** idênticos, a bateria do
+`not` fecha **14/14**, e o enumerador reporta **0 a alterar** nos módulos já portados.
+
+**Armadilha para o próximo módulo:** os commits de porte anteriores registram `classes/x.php`;
+os próximos registrarão `ecidade/classes/x.php`. Como o universo é relativo a `ecidade/`,
+`enumera.py` e `residuo.py` normalizam o prefixo — sem isso o módulo seguinte veria tudo como
+não-pago e o `porta.py` **re-aplicaria guardas já aplicadas**.
 
 ## Contexto do trabalho
 
