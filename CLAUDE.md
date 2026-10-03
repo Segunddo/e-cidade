@@ -91,7 +91,11 @@ docker compose -f docker-compose.proxy.yml up -d
 **Use `http://localhost:8090`** (origem única). Login `dbseller`/`dbseller`. O cabeçalho
 `X-Ecidade-Runtime` em cada resposta diz qual runtime a serviu.
 
-**Para migrar o próximo módulo:** seguir a receita de 9 passos na seção *ESTRATÉGIA ADOTADA*.
+**Para migrar o próximo módulo:** invocar a skill **`migrar-modulo`**
+(`.claude/skills/migrar-modulo/SKILL.md`) — ela traz o procedimento executável com os
+comandos, as verificações e as armadilhas. Este arquivo continua sendo o catálogo e o
+*porquê*; a skill é o *como*. A receita de 9 passos também está resumida na seção
+*ESTRATÉGIA ADOTADA*.
 
 **Regime de permissões (MUDOU):** `tmp/` e `arquivos/` agora são **777**. Antes eram 775 e
 nenhum container conseguia escrever, o que fazia **11% das telas da área falharem antes de
