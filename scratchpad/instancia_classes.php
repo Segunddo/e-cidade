@@ -15,6 +15,7 @@ require_once(modification("libs/db_stdlib.php"));
 // db_conecta exige sessao valida ("Sessao invalida (12)") e a instanciacao das
 // classes nao depende de conexao -- o que se compara aqui e o ESTADO INICIAL
 // que o construtor produz.
+$n_ok = 0;
 foreach (explode("\n", trim(file_get_contents($argv[1]))) as $arq) {
     if (!$arq) continue;
     if (!preg_match('/class\s+(\w+)/i', file_get_contents($arq), $m)) continue;
@@ -33,8 +34,12 @@ foreach (explode("\n", trim(file_get_contents($argv[1]))) as $arq) {
                               : (is_array($x) ? "[" . count($x) . "]"
                               : var_export($x, true))) . ";";
         }
-        echo "$arq\t$cls\t" . count($v) . "\t" . md5($sig) . "\n";
+        echo "$arq\t$cls\t" . count($v) . "\t" . md5($sig) . "\n"; $n_ok++;
     } catch (Throwable $e) {
         echo "$arq\t$cls\tERRO\t" . get_class($e) . ": " . $e->getMessage() . " @ " . $e->getFile() . ":" . $e->getLine() . "\n";
     }
 }
+
+// Guarda contra o falso "passou": um diff de dois arquivos VAZIOS reporta zero
+// divergencias. Ja aconteceu duas vezes. Se nada foi instanciado, grita.
+if (!isset($n_ok) || $n_ok === 0) { fwrite(STDERR, "SEM_SAIDA: nenhuma classe instanciada\n"); exit(2); }
