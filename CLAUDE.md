@@ -1846,6 +1846,111 @@ realmente custam — `0 == ""` (19.401 ocorrências), construtores PHP 4 (3.587 
 Duas categorias novas apareceram só aqui, ambas fatais de compilação no PHP 8.0 e invisíveis
 ao grep: **ternário aninhado sem parênteses** (`a ? b : c ? d : e`) e **cast `(real)`**.
 
+### ✅ EXPERIMENTO: Rector 2.6.7 medido contra o porte manual do `div`
+
+A pergunta "por que não usar o Rector?" era legítima e eu a respondia por raciocínio, não por
+medição — violando o princípio do próprio projeto. O experimento: reconstruir o estado
+**pré-porte** dos 163 arquivos que o commit do `div` alterou, rodar o Rector sobre eles, e
+comparar três árvores — original, saída do Rector, meu resultado.
+
+Config: `withPhpSets(php80: true)` — só os conjuntos de upgrade de versão, que é o "grupo (a)"
+da taxonomia do TCC de referência. Rodou em 1m12s e parseou os short tags sem problema
+(136 dos 163 arquivos usam `<?`).
+
+#### Cobertura por categoria
+
+| | ANTES | RECTOR | MEU |
+|---|---|---|---|
+| guarda `0 == ""` | 0 | **0** | **763** |
+| `split(` restante | 381 | 1 | 0 |
+| `parse_str` de 1 arg restante | 62 | 2 | 0 |
+| construtor PHP 4 restante | 80 | 0 | 0 |
+| offset `{}` restante | 2 | **0** | 0 |
+
+#### Onde o Rector é melhor que o meu ferramental — e não é pouco
+
+1. **Ele não toca em comentário.** Dois dos três "restantes" dele eram código comentado
+   (`// $arr = split("-", ...)`). **Meu regex editou os dois**, porque não distingue código de
+   comentário. Inofensivo aqui, mas é ruído no diff e revela a natureza do instrumento.
+2. **Ele pegou o offset `$aDebitos[$i]->origem{0}`**, que meu regex não cobria — a lacuna de
+   detecção que registrei na seção do `div` e que só o `php -l` tinha achado.
+3. **Ele converte `split()` sempre para `preg_split`**, preservando a semântica POSIX do
+   separador. Meu `porta.py` converte para `explode` e **aborta** quando o separador tem
+   metacaractere. A solução dele é mais geral e dispensa a classificação manual.
+
+#### Onde ele não serve — e por que isso decide a questão
+
+**1. Zero guardas `0 == ""`.** As 763 correções — **58% do trabalho** — estão inteiramente
+fora do alcance dele. Não é limitação da ferramenta: a guarda não é um upgrade, é um *shim*
+que preserva a semântica do 5.6, e o código é válido nas duas versões.
+
+**2. A saída dele NÃO roda em PHP 5.6.**
+
+| | PHP 5.6 | PHP 8.5 |
+|---|---|---|
+| Saída do Rector | **19 de 163 com erro de sintaxe** | 0 |
+| Meu resultado | **0** | 0 |
+
+Causa: regras que emitem sintaxe de PHP 7+. Exemplo literal em `cai3_gerfinanc001.php:1753`:
+
+```php
+ANTES   if (!isset($certidao)) { ... }
+RECTOR  $certidao ??= "";            // ??= e PHP 7.4 -> parse error no 5.6
+MEU     if (!isset($certidao)) { ... }
+```
+
+Regras responsáveis: `IfToNullCoalescingAssignRector` (6), `ClosureToArrowFunctionRector` (4),
+`TernaryToNullCoalescingRector` (3), `NullCoalescingOperatorRector` (3). **Isso quebra a
+restrição central do strangler fig**: os dois containers montam o mesmo diretório, então um
+arquivo que não parseia no 5.6 derruba a referência — que serve o login e todos os módulos
+ainda não migrados.
+
+**3. A regra de `parse_str` descarta variáveis do escopo, em silêncio.**
+
+```
+parse_str($s);            -> $foo existe em escopo        (comportamento do 5.6)
+parse_str($s, $result);   -> $foo NAO existe; so $result  (verificado no proprio 5.6)
+```
+
+O Rector criou **60 chamadas com 2º argumento e acrescentou `extract()` em zero delas**
+(24 `extract` antes, 24 depois). Nos 60 casos, as variáveis que o código legado importava do
+query string deixam de existir — sem erro, sem aviso. Se quebra ou não depende de o código
+adiante lê-las, o que exige análise caso a caso. Minha correção acrescenta
+`extract($__qs)` nas 62, restaurando o escopo mecanicamente.
+
+**4. Ele trocou `$HTTP_*_VARS` por `$_SERVER`/`$_POST` — 317 ocorrências em 67 arquivos.**
+Exatamente a mudança registrada aqui como **não-mudança deliberada**: nesse ambiente os
+`$HTTP_*_VARS` estão indefinidos (removidos no PHP 5.4) e o código se protege disso; trocá-los
+**popula valores hoje vazios**. É mudança de comportamento, não migração.
+
+#### Ressalva honesta: isto não prova que o Rector é inútil aqui
+
+Os problemas 2 e 4 vêm dos **conjuntos por versão**, que misturam o que é exigido com o que é
+opcional — a mesma queixa que o TCC de referência registrou. Uma configuração por **lista
+explícita de regras** evitaria os dois. O problema 3 é defeito da regra em si e exige
+desabilitá-la. O problema 1 é estrutural e nenhuma configuração resolve.
+
+Das 14 regras mais aplicadas, só 5 eram exigidas pela versão de destino; as outras 9
+(`StrStartsWithRector` 93, `ExplicitPublicClassMethodRector` 89, `VarToPublicPropertyRector` 86,
+`LongArrayToShortArrayRector` 27…) são modernização, e inflam o diff sem necessidade.
+
+#### Conclusão: o desenho correto é híbrido
+
+| Camada | Instrumento | Por quê |
+|---|---|---|
+| Sintática (1.927 das 4.641 correções) | **Rector, com lista explícita de regras** | AST não erra onde regex erra: comentários, chamada aninhada, `->prop{}` |
+| Semântica (2.714) | ferramental próprio | `0 == ""`, guardas `pg_*`, casts, `sizeof(null)` — não existem como regra |
+| Verificação | comparação byte-a-byte entre runtimes | nenhuma ferramenta substitui |
+
+**Não refiz os cinco módulos já portados** — eles estão verificados byte-a-byte, e trocar o
+instrumento agora custaria mais do que ganha. A recomendação vale para os sete prefixos
+restantes, e principalmente para `fis` (353) e `iss` (400), onde o volume justifica montar a
+lista de regras.
+
+Reproduzir: a montagem está em `tmp/rector/` (gitignored). O passo que importa é reconstruir o
+estado pré-porte com `git show <commit>^:<arquivo>` e comparar **três** árvores, não duas —
+sem a original não dá para saber quem mudou o quê.
+
 ### Decisões de porte tomadas (e o porquê)
 
 - **`each()` → ponteiro explícito, não `foreach`.** Em `db_libpessoal.php` há dois laços
