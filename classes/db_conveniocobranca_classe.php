@@ -44,7 +44,7 @@ class cl_conveniocobranca {
                  ar13_responsavelnossonumero = bool = Responsável pelo Nosso Número
                  ";
    //funcao construtor da classe
-   function cl_conveniocobranca() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conveniocobranca");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -61,14 +61,14 @@ class cl_conveniocobranca {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar13_sequencial = ($this->ar13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_sequencial"]:$this->ar13_sequencial);
-       $this->ar13_bancoagencia = ($this->ar13_bancoagencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_bancoagencia"]:$this->ar13_bancoagencia);
-       $this->ar13_cadconvenio = ($this->ar13_cadconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_cadconvenio"]:$this->ar13_cadconvenio);
+       $this->ar13_sequencial = (($this->ar13_sequencial === 0 || $this->ar13_sequencial === 0.0 || $this->ar13_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["ar13_sequencial"]:$this->ar13_sequencial);
+       $this->ar13_bancoagencia = (($this->ar13_bancoagencia === 0 || $this->ar13_bancoagencia === 0.0 || $this->ar13_bancoagencia == "")?@$GLOBALS["HTTP_POST_VARS"]["ar13_bancoagencia"]:$this->ar13_bancoagencia);
+       $this->ar13_cadconvenio = (($this->ar13_cadconvenio === 0 || $this->ar13_cadconvenio === 0.0 || $this->ar13_cadconvenio == "")?@$GLOBALS["HTTP_POST_VARS"]["ar13_cadconvenio"]:$this->ar13_cadconvenio);
        $this->ar13_carteira = ($this->ar13_carteira == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_carteira"]:$this->ar13_carteira);
        $this->ar13_convenio = ($this->ar13_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_convenio"]:$this->ar13_convenio);
        $this->ar13_cedente = ($this->ar13_cedente == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_cedente"]:$this->ar13_cedente);
        $this->ar13_especie = ($this->ar13_especie == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_especie"]:$this->ar13_especie);
-       $this->ar13_variacao = ($this->ar13_variacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_variacao"]:$this->ar13_variacao);
+       $this->ar13_variacao = (($this->ar13_variacao === 0 || $this->ar13_variacao === 0.0 || $this->ar13_variacao == "")?@$GLOBALS["HTTP_POST_VARS"]["ar13_variacao"]:$this->ar13_variacao);
        $this->ar13_operacao = ($this->ar13_operacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_operacao"]:$this->ar13_operacao);
        $this->ar13_digcedente = ($this->ar13_digcedente == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_digcedente"]:$this->ar13_digcedente);
        $this->ar13_contabancaria = ($this->ar13_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_contabancaria"]:$this->ar13_contabancaria);
@@ -76,7 +76,7 @@ class cl_conveniocobranca {
         $this->ar13_responsavelnossonumero = $GLOBALS["HTTP_POST_VARS"]["ar13_responsavelnossonumero"];
        }
      }else{
-       $this->ar13_sequencial = ($this->ar13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar13_sequencial"]:$this->ar13_sequencial);
+       $this->ar13_sequencial = (($this->ar13_sequencial === 0 || $this->ar13_sequencial === 0.0 || $this->ar13_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["ar13_sequencial"]:$this->ar13_sequencial);
      }
    }
    // funcao para Inclusão
@@ -172,7 +172,7 @@ class cl_conveniocobranca {
          $this->ar13_sequencial = $ar13_sequencial;
        }
      }
-     if(($this->ar13_sequencial == null) || ($this->ar13_sequencial == "") ){
+     if(($this->ar13_sequencial == null) || (($this->ar13_sequencial === 0 || $this->ar13_sequencial === 0.0 || $this->ar13_sequencial == "")) ){
        $this->erro_sql = " Campo ar13_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

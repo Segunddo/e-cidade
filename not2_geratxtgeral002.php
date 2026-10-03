@@ -45,7 +45,7 @@ require_once(modification("model/convenio.model.php"));
 require_once(modification("model/regraEmissao.model.php"));
 require_once(modification("model/recibo.model.php"));
 
-parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"] );
+parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"] , $__qs); extract($__qs);
 db_postmemory ( $HTTP_POST_VARS );
 
 $cldb_config = new cl_db_config ( );
@@ -496,7 +496,7 @@ if ($modelo == 1) {
 			
 			for($numpre = 0; $numpre < sizeof ( $aNumpres ); $numpre ++) {
 				
-				$valores = split ( "#", $aNumpres [$numpre] );
+				$valores = explode( "#", $aNumpres [$numpre] );
 				try {
 					
 					$oRecibo->addNumpre ( $valores [0], $valores [1] );
@@ -565,7 +565,7 @@ if ($modelo == 1) {
 				
 				for($numpre = 0; $numpre < sizeof ( $aNumpres ); $numpre ++) {
 					
-					$valores = split ( "#", $aNumpres [$numpre] );
+					$valores = explode( "#", $aNumpres [$numpre] );
 					try {
 						$oRecibo->addNumpre ( $valores [0], $valores [1] );
 						$oRecibo->setDescontoReciboWeb ( $valores [0], $valores [1], $desconto ); // alterado robson
@@ -762,7 +762,7 @@ if ($modelo == 1) {
 			
 			for($numpre = 0; $numpre < sizeof ( $aNumpres ); $numpre ++) {
 				
-				$valores = split ( "#", $aNumpres [$numpre] );
+				$valores = explode( "#", $aNumpres [$numpre] );
 				try {
 					
 					$oRecibo->addNumpre ( $valores [0], $valores [1] );
@@ -943,7 +943,7 @@ if ($modelo == 1) {
 				
 				for($numpre = 0; $numpre < sizeof ( $aNumpres ); $numpre ++) {
 					
-					$valores = split ( "#", $aNumpres [$numpre] );
+					$valores = explode( "#", $aNumpres [$numpre] );
 					try {
 						$oRecibo->addNumpre ( $valores [0], $valores [1] );
 						$oRecibo->setDescontoReciboWeb ( $valores [0], $valores [1], $desconto );
@@ -1010,7 +1010,7 @@ if ($modelo == 1) {
 				$codigobarras = $oConvenio->getCodigoBarra ();
 				$linhadigitavel = $oConvenio->getLinhaDigitavel ();
 				
-				$matrizbarras = split ( " ", $linhadigitavel );
+				$matrizbarras = explode( " ", $linhadigitavel );
 				$barras = $matrizbarras [0] . $matrizbarras [1] . $matrizbarras [2] . $matrizbarras [3];
 				
 				$parte1codbarraspag = substr ( $barras, 00, 11 );

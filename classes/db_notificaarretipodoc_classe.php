@@ -52,7 +52,7 @@ class cl_notificaarretipodoc {
                  k101_tipo = int4 = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_notificaarretipodoc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notificaarretipodoc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_notificaarretipodoc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k101_sequencial = ($this->k101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k101_sequencial"]:$this->k101_sequencial);
-       $this->k101_db_documento = ($this->k101_db_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["k101_db_documento"]:$this->k101_db_documento);
-       $this->k101_tipo = ($this->k101_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k101_tipo"]:$this->k101_tipo);
+       $this->k101_sequencial = (($this->k101_sequencial === 0 || $this->k101_sequencial === 0.0 || $this->k101_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k101_sequencial"]:$this->k101_sequencial);
+       $this->k101_db_documento = (($this->k101_db_documento === 0 || $this->k101_db_documento === 0.0 || $this->k101_db_documento == "")?@$GLOBALS["HTTP_POST_VARS"]["k101_db_documento"]:$this->k101_db_documento);
+       $this->k101_tipo = (($this->k101_tipo === 0 || $this->k101_tipo === 0.0 || $this->k101_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["k101_tipo"]:$this->k101_tipo);
      }else{
-       $this->k101_sequencial = ($this->k101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k101_sequencial"]:$this->k101_sequencial);
+       $this->k101_sequencial = (($this->k101_sequencial === 0 || $this->k101_sequencial === 0.0 || $this->k101_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k101_sequencial"]:$this->k101_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_notificaarretipodoc {
          $this->k101_sequencial = $k101_sequencial; 
        }
      }
-     if(($this->k101_sequencial == null) || ($this->k101_sequencial == "") ){ 
+     if(($this->k101_sequencial == null) || (($this->k101_sequencial === 0 || $this->k101_sequencial === 0.0 || $this->k101_sequencial == "")) ){ 
        $this->erro_sql = " Campo k101_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_notificaarretipodoc {
    function sql_query ( $k101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_notificaarretipodoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_notificaarretipodoc {
    function sql_query_file ( $k101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_notificaarretipodoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

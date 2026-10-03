@@ -69,11 +69,11 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 | | |
 |---|---|
-| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` Marcas e Sinais — **6 de 16** |
+| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` Notificações — **7 de 16** |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|tra)[0-9]*_` |
-| **Próximo módulo** | **`not` Notificações (14 telas, 17 arq.)** — módulo próprio, 7/7 no menu. Depois `fis` → `iss` → `dvr` → `arr`; `inf` e `tri` junto dos hospedeiros. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|tra)[0-9]*_` |
+| **Próximo módulo** | **`fis` Fiscal (353 telas, resíduo 119)** → `iss` (400, resíduo 144) → `dvr` (236) → `arr` (346). `inf` e `tri` junto dos módulos que os hospedam. |
 | **Dívida técnica aberta** | `dbagata/` (1 arquivo alcançável, pré-requisito do `iss`) e `fpdf151/` (28 arquivos). Ver *6ª LACUNA*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
@@ -761,7 +761,7 @@ location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|n
 gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
 Financeiro e Patrimonial junto.
 
-**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ — restam 6 prefixos.
+**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ — restam 5 prefixos (`fis`, `iss`, `arr`, `dvr`, e `inf`/`tri` embutidos).
 
 ### ⚠ ORDEM REVISTA: `jur` antes de `div`, e `arr` por último
 
@@ -1179,6 +1179,48 @@ Python, são **545 linhas bem formadas cobrindo as 14 classes, byte-a-byte idên
 
 Lição: **o instrumento de conferência também precisa ser conferido.** Duas verificações
 discordando é sinal de que uma delas está quebrada — não de que o dado está ruim.
+
+### Estado: MÓDULO `not` (Notificações) PORTADO ✅ — 7º da área Tributário
+
+**14 telas** (`^not[0-9]*_`, variantes `not1_`/`not2_`/`not4_`). Universo pelas seis frentes:
+**92 arquivos**, 47 já pagos. **17 alterados.**
+
+Módulo próprio, **7 de 7 itens de menu ligados**:
+
+```
+Notificações > Procedimentos > Notificações por Edital · Parâmetros · Documento da Lista
+             > Relatórios    > Emissão de Notificações (TXT Correios / Layout / Geral)
+                             > Situação da Notificação
+```
+
+| Correção | Qtd |
+|---|---|
+| `$this->X == <literal>` → forma que preserva a semântica do 5.6 | 60 |
+| `split(` → `explode(` (43 com `"#"`, 1 com `" "`) | 44 |
+| construtor PHP4 → `__construct` | 11 |
+| `parse_str()` com 2º argumento | 6 |
+
+Nenhuma categoria nova.
+
+| Passo | Resultado |
+|---|---|
+| 1. enumeração × `ls` | 14 = 14 ✅ |
+| 3. classificação dos `split` | 44 literais, 0 regex, 0 em `<script>` |
+| 5. `php -l` nos dois runtimes | 17/17 alterados e 91/91 do universo, 0 erros |
+| 6. instanciação das classes | 40/40, estado idêntico |
+| 6b. caminho de escrita | 1.111 linhas, byte-a-byte idênticas |
+| 7. bateria de telas | **14/14 idênticas, 0 divergentes**, 0 fatais |
+
+**Terceiro módulo sem nenhuma divergência**, depois de `div` e `mar`.
+
+Dois detalhes verificados em vez de deduzidos, ambos na categoria onde o erro é silencioso:
+
+- **`split(" ", ...)` com espaço único é literal**, não regex — confirmado no próprio 5.6:
+  `split(" ","um  dois")` e `explode(" ","um  dois")` devolvem o mesmo array, inclusive o
+  elemento vazio do espaço duplo. (Diferente de `split(" +", ...)` do `jur`, que é regex.)
+- **O harness de escrita cobriu 39 das 40 classes.** A ausente,
+  `classes/db_assinatura_classe.php`, tem **zero propriedades declaradas e nenhum
+  `atualizacampos()`** — não é classe de dados, não há caminho de escrita a exercitar.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

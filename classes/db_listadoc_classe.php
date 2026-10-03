@@ -50,7 +50,7 @@ class cl_listadoc {
                  k64_codigo = int4 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_listadoc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("listadoc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_listadoc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k64_docum = ($this->k64_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["k64_docum"]:$this->k64_docum);
-       $this->k64_codigo = ($this->k64_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k64_codigo"]:$this->k64_codigo);
+       $this->k64_docum = (($this->k64_docum === 0 || $this->k64_docum === 0.0 || $this->k64_docum == "")?@$GLOBALS["HTTP_POST_VARS"]["k64_docum"]:$this->k64_docum);
+       $this->k64_codigo = (($this->k64_codigo === 0 || $this->k64_codigo === 0.0 || $this->k64_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["k64_codigo"]:$this->k64_codigo);
      }else{
-       $this->k64_codigo = ($this->k64_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k64_codigo"]:$this->k64_codigo);
+       $this->k64_codigo = (($this->k64_codigo === 0 || $this->k64_codigo === 0.0 || $this->k64_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["k64_codigo"]:$this->k64_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_listadoc {
        return false;
      }
        $this->k64_codigo = $k64_codigo; 
-     if(($this->k64_codigo == null) || ($this->k64_codigo == "") ){ 
+     if(($this->k64_codigo == null) || (($this->k64_codigo === 0 || $this->k64_codigo === 0.0 || $this->k64_codigo == "")) ){ 
        $this->erro_sql = " Campo k64_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_listadoc {
    function sql_query ( $k64_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_listadoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_listadoc {
    function sql_query_file ( $k64_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_listadoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
