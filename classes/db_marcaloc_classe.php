@@ -52,7 +52,7 @@ class cl_marcaloc {
                  ma05_i_marca = int4 = Código da Marca 
                  ";
    //funcao construtor da classe 
-   function cl_marcaloc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("marcaloc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_marcaloc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ma05_i_codigo = ($this->ma05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma05_i_codigo"]:$this->ma05_i_codigo);
-       $this->ma05_i_local = ($this->ma05_i_local == ""?@$GLOBALS["HTTP_POST_VARS"]["ma05_i_local"]:$this->ma05_i_local);
-       $this->ma05_i_marca = ($this->ma05_i_marca == ""?@$GLOBALS["HTTP_POST_VARS"]["ma05_i_marca"]:$this->ma05_i_marca);
+       $this->ma05_i_codigo = (($this->ma05_i_codigo === 0 || $this->ma05_i_codigo === 0.0 || $this->ma05_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["ma05_i_codigo"]:$this->ma05_i_codigo);
+       $this->ma05_i_local = (($this->ma05_i_local === 0 || $this->ma05_i_local === 0.0 || $this->ma05_i_local == "")?@$GLOBALS["HTTP_POST_VARS"]["ma05_i_local"]:$this->ma05_i_local);
+       $this->ma05_i_marca = (($this->ma05_i_marca === 0 || $this->ma05_i_marca === 0.0 || $this->ma05_i_marca == "")?@$GLOBALS["HTTP_POST_VARS"]["ma05_i_marca"]:$this->ma05_i_marca);
      }else{
-       $this->ma05_i_codigo = ($this->ma05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma05_i_codigo"]:$this->ma05_i_codigo);
+       $this->ma05_i_codigo = (($this->ma05_i_codigo === 0 || $this->ma05_i_codigo === 0.0 || $this->ma05_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["ma05_i_codigo"]:$this->ma05_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_marcaloc {
          $this->ma05_i_codigo = $ma05_i_codigo; 
        }
      }
-     if(($this->ma05_i_codigo == null) || ($this->ma05_i_codigo == "") ){ 
+     if(($this->ma05_i_codigo == null) || (($this->ma05_i_codigo === 0 || $this->ma05_i_codigo === 0.0 || $this->ma05_i_codigo == "")) ){ 
        $this->erro_sql = " Campo ma05_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_marcaloc {
    function sql_query ( $ma05_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_marcaloc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_marcaloc {
    function sql_query_file ( $ma05_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_marcaloc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

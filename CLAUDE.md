@@ -69,11 +69,11 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 | | |
 |---|---|
-| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` Dívida Ativa — **5 de 16** |
+| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` Marcas e Sinais — **6 de 16** |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|tra)[0-9]*_` |
-| **Próximo módulo** | os pequenos (`mar` 35, `tri` 33, `dvr` 33, `inf` 30, `not` 14) → `arr` → `fis` → `iss`. Ver *ORDEM REVISTA*. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|tra)[0-9]*_` |
+| **Próximo módulo** | **`not` Notificações (14 telas, 17 arq.)** — módulo próprio, 7/7 no menu. Depois `fis` → `iss` → `dvr` → `arr`; `inf` e `tri` junto dos hospedeiros. |
 | **Dívida técnica aberta** | `dbagata/` (1 arquivo alcançável, pré-requisito do `iss`) e `fpdf151/` (28 arquivos). Ver *6ª LACUNA*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
@@ -761,7 +761,7 @@ location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|n
 gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
 Financeiro e Patrimonial junto.
 
-**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ — restam 7 prefixos.
+**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ — restam 6 prefixos.
 
 ### ⚠ ORDEM REVISTA: `jur` antes de `div`, e `arr` por último
 
@@ -1132,6 +1132,53 @@ os quatro instrumentos passaram a ser versionados:
 vírgulas no nível superior. Foi a divergência entre as duas que deixou duas telas do `jur`
 fatais depois do porte. E ele **aborta** diante de caso que exige decisão humana (separador de
 `split()` com metacaractere, arquivo com mais de uma classe), em vez de transformar errado.
+
+### Estado: MÓDULO `mar` (Marcas e Sinais) PORTADO ✅ — 6º da área Tributário
+
+**35 telas** (`^mar[0-9]*_`, variantes `mar1_`…`mar4_`, sem sufixo de letra). Universo pelas
+seis frentes: **77 arquivos**, 24 já pagos. **19 alterados.**
+
+Módulo de registro de marcas de gado. **17 de 17 itens de menu ligados** — módulo próprio e
+inteiramente demonstrável:
+
+```
+Marcas e Sinais > Cadastros     > Localidades (Inclusão/Alteração/Exclusão)
+                > Procedimentos > Cadastro de Marcas · Cancelamento · Transferência
+                > Consultas     > Consulta Marcas · Cancelamentos · Transferências
+                > Relatórios    > Marcas por Proprietário · Histórico de Cancelamentos
+```
+
+| Correção | Qtd |
+|---|---|
+| `$this->X == <literal>` → forma que preserva a semântica do 5.6 | 27 |
+| `split(` → `explode(` (todos com separador literal `"#"`) | 20 |
+| `parse_str()` com 2º argumento | 14 |
+| construtor PHP4 → `__construct` | 5 |
+
+Nenhuma categoria nova. Zero `each(`, `ereg*`, offsets `{}`, `=& new`, cast `(real)`.
+
+Verificações — **primeira vez com a receita completa, incluindo o passo 6b**:
+
+| Passo | Resultado |
+|---|---|
+| 1. enumeração × `ls` | 35 = 35 ✅ |
+| 3. classificação dos `split` | 20 literais, 0 regex, 0 dentro de `<script>` |
+| 5. `php -l` nos dois runtimes | 19/19 alterados e 76/76 do universo, 0 erros |
+| 6. instanciação das classes | 14/14, estado idêntico |
+| **6b. caminho de escrita** | **545 linhas, byte-a-byte idênticas** |
+| 7. bateria de telas | **35/35 idênticas, 0 divergentes**, 0 fatais no log |
+
+**Segundo módulo sem nenhuma divergência**, depois do `div`.
+
+#### Armadilha de verificação que reapareceu (terceira vez)
+
+O harness do passo 6b produziu 858 linhas e meu `diff` disse "0 divergentes". Antes de aceitar,
+conferi se **havia saída** — havia. Mas um segundo teste (`grep $'\t'`) contou **zero linhas
+bem formadas**, o que sugeria lixo. Era o `grep` que falhava por aspas no shell: medindo em
+Python, são **545 linhas bem formadas cobrindo as 14 classes, byte-a-byte idênticas**.
+
+Lição: **o instrumento de conferência também precisa ser conferido.** Duas verificações
+discordando é sinal de que uma delas está quebrada — não de que o dado está ruim.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

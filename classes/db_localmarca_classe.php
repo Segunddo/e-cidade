@@ -52,7 +52,7 @@ class cl_localmarca {
                  ma04_c_subdistrito = char(20) = Distrito/Subdistrito 
                  ";
    //funcao construtor da classe 
-   function cl_localmarca() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("localmarca"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_localmarca {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ma04_i_codigo = ($this->ma04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma04_i_codigo"]:$this->ma04_i_codigo);
+       $this->ma04_i_codigo = (($this->ma04_i_codigo === 0 || $this->ma04_i_codigo === 0.0 || $this->ma04_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["ma04_i_codigo"]:$this->ma04_i_codigo);
        $this->ma04_c_descr = ($this->ma04_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ma04_c_descr"]:$this->ma04_c_descr);
        $this->ma04_c_subdistrito = ($this->ma04_c_subdistrito == ""?@$GLOBALS["HTTP_POST_VARS"]["ma04_c_subdistrito"]:$this->ma04_c_subdistrito);
      }else{
-       $this->ma04_i_codigo = ($this->ma04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma04_i_codigo"]:$this->ma04_i_codigo);
+       $this->ma04_i_codigo = (($this->ma04_i_codigo === 0 || $this->ma04_i_codigo === 0.0 || $this->ma04_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["ma04_i_codigo"]:$this->ma04_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_localmarca {
          $this->ma04_i_codigo = $ma04_i_codigo; 
        }
      }
-     if(($this->ma04_i_codigo == null) || ($this->ma04_i_codigo == "") ){ 
+     if(($this->ma04_i_codigo == null) || (($this->ma04_i_codigo === 0 || $this->ma04_i_codigo === 0.0 || $this->ma04_i_codigo == "")) ){ 
        $this->erro_sql = " Campo ma04_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_localmarca {
    function sql_query ( $ma04_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_localmarca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_localmarca {
    function sql_query_file ( $ma04_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_localmarca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
