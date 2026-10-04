@@ -186,7 +186,7 @@ class ScintillaPHP extends GtkScintilla
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function ScintillaPHP()
+    function __construct()
     {
         GtkScintilla::GtkScintilla();
         GtkScintilla::connect_object('char_added', array($this,'char_added'));
@@ -259,7 +259,7 @@ class ScintillaPHP extends GtkScintilla
         if ($this->do_auto_indent && ($char == 10 || $char == 13) )
         $this->auto_indent();
         if ($this->curstyle == 0) return;*/
-        //if (eregi("[a-z>-]+",chr($char)))
+        //if (preg_match("#[a-z>-]+#i",chr($char)))
         $this->complete_word_activate(1,1);
     }
 
@@ -292,7 +292,7 @@ class ScintillaPHP extends GtkScintilla
         $disable_autocomplete = TRUE;
         if (trim($word) == substr($word,1)) $word[0] = " ";
         if ((strlen($word) > 2) || $word == '(')
-        switch ($word{0})
+        switch ($word[0])
         {
             case "$":
             if ($is_key) $this->lastword = $word;

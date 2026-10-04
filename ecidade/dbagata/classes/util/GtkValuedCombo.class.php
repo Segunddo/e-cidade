@@ -27,7 +27,7 @@
 
 class GtkValuedCombo extends GtkCombo
 {
-    function GtkValuedCombo()
+    function __construct()
     {
         GtkCombo::GtkCombo();
         $entry = $this->entry;

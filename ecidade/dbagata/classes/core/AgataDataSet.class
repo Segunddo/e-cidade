@@ -139,7 +139,7 @@ class AgataQueryArray
     /*******************************************************************************/
     /* Constructor
     /*******************************************************************************/
-    function AgataQueryArray($QueryArray)
+    function __construct($QueryArray)
     {
         $this->QueryArray = $QueryArray;
         $this->i = 0;

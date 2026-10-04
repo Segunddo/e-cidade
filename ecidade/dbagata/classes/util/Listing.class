@@ -34,7 +34,7 @@ class Listing extends GtkCList
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function Listing($Title)
+    function __construct($Title)
     {
         GtkCList::GtkCList(count($Title),$Title);
         GtkCList::set_selection_mode(GTK_SELECTION_SINGLE);

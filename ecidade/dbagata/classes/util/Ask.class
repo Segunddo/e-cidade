@@ -34,7 +34,7 @@ class Ask
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function Ask($question, $array_yes, $array_no = null, $extra_yes = null)
+    function __construct($question, $array_yes, $array_no = null, $extra_yes = null)
     {
         $this->window = new GtkWindow(GTK_WINDOW_DIALOG);
         $this->window->set_title(_a('Question'));

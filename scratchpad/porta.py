@@ -33,11 +33,8 @@ for p in alvos:
             bloqueios.append((p, "split() com 1o argumento nao literal")); continue
         if set(m.group(1)[1:-1]) & META:
             bloqueios.append((p, f"split() com separador REGEX {m.group(1)!r} -> use preg_split"))
-    cls = re.findall(rb'\bclass\s+(\w+)', b)
-    if not re.search(rb'function\s+__construct\s*\(', b, re.I):
-        php4 = [c for c in cls if re.search(rb'function\s+'+re.escape(c)+rb'\s*\(', b, re.I)]
-        if len(php4) > 1:
-            bloqueios.append((p, f"mais de uma classe com construtor PHP4: {php4}"))
+    # arquivo multi-classe deixou de ser bloqueio: construtores_fix() renomeia
+    # dentro do bloco de CADA classe, em vez de assumir uma classe por arquivo.
 for outros in (f for f in os.listdir(".") if f.endswith(".php") and os.path.isfile(f)):
     pass   # checagem de chamada explicita ao nome antigo fica no enumera/manual
 
@@ -67,6 +64,56 @@ def parse_str_fix(b):
     out += b[pos:]
     return bytes(out), n
 
+
+def classes_php4(b):
+    """Classes cujo construtor e o metodo homonimo, olhando o corpo de CADA classe.
+    A checagem por arquivo inteiro mascarava classes vizinhas (8a lacuna)."""
+    pos = [(m.start(), m.group(1)) for m in re.finditer(rb'\bclass\s+(\w+)', b)]
+    out = []
+    for i, (ini, nome) in enumerate(pos):
+        fim = pos[i+1][0] if i+1 < len(pos) else len(b)
+        if re.search(rb'function\s+__construct\s*\(', b[ini:fim], re.I): continue
+        if re.search(rb'function\s+' + re.escape(nome) + rb'\s*\(', b[ini:fim], re.I):
+            out.append((nome, ini, fim))
+    return out
+
+def construtores_fix(b):
+    """Renomeia os construtores estilo PHP 4 DENTRO do bloco de cada classe, e ajusta
+    as chamadas explicitas ao nome antigo -- `parent::Nome(` e, quando a classe do
+    arquivo estende Nome, `$this->Nome(`. Sem isso a chamada vira metodo inexistente."""
+    n = 0
+    classes = classes_php4(b)
+    for nome, ini, fim in reversed(classes):              # de tras pra frente: os offsets seguem valendo
+        trecho, k = re.subn(rb'function\s+' + re.escape(nome) + rb'\s*\(',
+                            b'function __construct(', b[ini:fim], flags=re.I)
+        if k: b = b[:ini] + trecho + b[fim:]; n += k
+    for nome in {m.group(1) for m in re.finditer(rb'\bclass\s+\w+\s+extends\s+(\w+)', b)}:
+        b = re.sub(rb'parent\s*::\s*' + re.escape(nome) + rb'\s*\(', b'parent::__construct(', b)
+        b = re.sub(rb'\$this\s*->\s*' + re.escape(nome) + rb'\s*\(', b'parent::__construct(', b)
+    # 3a forma, descoberta no dbagata: chamada ESTATICA `Classe::Classe(`. Escapou das
+    # duas regras acima e deixou MyPdf.class chamando FPDF::FPDF(), metodo que o
+    # proprio porte acabara de renomear. Nao vale so para a classe-pai declarada no
+    # arquivo, entao usa a lista de classes renomeadas aqui.
+    if classes:
+        alt = rb'\b(' + rb'|'.join(re.escape(c) for c, _, _ in classes) + rb')\s*::\s*\1\s*\('
+        linhas = b.split(b"\n")
+        for i, l in enumerate(linhas):
+            while True:
+                m = re.search(alt, linhas[i])
+                # nao tocar em comentario nem em string: o proprio jpgraph.php traz
+                # `//(... Text::Text() ...)` e as mensagens de erro citam Graph::Graph()
+                if not m or _em_texto(linhas[i], m.start()): break
+                linhas[i] = linhas[i][:m.start()] + m.group(1) + b'::__construct(' + linhas[i][m.end():]
+        b = b"\n".join(linhas)
+    return b, n
+
+def _em_texto(linha, col):
+    """True se a posicao cai dentro de comentario de linha ou de string literal."""
+    pre = linha[:col]
+    if b'//' in pre or b'/*' in pre or pre.lstrip()[:1] == b'#': return True
+    return ((pre.count(b'"') - pre.count(b'\\"')) % 2 == 1
+            or (pre.count(b"'") - pre.count(b"\\'")) % 2 == 1)
+
 cnt = collections.Counter()
 avisos = collections.defaultdict(list)
 MANUAL = {'each(':     re.compile(rb'(?<![A-Za-z0-9_>$.])each\s*\('),
@@ -81,11 +128,7 @@ for p in alvos:
         if n: avisos[k].append((p, n))
     b, n = re.subn(rb'(?<![A-Za-z0-9_>$.])split\s*\(', rb'explode(', b); cnt['split -> explode'] += n
     b, n = parse_str_fix(b);                                             cnt['parse_str 2 args'] += n
-    if not re.search(rb'function\s+__construct\s*\(', b, re.I):
-        mc = re.search(rb'\bclass\s+(\w+)', b)
-        if mc:
-            b, n = re.subn(rb'function\s+'+re.escape(mc.group(1))+rb'\s*\(', b'function __construct(', b, flags=re.I)
-            cnt['construtor PHP4'] += n
+    b, n = construtores_fix(b); cnt['construtor PHP4'] += n
     for x in {m.group(1) for m in re.finditer(rb'(?:var|public)\s+\$(\w+)\s*=\s*-?\d+\s*;', b)}:
         # Qualquer literal NAO-NUMERICO, nao so "": no 5.6 a string nao-numerica
         # era coagida para 0. Literal numerico e seguro nos dois e fica intocado.

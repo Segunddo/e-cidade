@@ -72,6 +72,22 @@ sort -u ecidade/tmp/<pref>_alvos.txt > /tmp/all.txt
 comm -23 /tmp/all.txt /tmp/ja.txt > /tmp/novos.txt     # substituir _alvos.txt por este
 ```
 
+**Renomear construtor exige varrer TRÊS formas de chamada ao nome antigo** — `parent::Classe(`,
+`$this->Classe(` e a estática `Classe::Classe(`. O `porta.py` faz as três, mas só para classes
+do **mesmo arquivo**: uma chamada cruzada (`MyPdf.class` chamando `FPDF::FPDF()`) escapa. Depois
+de portar uma biblioteca, conferir na base inteira, restringindo aos nomes que viraram
+`__construct` e pulando comentário e string:
+
+```bash
+git grep -nE '([A-Za-z_][A-Za-z0-9_]*)::\1\(' -- ecidade/
+```
+
+Classes de extensão externa (`GtkFrame::GtkFrame()`) **não** entram: ninguém as renomeou.
+
+**A checagem de `__construct` é por CLASSE, nunca pelo arquivo.** Um arquivo com várias classes
+em que só uma tem `__construct` mascarava as outras — foi assim que 42 classes do núcleo
+passaram por oito portes sem serem renomeadas (8ª lacuna).
+
 **Classificar os `split()` antes de converter.** Separador literal vira `explode`; separador
 com metacaractere de regex (`+ * ? [ ] ( ) | . ^ $ \`) vira `preg_split`. Converter um regex
 para `explode` devolve a string inteira sem separar — **dado errado, sem erro nenhum**:

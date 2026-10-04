@@ -37,7 +37,7 @@ class InputBox
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function InputBox($mensagem, $lenght, $PreText = '', $action = null)
+    function __construct($mensagem, $lenght, $PreText = '', $action = null)
     {
         $this->dialog = new GtkWindow;
         $this->dialog->set_title(_a('Question'));

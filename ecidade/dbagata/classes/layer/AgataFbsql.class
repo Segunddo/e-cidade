@@ -108,7 +108,7 @@ class AgataFbsql
      */
     function FreeResult($result)
     {
-        if (is_resource($result))
+        if ((is_resource($result) || is_object($result)))
         {
             return fbsql_free_result($result);
         }

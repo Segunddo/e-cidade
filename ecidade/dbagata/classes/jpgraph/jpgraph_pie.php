@@ -57,7 +57,7 @@ class PiePlot {
     var $la = array(); // Holds the angle for each label
 //---------------
 // CONSTRUCTOR
-    function PiePlot($data) {
+    function __construct($data) {
 	$this->data = array_reverse($data);
 	$this->title = new Text("");
 	$this->title->SetFont(FF_FONT1,FS_BOLD);
@@ -1017,8 +1017,8 @@ class PiePlotC extends PiePlot {
     var $midtitle='';
     var $middlecsimtarget='',$middlecsimwintarget='',$middlecsimalt='';
 
-    function PiePlotC($data,$aCenterTitle='') {
-	parent::PiePlot($data);
+    function __construct($data,$aCenterTitle='') {
+	parent::__construct($data);
 	$this->midtitle = new Text();
 	$this->midtitle->ParagraphAlign('center');
     }
@@ -1191,7 +1191,7 @@ class PiePlotC extends PiePlot {
 	$this->csimareas .= " />\n";
     }
 
-    function StrokeLabel($label,$img,$xc,$yc,$a,$r) {
+    function StrokeLabel($label,&$img,$xc,$yc,$a,$r) {
 
 	if( $this->ilabelposadj === 'auto' )
 	    $this->ilabelposadj = (1-$this->imidsize)/2+$this->imidsize;
@@ -1214,8 +1214,8 @@ class PieGraph extends Graph {
     var $pieaa = false ;
 //---------------
 // CONSTRUCTOR
-    function PieGraph($width=300,$height=200,$cachedName="",$timeout=0,$inline=1) {
-	$this->Graph($width,$height,$cachedName,$timeout,$inline);
+    function __construct($width=300,$height=200,$cachedName="",$timeout=0,$inline=1) {
+	parent::__construct($width,$height,$cachedName,$timeout,$inline);
 	$this->posx=$width/2;
 	$this->posy=$height/2;
 	$this->SetColor(array(255,255,255));		

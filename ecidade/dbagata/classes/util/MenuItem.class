@@ -34,7 +34,7 @@ class MyNormalMenuItem extends GtkMenuItem
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-	function MyNormalMenuItem($img, $label, $function = null, $param = null)
+	function __construct($img, $label, $function = null, $param = null)
 	{
 		GtkMenuItem::GtkMenuItem($label);
         $child = $this->child;
@@ -64,7 +64,7 @@ class MyControlMenuItem extends GtkMenuItem
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-	function MyControlMenuItem($img, $label, $underscore, $accelgroup, $function, $param = null)
+	function __construct($img, $label, $underscore, $accelgroup, $function, $param = null)
 	{
 		GtkMenuItem::GtkMenuItem($label);
         $child = $this->child;
@@ -109,7 +109,7 @@ class MyCheckMenuItem extends GtkCheckMenuItem
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-	function MyCheckMenuItem($img, $label, $underscore, $accelgroup, $function)
+	function __construct($img, $label, $underscore, $accelgroup, $function)
 	{
 		GtkCheckMenuItem::GtkCheckMenuItem($label);
         $child = $this->child;
@@ -144,7 +144,7 @@ class MyAltMenuItem extends GtkMenuItem
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-	function MyAltMenuItem($label, $underscore, $accelgroup)
+	function __construct($label, $underscore, $accelgroup)
 	{
 		GtkMenuItem::GtkMenuItem($label);
 
@@ -167,7 +167,7 @@ class MyFunctionMenuItem extends GtkMenuItem
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-	function MyFunctionMenuItem($img, $label, $key, $accelgroup, $function, $param = null)
+	function __construct($img, $label, $key, $accelgroup, $function, $param = null)
 	{
 		GtkMenuItem::GtkMenuItem($label);
         $child = $this->child;

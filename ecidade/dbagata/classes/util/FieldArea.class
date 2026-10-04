@@ -27,7 +27,7 @@
 
 class FieldArea extends GtkFixed
 {
-    function FieldArea($horizontal = true, $limit = false)
+    function __construct($horizontal = true, $limit = false)
     {
         GtkFixed::GtkFixed();
         GtkFixed::connect('drag_data_received', array($this, 'DragReceive'));

@@ -57,7 +57,7 @@ class XmlArray
     var $docElement;
     var $document;
     
-    function XmlArray($FileName)
+    function __construct($FileName)
     {
         if (substr(PHP_VERSION, 0, 1) >= '5')
         {
@@ -170,7 +170,7 @@ class XmlArray
                     {
                         if (trim($nextNode->node_value()) != "")
                         {
-                            $array = ereg_replace("\n\n","\n",utf8_decode($nextNode->node_value()));
+                            $array = preg_replace("#\n\n#","\n",utf8_decode($nextNode->node_value()));
                             $array = str_replace('&lt;', '<', $array);
                             $array = str_replace('&gt;', '>', $array);
                         }

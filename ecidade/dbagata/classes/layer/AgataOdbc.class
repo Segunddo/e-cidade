@@ -85,7 +85,7 @@ class AgataOdbc
      */
     function FreeResult()
     {
-        if (is_resource($result)) {
+        if ((is_resource($result) || is_object($result))) {
             return odbc_free_result($result);
         }
         return true;
@@ -122,7 +122,7 @@ class AgataOdbc
      */
     function RaiseError()
     {
-        if (!isset($this->connection) || !is_resource($this->connection))
+        if (!isset($this->connection) || !(is_resource($this->connection) || is_object($this->connection)))
         {
             $error = odbc_errormsg();
         }

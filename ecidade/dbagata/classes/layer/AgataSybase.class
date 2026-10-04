@@ -108,7 +108,7 @@ class AgataSybase
      */
     function FreeResult($result)
     {
-        if (is_resource($result))
+        if ((is_resource($result) || is_object($result)))
         {
             return @sybase_free_result($result);
         }

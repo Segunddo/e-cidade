@@ -34,7 +34,7 @@ class CheckList
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function CheckList($options)
+    function __construct($options)
     {
         $this->widget   = new GtkScrolledWindow;
         $this->viewport = new GtkViewport;

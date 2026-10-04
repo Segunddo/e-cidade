@@ -34,7 +34,7 @@ class Box extends GtkFrame
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function Box(&$field, $title)
+    function __construct(&$field, $title)
     {
         GtkFrame::GtkFrame($title);
         GtkFrame::set_shadow_type(GTK_SHADOW_NONE);
@@ -59,7 +59,7 @@ class EntryBox extends GtkFrame
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function EntryBox(&$field, $max_lenght, $title, $PreText)
+    function __construct(&$field, $max_lenght, $title, $PreText)
     {
         GtkFrame::GtkFrame($title);
         GtkFrame::set_shadow_type(GTK_SHADOW_NONE);
@@ -89,7 +89,7 @@ class TextBox extends GtkFrame
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function TextBox(&$field, $max_lenght, $title, $PreText)
+    function __construct(&$field, $max_lenght, $title, $PreText)
     {
         GtkFrame::GtkFrame($title);
         GtkFrame::set_shadow_type(GTK_SHADOW_NONE);

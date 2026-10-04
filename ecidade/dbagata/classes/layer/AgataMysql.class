@@ -113,7 +113,7 @@ class AgataMysql
      */
     function FreeResult()
     {
-        if (is_resource($result)) {
+        if ((is_resource($result) || is_object($result))) {
             return mysql_free_result($result);
         }
         return true;

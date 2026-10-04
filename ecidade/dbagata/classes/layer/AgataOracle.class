@@ -111,7 +111,7 @@ class AgataOracle
      */
     function FreeResult($result)
     {
-        if (is_resource($result))
+        if ((is_resource($result) || is_object($result)))
         {
             return OCIFreeStatement($result);
         }
@@ -136,7 +136,7 @@ class AgataOracle
      */
     function RaiseError()
     {
-        if (is_resource($this->result))
+        if ((is_resource($this->result) || is_object($this->result)))
         {
             $error = OCIError($this->result);
         }

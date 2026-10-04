@@ -34,7 +34,7 @@ class FontBox
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function FontBox($Description, $moreoptions)
+    function __construct($Description, $moreoptions)
     {
         global $Pixmaps;
         $tooltip = new GtkTooltips;
@@ -221,7 +221,7 @@ class GtkFontBox
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function GtkFontBox($Description, $Content)
+    function __construct($Description, $Content)
     {
         global $Pixmaps;
         $tooltip = new GtkTooltips;

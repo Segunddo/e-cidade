@@ -87,7 +87,7 @@ class AgataIbase
      */
     function FreeResult()
     {
-        if (is_resource($result)) {
+        if ((is_resource($result) || is_object($result))) {
             return ibase_free_result($result);
         }
         return true;

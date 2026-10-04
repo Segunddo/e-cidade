@@ -34,7 +34,7 @@ class FontProp {
 class SpiderLogTicks extends Ticks {
 //---------------
 // CONSTRUCTOR
-    function SpiderLogTicks() {
+    function __construct() {
     }
 //---------------
 // PUBLIC METHODS	
@@ -103,7 +103,7 @@ class SpiderLogTicks extends Ticks {
 class SpiderLinearTicks extends LinearTicks {
 //---------------
 // CONSTRUCTOR
-    function SpiderLinearTicks() {
+    function __construct() {
 	// Empty
     }
 
@@ -171,8 +171,8 @@ class SpiderAxis extends Axis {
     var $title=null;
 //---------------
 // CONSTRUCTOR
-    function SpiderAxis(&$img,&$aScale,$color=array(0,0,0)) {
-	parent::Axis($img,$aScale,$color);
+    function __construct(&$img,&$aScale,$color=array(0,0,0)) {
+	parent::__construct($img,$aScale,$color);
 	$this->len=$img->plotheight;
 	$this->font_size = FF_FONT1;
 	$this->title = new FontProp();
@@ -267,7 +267,7 @@ class SpiderAxis extends Axis {
 class SpiderGrid extends Grid {
 //------------
 // CONSTRUCTOR
-    function SpiderGrid() {
+    function __construct() {
     }
 
 //----------------
@@ -312,7 +312,7 @@ class SpiderPlot {
     var $weight=1;
 //---------------
 // CONSTRUCTOR
-    function SpiderPlot($data) {
+    function __construct($data) {
 	$this->data = $data;
     }
 
@@ -405,8 +405,8 @@ class SpiderGraph extends Graph {
     var $grid,$axis=null;
 //---------------
 // CONSTRUCTOR
-    function SpiderGraph($width=300,$height=200,$cachedName="",$timeout=0,$inline=1) {
-	$this->Graph($width,$height,$cachedName,$timeout,$inline);
+    function __construct($width=300,$height=200,$cachedName="",$timeout=0,$inline=1) {
+	parent::__construct($width,$height,$cachedName,$timeout,$inline);
 	$this->posx=$width/2;
 	$this->posy=$height/2;
 	$this->len=min($width,$height)*0.35;
@@ -426,17 +426,17 @@ class SpiderGraph extends Graph {
 	    JpGraphError::Raise("Illegal scale for spiderplot ($axtype). Must be \"lin\" or \"log\"");
 	}
 	if( $axtype=="lin" ) {
-	    $this->yscale = & new LinearScale(1,1);
-	    $this->yscale->ticks = & new SpiderLinearTicks();
+	    $this->yscale = new LinearScale(1,1);
+	    $this->yscale->ticks = new SpiderLinearTicks();
 	    $this->yscale->ticks->SupressMinorTickMarks();
 	}
 	elseif( $axtype=="log" ) {
-	    $this->yscale = & new LogScale(1,1);
-	    $this->yscale->ticks = & new SpiderLogTicks();
+	    $this->yscale = new LogScale(1,1);
+	    $this->yscale->ticks = new SpiderLogTicks();
 	}
 		
-	$this->axis = & new SpiderAxis($this->img,$this->yscale);
-	$this->grid = & new SpiderGrid();		
+	$this->axis = new SpiderAxis($this->img,$this->yscale);
+	$this->grid = new SpiderGrid();		
     }
 
     function SetPlotSize($s) {

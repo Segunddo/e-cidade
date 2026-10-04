@@ -120,9 +120,9 @@ class AgataTxtForm extends AgataReport
                 if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[$y])) //aquipbreak
                 {
                     # DIFFERENCE
-                    $QueryCell = ereg_replace("\n", '', $QueryCell);
-                    $QueryCell = ereg_replace(chr(13), '', $QueryCell);
-                    $QueryCell = ereg_replace(chr(10), '', $QueryCell);
+                    $QueryCell = preg_replace("#\n#", '', $QueryCell);
+                    $QueryCell = str_replace(chr(13), '', $QueryCell);
+                    $QueryCell = str_replace(chr(10), '', $QueryCell);
                     $splits = my_str_split($QueryCell, 80);
                     $n_splits = 0;
                     foreach($splits as $split)

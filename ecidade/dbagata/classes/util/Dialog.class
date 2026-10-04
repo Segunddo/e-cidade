@@ -34,7 +34,7 @@ class Dialog
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function Dialog($mensagem, $erro = true, $kill = false, $submessage = null)
+    function __construct($mensagem, $erro = true, $kill = false, $submessage = null)
     {
         if (!is_array($mensagem))
         {

@@ -34,7 +34,7 @@ class TreeHandler extends GtkBox
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function TreeHandler($FileTree, $names = null, $horizontal = false)
+    function __construct($FileTree, $names = null, $horizontal = false)
     {
         $this->horizontal = $horizontal;
         $this->FileTree = $FileTree;

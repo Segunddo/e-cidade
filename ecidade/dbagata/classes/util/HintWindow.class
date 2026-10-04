@@ -34,7 +34,7 @@ class HintWindow extends GtkWindow
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function HintWindow($bgcolor = '#FFFFFF')
+    function __construct($bgcolor = '#FFFFFF')
     {
         GtkWindow::GtkWindow(GTK_WINDOW_POPUP);
         $style = new GtkStyle;

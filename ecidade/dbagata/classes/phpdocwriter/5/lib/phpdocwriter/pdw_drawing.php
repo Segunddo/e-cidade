@@ -26,7 +26,7 @@ import('phpdocwriter.pdw_document');
 class pdw_drawing extends pdw_document
 {
 
-function pdw_drawing()
+function __construct()
 {
 	$this->paragstyle =& $this->parent->paragstyle;
 	$this->grno = $this->parent->_getNo('g');

@@ -219,7 +219,7 @@ class cl_download
     var $arquivo = null;
     var $texto = "Clique Aqui";
 
-    function cl_download()
+    function __construct()
     {
         $this->criaarquivo();
     }
@@ -238,7 +238,7 @@ class cl_download
 //Classe que verifica se o boletim já foi liberado
 class cl_verificaboletim
 {
-    function cl_verificaboletim($clboletim)
+    function __construct($clboletim)
     {
         global $k11_numbol;
         $data = date("Y-m-d", db_getsession("DB_datausu"));
@@ -510,7 +510,7 @@ class cl_abre_arquivo
     var $arquivo = null;
 
     //|30|//arquivo : FD do arquivo - retorno da função fopen()
-    function cl_abre_arquivo($nomearq = "")
+    function __construct($nomearq = "")
     {
         //#00#//cl_abre_arquivo
         //#10#//Método para abrir um arquivo

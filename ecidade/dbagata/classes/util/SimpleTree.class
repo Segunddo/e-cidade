@@ -34,7 +34,7 @@ class SimpleTree extends GtkCTree
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function SimpleTree($Title)
+    function __construct($Title)
     {
         if (is_array($Title))
         {

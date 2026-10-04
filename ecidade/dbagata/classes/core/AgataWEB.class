@@ -32,7 +32,7 @@
 /*******************************************************************************/
 class AgataWEB
 {
-    function AgataWEB()
+    function __construct()
     {
         include_once AGATA_PATH . '/web/class/sys.html/core/TMaster.class.php';
     }

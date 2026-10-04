@@ -34,7 +34,7 @@ class ReportBox
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function ReportBox($Description, $path)
+    function __construct($Description, $path)
     {
         global $Pixmaps;
         $tooltip = new GtkTooltips;

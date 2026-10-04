@@ -34,7 +34,7 @@ class IList
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function IList($items, $action, $list_pixmap, $title, $listtitle, $param = null)
+    function __construct($items, $action, $list_pixmap, $title, $listtitle, $param = null)
     {
         $this->window = new GtkWindow(GTK_WINDOW_DIALOG);
         $this->window->set_title($title);

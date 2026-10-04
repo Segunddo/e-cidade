@@ -72,9 +72,11 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 | Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` Fiscal — **8 de 16** |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
+| Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|tra)[0-9]*_` |
-| **Próximo módulo** | **`iss` ISSQN (400 telas, resíduo 144)** → `dvr` (236) → `arr` (346). `inf` e `tri` junto dos módulos que os hospedam. **`dbagata/` é pré-requisito duro do `iss`.** |
-| **Dívida técnica aberta** | `dbagata/` (1 arquivo alcançável, pré-requisito do `iss`) e `fpdf151/` (28 arquivos). Ver *6ª LACUNA*. |
+| **Próximo módulo** | **`iss` ISSQN (400 telas, resíduo 144)** → `dvr` (236) → `arr` (346). `inf` e `tri` junto dos módulos que os hospedam. O pré-requisito `dbagata/` já está pago. |
+| **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
+| Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
 
@@ -1492,6 +1494,151 @@ de uids documentava mas o bloco de comandos não repetia. Acrescentado lá.
 Diagnóstico que resolve em um passo: requisitar uma tela de **módulo já verificado** (`cem`,
 `not`). Se ela também der 500, o problema é de ambiente, não do porte em andamento.
 
+### Estado: BIBLIOTECA `dbagata/` PORTADA ✅ — pré-requisito do `iss` pago
+
+`dbagata/` tem **602 arquivos**, dos quais **216 são PHP executável** (`.php`, `.class`, `.inc`).
+Os outros são dados do Agata: 104 `.agl`, 73 `.agt`, 50 `.htm`, 25 `.rpt`, 15 `.map`, 10 `.lay`
+e **74 `.fun`**. Os `.fun` *são* PHP, mas só `AgataInterface.class` — a GUI GTK que nada no
+repositório inclui — os carrega; o caminho de relatório não os toca. Ficam registrados (3
+`ereg*` em 3 arquivos) e não foram portados.
+
+**5 dos 216 já não parseavam no 5.6** (`pdw_document.php` ×2 do phpdocwriter, `FileBox.class`,
+`GtkPopDate.class`, `createwidgets.inc` — todos GTK/doc). Não dá para verificá-los por lint, e
+são pré-existentes: ficaram de fora. **Universo portado: 211 arquivos.**
+
+| Correção | Qtd |
+|---|---|
+| construtor PHP4 → `__construct` | 213 classes |
+| `ereg*(` → `preg_match`/`preg_replace`/`str_replace` | 61 |
+| offsets `{}` → `[]` | 16 |
+| `=& new` → `= new` | 14 |
+| `is_resource()` → `is_resource() \|\| is_object()` | 13 |
+| chamadas ao construtor antigo (`parent::`, `$this->`, `Classe::Classe(`) | 10 + 62 |
+| `split(` → `explode(`/`preg_split(` | 9 |
+| assinaturas incompatíveis com a mãe (LSP) | 5 |
+| `each(` → ponteiro explícito | 5 |
+| `set/get_magic_quotes_runtime()` removidos | 5 |
+| `array_merge()` com argumento nulo | 2 |
+| `create_function(` → *closure* | 1 |
+
+#### Verificação
+
+| Critério | Antes | Depois |
+|---|---|---|
+| `php -l` no 5.6 | 0 erros (nos 211) | **0** |
+| `php -l` no 8.5 | **11 erros** | **0** |
+| `testeagata.php` (pipeline real de relatório) | 5.6 gera PDF, 8.5 dá 500 | **PDF byte-a-byte IDÊNTICO** |
+| leitura de `.odt` por pclzip + caminho `BY_EREG` | — | **idêntico nos dois** |
+
+E o ganho que prova o porte: a bateria do Cemitério foi de **114/116 para 115/116**.
+`cem2_emitecertisen002.php` — a tela que este arquivo atribuía, desde o piloto, ao "diálogo de
+erro do `dbagata/`, cujos construtores PHP 4 não rodam no 8.5" — **ficou idêntica**. Era
+exatamente esse o defeito.
+
+As demais sete baterias ficaram **iguais à linha de base** (itb 116/120, agu 222/224, jur
+144/145, div 148/148, mar 35/35, not 14/14, fis 350/353): zero regressão a partir das mudanças
+no núcleo. Das 1.155 telas dos oito módulos, **11 divergem e nenhuma quebra só no 8.5**.
+
+#### O que ficou deliberadamente intocado
+
+- **`nusoap.php:1731`** — `is_resource($this->fp)` com handle de `fsockopen()`. Diferente dos
+  13 de driver de banco: `fsockopen` **continua devolvendo resource** no PHP 8. Mexer ali seria
+  mudança sem motivo.
+- **`GtkFrame::GtkFrame()`, `GtkButton::GtkButton()`, `GtkCList::GtkCList()`** e afins — são
+  classes da extensão GTK, externas, cujos construtores eu não renomeei.
+- **Mensagens de erro e comentários** que citam `Graph::Graph()` / `Text::Text()` em
+  `jpgraph/lang/{en,de}.inc.php` e `jpgraph.php:2815`.
+- As 6 ocorrências de `"\$subfield{$i}_sum"` em `AgataOOParser.class` e `AgataInterface.class`:
+  **não são offsets, são interpolação** dentro de string de aspas duplas. Distinguem-se pela
+  barra invertida antes do `$`.
+
+### ⚠ 8ª LACUNA: a checagem de `__construct` era por ARQUIVO, e mascarava classes vizinhas
+
+A mais cara até agora, porque **sobreviveu a oito portes** e vive no núcleo.
+
+```python
+has5 = re.search(rb'function\s+__construct\s*\(', b)   # <- arquivo INTEIRO
+for m in re.finditer(rb'\bclass\s+(\w+)', b):
+    if ... and not has5:                                 # <- mascara TODAS as classes
+```
+
+Num arquivo com várias classes, **uma** delas com `__construct` fazia o detector ignorar todas
+as outras. O mesmo regex ainda contava como construtor um **método homônimo de outra classe**,
+por buscar no arquivo inteiro — falso positivo na direção oposta.
+
+Impacto medido na base, com detecção por classe: **42 classes em 5 arquivos, todos já dados
+como portados**.
+
+| Arquivo | Classes escondidas |
+|---|---|
+| `libs/jpgraph/jpgraph.php` | 33 |
+| **`libs/db_stdlib.php` — NÚCLEO** | **3** (`cl_download`, `cl_verificaboletim`, `cl_abre_arquivo`) |
+| `extension/modification/.../libs/db_stdlib.php` | 3 (a cópia que executa) |
+| **`libs/JSON.php` — NÚCLEO** | **2** (`Services_JSON`, `Services_JSON_Error`) |
+| `libs/jpgraph/jpgraph_line.php` | 1 |
+
+Comprovado no runtime, com o bootstrap da aplicação:
+
+```
+PHP 5.6   cl_download->arquivo = 'rp4576_1791136974'   construtor rodou? SIM
+PHP 8.5   cl_download->arquivo = NULL                  construtor rodou? NAO
+```
+
+`cl_download` é do núcleo e monta o nome do arquivo temporário de download. No 8.5 ele ficava
+**nulo**. Corrigido nos 5 arquivos; `enumera.py` e `porta.py` passaram a fatiar o arquivo em
+blocos de classe antes de decidir.
+
+### CATEGORIA NOVA (dbagata): a terceira forma de chamar o construtor antigo
+
+Renomear `function Classe()` para `__construct` quebra quem chamava pelo nome antigo. Já estavam
+tratadas `parent::Classe(` e `$this->Classe(`. Faltava a **chamada estática**:
+
+```php
+class MyPdf extends FPDF {
+    function __construct($o,$u,$f) {
+        FPDF::FPDF($o,$u,$f);        // <- vira "Call to undefined method FPDF::FPDF()"
+```
+
+Correção: `Classe::Classe(` → `Classe::__construct(`, que preserva a semântica exata (chamada
+do método da mãe no contexto do objeto) e funciona nos dois runtimes.
+
+**Duas armadilhas na varredura dessa forma**, ambas encontradas na prática:
+
+1. **Só vale para classes que EU renomeei.** `GtkFrame::GtkFrame()` é a extensão GTK, externa;
+   converter quebraria. A lista de alvos tem de sair das classes que agora têm `__construct`
+   nos arquivos alterados, não de um regex genérico `(\w+)::\1\(`.
+2. **Comentário e string contam como ocorrência.** `jpgraph/lang/en.inc.php` traz
+   `'Image width/height argument in Graph::Graph() must be numeric'` numa tabela de mensagens,
+   e `jpgraph.php:2815` cita `Text::Text()` dentro de `//`. São 4 das 17 ocorrências.
+
+**Como foi descoberta:** não pela varredura, e sim **exercitando o pipeline real** — o
+`testeagata.php` passou a dar 500 no 8.5 *depois* do porte. É a mesma lição das oito lacunas,
+com um agravante: aqui a varredura de remanescentes dizia "0" porque eu derivava a lista de
+nomes do lugar errado.
+
+### CATEGORIA NOVA (dbagata): `array_merge()` com argumento nulo, e o `@` que não suprime mais
+
+```
+                        @array_merge($a, null)
+PHP 5.6:                NULL   (warning, suprimido pelo @)
+PHP 8.5:                TypeError FATAL   -- o @ NAO suprime TypeError
+```
+
+Em `dbagata/classes/reports/AgataReport.class`, linhas 214 e 281. Era o que impedia o
+`testeagata.php` de gerar relatório no 8.5.
+
+Correção fiel, que reproduz o 5.6 **inclusive no resultado `NULL`**:
+
+```php
+$ClearColumns = (is_array($ClearColumns) && is_array($columns))
+              ? array_merge($ClearColumns, $columns) : null;
+```
+
+**O ponto que generaliza:** o operador `@` deixou de ser rede de segurança no PHP 8 para toda
+construção que passou de *warning* a `TypeError`/`ValueError`. Código legado que usa `@` para
+"deixar passar" argumento inválido **falha mesmo com o `@`**. Vale para `array_merge`,
+`pg_*`, `date()`, `sizeof()` e todas as outras já catalogadas aqui.
+
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 
 O texto anterior desta seção dizia que `tmp/`, `storage/` e `arquivos/` eram `775 diego`,
@@ -1978,6 +2125,13 @@ limpas mesmo com `tmp/` liberado. Mas **`iss` está**, com 4 call sites.
 **Consequência prática: `dbagata/` não é urgente agora, e é pré-requisito duro do `iss`** —
 o último e maior módulo da área (400 arquivos). Portá-lo antes do `iss` evita descobrir o
 problema no módulo mais caro.
+
+> **RESOLVIDO.** O `dbagata/` foi portado — ver *Estado: BIBLIOTECA `dbagata/` PORTADA*. Os 11
+> arquivos que só quebravam no 8.5 passam `php -l` nos dois runtimes, o pipeline de relatório
+> gera **PDF byte-a-byte idêntico**, e `cem2_emitecertisen002.php` — a divergência que esta
+> seção previa — ficou idêntica. O refinamento acima estava certo no diagnóstico e **errado na
+> contagem do que importava**: não era 1 arquivo alcançável, era a cadeia inteira de
+> construtores PHP 4 do diálogo de erro.
 
 Nota: existe um jpgraph **fora** do dbagata, em `libs/jpgraph/` (versão 1.14, contra 1.26.1-dev
 do dbagata — são versões diferentes, não cópias). Esse já foi portado no commit `04159b411`.

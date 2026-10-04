@@ -51,7 +51,7 @@ class XML extends Tree
 	  *	@param		optional string argument
 	  *	@returns	none
 	  */
-	function XML($argument = "")
+	function __construct($argument = "")
        	{
 		$success = false;
 		parent::__construct();

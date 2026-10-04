@@ -28,7 +28,7 @@ class pdw_header extends pdw_document
 var $tempname;
 var $parent;
 
-function pdw_header(&$obj, $tempname)
+function __construct(&$obj, $tempname)
 {
 	if (is_object($obj) && get_class($obj)=='pdw_document')
 	{

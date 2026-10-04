@@ -34,7 +34,7 @@ class Icone extends GtkButton
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function Icone($gdkwindow, $imagem, $texto, $dica, $horizontal = false)
+    function __construct($gdkwindow, $imagem, $texto, $dica, $horizontal = false)
     {
         GtkButton::GtkButton();
         $Pixmap = Gdk::pixmap_create_from_xpm($gdkwindow, null, $imagem);
@@ -63,7 +63,7 @@ class IconePixmap extends GtkButton
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function IconePixmap($Pixmap, $texto, $dica, $horizontal = false)
+    function __construct($Pixmap, $texto, $dica, $horizontal = false)
     {
         GtkButton::GtkButton();
         //$Pixmap = Gdk::pixmap_create_from_xpm($gdkwindow, null, $imagem);
@@ -96,7 +96,7 @@ class ToggleIcone extends GtkToggleButton
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function ToggleIcone($imagem, $texto, $dica)
+    function __construct($imagem, $texto, $dica)
     {
         GtkToggleButton::GtkToggleButton();
         $Pixmap = Gdk::pixmap_create_from_xpm(null, null, $imagem);
@@ -122,7 +122,7 @@ class IconeImg extends GtkButton
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function IconeImg($gdkwindow, $imagem, $dica)
+    function __construct($gdkwindow, $imagem, $dica)
     {
         GtkButton::GtkButton();
         $Pixmap = Gdk::pixmap_create_from_xpm($gdkwindow, null, $imagem);

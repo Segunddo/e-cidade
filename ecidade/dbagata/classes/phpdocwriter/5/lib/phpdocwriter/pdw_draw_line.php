@@ -26,11 +26,11 @@ import('phpdocwriter.pdw_drawing');
 class pdw_draw_line extends pdw_drawing
 {
 
-function pdw_draw_line(&$obj,$params)
+function __construct(&$obj,$params)
 {
 	$this->parent =& $obj;
 	$this->params =& $params;
-	parent::pdw_drawing();
+	parent::__construct();
 
 	if (!array_key_exists('x1', $params) || !array_key_exists('y1', $params) || !array_key_exists('x2', $params) || !array_key_exists('y2', $params))
 		$this->_error('You must define x1,y1,x2,y2 to draw a line');

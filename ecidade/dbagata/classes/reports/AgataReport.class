@@ -211,7 +211,10 @@ class AgataReport
                             }
                             
                             $this->BreakMatrix[$break][$column][] = $cellBreakContent;
-                            $ClearColumns = @array_merge($ClearColumns, $columns);
+                            // PHP 5.6: array_merge com argumento nao-array devolvia NULL (o warning era
+                            // suprimido pelo @); no PHP 8 e TypeError, que o @ NAO suprime.
+                            $ClearColumns = (is_array($ClearColumns) && is_array($columns))
+                                          ? array_merge($ClearColumns, $columns) : null;
                         }
                         $FormattedCell = FormatMask($this->Adjustments[$y]['Mask'], $QueryLine[$break]);
                         if ($this->ShowHeader)
@@ -278,7 +281,10 @@ class AgataReport
                     
                     $this->BreakMatrix[$break][$column][] = $cellBreakContent;
                     // colunas afetadas pela fórmula
-                    $ClearColumns = @array_merge($ClearColumns, $columns);
+                    // PHP 5.6: array_merge com argumento nao-array devolvia NULL (o warning era
+                    // suprimido pelo @); no PHP 8 e TypeError, que o @ NAO suprime.
+                    $ClearColumns = (is_array($ClearColumns) && is_array($columns))
+                                  ? array_merge($ClearColumns, $columns) : null;
                     
                     $this->Headers[$CountBreak] = trim($QueryCell);
                 }

@@ -37,7 +37,7 @@ class InputArea
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function InputArea($mensagem, $lenght, $PreText = '')
+    function __construct($mensagem, $lenght, $PreText = '')
     {
         $this->dialog = new GtkWindow;
         $this->dialog->set_title(_a('Question'));

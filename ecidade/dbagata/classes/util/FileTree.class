@@ -34,7 +34,7 @@ class FileTree extends GtkCTree
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function FileTree()
+    function __construct()
     {
         GtkCTree::GtkCTree(1, 0, array(''));
         GtkCTree::set_selection_mode(GTK_SELECTION_SINGLE);

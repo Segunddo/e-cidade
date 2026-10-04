@@ -39,6 +39,20 @@ RX_NEW = re.compile(rb'new\s+(cl_\w+)')
 RX_DAO = re.compile(rb'''getDao\s*\(\s*['"]([A-Za-z0-9_]+)['"]''')
 RX_STR = re.compile(rb'["\']([A-Za-z0-9_]+\.(?:RPC\.)?php)["\']')
 
+def classes_php4(b):
+    """Classes cujo construtor e o metodo homonimo (estilo PHP 4), olhando o corpo de
+    CADA classe isoladamente. Fatiar por `class X` evita dois erros do regex de arquivo
+    inteiro: mascarar classes vizinhas por causa de um __construct alheio, e contar um
+    METODO homonimo de outra classe como se fosse construtor."""
+    pos = [(m.start(), m.group(1)) for m in re.finditer(rb'\bclass\s+(\w+)', b)]
+    out = []
+    for i, (ini, nome) in enumerate(pos):
+        corpo = b[ini: pos[i+1][0] if i+1 < len(pos) else len(b)]
+        if re.search(rb'function\s+__construct\s*\(', corpo, re.I): continue
+        if re.search(rb'function\s+' + re.escape(nome) + rb'\s*\(', corpo, re.I):
+            out.append((nome, ini))
+    return out
+
 _c = {}
 def diretas(p):
     if p in _c: return _c[p]
@@ -111,10 +125,12 @@ for p in universo:
         if n: tot[k] += n; arq[k].add(p); alvos.add(p)
     n = parse_str_1arg(b)
     if n: tot['parse_str 1 arg'] += n; arq['parse_str 1 arg'].add(p); alvos.add(p)
-    has5 = re.search(rb'function\s+__construct\s*\(', b, re.I)
-    for m in re.finditer(rb'\bclass\s+(\w+)', b):
-        if re.search(rb'function\s+'+re.escape(m.group(1))+rb'\s*\(', b, re.I) and not has5:
-            tot['construtor PHP4'] += 1; arq['construtor PHP4'].add(p); alvos.add(p); break
+    # 8a lacuna: a checagem de __construct precisa ser por CLASSE, nao pelo arquivo.
+    # Com a checagem no arquivo inteiro, UMA classe com __construct mascarava todas as
+    # outras do mesmo arquivo -- foi assim que 42 classes do NUCLEO (3 em db_stdlib.php,
+    # 2 em JSON.php, 34 no jpgraph) sobreviveram a oito portes sem serem renomeadas.
+    for nome, _ in classes_php4(b):
+        tot['construtor PHP4'] += 1; arq['construtor PHP4'].add(p); alvos.add(p)
     props = {m.group(1) for m in re.finditer(rb'(?:var|public)\s+\$(\w+)\s*=\s*-?\d+\s*;', b)}
     # Inclui literal NAO-NUMERICO, nao so "". No 5.6 a string nao-numerica era
     # coagida para 0 e casava com a propriedade inteira; no PHP 8 vira comparacao
