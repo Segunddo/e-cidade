@@ -57,7 +57,7 @@ class cl_levvalorpgtos {
                  y68_pgto = date = Pagamento 
                  ";
    //funcao construtor da classe 
-   function cl_levvalorpgtos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("levvalorpgtos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,9 +74,9 @@ class cl_levvalorpgtos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y68_sequencia = ($this->y68_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_sequencia"]:$this->y68_sequencia);
-       $this->y68_seq = ($this->y68_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_seq"]:$this->y68_seq);
-       $this->y68_valor = ($this->y68_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_valor"]:$this->y68_valor);
+       $this->y68_sequencia = (($this->y68_sequencia === 0 || $this->y68_sequencia === 0.0 || $this->y68_sequencia == "")?@$GLOBALS["HTTP_POST_VARS"]["y68_sequencia"]:$this->y68_sequencia);
+       $this->y68_seq = (($this->y68_seq === 0 || $this->y68_seq === 0.0 || $this->y68_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["y68_seq"]:$this->y68_seq);
+       $this->y68_valor = (($this->y68_valor === 0 || $this->y68_valor === 0.0 || $this->y68_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["y68_valor"]:$this->y68_valor);
        if($this->y68_pgto == ""){
          $this->y68_pgto_dia = ($this->y68_pgto_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_pgto_dia"]:$this->y68_pgto_dia);
          $this->y68_pgto_mes = ($this->y68_pgto_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_pgto_mes"]:$this->y68_pgto_mes);
@@ -86,8 +86,8 @@ class cl_levvalorpgtos {
          }
        }
      }else{
-       $this->y68_sequencia = ($this->y68_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_sequencia"]:$this->y68_sequencia);
-       $this->y68_seq = ($this->y68_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_seq"]:$this->y68_seq);
+       $this->y68_sequencia = (($this->y68_sequencia === 0 || $this->y68_sequencia === 0.0 || $this->y68_sequencia == "")?@$GLOBALS["HTTP_POST_VARS"]["y68_sequencia"]:$this->y68_sequencia);
+       $this->y68_seq = (($this->y68_seq === 0 || $this->y68_seq === 0.0 || $this->y68_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["y68_seq"]:$this->y68_seq);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_levvalorpgtos {
      }
        $this->y68_sequencia = $y68_sequencia; 
        $this->y68_seq = $y68_seq; 
-     if(($this->y68_sequencia == null) || ($this->y68_sequencia == "") ){ 
+     if(($this->y68_sequencia == null) || (($this->y68_sequencia === 0 || $this->y68_sequencia === 0.0 || $this->y68_sequencia == "")) ){ 
        $this->erro_sql = " Campo y68_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -121,7 +121,7 @@ class cl_levvalorpgtos {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y68_seq == null) || ($this->y68_seq == "") ){ 
+     if(($this->y68_seq == null) || (($this->y68_seq === 0 || $this->y68_seq === 0.0 || $this->y68_seq == "")) ){ 
        $this->erro_sql = " Campo y68_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -404,7 +404,7 @@ class cl_levvalorpgtos {
    function sql_query ( $y68_sequencia=null,$y68_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_levvalorpgtos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_levvalorpgtos {
    function sql_query_file ( $y68_sequencia=null,$y68_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -476,7 +476,7 @@ class cl_levvalorpgtos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

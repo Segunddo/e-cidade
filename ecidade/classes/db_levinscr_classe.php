@@ -50,7 +50,7 @@ class cl_levinscr {
                  y62_inscr = int4 = Inscricao 
                  ";
    //funcao construtor da classe 
-   function cl_levinscr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("levinscr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_levinscr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y62_codlev = ($this->y62_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y62_codlev"]:$this->y62_codlev);
-       $this->y62_inscr = ($this->y62_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y62_inscr"]:$this->y62_inscr);
+       $this->y62_codlev = (($this->y62_codlev === 0 || $this->y62_codlev === 0.0 || $this->y62_codlev == "")?@$GLOBALS["HTTP_POST_VARS"]["y62_codlev"]:$this->y62_codlev);
+       $this->y62_inscr = (($this->y62_inscr === 0 || $this->y62_inscr === 0.0 || $this->y62_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["y62_inscr"]:$this->y62_inscr);
      }else{
-       $this->y62_codlev = ($this->y62_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y62_codlev"]:$this->y62_codlev);
+       $this->y62_codlev = (($this->y62_codlev === 0 || $this->y62_codlev === 0.0 || $this->y62_codlev == "")?@$GLOBALS["HTTP_POST_VARS"]["y62_codlev"]:$this->y62_codlev);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_levinscr {
        return false;
      }
        $this->y62_codlev = $y62_codlev; 
-     if(($this->y62_codlev == null) || ($this->y62_codlev == "") ){ 
+     if(($this->y62_codlev == null) || (($this->y62_codlev === 0 || $this->y62_codlev === 0.0 || $this->y62_codlev == "")) ){ 
        $this->erro_sql = " Campo y62_codlev nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_levinscr {
    function sql_query ( $y62_codlev=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_levinscr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_levinscr {
    function sql_query_file ( $y62_codlev=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_levinscr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

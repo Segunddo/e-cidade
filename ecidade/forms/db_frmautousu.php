@@ -34,7 +34,7 @@ $clrotulo->label("y59_codauto");
 $clrotulo->label("y50_nome");
 $clrotulo->label("y39_codandam");
 $clrotulo->label("nome");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_fiscais.location.href='fis1_autousu002.php?chavepesquisa=$y56_codauto&chavepesquisa1=$y56_id_usuario&y59_codauto=$y59_codauto&y39_codandam=$y39_codandam'</script>";}

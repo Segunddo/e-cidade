@@ -30,7 +30,7 @@ class cl_db_formulas {
                  db148_ambiente = bool = Variável de Ambiente 
                  ";
    //funcao construtor da classe 
-   function cl_db_formulas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_formulas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_db_formulas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db148_sequencial = ($this->db148_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db148_sequencial"]:$this->db148_sequencial);
+       $this->db148_sequencial = (($this->db148_sequencial === 0 || $this->db148_sequencial === 0.0 || $this->db148_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["db148_sequencial"]:$this->db148_sequencial);
        $this->db148_nome = ($this->db148_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["db148_nome"]:$this->db148_nome);
        $this->db148_descricao = ($this->db148_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db148_descricao"]:$this->db148_descricao);
        $this->db148_formula = ($this->db148_formula == ""?@$GLOBALS["HTTP_POST_VARS"]["db148_formula"]:$this->db148_formula);
        $this->db148_ambiente = ($this->db148_ambiente == "f"?@$GLOBALS["HTTP_POST_VARS"]["db148_ambiente"]:$this->db148_ambiente);
      }else{
-       $this->db148_sequencial = ($this->db148_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db148_sequencial"]:$this->db148_sequencial);
+       $this->db148_sequencial = (($this->db148_sequencial === 0 || $this->db148_sequencial === 0.0 || $this->db148_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["db148_sequencial"]:$this->db148_sequencial);
      }
    }
    // funcao para Inclusão
@@ -122,7 +122,7 @@ class cl_db_formulas {
          }
        }
      }
-     if(($this->db148_sequencial == null) || ($this->db148_sequencial == "") ){ 
+     if(($this->db148_sequencial == null) || (($this->db148_sequencial === 0 || $this->db148_sequencial === 0.0 || $this->db148_sequencial == "")) ){ 
        $this->erro_sql = " Campo db148_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

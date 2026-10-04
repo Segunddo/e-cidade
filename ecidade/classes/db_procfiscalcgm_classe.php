@@ -52,7 +52,7 @@ class cl_procfiscalcgm {
                  y101_procfiscal = int4 = Processo Fiscal 
                  ";
    //funcao construtor da classe 
-   function cl_procfiscalcgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procfiscalcgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_procfiscalcgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y101_sequencial = ($this->y101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y101_sequencial"]:$this->y101_sequencial);
-       $this->y101_numcgm = ($this->y101_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y101_numcgm"]:$this->y101_numcgm);
-       $this->y101_procfiscal = ($this->y101_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y101_procfiscal"]:$this->y101_procfiscal);
+       $this->y101_sequencial = (($this->y101_sequencial === 0 || $this->y101_sequencial === 0.0 || $this->y101_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y101_sequencial"]:$this->y101_sequencial);
+       $this->y101_numcgm = (($this->y101_numcgm === 0 || $this->y101_numcgm === 0.0 || $this->y101_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["y101_numcgm"]:$this->y101_numcgm);
+       $this->y101_procfiscal = (($this->y101_procfiscal === 0 || $this->y101_procfiscal === 0.0 || $this->y101_procfiscal == "")?@$GLOBALS["HTTP_POST_VARS"]["y101_procfiscal"]:$this->y101_procfiscal);
      }else{
-       $this->y101_sequencial = ($this->y101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y101_sequencial"]:$this->y101_sequencial);
+       $this->y101_sequencial = (($this->y101_sequencial === 0 || $this->y101_sequencial === 0.0 || $this->y101_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y101_sequencial"]:$this->y101_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procfiscalcgm {
          $this->y101_sequencial = $y101_sequencial; 
        }
      }
-     if(($this->y101_sequencial == null) || ($this->y101_sequencial == "") ){ 
+     if(($this->y101_sequencial == null) || (($this->y101_sequencial === 0 || $this->y101_sequencial === 0.0 || $this->y101_sequencial == "")) ){ 
        $this->erro_sql = " Campo y101_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_procfiscalcgm {
    function sql_query ( $y101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_procfiscalcgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_procfiscalcgm {
    function sql_query_file ( $y101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_procfiscalcgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

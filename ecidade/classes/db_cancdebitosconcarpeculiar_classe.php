@@ -52,7 +52,7 @@ class cl_cancdebitosconcarpeculiar {
                  k72_concarpeculiar = varchar(100) = Código carac. peculiar 
                  ";
    //funcao construtor da classe 
-   function cl_cancdebitosconcarpeculiar() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cancdebitosconcarpeculiar"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cancdebitosconcarpeculiar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k72_sequencial = ($this->k72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k72_sequencial"]:$this->k72_sequencial);
-       $this->k72_cancdebitos = ($this->k72_cancdebitos == ""?@$GLOBALS["HTTP_POST_VARS"]["k72_cancdebitos"]:$this->k72_cancdebitos);
+       $this->k72_sequencial = (($this->k72_sequencial === 0 || $this->k72_sequencial === 0.0 || $this->k72_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k72_sequencial"]:$this->k72_sequencial);
+       $this->k72_cancdebitos = (($this->k72_cancdebitos === 0 || $this->k72_cancdebitos === 0.0 || $this->k72_cancdebitos == "")?@$GLOBALS["HTTP_POST_VARS"]["k72_cancdebitos"]:$this->k72_cancdebitos);
        $this->k72_concarpeculiar = ($this->k72_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["k72_concarpeculiar"]:$this->k72_concarpeculiar);
      }else{
-       $this->k72_sequencial = ($this->k72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k72_sequencial"]:$this->k72_sequencial);
+       $this->k72_sequencial = (($this->k72_sequencial === 0 || $this->k72_sequencial === 0.0 || $this->k72_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k72_sequencial"]:$this->k72_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cancdebitosconcarpeculiar {
          $this->k72_sequencial = $k72_sequencial; 
        }
      }
-     if(($this->k72_sequencial == null) || ($this->k72_sequencial == "") ){ 
+     if(($this->k72_sequencial == null) || (($this->k72_sequencial === 0 || $this->k72_sequencial === 0.0 || $this->k72_sequencial == "")) ){ 
        $this->erro_sql = " Campo k72_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_cancdebitosconcarpeculiar {
    function sql_query ( $k72_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_cancdebitosconcarpeculiar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_cancdebitosconcarpeculiar {
    function sql_query_file ( $k72_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_cancdebitosconcarpeculiar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -28,7 +28,7 @@ class cl_grupotaxadiversos {
                  y118_procedencia = int4 = Procedência 
                  ";
    //funcao construtor da classe 
-   function cl_grupotaxadiversos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("grupotaxadiversos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_grupotaxadiversos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y118_sequencial = ($this->y118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y118_sequencial"]:$this->y118_sequencial);
+       $this->y118_sequencial = (($this->y118_sequencial === 0 || $this->y118_sequencial === 0.0 || $this->y118_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y118_sequencial"]:$this->y118_sequencial);
        $this->y118_descricao = ($this->y118_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["y118_descricao"]:$this->y118_descricao);
        $this->y118_inflator = ($this->y118_inflator == ""?@$GLOBALS["HTTP_POST_VARS"]["y118_inflator"]:$this->y118_inflator);
-       $this->y118_procedencia = ($this->y118_procedencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y118_procedencia"]:$this->y118_procedencia);
+       $this->y118_procedencia = (($this->y118_procedencia === 0 || $this->y118_procedencia === 0.0 || $this->y118_procedencia == "")?@$GLOBALS["HTTP_POST_VARS"]["y118_procedencia"]:$this->y118_procedencia);
      }else{
-       $this->y118_sequencial = ($this->y118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y118_sequencial"]:$this->y118_sequencial);
+       $this->y118_sequencial = (($this->y118_sequencial === 0 || $this->y118_sequencial === 0.0 || $this->y118_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y118_sequencial"]:$this->y118_sequencial);
      }
    }
    // funcao para Inclusão
@@ -107,7 +107,7 @@ class cl_grupotaxadiversos {
          $this->y118_sequencial = $y118_sequencial; 
        }
      }
-     if(($this->y118_sequencial == null) || ($this->y118_sequencial == "") ){ 
+     if(($this->y118_sequencial == null) || (($this->y118_sequencial === 0 || $this->y118_sequencial === 0.0 || $this->y118_sequencial == "")) ){ 
        $this->erro_sql = " Campo y118_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

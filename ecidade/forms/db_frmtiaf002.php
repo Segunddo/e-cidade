@@ -36,8 +36,8 @@
 		    $result = $cltiafdoc->sql_record($cltiafdoc->sql_query("","*","","y99_codtiaf = $y90_codtiaf".$where));
 		    if ($cltiafdoc->numrows > 0){
 		    	db_fieldsmemory($result,0);
-		    	list($y99_dataini_ano,$y99_dataini_mes,$y99_dataini_dia) = split ("-", $y99_dtini);
-		   		list($y99_datafim_ano,$y99_datafim_mes,$y99_datafim_dia) = split ("-", $y99_dtfim);
+		    	list($y99_dataini_ano,$y99_dataini_mes,$y99_dataini_dia) = explode("-", $y99_dtini);
+		   		list($y99_datafim_ano,$y99_datafim_mes,$y99_datafim_dia) = explode("-", $y99_dtfim);
 		    }else{
 		    	echo "<script>document.form1.novo.click;</script>";
 		    }

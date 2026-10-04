@@ -52,7 +52,7 @@ class cl_cancdebitosprocconcarpeculiar {
                  k74_concarpeculiar = varchar(100) = Código peculiar 
                  ";
    //funcao construtor da classe 
-   function cl_cancdebitosprocconcarpeculiar() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cancdebitosprocconcarpeculiar"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cancdebitosprocconcarpeculiar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k74_sequencial = ($this->k74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_sequencial"]:$this->k74_sequencial);
-       $this->k74_cancdebitosproc = ($this->k74_cancdebitosproc == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_cancdebitosproc"]:$this->k74_cancdebitosproc);
+       $this->k74_sequencial = (($this->k74_sequencial === 0 || $this->k74_sequencial === 0.0 || $this->k74_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k74_sequencial"]:$this->k74_sequencial);
+       $this->k74_cancdebitosproc = (($this->k74_cancdebitosproc === 0 || $this->k74_cancdebitosproc === 0.0 || $this->k74_cancdebitosproc == "")?@$GLOBALS["HTTP_POST_VARS"]["k74_cancdebitosproc"]:$this->k74_cancdebitosproc);
        $this->k74_concarpeculiar = ($this->k74_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_concarpeculiar"]:$this->k74_concarpeculiar);
      }else{
-       $this->k74_sequencial = ($this->k74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_sequencial"]:$this->k74_sequencial);
+       $this->k74_sequencial = (($this->k74_sequencial === 0 || $this->k74_sequencial === 0.0 || $this->k74_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k74_sequencial"]:$this->k74_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cancdebitosprocconcarpeculiar {
          $this->k74_sequencial = $k74_sequencial; 
        }
      }
-     if(($this->k74_sequencial == null) || ($this->k74_sequencial == "") ){ 
+     if(($this->k74_sequencial == null) || (($this->k74_sequencial === 0 || $this->k74_sequencial === 0.0 || $this->k74_sequencial == "")) ){ 
        $this->erro_sql = " Campo k74_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_cancdebitosprocconcarpeculiar {
    function sql_query ( $k74_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_cancdebitosprocconcarpeculiar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_cancdebitosprocconcarpeculiar {
    function sql_query_file ( $k74_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_cancdebitosprocconcarpeculiar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

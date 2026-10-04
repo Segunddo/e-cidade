@@ -58,7 +58,7 @@ $clrotulo->label("z01_nome");
 $clcadtipo->rotulo->label();
 
 $db_opcao = 1;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 
 if ( isset($importar) ) {
   $result_fiscais=$cllevusu->sql_record($cllevusu->sql_query_file($y60_codlev));

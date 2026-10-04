@@ -48,7 +48,7 @@ class cl_cadfiscais {
                  id_usuario = int4 = Cod. Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_cadfiscais() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadfiscais"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -65,16 +65,16 @@ class cl_cadfiscais {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_usuario = (($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
      }else{
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_usuario = (($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
      }
    }
    // funcao para inclusao
    function incluir ($id_usuario){ 
       $this->atualizacampos();
        $this->id_usuario = $id_usuario; 
-     if(($this->id_usuario == null) || ($this->id_usuario == "") ){ 
+     if(($this->id_usuario == null) || (($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "")) ){ 
        $this->erro_sql = " Campo id_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -274,7 +274,7 @@ class cl_cadfiscais {
    function sql_query ( $id_usuario=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -296,7 +296,7 @@ class cl_cadfiscais {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -308,7 +308,7 @@ class cl_cadfiscais {
    function sql_query_depto ( $id_usuario=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -331,7 +331,7 @@ class cl_cadfiscais {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -343,7 +343,7 @@ class cl_cadfiscais {
    function sql_query_descrdepto ( $id_usuario=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -367,7 +367,7 @@ class cl_cadfiscais {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -379,7 +379,7 @@ class cl_cadfiscais {
    function sql_query_file ( $id_usuario=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_cadfiscais {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

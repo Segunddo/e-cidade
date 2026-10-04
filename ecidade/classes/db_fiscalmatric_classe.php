@@ -50,7 +50,7 @@ class cl_fiscalmatric {
                  y35_matric = int4 = Inscrição Imóvel 
                  ";
    //funcao construtor da classe 
-   function cl_fiscalmatric() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscalmatric"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_fiscalmatric {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y35_codnoti = ($this->y35_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y35_codnoti"]:$this->y35_codnoti);
-       $this->y35_matric = ($this->y35_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y35_matric"]:$this->y35_matric);
+       $this->y35_codnoti = (($this->y35_codnoti === 0 || $this->y35_codnoti === 0.0 || $this->y35_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y35_codnoti"]:$this->y35_codnoti);
+       $this->y35_matric = (($this->y35_matric === 0 || $this->y35_matric === 0.0 || $this->y35_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["y35_matric"]:$this->y35_matric);
      }else{
-       $this->y35_codnoti = ($this->y35_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y35_codnoti"]:$this->y35_codnoti);
+       $this->y35_codnoti = (($this->y35_codnoti === 0 || $this->y35_codnoti === 0.0 || $this->y35_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y35_codnoti"]:$this->y35_codnoti);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_fiscalmatric {
        return false;
      }
        $this->y35_codnoti = $y35_codnoti; 
-     if(($this->y35_codnoti == null) || ($this->y35_codnoti == "") ){ 
+     if(($this->y35_codnoti == null) || (($this->y35_codnoti === 0 || $this->y35_codnoti === 0.0 || $this->y35_codnoti == "")) ){ 
        $this->erro_sql = " Campo y35_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_fiscalmatric {
    function sql_query ( $y35_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -332,7 +332,7 @@ class cl_fiscalmatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -344,7 +344,7 @@ class cl_fiscalmatric {
    function sql_query_file ( $y35_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_fiscalmatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

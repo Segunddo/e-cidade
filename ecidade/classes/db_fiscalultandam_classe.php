@@ -50,7 +50,7 @@ class cl_fiscalultandam {
                  y19_codandam = int8 = Codigo do Andamento Gerado 
                  ";
    //funcao construtor da classe 
-   function cl_fiscalultandam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscalultandam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_fiscalultandam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y19_codnoti = ($this->y19_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y19_codnoti"]:$this->y19_codnoti);
-       $this->y19_codandam = ($this->y19_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y19_codandam"]:$this->y19_codandam);
+       $this->y19_codnoti = (($this->y19_codnoti === 0 || $this->y19_codnoti === 0.0 || $this->y19_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y19_codnoti"]:$this->y19_codnoti);
+       $this->y19_codandam = (($this->y19_codandam === 0 || $this->y19_codandam === 0.0 || $this->y19_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y19_codandam"]:$this->y19_codandam);
      }else{
-       $this->y19_codnoti = ($this->y19_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y19_codnoti"]:$this->y19_codnoti);
-       $this->y19_codandam = ($this->y19_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y19_codandam"]:$this->y19_codandam);
+       $this->y19_codnoti = (($this->y19_codnoti === 0 || $this->y19_codnoti === 0.0 || $this->y19_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y19_codnoti"]:$this->y19_codnoti);
+       $this->y19_codandam = (($this->y19_codandam === 0 || $this->y19_codandam === 0.0 || $this->y19_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y19_codandam"]:$this->y19_codandam);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_fiscalultandam {
       $this->atualizacampos();
        $this->y19_codnoti = $y19_codnoti; 
        $this->y19_codandam = $y19_codandam; 
-     if(($this->y19_codnoti == null) || ($this->y19_codnoti == "") ){ 
+     if(($this->y19_codnoti == null) || (($this->y19_codnoti === 0 || $this->y19_codnoti === 0.0 || $this->y19_codnoti == "")) ){ 
        $this->erro_sql = " Campo y19_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_fiscalultandam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y19_codandam == null) || ($this->y19_codandam == "") ){ 
+     if(($this->y19_codandam == null) || (($this->y19_codandam === 0 || $this->y19_codandam === 0.0 || $this->y19_codandam == "")) ){ 
        $this->erro_sql = " Campo y19_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_fiscalultandam {
    function sql_query ( $y19_codnoti=null,$y19_codandam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -352,7 +352,7 @@ class cl_fiscalultandam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_fiscalultandam {
    function sql_query_file ( $y19_codnoti=null,$y19_codandam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_fiscalultandam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

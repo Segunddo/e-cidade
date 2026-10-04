@@ -33,7 +33,7 @@ $clrotulo->label("y70_data");
 $clrotulo->label("y39_codandam");
 $clrotulo->label("nome");
 $aux = new cl_arquivo_auxiliar;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_fiscais.location.href='fis1_vistusuario002.php?chavepesquisa=$y75_codvist&chavepesquisa1=$y75_id_usuario&y39_codandam=$y39_codandam'</script>";}

@@ -856,7 +856,7 @@ if (!function_exists("db_selectrecord")) {
                 $nomedescr = $nome . "descr";
             }
 
-            if (is_resource($record)) {
+            if (is_resource($record) || is_object($record)) {
                 for ($sqli = 0; $sqli < pg_numrows($record); $sqli++) {
                     if (pg_result($record, $sqli, 0) == @ $GLOBALS[$nome]) {
                         $nomec = pg_fieldname($record, 1);

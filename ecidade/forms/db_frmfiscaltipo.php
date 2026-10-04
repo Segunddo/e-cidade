@@ -34,7 +34,7 @@ $clrotulo->label("y30_data");
 $clrotulo->label("y30_dtvenc");
 $clrotulo->label("y29_descr");
 $clrotulo->label("y39_codandam");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_fiscaltipo.location.href='fis1_fiscaltipo002.php?chavepesquisa=$y31_codnoti&chavepesquisa1=$y31_codtipo'</script>";

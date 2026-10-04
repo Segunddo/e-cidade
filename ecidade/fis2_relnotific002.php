@@ -38,7 +38,7 @@ $clrotulo->label('y30_nome');
 $clrotulo->label('descrdepto');
 $and = "";
 $where = " y30_instit = ".db_getsession('DB_instit') ;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 if ($setorfiscal != 0) {
   $where .= " and y30_setor = $setorfiscal ";

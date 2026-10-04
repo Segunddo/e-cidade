@@ -60,7 +60,7 @@ class cl_inflan {
                  i01_calc = int4 = Tipo de calculo 
                  ";
    //funcao construtor da classe 
-   function cl_inflan() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("inflan"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,7 +83,7 @@ class cl_inflan {
        $this->i01_dm = ($this->i01_dm == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_dm"]:$this->i01_dm);
        $this->i01_tipo = ($this->i01_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_tipo"]:$this->i01_tipo);
        $this->i01_percen = ($this->i01_percen == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_percen"]:$this->i01_percen);
-       $this->i01_calc = ($this->i01_calc == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_calc"]:$this->i01_calc);
+       $this->i01_calc = (($this->i01_calc === 0 || $this->i01_calc === 0.0 || $this->i01_calc == "")?@$GLOBALS["HTTP_POST_VARS"]["i01_calc"]:$this->i01_calc);
      }else{
        $this->i01_codigo = ($this->i01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_codigo"]:$this->i01_codigo);
      }
@@ -443,7 +443,7 @@ class cl_inflan {
    function sql_query ( $i01_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -464,7 +464,7 @@ class cl_inflan {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_inflan {
    function sql_query_file ( $i01_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -498,7 +498,7 @@ class cl_inflan {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -369,8 +369,8 @@ if(isset($procreg) && $procreg == 't'){
     if (isset($numrows) && $numrows == 0 ){
 	 db_msgbox("Nenhum registro para o filtro selecionado !");	
     }
-    $codigo_k02 = split(",",$codreceita);
-    $codigo_v03 = split(",",$cod_v03_codigo);
+    $codigo_k02 = explode(",",$codreceita);
+    $codigo_v03 = explode(",",$cod_v03_codigo);
     $sqlerro=false;
    
     db_inicio_transacao();
@@ -464,7 +464,7 @@ if(isset($procreg) && $procreg == 't'){
 	  $cldivida->v01_livro   =  "";
 	  $cldivida->v01_folha   =  "";
 
-	  $dt_venc=split("/",$k00_dtvenc);
+	  $dt_venc=explode("/",$k00_dtvenc);
 	  $dt_venc_data = $dt_venc[2]."-".$dt_venc[1]."-".$dt_venc[0];
 //	  $cldivida->v01_dtvenc  = $dt_venc_data;
 	  if (isset($uni) && $uni == 'p'){
@@ -473,7 +473,7 @@ if(isset($procreg) && $procreg == 't'){
 	     $cldivida->v01_dtvenc  = $dt_venc_data;
 	  }
 //	  die($cldivida->v01_dtvenc);
-	  $dt_oper=split("/",$k00_dtoper);
+	  $dt_oper=explode("/",$k00_dtoper);
 	  $dt_oper_data = $dt_oper[2]."-".$dt_oper[1]."-".$dt_oper[0];
 	  $cldivida->v01_dtoper  = $dt_oper_data;
 	  $cldivida->v01_valor   = $val;

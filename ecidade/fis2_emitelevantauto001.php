@@ -38,7 +38,7 @@ $clrotulo->label("z01_nome");
 $clrotulo->label("z01_numcgm");
 $clrotulo->label("q02_inscr");
 $db_opcao = 1;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 ?>
 <html>
 <head>

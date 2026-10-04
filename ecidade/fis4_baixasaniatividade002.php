@@ -35,7 +35,7 @@ require_once(modification("classes/db_sanitario_classe.php"));
 require_once(modification("classes/db_sanibaixa_classe.php"));
 require_once(modification("classes/db_sanibaixaproc_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clsaniatividade = new cl_saniatividade;
@@ -56,7 +56,7 @@ if(isset($HTTP_POST_VARS["db_opcao"]) && $db_opcao == "Alterar"){
 	$sqlerro = false;
   if(isset($chaves) && $chaves != ""){
     db_inicio_transacao();
-    $chaves = split("#",$chaves);
+    $chaves = explode("#",$chaves);
     $db_opcao = 2;
     $HTTP_POST_VARS["y83_dtfim_dia"] = "";
     $HTTP_POST_VARS["y83_dtfim_mes"] = "";

@@ -52,7 +52,7 @@ class cl_autotipobaixaprocproc {
                  y114_processo = int8 = Processo 
                  ";
    //funcao construtor da classe 
-   function cl_autotipobaixaprocproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("autotipobaixaprocproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_autotipobaixaprocproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y114_sequencial = ($this->y114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_sequencial"]:$this->y114_sequencial);
-       $this->y114_baixaproc = ($this->y114_baixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_baixaproc"]:$this->y114_baixaproc);
-       $this->y114_processo = ($this->y114_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_processo"]:$this->y114_processo);
+       $this->y114_sequencial = (($this->y114_sequencial === 0 || $this->y114_sequencial === 0.0 || $this->y114_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y114_sequencial"]:$this->y114_sequencial);
+       $this->y114_baixaproc = (($this->y114_baixaproc === 0 || $this->y114_baixaproc === 0.0 || $this->y114_baixaproc == "")?@$GLOBALS["HTTP_POST_VARS"]["y114_baixaproc"]:$this->y114_baixaproc);
+       $this->y114_processo = (($this->y114_processo === 0 || $this->y114_processo === 0.0 || $this->y114_processo == "")?@$GLOBALS["HTTP_POST_VARS"]["y114_processo"]:$this->y114_processo);
      }else{
-       $this->y114_sequencial = ($this->y114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_sequencial"]:$this->y114_sequencial);
+       $this->y114_sequencial = (($this->y114_sequencial === 0 || $this->y114_sequencial === 0.0 || $this->y114_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y114_sequencial"]:$this->y114_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_autotipobaixaprocproc {
          $this->y114_sequencial = $y114_sequencial; 
        }
      }
-     if(($this->y114_sequencial == null) || ($this->y114_sequencial == "") ){ 
+     if(($this->y114_sequencial == null) || (($this->y114_sequencial === 0 || $this->y114_sequencial === 0.0 || $this->y114_sequencial == "")) ){ 
        $this->erro_sql = " Campo y114_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_autotipobaixaprocproc {
    function sql_query ( $y114_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_autotipobaixaprocproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_autotipobaixaprocproc {
    function sql_query_file ( $y114_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_autotipobaixaprocproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -57,7 +57,7 @@ class cl_informacaodebito {
                  k163_numpar = int4 = Parcela 
                  ";
    //funcao construtor da classe 
-   function cl_informacaodebito() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("informacaodebito"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_informacaodebito {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k163_sequencial = ($this->k163_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_sequencial"]:$this->k163_sequencial);
-       $this->k163_numpre = ($this->k163_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_numpre"]:$this->k163_numpre);
+       $this->k163_sequencial = (($this->k163_sequencial === 0 || $this->k163_sequencial === 0.0 || $this->k163_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k163_sequencial"]:$this->k163_sequencial);
+       $this->k163_numpre = (($this->k163_numpre === 0 || $this->k163_numpre === 0.0 || $this->k163_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k163_numpre"]:$this->k163_numpre);
        if($this->k163_data == ""){
          $this->k163_data_dia = ($this->k163_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_data_dia"]:$this->k163_data_dia);
          $this->k163_data_mes = ($this->k163_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_data_mes"]:$this->k163_data_mes);
@@ -84,9 +84,9 @@ class cl_informacaodebito {
             $this->k163_data = $this->k163_data_ano."-".$this->k163_data_mes."-".$this->k163_data_dia;
          }
        }
-       $this->k163_numpar = ($this->k163_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_numpar"]:$this->k163_numpar);
+       $this->k163_numpar = (($this->k163_numpar === 0 || $this->k163_numpar === 0.0 || $this->k163_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["k163_numpar"]:$this->k163_numpar);
      }else{
-       $this->k163_sequencial = ($this->k163_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_sequencial"]:$this->k163_sequencial);
+       $this->k163_sequencial = (($this->k163_sequencial === 0 || $this->k163_sequencial === 0.0 || $this->k163_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k163_sequencial"]:$this->k163_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_informacaodebito {
          $this->k163_sequencial = $k163_sequencial; 
        }
      }
-     if(($this->k163_sequencial == null) || ($this->k163_sequencial == "") ){ 
+     if(($this->k163_sequencial == null) || (($this->k163_sequencial === 0 || $this->k163_sequencial === 0.0 || $this->k163_sequencial == "")) ){ 
        $this->erro_sql = " Campo k163_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -415,7 +415,7 @@ class cl_informacaodebito {
    function sql_query ( $k163_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_informacaodebito {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -449,7 +449,7 @@ class cl_informacaodebito {
    function sql_query_file ( $k163_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_informacaodebito {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

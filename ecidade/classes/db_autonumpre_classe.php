@@ -50,7 +50,7 @@ class cl_autonumpre {
                  y17_codauto = int4 = Código do Auto de Infração
                  ";
    //funcao construtor da classe
-   function cl_autonumpre() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("autonumpre");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_autonumpre {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y17_numpre = ($this->y17_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["y17_numpre"]:$this->y17_numpre);
-       $this->y17_codauto = ($this->y17_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y17_codauto"]:$this->y17_codauto);
+       $this->y17_numpre = (($this->y17_numpre === 0 || $this->y17_numpre === 0.0 || $this->y17_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["y17_numpre"]:$this->y17_numpre);
+       $this->y17_codauto = (($this->y17_codauto === 0 || $this->y17_codauto === 0.0 || $this->y17_codauto == "")?@$GLOBALS["HTTP_POST_VARS"]["y17_codauto"]:$this->y17_codauto);
      }else{
      }
    }
@@ -252,7 +252,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $oid = null,$campos="autonumpre.oid,*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -276,7 +276,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -288,7 +288,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -306,7 +306,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -318,7 +318,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_val ( $oid = null,$campos="autonumpre.oid,*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -343,7 +343,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

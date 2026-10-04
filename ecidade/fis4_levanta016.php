@@ -37,7 +37,7 @@ include(modification("classes/db_levvalor_classe.php"));
 include(modification("classes/db_levusu_classe.php"));
 include(modification("classes/db_levvalorpgtos_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $cllevanta = new cl_levanta;
 $cllevantanotas = new cl_levantanotas;

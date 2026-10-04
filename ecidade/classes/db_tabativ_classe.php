@@ -81,7 +81,7 @@ class cl_tabativ {
                  q07_imprimealvara = varchar(10) = Imprime Alvará
                  ";
    //funcao construtor da classe
-   function cl_tabativ() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tabativ");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -98,9 +98,9 @@ class cl_tabativ {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q07_inscr = ($this->q07_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_inscr"]:$this->q07_inscr);
-       $this->q07_seq = ($this->q07_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_seq"]:$this->q07_seq);
-       $this->q07_ativ = ($this->q07_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_ativ"]:$this->q07_ativ);
+       $this->q07_inscr = (($this->q07_inscr === 0 || $this->q07_inscr === 0.0 || $this->q07_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q07_inscr"]:$this->q07_inscr);
+       $this->q07_seq = (($this->q07_seq === 0 || $this->q07_seq === 0.0 || $this->q07_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["q07_seq"]:$this->q07_seq);
+       $this->q07_ativ = (($this->q07_ativ === 0 || $this->q07_ativ === 0.0 || $this->q07_ativ == "")?@$GLOBALS["HTTP_POST_VARS"]["q07_ativ"]:$this->q07_ativ);
        if($this->q07_datain == ""){
          $this->q07_datain_dia = ($this->q07_datain_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_datain_dia"]:$this->q07_datain_dia);
          $this->q07_datain_mes = ($this->q07_datain_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_datain_mes"]:$this->q07_datain_mes);
@@ -125,15 +125,15 @@ class cl_tabativ {
             $this->q07_databx = $this->q07_databx_ano."-".$this->q07_databx_mes."-".$this->q07_databx_dia;
          }
        }
-       $this->q07_quant = ($this->q07_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_quant"]:$this->q07_quant);
+       $this->q07_quant = (($this->q07_quant === 0 || $this->q07_quant === 0.0 || $this->q07_quant == "")?@$GLOBALS["HTTP_POST_VARS"]["q07_quant"]:$this->q07_quant);
        $this->q07_tipbx = ($this->q07_tipbx == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_tipbx"]:$this->q07_tipbx);
        $this->q07_perman = ($this->q07_perman == "f"?@$GLOBALS["HTTP_POST_VARS"]["q07_perman"]:$this->q07_perman);
        $this->q07_horaini = ($this->q07_horaini == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_horaini"]:$this->q07_horaini);
        $this->q07_horafim = ($this->q07_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_horafim"]:$this->q07_horafim);
        $this->q07_imprimealvara = ($this->q07_imprimealvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_imprimealvara"]:$this->q07_imprimealvara);
      }else{
-       $this->q07_inscr = ($this->q07_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_inscr"]:$this->q07_inscr);
-       $this->q07_seq = ($this->q07_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_seq"]:$this->q07_seq);
+       $this->q07_inscr = (($this->q07_inscr === 0 || $this->q07_inscr === 0.0 || $this->q07_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q07_inscr"]:$this->q07_inscr);
+       $this->q07_seq = (($this->q07_seq === 0 || $this->q07_seq === 0.0 || $this->q07_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["q07_seq"]:$this->q07_seq);
      }
      $this->q07_val_ativ_int = ($this->q07_val_ativ_int == ""?@$GLOBALS["HTTP_POST_VARS"]["q07_val_ativ_int"]:$this->q07_val_ativ_int);
    }
@@ -187,7 +187,7 @@ class cl_tabativ {
      }
        $this->q07_inscr = $q07_inscr;
        $this->q07_seq = $q07_seq;
-     if(($this->q07_inscr == null) || ($this->q07_inscr == "") ){
+     if(($this->q07_inscr == null) || (($this->q07_inscr === 0 || $this->q07_inscr === 0.0 || $this->q07_inscr == "")) ){
        $this->erro_sql = " Campo q07_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -195,7 +195,7 @@ class cl_tabativ {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q07_seq == null) || ($this->q07_seq == "") ){
+     if(($this->q07_seq == null) || (($this->q07_seq === 0 || $this->q07_seq === 0.0 || $this->q07_seq == "")) ){
        $this->erro_sql = " Campo q07_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

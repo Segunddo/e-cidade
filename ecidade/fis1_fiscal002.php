@@ -34,12 +34,12 @@ include(modification("classes/db_fiscalocal_classe.php"));
 include(modification("classes/db_fiscexec_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_procfiscalnotificacao_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 if(!isset($abas)){
   echo "<script>location.href='fis1_fiscal005.php?db_opcao=2'</script>";
   exit;
 }
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clfiscal     = new cl_fiscal;
 $clfiscalocal = new cl_fiscalocal;

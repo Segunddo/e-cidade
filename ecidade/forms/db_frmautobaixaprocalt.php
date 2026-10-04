@@ -81,7 +81,7 @@ $clrotulo->label("p58_requer");
     
 <?
 if (isset($y87_dtbaixa)&&$y87_dtbaixa!=""){
-    $data=split('-',$y87_dtbaixa);
+    $data=explode('-',$y87_dtbaixa);
     $q07_databx_ano=$data[0];
     $q07_databx_mes=$data[1];
     $q07_databx_dia=$data[2];

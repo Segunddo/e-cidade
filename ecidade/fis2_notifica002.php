@@ -40,7 +40,7 @@ $clautonumpre = new cl_autonumpre;
 $clrotulo = new rotulocampo;
 $clrotulo->label('y50_codauto');
 $clrotulo->label('y50_nome');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 $pdf = new PDF1();
 $pdf->Open();
@@ -52,7 +52,7 @@ $pdf->setfont('arial','b',8);
 $result_infoauto=$clauto->sql_record($clauto->sql_query_infoautos($codauto));
 if ($clauto->numrows>0){
   db_fieldsmemory($result_infoauto,0);
-  $data=split('-',$data);
+  $data=explode('-',$data);
   $dia=$data[2];
   $mes=$data[1];
   $ano=$data[0];

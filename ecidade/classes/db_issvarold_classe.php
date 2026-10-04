@@ -68,7 +68,7 @@ class cl_issvarold {
                  q22_vlrinf = float8 = valor contribuinte 
                  ";
    //funcao construtor da classe 
-   function cl_issvarold() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issvarold"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,17 +85,17 @@ class cl_issvarold {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q22_codlev = ($this->q22_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_codlev"]:$this->q22_codlev);
-       $this->q22_codigo = ($this->q22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_codigo"]:$this->q22_codigo);
-       $this->q22_numpre = ($this->q22_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_numpre"]:$this->q22_numpre);
-       $this->q22_numpar = ($this->q22_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_numpar"]:$this->q22_numpar);
-       $this->q22_valor = ($this->q22_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_valor"]:$this->q22_valor);
-       $this->q22_ano = ($this->q22_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_ano"]:$this->q22_ano);
-       $this->q22_mes = ($this->q22_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_mes"]:$this->q22_mes);
+       $this->q22_codlev = (($this->q22_codlev === 0 || $this->q22_codlev === 0.0 || $this->q22_codlev == "")?@$GLOBALS["HTTP_POST_VARS"]["q22_codlev"]:$this->q22_codlev);
+       $this->q22_codigo = (($this->q22_codigo === 0 || $this->q22_codigo === 0.0 || $this->q22_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["q22_codigo"]:$this->q22_codigo);
+       $this->q22_numpre = (($this->q22_numpre === 0 || $this->q22_numpre === 0.0 || $this->q22_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["q22_numpre"]:$this->q22_numpre);
+       $this->q22_numpar = (($this->q22_numpar === 0 || $this->q22_numpar === 0.0 || $this->q22_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["q22_numpar"]:$this->q22_numpar);
+       $this->q22_valor = (($this->q22_valor === 0 || $this->q22_valor === 0.0 || $this->q22_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["q22_valor"]:$this->q22_valor);
+       $this->q22_ano = (($this->q22_ano === 0 || $this->q22_ano === 0.0 || $this->q22_ano == "")?@$GLOBALS["HTTP_POST_VARS"]["q22_ano"]:$this->q22_ano);
+       $this->q22_mes = (($this->q22_mes === 0 || $this->q22_mes === 0.0 || $this->q22_mes == "")?@$GLOBALS["HTTP_POST_VARS"]["q22_mes"]:$this->q22_mes);
        $this->q22_histor = ($this->q22_histor == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_histor"]:$this->q22_histor);
-       $this->q22_aliq = ($this->q22_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_aliq"]:$this->q22_aliq);
-       $this->q22_bruto = ($this->q22_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_bruto"]:$this->q22_bruto);
-       $this->q22_vlrinf = ($this->q22_vlrinf == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_vlrinf"]:$this->q22_vlrinf);
+       $this->q22_aliq = (($this->q22_aliq === 0 || $this->q22_aliq === 0.0 || $this->q22_aliq == "")?@$GLOBALS["HTTP_POST_VARS"]["q22_aliq"]:$this->q22_aliq);
+       $this->q22_bruto = (($this->q22_bruto === 0 || $this->q22_bruto === 0.0 || $this->q22_bruto == "")?@$GLOBALS["HTTP_POST_VARS"]["q22_bruto"]:$this->q22_bruto);
+       $this->q22_vlrinf = (($this->q22_vlrinf === 0 || $this->q22_vlrinf === 0.0 || $this->q22_vlrinf == "")?@$GLOBALS["HTTP_POST_VARS"]["q22_vlrinf"]:$this->q22_vlrinf);
      }else{
      }
    }
@@ -495,7 +495,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $oid = null,$campos="issvarold.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -516,7 +516,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -528,7 +528,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -546,7 +546,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

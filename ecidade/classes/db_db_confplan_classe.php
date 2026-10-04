@@ -56,7 +56,7 @@ class cl_db_confplan {
                  w10_dia = int4 = Dia Vencimento 
                  ";
    //funcao construtor da classe 
-   function cl_db_confplan() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_confplan"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,11 +73,11 @@ class cl_db_confplan {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->w10_valor = ($this->w10_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["w10_valor"]:$this->w10_valor);
-       $this->w10_receit = ($this->w10_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["w10_receit"]:$this->w10_receit);
-       $this->w10_hist = ($this->w10_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["w10_hist"]:$this->w10_hist);
-       $this->w10_tipo = ($this->w10_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["w10_tipo"]:$this->w10_tipo);
-       $this->w10_dia = ($this->w10_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["w10_dia"]:$this->w10_dia);
+       $this->w10_valor = (($this->w10_valor === 0 || $this->w10_valor === 0.0 || $this->w10_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["w10_valor"]:$this->w10_valor);
+       $this->w10_receit = (($this->w10_receit === 0 || $this->w10_receit === 0.0 || $this->w10_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["w10_receit"]:$this->w10_receit);
+       $this->w10_hist = (($this->w10_hist === 0 || $this->w10_hist === 0.0 || $this->w10_hist == "")?@$GLOBALS["HTTP_POST_VARS"]["w10_hist"]:$this->w10_hist);
+       $this->w10_tipo = (($this->w10_tipo === 0 || $this->w10_tipo === 0.0 || $this->w10_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["w10_tipo"]:$this->w10_tipo);
+       $this->w10_dia = (($this->w10_dia === 0 || $this->w10_dia === 0.0 || $this->w10_dia == "")?@$GLOBALS["HTTP_POST_VARS"]["w10_dia"]:$this->w10_dia);
      }else{
      }
    }
@@ -351,7 +351,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $oid = null,$campos="db_confplan.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -377,7 +377,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

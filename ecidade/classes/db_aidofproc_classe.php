@@ -52,7 +52,7 @@ class cl_aidofproc {
                  y02_codproc = int4 = Código do processo 
                  ";
    //funcao construtor da classe 
-   function cl_aidofproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aidofproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_aidofproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y02_codigo = ($this->y02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
-       $this->y02_aidof = ($this->y02_aidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_aidof"]:$this->y02_aidof);
-       $this->y02_codproc = ($this->y02_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codproc"]:$this->y02_codproc);
+       $this->y02_codigo = (($this->y02_codigo === 0 || $this->y02_codigo === 0.0 || $this->y02_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
+       $this->y02_aidof = (($this->y02_aidof === 0 || $this->y02_aidof === 0.0 || $this->y02_aidof == "")?@$GLOBALS["HTTP_POST_VARS"]["y02_aidof"]:$this->y02_aidof);
+       $this->y02_codproc = (($this->y02_codproc === 0 || $this->y02_codproc === 0.0 || $this->y02_codproc == "")?@$GLOBALS["HTTP_POST_VARS"]["y02_codproc"]:$this->y02_codproc);
      }else{
-       $this->y02_codigo = ($this->y02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
+       $this->y02_codigo = (($this->y02_codigo === 0 || $this->y02_codigo === 0.0 || $this->y02_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aidofproc {
          $this->y02_codigo = $y02_codigo; 
        }
      }
-     if(($this->y02_codigo == null) || ($this->y02_codigo == "") ){ 
+     if(($this->y02_codigo == null) || (($this->y02_codigo === 0 || $this->y02_codigo === 0.0 || $this->y02_codigo == "")) ){ 
        $this->erro_sql = " Campo y02_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_aidofproc {
    function sql_query ( $y02_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_aidofproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_aidofproc {
    function sql_query_file ( $y02_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_aidofproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

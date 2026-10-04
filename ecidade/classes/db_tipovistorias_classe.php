@@ -64,7 +64,7 @@ class cl_tipovistorias {
                  y77_instit = int4 = Cod. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_tipovistorias() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipovistorias"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_tipovistorias {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y77_codtipo = ($this->y77_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y77_codtipo"]:$this->y77_codtipo);
+       $this->y77_codtipo = (($this->y77_codtipo === 0 || $this->y77_codtipo === 0.0 || $this->y77_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y77_codtipo"]:$this->y77_codtipo);
        $this->y77_descricao = ($this->y77_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["y77_descricao"]:$this->y77_descricao);
        $this->y77_obs = ($this->y77_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y77_obs"]:$this->y77_obs);
-       $this->y77_coddepto = ($this->y77_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["y77_coddepto"]:$this->y77_coddepto);
-       $this->y77_tipoandam = ($this->y77_tipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y77_tipoandam"]:$this->y77_tipoandam);
-       $this->y77_dias = ($this->y77_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["y77_dias"]:$this->y77_dias);
-       $this->y77_diasgeral = ($this->y77_diasgeral == ""?@$GLOBALS["HTTP_POST_VARS"]["y77_diasgeral"]:$this->y77_diasgeral);
-       $this->y77_mesgeral = ($this->y77_mesgeral == ""?@$GLOBALS["HTTP_POST_VARS"]["y77_mesgeral"]:$this->y77_mesgeral);
-       $this->y77_instit = ($this->y77_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y77_instit"]:$this->y77_instit);
+       $this->y77_coddepto = (($this->y77_coddepto === 0 || $this->y77_coddepto === 0.0 || $this->y77_coddepto == "")?@$GLOBALS["HTTP_POST_VARS"]["y77_coddepto"]:$this->y77_coddepto);
+       $this->y77_tipoandam = (($this->y77_tipoandam === 0 || $this->y77_tipoandam === 0.0 || $this->y77_tipoandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y77_tipoandam"]:$this->y77_tipoandam);
+       $this->y77_dias = (($this->y77_dias === 0 || $this->y77_dias === 0.0 || $this->y77_dias == "")?@$GLOBALS["HTTP_POST_VARS"]["y77_dias"]:$this->y77_dias);
+       $this->y77_diasgeral = (($this->y77_diasgeral === 0 || $this->y77_diasgeral === 0.0 || $this->y77_diasgeral == "")?@$GLOBALS["HTTP_POST_VARS"]["y77_diasgeral"]:$this->y77_diasgeral);
+       $this->y77_mesgeral = (($this->y77_mesgeral === 0 || $this->y77_mesgeral === 0.0 || $this->y77_mesgeral == "")?@$GLOBALS["HTTP_POST_VARS"]["y77_mesgeral"]:$this->y77_mesgeral);
+       $this->y77_instit = (($this->y77_instit === 0 || $this->y77_instit === 0.0 || $this->y77_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["y77_instit"]:$this->y77_instit);
      }else{
-       $this->y77_codtipo = ($this->y77_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y77_codtipo"]:$this->y77_codtipo);
+       $this->y77_codtipo = (($this->y77_codtipo === 0 || $this->y77_codtipo === 0.0 || $this->y77_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y77_codtipo"]:$this->y77_codtipo);
      }
    }
    // funcao para inclusao
@@ -178,7 +178,7 @@ class cl_tipovistorias {
          $this->y77_codtipo = $y77_codtipo; 
        }
      }
-     if(($this->y77_codtipo == null) || ($this->y77_codtipo == "") ){ 
+     if(($this->y77_codtipo == null) || (($this->y77_codtipo === 0 || $this->y77_codtipo === 0.0 || $this->y77_codtipo == "")) ){ 
        $this->erro_sql = " Campo y77_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -515,7 +515,7 @@ class cl_tipovistorias {
    function sql_query ( $y77_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_tipovistorias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -551,7 +551,7 @@ class cl_tipovistorias {
    function sql_query_file ( $y77_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -572,7 +572,7 @@ class cl_tipovistorias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

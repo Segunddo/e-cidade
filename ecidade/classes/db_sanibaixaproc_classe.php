@@ -52,7 +52,7 @@ class cl_sanibaixaproc {
                  y82_codproc = int4 = Código do processo 
                  ";
    //funcao construtor da classe 
-   function cl_sanibaixaproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sanibaixaproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_sanibaixaproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y82_codsani = ($this->y82_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_codsani"]:$this->y82_codsani);
-       $this->y82_seq = ($this->y82_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_seq"]:$this->y82_seq);
-       $this->y82_codproc = ($this->y82_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_codproc"]:$this->y82_codproc);
+       $this->y82_codsani = (($this->y82_codsani === 0 || $this->y82_codsani === 0.0 || $this->y82_codsani == "")?@$GLOBALS["HTTP_POST_VARS"]["y82_codsani"]:$this->y82_codsani);
+       $this->y82_seq = (($this->y82_seq === 0 || $this->y82_seq === 0.0 || $this->y82_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["y82_seq"]:$this->y82_seq);
+       $this->y82_codproc = (($this->y82_codproc === 0 || $this->y82_codproc === 0.0 || $this->y82_codproc == "")?@$GLOBALS["HTTP_POST_VARS"]["y82_codproc"]:$this->y82_codproc);
      }else{
-       $this->y82_codsani = ($this->y82_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_codsani"]:$this->y82_codsani);
-       $this->y82_seq = ($this->y82_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_seq"]:$this->y82_seq);
+       $this->y82_codsani = (($this->y82_codsani === 0 || $this->y82_codsani === 0.0 || $this->y82_codsani == "")?@$GLOBALS["HTTP_POST_VARS"]["y82_codsani"]:$this->y82_codsani);
+       $this->y82_seq = (($this->y82_seq === 0 || $this->y82_seq === 0.0 || $this->y82_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["y82_seq"]:$this->y82_seq);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_sanibaixaproc {
      }
        $this->y82_codsani = $y82_codsani; 
        $this->y82_seq = $y82_seq; 
-     if(($this->y82_codsani == null) || ($this->y82_codsani == "") ){ 
+     if(($this->y82_codsani == null) || (($this->y82_codsani === 0 || $this->y82_codsani === 0.0 || $this->y82_codsani == "")) ){ 
        $this->erro_sql = " Campo y82_codsani nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_sanibaixaproc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y82_seq == null) || ($this->y82_seq == "") ){ 
+     if(($this->y82_seq == null) || (($this->y82_seq === 0 || $this->y82_seq === 0.0 || $this->y82_seq == "")) ){ 
        $this->erro_sql = " Campo y82_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_sanibaixaproc {
    function sql_query ( $y82_codsani=null,$y82_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_sanibaixaproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_sanibaixaproc {
    function sql_query_file ( $y82_codsani=null,$y82_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_sanibaixaproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

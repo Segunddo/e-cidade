@@ -50,7 +50,7 @@ class cl_vistretornocalc {
                  y04_msgretorno = varchar(150) = Mensagem de retorno 
                  ";
    //funcao construtor da classe 
-   function cl_vistretornocalc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vistretornocalc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_vistretornocalc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y04_codmsg = ($this->y04_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y04_codmsg"]:$this->y04_codmsg);
+       $this->y04_codmsg = (($this->y04_codmsg === 0 || $this->y04_codmsg === 0.0 || $this->y04_codmsg == "")?@$GLOBALS["HTTP_POST_VARS"]["y04_codmsg"]:$this->y04_codmsg);
        $this->y04_msgretorno = ($this->y04_msgretorno == ""?@$GLOBALS["HTTP_POST_VARS"]["y04_msgretorno"]:$this->y04_msgretorno);
      }else{
-       $this->y04_codmsg = ($this->y04_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y04_codmsg"]:$this->y04_codmsg);
+       $this->y04_codmsg = (($this->y04_codmsg === 0 || $this->y04_codmsg === 0.0 || $this->y04_codmsg == "")?@$GLOBALS["HTTP_POST_VARS"]["y04_codmsg"]:$this->y04_codmsg);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_vistretornocalc {
        return false;
      }
        $this->y04_codmsg = $y04_codmsg; 
-     if(($this->y04_codmsg == null) || ($this->y04_codmsg == "") ){ 
+     if(($this->y04_codmsg == null) || (($this->y04_codmsg === 0 || $this->y04_codmsg === 0.0 || $this->y04_codmsg == "")) ){ 
        $this->erro_sql = " Campo y04_codmsg nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_vistretornocalc {
    function sql_query ( $y04_codmsg=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -326,7 +326,7 @@ class cl_vistretornocalc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -338,7 +338,7 @@ class cl_vistretornocalc {
    function sql_query_file ( $y04_codmsg=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -359,7 +359,7 @@ class cl_vistretornocalc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

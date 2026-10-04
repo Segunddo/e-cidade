@@ -47,7 +47,7 @@ class cl_fiscbairro {
                  y32_codbai = int4 = Bairro 
                  ";
    //funcao construtor da classe 
-   function cl_fiscbairro() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscbairro"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -64,10 +64,10 @@ class cl_fiscbairro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y32_codnoti = ($this->y32_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_codnoti"]:$this->y32_codnoti);
-       $this->y32_codbai = ($this->y32_codbai == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_codbai"]:$this->y32_codbai);
+       $this->y32_codnoti = (($this->y32_codnoti === 0 || $this->y32_codnoti === 0.0 || $this->y32_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_codnoti"]:$this->y32_codnoti);
+       $this->y32_codbai = (($this->y32_codbai === 0 || $this->y32_codbai === 0.0 || $this->y32_codbai == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_codbai"]:$this->y32_codbai);
      }else{
-       $this->y32_codnoti = ($this->y32_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_codnoti"]:$this->y32_codnoti);
+       $this->y32_codnoti = (($this->y32_codnoti === 0 || $this->y32_codnoti === 0.0 || $this->y32_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y32_codnoti"]:$this->y32_codnoti);
      }
    }
    // funcao para inclusao
@@ -83,7 +83,7 @@ class cl_fiscbairro {
        return false;
      }
        $this->y32_codnoti = $y32_codnoti; 
-     if(($this->y32_codnoti == null) || ($this->y32_codnoti == "") ){ 
+     if(($this->y32_codnoti == null) || (($this->y32_codnoti === 0 || $this->y32_codnoti === 0.0 || $this->y32_codnoti == "")) ){ 
        $this->erro_sql = " Campo y32_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -279,7 +279,7 @@ class cl_fiscbairro {
    function sql_query ( $y32_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -303,7 +303,7 @@ class cl_fiscbairro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -316,7 +316,7 @@ class cl_fiscbairro {
    function sql_query_file ( $y32_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -337,7 +337,7 @@ class cl_fiscbairro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

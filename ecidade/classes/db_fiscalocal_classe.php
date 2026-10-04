@@ -56,7 +56,7 @@ class cl_fiscalocal {
                  y12_compl = varchar(10) = Complemento 
                  ";
    //funcao construtor da classe 
-   function cl_fiscalocal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscalocal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_fiscalocal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y12_codnoti = ($this->y12_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y12_codnoti"]:$this->y12_codnoti);
-       $this->y12_codigo = ($this->y12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y12_codigo"]:$this->y12_codigo);
-       $this->y12_codi = ($this->y12_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["y12_codi"]:$this->y12_codi);
-       $this->y12_numero = ($this->y12_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y12_numero"]:$this->y12_numero);
+       $this->y12_codnoti = (($this->y12_codnoti === 0 || $this->y12_codnoti === 0.0 || $this->y12_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y12_codnoti"]:$this->y12_codnoti);
+       $this->y12_codigo = (($this->y12_codigo === 0 || $this->y12_codigo === 0.0 || $this->y12_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y12_codigo"]:$this->y12_codigo);
+       $this->y12_codi = (($this->y12_codi === 0 || $this->y12_codi === 0.0 || $this->y12_codi == "")?@$GLOBALS["HTTP_POST_VARS"]["y12_codi"]:$this->y12_codi);
+       $this->y12_numero = (($this->y12_numero === 0 || $this->y12_numero === 0.0 || $this->y12_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["y12_numero"]:$this->y12_numero);
        $this->y12_compl = ($this->y12_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["y12_compl"]:$this->y12_compl);
      }else{
-       $this->y12_codnoti = ($this->y12_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y12_codnoti"]:$this->y12_codnoti);
+       $this->y12_codnoti = (($this->y12_codnoti === 0 || $this->y12_codnoti === 0.0 || $this->y12_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y12_codnoti"]:$this->y12_codnoti);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_fiscalocal {
        return false;
      }
        $this->y12_codnoti = $y12_codnoti; 
-     if(($this->y12_codnoti == null) || ($this->y12_codnoti == "") ){ 
+     if(($this->y12_codnoti == null) || (($this->y12_codnoti === 0 || $this->y12_codnoti === 0.0 || $this->y12_codnoti == "")) ){ 
        $this->erro_sql = " Campo y12_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -380,7 +380,7 @@ class cl_fiscalocal {
    function sql_query ( $y12_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_fiscalocal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_fiscalocal {
    function sql_query_file ( $y12_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_fiscalocal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -35,7 +35,7 @@ $clrotulo->label("y100_sequencial");
 $clrotulo->label("z01_nome");
 $get  = "";
 $data = date("d-m-Y",db_getsession("DB_datausu"));
-$data = split('-',$data);
+$data = explode('-',$data);
 $dia  = $data[0];
 $mes  = $data[1];
 $ano  = $data[2];

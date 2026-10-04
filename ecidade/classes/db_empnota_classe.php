@@ -107,10 +107,10 @@ class cl_empnota
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e69_codnota = ($this->e69_codnota == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_codnota"] : $this->e69_codnota);
+            $this->e69_codnota = (($this->e69_codnota === 0 || $this->e69_codnota === 0.0 || $this->e69_codnota == "") ? @$GLOBALS["HTTP_POST_VARS"]["e69_codnota"] : $this->e69_codnota);
             $this->e69_numero = ($this->e69_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_numero"] : $this->e69_numero);
-            $this->e69_numemp = ($this->e69_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_numemp"] : $this->e69_numemp);
-            $this->e69_id_usuario = ($this->e69_id_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_id_usuario"] : $this->e69_id_usuario);
+            $this->e69_numemp = (($this->e69_numemp === 0 || $this->e69_numemp === 0.0 || $this->e69_numemp == "") ? @$GLOBALS["HTTP_POST_VARS"]["e69_numemp"] : $this->e69_numemp);
+            $this->e69_id_usuario = (($this->e69_id_usuario === 0 || $this->e69_id_usuario === 0.0 || $this->e69_id_usuario == "") ? @$GLOBALS["HTTP_POST_VARS"]["e69_id_usuario"] : $this->e69_id_usuario);
             if ($this->e69_dtnota == "") {
                 $this->e69_dtnota_dia = ($this->e69_dtnota_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_dtnota_dia"] : $this->e69_dtnota_dia);
                 $this->e69_dtnota_mes = ($this->e69_dtnota_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_dtnota_mes"] : $this->e69_dtnota_mes);
@@ -127,8 +127,8 @@ class cl_empnota
                     $this->e69_dtrecebe = $this->e69_dtrecebe_ano . "-" . $this->e69_dtrecebe_mes . "-" . $this->e69_dtrecebe_dia;
                 }
             }
-            $this->e69_anousu = ($this->e69_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_anousu"] : $this->e69_anousu);
-            $this->e69_tipodocumentosfiscal = ($this->e69_tipodocumentosfiscal == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_tipodocumentosfiscal"] : $this->e69_tipodocumentosfiscal);
+            $this->e69_anousu = (($this->e69_anousu === 0 || $this->e69_anousu === 0.0 || $this->e69_anousu == "") ? @$GLOBALS["HTTP_POST_VARS"]["e69_anousu"] : $this->e69_anousu);
+            $this->e69_tipodocumentosfiscal = (($this->e69_tipodocumentosfiscal === 0 || $this->e69_tipodocumentosfiscal === 0.0 || $this->e69_tipodocumentosfiscal == "") ? @$GLOBALS["HTTP_POST_VARS"]["e69_tipodocumentosfiscal"] : $this->e69_tipodocumentosfiscal);
             if ($this->e69_dtservidor == "") {
                 $this->e69_dtservidor_dia = ($this->e69_dtservidor_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_dtservidor_dia"] : $this->e69_dtservidor_dia);
                 $this->e69_dtservidor_mes = ($this->e69_dtservidor_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_dtservidor_mes"] : $this->e69_dtservidor_mes);
@@ -157,7 +157,7 @@ class cl_empnota
             $this->e69_outrosdados = ($this->e69_outrosdados == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_outrosdados"] : $this->e69_outrosdados);
             $this->e69_serienota = ($this->e69_serienota == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_serienota"] : $this->e69_serienota);
         } else {
-            $this->e69_codnota = ($this->e69_codnota == "" ? @$GLOBALS["HTTP_POST_VARS"]["e69_codnota"] : $this->e69_codnota);
+            $this->e69_codnota = (($this->e69_codnota === 0 || $this->e69_codnota === 0.0 || $this->e69_codnota == "") ? @$GLOBALS["HTTP_POST_VARS"]["e69_codnota"] : $this->e69_codnota);
         }
     }
 
@@ -275,7 +275,7 @@ class cl_empnota
                 $this->e69_codnota = $e69_codnota;
             }
         }
-        if (($this->e69_codnota == null) || ($this->e69_codnota == "")) {
+        if (($this->e69_codnota == null) || (($this->e69_codnota === 0 || $this->e69_codnota === 0.0 || $this->e69_codnota == ""))) {
             $this->erro_sql = " Campo e69_codnota não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -829,7 +829,7 @@ class cl_empnota
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = explode("#", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -854,7 +854,7 @@ class cl_empnota
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = explode("#", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -868,7 +868,7 @@ class cl_empnota
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = explode("#", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -905,7 +905,7 @@ class cl_empnota
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = explode("#", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -919,7 +919,7 @@ class cl_empnota
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = explode("#", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -943,7 +943,7 @@ class cl_empnota
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = explode("#", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -957,7 +957,7 @@ class cl_empnota
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = explode("#", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -993,7 +993,7 @@ class cl_empnota
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = explode("#", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1007,7 +1007,7 @@ class cl_empnota
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = explode("#", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1048,7 +1048,7 @@ class cl_empnota
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = explode("#", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1062,7 +1062,7 @@ class cl_empnota
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = explode("#", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1103,7 +1103,7 @@ class cl_empnota
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = explode("#", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];

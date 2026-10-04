@@ -55,17 +55,17 @@ class cl_issquant
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->q30_anousu = ($this->q30_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q30_anousu"]:$this->q30_anousu);
-       $this->q30_inscr = ($this->q30_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q30_inscr"]:$this->q30_inscr);
-       $this->q30_quant = ($this->q30_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["q30_quant"]:$this->q30_quant);
-       $this->q30_mult = ($this->q30_mult == ""?@$GLOBALS["HTTP_POST_VARS"]["q30_mult"]:$this->q30_mult);
-       $this->q30_area = ($this->q30_area == ""?@$GLOBALS["HTTP_POST_VARS"]["q30_area"]:$this->q30_area);
-       $this->q30_tempofuncionamento = ($this->q30_tempofuncionamento == ""?@$GLOBALS["HTTP_POST_VARS"]["q30_tempofuncionamento"]:$this->q30_tempofuncionamento);
-       $this->q30_areapublicidade = ($this->q30_areapublicidade == ""?@$GLOBALS["HTTP_POST_VARS"]["q30_areapublicidade"]:$this->q30_areapublicidade);
+       $this->q30_anousu = (($this->q30_anousu === 0 || $this->q30_anousu === 0.0 || $this->q30_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["q30_anousu"]:$this->q30_anousu);
+       $this->q30_inscr = (($this->q30_inscr === 0 || $this->q30_inscr === 0.0 || $this->q30_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q30_inscr"]:$this->q30_inscr);
+       $this->q30_quant = (($this->q30_quant === 0 || $this->q30_quant === 0.0 || $this->q30_quant == "")?@$GLOBALS["HTTP_POST_VARS"]["q30_quant"]:$this->q30_quant);
+       $this->q30_mult = (($this->q30_mult === 0 || $this->q30_mult === 0.0 || $this->q30_mult == "")?@$GLOBALS["HTTP_POST_VARS"]["q30_mult"]:$this->q30_mult);
+       $this->q30_area = (($this->q30_area === 0 || $this->q30_area === 0.0 || $this->q30_area == "")?@$GLOBALS["HTTP_POST_VARS"]["q30_area"]:$this->q30_area);
+       $this->q30_tempofuncionamento = (($this->q30_tempofuncionamento === 0 || $this->q30_tempofuncionamento === 0.0 || $this->q30_tempofuncionamento == "")?@$GLOBALS["HTTP_POST_VARS"]["q30_tempofuncionamento"]:$this->q30_tempofuncionamento);
+       $this->q30_areapublicidade = (($this->q30_areapublicidade === 0 || $this->q30_areapublicidade === 0.0 || $this->q30_areapublicidade == "")?@$GLOBALS["HTTP_POST_VARS"]["q30_areapublicidade"]:$this->q30_areapublicidade);
        $this->q30_graurisco = (empty($this->q30_graurisco) ? @$GLOBALS["HTTP_POST_VARS"]["q30_graurisco"]:$this->q30_graurisco);
      }else{
-       $this->q30_anousu = ($this->q30_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q30_anousu"]:$this->q30_anousu);
-       $this->q30_inscr = ($this->q30_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q30_inscr"]:$this->q30_inscr);
+       $this->q30_anousu = (($this->q30_anousu === 0 || $this->q30_anousu === 0.0 || $this->q30_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["q30_anousu"]:$this->q30_anousu);
+       $this->q30_inscr = (($this->q30_inscr === 0 || $this->q30_inscr === 0.0 || $this->q30_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q30_inscr"]:$this->q30_inscr);
      }
    }
 
@@ -107,7 +107,7 @@ class cl_issquant
      }
        $this->q30_anousu = $q30_anousu;
        $this->q30_inscr = $q30_inscr;
-     if(($this->q30_anousu == null) || ($this->q30_anousu == "") ){
+     if(($this->q30_anousu == null) || (($this->q30_anousu === 0 || $this->q30_anousu === 0.0 || $this->q30_anousu == "")) ){
        $this->erro_sql = " Campo q30_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -115,7 +115,7 @@ class cl_issquant
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q30_inscr == null) || ($this->q30_inscr == "") ){
+     if(($this->q30_inscr == null) || (($this->q30_inscr === 0 || $this->q30_inscr === 0.0 || $this->q30_inscr == "")) ){
        $this->erro_sql = " Campo q30_inscr não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

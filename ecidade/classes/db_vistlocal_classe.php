@@ -56,7 +56,7 @@ class cl_vistlocal {
                  y10_compl = varchar(10) = Complemento 
                  ";
    //funcao construtor da classe 
-   function cl_vistlocal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vistlocal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_vistlocal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y10_codvist = ($this->y10_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y10_codvist"]:$this->y10_codvist);
-       $this->y10_codigo = ($this->y10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y10_codigo"]:$this->y10_codigo);
-       $this->y10_codi = ($this->y10_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["y10_codi"]:$this->y10_codi);
-       $this->y10_numero = ($this->y10_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y10_numero"]:$this->y10_numero);
+       $this->y10_codvist = (($this->y10_codvist === 0 || $this->y10_codvist === 0.0 || $this->y10_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y10_codvist"]:$this->y10_codvist);
+       $this->y10_codigo = (($this->y10_codigo === 0 || $this->y10_codigo === 0.0 || $this->y10_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y10_codigo"]:$this->y10_codigo);
+       $this->y10_codi = (($this->y10_codi === 0 || $this->y10_codi === 0.0 || $this->y10_codi == "")?@$GLOBALS["HTTP_POST_VARS"]["y10_codi"]:$this->y10_codi);
+       $this->y10_numero = (($this->y10_numero === 0 || $this->y10_numero === 0.0 || $this->y10_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["y10_numero"]:$this->y10_numero);
        $this->y10_compl = ($this->y10_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["y10_compl"]:$this->y10_compl);
      }else{
-       $this->y10_codvist = ($this->y10_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y10_codvist"]:$this->y10_codvist);
+       $this->y10_codvist = (($this->y10_codvist === 0 || $this->y10_codvist === 0.0 || $this->y10_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y10_codvist"]:$this->y10_codvist);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_vistlocal {
        return false;
      }
        $this->y10_codvist = $y10_codvist; 
-     if(($this->y10_codvist == null) || ($this->y10_codvist == "") ){ 
+     if(($this->y10_codvist == null) || (($this->y10_codvist === 0 || $this->y10_codvist === 0.0 || $this->y10_codvist == "")) ){ 
        $this->erro_sql = " Campo y10_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -380,7 +380,7 @@ class cl_vistlocal {
    function sql_query ( $y10_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -408,7 +408,7 @@ class cl_vistlocal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_vistlocal {
    function sql_query_file ( $y10_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_vistlocal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

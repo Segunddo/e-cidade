@@ -33,7 +33,7 @@ include(modification("classes/db_vistusuario_classe.php"));
 include(modification("classes/db_fandamusu_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 $clvistusuario = new cl_vistusuario;
 $clfandamusu   = new cl_fandamusu;
 $db_opcao = 1;

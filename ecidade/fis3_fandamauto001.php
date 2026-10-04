@@ -39,7 +39,7 @@ include(modification("classes/db_autousu_classe.php"));
 include(modification("classes/db_autolocal_classe.php"));
 include(modification("classes/db_autoexec_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 if(!isset($abas)){
   echo "<script>location.href='fis3_fandamauto005.php'</script>";
   exit;

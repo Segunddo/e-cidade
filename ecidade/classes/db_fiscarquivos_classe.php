@@ -50,7 +50,7 @@ class cl_fiscarquivos {
                  y26_idparag = int4 = Códido do parágrafo 
                  ";
    //funcao construtor da classe 
-   function cl_fiscarquivos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscarquivos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_fiscarquivos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y26_codnoti = ($this->y26_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y26_codnoti"]:$this->y26_codnoti);
-       $this->y26_idparag = ($this->y26_idparag == ""?@$GLOBALS["HTTP_POST_VARS"]["y26_idparag"]:$this->y26_idparag);
+       $this->y26_codnoti = (($this->y26_codnoti === 0 || $this->y26_codnoti === 0.0 || $this->y26_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y26_codnoti"]:$this->y26_codnoti);
+       $this->y26_idparag = (($this->y26_idparag === 0 || $this->y26_idparag === 0.0 || $this->y26_idparag == "")?@$GLOBALS["HTTP_POST_VARS"]["y26_idparag"]:$this->y26_idparag);
      }else{
-       $this->y26_codnoti = ($this->y26_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y26_codnoti"]:$this->y26_codnoti);
-       $this->y26_idparag = ($this->y26_idparag == ""?@$GLOBALS["HTTP_POST_VARS"]["y26_idparag"]:$this->y26_idparag);
+       $this->y26_codnoti = (($this->y26_codnoti === 0 || $this->y26_codnoti === 0.0 || $this->y26_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y26_codnoti"]:$this->y26_codnoti);
+       $this->y26_idparag = (($this->y26_idparag === 0 || $this->y26_idparag === 0.0 || $this->y26_idparag == "")?@$GLOBALS["HTTP_POST_VARS"]["y26_idparag"]:$this->y26_idparag);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_fiscarquivos {
       $this->atualizacampos();
        $this->y26_codnoti = $y26_codnoti; 
        $this->y26_idparag = $y26_idparag; 
-     if(($this->y26_codnoti == null) || ($this->y26_codnoti == "") ){ 
+     if(($this->y26_codnoti == null) || (($this->y26_codnoti === 0 || $this->y26_codnoti === 0.0 || $this->y26_codnoti == "")) ){ 
        $this->erro_sql = " Campo y26_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_fiscarquivos {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y26_idparag == null) || ($this->y26_idparag == "") ){ 
+     if(($this->y26_idparag == null) || (($this->y26_idparag === 0 || $this->y26_idparag === 0.0 || $this->y26_idparag == "")) ){ 
        $this->erro_sql = " Campo y26_idparag nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_fiscarquivos {
    function sql_query ( $y26_codnoti=null,$y26_idparag=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_fiscarquivos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_fiscarquivos {
    function sql_query_file ( $y26_codnoti=null,$y26_idparag=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_fiscarquivos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

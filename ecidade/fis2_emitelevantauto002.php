@@ -56,7 +56,7 @@ $clrotulo->label();
 $clrotulo->label("q02_inscr");
 $clrotulo->label("y63_aliquota");
 //debug($cllevanta, true);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $pdf = new scpdf();
@@ -95,7 +95,7 @@ if (isset($codinscr) && $codinscr != ""){
 }
 //die($cllevanta->sql_querylev("",'*',"",$where));
 $resultlev = $cllevanta->sql_record($cllevanta->sql_querylev("",'*',"","$where"));
-$xxnum = pg_numrows($resultlev);
+$xxnum = ($resultlev ? pg_numrows($resultlev) : 0);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem unidades cadastrados.');
    exit;

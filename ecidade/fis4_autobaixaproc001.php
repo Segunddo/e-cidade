@@ -129,7 +129,7 @@ if (isset($baixar)) {
   
   if ($sqlerro == false) {
   	
-    $cods = split('#',$chaves);
+    $cods = explode('#',$chaves);
     for($x = 0; $x < count($cods); $x++) {
     	
       if ($sqlerro == false) {

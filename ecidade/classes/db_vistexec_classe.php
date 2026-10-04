@@ -56,7 +56,7 @@ class cl_vistexec {
                  y11_compl = varchar(10) = Complemento 
                  ";
    //funcao construtor da classe 
-   function cl_vistexec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vistexec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_vistexec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y11_codvist = ($this->y11_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y11_codvist"]:$this->y11_codvist);
-       $this->y11_codigo = ($this->y11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y11_codigo"]:$this->y11_codigo);
-       $this->y11_codi = ($this->y11_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["y11_codi"]:$this->y11_codi);
-       $this->y11_numero = ($this->y11_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y11_numero"]:$this->y11_numero);
+       $this->y11_codvist = (($this->y11_codvist === 0 || $this->y11_codvist === 0.0 || $this->y11_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y11_codvist"]:$this->y11_codvist);
+       $this->y11_codigo = (($this->y11_codigo === 0 || $this->y11_codigo === 0.0 || $this->y11_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y11_codigo"]:$this->y11_codigo);
+       $this->y11_codi = (($this->y11_codi === 0 || $this->y11_codi === 0.0 || $this->y11_codi == "")?@$GLOBALS["HTTP_POST_VARS"]["y11_codi"]:$this->y11_codi);
+       $this->y11_numero = (($this->y11_numero === 0 || $this->y11_numero === 0.0 || $this->y11_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["y11_numero"]:$this->y11_numero);
        $this->y11_compl = ($this->y11_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["y11_compl"]:$this->y11_compl);
      }else{
-       $this->y11_codvist = ($this->y11_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y11_codvist"]:$this->y11_codvist);
+       $this->y11_codvist = (($this->y11_codvist === 0 || $this->y11_codvist === 0.0 || $this->y11_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y11_codvist"]:$this->y11_codvist);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_vistexec {
        return false;
      }
        $this->y11_codvist = $y11_codvist; 
-     if(($this->y11_codvist == null) || ($this->y11_codvist == "") ){ 
+     if(($this->y11_codvist == null) || (($this->y11_codvist === 0 || $this->y11_codvist === 0.0 || $this->y11_codvist == "")) ){ 
        $this->erro_sql = " Campo y11_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -380,7 +380,7 @@ class cl_vistexec {
    function sql_query ( $y11_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -408,7 +408,7 @@ class cl_vistexec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_vistexec {
    function sql_query_file ( $y11_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_vistexec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

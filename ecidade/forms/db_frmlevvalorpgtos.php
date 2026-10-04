@@ -154,9 +154,9 @@ db_inputdata('y68_pgto',@$y68_pgto_dia,@$y68_pgto_mes,@$y68_pgto_ano,true,'text'
 function js_monta(){
 <?
 if(isset($valores)){
-  $matriz01=split('HHH',$valores);
+  $matriz01=explode('HHH',$valores);
   for($i=0; $i<count($matriz01); $i++){
-    $matriz=split('-',$matriz01[$i]);
+    $matriz=explode('-',$matriz01[$i]);
     if($db_opcao==33){
       echo " js_incluirlinhas_disabled('".$matriz[0]."','".$matriz[1]."');\n\n  ";
     }else{

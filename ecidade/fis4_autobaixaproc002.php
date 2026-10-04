@@ -70,7 +70,7 @@ if (isset($cancelabaixa)) {
   
 	  $result_autotipo = $clautotipo->sql_record($clautotipo->sql_query_file(null,"*",null,"y59_codauto=$y50_codauto"));
 	  $numrows         = $clautotipo->numrows;
-	  $cods            = split('#',$chaves);
+	  $cods            = explode('#',$chaves);
 	  if ($numrows == count($cods)) {
 	  	
 	    if ($numrows != 0) {

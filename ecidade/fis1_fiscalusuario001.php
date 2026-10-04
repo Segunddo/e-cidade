@@ -34,7 +34,7 @@ include(modification("classes/db_fandamusu_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 db_postmemory($HTTP_POST_VARS);
 //db_postmemory($HTTP_SERVER_VARS,2);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 $clfiscalusuario = new cl_fiscalusuario;
 $clfandamusu = new cl_fandamusu;
 $db_opcao = 1;

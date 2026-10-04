@@ -61,7 +61,7 @@ class cl_fandam {
                  y39_hora = varchar(5) = Hora
                  ";
    //funcao construtor da classe
-   function cl_fandam() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fandam");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,7 +78,7 @@ class cl_fandam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y39_codandam = ($this->y39_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y39_codandam"]:$this->y39_codandam);
+       $this->y39_codandam = (($this->y39_codandam === 0 || $this->y39_codandam === 0.0 || $this->y39_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y39_codandam"]:$this->y39_codandam);
        if($this->y39_data == ""){
          $this->y39_data_dia = ($this->y39_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y39_data_dia"]:$this->y39_data_dia);
          $this->y39_data_mes = ($this->y39_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y39_data_mes"]:$this->y39_data_mes);
@@ -87,12 +87,12 @@ class cl_fandam {
             $this->y39_data = $this->y39_data_ano."-".$this->y39_data_mes."-".$this->y39_data_dia;
          }
        }
-       $this->y39_codtipo = ($this->y39_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y39_codtipo"]:$this->y39_codtipo);
+       $this->y39_codtipo = (($this->y39_codtipo === 0 || $this->y39_codtipo === 0.0 || $this->y39_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y39_codtipo"]:$this->y39_codtipo);
        $this->y39_obs = ($this->y39_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y39_obs"]:$this->y39_obs);
-       $this->y39_id_usuario = ($this->y39_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y39_id_usuario"]:$this->y39_id_usuario);
+       $this->y39_id_usuario = (($this->y39_id_usuario === 0 || $this->y39_id_usuario === 0.0 || $this->y39_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["y39_id_usuario"]:$this->y39_id_usuario);
        $this->y39_hora = ($this->y39_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y39_hora"]:$this->y39_hora);
      }else{
-       $this->y39_codandam = ($this->y39_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y39_codandam"]:$this->y39_codandam);
+       $this->y39_codandam = (($this->y39_codandam === 0 || $this->y39_codandam === 0.0 || $this->y39_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y39_codandam"]:$this->y39_codandam);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_fandam {
          $this->y39_codandam = $y39_codandam;
        }
      }
-     if(($this->y39_codandam == null) || ($this->y39_codandam == "") ){
+     if(($this->y39_codandam == null) || (($this->y39_codandam === 0 || $this->y39_codandam === 0.0 || $this->y39_codandam == "")) ){
        $this->erro_sql = " Campo y39_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_fandam {
    function sql_query ( $y39_codandam=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_fandam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_fandam {
    function sql_query_file ( $y39_codandam=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_fandam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

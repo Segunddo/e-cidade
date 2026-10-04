@@ -52,7 +52,7 @@ class cl_autolevanta {
                  y117_levanta = int4 = Levantamento
                  ";
    //funcao construtor da classe
-   function cl_autolevanta() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("autolevanta");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_autolevanta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y117_sequencial = ($this->y117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_sequencial"]:$this->y117_sequencial);
-       $this->y117_auto = ($this->y117_auto == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_auto"]:$this->y117_auto);
-       $this->y117_levanta = ($this->y117_levanta == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_levanta"]:$this->y117_levanta);
+       $this->y117_sequencial = (($this->y117_sequencial === 0 || $this->y117_sequencial === 0.0 || $this->y117_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y117_sequencial"]:$this->y117_sequencial);
+       $this->y117_auto = (($this->y117_auto === 0 || $this->y117_auto === 0.0 || $this->y117_auto == "")?@$GLOBALS["HTTP_POST_VARS"]["y117_auto"]:$this->y117_auto);
+       $this->y117_levanta = (($this->y117_levanta === 0 || $this->y117_levanta === 0.0 || $this->y117_levanta == "")?@$GLOBALS["HTTP_POST_VARS"]["y117_levanta"]:$this->y117_levanta);
      }else{
-       $this->y117_sequencial = ($this->y117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_sequencial"]:$this->y117_sequencial);
+       $this->y117_sequencial = (($this->y117_sequencial === 0 || $this->y117_sequencial === 0.0 || $this->y117_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y117_sequencial"]:$this->y117_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_autolevanta {
          $this->y117_sequencial = $y117_sequencial;
        }
      }
-     if(($this->y117_sequencial == null) || ($this->y117_sequencial == "") ){
+     if(($this->y117_sequencial == null) || (($this->y117_sequencial === 0 || $this->y117_sequencial === 0.0 || $this->y117_sequencial == "")) ){
        $this->erro_sql = " Campo y117_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

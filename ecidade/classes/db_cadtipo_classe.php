@@ -56,7 +56,7 @@ class cl_cadtipo {
                  k03_permparc = bool = Se permite parcelar este tipo de débito 
                  ";
    //funcao construtor da classe 
-   function cl_cadtipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadtipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_cadtipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k03_tipo = ($this->k03_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k03_tipo"]:$this->k03_tipo);
+       $this->k03_tipo = (($this->k03_tipo === 0 || $this->k03_tipo === 0.0 || $this->k03_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["k03_tipo"]:$this->k03_tipo);
        $this->k03_descr = ($this->k03_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k03_descr"]:$this->k03_descr);
        $this->k03_parcano = ($this->k03_parcano == "f"?@$GLOBALS["HTTP_POST_VARS"]["k03_parcano"]:$this->k03_parcano);
        $this->k03_parcelamento = ($this->k03_parcelamento == "f"?@$GLOBALS["HTTP_POST_VARS"]["k03_parcelamento"]:$this->k03_parcelamento);
        $this->k03_permparc = ($this->k03_permparc == "f"?@$GLOBALS["HTTP_POST_VARS"]["k03_permparc"]:$this->k03_permparc);
      }else{
-       $this->k03_tipo = ($this->k03_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k03_tipo"]:$this->k03_tipo);
+       $this->k03_tipo = (($this->k03_tipo === 0 || $this->k03_tipo === 0.0 || $this->k03_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["k03_tipo"]:$this->k03_tipo);
      }
    }
    // funcao para inclusao
@@ -122,7 +122,7 @@ class cl_cadtipo {
        return false;
      }
        $this->k03_tipo = $k03_tipo; 
-     if(($this->k03_tipo == null) || ($this->k03_tipo == "") ){ 
+     if(($this->k03_tipo == null) || (($this->k03_tipo === 0 || $this->k03_tipo === 0.0 || $this->k03_tipo == "")) ){ 
        $this->erro_sql = " Campo k03_tipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -398,7 +398,7 @@ class cl_cadtipo {
    function sql_query ( $k03_tipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_cadtipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_cadtipo {
    function sql_query_file ( $k03_tipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_cadtipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

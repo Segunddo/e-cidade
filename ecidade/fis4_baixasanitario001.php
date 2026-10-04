@@ -32,7 +32,7 @@ include(modification("classes/db_saniatividade_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 include(modification("classes/db_sanitario_classe.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clsaniatividade = new cl_saniatividade;
 $db_botao = false;

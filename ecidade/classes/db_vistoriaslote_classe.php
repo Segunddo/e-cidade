@@ -61,7 +61,7 @@ class cl_vistoriaslote {
                  y06_instit = int4 = Cod. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_vistoriaslote() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vistoriaslote"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,7 +78,7 @@ class cl_vistoriaslote {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y06_vistoriaslote = ($this->y06_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y06_vistoriaslote"]:$this->y06_vistoriaslote);
+       $this->y06_vistoriaslote = (($this->y06_vistoriaslote === 0 || $this->y06_vistoriaslote === 0.0 || $this->y06_vistoriaslote == "")?@$GLOBALS["HTTP_POST_VARS"]["y06_vistoriaslote"]:$this->y06_vistoriaslote);
        if($this->y06_data == ""){
          $this->y06_data_dia = ($this->y06_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y06_data_dia"]:$this->y06_data_dia);
          $this->y06_data_mes = ($this->y06_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y06_data_mes"]:$this->y06_data_mes);
@@ -88,11 +88,11 @@ class cl_vistoriaslote {
          }
        }
        $this->y06_hora = ($this->y06_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y06_hora"]:$this->y06_hora);
-       $this->y06_usuario = ($this->y06_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y06_usuario"]:$this->y06_usuario);
-       $this->y06_codtipo = ($this->y06_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y06_codtipo"]:$this->y06_codtipo);
-       $this->y06_instit = ($this->y06_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y06_instit"]:$this->y06_instit);
+       $this->y06_usuario = (($this->y06_usuario === 0 || $this->y06_usuario === 0.0 || $this->y06_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["y06_usuario"]:$this->y06_usuario);
+       $this->y06_codtipo = (($this->y06_codtipo === 0 || $this->y06_codtipo === 0.0 || $this->y06_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y06_codtipo"]:$this->y06_codtipo);
+       $this->y06_instit = (($this->y06_instit === 0 || $this->y06_instit === 0.0 || $this->y06_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["y06_instit"]:$this->y06_instit);
      }else{
-       $this->y06_vistoriaslote = ($this->y06_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y06_vistoriaslote"]:$this->y06_vistoriaslote);
+       $this->y06_vistoriaslote = (($this->y06_vistoriaslote === 0 || $this->y06_vistoriaslote === 0.0 || $this->y06_vistoriaslote == "")?@$GLOBALS["HTTP_POST_VARS"]["y06_vistoriaslote"]:$this->y06_vistoriaslote);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_vistoriaslote {
          $this->y06_vistoriaslote = $y06_vistoriaslote; 
        }
      }
-     if(($this->y06_vistoriaslote == null) || ($this->y06_vistoriaslote == "") ){ 
+     if(($this->y06_vistoriaslote == null) || (($this->y06_vistoriaslote === 0 || $this->y06_vistoriaslote === 0.0 || $this->y06_vistoriaslote == "")) ){ 
        $this->erro_sql = " Campo y06_vistoriaslote nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_vistoriaslote {
    function sql_query ( $y06_vistoriaslote=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_vistoriaslote {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -516,7 +516,7 @@ class cl_vistoriaslote {
    function sql_query_file ( $y06_vistoriaslote=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -537,7 +537,7 @@ class cl_vistoriaslote {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

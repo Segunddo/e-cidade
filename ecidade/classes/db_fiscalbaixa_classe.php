@@ -57,7 +57,7 @@ class cl_fiscalbaixa {
                  y47_obs = text = Observação da Baixa 
                  ";
    //funcao construtor da classe 
-   function cl_fiscalbaixa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscalbaixa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,7 +74,7 @@ class cl_fiscalbaixa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y47_codnoti = ($this->y47_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_codnoti"]:$this->y47_codnoti);
+       $this->y47_codnoti = (($this->y47_codnoti === 0 || $this->y47_codnoti === 0.0 || $this->y47_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y47_codnoti"]:$this->y47_codnoti);
        if($this->y47_data == ""){
          $this->y47_data_dia = ($this->y47_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_data_dia"]:$this->y47_data_dia);
          $this->y47_data_mes = ($this->y47_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_data_mes"]:$this->y47_data_mes);
@@ -83,10 +83,10 @@ class cl_fiscalbaixa {
             $this->y47_data = $this->y47_data_ano."-".$this->y47_data_mes."-".$this->y47_data_dia;
          }
        }
-       $this->y47_motivo = ($this->y47_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_motivo"]:$this->y47_motivo);
+       $this->y47_motivo = (($this->y47_motivo === 0 || $this->y47_motivo === 0.0 || $this->y47_motivo == "")?@$GLOBALS["HTTP_POST_VARS"]["y47_motivo"]:$this->y47_motivo);
        $this->y47_obs = ($this->y47_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_obs"]:$this->y47_obs);
      }else{
-       $this->y47_codnoti = ($this->y47_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_codnoti"]:$this->y47_codnoti);
+       $this->y47_codnoti = (($this->y47_codnoti === 0 || $this->y47_codnoti === 0.0 || $this->y47_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y47_codnoti"]:$this->y47_codnoti);
      }
    }
    // funcao para inclusao
@@ -120,7 +120,7 @@ class cl_fiscalbaixa {
        return false;
      }
        $this->y47_codnoti = $y47_codnoti; 
-     if(($this->y47_codnoti == null) || ($this->y47_codnoti == "") ){ 
+     if(($this->y47_codnoti == null) || (($this->y47_codnoti === 0 || $this->y47_codnoti === 0.0 || $this->y47_codnoti == "")) ){ 
        $this->erro_sql = " Campo y47_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_fiscalbaixa {
    function sql_query ( $y47_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_fiscalbaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_fiscalbaixa {
    function sql_query_file ( $y47_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_fiscalbaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_fiscalbaixa {
    function sql_query_proc ( $y47_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_fiscalbaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

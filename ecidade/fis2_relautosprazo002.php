@@ -38,7 +38,7 @@ $clrotulo->label('y50_prazorec');
 $clrotulo->label('y50_dtvenc');
 $clrotulo->label('y27_descr');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 
 $whereSetor = " and y50_instit = ".db_getsession('DB_instit') ;
 if ($setorfiscal != 0) {

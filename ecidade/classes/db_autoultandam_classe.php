@@ -50,7 +50,7 @@ class cl_autoultandam {
                  y16_codandam = int8 = Codigo do Andamento Gerado 
                  ";
    //funcao construtor da classe 
-   function cl_autoultandam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("autoultandam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_autoultandam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y16_codauto = ($this->y16_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codauto"]:$this->y16_codauto);
-       $this->y16_codandam = ($this->y16_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codandam"]:$this->y16_codandam);
+       $this->y16_codauto = (($this->y16_codauto === 0 || $this->y16_codauto === 0.0 || $this->y16_codauto == "")?@$GLOBALS["HTTP_POST_VARS"]["y16_codauto"]:$this->y16_codauto);
+       $this->y16_codandam = (($this->y16_codandam === 0 || $this->y16_codandam === 0.0 || $this->y16_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y16_codandam"]:$this->y16_codandam);
      }else{
-       $this->y16_codauto = ($this->y16_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codauto"]:$this->y16_codauto);
-       $this->y16_codandam = ($this->y16_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codandam"]:$this->y16_codandam);
+       $this->y16_codauto = (($this->y16_codauto === 0 || $this->y16_codauto === 0.0 || $this->y16_codauto == "")?@$GLOBALS["HTTP_POST_VARS"]["y16_codauto"]:$this->y16_codauto);
+       $this->y16_codandam = (($this->y16_codandam === 0 || $this->y16_codandam === 0.0 || $this->y16_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y16_codandam"]:$this->y16_codandam);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_autoultandam {
       $this->atualizacampos();
        $this->y16_codauto = $y16_codauto; 
        $this->y16_codandam = $y16_codandam; 
-     if(($this->y16_codauto == null) || ($this->y16_codauto == "") ){ 
+     if(($this->y16_codauto == null) || (($this->y16_codauto === 0 || $this->y16_codauto === 0.0 || $this->y16_codauto == "")) ){ 
        $this->erro_sql = " Campo y16_codauto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_autoultandam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y16_codandam == null) || ($this->y16_codandam == "") ){ 
+     if(($this->y16_codandam == null) || (($this->y16_codandam === 0 || $this->y16_codandam === 0.0 || $this->y16_codandam == "")) ){ 
        $this->erro_sql = " Campo y16_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_autoultandam {
    function sql_query ( $y16_codauto=null,$y16_codandam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -352,7 +352,7 @@ class cl_autoultandam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_autoultandam {
    function sql_query_file ( $y16_codauto=null,$y16_codandam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_autoultandam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

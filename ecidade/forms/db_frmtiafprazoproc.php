@@ -44,7 +44,7 @@ $clrotulo->label("y90_codtiaf");
 		    $rsResult = $cltiafprazo->sql_record($cltiafprazo->sql_query("","*","","y96_codtiaf = $y90_codtiaf ".$where));
 		    if ($cltiafdoc->numrows > 0){
 		    	db_fieldsmemory($rsResult,0);
-		    	list($y96_prazo_ano,$y96_prazo_mes,$y96_prazo_dia) = split ("-", $y96_prazo);
+		    	list($y96_prazo_ano,$y96_prazo_mes,$y96_prazo_dia) = explode("-", $y96_prazo);
 		    }  
 	    }
 	    else{

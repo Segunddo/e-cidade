@@ -61,7 +61,7 @@ class cl_termovist {
                  y91_tipo = varchar(3) = Origem do termo 
                  ";
    //funcao construtor da classe 
-   function cl_termovist() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termovist"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,8 +78,8 @@ class cl_termovist {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y91_termovist = ($this->y91_termovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_termovist"]:$this->y91_termovist);
-       $this->y91_inscr = ($this->y91_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_inscr"]:$this->y91_inscr);
+       $this->y91_termovist = (($this->y91_termovist === 0 || $this->y91_termovist === 0.0 || $this->y91_termovist == "")?@$GLOBALS["HTTP_POST_VARS"]["y91_termovist"]:$this->y91_termovist);
+       $this->y91_inscr = (($this->y91_inscr === 0 || $this->y91_inscr === 0.0 || $this->y91_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["y91_inscr"]:$this->y91_inscr);
        if($this->y91_datatermo == ""){
          $this->y91_datatermo_dia = ($this->y91_datatermo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_datatermo_dia"]:$this->y91_datatermo_dia);
          $this->y91_datatermo_mes = ($this->y91_datatermo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_datatermo_mes"]:$this->y91_datatermo_mes);
@@ -88,11 +88,11 @@ class cl_termovist {
             $this->y91_datatermo = $this->y91_datatermo_ano."-".$this->y91_datatermo_mes."-".$this->y91_datatermo_dia;
          }
        }
-       $this->y91_exerc = ($this->y91_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_exerc"]:$this->y91_exerc);
-       $this->y91_codigo = ($this->y91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_codigo"]:$this->y91_codigo);
+       $this->y91_exerc = (($this->y91_exerc === 0 || $this->y91_exerc === 0.0 || $this->y91_exerc == "")?@$GLOBALS["HTTP_POST_VARS"]["y91_exerc"]:$this->y91_exerc);
+       $this->y91_codigo = (($this->y91_codigo === 0 || $this->y91_codigo === 0.0 || $this->y91_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y91_codigo"]:$this->y91_codigo);
        $this->y91_tipo = ($this->y91_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_tipo"]:$this->y91_tipo);
      }else{
-       $this->y91_termovist = ($this->y91_termovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_termovist"]:$this->y91_termovist);
+       $this->y91_termovist = (($this->y91_termovist === 0 || $this->y91_termovist === 0.0 || $this->y91_termovist == "")?@$GLOBALS["HTTP_POST_VARS"]["y91_termovist"]:$this->y91_termovist);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_termovist {
          $this->y91_termovist = $y91_termovist; 
        }
      }
-     if(($this->y91_termovist == null) || ($this->y91_termovist == "") ){ 
+     if(($this->y91_termovist == null) || (($this->y91_termovist === 0 || $this->y91_termovist === 0.0 || $this->y91_termovist == "")) ){ 
        $this->erro_sql = " Campo y91_termovist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_termovist {
    function sql_query ( $y91_termovist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_termovist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_termovist {
    function sql_query_file ( $y91_termovist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_termovist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -61,7 +61,7 @@ class cl_levantanotas {
                  y79_data = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_levantanotas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("levantanotas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,11 +78,11 @@ class cl_levantanotas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y79_codigo = ($this->y79_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y79_codigo"]:$this->y79_codigo);
-       $this->y79_sequencia = ($this->y79_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y79_sequencia"]:$this->y79_sequencia);
-       $this->y79_ordem = ($this->y79_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["y79_ordem"]:$this->y79_ordem);
+       $this->y79_codigo = (($this->y79_codigo === 0 || $this->y79_codigo === 0.0 || $this->y79_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y79_codigo"]:$this->y79_codigo);
+       $this->y79_sequencia = (($this->y79_sequencia === 0 || $this->y79_sequencia === 0.0 || $this->y79_sequencia == "")?@$GLOBALS["HTTP_POST_VARS"]["y79_sequencia"]:$this->y79_sequencia);
+       $this->y79_ordem = (($this->y79_ordem === 0 || $this->y79_ordem === 0.0 || $this->y79_ordem == "")?@$GLOBALS["HTTP_POST_VARS"]["y79_ordem"]:$this->y79_ordem);
        $this->y79_documento = ($this->y79_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["y79_documento"]:$this->y79_documento);
-       $this->y79_valor = ($this->y79_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y79_valor"]:$this->y79_valor);
+       $this->y79_valor = (($this->y79_valor === 0 || $this->y79_valor === 0.0 || $this->y79_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["y79_valor"]:$this->y79_valor);
        if($this->y79_data == ""){
          $this->y79_data_dia = ($this->y79_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y79_data_dia"]:$this->y79_data_dia);
          $this->y79_data_mes = ($this->y79_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y79_data_mes"]:$this->y79_data_mes);
@@ -92,7 +92,7 @@ class cl_levantanotas {
          }
        }
      }else{
-       $this->y79_codigo = ($this->y79_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y79_codigo"]:$this->y79_codigo);
+       $this->y79_codigo = (($this->y79_codigo === 0 || $this->y79_codigo === 0.0 || $this->y79_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y79_codigo"]:$this->y79_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_levantanotas {
          $this->y79_codigo = $y79_codigo; 
        }
      }
-     if(($this->y79_codigo == null) || ($this->y79_codigo == "") ){ 
+     if(($this->y79_codigo == null) || (($this->y79_codigo === 0 || $this->y79_codigo === 0.0 || $this->y79_codigo == "")) ){ 
        $this->erro_sql = " Campo y79_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_levantanotas {
    function sql_query ( $y79_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_levantanotas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_levantanotas {
    function sql_query_file ( $y79_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_levantanotas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

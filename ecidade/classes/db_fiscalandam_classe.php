@@ -50,7 +50,7 @@ class cl_fiscalandam {
                  y49_codandam = int8 = Codigo do Andamento Gerado 
                  ";
    //funcao construtor da classe 
-   function cl_fiscalandam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscalandam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_fiscalandam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y49_codnoti = ($this->y49_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codnoti"]:$this->y49_codnoti);
-       $this->y49_codandam = ($this->y49_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codandam"]:$this->y49_codandam);
+       $this->y49_codnoti = (($this->y49_codnoti === 0 || $this->y49_codnoti === 0.0 || $this->y49_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y49_codnoti"]:$this->y49_codnoti);
+       $this->y49_codandam = (($this->y49_codandam === 0 || $this->y49_codandam === 0.0 || $this->y49_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y49_codandam"]:$this->y49_codandam);
      }else{
-       $this->y49_codnoti = ($this->y49_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codnoti"]:$this->y49_codnoti);
-       $this->y49_codandam = ($this->y49_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codandam"]:$this->y49_codandam);
+       $this->y49_codnoti = (($this->y49_codnoti === 0 || $this->y49_codnoti === 0.0 || $this->y49_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y49_codnoti"]:$this->y49_codnoti);
+       $this->y49_codandam = (($this->y49_codandam === 0 || $this->y49_codandam === 0.0 || $this->y49_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y49_codandam"]:$this->y49_codandam);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_fiscalandam {
       $this->atualizacampos();
        $this->y49_codnoti = $y49_codnoti; 
        $this->y49_codandam = $y49_codandam; 
-     if(($this->y49_codnoti == null) || ($this->y49_codnoti == "") ){ 
+     if(($this->y49_codnoti == null) || (($this->y49_codnoti === 0 || $this->y49_codnoti === 0.0 || $this->y49_codnoti == "")) ){ 
        $this->erro_sql = " Campo y49_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_fiscalandam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y49_codandam == null) || ($this->y49_codandam == "") ){ 
+     if(($this->y49_codandam == null) || (($this->y49_codandam === 0 || $this->y49_codandam === 0.0 || $this->y49_codandam == "")) ){ 
        $this->erro_sql = " Campo y49_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -364,7 +364,7 @@ class cl_fiscalandam {
    function sql_query_file ( $y49_codnoti=null,$y49_codandam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_fiscalandam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

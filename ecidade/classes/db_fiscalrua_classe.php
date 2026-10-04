@@ -51,7 +51,7 @@ class cl_fiscalrua {
                  y33_compl = varchar(20) = Complemento 
                  ";
    //funcao construtor da classe 
-   function cl_fiscalrua() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscalrua"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -68,12 +68,12 @@ class cl_fiscalrua {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y33_codnoti = ($this->y33_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_codnoti"]:$this->y33_codnoti);
-       $this->y33_codigo = ($this->y33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_codigo"]:$this->y33_codigo);
-       $this->y33_numero = ($this->y33_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_numero"]:$this->y33_numero);
+       $this->y33_codnoti = (($this->y33_codnoti === 0 || $this->y33_codnoti === 0.0 || $this->y33_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y33_codnoti"]:$this->y33_codnoti);
+       $this->y33_codigo = (($this->y33_codigo === 0 || $this->y33_codigo === 0.0 || $this->y33_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y33_codigo"]:$this->y33_codigo);
+       $this->y33_numero = (($this->y33_numero === 0 || $this->y33_numero === 0.0 || $this->y33_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["y33_numero"]:$this->y33_numero);
        $this->y33_compl = ($this->y33_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_compl"]:$this->y33_compl);
      }else{
-       $this->y33_codnoti = ($this->y33_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_codnoti"]:$this->y33_codnoti);
+       $this->y33_codnoti = (($this->y33_codnoti === 0 || $this->y33_codnoti === 0.0 || $this->y33_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y33_codnoti"]:$this->y33_codnoti);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_fiscalrua {
        return false;
      }
        $this->y33_codnoti = $y33_codnoti; 
-     if(($this->y33_codnoti == null) || ($this->y33_codnoti == "") ){ 
+     if(($this->y33_codnoti == null) || (($this->y33_codnoti === 0 || $this->y33_codnoti === 0.0 || $this->y33_codnoti == "")) ){ 
        $this->erro_sql = " Campo y33_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -323,7 +323,7 @@ class cl_fiscalrua {
    function sql_query ( $y33_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -347,7 +347,7 @@ class cl_fiscalrua {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -360,7 +360,7 @@ class cl_fiscalrua {
    function sql_query_file ( $y33_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_fiscalrua {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

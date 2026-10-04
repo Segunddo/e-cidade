@@ -50,7 +50,7 @@ class cl_tiafprazoproc {
                  y97_codproc = int4 = Código do processo 
                  ";
    //funcao construtor da classe 
-   function cl_tiafprazoproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tiafprazoproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_tiafprazoproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y97_codtiaf = ($this->y97_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y97_codtiaf"]:$this->y97_codtiaf);
-       $this->y97_codproc = ($this->y97_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y97_codproc"]:$this->y97_codproc);
+       $this->y97_codtiaf = (($this->y97_codtiaf === 0 || $this->y97_codtiaf === 0.0 || $this->y97_codtiaf == "")?@$GLOBALS["HTTP_POST_VARS"]["y97_codtiaf"]:$this->y97_codtiaf);
+       $this->y97_codproc = (($this->y97_codproc === 0 || $this->y97_codproc === 0.0 || $this->y97_codproc == "")?@$GLOBALS["HTTP_POST_VARS"]["y97_codproc"]:$this->y97_codproc);
      }else{
-       $this->y97_codtiaf = ($this->y97_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y97_codtiaf"]:$this->y97_codtiaf);
+       $this->y97_codtiaf = (($this->y97_codtiaf === 0 || $this->y97_codtiaf === 0.0 || $this->y97_codtiaf == "")?@$GLOBALS["HTTP_POST_VARS"]["y97_codtiaf"]:$this->y97_codtiaf);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_tiafprazoproc {
        return false;
      }
        $this->y97_codtiaf = $y97_codtiaf; 
-     if(($this->y97_codtiaf == null) || ($this->y97_codtiaf == "") ){ 
+     if(($this->y97_codtiaf == null) || (($this->y97_codtiaf === 0 || $this->y97_codtiaf === 0.0 || $this->y97_codtiaf == "")) ){ 
        $this->erro_sql = " Campo y97_codtiaf nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_tiafprazoproc {
    function sql_query ( $oid = null,$campos="tiafprazoproc.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -333,7 +333,7 @@ class cl_tiafprazoproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -345,7 +345,7 @@ class cl_tiafprazoproc {
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_tiafprazoproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

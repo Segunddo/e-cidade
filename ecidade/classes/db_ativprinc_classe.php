@@ -50,7 +50,7 @@ class cl_ativprinc {
                  q88_seq = int4 = sequencia 
                  ";
    //funcao construtor da classe 
-   function cl_ativprinc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ativprinc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_ativprinc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q88_inscr = ($this->q88_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q88_inscr"]:$this->q88_inscr);
-       $this->q88_seq = ($this->q88_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q88_seq"]:$this->q88_seq);
+       $this->q88_inscr = (($this->q88_inscr === 0 || $this->q88_inscr === 0.0 || $this->q88_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q88_inscr"]:$this->q88_inscr);
+       $this->q88_seq = (($this->q88_seq === 0 || $this->q88_seq === 0.0 || $this->q88_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["q88_seq"]:$this->q88_seq);
      }else{
-       $this->q88_inscr = ($this->q88_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q88_inscr"]:$this->q88_inscr);
+       $this->q88_inscr = (($this->q88_inscr === 0 || $this->q88_inscr === 0.0 || $this->q88_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["q88_inscr"]:$this->q88_inscr);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_ativprinc {
        return false;
      }
        $this->q88_inscr = $q88_inscr; 
-     if(($this->q88_inscr == null) || ($this->q88_inscr == "") ){ 
+     if(($this->q88_inscr == null) || (($this->q88_inscr === 0 || $this->q88_inscr === 0.0 || $this->q88_inscr == "")) ){ 
        $this->erro_sql = " Campo q88_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -311,7 +311,7 @@ class cl_ativprinc {
    function sql_query ( $q88_inscr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -337,7 +337,7 @@ class cl_ativprinc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_ativprinc {
    function sql_query_compl ( $q88_inscr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -373,7 +373,7 @@ class cl_ativprinc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_ativprinc {
    function sql_query_file ( $q88_inscr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_ativprinc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

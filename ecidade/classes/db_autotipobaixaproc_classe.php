@@ -62,7 +62,7 @@ class cl_autotipobaixaproc {
                  y87_hora = varchar(5) = Hora 
                  ";
    //funcao construtor da classe 
-   function cl_autotipobaixaproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("autotipobaixaproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,7 +79,7 @@ class cl_autotipobaixaproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y87_baixaproc = ($this->y87_baixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_baixaproc"]:$this->y87_baixaproc);
+       $this->y87_baixaproc = (($this->y87_baixaproc === 0 || $this->y87_baixaproc === 0.0 || $this->y87_baixaproc == "")?@$GLOBALS["HTTP_POST_VARS"]["y87_baixaproc"]:$this->y87_baixaproc);
        if($this->y87_dtbaixa == ""){
          $this->y87_dtbaixa_dia = ($this->y87_dtbaixa_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_dtbaixa_dia"]:$this->y87_dtbaixa_dia);
          $this->y87_dtbaixa_mes = ($this->y87_dtbaixa_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_dtbaixa_mes"]:$this->y87_dtbaixa_mes);
@@ -88,7 +88,7 @@ class cl_autotipobaixaproc {
             $this->y87_dtbaixa = $this->y87_dtbaixa_ano."-".$this->y87_dtbaixa_mes."-".$this->y87_dtbaixa_dia;
          }
        }
-       $this->y87_usuario = ($this->y87_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_usuario"]:$this->y87_usuario);
+       $this->y87_usuario = (($this->y87_usuario === 0 || $this->y87_usuario === 0.0 || $this->y87_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["y87_usuario"]:$this->y87_usuario);
        if($this->y87_data == ""){
          $this->y87_data_dia = ($this->y87_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_data_dia"]:$this->y87_data_dia);
          $this->y87_data_mes = ($this->y87_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_data_mes"]:$this->y87_data_mes);
@@ -99,7 +99,7 @@ class cl_autotipobaixaproc {
        }
        $this->y87_hora = ($this->y87_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_hora"]:$this->y87_hora);
      }else{
-       $this->y87_baixaproc = ($this->y87_baixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_baixaproc"]:$this->y87_baixaproc);
+       $this->y87_baixaproc = (($this->y87_baixaproc === 0 || $this->y87_baixaproc === 0.0 || $this->y87_baixaproc == "")?@$GLOBALS["HTTP_POST_VARS"]["y87_baixaproc"]:$this->y87_baixaproc);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_autotipobaixaproc {
          $this->y87_baixaproc = $y87_baixaproc; 
        }
      }
-     if(($this->y87_baixaproc == null) || ($this->y87_baixaproc == "") ){ 
+     if(($this->y87_baixaproc == null) || (($this->y87_baixaproc === 0 || $this->y87_baixaproc === 0.0 || $this->y87_baixaproc == "")) ){ 
        $this->erro_sql = " Campo y87_baixaproc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -470,7 +470,7 @@ class cl_autotipobaixaproc {
    function sql_query ( $y87_baixaproc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -498,7 +498,7 @@ class cl_autotipobaixaproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_autotipobaixaproc {
    function sql_query_file ( $y87_baixaproc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_autotipobaixaproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

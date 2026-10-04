@@ -148,8 +148,8 @@ if (isset($incluir) && $incluir == "Excluir"){
 				    $rsResult = $cltiaf->sql_record($cltiaf->sql_querytiaf("","*","","y90_codtiaf = $y90_codtiaf"));
 					if ($cltiaf->numrows > 0){
 				    	db_fieldsmemory($rsResult,0);
-				    	list($y90_data_ano,$y90_data_mes,$y90_data_dia) = split ("-", $y90_data);
-				   		list($y96_prazo_ano,$y96_prazo_mes,$y96_prazo_dia) = split ("-", $y96_prazo);
+				    	list($y90_data_ano,$y90_data_mes,$y90_data_dia) = explode("-", $y90_data);
+				   		list($y96_prazo_ano,$y96_prazo_mes,$y96_prazo_dia) = explode("-", $y96_prazo);
 				   		if ($tipo == "cgm"){
 							$z01_numcgm = $numero;
 							$z01_nomecgm = $z01_nome;

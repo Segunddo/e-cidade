@@ -19,7 +19,14 @@ O ambiente precisa estar no ar (ver *Como subir o ambiente* no `CLAUDE.md`). Con
 ```bash
 docker ps --filter name=ecidade --format '{{.Names}}\t{{.Status}}'   # 4 containers
 stat -c '%n %A' ecidade/tmp ecidade/arquivos                         # ambos 777
+stat -c '%n %A' ecidade/extension/log/*.log                          # os ARQUIVOS 666
 ```
+
+**Prova de fumaça antes de culpar o porte:** requisite uma tela de módulo já verificado
+(`cem1_campas001.php`) com a sessão. Se ela der 500, o problema é de ambiente. O caso mais comum
+é `extension/log/*.log` pertencer ao host em 664 — o Logger lança fatal antes de qualquer saída
+e **toda** tela autenticada devolve 500 com corpo vazio, nos dois runtimes, enquanto o
+`login.php` segue respondendo 200.
 
 **O projeto vive em `ecidade/`.** O compose monta `./ecidade` em `/var/www/html`, então os
 caminhos DENTRO do container não mudam. Os scripts do `scratchpad/` já fazem `chdir` para lá —
@@ -38,14 +45,31 @@ python3 scratchpad/enumera.py <prefixo>      # gera tmp/<pref>_universo.txt e _a
 ls | grep -icE '^<prefixo>[0-9]*_.*\.php$'   # DEVE bater com "telas" do enumerador
 ```
 
-O enumerador cobre as **seis frentes** (prefixo, includes transitivos, nomes citados em
-strings que o JavaScript abre, autoload `cl_*`, bibliotecas vendorizadas, pasta inteira da
-lib). Cada uma nasceu de uma lacuna que deixou arquivo sem porte.
+O enumerador cobre as **sete frentes** (prefixo, includes transitivos, nomes citados em
+strings que o JavaScript abre, autoload — `new cl_*` **e** `db_utils::getDao('x')` —,
+bibliotecas vendorizadas, pasta inteira da lib). Cada uma nasceu de uma lacuna que deixou
+arquivo sem porte.
 
 **Variantes de prefixo matam o porte em silêncio.** Já aconteceu três vezes:
 
 ```bash
 ls | grep -ioE '^<prefixo>[a-z]*[0-9]*_' | sort -u    # itbi? agua? jur01_? jur_?
+```
+
+**O detector de `0 == ""` casa com a PRÓPRIA guarda** — a correção termina em
+`|| $this->X == ""`, então essa categoria **nunca reporta zero**. Para conferir remanescentes,
+contar só as ocorrências cujos 120 bytes anteriores NÃO trazem
+`$this->X === 0 || $this->X === 0.0 || `. Ocorrência precedida de `== null ||` no mesmo `if` é
+segura: `0 == null` é `true` nos dois runtimes.
+
+**Se precisar reenumerar no meio do porte** (uma lacuna nova apareceu), o `porta.py` **não é
+idempotente** — ele reaplicaria guarda sobre guarda nos arquivos do primeiro lote, que ainda não
+estão commitados e portanto não contam como "já pagos". Rodar só sobre os novos:
+
+```bash
+git status --porcelain | awk '{print $NF}' | sed 's#^ecidade/##' | sort -u > /tmp/ja.txt
+sort -u ecidade/tmp/<pref>_alvos.txt > /tmp/all.txt
+comm -23 /tmp/all.txt /tmp/ja.txt > /tmp/novos.txt     # substituir _alvos.txt por este
 ```
 
 **Classificar os `split()` antes de converter.** Separador literal vira `explode`; separador

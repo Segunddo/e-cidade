@@ -495,7 +495,7 @@ for($cont=0;$cont < $int_linhas;$cont++) {
         $pdf->MultiCell(100,5,$str_issqn ,0,1,"J",0);
         $pdf->setx($col);
 
-        if( eregi("IRR",$str_issqn) ) {
+        if( preg_match("/IRR/i",$str_issqn) ) {
           $pdf->cell(160,2,"",0,1,"L",0);        	
         } else {
         	$pdf->cell(160,5,"",0,1,"L",0);

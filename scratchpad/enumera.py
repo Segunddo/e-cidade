@@ -33,6 +33,10 @@ PAGO = NUCLEO | PORTADO
 
 RX_INC = re.compile(rb'(?:include|require)(?:_once)?\s*\(?\s*(?:modification\s*\(\s*)?["\']([^"\']+\.php)["\']')
 RX_NEW = re.compile(rb'new\s+(cl_\w+)')
+# 7a lacuna: db_utils::getDao('x') instancia cl_x por autoload sem citar o
+# nome da classe. Achada no `fis`, em db_cadtipo_classe.php -- cujo construtor
+# PHP4 inicializa $this->rotulo, e sem ele a tela morre com label() on null.
+RX_DAO = re.compile(rb'''getDao\s*\(\s*['"]([A-Za-z0-9_]+)['"]''')
 RX_STR = re.compile(rb'["\']([A-Za-z0-9_]+\.(?:RPC\.)?php)["\']')
 
 _c = {}
@@ -46,6 +50,9 @@ def diretas(p):
         if os.path.isfile(q): out.add(q)
     for m in RX_NEW.finditer(b):                       # 4a lacuna: autoload
         q = f"classes/db_{m.group(1).decode('latin1')[3:]}_classe.php"
+        if os.path.isfile(q): out.add(q)
+    for m in RX_DAO.finditer(b):                       # 7a lacuna: getDao()
+        q = f"classes/db_{m.group(1).decode('latin1')}_classe.php"
         if os.path.isfile(q): out.add(q)
     _c[p] = out
     return out

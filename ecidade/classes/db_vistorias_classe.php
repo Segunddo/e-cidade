@@ -75,7 +75,7 @@ class cl_vistorias {
                  y70_instit = int4 = Cod. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_vistorias() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vistorias"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,7 +92,7 @@ class cl_vistorias {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y70_codvist = ($this->y70_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_codvist"]:$this->y70_codvist);
+       $this->y70_codvist = (($this->y70_codvist === 0 || $this->y70_codvist === 0.0 || $this->y70_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y70_codvist"]:$this->y70_codvist);
        if($this->y70_data == ""){
          $this->y70_data_dia = ($this->y70_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_data_dia"]:$this->y70_data_dia);
          $this->y70_data_mes = ($this->y70_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_data_mes"]:$this->y70_data_mes);
@@ -104,16 +104,16 @@ class cl_vistorias {
        $this->y70_hora = ($this->y70_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_hora"]:$this->y70_hora);
        $this->y70_obs = ($this->y70_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_obs"]:$this->y70_obs);
        $this->y70_contato = ($this->y70_contato == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_contato"]:$this->y70_contato);
-       $this->y70_tipovist = ($this->y70_tipovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_tipovist"]:$this->y70_tipovist);
-       $this->y70_ultandam = ($this->y70_ultandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_ultandam"]:$this->y70_ultandam);
-       $this->y70_id_usuario = ($this->y70_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_id_usuario"]:$this->y70_id_usuario);
-       $this->y70_coddepto = ($this->y70_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_coddepto"]:$this->y70_coddepto);
+       $this->y70_tipovist = (($this->y70_tipovist === 0 || $this->y70_tipovist === 0.0 || $this->y70_tipovist == "")?@$GLOBALS["HTTP_POST_VARS"]["y70_tipovist"]:$this->y70_tipovist);
+       $this->y70_ultandam = (($this->y70_ultandam === 0 || $this->y70_ultandam === 0.0 || $this->y70_ultandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y70_ultandam"]:$this->y70_ultandam);
+       $this->y70_id_usuario = (($this->y70_id_usuario === 0 || $this->y70_id_usuario === 0.0 || $this->y70_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["y70_id_usuario"]:$this->y70_id_usuario);
+       $this->y70_coddepto = (($this->y70_coddepto === 0 || $this->y70_coddepto === 0.0 || $this->y70_coddepto == "")?@$GLOBALS["HTTP_POST_VARS"]["y70_coddepto"]:$this->y70_coddepto);
        $this->y70_numbloco = ($this->y70_numbloco == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_numbloco"]:$this->y70_numbloco);
        $this->y70_parcial = ($this->y70_parcial == "f"?@$GLOBALS["HTTP_POST_VARS"]["y70_parcial"]:$this->y70_parcial);
        $this->y70_ativo = ($this->y70_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["y70_ativo"]:$this->y70_ativo);
-       $this->y70_instit = ($this->y70_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_instit"]:$this->y70_instit);
+       $this->y70_instit = (($this->y70_instit === 0 || $this->y70_instit === 0.0 || $this->y70_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["y70_instit"]:$this->y70_instit);
      }else{
-       $this->y70_codvist = ($this->y70_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_codvist"]:$this->y70_codvist);
+       $this->y70_codvist = (($this->y70_codvist === 0 || $this->y70_codvist === 0.0 || $this->y70_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y70_codvist"]:$this->y70_codvist);
      }
    }
    // funcao para inclusao
@@ -227,7 +227,7 @@ class cl_vistorias {
          $this->y70_codvist = $y70_codvist; 
        }
      }
-     if(($this->y70_codvist == null) || ($this->y70_codvist == "") ){ 
+     if(($this->y70_codvist == null) || (($this->y70_codvist === 0 || $this->y70_codvist === 0.0 || $this->y70_codvist == "")) ){ 
        $this->erro_sql = " Campo y70_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -650,7 +650,7 @@ class cl_vistorias {
    function sql_query ( $y70_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -680,7 +680,7 @@ class cl_vistorias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -763,7 +763,7 @@ class cl_vistorias {
    function sql_query_cons ( $y70_codvist=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -798,7 +798,7 @@ class cl_vistorias {
      $sql .= $sql2;
   if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -810,7 +810,7 @@ class cl_vistorias {
    function sql_query_deb ( $y70_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -843,7 +843,7 @@ class cl_vistorias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -855,7 +855,7 @@ class cl_vistorias {
    function sql_query_file ( $y70_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -876,7 +876,7 @@ class cl_vistorias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -940,7 +940,7 @@ class cl_vistorias {
      $sql .= $sql2;
 	 if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -952,7 +952,7 @@ class cl_vistorias {
    function sql_querylocal ( $y70_codvist=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -982,7 +982,7 @@ class cl_vistorias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -58,7 +58,7 @@ class cl_conparametro {
                  c90_confirmadata = bool = Confirma data antes da escrituração 
                  ";
 
-    public function cl_conparametro()
+    public function __construct()
     {
         $this->rotulo = new rotulo("conparametro"); 
         $this->pagina_retorno = basename($_SERVER['PHP_SELF']);
@@ -79,7 +79,7 @@ class cl_conparametro {
      if($exclusao==false){
        $this->c90_estrutsistema = ($this->c90_estrutsistema == ""?@$GLOBALS["HTTP_POST_VARS"]["c90_estrutsistema"]:$this->c90_estrutsistema);
        $this->c90_estrutcontabil = ($this->c90_estrutcontabil == ""?@$GLOBALS["HTTP_POST_VARS"]["c90_estrutcontabil"]:$this->c90_estrutcontabil);
-       $this->c90_codestrut = ($this->c90_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["c90_codestrut"]:$this->c90_codestrut);
+       $this->c90_codestrut = (($this->c90_codestrut === 0 || $this->c90_codestrut === 0.0 || $this->c90_codestrut == "")?@$GLOBALS["HTTP_POST_VARS"]["c90_codestrut"]:$this->c90_codestrut);
        $this->c90_utilcontabancaria = ($this->c90_utilcontabancaria == "f"?@$GLOBALS["HTTP_POST_VARS"]["c90_utilcontabancaria"]:$this->c90_utilcontabancaria);
        $this->c90_usapcasp = ($this->c90_usapcasp == "f"?@$GLOBALS["HTTP_POST_VARS"]["c90_usapcasp"]:$this->c90_usapcasp);
        $this->c90_confirmadata = ($this->c90_confirmadata == "f"?@$GLOBALS["HTTP_POST_VARS"]["c90_confirmadata"]:$this->c90_confirmadata);

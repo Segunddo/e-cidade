@@ -54,7 +54,7 @@ class cl_tipovistoriasrec {
                  y78_descr = varchar(50) = Descrição do Valor 
                  ";
    //funcao construtor da classe 
-   function cl_tipovistoriasrec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipovistoriasrec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_tipovistoriasrec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y78_codtipo = ($this->y78_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_codtipo"]:$this->y78_codtipo);
-       $this->y78_receit = ($this->y78_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_receit"]:$this->y78_receit);
-       $this->y78_valor = ($this->y78_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_valor"]:$this->y78_valor);
+       $this->y78_codtipo = (($this->y78_codtipo === 0 || $this->y78_codtipo === 0.0 || $this->y78_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y78_codtipo"]:$this->y78_codtipo);
+       $this->y78_receit = (($this->y78_receit === 0 || $this->y78_receit === 0.0 || $this->y78_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["y78_receit"]:$this->y78_receit);
+       $this->y78_valor = (($this->y78_valor === 0 || $this->y78_valor === 0.0 || $this->y78_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["y78_valor"]:$this->y78_valor);
        $this->y78_descr = ($this->y78_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_descr"]:$this->y78_descr);
      }else{
-       $this->y78_codtipo = ($this->y78_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_codtipo"]:$this->y78_codtipo);
-       $this->y78_receit = ($this->y78_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_receit"]:$this->y78_receit);
+       $this->y78_codtipo = (($this->y78_codtipo === 0 || $this->y78_codtipo === 0.0 || $this->y78_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y78_codtipo"]:$this->y78_codtipo);
+       $this->y78_receit = (($this->y78_receit === 0 || $this->y78_receit === 0.0 || $this->y78_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["y78_receit"]:$this->y78_receit);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_tipovistoriasrec {
      }
        $this->y78_codtipo = $y78_codtipo; 
        $this->y78_receit = $y78_receit; 
-     if(($this->y78_codtipo == null) || ($this->y78_codtipo == "") ){ 
+     if(($this->y78_codtipo == null) || (($this->y78_codtipo === 0 || $this->y78_codtipo === 0.0 || $this->y78_codtipo == "")) ){ 
        $this->erro_sql = " Campo y78_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_tipovistoriasrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y78_receit == null) || ($this->y78_receit == "") ){ 
+     if(($this->y78_receit == null) || (($this->y78_receit === 0 || $this->y78_receit === 0.0 || $this->y78_receit == "")) ){ 
        $this->erro_sql = " Campo y78_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -380,7 +380,7 @@ class cl_tipovistoriasrec {
    function sql_query ( $y78_codtipo=null,$y78_receit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_tipovistoriasrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_tipovistoriasrec {
    function sql_query_file ( $y78_codtipo=null,$y78_receit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -455,7 +455,7 @@ class cl_tipovistoriasrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -467,7 +467,7 @@ class cl_tipovistoriasrec {
    function sql_query_tipovist ( $y78_codtipo=null,$y78_receit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_tipovistoriasrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

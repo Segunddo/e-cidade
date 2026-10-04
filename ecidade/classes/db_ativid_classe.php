@@ -68,7 +68,7 @@ class cl_ativid {
                  ";
 
   //funcao construtor da classe
-  function cl_ativid() {
+  function __construct() {
 
     //classes dos rotulos dos campos
     $this->rotulo         = new rotulo("ativid");
@@ -90,7 +90,7 @@ class cl_ativid {
   function atualizacampos($exclusao = false) {
 
     if ($exclusao == false) {
-      $this->q03_ativ   = ($this->q03_ativ == "" ? @$GLOBALS["HTTP_POST_VARS"]["q03_ativ"] : $this->q03_ativ);
+      $this->q03_ativ   = (($this->q03_ativ === 0 || $this->q03_ativ === 0.0 || $this->q03_ativ == "") ? @$GLOBALS["HTTP_POST_VARS"]["q03_ativ"] : $this->q03_ativ);
       $this->q03_descr  = ($this->q03_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["q03_descr"] : $this->q03_descr);
       $this->q03_atmemo = ($this->q03_atmemo == "" ? @$GLOBALS["HTTP_POST_VARS"]["q03_atmemo"] : $this->q03_atmemo);
       if ($this->q03_limite == "") {
@@ -106,7 +106,7 @@ class cl_ativid {
       $this->q03_deducao = ($this->q03_deducao == "f" ? @$GLOBALS["HTTP_POST_VARS"]["q03_deducao"] : $this->q03_deducao);
       $this->q03_tributacao_municipio = ($this->q03_tributacao_municipio == "f" ? @$GLOBALS["HTTP_POST_VARS"]["q03_tributacao_municipio"] : $this->q03_tributacao_municipio);
     } else {
-      $this->q03_ativ = ($this->q03_ativ == "" ? @$GLOBALS["HTTP_POST_VARS"]["q03_ativ"] : $this->q03_ativ);
+      $this->q03_ativ = (($this->q03_ativ === 0 || $this->q03_ativ === 0.0 || $this->q03_ativ == "") ? @$GLOBALS["HTTP_POST_VARS"]["q03_ativ"] : $this->q03_ativ);
     }
   }
 
@@ -132,7 +132,7 @@ class cl_ativid {
       $this->q03_tributacao_municipio = "false";
     }
     $this->q03_ativ = $q03_ativ;
-    if (($this->q03_ativ == null) || ($this->q03_ativ == "")) {
+    if (($this->q03_ativ == null) || (($this->q03_ativ === 0 || $this->q03_ativ === 0.0 || $this->q03_ativ == ""))) {
       $this->erro_sql   = " Campo q03_ativ nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -525,7 +525,7 @@ class cl_ativid {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = explode("#", $campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -546,7 +546,7 @@ class cl_ativid {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = explode("#", $ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -562,7 +562,7 @@ class cl_ativid {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = explode("#", $campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -583,7 +583,7 @@ class cl_ativid {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = explode("#", $ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -599,7 +599,7 @@ class cl_ativid {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = explode("#", $campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -627,7 +627,7 @@ class cl_ativid {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = explode("#", $ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -642,7 +642,7 @@ class cl_ativid {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = explode("#", $campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -665,7 +665,7 @@ class cl_ativid {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = explode("#", $ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -680,7 +680,7 @@ class cl_ativid {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = explode("#", $campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -703,7 +703,7 @@ class cl_ativid {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = explode("#", $ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -718,7 +718,7 @@ class cl_ativid {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = explode("#", $campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -742,7 +742,7 @@ class cl_ativid {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = explode("#", $ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -769,7 +769,7 @@ class cl_ativid {
 
     if ($campos != "*") {
 
-      $campos_sql = split("#", $campos);
+      $campos_sql = explode("#", $campos);
       $virgula    = "";
 
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -799,7 +799,7 @@ class cl_ativid {
     if ($ordem != null) {
 
       $sSql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = explode("#", $ordem);
       $virgula    = "";
 
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -1009,7 +1009,7 @@ class cl_ativid {
 
     if ($campos != "*") {
 
-      $campos_sql = split("#", $campos);
+      $campos_sql = explode("#", $campos);
       $virgula    = "";
 
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -1040,7 +1040,7 @@ class cl_ativid {
     if ($ordem != null) {
 
       $sSql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = explode("#", $ordem);
       $virgula    = "";
 
       for ($i = 0; $i < sizeof($campos_sql); $i++) {

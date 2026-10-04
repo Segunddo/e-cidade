@@ -54,7 +54,7 @@ class cl_notasiss {
                  q09_gruponotaiss = int4 = Grupo Nota ISS 
                  ";
    //funcao construtor da classe 
-   function cl_notasiss() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notasiss"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_notasiss {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q09_codigo = ($this->q09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_codigo"]:$this->q09_codigo);
+       $this->q09_codigo = (($this->q09_codigo === 0 || $this->q09_codigo === 0.0 || $this->q09_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["q09_codigo"]:$this->q09_codigo);
        $this->q09_nota = ($this->q09_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_nota"]:$this->q09_nota);
        $this->q09_descr = ($this->q09_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_descr"]:$this->q09_descr);
-       $this->q09_gruponotaiss = ($this->q09_gruponotaiss == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_gruponotaiss"]:$this->q09_gruponotaiss);
+       $this->q09_gruponotaiss = (($this->q09_gruponotaiss === 0 || $this->q09_gruponotaiss === 0.0 || $this->q09_gruponotaiss == "")?@$GLOBALS["HTTP_POST_VARS"]["q09_gruponotaiss"]:$this->q09_gruponotaiss);
      }else{
-       $this->q09_codigo = ($this->q09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_codigo"]:$this->q09_codigo);
+       $this->q09_codigo = (($this->q09_codigo === 0 || $this->q09_codigo === 0.0 || $this->q09_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["q09_codigo"]:$this->q09_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_notasiss {
          $this->q09_codigo = $q09_codigo; 
        }
      }
-     if(($this->q09_codigo == null) || ($this->q09_codigo == "") ){ 
+     if(($this->q09_codigo == null) || (($this->q09_codigo === 0 || $this->q09_codigo === 0.0 || $this->q09_codigo == "")) ){ 
        $this->erro_sql = " Campo q09_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -413,7 +413,7 @@ class cl_notasiss {
    function sql_query ( $q09_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_notasiss {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_notasiss {
    function sql_query_file ( $q09_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_notasiss {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

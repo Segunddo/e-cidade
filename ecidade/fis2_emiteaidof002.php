@@ -42,11 +42,11 @@ $clissbase   = new cl_issbase;
 $clnotasiss  = new cl_notasiss;
 $clparfiscal = new cl_parfiscal;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 
 $sqlpref = "select * from db_config where codigo = ".db_getsession("DB_instit");
 $resultpref = db_query($sqlpref);
-if (pg_numrows($resultpref)!=0){
+if (($resultpref ? pg_numrows($resultpref) : 0)!=0){
   db_fieldsmemory($resultpref,0);
 }
 
@@ -102,13 +102,13 @@ $sql_empr=" select empresa.q02_inscr  as inscr_usu,
              where empresa.q02_inscr = $y08_inscr ";           
            
 $result_empresa=db_query($sql_empr);
-if (pg_numrows($result_empresa)!=0){
+if (($result_empresa ? pg_numrows($result_empresa) : 0)!=0){
   db_fieldsmemory($result_empresa,0);
 }
 
 $sqlDbUsuarioAutoriza = "select nome as nomeusu from db_usuarios where id_usuario = $y08_login";
 $rsDbUsuarioAutoriza  = db_query($sqlDbUsuarioAutoriza);
-$iDbUsuarioAutoriza   = pg_numrows($rsDbUsuarioAutoriza);
+$iDbUsuarioAutoriza   = ($rsDbUsuarioAutoriza ? pg_numrows($rsDbUsuarioAutoriza) : 0);
 
 if ($iDbUsuarioAutoriza > 0) {
   $oDbUsuarioAutoriza = db_utils::fieldsMemory($rsDbUsuarioAutoriza,0);
@@ -117,7 +117,7 @@ if ($iDbUsuarioAutoriza > 0) {
 
 $sqlDbUsuario = "select nome as nomeusu from db_usuarios where id_usuario =".db_getsession("DB_id_usuario");
 $rsDbUsuario  = db_query($sqlDbUsuario);
-$iDbUsuario   = pg_numrows($rsDbUsuario);
+$iDbUsuario   = ($rsDbUsuario ? pg_numrows($rsDbUsuario) : 0);
 
 if ($iDbUsuario > 0) {
 	$oDbUsuario = db_utils::fieldsMemory($rsDbUsuario,0);
@@ -157,7 +157,7 @@ if ($oParfiscal->y32_modaidof == 1) {
 //$pdf1->modelo = 14;
 $pdf1->objpdf->SetTextColor(0,0,0);
 
-for($i = 0;$i < pg_numrows($result);$i++){
+for($i = 0;$i < ($result ? pg_numrows($result) : 0);$i++){
   db_fieldsmemory($result,0);
 
   $pdf1->enderpref     = $ender;

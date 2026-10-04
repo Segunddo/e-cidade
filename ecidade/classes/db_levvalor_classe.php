@@ -69,7 +69,7 @@ class cl_levvalor {
                  y63_histor = text = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_levvalor() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("levvalor"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -86,10 +86,10 @@ class cl_levvalor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y63_sequencia = ($this->y63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_sequencia"]:$this->y63_sequencia);
-       $this->y63_codlev = ($this->y63_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_codlev"]:$this->y63_codlev);
-       $this->y63_ano = ($this->y63_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_ano"]:$this->y63_ano);
-       $this->y63_mes = ($this->y63_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_mes"]:$this->y63_mes);
+       $this->y63_sequencia = (($this->y63_sequencia === 0 || $this->y63_sequencia === 0.0 || $this->y63_sequencia == "")?@$GLOBALS["HTTP_POST_VARS"]["y63_sequencia"]:$this->y63_sequencia);
+       $this->y63_codlev = (($this->y63_codlev === 0 || $this->y63_codlev === 0.0 || $this->y63_codlev == "")?@$GLOBALS["HTTP_POST_VARS"]["y63_codlev"]:$this->y63_codlev);
+       $this->y63_ano = (($this->y63_ano === 0 || $this->y63_ano === 0.0 || $this->y63_ano == "")?@$GLOBALS["HTTP_POST_VARS"]["y63_ano"]:$this->y63_ano);
+       $this->y63_mes = (($this->y63_mes === 0 || $this->y63_mes === 0.0 || $this->y63_mes == "")?@$GLOBALS["HTTP_POST_VARS"]["y63_mes"]:$this->y63_mes);
        if($this->y63_dtvenc == ""){
          $this->y63_dtvenc_dia = ($this->y63_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_dtvenc_dia"]:$this->y63_dtvenc_dia);
          $this->y63_dtvenc_mes = ($this->y63_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_dtvenc_mes"]:$this->y63_dtvenc_mes);
@@ -98,13 +98,13 @@ class cl_levvalor {
             $this->y63_dtvenc = $this->y63_dtvenc_ano."-".$this->y63_dtvenc_mes."-".$this->y63_dtvenc_dia;
          }
        }
-       $this->y63_bruto = ($this->y63_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_bruto"]:$this->y63_bruto);
-       $this->y63_aliquota = ($this->y63_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_aliquota"]:$this->y63_aliquota);
-       $this->y63_pago = ($this->y63_pago == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_pago"]:$this->y63_pago);
-       $this->y63_saldo = ($this->y63_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_saldo"]:$this->y63_saldo);
+       $this->y63_bruto = (($this->y63_bruto === 0 || $this->y63_bruto === 0.0 || $this->y63_bruto == "")?@$GLOBALS["HTTP_POST_VARS"]["y63_bruto"]:$this->y63_bruto);
+       $this->y63_aliquota = (($this->y63_aliquota === 0 || $this->y63_aliquota === 0.0 || $this->y63_aliquota == "")?@$GLOBALS["HTTP_POST_VARS"]["y63_aliquota"]:$this->y63_aliquota);
+       $this->y63_pago = (($this->y63_pago === 0 || $this->y63_pago === 0.0 || $this->y63_pago == "")?@$GLOBALS["HTTP_POST_VARS"]["y63_pago"]:$this->y63_pago);
+       $this->y63_saldo = (($this->y63_saldo === 0 || $this->y63_saldo === 0.0 || $this->y63_saldo == "")?@$GLOBALS["HTTP_POST_VARS"]["y63_saldo"]:$this->y63_saldo);
        $this->y63_histor = ($this->y63_histor == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_histor"]:$this->y63_histor);
      }else{
-       $this->y63_sequencia = ($this->y63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_sequencia"]:$this->y63_sequencia);
+       $this->y63_sequencia = (($this->y63_sequencia === 0 || $this->y63_sequencia === 0.0 || $this->y63_sequencia == "")?@$GLOBALS["HTTP_POST_VARS"]["y63_sequencia"]:$this->y63_sequencia);
      }
    }
    // funcao para inclusao
@@ -206,7 +206,7 @@ class cl_levvalor {
          $this->y63_sequencia = $y63_sequencia; 
        }
      }
-     if(($this->y63_sequencia == null) || ($this->y63_sequencia == "") ){ 
+     if(($this->y63_sequencia == null) || (($this->y63_sequencia === 0 || $this->y63_sequencia === 0.0 || $this->y63_sequencia == "")) ){ 
        $this->erro_sql = " Campo y63_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -582,7 +582,7 @@ class cl_levvalor {
    function sql_compl ( $y63_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -606,7 +606,7 @@ class cl_levvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -618,7 +618,7 @@ class cl_levvalor {
    function sql_query ( $y63_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -641,7 +641,7 @@ class cl_levvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -653,7 +653,7 @@ class cl_levvalor {
    function sql_query_file ( $y63_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -674,7 +674,7 @@ class cl_levvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -686,7 +686,7 @@ class cl_levvalor {
    function sql_query_inf ( $y63_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -716,7 +716,7 @@ class cl_levvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -728,7 +728,7 @@ class cl_levvalor {
    function sql_query_notas ( $y63_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -751,7 +751,7 @@ class cl_levvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

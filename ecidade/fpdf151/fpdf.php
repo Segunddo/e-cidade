@@ -998,7 +998,7 @@ function Cell($w,$h=0,$txt='',$border=0,$ln=0,$align='',$fill=0,$link='',$preenc
   if($s)
     $this->_out($s);
   $this->lasth=$h;
-  if($ln>0)
+  if((float)$ln>0)
   {
     //Go to next line
     $this->y+=$h;
@@ -2947,7 +2947,7 @@ function WriteText($text)
     if($s)
       $this->_out($s);
     $this->lasth=$h;
-    if($ln>0)
+    if((float)$ln>0)
     {
       //Go to next line
       $this->y+=$h;

@@ -65,15 +65,15 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** migrando a **área Tributário** módulo a módulo. 3 de 16 concluídos.
+**Onde paramos:** migrando a **área Tributário** módulo a módulo. 8 de 16 concluídos.
 
 | | |
 |---|---|
-| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` Notificações — **7 de 16** |
+| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` Fiscal — **8 de 16** |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|tra)[0-9]*_` |
-| **Próximo módulo** | **`fis` Fiscal (353 telas, resíduo 119)** → `iss` (400, resíduo 144) → `dvr` (236) → `arr` (346). `inf` e `tri` junto dos módulos que os hospedam. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|tra)[0-9]*_` |
+| **Próximo módulo** | **`iss` ISSQN (400 telas, resíduo 144)** → `dvr` (236) → `arr` (346). `inf` e `tri` junto dos módulos que os hospedam. **`dbagata/` é pré-requisito duro do `iss`.** |
 | **Dívida técnica aberta** | `dbagata/` (1 arquivo alcançável, pré-requisito do `iss`) e `fpdf151/` (28 arquivos). Ver *6ª LACUNA*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
@@ -83,6 +83,7 @@ docker volume create ecidade_sessions && docker volume create ecidade_tmp
 docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
 docker exec ecidade_php56 chmod 1777 /tmp      # o volume nasce root:root 755
 chmod -R 777 ecidade/storage ecidade/bootstrap/cache && chmod 777 ecidade/extension/log
+chmod 666 ecidade/extension/log/*.log   # os ARQUIVOS, nao so a pasta -- senao TODA tela autenticada da 500
 chmod 777 ecidade/tmp ecidade/arquivos        # SEM isto, 11% das telas falham antes de executar
 docker compose -f docker-compose.php85.yml up -d
 docker compose -f docker-compose.proxy.yml up -d
@@ -807,7 +808,7 @@ location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|n
 gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
 Financeiro e Patrimonial junto.
 
-**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ — restam 5 prefixos (`fis`, `iss`, `arr`, `dvr`, e `inf`/`tri` embutidos).
+**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ · `fis` ✅ — restam 4 prefixos (`iss`, `arr`, `dvr`, e `inf`/`tri` embutidos).
 
 ### ⚠ ORDEM REVISTA: `jur` antes de `div`, e `arr` por último
 
@@ -870,7 +871,7 @@ arquivos abertos por JavaScript.
 Cada prefixo é um lote independente, com commit próprio e revertível:
 
 ```
-1. enumerar, em SEIS frentes       -> verificar: cada frente fecha (ver abaixo)
+1. enumerar, em SETE frentes       -> verificar: cada frente fecha (ver abaixo)
 2. varrer as categorias conhecidas -> verificar: inventário fechado
 3. classificar cada ocorrência     -> verificar: nenhum falso-positivo de JavaScript
 4. aplicar em nível de byte        -> verificar: zero remanescentes
@@ -881,16 +882,16 @@ Cada prefixo é um lote independente, com commit próprio e revertível:
 9. commit
 ```
 
-**O passo 1 é o que mais falhou.** Seis lacunas distintas já foram encontradas ali, todas
+**O passo 1 é o que mais falhou.** Sete lacunas distintas já foram encontradas ali, todas
 com a mesma assinatura: a verificação partia da lista que a própria enumeração gerou, então
-não podia achar o que a enumeração deixou de fora. As seis frentes:
+não podia achar o que a enumeração deixou de fora. As sete frentes:
 
 | Frente | Como | Lacuna que fecha |
 |---|---|---|
 | prefixo | `re.IGNORECASE`, e aceitar sufixos de letra (`itbi`, `agua`) | maiúsculas; sub-prefixos |
 | fecho de includes | `include(modification(...))` transitivo | — |
 | citados em strings | nomes `*.php` dentro do código (o JS os abre) | 3ª: `window.open` |
-| autoload | classes `cl_*` instanciadas, resolvidas em `classes/` | 4ª: `spl_autoload_register` |
+| autoload | classes `cl_*` instanciadas **e `db_utils::getDao('x')`**, resolvidas em `classes/` | 4ª: `spl_autoload_register`; 7ª: `getDao()` |
 | bibliotecas vendorizadas | `dbagata/`, incluindo `*.class` e `*.inc` | 5ª: `dbagata/` |
 | **pasta inteira da lib** | se um arquivo de uma pasta-biblioteca entrou, **varrer a pasta toda** | 6ª: `fpdf151/` (2 de 194 portados) |
 
@@ -1267,6 +1268,229 @@ Dois detalhes verificados em vez de deduzidos, ambos na categoria onde o erro é
 - **O harness de escrita cobriu 39 das 40 classes.** A ausente,
   `classes/db_assinatura_classe.php`, tem **zero propriedades declaradas e nenhum
   `atualizacampos()`** — não é classe de dados, não há caminho de escrita a exercitar.
+
+### Estado: MÓDULO `fis` (Fiscal) PORTADO ✅ — 8º da área Tributário
+
+**353 telas** (`^fis[0-9]*_`, variantes `fis1_`…`fis4_`, sem sufixo de letra e sem maiúsculas).
+Universo pelas seis frentes: **682** arquivos — e **699 depois de fechar a 7ª lacuna**, abaixo.
+**384 arquivos alterados**, o maior lote do projeto (o anterior era `agu`, 171).
+
+| Correção | Qtd |
+|---|---|
+| `$this->X == <literal>` → forma que preserva a semântica do 5.6 | 730 |
+| `split(` → `explode(` (todos literais: 519 `#`, 16 `-`, 4 `HHH`, 3 `/`, 2 `_sep_`, 2 `,`, 2 `\n`, 1 ` `) | 627 |
+| `parse_str()` com 2º argumento | 230 |
+| construtor PHP4 → `__construct` | 134 |
+| guardas `pg_*` contra resultado falso | 15 |
+| casts `(int)`/`(float)` em aritmética e comparação com string | 3 |
+| `is_resource()` → `is_resource() \|\| is_object()` (**núcleo**, ver categoria nova) | 2 |
+| `break` fora de laço → `exit` | 2 |
+| `eregi(` → `preg_match(` | 1 |
+
+| Passo | Resultado |
+|---|---|
+| 1. enumeração × `ls` | 353 = 353 ✅ |
+| 3. classificação dos `split` | 553 em PHP (todos literais), 8 em JavaScript preservados |
+| 5. `php -l` nos dois runtimes | **699/699 do universo, 0 erros** em 5.6 e 8.5 |
+| 6. instanciação das classes | **205/205, estado idêntico** |
+| 6b. caminho de escrita | 4.299 linhas, 204 de 205 classes, **0 divergentes** |
+| 7. bateria de telas | **350/353 idênticas** |
+| 8. roteamento | `/fis1_*`, `/w/2/fis1_*` e `/Fis1_*` pelo 8.5; `/login.php` pelo 5.6 |
+
+**Zero telas quebrando só no 8.5.** As 3 divergências restantes são defeitos pré-existentes, e
+**nenhuma é item de menu** (o módulo tem 109 de 114 itens ligados):
+
+- `fis1_sanitario004.php` — **não tem nenhum `include`**; usa `db_ancora()` e `rotulo->label()`
+  sem carregar nada. Quebra nos dois (5.6: `Call to undefined function db_ancora()`; 8.5:
+  `No PostgreSQL connection opened yet`, que é o mesmo defeito alcançado mais cedo).
+- `fis1_tiafprazoproc002/003.php` — `forms/db_frmtiafprazoproc.php:30` usa `$cltiafprazo`, que
+  **não é instanciado em lugar nenhum da cadeia**. O 5.6 renderiza a página de erro (500) e o
+  8.5 para antes (200 truncado). Tela quebrada nos dois.
+
+#### Decisão medida: NÃO usar Rector neste módulo
+
+O `CLAUDE.md` registrava que o Rector "vale a pena a partir de `fis` (353) e `iss` (400)". A
+recomendação era condicional ao volume; medida **neste** módulo, as duas vantagens concretas que
+ele teve no experimento do `div` **não se aplicam**:
+
+| Vantagem do Rector | No `div` | No `fis` |
+|---|---|---|
+| pega offset `->prop{}` que o regex não cobre | 1 (real) | **0 ocorrências** |
+| não edita código comentado | 2 | **1 ocorrência** |
+
+Trocar de instrumento custaria revalidar a *denylist* de 14 regras contra uma população de
+arquivos nova e repetir o portão de funções ausentes (`str_starts_with`, `random_int`), sem
+cobertura adicional. A recomendação segue de pé para `iss`, mas **tem de ser remedida lá** — o
+critério é a presença das construções que o regex erra, não a contagem de telas.
+
+### CATEGORIA NOVA (fis): `is_resource()` sobre resultado do PostgreSQL — NÚCLEO, FALHA SILENCIOSA
+
+A mais grave desde o `0 == ""`, e da mesma família: **o código é válido nas duas versões, não
+emite erro, e some com um campo da tela.**
+
+```
+                      pg_query(...) devolve
+PHP 5.6:              resource    -> is_resource() = true
+PHP 8.5:              object      -> is_resource() = FALSE   (PgSql\Result desde o PHP 8.1)
+```
+
+Comprovado nos dois runtimes:
+
+```
+ecidade_php56   tipo=resource   is_resource=true    is_object=false
+ecidade_php85   tipo=object     is_resource=false   is_object=true
+```
+
+Onde dói: `dbforms/db_funcoes.php`, função **`db_selectrecord()`** do núcleo. Em modo leitura
+(`$db_opcao = 3`) ela emite **dois** inputs — o código e a descrição —, e o segundo só é emitido
+se o laço guardado por `is_resource($record)` encontrar a linha correspondente:
+
+```php
+if (is_resource($record)) {                     // no 8.5: FALSE, laco nunca roda
+    for ($sqli = 0; $sqli < pg_numrows($record); $sqli++) { ... $nomec = pg_fieldname($record,1); }
+}
+if (!empty($nomec)) { db_input($nomec, ...); }  // no 8.5: $nomec vazio -> campo NAO sai
+```
+
+Sintoma observado em `fis1_aidof002/003` e `fis4_aidof005`: HTTP 200 nos dois runtimes, página
+renderizando normalmente, e **437 bytes a menos no 8.5** — o input `q09_descr` com valor
+`MODELO 1` simplesmente ausente. Nenhum fatal, nenhuma entrada no log.
+
+**Correção: `is_resource($record) || is_object($record)`** — verdadeira nos dois runtimes.
+Aplicada no original **e na cópia de `extension/modification/`**, que é a que executa para o
+usuário `dbseller`.
+
+Escala na base: **237 ocorrências de `is_resource` em 86 arquivos**. Nem todas são resultado de
+PostgreSQL — *handles* de arquivo continuam sendo resource no PHP 8 —, então a varredura exige
+classificar o argumento. Fica registrado como estimativa, não como lista de tarefas, seguindo a
+mesma decisão tomada para as guardas `pg_*`.
+
+**Por que nenhuma verificação anterior pegou:** `php -l` não vê, o harness de classes não vê (é
+código de tela, não de classe), e o harness de escrita não vê (não passa por `atualizacampos()`).
+**Só a comparação byte-a-byte entre runtimes encontra** — é o argumento mais forte do projeto a
+favor de manter o 5.6 vivo como referência.
+
+### CATEGORIA NOVA (fis): a RFC das comparações também muda `>` dentro do FPDF
+
+Já estava catalogado que a RFC "Saner string to number comparisons" mudou `==` e os operadores
+de ordem (o laço infinito do `agu`). Esta é a terceira manifestação, e atinge **o FPDF do
+núcleo**, alterando o layout dos relatórios em silêncio.
+
+A assinatura do FPDF é `Cell($w, $h, $txt, $border, $ln, $align, $fill, $link)`. O e-cidade
+chama, em `fis3_relatoriosani.php:66`:
+
+```php
+$pdf->Cell(90, 6, $RLz01_cgccpf.': '.@$z01_cgccpf, 1, "J", 1, 30);
+                                                      ^^^ isto cai em $ln
+```
+
+E dentro de `fpdf151/fpdf.php` (linhas 1001 e 2950):
+
+```
+              "J" > 0
+PHP 5.6:      false      ("J" vira numero: 0 > 0)
+PHP 8.5:      TRUE       (0 vira string: "J" > "0")
+```
+
+No 8.5 o `Cell` avança uma linha que não deveria avançar. O efeito no PDF gerado:
+
+```
+5.6:  Logradouro(y=680.32)  Numero(311.81, 680.32)  Complemento(411.03, 680.32)   <- mesma linha
+8.5:  Logradouro(y=663.31)  Numero(311.81, 663.31)  Complemento(311.81, 646.30)   <- quebrou
+```
+
+O relatório inteiro desce e um campo muda de coluna. **HTTP 200 nos dois, PDF válido nos dois,
+conteúdo diferente** — e o texto está dentro do fluxo `FlateDecode`, invisível a qualquer regex
+de normalização. Só descomprimindo o stream dá para ver.
+
+**Correção: `if((float)$ln>0)`** nas duas ocorrências — `(float)"J" > 0` é `false` nos dois
+runtimes, reproduzindo o 5.6 exatamente. Passar a `"J"` como `$ln` é defeito pré-existente da
+chamada; corrigi-lo mudaria o layout do 5.6, então **não foi tocado**.
+
+### 7ª LACUNA: `db_utils::getDao('x')` instancia classes que nenhuma frente enxergava
+
+A 4ª lacuna acrescentou a resolução de `new cl_*` para cobrir o autoload. Mas o e-cidade tem um
+**segundo idioma de instanciação**, que não cita o nome da classe em lugar nenhum:
+
+```php
+$clcadtipo = db_utils::getDao('cadtipo');     // carrega classes/db_cadtipo_classe.php
+$clcadtipo->rotulo->label();                  // no 8.5: label() on null
+```
+
+Como o construtor PHP 4 de `cl_cadtipo` é quem faz `$this->rotulo = new rotulo("cadtipo")`, a
+classe não portada deixa `rotulo` em `null` e a tela morre.
+
+Medido no `fis`: **61 DAOs distintos citados por `getDao()`, 16 classes fora do universo, 14
+delas com construtor PHP 4** — ou seja, 14 classes que quebrariam em silêncio. O universo foi
+de **682 para 699** arquivos e saíram mais 74 `split`, 72 guardas e 15 construtores.
+
+`enumera.py` passou a resolver os dois idiomas na mesma frente.
+
+**É a sétima vez que a mesma falha de método aparece:** a verificação partia da lista que a
+própria enumeração gerou. Vale repetir o contraste — as sete lacunas foram encontradas por
+*navegação* ou por *comparação de saída*, nunca pelas varreduras.
+
+### LACUNA DE DETECÇÃO: o detector de `0 == ""` casa com a PRÓPRIA correção
+
+O `enumera.py` procura `$this->X == "<literal>"` sobre propriedade inteira. A guarda que ele
+mesmo manda aplicar é:
+
+```php
+($this->X === 0 || $this->X === 0.0 || $this->X == "")
+                                       ^^^^^^^^^^^^^^ o detector casa aqui
+```
+
+Logo **essa categoria nunca pode reportar zero**, e "0 remanescentes" era impossível de obter
+por ali. A conferência correta conta as ocorrências **sem guarda** — olhando os 120 bytes
+anteriores atrás do prefixo `$this->X === 0 || $this->X === 0.0 || `.
+
+Rodando o detector correto na base inteira: **21.019 ocorrências em 3.565 arquivos** (consistente
+com as 19.401 registradas, maior porque agora inclui literais não-numéricos). Cruzando com os
+746 arquivos já tocados por commits `Porta `, sobram **12** — os 11 do `tra` (órfão, registrados
+como não corrigidos) e `classes/db_db_usuarios_classe.php`, que é **falso positivo**: ali a
+comparação é `$this->liberalotacao == null || $this->liberalotacao == ''`, e `0 == null` é `true`
+nos **dois** runtimes, então o curto-circuito já cobre o caso.
+
+Ou seja: nenhum módulo portado tem buraco nessa categoria. Mas isso só se soube agora, porque o
+instrumento não sabia medir o próprio resultado.
+
+### CORREÇÃO ao catálogo: `break` fora de laço é fatal de EXECUÇÃO no 5.6, não warning
+
+A seção do `jur` registra que `break` fora de laço "era *warning* no PHP 5.6". **Está errado** —
+medido no próprio runtime:
+
+```
+PHP 5.6:  php -l  -> No syntax errors detected
+          execucao -> Fatal error: Cannot break/continue 1 level
+PHP 8.5:  php -l  -> Fatal error na COMPILACAO (arquivo inteiro nao carrega)
+```
+
+A diferença prática é grande: no 5.6 a tela funciona até alcançar aquela linha; no 8.5 ela não
+carrega nunca. E muda a correção. No `jur` o `break` era inalcançável (a linha anterior chamava
+`db_redireciona()`, que termina em `exit`), então removê-lo era exatamente equivalente.
+
+Em `fis1_vistorias003.php:171` e `:179` ele **é alcançável** — são dois dos seis blocos de erro
+idênticos da mesma função, e os outros quatro não têm `break` (é cópia dos dois que estão dentro
+de `for`). Como o 5.6 morre ali sem chegar ao `db_fim_transacao($sqlerro)`, a correção fiel é
+**`exit;`**, que reproduz esse fluxo nos dois runtimes (ambos terminam em rollback). Remover o
+`break` faria o 8.5 seguir e tratar o erro normalmente — é conserto do defeito, não migração.
+
+### ARMADILHA OPERACIONAL: `chmod 777 extension/log` não basta — os ARQUIVOS também
+
+Sintoma: **toda** tela autenticada devolve `HTTP 500` com corpo vazio, nos dois runtimes, e
+`login.php` continua respondendo 200. Parece defeito grave de migração; é permissão.
+
+```
+extension/log            drwxrwxrwx diego:diego   <- a pasta estava certa
+extension/log/error.log  -rw-rw-r-- diego:diego   <- o ARQUIVO nao, e o container e uid 33
+```
+
+O Logger lança exceção fatal quando não consegue escrever, antes de qualquer saída. A receita de
+subida já trazia `chmod 777 extension/log`; faltava `chmod 666 extension/log/*.log`, que a seção
+de uids documentava mas o bloco de comandos não repetia. Acrescentado lá.
+
+Diagnóstico que resolve em um passo: requisitar uma tela de **módulo já verificado** (`cem`,
+`not`). Se ela também der 500, o problema é de ambiente, não do porte em andamento.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

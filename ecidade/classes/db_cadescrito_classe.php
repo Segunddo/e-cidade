@@ -53,7 +53,7 @@ class cl_cadescrito {
                  q86_datalimite = date = Data Limite 
                  ";
    //funcao construtor da classe 
-   function cl_cadescrito() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadescrito"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -70,7 +70,7 @@ class cl_cadescrito {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q86_numcgm = ($this->q86_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q86_numcgm"]:$this->q86_numcgm);
+       $this->q86_numcgm = (($this->q86_numcgm === 0 || $this->q86_numcgm === 0.0 || $this->q86_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["q86_numcgm"]:$this->q86_numcgm);
        if($this->q86_datalimite == ""){
          $this->q86_datalimite_dia = ($this->q86_datalimite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q86_datalimite_dia"]:$this->q86_datalimite_dia);
          $this->q86_datalimite_mes = ($this->q86_datalimite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q86_datalimite_mes"]:$this->q86_datalimite_mes);
@@ -80,7 +80,7 @@ class cl_cadescrito {
          }
        }
      }else{
-       $this->q86_numcgm = ($this->q86_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q86_numcgm"]:$this->q86_numcgm);
+       $this->q86_numcgm = (($this->q86_numcgm === 0 || $this->q86_numcgm === 0.0 || $this->q86_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["q86_numcgm"]:$this->q86_numcgm);
      }
    }
    // funcao para inclusao
@@ -90,7 +90,7 @@ class cl_cadescrito {
        $this->q86_datalimite = "null";
      }
        $this->q86_numcgm = $q86_numcgm; 
-     if(($this->q86_numcgm == null) || ($this->q86_numcgm == "") ){ 
+     if(($this->q86_numcgm == null) || (($this->q86_numcgm === 0 || $this->q86_numcgm === 0.0 || $this->q86_numcgm == "")) ){ 
        $this->erro_sql = " Campo q86_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -306,7 +306,7 @@ class cl_cadescrito {
    function sql_query ( $q86_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -328,7 +328,7 @@ class cl_cadescrito {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_cadescrito {
    function sql_query_file ( $q86_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_cadescrito {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

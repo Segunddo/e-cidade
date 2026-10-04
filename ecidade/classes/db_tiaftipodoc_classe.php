@@ -50,7 +50,7 @@ class cl_tiaftipodoc {
                  y98_descr = text = Descrição do documento 
                  ";
    //funcao construtor da classe 
-   function cl_tiaftipodoc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tiaftipodoc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_tiaftipodoc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y98_tiafdoc = ($this->y98_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
+       $this->y98_tiafdoc = (($this->y98_tiafdoc === 0 || $this->y98_tiafdoc === 0.0 || $this->y98_tiafdoc == "")?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
        $this->y98_descr = ($this->y98_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_descr"]:$this->y98_descr);
      }else{
-       $this->y98_tiafdoc = ($this->y98_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
+       $this->y98_tiafdoc = (($this->y98_tiafdoc === 0 || $this->y98_tiafdoc === 0.0 || $this->y98_tiafdoc == "")?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tiaftipodoc {
          $this->y98_tiafdoc = $y98_tiafdoc; 
        }
      }
-     if(($this->y98_tiafdoc == null) || ($this->y98_tiafdoc == "") ){ 
+     if(($this->y98_tiafdoc == null) || (($this->y98_tiafdoc === 0 || $this->y98_tiafdoc === 0.0 || $this->y98_tiafdoc == "")) ){ 
        $this->erro_sql = " Campo y98_tiafdoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_tiaftipodoc {
    function sql_query ( $y98_tiafdoc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_tiaftipodoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_tiaftipodoc {
    function sql_query_file ( $y98_tiafdoc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_tiaftipodoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
