@@ -60,8 +60,14 @@ final class ParseStrComExtractRector extends AbstractRector
         $resultado = new Variable('__qs');
         $chamada->args[] = new Arg($resultado);
 
+        // Reaproveita o Expression ORIGINAL em vez de criar um novo. Um no novo nasce
+        // sem atributos, e os comentarios ficam presos ao no antigo -- o Rector os
+        // descarta em silencio. Medido: 3 arquivos perderam linhas como
+        // "//---  parser POST/GET" e codigo comentado acima da chamada.
+        $node->expr = $chamada;
+
         return [
-            new Expression($chamada),
+            $node,
             new Expression(new FuncCall(new Name('extract'), [new Arg(clone $resultado)])),
         ];
     }

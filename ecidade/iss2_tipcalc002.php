@@ -26,6 +26,7 @@
  */
 
 include(modification("fpdf151/pdf.php"));
+
 parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
 extract($__qs);
 

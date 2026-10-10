@@ -64,6 +64,7 @@ if(!session_is_registered("DB_instit")) {
   }else{
      parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
      extract($__qs);
+
      if(isset($instit)){
       db_putsession("DB_instit",$instit);
      }else{

@@ -36,6 +36,8 @@ $cl_porte = new cl_issporte;
 $clrotulo = new rotulocampo;
 $clrotulo->label("q40_codporte");
 $clrotulo->label("q40_descr");
+
+//---  parser POST/GET
 parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
 extract($__qs);
 db_postmemory($HTTP_POST_VARS);
