@@ -65,18 +65,19 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** migrando a **área Tributário** módulo a módulo. 8 de 16 concluídos.
+**Onde paramos:** migrando a **área Tributário** módulo a módulo. 9 de 16 concluídos.
 
 | | |
 |---|---|
-| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` Fiscal — **8 de 16** |
+| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` · `iss` ISSQN — **9 de 16** |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|tra)[0-9]*_` |
-| **Próximo módulo** | **`iss` ISSQN (400 telas, resíduo 144)** → `dvr` (236) → `arr` (346). `inf` e `tri` junto dos módulos que os hospedam. O pré-requisito `dbagata/` já está pago. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|tra)[0-9]*_` |
+| **Próximo módulo** | **`dvr` (236)** → `arr` (346). `inf` e `tri` junto dos módulos que os hospedam. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
+| **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
 
@@ -810,7 +811,7 @@ location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|n
 gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
 Financeiro e Patrimonial junto.
 
-**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ · `fis` ✅ — restam 4 prefixos (`iss`, `arr`, `dvr`, e `inf`/`tri` embutidos).
+**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ · `fis` ✅ · `iss` ✅ — restam 3 prefixos (`arr`, `dvr`, e `inf`/`tri` embutidos).
 
 ### ⚠ ORDEM REVISTA: `jur` antes de `div`, e `arr` por último
 
@@ -876,7 +877,8 @@ Cada prefixo é um lote independente, com commit próprio e revertível:
 1. enumerar, em SETE frentes       -> verificar: cada frente fecha (ver abaixo)
 2. varrer as categorias conhecidas -> verificar: inventário fechado
 3. classificar cada ocorrência     -> verificar: nenhum falso-positivo de JavaScript
-4. aplicar em nível de byte        -> verificar: zero remanescentes
+4. aplicar (Rector, ver abaixo)    -> verificar: zero remanescentes, REPETINDO ate dar 0
+4b. portao de FUNCOES contra o 5.6 -> verificar: nenhuma funcao emitida que falte no 5.6
 5. php -l nos DOIS runtimes        -> verificar: 100% OK em 5.6 e 8.5 (com </dev/null!)
 6. instanciar as classes           -> verificar: estado idêntico entre runtimes
 7. comparar as telas com sessão    -> verificar: byte-a-byte, normalizando ids aleatórios
@@ -1182,7 +1184,7 @@ os quatro instrumentos passaram a ser versionados:
 | Arquivo | Passos da receita |
 |---|---|
 | `enumera.py` | 1–3: universo pelas seis frentes + inventário + lista de alvos |
-| `porta.py` | 4: transformações mecânicas |
+| ~~`porta.py`~~ → `rector-curado.php` + `rector-rules/` | 4: transformações mecânicas. O `porta.py` fica como referência e para comparar resultados; a partir do `iss` quem aplica é o Rector. |
 | `instancia_classes.php` | 6: estado das classes nos dois runtimes |
 | `cmp.py` | 7: comparação das telas |
 
@@ -1647,6 +1649,106 @@ $ClearColumns = (is_array($ClearColumns) && is_array($columns))
 construção que passou de *warning* a `TypeError`/`ValueError`. Código legado que usa `@` para
 "deixar passar" argumento inválido **falha mesmo com o `@`**. Vale para `array_merge`,
 `pg_*`, `date()`, `sizeof()` e todas as outras já catalogadas aqui.
+
+### Estado: MÓDULO `iss` (ISSQN) PORTADO ✅ — 9º da área Tributário, e o 1º feito com Rector
+
+**400 telas** (`^iss[0-9]*_`). O módulo tem **oito** variantes de prefixo: `iss1_`…`iss4_`, mais
+`iss01_`, `iss03_`, `iss04_` e **`iss179_`** — esta última derrubaria um `[0-9]?` no nginx, mesma
+armadilha do `jur01_`. Universo pelas sete frentes: **819 arquivos**, **280 alterados**.
+
+| Correção | Qtd |
+|---|---|
+| guarda `$this->X == <literal>` | 711 |
+| `split(`/`ereg*(` → `preg_*` | 538 |
+| construtor PHP4 → `__construct` | 127 |
+| `parse_str()` + `extract()` | 116 |
+| guardas `pg_*` contra resultado falso | 26 |
+| guardas de divisão por zero | 5 |
+| `reset()`/`sizeof()`/`rsort()` sobre null | 5 |
+| teste `$txt!=''` do `Cell()` do FPDF | 2 |
+| `sprintf('%.f')` → `'%.6f'` | 1 |
+| construtor com argumento faltando | 1 |
+
+Mais **6.480 linhas de modernização** que o Rector trouxe junto e que **não** são exigidas pela
+versão de destino: 2.973 renomeando alias `pg_*`, 2.432 `var $x` → `public $x`, 1.075
+acrescentando `public` a método. Ver a ressalva no fim desta seção.
+
+| Passo | Resultado |
+|---|---|
+| 1. enumeração × `ls` | 400 = 400 ✅ |
+| 5. `php -l` nos dois runtimes | 280/280 alterados, 0 erros em 5.6 e 8.5 |
+| portão de funções contra o 5.6 | 0 ausentes |
+| 7. bateria de telas | **397/400** (371 → 393 → 395 → 396 → 397) |
+| 8. roteamento | `iss1_`, `iss01_`, `iss179_` e `/w/2/iss1_` pelo 8.5 |
+| regressão nos 8 módulos anteriores | **zero** — todos na linha de base |
+
+As 3 divergências restantes são bugs **pré-existentes** e ficam como estão, pelo princípio
+registrado em *Princípios*:
+
+- `iss1_tabalvara_depto001.php` — `$cltabdesc` é usado na linha 43 e **nunca atribuído** no
+  arquivo. Até o PHP 7 isso criava um `stdClass` automaticamente; o 8.0 transformou em `Error`.
+- `iss4_issbasecaracteristicas001.php` — `$oGrupo` nulo, mesma família.
+- `iss3_emissaoalvaraeventos001.php` — `pg_lo_export($oid, $file, $conn)`, com os argumentos na
+  ordem errada. A assinatura é `($connection, $oid, $filename)` **nos dois runtimes**; o 5.6
+  tolerava.
+
+### ⚠ DECISÃO: Rector adotado como instrumento do passo 4, a partir do `iss`
+
+O experimento do `div` havia concluído "híbrido: Rector na camada sintática, ferramental próprio
+na semântica", e eu medi duas vezes (`fis`, `iss`) que a vantagem da AST era pequena demais para
+pagar a troca. **O que mudou a conta foi escrever as duas regras que faltavam.**
+
+`scratchpad/rector-rules/` — 196 linhas, contra 150 do `porta.py` inteiro:
+
+| Regra própria | Linhas | Cobre |
+|---|---|---|
+| `GuardaComparacaoLiteralRector` | 122 | `$this->X == "<literal>"` → guarda do 5.6 |
+| `ParseStrComExtractRector` | 74 | `parse_str` de 1 arg + `extract()` |
+
+Com elas, o Rector faz **100% do porte**. Acordo medido contra o `porta.py`, a partir do mesmo
+ponto de partida: **246 de 248 arquivos semanticamente idênticos**, e nos 2 em que divergem **o
+Rector está certo** — o `porta.py` editou um `parse_str` que estava dentro de comentário.
+
+Onde a AST ganha do regex, medido e não suposto:
+
+- **comentário**: o regex não distingue código de comentário; a AST sim
+- **precedência**: o printer põe parênteses só onde muda o sentido —
+  `($this->a === 0 || … ) && $o` leva, `… ? 1 : 2` não leva. O `porta.py` parentiza sempre.
+
+#### Os cinco modos de falha silenciosa que a adoção custou
+
+Nenhum deles aparece em varredura; todos foram achados por verificação cruzada.
+
+1. **O Rector desliga regras em silêncio.** Sem `->withPhpVersion()`, ele resolve a versão alvo
+   do `composer.json` do projeto (`">=5.6.4"`) e pula toda regra com *version bonding* —
+   `Php4ConstructorRector` (122 arquivos) e `EregToPregMatchRector` (118) entre elas — relatando
+   `[OK] N files changed` sem aviso nenhum. **O pin é obrigatório.**
+2. **Denylist não é transferível entre módulos.** `StrContainsRector` e `ArrayKeyFirstLastRector`
+   nunca dispararam no `div` e dispararam no `iss`, emitindo `str_contains()` (PHP 8.0) e
+   `array_key_first()` (PHP 7.3) em arquivos servidos pelo runtime **5.6**. Passam no `php -l`.
+   A denylist foi de 14 para 16 regras — e tem de ser reconferida a cada módulo.
+3. **O Rector não converge numa passada, e isso é intermitente.** Rodando o mesmo comando sobre
+   os mesmos alvos: 163 arquivos, depois mais 83, depois 0. Noutra execução, 246 e depois 0.
+   **Repetir até dar zero** é obrigatório; um run não prova nada.
+4. **Regra própria que devolve nó contendo o original entra em laço infinito.** O PhpParser
+   percorre os filhos do substituto, e o substituto não passa por `enterNode` — então uma
+   checagem de forma nunca é alcançada. O processo morre com `Killed`, sem traceback. A barreira
+   que funciona é marcar o nó (`setAttribute`) ao embrulhar.
+5. **Regra própria que cria nó novo apaga comentários.** Nó novo nasce sem atributos, e os
+   comentários ficam presos ao antigo. Três arquivos perderam linhas como `//--- parser POST/GET`.
+   Correção: reaproveitar o nó original em vez de criar outro.
+
+#### A ressalva que fica
+
+O Rector traz junto **modernização que a versão de destino não exige** — no `iss`, 6.480 das
+8.409 linhas (77%). É o "grupo (c)" da taxonomia do TCC de referência, e infla a revisão. Duas
+observações honestas: `pg_numrows()` **é** deprecated desde o 8.0 (confirmado no runtime), então
+o rename é grupo (b) e não lixo; e `var $x` → `public $x` é inofensivo nos dois runtimes. Mas o
+diff passa de 1.929 linhas de migração para 8.409 no total, e quem revisar precisa saber disso.
+
+Se o ruído incomodar, as regras `VarToPublicPropertyRector`, `ExplicitPublicClassMethodRector`,
+`LongArrayToShortArrayRector` e `RenameFunctionRector` (para os alias `pg_*`) podem entrar na
+denylist — ao custo de deixar o código mais longe do idioma moderno.
 
 ### CATEGORIA NOVA (iss): `DivisionByZeroError`
 
@@ -2578,7 +2680,11 @@ ferramental próprio continua necessário para eles. A ferramenta não sai de ce
 
 #### Resposta à pergunta, com o escopo certo
 
-**Sim, para a camada sintática, e vale a pena a partir de `fis` (353) e `iss` (400)** — onde
+**SUPERADO — ver *DECISÃO: Rector adotado*.** Esta conclusão valia enquanto faltavam as regras
+da camada semântica. Escritas (196 linhas), o Rector passou a fazer 100% do porte, e a resposta
+deixou de ser "só a camada sintática".
+
+*Texto original:* **Sim, para a camada sintática, e vale a pena a partir de `fis` (353) e `iss` (400)** — onde
 o volume paga a montagem da lista. Para os sete prefixos pequenos restantes, montar e validar
 a lista custa mais do que as poucas dezenas de correções sintáticas que ela faria.
 

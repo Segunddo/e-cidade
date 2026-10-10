@@ -22,6 +22,17 @@ stat -c '%n %A' ecidade/tmp ecidade/arquivos                         # ambos 777
 stat -c '%n %A' ecidade/extension/log/*.log                          # os ARQUIVOS 666
 ```
 
+**O Rector precisa ser instalado** — ele vive em `ecidade/tmp/rector/`, que é gitignored, então
+não sobrevive a um clone novo. A config e as regras **são** versionadas (`scratchpad/`):
+
+```bash
+docker exec -i ecidade_php85 sh -c '
+  mkdir -p /var/www/html/tmp/rector && cd /var/www/html/tmp/rector
+  [ -f composer.json ] || composer init --no-interaction --name=ecidade/rector-exp >/dev/null 2>&1
+  composer require --no-interaction --quiet rector/rector:^2.0
+  ./vendor/bin/rector --version' </dev/null
+```
+
 **Prova de fumaça antes de culpar o porte:** requisite uma tela de módulo já verificado
 (`cem1_campas001.php`) com a sessão. Se ela der 500, o problema é de ambiente. O caso mais comum
 é `extension/log/*.log` pertencer ao host em 664 — o Logger lança fatal antes de qualquer saída
@@ -99,15 +110,72 @@ split(" +", "um   dois")   -> ["um","dois"]      explode(" +", ...) -> ["um   do
 Se o inventário trouxer categoria que não está no `CLAUDE.md`, **pare e investigue** antes de
 transformar. Toda categoria nova até hoje veio daí.
 
-## Passo 4 — Aplicar
+## Passo 4 — Aplicar (Rector, desde o `iss`)
+
+O instrumento **mudou**: o `porta.py` foi substituído pelo Rector com lista curada mais duas
+regras próprias. Ele cobre 100% das categorias e erra menos que o regex (não toca comentário,
+acerta a precedência). O `porta.py` fica como referência e para comparar resultados.
 
 ```bash
-python3 scratchpad/porta.py <prefixo>
+# o scratchpad/ nao esta no bind mount: copiar config e regras para dentro
+docker exec ecidade_php85 mkdir -p /var/www/html/tmp/rector/scratch/rector-rules
+docker cp scratchpad/rector-curado.php      ecidade_php85:/var/www/html/tmp/rector/scratch/
+docker cp scratchpad/rector-rules/.         ecidade_php85:/var/www/html/tmp/rector/scratch/rector-rules/
+
+# REPETIR ate dizer "0 files changed" -- ele NAO converge numa passada, e isso e intermitente
+docker exec -i ecidade_php85 sh -c 'cd /var/www/html;
+  ALVOS=/var/www/html/tmp/<pref>_alvos.txt tmp/rector/vendor/bin/rector process \
+    --config tmp/rector/scratch/rector-curado.php --no-progress-bar' </dev/null
 ```
 
-Transforma só o que é mecânico e **aborta** diante de caso que exige decisão humana. As
-categorias que ele apenas relata — `each(`, `ereg*(`, offsets `{}`, `=& new` — são tratadas à
-mão, uma a uma, verificando o comportamento do 5.6 antes:
+**Quatro armadilhas, todas medidas e todas silenciosas:**
+
+1. **O pin de versão é obrigatório.** Sem `->withPhpVersion(PhpVersion::PHP_80)`, o Rector lê a
+   versão alvo do `composer.json` do projeto (`">=5.6.4"`) e **pula toda regra com version
+   bonding** — inclusive `Php4ConstructorRector` e `EregToPregMatchRector` — reportando `[OK]`
+   sem aviso. Conferir sempre: `Php4ConstructorRector` **tem** de aparecer na lista de regras
+   aplicadas se o módulo tiver construtor PHP 4.
+2. **Rodar até dar zero.** Uma passada deixou 85 `parse_str` por converter; a segunda, com o
+   comando idêntico, converteu 83. Um run não prova que acabou.
+3. **A denylist não é transferível entre módulos.** Regras que nunca dispararam antes podem
+   disparar agora e emitir função que não existe no 5.6. Daí o passo 4b, abaixo, ser obrigatório.
+4. **O Rector traz modernização junto** (~77% do diff no `iss`): alias `pg_*`, `var` → `public`.
+   Inofensiva nos dois runtimes, mas infla a revisão. Se incomodar, entra na denylist.
+
+### Passo 4b — portão de FUNÇÕES contra o 5.6 (nenhum `php -l` faz isto)
+
+```bash
+python3 - <<'EOF'
+import subprocess, re
+d=subprocess.run(["git","diff","-U0","--","ecidade/"],capture_output=True).stdout
+nov=set(); vel=set()
+for l in d.split(b"\n"):
+    if l.startswith((b"+++",b"---")): continue
+    alvo = nov if l.startswith(b"+") else (vel if l.startswith(b"-") else None)
+    if alvo is not None:
+        alvo |= {m.group(1) for m in re.finditer(rb'(?<![\$>:\w])([a-z_][a-z0-9_]{2,})\s*\(', l)}
+open("/tmp/fn.txt","w").write("\n".join(sorted(x.decode() for x in nov-vel)))
+EOF
+docker cp /tmp/fn.txt ecidade_php56:/tmp/fn.txt
+docker exec -i ecidade_php56 php -r '
+$f=array_filter(array_map("trim", file("/tmp/fn.txt", FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES)));
+$falta=array(); foreach($f as $x) if(!function_exists($x)) $falta[]=$x;
+echo count($falta)," ausentes: ",implode(", ",$falta),"\n";' </dev/null
+```
+
+Já pegou `str_contains()` e `array_key_first()` emitidos em arquivos servidos pelo 5.6.
+
+### Escrever uma regra própria? Dois defeitos esperam por você
+
+- **Laço infinito**: se a regra devolve um nó que **contém** o original, o PhpParser percorre os
+  filhos do substituto e o reencontra. O substituto não passa por `enterNode`, então
+  `DONT_TRAVERSE_CHILDREN` nunca é alcançado. O processo morre com `Killed`, sem traceback.
+  Marque o nó: `$n->setAttribute('ja_tratado', true)`.
+- **Perda de comentários**: nó novo nasce sem atributos, e os comentários ficam presos ao antigo.
+  Reaproveite o nó original (`$node->expr = $novo;`) em vez de criar outro.
+
+As categorias que exigem decisão caso a caso continuam tratadas à mão, verificando o
+comportamento do 5.6 antes:
 
 ```bash
 docker exec ecidade_php56 php -r '<expressão>'    # a referência é o 5.6, não a documentação
