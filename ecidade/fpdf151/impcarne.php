@@ -752,7 +752,7 @@ var $lUtilizaModeloDefault = true;
  * @param object  $objpdf    - Instancia da classe FPDF
  * @param integer $impmodelo - Numero do Modelo a ser utilizado.
  */
-  function __construct(&$objpdf,$impmodelo){
+  function __construct(&$objpdf,$impmodelo = null){
     $this->objpdf = $objpdf;
     $this->impmodelo = $impmodelo;
   }

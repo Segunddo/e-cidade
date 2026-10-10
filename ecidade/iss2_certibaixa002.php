@@ -52,7 +52,7 @@ $sSqlTabativBaixa .= "  from tabativbaixa                                 ";
 $sSqlTabativBaixa .= " where q11_inscr = " .$inscr;
 
 $rsTabativBaixa    = db_query($sSqlTabativBaixa);
-if (pg_numrows($rsTabativBaixa) == 0 || !$rsTabativBaixa ){
+if (($rsTabativBaixa ? pg_numrows($rsTabativBaixa) : 0) == 0 || !$rsTabativBaixa ){
 
   db_msgbox(_M($sCaminhoMensagem."baixa_incricao_nao_encontrada"));
   exit;

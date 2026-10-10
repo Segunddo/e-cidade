@@ -78,7 +78,7 @@ $p       = 0;
 	                           inner join cgm on q86_numcgm = z01_numcgm 
        	               where q86_numcgm in ({$Dados}) order by z01_nome";
    $result = db_query($sSqlCadEscrito);
-   $numrows = pg_numrows($result);
+   $numrows = ($result ? pg_numrows($result) : 0);
     
    for($x=0; $x< $numrows; $x++) {
      db_fieldsmemory($result,$x);

@@ -219,7 +219,7 @@ $sql = "
 
 $result = db_query($sql);
 //db_criatabela($result);exit;
-$numlinhas = pg_numrows($result);
+$numlinhas = ($result ? pg_numrows($result) : 0);
 if(!isset($numlinhas) || $numlinhas == 0){
     db_redireciona('db_erros.php?fechar=true&db_erro=Não foi encontrado nenhum registro para o filtro selecionado.');
 }

@@ -1048,8 +1048,8 @@ if (!function_exists("db_select")) {
                 $nomevar = $nomevar == "" ? $nome : $nomevar;
 
                 //x = array("a"=>"1","2")
-                reset($db_matriz);
-                for ($i = 0; $i < sizeof($db_matriz); $i++) {
+                if (is_array($db_matriz)) { reset($db_matriz); }
+                for ($i = 0; $i < sizeof((array)$db_matriz); $i++) {
                     ?>
                     <option
                         value="<?= key($db_matriz) ?>" <?= (@$GLOBALS[$nomevar] == key($db_matriz) || (@$GLOBALS[$nomevar] === "" && key($db_matriz) == 0) ? "selected" : "") ?>><?= $db_matriz[key($db_matriz)] ?></option>
@@ -1066,8 +1066,8 @@ if (!function_exists("db_select")) {
             global $$nome_select_descr, $$nome;
             $$nome = $GLOBALS[$nome];
 
-            reset($db_matriz);
-            for ($matsel = 0; $matsel < sizeof($db_matriz); $matsel++) {
+            if (is_array($db_matriz)) { reset($db_matriz); }
+            for ($matsel = 0; $matsel < sizeof((array)$db_matriz); $matsel++) {
                 if (key($db_matriz) == $$nome) {
                     $$nome_select_descr = $db_matriz[key($db_matriz)];
                     $$nome = key($db_matriz);

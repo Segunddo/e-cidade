@@ -98,7 +98,7 @@ $sql = "select * from listainscrcab inner join cgm on p11_numcgm = z01_numcgm  w
 
 $result = db_query($sql);
 
-if (pg_num_rows($result) == 0){
+if (($result ? pg_num_rows($result) : 0) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 
 }

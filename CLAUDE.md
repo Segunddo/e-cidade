@@ -922,6 +922,15 @@ comparações `0 == ""`. **Nenhuma categoria nova** além das já catalogadas.
   folha de pagamento, empenho contábil e tributos de prefeitura real. Regressão silenciosa em
   cálculo não é bug — é município que não paga servidor.
 - **Medir antes de decidir.** Este arquivo só contém números verificados no código; manter assim.
+- **O objetivo é MIGRAR, não consertar.** Bug pré-existente não se corrige: documenta-se e
+  deixa-se como está. Quando o PHP 8 transforma em fatal algo que o 5.6 tolerava, a correção
+  certa é a que **reproduz o comportamento do 5.6** — não a que conserta a intenção do autor.
+  Exemplos já decididos assim: o `break` fora de laço do `fis` virou `exit` (o 5.6 morria ali)
+  em vez de ser removido; o `"J"` passado como `$ln` ao FPDF foi contornado com `(float)$ln`
+  em vez de corrigido na chamada; o `1969-12-31` do `db_vencimento()` foi preservado.
+  **Critério:** se a alteração mudaria a saída do `:8080`, não é migração — é conserto, e fica
+  de fora. Uma tela que quebra **igual nos dois** não é problema nosso; uma que quebra **só no
+  8.5** é, e a correção tem de ser a mínima que restaure a paridade.
 - O ambiente PHP 5.6 existente (`docker-compose.yml`) é a referência funcional — **não alterá-lo**.
   Ambientes novos entram em arquivos separados (ex.: `docker-compose.php85.yml`).
 
@@ -1638,6 +1647,86 @@ $ClearColumns = (is_array($ClearColumns) && is_array($columns))
 construção que passou de *warning* a `TypeError`/`ValueError`. Código legado que usa `@` para
 "deixar passar" argumento inválido **falha mesmo com o `@`**. Vale para `array_merge`,
 `pg_*`, `date()`, `sizeof()` e todas as outras já catalogadas aqui.
+
+### CATEGORIA NOVA (iss): `DivisionByZeroError`
+
+```
+                     10 / 0        10 % 0
+PHP 5.6:             false         false      (Warning, suprimivel com @)
+PHP 8.0+:            DivisionByZeroError FATAL  -- o @ NAO suprime
+```
+
+É da mesma família do `array_merge(null)`: construção que era *warning* e virou `Error`, com o
+`@` deixando de ser rede de segurança.
+
+Onde apareceu: cinco pontos, **dois deles no núcleo** (`fpdf151/fpdf.php`, no desenho do gráfico
+de pizza, quando `$this->sum` é zero) e três em `iss2_calculadoepago002.php`, quando o relatório
+não tem registros.
+
+**Correção fiel:** guardar o denominador produzindo o valor que o 5.6 entregava adiante. O 5.6
+devolvia `false`, que as funções seguintes coagiam para 0:
+
+```php
+floor(($val * 360) / doubleval($this->sum))
+  ->  floor($this->sum ? ($val * 360) / doubleval($this->sum) : 0)
+
+100 - (($qtd_emdia * 100) / $qtd_calcfixo)
+  ->  100 - ($qtd_calcfixo ? ($qtd_emdia * 100) / $qtd_calcfixo : 0)
+```
+
+Comprovado no 5.6: `floor(false)` = 0 e `100 - false` = 100 — idênticos à guarda.
+
+**Não varrer em massa.** `fpdf151/fpdf.php` tem **25 divisões por variável**, quase todas por
+`$this->k` (a escala, nunca zero). Vale a mesma decisão das guardas `pg_*`: corrigir na aparição.
+
+### CATEGORIA NOVA (iss): `sprintf('%.f')` mudou de precisão
+
+```
+                     sprintf('%.f', 0)
+PHP 5.6:             "0.000000"    (precisao sem digito = padrao 6)
+PHP 8.5:             "0"           (precisao sem digito = 0)
+```
+
+Não é erro, não é aviso: é **saída diferente**. Em `fpdf151/fpdf.php` isso mudava a legenda do
+gráfico de `(0.000000%)` para `(0%)`, e como a largura do texto define o layout, **a geometria
+inteira do gráfico se deslocava** — centro, raio e posição de cada rótulo.
+
+**Correção: `'%.f'` → `'%.6f'`**, que torna explícita a precisão que o 5.6 assumia.
+
+Vale a pena registrar como o defeito foi achado, porque nenhum portão o pegaria: `php -l` passa,
+não há fatal no log, e os dois runtimes devolvem HTTP 200. Só a **comparação byte-a-byte**, e
+mesmo assim só depois de descomprimir o fluxo `FlateDecode` do PDF.
+
+### CATEGORIA NOVA (iss): o `0 == ""` dentro do `Cell()` do FPDF
+
+A RFC "Saner string to number comparisons" já estava catalogada nas formas `==` e de ordem.
+Esta é a quarta manifestação, e vive no **núcleo**, no teste que decide se o FPDF escreve o
+texto de uma célula:
+
+```php
+fpdf151/fpdf.php:965    if($txt!='')      // decide se imprime o texto da celula
+```
+
+```
+                     0 != ""
+PHP 5.6:             false   -> celula fica VAZIA
+PHP 8.5:             TRUE    -> imprime "0"
+```
+
+Sintoma observado em `iss2_escritctb002.php`: o campo "Total de Registros" saía **em branco** no
+5.6 e **`0`** no 8.5. HTTP 200 nos dois, PDF válido nos dois, 41 bytes de diferença.
+
+**Correção:** `if($txt!='' && $txt!==0 && $txt!==0.0)`, aplicada também na linha 866 (o mesmo
+teste no sublinhado). Verificada caso a caso nos dois runtimes:
+
+```
+          0      0.0     ""      "0"        "abc"      null
+5.6:    vazio   vazio   vazio   imprime    imprime    vazio
+8.5:    vazio   vazio   vazio   imprime    imprime    vazio
+```
+
+Identificada uma terceira ocorrência do mesmo teste em `fpdf151/FpdfMultiCellBorder.php:301`,
+**não tocada** — nenhuma tela a exercitou ainda, e vale a decisão de corrigir na aparição.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

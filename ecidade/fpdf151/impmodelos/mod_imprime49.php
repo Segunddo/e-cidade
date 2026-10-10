@@ -190,7 +190,7 @@ for ($j = 0;$j < $confNumRows;$j++){
     $cellYnew = $this->objpdf->getY();
     $this->objpdf->line(10,$iYinicio,200,$iYinicio);
     $totlinha = 0;
-    for ($i = 0; $i < pg_num_rows($this->rsServico); $i++){
+    for ($i = 0; $i < ($this->rsServico ? pg_num_rows($this->rsServico) : 0); $i++){
  
         $this->objpdf->sety($cellYnew);
         $oItensServico     = db_utils::fieldsmemory($this->rsServico,$i);

@@ -51,7 +51,7 @@ $anofin = substr($dataf,0,4);
    }else{
       @$xmax  .= " 0 as xx".$x;
    }
-   $mesini += 1;
+   $mesini = (int)$mesini + 1;
    if ($mesini > 12){
       $anoini += 1;
       $mesini = 1;
@@ -193,7 +193,7 @@ for ($x = 1; $x < 13;$x++){
     $pdf->cell($espaco,$altura,db_formatar($mesini,'s','0',2,'e').'/'.$anoini,1,0,'C',1);
    }
    
-   $mesini += 1;
+   $mesini = (int)$mesini + 1;
    if ($mesini > 12){
       $anoini += 1;
       $mesini = 1;
@@ -217,7 +217,7 @@ for ( $i = 0; $i < $num; $i++) {
          }else{
             $pdf->cell($espaco,$altura,db_formatar($mesini,'s','0',2,'e').'/'.$anoini,1,0,'C',1);
          }
-         $mesini += 1;
+         $mesini = (int)$mesini + 1;
          if ($mesini > 12){
             $anoini += 1;
             $mesini = 1;

@@ -111,7 +111,7 @@ select q01_anousu as ano,
 group by ano, receita,codrec
 ";
 $resultfixo= db_query($sqlfixo);
-$linhasfixo= pg_num_rows($resultfixo);
+$linhasfixo= ($resultfixo ? pg_num_rows($resultfixo) : 0);
 db_fieldsmemory($resultfixo,0);
 
 // variavel calculado
@@ -175,7 +175,7 @@ select q05_ano,
 ) as y
 ";
 $resultvarcalc= db_query($sqlvarcalc);
-$linhasvarcalc= pg_num_rows($resultvarcalc);
+$linhasvarcalc= ($resultvarcalc ? pg_num_rows($resultvarcalc) : 0);
 db_fieldsmemory($resultvarcalc,0);
 
 $sqlvencvar = "
@@ -192,7 +192,7 @@ where k00_dtvenc < '".date("Y-m-d", db_getsession("DB_datausu"))."'
 group by k00_inscr
 ) as x ";
 $resultvencvar= db_query($sqlvencvar);
-$linhasvencvar= pg_num_rows($resultvencvar);
+$linhasvencvar= ($resultvencvar ? pg_num_rows($resultvencvar) : 0);
 db_fieldsmemory($resultvencvar,0);
 
 $sqlqtdpagvar = "
@@ -208,7 +208,7 @@ where q05_ano = $anousu
 group by k00_inscr
 ) as x ";
 $resultqtdpagvar= db_query($sqlqtdpagvar);
-$linhasqtdpagvar= pg_num_rows($resultqtdpagvar);
+$linhasqtdpagvar= ($resultqtdpagvar ? pg_num_rows($resultqtdpagvar) : 0);
 db_fieldsmemory($resultqtdpagvar,0);
 
 
@@ -225,7 +225,7 @@ where q05_ano = $anousu
 group by k00_inscr
 ) as x ";
 $resultdivida= db_query($sqldivida);
-$linhasdivida= pg_num_rows($resultdivida);
+$linhasdivida= ($resultdivida ? pg_num_rows($resultdivida) : 0);
 db_fieldsmemory($resultdivida,0);
 
 $head2 = "ESTATÍSTICAS DO ISSQN CALCULADO E PAGO";
@@ -256,12 +256,12 @@ $total_tributo = "";
     $pdf->Cell(70,$alt,"ISSQN FIXO",0,0,"L",0);
     $pdf->Cell(40,$alt,$qtd_calcfixo,0,0,"R",0);
     $pdf->Cell(40,$alt,db_formatar($vlr_calcfixo,"f"),0,0,"R",0);
-    $pdf->Cell(40,$alt,round(($qtd_calcfixo*100)/$qtd_total,2)."%",0,0,"R",0);
+    $pdf->Cell(40,$alt,round($qtd_total ? ($qtd_calcfixo*100)/$qtd_total : 0,2)."%",0,0,"R",0);
     $pdf->ln();
     $pdf->Cell(70,$alt,"ISSQN VARIÁVEL",0,0,"L",0);
     $pdf->Cell(40,$alt,$qtd_calcvar,0,0,"R",0);
     $pdf->Cell(40,$alt,db_formatar($vlr_calcvar,"f"),0,0,"R",0);
-    $pdf->Cell(40,$alt,round(($qtd_calcvar*100)/$qtd_total,2)."%",0,0,"R",0);
+    $pdf->Cell(40,$alt,round($qtd_total ? ($qtd_calcvar*100)/$qtd_total : 0,2)."%",0,0,"R",0);
     $pdf->ln();
        
 // total
@@ -305,7 +305,7 @@ $pdf->Cell(40,$alt,"INADIMP (%)",0,0,"R",0);
 $pdf->ln();
 $pdf->SetFont('Arial','',8);
 $qtd_emdia = $qtd_emdia - $qtd_divida;
-$percenteF = 100-(($qtd_emdia  * 100)/$qtd_calcfixo);
+$percenteF = 100-($qtd_calcfixo ? ($qtd_emdia  * 100)/$qtd_calcfixo : 0);
 $percenteF = round($percenteF,2);
 
 $pdf->Cell(70,$alt,"ISSQN FIXO",0,0,"L",0);
@@ -315,7 +315,7 @@ $pdf->Cell(40,$alt,$percenteF."%",0,0,"R",0);
 $pdf->ln();
 
 $emdiavar = $qtd_calcvar - $vencido - $divida;
-$percenteV = 100-(($emdiavar  * 100)/$qtd_calcvar);
+$percenteV = 100-($qtd_calcvar ? ($emdiavar  * 100)/$qtd_calcvar : 0);
 $percenteV = round($percenteV,2);
 $pdf->Cell(70,$alt,"ISSQN VARIÁVEL",0,0,"L",0);
 $pdf->Cell(40,$alt,($qtd_calcvar-$emdiavar),0,0,"R",0);

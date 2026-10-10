@@ -65,7 +65,7 @@ $sql .= "         k02_drecei  ";
 $sql .= "order by k00_receit  ";
 
 $result = db_query($sql);
-$num = pg_num_rows($result);
+$num = ($result ? pg_num_rows($result) : 0);
 $linha = 0;
 $pdf->ln(2);
 $pre = 0;
@@ -148,7 +148,7 @@ $sql .= "order by k00_receit  ";
 
 
 $result = db_query($sql);
-$num = pg_num_rows($result);
+$num = ($result ? pg_num_rows($result) : 0);
 $pdf->SetFont('Arial','B',9);
 $imposto = "ISSQN VARIÁVEL";
 $borda   = "LRT";
@@ -210,7 +210,7 @@ $sql .= "         k02_drecei  ";
 $sql .= "order by k00_receit  ";
 
 $result = db_query($sql);
-$num = pg_num_rows($result);
+$num = ($result ? pg_num_rows($result) : 0);
 $pdf->SetFont('Arial','B',9);
 $imposto = "ALVARÁ";
 $borda = "LRT";
@@ -274,7 +274,7 @@ $sql .= "         k02_drecei  ";
 $sql .= "order by k00_receit  ";
 
 $result = db_query($sql);
-$num = pg_num_rows($result);
+$num = ($result ? pg_num_rows($result) : 0);
 $pdf->SetFont('Arial','B',9);
 $imposto = "VISTORIAS";
 $borda = "LRT";
