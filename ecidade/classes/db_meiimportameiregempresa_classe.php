@@ -105,12 +105,12 @@ class cl_meiimportameiregempresa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q107_sequencial = ($this->q107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_sequencial"]:$this->q107_sequencial);
+       $this->q107_sequencial = ($this->q107_sequencial === 0 || $this->q107_sequencial === 0.0 || $this->q107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_sequencial"]:$this->q107_sequencial);
        $this->q107_municipio = ($this->q107_municipio == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_municipio"]:$this->q107_municipio);
        $this->q107_cnpj = ($this->q107_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_cnpj"]:$this->q107_cnpj);
        $this->q107_cnpjmatriz = ($this->q107_cnpjmatriz == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_cnpjmatriz"]:$this->q107_cnpjmatriz);
        $this->q107_nome = ($this->q107_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_nome"]:$this->q107_nome);
-       $this->q107_capitalsocial = ($this->q107_capitalsocial == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_capitalsocial"]:$this->q107_capitalsocial);
+       $this->q107_capitalsocial = ($this->q107_capitalsocial === 0 || $this->q107_capitalsocial === 0.0 || $this->q107_capitalsocial == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_capitalsocial"]:$this->q107_capitalsocial);
        $this->q107_nomefantasia = ($this->q107_nomefantasia == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_nomefantasia"]:$this->q107_nomefantasia);
        $this->q107_tipologradouro = ($this->q107_tipologradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_tipologradouro"]:$this->q107_tipologradouro);
        $this->q107_logradouro = ($this->q107_logradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_logradouro"]:$this->q107_logradouro);
@@ -127,7 +127,7 @@ class cl_meiimportameiregempresa {
        $this->q107_caixapostal = ($this->q107_caixapostal == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_caixapostal"]:$this->q107_caixapostal);
        $this->q107_inscrmei = ($this->q107_inscrmei == "f"?@$GLOBALS["HTTP_POST_VARS"]["q107_inscrmei"]:$this->q107_inscrmei);
      }else{
-       $this->q107_sequencial = ($this->q107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_sequencial"]:$this->q107_sequencial);
+       $this->q107_sequencial = ($this->q107_sequencial === 0 || $this->q107_sequencial === 0.0 || $this->q107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q107_sequencial"]:$this->q107_sequencial);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_meiimportameiregempresa {
          $this->q107_sequencial = $q107_sequencial; 
        }
      }
-     if(($this->q107_sequencial == null) || ($this->q107_sequencial == "") ){ 
+     if(($this->q107_sequencial == null) || ($this->q107_sequencial === 0 || $this->q107_sequencial === 0.0 || $this->q107_sequencial == "") ){ 
        $this->erro_sql = " Campo q107_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -87,11 +87,11 @@ class cl_iptuconstrdemo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j60_matric = ($this->j60_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_matric"]:$this->j60_matric);
-       $this->j60_idcons = ($this->j60_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_idcons"]:$this->j60_idcons);
-       $this->j60_seq = ($this->j60_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_seq"]:$this->j60_seq);
+       $this->j60_matric = ($this->j60_matric === 0 || $this->j60_matric === 0.0 || $this->j60_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_matric"]:$this->j60_matric);
+       $this->j60_idcons = ($this->j60_idcons === 0 || $this->j60_idcons === 0.0 || $this->j60_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_idcons"]:$this->j60_idcons);
+       $this->j60_seq = ($this->j60_seq === 0 || $this->j60_seq === 0.0 || $this->j60_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_seq"]:$this->j60_seq);
        $this->j60_codproc = ($this->j60_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_codproc"]:$this->j60_codproc);
-       $this->j60_area = ($this->j60_area == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_area"]:$this->j60_area);
+       $this->j60_area = ($this->j60_area === 0 || $this->j60_area === 0.0 || $this->j60_area == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_area"]:$this->j60_area);
        if($this->j60_datademo == ""){
          $this->j60_datademo_dia = ($this->j60_datademo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_datademo_dia"]:$this->j60_datademo_dia);
          $this->j60_datademo_mes = ($this->j60_datademo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_datademo_mes"]:$this->j60_datademo_mes);
@@ -101,7 +101,7 @@ class cl_iptuconstrdemo {
          }
        }
        $this->j60_hora = ($this->j60_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_hora"]:$this->j60_hora);
-       $this->j60_usuario = ($this->j60_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_usuario"]:$this->j60_usuario);
+       $this->j60_usuario = ($this->j60_usuario === 0 || $this->j60_usuario === 0.0 || $this->j60_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_usuario"]:$this->j60_usuario);
        if($this->j60_data == ""){
          $this->j60_data_dia = ($this->j60_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_data_dia"]:$this->j60_data_dia);
          $this->j60_data_mes = ($this->j60_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_data_mes"]:$this->j60_data_mes);
@@ -111,9 +111,9 @@ class cl_iptuconstrdemo {
          }
        }
      }else{
-       $this->j60_matric = ($this->j60_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_matric"]:$this->j60_matric);
-       $this->j60_idcons = ($this->j60_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_idcons"]:$this->j60_idcons);
-       $this->j60_seq = ($this->j60_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_seq"]:$this->j60_seq);
+       $this->j60_matric = ($this->j60_matric === 0 || $this->j60_matric === 0.0 || $this->j60_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_matric"]:$this->j60_matric);
+       $this->j60_idcons = ($this->j60_idcons === 0 || $this->j60_idcons === 0.0 || $this->j60_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_idcons"]:$this->j60_idcons);
+       $this->j60_seq = ($this->j60_seq === 0 || $this->j60_seq === 0.0 || $this->j60_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["j60_seq"]:$this->j60_seq);
      }
    }
    // funcao para inclusao
@@ -176,7 +176,7 @@ class cl_iptuconstrdemo {
        $this->j60_matric = $j60_matric; 
        $this->j60_idcons = $j60_idcons; 
        $this->j60_seq = $j60_seq; 
-     if(($this->j60_matric == null) || ($this->j60_matric == "") ){ 
+     if(($this->j60_matric == null) || ($this->j60_matric === 0 || $this->j60_matric === 0.0 || $this->j60_matric == "") ){ 
        $this->erro_sql = " Campo j60_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -184,7 +184,7 @@ class cl_iptuconstrdemo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j60_idcons == null) || ($this->j60_idcons == "") ){ 
+     if(($this->j60_idcons == null) || ($this->j60_idcons === 0 || $this->j60_idcons === 0.0 || $this->j60_idcons == "") ){ 
        $this->erro_sql = " Campo j60_idcons nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -192,7 +192,7 @@ class cl_iptuconstrdemo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j60_seq == null) || ($this->j60_seq == "") ){ 
+     if(($this->j60_seq == null) || ($this->j60_seq === 0 || $this->j60_seq === 0.0 || $this->j60_seq == "") ){ 
        $this->erro_sql = " Campo j60_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

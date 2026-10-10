@@ -67,10 +67,10 @@ class cl_zonapont {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q26_zona = ($this->q26_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["q26_zona"]:$this->q26_zona);
-       $this->q26_pontuacao = ($this->q26_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q26_pontuacao"]:$this->q26_pontuacao);
+       $this->q26_zona = ($this->q26_zona === 0 || $this->q26_zona === 0.0 || $this->q26_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["q26_zona"]:$this->q26_zona);
+       $this->q26_pontuacao = ($this->q26_pontuacao === 0 || $this->q26_pontuacao === 0.0 || $this->q26_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q26_pontuacao"]:$this->q26_pontuacao);
      }else{
-       $this->q26_zona = ($this->q26_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["q26_zona"]:$this->q26_zona);
+       $this->q26_zona = ($this->q26_zona === 0 || $this->q26_zona === 0.0 || $this->q26_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["q26_zona"]:$this->q26_zona);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_zonapont {
        return false;
      }
        $this->q26_zona = $q26_zona; 
-     if(($this->q26_zona == null) || ($this->q26_zona == "") ){ 
+     if(($this->q26_zona == null) || ($this->q26_zona === 0 || $this->q26_zona === 0.0 || $this->q26_zona == "") ){ 
        $this->erro_sql = " Campo q26_zona nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

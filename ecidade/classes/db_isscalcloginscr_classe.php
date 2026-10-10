@@ -73,13 +73,13 @@ class cl_isscalcloginscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q48_codigo = ($this->q48_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_codigo"]:$this->q48_codigo);
-       $this->q48_isscalclog = ($this->q48_isscalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_isscalclog"]:$this->q48_isscalclog);
-       $this->q48_inscr = ($this->q48_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_inscr"]:$this->q48_inscr);
-       $this->q48_isscadlog = ($this->q48_isscadlog == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_isscadlog"]:$this->q48_isscadlog);
+       $this->q48_codigo = ($this->q48_codigo === 0 || $this->q48_codigo === 0.0 || $this->q48_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_codigo"]:$this->q48_codigo);
+       $this->q48_isscalclog = ($this->q48_isscalclog === 0 || $this->q48_isscalclog === 0.0 || $this->q48_isscalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_isscalclog"]:$this->q48_isscalclog);
+       $this->q48_inscr = ($this->q48_inscr === 0 || $this->q48_inscr === 0.0 || $this->q48_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_inscr"]:$this->q48_inscr);
+       $this->q48_isscadlog = ($this->q48_isscadlog === 0 || $this->q48_isscadlog === 0.0 || $this->q48_isscadlog == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_isscadlog"]:$this->q48_isscadlog);
        $this->q48_obs = ($this->q48_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_obs"]:$this->q48_obs);
      }else{
-       $this->q48_codigo = ($this->q48_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_codigo"]:$this->q48_codigo);
+       $this->q48_codigo = ($this->q48_codigo === 0 || $this->q48_codigo === 0.0 || $this->q48_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q48_codigo"]:$this->q48_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_isscalcloginscr {
          $this->q48_codigo = $q48_codigo; 
        }
      }
-     if(($this->q48_codigo == null) || ($this->q48_codigo == "") ){ 
+     if(($this->q48_codigo == null) || ($this->q48_codigo === 0 || $this->q48_codigo === 0.0 || $this->q48_codigo == "") ){ 
        $this->erro_sql = " Campo q48_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -82,8 +82,8 @@ class cl_isscalclog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q47_codigo = ($this->q47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_codigo"]:$this->q47_codigo);
-       $this->q47_anousu = ($this->q47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_anousu"]:$this->q47_anousu);
+       $this->q47_codigo = ($this->q47_codigo === 0 || $this->q47_codigo === 0.0 || $this->q47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_codigo"]:$this->q47_codigo);
+       $this->q47_anousu = ($this->q47_anousu === 0 || $this->q47_anousu === 0.0 || $this->q47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_anousu"]:$this->q47_anousu);
        if($this->q47_data == ""){
          $this->q47_data_dia = ($this->q47_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_data_dia"]:$this->q47_data_dia);
          $this->q47_data_mes = ($this->q47_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_data_mes"]:$this->q47_data_mes);
@@ -93,12 +93,12 @@ class cl_isscalclog {
          }
        }
        $this->q47_hora = ($this->q47_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_hora"]:$this->q47_hora);
-       $this->q47_usuario = ($this->q47_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_usuario"]:$this->q47_usuario);
+       $this->q47_usuario = ($this->q47_usuario === 0 || $this->q47_usuario === 0.0 || $this->q47_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_usuario"]:$this->q47_usuario);
        $this->q47_parcial = ($this->q47_parcial == "f"?@$GLOBALS["HTTP_POST_VARS"]["q47_parcial"]:$this->q47_parcial);
-       $this->q47_quantaproc = ($this->q47_quantaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_quantaproc"]:$this->q47_quantaproc);
-       $this->q47_tipo = ($this->q47_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_tipo"]:$this->q47_tipo);
+       $this->q47_quantaproc = ($this->q47_quantaproc === 0 || $this->q47_quantaproc === 0.0 || $this->q47_quantaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_quantaproc"]:$this->q47_quantaproc);
+       $this->q47_tipo = ($this->q47_tipo === 0 || $this->q47_tipo === 0.0 || $this->q47_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_tipo"]:$this->q47_tipo);
      }else{
-       $this->q47_codigo = ($this->q47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_codigo"]:$this->q47_codigo);
+       $this->q47_codigo = ($this->q47_codigo === 0 || $this->q47_codigo === 0.0 || $this->q47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_codigo"]:$this->q47_codigo);
      }
    }
    // funcao para inclusao
@@ -191,7 +191,7 @@ class cl_isscalclog {
          $this->q47_codigo = $q47_codigo; 
        }
      }
-     if(($this->q47_codigo == null) || ($this->q47_codigo == "") ){ 
+     if(($this->q47_codigo == null) || ($this->q47_codigo === 0 || $this->q47_codigo === 0.0 || $this->q47_codigo == "") ){ 
        $this->erro_sql = " Campo q47_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

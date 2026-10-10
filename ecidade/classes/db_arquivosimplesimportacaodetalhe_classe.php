@@ -75,14 +75,14 @@ class cl_arquivosimplesimportacaodetalhe {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q142_sequencial               = ($this->q142_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q142_sequencial"]:$this->q142_sequencial);
-       $this->q142_arquivosimplesimportacao = ($this->q142_arquivosimplesimportacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q142_arquivosimplesimportacao"]:$this->q142_arquivosimplesimportacao);
+       $this->q142_sequencial               = ($this->q142_sequencial === 0 || $this->q142_sequencial === 0.0 || $this->q142_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q142_sequencial"]:$this->q142_sequencial);
+       $this->q142_arquivosimplesimportacao = ($this->q142_arquivosimplesimportacao === 0 || $this->q142_arquivosimplesimportacao === 0.0 || $this->q142_arquivosimplesimportacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q142_arquivosimplesimportacao"]:$this->q142_arquivosimplesimportacao);
        $this->q142_cnpj                     = ($this->q142_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["q142_cnpj"]:$this->q142_cnpj);
        $this->q142_cnae                     = ($this->q142_cnae == ""?@$GLOBALS["HTTP_POST_VARS"]["q142_cnae"]:$this->q142_cnae);
        $this->q142_apto                     = ($this->q142_apto == ""?"f":$this->q142_apto);
        $this->q142_observacao               = ($this->q142_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q142_observacao"]:$this->q142_observacao);
      }else{
-       $this->q142_sequencial = ($this->q142_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q142_sequencial"]:$this->q142_sequencial);
+       $this->q142_sequencial = ($this->q142_sequencial === 0 || $this->q142_sequencial === 0.0 || $this->q142_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q142_sequencial"]:$this->q142_sequencial);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_arquivosimplesimportacaodetalhe {
          $this->q142_sequencial = $q142_sequencial;
        }
      }
-     if(($this->q142_sequencial == null) || ($this->q142_sequencial == "") ){
+     if(($this->q142_sequencial == null) || ($this->q142_sequencial === 0 || $this->q142_sequencial === 0.0 || $this->q142_sequencial == "") ){
        $this->erro_sql = " Campo q142_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

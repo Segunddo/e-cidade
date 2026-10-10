@@ -96,16 +96,16 @@ class cl_ouvidoriaatendimento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov01_sequencial = ($this->ov01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_sequencial"]:$this->ov01_sequencial);
-       $this->ov01_situacaoouvidoriaatendimento = ($this->ov01_situacaoouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_situacaoouvidoriaatendimento"]:$this->ov01_situacaoouvidoriaatendimento);
-       $this->ov01_tipoprocesso = ($this->ov01_tipoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_tipoprocesso"]:$this->ov01_tipoprocesso);
-       $this->ov01_formareclamacao = ($this->ov01_formareclamacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_formareclamacao"]:$this->ov01_formareclamacao);
-       $this->ov01_tipoidentificacao = ($this->ov01_tipoidentificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_tipoidentificacao"]:$this->ov01_tipoidentificacao);
-       $this->ov01_usuario = ($this->ov01_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_usuario"]:$this->ov01_usuario);
-       $this->ov01_depart = ($this->ov01_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_depart"]:$this->ov01_depart);
-       $this->ov01_instit = ($this->ov01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_instit"]:$this->ov01_instit);
-       $this->ov01_numero = ($this->ov01_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_numero"]:$this->ov01_numero);
-       $this->ov01_anousu = ($this->ov01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_anousu"]:$this->ov01_anousu);
+       $this->ov01_sequencial = ($this->ov01_sequencial === 0 || $this->ov01_sequencial === 0.0 || $this->ov01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_sequencial"]:$this->ov01_sequencial);
+       $this->ov01_situacaoouvidoriaatendimento = ($this->ov01_situacaoouvidoriaatendimento === 0 || $this->ov01_situacaoouvidoriaatendimento === 0.0 || $this->ov01_situacaoouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_situacaoouvidoriaatendimento"]:$this->ov01_situacaoouvidoriaatendimento);
+       $this->ov01_tipoprocesso = ($this->ov01_tipoprocesso === 0 || $this->ov01_tipoprocesso === 0.0 || $this->ov01_tipoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_tipoprocesso"]:$this->ov01_tipoprocesso);
+       $this->ov01_formareclamacao = ($this->ov01_formareclamacao === 0 || $this->ov01_formareclamacao === 0.0 || $this->ov01_formareclamacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_formareclamacao"]:$this->ov01_formareclamacao);
+       $this->ov01_tipoidentificacao = ($this->ov01_tipoidentificacao === 0 || $this->ov01_tipoidentificacao === 0.0 || $this->ov01_tipoidentificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_tipoidentificacao"]:$this->ov01_tipoidentificacao);
+       $this->ov01_usuario = ($this->ov01_usuario === 0 || $this->ov01_usuario === 0.0 || $this->ov01_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_usuario"]:$this->ov01_usuario);
+       $this->ov01_depart = ($this->ov01_depart === 0 || $this->ov01_depart === 0.0 || $this->ov01_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_depart"]:$this->ov01_depart);
+       $this->ov01_instit = ($this->ov01_instit === 0 || $this->ov01_instit === 0.0 || $this->ov01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_instit"]:$this->ov01_instit);
+       $this->ov01_numero = ($this->ov01_numero === 0 || $this->ov01_numero === 0.0 || $this->ov01_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_numero"]:$this->ov01_numero);
+       $this->ov01_anousu = ($this->ov01_anousu === 0 || $this->ov01_anousu === 0.0 || $this->ov01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_anousu"]:$this->ov01_anousu);
        if($this->ov01_dataatend == ""){
          $this->ov01_dataatend_dia = ($this->ov01_dataatend_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_dataatend_dia"]:$this->ov01_dataatend_dia);
          $this->ov01_dataatend_mes = ($this->ov01_dataatend_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_dataatend_mes"]:$this->ov01_dataatend_mes);
@@ -119,7 +119,7 @@ class cl_ouvidoriaatendimento {
        $this->ov01_solicitacao = ($this->ov01_solicitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_solicitacao"]:$this->ov01_solicitacao);
        $this->ov01_executado = ($this->ov01_executado == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_executado"]:$this->ov01_executado);
      }else{
-       $this->ov01_sequencial = ($this->ov01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_sequencial"]:$this->ov01_sequencial);
+       $this->ov01_sequencial = ($this->ov01_sequencial === 0 || $this->ov01_sequencial === 0.0 || $this->ov01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov01_sequencial"]:$this->ov01_sequencial);
      }
    }
    // funcao para inclusao
@@ -257,7 +257,7 @@ class cl_ouvidoriaatendimento {
          $this->ov01_sequencial = $ov01_sequencial;
        }
      }
-     if(($this->ov01_sequencial == null) || ($this->ov01_sequencial == "") ){
+     if(($this->ov01_sequencial == null) || ($this->ov01_sequencial === 0 || $this->ov01_sequencial === 0.0 || $this->ov01_sequencial == "") ){
        $this->erro_sql = " Campo ov01_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

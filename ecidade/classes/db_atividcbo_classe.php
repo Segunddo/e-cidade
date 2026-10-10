@@ -67,11 +67,11 @@ class cl_atividcbo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q75_ativid = ($this->q75_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["q75_ativid"]:$this->q75_ativid);
-       $this->q75_rhcbo = ($this->q75_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["q75_rhcbo"]:$this->q75_rhcbo);
+       $this->q75_ativid = ($this->q75_ativid === 0 || $this->q75_ativid === 0.0 || $this->q75_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["q75_ativid"]:$this->q75_ativid);
+       $this->q75_rhcbo = ($this->q75_rhcbo === 0 || $this->q75_rhcbo === 0.0 || $this->q75_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["q75_rhcbo"]:$this->q75_rhcbo);
      }else{
-       $this->q75_ativid = ($this->q75_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["q75_ativid"]:$this->q75_ativid);
-       $this->q75_rhcbo = ($this->q75_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["q75_rhcbo"]:$this->q75_rhcbo);
+       $this->q75_ativid = ($this->q75_ativid === 0 || $this->q75_ativid === 0.0 || $this->q75_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["q75_ativid"]:$this->q75_ativid);
+       $this->q75_rhcbo = ($this->q75_rhcbo === 0 || $this->q75_rhcbo === 0.0 || $this->q75_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["q75_rhcbo"]:$this->q75_rhcbo);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_atividcbo {
       $this->atualizacampos();
        $this->q75_ativid = $q75_ativid; 
        $this->q75_rhcbo = $q75_rhcbo; 
-     if(($this->q75_ativid == null) || ($this->q75_ativid == "") ){ 
+     if(($this->q75_ativid == null) || ($this->q75_ativid === 0 || $this->q75_ativid === 0.0 || $this->q75_ativid == "") ){ 
        $this->erro_sql = " Campo q75_ativid nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_atividcbo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q75_rhcbo == null) || ($this->q75_rhcbo == "") ){ 
+     if(($this->q75_rhcbo == null) || ($this->q75_rhcbo === 0 || $this->q75_rhcbo === 0.0 || $this->q75_rhcbo == "") ){ 
        $this->erro_sql = " Campo q75_rhcbo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

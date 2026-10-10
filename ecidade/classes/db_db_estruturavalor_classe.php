@@ -84,15 +84,15 @@ class cl_db_estruturavalor
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->db121_sequencial = ($this->db121_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_sequencial"] : $this->db121_sequencial);
-            $this->db121_db_estrutura = ($this->db121_db_estrutura == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_db_estrutura"] : $this->db121_db_estrutura);
+            $this->db121_sequencial = ($this->db121_sequencial === 0 || $this->db121_sequencial === 0.0 || $this->db121_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_sequencial"] : $this->db121_sequencial);
+            $this->db121_db_estrutura = ($this->db121_db_estrutura === 0 || $this->db121_db_estrutura === 0.0 || $this->db121_db_estrutura == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_db_estrutura"] : $this->db121_db_estrutura);
             $this->db121_estrutural = ($this->db121_estrutural == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_estrutural"] : $this->db121_estrutural);
             $this->db121_descricao = ($this->db121_descricao == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_descricao"] : $this->db121_descricao);
-            $this->db121_estruturavalorpai = ($this->db121_estruturavalorpai == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_estruturavalorpai"] : $this->db121_estruturavalorpai);
+            $this->db121_estruturavalorpai = ($this->db121_estruturavalorpai === 0 || $this->db121_estruturavalorpai === 0.0 || $this->db121_estruturavalorpai == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_estruturavalorpai"] : $this->db121_estruturavalorpai);
             $this->db121_nivel = ($this->db121_nivel === "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_nivel"] : $this->db121_nivel);
             $this->db121_tipoconta = ($this->db121_tipoconta === "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_tipoconta"] : $this->db121_tipoconta);
         } else {
-            $this->db121_sequencial = ($this->db121_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_sequencial"] : $this->db121_sequencial);
+            $this->db121_sequencial = ($this->db121_sequencial === 0 || $this->db121_sequencial === 0.0 || $this->db121_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_sequencial"] : $this->db121_sequencial);
         }
     }
 
@@ -162,7 +162,7 @@ class cl_db_estruturavalor
                 $this->db121_sequencial = $db121_sequencial;
             }
         }
-        if (($this->db121_sequencial == null) || ($this->db121_sequencial == "")) {
+        if (($this->db121_sequencial == null) || ($this->db121_sequencial === 0 || $this->db121_sequencial === 0.0 || $this->db121_sequencial == "")) {
             $this->erro_sql = " Campo db121_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

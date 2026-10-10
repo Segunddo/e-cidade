@@ -76,10 +76,10 @@ class cl_cancrecibopaga {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k134_sequencial = ($this->k134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_sequencial"]:$this->k134_sequencial);
-       $this->k134_numnov = ($this->k134_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_numnov"]:$this->k134_numnov);
+       $this->k134_sequencial = ($this->k134_sequencial === 0 || $this->k134_sequencial === 0.0 || $this->k134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_sequencial"]:$this->k134_sequencial);
+       $this->k134_numnov = ($this->k134_numnov === 0 || $this->k134_numnov === 0.0 || $this->k134_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_numnov"]:$this->k134_numnov);
        $this->k134_motivo = ($this->k134_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_motivo"]:$this->k134_motivo);
-       $this->k134_usuario = ($this->k134_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_usuario"]:$this->k134_usuario);
+       $this->k134_usuario = ($this->k134_usuario === 0 || $this->k134_usuario === 0.0 || $this->k134_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_usuario"]:$this->k134_usuario);
        if($this->k134_data == ""){
          $this->k134_data_dia = ($this->k134_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_data_dia"]:$this->k134_data_dia);
          $this->k134_data_mes = ($this->k134_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_data_mes"]:$this->k134_data_mes);
@@ -89,7 +89,7 @@ class cl_cancrecibopaga {
          }
        }
      }else{
-       $this->k134_sequencial = ($this->k134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_sequencial"]:$this->k134_sequencial);
+       $this->k134_sequencial = ($this->k134_sequencial === 0 || $this->k134_sequencial === 0.0 || $this->k134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k134_sequencial"]:$this->k134_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_cancrecibopaga {
          $this->k134_sequencial = $k134_sequencial; 
        }
      }
-     if(($this->k134_sequencial == null) || ($this->k134_sequencial == "") ){ 
+     if(($this->k134_sequencial == null) || ($this->k134_sequencial === 0 || $this->k134_sequencial === 0.0 || $this->k134_sequencial == "") ){ 
        $this->erro_sql = " Campo k134_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

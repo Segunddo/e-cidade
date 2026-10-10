@@ -26,7 +26,8 @@
  */
 
 include(modification("fpdf151/pdf.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $sqlinst = "select munic as municipio from db_config where codigo = ".db_getsession("DB_instit");
 $resultinst = db_query($sqlinst);

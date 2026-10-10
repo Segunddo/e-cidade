@@ -74,8 +74,8 @@ class cl_isscadsimples {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q38_sequencial = ($this->q38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q38_sequencial"]:$this->q38_sequencial);
-       $this->q38_inscr = ($this->q38_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q38_inscr"]:$this->q38_inscr);
+       $this->q38_sequencial = ($this->q38_sequencial === 0 || $this->q38_sequencial === 0.0 || $this->q38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q38_sequencial"]:$this->q38_sequencial);
+       $this->q38_inscr = ($this->q38_inscr === 0 || $this->q38_inscr === 0.0 || $this->q38_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q38_inscr"]:$this->q38_inscr);
        if($this->q38_dtinicial == ""){
          $this->q38_dtinicial_dia = ($this->q38_dtinicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q38_dtinicial_dia"]:$this->q38_dtinicial_dia);
          $this->q38_dtinicial_mes = ($this->q38_dtinicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q38_dtinicial_mes"]:$this->q38_dtinicial_mes);
@@ -84,9 +84,9 @@ class cl_isscadsimples {
             $this->q38_dtinicial = $this->q38_dtinicial_ano."-".$this->q38_dtinicial_mes."-".$this->q38_dtinicial_dia;
          }
        }
-       $this->q38_categoria = ($this->q38_categoria == ""?@$GLOBALS["HTTP_POST_VARS"]["q38_categoria"]:$this->q38_categoria);
+       $this->q38_categoria = ($this->q38_categoria === 0 || $this->q38_categoria === 0.0 || $this->q38_categoria == ""?@$GLOBALS["HTTP_POST_VARS"]["q38_categoria"]:$this->q38_categoria);
      }else{
-       $this->q38_sequencial = ($this->q38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q38_sequencial"]:$this->q38_sequencial);
+       $this->q38_sequencial = ($this->q38_sequencial === 0 || $this->q38_sequencial === 0.0 || $this->q38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q38_sequencial"]:$this->q38_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_isscadsimples {
          $this->q38_sequencial = $q38_sequencial;
        }
      }
-     if(($this->q38_sequencial == null) || ($this->q38_sequencial == "") ){
+     if(($this->q38_sequencial == null) || ($this->q38_sequencial === 0 || $this->q38_sequencial === 0.0 || $this->q38_sequencial == "") ){
        $this->erro_sql = " Campo q38_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

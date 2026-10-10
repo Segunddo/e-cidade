@@ -82,9 +82,9 @@ class cl_cgmfoto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z16_sequencial = ($this->z16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_sequencial"]:$this->z16_sequencial);
-       $this->z16_numcgm = ($this->z16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_numcgm"]:$this->z16_numcgm);
-       $this->z16_id_usuario = ($this->z16_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_id_usuario"]:$this->z16_id_usuario);
+       $this->z16_sequencial = ($this->z16_sequencial === 0 || $this->z16_sequencial === 0.0 || $this->z16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_sequencial"]:$this->z16_sequencial);
+       $this->z16_numcgm = ($this->z16_numcgm === 0 || $this->z16_numcgm === 0.0 || $this->z16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_numcgm"]:$this->z16_numcgm);
+       $this->z16_id_usuario = ($this->z16_id_usuario === 0 || $this->z16_id_usuario === 0.0 || $this->z16_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_id_usuario"]:$this->z16_id_usuario);
        if($this->z16_data == ""){
          $this->z16_data_dia = ($this->z16_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_data_dia"]:$this->z16_data_dia);
          $this->z16_data_mes = ($this->z16_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_data_mes"]:$this->z16_data_mes);
@@ -96,9 +96,9 @@ class cl_cgmfoto {
        $this->z16_hora = ($this->z16_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_hora"]:$this->z16_hora);
        $this->z16_fotoativa = ($this->z16_fotoativa == "f"?@$GLOBALS["HTTP_POST_VARS"]["z16_fotoativa"]:$this->z16_fotoativa);
        $this->z16_principal = ($this->z16_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["z16_principal"]:$this->z16_principal);
-       $this->z16_arquivofoto = ($this->z16_arquivofoto == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_arquivofoto"]:$this->z16_arquivofoto);
+       $this->z16_arquivofoto = ($this->z16_arquivofoto === 0 || $this->z16_arquivofoto === 0.0 || $this->z16_arquivofoto == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_arquivofoto"]:$this->z16_arquivofoto);
      }else{
-       $this->z16_sequencial = ($this->z16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_sequencial"]:$this->z16_sequencial);
+       $this->z16_sequencial = ($this->z16_sequencial === 0 || $this->z16_sequencial === 0.0 || $this->z16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_sequencial"]:$this->z16_sequencial);
      }
    }
    // funcao para inclusao
@@ -185,7 +185,7 @@ class cl_cgmfoto {
          $this->z16_sequencial = $z16_sequencial; 
        }
      }
-     if(($this->z16_sequencial == null) || ($this->z16_sequencial == "") ){ 
+     if(($this->z16_sequencial == null) || ($this->z16_sequencial === 0 || $this->z16_sequencial === 0.0 || $this->z16_sequencial == "") ){ 
        $this->erro_sql = " Campo z16_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

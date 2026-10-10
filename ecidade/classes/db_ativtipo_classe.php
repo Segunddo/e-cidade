@@ -67,11 +67,11 @@ class cl_ativtipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q80_ativ = ($this->q80_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q80_ativ"]:$this->q80_ativ);
-       $this->q80_tipcal = ($this->q80_tipcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q80_tipcal"]:$this->q80_tipcal);
+       $this->q80_ativ = ($this->q80_ativ === 0 || $this->q80_ativ === 0.0 || $this->q80_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q80_ativ"]:$this->q80_ativ);
+       $this->q80_tipcal = ($this->q80_tipcal === 0 || $this->q80_tipcal === 0.0 || $this->q80_tipcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q80_tipcal"]:$this->q80_tipcal);
      }else{
-       $this->q80_ativ = ($this->q80_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q80_ativ"]:$this->q80_ativ);
-       $this->q80_tipcal = ($this->q80_tipcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q80_tipcal"]:$this->q80_tipcal);
+       $this->q80_ativ = ($this->q80_ativ === 0 || $this->q80_ativ === 0.0 || $this->q80_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q80_ativ"]:$this->q80_ativ);
+       $this->q80_tipcal = ($this->q80_tipcal === 0 || $this->q80_tipcal === 0.0 || $this->q80_tipcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q80_tipcal"]:$this->q80_tipcal);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_ativtipo {
       $this->atualizacampos();
        $this->q80_ativ = $q80_ativ; 
        $this->q80_tipcal = $q80_tipcal; 
-     if(($this->q80_ativ == null) || ($this->q80_ativ == "") ){ 
+     if(($this->q80_ativ == null) || ($this->q80_ativ === 0 || $this->q80_ativ === 0.0 || $this->q80_ativ == "") ){ 
        $this->erro_sql = " Campo q80_ativ nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_ativtipo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q80_tipcal == null) || ($this->q80_tipcal == "") ){ 
+     if(($this->q80_tipcal == null) || ($this->q80_tipcal === 0 || $this->q80_tipcal === 0.0 || $this->q80_tipcal == "") ){ 
        $this->erro_sql = " Campo q80_tipcal nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

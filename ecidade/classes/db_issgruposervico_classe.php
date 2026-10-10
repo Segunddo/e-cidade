@@ -67,10 +67,10 @@ class cl_issgruposervico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q126_sequencial = ($this->q126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q126_sequencial"]:$this->q126_sequencial);
-       $this->q126_db_estruturavalor = ($this->q126_db_estruturavalor == ""?@$GLOBALS["HTTP_POST_VARS"]["q126_db_estruturavalor"]:$this->q126_db_estruturavalor);
+       $this->q126_sequencial = ($this->q126_sequencial === 0 || $this->q126_sequencial === 0.0 || $this->q126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q126_sequencial"]:$this->q126_sequencial);
+       $this->q126_db_estruturavalor = ($this->q126_db_estruturavalor === 0 || $this->q126_db_estruturavalor === 0.0 || $this->q126_db_estruturavalor == ""?@$GLOBALS["HTTP_POST_VARS"]["q126_db_estruturavalor"]:$this->q126_db_estruturavalor);
      }else{
-       $this->q126_sequencial = ($this->q126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q126_sequencial"]:$this->q126_sequencial);
+       $this->q126_sequencial = ($this->q126_sequencial === 0 || $this->q126_sequencial === 0.0 || $this->q126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q126_sequencial"]:$this->q126_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_issgruposervico {
          $this->q126_sequencial = $q126_sequencial;
        }
      }
-     if(($this->q126_sequencial == null) || ($this->q126_sequencial == "") ){
+     if(($this->q126_sequencial == null) || ($this->q126_sequencial === 0 || $this->q126_sequencial === 0.0 || $this->q126_sequencial == "") ){
        $this->erro_sql = " Campo q126_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_cadvencdescban {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q93_codigo = ($this->q93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q93_codigo"]:$this->q93_codigo);
-       $this->q93_cadban = ($this->q93_cadban == ""?@$GLOBALS["HTTP_POST_VARS"]["q93_cadban"]:$this->q93_cadban);
+       $this->q93_codigo = ($this->q93_codigo === 0 || $this->q93_codigo === 0.0 || $this->q93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q93_codigo"]:$this->q93_codigo);
+       $this->q93_cadban = ($this->q93_cadban === 0 || $this->q93_cadban === 0.0 || $this->q93_cadban == ""?@$GLOBALS["HTTP_POST_VARS"]["q93_cadban"]:$this->q93_cadban);
      }else{
-       $this->q93_codigo = ($this->q93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q93_codigo"]:$this->q93_codigo);
+       $this->q93_codigo = ($this->q93_codigo === 0 || $this->q93_codigo === 0.0 || $this->q93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q93_codigo"]:$this->q93_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_cadvencdescban {
        return false;
      }
        $this->q93_codigo = $q93_codigo; 
-     if(($this->q93_codigo == null) || ($this->q93_codigo == "") ){ 
+     if(($this->q93_codigo == null) || ($this->q93_codigo === 0 || $this->q93_codigo === 0.0 || $this->q93_codigo == "") ){ 
        $this->erro_sql = " Campo q93_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

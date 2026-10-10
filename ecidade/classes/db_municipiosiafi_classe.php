@@ -73,13 +73,13 @@ class cl_municipiosiafi {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q110_sequencial = ($this->q110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q110_sequencial"]:$this->q110_sequencial);
+       $this->q110_sequencial = ($this->q110_sequencial === 0 || $this->q110_sequencial === 0.0 || $this->q110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q110_sequencial"]:$this->q110_sequencial);
        $this->q110_codigo = ($this->q110_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q110_codigo"]:$this->q110_codigo);
        $this->q110_descricao = ($this->q110_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["q110_descricao"]:$this->q110_descricao);
        $this->q110_uf = ($this->q110_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["q110_uf"]:$this->q110_uf);
        $this->q110_cnpj = ($this->q110_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["q110_cnpj"]:$this->q110_cnpj);
      }else{
-       $this->q110_sequencial = ($this->q110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q110_sequencial"]:$this->q110_sequencial);
+       $this->q110_sequencial = ($this->q110_sequencial === 0 || $this->q110_sequencial === 0.0 || $this->q110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q110_sequencial"]:$this->q110_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_municipiosiafi {
          $this->q110_sequencial = $q110_sequencial; 
        }
      }
-     if(($this->q110_sequencial == null) || ($this->q110_sequencial == "") ){ 
+     if(($this->q110_sequencial == null) || ($this->q110_sequencial === 0 || $this->q110_sequencial === 0.0 || $this->q110_sequencial == "") ){ 
        $this->erro_sql = " Campo q110_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

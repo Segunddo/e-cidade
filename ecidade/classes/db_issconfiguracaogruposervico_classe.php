@@ -79,14 +79,14 @@ class cl_issconfiguracaogruposervico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q136_sequencial = ($this->q136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_sequencial"]:$this->q136_sequencial);
-       $this->q136_issgruposervico = ($this->q136_issgruposervico == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_issgruposervico"]:$this->q136_issgruposervico);
-       $this->q136_exercicio = ($this->q136_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_exercicio"]:$this->q136_exercicio);
-       $this->q136_tipotributacao = ($this->q136_tipotributacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_tipotributacao"]:$this->q136_tipotributacao);
-       $this->q136_valor = ($this->q136_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_valor"]:$this->q136_valor);
-       $this->q136_localpagamento = ($this->q136_localpagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_localpagamento"]:$this->q136_localpagamento);
+       $this->q136_sequencial = ($this->q136_sequencial === 0 || $this->q136_sequencial === 0.0 || $this->q136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_sequencial"]:$this->q136_sequencial);
+       $this->q136_issgruposervico = ($this->q136_issgruposervico === 0 || $this->q136_issgruposervico === 0.0 || $this->q136_issgruposervico == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_issgruposervico"]:$this->q136_issgruposervico);
+       $this->q136_exercicio = ($this->q136_exercicio === 0 || $this->q136_exercicio === 0.0 || $this->q136_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_exercicio"]:$this->q136_exercicio);
+       $this->q136_tipotributacao = ($this->q136_tipotributacao === 0 || $this->q136_tipotributacao === 0.0 || $this->q136_tipotributacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_tipotributacao"]:$this->q136_tipotributacao);
+       $this->q136_valor = ($this->q136_valor === 0 || $this->q136_valor === 0.0 || $this->q136_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_valor"]:$this->q136_valor);
+       $this->q136_localpagamento = ($this->q136_localpagamento === 0 || $this->q136_localpagamento === 0.0 || $this->q136_localpagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_localpagamento"]:$this->q136_localpagamento);
      }else{
-       $this->q136_sequencial = ($this->q136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_sequencial"]:$this->q136_sequencial);
+       $this->q136_sequencial = ($this->q136_sequencial === 0 || $this->q136_sequencial === 0.0 || $this->q136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q136_sequencial"]:$this->q136_sequencial);
      }
    }
    // funcao para inclusao
@@ -161,7 +161,7 @@ class cl_issconfiguracaogruposervico {
          $this->q136_sequencial = $q136_sequencial;
        }
      }
-     if(($this->q136_sequencial == null) || ($this->q136_sequencial == "") ){
+     if(($this->q136_sequencial == null) || ($this->q136_sequencial === 0 || $this->q136_sequencial === 0.0 || $this->q136_sequencial == "") ){
        $this->erro_sql = " Campo q136_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

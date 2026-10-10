@@ -85,8 +85,8 @@ class cl_meievento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q101_sequencial = ($this->q101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q101_sequencial"]:$this->q101_sequencial);
-       $this->q101_meigrupoevento = ($this->q101_meigrupoevento == ""?@$GLOBALS["HTTP_POST_VARS"]["q101_meigrupoevento"]:$this->q101_meigrupoevento);
+       $this->q101_sequencial = ($this->q101_sequencial === 0 || $this->q101_sequencial === 0.0 || $this->q101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q101_sequencial"]:$this->q101_sequencial);
+       $this->q101_meigrupoevento = ($this->q101_meigrupoevento === 0 || $this->q101_meigrupoevento === 0.0 || $this->q101_meigrupoevento == ""?@$GLOBALS["HTTP_POST_VARS"]["q101_meigrupoevento"]:$this->q101_meigrupoevento);
        $this->q101_codigo = ($this->q101_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q101_codigo"]:$this->q101_codigo);
        $this->q101_descricao = ($this->q101_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["q101_descricao"]:$this->q101_descricao);
        $this->q101_obs = ($this->q101_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q101_obs"]:$this->q101_obs);
@@ -108,7 +108,7 @@ class cl_meievento {
          }
        }
      }else{
-       $this->q101_sequencial = ($this->q101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q101_sequencial"]:$this->q101_sequencial);
+       $this->q101_sequencial = ($this->q101_sequencial === 0 || $this->q101_sequencial === 0.0 || $this->q101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q101_sequencial"]:$this->q101_sequencial);
      }
    }
    // funcao para inclusao
@@ -162,7 +162,7 @@ class cl_meievento {
          $this->q101_sequencial = $q101_sequencial; 
        }
      }
-     if(($this->q101_sequencial == null) || ($this->q101_sequencial == "") ){ 
+     if(($this->q101_sequencial == null) || ($this->q101_sequencial === 0 || $this->q101_sequencial === 0.0 || $this->q101_sequencial == "") ){ 
        $this->erro_sql = " Campo q101_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

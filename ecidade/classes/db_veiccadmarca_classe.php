@@ -67,10 +67,10 @@ class cl_veiccadmarca {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve21_codigo = ($this->ve21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve21_codigo"]:$this->ve21_codigo);
+       $this->ve21_codigo = ($this->ve21_codigo === 0 || $this->ve21_codigo === 0.0 || $this->ve21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve21_codigo"]:$this->ve21_codigo);
        $this->ve21_descr = ($this->ve21_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve21_descr"]:$this->ve21_descr);
      }else{
-       $this->ve21_codigo = ($this->ve21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve21_codigo"]:$this->ve21_codigo);
+       $this->ve21_codigo = ($this->ve21_codigo === 0 || $this->ve21_codigo === 0.0 || $this->ve21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve21_codigo"]:$this->ve21_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_veiccadmarca {
          $this->ve21_codigo = $ve21_codigo; 
        }
      }
-     if(($this->ve21_codigo == null) || ($this->ve21_codigo == "") ){ 
+     if(($this->ve21_codigo == null) || ($this->ve21_codigo === 0 || $this->ve21_codigo === 0.0 || $this->ve21_codigo == "") ){ 
        $this->erro_sql = " Campo ve21_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

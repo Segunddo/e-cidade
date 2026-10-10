@@ -79,7 +79,7 @@ class cl_arquivosimplesimportacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q64_sequencial = ($this->q64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q64_sequencial"]:$this->q64_sequencial);
+       $this->q64_sequencial = ($this->q64_sequencial === 0 || $this->q64_sequencial === 0.0 || $this->q64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q64_sequencial"]:$this->q64_sequencial);
        $this->q64_nomearquivo = ($this->q64_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q64_nomearquivo"]:$this->q64_nomearquivo);
        if($this->q64_data == ""){
          $this->q64_data_dia = ($this->q64_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q64_data_dia"]:$this->q64_data_dia);
@@ -99,7 +99,7 @@ class cl_arquivosimplesimportacao {
          }
        }
      }else{
-       $this->q64_sequencial = ($this->q64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q64_sequencial"]:$this->q64_sequencial);
+       $this->q64_sequencial = ($this->q64_sequencial === 0 || $this->q64_sequencial === 0.0 || $this->q64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q64_sequencial"]:$this->q64_sequencial);
      }
    }
    // funcao para inclusao
@@ -159,7 +159,7 @@ class cl_arquivosimplesimportacao {
          $this->q64_sequencial = $q64_sequencial;
        }
      }
-     if(($this->q64_sequencial == null) || ($this->q64_sequencial == "") ){
+     if(($this->q64_sequencial == null) || ($this->q64_sequencial === 0 || $this->q64_sequencial === 0.0 || $this->q64_sequencial == "") ){
        $this->erro_sql = " Campo q64_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

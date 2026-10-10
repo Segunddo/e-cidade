@@ -80,9 +80,9 @@ class cl_issalvara {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q123_sequencial = ($this->q123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_sequencial"]:$this->q123_sequencial);
-       $this->q123_isstipoalvara = ($this->q123_isstipoalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_isstipoalvara"]:$this->q123_isstipoalvara);
-       $this->q123_inscr = ($this->q123_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_inscr"]:$this->q123_inscr);
+       $this->q123_sequencial = ($this->q123_sequencial === 0 || $this->q123_sequencial === 0.0 || $this->q123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_sequencial"]:$this->q123_sequencial);
+       $this->q123_isstipoalvara = ($this->q123_isstipoalvara === 0 || $this->q123_isstipoalvara === 0.0 || $this->q123_isstipoalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_isstipoalvara"]:$this->q123_isstipoalvara);
+       $this->q123_inscr = ($this->q123_inscr === 0 || $this->q123_inscr === 0.0 || $this->q123_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_inscr"]:$this->q123_inscr);
        if($this->q123_dtinclusao == ""){
          $this->q123_dtinclusao_dia = ($this->q123_dtinclusao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_dtinclusao_dia"]:$this->q123_dtinclusao_dia);
          $this->q123_dtinclusao_mes = ($this->q123_dtinclusao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_dtinclusao_mes"]:$this->q123_dtinclusao_mes);
@@ -91,11 +91,11 @@ class cl_issalvara {
             $this->q123_dtinclusao = $this->q123_dtinclusao_ano."-".$this->q123_dtinclusao_mes."-".$this->q123_dtinclusao_dia;
          }
        }
-       $this->q123_situacao = ($this->q123_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_situacao"]:$this->q123_situacao);
-       $this->q123_usuario = ($this->q123_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_usuario"]:$this->q123_usuario);
+       $this->q123_situacao = ($this->q123_situacao === 0 || $this->q123_situacao === 0.0 || $this->q123_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_situacao"]:$this->q123_situacao);
+       $this->q123_usuario = ($this->q123_usuario === 0 || $this->q123_usuario === 0.0 || $this->q123_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_usuario"]:$this->q123_usuario);
        $this->q123_geradoautomatico = ($this->q123_geradoautomatico == "f"?@$GLOBALS["HTTP_POST_VARS"]["q123_geradoautomatico"]:$this->q123_geradoautomatico);
      }else{
-       $this->q123_sequencial = ($this->q123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_sequencial"]:$this->q123_sequencial);
+       $this->q123_sequencial = ($this->q123_sequencial === 0 || $this->q123_sequencial === 0.0 || $this->q123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q123_sequencial"]:$this->q123_sequencial);
      }
    }
    // funcao para inclusao
@@ -173,7 +173,7 @@ class cl_issalvara {
          $this->q123_sequencial = $q123_sequencial; 
        }
      }
-     if(($this->q123_sequencial == null) || ($this->q123_sequencial == "") ){ 
+     if(($this->q123_sequencial == null) || ($this->q123_sequencial === 0 || $this->q123_sequencial === 0.0 || $this->q123_sequencial == "") ){ 
        $this->erro_sql = " Campo q123_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

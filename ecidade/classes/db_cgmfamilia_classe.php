@@ -65,9 +65,9 @@ class cl_cgmfamilia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z13_sequencial = ($this->z13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z13_sequencial"]:$this->z13_sequencial);
+       $this->z13_sequencial = ($this->z13_sequencial === 0 || $this->z13_sequencial === 0.0 || $this->z13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z13_sequencial"]:$this->z13_sequencial);
      }else{
-       $this->z13_sequencial = ($this->z13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z13_sequencial"]:$this->z13_sequencial);
+       $this->z13_sequencial = ($this->z13_sequencial === 0 || $this->z13_sequencial === 0.0 || $this->z13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z13_sequencial"]:$this->z13_sequencial);
      }
    }
    // funcao para inclusao
@@ -97,7 +97,7 @@ class cl_cgmfamilia {
          $this->z13_sequencial = $z13_sequencial; 
        }
      }
-     if(($this->z13_sequencial == null) || ($this->z13_sequencial == "") ){ 
+     if(($this->z13_sequencial == null) || ($this->z13_sequencial === 0 || $this->z13_sequencial === 0.0 || $this->z13_sequencial == "") ){ 
        $this->erro_sql = " Campo z13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,12 +71,12 @@ class cl_db_uf {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db12_codigo = ($this->db12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db12_codigo"]:$this->db12_codigo);
+       $this->db12_codigo = ($this->db12_codigo === 0 || $this->db12_codigo === 0.0 || $this->db12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db12_codigo"]:$this->db12_codigo);
        $this->db12_uf = ($this->db12_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["db12_uf"]:$this->db12_uf);
        $this->db12_nome = ($this->db12_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["db12_nome"]:$this->db12_nome);
        $this->db12_extenso = ($this->db12_extenso == ""?@$GLOBALS["HTTP_POST_VARS"]["db12_extenso"]:$this->db12_extenso);
      }else{
-       $this->db12_codigo = ($this->db12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db12_codigo"]:$this->db12_codigo);
+       $this->db12_codigo = ($this->db12_codigo === 0 || $this->db12_codigo === 0.0 || $this->db12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db12_codigo"]:$this->db12_codigo);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_db_uf {
        return false;
      }
        $this->db12_codigo = $db12_codigo;
-     if(($this->db12_codigo == null) || ($this->db12_codigo == "") ){
+     if(($this->db12_codigo == null) || ($this->db12_codigo === 0 || $this->db12_codigo === 0.0 || $this->db12_codigo == "") ){
        $this->erro_sql = " Campo db12_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

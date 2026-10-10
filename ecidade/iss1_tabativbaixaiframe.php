@@ -30,7 +30,8 @@ require(modification("libs/db_conecta.php"));
 include(modification("classes/db_tabativ_classe.php"));
 $cltabativ = new cl_tabativ;
 $clrotulo = new rotulocampo;
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 if(isset($q07_inscr) && $q07_inscr!=""){ 
   $sql = $cltabativ->sql_query_atividade_inscr($q07_inscr,"*","q07_seq","q07_inscr = $q07_inscr and q07_databx is null");
   $msg_vazio='<b>Nenhum registro encontrado</b>';

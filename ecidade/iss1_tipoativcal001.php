@@ -35,7 +35,8 @@ $cltipcalc = new cl_tipcalc;
 $clrotulo = new rotulocampo;
 $clrotulo->label("q81_descr");
 $clrotulo->label("q85_descr");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 if(isset($atualizar)){
   db_inicio_transacao();
   $result03=$clativtipo->sql_record($clativtipo->sql_query_file($q80_ativ,"","q80_tipcal"));

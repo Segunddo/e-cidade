@@ -73,13 +73,13 @@ class cl_db_layouttxt {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db50_codigo = ($this->db50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db50_codigo"]:$this->db50_codigo);
-       $this->db50_layouttxtgrupo = ($this->db50_layouttxtgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["db50_layouttxtgrupo"]:$this->db50_layouttxtgrupo);
+       $this->db50_codigo = ($this->db50_codigo === 0 || $this->db50_codigo === 0.0 || $this->db50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db50_codigo"]:$this->db50_codigo);
+       $this->db50_layouttxtgrupo = ($this->db50_layouttxtgrupo === 0 || $this->db50_layouttxtgrupo === 0.0 || $this->db50_layouttxtgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["db50_layouttxtgrupo"]:$this->db50_layouttxtgrupo);
        $this->db50_descr = ($this->db50_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db50_descr"]:$this->db50_descr);
-       $this->db50_quantlinhas = ($this->db50_quantlinhas == ""?@$GLOBALS["HTTP_POST_VARS"]["db50_quantlinhas"]:$this->db50_quantlinhas);
+       $this->db50_quantlinhas = ($this->db50_quantlinhas === 0 || $this->db50_quantlinhas === 0.0 || $this->db50_quantlinhas == ""?@$GLOBALS["HTTP_POST_VARS"]["db50_quantlinhas"]:$this->db50_quantlinhas);
        $this->db50_obs = ($this->db50_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["db50_obs"]:$this->db50_obs);
      }else{
-       $this->db50_codigo = ($this->db50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db50_codigo"]:$this->db50_codigo);
+       $this->db50_codigo = ($this->db50_codigo === 0 || $this->db50_codigo === 0.0 || $this->db50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db50_codigo"]:$this->db50_codigo);
      }
    }
    // funcao para inclusao
@@ -130,7 +130,7 @@ class cl_db_layouttxt {
          $this->db50_codigo = $db50_codigo; 
        }
      }
-     if(($this->db50_codigo == null) || ($this->db50_codigo == "") ){ 
+     if(($this->db50_codigo == null) || ($this->db50_codigo === 0 || $this->db50_codigo === 0.0 || $this->db50_codigo == "") ){ 
        $this->erro_sql = " Campo db50_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

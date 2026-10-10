@@ -80,9 +80,9 @@ class cl_issmovalvara {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q120_sequencial = ($this->q120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_sequencial"]:$this->q120_sequencial);
-       $this->q120_issalvara = ($this->q120_issalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_issalvara"]:$this->q120_issalvara);
-       $this->q120_isstipomovalvara = ($this->q120_isstipomovalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_isstipomovalvara"]:$this->q120_isstipomovalvara);
+       $this->q120_sequencial = ($this->q120_sequencial === 0 || $this->q120_sequencial === 0.0 || $this->q120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_sequencial"]:$this->q120_sequencial);
+       $this->q120_issalvara = ($this->q120_issalvara === 0 || $this->q120_issalvara === 0.0 || $this->q120_issalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_issalvara"]:$this->q120_issalvara);
+       $this->q120_isstipomovalvara = ($this->q120_isstipomovalvara === 0 || $this->q120_isstipomovalvara === 0.0 || $this->q120_isstipomovalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_isstipomovalvara"]:$this->q120_isstipomovalvara);
        if($this->q120_dtmov == ""){
          $this->q120_dtmov_dia = ($this->q120_dtmov_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_dtmov_dia"]:$this->q120_dtmov_dia);
          $this->q120_dtmov_mes = ($this->q120_dtmov_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_dtmov_mes"]:$this->q120_dtmov_mes);
@@ -91,11 +91,11 @@ class cl_issmovalvara {
             $this->q120_dtmov = $this->q120_dtmov_ano."-".$this->q120_dtmov_mes."-".$this->q120_dtmov_dia;
          }
        }
-       $this->q120_validadealvara = ($this->q120_validadealvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_validadealvara"]:$this->q120_validadealvara);
-       $this->q120_usuario = ($this->q120_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_usuario"]:$this->q120_usuario);
+       $this->q120_validadealvara = ($this->q120_validadealvara === 0 || $this->q120_validadealvara === 0.0 || $this->q120_validadealvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_validadealvara"]:$this->q120_validadealvara);
+       $this->q120_usuario = ($this->q120_usuario === 0 || $this->q120_usuario === 0.0 || $this->q120_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_usuario"]:$this->q120_usuario);
        $this->q120_obs = ($this->q120_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_obs"]:$this->q120_obs);
      }else{
-       $this->q120_sequencial = ($this->q120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_sequencial"]:$this->q120_sequencial);
+       $this->q120_sequencial = ($this->q120_sequencial === 0 || $this->q120_sequencial === 0.0 || $this->q120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q120_sequencial"]:$this->q120_sequencial);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_issmovalvara {
          $this->q120_sequencial = $q120_sequencial; 
        }
      }
-     if(($this->q120_sequencial == null) || ($this->q120_sequencial == "") ){ 
+     if(($this->q120_sequencial == null) || ($this->q120_sequencial === 0 || $this->q120_sequencial === 0.0 || $this->q120_sequencial == "") ){ 
        $this->erro_sql = " Campo q120_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

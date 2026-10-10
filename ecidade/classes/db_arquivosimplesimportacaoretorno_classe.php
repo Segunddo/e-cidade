@@ -49,13 +49,13 @@ class cl_arquivosimplesimportacaoretorno
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->q182_sequencial = ($this->q182_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_sequencial"]:$this->q182_sequencial);
-       $this->q182_id_usuario = ($this->q182_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_id_usuario"]:$this->q182_id_usuario);
+       $this->q182_sequencial = ($this->q182_sequencial === 0 || $this->q182_sequencial === 0.0 || $this->q182_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_sequencial"]:$this->q182_sequencial);
+       $this->q182_id_usuario = ($this->q182_id_usuario === 0 || $this->q182_id_usuario === 0.0 || $this->q182_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_id_usuario"]:$this->q182_id_usuario);
        $this->q182_nomearquivo = ($this->q182_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_nomearquivo"]:$this->q182_nomearquivo);
-       $this->q182_id_storage = ($this->q182_id_storage == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_id_storage"]:$this->q182_id_storage);
-       $this->q182_arquivosimplesimportacao = ($this->q182_arquivosimplesimportacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_arquivosimplesimportacao"]:$this->q182_arquivosimplesimportacao);
+       $this->q182_id_storage = ($this->q182_id_storage === 0 || $this->q182_id_storage === 0.0 || $this->q182_id_storage == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_id_storage"]:$this->q182_id_storage);
+       $this->q182_arquivosimplesimportacao = ($this->q182_arquivosimplesimportacao === 0 || $this->q182_arquivosimplesimportacao === 0.0 || $this->q182_arquivosimplesimportacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_arquivosimplesimportacao"]:$this->q182_arquivosimplesimportacao);
      }else{
-       $this->q182_sequencial = ($this->q182_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_sequencial"]:$this->q182_sequencial);
+       $this->q182_sequencial = ($this->q182_sequencial === 0 || $this->q182_sequencial === 0.0 || $this->q182_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q182_sequencial"]:$this->q182_sequencial);
      }
    }
 
@@ -122,7 +122,7 @@ class cl_arquivosimplesimportacaoretorno
          $this->q182_sequencial = $q182_sequencial; 
        }
      }
-     if(($this->q182_sequencial == null) || ($this->q182_sequencial == "") ){ 
+     if(($this->q182_sequencial == null) || ($this->q182_sequencial === 0 || $this->q182_sequencial === 0.0 || $this->q182_sequencial == "") ){ 
        $this->erro_sql = " Campo q182_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

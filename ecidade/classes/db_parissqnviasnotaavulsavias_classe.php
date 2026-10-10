@@ -69,11 +69,11 @@ class cl_parissqnviasnotaavulsavias {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q67_sequencial = ($this->q67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q67_sequencial"]:$this->q67_sequencial);
-       $this->q67_via = ($this->q67_via == ""?@$GLOBALS["HTTP_POST_VARS"]["q67_via"]:$this->q67_via);
+       $this->q67_sequencial = ($this->q67_sequencial === 0 || $this->q67_sequencial === 0.0 || $this->q67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q67_sequencial"]:$this->q67_sequencial);
+       $this->q67_via = ($this->q67_via === 0 || $this->q67_via === 0.0 || $this->q67_via == ""?@$GLOBALS["HTTP_POST_VARS"]["q67_via"]:$this->q67_via);
        $this->q67_descr = ($this->q67_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q67_descr"]:$this->q67_descr);
      }else{
-       $this->q67_sequencial = ($this->q67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q67_sequencial"]:$this->q67_sequencial);
+       $this->q67_sequencial = ($this->q67_sequencial === 0 || $this->q67_sequencial === 0.0 || $this->q67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q67_sequencial"]:$this->q67_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_parissqnviasnotaavulsavias {
          $this->q67_sequencial = $q67_sequencial; 
        }
      }
-     if(($this->q67_sequencial == null) || ($this->q67_sequencial == "") ){ 
+     if(($this->q67_sequencial == null) || ($this->q67_sequencial === 0 || $this->q67_sequencial === 0.0 || $this->q67_sequencial == "") ){ 
        $this->erro_sql = " Campo q67_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

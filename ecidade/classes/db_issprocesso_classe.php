@@ -67,10 +67,10 @@ class cl_issprocesso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q14_inscr = ($this->q14_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_inscr"]:$this->q14_inscr);
-       $this->q14_proces = ($this->q14_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_proces"]:$this->q14_proces);
+       $this->q14_inscr = ($this->q14_inscr === 0 || $this->q14_inscr === 0.0 || $this->q14_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_inscr"]:$this->q14_inscr);
+       $this->q14_proces = ($this->q14_proces === 0 || $this->q14_proces === 0.0 || $this->q14_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_proces"]:$this->q14_proces);
      }else{
-       $this->q14_inscr = ($this->q14_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_inscr"]:$this->q14_inscr);
+       $this->q14_inscr = ($this->q14_inscr === 0 || $this->q14_inscr === 0.0 || $this->q14_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_inscr"]:$this->q14_inscr);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_issprocesso {
        return false;
      }
        $this->q14_inscr = $q14_inscr; 
-     if(($this->q14_inscr == null) || ($this->q14_inscr == "") ){ 
+     if(($this->q14_inscr == null) || ($this->q14_inscr === 0 || $this->q14_inscr === 0.0 || $this->q14_inscr == "") ){ 
        $this->erro_sql = " Campo q14_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

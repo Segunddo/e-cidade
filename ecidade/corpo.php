@@ -62,8 +62,8 @@ if(!session_is_registered("DB_instit")) {
   if(isset($HTTP_POST_VARS["instit"])){
     db_putsession("DB_instit",$HTTP_POST_VARS["instit"]);
   }else{
-     parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
-
+     parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+     extract($__qs);
      if(isset($instit)){
       db_putsession("DB_instit",$instit);
      }else{
@@ -76,7 +76,8 @@ if(!session_is_registered("DB_instit")) {
 
   db_logsmanual_demais("Acesso instituição - Login: ".db_getsession("DB_login"),db_getsession("DB_id_usuario"),0,0,0,db_getsession("DB_instit"));
 }else{
-  parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+  parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+  extract($__qs);
   if(isset($area_de_acesso)){
     db_putsession("DB_Area",$area_de_acesso);
 

@@ -67,10 +67,10 @@ class cl_db_usuacgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
-       $this->cgmlogin = ($this->cgmlogin == ""?@$GLOBALS["HTTP_POST_VARS"]["cgmlogin"]:$this->cgmlogin);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->cgmlogin = ($this->cgmlogin === 0 || $this->cgmlogin === 0.0 || $this->cgmlogin == ""?@$GLOBALS["HTTP_POST_VARS"]["cgmlogin"]:$this->cgmlogin);
      }else{
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_db_usuacgm {
        return false;
      }
        $this->id_usuario = $id_usuario; 
-     if(($this->id_usuario == null) || ($this->id_usuario == "") ){ 
+     if(($this->id_usuario == null) || ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "") ){ 
        $this->erro_sql = " Campo id_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

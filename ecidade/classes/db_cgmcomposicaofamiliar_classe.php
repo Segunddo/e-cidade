@@ -78,11 +78,11 @@ class cl_cgmcomposicaofamiliar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z15_sequencial = ($this->z15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_sequencial"]:$this->z15_sequencial);
-       $this->z15_cgmfamilia = ($this->z15_cgmfamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_cgmfamilia"]:$this->z15_cgmfamilia);
-       $this->z15_cgmtipofamiliar = ($this->z15_cgmtipofamiliar == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_cgmtipofamiliar"]:$this->z15_cgmtipofamiliar);
-       $this->z15_numcgm = ($this->z15_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_numcgm"]:$this->z15_numcgm);
-       $this->z15_datainicial = ($this->z15_datainicial == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_datainicial"]:$this->z15_datainicial);
+       $this->z15_sequencial = ($this->z15_sequencial === 0 || $this->z15_sequencial === 0.0 || $this->z15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_sequencial"]:$this->z15_sequencial);
+       $this->z15_cgmfamilia = ($this->z15_cgmfamilia === 0 || $this->z15_cgmfamilia === 0.0 || $this->z15_cgmfamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_cgmfamilia"]:$this->z15_cgmfamilia);
+       $this->z15_cgmtipofamiliar = ($this->z15_cgmtipofamiliar === 0 || $this->z15_cgmtipofamiliar === 0.0 || $this->z15_cgmtipofamiliar == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_cgmtipofamiliar"]:$this->z15_cgmtipofamiliar);
+       $this->z15_numcgm = ($this->z15_numcgm === 0 || $this->z15_numcgm === 0.0 || $this->z15_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_numcgm"]:$this->z15_numcgm);
+       $this->z15_datainicial = ($this->z15_datainicial === 0 || $this->z15_datainicial === 0.0 || $this->z15_datainicial == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_datainicial"]:$this->z15_datainicial);
        if($this->z15_datafinal == ""){
          $this->z15_datafinal_dia = ($this->z15_datafinal_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_datafinal_dia"]:$this->z15_datafinal_dia);
          $this->z15_datafinal_mes = ($this->z15_datafinal_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_datafinal_mes"]:$this->z15_datafinal_mes);
@@ -92,7 +92,7 @@ class cl_cgmcomposicaofamiliar {
          }
        }
      }else{
-       $this->z15_sequencial = ($this->z15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_sequencial"]:$this->z15_sequencial);
+       $this->z15_sequencial = ($this->z15_sequencial === 0 || $this->z15_sequencial === 0.0 || $this->z15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z15_sequencial"]:$this->z15_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_cgmcomposicaofamiliar {
          $this->z15_sequencial = $z15_sequencial; 
        }
      }
-     if(($this->z15_sequencial == null) || ($this->z15_sequencial == "") ){ 
+     if(($this->z15_sequencial == null) || ($this->z15_sequencial === 0 || $this->z15_sequencial === 0.0 || $this->z15_sequencial == "") ){ 
        $this->erro_sql = " Campo z15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_isscadlogcalc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q46_codigo = ($this->q46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q46_codigo"]:$this->q46_codigo);
+       $this->q46_codigo = ($this->q46_codigo === 0 || $this->q46_codigo === 0.0 || $this->q46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q46_codigo"]:$this->q46_codigo);
        $this->q46_descr = ($this->q46_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q46_descr"]:$this->q46_descr);
        $this->q46_erro = ($this->q46_erro == "f"?@$GLOBALS["HTTP_POST_VARS"]["q46_erro"]:$this->q46_erro);
      }else{
-       $this->q46_codigo = ($this->q46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q46_codigo"]:$this->q46_codigo);
+       $this->q46_codigo = ($this->q46_codigo === 0 || $this->q46_codigo === 0.0 || $this->q46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q46_codigo"]:$this->q46_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_isscadlogcalc {
          $this->q46_codigo = $q46_codigo; 
        }
      }
-     if(($this->q46_codigo == null) || ($this->q46_codigo == "") ){ 
+     if(($this->q46_codigo == null) || ($this->q46_codigo === 0 || $this->q46_codigo === 0.0 || $this->q46_codigo == "") ){ 
        $this->erro_sql = " Campo q46_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

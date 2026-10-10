@@ -67,10 +67,10 @@ class cl_veiccadtipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve20_codigo = ($this->ve20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve20_codigo"]:$this->ve20_codigo);
+       $this->ve20_codigo = ($this->ve20_codigo === 0 || $this->ve20_codigo === 0.0 || $this->ve20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve20_codigo"]:$this->ve20_codigo);
        $this->ve20_descr = ($this->ve20_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve20_descr"]:$this->ve20_descr);
      }else{
-       $this->ve20_codigo = ($this->ve20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve20_codigo"]:$this->ve20_codigo);
+       $this->ve20_codigo = ($this->ve20_codigo === 0 || $this->ve20_codigo === 0.0 || $this->ve20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve20_codigo"]:$this->ve20_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_veiccadtipo {
          $this->ve20_codigo = $ve20_codigo; 
        }
      }
-     if(($this->ve20_codigo == null) || ($this->ve20_codigo == "") ){ 
+     if(($this->ve20_codigo == null) || ($this->ve20_codigo === 0 || $this->ve20_codigo === 0.0 || $this->ve20_codigo == "") ){ 
        $this->erro_sql = " Campo ve20_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

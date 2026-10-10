@@ -67,10 +67,10 @@ class cl_issbaseporte {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q45_inscr = ($this->q45_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q45_inscr"]:$this->q45_inscr);
-       $this->q45_codporte = ($this->q45_codporte == ""?@$GLOBALS["HTTP_POST_VARS"]["q45_codporte"]:$this->q45_codporte);
+       $this->q45_inscr = ($this->q45_inscr === 0 || $this->q45_inscr === 0.0 || $this->q45_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q45_inscr"]:$this->q45_inscr);
+       $this->q45_codporte = ($this->q45_codporte === 0 || $this->q45_codporte === 0.0 || $this->q45_codporte == ""?@$GLOBALS["HTTP_POST_VARS"]["q45_codporte"]:$this->q45_codporte);
      }else{
-       $this->q45_inscr = ($this->q45_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q45_inscr"]:$this->q45_inscr);
+       $this->q45_inscr = ($this->q45_inscr === 0 || $this->q45_inscr === 0.0 || $this->q45_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q45_inscr"]:$this->q45_inscr);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_issbaseporte {
        return false;
      }
        $this->q45_inscr = $q45_inscr; 
-     if(($this->q45_inscr == null) || ($this->q45_inscr == "") ){ 
+     if(($this->q45_inscr == null) || ($this->q45_inscr === 0 || $this->q45_inscr === 0.0 || $this->q45_inscr == "") ){ 
        $this->erro_sql = " Campo q45_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

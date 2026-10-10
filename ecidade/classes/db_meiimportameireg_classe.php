@@ -82,13 +82,13 @@ class cl_meiimportameireg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q111_sequencial = ($this->q111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_sequencial"]:$this->q111_sequencial);
-       $this->q111_meiimportamei = ($this->q111_meiimportamei == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meiimportamei"]:$this->q111_meiimportamei);
-       $this->q111_meievento = ($this->q111_meievento == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meievento"]:$this->q111_meievento);
-       $this->q111_meiimportameiregatividade = ($this->q111_meiimportameiregatividade == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meiimportameiregatividade"]:$this->q111_meiimportameiregatividade);
-       $this->q111_meiimportameiregempresa = ($this->q111_meiimportameiregempresa == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meiimportameiregempresa"]:$this->q111_meiimportameiregempresa);
-       $this->q111_meiimportameiregcontador = ($this->q111_meiimportameiregcontador == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meiimportameiregcontador"]:$this->q111_meiimportameiregcontador);
-       $this->q111_meiimportameiregresponsavel = ($this->q111_meiimportameiregresponsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meiimportameiregresponsavel"]:$this->q111_meiimportameiregresponsavel);
+       $this->q111_sequencial = ($this->q111_sequencial === 0 || $this->q111_sequencial === 0.0 || $this->q111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_sequencial"]:$this->q111_sequencial);
+       $this->q111_meiimportamei = ($this->q111_meiimportamei === 0 || $this->q111_meiimportamei === 0.0 || $this->q111_meiimportamei == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meiimportamei"]:$this->q111_meiimportamei);
+       $this->q111_meievento = ($this->q111_meievento === 0 || $this->q111_meievento === 0.0 || $this->q111_meievento == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meievento"]:$this->q111_meievento);
+       $this->q111_meiimportameiregatividade = ($this->q111_meiimportameiregatividade === 0 || $this->q111_meiimportameiregatividade === 0.0 || $this->q111_meiimportameiregatividade == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meiimportameiregatividade"]:$this->q111_meiimportameiregatividade);
+       $this->q111_meiimportameiregempresa = ($this->q111_meiimportameiregempresa === 0 || $this->q111_meiimportameiregempresa === 0.0 || $this->q111_meiimportameiregempresa == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meiimportameiregempresa"]:$this->q111_meiimportameiregempresa);
+       $this->q111_meiimportameiregcontador = ($this->q111_meiimportameiregcontador === 0 || $this->q111_meiimportameiregcontador === 0.0 || $this->q111_meiimportameiregcontador == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meiimportameiregcontador"]:$this->q111_meiimportameiregcontador);
+       $this->q111_meiimportameiregresponsavel = ($this->q111_meiimportameiregresponsavel === 0 || $this->q111_meiimportameiregresponsavel === 0.0 || $this->q111_meiimportameiregresponsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_meiimportameiregresponsavel"]:$this->q111_meiimportameiregresponsavel);
        if($this->q111_data == ""){
          $this->q111_data_dia = ($this->q111_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_data_dia"]:$this->q111_data_dia);
          $this->q111_data_mes = ($this->q111_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_data_mes"]:$this->q111_data_mes);
@@ -98,7 +98,7 @@ class cl_meiimportameireg {
          }
        }
      }else{
-       $this->q111_sequencial = ($this->q111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_sequencial"]:$this->q111_sequencial);
+       $this->q111_sequencial = ($this->q111_sequencial === 0 || $this->q111_sequencial === 0.0 || $this->q111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q111_sequencial"]:$this->q111_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_meiimportameireg {
          $this->q111_sequencial = $q111_sequencial; 
        }
      }
-     if(($this->q111_sequencial == null) || ($this->q111_sequencial == "") ){ 
+     if(($this->q111_sequencial == null) || ($this->q111_sequencial === 0 || $this->q111_sequencial === 0.0 || $this->q111_sequencial == "") ){ 
        $this->erro_sql = " Campo q111_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

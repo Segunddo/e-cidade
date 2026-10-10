@@ -69,11 +69,11 @@ class cl_issarqsimplesdisarq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q43_sequencial = ($this->q43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q43_sequencial"]:$this->q43_sequencial);
-       $this->q43_issarqsimples = ($this->q43_issarqsimples == ""?@$GLOBALS["HTTP_POST_VARS"]["q43_issarqsimples"]:$this->q43_issarqsimples);
-       $this->q43_disarq = ($this->q43_disarq == ""?@$GLOBALS["HTTP_POST_VARS"]["q43_disarq"]:$this->q43_disarq);
+       $this->q43_sequencial = ($this->q43_sequencial === 0 || $this->q43_sequencial === 0.0 || $this->q43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q43_sequencial"]:$this->q43_sequencial);
+       $this->q43_issarqsimples = ($this->q43_issarqsimples === 0 || $this->q43_issarqsimples === 0.0 || $this->q43_issarqsimples == ""?@$GLOBALS["HTTP_POST_VARS"]["q43_issarqsimples"]:$this->q43_issarqsimples);
+       $this->q43_disarq = ($this->q43_disarq === 0 || $this->q43_disarq === 0.0 || $this->q43_disarq == ""?@$GLOBALS["HTTP_POST_VARS"]["q43_disarq"]:$this->q43_disarq);
      }else{
-       $this->q43_sequencial = ($this->q43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q43_sequencial"]:$this->q43_sequencial);
+       $this->q43_sequencial = ($this->q43_sequencial === 0 || $this->q43_sequencial === 0.0 || $this->q43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q43_sequencial"]:$this->q43_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_issarqsimplesdisarq {
          $this->q43_sequencial = $q43_sequencial; 
        }
      }
-     if(($this->q43_sequencial == null) || ($this->q43_sequencial == "") ){ 
+     if(($this->q43_sequencial == null) || ($this->q43_sequencial === 0 || $this->q43_sequencial === 0.0 || $this->q43_sequencial == "") ){ 
        $this->erro_sql = " Campo q43_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

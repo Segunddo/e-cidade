@@ -84,9 +84,9 @@ class cl_issbaseparalisacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q140_sequencial = ($this->q140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_sequencial"]:$this->q140_sequencial);
-       $this->q140_issbase = ($this->q140_issbase == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_issbase"]:$this->q140_issbase);
-       $this->q140_issmotivoparalisacao = ($this->q140_issmotivoparalisacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_issmotivoparalisacao"]:$this->q140_issmotivoparalisacao);
+       $this->q140_sequencial = ($this->q140_sequencial === 0 || $this->q140_sequencial === 0.0 || $this->q140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_sequencial"]:$this->q140_sequencial);
+       $this->q140_issbase = ($this->q140_issbase === 0 || $this->q140_issbase === 0.0 || $this->q140_issbase == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_issbase"]:$this->q140_issbase);
+       $this->q140_issmotivoparalisacao = ($this->q140_issmotivoparalisacao === 0 || $this->q140_issmotivoparalisacao === 0.0 || $this->q140_issmotivoparalisacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_issmotivoparalisacao"]:$this->q140_issmotivoparalisacao);
        if($this->q140_datainicio == ""){
          $this->q140_datainicio_dia = ($this->q140_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_datainicio_dia"]:$this->q140_datainicio_dia);
          $this->q140_datainicio_mes = ($this->q140_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_datainicio_mes"]:$this->q140_datainicio_mes);
@@ -104,9 +104,9 @@ class cl_issbaseparalisacao {
          }
        }
        $this->q140_observacao = ($this->q140_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_observacao"]:$this->q140_observacao);
-       $this->q140_usuario = ($this->q140_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_usuario"]:$this->q140_usuario);
+       $this->q140_usuario = ($this->q140_usuario === 0 || $this->q140_usuario === 0.0 || $this->q140_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_usuario"]:$this->q140_usuario);
      }else{
-       $this->q140_sequencial = ($this->q140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_sequencial"]:$this->q140_sequencial);
+       $this->q140_sequencial = ($this->q140_sequencial === 0 || $this->q140_sequencial === 0.0 || $this->q140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q140_sequencial"]:$this->q140_sequencial);
      }
    }
    // funcao para inclusao
@@ -184,7 +184,7 @@ class cl_issbaseparalisacao {
          $this->q140_sequencial = $q140_sequencial;
        }
      }
-     if(($this->q140_sequencial == null) || ($this->q140_sequencial == "") ){
+     if(($this->q140_sequencial == null) || ($this->q140_sequencial === 0 || $this->q140_sequencial === 0.0 || $this->q140_sequencial == "") ){
        $this->erro_sql = " Campo q140_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_grupocaracteristica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db139_sequencial = ($this->db139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db139_sequencial"]:$this->db139_sequencial);
-       $this->db139_grupoutilizacao = ($this->db139_grupoutilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["db139_grupoutilizacao"]:$this->db139_grupoutilizacao);
+       $this->db139_sequencial = ($this->db139_sequencial === 0 || $this->db139_sequencial === 0.0 || $this->db139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db139_sequencial"]:$this->db139_sequencial);
+       $this->db139_grupoutilizacao = ($this->db139_grupoutilizacao === 0 || $this->db139_grupoutilizacao === 0.0 || $this->db139_grupoutilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["db139_grupoutilizacao"]:$this->db139_grupoutilizacao);
        $this->db139_descricao = ($this->db139_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db139_descricao"]:$this->db139_descricao);
      }else{
-       $this->db139_sequencial = ($this->db139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db139_sequencial"]:$this->db139_sequencial);
+       $this->db139_sequencial = ($this->db139_sequencial === 0 || $this->db139_sequencial === 0.0 || $this->db139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db139_sequencial"]:$this->db139_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_grupocaracteristica {
          $this->db139_sequencial = $db139_sequencial; 
        }
      }
-     if(($this->db139_sequencial == null) || ($this->db139_sequencial == "") ){ 
+     if(($this->db139_sequencial == null) || ($this->db139_sequencial === 0 || $this->db139_sequencial === 0.0 || $this->db139_sequencial == "") ){ 
        $this->erro_sql = " Campo db139_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

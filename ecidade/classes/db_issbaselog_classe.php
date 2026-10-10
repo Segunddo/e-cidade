@@ -80,9 +80,9 @@ class cl_issbaselog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q102_sequencial = ($this->q102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_sequencial"]:$this->q102_sequencial);
-       $this->q102_inscr = ($this->q102_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_inscr"]:$this->q102_inscr);
-       $this->q102_issbaselogtipo = ($this->q102_issbaselogtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_issbaselogtipo"]:$this->q102_issbaselogtipo);
+       $this->q102_sequencial = ($this->q102_sequencial === 0 || $this->q102_sequencial === 0.0 || $this->q102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_sequencial"]:$this->q102_sequencial);
+       $this->q102_inscr = ($this->q102_inscr === 0 || $this->q102_inscr === 0.0 || $this->q102_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_inscr"]:$this->q102_inscr);
+       $this->q102_issbaselogtipo = ($this->q102_issbaselogtipo === 0 || $this->q102_issbaselogtipo === 0.0 || $this->q102_issbaselogtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_issbaselogtipo"]:$this->q102_issbaselogtipo);
        if($this->q102_data == ""){
          $this->q102_data_dia = ($this->q102_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_data_dia"]:$this->q102_data_dia);
          $this->q102_data_mes = ($this->q102_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_data_mes"]:$this->q102_data_mes);
@@ -93,9 +93,9 @@ class cl_issbaselog {
        }
        $this->q102_hora = ($this->q102_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_hora"]:$this->q102_hora);
        $this->q102_obs = ($this->q102_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_obs"]:$this->q102_obs);
-       $this->q102_origem = ($this->q102_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_origem"]:$this->q102_origem);
+       $this->q102_origem = ($this->q102_origem === 0 || $this->q102_origem === 0.0 || $this->q102_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_origem"]:$this->q102_origem);
      }else{
-       $this->q102_sequencial = ($this->q102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_sequencial"]:$this->q102_sequencial);
+       $this->q102_sequencial = ($this->q102_sequencial === 0 || $this->q102_sequencial === 0.0 || $this->q102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q102_sequencial"]:$this->q102_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_issbaselog {
          $this->q102_sequencial = $q102_sequencial; 
        }
      }
-     if(($this->q102_sequencial == null) || ($this->q102_sequencial == "") ){ 
+     if(($this->q102_sequencial == null) || ($this->q102_sequencial === 0 || $this->q102_sequencial === 0.0 || $this->q102_sequencial == "") ){ 
        $this->erro_sql = " Campo q102_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

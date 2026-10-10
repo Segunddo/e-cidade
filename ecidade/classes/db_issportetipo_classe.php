@@ -71,12 +71,12 @@ class cl_issportetipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q41_codigo = ($this->q41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q41_codigo"]:$this->q41_codigo);
-       $this->q41_codporte = ($this->q41_codporte == ""?@$GLOBALS["HTTP_POST_VARS"]["q41_codporte"]:$this->q41_codporte);
-       $this->q41_codclasse = ($this->q41_codclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["q41_codclasse"]:$this->q41_codclasse);
-       $this->q41_codtipcalc = ($this->q41_codtipcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q41_codtipcalc"]:$this->q41_codtipcalc);
+       $this->q41_codigo = ($this->q41_codigo === 0 || $this->q41_codigo === 0.0 || $this->q41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q41_codigo"]:$this->q41_codigo);
+       $this->q41_codporte = ($this->q41_codporte === 0 || $this->q41_codporte === 0.0 || $this->q41_codporte == ""?@$GLOBALS["HTTP_POST_VARS"]["q41_codporte"]:$this->q41_codporte);
+       $this->q41_codclasse = ($this->q41_codclasse === 0 || $this->q41_codclasse === 0.0 || $this->q41_codclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["q41_codclasse"]:$this->q41_codclasse);
+       $this->q41_codtipcalc = ($this->q41_codtipcalc === 0 || $this->q41_codtipcalc === 0.0 || $this->q41_codtipcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q41_codtipcalc"]:$this->q41_codtipcalc);
      }else{
-       $this->q41_codigo = ($this->q41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q41_codigo"]:$this->q41_codigo);
+       $this->q41_codigo = ($this->q41_codigo === 0 || $this->q41_codigo === 0.0 || $this->q41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q41_codigo"]:$this->q41_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_issportetipo {
          $this->q41_codigo = $q41_codigo; 
        }
      }
-     if(($this->q41_codigo == null) || ($this->q41_codigo == "") ){ 
+     if(($this->q41_codigo == null) || ($this->q41_codigo === 0 || $this->q41_codigo === 0.0 || $this->q41_codigo == "") ){ 
        $this->erro_sql = " Campo q41_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

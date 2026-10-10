@@ -76,11 +76,11 @@ class cl_caddocumento
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->db44_sequencial = ($this->db44_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db44_sequencial"] : $this->db44_sequencial);
+            $this->db44_sequencial = ($this->db44_sequencial === 0 || $this->db44_sequencial === 0.0 || $this->db44_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db44_sequencial"] : $this->db44_sequencial);
             $this->db44_descricao = ($this->db44_descricao == "" ? @$GLOBALS["HTTP_POST_VARS"]["db44_descricao"] : $this->db44_descricao);
-            $this->db44_cadtipodocumento = ($this->db44_cadtipodocumento == "" ? @$GLOBALS["HTTP_POST_VARS"]["db44_cadtipodocumento"] : $this->db44_cadtipodocumento);
+            $this->db44_cadtipodocumento = ($this->db44_cadtipodocumento === 0 || $this->db44_cadtipodocumento === 0.0 || $this->db44_cadtipodocumento == "" ? @$GLOBALS["HTTP_POST_VARS"]["db44_cadtipodocumento"] : $this->db44_cadtipodocumento);
         } else {
-            $this->db44_sequencial = ($this->db44_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db44_sequencial"] : $this->db44_sequencial);
+            $this->db44_sequencial = ($this->db44_sequencial === 0 || $this->db44_sequencial === 0.0 || $this->db44_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db44_sequencial"] : $this->db44_sequencial);
         }
     }
 
@@ -138,7 +138,7 @@ class cl_caddocumento
                 $this->db44_sequencial = $db44_sequencial;
             }
         }
-        if (($this->db44_sequencial == null) || ($this->db44_sequencial == "")) {
+        if (($this->db44_sequencial == null) || ($this->db44_sequencial === 0 || $this->db44_sequencial === 0.0 || $this->db44_sequencial == "")) {
             $this->erro_sql = " Campo db44_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

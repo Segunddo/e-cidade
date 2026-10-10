@@ -67,10 +67,10 @@ class cl_issbairro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q13_inscr = ($this->q13_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q13_inscr"]:$this->q13_inscr);
-       $this->q13_bairro = ($this->q13_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["q13_bairro"]:$this->q13_bairro);
+       $this->q13_inscr = ($this->q13_inscr === 0 || $this->q13_inscr === 0.0 || $this->q13_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q13_inscr"]:$this->q13_inscr);
+       $this->q13_bairro = ($this->q13_bairro === 0 || $this->q13_bairro === 0.0 || $this->q13_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["q13_bairro"]:$this->q13_bairro);
      }else{
-       $this->q13_inscr = ($this->q13_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q13_inscr"]:$this->q13_inscr);
+       $this->q13_inscr = ($this->q13_inscr === 0 || $this->q13_inscr === 0.0 || $this->q13_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q13_inscr"]:$this->q13_inscr);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_issbairro {
        return false;
      }
        $this->q13_inscr = $q13_inscr; 
-     if(($this->q13_inscr == null) || ($this->q13_inscr == "") ){ 
+     if(($this->q13_inscr == null) || ($this->q13_inscr === 0 || $this->q13_inscr === 0.0 || $this->q13_inscr == "") ){ 
        $this->erro_sql = " Campo q13_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

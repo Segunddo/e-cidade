@@ -85,8 +85,8 @@ class cl_recibounicageracao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao = false) {
      if($exclusao==false){
-       $this->ar40_sequencial = ($this->ar40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_sequencial"]:$this->ar40_sequencial);
-       $this->ar40_db_usuarios = ($this->ar40_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_db_usuarios"]:$this->ar40_db_usuarios);
+       $this->ar40_sequencial = ($this->ar40_sequencial === 0 || $this->ar40_sequencial === 0.0 || $this->ar40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_sequencial"]:$this->ar40_sequencial);
+       $this->ar40_db_usuarios = ($this->ar40_db_usuarios === 0 || $this->ar40_db_usuarios === 0.0 || $this->ar40_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_db_usuarios"]:$this->ar40_db_usuarios);
        if($this->ar40_dtoperacao == ""){
          $this->ar40_dtoperacao_dia = ($this->ar40_dtoperacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_dtoperacao_dia"]:$this->ar40_dtoperacao_dia);
          $this->ar40_dtoperacao_mes = ($this->ar40_dtoperacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_dtoperacao_mes"]:$this->ar40_dtoperacao_mes);
@@ -103,12 +103,12 @@ class cl_recibounicageracao {
             $this->ar40_dtvencimento = $this->ar40_dtvencimento_ano."-".$this->ar40_dtvencimento_mes."-".$this->ar40_dtvencimento_dia;
          }
        }
-       $this->ar40_percentualdesconto = ($this->ar40_percentualdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_percentualdesconto"]:$this->ar40_percentualdesconto);
+       $this->ar40_percentualdesconto = ($this->ar40_percentualdesconto === 0 || $this->ar40_percentualdesconto === 0.0 || $this->ar40_percentualdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_percentualdesconto"]:$this->ar40_percentualdesconto);
        $this->ar40_tipogeracao = ($this->ar40_tipogeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_tipogeracao"]:$this->ar40_tipogeracao);
        $this->ar40_ativo = ($this->ar40_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ar40_ativo"]:$this->ar40_ativo);
        $this->ar40_observacao = ($this->ar40_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_observacao"]:$this->ar40_observacao);
      }else{
-       $this->ar40_sequencial = ($this->ar40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_sequencial"]:$this->ar40_sequencial);
+       $this->ar40_sequencial = ($this->ar40_sequencial === 0 || $this->ar40_sequencial === 0.0 || $this->ar40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_sequencial"]:$this->ar40_sequencial);
      }
    }
    // funcao para inclusao
@@ -192,7 +192,7 @@ class cl_recibounicageracao {
          $this->ar40_sequencial = $ar40_sequencial;
        }
      }
-     if(($this->ar40_sequencial == null) || ($this->ar40_sequencial == "") ){
+     if(($this->ar40_sequencial == null) || ($this->ar40_sequencial === 0 || $this->ar40_sequencial === 0.0 || $this->ar40_sequencial == "") ){
        $this->erro_sql = " Campo ar40_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

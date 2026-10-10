@@ -74,7 +74,7 @@ class cl_meiprocessa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q113_sequencial = ($this->q113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q113_sequencial"]:$this->q113_sequencial);
+       $this->q113_sequencial = ($this->q113_sequencial === 0 || $this->q113_sequencial === 0.0 || $this->q113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q113_sequencial"]:$this->q113_sequencial);
        if($this->q113_data == ""){
          $this->q113_data_dia = ($this->q113_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q113_data_dia"]:$this->q113_data_dia);
          $this->q113_data_mes = ($this->q113_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q113_data_mes"]:$this->q113_data_mes);
@@ -84,9 +84,9 @@ class cl_meiprocessa {
          }
        }
        $this->q113_hora = ($this->q113_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q113_hora"]:$this->q113_hora);
-       $this->q113_id_usuario = ($this->q113_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q113_id_usuario"]:$this->q113_id_usuario);
+       $this->q113_id_usuario = ($this->q113_id_usuario === 0 || $this->q113_id_usuario === 0.0 || $this->q113_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q113_id_usuario"]:$this->q113_id_usuario);
      }else{
-       $this->q113_sequencial = ($this->q113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q113_sequencial"]:$this->q113_sequencial);
+       $this->q113_sequencial = ($this->q113_sequencial === 0 || $this->q113_sequencial === 0.0 || $this->q113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q113_sequencial"]:$this->q113_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_meiprocessa {
          $this->q113_sequencial = $q113_sequencial; 
        }
      }
-     if(($this->q113_sequencial == null) || ($this->q113_sequencial == "") ){ 
+     if(($this->q113_sequencial == null) || ($this->q113_sequencial === 0 || $this->q113_sequencial === 0.0 || $this->q113_sequencial == "") ){ 
        $this->erro_sql = " Campo q113_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

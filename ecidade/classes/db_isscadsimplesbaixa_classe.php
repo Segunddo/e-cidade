@@ -76,8 +76,8 @@ class cl_isscadsimplesbaixa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q39_sequencial = ($this->q39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_sequencial"]:$this->q39_sequencial);
-       $this->q39_isscadsimples = ($this->q39_isscadsimples == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_isscadsimples"]:$this->q39_isscadsimples);
+       $this->q39_sequencial = ($this->q39_sequencial === 0 || $this->q39_sequencial === 0.0 || $this->q39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_sequencial"]:$this->q39_sequencial);
+       $this->q39_isscadsimples = ($this->q39_isscadsimples === 0 || $this->q39_isscadsimples === 0.0 || $this->q39_isscadsimples == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_isscadsimples"]:$this->q39_isscadsimples);
        if($this->q39_dtbaixa == ""){
          $this->q39_dtbaixa_dia = ($this->q39_dtbaixa_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_dtbaixa_dia"]:$this->q39_dtbaixa_dia);
          $this->q39_dtbaixa_mes = ($this->q39_dtbaixa_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_dtbaixa_mes"]:$this->q39_dtbaixa_mes);
@@ -86,10 +86,10 @@ class cl_isscadsimplesbaixa {
             $this->q39_dtbaixa = $this->q39_dtbaixa_ano."-".$this->q39_dtbaixa_mes."-".$this->q39_dtbaixa_dia;
          }
        }
-       $this->q39_issmotivobaixa = ($this->q39_issmotivobaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_issmotivobaixa"]:$this->q39_issmotivobaixa);
+       $this->q39_issmotivobaixa = ($this->q39_issmotivobaixa === 0 || $this->q39_issmotivobaixa === 0.0 || $this->q39_issmotivobaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_issmotivobaixa"]:$this->q39_issmotivobaixa);
        $this->q39_obs = ($this->q39_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_obs"]:$this->q39_obs);
      }else{
-       $this->q39_sequencial = ($this->q39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_sequencial"]:$this->q39_sequencial);
+       $this->q39_sequencial = ($this->q39_sequencial === 0 || $this->q39_sequencial === 0.0 || $this->q39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q39_sequencial"]:$this->q39_sequencial);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_isscadsimplesbaixa {
          $this->q39_sequencial = $q39_sequencial; 
        }
      }
-     if(($this->q39_sequencial == null) || ($this->q39_sequencial == "") ){ 
+     if(($this->q39_sequencial == null) || ($this->q39_sequencial === 0 || $this->q39_sequencial === 0.0 || $this->q39_sequencial == "") ){ 
        $this->erro_sql = " Campo q39_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

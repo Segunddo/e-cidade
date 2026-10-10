@@ -67,10 +67,10 @@ class cl_cnaeanalitica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q72_sequencial = ($this->q72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q72_sequencial"]:$this->q72_sequencial);
-       $this->q72_cnae = ($this->q72_cnae == ""?@$GLOBALS["HTTP_POST_VARS"]["q72_cnae"]:$this->q72_cnae);
+       $this->q72_sequencial = ($this->q72_sequencial === 0 || $this->q72_sequencial === 0.0 || $this->q72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q72_sequencial"]:$this->q72_sequencial);
+       $this->q72_cnae = ($this->q72_cnae === 0 || $this->q72_cnae === 0.0 || $this->q72_cnae == ""?@$GLOBALS["HTTP_POST_VARS"]["q72_cnae"]:$this->q72_cnae);
      }else{
-       $this->q72_sequencial = ($this->q72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q72_sequencial"]:$this->q72_sequencial);
+       $this->q72_sequencial = ($this->q72_sequencial === 0 || $this->q72_sequencial === 0.0 || $this->q72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q72_sequencial"]:$this->q72_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_cnaeanalitica {
          $this->q72_sequencial = $q72_sequencial; 
        }
      }
-     if(($this->q72_sequencial == null) || ($this->q72_sequencial == "") ){ 
+     if(($this->q72_sequencial == null) || ($this->q72_sequencial === 0 || $this->q72_sequencial === 0.0 || $this->q72_sequencial == "") ){ 
        $this->erro_sql = " Campo q72_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

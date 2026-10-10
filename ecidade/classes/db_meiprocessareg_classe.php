@@ -73,13 +73,13 @@ class cl_meiprocessareg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q112_sequencial = ($this->q112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_sequencial"]:$this->q112_sequencial);
-       $this->q112_meiprocessa = ($this->q112_meiprocessa == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_meiprocessa"]:$this->q112_meiprocessa);
-       $this->q112_meiimportameireg = ($this->q112_meiimportameireg == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_meiimportameireg"]:$this->q112_meiimportameireg);
-       $this->q112_tipoprocessa = ($this->q112_tipoprocessa == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_tipoprocessa"]:$this->q112_tipoprocessa);
+       $this->q112_sequencial = ($this->q112_sequencial === 0 || $this->q112_sequencial === 0.0 || $this->q112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_sequencial"]:$this->q112_sequencial);
+       $this->q112_meiprocessa = ($this->q112_meiprocessa === 0 || $this->q112_meiprocessa === 0.0 || $this->q112_meiprocessa == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_meiprocessa"]:$this->q112_meiprocessa);
+       $this->q112_meiimportameireg = ($this->q112_meiimportameireg === 0 || $this->q112_meiimportameireg === 0.0 || $this->q112_meiimportameireg == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_meiimportameireg"]:$this->q112_meiimportameireg);
+       $this->q112_tipoprocessa = ($this->q112_tipoprocessa === 0 || $this->q112_tipoprocessa === 0.0 || $this->q112_tipoprocessa == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_tipoprocessa"]:$this->q112_tipoprocessa);
        $this->q112_motivo = ($this->q112_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_motivo"]:$this->q112_motivo);
      }else{
-       $this->q112_sequencial = ($this->q112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_sequencial"]:$this->q112_sequencial);
+       $this->q112_sequencial = ($this->q112_sequencial === 0 || $this->q112_sequencial === 0.0 || $this->q112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_sequencial"]:$this->q112_sequencial);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_meiprocessareg {
          $this->q112_sequencial = $q112_sequencial; 
        }
      }
-     if(($this->q112_sequencial == null) || ($this->q112_sequencial == "") ){ 
+     if(($this->q112_sequencial == null) || ($this->q112_sequencial === 0 || $this->q112_sequencial === 0.0 || $this->q112_sequencial == "") ){ 
        $this->erro_sql = " Campo q112_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

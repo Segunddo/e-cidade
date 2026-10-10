@@ -69,13 +69,13 @@ class cl_constrcar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j53_matric = ($this->j53_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_matric"]:$this->j53_matric);
-       $this->j53_idcons = ($this->j53_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_idcons"]:$this->j53_idcons);
-       $this->j53_caract = ($this->j53_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_caract"]:$this->j53_caract);
+       $this->j53_matric = ($this->j53_matric === 0 || $this->j53_matric === 0.0 || $this->j53_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_matric"]:$this->j53_matric);
+       $this->j53_idcons = ($this->j53_idcons === 0 || $this->j53_idcons === 0.0 || $this->j53_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_idcons"]:$this->j53_idcons);
+       $this->j53_caract = ($this->j53_caract === 0 || $this->j53_caract === 0.0 || $this->j53_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_caract"]:$this->j53_caract);
      }else{
-       $this->j53_matric = ($this->j53_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_matric"]:$this->j53_matric);
-       $this->j53_idcons = ($this->j53_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_idcons"]:$this->j53_idcons);
-       $this->j53_caract = ($this->j53_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_caract"]:$this->j53_caract);
+       $this->j53_matric = ($this->j53_matric === 0 || $this->j53_matric === 0.0 || $this->j53_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_matric"]:$this->j53_matric);
+       $this->j53_idcons = ($this->j53_idcons === 0 || $this->j53_idcons === 0.0 || $this->j53_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_idcons"]:$this->j53_idcons);
+       $this->j53_caract = ($this->j53_caract === 0 || $this->j53_caract === 0.0 || $this->j53_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j53_caract"]:$this->j53_caract);
      }
    }
    // funcao para inclusao
@@ -84,7 +84,7 @@ class cl_constrcar {
        $this->j53_matric = $j53_matric; 
        $this->j53_idcons = $j53_idcons; 
        $this->j53_caract = $j53_caract; 
-     if(($this->j53_matric == null) || ($this->j53_matric == "") ){ 
+     if(($this->j53_matric == null) || ($this->j53_matric === 0 || $this->j53_matric === 0.0 || $this->j53_matric == "") ){ 
        $this->erro_sql = " Campo j53_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -92,7 +92,7 @@ class cl_constrcar {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j53_idcons == null) || ($this->j53_idcons == "") ){ 
+     if(($this->j53_idcons == null) || ($this->j53_idcons === 0 || $this->j53_idcons === 0.0 || $this->j53_idcons == "") ){ 
        $this->erro_sql = " Campo j53_idcons nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -100,7 +100,7 @@ class cl_constrcar {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j53_caract == null) || ($this->j53_caract == "") ){ 
+     if(($this->j53_caract == null) || ($this->j53_caract === 0 || $this->j53_caract === 0.0 || $this->j53_caract == "") ){ 
        $this->erro_sql = " Campo j53_caract nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

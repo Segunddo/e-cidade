@@ -78,8 +78,8 @@ class cl_varfix {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q33_codigo = ($this->q33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q33_codigo"]:$this->q33_codigo);
-       $this->q33_inscr = ($this->q33_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q33_inscr"]:$this->q33_inscr);
+       $this->q33_codigo = ($this->q33_codigo === 0 || $this->q33_codigo === 0.0 || $this->q33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q33_codigo"]:$this->q33_codigo);
+       $this->q33_inscr = ($this->q33_inscr === 0 || $this->q33_inscr === 0.0 || $this->q33_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q33_inscr"]:$this->q33_inscr);
        $this->q33_tiporeg = ($this->q33_tiporeg == ""?@$GLOBALS["HTTP_POST_VARS"]["q33_tiporeg"]:$this->q33_tiporeg);
        if($this->q33_data == ""){
          $this->q33_data_dia = ($this->q33_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q33_data_dia"]:$this->q33_data_dia);
@@ -92,7 +92,7 @@ class cl_varfix {
        $this->q33_hora = ($this->q33_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q33_hora"]:$this->q33_hora);
        $this->q33_obs = ($this->q33_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q33_obs"]:$this->q33_obs);
      }else{
-       $this->q33_codigo = ($this->q33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q33_codigo"]:$this->q33_codigo);
+       $this->q33_codigo = ($this->q33_codigo === 0 || $this->q33_codigo === 0.0 || $this->q33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q33_codigo"]:$this->q33_codigo);
      }
    }
    // funcao para inclusao
@@ -158,7 +158,7 @@ class cl_varfix {
          $this->q33_codigo = $q33_codigo; 
        }
      }
-     if(($this->q33_codigo == null) || ($this->q33_codigo == "") ){ 
+     if(($this->q33_codigo == null) || ($this->q33_codigo === 0 || $this->q33_codigo === 0.0 || $this->q33_codigo == "") ){ 
        $this->erro_sql = " Campo q33_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

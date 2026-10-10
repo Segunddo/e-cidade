@@ -67,10 +67,10 @@ class cl_classepont {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q25_classe = ($this->q25_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q25_classe"]:$this->q25_classe);
-       $this->q25_pontuacao = ($this->q25_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q25_pontuacao"]:$this->q25_pontuacao);
+       $this->q25_classe = ($this->q25_classe === 0 || $this->q25_classe === 0.0 || $this->q25_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q25_classe"]:$this->q25_classe);
+       $this->q25_pontuacao = ($this->q25_pontuacao === 0 || $this->q25_pontuacao === 0.0 || $this->q25_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q25_pontuacao"]:$this->q25_pontuacao);
      }else{
-       $this->q25_classe = ($this->q25_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q25_classe"]:$this->q25_classe);
+       $this->q25_classe = ($this->q25_classe === 0 || $this->q25_classe === 0.0 || $this->q25_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q25_classe"]:$this->q25_classe);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_classepont {
        return false;
      }
        $this->q25_classe = $q25_classe; 
-     if(($this->q25_classe == null) || ($this->q25_classe == "") ){ 
+     if(($this->q25_classe == null) || ($this->q25_classe === 0 || $this->q25_classe === 0.0 || $this->q25_classe == "") ){ 
        $this->erro_sql = " Campo q25_classe nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

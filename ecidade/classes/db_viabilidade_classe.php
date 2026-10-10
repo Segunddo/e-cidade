@@ -86,7 +86,7 @@ class cl_viabilidade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q29_codigo = ($this->q29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_codigo"]:$this->q29_codigo);
+       $this->q29_codigo = ($this->q29_codigo === 0 || $this->q29_codigo === 0.0 || $this->q29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_codigo"]:$this->q29_codigo);
        if($this->q29_data == ""){
          $this->q29_data_dia = ($this->q29_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_data_dia"]:$this->q29_data_dia);
          $this->q29_data_mes = ($this->q29_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_data_mes"]:$this->q29_data_mes);
@@ -95,16 +95,16 @@ class cl_viabilidade {
             $this->q29_data = $this->q29_data_ano."-".$this->q29_data_mes."-".$this->q29_data_dia;
          }
        }
-       $this->q29_numcgm = ($this->q29_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_numcgm"]:$this->q29_numcgm);
-       $this->q29_lograd = ($this->q29_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_lograd"]:$this->q29_lograd);
-       $this->q29_numero = ($this->q29_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_numero"]:$this->q29_numero);
+       $this->q29_numcgm = ($this->q29_numcgm === 0 || $this->q29_numcgm === 0.0 || $this->q29_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_numcgm"]:$this->q29_numcgm);
+       $this->q29_lograd = ($this->q29_lograd === 0 || $this->q29_lograd === 0.0 || $this->q29_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_lograd"]:$this->q29_lograd);
+       $this->q29_numero = ($this->q29_numero === 0 || $this->q29_numero === 0.0 || $this->q29_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_numero"]:$this->q29_numero);
        $this->q29_complem = ($this->q29_complem == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_complem"]:$this->q29_complem);
-       $this->q29_bairro = ($this->q29_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_bairro"]:$this->q29_bairro);
-       $this->q29_ativ = ($this->q29_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_ativ"]:$this->q29_ativ);
-       $this->q29_escrito = ($this->q29_escrito == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_escrito"]:$this->q29_escrito);
+       $this->q29_bairro = ($this->q29_bairro === 0 || $this->q29_bairro === 0.0 || $this->q29_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_bairro"]:$this->q29_bairro);
+       $this->q29_ativ = ($this->q29_ativ === 0 || $this->q29_ativ === 0.0 || $this->q29_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_ativ"]:$this->q29_ativ);
+       $this->q29_escrito = ($this->q29_escrito === 0 || $this->q29_escrito === 0.0 || $this->q29_escrito == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_escrito"]:$this->q29_escrito);
        $this->q29_tipo = ($this->q29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_tipo"]:$this->q29_tipo);
      }else{
-       $this->q29_codigo = ($this->q29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_codigo"]:$this->q29_codigo);
+       $this->q29_codigo = ($this->q29_codigo === 0 || $this->q29_codigo === 0.0 || $this->q29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q29_codigo"]:$this->q29_codigo);
      }
    }
    // funcao para inclusao
@@ -200,7 +200,7 @@ class cl_viabilidade {
          $this->q29_codigo = $q29_codigo; 
        }
      }
-     if(($this->q29_codigo == null) || ($this->q29_codigo == "") ){ 
+     if(($this->q29_codigo == null) || ($this->q29_codigo === 0 || $this->q29_codigo === 0.0 || $this->q29_codigo == "") ){ 
        $this->erro_sql = " Campo q29_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

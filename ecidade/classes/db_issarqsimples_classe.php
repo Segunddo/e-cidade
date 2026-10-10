@@ -86,8 +86,8 @@ class cl_issarqsimples {
   // funcao para atualizar campos
   public function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->q17_sequencial = ($this->q17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_sequencial"]:$this->q17_sequencial);
-      $this->q17_instit = ($this->q17_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_instit"]:$this->q17_instit);
+      $this->q17_sequencial = ($this->q17_sequencial === 0 || $this->q17_sequencial === 0.0 || $this->q17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_sequencial"]:$this->q17_sequencial);
+      $this->q17_instit = ($this->q17_instit === 0 || $this->q17_instit === 0.0 || $this->q17_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_instit"]:$this->q17_instit);
       if($this->q17_data == ""){
         $this->q17_data_dia = ($this->q17_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_data_dia"]:$this->q17_data_dia);
         $this->q17_data_mes = ($this->q17_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_data_mes"]:$this->q17_data_mes);
@@ -96,15 +96,15 @@ class cl_issarqsimples {
           $this->q17_data = $this->q17_data_ano."-".$this->q17_data_mes."-".$this->q17_data_dia;
         }
       }
-      $this->q17_nroremessa = ($this->q17_nroremessa == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_nroremessa"]:$this->q17_nroremessa);
-      $this->q17_versao = ($this->q17_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_versao"]:$this->q17_versao);
-      $this->q17_qtdreg = ($this->q17_qtdreg == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_qtdreg"]:$this->q17_qtdreg);
-      $this->q17_vlrtot = ($this->q17_vlrtot == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_vlrtot"]:$this->q17_vlrtot);
+      $this->q17_nroremessa = ($this->q17_nroremessa === 0 || $this->q17_nroremessa === 0.0 || $this->q17_nroremessa == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_nroremessa"]:$this->q17_nroremessa);
+      $this->q17_versao = ($this->q17_versao === 0 || $this->q17_versao === 0.0 || $this->q17_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_versao"]:$this->q17_versao);
+      $this->q17_qtdreg = ($this->q17_qtdreg === 0 || $this->q17_qtdreg === 0.0 || $this->q17_qtdreg == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_qtdreg"]:$this->q17_qtdreg);
+      $this->q17_vlrtot = ($this->q17_vlrtot === 0 || $this->q17_vlrtot === 0.0 || $this->q17_vlrtot == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_vlrtot"]:$this->q17_vlrtot);
       $this->q17_codbco = ($this->q17_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_codbco"]:$this->q17_codbco);
-      $this->q17_oidarq = ($this->q17_oidarq == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_oidarq"]:$this->q17_oidarq);
+      $this->q17_oidarq = ($this->q17_oidarq === 0 || $this->q17_oidarq === 0.0 || $this->q17_oidarq == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_oidarq"]:$this->q17_oidarq);
       $this->q17_nomearq = ($this->q17_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_nomearq"]:$this->q17_nomearq);
     }else{
-      $this->q17_sequencial = ($this->q17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_sequencial"]:$this->q17_sequencial);
+      $this->q17_sequencial = ($this->q17_sequencial === 0 || $this->q17_sequencial === 0.0 || $this->q17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q17_sequencial"]:$this->q17_sequencial);
     }
   }
   // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_issarqsimples {
         $this->q17_sequencial = $q17_sequencial;
       }
     }
-    if(($this->q17_sequencial == null) || ($this->q17_sequencial == "") ){
+    if(($this->q17_sequencial == null) || ($this->q17_sequencial === 0 || $this->q17_sequencial === 0.0 || $this->q17_sequencial == "") ){
       $this->erro_sql = " Campo q17_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

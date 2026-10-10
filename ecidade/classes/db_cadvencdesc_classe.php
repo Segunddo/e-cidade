@@ -77,15 +77,15 @@ class cl_cadvencdesc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q92_codigo = ($this->q92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_codigo"]:$this->q92_codigo);
+       $this->q92_codigo = ($this->q92_codigo === 0 || $this->q92_codigo === 0.0 || $this->q92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_codigo"]:$this->q92_codigo);
        $this->q92_descr = ($this->q92_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_descr"]:$this->q92_descr);
-       $this->q92_tipo = ($this->q92_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_tipo"]:$this->q92_tipo);
-       $this->q92_hist = ($this->q92_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_hist"]:$this->q92_hist);
-       $this->q92_diasvcto = ($this->q92_diasvcto == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_diasvcto"]:$this->q92_diasvcto);
-       $this->q92_vlrminimo = ($this->q92_vlrminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_vlrminimo"]:$this->q92_vlrminimo);
-       $this->q92_formacalcparcvenc = ($this->q92_formacalcparcvenc == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_formacalcparcvenc"]:$this->q92_formacalcparcvenc);
+       $this->q92_tipo = ($this->q92_tipo === 0 || $this->q92_tipo === 0.0 || $this->q92_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_tipo"]:$this->q92_tipo);
+       $this->q92_hist = ($this->q92_hist === 0 || $this->q92_hist === 0.0 || $this->q92_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_hist"]:$this->q92_hist);
+       $this->q92_diasvcto = ($this->q92_diasvcto === 0 || $this->q92_diasvcto === 0.0 || $this->q92_diasvcto == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_diasvcto"]:$this->q92_diasvcto);
+       $this->q92_vlrminimo = ($this->q92_vlrminimo === 0 || $this->q92_vlrminimo === 0.0 || $this->q92_vlrminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_vlrminimo"]:$this->q92_vlrminimo);
+       $this->q92_formacalcparcvenc = ($this->q92_formacalcparcvenc === 0 || $this->q92_formacalcparcvenc === 0.0 || $this->q92_formacalcparcvenc == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_formacalcparcvenc"]:$this->q92_formacalcparcvenc);
      }else{
-       $this->q92_codigo = ($this->q92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_codigo"]:$this->q92_codigo);
+       $this->q92_codigo = ($this->q92_codigo === 0 || $this->q92_codigo === 0.0 || $this->q92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q92_codigo"]:$this->q92_codigo);
      }
    }
    // funcao para inclusao
@@ -163,7 +163,7 @@ class cl_cadvencdesc {
          $this->q92_codigo = $q92_codigo; 
        }
      }
-     if(($this->q92_codigo == null) || ($this->q92_codigo == "") ){ 
+     if(($this->q92_codigo == null) || ($this->q92_codigo === 0 || $this->q92_codigo === 0.0 || $this->q92_codigo == "") ){ 
        $this->erro_sql = " Campo q92_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

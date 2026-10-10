@@ -31,7 +31,8 @@
   include(modification("libs/db_usuariosonline.php"));
   include(modification("classes/db_issvar_classe.php"));
   include(modification("classes/db_issvarnotas_classe.php"));
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   $clissvar = new cl_issvar;
   $clissvarnotas = new cl_issvarnotas;
   $clissvar->rotulo->label();

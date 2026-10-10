@@ -86,9 +86,9 @@ class cl_cadcalc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q85_codigo = ($this->q85_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_codigo"]:$this->q85_codigo);
+       $this->q85_codigo = ($this->q85_codigo === 0 || $this->q85_codigo === 0.0 || $this->q85_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_codigo"]:$this->q85_codigo);
        $this->q85_descr = ($this->q85_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_descr"]:$this->q85_descr);
-       $this->q85_uniref = ($this->q85_uniref == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_uniref"]:$this->q85_uniref);
+       $this->q85_uniref = ($this->q85_uniref === 0 || $this->q85_uniref === 0.0 || $this->q85_uniref == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_uniref"]:$this->q85_uniref);
        if($this->q85_dtoper == ""){
          $this->q85_dtoper_dia = ($this->q85_dtoper_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_dtoper_dia"]:$this->q85_dtoper_dia);
          $this->q85_dtoper_mes = ($this->q85_dtoper_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_dtoper_mes"]:$this->q85_dtoper_mes);
@@ -97,14 +97,14 @@ class cl_cadcalc {
             $this->q85_dtoper = $this->q85_dtoper_ano."-".$this->q85_dtoper_mes."-".$this->q85_dtoper_dia;
          }
        }
-       $this->q85_codven = ($this->q85_codven == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_codven"]:$this->q85_codven);
+       $this->q85_codven = ($this->q85_codven === 0 || $this->q85_codven === 0.0 || $this->q85_codven == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_codven"]:$this->q85_codven);
        $this->q85_var = ($this->q85_var == "f"?@$GLOBALS["HTTP_POST_VARS"]["q85_var"]:$this->q85_var);
        $this->q85_fixmes = ($this->q85_fixmes == "f"?@$GLOBALS["HTTP_POST_VARS"]["q85_fixmes"]:$this->q85_fixmes);
-       $this->q85_forcal = ($this->q85_forcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_forcal"]:$this->q85_forcal);
+       $this->q85_forcal = ($this->q85_forcal === 0 || $this->q85_forcal === 0.0 || $this->q85_forcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_forcal"]:$this->q85_forcal);
        $this->q85_perman = ($this->q85_perman == "f"?@$GLOBALS["HTTP_POST_VARS"]["q85_perman"]:$this->q85_perman);
        $this->q85_outromun = ($this->q85_outromun == "f"?@$GLOBALS["HTTP_POST_VARS"]["q85_outromun"]:$this->q85_outromun);
      }else{
-       $this->q85_codigo = ($this->q85_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_codigo"]:$this->q85_codigo);
+       $this->q85_codigo = ($this->q85_codigo === 0 || $this->q85_codigo === 0.0 || $this->q85_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q85_codigo"]:$this->q85_codigo);
      }
    }
    // funcao para inclusao
@@ -215,7 +215,7 @@ class cl_cadcalc {
          $this->q85_codigo = $q85_codigo; 
        }
      }
-     if(($this->q85_codigo == null) || ($this->q85_codigo == "") ){ 
+     if(($this->q85_codigo == null) || ($this->q85_codigo === 0 || $this->q85_codigo === 0.0 || $this->q85_codigo == "") ){ 
        $this->erro_sql = " Campo q85_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

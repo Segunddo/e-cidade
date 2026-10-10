@@ -11,6 +11,11 @@
  *   ALVOS=/var/www/html/tmp/iss_alvos.txt \
  *   tmp/rector/vendor/bin/rector process --config scratchpad/rector-curado.php --dry-run
  */
+require_once __DIR__ . '/rector-rules/GuardaComparacaoLiteralRector.php';
+require_once __DIR__ . '/rector-rules/ParseStrComExtractRector.php';
+
+use ECidade\RectorRules\GuardaComparacaoLiteralRector;
+use ECidade\RectorRules\ParseStrComExtractRector;
 use Rector\Config\RectorConfig;
 use Rector\ValueObject\PhpVersion;
 
@@ -31,6 +36,12 @@ return RectorConfig::configure()
     // O run reporta "[OK] N files would have been changed" sem nenhum aviso.
     ->withPhpVersion(PhpVersion::PHP_80)
     ->withPhpSets(php80: true)
+    // As duas regras PROPRIAS: cobrem a camada semantica, que nao existe como regra
+    // nativa porque nao e upgrade -- e shim que preserva a semantica do 5.6.
+    ->withRules([
+        GuardaComparacaoLiteralRector::class,
+        ParseStrComExtractRector::class,
+    ])
     ->withSkip([
         // --- emitem sintaxe de PHP 7+ -> parse error no 5.6, derruba a REFERENCIA ---
         Rector\Php74\Rector\If_\IfToNullCoalescingAssignRector::class,

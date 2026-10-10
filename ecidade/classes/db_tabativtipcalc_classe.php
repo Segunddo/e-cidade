@@ -69,12 +69,12 @@ class cl_tabativtipcalc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q11_inscr = ($this->q11_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_inscr"]:$this->q11_inscr);
-       $this->q11_seq = ($this->q11_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_seq"]:$this->q11_seq);
-       $this->q11_tipcalc = ($this->q11_tipcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_tipcalc"]:$this->q11_tipcalc);
+       $this->q11_inscr = ($this->q11_inscr === 0 || $this->q11_inscr === 0.0 || $this->q11_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_inscr"]:$this->q11_inscr);
+       $this->q11_seq = ($this->q11_seq === 0 || $this->q11_seq === 0.0 || $this->q11_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_seq"]:$this->q11_seq);
+       $this->q11_tipcalc = ($this->q11_tipcalc === 0 || $this->q11_tipcalc === 0.0 || $this->q11_tipcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_tipcalc"]:$this->q11_tipcalc);
      }else{
-       $this->q11_inscr = ($this->q11_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_inscr"]:$this->q11_inscr);
-       $this->q11_seq = ($this->q11_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_seq"]:$this->q11_seq);
+       $this->q11_inscr = ($this->q11_inscr === 0 || $this->q11_inscr === 0.0 || $this->q11_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_inscr"]:$this->q11_inscr);
+       $this->q11_seq = ($this->q11_seq === 0 || $this->q11_seq === 0.0 || $this->q11_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_seq"]:$this->q11_seq);
      }
    }
    // funcao para inclusao
@@ -85,7 +85,7 @@ class cl_tabativtipcalc {
      }
        $this->q11_inscr = $q11_inscr; 
        $this->q11_seq = $q11_seq; 
-     if(($this->q11_inscr == null) || ($this->q11_inscr == "") ){ 
+     if(($this->q11_inscr == null) || ($this->q11_inscr === 0 || $this->q11_inscr === 0.0 || $this->q11_inscr == "") ){ 
        $this->erro_sql = " Campo q11_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -93,7 +93,7 @@ class cl_tabativtipcalc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q11_seq == null) || ($this->q11_seq == "") ){ 
+     if(($this->q11_seq == null) || ($this->q11_seq === 0 || $this->q11_seq === 0.0 || $this->q11_seq == "") ){ 
        $this->erro_sql = " Campo q11_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

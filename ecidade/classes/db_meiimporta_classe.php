@@ -81,17 +81,17 @@ class cl_meiimporta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q104_sequencial = ($this->q104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_sequencial"]:$this->q104_sequencial);
-       $this->q104_id_usuario = ($this->q104_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_id_usuario"]:$this->q104_id_usuario);
-       $this->q104_anousu = ($this->q104_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_anousu"]:$this->q104_anousu);
-       $this->q104_mesusu = ($this->q104_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_mesusu"]:$this->q104_mesusu);
+       $this->q104_sequencial = ($this->q104_sequencial === 0 || $this->q104_sequencial === 0.0 || $this->q104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_sequencial"]:$this->q104_sequencial);
+       $this->q104_id_usuario = ($this->q104_id_usuario === 0 || $this->q104_id_usuario === 0.0 || $this->q104_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_id_usuario"]:$this->q104_id_usuario);
+       $this->q104_anousu = ($this->q104_anousu === 0 || $this->q104_anousu === 0.0 || $this->q104_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_anousu"]:$this->q104_anousu);
+       $this->q104_mesusu = ($this->q104_mesusu === 0 || $this->q104_mesusu === 0.0 || $this->q104_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_mesusu"]:$this->q104_mesusu);
        $this->q104_nomearq = ($this->q104_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_nomearq"]:$this->q104_nomearq);
        $this->q104_arquivo = ($this->q104_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_arquivo"]:$this->q104_arquivo);
        $this->q104_xml = ($this->q104_xml == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_xml"]:$this->q104_xml);
-       $this->q104_tipoimporta = ($this->q104_tipoimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_tipoimporta"]:$this->q104_tipoimporta);
+       $this->q104_tipoimporta = ($this->q104_tipoimporta === 0 || $this->q104_tipoimporta === 0.0 || $this->q104_tipoimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_tipoimporta"]:$this->q104_tipoimporta);
        $this->q104_cancelado = ($this->q104_cancelado == "f"?@$GLOBALS["HTTP_POST_VARS"]["q104_cancelado"]:$this->q104_cancelado);
      }else{
-       $this->q104_sequencial = ($this->q104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_sequencial"]:$this->q104_sequencial);
+       $this->q104_sequencial = ($this->q104_sequencial === 0 || $this->q104_sequencial === 0.0 || $this->q104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q104_sequencial"]:$this->q104_sequencial);
      }
    }
    // funcao para inclusao
@@ -166,7 +166,7 @@ class cl_meiimporta {
          $this->q104_sequencial = $q104_sequencial; 
        }
      }
-     if(($this->q104_sequencial == null) || ($this->q104_sequencial == "") ){ 
+     if(($this->q104_sequencial == null) || ($this->q104_sequencial === 0 || $this->q104_sequencial === 0.0 || $this->q104_sequencial == "") ){ 
        $this->erro_sql = " Campo q104_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

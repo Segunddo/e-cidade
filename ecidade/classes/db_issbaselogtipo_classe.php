@@ -81,7 +81,7 @@ class cl_issbaselogtipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q103_sequencial = ($this->q103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q103_sequencial"]:$this->q103_sequencial);
+       $this->q103_sequencial = ($this->q103_sequencial === 0 || $this->q103_sequencial === 0.0 || $this->q103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q103_sequencial"]:$this->q103_sequencial);
        $this->q103_descricao = ($this->q103_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["q103_descricao"]:$this->q103_descricao);
        if($this->q103_dataini == ""){
          $this->q103_dataini_dia = ($this->q103_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q103_dataini_dia"]:$this->q103_dataini_dia);
@@ -102,7 +102,7 @@ class cl_issbaselogtipo {
        $this->q103_ativo = ($this->q103_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["q103_ativo"]:$this->q103_ativo);
        $this->q103_automatico = ($this->q103_automatico == "f"?@$GLOBALS["HTTP_POST_VARS"]["q103_automatico"]:$this->q103_automatico);
      }else{
-       $this->q103_sequencial = ($this->q103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q103_sequencial"]:$this->q103_sequencial);
+       $this->q103_sequencial = ($this->q103_sequencial === 0 || $this->q103_sequencial === 0.0 || $this->q103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q103_sequencial"]:$this->q103_sequencial);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_issbaselogtipo {
          $this->q103_sequencial = $q103_sequencial; 
        }
      }
-     if(($this->q103_sequencial == null) || ($this->q103_sequencial == "") ){ 
+     if(($this->q103_sequencial == null) || ($this->q103_sequencial === 0 || $this->q103_sequencial === 0.0 || $this->q103_sequencial == "") ){ 
        $this->erro_sql = " Campo q103_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

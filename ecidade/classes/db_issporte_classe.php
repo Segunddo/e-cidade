@@ -69,11 +69,11 @@ class cl_issporte {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q40_codporte = ($this->q40_codporte == ""?@$GLOBALS["HTTP_POST_VARS"]["q40_codporte"]:$this->q40_codporte);
+       $this->q40_codporte = ($this->q40_codporte === 0 || $this->q40_codporte === 0.0 || $this->q40_codporte == ""?@$GLOBALS["HTTP_POST_VARS"]["q40_codporte"]:$this->q40_codporte);
        $this->q40_descr = ($this->q40_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q40_descr"]:$this->q40_descr);
        $this->q40_fisica = ($this->q40_fisica == "f"?@$GLOBALS["HTTP_POST_VARS"]["q40_fisica"]:$this->q40_fisica);
      }else{
-       $this->q40_codporte = ($this->q40_codporte == ""?@$GLOBALS["HTTP_POST_VARS"]["q40_codporte"]:$this->q40_codporte);
+       $this->q40_codporte = ($this->q40_codporte === 0 || $this->q40_codporte === 0.0 || $this->q40_codporte == ""?@$GLOBALS["HTTP_POST_VARS"]["q40_codporte"]:$this->q40_codporte);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_issporte {
          $this->q40_codporte = $q40_codporte; 
        }
      }
-     if(($this->q40_codporte == null) || ($this->q40_codporte == "") ){ 
+     if(($this->q40_codporte == null) || ($this->q40_codporte === 0 || $this->q40_codporte === 0.0 || $this->q40_codporte == "") ){ 
        $this->erro_sql = " Campo q40_codporte nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

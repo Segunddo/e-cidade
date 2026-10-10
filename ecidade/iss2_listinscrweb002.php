@@ -46,10 +46,8 @@ $clrotulo->label("p12_codigo    " );
 $clrotulo->label("p12_inscr     " );
 $clrotulo->label("p12_cnpj      " );
 $clrotulo->label("p12_fone      " );
-
-//$cllistainscrcab->rotulo->label();
-//$cllistainscr->rotulo->label();
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 $dt="";
 $dt1="";

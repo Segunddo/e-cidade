@@ -71,12 +71,12 @@ class cl_areapont {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q28_sequencia = ($this->q28_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["q28_sequencia"]:$this->q28_sequencia);
-       $this->q28_quantini = ($this->q28_quantini == ""?@$GLOBALS["HTTP_POST_VARS"]["q28_quantini"]:$this->q28_quantini);
-       $this->q28_quantfim = ($this->q28_quantfim == ""?@$GLOBALS["HTTP_POST_VARS"]["q28_quantfim"]:$this->q28_quantfim);
-       $this->q28_pontuacao = ($this->q28_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q28_pontuacao"]:$this->q28_pontuacao);
+       $this->q28_sequencia = ($this->q28_sequencia === 0 || $this->q28_sequencia === 0.0 || $this->q28_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["q28_sequencia"]:$this->q28_sequencia);
+       $this->q28_quantini = ($this->q28_quantini === 0 || $this->q28_quantini === 0.0 || $this->q28_quantini == ""?@$GLOBALS["HTTP_POST_VARS"]["q28_quantini"]:$this->q28_quantini);
+       $this->q28_quantfim = ($this->q28_quantfim === 0 || $this->q28_quantfim === 0.0 || $this->q28_quantfim == ""?@$GLOBALS["HTTP_POST_VARS"]["q28_quantfim"]:$this->q28_quantfim);
+       $this->q28_pontuacao = ($this->q28_pontuacao === 0 || $this->q28_pontuacao === 0.0 || $this->q28_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q28_pontuacao"]:$this->q28_pontuacao);
      }else{
-       $this->q28_sequencia = ($this->q28_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["q28_sequencia"]:$this->q28_sequencia);
+       $this->q28_sequencia = ($this->q28_sequencia === 0 || $this->q28_sequencia === 0.0 || $this->q28_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["q28_sequencia"]:$this->q28_sequencia);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_areapont {
          $this->q28_sequencia = $q28_sequencia; 
        }
      }
-     if(($this->q28_sequencia == null) || ($this->q28_sequencia == "") ){ 
+     if(($this->q28_sequencia == null) || ($this->q28_sequencia === 0 || $this->q28_sequencia === 0.0 || $this->q28_sequencia == "") ){ 
        $this->erro_sql = " Campo q28_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

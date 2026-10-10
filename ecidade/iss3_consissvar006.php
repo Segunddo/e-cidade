@@ -32,7 +32,8 @@
   include(modification("classes/db_issplanit_classe.php"));
   include(modification("classes/db_issplan_classe.php"));
   include(modification("classes/db_issplanitinscr_classe.php"));
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   $clissplanit = new cl_issplanit;
   $clissplan = new cl_issplan;
   $clissplanitinscr = new cl_issplanitinscr;

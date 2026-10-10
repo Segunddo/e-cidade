@@ -84,12 +84,12 @@ class cl_tabativbaixa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q11_inscr = ($this->q11_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_inscr"]:$this->q11_inscr);
-       $this->q11_seq = ($this->q11_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_seq"]:$this->q11_seq);
-       $this->q11_processo = ($this->q11_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_processo"]:$this->q11_processo);
+       $this->q11_inscr = ($this->q11_inscr === 0 || $this->q11_inscr === 0.0 || $this->q11_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_inscr"]:$this->q11_inscr);
+       $this->q11_seq = ($this->q11_seq === 0 || $this->q11_seq === 0.0 || $this->q11_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_seq"]:$this->q11_seq);
+       $this->q11_processo = ($this->q11_processo === 0 || $this->q11_processo === 0.0 || $this->q11_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_processo"]:$this->q11_processo);
        $this->q11_oficio = ($this->q11_oficio == "f"?@$GLOBALS["HTTP_POST_VARS"]["q11_oficio"]:$this->q11_oficio);
        $this->q11_obs = ($this->q11_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_obs"]:$this->q11_obs);
-       $this->q11_login = ($this->q11_login == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_login"]:$this->q11_login);
+       $this->q11_login = ($this->q11_login === 0 || $this->q11_login === 0.0 || $this->q11_login == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_login"]:$this->q11_login);
        if($this->q11_data == ""){
          $this->q11_data_dia = ($this->q11_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_data_dia"]:$this->q11_data_dia);
          $this->q11_data_mes = ($this->q11_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_data_mes"]:$this->q11_data_mes);
@@ -101,8 +101,8 @@ class cl_tabativbaixa {
        $this->q11_hora = ($this->q11_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_hora"]:$this->q11_hora);
        $this->q11_numero = ($this->q11_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_numero"]:$this->q11_numero);
      }else{
-       $this->q11_inscr = ($this->q11_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_inscr"]:$this->q11_inscr);
-       $this->q11_seq = ($this->q11_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_seq"]:$this->q11_seq);
+       $this->q11_inscr = ($this->q11_inscr === 0 || $this->q11_inscr === 0.0 || $this->q11_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_inscr"]:$this->q11_inscr);
+       $this->q11_seq = ($this->q11_seq === 0 || $this->q11_seq === 0.0 || $this->q11_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q11_seq"]:$this->q11_seq);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_tabativbaixa {
      }*/
        $this->q11_inscr = $q11_inscr; 
        $this->q11_seq = $q11_seq; 
-     if(($this->q11_inscr == null) || ($this->q11_inscr == "") ){ 
+     if(($this->q11_inscr == null) || ($this->q11_inscr === 0 || $this->q11_inscr === 0.0 || $this->q11_inscr == "") ){ 
        $this->erro_sql = " Campo q11_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -175,7 +175,7 @@ class cl_tabativbaixa {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q11_seq == null) || ($this->q11_seq == "") ){ 
+     if(($this->q11_seq == null) || ($this->q11_seq === 0 || $this->q11_seq === 0.0 || $this->q11_seq == "") ){ 
        $this->erro_sql = " Campo q11_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

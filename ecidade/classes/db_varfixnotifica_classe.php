@@ -69,11 +69,11 @@ class cl_varfixnotifica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q37_sequence = ($this->q37_sequence == ""?@$GLOBALS["HTTP_POST_VARS"]["q37_sequence"]:$this->q37_sequence);
-       $this->q37_varfix = ($this->q37_varfix == ""?@$GLOBALS["HTTP_POST_VARS"]["q37_varfix"]:$this->q37_varfix);
-       $this->q37_notifica = ($this->q37_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["q37_notifica"]:$this->q37_notifica);
+       $this->q37_sequence = ($this->q37_sequence === 0 || $this->q37_sequence === 0.0 || $this->q37_sequence == ""?@$GLOBALS["HTTP_POST_VARS"]["q37_sequence"]:$this->q37_sequence);
+       $this->q37_varfix = ($this->q37_varfix === 0 || $this->q37_varfix === 0.0 || $this->q37_varfix == ""?@$GLOBALS["HTTP_POST_VARS"]["q37_varfix"]:$this->q37_varfix);
+       $this->q37_notifica = ($this->q37_notifica === 0 || $this->q37_notifica === 0.0 || $this->q37_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["q37_notifica"]:$this->q37_notifica);
      }else{
-       $this->q37_sequence = ($this->q37_sequence == ""?@$GLOBALS["HTTP_POST_VARS"]["q37_sequence"]:$this->q37_sequence);
+       $this->q37_sequence = ($this->q37_sequence === 0 || $this->q37_sequence === 0.0 || $this->q37_sequence == ""?@$GLOBALS["HTTP_POST_VARS"]["q37_sequence"]:$this->q37_sequence);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_varfixnotifica {
          $this->q37_sequence = $q37_sequence; 
        }
      }
-     if(($this->q37_sequence == null) || ($this->q37_sequence == "") ){ 
+     if(($this->q37_sequence == null) || ($this->q37_sequence === 0 || $this->q37_sequence === 0.0 || $this->q37_sequence == "") ){ 
        $this->erro_sql = " Campo q37_sequence nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

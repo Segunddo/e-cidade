@@ -69,11 +69,11 @@ class cl_isstipoalvaradepto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q99_sequencial = ($this->q99_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q99_sequencial"]:$this->q99_sequencial);
-       $this->q99_depto = ($this->q99_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["q99_depto"]:$this->q99_depto);
-       $this->q99_isstipoalvara = ($this->q99_isstipoalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q99_isstipoalvara"]:$this->q99_isstipoalvara);
+       $this->q99_sequencial = ($this->q99_sequencial === 0 || $this->q99_sequencial === 0.0 || $this->q99_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q99_sequencial"]:$this->q99_sequencial);
+       $this->q99_depto = ($this->q99_depto === 0 || $this->q99_depto === 0.0 || $this->q99_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["q99_depto"]:$this->q99_depto);
+       $this->q99_isstipoalvara = ($this->q99_isstipoalvara === 0 || $this->q99_isstipoalvara === 0.0 || $this->q99_isstipoalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q99_isstipoalvara"]:$this->q99_isstipoalvara);
      }else{
-       $this->q99_sequencial = ($this->q99_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q99_sequencial"]:$this->q99_sequencial);
+       $this->q99_sequencial = ($this->q99_sequencial === 0 || $this->q99_sequencial === 0.0 || $this->q99_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q99_sequencial"]:$this->q99_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_isstipoalvaradepto {
          $this->q99_sequencial = $q99_sequencial; 
        }
      }
-     if(($this->q99_sequencial == null) || ($this->q99_sequencial == "") ){ 
+     if(($this->q99_sequencial == null) || ($this->q99_sequencial === 0 || $this->q99_sequencial === 0.0 || $this->q99_sequencial == "") ){ 
        $this->erro_sql = " Campo q99_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

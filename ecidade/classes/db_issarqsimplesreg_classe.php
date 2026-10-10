@@ -112,9 +112,9 @@ class cl_issarqsimplesreg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q23_sequencial = ($this->q23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_sequencial"]:$this->q23_sequencial);
-       $this->q23_issarqsimples = ($this->q23_issarqsimples == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_issarqsimples"]:$this->q23_issarqsimples);
-       $this->q23_seqreg = ($this->q23_seqreg == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_seqreg"]:$this->q23_seqreg);
+       $this->q23_sequencial = ($this->q23_sequencial === 0 || $this->q23_sequencial === 0.0 || $this->q23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_sequencial"]:$this->q23_sequencial);
+       $this->q23_issarqsimples = ($this->q23_issarqsimples === 0 || $this->q23_issarqsimples === 0.0 || $this->q23_issarqsimples == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_issarqsimples"]:$this->q23_issarqsimples);
+       $this->q23_seqreg = ($this->q23_seqreg === 0 || $this->q23_seqreg === 0.0 || $this->q23_seqreg == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_seqreg"]:$this->q23_seqreg);
        if($this->q23_dtarrec == ""){
          $this->q23_dtarrec_dia = ($this->q23_dtarrec_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_dtarrec_dia"]:$this->q23_dtarrec_dia);
          $this->q23_dtarrec_mes = ($this->q23_dtarrec_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_dtarrec_mes"]:$this->q23_dtarrec_mes);
@@ -133,9 +133,9 @@ class cl_issarqsimplesreg {
        }
        $this->q23_cnpj = ($this->q23_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_cnpj"]:$this->q23_cnpj);
        $this->q23_tiporec = ($this->q23_tiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_tiporec"]:$this->q23_tiporec);
-       $this->q23_vlrprinc = ($this->q23_vlrprinc == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_vlrprinc"]:$this->q23_vlrprinc);
-       $this->q23_vlrmul = ($this->q23_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_vlrmul"]:$this->q23_vlrmul);
-       $this->q23_vlrjur = ($this->q23_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_vlrjur"]:$this->q23_vlrjur);
+       $this->q23_vlrprinc = ($this->q23_vlrprinc === 0 || $this->q23_vlrprinc === 0.0 || $this->q23_vlrprinc == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_vlrprinc"]:$this->q23_vlrprinc);
+       $this->q23_vlrmul = ($this->q23_vlrmul === 0 || $this->q23_vlrmul === 0.0 || $this->q23_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_vlrmul"]:$this->q23_vlrmul);
+       $this->q23_vlrjur = ($this->q23_vlrjur === 0 || $this->q23_vlrjur === 0.0 || $this->q23_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_vlrjur"]:$this->q23_vlrjur);
        if($this->q23_data == ""){
          $this->q23_data_dia = ($this->q23_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_data_dia"]:$this->q23_data_dia);
          $this->q23_data_mes = ($this->q23_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_data_mes"]:$this->q23_data_mes);
@@ -144,17 +144,17 @@ class cl_issarqsimplesreg {
             $this->q23_data = $this->q23_data_ano."-".$this->q23_data_mes."-".$this->q23_data_dia;
          }
        }
-       $this->q23_vlraut = ($this->q23_vlraut == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_vlraut"]:$this->q23_vlraut);
+       $this->q23_vlraut = ($this->q23_vlraut === 0 || $this->q23_vlraut === 0.0 || $this->q23_vlraut == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_vlraut"]:$this->q23_vlraut);
        $this->q23_nroaut = ($this->q23_nroaut == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_nroaut"]:$this->q23_nroaut);
        $this->q23_codbco = ($this->q23_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_codbco"]:$this->q23_codbco);
        $this->q23_codage = ($this->q23_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_codage"]:$this->q23_codage);
-       $this->q23_codsiafi = ($this->q23_codsiafi == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_codsiafi"]:$this->q23_codsiafi);
-       $this->q23_codserpro = ($this->q23_codserpro == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_codserpro"]:$this->q23_codserpro);
-       $this->q23_anousu = ($this->q23_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_anousu"]:$this->q23_anousu);
-       $this->q23_mesusu = ($this->q23_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_mesusu"]:$this->q23_mesusu);
-       $this->q23_acao = ($this->q23_acao == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_acao"]:$this->q23_acao);
+       $this->q23_codsiafi = ($this->q23_codsiafi === 0 || $this->q23_codsiafi === 0.0 || $this->q23_codsiafi == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_codsiafi"]:$this->q23_codsiafi);
+       $this->q23_codserpro = ($this->q23_codserpro === 0 || $this->q23_codserpro === 0.0 || $this->q23_codserpro == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_codserpro"]:$this->q23_codserpro);
+       $this->q23_anousu = ($this->q23_anousu === 0 || $this->q23_anousu === 0.0 || $this->q23_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_anousu"]:$this->q23_anousu);
+       $this->q23_mesusu = ($this->q23_mesusu === 0 || $this->q23_mesusu === 0.0 || $this->q23_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_mesusu"]:$this->q23_mesusu);
+       $this->q23_acao = ($this->q23_acao === 0 || $this->q23_acao === 0.0 || $this->q23_acao == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_acao"]:$this->q23_acao);
      }else{
-       $this->q23_sequencial = ($this->q23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_sequencial"]:$this->q23_sequencial);
+       $this->q23_sequencial = ($this->q23_sequencial === 0 || $this->q23_sequencial === 0.0 || $this->q23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q23_sequencial"]:$this->q23_sequencial);
      }
    }
    // funcao para inclusao
@@ -238,7 +238,7 @@ class cl_issarqsimplesreg {
          $this->q23_sequencial = $q23_sequencial; 
        }
      }
-     if(($this->q23_sequencial == null) || ($this->q23_sequencial == "") ){ 
+     if(($this->q23_sequencial == null) || ($this->q23_sequencial === 0 || $this->q23_sequencial === 0.0 || $this->q23_sequencial == "") ){ 
        $this->erro_sql = " Campo q23_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

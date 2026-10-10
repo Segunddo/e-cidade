@@ -105,29 +105,29 @@ class cl_tipcalc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q81_codigo = ($this->q81_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_codigo"]:$this->q81_codigo);
+       $this->q81_codigo = ($this->q81_codigo === 0 || $this->q81_codigo === 0.0 || $this->q81_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_codigo"]:$this->q81_codigo);
        $this->q81_descr = ($this->q81_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_descr"]:$this->q81_descr);
        $this->q81_abrev = ($this->q81_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_abrev"]:$this->q81_abrev);
-       $this->q81_cadcalc = ($this->q81_cadcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_cadcalc"]:$this->q81_cadcalc);
+       $this->q81_cadcalc = ($this->q81_cadcalc === 0 || $this->q81_cadcalc === 0.0 || $this->q81_cadcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_cadcalc"]:$this->q81_cadcalc);
        $this->q81_integr = ($this->q81_integr == "f"?@$GLOBALS["HTTP_POST_VARS"]["q81_integr"]:$this->q81_integr);
        $this->q81_tippro = ($this->q81_tippro == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_tippro"]:$this->q81_tippro);
-       $this->q81_recexe = ($this->q81_recexe == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_recexe"]:$this->q81_recexe);
-       $this->q81_qiexe = ($this->q81_qiexe == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_qiexe"]:$this->q81_qiexe);
-       $this->q81_qfexe = ($this->q81_qfexe == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_qfexe"]:$this->q81_qfexe);
-       $this->q81_valexe = ($this->q81_valexe == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_valexe"]:$this->q81_valexe);
-       $this->q81_recpro = ($this->q81_recpro == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_recpro"]:$this->q81_recpro);
-       $this->q81_qipro = ($this->q81_qipro == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_qipro"]:$this->q81_qipro);
-       $this->q81_qfpro = ($this->q81_qfpro == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_qfpro"]:$this->q81_qfpro);
-       $this->q81_valpro = ($this->q81_valpro == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_valpro"]:$this->q81_valpro);
+       $this->q81_recexe = ($this->q81_recexe === 0 || $this->q81_recexe === 0.0 || $this->q81_recexe == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_recexe"]:$this->q81_recexe);
+       $this->q81_qiexe = ($this->q81_qiexe === 0 || $this->q81_qiexe === 0.0 || $this->q81_qiexe == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_qiexe"]:$this->q81_qiexe);
+       $this->q81_qfexe = ($this->q81_qfexe === 0 || $this->q81_qfexe === 0.0 || $this->q81_qfexe == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_qfexe"]:$this->q81_qfexe);
+       $this->q81_valexe = ($this->q81_valexe === 0 || $this->q81_valexe === 0.0 || $this->q81_valexe == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_valexe"]:$this->q81_valexe);
+       $this->q81_recpro = ($this->q81_recpro === 0 || $this->q81_recpro === 0.0 || $this->q81_recpro == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_recpro"]:$this->q81_recpro);
+       $this->q81_qipro = ($this->q81_qipro === 0 || $this->q81_qipro === 0.0 || $this->q81_qipro == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_qipro"]:$this->q81_qipro);
+       $this->q81_qfpro = ($this->q81_qfpro === 0 || $this->q81_qfpro === 0.0 || $this->q81_qfpro == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_qfpro"]:$this->q81_qfpro);
+       $this->q81_valpro = ($this->q81_valpro === 0 || $this->q81_valpro === 0.0 || $this->q81_valpro == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_valpro"]:$this->q81_valpro);
        $this->q81_uqtab = ($this->q81_uqtab == "f"?@$GLOBALS["HTTP_POST_VARS"]["q81_uqtab"]:$this->q81_uqtab);
        $this->q81_uqcad = ($this->q81_uqcad == "f"?@$GLOBALS["HTTP_POST_VARS"]["q81_uqcad"]:$this->q81_uqcad);
-       $this->q81_gera = ($this->q81_gera == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_gera"]:$this->q81_gera);
-       $this->q81_tipo = ($this->q81_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_tipo"]:$this->q81_tipo);
-       $this->q81_percprovis = ($this->q81_percprovis == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_percprovis"]:$this->q81_percprovis);
+       $this->q81_gera = ($this->q81_gera === 0 || $this->q81_gera === 0.0 || $this->q81_gera == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_gera"]:$this->q81_gera);
+       $this->q81_tipo = ($this->q81_tipo === 0 || $this->q81_tipo === 0.0 || $this->q81_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_tipo"]:$this->q81_tipo);
+       $this->q81_percprovis = ($this->q81_percprovis === 0 || $this->q81_percprovis === 0.0 || $this->q81_percprovis == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_percprovis"]:$this->q81_percprovis);
        $this->q81_usaretido = ($this->q81_usaretido == "f"?@$GLOBALS["HTTP_POST_VARS"]["q81_usaretido"]:$this->q81_usaretido);
-       $this->q81_excedenteativ = ($this->q81_excedenteativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_excedenteativ"]:$this->q81_excedenteativ);
+       $this->q81_excedenteativ = ($this->q81_excedenteativ === 0 || $this->q81_excedenteativ === 0.0 || $this->q81_excedenteativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_excedenteativ"]:$this->q81_excedenteativ);
      }else{
-       $this->q81_codigo = ($this->q81_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_codigo"]:$this->q81_codigo);
+       $this->q81_codigo = ($this->q81_codigo === 0 || $this->q81_codigo === 0.0 || $this->q81_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q81_codigo"]:$this->q81_codigo);
      }
    }
    // funcao para inclusao
@@ -337,7 +337,7 @@ class cl_tipcalc {
          $this->q81_codigo = $q81_codigo; 
        }
      }
-     if(($this->q81_codigo == null) || ($this->q81_codigo == "") ){ 
+     if(($this->q81_codigo == null) || ($this->q81_codigo === 0 || $this->q81_codigo === 0.0 || $this->q81_codigo == "") ){ 
        $this->erro_sql = " Campo q81_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -73,14 +73,14 @@ class cl_listainscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p12_codigo = ($this->p12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_codigo"]:$this->p12_codigo);
-       $this->p12_inscr = ($this->p12_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_inscr"]:$this->p12_inscr);
+       $this->p12_codigo = ($this->p12_codigo === 0 || $this->p12_codigo === 0.0 || $this->p12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_codigo"]:$this->p12_codigo);
+       $this->p12_inscr = ($this->p12_inscr === 0 || $this->p12_inscr === 0.0 || $this->p12_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_inscr"]:$this->p12_inscr);
        $this->p12_cnpj = ($this->p12_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_cnpj"]:$this->p12_cnpj);
        $this->p12_fone = ($this->p12_fone == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_fone"]:$this->p12_fone);
-       $this->p12_tipolanc = ($this->p12_tipolanc == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_tipolanc"]:$this->p12_tipolanc);
+       $this->p12_tipolanc = ($this->p12_tipolanc === 0 || $this->p12_tipolanc === 0.0 || $this->p12_tipolanc == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_tipolanc"]:$this->p12_tipolanc);
      }else{
-       $this->p12_codigo = ($this->p12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_codigo"]:$this->p12_codigo);
-       $this->p12_inscr = ($this->p12_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_inscr"]:$this->p12_inscr);
+       $this->p12_codigo = ($this->p12_codigo === 0 || $this->p12_codigo === 0.0 || $this->p12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_codigo"]:$this->p12_codigo);
+       $this->p12_inscr = ($this->p12_inscr === 0 || $this->p12_inscr === 0.0 || $this->p12_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["p12_inscr"]:$this->p12_inscr);
      }
    }
    // funcao para inclusao
@@ -106,7 +106,7 @@ class cl_listainscr {
      }
        $this->p12_codigo = $p12_codigo; 
        $this->p12_inscr = $p12_inscr; 
-     if(($this->p12_codigo == null) || ($this->p12_codigo == "") ){ 
+     if(($this->p12_codigo == null) || ($this->p12_codigo === 0 || $this->p12_codigo === 0.0 || $this->p12_codigo == "") ){ 
        $this->erro_sql = " Campo p12_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -114,7 +114,7 @@ class cl_listainscr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p12_inscr == null) || ($this->p12_inscr == "") ){ 
+     if(($this->p12_inscr == null) || ($this->p12_inscr === 0 || $this->p12_inscr === 0.0 || $this->p12_inscr == "") ){ 
        $this->erro_sql = " Campo p12_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

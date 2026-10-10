@@ -75,14 +75,14 @@ class cl_classe {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q12_classe = ($this->q12_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q12_classe"]:$this->q12_classe);
+       $this->q12_classe = ($this->q12_classe === 0 || $this->q12_classe === 0.0 || $this->q12_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q12_classe"]:$this->q12_classe);
        $this->q12_descr = ($this->q12_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q12_descr"]:$this->q12_descr);
        $this->q12_fisica = ($this->q12_fisica == "f"?@$GLOBALS["HTTP_POST_VARS"]["q12_fisica"]:$this->q12_fisica);
        $this->q12_calciss = ($this->q12_calciss == "f"?@$GLOBALS["HTTP_POST_VARS"]["q12_calciss"]:$this->q12_calciss);
        $this->q12_integrasani = ($this->q12_integrasani == "f"?@$GLOBALS["HTTP_POST_VARS"]["q12_integrasani"]:$this->q12_integrasani);
        $this->q12_alvaraautomatico = ($this->q12_alvaraautomatico == "f"?@$GLOBALS["HTTP_POST_VARS"]["q12_alvaraautomatico"]:$this->q12_alvaraautomatico);
      }else{
-       $this->q12_classe = ($this->q12_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q12_classe"]:$this->q12_classe);
+       $this->q12_classe = ($this->q12_classe === 0 || $this->q12_classe === 0.0 || $this->q12_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q12_classe"]:$this->q12_classe);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_classe {
          $this->q12_classe = $q12_classe; 
        }
      }
-     if(($this->q12_classe == null) || ($this->q12_classe == "") ){ 
+     if(($this->q12_classe == null) || ($this->q12_classe === 0 || $this->q12_classe === 0.0 || $this->q12_classe == "") ){ 
        $this->erro_sql = " Campo q12_classe nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

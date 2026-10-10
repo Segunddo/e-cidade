@@ -67,11 +67,11 @@ class cl_clasativ {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q82_ativ = ($this->q82_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_ativ"]:$this->q82_ativ);
-       $this->q82_classe = ($this->q82_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_classe"]:$this->q82_classe);
+       $this->q82_ativ = ($this->q82_ativ === 0 || $this->q82_ativ === 0.0 || $this->q82_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_ativ"]:$this->q82_ativ);
+       $this->q82_classe = ($this->q82_classe === 0 || $this->q82_classe === 0.0 || $this->q82_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_classe"]:$this->q82_classe);
      }else{
-       $this->q82_ativ = ($this->q82_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_ativ"]:$this->q82_ativ);
-       $this->q82_classe = ($this->q82_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_classe"]:$this->q82_classe);
+       $this->q82_ativ = ($this->q82_ativ === 0 || $this->q82_ativ === 0.0 || $this->q82_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_ativ"]:$this->q82_ativ);
+       $this->q82_classe = ($this->q82_classe === 0 || $this->q82_classe === 0.0 || $this->q82_classe == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_classe"]:$this->q82_classe);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_clasativ {
       $this->atualizacampos();
        $this->q82_ativ = $q82_ativ; 
        $this->q82_classe = $q82_classe; 
-     if(($this->q82_ativ == null) || ($this->q82_ativ == "") ){ 
+     if(($this->q82_ativ == null) || ($this->q82_ativ === 0 || $this->q82_ativ === 0.0 || $this->q82_ativ == "") ){ 
        $this->erro_sql = " Campo q82_ativ nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_clasativ {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q82_classe == null) || ($this->q82_classe == "") ){ 
+     if(($this->q82_classe == null) || ($this->q82_classe === 0 || $this->q82_classe === 0.0 || $this->q82_classe == "") ){ 
        $this->erro_sql = " Campo q82_classe nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

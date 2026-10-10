@@ -36,7 +36,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("q81_codigo");
 $clrotulo->label("q81_descr");
 $clrotulo->label("q85_descr");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 echo"
 <script>
 	parent.document.form1.atualizar.disabled=true;

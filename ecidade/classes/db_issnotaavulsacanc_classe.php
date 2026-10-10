@@ -78,9 +78,9 @@ class cl_issnotaavulsacanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q63_sequencial = ($this->q63_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_sequencial"]:$this->q63_sequencial);
-       $this->q63_usuario = ($this->q63_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_usuario"]:$this->q63_usuario);
-       $this->q63_issnotaavulsa = ($this->q63_issnotaavulsa == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_issnotaavulsa"]:$this->q63_issnotaavulsa);
+       $this->q63_sequencial = ($this->q63_sequencial === 0 || $this->q63_sequencial === 0.0 || $this->q63_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_sequencial"]:$this->q63_sequencial);
+       $this->q63_usuario = ($this->q63_usuario === 0 || $this->q63_usuario === 0.0 || $this->q63_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_usuario"]:$this->q63_usuario);
+       $this->q63_issnotaavulsa = ($this->q63_issnotaavulsa === 0 || $this->q63_issnotaavulsa === 0.0 || $this->q63_issnotaavulsa == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_issnotaavulsa"]:$this->q63_issnotaavulsa);
        if($this->q63_data == ""){
          $this->q63_data_dia = ($this->q63_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_data_dia"]:$this->q63_data_dia);
          $this->q63_data_mes = ($this->q63_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_data_mes"]:$this->q63_data_mes);
@@ -92,7 +92,7 @@ class cl_issnotaavulsacanc {
        $this->q63_hora = ($this->q63_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_hora"]:$this->q63_hora);
        $this->q63_motivo = ($this->q63_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_motivo"]:$this->q63_motivo);
      }else{
-       $this->q63_sequencial = ($this->q63_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_sequencial"]:$this->q63_sequencial);
+       $this->q63_sequencial = ($this->q63_sequencial === 0 || $this->q63_sequencial === 0.0 || $this->q63_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q63_sequencial"]:$this->q63_sequencial);
      }
    }
    // funcao para inclusao
@@ -158,7 +158,7 @@ class cl_issnotaavulsacanc {
          $this->q63_sequencial = $q63_sequencial; 
        }
      }
-     if(($this->q63_sequencial == null) || ($this->q63_sequencial == "") ){ 
+     if(($this->q63_sequencial == null) || ($this->q63_sequencial === 0 || $this->q63_sequencial === 0.0 || $this->q63_sequencial == "") ){ 
        $this->erro_sql = " Campo q63_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

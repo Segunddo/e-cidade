@@ -69,12 +69,12 @@ class cl_issmatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q05_inscr = ($this->q05_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_inscr"]:$this->q05_inscr);
-       $this->q05_matric = ($this->q05_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_matric"]:$this->q05_matric);
-       $this->q05_idcons = ($this->q05_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_idcons"]:$this->q05_idcons);
+       $this->q05_inscr = ($this->q05_inscr === 0 || $this->q05_inscr === 0.0 || $this->q05_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_inscr"]:$this->q05_inscr);
+       $this->q05_matric = ($this->q05_matric === 0 || $this->q05_matric === 0.0 || $this->q05_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_matric"]:$this->q05_matric);
+       $this->q05_idcons = ($this->q05_idcons === 0 || $this->q05_idcons === 0.0 || $this->q05_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_idcons"]:$this->q05_idcons);
      }else{
-       $this->q05_inscr = ($this->q05_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_inscr"]:$this->q05_inscr);
-       $this->q05_matric = ($this->q05_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_matric"]:$this->q05_matric);
+       $this->q05_inscr = ($this->q05_inscr === 0 || $this->q05_inscr === 0.0 || $this->q05_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_inscr"]:$this->q05_inscr);
+       $this->q05_matric = ($this->q05_matric === 0 || $this->q05_matric === 0.0 || $this->q05_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_matric"]:$this->q05_matric);
      }
    }
    // funcao para inclusao
@@ -85,7 +85,7 @@ class cl_issmatric {
      }
        $this->q05_inscr = $q05_inscr; 
        $this->q05_matric = $q05_matric; 
-     if(($this->q05_inscr == null) || ($this->q05_inscr == "") ){ 
+     if(($this->q05_inscr == null) || ($this->q05_inscr === 0 || $this->q05_inscr === 0.0 || $this->q05_inscr == "") ){ 
        $this->erro_sql = " Campo q05_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -93,7 +93,7 @@ class cl_issmatric {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q05_matric == null) || ($this->q05_matric == "") ){ 
+     if(($this->q05_matric == null) || ($this->q05_matric === 0 || $this->q05_matric === 0.0 || $this->q05_matric == "") ){ 
        $this->erro_sql = " Campo q05_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

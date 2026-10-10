@@ -85,19 +85,19 @@ class cl_orcunidade
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->o41_anousu = ($this->o41_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_anousu"]:$this->o41_anousu);
-            $this->o41_orgao = ($this->o41_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_orgao"]:$this->o41_orgao);
-            $this->o41_unidade = ($this->o41_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_unidade"]:$this->o41_unidade);
+            $this->o41_anousu = ($this->o41_anousu === 0 || $this->o41_anousu === 0.0 || $this->o41_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_anousu"]:$this->o41_anousu);
+            $this->o41_orgao = ($this->o41_orgao === 0 || $this->o41_orgao === 0.0 || $this->o41_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_orgao"]:$this->o41_orgao);
+            $this->o41_unidade = ($this->o41_unidade === 0 || $this->o41_unidade === 0.0 || $this->o41_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_unidade"]:$this->o41_unidade);
             $this->o41_codtri = ($this->o41_codtri == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_codtri"]:$this->o41_codtri);
             $this->o41_descr = ($this->o41_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_descr"]:$this->o41_descr);
-            $this->o41_indent = ($this->o41_indent == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_indent"]:$this->o41_indent);
+            $this->o41_indent = ($this->o41_indent === 0 || $this->o41_indent === 0.0 || $this->o41_indent == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_indent"]:$this->o41_indent);
             $this->o41_cnpj = ($this->o41_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_cnpj"]:$this->o41_cnpj);
-            $this->o41_ident = ($this->o41_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_ident"]:$this->o41_ident);
-            $this->o41_instit = ($this->o41_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_instit"]:$this->o41_instit);
+            $this->o41_ident = ($this->o41_ident === 0 || $this->o41_ident === 0.0 || $this->o41_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_ident"]:$this->o41_ident);
+            $this->o41_instit = ($this->o41_instit === 0 || $this->o41_instit === 0.0 || $this->o41_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_instit"]:$this->o41_instit);
         } else {
-            $this->o41_anousu = ($this->o41_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_anousu"]:$this->o41_anousu);
-            $this->o41_orgao = ($this->o41_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_orgao"]:$this->o41_orgao);
-            $this->o41_unidade = ($this->o41_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_unidade"]:$this->o41_unidade);
+            $this->o41_anousu = ($this->o41_anousu === 0 || $this->o41_anousu === 0.0 || $this->o41_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_anousu"]:$this->o41_anousu);
+            $this->o41_orgao = ($this->o41_orgao === 0 || $this->o41_orgao === 0.0 || $this->o41_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_orgao"]:$this->o41_orgao);
+            $this->o41_unidade = ($this->o41_unidade === 0 || $this->o41_unidade === 0.0 || $this->o41_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o41_unidade"]:$this->o41_unidade);
         }
     }
     // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_orcunidade
         $this->o41_anousu = $o41_anousu;
         $this->o41_orgao = $o41_orgao;
         $this->o41_unidade = $o41_unidade;
-        if (($this->o41_anousu == null) || ($this->o41_anousu == "")) {
+        if (($this->o41_anousu == null) || ($this->o41_anousu === 0 || $this->o41_anousu === 0.0 || $this->o41_anousu == "")) {
             $this->erro_sql = " Campo o41_anousu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -154,7 +154,7 @@ class cl_orcunidade
             $this->erro_status = "0";
             return false;
         }
-        if (($this->o41_orgao == null) || ($this->o41_orgao == "")) {
+        if (($this->o41_orgao == null) || ($this->o41_orgao === 0 || $this->o41_orgao === 0.0 || $this->o41_orgao == "")) {
             $this->erro_sql = " Campo o41_orgao nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -162,7 +162,7 @@ class cl_orcunidade
             $this->erro_status = "0";
             return false;
         }
-        if (($this->o41_unidade == null) || ($this->o41_unidade == "")) {
+        if (($this->o41_unidade == null) || ($this->o41_unidade === 0 || $this->o41_unidade === 0.0 || $this->o41_unidade == "")) {
             $this->erro_sql = " Campo o41_unidade nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

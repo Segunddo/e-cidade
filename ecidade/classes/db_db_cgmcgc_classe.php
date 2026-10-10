@@ -67,17 +67,17 @@ class cl_db_cgmcgc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z01_numcgm = ($this->z01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_numcgm"]:$this->z01_numcgm);
+       $this->z01_numcgm = ($this->z01_numcgm === 0 || $this->z01_numcgm === 0.0 || $this->z01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_numcgm"]:$this->z01_numcgm);
        $this->z01_cgc = ($this->z01_cgc == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_cgc"]:$this->z01_cgc);
      }else{
-       $this->z01_numcgm = ($this->z01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_numcgm"]:$this->z01_numcgm);
+       $this->z01_numcgm = ($this->z01_numcgm === 0 || $this->z01_numcgm === 0.0 || $this->z01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_numcgm"]:$this->z01_numcgm);
      }
    }
    // funcao para inclusao
    public function incluir ($z01_numcgm){ 
       $this->atualizacampos();
        $this->z01_numcgm = $z01_numcgm; 
-     if(($this->z01_numcgm == null) || ($this->z01_numcgm == "") ){ 
+     if(($this->z01_numcgm == null) || ($this->z01_numcgm === 0 || $this->z01_numcgm === 0.0 || $this->z01_numcgm == "") ){ 
        $this->erro_sql = " Campo z01_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

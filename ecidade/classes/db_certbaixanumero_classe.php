@@ -69,11 +69,11 @@ class cl_certbaixanumero {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q79_sequencial = ($this->q79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q79_sequencial"]:$this->q79_sequencial);
-       $this->q79_anousu = ($this->q79_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q79_anousu"]:$this->q79_anousu);
-       $this->q79_ultcodcertbaixa = ($this->q79_ultcodcertbaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["q79_ultcodcertbaixa"]:$this->q79_ultcodcertbaixa);
+       $this->q79_sequencial = ($this->q79_sequencial === 0 || $this->q79_sequencial === 0.0 || $this->q79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q79_sequencial"]:$this->q79_sequencial);
+       $this->q79_anousu = ($this->q79_anousu === 0 || $this->q79_anousu === 0.0 || $this->q79_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q79_anousu"]:$this->q79_anousu);
+       $this->q79_ultcodcertbaixa = ($this->q79_ultcodcertbaixa === 0 || $this->q79_ultcodcertbaixa === 0.0 || $this->q79_ultcodcertbaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["q79_ultcodcertbaixa"]:$this->q79_ultcodcertbaixa);
      }else{
-       $this->q79_sequencial = ($this->q79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q79_sequencial"]:$this->q79_sequencial);
+       $this->q79_sequencial = ($this->q79_sequencial === 0 || $this->q79_sequencial === 0.0 || $this->q79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q79_sequencial"]:$this->q79_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_certbaixanumero {
          $this->q79_sequencial = $q79_sequencial; 
        }
      }
-     if(($this->q79_sequencial == null) || ($this->q79_sequencial == "") ){ 
+     if(($this->q79_sequencial == null) || ($this->q79_sequencial === 0 || $this->q79_sequencial === 0.0 || $this->q79_sequencial == "") ){ 
        $this->erro_sql = " Campo q79_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

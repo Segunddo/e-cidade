@@ -69,11 +69,11 @@ class cl_issarqsimplesregerro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q49_sequencial = ($this->q49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q49_sequencial"]:$this->q49_sequencial);
+       $this->q49_sequencial = ($this->q49_sequencial === 0 || $this->q49_sequencial === 0.0 || $this->q49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q49_sequencial"]:$this->q49_sequencial);
        $this->q49_erro = ($this->q49_erro == ""?@$GLOBALS["HTTP_POST_VARS"]["q49_erro"]:$this->q49_erro);
-       $this->q49_tipo = ($this->q49_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q49_tipo"]:$this->q49_tipo);
+       $this->q49_tipo = ($this->q49_tipo === 0 || $this->q49_tipo === 0.0 || $this->q49_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q49_tipo"]:$this->q49_tipo);
      }else{
-       $this->q49_sequencial = ($this->q49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q49_sequencial"]:$this->q49_sequencial);
+       $this->q49_sequencial = ($this->q49_sequencial === 0 || $this->q49_sequencial === 0.0 || $this->q49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q49_sequencial"]:$this->q49_sequencial);
      }
    }
    // funcao para inclusao
@@ -89,7 +89,7 @@ class cl_issarqsimplesregerro {
        return false;
      }
        $this->q49_sequencial = $q49_sequencial; 
-     if(($this->q49_sequencial == null) || ($this->q49_sequencial == "") ){ 
+     if(($this->q49_sequencial == null) || ($this->q49_sequencial === 0 || $this->q49_sequencial === 0.0 || $this->q49_sequencial == "") ){ 
        $this->erro_sql = " Campo q49_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

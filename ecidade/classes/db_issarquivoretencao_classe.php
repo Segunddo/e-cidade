@@ -86,8 +86,8 @@ class cl_issarquivoretencao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q90_sequencial = ($this->q90_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_sequencial"]:$this->q90_sequencial);
-       $this->q90_instit = ($this->q90_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_instit"]:$this->q90_instit);
+       $this->q90_sequencial = ($this->q90_sequencial === 0 || $this->q90_sequencial === 0.0 || $this->q90_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_sequencial"]:$this->q90_sequencial);
+       $this->q90_instit = ($this->q90_instit === 0 || $this->q90_instit === 0.0 || $this->q90_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_instit"]:$this->q90_instit);
        if($this->q90_data == ""){
          $this->q90_data_dia = ($this->q90_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_data_dia"]:$this->q90_data_dia);
          $this->q90_data_mes = ($this->q90_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_data_mes"]:$this->q90_data_mes);
@@ -96,15 +96,15 @@ class cl_issarquivoretencao {
             $this->q90_data = $this->q90_data_ano."-".$this->q90_data_mes."-".$this->q90_data_dia;
          }
        }
-       $this->q90_numeroremessa = ($this->q90_numeroremessa == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_numeroremessa"]:$this->q90_numeroremessa);
-       $this->q90_versao = ($this->q90_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_versao"]:$this->q90_versao);
-       $this->q90_quantidaderegistro = ($this->q90_quantidaderegistro == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_quantidaderegistro"]:$this->q90_quantidaderegistro);
-       $this->q90_valortotal = ($this->q90_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_valortotal"]:$this->q90_valortotal);
-       $this->q90_codigobanco = ($this->q90_codigobanco == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_codigobanco"]:$this->q90_codigobanco);
-       $this->q90_oidarquivo = ($this->q90_oidarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_oidarquivo"]:$this->q90_oidarquivo);
+       $this->q90_numeroremessa = ($this->q90_numeroremessa === 0 || $this->q90_numeroremessa === 0.0 || $this->q90_numeroremessa == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_numeroremessa"]:$this->q90_numeroremessa);
+       $this->q90_versao = ($this->q90_versao === 0 || $this->q90_versao === 0.0 || $this->q90_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_versao"]:$this->q90_versao);
+       $this->q90_quantidaderegistro = ($this->q90_quantidaderegistro === 0 || $this->q90_quantidaderegistro === 0.0 || $this->q90_quantidaderegistro == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_quantidaderegistro"]:$this->q90_quantidaderegistro);
+       $this->q90_valortotal = ($this->q90_valortotal === 0 || $this->q90_valortotal === 0.0 || $this->q90_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_valortotal"]:$this->q90_valortotal);
+       $this->q90_codigobanco = ($this->q90_codigobanco === 0 || $this->q90_codigobanco === 0.0 || $this->q90_codigobanco == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_codigobanco"]:$this->q90_codigobanco);
+       $this->q90_oidarquivo = ($this->q90_oidarquivo === 0 || $this->q90_oidarquivo === 0.0 || $this->q90_oidarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_oidarquivo"]:$this->q90_oidarquivo);
        $this->q90_nomearquivo = ($this->q90_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_nomearquivo"]:$this->q90_nomearquivo);
      }else{
-       $this->q90_sequencial = ($this->q90_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_sequencial"]:$this->q90_sequencial);
+       $this->q90_sequencial = ($this->q90_sequencial === 0 || $this->q90_sequencial === 0.0 || $this->q90_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q90_sequencial"]:$this->q90_sequencial);
      }
    }
    // funcao para inclusao
@@ -215,7 +215,7 @@ class cl_issarquivoretencao {
          $this->q90_sequencial = $q90_sequencial;
        }
      }
-     if(($this->q90_sequencial == null) || ($this->q90_sequencial == "") ){
+     if(($this->q90_sequencial == null) || ($this->q90_sequencial === 0 || $this->q90_sequencial === 0.0 || $this->q90_sequencial == "") ){
        $this->erro_sql = " Campo q90_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -31,8 +31,8 @@ include(modification("classes/db_listainscrcab_classe.php"));
 include(modification("classes/db_listainscr_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 include(modification("classes/db_issbase_classe.php"));
-
-parse_str ( $HTTP_SERVER_VARS ['QUERY_STRING'] );
+parse_str ( $HTTP_SERVER_VARS ['QUERY_STRING'], $__qs );
+extract($__qs);
 $cllistainscr = new cl_listainscr ( );
 $cllistainscrcab = new cl_listainscrcab ( );
 $clcgm = new cl_cgm ( );

@@ -35,7 +35,8 @@ $clrotulo->label('z01_nome');
 $clrotulo->label('q05_mes');
 $clrotulo->label('q05_ano');
 $clrotulo->label('q05_valor');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $txt_where = "";
 $and = "";
 if ($listaativ != "") {

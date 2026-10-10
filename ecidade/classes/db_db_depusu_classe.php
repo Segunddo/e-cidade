@@ -69,12 +69,12 @@ class cl_db_depusu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
-       $this->coddepto = ($this->coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["coddepto"]:$this->coddepto);
-       $this->db17_ordem = ($this->db17_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db17_ordem"]:$this->db17_ordem);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->coddepto = ($this->coddepto === 0 || $this->coddepto === 0.0 || $this->coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["coddepto"]:$this->coddepto);
+       $this->db17_ordem = ($this->db17_ordem === 0 || $this->db17_ordem === 0.0 || $this->db17_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db17_ordem"]:$this->db17_ordem);
      }else{
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
-       $this->coddepto = ($this->coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["coddepto"]:$this->coddepto);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->coddepto = ($this->coddepto === 0 || $this->coddepto === 0.0 || $this->coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["coddepto"]:$this->coddepto);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_db_depusu {
      }
        $this->id_usuario = $id_usuario; 
        $this->coddepto = $coddepto; 
-     if(($this->id_usuario == null) || ($this->id_usuario == "") ){ 
+     if(($this->id_usuario == null) || ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "") ){ 
        $this->erro_sql = " Campo id_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_db_depusu {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->coddepto == null) || ($this->coddepto == "") ){ 
+     if(($this->coddepto == null) || ($this->coddepto === 0 || $this->coddepto === 0.0 || $this->coddepto == "") ){ 
        $this->erro_sql = " Campo coddepto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

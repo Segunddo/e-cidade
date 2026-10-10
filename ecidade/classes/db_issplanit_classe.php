@@ -111,16 +111,16 @@ class cl_issplanit {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q21_sequencial = ($this->q21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_sequencial"]:$this->q21_sequencial);
-       $this->q21_planilha = ($this->q21_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_planilha"]:$this->q21_planilha);
+       $this->q21_sequencial = ($this->q21_sequencial === 0 || $this->q21_sequencial === 0.0 || $this->q21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_sequencial"]:$this->q21_sequencial);
+       $this->q21_planilha = ($this->q21_planilha === 0 || $this->q21_planilha === 0.0 || $this->q21_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_planilha"]:$this->q21_planilha);
        $this->q21_cnpj = ($this->q21_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_cnpj"]:$this->q21_cnpj);
        $this->q21_nome = ($this->q21_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_nome"]:$this->q21_nome);
        $this->q21_servico = ($this->q21_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_servico"]:$this->q21_servico);
        $this->q21_nota = ($this->q21_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_nota"]:$this->q21_nota);
        $this->q21_serie = ($this->q21_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_serie"]:$this->q21_serie);
-       $this->q21_valorser = ($this->q21_valorser == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_valorser"]:$this->q21_valorser);
-       $this->q21_aliq = ($this->q21_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_aliq"]:$this->q21_aliq);
-       $this->q21_valor = ($this->q21_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_valor"]:$this->q21_valor);
+       $this->q21_valorser = ($this->q21_valorser === 0 || $this->q21_valorser === 0.0 || $this->q21_valorser == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_valorser"]:$this->q21_valorser);
+       $this->q21_aliq = ($this->q21_aliq === 0 || $this->q21_aliq === 0.0 || $this->q21_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_aliq"]:$this->q21_aliq);
+       $this->q21_valor = ($this->q21_valor === 0 || $this->q21_valor === 0.0 || $this->q21_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_valor"]:$this->q21_valor);
        if($this->q21_dataop == ""){
          $this->q21_dataop_dia = ($this->q21_dataop_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_dataop_dia"]:$this->q21_dataop_dia);
          $this->q21_dataop_mes = ($this->q21_dataop_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_dataop_mes"]:$this->q21_dataop_mes);
@@ -130,10 +130,10 @@ class cl_issplanit {
          }
        }
        $this->q21_horaop = ($this->q21_horaop == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_horaop"]:$this->q21_horaop);
-       $this->q21_tipolanc = ($this->q21_tipolanc == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_tipolanc"]:$this->q21_tipolanc);
-       $this->q21_situacao = ($this->q21_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_situacao"]:$this->q21_situacao);
-       $this->q21_valordeducao = ($this->q21_valordeducao == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_valordeducao"]:$this->q21_valordeducao);
-       $this->q21_valorbase = ($this->q21_valorbase == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_valorbase"]:$this->q21_valorbase);
+       $this->q21_tipolanc = ($this->q21_tipolanc === 0 || $this->q21_tipolanc === 0.0 || $this->q21_tipolanc == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_tipolanc"]:$this->q21_tipolanc);
+       $this->q21_situacao = ($this->q21_situacao === 0 || $this->q21_situacao === 0.0 || $this->q21_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_situacao"]:$this->q21_situacao);
+       $this->q21_valordeducao = ($this->q21_valordeducao === 0 || $this->q21_valordeducao === 0.0 || $this->q21_valordeducao == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_valordeducao"]:$this->q21_valordeducao);
+       $this->q21_valorbase = ($this->q21_valorbase === 0 || $this->q21_valorbase === 0.0 || $this->q21_valorbase == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_valorbase"]:$this->q21_valorbase);
        $this->q21_retido = ($this->q21_retido == "f"?@$GLOBALS["HTTP_POST_VARS"]["q21_retido"]:$this->q21_retido);
        $this->q21_obs = ($this->q21_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_obs"]:$this->q21_obs);
        if($this->q21_datanota == ""){
@@ -144,10 +144,10 @@ class cl_issplanit {
             $this->q21_datanota = $this->q21_datanota_ano."-".$this->q21_datanota_mes."-".$this->q21_datanota_dia;
          }
        }
-       $this->q21_valorimposto = ($this->q21_valorimposto == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_valorimposto"]:$this->q21_valorimposto);
-       $this->q21_status = ($this->q21_status == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_status"]:$this->q21_status);
+       $this->q21_valorimposto = ($this->q21_valorimposto === 0 || $this->q21_valorimposto === 0.0 || $this->q21_valorimposto == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_valorimposto"]:$this->q21_valorimposto);
+       $this->q21_status = ($this->q21_status === 0 || $this->q21_status === 0.0 || $this->q21_status == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_status"]:$this->q21_status);
      }else{
-       $this->q21_sequencial = ($this->q21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_sequencial"]:$this->q21_sequencial);
+       $this->q21_sequencial = ($this->q21_sequencial === 0 || $this->q21_sequencial === 0.0 || $this->q21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q21_sequencial"]:$this->q21_sequencial);
      }
    }
    // funcao para inclusao
@@ -300,7 +300,7 @@ class cl_issplanit {
          $this->q21_sequencial = $q21_sequencial; 
        }
      }
-     if(($this->q21_sequencial == null) || ($this->q21_sequencial == "") ){ 
+     if(($this->q21_sequencial == null) || ($this->q21_sequencial === 0 || $this->q21_sequencial === 0.0 || $this->q21_sequencial == "") ){ 
        $this->erro_sql = " Campo q21_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

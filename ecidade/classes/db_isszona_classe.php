@@ -67,10 +67,10 @@ class cl_isszona {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q35_inscr = ($this->q35_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q35_inscr"]:$this->q35_inscr);
-       $this->q35_zona = ($this->q35_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["q35_zona"]:$this->q35_zona);
+       $this->q35_inscr = ($this->q35_inscr === 0 || $this->q35_inscr === 0.0 || $this->q35_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q35_inscr"]:$this->q35_inscr);
+       $this->q35_zona = ($this->q35_zona === 0 || $this->q35_zona === 0.0 || $this->q35_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["q35_zona"]:$this->q35_zona);
      }else{
-       $this->q35_inscr = ($this->q35_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q35_inscr"]:$this->q35_inscr);
+       $this->q35_inscr = ($this->q35_inscr === 0 || $this->q35_inscr === 0.0 || $this->q35_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q35_inscr"]:$this->q35_inscr);
      }
    }
    // funcao para inclusao
@@ -80,7 +80,7 @@ class cl_isszona {
        $this->q35_zona = "0";
      }
        $this->q35_inscr = $q35_inscr; 
-     if(($this->q35_inscr == null) || ($this->q35_inscr == "") ){ 
+     if(($this->q35_inscr == null) || ($this->q35_inscr === 0 || $this->q35_inscr === 0.0 || $this->q35_inscr == "") ){ 
        $this->erro_sql = " Campo q35_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

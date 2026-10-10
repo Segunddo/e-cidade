@@ -67,10 +67,10 @@ class cl_geradesc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q89_codigo = ($this->q89_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q89_codigo"]:$this->q89_codigo);
+       $this->q89_codigo = ($this->q89_codigo === 0 || $this->q89_codigo === 0.0 || $this->q89_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q89_codigo"]:$this->q89_codigo);
        $this->q89_descr = ($this->q89_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q89_descr"]:$this->q89_descr);
      }else{
-       $this->q89_codigo = ($this->q89_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q89_codigo"]:$this->q89_codigo);
+       $this->q89_codigo = ($this->q89_codigo === 0 || $this->q89_codigo === 0.0 || $this->q89_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q89_codigo"]:$this->q89_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_geradesc {
          $this->q89_codigo = $q89_codigo; 
        }
      }
-     if(($this->q89_codigo == null) || ($this->q89_codigo == "") ){ 
+     if(($this->q89_codigo == null) || ($this->q89_codigo === 0 || $this->q89_codigo === 0.0 || $this->q89_codigo == "") ){ 
        $this->erro_sql = " Campo q89_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

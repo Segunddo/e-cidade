@@ -69,11 +69,11 @@ class cl_procfiscalvarfix {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y113_sequencial = ($this->y113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y113_sequencial"]:$this->y113_sequencial);
-       $this->y113_procfiscal = ($this->y113_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y113_procfiscal"]:$this->y113_procfiscal);
-       $this->y113_varfix = ($this->y113_varfix == ""?@$GLOBALS["HTTP_POST_VARS"]["y113_varfix"]:$this->y113_varfix);
+       $this->y113_sequencial = ($this->y113_sequencial === 0 || $this->y113_sequencial === 0.0 || $this->y113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y113_sequencial"]:$this->y113_sequencial);
+       $this->y113_procfiscal = ($this->y113_procfiscal === 0 || $this->y113_procfiscal === 0.0 || $this->y113_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y113_procfiscal"]:$this->y113_procfiscal);
+       $this->y113_varfix = ($this->y113_varfix === 0 || $this->y113_varfix === 0.0 || $this->y113_varfix == ""?@$GLOBALS["HTTP_POST_VARS"]["y113_varfix"]:$this->y113_varfix);
      }else{
-       $this->y113_sequencial = ($this->y113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y113_sequencial"]:$this->y113_sequencial);
+       $this->y113_sequencial = ($this->y113_sequencial === 0 || $this->y113_sequencial === 0.0 || $this->y113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y113_sequencial"]:$this->y113_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procfiscalvarfix {
          $this->y113_sequencial = $y113_sequencial; 
        }
      }
-     if(($this->y113_sequencial == null) || ($this->y113_sequencial == "") ){ 
+     if(($this->y113_sequencial == null) || ($this->y113_sequencial === 0 || $this->y113_sequencial === 0.0 || $this->y113_sequencial == "") ){ 
        $this->erro_sql = " Campo y113_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

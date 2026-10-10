@@ -67,11 +67,11 @@ class cl_atividcnae {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q74_cnaeanalitica = ($this->q74_cnaeanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["q74_cnaeanalitica"]:$this->q74_cnaeanalitica);
-       $this->q74_ativid = ($this->q74_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["q74_ativid"]:$this->q74_ativid);
+       $this->q74_cnaeanalitica = ($this->q74_cnaeanalitica === 0 || $this->q74_cnaeanalitica === 0.0 || $this->q74_cnaeanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["q74_cnaeanalitica"]:$this->q74_cnaeanalitica);
+       $this->q74_ativid = ($this->q74_ativid === 0 || $this->q74_ativid === 0.0 || $this->q74_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["q74_ativid"]:$this->q74_ativid);
      }else{
-       $this->q74_cnaeanalitica = ($this->q74_cnaeanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["q74_cnaeanalitica"]:$this->q74_cnaeanalitica);
-       $this->q74_ativid = ($this->q74_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["q74_ativid"]:$this->q74_ativid);
+       $this->q74_cnaeanalitica = ($this->q74_cnaeanalitica === 0 || $this->q74_cnaeanalitica === 0.0 || $this->q74_cnaeanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["q74_cnaeanalitica"]:$this->q74_cnaeanalitica);
+       $this->q74_ativid = ($this->q74_ativid === 0 || $this->q74_ativid === 0.0 || $this->q74_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["q74_ativid"]:$this->q74_ativid);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_atividcnae {
       $this->atualizacampos();
        $this->q74_cnaeanalitica = $q74_cnaeanalitica; 
        $this->q74_ativid = $q74_ativid; 
-     if(($this->q74_cnaeanalitica == null) || ($this->q74_cnaeanalitica == "") ){ 
+     if(($this->q74_cnaeanalitica == null) || ($this->q74_cnaeanalitica === 0 || $this->q74_cnaeanalitica === 0.0 || $this->q74_cnaeanalitica == "") ){ 
        $this->erro_sql = " Campo q74_cnaeanalitica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_atividcnae {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q74_ativid == null) || ($this->q74_ativid == "") ){ 
+     if(($this->q74_ativid == null) || ($this->q74_ativid === 0 || $this->q74_ativid === 0.0 || $this->q74_ativid == "") ){ 
        $this->erro_sql = " Campo q74_ativid nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
