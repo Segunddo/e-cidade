@@ -77,7 +77,7 @@ class cl_parecertecnico {
                  am08_arquivo = oid = Arquivo Parecer Técnico
                  ";
    //funcao construtor da classe
-   function cl_parecertecnico() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parecertecnico");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -94,10 +94,10 @@ class cl_parecertecnico {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am08_sequencial = ($this->am08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_sequencial"]:$this->am08_sequencial);
-       $this->am08_empreendimento = ($this->am08_empreendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_empreendimento"]:$this->am08_empreendimento);
-       $this->am08_protprocesso = ($this->am08_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_protprocesso"]:$this->am08_protprocesso);
-       $this->am08_pareceranterior = ($this->am08_pareceranterior == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_pareceranterior"]:$this->am08_pareceranterior);
+       $this->am08_sequencial = ($this->am08_sequencial === 0 || $this->am08_sequencial === 0.0 || $this->am08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_sequencial"]:$this->am08_sequencial);
+       $this->am08_empreendimento = ($this->am08_empreendimento === 0 || $this->am08_empreendimento === 0.0 || $this->am08_empreendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_empreendimento"]:$this->am08_empreendimento);
+       $this->am08_protprocesso = ($this->am08_protprocesso === 0 || $this->am08_protprocesso === 0.0 || $this->am08_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_protprocesso"]:$this->am08_protprocesso);
+       $this->am08_pareceranterior = ($this->am08_pareceranterior === 0 || $this->am08_pareceranterior === 0.0 || $this->am08_pareceranterior == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_pareceranterior"]:$this->am08_pareceranterior);
        if($this->am08_dataemissao == ""){
          $this->am08_dataemissao_dia = ($this->am08_dataemissao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_dataemissao_dia"]:$this->am08_dataemissao_dia);
          $this->am08_dataemissao_mes = ($this->am08_dataemissao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_dataemissao_mes"]:$this->am08_dataemissao_mes);
@@ -114,7 +114,7 @@ class cl_parecertecnico {
             $this->am08_datavencimento = $this->am08_datavencimento_ano."-".$this->am08_datavencimento_mes."-".$this->am08_datavencimento_dia;
          }
        }
-       $this->am08_tipolicenca = ($this->am08_tipolicenca == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_tipolicenca"]:$this->am08_tipolicenca);
+       $this->am08_tipolicenca = ($this->am08_tipolicenca === 0 || $this->am08_tipolicenca === 0.0 || $this->am08_tipolicenca == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_tipolicenca"]:$this->am08_tipolicenca);
        if($this->am08_datageracao == ""){
          $this->am08_datageracao_dia = ($this->am08_datageracao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_datageracao_dia"]:$this->am08_datageracao_dia);
          $this->am08_datageracao_mes = ($this->am08_datageracao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_datageracao_mes"]:$this->am08_datageracao_mes);
@@ -125,9 +125,9 @@ class cl_parecertecnico {
        }
        $this->am08_favoravel = ($this->am08_favoravel == "f"?@$GLOBALS["HTTP_POST_VARS"]["am08_favoravel"]:$this->am08_favoravel);
        $this->am08_observacao = ($this->am08_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_observacao"]:$this->am08_observacao);
-       $this->am08_arquivo = ($this->am08_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_arquivo"]:$this->am08_arquivo);
+       $this->am08_arquivo = ($this->am08_arquivo === 0 || $this->am08_arquivo === 0.0 || $this->am08_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_arquivo"]:$this->am08_arquivo);
      }else{
-       $this->am08_sequencial = ($this->am08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_sequencial"]:$this->am08_sequencial);
+       $this->am08_sequencial = ($this->am08_sequencial === 0 || $this->am08_sequencial === 0.0 || $this->am08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am08_sequencial"]:$this->am08_sequencial);
      }
    }
    // funcao para inclusao
@@ -212,7 +212,7 @@ class cl_parecertecnico {
          $this->am08_sequencial = $am08_sequencial;
        }
      }
-     if(($this->am08_sequencial == null) || ($this->am08_sequencial == "") ){
+     if(($this->am08_sequencial == null) || ($this->am08_sequencial === 0 || $this->am08_sequencial === 0.0 || $this->am08_sequencial == "") ){
        $this->erro_sql = " Campo am08_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

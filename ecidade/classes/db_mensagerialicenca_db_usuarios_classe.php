@@ -26,7 +26,7 @@ class cl_mensagerialicenca_db_usuarios {
                  am16_dias = int4 = Dias
                  ";
    //funcao construtor da classe
-   function cl_mensagerialicenca_db_usuarios() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mensagerialicenca_db_usuarios");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_mensagerialicenca_db_usuarios {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am16_sequencial = ($this->am16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am16_sequencial"]:$this->am16_sequencial);
-       $this->am16_usuario = ($this->am16_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["am16_usuario"]:$this->am16_usuario);
-       $this->am16_dias = ($this->am16_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["am16_dias"]:$this->am16_dias);
+       $this->am16_sequencial = ($this->am16_sequencial === 0 || $this->am16_sequencial === 0.0 || $this->am16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am16_sequencial"]:$this->am16_sequencial);
+       $this->am16_usuario = ($this->am16_usuario === 0 || $this->am16_usuario === 0.0 || $this->am16_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["am16_usuario"]:$this->am16_usuario);
+       $this->am16_dias = ($this->am16_dias === 0 || $this->am16_dias === 0.0 || $this->am16_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["am16_dias"]:$this->am16_dias);
      }else{
-       $this->am16_sequencial = ($this->am16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am16_sequencial"]:$this->am16_sequencial);
+       $this->am16_sequencial = ($this->am16_sequencial === 0 || $this->am16_sequencial === 0.0 || $this->am16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am16_sequencial"]:$this->am16_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_mensagerialicenca_db_usuarios {
          $this->am16_sequencial = $am16_sequencial;
        }
      }
-     if(($this->am16_sequencial == null) || ($this->am16_sequencial == "") ){
+     if(($this->am16_sequencial == null) || ($this->am16_sequencial === 0 || $this->am16_sequencial === 0.0 || $this->am16_sequencial == "") ){
        $this->erro_sql = " Campo am16_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

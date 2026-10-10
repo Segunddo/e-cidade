@@ -35,7 +35,7 @@ $DocRoot = substr($_SERVER['SCRIPT_FILENAME'],0,strrpos($_SERVER['SCRIPT_FILENAM
 
 if(isset($HTTP_POST_VARS["confirmar"])) {
   $imagem = $HTTP_POST_VARS["imagem"];
-  $aux = split("-",$imagem);
+  $aux = preg_split("#\\-#m",$imagem);
   $TestaMatricula = 0;
   if($HTTP_POST_VARS["matricula"] != $aux[0] && $HTTP_POST_VARS["matricula"] != "") {
     $matricula = trim($HTTP_POST_VARS["matricula"]);
@@ -108,7 +108,7 @@ table {
 	if(isset($HTTP_POST_VARS["procura"])) {
 	  if(isset($_FILES["arq"]))
         db_postmemory($_FILES["arq"]);	  
-	  $aux = split("-",$name);
+	  $aux = preg_split("#\\-#m",$name);
       $matricula = @$aux[0];
       $data_ano = @$aux[1];
 	  $data_mes = @$aux[2];

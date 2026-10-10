@@ -1052,7 +1052,7 @@ if (!function_exists("db_select")) {
                 for ($i = 0; $i < sizeof((array)$db_matriz); $i++) {
                     ?>
                     <option
-                        value="<?= key($db_matriz) ?>" <?= (@$GLOBALS[$nomevar] == key($db_matriz) || (@$GLOBALS[$nomevar] === "" && key($db_matriz) == 0) ? "selected" : "") ?>><?= $db_matriz[key($db_matriz)] ?></option>
+                        value="<?= key($db_matriz) ?>" <?= (@$GLOBALS[$nomevar] == key($db_matriz) || (@$GLOBALS[$nomevar] === "" && (is_string(key($db_matriz)) && !is_numeric(key($db_matriz)) ? true : key($db_matriz) == 0)) ? "selected" : "") ?>><?= $db_matriz[key($db_matriz)] ?></option>
                     <?php
 
 

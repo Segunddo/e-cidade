@@ -35,7 +35,8 @@ require_once(modification("classes/db_db_ouvidoria_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 $cl_db_ouvidoria = new cl_db_ouvidoria();
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 
 $oPost = db_utils::postMemory($HTTP_POST_VARS);
 

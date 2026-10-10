@@ -50,7 +50,7 @@ class cl_db_tipo {
                  w03_tipo = varchar(50) = Assunto 
                  ";
    //funcao construtor da classe 
-   function cl_db_tipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_tipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_db_tipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->w03_codtipo = ($this->w03_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["w03_codtipo"]:$this->w03_codtipo);
+       $this->w03_codtipo = ($this->w03_codtipo === 0 || $this->w03_codtipo === 0.0 || $this->w03_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["w03_codtipo"]:$this->w03_codtipo);
        $this->w03_tipo = ($this->w03_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["w03_tipo"]:$this->w03_tipo);
      }else{
-       $this->w03_codtipo = ($this->w03_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["w03_codtipo"]:$this->w03_codtipo);
+       $this->w03_codtipo = ($this->w03_codtipo === 0 || $this->w03_codtipo === 0.0 || $this->w03_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["w03_codtipo"]:$this->w03_codtipo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_db_tipo {
          $this->w03_codtipo = $w03_codtipo; 
        }
      }
-     if(($this->w03_codtipo == null) || ($this->w03_codtipo == "") ){ 
+     if(($this->w03_codtipo == null) || ($this->w03_codtipo === 0 || $this->w03_codtipo === 0.0 || $this->w03_codtipo == "") ){ 
        $this->erro_sql = " Campo w03_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_db_tipo {
    function sql_query ( $w03_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_db_tipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_db_tipo {
    function sql_query_file ( $w03_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_db_tipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

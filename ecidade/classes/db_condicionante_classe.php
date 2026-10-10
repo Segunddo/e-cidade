@@ -54,7 +54,7 @@ class cl_condicionante {
                  am10_vinculatodasatividades = bool = Vincula Todas Atividade 
                  ";
    //funcao construtor da classe 
-   function cl_condicionante() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("condicionante"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_condicionante {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am10_sequencial = ($this->am10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am10_sequencial"]:$this->am10_sequencial);
+       $this->am10_sequencial = ($this->am10_sequencial === 0 || $this->am10_sequencial === 0.0 || $this->am10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am10_sequencial"]:$this->am10_sequencial);
        $this->am10_descricao = ($this->am10_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["am10_descricao"]:$this->am10_descricao);
        $this->am10_padrao = ($this->am10_padrao == "f"?@$GLOBALS["HTTP_POST_VARS"]["am10_padrao"]:$this->am10_padrao);
        $this->am10_vinculatodasatividades = ($this->am10_vinculatodasatividades == "f"?@$GLOBALS["HTTP_POST_VARS"]["am10_vinculatodasatividades"]:$this->am10_vinculatodasatividades);
      }else{
-       $this->am10_sequencial = ($this->am10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am10_sequencial"]:$this->am10_sequencial);
+       $this->am10_sequencial = ($this->am10_sequencial === 0 || $this->am10_sequencial === 0.0 || $this->am10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am10_sequencial"]:$this->am10_sequencial);
      }
    }
    // funcao para Inclusão
@@ -133,7 +133,7 @@ class cl_condicionante {
          $this->am10_sequencial = $am10_sequencial; 
        }
      }
-     if(($this->am10_sequencial == null) || ($this->am10_sequencial == "") ){ 
+     if(($this->am10_sequencial == null) || ($this->am10_sequencial === 0 || $this->am10_sequencial === 0.0 || $this->am10_sequencial == "") ){ 
        $this->erro_sql = " Campo am10_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

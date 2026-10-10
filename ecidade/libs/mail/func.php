@@ -81,7 +81,7 @@ class FUNC {
 			for($i = 0; $i < $len1; $i++){
 				$found = false;
 				for($j = 0; $j < $len2; $j++){
-					if($lists{$j} == $strval{$i}){
+					if($lists[$j] == $strval[$i]){
 						$found = true;
 						break;
 					}
@@ -181,7 +181,7 @@ class FUNC {
 		$ret = false;
 		if(is_string($addr) && $addr != ""){
 			$regs = '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$';
-			if(eregi($regs, $addr)){
+			if(preg_match('#' . preg_quote($regs, '#') . '#mi', $addr)){
 				if(is_bool($vermx)){
 					if($vermx){
 						$exp = explode('@', $addr);

@@ -57,6 +57,18 @@ return RectorConfig::configure()
 
         // --- emitem FUNCAO que nao existe no 5.6: compila e explode em execucao ---
         Rector\Php80\Rector\Identical\StrStartsWithRector::class,   // str_starts_with
+        // 4o CRESCIMENTO da denylist (amb/pre), e a QUARTA vez que ela cresce.
+        // Irma da de cima; escapou ate aqui so por nunca ter disparado. Emite
+        // str_ends_with() -- PHP 8.0, MEDIDO como inexistente no 5.6. Passa no
+        // php -l e e fatal so em execucao: modo de falha nº 2 do catalogo.
+        Rector\Php80\Rector\Identical\StrEndsWithRector::class,        // str_ends_with
+        // Reescreve `$x == ""` para `$x == 0`. NAO reproduz o 5.6 -- medido nos
+        // dois runtimes, diverge em 2 dos 6 valores:
+        //                5.6 `== ""`    8.5 `== 0`
+        //     ""           true          FALSE    <- diverge
+        //     "0"          false         TRUE     <- diverge
+        // Esta categoria pertence ao GuardaComparacaoLiteralRector, que e fiel.
+        Rector\Php71\Rector\BinaryOp\BinaryOpBetweenNumberAndStringRector::class,
         Rector\Php70\Rector\FuncCall\RandomFunctionRector::class,   // random_int
         // As duas abaixo NAO estavam na denylist herdada do experimento do `div`:
         // elas nunca dispararam la. No `iss` dispararam, emitiram funcao inexistente

@@ -75,7 +75,7 @@ portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compa
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra)[0-9]*_` — **1.813 telas** |
-| **Próximo passo** | **Fase B — DIMENSIONADA**, ver seção própria. Escopo recomendado: **428 arquivos** (só as telas de Tributário), não os 2.072 dos prefixos inteiros. Fecha a área: 14 dos 16 módulos ainda têm telas no 5.6. |
+| **Próximo passo** | **Fase B EM ANDAMENTO** — escopo B adotado. `amb` e `pre` ✅ (13 telas roteadas por `map`). Faltam `cad` 166, `cai` 101, `pro` 35, `con` 30, `prot` 4, `rec` 1, `dv` 1. Área em **703 de 1.056 telas (66,6%)**. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
@@ -2204,6 +2204,169 @@ Contabilidade, RH e Patrimonial, que **não estão no escopo acordado da discipl
    em 92+56 de 172). Recomendo **roteá-las**: o código é o mesmo nos dois runtimes.
 2. **Os 6 itens de `prot`/`rec`/`dv`** — prefixos minúsculos nesta área (48, 279 e 2 arquivos em
    disco) que ninguém tinha notado. São 6 telas; incluí-las é barato e evita um 17º resíduo.
+
+### Estado: FASE B INICIADA — `amb` e `pre` PORTADOS ✅, e o `map` funciona
+
+Primeiro lote do escopo B. Escolhidos por serem os menores: validam o mecanismo de
+roteamento por lista antes de `cad` (166 telas) e `cai` (101).
+
+**Decisão de escopo tomada aqui:** porta-se o **prefixo inteiro** (57 arquivos), roteia-se
+**só as telas de Tributário** (13). Portar mais do que se roteia é inofensivo — todo código
+portado roda nos dois runtimes — e evita a lacuna dos 2/3 fora do menu. As telas `amb` de
+Saúde e `pre` de Cidadão ficam no 5.6, já portadas para quando essas áreas chegarem.
+
+| | `amb` | `pre` |
+|---|---|---|
+| Arquivos do prefixo | 31 | 54 |
+| Universo pelas sete frentes | 103 | 133 |
+| **Alterados** | **28** | **29** |
+| Telas roteadas (Tributário) | **7** | **6** |
+| `php -l` nos dois runtimes | 207/207 no universo combinado, 0 erros | |
+| Instanciação das classes | 60/60 idênticas | |
+| Caminho de escrita | 1.601 linhas, 59 classes, 0 divergentes | |
+| **Bateria de telas** | **31/31** | **54/54** |
+| Regressão nos 13 módulos da Fase A | **zero** — todos na linha de base | |
+
+Correções: 181 guardas `== <literal>`, 89 `split`/`ereg` → `preg_*`, 31 construtores PHP 4,
+25 `parse_str`+`extract`, 9 guardas `pg_*`, 1 offset `{}`.
+
+#### O roteamento por `map`, montado e verificado
+
+`docker/proxy/faseb_map.conf` é **gerado do banco** por `scratchpad/gera_map_faseb.py`; o
+`nginx.conf` ganhou três `map`:
+
+```nginx
+map $uri $ecidade_arquivo {          # tira o prefixo de janela /w/<n>/
+    default                         $uri;
+    ~^(?:/w/[0-9]+)?/(?<arq>[^/]+)$ $arq;
+}
+map $ecidade_arquivo $ecidade_upstream {   # hash exato, O(1)
+    default php56;
+    include /etc/nginx/faseb_map.conf;
+}
+location / { proxy_pass http://$ecidade_upstream; }
+```
+
+Sete casos verificados: tela `amb`/`pre` de Tributário → 8.5; `/w/2/` → 8.5; tela `amb` que
+**não** é de Tributário (`amb1_condicionante.RPC.php`) → 5.6; `cad` ainda não portado → 5.6;
+prefixo da Fase A → 8.5; `login.php` → 5.6.
+
+**Armadilha do gerador:** `\copy` é meta-comando do psql e **tem de caber em uma linha**.
+Quebrado em várias, o psql falha — e a mensagem vem em **LATIN-1**, que o Python não
+decodifica: o sintoma é `UnicodeDecodeError`, não erro de SQL. Mesma família da armadilha de
+encoding do resto do projeto, num lugar novo.
+
+### Denylist do Rector: 23 → 25 (QUARTA vez que ela cresce)
+
+Duas regras novas dispararam em `amb`/`pre` e **as duas são perigosas**, por motivos distintos.
+
+**1. `StrEndsWithRector`** — irmã da `StrStartsWithRector`, que já estava banida. Escapou só
+por nunca ter disparado. Emite `str_ends_with()`, PHP 8.0; medido, **não existe no 5.6**.
+Passa no `php -l` e é fatal só em execução — o modo de falha nº 2 do catálogo, de novo.
+
+**2. `BinaryOpBetweenNumberAndStringRector`** — reescreve `$x == ""` para `$x == 0`. Medido
+nos dois runtimes, **não reproduz o 5.6**:
+
+| `$x` | 5.6 `== ""` | 8.5 `== 0` | |
+|---|---|---|---|
+| `""` | true | **false** | diverge |
+| `"0"` | false | **true** | diverge |
+| `"abc"` | false | false | ok |
+| `0` | true | true | ok |
+
+Essa categoria pertence ao `GuardaComparacaoLiteralRector`, que é fiel. A regra do Rector
+chega perto e erra em dois dos seis valores — exatamente o tipo de regressão silenciosa que
+o projeto existe para evitar.
+
+**A conferência por módulo se pagou pela quarta vez.** Sem ela, um arquivo iria para a árvore
+com `str_ends_with()` e outro com uma comparação que muda de resultado.
+
+### CATEGORIA NOVA: a 5ª manifestação do `0 == ""` vive no `db_select()` do NÚCLEO
+
+E foi achada do jeito mais difícil — **duas hipóteses minhas estavam erradas antes da certa**.
+
+Sintoma: `pre4_configdbpref001.php`, HTTP 200 nos dois, 16 bytes de diferença. Um `<select>`
+marcava `selected` em **duas** opções no 5.6 e em **nenhuma** no 8.5.
+
+A linha, em `dbforms/db_funcoes.php:1055` (`db_select()`):
+
+```php
+@$GLOBALS[$nomevar] == key($db_matriz) || (@$GLOBALS[$nomevar] === "" && key($db_matriz) == 0)
+                                                                         ^^^^^^^^^^^^^^^^^^^^
+```
+
+Com o global `""` e as chaves `'f'`/`'t'`:
+
+```
+              "f" == 0
+PHP 5.6:      true    -> marca AS DUAS opcoes
+PHP 8.5:      false   -> nao marca NENHUMA
+```
+
+Ironia útil: `key($db_matriz) == 0` **é** a guarda que o catálogo registra como acrescentada
+para o caso `"" == 0` no `db_select()`. A guarda de ontem virou o defeito de hoje — ela
+própria compara string não-numérica com `0`.
+
+**Correção, medida em 9 valores com zero divergência:**
+
+```php
+key($db_matriz) == 0
+  ->  (is_string(key($db_matriz)) && !is_numeric(key($db_matriz)) ? true : key($db_matriz) == 0)
+```
+
+#### As duas hipóteses erradas, e o que as desfez
+
+Vale registrar porque o método é o achado:
+
+1. **"É a linha 761"** — outro emissor de `<option>` no mesmo arquivo. Corrigi, e a bateria
+   não mudou. A linha 761 usa o valor como rótulo; a tela mostrava "Não"/"Sim". **Revertida**,
+   pela política de corrigir na aparição.
+2. **"É a primeira comparação da 1055"** (`$GLOBALS[$nomevar] == key(...)`). Corrigi, e a
+   bateria não mudou. **Revertida.**
+3. **A sonda decidiu.** Imprimir `var_export()` do valor e da chave dentro do laço mostrou
+   `val='' tipo=string key='f'` — o que elimina as duas primeiras hipóteses e aponta a
+   segunda metade da expressão.
+
+**Lição:** com três candidatos plausíveis no mesmo arquivo, instrumentar custa um minuto e
+decide; deduzir custou duas rodadas de bateria e duas correções revertidas no núcleo.
+
+#### ⚠ CORREÇÃO ao catálogo: é o ORIGINAL que executa, não a cópia do `modification/`
+
+A sonda mostrou outra coisa que este arquivo afirma e não se confirma neste caminho. A seção
+*CRÍTICO: `modification()`* diz que as cópias de `extension/modification/.../cache/user/dbseller/`
+são as que executam. Para `dbforms/db_funcoes.php` chamado por `pre4_configdbpref001.php`,
+**quem executou foi o original** — a sonda instalada na cópia não produziu saída nenhuma, e a
+instalada no original produziu.
+
+As duas cópias **diferem**. Mantive as duas corrigidas, que é o lado seguro, mas a afirmação
+"a cópia é que executa" não vale para todo caminho e **precisa ser verificada caso a caso**,
+não assumida.
+
+### ⚠ CORREÇÃO ao catálogo: `pg_result()` sobre falso devolve NULL no 5.6, não `false`
+
+A seção das guardas `pg_*` diz que "para `pg_result`, o 5.6 devolvia `false`". Medido:
+
+```
+PHP 5.6:  @pg_result(false, 0)  ->  NULL
+```
+
+A diferença importa sob `===`. A guarda aplicada em `pre4_liberaitbi002.php` usa `null`:
+
+```php
+pg_result($result,0,0)  ->  ($result ? pg_result($result,0,0) : null)
+```
+
+### CATEGORIA (pre): ternário aninhado sem parênteses — agora com correção medida
+
+`pre3_logs001.php` era um dos **87 arquivos da base que só quebram no 8.5**. Duas ocorrências
+de `a ? b : c ? d : e`, fatal de compilação desde o PHP 8.0.
+
+A associatividade do 5.6 é **à esquerda** — confirmada no runtime: `1?"b":"c"?"d":"e"` devolve
+`"d"`. Logo a correção fiel é `(a ? b : c) ? d : e`, e os três valores possíveis do campo
+produzem saída idêntica nos dois runtimes depois dela.
+
+**O `php -l` dirigiu a correção, e foi preciso:** corrigi a linha 91, reconferi, e o lint
+apontou a **104**. Supor que a primeira era a única teria deixado o arquivo quebrado.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

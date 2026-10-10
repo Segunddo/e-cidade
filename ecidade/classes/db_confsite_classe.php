@@ -138,7 +138,7 @@ class cl_confsite {
                  w01_instit = int8 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_confsite() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("confsite"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -155,7 +155,7 @@ class cl_confsite {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->w01_cod = ($this->w01_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_cod"]:$this->w01_cod);
+       $this->w01_cod = ($this->w01_cod === 0 || $this->w01_cod === 0.0 || $this->w01_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_cod"]:$this->w01_cod);
        $this->w01_descricao = ($this->w01_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_descricao"]:$this->w01_descricao);
        $this->w01_corbody = ($this->w01_corbody == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_corbody"]:$this->w01_corbody);
        $this->w01_cortexto = ($this->w01_cortexto == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_cortexto"]:$this->w01_cortexto);
@@ -200,9 +200,9 @@ class cl_confsite {
        $this->w01_estilobotao = ($this->w01_estilobotao == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_estilobotao"]:$this->w01_estilobotao);
        $this->w01_corbordabotao = ($this->w01_corbordabotao == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_corbordabotao"]:$this->w01_corbordabotao);
        $this->w01_titulo = ($this->w01_titulo == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_titulo"]:$this->w01_titulo);
-       $this->w01_instit = ($this->w01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_instit"]:$this->w01_instit);
+       $this->w01_instit = ($this->w01_instit === 0 || $this->w01_instit === 0.0 || $this->w01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_instit"]:$this->w01_instit);
      }else{
-       $this->w01_cod = ($this->w01_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_cod"]:$this->w01_cod);
+       $this->w01_cod = ($this->w01_cod === 0 || $this->w01_cod === 0.0 || $this->w01_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["w01_cod"]:$this->w01_cod);
      }
    }
    // funcao para inclusao
@@ -608,7 +608,7 @@ class cl_confsite {
        return false;
      }
        $this->w01_cod = $w01_cod; 
-     if(($this->w01_cod == null) || ($this->w01_cod == "") ){ 
+     if(($this->w01_cod == null) || ($this->w01_cod === 0 || $this->w01_cod === 0.0 || $this->w01_cod == "") ){ 
        $this->erro_sql = " Campo w01_cod nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -1654,7 +1654,7 @@ class cl_confsite {
    function sql_query ( $w01_cod=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1677,7 +1677,7 @@ class cl_confsite {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1689,7 +1689,7 @@ class cl_confsite {
    function sql_query_file ( $w01_cod=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1710,7 +1710,7 @@ class cl_confsite {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

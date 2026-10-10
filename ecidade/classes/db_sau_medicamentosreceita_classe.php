@@ -75,14 +75,14 @@ class cl_sau_medicamentosreceita {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s159_i_codigo = ($this->s159_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_i_codigo"]:$this->s159_i_codigo);
-       $this->s159_i_medicamento = ($this->s159_i_medicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_i_medicamento"]:$this->s159_i_medicamento);
-       $this->s159_i_receita = ($this->s159_i_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_i_receita"]:$this->s159_i_receita);
-       $this->s159_i_formaadm = ($this->s159_i_formaadm == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_i_formaadm"]:$this->s159_i_formaadm);
-       $this->s159_n_quant = ($this->s159_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_n_quant"]:$this->s159_n_quant);
+       $this->s159_i_codigo = ($this->s159_i_codigo === 0 || $this->s159_i_codigo === 0.0 || $this->s159_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_i_codigo"]:$this->s159_i_codigo);
+       $this->s159_i_medicamento = ($this->s159_i_medicamento === 0 || $this->s159_i_medicamento === 0.0 || $this->s159_i_medicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_i_medicamento"]:$this->s159_i_medicamento);
+       $this->s159_i_receita = ($this->s159_i_receita === 0 || $this->s159_i_receita === 0.0 || $this->s159_i_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_i_receita"]:$this->s159_i_receita);
+       $this->s159_i_formaadm = ($this->s159_i_formaadm === 0 || $this->s159_i_formaadm === 0.0 || $this->s159_i_formaadm == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_i_formaadm"]:$this->s159_i_formaadm);
+       $this->s159_n_quant = ($this->s159_n_quant === 0 || $this->s159_n_quant === 0.0 || $this->s159_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_n_quant"]:$this->s159_n_quant);
        $this->s159_t_posologia = ($this->s159_t_posologia == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_t_posologia"]:$this->s159_t_posologia);
      }else{
-       $this->s159_i_codigo = ($this->s159_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_i_codigo"]:$this->s159_i_codigo);
+       $this->s159_i_codigo = ($this->s159_i_codigo === 0 || $this->s159_i_codigo === 0.0 || $this->s159_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s159_i_codigo"]:$this->s159_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_sau_medicamentosreceita {
          $this->s159_i_codigo = $s159_i_codigo;
        }
      }
-     if(($this->s159_i_codigo == null) || ($this->s159_i_codigo == "") ){
+     if(($this->s159_i_codigo == null) || ($this->s159_i_codigo === 0 || $this->s159_i_codigo === 0.0 || $this->s159_i_codigo == "") ){
        $this->erro_sql = " Campo s159_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

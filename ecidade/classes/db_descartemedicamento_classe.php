@@ -43,7 +43,7 @@ class cl_descartemedicamento {
                  sd107_unidadesaida = int4 = Unidade de Saída 
                  ";
    //funcao construtor da classe 
-   function cl_descartemedicamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("descartemedicamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -60,9 +60,9 @@ class cl_descartemedicamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd107_sequencial = ($this->sd107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_sequencial"]:$this->sd107_sequencial);
-       $this->sd107_medicamento = ($this->sd107_medicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_medicamento"]:$this->sd107_medicamento);
-       $this->sd107_quantidade = ($this->sd107_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_quantidade"]:$this->sd107_quantidade);
+       $this->sd107_sequencial = ($this->sd107_sequencial === 0 || $this->sd107_sequencial === 0.0 || $this->sd107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_sequencial"]:$this->sd107_sequencial);
+       $this->sd107_medicamento = ($this->sd107_medicamento === 0 || $this->sd107_medicamento === 0.0 || $this->sd107_medicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_medicamento"]:$this->sd107_medicamento);
+       $this->sd107_quantidade = ($this->sd107_quantidade === 0 || $this->sd107_quantidade === 0.0 || $this->sd107_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_quantidade"]:$this->sd107_quantidade);
        $this->sd107_motivo = ($this->sd107_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_motivo"]:$this->sd107_motivo);
        if($this->sd107_data == ""){
          $this->sd107_data_dia = ($this->sd107_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_data_dia"]:$this->sd107_data_dia);
@@ -73,12 +73,12 @@ class cl_descartemedicamento {
          }
        }
        $this->sd107_hora = ($this->sd107_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_hora"]:$this->sd107_hora);
-       $this->sd107_usuario = ($this->sd107_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_usuario"]:$this->sd107_usuario);
-       $this->sd107_db_depart = ($this->sd107_db_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_db_depart"]:$this->sd107_db_depart);
-       $this->sd107_quantidadetotal = ($this->sd107_quantidadetotal == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_quantidadetotal"]:$this->sd107_quantidadetotal);
-       $this->sd107_unidadesaida = ($this->sd107_unidadesaida == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_unidadesaida"]:$this->sd107_unidadesaida);
+       $this->sd107_usuario = ($this->sd107_usuario === 0 || $this->sd107_usuario === 0.0 || $this->sd107_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_usuario"]:$this->sd107_usuario);
+       $this->sd107_db_depart = ($this->sd107_db_depart === 0 || $this->sd107_db_depart === 0.0 || $this->sd107_db_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_db_depart"]:$this->sd107_db_depart);
+       $this->sd107_quantidadetotal = ($this->sd107_quantidadetotal === 0 || $this->sd107_quantidadetotal === 0.0 || $this->sd107_quantidadetotal == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_quantidadetotal"]:$this->sd107_quantidadetotal);
+       $this->sd107_unidadesaida = ($this->sd107_unidadesaida === 0 || $this->sd107_unidadesaida === 0.0 || $this->sd107_unidadesaida == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_unidadesaida"]:$this->sd107_unidadesaida);
      }else{
-       $this->sd107_sequencial = ($this->sd107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_sequencial"]:$this->sd107_sequencial);
+       $this->sd107_sequencial = ($this->sd107_sequencial === 0 || $this->sd107_sequencial === 0.0 || $this->sd107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd107_sequencial"]:$this->sd107_sequencial);
      }
    }
    // funcao para Inclusão
@@ -189,7 +189,7 @@ class cl_descartemedicamento {
          $this->sd107_sequencial = $sd107_sequencial; 
        }
      }
-     if(($this->sd107_sequencial == null) || ($this->sd107_sequencial == "") ){ 
+     if(($this->sd107_sequencial == null) || ($this->sd107_sequencial === 0 || $this->sd107_sequencial === 0.0 || $this->sd107_sequencial == "") ){ 
        $this->erro_sql = " Campo sd107_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -743,8 +743,8 @@ function getBrowser()  {
 function db_compara_conf_php($sValorIni, $sValorConfig, $lBoolean, $sOperacao='==') {
 
   if ($lBoolean == 'false') {
-    $sValorIni    = ereg_replace('[^0-9]', '', $sValorIni);
-    $sValorConfig = ereg_replace('[^0-9]', '', $sValorConfig);
+    $sValorIni    = preg_replace('#[^0-9]#m', '', $sValorIni);
+    $sValorConfig = preg_replace('#[^0-9]#m', '', $sValorConfig);
   }
 
   $nValorIni    = (trim($sValorIni)=='')?0:$sValorIni;

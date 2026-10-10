@@ -21,6 +21,8 @@ services:
       - "8090:80"
     volumes:
       - ./docker/proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      # Lista da Fase B, gerada do banco por scratchpad/gera_map_faseb.py
+      - ./docker/proxy/faseb_map.conf:/etc/nginx/faseb_map.conf:ro
     networks:
       - ecidade
 
