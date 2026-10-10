@@ -63,6 +63,25 @@ return RectorConfig::configure()
         // no 5.6 e passaram batido pelo php -l. E a fragilidade da denylist, medida.
         Rector\Php80\Rector\NotIdentical\StrContainsRector::class,  // str_contains (PHP 8.0)
         Rector\Php73\Rector\FuncCall\ArrayKeyFirstLastRector::class, // array_key_first (PHP 7.3)
+
+        // --- MODERNIZACAO: nao e exigida pela versao de destino -------------------
+        // No `iss` estas quatro responderam por 77% do diff (6.480 de 8.409 linhas) e
+        // zero da migracao. Medido que desliga-las NAO custa nada obrigatorio: split,
+        // spliti, ereg*, offsets {} e create_function sao convertidos por regras
+        // dedicadas, nao por estas.
+        Rector\Renaming\Rector\FuncCall\RenameFunctionRector::class,        // pg_numrows -> pg_num_rows
+        Rector\Php52\Rector\Property\VarToPublicPropertyRector::class,      // var $x -> public $x
+        Rector\Visibility\Rector\ClassMethod\ExplicitPublicClassMethodRector::class,
+        Rector\Php54\Rector\Array_\LongArrayToShortArrayRector::class,      // array() -> []
+
+        // --- each(): o foreach NAO e equivalente ----------------------------------
+        // O e-cidade tem laços que dependem do ponteiro interno ja exaurido por um
+        // laco anterior, e que por isso NUNCA executam (ver db_libpessoal.php no
+        // CLAUDE.md). Trocar por foreach faz o segundo laco rodar -- mudanca
+        // silenciosa de comportamento. O Rector nao tem como ver o reset() anterior.
+        // Tratar a mao, com key()/current()/next(), conferindo o contexto.
+        Rector\Php72\Rector\While_\WhileEachToForeachRector::class,
+        Rector\Php72\Rector\Assign\ListEachRector::class,
                                                                       // e ainda remove o reset(),
                                                                       // mudando o ponteiro do array
 

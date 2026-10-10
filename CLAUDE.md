@@ -1746,9 +1746,36 @@ observações honestas: `pg_numrows()` **é** deprecated desde o 8.0 (confirmado
 o rename é grupo (b) e não lixo; e `var $x` → `public $x` é inofensivo nos dois runtimes. Mas o
 diff passa de 1.929 linhas de migração para 8.409 no total, e quem revisar precisa saber disso.
 
-Se o ruído incomodar, as regras `VarToPublicPropertyRector`, `ExplicitPublicClassMethodRector`,
-`LongArrayToShortArrayRector` e `RenameFunctionRector` (para os alias `pg_*`) podem entrar na
-denylist — ao custo de deixar o código mais longe do idioma moderno.
+**RESOLVIDO a partir do `dvr`:** as quatro regras entraram na denylist. Medido num caso que
+exercita todas as categorias do catálogo, desligá-las **não custa nada obrigatório** — `split`,
+`spliti`, `ereg*`, offsets `{}`, `create_function` e construtor PHP 4 são convertidos por regras
+**dedicadas**, não pelo `RenameFunctionRector`:
+
+| | config anterior | com a denylist |
+|---|---|---|
+| `split`/`spliti` → `preg_split` | ✓ | ✓ |
+| `ereg*` → `preg_*` | ✓ | ✓ |
+| offset `{}` → `[]` | ✓ | ✓ |
+| construtor PHP4 → `__construct` (+ chamada ao nome antigo) | ✓ | ✓ |
+| guarda `== <literal>` e `parse_str`+`extract` (regras próprias) | ✓ | ✓ |
+| `pg_numrows` → `pg_num_rows` | ✓ | **não** |
+| `var $x` → `public $x` | ✓ | **não** |
+| `array()` → `[]` | ✓ | **não** |
+| `public` em método | ✓ | **não** |
+
+#### E mais duas, por segurança: as regras de `each()`
+
+A comparação expôs algo que eu não procurava: a config convertia
+`while (list($k,$v) = each($arr))` em `foreach`. **O catálogo proíbe exatamente isso** — em
+`db_libpessoal.php` há laços que dependem do ponteiro interno já exaurido por um laço anterior e
+que por isso *nunca executam*; trocar por `foreach` faz o segundo rodar. O Rector não tem como
+enxergar o `reset()` anterior.
+
+`WhileEachToForeachRector` e `ListEachRector` entraram na denylist. `each()` volta a ser tratado
+à mão com `key()`/`current()`/`next()`, conferindo o contexto — como sempre foi.
+
+**Denylist: 22 regras.** Ela cresceu 16 → 22 entre o `iss` e o `dvr`, o que confirma a lição do
+item 2 acima: *denylist não é transferível, tem de ser reconferida a cada módulo.*
 
 ### CATEGORIA NOVA (iss): `DivisionByZeroError`
 
