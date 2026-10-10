@@ -75,7 +75,7 @@ portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compa
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra)[0-9]*_` — **1.813 telas** |
-| **Próximo passo** | **Fase B** — os 6 prefixos compartilhados (`con` 1.559, `cai` 740, `cad` 523, `pro` 337, `pre` 54, `amb` 31). Exige um `map` do nginx gerado do banco: eles não podem ir inteiros para o 8.5 sem arrastar Financeiro e Patrimonial. |
+| **Próximo passo** | **Fase B — DIMENSIONADA**, ver seção própria. Escopo recomendado: **428 arquivos** (só as telas de Tributário), não os 2.072 dos prefixos inteiros. Fecha a área: 14 dos 16 módulos ainda têm telas no 5.6. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
@@ -2095,6 +2095,115 @@ fis 384   iss 280   dvr 197   arr 116   tri  28   inf  16      + dbagata 211 e o
 **O `arr`, previsto como o maior (343), saiu em 116** — ver a correção na seção dele. A ordem
 adotada (grandes no meio, `arr` por último) foi a que minimizou o custo total, porque cada
 módulo pré-paga o resíduo compartilhado do seguinte.
+
+### 📐 FASE B DIMENSIONADA — e duas correções ao que este arquivo afirmava
+
+Medido em 10/10/2026, antes de começar. Duas premissas registradas aqui estavam erradas.
+
+#### ⚠ CORREÇÃO 1: "13 de 16 módulos portados" media PREFIXOS, não módulos
+
+O cabeçalho de estado dizia 13 de 16. **Por telas de menu efetivamente roteadas, só 2 dos 16
+módulos estão completos** — `Marcas e Sinais` e `Inflat`. Todos os outros 14 têm pelo menos uma
+tela atrás de prefixo compartilhado, quase sempre `cai` (Caixa).
+
+| Módulo | Telas | Já no 8.5 | Faltam | Prefixos que faltam |
+|---|---|---|---|---|
+| Cadastro | 170 | **0** | 170 | `cad` `cai` `pro` |
+| Arrecadação | 172 | 92 | 80 | `cai` |
+| Projetos | 35 | 1 | 34 | `pro` `rec` |
+| Contrib | 31 | **0** | 31 | `cai` `con` |
+| Notificações | 25 | 7 | 18 | `cai` |
+| ISSQN | 182 | 174 | 8 | `cad` `cai` `pre` |
+| Meio Ambiente | 8 | **0** | 8 | `amb` `pro` |
+| Dívida Ativa | 57 | 52 | 5 | `cai` |
+| Fiscal | 97 | 94 | 3 | `cai` `prot` |
+| Cemitério | 43 | 40 | 3 | `cai` `prot` |
+| ITBI | 25 | 23 | 2 | `cad` `cai` |
+| Diversos | 15 | 13 | 2 | `cai` `dv` |
+| Água | 109 | 108 | 1 | `cai` |
+| Jurídico | 62 | 61 | 1 | `cai` |
+| **Marcas e Sinais** | 17 | **17** | **0** | — |
+| **Inflat** | 8 | **8** | **0** | — |
+| **Total** | **1.056** | **690 (65%)** | **366** | |
+
+As 1.813 telas servidas pelo 8.5 continuam corretas — são **arquivos por prefixo**, e dois terços
+deles não estão no menu. As duas métricas medem coisas diferentes e as duas valem: *arquivos
+roteados* mede o porte, *telas de menu cobertas* mede o que o usuário alcança.
+
+#### ⚠ CORREÇÃO 2: os prefixos compartilhados quase NÃO são compartilhados
+
+Este arquivo afirmava que `cad` e `con` "não podem ir inteiros para o 8.5 sem arrastar
+Financeiro e Patrimonial". Medido tela a tela, **as telas são quase disjuntas**:
+
+| Prefixo | Só Tributário | Em Tributário **e** outra área | Só outras áreas |
+|---|---|---|---|
+| `con` | 30 | **0** | 511 |
+| `cai` | 77 | **24** | 151 |
+| `cad` | 165 | **1** | 1 |
+| `pro` | 34 | **1** | 66 |
+| `pre` | 6 | **0** | 35 |
+| `amb` | 7 | **0** | 14 |
+| **Total** | **319** | **26** | **778** |
+
+**26 telas de 345 (7,5%)** são de fato compartilhadas — 24 delas `cai` com Financeiro
+(`cai1_receita*`, `cai1_cfautent*`, `cai4_arrecada001`…), 1 `cad`, 1 `pro`. O risco existe e é
+pequeno, e **é de roteamento, não de porte**: o código portado roda nos dois runtimes, então
+quem cair no 8.5 por essas 26 telas recebe código verificado byte-a-byte.
+
+#### Os dois escopos possíveis, medidos
+
+| | **A — prefixos inteiros** | **B — só as telas de Tributário** |
+|---|---|---|
+| Telas roteadas | 3.244 arquivos | **351 telas** (345 + 6 de `prot`/`rec`/`dv`) |
+| Universo pelas sete frentes | 5.510 | **1.439** |
+| Já pago pela Fase A | 1.004 | **413** |
+| **Arquivos a alterar** | **2.072** | **428** |
+| Roteamento | uma linha no `location` | `map` de 341 nomes (~10 KB), gerado do banco |
+| Efeito colateral | migra Contabilidade, RH, Patrimonial junto | 26 telas de Financeiro vão junto |
+| Comparável a | **toda a Fase A** (2.113) | **um módulo grande**: entre `iss` (280) e `fis` (384) |
+
+Custo incremental do escopo A, na ordem do menor para o maior — a sobreposição entre os seis é
+de 1.064 arquivos, então somar os lotes isolados superestima em 183:
+
+```
+amb    28 isolado ->  28 incremental   (acumulado    28)
+pre    29            29                            57
+pro   235           234                           291
+cad   376           365                           656
+cai   544           503                         1.159
+con  1043           913                         2.072
+```
+
+Distribuição dos 428 arquivos do escopo B: `classes/` 202, `cad_` 105, `cai_` 52, `con_` 30,
+`pro_` 21, `func_` 9, resto 9. Categorias: 1.156 guardas `== <literal>`, 802 `split(`, 212
+`parse_str`, 187 construtores PHP 4, 14 `ereg*`, 5 `each(`, 2 offsets `{}`. **Nenhuma categoria
+nova** — o catálogo das 13 já cobre tudo que a varredura encontra.
+
+#### Viabilidade do roteamento por lista, verificada
+
+- **341 nomes distintos**, sem colisão; `map` de ~10 KB no nginx.
+- **3 telas em maiúscula** (`Cai1_recreparcori001/002/003.php`) — o `map` tem de ser
+  *case-insensitive*, mesma armadilha do `location ~*`.
+- **4 itens de menu apontam para arquivo que não existe** (`cad1_iptupadrao001/002.php`,
+  `cad4_iptunotificacaolancamento.php`, `cad4_manutencaonotificacaolancamento.php`). Defeito
+  pré-existente do cadastro de menu; ficam de fora.
+- Os dois terços fora do menu (popups, `.RPC.php`) **continuam no 5.6** e funcionam: são portados
+  junto por estarem no universo, e código portado roda nos dois runtimes. O `/tmp` compartilhado
+  já resolveu o loop de iframes que isso poderia causar.
+
+#### Recomendação: escopo B
+
+Ele fecha a área (16 de 16 módulos, 1.056 telas de menu) por **428 arquivos** — o tamanho de um
+módulo grande, dentro da faixa já provada sete vezes. O escopo A custa 4,8× mais e entrega
+Contabilidade, RH e Patrimonial, que **não estão no escopo acordado da disciplina**.
+
+**Duas decisões em aberto, ambas do usuário:**
+
+1. **As 26 telas compartilhadas com Financeiro** — roteá-las (o módulo Arrecadação fica completo,
+   e 24 telas de Financeiro passam a ser servidas pelo 8.5) ou deixá-las no 5.6 (Arrecadação fica
+   em 92+56 de 172). Recomendo **roteá-las**: o código é o mesmo nos dois runtimes.
+2. **Os 6 itens de `prot`/`rec`/`dv`** — prefixos minúsculos nesta área (48, 279 e 2 arquivos em
+   disco) que ninguém tinha notado. São 6 telas; incluí-las é barato e evita um 17º resíduo.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 
