@@ -85,7 +85,7 @@ if (isset($post->incluir)){
      $clissnotaavulsa->q51_inscr       = $post->q51_inscr;
      $clissnotaavulsa->q51_obs         = $post->q51_obs;
      if (isset($post->q51_dtemiss)){
-        $dtparte                          = split("/",$post->q51_dtemiss);
+        $dtparte                          = preg_split("#\\/#m",$post->q51_dtemiss);
         $clissnotaavulsa->q51_dtemiss_dia = $dtparte[0];
         $clissnotaavulsa->q51_dtemiss_mes = $dtparte[1];
         $clissnotaavulsa->q51_dtemiss_ano = $dtparte[2];

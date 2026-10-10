@@ -169,7 +169,7 @@ if(isset($postback)){
 		echo "<script>
 						alert($erro);		
 					</script>";
-		parent.mo_camada('atividades');
+		\PARENT.mo_camada('atividades');
 		db_redireciona("iss1_issbase017.php?nomenu=nops&chavepesquisa=$q02_inscr&opcao=$opcao");
 	}
 }

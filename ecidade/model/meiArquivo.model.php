@@ -56,7 +56,7 @@ class MeiArquivo {
 	 *
 	 * @var array
 	 */
-	private $aDadosMEI     = array();
+	private $aDadosMEI     = [];
 
 	/**
 	 * Cláusula where com filtro dos dados a serem exibidos
@@ -71,7 +71,7 @@ class MeiArquivo {
 	 *
 	 * @param string $sWhereImporta
 	 */
-  function __construct( $sWhereImporta='' ) {
+  public function __construct( $sWhereImporta='' ) {
 
   	$sMsgErro = '';
 
@@ -195,7 +195,7 @@ class MeiArquivo {
    * @param string $sNomeArquivo
    * @param string $sCaminhoArquivo
    */
-  function importaArquivo( $sNomeArquivo='', $sCaminhoArquivo='' ) {
+  public function importaArquivo( $sNomeArquivo='', $sCaminhoArquivo='' ) {
 
   	$sMsgErro = "Importação de Arquivo MEI abortada!\n";
 
@@ -261,8 +261,8 @@ class MeiArquivo {
      *
      */
 
-    $aDadosArquivo    = array();
-    $aCodSIAFI        = array();
+    $aDadosArquivo    = [];
+    $aCodSIAFI        = [];
     $lValidaData      = true;
     $iNumeroRegistros = 0;
     foreach ( $aLinhasArquivo as $iIndLinha => $oLinha ) {
@@ -409,7 +409,7 @@ class MeiArquivo {
           	if ( trim($oLinha->nm_empresarial_01) != '' ||
           	     trim($oLinha->nm_logradouro) != '' ||
           	     ((int)$sCodEvento >= 500 && (int)$sCodEvento <= 599) ||
-          	      in_array($sCodEvento,array('101','221'))
+          	      in_array($sCodEvento,['101','221'])
           	   ) {
 
 
@@ -634,7 +634,7 @@ class MeiArquivo {
      *  Cria um array contendo todas as descrições dos municipios SIAFI
      *  utilizado no arquivo txt, pois nele é apenas informado o código
      */
-    $aDescrSIAFI = array();
+    $aDescrSIAFI = [];
 
     if ( count($aCodSIAFI) > 0 ) {
 
@@ -898,7 +898,7 @@ class MeiArquivo {
    * @param string  $sEvento
    * @param object  $oMeiEmpresa
    */
-  function addEmpresa( $iCnpj='', $sEvento='', $oMeiEmpresa ){
+  public function addEmpresa( $iCnpj='', $sEvento='', $oMeiEmpresa = null ){
 
     $sMsgErro = 'Falha ao adicionar empresa';
 
@@ -929,7 +929,7 @@ class MeiArquivo {
    * @param string  $sEvento
    * @param string  $oMeiContador
    */
-  function addContador( $iCnpj='', $sEvento='', $oMeiContador){
+  public function addContador( $iCnpj='', $sEvento='', $oMeiContador = null){
 
     $sMsgErro = 'Falha ao adicionar empresa contábil';
 
@@ -958,7 +958,7 @@ class MeiArquivo {
    * @param string $sEvento
    * @param object $oMeiResponsavel
    */
-  function addResponsavel( $iCnpj='', $sEvento='', $oMeiResponsavel){
+  public function addResponsavel( $iCnpj='', $sEvento='', $oMeiResponsavel = null){
 
   	$sMsgErro = 'Falha ao adicionar responsável';
 
@@ -990,7 +990,7 @@ class MeiArquivo {
    * @param string  $sEvento
    * @param string  $oMeiAtividade
    */
-  function addAtividade( $iCnpj='', $sEvento='', $oMeiAtividade){
+  public function addAtividade( $iCnpj='', $sEvento='', $oMeiAtividade = null){
 
   	$sMsgErro = 'Falha ao adicionar atividade';
 
@@ -1020,7 +1020,7 @@ class MeiArquivo {
    * @param date    $dtData
    * @param string  $sTipo
    */
-  function setDadosEvento( $iCnpj='', $sEvento='', $iSeqEvento='', $dtData='', $sTipo='' ){
+  public function setDadosEvento( $iCnpj='', $sEvento='', $iSeqEvento='', $dtData='', $sTipo='' ){
 
   	$sMsgErro = 'Falha ao definir dados do evento';
 
@@ -1047,7 +1047,7 @@ class MeiArquivo {
    * @param integer $iCnpj
    * @param string  $sNroRecibo
    */
-  function addRecibo( $iCnpj='', $sNroRecibo='' ){
+  public function addRecibo( $iCnpj='', $sNroRecibo='' ){
 
   	$sMsgErro = 'Falha ao adicionar número recibo';
 
@@ -1067,7 +1067,7 @@ class MeiArquivo {
    * @param  integer $iCnpj
    * @return string  Mensagem de retorno
    */
-  function validaEventoMEI( $sCodEvento='', $iCnpj='' ){
+  public function validaEventoMEI( $sCodEvento='', $iCnpj='' ){
 
     $sMsgErro = "Validação do Evento sobre o MEI abortada!";
 
@@ -1088,7 +1088,7 @@ class MeiArquivo {
       throw new Exception("{$sMsgErro}\n{$eException->getMessage()}");
     }
 
-    $aMsg = array();
+    $aMsg = [];
 
     if ( $sCodEvento == '101' || $sCodEvento == '209' ) {
 
@@ -1295,7 +1295,7 @@ class MeiArquivo {
      *  OBS: O array informado abaixo contém todos evento que existentes, porém sem nenhum tipo de validação,
      *  se não encontrar nenhum registro então o evento informado não está configurado no sistema.
      */
-    } else if ( !in_array($sCodEvento,array('211','220','221','232','244','203')) ) {
+    } else if ( !in_array($sCodEvento,['211','220','221','232','244','203']) ) {
 
   	  $aMsg[]['9']  = "Evento {$sCodEvento} não configurado para o sistema!";
 
@@ -1306,7 +1306,7 @@ class MeiArquivo {
   }
 
 
-  function getTelaInconsistenciaMEI( $sCodEvento='', $iCnpj='' ){
+  public function getTelaInconsistenciaMEI( $sCodEvento='', $iCnpj='' ){
 
   	$sMsgErro = 'Consulta de detalhes das inconsistências abortada!\n';
 
@@ -1333,7 +1333,7 @@ class MeiArquivo {
   	}
 
   	$sTela = "";
-  	$aCnaeProcessado = array();
+  	$aCnaeProcessado = [];
 
 
   	foreach ( $aDadosInconsistencias as $iIndInconsistencia => $aListaInconsistencias ) {
@@ -1342,7 +1342,7 @@ class MeiArquivo {
 	    	$sTela .= "<tr>  ";
 	    	$sTela .= "  <td>";
 
-	    	if (  in_array($iCodInconsistencia,array(2,3)) ) {
+	    	if (  in_array($iCodInconsistencia,[2,3]) ) {
 
 	    		if ( $iCodInconsistencia == 2 ) {
 		    		$sCampo = "logradouro";
@@ -1496,7 +1496,7 @@ class MeiArquivo {
   }
 
 
-  function getTelaDetalhesEvento( $sCodEvento='', $iCnpj='' ){
+  public function getTelaDetalhesEvento( $sCodEvento='', $iCnpj='' ){
 
   	$sMsgErro = 'Consulta dos detalhes do Evento abortado';
 
@@ -2067,7 +2067,7 @@ class MeiArquivo {
   }
 
 
-  function getDadosMEI( $iCnpj='' ){
+  public function getDadosMEI( $iCnpj='' ){
 
   	if ( trim($iCnpj) != '' ) {
       return $this->aDadosMEI[$iCnpj];
@@ -2078,7 +2078,7 @@ class MeiArquivo {
   }
 
 
-  function processaMeiArquivo( $iCnpj='', $sCodEvento='', $iCodProcessa='' ){
+  public function processaMeiArquivo( $iCnpj='', $sCodEvento='', $iCodProcessa='' ){
 
     $sMsgErro = 'Processamento do arquivo do MEI abortado,\n';
 
@@ -2121,7 +2121,7 @@ class MeiArquivo {
     $rsMeiImporta   = $oDaoMeiImporta->sql_record($sSqlImporta);
     $iRowsImporta   = pg_num_rows($rsMeiImporta);
 
-    $aRegProcessa = array();
+    $aRegProcessa = [];
 
     if ( $iRowsImporta > 0 ) {
 
@@ -2498,7 +2498,7 @@ class MeiArquivo {
 
    			$iSeqAtiv = 0;
 
-        $aAtividades = array();
+        $aAtividades = [];
 
         $iAtividadePrincipal = 0;
 
@@ -2695,7 +2695,7 @@ class MeiArquivo {
            $iRowsAtiv      = pg_num_rows($rsAtivCalculo);
 
            //if ($iFormula > 1) {
-              $aListaAtivCalc = array();
+              $aListaAtivCalc = [];
 
               if ($iRowsAtiv > 0) {
                  for ($iIndC = 0; $iIndC < $iRowsAtiv; $iIndC++) {
@@ -3149,7 +3149,7 @@ class MeiArquivo {
 
         if ( $iRowsTabAtiv > 0 ) {
 
-          $aListaAtividades = array();
+          $aListaAtividades = [];
           for ( $iIndTabAtiv=0; $iIndTabAtiv < $iRowsTabAtiv; $iIndTabAtiv++ ) {
 
             $oTabAtiv = db_utils::fieldsMemory($rsTabAtiv,$iIndTabAtiv);
@@ -3265,7 +3265,7 @@ class MeiArquivo {
            $rsAtivCalculo  = db_query($sSqlAtivCalc);
            $iRowsAtiv      = pg_num_rows($rsAtivCalculo);
 
-           $aListaAtivCalc = array();
+           $aListaAtivCalc = [];
 
            if ($iRowsAtiv > 0) {
               for ($iIndC = 0; $iIndC < $iRowsAtiv; $iIndC++) {
@@ -3486,7 +3486,7 @@ class MeiArquivo {
   }
 
 
-  function descartaMeiArquivo( $iCnpj='', $sCodEvento='', $sMotivo='', $iCodProcessa='' ){
+  public function descartaMeiArquivo( $iCnpj='', $sCodEvento='', $sMotivo='', $iCodProcessa='' ){
 
     $sMsgErro = 'Processamento do arquivo do MEI abortado,\n';
 
@@ -3548,7 +3548,7 @@ class MeiArquivo {
   }
 
 
-  function processaMeiArquivoLote( $aListaProcessa=array() ){
+  public function processaMeiArquivoLote( $aListaProcessa=[] ){
 
     $sMsgErro = 'Processamento em lote do arquivo do MEI abortado,\n';
 
@@ -3600,7 +3600,7 @@ class MeiArquivo {
   }
 
 
-  function getCgmByCpfCnpj($iCnpj){
+  public function getCgmByCpfCnpj($iCnpj){
 
     $oDaoCgm = db_utils::getDao('cgm');
 
@@ -3619,7 +3619,7 @@ class MeiArquivo {
   }
 
 
-  function vinculaMeiCgm( $iCnpj='', $sCodEvento='' ){
+  public function vinculaMeiCgm( $iCnpj='', $sCodEvento='' ){
 
     $sMsgErro = 'Vinculação do MEI abortada,\n';
 
@@ -3720,7 +3720,7 @@ class MeiArquivo {
   }
 
 
-  function setCodRuaMEI($iCnpj='',$sCodEvento='',$iCodRua=''){
+  public function setCodRuaMEI($iCnpj='',$sCodEvento='',$iCodRua=''){
 
   	if ( trim($iCnpj) == '') {
       throw new Exception('CNPJ não informado!');
@@ -3739,7 +3739,7 @@ class MeiArquivo {
   }
 
 
-  function setCodBairroMEI($iCnpj='',$sCodEvento='',$iCodBairro=''){
+  public function setCodBairroMEI($iCnpj='',$sCodEvento='',$iCodBairro=''){
 
     if ( trim($iCnpj) == '') {
       throw new Exception('CNPJ não informado!');
@@ -3754,7 +3754,7 @@ class MeiArquivo {
   }
 
 
-  function setEmpresaCadastrada($iCnpj='',$sCodEvento=''){
+  public function setEmpresaCadastrada($iCnpj='',$sCodEvento=''){
 
     if ( trim($iCnpj) == '') {
       throw new Exception('CNPJ não informado!');
@@ -3768,7 +3768,7 @@ class MeiArquivo {
     $this->aDadosMEI[$iCnpj]['aEventos'][$sCodEvento]['oEmpresa']->lEmpresaCadastrada = true;
   }
 
-  function setResponsavelCadastrado($iCnpj='',$sCodEvento=''){
+  public function setResponsavelCadastrado($iCnpj='',$sCodEvento=''){
 
     if ( trim($iCnpj) == '') {
       throw new Exception('CNPJ não informado!');
@@ -3782,7 +3782,7 @@ class MeiArquivo {
   }
 
 
-  function setCodAtividade($iCnpj='',$sCodEvento='',$sCnae='',$iCodAtividade=''){
+  public function setCodAtividade($iCnpj='',$sCodEvento='',$sCnae='',$iCodAtividade=''){
 
     if ( trim($iCnpj) == '') {
       throw new Exception('CNPJ não informado!');
@@ -3807,9 +3807,9 @@ class MeiArquivo {
   }
 
 
-  function validaNumeroEndereco($sNumero=''){
+  public function validaNumeroEndereco($sNumero=''){
 
-  	$aNumero = split("[^0-9]",trim($sNumero));
+  	$aNumero = preg_split("#[^0-9]#m",trim($sNumero));
   	if ( count($aNumero) > 1 ){
   	  return false;
   	} else {
@@ -3819,7 +3819,7 @@ class MeiArquivo {
   }
 
 
-  function getCompetencias($dtDataini='',$dtDataFim=''){
+  public function getCompetencias($dtDataini='',$dtDataFim=''){
 
   	$clMeiImporta = db_utils::getDao('meiimporta');
 
@@ -3871,7 +3871,7 @@ class MeiArquivo {
   }
 
 
-	function getDataImpMEI() {
+	public function getDataImpMEI() {
 
 		$oParIssqn = db_utils::getDao('parissqn');
 

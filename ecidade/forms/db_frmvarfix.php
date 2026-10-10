@@ -42,7 +42,7 @@ $get="origem=N";
 include(modification("dbforms/db_classesgenericas.php"));
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;
 $data=date("d-m-Y",db_getsession("DB_datausu"));
-$data=split('-',$data);
+$data=preg_split('#\-#m',$data);
 $dia=$data[0];
 $mes=$data[1];
 $ano=$data[2];
@@ -115,7 +115,7 @@ db_input('z01_nome',40,$Iz01_nome,true,'text',3,'')
     <td>
 
 <?
-$x = array('e'=>'Estimado','a'=>'Arbitrado');
+$x = ['e'=>'Estimado','a'=>'Arbitrado'];
 db_select('q33_tiporeg',$x,true,$db_opcao,"");
 ?>
 <?
@@ -206,7 +206,7 @@ db_inputdata('q33_data',@$q33_data_dia,@$q33_data_mes,@$q33_data_ano,true,'text'
 		  if(empty($q34_mes)){
      		 $q34_numpar = date("m",db_getsession('DB_datausu'));
 	      }
-		  $par = array("1"=>"1","2"=>"2","3"=>"3","4"=>"4","5"=>"5","6"=>"6","7"=>"7","8"=>"8","9"=>"9","10"=>"10","11"=>"11","12"=>"12");
+		  $par = ["1"=>"1","2"=>"2","3"=>"3","4"=>"4","5"=>"5","6"=>"6","7"=>"7","8"=>"8","9"=>"9","10"=>"10","11"=>"11","12"=>"12"];
 		  db_select("q34_numpar",$par,true,$db_opcao05,"","","","","");
 		  ?>
        </td>
@@ -220,7 +220,7 @@ db_inputdata('q33_data',@$q33_data_dia,@$q33_data_mes,@$q33_data_ano,true,'text'
 		if(empty($q34_mes)){
 		 $q34_mes=date("m",db_getsession('DB_datausu'));
 		}
-		$resultw=array("1"=>"Janeiro","2"=>"Fevereiro","3"=>"Março","4"=>"Abril","5"=>"Maio","6"=>"Junho","7"=>"Julho","8"=>"Agosto","9"=>"Setembro","10"=>"Outubro","11"=>"Novembro","12"=>"Dezembro");
+		$resultw=["1"=>"Janeiro","2"=>"Fevereiro","3"=>"Março","4"=>"Abril","5"=>"Maio","6"=>"Junho","7"=>"Julho","8"=>"Agosto","9"=>"Setembro","10"=>"Outubro","11"=>"Novembro","12"=>"Dezembro"];
 		  db_select("q34_mes",$resultw,true,$db_opcao05,"","","","","");
 		?>
 	    </td>
@@ -229,7 +229,7 @@ db_inputdata('q33_data',@$q33_data_dia,@$q33_data_mes,@$q33_data_ano,true,'text'
 	    </td>
 	    <td>
 		<?
-		$anos=array();
+		$anos=[];
 		$anoatual=date("Y",db_getsession("DB_datausu"));
 		for($i=$anoatual; $i>($anoatual-10); $i--){
 		 $anos[$i]=$i;
@@ -300,7 +300,7 @@ if(isset($opcao)){
     <td valign="top" >
      <?
       $cliframe_alterar_excluir->sql = $clvarfixval->sql_query_file(null,"q34_numpar, q34_codigo,q34_mes,q34_ano,q34_valor,q34_inflat,q34_dtval","q34_mes"," q34_codigo = $q33_codigo");
-      $chavepri = array("q34_codigo"=>$q33_codigo,"q34_mes"=>@$q34_mes,"q34_ano"=>@$q34_ano);
+      $chavepri = ["q34_codigo"=>$q33_codigo,"q34_mes"=>@$q34_mes,"q34_ano"=>@$q34_ano];
       $cliframe_alterar_excluir->chavepri=$chavepri;
       $cliframe_alterar_excluir->campos  =" q34_numpar, q34_mes, q34_ano, q34_valor, q34_inflat, q34_dtval ";
       $cliframe_alterar_excluir->legenda="VALORES DE LANÇADOS";

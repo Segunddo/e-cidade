@@ -29,32 +29,32 @@
 //CLASSE DA ENTIDADE isscalclog
 class cl_isscalclog { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $q47_codigo = 0; 
-   var $q47_anousu = 0; 
-   var $q47_data_dia = null; 
-   var $q47_data_mes = null; 
-   var $q47_data_ano = null; 
-   var $q47_data = null; 
-   var $q47_hora = null; 
-   var $q47_usuario = 0; 
-   var $q47_parcial = 'f'; 
-   var $q47_quantaproc = 0; 
-   var $q47_tipo = 0; 
+   public $q47_codigo = 0; 
+   public $q47_anousu = 0; 
+   public $q47_data_dia = null; 
+   public $q47_data_mes = null; 
+   public $q47_data_ano = null; 
+   public $q47_data = null; 
+   public $q47_hora = null; 
+   public $q47_usuario = 0; 
+   public $q47_parcial = 'f'; 
+   public $q47_quantaproc = 0; 
+   public $q47_tipo = 0; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  q47_codigo = int4 = Código 
                  q47_anousu = int4 = Ano 
                  q47_data = date = Data 
@@ -65,13 +65,13 @@ class cl_isscalclog {
                  q47_tipo = int4 = Codigo do calculo 
                  ";
    //funcao construtor da classe 
-   function cl_isscalclog() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isscalclog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -80,7 +80,7 @@ class cl_isscalclog {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->q47_codigo = ($this->q47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_codigo"]:$this->q47_codigo);
        $this->q47_anousu = ($this->q47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q47_anousu"]:$this->q47_anousu);
@@ -102,7 +102,7 @@ class cl_isscalclog {
      }
    }
    // funcao para inclusao
-   function incluir ($q47_codigo){ 
+   public function incluir ($q47_codigo){ 
       $this->atualizacampos();
      if($this->q47_anousu == null ){ 
        $this->erro_sql = " Campo Ano nao Informado.";
@@ -177,10 +177,10 @@ class cl_isscalclog {
          $this->erro_status = "0";
          return false; 
        }
-       $this->q47_codigo = pg_result($result,0,0); 
+       $this->q47_codigo = pg_fetch_result($result,0,0); 
      }else{
        $result = db_query("select last_value from isscalclog_q47_codigo_seq");
-       if(($result != false) && (pg_result($result,0,0) < $q47_codigo)){
+       if(($result != false) && (pg_fetch_result($result,0,0) < $q47_codigo)){
          $this->erro_sql = " Campo q47_codigo maior que último número da sequencia.";
          $this->erro_banco = "Sequencia menor que este número.";
          $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -246,22 +246,22 @@ class cl_isscalclog {
      $resaco = $this->sql_record($this->sql_query_file($this->q47_codigo));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,9768,'$this->q47_codigo','I')");
-       $resac = db_query("insert into db_acount values($acount,1675,9768,'','".AddSlashes(pg_result($resaco,0,'q47_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1675,9769,'','".AddSlashes(pg_result($resaco,0,'q47_anousu'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1675,9770,'','".AddSlashes(pg_result($resaco,0,'q47_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1675,9771,'','".AddSlashes(pg_result($resaco,0,'q47_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1675,9772,'','".AddSlashes(pg_result($resaco,0,'q47_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1675,9773,'','".AddSlashes(pg_result($resaco,0,'q47_parcial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1675,9774,'','".AddSlashes(pg_result($resaco,0,'q47_quantaproc'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1675,9798,'','".AddSlashes(pg_result($resaco,0,'q47_tipo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1675,9768,'','".AddSlashes(pg_fetch_result($resaco,0,'q47_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1675,9769,'','".AddSlashes(pg_fetch_result($resaco,0,'q47_anousu'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1675,9770,'','".AddSlashes(pg_fetch_result($resaco,0,'q47_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1675,9771,'','".AddSlashes(pg_fetch_result($resaco,0,'q47_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1675,9772,'','".AddSlashes(pg_fetch_result($resaco,0,'q47_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1675,9773,'','".AddSlashes(pg_fetch_result($resaco,0,'q47_parcial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1675,9774,'','".AddSlashes(pg_fetch_result($resaco,0,'q47_quantaproc'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1675,9798,'','".AddSlashes(pg_fetch_result($resaco,0,'q47_tipo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($q47_codigo=null) { 
+   public function alterar ($q47_codigo=null) { 
       $this->atualizacampos();
      $sql = " update isscalclog set ";
      $virgula = "";
@@ -391,25 +391,25 @@ class cl_isscalclog {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,9768,'$this->q47_codigo','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q47_codigo"]))
-           $resac = db_query("insert into db_acount values($acount,1675,9768,'".AddSlashes(pg_result($resaco,$conresaco,'q47_codigo'))."','$this->q47_codigo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1675,9768,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q47_codigo'))."','$this->q47_codigo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q47_anousu"]))
-           $resac = db_query("insert into db_acount values($acount,1675,9769,'".AddSlashes(pg_result($resaco,$conresaco,'q47_anousu'))."','$this->q47_anousu',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1675,9769,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q47_anousu'))."','$this->q47_anousu',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q47_data"]))
-           $resac = db_query("insert into db_acount values($acount,1675,9770,'".AddSlashes(pg_result($resaco,$conresaco,'q47_data'))."','$this->q47_data',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1675,9770,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q47_data'))."','$this->q47_data',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q47_hora"]))
-           $resac = db_query("insert into db_acount values($acount,1675,9771,'".AddSlashes(pg_result($resaco,$conresaco,'q47_hora'))."','$this->q47_hora',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1675,9771,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q47_hora'))."','$this->q47_hora',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q47_usuario"]))
-           $resac = db_query("insert into db_acount values($acount,1675,9772,'".AddSlashes(pg_result($resaco,$conresaco,'q47_usuario'))."','$this->q47_usuario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1675,9772,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q47_usuario'))."','$this->q47_usuario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q47_parcial"]))
-           $resac = db_query("insert into db_acount values($acount,1675,9773,'".AddSlashes(pg_result($resaco,$conresaco,'q47_parcial'))."','$this->q47_parcial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1675,9773,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q47_parcial'))."','$this->q47_parcial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q47_quantaproc"]))
-           $resac = db_query("insert into db_acount values($acount,1675,9774,'".AddSlashes(pg_result($resaco,$conresaco,'q47_quantaproc'))."','$this->q47_quantaproc',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1675,9774,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q47_quantaproc'))."','$this->q47_quantaproc',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q47_tipo"]))
-           $resac = db_query("insert into db_acount values($acount,1675,9798,'".AddSlashes(pg_result($resaco,$conresaco,'q47_tipo'))."','$this->q47_tipo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1675,9798,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q47_tipo'))."','$this->q47_tipo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -445,7 +445,7 @@ class cl_isscalclog {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($q47_codigo=null,$dbwhere=null) { 
+   public function excluir ($q47_codigo=null,$dbwhere=null) { 
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($q47_codigo));
      }else{ 
@@ -454,17 +454,17 @@ class cl_isscalclog {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,9768,'$q47_codigo','E')");
-         $resac = db_query("insert into db_acount values($acount,1675,9768,'','".AddSlashes(pg_result($resaco,$iresaco,'q47_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1675,9769,'','".AddSlashes(pg_result($resaco,$iresaco,'q47_anousu'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1675,9770,'','".AddSlashes(pg_result($resaco,$iresaco,'q47_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1675,9771,'','".AddSlashes(pg_result($resaco,$iresaco,'q47_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1675,9772,'','".AddSlashes(pg_result($resaco,$iresaco,'q47_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1675,9773,'','".AddSlashes(pg_result($resaco,$iresaco,'q47_parcial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1675,9774,'','".AddSlashes(pg_result($resaco,$iresaco,'q47_quantaproc'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1675,9798,'','".AddSlashes(pg_result($resaco,$iresaco,'q47_tipo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1675,9768,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q47_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1675,9769,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q47_anousu'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1675,9770,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q47_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1675,9771,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q47_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1675,9772,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q47_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1675,9773,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q47_parcial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1675,9774,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q47_quantaproc'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1675,9798,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q47_tipo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from isscalclog
@@ -513,7 +513,7 @@ class cl_isscalclog {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -524,7 +524,7 @@ class cl_isscalclog {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:isscalclog";
@@ -535,10 +535,10 @@ class cl_isscalclog {
       }
      return $result;
    }
-   function sql_query ( $q47_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $q47_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -563,7 +563,7 @@ class cl_isscalclog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -572,10 +572,10 @@ class cl_isscalclog {
      }
      return $sql;
   }
-   function sql_query_file ( $q47_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $q47_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -596,7 +596,7 @@ class cl_isscalclog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -605,10 +605,10 @@ class cl_isscalclog {
      }
      return $sql;
   }
-   function sql_query_inf ( $q47_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_inf ( $q47_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -635,7 +635,7 @@ class cl_isscalclog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

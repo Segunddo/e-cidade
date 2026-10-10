@@ -47,10 +47,10 @@ $head3 = "ATIVIDADES SEM CLASSE CONFIGURADA.";
 $head5 = "ORDEM POR COD.";
 
 $result1=db_query("select q82_ativ from clasativ;");
-if(pg_numrows($result1) == 0){
+if(pg_num_rows($result1) == 0){
     
 }else{
-  for($x1 = 0; $x1 < pg_numrows($result1);$x1++){
+  for($x1 = 0; $x1 < pg_num_rows($result1);$x1++){
     db_fieldsmemory($result1,$x1);
     $lista .= $vir.$q82_ativ;
     $vir = ",";

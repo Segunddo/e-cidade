@@ -29,34 +29,34 @@
 //CLASSE DA ENTIDADE atividcnae
 class cl_atividcnae { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $q74_cnaeanalitica = 0; 
-   var $q74_ativid = 0; 
+   public $q74_cnaeanalitica = 0; 
+   public $q74_ativid = 0; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  q74_cnaeanalitica = int4 = Código 
                  q74_ativid = int4 = Atividade 
                  ";
    //funcao construtor da classe 
-   function cl_atividcnae() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("atividcnae"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -65,7 +65,7 @@ class cl_atividcnae {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->q74_cnaeanalitica = ($this->q74_cnaeanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["q74_cnaeanalitica"]:$this->q74_cnaeanalitica);
        $this->q74_ativid = ($this->q74_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["q74_ativid"]:$this->q74_ativid);
@@ -75,7 +75,7 @@ class cl_atividcnae {
      }
    }
    // funcao para inclusao
-   function incluir ($q74_cnaeanalitica,$q74_ativid){ 
+   public function incluir ($q74_cnaeanalitica,$q74_ativid){ 
       $this->atualizacampos();
        $this->q74_cnaeanalitica = $q74_cnaeanalitica; 
        $this->q74_ativid = $q74_ativid; 
@@ -130,17 +130,17 @@ class cl_atividcnae {
      $resaco = $this->sql_record($this->sql_query_file($this->q74_cnaeanalitica,$this->q74_ativid));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,10191,'$this->q74_cnaeanalitica','I')");
        $resac = db_query("insert into db_acountkey values($acount,10192,'$this->q74_ativid','I')");
-       $resac = db_query("insert into db_acount values($acount,1754,10191,'','".AddSlashes(pg_result($resaco,0,'q74_cnaeanalitica'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1754,10192,'','".AddSlashes(pg_result($resaco,0,'q74_ativid'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1754,10191,'','".AddSlashes(pg_fetch_result($resaco,0,'q74_cnaeanalitica'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1754,10192,'','".AddSlashes(pg_fetch_result($resaco,0,'q74_ativid'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($q74_cnaeanalitica=null,$q74_ativid=null) { 
+   public function alterar ($q74_cnaeanalitica=null,$q74_ativid=null) { 
       $this->atualizacampos();
      $sql = " update atividcnae set ";
      $virgula = "";
@@ -181,14 +181,14 @@ class cl_atividcnae {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,10191,'$this->q74_cnaeanalitica','A')");
          $resac = db_query("insert into db_acountkey values($acount,10192,'$this->q74_ativid','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q74_cnaeanalitica"]))
-           $resac = db_query("insert into db_acount values($acount,1754,10191,'".AddSlashes(pg_result($resaco,$conresaco,'q74_cnaeanalitica'))."','$this->q74_cnaeanalitica',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1754,10191,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q74_cnaeanalitica'))."','$this->q74_cnaeanalitica',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q74_ativid"]))
-           $resac = db_query("insert into db_acount values($acount,1754,10192,'".AddSlashes(pg_result($resaco,$conresaco,'q74_ativid'))."','$this->q74_ativid',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1754,10192,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q74_ativid'))."','$this->q74_ativid',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -224,7 +224,7 @@ class cl_atividcnae {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($q74_cnaeanalitica=null,$q74_ativid=null,$dbwhere=null) { 
+   public function excluir ($q74_cnaeanalitica=null,$q74_ativid=null,$dbwhere=null) { 
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($q74_cnaeanalitica,$q74_ativid));
      }else{ 
@@ -233,12 +233,12 @@ class cl_atividcnae {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,10191,'$q74_cnaeanalitica','E')");
          $resac = db_query("insert into db_acountkey values($acount,10192,'$q74_ativid','E')");
-         $resac = db_query("insert into db_acount values($acount,1754,10191,'','".AddSlashes(pg_result($resaco,$iresaco,'q74_cnaeanalitica'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1754,10192,'','".AddSlashes(pg_result($resaco,$iresaco,'q74_ativid'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1754,10191,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q74_cnaeanalitica'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1754,10192,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q74_ativid'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from atividcnae
@@ -293,7 +293,7 @@ class cl_atividcnae {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -304,7 +304,7 @@ class cl_atividcnae {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:atividcnae";
@@ -315,10 +315,10 @@ class cl_atividcnae {
       }
      return $result;
    }
-   function sql_query ( $q74_cnaeanalitica=null,$q74_ativid=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $q74_cnaeanalitica=null,$q74_ativid=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_atividcnae {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -359,10 +359,10 @@ class cl_atividcnae {
      }
      return $sql;
   }
-   function sql_query_file ( $q74_cnaeanalitica=null,$q74_ativid=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $q74_cnaeanalitica=null,$q74_ativid=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_atividcnae {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

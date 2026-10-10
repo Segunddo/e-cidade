@@ -80,7 +80,7 @@ $sSql = "select codigo,
 //die($sSql);
 $rsSql = db_query ( $sSql );
 
-if (pg_numrows ( $rsSql ) > 0) {
+if (pg_num_rows ( $rsSql ) > 0) {
 	db_fieldsmemory ( $rsSql, 0 );
 }
 

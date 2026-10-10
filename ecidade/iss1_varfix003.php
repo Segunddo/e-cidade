@@ -60,7 +60,7 @@ if (isset($excluir)) {
     }
   }
   
-  $result=$clvarfixnotifica->sql_record($clvarfixnotifica->sql_query_file(null,"*",null,null,"q37_varfix=$q33_codigo"));
+  $result=$clvarfixnotifica->sql_record($clvarfixnotifica->sql_query_file(null,"*",null,null));
   if ($clvarfixnotifica->numrows>0) {
     $clvarfixnotifica->excluir(null,"q37_varfix=$q33_codigo");
   }
@@ -69,7 +69,7 @@ if (isset($excluir)) {
     $sqlerro=true;
   }
   
-  $result=$clvarfixproc->sql_record($clvarfixproc->sql_query_file(null,"*",null,null,"q36_varfix=$q33_codigo"));
+  $result=$clvarfixproc->sql_record($clvarfixproc->sql_query_file(null,"*",null,null));
   if ($clvarfixproc->numrows>0) {
     $clvarfixproc->excluir(null,"q36_varfix=$q33_codigo");
   }

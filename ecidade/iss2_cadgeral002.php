@@ -187,7 +187,7 @@ $sql .= " $Orderby																												";
 //die($sql);
 $result = db_query($sql);
 
-if (pg_numrows($result) == 0){ 
+if (pg_num_rows($result) == 0){ 
 	db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 }
       
@@ -202,11 +202,11 @@ $alt   = 4;
 $total = 0;
 $p     = 0;
 $pdf->addpage("L");
-for($x = 0; $x <pg_numrows($result);$x++){
+for($x = 0; $x <pg_num_rows($result);$x++){
    db_fieldsmemory($result,$x);
 	 
 		if($lImpCab){
-			if($$Cab != $TrocaCab && $x != 0){
+			if(${$Cab} != $TrocaCab && $x != 0){
 				$pdf->setfont('arial','b',8);
 				$pdf->cell(0,$alt,'TOTAL DE REGISTROS  :  '.$total,"T",1,"L",0);
 				$pdf->ln();
@@ -214,18 +214,18 @@ for($x = 0; $x <pg_numrows($result);$x++){
 			}
 		}
 
-		if($pdf->gety() > $pdf->h - 30 || $TrocaCab != $$Cab){   
+		if($pdf->gety() > $pdf->h - 30 || $TrocaCab != ${$Cab}){   
 			if($pdf->gety() > $pdf->h - 30){
 				$pdf->addpage("L");
 		  }
 			if($lImpCab){
 				$pdf->ln(2);
 				$pdf->setfont('arial','b',10);
-				$pdf->cell(0,$alt,(isset($$cabCod)?$$cabCod."  ":"").$$Cab,0,1,"L",0);
+				$pdf->cell(0,$alt,(isset(${$cabCod})?${$cabCod}."  ":"").${$Cab},0,1,"L",0);
 				$pdf->ln(2);
 			}
 			
-			$TrocaCab = $$Cab;
+			$TrocaCab = ${$Cab};
 			$pdf->setfont('arial','b',8);
       $pdf->cell(10,$alt,"Inscr"							,1,0,"C",1);
       $pdf->cell(25,$alt,"CGC/CPF"						,1,0,"C",1);
@@ -246,13 +246,13 @@ for($x = 0; $x <pg_numrows($result);$x++){
    $pdf->cell(25,$alt,$z01_cgccpf										 ,0,0,"L",$p);
    $pdf->cell(15,$alt,$q02_numcgm										 ,0,0,"C",$p);
    $pdf->cell(62,$alt,$z01_nome											 ,0,0,"L",$p);
-   $pdf->cell($iTamCamp,$alt,substr($$ColCampo1,0,25),0,0,"L",$p); 
-   $pdf->cell($iTamCamp,$alt,substr($$ColCampo2,0,25),0,0,"L",$p); 
+   $pdf->cell($iTamCamp,$alt,substr(${$ColCampo1},0,25),0,0,"L",$p); 
+   $pdf->cell($iTamCamp,$alt,substr(${$ColCampo2},0,25),0,0,"L",$p); 
 	 if($lImpCab){
-    $pdf->cell(70,$alt,$$ColCampo3				           ,0,1,"L",$p);
+    $pdf->cell(70,$alt,${$ColCampo3}				           ,0,1,"L",$p);
 	 }else{
-    $pdf->cell(55,$alt,$$ColCampo3									 ,0,0,"L",$p);
-		$pdf->cell(28,$alt,$$ColCampo4									 ,0,1,"L",$p);
+    $pdf->cell(55,$alt,${$ColCampo3}									 ,0,0,"L",$p);
+		$pdf->cell(28,$alt,${$ColCampo4}									 ,0,1,"L",$p);
    }
 	 if ($p==0){
      $p=1;

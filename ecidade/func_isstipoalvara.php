@@ -141,9 +141,9 @@ $clisstipoalvara->rotulo->label("q98_descricao");
 
         }
 
-        $repassa = array();
+        $repassa = [];
         if(isset($chave_q98_descricao)){
-          $repassa = array("chave_q98_sequencial"=>$chave_q98_sequencial,"chave_q98_descricao"=>$chave_q98_descricao);
+          $repassa = ["chave_q98_sequencial"=>$chave_q98_sequencial,"chave_q98_descricao"=>$chave_q98_descricao];
         }
 
         //echo $sql;

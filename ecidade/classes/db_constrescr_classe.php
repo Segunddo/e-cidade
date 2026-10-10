@@ -29,38 +29,38 @@
 //CLASSE DA ENTIDADE constrescr
 class cl_constrescr { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $j52_matric = 0; 
-   var $j52_idcons = 0; 
-   var $j52_ano = 0; 
-   var $j52_area = 0; 
-   var $j52_areap = 0; 
-   var $j52_dtlan_dia = null; 
-   var $j52_dtlan_mes = null; 
-   var $j52_dtlan_ano = null; 
-   var $j52_dtlan = null; 
-   var $j52_codigo = 0; 
-   var $j52_numero = 0; 
-   var $j52_compl = null; 
-   var $j52_dtdemo_dia = null; 
-   var $j52_dtdemo_mes = null; 
-   var $j52_dtdemo_ano = null; 
-   var $j52_dtdemo = null; 
-   var $j52_idaument = 0; 
+   public $j52_matric = 0; 
+   public $j52_idcons = 0; 
+   public $j52_ano = 0; 
+   public $j52_area = 0; 
+   public $j52_areap = 0; 
+   public $j52_dtlan_dia = null; 
+   public $j52_dtlan_mes = null; 
+   public $j52_dtlan_ano = null; 
+   public $j52_dtlan = null; 
+   public $j52_codigo = 0; 
+   public $j52_numero = 0; 
+   public $j52_compl = null; 
+   public $j52_dtdemo_dia = null; 
+   public $j52_dtdemo_mes = null; 
+   public $j52_dtdemo_ano = null; 
+   public $j52_dtdemo = null; 
+   public $j52_idaument = 0; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  j52_matric = int4 = Matricula 
                  j52_idcons = int4 = Codigo Construcao 
                  j52_ano = int4 = Ano Construcao 
@@ -74,13 +74,13 @@ class cl_constrescr {
                  j52_idaument = int4 = Construção Principal 
                  ";
    //funcao construtor da classe 
-   function cl_constrescr() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("constrescr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -89,7 +89,7 @@ class cl_constrescr {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->j52_matric = ($this->j52_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j52_matric"]:$this->j52_matric);
        $this->j52_idcons = ($this->j52_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j52_idcons"]:$this->j52_idcons);
@@ -122,7 +122,7 @@ class cl_constrescr {
      }
    }
    // funcao para inclusao
-   function incluir ($j52_matric,$j52_idcons){ 
+   public function incluir ($j52_matric,$j52_idcons){ 
       $this->atualizacampos();
      if($this->j52_ano == null ){ 
        $this->erro_sql = " Campo Ano Construcao nao Informado.";
@@ -249,26 +249,26 @@ class cl_constrescr {
      $resaco = $this->sql_record($this->sql_query_file($this->j52_matric,$this->j52_idcons));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,172,'$this->j52_matric','I')");
        $resac = db_query("insert into db_acountkey values($acount,173,'$this->j52_idcons','I')");
-       $resac = db_query("insert into db_acount values($acount,35,172,'','".AddSlashes(pg_result($resaco,0,'j52_matric'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,35,173,'','".AddSlashes(pg_result($resaco,0,'j52_idcons'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,35,174,'','".AddSlashes(pg_result($resaco,0,'j52_ano'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,35,175,'','".AddSlashes(pg_result($resaco,0,'j52_area'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,35,176,'','".AddSlashes(pg_result($resaco,0,'j52_areap'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,35,177,'','".AddSlashes(pg_result($resaco,0,'j52_dtlan'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,35,178,'','".AddSlashes(pg_result($resaco,0,'j52_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,35,179,'','".AddSlashes(pg_result($resaco,0,'j52_numero'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,35,180,'','".AddSlashes(pg_result($resaco,0,'j52_compl'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,35,2492,'','".AddSlashes(pg_result($resaco,0,'j52_dtdemo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,35,2493,'','".AddSlashes(pg_result($resaco,0,'j52_idaument'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,172,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_matric'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,173,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_idcons'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,174,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_ano'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,175,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_area'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,176,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_areap'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,177,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_dtlan'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,178,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,179,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_numero'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,180,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_compl'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,2492,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_dtdemo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,35,2493,'','".AddSlashes(pg_fetch_result($resaco,0,'j52_idaument'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($j52_matric=null,$j52_idcons=null) { 
+   public function alterar ($j52_matric=null,$j52_idcons=null) { 
       $this->atualizacampos();
      $sql = " update constrescr set ";
      $virgula = "";
@@ -415,32 +415,32 @@ class cl_constrescr {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,172,'$this->j52_matric','A')");
          $resac = db_query("insert into db_acountkey values($acount,173,'$this->j52_idcons','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_matric"]))
-           $resac = db_query("insert into db_acount values($acount,35,172,'".AddSlashes(pg_result($resaco,$conresaco,'j52_matric'))."','$this->j52_matric',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,172,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_matric'))."','$this->j52_matric',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_idcons"]))
-           $resac = db_query("insert into db_acount values($acount,35,173,'".AddSlashes(pg_result($resaco,$conresaco,'j52_idcons'))."','$this->j52_idcons',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,173,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_idcons'))."','$this->j52_idcons',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_ano"]))
-           $resac = db_query("insert into db_acount values($acount,35,174,'".AddSlashes(pg_result($resaco,$conresaco,'j52_ano'))."','$this->j52_ano',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,174,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_ano'))."','$this->j52_ano',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_area"]))
-           $resac = db_query("insert into db_acount values($acount,35,175,'".AddSlashes(pg_result($resaco,$conresaco,'j52_area'))."','$this->j52_area',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,175,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_area'))."','$this->j52_area',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_areap"]))
-           $resac = db_query("insert into db_acount values($acount,35,176,'".AddSlashes(pg_result($resaco,$conresaco,'j52_areap'))."','$this->j52_areap',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,176,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_areap'))."','$this->j52_areap',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_dtlan"]))
-           $resac = db_query("insert into db_acount values($acount,35,177,'".AddSlashes(pg_result($resaco,$conresaco,'j52_dtlan'))."','$this->j52_dtlan',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,177,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_dtlan'))."','$this->j52_dtlan',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_codigo"]))
-           $resac = db_query("insert into db_acount values($acount,35,178,'".AddSlashes(pg_result($resaco,$conresaco,'j52_codigo'))."','$this->j52_codigo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,178,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_codigo'))."','$this->j52_codigo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_numero"]))
-           $resac = db_query("insert into db_acount values($acount,35,179,'".AddSlashes(pg_result($resaco,$conresaco,'j52_numero'))."','$this->j52_numero',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,179,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_numero'))."','$this->j52_numero',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_compl"]))
-           $resac = db_query("insert into db_acount values($acount,35,180,'".AddSlashes(pg_result($resaco,$conresaco,'j52_compl'))."','$this->j52_compl',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,180,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_compl'))."','$this->j52_compl',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_dtdemo"]))
-           $resac = db_query("insert into db_acount values($acount,35,2492,'".AddSlashes(pg_result($resaco,$conresaco,'j52_dtdemo'))."','$this->j52_dtdemo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,2492,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_dtdemo'))."','$this->j52_dtdemo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["j52_idaument"]))
-           $resac = db_query("insert into db_acount values($acount,35,2493,'".AddSlashes(pg_result($resaco,$conresaco,'j52_idaument'))."','$this->j52_idaument',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,35,2493,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'j52_idaument'))."','$this->j52_idaument',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -476,7 +476,7 @@ class cl_constrescr {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($j52_matric=null,$j52_idcons=null,$dbwhere=null) { 
+   public function excluir ($j52_matric=null,$j52_idcons=null,$dbwhere=null) { 
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($j52_matric,$j52_idcons));
      }else{ 
@@ -485,21 +485,21 @@ class cl_constrescr {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,172,'$j52_matric','E')");
          $resac = db_query("insert into db_acountkey values($acount,173,'$j52_idcons','E')");
-         $resac = db_query("insert into db_acount values($acount,35,172,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_matric'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,35,173,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_idcons'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,35,174,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_ano'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,35,175,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_area'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,35,176,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_areap'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,35,177,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_dtlan'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,35,178,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,35,179,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_numero'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,35,180,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_compl'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,35,2492,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_dtdemo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,35,2493,'','".AddSlashes(pg_result($resaco,$iresaco,'j52_idaument'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,172,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_matric'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,173,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_idcons'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,174,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_ano'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,175,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_area'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,176,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_areap'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,177,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_dtlan'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,178,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,179,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_numero'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,180,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_compl'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,2492,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_dtdemo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,35,2493,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'j52_idaument'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from constrescr
@@ -554,7 +554,7 @@ class cl_constrescr {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -565,7 +565,7 @@ class cl_constrescr {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:constrescr";
@@ -576,10 +576,10 @@ class cl_constrescr {
       }
      return $result;
    }
-   function sql_query ( $j52_matric=null,$j52_idcons=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $j52_matric=null,$j52_idcons=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -612,7 +612,7 @@ class cl_constrescr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -621,10 +621,10 @@ class cl_constrescr {
      }
      return $sql;
   }
-   function sql_query_file ( $j52_matric=null,$j52_idcons=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $j52_matric=null,$j52_idcons=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -653,7 +653,7 @@ class cl_constrescr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -60,15 +60,15 @@ if (isset($chave_pesquisa)) {
   <tr> 
      <td>
      <?
-	     $clcriaabas->identifica = array("alvara"       => "Cadastro de Tipo de Alvará",
-	                                     "departamento"   => "Departamentos");//nome do iframe e o label
+	     $clcriaabas->identifica = ["alvara"       => "Cadastro de Tipo de Alvará",
+	                                     "departamento"   => "Departamentos"];//nome do iframe e o label
 	         
-	     $clcriaabas->title      = array("alvara"       => "Cadastro de Tipo de Alvará",
-	                                     "departamento" => "Departamentos");    
-	     $clcriaabas->src        = array("alvara"       => "iss1_isstipoalvara006.php", 
-	                                     "departamento" => "iss1_tabalvara_depto001.php");  
-	     $clcriaabas->sizecampo  = array("alvara"       => "30");    
-	     $clcriaabas->disabled   = array("departamento" => "false");    
+	     $clcriaabas->title      = ["alvara"       => "Cadastro de Tipo de Alvará",
+	                                     "departamento" => "Departamentos"];    
+	     $clcriaabas->src        = ["alvara"       => "iss1_isstipoalvara006.php", 
+	                                     "departamento" => "iss1_tabalvara_depto001.php"];  
+	     $clcriaabas->sizecampo  = ["alvara"       => "30"];    
+	     $clcriaabas->disabled   = ["departamento" => "false"];    
 	     $clcriaabas->cria_abas();     
      ?> 
      </td>

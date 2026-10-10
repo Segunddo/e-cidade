@@ -109,7 +109,7 @@ function js_relatorio(){
        
        <label id="label_iSituacao" for="iSituacao"><strong>Inscrições:</stong></label>
        <?
-         $selSituacao = array("T"=>"Todos", "A"=>"Ativas","B"=>"Baixadas");
+         $selSituacao = ["T"=>"Todos", "A"=>"Ativas","B"=>"Baixadas"];
          db_select('sSituacao', $selSituacao, true, 1, "style='width: 150'");
        ?>  
        &nbsp;

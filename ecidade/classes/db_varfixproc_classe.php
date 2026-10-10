@@ -29,36 +29,36 @@
 //CLASSE DA ENTIDADE varfixproc
 class cl_varfixproc { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $q36_sequencial = 0; 
-   var $q36_varfix = 0; 
-   var $q36_processo = 0; 
+   public $q36_sequencial = 0; 
+   public $q36_varfix = 0; 
+   public $q36_processo = 0; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  q36_sequencial = int4 = Sequencial 
                  q36_varfix = int4 = Varfix 
                  q36_processo = int4 = Processo 
                  ";
    //funcao construtor da classe 
-   function cl_varfixproc() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("varfixproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -67,7 +67,7 @@ class cl_varfixproc {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->q36_sequencial = ($this->q36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q36_sequencial"]:$this->q36_sequencial);
        $this->q36_varfix = ($this->q36_varfix == ""?@$GLOBALS["HTTP_POST_VARS"]["q36_varfix"]:$this->q36_varfix);
@@ -77,7 +77,7 @@ class cl_varfixproc {
      }
    }
    // funcao para inclusao
-   function incluir ($q36_sequencial){ 
+   public function incluir ($q36_sequencial){ 
       $this->atualizacampos();
      if($this->q36_varfix == null ){ 
        $this->erro_sql = " Campo Varfix nao Informado.";
@@ -107,10 +107,10 @@ class cl_varfixproc {
          $this->erro_status = "0";
          return false; 
        }
-       $this->q36_sequencial = pg_result($result,0,0); 
+       $this->q36_sequencial = pg_fetch_result($result,0,0); 
      }else{
        $result = db_query("select last_value from varfixproc_q36_sequencial_seq");
-       if(($result != false) && (pg_result($result,0,0) < $q36_sequencial)){
+       if(($result != false) && (pg_fetch_result($result,0,0) < $q36_sequencial)){
          $this->erro_sql = " Campo q36_sequencial maior que último número da sequencia.";
          $this->erro_banco = "Sequencia menor que este número.";
          $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -166,17 +166,17 @@ class cl_varfixproc {
      $resaco = $this->sql_record($this->sql_query_file($this->q36_sequencial));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,9356,'$this->q36_sequencial','I')");
-       $resac = db_query("insert into db_acount values($acount,1608,9356,'','".AddSlashes(pg_result($resaco,0,'q36_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1608,9357,'','".AddSlashes(pg_result($resaco,0,'q36_varfix'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1608,9358,'','".AddSlashes(pg_result($resaco,0,'q36_processo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1608,9356,'','".AddSlashes(pg_fetch_result($resaco,0,'q36_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1608,9357,'','".AddSlashes(pg_fetch_result($resaco,0,'q36_varfix'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1608,9358,'','".AddSlashes(pg_fetch_result($resaco,0,'q36_processo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($q36_sequencial=null) { 
+   public function alterar ($q36_sequencial=null) { 
       $this->atualizacampos();
      $sql = " update varfixproc set ";
      $virgula = "";
@@ -227,15 +227,15 @@ class cl_varfixproc {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,9356,'$this->q36_sequencial','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q36_sequencial"]))
-           $resac = db_query("insert into db_acount values($acount,1608,9356,'".AddSlashes(pg_result($resaco,$conresaco,'q36_sequencial'))."','$this->q36_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1608,9356,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q36_sequencial'))."','$this->q36_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q36_varfix"]))
-           $resac = db_query("insert into db_acount values($acount,1608,9357,'".AddSlashes(pg_result($resaco,$conresaco,'q36_varfix'))."','$this->q36_varfix',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1608,9357,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q36_varfix'))."','$this->q36_varfix',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q36_processo"]))
-           $resac = db_query("insert into db_acount values($acount,1608,9358,'".AddSlashes(pg_result($resaco,$conresaco,'q36_processo'))."','$this->q36_processo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1608,9358,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q36_processo'))."','$this->q36_processo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -271,7 +271,7 @@ class cl_varfixproc {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($q36_sequencial=null,$dbwhere=null) { 
+   public function excluir ($q36_sequencial=null,$dbwhere=null) { 
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($q36_sequencial));
      }else{ 
@@ -280,12 +280,12 @@ class cl_varfixproc {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,9356,'$q36_sequencial','E')");
-         $resac = db_query("insert into db_acount values($acount,1608,9356,'','".AddSlashes(pg_result($resaco,$iresaco,'q36_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1608,9357,'','".AddSlashes(pg_result($resaco,$iresaco,'q36_varfix'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1608,9358,'','".AddSlashes(pg_result($resaco,$iresaco,'q36_processo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1608,9356,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q36_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1608,9357,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q36_varfix'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1608,9358,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q36_processo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from varfixproc
@@ -334,7 +334,7 @@ class cl_varfixproc {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -345,7 +345,7 @@ class cl_varfixproc {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:varfixproc";
@@ -356,10 +356,10 @@ class cl_varfixproc {
       }
      return $result;
    }
-   function sql_query ( $q36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $q36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_varfixproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,10 +397,10 @@ class cl_varfixproc {
      }
      return $sql;
   }
-   function sql_query_file ( $q36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $q36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_varfixproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

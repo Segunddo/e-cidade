@@ -55,11 +55,11 @@ $clcriaabas     = new cl_criaabas;
   <tr> 
      <td>
      <?
-       $clcriaabas->identifica = array("cadvencdesc"=>"Vencimento","cadvenc"=>"Datas");//nome do iframe e o label    
-       $clcriaabas->title      = array("cadvencdesc"=>"Descrição dos vencimentos","cadvenc"=>"Datas do vencimento");//nome do iframe e o label    
-       $clcriaabas->src = array("cadvencdesc"=>"iss1_cadvencdesc015.php");  //nome do iframe e SRC  
-       $clcriaabas->sizecampo= array("cadvencdesc"=>"10");    
-       $clcriaabas->disabled= array("cadvenc"=>"true");    
+       $clcriaabas->identifica = ["cadvencdesc"=>"Vencimento","cadvenc"=>"Datas"];//nome do iframe e o label    
+       $clcriaabas->title      = ["cadvencdesc"=>"Descrição dos vencimentos","cadvenc"=>"Datas do vencimento"];//nome do iframe e o label    
+       $clcriaabas->src = ["cadvencdesc"=>"iss1_cadvencdesc015.php"];  //nome do iframe e SRC  
+       $clcriaabas->sizecampo= ["cadvencdesc"=>"10"];    
+       $clcriaabas->disabled= ["cadvenc"=>"true"];    
        $clcriaabas->cria_abas();    
      ?> 
      </td>

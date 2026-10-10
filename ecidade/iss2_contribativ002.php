@@ -38,7 +38,7 @@ $ativs      = "";
 $atividades = "";
 $where      = "";
 if(isset($chaves) && $chaves != ""){
-  $at = split("#",$chaves);
+  $at = preg_split("#\\##m",$chaves);
   $or = "";
   for($i=0;$i<sizeof($at);$i++){
     $ativs .= $or." q03_ativ = ".$at[$i]." ";
@@ -108,7 +108,7 @@ issruas.j14_codigo ";
 
 $result = db_query($sql) or die($sql);
 //db_criatabela($result);exit;             
-$numlinhas = pg_numrows($result);
+$numlinhas = pg_num_rows($result);
 if($numlinhas == 0){
   db_redireciona('db_erros.php?fechar=true&db_erro=Não foi encontrado nenhum registro para o filtro selecionado.');
 }
@@ -178,7 +178,7 @@ for($i=0;$i<$numlinhas;$i++){
 		group by extract (year from k00_dtoper)";
 		//die($sqltotal);
 		$rsTotal =  db_query($sqltotal);
-		$toti    =  pg_numrows($rsTotal);
+		$toti    =  pg_num_rows($rsTotal);
 		$passa = true;	
 		
 		if ($debitos == "s" and $toti > 0) {

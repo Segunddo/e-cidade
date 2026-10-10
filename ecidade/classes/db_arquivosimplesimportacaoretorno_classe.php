@@ -108,10 +108,10 @@ class cl_arquivosimplesimportacaoretorno
          $this->erro_status = "0";
          return false; 
        }
-       $this->q182_sequencial = pg_result($result,0,0); 
+       $this->q182_sequencial = pg_fetch_result($result,0,0); 
      }else{
        $result = db_query("select last_value from arquivosimplesimportacaoretorno_q182_sequencial_seq");
-       if(($result != false) && (pg_result($result,0,0) < $q182_sequencial)){
+       if(($result != false) && (pg_fetch_result($result,0,0) < $q182_sequencial)){
          $this->erro_sql = " Campo q182_sequencial maior que último número da sequencia.";
          $this->erro_banco = "Sequencia menor que este número.";
          $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -176,14 +176,14 @@ class cl_arquivosimplesimportacaoretorno
        if(($resaco!=false)||($this->numrows!=0)){
 
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,1014662,'$this->q182_sequencial','I')");
-         $resac = db_query("insert into db_acount values($acount,1011010,1014662,'','".AddSlashes(pg_result($resaco,0,'q182_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1011010,1014663,'','".AddSlashes(pg_result($resaco,0,'q182_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1011010,1014664,'','".AddSlashes(pg_result($resaco,0,'q182_nomearquivo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1011010,1014665,'','".AddSlashes(pg_result($resaco,0,'q182_id_storage'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1011010,1014666,'','".AddSlashes(pg_result($resaco,0,'q182_arquivosimplesimportacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1011010,1014662,'','".AddSlashes(pg_fetch_result($resaco,0,'q182_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1011010,1014663,'','".AddSlashes(pg_fetch_result($resaco,0,'q182_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1011010,1014664,'','".AddSlashes(pg_fetch_result($resaco,0,'q182_nomearquivo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1011010,1014665,'','".AddSlashes(pg_fetch_result($resaco,0,'q182_id_storage'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1011010,1014666,'','".AddSlashes(pg_fetch_result($resaco,0,'q182_arquivosimplesimportacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      return true;
@@ -273,19 +273,19 @@ class cl_arquivosimplesimportacaoretorno
          for ($conresaco = 0; $conresaco < $this->numrows; $conresaco++) {
 
            $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-           $acount = pg_result($resac,0,0);
+           $acount = pg_fetch_result($resac,0,0);
            $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac = db_query("insert into db_acountkey values($acount,1014662,'$this->q182_sequencial','A')");
            if (isset($GLOBALS["HTTP_POST_VARS"]["q182_sequencial"]) || $this->q182_sequencial != "")
-             $resac = db_query("insert into db_acount values($acount,1011010,1014662,'".AddSlashes(pg_result($resaco,$conresaco,'q182_sequencial'))."','$this->q182_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+             $resac = db_query("insert into db_acount values($acount,1011010,1014662,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q182_sequencial'))."','$this->q182_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["q182_id_usuario"]) || $this->q182_id_usuario != "")
-             $resac = db_query("insert into db_acount values($acount,1011010,1014663,'".AddSlashes(pg_result($resaco,$conresaco,'q182_id_usuario'))."','$this->q182_id_usuario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+             $resac = db_query("insert into db_acount values($acount,1011010,1014663,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q182_id_usuario'))."','$this->q182_id_usuario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["q182_nomearquivo"]) || $this->q182_nomearquivo != "")
-             $resac = db_query("insert into db_acount values($acount,1011010,1014664,'".AddSlashes(pg_result($resaco,$conresaco,'q182_nomearquivo'))."','$this->q182_nomearquivo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+             $resac = db_query("insert into db_acount values($acount,1011010,1014664,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q182_nomearquivo'))."','$this->q182_nomearquivo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["q182_id_storage"]) || $this->q182_id_storage != "")
-             $resac = db_query("insert into db_acount values($acount,1011010,1014665,'".AddSlashes(pg_result($resaco,$conresaco,'q182_id_storage'))."','$this->q182_id_storage',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+             $resac = db_query("insert into db_acount values($acount,1011010,1014665,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q182_id_storage'))."','$this->q182_id_storage',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["q182_arquivosimplesimportacao"]) || $this->q182_arquivosimplesimportacao != "")
-             $resac = db_query("insert into db_acount values($acount,1011010,1014666,'".AddSlashes(pg_result($resaco,$conresaco,'q182_arquivosimplesimportacao'))."','$this->q182_arquivosimplesimportacao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+             $resac = db_query("insert into db_acount values($acount,1011010,1014666,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q182_arquivosimplesimportacao'))."','$this->q182_arquivosimplesimportacao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          }
        }
      }
@@ -339,14 +339,14 @@ class cl_arquivosimplesimportacaoretorno
          for ($iresaco = 0; $iresaco < $this->numrows; $iresaco++) {
 
            $resac  = db_query("select nextval('db_acount_id_acount_seq') as acount");
-           $acount = pg_result($resac,0,0);
+           $acount = pg_fetch_result($resac,0,0);
            $resac  = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac  = db_query("insert into db_acountkey values($acount,1014662,'$q182_sequencial','E')");
-           $resac  = db_query("insert into db_acount values($acount,1011010,1014662,'','".AddSlashes(pg_result($resaco,$iresaco,'q182_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           $resac  = db_query("insert into db_acount values($acount,1011010,1014663,'','".AddSlashes(pg_result($resaco,$iresaco,'q182_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           $resac  = db_query("insert into db_acount values($acount,1011010,1014664,'','".AddSlashes(pg_result($resaco,$iresaco,'q182_nomearquivo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           $resac  = db_query("insert into db_acount values($acount,1011010,1014665,'','".AddSlashes(pg_result($resaco,$iresaco,'q182_id_storage'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           $resac  = db_query("insert into db_acount values($acount,1011010,1014666,'','".AddSlashes(pg_result($resaco,$iresaco,'q182_arquivosimplesimportacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac  = db_query("insert into db_acount values($acount,1011010,1014662,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q182_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac  = db_query("insert into db_acount values($acount,1011010,1014663,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q182_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac  = db_query("insert into db_acount values($acount,1011010,1014664,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q182_nomearquivo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac  = db_query("insert into db_acount values($acount,1011010,1014665,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q182_id_storage'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac  = db_query("insert into db_acount values($acount,1011010,1014666,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q182_arquivosimplesimportacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          }
        }
      }

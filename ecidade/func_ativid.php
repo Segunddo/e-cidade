@@ -130,7 +130,7 @@ $clrotulo->label('rh70_estrutural');
       <?
 
       $chave_q03_descr = addslashes($chave_q03_descr);
-      $repassa = array("tipo_pesquisa"=>@$tipo_pesquisa);
+      $repassa = ["tipo_pesquisa"=>@$tipo_pesquisa];
 
       if( isset($tipo_pesquisa) && $tipo_pesquisa == 'cnpj'){
 

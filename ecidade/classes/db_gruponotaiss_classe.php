@@ -29,34 +29,34 @@
 //CLASSE DA ENTIDADE gruponotaiss
 class cl_gruponotaiss { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $q139_sequencial = 0; 
-   var $q139_descricao = null; 
+   public $q139_sequencial = 0; 
+   public $q139_descricao = null; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  q139_sequencial = int8 = Código 
                  q139_descricao = text = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_gruponotaiss() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("gruponotaiss"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -65,7 +65,7 @@ class cl_gruponotaiss {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->q139_sequencial = ($this->q139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q139_sequencial"]:$this->q139_sequencial);
        $this->q139_descricao = ($this->q139_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["q139_descricao"]:$this->q139_descricao);
@@ -74,7 +74,7 @@ class cl_gruponotaiss {
      }
    }
    // funcao para inclusao
-   function incluir ($q139_sequencial){ 
+   public function incluir ($q139_sequencial){ 
       $this->atualizacampos();
      if($this->q139_descricao == null ){ 
        $this->erro_sql = " Campo Descrição nao Informado.";
@@ -95,10 +95,10 @@ class cl_gruponotaiss {
          $this->erro_status = "0";
          return false; 
        }
-       $this->q139_sequencial = pg_result($result,0,0); 
+       $this->q139_sequencial = pg_fetch_result($result,0,0); 
      }else{
        $result = db_query("select last_value from gruponotaiss_q139_sequencial_seq");
-       if(($result != false) && (pg_result($result,0,0) < $q139_sequencial)){
+       if(($result != false) && (pg_fetch_result($result,0,0) < $q139_sequencial)){
          $this->erro_sql = " Campo q139_sequencial maior que último número da sequencia.";
          $this->erro_banco = "Sequencia menor que este número.";
          $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -157,17 +157,17 @@ class cl_gruponotaiss {
        if(($resaco!=false)||($this->numrows!=0)){
 
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,19909,'$this->q139_sequencial','I')");
-         $resac = db_query("insert into db_acount values($acount,3566,19909,'','".AddSlashes(pg_result($resaco,0,'q139_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3566,19910,'','".AddSlashes(pg_result($resaco,0,'q139_descricao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3566,19909,'','".AddSlashes(pg_fetch_result($resaco,0,'q139_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3566,19910,'','".AddSlashes(pg_fetch_result($resaco,0,'q139_descricao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($q139_sequencial=null) { 
+   public function alterar ($q139_sequencial=null) { 
       $this->atualizacampos();
      $sql = " update gruponotaiss set ";
      $virgula = "";
@@ -211,13 +211,13 @@ class cl_gruponotaiss {
          for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
 
            $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-           $acount = pg_result($resac,0,0);
+           $acount = pg_fetch_result($resac,0,0);
            $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac = db_query("insert into db_acountkey values($acount,19909,'$this->q139_sequencial','A')");
            if(isset($GLOBALS["HTTP_POST_VARS"]["q139_sequencial"]) || $this->q139_sequencial != "")
-             $resac = db_query("insert into db_acount values($acount,3566,19909,'".AddSlashes(pg_result($resaco,$conresaco,'q139_sequencial'))."','$this->q139_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+             $resac = db_query("insert into db_acount values($acount,3566,19909,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q139_sequencial'))."','$this->q139_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if(isset($GLOBALS["HTTP_POST_VARS"]["q139_descricao"]) || $this->q139_descricao != "")
-             $resac = db_query("insert into db_acount values($acount,3566,19910,'".AddSlashes(pg_result($resaco,$conresaco,'q139_descricao'))."','$this->q139_descricao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+             $resac = db_query("insert into db_acount values($acount,3566,19910,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q139_descricao'))."','$this->q139_descricao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          }
        }
      }
@@ -254,7 +254,7 @@ class cl_gruponotaiss {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($q139_sequencial=null,$dbwhere=null) { 
+   public function excluir ($q139_sequencial=null,$dbwhere=null) { 
 
      $lSessaoDesativarAccount = db_getsession("DB_desativar_account", false);
      if (!isset($lSessaoDesativarAccount) || (isset($lSessaoDesativarAccount)
@@ -271,11 +271,11 @@ class cl_gruponotaiss {
          for ($iresaco = 0; $iresaco < $this->numrows; $iresaco++) {
 
            $resac  = db_query("select nextval('db_acount_id_acount_seq') as acount");
-           $acount = pg_result($resac,0,0);
+           $acount = pg_fetch_result($resac,0,0);
            $resac  = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac  = db_query("insert into db_acountkey values($acount,19909,'$q139_sequencial','E')");
-           $resac  = db_query("insert into db_acount values($acount,3566,19909,'','".AddSlashes(pg_result($resaco,$iresaco,'q139_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           $resac  = db_query("insert into db_acount values($acount,3566,19910,'','".AddSlashes(pg_result($resaco,$iresaco,'q139_descricao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac  = db_query("insert into db_acount values($acount,3566,19909,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q139_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac  = db_query("insert into db_acount values($acount,3566,19910,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q139_descricao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          }
        }
      }
@@ -325,7 +325,7 @@ class cl_gruponotaiss {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -336,7 +336,7 @@ class cl_gruponotaiss {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:gruponotaiss";
@@ -348,10 +348,10 @@ class cl_gruponotaiss {
      return $result;
    }
    // funcao do sql 
-   function sql_query ( $q139_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $q139_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -372,7 +372,7 @@ class cl_gruponotaiss {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,10 +382,10 @@ class cl_gruponotaiss {
      return $sql;
   }
    // funcao do sql 
-   function sql_query_file ( $q139_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $q139_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_gruponotaiss {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -58,7 +58,7 @@ if(isset($incluir) or isset($alterar)){
 		    $msgerro = $clisstipoalvaradepto->erro_msg;
 	}	
 	
-	$depto = split("#",$chaves); 
+	$depto = preg_split("#\\##m",$chaves); 
   for($w=0;$w<count($depto);$w++){
     if($erro==false){
     	

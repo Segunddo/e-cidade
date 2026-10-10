@@ -29,26 +29,26 @@
 //CLASSE DA ENTIDADE reciboconcarpeculiar
 class cl_reciboconcarpeculiar { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $k130_sequencial = 0; 
-   var $k130_numpre = 0; 
-   var $k130_numpar = 0; 
-   var $k130_receit = 0; 
-   var $k130_concarpeculiar = null; 
+   public $k130_sequencial = 0; 
+   public $k130_numpre = 0; 
+   public $k130_numpar = 0; 
+   public $k130_receit = 0; 
+   public $k130_concarpeculiar = null; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  k130_sequencial = int4 = Código Sequencial 
                  k130_numpre = int4 = Numpre 
                  k130_numpar = int4 = Numpar 
@@ -56,13 +56,13 @@ class cl_reciboconcarpeculiar {
                  k130_concarpeculiar = varchar(100) = C. Peculiar/C . Aplicação 
                  ";
    //funcao construtor da classe 
-   function cl_reciboconcarpeculiar() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("reciboconcarpeculiar"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -71,7 +71,7 @@ class cl_reciboconcarpeculiar {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->k130_sequencial = ($this->k130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k130_sequencial"]:$this->k130_sequencial);
        $this->k130_numpre = ($this->k130_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k130_numpre"]:$this->k130_numpre);
@@ -83,7 +83,7 @@ class cl_reciboconcarpeculiar {
      }
    }
    // funcao para inclusao
-   function incluir ($k130_sequencial){ 
+   public function incluir ($k130_sequencial){ 
       $this->atualizacampos();
      if($this->k130_numpre == null ){ 
        $this->erro_sql = " Campo Numpre nao Informado.";
@@ -131,10 +131,10 @@ class cl_reciboconcarpeculiar {
          $this->erro_status = "0";
          return false; 
        }
-       $this->k130_sequencial = pg_result($result,0,0); 
+       $this->k130_sequencial = pg_fetch_result($result,0,0); 
      }else{
        $result = db_query("select last_value from reciboconcarpeculiar_k130_sequencial_seq");
-       if(($result != false) && (pg_result($result,0,0) < $k130_sequencial)){
+       if(($result != false) && (pg_fetch_result($result,0,0) < $k130_sequencial)){
          $this->erro_sql = " Campo k130_sequencial maior que último número da sequencia.";
          $this->erro_banco = "Sequencia menor que este número.";
          $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -194,19 +194,19 @@ class cl_reciboconcarpeculiar {
      $resaco = $this->sql_record($this->sql_query_file($this->k130_sequencial));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,18181,'$this->k130_sequencial','I')");
-       $resac = db_query("insert into db_acount values($acount,3212,18181,'','".AddSlashes(pg_result($resaco,0,'k130_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3212,18182,'','".AddSlashes(pg_result($resaco,0,'k130_numpre'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3212,18183,'','".AddSlashes(pg_result($resaco,0,'k130_numpar'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3212,18184,'','".AddSlashes(pg_result($resaco,0,'k130_receit'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3212,18185,'','".AddSlashes(pg_result($resaco,0,'k130_concarpeculiar'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3212,18181,'','".AddSlashes(pg_fetch_result($resaco,0,'k130_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3212,18182,'','".AddSlashes(pg_fetch_result($resaco,0,'k130_numpre'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3212,18183,'','".AddSlashes(pg_fetch_result($resaco,0,'k130_numpar'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3212,18184,'','".AddSlashes(pg_fetch_result($resaco,0,'k130_receit'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3212,18185,'','".AddSlashes(pg_fetch_result($resaco,0,'k130_concarpeculiar'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($k130_sequencial=null) { 
+   public function alterar ($k130_sequencial=null) { 
       $this->atualizacampos();
      $sql = " update reciboconcarpeculiar set ";
      $virgula = "";
@@ -283,19 +283,19 @@ class cl_reciboconcarpeculiar {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,18181,'$this->k130_sequencial','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["k130_sequencial"]) || $this->k130_sequencial != "")
-           $resac = db_query("insert into db_acount values($acount,3212,18181,'".AddSlashes(pg_result($resaco,$conresaco,'k130_sequencial'))."','$this->k130_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3212,18181,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'k130_sequencial'))."','$this->k130_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["k130_numpre"]) || $this->k130_numpre != "")
-           $resac = db_query("insert into db_acount values($acount,3212,18182,'".AddSlashes(pg_result($resaco,$conresaco,'k130_numpre'))."','$this->k130_numpre',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3212,18182,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'k130_numpre'))."','$this->k130_numpre',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["k130_numpar"]) || $this->k130_numpar != "")
-           $resac = db_query("insert into db_acount values($acount,3212,18183,'".AddSlashes(pg_result($resaco,$conresaco,'k130_numpar'))."','$this->k130_numpar',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3212,18183,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'k130_numpar'))."','$this->k130_numpar',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["k130_receit"]) || $this->k130_receit != "")
-           $resac = db_query("insert into db_acount values($acount,3212,18184,'".AddSlashes(pg_result($resaco,$conresaco,'k130_receit'))."','$this->k130_receit',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3212,18184,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'k130_receit'))."','$this->k130_receit',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["k130_concarpeculiar"]) || $this->k130_concarpeculiar != "")
-           $resac = db_query("insert into db_acount values($acount,3212,18185,'".AddSlashes(pg_result($resaco,$conresaco,'k130_concarpeculiar'))."','$this->k130_concarpeculiar',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3212,18185,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'k130_concarpeculiar'))."','$this->k130_concarpeculiar',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -331,7 +331,7 @@ class cl_reciboconcarpeculiar {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($k130_sequencial=null,$dbwhere=null) { 
+   public function excluir ($k130_sequencial=null,$dbwhere=null) { 
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($k130_sequencial));
      }else{ 
@@ -340,14 +340,14 @@ class cl_reciboconcarpeculiar {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,18181,'$k130_sequencial','E')");
-         $resac = db_query("insert into db_acount values($acount,3212,18181,'','".AddSlashes(pg_result($resaco,$iresaco,'k130_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3212,18182,'','".AddSlashes(pg_result($resaco,$iresaco,'k130_numpre'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3212,18183,'','".AddSlashes(pg_result($resaco,$iresaco,'k130_numpar'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3212,18184,'','".AddSlashes(pg_result($resaco,$iresaco,'k130_receit'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3212,18185,'','".AddSlashes(pg_result($resaco,$iresaco,'k130_concarpeculiar'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3212,18181,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'k130_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3212,18182,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'k130_numpre'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3212,18183,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'k130_numpar'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3212,18184,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'k130_receit'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3212,18185,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'k130_concarpeculiar'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from reciboconcarpeculiar
@@ -396,7 +396,7 @@ class cl_reciboconcarpeculiar {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -407,7 +407,7 @@ class cl_reciboconcarpeculiar {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:reciboconcarpeculiar";
@@ -419,10 +419,10 @@ class cl_reciboconcarpeculiar {
      return $result;
    }
    // funcao do sql 
-   function sql_query ( $k130_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $k130_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_reciboconcarpeculiar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -454,10 +454,10 @@ class cl_reciboconcarpeculiar {
      return $sql;
   }
    // funcao do sql 
-   function sql_query_file ( $k130_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $k130_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -478,7 +478,7 @@ class cl_reciboconcarpeculiar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

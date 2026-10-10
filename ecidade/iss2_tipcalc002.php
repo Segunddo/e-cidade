@@ -55,7 +55,7 @@ $pdf->SetTextColor(0,0,0);
 $pdf->SetFillColor(24,135,18);
 
 $result = db_query($sql);
-$num = pg_numrows($result);
+$num = pg_num_rows($result);
 $pdf->SetFont('Courier','B',4);
 $linha = 60;
 $TotPag = 0;
@@ -105,28 +105,28 @@ for ($i=0; $i<$num; $i++) {
     $pdf->SetFont('Courier','B',7);
     $pdf->SetTextColor(0,0,0);
   }
-  $pdf->Cell(04,4,pg_result($result,$i,"q81_codigo"),"0",0,"C",0);
-  $pdf->Cell(40,4,pg_result($result,$i,"q81_abrev"),"0",0,"L",0);
-  $pdf->Cell(10,4,(int)(pg_result($result,$i,"q81_cadcalc")),"0",0,"C",0);
-  $pdf->Cell(06,4,db_formatar(pg_result($result,$i,"q81_integr"),"b"),"0",0,"C",0);
-  $pdf->Cell(04,4,pg_result($result,$i,"q81_tippro"),"0",0,"C",0);
-  $pdf->Cell(06,4,pg_result($result,$i,"q85_codven"),"0",0,"C",0);
-  $pdf->Cell(06,4,db_formatar(pg_result($result,$i,"q81_uqtab"),"b"),"0",0,"C",0);
-  $pdf->Cell(06,4,db_formatar(pg_result($result,$i,"q81_uqcad"),"b"),"0",0,"C",0);
-  $pdf->Cell(05,4,pg_result($result,$i,"q81_gera"),"0",0,"C",0);
-  $pdf->Cell(06,4,pg_result($result,$i,"q81_recexe"),"0",0,"R",0);
-  $pdf->Cell(20,4,number_format(pg_result($result,$i,"q81_qiexe"  ),2,",","."),"0",0,"R",0);
-  $pdf->Cell(26,4,number_format(pg_result($result,$i,"q81_valexe"),2,",","."),"0",0,"R",0);
-  $pdf->Cell(06,4,pg_result($result,$i,"q81_recpro"),"0",0,"R",0);
-  $pdf->Cell(20,4,number_format(pg_result($result,$i,"q81_qipro"),2,",","."),"0",0,"R",0);
-  $pdf->Cell(26,4,number_format(pg_result($result,$i,"q81_valpro"),2,",","."),"0",1,"R",0);
+  $pdf->Cell(04,4,pg_fetch_result($result,$i,"q81_codigo"),"0",0,"C",0);
+  $pdf->Cell(40,4,pg_fetch_result($result,$i,"q81_abrev"),"0",0,"L",0);
+  $pdf->Cell(10,4,(int)(pg_fetch_result($result,$i,"q81_cadcalc")),"0",0,"C",0);
+  $pdf->Cell(06,4,db_formatar(pg_fetch_result($result,$i,"q81_integr"),"b"),"0",0,"C",0);
+  $pdf->Cell(04,4,pg_fetch_result($result,$i,"q81_tippro"),"0",0,"C",0);
+  $pdf->Cell(06,4,pg_fetch_result($result,$i,"q85_codven"),"0",0,"C",0);
+  $pdf->Cell(06,4,db_formatar(pg_fetch_result($result,$i,"q81_uqtab"),"b"),"0",0,"C",0);
+  $pdf->Cell(06,4,db_formatar(pg_fetch_result($result,$i,"q81_uqcad"),"b"),"0",0,"C",0);
+  $pdf->Cell(05,4,pg_fetch_result($result,$i,"q81_gera"),"0",0,"C",0);
+  $pdf->Cell(06,4,pg_fetch_result($result,$i,"q81_recexe"),"0",0,"R",0);
+  $pdf->Cell(20,4,number_format(pg_fetch_result($result,$i,"q81_qiexe"  ),2,",","."),"0",0,"R",0);
+  $pdf->Cell(26,4,number_format(pg_fetch_result($result,$i,"q81_valexe"),2,",","."),"0",0,"R",0);
+  $pdf->Cell(06,4,pg_fetch_result($result,$i,"q81_recpro"),"0",0,"R",0);
+  $pdf->Cell(20,4,number_format(pg_fetch_result($result,$i,"q81_qipro"),2,",","."),"0",0,"R",0);
+  $pdf->Cell(26,4,number_format(pg_fetch_result($result,$i,"q81_valpro"),2,",","."),"0",1,"R",0);
   
   $pdf->Cell(04,4,"","B",0,"C",0);
-  $pdf->Cell(40,4,pg_result($result,$i,"q81_descr"),"B",0,"C",0);
+  $pdf->Cell(40,4,pg_fetch_result($result,$i,"q81_descr"),"B",0,"C",0);
   $pdf->Cell(49,4,"","B",0,"C",0);
-  $pdf->Cell(20,4,number_format(pg_result($result,$i,"q81_qfexe"),2,",","."),"B",0,"R",0);
+  $pdf->Cell(20,4,number_format(pg_fetch_result($result,$i,"q81_qfexe"),2,",","."),"B",0,"R",0);
   $pdf->Cell(32,4,"","B",0,"C",0);
-  $pdf->Cell(20,4,number_format(pg_result($result,$i,"q81_qfpro"),2,",","."),"B",0,"R",0);
+  $pdf->Cell(20,4,number_format(pg_fetch_result($result,$i,"q81_qfpro"),2,",","."),"B",0,"R",0);
   $pdf->Cell(26,4,"","B",1,"R",0);
   $TotPag += 1;
 }

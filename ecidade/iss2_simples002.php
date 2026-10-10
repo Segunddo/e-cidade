@@ -149,7 +149,7 @@ for ($x=0; $x < $linhas; $x++) {
                 inner join arrecad    on arrenumcgm.k00_numpre = arrecad.k00_numpre
                 where z01_cgccpf = '$z01_cgccpf'";
     $result_daeb = db_query($conn2,$sql_daeb) or die($sql_daeb);
-    if (pg_numrows($result_daeb) > 0 and $tipo == 1) {
+    if (pg_num_rows($result_daeb) > 0 and $tipo == 1) {
       $vaitxt=false;
     }
 

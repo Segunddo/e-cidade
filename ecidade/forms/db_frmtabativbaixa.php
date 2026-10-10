@@ -148,7 +148,7 @@ function js_verifica(){
     </td>
     <td valign="top">
 <?
-$xe = array("false"=>"NORMAL","true"=>"OFÍCIO");
+$xe = ["false"=>"NORMAL","true"=>"OFÍCIO"];
 db_select('q11_oficio',$xe,true,$db_opcao);
 ?>
 
@@ -205,7 +205,7 @@ db_inputdata('q07_databx',@$q07_databx_dia,@$q07_databx_mes,@$q07_databx_ano,tru
        echo "<script>";
 ################## quando for setado a propriedade chaves, sera gerado um input contendo todas as chaves#################
         if(isset($chaves)){
-           $matriz01=split(",",$chaves);
+           $matriz01=preg_split("#,#m",$chaves);
            echo "
           function js_gera_chaves(){
             tabela=atividades.document.getElementById('tabela_seleciona');\n

@@ -29,35 +29,35 @@
 //CLASSE DA ENTIDADE recibounicageracao
 class cl_recibounicageracao {
    // cria variaveis de erro
-   var $rotulo     = null;
-   var $query_sql  = null;
-   var $numrows    = 0;
-   var $numrows_incluir = 0;
-   var $numrows_alterar = 0;
-   var $numrows_excluir = 0;
-   var $erro_status= null;
-   var $erro_sql   = null;
-   var $erro_banco = null;
-   var $erro_msg   = null;
-   var $erro_campo = null;
-   var $pagina_retorno = null;
+   public $rotulo     = null;
+   public $query_sql  = null;
+   public $numrows    = 0;
+   public $numrows_incluir = 0;
+   public $numrows_alterar = 0;
+   public $numrows_excluir = 0;
+   public $erro_status= null;
+   public $erro_sql   = null;
+   public $erro_banco = null;
+   public $erro_msg   = null;
+   public $erro_campo = null;
+   public $pagina_retorno = null;
    // cria variaveis do arquivo
-   var $ar40_sequencial = 0;
-   var $ar40_db_usuarios = 0;
-   var $ar40_dtoperacao_dia = null;
-   var $ar40_dtoperacao_mes = null;
-   var $ar40_dtoperacao_ano = null;
-   var $ar40_dtoperacao = null;
-   var $ar40_dtvencimento_dia = null;
-   var $ar40_dtvencimento_mes = null;
-   var $ar40_dtvencimento_ano = null;
-   var $ar40_dtvencimento = null;
-   var $ar40_percentualdesconto = 0;
-   var $ar40_tipogeracao = null;
-   var $ar40_ativo = 'f';
-   var $ar40_observacao = null;
+   public $ar40_sequencial = 0;
+   public $ar40_db_usuarios = 0;
+   public $ar40_dtoperacao_dia = null;
+   public $ar40_dtoperacao_mes = null;
+   public $ar40_dtoperacao_ano = null;
+   public $ar40_dtoperacao = null;
+   public $ar40_dtvencimento_dia = null;
+   public $ar40_dtvencimento_mes = null;
+   public $ar40_dtvencimento_ano = null;
+   public $ar40_dtvencimento = null;
+   public $ar40_percentualdesconto = 0;
+   public $ar40_tipogeracao = null;
+   public $ar40_ativo = 'f';
+   public $ar40_observacao = null;
    // cria propriedade com as variaveis do arquivo
-   var $campos = "
+   public $campos = "
                  ar40_sequencial = int4 = Sequencial
                  ar40_db_usuarios = int4 = Usuario
                  ar40_dtoperacao = date = Data de Operação
@@ -68,13 +68,13 @@ class cl_recibounicageracao {
                  ar40_observacao = text = Observação
                  ";
    //funcao construtor da classe
-   function cl_recibounicageracao() {
+   public function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("recibounicageracao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro
-   function erro($mostra,$retorna) {
+   public function erro($mostra,$retorna) {
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -83,7 +83,7 @@ class cl_recibounicageracao {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao = false) {
+   public function atualizacampos($exclusao = false) {
      if($exclusao==false){
        $this->ar40_sequencial = ($this->ar40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_sequencial"]:$this->ar40_sequencial);
        $this->ar40_db_usuarios = ($this->ar40_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ar40_db_usuarios"]:$this->ar40_db_usuarios);
@@ -112,7 +112,7 @@ class cl_recibounicageracao {
      }
    }
    // funcao para inclusao
-   function incluir ($ar40_sequencial){
+   public function incluir ($ar40_sequencial){
       $this->atualizacampos();
      if($this->ar40_db_usuarios == null ){
        $this->erro_sql = " Campo Usuario nao Informado.";
@@ -178,10 +178,10 @@ class cl_recibounicageracao {
          $this->erro_status = "0";
          return false;
        }
-       $this->ar40_sequencial = pg_result($result,0,0);
+       $this->ar40_sequencial = pg_fetch_result($result,0,0);
      }else{
        $result = db_query("select last_value from recibounicageracao_ar40_sequencial_seq");
-       if(($result != false) && (pg_result($result,0,0) < $ar40_sequencial)){
+       if(($result != false) && (pg_fetch_result($result,0,0) < $ar40_sequencial)){
          $this->erro_sql = " Campo ar40_sequencial maior que último número da sequencia.";
          $this->erro_banco = "Sequencia menor que este número.";
          $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -247,22 +247,22 @@ class cl_recibounicageracao {
      $resaco = $this->sql_record($this->sql_query_file($this->ar40_sequencial));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,18230,'$this->ar40_sequencial','I')");
-       $resac = db_query("insert into db_acount values($acount,3266,18230,'','".AddSlashes(pg_result($resaco,0,'ar40_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3266,18473,'','".AddSlashes(pg_result($resaco,0,'ar40_db_usuarios'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3266,18474,'','".AddSlashes(pg_result($resaco,0,'ar40_dtoperacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3266,18480,'','".AddSlashes(pg_result($resaco,0,'ar40_dtvencimento'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3266,18481,'','".AddSlashes(pg_result($resaco,0,'ar40_percentualdesconto'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3266,18475,'','".AddSlashes(pg_result($resaco,0,'ar40_tipogeracao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3266,18476,'','".AddSlashes(pg_result($resaco,0,'ar40_ativo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3266,18477,'','".AddSlashes(pg_result($resaco,0,'ar40_observacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3266,18230,'','".AddSlashes(pg_fetch_result($resaco,0,'ar40_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3266,18473,'','".AddSlashes(pg_fetch_result($resaco,0,'ar40_db_usuarios'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3266,18474,'','".AddSlashes(pg_fetch_result($resaco,0,'ar40_dtoperacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3266,18480,'','".AddSlashes(pg_fetch_result($resaco,0,'ar40_dtvencimento'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3266,18481,'','".AddSlashes(pg_fetch_result($resaco,0,'ar40_percentualdesconto'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3266,18475,'','".AddSlashes(pg_fetch_result($resaco,0,'ar40_tipogeracao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3266,18476,'','".AddSlashes(pg_fetch_result($resaco,0,'ar40_ativo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3266,18477,'','".AddSlashes(pg_fetch_result($resaco,0,'ar40_observacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    }
    // funcao para alteracao
-   function alterar ($ar40_sequencial=null) {
+   public function alterar ($ar40_sequencial=null) {
       $this->atualizacampos();
      $sql = " update recibounicageracao set ";
      $virgula = "";
@@ -397,25 +397,25 @@ class cl_recibounicageracao {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,18230,'$this->ar40_sequencial','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["ar40_sequencial"]) || $this->ar40_sequencial != "")
-           $resac = db_query("insert into db_acount values($acount,3266,18230,'".AddSlashes(pg_result($resaco,$conresaco,'ar40_sequencial'))."','$this->ar40_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3266,18230,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'ar40_sequencial'))."','$this->ar40_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["ar40_db_usuarios"]) || $this->ar40_db_usuarios != "")
-           $resac = db_query("insert into db_acount values($acount,3266,18473,'".AddSlashes(pg_result($resaco,$conresaco,'ar40_db_usuarios'))."','$this->ar40_db_usuarios',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3266,18473,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'ar40_db_usuarios'))."','$this->ar40_db_usuarios',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["ar40_dtoperacao"]) || $this->ar40_dtoperacao != "")
-           $resac = db_query("insert into db_acount values($acount,3266,18474,'".AddSlashes(pg_result($resaco,$conresaco,'ar40_dtoperacao'))."','$this->ar40_dtoperacao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3266,18474,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'ar40_dtoperacao'))."','$this->ar40_dtoperacao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["ar40_dtvencimento"]) || $this->ar40_dtvencimento != "")
-           $resac = db_query("insert into db_acount values($acount,3266,18480,'".AddSlashes(pg_result($resaco,$conresaco,'ar40_dtvencimento'))."','$this->ar40_dtvencimento',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3266,18480,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'ar40_dtvencimento'))."','$this->ar40_dtvencimento',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["ar40_percentualdesconto"]) || $this->ar40_percentualdesconto != "")
-           $resac = db_query("insert into db_acount values($acount,3266,18481,'".AddSlashes(pg_result($resaco,$conresaco,'ar40_percentualdesconto'))."','$this->ar40_percentualdesconto',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3266,18481,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'ar40_percentualdesconto'))."','$this->ar40_percentualdesconto',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["ar40_tipogeracao"]) || $this->ar40_tipogeracao != "")
-           $resac = db_query("insert into db_acount values($acount,3266,18475,'".AddSlashes(pg_result($resaco,$conresaco,'ar40_tipogeracao'))."','$this->ar40_tipogeracao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3266,18475,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'ar40_tipogeracao'))."','$this->ar40_tipogeracao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["ar40_ativo"]) || $this->ar40_ativo != "")
-           $resac = db_query("insert into db_acount values($acount,3266,18476,'".AddSlashes(pg_result($resaco,$conresaco,'ar40_ativo'))."','$this->ar40_ativo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3266,18476,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'ar40_ativo'))."','$this->ar40_ativo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["ar40_observacao"]) || $this->ar40_observacao != "")
-           $resac = db_query("insert into db_acount values($acount,3266,18477,'".AddSlashes(pg_result($resaco,$conresaco,'ar40_observacao'))."','$this->ar40_observacao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3266,18477,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'ar40_observacao'))."','$this->ar40_observacao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -451,7 +451,7 @@ class cl_recibounicageracao {
      }
    }
    // funcao para exclusao
-   function excluir ($ar40_sequencial=null,$dbwhere=null) {
+   public function excluir ($ar40_sequencial=null,$dbwhere=null) {
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($ar40_sequencial));
      }else{
@@ -460,17 +460,17 @@ class cl_recibounicageracao {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,18230,'$ar40_sequencial','E')");
-         $resac = db_query("insert into db_acount values($acount,3266,18230,'','".AddSlashes(pg_result($resaco,$iresaco,'ar40_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3266,18473,'','".AddSlashes(pg_result($resaco,$iresaco,'ar40_db_usuarios'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3266,18474,'','".AddSlashes(pg_result($resaco,$iresaco,'ar40_dtoperacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3266,18480,'','".AddSlashes(pg_result($resaco,$iresaco,'ar40_dtvencimento'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3266,18481,'','".AddSlashes(pg_result($resaco,$iresaco,'ar40_percentualdesconto'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3266,18475,'','".AddSlashes(pg_result($resaco,$iresaco,'ar40_tipogeracao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3266,18476,'','".AddSlashes(pg_result($resaco,$iresaco,'ar40_ativo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3266,18477,'','".AddSlashes(pg_result($resaco,$iresaco,'ar40_observacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3266,18230,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'ar40_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3266,18473,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'ar40_db_usuarios'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3266,18474,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'ar40_dtoperacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3266,18480,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'ar40_dtvencimento'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3266,18481,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'ar40_percentualdesconto'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3266,18475,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'ar40_tipogeracao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3266,18476,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'ar40_ativo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3266,18477,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'ar40_observacao'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from recibounicageracao
@@ -519,7 +519,7 @@ class cl_recibounicageracao {
      }
    }
    // funcao do recordset
-   function sql_record($sql) {
+   public function sql_record($sql) {
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -530,7 +530,7 @@ class cl_recibounicageracao {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:recibounicageracao";
@@ -542,10 +542,10 @@ class cl_recibounicageracao {
      return $result;
    }
    // funcao do sql
-   function sql_query ( $ar40_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
+   public function sql_query ( $ar40_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -567,7 +567,7 @@ class cl_recibounicageracao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -577,10 +577,10 @@ class cl_recibounicageracao {
      return $sql;
   }
    // funcao do sql
-   function sql_query_file ( $ar40_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
+   public function sql_query_file ( $ar40_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -601,7 +601,7 @@ class cl_recibounicageracao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -618,7 +618,7 @@ class cl_recibounicageracao {
    * @param unknown_type $sChavePesquisa
    * @return string
    */
-   function sql_query_pesquisa($sTipoPesquisa, $sChavePesquisa,$lNumpres = false, $iCadTipoDebito = null, $bTaxaIptu= false){
+   public function sql_query_pesquisa($sTipoPesquisa, $sChavePesquisa,$lNumpres = false, $iCadTipoDebito = null, $bTaxaIptu= false){
 
      switch($sTipoPesquisa){
        case 'C':
@@ -675,7 +675,7 @@ class cl_recibounicageracao {
    * @param unknown_type $sChavePesquisa
    * @return string
    */
-   function sql_query_pesquisa_taxa($sTipoPesquisa, $iReceita){
+   public function sql_query_pesquisa_taxa($sTipoPesquisa, $iReceita){
 
      switch($sTipoPesquisa){
        case 'C':
@@ -704,7 +704,7 @@ class cl_recibounicageracao {
      return $sSqlPesquisa;
    }
 
-   function sql_query_debitosExercicios($sTipoPesquisa, $sChavePesquisa, $iCadTipoDebito, $lExercicios = true, $iExercicioPesquisa = 0, $bTaxaIptu = false) {
+   public function sql_query_debitosExercicios($sTipoPesquisa, $sChavePesquisa, $iCadTipoDebito, $lExercicios = true, $iExercicioPesquisa = 0, $bTaxaIptu = false) {
 
      $sSql = "select * from ( \n";
 
@@ -892,7 +892,7 @@ class cl_recibounicageracao {
     * @param  integer $iCodigo Codigo da geracao
     * @return string
     */
-  function sql_query_unica_geral($iCodigo){
+  public function sql_query_unica_geral($iCodigo){
 
     $sSql  = "select ar40_dtoperacao,                                                   ";
     $sSql .= "       ar40_dtvencimento,                                                 ";

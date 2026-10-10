@@ -29,34 +29,34 @@
 //CLASSE DA ENTIDADE forcaldesc
 class cl_forcaldesc { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $q87_codigo = 0; 
-   var $q87_descr = null; 
+   public $q87_codigo = 0; 
+   public $q87_descr = null; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  q87_codigo = int4 = codigo da forma de calculo 
                  q87_descr = varchar(80) = descricao da forma de calculo 
                  ";
    //funcao construtor da classe 
-   function cl_forcaldesc() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("forcaldesc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -65,7 +65,7 @@ class cl_forcaldesc {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->q87_codigo = ($this->q87_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q87_codigo"]:$this->q87_codigo);
        $this->q87_descr = ($this->q87_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q87_descr"]:$this->q87_descr);
@@ -74,7 +74,7 @@ class cl_forcaldesc {
      }
    }
    // funcao para inclusao
-   function incluir ($q87_codigo){ 
+   public function incluir ($q87_codigo){ 
       $this->atualizacampos();
      if($this->q87_descr == null ){ 
        $this->erro_sql = " Campo descricao da forma de calculo nao Informado.";
@@ -95,10 +95,10 @@ class cl_forcaldesc {
          $this->erro_status = "0";
          return false; 
        }
-       $this->q87_codigo = pg_result($result,0,0); 
+       $this->q87_codigo = pg_fetch_result($result,0,0); 
      }else{
        $result = db_query("select last_value from forcaldesc_q87_codigo_seq");
-       if(($result != false) && (pg_result($result,0,0) < $q87_codigo)){
+       if(($result != false) && (pg_fetch_result($result,0,0) < $q87_codigo)){
          $this->erro_sql = " Campo q87_codigo maior que último número da sequencia.";
          $this->erro_banco = "Sequencia menor que este número.";
          $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -152,16 +152,16 @@ class cl_forcaldesc {
      $resaco = $this->sql_record($this->sql_query_file($this->q87_codigo));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,257,'$this->q87_codigo','I')");
-       $resac = db_query("insert into db_acount values($acount,59,257,'','".AddSlashes(pg_result($resaco,0,'q87_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,59,258,'','".AddSlashes(pg_result($resaco,0,'q87_descr'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,59,257,'','".AddSlashes(pg_fetch_result($resaco,0,'q87_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,59,258,'','".AddSlashes(pg_fetch_result($resaco,0,'q87_descr'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($q87_codigo=null) { 
+   public function alterar ($q87_codigo=null) { 
       $this->atualizacampos();
      $sql = " update forcaldesc set ";
      $virgula = "";
@@ -199,13 +199,13 @@ class cl_forcaldesc {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,257,'$this->q87_codigo','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q87_codigo"]))
-           $resac = db_query("insert into db_acount values($acount,59,257,'".AddSlashes(pg_result($resaco,$conresaco,'q87_codigo'))."','$this->q87_codigo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,59,257,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q87_codigo'))."','$this->q87_codigo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q87_descr"]))
-           $resac = db_query("insert into db_acount values($acount,59,258,'".AddSlashes(pg_result($resaco,$conresaco,'q87_descr'))."','$this->q87_descr',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,59,258,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q87_descr'))."','$this->q87_descr',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -241,7 +241,7 @@ class cl_forcaldesc {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($q87_codigo=null,$dbwhere=null) { 
+   public function excluir ($q87_codigo=null,$dbwhere=null) { 
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($q87_codigo));
      }else{ 
@@ -250,11 +250,11 @@ class cl_forcaldesc {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,257,'$q87_codigo','E')");
-         $resac = db_query("insert into db_acount values($acount,59,257,'','".AddSlashes(pg_result($resaco,$iresaco,'q87_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,59,258,'','".AddSlashes(pg_result($resaco,$iresaco,'q87_descr'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,59,257,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q87_codigo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,59,258,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q87_descr'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from forcaldesc
@@ -303,7 +303,7 @@ class cl_forcaldesc {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -314,7 +314,7 @@ class cl_forcaldesc {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:forcaldesc";
@@ -325,10 +325,10 @@ class cl_forcaldesc {
       }
      return $result;
    }
-   function sql_query ( $q87_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $q87_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_forcaldesc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -358,10 +358,10 @@ class cl_forcaldesc {
      }
      return $sql;
   }
-   function sql_query_file ( $q87_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $q87_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_forcaldesc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

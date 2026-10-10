@@ -61,7 +61,7 @@ $head3 = " ";
 $result =  db_query("select q02_inscr,z01_nome,q85_descr,q03_descr  from issbase inner join isscalc on q02_inscr = q01_inscr inner join cadcalc on q01_cadcal = q85_codigo inner join tabativ on q07_inscr = q02_inscr inner join ativprinc on q88_inscr = q02_inscr and q07_seq = q88_seq left join tabativbaixa on q11_inscr = q02_inscr and q11_seq = q07_seq inner join ativid on q03_ativ = q07_ativ inner join cgm on z01_numcgm = q02_numcgm where q01_anousu = 2007 and q85_codigo in (2,3) and q11_inscr is null order by z01_nome");
 
 
-$xxnum = pg_numrows($result);
+$xxnum = pg_num_rows($result);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 }
@@ -76,7 +76,7 @@ $pdf->setfont('arial','b',8);
 $troca = 1;
 $alt = 4;
 
-for($x = 0; $x < pg_numrows($result);$x++)
+for($x = 0; $x < pg_num_rows($result);$x++)
 {
    db_fieldsmemory($result,$x);
    if ($pdf->gety() > $pdf->h - 30 || $troca != 0 )

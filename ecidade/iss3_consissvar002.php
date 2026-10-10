@@ -341,25 +341,25 @@ if(isset($varias_inscricoes) && $varias_inscricoes==true){
      <?
        if($tipo=="cgm"){
 	   if($z01_cgccpf!=""){
-             $clcriaabas->identifica = array("issvar"=>"$RLDBtxtissvar","issplanit"=>"$RLDBtxtissplanit");
-             $clcriaabas->src = array("issvar"=>"iss3_consissvar003.php?tipo=$tipo&valor=$valor$string","issplanit"=>"iss3_consissvar006.php?z01_cgccpf=$z01_cgccpf");
+             $clcriaabas->identifica = ["issvar"=>"$RLDBtxtissvar","issplanit"=>"$RLDBtxtissplanit"];
+             $clcriaabas->src = ["issvar"=>"iss3_consissvar003.php?tipo=$tipo&valor=$valor$string","issplanit"=>"iss3_consissvar006.php?z01_cgccpf=$z01_cgccpf"];
 	   }else{  
-             $clcriaabas->identifica = array("issvar"=>"$RLDBtxtissvar");
-             $clcriaabas->src = array("issvar"=>"iss3_consissvar003.php?tipo=$tipo&valor=$valor$string");
+             $clcriaabas->identifica = ["issvar"=>"$RLDBtxtissvar"];
+             $clcriaabas->src = ["issvar"=>"iss3_consissvar003.php?tipo=$tipo&valor=$valor$string"];
 	   }  
        }else if($tipo=="inscr"){
 	   if($z01_cgccpf!=""){
-             $clcriaabas->identifica = array("issvar"=>"$RLDBtxtissvar","issplan"=>"$RLDBtxtissplan","issplanit"=>"$RLDBtxtissplanit");
-             $clcriaabas->src = array("issvar"=>"iss3_consissvar003.php?tipo=$tipo&valor=$valor$string","issplan"=>"iss3_consissvar004.php?q02_inscr=$valor$string02","issplanit"=>"iss3_consissvar006.php?q02_inscr=$q02_inscr&z01_cgccpf=$z01_cgccpf");
+             $clcriaabas->identifica = ["issvar"=>"$RLDBtxtissvar","issplan"=>"$RLDBtxtissplan","issplanit"=>"$RLDBtxtissplanit"];
+             $clcriaabas->src = ["issvar"=>"iss3_consissvar003.php?tipo=$tipo&valor=$valor$string","issplan"=>"iss3_consissvar004.php?q02_inscr=$valor$string02","issplanit"=>"iss3_consissvar006.php?q02_inscr=$q02_inscr&z01_cgccpf=$z01_cgccpf"];
 	   }else{  
-             $clcriaabas->identifica = array("issvar"=>"$RLDBtxtissvar","issplan"=>"$RLDBtxtissplan");
-             $clcriaabas->src = array("issvar"=>"iss3_consissvar003.php?tipo=$tipo&valor=$valor$string","issplan"=>"iss3_consissvar004.php?q02_inscr=$valor$string02");
+             $clcriaabas->identifica = ["issvar"=>"$RLDBtxtissvar","issplan"=>"$RLDBtxtissplan"];
+             $clcriaabas->src = ["issvar"=>"iss3_consissvar003.php?tipo=$tipo&valor=$valor$string","issplan"=>"iss3_consissvar004.php?q02_inscr=$valor$string02"];
 	   }  
        }else{	 
-          $clcriaabas->identifica = array("issplanit"=>"$RLDBtxtissplanit");
-          $clcriaabas->src = array("issplanit"=>"iss3_consissvar006.php?z01_cgccpf=$z01_cgccpf");
+          $clcriaabas->identifica = ["issplanit"=>"$RLDBtxtissplanit"];
+          $clcriaabas->src = ["issplanit"=>"iss3_consissvar006.php?z01_cgccpf=$z01_cgccpf"];
        } 
-       $clcriaabas->sizecampo= array("issvar"=>"15");    
+       $clcriaabas->sizecampo= ["issvar"=>"15"];    
        $clcriaabas->iframe_width="740"; 
        $clcriaabas->iframe_height="300"; 
        $clcriaabas->abas_top=60;    

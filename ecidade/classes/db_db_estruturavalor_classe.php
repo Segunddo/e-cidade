@@ -30,28 +30,28 @@
 class cl_db_estruturavalor
 {
     // cria variaveis de erro
-    var $rotulo = null;
-    var $query_sql = null;
-    var $numrows = 0;
-    var $numrows_incluir = 0;
-    var $numrows_alterar = 0;
-    var $numrows_excluir = 0;
-    var $erro_status = null;
-    var $erro_sql = null;
-    var $erro_banco = null;
-    var $erro_msg = null;
-    var $erro_campo = null;
-    var $pagina_retorno = null;
+    public $rotulo = null;
+    public $query_sql = null;
+    public $numrows = 0;
+    public $numrows_incluir = 0;
+    public $numrows_alterar = 0;
+    public $numrows_excluir = 0;
+    public $erro_status = null;
+    public $erro_sql = null;
+    public $erro_banco = null;
+    public $erro_msg = null;
+    public $erro_campo = null;
+    public $pagina_retorno = null;
     // cria variaveis do arquivo
-    var $db121_sequencial = 0;
-    var $db121_db_estrutura = 0;
-    var $db121_estrutural = null;
-    var $db121_descricao = null;
-    var $db121_estruturavalorpai = 0;
-    var $db121_nivel = 0;
-    var $db121_tipoconta = 0;
+    public $db121_sequencial = 0;
+    public $db121_db_estrutura = 0;
+    public $db121_estrutural = null;
+    public $db121_descricao = null;
+    public $db121_estruturavalorpai = 0;
+    public $db121_nivel = 0;
+    public $db121_tipoconta = 0;
     // cria propriedade com as variaveis do arquivo
-    var $campos = "
+    public $campos = "
                  db121_sequencial = int4 = Código Sequencial
                  db121_db_estrutura = int4 = Código da Estrutura
                  db121_estrutural = varchar(255) = Estrutural
@@ -62,7 +62,7 @@ class cl_db_estruturavalor
                  ";
 
     //funcao construtor da classe
-    function __construct()
+    public function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("db_estruturavalor");
@@ -70,7 +70,7 @@ class cl_db_estruturavalor
     }
 
     //funcao erro
-    function erro($mostra, $retorna)
+    public function erro($mostra, $retorna)
     {
         if (($this->erro_status == "0") || ($mostra == true && $this->erro_status != null)) {
             echo "<script>alert(\"" . $this->erro_msg . "\");</script>";
@@ -81,7 +81,7 @@ class cl_db_estruturavalor
     }
 
     // funcao para atualizar campos
-    function atualizacampos($exclusao = false)
+    public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
             $this->db121_sequencial = ($this->db121_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db121_sequencial"] : $this->db121_sequencial);
@@ -97,7 +97,7 @@ class cl_db_estruturavalor
     }
 
     // funcao para inclusao
-    function incluir($db121_sequencial)
+    public function incluir($db121_sequencial)
     {
         $this->atualizacampos();
         if ($this->db121_db_estrutura == null) {
@@ -148,10 +148,10 @@ class cl_db_estruturavalor
                 $this->erro_status = "0";
                 return false;
             }
-            $this->db121_sequencial = pg_result($result, 0, 0);
+            $this->db121_sequencial = pg_fetch_result($result, 0, 0);
         } else {
             $result = db_query("select last_value from db_estruturavalor_db121_sequencial_seq");
-            if (($result != false) && (pg_result($result, 0, 0) < $db121_sequencial)) {
+            if (($result != false) && (pg_fetch_result($result, 0, 0) < $db121_sequencial)) {
                 $this->erro_sql = " Campo db121_sequencial maior que último número da sequencia.";
                 $this->erro_banco = "Sequencia menor que este número.";
                 $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -215,22 +215,22 @@ class cl_db_estruturavalor
         $resaco = $this->sql_record($this->sql_query_file($this->db121_sequencial));
         if (($resaco != false) || ($this->numrows != 0)) {
             $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-            $acount = pg_result($resac, 0, 0);
+            $acount = pg_fetch_result($resac, 0, 0);
             $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
             $resac = db_query("insert into db_acountkey values($acount,17960,'$this->db121_sequencial','I')");
-            $resac = db_query("insert into db_acount values($acount,3173,17960,'','" . AddSlashes(pg_result($resaco, 0, 'db121_sequencial')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-            $resac = db_query("insert into db_acount values($acount,3173,17961,'','" . AddSlashes(pg_result($resaco, 0, 'db121_db_estrutura')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-            $resac = db_query("insert into db_acount values($acount,3173,17962,'','" . AddSlashes(pg_result($resaco, 0, 'db121_estrutural')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-            $resac = db_query("insert into db_acount values($acount,3173,17963,'','" . AddSlashes(pg_result($resaco, 0, 'db121_descricao')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-            $resac = db_query("insert into db_acount values($acount,3173,17964,'','" . AddSlashes(pg_result($resaco, 0, 'db121_estruturavalorpai')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-            $resac = db_query("insert into db_acount values($acount,3173,17965,'','" . AddSlashes(pg_result($resaco, 0, 'db121_nivel')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-            $resac = db_query("insert into db_acount values($acount,3173,17966,'','" . AddSlashes(pg_result($resaco, 0, 'db121_tipoconta')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+            $resac = db_query("insert into db_acount values($acount,3173,17960,'','" . AddSlashes(pg_fetch_result($resaco, 0, 'db121_sequencial')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+            $resac = db_query("insert into db_acount values($acount,3173,17961,'','" . AddSlashes(pg_fetch_result($resaco, 0, 'db121_db_estrutura')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+            $resac = db_query("insert into db_acount values($acount,3173,17962,'','" . AddSlashes(pg_fetch_result($resaco, 0, 'db121_estrutural')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+            $resac = db_query("insert into db_acount values($acount,3173,17963,'','" . AddSlashes(pg_fetch_result($resaco, 0, 'db121_descricao')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+            $resac = db_query("insert into db_acount values($acount,3173,17964,'','" . AddSlashes(pg_fetch_result($resaco, 0, 'db121_estruturavalorpai')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+            $resac = db_query("insert into db_acount values($acount,3173,17965,'','" . AddSlashes(pg_fetch_result($resaco, 0, 'db121_nivel')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+            $resac = db_query("insert into db_acount values($acount,3173,17966,'','" . AddSlashes(pg_fetch_result($resaco, 0, 'db121_tipoconta')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
         }
         return true;
     }
 
     // funcao para alteracao
-    function alterar($db121_sequencial = null)
+    public function alterar($db121_sequencial = null)
     {
         $this->atualizacampos();
         $sql = " update db_estruturavalor set ";
@@ -328,23 +328,23 @@ class cl_db_estruturavalor
         if ($this->numrows > 0) {
             for ($conresaco = 0; $conresaco < $this->numrows; $conresaco++) {
                 $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-                $acount = pg_result($resac, 0, 0);
+                $acount = pg_fetch_result($resac, 0, 0);
                 $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
                 $resac = db_query("insert into db_acountkey values($acount,17960,'$this->db121_sequencial','A')");
                 if (isset($GLOBALS["HTTP_POST_VARS"]["db121_sequencial"]) || $this->db121_sequencial != "")
-                    $resac = db_query("insert into db_acount values($acount,3173,17960,'" . AddSlashes(pg_result($resaco, $conresaco, 'db121_sequencial')) . "','$this->db121_sequencial'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                    $resac = db_query("insert into db_acount values($acount,3173,17960,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_sequencial')) . "','$this->db121_sequencial'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 if (isset($GLOBALS["HTTP_POST_VARS"]["db121_db_estrutura"]) || $this->db121_db_estrutura != "")
-                    $resac = db_query("insert into db_acount values($acount,3173,17961,'" . AddSlashes(pg_result($resaco, $conresaco, 'db121_db_estrutura')) . "','$this->db121_db_estrutura'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                    $resac = db_query("insert into db_acount values($acount,3173,17961,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_db_estrutura')) . "','$this->db121_db_estrutura'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 if (isset($GLOBALS["HTTP_POST_VARS"]["db121_estrutural"]) || $this->db121_estrutural != "")
-                    $resac = db_query("insert into db_acount values($acount,3173,17962,'" . AddSlashes(pg_result($resaco, $conresaco, 'db121_estrutural')) . "','$this->db121_estrutural'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                    $resac = db_query("insert into db_acount values($acount,3173,17962,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_estrutural')) . "','$this->db121_estrutural'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 if (isset($GLOBALS["HTTP_POST_VARS"]["db121_descricao"]) || $this->db121_descricao != "")
-                    $resac = db_query("insert into db_acount values($acount,3173,17963,'" . AddSlashes(pg_result($resaco, $conresaco, 'db121_descricao')) . "','$this->db121_descricao'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                    $resac = db_query("insert into db_acount values($acount,3173,17963,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_descricao')) . "','$this->db121_descricao'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 if (isset($GLOBALS["HTTP_POST_VARS"]["db121_estruturavalorpai"]) || $this->db121_estruturavalorpai != "")
-                    $resac = db_query("insert into db_acount values($acount,3173,17964,'" . AddSlashes(pg_result($resaco, $conresaco, 'db121_estruturavalorpai')) . "','$this->db121_estruturavalorpai'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                    $resac = db_query("insert into db_acount values($acount,3173,17964,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_estruturavalorpai')) . "','$this->db121_estruturavalorpai'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 if (isset($GLOBALS["HTTP_POST_VARS"]["db121_nivel"]) || $this->db121_nivel != "")
-                    $resac = db_query("insert into db_acount values($acount,3173,17965,'" . AddSlashes(pg_result($resaco, $conresaco, 'db121_nivel')) . "','$this->db121_nivel'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                    $resac = db_query("insert into db_acount values($acount,3173,17965,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_nivel')) . "','$this->db121_nivel'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 if (isset($GLOBALS["HTTP_POST_VARS"]["db121_tipoconta"]) || $this->db121_tipoconta != "")
-                    $resac = db_query("insert into db_acount values($acount,3173,17966,'" . AddSlashes(pg_result($resaco, $conresaco, 'db121_tipoconta')) . "','$this->db121_tipoconta'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                    $resac = db_query("insert into db_acount values($acount,3173,17966,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_tipoconta')) . "','$this->db121_tipoconta'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
             }
         }
         $result = db_query($sql);
@@ -381,7 +381,7 @@ class cl_db_estruturavalor
     }
 
     // funcao para exclusao
-    function excluir($db121_sequencial = null, $dbwhere = null)
+    public function excluir($db121_sequencial = null, $dbwhere = null)
     {
         if ($dbwhere == null || $dbwhere == "") {
             $resaco = $this->sql_record($this->sql_query_file($db121_sequencial));
@@ -391,16 +391,16 @@ class cl_db_estruturavalor
         if (($resaco != false) || ($this->numrows != 0)) {
             for ($iresaco = 0; $iresaco < $this->numrows; $iresaco++) {
                 $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-                $acount = pg_result($resac, 0, 0);
+                $acount = pg_fetch_result($resac, 0, 0);
                 $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
                 $resac = db_query("insert into db_acountkey values($acount,17960,'$db121_sequencial','E')");
-                $resac = db_query("insert into db_acount values($acount,3173,17960,'','" . AddSlashes(pg_result($resaco, $iresaco, 'db121_sequencial')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                $resac = db_query("insert into db_acount values($acount,3173,17961,'','" . AddSlashes(pg_result($resaco, $iresaco, 'db121_db_estrutura')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                $resac = db_query("insert into db_acount values($acount,3173,17962,'','" . AddSlashes(pg_result($resaco, $iresaco, 'db121_estrutural')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                $resac = db_query("insert into db_acount values($acount,3173,17963,'','" . AddSlashes(pg_result($resaco, $iresaco, 'db121_descricao')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                $resac = db_query("insert into db_acount values($acount,3173,17964,'','" . AddSlashes(pg_result($resaco, $iresaco, 'db121_estruturavalorpai')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                $resac = db_query("insert into db_acount values($acount,3173,17965,'','" . AddSlashes(pg_result($resaco, $iresaco, 'db121_nivel')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                $resac = db_query("insert into db_acount values($acount,3173,17966,'','" . AddSlashes(pg_result($resaco, $iresaco, 'db121_tipoconta')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                $resac = db_query("insert into db_acount values($acount,3173,17960,'','" . AddSlashes(pg_fetch_result($resaco, $iresaco, 'db121_sequencial')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                $resac = db_query("insert into db_acount values($acount,3173,17961,'','" . AddSlashes(pg_fetch_result($resaco, $iresaco, 'db121_db_estrutura')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                $resac = db_query("insert into db_acount values($acount,3173,17962,'','" . AddSlashes(pg_fetch_result($resaco, $iresaco, 'db121_estrutural')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                $resac = db_query("insert into db_acount values($acount,3173,17963,'','" . AddSlashes(pg_fetch_result($resaco, $iresaco, 'db121_descricao')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                $resac = db_query("insert into db_acount values($acount,3173,17964,'','" . AddSlashes(pg_fetch_result($resaco, $iresaco, 'db121_estruturavalorpai')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                $resac = db_query("insert into db_acount values($acount,3173,17965,'','" . AddSlashes(pg_fetch_result($resaco, $iresaco, 'db121_nivel')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
+                $resac = db_query("insert into db_acount values($acount,3173,17966,'','" . AddSlashes(pg_fetch_result($resaco, $iresaco, 'db121_tipoconta')) . "'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
             }
         }
         $sql = " delete from db_estruturavalor
@@ -450,7 +450,7 @@ class cl_db_estruturavalor
     }
 
     // funcao do recordset
-    function sql_record($sql)
+    public function sql_record($sql)
     {
         $result = db_query($sql);
         if ($result == false) {
@@ -462,7 +462,7 @@ class cl_db_estruturavalor
             $this->erro_status = "0";
             return false;
         }
-        $this->numrows = pg_numrows($result);
+        $this->numrows = pg_num_rows($result);
         if ($this->numrows == 0) {
             $this->erro_banco = "";
             $this->erro_sql = "Record Vazio na Tabela:db_estruturavalor";
@@ -475,11 +475,11 @@ class cl_db_estruturavalor
     }
 
     // funcao do sql
-    function sql_query($db121_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "")
+    public function sql_query($db121_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "")
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_db_estruturavalor
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -512,11 +512,11 @@ class cl_db_estruturavalor
     }
 
     // funcao do sql
-    function sql_query_file($db121_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "")
+    public function sql_query_file($db121_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "")
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -537,7 +537,7 @@ class cl_db_estruturavalor
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];

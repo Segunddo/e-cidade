@@ -98,8 +98,8 @@ function js_trocapri(seq){
 <?
 if(isset($sql) && $sql!=""){ 
        $result=db_query($sql);
-       $numrows=pg_numrows($result);
-       $numcols=pg_numfields($result);
+       $numrows=pg_num_rows($result);
+       $numcols=pg_num_fields($result);
        if($db_opcao=="Incluir"){
        } 
        if($db_opcao=="Incluir"){
@@ -110,7 +110,7 @@ if(isset($sql) && $sql!=""){
           $db_opcao=3;
        }
        if($numrows>0){ 
-	  $matriz_campos=split(",",$campos); 
+	  $matriz_campos=preg_split("#,#m",$campos); 
           $numcolunas=sizeof($matriz_campos);
           echo "   <tr class='cabec'>";
           if($db_opcao!=3){  
@@ -123,7 +123,7 @@ if(isset($sql) && $sql!=""){
             $clrotulo->label($campo);
 	    $Tlabel="T$campo";
 	    $Llabel="L$campo";
-	    echo "   <td class='cabec' title='".$$Tlabel."'>".str_replace(":","",$$Llabel)."</td>\n";
+	    echo "   <td class='cabec' title='".${$Tlabel}."'>".str_replace(":","",${$Llabel})."</td>\n";
 	  }  
           echo "   </tr>"; 	   
           $cabec=true;
@@ -131,7 +131,7 @@ if(isset($sql) && $sql!=""){
           echo $msg_vazio;
        } 	 
        if(isset($cabec) && $cabec==true){
-         $matriz02=split(",",$chaves);       
+         $matriz02=preg_split("#,#m",$chaves);       
          for($i=0; $i<$numrows; $i++){
            db_fieldsmemory($result,$i,true);
 
@@ -148,12 +148,12 @@ if(isset($sql) && $sql!=""){
   	     $Llabel="L$campo";
              if($campo=="q88_inscr"){
                $checa=""; 
-               if($$campo=="*"){
+               if(${$campo}=="*"){
                   $checa="checked";
                }  
                echo "<td class='corpo' align='center'><input  id='q88_inscr_$li' value='$q07_seq'  name='principal' type='radio' $checa onclick='js_trocapri($q07_seq)' ></td>";
              }else{   
-	       echo "   <td id='".$campo."_".$li."' title='".$$Tlabel."' class='corpo'>".$$campo."&nbsp;</td>";
+	       echo "   <td id='".$campo."_".$li."' title='".${$Tlabel}."' class='corpo'>".${$campo}."&nbsp;</td>";
              } 
 	   } 
            echo "   </tr>";

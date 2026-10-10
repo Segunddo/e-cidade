@@ -29,26 +29,26 @@
 //CLASSE DA ENTIDADE meiprocessareg
 class cl_meiprocessareg { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $q112_sequencial = 0; 
-   var $q112_meiprocessa = 0; 
-   var $q112_meiimportameireg = 0; 
-   var $q112_tipoprocessa = 0; 
-   var $q112_motivo = null; 
+   public $q112_sequencial = 0; 
+   public $q112_meiprocessa = 0; 
+   public $q112_meiimportameireg = 0; 
+   public $q112_tipoprocessa = 0; 
+   public $q112_motivo = null; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  q112_sequencial = int4 = Sequencial 
                  q112_meiprocessa = int4 = Código de Processamento do MEI 
                  q112_meiimportameireg = int4 = Registro de Importação do MEI 
@@ -56,13 +56,13 @@ class cl_meiprocessareg {
                  q112_motivo = text = Motivo de Descarte do Registro 
                  ";
    //funcao construtor da classe 
-   function cl_meiprocessareg() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("meiprocessareg"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -71,7 +71,7 @@ class cl_meiprocessareg {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->q112_sequencial = ($this->q112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_sequencial"]:$this->q112_sequencial);
        $this->q112_meiprocessa = ($this->q112_meiprocessa == ""?@$GLOBALS["HTTP_POST_VARS"]["q112_meiprocessa"]:$this->q112_meiprocessa);
@@ -83,7 +83,7 @@ class cl_meiprocessareg {
      }
    }
    // funcao para inclusao
-   function incluir ($q112_sequencial){ 
+   public function incluir ($q112_sequencial){ 
       $this->atualizacampos();
      if($this->q112_meiprocessa == null ){ 
        $this->erro_sql = " Campo Código de Processamento do MEI nao Informado.";
@@ -122,10 +122,10 @@ class cl_meiprocessareg {
          $this->erro_status = "0";
          return false; 
        }
-       $this->q112_sequencial = pg_result($result,0,0); 
+       $this->q112_sequencial = pg_fetch_result($result,0,0); 
      }else{
        $result = db_query("select last_value from meiprocessareg_q112_sequencial_seq");
-       if(($result != false) && (pg_result($result,0,0) < $q112_sequencial)){
+       if(($result != false) && (pg_fetch_result($result,0,0) < $q112_sequencial)){
          $this->erro_sql = " Campo q112_sequencial maior que último número da sequencia.";
          $this->erro_banco = "Sequencia menor que este número.";
          $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -185,19 +185,19 @@ class cl_meiprocessareg {
      $resaco = $this->sql_record($this->sql_query_file($this->q112_sequencial));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,16635,'$this->q112_sequencial','I')");
-       $resac = db_query("insert into db_acount values($acount,2924,16635,'','".AddSlashes(pg_result($resaco,0,'q112_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,2924,16636,'','".AddSlashes(pg_result($resaco,0,'q112_meiprocessa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,2924,16637,'','".AddSlashes(pg_result($resaco,0,'q112_meiimportameireg'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,2924,16638,'','".AddSlashes(pg_result($resaco,0,'q112_tipoprocessa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,2924,16639,'','".AddSlashes(pg_result($resaco,0,'q112_motivo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,2924,16635,'','".AddSlashes(pg_fetch_result($resaco,0,'q112_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,2924,16636,'','".AddSlashes(pg_fetch_result($resaco,0,'q112_meiprocessa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,2924,16637,'','".AddSlashes(pg_fetch_result($resaco,0,'q112_meiimportameireg'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,2924,16638,'','".AddSlashes(pg_fetch_result($resaco,0,'q112_tipoprocessa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,2924,16639,'','".AddSlashes(pg_fetch_result($resaco,0,'q112_motivo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($q112_sequencial=null) { 
+   public function alterar ($q112_sequencial=null) { 
       $this->atualizacampos();
      $sql = " update meiprocessareg set ";
      $virgula = "";
@@ -265,19 +265,19 @@ class cl_meiprocessareg {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,16635,'$this->q112_sequencial','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q112_sequencial"]) || $this->q112_sequencial != "")
-           $resac = db_query("insert into db_acount values($acount,2924,16635,'".AddSlashes(pg_result($resaco,$conresaco,'q112_sequencial'))."','$this->q112_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,2924,16635,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q112_sequencial'))."','$this->q112_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q112_meiprocessa"]) || $this->q112_meiprocessa != "")
-           $resac = db_query("insert into db_acount values($acount,2924,16636,'".AddSlashes(pg_result($resaco,$conresaco,'q112_meiprocessa'))."','$this->q112_meiprocessa',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,2924,16636,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q112_meiprocessa'))."','$this->q112_meiprocessa',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q112_meiimportameireg"]) || $this->q112_meiimportameireg != "")
-           $resac = db_query("insert into db_acount values($acount,2924,16637,'".AddSlashes(pg_result($resaco,$conresaco,'q112_meiimportameireg'))."','$this->q112_meiimportameireg',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,2924,16637,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q112_meiimportameireg'))."','$this->q112_meiimportameireg',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q112_tipoprocessa"]) || $this->q112_tipoprocessa != "")
-           $resac = db_query("insert into db_acount values($acount,2924,16638,'".AddSlashes(pg_result($resaco,$conresaco,'q112_tipoprocessa'))."','$this->q112_tipoprocessa',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,2924,16638,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q112_tipoprocessa'))."','$this->q112_tipoprocessa',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q112_motivo"]) || $this->q112_motivo != "")
-           $resac = db_query("insert into db_acount values($acount,2924,16639,'".AddSlashes(pg_result($resaco,$conresaco,'q112_motivo'))."','$this->q112_motivo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,2924,16639,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q112_motivo'))."','$this->q112_motivo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -313,7 +313,7 @@ class cl_meiprocessareg {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($q112_sequencial=null,$dbwhere=null) { 
+   public function excluir ($q112_sequencial=null,$dbwhere=null) { 
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($q112_sequencial));
      }else{ 
@@ -322,14 +322,14 @@ class cl_meiprocessareg {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,16635,'$q112_sequencial','E')");
-         $resac = db_query("insert into db_acount values($acount,2924,16635,'','".AddSlashes(pg_result($resaco,$iresaco,'q112_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,2924,16636,'','".AddSlashes(pg_result($resaco,$iresaco,'q112_meiprocessa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,2924,16637,'','".AddSlashes(pg_result($resaco,$iresaco,'q112_meiimportameireg'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,2924,16638,'','".AddSlashes(pg_result($resaco,$iresaco,'q112_tipoprocessa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,2924,16639,'','".AddSlashes(pg_result($resaco,$iresaco,'q112_motivo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,2924,16635,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q112_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,2924,16636,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q112_meiprocessa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,2924,16637,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q112_meiimportameireg'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,2924,16638,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q112_tipoprocessa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,2924,16639,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q112_motivo'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from meiprocessareg
@@ -378,7 +378,7 @@ class cl_meiprocessareg {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -389,7 +389,7 @@ class cl_meiprocessareg {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:meiprocessareg";
@@ -401,10 +401,10 @@ class cl_meiprocessareg {
      return $result;
    }
    // funcao do sql 
-   function sql_query ( $q112_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $q112_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_meiprocessareg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,10 +443,10 @@ class cl_meiprocessareg {
      return $sql;
   }
    // funcao do sql 
-   function sql_query_file ( $q112_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $q112_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -467,7 +467,7 @@ class cl_meiprocessareg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

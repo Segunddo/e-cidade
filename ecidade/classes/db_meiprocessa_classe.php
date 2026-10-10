@@ -29,41 +29,41 @@
 //CLASSE DA ENTIDADE meiprocessa
 class cl_meiprocessa { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $q113_sequencial = 0; 
-   var $q113_data_dia = null; 
-   var $q113_data_mes = null; 
-   var $q113_data_ano = null; 
-   var $q113_data = null; 
-   var $q113_hora = null; 
-   var $q113_id_usuario = 0; 
+   public $q113_sequencial = 0; 
+   public $q113_data_dia = null; 
+   public $q113_data_mes = null; 
+   public $q113_data_ano = null; 
+   public $q113_data = null; 
+   public $q113_hora = null; 
+   public $q113_id_usuario = 0; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  q113_sequencial = int4 = Sequencial 
                  q113_data = date = Data Processamento 
                  q113_hora = char(5) = Hora Processamento 
                  q113_id_usuario = int4 = Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_meiprocessa() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("meiprocessa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -72,7 +72,7 @@ class cl_meiprocessa {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->q113_sequencial = ($this->q113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q113_sequencial"]:$this->q113_sequencial);
        if($this->q113_data == ""){
@@ -90,7 +90,7 @@ class cl_meiprocessa {
      }
    }
    // funcao para inclusao
-   function incluir ($q113_sequencial){ 
+   public function incluir ($q113_sequencial){ 
       $this->atualizacampos();
      if($this->q113_data == null ){ 
        $this->erro_sql = " Campo Data Processamento nao Informado.";
@@ -129,10 +129,10 @@ class cl_meiprocessa {
          $this->erro_status = "0";
          return false; 
        }
-       $this->q113_sequencial = pg_result($result,0,0); 
+       $this->q113_sequencial = pg_fetch_result($result,0,0); 
      }else{
        $result = db_query("select last_value from meiprocessa_q113_sequencial_seq");
-       if(($result != false) && (pg_result($result,0,0) < $q113_sequencial)){
+       if(($result != false) && (pg_fetch_result($result,0,0) < $q113_sequencial)){
          $this->erro_sql = " Campo q113_sequencial maior que último número da sequencia.";
          $this->erro_banco = "Sequencia menor que este número.";
          $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -190,18 +190,18 @@ class cl_meiprocessa {
      $resaco = $this->sql_record($this->sql_query_file($this->q113_sequencial));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,16640,'$this->q113_sequencial','I')");
-       $resac = db_query("insert into db_acount values($acount,2925,16640,'','".AddSlashes(pg_result($resaco,0,'q113_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,2925,16641,'','".AddSlashes(pg_result($resaco,0,'q113_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,2925,16642,'','".AddSlashes(pg_result($resaco,0,'q113_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,2925,16643,'','".AddSlashes(pg_result($resaco,0,'q113_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,2925,16640,'','".AddSlashes(pg_fetch_result($resaco,0,'q113_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,2925,16641,'','".AddSlashes(pg_fetch_result($resaco,0,'q113_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,2925,16642,'','".AddSlashes(pg_fetch_result($resaco,0,'q113_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,2925,16643,'','".AddSlashes(pg_fetch_result($resaco,0,'q113_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($q113_sequencial=null) { 
+   public function alterar ($q113_sequencial=null) { 
       $this->atualizacampos();
      $sql = " update meiprocessa set ";
      $virgula = "";
@@ -279,17 +279,17 @@ class cl_meiprocessa {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,16640,'$this->q113_sequencial','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q113_sequencial"]) || $this->q113_sequencial != "")
-           $resac = db_query("insert into db_acount values($acount,2925,16640,'".AddSlashes(pg_result($resaco,$conresaco,'q113_sequencial'))."','$this->q113_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,2925,16640,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q113_sequencial'))."','$this->q113_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q113_data"]) || $this->q113_data != "")
-           $resac = db_query("insert into db_acount values($acount,2925,16641,'".AddSlashes(pg_result($resaco,$conresaco,'q113_data'))."','$this->q113_data',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,2925,16641,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q113_data'))."','$this->q113_data',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q113_hora"]) || $this->q113_hora != "")
-           $resac = db_query("insert into db_acount values($acount,2925,16642,'".AddSlashes(pg_result($resaco,$conresaco,'q113_hora'))."','$this->q113_hora',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,2925,16642,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q113_hora'))."','$this->q113_hora',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q113_id_usuario"]) || $this->q113_id_usuario != "")
-           $resac = db_query("insert into db_acount values($acount,2925,16643,'".AddSlashes(pg_result($resaco,$conresaco,'q113_id_usuario'))."','$this->q113_id_usuario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,2925,16643,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q113_id_usuario'))."','$this->q113_id_usuario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -325,7 +325,7 @@ class cl_meiprocessa {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($q113_sequencial=null,$dbwhere=null) { 
+   public function excluir ($q113_sequencial=null,$dbwhere=null) { 
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($q113_sequencial));
      }else{ 
@@ -334,13 +334,13 @@ class cl_meiprocessa {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,16640,'$q113_sequencial','E')");
-         $resac = db_query("insert into db_acount values($acount,2925,16640,'','".AddSlashes(pg_result($resaco,$iresaco,'q113_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,2925,16641,'','".AddSlashes(pg_result($resaco,$iresaco,'q113_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,2925,16642,'','".AddSlashes(pg_result($resaco,$iresaco,'q113_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,2925,16643,'','".AddSlashes(pg_result($resaco,$iresaco,'q113_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,2925,16640,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q113_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,2925,16641,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q113_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,2925,16642,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q113_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,2925,16643,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q113_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from meiprocessa
@@ -389,7 +389,7 @@ class cl_meiprocessa {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -400,7 +400,7 @@ class cl_meiprocessa {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:meiprocessa";
@@ -412,10 +412,10 @@ class cl_meiprocessa {
      return $result;
    }
    // funcao do sql 
-   function sql_query ( $q113_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $q113_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_meiprocessa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,10 +446,10 @@ class cl_meiprocessa {
      return $sql;
   }
    // funcao do sql 
-   function sql_query_file ( $q113_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $q113_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_meiprocessa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

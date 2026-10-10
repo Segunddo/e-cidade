@@ -29,32 +29,32 @@
 //CLASSE DA ENTIDADE cgmfoto
 class cl_cgmfoto { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $z16_sequencial = 0; 
-   var $z16_numcgm = 0; 
-   var $z16_id_usuario = 0; 
-   var $z16_data_dia = null; 
-   var $z16_data_mes = null; 
-   var $z16_data_ano = null; 
-   var $z16_data = null; 
-   var $z16_hora = null; 
-   var $z16_fotoativa = 'f'; 
-   var $z16_principal = 'f'; 
-   var $z16_arquivofoto = 0; 
+   public $z16_sequencial = 0; 
+   public $z16_numcgm = 0; 
+   public $z16_id_usuario = 0; 
+   public $z16_data_dia = null; 
+   public $z16_data_mes = null; 
+   public $z16_data_ano = null; 
+   public $z16_data = null; 
+   public $z16_hora = null; 
+   public $z16_fotoativa = 'f'; 
+   public $z16_principal = 'f'; 
+   public $z16_arquivofoto = 0; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  z16_sequencial = int4 = Código da Foto 
                  z16_numcgm = int4 = Número do Cgm 
                  z16_id_usuario = int4 = Usuário 
@@ -65,13 +65,13 @@ class cl_cgmfoto {
                  z16_arquivofoto = oid = Arquivo da Foto 
                  ";
    //funcao construtor da classe 
-   function cl_cgmfoto() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgmfoto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -80,7 +80,7 @@ class cl_cgmfoto {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->z16_sequencial = ($this->z16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_sequencial"]:$this->z16_sequencial);
        $this->z16_numcgm = ($this->z16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z16_numcgm"]:$this->z16_numcgm);
@@ -102,7 +102,7 @@ class cl_cgmfoto {
      }
    }
    // funcao para inclusao
-   function incluir ($z16_sequencial){ 
+   public function incluir ($z16_sequencial){ 
       $this->atualizacampos();
      if($this->z16_numcgm == null ){ 
        $this->erro_sql = " Campo Número do Cgm nao Informado.";
@@ -171,10 +171,10 @@ class cl_cgmfoto {
          $this->erro_status = "0";
          return false; 
        }
-       $this->z16_sequencial = pg_result($result,0,0); 
+       $this->z16_sequencial = pg_fetch_result($result,0,0); 
      }else{
        $result = db_query("select last_value from cgmfoto_z16_sequencial_seq");
-       if(($result != false) && (pg_result($result,0,0) < $z16_sequencial)){
+       if(($result != false) && (pg_fetch_result($result,0,0) < $z16_sequencial)){
          $this->erro_sql = " Campo z16_sequencial maior que último número da sequencia.";
          $this->erro_banco = "Sequencia menor que este número.";
          $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -240,22 +240,22 @@ class cl_cgmfoto {
      $resaco = $this->sql_record($this->sql_query_file($this->z16_sequencial));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,17428,'$this->z16_sequencial','I')");
-       $resac = db_query("insert into db_acount values($acount,3082,17428,'','".AddSlashes(pg_result($resaco,0,'z16_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3082,17429,'','".AddSlashes(pg_result($resaco,0,'z16_numcgm'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3082,17430,'','".AddSlashes(pg_result($resaco,0,'z16_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3082,17431,'','".AddSlashes(pg_result($resaco,0,'z16_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3082,17432,'','".AddSlashes(pg_result($resaco,0,'z16_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3082,17433,'','".AddSlashes(pg_result($resaco,0,'z16_fotoativa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3082,17434,'','".AddSlashes(pg_result($resaco,0,'z16_principal'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,3082,17435,'','".AddSlashes(pg_result($resaco,0,'z16_arquivofoto'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3082,17428,'','".AddSlashes(pg_fetch_result($resaco,0,'z16_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3082,17429,'','".AddSlashes(pg_fetch_result($resaco,0,'z16_numcgm'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3082,17430,'','".AddSlashes(pg_fetch_result($resaco,0,'z16_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3082,17431,'','".AddSlashes(pg_fetch_result($resaco,0,'z16_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3082,17432,'','".AddSlashes(pg_fetch_result($resaco,0,'z16_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3082,17433,'','".AddSlashes(pg_fetch_result($resaco,0,'z16_fotoativa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3082,17434,'','".AddSlashes(pg_fetch_result($resaco,0,'z16_principal'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,3082,17435,'','".AddSlashes(pg_fetch_result($resaco,0,'z16_arquivofoto'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($z16_sequencial=null) { 
+   public function alterar ($z16_sequencial=null) { 
       $this->atualizacampos();
      $sql = " update cgmfoto set ";
      $virgula = "";
@@ -376,25 +376,25 @@ class cl_cgmfoto {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,17428,'$this->z16_sequencial','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["z16_sequencial"]) || $this->z16_sequencial != "")
-           $resac = db_query("insert into db_acount values($acount,3082,17428,'".AddSlashes(pg_result($resaco,$conresaco,'z16_sequencial'))."','$this->z16_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3082,17428,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'z16_sequencial'))."','$this->z16_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["z16_numcgm"]) || $this->z16_numcgm != "")
-           $resac = db_query("insert into db_acount values($acount,3082,17429,'".AddSlashes(pg_result($resaco,$conresaco,'z16_numcgm'))."','$this->z16_numcgm',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3082,17429,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'z16_numcgm'))."','$this->z16_numcgm',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["z16_id_usuario"]) || $this->z16_id_usuario != "")
-           $resac = db_query("insert into db_acount values($acount,3082,17430,'".AddSlashes(pg_result($resaco,$conresaco,'z16_id_usuario'))."','$this->z16_id_usuario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3082,17430,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'z16_id_usuario'))."','$this->z16_id_usuario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["z16_data"]) || $this->z16_data != "")
-           $resac = db_query("insert into db_acount values($acount,3082,17431,'".AddSlashes(pg_result($resaco,$conresaco,'z16_data'))."','$this->z16_data',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3082,17431,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'z16_data'))."','$this->z16_data',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["z16_hora"]) || $this->z16_hora != "")
-           $resac = db_query("insert into db_acount values($acount,3082,17432,'".AddSlashes(pg_result($resaco,$conresaco,'z16_hora'))."','$this->z16_hora',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3082,17432,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'z16_hora'))."','$this->z16_hora',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["z16_fotoativa"]) || $this->z16_fotoativa != "")
-           $resac = db_query("insert into db_acount values($acount,3082,17433,'".AddSlashes(pg_result($resaco,$conresaco,'z16_fotoativa'))."','$this->z16_fotoativa',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3082,17433,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'z16_fotoativa'))."','$this->z16_fotoativa',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["z16_principal"]) || $this->z16_principal != "")
-           $resac = db_query("insert into db_acount values($acount,3082,17434,'".AddSlashes(pg_result($resaco,$conresaco,'z16_principal'))."','$this->z16_principal',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3082,17434,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'z16_principal'))."','$this->z16_principal',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["z16_arquivofoto"]) || $this->z16_arquivofoto != "")
-           $resac = db_query("insert into db_acount values($acount,3082,17435,'".AddSlashes(pg_result($resaco,$conresaco,'z16_arquivofoto'))."','$this->z16_arquivofoto',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,3082,17435,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'z16_arquivofoto'))."','$this->z16_arquivofoto',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -430,7 +430,7 @@ class cl_cgmfoto {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($z16_sequencial=null,$dbwhere=null) { 
+   public function excluir ($z16_sequencial=null,$dbwhere=null) { 
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($z16_sequencial));
      }else{ 
@@ -439,17 +439,17 @@ class cl_cgmfoto {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,17428,'$z16_sequencial','E')");
-         $resac = db_query("insert into db_acount values($acount,3082,17428,'','".AddSlashes(pg_result($resaco,$iresaco,'z16_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3082,17429,'','".AddSlashes(pg_result($resaco,$iresaco,'z16_numcgm'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3082,17430,'','".AddSlashes(pg_result($resaco,$iresaco,'z16_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3082,17431,'','".AddSlashes(pg_result($resaco,$iresaco,'z16_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3082,17432,'','".AddSlashes(pg_result($resaco,$iresaco,'z16_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3082,17433,'','".AddSlashes(pg_result($resaco,$iresaco,'z16_fotoativa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3082,17434,'','".AddSlashes(pg_result($resaco,$iresaco,'z16_principal'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,3082,17435,'','".AddSlashes(pg_result($resaco,$iresaco,'z16_arquivofoto'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3082,17428,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'z16_sequencial'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3082,17429,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'z16_numcgm'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3082,17430,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'z16_id_usuario'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3082,17431,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'z16_data'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3082,17432,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'z16_hora'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3082,17433,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'z16_fotoativa'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3082,17434,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'z16_principal'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,3082,17435,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'z16_arquivofoto'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from cgmfoto
@@ -498,7 +498,7 @@ class cl_cgmfoto {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -509,7 +509,7 @@ class cl_cgmfoto {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:cgmfoto";
@@ -521,7 +521,7 @@ class cl_cgmfoto {
      return $result;
    }
    // funcao do sql 
-   function sql_query ( $z16_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $z16_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
          $campos_sql = explode("#", $campos);
@@ -557,7 +557,7 @@ class cl_cgmfoto {
      return $sql;
   }
    // funcao do sql 
-   function sql_query_file ( $z16_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $z16_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
          $campos_sql = explode("#", $campos);

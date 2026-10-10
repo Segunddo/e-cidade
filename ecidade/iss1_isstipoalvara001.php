@@ -56,15 +56,15 @@ $clcriaabas     = new cl_criaabas;
   <tr> 
      <td>
      <?
-       $clcriaabas->identifica = array("alvara"      => "Cadastro de Tipo de Alvará",
+       $clcriaabas->identifica = ["alvara"      => "Cadastro de Tipo de Alvará",
                                        "departamento" => "Departamentos"
-                                      );//nome do iframe e o label    
-       $clcriaabas->title      = array("alvara"      => "Cadastro de Tipo de Alvará",
+                                      ];//nome do iframe e o label    
+       $clcriaabas->title      = ["alvara"      => "Cadastro de Tipo de Alvará",
                                        "departamento" => "Departamentos"
-                                      );//nome do iframe e o label    
-       $clcriaabas->src        = array("alvara" => "iss1_isstipoalvara004.php");  //nome do iframe e SRC  
-       $clcriaabas->sizecampo  = array("alvara" => "30");    
-       $clcriaabas->disabled   = array("departamento"=>"true");    
+                                      ];//nome do iframe e o label    
+       $clcriaabas->src        = ["alvara" => "iss1_isstipoalvara004.php"];  //nome do iframe e SRC  
+       $clcriaabas->sizecampo  = ["alvara" => "30"];    
+       $clcriaabas->disabled   = ["departamento"=>"true"];    
        $clcriaabas->cria_abas();    // iss1_isstipoalvaraAba001.php
      ?> 
      </td>

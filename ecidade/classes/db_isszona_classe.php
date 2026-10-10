@@ -29,34 +29,34 @@
 //CLASSE DA ENTIDADE isszona
 class cl_isszona { 
    // cria variaveis de erro 
-   var $rotulo     = null; 
-   var $query_sql  = null; 
-   var $numrows    = 0; 
-   var $numrows_incluir = 0; 
-   var $numrows_alterar = 0; 
-   var $numrows_excluir = 0; 
-   var $erro_status= null; 
-   var $erro_sql   = null; 
-   var $erro_banco = null;  
-   var $erro_msg   = null;  
-   var $erro_campo = null;  
-   var $pagina_retorno = null; 
+   public $rotulo     = null; 
+   public $query_sql  = null; 
+   public $numrows    = 0; 
+   public $numrows_incluir = 0; 
+   public $numrows_alterar = 0; 
+   public $numrows_excluir = 0; 
+   public $erro_status= null; 
+   public $erro_sql   = null; 
+   public $erro_banco = null;  
+   public $erro_msg   = null;  
+   public $erro_campo = null;  
+   public $pagina_retorno = null; 
    // cria variaveis do arquivo 
-   var $q35_inscr = 0; 
-   var $q35_zona = 0; 
+   public $q35_inscr = 0; 
+   public $q35_zona = 0; 
    // cria propriedade com as variaveis do arquivo 
-   var $campos = "
+   public $campos = "
                  q35_inscr = int4 = Inscrição no ISSQN 
                  q35_zona = int8 = Zona 
                  ";
    //funcao construtor da classe 
-   function cl_isszona() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isszona"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
    }
    //funcao erro 
-   function erro($mostra,$retorna) { 
+   public function erro($mostra,$retorna) { 
      if(($this->erro_status == "0") || ($mostra == true && $this->erro_status != null )){
         echo "<script>alert(\"".$this->erro_msg."\");</script>";
         if($retorna==true){
@@ -65,7 +65,7 @@ class cl_isszona {
      }
    }
    // funcao para atualizar campos
-   function atualizacampos($exclusao=false) {
+   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->q35_inscr = ($this->q35_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q35_inscr"]:$this->q35_inscr);
        $this->q35_zona = ($this->q35_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["q35_zona"]:$this->q35_zona);
@@ -74,7 +74,7 @@ class cl_isszona {
      }
    }
    // funcao para inclusao
-   function incluir ($q35_inscr){ 
+   public function incluir ($q35_inscr){ 
       $this->atualizacampos();
      if($this->q35_zona == null ){ 
        $this->q35_zona = "0";
@@ -123,16 +123,16 @@ class cl_isszona {
      $resaco = $this->sql_record($this->sql_query_file($this->q35_inscr));
      if(($resaco!=false)||($this->numrows!=0)){
        $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-       $acount = pg_result($resac,0,0);
+       $acount = pg_fetch_result($resac,0,0);
        $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
        $resac = db_query("insert into db_acountkey values($acount,7430,'$this->q35_inscr','I')");
-       $resac = db_query("insert into db_acount values($acount,1235,7430,'','".AddSlashes(pg_result($resaco,0,'q35_inscr'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-       $resac = db_query("insert into db_acount values($acount,1235,7429,'','".AddSlashes(pg_result($resaco,0,'q35_zona'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1235,7430,'','".AddSlashes(pg_fetch_result($resaco,0,'q35_inscr'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+       $resac = db_query("insert into db_acount values($acount,1235,7429,'','".AddSlashes(pg_fetch_result($resaco,0,'q35_zona'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
      }
      return true;
    } 
    // funcao para alteracao
-   function alterar ($q35_inscr=null) { 
+   public function alterar ($q35_inscr=null) { 
       $this->atualizacampos();
      $sql = " update isszona set ";
      $virgula = "";
@@ -158,13 +158,13 @@ class cl_isszona {
      if($this->numrows>0){
        for($conresaco=0;$conresaco<$this->numrows;$conresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,7430,'$this->q35_inscr','A')");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q35_inscr"]))
-           $resac = db_query("insert into db_acount values($acount,1235,7430,'".AddSlashes(pg_result($resaco,$conresaco,'q35_inscr'))."','$this->q35_inscr',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1235,7430,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q35_inscr'))."','$this->q35_inscr',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["q35_zona"]))
-           $resac = db_query("insert into db_acount values($acount,1235,7429,'".AddSlashes(pg_result($resaco,$conresaco,'q35_zona'))."','$this->q35_zona',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+           $resac = db_query("insert into db_acount values($acount,1235,7429,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'q35_zona'))."','$this->q35_zona',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $result = db_query($sql);
@@ -200,7 +200,7 @@ class cl_isszona {
      } 
    } 
    // funcao para exclusao 
-   function excluir ($q35_inscr=null,$dbwhere=null) { 
+   public function excluir ($q35_inscr=null,$dbwhere=null) { 
      if($dbwhere==null || $dbwhere==""){
        $resaco = $this->sql_record($this->sql_query_file($q35_inscr));
      }else{ 
@@ -209,11 +209,11 @@ class cl_isszona {
      if(($resaco!=false)||($this->numrows!=0)){
        for($iresaco=0;$iresaco<$this->numrows;$iresaco++){
          $resac = db_query("select nextval('db_acount_id_acount_seq') as acount");
-         $acount = pg_result($resac,0,0);
+         $acount = pg_fetch_result($resac,0,0);
          $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
          $resac = db_query("insert into db_acountkey values($acount,7430,'$q35_inscr','E')");
-         $resac = db_query("insert into db_acount values($acount,1235,7430,'','".AddSlashes(pg_result($resaco,$iresaco,'q35_inscr'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         $resac = db_query("insert into db_acount values($acount,1235,7429,'','".AddSlashes(pg_result($resaco,$iresaco,'q35_zona'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1235,7430,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q35_inscr'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
+         $resac = db_query("insert into db_acount values($acount,1235,7429,'','".AddSlashes(pg_fetch_result($resaco,$iresaco,'q35_zona'))."',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
      $sql = " delete from isszona
@@ -262,7 +262,7 @@ class cl_isszona {
      } 
    } 
    // funcao do recordset 
-   function sql_record($sql) { 
+   public function sql_record($sql) { 
      $result = db_query($sql);
      if($result==false){
        $this->numrows    = 0;
@@ -273,7 +273,7 @@ class cl_isszona {
        $this->erro_status = "0";
        return false;
      }
-     $this->numrows = pg_numrows($result);
+     $this->numrows = pg_num_rows($result);
       if($this->numrows==0){
         $this->erro_banco = "";
         $this->erro_sql   = "Record Vazio na Tabela:isszona";
@@ -284,10 +284,10 @@ class cl_isszona {
       }
      return $result;
    }
-   function sql_query ( $q35_inscr=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query ( $q35_inscr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -311,7 +311,7 @@ class cl_isszona {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -320,10 +320,10 @@ class cl_isszona {
      }
      return $sql;
   }
-   function sql_query_file ( $q35_inscr=null,$campos="*",$ordem=null,$dbwhere=""){ 
+   public function sql_query_file ( $q35_inscr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -344,7 +344,7 @@ class cl_isszona {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

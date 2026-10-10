@@ -62,7 +62,7 @@ if(isset($atualizar)){
   for($i=0; $i<$ta; $i++){
     $chave=key($vt);
     if(substr($chave,0,5)=="CHECK"){
-      $dados=split("_",$chave); 
+      $dados=preg_split("#_#m",$chave); 
       $clativtipo->q80_ativ=$q80_ativ;
       $clativtipo->q80_tipcal=$dados[1];
       $clativtipo->incluir($q80_ativ,$dados[1]);

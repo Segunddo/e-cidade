@@ -99,8 +99,8 @@ $matricularecibo = @$j01_matric;
 $inscricaorecibo = @$q02_inscr;
 $numcgmrecibo = @$z01_numcgm;
 $exerc = '';
-$aProcessoForo = array();
-$aCodProcessoForo = array();
+$aProcessoForo = [];
+$aCodProcessoForo = [];
 $iModeloRecibo = $aDados["iModeloRecibo"];
 if (isset($processarDescontoRecibo)) {
     (bool)$processarDescontoRecibo = $processarDescontoRecibo;
@@ -161,7 +161,7 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
     //pega os numpres da ca3_gerfinanc002.php, separa e insere em db_reciboweb
     $result = db_query("select k00_codbco,k00_codage,k00_descr,k00_hist1,k00_hist2,k00_hist3,k00_hist4,k00_hist5,k00_hist6,k00_hist7,k00_hist8,k03_tipo,k00_tipoagrup from arretipo where k00_tipo = $tipo");
 
-    if (pg_numrows($result) == 0) {
+    if (pg_num_rows($result) == 0) {
         db_fim_transacao(true);
         echo "O código do banco não esta cadastrado no arquivo arretipo para este tipo.";
         exit;
@@ -179,14 +179,14 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
         $tam = sizeof($vt);
         reset($vt);
         $numpres = "";
-        $meses = array();
-        $arretipos = array();
-        $aParcelasSemInflatores = array();
+        $meses = [];
+        $arretipos = [];
+        $aParcelasSemInflatores = [];
 
         for ($i = 0; $i < $tam; $i++) {
             if (db_indexOf(key($vt), "CHECK") > 0) {
                 $numpres .= "N" . $vt[key($vt)];
-                $matnumpres = split("N", $vt[key($vt)]);
+                $matnumpres = preg_split("#N#m", $vt[key($vt)]);
 
                 if (!isset($inicial)) {
                     for ($contanumpres = 0; $contanumpres < sizeof($matnumpres); $contanumpres++) {
@@ -196,9 +196,9 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
                             continue;
                         }
 
-                        $resultado = split("P", $numprecerto);
-                        $numpar = split("P", $resultado[1]);
-                        $numpar = split("R", $numpar[0]);
+                        $resultado = preg_split("#P#m", $numprecerto);
+                        $numpar = preg_split("#P#m", $resultado[1]);
+                        $numpar = preg_split("#R#m", $numpar[0]);
 
                         $sSqlInflatores = " select distinct   ";
                         $sSqlInflatores .= "        k00_numpar, ";
@@ -239,7 +239,7 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
                            where k00_numpre = " . $resultado[0] . "
                              and k00_numpar = " . $numpar[0];
                         $resultagrupa = db_query($sqlagrupa) or die($sqlagrupa);
-                        if (pg_numrows($resultagrupa) > 0) {
+                        if (pg_num_rows($resultagrupa) > 0) {
                             db_fieldsmemory($resultagrupa, 0);
 
                             if (!in_array(str_pad($mesagrupa, 2, "0") . $anoagrupa, $meses)) {
@@ -299,7 +299,7 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
 
                 $resultagrupa = db_query($sqlagrupa);
 
-                for ($agrupa = 0; $agrupa < pg_numrows($resultagrupa); $agrupa++) {
+                for ($agrupa = 0; $agrupa < pg_num_rows($resultagrupa); $agrupa++) {
                     db_fieldsmemory($resultagrupa, $agrupa);
                     $numpres .= "N" . $numpreagrupa . "P" . $numparagrupa;
                 }
@@ -308,7 +308,7 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
 
         if (isset($oPost->marcarvencidas) && isset($oPost->marcartodas)) {
             if ($oPost->marcarvencidas == 'true' && $oPost->marcartodas == 'false') {
-                $aNumpres = split("N", $numpres);
+                $aNumpres = preg_split("#N#m", $numpres);
                 $numpres = "";
                 $sNumPreAnt = "";
                 $sAuxiliar = "";
@@ -318,9 +318,9 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
                         continue;
                     }
 
-                    $iNumpre = split("P", $aNumpres[$iInd]);
-                    $iNumpar = split("P", strstr($aNumpres[$iInd], "P"));
-                    $iNumpar = split("R", $iNumpar[1]);
+                    $iNumpre = preg_split("#P#m", $aNumpres[$iInd]);
+                    $iNumpar = preg_split("#P#m", strstr($aNumpres[$iInd], "P"));
+                    $iNumpar = preg_split("#R#m", $iNumpar[1]);
                     $iReceit = $iNumpar[1];
                     $iNumpar = $iNumpar[0];
                     $iNumpre = $iNumpre[0];
@@ -350,12 +350,12 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
             }
         }
 
-        $numpres = split("N", $numpres);
+        $numpres = preg_split("#N#m", $numpres);
 
         $totalregistrospassados = 0;
 
         for ($iii = 0; $iii < sizeof($numpres); $iii++) {
-            $valores = split("P", $numpres[$iii]);
+            $valores = preg_split("#P#m", $numpres[$iii]);
             if ($numpres[$iii] <> "") {
                 if (!isset($inicial)) {
                     $totalregistrospassados += sizeof($valores) - 1;
@@ -374,7 +374,7 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
             $sqlloteador .= "   where j120_cgm = {$numcgm}                                                ";
 
             $resultloteador = db_query($sqlloteador) or die($sqlloteador);
-            if (pg_numrows($resultloteador) > 0) {
+            if (pg_num_rows($resultloteador) > 0) {
                 $loteador = true;
             }
         }
@@ -385,17 +385,17 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
             $whereloteador = " and k40_forma = 3";
         }
 
-        $aRegTodasMarc = array();
+        $aRegTodasMarc = [];
         $iNumpreAnt = 0;
         $iNumparAnt = 0;
-        $aDebitosRecibo = array();
+        $aDebitosRecibo = [];
 
         for ($ii = 1; $ii < sizeof($numpres); $ii++) {
             if ($numpres[$ii] == "") {
                 continue;
             }
 
-            $valores = split("P", $numpres[$ii]);
+            $valores = preg_split("#P#m", $numpres[$ii]);
 
             if (isset($inicial)) {
                 $sSqlinicial = " select distinct arrecad.k00_numpre,                                        ";
@@ -406,7 +406,7 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
 
                 $resultinicial = db_query($sSqlinicial);
 
-                for ($xinicial = 0; $xinicial < pg_numrows($resultinicial); $xinicial++) {
+                for ($xinicial = 0; $xinicial < pg_num_rows($resultinicial); $xinicial++) {
                     db_fieldsmemory($resultinicial, $xinicial);
 
                     if ($processarDescontoRecibo == 'true') {
@@ -416,11 +416,11 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
                         $desconto = 0;
                     }
 
-                    if (in_array(array($k00_numpre, $k00_numpar), $aDebitosRecibo)) {
+                    if (in_array([$k00_numpre, $k00_numpar], $aDebitosRecibo)) {
                         continue;
                     }
 
-                    $aDebitosRecibo[] = array($k00_numpre, $k00_numpar);
+                    $aDebitosRecibo[] = [$k00_numpre, $k00_numpar];
 
                     try {
                         $oRecibo->addNumpre($k00_numpre, $k00_numpar);
@@ -432,13 +432,13 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
                     }
                 }
             } else {
-                $numpar = split("R", $valores[1]);
+                $numpar = preg_split("#R#m", $valores[1]);
 
-                if (in_array(array($valores[0], $numpar[0]), $aDebitosRecibo)) {
+                if (in_array([$valores[0], $numpar[0]], $aDebitosRecibo)) {
                     continue;
                 }
 
-                $aDebitosRecibo[] = array($valores[0], $numpar[0]);
+                $aDebitosRecibo[] = [$valores[0], $numpar[0]];
 
                 if ($processarDescontoRecibo == 'true') {
                     $desconto = recibodesconto($valores[0], $numpar[0], $tipo, $tipo_debito, $whereloteador,
@@ -550,7 +550,7 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
         $sqlloteador .= "   where j120_cgm = {$numcgm}                                                ";
 
         $resultloteador = db_query($sqlloteador) or die($sqlloteador);
-        if (pg_numrows($resultloteador) > 0) {
+        if (pg_num_rows($resultloteador) > 0) {
             $loteador = true;
         }
     }
@@ -561,7 +561,7 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
         $whereloteador = " and k40_forma = 3";
     }
 
-    if (pg_numrows($result) == 0) {
+    if (pg_num_rows($result) == 0) {
         db_fim_transacao(true);
         echo "O código do banco não esta cadastrado no arquivo arretipo para este tipo.";
         exit;
@@ -586,11 +586,11 @@ if (!isset($emite_recibo_protocolo) and !isset($reemite_recibo)) {
             $minvenc = $oGet->db_datausu;
         }
     } else {
-        for ($conta = 0; $conta < pg_numrows($resultrecibo); $conta++) {
+        for ($conta = 0; $conta < pg_num_rows($resultrecibo); $conta++) {
             $sqlvenc = " select min(k00_dtvenc) as k00_dtvenc ";
             $sqlvenc .= "   from arrecad                       ";
-            $sqlvenc .= "  where k00_numpre = " . pg_result($resultrecibo, $conta, "k99_numpre");
-            $sqlvenc .= "    and k00_numpar = " . pg_result($resultrecibo, $conta, "k99_numpar");
+            $sqlvenc .= "  where k00_numpre = " . pg_fetch_result($resultrecibo, $conta, "k99_numpre");
+            $sqlvenc .= "    and k00_numpar = " . pg_fetch_result($resultrecibo, $conta, "k99_numpar");
             $resultvenc = db_query($sqlvenc) or die($sqlvenc);
             db_fieldsmemory($resultvenc, 0);
 
@@ -759,25 +759,25 @@ if (!isset($emite_recibo_protocolo)) {
 $DadosPagamento = db_query($sql) or die($sql);
 //faz um somatorio do valor
 
-if (pg_numrows($DadosPagamento) == 0) {
+if (pg_num_rows($DadosPagamento) == 0) {
     echo "problemas ao gerar recibo! Contate suporte";
     exit;
 }
 
-$datavencimento = pg_result($DadosPagamento, 0, "k00_dtpaga");
+$datavencimento = pg_fetch_result($DadosPagamento, 0, "k00_dtpaga");
 $total_recibo = 0;
 $sHistoricoDesconto = '';
 $iMostra = 0;
-for ($i = 0; $i < pg_numrows($DadosPagamento); $i++) {
-    $total_recibo += pg_result($DadosPagamento, $i, "valor");
+for ($i = 0; $i < pg_num_rows($DadosPagamento); $i++) {
+    $total_recibo += pg_fetch_result($DadosPagamento, $i, "valor");
 
     if (($k03_tipo == 20) and
-      (pg_result($DadosPagamento, $i, "k00_histtxt") <> '') and
-      (pg_result($DadosPagamento, $i, "valor") < 0) and
-      (pg_result($DadosPagamento, $i, "k00_receit") == '401002') and
+      (pg_fetch_result($DadosPagamento, $i, "k00_histtxt") <> '') and
+      (pg_fetch_result($DadosPagamento, $i, "valor") < 0) and
+      (pg_fetch_result($DadosPagamento, $i, "k00_receit") == '401002') and
       ($iMostra == 0)) {
-        $sHistoricoDesconto .= pg_result($DadosPagamento, $i, "k00_histtxt");
-        $sHistoricoDesconto .= '=>RECEITA:' . pg_result($DadosPagamento, $i, "k00_receit");
+        $sHistoricoDesconto .= pg_fetch_result($DadosPagamento, $i, "k00_histtxt");
+        $sHistoricoDesconto .= '=>RECEITA:' . pg_fetch_result($DadosPagamento, $i, "k00_receit");
         $iMostra = 1;
     }
 }
@@ -803,8 +803,8 @@ $sqldtop .= "        left  join issvar on arrecad.k00_numpre = q05_numpre ";
 $sqldtop .= "  group by arrecad.k00_tipo ";
 
 $resultdtop = db_query($sqldtop);
-$mindatop = pg_result($resultdtop, 0, "mindatop");
-$valor_origem = pg_result($resultdtop, 0, "valor_origem");
+$mindatop = pg_fetch_result($resultdtop, 0, "mindatop");
+$valor_origem = pg_fetch_result($resultdtop, 0, "valor_origem");
 
 //seleciona da tabela db_config, o numero do banco e a taxa bancaria e concatena em variavel
 $sSqlDadosInstit = "select db12_uf,
@@ -834,17 +834,17 @@ $sSqlTxBancaria = "select to_char(k00_txban,'99.99') as tx_banc
                       and k00_tipo = $tipo";
 $sqlArretipo_tx_banc = db_query($sSqlTxBancaria);
 
-$taxabancaria += pg_result($sqlArretipo_tx_banc,0,"tx_banc");
-$src = pg_result($DadosInstit,0,'logo');
-$db_nomeinst = pg_result($DadosInstit,0,'nomeinst');
-$db_ender    = pg_result($DadosInstit,0,'ender');
-$db_numero   = pg_result($DadosInstit,0,'numero');
-$db_munic    = pg_result($DadosInstit,0,'munic');
-$db_uf       = pg_result($DadosInstit,0,'uf');
-$db_telef    = pg_result($DadosInstit,0,'telef');
-$db_cgc      = pg_result($DadosInstit,0,'cgc');
-$db_email    = pg_result($DadosInstit,0,'email');
-$db_logo     = pg_result($DadosInstit,0,'logo');
+$taxabancaria += pg_fetch_result($sqlArretipo_tx_banc,0,"tx_banc");
+$src = pg_fetch_result($DadosInstit,0,'logo');
+$db_nomeinst = pg_fetch_result($DadosInstit,0,'nomeinst');
+$db_ender    = pg_fetch_result($DadosInstit,0,'ender');
+$db_numero   = pg_fetch_result($DadosInstit,0,'numero');
+$db_munic    = pg_fetch_result($DadosInstit,0,'munic');
+$db_uf       = pg_fetch_result($DadosInstit,0,'uf');
+$db_telef    = pg_fetch_result($DadosInstit,0,'telef');
+$db_cgc      = pg_fetch_result($DadosInstit,0,'cgc');
+$db_email    = pg_fetch_result($DadosInstit,0,'email');
+$db_logo     = pg_fetch_result($DadosInstit,0,'logo');
 
 $total_recibo += $taxabancaria;
 if ($total_recibo == 0) {
@@ -901,7 +901,7 @@ if (!empty($aDados["ver_matric"]) || $matricularecibo > 0) {
     $Identificacao = db_query($sSqlIdentificacao) or die($sSqlIdentificacao);
 
     $iNumero = $numero;
-    if (pg_numrows($Identificacao) == 0) {
+    if (pg_num_rows($Identificacao) == 0) {
         db_redireciona('db_erros.php?fechar=true&db_erro=[9] - Problemas no Cadastro da Matricula ' . $numero);
     }
 
@@ -958,7 +958,7 @@ if (!empty($aDados["ver_matric"]) || $matricularecibo > 0) {
                         where issbase.q02_inscr = $numero";
         $Identificacao = db_query($sqlidentificacao) or die($sqlidentificacao);
 
-        if (pg_numrows($Identificacao) == 0) {
+        if (pg_num_rows($Identificacao) == 0) {
             db_redireciona('db_erros.php?fechar=true&db_erro=[10] - Problemas no Cadastro da Inscrição ' . $numero);
         }
 
@@ -990,7 +990,7 @@ if (!empty($aDados["ver_matric"]) || $matricularecibo > 0) {
                          where z01_numcgm = $numero ";
             $Identificacao = db_query($sSqlIdentificacao);
 
-            if (pg_numrows($Identificacao) == 0) {
+            if (pg_num_rows($Identificacao) == 0) {
                 db_redireciona('db_erros.php?fechar=true&db_erro=[11] - Problema no Cadastro do CGM ' . $numero);
             }
 
@@ -1018,7 +1018,7 @@ if (!empty($aDados["ver_matric"]) || $matricularecibo > 0) {
                             where r.k00_numpre = " . $k03_numpre . " limit 1";
                 $Identificacao = db_query($sSqlIdentificacao);
 
-                if (pg_numrows($Identificacao) == 0) {
+                if (pg_num_rows($Identificacao) == 0) {
                     db_redireciona('db_erros.php?fechar=true&db_erro=[12] - Problema no Cadastro do Recibo do Protocolo Numpre ' . $k03_numpre);
                 }
 
@@ -1077,7 +1077,7 @@ if (!empty($aDados["ver_matric"]) || $matricularecibo > 0) {
       ";
 
                     $Identificacao = db_query($sSqlIdentificacao);
-                    if (pg_numrows($Identificacao) == 0) {
+                    if (pg_num_rows($Identificacao) == 0) {
                         $erro = 1;
                         db_redireciona('db_erros.php?fechar=true&db_erro=[12] - Problema no Cadastro do Recibo do Protocolo Numpre ' . $k03_numpre);
                     }
@@ -1090,7 +1090,7 @@ if (!empty($aDados["ver_matric"]) || $matricularecibo > 0) {
         }
     }
 }
-$aEmitirPor = array();
+$aEmitirPor = [];
 
 $aEmitirPor[$sEmitirPor] = $iNumero;
 // Controle de Limitação do Tamanho do Historico em 210 Caracteres
@@ -1119,14 +1119,14 @@ if (isset($tipo_debito)) {
                  group by v01_exerc,v01_numpar
                  order by v01_exerc,v01_numpar";
         $result = db_query($sqlhist);
-        if (pg_numrows($result) != false) {
+        if (pg_num_rows($result) != false) {
             $exercv = "0000";
-            for ($xy = 0; $xy < pg_numrows($result); $xy++) {
-                if ($exercv != pg_result($result, $xy, 0)) {
-                    $exercv = pg_result($result, $xy, 0);
-                    $histparcela .= pg_result($result, $xy, 0) . ":";
+            for ($xy = 0; $xy < pg_num_rows($result); $xy++) {
+                if ($exercv != pg_fetch_result($result, $xy, 0)) {
+                    $exercv = pg_fetch_result($result, $xy, 0);
+                    $histparcela .= pg_fetch_result($result, $xy, 0) . ":";
                 }
-                $histparcela .= pg_result($result, $xy, 1) . "-";
+                $histparcela .= pg_fetch_result($result, $xy, 1) . "-";
             }
         }
         $sqlobs = "select distinct
@@ -1136,11 +1136,11 @@ if (isset($tipo_debito)) {
                                  and v01_numpar = k99_numpar
                 where k99_numpre_n = $k03_numpre";
         $result = db_query($sqlobs);
-        if (pg_numrows($result) > 0) {
+        if (pg_num_rows($result) > 0) {
             $histparcela .= "\nOBS: ";
-            for ($xy = 0; $xy < pg_numrows($result); $xy++) {
-                if (ltrim(rtrim(pg_result($result, $xy, 0))) != "") {
-                    $histparcela .= ltrim(rtrim(pg_result($result, $xy, 0)));
+            for ($xy = 0; $xy < pg_num_rows($result); $xy++) {
+                if (ltrim(rtrim(pg_fetch_result($result, $xy, 0))) != "") {
+                    $histparcela .= ltrim(rtrim(pg_fetch_result($result, $xy, 0)));
                 }
             }
         }
@@ -1156,14 +1156,14 @@ if (isset($tipo_debito)) {
                  group by q01_anousu,k99_numpar
                  order by q01_anousu,k99_numpar";
             $result = db_query($sqlhist);
-            if (pg_numrows($result) != false) {
+            if (pg_num_rows($result) != false) {
                 $exercv = "0000";
-                for ($xy = 0; $xy < pg_numrows($result); $xy++) {
-                    if ($exercv != pg_result($result, $xy, 0)) {
-                        $exercv = pg_result($result, $xy, 0);
-                        $histparcela .= "  " . pg_result($result, $xy, 0) . ": Parc:";
+                for ($xy = 0; $xy < pg_num_rows($result); $xy++) {
+                    if ($exercv != pg_fetch_result($result, $xy, 0)) {
+                        $exercv = pg_fetch_result($result, $xy, 0);
+                        $histparcela .= "  " . pg_fetch_result($result, $xy, 0) . ": Parc:";
                     }
-                    $histparcela .= "-" . pg_result($result, $xy, 1);
+                    $histparcela .= "-" . pg_fetch_result($result, $xy, 1);
                 }
             }
         } else {
@@ -1179,25 +1179,25 @@ if (isset($tipo_debito)) {
                  group by q05_ano,q05_mes
                  order by q05_ano,q05_mes";
                 $result = db_query($sqlhist);
-                if (pg_numrows($result) != false) {
+                if (pg_num_rows($result) != false) {
                     $exercv = "0000";
 
-                    for ($xy = 0; $xy < pg_numrows($result); $xy++) {
-                        if ($exercv != pg_result($result, $xy, 0)) {
-                            $exercv = pg_result($result, $xy, 0);
-                            $histparcela .= "  " . pg_result($result, $xy, 0) . ": Mês:";
+                    for ($xy = 0; $xy < pg_num_rows($result); $xy++) {
+                        if ($exercv != pg_fetch_result($result, $xy, 0)) {
+                            $exercv = pg_fetch_result($result, $xy, 0);
+                            $histparcela .= "  " . pg_fetch_result($result, $xy, 0) . ": Mês:";
                         }
-                        $histparcela .= "-" . pg_result($result, $xy, 1);
+                        $histparcela .= "-" . pg_fetch_result($result, $xy, 1);
 
-                        if (pg_result($result, $xy, 1) != "") {
+                        if (pg_fetch_result($result, $xy, 1) != "") {
                             $sqlhistor = "select distinct
                                q05_histor
                           from db_reciboweb
                                inner join issvar on q05_numpre = k99_numpre
                                                 and q05_numpar = k99_numpar
-                         where k99_numpre_n = $k03_numpre and q05_numpar = " . pg_result($result, $xy, 1);
+                         where k99_numpre_n = $k03_numpre and q05_numpar = " . pg_fetch_result($result, $xy, 1);
                             $resulthistor = db_query($sqlhistor);
-                            if (pg_numrows($resulthistor) > 0) {
+                            if (pg_num_rows($resulthistor) > 0) {
                                 db_fieldsmemory($resulthistor, 0);
                                 if ($q05_histor <> "Arrecadacao Normal") {
                                     $histparcela .= " - " . $q05_histor;
@@ -1218,15 +1218,15 @@ if (isset($tipo_debito)) {
                  order by v07_parcel,k99_numpar";
                     $result = db_query($sqlhist);
 
-                    if (pg_numrows($result) != false) {
-                        for ($xy = 0; $xy < pg_numrows($result); $xy++) {
-                            if (pg_result($result, $xy, 0) != $parcelamento) {
-                                $histparcela .= "\nParcelamento" . ($k03_tipo == 13 ? " do foro" : "") . ': ' . pg_result($result,
+                    if (pg_num_rows($result) != false) {
+                        for ($xy = 0; $xy < pg_num_rows($result); $xy++) {
+                            if (pg_fetch_result($result, $xy, 0) != $parcelamento) {
+                                $histparcela .= "\nParcelamento" . ($k03_tipo == 13 ? " do foro" : "") . ': ' . pg_fetch_result($result,
                                     $xy, 0) . " - ";
                             }
 
-                            $histparcela .= pg_result($result, $xy, 1) . ", ";
-                            $parcelamento = pg_result($result, $xy, 0);
+                            $histparcela .= pg_fetch_result($result, $xy, 1) . ", ";
+                            $parcelamento = pg_fetch_result($result, $xy, 0);
                         }
                     }
                 } else {
@@ -1237,7 +1237,7 @@ if (isset($tipo_debito)) {
                         $iMaxParc = "";
                         $sProcessoForo = "";
                         $sHistoricoIniciaisParcelamento = "";
-                        $aHistoricoIniciaisParcelamento = array();
+                        $aHistoricoIniciaisParcelamento = [];
 
                         $sSqlHist = "select v07_parcel   as parcel,
                         v07_numpre   as numpre,
@@ -1250,8 +1250,8 @@ if (isset($tipo_debito)) {
                   order by v07_parcel,k99_numpar";
                         $result = db_query($sSqlHist);
 
-                        if (pg_numrows($result) != false) {
-                            for ($xy = 0; $xy < pg_numrows($result); $xy++) {
+                        if (pg_num_rows($result) != false) {
+                            for ($xy = 0; $xy < pg_num_rows($result); $xy++) {
                                 $oHistParcelaTermo = db_utils::fieldsMemory($result, $xy);
 
                                 if ($iMinParc > $oHistParcelaTermo->numpar || $iMinParc == "") {
@@ -1287,7 +1287,7 @@ if (isset($tipo_debito)) {
                                                                         and processoforo.v70_anulado = false
                                   group by termoini.inicial, processoforo.v70_codforo, processoforo.v70_sequencial";
                                 $rsIniciaisParcelamento = db_query($sSqlIniciaisParcelamento);
-                                if (pg_numrows($rsIniciaisParcelamento) > 0) {
+                                if (pg_num_rows($rsIniciaisParcelamento) > 0) {
                                     for ($xy2 = 0; $xy2 < pg_num_rows($rsIniciaisParcelamento); $xy2++) {
                                         $oDadosInicial = db_utils::fieldsmemory($rsIniciaisParcelamento, $xy2);
 
@@ -1326,14 +1326,14 @@ if (isset($tipo_debito)) {
                  group by dv05_exerc,k00_numpar
                  order by dv05_exerc,k00_numpar";
                             $result = db_query($sqlhist);
-                            if (pg_numrows($result) != false) {
+                            if (pg_num_rows($result) != false) {
                                 $exercv = "0000";
-                                for ($xy = 0; $xy < pg_numrows($result); $xy++) {
-                                    if ($exercv != pg_result($result, $xy, 0)) {
-                                        $exercv = pg_result($result, $xy, 0);
-                                        $histparcela .= pg_result($result, $xy, 0) . ":";
+                                for ($xy = 0; $xy < pg_num_rows($result); $xy++) {
+                                    if ($exercv != pg_fetch_result($result, $xy, 0)) {
+                                        $exercv = pg_fetch_result($result, $xy, 0);
+                                        $histparcela .= pg_fetch_result($result, $xy, 0) . ":";
                                     }
-                                    $histparcela .= pg_result($result, $xy, 1) . "-";
+                                    $histparcela .= pg_fetch_result($result, $xy, 1) . "-";
                                 }
                             }
 
@@ -1343,11 +1343,11 @@ if (isset($tipo_debito)) {
                 inner join diversos on dv05_numpre = k99_numpre
                 where k99_numpre_n = $k03_numpre";
                             $result = db_query($sqlobs);
-                            if (pg_numrows($result) > 0) {
+                            if (pg_num_rows($result) > 0) {
                                 $histparcela .= "OBS: ";
-                                for ($xy = 0; $xy < pg_numrows($result); $xy++) {
-                                    if (ltrim(rtrim(pg_result($result, $xy, 0))) != "") {
-                                        $histparcela .= ltrim(rtrim(pg_result($result, $xy, 0)));
+                                for ($xy = 0; $xy < pg_num_rows($result); $xy++) {
+                                    if (ltrim(rtrim(pg_fetch_result($result, $xy, 0))) != "") {
+                                        $histparcela .= ltrim(rtrim(pg_fetch_result($result, $xy, 0)));
                                     }
                                 }
                             }
@@ -1392,10 +1392,10 @@ if (isset($tipo_debito)) {
                                 where db_reciboweb.k99_numpre_n = {$k03_numpre}) as x
                  order by inicial, exerc";
                                 $result = db_query($sqlhist);
-                                if (pg_numrows($result) != false) {
+                                if (pg_num_rows($result) != false) {
                                     $exercv = "0000";
                                     $sSeparador = "";
-                                    for ($xy = 0; $xy < pg_numrows($result); $xy++) {
+                                    for ($xy = 0; $xy < pg_num_rows($result); $xy++) {
                                         $oHistParcela = db_utils::fieldsMemory($result, $xy);
 
                                         if (!empty($oHistParcela->v70_sequencial)) {
@@ -1433,11 +1433,11 @@ if (isset($tipo_debito)) {
                              inner join arretipo   on arretipo.k00_tipo     = arrecad.k00_tipo
                        where db_reciboweb.k99_numpre_n = {$k03_numpre}";
                                     $rsDadosHist = db_query($sSqlDadosHist);
-                                    if (@pg_numrows($rsDadosHist) > 0) {
+                                    if (@pg_num_rows($rsDadosHist) > 0) {
                                         $oDadosAuto = db_utils::fieldsmemory($rsDadosHist, 0);
                                         $sObsAuto = "";
 
-                                        $aObs = split("\n", $oDadosAuto->y50_obs);
+                                        $aObs = preg_split("#\n#m", $oDadosAuto->y50_obs);
                                         if (count($aObs) > 3) {
                                             $sObsAuto = $aObs[0] . "\n" . $aObs[1] . "\n" . $aObs[2];
                                         } else {
@@ -1480,25 +1480,25 @@ if (isset($tipo_debito)) {
         ";
 
                                     $result = db_query($sqlhist) or die($sqlhist);
-                                    $tot = pg_numrows($result);
+                                    $tot = pg_num_rows($result);
 
                                     if ($tot > 0) {
-                                        $histant = pg_result($result, 0, "k00_origem") . "-" . pg_result($result, 0,
+                                        $histant = pg_fetch_result($result, 0, "k00_origem") . "-" . pg_fetch_result($result, 0,
                                             "k00_descr");
-                                        $histparcela .= pg_result($result, 0, "k00_descr") . "=>" . pg_result($result,
+                                        $histparcela .= pg_fetch_result($result, 0, "k00_descr") . "=>" . pg_fetch_result($result,
                                             0, "k00_origem") . " / P: ";
 
-                                        for ($xy = 0; $xy < pg_numrows($result); $xy++) {
-                                            if (pg_result($result, $xy, "k00_origem") . "-" . pg_result($result, $xy,
+                                        for ($xy = 0; $xy < pg_num_rows($result); $xy++) {
+                                            if (pg_fetch_result($result, $xy, "k00_origem") . "-" . pg_fetch_result($result, $xy,
                                                 "k00_descr") <> $histant) {
-                                                $histparcela .= "-" . pg_result($result, $xy,
-                                                    "k00_descr") . "=>" . pg_result($result, $xy,
+                                                $histparcela .= "-" . pg_fetch_result($result, $xy,
+                                                    "k00_descr") . "=>" . pg_fetch_result($result, $xy,
                                                     "k00_origem") . " / P: ";
-                                                $histant = pg_result($result, $xy,
-                                                    "k00_origem") . "-" . pg_result($result, $xy, "k00_descr");
+                                                $histant = pg_fetch_result($result, $xy,
+                                                    "k00_origem") . "-" . pg_fetch_result($result, $xy, "k00_descr");
                                             }
 
-                                            $histparcela .= pg_result($result, $xy, "k99_numpar") . " ";
+                                            $histparcela .= pg_fetch_result($result, $xy, "k99_numpar") . " ";
                                         }
                                     }
 
@@ -1515,7 +1515,7 @@ if (isset($tipo_debito)) {
 
                                     $result = db_query($sqlhist) or die($sqlhist);
 
-                                    $histant = pg_result($result, 0, "descricao");
+                                    $histant = pg_fetch_result($result, 0, "descricao");
 
                                     if (!empty($histant)) {
                                         $histparcela .= "\n" . $histant;
@@ -1587,10 +1587,10 @@ try {
                     $usuarioSistema = UsuarioSistemaRepository::getPorCodigo($idUsuario);
                     $nomeUsuario = strtolower($usuarioSistema->getNome());
 
-                    $debugWebservice = (object)array(
+                    $debugWebservice = (object)[
                       'debug' => false,
                       'origem' => 'Recibo'
-                    );
+                    ];
                     if (strpos($nomeUsuario, 'dbseller') !== false) {
                         $debugWebservice->debug = true;
                     }
@@ -1658,16 +1658,16 @@ $pdf1->municpref = $db_munic;
 $pdf1->telefpref = $db_telef;
 $pdf1->cgcpref = $db_cgc;
 $pdf1->emailpref = @$db_email;
-$pdf1->nome = trim(pg_result($Identificacao, 0, "z01_numcgm")) . "-" . trim(pg_result($Identificacao, 0, "z01_nome"));
-$pdf1->ender = trim(pg_result($Identificacao, 0, "z01_ender")) . ', ' . pg_result($Identificacao, 0,
-    "z01_numero") . ' ' . trim(pg_result($Identificacao, 0, "z01_compl")) . (strlen(trim(pg_result($Identificacao, 0,
-    "z01_bairro"))) > 0 ? "/" : "") . trim(pg_result($Identificacao, 0, "z01_bairro"));
-$pdf1->munic = trim(pg_result($Identificacao, 0, "z01_munic"));
-$pdf1->cep = trim(pg_result($Identificacao, 0, "z01_cep"));
-$pdf1->cgccpf = trim(@pg_result($Identificacao, 0, "z01_cgccpf"));
+$pdf1->nome = trim(pg_fetch_result($Identificacao, 0, "z01_numcgm")) . "-" . trim(pg_fetch_result($Identificacao, 0, "z01_nome"));
+$pdf1->ender = trim(pg_fetch_result($Identificacao, 0, "z01_ender")) . ', ' . pg_fetch_result($Identificacao, 0,
+    "z01_numero") . ' ' . trim(pg_fetch_result($Identificacao, 0, "z01_compl")) . (strlen(trim(pg_fetch_result($Identificacao, 0,
+    "z01_bairro"))) > 0 ? "/" : "") . trim(pg_fetch_result($Identificacao, 0, "z01_bairro"));
+$pdf1->munic = trim(pg_fetch_result($Identificacao, 0, "z01_munic"));
+$pdf1->cep = trim(pg_fetch_result($Identificacao, 0, "z01_cep"));
+$pdf1->cgccpf = trim(@pg_fetch_result($Identificacao, 0, "z01_cgccpf"));
 $pdf1->tipoinscr = $tipoidentificacao;
 $pdf1->nrinscr = $numero;
-$pdf1->ufcgm = trim(@pg_result($Identificacao, 0, "z01_uf"));
+$pdf1->ufcgm = trim(@pg_fetch_result($Identificacao, 0, "z01_uf"));
 $pdf1->ip = db_getsession("DB_ip");
 $pdf1->identifica_dados = $ident_tipo_ii;
 $pdf1->tipolograd = 'Logradouro:';
@@ -1711,7 +1711,7 @@ $pdf1->datacalc = db_formatar($minvenc, "d");
 $pdf1->predatacalc = db_formatar($minvenc, "d");
 $pdf1->taxabanc = db_formatar($taxabancaria, 'f');
 $pdf1->recorddadospagto = $DadosPagamento;
-$pdf1->linhasdadospagto = pg_numrows($DadosPagamento);
+$pdf1->linhasdadospagto = pg_num_rows($DadosPagamento);
 $pdf1->receita = 'k00_receit';
 $pdf1->valor = 'valor';
 $pdf1->receitared = 'codreduz';
@@ -1729,7 +1729,7 @@ if (pg_num_rows($rsReEmiteRecibo) > 0) {
     $rsObs = db_query($sqlObs);
 
     if (pg_num_rows($rsObs) > 0) {
-        $historico = pg_result($rsObs, 0, 0);
+        $historico = pg_fetch_result($rsObs, 0, 0);
     }
 } else {
     if (isset($_SESSION["DB_obsrecibo"])) {
@@ -1781,19 +1781,19 @@ $pdf1->linhadigitavel = $linhadigitavel;
 $pdf1->codigobarras   = $codigobarras;
 $pdf1->texto          = db_getsession('DB_login').' - '.date("d-m-Y - H-i").'   '.db_base_ativa();
 
-$pdf1->descr3_1       = trim(pg_result($Identificacao,0,"z01_numcgm")) . "-" . trim(pg_result($Identificacao,0,"z01_nome")); // contribuinte
-$pdf1->descr3_2       = trim(pg_result($Identificacao,0,"z01_ender")).', '.pg_result($Identificacao,0,"z01_numero").' '.trim(pg_result($Identificacao,0,"z01_compl")) . (strlen(trim(pg_result($Identificacao,0,"z01_bairro"))) > 0?"/":"") . trim(pg_result($Identificacao,0,"z01_bairro"));// endereco
-$pdf1->predescr3_1    = trim(pg_result($Identificacao,0,"z01_nome")); // contribuinte
-$pdf1->predescr3_2    = trim(pg_result($Identificacao,0,"z01_ender")).', '.pg_result($Identificacao,0,"z01_numero").' '.trim(pg_result($Identificacao,0,"z01_compl"));// endereco
+$pdf1->descr3_1       = trim(pg_fetch_result($Identificacao,0,"z01_numcgm")) . "-" . trim(pg_fetch_result($Identificacao,0,"z01_nome")); // contribuinte
+$pdf1->descr3_2       = trim(pg_fetch_result($Identificacao,0,"z01_ender")).', '.pg_fetch_result($Identificacao,0,"z01_numero").' '.trim(pg_fetch_result($Identificacao,0,"z01_compl")) . (strlen(trim(pg_fetch_result($Identificacao,0,"z01_bairro"))) > 0?"/":"") . trim(pg_fetch_result($Identificacao,0,"z01_bairro"));// endereco
+$pdf1->predescr3_1    = trim(pg_fetch_result($Identificacao,0,"z01_nome")); // contribuinte
+$pdf1->predescr3_2    = trim(pg_fetch_result($Identificacao,0,"z01_ender")).', '.pg_fetch_result($Identificacao,0,"z01_numero").' '.trim(pg_fetch_result($Identificacao,0,"z01_compl"));// endereco
 $pdf1->bairropri      = $j13_descr;    // municipio
-$pdf1->munic          = trim(pg_result($Identificacao,0,"z01_munic"));    // bairro
-$pdf1->premunic       = trim(pg_result($Identificacao,0,"z01_munic"));    // bairro
+$pdf1->munic          = trim(pg_fetch_result($Identificacao,0,"z01_munic"));    // bairro
+$pdf1->premunic       = trim(pg_fetch_result($Identificacao,0,"z01_munic"));    // bairro
 
-$pdf1->cep            = trim(pg_result($Identificacao,0,"z01_cep"));
-$pdf1->precep         = trim(pg_result($Identificacao,0,"z01_cep"));
-$pdf1->cgccpf         = trim(@pg_result($Identificacao,0,"z01_cgccpf"));
-$pdf1->precgccpf      = trim(@pg_result($Identificacao,0,"z01_cgccpf"));
-$pdf1->cgccpfcomprador = trim(@pg_result($Identificacao,0,"z01_cgccpf"));
+$pdf1->cep            = trim(pg_fetch_result($Identificacao,0,"z01_cep"));
+$pdf1->precep         = trim(pg_fetch_result($Identificacao,0,"z01_cep"));
+$pdf1->cgccpf         = trim(@pg_fetch_result($Identificacao,0,"z01_cgccpf"));
+$pdf1->precgccpf      = trim(@pg_fetch_result($Identificacao,0,"z01_cgccpf"));
+$pdf1->cgccpfcomprador = trim(@pg_fetch_result($Identificacao,0,"z01_cgccpf"));
 
 $pdf1->titulo5        = "";                 // titulo parcela
 $pdf1->descr5         = "";                 // descr parcela
@@ -1891,7 +1891,7 @@ $pdf1->predescr9 = str_pad($k03_numpre . "000", 11, 0, STR_PAD_LEFT); // cod. de
 
 $sSqlMsgCarne = "select k03_msgbanco from numpref where k03_anousu = " . db_getsession('DB_anousu');
 $rsMsgcarne = db_query($sSqlMsgCarne);
-$iNumrows = pg_numrows($rsMsgcarne);
+$iNumrows = pg_num_rows($rsMsgcarne);
 if ($iNumrows > 0) {
     db_fieldsmemory($rsMsgcarne, 0);
 } else {
@@ -1905,17 +1905,17 @@ $pdf1->predescr16_1 = substr($k03_msgbanco, 0, 50);
 $pdf1->predescr16_2 = substr($k03_msgbanco, 50, 50);
 $pdf1->predescr16_3 = substr($k03_msgbanco, 100, 50);
 
-$pdf1->descr11_1 = trim(pg_result($Identificacao, 0, "z01_numcgm")) . "-" . trim(pg_result($Identificacao, 0,
+$pdf1->descr11_1 = trim(pg_fetch_result($Identificacao, 0, "z01_numcgm")) . "-" . trim(pg_fetch_result($Identificacao, 0,
     "z01_nome"));
-if (trim(pg_result($Identificacao, 0, "z01_ender")) != "") {
-    $pdf1->descr11_2 = trim(pg_result($Identificacao, 0, "z01_ender")) . ", " . trim(pg_result($Identificacao, 0,
-        "z01_numero")) . '  ' . trim(pg_result($Identificacao, 0, "z01_compl"));
+if (trim(pg_fetch_result($Identificacao, 0, "z01_ender")) != "") {
+    $pdf1->descr11_2 = trim(pg_fetch_result($Identificacao, 0, "z01_ender")) . ", " . trim(pg_fetch_result($Identificacao, 0,
+        "z01_numero")) . '  ' . trim(pg_fetch_result($Identificacao, 0, "z01_compl"));
 } else {
     $pdf1->descr11_2 = "";
 }
-$pdf1->descr11_3 = trim(pg_result($Identificacao, 0, "z01_munic"));
-$pdf1->cep = trim(pg_result($Identificacao, 0, "z01_cep"));
-$pdf1->uf = trim(pg_result($Identificacao, 0, "z01_uf"));
+$pdf1->descr11_3 = trim(pg_fetch_result($Identificacao, 0, "z01_munic"));
+$pdf1->cep = trim(pg_fetch_result($Identificacao, 0, "z01_cep"));
+$pdf1->uf = trim(pg_fetch_result($Identificacao, 0, "z01_uf"));
 $pdf1->tipoinscr = $tipoidentificacao;
 $pdf1->nrinscr = $numero;
 
@@ -1932,10 +1932,10 @@ $k00_mensagemdesconto .= "DESCONTO CONCEDIDO REFERENTE ";
 
 $temdesconto = false;
 
-for ($mensdesc = 0; $mensdesc < pg_numrows($resultmensagemdesconto); $mensdesc++) {
+for ($mensdesc = 0; $mensdesc < pg_num_rows($resultmensagemdesconto); $mensdesc++) {
     db_fieldsmemory($resultmensagemdesconto, $mensdesc);
-    $descrlei = split("#", $k40_descr);
-    $k00_mensagemdesconto .= $descrlei[0] . ($mensdesc == pg_numrows($resultmensagemdesconto) ? "" : "-");
+    $descrlei = preg_split("#\\##m", $k40_descr);
+    $k00_mensagemdesconto .= $descrlei[0] . ($mensdesc == pg_num_rows($resultmensagemdesconto) ? "" : "-");
     $temdesconto = true;
 }
 
@@ -1995,7 +1995,7 @@ if ($oRegraEmissao->isCobranca()) {
         $aProcessoForo = array_unique($aProcessoForo);
         $aCodProcessoForo = array_unique($aCodProcessoForo);
         $nTotalTaxas = 0;
-        $aTaxas = array();
+        $aTaxas = [];
         $aDadosPartilha = new stdClass();
         $aDadosPartilha->ar37_descricao = null;
 
@@ -2213,7 +2213,7 @@ function recibodesconto(
     $sql_cgc = "select cgc, db21_codcli from db_config where codigo = " . db_getsession("DB_instit");
     $rs_cgc = db_query($sql_cgc);
     $oConfig = new stdClass();
-    $oConfig->cgc = pg_result($rs_cgc, 0, 0);
+    $oConfig->cgc = pg_fetch_result($rs_cgc, 0, 0);
 
     /* testa se está em dia com IPTU */
     $iTemDesconto = 1;
@@ -2221,8 +2221,8 @@ function recibodesconto(
     if (isset($ver_matric) and $oConfig->db21_codcli == 19985 and false) { // marica/rj
         $sIptuAberto = "select count(distinct k00_numpar) from caixa.arrecad inner join caixa.arretipo on arrecad.k00_tipo = arretipo.k00_tipo inner join caixa.arrematric on arrecad.k00_numpre = arrematric.k00_numpre where k03_tipo = 1 and k00_matric = $ver_matric";
         $rsIptuAberto = db_query($sIptuAberto) or die($sIptuAberto);
-        if (pg_numrows($rsIptuAberto) > 0) {
-            $iQuantAberto = pg_result($rsIptuAberto, 0, 0);
+        if (pg_num_rows($rsIptuAberto) > 0) {
+            $iQuantAberto = pg_fetch_result($rsIptuAberto, 0, 0);
             if ($iQuantAberto > 2) {
                 $iTemDesconto = 0;
             }
@@ -2239,7 +2239,7 @@ function recibodesconto(
                where k00_numpre = $numpre
                  and k00_numpar = $numpar";
     $resultvenc = db_query($sqlvenc) or die($sqlvenc);
-    if (pg_numrows($resultvenc) == 0) {
+    if (pg_num_rows($resultvenc) == 0) {
         return 0;
     }
     db_fieldsmemory($resultvenc, 0);
@@ -2261,7 +2261,7 @@ function recibodesconto(
                      and '$k00_dtvenc' <= k41_vencfim ";
 
     $resulttipoparc = db_query($sqltipoparc) or die($sqltipoparc);
-    if (pg_numrows($resulttipoparc) > 0) {
+    if (pg_num_rows($resulttipoparc) > 0) {
         db_fieldsmemory($resulttipoparc, 0);
     } else {
         $sqltipoparc = "select k40_codigo,
@@ -2280,7 +2280,7 @@ function recibodesconto(
 
         $resulttipoparc = db_query($sqltipoparc) or die($sqltipoparc);
 
-        if (pg_numrows($resulttipoparc) == 1) {
+        if (pg_num_rows($resulttipoparc) == 1) {
             db_fieldsmemory($resulttipoparc, 0);
         } else {
             $k40_todasmarc = false;
@@ -2291,7 +2291,7 @@ function recibodesconto(
     $resulttipoparcdeb = db_query($sqltipoparcdeb) or die($sqltipoparcdeb);
     $passar = false;
 
-    if (pg_numrows($resulttipoparcdeb) == 0) {
+    if (pg_num_rows($resulttipoparcdeb) == 0) {
         $passar = true;
     } else {
         $sqltipoparcdeb = "select k40_codigo, k40_todasmarc
@@ -2302,12 +2302,12 @@ function recibodesconto(
                        '$k00_dtvenc' >= k41_vencini and
                        '$k00_dtvenc' <= k41_vencfim ";
         $resulttipoparcdeb = db_query($sqltipoparcdeb) or die($sqltipoparcdeb);
-        if (pg_numrows($resulttipoparcdeb) > 0) {
+        if (pg_num_rows($resulttipoparcdeb) > 0) {
             $passar = true;
         }
     }
 
-    if (pg_numrows($resulttipoparc) == 0 or ($k40_todasmarc == 't' ? $totalregistrospassados <> $totregistros : false) or $passar == false) {
+    if (pg_num_rows($resulttipoparc) == 0 or ($k40_todasmarc == 't' ? $totalregistrospassados <> $totregistros : false) or $passar == false) {
         $desconto = 0;
     } else {
         $desconto = $k40_codigo;

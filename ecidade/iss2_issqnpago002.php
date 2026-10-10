@@ -64,7 +64,7 @@ $sql .= "         k02_drecei  ";
 $sql .= "order by k00_receit  ";
 
 $result = db_query($sql);
-$num = pg_numrows($result);
+$num = pg_num_rows($result);
 $linha = 0;
 $pdf->ln(2);
 $pre = 0;
@@ -147,7 +147,7 @@ $sql .= "order by k00_receit  ";
 
 
 $result = db_query($sql);
-$num = pg_numrows($result);
+$num = pg_num_rows($result);
 $pdf->SetFont('Arial','B',9);
 $imposto = "ISSQN VARIÁVEL";
 $borda   = "LRT";
@@ -209,7 +209,7 @@ $sql .= "         k02_drecei  ";
 $sql .= "order by k00_receit  ";
 
 $result = db_query($sql);
-$num = pg_numrows($result);
+$num = pg_num_rows($result);
 $pdf->SetFont('Arial','B',9);
 $imposto = "ALVARÁ";
 $borda = "LRT";
@@ -273,7 +273,7 @@ $sql .= "         k02_drecei  ";
 $sql .= "order by k00_receit  ";
 
 $result = db_query($sql);
-$num = pg_numrows($result);
+$num = pg_num_rows($result);
 $pdf->SetFont('Arial','B',9);
 $imposto = "VISTORIAS";
 $borda = "LRT";
@@ -317,22 +317,22 @@ $pdf->Cell(145,6,"TOTAL GERAL : ",1,0,"L",0);
 $pdf->Cell(30,6,db_formatar($total_geral,'f'),1,1,"R",0);
 
 
-$data = array(
+$data = [
     'ISSQN FIXO    ' => $total_fixo,
     'ISSQN VARIAVEL' => $total_variavel,
     'ALVARÁ        ' => $total_alvara,
-    'VISTORIAS     ' => $total_vistorias);
+    'VISTORIAS     ' => $total_vistorias];
 
 $pdf->setfont('Arial',"B",12);
 $pdf->ln(8);
 $pdf->multicell(0,6,'GRÁFICO COMPARATIVO',0,"C",0,0);
 $pdf->ln(8);
 $pdf->SetX(50);
-$col1=array(100,100,255);
-$col2=array(255,100,100);
-$col3=array(255,255,100);
-$col4=array(100,255,100);
-$pdf->PieChart(130, 100, $data, '%l - %v - (%p)', array($col1,$col2,$col3,$col4));
+$col1=[100,100,255];
+$col2=[255,100,100];
+$col3=[255,255,100];
+$col4=[100,255,100];
+$pdf->PieChart(130, 100, $data, '%l - %v - (%p)', [$col1,$col2,$col3,$col4]);
 
 $pdf->Output();
 

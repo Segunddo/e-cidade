@@ -98,9 +98,9 @@ $clclasse->rotulo->label("q12_descr");
         }else{
            $sql = $clclasse->sql_query("",$campos,"q12_classe","");
         }
-        $repassa = array();
+        $repassa = [];
         if(isset($chave_q12_descr)){
-          $repassa = array("chave_q12_classe"=>$chave_q12_classe,"chave_q12_descr"=>$chave_q12_descr);
+          $repassa = ["chave_q12_classe"=>$chave_q12_classe,"chave_q12_descr"=>$chave_q12_descr];
         }
         db_lovrot($sql,15,"()","",$funcao_js,"","NoMe",$repassa);
       }else{

@@ -97,7 +97,7 @@ $sql = "select * from listainscrcab inner join cgm on p11_numcgm = z01_numcgm  w
 
 $result = db_query($sql);
 
-if (pg_numrows($result) == 0){
+if (pg_num_rows($result) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 
 }
@@ -117,7 +117,7 @@ $troca = 1;
 $alt = 4;
 $total = 0;
 $qln = 0;
-for($x = 0; $x < pg_numrows($result) ;$x++){
+for($x = 0; $x < pg_num_rows($result) ;$x++){
    db_fieldsmemory($result,$x,true);
    if ($pdf->gety() > $pdf->h - 30 || $troca != 0 ){
       $pdf->addpage("L");
@@ -156,13 +156,13 @@ for($x = 0; $x < pg_numrows($result) ;$x++){
    $separa=0;
    $sql2 = "select * from listainscr  where p12_codigo = $p11_codigo "; 
    $result2 = db_query($sql2);  
-   if (pg_numrows($result2)==0){
+   if (pg_num_rows($result2)==0){
      $qln=1;
    }else $qln=0;
    $pdf->cell(55,$alt,$p11_contato   ,0,$qln,"L",0);
    $total++;
-   $numrows=pg_numrows($result2) - 1;
-   for($i = 0; $i < pg_numrows($result2) ;$i++){
+   $numrows=pg_num_rows($result2) - 1;
+   for($i = 0; $i < pg_num_rows($result2) ;$i++){
      db_fieldsmemory($result2,$i);
      if ($pdf->gety() > $pdf->h - 30 || $troca != 0 ){
        $pdf->addpage("L");
