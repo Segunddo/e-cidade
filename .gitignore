@@ -1,0 +1,4 @@
+
+# Dump de 314 MB -- NUNCA commitar (ver CLAUDE.md, Principios).
+# Entrou por engano num `git add -- docker/` e foi removido por amend.
+docker/database/ecidade_base.sql
