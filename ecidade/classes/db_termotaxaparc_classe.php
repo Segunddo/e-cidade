@@ -28,7 +28,7 @@ class cl_termotaxaparc {
                  ar29_instit = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_termotaxaparc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termotaxaparc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_termotaxaparc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar29_sequencial = ($this->ar29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar29_sequencial"]:$this->ar29_sequencial);
-       $this->ar29_numpar = ($this->ar29_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["ar29_numpar"]:$this->ar29_numpar);
-       $this->ar29_taxa = ($this->ar29_taxa == ""?@$GLOBALS["HTTP_POST_VARS"]["ar29_taxa"]:$this->ar29_taxa);
-       $this->ar29_instit = ($this->ar29_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ar29_instit"]:$this->ar29_instit);
+       $this->ar29_sequencial = ($this->ar29_sequencial === 0 || $this->ar29_sequencial === 0.0 || $this->ar29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar29_sequencial"]:$this->ar29_sequencial);
+       $this->ar29_numpar = ($this->ar29_numpar === 0 || $this->ar29_numpar === 0.0 || $this->ar29_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["ar29_numpar"]:$this->ar29_numpar);
+       $this->ar29_taxa = ($this->ar29_taxa === 0 || $this->ar29_taxa === 0.0 || $this->ar29_taxa == ""?@$GLOBALS["HTTP_POST_VARS"]["ar29_taxa"]:$this->ar29_taxa);
+       $this->ar29_instit = ($this->ar29_instit === 0 || $this->ar29_instit === 0.0 || $this->ar29_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ar29_instit"]:$this->ar29_instit);
      }else{
-       $this->ar29_sequencial = ($this->ar29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar29_sequencial"]:$this->ar29_sequencial);
+       $this->ar29_sequencial = ($this->ar29_sequencial === 0 || $this->ar29_sequencial === 0.0 || $this->ar29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar29_sequencial"]:$this->ar29_sequencial);
      }
    }
    // funcao para Inclusão
@@ -107,7 +107,7 @@ class cl_termotaxaparc {
          $this->ar29_sequencial = $ar29_sequencial; 
        }
      }
-     if(($this->ar29_sequencial == null) || ($this->ar29_sequencial == "") ){ 
+     if(($this->ar29_sequencial == null) || ($this->ar29_sequencial === 0 || $this->ar29_sequencial === 0.0 || $this->ar29_sequencial == "") ){ 
        $this->erro_sql = " Campo ar29_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

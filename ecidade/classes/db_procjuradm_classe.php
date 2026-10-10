@@ -52,7 +52,7 @@ class cl_procjuradm {
                  v64_procjur = int4 = Código do processo jurídico 
                  ";
    //funcao construtor da classe 
-   function cl_procjuradm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procjuradm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_procjuradm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v64_sequencial = ($this->v64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v64_sequencial"]:$this->v64_sequencial);
-       $this->v64_protprocesso = ($this->v64_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["v64_protprocesso"]:$this->v64_protprocesso);
-       $this->v64_procjur = ($this->v64_procjur == ""?@$GLOBALS["HTTP_POST_VARS"]["v64_procjur"]:$this->v64_procjur);
+       $this->v64_sequencial = ($this->v64_sequencial === 0 || $this->v64_sequencial === 0.0 || $this->v64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v64_sequencial"]:$this->v64_sequencial);
+       $this->v64_protprocesso = ($this->v64_protprocesso === 0 || $this->v64_protprocesso === 0.0 || $this->v64_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["v64_protprocesso"]:$this->v64_protprocesso);
+       $this->v64_procjur = ($this->v64_procjur === 0 || $this->v64_procjur === 0.0 || $this->v64_procjur == ""?@$GLOBALS["HTTP_POST_VARS"]["v64_procjur"]:$this->v64_procjur);
      }else{
-       $this->v64_sequencial = ($this->v64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v64_sequencial"]:$this->v64_sequencial);
+       $this->v64_sequencial = ($this->v64_sequencial === 0 || $this->v64_sequencial === 0.0 || $this->v64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v64_sequencial"]:$this->v64_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procjuradm {
          $this->v64_sequencial = $v64_sequencial; 
        }
      }
-     if(($this->v64_sequencial == null) || ($this->v64_sequencial == "") ){ 
+     if(($this->v64_sequencial == null) || ($this->v64_sequencial === 0 || $this->v64_sequencial === 0.0 || $this->v64_sequencial == "") ){ 
        $this->erro_sql = " Campo v64_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_procjuradm {
    function sql_query ( $v64_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_procjuradm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_procjuradm {
    function sql_query_file ( $v64_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_procjuradm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

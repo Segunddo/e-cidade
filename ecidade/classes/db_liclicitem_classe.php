@@ -32,7 +32,7 @@ class cl_liclicitem
                  ";
 
     //funcao construtor da classe
-    function cl_liclicitem()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("liclicitem");
@@ -54,13 +54,13 @@ class cl_liclicitem
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->l21_codigo = ($this->l21_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_codigo"] : $this->l21_codigo);
-            $this->l21_codliclicita = ($this->l21_codliclicita == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_codliclicita"] : $this->l21_codliclicita);
-            $this->l21_codpcprocitem = ($this->l21_codpcprocitem == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_codpcprocitem"] : $this->l21_codpcprocitem);
-            $this->l21_situacao = ($this->l21_situacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_situacao"] : $this->l21_situacao);
-            $this->l21_ordem = ($this->l21_ordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_ordem"] : $this->l21_ordem);
+            $this->l21_codigo = ($this->l21_codigo === 0 || $this->l21_codigo === 0.0 || $this->l21_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_codigo"] : $this->l21_codigo);
+            $this->l21_codliclicita = ($this->l21_codliclicita === 0 || $this->l21_codliclicita === 0.0 || $this->l21_codliclicita == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_codliclicita"] : $this->l21_codliclicita);
+            $this->l21_codpcprocitem = ($this->l21_codpcprocitem === 0 || $this->l21_codpcprocitem === 0.0 || $this->l21_codpcprocitem == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_codpcprocitem"] : $this->l21_codpcprocitem);
+            $this->l21_situacao = ($this->l21_situacao === 0 || $this->l21_situacao === 0.0 || $this->l21_situacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_situacao"] : $this->l21_situacao);
+            $this->l21_ordem = ($this->l21_ordem === 0 || $this->l21_ordem === 0.0 || $this->l21_ordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_ordem"] : $this->l21_ordem);
         } else {
-            $this->l21_codigo = ($this->l21_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_codigo"] : $this->l21_codigo);
+            $this->l21_codigo = ($this->l21_codigo === 0 || $this->l21_codigo === 0.0 || $this->l21_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["l21_codigo"] : $this->l21_codigo);
         }
     }
 
@@ -132,7 +132,7 @@ class cl_liclicitem
                 $this->l21_codigo = $l21_codigo;
             }
         }
-        if (($this->l21_codigo == null) || ($this->l21_codigo == "")) {
+        if (($this->l21_codigo == null) || ($this->l21_codigo === 0 || $this->l21_codigo === 0.0 || $this->l21_codigo == "")) {
             $this->erro_sql = " Campo l21_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -1043,7 +1043,7 @@ class cl_liclicitem
     function sql_query_acordos ( $l21_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1071,7 +1071,7 @@ class cl_liclicitem
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

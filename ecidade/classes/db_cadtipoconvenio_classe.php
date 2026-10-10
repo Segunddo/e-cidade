@@ -54,7 +54,7 @@ class cl_cadtipoconvenio {
                  ar12_sigla = varchar(3) = Sigla 
                  ";
    //funcao construtor da classe 
-   function cl_cadtipoconvenio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadtipoconvenio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_cadtipoconvenio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar12_sequencial = ($this->ar12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar12_sequencial"]:$this->ar12_sequencial);
-       $this->ar12_cadconveniomodalidade = ($this->ar12_cadconveniomodalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ar12_cadconveniomodalidade"]:$this->ar12_cadconveniomodalidade);
+       $this->ar12_sequencial = ($this->ar12_sequencial === 0 || $this->ar12_sequencial === 0.0 || $this->ar12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar12_sequencial"]:$this->ar12_sequencial);
+       $this->ar12_cadconveniomodalidade = ($this->ar12_cadconveniomodalidade === 0 || $this->ar12_cadconveniomodalidade === 0.0 || $this->ar12_cadconveniomodalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ar12_cadconveniomodalidade"]:$this->ar12_cadconveniomodalidade);
        $this->ar12_nome = ($this->ar12_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ar12_nome"]:$this->ar12_nome);
        $this->ar12_sigla = ($this->ar12_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["ar12_sigla"]:$this->ar12_sigla);
      }else{
-       $this->ar12_sequencial = ($this->ar12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar12_sequencial"]:$this->ar12_sequencial);
+       $this->ar12_sequencial = ($this->ar12_sequencial === 0 || $this->ar12_sequencial === 0.0 || $this->ar12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar12_sequencial"]:$this->ar12_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_cadtipoconvenio {
          $this->ar12_sequencial = $ar12_sequencial; 
        }
      }
-     if(($this->ar12_sequencial == null) || ($this->ar12_sequencial == "") ){ 
+     if(($this->ar12_sequencial == null) || ($this->ar12_sequencial === 0 || $this->ar12_sequencial === 0.0 || $this->ar12_sequencial == "") ){ 
        $this->erro_sql = " Campo ar12_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_cadtipoconvenio {
    function sql_query ( $ar12_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_cadtipoconvenio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_cadtipoconvenio {
    function sql_query_file ( $ar12_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_cadtipoconvenio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

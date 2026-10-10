@@ -40,7 +40,8 @@ $oParametrosJuridico = $oDaoParjuridico->getParametrosJuridico(db_getsession("DB
 $oParametrosJuridico = $oParametrosJuridico[0];
 
 db_postmemory($_SERVER);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $DB_DATACALC = mktime(0, 0, 0, substr($db_datausu, 5, 2), substr($db_datausu, 8, 2), substr($db_datausu, 0, 4));
 
@@ -355,7 +356,7 @@ foreach ($oDadosDebitos as $aDados) {
             if ($oDaoDivida->numrows > 0) {
                 $sExercicios = db_utils::fieldsMemory($rsDadosDivida, 0)->exercicios;
 
-                $aDadosProcessado->divida_exercicios = ereg_replace("[{}]", "", $sExercicios);
+                $aDadosProcessado->divida_exercicios = preg_replace("#[\\{\\}]#m", "", $sExercicios);
                 $aDadosProcessado->complemento_numpre = " - Exercício: " . $aDadosProcessado->divida_exercicios;
             }
         }
@@ -626,7 +627,7 @@ foreach ($oDadosDebitos as $aDados) {
         $aDadosProcessado->divida_exercicios = "";
 
         if (in_array($oDadosArreTipo->k03_tipo, $aCadTipoBuscaDadosDivida) && !empty($sExercicios)) {
-            $aDadosProcessado->divida_exercicios = ereg_replace("[{}]", "", $sExercicios);
+            $aDadosProcessado->divida_exercicios = preg_replace("#[\\{\\}]#m", "", $sExercicios);
             $aDadosProcessado->complemento_numpre = " - Exercício: " . $aDadosProcessado->divida_exercicios;
         }
 

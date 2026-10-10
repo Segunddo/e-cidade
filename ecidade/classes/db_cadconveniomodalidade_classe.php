@@ -50,7 +50,7 @@ class cl_cadconveniomodalidade {
                  ar15_nome = varchar(50) = Nome 
                  ";
    //funcao construtor da classe 
-   function cl_cadconveniomodalidade() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadconveniomodalidade"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_cadconveniomodalidade {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar15_sequencial = ($this->ar15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar15_sequencial"]:$this->ar15_sequencial);
+       $this->ar15_sequencial = ($this->ar15_sequencial === 0 || $this->ar15_sequencial === 0.0 || $this->ar15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar15_sequencial"]:$this->ar15_sequencial);
        $this->ar15_nome = ($this->ar15_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ar15_nome"]:$this->ar15_nome);
      }else{
-       $this->ar15_sequencial = ($this->ar15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar15_sequencial"]:$this->ar15_sequencial);
+       $this->ar15_sequencial = ($this->ar15_sequencial === 0 || $this->ar15_sequencial === 0.0 || $this->ar15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar15_sequencial"]:$this->ar15_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_cadconveniomodalidade {
          $this->ar15_sequencial = $ar15_sequencial; 
        }
      }
-     if(($this->ar15_sequencial == null) || ($this->ar15_sequencial == "") ){ 
+     if(($this->ar15_sequencial == null) || ($this->ar15_sequencial === 0 || $this->ar15_sequencial === 0.0 || $this->ar15_sequencial == "") ){ 
        $this->erro_sql = " Campo ar15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_cadconveniomodalidade {
    function sql_query ( $ar15_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_cadconveniomodalidade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_cadconveniomodalidade {
    function sql_query_file ( $ar15_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_cadconveniomodalidade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

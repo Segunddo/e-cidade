@@ -110,7 +110,7 @@ class cl_protprocessodocumento
     function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->p01_sequencial = ($this->p01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p01_sequencial"]:$this->p01_sequencial);
+            $this->p01_sequencial = ($this->p01_sequencial === 0 || $this->p01_sequencial === 0.0 || $this->p01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p01_sequencial"]:$this->p01_sequencial);
             $this->p01_protprocesso = ($this->p01_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["p01_protprocesso"]:$this->p01_protprocesso);
             $this->p01_descricao = ($this->p01_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["p01_descricao"]:$this->p01_descricao);
             $this->p01_documento = ($this->p01_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["p01_documento"]:$this->p01_documento);
@@ -128,9 +128,9 @@ class cl_protprocessodocumento
                 }
             }
             $this->p01_procandamint = ($this->p01_procandamint == ""?@$GLOBALS["HTTP_POST_VARS"]["p01_procandamint"]:$this->p01_procandamint);
-            $this->p01_ordem = ($this->p01_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["p01_ordem"]:$this->p01_ordem);
+            $this->p01_ordem = ($this->p01_ordem === 0 || $this->p01_ordem === 0.0 || $this->p01_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["p01_ordem"]:$this->p01_ordem);
         } else {
-            $this->p01_sequencial = ($this->p01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p01_sequencial"]:$this->p01_sequencial);
+            $this->p01_sequencial = ($this->p01_sequencial === 0 || $this->p01_sequencial === 0.0 || $this->p01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p01_sequencial"]:$this->p01_sequencial);
         }
     }
 

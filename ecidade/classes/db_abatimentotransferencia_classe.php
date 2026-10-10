@@ -54,7 +54,7 @@ class cl_abatimentotransferencia {
                  k158_abatimentodestino = int4 = Sequencial da tabela abatimento 
                  ";
    //funcao construtor da classe 
-   function cl_abatimentotransferencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("abatimentotransferencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_abatimentotransferencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k158_sequencial = ($this->k158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k158_sequencial"]:$this->k158_sequencial);
-       $this->k158_abatimentoutilizacao = ($this->k158_abatimentoutilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k158_abatimentoutilizacao"]:$this->k158_abatimentoutilizacao);
-       $this->k158_abatimentoorigem = ($this->k158_abatimentoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["k158_abatimentoorigem"]:$this->k158_abatimentoorigem);
-       $this->k158_abatimentodestino = ($this->k158_abatimentodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["k158_abatimentodestino"]:$this->k158_abatimentodestino);
+       $this->k158_sequencial = ($this->k158_sequencial === 0 || $this->k158_sequencial === 0.0 || $this->k158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k158_sequencial"]:$this->k158_sequencial);
+       $this->k158_abatimentoutilizacao = ($this->k158_abatimentoutilizacao === 0 || $this->k158_abatimentoutilizacao === 0.0 || $this->k158_abatimentoutilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k158_abatimentoutilizacao"]:$this->k158_abatimentoutilizacao);
+       $this->k158_abatimentoorigem = ($this->k158_abatimentoorigem === 0 || $this->k158_abatimentoorigem === 0.0 || $this->k158_abatimentoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["k158_abatimentoorigem"]:$this->k158_abatimentoorigem);
+       $this->k158_abatimentodestino = ($this->k158_abatimentodestino === 0 || $this->k158_abatimentodestino === 0.0 || $this->k158_abatimentodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["k158_abatimentodestino"]:$this->k158_abatimentodestino);
      }else{
-       $this->k158_sequencial = ($this->k158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k158_sequencial"]:$this->k158_sequencial);
+       $this->k158_sequencial = ($this->k158_sequencial === 0 || $this->k158_sequencial === 0.0 || $this->k158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k158_sequencial"]:$this->k158_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_abatimentotransferencia {
          $this->k158_sequencial = $k158_sequencial; 
        }
      }
-     if(($this->k158_sequencial == null) || ($this->k158_sequencial == "") ){ 
+     if(($this->k158_sequencial == null) || ($this->k158_sequencial === 0 || $this->k158_sequencial === 0.0 || $this->k158_sequencial == "") ){ 
        $this->erro_sql = " Campo k158_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_abatimentotransferencia {
    function sql_query ( $k158_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_abatimentotransferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_abatimentotransferencia {
    function sql_query_file ( $k158_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -453,7 +453,7 @@ class cl_abatimentotransferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

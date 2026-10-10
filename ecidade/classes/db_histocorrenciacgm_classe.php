@@ -52,7 +52,7 @@ class cl_histocorrenciacgm {
                  ar24_histocorrencia = int4 = Código Histórico 
                  ";
    //funcao construtor da classe 
-   function cl_histocorrenciacgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("histocorrenciacgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_histocorrenciacgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar24_sequencial = ($this->ar24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar24_sequencial"]:$this->ar24_sequencial);
-       $this->ar24_numcgm = ($this->ar24_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ar24_numcgm"]:$this->ar24_numcgm);
-       $this->ar24_histocorrencia = ($this->ar24_histocorrencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar24_histocorrencia"]:$this->ar24_histocorrencia);
+       $this->ar24_sequencial = ($this->ar24_sequencial === 0 || $this->ar24_sequencial === 0.0 || $this->ar24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar24_sequencial"]:$this->ar24_sequencial);
+       $this->ar24_numcgm = ($this->ar24_numcgm === 0 || $this->ar24_numcgm === 0.0 || $this->ar24_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ar24_numcgm"]:$this->ar24_numcgm);
+       $this->ar24_histocorrencia = ($this->ar24_histocorrencia === 0 || $this->ar24_histocorrencia === 0.0 || $this->ar24_histocorrencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar24_histocorrencia"]:$this->ar24_histocorrencia);
      }else{
-       $this->ar24_sequencial = ($this->ar24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar24_sequencial"]:$this->ar24_sequencial);
+       $this->ar24_sequencial = ($this->ar24_sequencial === 0 || $this->ar24_sequencial === 0.0 || $this->ar24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar24_sequencial"]:$this->ar24_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_histocorrenciacgm {
          $this->ar24_sequencial = $ar24_sequencial; 
        }
      }
-     if(($this->ar24_sequencial == null) || ($this->ar24_sequencial == "") ){ 
+     if(($this->ar24_sequencial == null) || ($this->ar24_sequencial === 0 || $this->ar24_sequencial === 0.0 || $this->ar24_sequencial == "") ){ 
        $this->erro_sql = " Campo ar24_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_histocorrenciacgm {
    function sql_query ( $ar24_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_histocorrenciacgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_histocorrenciacgm {
    function sql_query_file ( $ar24_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_histocorrenciacgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

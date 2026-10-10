@@ -50,7 +50,7 @@ class cl_inicialcert_anulada {
                  v49_certidao = int4 = Certidão 
                  ";
    //funcao construtor da classe 
-   function cl_inicialcert_anulada() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("inicialcert_anulada"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_inicialcert_anulada {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v49_inicial = ($this->v49_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v49_inicial"]:$this->v49_inicial);
-       $this->v49_certidao = ($this->v49_certidao == ""?@$GLOBALS["HTTP_POST_VARS"]["v49_certidao"]:$this->v49_certidao);
+       $this->v49_inicial = ($this->v49_inicial === 0 || $this->v49_inicial === 0.0 || $this->v49_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v49_inicial"]:$this->v49_inicial);
+       $this->v49_certidao = ($this->v49_certidao === 0 || $this->v49_certidao === 0.0 || $this->v49_certidao == ""?@$GLOBALS["HTTP_POST_VARS"]["v49_certidao"]:$this->v49_certidao);
      }else{
      }
    }
@@ -253,7 +253,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $oid = null,$campos="inicialcert_anulada.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -279,7 +279,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -292,7 +292,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -310,7 +310,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

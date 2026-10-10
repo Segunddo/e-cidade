@@ -52,7 +52,7 @@ class cl_partilhaarquivoreg {
                  v79_processoforopartilhacusta = int4 = Custa da partilha do processo 
                  ";
    //funcao construtor da classe 
-   function cl_partilhaarquivoreg() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("partilhaarquivoreg"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_partilhaarquivoreg {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v79_sequencial = ($this->v79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_sequencial"]:$this->v79_sequencial);
-       $this->v79_partilhaarquivo = ($this->v79_partilhaarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_partilhaarquivo"]:$this->v79_partilhaarquivo);
-       $this->v79_processoforopartilhacusta = ($this->v79_processoforopartilhacusta == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_processoforopartilhacusta"]:$this->v79_processoforopartilhacusta);
+       $this->v79_sequencial = ($this->v79_sequencial === 0 || $this->v79_sequencial === 0.0 || $this->v79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_sequencial"]:$this->v79_sequencial);
+       $this->v79_partilhaarquivo = ($this->v79_partilhaarquivo === 0 || $this->v79_partilhaarquivo === 0.0 || $this->v79_partilhaarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_partilhaarquivo"]:$this->v79_partilhaarquivo);
+       $this->v79_processoforopartilhacusta = ($this->v79_processoforopartilhacusta === 0 || $this->v79_processoforopartilhacusta === 0.0 || $this->v79_processoforopartilhacusta == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_processoforopartilhacusta"]:$this->v79_processoforopartilhacusta);
      }else{
-       $this->v79_sequencial = ($this->v79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_sequencial"]:$this->v79_sequencial);
+       $this->v79_sequencial = ($this->v79_sequencial === 0 || $this->v79_sequencial === 0.0 || $this->v79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_sequencial"]:$this->v79_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_partilhaarquivoreg {
          $this->v79_sequencial = $v79_sequencial; 
        }
      }
-     if(($this->v79_sequencial == null) || ($this->v79_sequencial == "") ){ 
+     if(($this->v79_sequencial == null) || ($this->v79_sequencial === 0 || $this->v79_sequencial === 0.0 || $this->v79_sequencial == "") ){ 
        $this->erro_sql = " Campo v79_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_partilhaarquivoreg {
    function sql_query ( $v79_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_partilhaarquivoreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_partilhaarquivoreg {
    function sql_query_file ( $v79_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_partilhaarquivoreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -41,7 +41,7 @@ class cl_procandamint {
                  p78_tipodespacho = int4 = Tipo de Despacho
                  ";
    //funcao construtor da classe
-   function cl_procandamint() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procandamint");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -58,8 +58,8 @@ class cl_procandamint {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p78_sequencial = ($this->p78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_sequencial"]:$this->p78_sequencial);
-       $this->p78_codandam = ($this->p78_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_codandam"]:$this->p78_codandam);
+       $this->p78_sequencial = ($this->p78_sequencial === 0 || $this->p78_sequencial === 0.0 || $this->p78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_sequencial"]:$this->p78_sequencial);
+       $this->p78_codandam = ($this->p78_codandam === 0 || $this->p78_codandam === 0.0 || $this->p78_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_codandam"]:$this->p78_codandam);
        if($this->p78_data == ""){
          $this->p78_data_dia = ($this->p78_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_data_dia"]:$this->p78_data_dia);
          $this->p78_data_mes = ($this->p78_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_data_mes"]:$this->p78_data_mes);
@@ -69,7 +69,7 @@ class cl_procandamint {
          }
        }
        $this->p78_hora = ($this->p78_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_hora"]:$this->p78_hora);
-       $this->p78_usuario = ($this->p78_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_usuario"]:$this->p78_usuario);
+       $this->p78_usuario = ($this->p78_usuario === 0 || $this->p78_usuario === 0.0 || $this->p78_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_usuario"]:$this->p78_usuario);
        $this->p78_despacho = ($this->p78_despacho == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_despacho"]:$this->p78_despacho);
        $this->p78_publico = ($this->p78_publico == "f"?@$GLOBALS["HTTP_POST_VARS"]["p78_publico"]:$this->p78_publico);
        $this->p78_transint = ($this->p78_transint == "f"?@$GLOBALS["HTTP_POST_VARS"]["p78_transint"]:$this->p78_transint);
@@ -86,9 +86,9 @@ class cl_procandamint {
          $this->p78_usuario = 0;
        }
 
-       $this->p78_tipodespacho = ($this->p78_tipodespacho == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_tipodespacho"]:$this->p78_tipodespacho);
+       $this->p78_tipodespacho = ($this->p78_tipodespacho === 0 || $this->p78_tipodespacho === 0.0 || $this->p78_tipodespacho == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_tipodespacho"]:$this->p78_tipodespacho);
      }else{
-       $this->p78_sequencial = ($this->p78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_sequencial"]:$this->p78_sequencial);
+       $this->p78_sequencial = ($this->p78_sequencial === 0 || $this->p78_sequencial === 0.0 || $this->p78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p78_sequencial"]:$this->p78_sequencial);
      }
    }
    // funcao para inclusao
@@ -172,7 +172,7 @@ class cl_procandamint {
          $this->p78_sequencial = $p78_sequencial;
        }
      }
-     if(($this->p78_sequencial == null) || ($this->p78_sequencial == "") ){
+     if(($this->p78_sequencial == null) || ($this->p78_sequencial === 0 || $this->p78_sequencial === 0.0 || $this->p78_sequencial == "") ){
        $this->erro_sql = " Campo p78_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

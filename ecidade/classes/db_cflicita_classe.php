@@ -60,7 +60,7 @@ class cl_cflicita {
                  l03_pctipocompratribunal = int4 = Código Tribunal 
                  ";
    //funcao construtor da classe 
-   function cl_cflicita() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cflicita"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_cflicita {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l03_codigo = ($this->l03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_codigo"]:$this->l03_codigo);
+       $this->l03_codigo = ($this->l03_codigo === 0 || $this->l03_codigo === 0.0 || $this->l03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_codigo"]:$this->l03_codigo);
        $this->l03_descr = ($this->l03_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_descr"]:$this->l03_descr);
        $this->l03_tipo = ($this->l03_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_tipo"]:$this->l03_tipo);
-       $this->l03_codcom = ($this->l03_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_codcom"]:$this->l03_codcom);
-       $this->l03_instit = ($this->l03_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_instit"]:$this->l03_instit);
+       $this->l03_codcom = ($this->l03_codcom === 0 || $this->l03_codcom === 0.0 || $this->l03_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_codcom"]:$this->l03_codcom);
+       $this->l03_instit = ($this->l03_instit === 0 || $this->l03_instit === 0.0 || $this->l03_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_instit"]:$this->l03_instit);
        $this->l03_usaregistropreco = ($this->l03_usaregistropreco == "f"?@$GLOBALS["HTTP_POST_VARS"]["l03_usaregistropreco"]:$this->l03_usaregistropreco);
-       $this->l03_pctipocompratribunal = ($this->l03_pctipocompratribunal == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_pctipocompratribunal"]:$this->l03_pctipocompratribunal);
+       $this->l03_pctipocompratribunal = ($this->l03_pctipocompratribunal === 0 || $this->l03_pctipocompratribunal === 0.0 || $this->l03_pctipocompratribunal == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_pctipocompratribunal"]:$this->l03_pctipocompratribunal);
      }else{
-       $this->l03_codigo = ($this->l03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_codigo"]:$this->l03_codigo);
+       $this->l03_codigo = ($this->l03_codigo === 0 || $this->l03_codigo === 0.0 || $this->l03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l03_codigo"]:$this->l03_codigo);
      }
    }
    // funcao para inclusao
@@ -163,7 +163,7 @@ class cl_cflicita {
          $this->l03_codigo = $l03_codigo; 
        }
      }
-     if(($this->l03_codigo == null) || ($this->l03_codigo == "") ){ 
+     if(($this->l03_codigo == null) || ($this->l03_codigo === 0 || $this->l03_codigo === 0.0 || $this->l03_codigo == "") ){ 
        $this->erro_sql = " Campo l03_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

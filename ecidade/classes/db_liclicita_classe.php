@@ -108,7 +108,7 @@ class cl_liclicita {
                  l20_tipo = int4 = Tipo
                  ";
    //funcao construtor da classe
-   function cl_liclicita() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liclicita");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -125,10 +125,10 @@ class cl_liclicita {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l20_codigo = ($this->l20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_codigo"]:$this->l20_codigo);
-       $this->l20_codtipocom = ($this->l20_codtipocom == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_codtipocom"]:$this->l20_codtipocom);
-       $this->l20_numero = ($this->l20_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_numero"]:$this->l20_numero);
-       $this->l20_id_usucria = ($this->l20_id_usucria == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_id_usucria"]:$this->l20_id_usucria);
+       $this->l20_codigo = ($this->l20_codigo === 0 || $this->l20_codigo === 0.0 || $this->l20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_codigo"]:$this->l20_codigo);
+       $this->l20_codtipocom = ($this->l20_codtipocom === 0 || $this->l20_codtipocom === 0.0 || $this->l20_codtipocom == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_codtipocom"]:$this->l20_codtipocom);
+       $this->l20_numero = ($this->l20_numero === 0 || $this->l20_numero === 0.0 || $this->l20_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_numero"]:$this->l20_numero);
+       $this->l20_id_usucria = ($this->l20_id_usucria === 0 || $this->l20_id_usucria === 0.0 || $this->l20_id_usucria == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_id_usucria"]:$this->l20_id_usucria);
        if($this->l20_datacria == ""){
          $this->l20_datacria_dia = ($this->l20_datacria_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_datacria_dia"]:$this->l20_datacria_dia);
          $this->l20_datacria_mes = ($this->l20_datacria_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_datacria_mes"]:$this->l20_datacria_mes);
@@ -157,24 +157,24 @@ class cl_liclicita {
        $this->l20_horaaber = ($this->l20_horaaber == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_horaaber"]:$this->l20_horaaber);
        $this->l20_local = ($this->l20_local == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_local"]:$this->l20_local);
        $this->l20_objeto = ($this->l20_objeto == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_objeto"]:$this->l20_objeto);
-       $this->l20_tipojulg = ($this->l20_tipojulg == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_tipojulg"]:$this->l20_tipojulg);
-       $this->l20_liccomissao = ($this->l20_liccomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_liccomissao"]:$this->l20_liccomissao);
-       $this->l20_liclocal = ($this->l20_liclocal == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_liclocal"]:$this->l20_liclocal);
+       $this->l20_tipojulg = ($this->l20_tipojulg === 0 || $this->l20_tipojulg === 0.0 || $this->l20_tipojulg == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_tipojulg"]:$this->l20_tipojulg);
+       $this->l20_liccomissao = ($this->l20_liccomissao === 0 || $this->l20_liccomissao === 0.0 || $this->l20_liccomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_liccomissao"]:$this->l20_liccomissao);
+       $this->l20_liclocal = ($this->l20_liclocal === 0 || $this->l20_liclocal === 0.0 || $this->l20_liclocal == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_liclocal"]:$this->l20_liclocal);
        $this->l20_procadmin = ($this->l20_procadmin == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_procadmin"]:$this->l20_procadmin);
        $this->l20_correto = ($this->l20_correto == "f"?@$GLOBALS["HTTP_POST_VARS"]["l20_correto"]:$this->l20_correto);
-       $this->l20_instit = ($this->l20_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_instit"]:$this->l20_instit);
-       $this->l20_licsituacao = ($this->l20_licsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_licsituacao"]:$this->l20_licsituacao);
-       $this->l20_edital = ($this->l20_edital == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_edital"]:$this->l20_edital);
-       $this->l20_anousu = ($this->l20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_anousu"]:$this->l20_anousu);
+       $this->l20_instit = ($this->l20_instit === 0 || $this->l20_instit === 0.0 || $this->l20_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_instit"]:$this->l20_instit);
+       $this->l20_licsituacao = ($this->l20_licsituacao === 0 || $this->l20_licsituacao === 0.0 || $this->l20_licsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_licsituacao"]:$this->l20_licsituacao);
+       $this->l20_edital = ($this->l20_edital === 0 || $this->l20_edital === 0.0 || $this->l20_edital == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_edital"]:$this->l20_edital);
+       $this->l20_anousu = ($this->l20_anousu === 0 || $this->l20_anousu === 0.0 || $this->l20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_anousu"]:$this->l20_anousu);
        $this->l20_usaregistropreco = ($this->l20_usaregistropreco == "f"?@$GLOBALS["HTTP_POST_VARS"]["l20_usaregistropreco"]:$this->l20_usaregistropreco);
        $this->l20_localentrega = ($this->l20_localentrega == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_localentrega"]:$this->l20_localentrega);
        $this->l20_prazoentrega = ($this->l20_prazoentrega == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_prazoentrega"]:$this->l20_prazoentrega);
        $this->l20_condicoespag = ($this->l20_condicoespag == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_condicoespag"]:$this->l20_condicoespag);
        $this->l20_validadeproposta = ($this->l20_validadeproposta == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_validadeproposta"]:$this->l20_validadeproposta);
-       $this->l20_formacontroleregistropreco = ($this->l20_formacontroleregistropreco == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_formacontroleregistropreco"]:$this->l20_formacontroleregistropreco);
-       $this->l20_tipo = ($this->l20_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_tipo"]:$this->l20_tipo);
+       $this->l20_formacontroleregistropreco = ($this->l20_formacontroleregistropreco === 0 || $this->l20_formacontroleregistropreco === 0.0 || $this->l20_formacontroleregistropreco == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_formacontroleregistropreco"]:$this->l20_formacontroleregistropreco);
+       $this->l20_tipo = ($this->l20_tipo === 0 || $this->l20_tipo === 0.0 || $this->l20_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_tipo"]:$this->l20_tipo);
      }else{
-       $this->l20_codigo = ($this->l20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_codigo"]:$this->l20_codigo);
+       $this->l20_codigo = ($this->l20_codigo === 0 || $this->l20_codigo === 0.0 || $this->l20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l20_codigo"]:$this->l20_codigo);
      }
    }
    // funcao para Inclusão
@@ -384,7 +384,7 @@ class cl_liclicita {
          $this->l20_codigo = $l20_codigo;
        }
      }
-     if(($this->l20_codigo == null) || ($this->l20_codigo == "") ){
+     if(($this->l20_codigo == null) || ($this->l20_codigo === 0 || $this->l20_codigo === 0.0 || $this->l20_codigo == "") ){
        $this->erro_sql = " Campo l20_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

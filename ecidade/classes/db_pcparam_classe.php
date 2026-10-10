@@ -160,11 +160,11 @@ class cl_pcparam
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->pc30_instit = ($this->pc30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_instit"]:$this->pc30_instit);
+       $this->pc30_instit = ($this->pc30_instit === 0 || $this->pc30_instit === 0.0 || $this->pc30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_instit"]:$this->pc30_instit);
        $this->pc30_horas = ($this->pc30_horas == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_horas"]:$this->pc30_horas);
-       $this->pc30_dias = ($this->pc30_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_dias"]:$this->pc30_dias);
-       $this->pc30_tipcom = ($this->pc30_tipcom == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_tipcom"]:$this->pc30_tipcom);
-       $this->pc30_unid = ($this->pc30_unid == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_unid"]:$this->pc30_unid);
+       $this->pc30_dias = ($this->pc30_dias === 0 || $this->pc30_dias === 0.0 || $this->pc30_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_dias"]:$this->pc30_dias);
+       $this->pc30_tipcom = ($this->pc30_tipcom === 0 || $this->pc30_tipcom === 0.0 || $this->pc30_tipcom == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_tipcom"]:$this->pc30_tipcom);
+       $this->pc30_unid = ($this->pc30_unid === 0 || $this->pc30_unid === 0.0 || $this->pc30_unid == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_unid"]:$this->pc30_unid);
        $this->pc30_obrigajust = ($this->pc30_obrigajust == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_obrigajust"]:$this->pc30_obrigajust);
        $this->pc30_obrigamat = ($this->pc30_obrigamat == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_obrigamat"]:$this->pc30_obrigamat);
        $this->pc30_gerareserva = ($this->pc30_gerareserva == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_gerareserva"]:$this->pc30_gerareserva);
@@ -180,35 +180,35 @@ class cl_pcparam
        $this->pc30_tipoemiss = ($this->pc30_tipoemiss == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_tipoemiss"]:$this->pc30_tipoemiss);
        $this->pc30_comsaldo = ($this->pc30_comsaldo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_comsaldo"]:$this->pc30_comsaldo);
        $this->pc30_contrandsol = ($this->pc30_contrandsol == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_contrandsol"]:$this->pc30_contrandsol);
-       $this->pc30_tipoprocsol = ($this->pc30_tipoprocsol == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_tipoprocsol"]:$this->pc30_tipoprocsol);
+       $this->pc30_tipoprocsol = ($this->pc30_tipoprocsol === 0 || $this->pc30_tipoprocsol === 0.0 || $this->pc30_tipoprocsol == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_tipoprocsol"]:$this->pc30_tipoprocsol);
        $this->pc30_itenslibaut = ($this->pc30_itenslibaut == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_itenslibaut"]:$this->pc30_itenslibaut);
        $this->pc30_comobs = ($this->pc30_comobs == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_comobs"]:$this->pc30_comobs);
        $this->pc30_ultdotac = ($this->pc30_ultdotac == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_ultdotac"]:$this->pc30_ultdotac);
-       $this->pc30_fornecdeb = ($this->pc30_fornecdeb == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_fornecdeb"]:$this->pc30_fornecdeb);
+       $this->pc30_fornecdeb = ($this->pc30_fornecdeb === 0 || $this->pc30_fornecdeb === 0.0 || $this->pc30_fornecdeb == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_fornecdeb"]:$this->pc30_fornecdeb);
        $this->pc30_emiteemail = ($this->pc30_emiteemail == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_emiteemail"]:$this->pc30_emiteemail);
-       $this->pc30_modeloorc = ($this->pc30_modeloorc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_modeloorc"]:$this->pc30_modeloorc);
-       $this->pc30_modeloordemcompra = ($this->pc30_modeloordemcompra == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_modeloordemcompra"]:$this->pc30_modeloordemcompra);
-       $this->pc30_modeloorcsol = ($this->pc30_modeloorcsol == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_modeloorcsol"]:$this->pc30_modeloorcsol);
+       $this->pc30_modeloorc = ($this->pc30_modeloorc === 0 || $this->pc30_modeloorc === 0.0 || $this->pc30_modeloorc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_modeloorc"]:$this->pc30_modeloorc);
+       $this->pc30_modeloordemcompra = ($this->pc30_modeloordemcompra === 0 || $this->pc30_modeloordemcompra === 0.0 || $this->pc30_modeloordemcompra == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_modeloordemcompra"]:$this->pc30_modeloordemcompra);
+       $this->pc30_modeloorcsol = ($this->pc30_modeloorcsol === 0 || $this->pc30_modeloorcsol === 0.0 || $this->pc30_modeloorcsol == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_modeloorcsol"]:$this->pc30_modeloorcsol);
        $this->pc30_dotacaopordepartamento = ($this->pc30_dotacaopordepartamento == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_dotacaopordepartamento"]:$this->pc30_dotacaopordepartamento);
        $this->pc30_valoraproximadoautomatico = ($this->pc30_valoraproximadoautomatico == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_valoraproximadoautomatico"]:$this->pc30_valoraproximadoautomatico);
-       $this->pc30_basesolicitacao = ($this->pc30_basesolicitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_basesolicitacao"]:$this->pc30_basesolicitacao);
-       $this->pc30_baseprocessocompras = ($this->pc30_baseprocessocompras == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_baseprocessocompras"]:$this->pc30_baseprocessocompras);
-       $this->pc30_baseempenhos = ($this->pc30_baseempenhos == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_baseempenhos"]:$this->pc30_baseempenhos);
-       $this->pc30_maximodiasorcamento = ($this->pc30_maximodiasorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_maximodiasorcamento"]:$this->pc30_maximodiasorcamento);
-       $this->pc30_validadepadraocertificado = ($this->pc30_validadepadraocertificado == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_validadepadraocertificado"]:$this->pc30_validadepadraocertificado);
-       $this->pc30_tipovalidade = ($this->pc30_tipovalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_tipovalidade"]:$this->pc30_tipovalidade);
+       $this->pc30_basesolicitacao = ($this->pc30_basesolicitacao === 0 || $this->pc30_basesolicitacao === 0.0 || $this->pc30_basesolicitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_basesolicitacao"]:$this->pc30_basesolicitacao);
+       $this->pc30_baseprocessocompras = ($this->pc30_baseprocessocompras === 0 || $this->pc30_baseprocessocompras === 0.0 || $this->pc30_baseprocessocompras == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_baseprocessocompras"]:$this->pc30_baseprocessocompras);
+       $this->pc30_baseempenhos = ($this->pc30_baseempenhos === 0 || $this->pc30_baseempenhos === 0.0 || $this->pc30_baseempenhos == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_baseempenhos"]:$this->pc30_baseempenhos);
+       $this->pc30_maximodiasorcamento = ($this->pc30_maximodiasorcamento === 0 || $this->pc30_maximodiasorcamento === 0.0 || $this->pc30_maximodiasorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_maximodiasorcamento"]:$this->pc30_maximodiasorcamento);
+       $this->pc30_validadepadraocertificado = ($this->pc30_validadepadraocertificado === 0 || $this->pc30_validadepadraocertificado === 0.0 || $this->pc30_validadepadraocertificado == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_validadepadraocertificado"]:$this->pc30_validadepadraocertificado);
+       $this->pc30_tipovalidade = ($this->pc30_tipovalidade === 0 || $this->pc30_tipovalidade === 0.0 || $this->pc30_tipovalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_tipovalidade"]:$this->pc30_tipovalidade);
        $this->pc30_importaresumoemp = ($this->pc30_importaresumoemp == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_importaresumoemp"]:$this->pc30_importaresumoemp);
-       $this->pc30_diasdebitosvencidos = ($this->pc30_diasdebitosvencidos == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_diasdebitosvencidos"]:$this->pc30_diasdebitosvencidos);
+       $this->pc30_diasdebitosvencidos = ($this->pc30_diasdebitosvencidos === 0 || $this->pc30_diasdebitosvencidos === 0.0 || $this->pc30_diasdebitosvencidos == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_diasdebitosvencidos"]:$this->pc30_diasdebitosvencidos);
        $this->pc30_notificaemail = ($this->pc30_notificaemail == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_notificaemail"]:$this->pc30_notificaemail);
        $this->pc30_notificacarta = ($this->pc30_notificacarta == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_notificacarta"]:$this->pc30_notificacarta);
        $this->pc30_permitirgerarnotifdebitos = ($this->pc30_permitirgerarnotifdebitos == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_permitirgerarnotifdebitos"]:$this->pc30_permitirgerarnotifdebitos);
-       $this->pc30_consultarelatoriodepartamento = ($this->pc30_consultarelatoriodepartamento == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_consultarelatoriodepartamento"]:$this->pc30_consultarelatoriodepartamento);
-       $this->pc30_tipojulgamentoorcamento = ($this->pc30_tipojulgamentoorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_tipojulgamentoorcamento"]:$this->pc30_tipojulgamentoorcamento);
+       $this->pc30_consultarelatoriodepartamento = ($this->pc30_consultarelatoriodepartamento === 0 || $this->pc30_consultarelatoriodepartamento === 0.0 || $this->pc30_consultarelatoriodepartamento == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_consultarelatoriodepartamento"]:$this->pc30_consultarelatoriodepartamento);
+       $this->pc30_tipojulgamentoorcamento = ($this->pc30_tipojulgamentoorcamento === 0 || $this->pc30_tipojulgamentoorcamento === 0.0 || $this->pc30_tipojulgamentoorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_tipojulgamentoorcamento"]:$this->pc30_tipojulgamentoorcamento);
        $this->pc30_mostrasaldo = ($this->pc30_mostrasaldo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_mostrasaldo"]:$this->pc30_mostrasaldo);
        $this->pc30_validadept = ($this->pc30_validadept == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_validadept"]:$this->pc30_validadept);
        $this->pc30_bloqueiaautemp = ($this->pc30_bloqueiaautemp == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc30_bloqueiaautemp"]:$this->pc30_bloqueiaautemp);
      }else{
-       $this->pc30_instit = ($this->pc30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_instit"]:$this->pc30_instit);
+       $this->pc30_instit = ($this->pc30_instit === 0 || $this->pc30_instit === 0.0 || $this->pc30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pc30_instit"]:$this->pc30_instit);
      }
    }
 
@@ -576,7 +576,7 @@ class cl_pcparam
        return false;
      }
        $this->pc30_instit = $pc30_instit; 
-     if(($this->pc30_instit == null) || ($this->pc30_instit == "") ){ 
+     if(($this->pc30_instit == null) || ($this->pc30_instit === 0 || $this->pc30_instit === 0.0 || $this->pc30_instit == "") ){ 
        $this->erro_sql = " Campo pc30_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

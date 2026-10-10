@@ -65,16 +65,16 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** migrando a **área Tributário** módulo a módulo. 10 de 16 concluídos.
+**Onde paramos:** migrando a **área Tributário** módulo a módulo. 11 de 16 concluídos.
 
 | | |
 |---|---|
-| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` · `iss` · `dvr` Diversos — **10 de 16** |
+| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` · `iss` · `dvr` · `arr` Arrecadação — **11 de 16** |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|tra)[0-9]*_` |
-| **Próximo módulo** | **`arr` Arrecadação (162 telas)** — o único que rompe a fronteira da área. `inf` e `tri` junto dos módulos que os hospedam. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tra)[0-9]*_` |
+| **Próximo módulo** | **`tri` (33 telas, 28 arquivos a alterar)** e **`inf` (30 telas, 16 arquivos)** — os dois últimos prefixos exclusivos da Fase A. Medidos: **não** foram cobertos incidentalmente, ao contrário do que este arquivo supunha. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
@@ -811,7 +811,7 @@ location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|n
 gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
 Financeiro e Patrimonial junto.
 
-**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ · `fis` ✅ · `iss` ✅ · `dvr` ✅ — resta `arr` (e `inf`/`tri` embutidos).
+**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ · `fis` ✅ · `iss` ✅ · `dvr` ✅ · `arr` ✅ — restam `tri` (28 arquivos) e `inf` (16).
 
 ### ⚠ ORDEM REVISTA: `jur` antes de `div`, e `arr` por último
 
@@ -1958,6 +1958,84 @@ com sintaxe que derruba o runtime de referência — e o `php -l` do 8.5 não ac
 **Armadilha nova do instrumento:** com a config contendo erro de sintaxe, o Rector reportou
 **`0 arquivos, 0 regras` sem nenhuma mensagem de erro** no formato JSON. Mais uma falha
 silenciosa dele: conferir sempre `php -l` na própria config antes de confiar num resultado zero.
+
+### Estado: MÓDULO `arr` (Arrecadação) PORTADO ✅ — 11º da área Tributário
+
+**162 telas** (`^arr[0-9]*_`, variantes `arr1_`…`arr4_`, sem maiúsculas). Universo pelas sete
+frentes: **787 arquivos** — e **366 já pagos** pelos dez portes anteriores, restando **137 a
+alterar**. Efetivamente alterados: **116**.
+
+| Correção | Qtd |
+|---|---|
+| guarda `$this->X == <literal>` | 504 |
+| `split(`/`ereg*(` → `preg_*` (279 `split`, todos literais) | 281 |
+| construtor PHP4 → `__construct` | 70 |
+| `parse_str()` + `extract()` | 34 |
+| `$$var` → `${$var}` | 10 |
+| guarda `pg_*` contra resultado falso | 1 |
+
+| Passo | Resultado |
+|---|---|
+| 1. enumeração × `ls` | 162 = 162 ✅ |
+| 3. classificação dos `split` | 279 literais, **0 regex**, 0 em JavaScript |
+| 4. Rector | **5 regras, todas já vetadas**; convergiu em 1 passada |
+| 4b. portão de funções | 3 novas, 0 ausentes no 5.6 |
+| 5. `php -l` nos dois runtimes | **787/787 do universo, 0 erros** |
+| 6. instanciação das classes | 450 de 451 idênticas (artefatos conhecidos do harness) |
+| 6b. caminho de escrita | 9.267 linhas, 434 classes, 2 divergentes (os mesmos do `dvr`) |
+| 7. bateria de telas | **162/162 idênticas, 0 divergentes** |
+| 8. roteamento | `arr1_`…`arr4_` e `/w/2/` pelo 8.5; `agu1_` não foi sombreado |
+| regressão nos 10 módulos anteriores | **zero** — todos na linha de base |
+
+**Quinta bateria perfeita**, e no módulo mais acoplado da área. A única divergência da primeira
+rodada era `pg_numrows` sobre resultado falso em `arr2_rellistadqd002.php:178`.
+
+#### ⚠ CORREÇÃO: a previsão de contaminação de escopo do `arr` estava muito errada
+
+Este arquivo registrava, com base na tabela de resíduo:
+
+> **`arr` é o único que rompe a fronteira da área.** Ele arrasta 212 arquivos de `con`
+> (Contabilidade) e 203 de `pes` (RH) — módulos de *outras* áreas.
+> `arr   func:285   cai:252   con:212   emp:208   pes:203`
+
+**Medido no porte real, a distribuição dos 116 arquivos alterados é:**
+
+```
+classes/  80      arr_  32      func_  2      model/  1      cai_  1
+```
+
+Nenhum arquivo de `con`, `pes` ou `emp` precisou ser tocado. A previsão não estava errada quanto
+ao *fecho de dependências* — `arr` de fato alcança aqueles módulos —, e sim quanto ao **custo**:
+a tabela foi computada **antes dos portes** e contava como "a alterar" tudo que o `arr` encosta.
+Depois de dez módulos, **366 dos 787 arquivos do universo já estavam pagos**, e o que sobrou do
+resíduo compartilhado eram classes que `div`, `fis`, `iss` e `dvr` já haviam corrigido.
+
+**Lição para o relatório:** a métrica de resíduo mede contaminação de escopo num instante, e
+**envelhece rápido** num porte incremental. O `arr`, previsto como "o dobro do maior lote já
+executado" (343 arquivos), saiu com **116** — menor que o `fis` (384), o `iss` (280) e o `dvr`
+(197). A ordem adotada (deixar o `arr` por último) foi, por acidente, a que minimizou o custo
+dele: cada módulo anterior pré-pagou parte do seu resíduo.
+
+#### A categoria do `date(null)` NÃO se manifestou
+
+O `arr` tem **24 `date(<fmt>, <variável>)`** e eu havia registrado que era "o candidato número
+um a aparecer". A bateria fechou **162/162**, o que confirma o raciocínio da seção do `dvr`: com
+sessão presente, `db_getsession("DB_datausu")` devolve um timestamp válido e os dois runtimes
+concordam. A divergência exige a variável de sessão ausente, que é condição do harness e não de
+operação. As 24 ocorrências ficam **não corrigidas**, como as 183 do `dvr`.
+
+### ⚠ CORREÇÃO: `tri` e `inf` NÃO foram cobertos pelos módulos que os hospedam
+
+Este arquivo supunha, desde o plano da Fase A, que `inf` e `tri` entrariam "junto dos módulos
+que os hospedam". **Medido depois do `arr`, não entraram:**
+
+| Prefixo | Telas | Universo | Já pago | **A alterar** | Roteado? |
+|---|---|---|---|---|---|
+| `tri` | 33 | 83 | 25 | **28** | não — responde pelo 5.6 |
+| `inf` | 30 | 89 | 42 | **16** | não — responde pelo 5.6 |
+
+São 44 arquivos no total — os dois menores lotes restantes da área, menores que o `mar` (19) e o
+`not` (17) só em telas, não em arquivos. A Fase A **não está concluída** até eles entrarem.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

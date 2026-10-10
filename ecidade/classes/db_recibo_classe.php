@@ -80,7 +80,7 @@ class cl_recibo {
                  k00_numnov = int4 = Codigo Auxiliar
                  ";
    //funcao construtor da classe
-   function cl_recibo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("recibo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -97,7 +97,7 @@ class cl_recibo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numcgm = ($this->k00_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numcgm"]:$this->k00_numcgm);
+       $this->k00_numcgm = ($this->k00_numcgm === 0 || $this->k00_numcgm === 0.0 || $this->k00_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numcgm"]:$this->k00_numcgm);
        if($this->k00_dtoper == ""){
          $this->k00_dtoper_dia = ($this->k00_dtoper_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtoper_dia"]:$this->k00_dtoper_dia);
          $this->k00_dtoper_mes = ($this->k00_dtoper_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtoper_mes"]:$this->k00_dtoper_mes);
@@ -106,9 +106,9 @@ class cl_recibo {
             $this->k00_dtoper = $this->k00_dtoper_ano."-".$this->k00_dtoper_mes."-".$this->k00_dtoper_dia;
          }
        }
-       $this->k00_receit = ($this->k00_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_receit"]:$this->k00_receit);
-       $this->k00_hist = ($this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
-       $this->k00_valor = ($this->k00_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_valor"]:$this->k00_valor);
+       $this->k00_receit = ($this->k00_receit === 0 || $this->k00_receit === 0.0 || $this->k00_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_receit"]:$this->k00_receit);
+       $this->k00_hist = ($this->k00_hist === 0 || $this->k00_hist === 0.0 || $this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
+       $this->k00_valor = ($this->k00_valor === 0 || $this->k00_valor === 0.0 || $this->k00_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_valor"]:$this->k00_valor);
        if($this->k00_dtvenc == ""){
          $this->k00_dtvenc_dia = ($this->k00_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtvenc_dia"]:$this->k00_dtvenc_dia);
          $this->k00_dtvenc_mes = ($this->k00_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtvenc_mes"]:$this->k00_dtvenc_mes);
@@ -117,14 +117,14 @@ class cl_recibo {
             $this->k00_dtvenc = $this->k00_dtvenc_ano."-".$this->k00_dtvenc_mes."-".$this->k00_dtvenc_dia;
          }
        }
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
-       $this->k00_numtot = ($this->k00_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numtot"]:$this->k00_numtot);
-       $this->k00_numdig = ($this->k00_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numdig"]:$this->k00_numdig);
-       $this->k00_tipo = ($this->k00_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_tipo"]:$this->k00_tipo);
-       $this->k00_tipojm = ($this->k00_tipojm == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_tipojm"]:$this->k00_tipojm);
-       $this->k00_codsubrec = ($this->k00_codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_codsubrec"]:$this->k00_codsubrec);
-       $this->k00_numnov = ($this->k00_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numnov"]:$this->k00_numnov);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = ($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->k00_numtot = ($this->k00_numtot === 0 || $this->k00_numtot === 0.0 || $this->k00_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numtot"]:$this->k00_numtot);
+       $this->k00_numdig = ($this->k00_numdig === 0 || $this->k00_numdig === 0.0 || $this->k00_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numdig"]:$this->k00_numdig);
+       $this->k00_tipo = ($this->k00_tipo === 0 || $this->k00_tipo === 0.0 || $this->k00_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_tipo"]:$this->k00_tipo);
+       $this->k00_tipojm = ($this->k00_tipojm === 0 || $this->k00_tipojm === 0.0 || $this->k00_tipojm == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_tipojm"]:$this->k00_tipojm);
+       $this->k00_codsubrec = ($this->k00_codsubrec === 0 || $this->k00_codsubrec === 0.0 || $this->k00_codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_codsubrec"]:$this->k00_codsubrec);
+       $this->k00_numnov = ($this->k00_numnov === 0 || $this->k00_numnov === 0.0 || $this->k00_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numnov"]:$this->k00_numnov);
      }else{
      }
    }
@@ -609,7 +609,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $oid = null,$campos="recibo.oid,*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -636,7 +636,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -648,7 +648,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_cancela($oid = null,$campos="recibo.oid,*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -678,7 +678,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -690,7 +690,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -708,7 +708,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

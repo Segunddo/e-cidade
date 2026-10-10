@@ -86,7 +86,7 @@ class cl_cidadao {
                  ov02_sexo = varchar(1) = Sexo
                  ";
   //funcao construtor da classe
-  function cl_cidadao() {
+  function __construct() {
     //classes dos rotulos dos campos
     $this->rotulo = new rotulo("cidadao");
     $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -103,19 +103,19 @@ class cl_cidadao {
   // funcao para atualizar campos
   function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->ov02_sequencial = ($this->ov02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_sequencial"]:$this->ov02_sequencial);
-      $this->ov02_seq = ($this->ov02_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_seq"]:$this->ov02_seq);
+      $this->ov02_sequencial = ($this->ov02_sequencial === 0 || $this->ov02_sequencial === 0.0 || $this->ov02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_sequencial"]:$this->ov02_sequencial);
+      $this->ov02_seq = ($this->ov02_seq === 0 || $this->ov02_seq === 0.0 || $this->ov02_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_seq"]:$this->ov02_seq);
       $this->ov02_nome = ($this->ov02_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_nome"]:$this->ov02_nome);
       $this->ov02_ident = ($this->ov02_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_ident"]:$this->ov02_ident);
       $this->ov02_cnpjcpf = ($this->ov02_cnpjcpf == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_cnpjcpf"]:$this->ov02_cnpjcpf);
       $this->ov02_endereco = ($this->ov02_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_endereco"]:$this->ov02_endereco);
-      $this->ov02_numero = ($this->ov02_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_numero"]:$this->ov02_numero);
+      $this->ov02_numero = ($this->ov02_numero === 0 || $this->ov02_numero === 0.0 || $this->ov02_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_numero"]:$this->ov02_numero);
       $this->ov02_compl = ($this->ov02_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_compl"]:$this->ov02_compl);
       $this->ov02_bairro = ($this->ov02_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_bairro"]:$this->ov02_bairro);
       $this->ov02_munic = ($this->ov02_munic == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_munic"]:$this->ov02_munic);
       $this->ov02_uf = ($this->ov02_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_uf"]:$this->ov02_uf);
       $this->ov02_cep = ($this->ov02_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_cep"]:$this->ov02_cep);
-      $this->ov02_situacaocidadao = ($this->ov02_situacaocidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_situacaocidadao"]:$this->ov02_situacaocidadao);
+      $this->ov02_situacaocidadao = ($this->ov02_situacaocidadao === 0 || $this->ov02_situacaocidadao === 0.0 || $this->ov02_situacaocidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_situacaocidadao"]:$this->ov02_situacaocidadao);
       $this->ov02_ativo = ($this->ov02_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ov02_ativo"]:$this->ov02_ativo);
       if($this->ov02_data == ""){
         $this->ov02_data_dia = ($this->ov02_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_data_dia"]:$this->ov02_data_dia);
@@ -135,8 +135,8 @@ class cl_cidadao {
       }
       $this->ov02_sexo = ($this->ov02_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_sexo"]:$this->ov02_sexo);
     }else{
-      $this->ov02_sequencial = ($this->ov02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_sequencial"]:$this->ov02_sequencial);
-      $this->ov02_seq = ($this->ov02_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_seq"]:$this->ov02_seq);
+      $this->ov02_sequencial = ($this->ov02_sequencial === 0 || $this->ov02_sequencial === 0.0 || $this->ov02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_sequencial"]:$this->ov02_sequencial);
+      $this->ov02_seq = ($this->ov02_seq === 0 || $this->ov02_seq === 0.0 || $this->ov02_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov02_seq"]:$this->ov02_seq);
     }
   }
   // funcao para inclusao
@@ -208,7 +208,7 @@ class cl_cidadao {
         $this->ov02_sequencial = $ov02_sequencial;
       }
     }
-    if(($this->ov02_sequencial == null) || ($this->ov02_sequencial == "") ){
+    if(($this->ov02_sequencial == null) || ($this->ov02_sequencial === 0 || $this->ov02_sequencial === 0.0 || $this->ov02_sequencial == "") ){
       $this->erro_sql = " Campo ov02_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -216,7 +216,7 @@ class cl_cidadao {
       $this->erro_status = "0";
       return false;
     }
-    if(($this->ov02_seq == null) || ($this->ov02_seq == "") ){
+    if(($this->ov02_seq == null) || ($this->ov02_seq === 0 || $this->ov02_seq === 0.0 || $this->ov02_seq == "") ){
       $this->erro_sql = " Campo ov02_seq nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

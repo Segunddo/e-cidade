@@ -50,7 +50,7 @@ class cl_pcorcamitemlic {
                  pc26_liclicitem = int8 = Cod. Sequencial
                  ";
    //funcao construtor da classe
-   function cl_pcorcamitemlic() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcorcamitemlic");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_pcorcamitemlic {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc26_orcamitem = ($this->pc26_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc26_orcamitem"]:$this->pc26_orcamitem);
-       $this->pc26_liclicitem = ($this->pc26_liclicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc26_liclicitem"]:$this->pc26_liclicitem);
+       $this->pc26_orcamitem = ($this->pc26_orcamitem === 0 || $this->pc26_orcamitem === 0.0 || $this->pc26_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc26_orcamitem"]:$this->pc26_orcamitem);
+       $this->pc26_liclicitem = ($this->pc26_liclicitem === 0 || $this->pc26_liclicitem === 0.0 || $this->pc26_liclicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc26_liclicitem"]:$this->pc26_liclicitem);
      }else{
      }
    }

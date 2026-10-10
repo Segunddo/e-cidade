@@ -65,7 +65,7 @@ class cl_pcorcam
                  ";
 
     //funcao construtor da classe
-    function cl_pcorcam()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("pcorcam");
@@ -87,7 +87,7 @@ class cl_pcorcam
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->pc20_codorc = ($this->pc20_codorc == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_codorc"] : $this->pc20_codorc);
+            $this->pc20_codorc = ($this->pc20_codorc === 0 || $this->pc20_codorc === 0.0 || $this->pc20_codorc == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_codorc"] : $this->pc20_codorc);
             if ($this->pc20_dtate == "") {
                 $this->pc20_dtate_dia = ($this->pc20_dtate_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_dtate_dia"] : $this->pc20_dtate_dia);
                 $this->pc20_dtate_mes = ($this->pc20_dtate_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_dtate_mes"] : $this->pc20_dtate_mes);
@@ -98,11 +98,11 @@ class cl_pcorcam
             }
             $this->pc20_hrate = ($this->pc20_hrate == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_hrate"] : $this->pc20_hrate);
             $this->pc20_obs = ($this->pc20_obs == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_obs"] : $this->pc20_obs);
-            $this->pc20_prazoentrega = ($this->pc20_prazoentrega == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_prazoentrega"] : $this->pc20_prazoentrega);
-            $this->pc20_validadeorcamento = ($this->pc20_validadeorcamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_validadeorcamento"] : $this->pc20_validadeorcamento);
-            $this->pc20_cotacaoprevia = ($this->pc20_cotacaoprevia == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_cotacaoprevia"] : $this->pc20_cotacaoprevia);
+            $this->pc20_prazoentrega = ($this->pc20_prazoentrega === 0 || $this->pc20_prazoentrega === 0.0 || $this->pc20_prazoentrega == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_prazoentrega"] : $this->pc20_prazoentrega);
+            $this->pc20_validadeorcamento = ($this->pc20_validadeorcamento === 0 || $this->pc20_validadeorcamento === 0.0 || $this->pc20_validadeorcamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_validadeorcamento"] : $this->pc20_validadeorcamento);
+            $this->pc20_cotacaoprevia = ($this->pc20_cotacaoprevia === 0 || $this->pc20_cotacaoprevia === 0.0 || $this->pc20_cotacaoprevia == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_cotacaoprevia"] : $this->pc20_cotacaoprevia);
         } else {
-            $this->pc20_codorc = ($this->pc20_codorc == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_codorc"] : $this->pc20_codorc);
+            $this->pc20_codorc = ($this->pc20_codorc === 0 || $this->pc20_codorc === 0.0 || $this->pc20_codorc == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc20_codorc"] : $this->pc20_codorc);
         }
     }
 
@@ -161,7 +161,7 @@ class cl_pcorcam
                 $this->pc20_codorc = $pc20_codorc;
             }
         }
-        if (($this->pc20_codorc == null) || ($this->pc20_codorc == "")) {
+        if (($this->pc20_codorc == null) || ($this->pc20_codorc === 0 || $this->pc20_codorc === 0.0 || $this->pc20_codorc == "")) {
             $this->erro_sql = " Campo pc20_codorc nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

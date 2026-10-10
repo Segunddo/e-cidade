@@ -52,7 +52,8 @@ use ECidade\Tributario\Arrecadacao\Repository\TaxaEspecifica as TaxaEspecificaRe
 use ECidade\Tributario\Arrecadacao\Service\TaxaEspecifica as TaxaEspecificaService;
 
 $historico = "";
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_SERVER);
 db_postmemory($_GET);
 db_postmemory($_POST);
@@ -121,12 +122,12 @@ if (!isset($lReemissao)) {
     $dignum = db_sqlformatar($k03_numpre, 8, '0') . "001001";
     $dignum = db_CalculaDV($dignum);
 
-    $rece = split("YY", $codrece);
-    $concarpeculiar = split("YY", $codcpca);
-    $codtaxa = split("YY", $codtaxa);
-    $valor = split("YY", $vlrrece);
-    $recurso = split("YY", $codrecu);
-    $complemento = split("YY", $codcomplemento);
+    $rece = preg_split("#YY#m", $codrece);
+    $concarpeculiar = preg_split("#YY#m", $codcpca);
+    $codtaxa = preg_split("#YY#m", $codtaxa);
+    $valor = preg_split("#YY#m", $vlrrece);
+    $recurso = preg_split("#YY#m", $codrecu);
+    $complemento = preg_split("#YY#m", $codcomplemento);
 
     if ($j01_matric != "") {
         $cliptubase = new cl_iptubase;

@@ -35,7 +35,8 @@ require_once(modification("dbforms/db_classesgenericas.php"));
 require_once(modification("classes/db_arrematric_classe.php"));
 require_once(modification("classes/db_arreinscr_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $oPost = db_utils::postMemory($HTTP_POST_VARS);
 
 switch ($oPost->tipo) {
@@ -76,7 +77,7 @@ if (isset($operacao) ) {
 	
 	$oDadosRecalculoPercentual->iNumpre              = $k00_numpre;
 	$oDadosRecalculoPercentual->sCampo               = $sCampo;
-	$oDadosRecalculoPercentual->sCampoValor          = $$sCampo;
+	$oDadosRecalculoPercentual->sCampoValor          = ${$sCampo};
 	$oDadosRecalculoPercentual->nPercentual          = $oPost->k00_perc;
 	$oDadosRecalculoPercentual->nPercentualBloqueado = $nPercentualBloqueado;
 	$oDadosRecalculoPercentual->sLabelCampo          = $sLabel;
@@ -90,7 +91,7 @@ if (isset($operacao) ) {
 				db_inicio_transacao();
 					
 				$oClasseVinculo->k00_perc = $oPost->k00_perc;
-				$oClasseVinculo->incluir($k00_numpre, $$sCampo);
+				$oClasseVinculo->incluir($k00_numpre, ${$sCampo});
 				if ($oClasseVinculo->erro_status == "0"){
 					throw new Exception("Erro excluindo dados\n".$oClasseVinculo->erro_msg);
 				}
@@ -112,7 +113,7 @@ if (isset($operacao) ) {
 				db_fim_transacao(false);
 				
 				$k00_perc = "";
-				$$sCampo  = "";
+				${$sCampo}  = "";
 				
 			} catch (Exception $oErro) {
 				
@@ -131,7 +132,7 @@ if (isset($operacao) ) {
 				db_inicio_transacao();
 
 			  $oClasseVinculo->k00_perc = $oPost->k00_perc;
-				$oClasseVinculo->alterar($k00_numpre, $$sCampo);
+				$oClasseVinculo->alterar($k00_numpre, ${$sCampo});
 				if ($oClasseVinculo->erro_status == "0"){
 					throw new Exception("Erro excluindo dados\n".$oClasseVinculo->erro_msg);
 				}
@@ -153,7 +154,7 @@ if (isset($operacao) ) {
 				db_fim_transacao(false);
 				
 				$k00_perc = "";
-				$$sCampo  = "";
+				${$sCampo}  = "";
 			
 			} catch (Exception $oErro) {
 				
@@ -171,7 +172,7 @@ if (isset($operacao) ) {
 				
 			  db_inicio_transacao();
 			  
-			  $oClasseVinculo->excluir($k00_numpre, $$sCampo);
+			  $oClasseVinculo->excluir($k00_numpre, ${$sCampo});
 			  if ($oClasseVinculo->erro_status == "0"){
 			  	throw new Exception("Erro excluindo dados\n".$oClasseVinculo->erro_msg);  
 			  }
@@ -184,7 +185,7 @@ if (isset($operacao) ) {
 			  db_fim_transacao(false);
 			  
 			  $k00_perc = "";
-			  $$sCampo  = "";
+			  ${$sCampo}  = "";
 			  
 			} catch (Exception $oErro) {
 				
@@ -197,7 +198,7 @@ if (isset($operacao) ) {
 		break;
 
 		default:
-			$rsDados=$oClasseVinculo->sql_record($oClasseVinculo->sql_query_file($k00_numpre, $$sCampo));
+			$rsDados=$oClasseVinculo->sql_record($oClasseVinculo->sql_query_file($k00_numpre, ${$sCampo}));
       db_fieldsmemory($rsDados, 0);			
 		break;
 
@@ -217,7 +218,7 @@ if (isset($opcao)) {
 }
 	
 if (isset($novo) || $lErro) {
-	$$sCampo     = "";
+	${$sCampo}     = "";
 	$k00_perc    = "";
 }
 
@@ -448,7 +449,7 @@ function geraArreHist($iNumpre, $sTexto, $sLabel) {
            <tr>
             <td valign="top"  align="center">  
             <?
-              $chavepri= array($sCampo=>@$$sCampo);
+              $chavepri= array($sCampo=>@${$sCampo});
               $cliframe_alterar_excluir->chavepri      = $chavepri;
 	            $cliframe_alterar_excluir->sql           = $oClasseVinculo->sql_query_file($k00_numpre);
 	            $cliframe_alterar_excluir->campos        = "k00_numpre, {$sCampo}, k00_perc"; 
