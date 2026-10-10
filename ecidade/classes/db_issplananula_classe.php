@@ -63,7 +63,7 @@ class cl_issplananula {
                  q76_id_usuario = int4 = Usuario 
                  ";
    //funcao construtor da classe 
-   function cl_issplananula() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issplananula"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_issplananula {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q76_sequencial = ($this->q76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_sequencial"]:$this->q76_sequencial);
-       $this->q76_planilha = ($this->q76_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_planilha"]:$this->q76_planilha);
+       $this->q76_sequencial = ($this->q76_sequencial === 0 || $this->q76_sequencial === 0.0 || $this->q76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_sequencial"]:$this->q76_sequencial);
+       $this->q76_planilha = ($this->q76_planilha === 0 || $this->q76_planilha === 0.0 || $this->q76_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_planilha"]:$this->q76_planilha);
        if($this->q76_data == ""){
          $this->q76_data_dia = ($this->q76_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_data_dia"]:$this->q76_data_dia);
          $this->q76_data_mes = ($this->q76_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_data_mes"]:$this->q76_data_mes);
@@ -93,9 +93,9 @@ class cl_issplananula {
        $this->q76_hora = ($this->q76_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_hora"]:$this->q76_hora);
        $this->q76_motivo = ($this->q76_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_motivo"]:$this->q76_motivo);
        $this->q76_ip = ($this->q76_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_ip"]:$this->q76_ip);
-       $this->q76_id_usuario = ($this->q76_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_id_usuario"]:$this->q76_id_usuario);
+       $this->q76_id_usuario = ($this->q76_id_usuario === 0 || $this->q76_id_usuario === 0.0 || $this->q76_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_id_usuario"]:$this->q76_id_usuario);
      }else{
-       $this->q76_sequencial = ($this->q76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_sequencial"]:$this->q76_sequencial);
+       $this->q76_sequencial = ($this->q76_sequencial === 0 || $this->q76_sequencial === 0.0 || $this->q76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_sequencial"]:$this->q76_sequencial);
      }
    }
    // funcao para inclusao
@@ -173,7 +173,7 @@ class cl_issplananula {
          $this->q76_sequencial = $q76_sequencial; 
        }
      }
-     if(($this->q76_sequencial == null) || ($this->q76_sequencial == "") ){ 
+     if(($this->q76_sequencial == null) || ($this->q76_sequencial === 0 || $this->q76_sequencial === 0.0 || $this->q76_sequencial == "") ){ 
        $this->erro_sql = " Campo q76_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -495,7 +495,7 @@ class cl_issplananula {
    function sql_query ( $q76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -518,7 +518,7 @@ class cl_issplananula {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -530,7 +530,7 @@ class cl_issplananula {
    function sql_query_file ( $q76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -551,7 +551,7 @@ class cl_issplananula {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

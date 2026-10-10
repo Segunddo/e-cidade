@@ -54,7 +54,7 @@ class cl_cadendermunicipiosistema {
                  db125_codigosistema = varchar(50) = Código Sistema Externo 
                  ";
    //funcao construtor da classe 
-   function cl_cadendermunicipiosistema() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadendermunicipiosistema"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_cadendermunicipiosistema {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db125_sequencial = ($this->db125_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db125_sequencial"]:$this->db125_sequencial);
-       $this->db125_cadendermunicipio = ($this->db125_cadendermunicipio == ""?@$GLOBALS["HTTP_POST_VARS"]["db125_cadendermunicipio"]:$this->db125_cadendermunicipio);
-       $this->db125_db_sistemaexterno = ($this->db125_db_sistemaexterno == ""?@$GLOBALS["HTTP_POST_VARS"]["db125_db_sistemaexterno"]:$this->db125_db_sistemaexterno);
+       $this->db125_sequencial = ($this->db125_sequencial === 0 || $this->db125_sequencial === 0.0 || $this->db125_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db125_sequencial"]:$this->db125_sequencial);
+       $this->db125_cadendermunicipio = ($this->db125_cadendermunicipio === 0 || $this->db125_cadendermunicipio === 0.0 || $this->db125_cadendermunicipio == ""?@$GLOBALS["HTTP_POST_VARS"]["db125_cadendermunicipio"]:$this->db125_cadendermunicipio);
+       $this->db125_db_sistemaexterno = ($this->db125_db_sistemaexterno === 0 || $this->db125_db_sistemaexterno === 0.0 || $this->db125_db_sistemaexterno == ""?@$GLOBALS["HTTP_POST_VARS"]["db125_db_sistemaexterno"]:$this->db125_db_sistemaexterno);
        $this->db125_codigosistema = ($this->db125_codigosistema == ""?@$GLOBALS["HTTP_POST_VARS"]["db125_codigosistema"]:$this->db125_codigosistema);
      }else{
-       $this->db125_sequencial = ($this->db125_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db125_sequencial"]:$this->db125_sequencial);
+       $this->db125_sequencial = ($this->db125_sequencial === 0 || $this->db125_sequencial === 0.0 || $this->db125_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db125_sequencial"]:$this->db125_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_cadendermunicipiosistema {
          $this->db125_sequencial = $db125_sequencial; 
        }
      }
-     if(($this->db125_sequencial == null) || ($this->db125_sequencial == "") ){ 
+     if(($this->db125_sequencial == null) || ($this->db125_sequencial === 0 || $this->db125_sequencial === 0.0 || $this->db125_sequencial == "") ){ 
        $this->erro_sql = " Campo db125_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

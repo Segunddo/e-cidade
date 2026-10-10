@@ -83,7 +83,7 @@ class cl_slip
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->k17_codigo = ($this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
+       $this->k17_codigo = ($this->k17_codigo === 0 || $this->k17_codigo === 0.0 || $this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
        if($this->k17_data == ""){
          $this->k17_data_dia = ($this->k17_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_data_dia"]:$this->k17_data_dia);
          $this->k17_data_mes = ($this->k17_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_data_mes"]:$this->k17_data_mes);
@@ -92,10 +92,10 @@ class cl_slip
             $this->k17_data = $this->k17_data_ano."-".$this->k17_data_mes."-".$this->k17_data_dia;
          }
        }
-       $this->k17_debito = ($this->k17_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_debito"]:$this->k17_debito);
-       $this->k17_credito = ($this->k17_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_credito"]:$this->k17_credito);
-       $this->k17_valor = ($this->k17_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_valor"]:$this->k17_valor);
-       $this->k17_hist = ($this->k17_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_hist"]:$this->k17_hist);
+       $this->k17_debito = ($this->k17_debito === 0 || $this->k17_debito === 0.0 || $this->k17_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_debito"]:$this->k17_debito);
+       $this->k17_credito = ($this->k17_credito === 0 || $this->k17_credito === 0.0 || $this->k17_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_credito"]:$this->k17_credito);
+       $this->k17_valor = ($this->k17_valor === 0 || $this->k17_valor === 0.0 || $this->k17_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_valor"]:$this->k17_valor);
+       $this->k17_hist = ($this->k17_hist === 0 || $this->k17_hist === 0.0 || $this->k17_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_hist"]:$this->k17_hist);
        $this->k17_texto = ($this->k17_texto == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_texto"]:$this->k17_texto);
        if($this->k17_dtaut == ""){
          $this->k17_dtaut_dia = ($this->k17_dtaut_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_dtaut_dia"]:$this->k17_dtaut_dia);
@@ -105,8 +105,8 @@ class cl_slip
             $this->k17_dtaut = $this->k17_dtaut_ano."-".$this->k17_dtaut_mes."-".$this->k17_dtaut_dia;
          }
        }
-       $this->k17_autent = ($this->k17_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_autent"]:$this->k17_autent);
-       $this->k17_instit = ($this->k17_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_instit"]:$this->k17_instit);
+       $this->k17_autent = ($this->k17_autent === 0 || $this->k17_autent === 0.0 || $this->k17_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_autent"]:$this->k17_autent);
+       $this->k17_instit = ($this->k17_instit === 0 || $this->k17_instit === 0.0 || $this->k17_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_instit"]:$this->k17_instit);
        if($this->k17_dtanu == ""){
          $this->k17_dtanu_dia = ($this->k17_dtanu_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_dtanu_dia"]:$this->k17_dtanu_dia);
          $this->k17_dtanu_mes = ($this->k17_dtanu_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_dtanu_mes"]:$this->k17_dtanu_mes);
@@ -115,8 +115,8 @@ class cl_slip
             $this->k17_dtanu = $this->k17_dtanu_ano."-".$this->k17_dtanu_mes."-".$this->k17_dtanu_dia;
          }
        }
-       $this->k17_situacao = ($this->k17_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_situacao"]:$this->k17_situacao);
-       $this->k17_tipopagamento = ($this->k17_tipopagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_tipopagamento"]:$this->k17_tipopagamento);
+       $this->k17_situacao = ($this->k17_situacao === 0 || $this->k17_situacao === 0.0 || $this->k17_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_situacao"]:$this->k17_situacao);
+       $this->k17_tipopagamento = ($this->k17_tipopagamento === 0 || $this->k17_tipopagamento === 0.0 || $this->k17_tipopagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_tipopagamento"]:$this->k17_tipopagamento);
        if($this->k17_dtestorno == ""){
          $this->k17_dtestorno_dia = ($this->k17_dtestorno_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_dtestorno_dia"]:$this->k17_dtestorno_dia);
          $this->k17_dtestorno_mes = ($this->k17_dtestorno_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_dtestorno_mes"]:$this->k17_dtestorno_mes);
@@ -126,9 +126,9 @@ class cl_slip
          }
        }
        $this->k17_motivoestorno = ($this->k17_motivoestorno == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_motivoestorno"]:$this->k17_motivoestorno);
-       $this->k17_idusuario = ($this->k17_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_idusuario"]:$this->k17_idusuario);
+       $this->k17_idusuario = ($this->k17_idusuario === 0 || $this->k17_idusuario === 0.0 || $this->k17_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_idusuario"]:$this->k17_idusuario);
      }else{
-       $this->k17_codigo = ($this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
+       $this->k17_codigo = ($this->k17_codigo === 0 || $this->k17_codigo === 0.0 || $this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
      }
    }
 
@@ -235,7 +235,7 @@ class cl_slip
          $this->k17_codigo = $k17_codigo;
        }
      }
-     if(($this->k17_codigo == null) || ($this->k17_codigo == "") ){
+     if(($this->k17_codigo == null) || ($this->k17_codigo === 0 || $this->k17_codigo === 0.0 || $this->k17_codigo == "") ){
        $this->erro_sql = " Campo k17_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

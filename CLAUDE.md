@@ -65,16 +65,16 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** migrando a **área Tributário** módulo a módulo. 9 de 16 concluídos.
+**Onde paramos:** migrando a **área Tributário** módulo a módulo. 10 de 16 concluídos.
 
 | | |
 |---|---|
-| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` · `iss` ISSQN — **9 de 16** |
+| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` · `iss` · `dvr` Diversos — **10 de 16** |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|tra)[0-9]*_` |
-| **Próximo módulo** | **`dvr` (236)** → `arr` (346). `inf` e `tri` junto dos módulos que os hospedam. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|tra)[0-9]*_` |
+| **Próximo módulo** | **`arr` Arrecadação (162 telas)** — o único que rompe a fronteira da área. `inf` e `tri` junto dos módulos que os hospedam. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
@@ -811,7 +811,7 @@ location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|n
 gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
 Financeiro e Patrimonial junto.
 
-**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ · `fis` ✅ · `iss` ✅ — restam 3 prefixos (`arr`, `dvr`, e `inf`/`tri` embutidos).
+**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ · `fis` ✅ · `iss` ✅ · `dvr` ✅ — resta `arr` (e `inf`/`tri` embutidos).
 
 ### ⚠ ORDEM REVISTA: `jur` antes de `div`, e `arr` por último
 
@@ -1856,6 +1856,108 @@ teste no sublinhado). Verificada caso a caso nos dois runtimes:
 
 Identificada uma terceira ocorrência do mesmo teste em `fpdf151/FpdfMultiCellBorder.php:301`,
 **não tocada** — nenhuma tela a exercitou ainda, e vale a decisão de corrigir na aparição.
+
+### Estado: MÓDULO `dvr` (Diversos) PORTADO ✅ — 10º da área Tributário
+
+**33 telas** (`^dvr[0-9]*_`, variantes `dvr2_`/`dvr3_`/`dvr4_`, sem maiúsculas). Universo pelas
+sete frentes: **436 arquivos**, **197 alterados** — a razão telas/arquivos mais desproporcional
+da área até aqui (33 telas puxando 197 arquivos), porque quase tudo é `classes/` compartilhada
+com Contabilidade e Empenho.
+
+| Correção | Qtd |
+|---|---|
+| guarda `$this->X == <literal>` | 1.199 |
+| `split(`/`ereg*(` → `preg_*` (744 `split`, todos com separador literal) | 744 |
+| construtor PHP4 → `__construct` | 162 |
+| guardas `pg_*` contra resultado falso | 18 |
+| `parse_str()` + `extract()` | 3 |
+| parâmetro obrigatório depois de opcional → default `null` | 6 arquivos |
+| `$$var` → `${$var}` | 2 arquivos |
+
+| Passo | Resultado |
+|---|---|
+| 1. enumeração × `ls` | 33 = 33 ✅ |
+| 3. classificação dos `split` | 744 literais, **0 regex**, 1 em JavaScript preservado |
+| 4. Rector | convergiu em **1 passada** (196 arquivos, depois 0) |
+| 4b. portão de funções | 2 novas (`extract`, `preg_split`), 0 ausentes no 5.6 |
+| 5. `php -l` nos dois runtimes | **436/436 do universo, 0 erros** |
+| 6. instanciação das classes | 315 de 316 idênticas (ver abaixo) |
+| 6b. caminho de escrita | 6.207 linhas, 299 classes, 2 divergentes (ver abaixo) |
+| 7. bateria de telas | **33/33 idênticas, 0 divergentes** |
+| 8. roteamento | `dvr2_`, `dvr3_`, `dvr4_` e `/w/2/` pelo 8.5; `div1_` não foi sombreado |
+| regressão nos 9 módulos anteriores | **zero** — todos na linha de base |
+
+**Quarto módulo com bateria perfeita**, depois de `div`, `mar` e `not`. O diff ficou em **2.150
+linhas** contra as 8.409 do `iss` — efeito direto da denylist de modernização.
+
+As 4 divergências da primeira bateria eram todas `pg_numrows` sobre resultado falso, em
+`dvr2_capaloteamento002`, `dvr3_procedper002` e `dvr4_parclote004/005`. Guardadas as 18 chamadas
+desses quatro arquivos, a bateria fechou.
+
+#### Divergências do harness que NÃO são defeito de porte
+
+- **`lancamentoContabil` e `ordemPagamento`** aparecem com `ArgumentCountError` no 8.5 e ausentes
+  no 5.6. São `.model.php` com `__construct` exigindo argumentos; o harness instancia sem
+  nenhum. No 8.5 o erro é capturável e a varredura segue; **no 5.6 o processo morre**. Limitação
+  conhecida do instrumento, igual à registrada no `dbagata/`.
+- **`classes/empenho.php` → `datausu`** diverge: `'1969-12-31'` no 5.6 e a data de hoje no 8.5.
+  É a categoria nova abaixo, e aparece **porque o construtor agora roda no 8.5** — antes nem
+  chegava lá. Só se manifesta sem sessão, que é a condição do harness, não de operação.
+
+### CATEGORIA NOVA (dvr): `date($fmt, null)` significa AGORA no PHP 8
+
+Já estava catalogado que `date()` com *string* é `TypeError` no PHP 8. Com **`null`** não há erro
+nenhum — e o resultado muda:
+
+```
+                     date("Y-m-d", null)
+PHP 5.6:             "1969-12-31"    (null coagido para 0)
+PHP 8.5:             "2026-10-10"    (null = usar o relogio, como se o argumento fosse omitido)
+```
+
+Medido nos dois runtimes com `db_getsession("DB_datausu")` ausente, que devolve `NULL` em ambos.
+
+**É a forma mais perigosa da família**: não há fatal, não há aviso, e o campo de data recebe
+**hoje** em vez da época. Num sistema que grava data de empenho e de pagamento, isso é dado
+errado gravado em silêncio.
+
+Correção fiel quando aparecer: `date("Y-m-d", (int)$x)` — `(int)null` é 0, reproduzindo o 5.6.
+
+**NÃO foi varrido em massa.** Escala medida só no universo do `dvr`: **183 ocorrências de
+`date(<fmt>, <variável>)` em 39 arquivos**, 20 delas em `classes/empenho.php`. Vale a mesma
+decisão das guardas `pg_*`: corrigir na aparição. A bateria das 33 telas fechou **33/33**, o que
+indica que em operação normal (com sessão) o valor chega preenchido e os dois runtimes
+concordam — mas o risco fica registrado, e é o candidato número um a aparecer no `arr`, que
+arrasta 208 arquivos de Empenho.
+
+### Denylist do Rector: 22 → 23 (terceira vez que ela cresce)
+
+`IfIssetToCoalescingRector` **nunca disparou no `div` nem no `iss`, e disparou no `dvr`**. Ela
+converte
+
+```php
+if (isset($GLOBALS["HTTP_POST_VARS"][$c])) { return $GLOBALS["HTTP_POST_VARS"][$c]; }
+return null;
+          ->  return $GLOBALS["HTTP_POST_VARS"][$c] ?? null;
+```
+
+e o `??` é **PHP 7.0 — parse error no 5.6**. Medido: `$x["k"] ?? null` não parseia no 5.6 e
+parseia no 8.5.
+
+Outras duas regras novas apareceram e **foram verificadas e mantidas**, porque são seguras nos
+dois runtimes:
+
+| Regra | O que faz | 5.6 | 8.5 |
+|---|---|---|---|
+| `OptionalParametersAfterRequiredRector` | `function f($a="", $b)` → `$b = null` | ok, devolve `null` | idem |
+| `WrapVariableVariableNameInCurlyBracesRector` | `$$label` → `${$label}` | ok | idem |
+
+**A conferência por módulo se pagou pela terceira vez.** Sem ela, 1 arquivo iria para a árvore
+com sintaxe que derruba o runtime de referência — e o `php -l` do 8.5 não acusaria nada.
+
+**Armadilha nova do instrumento:** com a config contendo erro de sintaxe, o Rector reportou
+**`0 arquivos, 0 regras` sem nenhuma mensagem de erro** no formato JSON. Mais uma falha
+silenciosa dele: conferir sempre `php -l` na própria config antes de confiar num resultado zero.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

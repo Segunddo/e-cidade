@@ -56,7 +56,7 @@ class cl_orcfontes {
                  o57_finali = text = Finalidade
                  ";
    //funcao construtor da classe
-   function cl_orcfontes() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcfontes");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,14 +73,14 @@ class cl_orcfontes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o57_codfon = ($this->o57_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_codfon"]:$this->o57_codfon);
-       $this->o57_anousu = ($this->o57_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_anousu"]:$this->o57_anousu);
+       $this->o57_codfon = ($this->o57_codfon === 0 || $this->o57_codfon === 0.0 || $this->o57_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_codfon"]:$this->o57_codfon);
+       $this->o57_anousu = ($this->o57_anousu === 0 || $this->o57_anousu === 0.0 || $this->o57_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_anousu"]:$this->o57_anousu);
        $this->o57_fonte = ($this->o57_fonte == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_fonte"]:$this->o57_fonte);
        $this->o57_descr = ($this->o57_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_descr"]:$this->o57_descr);
        $this->o57_finali = ($this->o57_finali == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_finali"]:$this->o57_finali);
      }else{
-       $this->o57_codfon = ($this->o57_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_codfon"]:$this->o57_codfon);
-       $this->o57_anousu = ($this->o57_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_anousu"]:$this->o57_anousu);
+       $this->o57_codfon = ($this->o57_codfon === 0 || $this->o57_codfon === 0.0 || $this->o57_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_codfon"]:$this->o57_codfon);
+       $this->o57_anousu = ($this->o57_anousu === 0 || $this->o57_anousu === 0.0 || $this->o57_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o57_anousu"]:$this->o57_anousu);
      }
    }
    // funcao para inclusao
@@ -106,7 +106,7 @@ class cl_orcfontes {
      }
        $this->o57_codfon = $o57_codfon;
        $this->o57_anousu = $o57_anousu;
-     if(($this->o57_codfon == null) || ($this->o57_codfon == "") ){
+     if(($this->o57_codfon == null) || ($this->o57_codfon === 0 || $this->o57_codfon === 0.0 || $this->o57_codfon == "") ){
        $this->erro_sql = " Campo o57_codfon nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -114,7 +114,7 @@ class cl_orcfontes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o57_anousu == null) || ($this->o57_anousu == "") ){
+     if(($this->o57_anousu == null) || ($this->o57_anousu === 0 || $this->o57_anousu === 0.0 || $this->o57_anousu == "") ){
        $this->erro_sql = " Campo o57_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

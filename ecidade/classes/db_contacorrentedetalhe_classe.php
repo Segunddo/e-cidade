@@ -84,7 +84,7 @@ class cl_contacorrentedetalhe {
                  c19_orcdotacaoanousu = int4 = Orcdotação Ano
                  ";
   //funcao construtor da classe
-  function cl_contacorrentedetalhe() {
+  function __construct() {
     //classes dos rotulos dos campos
     $this->rotulo = new rotulo("contacorrentedetalhe");
     $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -101,27 +101,27 @@ class cl_contacorrentedetalhe {
   // funcao para atualizar campos
   function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->c19_sequencial = ($this->c19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_sequencial"]:$this->c19_sequencial);
-      $this->c19_contacorrente = ($this->c19_contacorrente == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_contacorrente"]:$this->c19_contacorrente);
-      $this->c19_orctiporec = ($this->c19_orctiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orctiporec"]:$this->c19_orctiporec);
-      $this->c19_instit = ($this->c19_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_instit"]:$this->c19_instit);
+      $this->c19_sequencial = ($this->c19_sequencial === 0 || $this->c19_sequencial === 0.0 || $this->c19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_sequencial"]:$this->c19_sequencial);
+      $this->c19_contacorrente = ($this->c19_contacorrente === 0 || $this->c19_contacorrente === 0.0 || $this->c19_contacorrente == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_contacorrente"]:$this->c19_contacorrente);
+      $this->c19_orctiporec = ($this->c19_orctiporec === 0 || $this->c19_orctiporec === 0.0 || $this->c19_orctiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orctiporec"]:$this->c19_orctiporec);
+      $this->c19_instit = ($this->c19_instit === 0 || $this->c19_instit === 0.0 || $this->c19_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_instit"]:$this->c19_instit);
       $this->c19_concarpeculiar = ($this->c19_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_concarpeculiar"]:$this->c19_concarpeculiar);
-      $this->c19_contabancaria = ($this->c19_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_contabancaria"]:$this->c19_contabancaria);
-      $this->c19_reduz = ($this->c19_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_reduz"]:$this->c19_reduz);
-      $this->c19_numemp = ($this->c19_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_numemp"]:$this->c19_numemp);
-      $this->c19_numcgm = ($this->c19_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_numcgm"]:$this->c19_numcgm);
-      $this->c19_orcunidadeanousu = ($this->c19_orcunidadeanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcunidadeanousu"]:$this->c19_orcunidadeanousu);
-      $this->c19_orcunidadeorgao = ($this->c19_orcunidadeorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcunidadeorgao"]:$this->c19_orcunidadeorgao);
-      $this->c19_orcunidadeunidade = ($this->c19_orcunidadeunidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcunidadeunidade"]:$this->c19_orcunidadeunidade);
-      $this->c19_orcorgaoanousu = ($this->c19_orcorgaoanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcorgaoanousu"]:$this->c19_orcorgaoanousu);
-      $this->c19_orcorgaoorgao = ($this->c19_orcorgaoorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcorgaoorgao"]:$this->c19_orcorgaoorgao);
-      $this->c19_conplanoreduzanousu = ($this->c19_conplanoreduzanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_conplanoreduzanousu"]:$this->c19_conplanoreduzanousu);
-      $this->c19_acordo = ($this->c19_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_acordo"]:$this->c19_acordo);
+      $this->c19_contabancaria = ($this->c19_contabancaria === 0 || $this->c19_contabancaria === 0.0 || $this->c19_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_contabancaria"]:$this->c19_contabancaria);
+      $this->c19_reduz = ($this->c19_reduz === 0 || $this->c19_reduz === 0.0 || $this->c19_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_reduz"]:$this->c19_reduz);
+      $this->c19_numemp = ($this->c19_numemp === 0 || $this->c19_numemp === 0.0 || $this->c19_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_numemp"]:$this->c19_numemp);
+      $this->c19_numcgm = ($this->c19_numcgm === 0 || $this->c19_numcgm === 0.0 || $this->c19_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_numcgm"]:$this->c19_numcgm);
+      $this->c19_orcunidadeanousu = ($this->c19_orcunidadeanousu === 0 || $this->c19_orcunidadeanousu === 0.0 || $this->c19_orcunidadeanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcunidadeanousu"]:$this->c19_orcunidadeanousu);
+      $this->c19_orcunidadeorgao = ($this->c19_orcunidadeorgao === 0 || $this->c19_orcunidadeorgao === 0.0 || $this->c19_orcunidadeorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcunidadeorgao"]:$this->c19_orcunidadeorgao);
+      $this->c19_orcunidadeunidade = ($this->c19_orcunidadeunidade === 0 || $this->c19_orcunidadeunidade === 0.0 || $this->c19_orcunidadeunidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcunidadeunidade"]:$this->c19_orcunidadeunidade);
+      $this->c19_orcorgaoanousu = ($this->c19_orcorgaoanousu === 0 || $this->c19_orcorgaoanousu === 0.0 || $this->c19_orcorgaoanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcorgaoanousu"]:$this->c19_orcorgaoanousu);
+      $this->c19_orcorgaoorgao = ($this->c19_orcorgaoorgao === 0 || $this->c19_orcorgaoorgao === 0.0 || $this->c19_orcorgaoorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcorgaoorgao"]:$this->c19_orcorgaoorgao);
+      $this->c19_conplanoreduzanousu = ($this->c19_conplanoreduzanousu === 0 || $this->c19_conplanoreduzanousu === 0.0 || $this->c19_conplanoreduzanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_conplanoreduzanousu"]:$this->c19_conplanoreduzanousu);
+      $this->c19_acordo = ($this->c19_acordo === 0 || $this->c19_acordo === 0.0 || $this->c19_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_acordo"]:$this->c19_acordo);
       $this->c19_estrutural = ($this->c19_estrutural == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_estrutural"]:$this->c19_estrutural);
-      $this->c19_orcdotacao = ($this->c19_orcdotacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcdotacao"]:$this->c19_orcdotacao);
-      $this->c19_orcdotacaoanousu = ($this->c19_orcdotacaoanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcdotacaoanousu"]:$this->c19_orcdotacaoanousu);
+      $this->c19_orcdotacao = ($this->c19_orcdotacao === 0 || $this->c19_orcdotacao === 0.0 || $this->c19_orcdotacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcdotacao"]:$this->c19_orcdotacao);
+      $this->c19_orcdotacaoanousu = ($this->c19_orcdotacaoanousu === 0 || $this->c19_orcdotacaoanousu === 0.0 || $this->c19_orcdotacaoanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_orcdotacaoanousu"]:$this->c19_orcdotacaoanousu);
     }else{
-      $this->c19_sequencial = ($this->c19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_sequencial"]:$this->c19_sequencial);
+      $this->c19_sequencial = ($this->c19_sequencial === 0 || $this->c19_sequencial === 0.0 || $this->c19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c19_sequencial"]:$this->c19_sequencial);
     }
   }
   // funcao para inclusao
@@ -205,7 +205,7 @@ class cl_contacorrentedetalhe {
         $this->c19_sequencial = $c19_sequencial;
       }
     }
-    if(($this->c19_sequencial == null) || ($this->c19_sequencial == "") ){
+    if(($this->c19_sequencial == null) || ($this->c19_sequencial === 0 || $this->c19_sequencial === 0.0 || $this->c19_sequencial == "") ){
       $this->erro_sql = " Campo c19_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -533,7 +533,7 @@ class cl_contacorrentedetalhe {
   function sql_query ( $c19_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -590,7 +590,7 @@ class cl_contacorrentedetalhe {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -624,7 +624,7 @@ class cl_contacorrentedetalhe {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -636,7 +636,7 @@ class cl_contacorrentedetalhe {
   function sql_query_saldo($c19_sequencial=null,$campos="*",$ordem=null,$dbwhere="") {
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -659,7 +659,7 @@ class cl_contacorrentedetalhe {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -671,7 +671,7 @@ class cl_contacorrentedetalhe {
   function sql_query_lancamentos($c19_sequencial=null,$campos="*",$ordem=null,$dbwhere="") {
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -695,7 +695,7 @@ class cl_contacorrentedetalhe {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -707,7 +707,7 @@ class cl_contacorrentedetalhe {
   function sql_query_fileAtributos ( $c19_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -751,7 +751,7 @@ class cl_contacorrentedetalhe {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -764,7 +764,7 @@ class cl_contacorrentedetalhe {
   function sql_query_contacorrente_cgm ($c19_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -788,7 +788,7 @@ class cl_contacorrentedetalhe {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -801,7 +801,7 @@ class cl_contacorrentedetalhe {
   function sql_query_viewDetalhes ( $c19_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -846,7 +846,7 @@ class cl_contacorrentedetalhe {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

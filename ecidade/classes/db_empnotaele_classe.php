@@ -56,7 +56,7 @@ class cl_empnotaele {
                  e70_vlrliq = float8 = Valor liquidado 
                  ";
    //funcao construtor da classe 
-   function cl_empnotaele() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empnotaele"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,14 +73,14 @@ class cl_empnotaele {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e70_codnota = ($this->e70_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_codnota"]:$this->e70_codnota);
-       $this->e70_codele = ($this->e70_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_codele"]:$this->e70_codele);
-       $this->e70_valor = ($this->e70_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_valor"]:$this->e70_valor);
-       $this->e70_vlranu = ($this->e70_vlranu == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_vlranu"]:$this->e70_vlranu);
-       $this->e70_vlrliq = ($this->e70_vlrliq == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_vlrliq"]:$this->e70_vlrliq);
+       $this->e70_codnota = ($this->e70_codnota === 0 || $this->e70_codnota === 0.0 || $this->e70_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_codnota"]:$this->e70_codnota);
+       $this->e70_codele = ($this->e70_codele === 0 || $this->e70_codele === 0.0 || $this->e70_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_codele"]:$this->e70_codele);
+       $this->e70_valor = ($this->e70_valor === 0 || $this->e70_valor === 0.0 || $this->e70_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_valor"]:$this->e70_valor);
+       $this->e70_vlranu = ($this->e70_vlranu === 0 || $this->e70_vlranu === 0.0 || $this->e70_vlranu == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_vlranu"]:$this->e70_vlranu);
+       $this->e70_vlrliq = ($this->e70_vlrliq === 0 || $this->e70_vlrliq === 0.0 || $this->e70_vlrliq == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_vlrliq"]:$this->e70_vlrliq);
      }else{
-       $this->e70_codnota = ($this->e70_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_codnota"]:$this->e70_codnota);
-       $this->e70_codele = ($this->e70_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_codele"]:$this->e70_codele);
+       $this->e70_codnota = ($this->e70_codnota === 0 || $this->e70_codnota === 0.0 || $this->e70_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_codnota"]:$this->e70_codnota);
+       $this->e70_codele = ($this->e70_codele === 0 || $this->e70_codele === 0.0 || $this->e70_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e70_codele"]:$this->e70_codele);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_empnotaele {
      }
        $this->e70_codnota = $e70_codnota; 
        $this->e70_codele = $e70_codele; 
-     if(($this->e70_codnota == null) || ($this->e70_codnota == "") ){ 
+     if(($this->e70_codnota == null) || ($this->e70_codnota === 0 || $this->e70_codnota === 0.0 || $this->e70_codnota == "") ){ 
        $this->erro_sql = " Campo e70_codnota nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -123,7 +123,7 @@ class cl_empnotaele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e70_codele == null) || ($this->e70_codele == "") ){ 
+     if(($this->e70_codele == null) || ($this->e70_codele === 0 || $this->e70_codele === 0.0 || $this->e70_codele == "") ){ 
        $this->erro_sql = " Campo e70_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -411,7 +411,7 @@ class cl_empnotaele {
    function sql_query ( $e70_codnota=null,$e70_codele=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_empnotaele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_empnotaele {
    function sql_query_file ( $e70_codnota=null,$e70_codele=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -485,7 +485,7 @@ class cl_empnotaele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -497,7 +497,7 @@ class cl_empnotaele {
    function sql_query_notaliq ( $e70_codnota=null,$e70_codele=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -533,7 +533,7 @@ class cl_empnotaele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_empnotaele {
    function sql_query_ordem ( $e70_codnota=null,$e70_codele=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -579,7 +579,7 @@ class cl_empnotaele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -591,7 +591,7 @@ class cl_empnotaele {
 function sql_query_nf ( $e70_codnota=null,$e70_codele=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -631,7 +631,7 @@ function sql_query_nf ( $e70_codnota=null,$e70_codele=null,$campos="*",$ordem=nu
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

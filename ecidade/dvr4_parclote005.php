@@ -27,7 +27,8 @@
 
 require(modification("fpdf151/pdf.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $sql = "select * from loteam where j34_loteam = $loteam";
 $result = db_query($sql);
@@ -63,7 +64,7 @@ $pdf->Cell(12,4,'MATR.',1,0,"C",0);
 $pdf->Cell(80,4,'NOME',1,0,"C",0);
 $pdf->Cell(100,4,'ENDEREÇO',1,1,"C",0);
 $total = 0;
-$num = pg_numrows($principal);
+$num = ($principal ? pg_numrows($principal) : 0);
 for($i = 0;$i < $num ;$i++) {
    db_fieldsmemory($principal,$i) ;
    if($pdf->GetY() > ( $pdf->h - 30 )){

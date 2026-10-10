@@ -66,7 +66,7 @@ class cl_empprestaitem {
                  e46_emppresta = int4 = Referência para emppresta
                  ";
    //funcao construtor da classe
-   function cl_empprestaitem() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empprestaitem");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,18 +83,18 @@ class cl_empprestaitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e46_codigo = ($this->e46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_codigo"]:$this->e46_codigo);
-       $this->e46_numemp = ($this->e46_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_numemp"]:$this->e46_numemp);
+       $this->e46_codigo = ($this->e46_codigo === 0 || $this->e46_codigo === 0.0 || $this->e46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_codigo"]:$this->e46_codigo);
+       $this->e46_numemp = ($this->e46_numemp === 0 || $this->e46_numemp === 0.0 || $this->e46_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_numemp"]:$this->e46_numemp);
        $this->e46_nota = ($this->e46_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_nota"]:$this->e46_nota);
-       $this->e46_valor = ($this->e46_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_valor"]:$this->e46_valor);
+       $this->e46_valor = ($this->e46_valor === 0 || $this->e46_valor === 0.0 || $this->e46_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_valor"]:$this->e46_valor);
        $this->e46_descr = ($this->e46_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_descr"]:$this->e46_descr);
-       $this->e46_id_usuario = ($this->e46_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_id_usuario"]:$this->e46_id_usuario);
+       $this->e46_id_usuario = ($this->e46_id_usuario === 0 || $this->e46_id_usuario === 0.0 || $this->e46_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_id_usuario"]:$this->e46_id_usuario);
        $this->e46_cnpj = ($this->e46_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_cnpj"]:$this->e46_cnpj);
        $this->e46_cpf = ($this->e46_cpf == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_cpf"]:$this->e46_cpf);
        $this->e46_nome = ($this->e46_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_nome"]:$this->e46_nome);
-       $this->e46_emppresta = ($this->e46_emppresta == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_emppresta"]:$this->e46_emppresta);
+       $this->e46_emppresta = ($this->e46_emppresta === 0 || $this->e46_emppresta === 0.0 || $this->e46_emppresta == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_emppresta"]:$this->e46_emppresta);
      }else{
-       $this->e46_codigo = ($this->e46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_codigo"]:$this->e46_codigo);
+       $this->e46_codigo = ($this->e46_codigo === 0 || $this->e46_codigo === 0.0 || $this->e46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e46_codigo"]:$this->e46_codigo);
      }
    }
    // funcao para inclusao
@@ -160,7 +160,7 @@ class cl_empprestaitem {
          $this->e46_codigo = $e46_codigo;
        }
      }
-     if(($this->e46_codigo == null) || ($this->e46_codigo == "") ){
+     if(($this->e46_codigo == null) || ($this->e46_codigo === 0 || $this->e46_codigo === 0.0 || $this->e46_codigo == "") ){
        $this->erro_sql = " Campo e46_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

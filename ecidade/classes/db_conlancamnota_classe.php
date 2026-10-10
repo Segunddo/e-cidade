@@ -50,7 +50,7 @@ class cl_conlancamnota {
                  c66_codnota = int4 = Nota
                  ";
     //funcao construtor da classe
-    function cl_conlancamnota() {
+    function __construct() {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("conlancamnota");
         $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_conlancamnota {
     // funcao para atualizar campos
     function atualizacampos($exclusao=false) {
         if($exclusao==false){
-            $this->c66_codlan = ($this->c66_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codlan"]:$this->c66_codlan);
-            $this->c66_codnota = ($this->c66_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codnota"]:$this->c66_codnota);
+            $this->c66_codlan = ($this->c66_codlan === 0 || $this->c66_codlan === 0.0 || $this->c66_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codlan"]:$this->c66_codlan);
+            $this->c66_codnota = ($this->c66_codnota === 0 || $this->c66_codnota === 0.0 || $this->c66_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codnota"]:$this->c66_codnota);
         }else{
-            $this->c66_codlan = ($this->c66_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codlan"]:$this->c66_codlan);
-            $this->c66_codnota = ($this->c66_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codnota"]:$this->c66_codnota);
+            $this->c66_codlan = ($this->c66_codlan === 0 || $this->c66_codlan === 0.0 || $this->c66_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codlan"]:$this->c66_codlan);
+            $this->c66_codnota = ($this->c66_codnota === 0 || $this->c66_codnota === 0.0 || $this->c66_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codnota"]:$this->c66_codnota);
         }
     }
     // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_conlancamnota {
         $this->atualizacampos();
         $this->c66_codlan = $c66_codlan;
         $this->c66_codnota = $c66_codnota;
-        if(($this->c66_codlan == null) || ($this->c66_codlan == "") ){
+        if(($this->c66_codlan == null) || ($this->c66_codlan === 0 || $this->c66_codlan === 0.0 || $this->c66_codlan == "") ){
             $this->erro_sql = " Campo c66_codlan nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_conlancamnota {
             $this->erro_status = "0";
             return false;
         }
-        if(($this->c66_codnota == null) || ($this->c66_codnota == "") ){
+        if(($this->c66_codnota == null) || ($this->c66_codnota === 0 || $this->c66_codnota === 0.0 || $this->c66_codnota == "") ){
             $this->erro_sql = " Campo c66_codnota nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_conlancamnota {
     function sql_query ( $c66_codlan=null,$c66_codnota=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -351,7 +351,7 @@ class cl_conlancamnota {
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -366,7 +366,7 @@ class cl_conlancamnota {
     function sql_query_file ( $c66_codlan=null,$c66_codnota=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_conlancamnota {
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -408,7 +408,7 @@ class cl_conlancamnota {
     function sql_query_contrato ( $c66_codlan=null,$c66_codnota=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_conlancamnota {
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];

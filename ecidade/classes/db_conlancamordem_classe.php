@@ -26,7 +26,7 @@ class cl_conlancamordem {
                  c03_ordem = int4 = Ordem
                  ";
    //funcao construtor da classe
-   function cl_conlancamordem() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancamordem");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_conlancamordem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c03_sequencial = ($this->c03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_sequencial"]:$this->c03_sequencial);
-       $this->c03_codlan = ($this->c03_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_codlan"]:$this->c03_codlan);
-       $this->c03_ordem = ($this->c03_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_ordem"]:$this->c03_ordem);
+       $this->c03_sequencial = ($this->c03_sequencial === 0 || $this->c03_sequencial === 0.0 || $this->c03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_sequencial"]:$this->c03_sequencial);
+       $this->c03_codlan = ($this->c03_codlan === 0 || $this->c03_codlan === 0.0 || $this->c03_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_codlan"]:$this->c03_codlan);
+       $this->c03_ordem = ($this->c03_ordem === 0 || $this->c03_ordem === 0.0 || $this->c03_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_ordem"]:$this->c03_ordem);
      }else{
-       $this->c03_sequencial = ($this->c03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_sequencial"]:$this->c03_sequencial);
+       $this->c03_sequencial = ($this->c03_sequencial === 0 || $this->c03_sequencial === 0.0 || $this->c03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_sequencial"]:$this->c03_sequencial);
      }
    }
    // funcao para inclusao
@@ -102,7 +102,7 @@ class cl_conlancamordem {
        $this->c03_ordem = pg_result($result,0,0);
      }
 
-     if(($this->c03_sequencial == null) || ($this->c03_sequencial == "") ){
+     if(($this->c03_sequencial == null) || ($this->c03_sequencial === 0 || $this->c03_sequencial === 0.0 || $this->c03_sequencial == "") ){
        $this->erro_sql = " Campo c03_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -364,7 +364,7 @@ class cl_conlancamordem {
    function sql_query ( $c03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_conlancamordem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_conlancamordem {
    function sql_query_file ( $c03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_conlancamordem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

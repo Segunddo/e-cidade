@@ -52,7 +52,7 @@ class cl_rhempenhofolhaempenho {
                  rh76_numemp = int4 = Número do Empenho 
                  ";
    //funcao construtor da classe 
-   function cl_rhempenhofolhaempenho() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhempenhofolhaempenho"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rhempenhofolhaempenho {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh76_sequencial = ($this->rh76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh76_sequencial"]:$this->rh76_sequencial);
-       $this->rh76_rhempenhofolha = ($this->rh76_rhempenhofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh76_rhempenhofolha"]:$this->rh76_rhempenhofolha);
-       $this->rh76_numemp = ($this->rh76_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["rh76_numemp"]:$this->rh76_numemp);
+       $this->rh76_sequencial = ($this->rh76_sequencial === 0 || $this->rh76_sequencial === 0.0 || $this->rh76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh76_sequencial"]:$this->rh76_sequencial);
+       $this->rh76_rhempenhofolha = ($this->rh76_rhempenhofolha === 0 || $this->rh76_rhempenhofolha === 0.0 || $this->rh76_rhempenhofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh76_rhempenhofolha"]:$this->rh76_rhempenhofolha);
+       $this->rh76_numemp = ($this->rh76_numemp === 0 || $this->rh76_numemp === 0.0 || $this->rh76_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["rh76_numemp"]:$this->rh76_numemp);
      }else{
-       $this->rh76_sequencial = ($this->rh76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh76_sequencial"]:$this->rh76_sequencial);
+       $this->rh76_sequencial = ($this->rh76_sequencial === 0 || $this->rh76_sequencial === 0.0 || $this->rh76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh76_sequencial"]:$this->rh76_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rhempenhofolhaempenho {
          $this->rh76_sequencial = $rh76_sequencial; 
        }
      }
-     if(($this->rh76_sequencial == null) || ($this->rh76_sequencial == "") ){ 
+     if(($this->rh76_sequencial == null) || ($this->rh76_sequencial === 0 || $this->rh76_sequencial === 0.0 || $this->rh76_sequencial == "") ){ 
        $this->erro_sql = " Campo rh76_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_rhempenhofolhaempenho {
    function sql_query ( $rh76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_rhempenhofolhaempenho {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_rhempenhofolhaempenho {
    function sql_query_file ( $rh76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_rhempenhofolhaempenho {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

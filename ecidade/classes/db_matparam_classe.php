@@ -77,7 +77,7 @@ class cl_matparam {
                  m90_db_estrutura = int4 = Estrutura dos Grupos 
                  ";
    //funcao construtor da classe 
-   function cl_matparam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matparam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -107,14 +107,14 @@ class cl_matparam {
        $this->m90_deptalmox = ($this->m90_deptalmox == "f"?@$GLOBALS["HTTP_POST_VARS"]["m90_deptalmox"]:$this->m90_deptalmox);
        $this->m90_liqentoc = ($this->m90_liqentoc == "f"?@$GLOBALS["HTTP_POST_VARS"]["m90_liqentoc"]:$this->m90_liqentoc);
        $this->m90_entratrans = ($this->m90_entratrans == "f"?@$GLOBALS["HTTP_POST_VARS"]["m90_entratrans"]:$this->m90_entratrans);
-       $this->m90_modrelsaidamat = ($this->m90_modrelsaidamat == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_modrelsaidamat"]:$this->m90_modrelsaidamat);
-       $this->m90_almoxordemcompra = ($this->m90_almoxordemcompra == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_almoxordemcompra"]:$this->m90_almoxordemcompra);
-       $this->m90_prazovenc = ($this->m90_prazovenc == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_prazovenc"]:$this->m90_prazovenc);
-       $this->m90_corfundorequisicao = ($this->m90_corfundorequisicao == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_corfundorequisicao"]:$this->m90_corfundorequisicao);
-       $this->m90_mostrarsaldosolictransf = ($this->m90_mostrarsaldosolictransf == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_mostrarsaldosolictransf"]:$this->m90_mostrarsaldosolictransf);
-       $this->m90_validarsaldosolictransf = ($this->m90_validarsaldosolictransf == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_validarsaldosolictransf"]:$this->m90_validarsaldosolictransf);
+       $this->m90_modrelsaidamat = ($this->m90_modrelsaidamat === 0 || $this->m90_modrelsaidamat === 0.0 || $this->m90_modrelsaidamat == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_modrelsaidamat"]:$this->m90_modrelsaidamat);
+       $this->m90_almoxordemcompra = ($this->m90_almoxordemcompra === 0 || $this->m90_almoxordemcompra === 0.0 || $this->m90_almoxordemcompra == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_almoxordemcompra"]:$this->m90_almoxordemcompra);
+       $this->m90_prazovenc = ($this->m90_prazovenc === 0 || $this->m90_prazovenc === 0.0 || $this->m90_prazovenc == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_prazovenc"]:$this->m90_prazovenc);
+       $this->m90_corfundorequisicao = ($this->m90_corfundorequisicao === 0 || $this->m90_corfundorequisicao === 0.0 || $this->m90_corfundorequisicao == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_corfundorequisicao"]:$this->m90_corfundorequisicao);
+       $this->m90_mostrarsaldosolictransf = ($this->m90_mostrarsaldosolictransf === 0 || $this->m90_mostrarsaldosolictransf === 0.0 || $this->m90_mostrarsaldosolictransf == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_mostrarsaldosolictransf"]:$this->m90_mostrarsaldosolictransf);
+       $this->m90_validarsaldosolictransf = ($this->m90_validarsaldosolictransf === 0 || $this->m90_validarsaldosolictransf === 0.0 || $this->m90_validarsaldosolictransf == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_validarsaldosolictransf"]:$this->m90_validarsaldosolictransf);
        $this->m90_versaldoitemreq = ($this->m90_versaldoitemreq == "f"?@$GLOBALS["HTTP_POST_VARS"]["m90_versaldoitemreq"]:$this->m90_versaldoitemreq);
-       $this->m90_db_estrutura = ($this->m90_db_estrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_db_estrutura"]:$this->m90_db_estrutura);
+       $this->m90_db_estrutura = ($this->m90_db_estrutura === 0 || $this->m90_db_estrutura === 0.0 || $this->m90_db_estrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["m90_db_estrutura"]:$this->m90_db_estrutura);
      }else{
      }
    }
@@ -588,7 +588,7 @@ class cl_matparam {
    function sql_query ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -607,7 +607,7 @@ class cl_matparam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -620,7 +620,7 @@ class cl_matparam {
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -638,7 +638,7 @@ class cl_matparam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

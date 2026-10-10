@@ -56,7 +56,7 @@ class cl_orcreservasol
                  ";
 
     //funcao construtor da classe
-    function cl_orcreservasol()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("orcreservasol");
@@ -78,12 +78,12 @@ class cl_orcreservasol
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->o82_sequencial = ($this->o82_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o82_sequencial"] : $this->o82_sequencial);
-            $this->o82_codres = ($this->o82_codres == "" ? @$GLOBALS["HTTP_POST_VARS"]["o82_codres"] : $this->o82_codres);
-            $this->o82_solicitem = ($this->o82_solicitem == "" ? @$GLOBALS["HTTP_POST_VARS"]["o82_solicitem"] : $this->o82_solicitem);
-            $this->o82_pcdotac = ($this->o82_pcdotac == "" ? @$GLOBALS["HTTP_POST_VARS"]["o82_pcdotac"] : $this->o82_pcdotac);
+            $this->o82_sequencial = ($this->o82_sequencial === 0 || $this->o82_sequencial === 0.0 || $this->o82_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o82_sequencial"] : $this->o82_sequencial);
+            $this->o82_codres = ($this->o82_codres === 0 || $this->o82_codres === 0.0 || $this->o82_codres == "" ? @$GLOBALS["HTTP_POST_VARS"]["o82_codres"] : $this->o82_codres);
+            $this->o82_solicitem = ($this->o82_solicitem === 0 || $this->o82_solicitem === 0.0 || $this->o82_solicitem == "" ? @$GLOBALS["HTTP_POST_VARS"]["o82_solicitem"] : $this->o82_solicitem);
+            $this->o82_pcdotac = ($this->o82_pcdotac === 0 || $this->o82_pcdotac === 0.0 || $this->o82_pcdotac == "" ? @$GLOBALS["HTTP_POST_VARS"]["o82_pcdotac"] : $this->o82_pcdotac);
         } else {
-            $this->o82_sequencial = ($this->o82_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o82_sequencial"] : $this->o82_sequencial);
+            $this->o82_sequencial = ($this->o82_sequencial === 0 || $this->o82_sequencial === 0.0 || $this->o82_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o82_sequencial"] : $this->o82_sequencial);
         }
     }
 
@@ -142,7 +142,7 @@ class cl_orcreservasol
                 $this->o82_sequencial = $o82_sequencial;
             }
         }
-        if (($this->o82_sequencial == null) || ($this->o82_sequencial == "")) {
+        if (($this->o82_sequencial == null) || ($this->o82_sequencial === 0 || $this->o82_sequencial === 0.0 || $this->o82_sequencial == "")) {
             $this->erro_sql = " Campo o82_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

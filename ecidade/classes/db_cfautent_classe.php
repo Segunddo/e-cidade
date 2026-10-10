@@ -82,7 +82,7 @@ class cl_cfautent {
                  k11_tef = char(1) = TEF
                  ";
    //funcao construtor da classe
-   function cl_cfautent() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cfautent");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -99,7 +99,7 @@ class cl_cfautent {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k11_id = ($this->k11_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_id"]:$this->k11_id);
+       $this->k11_id = ($this->k11_id === 0 || $this->k11_id === 0.0 || $this->k11_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_id"]:$this->k11_id);
        $this->k11_ident1 = ($this->k11_ident1 == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_ident1"]:$this->k11_ident1);
        $this->k11_ident2 = ($this->k11_ident2 == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_ident2"]:$this->k11_ident2);
        $this->k11_ident3 = ($this->k11_ident3 == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_ident3"]:$this->k11_ident3);
@@ -107,18 +107,18 @@ class cl_cfautent {
        $this->k11_local = ($this->k11_local == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_local"]:$this->k11_local);
        $this->k11_aut1 = ($this->k11_aut1 == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_aut1"]:$this->k11_aut1);
        $this->k11_aut2 = ($this->k11_aut2 == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_aut2"]:$this->k11_aut2);
-       $this->k11_tipautent = ($this->k11_tipautent == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_tipautent"]:$this->k11_tipautent);
+       $this->k11_tipautent = ($this->k11_tipautent === 0 || $this->k11_tipautent === 0.0 || $this->k11_tipautent == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_tipautent"]:$this->k11_tipautent);
        $this->k11_tesoureiro = ($this->k11_tesoureiro == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_tesoureiro"]:$this->k11_tesoureiro);
-       $this->k11_instit = ($this->k11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_instit"]:$this->k11_instit);
-       $this->k11_tipoimp = ($this->k11_tipoimp == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_tipoimp"]:$this->k11_tipoimp);
-       $this->k11_tipoimpcheque = ($this->k11_tipoimpcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_tipoimpcheque"]:$this->k11_tipoimpcheque);
+       $this->k11_instit = ($this->k11_instit === 0 || $this->k11_instit === 0.0 || $this->k11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_instit"]:$this->k11_instit);
+       $this->k11_tipoimp = ($this->k11_tipoimp === 0 || $this->k11_tipoimp === 0.0 || $this->k11_tipoimp == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_tipoimp"]:$this->k11_tipoimp);
+       $this->k11_tipoimpcheque = ($this->k11_tipoimpcheque === 0 || $this->k11_tipoimpcheque === 0.0 || $this->k11_tipoimpcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_tipoimpcheque"]:$this->k11_tipoimpcheque);
        $this->k11_ipimpcheque = ($this->k11_ipimpcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_ipimpcheque"]:$this->k11_ipimpcheque);
-       $this->k11_portaimpcheque = ($this->k11_portaimpcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_portaimpcheque"]:$this->k11_portaimpcheque);
-       $this->k11_impassche = ($this->k11_impassche == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_impassche"]:$this->k11_impassche);
-       $this->k11_zeratrocoarrec = ($this->k11_zeratrocoarrec == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_zeratrocoarrec"]:$this->k11_zeratrocoarrec);
+       $this->k11_portaimpcheque = ($this->k11_portaimpcheque === 0 || $this->k11_portaimpcheque === 0.0 || $this->k11_portaimpcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_portaimpcheque"]:$this->k11_portaimpcheque);
+       $this->k11_impassche = ($this->k11_impassche === 0 || $this->k11_impassche === 0.0 || $this->k11_impassche == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_impassche"]:$this->k11_impassche);
+       $this->k11_zeratrocoarrec = ($this->k11_zeratrocoarrec === 0 || $this->k11_zeratrocoarrec === 0.0 || $this->k11_zeratrocoarrec == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_zeratrocoarrec"]:$this->k11_zeratrocoarrec);
        $this->k11_tef = ($this->k11_tef == "f"?@$GLOBALS["HTTP_POST_VARS"]["k11_tef"]:$this->k11_tef);
      }else{
-       $this->k11_id = ($this->k11_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_id"]:$this->k11_id);
+       $this->k11_id = ($this->k11_id === 0 || $this->k11_id === 0.0 || $this->k11_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_id"]:$this->k11_id);
      }
    }
    // funcao para inclusao
@@ -229,7 +229,7 @@ class cl_cfautent {
          $this->k11_id = $k11_id;
        }
      }
-     if(($this->k11_id == null) || ($this->k11_id == "") ){
+     if(($this->k11_id == null) || ($this->k11_id === 0 || $this->k11_id === 0.0 || $this->k11_id == "") ){
        $this->erro_sql = " Campo k11_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -56,7 +56,7 @@ class cl_empagenotasordem {
                  e43_valor = float8 = Valor Liberado 
                  ";
    //funcao construtor da classe 
-   function cl_empagenotasordem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empagenotasordem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_empagenotasordem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e43_sequencial = ($this->e43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_sequencial"]:$this->e43_sequencial);
-       $this->e43_ordempagamento = ($this->e43_ordempagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_ordempagamento"]:$this->e43_ordempagamento);
-       $this->e43_empagemov = ($this->e43_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_empagemov"]:$this->e43_empagemov);
+       $this->e43_sequencial = ($this->e43_sequencial === 0 || $this->e43_sequencial === 0.0 || $this->e43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_sequencial"]:$this->e43_sequencial);
+       $this->e43_ordempagamento = ($this->e43_ordempagamento === 0 || $this->e43_ordempagamento === 0.0 || $this->e43_ordempagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_ordempagamento"]:$this->e43_ordempagamento);
+       $this->e43_empagemov = ($this->e43_empagemov === 0 || $this->e43_empagemov === 0.0 || $this->e43_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_empagemov"]:$this->e43_empagemov);
        $this->e43_autorizado = ($this->e43_autorizado == "f"?@$GLOBALS["HTTP_POST_VARS"]["e43_autorizado"]:$this->e43_autorizado);
-       $this->e43_valor = ($this->e43_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_valor"]:$this->e43_valor);
+       $this->e43_valor = ($this->e43_valor === 0 || $this->e43_valor === 0.0 || $this->e43_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_valor"]:$this->e43_valor);
      }else{
-       $this->e43_sequencial = ($this->e43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_sequencial"]:$this->e43_sequencial);
+       $this->e43_sequencial = ($this->e43_sequencial === 0 || $this->e43_sequencial === 0.0 || $this->e43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_sequencial"]:$this->e43_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_empagenotasordem {
          $this->e43_sequencial = $e43_sequencial; 
        }
      }
-     if(($this->e43_sequencial == null) || ($this->e43_sequencial == "") ){ 
+     if(($this->e43_sequencial == null) || ($this->e43_sequencial === 0 || $this->e43_sequencial === 0.0 || $this->e43_sequencial == "") ){ 
        $this->erro_sql = " Campo e43_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -410,7 +410,7 @@ class cl_empagenotasordem {
    function sql_query ( $e43_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_empagenotasordem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_empagenotasordem {
    function sql_query_file ( $e43_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_empagenotasordem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_empagenotasordem {
     
     $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_empagenotasordem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

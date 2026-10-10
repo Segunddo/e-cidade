@@ -45,11 +45,11 @@ class cl_slippagordem
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->k209_sequencial = ($this->k209_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k209_sequencial"]:$this->k209_sequencial);
-       $this->k209_pagordem = ($this->k209_pagordem == ""?@$GLOBALS["HTTP_POST_VARS"]["k209_pagordem"]:$this->k209_pagordem);
-       $this->k209_slip = ($this->k209_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k209_slip"]:$this->k209_slip);
+       $this->k209_sequencial = ($this->k209_sequencial === 0 || $this->k209_sequencial === 0.0 || $this->k209_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k209_sequencial"]:$this->k209_sequencial);
+       $this->k209_pagordem = ($this->k209_pagordem === 0 || $this->k209_pagordem === 0.0 || $this->k209_pagordem == ""?@$GLOBALS["HTTP_POST_VARS"]["k209_pagordem"]:$this->k209_pagordem);
+       $this->k209_slip = ($this->k209_slip === 0 || $this->k209_slip === 0.0 || $this->k209_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k209_slip"]:$this->k209_slip);
      }else{
-       $this->k209_sequencial = ($this->k209_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k209_sequencial"]:$this->k209_sequencial);
+       $this->k209_sequencial = ($this->k209_sequencial === 0 || $this->k209_sequencial === 0.0 || $this->k209_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k209_sequencial"]:$this->k209_sequencial);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_slippagordem
          $this->k209_sequencial = $k209_sequencial; 
        }
      }
-     if(($this->k209_sequencial == null) || ($this->k209_sequencial == "") ){ 
+     if(($this->k209_sequencial == null) || ($this->k209_sequencial === 0 || $this->k209_sequencial === 0.0 || $this->k209_sequencial == "") ){ 
        $this->erro_sql = " Campo k209_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

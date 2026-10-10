@@ -56,7 +56,7 @@ class cl_pagordemele {
                  e53_vlrpag = float8 = Pago 
                  ";
    //funcao construtor da classe 
-   function cl_pagordemele() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pagordemele"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,14 +73,14 @@ class cl_pagordemele {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e53_codord = ($this->e53_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codord"]:$this->e53_codord);
-       $this->e53_codele = ($this->e53_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codele"]:$this->e53_codele);
-       $this->e53_valor = ($this->e53_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_valor"]:$this->e53_valor);
-       $this->e53_vlranu = ($this->e53_vlranu == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_vlranu"]:$this->e53_vlranu);
-       $this->e53_vlrpag = ($this->e53_vlrpag == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_vlrpag"]:$this->e53_vlrpag);
+       $this->e53_codord = ($this->e53_codord === 0 || $this->e53_codord === 0.0 || $this->e53_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codord"]:$this->e53_codord);
+       $this->e53_codele = ($this->e53_codele === 0 || $this->e53_codele === 0.0 || $this->e53_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codele"]:$this->e53_codele);
+       $this->e53_valor = ($this->e53_valor === 0 || $this->e53_valor === 0.0 || $this->e53_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_valor"]:$this->e53_valor);
+       $this->e53_vlranu = ($this->e53_vlranu === 0 || $this->e53_vlranu === 0.0 || $this->e53_vlranu == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_vlranu"]:$this->e53_vlranu);
+       $this->e53_vlrpag = ($this->e53_vlrpag === 0 || $this->e53_vlrpag === 0.0 || $this->e53_vlrpag == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_vlrpag"]:$this->e53_vlrpag);
      }else{
-       $this->e53_codord = ($this->e53_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codord"]:$this->e53_codord);
-       $this->e53_codele = ($this->e53_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codele"]:$this->e53_codele);
+       $this->e53_codord = ($this->e53_codord === 0 || $this->e53_codord === 0.0 || $this->e53_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codord"]:$this->e53_codord);
+       $this->e53_codele = ($this->e53_codele === 0 || $this->e53_codele === 0.0 || $this->e53_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codele"]:$this->e53_codele);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_pagordemele {
      }
        $this->e53_codord = $e53_codord; 
        $this->e53_codele = $e53_codele; 
-     if(($this->e53_codord == null) || ($this->e53_codord == "") ){ 
+     if(($this->e53_codord == null) || ($this->e53_codord === 0 || $this->e53_codord === 0.0 || $this->e53_codord == "") ){ 
        $this->erro_sql = " Campo e53_codord nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -123,7 +123,7 @@ class cl_pagordemele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e53_codele == null) || ($this->e53_codele == "") ){ 
+     if(($this->e53_codele == null) || ($this->e53_codele === 0 || $this->e53_codele === 0.0 || $this->e53_codele == "") ){ 
        $this->erro_sql = " Campo e53_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -411,7 +411,7 @@ class cl_pagordemele {
    function sql_query ( $e53_codord=null,$e53_codele=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_pagordemele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_pagordemele {
    function sql_query_file ( $e53_codord=null,$e53_codele=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -485,7 +485,7 @@ class cl_pagordemele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

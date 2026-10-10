@@ -59,18 +59,18 @@ class cl_retencaotiporec
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->e21_sequencial = ($this->e21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_sequencial"]:$this->e21_sequencial);
-       $this->e21_retencaotipocalc = ($this->e21_retencaotipocalc == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_retencaotipocalc"]:$this->e21_retencaotipocalc);
-       $this->e21_receita = ($this->e21_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_receita"]:$this->e21_receita);
+       $this->e21_sequencial = ($this->e21_sequencial === 0 || $this->e21_sequencial === 0.0 || $this->e21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_sequencial"]:$this->e21_sequencial);
+       $this->e21_retencaotipocalc = ($this->e21_retencaotipocalc === 0 || $this->e21_retencaotipocalc === 0.0 || $this->e21_retencaotipocalc == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_retencaotipocalc"]:$this->e21_retencaotipocalc);
+       $this->e21_receita = ($this->e21_receita === 0 || $this->e21_receita === 0.0 || $this->e21_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_receita"]:$this->e21_receita);
        $this->e21_descricao = ($this->e21_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_descricao"]:$this->e21_descricao);
-       $this->e21_aliquota = ($this->e21_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_aliquota"]:$this->e21_aliquota);
-       $this->e21_instit = ($this->e21_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_instit"]:$this->e21_instit);
-       $this->e21_retencaotiporecgrupo = ($this->e21_retencaotiporecgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_retencaotiporecgrupo"]:$this->e21_retencaotiporecgrupo);
+       $this->e21_aliquota = ($this->e21_aliquota === 0 || $this->e21_aliquota === 0.0 || $this->e21_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_aliquota"]:$this->e21_aliquota);
+       $this->e21_instit = ($this->e21_instit === 0 || $this->e21_instit === 0.0 || $this->e21_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_instit"]:$this->e21_instit);
+       $this->e21_retencaotiporecgrupo = ($this->e21_retencaotiporecgrupo === 0 || $this->e21_retencaotiporecgrupo === 0.0 || $this->e21_retencaotiporecgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_retencaotiporecgrupo"]:$this->e21_retencaotiporecgrupo);
        $this->e21_enterecebedor = ($this->e21_enterecebedor == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_enterecebedor"]:$this->e21_enterecebedor);
        $this->e21_receitaenterecebedor = ($this->e21_receitaenterecebedor == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_receitaenterecebedor"]:$this->e21_receitaenterecebedor);
        $this->e21_envioremessabancaria = ($this->e21_envioremessabancaria == "f"?@$GLOBALS["HTTP_POST_VARS"]["e21_envioremessabancaria"]:$this->e21_envioremessabancaria);
      }else{
-       $this->e21_sequencial = ($this->e21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_sequencial"]:$this->e21_sequencial);
+       $this->e21_sequencial = ($this->e21_sequencial === 0 || $this->e21_sequencial === 0.0 || $this->e21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e21_sequencial"]:$this->e21_sequencial);
      }
    }
 
@@ -170,7 +170,7 @@ class cl_retencaotiporec
          $this->e21_sequencial = $e21_sequencial; 
        }
      }
-     if(($this->e21_sequencial == null) || ($this->e21_sequencial == "") ){ 
+     if(($this->e21_sequencial == null) || ($this->e21_sequencial === 0 || $this->e21_sequencial === 0.0 || $this->e21_sequencial == "") ){ 
        $this->erro_sql = " Campo e21_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -599,7 +599,7 @@ class cl_retencaotiporec
 
   	$sql = "select ";
     if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -628,7 +628,7 @@ class cl_retencaotiporec
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

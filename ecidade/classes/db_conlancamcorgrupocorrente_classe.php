@@ -52,7 +52,7 @@ class cl_conlancamcorgrupocorrente {
                  c23_corgrupocorrente = int4 = Código do grupo
                  ";
    //funcao construtor da classe
-   function cl_conlancamcorgrupocorrente() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancamcorgrupocorrente");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_conlancamcorgrupocorrente {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c23_sequencial = ($this->c23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c23_sequencial"]:$this->c23_sequencial);
-       $this->c23_conlancam = ($this->c23_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c23_conlancam"]:$this->c23_conlancam);
-       $this->c23_corgrupocorrente = ($this->c23_corgrupocorrente == ""?@$GLOBALS["HTTP_POST_VARS"]["c23_corgrupocorrente"]:$this->c23_corgrupocorrente);
+       $this->c23_sequencial = ($this->c23_sequencial === 0 || $this->c23_sequencial === 0.0 || $this->c23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c23_sequencial"]:$this->c23_sequencial);
+       $this->c23_conlancam = ($this->c23_conlancam === 0 || $this->c23_conlancam === 0.0 || $this->c23_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c23_conlancam"]:$this->c23_conlancam);
+       $this->c23_corgrupocorrente = ($this->c23_corgrupocorrente === 0 || $this->c23_corgrupocorrente === 0.0 || $this->c23_corgrupocorrente == ""?@$GLOBALS["HTTP_POST_VARS"]["c23_corgrupocorrente"]:$this->c23_corgrupocorrente);
      }else{
-       $this->c23_sequencial = ($this->c23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c23_sequencial"]:$this->c23_sequencial);
+       $this->c23_sequencial = ($this->c23_sequencial === 0 || $this->c23_sequencial === 0.0 || $this->c23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c23_sequencial"]:$this->c23_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_conlancamcorgrupocorrente {
          $this->c23_sequencial = $c23_sequencial;
        }
      }
-     if(($this->c23_sequencial == null) || ($this->c23_sequencial == "") ){
+     if(($this->c23_sequencial == null) || ($this->c23_sequencial === 0 || $this->c23_sequencial === 0.0 || $this->c23_sequencial == "") ){
        $this->erro_sql = " Campo c23_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -372,7 +372,7 @@ class cl_conlancamcorgrupocorrente {
    function sql_query ( $c23_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_conlancamcorgrupocorrente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_conlancamcorgrupocorrente {
    function sql_query_file ( $c23_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_conlancamcorgrupocorrente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -442,7 +442,7 @@ class cl_conlancamcorgrupocorrente {
 
   	$sql = "select ";
   	if($campos != "*" ){
-  		$campos_sql = split("#",$campos);
+  		$campos_sql = preg_split("#\\##m",$campos);
   		$virgula = "";
   		for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];
@@ -483,7 +483,7 @@ class cl_conlancamcorgrupocorrente {
   		if($ordem != null ) {
 
   			$sql .= " order by ";
-  			$campos_sql = split("#",$ordem);
+  			$campos_sql = preg_split("#\\##m",$ordem);
   			$virgula = "";
 
   			for($i=0;$i<sizeof($campos_sql);$i++) {

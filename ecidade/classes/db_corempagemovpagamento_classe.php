@@ -52,8 +52,8 @@ class cl_corempagemovpagamento
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->k12_sequencial = ($this->k12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_sequencial"]:$this->k12_sequencial);
-       $this->k12_id = ($this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
+       $this->k12_sequencial = ($this->k12_sequencial === 0 || $this->k12_sequencial === 0.0 || $this->k12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_sequencial"]:$this->k12_sequencial);
+       $this->k12_id = ($this->k12_id === 0 || $this->k12_id === 0.0 || $this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
        if($this->k12_data == ""){
          $this->k12_data_dia = ($this->k12_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_dia"]:$this->k12_data_dia);
          $this->k12_data_mes = ($this->k12_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_mes"]:$this->k12_data_mes);
@@ -62,10 +62,10 @@ class cl_corempagemovpagamento
             $this->k12_data = $this->k12_data_ano."-".$this->k12_data_mes."-".$this->k12_data_dia;
          }
        }
-       $this->k12_autent = ($this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
-       $this->k12_codmov = ($this->k12_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codmov"]:$this->k12_codmov);
+       $this->k12_autent = ($this->k12_autent === 0 || $this->k12_autent === 0.0 || $this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
+       $this->k12_codmov = ($this->k12_codmov === 0 || $this->k12_codmov === 0.0 || $this->k12_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codmov"]:$this->k12_codmov);
      }else{
-       $this->k12_sequencial = ($this->k12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_sequencial"]:$this->k12_sequencial);
+       $this->k12_sequencial = ($this->k12_sequencial === 0 || $this->k12_sequencial === 0.0 || $this->k12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_sequencial"]:$this->k12_sequencial);
      }
    }
 
@@ -132,7 +132,7 @@ class cl_corempagemovpagamento
          $this->k12_sequencial = $k12_sequencial; 
        }
      }
-     if(($this->k12_sequencial == null) || ($this->k12_sequencial == "") ){ 
+     if(($this->k12_sequencial == null) || ($this->k12_sequencial === 0 || $this->k12_sequencial === 0.0 || $this->k12_sequencial == "") ){ 
        $this->erro_sql = " Campo k12_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

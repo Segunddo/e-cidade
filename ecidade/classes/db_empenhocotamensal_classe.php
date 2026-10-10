@@ -28,7 +28,7 @@ class cl_empenhocotamensal {
                  e05_valor = float8 = Valor da Cota
                  ";
    //funcao construtor da classe
-   function cl_empenhocotamensal() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empenhocotamensal");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_empenhocotamensal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e05_sequencial = ($this->e05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e05_sequencial"]:$this->e05_sequencial);
-       $this->e05_numemp = ($this->e05_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e05_numemp"]:$this->e05_numemp);
-       $this->e05_mes = ($this->e05_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e05_mes"]:$this->e05_mes);
-       $this->e05_valor = ($this->e05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e05_valor"]:$this->e05_valor);
+       $this->e05_sequencial = ($this->e05_sequencial === 0 || $this->e05_sequencial === 0.0 || $this->e05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e05_sequencial"]:$this->e05_sequencial);
+       $this->e05_numemp = ($this->e05_numemp === 0 || $this->e05_numemp === 0.0 || $this->e05_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e05_numemp"]:$this->e05_numemp);
+       $this->e05_mes = ($this->e05_mes === 0 || $this->e05_mes === 0.0 || $this->e05_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e05_mes"]:$this->e05_mes);
+       $this->e05_valor = ($this->e05_valor === 0 || $this->e05_valor === 0.0 || $this->e05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e05_valor"]:$this->e05_valor);
      }else{
-       $this->e05_sequencial = ($this->e05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e05_sequencial"]:$this->e05_sequencial);
+       $this->e05_sequencial = ($this->e05_sequencial === 0 || $this->e05_sequencial === 0.0 || $this->e05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e05_sequencial"]:$this->e05_sequencial);
      }
    }
    // funcao para Inclusão
@@ -109,7 +109,7 @@ class cl_empenhocotamensal {
          $this->e05_sequencial = $e05_sequencial;
        }
      }
-     if(($this->e05_sequencial == null) || ($this->e05_sequencial == "") ){
+     if(($this->e05_sequencial == null) || ($this->e05_sequencial === 0 || $this->e05_sequencial === 0.0 || $this->e05_sequencial == "") ){
        $this->erro_sql = " Campo e05_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

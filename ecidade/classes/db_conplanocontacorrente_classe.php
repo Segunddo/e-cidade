@@ -56,7 +56,7 @@ class cl_conplanocontacorrente
                  ";
 
     //funcao construtor da classe
-    function cl_conplanocontacorrente()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("conplanocontacorrente");
@@ -78,12 +78,12 @@ class cl_conplanocontacorrente
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->c18_sequencial = ($this->c18_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c18_sequencial"] : $this->c18_sequencial);
-            $this->c18_codcon = ($this->c18_codcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["c18_codcon"] : $this->c18_codcon);
-            $this->c18_anousu = ($this->c18_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c18_anousu"] : $this->c18_anousu);
-            $this->c18_contacorrente = ($this->c18_contacorrente == "" ? @$GLOBALS["HTTP_POST_VARS"]["c18_contacorrente"] : $this->c18_contacorrente);
+            $this->c18_sequencial = ($this->c18_sequencial === 0 || $this->c18_sequencial === 0.0 || $this->c18_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c18_sequencial"] : $this->c18_sequencial);
+            $this->c18_codcon = ($this->c18_codcon === 0 || $this->c18_codcon === 0.0 || $this->c18_codcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["c18_codcon"] : $this->c18_codcon);
+            $this->c18_anousu = ($this->c18_anousu === 0 || $this->c18_anousu === 0.0 || $this->c18_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c18_anousu"] : $this->c18_anousu);
+            $this->c18_contacorrente = ($this->c18_contacorrente === 0 || $this->c18_contacorrente === 0.0 || $this->c18_contacorrente == "" ? @$GLOBALS["HTTP_POST_VARS"]["c18_contacorrente"] : $this->c18_contacorrente);
         } else {
-            $this->c18_sequencial = ($this->c18_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c18_sequencial"] : $this->c18_sequencial);
+            $this->c18_sequencial = ($this->c18_sequencial === 0 || $this->c18_sequencial === 0.0 || $this->c18_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c18_sequencial"] : $this->c18_sequencial);
         }
     }
 
@@ -152,7 +152,7 @@ class cl_conplanocontacorrente
                 $this->c18_sequencial = $c18_sequencial;
             }
         }
-        if (($this->c18_sequencial == null) || ($this->c18_sequencial == "")) {
+        if (($this->c18_sequencial == null) || ($this->c18_sequencial === 0 || $this->c18_sequencial === 0.0 || $this->c18_sequencial == "")) {
             $this->erro_sql = " Campo c18_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

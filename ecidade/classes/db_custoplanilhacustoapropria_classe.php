@@ -52,7 +52,7 @@ class cl_custoplanilhacustoapropria {
                  cc18_custoplanilhaapuracao = int4 = Custo Planilha Apuração 
                  ";
    //funcao construtor da classe 
-   function cl_custoplanilhacustoapropria() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("custoplanilhacustoapropria"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_custoplanilhacustoapropria {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc18_sequencial = ($this->cc18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc18_sequencial"]:$this->cc18_sequencial);
-       $this->cc18_custoapropria = ($this->cc18_custoapropria == ""?@$GLOBALS["HTTP_POST_VARS"]["cc18_custoapropria"]:$this->cc18_custoapropria);
-       $this->cc18_custoplanilhaapuracao = ($this->cc18_custoplanilhaapuracao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc18_custoplanilhaapuracao"]:$this->cc18_custoplanilhaapuracao);
+       $this->cc18_sequencial = ($this->cc18_sequencial === 0 || $this->cc18_sequencial === 0.0 || $this->cc18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc18_sequencial"]:$this->cc18_sequencial);
+       $this->cc18_custoapropria = ($this->cc18_custoapropria === 0 || $this->cc18_custoapropria === 0.0 || $this->cc18_custoapropria == ""?@$GLOBALS["HTTP_POST_VARS"]["cc18_custoapropria"]:$this->cc18_custoapropria);
+       $this->cc18_custoplanilhaapuracao = ($this->cc18_custoplanilhaapuracao === 0 || $this->cc18_custoplanilhaapuracao === 0.0 || $this->cc18_custoplanilhaapuracao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc18_custoplanilhaapuracao"]:$this->cc18_custoplanilhaapuracao);
      }else{
-       $this->cc18_sequencial = ($this->cc18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc18_sequencial"]:$this->cc18_sequencial);
+       $this->cc18_sequencial = ($this->cc18_sequencial === 0 || $this->cc18_sequencial === 0.0 || $this->cc18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc18_sequencial"]:$this->cc18_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_custoplanilhacustoapropria {
          $this->cc18_sequencial = $cc18_sequencial; 
        }
      }
-     if(($this->cc18_sequencial == null) || ($this->cc18_sequencial == "") ){ 
+     if(($this->cc18_sequencial == null) || ($this->cc18_sequencial === 0 || $this->cc18_sequencial === 0.0 || $this->cc18_sequencial == "") ){ 
        $this->erro_sql = " Campo cc18_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_custoplanilhacustoapropria {
    function sql_query ( $cc18_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_custoplanilhacustoapropria {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_custoplanilhacustoapropria {
    function sql_query_file ( $cc18_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_custoplanilhacustoapropria {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

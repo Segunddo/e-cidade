@@ -52,7 +52,7 @@ class cl_pcprocitem {
                  pc81_solicitem = int8 = Código do registro
                  ";
    //funcao construtor da classe
-   function cl_pcprocitem() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcprocitem");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_pcprocitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc81_codprocitem = ($this->pc81_codprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_codprocitem"]:$this->pc81_codprocitem);
-       $this->pc81_codproc = ($this->pc81_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_codproc"]:$this->pc81_codproc);
-       $this->pc81_solicitem = ($this->pc81_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_solicitem"]:$this->pc81_solicitem);
+       $this->pc81_codprocitem = ($this->pc81_codprocitem === 0 || $this->pc81_codprocitem === 0.0 || $this->pc81_codprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_codprocitem"]:$this->pc81_codprocitem);
+       $this->pc81_codproc = ($this->pc81_codproc === 0 || $this->pc81_codproc === 0.0 || $this->pc81_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_codproc"]:$this->pc81_codproc);
+       $this->pc81_solicitem = ($this->pc81_solicitem === 0 || $this->pc81_solicitem === 0.0 || $this->pc81_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_solicitem"]:$this->pc81_solicitem);
      }else{
-       $this->pc81_codprocitem = ($this->pc81_codprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_codprocitem"]:$this->pc81_codprocitem);
-       $this->pc81_codproc = ($this->pc81_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_codproc"]:$this->pc81_codproc);
+       $this->pc81_codprocitem = ($this->pc81_codprocitem === 0 || $this->pc81_codprocitem === 0.0 || $this->pc81_codprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_codprocitem"]:$this->pc81_codprocitem);
+       $this->pc81_codproc = ($this->pc81_codproc === 0 || $this->pc81_codproc === 0.0 || $this->pc81_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_codproc"]:$this->pc81_codproc);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_pcprocitem {
          $this->pc81_codprocitem = $pc81_codprocitem;
        }
      }
-     if(($this->pc81_codprocitem == null) || ($this->pc81_codprocitem == "") ){
+     if(($this->pc81_codprocitem == null) || ($this->pc81_codprocitem === 0 || $this->pc81_codprocitem === 0.0 || $this->pc81_codprocitem == "") ){
        $this->erro_sql = " Campo pc81_codprocitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -52,7 +52,7 @@ class cl_empnotadadospitnotas {
                  e13_empnotadadospit = int4 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_empnotadadospitnotas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empnotadadospitnotas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_empnotadadospitnotas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e13_sequencial = ($this->e13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e13_sequencial"]:$this->e13_sequencial);
-       $this->e13_empnota = ($this->e13_empnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e13_empnota"]:$this->e13_empnota);
-       $this->e13_empnotadadospit = ($this->e13_empnotadadospit == ""?@$GLOBALS["HTTP_POST_VARS"]["e13_empnotadadospit"]:$this->e13_empnotadadospit);
+       $this->e13_sequencial = ($this->e13_sequencial === 0 || $this->e13_sequencial === 0.0 || $this->e13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e13_sequencial"]:$this->e13_sequencial);
+       $this->e13_empnota = ($this->e13_empnota === 0 || $this->e13_empnota === 0.0 || $this->e13_empnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e13_empnota"]:$this->e13_empnota);
+       $this->e13_empnotadadospit = ($this->e13_empnotadadospit === 0 || $this->e13_empnotadadospit === 0.0 || $this->e13_empnotadadospit == ""?@$GLOBALS["HTTP_POST_VARS"]["e13_empnotadadospit"]:$this->e13_empnotadadospit);
      }else{
-       $this->e13_sequencial = ($this->e13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e13_sequencial"]:$this->e13_sequencial);
+       $this->e13_sequencial = ($this->e13_sequencial === 0 || $this->e13_sequencial === 0.0 || $this->e13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e13_sequencial"]:$this->e13_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_empnotadadospitnotas {
          $this->e13_sequencial = $e13_sequencial; 
        }
      }
-     if(($this->e13_sequencial == null) || ($this->e13_sequencial == "") ){ 
+     if(($this->e13_sequencial == null) || ($this->e13_sequencial === 0 || $this->e13_sequencial === 0.0 || $this->e13_sequencial == "") ){ 
        $this->erro_sql = " Campo e13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_empnotadadospitnotas {
    function sql_query ( $e13_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_empnotadadospitnotas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_empnotadadospitnotas {
    function sql_query_file ( $e13_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_empnotadadospitnotas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

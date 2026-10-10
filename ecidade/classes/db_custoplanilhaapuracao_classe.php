@@ -58,7 +58,7 @@ class cl_custoplanilhaapuracao {
                  cc17_valor = float4 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_custoplanilhaapuracao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("custoplanilhaapuracao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_custoplanilhaapuracao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc17_sequencial = ($this->cc17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_sequencial"]:$this->cc17_sequencial);
-       $this->cc17_custoplanilhaorigem = ($this->cc17_custoplanilhaorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_custoplanilhaorigem"]:$this->cc17_custoplanilhaorigem);
-       $this->cc17_custoplanilha = ($this->cc17_custoplanilha == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_custoplanilha"]:$this->cc17_custoplanilha);
-       $this->cc17_custoplanoanalitica = ($this->cc17_custoplanoanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_custoplanoanalitica"]:$this->cc17_custoplanoanalitica);
-       $this->cc17_quantidade = ($this->cc17_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_quantidade"]:$this->cc17_quantidade);
-       $this->cc17_valor = ($this->cc17_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_valor"]:$this->cc17_valor);
+       $this->cc17_sequencial = ($this->cc17_sequencial === 0 || $this->cc17_sequencial === 0.0 || $this->cc17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_sequencial"]:$this->cc17_sequencial);
+       $this->cc17_custoplanilhaorigem = ($this->cc17_custoplanilhaorigem === 0 || $this->cc17_custoplanilhaorigem === 0.0 || $this->cc17_custoplanilhaorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_custoplanilhaorigem"]:$this->cc17_custoplanilhaorigem);
+       $this->cc17_custoplanilha = ($this->cc17_custoplanilha === 0 || $this->cc17_custoplanilha === 0.0 || $this->cc17_custoplanilha == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_custoplanilha"]:$this->cc17_custoplanilha);
+       $this->cc17_custoplanoanalitica = ($this->cc17_custoplanoanalitica === 0 || $this->cc17_custoplanoanalitica === 0.0 || $this->cc17_custoplanoanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_custoplanoanalitica"]:$this->cc17_custoplanoanalitica);
+       $this->cc17_quantidade = ($this->cc17_quantidade === 0 || $this->cc17_quantidade === 0.0 || $this->cc17_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_quantidade"]:$this->cc17_quantidade);
+       $this->cc17_valor = ($this->cc17_valor === 0 || $this->cc17_valor === 0.0 || $this->cc17_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_valor"]:$this->cc17_valor);
      }else{
-       $this->cc17_sequencial = ($this->cc17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_sequencial"]:$this->cc17_sequencial);
+       $this->cc17_sequencial = ($this->cc17_sequencial === 0 || $this->cc17_sequencial === 0.0 || $this->cc17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc17_sequencial"]:$this->cc17_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_custoplanilhaapuracao {
          $this->cc17_sequencial = $cc17_sequencial; 
        }
      }
-     if(($this->cc17_sequencial == null) || ($this->cc17_sequencial == "") ){ 
+     if(($this->cc17_sequencial == null) || ($this->cc17_sequencial === 0 || $this->cc17_sequencial === 0.0 || $this->cc17_sequencial == "") ){ 
        $this->erro_sql = " Campo cc17_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -453,7 +453,7 @@ class cl_custoplanilhaapuracao {
    function sql_query ( $cc17_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -479,7 +479,7 @@ class cl_custoplanilhaapuracao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_custoplanilhaapuracao {
    function sql_query_file ( $cc17_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -513,7 +513,7 @@ class cl_custoplanilhaapuracao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -526,7 +526,7 @@ class cl_custoplanilhaapuracao {
  function sql_query_custo ( $cc19_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -555,7 +555,7 @@ class cl_custoplanilhaapuracao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

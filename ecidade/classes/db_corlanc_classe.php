@@ -59,7 +59,7 @@ class cl_corlanc {
                  k12_codigo = int4 = Código do Slip
                  ";
    //funcao construtor da classe
-   function cl_corlanc() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("corlanc");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,7 +76,7 @@ class cl_corlanc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k12_id = ($this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
+       $this->k12_id = ($this->k12_id === 0 || $this->k12_id === 0.0 || $this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
        if($this->k12_data == ""){
          $this->k12_data_dia = ($this->k12_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_dia"]:$this->k12_data_dia);
          $this->k12_data_mes = ($this->k12_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_mes"]:$this->k12_data_mes);
@@ -85,13 +85,13 @@ class cl_corlanc {
             $this->k12_data = $this->k12_data_ano."-".$this->k12_data_mes."-".$this->k12_data_dia;
          }
        }
-       $this->k12_autent = ($this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
-       $this->k12_conta = ($this->k12_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_conta"]:$this->k12_conta);
-       $this->k12_codigo = ($this->k12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codigo"]:$this->k12_codigo);
+       $this->k12_autent = ($this->k12_autent === 0 || $this->k12_autent === 0.0 || $this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
+       $this->k12_conta = ($this->k12_conta === 0 || $this->k12_conta === 0.0 || $this->k12_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_conta"]:$this->k12_conta);
+       $this->k12_codigo = ($this->k12_codigo === 0 || $this->k12_codigo === 0.0 || $this->k12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codigo"]:$this->k12_codigo);
      }else{
-       $this->k12_id = ($this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
+       $this->k12_id = ($this->k12_id === 0 || $this->k12_id === 0.0 || $this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
        $this->k12_data = ($this->k12_data == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_ano"]."-".@$GLOBALS["HTTP_POST_VARS"]["k12_data_mes"]."-".@$GLOBALS["HTTP_POST_VARS"]["k12_data_dia"]:$this->k12_data);
-       $this->k12_autent = ($this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
+       $this->k12_autent = ($this->k12_autent === 0 || $this->k12_autent === 0.0 || $this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
      }
    }
    // funcao para inclusao
@@ -118,7 +118,7 @@ class cl_corlanc {
        $this->k12_id = $k12_id;
        $this->k12_data = $k12_data;
        $this->k12_autent = $k12_autent;
-     if(($this->k12_id == null) || ($this->k12_id == "") ){
+     if(($this->k12_id == null) || ($this->k12_id === 0 || $this->k12_id === 0.0 || $this->k12_id == "") ){
        $this->erro_sql = " Campo k12_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -134,7 +134,7 @@ class cl_corlanc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k12_autent == null) || ($this->k12_autent == "") ){
+     if(($this->k12_autent == null) || ($this->k12_autent === 0 || $this->k12_autent === 0.0 || $this->k12_autent == "") ){
        $this->erro_sql = " Campo k12_autent nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -426,7 +426,7 @@ class cl_corlanc {
    function sql_query_file ( $k12_id=null,$k12_data=null,$k12_autent=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -463,7 +463,7 @@ class cl_corlanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_corlanc {
    function sql_query_slip ( $k12_id=null,$k12_data=null,$k12_autent=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -553,7 +553,7 @@ class cl_corlanc {
    $sql .= $sql2;
    if($ordem != null ){
      $sql .= " order by ";
-     $campos_sql = split("#",$ordem);
+     $campos_sql = preg_split("#\\##m",$ordem);
      $virgula = "";
      for($i=0;$i<sizeof($campos_sql);$i++){
      $sql .= $virgula.$campos_sql[$i];
@@ -587,7 +587,7 @@ class cl_corlanc {
      $sql = "select ";
      if($campos != "*" ){
 
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -633,7 +633,7 @@ class cl_corlanc {
    if($ordem != null ){
 
      $sql .= " order by ";
-     $campos_sql = split("#",$ordem);
+     $campos_sql = preg_split("#\\##m",$ordem);
      $virgula = "";
      for($i=0;$i<sizeof($campos_sql);$i++){
      $sql .= $virgula.$campos_sql[$i];

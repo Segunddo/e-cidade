@@ -91,7 +91,7 @@ class cl_empparametro {
                  e30_dadosbancoempenho = bool = Emite Dados Bancarios no Empenho
                  ";
    //funcao construtor da classe
-   function cl_empparametro() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empparametro");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -108,20 +108,20 @@ class cl_empparametro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e39_anousu = ($this->e39_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e39_anousu"]:$this->e39_anousu);
-       $this->e30_codemp = ($this->e30_codemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_codemp"]:$this->e30_codemp);
-       $this->e30_nroviaaut = ($this->e30_nroviaaut == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_nroviaaut"]:$this->e30_nroviaaut);
-       $this->e30_nroviaemp = ($this->e30_nroviaemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_nroviaemp"]:$this->e30_nroviaemp);
-       $this->e30_nroviaord = ($this->e30_nroviaord == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_nroviaord"]:$this->e30_nroviaord);
-       $this->e30_numdec = ($this->e30_numdec == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_numdec"]:$this->e30_numdec);
+       $this->e39_anousu = ($this->e39_anousu === 0 || $this->e39_anousu === 0.0 || $this->e39_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e39_anousu"]:$this->e39_anousu);
+       $this->e30_codemp = ($this->e30_codemp === 0 || $this->e30_codemp === 0.0 || $this->e30_codemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_codemp"]:$this->e30_codemp);
+       $this->e30_nroviaaut = ($this->e30_nroviaaut === 0 || $this->e30_nroviaaut === 0.0 || $this->e30_nroviaaut == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_nroviaaut"]:$this->e30_nroviaaut);
+       $this->e30_nroviaemp = ($this->e30_nroviaemp === 0 || $this->e30_nroviaemp === 0.0 || $this->e30_nroviaemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_nroviaemp"]:$this->e30_nroviaemp);
+       $this->e30_nroviaord = ($this->e30_nroviaord === 0 || $this->e30_nroviaord === 0.0 || $this->e30_nroviaord == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_nroviaord"]:$this->e30_nroviaord);
+       $this->e30_numdec = ($this->e30_numdec === 0 || $this->e30_numdec === 0.0 || $this->e30_numdec == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_numdec"]:$this->e30_numdec);
        $this->e30_opimportaresumo = ($this->e30_opimportaresumo == "f"?@$GLOBALS["HTTP_POST_VARS"]["e30_opimportaresumo"]:$this->e30_opimportaresumo);
        $this->e30_permconsempger = ($this->e30_permconsempger == "f"?@$GLOBALS["HTTP_POST_VARS"]["e30_permconsempger"]:$this->e30_permconsempger);
        $this->e30_autimportahist = ($this->e30_autimportahist == "f"?@$GLOBALS["HTTP_POST_VARS"]["e30_autimportahist"]:$this->e30_autimportahist);
-       $this->e30_trazobsultop = ($this->e30_trazobsultop == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_trazobsultop"]:$this->e30_trazobsultop);
+       $this->e30_trazobsultop = ($this->e30_trazobsultop === 0 || $this->e30_trazobsultop === 0.0 || $this->e30_trazobsultop == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_trazobsultop"]:$this->e30_trazobsultop);
        $this->e30_empdataemp = ($this->e30_empdataemp == "f"?@$GLOBALS["HTTP_POST_VARS"]["e30_empdataemp"]:$this->e30_empdataemp);
        $this->e30_empdataserv = ($this->e30_empdataserv == "f"?@$GLOBALS["HTTP_POST_VARS"]["e30_empdataserv"]:$this->e30_empdataserv);
-       $this->e30_formvisuitemaut = ($this->e30_formvisuitemaut == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_formvisuitemaut"]:$this->e30_formvisuitemaut);
-       $this->e30_verificarmatordem = ($this->e30_verificarmatordem == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_verificarmatordem"]:$this->e30_verificarmatordem);
+       $this->e30_formvisuitemaut = ($this->e30_formvisuitemaut === 0 || $this->e30_formvisuitemaut === 0.0 || $this->e30_formvisuitemaut == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_formvisuitemaut"]:$this->e30_formvisuitemaut);
+       $this->e30_verificarmatordem = ($this->e30_verificarmatordem === 0 || $this->e30_verificarmatordem === 0.0 || $this->e30_verificarmatordem == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_verificarmatordem"]:$this->e30_verificarmatordem);
        if($this->e30_notaliquidacao == ""){
          $this->e30_notaliquidacao_dia = ($this->e30_notaliquidacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_notaliquidacao_dia"]:$this->e30_notaliquidacao_dia);
          $this->e30_notaliquidacao_mes = ($this->e30_notaliquidacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_notaliquidacao_mes"]:$this->e30_notaliquidacao_mes);

@@ -50,7 +50,7 @@ class cl_pagordemconta {
                  e49_numcgm = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_pagordemconta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pagordemconta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_pagordemconta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e49_codord = ($this->e49_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_codord"]:$this->e49_codord);
-       $this->e49_numcgm = ($this->e49_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_numcgm"]:$this->e49_numcgm);
+       $this->e49_codord = ($this->e49_codord === 0 || $this->e49_codord === 0.0 || $this->e49_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_codord"]:$this->e49_codord);
+       $this->e49_numcgm = ($this->e49_numcgm === 0 || $this->e49_numcgm === 0.0 || $this->e49_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_numcgm"]:$this->e49_numcgm);
      }else{
-       $this->e49_codord = ($this->e49_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_codord"]:$this->e49_codord);
+       $this->e49_codord = ($this->e49_codord === 0 || $this->e49_codord === 0.0 || $this->e49_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_codord"]:$this->e49_codord);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_pagordemconta {
        return false;
      }
        $this->e49_codord = $e49_codord; 
-     if(($this->e49_codord == null) || ($this->e49_codord == "") ){ 
+     if(($this->e49_codord == null) || ($this->e49_codord === 0 || $this->e49_codord === 0.0 || $this->e49_codord == "") ){ 
        $this->erro_sql = " Campo e49_codord nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_pagordemconta {
    function sql_query ( $e49_codord=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_pagordemconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_pagordemconta {
    function sql_query_file ( $e49_codord=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_pagordemconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

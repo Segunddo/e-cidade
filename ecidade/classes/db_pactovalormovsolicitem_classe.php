@@ -52,7 +52,7 @@ class cl_pactovalormovsolicitem {
                  o101_pactovalormov = int4 = Movimentação do Item 
                  ";
    //funcao construtor da classe 
-   function cl_pactovalormovsolicitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pactovalormovsolicitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_pactovalormovsolicitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o101_sequencial = ($this->o101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o101_sequencial"]:$this->o101_sequencial);
-       $this->o101_solicitem = ($this->o101_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["o101_solicitem"]:$this->o101_solicitem);
-       $this->o101_pactovalormov = ($this->o101_pactovalormov == ""?@$GLOBALS["HTTP_POST_VARS"]["o101_pactovalormov"]:$this->o101_pactovalormov);
+       $this->o101_sequencial = ($this->o101_sequencial === 0 || $this->o101_sequencial === 0.0 || $this->o101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o101_sequencial"]:$this->o101_sequencial);
+       $this->o101_solicitem = ($this->o101_solicitem === 0 || $this->o101_solicitem === 0.0 || $this->o101_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["o101_solicitem"]:$this->o101_solicitem);
+       $this->o101_pactovalormov = ($this->o101_pactovalormov === 0 || $this->o101_pactovalormov === 0.0 || $this->o101_pactovalormov == ""?@$GLOBALS["HTTP_POST_VARS"]["o101_pactovalormov"]:$this->o101_pactovalormov);
      }else{
-       $this->o101_sequencial = ($this->o101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o101_sequencial"]:$this->o101_sequencial);
+       $this->o101_sequencial = ($this->o101_sequencial === 0 || $this->o101_sequencial === 0.0 || $this->o101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o101_sequencial"]:$this->o101_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_pactovalormovsolicitem {
          $this->o101_sequencial = $o101_sequencial; 
        }
      }
-     if(($this->o101_sequencial == null) || ($this->o101_sequencial == "") ){ 
+     if(($this->o101_sequencial == null) || ($this->o101_sequencial === 0 || $this->o101_sequencial === 0.0 || $this->o101_sequencial == "") ){ 
        $this->erro_sql = " Campo o101_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_pactovalormovsolicitem {
    function sql_query ( $o101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_pactovalormovsolicitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_pactovalormovsolicitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_pactovalormovsolicitem {
    function sql_query_file ( $o101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_pactovalormovsolicitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

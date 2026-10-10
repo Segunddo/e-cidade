@@ -56,7 +56,7 @@ class cl_empsolicitaanulitem {
                  e36_qtdanu = float4 = Quantidade Anulada 
                  ";
    //funcao construtor da classe 
-   function cl_empsolicitaanulitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empsolicitaanulitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_empsolicitaanulitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e36_sequencial = ($this->e36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_sequencial"]:$this->e36_sequencial);
-       $this->e36_empempitem = ($this->e36_empempitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_empempitem"]:$this->e36_empempitem);
-       $this->e36_empsolicitaanul = ($this->e36_empsolicitaanul == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_empsolicitaanul"]:$this->e36_empsolicitaanul);
-       $this->e36_vrlanu = ($this->e36_vrlanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_vrlanu"]:$this->e36_vrlanu);
-       $this->e36_qtdanu = ($this->e36_qtdanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_qtdanu"]:$this->e36_qtdanu);
+       $this->e36_sequencial = ($this->e36_sequencial === 0 || $this->e36_sequencial === 0.0 || $this->e36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_sequencial"]:$this->e36_sequencial);
+       $this->e36_empempitem = ($this->e36_empempitem === 0 || $this->e36_empempitem === 0.0 || $this->e36_empempitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_empempitem"]:$this->e36_empempitem);
+       $this->e36_empsolicitaanul = ($this->e36_empsolicitaanul === 0 || $this->e36_empsolicitaanul === 0.0 || $this->e36_empsolicitaanul == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_empsolicitaanul"]:$this->e36_empsolicitaanul);
+       $this->e36_vrlanu = ($this->e36_vrlanu === 0 || $this->e36_vrlanu === 0.0 || $this->e36_vrlanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_vrlanu"]:$this->e36_vrlanu);
+       $this->e36_qtdanu = ($this->e36_qtdanu === 0 || $this->e36_qtdanu === 0.0 || $this->e36_qtdanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_qtdanu"]:$this->e36_qtdanu);
      }else{
-       $this->e36_sequencial = ($this->e36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_sequencial"]:$this->e36_sequencial);
+       $this->e36_sequencial = ($this->e36_sequencial === 0 || $this->e36_sequencial === 0.0 || $this->e36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_sequencial"]:$this->e36_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_empsolicitaanulitem {
          $this->e36_sequencial = $e36_sequencial; 
        }
      }
-     if(($this->e36_sequencial == null) || ($this->e36_sequencial == "") ){ 
+     if(($this->e36_sequencial == null) || ($this->e36_sequencial === 0 || $this->e36_sequencial === 0.0 || $this->e36_sequencial == "") ){ 
        $this->erro_sql = " Campo e36_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -409,7 +409,7 @@ class cl_empsolicitaanulitem {
    function sql_query ( $e36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_empsolicitaanulitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_empsolicitaanulitem {
    function sql_query_file ( $e36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -466,7 +466,7 @@ class cl_empsolicitaanulitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

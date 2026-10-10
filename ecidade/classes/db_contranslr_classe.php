@@ -66,7 +66,7 @@ class cl_contranslr {
                  c47_tiporesto = int4 = tipo resto
                  ";
    //funcao construtor da classe
-   function cl_contranslr() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contranslr");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,18 +83,18 @@ class cl_contranslr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c47_seqtranslr = ($this->c47_seqtranslr == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_seqtranslr"]:$this->c47_seqtranslr);
-       $this->c47_seqtranslan = ($this->c47_seqtranslan == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_seqtranslan"]:$this->c47_seqtranslan);
-       $this->c47_debito = ($this->c47_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_debito"]:$this->c47_debito);
-       $this->c47_credito = ($this->c47_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_credito"]:$this->c47_credito);
+       $this->c47_seqtranslr = ($this->c47_seqtranslr === 0 || $this->c47_seqtranslr === 0.0 || $this->c47_seqtranslr == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_seqtranslr"]:$this->c47_seqtranslr);
+       $this->c47_seqtranslan = ($this->c47_seqtranslan === 0 || $this->c47_seqtranslan === 0.0 || $this->c47_seqtranslan == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_seqtranslan"]:$this->c47_seqtranslan);
+       $this->c47_debito = ($this->c47_debito === 0 || $this->c47_debito === 0.0 || $this->c47_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_debito"]:$this->c47_debito);
+       $this->c47_credito = ($this->c47_credito === 0 || $this->c47_credito === 0.0 || $this->c47_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_credito"]:$this->c47_credito);
        $this->c47_obs = ($this->c47_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_obs"]:$this->c47_obs);
-       $this->c47_ref = ($this->c47_ref == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_ref"]:$this->c47_ref);
-       $this->c47_anousu = ($this->c47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_anousu"]:$this->c47_anousu);
-       $this->c47_instit = ($this->c47_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_instit"]:$this->c47_instit);
-       $this->c47_compara = ($this->c47_compara == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_compara"]:$this->c47_compara);
-       $this->c47_tiporesto = ($this->c47_tiporesto == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_tiporesto"]:$this->c47_tiporesto);
+       $this->c47_ref = ($this->c47_ref === 0 || $this->c47_ref === 0.0 || $this->c47_ref == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_ref"]:$this->c47_ref);
+       $this->c47_anousu = ($this->c47_anousu === 0 || $this->c47_anousu === 0.0 || $this->c47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_anousu"]:$this->c47_anousu);
+       $this->c47_instit = ($this->c47_instit === 0 || $this->c47_instit === 0.0 || $this->c47_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_instit"]:$this->c47_instit);
+       $this->c47_compara = ($this->c47_compara === 0 || $this->c47_compara === 0.0 || $this->c47_compara == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_compara"]:$this->c47_compara);
+       $this->c47_tiporesto = ($this->c47_tiporesto === 0 || $this->c47_tiporesto === 0.0 || $this->c47_tiporesto == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_tiporesto"]:$this->c47_tiporesto);
      }else{
-       $this->c47_seqtranslr = ($this->c47_seqtranslr == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_seqtranslr"]:$this->c47_seqtranslr);
+       $this->c47_seqtranslr = ($this->c47_seqtranslr === 0 || $this->c47_seqtranslr === 0.0 || $this->c47_seqtranslr == ""?@$GLOBALS["HTTP_POST_VARS"]["c47_seqtranslr"]:$this->c47_seqtranslr);
      }
    }
    // funcao para inclusao
@@ -190,7 +190,7 @@ class cl_contranslr {
          $this->c47_seqtranslr = $c47_seqtranslr;
        }
      }
-     if(($this->c47_seqtranslr == null) || ($this->c47_seqtranslr == "") ){
+     if(($this->c47_seqtranslr == null) || ($this->c47_seqtranslr === 0 || $this->c47_seqtranslr === 0.0 || $this->c47_seqtranslr == "") ){
        $this->erro_sql = " Campo c47_seqtranslr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -550,7 +550,7 @@ class cl_contranslr {
 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -589,7 +589,7 @@ class cl_contranslr {
 
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -629,7 +629,7 @@ class cl_contranslr {
    function sql_query_file ( $c47_seqtranslr=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -650,7 +650,7 @@ class cl_contranslr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -664,7 +664,7 @@ class cl_contranslr {
 
   	$sql = "select ";
   	if($campos != "*" ){
-  		$campos_sql = split("#",$campos);
+  		$campos_sql = preg_split("#\\##m",$campos);
   		$virgula = "";
   		for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];
@@ -690,7 +690,7 @@ class cl_contranslr {
   		$sql .= $sql2;
   		if($ordem != null ){
   		$sql .= " order by ";
-  		$campos_sql = split("#",$ordem);
+  		$campos_sql = preg_split("#\\##m",$ordem);
   		$virgula = "";
   		for($i=0;$i<sizeof($campos_sql);$i++){
   		$sql .= $virgula.$campos_sql[$i];

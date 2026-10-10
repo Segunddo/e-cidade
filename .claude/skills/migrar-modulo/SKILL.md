@@ -137,7 +137,12 @@ docker exec -i ecidade_php85 sh -c 'cd /var/www/html;
    aplicadas se o módulo tiver construtor PHP 4.
 2. **Rodar até dar zero.** Uma passada deixou 85 `parse_str` por converter; a segunda, com o
    comando idêntico, converteu 83. Um run não prova que acabou.
-3. **A denylist não é transferível entre módulos.** Regras que nunca dispararam antes podem
+3. **A denylist não é transferível entre módulos.** Já cresceu três vezes: 14 → 16 (`iss`) →
+   22 (modernização) → 23 (`dvr`, `IfIssetToCoalescingRector`, que emite `??` e é parse error
+   no 5.6). **Antes de aplicar, rode um `--dry-run --output-format=json` e confira a lista de
+   regras aplicadas**; para cada regra que você ainda não vetou, teste a construção que ela
+   emite nos DOIS runtimes antes de aceitar. E confira `php -l` na própria config: com erro de
+   sintaxe nela, o Rector reporta `0 arquivos` sem mensagem de erro. Regras que nunca dispararam antes podem
    disparar agora e emitir função que não existe no 5.6. Daí o passo 4b, abaixo, ser obrigatório.
 4. **O Rector traz modernização junto** (~77% do diff no `iss`): alias `pg_*`, `var` → `public`.
    Inofensiva nos dois runtimes, mas infla a revisão. Se incomodar, entra na denylist.
@@ -153,7 +158,9 @@ for l in d.split(b"\n"):
     if l.startswith((b"+++",b"---")): continue
     alvo = nov if l.startswith(b"+") else (vel if l.startswith(b"-") else None)
     if alvo is not None:
-        alvo |= {m.group(1) for m in re.finditer(rb'(?<![\$>:\w])([a-z_][a-z0-9_]{2,})\s*\(', l)}
+        # o (?<!function ) exclui DECLARACOES: sem ele o portao acusa "__construct"
+        # como funcao ausente no 5.6, que e falso positivo
+        alvo |= {m.group(1) for m in re.finditer(rb'(?<![\$>:\w])(?<!function )([a-z_][a-z0-9_]{2,})\s*\(', l)}
 open("/tmp/fn.txt","w").write("\n".join(sorted(x.decode() for x in nov-vel)))
 EOF
 docker cp /tmp/fn.txt ecidade_php56:/tmp/fn.txt

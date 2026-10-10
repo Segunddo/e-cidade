@@ -86,12 +86,12 @@ class cl_rhpeslocaltrab
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh56_seq = ($this->rh56_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_seq"]:$this->rh56_seq);
-       $this->rh56_seqpes = ($this->rh56_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_seqpes"]:$this->rh56_seqpes);
-       $this->rh56_localtrab = ($this->rh56_localtrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_localtrab"]:$this->rh56_localtrab);
+       $this->rh56_seq = ($this->rh56_seq === 0 || $this->rh56_seq === 0.0 || $this->rh56_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_seq"]:$this->rh56_seq);
+       $this->rh56_seqpes = ($this->rh56_seqpes === 0 || $this->rh56_seqpes === 0.0 || $this->rh56_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_seqpes"]:$this->rh56_seqpes);
+       $this->rh56_localtrab = ($this->rh56_localtrab === 0 || $this->rh56_localtrab === 0.0 || $this->rh56_localtrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_localtrab"]:$this->rh56_localtrab);
        $this->rh56_princ = ($this->rh56_princ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_princ"]:$this->rh56_princ);
-       $this->rh56_quantidadecusto = ($this->rh56_quantidadecusto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_quantidadecusto"]:$this->rh56_quantidadecusto);
-       $this->rh56_percentualcusto = ($this->rh56_percentualcusto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_percentualcusto"]:$this->rh56_percentualcusto);
+       $this->rh56_quantidadecusto = ($this->rh56_quantidadecusto === 0 || $this->rh56_quantidadecusto === 0.0 || $this->rh56_quantidadecusto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_quantidadecusto"]:$this->rh56_quantidadecusto);
+       $this->rh56_percentualcusto = ($this->rh56_percentualcusto === 0 || $this->rh56_percentualcusto === 0.0 || $this->rh56_percentualcusto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_percentualcusto"]:$this->rh56_percentualcusto);
        if($this->rh56_datainicio == ""){
          $this->rh56_datainicio_dia = ($this->rh56_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_datainicio_dia"]:$this->rh56_datainicio_dia);
          $this->rh56_datainicio_mes = ($this->rh56_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_datainicio_mes"]:$this->rh56_datainicio_mes);
@@ -109,7 +109,7 @@ class cl_rhpeslocaltrab
          }
        }
      }else{
-       $this->rh56_seq = ($this->rh56_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_seq"]:$this->rh56_seq);
+       $this->rh56_seq = ($this->rh56_seq === 0 || $this->rh56_seq === 0.0 || $this->rh56_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh56_seq"]:$this->rh56_seq);
      }
    }
 
@@ -179,7 +179,7 @@ class cl_rhpeslocaltrab
          $this->rh56_seq = $rh56_seq; 
        }
      }
-     if(($this->rh56_seq == null) || ($this->rh56_seq == "") ){ 
+     if(($this->rh56_seq == null) || ($this->rh56_seq === 0 || $this->rh56_seq === 0.0 || $this->rh56_seq == "") ){ 
        $this->erro_sql = " Campo rh56_seq não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -555,7 +555,7 @@ class cl_rhpeslocaltrab
   function sql_query_descrlocal ( $rh56_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -577,7 +577,7 @@ class cl_rhpeslocaltrab
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -587,10 +587,10 @@ class cl_rhpeslocaltrab
      return $sql;
   }
 
-  function sql_query_retorno ( $rh56_seq=null,$campos="*",$ordem=null,$dbwhere="",$anonovo,$mesnovo){ 
+  function sql_query_retorno ( $rh56_seq=null,$campos="*",$ordem=null,$dbwhere="",$anonovo = null,$mesnovo = null){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -616,7 +616,7 @@ class cl_rhpeslocaltrab
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -629,7 +629,7 @@ class cl_rhpeslocaltrab
   function sql_query_rhpessoalmov ( $rh56_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -652,7 +652,7 @@ class cl_rhpeslocaltrab
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -665,7 +665,7 @@ class cl_rhpeslocaltrab
  function sql_query_custocriterio ( $rh56_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -689,7 +689,7 @@ class cl_rhpeslocaltrab
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

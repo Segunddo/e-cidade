@@ -50,7 +50,7 @@ class cl_solicitemele {
                  pc18_codele = int4 = Código Elemento 
                  ";
    //funcao construtor da classe 
-   function cl_solicitemele() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("solicitemele"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_solicitemele {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc18_solicitem = ($this->pc18_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_solicitem"]:$this->pc18_solicitem);
-       $this->pc18_codele = ($this->pc18_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_codele"]:$this->pc18_codele);
+       $this->pc18_solicitem = ($this->pc18_solicitem === 0 || $this->pc18_solicitem === 0.0 || $this->pc18_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_solicitem"]:$this->pc18_solicitem);
+       $this->pc18_codele = ($this->pc18_codele === 0 || $this->pc18_codele === 0.0 || $this->pc18_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_codele"]:$this->pc18_codele);
      }else{
-       $this->pc18_solicitem = ($this->pc18_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_solicitem"]:$this->pc18_solicitem);
-       $this->pc18_codele = ($this->pc18_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_codele"]:$this->pc18_codele);
+       $this->pc18_solicitem = ($this->pc18_solicitem === 0 || $this->pc18_solicitem === 0.0 || $this->pc18_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_solicitem"]:$this->pc18_solicitem);
+       $this->pc18_codele = ($this->pc18_codele === 0 || $this->pc18_codele === 0.0 || $this->pc18_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_codele"]:$this->pc18_codele);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_solicitemele {
       $this->atualizacampos();
        $this->pc18_solicitem = $pc18_solicitem; 
        $this->pc18_codele = $pc18_codele; 
-     if(($this->pc18_solicitem == null) || ($this->pc18_solicitem == "") ){ 
+     if(($this->pc18_solicitem == null) || ($this->pc18_solicitem === 0 || $this->pc18_solicitem === 0.0 || $this->pc18_solicitem == "") ){ 
        $this->erro_sql = " Campo pc18_solicitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_solicitemele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pc18_codele == null) || ($this->pc18_codele == "") ){ 
+     if(($this->pc18_codele == null) || ($this->pc18_codele === 0 || $this->pc18_codele === 0.0 || $this->pc18_codele == "") ){ 
        $this->erro_sql = " Campo pc18_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_solicitemele {
    function sql_query ( $pc18_solicitem=null,$pc18_codele=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_solicitemele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_solicitemele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

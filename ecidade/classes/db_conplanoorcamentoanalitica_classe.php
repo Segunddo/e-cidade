@@ -61,7 +61,7 @@ class cl_conplanoorcamentoanalitica {
                  ";
   //funcao construtor da classe
 
-  function cl_conplanoorcamentoanalitica() {
+  function __construct() {
     //classes dos rotulos dos campos
 
     $this->rotulo = new rotulo("conplanoorcamentoanalitica");
@@ -83,16 +83,16 @@ class cl_conplanoorcamentoanalitica {
   function atualizacampos($exclusao = false) {
 
     if ($exclusao == false) {
-      $this->c61_reduz = ($this->c61_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_reduz"] : $this->c61_reduz);
-      $this->c61_codcon = ($this->c61_codcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_codcon"] : $this->c61_codcon);
-      $this->c61_anousu = ($this->c61_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_anousu"] : $this->c61_anousu);
-      $this->c61_instit = ($this->c61_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_instit"] : $this->c61_instit);
-      $this->c61_codigo = ($this->c61_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_codigo"] : $this->c61_codigo);
-      $this->c61_contrapartida = ($this->c61_contrapartida == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_contrapartida"]
+      $this->c61_reduz = ($this->c61_reduz === 0 || $this->c61_reduz === 0.0 || $this->c61_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_reduz"] : $this->c61_reduz);
+      $this->c61_codcon = ($this->c61_codcon === 0 || $this->c61_codcon === 0.0 || $this->c61_codcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_codcon"] : $this->c61_codcon);
+      $this->c61_anousu = ($this->c61_anousu === 0 || $this->c61_anousu === 0.0 || $this->c61_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_anousu"] : $this->c61_anousu);
+      $this->c61_instit = ($this->c61_instit === 0 || $this->c61_instit === 0.0 || $this->c61_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_instit"] : $this->c61_instit);
+      $this->c61_codigo = ($this->c61_codigo === 0 || $this->c61_codigo === 0.0 || $this->c61_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_codigo"] : $this->c61_codigo);
+      $this->c61_contrapartida = ($this->c61_contrapartida === 0 || $this->c61_contrapartida === 0.0 || $this->c61_contrapartida == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_contrapartida"]
           : $this->c61_contrapartida);
     } else {
-      $this->c61_reduz = ($this->c61_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_reduz"] : $this->c61_reduz);
-      $this->c61_anousu = ($this->c61_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_anousu"] : $this->c61_anousu);
+      $this->c61_reduz = ($this->c61_reduz === 0 || $this->c61_reduz === 0.0 || $this->c61_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_reduz"] : $this->c61_reduz);
+      $this->c61_anousu = ($this->c61_anousu === 0 || $this->c61_anousu === 0.0 || $this->c61_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_anousu"] : $this->c61_anousu);
     }
   }
   // funcao para inclusao
@@ -159,7 +159,7 @@ class cl_conplanoorcamentoanalitica {
         $this->c61_reduz = $c61_reduz;
       }
     }
-    if (($this->c61_reduz == null) || ($this->c61_reduz == "")) {
+    if (($this->c61_reduz == null) || ($this->c61_reduz === 0 || $this->c61_reduz === 0.0 || $this->c61_reduz == "")) {
       $this->erro_sql = " Campo c61_reduz nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -168,7 +168,7 @@ class cl_conplanoorcamentoanalitica {
       $this->erro_status = "0";
       return false;
     }
-    if (($this->c61_anousu == null) || ($this->c61_anousu == "")) {
+    if (($this->c61_anousu == null) || ($this->c61_anousu === 0 || $this->c61_anousu === 0.0 || $this->c61_anousu == "")) {
       $this->erro_sql = " Campo c61_anousu nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -447,7 +447,7 @@ class cl_conplanoorcamentoanalitica {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_conplanoorcamentoanalitica {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_conplanoorcamentoanalitica {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -530,7 +530,7 @@ class cl_conplanoorcamentoanalitica {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -571,7 +571,7 @@ class cl_conplanoorcamentoanalitica {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -609,7 +609,7 @@ class cl_conplanoorcamentoanalitica {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -623,7 +623,7 @@ class cl_conplanoorcamentoanalitica {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -654,7 +654,7 @@ class cl_conplanoorcamentoanalitica {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];

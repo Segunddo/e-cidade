@@ -52,7 +52,7 @@ class cl_issplannumpreissplanit {
                  q77_issplannumpre = int4 = Codigo da issplanumpre 
                  ";
    //funcao construtor da classe 
-   function cl_issplannumpreissplanit() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issplannumpreissplanit"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_issplannumpreissplanit {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q77_sequencial = ($this->q77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q77_sequencial"]:$this->q77_sequencial);
-       $this->q77_issplanit = ($this->q77_issplanit == ""?@$GLOBALS["HTTP_POST_VARS"]["q77_issplanit"]:$this->q77_issplanit);
-       $this->q77_issplannumpre = ($this->q77_issplannumpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q77_issplannumpre"]:$this->q77_issplannumpre);
+       $this->q77_sequencial = ($this->q77_sequencial === 0 || $this->q77_sequencial === 0.0 || $this->q77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q77_sequencial"]:$this->q77_sequencial);
+       $this->q77_issplanit = ($this->q77_issplanit === 0 || $this->q77_issplanit === 0.0 || $this->q77_issplanit == ""?@$GLOBALS["HTTP_POST_VARS"]["q77_issplanit"]:$this->q77_issplanit);
+       $this->q77_issplannumpre = ($this->q77_issplannumpre === 0 || $this->q77_issplannumpre === 0.0 || $this->q77_issplannumpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q77_issplannumpre"]:$this->q77_issplannumpre);
      }else{
-       $this->q77_sequencial = ($this->q77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q77_sequencial"]:$this->q77_sequencial);
+       $this->q77_sequencial = ($this->q77_sequencial === 0 || $this->q77_sequencial === 0.0 || $this->q77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q77_sequencial"]:$this->q77_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_issplannumpreissplanit {
          $this->q77_sequencial = $q77_sequencial; 
        }
      }
-     if(($this->q77_sequencial == null) || ($this->q77_sequencial == "") ){ 
+     if(($this->q77_sequencial == null) || ($this->q77_sequencial === 0 || $this->q77_sequencial === 0.0 || $this->q77_sequencial == "") ){ 
        $this->erro_sql = " Campo q77_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_issplannumpreissplanit {
    function sql_query ( $q77_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_issplannumpreissplanit {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_issplannumpreissplanit {
    function sql_query_file ( $q77_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_issplannumpreissplanit {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

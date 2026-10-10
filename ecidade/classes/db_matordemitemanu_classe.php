@@ -56,7 +56,7 @@ class cl_matordemitemanu {
                  m36_qtd = float4 = Quantidade Anulada 
                  ";
   //funcao construtor da classe
-  function cl_matordemitemanu() {
+  function __construct() {
     //classes dos rotulos dos campos
     $this->rotulo = new rotulo("matordemitemanu");
     $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_matordemitemanu {
   // funcao para atualizar campos
   function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->m36_sequencial = ($this->m36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_sequencial"]:$this->m36_sequencial);
-      $this->m36_matordemitem = ($this->m36_matordemitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_matordemitem"]:$this->m36_matordemitem);
-      $this->m36_matordemanul = ($this->m36_matordemanul == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_matordemanul"]:$this->m36_matordemanul);
-      $this->m36_vrlanu = ($this->m36_vrlanu == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_vrlanu"]:$this->m36_vrlanu);
-      $this->m36_qtd = ($this->m36_qtd == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_qtd"]:$this->m36_qtd);
+      $this->m36_sequencial = ($this->m36_sequencial === 0 || $this->m36_sequencial === 0.0 || $this->m36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_sequencial"]:$this->m36_sequencial);
+      $this->m36_matordemitem = ($this->m36_matordemitem === 0 || $this->m36_matordemitem === 0.0 || $this->m36_matordemitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_matordemitem"]:$this->m36_matordemitem);
+      $this->m36_matordemanul = ($this->m36_matordemanul === 0 || $this->m36_matordemanul === 0.0 || $this->m36_matordemanul == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_matordemanul"]:$this->m36_matordemanul);
+      $this->m36_vrlanu = ($this->m36_vrlanu === 0 || $this->m36_vrlanu === 0.0 || $this->m36_vrlanu == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_vrlanu"]:$this->m36_vrlanu);
+      $this->m36_qtd = ($this->m36_qtd === 0 || $this->m36_qtd === 0.0 || $this->m36_qtd == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_qtd"]:$this->m36_qtd);
     }else{
-      $this->m36_sequencial = ($this->m36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_sequencial"]:$this->m36_sequencial);
+      $this->m36_sequencial = ($this->m36_sequencial === 0 || $this->m36_sequencial === 0.0 || $this->m36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m36_sequencial"]:$this->m36_sequencial);
     }
   }
   // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_matordemitemanu {
         $this->m36_sequencial = $m36_sequencial;
       }
     }
-    if(($this->m36_sequencial == null) || ($this->m36_sequencial == "") ){
+    if(($this->m36_sequencial == null) || ($this->m36_sequencial === 0 || $this->m36_sequencial === 0.0 || $this->m36_sequencial == "") ){
       $this->erro_sql = " Campo m36_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_matordemitemanu {
   function sql_query ( $m36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_matordemitemanu {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_matordemitemanu {
   function sql_query_file ( $m36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_matordemitemanu {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

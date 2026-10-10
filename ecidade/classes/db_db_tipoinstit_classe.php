@@ -54,7 +54,7 @@ class cl_db_tipoinstit {
                  db21_codigosiconfi = varchar(6) = Código do SICONFI 
                  ";
    //funcao construtor da classe 
-   function cl_db_tipoinstit() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_tipoinstit"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_db_tipoinstit {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db21_codtipo = ($this->db21_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_codtipo"]:$this->db21_codtipo);
+       $this->db21_codtipo = ($this->db21_codtipo === 0 || $this->db21_codtipo === 0.0 || $this->db21_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_codtipo"]:$this->db21_codtipo);
        $this->db21_nome = ($this->db21_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_nome"]:$this->db21_nome);
        $this->db21_idtribunal = ($this->db21_idtribunal == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_idtribunal"]:$this->db21_idtribunal);
        $this->db21_codigosiconfi = ($this->db21_codigosiconfi == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_codigosiconfi"]:$this->db21_codigosiconfi);
      }else{
-       $this->db21_codtipo = ($this->db21_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_codtipo"]:$this->db21_codtipo);
+       $this->db21_codtipo = ($this->db21_codtipo === 0 || $this->db21_codtipo === 0.0 || $this->db21_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_codtipo"]:$this->db21_codtipo);
      }
    }
    // funcao para Inclusão
@@ -101,7 +101,7 @@ class cl_db_tipoinstit {
        return false;
      }
        $this->db21_codtipo = $db21_codtipo; 
-     if(($this->db21_codtipo == null) || ($this->db21_codtipo == "") ){ 
+     if(($this->db21_codtipo == null) || ($this->db21_codtipo === 0 || $this->db21_codtipo === 0.0 || $this->db21_codtipo == "") ){ 
        $this->erro_sql = " Campo db21_codtipo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

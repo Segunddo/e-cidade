@@ -62,7 +62,7 @@ class cl_matordemitem
                  ";
 
     //funcao construtor da classe
-    function cl_matordemitem()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("matordemitem");
@@ -84,15 +84,15 @@ class cl_matordemitem
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->m52_codlanc = ($this->m52_codlanc == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_codlanc"] : $this->m52_codlanc);
-            $this->m52_codordem = ($this->m52_codordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_codordem"] : $this->m52_codordem);
-            $this->m52_numemp = ($this->m52_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_numemp"] : $this->m52_numemp);
-            $this->m52_sequen = ($this->m52_sequen == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_sequen"] : $this->m52_sequen);
-            $this->m52_quant = ($this->m52_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_quant"] : $this->m52_quant);
-            $this->m52_valor = ($this->m52_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_valor"] : $this->m52_valor);
-            $this->m52_vlruni = ($this->m52_vlruni == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_vlruni"] : $this->m52_vlruni);
+            $this->m52_codlanc = ($this->m52_codlanc === 0 || $this->m52_codlanc === 0.0 || $this->m52_codlanc == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_codlanc"] : $this->m52_codlanc);
+            $this->m52_codordem = ($this->m52_codordem === 0 || $this->m52_codordem === 0.0 || $this->m52_codordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_codordem"] : $this->m52_codordem);
+            $this->m52_numemp = ($this->m52_numemp === 0 || $this->m52_numemp === 0.0 || $this->m52_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_numemp"] : $this->m52_numemp);
+            $this->m52_sequen = ($this->m52_sequen === 0 || $this->m52_sequen === 0.0 || $this->m52_sequen == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_sequen"] : $this->m52_sequen);
+            $this->m52_quant = ($this->m52_quant === 0 || $this->m52_quant === 0.0 || $this->m52_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_quant"] : $this->m52_quant);
+            $this->m52_valor = ($this->m52_valor === 0 || $this->m52_valor === 0.0 || $this->m52_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_valor"] : $this->m52_valor);
+            $this->m52_vlruni = ($this->m52_vlruni === 0 || $this->m52_vlruni === 0.0 || $this->m52_vlruni == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_vlruni"] : $this->m52_vlruni);
         } else {
-            $this->m52_codlanc = ($this->m52_codlanc == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_codlanc"] : $this->m52_codlanc);
+            $this->m52_codlanc = ($this->m52_codlanc === 0 || $this->m52_codlanc === 0.0 || $this->m52_codlanc == "" ? @$GLOBALS["HTTP_POST_VARS"]["m52_codlanc"] : $this->m52_codlanc);
         }
     }
 
@@ -194,7 +194,7 @@ class cl_matordemitem
                 $this->m52_codlanc = $m52_codlanc;
             }
         }
-        if (($this->m52_codlanc == null) || ($this->m52_codlanc == "")) {
+        if (($this->m52_codlanc == null) || ($this->m52_codlanc === 0 || $this->m52_codlanc === 0.0 || $this->m52_codlanc == "")) {
             $this->erro_sql = " Campo m52_codlanc nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

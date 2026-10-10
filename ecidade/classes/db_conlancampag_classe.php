@@ -52,7 +52,7 @@ class cl_conlancampag {
                  c82_reduz = int4 = Reduzido
                  ";
    //funcao construtor da classe
-   function cl_conlancampag() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancampag");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_conlancampag {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c82_codlan = ($this->c82_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c82_codlan"]:$this->c82_codlan);
-       $this->c82_anousu = ($this->c82_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c82_anousu"]:$this->c82_anousu);
-       $this->c82_reduz = ($this->c82_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c82_reduz"]:$this->c82_reduz);
+       $this->c82_codlan = ($this->c82_codlan === 0 || $this->c82_codlan === 0.0 || $this->c82_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c82_codlan"]:$this->c82_codlan);
+       $this->c82_anousu = ($this->c82_anousu === 0 || $this->c82_anousu === 0.0 || $this->c82_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c82_anousu"]:$this->c82_anousu);
+       $this->c82_reduz = ($this->c82_reduz === 0 || $this->c82_reduz === 0.0 || $this->c82_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c82_reduz"]:$this->c82_reduz);
      }else{
-       $this->c82_codlan = ($this->c82_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c82_codlan"]:$this->c82_codlan);
+       $this->c82_codlan = ($this->c82_codlan === 0 || $this->c82_codlan === 0.0 || $this->c82_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c82_codlan"]:$this->c82_codlan);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_conlancampag {
        return false;
      }
        $this->c82_codlan = $c82_codlan;
-     if(($this->c82_codlan == null) || ($this->c82_codlan == "") ){
+     if(($this->c82_codlan == null) || ($this->c82_codlan === 0 || $this->c82_codlan === 0.0 || $this->c82_codlan == "") ){
        $this->erro_sql = " Campo c82_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -348,7 +348,7 @@ class cl_conlancampag {
    function sql_query ( $c82_codlan=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -373,7 +373,7 @@ class cl_conlancampag {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_conlancampag {
    function sql_query_file ( $c82_codlan=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_conlancampag {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

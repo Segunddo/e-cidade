@@ -45,11 +45,11 @@ class cl_slipretencaoreceitas
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->k206_sequencial = ($this->k206_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k206_sequencial"]:$this->k206_sequencial);
-       $this->k206_retencaoreceitas = ($this->k206_retencaoreceitas == ""?@$GLOBALS["HTTP_POST_VARS"]["k206_retencaoreceitas"]:$this->k206_retencaoreceitas);
-       $this->k206_slip = ($this->k206_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k206_slip"]:$this->k206_slip);
+       $this->k206_sequencial = ($this->k206_sequencial === 0 || $this->k206_sequencial === 0.0 || $this->k206_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k206_sequencial"]:$this->k206_sequencial);
+       $this->k206_retencaoreceitas = ($this->k206_retencaoreceitas === 0 || $this->k206_retencaoreceitas === 0.0 || $this->k206_retencaoreceitas == ""?@$GLOBALS["HTTP_POST_VARS"]["k206_retencaoreceitas"]:$this->k206_retencaoreceitas);
+       $this->k206_slip = ($this->k206_slip === 0 || $this->k206_slip === 0.0 || $this->k206_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k206_slip"]:$this->k206_slip);
      }else{
-       $this->k206_sequencial = ($this->k206_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k206_sequencial"]:$this->k206_sequencial);
+       $this->k206_sequencial = ($this->k206_sequencial === 0 || $this->k206_sequencial === 0.0 || $this->k206_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k206_sequencial"]:$this->k206_sequencial);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_slipretencaoreceitas
          $this->k206_sequencial = $k206_sequencial; 
        }
      }
-     if(($this->k206_sequencial == null) || ($this->k206_sequencial == "") ){ 
+     if(($this->k206_sequencial == null) || ($this->k206_sequencial === 0 || $this->k206_sequencial === 0.0 || $this->k206_sequencial == "") ){ 
        $this->erro_sql = " Campo k206_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -63,6 +63,10 @@ return RectorConfig::configure()
         // no 5.6 e passaram batido pelo php -l. E a fragilidade da denylist, medida.
         Rector\Php80\Rector\NotIdentical\StrContainsRector::class,  // str_contains (PHP 8.0)
         Rector\Php73\Rector\FuncCall\ArrayKeyFirstLastRector::class, // array_key_first (PHP 7.3)
+        // Terceira rodada da mesma licao: esta regra nunca disparou no div nem no iss,
+        // e disparou no dvr. Emite `$x ?? null`, e o ?? e PHP 7.0 -> PARSE ERROR no 5.6.
+        // (Medido: `$x["k"] ?? null` nao parseia no 5.6 e parseia no 8.5.)
+        Rector\Php70\Rector\StmtsAwareInterface\IfIssetToCoalescingRector::class,
 
         // --- MODERNIZACAO: nao e exigida pela versao de destino -------------------
         // No `iss` estas quatro responderam por 77% do diff (6.480 de 8.409 linhas) e

@@ -52,7 +52,7 @@ class cl_slipempagemovslips {
                  k108_empagemovslips = int4 = Código do movimento.
                  ";
    //funcao construtor da classe
-   function cl_slipempagemovslips() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("slipempagemovslips");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_slipempagemovslips {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k108_sequencial = ($this->k108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k108_sequencial"]:$this->k108_sequencial);
-       $this->k108_slip = ($this->k108_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k108_slip"]:$this->k108_slip);
-       $this->k108_empagemovslips = ($this->k108_empagemovslips == ""?@$GLOBALS["HTTP_POST_VARS"]["k108_empagemovslips"]:$this->k108_empagemovslips);
+       $this->k108_sequencial = ($this->k108_sequencial === 0 || $this->k108_sequencial === 0.0 || $this->k108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k108_sequencial"]:$this->k108_sequencial);
+       $this->k108_slip = ($this->k108_slip === 0 || $this->k108_slip === 0.0 || $this->k108_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k108_slip"]:$this->k108_slip);
+       $this->k108_empagemovslips = ($this->k108_empagemovslips === 0 || $this->k108_empagemovslips === 0.0 || $this->k108_empagemovslips == ""?@$GLOBALS["HTTP_POST_VARS"]["k108_empagemovslips"]:$this->k108_empagemovslips);
      }else{
-       $this->k108_sequencial = ($this->k108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k108_sequencial"]:$this->k108_sequencial);
+       $this->k108_sequencial = ($this->k108_sequencial === 0 || $this->k108_sequencial === 0.0 || $this->k108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k108_sequencial"]:$this->k108_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_slipempagemovslips {
          $this->k108_sequencial = $k108_sequencial;
        }
      }
-     if(($this->k108_sequencial == null) || ($this->k108_sequencial == "") ){
+     if(($this->k108_sequencial == null) || ($this->k108_sequencial === 0 || $this->k108_sequencial === 0.0 || $this->k108_sequencial == "") ){
        $this->erro_sql = " Campo k108_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_slipempagemovslips {
    function sql_query ( $k108_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_slipempagemovslips {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_slipempagemovslips {
    function sql_query_file ( $k108_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_slipempagemovslips {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_slipempagemovslips {
     function sql_query_retencao ( $k108_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_slipempagemovslips {
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];

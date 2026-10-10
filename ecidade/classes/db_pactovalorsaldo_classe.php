@@ -60,7 +60,7 @@ class cl_pactovalorsaldo {
                  o103_contrapartida = bool = Contrapartida 
                  ";
    //funcao construtor da classe 
-   function cl_pactovalorsaldo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pactovalorsaldo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_pactovalorsaldo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o103_sequencial = ($this->o103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_sequencial"]:$this->o103_sequencial);
-       $this->o103_pactovalor = ($this->o103_pactovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_pactovalor"]:$this->o103_pactovalor);
-       $this->o103_pactovalorsaldotipo = ($this->o103_pactovalorsaldotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_pactovalorsaldotipo"]:$this->o103_pactovalorsaldotipo);
-       $this->o103_anousu = ($this->o103_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_anousu"]:$this->o103_anousu);
-       $this->o103_mesusu = ($this->o103_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_mesusu"]:$this->o103_mesusu);
-       $this->o103_valor = ($this->o103_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_valor"]:$this->o103_valor);
+       $this->o103_sequencial = ($this->o103_sequencial === 0 || $this->o103_sequencial === 0.0 || $this->o103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_sequencial"]:$this->o103_sequencial);
+       $this->o103_pactovalor = ($this->o103_pactovalor === 0 || $this->o103_pactovalor === 0.0 || $this->o103_pactovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_pactovalor"]:$this->o103_pactovalor);
+       $this->o103_pactovalorsaldotipo = ($this->o103_pactovalorsaldotipo === 0 || $this->o103_pactovalorsaldotipo === 0.0 || $this->o103_pactovalorsaldotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_pactovalorsaldotipo"]:$this->o103_pactovalorsaldotipo);
+       $this->o103_anousu = ($this->o103_anousu === 0 || $this->o103_anousu === 0.0 || $this->o103_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_anousu"]:$this->o103_anousu);
+       $this->o103_mesusu = ($this->o103_mesusu === 0 || $this->o103_mesusu === 0.0 || $this->o103_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_mesusu"]:$this->o103_mesusu);
+       $this->o103_valor = ($this->o103_valor === 0 || $this->o103_valor === 0.0 || $this->o103_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_valor"]:$this->o103_valor);
        $this->o103_contrapartida = ($this->o103_contrapartida == "f"?@$GLOBALS["HTTP_POST_VARS"]["o103_contrapartida"]:$this->o103_contrapartida);
      }else{
-       $this->o103_sequencial = ($this->o103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_sequencial"]:$this->o103_sequencial);
+       $this->o103_sequencial = ($this->o103_sequencial === 0 || $this->o103_sequencial === 0.0 || $this->o103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_sequencial"]:$this->o103_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_pactovalorsaldo {
          $this->o103_sequencial = $o103_sequencial; 
        }
      }
-     if(($this->o103_sequencial == null) || ($this->o103_sequencial == "") ){ 
+     if(($this->o103_sequencial == null) || ($this->o103_sequencial === 0 || $this->o103_sequencial === 0.0 || $this->o103_sequencial == "") ){ 
        $this->erro_sql = " Campo o103_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -484,7 +484,7 @@ class cl_pactovalorsaldo {
    function sql_query ( $o103_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -514,7 +514,7 @@ class cl_pactovalorsaldo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_pactovalorsaldo {
    function sql_query_file ( $o103_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -548,7 +548,7 @@ class cl_pactovalorsaldo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

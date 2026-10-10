@@ -66,13 +66,13 @@ class cl_orcreceita
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->o70_anousu = ($this->o70_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_anousu"]:$this->o70_anousu);
-       $this->o70_codrec = ($this->o70_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_codrec"]:$this->o70_codrec);
-       $this->o70_codfon = ($this->o70_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_codfon"]:$this->o70_codfon);
-       $this->o70_codigo = ($this->o70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_codigo"]:$this->o70_codigo);
-       $this->o70_valor = ($this->o70_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_valor"]:$this->o70_valor);
+       $this->o70_anousu = ($this->o70_anousu === 0 || $this->o70_anousu === 0.0 || $this->o70_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_anousu"]:$this->o70_anousu);
+       $this->o70_codrec = ($this->o70_codrec === 0 || $this->o70_codrec === 0.0 || $this->o70_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_codrec"]:$this->o70_codrec);
+       $this->o70_codfon = ($this->o70_codfon === 0 || $this->o70_codfon === 0.0 || $this->o70_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_codfon"]:$this->o70_codfon);
+       $this->o70_codigo = ($this->o70_codigo === 0 || $this->o70_codigo === 0.0 || $this->o70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_codigo"]:$this->o70_codigo);
+       $this->o70_valor = ($this->o70_valor === 0 || $this->o70_valor === 0.0 || $this->o70_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_valor"]:$this->o70_valor);
        $this->o70_reclan = ($this->o70_reclan == "f"?@$GLOBALS["HTTP_POST_VARS"]["o70_reclan"]:$this->o70_reclan);
-       $this->o70_instit = ($this->o70_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_instit"]:$this->o70_instit);
+       $this->o70_instit = ($this->o70_instit === 0 || $this->o70_instit === 0.0 || $this->o70_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_instit"]:$this->o70_instit);
        $this->o70_concarpeculiar = ($this->o70_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_concarpeculiar"]:$this->o70_concarpeculiar);
        if($this->o70_datacriacao == ""){
          $this->o70_datacriacao_dia = ($this->o70_datacriacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_datacriacao_dia"]:$this->o70_datacriacao_dia);
@@ -86,8 +86,8 @@ class cl_orcreceita
        $this->o70_orcunidade = ($this->o70_orcunidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_orcunidade"]:$this->o70_orcunidade);
        $this->o70_esferaorcamentaria = ($this->o70_esferaorcamentaria == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_esferaorcamentaria"]:$this->o70_esferaorcamentaria);
      }else{
-       $this->o70_anousu = ($this->o70_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_anousu"]:$this->o70_anousu);
-       $this->o70_codrec = ($this->o70_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_codrec"]:$this->o70_codrec);
+       $this->o70_anousu = ($this->o70_anousu === 0 || $this->o70_anousu === 0.0 || $this->o70_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_anousu"]:$this->o70_anousu);
+       $this->o70_codrec = ($this->o70_codrec === 0 || $this->o70_codrec === 0.0 || $this->o70_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o70_codrec"]:$this->o70_codrec);
      }
    }
 
@@ -185,7 +185,7 @@ class cl_orcreceita
          $this->o70_codrec = $o70_codrec;
        }
      }
-     if(($this->o70_anousu == null) || ($this->o70_anousu == "") ){
+     if(($this->o70_anousu == null) || ($this->o70_anousu === 0 || $this->o70_anousu === 0.0 || $this->o70_anousu == "") ){
        $this->erro_sql = " Campo o70_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -193,7 +193,7 @@ class cl_orcreceita
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o70_codrec == null) || ($this->o70_codrec == "") ){
+     if(($this->o70_codrec == null) || ($this->o70_codrec === 0 || $this->o70_codrec === 0.0 || $this->o70_codrec == "") ){
        $this->erro_sql = " Campo o70_codrec não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

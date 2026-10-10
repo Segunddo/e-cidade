@@ -52,7 +52,7 @@ class cl_cairetordem {
                  k32_ordpag = int4 = Ordem de pagamento 
                  ";
    //funcao construtor da classe 
-   function cl_cairetordem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cairetordem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cairetordem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k32_sequencia = ($this->k32_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_sequencia"]:$this->k32_sequencia);
-       $this->k32_numpre = ($this->k32_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_numpre"]:$this->k32_numpre);
-       $this->k32_ordpag = ($this->k32_ordpag == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_ordpag"]:$this->k32_ordpag);
+       $this->k32_sequencia = ($this->k32_sequencia === 0 || $this->k32_sequencia === 0.0 || $this->k32_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_sequencia"]:$this->k32_sequencia);
+       $this->k32_numpre = ($this->k32_numpre === 0 || $this->k32_numpre === 0.0 || $this->k32_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_numpre"]:$this->k32_numpre);
+       $this->k32_ordpag = ($this->k32_ordpag === 0 || $this->k32_ordpag === 0.0 || $this->k32_ordpag == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_ordpag"]:$this->k32_ordpag);
      }else{
-       $this->k32_sequencia = ($this->k32_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_sequencia"]:$this->k32_sequencia);
+       $this->k32_sequencia = ($this->k32_sequencia === 0 || $this->k32_sequencia === 0.0 || $this->k32_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_sequencia"]:$this->k32_sequencia);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cairetordem {
          $this->k32_sequencia = $k32_sequencia; 
        }
      }
-     if(($this->k32_sequencia == null) || ($this->k32_sequencia == "") ){ 
+     if(($this->k32_sequencia == null) || ($this->k32_sequencia === 0 || $this->k32_sequencia === 0.0 || $this->k32_sequencia == "") ){ 
        $this->erro_sql = " Campo k32_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_cairetordem {
    function sql_query ( $k32_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_cairetordem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_cairetordem {
    function sql_query_file ( $k32_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_cairetordem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

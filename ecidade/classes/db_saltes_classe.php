@@ -93,12 +93,12 @@ class cl_saltes
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->k13_conta = ($this->k13_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_conta"]:$this->k13_conta);
-       $this->k13_reduz = ($this->k13_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_reduz"]:$this->k13_reduz);
+       $this->k13_conta = ($this->k13_conta === 0 || $this->k13_conta === 0.0 || $this->k13_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_conta"]:$this->k13_conta);
+       $this->k13_reduz = ($this->k13_reduz === 0 || $this->k13_reduz === 0.0 || $this->k13_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_reduz"]:$this->k13_reduz);
        $this->k13_descr = ($this->k13_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_descr"]:$this->k13_descr);
-       $this->k13_saldo = ($this->k13_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_saldo"]:$this->k13_saldo);
+       $this->k13_saldo = ($this->k13_saldo === 0 || $this->k13_saldo === 0.0 || $this->k13_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_saldo"]:$this->k13_saldo);
        $this->k13_ident = ($this->k13_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_ident"]:$this->k13_ident);
-       $this->k13_vlratu = ($this->k13_vlratu == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_vlratu"]:$this->k13_vlratu);
+       $this->k13_vlratu = ($this->k13_vlratu === 0 || $this->k13_vlratu === 0.0 || $this->k13_vlratu == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_vlratu"]:$this->k13_vlratu);
        if($this->k13_datvlr == ""){
          $this->k13_datvlr_dia = ($this->k13_datvlr_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_datvlr_dia"]:$this->k13_datvlr_dia);
          $this->k13_datvlr_mes = ($this->k13_datvlr_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_datvlr_mes"]:$this->k13_datvlr_mes);
@@ -125,7 +125,7 @@ class cl_saltes
        }
        $this->k13_outrosdados = ($this->k13_outrosdados == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_outrosdados"]:$this->k13_outrosdados);
      }else{
-       $this->k13_conta = ($this->k13_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_conta"]:$this->k13_conta);
+       $this->k13_conta = ($this->k13_conta === 0 || $this->k13_conta === 0.0 || $this->k13_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k13_conta"]:$this->k13_conta);
      }
    }
 
@@ -175,7 +175,7 @@ class cl_saltes
        return false;
      }
        $this->k13_conta = $k13_conta;
-     if(($this->k13_conta == null) || ($this->k13_conta == "") ){
+     if(($this->k13_conta == null) || ($this->k13_conta === 0 || $this->k13_conta === 0.0 || $this->k13_conta == "") ){
        $this->erro_sql = " Campo k13_conta não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -779,12 +779,12 @@ class cl_saltes
   }
 
   function sql_query_orcamento_recurso($iConta = null,
-    $sInstituicoes,
-    $iAnoUsu,
+    $sInstituicoes = null,
+    $iAnoUsu = null,
     $sCampos = "*",
     $sOrdem = null,
     $sWhere = "",
-    $sGroupBy){
+    $sGroupBy = null){
 
     $sql  = "select ";
     $sql .= " {$sCampos} ";

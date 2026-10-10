@@ -63,7 +63,7 @@ class cl_diverimporta {
                  dv11_obs = text = Observação
                  ";
    //funcao construtor da classe
-   function cl_diverimporta() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diverimporta");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,9 +80,9 @@ class cl_diverimporta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->dv11_sequencial = ($this->dv11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_sequencial"]:$this->dv11_sequencial);
-       $this->dv11_instit = ($this->dv11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_instit"]:$this->dv11_instit);
-       $this->dv11_id_usuario = ($this->dv11_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_id_usuario"]:$this->dv11_id_usuario);
+       $this->dv11_sequencial = ($this->dv11_sequencial === 0 || $this->dv11_sequencial === 0.0 || $this->dv11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_sequencial"]:$this->dv11_sequencial);
+       $this->dv11_instit = ($this->dv11_instit === 0 || $this->dv11_instit === 0.0 || $this->dv11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_instit"]:$this->dv11_instit);
+       $this->dv11_id_usuario = ($this->dv11_id_usuario === 0 || $this->dv11_id_usuario === 0.0 || $this->dv11_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_id_usuario"]:$this->dv11_id_usuario);
        if($this->dv11_data == ""){
          $this->dv11_data_dia = ($this->dv11_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_data_dia"]:$this->dv11_data_dia);
          $this->dv11_data_mes = ($this->dv11_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_data_mes"]:$this->dv11_data_mes);
@@ -92,10 +92,10 @@ class cl_diverimporta {
          }
        }
        $this->dv11_hora = ($this->dv11_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_hora"]:$this->dv11_hora);
-       $this->dv11_tipo = ($this->dv11_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_tipo"]:$this->dv11_tipo);
+       $this->dv11_tipo = ($this->dv11_tipo === 0 || $this->dv11_tipo === 0.0 || $this->dv11_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_tipo"]:$this->dv11_tipo);
        $this->dv11_obs = ($this->dv11_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_obs"]:$this->dv11_obs);
      }else{
-       $this->dv11_sequencial = ($this->dv11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_sequencial"]:$this->dv11_sequencial);
+       $this->dv11_sequencial = ($this->dv11_sequencial === 0 || $this->dv11_sequencial === 0.0 || $this->dv11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv11_sequencial"]:$this->dv11_sequencial);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_diverimporta {
          $this->dv11_sequencial = $dv11_sequencial;
        }
      }
-     if(($this->dv11_sequencial == null) || ($this->dv11_sequencial == "") ){
+     if(($this->dv11_sequencial == null) || ($this->dv11_sequencial === 0 || $this->dv11_sequencial === 0.0 || $this->dv11_sequencial == "") ){
        $this->erro_sql = " Campo dv11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -490,7 +490,7 @@ class cl_diverimporta {
    function sql_query ( $dv11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -515,7 +515,7 @@ class cl_diverimporta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -528,7 +528,7 @@ class cl_diverimporta {
    function sql_query_file ( $dv11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -549,7 +549,7 @@ class cl_diverimporta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

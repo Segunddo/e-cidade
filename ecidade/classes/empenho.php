@@ -86,7 +86,7 @@ class empenho
 
     private $log = [];
 
-    function empenho()
+    function __construct()
     {
 
         if (!class_exists("cl_empempenho")) {
@@ -1098,7 +1098,7 @@ class empenho
      *  gera registros como se fosse ordem de pagamento (OP)
      *
      */
-    private function lancaOP($numemp = "", $codele = "", $codnota = "", $valor = "", $retencoes = "", $historico)
+    private function lancaOP($numemp = "", $codele = "", $codnota = "", $valor = "", $retencoes = "", $historico = null)
     {
 
         if ($numemp == "" || $codele == "" || $codnota == "" || $valor == "") {
@@ -1227,7 +1227,7 @@ class empenho
      *
      */
 
-    function estornaOP($numemp = "", $codele = "", $codnota = "", $valor = "", $retencoes = "", $historico)
+    function estornaOP($numemp = "", $codele = "", $codnota = "", $valor = "", $retencoes = "", $historico = null)
     {
 
         if ($numemp == "" || $codele == "" || $codnota == "" || $valor == "") {
@@ -2552,7 +2552,7 @@ class empenho
         $nValorAnular = 0,
         $sMotivo = null,
         $aSolicitacoes = null,
-        $iTipoAnulacao,
+        $iTipoAnulacao = null,
         $lTransacao = true
     ) {
 
@@ -3222,7 +3222,7 @@ class empenho
     function estornarRP(
         $iTipo,
         $aNotas = null,
-        $nValorEstornado,
+        $nValorEstornado = null,
         $sMotivo = '',
         $aItens = null,
         $iTipoAnulacao = null
@@ -3659,15 +3659,15 @@ class empenho
         $sCampos .= "               inner join db_depart on ridepto = coddepto limit 1) as origem                        ";
 
         if (isset($oFiltro->codempini) && !empty($oFiltro->codempini)) {
-            $codempIni = split("/", $oFiltro->codempini);
+            $codempIni = preg_split("#\\/#m", $oFiltro->codempini);
             if (isset($oFiltro->codempfim) && !empty($oFiltro->codempfim)) {
-                $codempFim = split("/", $oFiltro->codempfim);
+                $codempFim = preg_split("#\\/#m", $oFiltro->codempfim);
                 $str       = "  ( ( e60_codemp::integer >= " . $codempIni[0]
                   . " and e60_anousu = {$iAnoUso} )                          ";
                 $str .= " and ( e60_codemp::integer <= " . $codempFim[0]
                   . " and e60_anousu = {$iAnoUso} ) )                      ";
             } else {
-                $codemp = split("/", $oFiltro->codempini);
+                $codemp = preg_split("#\\/#m", $oFiltro->codempini);
                 if (count($codemp) > 1) {
                     $str = " e60_codemp = '" . $codemp[0] . "' and e60_anousu = " . $codemp[1] . " ";
                 } else {
@@ -3686,12 +3686,12 @@ class empenho
 
         if (isset($oFiltro->dtemissini) && isset($oFiltro->dtemissfim)) {
             if (!empty($oFiltro->dtemissini)) {
-                $dtDataIni = split("/", $oFiltro->dtemissini);
+                $dtDataIni = preg_split("#\\/#m", $oFiltro->dtemissini);
                 $dtDataIni = $dtDataIni[2] . "-" . $dtDataIni[1] . "-" . $dtDataIni[0];
             }
 
             if (!empty($oFiltro->dtemissini)) {
-                $dtDataFim = split("/", $oFiltro->dtemissfim);
+                $dtDataFim = preg_split("#\\/#m", $oFiltro->dtemissfim);
                 $dtDataFim = $dtDataFim[2] . "-" . $dtDataFim[1] . "-" . $dtDataFim[0];
             }
 
@@ -6082,7 +6082,7 @@ class empenho
      *
      * @return bool
      */
-    public static function possuiLancamentoDeControle($iNumeroEmpenho, $iAno = null, array $aDocumentos)
+    public static function possuiLancamentoDeControle($iNumeroEmpenho, $iAno = null, array $aDocumentos = [])
     {
 
         $sDocumentos = implode(',', $aDocumentos);

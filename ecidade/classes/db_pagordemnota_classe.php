@@ -52,7 +52,7 @@ class cl_pagordemnota {
                  e71_anulado = bool = Anulado 
                  ";
    //funcao construtor da classe 
-   function cl_pagordemnota() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pagordemnota"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_pagordemnota {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e71_codord = ($this->e71_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codord"]:$this->e71_codord);
-       $this->e71_codnota = ($this->e71_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codnota"]:$this->e71_codnota);
+       $this->e71_codord = ($this->e71_codord === 0 || $this->e71_codord === 0.0 || $this->e71_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codord"]:$this->e71_codord);
+       $this->e71_codnota = ($this->e71_codnota === 0 || $this->e71_codnota === 0.0 || $this->e71_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codnota"]:$this->e71_codnota);
        $this->e71_anulado = ($this->e71_anulado == "f"?@$GLOBALS["HTTP_POST_VARS"]["e71_anulado"]:$this->e71_anulado);
      }else{
-       $this->e71_codord = ($this->e71_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codord"]:$this->e71_codord);
-       $this->e71_codnota = ($this->e71_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codnota"]:$this->e71_codnota);
+       $this->e71_codord = ($this->e71_codord === 0 || $this->e71_codord === 0.0 || $this->e71_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codord"]:$this->e71_codord);
+       $this->e71_codnota = ($this->e71_codnota === 0 || $this->e71_codnota === 0.0 || $this->e71_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codnota"]:$this->e71_codnota);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_pagordemnota {
      }
        $this->e71_codord = $e71_codord; 
        $this->e71_codnota = $e71_codnota; 
-     if(($this->e71_codord == null) || ($this->e71_codord == "") ){ 
+     if(($this->e71_codord == null) || ($this->e71_codord === 0 || $this->e71_codord === 0.0 || $this->e71_codord == "") ){ 
        $this->erro_sql = " Campo e71_codord nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_pagordemnota {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e71_codnota == null) || ($this->e71_codnota == "") ){ 
+     if(($this->e71_codnota == null) || ($this->e71_codnota === 0 || $this->e71_codnota === 0.0 || $this->e71_codnota == "") ){ 
        $this->erro_sql = " Campo e71_codnota nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_pagordemnota {
    function sql_query ( $e71_codord=null,$e71_codnota=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_pagordemnota {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_pagordemnota {
    function sql_query_file ( $e71_codord=null,$e71_codnota=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_pagordemnota {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_pagordemnota {
  function sql_query_valorordem ( $e71_codord=null,$e71_codnota=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_pagordemnota {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

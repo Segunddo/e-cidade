@@ -63,7 +63,7 @@ class cl_matordemanul {
                  m37_motivo = text = Motivo da Anulação 
                  ";
    //funcao construtor da classe 
-   function cl_matordemanul() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matordemanul"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,7 +80,7 @@ class cl_matordemanul {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m37_sequencial = ($this->m37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_sequencial"]:$this->m37_sequencial);
+       $this->m37_sequencial = ($this->m37_sequencial === 0 || $this->m37_sequencial === 0.0 || $this->m37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_sequencial"]:$this->m37_sequencial);
        $this->m37_hora = ($this->m37_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_hora"]:$this->m37_hora);
        if($this->m37_data == ""){
          $this->m37_data_dia = ($this->m37_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_data_dia"]:$this->m37_data_dia);
@@ -90,12 +90,12 @@ class cl_matordemanul {
             $this->m37_data = $this->m37_data_ano."-".$this->m37_data_mes."-".$this->m37_data_dia;
          }
        }
-       $this->m37_usuario = ($this->m37_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_usuario"]:$this->m37_usuario);
-       $this->m37_empanul = ($this->m37_empanul == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_empanul"]:$this->m37_empanul);
-       $this->m37_tipo = ($this->m37_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_tipo"]:$this->m37_tipo);
+       $this->m37_usuario = ($this->m37_usuario === 0 || $this->m37_usuario === 0.0 || $this->m37_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_usuario"]:$this->m37_usuario);
+       $this->m37_empanul = ($this->m37_empanul === 0 || $this->m37_empanul === 0.0 || $this->m37_empanul == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_empanul"]:$this->m37_empanul);
+       $this->m37_tipo = ($this->m37_tipo === 0 || $this->m37_tipo === 0.0 || $this->m37_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_tipo"]:$this->m37_tipo);
        $this->m37_motivo = ($this->m37_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_motivo"]:$this->m37_motivo);
      }else{
-       $this->m37_sequencial = ($this->m37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_sequencial"]:$this->m37_sequencial);
+       $this->m37_sequencial = ($this->m37_sequencial === 0 || $this->m37_sequencial === 0.0 || $this->m37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m37_sequencial"]:$this->m37_sequencial);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_matordemanul {
          $this->m37_sequencial = $m37_sequencial; 
        }
      }
-     if(($this->m37_sequencial == null) || ($this->m37_sequencial == "") ){ 
+     if(($this->m37_sequencial == null) || ($this->m37_sequencial === 0 || $this->m37_sequencial === 0.0 || $this->m37_sequencial == "") ){ 
        $this->erro_sql = " Campo m37_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -489,7 +489,7 @@ class cl_matordemanul {
    function sql_query ( $m37_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_matordemanul {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_matordemanul {
    function sql_query_file ( $m37_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_matordemanul {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

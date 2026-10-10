@@ -66,9 +66,9 @@ class cl_orcreserva
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->o80_codres = ($this->o80_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_codres"]:$this->o80_codres);
-       $this->o80_anousu = ($this->o80_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_anousu"]:$this->o80_anousu);
-       $this->o80_coddot = ($this->o80_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_coddot"]:$this->o80_coddot);
+       $this->o80_codres = ($this->o80_codres === 0 || $this->o80_codres === 0.0 || $this->o80_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_codres"]:$this->o80_codres);
+       $this->o80_anousu = ($this->o80_anousu === 0 || $this->o80_anousu === 0.0 || $this->o80_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_anousu"]:$this->o80_anousu);
+       $this->o80_coddot = ($this->o80_coddot === 0 || $this->o80_coddot === 0.0 || $this->o80_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_coddot"]:$this->o80_coddot);
        if($this->o80_dtfim == ""){
          $this->o80_dtfim_dia = ($this->o80_dtfim_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_dtfim_dia"]:$this->o80_dtfim_dia);
          $this->o80_dtfim_mes = ($this->o80_dtfim_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_dtfim_mes"]:$this->o80_dtfim_mes);
@@ -93,11 +93,11 @@ class cl_orcreserva
             $this->o80_dtlanc = $this->o80_dtlanc_ano."-".$this->o80_dtlanc_mes."-".$this->o80_dtlanc_dia;
          }
        }
-       $this->o80_valor = ($this->o80_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_valor"]:$this->o80_valor);
+       $this->o80_valor = ($this->o80_valor === 0 || $this->o80_valor === 0.0 || $this->o80_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_valor"]:$this->o80_valor);
        $this->o80_descr = ($this->o80_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_descr"]:$this->o80_descr);
        $this->o80_planoorcamentariolinhapacto = ($this->o80_planoorcamentariolinhapacto == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_planoorcamentariolinhapacto"]:$this->o80_planoorcamentariolinhapacto);
      }else{
-       $this->o80_codres = ($this->o80_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_codres"]:$this->o80_codres);
+       $this->o80_codres = ($this->o80_codres === 0 || $this->o80_codres === 0.0 || $this->o80_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o80_codres"]:$this->o80_codres);
      }
    }
 
@@ -194,7 +194,7 @@ class cl_orcreserva
          $this->o80_codres = $o80_codres; 
        }
      }
-     if(($this->o80_codres == null) || ($this->o80_codres == "") ){ 
+     if(($this->o80_codres == null) || ($this->o80_codres === 0 || $this->o80_codres === 0.0 || $this->o80_codres == "") ){ 
        $this->erro_sql = " Campo o80_codres não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -701,7 +701,7 @@ class cl_orcreserva
   function sql_query_reservas ( $o80_codres=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -752,7 +752,7 @@ class cl_orcreserva
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_pagordemdescontolanc {
                  e33_conlancam = int4 = Código do Lançamento 
                  ";
    //funcao construtor da classe 
-   function cl_pagordemdescontolanc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pagordemdescontolanc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_pagordemdescontolanc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e33_sequencial = ($this->e33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e33_sequencial"]:$this->e33_sequencial);
-       $this->e33_pagordemdesconto = ($this->e33_pagordemdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["e33_pagordemdesconto"]:$this->e33_pagordemdesconto);
-       $this->e33_conlancam = ($this->e33_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["e33_conlancam"]:$this->e33_conlancam);
+       $this->e33_sequencial = ($this->e33_sequencial === 0 || $this->e33_sequencial === 0.0 || $this->e33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e33_sequencial"]:$this->e33_sequencial);
+       $this->e33_pagordemdesconto = ($this->e33_pagordemdesconto === 0 || $this->e33_pagordemdesconto === 0.0 || $this->e33_pagordemdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["e33_pagordemdesconto"]:$this->e33_pagordemdesconto);
+       $this->e33_conlancam = ($this->e33_conlancam === 0 || $this->e33_conlancam === 0.0 || $this->e33_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["e33_conlancam"]:$this->e33_conlancam);
      }else{
-       $this->e33_sequencial = ($this->e33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e33_sequencial"]:$this->e33_sequencial);
+       $this->e33_sequencial = ($this->e33_sequencial === 0 || $this->e33_sequencial === 0.0 || $this->e33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e33_sequencial"]:$this->e33_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_pagordemdescontolanc {
          $this->e33_sequencial = $e33_sequencial; 
        }
      }
-     if(($this->e33_sequencial == null) || ($this->e33_sequencial == "") ){ 
+     if(($this->e33_sequencial == null) || ($this->e33_sequencial === 0 || $this->e33_sequencial === 0.0 || $this->e33_sequencial == "") ){ 
        $this->erro_sql = " Campo e33_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_pagordemdescontolanc {
    function sql_query ( $e33_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_pagordemdescontolanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_pagordemdescontolanc {
    function sql_query_file ( $e33_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_pagordemdescontolanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

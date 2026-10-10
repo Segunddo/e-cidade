@@ -74,18 +74,18 @@ class cl_orcdotacao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->o58_anousu = ($this->o58_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_anousu"]:$this->o58_anousu);
-       $this->o58_coddot = ($this->o58_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_coddot"]:$this->o58_coddot);
-       $this->o58_orgao = ($this->o58_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_orgao"]:$this->o58_orgao);
-       $this->o58_unidade = ($this->o58_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_unidade"]:$this->o58_unidade);
-       $this->o58_funcao = ($this->o58_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_funcao"]:$this->o58_funcao);
-       $this->o58_subfuncao = ($this->o58_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_subfuncao"]:$this->o58_subfuncao);
+       $this->o58_anousu = ($this->o58_anousu === 0 || $this->o58_anousu === 0.0 || $this->o58_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_anousu"]:$this->o58_anousu);
+       $this->o58_coddot = ($this->o58_coddot === 0 || $this->o58_coddot === 0.0 || $this->o58_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_coddot"]:$this->o58_coddot);
+       $this->o58_orgao = ($this->o58_orgao === 0 || $this->o58_orgao === 0.0 || $this->o58_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_orgao"]:$this->o58_orgao);
+       $this->o58_unidade = ($this->o58_unidade === 0 || $this->o58_unidade === 0.0 || $this->o58_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_unidade"]:$this->o58_unidade);
+       $this->o58_funcao = ($this->o58_funcao === 0 || $this->o58_funcao === 0.0 || $this->o58_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_funcao"]:$this->o58_funcao);
+       $this->o58_subfuncao = ($this->o58_subfuncao === 0 || $this->o58_subfuncao === 0.0 || $this->o58_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_subfuncao"]:$this->o58_subfuncao);
        $this->o58_programa = ($this->o58_programa === ""?@$GLOBALS["HTTP_POST_VARS"]["o58_programa"]:$this->o58_programa);
-       $this->o58_projativ = ($this->o58_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_projativ"]:$this->o58_projativ);
-       $this->o58_codele = ($this->o58_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_codele"]:$this->o58_codele);
-       $this->o58_codigo = ($this->o58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_codigo"]:$this->o58_codigo);
-       $this->o58_valor = ($this->o58_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_valor"]:$this->o58_valor);
-       $this->o58_instit = ($this->o58_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_instit"]:$this->o58_instit);
+       $this->o58_projativ = ($this->o58_projativ === 0 || $this->o58_projativ === 0.0 || $this->o58_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_projativ"]:$this->o58_projativ);
+       $this->o58_codele = ($this->o58_codele === 0 || $this->o58_codele === 0.0 || $this->o58_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_codele"]:$this->o58_codele);
+       $this->o58_codigo = ($this->o58_codigo === 0 || $this->o58_codigo === 0.0 || $this->o58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_codigo"]:$this->o58_codigo);
+       $this->o58_valor = ($this->o58_valor === 0 || $this->o58_valor === 0.0 || $this->o58_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_valor"]:$this->o58_valor);
+       $this->o58_instit = ($this->o58_instit === 0 || $this->o58_instit === 0.0 || $this->o58_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_instit"]:$this->o58_instit);
        $this->o58_localizadorgastos = ($this->o58_localizadorgastos === ""?@$GLOBALS["HTTP_POST_VARS"]["o58_localizadorgastos"]:$this->o58_localizadorgastos);
        if($this->o58_datacriacao == ""){
          $this->o58_datacriacao_dia = ($this->o58_datacriacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_datacriacao_dia"]:$this->o58_datacriacao_dia);
@@ -96,10 +96,10 @@ class cl_orcdotacao
          }
        }
        $this->o58_concarpeculiar = ($this->o58_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_concarpeculiar"]:$this->o58_concarpeculiar);
-       $this->o58_esferaorcamentaria = ($this->o58_esferaorcamentaria == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_esferaorcamentaria"]:$this->o58_esferaorcamentaria);
+       $this->o58_esferaorcamentaria = ($this->o58_esferaorcamentaria === 0 || $this->o58_esferaorcamentaria === 0.0 || $this->o58_esferaorcamentaria == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_esferaorcamentaria"]:$this->o58_esferaorcamentaria);
      }else{
-       $this->o58_anousu = ($this->o58_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_anousu"]:$this->o58_anousu);
-       $this->o58_coddot = ($this->o58_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_coddot"]:$this->o58_coddot);
+       $this->o58_anousu = ($this->o58_anousu === 0 || $this->o58_anousu === 0.0 || $this->o58_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_anousu"]:$this->o58_anousu);
+       $this->o58_coddot = ($this->o58_coddot === 0 || $this->o58_coddot === 0.0 || $this->o58_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o58_coddot"]:$this->o58_coddot);
      }
    }
 
@@ -223,7 +223,7 @@ class cl_orcdotacao
      }
        $this->o58_anousu = $o58_anousu;
        $this->o58_coddot = $o58_coddot;
-     if(($this->o58_anousu == null) || ($this->o58_anousu == "") ){
+     if(($this->o58_anousu == null) || ($this->o58_anousu === 0 || $this->o58_anousu === 0.0 || $this->o58_anousu == "") ){
        $this->erro_sql = " Campo o58_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -231,7 +231,7 @@ class cl_orcdotacao
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o58_coddot == null) || ($this->o58_coddot == "") ){
+     if(($this->o58_coddot == null) || ($this->o58_coddot === 0 || $this->o58_coddot === 0.0 || $this->o58_coddot == "") ){
        $this->erro_sql = " Campo o58_coddot não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -68,7 +68,7 @@ class cl_empautitem
                  ";
 
     //funcao construtor da classe
-    function cl_empautitem()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("empautitem");
@@ -90,19 +90,19 @@ class cl_empautitem
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e55_autori = ($this->e55_autori == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_autori"] : $this->e55_autori);
-            $this->e55_item = ($this->e55_item == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_item"] : $this->e55_item);
-            $this->e55_sequen = ($this->e55_sequen == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_sequen"] : $this->e55_sequen);
-            $this->e55_quant = ($this->e55_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_quant"] : $this->e55_quant);
-            $this->e55_vltot = ($this->e55_vltot == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_vltot"] : $this->e55_vltot);
+            $this->e55_autori = ($this->e55_autori === 0 || $this->e55_autori === 0.0 || $this->e55_autori == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_autori"] : $this->e55_autori);
+            $this->e55_item = ($this->e55_item === 0 || $this->e55_item === 0.0 || $this->e55_item == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_item"] : $this->e55_item);
+            $this->e55_sequen = ($this->e55_sequen === 0 || $this->e55_sequen === 0.0 || $this->e55_sequen == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_sequen"] : $this->e55_sequen);
+            $this->e55_quant = ($this->e55_quant === 0 || $this->e55_quant === 0.0 || $this->e55_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_quant"] : $this->e55_quant);
+            $this->e55_vltot = ($this->e55_vltot === 0 || $this->e55_vltot === 0.0 || $this->e55_vltot == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_vltot"] : $this->e55_vltot);
             $this->e55_descr = ($this->e55_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_descr"] : $this->e55_descr);
-            $this->e55_codele = ($this->e55_codele == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_codele"] : $this->e55_codele);
-            $this->e55_vlrun = ($this->e55_vlrun == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_vlrun"] : $this->e55_vlrun);
+            $this->e55_codele = ($this->e55_codele === 0 || $this->e55_codele === 0.0 || $this->e55_codele == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_codele"] : $this->e55_codele);
+            $this->e55_vlrun = ($this->e55_vlrun === 0 || $this->e55_vlrun === 0.0 || $this->e55_vlrun == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_vlrun"] : $this->e55_vlrun);
             $this->e55_servicoquantidade = ($this->e55_servicoquantidade == "f" ? @$GLOBALS["HTTP_POST_VARS"]["e55_servicoquantidade"] : $this->e55_servicoquantidade);
-            $this->e55_matunid = ($this->e55_matunid == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_matunid"] : $this->e55_matunid);
+            $this->e55_matunid = ($this->e55_matunid === 0 || $this->e55_matunid === 0.0 || $this->e55_matunid == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_matunid"] : $this->e55_matunid);
         } else {
-            $this->e55_autori = ($this->e55_autori == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_autori"] : $this->e55_autori);
-            $this->e55_sequen = ($this->e55_sequen == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_sequen"] : $this->e55_sequen);
+            $this->e55_autori = ($this->e55_autori === 0 || $this->e55_autori === 0.0 || $this->e55_autori == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_autori"] : $this->e55_autori);
+            $this->e55_sequen = ($this->e55_sequen === 0 || $this->e55_sequen === 0.0 || $this->e55_sequen == "" ? @$GLOBALS["HTTP_POST_VARS"]["e55_sequen"] : $this->e55_sequen);
         }
     }
 
@@ -163,7 +163,7 @@ class cl_empautitem
         }
         $this->e55_autori = $e55_autori;
         $this->e55_sequen = $e55_sequen;
-        if (($this->e55_autori == null) || ($this->e55_autori == "")) {
+        if (($this->e55_autori == null) || ($this->e55_autori === 0 || $this->e55_autori === 0.0 || $this->e55_autori == "")) {
             $this->erro_sql = " Campo e55_autori não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -171,7 +171,7 @@ class cl_empautitem
             $this->erro_status = "0";
             return false;
         }
-        if (($this->e55_sequen == null) || ($this->e55_sequen == "")) {
+        if (($this->e55_sequen == null) || ($this->e55_sequen === 0 || $this->e55_sequen === 0.0 || $this->e55_sequen == "")) {
             $this->erro_sql = " Campo e55_sequen não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

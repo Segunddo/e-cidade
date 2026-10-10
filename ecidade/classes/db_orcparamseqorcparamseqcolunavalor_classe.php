@@ -60,7 +60,7 @@ class cl_orcparamseqorcparamseqcolunavalor {
                  o117_anousu = int4 = Ano do Valor
                  ";
    //funcao construtor da classe
-   function cl_orcparamseqorcparamseqcolunavalor() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcparamseqorcparamseqcolunavalor");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_orcparamseqorcparamseqcolunavalor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o117_sequencial = ($this->o117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_sequencial"]:$this->o117_sequencial);
-       $this->o117_orcparamseqorcparamseqcoluna = ($this->o117_orcparamseqorcparamseqcoluna == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_orcparamseqorcparamseqcoluna"]:$this->o117_orcparamseqorcparamseqcoluna);
-       $this->o117_linha = ($this->o117_linha == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_linha"]:$this->o117_linha);
+       $this->o117_sequencial = ($this->o117_sequencial === 0 || $this->o117_sequencial === 0.0 || $this->o117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_sequencial"]:$this->o117_sequencial);
+       $this->o117_orcparamseqorcparamseqcoluna = ($this->o117_orcparamseqorcparamseqcoluna === 0 || $this->o117_orcparamseqorcparamseqcoluna === 0.0 || $this->o117_orcparamseqorcparamseqcoluna == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_orcparamseqorcparamseqcoluna"]:$this->o117_orcparamseqorcparamseqcoluna);
+       $this->o117_linha = ($this->o117_linha === 0 || $this->o117_linha === 0.0 || $this->o117_linha == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_linha"]:$this->o117_linha);
        $this->o117_valor = ($this->o117_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_valor"]:$this->o117_valor);
-       $this->o117_instit = ($this->o117_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_instit"]:$this->o117_instit);
-       $this->o117_periodo = ($this->o117_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_periodo"]:$this->o117_periodo);
-       $this->o117_anousu = ($this->o117_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_anousu"]:$this->o117_anousu);
+       $this->o117_instit = ($this->o117_instit === 0 || $this->o117_instit === 0.0 || $this->o117_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_instit"]:$this->o117_instit);
+       $this->o117_periodo = ($this->o117_periodo === 0 || $this->o117_periodo === 0.0 || $this->o117_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_periodo"]:$this->o117_periodo);
+       $this->o117_anousu = ($this->o117_anousu === 0 || $this->o117_anousu === 0.0 || $this->o117_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_anousu"]:$this->o117_anousu);
      }else{
-       $this->o117_sequencial = ($this->o117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_sequencial"]:$this->o117_sequencial);
+       $this->o117_sequencial = ($this->o117_sequencial === 0 || $this->o117_sequencial === 0.0 || $this->o117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o117_sequencial"]:$this->o117_sequencial);
      }
    }
    // funcao para inclusao
@@ -163,7 +163,7 @@ class cl_orcparamseqorcparamseqcolunavalor {
          $this->o117_sequencial = $o117_sequencial;
        }
      }
-     if(($this->o117_sequencial == null) || ($this->o117_sequencial == "") ){
+     if(($this->o117_sequencial == null) || ($this->o117_sequencial === 0 || $this->o117_sequencial === 0.0 || $this->o117_sequencial == "") ){
        $this->erro_sql = " Campo o117_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

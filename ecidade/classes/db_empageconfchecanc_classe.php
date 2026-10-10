@@ -54,7 +54,7 @@ class cl_empageconfchecanc {
                  e93_valor = float4 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_empageconfchecanc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empageconfchecanc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,10 +71,10 @@ class cl_empageconfchecanc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e93_codcheque = ($this->e93_codcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_codcheque"]:$this->e93_codcheque);
-       $this->e93_codmov = ($this->e93_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_codmov"]:$this->e93_codmov);
+       $this->e93_codcheque = ($this->e93_codcheque === 0 || $this->e93_codcheque === 0.0 || $this->e93_codcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_codcheque"]:$this->e93_codcheque);
+       $this->e93_codmov = ($this->e93_codmov === 0 || $this->e93_codmov === 0.0 || $this->e93_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_codmov"]:$this->e93_codmov);
        $this->e93_cheque = ($this->e93_cheque == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_cheque"]:$this->e93_cheque);
-       $this->e93_valor = ($this->e93_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_valor"]:$this->e93_valor);
+       $this->e93_valor = ($this->e93_valor === 0 || $this->e93_valor === 0.0 || $this->e93_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_valor"]:$this->e93_valor);
      }else{
      }
    }
@@ -306,7 +306,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $oid = null,$campos="empageconfchecanc.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -327,7 +327,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -339,7 +339,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -357,7 +357,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

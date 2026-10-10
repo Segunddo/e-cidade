@@ -63,7 +63,7 @@ class cl_pagordem {
                  e50_anousu = int4 = Ano da Ordem
                  ";
    //funcao construtor da classe
-   function cl_pagordem() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pagordem");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_pagordem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e50_codord = ($this->e50_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_codord"]:$this->e50_codord);
-       $this->e50_numemp = ($this->e50_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_numemp"]:$this->e50_numemp);
+       $this->e50_codord = ($this->e50_codord === 0 || $this->e50_codord === 0.0 || $this->e50_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_codord"]:$this->e50_codord);
+       $this->e50_numemp = ($this->e50_numemp === 0 || $this->e50_numemp === 0.0 || $this->e50_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_numemp"]:$this->e50_numemp);
        if($this->e50_data == ""){
          $this->e50_data_dia = ($this->e50_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_data_dia"]:$this->e50_data_dia);
          $this->e50_data_mes = ($this->e50_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_data_mes"]:$this->e50_data_mes);
@@ -91,11 +91,11 @@ class cl_pagordem {
          }
        }
        $this->e50_obs = ($this->e50_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_obs"]:$this->e50_obs);
-       $this->e50_id_usuario = ($this->e50_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_id_usuario"]:$this->e50_id_usuario);
+       $this->e50_id_usuario = ($this->e50_id_usuario === 0 || $this->e50_id_usuario === 0.0 || $this->e50_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_id_usuario"]:$this->e50_id_usuario);
        $this->e50_hora = ($this->e50_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_hora"]:$this->e50_hora);
-       $this->e50_anousu = ($this->e50_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_anousu"]:$this->e50_anousu);
+       $this->e50_anousu = ($this->e50_anousu === 0 || $this->e50_anousu === 0.0 || $this->e50_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_anousu"]:$this->e50_anousu);
      }else{
-       $this->e50_codord = ($this->e50_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_codord"]:$this->e50_codord);
+       $this->e50_codord = ($this->e50_codord === 0 || $this->e50_codord === 0.0 || $this->e50_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e50_codord"]:$this->e50_codord);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_pagordem {
          $this->e50_codord = $e50_codord;
        }
      }
-     if(($this->e50_codord == null) || ($this->e50_codord == "") ){
+     if(($this->e50_codord == null) || ($this->e50_codord === 0 || $this->e50_codord === 0.0 || $this->e50_codord == "") ){
        $this->erro_sql = " Campo e50_codord nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -45,11 +45,11 @@ class cl_empempenhooutrosdados
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->e171_numdadosemp = ($this->e171_numdadosemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e171_numdadosemp"]:$this->e171_numdadosemp);
-            $this->e171_numemp = ($this->e171_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e171_numemp"]:$this->e171_numemp);
+            $this->e171_numdadosemp = ($this->e171_numdadosemp === 0 || $this->e171_numdadosemp === 0.0 || $this->e171_numdadosemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e171_numdadosemp"]:$this->e171_numdadosemp);
+            $this->e171_numemp = ($this->e171_numemp === 0 || $this->e171_numemp === 0.0 || $this->e171_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e171_numemp"]:$this->e171_numemp);
             $this->e171_dados = ($this->e171_dados == ""?@$GLOBALS["HTTP_POST_VARS"]["e171_dados"]:$this->e171_dados);
         } else {
-            $this->e171_numdadosemp = ($this->e171_numdadosemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e171_numdadosemp"]:$this->e171_numdadosemp);
+            $this->e171_numdadosemp = ($this->e171_numdadosemp === 0 || $this->e171_numdadosemp === 0.0 || $this->e171_numdadosemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e171_numdadosemp"]:$this->e171_numdadosemp);
         }
     }
 
@@ -89,7 +89,7 @@ class cl_empempenhooutrosdados
                 $this->e171_numdadosemp = $e171_numdadosemp;
             }
         }
-        if (($this->e171_numdadosemp == null) || ($this->e171_numdadosemp == "")) {
+        if (($this->e171_numdadosemp == null) || ($this->e171_numdadosemp === 0 || $this->e171_numdadosemp === 0.0 || $this->e171_numdadosemp == "")) {
             $this->erro_sql = " Campo e171_numdadosemp não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

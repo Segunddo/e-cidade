@@ -45,13 +45,13 @@ class cl_emppreautorizacaounidade
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->exercicio = ($this->exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["exercicio"]:$this->exercicio);
-            $this->orgao_id = ($this->orgao_id == ""?@$GLOBALS["HTTP_POST_VARS"]["orgao_id"]:$this->orgao_id);
-            $this->unidade_id = ($this->unidade_id == ""?@$GLOBALS["HTTP_POST_VARS"]["unidade_id"]:$this->unidade_id);
+            $this->exercicio = ($this->exercicio === 0 || $this->exercicio === 0.0 || $this->exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["exercicio"]:$this->exercicio);
+            $this->orgao_id = ($this->orgao_id === 0 || $this->orgao_id === 0.0 || $this->orgao_id == ""?@$GLOBALS["HTTP_POST_VARS"]["orgao_id"]:$this->orgao_id);
+            $this->unidade_id = ($this->unidade_id === 0 || $this->unidade_id === 0.0 || $this->unidade_id == ""?@$GLOBALS["HTTP_POST_VARS"]["unidade_id"]:$this->unidade_id);
         } else {
-            $this->exercicio = ($this->exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["exercicio"]:$this->exercicio);
-            $this->orgao_id = ($this->orgao_id == ""?@$GLOBALS["HTTP_POST_VARS"]["orgao_id"]:$this->orgao_id);
-            $this->unidade_id = ($this->unidade_id == ""?@$GLOBALS["HTTP_POST_VARS"]["unidade_id"]:$this->unidade_id);
+            $this->exercicio = ($this->exercicio === 0 || $this->exercicio === 0.0 || $this->exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["exercicio"]:$this->exercicio);
+            $this->orgao_id = ($this->orgao_id === 0 || $this->orgao_id === 0.0 || $this->orgao_id == ""?@$GLOBALS["HTTP_POST_VARS"]["orgao_id"]:$this->orgao_id);
+            $this->unidade_id = ($this->unidade_id === 0 || $this->unidade_id === 0.0 || $this->unidade_id == ""?@$GLOBALS["HTTP_POST_VARS"]["unidade_id"]:$this->unidade_id);
         }
     }
 
@@ -61,7 +61,7 @@ class cl_emppreautorizacaounidade
         $this->exercicio = $exercicio;
         $this->orgao_id = $orgao_id;
         $this->unidade_id = $unidade_id;
-        if (($this->exercicio == null) || ($this->exercicio == "")) {
+        if (($this->exercicio == null) || ($this->exercicio === 0 || $this->exercicio === 0.0 || $this->exercicio == "")) {
             $this->erro_sql = " Campo exercicio não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -69,7 +69,7 @@ class cl_emppreautorizacaounidade
             $this->erro_status = "0";
             return false;
         }
-        if (($this->orgao_id == null) || ($this->orgao_id == "")) {
+        if (($this->orgao_id == null) || ($this->orgao_id === 0 || $this->orgao_id === 0.0 || $this->orgao_id == "")) {
             $this->erro_sql = " Campo orgao_id não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -77,7 +77,7 @@ class cl_emppreautorizacaounidade
             $this->erro_status = "0";
             return false;
         }
-        if (($this->unidade_id == null) || ($this->unidade_id == "")) {
+        if (($this->unidade_id == null) || ($this->unidade_id === 0 || $this->unidade_id === 0.0 || $this->unidade_id == "")) {
             $this->erro_sql = " Campo unidade_id não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

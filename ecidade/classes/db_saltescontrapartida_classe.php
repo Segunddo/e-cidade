@@ -52,7 +52,7 @@ class cl_saltescontrapartida {
                  k103_contrapartida = int4 = Contrapartida 
                  ";
    //funcao construtor da classe 
-   function cl_saltescontrapartida() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("saltescontrapartida"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_saltescontrapartida {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k103_sequencial = ($this->k103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k103_sequencial"]:$this->k103_sequencial);
-       $this->k103_saltes = ($this->k103_saltes == ""?@$GLOBALS["HTTP_POST_VARS"]["k103_saltes"]:$this->k103_saltes);
-       $this->k103_contrapartida = ($this->k103_contrapartida == ""?@$GLOBALS["HTTP_POST_VARS"]["k103_contrapartida"]:$this->k103_contrapartida);
+       $this->k103_sequencial = ($this->k103_sequencial === 0 || $this->k103_sequencial === 0.0 || $this->k103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k103_sequencial"]:$this->k103_sequencial);
+       $this->k103_saltes = ($this->k103_saltes === 0 || $this->k103_saltes === 0.0 || $this->k103_saltes == ""?@$GLOBALS["HTTP_POST_VARS"]["k103_saltes"]:$this->k103_saltes);
+       $this->k103_contrapartida = ($this->k103_contrapartida === 0 || $this->k103_contrapartida === 0.0 || $this->k103_contrapartida == ""?@$GLOBALS["HTTP_POST_VARS"]["k103_contrapartida"]:$this->k103_contrapartida);
      }else{
-       $this->k103_sequencial = ($this->k103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k103_sequencial"]:$this->k103_sequencial);
+       $this->k103_sequencial = ($this->k103_sequencial === 0 || $this->k103_sequencial === 0.0 || $this->k103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k103_sequencial"]:$this->k103_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_saltescontrapartida {
          $this->k103_sequencial = $k103_sequencial; 
        }
      }
-     if(($this->k103_sequencial == null) || ($this->k103_sequencial == "") ){ 
+     if(($this->k103_sequencial == null) || ($this->k103_sequencial === 0 || $this->k103_sequencial === 0.0 || $this->k103_sequencial == "") ){ 
        $this->erro_sql = " Campo k103_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_saltescontrapartida {
    function sql_query ( $k103_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_saltescontrapartida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_saltescontrapartida {
    function sql_query_file ( $k103_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_saltescontrapartida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_saltescontrapartida {
    function sql_query_contrapartida ( $k103_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_saltescontrapartida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
