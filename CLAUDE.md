@@ -2233,8 +2233,26 @@ Evolução: **14 divergentes → 4**, com 5 defeitos reais corrigidos no caminho
 
 O padrão `$r = db_query(...); pg_numrows($r);` sem checar `$r` é sistêmico. No 5.6 passava
 `false` adiante e a função devolvia `false` (que `== 0`); no PHP 8 é `TypeError` fatal.
-Ocorre sempre que a consulta traz **zero linhas** — por isso aparece muito neste banco de
-exemplo, que tem várias tabelas do Cemitério vazias.
+
+**⚠ CORREÇÃO (medida depois do `arr`): a causa NÃO é tabela vazia.** Este arquivo registrava
+que o defeito "ocorre sempre que a consulta traz zero linhas". Está errado — verificado nos
+dois runtimes:
+
+```
+consulta VALIDA com zero linhas  ->  resultado normal, pg_numrows() = 0
+SQL INVALIDA                     ->  false
+```
+
+`pg_query()` só devolve `false` quando **a própria SQL falha**. Os ~112 pontos guardados ao
+longo de 11 módulos não são tabelas vazias: são **consultas quebradas**, defeitos
+pré-existentes que o 5.6 engolia. Exemplo real, de `arr2_rellistadqd002.php`:
+
+```
+ERRO: coluna "declaracaoquitacao.ar30_exercicio" deve aparecer na clausula GROUP BY
+```
+
+Esse `GROUP BY` malformado erra no PostgreSQL **independentemente da versão do PHP**; a única
+diferença é que o 5.6 passa o `false` adiante e o 8.5 fatala.
 
 | Arquivo do núcleo | Chamadas não protegidas |
 |---|---|
@@ -2257,6 +2275,45 @@ em ~136 pontos sem evidência de que precisavam mudar, e traz risco próprio —
 O procedimento é: página quebra → ler `extension/log/error.log` → corrigir aquele ponto →
 rodar a bateria das 113 páginas para confirmar que nada mais mudou. Os números acima ficam
 registrados como estimativa de esforço restante, não como lista de tarefas.
+
+#### ✅ A decisão de não varrer em massa, agora MEDIDA
+
+A pergunta "não dá para automatizar isso?" foi levantada e medida, em vez de respondida por
+hábito:
+
+| | |
+|---|---|
+| Chamadas `pg_num*` sem guarda no universo do `arr` | **1.083** em 526 arquivos |
+| Quantas de fato precisaram de guarda | **1** |
+| Idem no `dvr` | 685 no universo, 4 necessárias |
+| `pg_result`/`pg_fetch_result` na base inteira | **84.077** — 81% do total |
+| **Risco da varredura** (resultado comparado com `===` a jusante) | **25 pontos na base** |
+
+A taxa de acerto de uma varredura seria de **~0,1%**. E o risco é concreto, não teórico: em
+`con2_razaodespesa002.php:170` há `if ($rows === 0)`. Com a guarda devolvendo `0`, a condição
+passa a ser verdadeira onde no 5.6 (`false === 0`) era falsa. **Varrer em massa introduziria
+regressão em 25 pontos para prevenir cerca de um por módulo.**
+
+#### ✅ O que DÁ para automatizar: a descoberta, pelo log do PostgreSQL
+
+Como toda falha é erro de SQL, **o PostgreSQL já registra todas**. Uma passada da bateria com o
+log capturado lista todos os pontos de uma vez, em vez de descobrir um por rodada:
+
+```bash
+docker logs --since 20m ecidade_database 2>&1 | grep -aA1 'ERRO:'
+```
+
+**O log está em PORTUGUÊS** (`ERRO:` / `INSTRUÇÃO:`), por causa do locale `pt_BR.ISO-8859-1` do
+cluster. Um `grep 'ERROR:'` não acha nada — e falha em silêncio, como as outras armadilhas deste
+arquivo. `log_min_error_statement` já vem em `error` e `logging_collector` está `off`, então os
+erros saem no stderr do container; não é preciso configurar nada.
+
+Validado ponta a ponta: revertendo a guarda de `arr2_rellistadqd002.php`, a tela volta a dar 500
+no 8.5 e o log aponta a consulta exata.
+
+**Ganho medido:** isso troca N rodadas de bateria por 1. O custo real do método nunca foi o
+número de guardas, e sim a iteração — `fis` precisou de 2 rodadas, **`iss` de 4**, `dvr` e `arr`
+de 1.
 
 **Deixado intencionalmente sem tocar:** `libs/db_libsys.php:180` usa
 `session_is_registered("DB_NBASE")`, função removida no PHP 5.4 mas **polyfilled** por
@@ -2335,6 +2392,11 @@ Com `itbi` vazia, qualquer guia informada cai nesse ramo. O `:8080` e o `:8085` 
 **2. Vazio que vira FATAL — é regressão.** O código passa o resultado falso adiante para
 `pg_*`, que o 5.6 tolerava e o PHP 8 rejeita com `TypeError`. Foi a causa das 8 telas do
 Cemitério que quebravam só no 8.5, e das guardas que fomos acrescentando ao núcleo.
+
+> **Ressalva medida depois do `arr`:** este caso 2 **não é causado por tabela vazia**. Consulta
+> válida sobre tabela vazia devolve resultado normal com `numrows = 0`. O `false` vem de **SQL
+> inválida** — ver a correção na seção das guardas `pg_*`. A coincidência com tabelas vazias
+> neste banco é real, mas o mecanismo é outro.
 
 **Variante: a tabela com UMA linha, e ela é justamente o valor óbvio de teste.** Terceiro
 alarme falso vindo dos dados deste banco. Em *Jurídico → Advogados → Inclusão*, a inclusão

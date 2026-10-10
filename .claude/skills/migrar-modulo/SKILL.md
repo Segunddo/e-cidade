@@ -301,6 +301,29 @@ normaliza os identificadores aleatórios e **confirma a divergência refazendo o
 acusar — relatório em PDF carrega horário dentro do fluxo comprimido, fora do alcance de
 qualquer regex, e gera falso positivo intermitente.
 
+### Antes de diagnosticar: o log do PostgreSQL lista TODAS as falhas de uma vez
+
+A maioria das divergências "quebra só no 8.5" é `pg_*` sobre resultado `false`. E `pg_query()`
+só devolve `false` quando **a SQL falha** — não quando a tabela está vazia. Logo o PostgreSQL
+já registrou todas, e uma passada da bateria basta:
+
+```bash
+# ANTES de rodar a bateria, anote o horario; DEPOIS:
+docker logs --since 20m ecidade_database 2>&1 | grep -aA1 'ERRO:'
+```
+
+**O log está em PORTUGUES** (`ERRO:` / `INSTRUÇÃO:`) por causa do locale `pt_BR.ISO-8859-1`.
+`grep 'ERROR:'` não acha nada e falha em silêncio. Nada precisa ser configurado:
+`log_min_error_statement` já é `error` e os erros saem no stderr do container.
+
+Cada par `ERRO:` + `INSTRUÇÃO:` aponta uma consulta quebrada — e o ponto de chamada que precisa
+de guarda. Isso troca N rodadas de bateria por 1 (o `iss` precisou de 4).
+
+**Não varra `pg_*` em massa.** Medido: 1.083 chamadas sem guarda no universo do `arr`, e só 1
+precisava. E há 25 pontos na base onde o resultado é comparado com `===` — a guarda devolve `0`
+onde o 5.6 devolvia `false`, e `false === 0` é falso. A varredura introduziria regressão em 25
+pontos para prevenir cerca de um por módulo.
+
 ### Diagnosticar cada divergência
 
 ```bash
