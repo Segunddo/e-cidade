@@ -65,16 +65,17 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** migrando a **área Tributário** módulo a módulo. 11 de 16 concluídos.
+**Onde paramos:** **FASE A CONCLUÍDA** — os 13 prefixos exclusivos da área Tributário estão
+portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compartilhado (Fase B).
 
 | | |
 |---|---|
-| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` · `iss` · `dvr` · `arr` Arrecadação — **11 de 16** |
+| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` · `iss` · `dvr` · `arr` · `tri` · `inf` — **13 de 16** |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tra)[0-9]*_` |
-| **Próximo módulo** | **`tri` (33 telas, 28 arquivos a alterar)** e **`inf` (30 telas, 16 arquivos)** — os dois últimos prefixos exclusivos da Fase A. Medidos: **não** foram cobertos incidentalmente, ao contrário do que este arquivo supunha. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra)[0-9]*_` — **1.813 telas** |
+| **Próximo passo** | **Fase B** — os 6 prefixos compartilhados (`con` 1.559, `cai` 740, `cad` 523, `pro` 337, `pre` 54, `amb` 31). Exige um `map` do nginx gerado do banco: eles não podem ir inteiros para o 8.5 sem arrastar Financeiro e Patrimonial. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
@@ -811,7 +812,7 @@ location ~* ^(?:/w/[0-9]+)?/(?:cem|iss|fis|agu|arr|div|jur|itb|mar|tri|dvr|inf|n
 gerado a partir do banco, porque `cad` e `con` não podem ir inteiros para o 8.5 sem arrastar
 Financeiro e Patrimonial junto.
 
-**Progresso da Fase A:** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ · `fis` ✅ · `iss` ✅ · `dvr` ✅ · `arr` ✅ — restam `tri` (28 arquivos) e `inf` (16).
+**Progresso da Fase A: CONCLUÍDA.** `cem` ✅ · `itb`/`itbi` ✅ · `agu` ✅ · `jur` ✅ · `div` ✅ · `mar` ✅ · `not` ✅ · `fis` ✅ · `iss` ✅ · `dvr` ✅ · `arr` ✅ · `tri` ✅ · `inf` ✅ — 13 de 13 prefixos exclusivos.
 
 ### ⚠ ORDEM REVISTA: `jur` antes de `div`, e `arr` por último
 
@@ -2036,6 +2037,64 @@ que os hospedam". **Medido depois do `arr`, não entraram:**
 
 São 44 arquivos no total — os dois menores lotes restantes da área, menores que o `mar` (19) e o
 `not` (17) só em telas, não em arquivos. A Fase A **não está concluída** até eles entrarem.
+
+### Estado: MÓDULOS `tri` e `inf` PORTADOS ✅ — 12º e 13º, e a FASE A FECHA
+
+Os dois últimos prefixos exclusivos da área, portados no mesmo lote por serem pequenos.
+
+| | `tri` | `inf` |
+|---|---|---|
+| Telas (`^tri[0-9]*_` / `^inf[0-9]*_`) | 33 (`tri1_`, `tri4_`) | 30 (`inf1_`, `inf2_`, `inf4_`) |
+| Universo pelas sete frentes | 83 | 89 |
+| Já pago pelos portes anteriores | 25 | 42 |
+| **Alterados** | **28** | **16** |
+| `php -l` nos dois runtimes | 145/145 no universo combinado, 0 erros | |
+| Instanciação das classes | 21/21 idênticas | 28/28 idênticas |
+| Caminho de escrita | 616 linhas, 0 divergentes | 720 linhas, 0 divergentes |
+| **Bateria de telas** | **33/33** | **30/30** |
+
+Correções somadas nos dois: 63 guardas `== <literal>`, 53 `split`/`ereg` → `preg_*`, 29
+`parse_str`+`extract`, 13 construtores, 2 guardas `pg_*`, 1 `${$var}`. Nenhuma categoria nova.
+O Rector aplicou 4 regras no `tri` e 5 no `inf`, **todas já vetadas** — a denylist não cresceu.
+
+**Sexta e sétima baterias perfeitas**, e as duas divergências iniciais foram a mesma categoria
+de sempre: `pg_numrows` sobre resultado falso, uma em cada módulo.
+
+**O passo novo do log do PostgreSQL funcionou de primeira.** Na bateria do `tri` ele apontou a
+consulta culpada antes de eu abrir o log da aplicação:
+
+```
+ERRO: erro de sintaxe no fim da entrada no caractere 219
+INSTRUÇÃO: select k09_sequencial, k37_descr from cadtipo inner join cadtipoitem ...
+```
+
+Confirma a premissa corrigida: a SQL está **truncada** — não é tabela vazia.
+
+### 📊 FASE A CONCLUÍDA — o número que resume o trabalho
+
+| | |
+|---|---|
+| Prefixos exclusivos portados e roteados | **13 de 13** |
+| **Telas servidas pelo PHP 8.5** | **1.813** |
+| **Telas comparadas byte-a-byte** | **1.799 idênticas de 1.813 — 99,2%** |
+| Divergências remanescentes | **14**, todas caracterizadas |
+| Módulos com bateria **perfeita** | **7** — `div`, `mar`, `not`, `dvr`, `arr`, `tri`, `inf` |
+
+As 14 divergências, por módulo: `itb` 4, `fis` 3, `iss` 3, `agu` 2, `cem` 1, `jur` 1. **Nenhuma
+é defeito de migração** — são de três tipos já documentados nas seções de cada módulo: telas que
+quebram **no 5.6** e funcionam no 8.5 (defeito pré-existente da referência), fragmentos de
+include que não são telas, e variáveis/objetos nunca instanciados no próprio código legado.
+
+Ordem em que foram portados, com o tamanho do lote efetivo:
+
+```
+cem 187   itb 192   agu 171   jur 137   div 158   mar  19   not  17
+fis 384   iss 280   dvr 197   arr 116   tri  28   inf  16      + dbagata 211 e o nucleo
+```
+
+**O `arr`, previsto como o maior (343), saiu em 116** — ver a correção na seção dele. A ordem
+adotada (grandes no meio, `arr` por último) foi a que minimizou o custo total, porque cada
+módulo pré-paga o resíduo compartilhado do seguinte.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

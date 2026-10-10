@@ -79,14 +79,14 @@ $where = " 1 = 1 ";
 
      if(!(substr($i02_data,4,1) =='-') && !(substr($i02_data,7,1)=='-')) {
 
-		  	 $data = split("/",$i02_data);
+		  	 $data = preg_split("#\\/#m",$i02_data);
      	   $i02_data_dia = @$data[0];
   		   $i02_data_mes = @$data[1];
 	  	   $i02_data_ano = @$data[2];
 			   $i02_data     = $i02_data_ano."-".$i02_data_mes."-".$i02_data_dia;
 		 }else if(substr($i02_data,4,1)=='-' && substr($i02_data,7,1)=='-') {
 
-		  	 $data = split("-",$i02_data);
+		  	 $data = preg_split("#\\-#m",$i02_data);
 				 $i02_data_dia = @$data[1];
   		   $i02_data_mes = @$data[2];
 	  	   $i02_data_ano = @$data[0];

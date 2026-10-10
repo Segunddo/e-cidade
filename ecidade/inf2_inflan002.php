@@ -28,7 +28,8 @@
 set_time_limit(0);
 include(modification("libs/db_sql.php"));
 require(modification("fpdf151/pdf.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $sql = "select * from inflan where upper(i01_codigo) = upper('$codigo')";
@@ -123,7 +124,7 @@ group by exerc,tipo
 
 }
 $result = db_query($sql);
-$num = pg_numrows($result);
+$num = ($result ? pg_numrows($result) : 0);
 if ($num == 0 ){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existe valores do inflator '.$codigo.' para o período '.$exercicioi.'/'.$exerciciof);
 }
