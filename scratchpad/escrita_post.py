@@ -30,7 +30,17 @@ def sh(c, entrada=None):
 def sequencias(t):
     """Sequencias da tabela. O e-cidade as cria SEM OWNED BY, entao
     pg_get_serial_sequence nao as enxerga -- casa pelo nome."""
-    q = "select relname from pg_class where relkind='S' and relname like '" + t + "\\_%\\_seq'"
+    # A convencao NAO e uniforme. Tres formas vistas:
+    #   cemiterioisencao_cm34_sequencial_seq   <tabela>_<campo>_seq
+    #   cem_legista_seq                        <modulo>_<tabela>_seq   <- a tabela no MEIO
+    #   <tabela>_seq
+    # Casar so a primeira deixava a sequencia de `legista` para tras, e o INSERT
+    # do segundo runtime saia com o numero seguinte -- divergencia benigna que
+    # parecia defeito de migracao.
+    q = ("select relname from pg_class where relkind='S' and ("
+         "relname like '" + t + "\\_%\\_seq' or "
+         "relname like '%\\_" + t + "\\_seq' or "
+         "relname = '" + t + "_seq')")
     r = sh(DB + ' -tAc "' + q + '"')
     return [x for x in r.stdout.decode("latin1").split() if x]
 
@@ -68,16 +78,26 @@ def linhas_log():
     return int(sh("docker logs ecidade_database 2>&1 | wc -l").stdout.strip() or 0)
 
 PREFIXO = re.compile(rb'^\d{4}-\d{2}-\d{2} [\d:.]+ [^ ]+ \[\d+\] LOG:\s+[^:]*:\s*')
+# QUALQUER linha de log do PostgreSQL, nao so as de LOG: -- ERRO:, INSTRUCAO:,
+# DICA: e AVISO: tambem comecam assim. Sem distinguir, a juncao de continuacao
+# engolia a linha de ERRO (com timestamp e PID proprios) para dentro do
+# statement, e duas execucoes do MESMO insert divergiam so pelo relogio.
+LINHA_LOG = re.compile(rb'^\d{4}-\d{2}-\d{2} [\d:.]+ [^ ]+ \[\d+\] ')
+
 def capturar(desde):
-    """Statements emitidos depois de `desde`, sem o prefixo de log, juntando
-    continuacoes de linha."""
+    """Statements emitidos depois de `desde`, sem o prefixo de log, juntando as
+    continuacoes de linha -- e SO as continuacoes."""
     bruto = sh(f"docker logs ecidade_database 2>&1 | tail -n +{desde+1}").stdout
-    out = []
+    out, aberto = [], False
     for l in bruto.split(b'\n'):
         m = PREFIXO.match(l)
-        if m:   out.append(bytearray(l[m.end():]))
-        elif out and l.strip(): out[-1] += b' ' + l.strip()
-    return [bytes(x) for x in out]
+        if m:
+            out.append(bytearray(l[m.end():])); aberto = True
+        elif LINHA_LOG.match(l):
+            aberto = False                       # outra linha de log encerra o statement
+        elif aberto and l.strip():
+            out[-1] += b' ' + l.strip()
+    return [bytes(x) for x in out if x.strip()]
 
 NORM = [(re.compile(rb"'\d{4}-\d{2}-\d{2}[ T][\d:.]+'"), b"'<TS>'"),   # timestamps
         (re.compile(rb'\s+'), b' ')]
