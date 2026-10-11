@@ -117,6 +117,16 @@ for s in na[:6]: print(f"    5.6> {s.decode('latin1')[:140]}")
 for s in nb[:6]: print(f"    8.5> {s.decode('latin1')[:140]}")
 ea, eb = na, nb
 
+# INCONCLUSIVO != IDENTICO. Com os dois lados vazios o teste nao exercitou nada
+# -- payload errado, tela inexistente, validacao recusando antes do INSERT. Sem
+# esta guarda o harness APROVA o nada, que e o pior resultado possivel: da a
+# impressao de cobertura onde nao houve nenhuma.
+if not ea and not eb:
+    print("  == INCONCLUSIVO: nenhuma escrita de negocio nos DOIS runtimes ==")
+    print("     o POST nao chegou a gravar. Conferir: a tela existe? o nome do")
+    print("     botao de submit esta certo? a validacao recusou antes do INSERT?")
+    sys.exit(2)
+
 if ea == eb:
     print("  == SQL de escrita de NEGOCIO IDENTICO nos dois runtimes ==")
 else:
