@@ -1,0 +1,24 @@
+# Serviço extra com PHP 8.4, para usar JUNTO com o docker-compose.yml.
+# Use só DEPOIS de instalar o sistema com o PHP 5.6 (veja CONTRIBUINDO.md).
+#
+#   docker compose -f docker-compose.yml -f docker-compose.php84.yml up -d --build ecidade_php84
+#
+# O sistema abre em http://localhost:8084 (o PHP 5.6 continua em :8080).
+# NÃO rode docker/install.sh neste container: o composer.json chama php5.6 fixo.
+services:
+  ecidade_php84:
+    build:
+      context: ./docker/php84-apache
+    container_name: ecidade_php84
+    ports:
+      - "8084:80"
+    environment:
+      DB_HOST: ecidade_database
+      DB_PORT: 5432
+      DB_DATABASE: ecidade
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+    volumes:
+      - ./:/var/www/html/
+    networks:
+      - ecidade

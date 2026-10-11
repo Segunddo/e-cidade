@@ -3,6 +3,8 @@
 Bem-vindo ao **e-Cidade** rodando em containers Docker.  
 Este projeto foi preparado para simplificar ao máximo a instalação e execução da aplicação. 🚀
 
+> **Equipe da migração PHP 8.4:** o passo a passo completo (com a correção da senha e o serviço PHP 8.4) está no `CONTRIBUINDO.md`, na raiz do repositório.
+
 ### Instalação do Docker
  - [docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
  - [docker-compose](https://docs.docker.com/compose/install/#install-compose)
@@ -13,10 +15,10 @@ Este projeto foi preparado para simplificar ao máximo a instalação e execuç�
 
 ## 📥 1. Clonar o projeto
 
-Clone este repositório na sua máquina:  
+Clone o repositório da equipe na sua máquina (dentro do WSL, se estiver no Windows):  
 
 ```bash
-git clone http://softwarepublico.gov.br/gitlab/e-cidade/e-cidade.git
+git clone https://github.com/Segunddo/e-cidade.git
 ```
 Entre na pasta do projeto
 ```bash
@@ -71,6 +73,8 @@ Após a instalação, acesse o sistema nos endereços:
 
 - **Login:** `dbseller`
 - **Senha:** `dbseller`
+
+> **Atenção:** neste banco a senha acima pode dar "Senha Inválida". Se acontecer, veja a correção no `CONTRIBUINDO.md`.
 
 &nbsp;
 
