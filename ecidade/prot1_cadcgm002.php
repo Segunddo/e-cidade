@@ -46,7 +46,8 @@
   require_once(modification("classes/db_cidadao_classe.php"));
   require_once(modification("model/logCgm.model.php"));
 
-  parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+  parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_POST_VARS);
   db_postmemory($HTTP_SERVER_VARS);
 
@@ -163,11 +164,11 @@
 						 </script>";
     if(isset($testanome) && !isset($inconsistenciaSimples)){
 
-	     $camp = split("\|",$valores);
+	     $camp = preg_split("#\\|#m",$valores);
 	     $vals = "";
 	     $vir = "";
 	     for($f=1;$f<count($camp);$f++){
-	       $vals .= $vir.$$camp[$f];
+	       $vals .= $vir.${$camp}[$f];
 	       $vir = ",";
 	     }
 	     if ( !isset($inconsistenciaSimples)){
@@ -403,11 +404,11 @@
        }
      }
      if(isset($testanome)){
-       $camp = split("\|",@$valores);
+       $camp = preg_split("#\\|#m",@$valores);
        $vals = "";
        $vir = "";
        for($f=1;$f<count($camp);$f++){
-         $vals .= $vir.$$camp[$f];
+         $vals .= $vir.${$camp}[$f];
 	 $vir = ",";
        }
        db_fim_transacao(); //descomentar

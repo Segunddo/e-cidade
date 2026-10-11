@@ -66,7 +66,8 @@ $clobrasenvioreg				 = new cl_obrasenvioreg;
 $clobrasenvioreghab			 = new cl_obrasenvioreghab;
 $clobrascaractarqsisobra = new cl_obrascaractarqsisobra;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $db_opcao = 1;
@@ -125,7 +126,7 @@ if(isset($reenviar)){
   @db_fieldsmemory($result,0);
 
   $resobras = $clobras->sql_record($clobras->sql_query("","*","ob01_codobra"));
-  
+
   $depart =  str_pad("SECRETARIA DE PLANEJAMENTO E URBANISMO",55," ",STR_PAD_RIGHT);
   $nomeinst = str_pad($nomeinst,55," ",STR_PAD_RIGHT);
   $munic = str_pad($munic,30," ",STR_PAD_RIGHT);
@@ -149,7 +150,7 @@ if(isset($reenviar)){
      $result = db_query($sql);
      db_fieldsmemory($result,0);
    }
-   
+
    if(isset($dtini_dia) && $dtini_dia != "" && isset($dtfim_dia) && $dtfim_dia != ""){
      $res_tem = $clobrasalvara->sql_record($clobrasalvara->sql_query(null,"*",null,"ob04_data between '$dtini' and  '$dtfim' "));
    } 	    
@@ -168,13 +169,13 @@ if(isset($reenviar)){
     db_fieldsmemory($resobras,$xx);
     $passa = false;
     //resultados pendentes na tabela
-    
+
     //select em obrasconstr pelo $ob01_codobra
     //faz um for nesse select pra pegar os habite-se das construcoes
     //se descobrir registro de habite-se que ainda nao existe em obrasenvioreghab passa = true;
-    
+
 		$resconstr = $clobrasconstr->sql_record($clobrasconstr->sql_query("","*","","ob08_codobra = $ob01_codobra"));
-    
+
 		for($xxx=0;$xxx<$clobrasconstr->numrows;$xxx++){
       db_fieldsmemory($resconstr,$xxx);    
 			$reshabite = $clobrashabite->sql_record($clobrashabite->sql_query("","*","","ob09_codconstr = $ob08_codconstr"));
@@ -197,7 +198,7 @@ if(isset($reenviar)){
 	if($numrowsreg == 0){
 	  $passa = true;
 	}
-	
+
       }
 
       if($passa == true){
@@ -222,13 +223,13 @@ if(isset($reenviar)){
 	  $codigo1 = $clobrasenvio->ob16_codobrasenvio;
 
 	  $primeiro = true;
-    
+
 	}
-	
+
       } else {
 	continue;
       }
-       
+
       $linha2="";
       $linha3="";
 
@@ -236,7 +237,7 @@ if(isset($reenviar)){
 	for($i=0;$i<$numrows;$i++){
 	  $contador++;
 	  db_fieldsmemory($resob,$i);
-	  
+
 	  $result = $clobraspropri->sql_record($clobraspropri->sql_query($ob01_codobra));
 	  if($clobraspropri->numrows > 0){
 	    db_fieldsmemory($result,0);
@@ -383,7 +384,7 @@ if(isset($reenviar)){
 	      echo "obra $ob01_codobra sem álvara<br>";
 	      continue;
 	    }
-	   
+
 
 
 	  }
@@ -508,7 +509,7 @@ if(isset($reenviar)){
 	    */
 	    continue;
 	  }
-	  
+
 		$rsSisObra = $clobrascaractarqsisobra->sql_record($clobrascaractarqsisobra->sql_query(null,"ob23_caractdestino as ob08_ocupacao",null,"ob23_caractorigem = {$ob08_ocupacao}"));
 		if ($clobrascaractarqsisobra->numrows > 0) {
 			db_fieldsmemory($rsSisObra,0);
@@ -516,7 +517,7 @@ if(isset($reenviar)){
 		 db_msgbox("Não está configurado a caracteristica para o arquivo SISOBRANET da ocupação: {$ob08_ocupacao}");
 		 db_redireciona("pro4_geralayout.php");
 		}
-		
+
 		$rsSisObra = $clobrascaractarqsisobra->sql_record($clobrascaractarqsisobra->sql_query(null,"ob23_caractdestino as ob08_tipolanc",null,"ob23_caractorigem = {$ob08_tipolanc}"));
 		if ($clobrascaractarqsisobra->numrows > 0) {
 			db_fieldsmemory($rsSisObra,0);
@@ -524,11 +525,11 @@ if(isset($reenviar)){
 		 db_msgbox("Não está configurado a caracteristica para o arquivo SISOBRANET da o tipo de lancamento: {$ob08_ocupacao}");
 		 db_redireciona("pro4_geralayout.php");
 		}
-		
+
 		$j13_descr = str_pad($j13_descr,20," ",STR_PAD_LEFT);
 	  $cep       = str_pad($cep,8,"0",STR_PAD_LEFT);
           $z01_uf    = str_pad($z01_uf,2," ",STR_PAD_LEFT);
-	  
+
 	  if (strlen($ob08_tipoconstr) < 5) {
 	    echo "obra $ob01_codobra com tipo de construção inválido<br>";
 	    continue;
@@ -583,13 +584,13 @@ if(isset($reenviar)){
 	    $resto .= substr($ob08_ocupacao,4,1);
 	    $resto .= substr($ob08_tipoconstr,4,1);
 	    $resto .= str_pad( $ob08_area,8,"0",STR_PAD_LEFT);
-	    
+
 	  }					  
 
           $j13_descr = substr($j13_descr,0,20);
           $cep       = str_pad($cep,8,"0",STR_PAD_RIGHT);
           $z01_uf    = str_pad($z01_uf,2," ",STR_PAD_RIGHT);
-	  
+
 	  $linha2 = $linha2.$ob04_alvara.$ob04_data.$ob01_nomeobra.$j14_nome.$j13_descr.$cep.$z01_uf.substr($codibge,0,6).$ddd.$ddd.$ddd.$ddd.$ddd.$ddd.$ddd.$ddd.$ob07_inicio.$ob07_fim.$resto.$ob07_unidades.$ob07_pavimentos;
 
 	  $clobrasenvioreg->ob17_codobra = $ob01_codobra;

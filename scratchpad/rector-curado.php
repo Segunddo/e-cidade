@@ -87,6 +87,15 @@ return RectorConfig::configure()
         // `($x)?$x:' '` -> `$x ?: ' '`. Parseia nos dois e e equivalente, mas e
         // modernizacao (grupo "c"), e o foco declarado nao e modernizar.
         Rector\Php53\Rector\Ternary\TernaryToElvisRector::class,
+
+        // 6o CRESCIMENTO (pro/con). Converte `break;` fora de laco em `return;`.
+        // MEDIDO no 5.6: break fora de laco e FATAL DE EXECUCAO ("Cannot
+        // break/continue 1 level") -- o script MORRE ali. Um `return` faz o 8.5
+        // voltar e seguir, que e comportamento novo. A correcao fiel ja decidida
+        // no `fis` e `exit;`, quando o break e alcancavel; quando nao e (linha
+        // anterior chama db_redireciona(), que termina em exit), remover equivale.
+        // A escolha depende da ALCANCABILIDADE, que a regra nao analisa.
+        Rector\Php70\Rector\Break_\BreakNotInLoopOrSwitchToReturnRector::class,
         Rector\Php70\Rector\FuncCall\RandomFunctionRector::class,   // random_int
         // As duas abaixo NAO estavam na denylist herdada do experimento do `div`:
         // elas nunca dispararam la. No `iss` dispararam, emitiram funcao inexistente

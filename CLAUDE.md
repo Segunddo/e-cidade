@@ -70,12 +70,12 @@ portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compa
 
 | | |
 |---|---|
-| Módulos portados | `cem` · `itb`/`itbi` · `agu` · `jur` · `div` · `mar` · `not` · `fis` · `iss` · `dvr` · `arr` · `tri` · `inf` — **13 de 16** |
+| Módulos portados | **16 de 16** — todos com 100% das telas de menu servidas pelo PHP 8.5 |
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra)[0-9]*_` — **1.813 telas** |
-| **Próximo passo** | **Fase B EM ANDAMENTO.** `amb` · `pre` · `cad` · `cai` ✅ (280 telas roteadas por `map`). Faltam `pro` 35, `con` 30, `prot` 4, `rec` 1, `dv` 1. Área em **985 de 1.056 telas (93,3%)**. |
+| **Próximo passo** | **ÁREA TRIBUTÁRIO CONCLUÍDA** — 16 de 16 módulos, **1.056 de 1.056 telas de menu**. Fases A e B fechadas. O que resta é das Fases 1-3 do workflow: Laravel, dependências mortas e PostgreSQL/UTF-8. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
@@ -2742,6 +2742,119 @@ a previsão da interseção.
 Economia: ~25 minutos de bateria trocados por ~3 segundos de interseção mais 2 minutos de
 amostra. E, mais importante que o tempo, a regra **explicita o motivo** de cada verificação
 em vez de rodar tudo por hábito.
+
+### Estado: `pro` · `con` · `prot` · `rec` · `dv` PORTADOS ✅ — e a ÁREA TRIBUTÁRIO FECHA
+
+Lote final da Fase B: os cinco prefixos que faltavam, somando **71 telas**.
+
+**É aqui que o escopo B se paga de forma decisiva.** Os prefixos inteiros custariam **1.483**
+arquivos; o universo das telas efetivamente roteadas custou **109** — 13,6× menos. O `con`
+sozinho custaria 1.019 arquivos para entregar 30 telas.
+
+| | |
+|---|---|
+| Telas roteadas | **71** (`pro` 35, `con` 30, `prot` 4, `rec` 1, `dv` 1) |
+| Universo das 7 frentes | 264 |
+| **Alterados** | **109** (prefixos inteiros: 1.483) |
+| `php -l` nos dois runtimes | **264/264, 0 erros** |
+| Instanciação das classes | **106/106 idênticas** |
+| **Bateria** | **71/71** |
+| Regressão nos 15 módulos | **zero** |
+
+Correções: 258 guardas `== <literal>`, 218 `split`/`ereg` → `preg_*`, 56 `parse_str`+`extract`,
+40 construtores, 6 `${$var}`, 4 `break` → `exit`, 1 guarda `pg_*`.
+
+### Denylist do Rector: 28 → 29 (SEXTA vez), e a regra contrariava uma decisão já medida
+
+**`BreakNotInLoopOrSwitchToReturnRector`** converte `break;` fora de laço em `return;`. O
+catálogo **já havia decidido essa categoria** na seção do `fis`, e contra ela:
+
+```
+PHP 5.6, break fora de laco:  imprime "antes " e MORRE
+                              ("Cannot break/continue 1 level")
+com `return;`:                o 8.5 volta e SEGUE -> comportamento novo
+```
+
+A correção fiel é **`exit;`** quando o `break` é alcançável; remover só equivale quando ele é
+inalcançável. **A escolha depende da alcançabilidade, que a regra não analisa.**
+
+Os 4 sítios (`con1_autoriza001.php`, `con1_edital002.php` ×2, `con1_edital003.php`) estão
+todos dentro de blocos `if ($obj->erro_status == '0') { $sqlerro = true; break; }` —
+**alcançáveis**, exatamente como `fis1_vistorias003.php`. Corrigidos para `exit;` à mão.
+
+São três dos **87 arquivos da base que só quebram no 8.5**. E de novo o `php -l` dirigiu:
+em `con1_edital002.php` ele apontou a linha 83, depois a 92 — e **não** apontou a 72, porque
+aquele `break` está dentro de um `for` e é legal. A ferramenta distinguiu o que o olho não
+distinguiria sem ler o bloco inteiro.
+
+### Onde o Rector ganha do `porta.py`, agora com caso concreto
+
+Este lote tinha **4 `split()` com separador não-literal** — a categoria que o `porta.py`
+**abortava** e que o `jur` documentou como perigosa. O Rector converteu os quatro
+corretamente:
+
+```php
+split(" +", $regs[2])   ->  preg_split("# +#m", $regs[2])    // POSIX "um ou mais espacos"
+split("\|", $valores)   ->  preg_split("#\|#m", $valores)    // pipe escapado = literal
+```
+
+É a terceira vantagem da AST listada no experimento do `div`, aparecendo na prática.
+
+### ⚠ A regra proporcional e a interseção medida DISCORDARAM — e vale registrar
+
+```
+arquivos alterados               108
+NUCLEO tocado                      1  -> fpdf151/pdf4.php
+modulos cujo universo intersecta   0  (vazio)
+```
+
+A regra manda **bateria completa** quando o núcleo é tocado; a interseção medida dizia que
+**nenhum** módulo verificado executa aquele arquivo. Verificado: `fpdf151/pdf4.php` é incluído
+por **um** arquivo em toda a base — `pro2_cartahabite002.php`, que está neste próprio lote.
+
+**A interseção estava certa; a heurística "pasta inteira = núcleo" disparou demais.** Rodei a
+bateria completa mesmo assim, por ser o lote que fecha a área — e deu linha de base nos 15.
+
+**Refinamento para a regra:** o critério de núcleo deveria ser por **arquivo alcançado**, não
+por pasta. `dbforms/db_funcoes.php` é carregado por tudo; `fpdf151/pdf4.php`, por um arquivo.
+A interseção com os universos já mede isso corretamente — a lista de pastas é redundante e
+mais conservadora do que precisa.
+
+### 🏁 ÁREA TRIBUTÁRIO CONCLUÍDA — os números que resumem o trabalho
+
+| | |
+|---|---|
+| **Módulos completos** | **16 de 16** |
+| **Telas de menu servidas pelo PHP 8.5** | **1.056 de 1.056 (100%)** |
+| Arquivos roteados | **2.160** — 1.813 por prefixo (`location`) + 347 por lista (`map`) |
+| **Telas comparadas byte-a-byte** | **2.222 idênticas de 2.236 — 99,4%** |
+| Divergências | **14**, todas caracterizadas, **nenhuma defeito de migração** |
+| Baterias **perfeitas** | **12** — `div`, `mar`, `not`, `dvr`, `arr`, `tri`, `inf`, `amb`, `pre`, `cad`, `cai`, e o lote final |
+
+Cobertura por módulo, todos em 100%:
+
+```
+ISSQN 182   Arrecadacao 172   Cadastro 170   Agua 109   Fiscal 97   Juridico 62
+Divida 57   Cemiterio 43   Projetos 35   Contrib 31   ITBI 25   Notificacoes 25
+Marcas 17   Diversos 15   Inflat 8   Meio Ambiente 8
+```
+
+Custo efetivo, por fase:
+
+```
+Fase A  13 prefixos exclusivos, roteados por `location`    ~2.113 arquivos alterados
+Fase B   9 prefixos compartilhados, roteados por `map`       ~  909 arquivos alterados
+         (os prefixos inteiros teriam custado 2.072)
+```
+
+**A decisão de escopo da Fase B economizou cerca de 1.160 arquivos** e evitou migrar
+Contabilidade, RH e Patrimonial, que estão fora do escopo acordado.
+
+**O que NÃO está feito, e precisa estar claro no relatório:** o 100% é de *telas de menu*. Os
+dois terços de cada prefixo que vivem fora do menu — popups, `.RPC.php`, subtelas — continuam
+servidos pelo 5.6. Estão **portados** (entram pelo universo das sete frentes) e funcionam nos
+dois runtimes, mas não estão roteados. Rotear o resto exigiria estender o `map` com os
+arquivos fora do menu, que o banco não sabe classificar por área.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

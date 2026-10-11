@@ -52,7 +52,7 @@ class cl_obrascaractarqsisobra {
                  ob23_caractorigem = int4 = Origem 
                  ";
    //funcao construtor da classe 
-   function cl_obrascaractarqsisobra() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obrascaractarqsisobra"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_obrascaractarqsisobra {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob23_sequencial = ($this->ob23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob23_sequencial"]:$this->ob23_sequencial);
-       $this->ob23_caractdestino = ($this->ob23_caractdestino == ""?@$GLOBALS["HTTP_POST_VARS"]["ob23_caractdestino"]:$this->ob23_caractdestino);
-       $this->ob23_caractorigem = ($this->ob23_caractorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["ob23_caractorigem"]:$this->ob23_caractorigem);
+       $this->ob23_sequencial = ($this->ob23_sequencial === 0 || $this->ob23_sequencial === 0.0 || $this->ob23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob23_sequencial"]:$this->ob23_sequencial);
+       $this->ob23_caractdestino = ($this->ob23_caractdestino === 0 || $this->ob23_caractdestino === 0.0 || $this->ob23_caractdestino == ""?@$GLOBALS["HTTP_POST_VARS"]["ob23_caractdestino"]:$this->ob23_caractdestino);
+       $this->ob23_caractorigem = ($this->ob23_caractorigem === 0 || $this->ob23_caractorigem === 0.0 || $this->ob23_caractorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["ob23_caractorigem"]:$this->ob23_caractorigem);
      }else{
-       $this->ob23_sequencial = ($this->ob23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob23_sequencial"]:$this->ob23_sequencial);
+       $this->ob23_sequencial = ($this->ob23_sequencial === 0 || $this->ob23_sequencial === 0.0 || $this->ob23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob23_sequencial"]:$this->ob23_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_obrascaractarqsisobra {
          $this->ob23_sequencial = $ob23_sequencial; 
        }
      }
-     if(($this->ob23_sequencial == null) || ($this->ob23_sequencial == "") ){ 
+     if(($this->ob23_sequencial == null) || ($this->ob23_sequencial === 0 || $this->ob23_sequencial === 0.0 || $this->ob23_sequencial == "") ){ 
        $this->erro_sql = " Campo ob23_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_obrascaractarqsisobra {
    function sql_query ( $ob23_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_obrascaractarqsisobra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_obrascaractarqsisobra {
    function sql_query_file ( $ob23_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_obrascaractarqsisobra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -37,7 +37,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_editaldoc_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $cledital     = new cl_edital;
 $cltabrec     = new cl_tabrec;
@@ -66,7 +67,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
   
   }
   
-  $dados=split("XX",$codigo);
+  $dados=preg_split("#XX#m",$codigo);
   for($r=0; $r<sizeof($dados); $r++){
       if($dados[$r]!=""){
         $cleditalproj->d10_codedi=$codedi;

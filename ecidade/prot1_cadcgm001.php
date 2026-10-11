@@ -111,13 +111,13 @@
             else "; 
          if (isset($testanome)) {
            
-          $camp = split("\|",$valores);
+          $camp = preg_split("#\\|#m",$valores);
           $vals = "";
           $vir = "";
           
           for ($f=1;$f<count($camp);$f++) {
             
-             $vals .= $vir.$$camp[$f];
+             $vals .= $vir.${$camp}[$f];
              $vir = ",";
            }
            if ($z01_cgc == "" && $z01_cpf == "") {
@@ -219,7 +219,7 @@
     $clcidadaocgm->incluir(null);
       
     if ($clcidadaocgm->erro_status == '0') {
-        
+
       db_query("rollback");
       $clcgm->erro_msg    = $clcidadaocgm->erro_msg;
       $clcgm->erro_status = "0";
@@ -231,7 +231,7 @@
     $clcidadao->alterar_where($ov02_sequencial,$ov02_seq,"ov02_sequencial = $ov02_sequencial and ov02_seq = $ov02_seq");
     
     if ($clcidadao->erro_status == '0') {
-        
+
       db_query("rollback");
       $clcgm->erro_msg    = $clcidadao->erro_msg;
       $clcgm->erro_status = "0";
@@ -242,11 +242,11 @@
    } // ------------------------ FIM NÃO ENTRA -----------------------------------------------   
    
    if (isset($testanome)) {
-     $camp = split("\|",$valores);
+     $camp = preg_split("#\\|#m",$valores);
      $vals = "";
      $vir = "";
      for ($f=1;$f<count($camp);$f++) {
-       $vals .= $vir.$$camp[$f];
+       $vals .= $vir.${$camp}[$f];
        $vir = ",";
      }
      $clcgm->erro(true,false);

@@ -57,7 +57,7 @@ class cl_obraslayout {
                  ob14_data = date = Data da emissão 
                  ";
    //funcao construtor da classe 
-   function cl_obraslayout() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obraslayout"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,9 +74,9 @@ class cl_obraslayout {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob14_seq = ($this->ob14_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ob14_seq"]:$this->ob14_seq);
-       $this->ob14_codobra = ($this->ob14_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob14_codobra"]:$this->ob14_codobra);
-       $this->ob14_codhab = ($this->ob14_codhab == ""?@$GLOBALS["HTTP_POST_VARS"]["ob14_codhab"]:$this->ob14_codhab);
+       $this->ob14_seq = ($this->ob14_seq === 0 || $this->ob14_seq === 0.0 || $this->ob14_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ob14_seq"]:$this->ob14_seq);
+       $this->ob14_codobra = ($this->ob14_codobra === 0 || $this->ob14_codobra === 0.0 || $this->ob14_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob14_codobra"]:$this->ob14_codobra);
+       $this->ob14_codhab = ($this->ob14_codhab === 0 || $this->ob14_codhab === 0.0 || $this->ob14_codhab == ""?@$GLOBALS["HTTP_POST_VARS"]["ob14_codhab"]:$this->ob14_codhab);
        if($this->ob14_data == ""){
          $this->ob14_data_dia = ($this->ob14_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ob14_data_dia"]:$this->ob14_data_dia);
          $this->ob14_data_mes = ($this->ob14_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ob14_data_mes"]:$this->ob14_data_mes);
@@ -86,7 +86,7 @@ class cl_obraslayout {
          }
        }
      }else{
-       $this->ob14_seq = ($this->ob14_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ob14_seq"]:$this->ob14_seq);
+       $this->ob14_seq = ($this->ob14_seq === 0 || $this->ob14_seq === 0.0 || $this->ob14_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ob14_seq"]:$this->ob14_seq);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_obraslayout {
          $this->ob14_seq = $ob14_seq; 
        }
      }
-     if(($this->ob14_seq == null) || ($this->ob14_seq == "") ){ 
+     if(($this->ob14_seq == null) || ($this->ob14_seq === 0 || $this->ob14_seq === 0.0 || $this->ob14_seq == "") ){ 
        $this->erro_sql = " Campo ob14_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -414,7 +414,7 @@ class cl_obraslayout {
    function sql_query ( $ob14_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_obraslayout {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_obraslayout {
    function sql_query_file ( $ob14_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -472,7 +472,7 @@ class cl_obraslayout {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

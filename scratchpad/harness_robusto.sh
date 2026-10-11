@@ -1,6 +1,10 @@
 #!/bin/sh
 # Roda o harness repetidamente: quando ele morre num arquivo, registra o culpado,
 # pula para o seguinte e continua. Sem isso, UM fatal esconde todo o resto da lista.
+#
+# SO SERVE para harness que emite UMA linha por entrada (instancia_classes.php).
+# O avanco e `i = i + linhas_de_saida + 1`; com escrita.php, que emite MUITAS linhas
+# por classe, a aritmetica pula a lista inteira. Para esse, rodar direto.
 C="$1"; LISTA=/tmp/cls.txt; OUT=/tmp/rb_$C.txt; SKIP=/tmp/skip_$C.txt
 : > "$OUT"; : > "$SKIP"
 total=$(wc -l < "$LISTA"); i=1

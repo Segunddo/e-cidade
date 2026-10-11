@@ -50,7 +50,7 @@ class cl_db_sistemaexterno {
                  db124_descricao = varchar(50) = Sistema Externo
                  ";
    //funcao construtor da classe
-   function cl_db_sistemaexterno() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sistemaexterno");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_db_sistemaexterno {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db124_sequencial = ($this->db124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db124_sequencial"]:$this->db124_sequencial);
+       $this->db124_sequencial = ($this->db124_sequencial === 0 || $this->db124_sequencial === 0.0 || $this->db124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db124_sequencial"]:$this->db124_sequencial);
        $this->db124_descricao = ($this->db124_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db124_descricao"]:$this->db124_descricao);
      }else{
-       $this->db124_sequencial = ($this->db124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db124_sequencial"]:$this->db124_sequencial);
+       $this->db124_sequencial = ($this->db124_sequencial === 0 || $this->db124_sequencial === 0.0 || $this->db124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db124_sequencial"]:$this->db124_sequencial);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_db_sistemaexterno {
        return false;
      }
        $this->db124_sequencial = $db124_sequencial;
-     if(($this->db124_sequencial == null) || ($this->db124_sequencial == "") ){
+     if(($this->db124_sequencial == null) || ($this->db124_sequencial === 0 || $this->db124_sequencial === 0.0 || $this->db124_sequencial == "") ){
        $this->erro_sql = " Campo db124_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -306,7 +306,7 @@ class cl_db_sistemaexterno {
    function sql_query ( $db124_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -327,7 +327,7 @@ class cl_db_sistemaexterno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -340,7 +340,7 @@ class cl_db_sistemaexterno {
    function sql_query_file ( $db124_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_db_sistemaexterno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

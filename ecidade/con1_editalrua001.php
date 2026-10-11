@@ -41,7 +41,8 @@ include(modification("classes/db_contlot_classe.php"));
 include(modification("classes/db_contlotv_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $cleditalrua           = new cl_editalrua;
 $cledital              = new cl_edital;
@@ -80,12 +81,12 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 
   if ($sqlerro == false) {
     $d02_contri = $cleditalrua->d02_contri;
-    $matriz= split("XX",$dados);
+    $matriz= preg_split("#XX#m",$dados);
     $tam=sizeof($matriz);
     //
     // For inserindo os servicos
 	//
-	
+
 	$aDados = explode("-", $oPost->dados);
 	$d04_forma = $aDados[6];
 
@@ -94,7 +95,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 
       if($matriz[$i]!=""){
 
-	$dad = split("-",$matriz[$i]);
+	$dad = preg_split("#\\-#m",$matriz[$i]);
 
 	$cleditalserv->d04_contri  = $d02_contri;
 	$cleditalserv->d04_tipos   = $dad[0];
@@ -118,7 +119,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 
 	} 
 
-	
+
 
 	//echo "<br><br><br>FORMA: $d04_forma ";
 
@@ -150,19 +151,19 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 		}	
 		$sD40_codigo = implode(", " , $a40Codigo);
 
-		
+
 		$d40_codigo = $sD40_codigo;
-		
+
 		//echo $d40_codigo; 
 
 		//die();
 
 
-		
+
 		if (  $cleditalproj->numrows > 0 ) {
 
 
-			
+
 		//	for (  $iLista = 0; $iLista < $cleditalproj->numrows;  $iLista++ )   {
 
 
@@ -171,7 +172,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 
 				//$d40_codigo = $oDados->d40_codigo;
 
-	
+
 
 
 
@@ -183,10 +184,10 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 	  //sql_query_file ( $d41_codigo=null,$d41_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
 
 	  //echo $sSqlprojmelhoriasmatric; die();
-	  
+
 
 	  $result_total=$clprojmelhoriasmatric->sql_record($sSqlprojmelhoriasmatric);
-	  
+
 //db_criatabela($result_total);
 
 
@@ -196,7 +197,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 	    $total_testada = 0;
       }
 
-	  
+
       $sSQlMatricula = $clprojmelhoriasmatric->sql_query(null,null," j01_idbql,
                                                                sum(d41_testada) as d41_testada, 
                                                                sum(d41_eixo) as d41_eixo, 
@@ -271,7 +272,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 
 
 		db_fieldsmemory($redital,$j); 
-		
+
 
 
 
@@ -283,8 +284,8 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 
 	      $valor_normal = $d04_vlrcal - (($d04_vlrcal * $d01_perc) / 100) ;
 		  $valor_contri = ($valor_normal * ($d41_testada + $d41_eixo) * $d02_profun);
-		  
-            
+
+
 
 
 
@@ -355,7 +356,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 	      //
 	      // Se Custo maior que a valorizacao entao custo fica a valorizacao 
 		  //
-		  
+
           $nValorCalculoReal = $nCusto;
 
 	      if ( $nCusto > $nValorizacao ) {
@@ -374,10 +375,10 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 	    $clcontlotv->d06_tipos  = $d04_tipos;
 	    $clcontlotv->d06_fracao = $d41_testada + $d41_eixo;
 		$clcontlotv->d06_valor  = $valor_contri;
-		
 
 
-		
+
+
 		$oDadosIncluir = new stdClass();
 		$oDadosIncluir->d06_contri         = $clcontlotv->d06_contri;
         $oDadosIncluir->d06_idbql          = $clcontlotv->d06_idbql;
@@ -421,7 +422,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
       if ($sqlerro == false) {
 
 		   $results=$cleditalruaproj->sql_record($cleditalruaproj->sql_query($d02_contri,"","d11_codproj"));
-		   
+
 		   /*
 	       if($cleditalruaproj->numrows>0){
 	         $cleditalruaproj->d11_contri=$d02_contri;
@@ -433,15 +434,15 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 	         }
 	       } 
 	   */
-		   
+
 	           if(isset($d40_codigo)){
 
 
 
-				
+
 		         foreach($a40Codigo as $d40_codigo) {
 
-					 
+
 					 $cleditalruaproj->d11_contri = $d02_contri;
 					 $cleditalruaproj->d11_codproj= $d40_codigo;
 					 $cleditalruaproj->incluir($d02_contri,$d40_codigo);
@@ -449,12 +450,12 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 						 $sqlerro = true;
 						 $erro_msg = $cleditalruaproj->erro_msg;
 						}
-						
+
 				}
 
 	           }
 	  }
-	  
+
 
 
 
@@ -477,7 +478,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Incluir
 
 
 	}
-	
+
   }
 
 /*

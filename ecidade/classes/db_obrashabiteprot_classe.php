@@ -50,7 +50,7 @@ class cl_obrashabiteprot {
                  ob19_codproc = int4 = Código do processo 
                  ";
    //funcao construtor da classe 
-   function cl_obrashabiteprot() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obrashabiteprot"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_obrashabiteprot {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob19_codhab = ($this->ob19_codhab == ""?@$GLOBALS["HTTP_POST_VARS"]["ob19_codhab"]:$this->ob19_codhab);
-       $this->ob19_codproc = ($this->ob19_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ob19_codproc"]:$this->ob19_codproc);
+       $this->ob19_codhab = ($this->ob19_codhab === 0 || $this->ob19_codhab === 0.0 || $this->ob19_codhab == ""?@$GLOBALS["HTTP_POST_VARS"]["ob19_codhab"]:$this->ob19_codhab);
+       $this->ob19_codproc = ($this->ob19_codproc === 0 || $this->ob19_codproc === 0.0 || $this->ob19_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ob19_codproc"]:$this->ob19_codproc);
      }else{
      }
    }
@@ -256,7 +256,7 @@ class cl_obrashabiteprot {
    function sql_query ( $oid = null,$campos="obrashabiteprot.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -284,7 +284,7 @@ class cl_obrashabiteprot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -296,7 +296,7 @@ class cl_obrashabiteprot {
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -314,7 +314,7 @@ class cl_obrashabiteprot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

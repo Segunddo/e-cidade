@@ -76,10 +76,10 @@ class cl_obras
     {
      if($exclusao==false){
        $this->ob01_arquitetoobra = ($this->ob01_arquitetoobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_arquitetoobra"]:$this->ob01_arquitetoobra);
-       $this->ob01_codobra = ($this->ob01_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_codobra"]:$this->ob01_codobra);
-       $this->ob01_responsavelprojeto = ($this->ob01_responsavelprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_responsavelprojeto"]:$this->ob01_responsavelprojeto);
+       $this->ob01_codobra = ($this->ob01_codobra === 0 || $this->ob01_codobra === 0.0 || $this->ob01_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_codobra"]:$this->ob01_codobra);
+       $this->ob01_responsavelprojeto = ($this->ob01_responsavelprojeto === 0 || $this->ob01_responsavelprojeto === 0.0 || $this->ob01_responsavelprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_responsavelprojeto"]:$this->ob01_responsavelprojeto);
        $this->ob01_nomeobra = ($this->ob01_nomeobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_nomeobra"]:$this->ob01_nomeobra);
-       $this->ob01_tiporesp = ($this->ob01_tiporesp == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_tiporesp"]:$this->ob01_tiporesp);
+       $this->ob01_tiporesp = ($this->ob01_tiporesp === 0 || $this->ob01_tiporesp === 0.0 || $this->ob01_tiporesp == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_tiporesp"]:$this->ob01_tiporesp);
        $this->ob01_regular = ($this->ob01_regular == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_regular"]:$this->ob01_regular);
        if($this->ob01_dtobra == ""){
          $this->ob01_dtobra_dia = ($this->ob01_dtobra_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_dtobra_dia"]:$this->ob01_dtobra_dia);
@@ -100,12 +100,12 @@ class cl_obras
          }
        }
        $this->ob01_obs = ($this->ob01_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_obs"]:$this->ob01_obs);
-       $this->ob01_numeroartprojeto = ($this->ob01_numeroartprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_numeroartprojeto"]:$this->ob01_numeroartprojeto);
-       $this->ob01_numerorrtprojeto = ($this->ob01_numerorrtprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_numerorrtprojeto"]:$this->ob01_numerorrtprojeto);
-       $this->ob01_numeroarttecnico = ($this->ob01_numeroarttecnico == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_numeroarttecnico"]:$this->ob01_numeroarttecnico);
-       $this->ob01_numerorrttecnico = ($this->ob01_numerorrttecnico == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_numerorrttecnico"]:$this->ob01_numerorrttecnico);
+       $this->ob01_numeroartprojeto = ($this->ob01_numeroartprojeto === 0 || $this->ob01_numeroartprojeto === 0.0 || $this->ob01_numeroartprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_numeroartprojeto"]:$this->ob01_numeroartprojeto);
+       $this->ob01_numerorrtprojeto = ($this->ob01_numerorrtprojeto === 0 || $this->ob01_numerorrtprojeto === 0.0 || $this->ob01_numerorrtprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_numerorrtprojeto"]:$this->ob01_numerorrtprojeto);
+       $this->ob01_numeroarttecnico = ($this->ob01_numeroarttecnico === 0 || $this->ob01_numeroarttecnico === 0.0 || $this->ob01_numeroarttecnico == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_numeroarttecnico"]:$this->ob01_numeroarttecnico);
+       $this->ob01_numerorrttecnico = ($this->ob01_numerorrttecnico === 0 || $this->ob01_numerorrttecnico === 0.0 || $this->ob01_numerorrttecnico == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_numerorrttecnico"]:$this->ob01_numerorrttecnico);
      }else{
-       $this->ob01_codobra = ($this->ob01_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_codobra"]:$this->ob01_codobra);
+       $this->ob01_codobra = ($this->ob01_codobra === 0 || $this->ob01_codobra === 0.0 || $this->ob01_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob01_codobra"]:$this->ob01_codobra);
      }
    }
 
@@ -214,7 +214,7 @@ class cl_obras
          $this->ob01_codobra = $ob01_codobra;
        }
      }
-     if(($this->ob01_codobra == null) || ($this->ob01_codobra == "") ){
+     if(($this->ob01_codobra == null) || ($this->ob01_codobra === 0 || $this->ob01_codobra === 0.0 || $this->ob01_codobra == "") ){
        $this->erro_sql = " Campo ob01_codobra não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -723,7 +723,7 @@ class cl_obras
 
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -761,7 +761,7 @@ class cl_obras
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];

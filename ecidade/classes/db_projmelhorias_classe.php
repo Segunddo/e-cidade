@@ -61,7 +61,7 @@ class cl_projmelhorias {
                  d40_profun = float8 = Profundidade 
                  ";
    //funcao construtor da classe 
-   function cl_projmelhorias() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("projmelhorias"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,7 +78,7 @@ class cl_projmelhorias {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d40_codigo = ($this->d40_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_codigo"]:$this->d40_codigo);
+       $this->d40_codigo = ($this->d40_codigo === 0 || $this->d40_codigo === 0.0 || $this->d40_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_codigo"]:$this->d40_codigo);
        if($this->d40_data == ""){
          $this->d40_data_dia = ($this->d40_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_data_dia"]:$this->d40_data_dia);
          $this->d40_data_mes = ($this->d40_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_data_mes"]:$this->d40_data_mes);
@@ -87,12 +87,12 @@ class cl_projmelhorias {
             $this->d40_data = $this->d40_data_ano."-".$this->d40_data_mes."-".$this->d40_data_dia;
          }
        }
-       $this->d40_login = ($this->d40_login == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_login"]:$this->d40_login);
-       $this->d40_codlog = ($this->d40_codlog == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_codlog"]:$this->d40_codlog);
+       $this->d40_login = ($this->d40_login === 0 || $this->d40_login === 0.0 || $this->d40_login == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_login"]:$this->d40_login);
+       $this->d40_codlog = ($this->d40_codlog === 0 || $this->d40_codlog === 0.0 || $this->d40_codlog == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_codlog"]:$this->d40_codlog);
        $this->d40_trecho = ($this->d40_trecho == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_trecho"]:$this->d40_trecho);
-       $this->d40_profun = ($this->d40_profun == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_profun"]:$this->d40_profun);
+       $this->d40_profun = ($this->d40_profun === 0 || $this->d40_profun === 0.0 || $this->d40_profun == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_profun"]:$this->d40_profun);
      }else{
-       $this->d40_codigo = ($this->d40_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_codigo"]:$this->d40_codigo);
+       $this->d40_codigo = ($this->d40_codigo === 0 || $this->d40_codigo === 0.0 || $this->d40_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d40_codigo"]:$this->d40_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_projmelhorias {
          $this->d40_codigo = $d40_codigo; 
        }
      }
-     if(($this->d40_codigo == null) || ($this->d40_codigo == "") ){ 
+     if(($this->d40_codigo == null) || ($this->d40_codigo === 0 || $this->d40_codigo === 0.0 || $this->d40_codigo == "") ){ 
        $this->erro_sql = " Campo d40_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_projmelhorias {
    function sql_query ( $d40_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_projmelhorias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_projmelhorias {
    function sql_query_file ( $d40_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_projmelhorias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -62,7 +62,7 @@ class cl_editalserv {
                  d04_vlrobra = int4 = Valor da Obra 
                  ";
    //funcao construtor da classe 
-   function cl_editalserv() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("editalserv"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,17 +79,17 @@ class cl_editalserv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d04_contri = ($this->d04_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_contri"]:$this->d04_contri);
-       $this->d04_tipos = ($this->d04_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_tipos"]:$this->d04_tipos);
-       $this->d04_quant = ($this->d04_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_quant"]:$this->d04_quant);
-       $this->d04_vlrcal = ($this->d04_vlrcal == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_vlrcal"]:$this->d04_vlrcal);
-       $this->d04_vlrval = ($this->d04_vlrval == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_vlrval"]:$this->d04_vlrval);
-       $this->d04_mult = ($this->d04_mult == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_mult"]:$this->d04_mult);
-       $this->d04_forma = ($this->d04_forma == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_forma"]:$this->d04_forma);
-       $this->d04_vlrobra = ($this->d04_vlrobra == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_vlrobra"]:$this->d04_vlrobra);
+       $this->d04_contri = ($this->d04_contri === 0 || $this->d04_contri === 0.0 || $this->d04_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_contri"]:$this->d04_contri);
+       $this->d04_tipos = ($this->d04_tipos === 0 || $this->d04_tipos === 0.0 || $this->d04_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_tipos"]:$this->d04_tipos);
+       $this->d04_quant = ($this->d04_quant === 0 || $this->d04_quant === 0.0 || $this->d04_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_quant"]:$this->d04_quant);
+       $this->d04_vlrcal = ($this->d04_vlrcal === 0 || $this->d04_vlrcal === 0.0 || $this->d04_vlrcal == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_vlrcal"]:$this->d04_vlrcal);
+       $this->d04_vlrval = ($this->d04_vlrval === 0 || $this->d04_vlrval === 0.0 || $this->d04_vlrval == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_vlrval"]:$this->d04_vlrval);
+       $this->d04_mult = ($this->d04_mult === 0 || $this->d04_mult === 0.0 || $this->d04_mult == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_mult"]:$this->d04_mult);
+       $this->d04_forma = ($this->d04_forma === 0 || $this->d04_forma === 0.0 || $this->d04_forma == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_forma"]:$this->d04_forma);
+       $this->d04_vlrobra = ($this->d04_vlrobra === 0 || $this->d04_vlrobra === 0.0 || $this->d04_vlrobra == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_vlrobra"]:$this->d04_vlrobra);
      }else{
-       $this->d04_contri = ($this->d04_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_contri"]:$this->d04_contri);
-       $this->d04_tipos = ($this->d04_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_tipos"]:$this->d04_tipos);
+       $this->d04_contri = ($this->d04_contri === 0 || $this->d04_contri === 0.0 || $this->d04_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_contri"]:$this->d04_contri);
+       $this->d04_tipos = ($this->d04_tipos === 0 || $this->d04_tipos === 0.0 || $this->d04_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d04_tipos"]:$this->d04_tipos);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_editalserv {
      }
        $this->d04_contri = $d04_contri; 
        $this->d04_tipos = $d04_tipos; 
-     if(($this->d04_contri == null) || ($this->d04_contri == "") ){ 
+     if(($this->d04_contri == null) || ($this->d04_contri === 0 || $this->d04_contri === 0.0 || $this->d04_contri == "") ){ 
        $this->erro_sql = " Campo d04_contri nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -159,7 +159,7 @@ class cl_editalserv {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d04_tipos == null) || ($this->d04_tipos == "") ){ 
+     if(($this->d04_tipos == null) || ($this->d04_tipos === 0 || $this->d04_tipos === 0.0 || $this->d04_tipos == "") ){ 
        $this->erro_sql = " Campo d04_tipos nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -504,7 +504,7 @@ class cl_editalserv {
    function sql_query ( $d04_contri=null,$d04_tipos=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_editalserv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -550,7 +550,7 @@ class cl_editalserv {
    function sql_query_file ( $d04_contri=null,$d04_tipos=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -579,7 +579,7 @@ class cl_editalserv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

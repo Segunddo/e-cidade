@@ -103,7 +103,7 @@ if(isset($oPost->alterar) || isset($oPost->incluir)){
 	db_fim_transacao();
 }
 
-if ( pg_num_rows($rsParProjetos) > 0 ) {
+if ( ($rsParProjetos ? pg_num_rows($rsParProjetos) : 0) > 0 ) {
 
 	$oParProjetos = db_utils::fieldsMemory($rsParProjetos,0);
 

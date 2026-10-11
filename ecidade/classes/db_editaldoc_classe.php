@@ -52,7 +52,7 @@ class cl_editaldoc {
                  d13_edital = int4 = Codigo Edital 
                  ";
    //funcao construtor da classe 
-   function cl_editaldoc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("editaldoc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_editaldoc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d13_sequencial = ($this->d13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_sequencial"]:$this->d13_sequencial);
-       $this->d13_db_documento = ($this->d13_db_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_db_documento"]:$this->d13_db_documento);
-       $this->d13_edital = ($this->d13_edital == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_edital"]:$this->d13_edital);
+       $this->d13_sequencial = ($this->d13_sequencial === 0 || $this->d13_sequencial === 0.0 || $this->d13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_sequencial"]:$this->d13_sequencial);
+       $this->d13_db_documento = ($this->d13_db_documento === 0 || $this->d13_db_documento === 0.0 || $this->d13_db_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_db_documento"]:$this->d13_db_documento);
+       $this->d13_edital = ($this->d13_edital === 0 || $this->d13_edital === 0.0 || $this->d13_edital == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_edital"]:$this->d13_edital);
      }else{
-       $this->d13_sequencial = ($this->d13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_sequencial"]:$this->d13_sequencial);
+       $this->d13_sequencial = ($this->d13_sequencial === 0 || $this->d13_sequencial === 0.0 || $this->d13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_sequencial"]:$this->d13_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_editaldoc {
          $this->d13_sequencial = $d13_sequencial; 
        }
      }
-     if(($this->d13_sequencial == null) || ($this->d13_sequencial == "") ){ 
+     if(($this->d13_sequencial == null) || ($this->d13_sequencial === 0 || $this->d13_sequencial === 0.0 || $this->d13_sequencial == "") ){ 
        $this->erro_sql = " Campo d13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_editaldoc {
    function sql_query ( $d13_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_editaldoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_editaldoc {
    function sql_query_file ( $d13_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_editaldoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

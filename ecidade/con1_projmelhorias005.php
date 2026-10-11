@@ -40,7 +40,8 @@ $clprojmelhoriasmatric = new cl_projmelhoriasmatric;
 $db_opcao = 22;
 $db_botao = true;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($confirma)){
   db_inicio_transacao();
@@ -72,12 +73,12 @@ if(isset($confirma)){
       }
     }
   }
-  $tes = split("X",$testada);
-  $eixo = split("X",$eixo);
-  $obs = split("X",$obs);
-  $pgto = split("X",$pgto);
+  $tes = preg_split("#X#m",$testada);
+  $eixo = preg_split("#X#m",$eixo);
+  $obs = preg_split("#X#m",$obs);
+  $pgto = preg_split("#X#m",$pgto);
   for($ii=0;$ii<sizeof($tes);$ii++){
-    $chave = split('-',$tes[$ii]);
+    $chave = preg_split('#\-#m',$tes[$ii]);
     $clprojmelhoriasmatric->d41_codigo = $clprojmelhorias->d40_codigo;
     $clprojmelhoriasmatric->d41_matric = $chave[0];
     $clprojmelhoriasmatric->d41_testada= $chave[1]+0;

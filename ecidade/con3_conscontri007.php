@@ -44,7 +44,8 @@ $clrotulo->label("j01_matric");
 $clrotulo->label("z01_nome");
 $clrotulo->label("d40_codigo");
 $db_opcao = 1;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
    if(isset($d40_codigo) && $d40_codigo!=""){
      $result05=$cleditalproj->sql_record($cleditalproj->sql_query_file("",$d40_codigo,"d10_codedi"));

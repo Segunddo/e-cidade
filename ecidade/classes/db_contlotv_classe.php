@@ -56,7 +56,7 @@ class cl_contlotv {
                  d06_valor = float8 = Valor do serviço 
                  ";
    //funcao construtor da classe 
-   function cl_contlotv() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contlotv"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,15 +73,15 @@ class cl_contlotv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d06_contri = ($this->d06_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_contri"]:$this->d06_contri);
-       $this->d06_idbql = ($this->d06_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_idbql"]:$this->d06_idbql);
-       $this->d06_tipos = ($this->d06_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_tipos"]:$this->d06_tipos);
-       $this->d06_fracao = ($this->d06_fracao == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_fracao"]:$this->d06_fracao);
-       $this->d06_valor = ($this->d06_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_valor"]:$this->d06_valor);
+       $this->d06_contri = ($this->d06_contri === 0 || $this->d06_contri === 0.0 || $this->d06_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_contri"]:$this->d06_contri);
+       $this->d06_idbql = ($this->d06_idbql === 0 || $this->d06_idbql === 0.0 || $this->d06_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_idbql"]:$this->d06_idbql);
+       $this->d06_tipos = ($this->d06_tipos === 0 || $this->d06_tipos === 0.0 || $this->d06_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_tipos"]:$this->d06_tipos);
+       $this->d06_fracao = ($this->d06_fracao === 0 || $this->d06_fracao === 0.0 || $this->d06_fracao == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_fracao"]:$this->d06_fracao);
+       $this->d06_valor = ($this->d06_valor === 0 || $this->d06_valor === 0.0 || $this->d06_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_valor"]:$this->d06_valor);
      }else{
-       $this->d06_contri = ($this->d06_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_contri"]:$this->d06_contri);
-       $this->d06_idbql = ($this->d06_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_idbql"]:$this->d06_idbql);
-       $this->d06_tipos = ($this->d06_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_tipos"]:$this->d06_tipos);
+       $this->d06_contri = ($this->d06_contri === 0 || $this->d06_contri === 0.0 || $this->d06_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_contri"]:$this->d06_contri);
+       $this->d06_idbql = ($this->d06_idbql === 0 || $this->d06_idbql === 0.0 || $this->d06_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_idbql"]:$this->d06_idbql);
+       $this->d06_tipos = ($this->d06_tipos === 0 || $this->d06_tipos === 0.0 || $this->d06_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d06_tipos"]:$this->d06_tipos);
      }
    }
    // funcao para inclusao
@@ -96,7 +96,7 @@ class cl_contlotv {
        $this->d06_contri = $d06_contri; 
        $this->d06_idbql = $d06_idbql; 
        $this->d06_tipos = $d06_tipos; 
-     if(($this->d06_contri == null) || ($this->d06_contri == "") ){ 
+     if(($this->d06_contri == null) || ($this->d06_contri === 0 || $this->d06_contri === 0.0 || $this->d06_contri == "") ){ 
        $this->erro_sql = " Campo d06_contri nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -104,7 +104,7 @@ class cl_contlotv {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d06_idbql == null) || ($this->d06_idbql == "") ){ 
+     if(($this->d06_idbql == null) || ($this->d06_idbql === 0 || $this->d06_idbql === 0.0 || $this->d06_idbql == "") ){ 
        $this->erro_sql = " Campo d06_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -112,7 +112,7 @@ class cl_contlotv {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d06_tipos == null) || ($this->d06_tipos == "") ){ 
+     if(($this->d06_tipos == null) || ($this->d06_tipos === 0 || $this->d06_tipos === 0.0 || $this->d06_tipos == "") ){ 
        $this->erro_sql = " Campo d06_tipos nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -400,7 +400,7 @@ class cl_contlotv {
    function sql_query ( $d06_contri=null,$d06_idbql=null,$d06_tipos=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_contlotv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -455,7 +455,7 @@ class cl_contlotv {
    function sql_query_file ( $d06_contri=null,$d06_idbql=null,$d06_tipos=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_contlotv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

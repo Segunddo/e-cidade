@@ -50,7 +50,7 @@ class cl_emphist {
                  e40_descr = varchar(60) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_emphist() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("emphist"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_emphist {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e40_codhist = ($this->e40_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e40_codhist"]:$this->e40_codhist);
+       $this->e40_codhist = ($this->e40_codhist === 0 || $this->e40_codhist === 0.0 || $this->e40_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e40_codhist"]:$this->e40_codhist);
        $this->e40_descr = ($this->e40_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e40_descr"]:$this->e40_descr);
      }else{
-       $this->e40_codhist = ($this->e40_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e40_codhist"]:$this->e40_codhist);
+       $this->e40_codhist = ($this->e40_codhist === 0 || $this->e40_codhist === 0.0 || $this->e40_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e40_codhist"]:$this->e40_codhist);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_emphist {
        return false;
      }
        $this->e40_codhist = $e40_codhist; 
-     if(($this->e40_codhist == null) || ($this->e40_codhist == "") ){ 
+     if(($this->e40_codhist == null) || ($this->e40_codhist === 0 || $this->e40_codhist === 0.0 || $this->e40_codhist == "") ){ 
        $this->erro_sql = " Campo e40_codhist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_emphist {
    function sql_query ( $e40_codhist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -326,7 +326,7 @@ class cl_emphist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -338,7 +338,7 @@ class cl_emphist {
    function sql_query_file ( $e40_codhist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -359,7 +359,7 @@ class cl_emphist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
