@@ -2530,6 +2530,111 @@ mesmo nos dois runtimes.
 `serialize()` de `DOMElement` e do `grep` com aspas). **Saída truncada é indistinguível de
 saída limpa quando não se conta o que entrou.**
 
+### MÉTODO: como se decide o que é da área — e por que ROTEAR e PORTAR usam fontes diferentes
+
+Registrado porque é o mecanismo central da Fase B, e porque os limites dele importam tanto
+quanto o que ele resolve.
+
+#### A fonte é o BANCO, não o código
+
+```
+atendcadarea  →  atendcadareamod  →  db_modulos  →  db_menu  →  db_itensmenu
+   (área)          (área↔módulo)       (módulo)      (árvore)    funcao = NOME DO ARQUIVO
+```
+
+`db_itensmenu.funcao` guarda o nome do arquivo. Uma tela pertence a uma área quando existe
+caminho até ela; a classificação é um `bool_or` sobre a junção:
+
+```sql
+bool_or(area LIKE 'TRIBUT%')      -- e da area
+bool_or(area NOT LIKE 'TRIBUT%')  -- tambem e de outra
+```
+
+Exemplo real, que mostra as duas linhas para o mesmo arquivo:
+
+```
+  area          | modulo      | tela
+  DB:FINANCEIRO | Caixa       | cai1_receita001.php
+  DB:TRIBUTÁRIO | Arrecadação | cai1_receita001.php
+```
+
+#### Os três limites, medidos
+
+| Prefixo | Em disco | No menu | **Fora do menu** | Menu → arquivo inexistente |
+|---|---|---|---|---|
+| `cad` | 523 | 193 (37%) | **330** | 9 |
+| `cai` | 740 | 264 (36%) | **476** | 9 |
+| `con` | 1.570 | 566 (36%) | **1.004** | 21 |
+| `pro` | 387 | 134 (35%) | **253** | 0 |
+
+1. **Só ~36% dos arquivos estão no menu.** Os outros 64% — popups, `.RPC.php`, subtelas —
+   **não têm atribuição de área nenhuma** no banco. Para eles o mapeamento não responde.
+2. **197 entradas fantasma** na base inteira: o menu aponta para arquivo que não existe.
+   Defeito pré-existente do cadastro, não da migração.
+3. **É dado, não código.** É o menu *desta* prefeitura. Outra instalação teria outra árvore —
+   o gerador é reprodutível, a saída é específica da base.
+
+#### A resolução: duas perguntas, duas fontes
+
+| Pergunta | Fonte | No `cad` |
+|---|---|---|
+| **O que roteio para o 8.5?** | o menu do banco | 166 telas |
+| **O que preciso portar?** | fecho de dependências, 7 frentes | 555 arquivos |
+
+Os 330 arquivos do `cad` fora do menu **continuam servidos pelo 5.6**, mas **estão portados**:
+a frente "citados em strings" os puxa a partir das telas roteadas, seguindo o `window.open` do
+JavaScript. Funcionam nos dois runtimes, que é a invariante do strangler fig.
+
+É por isso que a 3ª lacuna foi cara quando apareceu no ITBI: sem ela eu rotearia telas cujos
+popups ninguém havia portado.
+
+### ⚠ DECISÃO REVISTA: a bateria de regressão passa a ser PROPORCIONAL ao risco
+
+A pergunta do usuário — *"é realmente necessária aquela bateria de regressão? se não mexeu nos
+outros arquivos, para que verificar?"* — estava **certa em 198 dos 199 arquivos**, e produziu
+uma correção de método.
+
+Medido, cruzando os arquivos de cada lote com o universo dos módulos já verificados:
+
+| Lote | Arquivos alterados | **No universo de módulo já verificado** |
+|---|---|---|
+| `cad` | 199 | **1** — `dbforms/db_funcoes.php` |
+| `amb`+`pre` | 64 | **2** — o mesmo, mais uma `classes/` |
+
+**A bateria de 1.898 telas nunca foi por causa do lote** — foi por causa de **um** arquivo.
+Os outros 198 do `cad` não são executados por nenhum módulo anterior: ninguém mais os carrega.
+
+Duas honestidades que o número expõe:
+
+- **Em 15 execuções, a bateria de regressão cruzada nunca pegou uma regressão.** Sempre
+  reportou linha de base. O valor dela até aqui foi **confirmatório**, não detetivesco.
+- Ela só se justificou porque **quase todo lote acabou tocando o núcleo** — e um defeito no
+  núcleo alcança as 1.898 telas, então aí a bateria larga é exatamente o teste certo.
+
+**Regra que passa a valer** (custa ~3 segundos computar, contra ~25 minutos de bateria):
+
+```
+interseção = arquivos_do_lote  ∩  união(universos dos módulos já verificados)
+
+vazia                      -> NÃO rodar bateria de regressão
+só arquivos de um módulo   -> rodar a bateria DAQUELE módulo
+arquivo do NÚCLEO          -> rodar a bateria COMPLETA
+```
+
+O núcleo, para este fim, é `dbforms/`, `libs/`, `std/`, `fpdf151/`,
+`classes/db_cgm_classe.php` e a árvore `extension/modification/`.
+
+**Ressalva que mantém o rigor:** a bateria completa continua obrigatória sempre que o núcleo
+for tocado — e isso aconteceu em **todos** os lotes medidos até aqui, porque é lá que os
+defeitos silenciosos vivem (`is_resource`, `gettype`, `db_select`, `db_inputdata`). A regra
+não afrouxa a verificação: ela deixa de gastar 25 minutos quando a interseção é vazia, o que
+até hoje nunca ocorreu, mas vai ocorrer nos lotes pequenos que não encostam no núcleo.
+
+**Valor que fica, mesmo sem nunca ter pego defeito:** as 15 execuções com "zero regressão" são
+a evidência de que migração incremental com dois runtimes **não degrada o que já foi migrado**.
+Isso é resultado do trabalho, não só um portão de qualidade — e é o que o TCC de referência,
+que fez big-bang, não tem como mostrar.
+
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 
 O texto anterior desta seção dizia que `tmp/`, `storage/` e `arquivos/` eram `775 diego`,
