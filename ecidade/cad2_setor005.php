@@ -32,7 +32,8 @@ include(modification("classes/db_lote_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $cllote							= new cl_lote;
@@ -43,7 +44,7 @@ $cllote->rotulo->label();
 $clrotulo->label("z01_nome");
 
 if(isset($j34_zona) && $j34_zona != ""){
-  $zona = split(",",$j34_zona);
+  $zona = preg_split("#,#m",$j34_zona);
   $vir = "";
   $zon = "";
   for($i=0;$i<count($zona);$i++){
@@ -52,7 +53,7 @@ if(isset($j34_zona) && $j34_zona != ""){
   }
 }
 if(isset($j34_setor) && $j34_setor != ""){
-  $setor = split(",",$j34_setor);
+  $setor = preg_split("#,#m",$j34_setor);
   $vir = "";
   $set = "";
   for($i=0;$i<count($setor);$i++){

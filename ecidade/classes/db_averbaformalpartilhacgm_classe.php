@@ -52,7 +52,7 @@ class cl_averbaformalpartilhacgm {
                  j102_averbaformalpartilha = int4 = Averba sentença Judicial 
                  ";
    //funcao construtor da classe 
-   function cl_averbaformalpartilhacgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("averbaformalpartilhacgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_averbaformalpartilhacgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j102_sequencial = ($this->j102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_sequencial"]:$this->j102_sequencial);
-       $this->j102_numcgm = ($this->j102_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_numcgm"]:$this->j102_numcgm);
-       $this->j102_averbaformalpartilha = ($this->j102_averbaformalpartilha == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_averbaformalpartilha"]:$this->j102_averbaformalpartilha);
+       $this->j102_sequencial = ($this->j102_sequencial === 0 || $this->j102_sequencial === 0.0 || $this->j102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_sequencial"]:$this->j102_sequencial);
+       $this->j102_numcgm = ($this->j102_numcgm === 0 || $this->j102_numcgm === 0.0 || $this->j102_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_numcgm"]:$this->j102_numcgm);
+       $this->j102_averbaformalpartilha = ($this->j102_averbaformalpartilha === 0 || $this->j102_averbaformalpartilha === 0.0 || $this->j102_averbaformalpartilha == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_averbaformalpartilha"]:$this->j102_averbaformalpartilha);
      }else{
-       $this->j102_sequencial = ($this->j102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_sequencial"]:$this->j102_sequencial);
+       $this->j102_sequencial = ($this->j102_sequencial === 0 || $this->j102_sequencial === 0.0 || $this->j102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_sequencial"]:$this->j102_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_averbaformalpartilhacgm {
          $this->j102_sequencial = $j102_sequencial; 
        }
      }
-     if(($this->j102_sequencial == null) || ($this->j102_sequencial == "") ){ 
+     if(($this->j102_sequencial == null) || ($this->j102_sequencial === 0 || $this->j102_sequencial === 0.0 || $this->j102_sequencial == "") ){ 
        $this->erro_sql = " Campo j102_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_averbaformalpartilhacgm {
    function sql_query ( $j102_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_averbaformalpartilhacgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_averbaformalpartilhacgm {
    function sql_query_file ( $j102_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_averbaformalpartilhacgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

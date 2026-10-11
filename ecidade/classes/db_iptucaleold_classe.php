@@ -83,17 +83,17 @@ class cl_iptucaleold
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->j162_sequencial = ($this->j162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_sequencial"]:$this->j162_sequencial);
-       $this->j162_anousu = ($this->j162_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_anousu"]:$this->j162_anousu);
-       $this->j162_matric = ($this->j162_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_matric"]:$this->j162_matric);
-       $this->j162_idcons = ($this->j162_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_idcons"]:$this->j162_idcons);
-       $this->j162_areaed = ($this->j162_areaed == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_areaed"]:$this->j162_areaed);
-       $this->j162_vm2 = ($this->j162_vm2 == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_vm2"]:$this->j162_vm2);
-       $this->j162_pontos = ($this->j162_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_pontos"]:$this->j162_pontos);
-       $this->j162_valor = ($this->j162_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_valor"]:$this->j162_valor);
-       $this->j162_iptucalclog = ($this->j162_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_iptucalclog"]:$this->j162_iptucalclog);
+       $this->j162_sequencial = ($this->j162_sequencial === 0 || $this->j162_sequencial === 0.0 || $this->j162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_sequencial"]:$this->j162_sequencial);
+       $this->j162_anousu = ($this->j162_anousu === 0 || $this->j162_anousu === 0.0 || $this->j162_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_anousu"]:$this->j162_anousu);
+       $this->j162_matric = ($this->j162_matric === 0 || $this->j162_matric === 0.0 || $this->j162_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_matric"]:$this->j162_matric);
+       $this->j162_idcons = ($this->j162_idcons === 0 || $this->j162_idcons === 0.0 || $this->j162_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_idcons"]:$this->j162_idcons);
+       $this->j162_areaed = ($this->j162_areaed === 0 || $this->j162_areaed === 0.0 || $this->j162_areaed == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_areaed"]:$this->j162_areaed);
+       $this->j162_vm2 = ($this->j162_vm2 === 0 || $this->j162_vm2 === 0.0 || $this->j162_vm2 == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_vm2"]:$this->j162_vm2);
+       $this->j162_pontos = ($this->j162_pontos === 0 || $this->j162_pontos === 0.0 || $this->j162_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_pontos"]:$this->j162_pontos);
+       $this->j162_valor = ($this->j162_valor === 0 || $this->j162_valor === 0.0 || $this->j162_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_valor"]:$this->j162_valor);
+       $this->j162_iptucalclog = ($this->j162_iptucalclog === 0 || $this->j162_iptucalclog === 0.0 || $this->j162_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_iptucalclog"]:$this->j162_iptucalclog);
      }else{
-       $this->j162_sequencial = ($this->j162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_sequencial"]:$this->j162_sequencial);
+       $this->j162_sequencial = ($this->j162_sequencial === 0 || $this->j162_sequencial === 0.0 || $this->j162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j162_sequencial"]:$this->j162_sequencial);
      }
    }
 
@@ -197,7 +197,7 @@ class cl_iptucaleold
          $this->j162_sequencial = $j162_sequencial; 
        }
      }
-     if(($this->j162_sequencial == null) || ($this->j162_sequencial == "") ){ 
+     if(($this->j162_sequencial == null) || ($this->j162_sequencial === 0 || $this->j162_sequencial === 0.0 || $this->j162_sequencial == "") ){ 
        $this->erro_sql = " Campo j162_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

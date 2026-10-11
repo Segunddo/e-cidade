@@ -50,7 +50,7 @@ class cl_massamat {
                  j59_matric = int4 = Código da massa falida 
                  ";
    //funcao construtor da classe 
-   function cl_massamat() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("massamat"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_massamat {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j59_codigo = ($this->j59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j59_codigo"]:$this->j59_codigo);
-       $this->j59_matric = ($this->j59_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j59_matric"]:$this->j59_matric);
+       $this->j59_codigo = ($this->j59_codigo === 0 || $this->j59_codigo === 0.0 || $this->j59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j59_codigo"]:$this->j59_codigo);
+       $this->j59_matric = ($this->j59_matric === 0 || $this->j59_matric === 0.0 || $this->j59_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j59_matric"]:$this->j59_matric);
      }else{
-       $this->j59_codigo = ($this->j59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j59_codigo"]:$this->j59_codigo);
-       $this->j59_matric = ($this->j59_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j59_matric"]:$this->j59_matric);
+       $this->j59_codigo = ($this->j59_codigo === 0 || $this->j59_codigo === 0.0 || $this->j59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j59_codigo"]:$this->j59_codigo);
+       $this->j59_matric = ($this->j59_matric === 0 || $this->j59_matric === 0.0 || $this->j59_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j59_matric"]:$this->j59_matric);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_massamat {
       $this->atualizacampos();
        $this->j59_codigo = $j59_codigo; 
        $this->j59_matric = $j59_matric; 
-     if(($this->j59_codigo == null) || ($this->j59_codigo == "") ){ 
+     if(($this->j59_codigo == null) || ($this->j59_codigo === 0 || $this->j59_codigo === 0.0 || $this->j59_codigo == "") ){ 
        $this->erro_sql = " Campo j59_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_massamat {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j59_matric == null) || ($this->j59_matric == "") ){ 
+     if(($this->j59_matric == null) || ($this->j59_matric === 0 || $this->j59_matric === 0.0 || $this->j59_matric == "") ){ 
        $this->erro_sql = " Campo j59_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_massamat {
    function sql_query ( $j59_codigo=null,$j59_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -352,7 +352,7 @@ class cl_massamat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_massamat {
    function sql_query_file ( $j59_codigo=null,$j59_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_massamat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -56,7 +56,7 @@ class cl_averbacgm {
                  j76_principal = bool = Principal 
                  ";
    //funcao construtor da classe 
-   function cl_averbacgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("averbacgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_averbacgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j76_codigo = ($this->j76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_codigo"]:$this->j76_codigo);
-       $this->j76_averbacao = ($this->j76_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_averbacao"]:$this->j76_averbacao);
-       $this->j76_numcgm = ($this->j76_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_numcgm"]:$this->j76_numcgm);
-       $this->j76_tipo = ($this->j76_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_tipo"]:$this->j76_tipo);
+       $this->j76_codigo = ($this->j76_codigo === 0 || $this->j76_codigo === 0.0 || $this->j76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_codigo"]:$this->j76_codigo);
+       $this->j76_averbacao = ($this->j76_averbacao === 0 || $this->j76_averbacao === 0.0 || $this->j76_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_averbacao"]:$this->j76_averbacao);
+       $this->j76_numcgm = ($this->j76_numcgm === 0 || $this->j76_numcgm === 0.0 || $this->j76_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_numcgm"]:$this->j76_numcgm);
+       $this->j76_tipo = ($this->j76_tipo === 0 || $this->j76_tipo === 0.0 || $this->j76_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_tipo"]:$this->j76_tipo);
        $this->j76_principal = ($this->j76_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["j76_principal"]:$this->j76_principal);
      }else{
-       $this->j76_codigo = ($this->j76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_codigo"]:$this->j76_codigo);
+       $this->j76_codigo = ($this->j76_codigo === 0 || $this->j76_codigo === 0.0 || $this->j76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_codigo"]:$this->j76_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_averbacgm {
          $this->j76_codigo = $j76_codigo; 
        }
      }
-     if(($this->j76_codigo == null) || ($this->j76_codigo == "") ){ 
+     if(($this->j76_codigo == null) || ($this->j76_codigo === 0 || $this->j76_codigo === 0.0 || $this->j76_codigo == "") ){ 
        $this->erro_sql = " Campo j76_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_averbacgm {
    function sql_query ( $j76_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_averbacgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_averbacgm {
    function sql_query_file ( $j76_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -478,7 +478,7 @@ class cl_averbacgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -127,7 +127,7 @@ class cl_escola
                  ";
 
     //funcao construtor da classe
-    function cl_escola()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("escola");
@@ -149,38 +149,38 @@ class cl_escola
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed18_i_codigo = ($this->ed18_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_codigo"] : $this->ed18_i_codigo);
-            $this->ed18_i_rua = ($this->ed18_i_rua == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_rua"] : $this->ed18_i_rua);
-            $this->ed18_i_numero = ($this->ed18_i_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_numero"] : $this->ed18_i_numero);
+            $this->ed18_i_codigo = ($this->ed18_i_codigo === 0 || $this->ed18_i_codigo === 0.0 || $this->ed18_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_codigo"] : $this->ed18_i_codigo);
+            $this->ed18_i_rua = ($this->ed18_i_rua === 0 || $this->ed18_i_rua === 0.0 || $this->ed18_i_rua == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_rua"] : $this->ed18_i_rua);
+            $this->ed18_i_numero = ($this->ed18_i_numero === 0 || $this->ed18_i_numero === 0.0 || $this->ed18_i_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_numero"] : $this->ed18_i_numero);
             $this->ed18_c_compl = ($this->ed18_c_compl == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_compl"] : $this->ed18_c_compl);
-            $this->ed18_i_bairro = ($this->ed18_i_bairro == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_bairro"] : $this->ed18_i_bairro);
+            $this->ed18_i_bairro = ($this->ed18_i_bairro === 0 || $this->ed18_i_bairro === 0.0 || $this->ed18_i_bairro == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_bairro"] : $this->ed18_i_bairro);
             $this->ed18_c_nome = ($this->ed18_c_nome == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_nome"] : $this->ed18_c_nome);
             $this->ed18_c_abrev = ($this->ed18_c_abrev == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_abrev"] : $this->ed18_c_abrev);
-            $this->ed18_c_mantenedora = ($this->ed18_c_mantenedora == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_mantenedora"] : $this->ed18_c_mantenedora);
-            $this->ed18_i_anoinicio = ($this->ed18_i_anoinicio == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_anoinicio"] : $this->ed18_i_anoinicio);
+            $this->ed18_c_mantenedora = ($this->ed18_c_mantenedora === 0 || $this->ed18_c_mantenedora === 0.0 || $this->ed18_c_mantenedora == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_mantenedora"] : $this->ed18_c_mantenedora);
+            $this->ed18_i_anoinicio = ($this->ed18_i_anoinicio === 0 || $this->ed18_i_anoinicio === 0.0 || $this->ed18_i_anoinicio == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_anoinicio"] : $this->ed18_i_anoinicio);
             $this->ed18_c_email = ($this->ed18_c_email == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_email"] : $this->ed18_c_email);
             $this->ed18_c_homepage = ($this->ed18_c_homepage == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_homepage"] : $this->ed18_c_homepage);
             $this->ed18_c_tipo = ($this->ed18_c_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_tipo"] : $this->ed18_c_tipo);
-            $this->ed18_c_codigoinep = ($this->ed18_c_codigoinep == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_codigoinep"] : $this->ed18_c_codigoinep);
+            $this->ed18_c_codigoinep = ($this->ed18_c_codigoinep === 0 || $this->ed18_c_codigoinep === 0.0 || $this->ed18_c_codigoinep == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_codigoinep"] : $this->ed18_c_codigoinep);
             $this->ed18_c_local = ($this->ed18_c_local == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_local"] : $this->ed18_c_local);
             $this->ed18_c_logo = ($this->ed18_c_logo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_logo"] : $this->ed18_c_logo);
             $this->ed18_c_cep = ($this->ed18_c_cep == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_cep"] : $this->ed18_c_cep);
             $this->ed18_i_cnpj = ($this->ed18_i_cnpj == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_cnpj"] : $this->ed18_i_cnpj);
-            $this->ed18_i_locdiferenciada = ($this->ed18_i_locdiferenciada == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_locdiferenciada"] : $this->ed18_i_locdiferenciada);
-            $this->ed18_i_educindigena = ($this->ed18_i_educindigena == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_educindigena"] : $this->ed18_i_educindigena);
-            $this->ed18_i_tipolinguain = ($this->ed18_i_tipolinguain == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_tipolinguain"] : $this->ed18_i_tipolinguain);
-            $this->ed18_i_tipolinguapt = ($this->ed18_i_tipolinguapt == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_tipolinguapt"] : $this->ed18_i_tipolinguapt);
-            $this->ed18_i_linguaindigena = ($this->ed18_i_linguaindigena == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_linguaindigena"] : $this->ed18_i_linguaindigena);
-            $this->ed18_i_credenciamento = ($this->ed18_i_credenciamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_credenciamento"] : $this->ed18_i_credenciamento);
-            $this->ed18_i_funcionamento = ($this->ed18_i_funcionamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_funcionamento"] : $this->ed18_i_funcionamento);
-            $this->ed18_i_censouf = ($this->ed18_i_censouf == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_censouf"] : $this->ed18_i_censouf);
-            $this->ed18_i_censomunic = ($this->ed18_i_censomunic == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_censomunic"] : $this->ed18_i_censomunic);
-            $this->ed18_i_censodistrito = ($this->ed18_i_censodistrito == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_censodistrito"] : $this->ed18_i_censodistrito);
-            $this->ed18_i_censoorgreg = ($this->ed18_i_censoorgreg == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_censoorgreg"] : $this->ed18_i_censoorgreg);
-            $this->ed18_i_categprivada = ($this->ed18_i_categprivada == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_categprivada"] : $this->ed18_i_categprivada);
-            $this->ed18_i_conveniada = ($this->ed18_i_conveniada == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_conveniada"] : $this->ed18_i_conveniada);
-            $this->ed18_i_cnas = ($this->ed18_i_cnas == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_cnas"] : $this->ed18_i_cnas);
-            $this->ed18_i_cebas = ($this->ed18_i_cebas == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_cebas"] : $this->ed18_i_cebas);
+            $this->ed18_i_locdiferenciada = ($this->ed18_i_locdiferenciada === 0 || $this->ed18_i_locdiferenciada === 0.0 || $this->ed18_i_locdiferenciada == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_locdiferenciada"] : $this->ed18_i_locdiferenciada);
+            $this->ed18_i_educindigena = ($this->ed18_i_educindigena === 0 || $this->ed18_i_educindigena === 0.0 || $this->ed18_i_educindigena == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_educindigena"] : $this->ed18_i_educindigena);
+            $this->ed18_i_tipolinguain = ($this->ed18_i_tipolinguain === 0 || $this->ed18_i_tipolinguain === 0.0 || $this->ed18_i_tipolinguain == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_tipolinguain"] : $this->ed18_i_tipolinguain);
+            $this->ed18_i_tipolinguapt = ($this->ed18_i_tipolinguapt === 0 || $this->ed18_i_tipolinguapt === 0.0 || $this->ed18_i_tipolinguapt == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_tipolinguapt"] : $this->ed18_i_tipolinguapt);
+            $this->ed18_i_linguaindigena = ($this->ed18_i_linguaindigena === 0 || $this->ed18_i_linguaindigena === 0.0 || $this->ed18_i_linguaindigena == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_linguaindigena"] : $this->ed18_i_linguaindigena);
+            $this->ed18_i_credenciamento = ($this->ed18_i_credenciamento === 0 || $this->ed18_i_credenciamento === 0.0 || $this->ed18_i_credenciamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_credenciamento"] : $this->ed18_i_credenciamento);
+            $this->ed18_i_funcionamento = ($this->ed18_i_funcionamento === 0 || $this->ed18_i_funcionamento === 0.0 || $this->ed18_i_funcionamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_funcionamento"] : $this->ed18_i_funcionamento);
+            $this->ed18_i_censouf = ($this->ed18_i_censouf === 0 || $this->ed18_i_censouf === 0.0 || $this->ed18_i_censouf == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_censouf"] : $this->ed18_i_censouf);
+            $this->ed18_i_censomunic = ($this->ed18_i_censomunic === 0 || $this->ed18_i_censomunic === 0.0 || $this->ed18_i_censomunic == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_censomunic"] : $this->ed18_i_censomunic);
+            $this->ed18_i_censodistrito = ($this->ed18_i_censodistrito === 0 || $this->ed18_i_censodistrito === 0.0 || $this->ed18_i_censodistrito == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_censodistrito"] : $this->ed18_i_censodistrito);
+            $this->ed18_i_censoorgreg = ($this->ed18_i_censoorgreg === 0 || $this->ed18_i_censoorgreg === 0.0 || $this->ed18_i_censoorgreg == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_censoorgreg"] : $this->ed18_i_censoorgreg);
+            $this->ed18_i_categprivada = ($this->ed18_i_categprivada === 0 || $this->ed18_i_categprivada === 0.0 || $this->ed18_i_categprivada == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_categprivada"] : $this->ed18_i_categprivada);
+            $this->ed18_i_conveniada = ($this->ed18_i_conveniada === 0 || $this->ed18_i_conveniada === 0.0 || $this->ed18_i_conveniada == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_conveniada"] : $this->ed18_i_conveniada);
+            $this->ed18_i_cnas = ($this->ed18_i_cnas === 0 || $this->ed18_i_cnas === 0.0 || $this->ed18_i_cnas == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_cnas"] : $this->ed18_i_cnas);
+            $this->ed18_i_cebas = ($this->ed18_i_cebas === 0 || $this->ed18_i_cebas === 0.0 || $this->ed18_i_cebas == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_cebas"] : $this->ed18_i_cebas);
             $this->ed18_c_mantprivada = ($this->ed18_c_mantprivada == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_c_mantprivada"] : $this->ed18_c_mantprivada);
             $this->ed18_i_cnpjprivada = ($this->ed18_i_cnpjprivada == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_cnpjprivada"] : $this->ed18_i_cnpjprivada);
             $this->ed18_i_cnpjmantprivada = ($this->ed18_i_cnpjmantprivada == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_cnpjmantprivada"] : $this->ed18_i_cnpjmantprivada);
@@ -188,10 +188,10 @@ class cl_escola
             $this->ed18_longitude = ($this->ed18_longitude == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_longitude"] : $this->ed18_longitude);
             $this->ed18_codigoreferencia = ($this->ed18_codigoreferencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_codigoreferencia"] : $this->ed18_codigoreferencia);
             $this->ed18_i_esferaadministrativa = ($this->ed18_i_esferaadministrativa == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_esferaadministrativa"] : $this->ed18_i_esferaadministrativa);
-            $this->ed18_i_tipoescola = ($this->ed18_i_tipoescola == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_tipoescola"] : $this->ed18_i_tipoescola);
+            $this->ed18_i_tipoescola = ($this->ed18_i_tipoescola === 0 || $this->ed18_i_tipoescola === 0.0 || $this->ed18_i_tipoescola == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_tipoescola"] : $this->ed18_i_tipoescola);
             
         } else {
-            $this->ed18_i_codigo = ($this->ed18_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_codigo"] : $this->ed18_i_codigo);
+            $this->ed18_i_codigo = ($this->ed18_i_codigo === 0 || $this->ed18_i_codigo === 0.0 || $this->ed18_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed18_i_codigo"] : $this->ed18_i_codigo);
         }
     }
 
@@ -392,7 +392,7 @@ class cl_escola
             return false;
         }
         $this->ed18_i_codigo = $ed18_i_codigo;
-        if (($this->ed18_i_codigo == null) || ($this->ed18_i_codigo == "")) {
+        if (($this->ed18_i_codigo == null) || ($this->ed18_i_codigo === 0 || $this->ed18_i_codigo === 0.0 || $this->ed18_i_codigo == "")) {
             $this->erro_sql = " Campo ed18_i_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -1299,7 +1299,7 @@ class cl_escola
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1333,7 +1333,7 @@ class cl_escola
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1348,7 +1348,7 @@ class cl_escola
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1382,7 +1382,7 @@ class cl_escola
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1397,7 +1397,7 @@ class cl_escola
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1425,7 +1425,7 @@ class cl_escola
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1439,7 +1439,7 @@ class cl_escola
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1464,7 +1464,7 @@ class cl_escola
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1479,7 +1479,7 @@ class cl_escola
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1507,7 +1507,7 @@ class cl_escola
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1522,7 +1522,7 @@ class cl_escola
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1556,7 +1556,7 @@ class cl_escola
         if ($ordem != null) {
 
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1574,7 +1574,7 @@ class cl_escola
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1602,7 +1602,7 @@ class cl_escola
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];

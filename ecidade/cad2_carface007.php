@@ -31,7 +31,8 @@ require_once(modification("libs/db_usuariosonline.php"));
 require_once(modification("classes/db_lote_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("dbforms/db_classesgenericas.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 $cllote             = new cl_lote;
 $cliframe_seleciona = new cl_iframe_seleciona;
@@ -40,7 +41,7 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("z01_nome");
 if (isset($j37_quadra) && $j37_quadra != "") {
   
-  $quadra = split(",",$j37_quadra);
+  $quadra = preg_split("#,#m",$j37_quadra);
   $vir    = "";
   $qua    = "";
   for ($i = 0; $i < count($quadra); $i++) {
@@ -51,7 +52,7 @@ if (isset($j37_quadra) && $j37_quadra != "") {
 }
 if (isset($j37_setor) && $j37_setor != "") {
   
-  $setor     = split(",",$j37_setor);
+  $setor     = preg_split("#,#m",$j37_setor);
   $vir       = "";
   $qua1      = "";
   $setor_old = "";

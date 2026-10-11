@@ -94,23 +94,23 @@ class cl_iptucalcold
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->j223_sequencial = ($this->j223_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_sequencial"]:$this->j223_sequencial);
-       $this->j223_anousu = ($this->j223_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_anousu"]:$this->j223_anousu);
-       $this->j223_matric = ($this->j223_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_matric"]:$this->j223_matric);
-       $this->j223_testad = ($this->j223_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_testad"]:$this->j223_testad);
-       $this->j223_arealo = ($this->j223_arealo == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_arealo"]:$this->j223_arealo);
-       $this->j223_areafr = ($this->j223_areafr == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_areafr"]:$this->j223_areafr);
-       $this->j223_areaed = ($this->j223_areaed == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_areaed"]:$this->j223_areaed);
-       $this->j223_m2terr = ($this->j223_m2terr == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_m2terr"]:$this->j223_m2terr);
-       $this->j223_vlrter = ($this->j223_vlrter == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_vlrter"]:$this->j223_vlrter);
-       $this->j223_aliq = ($this->j223_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_aliq"]:$this->j223_aliq);
-       $this->j223_vlrisen = ($this->j223_vlrisen == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_vlrisen"]:$this->j223_vlrisen);
+       $this->j223_sequencial = ($this->j223_sequencial === 0 || $this->j223_sequencial === 0.0 || $this->j223_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_sequencial"]:$this->j223_sequencial);
+       $this->j223_anousu = ($this->j223_anousu === 0 || $this->j223_anousu === 0.0 || $this->j223_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_anousu"]:$this->j223_anousu);
+       $this->j223_matric = ($this->j223_matric === 0 || $this->j223_matric === 0.0 || $this->j223_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_matric"]:$this->j223_matric);
+       $this->j223_testad = ($this->j223_testad === 0 || $this->j223_testad === 0.0 || $this->j223_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_testad"]:$this->j223_testad);
+       $this->j223_arealo = ($this->j223_arealo === 0 || $this->j223_arealo === 0.0 || $this->j223_arealo == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_arealo"]:$this->j223_arealo);
+       $this->j223_areafr = ($this->j223_areafr === 0 || $this->j223_areafr === 0.0 || $this->j223_areafr == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_areafr"]:$this->j223_areafr);
+       $this->j223_areaed = ($this->j223_areaed === 0 || $this->j223_areaed === 0.0 || $this->j223_areaed == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_areaed"]:$this->j223_areaed);
+       $this->j223_m2terr = ($this->j223_m2terr === 0 || $this->j223_m2terr === 0.0 || $this->j223_m2terr == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_m2terr"]:$this->j223_m2terr);
+       $this->j223_vlrter = ($this->j223_vlrter === 0 || $this->j223_vlrter === 0.0 || $this->j223_vlrter == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_vlrter"]:$this->j223_vlrter);
+       $this->j223_aliq = ($this->j223_aliq === 0 || $this->j223_aliq === 0.0 || $this->j223_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_aliq"]:$this->j223_aliq);
+       $this->j223_vlrisen = ($this->j223_vlrisen === 0 || $this->j223_vlrisen === 0.0 || $this->j223_vlrisen == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_vlrisen"]:$this->j223_vlrisen);
        $this->j223_tipoim = ($this->j223_tipoim == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_tipoim"]:$this->j223_tipoim);
        $this->j223_manual = ($this->j223_manual == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_manual"]:$this->j223_manual);
-       $this->j223_tipocalculo = ($this->j223_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_tipocalculo"]:$this->j223_tipocalculo);
-       $this->j223_iptucalclog = ($this->j223_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_iptucalclog"]:$this->j223_iptucalclog);
+       $this->j223_tipocalculo = ($this->j223_tipocalculo === 0 || $this->j223_tipocalculo === 0.0 || $this->j223_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_tipocalculo"]:$this->j223_tipocalculo);
+       $this->j223_iptucalclog = ($this->j223_iptucalclog === 0 || $this->j223_iptucalclog === 0.0 || $this->j223_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_iptucalclog"]:$this->j223_iptucalclog);
      }else{
-       $this->j223_sequencial = ($this->j223_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_sequencial"]:$this->j223_sequencial);
+       $this->j223_sequencial = ($this->j223_sequencial === 0 || $this->j223_sequencial === 0.0 || $this->j223_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j223_sequencial"]:$this->j223_sequencial);
      }
    }
 
@@ -269,7 +269,7 @@ class cl_iptucalcold
          $this->j223_sequencial = $j223_sequencial; 
        }
      }
-     if(($this->j223_sequencial == null) || ($this->j223_sequencial == "") ){ 
+     if(($this->j223_sequencial == null) || ($this->j223_sequencial === 0 || $this->j223_sequencial === 0.0 || $this->j223_sequencial == "") ){ 
        $this->erro_sql = " Campo j223_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

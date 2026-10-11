@@ -70,7 +70,7 @@ class cl_moblevantamento {
                  j97_calcada = int4 = Calçada 
                  ";
    //funcao construtor da classe 
-   function cl_moblevantamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("moblevantamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,20 +87,20 @@ class cl_moblevantamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j97_sequen = ($this->j97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sequen"]:$this->j97_sequen);
-       $this->j97_codimporta = ($this->j97_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_codimporta"]:$this->j97_codimporta);
-       $this->j97_matric = ($this->j97_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_matric"]:$this->j97_matric);
+       $this->j97_sequen = ($this->j97_sequen === 0 || $this->j97_sequen === 0.0 || $this->j97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sequen"]:$this->j97_sequen);
+       $this->j97_codimporta = ($this->j97_codimporta === 0 || $this->j97_codimporta === 0.0 || $this->j97_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_codimporta"]:$this->j97_codimporta);
+       $this->j97_matric = ($this->j97_matric === 0 || $this->j97_matric === 0.0 || $this->j97_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_matric"]:$this->j97_matric);
        $this->j97_endcor = ($this->j97_endcor == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_endcor"]:$this->j97_endcor);
        $this->j97_cidade = ($this->j97_cidade == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_cidade"]:$this->j97_cidade);
        $this->j97_profun = ($this->j97_profun == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_profun"]:$this->j97_profun);
-       $this->j97_sitterreno = ($this->j97_sitterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sitterreno"]:$this->j97_sitterreno);
-       $this->j97_pedol = ($this->j97_pedol == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_pedol"]:$this->j97_pedol);
-       $this->j97_topog = ($this->j97_topog == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_topog"]:$this->j97_topog);
-       $this->j97_vistoria = ($this->j97_vistoria == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_vistoria"]:$this->j97_vistoria);
-       $this->j97_muro = ($this->j97_muro == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_muro"]:$this->j97_muro);
-       $this->j97_calcada = ($this->j97_calcada == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_calcada"]:$this->j97_calcada);
+       $this->j97_sitterreno = ($this->j97_sitterreno === 0 || $this->j97_sitterreno === 0.0 || $this->j97_sitterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sitterreno"]:$this->j97_sitterreno);
+       $this->j97_pedol = ($this->j97_pedol === 0 || $this->j97_pedol === 0.0 || $this->j97_pedol == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_pedol"]:$this->j97_pedol);
+       $this->j97_topog = ($this->j97_topog === 0 || $this->j97_topog === 0.0 || $this->j97_topog == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_topog"]:$this->j97_topog);
+       $this->j97_vistoria = ($this->j97_vistoria === 0 || $this->j97_vistoria === 0.0 || $this->j97_vistoria == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_vistoria"]:$this->j97_vistoria);
+       $this->j97_muro = ($this->j97_muro === 0 || $this->j97_muro === 0.0 || $this->j97_muro == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_muro"]:$this->j97_muro);
+       $this->j97_calcada = ($this->j97_calcada === 0 || $this->j97_calcada === 0.0 || $this->j97_calcada == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_calcada"]:$this->j97_calcada);
      }else{
-       $this->j97_sequen = ($this->j97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sequen"]:$this->j97_sequen);
+       $this->j97_sequen = ($this->j97_sequen === 0 || $this->j97_sequen === 0.0 || $this->j97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sequen"]:$this->j97_sequen);
      }
    }
    // funcao para inclusao
@@ -211,7 +211,7 @@ class cl_moblevantamento {
          $this->j97_sequen = $j97_sequen; 
        }
      }
-     if(($this->j97_sequen == null) || ($this->j97_sequen == "") ){ 
+     if(($this->j97_sequen == null) || ($this->j97_sequen === 0 || $this->j97_sequen === 0.0 || $this->j97_sequen == "") ){ 
        $this->erro_sql = " Campo j97_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -600,7 +600,7 @@ class cl_moblevantamento {
    function sql_query ( $j97_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -623,7 +623,7 @@ class cl_moblevantamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -636,7 +636,7 @@ class cl_moblevantamento {
    function sql_query_file ( $j97_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -657,7 +657,7 @@ class cl_moblevantamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

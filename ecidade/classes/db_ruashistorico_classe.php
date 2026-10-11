@@ -66,7 +66,7 @@ class cl_ruashistorico {
                  j136_dataalteracao = date = Data Alteração 
                  ";
    //funcao construtor da classe 
-   function cl_ruashistorico() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ruashistorico"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,9 +83,9 @@ class cl_ruashistorico {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j136_sequencial = ($this->j136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_sequencial"]:$this->j136_sequencial);
-       $this->j136_ruas = ($this->j136_ruas == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_ruas"]:$this->j136_ruas);
-       $this->j136_ruastipo = ($this->j136_ruastipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_ruastipo"]:$this->j136_ruastipo);
+       $this->j136_sequencial = ($this->j136_sequencial === 0 || $this->j136_sequencial === 0.0 || $this->j136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_sequencial"]:$this->j136_sequencial);
+       $this->j136_ruas = ($this->j136_ruas === 0 || $this->j136_ruas === 0.0 || $this->j136_ruas == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_ruas"]:$this->j136_ruas);
+       $this->j136_ruastipo = ($this->j136_ruastipo === 0 || $this->j136_ruastipo === 0.0 || $this->j136_ruastipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_ruastipo"]:$this->j136_ruastipo);
        $this->j136_lei = ($this->j136_lei == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_lei"]:$this->j136_lei);
        if($this->j136_datalei == ""){
          $this->j136_datalei_dia = ($this->j136_datalei_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_datalei_dia"]:$this->j136_datalei_dia);
@@ -105,7 +105,7 @@ class cl_ruashistorico {
          }
        }
      }else{
-       $this->j136_sequencial = ($this->j136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_sequencial"]:$this->j136_sequencial);
+       $this->j136_sequencial = ($this->j136_sequencial === 0 || $this->j136_sequencial === 0.0 || $this->j136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_sequencial"]:$this->j136_sequencial);
      }
    }
    // funcao para inclusao
@@ -174,7 +174,7 @@ class cl_ruashistorico {
          $this->j136_sequencial = $j136_sequencial; 
        }
      }
-     if(($this->j136_sequencial == null) || ($this->j136_sequencial == "") ){ 
+     if(($this->j136_sequencial == null) || ($this->j136_sequencial === 0 || $this->j136_sequencial === 0.0 || $this->j136_sequencial == "") ){ 
        $this->erro_sql = " Campo j136_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -512,7 +512,7 @@ class cl_ruashistorico {
    function sql_query ( $j136_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -535,7 +535,7 @@ class cl_ruashistorico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -548,7 +548,7 @@ class cl_ruashistorico {
    function sql_query_file ( $j136_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -569,7 +569,7 @@ class cl_ruashistorico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

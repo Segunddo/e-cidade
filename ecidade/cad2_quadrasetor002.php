@@ -32,9 +32,10 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('j34_setor');
 $clrotulo->label('j34_quadra');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
-$setor_arr = split(",",$setor);
+$setor_arr = preg_split("#,#m",$setor);
 $sVirgula  = "";
 $sSetores  = "";
 

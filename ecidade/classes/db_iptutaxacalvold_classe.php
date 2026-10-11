@@ -35,7 +35,7 @@ class cl_iptutaxacalvold {
                  j158_iptucalclog = int4 = Código de vínculo com a iptucalclog 
                  ";
    //funcao construtor da classe 
-   function cl_iptutaxacalvold() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptutaxacalvold"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -52,17 +52,17 @@ class cl_iptutaxacalvold {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j158_sequencial = ($this->j158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_sequencial"]:$this->j158_sequencial);
-       $this->j158_codigo = ($this->j158_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_codigo"]:$this->j158_codigo);
-       $this->j158_iptutaxanumpold = ($this->j158_iptutaxanumpold == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_iptutaxanumpold"]:$this->j158_iptutaxanumpold);
-       $this->j158_codhis = ($this->j158_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_codhis"]:$this->j158_codhis);
-       $this->j158_receit = ($this->j158_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_receit"]:$this->j158_receit);
-       $this->j158_valor = ($this->j158_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_valor"]:$this->j158_valor);
-       $this->j158_quant = ($this->j158_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_quant"]:$this->j158_quant);
-       $this->j158_areaed = ($this->j158_areaed == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_areaed"]:$this->j158_areaed);
-       $this->j158_iptucalclog = ($this->j158_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_iptucalclog"]:$this->j158_iptucalclog);
+       $this->j158_sequencial = ($this->j158_sequencial === 0 || $this->j158_sequencial === 0.0 || $this->j158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_sequencial"]:$this->j158_sequencial);
+       $this->j158_codigo = ($this->j158_codigo === 0 || $this->j158_codigo === 0.0 || $this->j158_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_codigo"]:$this->j158_codigo);
+       $this->j158_iptutaxanumpold = ($this->j158_iptutaxanumpold === 0 || $this->j158_iptutaxanumpold === 0.0 || $this->j158_iptutaxanumpold == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_iptutaxanumpold"]:$this->j158_iptutaxanumpold);
+       $this->j158_codhis = ($this->j158_codhis === 0 || $this->j158_codhis === 0.0 || $this->j158_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_codhis"]:$this->j158_codhis);
+       $this->j158_receit = ($this->j158_receit === 0 || $this->j158_receit === 0.0 || $this->j158_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_receit"]:$this->j158_receit);
+       $this->j158_valor = ($this->j158_valor === 0 || $this->j158_valor === 0.0 || $this->j158_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_valor"]:$this->j158_valor);
+       $this->j158_quant = ($this->j158_quant === 0 || $this->j158_quant === 0.0 || $this->j158_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_quant"]:$this->j158_quant);
+       $this->j158_areaed = ($this->j158_areaed === 0 || $this->j158_areaed === 0.0 || $this->j158_areaed == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_areaed"]:$this->j158_areaed);
+       $this->j158_iptucalclog = ($this->j158_iptucalclog === 0 || $this->j158_iptucalclog === 0.0 || $this->j158_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_iptucalclog"]:$this->j158_iptucalclog);
      }else{
-       $this->j158_sequencial = ($this->j158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_sequencial"]:$this->j158_sequencial);
+       $this->j158_sequencial = ($this->j158_sequencial === 0 || $this->j158_sequencial === 0.0 || $this->j158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j158_sequencial"]:$this->j158_sequencial);
      }
    }
    // funcao para inclusao
@@ -152,7 +152,7 @@ class cl_iptutaxacalvold {
          $this->j158_sequencial = $j158_sequencial; 
        }
      }
-     if(($this->j158_sequencial == null) || ($this->j158_sequencial == "") ){ 
+     if(($this->j158_sequencial == null) || ($this->j158_sequencial === 0 || $this->j158_sequencial === 0.0 || $this->j158_sequencial == "") ){ 
        $this->erro_sql = " Campo j158_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -488,7 +488,7 @@ class cl_iptutaxacalvold {
    function sql_query ( $j158_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -519,7 +519,7 @@ class cl_iptutaxacalvold {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_iptutaxacalvold {
    function sql_query_file ( $j158_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -553,7 +553,7 @@ class cl_iptutaxacalvold {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

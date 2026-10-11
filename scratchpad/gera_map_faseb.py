@@ -46,9 +46,12 @@ lote  = [t for t in todas if t.startswith(tuple(PREFS))]
 linhas, falta = [], []
 for t in sorted(lote):
     if t not in disco: falta.append(t); continue
-    # DUAS grafias quando diferem: o map do nginx e sensivel a caso, e o e-cidade
-    # tem arquivos capitalizados (Cai1_*). Mesma armadilha que exigiu o `~*`.
-    for g in sorted({t, disco[t]}): linhas.append(f"    {g:46s} php85;")
+    # UMA grafia so, em minuscula. O `map` do nginx ja casa de forma INSENSIVEL a
+    # caso -- descoberto porque emitir as duas grafias de cad4_emiteiptuNovo.php
+    # fez o nginx recusar a config com "conflicting parameter". Ou seja: a
+    # armadilha que obrigou o `location ~*` NAO se repete aqui, e tentar
+    # prevenir-se dela quebra o proxy.
+    linhas.append(f"    {t:46s} php85;")
 
 cab = ("# GERADO de configuracoes.db_menu -- NAO editar a mao.\n"
        "# Reproduzir:  python3 scratchpad/gera_map_faseb.py " + " ".join(PREFS) + "\n#\n"

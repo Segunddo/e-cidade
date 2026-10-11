@@ -74,7 +74,7 @@ class cl_ceplogradouros {
                  cp06_codlocalidade = int8 = Codigo da Localidade 
                  ";
    //funcao construtor da classe 
-   function cl_ceplogradouros() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ceplogradouros"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -91,22 +91,22 @@ class cl_ceplogradouros {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cp06_sequencial = ($this->cp06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_sequencial"]:$this->cp06_sequencial);
-       $this->cp06_codlogradouro = ($this->cp06_codlogradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_codlogradouro"]:$this->cp06_codlogradouro);
-       $this->cp06_codbairroinicial = ($this->cp06_codbairroinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_codbairroinicial"]:$this->cp06_codbairroinicial);
-       $this->cp06_codbairrofinal = ($this->cp06_codbairrofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_codbairrofinal"]:$this->cp06_codbairrofinal);
+       $this->cp06_sequencial = ($this->cp06_sequencial === 0 || $this->cp06_sequencial === 0.0 || $this->cp06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_sequencial"]:$this->cp06_sequencial);
+       $this->cp06_codlogradouro = ($this->cp06_codlogradouro === 0 || $this->cp06_codlogradouro === 0.0 || $this->cp06_codlogradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_codlogradouro"]:$this->cp06_codlogradouro);
+       $this->cp06_codbairroinicial = ($this->cp06_codbairroinicial === 0 || $this->cp06_codbairroinicial === 0.0 || $this->cp06_codbairroinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_codbairroinicial"]:$this->cp06_codbairroinicial);
+       $this->cp06_codbairrofinal = ($this->cp06_codbairrofinal === 0 || $this->cp06_codbairrofinal === 0.0 || $this->cp06_codbairrofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_codbairrofinal"]:$this->cp06_codbairrofinal);
        $this->cp06_logradouro = ($this->cp06_logradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_logradouro"]:$this->cp06_logradouro);
        $this->cp06_adicional = ($this->cp06_adicional == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_adicional"]:$this->cp06_adicional);
        $this->cp06_cep = ($this->cp06_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_cep"]:$this->cp06_cep);
        $this->cp06_grandeusuario = ($this->cp06_grandeusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_grandeusuario"]:$this->cp06_grandeusuario);
-       $this->cp06_numinicial = ($this->cp06_numinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_numinicial"]:$this->cp06_numinicial);
-       $this->cp06_numfinal = ($this->cp06_numfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_numfinal"]:$this->cp06_numfinal);
+       $this->cp06_numinicial = ($this->cp06_numinicial === 0 || $this->cp06_numinicial === 0.0 || $this->cp06_numinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_numinicial"]:$this->cp06_numinicial);
+       $this->cp06_numfinal = ($this->cp06_numfinal === 0 || $this->cp06_numfinal === 0.0 || $this->cp06_numfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_numfinal"]:$this->cp06_numfinal);
        $this->cp06_lado = ($this->cp06_lado == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_lado"]:$this->cp06_lado);
-       $this->cp06_codseccao = ($this->cp06_codseccao == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_codseccao"]:$this->cp06_codseccao);
+       $this->cp06_codseccao = ($this->cp06_codseccao === 0 || $this->cp06_codseccao === 0.0 || $this->cp06_codseccao == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_codseccao"]:$this->cp06_codseccao);
        $this->cp06_sigla = ($this->cp06_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_sigla"]:$this->cp06_sigla);
-       $this->cp06_codlocalidade = ($this->cp06_codlocalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_codlocalidade"]:$this->cp06_codlocalidade);
+       $this->cp06_codlocalidade = ($this->cp06_codlocalidade === 0 || $this->cp06_codlocalidade === 0.0 || $this->cp06_codlocalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_codlocalidade"]:$this->cp06_codlocalidade);
      }else{
-       $this->cp06_sequencial = ($this->cp06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_sequencial"]:$this->cp06_sequencial);
+       $this->cp06_sequencial = ($this->cp06_sequencial === 0 || $this->cp06_sequencial === 0.0 || $this->cp06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cp06_sequencial"]:$this->cp06_sequencial);
      }
    }
    // funcao para inclusao
@@ -253,7 +253,7 @@ class cl_ceplogradouros {
          $this->cp06_sequencial = $cp06_sequencial; 
        }
      }
-     if(($this->cp06_sequencial == null) || ($this->cp06_sequencial == "") ){ 
+     if(($this->cp06_sequencial == null) || ($this->cp06_sequencial === 0 || $this->cp06_sequencial === 0.0 || $this->cp06_sequencial == "") ){ 
        $this->erro_sql = " Campo cp06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -700,7 +700,7 @@ class cl_ceplogradouros {
    function sql_query ( $cp06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -723,7 +723,7 @@ class cl_ceplogradouros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -735,7 +735,7 @@ class cl_ceplogradouros {
    function sql_query_file ( $cp06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -756,7 +756,7 @@ class cl_ceplogradouros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -69,6 +69,24 @@ return RectorConfig::configure()
         //     "0"          false         TRUE     <- diverge
         // Esta categoria pertence ao GuardaComparacaoLiteralRector, que e fiel.
         Rector\Php71\Rector\BinaryOp\BinaryOpBetweenNumberAndStringRector::class,
+
+        // 5o CRESCIMENTO (cad). A mais PERIGOSA achada ate aqui.
+        // RemoveExtraParameters APAGA argumentos reais quando a chamada passa mais
+        // do que a assinatura declara. Em cad1_ruas003.php ela produziu:
+        //     $cllogradcep->excluir("","","j65_lograd=$j14_codigo");
+        //  -> $cllogradcep->excluir("","");          <- o WHERE do DELETE SUMIU
+        // e em cad1_aba2ruas001.php apagou os dois argumentos de um incluir().
+        // MEDIDO: o PHP 8.5 ainda ACEITA argumentos extras em funcao de usuario
+        // (func_num_args() devolve 3 nos dois runtimes), entao a regra nao e
+        // exigida pela versao de destino -- e limpeza, e limpeza que apaga SQL.
+        Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector::class,
+        // Transformou a constante indefinida `l` em `\L` (maiuscula e totalmente
+        // qualificada) em classes/db_averbacao_classe.php. Muda o VALOR: no 5.6
+        // uma constante indefinida vira a string do proprio nome, "l" -- nao "L".
+        Rector\Php73\Rector\ConstFetch\SensitiveConstantNameRector::class,
+        // `($x)?$x:' '` -> `$x ?: ' '`. Parseia nos dois e e equivalente, mas e
+        // modernizacao (grupo "c"), e o foco declarado nao e modernizar.
+        Rector\Php53\Rector\Ternary\TernaryToElvisRector::class,
         Rector\Php70\Rector\FuncCall\RandomFunctionRector::class,   // random_int
         // As duas abaixo NAO estavam na denylist herdada do experimento do `div`:
         // elas nunca dispararam la. No `iss` dispararam, emitiram funcao inexistente

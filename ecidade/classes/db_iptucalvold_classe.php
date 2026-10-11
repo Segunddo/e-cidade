@@ -80,16 +80,16 @@ class cl_iptucalvold
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->j157_sequencial = ($this->j157_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_sequencial"]:$this->j157_sequencial);
-       $this->j157_anousu = ($this->j157_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_anousu"]:$this->j157_anousu);
-       $this->j157_matric = ($this->j157_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_matric"]:$this->j157_matric);
-       $this->j157_receit = ($this->j157_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_receit"]:$this->j157_receit);
-       $this->j157_valor = ($this->j157_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_valor"]:$this->j157_valor);
-       $this->j157_quant = ($this->j157_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_quant"]:$this->j157_quant);
-       $this->j157_codhis = ($this->j157_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_codhis"]:$this->j157_codhis);
-       $this->j157_iptucalclog = ($this->j157_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_iptucalclog"]:$this->j157_iptucalclog);
+       $this->j157_sequencial = ($this->j157_sequencial === 0 || $this->j157_sequencial === 0.0 || $this->j157_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_sequencial"]:$this->j157_sequencial);
+       $this->j157_anousu = ($this->j157_anousu === 0 || $this->j157_anousu === 0.0 || $this->j157_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_anousu"]:$this->j157_anousu);
+       $this->j157_matric = ($this->j157_matric === 0 || $this->j157_matric === 0.0 || $this->j157_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_matric"]:$this->j157_matric);
+       $this->j157_receit = ($this->j157_receit === 0 || $this->j157_receit === 0.0 || $this->j157_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_receit"]:$this->j157_receit);
+       $this->j157_valor = ($this->j157_valor === 0 || $this->j157_valor === 0.0 || $this->j157_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_valor"]:$this->j157_valor);
+       $this->j157_quant = ($this->j157_quant === 0 || $this->j157_quant === 0.0 || $this->j157_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_quant"]:$this->j157_quant);
+       $this->j157_codhis = ($this->j157_codhis === 0 || $this->j157_codhis === 0.0 || $this->j157_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_codhis"]:$this->j157_codhis);
+       $this->j157_iptucalclog = ($this->j157_iptucalclog === 0 || $this->j157_iptucalclog === 0.0 || $this->j157_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_iptucalclog"]:$this->j157_iptucalclog);
      }else{
-       $this->j157_sequencial = ($this->j157_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_sequencial"]:$this->j157_sequencial);
+       $this->j157_sequencial = ($this->j157_sequencial === 0 || $this->j157_sequencial === 0.0 || $this->j157_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j157_sequencial"]:$this->j157_sequencial);
      }
    }
 
@@ -183,7 +183,7 @@ class cl_iptucalvold
          $this->j157_sequencial = $j157_sequencial; 
        }
      }
-     if(($this->j157_sequencial == null) || ($this->j157_sequencial == "") ){ 
+     if(($this->j157_sequencial == null) || ($this->j157_sequencial === 0 || $this->j157_sequencial === 0.0 || $this->j157_sequencial == "") ){ 
        $this->erro_sql = " Campo j157_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

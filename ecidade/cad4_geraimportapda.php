@@ -85,7 +85,7 @@ if( isset($importa) ) {
     $arq_matriculas = file($matriculas["tmp_name"]);
     ///
     for($i=0;$i<count($arq_matriculas);$i++){
-      $conteudo = split(";" ,$arq_matriculas[$i]);
+      $conteudo = preg_split("#;#m" ,$arq_matriculas[$i]);
  
  
  
@@ -138,7 +138,7 @@ if( isset($importa) ) {
       $arq_testadas   = file($testadas["tmp_name"]);
       ///
       for($i=0;$i<count($arq_testadas);$i++){
-        $conteudo = split(";",$arq_testadas[$i]);
+        $conteudo = preg_split("#;#m",$arq_testadas[$i]);
         /*
         $sql = "insert into mobavalogradouro values (
             ".$conteudo[0].",
@@ -190,7 +190,7 @@ if( isset($importa) ) {
 
 
     for($i=0;$i<count($arq_edificacoes);$i++){
-      $conteudo = split(";",$arq_edificacoes[$i]);
+      $conteudo = preg_split("#;#m",$arq_edificacoes[$i]);
      
      
       /*$sql = "insert into mobavaedificacao values (

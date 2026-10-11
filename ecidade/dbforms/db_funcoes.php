@@ -413,7 +413,7 @@ if (!function_exists("db_multiploselect")) {
                                 style="width:<?= $width ?>px" multiple
                                 onDblClick="js_db_multiploselect_incluir_item(this,document.form1.<?= $objsel ?>);">
                             <?php
-                            if (gettype($recordnsel) == "resource") {
+                            if ((gettype($recordnsel) == "resource" || is_object($recordnsel))) {
                                 $numrows_recnsel = pg_numrows($recordnsel);
                                 for ($i = 0; $i < $numrows_recnsel; $i++) {
                                     db_fieldsmemory($recordnsel, $i);
@@ -472,7 +472,7 @@ if (!function_exists("db_multiploselect")) {
                                 style="width:<?= $width ?>px" multiple
                                 onDblClick="js_db_multiploselect_incluir_item(this,document.form1.<?= $objnsel ?>);">
                             <?php
-                            if (gettype($recordsel) == "resource") {
+                            if ((gettype($recordsel) == "resource" || is_object($recordsel))) {
                                 $numrows_recsel = pg_numrows($recordsel);
                                 for ($i = 0; $i < $numrows_recsel; $i++) {
                                     db_fieldsmemory($recordsel, $i);
@@ -924,7 +924,7 @@ if (!function_exists("db_selectmultiple")) {
                 ?>
             >
                 <?php
-                if (gettype($record) == "resource") {
+                if ((gettype($record) == "resource" || is_object($record))) {
                     for ($sqli = 0; $sqli < pg_numrows($record); $sqli++) {
                         if ($sqli % 2 == 0) {
                             $color = "#D7CC06";
@@ -981,7 +981,7 @@ if (!function_exists("db_selectmultiple")) {
             <?php
         } else {
             if (!is_int($record_select) && $record_select != false) {
-                if (gettype($record) == "resource") {
+                if ((gettype($record) == "resource" || is_object($record))) {
                     if (pg_numrows($record_select) > 0) {
                         db_selectrecord($nome, $record_select, true, ($db_opcao == 3 ? 2 : $db_opcao), "", $nomevar = "", $bgcolor = "", $todos = "", $onchange = "");
                     }
@@ -1154,7 +1154,7 @@ if (!function_exists("db_inputdata")) {
         <input name="<?= ($nomevar == "" ? $nome : $nomevar) . "_ano" ?>" type="hidden" title=""
                id="<?= ($nomevar == "" ? $nome : $nomevar) . "_ano" ?>" value="<?= @$ano ?>" size="4" maxlength="4">
         <?php
-        if (($db_opcao < 3) || ($db_opcao == 4)) {
+        if (((float)$db_opcao < 3) || ($db_opcao == 4)) {
             ?>
             <script>
                 var PosMouseY, PosMoudeX;

@@ -58,7 +58,7 @@ class cl_testada {
                  j36_orientacao = int4 = Orientação
                  ";
    //funcao construtor da classe
-   function cl_testada() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("testada");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,15 +75,15 @@ class cl_testada {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j36_idbql = ($this->j36_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_idbql"]:$this->j36_idbql);
-       $this->j36_face = ($this->j36_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_face"]:$this->j36_face);
-       $this->j36_codigo = ($this->j36_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_codigo"]:$this->j36_codigo);
-       $this->j36_testad = ($this->j36_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_testad"]:$this->j36_testad);
-       $this->j36_testle = ($this->j36_testle == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_testle"]:$this->j36_testle);
-       $this->j36_orientacao = ($this->j36_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_orientacao"]:$this->j36_orientacao);
+       $this->j36_idbql = ($this->j36_idbql === 0 || $this->j36_idbql === 0.0 || $this->j36_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_idbql"]:$this->j36_idbql);
+       $this->j36_face = ($this->j36_face === 0 || $this->j36_face === 0.0 || $this->j36_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_face"]:$this->j36_face);
+       $this->j36_codigo = ($this->j36_codigo === 0 || $this->j36_codigo === 0.0 || $this->j36_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_codigo"]:$this->j36_codigo);
+       $this->j36_testad = ($this->j36_testad === 0 || $this->j36_testad === 0.0 || $this->j36_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_testad"]:$this->j36_testad);
+       $this->j36_testle = ($this->j36_testle === 0 || $this->j36_testle === 0.0 || $this->j36_testle == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_testle"]:$this->j36_testle);
+       $this->j36_orientacao = ($this->j36_orientacao === 0 || $this->j36_orientacao === 0.0 || $this->j36_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_orientacao"]:$this->j36_orientacao);
      }else{
-       $this->j36_idbql = ($this->j36_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_idbql"]:$this->j36_idbql);
-       $this->j36_face = ($this->j36_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_face"]:$this->j36_face);
+       $this->j36_idbql = ($this->j36_idbql === 0 || $this->j36_idbql === 0.0 || $this->j36_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_idbql"]:$this->j36_idbql);
+       $this->j36_face = ($this->j36_face === 0 || $this->j36_face === 0.0 || $this->j36_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j36_face"]:$this->j36_face);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_testada {
      }
        $this->j36_idbql = $j36_idbql;
        $this->j36_face = $j36_face;
-     if(($this->j36_idbql == null) || ($this->j36_idbql == "") ){
+     if(($this->j36_idbql == null) || ($this->j36_idbql === 0 || $this->j36_idbql === 0.0 || $this->j36_idbql == "") ){
        $this->erro_sql = " Campo j36_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -117,7 +117,7 @@ class cl_testada {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j36_face == null) || ($this->j36_face == "") ){
+     if(($this->j36_face == null) || ($this->j36_face === 0 || $this->j36_face === 0.0 || $this->j36_face == "") ){
        $this->erro_sql = " Campo j36_face nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

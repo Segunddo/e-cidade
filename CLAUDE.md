@@ -75,7 +75,7 @@ portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compa
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra)[0-9]*_` — **1.813 telas** |
-| **Próximo passo** | **Fase B EM ANDAMENTO** — escopo B adotado. `amb` e `pre` ✅ (13 telas roteadas por `map`). Faltam `cad` 166, `cai` 101, `pro` 35, `con` 30, `prot` 4, `rec` 1, `dv` 1. Área em **703 de 1.056 telas (66,6%)**. |
+| **Próximo passo** | **Fase B EM ANDAMENTO.** `amb` · `pre` · `cad` ✅ (179 telas roteadas por `map`). Faltam `cai` 101, `pro` 35, `con` 30, `prot` 4, `rec` 1, `dv` 1. Área em **869 de 1.056 telas (82,3%)**. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
@@ -2367,6 +2367,168 @@ produzem saída idêntica nos dois runtimes depois dela.
 
 **O `php -l` dirigiu a correção, e foi preciso:** corrigi a linha 91, reconferi, e o lint
 apontou a **104**. Supor que a primeira era a única teria deixado o arquivo quebrado.
+
+### Estado: MÓDULO `cad` (Cadastro) PORTADO ✅ — 2º lote da Fase B, e o maior salto de cobertura
+
+O único módulo da área que estava em **zero telas** no 8.5. Depois dele, a área salta de
+66,6% para **82,3%**.
+
+**Decisão de escopo, medida:** o prefixo inteiro custaria **376** arquivos; o universo das
+telas que o `map` de fato roteia custa **210**. Escolhi os 210 — os outros 166 seriam
+pré-pagamento para Financeiro e Patrimonial, que não estão no escopo. Diferente de `amb`/`pre`,
+onde portar tudo custava 57 e não valia a conta separada.
+
+| | |
+|---|---|
+| Telas do prefixo em disco | 523 |
+| **Telas roteadas (Tributário)** | **166** (162 existem em disco) |
+| Universo das 7 frentes, a partir delas | 555 |
+| Já pago | 413 |
+| **Alterados** | **210** |
+| `php -l` nos dois runtimes | **555/555, 0 erros** |
+| Instanciação das classes | **201/202 idênticas** |
+| Caminho de escrita | 2.049 linhas, **byte-a-byte idêntico** |
+| **Bateria das telas roteadas** | **166/166** |
+| Regressão nos 15 módulos roteados | **zero** |
+
+Correções: 529 guardas `== <literal>`, 328 `split`/`ereg` → `preg_*`, 99 `parse_str`+`extract`,
+82 construtores PHP 4, 8 `gettype`→`is_object` e 2 `(float)` (as duas últimas no núcleo).
+
+### Denylist do Rector: 25 → 28 (QUINTA vez), e uma delas APAGAVA SQL
+
+**`RemoveExtraParametersRector` é a regra mais perigosa encontrada até aqui.** Ela remove
+argumentos quando a chamada passa mais do que a assinatura declara:
+
+```php
+// cad1_ruas003.php
+$cllogradcep->excluir("","","j65_lograd=$j14_codigo");
+->  $cllogradcep->excluir("","");          // o WHERE do DELETE SUMIU
+
+// cad1_aba2ruas001.php
+$cllogradcep->incluir($j14_codigo, $logs_split[$i]);
+->  $cllogradcep->incluir();               // os dois argumentos do INSERT
+```
+
+**Medido: o PHP 8.5 ainda aceita argumentos extras** em função de usuário — `func_num_args()`
+devolve 3 nos dois runtimes. Logo a regra **não é exigida pela versão de destino**; é limpeza,
+e limpeza que apaga a cláusula `WHERE` de um `DELETE` em sistema de tributos.
+
+As outras duas:
+
+| Regra | O que fez | Veredito |
+|---|---|---|
+| `SensitiveConstantNameRector` | transformou a constante indefinida `l` em `\L` | muda o VALOR: no 5.6 a constante indefinida vira `"l"`, não `"L"` |
+| `TernaryToElvisRector` | `($x)?$x:' '` → `$x ?: ' '` | equivalente, mas é modernização — fora do foco |
+
+### CATEGORIA NOVA (cad): `gettype($x) == "resource"` — a variante que a varredura de `is_resource` NÃO pega
+
+O catálogo já registra `is_resource()` sobre resultado do PostgreSQL. Esta é a **mesma falha
+escrita de outro jeito**, e por isso escapou da medição de 237 ocorrências feita no `fis`:
+
+```php
+dbforms/db_funcoes.php:416   if (gettype($recordnsel) == "resource") {
+```
+
+```
+             pg_query(...) -> gettype
+PHP 5.6:     "resource"   -> laco roda, <option> saem
+PHP 8.5:     "object"     -> laco NAO roda, o <select> vem VAZIO
+```
+
+Sintoma em `cad2_iptulancpago001.php`: HTTP 200 nos dois, 123 bytes a menos, e as três opções
+`ZONA FISCAL 1/2/3` simplesmente ausentes. Nenhum fatal, nenhum log.
+
+Escala medida na base: **8 ocorrências em 2 arquivos** — 4 sítios no `db_funcoes.php` mais a
+cópia do `modification/`. Corrigidos os 4, porque 416 e 475 são as **duas metades da mesma
+chamada** (`db_multiploselect` monta a lista disponível e a selecionada) e 927/984 são o par
+equivalente em `db_selectmultiple`. Correção aditiva: `|| is_object($x)`, que não toca o
+caminho do 5.6.
+
+**Lição:** varrer por `is_resource` encontra uma grafia da categoria. A pergunta certa é
+"quem mais testa o TIPO do resultado?" — e `gettype()` é a resposta que faltava.
+
+### CATEGORIA (cad): a RFC de ordem no `db_inputdata()` do NÚCLEO
+
+```php
+dbforms/db_funcoes.php:1157   if (($db_opcao < 3) || ($db_opcao == 4)) {
+```
+
+Sondado em execução: `$db_opcao` vale **`'text'`** — uma string não-numérica.
+
+```
+             'text' < 3
+PHP 5.6:     true    ("text" vira 0)   -> o seletor de data e emitido
+PHP 8.5:     false   ("text" < "3")    -> o widget inteiro SOME
+```
+
+Em `cad1_ruas003.php` sumiam o `<script>` com `js_comparaDatasj14_dtlei` e o botão do
+calendário — 542 bytes, HTTP 200 nos dois.
+
+Correção `(float)$db_opcao < 3`, medida em 13 valores com **zero divergência**. A ocorrência
+irmã em `db_ancora()` (linha 355) **não foi tocada**: não se manifestou, e vale a decisão de
+corrigir na aparição.
+
+### ⚠ ERRO MEU: transformação em massa dentro de string SQL quebrou 7 arquivos
+
+O princípio deste arquivo diz "**nunca aplicar transformação em massa sem teste de
+caracterização antes**". Eu violei, e o preço apareceu em um minuto.
+
+Achei `trim(l)` em `classes/db_averbacao_classe.php` — constante indefinida, *notice* no 5.6
+(vira a string `"l"`) e **fatal no 8.5**. Categoria legítima. Varri o universo por
+`trim|strlen|strtoupper|...(bareword)`, achei 25 ocorrências, confirmei no runtime que
+**nenhum** dos 18 nomes é constante definida, e apliquei aspas nas 25.
+
+**Quebrou 7 arquivos, incluindo `libs/db_stdlib.php` do núcleo:**
+
+```sql
+-- o que meu regex "corrigiu":
+where trim(funcao) = '" . trim(addslashes(...)) . "'
+where trim("funcao") = '" . ...        <- aspas DENTRO de string PHP de aspas duplas
+```
+
+As 25 não eram PHP: eram **colunas de banco dentro de strings SQL**. Um regex que lê bytes não
+distingue código de string — é a mesma limitação que o catálogo registra para comentários, e
+que motivou adotar o Rector. Desfeitas as 25; `php -l` voltou a 555/555.
+
+**Fica só a de `db_averbacao_classe.php`**, que é PHP de verdade (verificado no contexto:
+`$sql .= ...` acima e `$this->erro_sql = ...` abaixo), corrigida para `trim("l")`.
+
+**A lição não é "o regex é ruim"** — é que o teste de caracterização tem de vir **antes** da
+aplicação, não depois. Rodar o `php -l` nos 555 arquivos custou 40 segundos e teria evitado
+tudo, se eu o tivesse rodado em um arquivo antes de aplicar nos 7.
+
+### ⚠ CORREÇÃO: o `map` do nginx É insensível a maiúsculas — emitir as duas grafias QUEBRA o proxy
+
+O gerador emitia cada tela em duas grafias (minúscula e a do disco), por analogia com a
+armadilha que obrigou o `location ~*`. O nginx recusou a configuração:
+
+```
+[emerg] conflicting parameter "cad4_emiteiptunovo.php" in faseb_map.conf:159
+```
+
+As duas linhas eram `cad4_emiteiptuNovo.php` e `cad4_emiteiptunovo.php`. O erro **prova** que
+o `map` trata as duas como a mesma chave. Verificado depois: `/Cad1_averbacao002.php` em
+maiúscula roteia para o 8.5 com uma única entrada minúscula no arquivo.
+
+**Generalizando:** `location ~` é sensível a caso e exigiu o `~*`; `map` **não é**. Prevenir-se
+da armadilha no lugar errado derrubou o proxy.
+
+### FERRAMENTAL: o harness de classes agora sobrevive a fatal (`scratchpad/harness_robusto.sh`)
+
+O `instancia_classes.php` processa a lista num processo só. **Um fatal mata o processo e o
+resto da lista nunca é testado** — e, como os dois runtimes morrem no mesmo arquivo, o
+resultado aparece como "idêntico".
+
+Medido no `cad`: a lista tinha **202 classes** e a saída trazia **57**. Parava em
+`classes/db_classecadastro.php`.
+
+O invólucro roda o harness repetidamente: quando ele morre, registra o culpado, pula para o
+seguinte e continua. Resultado: **201 de 202 idênticas**, com um único arquivo pulado — o
+mesmo nos dois runtimes.
+
+É a terceira vez que o instrumento de conferência precisa ser conferido (depois do
+`serialize()` de `DOMElement` e do `grep` com aspas). **Saída truncada é indistinguível de
+saída limpa quando não se conta o que entrou.**
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

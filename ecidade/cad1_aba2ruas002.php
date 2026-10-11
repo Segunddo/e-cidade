@@ -55,7 +55,7 @@ $db_opcao = 1;
   
 if(isset($incluir)){
   if (isset($logs)&&$logs!=""){
-    $logs_split = split(',',$logs);
+    $logs_split = preg_split('#,#m',$logs);
     $res = $cllogradcep->sql_record($cllogradcep->sql_query_file($j14_codigo));
     if ($cllogradcep->numrows > 0){
       $cllogradcep->excluir("","","j65_lograd=$j14_codigo");

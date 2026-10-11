@@ -50,7 +50,7 @@ class cl_iptucadtaxa {
                  j07_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_iptucadtaxa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptucadtaxa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_iptucadtaxa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j07_iptucadtaxa = ($this->j07_iptucadtaxa == ""?@$GLOBALS["HTTP_POST_VARS"]["j07_iptucadtaxa"]:$this->j07_iptucadtaxa);
+       $this->j07_iptucadtaxa = ($this->j07_iptucadtaxa === 0 || $this->j07_iptucadtaxa === 0.0 || $this->j07_iptucadtaxa == ""?@$GLOBALS["HTTP_POST_VARS"]["j07_iptucadtaxa"]:$this->j07_iptucadtaxa);
        $this->j07_descr = ($this->j07_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j07_descr"]:$this->j07_descr);
      }else{
-       $this->j07_iptucadtaxa = ($this->j07_iptucadtaxa == ""?@$GLOBALS["HTTP_POST_VARS"]["j07_iptucadtaxa"]:$this->j07_iptucadtaxa);
+       $this->j07_iptucadtaxa = ($this->j07_iptucadtaxa === 0 || $this->j07_iptucadtaxa === 0.0 || $this->j07_iptucadtaxa == ""?@$GLOBALS["HTTP_POST_VARS"]["j07_iptucadtaxa"]:$this->j07_iptucadtaxa);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_iptucadtaxa {
          $this->j07_iptucadtaxa = $j07_iptucadtaxa; 
        }
      }
-     if(($this->j07_iptucadtaxa == null) || ($this->j07_iptucadtaxa == "") ){ 
+     if(($this->j07_iptucadtaxa == null) || ($this->j07_iptucadtaxa === 0 || $this->j07_iptucadtaxa === 0.0 || $this->j07_iptucadtaxa == "") ){ 
        $this->erro_sql = " Campo j07_iptucadtaxa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_iptucadtaxa {
    function sql_query ( $j07_iptucadtaxa=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_iptucadtaxa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_iptucadtaxa {
    function sql_query_file ( $j07_iptucadtaxa=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_iptucadtaxa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -99,15 +99,15 @@ class cl_obrasender
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ob07_codconstr = ($this->ob07_codconstr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_codconstr"] : $this->ob07_codconstr);
-            $this->ob07_codobra = ($this->ob07_codobra == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_codobra"] : $this->ob07_codobra);
-            $this->ob07_lograd = ($this->ob07_lograd == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_lograd"] : $this->ob07_lograd);
+            $this->ob07_codconstr = ($this->ob07_codconstr === 0 || $this->ob07_codconstr === 0.0 || $this->ob07_codconstr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_codconstr"] : $this->ob07_codconstr);
+            $this->ob07_codobra = ($this->ob07_codobra === 0 || $this->ob07_codobra === 0.0 || $this->ob07_codobra == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_codobra"] : $this->ob07_codobra);
+            $this->ob07_lograd = ($this->ob07_lograd === 0 || $this->ob07_lograd === 0.0 || $this->ob07_lograd == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_lograd"] : $this->ob07_lograd);
             $this->ob07_numero = ($this->ob07_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_numero"] : $this->ob07_numero);
             $this->ob07_compl = ($this->ob07_compl == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_compl"] : $this->ob07_compl);
-            $this->ob07_bairro = ($this->ob07_bairro == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_bairro"] : $this->ob07_bairro);
+            $this->ob07_bairro = ($this->ob07_bairro === 0 || $this->ob07_bairro === 0.0 || $this->ob07_bairro == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_bairro"] : $this->ob07_bairro);
             $this->ob07_areaatual = ($this->ob07_areaatual === "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_areaatual"] : $this->ob07_areaatual);
-            $this->ob07_unidades = ($this->ob07_unidades == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_unidades"] : $this->ob07_unidades);
-            $this->ob07_pavimentos = ($this->ob07_pavimentos == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_pavimentos"] : $this->ob07_pavimentos);
+            $this->ob07_unidades = ($this->ob07_unidades === 0 || $this->ob07_unidades === 0.0 || $this->ob07_unidades == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_unidades"] : $this->ob07_unidades);
+            $this->ob07_pavimentos = ($this->ob07_pavimentos === 0 || $this->ob07_pavimentos === 0.0 || $this->ob07_pavimentos == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_pavimentos"] : $this->ob07_pavimentos);
             $this->ob07_inicio = ($this->ob07_inicio == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_inicio"] : $this->ob07_inicio);
             $this->ob07_fim = ($this->ob07_fim == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_fim"] : $this->ob07_fim);
 
@@ -124,7 +124,7 @@ class cl_obrasender
             $this->ob07_areadescoberta = ($this->ob07_areadescoberta === "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_areadescoberta"] : $this->ob07_areadescoberta);
             $this->ob07_areacoberta = ($this->ob07_areacoberta === "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_areacoberta"] : $this->ob07_areacoberta);
         } else {
-            $this->ob07_codconstr = ($this->ob07_codconstr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_codconstr"] : $this->ob07_codconstr);
+            $this->ob07_codconstr = ($this->ob07_codconstr === 0 || $this->ob07_codconstr === 0.0 || $this->ob07_codconstr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob07_codconstr"] : $this->ob07_codconstr);
         }
     }
 
@@ -621,7 +621,7 @@ class cl_obrasender
    function sql_query_constr( $ob07_codconstr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -647,7 +647,7 @@ class cl_obrasender
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

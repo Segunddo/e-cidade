@@ -52,7 +52,7 @@ class cl_ruastipo {
                  j88_descricao = varchar(20) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_ruastipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ruastipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);

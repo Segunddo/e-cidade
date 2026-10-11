@@ -36,7 +36,8 @@ include(modification("classes/db_ruasbairro_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_ruastipo_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clruas        = new cl_ruas;
 $cllogradcep   = new cl_logradcep;
@@ -51,7 +52,7 @@ $db_codopcao   = 3;
 if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Excluir"){
   // db_inicio_transacao();
   $db_opcao = 3;
- 
+
   if ($sqlerro==false){
     $reslogradcep = $cllogradcep->sql_record($cllogradcep->sql_query_file($j14_codigo,"","*","","j65_lograd = $j14_codigo"));
     if($cllogradcep->numrows > 0){    	
@@ -62,7 +63,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Excluir
         }
     }  
   }
-  
+
   if ($sqlerro==false){
      $resruascep = $clruascep->sql_record($clruascep->sql_query_file(null,null,"*",null,"j29_codigo = $j14_codigo"));
      if($clruascep->numrows > 0){
@@ -74,7 +75,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Excluir
          }
     }
   }
-  
+
   if ($sqlerro==false){
   	$clruasbairro->excluir(null,"j16_lograd=$j14_codigo");
   	if ($clruasbairro->erro_status==0){
@@ -82,11 +83,11 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Excluir
       $erro_msg=$clruasbairro->erro_msg;
     }  	
   }    
-  
+
   if ($sqlerro==false){
   	//debug($clruas);
   	$clruas->excluir($j14_codigo);
-  	
+
   	//debug($clruas,true);
   	//exit;
     if ($clruas->erro_status==0){

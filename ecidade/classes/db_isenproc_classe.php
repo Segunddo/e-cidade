@@ -50,7 +50,7 @@ class cl_isenproc {
                  j61_codproc = int4 = Código do processo 
                  ";
    //funcao construtor da classe 
-   function cl_isenproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isenproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_isenproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j61_codigo = ($this->j61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j61_codigo"]:$this->j61_codigo);
-       $this->j61_codproc = ($this->j61_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j61_codproc"]:$this->j61_codproc);
+       $this->j61_codigo = ($this->j61_codigo === 0 || $this->j61_codigo === 0.0 || $this->j61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j61_codigo"]:$this->j61_codigo);
+       $this->j61_codproc = ($this->j61_codproc === 0 || $this->j61_codproc === 0.0 || $this->j61_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j61_codproc"]:$this->j61_codproc);
      }else{
      }
    }
@@ -315,7 +315,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $oid = null,$campos="isenproc.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -344,7 +344,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -356,7 +356,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -374,7 +374,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

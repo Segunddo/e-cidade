@@ -84,7 +84,7 @@ class cl_moblevantamentoedi {
                  j96_subtitulo = int4 = Sub Título 
                  ";
    //funcao construtor da classe 
-   function cl_moblevantamentoedi() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("moblevantamentoedi"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -101,27 +101,27 @@ class cl_moblevantamentoedi {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j96_sequen = ($this->j96_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_sequen"]:$this->j96_sequen);
-       $this->j96_codimporta = ($this->j96_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_codimporta"]:$this->j96_codimporta);
-       $this->j96_matric = ($this->j96_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_matric"]:$this->j96_matric);
-       $this->j96_codigo = ($this->j96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_codigo"]:$this->j96_codigo);
+       $this->j96_sequen = ($this->j96_sequen === 0 || $this->j96_sequen === 0.0 || $this->j96_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_sequen"]:$this->j96_sequen);
+       $this->j96_codimporta = ($this->j96_codimporta === 0 || $this->j96_codimporta === 0.0 || $this->j96_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_codimporta"]:$this->j96_codimporta);
+       $this->j96_matric = ($this->j96_matric === 0 || $this->j96_matric === 0.0 || $this->j96_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_matric"]:$this->j96_matric);
+       $this->j96_codigo = ($this->j96_codigo === 0 || $this->j96_codigo === 0.0 || $this->j96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_codigo"]:$this->j96_codigo);
        $this->j96_numero = ($this->j96_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_numero"]:$this->j96_numero);
        $this->j96_compl = ($this->j96_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_compl"]:$this->j96_compl);
-       $this->j96_paredes = ($this->j96_paredes == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_paredes"]:$this->j96_paredes);
-       $this->j96_cobertura = ($this->j96_cobertura == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_cobertura"]:$this->j96_cobertura);
-       $this->j96_revexterno = ($this->j96_revexterno == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_revexterno"]:$this->j96_revexterno);
-       $this->j96_esquadrias = ($this->j96_esquadrias == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_esquadrias"]:$this->j96_esquadrias);
-       $this->j96_forro = ($this->j96_forro == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_forro"]:$this->j96_forro);
-       $this->j96_pintura = ($this->j96_pintura == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_pintura"]:$this->j96_pintura);
-       $this->j96_piso = ($this->j96_piso == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_piso"]:$this->j96_piso);
-       $this->j96_revinterno = ($this->j96_revinterno == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_revinterno"]:$this->j96_revinterno);
-       $this->j96_instsanitario = ($this->j96_instsanitario == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_instsanitario"]:$this->j96_instsanitario);
-       $this->j96_insteletrica = ($this->j96_insteletrica == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_insteletrica"]:$this->j96_insteletrica);
-       $this->j96_idade = ($this->j96_idade == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_idade"]:$this->j96_idade);
-       $this->j96_tipoconstr = ($this->j96_tipoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_tipoconstr"]:$this->j96_tipoconstr);
-       $this->j96_subtitulo = ($this->j96_subtitulo == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_subtitulo"]:$this->j96_subtitulo);
+       $this->j96_paredes = ($this->j96_paredes === 0 || $this->j96_paredes === 0.0 || $this->j96_paredes == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_paredes"]:$this->j96_paredes);
+       $this->j96_cobertura = ($this->j96_cobertura === 0 || $this->j96_cobertura === 0.0 || $this->j96_cobertura == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_cobertura"]:$this->j96_cobertura);
+       $this->j96_revexterno = ($this->j96_revexterno === 0 || $this->j96_revexterno === 0.0 || $this->j96_revexterno == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_revexterno"]:$this->j96_revexterno);
+       $this->j96_esquadrias = ($this->j96_esquadrias === 0 || $this->j96_esquadrias === 0.0 || $this->j96_esquadrias == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_esquadrias"]:$this->j96_esquadrias);
+       $this->j96_forro = ($this->j96_forro === 0 || $this->j96_forro === 0.0 || $this->j96_forro == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_forro"]:$this->j96_forro);
+       $this->j96_pintura = ($this->j96_pintura === 0 || $this->j96_pintura === 0.0 || $this->j96_pintura == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_pintura"]:$this->j96_pintura);
+       $this->j96_piso = ($this->j96_piso === 0 || $this->j96_piso === 0.0 || $this->j96_piso == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_piso"]:$this->j96_piso);
+       $this->j96_revinterno = ($this->j96_revinterno === 0 || $this->j96_revinterno === 0.0 || $this->j96_revinterno == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_revinterno"]:$this->j96_revinterno);
+       $this->j96_instsanitario = ($this->j96_instsanitario === 0 || $this->j96_instsanitario === 0.0 || $this->j96_instsanitario == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_instsanitario"]:$this->j96_instsanitario);
+       $this->j96_insteletrica = ($this->j96_insteletrica === 0 || $this->j96_insteletrica === 0.0 || $this->j96_insteletrica == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_insteletrica"]:$this->j96_insteletrica);
+       $this->j96_idade = ($this->j96_idade === 0 || $this->j96_idade === 0.0 || $this->j96_idade == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_idade"]:$this->j96_idade);
+       $this->j96_tipoconstr = ($this->j96_tipoconstr === 0 || $this->j96_tipoconstr === 0.0 || $this->j96_tipoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_tipoconstr"]:$this->j96_tipoconstr);
+       $this->j96_subtitulo = ($this->j96_subtitulo === 0 || $this->j96_subtitulo === 0.0 || $this->j96_subtitulo == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_subtitulo"]:$this->j96_subtitulo);
      }else{
-       $this->j96_sequen = ($this->j96_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_sequen"]:$this->j96_sequen);
+       $this->j96_sequen = ($this->j96_sequen === 0 || $this->j96_sequen === 0.0 || $this->j96_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_sequen"]:$this->j96_sequen);
      }
    }
    // funcao para inclusao
@@ -295,7 +295,7 @@ class cl_moblevantamentoedi {
          $this->j96_sequen = $j96_sequen; 
        }
      }
-     if(($this->j96_sequen == null) || ($this->j96_sequen == "") ){ 
+     if(($this->j96_sequen == null) || ($this->j96_sequen === 0 || $this->j96_sequen === 0.0 || $this->j96_sequen == "") ){ 
        $this->erro_sql = " Campo j96_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -819,7 +819,7 @@ class cl_moblevantamentoedi {
    function sql_query ( $j96_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -842,7 +842,7 @@ class cl_moblevantamentoedi {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -854,7 +854,7 @@ class cl_moblevantamentoedi {
    function sql_query_file ( $j96_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -875,7 +875,7 @@ class cl_moblevantamentoedi {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

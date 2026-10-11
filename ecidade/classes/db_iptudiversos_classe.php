@@ -52,7 +52,7 @@ class cl_iptudiversos {
                  j80_profund = float8 = Profundidade 
                  ";
    //funcao construtor da classe 
-   function cl_iptudiversos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptudiversos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_iptudiversos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j80_matric = ($this->j80_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_matric"]:$this->j80_matric);
-       $this->j80_areatrib = ($this->j80_areatrib == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_areatrib"]:$this->j80_areatrib);
-       $this->j80_profund = ($this->j80_profund == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_profund"]:$this->j80_profund);
+       $this->j80_matric = ($this->j80_matric === 0 || $this->j80_matric === 0.0 || $this->j80_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_matric"]:$this->j80_matric);
+       $this->j80_areatrib = ($this->j80_areatrib === 0 || $this->j80_areatrib === 0.0 || $this->j80_areatrib == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_areatrib"]:$this->j80_areatrib);
+       $this->j80_profund = ($this->j80_profund === 0 || $this->j80_profund === 0.0 || $this->j80_profund == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_profund"]:$this->j80_profund);
      }else{
-       $this->j80_matric = ($this->j80_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_matric"]:$this->j80_matric);
+       $this->j80_matric = ($this->j80_matric === 0 || $this->j80_matric === 0.0 || $this->j80_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_matric"]:$this->j80_matric);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_iptudiversos {
        return false;
      }
        $this->j80_matric = $j80_matric; 
-     if(($this->j80_matric == null) || ($this->j80_matric == "") ){ 
+     if(($this->j80_matric == null) || ($this->j80_matric === 0 || $this->j80_matric === 0.0 || $this->j80_matric == "") ){ 
        $this->erro_sql = " Campo j80_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -336,7 +336,7 @@ class cl_iptudiversos {
    function sql_query ( $j80_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -360,7 +360,7 @@ class cl_iptudiversos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -372,7 +372,7 @@ class cl_iptudiversos {
    function sql_query_file ( $j80_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_iptudiversos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

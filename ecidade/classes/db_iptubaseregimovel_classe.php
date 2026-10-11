@@ -58,7 +58,7 @@ class cl_iptubaseregimovel {
                  j04_loteregimo = varchar(20) = Lote do registro de imóveis 
                  ";
    //funcao construtor da classe 
-   function cl_iptubaseregimovel() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptubaseregimovel"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_iptubaseregimovel {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j04_sequencial = ($this->j04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_sequencial"]:$this->j04_sequencial);
-       $this->j04_setorregimovel = ($this->j04_setorregimovel == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_setorregimovel"]:$this->j04_setorregimovel);
-       $this->j04_matric = ($this->j04_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_matric"]:$this->j04_matric);
+       $this->j04_sequencial = ($this->j04_sequencial === 0 || $this->j04_sequencial === 0.0 || $this->j04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_sequencial"]:$this->j04_sequencial);
+       $this->j04_setorregimovel = ($this->j04_setorregimovel === 0 || $this->j04_setorregimovel === 0.0 || $this->j04_setorregimovel == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_setorregimovel"]:$this->j04_setorregimovel);
+       $this->j04_matric = ($this->j04_matric === 0 || $this->j04_matric === 0.0 || $this->j04_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_matric"]:$this->j04_matric);
        $this->j04_matricregimo = ($this->j04_matricregimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_matricregimo"]:$this->j04_matricregimo);
        $this->j04_quadraregimo = ($this->j04_quadraregimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_quadraregimo"]:$this->j04_quadraregimo);
        $this->j04_loteregimo = ($this->j04_loteregimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_loteregimo"]:$this->j04_loteregimo);
      }else{
-       $this->j04_sequencial = ($this->j04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_sequencial"]:$this->j04_sequencial);
+       $this->j04_sequencial = ($this->j04_sequencial === 0 || $this->j04_sequencial === 0.0 || $this->j04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j04_sequencial"]:$this->j04_sequencial);
      }
    }
    // funcao para inclusao
@@ -130,7 +130,7 @@ class cl_iptubaseregimovel {
          $this->j04_sequencial = $j04_sequencial; 
        }
      }
-     if(($this->j04_sequencial == null) || ($this->j04_sequencial == "") ){ 
+     if(($this->j04_sequencial == null) || ($this->j04_sequencial === 0 || $this->j04_sequencial === 0.0 || $this->j04_sequencial == "") ){ 
        $this->erro_sql = " Campo j04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

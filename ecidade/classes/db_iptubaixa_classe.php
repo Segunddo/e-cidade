@@ -64,7 +64,7 @@ class cl_iptubaixa {
                  j02_hora = char(5) = Hora 
                  ";
    //funcao construtor da classe 
-   function cl_iptubaixa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptubaixa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,7 +81,7 @@ class cl_iptubaixa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j02_matric = ($this->j02_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_matric"]:$this->j02_matric);
+       $this->j02_matric = ($this->j02_matric === 0 || $this->j02_matric === 0.0 || $this->j02_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_matric"]:$this->j02_matric);
        if($this->j02_dtbaixa == ""){
          $this->j02_dtbaixa_dia = ($this->j02_dtbaixa_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_dtbaixa_dia"]:$this->j02_dtbaixa_dia);
          $this->j02_dtbaixa_mes = ($this->j02_dtbaixa_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_dtbaixa_mes"]:$this->j02_dtbaixa_mes);
@@ -91,7 +91,7 @@ class cl_iptubaixa {
          }
        }
        $this->j02_motivo = ($this->j02_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_motivo"]:$this->j02_motivo);
-       $this->j02_usuario = ($this->j02_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_usuario"]:$this->j02_usuario);
+       $this->j02_usuario = ($this->j02_usuario === 0 || $this->j02_usuario === 0.0 || $this->j02_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_usuario"]:$this->j02_usuario);
        if($this->j02_data == ""){
          $this->j02_data_dia = ($this->j02_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_data_dia"]:$this->j02_data_dia);
          $this->j02_data_mes = ($this->j02_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_data_mes"]:$this->j02_data_mes);
@@ -102,7 +102,7 @@ class cl_iptubaixa {
        }
        $this->j02_hora = ($this->j02_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_hora"]:$this->j02_hora);
      }else{
-       $this->j02_matric = ($this->j02_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_matric"]:$this->j02_matric);
+       $this->j02_matric = ($this->j02_matric === 0 || $this->j02_matric === 0.0 || $this->j02_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_matric"]:$this->j02_matric);
      }
    }
    // funcao para inclusao
@@ -154,7 +154,7 @@ class cl_iptubaixa {
        return false;
      }
        $this->j02_matric = $j02_matric; 
-     if(($this->j02_matric == null) || ($this->j02_matric == "") ){ 
+     if(($this->j02_matric == null) || ($this->j02_matric === 0 || $this->j02_matric === 0.0 || $this->j02_matric == "") ){ 
        $this->erro_sql = " Campo j02_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -477,7 +477,7 @@ class cl_iptubaixa {
    function sql_query ( $j02_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_iptubaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -514,7 +514,7 @@ class cl_iptubaixa {
    function sql_query_file ( $j02_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -535,7 +535,7 @@ class cl_iptubaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -549,7 +549,7 @@ class cl_iptubaixa {
 
     $sql = "select ";
     if($campos != "*" ){
-     $campos_sql = split("#",$campos);
+     $campos_sql = preg_split("#\\##m",$campos);
      $virgula = "";
      for($i=0;$i<sizeof($campos_sql);$i++){
        $sql .= $virgula.$campos_sql[$i];
@@ -576,7 +576,7 @@ class cl_iptubaixa {
     $sql .= $sql2;
     if($ordem != null ){
      $sql .= " order by ";
-     $campos_sql = split("#",$ordem);
+     $campos_sql = preg_split("#\\##m",$ordem);
      $virgula = "";
      for($i=0;$i<sizeof($campos_sql);$i++){
        $sql .= $virgula.$campos_sql[$i];
