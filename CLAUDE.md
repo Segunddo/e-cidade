@@ -2856,6 +2856,106 @@ servidos pelo 5.6. Estão **portados** (entram pelo universo das sete frentes) e
 dois runtimes, mas não estão roteados. Rotear o resto exigiria estender o `map` com os
 arquivos fora do menu, que o banco não sabe classificar por área.
 
+### ✅ NÍVEL 3 EM ESCALA — 18 telas roteadas, 14 módulos, zero divergências
+
+O maior ponto fraco declarado do trabalho era este: **as 6.552 guardas `0 == ""` são 60% de
+todas as correções, e só disparam no `POST`** — enquanto a bateria de 2.236 telas é toda
+`GET`. O nível 1 (estado do objeto) as cobria em todos os lotes; o nível 3 (POST real,
+comparando o SQL emitido) tinha rodado em **uma** tela.
+
+Agora são **18**, cobrindo 14 dos 16 módulos:
+
+```
+agu arr cem div jur mar not tri cad cai fis inf iss itb
+```
+
+Cada uma submete o mesmo `POST` aos dois runtimes, com snapshot/restore entre eles, e compara
+o `INSERT` de negócio campo a campo. **Zero divergências.**
+
+#### FERRAMENTAL NOVO: `scratchpad/payload_auto.py`
+
+O catálogo registrava que "o que limita o nível 3 é montar o payload, não o custo de
+execução". Provado na prática: errei **duas vezes seguidas** antes de acertar uma tela —
+inventei um nome de arquivo que não existe, e depois usei nomes de campo que não eram os reais
+(`cm34_descr` em vez de `cm34_descricao`, `cm34_dtvalidade` em vez de `cm34_datalimite`).
+
+A saída foi ler o formulário que o próprio 5.6 emite e gerar o esqueleto: nomes reais dos
+campos, o botão de submit certo (ignorando os `dtjs_*`, que são seletores de calendário), as
+opções de cada `<select>` e os `_dia`/`_mes`/`_ano` escondidos. Com ele, **18 das 28 telas
+exercitaram de primeira**.
+
+#### ⚠ A primeira rodada deu 5 DIVERGE — e as CINCO eram do instrumento
+
+Vale registrar inteiro, porque é o padrão que se repete neste projeto.
+
+**Defeito 1 — o parser engolia a linha de `ERRO:` do PostgreSQL.** A junção de continuação
+colava qualquer linha seguinte ao statement, e as linhas de erro trazem timestamp e PID
+próprios:
+
+```
+5.6> insert into advog(...) values ( 1 ,'1' ,'1' ) 2026-10-11 15:06:50.952 [8134] ERRO: ...
+8.5> insert into advog(...) values ( 1 ,'1' ,'1' ) 2026-10-11 15:06:53.437 [8156] ERRO: ...
+```
+
+O `INSERT` é idêntico; divergia **só pelo relógio**. Corrigido distinguindo linha de log
+(qualquer nível) de continuação de SQL. Isso sozinho levou 5 DIVERGE para 1.
+
+**Defeito 2 — o nome da sequência não era casado.** O harness procurava só
+`<tabela>_%_seq`, mas a convenção do e-cidade tem **três** formas:
+
+```
+cemiterioisencao_cm34_sequencial_seq    <tabela>_<campo>_seq
+cem_legista_seq                         <modulo>_<tabela>_seq   <- a tabela no MEIO
+<tabela>_seq
+```
+
+Sem restaurar a de `legista`, o segundo runtime recebia o número seguinte — `values ( 8 ...)`
+contra `( 9 ...)`. **É exatamente a divergência benigna que o próprio catálogo previa**, e
+que eu não tinha percebido estar acontecendo.
+
+**Defeito 3, o pior — ele APROVAVA quando nada acontecia.** Com os dois lados vazios, imprimia
+"SQL de escrita de NEGOCIO IDENTICO". Achado por acidente, ao rodar com um nome de tela
+inexistente: 404 nos dois lados, zero statements, veredito positivo. Agora reporta
+**`INCONCLUSIVO`** e sai com código 2.
+
+**É a quarta vez que o instrumento de conferência precisa ser conferido** — depois do
+`serialize()` de `DOMElement`, do `grep` com aspas e do invólucro que contava linhas de saída.
+E o terceiro defeito é o mais grave de todos: *dá impressão de cobertura onde não houve
+nenhuma*. Se eu tivesse rodado as 18 telas com o harness anterior e errado payloads, teria
+entregue "18 telas verificadas" sem ter verificado nada.
+
+#### ⚠ ERRO DE MÉTODO MEU: testei telas que NÃO estão roteadas
+
+Duas divergências sobreviveram às correções, em `cad1_averba001.php` e `cad1_averbacgm001.php`.
+Diagnóstico no 8.5:
+
+```
+ArgumentCountError: parse_str() expects exactly 2 arguments, 1 given
+  em cad1_averba001.php:34
+```
+
+Um `parse_str` de 1 argumento **não portado**. Mas antes de chamar isso de defeito, conferi o
+roteamento: **as duas telas não estão no `map`** — são servidas pelo 5.6, onde funcionam.
+Testei código que nunca executa no 8.5.
+
+Meu critério de seleção pegava "telas de inclusão por prefixo", não "telas roteadas". Das 33
+testadas, **5 não estavam roteadas** e foram descartadas da contagem.
+
+**O achado continua valendo, por outro motivo:** ele é a prova concreta de que a fronteira do
+escopo B é real e está no lugar certo. Os arquivos `cad` fora do menu **não** foram portados,
+e fatalariam se fossem roteados. O `map` é o que os mantém no runtime onde funcionam.
+
+#### O que fica em aberto
+
+Das 28 telas roteadas testadas: **18 exercitaram**, 6 voltaram `INCONCLUSIVO` (a validação
+recusa antes do `INSERT` — payload automático insuficiente), 3 deram erro e 1 não tem
+formulário no HTML inicial (é aba carregada por JavaScript).
+
+As 10 que faltam precisam de payload montado à mão, lendo cada formulário. **É o custo que o
+catálogo já previa, e ele é real:** ~2 a 4 telas por sessão de trabalho. O ganho marginal de
+insistir nelas é baixo — 18 telas em 14 módulos, todas idênticas, já sustentam a afirmação
+que faltava.
+
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 
 O texto anterior desta seção dizia que `tmp/`, `storage/` e `arquivos/` eram `775 diego`,
