@@ -60,7 +60,7 @@ class cl_cadtipoparcdeb {
                  k41_vencfim = date = Vencimento final 
                  ";
    //funcao construtor da classe 
-   function cl_cadtipoparcdeb() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadtipoparcdeb"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,8 +77,8 @@ class cl_cadtipoparcdeb {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k41_cadtipoparc = ($this->k41_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_cadtipoparc"]:$this->k41_cadtipoparc);
-       $this->k41_arretipo = ($this->k41_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_arretipo"]:$this->k41_arretipo);
+       $this->k41_cadtipoparc = ($this->k41_cadtipoparc === 0 || $this->k41_cadtipoparc === 0.0 || $this->k41_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_cadtipoparc"]:$this->k41_cadtipoparc);
+       $this->k41_arretipo = ($this->k41_arretipo === 0 || $this->k41_arretipo === 0.0 || $this->k41_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_arretipo"]:$this->k41_arretipo);
        if($this->k41_vencini == ""){
          $this->k41_vencini_dia = ($this->k41_vencini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_vencini_dia"]:$this->k41_vencini_dia);
          $this->k41_vencini_mes = ($this->k41_vencini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_vencini_mes"]:$this->k41_vencini_mes);
@@ -96,8 +96,8 @@ class cl_cadtipoparcdeb {
          }
        }
      }else{
-       $this->k41_cadtipoparc = ($this->k41_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_cadtipoparc"]:$this->k41_cadtipoparc);
-       $this->k41_arretipo = ($this->k41_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_arretipo"]:$this->k41_arretipo);
+       $this->k41_cadtipoparc = ($this->k41_cadtipoparc === 0 || $this->k41_cadtipoparc === 0.0 || $this->k41_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_cadtipoparc"]:$this->k41_cadtipoparc);
+       $this->k41_arretipo = ($this->k41_arretipo === 0 || $this->k41_arretipo === 0.0 || $this->k41_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_arretipo"]:$this->k41_arretipo);
      }
    }
    // funcao para inclusao
@@ -123,7 +123,7 @@ class cl_cadtipoparcdeb {
      }
        $this->k41_cadtipoparc = $k41_cadtipoparc; 
        $this->k41_arretipo = $k41_arretipo; 
-     if(($this->k41_cadtipoparc == null) || ($this->k41_cadtipoparc == "") ){ 
+     if(($this->k41_cadtipoparc == null) || ($this->k41_cadtipoparc === 0 || $this->k41_cadtipoparc === 0.0 || $this->k41_cadtipoparc == "") ){ 
        $this->erro_sql = " Campo k41_cadtipoparc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -131,7 +131,7 @@ class cl_cadtipoparcdeb {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k41_arretipo == null) || ($this->k41_arretipo == "") ){ 
+     if(($this->k41_arretipo == null) || ($this->k41_arretipo === 0 || $this->k41_arretipo === 0.0 || $this->k41_arretipo == "") ){ 
        $this->erro_sql = " Campo k41_arretipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -428,7 +428,7 @@ class cl_cadtipoparcdeb {
    function sql_query ( $k41_cadtipoparc=null,$k41_arretipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_cadtipoparcdeb {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -472,7 +472,7 @@ class cl_cadtipoparcdeb {
    function sql_query_file ( $k41_cadtipoparc=null,$k41_arretipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_cadtipoparcdeb {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_cfautentmodeloimpressao {
                  db68_modeloimpressao = int4 = Código Mod. Impressão 
                  ";
    //funcao construtor da classe 
-   function cl_cfautentmodeloimpressao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cfautentmodeloimpressao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cfautentmodeloimpressao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db68_sequencial = ($this->db68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db68_sequencial"]:$this->db68_sequencial);
-       $this->db68_cfautent = ($this->db68_cfautent == ""?@$GLOBALS["HTTP_POST_VARS"]["db68_cfautent"]:$this->db68_cfautent);
-       $this->db68_modeloimpressao = ($this->db68_modeloimpressao == ""?@$GLOBALS["HTTP_POST_VARS"]["db68_modeloimpressao"]:$this->db68_modeloimpressao);
+       $this->db68_sequencial = ($this->db68_sequencial === 0 || $this->db68_sequencial === 0.0 || $this->db68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db68_sequencial"]:$this->db68_sequencial);
+       $this->db68_cfautent = ($this->db68_cfautent === 0 || $this->db68_cfautent === 0.0 || $this->db68_cfautent == ""?@$GLOBALS["HTTP_POST_VARS"]["db68_cfautent"]:$this->db68_cfautent);
+       $this->db68_modeloimpressao = ($this->db68_modeloimpressao === 0 || $this->db68_modeloimpressao === 0.0 || $this->db68_modeloimpressao == ""?@$GLOBALS["HTTP_POST_VARS"]["db68_modeloimpressao"]:$this->db68_modeloimpressao);
      }else{
-       $this->db68_sequencial = ($this->db68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db68_sequencial"]:$this->db68_sequencial);
+       $this->db68_sequencial = ($this->db68_sequencial === 0 || $this->db68_sequencial === 0.0 || $this->db68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db68_sequencial"]:$this->db68_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cfautentmodeloimpressao {
          $this->db68_sequencial = $db68_sequencial; 
        }
      }
-     if(($this->db68_sequencial == null) || ($this->db68_sequencial == "") ){ 
+     if(($this->db68_sequencial == null) || ($this->db68_sequencial === 0 || $this->db68_sequencial === 0.0 || $this->db68_sequencial == "") ){ 
        $this->erro_sql = " Campo db68_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_cfautentmodeloimpressao {
    function sql_query ( $db68_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_cfautentmodeloimpressao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_cfautentmodeloimpressao {
    function sql_query_file ( $db68_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_cfautentmodeloimpressao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

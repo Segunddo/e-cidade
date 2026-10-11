@@ -369,7 +369,7 @@ if ((isset ($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"]) == "Inc
 			}
 			$sqltip = "select k00_tipo,k00_descr from arretipo where k00_tipo in($tipodeb1)";
 				$resulttip = db_query($sqltip);
-				$linhastip = pg_num_rows($resulttip);
+				$linhastip = ($resulttip ? pg_num_rows($resulttip) : 0);
 				$virgula = "";
 				for ($x = 0; $x < $linhastip ; $x ++) {
 					db_fieldsmemory($resulttip, $x);
@@ -961,14 +961,14 @@ if ($debugando == true) {
     if ($opcaofiltro == 1) {
 		$resultlistadeb = db_query("select * from listadeb where k61_codigo = ".$cllista->k60_codigo." limit 1");
 		// 	db_criatabela($resultlistadeb);exit;
-		if (pg_numrows($resultlistadeb) == 0) {
+		if (($resultlistadeb ? pg_numrows($resultlistadeb) : 0) == 0) {
 			echo "<script>alert('Não existem devedores para as opções escolhidas')</script>";
 			db_redireciona("cai1_lista001.php");
 			exit;
 		}
     }
 	if (1 == 2) {
-		for ($ii = 0; $ii < pg_numrows($resultlistadeb); $ii ++) {
+		for ($ii = 0; $ii < ($resultlistadeb ? pg_numrows($resultlistadeb) : 0); $ii ++) {
 			db_fieldsmemory($resultlistadeb, $ii);
 			$cllistadeb->k61_codigo = $cllista->k60_codigo;
 			$cllistadeb->k61_numpre = $k22_numpre;
@@ -1252,7 +1252,7 @@ function js_emite1(){
 
 $sql = "select k115_data as k22_data from datadebitos where k115_instit = ".db_getsession("DB_instit")."order by k115_data desc limit 1";
 $result = db_query($sql);
-if (pg_numrows($result) > 0) {
+if (($result ? pg_numrows($result) : 0) > 0) {
 	db_fieldsmemory($result, 0);
 	$data_ano = substr($k22_data, 0, 4);
 	$data_mes = substr($k22_data, 5, 2);

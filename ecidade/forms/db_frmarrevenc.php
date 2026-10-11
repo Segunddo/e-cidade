@@ -231,7 +231,7 @@ function carregaDadosSelect(oResposta) {
 		objParcelas.disabled = false;
 		<?
 
-		if(isset($k00_numpar) && $k00_numpar!=""){
+		if(isset($k00_numpar) && $k00_numpar!="" && $k00_numpar!==0 && $k00_numpar!==0.0){
 			echo " document.form1.k00_numpar.value = $k00_numpar; ";
 		}
 		if(isset($alterar) || isset($incluir) ){

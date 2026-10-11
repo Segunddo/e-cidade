@@ -49,7 +49,8 @@ $notifica = '';
 
 global $sCepCxPostal, $sMunicipio, $lValidaOrdemEnderecoEntrega;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 db_postmemory($_POST);
 db_postmemory($_GET);
@@ -1100,7 +1101,7 @@ if ($tiporel == 1 || $tiporel == 11) {
 
             db_fieldsmemory($resultdocparagr, $doc, "", false, false);
             $texto = db_geratexto($db02_texto);
-            
+
             $sInnerArrecad = "";
             if ($oParam->k102_tipoemissao == 2) {
 
@@ -4026,17 +4027,17 @@ if ($tiporel == 1 || $tiporel == 11) {
 
                                 $pdf->cell(30, 5, "CGM:", 0, 0, "L", 0);
                                 $pdf->SetFont('Arial', 'B', 12);
-                                $pdf->cell(20, 5, $$xcodigo1, 0, 1, "L", 0);
+                                $pdf->cell(20, 5, ${$xcodigo1}, 0, 1, "L", 0);
                             } elseif ($xcodigo == "k22_matric") {
 
                                 $pdf->cell(30, 5, "MATRÍCULA:", 0, 0, "L", 0);
                                 $pdf->SetFont('Arial', 'B', 12);
-                                $pdf->cell(20, 5, $$xcodigo1, 0, 1, "L", 0);
+                                $pdf->cell(20, 5, ${$xcodigo1}, 0, 1, "L", 0);
                             } elseif ($xcodigo == "k22_inscr") {
 
                                 $pdf->cell(30, 5, "INSCRIÇÃO:", 0, 0, "L", 0);
                                 $pdf->SetFont('Arial', 'B', 12);
-                                $pdf->cell(20, 5, $$xcodigo1, 0, 1, "L", 0);
+                                $pdf->cell(20, 5, ${$xcodigo1}, 0, 1, "L", 0);
                             }
 
                         } elseif (strtoupper($db02_descr) == "SEEDRESUMIDO") {
@@ -4082,17 +4083,17 @@ if ($tiporel == 1 || $tiporel == 11) {
 
                                     $pdf->cell(30, 5, "CGM:", 0, 0, "L", 0);
                                     $pdf->SetFont('Arial', 'B', 12);
-                                    $pdf->cell(20, 5, $$xcodigo1, 0, 1, "L", 0);
+                                    $pdf->cell(20, 5, ${$xcodigo1}, 0, 1, "L", 0);
                                 } elseif ($xcodigo == "k22_matric") {
 
                                     $pdf->cell(30, 5, "MATRÍCULA:", 0, 0, "L", 0);
                                     $pdf->SetFont('Arial', 'B', 12);
-                                    $pdf->cell(20, 5, $$xcodigo1, 0, 1, "L", 0);
+                                    $pdf->cell(20, 5, ${$xcodigo1}, 0, 1, "L", 0);
                                 } elseif ($xcodigo == "k22_inscr") {
 
                                     $pdf->cell(30, 5, "INSCRIÇÃO:", 0, 0, "L", 0);
                                     $pdf->SetFont('Arial', 'B', 12);
-                                    $pdf->cell(20, 5, $$xcodigo1, 0, 1, "L", 0);
+                                    $pdf->cell(20, 5, ${$xcodigo1}, 0, 1, "L", 0);
                                 }
                                 $iAltura = $iAltura + 33;
                             }
@@ -4140,17 +4141,17 @@ if ($tiporel == 1 || $tiporel == 11) {
 
                                 $pdf->cell(30, 5, "CGM:", 0, 0, "L", 0);
                                 $pdf->SetFont('Arial', 'B', 12);
-                                $pdf->cell(20, 5, $$xcodigo1, 0, 1, "L", 0);
+                                $pdf->cell(20, 5, ${$xcodigo1}, 0, 1, "L", 0);
                             } elseif ($xcodigo == "k22_matric") {
 
                                 $pdf->cell(30, 5, "MATRÍCULA:", 0, 0, "L", 0);
                                 $pdf->SetFont('Arial', 'B', 12);
-                                $pdf->cell(20, 5, $$xcodigo1, 0, 1, "L", 0);
+                                $pdf->cell(20, 5, ${$xcodigo1}, 0, 1, "L", 0);
                             } elseif ($xcodigo == "k22_inscr") {
 
                                 $pdf->cell(30, 5, "INSCRIÇÃO:", 0, 0, "L", 0);
                                 $pdf->SetFont('Arial', 'B', 12);
-                                $pdf->cell(20, 5, $$xcodigo1, 0, 1, "L", 0);
+                                $pdf->cell(20, 5, ${$xcodigo1}, 0, 1, "L", 0);
                             }
 
                             $pdf->RoundedRect(150, 190 + 35, 55, 67, 0, '', '1234');
@@ -4490,18 +4491,18 @@ if ($tiporel == 1 || $tiporel == 11) {
                                                 $S = 10;
                                                 global $variavel;
                                                 $variavel = "";
-    
+
                                                 if (($imprimirtimbre == 1) || ($imprimirtimbre == 3)) {
                                                     $pdf = CabecNotif($pdf, 1, $variavel);
                                                 } else {
                                                     $pdf->ln(135);
                                                 }
-    
+
                                                 $z01_ender = "";
                                                 $z01_munic = "";
-    
+
                                                 if ($k60_tipo == 'M') {
-    
+
                                                     $sqlpropri = "select z01_nome,
                                          codpri,
                                          nomepri,
@@ -4521,17 +4522,17 @@ if ($tiporel == 1 || $tiporel == 11) {
                                          proprietario.pql_localizacao
                                     from proprietario
                                    where j01_matric = $matric";
-    
+
                                                     $resultpropri = db_query($sqlpropri);
                                                     if (pg_numrows($resultpropri) > 0) {
-    
+
                                                         db_fieldsmemory($resultpropri, 0);
                                                         $nomepri = ucwords(strtolower($nomepri));
                                                         $j13_descr = ucwords(strtolower($j13_descr));
                                                     }
-    
+
                                                     if ($tratamento == 0) {
-    
+
                                                         $imprimedestinatario = $z01_nome;
                                                         $sqlender = "select z01_ender,
                                           z01_numero,
@@ -4547,15 +4548,15 @@ if ($tiporel == 1 || $tiporel == 11) {
                                                         db_fieldsmemory($resultender, 0, true);
                                                         $z01_ender = $z01_ender . ", " . $z01_numero . " - " . $z01_compl;
                                                         $z01_munic = $z01_cep ."-" . trim($z01_munic) . "/" . $z01_uf . "  " . $z01_cxpostal;
-    
+
                                                     } else {
-    
+
                                                         EnderecoNotif($tratamento, $matric, $z01_nome, $cgm);
                                                         $imprimedestinatario = $z01_destinatario;
                                                     }
-    
+
                                                 } elseif ($k60_tipo == 'I') {
-    
+
                                                     $imprimedestinatario = $z01_nome;
                                                     $sqlempresa = "select z01_ender,
                                           z01_numero,
@@ -4569,15 +4570,15 @@ if ($tiporel == 1 || $tiporel == 11) {
                                           inner join cgm on z01_numcgm = q02_numcgm
                                     where q02_inscr = $q02_inscr";
                                                     $resultempresa = db_query($sqlempresa);
-    
+
                                                     if (pg_numrows($resultempresa) > 0) {
                                                         db_fieldsmemory($resultempresa, 0);
                                                     }
                                                     $z01_ender = $z01_ender . ", " . $z01_numero . " - " . $z01_compl;
                                                     $z01_munic = $z01_cep ."-" . trim($z01_munic) . "/" . $z01_uf . "  " . $z01_cxpostal;
-    
+
                                                 } elseif ($k60_tipo == 'N' || $k60_tipo == 'C') {
-    
+
                                                     $imprimedestinatario = $z01_nome;
                                                     $sqlender = "select z01_ender,
                                         z01_numero,
@@ -4594,10 +4595,10 @@ if ($tiporel == 1 || $tiporel == 11) {
                                                     $z01_ender = $z01_ender . ", " . $z01_numero . " - " . $z01_compl;
                                                     $z01_munic = $z01_cep ."-" . trim($z01_munic) . "/" . $z01_uf . "  " . $z01_cxpostal;
                                                 }
-    
+
                                                 $oLibDocumento = new libdocumento(1702, null);
                                                 if ($oLibDocumento->lErro) {
-    
+
                                                     $oParms = new stdClass();
                                                     $oParms->sErro = $oLibDocumento->sMsgErro;
                                                     $sMsg = _M('tributario.notificacoes.cai2_emitenotif002.sem_documento_cadastrado',
@@ -4605,12 +4606,12 @@ if ($tiporel == 1 || $tiporel == 11) {
                                                     db_redireciona("db_erros.php?fechar=true&db_erro={$sMsg}");
                                                     exit;
                                                 }
-    
+
                                                 $aParagrafos = $oLibDocumento->getDocParagrafos();
                                                 foreach ($aParagrafos as $oParag) {
                                                     eval($oParag->oParag->db02_texto);
                                                 }
-    
+
                                                 if (file_exists('imagens/files/correios.jpg')) {
                                                     $pdf->Image('imagens/files/correios.jpg', 162, 110, 38);
                                                 }
@@ -5004,17 +5005,17 @@ if ($tiporel == 1 || $tiporel == 11) {
 
                                                 $pdf->cell(30, 4, "CGM:", 0, 0, "L", 0);
                                                 $pdf->SetFont('Arial', 'B', 10);
-                                                $pdf->cell(20, 4, $$xcodigo1, 0, 1, "L", 0);
+                                                $pdf->cell(20, 4, ${$xcodigo1}, 0, 1, "L", 0);
                                             } elseif ($xcodigo == "k22_matric") {
 
                                                 $pdf->cell(45, 4, "INSCRIÇÃO IMOBILIÁRIA:", 0, 0, "L", 0);
                                                 $pdf->SetFont('Arial', 'B', 10);
-                                                $pdf->cell(20, 4, $$xcodigo1, 0, 1, "L", 0);
+                                                $pdf->cell(20, 4, ${$xcodigo1}, 0, 1, "L", 0);
                                             } elseif ($xcodigo == "k22_inscr") {
 
                                                 $pdf->cell(30, 4, "INSCRIÇÃO:", 0, 0, "L", 0);
                                                 $pdf->SetFont('Arial', 'B', 10);
-                                                $pdf->cell(20, 4, $$xcodigo1, 0, 1, "L", 0);
+                                                $pdf->cell(20, 4, ${$xcodigo1}, 0, 1, "L", 0);
                                             }
 
                                             $pdf->RoundedRect(148, 225 - $diminui, 47, 62, 0, '', '1234');
@@ -5295,7 +5296,7 @@ if ($tiporel == 1 || $tiporel == 11) {
                 $pdf->setfont('arial', '', 8);
             }
             $pdf->cell(15, 05, $notifica, 0, 0, "R", 0);
-            $pdf->cell(15, 5, $$xcodigo1, 0, 0, "R", 0);
+            $pdf->cell(15, 5, ${$xcodigo1}, 0, 0, "R", 0);
             $pdf->cell(15, 5, $z01_numcgm, 0, 0, "R", 0);
             $pdf->cell(80, 5, $z01_nome, 0, 1, "L", 0);
             $total += 1;
@@ -5440,7 +5441,7 @@ if ($tiporel == 1 || $tiporel == 11) {
                     db_fieldsmemory($result3, 0);
                     $pdf->text(10, 248, "Contribuinte: ");
                     $pdf->SetFont('Arial', '', 10);
-                    $pdf->text(10, 254, strtoupper($xtipo) . ' - ' . $$xcodigo1);
+                    $pdf->text(10, 254, strtoupper($xtipo) . ' - ' . ${$xcodigo1});
                     $pdf->text(10, 259, $z01_nome);
                     if ($z01_cxpostal == "") {
                         $pdf->text(10, 264, $z01_ender . ", " . $z01_numero . " " . $z01_compl);

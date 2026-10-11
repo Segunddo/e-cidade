@@ -39,7 +39,8 @@ use App\Domain\Tributario\Arrecadacao\Models\Configuracoesteftipodebito;
 use App\Domain\Tributario\Arrecadacao\Models\Operacoesteftipodebito;
 use App\Domain\Tributario\Arrecadacao\Repositories\OperacoesteftipodebitoRepository;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clarretipo = new cl_arretipo;

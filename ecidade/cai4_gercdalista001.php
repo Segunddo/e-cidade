@@ -56,7 +56,8 @@ $clrotulo->label('k51_procede');
 $clrotulo->label('k51_descr');
 $instit = db_getsession("DB_instit");
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 ?>
 

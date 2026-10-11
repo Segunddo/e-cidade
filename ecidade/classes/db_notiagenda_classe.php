@@ -59,7 +59,7 @@ class cl_notiagenda {
                  k58_id_usuario = int4 = Cod. Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_notiagenda() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notiagenda"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,8 +76,8 @@ class cl_notiagenda {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k58_codage = ($this->k58_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_codage"]:$this->k58_codage);
-       $this->k58_notifica = ($this->k58_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_notifica"]:$this->k58_notifica);
+       $this->k58_codage = ($this->k58_codage === 0 || $this->k58_codage === 0.0 || $this->k58_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_codage"]:$this->k58_codage);
+       $this->k58_notifica = ($this->k58_notifica === 0 || $this->k58_notifica === 0.0 || $this->k58_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_notifica"]:$this->k58_notifica);
        if($this->k58_data == ""){
          $this->k58_data_dia = ($this->k58_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_data_dia"]:$this->k58_data_dia);
          $this->k58_data_mes = ($this->k58_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_data_mes"]:$this->k58_data_mes);
@@ -87,9 +87,9 @@ class cl_notiagenda {
          }
        }
        $this->k58_hora = ($this->k58_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_hora"]:$this->k58_hora);
-       $this->k58_id_usuario = ($this->k58_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_id_usuario"]:$this->k58_id_usuario);
+       $this->k58_id_usuario = ($this->k58_id_usuario === 0 || $this->k58_id_usuario === 0.0 || $this->k58_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_id_usuario"]:$this->k58_id_usuario);
      }else{
-       $this->k58_codage = ($this->k58_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_codage"]:$this->k58_codage);
+       $this->k58_codage = ($this->k58_codage === 0 || $this->k58_codage === 0.0 || $this->k58_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_codage"]:$this->k58_codage);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_notiagenda {
          $this->k58_codage = $k58_codage; 
        }
      }
-     if(($this->k58_codage == null) || ($this->k58_codage == "") ){ 
+     if(($this->k58_codage == null) || ($this->k58_codage === 0 || $this->k58_codage === 0.0 || $this->k58_codage == "") ){ 
        $this->erro_sql = " Campo k58_codage nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -454,7 +454,7 @@ class cl_notiagenda {
    function sql_query ( $k58_codage=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -478,7 +478,7 @@ class cl_notiagenda {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -490,7 +490,7 @@ class cl_notiagenda {
    function sql_query_file ( $k58_codage=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_notiagenda {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -66,7 +66,7 @@ class cl_disbancotxt {
                  k34_diferenca = float8 = Diferenca 
                  ";
    //funcao construtor da classe 
-   function cl_disbancotxt() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("disbancotxt"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,9 +83,9 @@ class cl_disbancotxt {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k34_sequencial = ($this->k34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_sequencial"]:$this->k34_sequencial);
+       $this->k34_sequencial = ($this->k34_sequencial === 0 || $this->k34_sequencial === 0.0 || $this->k34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_sequencial"]:$this->k34_sequencial);
        $this->k34_numpremigra = ($this->k34_numpremigra == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_numpremigra"]:$this->k34_numpremigra);
-       $this->k34_valor = ($this->k34_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_valor"]:$this->k34_valor);
+       $this->k34_valor = ($this->k34_valor === 0 || $this->k34_valor === 0.0 || $this->k34_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_valor"]:$this->k34_valor);
        if($this->k34_dtvenc == ""){
          $this->k34_dtvenc_dia = ($this->k34_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_dtvenc_dia"]:$this->k34_dtvenc_dia);
          $this->k34_dtvenc_mes = ($this->k34_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_dtvenc_mes"]:$this->k34_dtvenc_mes);
@@ -102,10 +102,10 @@ class cl_disbancotxt {
             $this->k34_dtpago = $this->k34_dtpago_ano."-".$this->k34_dtpago_mes."-".$this->k34_dtpago_dia;
          }
        }
-       $this->k34_codret = ($this->k34_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_codret"]:$this->k34_codret);
-       $this->k34_diferenca = ($this->k34_diferenca == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_diferenca"]:$this->k34_diferenca);
+       $this->k34_codret = ($this->k34_codret === 0 || $this->k34_codret === 0.0 || $this->k34_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_codret"]:$this->k34_codret);
+       $this->k34_diferenca = ($this->k34_diferenca === 0 || $this->k34_diferenca === 0.0 || $this->k34_diferenca == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_diferenca"]:$this->k34_diferenca);
      }else{
-       $this->k34_sequencial = ($this->k34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_sequencial"]:$this->k34_sequencial);
+       $this->k34_sequencial = ($this->k34_sequencial === 0 || $this->k34_sequencial === 0.0 || $this->k34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k34_sequencial"]:$this->k34_sequencial);
      }
    }
    // funcao para inclusao
@@ -189,7 +189,7 @@ class cl_disbancotxt {
          $this->k34_sequencial = $k34_sequencial; 
        }
      }
-     if(($this->k34_sequencial == null) || ($this->k34_sequencial == "") ){ 
+     if(($this->k34_sequencial == null) || ($this->k34_sequencial === 0 || $this->k34_sequencial === 0.0 || $this->k34_sequencial == "") ){ 
        $this->erro_sql = " Campo k34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -531,7 +531,7 @@ class cl_disbancotxt {
    function sql_query ( $k34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_disbancotxt {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -564,7 +564,7 @@ class cl_disbancotxt {
    function sql_query_file ( $k34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -585,7 +585,7 @@ class cl_disbancotxt {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

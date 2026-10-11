@@ -59,7 +59,7 @@ class cl_arrevenclog {
                  k75_hora = char(10) = Hora 
                  ";
    //funcao construtor da classe 
-   function cl_arrevenclog() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("arrevenclog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,9 +76,9 @@ class cl_arrevenclog {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k75_sequencial = ($this->k75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_sequencial"]:$this->k75_sequencial);
-       $this->k75_instit = ($this->k75_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_instit"]:$this->k75_instit);
-       $this->k75_usuario = ($this->k75_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_usuario"]:$this->k75_usuario);
+       $this->k75_sequencial = ($this->k75_sequencial === 0 || $this->k75_sequencial === 0.0 || $this->k75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_sequencial"]:$this->k75_sequencial);
+       $this->k75_instit = ($this->k75_instit === 0 || $this->k75_instit === 0.0 || $this->k75_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_instit"]:$this->k75_instit);
+       $this->k75_usuario = ($this->k75_usuario === 0 || $this->k75_usuario === 0.0 || $this->k75_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_usuario"]:$this->k75_usuario);
        if($this->k75_data == ""){
          $this->k75_data_dia = ($this->k75_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_data_dia"]:$this->k75_data_dia);
          $this->k75_data_mes = ($this->k75_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_data_mes"]:$this->k75_data_mes);
@@ -89,7 +89,7 @@ class cl_arrevenclog {
        }
        $this->k75_hora = ($this->k75_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_hora"]:$this->k75_hora);
      }else{
-       $this->k75_sequencial = ($this->k75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_sequencial"]:$this->k75_sequencial);
+       $this->k75_sequencial = ($this->k75_sequencial === 0 || $this->k75_sequencial === 0.0 || $this->k75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k75_sequencial"]:$this->k75_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_arrevenclog {
          $this->k75_sequencial = $k75_sequencial; 
        }
      }
-     if(($this->k75_sequencial == null) || ($this->k75_sequencial == "") ){ 
+     if(($this->k75_sequencial == null) || ($this->k75_sequencial === 0 || $this->k75_sequencial === 0.0 || $this->k75_sequencial == "") ){ 
        $this->erro_sql = " Campo k75_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -445,7 +445,7 @@ class cl_arrevenclog {
    function sql_query ( $k75_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_arrevenclog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_arrevenclog {
    function sql_query_file ( $k75_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_arrevenclog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

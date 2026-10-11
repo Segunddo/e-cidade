@@ -50,7 +50,7 @@ class cl_recreparcdest {
                  k71_recdest = int4 = Receita 
                  ";
    //funcao construtor da classe 
-   function cl_recreparcdest() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("recreparcdest"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_recreparcdest {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k71_codigo = ($this->k71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_codigo"]:$this->k71_codigo);
-       $this->k71_recdest = ($this->k71_recdest == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_recdest"]:$this->k71_recdest);
+       $this->k71_codigo = ($this->k71_codigo === 0 || $this->k71_codigo === 0.0 || $this->k71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_codigo"]:$this->k71_codigo);
+       $this->k71_recdest = ($this->k71_recdest === 0 || $this->k71_recdest === 0.0 || $this->k71_recdest == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_recdest"]:$this->k71_recdest);
      }else{
-       $this->k71_codigo = ($this->k71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_codigo"]:$this->k71_codigo);
+       $this->k71_codigo = ($this->k71_codigo === 0 || $this->k71_codigo === 0.0 || $this->k71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_codigo"]:$this->k71_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_recreparcdest {
        return false;
      }
        $this->k71_codigo = $k71_codigo; 
-     if(($this->k71_codigo == null) || ($this->k71_codigo == "") ){ 
+     if(($this->k71_codigo == null) || ($this->k71_codigo === 0 || $this->k71_codigo === 0.0 || $this->k71_codigo == "") ){ 
        $this->erro_sql = " Campo k71_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -306,7 +306,7 @@ class cl_recreparcdest {
    function sql_query ( $k71_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -331,7 +331,7 @@ class cl_recreparcdest {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -344,7 +344,7 @@ class cl_recreparcdest {
    function sql_query_file ( $k71_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_recreparcdest {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

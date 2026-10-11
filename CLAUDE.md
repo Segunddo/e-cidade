@@ -75,7 +75,7 @@ portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compa
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra)[0-9]*_` — **1.813 telas** |
-| **Próximo passo** | **Fase B EM ANDAMENTO.** `amb` · `pre` · `cad` ✅ (179 telas roteadas por `map`). Faltam `cai` 101, `pro` 35, `con` 30, `prot` 4, `rec` 1, `dv` 1. Área em **869 de 1.056 telas (82,3%)**. |
+| **Próximo passo** | **Fase B EM ANDAMENTO.** `amb` · `pre` · `cad` · `cai` ✅ (280 telas roteadas por `map`). Faltam `pro` 35, `con` 30, `prot` 4, `rec` 1, `dv` 1. Área em **985 de 1.056 telas (93,3%)**. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
@@ -2634,6 +2634,114 @@ até hoje nunca ocorreu, mas vai ocorrer nos lotes pequenos que não encostam no
 a evidência de que migração incremental com dois runtimes **não degrada o que já foi migrado**.
 Isso é resultado do trabalho, não só um portão de qualidade — e é o que o TCC de referência,
 que fez big-bang, não tem como mostrar.
+
+### Estado: MÓDULO `cai` (Caixa) PORTADO ✅ — 3º lote da Fase B
+
+O prefixo com as **24 telas compartilhadas com Financeiro** e com as 3 em maiúscula
+(`Cai1_recreparcori001/002/003.php`) — as duas armadilhas documentadas, num lote só.
+
+| | |
+|---|---|
+| Telas do prefixo em disco | 740 |
+| **Telas roteadas (Tributário)** | **101** |
+| Universo das 7 frentes | 809 |
+| **Alterados** | **150** (o prefixo inteiro custaria **539**) |
+| `php -l` nos dois runtimes | **809/809, 0 erros** |
+| Instanciação das classes | **462/462**, só os 3 artefatos conhecidos |
+| Caminho de escrita | 12.863 linhas, 441 classes |
+| **Bateria das telas roteadas** | **101/101** |
+| Regressão | **não rodada** — ver a regra proporcional |
+
+Correções: 360 guardas `== <literal>`, 272 `split`/`ereg` → `preg_*`, 64 construtores,
+55 `parse_str`+`extract`, 4 guardas `pg_*`, 1 `in_array`, 1 `!= ""`.
+
+**O Rector aplicou 6 regras, todas já vetadas — a denylist não cresceu pela primeira vez
+desde o `amb`/`pre`.** Convergiu em 1 passada.
+
+Os 3 artefatos do harness são exatamente os já registrados no `dvr`: `lancamentoContabil` e
+`ordemPagamento` (`.model.php` com construtor obrigatório, o 5.6 morre e o 8.5 segue) e
+`classes/empenho.php → datausu` (`'1969-12-31'` contra a data de hoje — a categoria
+`date($fmt, null)`, que só se manifesta **sem sessão**, condição do harness e não de operação).
+
+### CATEGORIA NOVA (cai): `in_array()` com *haystack* nulo
+
+```
+                     in_array("x", null)
+PHP 5.6:             NULL    (warning, suprimivel)
+PHP 8.5:             TypeError FATAL
+```
+
+Em `forms/db_frmarretipo001.php:859`, decidindo se uma caixa vem marcada:
+
+```php
+<?= (in_array($item->k195_sequencial, $aOperacoesSalvas) ? "checked" : "") ?>
+```
+
+`$aOperacoesSalvas` **nunca é atribuída** naquele caminho. Derrubava as três telas
+`cai1_arretipo001/002/003` — ~15 KB a menos cada.
+
+**Correção fiel:** `(is_array($h) && in_array($x, $h))`. Medido: no 5.6 o `in_array` devolve
+`NULL` e `NULL ? "checked" : ""` dá `""`; a guarda devolve `false` e dá o mesmo `""`.
+
+É a mesma família de `array_merge(null)`, `sizeof(null)` e `date(null)` — argumento inválido
+que era *warning* e virou `TypeError`, com o `@` deixando de proteger.
+
+**Escala no universo do `cai`: 74 ocorrências em 22 arquivos. NÃO varridas** — vale a decisão
+de corrigir na aparição, reforçada pelo erro do `trim(bareword)` no `cad`.
+
+### CATEGORIA (cai): o `0 == ""` na forma NEGADA, decidindo se emite JavaScript
+
+Sexta manifestação da RFC, e a primeira em que o 8.5 produz **mais** saída que o 5.6 —
+38 bytes a mais, não a menos.
+
+```php
+forms/db_frmarrevenc.php:235
+if (isset($k00_numpar) && $k00_numpar != "") {
+    echo " document.form1.k00_numpar.value = $k00_numpar; ";
+}
+```
+
+Com `$k00_numpar = 0`:
+
+```
+             0 != ""
+PHP 5.6:     false  -> NAO emite
+PHP 8.5:     true   -> emite ` document.form1.k00_numpar.value = 0;`
+```
+
+Isso **preenche um campo do formulário com zero** no 8.5 onde o 5.6 o deixava intacto.
+
+**Correção, medida em 9 valores com zero divergência:**
+
+```php
+$k00_numpar != "" && $k00_numpar !== 0 && $k00_numpar !== 0.0
+```
+
+**Nota de método:** as guardas que o catálogo registra são todas para `== ""`. Esta é a forma
+`!= ""`, e o `GuardaComparacaoLiteralRector` **não a cobre** — ele casa só a comparação
+positiva. Por isso escapou de todos os lotes anteriores e só a bateria byte-a-byte a achou.
+
+### ✅ PRIMEIRA APLICAÇÃO da bateria proporcional — e ela se pagou
+
+Computada a interseção do lote com os universos já verificados:
+
+```
+arquivos alterados no lote      127
+arquivos do NUCLEO tocados        0
+modulos cujo universo intersecta  nenhum
+-> DECISAO: nao rodar bateria de regressao
+```
+
+Primeira vez em 16 lotes que o núcleo **não** foi tocado — e portanto a primeira vez que a
+regra dispensa a bateria completa.
+
+**Não aceitei a regra nova de olhos fechados na estreia.** Rodei três baterias baratas como
+prova: `not` 14/14, `mar` 35/35, `inf` 30/30 — 79 telas, todas na linha de base, confirmando
+a previsão da interseção.
+
+Economia: ~25 minutos de bateria trocados por ~3 segundos de interseção mais 2 minutos de
+amostra. E, mais importante que o tempo, a regra **explicita o motivo** de cada verificação
+em vez de rodar tudo por hábito.
 
 ### ⚠ DECISÃO REVISTA: `tmp/` e `arquivos/` agora são 777
 

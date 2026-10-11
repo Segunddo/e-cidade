@@ -67,7 +67,7 @@ class cl_aguacontratoeconomia {
                  x38_observacoes = varchar(200) = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_aguacontratoeconomia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacontratoeconomia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -136,7 +136,7 @@ class cl_aguacontratoeconomia {
          $this->x38_sequencial = $x38_sequencial; 
        }
      }
-     if(($this->x38_sequencial == null) || ($this->x38_sequencial == "") ){ 
+     if(($this->x38_sequencial == null) || ($this->x38_sequencial === 0 || $this->x38_sequencial === 0.0 || $this->x38_sequencial == "") ){ 
        $this->erro_sql = " Campo x38_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -57,14 +57,14 @@ $db_opcao = 33;
 $db_botao = false;
 
 if (isset($processa) && isset($chaves)) {
-  $regs = split("#", $chaves);
+  $regs = preg_split("#\\##m", $chaves);
 //  echo "<br><br><br>";print_r($regs);exit;
   $erro_msg = '';
   $sqlerro  = false; 
   $numrows  = count($regs);
   db_inicio_transacao();
   for ($i=0;$i<$numrows;$i++){
-    $numpreparrec =  split("-", $regs[$i]);
+    $numpreparrec =  preg_split("#\\-#m", $regs[$i]);
 //		echo "$numpreparrec[1] -- $numpreparrec[2] <br>";
     $clcancdebitosreg->excluir(null," k21_numpre = ".$numpreparrec[1]." and k21_numpar = ".$numpreparrec[2].((int)$numpreparrec[3] == 0?"":" and k21_receit =".$numpreparrec[3]));
     if($clcancdebitosreg->erro_status=="0"){
@@ -111,7 +111,7 @@ if (isset($processa) && isset($chaves)) {
   }
   //  $sqlerro = true;
   db_fim_transacao($sqlerro);
-  
+
   /********************************************************************************************************************************/
   
 }

@@ -62,7 +62,7 @@ class cl_tabrecregrasjm {
                  k04_dtfim = date = Data final 
                  ";
    //funcao construtor da classe 
-   function cl_tabrecregrasjm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tabrecregrasjm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,9 +79,9 @@ class cl_tabrecregrasjm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k04_sequencial = ($this->k04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k04_sequencial"]:$this->k04_sequencial);
-       $this->k04_receit = ($this->k04_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k04_receit"]:$this->k04_receit);
-       $this->k04_codjm = ($this->k04_codjm == ""?@$GLOBALS["HTTP_POST_VARS"]["k04_codjm"]:$this->k04_codjm);
+       $this->k04_sequencial = ($this->k04_sequencial === 0 || $this->k04_sequencial === 0.0 || $this->k04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k04_sequencial"]:$this->k04_sequencial);
+       $this->k04_receit = ($this->k04_receit === 0 || $this->k04_receit === 0.0 || $this->k04_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k04_receit"]:$this->k04_receit);
+       $this->k04_codjm = ($this->k04_codjm === 0 || $this->k04_codjm === 0.0 || $this->k04_codjm == ""?@$GLOBALS["HTTP_POST_VARS"]["k04_codjm"]:$this->k04_codjm);
        if($this->k04_dtini == ""){
          $this->k04_dtini_dia = ($this->k04_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k04_dtini_dia"]:$this->k04_dtini_dia);
          $this->k04_dtini_mes = ($this->k04_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k04_dtini_mes"]:$this->k04_dtini_mes);
@@ -99,7 +99,7 @@ class cl_tabrecregrasjm {
          }
        }
      }else{
-       $this->k04_sequencial = ($this->k04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k04_sequencial"]:$this->k04_sequencial);
+       $this->k04_sequencial = ($this->k04_sequencial === 0 || $this->k04_sequencial === 0.0 || $this->k04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k04_sequencial"]:$this->k04_sequencial);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_tabrecregrasjm {
          $this->k04_sequencial = $k04_sequencial; 
        }
      }
-     if(($this->k04_sequencial == null) || ($this->k04_sequencial == "") ){ 
+     if(($this->k04_sequencial == null) || ($this->k04_sequencial === 0 || $this->k04_sequencial === 0.0 || $this->k04_sequencial == "") ){ 
        $this->erro_sql = " Campo k04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -469,7 +469,7 @@ class cl_tabrecregrasjm {
    function sql_query ( $k04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -494,7 +494,7 @@ class cl_tabrecregrasjm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -506,7 +506,7 @@ class cl_tabrecregrasjm {
    function sql_query_file ( $k04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_tabrecregrasjm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_tabrecregrasjm {
    function sql_query_tabrec ( $k04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -562,7 +562,7 @@ class cl_tabrecregrasjm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -30,7 +30,8 @@ require_once(modification("ext/php/adodb-time.inc.php"));
 require_once(modification("libs/db_utils.php"));
 
 set_time_limit(0);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //die($HTTP_SERVER_VARS['QUERY_STRING']);
 
 //print_r($_GET);
@@ -122,9 +123,9 @@ if((isset($HTTP_POST_VARS["numpre_unica"]) && $HTTP_POST_VARS["numpre_unica"] !=
       // Removido inicio de trasacao com db query
       db_inicio_transacao();
       for($i = 0;$i < $tam;$i++) {
-        $mat = split("P",$numpres[$i]);
+        $mat = preg_split("#P#m",$numpres[$i]);
         $numpre = $mat[0];
-        $numpar = split("R", $mat[1]);
+        $numpar = preg_split("#R#m", $mat[1]);
         $numpar = $numpar[0];
         $valores[$i] = $valores[$i] + 0;
 
@@ -1068,7 +1069,8 @@ if(isset($tipo)) {
 
   //verifica se foi clicado no link agrupar e recria as variaveis do QUERY_STRING pra atualizar o agnump e agpar
   if(isset($verificaagrupar)) {
-    parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+    parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+    extract($__qs);
   }
 
   // calcular totregistros...

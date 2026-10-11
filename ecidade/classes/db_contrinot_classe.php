@@ -52,7 +52,7 @@ class cl_contrinot {
                  d08_notif = int4 = Notifiicacao 
                  ";
    //funcao construtor da classe 
-   function cl_contrinot() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contrinot"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_contrinot {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d08_sequencial = ($this->d08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d08_sequencial"]:$this->d08_sequencial);
-       $this->d08_contricalc = ($this->d08_contricalc == ""?@$GLOBALS["HTTP_POST_VARS"]["d08_contricalc"]:$this->d08_contricalc);
-       $this->d08_notif = ($this->d08_notif == ""?@$GLOBALS["HTTP_POST_VARS"]["d08_notif"]:$this->d08_notif);
+       $this->d08_sequencial = ($this->d08_sequencial === 0 || $this->d08_sequencial === 0.0 || $this->d08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d08_sequencial"]:$this->d08_sequencial);
+       $this->d08_contricalc = ($this->d08_contricalc === 0 || $this->d08_contricalc === 0.0 || $this->d08_contricalc == ""?@$GLOBALS["HTTP_POST_VARS"]["d08_contricalc"]:$this->d08_contricalc);
+       $this->d08_notif = ($this->d08_notif === 0 || $this->d08_notif === 0.0 || $this->d08_notif == ""?@$GLOBALS["HTTP_POST_VARS"]["d08_notif"]:$this->d08_notif);
      }else{
-       $this->d08_sequencial = ($this->d08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d08_sequencial"]:$this->d08_sequencial);
+       $this->d08_sequencial = ($this->d08_sequencial === 0 || $this->d08_sequencial === 0.0 || $this->d08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d08_sequencial"]:$this->d08_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_contrinot {
          $this->d08_sequencial = $d08_sequencial; 
        }
      }
-     if(($this->d08_sequencial == null) || ($this->d08_sequencial == "") ){ 
+     if(($this->d08_sequencial == null) || ($this->d08_sequencial === 0 || $this->d08_sequencial === 0.0 || $this->d08_sequencial == "") ){ 
        $this->erro_sql = " Campo d08_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_contrinot {
    function sql_query ( $d08_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_contrinot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_contrinot {
    function sql_query_file ( $d08_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_contrinot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

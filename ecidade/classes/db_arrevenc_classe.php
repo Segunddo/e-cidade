@@ -66,7 +66,7 @@ class cl_arrevenc {
                  k00_obs = text = Observação 
                  ";
    //funcao construtor da classe
-   function cl_arrevenc() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("arrevenc");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,10 +83,10 @@ class cl_arrevenc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_sequencial = ($this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
-       $this->k00_arrevenclog = ($this->k00_arrevenclog == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_arrevenclog"]:$this->k00_arrevenclog);
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->k00_sequencial = ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
+       $this->k00_arrevenclog = ($this->k00_arrevenclog === 0 || $this->k00_arrevenclog === 0.0 || $this->k00_arrevenclog == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_arrevenclog"]:$this->k00_arrevenclog);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = ($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
        if($this->k00_dtini == ""){
          $this->k00_dtini_dia = ($this->k00_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtini_dia"]:$this->k00_dtini_dia);
          $this->k00_dtini_mes = ($this->k00_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtini_mes"]:$this->k00_dtini_mes);
@@ -105,7 +105,7 @@ class cl_arrevenc {
        }
        $this->k00_obs = ($this->k00_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_obs"]:$this->k00_obs);
      }else{
-       $this->k00_sequencial = ($this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
+       $this->k00_sequencial = ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
      }
    }
    // funcao para inclusao
@@ -183,7 +183,7 @@ class cl_arrevenc {
          $this->k00_sequencial = $k00_sequencial;
        }
      }
-     if(($this->k00_sequencial == null) || ($this->k00_sequencial == "") ){
+     if(($this->k00_sequencial == null) || ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == "") ){
        $this->erro_sql = " Campo k00_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

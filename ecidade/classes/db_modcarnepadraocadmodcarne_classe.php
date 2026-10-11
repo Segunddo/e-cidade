@@ -52,7 +52,7 @@ class cl_modcarnepadraocadmodcarne {
                  m01_modcarnepadrao = int4 = Modelo Padrão 
                  ";
    //funcao construtor da classe 
-   function cl_modcarnepadraocadmodcarne() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("modcarnepadraocadmodcarne"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_modcarnepadraocadmodcarne {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m01_sequencial = ($this->m01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m01_sequencial"]:$this->m01_sequencial);
-       $this->m01_cadmodcarne = ($this->m01_cadmodcarne == ""?@$GLOBALS["HTTP_POST_VARS"]["m01_cadmodcarne"]:$this->m01_cadmodcarne);
-       $this->m01_modcarnepadrao = ($this->m01_modcarnepadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["m01_modcarnepadrao"]:$this->m01_modcarnepadrao);
+       $this->m01_sequencial = ($this->m01_sequencial === 0 || $this->m01_sequencial === 0.0 || $this->m01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m01_sequencial"]:$this->m01_sequencial);
+       $this->m01_cadmodcarne = ($this->m01_cadmodcarne === 0 || $this->m01_cadmodcarne === 0.0 || $this->m01_cadmodcarne == ""?@$GLOBALS["HTTP_POST_VARS"]["m01_cadmodcarne"]:$this->m01_cadmodcarne);
+       $this->m01_modcarnepadrao = ($this->m01_modcarnepadrao === 0 || $this->m01_modcarnepadrao === 0.0 || $this->m01_modcarnepadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["m01_modcarnepadrao"]:$this->m01_modcarnepadrao);
      }else{
-       $this->m01_sequencial = ($this->m01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m01_sequencial"]:$this->m01_sequencial);
+       $this->m01_sequencial = ($this->m01_sequencial === 0 || $this->m01_sequencial === 0.0 || $this->m01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m01_sequencial"]:$this->m01_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_modcarnepadraocadmodcarne {
          $this->m01_sequencial = $m01_sequencial; 
        }
      }
-     if(($this->m01_sequencial == null) || ($this->m01_sequencial == "") ){ 
+     if(($this->m01_sequencial == null) || ($this->m01_sequencial === 0 || $this->m01_sequencial === 0.0 || $this->m01_sequencial == "") ){ 
        $this->erro_sql = " Campo m01_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_modcarnepadraocadmodcarne {
    function sql_query ( $m01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_modcarnepadraocadmodcarne {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_modcarnepadraocadmodcarne {
    function sql_query_file ( $m01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_modcarnepadraocadmodcarne {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

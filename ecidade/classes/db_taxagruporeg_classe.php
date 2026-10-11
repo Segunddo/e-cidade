@@ -52,7 +52,7 @@ class cl_taxagruporeg {
                  k08_codsubrec = int4 = Código da Subreceita 
                  ";
    //funcao construtor da classe 
-   function cl_taxagruporeg() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("taxagruporeg"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_taxagruporeg {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k08_taxagruporeg = ($this->k08_taxagruporeg == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagruporeg"]:$this->k08_taxagruporeg);
-       $this->k08_taxagrupo = ($this->k08_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagrupo"]:$this->k08_taxagrupo);
-       $this->k08_codsubrec = ($this->k08_codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_codsubrec"]:$this->k08_codsubrec);
+       $this->k08_taxagruporeg = ($this->k08_taxagruporeg === 0 || $this->k08_taxagruporeg === 0.0 || $this->k08_taxagruporeg == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagruporeg"]:$this->k08_taxagruporeg);
+       $this->k08_taxagrupo = ($this->k08_taxagrupo === 0 || $this->k08_taxagrupo === 0.0 || $this->k08_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagrupo"]:$this->k08_taxagrupo);
+       $this->k08_codsubrec = ($this->k08_codsubrec === 0 || $this->k08_codsubrec === 0.0 || $this->k08_codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_codsubrec"]:$this->k08_codsubrec);
      }else{
-       $this->k08_taxagruporeg = ($this->k08_taxagruporeg == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagruporeg"]:$this->k08_taxagruporeg);
-       $this->k08_taxagrupo = ($this->k08_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagrupo"]:$this->k08_taxagrupo);
+       $this->k08_taxagruporeg = ($this->k08_taxagruporeg === 0 || $this->k08_taxagruporeg === 0.0 || $this->k08_taxagruporeg == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagruporeg"]:$this->k08_taxagruporeg);
+       $this->k08_taxagrupo = ($this->k08_taxagrupo === 0 || $this->k08_taxagrupo === 0.0 || $this->k08_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagrupo"]:$this->k08_taxagrupo);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_taxagruporeg {
          $this->k08_taxagruporeg = $k08_taxagruporeg; 
        }
      }
-     if(($this->k08_taxagruporeg == null) || ($this->k08_taxagruporeg == "") ){ 
+     if(($this->k08_taxagruporeg == null) || ($this->k08_taxagruporeg === 0 || $this->k08_taxagruporeg === 0.0 || $this->k08_taxagruporeg == "") ){ 
        $this->erro_sql = " Campo k08_taxagruporeg nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -351,7 +351,7 @@ class cl_taxagruporeg {
    function sql_query ( $k08_taxagruporeg=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -377,7 +377,7 @@ class cl_taxagruporeg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_taxagruporeg {
    function sql_query_file ( $k08_taxagruporeg=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -410,7 +410,7 @@ class cl_taxagruporeg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

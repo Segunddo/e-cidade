@@ -50,7 +50,7 @@ class cl_notiinscr {
                  k56_inscr = int4 = Inscricao 
                  ";
    //funcao construtor da classe 
-   function cl_notiinscr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notiinscr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_notiinscr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k56_notifica = ($this->k56_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_notifica"]:$this->k56_notifica);
-       $this->k56_inscr = ($this->k56_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_inscr"]:$this->k56_inscr);
+       $this->k56_notifica = ($this->k56_notifica === 0 || $this->k56_notifica === 0.0 || $this->k56_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_notifica"]:$this->k56_notifica);
+       $this->k56_inscr = ($this->k56_inscr === 0 || $this->k56_inscr === 0.0 || $this->k56_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_inscr"]:$this->k56_inscr);
      }else{
-       $this->k56_notifica = ($this->k56_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_notifica"]:$this->k56_notifica);
-       $this->k56_inscr = ($this->k56_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_inscr"]:$this->k56_inscr);
+       $this->k56_notifica = ($this->k56_notifica === 0 || $this->k56_notifica === 0.0 || $this->k56_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_notifica"]:$this->k56_notifica);
+       $this->k56_inscr = ($this->k56_inscr === 0 || $this->k56_inscr === 0.0 || $this->k56_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_inscr"]:$this->k56_inscr);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_notiinscr {
       $this->atualizacampos();
        $this->k56_notifica = $k56_notifica; 
        $this->k56_inscr = $k56_inscr; 
-     if(($this->k56_notifica == null) || ($this->k56_notifica == "") ){ 
+     if(($this->k56_notifica == null) || ($this->k56_notifica === 0 || $this->k56_notifica === 0.0 || $this->k56_notifica == "") ){ 
        $this->erro_sql = " Campo k56_notifica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_notiinscr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k56_inscr == null) || ($this->k56_inscr == "") ){ 
+     if(($this->k56_inscr == null) || ($this->k56_inscr === 0 || $this->k56_inscr === 0.0 || $this->k56_inscr == "") ){ 
        $this->erro_sql = " Campo k56_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -324,7 +324,7 @@ class cl_notiinscr {
    function sql_query ( $k56_notifica=null,$k56_inscr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -357,7 +357,7 @@ class cl_notiinscr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -369,7 +369,7 @@ class cl_notiinscr {
    function sql_query_arrecad ( $k56_notifica=null,$k56_inscr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -403,7 +403,7 @@ class cl_notiinscr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_notiinscr {
    function sql_query_file ( $k56_notifica=null,$k56_inscr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_notiinscr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

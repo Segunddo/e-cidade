@@ -50,7 +50,7 @@ class cl_cfautentconta {
                  k16_conta = int4 = Código Conta 
                  ";
    //funcao construtor da classe 
-   function cl_cfautentconta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cfautentconta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_cfautentconta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k16_id = ($this->k16_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_id"]:$this->k16_id);
-       $this->k16_conta = ($this->k16_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_conta"]:$this->k16_conta);
+       $this->k16_id = ($this->k16_id === 0 || $this->k16_id === 0.0 || $this->k16_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_id"]:$this->k16_id);
+       $this->k16_conta = ($this->k16_conta === 0 || $this->k16_conta === 0.0 || $this->k16_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_conta"]:$this->k16_conta);
      }else{
-       $this->k16_id = ($this->k16_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_id"]:$this->k16_id);
+       $this->k16_id = ($this->k16_id === 0 || $this->k16_id === 0.0 || $this->k16_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_id"]:$this->k16_id);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_cfautentconta {
        return false;
      }
        $this->k16_id = $k16_id; 
-     if(($this->k16_id == null) || ($this->k16_id == "") ){ 
+     if(($this->k16_id == null) || ($this->k16_id === 0 || $this->k16_id === 0.0 || $this->k16_id == "") ){ 
        $this->erro_sql = " Campo k16_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_cfautentconta {
    function sql_query ( $k16_id=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_cfautentconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_cfautentconta {
    function sql_query_file ( $k16_id=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_cfautentconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
