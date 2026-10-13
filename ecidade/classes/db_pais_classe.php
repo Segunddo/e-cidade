@@ -56,7 +56,7 @@ class cl_pais
                  ";
 
     //funcao construtor da classe
-    function cl_pais()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("pais");
@@ -78,12 +78,12 @@ class cl_pais
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed228_i_codigo = ($this->ed228_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed228_i_codigo"] : $this->ed228_i_codigo);
+            $this->ed228_i_codigo = ($this->ed228_i_codigo === 0 || $this->ed228_i_codigo === 0.0 || $this->ed228_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed228_i_codigo"] : $this->ed228_i_codigo);
             $this->ed228_c_descr = ($this->ed228_c_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed228_c_descr"] : $this->ed228_c_descr);
             $this->ed288_c_abrev = ($this->ed288_c_abrev == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed288_c_abrev"] : $this->ed288_c_abrev);
-            $this->ed228_i_paisonu = ($this->ed228_i_paisonu == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed228_i_paisonu"] : $this->ed228_i_paisonu);
+            $this->ed228_i_paisonu = ($this->ed228_i_paisonu === 0 || $this->ed228_i_paisonu === 0.0 || $this->ed228_i_paisonu == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed228_i_paisonu"] : $this->ed228_i_paisonu);
         } else {
-            $this->ed228_i_codigo = ($this->ed228_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed228_i_codigo"] : $this->ed228_i_codigo);
+            $this->ed228_i_codigo = ($this->ed228_i_codigo === 0 || $this->ed228_i_codigo === 0.0 || $this->ed228_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed228_i_codigo"] : $this->ed228_i_codigo);
         }
     }
 
@@ -152,7 +152,7 @@ class cl_pais
                 $this->ed228_i_codigo = $ed228_i_codigo;
             }
         }
-        if (($this->ed228_i_codigo == null) || ($this->ed228_i_codigo == "")) {
+        if (($this->ed228_i_codigo == null) || ($this->ed228_i_codigo === 0 || $this->ed228_i_codigo === 0.0 || $this->ed228_i_codigo == "")) {
             $this->erro_sql = " Campo ed228_i_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

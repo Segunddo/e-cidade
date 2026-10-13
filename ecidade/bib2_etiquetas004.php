@@ -31,7 +31,8 @@ include(modification("classes/db_exemplar_classe.php"));
 include(modification("classes/db_assunto_classe.php"));
 include(modification("classes/db_localacervo_classe.php"));
 include(modification("classes/db_localizacao_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $lista = db_getsession('sListaImpressao');
 $clexemplar = new cl_exemplar;

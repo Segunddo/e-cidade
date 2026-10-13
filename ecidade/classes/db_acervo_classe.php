@@ -107,8 +107,8 @@ class cl_acervo
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->bi06_seq = ($this->bi06_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_seq"]:$this->bi06_seq);
-       $this->bi06_biblioteca = ($this->bi06_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_biblioteca"]:$this->bi06_biblioteca);
+       $this->bi06_seq = ($this->bi06_seq === 0 || $this->bi06_seq === 0.0 || $this->bi06_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_seq"]:$this->bi06_seq);
+       $this->bi06_biblioteca = ($this->bi06_biblioteca === 0 || $this->bi06_biblioteca === 0.0 || $this->bi06_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_biblioteca"]:$this->bi06_biblioteca);
        if($this->bi06_dataregistro == ""){
          $this->bi06_dataregistro_dia = ($this->bi06_dataregistro_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_dataregistro_dia"]:$this->bi06_dataregistro_dia);
          $this->bi06_dataregistro_mes = ($this->bi06_dataregistro_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_dataregistro_mes"]:$this->bi06_dataregistro_mes);
@@ -122,20 +122,20 @@ class cl_acervo
        $this->bi06_classcdd = ($this->bi06_classcdd == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_classcdd"]:$this->bi06_classcdd);
        $this->bi06_isbn = ($this->bi06_isbn == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_isbn"]:$this->bi06_isbn);
        $this->bi06_volume = ($this->bi06_volume == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_volume"]:$this->bi06_volume);
-       $this->bi06_tipoitem = ($this->bi06_tipoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_tipoitem"]:$this->bi06_tipoitem);
-       $this->bi06_editora = ($this->bi06_editora == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_editora"]:$this->bi06_editora);
-       $this->bi06_classiliteraria = ($this->bi06_classiliteraria == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_classiliteraria"]:$this->bi06_classiliteraria);
+       $this->bi06_tipoitem = ($this->bi06_tipoitem === 0 || $this->bi06_tipoitem === 0.0 || $this->bi06_tipoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_tipoitem"]:$this->bi06_tipoitem);
+       $this->bi06_editora = ($this->bi06_editora === 0 || $this->bi06_editora === 0.0 || $this->bi06_editora == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_editora"]:$this->bi06_editora);
+       $this->bi06_classiliteraria = ($this->bi06_classiliteraria === 0 || $this->bi06_classiliteraria === 0.0 || $this->bi06_classiliteraria == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_classiliteraria"]:$this->bi06_classiliteraria);
        $this->bi06_anoedicao = ($this->bi06_anoedicao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_anoedicao"]:$this->bi06_anoedicao);
        $this->bi06_colecaoacervo = ($this->bi06_colecaoacervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_colecaoacervo"]:$this->bi06_colecaoacervo);
        $this->bi06_cutter = ($this->bi06_cutter == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_cutter"]:$this->bi06_cutter);
-       $this->bi06_idioma = ($this->bi06_idioma == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_idioma"]:$this->bi06_idioma);
+       $this->bi06_idioma = ($this->bi06_idioma === 0 || $this->bi06_idioma === 0.0 || $this->bi06_idioma == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_idioma"]:$this->bi06_idioma);
        $this->bi06_subtitulo = ($this->bi06_subtitulo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_subtitulo"]:$this->bi06_subtitulo);
        $this->bi06_titulooriginal = ($this->bi06_titulooriginal == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_titulooriginal"]:$this->bi06_titulooriginal);
        $this->bi06_paginacao = ($this->bi06_paginacao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_paginacao"]:$this->bi06_paginacao);
        $this->bi06_tomo = ($this->bi06_tomo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_tomo"]:$this->bi06_tomo);
        $this->bi06_numeroitem = ($this->bi06_numeroitem == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_numeroitem"]:$this->bi06_numeroitem);
      }else{
-       $this->bi06_seq = ($this->bi06_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_seq"]:$this->bi06_seq);
+       $this->bi06_seq = ($this->bi06_seq === 0 || $this->bi06_seq === 0.0 || $this->bi06_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["bi06_seq"]:$this->bi06_seq);
      }
    }
 
@@ -243,7 +243,7 @@ class cl_acervo
          $this->bi06_seq = $bi06_seq;
        }
      }
-     if(($this->bi06_seq == null) || ($this->bi06_seq == "") ){
+     if(($this->bi06_seq == null) || ($this->bi06_seq === 0 || $this->bi06_seq === 0.0 || $this->bi06_seq == "") ){
        $this->erro_sql = " Campo bi06_seq não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -797,7 +797,7 @@ class cl_acervo
    function sql_query_autores ( $bi06_seq=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -827,7 +827,7 @@ class cl_acervo
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

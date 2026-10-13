@@ -66,7 +66,7 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
 **Onde paramos:** **ÁREA TRIBUTÁRIO CONCLUÍDA; ÁREA EDUCAÇÃO INICIADA** (branch
-`2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel` e `sec`; faltam `bib`, `mer`
+`2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec` e `bib`; faltam `mer`
 (+ `mat`/`pro` por `map`) e `edu`. Ver *ÁREA EDUCAÇÃO*.
 
 | | |
@@ -75,8 +75,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec)[0-9]*_` — **1.848 telas** |
-| **Próximo passo** | **`bib`** (85 arquivos), depois `mer` (182) e `edu` (740). Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib)[0-9]*_` — **1.946 telas** |
+| **Próximo passo** | **`mer`** (173 arquivos) + `mat`/`pro` por `map` (20 telas), depois `edu` (726). Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
@@ -3058,6 +3058,47 @@ por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` n
 |---|---|---|---|---|---|---|
 | `tre` | 60 | 3 | 60/60 | 13/13 | 655 linhas, 0 div. | **19/19** (depois do ini) |
 | `esc`+`rel`+`sec` | 84 | 19 | 84/84 | 35/35 | 1.368 linhas, 0 div. | **16/16** |
+| `bib` | 232 | 79 | 232/232 | 75/75 | 2.632 linhas, 0 div. | **95/98** |
+
+**`bib`** — 76 pelo Rector (242 guardas, 152 `split` todos `#`, 39 construtores, 33
+`parse_str`+`extract`, 3 parâmetros opcionais antes de obrigatórios, 1 `${$var}`), mais 3 à mão:
+4 guardas `pg_*` (`bib1_leitor005` ×2, `bib2_racervos002`, `bib2_rmaisempres002`) e o octal
+abaixo. As guardas devolvem **`null`**, o valor medido no 5.6 — `bib2_racervos002.php:120`
+compara com `=== 0`, exatamente o caso que proíbe a guarda de devolver `0`.
+
+As 3 divergências restantes são **artefatos da bateria**, verificados no caminho real:
+
+- `bib1_emprestimo002.php` — iframe que calcula a data de devolução; a bateria o chama sem
+  `ano/mes/dia` e o `mktime()` recebe `"--"`. No uso real o JS manda a data com zeros à
+  esquerda e recusa campo vazio. Com 5 datas reais (dia útil, sábado, domingo, Páscoa,
+  31/12) a saída é **idêntica** nos dois runtimes. Registro: no 5.6 `mktime()` com string
+  NÃO numérica devolve `false` (não coage), então `(int)` **não** seria correção fiel.
+- `bib2_comprovantemodelo_80mm/a4.php` — fragmentos incluídos por `bib2_emprestimo002.php`
+  (idêntico), que lança exceção antes do include quando não há acervos; `aAcervos` chega
+  sempre como array no caminho real.
+
+Regra proporcional: núcleo intocado; a interseção com os universos verificados deu só
+`classes/db_aluno_classe.php` × `con` → bateria das 30 telas `con` roteadas: **30/30**.
+Os universos de `cem`, `itb`, `agu`, `jur`, `div`, `mar` não estavam em `tmp/` (são
+gitignored) e tiveram de ser regerados — universo ausente é *desconhecido*, não *vazio*.
+
+#### CATEGORIA (bib): octal inválido — a correção fiel PRESERVA o bug
+
+`bib1_reserva004.php:64`, fatal de compilação no 8.5 (*Invalid numeric literal*), arquivo que
+nenhuma regra do Rector tocou:
+
+```php
+if($mes == 04 || $mes == 06 || $mes == 09 || $mes == 11){   // meses de 30 dias
+```
+
+```
+PHP 5.6:  var_dump(09, 08, 019)  ->  int(0) int(0) int(1)   (para no 1o digito invalido)
+PHP 7+:   parse error
+```
+
+No 5.6 `$mes == 09` é `$mes == 0`: **setembro nunca entra no ramo dos meses de 30 dias** —
+bug pré-existente no cálculo da data da reserva. Corrigido para `0`, com comentário, e não
+para `9`: escrever `9` mudaria a saída do `:8080`.
 
 Correções: 104 guardas `== <literal>`, 34 `split` → `preg_split` (todos `#`), 17 construtores,
 4 `parse_str`+`extract`. O Rector aplicou só regras já vetadas — **denylist inalterada (29)**.

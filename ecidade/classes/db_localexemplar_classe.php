@@ -54,7 +54,7 @@ class cl_localexemplar {
                  bi27_letra = char(1) = Letra
                  ";
    //funcao construtor da classe
-   function cl_localexemplar() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("localexemplar");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_localexemplar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi27_codigo = ($this->bi27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi27_codigo"]:$this->bi27_codigo);
-       $this->bi27_localacervo = ($this->bi27_localacervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi27_localacervo"]:$this->bi27_localacervo);
-       $this->bi27_exemplar = ($this->bi27_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi27_exemplar"]:$this->bi27_exemplar);
+       $this->bi27_codigo = ($this->bi27_codigo === 0 || $this->bi27_codigo === 0.0 || $this->bi27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi27_codigo"]:$this->bi27_codigo);
+       $this->bi27_localacervo = ($this->bi27_localacervo === 0 || $this->bi27_localacervo === 0.0 || $this->bi27_localacervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi27_localacervo"]:$this->bi27_localacervo);
+       $this->bi27_exemplar = ($this->bi27_exemplar === 0 || $this->bi27_exemplar === 0.0 || $this->bi27_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi27_exemplar"]:$this->bi27_exemplar);
        $this->bi27_letra = ($this->bi27_letra == ""?@$GLOBALS["HTTP_POST_VARS"]["bi27_letra"]:$this->bi27_letra);
      }else{
-       $this->bi27_codigo = ($this->bi27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi27_codigo"]:$this->bi27_codigo);
+       $this->bi27_codigo = ($this->bi27_codigo === 0 || $this->bi27_codigo === 0.0 || $this->bi27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi27_codigo"]:$this->bi27_codigo);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_localexemplar {
          $this->bi27_codigo = $bi27_codigo;
        }
      }
-     if(($this->bi27_codigo == null) || ($this->bi27_codigo == "") ){
+     if(($this->bi27_codigo == null) || ($this->bi27_codigo === 0 || $this->bi27_codigo === 0.0 || $this->bi27_codigo == "") ){
        $this->erro_sql = " Campo bi27_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -373,7 +373,7 @@ class cl_localexemplar {
    function sql_query ( $bi27_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_localexemplar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -412,7 +412,7 @@ class cl_localexemplar {
    function sql_query_file ( $bi27_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_localexemplar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

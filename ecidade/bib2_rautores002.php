@@ -29,7 +29,8 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_autor_classe.php"));
 $clautor = new cl_autor;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 if($ordem == "a") {
  $desc_ordem = "ALFABÉTICA";
  $order_by = "bi01_nome";

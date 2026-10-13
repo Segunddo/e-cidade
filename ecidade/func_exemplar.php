@@ -35,7 +35,8 @@ include(modification("classes/db_exemplar_classe.php"));
 include(modification("classes/db_biblioteca_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $clexemplar   = new cl_exemplar;
 $clbiblioteca = new cl_biblioteca;
 $clrotulo     = new rotulocampo;

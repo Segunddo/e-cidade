@@ -24,7 +24,7 @@ class cl_tipoassunto {
                  bi30_descricao = text = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_tipoassunto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoassunto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -41,10 +41,10 @@ class cl_tipoassunto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi30_sequencial = ($this->bi30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi30_sequencial"]:$this->bi30_sequencial);
+       $this->bi30_sequencial = ($this->bi30_sequencial === 0 || $this->bi30_sequencial === 0.0 || $this->bi30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi30_sequencial"]:$this->bi30_sequencial);
        $this->bi30_descricao = ($this->bi30_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi30_descricao"]:$this->bi30_descricao);
      }else{
-       $this->bi30_sequencial = ($this->bi30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi30_sequencial"]:$this->bi30_sequencial);
+       $this->bi30_sequencial = ($this->bi30_sequencial === 0 || $this->bi30_sequencial === 0.0 || $this->bi30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi30_sequencial"]:$this->bi30_sequencial);
      }
    }
    // funcao para Inclusão
@@ -83,7 +83,7 @@ class cl_tipoassunto {
          $this->bi30_sequencial = $bi30_sequencial; 
        }
      }
-     if(($this->bi30_sequencial == null) || ($this->bi30_sequencial == "") ){ 
+     if(($this->bi30_sequencial == null) || ($this->bi30_sequencial === 0 || $this->bi30_sequencial === 0.0 || $this->bi30_sequencial == "") ){ 
        $this->erro_sql = " Campo bi30_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

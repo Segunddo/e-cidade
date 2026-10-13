@@ -28,7 +28,7 @@ class cl_bib_parametros {
                  bi26_impressora = int4 = Impressão de Comprovantes 
                  ";
    //funcao construtor da classe 
-   function cl_bib_parametros() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bib_parametros"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_bib_parametros {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi26_codigo = ($this->bi26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi26_codigo"]:$this->bi26_codigo);
-       $this->bi26_biblioteca = ($this->bi26_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi26_biblioteca"]:$this->bi26_biblioteca);
+       $this->bi26_codigo = ($this->bi26_codigo === 0 || $this->bi26_codigo === 0.0 || $this->bi26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi26_codigo"]:$this->bi26_codigo);
+       $this->bi26_biblioteca = ($this->bi26_biblioteca === 0 || $this->bi26_biblioteca === 0.0 || $this->bi26_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi26_biblioteca"]:$this->bi26_biblioteca);
        $this->bi26_leitorbarra = ($this->bi26_leitorbarra == ""?@$GLOBALS["HTTP_POST_VARS"]["bi26_leitorbarra"]:$this->bi26_leitorbarra);
-       $this->bi26_impressora = ($this->bi26_impressora == ""?@$GLOBALS["HTTP_POST_VARS"]["bi26_impressora"]:$this->bi26_impressora);
+       $this->bi26_impressora = ($this->bi26_impressora === 0 || $this->bi26_impressora === 0.0 || $this->bi26_impressora == ""?@$GLOBALS["HTTP_POST_VARS"]["bi26_impressora"]:$this->bi26_impressora);
      }else{
-       $this->bi26_codigo = ($this->bi26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi26_codigo"]:$this->bi26_codigo);
+       $this->bi26_codigo = ($this->bi26_codigo === 0 || $this->bi26_codigo === 0.0 || $this->bi26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi26_codigo"]:$this->bi26_codigo);
      }
    }
    // funcao para Inclusão
@@ -101,7 +101,7 @@ class cl_bib_parametros {
          $this->bi26_codigo = $bi26_codigo; 
        }
      }
-     if(($this->bi26_codigo == null) || ($this->bi26_codigo == "") ){ 
+     if(($this->bi26_codigo == null) || ($this->bi26_codigo === 0 || $this->bi26_codigo === 0.0 || $this->bi26_codigo == "") ){ 
        $this->erro_sql = " Campo bi26_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

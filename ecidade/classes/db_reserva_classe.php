@@ -73,7 +73,7 @@ class cl_reserva {
                  bi14_situacao = char(1) = Situação
                  ";
    //funcao construtor da classe
-   function cl_reserva() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("reserva");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,10 +90,10 @@ class cl_reserva {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi14_codigo = ($this->bi14_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_codigo"]:$this->bi14_codigo);
-       $this->bi14_carteira = ($this->bi14_carteira == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_carteira"]:$this->bi14_carteira);
-       $this->bi14_usuario = ($this->bi14_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_usuario"]:$this->bi14_usuario);
-       $this->bi14_acervo = ($this->bi14_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_acervo"]:$this->bi14_acervo);
+       $this->bi14_codigo = ($this->bi14_codigo === 0 || $this->bi14_codigo === 0.0 || $this->bi14_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_codigo"]:$this->bi14_codigo);
+       $this->bi14_carteira = ($this->bi14_carteira === 0 || $this->bi14_carteira === 0.0 || $this->bi14_carteira == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_carteira"]:$this->bi14_carteira);
+       $this->bi14_usuario = ($this->bi14_usuario === 0 || $this->bi14_usuario === 0.0 || $this->bi14_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_usuario"]:$this->bi14_usuario);
+       $this->bi14_acervo = ($this->bi14_acervo === 0 || $this->bi14_acervo === 0.0 || $this->bi14_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_acervo"]:$this->bi14_acervo);
        if($this->bi14_data == ""){
          $this->bi14_data_dia = ($this->bi14_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_data_dia"]:$this->bi14_data_dia);
          $this->bi14_data_mes = ($this->bi14_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_data_mes"]:$this->bi14_data_mes);
@@ -121,7 +121,7 @@ class cl_reserva {
        }
        $this->bi14_situacao = ($this->bi14_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_situacao"]:$this->bi14_situacao);
      }else{
-       $this->bi14_codigo = ($this->bi14_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_codigo"]:$this->bi14_codigo);
+       $this->bi14_codigo = ($this->bi14_codigo === 0 || $this->bi14_codigo === 0.0 || $this->bi14_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_codigo"]:$this->bi14_codigo);
      }
    }
    // funcao para inclusao
@@ -208,7 +208,7 @@ class cl_reserva {
          $this->bi14_codigo = $bi14_codigo;
        }
      }
-     if(($this->bi14_codigo == null) || ($this->bi14_codigo == "") ){
+     if(($this->bi14_codigo == null) || ($this->bi14_codigo === 0 || $this->bi14_codigo === 0.0 || $this->bi14_codigo == "") ){
        $this->erro_sql = " Campo bi14_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -575,7 +575,7 @@ class cl_reserva {
    function sql_query ( $bi14_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -617,7 +617,7 @@ class cl_reserva {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -629,7 +629,7 @@ class cl_reserva {
    function sql_query_file ( $bi14_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -650,7 +650,7 @@ class cl_reserva {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -665,7 +665,7 @@ class cl_reserva {
     $sql = "select ";
     if ($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -703,7 +703,7 @@ class cl_reserva {
     if ($ordem != null ) {
 
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 

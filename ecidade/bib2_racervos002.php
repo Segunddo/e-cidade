@@ -116,7 +116,7 @@ if ($sql_autor) {
     $sql = $clacervo->sql_query_autores("", " DISTINCT " . $campos, $ordem, $where);
 }
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 if ($linhas === 0) {
     db_redireciona('db_erros.php?fechar=true&db_erro=Não foram encontrados registros.');
 }

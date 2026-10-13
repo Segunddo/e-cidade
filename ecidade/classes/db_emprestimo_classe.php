@@ -62,7 +62,7 @@ class cl_emprestimo {
                  bi18_usuario = int8 = Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_emprestimo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("emprestimo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,7 +79,7 @@ class cl_emprestimo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi18_codigo = ($this->bi18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi18_codigo"]:$this->bi18_codigo);
+       $this->bi18_codigo = ($this->bi18_codigo === 0 || $this->bi18_codigo === 0.0 || $this->bi18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi18_codigo"]:$this->bi18_codigo);
        if($this->bi18_retirada == ""){
          $this->bi18_retirada_dia = ($this->bi18_retirada_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi18_retirada_dia"]:$this->bi18_retirada_dia);
          $this->bi18_retirada_mes = ($this->bi18_retirada_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi18_retirada_mes"]:$this->bi18_retirada_mes);
@@ -96,10 +96,10 @@ class cl_emprestimo {
             $this->bi18_devolucao = $this->bi18_devolucao_ano."-".$this->bi18_devolucao_mes."-".$this->bi18_devolucao_dia;
          }
        }
-       $this->bi18_carteira = ($this->bi18_carteira == ""?@$GLOBALS["HTTP_POST_VARS"]["bi18_carteira"]:$this->bi18_carteira);
-       $this->bi18_usuario = ($this->bi18_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi18_usuario"]:$this->bi18_usuario);
+       $this->bi18_carteira = ($this->bi18_carteira === 0 || $this->bi18_carteira === 0.0 || $this->bi18_carteira == ""?@$GLOBALS["HTTP_POST_VARS"]["bi18_carteira"]:$this->bi18_carteira);
+       $this->bi18_usuario = ($this->bi18_usuario === 0 || $this->bi18_usuario === 0.0 || $this->bi18_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi18_usuario"]:$this->bi18_usuario);
      }else{
-       $this->bi18_codigo = ($this->bi18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi18_codigo"]:$this->bi18_codigo);
+       $this->bi18_codigo = ($this->bi18_codigo === 0 || $this->bi18_codigo === 0.0 || $this->bi18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi18_codigo"]:$this->bi18_codigo);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_emprestimo {
          $this->bi18_codigo = $bi18_codigo; 
        }
      }
-     if(($this->bi18_codigo == null) || ($this->bi18_codigo == "") ){ 
+     if(($this->bi18_codigo == null) || ($this->bi18_codigo === 0 || $this->bi18_codigo === 0.0 || $this->bi18_codigo == "") ){ 
        $this->erro_sql = " Campo bi18_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -469,7 +469,7 @@ class cl_emprestimo {
    function sql_query ( $bi18_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -503,7 +503,7 @@ class cl_emprestimo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -515,7 +515,7 @@ class cl_emprestimo {
    function sql_query_file ( $bi18_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -536,7 +536,7 @@ class cl_emprestimo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
