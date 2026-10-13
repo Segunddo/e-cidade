@@ -74,10 +74,10 @@ class cl_escoladiretor
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed254_i_codigo = ($this->ed254_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_codigo"]:$this->ed254_i_codigo);
-       $this->ed254_i_rechumano = ($this->ed254_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_rechumano"]:$this->ed254_i_rechumano);
-       $this->ed254_i_escola = ($this->ed254_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_escola"]:$this->ed254_i_escola);
-       $this->ed254_i_turno = ($this->ed254_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_turno"]:$this->ed254_i_turno);
+       $this->ed254_i_codigo = ($this->ed254_i_codigo === 0 || $this->ed254_i_codigo === 0.0 || $this->ed254_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_codigo"]:$this->ed254_i_codigo);
+       $this->ed254_i_rechumano = ($this->ed254_i_rechumano === 0 || $this->ed254_i_rechumano === 0.0 || $this->ed254_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_rechumano"]:$this->ed254_i_rechumano);
+       $this->ed254_i_escola = ($this->ed254_i_escola === 0 || $this->ed254_i_escola === 0.0 || $this->ed254_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_escola"]:$this->ed254_i_escola);
+       $this->ed254_i_turno = ($this->ed254_i_turno === 0 || $this->ed254_i_turno === 0.0 || $this->ed254_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_turno"]:$this->ed254_i_turno);
        $this->ed254_i_atolegal = ($this->ed254_i_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_atolegal"]:$this->ed254_i_atolegal);
        $this->ed254_c_email = ($this->ed254_c_email == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_c_email"]:$this->ed254_c_email);
        if($this->ed254_d_dataini == ""){
@@ -97,7 +97,7 @@ class cl_escoladiretor
          }
        }
        $this->ed254_c_tipo = ($this->ed254_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_c_tipo"]:$this->ed254_c_tipo);
-       $this->ed254_i_usuario = ($this->ed254_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_usuario"]:$this->ed254_i_usuario);
+       $this->ed254_i_usuario = ($this->ed254_i_usuario === 0 || $this->ed254_i_usuario === 0.0 || $this->ed254_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_usuario"]:$this->ed254_i_usuario);
        if($this->ed254_d_datacad == ""){
          $this->ed254_d_datacad_dia = ($this->ed254_d_datacad_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_d_datacad_dia"]:$this->ed254_d_datacad_dia);
          $this->ed254_d_datacad_mes = ($this->ed254_d_datacad_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_d_datacad_mes"]:$this->ed254_d_datacad_mes);
@@ -107,9 +107,9 @@ class cl_escoladiretor
          }
        }
        $this->ed254_especificacaocriteriooutros = ($this->ed254_especificacaocriteriooutros == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_especificacaocriteriooutros"]:$this->ed254_especificacaocriteriooutros);
-       $this->ed254_criterioacessofuncao = ($this->ed254_criterioacessofuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_criterioacessofuncao"]:$this->ed254_criterioacessofuncao);
+       $this->ed254_criterioacessofuncao = ($this->ed254_criterioacessofuncao === 0 || $this->ed254_criterioacessofuncao === 0.0 || $this->ed254_criterioacessofuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_criterioacessofuncao"]:$this->ed254_criterioacessofuncao);
      }else{
-       $this->ed254_i_codigo = ($this->ed254_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_codigo"]:$this->ed254_i_codigo);
+       $this->ed254_i_codigo = ($this->ed254_i_codigo === 0 || $this->ed254_i_codigo === 0.0 || $this->ed254_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed254_i_codigo"]:$this->ed254_i_codigo);
      }
    }
 
@@ -212,7 +212,7 @@ class cl_escoladiretor
          $this->ed254_i_codigo = $ed254_i_codigo;
        }
      }
-     if(($this->ed254_i_codigo == null) || ($this->ed254_i_codigo == "") ){
+     if(($this->ed254_i_codigo == null) || ($this->ed254_i_codigo === 0 || $this->ed254_i_codigo === 0.0 || $this->ed254_i_codigo == "") ){
        $this->erro_sql = " Campo ed254_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

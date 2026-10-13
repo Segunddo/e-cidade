@@ -57,7 +57,7 @@ class cl_controleacessoaluno {
                  ed100_horaleitura = varchar(8) = Hora da Ultima Coleta 
                  ";
    //funcao construtor da classe 
-   function cl_controleacessoaluno() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("controleacessoaluno"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_controleacessoaluno {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed100_sequencial = ($this->ed100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed100_sequencial"]:$this->ed100_sequencial);
-       $this->ed100_id_usuario = ($this->ed100_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed100_id_usuario"]:$this->ed100_id_usuario);
+       $this->ed100_sequencial = ($this->ed100_sequencial === 0 || $this->ed100_sequencial === 0.0 || $this->ed100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed100_sequencial"]:$this->ed100_sequencial);
+       $this->ed100_id_usuario = ($this->ed100_id_usuario === 0 || $this->ed100_id_usuario === 0.0 || $this->ed100_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed100_id_usuario"]:$this->ed100_id_usuario);
        if($this->ed100_dataleitura == ""){
          $this->ed100_dataleitura_dia = ($this->ed100_dataleitura_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed100_dataleitura_dia"]:$this->ed100_dataleitura_dia);
          $this->ed100_dataleitura_mes = ($this->ed100_dataleitura_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed100_dataleitura_mes"]:$this->ed100_dataleitura_mes);
@@ -86,7 +86,7 @@ class cl_controleacessoaluno {
        }
        $this->ed100_horaleitura = ($this->ed100_horaleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["ed100_horaleitura"]:$this->ed100_horaleitura);
      }else{
-       $this->ed100_sequencial = ($this->ed100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed100_sequencial"]:$this->ed100_sequencial);
+       $this->ed100_sequencial = ($this->ed100_sequencial === 0 || $this->ed100_sequencial === 0.0 || $this->ed100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed100_sequencial"]:$this->ed100_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_controleacessoaluno {
          $this->ed100_sequencial = $ed100_sequencial; 
        }
      }
-     if(($this->ed100_sequencial == null) || ($this->ed100_sequencial == "") ){ 
+     if(($this->ed100_sequencial == null) || ($this->ed100_sequencial === 0 || $this->ed100_sequencial === 0.0 || $this->ed100_sequencial == "") ){ 
        $this->erro_sql = " Campo ed100_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -415,7 +415,7 @@ class cl_controleacessoaluno {
    function sql_query ( $ed100_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_controleacessoaluno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_controleacessoaluno {
    function sql_query_file ( $ed100_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_controleacessoaluno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_controleacessoaluno {
     $sql = "select ";
     if ($campos != "*" ) {
       
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -511,7 +511,7 @@ class cl_controleacessoaluno {
     if ($ordem != null ) {
        
       $sql        .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 

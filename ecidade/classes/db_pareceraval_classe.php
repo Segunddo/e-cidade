@@ -52,7 +52,7 @@ class cl_pareceraval {
                  ed93_t_parecer = text = Parecer Padronizado
                  ";
    //funcao construtor da classe
-   function cl_pareceraval() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pareceraval");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_pareceraval {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed93_i_codigo = ($this->ed93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed93_i_codigo"]:$this->ed93_i_codigo);
-       $this->ed93_i_diarioavaliacao = ($this->ed93_i_diarioavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed93_i_diarioavaliacao"]:$this->ed93_i_diarioavaliacao);
-       $this->ed93_t_parecer = ($this->ed93_t_parecer == ""?@$GLOBALS["HTTP_POST_VARS"]["ed93_t_parecer"]:$this->ed93_t_parecer);
+       $this->ed93_i_codigo = ($this->ed93_i_codigo === 0 || $this->ed93_i_codigo === 0.0 || $this->ed93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed93_i_codigo"]:$this->ed93_i_codigo);
+       $this->ed93_i_diarioavaliacao = ($this->ed93_i_diarioavaliacao === 0 || $this->ed93_i_diarioavaliacao === 0.0 || $this->ed93_i_diarioavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed93_i_diarioavaliacao"]:$this->ed93_i_diarioavaliacao);
+       $this->ed93_t_parecer = ($this->ed93_t_parecer === 0 || $this->ed93_t_parecer === 0.0 || $this->ed93_t_parecer == ""?@$GLOBALS["HTTP_POST_VARS"]["ed93_t_parecer"]:$this->ed93_t_parecer);
      }else{
-       $this->ed93_i_codigo = ($this->ed93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed93_i_codigo"]:$this->ed93_i_codigo);
+       $this->ed93_i_codigo = ($this->ed93_i_codigo === 0 || $this->ed93_i_codigo === 0.0 || $this->ed93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed93_i_codigo"]:$this->ed93_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_pareceraval {
          $this->ed93_i_codigo = $ed93_i_codigo;
        }
      }
-     if(($this->ed93_i_codigo == null) || ($this->ed93_i_codigo == "") ){
+     if(($this->ed93_i_codigo == null) || ($this->ed93_i_codigo === 0 || $this->ed93_i_codigo === 0.0 || $this->ed93_i_codigo == "") ){
        $this->erro_sql = " Campo ed93_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

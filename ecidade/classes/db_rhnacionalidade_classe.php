@@ -50,7 +50,7 @@ class cl_rhnacionalidade {
                  rh06_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_rhnacionalidade() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhnacionalidade"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_rhnacionalidade {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh06_nacionalidade = ($this->rh06_nacionalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh06_nacionalidade"]:$this->rh06_nacionalidade);
+       $this->rh06_nacionalidade = ($this->rh06_nacionalidade === 0 || $this->rh06_nacionalidade === 0.0 || $this->rh06_nacionalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh06_nacionalidade"]:$this->rh06_nacionalidade);
        $this->rh06_descr = ($this->rh06_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh06_descr"]:$this->rh06_descr);
      }else{
-       $this->rh06_nacionalidade = ($this->rh06_nacionalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh06_nacionalidade"]:$this->rh06_nacionalidade);
+       $this->rh06_nacionalidade = ($this->rh06_nacionalidade === 0 || $this->rh06_nacionalidade === 0.0 || $this->rh06_nacionalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh06_nacionalidade"]:$this->rh06_nacionalidade);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhnacionalidade {
        return false;
      }
        $this->rh06_nacionalidade = $rh06_nacionalidade; 
-     if(($this->rh06_nacionalidade == null) || ($this->rh06_nacionalidade == "") ){ 
+     if(($this->rh06_nacionalidade == null) || ($this->rh06_nacionalidade === 0 || $this->rh06_nacionalidade === 0.0 || $this->rh06_nacionalidade == "") ){ 
        $this->erro_sql = " Campo rh06_nacionalidade nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

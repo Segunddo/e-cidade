@@ -83,17 +83,17 @@ class cl_sala
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed16_i_codigo = ($this->ed16_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_codigo"] : $this->ed16_i_codigo);
-            $this->ed16_i_escola = ($this->ed16_i_escola == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_escola"] : $this->ed16_i_escola);
-            $this->ed16_i_tiposala = ($this->ed16_i_tiposala == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_tiposala"] : $this->ed16_i_tiposala);
+            $this->ed16_i_codigo = ($this->ed16_i_codigo === 0 || $this->ed16_i_codigo === 0.0 || $this->ed16_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_codigo"] : $this->ed16_i_codigo);
+            $this->ed16_i_escola = ($this->ed16_i_escola === 0 || $this->ed16_i_escola === 0.0 || $this->ed16_i_escola == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_escola"] : $this->ed16_i_escola);
+            $this->ed16_i_tiposala = ($this->ed16_i_tiposala === 0 || $this->ed16_i_tiposala === 0.0 || $this->ed16_i_tiposala == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_tiposala"] : $this->ed16_i_tiposala);
             $this->ed16_c_descr = ($this->ed16_c_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_c_descr"] : $this->ed16_c_descr);
-            $this->ed16_i_capacidade = ($this->ed16_i_capacidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_capacidade"] : $this->ed16_i_capacidade);
+            $this->ed16_i_capacidade = ($this->ed16_i_capacidade === 0 || $this->ed16_i_capacidade === 0.0 || $this->ed16_i_capacidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_capacidade"] : $this->ed16_i_capacidade);
             $this->ed16_c_pertence = ($this->ed16_c_pertence == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_c_pertence"] : $this->ed16_c_pertence);
-            $this->ed16_f_metragem = ($this->ed16_f_metragem == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_f_metragem"] : $this->ed16_f_metragem);
-            $this->ed16_i_calculoaluno = ($this->ed16_i_calculoaluno == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_calculoaluno"] : $this->ed16_i_calculoaluno);
+            $this->ed16_f_metragem = ($this->ed16_f_metragem === 0 || $this->ed16_f_metragem === 0.0 || $this->ed16_f_metragem == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_f_metragem"] : $this->ed16_f_metragem);
+            $this->ed16_i_calculoaluno = ($this->ed16_i_calculoaluno === 0 || $this->ed16_i_calculoaluno === 0.0 || $this->ed16_i_calculoaluno == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_calculoaluno"] : $this->ed16_i_calculoaluno);
             $this->ed16_local_funcionamento = ($this->ed16_local_funcionamento === "" ? "null" : $this->ed16_local_funcionamento);
         } else {
-            $this->ed16_i_codigo = ($this->ed16_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_codigo"] : $this->ed16_i_codigo);
+            $this->ed16_i_codigo = ($this->ed16_i_codigo === 0 || $this->ed16_i_codigo === 0.0 || $this->ed16_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed16_i_codigo"] : $this->ed16_i_codigo);
         }
     }
 
@@ -174,7 +174,7 @@ class cl_sala
                 $this->ed16_i_codigo = $ed16_i_codigo;
             }
         }
-        if (($this->ed16_i_codigo == null) || ($this->ed16_i_codigo == "")) {
+        if (($this->ed16_i_codigo == null) || ($this->ed16_i_codigo === 0 || $this->ed16_i_codigo === 0.0 || $this->ed16_i_codigo == "")) {
             $this->erro_sql = " Campo ed16_i_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

@@ -267,6 +267,13 @@ done
 diff /tmp/esc56.txt /tmp/esc85.txt      # qualquer linha e defeito
 ```
 
+**Com listas grandes, rodar UMA classe por processo** (`while read c; do echo "$c" > /tmp/um.txt;
+php /tmp/esc.php /tmp/um.txt; done`): um fatal mata o processo e o resto da lista some — no
+`edu3` a lista inteira cobriu 120 de 404 classes. Conferir quantas classes aparecem na saída.
+
+**Depois de editar um arquivo, esperar 3 s antes de requisitá-lo no 8.5** — o opcache revalida
+a cada 2 s e executa o código antigo (um ciclo automatizado aplicou a mesma guarda 15 vezes).
+
 Ele popula `HTTP_POST_VARS`, chama `atualizacampos()` e compara o estado — sem HTTP e sem
 tocar no banco. Divergência significa que o 5.6 lê o valor do formulário e o 8.5 mantém `0`:
 **dado errado gravado em silêncio**.

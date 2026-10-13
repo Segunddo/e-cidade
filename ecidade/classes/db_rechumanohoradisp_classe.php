@@ -55,16 +55,16 @@ class cl_rechumanohoradisp
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed33_i_codigo = ($this->ed33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_i_codigo"]:$this->ed33_i_codigo);
-       $this->ed33_rechumanoescola = ($this->ed33_rechumanoescola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_rechumanoescola"]:$this->ed33_rechumanoescola);
-       $this->ed33_i_diasemana = ($this->ed33_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_i_diasemana"]:$this->ed33_i_diasemana);
-       $this->ed33_i_periodo = ($this->ed33_i_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_i_periodo"]:$this->ed33_i_periodo);
+       $this->ed33_i_codigo = ($this->ed33_i_codigo === 0 || $this->ed33_i_codigo === 0.0 || $this->ed33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_i_codigo"]:$this->ed33_i_codigo);
+       $this->ed33_rechumanoescola = ($this->ed33_rechumanoescola === 0 || $this->ed33_rechumanoescola === 0.0 || $this->ed33_rechumanoescola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_rechumanoescola"]:$this->ed33_rechumanoescola);
+       $this->ed33_i_diasemana = ($this->ed33_i_diasemana === 0 || $this->ed33_i_diasemana === 0.0 || $this->ed33_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_i_diasemana"]:$this->ed33_i_diasemana);
+       $this->ed33_i_periodo = ($this->ed33_i_periodo === 0 || $this->ed33_i_periodo === 0.0 || $this->ed33_i_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_i_periodo"]:$this->ed33_i_periodo);
        $this->ed33_ativo = ($this->ed33_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed33_ativo"]:$this->ed33_ativo);
-       $this->ed33_tipohoratrabalho = ($this->ed33_tipohoratrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_tipohoratrabalho"]:$this->ed33_tipohoratrabalho);
+       $this->ed33_tipohoratrabalho = ($this->ed33_tipohoratrabalho === 0 || $this->ed33_tipohoratrabalho === 0.0 || $this->ed33_tipohoratrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_tipohoratrabalho"]:$this->ed33_tipohoratrabalho);
        $this->ed33_horaatividade = ($this->ed33_horaatividade == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed33_horaatividade"]:$this->ed33_horaatividade);
-       $this->ed33_rechumanoativ = ($this->ed33_rechumanoativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_rechumanoativ"]:$this->ed33_rechumanoativ);
+       $this->ed33_rechumanoativ = ($this->ed33_rechumanoativ === 0 || $this->ed33_rechumanoativ === 0.0 || $this->ed33_rechumanoativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_rechumanoativ"]:$this->ed33_rechumanoativ);
      }else{
-       $this->ed33_i_codigo = ($this->ed33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_i_codigo"]:$this->ed33_i_codigo);
+       $this->ed33_i_codigo = ($this->ed33_i_codigo === 0 || $this->ed33_i_codigo === 0.0 || $this->ed33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed33_i_codigo"]:$this->ed33_i_codigo);
      }
    }
 
@@ -158,7 +158,7 @@ class cl_rechumanohoradisp
          $this->ed33_i_codigo = $ed33_i_codigo;
        }
      }
-     if(($this->ed33_i_codigo == null) || ($this->ed33_i_codigo == "") ){
+     if(($this->ed33_i_codigo == null) || ($this->ed33_i_codigo === 0 || $this->ed33_i_codigo === 0.0 || $this->ed33_i_codigo == "") ){
        $this->erro_sql = " Campo ed33_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -564,7 +564,7 @@ class cl_rechumanohoradisp
   	$sql = "select ";
   	if ($campos != "*" ) {
 
-  		$campos_sql = split("#",$campos);
+  		$campos_sql = preg_split("#\\##m",$campos);
   		$virgula    = "";
 
   		for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -597,7 +597,7 @@ class cl_rechumanohoradisp
   	if ($ordem != null ) {
 
   		$sql       .= " order by ";
-  		$campos_sql = split("#",$ordem);
+  		$campos_sql = preg_split("#\\##m",$ordem);
   		$virgula    = "";
   		for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -613,7 +613,7 @@ class cl_rechumanohoradisp
 
     if( $campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
 
       for( $i = 0; $i < sizeof( $campos_sql ); $i++ ) {
@@ -655,7 +655,7 @@ class cl_rechumanohoradisp
     if( $ordem != null ) {
 
       $sql        .= " order by ";
-      $campos_sql  = split( "#", $ordem );
+      $campos_sql  = preg_split( "#\\##m", $ordem );
       $virgula     = "";
 
       for( $i = 0; $i < sizeof( $campos_sql ); $i++ ) {
@@ -673,7 +673,7 @@ class cl_rechumanohoradisp
 
     if( $campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
 
       for( $i = 0; $i < sizeof( $campos_sql ); $i++ ) {
@@ -715,7 +715,7 @@ class cl_rechumanohoradisp
     if( $ordem != null ) {
 
       $sql        .= " order by ";
-      $campos_sql  = split( "#", $ordem );
+      $campos_sql  = preg_split( "#\\##m", $ordem );
       $virgula     = "";
 
       for( $i = 0; $i < sizeof( $campos_sql ); $i++ ) {

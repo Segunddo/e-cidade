@@ -57,7 +57,7 @@ class cl_loteimpressaocartaoidentificacao {
                  ed305_hora = char(5) = Hora 
                  ";
    //funcao construtor da classe 
-   function cl_loteimpressaocartaoidentificacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("loteimpressaocartaoidentificacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_loteimpressaocartaoidentificacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed305_sequencial = ($this->ed305_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_sequencial"]:$this->ed305_sequencial);
-       $this->ed305_usuario = ($this->ed305_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_usuario"]:$this->ed305_usuario);
+       $this->ed305_sequencial = ($this->ed305_sequencial === 0 || $this->ed305_sequencial === 0.0 || $this->ed305_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_sequencial"]:$this->ed305_sequencial);
+       $this->ed305_usuario = ($this->ed305_usuario === 0 || $this->ed305_usuario === 0.0 || $this->ed305_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_usuario"]:$this->ed305_usuario);
        if($this->ed305_data == ""){
          $this->ed305_data_dia = ($this->ed305_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_data_dia"]:$this->ed305_data_dia);
          $this->ed305_data_mes = ($this->ed305_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_data_mes"]:$this->ed305_data_mes);
@@ -86,7 +86,7 @@ class cl_loteimpressaocartaoidentificacao {
        }
        $this->ed305_hora = ($this->ed305_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_hora"]:$this->ed305_hora);
      }else{
-       $this->ed305_sequencial = ($this->ed305_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_sequencial"]:$this->ed305_sequencial);
+       $this->ed305_sequencial = ($this->ed305_sequencial === 0 || $this->ed305_sequencial === 0.0 || $this->ed305_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_sequencial"]:$this->ed305_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_loteimpressaocartaoidentificacao {
          $this->ed305_sequencial = $ed305_sequencial; 
        }
      }
-     if(($this->ed305_sequencial == null) || ($this->ed305_sequencial == "") ){ 
+     if(($this->ed305_sequencial == null) || ($this->ed305_sequencial === 0 || $this->ed305_sequencial === 0.0 || $this->ed305_sequencial == "") ){ 
        $this->erro_sql = " Campo ed305_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -415,7 +415,7 @@ class cl_loteimpressaocartaoidentificacao {
    function sql_query ( $ed305_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_loteimpressaocartaoidentificacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_loteimpressaocartaoidentificacao {
    function sql_query_file ( $ed305_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_loteimpressaocartaoidentificacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_loteimpressaocartaoidentificacao {
   function sql_query_lotes ( $ed305_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -512,7 +512,7 @@ class cl_loteimpressaocartaoidentificacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

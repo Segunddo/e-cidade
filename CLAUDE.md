@@ -66,8 +66,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
 **Onde paramos:** **ÁREA TRIBUTÁRIO CONCLUÍDA; ÁREA EDUCAÇÃO INICIADA** (branch
-`2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib` e `mer` (+ 20 telas `mat`/`pro` por
-`map`); falta só **`edu`**. Ver *ÁREA EDUCAÇÃO*.
+`2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
+`map`) e `edu3_` + variantes `edu0x_`/`edu_`; faltam `edu2_`, `edu4_` e `edu1_`. Ver *ÁREA EDUCAÇÃO*.
 
 | | |
 |---|---|
@@ -75,11 +75,11 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer)[0-9]*_` — **2.133 telas** + 367 por `map` |
-| **Próximo passo** | **`edu`** (726 arquivos, 1.211 telas) — quebrar por subprefixo `edu1_`, `edu2_`… Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu3\|edu0\|edu(?=_))[0-9]*_` — **2.204 telas** + 367 por `map` |
+| **Próximo passo** | **`edu2_`** (259 telas), depois `edu4_` (148) e `edu1_` (733, o maior lote do projeto) Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
-| Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
+| Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
@@ -3060,6 +3060,7 @@ por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` n
 | `esc`+`rel`+`sec` | 84 | 19 | 84/84 | 35/35 | 1.368 linhas, 0 div. | **16/16** |
 | `bib` | 232 | 79 | 232/232 | 75/75 | 2.632 linhas, 0 div. | **95/98** |
 | `mer` + 20 `mat`/`pro` | 507 | 198 | 506/507 | 163/164 | 3.270 linhas, 0 div. | **207/207** |
+| `edu3_` + 13 variantes | 591 | 100 + 24 da 9ª lacuna + 9 à mão | 591/591 | 402/404 | 11.451 linhas, 402 classes | **71/71** |
 
 **`bib`** — 76 pelo Rector (242 guardas, 152 `split` todos `#`, 39 construtores, 33
 `parse_str`+`extract`, 3 parâmetros opcionais antes de obrigatórios, 1 `${$var}`), mais 3 à mão:
@@ -3102,6 +3103,52 @@ existem** no banco (`me07_i_codmater`, `me22_i_cardapio`), defeito pré-existent
 **Roteamento por `map` agora é por ÁREA.** `gera_map_faseb.py` recebe `<area>:<prefixos>`
 (`tribut:amb,pre,… educa:mat,pro`). Ele **reescreve o arquivo inteiro** — repetir todos os
 lotes; conferido por diff que só houve 20 linhas acrescentadas e nenhuma removida.
+
+**`edu3_` + variantes** — `edu02_`, `edu03_`, `edu04_` e `edu_` (13 arquivos) não casam
+`^edu3[0-9]*_` nem `^edu2[0-9]*_`: mesma armadilha do `jur01_`, por isso entraram no primeiro
+lote. Regex usado: `(?:edu(?:3|0)|edu(?=_))` — qualquer alternativa **vazia** (`edu(?:3|)`)
+casaria todos os `edu1_`. No nginx idem: a lookahead `edu(?=_)` é o que impede `edu` sozinho de
+rotear os subprefixos ainda não portados (verificado: `edu1_aluno001.php` segue no 5.6).
+
+À mão: 13 guardas `pg_*` (`null`) em 6 telas — SQLs sobre relações que **não existem** no banco
+(`alunofora`, `alunopassagem`) — e `array_unique(null)`/`natsort(null)` em
+`edu3_quadrogeraldehorarioshtml002.php`: no 5.6 devolvem `NULL` e deixam a variável nula; no
+8.5 são `TypeError` (o `@` não protege). Corrigido com `is_array()`, que reproduz os dois.
+
+Onze alvos o Rector não tocou: estavam portados pelos commits `EXPERIMENTO: …` do `iss`, que o
+`enumera.py` não conta como pagos (só `^Porta `). **Não** passei a contá-los: um experimento
+revertido faria arquivo não portado ser pulado — o erro no sentido perigoso. O custo é só
+superestimar "a alterar".
+
+**O harness de escrita precisa de UM PROCESSO POR CLASSE.** Com a lista toda num processo só,
+cobriu 120 de 404 classes (um fatal o matou) — e o `harness_robusto.sh` não serve para ele,
+que emite várias linhas por classe. Em laço, uma classe por `php`: 402 de 404.
+
+#### ⚠ 9ª LACUNA: `getdao` em minúsculas — a enumeração era sensível a maiúsculas no MÉTODO
+
+`edu3_atolegal001.php` morria com `label() on null`:
+
+```php
+$oDaoAtoLegal = db_utils::getdao('atolegal');   // minusculas
+$oDaoAtoLegal->rotulo->label();                 // rotulo nulo: o construtor PHP 4 nao rodou
+```
+
+A 7ª frente procurava `getDao` com regex sensível a caso; PHP não diferencia maiúsculas em nome
+de método. Escala na base: `getDao` 4.020 chamadas, **`getdao` 766, `getDAO` 13, `GetDao` 2 —
+781 chamadas em 244 arquivos invisíveis**. As frentes de `include`/`require` e `new cl_*`
+tinham a mesma fraqueza; as três passaram a `re.I`, e a resolução do nome tenta também o
+arquivo em minúsculas.
+
+Impacto medido **retroativamente** (universo novo − universo antigo, por lote): Tributário
+**+1 arquivo** (`iss`); Educação **+30**, porque o `getdao` minúsculo é idioma do código de
+Educação. Dos 30, **24 ainda precisavam de porte** (17 construtores PHP 4, 21 com guardas
+faltando) — 16 deles nos lotes `rel`/`sec`/`bib`/`mer` já commitados, e
+`db_issmovalvaraprocesso_classe.php` no `iss`. Portados neste lote; baterias refeitas de todos
+os lotes afetados: `tre` 19/19, `esc`+`rel`+`sec` 16/16, `bib` 95/98, `mer` 187/187, `map`
+20/20, `iss` 397/400, `con`+`rec` roteadas 31/31 — **todas na linha de base**.
+
+É a nona vez da mesma falha de método, e a segunda de maiúsculas (a primeira foi `Cem1_` no
+nome do arquivo). Achada como as outras: por uma tela que quebrou, não por varredura.
 
 #### ARMADILHA DE FERRAMENTAL: o opcache do 8.5 revalida a cada 2 s
 

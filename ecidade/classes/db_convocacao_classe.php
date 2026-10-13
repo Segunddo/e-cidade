@@ -59,7 +59,7 @@ class cl_convocacao {
                  ed111_i_ano = int4 = Ano Referente 
                  ";
    //funcao construtor da classe 
-   function cl_convocacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("convocacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,7 +76,7 @@ class cl_convocacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed111_i_codigo = ($this->ed111_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed111_i_codigo"]:$this->ed111_i_codigo);
+       $this->ed111_i_codigo = ($this->ed111_i_codigo === 0 || $this->ed111_i_codigo === 0.0 || $this->ed111_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed111_i_codigo"]:$this->ed111_i_codigo);
        $this->ed111_c_titulo = ($this->ed111_c_titulo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed111_c_titulo"]:$this->ed111_c_titulo);
        $this->ed111_t_obs = ($this->ed111_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed111_t_obs"]:$this->ed111_t_obs);
        if($this->ed111_d_data == ""){
@@ -87,9 +87,9 @@ class cl_convocacao {
             $this->ed111_d_data = $this->ed111_d_data_ano."-".$this->ed111_d_data_mes."-".$this->ed111_d_data_dia;
          }
        }
-       $this->ed111_i_ano = ($this->ed111_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed111_i_ano"]:$this->ed111_i_ano);
+       $this->ed111_i_ano = ($this->ed111_i_ano === 0 || $this->ed111_i_ano === 0.0 || $this->ed111_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed111_i_ano"]:$this->ed111_i_ano);
      }else{
-       $this->ed111_i_codigo = ($this->ed111_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed111_i_codigo"]:$this->ed111_i_codigo);
+       $this->ed111_i_codigo = ($this->ed111_i_codigo === 0 || $this->ed111_i_codigo === 0.0 || $this->ed111_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed111_i_codigo"]:$this->ed111_i_codigo);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_convocacao {
          $this->ed111_i_codigo = $ed111_i_codigo; 
        }
      }
-     if(($this->ed111_i_codigo == null) || ($this->ed111_i_codigo == "") ){ 
+     if(($this->ed111_i_codigo == null) || ($this->ed111_i_codigo === 0 || $this->ed111_i_codigo === 0.0 || $this->ed111_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed111_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -427,7 +427,7 @@ class cl_convocacao {
    function sql_query ( $ed111_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_convocacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_convocacao {
    function sql_query_file ( $ed111_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_convocacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

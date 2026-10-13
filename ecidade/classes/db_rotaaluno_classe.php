@@ -69,7 +69,7 @@ class cl_rotaaluno {
                  ed219_i_usuario = int4 = Usuario 
                  ";
    //funcao construtor da classe 
-   function cl_rotaaluno() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rotaaluno"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -86,7 +86,7 @@ class cl_rotaaluno {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed219_i_codigo = ($this->ed219_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_i_codigo"]:$this->ed219_i_codigo);
+       $this->ed219_i_codigo = ($this->ed219_i_codigo === 0 || $this->ed219_i_codigo === 0.0 || $this->ed219_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_i_codigo"]:$this->ed219_i_codigo);
        if($this->ed219_d_dataacao == ""){
          $this->ed219_d_dataacao_dia = ($this->ed219_d_dataacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_d_dataacao_dia"]:$this->ed219_d_dataacao_dia);
          $this->ed219_d_dataacao_mes = ($this->ed219_d_dataacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_d_dataacao_mes"]:$this->ed219_d_dataacao_mes);
@@ -111,11 +111,11 @@ class cl_rotaaluno {
             $this->ed219_d_datainicio = $this->ed219_d_datainicio_ano."-".$this->ed219_d_datainicio_mes."-".$this->ed219_d_datainicio_dia;
          }
        }
-       $this->ed219_i_rota = ($this->ed219_i_rota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_i_rota"]:$this->ed219_i_rota);
-       $this->ed219_i_aluno = ($this->ed219_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_i_aluno"]:$this->ed219_i_aluno);
-       $this->ed219_i_usuario = ($this->ed219_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_i_usuario"]:$this->ed219_i_usuario);
+       $this->ed219_i_rota = ($this->ed219_i_rota === 0 || $this->ed219_i_rota === 0.0 || $this->ed219_i_rota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_i_rota"]:$this->ed219_i_rota);
+       $this->ed219_i_aluno = ($this->ed219_i_aluno === 0 || $this->ed219_i_aluno === 0.0 || $this->ed219_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_i_aluno"]:$this->ed219_i_aluno);
+       $this->ed219_i_usuario = ($this->ed219_i_usuario === 0 || $this->ed219_i_usuario === 0.0 || $this->ed219_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_i_usuario"]:$this->ed219_i_usuario);
      }else{
-       $this->ed219_i_codigo = ($this->ed219_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_i_codigo"]:$this->ed219_i_codigo);
+       $this->ed219_i_codigo = ($this->ed219_i_codigo === 0 || $this->ed219_i_codigo === 0.0 || $this->ed219_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed219_i_codigo"]:$this->ed219_i_codigo);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_rotaaluno {
          $this->ed219_i_codigo = $ed219_i_codigo; 
        }
      }
-     if(($this->ed219_i_codigo == null) || ($this->ed219_i_codigo == "") ){ 
+     if(($this->ed219_i_codigo == null) || ($this->ed219_i_codigo === 0 || $this->ed219_i_codigo === 0.0 || $this->ed219_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed219_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -531,7 +531,7 @@ class cl_rotaaluno {
    function sql_query ( $ed219_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -555,7 +555,7 @@ class cl_rotaaluno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -567,7 +567,7 @@ class cl_rotaaluno {
    function sql_query_file ( $ed219_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -588,7 +588,7 @@ class cl_rotaaluno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

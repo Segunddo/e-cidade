@@ -64,7 +64,7 @@ class cl_aprovconselho {
                  ed253_avaliacaoconselho = varchar(10) = Avaliação do Conselho 
                  ";
    //funcao construtor da classe
-   function cl_aprovconselho() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aprovconselho");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_aprovconselho {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed253_i_codigo = ($this->ed253_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_codigo"]:$this->ed253_i_codigo);
-       $this->ed253_i_diario = ($this->ed253_i_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_diario"]:$this->ed253_i_diario);
+       $this->ed253_i_codigo = ($this->ed253_i_codigo === 0 || $this->ed253_i_codigo === 0.0 || $this->ed253_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_codigo"]:$this->ed253_i_codigo);
+       $this->ed253_i_diario = ($this->ed253_i_diario === 0 || $this->ed253_i_diario === 0.0 || $this->ed253_i_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_diario"]:$this->ed253_i_diario);
        $this->ed253_i_rechumano = ($this->ed253_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_rechumano"]:$this->ed253_i_rechumano);
-       $this->ed253_i_usuario = ($this->ed253_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_usuario"]:$this->ed253_i_usuario);
+       $this->ed253_i_usuario = ($this->ed253_i_usuario === 0 || $this->ed253_i_usuario === 0.0 || $this->ed253_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_usuario"]:$this->ed253_i_usuario);
        $this->ed253_t_obs = ($this->ed253_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_t_obs"]:$this->ed253_t_obs);
-       $this->ed253_i_data = ($this->ed253_i_data == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_data"]:$this->ed253_i_data);
-       $this->ed253_aprovconselhotipo = ($this->ed253_aprovconselhotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_aprovconselhotipo"]:$this->ed253_aprovconselhotipo);
+       $this->ed253_i_data = ($this->ed253_i_data === 0 || $this->ed253_i_data === 0.0 || $this->ed253_i_data == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_data"]:$this->ed253_i_data);
+       $this->ed253_aprovconselhotipo = ($this->ed253_aprovconselhotipo === 0 || $this->ed253_aprovconselhotipo === 0.0 || $this->ed253_aprovconselhotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_aprovconselhotipo"]:$this->ed253_aprovconselhotipo);
        $this->ed253_alterarnotafinal = ($this->ed253_alterarnotafinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_alterarnotafinal"]:$this->ed253_alterarnotafinal);
        $this->ed253_avaliacaoconselho = ($this->ed253_avaliacaoconselho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_avaliacaoconselho"]:$this->ed253_avaliacaoconselho);
      }else{
-       $this->ed253_i_codigo = ($this->ed253_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_codigo"]:$this->ed253_i_codigo);
+       $this->ed253_i_codigo = ($this->ed253_i_codigo === 0 || $this->ed253_i_codigo === 0.0 || $this->ed253_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed253_i_codigo"]:$this->ed253_i_codigo);
      }
    }
    // funcao para inclusao
@@ -172,7 +172,7 @@ class cl_aprovconselho {
          $this->ed253_i_codigo = $ed253_i_codigo;
        }
      }
-     if(($this->ed253_i_codigo == null) || ($this->ed253_i_codigo == "") ){
+     if(($this->ed253_i_codigo == null) || ($this->ed253_i_codigo === 0 || $this->ed253_i_codigo === 0.0 || $this->ed253_i_codigo == "") ){
        $this->erro_sql = " Campo ed253_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -54,7 +54,7 @@ class cl_censocartorio {
                  ed291_i_censomunic = int4 = Município 
                  ";
    //funcao construtor da classe 
-   function cl_censocartorio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("censocartorio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_censocartorio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed291_i_codigo = ($this->ed291_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed291_i_codigo"]:$this->ed291_i_codigo);
+       $this->ed291_i_codigo = ($this->ed291_i_codigo === 0 || $this->ed291_i_codigo === 0.0 || $this->ed291_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed291_i_codigo"]:$this->ed291_i_codigo);
        $this->ed291_c_nome = ($this->ed291_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ed291_c_nome"]:$this->ed291_c_nome);
-       $this->ed291_i_serventia = ($this->ed291_i_serventia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed291_i_serventia"]:$this->ed291_i_serventia);
-       $this->ed291_i_censomunic = ($this->ed291_i_censomunic == ""?@$GLOBALS["HTTP_POST_VARS"]["ed291_i_censomunic"]:$this->ed291_i_censomunic);
+       $this->ed291_i_serventia = ($this->ed291_i_serventia === 0 || $this->ed291_i_serventia === 0.0 || $this->ed291_i_serventia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed291_i_serventia"]:$this->ed291_i_serventia);
+       $this->ed291_i_censomunic = ($this->ed291_i_censomunic === 0 || $this->ed291_i_censomunic === 0.0 || $this->ed291_i_censomunic == ""?@$GLOBALS["HTTP_POST_VARS"]["ed291_i_censomunic"]:$this->ed291_i_censomunic);
      }else{
-       $this->ed291_i_codigo = ($this->ed291_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed291_i_codigo"]:$this->ed291_i_codigo);
+       $this->ed291_i_codigo = ($this->ed291_i_codigo === 0 || $this->ed291_i_codigo === 0.0 || $this->ed291_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed291_i_codigo"]:$this->ed291_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_censocartorio {
          $this->ed291_i_codigo = $ed291_i_codigo; 
        }
      }
-     if(($this->ed291_i_codigo == null) || ($this->ed291_i_codigo == "") ){ 
+     if(($this->ed291_i_codigo == null) || ($this->ed291_i_codigo === 0 || $this->ed291_i_codigo === 0.0 || $this->ed291_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed291_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_censocartorio {
    function sql_query ( $ed291_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_censocartorio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_censocartorio {
    function sql_query_file ( $ed291_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_censocartorio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

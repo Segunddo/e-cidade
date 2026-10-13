@@ -62,7 +62,7 @@ class cl_progressaoparcialaluno {
                  ed114_situacaoeducacao = int4 = Situação da progressão
                  ";
    //funcao construtor da classe
-   function cl_progressaoparcialaluno() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("progressaoparcialaluno");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_progressaoparcialaluno {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed114_sequencial = ($this->ed114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_sequencial"]:$this->ed114_sequencial);
-       $this->ed114_disciplina = ($this->ed114_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_disciplina"]:$this->ed114_disciplina);
-       $this->ed114_aluno = ($this->ed114_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_aluno"]:$this->ed114_aluno);
-       $this->ed114_serie = ($this->ed114_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_serie"]:$this->ed114_serie);
-       $this->ed114_tipoconclusao = ($this->ed114_tipoconclusao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_tipoconclusao"]:$this->ed114_tipoconclusao);
-       $this->ed114_ano = ($this->ed114_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_ano"]:$this->ed114_ano);
-       $this->ed114_escola = ($this->ed114_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_escola"]:$this->ed114_escola);
-       $this->ed114_situacaoeducacao = ($this->ed114_situacaoeducacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_situacaoeducacao"]:$this->ed114_situacaoeducacao);
+       $this->ed114_sequencial = ($this->ed114_sequencial === 0 || $this->ed114_sequencial === 0.0 || $this->ed114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_sequencial"]:$this->ed114_sequencial);
+       $this->ed114_disciplina = ($this->ed114_disciplina === 0 || $this->ed114_disciplina === 0.0 || $this->ed114_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_disciplina"]:$this->ed114_disciplina);
+       $this->ed114_aluno = ($this->ed114_aluno === 0 || $this->ed114_aluno === 0.0 || $this->ed114_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_aluno"]:$this->ed114_aluno);
+       $this->ed114_serie = ($this->ed114_serie === 0 || $this->ed114_serie === 0.0 || $this->ed114_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_serie"]:$this->ed114_serie);
+       $this->ed114_tipoconclusao = ($this->ed114_tipoconclusao === 0 || $this->ed114_tipoconclusao === 0.0 || $this->ed114_tipoconclusao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_tipoconclusao"]:$this->ed114_tipoconclusao);
+       $this->ed114_ano = ($this->ed114_ano === 0 || $this->ed114_ano === 0.0 || $this->ed114_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_ano"]:$this->ed114_ano);
+       $this->ed114_escola = ($this->ed114_escola === 0 || $this->ed114_escola === 0.0 || $this->ed114_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_escola"]:$this->ed114_escola);
+       $this->ed114_situacaoeducacao = ($this->ed114_situacaoeducacao === 0 || $this->ed114_situacaoeducacao === 0.0 || $this->ed114_situacaoeducacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_situacaoeducacao"]:$this->ed114_situacaoeducacao);
      }else{
-       $this->ed114_sequencial = ($this->ed114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_sequencial"]:$this->ed114_sequencial);
+       $this->ed114_sequencial = ($this->ed114_sequencial === 0 || $this->ed114_sequencial === 0.0 || $this->ed114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed114_sequencial"]:$this->ed114_sequencial);
      }
    }
    // funcao para inclusao
@@ -175,7 +175,7 @@ class cl_progressaoparcialaluno {
          $this->ed114_sequencial = $ed114_sequencial;
        }
      }
-     if(($this->ed114_sequencial == null) || ($this->ed114_sequencial == "") ){
+     if(($this->ed114_sequencial == null) || ($this->ed114_sequencial === 0 || $this->ed114_sequencial === 0.0 || $this->ed114_sequencial == "") ){
        $this->erro_sql = " Campo ed114_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

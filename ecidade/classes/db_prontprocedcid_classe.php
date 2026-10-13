@@ -52,7 +52,7 @@ class cl_prontprocedcid {
                  s135_i_cid = int4 = CID 
                  ";
    //funcao construtor da classe 
-   function cl_prontprocedcid() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prontprocedcid"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_prontprocedcid {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s135_i_codigo = ($this->s135_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s135_i_codigo"]:$this->s135_i_codigo);
-       $this->s135_i_prontproced = ($this->s135_i_prontproced == ""?@$GLOBALS["HTTP_POST_VARS"]["s135_i_prontproced"]:$this->s135_i_prontproced);
-       $this->s135_i_cid = ($this->s135_i_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["s135_i_cid"]:$this->s135_i_cid);
+       $this->s135_i_codigo = ($this->s135_i_codigo === 0 || $this->s135_i_codigo === 0.0 || $this->s135_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s135_i_codigo"]:$this->s135_i_codigo);
+       $this->s135_i_prontproced = ($this->s135_i_prontproced === 0 || $this->s135_i_prontproced === 0.0 || $this->s135_i_prontproced == ""?@$GLOBALS["HTTP_POST_VARS"]["s135_i_prontproced"]:$this->s135_i_prontproced);
+       $this->s135_i_cid = ($this->s135_i_cid === 0 || $this->s135_i_cid === 0.0 || $this->s135_i_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["s135_i_cid"]:$this->s135_i_cid);
      }else{
-       $this->s135_i_codigo = ($this->s135_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s135_i_codigo"]:$this->s135_i_codigo);
+       $this->s135_i_codigo = ($this->s135_i_codigo === 0 || $this->s135_i_codigo === 0.0 || $this->s135_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s135_i_codigo"]:$this->s135_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_prontprocedcid {
          $this->s135_i_codigo = $s135_i_codigo; 
        }
      }
-     if(($this->s135_i_codigo == null) || ($this->s135_i_codigo == "") ){ 
+     if(($this->s135_i_codigo == null) || ($this->s135_i_codigo === 0 || $this->s135_i_codigo === 0.0 || $this->s135_i_codigo == "") ){ 
        $this->erro_sql = " Campo s135_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_prontprocedcid {
    function sql_query ( $s135_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_prontprocedcid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_prontprocedcid {
    function sql_query_file ( $s135_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_prontprocedcid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -50,7 +50,7 @@ class cl_rhestcivil {
                  rh08_descr = varchar(20) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_rhestcivil() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhestcivil"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_rhestcivil {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh08_estciv = ($this->rh08_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["rh08_estciv"]:$this->rh08_estciv);
+       $this->rh08_estciv = ($this->rh08_estciv === 0 || $this->rh08_estciv === 0.0 || $this->rh08_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["rh08_estciv"]:$this->rh08_estciv);
        $this->rh08_descr = ($this->rh08_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh08_descr"]:$this->rh08_descr);
      }else{
-       $this->rh08_estciv = ($this->rh08_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["rh08_estciv"]:$this->rh08_estciv);
+       $this->rh08_estciv = ($this->rh08_estciv === 0 || $this->rh08_estciv === 0.0 || $this->rh08_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["rh08_estciv"]:$this->rh08_estciv);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhestcivil {
        return false;
      }
        $this->rh08_estciv = $rh08_estciv; 
-     if(($this->rh08_estciv == null) || ($this->rh08_estciv == "") ){ 
+     if(($this->rh08_estciv == null) || ($this->rh08_estciv === 0 || $this->rh08_estciv === 0.0 || $this->rh08_estciv == "") ){ 
        $this->erro_sql = " Campo rh08_estciv nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_rhestcivil {
    function sql_query ( $rh08_estciv=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -326,7 +326,7 @@ class cl_rhestcivil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -338,7 +338,7 @@ class cl_rhestcivil {
    function sql_query_file ( $rh08_estciv=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -359,7 +359,7 @@ class cl_rhestcivil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

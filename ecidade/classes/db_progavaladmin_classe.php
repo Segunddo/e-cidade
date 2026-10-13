@@ -65,7 +65,7 @@ class cl_progavaladmin {
                  ed116_i_ano = int4 = Ano Referente 
                  ";
    //funcao construtor da classe 
-   function cl_progavaladmin() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("progavaladmin"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,11 +82,11 @@ class cl_progavaladmin {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed116_i_codigo = ($this->ed116_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_codigo"]:$this->ed116_i_codigo);
-       $this->ed116_i_progmatricula = ($this->ed116_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_progmatricula"]:$this->ed116_i_progmatricula);
-       $this->ed116_i_questaoaval = ($this->ed116_i_questaoaval == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_questaoaval"]:$this->ed116_i_questaoaval);
-       $this->ed116_i_opcaoquestao = ($this->ed116_i_opcaoquestao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_opcaoquestao"]:$this->ed116_i_opcaoquestao);
-       $this->ed116_i_usuario = ($this->ed116_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_usuario"]:$this->ed116_i_usuario);
+       $this->ed116_i_codigo = ($this->ed116_i_codigo === 0 || $this->ed116_i_codigo === 0.0 || $this->ed116_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_codigo"]:$this->ed116_i_codigo);
+       $this->ed116_i_progmatricula = ($this->ed116_i_progmatricula === 0 || $this->ed116_i_progmatricula === 0.0 || $this->ed116_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_progmatricula"]:$this->ed116_i_progmatricula);
+       $this->ed116_i_questaoaval = ($this->ed116_i_questaoaval === 0 || $this->ed116_i_questaoaval === 0.0 || $this->ed116_i_questaoaval == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_questaoaval"]:$this->ed116_i_questaoaval);
+       $this->ed116_i_opcaoquestao = ($this->ed116_i_opcaoquestao === 0 || $this->ed116_i_opcaoquestao === 0.0 || $this->ed116_i_opcaoquestao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_opcaoquestao"]:$this->ed116_i_opcaoquestao);
+       $this->ed116_i_usuario = ($this->ed116_i_usuario === 0 || $this->ed116_i_usuario === 0.0 || $this->ed116_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_usuario"]:$this->ed116_i_usuario);
        if($this->ed116_d_data == ""){
          $this->ed116_d_data_dia = ($this->ed116_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_d_data_dia"]:$this->ed116_d_data_dia);
          $this->ed116_d_data_mes = ($this->ed116_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_d_data_mes"]:$this->ed116_d_data_mes);
@@ -96,9 +96,9 @@ class cl_progavaladmin {
          }
        }
        $this->ed116_c_tipo = ($this->ed116_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_c_tipo"]:$this->ed116_c_tipo);
-       $this->ed116_i_ano = ($this->ed116_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_ano"]:$this->ed116_i_ano);
+       $this->ed116_i_ano = ($this->ed116_i_ano === 0 || $this->ed116_i_ano === 0.0 || $this->ed116_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_ano"]:$this->ed116_i_ano);
      }else{
-       $this->ed116_i_codigo = ($this->ed116_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_codigo"]:$this->ed116_i_codigo);
+       $this->ed116_i_codigo = ($this->ed116_i_codigo === 0 || $this->ed116_i_codigo === 0.0 || $this->ed116_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed116_i_codigo"]:$this->ed116_i_codigo);
      }
    }
    // funcao para inclusao
@@ -191,7 +191,7 @@ class cl_progavaladmin {
          $this->ed116_i_codigo = $ed116_i_codigo; 
        }
      }
-     if(($this->ed116_i_codigo == null) || ($this->ed116_i_codigo == "") ){ 
+     if(($this->ed116_i_codigo == null) || ($this->ed116_i_codigo === 0 || $this->ed116_i_codigo === 0.0 || $this->ed116_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed116_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -538,7 +538,7 @@ class cl_progavaladmin {
    function sql_query ( $ed116_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -571,7 +571,7 @@ class cl_progavaladmin {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -583,7 +583,7 @@ class cl_progavaladmin {
    function sql_query_file ( $ed116_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -604,7 +604,7 @@ class cl_progavaladmin {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

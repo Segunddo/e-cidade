@@ -30,7 +30,7 @@ class cl_tipohoratrabalho {
                  ed128_ativo = bool = Ativo 
                  ";
    //funcao construtor da classe 
-   function cl_tipohoratrabalho() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipohoratrabalho"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_tipohoratrabalho {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed128_codigo = ($this->ed128_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed128_codigo"]:$this->ed128_codigo);
+       $this->ed128_codigo = ($this->ed128_codigo === 0 || $this->ed128_codigo === 0.0 || $this->ed128_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed128_codigo"]:$this->ed128_codigo);
        $this->ed128_descricao = ($this->ed128_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed128_descricao"]:$this->ed128_descricao);
        $this->ed128_abreviatura = ($this->ed128_abreviatura == ""?@$GLOBALS["HTTP_POST_VARS"]["ed128_abreviatura"]:$this->ed128_abreviatura);
-       $this->ed128_tipoefetividade = ($this->ed128_tipoefetividade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed128_tipoefetividade"]:$this->ed128_tipoefetividade);
+       $this->ed128_tipoefetividade = ($this->ed128_tipoefetividade === 0 || $this->ed128_tipoefetividade === 0.0 || $this->ed128_tipoefetividade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed128_tipoefetividade"]:$this->ed128_tipoefetividade);
        $this->ed128_ativo = ($this->ed128_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed128_ativo"]:$this->ed128_ativo);
      }else{
-       $this->ed128_codigo = ($this->ed128_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed128_codigo"]:$this->ed128_codigo);
+       $this->ed128_codigo = ($this->ed128_codigo === 0 || $this->ed128_codigo === 0.0 || $this->ed128_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed128_codigo"]:$this->ed128_codigo);
      }
    }
    // funcao para Inclusão
@@ -119,7 +119,7 @@ class cl_tipohoratrabalho {
          $this->ed128_codigo = $ed128_codigo; 
        }
      }
-     if(($this->ed128_codigo == null) || ($this->ed128_codigo == "") ){ 
+     if(($this->ed128_codigo == null) || ($this->ed128_codigo === 0 || $this->ed128_codigo === 0.0 || $this->ed128_codigo == "") ){ 
        $this->erro_sql = " Campo ed128_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

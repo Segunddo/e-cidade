@@ -75,7 +75,7 @@ class cl_undmedhorario {
                  sd30_d_valfinal = date = Fim
                  ";
    //funcao construtor da classe
-   function cl_undmedhorario() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("undmedhorario");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,16 +92,16 @@ class cl_undmedhorario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd30_i_codigo = ($this->sd30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_codigo"]:$this->sd30_i_codigo);
-       $this->sd30_i_undmed = ($this->sd30_i_undmed == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_undmed"]:$this->sd30_i_undmed);
-       $this->sd30_i_diasemana = ($this->sd30_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_diasemana"]:$this->sd30_i_diasemana);
+       $this->sd30_i_codigo = ($this->sd30_i_codigo === 0 || $this->sd30_i_codigo === 0.0 || $this->sd30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_codigo"]:$this->sd30_i_codigo);
+       $this->sd30_i_undmed = ($this->sd30_i_undmed === 0 || $this->sd30_i_undmed === 0.0 || $this->sd30_i_undmed == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_undmed"]:$this->sd30_i_undmed);
+       $this->sd30_i_diasemana = ($this->sd30_i_diasemana === 0 || $this->sd30_i_diasemana === 0.0 || $this->sd30_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_diasemana"]:$this->sd30_i_diasemana);
        $this->sd30_c_horaini = ($this->sd30_c_horaini == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_c_horaini"]:$this->sd30_c_horaini);
        $this->sd30_c_horafim = ($this->sd30_c_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_c_horafim"]:$this->sd30_c_horafim);
-       $this->sd30_i_fichas = ($this->sd30_i_fichas == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_fichas"]:$this->sd30_i_fichas);
-       $this->sd30_i_reservas = ($this->sd30_i_reservas == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_reservas"]:$this->sd30_i_reservas);
-       $this->sd30_i_turno = ($this->sd30_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_turno"]:$this->sd30_i_turno);
+       $this->sd30_i_fichas = ($this->sd30_i_fichas === 0 || $this->sd30_i_fichas === 0.0 || $this->sd30_i_fichas == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_fichas"]:$this->sd30_i_fichas);
+       $this->sd30_i_reservas = ($this->sd30_i_reservas === 0 || $this->sd30_i_reservas === 0.0 || $this->sd30_i_reservas == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_reservas"]:$this->sd30_i_reservas);
+       $this->sd30_i_turno = ($this->sd30_i_turno === 0 || $this->sd30_i_turno === 0.0 || $this->sd30_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_turno"]:$this->sd30_i_turno);
        $this->sd30_c_tipograde = ($this->sd30_c_tipograde == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_c_tipograde"]:$this->sd30_c_tipograde);
-       $this->sd30_i_tipoficha = ($this->sd30_i_tipoficha == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_tipoficha"]:$this->sd30_i_tipoficha);
+       $this->sd30_i_tipoficha = ($this->sd30_i_tipoficha === 0 || $this->sd30_i_tipoficha === 0.0 || $this->sd30_i_tipoficha == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_tipoficha"]:$this->sd30_i_tipoficha);
        if($this->sd30_d_valinicial == ""){
          $this->sd30_d_valinicial_dia = ($this->sd30_d_valinicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_d_valinicial_dia"]:$this->sd30_d_valinicial_dia);
          $this->sd30_d_valinicial_mes = ($this->sd30_d_valinicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_d_valinicial_mes"]:$this->sd30_d_valinicial_mes);
@@ -119,7 +119,7 @@ class cl_undmedhorario {
          }
        }
      }else{
-       $this->sd30_i_codigo = ($this->sd30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_codigo"]:$this->sd30_i_codigo);
+       $this->sd30_i_codigo = ($this->sd30_i_codigo === 0 || $this->sd30_i_codigo === 0.0 || $this->sd30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd30_i_codigo"]:$this->sd30_i_codigo);
      }
    }
    // funcao para Inclusao
@@ -236,7 +236,7 @@ class cl_undmedhorario {
          $this->sd30_i_codigo = $sd30_i_codigo;
        }
      }
-     if(($this->sd30_i_codigo == null) || ($this->sd30_i_codigo == "") ){
+     if(($this->sd30_i_codigo == null) || ($this->sd30_i_codigo === 0 || $this->sd30_i_codigo === 0.0 || $this->sd30_i_codigo == "") ){
        $this->erro_sql = " Campo sd30_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -708,7 +708,7 @@ class cl_undmedhorario {
   function sql_query_grade_relatorio ( $sd30_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -738,7 +738,7 @@ class cl_undmedhorario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -31,12 +31,15 @@ PORTADO = {l.strip().removeprefix("ecidade/") for l in subprocess.run(
     capture_output=True, text=True).stdout.splitlines() if l.strip().endswith(".php")}
 PAGO = NUCLEO | PORTADO
 
-RX_INC = re.compile(rb'(?:include|require)(?:_once)?\s*\(?\s*(?:modification\s*\(\s*)?["\']([^"\']+\.php)["\']')
-RX_NEW = re.compile(rb'new\s+(cl_\w+)')
+# re.I nas tres: PHP nao diferencia maiusculas em palavra-chave nem em nome de
+# metodo/classe. 9a lacuna: `db_utils::getdao('atolegal')` (minusculas) -- 781
+# chamadas em 244 arquivos com grafia diferente de getDao, invisiveis a frente.
+RX_INC = re.compile(rb'(?:include|require)(?:_once)?\s*\(?\s*(?:modification\s*\(\s*)?["\']([^"\']+\.php)["\']', re.I)
+RX_NEW = re.compile(rb'new\s+(cl_\w+)', re.I)
 # 7a lacuna: db_utils::getDao('x') instancia cl_x por autoload sem citar o
 # nome da classe. Achada no `fis`, em db_cadtipo_classe.php -- cujo construtor
 # PHP4 inicializa $this->rotulo, e sem ele a tela morre com label() on null.
-RX_DAO = re.compile(rb'''getDao\s*\(\s*['"]([A-Za-z0-9_]+)['"]''')
+RX_DAO = re.compile(rb'''getDao\s*\(\s*['"]([A-Za-z0-9_]+)['"]''', re.I)
 RX_STR = re.compile(rb'["\']([A-Za-z0-9_]+\.(?:RPC\.)?php)["\']')
 
 def classes_php4(b):
@@ -64,9 +67,11 @@ def diretas(p):
         if os.path.isfile(q): out.add(q)
     for m in RX_NEW.finditer(b):                       # 4a lacuna: autoload
         q = f"classes/db_{m.group(1).decode('latin1')[3:]}_classe.php"
+        if not os.path.isfile(q): q = q.lower()   # o nome no codigo pode vir capitalizado
         if os.path.isfile(q): out.add(q)
     for m in RX_DAO.finditer(b):                       # 7a lacuna: getDao()
         q = f"classes/db_{m.group(1).decode('latin1')}_classe.php"
+        if not os.path.isfile(q): q = q.lower()   # o nome no codigo pode vir capitalizado
         if os.path.isfile(q): out.add(q)
     _c[p] = out
     return out

@@ -52,7 +52,7 @@ class cl_alunocensotipotransporte {
                  ed311_censotipotransporte = int4 = Código do Tipo de Transporte 
                  ";
    //funcao construtor da classe 
-   function cl_alunocensotipotransporte() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("alunocensotipotransporte"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_alunocensotipotransporte {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed311_sequencial = ($this->ed311_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_sequencial"]:$this->ed311_sequencial);
-       $this->ed311_aluno = ($this->ed311_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_aluno"]:$this->ed311_aluno);
-       $this->ed311_censotipotransporte = ($this->ed311_censotipotransporte == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_censotipotransporte"]:$this->ed311_censotipotransporte);
+       $this->ed311_sequencial = ($this->ed311_sequencial === 0 || $this->ed311_sequencial === 0.0 || $this->ed311_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_sequencial"]:$this->ed311_sequencial);
+       $this->ed311_aluno = ($this->ed311_aluno === 0 || $this->ed311_aluno === 0.0 || $this->ed311_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_aluno"]:$this->ed311_aluno);
+       $this->ed311_censotipotransporte = ($this->ed311_censotipotransporte === 0 || $this->ed311_censotipotransporte === 0.0 || $this->ed311_censotipotransporte == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_censotipotransporte"]:$this->ed311_censotipotransporte);
      }else{
-       $this->ed311_sequencial = ($this->ed311_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_sequencial"]:$this->ed311_sequencial);
+       $this->ed311_sequencial = ($this->ed311_sequencial === 0 || $this->ed311_sequencial === 0.0 || $this->ed311_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_sequencial"]:$this->ed311_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_alunocensotipotransporte {
          $this->ed311_sequencial = $ed311_sequencial; 
        }
      }
-     if(($this->ed311_sequencial == null) || ($this->ed311_sequencial == "") ){ 
+     if(($this->ed311_sequencial == null) || ($this->ed311_sequencial === 0 || $this->ed311_sequencial === 0.0 || $this->ed311_sequencial == "") ){ 
        $this->erro_sql = " Campo ed311_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_alunocensotipotransporte {
    function sql_query ( $ed311_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_alunocensotipotransporte {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_alunocensotipotransporte {
    function sql_query_file ( $ed311_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_alunocensotipotransporte {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_alunocensotipotransporte {
    $sql = "select ";
    if ($campos != "*" ) {
 
-     $campos_sql = split("#",$campos);
+     $campos_sql = preg_split("#\\##m",$campos);
      $virgula = "";
      for ($i = 0; $i < sizeof($campos_sql); $i++) {
        
@@ -453,7 +453,7 @@ class cl_alunocensotipotransporte {
     if ($ordem != null ) {
        
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
          
@@ -469,7 +469,7 @@ class cl_alunocensotipotransporte {
     $sql = "select ";
     if ($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -495,7 +495,7 @@ class cl_alunocensotipotransporte {
     if ($ordem != null) {
 
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         

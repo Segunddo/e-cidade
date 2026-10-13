@@ -61,7 +61,7 @@ class cl_rotamov {
                  ed220_d_datacad = date = Data do cadastro 
                  ";
    //funcao construtor da classe 
-   function cl_rotamov() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rotamov"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,11 +78,11 @@ class cl_rotamov {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed220_i_codigo = ($this->ed220_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_codigo"]:$this->ed220_i_codigo);
+       $this->ed220_i_codigo = ($this->ed220_i_codigo === 0 || $this->ed220_i_codigo === 0.0 || $this->ed220_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_codigo"]:$this->ed220_i_codigo);
        $this->ed220_c_horacad = ($this->ed220_c_horacad == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_c_horacad"]:$this->ed220_c_horacad);
-       $this->ed220_i_veicretirada = ($this->ed220_i_veicretirada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_veicretirada"]:$this->ed220_i_veicretirada);
-       $this->ed220_i_usuario = ($this->ed220_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_usuario"]:$this->ed220_i_usuario);
-       $this->ed220_i_rota = ($this->ed220_i_rota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_rota"]:$this->ed220_i_rota);
+       $this->ed220_i_veicretirada = ($this->ed220_i_veicretirada === 0 || $this->ed220_i_veicretirada === 0.0 || $this->ed220_i_veicretirada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_veicretirada"]:$this->ed220_i_veicretirada);
+       $this->ed220_i_usuario = ($this->ed220_i_usuario === 0 || $this->ed220_i_usuario === 0.0 || $this->ed220_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_usuario"]:$this->ed220_i_usuario);
+       $this->ed220_i_rota = ($this->ed220_i_rota === 0 || $this->ed220_i_rota === 0.0 || $this->ed220_i_rota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_rota"]:$this->ed220_i_rota);
        if($this->ed220_d_datacad == ""){
          $this->ed220_d_datacad_dia = ($this->ed220_d_datacad_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_d_datacad_dia"]:$this->ed220_d_datacad_dia);
          $this->ed220_d_datacad_mes = ($this->ed220_d_datacad_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_d_datacad_mes"]:$this->ed220_d_datacad_mes);
@@ -92,7 +92,7 @@ class cl_rotamov {
          }
        }
      }else{
-       $this->ed220_i_codigo = ($this->ed220_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_codigo"]:$this->ed220_i_codigo);
+       $this->ed220_i_codigo = ($this->ed220_i_codigo === 0 || $this->ed220_i_codigo === 0.0 || $this->ed220_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_codigo"]:$this->ed220_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_rotamov {
          $this->ed220_i_codigo = $ed220_i_codigo; 
        }
      }
-     if(($this->ed220_i_codigo == null) || ($this->ed220_i_codigo == "") ){ 
+     if(($this->ed220_i_codigo == null) || ($this->ed220_i_codigo === 0 || $this->ed220_i_codigo === 0.0 || $this->ed220_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed220_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_rotamov {
    function sql_query ( $ed220_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -506,7 +506,7 @@ class cl_rotamov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -518,7 +518,7 @@ class cl_rotamov {
    function sql_query_file ( $ed220_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_rotamov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -128,13 +128,13 @@ class cl_sau_config
        $this->s103_v_msgagenda = ($this->s103_v_msgagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_v_msgagenda"]:$this->s103_v_msgagenda);
        $this->s103_c_agendaproc = ($this->s103_c_agendaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_agendaproc"]:$this->s103_c_agendaproc);
        $this->s103_c_emitircomprovante = ($this->s103_c_emitircomprovante == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_emitircomprovante"]:$this->s103_c_emitircomprovante);
-       $this->s103_i_departamentos = ($this->s103_i_departamentos == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_departamentos"]:$this->s103_i_departamentos);
+       $this->s103_i_departamentos = ($this->s103_i_departamentos === 0 || $this->s103_i_departamentos === 0.0 || $this->s103_i_departamentos == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_departamentos"]:$this->s103_i_departamentos);
        $this->s103_c_emitirfaa = ($this->s103_c_emitirfaa == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_emitirfaa"]:$this->s103_c_emitirfaa);
        $this->s103_c_cancelafa = ($this->s103_c_cancelafa == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_cancelafa"]:$this->s103_c_cancelafa);
-       $this->s103_i_modalidade = ($this->s103_i_modalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_modalidade"]:$this->s103_i_modalidade);
+       $this->s103_i_modalidade = ($this->s103_i_modalidade === 0 || $this->s103_i_modalidade === 0.0 || $this->s103_i_modalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_modalidade"]:$this->s103_i_modalidade);
        $this->s103_c_sgdb = ($this->s103_c_sgdb == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_sgdb"]:$this->s103_c_sgdb);
        $this->s103_c_ip = ($this->s103_c_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_ip"]:$this->s103_c_ip);
-       $this->s103_i_porta = ($this->s103_i_porta == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_porta"]:$this->s103_i_porta);
+       $this->s103_i_porta = ($this->s103_i_porta === 0 || $this->s103_i_porta === 0.0 || $this->s103_i_porta == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_porta"]:$this->s103_i_porta);
        $this->s103_c_senha = ($this->s103_c_senha == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_senha"]:$this->s103_c_senha);
        $this->s103_c_usuario = ($this->s103_c_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_usuario"]:$this->s103_c_usuario);
        $this->s103_c_apareceragenda = ($this->s103_c_apareceragenda == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_apareceragenda"]:$this->s103_c_apareceragenda);
@@ -142,15 +142,15 @@ class cl_sau_config
        $this->s103_c_servicoproc = ($this->s103_c_servicoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_servicoproc"]:$this->s103_c_servicoproc);
        $this->s103_c_ipauto = ($this->s103_c_ipauto == "f"?@$GLOBALS["HTTP_POST_VARS"]["s103_c_ipauto"]:$this->s103_c_ipauto);
        $this->s103_c_agendaprog = ($this->s103_c_agendaprog == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_agendaprog"]:$this->s103_c_agendaprog);
-       $this->s103_i_validaagenda = ($this->s103_i_validaagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_validaagenda"]:$this->s103_i_validaagenda);
-       $this->s103_i_revisacgs = ($this->s103_i_revisacgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_revisacgs"]:$this->s103_i_revisacgs);
-       $this->s103_i_tipodb = ($this->s103_i_tipodb == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_tipodb"]:$this->s103_i_tipodb);
-       $this->s103_i_datahorafaa = ($this->s103_i_datahorafaa == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_datahorafaa"]:$this->s103_i_datahorafaa);
-       $this->s103_i_modelofaa = ($this->s103_i_modelofaa == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_modelofaa"]:$this->s103_i_modelofaa);
+       $this->s103_i_validaagenda = ($this->s103_i_validaagenda === 0 || $this->s103_i_validaagenda === 0.0 || $this->s103_i_validaagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_validaagenda"]:$this->s103_i_validaagenda);
+       $this->s103_i_revisacgs = ($this->s103_i_revisacgs === 0 || $this->s103_i_revisacgs === 0.0 || $this->s103_i_revisacgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_revisacgs"]:$this->s103_i_revisacgs);
+       $this->s103_i_tipodb = ($this->s103_i_tipodb === 0 || $this->s103_i_tipodb === 0.0 || $this->s103_i_tipodb == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_tipodb"]:$this->s103_i_tipodb);
+       $this->s103_i_datahorafaa = ($this->s103_i_datahorafaa === 0 || $this->s103_i_datahorafaa === 0.0 || $this->s103_i_datahorafaa == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_datahorafaa"]:$this->s103_i_datahorafaa);
+       $this->s103_i_modelofaa = ($this->s103_i_modelofaa === 0 || $this->s103_i_modelofaa === 0.0 || $this->s103_i_modelofaa == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_modelofaa"]:$this->s103_i_modelofaa);
        $this->s103_c_bpasecrdestino = ($this->s103_c_bpasecrdestino == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_bpasecrdestino"]:$this->s103_c_bpasecrdestino);
        $this->s103_c_bpasigla = ($this->s103_c_bpasigla == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_bpasigla"]:$this->s103_c_bpasigla);
        $this->s103_c_bpaibge = ($this->s103_c_bpaibge == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_c_bpaibge"]:$this->s103_c_bpaibge);
-       $this->s103_i_todacomp = ($this->s103_i_todacomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_todacomp"]:$this->s103_i_todacomp);
+       $this->s103_i_todacomp = ($this->s103_i_todacomp === 0 || $this->s103_i_todacomp === 0.0 || $this->s103_i_todacomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_i_todacomp"]:$this->s103_i_todacomp);
        $this->s103_procsemcbo = ($this->s103_procsemcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["s103_procsemcbo"]:$this->s103_procsemcbo);
        $this->s103_obrigarcns = ($this->s103_obrigarcns == "f"?@$GLOBALS["HTTP_POST_VARS"]["s103_obrigarcns"]:$this->s103_obrigarcns);
        $this->s103_validamicroarea = ($this->s103_validamicroarea == "f"?@$GLOBALS["HTTP_POST_VARS"]["s103_validamicroarea"]:$this->s103_validamicroarea);
@@ -770,7 +770,7 @@ class cl_sau_config
 
 	  if ($campos != "*") {
 
-		  $campos_sql = split ( "#", $campos );
+		  $campos_sql = preg_split ( "#\\##m", $campos );
 		  $virgula    = "";
 
 		  for($i = 0; $i < sizeof ( $campos_sql ); $i ++) {
@@ -805,7 +805,7 @@ class cl_sau_config
 	  if ($ordem != null) {
 
 		  $sSqlSauConfig .= " order by ";
-		  $campos_sql     = split ( "#", $ordem );
+		  $campos_sql     = preg_split ( "#\\##m", $ordem );
 		  $virgula        = "";
 
 		  for ($i = 0; $i < sizeof ( $campos_sql ); $i ++) {

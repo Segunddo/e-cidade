@@ -76,14 +76,14 @@ class cl_serie {
    // funcao para atualizar campos
   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed11_i_codigo = ($this->ed11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_codigo"]:$this->ed11_i_codigo);
-       $this->ed11_i_ensino = ($this->ed11_i_ensino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_ensino"]:$this->ed11_i_ensino);
+       $this->ed11_i_codigo = ($this->ed11_i_codigo === 0 || $this->ed11_i_codigo === 0.0 || $this->ed11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_codigo"]:$this->ed11_i_codigo);
+       $this->ed11_i_ensino = ($this->ed11_i_ensino === 0 || $this->ed11_i_ensino === 0.0 || $this->ed11_i_ensino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_ensino"]:$this->ed11_i_ensino);
        $this->ed11_c_descr = ($this->ed11_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_c_descr"]:$this->ed11_c_descr);
        $this->ed11_c_abrev = ($this->ed11_c_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_c_abrev"]:$this->ed11_c_abrev);
-       $this->ed11_i_sequencia = ($this->ed11_i_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_sequencia"]:$this->ed11_i_sequencia);
-       $this->ed11_i_codcenso = ($this->ed11_i_codcenso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_codcenso"]:$this->ed11_i_codcenso);
+       $this->ed11_i_sequencia = ($this->ed11_i_sequencia === 0 || $this->ed11_i_sequencia === 0.0 || $this->ed11_i_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_sequencia"]:$this->ed11_i_sequencia);
+       $this->ed11_i_codcenso = ($this->ed11_i_codcenso === 0 || $this->ed11_i_codcenso === 0.0 || $this->ed11_i_codcenso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_codcenso"]:$this->ed11_i_codcenso);
      }else{
-       $this->ed11_i_codigo = ($this->ed11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_codigo"]:$this->ed11_i_codigo);
+       $this->ed11_i_codigo = ($this->ed11_i_codigo === 0 || $this->ed11_i_codigo === 0.0 || $this->ed11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_codigo"]:$this->ed11_i_codigo);
      }
    }
    // funcao para inclusao
@@ -137,7 +137,7 @@ class cl_serie {
          $this->ed11_i_codigo = $ed11_i_codigo;
        }
      }
-     if(($this->ed11_i_codigo == null) || ($this->ed11_i_codigo == "") ){
+     if(($this->ed11_i_codigo == null) || ($this->ed11_i_codigo === 0 || $this->ed11_i_codigo === 0.0 || $this->ed11_i_codigo == "") ){
        $this->erro_sql = " Campo ed11_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -56,7 +56,7 @@ class cl_cursoescola {
                  ed71_c_turmasala = char(1) = Permitir mais de uma turma por sala 
                  ";
    //funcao construtor da classe
-   function cl_cursoescola() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cursoescola");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]."?ed71_i_escola=".@$GLOBALS["HTTP_POST_VARS"]["ed71_i_escola"]."&ed18_c_nome=".@$GLOBALS["HTTP_POST_VARS"]["ed18_c_nome"]."&ed71_i_curso=".@$GLOBALS["HTTP_POST_VARS"]["ed71_i_curso"]."&ed29_c_descr=".@$GLOBALS["HTTP_POST_VARS"]["ed29_c_descr"]);
@@ -73,13 +73,13 @@ class cl_cursoescola {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed71_i_codigo = ($this->ed71_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed71_i_codigo"]:$this->ed71_i_codigo);
-       $this->ed71_i_escola = ($this->ed71_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed71_i_escola"]:$this->ed71_i_escola);
-       $this->ed71_i_curso = ($this->ed71_i_curso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed71_i_curso"]:$this->ed71_i_curso);
+       $this->ed71_i_codigo = ($this->ed71_i_codigo === 0 || $this->ed71_i_codigo === 0.0 || $this->ed71_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed71_i_codigo"]:$this->ed71_i_codigo);
+       $this->ed71_i_escola = ($this->ed71_i_escola === 0 || $this->ed71_i_escola === 0.0 || $this->ed71_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed71_i_escola"]:$this->ed71_i_escola);
+       $this->ed71_i_curso = ($this->ed71_i_curso === 0 || $this->ed71_i_curso === 0.0 || $this->ed71_i_curso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed71_i_curso"]:$this->ed71_i_curso);
        $this->ed71_c_situacao = ($this->ed71_c_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed71_c_situacao"]:$this->ed71_c_situacao);
        $this->ed71_c_turmasala = ($this->ed71_c_turmasala == ""?@$GLOBALS["HTTP_POST_VARS"]["ed71_c_turmasala"]:$this->ed71_c_turmasala);
      }else{
-       $this->ed71_i_codigo = ($this->ed71_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed71_i_codigo"]:$this->ed71_i_codigo);
+       $this->ed71_i_codigo = ($this->ed71_i_codigo === 0 || $this->ed71_i_codigo === 0.0 || $this->ed71_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed71_i_codigo"]:$this->ed71_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_cursoescola {
          $this->ed71_i_codigo = $ed71_i_codigo;
        }
      }
-     if(($this->ed71_i_codigo == null) || ($this->ed71_i_codigo == "") ){
+     if(($this->ed71_i_codigo == null) || ($this->ed71_i_codigo === 0 || $this->ed71_i_codigo === 0.0 || $this->ed71_i_codigo == "") ){
        $this->erro_sql = " Campo ed71_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -41,7 +41,8 @@ require_once(modification("model/educacao/QuadroGeralHorario.model.php"));
 ini_set('memory_limit', '-1');
 set_time_limit(0);
 $parametros = $HTTP_SERVER_VARS["QUERY_STRING"];
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $anoAtual = db_getsession("DB_anousu");
 $pCorQuadro = QuadroGeralHorarioRepository::getParamQuadroHorarios();
@@ -135,9 +136,9 @@ foreach ($arrQuadroGeralHorarios as $dados) {
     $arrTempo[$codEscola][$periodo] = $dtTempo;
 }
 
-$arrTurmas = array_unique($arrTurmas, SORT_REGULAR);
-$arrDiaSemana = array_unique($arrDiaSemana, SORT_REGULAR);
-natsort($arrDiaSemana);
+$arrTurmas = (is_array($arrTurmas) ? array_unique($arrTurmas, SORT_REGULAR) : null);
+$arrDiaSemana = (is_array($arrDiaSemana) ? array_unique($arrDiaSemana, SORT_REGULAR) : null);
+if (is_array($arrDiaSemana)) natsort($arrDiaSemana);
 
 ?>
 <!doctype html>
