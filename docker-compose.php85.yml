@@ -38,6 +38,8 @@ services:
       # dbforms/db_classesgenericas.php são criados por um runtime e lidos pelo outro.
       # Sem isso o iframe entra em loop infinito. Ver docker-compose.sessions.yml.
       - ecidade_tmp:/tmp
+      # Paridade de php.ini com o 5.6 nas diretivas que mudam a saida.
+      - ./docker/php85-apache/paridade-56.ini:/usr/local/etc/php/conf.d/zz-paridade-56.ini:ro
     networks:
       - ecidade
 
