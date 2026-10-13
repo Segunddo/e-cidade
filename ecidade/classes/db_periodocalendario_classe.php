@@ -87,9 +87,9 @@ class cl_periodocalendario
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed53_i_codigo = ($this->ed53_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_codigo"] : $this->ed53_i_codigo);
-            $this->ed53_i_calendario = ($this->ed53_i_calendario == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_calendario"] : $this->ed53_i_calendario);
-            $this->ed53_i_periodoavaliacao = ($this->ed53_i_periodoavaliacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_periodoavaliacao"] : $this->ed53_i_periodoavaliacao);
+            $this->ed53_i_codigo = ($this->ed53_i_codigo === 0 || $this->ed53_i_codigo === 0.0 || $this->ed53_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_codigo"] : $this->ed53_i_codigo);
+            $this->ed53_i_calendario = ($this->ed53_i_calendario === 0 || $this->ed53_i_calendario === 0.0 || $this->ed53_i_calendario == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_calendario"] : $this->ed53_i_calendario);
+            $this->ed53_i_periodoavaliacao = ($this->ed53_i_periodoavaliacao === 0 || $this->ed53_i_periodoavaliacao === 0.0 || $this->ed53_i_periodoavaliacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_periodoavaliacao"] : $this->ed53_i_periodoavaliacao);
             if ($this->ed53_d_inicio == "") {
                 $this->ed53_d_inicio_dia = ($this->ed53_d_inicio_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_d_inicio_dia"] : $this->ed53_d_inicio_dia);
                 $this->ed53_d_inicio_mes = ($this->ed53_d_inicio_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_d_inicio_mes"] : $this->ed53_d_inicio_mes);
@@ -106,10 +106,10 @@ class cl_periodocalendario
                     $this->ed53_d_fim = $this->ed53_d_fim_ano . "-" . $this->ed53_d_fim_mes . "-" . $this->ed53_d_fim_dia;
                 }
             }
-            $this->ed53_i_diasletivos = ($this->ed53_i_diasletivos == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_diasletivos"] : $this->ed53_i_diasletivos);
-            $this->ed53_i_semletivas = ($this->ed53_i_semletivas == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_semletivas"] : $this->ed53_i_semletivas);
+            $this->ed53_i_diasletivos = ($this->ed53_i_diasletivos === 0 || $this->ed53_i_diasletivos === 0.0 || $this->ed53_i_diasletivos == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_diasletivos"] : $this->ed53_i_diasletivos);
+            $this->ed53_i_semletivas = ($this->ed53_i_semletivas === 0 || $this->ed53_i_semletivas === 0.0 || $this->ed53_i_semletivas == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_semletivas"] : $this->ed53_i_semletivas);
         } else {
-            $this->ed53_i_codigo = ($this->ed53_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_codigo"] : $this->ed53_i_codigo);
+            $this->ed53_i_codigo = ($this->ed53_i_codigo === 0 || $this->ed53_i_codigo === 0.0 || $this->ed53_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed53_i_codigo"] : $this->ed53_i_codigo);
         }
     }
 
@@ -182,7 +182,7 @@ class cl_periodocalendario
                 $this->ed53_i_codigo = $ed53_i_codigo;
             }
         }
-        if (($this->ed53_i_codigo == null) || ($this->ed53_i_codigo == "")) {
+        if (($this->ed53_i_codigo == null) || ($this->ed53_i_codigo === 0 || $this->ed53_i_codigo === 0.0 || $this->ed53_i_codigo == "")) {
             $this->erro_sql = " Campo ed53_i_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -581,7 +581,7 @@ class cl_periodocalendario
         $sql = "select ";
         if ($campos != "*") {
 
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -610,7 +610,7 @@ class cl_periodocalendario
         if ($ordem != null) {
 
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
 

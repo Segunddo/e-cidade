@@ -63,7 +63,7 @@ class cl_mer_requi {
                  me16_i_dbusuario = int4 = Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_mer_requi() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_requi"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,7 +80,7 @@ class cl_mer_requi {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me16_i_codigo = ($this->me16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_codigo"]:$this->me16_i_codigo);
+       $this->me16_i_codigo = ($this->me16_i_codigo === 0 || $this->me16_i_codigo === 0.0 || $this->me16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_codigo"]:$this->me16_i_codigo);
        $this->me16_t_obs = ($this->me16_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_t_obs"]:$this->me16_t_obs);
        if($this->me16_d_data == ""){
          $this->me16_d_data_dia = ($this->me16_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_d_data_dia"]:$this->me16_d_data_dia);
@@ -92,10 +92,10 @@ class cl_mer_requi {
        }
        $this->me16_c_hora = ($this->me16_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_c_hora"]:$this->me16_c_hora);
        $this->me16_c_tiposaida = ($this->me16_c_tiposaida == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_c_tiposaida"]:$this->me16_c_tiposaida);
-       $this->me16_i_escola = ($this->me16_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_escola"]:$this->me16_i_escola);
-       $this->me16_i_dbusuario = ($this->me16_i_dbusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_dbusuario"]:$this->me16_i_dbusuario);
+       $this->me16_i_escola = ($this->me16_i_escola === 0 || $this->me16_i_escola === 0.0 || $this->me16_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_escola"]:$this->me16_i_escola);
+       $this->me16_i_dbusuario = ($this->me16_i_dbusuario === 0 || $this->me16_i_dbusuario === 0.0 || $this->me16_i_dbusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_dbusuario"]:$this->me16_i_dbusuario);
      }else{
-       $this->me16_i_codigo = ($this->me16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_codigo"]:$this->me16_i_codigo);
+       $this->me16_i_codigo = ($this->me16_i_codigo === 0 || $this->me16_i_codigo === 0.0 || $this->me16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_codigo"]:$this->me16_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_mer_requi {
          $this->me16_i_codigo = $me16_i_codigo; 
        }
      }
-     if(($this->me16_i_codigo == null) || ($this->me16_i_codigo == "") ){ 
+     if(($this->me16_i_codigo == null) || ($this->me16_i_codigo === 0 || $this->me16_i_codigo === 0.0 || $this->me16_i_codigo == "") ){ 
        $this->erro_sql = " Campo me16_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -508,7 +508,7 @@ class cl_mer_requi {
    function sql_query ( $me16_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_mer_requi {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -547,7 +547,7 @@ class cl_mer_requi {
    function sql_query_file ( $me16_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -568,7 +568,7 @@ class cl_mer_requi {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

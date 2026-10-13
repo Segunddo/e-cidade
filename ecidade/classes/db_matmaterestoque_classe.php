@@ -60,7 +60,7 @@ class cl_matmaterestoque {
                  m64_localizacao = varchar(25) = Localização 
                  ";
    //funcao construtor da classe 
-   function cl_matmaterestoque() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matmaterestoque"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_matmaterestoque {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m64_sequencial = ($this->m64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_sequencial"]:$this->m64_sequencial);
-       $this->m64_almox = ($this->m64_almox == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_almox"]:$this->m64_almox);
-       $this->m64_matmater = ($this->m64_matmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_matmater"]:$this->m64_matmater);
-       $this->m64_estoqueminimo = ($this->m64_estoqueminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_estoqueminimo"]:$this->m64_estoqueminimo);
-       $this->m64_estoquemaximo = ($this->m64_estoquemaximo == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_estoquemaximo"]:$this->m64_estoquemaximo);
-       $this->m64_pontopedido = ($this->m64_pontopedido == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_pontopedido"]:$this->m64_pontopedido);
+       $this->m64_sequencial = ($this->m64_sequencial === 0 || $this->m64_sequencial === 0.0 || $this->m64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_sequencial"]:$this->m64_sequencial);
+       $this->m64_almox = ($this->m64_almox === 0 || $this->m64_almox === 0.0 || $this->m64_almox == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_almox"]:$this->m64_almox);
+       $this->m64_matmater = ($this->m64_matmater === 0 || $this->m64_matmater === 0.0 || $this->m64_matmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_matmater"]:$this->m64_matmater);
+       $this->m64_estoqueminimo = ($this->m64_estoqueminimo === 0 || $this->m64_estoqueminimo === 0.0 || $this->m64_estoqueminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_estoqueminimo"]:$this->m64_estoqueminimo);
+       $this->m64_estoquemaximo = ($this->m64_estoquemaximo === 0 || $this->m64_estoquemaximo === 0.0 || $this->m64_estoquemaximo == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_estoquemaximo"]:$this->m64_estoquemaximo);
+       $this->m64_pontopedido = ($this->m64_pontopedido === 0 || $this->m64_pontopedido === 0.0 || $this->m64_pontopedido == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_pontopedido"]:$this->m64_pontopedido);
        $this->m64_localizacao = ($this->m64_localizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_localizacao"]:$this->m64_localizacao);
      }else{
-       $this->m64_sequencial = ($this->m64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_sequencial"]:$this->m64_sequencial);
+       $this->m64_sequencial = ($this->m64_sequencial === 0 || $this->m64_sequencial === 0.0 || $this->m64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m64_sequencial"]:$this->m64_sequencial);
      }
    }
    // funcao para inclusao
@@ -160,7 +160,7 @@ class cl_matmaterestoque {
          $this->m64_sequencial = $m64_sequencial; 
        }
      }
-     if(($this->m64_sequencial == null) || ($this->m64_sequencial == "") ){ 
+     if(($this->m64_sequencial == null) || ($this->m64_sequencial === 0 || $this->m64_sequencial === 0.0 || $this->m64_sequencial == "") ){ 
        $this->erro_sql = " Campo m64_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -465,7 +465,7 @@ class cl_matmaterestoque {
    function sql_query ( $m64_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -490,7 +490,7 @@ class cl_matmaterestoque {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_matmaterestoque {
    function sql_query_file ( $m64_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_matmaterestoque {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -536,7 +536,7 @@ class cl_matmaterestoque {
   function sql_queryAlmoxarifado ( $m64_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -560,7 +560,7 @@ class cl_matmaterestoque {
           $sql .= $sql2;
           if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
               $sql .= $virgula.$campos_sql[$i];

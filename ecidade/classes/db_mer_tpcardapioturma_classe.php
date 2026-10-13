@@ -52,7 +52,7 @@ class cl_mer_tpcardapioturma {
                  me28_i_cardapioescola = int4 = Cardapio escola 
                  ";
    //funcao construtor da classe 
-   function cl_mer_tpcardapioturma() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_tpcardapioturma"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_mer_tpcardapioturma {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me28_i_codigo = ($this->me28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me28_i_codigo"]:$this->me28_i_codigo);
-       $this->me28_i_serie = ($this->me28_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["me28_i_serie"]:$this->me28_i_serie);
-       $this->me28_i_cardapioescola = ($this->me28_i_cardapioescola == ""?@$GLOBALS["HTTP_POST_VARS"]["me28_i_cardapioescola"]:$this->me28_i_cardapioescola);
+       $this->me28_i_codigo = ($this->me28_i_codigo === 0 || $this->me28_i_codigo === 0.0 || $this->me28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me28_i_codigo"]:$this->me28_i_codigo);
+       $this->me28_i_serie = ($this->me28_i_serie === 0 || $this->me28_i_serie === 0.0 || $this->me28_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["me28_i_serie"]:$this->me28_i_serie);
+       $this->me28_i_cardapioescola = ($this->me28_i_cardapioescola === 0 || $this->me28_i_cardapioescola === 0.0 || $this->me28_i_cardapioescola == ""?@$GLOBALS["HTTP_POST_VARS"]["me28_i_cardapioescola"]:$this->me28_i_cardapioescola);
      }else{
-       $this->me28_i_codigo = ($this->me28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me28_i_codigo"]:$this->me28_i_codigo);
+       $this->me28_i_codigo = ($this->me28_i_codigo === 0 || $this->me28_i_codigo === 0.0 || $this->me28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me28_i_codigo"]:$this->me28_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_mer_tpcardapioturma {
          $this->me28_i_codigo = $me28_i_codigo; 
        }
      }
-     if(($this->me28_i_codigo == null) || ($this->me28_i_codigo == "") ){ 
+     if(($this->me28_i_codigo == null) || ($this->me28_i_codigo === 0 || $this->me28_i_codigo === 0.0 || $this->me28_i_codigo == "") ){ 
        $this->erro_sql = " Campo me28_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_mer_tpcardapioturma {
    function sql_query ( $me28_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_mer_tpcardapioturma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_mer_tpcardapioturma {
    function sql_query_file ( $me28_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_mer_tpcardapioturma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

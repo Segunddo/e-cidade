@@ -65,7 +65,7 @@ class cl_mer_infaluno {
                  me14_d_data = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_mer_infaluno() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_infaluno"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,10 +82,10 @@ class cl_mer_infaluno {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me14_i_codigo = ($this->me14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_codigo"]:$this->me14_i_codigo);
-       $this->me14_f_peso = ($this->me14_f_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_f_peso"]:$this->me14_f_peso);
-       $this->me14_f_altura = ($this->me14_f_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_f_altura"]:$this->me14_f_altura);
-       $this->me14_i_aluno = ($this->me14_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_aluno"]:$this->me14_i_aluno);
+       $this->me14_i_codigo = ($this->me14_i_codigo === 0 || $this->me14_i_codigo === 0.0 || $this->me14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_codigo"]:$this->me14_i_codigo);
+       $this->me14_f_peso = ($this->me14_f_peso === 0 || $this->me14_f_peso === 0.0 || $this->me14_f_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_f_peso"]:$this->me14_f_peso);
+       $this->me14_f_altura = ($this->me14_f_altura === 0 || $this->me14_f_altura === 0.0 || $this->me14_f_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_f_altura"]:$this->me14_f_altura);
+       $this->me14_i_aluno = ($this->me14_i_aluno === 0 || $this->me14_i_aluno === 0.0 || $this->me14_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_aluno"]:$this->me14_i_aluno);
        $this->me14_i_ano = ($this->me14_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_ano"]:$this->me14_i_ano);
        $this->me14_i_mes = ($this->me14_i_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_mes"]:$this->me14_i_mes);
        $this->me14_i_periodocalendario = ($this->me14_i_periodocalendario == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_periodocalendario"]:$this->me14_i_periodocalendario);
@@ -98,7 +98,7 @@ class cl_mer_infaluno {
          }
        }
      }else{
-       $this->me14_i_codigo = ($this->me14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_codigo"]:$this->me14_i_codigo);
+       $this->me14_i_codigo = ($this->me14_i_codigo === 0 || $this->me14_i_codigo === 0.0 || $this->me14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_codigo"]:$this->me14_i_codigo);
      }
    }
    // funcao para inclusao
@@ -173,7 +173,7 @@ class cl_mer_infaluno {
          $this->me14_i_codigo = $me14_i_codigo; 
        }
      }
-     if(($this->me14_i_codigo == null) || ($this->me14_i_codigo == "") ){ 
+     if(($this->me14_i_codigo == null) || ($this->me14_i_codigo === 0 || $this->me14_i_codigo === 0.0 || $this->me14_i_codigo == "") ){ 
        $this->erro_sql = " Campo me14_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -503,7 +503,7 @@ class cl_mer_infaluno {
    function sql_query ( $me14_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_mer_infaluno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_mer_infaluno {
    function sql_query_file ( $me14_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -566,7 +566,7 @@ class cl_mer_infaluno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

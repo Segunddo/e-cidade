@@ -58,7 +58,7 @@ class cl_mer_estoque {
                  me18_i_codmater = int4 = Item 
                  ";
    //funcao construtor da classe 
-   function cl_mer_estoque() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_estoque"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_mer_estoque {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me18_i_codigo = ($this->me18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codigo"]:$this->me18_i_codigo);
-       $this->me18_f_quant = ($this->me18_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_f_quant"]:$this->me18_f_quant);
-       $this->me18_f_valor = ($this->me18_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_f_valor"]:$this->me18_f_valor);
-       $this->me18_i_calendario = ($this->me18_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_calendario"]:$this->me18_i_calendario);
-       $this->me18_i_escola = ($this->me18_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_escola"]:$this->me18_i_escola);
-       $this->me18_i_codmater = ($this->me18_i_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codmater"]:$this->me18_i_codmater);
+       $this->me18_i_codigo = ($this->me18_i_codigo === 0 || $this->me18_i_codigo === 0.0 || $this->me18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codigo"]:$this->me18_i_codigo);
+       $this->me18_f_quant = ($this->me18_f_quant === 0 || $this->me18_f_quant === 0.0 || $this->me18_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_f_quant"]:$this->me18_f_quant);
+       $this->me18_f_valor = ($this->me18_f_valor === 0 || $this->me18_f_valor === 0.0 || $this->me18_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_f_valor"]:$this->me18_f_valor);
+       $this->me18_i_calendario = ($this->me18_i_calendario === 0 || $this->me18_i_calendario === 0.0 || $this->me18_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_calendario"]:$this->me18_i_calendario);
+       $this->me18_i_escola = ($this->me18_i_escola === 0 || $this->me18_i_escola === 0.0 || $this->me18_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_escola"]:$this->me18_i_escola);
+       $this->me18_i_codmater = ($this->me18_i_codmater === 0 || $this->me18_i_codmater === 0.0 || $this->me18_i_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codmater"]:$this->me18_i_codmater);
      }else{
-       $this->me18_i_codigo = ($this->me18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codigo"]:$this->me18_i_codigo);
+       $this->me18_i_codigo = ($this->me18_i_codigo === 0 || $this->me18_i_codigo === 0.0 || $this->me18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codigo"]:$this->me18_i_codigo);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_mer_estoque {
          $this->me18_i_codigo = $me18_i_codigo; 
        }
      }
-     if(($this->me18_i_codigo == null) || ($this->me18_i_codigo == "") ){ 
+     if(($this->me18_i_codigo == null) || ($this->me18_i_codigo === 0 || $this->me18_i_codigo === 0.0 || $this->me18_i_codigo == "") ){ 
        $this->erro_sql = " Campo me18_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -441,7 +441,7 @@ class cl_mer_estoque {
    function sql_query ( $me18_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_mer_estoque {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_mer_estoque {
    function sql_query_file ( $me18_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_mer_estoque {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

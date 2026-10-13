@@ -37,7 +37,7 @@ $sql .="  inner join matunid on m61_codmatunid=m62_codmatunid ";
 $sql .="  inner join matmater on m61_codmatunid=matmater.m60_codmatunid ";
 $sql .="  where m60_codmater=$item ";
 $result=db_query($sql);
-if (pg_num_rows($result)) {
+if (($result ? pg_num_rows($result) : null)) {
 	
 	db_fieldsmemory($result,0);
     echo "$m61_descr";

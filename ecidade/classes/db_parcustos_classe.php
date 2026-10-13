@@ -54,7 +54,7 @@ class cl_parcustos {
                  cc09_tipocontrole = int4 = Tipo de Controle 
                  ";
    //funcao construtor da classe 
-   function cl_parcustos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parcustos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_parcustos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc09_anousu = ($this->cc09_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["cc09_anousu"]:$this->cc09_anousu);
-       $this->cc09_instit = ($this->cc09_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["cc09_instit"]:$this->cc09_instit);
-       $this->cc09_mascaracustoplano = ($this->cc09_mascaracustoplano == ""?@$GLOBALS["HTTP_POST_VARS"]["cc09_mascaracustoplano"]:$this->cc09_mascaracustoplano);
-       $this->cc09_tipocontrole = ($this->cc09_tipocontrole == ""?@$GLOBALS["HTTP_POST_VARS"]["cc09_tipocontrole"]:$this->cc09_tipocontrole);
+       $this->cc09_anousu = ($this->cc09_anousu === 0 || $this->cc09_anousu === 0.0 || $this->cc09_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["cc09_anousu"]:$this->cc09_anousu);
+       $this->cc09_instit = ($this->cc09_instit === 0 || $this->cc09_instit === 0.0 || $this->cc09_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["cc09_instit"]:$this->cc09_instit);
+       $this->cc09_mascaracustoplano = ($this->cc09_mascaracustoplano === 0 || $this->cc09_mascaracustoplano === 0.0 || $this->cc09_mascaracustoplano == ""?@$GLOBALS["HTTP_POST_VARS"]["cc09_mascaracustoplano"]:$this->cc09_mascaracustoplano);
+       $this->cc09_tipocontrole = ($this->cc09_tipocontrole === 0 || $this->cc09_tipocontrole === 0.0 || $this->cc09_tipocontrole == ""?@$GLOBALS["HTTP_POST_VARS"]["cc09_tipocontrole"]:$this->cc09_tipocontrole);
      }else{
-       $this->cc09_anousu = ($this->cc09_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["cc09_anousu"]:$this->cc09_anousu);
+       $this->cc09_anousu = ($this->cc09_anousu === 0 || $this->cc09_anousu === 0.0 || $this->cc09_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["cc09_anousu"]:$this->cc09_anousu);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_parcustos {
        return false;
      }
        $this->cc09_anousu = $cc09_anousu; 
-     if(($this->cc09_anousu == null) || ($this->cc09_anousu == "") ){ 
+     if(($this->cc09_anousu == null) || ($this->cc09_anousu === 0 || $this->cc09_anousu === 0.0 || $this->cc09_anousu == "") ){ 
        $this->erro_sql = " Campo cc09_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -368,7 +368,7 @@ class cl_parcustos {
    function sql_query ( $cc09_anousu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_parcustos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_parcustos {
    function sql_query_file ( $cc09_anousu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_parcustos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

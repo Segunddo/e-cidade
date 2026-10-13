@@ -54,7 +54,7 @@ class cl_mer_nutricionistaescola {
                  me31_i_ordem = int4 = Ordem 
                  ";
    //funcao construtor da classe 
-   function cl_mer_nutricionistaescola() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_nutricionistaescola"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_mer_nutricionistaescola {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me31_i_codigo = ($this->me31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me31_i_codigo"]:$this->me31_i_codigo);
-       $this->me31_i_escola = ($this->me31_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["me31_i_escola"]:$this->me31_i_escola);
-       $this->me31_i_nutricionista = ($this->me31_i_nutricionista == ""?@$GLOBALS["HTTP_POST_VARS"]["me31_i_nutricionista"]:$this->me31_i_nutricionista);
-       $this->me31_i_ordem = ($this->me31_i_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["me31_i_ordem"]:$this->me31_i_ordem);
+       $this->me31_i_codigo = ($this->me31_i_codigo === 0 || $this->me31_i_codigo === 0.0 || $this->me31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me31_i_codigo"]:$this->me31_i_codigo);
+       $this->me31_i_escola = ($this->me31_i_escola === 0 || $this->me31_i_escola === 0.0 || $this->me31_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["me31_i_escola"]:$this->me31_i_escola);
+       $this->me31_i_nutricionista = ($this->me31_i_nutricionista === 0 || $this->me31_i_nutricionista === 0.0 || $this->me31_i_nutricionista == ""?@$GLOBALS["HTTP_POST_VARS"]["me31_i_nutricionista"]:$this->me31_i_nutricionista);
+       $this->me31_i_ordem = ($this->me31_i_ordem === 0 || $this->me31_i_ordem === 0.0 || $this->me31_i_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["me31_i_ordem"]:$this->me31_i_ordem);
      }else{
-       $this->me31_i_codigo = ($this->me31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me31_i_codigo"]:$this->me31_i_codigo);
+       $this->me31_i_codigo = ($this->me31_i_codigo === 0 || $this->me31_i_codigo === 0.0 || $this->me31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me31_i_codigo"]:$this->me31_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_mer_nutricionistaescola {
          $this->me31_i_codigo = $me31_i_codigo; 
        }
      }
-     if(($this->me31_i_codigo == null) || ($this->me31_i_codigo == "") ){ 
+     if(($this->me31_i_codigo == null) || ($this->me31_i_codigo === 0 || $this->me31_i_codigo === 0.0 || $this->me31_i_codigo == "") ){ 
        $this->erro_sql = " Campo me31_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -393,7 +393,7 @@ class cl_mer_nutricionistaescola {
    function sql_query ( $me31_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_mer_nutricionistaescola {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_mer_nutricionistaescola {
    function sql_query_file ( $me31_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_mer_nutricionistaescola {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_mer_nutricionistaescola {
   function sql_query_nutricionistausuario ($me31_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_mer_nutricionistaescola {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -74,13 +74,13 @@ class cl_matestoqueinimei
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->m82_codigo = ($this->m82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_codigo"]:$this->m82_codigo);
-       $this->m82_matestoqueini = ($this->m82_matestoqueini == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_matestoqueini"]:$this->m82_matestoqueini);
-       $this->m82_matestoqueitem = ($this->m82_matestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_matestoqueitem"]:$this->m82_matestoqueitem);
-       $this->m82_quant = ($this->m82_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_quant"]:$this->m82_quant);
+       $this->m82_codigo = ($this->m82_codigo === 0 || $this->m82_codigo === 0.0 || $this->m82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_codigo"]:$this->m82_codigo);
+       $this->m82_matestoqueini = ($this->m82_matestoqueini === 0 || $this->m82_matestoqueini === 0.0 || $this->m82_matestoqueini == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_matestoqueini"]:$this->m82_matestoqueini);
+       $this->m82_matestoqueitem = ($this->m82_matestoqueitem === 0 || $this->m82_matestoqueitem === 0.0 || $this->m82_matestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_matestoqueitem"]:$this->m82_matestoqueitem);
+       $this->m82_quant = ($this->m82_quant === 0 || $this->m82_quant === 0.0 || $this->m82_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_quant"]:$this->m82_quant);
        $this->m82_matestoqueinimeiorigem = ($this->m82_matestoqueinimeiorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_matestoqueinimeiorigem"]:$this->m82_matestoqueinimeiorigem);
      }else{
-       $this->m82_codigo = ($this->m82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_codigo"]:$this->m82_codigo);
+       $this->m82_codigo = ($this->m82_codigo === 0 || $this->m82_codigo === 0.0 || $this->m82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m82_codigo"]:$this->m82_codigo);
      }
    }
 
@@ -141,7 +141,7 @@ class cl_matestoqueinimei
          $this->m82_codigo = $m82_codigo;
        }
      }
-     if(($this->m82_codigo == null) || ($this->m82_codigo == "") ){
+     if(($this->m82_codigo == null) || ($this->m82_codigo === 0 || $this->m82_codigo === 0.0 || $this->m82_codigo == "") ){
        $this->erro_sql = " Campo m82_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -435,7 +435,7 @@ class cl_matestoqueinimei
    function sql_query ( $m82_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -462,7 +462,7 @@ class cl_matestoqueinimei
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -474,7 +474,7 @@ class cl_matestoqueinimei
    function sql_query_file ( $m82_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -495,7 +495,7 @@ class cl_matestoqueinimei
      $sql .= $sql2;
      if(!empty($ordem)){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -507,7 +507,7 @@ class cl_matestoqueinimei
    function sql_query_info ( $m82_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_matestoqueinimei
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -546,7 +546,7 @@ class cl_matestoqueinimei
    function sql_query_matestoque ( $m82_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -578,7 +578,7 @@ class cl_matestoqueinimei
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -590,7 +590,7 @@ class cl_matestoqueinimei
    function sql_query_matestoqueitem ( $m82_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -613,7 +613,7 @@ class cl_matestoqueinimei
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -628,7 +628,7 @@ class cl_matestoqueinimei
     $sql = "select ";
     if ($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -668,7 +668,7 @@ class cl_matestoqueinimei
     if ($ordem != null ) {
 
       $sql       .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 

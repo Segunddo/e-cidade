@@ -52,7 +52,7 @@ class cl_regenteconselho {
                  ed235_i_rechumano = int8 = Regente 
                  ";
    //funcao construtor da classe 
-   function cl_regenteconselho() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("regenteconselho"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]."?ed235_i_turma=".@$GLOBALS["HTTP_POST_VARS"]["ed235_i_turma"]."&ed18_c_nome=".@$GLOBALS["HTTP_POST_VARS"]["ed18_c_nome"]."&ed235_i_rechumano=".@$GLOBALS["HTTP_POST_VARS"]["ed235_i_rechumano"]."&ed29_c_descr=".@$GLOBALS["HTTP_POST_VARS"]["ed29_c_descr"]);
@@ -69,11 +69,11 @@ class cl_regenteconselho {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed235_i_codigo = ($this->ed235_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed235_i_codigo"]:$this->ed235_i_codigo);
-       $this->ed235_i_turma = ($this->ed235_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed235_i_turma"]:$this->ed235_i_turma);
-       $this->ed235_i_rechumano = ($this->ed235_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed235_i_rechumano"]:$this->ed235_i_rechumano);
+       $this->ed235_i_codigo = ($this->ed235_i_codigo === 0 || $this->ed235_i_codigo === 0.0 || $this->ed235_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed235_i_codigo"]:$this->ed235_i_codigo);
+       $this->ed235_i_turma = ($this->ed235_i_turma === 0 || $this->ed235_i_turma === 0.0 || $this->ed235_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed235_i_turma"]:$this->ed235_i_turma);
+       $this->ed235_i_rechumano = ($this->ed235_i_rechumano === 0 || $this->ed235_i_rechumano === 0.0 || $this->ed235_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed235_i_rechumano"]:$this->ed235_i_rechumano);
      }else{
-       $this->ed235_i_codigo = ($this->ed235_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed235_i_codigo"]:$this->ed235_i_codigo);
+       $this->ed235_i_codigo = ($this->ed235_i_codigo === 0 || $this->ed235_i_codigo === 0.0 || $this->ed235_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed235_i_codigo"]:$this->ed235_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_regenteconselho {
          $this->ed235_i_codigo = $ed235_i_codigo; 
        }
      }
-     if(($this->ed235_i_codigo == null) || ($this->ed235_i_codigo == "") ){ 
+     if(($this->ed235_i_codigo == null) || ($this->ed235_i_codigo === 0 || $this->ed235_i_codigo === 0.0 || $this->ed235_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed235_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

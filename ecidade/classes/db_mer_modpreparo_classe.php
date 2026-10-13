@@ -58,7 +58,7 @@ class cl_mer_modpreparo {
                  me05_i_alimento = int4 = Alimento 
                  ";
    //funcao construtor da classe 
-   function cl_mer_modpreparo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_modpreparo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_mer_modpreparo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me05_i_codigo = ($this->me05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_codigo"]:$this->me05_i_codigo);
-       $this->me05_f_porcao = ($this->me05_f_porcao == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_f_porcao"]:$this->me05_f_porcao);
+       $this->me05_i_codigo = ($this->me05_i_codigo === 0 || $this->me05_i_codigo === 0.0 || $this->me05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_codigo"]:$this->me05_i_codigo);
+       $this->me05_f_porcao = ($this->me05_f_porcao === 0 || $this->me05_f_porcao === 0.0 || $this->me05_f_porcao == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_f_porcao"]:$this->me05_f_porcao);
        $this->me05_c_natureza = ($this->me05_c_natureza == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_c_natureza"]:$this->me05_c_natureza);
        $this->me05_t_obs = ($this->me05_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_t_obs"]:$this->me05_t_obs);
-       $this->me05_i_cardapio = ($this->me05_i_cardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_cardapio"]:$this->me05_i_cardapio);
-       $this->me05_i_alimento = ($this->me05_i_alimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_alimento"]:$this->me05_i_alimento);
+       $this->me05_i_cardapio = ($this->me05_i_cardapio === 0 || $this->me05_i_cardapio === 0.0 || $this->me05_i_cardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_cardapio"]:$this->me05_i_cardapio);
+       $this->me05_i_alimento = ($this->me05_i_alimento === 0 || $this->me05_i_alimento === 0.0 || $this->me05_i_alimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_alimento"]:$this->me05_i_alimento);
      }else{
-       $this->me05_i_codigo = ($this->me05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_codigo"]:$this->me05_i_codigo);
+       $this->me05_i_codigo = ($this->me05_i_codigo === 0 || $this->me05_i_codigo === 0.0 || $this->me05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_codigo"]:$this->me05_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_mer_modpreparo {
          $this->me05_i_codigo = $me05_i_codigo; 
        }
      }
-     if(($this->me05_i_codigo == null) || ($this->me05_i_codigo == "") ){ 
+     if(($this->me05_i_codigo == null) || ($this->me05_i_codigo === 0 || $this->me05_i_codigo === 0.0 || $this->me05_i_codigo == "") ){ 
        $this->erro_sql = " Campo me05_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -453,7 +453,7 @@ class cl_mer_modpreparo {
    function sql_query ( $me05_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_mer_modpreparo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -490,7 +490,7 @@ class cl_mer_modpreparo {
    function sql_query_file ( $me05_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_mer_modpreparo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

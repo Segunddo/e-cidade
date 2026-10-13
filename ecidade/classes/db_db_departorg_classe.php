@@ -56,7 +56,7 @@ class cl_db_departorg
                  ";
 
     //funcao construtor da classe
-    function cl_db_departorg()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("db_departorg");
@@ -78,13 +78,13 @@ class cl_db_departorg
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->db01_coddepto = ($this->db01_coddepto == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_coddepto"] : $this->db01_coddepto);
-            $this->db01_anousu = ($this->db01_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_anousu"] : $this->db01_anousu);
-            $this->db01_orgao = ($this->db01_orgao == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_orgao"] : $this->db01_orgao);
-            $this->db01_unidade = ($this->db01_unidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_unidade"] : $this->db01_unidade);
+            $this->db01_coddepto = ($this->db01_coddepto === 0 || $this->db01_coddepto === 0.0 || $this->db01_coddepto == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_coddepto"] : $this->db01_coddepto);
+            $this->db01_anousu = ($this->db01_anousu === 0 || $this->db01_anousu === 0.0 || $this->db01_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_anousu"] : $this->db01_anousu);
+            $this->db01_orgao = ($this->db01_orgao === 0 || $this->db01_orgao === 0.0 || $this->db01_orgao == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_orgao"] : $this->db01_orgao);
+            $this->db01_unidade = ($this->db01_unidade === 0 || $this->db01_unidade === 0.0 || $this->db01_unidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_unidade"] : $this->db01_unidade);
         } else {
-            $this->db01_coddepto = ($this->db01_coddepto == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_coddepto"] : $this->db01_coddepto);
-            $this->db01_anousu = ($this->db01_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_anousu"] : $this->db01_anousu);
+            $this->db01_coddepto = ($this->db01_coddepto === 0 || $this->db01_coddepto === 0.0 || $this->db01_coddepto == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_coddepto"] : $this->db01_coddepto);
+            $this->db01_anousu = ($this->db01_anousu === 0 || $this->db01_anousu === 0.0 || $this->db01_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["db01_anousu"] : $this->db01_anousu);
         }
     }
 
@@ -116,7 +116,7 @@ class cl_db_departorg
         }
         $this->db01_coddepto = $db01_coddepto;
         $this->db01_anousu = $db01_anousu;
-        if (($this->db01_coddepto == null) || ($this->db01_coddepto == "")) {
+        if (($this->db01_coddepto == null) || ($this->db01_coddepto === 0 || $this->db01_coddepto === 0.0 || $this->db01_coddepto == "")) {
             $this->erro_sql = " Campo db01_coddepto nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -126,7 +126,7 @@ class cl_db_departorg
 
             return false;
         }
-        if (($this->db01_anousu == null) || ($this->db01_anousu == "")) {
+        if (($this->db01_anousu == null) || ($this->db01_anousu === 0 || $this->db01_anousu === 0.0 || $this->db01_anousu == "")) {
             $this->erro_sql = " Campo db01_anousu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

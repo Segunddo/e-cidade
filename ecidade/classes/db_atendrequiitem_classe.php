@@ -54,7 +54,7 @@ class cl_atendrequiitem {
                  m43_quantatend = float8 = Quant. Atendida 
                  ";
    //funcao construtor da classe 
-   function cl_atendrequiitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("atendrequiitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_atendrequiitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m43_codigo = ($this->m43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m43_codigo"]:$this->m43_codigo);
-       $this->m43_codatendrequi = ($this->m43_codatendrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["m43_codatendrequi"]:$this->m43_codatendrequi);
-       $this->m43_codmatrequiitem = ($this->m43_codmatrequiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m43_codmatrequiitem"]:$this->m43_codmatrequiitem);
-       $this->m43_quantatend = ($this->m43_quantatend == ""?@$GLOBALS["HTTP_POST_VARS"]["m43_quantatend"]:$this->m43_quantatend);
+       $this->m43_codigo = ($this->m43_codigo === 0 || $this->m43_codigo === 0.0 || $this->m43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m43_codigo"]:$this->m43_codigo);
+       $this->m43_codatendrequi = ($this->m43_codatendrequi === 0 || $this->m43_codatendrequi === 0.0 || $this->m43_codatendrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["m43_codatendrequi"]:$this->m43_codatendrequi);
+       $this->m43_codmatrequiitem = ($this->m43_codmatrequiitem === 0 || $this->m43_codmatrequiitem === 0.0 || $this->m43_codmatrequiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m43_codmatrequiitem"]:$this->m43_codmatrequiitem);
+       $this->m43_quantatend = ($this->m43_quantatend === 0 || $this->m43_quantatend === 0.0 || $this->m43_quantatend == ""?@$GLOBALS["HTTP_POST_VARS"]["m43_quantatend"]:$this->m43_quantatend);
      }else{
-       $this->m43_codigo = ($this->m43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m43_codigo"]:$this->m43_codigo);
+       $this->m43_codigo = ($this->m43_codigo === 0 || $this->m43_codigo === 0.0 || $this->m43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m43_codigo"]:$this->m43_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_atendrequiitem {
          $this->m43_codigo = $m43_codigo; 
        }
      }
-     if(($this->m43_codigo == null) || ($this->m43_codigo == "") ){ 
+     if(($this->m43_codigo == null) || ($this->m43_codigo === 0 || $this->m43_codigo === 0.0 || $this->m43_codigo == "") ){ 
        $this->erro_sql = " Campo m43_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_atendrequiitem {
    function sql_query ( $m43_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_atendrequiitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_atendrequiitem {
    function sql_query_devol ( $m43_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_atendrequiitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_atendrequiitem {
    function sql_query_file ( $m43_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -490,7 +490,7 @@ class cl_atendrequiitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -503,7 +503,7 @@ class cl_atendrequiitem {
  function sql_query_inimei ( $m43_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_atendrequiitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_matparamconsulta {
                  m38_visualizacaomatestoque = bool = Visualizar apenas materiais do estoque 
                  ";
    //funcao construtor da classe 
-   function cl_matparamconsulta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matparamconsulta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_matparamconsulta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m38_instit = ($this->m38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_instit"]:$this->m38_instit);
-       $this->m38_visualizacaoitens = ($this->m38_visualizacaoitens == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_visualizacaoitens"]:$this->m38_visualizacaoitens);
+       $this->m38_instit = ($this->m38_instit === 0 || $this->m38_instit === 0.0 || $this->m38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_instit"]:$this->m38_instit);
+       $this->m38_visualizacaoitens = ($this->m38_visualizacaoitens === 0 || $this->m38_visualizacaoitens === 0.0 || $this->m38_visualizacaoitens == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_visualizacaoitens"]:$this->m38_visualizacaoitens);
        $this->m38_visualizacaomatestoque = ($this->m38_visualizacaomatestoque == "f"?@$GLOBALS["HTTP_POST_VARS"]["m38_visualizacaomatestoque"]:$this->m38_visualizacaomatestoque);
      }else{
-       $this->m38_instit = ($this->m38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_instit"]:$this->m38_instit);
+       $this->m38_instit = ($this->m38_instit === 0 || $this->m38_instit === 0.0 || $this->m38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_instit"]:$this->m38_instit);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_matparamconsulta {
        return false;
      }
        $this->m38_instit = $m38_instit; 
-     if(($this->m38_instit == null) || ($this->m38_instit == "") ){ 
+     if(($this->m38_instit == null) || ($this->m38_instit === 0 || $this->m38_instit === 0.0 || $this->m38_instit == "") ){ 
        $this->erro_sql = " Campo m38_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -337,7 +337,7 @@ class cl_matparamconsulta {
    function sql_query ( $m38_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -360,7 +360,7 @@ class cl_matparamconsulta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -373,7 +373,7 @@ class cl_matparamconsulta {
    function sql_query_file ( $m38_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_matparamconsulta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

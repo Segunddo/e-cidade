@@ -66,8 +66,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
 **Onde paramos:** **ÁREA TRIBUTÁRIO CONCLUÍDA; ÁREA EDUCAÇÃO INICIADA** (branch
-`2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec` e `bib`; faltam `mer`
-(+ `mat`/`pro` por `map`) e `edu`. Ver *ÁREA EDUCAÇÃO*.
+`2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib` e `mer` (+ 20 telas `mat`/`pro` por
+`map`); falta só **`edu`**. Ver *ÁREA EDUCAÇÃO*.
 
 | | |
 |---|---|
@@ -75,8 +75,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib)[0-9]*_` — **1.946 telas** |
-| **Próximo passo** | **`mer`** (173 arquivos) + `mat`/`pro` por `map` (20 telas), depois `edu` (726). Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer)[0-9]*_` — **2.133 telas** + 367 por `map` |
+| **Próximo passo** | **`edu`** (726 arquivos, 1.211 telas) — quebrar por subprefixo `edu1_`, `edu2_`… Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
@@ -3059,6 +3059,7 @@ por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` n
 | `tre` | 60 | 3 | 60/60 | 13/13 | 655 linhas, 0 div. | **19/19** (depois do ini) |
 | `esc`+`rel`+`sec` | 84 | 19 | 84/84 | 35/35 | 1.368 linhas, 0 div. | **16/16** |
 | `bib` | 232 | 79 | 232/232 | 75/75 | 2.632 linhas, 0 div. | **95/98** |
+| `mer` + 20 `mat`/`pro` | 507 | 198 | 506/507 | 163/164 | 3.270 linhas, 0 div. | **207/207** |
 
 **`bib`** — 76 pelo Rector (242 guardas, 152 `split` todos `#`, 39 construtores, 33
 `parse_str`+`extract`, 3 parâmetros opcionais antes de obrigatórios, 1 `${$var}`), mais 3 à mão:
@@ -3081,6 +3082,34 @@ Regra proporcional: núcleo intocado; a interseção com os universos verificado
 `classes/db_aluno_classe.php` × `con` → bateria das 30 telas `con` roteadas: **30/30**.
 Os universos de `cem`, `itb`, `agu`, `jur`, `div`, `mar` não estavam em `tmp/` (são
 gitignored) e tiveram de ser regerados — universo ausente é *desconhecido*, não *vazio*.
+
+**`mer` + `mat`/`pro`** — universo montado do prefixo `mer` inteiro **mais** as 20 telas
+`mat`/`pro` que o banco atribui a Educação (as `mat` também são do Patrimonial: rotear por
+prefixo levaria 261 telas de Almoxarifado junto). Rector em 193 arquivos (104 `parse_str`+
+`extract`, 88 guardas, 84 `split`, 84 construtores, 2 parâmetros opcionais), só regras vetadas.
+À mão, 12 guardas `pg_*` devolvendo `null` em 10 telas — as SQLs falham por colunas que **não
+existem** no banco (`me07_i_codmater`, `me22_i_cardapio`), defeito pré-existente.
+
+- `mer1_mer_desper_und003.php` **não compila nem no 5.6** (chave aberta na linha 57). Fora do
+  lote, como os 5 do `dbagata/`. O Rector o acusa como `errors: 1` no dry-run — conferir o
+  campo `errors`, não só `changed_files`.
+- `RequisicaoMaterial` (`.model.php`) diverge no harness de classes: construtor com argumento
+  obrigatório, mesmo artefato de `lancamentoContabil`. `db_mer_requiitem_classe_ext.php`
+  derruba os dois runtimes igual (o `harness_robusto.sh` o pulou nos dois).
+- Regressão: núcleo intocado; interseção com `con` (28 classes) e `pro` (1) → 65/65 telas
+  roteadas idênticas.
+
+**Roteamento por `map` agora é por ÁREA.** `gera_map_faseb.py` recebe `<area>:<prefixos>`
+(`tribut:amb,pre,… educa:mat,pro`). Ele **reescreve o arquivo inteiro** — repetir todos os
+lotes; conferido por diff que só houve 20 linhas acrescentadas e nenhuma removida.
+
+#### ARMADILHA DE FERRAMENTAL: o opcache do 8.5 revalida a cada 2 s
+
+Automatizei o ciclo "requisitar → ler o fatal → guardar a linha → repetir". Ele aplicou a
+mesma guarda **15 vezes aninhada** na mesma linha: o 8.5 tem `opcache.revalidate_freq = 2`, e
+a requisição seguinte chegava antes da revalidação, executando o código antigo e acusando o
+mesmo fatal. Desfeito (uma guarda por linha, diff conferido). **Esperar 3 s depois de editar e
+antes de requisitar.** O 5.6 não tem opcache, então o sintoma só aparece de um lado.
 
 #### CATEGORIA (bib): octal inválido — a correção fiel PRESERVA o bug
 

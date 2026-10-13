@@ -35,7 +35,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_mer_tpcardapioturma_classe.php"));
 include(modification("classes/db_mer_cardapioescola_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $clmer_tpcardapioturma = new cl_mer_tpcardapioturma;
 $clmer_cardapioescola = new cl_mer_cardapioescola;
 if(isset($coddisciplinas)){
@@ -95,7 +96,7 @@ if(isset($coddisciplinas)){
                                                                              "",
                                                                              "me32_i_tipocardapio = $codcardapio and me32_i_codigo not in ($codcardapioescola)"
                                                                             ));
-   $linhas = pg_num_rows($result);
+   $linhas = ($result ? pg_num_rows($result) : null);
    if($linhas>0){
     ?>
     <select name="outras_disc[]" id="outras_disc" size="10" style="width:300px;font-size:10px;padding:0px;" multiple>

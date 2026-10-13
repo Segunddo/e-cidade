@@ -62,7 +62,7 @@ class cl_matestoquetransferencia {
                  m84_ativo = bool = Situação da Transferência
                  ";
    //funcao construtor da classe
-   function cl_matestoquetransferencia() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matestoquetransferencia");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_matestoquetransferencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m84_sequencial = ($this->m84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_sequencial"]:$this->m84_sequencial);
-       $this->m84_matestoqueitem = ($this->m84_matestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_matestoqueitem"]:$this->m84_matestoqueitem);
-       $this->m84_matestoqueini = ($this->m84_matestoqueini == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_matestoqueini"]:$this->m84_matestoqueini);
-       $this->m84_coddepto = ($this->m84_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_coddepto"]:$this->m84_coddepto);
-       $this->m84_valortotal = ($this->m84_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_valortotal"]:$this->m84_valortotal);
-       $this->m84_quantidade = ($this->m84_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_quantidade"]:$this->m84_quantidade);
+       $this->m84_sequencial = ($this->m84_sequencial === 0 || $this->m84_sequencial === 0.0 || $this->m84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_sequencial"]:$this->m84_sequencial);
+       $this->m84_matestoqueitem = ($this->m84_matestoqueitem === 0 || $this->m84_matestoqueitem === 0.0 || $this->m84_matestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_matestoqueitem"]:$this->m84_matestoqueitem);
+       $this->m84_matestoqueini = ($this->m84_matestoqueini === 0 || $this->m84_matestoqueini === 0.0 || $this->m84_matestoqueini == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_matestoqueini"]:$this->m84_matestoqueini);
+       $this->m84_coddepto = ($this->m84_coddepto === 0 || $this->m84_coddepto === 0.0 || $this->m84_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_coddepto"]:$this->m84_coddepto);
+       $this->m84_valortotal = ($this->m84_valortotal === 0 || $this->m84_valortotal === 0.0 || $this->m84_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_valortotal"]:$this->m84_valortotal);
+       $this->m84_quantidade = ($this->m84_quantidade === 0 || $this->m84_quantidade === 0.0 || $this->m84_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_quantidade"]:$this->m84_quantidade);
        $this->m84_transferido = ($this->m84_transferido == "f"?@$GLOBALS["HTTP_POST_VARS"]["m84_transferido"]:$this->m84_transferido);
        $this->m84_ativo = ($this->m84_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["m84_ativo"]:$this->m84_ativo);
      }else{
-       $this->m84_sequencial = ($this->m84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_sequencial"]:$this->m84_sequencial);
+       $this->m84_sequencial = ($this->m84_sequencial === 0 || $this->m84_sequencial === 0.0 || $this->m84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m84_sequencial"]:$this->m84_sequencial);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_matestoquetransferencia {
          $this->m84_sequencial = $m84_sequencial;
        }
      }
-     if(($this->m84_sequencial == null) || ($this->m84_sequencial == "") ){
+     if(($this->m84_sequencial == null) || ($this->m84_sequencial === 0 || $this->m84_sequencial === 0.0 || $this->m84_sequencial == "") ){
        $this->erro_sql = " Campo m84_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -251,7 +251,7 @@ class cl_matestoquetransferencia {
      return true;
    }
    // funcao para alteracao
-   function alterar ($m84_sequencial=null, $sWhereAlterar) {
+   function alterar ($m84_sequencial=null, $sWhereAlterar = null) {
       $this->atualizacampos();
      $sql = " update matestoquetransferencia set ";
      $virgula = "";
@@ -531,7 +531,7 @@ class cl_matestoquetransferencia {
    function sql_query ( $m84_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -561,7 +561,7 @@ class cl_matestoquetransferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -574,7 +574,7 @@ class cl_matestoquetransferencia {
    function sql_query_file ( $m84_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -595,7 +595,7 @@ class cl_matestoquetransferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -607,7 +607,7 @@ class cl_matestoquetransferencia {
    function sql_query_transferencia ( $m84_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -632,7 +632,7 @@ class cl_matestoquetransferencia {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

@@ -58,7 +58,7 @@ class cl_matunid {
                  m61_codigotribunal = varchar(5) = Código do Tribunal 
                  ";
    //funcao construtor da classe 
-   function cl_matunid() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matunid"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_matunid {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m61_codmatunid = ($this->m61_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m61_codmatunid"]:$this->m61_codmatunid);
+       $this->m61_codmatunid = ($this->m61_codmatunid === 0 || $this->m61_codmatunid === 0.0 || $this->m61_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m61_codmatunid"]:$this->m61_codmatunid);
        $this->m61_descr = ($this->m61_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["m61_descr"]:$this->m61_descr);
        $this->m61_usaquant = ($this->m61_usaquant == "f"?@$GLOBALS["HTTP_POST_VARS"]["m61_usaquant"]:$this->m61_usaquant);
        $this->m61_abrev = ($this->m61_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["m61_abrev"]:$this->m61_abrev);
        $this->m61_usadec = ($this->m61_usadec == "f"?@$GLOBALS["HTTP_POST_VARS"]["m61_usadec"]:$this->m61_usadec);
        $this->m61_codigotribunal = ($this->m61_codigotribunal == ""?@$GLOBALS["HTTP_POST_VARS"]["m61_codigotribunal"]:$this->m61_codigotribunal);
      }else{
-       $this->m61_codmatunid = ($this->m61_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m61_codmatunid"]:$this->m61_codmatunid);
+       $this->m61_codmatunid = ($this->m61_codmatunid === 0 || $this->m61_codmatunid === 0.0 || $this->m61_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m61_codmatunid"]:$this->m61_codmatunid);
      }
    }
    // funcao para Inclusão
@@ -148,7 +148,7 @@ class cl_matunid {
          $this->m61_codmatunid = $m61_codmatunid; 
        }
      }
-     if(($this->m61_codmatunid == null) || ($this->m61_codmatunid == "") ){ 
+     if(($this->m61_codmatunid == null) || ($this->m61_codmatunid === 0 || $this->m61_codmatunid === 0.0 || $this->m61_codmatunid == "") ){ 
        $this->erro_sql = " Campo m61_codmatunid não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -52,7 +52,7 @@ class cl_matestoqueinimeimdi {
                  m50_codmatestoqueinimei = int8 = Código matestoqueinimei 
                  ";
    //funcao construtor da classe 
-   function cl_matestoqueinimeimdi() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matestoqueinimeimdi"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_matestoqueinimeimdi {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m50_codigo = ($this->m50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m50_codigo"]:$this->m50_codigo);
-       $this->m50_codmatestoquedevitem = ($this->m50_codmatestoquedevitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m50_codmatestoquedevitem"]:$this->m50_codmatestoquedevitem);
-       $this->m50_codmatestoqueinimei = ($this->m50_codmatestoqueinimei == ""?@$GLOBALS["HTTP_POST_VARS"]["m50_codmatestoqueinimei"]:$this->m50_codmatestoqueinimei);
+       $this->m50_codigo = ($this->m50_codigo === 0 || $this->m50_codigo === 0.0 || $this->m50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m50_codigo"]:$this->m50_codigo);
+       $this->m50_codmatestoquedevitem = ($this->m50_codmatestoquedevitem === 0 || $this->m50_codmatestoquedevitem === 0.0 || $this->m50_codmatestoquedevitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m50_codmatestoquedevitem"]:$this->m50_codmatestoquedevitem);
+       $this->m50_codmatestoqueinimei = ($this->m50_codmatestoqueinimei === 0 || $this->m50_codmatestoqueinimei === 0.0 || $this->m50_codmatestoqueinimei == ""?@$GLOBALS["HTTP_POST_VARS"]["m50_codmatestoqueinimei"]:$this->m50_codmatestoqueinimei);
      }else{
-       $this->m50_codigo = ($this->m50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m50_codigo"]:$this->m50_codigo);
+       $this->m50_codigo = ($this->m50_codigo === 0 || $this->m50_codigo === 0.0 || $this->m50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m50_codigo"]:$this->m50_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_matestoqueinimeimdi {
          $this->m50_codigo = $m50_codigo; 
        }
      }
-     if(($this->m50_codigo == null) || ($this->m50_codigo == "") ){ 
+     if(($this->m50_codigo == null) || ($this->m50_codigo === 0 || $this->m50_codigo === 0.0 || $this->m50_codigo == "") ){ 
        $this->erro_sql = " Campo m50_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_matestoqueinimeimdi {
    function sql_query ( $m50_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_matestoqueinimeimdi {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_matestoqueinimeimdi {
    function sql_query_file ( $m50_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_matestoqueinimeimdi {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

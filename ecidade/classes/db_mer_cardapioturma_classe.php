@@ -56,7 +56,7 @@ class cl_mer_cardapioturma {
                  me39_i_cardapiodia = int4 = Cardapio dia 
                  ";
    //funcao construtor da classe 
-   function cl_mer_cardapioturma() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_cardapioturma"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_mer_cardapioturma {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me39_i_codigo = ($this->me39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_codigo"]:$this->me39_i_codigo);
-       $this->me39_i_repeticao = ($this->me39_i_repeticao == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_repeticao"]:$this->me39_i_repeticao);
-       $this->me39_i_quantidade = ($this->me39_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_quantidade"]:$this->me39_i_quantidade);
-       $this->me39_i_turma = ($this->me39_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_turma"]:$this->me39_i_turma);
-       $this->me39_i_cardapiodia = ($this->me39_i_cardapiodia == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_cardapiodia"]:$this->me39_i_cardapiodia);
+       $this->me39_i_codigo = ($this->me39_i_codigo === 0 || $this->me39_i_codigo === 0.0 || $this->me39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_codigo"]:$this->me39_i_codigo);
+       $this->me39_i_repeticao = ($this->me39_i_repeticao === 0 || $this->me39_i_repeticao === 0.0 || $this->me39_i_repeticao == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_repeticao"]:$this->me39_i_repeticao);
+       $this->me39_i_quantidade = ($this->me39_i_quantidade === 0 || $this->me39_i_quantidade === 0.0 || $this->me39_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_quantidade"]:$this->me39_i_quantidade);
+       $this->me39_i_turma = ($this->me39_i_turma === 0 || $this->me39_i_turma === 0.0 || $this->me39_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_turma"]:$this->me39_i_turma);
+       $this->me39_i_cardapiodia = ($this->me39_i_cardapiodia === 0 || $this->me39_i_cardapiodia === 0.0 || $this->me39_i_cardapiodia == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_cardapiodia"]:$this->me39_i_cardapiodia);
      }else{
-       $this->me39_i_codigo = ($this->me39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_codigo"]:$this->me39_i_codigo);
+       $this->me39_i_codigo = ($this->me39_i_codigo === 0 || $this->me39_i_codigo === 0.0 || $this->me39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_codigo"]:$this->me39_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_mer_cardapioturma {
          $this->me39_i_codigo = $me39_i_codigo; 
        }
      }
-     if(($this->me39_i_codigo == null) || ($this->me39_i_codigo == "") ){ 
+     if(($this->me39_i_codigo == null) || ($this->me39_i_codigo === 0 || $this->me39_i_codigo === 0.0 || $this->me39_i_codigo == "") ){ 
        $this->erro_sql = " Campo me39_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_mer_cardapioturma {
    function sql_query ( $me39_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -454,7 +454,7 @@ class cl_mer_cardapioturma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -467,7 +467,7 @@ class cl_mer_cardapioturma {
    function sql_query_file ( $me39_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_mer_cardapioturma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

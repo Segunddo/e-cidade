@@ -65,7 +65,7 @@ class cl_matpedido {
                  m97_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_matpedido() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matpedido"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,9 +82,9 @@ class cl_matpedido {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m97_sequencial = ($this->m97_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_sequencial"]:$this->m97_sequencial);
-       $this->m97_db_almox = ($this->m97_db_almox == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_db_almox"]:$this->m97_db_almox);
-       $this->m97_coddepto = ($this->m97_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_coddepto"]:$this->m97_coddepto);
+       $this->m97_sequencial = ($this->m97_sequencial === 0 || $this->m97_sequencial === 0.0 || $this->m97_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_sequencial"]:$this->m97_sequencial);
+       $this->m97_db_almox = ($this->m97_db_almox === 0 || $this->m97_db_almox === 0.0 || $this->m97_db_almox == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_db_almox"]:$this->m97_db_almox);
+       $this->m97_coddepto = ($this->m97_coddepto === 0 || $this->m97_coddepto === 0.0 || $this->m97_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_coddepto"]:$this->m97_coddepto);
        if($this->m97_data == ""){
          $this->m97_data_dia = ($this->m97_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_data_dia"]:$this->m97_data_dia);
          $this->m97_data_mes = ($this->m97_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_data_mes"]:$this->m97_data_mes);
@@ -93,12 +93,12 @@ class cl_matpedido {
             $this->m97_data = $this->m97_data_ano."-".$this->m97_data_mes."-".$this->m97_data_dia;
          }
        }
-       $this->m97_login = ($this->m97_login == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_login"]:$this->m97_login);
+       $this->m97_login = ($this->m97_login === 0 || $this->m97_login === 0.0 || $this->m97_login == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_login"]:$this->m97_login);
        $this->m97_hora = ($this->m97_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_hora"]:$this->m97_hora);
-       $this->m97_origem = ($this->m97_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_origem"]:$this->m97_origem);
+       $this->m97_origem = ($this->m97_origem === 0 || $this->m97_origem === 0.0 || $this->m97_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_origem"]:$this->m97_origem);
        $this->m97_obs = ($this->m97_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_obs"]:$this->m97_obs);
      }else{
-       $this->m97_sequencial = ($this->m97_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_sequencial"]:$this->m97_sequencial);
+       $this->m97_sequencial = ($this->m97_sequencial === 0 || $this->m97_sequencial === 0.0 || $this->m97_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m97_sequencial"]:$this->m97_sequencial);
      }
    }
    // funcao para inclusao
@@ -185,7 +185,7 @@ class cl_matpedido {
          $this->m97_sequencial = $m97_sequencial; 
        }
      }
-     if(($this->m97_sequencial == null) || ($this->m97_sequencial == "") ){ 
+     if(($this->m97_sequencial == null) || ($this->m97_sequencial === 0 || $this->m97_sequencial === 0.0 || $this->m97_sequencial == "") ){ 
        $this->erro_sql = " Campo m97_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -524,7 +524,7 @@ class cl_matpedido {
    function sql_query ( $m97_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -550,7 +550,7 @@ class cl_matpedido {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -562,7 +562,7 @@ class cl_matpedido {
    function sql_query_matpedido($m97_sequencial=null,$campos="*",$ordem=null,$dbwhere="") {
     $sql = "select ";
     if ($campos != "*" ) {
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -589,7 +589,7 @@ class cl_matpedido {
     $sql .= $sql2;
     if ($ordem != null ) {
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -602,7 +602,7 @@ class cl_matpedido {
    function sql_query_matpedidorequi($m97_sequencial=null,$campos="*",$ordem=null,$dbwhere="") {
     $sql = "select ";
     if ($campos != "*" ) {
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -630,7 +630,7 @@ class cl_matpedido {
     $sql .= $sql2;
     if ($ordem != null ) {
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -643,7 +643,7 @@ class cl_matpedido {
    function sql_query_matpedidoanul($m97_sequencial=null,$campos="*",$ordem=null,$dbwhere="") {
     $sql = "select ";
     if ($campos != "*" ) {
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -672,7 +672,7 @@ class cl_matpedido {
     $sql .= $sql2;
     if ($ordem != null ) {
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -686,7 +686,7 @@ class cl_matpedido {
   function sql_query_almoxleft($m97_codigo=null,$campos="*",$ordem=null,$dbwhere="") {
     $sql = "select  distinct ";
     if ($campos != "*" ) {
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -714,7 +714,7 @@ class cl_matpedido {
     $sql .= $sql2;
     if ($ordem != null ) {
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -727,7 +727,7 @@ class cl_matpedido {
   function sql_query_almox($m97_sequencial=null,$campos="*",$ordem=null,$dbwhere="") {
     $sql = "select ";
     if ($campos != "*" ) {
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -754,7 +754,7 @@ class cl_matpedido {
     $sql .= $sql2;
     if ($ordem != null ) {
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -767,7 +767,7 @@ class cl_matpedido {
    function sql_query_file ( $m97_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -788,7 +788,7 @@ class cl_matpedido {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
