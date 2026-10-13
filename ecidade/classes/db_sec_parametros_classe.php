@@ -80,16 +80,16 @@ class cl_sec_parametros
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed290_sequencial = ($this->ed290_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_sequencial"] : $this->ed290_sequencial);
-            $this->ed290_importcenso = ($this->ed290_importcenso == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_importcenso"] : $this->ed290_importcenso);
-            $this->ed290_controleprogressaoparcial = ($this->ed290_controleprogressaoparcial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_controleprogressaoparcial"] : $this->ed290_controleprogressaoparcial);
-            $this->ed290_diasmanutencaohistorico = ($this->ed290_diasmanutencaohistorico == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_diasmanutencaohistorico"] : $this->ed290_diasmanutencaohistorico);
-            $this->ed290_bncc = ($this->ed290_bncc == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_bncc"] : $this->ed290_bncc);
+            $this->ed290_sequencial = ($this->ed290_sequencial === 0 || $this->ed290_sequencial === 0.0 || $this->ed290_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_sequencial"] : $this->ed290_sequencial);
+            $this->ed290_importcenso = ($this->ed290_importcenso === 0 || $this->ed290_importcenso === 0.0 || $this->ed290_importcenso == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_importcenso"] : $this->ed290_importcenso);
+            $this->ed290_controleprogressaoparcial = ($this->ed290_controleprogressaoparcial === 0 || $this->ed290_controleprogressaoparcial === 0.0 || $this->ed290_controleprogressaoparcial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_controleprogressaoparcial"] : $this->ed290_controleprogressaoparcial);
+            $this->ed290_diasmanutencaohistorico = ($this->ed290_diasmanutencaohistorico === 0 || $this->ed290_diasmanutencaohistorico === 0.0 || $this->ed290_diasmanutencaohistorico == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_diasmanutencaohistorico"] : $this->ed290_diasmanutencaohistorico);
+            $this->ed290_bncc = ($this->ed290_bncc === 0 || $this->ed290_bncc === 0.0 || $this->ed290_bncc == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_bncc"] : $this->ed290_bncc);
             $this->ed290_habilitaconsultaalunoporescola = ($this->ed290_habilitaconsultaalunoporescola == "f" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_habilitaconsultaalunoporescola"] : $this->ed290_habilitaconsultaalunoporescola);
             $this->ed290_habilconsmovalunescola = ($this->ed290_habilconsmovalunescola == "f" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_habilconsmovalunescola"] : $this->ed290_habilconsmovalunescola);
-            $this->ed290_cordisciplinaquadro = ($this->ed290_cordisciplinaquadro == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_cordisciplinaquadro"] : $this->ed290_cordisciplinaquadro);
+            $this->ed290_cordisciplinaquadro = ($this->ed290_cordisciplinaquadro === 0 || $this->ed290_cordisciplinaquadro === 0.0 || $this->ed290_cordisciplinaquadro == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_cordisciplinaquadro"] : $this->ed290_cordisciplinaquadro);
         } else {
-            $this->ed290_sequencial = ($this->ed290_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_sequencial"] : $this->ed290_sequencial);
+            $this->ed290_sequencial = ($this->ed290_sequencial === 0 || $this->ed290_sequencial === 0.0 || $this->ed290_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed290_sequencial"] : $this->ed290_sequencial);
         }
     }
 
@@ -183,7 +183,7 @@ class cl_sec_parametros
                 $this->ed290_sequencial = $ed290_sequencial;
             }
         }
-        if (($this->ed290_sequencial == null) || ($this->ed290_sequencial == "")) {
+        if (($this->ed290_sequencial == null) || ($this->ed290_sequencial === 0 || $this->ed290_sequencial === 0.0 || $this->ed290_sequencial == "")) {
             $this->erro_sql = " Campo ed290_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

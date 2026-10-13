@@ -144,8 +144,9 @@ for p in universo:
     if n: tot['$this->X == <literal>'] += n; arq['$this->X == <literal>'].add(p); alvos.add(p)
 
 os.makedirs("tmp", exist_ok=True)
-open(f"tmp/{PREF}_universo.txt","w").write("\n".join(universo))
-open(f"tmp/{PREF}_alvos.txt","w").write("\n".join(sorted(alvos)))
+# com "\n" final: sem ele o `while read` do lint perde o ULTIMO arquivo da lista
+open(f"tmp/{PREF}_universo.txt","w").write("\n".join(universo) + "\n")
+open(f"tmp/{PREF}_alvos.txt","w").write("\n".join(sorted(alvos)) + "\n")
 print(f"  telas (prefixo {PREF}[0-9]*_) : {len(telas)}")
 print(f"  universo (6 frentes)        : {len(universo)}   | ja pago: {len([p for p in universo if p in PAGO])}")
 print(f"  {'':28}| A ALTERAR: {len(alvos)}\n")

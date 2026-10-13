@@ -54,7 +54,7 @@ class cl_turmaturnoreferente {
                  ed336_vagas = int4 = Vagas da Turma
                  ";
    //funcao construtor da classe
-   function cl_turmaturnoreferente() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("turmaturnoreferente");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_turmaturnoreferente {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed336_codigo = ($this->ed336_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed336_codigo"]:$this->ed336_codigo);
-       $this->ed336_turma = ($this->ed336_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed336_turma"]:$this->ed336_turma);
-       $this->ed336_turnoreferente = ($this->ed336_turnoreferente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed336_turnoreferente"]:$this->ed336_turnoreferente);
-       $this->ed336_vagas = ($this->ed336_vagas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed336_vagas"]:$this->ed336_vagas);
+       $this->ed336_codigo = ($this->ed336_codigo === 0 || $this->ed336_codigo === 0.0 || $this->ed336_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed336_codigo"]:$this->ed336_codigo);
+       $this->ed336_turma = ($this->ed336_turma === 0 || $this->ed336_turma === 0.0 || $this->ed336_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed336_turma"]:$this->ed336_turma);
+       $this->ed336_turnoreferente = ($this->ed336_turnoreferente === 0 || $this->ed336_turnoreferente === 0.0 || $this->ed336_turnoreferente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed336_turnoreferente"]:$this->ed336_turnoreferente);
+       $this->ed336_vagas = ($this->ed336_vagas === 0 || $this->ed336_vagas === 0.0 || $this->ed336_vagas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed336_vagas"]:$this->ed336_vagas);
      }else{
-       $this->ed336_codigo = ($this->ed336_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed336_codigo"]:$this->ed336_codigo);
+       $this->ed336_codigo = ($this->ed336_codigo === 0 || $this->ed336_codigo === 0.0 || $this->ed336_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed336_codigo"]:$this->ed336_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_turmaturnoreferente {
          $this->ed336_codigo = $ed336_codigo;
        }
      }
-     if(($this->ed336_codigo == null) || ($this->ed336_codigo == "") ){
+     if(($this->ed336_codigo == null) || ($this->ed336_codigo === 0 || $this->ed336_codigo === 0.0 || $this->ed336_codigo == "") ){
        $this->erro_sql = " Campo ed336_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

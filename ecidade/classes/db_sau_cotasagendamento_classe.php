@@ -60,7 +60,7 @@ class cl_sau_cotasagendamento {
                  s163_i_anocomp = int4 = Ano 
                  ";
    //funcao construtor da classe 
-   function cl_sau_cotasagendamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_cotasagendamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_sau_cotasagendamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s163_i_codigo = ($this->s163_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_codigo"]:$this->s163_i_codigo);
-       $this->s163_i_rhcbo = ($this->s163_i_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_rhcbo"]:$this->s163_i_rhcbo);
-       $this->s163_i_upssolicitante = ($this->s163_i_upssolicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_upssolicitante"]:$this->s163_i_upssolicitante);
-       $this->s163_i_upsprestadora = ($this->s163_i_upsprestadora == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_upsprestadora"]:$this->s163_i_upsprestadora);
-       $this->s163_i_quantidade = ($this->s163_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_quantidade"]:$this->s163_i_quantidade);
-       $this->s163_i_mescomp = ($this->s163_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_mescomp"]:$this->s163_i_mescomp);
-       $this->s163_i_anocomp = ($this->s163_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_anocomp"]:$this->s163_i_anocomp);
+       $this->s163_i_codigo = ($this->s163_i_codigo === 0 || $this->s163_i_codigo === 0.0 || $this->s163_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_codigo"]:$this->s163_i_codigo);
+       $this->s163_i_rhcbo = ($this->s163_i_rhcbo === 0 || $this->s163_i_rhcbo === 0.0 || $this->s163_i_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_rhcbo"]:$this->s163_i_rhcbo);
+       $this->s163_i_upssolicitante = ($this->s163_i_upssolicitante === 0 || $this->s163_i_upssolicitante === 0.0 || $this->s163_i_upssolicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_upssolicitante"]:$this->s163_i_upssolicitante);
+       $this->s163_i_upsprestadora = ($this->s163_i_upsprestadora === 0 || $this->s163_i_upsprestadora === 0.0 || $this->s163_i_upsprestadora == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_upsprestadora"]:$this->s163_i_upsprestadora);
+       $this->s163_i_quantidade = ($this->s163_i_quantidade === 0 || $this->s163_i_quantidade === 0.0 || $this->s163_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_quantidade"]:$this->s163_i_quantidade);
+       $this->s163_i_mescomp = ($this->s163_i_mescomp === 0 || $this->s163_i_mescomp === 0.0 || $this->s163_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_mescomp"]:$this->s163_i_mescomp);
+       $this->s163_i_anocomp = ($this->s163_i_anocomp === 0 || $this->s163_i_anocomp === 0.0 || $this->s163_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_anocomp"]:$this->s163_i_anocomp);
      }else{
-       $this->s163_i_codigo = ($this->s163_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_codigo"]:$this->s163_i_codigo);
+       $this->s163_i_codigo = ($this->s163_i_codigo === 0 || $this->s163_i_codigo === 0.0 || $this->s163_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_codigo"]:$this->s163_i_codigo);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_sau_cotasagendamento {
          $this->s163_i_codigo = $s163_i_codigo; 
        }
      }
-     if(($this->s163_i_codigo == null) || ($this->s163_i_codigo == "") ){ 
+     if(($this->s163_i_codigo == null) || ($this->s163_i_codigo === 0 || $this->s163_i_codigo === 0.0 || $this->s163_i_codigo == "") ){ 
        $this->erro_sql = " Campo s163_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -484,7 +484,7 @@ class cl_sau_cotasagendamento {
    function sql_query ( $s163_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -518,7 +518,7 @@ class cl_sau_cotasagendamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -531,7 +531,7 @@ class cl_sau_cotasagendamento {
    function sql_query_file ( $s163_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_sau_cotasagendamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -567,7 +567,7 @@ class cl_sau_cotasagendamento {
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
 
@@ -605,7 +605,7 @@ class cl_sau_cotasagendamento {
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 

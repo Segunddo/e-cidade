@@ -65,8 +65,9 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** **FASE A CONCLUÍDA** — os 13 prefixos exclusivos da área Tributário estão
-portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compartilhado (Fase B).
+**Onde paramos:** **ÁREA TRIBUTÁRIO CONCLUÍDA; ÁREA EDUCAÇÃO INICIADA** (branch
+`2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel` e `sec`; faltam `bib`, `mer`
+(+ `mat`/`pro` por `map`) e `edu`. Ver *ÁREA EDUCAÇÃO*.
 
 | | |
 |---|---|
@@ -74,8 +75,9 @@ portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compa
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra)[0-9]*_` — **1.813 telas** |
-| **Próximo passo** | **ÁREA TRIBUTÁRIO CONCLUÍDA** — 16 de 16 módulos, **1.056 de 1.056 telas de menu**. Fases A e B fechadas. O que resta é das Fases 1-3 do workflow: Laravel, dependências mortas e PostgreSQL/UTF-8. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec)[0-9]*_` — **1.848 telas** |
+| **Próximo passo** | **`bib`** (85 arquivos), depois `mer` (182) e `edu` (740). Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
@@ -3006,6 +3008,115 @@ responde **1 requisição, HTTP 200** (o loop devolvia milhares). O volume `ecid
 mantido — outros pontos ainda usam o `/tmp` do sistema.
 
 Reversível com `chmod 775 tmp arquivos`; nenhuma alteração de código.
+
+### 🗺️ DIMENSIONAMENTO DAS PRÓXIMAS ÁREAS (13/10/2026)
+
+Medido no banco (mesma cadeia `atendcadarea → … → db_itensmenu`), descontando o que já é
+servido pelo 8.5 e o que os commits `Porta …` já pagaram. Arquivos a alterar = fecho das sete
+frentes a partir das telas de menu (estimativa: na Fase B, 428 previstos viraram ~526).
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | A alterar |
+|---|---|---|---|---|---|
+| Financeiro | 6 | 910 | 2.568 | 340 | 788 |
+| Patrimonial | 8 | 713 | 2.224 | 344 | 674 |
+| Recursos Humanos | 4 | 685 | 1.925 | 300 | 492 |
+| Saúde | 8 | 474 | 1.192 | 84 | 507 |
+| Educação | 5 | 467 | 1.617 | 296 | 514 |
+| Configuração | 1 | 203 | 905 | 298 | 219 |
+| Assistência Social | 2 | 65 | 305 | 102 | 73 |
+| Cidadão | 1 | 34 | 108 | 35 | 13 |
+| Gestor / Integrações | 1+1 | 7+8 | 41+60 | — | 8+5 |
+
+Somadas isoladas dão 3.293; a união é 2.783 — a ordem pré-paga o resíduo da seguinte. Cinco
+áreas cadastradas não têm módulo ligado (Geoprocessamento, Administração, DBLeis, Comercial,
+Implantação). Contando telas distintas, Tributário tem 1.031 (o 1.056 conta por módulo).
+
+**Escolhida: Educação** — não a maior nem a mais barata, mas a única que permite comparar as
+duas estratégias (big-bang 8.4 do TCC de referência × strangler fig 8.5) **sobre o mesmo módulo**.
+
+### 📐 ÁREA EDUCAÇÃO — dimensionada e INICIADA
+
+Ao contrário do Tributário, quase não tem prefixo compartilhado:
+
+| Prefixo | Telas no menu | Em outra área? | Em disco | A alterar (prefixo inteiro) |
+|---|---|---|---|---|
+| `edu` | 340 | não | **1.211** (= as 1.211 da monografia) | 740 |
+| `mer` | 43 | não | 187 | 182 |
+| `bib` | 39 | não | 98 | 85 |
+| `sec` / `rel` / `esc` | 8 / 1 / 3 | não | 12 / 1 / 3 | 15 / 9 / 4 |
+| `tre` | 14 | não | 19 | 3 |
+| `mat` | 19 | **sim** — as 19 também são do Patrimonial | 280 | via `map` |
+| `pro` | 1 | sim — prefixo da Fase B | 341 | via `map` |
+
+**Escopo adotado: A** — os 7 prefixos exclusivos portados **inteiros** e roteados por
+`location` (969 arquivos contra 514 do escopo "só menu"), porque é a regra da Fase A e porque é
+o único escopo comparável ao do TCC de referência, que migrou os 1.211 `edu`. `mat` e `pro` vão
+por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` não casam
+`^rel[0-9]*_`. Ordem: `tre` → `esc`/`rel`/`sec` → `bib` → `mer` (+`mat`/`pro`) → `edu`.
+
+| Lote | Universo | Alterados | `php -l` 5.6/8.5 | Classes | Escrita | **Bateria** |
+|---|---|---|---|---|---|---|
+| `tre` | 60 | 3 | 60/60 | 13/13 | 655 linhas, 0 div. | **19/19** (depois do ini) |
+| `esc`+`rel`+`sec` | 84 | 19 | 84/84 | 35/35 | 1.368 linhas, 0 div. | **16/16** |
+
+Correções: 104 guardas `== <literal>`, 34 `split` → `preg_split` (todos `#`), 17 construtores,
+4 `parse_str`+`extract`. O Rector aplicou só regras já vetadas — **denylist inalterada (29)**.
+Entre os alvos estão `db_turma_classe.php` e `db_matricula_classe.php`, duas das quatro classes
+em que a branch do TCC de referência deixou as guardas `0 == ""` de fora.
+
+### ⚠ CATEGORIA NOVA: AMBIENTE — o php.ini do 8.5 não reproduzia o do 5.6
+
+Achada em `tre2_linha001.php`: HTTP 200 nos dois, **1 byte** no 8.5, nenhum fatal em log
+nenhum. O arquivo começa com um **espaço antes do `<?php`**:
+
+```
+5.6  output_buffering = 4096  (php.ini do Ubuntu)  -> o espaco fica no buffer, a sessao abre
+8.5  output_buffering = 0     (imagem sem php.ini) -> o espaco sai, os cabecalhos ja foram,
+                                                      a sessao nao abre e a tela encerra
+```
+
+Corrigir no código mudaria a saída do `:8080` (é conserto, não migração). A correção fiel é de
+**ambiente**: `docker/php85-apache/paridade-56.ini`, montado em `conf.d` por
+`docker-compose.php85.yml`. **Não por rebuild**: o rebuild falhou sem rede para o
+`deb.debian.org` e, pior, a camada do `apt` não estava em cache — reconstruir reinstalaria todos
+os pacotes em versão nova, outra variável. Com o bind mount o binário segue **8.5.10**.
+
+Comparadas as 228 diretivas dos dois runtimes web, há mais quatro que mudam saída e **não**
+foram alinhadas, por falta de defeito observado (regra de corrigir na aparição):
+
+| Diretiva | 5.6 | 8.5 | Risco |
+|---|---|---|---|
+| `serialize_precision` | 17 | -1 | `json_encode(0.1)` → `0.10000000000000001` × `0.1`; `.RPC.php` com dinheiro |
+| `request_order` | GP | (vazio) | `$_REQUEST` passa a incluir cookies |
+| `variables_order` | GPCS | EGPCS | `$_ENV` preenchido |
+| `default_charset` | UTF-8 | ISO-8859-1 | só o cabeçalho HTTP |
+
+Escala da forma achada: **3 scripts na raiz** com saída antes do `<?php` (`tre`, um `emp`, um
+`sau`) — nenhum no Tributário, por isso nenhuma bateria anterior a viu.
+
+#### ⚠ CORREÇÃO: 8 das 14 divergências "caracterizadas" do Tributário eram ESTA causa
+
+Bateria completa depois do ini: **Fase A 1.807/1.813, Fase B 347/347 — 2.154/2.160**. Antes
+eram 14 divergências; sobraram **6** (2 fragmentos do `agu`, `fis1_sanitario004`, as 3 do
+`iss`). As 8 que sumiram — as 4 do `itb`, `cem1_itenserv002`, `jur_enviarremessatj`,
+`fis1_tiafprazoproc002/003` — **quebram nos dois** e agora devolvem a **mesma** página de erro
+(ex.: 500/4.558 B nos dois). O defeito é da referência, como estava registrado; mas a
+*divergência* era o buffer: no 5.6 o tratador de erro descartava a saída retida e emitia o 500,
+no 8.5 a saída já tinha ido e restava um 200 truncado.
+
+**Lição:** "quebra no 5.6 e funciona no 8.5" era leitura errada do sintoma — o 8.5 não
+funcionava, só não conseguia mais *dizer* que falhou. Paridade de ambiente faz parte da
+invariante "a única variável é a versão do PHP", e ela nunca tinha sido medida diretiva a
+diretiva.
+
+### FERRAMENTAL: duas armadilhas de hoje
+
+- **O harness não está no container.** `scratchpad/` fica na raiz, fora do bind mount
+  (`./ecidade`). Chamado como `/var/www/html/scratchpad/escrita.php`, o php não acha o arquivo,
+  a saída sai **vazia nos dois** e o diff vazio parece aprovação. Copiar com `docker cp` (a skill
+  foi corrigida; o manual já fazia assim).
+- **Lista sem `\n` final perde o último arquivo no `while read`.** O `enumera.py` gravava sem;
+  o lint do `tre` verificou 59 de 60. Corrigido na origem.
 
 ### Estado atual: NÚCLEO PORTADO ✅
 

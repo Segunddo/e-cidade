@@ -54,7 +54,7 @@ class cl_matriculaserie {
                  ed221_c_origem = char(1) = Etapa de Origem 
                  ";
    //funcao construtor da classe 
-   function cl_matriculaserie() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matriculaserie"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_matriculaserie {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed221_i_codigo = ($this->ed221_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed221_i_codigo"]:$this->ed221_i_codigo);
-       $this->ed221_i_matricula = ($this->ed221_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed221_i_matricula"]:$this->ed221_i_matricula);
-       $this->ed221_i_serie = ($this->ed221_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed221_i_serie"]:$this->ed221_i_serie);
+       $this->ed221_i_codigo = ($this->ed221_i_codigo === 0 || $this->ed221_i_codigo === 0.0 || $this->ed221_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed221_i_codigo"]:$this->ed221_i_codigo);
+       $this->ed221_i_matricula = ($this->ed221_i_matricula === 0 || $this->ed221_i_matricula === 0.0 || $this->ed221_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed221_i_matricula"]:$this->ed221_i_matricula);
+       $this->ed221_i_serie = ($this->ed221_i_serie === 0 || $this->ed221_i_serie === 0.0 || $this->ed221_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed221_i_serie"]:$this->ed221_i_serie);
        $this->ed221_c_origem = ($this->ed221_c_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed221_c_origem"]:$this->ed221_c_origem);
      }else{
-       $this->ed221_i_codigo = ($this->ed221_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed221_i_codigo"]:$this->ed221_i_codigo);
+       $this->ed221_i_codigo = ($this->ed221_i_codigo === 0 || $this->ed221_i_codigo === 0.0 || $this->ed221_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed221_i_codigo"]:$this->ed221_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_matriculaserie {
          $this->ed221_i_codigo = $ed221_i_codigo; 
        }
      }
-     if(($this->ed221_i_codigo == null) || ($this->ed221_i_codigo == "") ){ 
+     if(($this->ed221_i_codigo == null) || ($this->ed221_i_codigo === 0 || $this->ed221_i_codigo === 0.0 || $this->ed221_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed221_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

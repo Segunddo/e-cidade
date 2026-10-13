@@ -42,7 +42,7 @@ class cl_rechumanoausente {
                  ed348_escola = int4 = Escola
                  ";
    //funcao construtor da classe
-   function cl_rechumanoausente() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rechumanoausente");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -59,10 +59,10 @@ class cl_rechumanoausente {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed348_sequencial = ($this->ed348_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_sequencial"]:$this->ed348_sequencial);
-       $this->ed348_rechumano = ($this->ed348_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_rechumano"]:$this->ed348_rechumano);
-       $this->ed348_tipoausencia = ($this->ed348_tipoausencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_tipoausencia"]:$this->ed348_tipoausencia);
-       $this->ed348_usuario = ($this->ed348_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_usuario"]:$this->ed348_usuario);
+       $this->ed348_sequencial = ($this->ed348_sequencial === 0 || $this->ed348_sequencial === 0.0 || $this->ed348_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_sequencial"]:$this->ed348_sequencial);
+       $this->ed348_rechumano = ($this->ed348_rechumano === 0 || $this->ed348_rechumano === 0.0 || $this->ed348_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_rechumano"]:$this->ed348_rechumano);
+       $this->ed348_tipoausencia = ($this->ed348_tipoausencia === 0 || $this->ed348_tipoausencia === 0.0 || $this->ed348_tipoausencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_tipoausencia"]:$this->ed348_tipoausencia);
+       $this->ed348_usuario = ($this->ed348_usuario === 0 || $this->ed348_usuario === 0.0 || $this->ed348_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_usuario"]:$this->ed348_usuario);
        if($this->ed348_inicio == ""){
          $this->ed348_inicio_dia = ($this->ed348_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_inicio_dia"]:$this->ed348_inicio_dia);
          $this->ed348_inicio_mes = ($this->ed348_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_inicio_mes"]:$this->ed348_inicio_mes);
@@ -80,9 +80,9 @@ class cl_rechumanoausente {
          }
        }
        $this->ed348_observacao = ($this->ed348_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_observacao"]:$this->ed348_observacao);
-       $this->ed348_escola = ($this->ed348_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_escola"]:$this->ed348_escola);
+       $this->ed348_escola = ($this->ed348_escola === 0 || $this->ed348_escola === 0.0 || $this->ed348_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_escola"]:$this->ed348_escola);
      }else{
-       $this->ed348_sequencial = ($this->ed348_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_sequencial"]:$this->ed348_sequencial);
+       $this->ed348_sequencial = ($this->ed348_sequencial === 0 || $this->ed348_sequencial === 0.0 || $this->ed348_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed348_sequencial"]:$this->ed348_sequencial);
      }
    }
    // funcao para Inclusão
@@ -160,7 +160,7 @@ class cl_rechumanoausente {
          $this->ed348_sequencial = $ed348_sequencial;
        }
      }
-     if(($this->ed348_sequencial == null) || ($this->ed348_sequencial == "") ){
+     if(($this->ed348_sequencial == null) || ($this->ed348_sequencial === 0 || $this->ed348_sequencial === 0.0 || $this->ed348_sequencial == "") ){
        $this->erro_sql = " Campo ed348_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

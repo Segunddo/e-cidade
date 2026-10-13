@@ -58,7 +58,7 @@ class cl_termoresultadofinal {
                  ed110_ano = varchar(4) = Ano 
                  ";
    //funcao construtor da classe
-   function cl_termoresultadofinal() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termoresultadofinal");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_termoresultadofinal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed110_sequencial = ($this->ed110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_sequencial"]:$this->ed110_sequencial);
-       $this->ed110_ensino = ($this->ed110_ensino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_ensino"]:$this->ed110_ensino);
+       $this->ed110_sequencial = ($this->ed110_sequencial === 0 || $this->ed110_sequencial === 0.0 || $this->ed110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_sequencial"]:$this->ed110_sequencial);
+       $this->ed110_ensino = ($this->ed110_ensino === 0 || $this->ed110_ensino === 0.0 || $this->ed110_ensino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_ensino"]:$this->ed110_ensino);
        $this->ed110_descricao = ($this->ed110_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_descricao"]:$this->ed110_descricao);
        $this->ed110_abreviatura = ($this->ed110_abreviatura == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_abreviatura"]:$this->ed110_abreviatura);
        $this->ed110_referencia = ($this->ed110_referencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_referencia"]:$this->ed110_referencia);
        $this->ed110_ano = ($this->ed110_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_ano"]:$this->ed110_ano);
      }else{
-       $this->ed110_sequencial = ($this->ed110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_sequencial"]:$this->ed110_sequencial);
+       $this->ed110_sequencial = ($this->ed110_sequencial === 0 || $this->ed110_sequencial === 0.0 || $this->ed110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_sequencial"]:$this->ed110_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_termoresultadofinal {
          $this->ed110_sequencial = $ed110_sequencial;
        }
      }
-     if(($this->ed110_sequencial == null) || ($this->ed110_sequencial == "") ){
+     if(($this->ed110_sequencial == null) || ($this->ed110_sequencial === 0 || $this->ed110_sequencial === 0.0 || $this->ed110_sequencial == "") ){
        $this->erro_sql = " Campo ed110_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
