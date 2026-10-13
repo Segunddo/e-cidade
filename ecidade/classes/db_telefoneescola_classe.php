@@ -60,7 +60,7 @@ class cl_telefoneescola {
                  ed26_i_ddd = int4 = DDD
                  ";
    //funcao construtor da classe
-   function cl_telefoneescola() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("telefoneescola");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]."?ed26_i_escola=".@$GLOBALS["HTTP_POST_VARS"]["ed26_i_escola"]."&descrdepto=".@$GLOBALS["HTTP_POST_VARS"]["descrdepto"]);
@@ -77,15 +77,15 @@ class cl_telefoneescola {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed26_i_codigo = ($this->ed26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_codigo"]:$this->ed26_i_codigo);
-       $this->ed26_i_escola = ($this->ed26_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_escola"]:$this->ed26_i_escola);
-       $this->ed26_i_tipotelefone = ($this->ed26_i_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_tipotelefone"]:$this->ed26_i_tipotelefone);
-       $this->ed26_i_numero = ($this->ed26_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_numero"]:$this->ed26_i_numero);
-       $this->ed26_i_ramal = ($this->ed26_i_ramal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_ramal"]:$this->ed26_i_ramal);
+       $this->ed26_i_codigo = ($this->ed26_i_codigo === 0 || $this->ed26_i_codigo === 0.0 || $this->ed26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_codigo"]:$this->ed26_i_codigo);
+       $this->ed26_i_escola = ($this->ed26_i_escola === 0 || $this->ed26_i_escola === 0.0 || $this->ed26_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_escola"]:$this->ed26_i_escola);
+       $this->ed26_i_tipotelefone = ($this->ed26_i_tipotelefone === 0 || $this->ed26_i_tipotelefone === 0.0 || $this->ed26_i_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_tipotelefone"]:$this->ed26_i_tipotelefone);
+       $this->ed26_i_numero = ($this->ed26_i_numero === 0 || $this->ed26_i_numero === 0.0 || $this->ed26_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_numero"]:$this->ed26_i_numero);
+       $this->ed26_i_ramal = ($this->ed26_i_ramal === 0 || $this->ed26_i_ramal === 0.0 || $this->ed26_i_ramal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_ramal"]:$this->ed26_i_ramal);
        $this->ed26_t_obs = ($this->ed26_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_t_obs"]:$this->ed26_t_obs);
-       $this->ed26_i_ddd = ($this->ed26_i_ddd == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_ddd"]:$this->ed26_i_ddd);
+       $this->ed26_i_ddd = ($this->ed26_i_ddd === 0 || $this->ed26_i_ddd === 0.0 || $this->ed26_i_ddd == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_ddd"]:$this->ed26_i_ddd);
      }else{
-       $this->ed26_i_codigo = ($this->ed26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_codigo"]:$this->ed26_i_codigo);
+       $this->ed26_i_codigo = ($this->ed26_i_codigo === 0 || $this->ed26_i_codigo === 0.0 || $this->ed26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed26_i_codigo"]:$this->ed26_i_codigo);
      }
    }
    // funcao para inclusao
@@ -154,7 +154,7 @@ class cl_telefoneescola {
          $this->ed26_i_codigo = $ed26_i_codigo;
        }
      }
-     if(($this->ed26_i_codigo == null) || ($this->ed26_i_codigo == "") ){
+     if(($this->ed26_i_codigo == null) || ($this->ed26_i_codigo === 0 || $this->ed26_i_codigo === 0.0 || $this->ed26_i_codigo == "") ){
        $this->erro_sql = " Campo ed26_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

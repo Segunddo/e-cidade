@@ -67,7 +67,7 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 **Onde paramos:** **ÁREA TRIBUTÁRIO CONCLUÍDA; ÁREA EDUCAÇÃO INICIADA** (branch
 `2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
-`map`) e `edu3_` + variantes `edu0x_`/`edu_`; faltam `edu2_`, `edu4_` e `edu1_`. Ver *ÁREA EDUCAÇÃO*.
+`map`) `edu3_` + variantes `edu0x_`/`edu_` e `edu2_`; faltam **`edu4_`** e **`edu1_`**. Ver *ÁREA EDUCAÇÃO*.
 
 | | |
 |---|---|
@@ -75,8 +75,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu3\|edu0\|edu(?=_))[0-9]*_` — **2.204 telas** + 367 por `map` |
-| **Próximo passo** | **`edu2_`** (259 telas), depois `edu4_` (148) e `edu1_` (733, o maior lote do projeto) Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu2\|edu3\|edu0\|edu(?=_))[0-9]*_` — **2.463 telas** + 367 por `map` |
+| **Próximo passo** | **`edu4_`** (148 telas), depois `edu1_` (733, o maior lote do projeto) Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3061,6 +3061,7 @@ por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` n
 | `bib` | 232 | 79 | 232/232 | 75/75 | 2.632 linhas, 0 div. | **95/98** |
 | `mer` + 20 `mat`/`pro` | 507 | 198 | 506/507 | 163/164 | 3.270 linhas, 0 div. | **207/207** |
 | `edu3_` + 13 variantes | 591 | 100 + 24 da 9ª lacuna + 9 à mão | 591/591 | 402/404 | 11.451 linhas, 402 classes | **71/71** |
+| `edu2_` | 813 | 67 (38 Rector + 29 à mão) | 813/813 | 430/432 | 12.262 linhas, 414 classes | **259/259** |
 
 **`bib`** — 76 pelo Rector (242 guardas, 152 `split` todos `#`, 39 construtores, 33
 `parse_str`+`extract`, 3 parâmetros opcionais antes de obrigatórios, 1 `${$var}`), mais 3 à mão:
@@ -3123,6 +3124,43 @@ superestimar "a alterar".
 **O harness de escrita precisa de UM PROCESSO POR CLASSE.** Com a lista toda num processo só,
 cobriu 120 de 404 classes (um fatal o matou) — e o `harness_robusto.sh` não serve para ele,
 que emite várias linhas por classe. Em laço, uma classe por `php`: 402 de 404.
+
+**`edu2_`** — 28 divergências na primeira bateria, a maior leva até aqui; todas fechadas:
+
+- **60 guardas `pg_*`** (`null`) aplicadas pelo ciclo automatizado, 18 delas só no
+  `edu2_censoescolar002.php` (2.700 linhas). O ciclo passou a cobrir `pg_fetch_assoc/object/
+  array/row` (no 5.6 todos devolvem `NULL` sobre `false`) e espaço dentro dos parênteses
+  (`pg_numrows( $result )` escapava). Nenhuma linha guardada é seguida de `===`.
+- **Divisão por zero** em `EstatisticaAlunosMatriculados.model.php` (9 linhas do total geral, a
+  mesma aparição) e `edu2_horarioprofessor002.php`. As 16 linhas iguais por ensino/etapa
+  (412–444) **não** foram tocadas: só falham com ensino de zero matrículas, que não apareceu.
+- **`cal_days_in_month()` no NÚCLEO** (`std/DBDate.php`): medido em 10 entradas, o 5.6 devolve
+  `false` exatamente onde o 8.5 lança `ValueError`/`TypeError` (mês 0, 13, -1, `""`, `null`,
+  ano 0…). Correção: `try { … } catch (Throwable $e) { return false; }`. **Catch único**:
+  `catch (A | B $e)` é PHP 7.1 e não compila no 5.6; `Throwable` não existe no 5.6, mas o
+  `catch` só é avaliado quando algo é lançado, e lá nada é.
+- **`file_get_contents("")`**: `false` no 5.6, `ValueError` no 8.5. Guarda por string vazia.
+- **`continue` fora de laço** (`edu2_historico002.php:716`): mesma categoria do `break` —
+  fatal de execução no 5.6 ("Cannot break/continue 1 level"), de compilação no 8.5. Alcançável
+  → **`exit;`**. O `continue` dentro de `switch` da linha 669 equivale a `break` nas duas
+  versões (o 8.5 só avisa) e ficou intocado.
+- **Ternário aninhado** (`edu2_certconclusao002.php:733`): parênteses à esquerda, conferido nas
+  4 combinações de entrada.
+- **7ª manifestação da RFC das comparações**, a mais sutil até aqui — num laço de PDF:
+
+  ```php
+  $hora = substr($hora,0,2).":".substr($hora,2,2);   // "1:", "2:" ... para os minutos
+  if ($hora <= $horafinal) { ... $tt += 1; if ($tt == 60) $t += 40; }
+  ```
+  `"1:" <= 100` é `true` no 5.6 e **`false`** no 8.5 (string não numérica → comparação de
+  string, `':' > '0'`). O laço dá mais voltas, o cursor desce 0,22 pt por volta, e o rótulo
+  `01:00` sai **25 pt mais baixo** no PDF. HTTP 200, PDF válido, mesmo tamanho em bytes — só
+  descomprimindo o fluxo aparece. Correção `(float)$hora`, conferida em 14 casos.
+- `cmp.py` ganhou regra para `tmp/<nome>_<timestamp>.csv|txt` (dentro de JSON a barra vem
+  escapada, `tmp\/`): falso positivo em `edu2_relatorioinfradaescolaprocessamento001.php`.
+
+Núcleo tocado (`std/DBDate.php`, `libs/db_stdlibwebseller.php`) → **bateria completa**: Fase A
+1.807/1.813, `map` 367/367, Educação anterior 388/391 — todas na linha de base.
 
 #### ⚠ 9ª LACUNA: `getdao` em minúsculas — a enumeração era sensível a maiúsculas no MÉTODO
 

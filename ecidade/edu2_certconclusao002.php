@@ -730,8 +730,8 @@ for ($iContPrincipal = 0; $iContPrincipal < $iLinhasAluno; $iContPrincipal++) {
     $oPdf->SetFont('arial', '', 7);
     $oPdf->Cell(10, $iAltura, $oDadosDisciplina->ed65_i_qtdch == "" ? "0" : 
                               $oDadosDisciplina->ed65_i_qtdch, "LR", 0, "C", $lCor);
-    $oPdf->Cell(8, $iAltura, $oDadosDisciplina->ed65_c_resultadofinal == "A" ? "APR" : 
-                            ($oDadosDisciplina->ed65_c_situacao!="CONCLUÍDO")?"APR":"REP", "LR", 0, "C", $lCor);
+    $oPdf->Cell(8, $iAltura, ($oDadosDisciplina->ed65_c_resultadofinal == "A" ? "APR" : 
+                            ($oDadosDisciplina->ed65_c_situacao!="CONCLUÍDO"))?"APR":"REP", "LR", 0, "C", $lCor);
     $oPdf->Cell(10, $iAltura, $oDadosDisciplina->ed62_i_anoref, "LR", 0, "C", $lCor);
     $oPdf->Cell(10, $iAltura, $oDadosDisciplina->ed62_i_escola, "LR", 1, "C", $lCor);
     

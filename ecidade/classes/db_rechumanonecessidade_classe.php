@@ -52,7 +52,7 @@ class cl_rechumanonecessidade {
                  ed310_necessidade = int4 = Código da Necessidade 
                  ";
    //funcao construtor da classe 
-   function cl_rechumanonecessidade() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rechumanonecessidade"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rechumanonecessidade {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed310_sequencial = ($this->ed310_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed310_sequencial"]:$this->ed310_sequencial);
-       $this->ed310_rechumano = ($this->ed310_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed310_rechumano"]:$this->ed310_rechumano);
-       $this->ed310_necessidade = ($this->ed310_necessidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed310_necessidade"]:$this->ed310_necessidade);
+       $this->ed310_sequencial = ($this->ed310_sequencial === 0 || $this->ed310_sequencial === 0.0 || $this->ed310_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed310_sequencial"]:$this->ed310_sequencial);
+       $this->ed310_rechumano = ($this->ed310_rechumano === 0 || $this->ed310_rechumano === 0.0 || $this->ed310_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed310_rechumano"]:$this->ed310_rechumano);
+       $this->ed310_necessidade = ($this->ed310_necessidade === 0 || $this->ed310_necessidade === 0.0 || $this->ed310_necessidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed310_necessidade"]:$this->ed310_necessidade);
      }else{
-       $this->ed310_sequencial = ($this->ed310_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed310_sequencial"]:$this->ed310_sequencial);
+       $this->ed310_sequencial = ($this->ed310_sequencial === 0 || $this->ed310_sequencial === 0.0 || $this->ed310_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed310_sequencial"]:$this->ed310_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rechumanonecessidade {
          $this->ed310_sequencial = $ed310_sequencial; 
        }
      }
-     if(($this->ed310_sequencial == null) || ($this->ed310_sequencial == "") ){ 
+     if(($this->ed310_sequencial == null) || ($this->ed310_sequencial === 0 || $this->ed310_sequencial === 0.0 || $this->ed310_sequencial == "") ){ 
        $this->erro_sql = " Campo ed310_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_rechumanonecessidade {
    function sql_query ( $ed310_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_rechumanonecessidade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -403,7 +403,7 @@ class cl_rechumanonecessidade {
    function sql_query_file ( $ed310_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_rechumanonecessidade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_rechumanonecessidade {
      $sql = "select ";
      if ($sCampos != "*" ) {
 
-       $campos_sql = split("#", $sCampos);
+       $campos_sql = preg_split("#\\##m", $sCampos);
        $virgula    = "";
        for ($i = 0; $i < sizeof($campos_sql); $i++) {
          

@@ -26,7 +26,7 @@ class cl_cursoequivalencia {
                  ed140_cursoequivalente = int4 = Curso equivalente
                  ";
    //funcao construtor da classe
-   function cl_cursoequivalencia() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cursoequivalencia");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_cursoequivalencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed140_sequencial = ($this->ed140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed140_sequencial"]:$this->ed140_sequencial);
-       $this->ed140_cursoedu = ($this->ed140_cursoedu == ""?@$GLOBALS["HTTP_POST_VARS"]["ed140_cursoedu"]:$this->ed140_cursoedu);
-       $this->ed140_cursoequivalente = ($this->ed140_cursoequivalente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed140_cursoequivalente"]:$this->ed140_cursoequivalente);
+       $this->ed140_sequencial = ($this->ed140_sequencial === 0 || $this->ed140_sequencial === 0.0 || $this->ed140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed140_sequencial"]:$this->ed140_sequencial);
+       $this->ed140_cursoedu = ($this->ed140_cursoedu === 0 || $this->ed140_cursoedu === 0.0 || $this->ed140_cursoedu == ""?@$GLOBALS["HTTP_POST_VARS"]["ed140_cursoedu"]:$this->ed140_cursoedu);
+       $this->ed140_cursoequivalente = ($this->ed140_cursoequivalente === 0 || $this->ed140_cursoequivalente === 0.0 || $this->ed140_cursoequivalente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed140_cursoequivalente"]:$this->ed140_cursoequivalente);
      }else{
-       $this->ed140_sequencial = ($this->ed140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed140_sequencial"]:$this->ed140_sequencial);
+       $this->ed140_sequencial = ($this->ed140_sequencial === 0 || $this->ed140_sequencial === 0.0 || $this->ed140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed140_sequencial"]:$this->ed140_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_cursoequivalencia {
          $this->ed140_sequencial = $ed140_sequencial;
        }
      }
-     if(($this->ed140_sequencial == null) || ($this->ed140_sequencial == "") ){
+     if(($this->ed140_sequencial == null) || ($this->ed140_sequencial === 0 || $this->ed140_sequencial === 0.0 || $this->ed140_sequencial == "") ){
        $this->erro_sql = " Campo ed140_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

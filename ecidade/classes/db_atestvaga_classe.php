@@ -69,7 +69,7 @@ class cl_atestvaga {
                  ed102_t_obs = text = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_atestvaga() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("atestvaga"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -86,14 +86,14 @@ class cl_atestvaga {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed102_i_codigo = ($this->ed102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_codigo"]:$this->ed102_i_codigo);
-       $this->ed102_i_escola = ($this->ed102_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_escola"]:$this->ed102_i_escola);
-       $this->ed102_i_aluno = ($this->ed102_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_aluno"]:$this->ed102_i_aluno);
-       $this->ed102_i_base = ($this->ed102_i_base == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_base"]:$this->ed102_i_base);
-       $this->ed102_i_calendario = ($this->ed102_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_calendario"]:$this->ed102_i_calendario);
-       $this->ed102_i_serie = ($this->ed102_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_serie"]:$this->ed102_i_serie);
-       $this->ed102_i_turno = ($this->ed102_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_turno"]:$this->ed102_i_turno);
-       $this->ed102_i_usuario = ($this->ed102_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_usuario"]:$this->ed102_i_usuario);
+       $this->ed102_i_codigo = ($this->ed102_i_codigo === 0 || $this->ed102_i_codigo === 0.0 || $this->ed102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_codigo"]:$this->ed102_i_codigo);
+       $this->ed102_i_escola = ($this->ed102_i_escola === 0 || $this->ed102_i_escola === 0.0 || $this->ed102_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_escola"]:$this->ed102_i_escola);
+       $this->ed102_i_aluno = ($this->ed102_i_aluno === 0 || $this->ed102_i_aluno === 0.0 || $this->ed102_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_aluno"]:$this->ed102_i_aluno);
+       $this->ed102_i_base = ($this->ed102_i_base === 0 || $this->ed102_i_base === 0.0 || $this->ed102_i_base == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_base"]:$this->ed102_i_base);
+       $this->ed102_i_calendario = ($this->ed102_i_calendario === 0 || $this->ed102_i_calendario === 0.0 || $this->ed102_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_calendario"]:$this->ed102_i_calendario);
+       $this->ed102_i_serie = ($this->ed102_i_serie === 0 || $this->ed102_i_serie === 0.0 || $this->ed102_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_serie"]:$this->ed102_i_serie);
+       $this->ed102_i_turno = ($this->ed102_i_turno === 0 || $this->ed102_i_turno === 0.0 || $this->ed102_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_turno"]:$this->ed102_i_turno);
+       $this->ed102_i_usuario = ($this->ed102_i_usuario === 0 || $this->ed102_i_usuario === 0.0 || $this->ed102_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_usuario"]:$this->ed102_i_usuario);
        if($this->ed102_d_data == ""){
          $this->ed102_d_data_dia = ($this->ed102_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_d_data_dia"]:$this->ed102_d_data_dia);
          $this->ed102_d_data_mes = ($this->ed102_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_d_data_mes"]:$this->ed102_d_data_mes);
@@ -104,7 +104,7 @@ class cl_atestvaga {
        }
        $this->ed102_t_obs = ($this->ed102_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_t_obs"]:$this->ed102_t_obs);
      }else{
-       $this->ed102_i_codigo = ($this->ed102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_codigo"]:$this->ed102_i_codigo);
+       $this->ed102_i_codigo = ($this->ed102_i_codigo === 0 || $this->ed102_i_codigo === 0.0 || $this->ed102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_codigo"]:$this->ed102_i_codigo);
      }
    }
    // funcao para inclusao
@@ -206,7 +206,7 @@ class cl_atestvaga {
          $this->ed102_i_codigo = $ed102_i_codigo; 
        }
      }
-     if(($this->ed102_i_codigo == null) || ($this->ed102_i_codigo == "") ){ 
+     if(($this->ed102_i_codigo == null) || ($this->ed102_i_codigo === 0 || $this->ed102_i_codigo === 0.0 || $this->ed102_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed102_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -582,7 +582,7 @@ class cl_atestvaga {
    function sql_query ( $ed102_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -616,7 +616,7 @@ class cl_atestvaga {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -628,7 +628,7 @@ class cl_atestvaga {
    function sql_query_file ( $ed102_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -649,7 +649,7 @@ class cl_atestvaga {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

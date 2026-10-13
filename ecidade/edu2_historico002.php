@@ -716,7 +716,7 @@ if (!$ultimaPagina) {
     // for ($iContProg = $iLinhasProg - 1; $iContProg >= 0; $iContProg--) {
       $oDadosProg = db_utils::fieldsmemory($rsProg, $iLinhasProg - 1);
       if ( !$lExibirReclassificacao && $oDadosProg->ed101_c_tipo == "R" ) {
-        continue;
+        exit; // era `continue` fora de laco: o 5.6 morria aqui ("Cannot break/continue 1 level")
       }
       $sObsProg .= $sSepProg."- ".($oDadosProg->ed101_c_tipo == "A" ? "AVANÇADO" : "RECLASSIFICADO")."(A) DA ETAPA ";
       $sObsProg .= (trim($oDadosProg->ed11_c_origem))." PARA ETAPA ".(trim($oDadosProg->ed11_c_destino))." EM ";

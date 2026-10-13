@@ -101,7 +101,7 @@ if ($codigo_turma != 0) $sql_turma .= " AND ed57_i_codigo =" . $codigo_turma;
 $sql_turma .= " ORDER BY 1";
 
 $rs_turma = db_query($sql_turma);
-$linhas_turma = pg_num_rows($rs_turma);
+$linhas_turma = ($rs_turma ? pg_num_rows($rs_turma) : null);
 
 // WALLACE (2019-01-31) ITERA O RESULTADO DAS TURMAS OBTIDAS PELA QUERY E TRANSFORMA OS CAMPOS DA CONSULTA EM VARÍAVEL PARA SEREM USADAS PELO FPDF
 

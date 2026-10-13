@@ -66,9 +66,9 @@ $codigo_escola = db_getsession("DB_coddepto");
                       where ed75_i_rechumano = ed58_i_rechumano
                       and ed75_i_escola = $codigo_escola) and ed58_ativo is true  ";
  $result = $clregenciahorario->sql_record($clregenciahorario->sql_query("","DISTINCT ed20_i_codigo,case when ed20_i_tiposervidor = 1 then cgmrh.z01_nome else cgmcgm.z01_nome end as z01_nome,case when ed20_i_tiposervidor = 1 then rechumanopessoal.ed284_i_rhpessoal else rechumanocgm.ed285_i_cgm end as identificacao","z01_nome"," $restricao"));
- $num = pg_num_rows($result);
+ $num = ($result ? pg_num_rows($result) : null);
  $conta = "";
- while ($row=pg_fetch_array($result)){
+ while ($row=($result ? pg_fetch_array($result) : null)){
   $conta = $conta+1;
   $cod_rec = $row["ed20_i_codigo"];
   echo "new Array(\n";

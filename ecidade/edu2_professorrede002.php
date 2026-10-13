@@ -161,7 +161,7 @@ $sSql .= "order by  ed18_i_codigo, ed10_i_codigo, ed12_i_codigo";
 
 
 $rsProfessorRede = db_query($sSql);
-$iLinhas = pg_num_rows($rsProfessorRede);
+$iLinhas = ($rsProfessorRede ? pg_num_rows($rsProfessorRede) : null);
 
 if ($iLinhas == 0) {
     db_redireciona("db_erros.php?fechar=false&db_erro=Nenhum registro encontrado para os filtros selecionados.");

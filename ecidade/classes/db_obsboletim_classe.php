@@ -52,7 +52,7 @@ class cl_obsboletim {
                  ed252_t_mensagem = text = Mensagem 
                  ";
    //funcao construtor da classe 
-   function cl_obsboletim() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obsboletim"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_obsboletim {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed252_i_codigo = ($this->ed252_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed252_i_codigo"]:$this->ed252_i_codigo);
-       $this->ed252_i_escola = ($this->ed252_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed252_i_escola"]:$this->ed252_i_escola);
+       $this->ed252_i_codigo = ($this->ed252_i_codigo === 0 || $this->ed252_i_codigo === 0.0 || $this->ed252_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed252_i_codigo"]:$this->ed252_i_codigo);
+       $this->ed252_i_escola = ($this->ed252_i_escola === 0 || $this->ed252_i_escola === 0.0 || $this->ed252_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed252_i_escola"]:$this->ed252_i_escola);
        $this->ed252_t_mensagem = ($this->ed252_t_mensagem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed252_t_mensagem"]:$this->ed252_t_mensagem);
      }else{
-       $this->ed252_i_codigo = ($this->ed252_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed252_i_codigo"]:$this->ed252_i_codigo);
+       $this->ed252_i_codigo = ($this->ed252_i_codigo === 0 || $this->ed252_i_codigo === 0.0 || $this->ed252_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed252_i_codigo"]:$this->ed252_i_codigo);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_obsboletim {
          $this->ed252_i_codigo = $ed252_i_codigo; 
        }
      }
-     if(($this->ed252_i_codigo == null) || ($this->ed252_i_codigo == "") ){ 
+     if(($this->ed252_i_codigo == null) || ($this->ed252_i_codigo === 0 || $this->ed252_i_codigo === 0.0 || $this->ed252_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed252_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
