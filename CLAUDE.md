@@ -66,7 +66,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
 **Onde paramos:** **ÁREAS TRIBUTÁRIO E EDUCAÇÃO CONCLUÍDAS** (branch `2educacao-migrado`).
-Educação: 5/5 módulos, **555/555 telas de menu** no PHP 8.5. Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*. Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
+Educação: 5/5 módulos, **555/555 telas de menu** no PHP 8.5. Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
+**Comparação com o TCC de referência FEITA** — ver *⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA*. Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
 `map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e os 4 sublotes do `edu1_` — todo o prefixo `edu` (1.211 arquivos). Ver *ÁREA EDUCAÇÃO*.
 
 | | |
@@ -76,7 +77,7 @@ Educação: 5/5 módulos, **555/555 telas de menu** no PHP 8.5. Ver *🏁 ÁREA 
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu)[0-9]*_)` — **3.344 arquivos** + 367 por `map` |
-| **Próximo passo** | **decisão do usuário**: próxima área (ver *DIMENSIONAMENTO DAS PRÓXIMAS ÁREAS*), comparação com o TCC de referência, ou o relatório Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| **Próximo passo** | **decisão do usuário**: próxima área (ver *DIMENSIONAMENTO DAS PRÓXIMAS ÁREAS*) ou o relatório Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3288,11 +3289,126 @@ caminho (9ª lacuna: +30 arquivos) e das correções à mão, que a estimativa e
 (`reset/sizeof/key` sobre nulo), `dbforms/db_funcoes.php` (os dois ramos do `db_select`) e
 `libs/db_stdlibwebseller.php` — todas com bateria completa na linha de base.
 
-**O que a comparação com o TCC de referência agora permite**, sobre o mesmo módulo e os mesmos
-1.211 arquivos `edu`: medir quantas guardas `0 == ""` faltam na branch dele (já confirmado em 4
-classes), rodar a nossa bateria contra a saída dele, e comparar custo e defeitos encontrados
-pelos dois critérios de validação. Não foi feito ainda — é o próximo passo natural, se o usuário
-quiser.
+### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
+
+Feita sobre **o mesmo universo** (os ~2.795 arquivos que as sete frentes alcançam a partir das
+telas da área Educação) e **o mesmo critério**: comparação byte-a-byte contra o 5.6 vivo.
+
+#### Como foi montada
+
+- `git fetch` da branch dele para `refs/remotes/gerson/tcc-gerson-banca` (só leitura, sem mexer
+  nos remotos). Estrutura **anterior** à reorganização (arquivos na raiz, não em `ecidade/`).
+- *worktree* dele em `ecidade/tmp/tcc_gerson/` (gitignored, 1,1 GB) + as configurações locais
+  não versionadas (`.env`, `config/*.php`, `libs/db_conn.php`, `extension/data/`…).
+- **Terceiro container**, `ecidade_tcc_gerson` na porta **8086**: mesma imagem do nosso 8.5,
+  mesmos volumes de sessão e `/tmp`, mesmo `paridade-56.ini`, mesmo `vendor/` (ele não alterou
+  `composer.json`/`.lock`). **Só o código difere** do nosso 8085.
+- `cmp.py` ganhou `PORTA_B` (8085 = nosso, 8086 = dele) e `NORM_MENU` (abaixo).
+- **Limitação declarada:** ele mirou PHP **8.4**; rodou aqui no **8.5.10**. Os fatais encontrados
+  são todos de categorias que quebram desde o 8.0 (valem para o 8.4); nenhum veio de algo
+  exclusivo do 8.5.
+
+#### 1. Estático — por *token* (`scratchpad/conta_tokens.php`), só código, nunca comentário
+
+| Universo de Educação (~2.795 arq.) | Antes | Gerson | **Nosso** |
+|---|---|---|---|
+| **guarda `0 == ""` faltando** | 3.685 em 730 arq. | **3.685 em 730 arq.** | **0** |
+| construtor PHP 4 | 646 | 0 | 0 |
+| `parse_str` de 1 argumento | 545 | 0 | 0 (1 em arquivo que não compila nem no 5.6) |
+| `split()` | 2.759 | 776 | 0 |
+| `ereg*()` / `each()` | 13 / 3 | 0 / 0 | 0 / 0 |
+
+**Duas correções que esta medição impôs a afirmações anteriores:**
+
+1. **`split()` tem polyfill.** `vendor/dbseller/legacy/bootstrap/PHP_56.php` define `split()` no
+   PHP ≥ 7 — e a implementação é **`explode()`**. Os 776 que ele deixou usam todos separador
+   literal (`"#"` 775, `"_"` 1), nenhum com `limit`: **equivalentes**, não defeito. O mesmo vale
+   contra nós: as milhares de conversões `split` → `preg_split` **não eram necessárias para
+   rodar** — só nos separadores com regex (o caso do `jur`, onde o polyfill `explode` daria dado
+   errado) e para não depender de um `vendor/` não versionado. O polyfill também ignora o 3º
+   argumento do `split` original.
+2. O contador de bytes do `enumera.py` acusou 2 guardas faltando do nosso lado
+   (`db_db_config_classe.php:755-756`, `$x == "null" || (guarda…)`): **falso positivo** — o
+   único valor em que `0 == "null"` muda (o inteiro `0`) é coberto pela guarda à direita do `||`.
+   E 4 `split` "restantes" estavam dentro de `/* */` (o Rector, com razão, não os tocou).
+
+#### 2. Caminho de escrita (nível 1) — o efeito das 3.685 guardas, medido
+
+`escrita.php` sobre as 756 classes de Educação, uma classe por processo, contra o 5.6:
+
+| | Campos com valor diferente do 5.6 | Classes |
+|---|---|---|
+| **Gerson** | **3.606** | **730** |
+| **Nosso** | **0** (1 linha: artefato conhecido de `RequisicaoMaterial`) | 0 |
+
+```
+5.6:     ed80_i_codigo='1012'  ed80_i_diarioavaliacao='1013'  ed80_i_justificativa='1014'
+Gerson:  ed80_i_codigo=0       ed80_i_diarioavaliacao=0       ed80_i_justificativa=0
+```
+
+É o `0 == ""` em escala: o valor digitado no formulário **não é lido**; o campo fica `0` e a
+validação recusa ("campo não informado") ou o `0` é gravado. **Nenhuma tela "carrega com erro"
+por isso** — passa no critério dele ("carregou sem erro fatal") e falha no nosso.
+
+#### 3. Dinâmico — as 1.551 telas da área, 5.6 × código dele
+
+Bruto: **424 idênticas** (nosso: 1.534). Classificadas as 1.087 divergências:
+
+| Categoria | Telas | É defeito da migração dele? |
+|---|---|---|
+| idêntica depois de recortar o `db_menu()` | 482 | **sim, um único** — ver abaixo |
+| só espaço em branco (a quebra de linha final do documento) | 294 | não (efeito da conversão de *short tags* no `?>` final) |
+| quebram nos dois, só muda a mensagem de erro | 85 | não (pré-existente; ele exibe a exceção, a referência diz "Erro interno") |
+| **500 só no código dele** | **175** | **sim** |
+| **página truncada / conteúdo faltando** | **26** | **sim** |
+| outra diferença de conteúdo | 22 | provável — não verificadas uma a uma |
+| **acentuação corrompida** (`vínculo` → `vÃ­nculo`) | **2** | **sim** (arquivo LATIN-1 salvo como UTF-8 — o problema do PHP8-21 dele) |
+| timeout (os 8 laços eternos do `edu4`, iguais aos nossos, + 1) | 9 | não |
+
+**As causas dos 175 fatais são as categorias do nosso catálogo**, sem tratamento no código dele:
+
+```
+81  pg_num_fields(false)       libs/db_stdlib.php:1330 (db_fieldsmemory) -- corrigido por nos no piloto cem
+44  pg_num_rows(false)
+24  get_magic_quotes_runtime()  fpdf151/fpdf.php:1375 -- removida no PHP 8.0; corrigida por nos no nucleo
+ 4  reset(null)   3 count(null)   3 Path must not be empty   2 cal_days_in_month   ...
+```
+
+**105 dos 175 vêm de dois pontos do núcleo** — corrigidos uma vez aqui, quebram dezenas de telas
+lá. Os pontos `pg_*` só disparam quando a SQL falha (a categoria "consulta quebrada" do catálogo),
+o que explica por que 520 telas navegadas à mão não os encontraram.
+
+**O defeito sistemático, único:** no código dele a camada V3 (`Request->session()->get()`)
+devolve **`NULL`** para o login, enquanto o `db_getsession()` legado lê `dbseller` normalmente —
+no mesmo container, mesma sessão. Consequência: `ECIDADE_DESKTOP` dá `false` e o `db_menu()`
+emite o **menu clássico** (~400 linhas) no lugar do estilo/script do desktop, em **toda** tela.
+Provado que é do código (8085 e 8086 diferem só no código; `isEnabled('Desktop','dbseller')` dá
+`true` nos dois). **A linha exata não foi localizada** — ele alterou 21.967 arquivos. Para medir
+os defeitos *por tela* sem que esse um esconda os outros, `NORM_MENU=1` recorta só as partes
+**exclusivas** de cada ramo do `db_menu()` (três regex independentes; a parte comum, o tooltip,
+continua comparada). Verificado: com ela o **nosso** lado continua 40/40 na amostra.
+
+#### Síntese, sobre o mesmo universo e o mesmo critério
+
+| | TCC de referência | Este trabalho |
+|---|---|---|
+| Telas da área equivalentes ao 5.6 | 1.316 de 1.551 (84,8%) — contando as 294 só-espaço e as 85 que quebram nos dois | **1.534 de 1.551 (98,9%)** |
+| Telas com defeito de migração | **≥ 203** (175 fatais + 26 truncadas + 2 acentuação; + até 22) | **0** (17 caracterizadas, todas pré-existentes ou artefato) |
+| Defeito sistemático em toda tela | 1 (camada V3 sem login → menu clássico) | 0 |
+| Campos de formulário não lidos (POST) | **3.606 em 730 classes** | **0** |
+| Roda no 5.6 também | não (big-bang) | sim |
+
+**A leitura correta não é "o trabalho dele está errado".** Ele declarou o próprio critério —
+"carregou sem erro fatal… isso não comprova regras de negócio" — e o cumpriu nas 520 telas que
+navegou. A diferença é **de critério de verificação**, e é exatamente a que este trabalho existe
+para mostrar: com o 5.6 vivo como referência, a comparação byte-a-byte e o caminho de escrita
+encontram o que a navegação não encontra — 3.606 campos que gravariam dado errado em silêncio, e
+~200 telas que só quebram nos caminhos de dado incomum.
+
+**Pendências honestas:** as 22 "outras diferenças" não foram verificadas uma a uma; a causa do
+defeito da camada V3 não foi localizada; o runtime foi 8.5, não o 8.4 dele. O container
+`ecidade_tcc_gerson` e a worktree ficam para reprodução (remover com
+`docker rm -f ecidade_tcc_gerson && git worktree remove ecidade/tmp/tcc_gerson`).
 
 ##### ⚠ O instrumento, de novo: resposta cortada pelo `curl -m 60` virava divergência
 
