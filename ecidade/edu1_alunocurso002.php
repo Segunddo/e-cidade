@@ -33,7 +33,8 @@ require_once(modification("libs/db_sessoes.php"));
 require_once(modification("libs/db_usuariosonline.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $resultedu = eduparametros(db_getsession("DB_coddepto"));
@@ -131,7 +132,7 @@ if (!isset($incluir)) {
             $sSqlOrigem      = $oDaoRegencia->sql_query("", $sCamposOrigem, $sOrderByOrigem, $sWhereOrigem);
             $rsOrigem        = $oDaoRegencia->sql_record($sSqlOrigem);
 
-            $procorigem      = pg_result($rsOrigem, 0, 'procorigem');
+            $procorigem      = ($rsOrigem ? pg_result($rsOrigem, 0, 'procorigem') : null);
             $linhas          = $oDaoRegencia->numrows;
 
             $sCamposDestino  = " ed59_i_codigo as regdestino,ed232_i_codigo as coddestino,ed232_c_descr as descrdestino, ";
@@ -142,19 +143,19 @@ if (!isset($incluir)) {
             $sSqlDestino     = $oDaoRegencia->sql_query("", $sCamposDestino, $sOrderByDestino, $sWhereDestino);
             $rsDestino       = $oDaoRegencia->sql_record($sSqlDestino);
 
-            $procdestino     = pg_result($rsDestino, 0, 'procdestino');
+            $procdestino     = ($rsDestino ? pg_result($rsDestino, 0, 'procdestino') : null);
             $linhas1         = $oDaoRegencia->numrows;
           ?>
           <tr>
             <td colspan="2" width="48%" valign="top" bgcolor="#CCCCCC">
-              <b>TURMA DE ORIGEM: ( <?=pg_result($rsOrigem, 0, 'ed57_c_descr')?>&nbsp;&nbsp;&nbsp;
-                 <?=pg_result($rsOrigem, 0, 'ed11_c_descr')?> - Escola: <?=pg_result($rsOrigem, 0, 'ed57_i_escola')?> )
+              <b>TURMA DE ORIGEM: ( <?=($rsOrigem ? pg_result($rsOrigem, 0, 'ed57_c_descr') : null)?>&nbsp;&nbsp;&nbsp;
+                 <?=($rsOrigem ? pg_result($rsOrigem, 0, 'ed11_c_descr') : null)?> - Escola: <?=($rsOrigem ? pg_result($rsOrigem, 0, 'ed57_i_escola') : null)?> )
               </b>
             </td>
             <td></td>
             <td colspan="2" width="48%" valign="top" bgcolor="#CCCCCC">
-              <b>TURMA ATUAL: ( <?=pg_result($result1,0,'ed57_c_descrdest')?>&nbsp;&nbsp;&nbsp;
-                 <?=pg_result($rsDestino, 0, 'ed11_c_descrdest')?> - Escola: <?=pg_result($rsDestino, 0, 'ed57_i_escoladest')?> )
+              <b>TURMA ATUAL: ( <?=($result1 ? pg_result($result1,0,'ed57_c_descrdest') : null)?>&nbsp;&nbsp;&nbsp;
+                 <?=($rsDestino ? pg_result($rsDestino, 0, 'ed11_c_descrdest') : null)?> - Escola: <?=($rsDestino ? pg_result($rsDestino, 0, 'ed57_i_escoladest') : null)?> )
               </b>
             </td>
           </tr>

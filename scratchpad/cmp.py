@@ -73,6 +73,13 @@ files = sorted(f for f in os.listdir('.')
                if re.match(PREF, f, re.IGNORECASE) and f.endswith('.php'))
 if os.environ.get('ONLY'):
     files = os.environ['ONLY'].split(',')
+# Telas que contatam servico EXTERNO real: a bateria nao pode disparar conexao a
+# terceiros. iss4_siss002 tem fixo o IP do SISS (200.192.137.56); o pg_connect leva
+# ~134 s para desistir, igual nos dois runtimes -- nao e regressao, e rede.
+PULAR = {'iss4_siss002.php'}
+for f in sorted(set(files) & PULAR):
+    print(f"  PULADA {f}  (contata servico externo)", flush=True)
+files = [f for f in files if f not in PULAR]
 
 print(f"{len(files)} telas\n", flush=True)
 div = []; tout = []

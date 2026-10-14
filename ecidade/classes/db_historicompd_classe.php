@@ -70,7 +70,7 @@ class cl_historicompd {
                  ed64_c_tiporesultado = char(1) = Tipo de Resultado 
                  ";
    //funcao construtor da classe 
-   function cl_historicompd() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("historicompd"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,20 +87,20 @@ class cl_historicompd {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed64_i_codigo = ($this->ed64_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_codigo"]:$this->ed64_i_codigo);
-       $this->ed64_i_historico = ($this->ed64_i_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_historico"]:$this->ed64_i_historico);
-       $this->ed64_i_escola = ($this->ed64_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_escola"]:$this->ed64_i_escola);
-       $this->ed64_i_disciplina = ($this->ed64_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_disciplina"]:$this->ed64_i_disciplina);
-       $this->ed64_i_justificativa = ($this->ed64_i_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_justificativa"]:$this->ed64_i_justificativa);
-       $this->ed64_i_anoref = ($this->ed64_i_anoref == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_anoref"]:$this->ed64_i_anoref);
-       $this->ed64_i_periodoref = ($this->ed64_i_periodoref == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_periodoref"]:$this->ed64_i_periodoref);
+       $this->ed64_i_codigo = ($this->ed64_i_codigo === 0 || $this->ed64_i_codigo === 0.0 || $this->ed64_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_codigo"]:$this->ed64_i_codigo);
+       $this->ed64_i_historico = ($this->ed64_i_historico === 0 || $this->ed64_i_historico === 0.0 || $this->ed64_i_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_historico"]:$this->ed64_i_historico);
+       $this->ed64_i_escola = ($this->ed64_i_escola === 0 || $this->ed64_i_escola === 0.0 || $this->ed64_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_escola"]:$this->ed64_i_escola);
+       $this->ed64_i_disciplina = ($this->ed64_i_disciplina === 0 || $this->ed64_i_disciplina === 0.0 || $this->ed64_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_disciplina"]:$this->ed64_i_disciplina);
+       $this->ed64_i_justificativa = ($this->ed64_i_justificativa === 0 || $this->ed64_i_justificativa === 0.0 || $this->ed64_i_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_justificativa"]:$this->ed64_i_justificativa);
+       $this->ed64_i_anoref = ($this->ed64_i_anoref === 0 || $this->ed64_i_anoref === 0.0 || $this->ed64_i_anoref == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_anoref"]:$this->ed64_i_anoref);
+       $this->ed64_i_periodoref = ($this->ed64_i_periodoref === 0 || $this->ed64_i_periodoref === 0.0 || $this->ed64_i_periodoref == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_periodoref"]:$this->ed64_i_periodoref);
        $this->ed64_c_resultadofinal = ($this->ed64_c_resultadofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_c_resultadofinal"]:$this->ed64_c_resultadofinal);
        $this->ed64_c_situacao = ($this->ed64_c_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_c_situacao"]:$this->ed64_c_situacao);
        $this->ed64_t_resultobtido = ($this->ed64_t_resultobtido == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_t_resultobtido"]:$this->ed64_t_resultobtido);
-       $this->ed64_i_qtdch = ($this->ed64_i_qtdch == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_qtdch"]:$this->ed64_i_qtdch);
+       $this->ed64_i_qtdch = ($this->ed64_i_qtdch === 0 || $this->ed64_i_qtdch === 0.0 || $this->ed64_i_qtdch == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_qtdch"]:$this->ed64_i_qtdch);
        $this->ed64_c_tiporesultado = ($this->ed64_c_tiporesultado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_c_tiporesultado"]:$this->ed64_c_tiporesultado);
      }else{
-       $this->ed64_i_codigo = ($this->ed64_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_codigo"]:$this->ed64_i_codigo);
+       $this->ed64_i_codigo = ($this->ed64_i_codigo === 0 || $this->ed64_i_codigo === 0.0 || $this->ed64_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed64_i_codigo"]:$this->ed64_i_codigo);
      }
    }
    // funcao para inclusao
@@ -217,7 +217,7 @@ class cl_historicompd {
          $this->ed64_i_codigo = $ed64_i_codigo; 
        }
      }
-     if(($this->ed64_i_codigo == null) || ($this->ed64_i_codigo == "") ){ 
+     if(($this->ed64_i_codigo == null) || ($this->ed64_i_codigo === 0 || $this->ed64_i_codigo === 0.0 || $this->ed64_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed64_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -614,7 +614,7 @@ class cl_historicompd {
    function sql_query ( $ed64_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -647,7 +647,7 @@ class cl_historicompd {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -659,7 +659,7 @@ class cl_historicompd {
    function sql_query_file ( $ed64_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -680,7 +680,7 @@ class cl_historicompd {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

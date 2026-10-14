@@ -52,7 +52,7 @@ class cl_censodisciplina
                  ";
 
     //funcao construtor da classe
-    function cl_censodisciplina()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("censodisciplina");
@@ -74,10 +74,10 @@ class cl_censodisciplina
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed265_i_codigo = ($this->ed265_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed265_i_codigo"] : $this->ed265_i_codigo);
+            $this->ed265_i_codigo = ($this->ed265_i_codigo === 0 || $this->ed265_i_codigo === 0.0 || $this->ed265_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed265_i_codigo"] : $this->ed265_i_codigo);
             $this->ed265_c_descr = ($this->ed265_c_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed265_c_descr"] : $this->ed265_c_descr);
         } else {
-            $this->ed265_i_codigo = ($this->ed265_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed265_i_codigo"] : $this->ed265_i_codigo);
+            $this->ed265_i_codigo = ($this->ed265_i_codigo === 0 || $this->ed265_i_codigo === 0.0 || $this->ed265_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed265_i_codigo"] : $this->ed265_i_codigo);
         }
     }
 
@@ -95,7 +95,7 @@ class cl_censodisciplina
             return false;
         }
         $this->ed265_i_codigo = $ed265_i_codigo;
-        if (($this->ed265_i_codigo == null) || ($this->ed265_i_codigo == "")) {
+        if (($this->ed265_i_codigo == null) || ($this->ed265_i_codigo === 0 || $this->ed265_i_codigo === 0.0 || $this->ed265_i_codigo == "")) {
             $this->erro_sql = " Campo ed265_i_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -323,7 +323,7 @@ class cl_censodisciplina
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -344,7 +344,7 @@ class cl_censodisciplina
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -359,7 +359,7 @@ class cl_censodisciplina
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_censodisciplina
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];

@@ -62,7 +62,6 @@
 
       db_msgbox("Já existe uma estrutura de nota configurada para o ano informado.");
       db_redireciona("edu1_avaliacaoestruturanota001.php");
-      break;
     }
 
     db_inicio_transacao();

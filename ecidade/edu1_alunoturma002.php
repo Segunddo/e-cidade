@@ -36,13 +36,15 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_matricula_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $oDaoEduNumAlunoBloqueado = db_utils::getdao('edu_numalunobloqueado');
 $clmatricula              = new cl_matricula;
 $escola                   = db_getsession("DB_coddepto");
 $oConfig                  = loadConfig('edu_parametros', 'ed233_i_escola = '.$escola);
 if ($oConfig == null) {
+  if ($oConfig === null || $oConfig === false || $oConfig === "") $oConfig = new stdClass(); // o 5.6 criava sozinho
   $oConfig->ed233_i_habilitaordemalfabeticaturma = 2; // Não habilita (não exibe o botão)
 }
 if (isset($atualizar)) {

@@ -52,7 +52,7 @@ class cl_progressaoparcialalunoencerradodiario {
                  ed151_diariofinal = int8 = Código Diario Final 
                  ";
    //funcao construtor da classe 
-   function cl_progressaoparcialalunoencerradodiario() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("progressaoparcialalunoencerradodiario"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_progressaoparcialalunoencerradodiario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed151_sequencial = ($this->ed151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed151_sequencial"]:$this->ed151_sequencial);
-       $this->ed151_progressaoparcialaluno = ($this->ed151_progressaoparcialaluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed151_progressaoparcialaluno"]:$this->ed151_progressaoparcialaluno);
-       $this->ed151_diariofinal = ($this->ed151_diariofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed151_diariofinal"]:$this->ed151_diariofinal);
+       $this->ed151_sequencial = ($this->ed151_sequencial === 0 || $this->ed151_sequencial === 0.0 || $this->ed151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed151_sequencial"]:$this->ed151_sequencial);
+       $this->ed151_progressaoparcialaluno = ($this->ed151_progressaoparcialaluno === 0 || $this->ed151_progressaoparcialaluno === 0.0 || $this->ed151_progressaoparcialaluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed151_progressaoparcialaluno"]:$this->ed151_progressaoparcialaluno);
+       $this->ed151_diariofinal = ($this->ed151_diariofinal === 0 || $this->ed151_diariofinal === 0.0 || $this->ed151_diariofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed151_diariofinal"]:$this->ed151_diariofinal);
      }else{
-       $this->ed151_sequencial = ($this->ed151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed151_sequencial"]:$this->ed151_sequencial);
+       $this->ed151_sequencial = ($this->ed151_sequencial === 0 || $this->ed151_sequencial === 0.0 || $this->ed151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed151_sequencial"]:$this->ed151_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_progressaoparcialalunoencerradodiario {
          $this->ed151_sequencial = $ed151_sequencial; 
        }
      }
-     if(($this->ed151_sequencial == null) || ($this->ed151_sequencial == "") ){ 
+     if(($this->ed151_sequencial == null) || ($this->ed151_sequencial === 0 || $this->ed151_sequencial === 0.0 || $this->ed151_sequencial == "") ){ 
        $this->erro_sql = " Campo ed151_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_progressaoparcialalunoencerradodiario {
    function sql_query ( $ed151_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -411,7 +411,7 @@ class cl_progressaoparcialalunoencerradodiario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_progressaoparcialalunoencerradodiario {
    function sql_query_file ( $ed151_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_progressaoparcialalunoencerradodiario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -458,7 +458,7 @@ class cl_progressaoparcialalunoencerradodiario {
   function sql_query_diariofinal ( $ed151_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_progressaoparcialalunoencerradodiario {
           $sql .= $sql2;
           if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
               $sql .= $virgula.$campos_sql[$i];

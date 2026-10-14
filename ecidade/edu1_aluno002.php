@@ -34,7 +34,8 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("libs/db_jsplibwebseller.php"));
 use App\Domain\Configuracao\Helpers\StorageHelper;
 
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"], $__qs );
+extract($__qs);
 db_postmemory( $_POST );
 
 $oDaoAluno           = new cl_aluno();

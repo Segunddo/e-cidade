@@ -261,7 +261,7 @@ if ( @$ed14_c_descr == "RESULTADO" ) {
  ?><script>document.form1.ed44_c_obrigatorio.disabled = false;</script><?
 }
 $query  = db_query( $sql );
-$linhas = pg_num_rows( $query );
+$linhas = ($query ? pg_num_rows( $query ) : null);
 
 if ( $linhas > 0 ) {
 

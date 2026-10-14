@@ -34,7 +34,8 @@ require_once(modification("libs/db_utils.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 $ed31_c_ativo = '';
 
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"], $__qs );
+extract($__qs);
 db_postmemory( $_POST );
 
 $clbase         = new cl_base;

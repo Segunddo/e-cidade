@@ -67,7 +67,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 **Onde paramos:** **ÁREA TRIBUTÁRIO CONCLUÍDA; ÁREA EDUCAÇÃO INICIADA** (branch
 `2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
-`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_` e `edu4_`; falta só **`edu1_`**. Ver *ÁREA EDUCAÇÃO*.
+`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e o **sublote A do `edu1_`** (a–c);
+faltam os sublotes B (d–m), C (n–p) e D (q–v). Ver *ÁREA EDUCAÇÃO*.
 
 | | |
 |---|---|
@@ -75,8 +76,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu2\|edu3\|edu4\|edu0\|edu(?=_))[0-9]*_` — **2.611 telas** + 367 por `map` |
-| **Próximo passo** | **`edu1_`** (733 telas, o maior lote do projeto) — quebrar em sublotes Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu2\|edu3\|edu4\|edu0\|edu(?=_))[0-9]*_\|edu1_[a-c])` — **2.807 telas** + 367 por `map` |
+| **Próximo passo** | **`edu1_` sublote B** (`d`–`m`, 205 telas); depois C (`n`–`p`, 132) e D (`q`–`v`, 200) Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3063,6 +3064,7 @@ por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` n
 | `edu3_` + 13 variantes | 591 | 100 + 24 da 9ª lacuna + 9 à mão | 591/591 | 402/404 | 11.451 linhas, 402 classes | **71/71** |
 | `edu2_` | 813 | 67 (38 Rector + 29 à mão) | 813/813 | 430/432 | 12.262 linhas, 414 classes | **259/259** |
 | `edu4_` | 793 | 110 (101 Rector + 9 à mão) | 793/793 | 501/503 | 13.626 linhas, 483 classes | **140/148** + 8 caracterizadas |
+| `edu1_` A (a–c) | 819 | 127 Rector + 15 à mão | 819/819 | 449/451 | 12.436 linhas, 433 classes | **194/196** |
 
 **`bib`** — 76 pelo Rector (242 guardas, 152 `split` todos `#`, 39 construtores, 33
 `parse_str`+`extract`, 3 parâmetros opcionais antes de obrigatórios, 1 `${$var}`), mais 3 à mão:
@@ -3171,6 +3173,43 @@ do 5.6 preserva até o bug de "ESTADUAL" nunca aparecer, conferido em 4 entradas
 outras 4 iguais no arquivo) e **`pg_last_error()` sem conexão** — `false` no 5.6, `Error` no
 8.5 — com o mesmo `try/catch (Throwable)` do `DBDate`. Regressão: núcleo intocado; `con`+`pro`+
 `prot` roteadas 70/70.
+
+**`edu1_`: 733 telas, 454 a alterar — o maior lote do projeto, quebrado em 4 sublotes por
+letra inicial** (A a–c 196, B d–m 205, C n–p 132, D q–v 200). Cada sublote tem porte,
+verificação, roteamento e commit próprios. Enumeração por `edu1(?=_[a-c])` — a lookahead
+mantém o `[0-9]*_` que o `enumera.py` acrescenta. No nginx, a faixa entra como alternativa
+**fora** do grupo que exige `[0-9]*_`: `(?:(?:cem|…|edu(?=_))[0-9]*_|edu1_[a-c])`. A config nova
+foi testada num container descartável **antes** do recreate (o container em execução enxerga o
+inode antigo do bind mount e aprova a config velha).
+
+**Sublote A** — 26 divergências na 1ª bateria, 24 fechadas:
+
+- 17 guardas `pg_*` pelo ciclo (+3 à mão: `pg_result(null)`, que o ciclo não reconhecia — ele
+  casava só "false given").
+- **Constante indefinida** em `forms/db_frmbase.php` e `forms/db_frmalunodados.php`
+  (`@Ted31_i_regimemat`, `$GLOBALS[Sed47_c_emailresp]`). **Indefinida também no 5.6** —
+  conferido: ele imprime `title="Ted31_i_regimemat"`. Correção fiel em qualquer contexto:
+  `(defined('X') ? X : 'X')` — se algum `label()` a definir, usa o valor; senão, o nome, como o
+  5.6. Aplicada por ciclo (`const_ciclo`), uma linha por vez.
+- **Propriedade sobre `null`** (`edu1_alunoturma002.php:47`): o 5.6 cria `stdClass` sozinho
+  para `null`/`false`/`""` (medido; para `0` e array não). Guarda com exatamente essa condição.
+- **NÚCLEO `dbforms/db_classesgenericas.php`** (e a cópia do `modification/`): `reset()`,
+  `sizeof()` e `key()` sobre `$this->identifica` nulo, em 3 pontos do desenho de abas — no 5.6
+  devolvem `NULL`/0 com warning; no 8.5, `TypeError`. `is_array()` + `(array)`.
+- `edu1_calendarioescola002/003` **quebram também no 5.6** (500, página truncada no mesmo
+  ponto) — caracterizadas.
+
+Núcleo tocado → bateria completa: Fase A 1.806/1.813 (+1 pulada, abaixo), `map` 367/367,
+Educação 317/320 e 470/478 (os 8 timeouts do `edu4`) — linha de base.
+
+##### ⚠ A bateria contatava um servidor EXTERNO real: `iss4_siss002.php`
+
+Apareceu como `TIMEOUT` nos dois runtimes, numa tela antes idêntica. É um script de lote (lê
+`$argv`) com **IP de terceiro fixo no código**: `$DB_SERVIDOR_SISS = "200.192.137.56"`
+(`colocation.sissbr.com.br`). Cada execução da bateria disparava um `pg_connect` a esse
+servidor; hoje ele leva **134 s** para desistir, igual nos dois — antes a rede recusava na hora.
+Não é regressão; é rede. Mas **testes automatizados não podem contatar serviço real de
+terceiros**: o `cmp.py` ganhou a lista `PULAR`, reportada como `PULADA`.
 
 ##### ⚠ CATEGORIA NOVA (edu4): `while (!feof(false))` — LAÇO ETERNO no 5.6, 500 no 8.5
 

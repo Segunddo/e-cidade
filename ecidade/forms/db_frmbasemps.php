@@ -74,7 +74,7 @@ $sql1 = "SELECT ed34_i_disciplina as discjacad
           WHERE ed34_i_base = $ed34_i_base AND ed34_i_serie = $ed34_i_serie
        ";
 $result1 = db_query($sql1);
-$linhas1 = pg_num_rows($result1);
+$linhas1 = ($result1 ? pg_num_rows($result1) : null);
 
 if ($linhas1 > 0) {
 

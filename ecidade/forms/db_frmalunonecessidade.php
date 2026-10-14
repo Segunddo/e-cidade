@@ -152,7 +152,7 @@ if($ed214_i_aluno!=""){
            WHERE ed214_i_aluno = $ed214_i_aluno
            ORDER BY ed48_c_descr";
    $result = db_query($sql);
-   $linhas = pg_num_rows($result);
+   $linhas = ($result ? pg_num_rows($result) : null);
    if($linhas>1){
     ?>
     <b>Informe a necessidade maior:</b><br>

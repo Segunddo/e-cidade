@@ -915,8 +915,8 @@ if($db_opcao!=1 && @$ed47_i_codigo!=""){
             }
 
             <?php } ?>
-            Vemailresp = "<?=@$GLOBALS[Sed47_c_emailresp]?>";
-            Vemail = "<?=@$GLOBALS[Sed47_v_email]?>";
+            Vemailresp = "<?=@$GLOBALS[(defined('Sed47_c_emailresp') ? Sed47_c_emailresp : 'Sed47_c_emailresp')]?>";
+            Vemail = "<?=@$GLOBALS[(defined('Sed47_v_email') ? Sed47_v_email : 'Sed47_v_email')]?>";
             if(jsValidaEmail(document.form1.ed47_c_emailresp.value,Vemailresp)==false){
                 return false;
             }
