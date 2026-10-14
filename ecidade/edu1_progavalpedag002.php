@@ -35,7 +35,8 @@ include(modification("classes/db_questaoaval_classe.php"));
 include(modification("classes/db_opcaoquestao_classe.php"));
 include(modification("classes/db_progconfig_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clprogavalpedag = new cl_progavalpedag;
 $clquestaoaval = new cl_questaoaval;
@@ -54,11 +55,11 @@ if(isset($alterar)){
   $ed117_i_opcaoquestao = "ed117_i_opcaoquestao".$t;
   $ed117_i_codigo = "ed117_i_codigo".$t;
   db_inicio_transacao();
-  $clprogavalpedag->ed117_i_questaoaval = $$ed117_i_questaoaval;
-  $clprogavalpedag->ed117_i_opcaoquestao = $$ed117_i_opcaoquestao;
+  $clprogavalpedag->ed117_i_questaoaval = ${$ed117_i_questaoaval};
+  $clprogavalpedag->ed117_i_opcaoquestao = ${$ed117_i_opcaoquestao};
   $clprogavalpedag->ed117_i_usuario = db_getsession("DB_id_usuario");
-  $clprogavalpedag->ed117_i_codigo = $$ed117_i_codigo;
-  $clprogavalpedag->alterar($$ed117_i_codigo);
+  $clprogavalpedag->ed117_i_codigo = ${$ed117_i_codigo};
+  $clprogavalpedag->alterar(${$ed117_i_codigo});
   db_fim_transacao();
  }
 }elseif(isset($ed112_i_rhpessoal)){

@@ -35,7 +35,8 @@ include(modification("classes/db_questaoaval_classe.php"));
 include(modification("classes/db_opcaoquestao_classe.php"));
 include(modification("classes/db_progconfig_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clprogavaladmin = new cl_progavaladmin;
 $clquestaoaval = new cl_questaoaval;
@@ -54,11 +55,11 @@ if(isset($alterar)){
   $ed116_i_opcaoquestao = "ed116_i_opcaoquestao".$t;
   $ed116_i_codigo = "ed116_i_codigo".$t;
   db_inicio_transacao();
-  $clprogavaladmin->ed116_i_questaoaval = $$ed116_i_questaoaval;
-  $clprogavaladmin->ed116_i_opcaoquestao = $$ed116_i_opcaoquestao;
+  $clprogavaladmin->ed116_i_questaoaval = ${$ed116_i_questaoaval};
+  $clprogavaladmin->ed116_i_opcaoquestao = ${$ed116_i_opcaoquestao};
   $clprogavaladmin->ed116_i_usuario = db_getsession("DB_id_usuario");
-  $clprogavaladmin->ed116_i_codigo = $$ed116_i_codigo;
-  $clprogavaladmin->alterar($$ed116_i_codigo);
+  $clprogavaladmin->ed116_i_codigo = ${$ed116_i_codigo};
+  $clprogavaladmin->alterar(${$ed116_i_codigo});
   db_fim_transacao();
  }
 }elseif(isset($ed112_i_rhpessoal)){

@@ -59,7 +59,7 @@ class cl_progfalta {
                  ed118_c_abonada = char(1) = Falta justificada 
                  ";
    //funcao construtor da classe 
-   function cl_progfalta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("progfalta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,9 +76,9 @@ class cl_progfalta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed118_i_codigo = ($this->ed118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_i_codigo"]:$this->ed118_i_codigo);
-       $this->ed118_i_progmatricula = ($this->ed118_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_i_progmatricula"]:$this->ed118_i_progmatricula);
-       $this->ed118_i_usuario = ($this->ed118_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_i_usuario"]:$this->ed118_i_usuario);
+       $this->ed118_i_codigo = ($this->ed118_i_codigo === 0 || $this->ed118_i_codigo === 0.0 || $this->ed118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_i_codigo"]:$this->ed118_i_codigo);
+       $this->ed118_i_progmatricula = ($this->ed118_i_progmatricula === 0 || $this->ed118_i_progmatricula === 0.0 || $this->ed118_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_i_progmatricula"]:$this->ed118_i_progmatricula);
+       $this->ed118_i_usuario = ($this->ed118_i_usuario === 0 || $this->ed118_i_usuario === 0.0 || $this->ed118_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_i_usuario"]:$this->ed118_i_usuario);
        if($this->ed118_d_data == ""){
          $this->ed118_d_data_dia = ($this->ed118_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_d_data_dia"]:$this->ed118_d_data_dia);
          $this->ed118_d_data_mes = ($this->ed118_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_d_data_mes"]:$this->ed118_d_data_mes);
@@ -89,7 +89,7 @@ class cl_progfalta {
        }
        $this->ed118_c_abonada = ($this->ed118_c_abonada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_c_abonada"]:$this->ed118_c_abonada);
      }else{
-       $this->ed118_i_codigo = ($this->ed118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_i_codigo"]:$this->ed118_i_codigo);
+       $this->ed118_i_codigo = ($this->ed118_i_codigo === 0 || $this->ed118_i_codigo === 0.0 || $this->ed118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed118_i_codigo"]:$this->ed118_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_progfalta {
          $this->ed118_i_codigo = $ed118_i_codigo; 
        }
      }
-     if(($this->ed118_i_codigo == null) || ($this->ed118_i_codigo == "") ){ 
+     if(($this->ed118_i_codigo == null) || ($this->ed118_i_codigo === 0 || $this->ed118_i_codigo === 0.0 || $this->ed118_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed118_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -445,7 +445,7 @@ class cl_progfalta {
    function sql_query ( $ed118_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_progfalta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -489,7 +489,7 @@ class cl_progfalta {
    function sql_query_file ( $ed118_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -510,7 +510,7 @@ class cl_progfalta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

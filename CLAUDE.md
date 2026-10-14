@@ -67,8 +67,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 **Onde paramos:** **ÁREA TRIBUTÁRIO CONCLUÍDA; ÁREA EDUCAÇÃO INICIADA** (branch
 `2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
-`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e os **sublotes A e B do `edu1_`** (a–m);
-faltam os sublotes C (n–p) e D (q–v). Ver *ÁREA EDUCAÇÃO*.
+`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e os **sublotes A, B e C do `edu1_`** (a–p);
+falta só o sublote D (q–v). Ver *ÁREA EDUCAÇÃO*.
 
 | | |
 |---|---|
@@ -76,8 +76,8 @@ faltam os sublotes C (n–p) e D (q–v). Ver *ÁREA EDUCAÇÃO*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu2\|edu3\|edu4\|edu0\|edu(?=_))[0-9]*_\|edu1_[a-m])` — **3.012 telas** + 367 por `map` |
-| **Próximo passo** | **`edu1_` sublote C** (`n`–`p`, 132 telas); depois D (`q`–`v`, 200) Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu2\|edu3\|edu4\|edu0\|edu(?=_))[0-9]*_\|edu1_[a-p])` — **3.144 telas** + 367 por `map` |
+| **Próximo passo** | **`edu1_` sublote D** (`q`–`v`, 200 telas) — o último da área Educação Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3066,6 +3066,7 @@ por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` n
 | `edu4_` | 793 | 110 (101 Rector + 9 à mão) | 793/793 | 501/503 | 13.626 linhas, 483 classes | **140/148** + 8 caracterizadas |
 | `edu1_` A (a–c) | 819 | 127 Rector + 15 à mão | 819/819 | 449/451 | 12.436 linhas, 433 classes | **194/196** |
 | `edu1_` B (d–m) | 482 | 115 Rector + ~16 à mão | 482/482 | 158/158 | 5.081 linhas, 156 classes | **203/205** |
+| `edu1_` C (n–p) | 312 | 82 Rector + 4 à mão | 312/312 | 101/101 | 3.259 linhas, 100 classes | **130/132** |
 
 **`bib`** — 76 pelo Rector (242 guardas, 152 `split` todos `#`, 39 construtores, 33
 `parse_str`+`extract`, 3 parâmetros opcionais antes de obrigatórios, 1 `${$var}`), mais 3 à mão:
@@ -3236,6 +3237,13 @@ Educação 317/320 e 470/478 (os 8 timeouts do `edu4`) — linha de base.
 
 Núcleo tocado → bateria completa: Fase A 1.806/1.812 (+1 pulada), `map` 367/367, `edu1` A
 194/196, demais Educação na linha de base. Duas "novas" na 1ª passada eram do instrumento:
+
+**Sublote C** — o mais limpo do `edu1`: Rector só com regras vetadas, nenhum erro de lint
+prévio, 9 divergências na 1ª bateria fechadas por 6 guardas `pg_*` (as duas restantes,
+`edu1_procescola002/003`, quebram também no 5.6 — `$clprocescola` nunca instanciado, mesmo
+padrão de `escolabase`/`calendarioescola`). **Interseção com todos os universos verificados
+vazia e núcleo intocado → sem bateria de regressão**, pela regra proporcional — a segunda vez
+desde o `cai`.
 
 ##### ⚠ O instrumento, de novo: resposta cortada pelo `curl -m 60` virava divergência
 
