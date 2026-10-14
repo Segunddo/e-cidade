@@ -58,7 +58,7 @@ class cl_edutabelasdump {
                  ed130_i_sequencia = int4 = Sequência 
                  ";
    //funcao construtor da classe 
-   function cl_edutabelasdump() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("edutabelasdump"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_edutabelasdump {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed130_i_codigo = ($this->ed130_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_i_codigo"]:$this->ed130_i_codigo);
+       $this->ed130_i_codigo = ($this->ed130_i_codigo === 0 || $this->ed130_i_codigo === 0.0 || $this->ed130_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_i_codigo"]:$this->ed130_i_codigo);
        $this->ed130_c_tabela = ($this->ed130_c_tabela == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_c_tabela"]:$this->ed130_c_tabela);
        $this->ed130_c_tipo = ($this->ed130_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_c_tipo"]:$this->ed130_c_tipo);
        $this->ed130_c_dumpseq = ($this->ed130_c_dumpseq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_c_dumpseq"]:$this->ed130_c_dumpseq);
        $this->ed130_c_dumptrigger = ($this->ed130_c_dumptrigger == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_c_dumptrigger"]:$this->ed130_c_dumptrigger);
-       $this->ed130_i_sequencia = ($this->ed130_i_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_i_sequencia"]:$this->ed130_i_sequencia);
+       $this->ed130_i_sequencia = ($this->ed130_i_sequencia === 0 || $this->ed130_i_sequencia === 0.0 || $this->ed130_i_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_i_sequencia"]:$this->ed130_i_sequencia);
      }else{
-       $this->ed130_i_codigo = ($this->ed130_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_i_codigo"]:$this->ed130_i_codigo);
+       $this->ed130_i_codigo = ($this->ed130_i_codigo === 0 || $this->ed130_i_codigo === 0.0 || $this->ed130_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_i_codigo"]:$this->ed130_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_edutabelasdump {
          $this->ed130_i_codigo = $ed130_i_codigo; 
        }
      }
-     if(($this->ed130_i_codigo == null) || ($this->ed130_i_codigo == "") ){ 
+     if(($this->ed130_i_codigo == null) || ($this->ed130_i_codigo === 0 || $this->ed130_i_codigo === 0.0 || $this->ed130_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed130_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -452,7 +452,7 @@ class cl_edutabelasdump {
    function sql_query ( $ed130_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_edutabelasdump {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -485,7 +485,7 @@ class cl_edutabelasdump {
    function sql_query_file ( $ed130_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -506,7 +506,7 @@ class cl_edutabelasdump {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

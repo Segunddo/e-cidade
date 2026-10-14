@@ -538,7 +538,7 @@ function js_valida() {
     return false;
   }
 
-  Vemail = "<?=@$GLOBALS[Sed254_c_email]?>";
+  Vemail = "<?=@$GLOBALS[(defined('Sed254_c_email') ? Sed254_c_email : 'Sed254_c_email')]?>";
   if( jsValidaEmail( document.form1.ed254_c_email.value, Vemail ) == false ) {
     return false;
   }

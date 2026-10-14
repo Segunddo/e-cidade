@@ -32,7 +32,8 @@ require_once(modification("libs/db_sessoes.php"));
 require_once(modification("libs/db_usuariosonline.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 $resultedu           = eduparametros(db_getsession("DB_coddepto"));
@@ -127,7 +128,7 @@ if (!isset($incluir)) {
           $sSqlRegenciaOrigem     = $clregencia->sql_query(null, $sCamposRegenciaOrigem, "ed59_i_ordenacao", $sWhereRegenciaOrigem);
 
           $result      = $clregencia->sql_record($sSqlRegenciaOrigem);
-          $procorigem  = pg_result($result, 0, 'procorigem');
+          $procorigem  = ($result ? pg_result($result, 0, 'procorigem') : null);
           $linhas      = $clregencia->numrows;
 
           $sCamposRegenciaDestino  = " ed59_i_codigo as regdestino,ed232_i_codigo as coddestino,ed232_c_descr as descrdestino, ";
@@ -137,17 +138,17 @@ if (!isset($incluir)) {
           $sSqlRegenciaDestino     = $clregencia->sql_query("", $sCamposRegenciaDestino, "ed59_i_ordenacao", $sWhereRegenciaDestino);
 
           $result1     = $clregencia->sql_record($clregencia->sql_query("", "ed59_i_codigo as regdestino, ed232_i_codigo as coddestino,ed232_c_descr as descrdestino,ed220_i_procedimento as procdestino,ed57_c_descr as ed57_c_descrdest,ed57_i_escola as ed57_i_escoladest,fc_nomeetapaturma(ed59_i_turma) as ed11_c_descrdest,ed59_i_ordenacao", "ed59_i_ordenacao", " ed59_i_turma = $turmadestino AND ed59_i_serie in ($codequivorig)"));
-          $procdestino = pg_result($result1, 0, 'procdestino');
+          $procdestino = ($result1 ? pg_result($result1, 0, 'procdestino') : null);
           $linhas1 = $clregencia->numrows;
           ?>
 
           <tr>
             <td colspan="2" width="48%" valign="top" bgcolor="#CCCCCC">
-              <b>TURMA DE ORIGEM: ( <?= pg_result($result, 0, 'ed57_c_descr') ?>&nbsp;&nbsp;&nbsp;<?= pg_result($result, 0, 'ed11_c_descr') ?> - Escola: <?= pg_result($result, 0, 'ed57_i_escola') ?> )</b>
+              <b>TURMA DE ORIGEM: ( <?= ($result ? pg_result($result, 0, 'ed57_c_descr') : null) ?>&nbsp;&nbsp;&nbsp;<?= ($result ? pg_result($result, 0, 'ed11_c_descr') : null) ?> - Escola: <?= ($result ? pg_result($result, 0, 'ed57_i_escola') : null) ?> )</b>
             </td>
             <td></td>
             <td colspan="2" width="48%" valign="top" bgcolor="#CCCCCC">
-              <b>TURMA ATUAL: ( <?= pg_result($result1, 0, 'ed57_c_descrdest') ?>&nbsp;&nbsp;&nbsp;<?= pg_result($result1, 0, 'ed11_c_descrdest') ?> - Escola: <?= pg_result($result1, 0, 'ed57_i_escoladest') ?> )</b>
+              <b>TURMA ATUAL: ( <?= ($result1 ? pg_result($result1, 0, 'ed57_c_descrdest') : null) ?>&nbsp;&nbsp;&nbsp;<?= ($result1 ? pg_result($result1, 0, 'ed11_c_descrdest') : null) ?> - Escola: <?= ($result1 ? pg_result($result1, 0, 'ed57_i_escoladest') : null) ?> )</b>
             </td>
           </tr>
 

@@ -35,7 +35,8 @@ require_once(modification("libs/db_utils.php"));
 require_once(modification("libs/db_app.utils.php"));
 require_once(modification("std/DBDate.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $resultedu               = eduparametros(db_getsession("DB_coddepto"));
@@ -143,10 +144,10 @@ if (isset($salvartudo)) {
       if ($ed37_c_tipo == "NIVEL") {
 
         $aprov    = "ed72_c_valorconceitoX".$x;
-        $conceito = $$aprov;
+        $conceito = ${$aprov};
         $nota     = "";
         $parecer  = "";
-        $nfaltas  = $$faltas;
+        $nfaltas  = ${$faltas};
 
         if ($conceito != "") {
 
@@ -180,10 +181,10 @@ if (isset($salvartudo)) {
       } else if ($ed37_c_tipo == "NOTA") {
 
         $aprov    = "ed72_i_valornotaX".$x;
-        $nota     = @$$aprov;
+        $nota     = @${$aprov};
         $conceito = "";
         $parecer  = "";
-        $nfaltas  = @$$faltas;
+        $nfaltas  = @${$faltas};
 
         if ($nota != "") {
 
@@ -199,14 +200,14 @@ if (isset($salvartudo)) {
 
         $nota     = "";
         $conceito = "";
-        $nfaltas  = $$faltas;
+        $nfaltas  = ${$faltas};
         $minimo   = "S";
 
       }
       $nomediario = "ed72_i_diarioX".$x;
-      $coddiario  = $$nomediario;
+      $coddiario  = ${$nomediario};
       $amparo     = "ed72_c_amparoX".$x;
-      $amparo     = $$amparo;
+      $amparo     = ${$amparo};
 
       db_inicio_transacao();
       $cldiarioavaliacao->ed72_i_codigo        = $ed72_i_codigo;
@@ -783,7 +784,7 @@ $descr_periodo = pg_result($result1,0,'ed09_c_descr');
             }
           }
 
-          $campo       = trim($ed37_c_tipo)=="NOTA"?"ed73_i_valornota":trim($ed37_c_tipo)=="NIVEL"?"ed73_c_valorconceito":"ed73_t_parecer";
+          $campo       = (trim($ed37_c_tipo)=="NOTA" ? "ed73_i_valornota" : trim($ed37_c_tipo)=="NIVEL")?"ed73_c_valorconceito":"ed73_t_parecer";
           $result_ante = $cldiarioresultado->sql_record($cldiarioresultado->sql_query("","ed42_c_abrev,ed73_c_aprovmin as apvmin,$campo as tipovalor",""," ed43_i_sequencia < $ed41_i_sequencia AND ed73_i_diario = $ed72_i_diario"));
 
           if ( $cldiarioresultado->numrows > 0 && $ed41_i_procresultvinc == 0 && $ed41_i_procavalvinc == 0 ) {

@@ -55,7 +55,7 @@ $sql = "SELECT DISTINCT ed20_i_codigo as ed97_i_rechumano,
         ORDER BY z01_nome
        ";
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 
 ?>
 <form name="form1" method="post" action="">

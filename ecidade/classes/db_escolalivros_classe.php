@@ -58,7 +58,7 @@ class cl_escolalivros {
                  ed134_i_reutilizavel = int4 = Qtde. Livros Devolvidos com Reutilização
                  ";
    //funcao construtor da classe
-   function cl_escolalivros() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("escolalivros");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_escolalivros {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed134_i_codigo = ($this->ed134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_codigo"]:$this->ed134_i_codigo);
-       $this->ed134_i_escola = ($this->ed134_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_escola"]:$this->ed134_i_escola);
-       $this->ed134_i_ano = ($this->ed134_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_ano"]:$this->ed134_i_ano);
-       $this->ed134_i_serie = ($this->ed134_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_serie"]:$this->ed134_i_serie);
-       $this->ed134_i_devolucao = ($this->ed134_i_devolucao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_devolucao"]:$this->ed134_i_devolucao);
-       $this->ed134_i_reutilizavel = ($this->ed134_i_reutilizavel == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_reutilizavel"]:$this->ed134_i_reutilizavel);
+       $this->ed134_i_codigo = ($this->ed134_i_codigo === 0 || $this->ed134_i_codigo === 0.0 || $this->ed134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_codigo"]:$this->ed134_i_codigo);
+       $this->ed134_i_escola = ($this->ed134_i_escola === 0 || $this->ed134_i_escola === 0.0 || $this->ed134_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_escola"]:$this->ed134_i_escola);
+       $this->ed134_i_ano = ($this->ed134_i_ano === 0 || $this->ed134_i_ano === 0.0 || $this->ed134_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_ano"]:$this->ed134_i_ano);
+       $this->ed134_i_serie = ($this->ed134_i_serie === 0 || $this->ed134_i_serie === 0.0 || $this->ed134_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_serie"]:$this->ed134_i_serie);
+       $this->ed134_i_devolucao = ($this->ed134_i_devolucao === 0 || $this->ed134_i_devolucao === 0.0 || $this->ed134_i_devolucao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_devolucao"]:$this->ed134_i_devolucao);
+       $this->ed134_i_reutilizavel = ($this->ed134_i_reutilizavel === 0 || $this->ed134_i_reutilizavel === 0.0 || $this->ed134_i_reutilizavel == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_reutilizavel"]:$this->ed134_i_reutilizavel);
      }else{
-       $this->ed134_i_codigo = ($this->ed134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_codigo"]:$this->ed134_i_codigo);
+       $this->ed134_i_codigo = ($this->ed134_i_codigo === 0 || $this->ed134_i_codigo === 0.0 || $this->ed134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_i_codigo"]:$this->ed134_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_escolalivros {
          $this->ed134_i_codigo = $ed134_i_codigo;
        }
      }
-     if(($this->ed134_i_codigo == null) || ($this->ed134_i_codigo == "") ){
+     if(($this->ed134_i_codigo == null) || ($this->ed134_i_codigo === 0 || $this->ed134_i_codigo === 0.0 || $this->ed134_i_codigo == "") ){
        $this->erro_sql = " Campo ed134_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -425,7 +425,7 @@ class cl_escolalivros {
    function sql_query ( $ed134_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -455,7 +455,7 @@ class cl_escolalivros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_escolalivros {
    function sql_query_file ( $ed134_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -489,7 +489,7 @@ class cl_escolalivros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

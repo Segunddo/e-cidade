@@ -55,10 +55,16 @@ def fetch(port, page):
     # a memoria do harness e o mata com SIGKILL. Truncada, ela perde o marcador
     # @@ e cai como divergente, que e o desfecho correto.
     r = sh(f"curl -s -m 60 -b 'ECIDADEWINDOWMAIN={SID}' "
-           f"-w '\\n@@%{{http_code}}' http://localhost:{port}/{page} | head -c 5000000")
+           f"-w '\\n@@%{{http_code}}@%{{time_total}}' http://localhost:{port}/{page} | head -c 5000000")
     out = r.stdout
     i = out.rfind(b'\n@@')
     code = out[i+3:].decode(errors='replace') if i >= 0 else '???'
+    code, _, t = code.partition('@')
+    # Resposta que bateu no -m 60 sai TRUNCADA com codigo 200, e cada lado corta num
+    # ponto diferente: parecia divergencia. Achado no mer3_mer_nutriitem002 (~53 s nos
+    # dois runtimes; sob a carga da bateria passa de 60). Vira TIMEOUT.
+    if t and float(t) >= 59.5:
+        code = '000'
     if code == '000':
         # O curl desistiu, mas o PHP CONTINUA rodando no servidor -- e segura o
         # flock do arquivo de sessao. Como a sessao e compartilhada, toda tela

@@ -49,13 +49,13 @@ class cl_escolacensolinguaindigena
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed144_i_escola = ($this->ed144_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_escola"]:$this->ed144_i_escola);
-       $this->ed144_i_linguaindigena1 = ($this->ed144_i_linguaindigena1 == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_linguaindigena1"]:$this->ed144_i_linguaindigena1);
-       $this->ed144_i_linguaindigena2 = ($this->ed144_i_linguaindigena2 == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_linguaindigena2"]:$this->ed144_i_linguaindigena2);
-       $this->ed144_i_linguaindigena3 = ($this->ed144_i_linguaindigena3 == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_linguaindigena3"]:$this->ed144_i_linguaindigena3);
-       $this->ed144_i_codigo = ($this->ed144_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_codigo"]:$this->ed144_i_codigo);
+       $this->ed144_i_escola = ($this->ed144_i_escola === 0 || $this->ed144_i_escola === 0.0 || $this->ed144_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_escola"]:$this->ed144_i_escola);
+       $this->ed144_i_linguaindigena1 = ($this->ed144_i_linguaindigena1 === 0 || $this->ed144_i_linguaindigena1 === 0.0 || $this->ed144_i_linguaindigena1 == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_linguaindigena1"]:$this->ed144_i_linguaindigena1);
+       $this->ed144_i_linguaindigena2 = ($this->ed144_i_linguaindigena2 === 0 || $this->ed144_i_linguaindigena2 === 0.0 || $this->ed144_i_linguaindigena2 == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_linguaindigena2"]:$this->ed144_i_linguaindigena2);
+       $this->ed144_i_linguaindigena3 = ($this->ed144_i_linguaindigena3 === 0 || $this->ed144_i_linguaindigena3 === 0.0 || $this->ed144_i_linguaindigena3 == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_linguaindigena3"]:$this->ed144_i_linguaindigena3);
+       $this->ed144_i_codigo = ($this->ed144_i_codigo === 0 || $this->ed144_i_codigo === 0.0 || $this->ed144_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_codigo"]:$this->ed144_i_codigo);
      }else{
-       $this->ed144_i_codigo = ($this->ed144_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_codigo"]:$this->ed144_i_codigo);
+       $this->ed144_i_codigo = ($this->ed144_i_codigo === 0 || $this->ed144_i_codigo === 0.0 || $this->ed144_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed144_i_codigo"]:$this->ed144_i_codigo);
      }
    }
 
@@ -104,7 +104,7 @@ class cl_escolacensolinguaindigena
          $this->ed144_i_codigo = $ed144_i_codigo; 
        }
      }
-     if(($this->ed144_i_codigo == null) || ($this->ed144_i_codigo == "") ){ 
+     if(($this->ed144_i_codigo == null) || ($this->ed144_i_codigo === 0 || $this->ed144_i_codigo === 0.0 || $this->ed144_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed144_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

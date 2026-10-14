@@ -15,7 +15,7 @@ Exige a sessao restaurada em /tmp/_sess.bak (o cmp.py faz isso ao rodar).
 import subprocess, re, sys, time, os
 os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SID=os.environ["SID"]; SESS=f"/var/lib/php/sessions/sess_{SID}"
-rx=re.compile(rb'\b(pg_num_rows|pg_numrows|pg_result|pg_fetch_result|pg_fetch_assoc|pg_fetch_object|pg_fetch_array|pg_fetch_row)\(\s*(\$\w+)\s*((?:,[^()]*)?)\)')
+rx=re.compile(rb'\b(pg_num_rows|pg_numrows|pg_result|pg_fetch_result|pg_fetch_assoc|pg_fetch_object|pg_fetch_array|pg_fetch_row|pg_num_fields|pg_numfields)\(\s*(\$\w+)\s*((?:,[^()]*)?)\)')
 for tela in sys.argv[1:]:
   for rodada in range(15):
     open("ecidade/extension/log/error.log","w").close()

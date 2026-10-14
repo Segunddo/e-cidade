@@ -52,7 +52,7 @@ class cl_matriculadisciplina {
                  ed298_disciplina = int4 = Disciplina 
                  ";
    //funcao construtor da classe 
-   function cl_matriculadisciplina() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matriculadisciplina"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_matriculadisciplina {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed298_sequencial = ($this->ed298_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_sequencial"]:$this->ed298_sequencial);
-       $this->ed298_matriculadependencia = ($this->ed298_matriculadependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_matriculadependencia"]:$this->ed298_matriculadependencia);
-       $this->ed298_disciplina = ($this->ed298_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_disciplina"]:$this->ed298_disciplina);
+       $this->ed298_sequencial = ($this->ed298_sequencial === 0 || $this->ed298_sequencial === 0.0 || $this->ed298_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_sequencial"]:$this->ed298_sequencial);
+       $this->ed298_matriculadependencia = ($this->ed298_matriculadependencia === 0 || $this->ed298_matriculadependencia === 0.0 || $this->ed298_matriculadependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_matriculadependencia"]:$this->ed298_matriculadependencia);
+       $this->ed298_disciplina = ($this->ed298_disciplina === 0 || $this->ed298_disciplina === 0.0 || $this->ed298_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_disciplina"]:$this->ed298_disciplina);
      }else{
-       $this->ed298_sequencial = ($this->ed298_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_sequencial"]:$this->ed298_sequencial);
+       $this->ed298_sequencial = ($this->ed298_sequencial === 0 || $this->ed298_sequencial === 0.0 || $this->ed298_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_sequencial"]:$this->ed298_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_matriculadisciplina {
          $this->ed298_sequencial = $ed298_sequencial; 
        }
      }
-     if(($this->ed298_sequencial == null) || ($this->ed298_sequencial == "") ){ 
+     if(($this->ed298_sequencial == null) || ($this->ed298_sequencial === 0 || $this->ed298_sequencial === 0.0 || $this->ed298_sequencial == "") ){ 
        $this->erro_sql = " Campo ed298_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_matriculadisciplina {
    function sql_query ( $ed298_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_matriculadisciplina {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_matriculadisciplina {
    function sql_query_file ( $ed298_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_matriculadisciplina {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

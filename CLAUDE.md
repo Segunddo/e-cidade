@@ -67,8 +67,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 **Onde paramos:** **ÁREA TRIBUTÁRIO CONCLUÍDA; ÁREA EDUCAÇÃO INICIADA** (branch
 `2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
-`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e o **sublote A do `edu1_`** (a–c);
-faltam os sublotes B (d–m), C (n–p) e D (q–v). Ver *ÁREA EDUCAÇÃO*.
+`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e os **sublotes A e B do `edu1_`** (a–m);
+faltam os sublotes C (n–p) e D (q–v). Ver *ÁREA EDUCAÇÃO*.
 
 | | |
 |---|---|
@@ -76,8 +76,8 @@ faltam os sublotes B (d–m), C (n–p) e D (q–v). Ver *ÁREA EDUCAÇÃO*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu2\|edu3\|edu4\|edu0\|edu(?=_))[0-9]*_\|edu1_[a-c])` — **2.807 telas** + 367 por `map` |
-| **Próximo passo** | **`edu1_` sublote B** (`d`–`m`, 205 telas); depois C (`n`–`p`, 132) e D (`q`–`v`, 200) Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu2\|edu3\|edu4\|edu0\|edu(?=_))[0-9]*_\|edu1_[a-m])` — **3.012 telas** + 367 por `map` |
+| **Próximo passo** | **`edu1_` sublote C** (`n`–`p`, 132 telas); depois D (`q`–`v`, 200) Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3065,6 +3065,7 @@ por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` n
 | `edu2_` | 813 | 67 (38 Rector + 29 à mão) | 813/813 | 430/432 | 12.262 linhas, 414 classes | **259/259** |
 | `edu4_` | 793 | 110 (101 Rector + 9 à mão) | 793/793 | 501/503 | 13.626 linhas, 483 classes | **140/148** + 8 caracterizadas |
 | `edu1_` A (a–c) | 819 | 127 Rector + 15 à mão | 819/819 | 449/451 | 12.436 linhas, 433 classes | **194/196** |
+| `edu1_` B (d–m) | 482 | 115 Rector + ~16 à mão | 482/482 | 158/158 | 5.081 linhas, 156 classes | **203/205** |
 
 **`bib`** — 76 pelo Rector (242 guardas, 152 `split` todos `#`, 39 construtores, 33
 `parse_str`+`extract`, 3 parâmetros opcionais antes de obrigatórios, 1 `${$var}`), mais 3 à mão:
@@ -3201,6 +3202,68 @@ inode antigo do bind mount e aprova a config velha).
 
 Núcleo tocado → bateria completa: Fase A 1.806/1.813 (+1 pulada, abaixo), `map` 367/367,
 Educação 317/320 e 470/478 (os 8 timeouts do `edu4`) — linha de base.
+
+**Sublote B** — 18 divergências na 1ª bateria, 16 fechadas:
+
+- 11 guardas `pg_*` + `pg_num_fields` (que o ciclo passou a cobrir; `NULL` no 5.6) e 3
+  constantes indefinidas pelos dois ciclos.
+- **Regra nova do Rector, ACEITA depois de medida:** `ParenthesizeNestedTernaryRector` põe os
+  parênteses **à esquerda** — a associação do 5.6, a mesma correção feita à mão até aqui.
+  Conferida em 4 entradas (inclusive o bug pré-existente de `NOTA` cair em `valorconceito`).
+  Emite só parênteses; não entra na denylist.
+- **`break 2` com um laço só** (`edu1_matricula003.php:312`): fatal de compilação no 8.5;
+  no 5.6, fatal de execução ("Cannot break/continue 2 levels", medido). Bloco de erro
+  alcançável → **`exit;`**, como o `break` do `fis`/`con`. O `break 2` da linha 271 está dentro
+  de dois laços e é legal.
+- **8ª manifestação da RFC das comparações — NÚCLEO `db_select()`, nos DOIS ramos**
+  (`dbforms/db_funcoes.php` + cópia). A correção do `pre` cobria só a segunda metade do teste de
+  `selected`. Agora:
+  - ramo **somente leitura** (`$db_opcao = 3`): `if (key($db_matriz) == $$nome)` escolhe a
+    descrição; com valor `""` e chaves `'' / 0 / 1 / 2`, o 5.6 casa `0 == ""` e mostra
+    "NÃO CREDENCIADA", o 8.5 deixa vazio — **campo de formulário em branco, HTTP 200**
+    (`edu1_escola003`);
+  - ramo **editável**: `$GLOBALS[$nomevar] == key()` deixava de marcar `selected`
+    (`edu1_escola002`, 8 bytes).
+
+  Correção nos dois: comparar número com string convertendo a string com `(float)`, que é
+  exatamente a conversão do 5.6 (`""`, `"abc"`, `"1x"`), e `==` nos demais casos. **Medido em 12
+  combinações de tipos: o emulado no 8.5 = o nativo do 5.6 em todas** (o `==` puro errava 5).
+  Inline, sem função auxiliar — o arquivo é incluído por tudo.
+- `edu1_escolabase002/003` quebram também no 5.6 (500; `$clescolabase` nunca instanciado, a
+  página do 5.6 é cortada antes do trecho que o usa). **Ressalva:** a mensagem do 5.6 não foi
+  lida — a aplicação suprime o fatal em todos os logs dela, e uma sonda com `display_errors`
+  também não a expôs. Vale igual para `calendarioescola002/003` do sublote A.
+
+Núcleo tocado → bateria completa: Fase A 1.806/1.812 (+1 pulada), `map` 367/367, `edu1` A
+194/196, demais Educação na linha de base. Duas "novas" na 1ª passada eram do instrumento:
+
+##### ⚠ O instrumento, de novo: resposta cortada pelo `curl -m 60` virava divergência
+
+`mer3_mer_nutriitem002.php` leva **~53 s nos dois runtimes** (495 alimentos, uma consulta por
+item). Sob a carga da bateria passa de 60 s, o `curl` corta a resposta — **com código 200** — e
+cada lado corta num ponto diferente: 1,3 MB contra 1,3 MB, depois 2,65 MB contra 2,48 MB.
+Isolada, dá 2.652.582 bytes idênticos nas duas portas. O `cmp.py` passou a registrar o
+`time_total` e trata resposta que bate no limite como `TIMEOUT`. `bib2_reditoras002` (1 byte) é
+o horário dentro do PDF comprimido: idêntica em 4 repetições isoladas.
+
+##### ⚠ CORREÇÃO ao catálogo: por que é o ORIGINAL que executa, e não a cópia do `modification/`
+
+A seção *CRÍTICO: `modification()`* diz que as cópias executam; a sonda do `pre` mostrou o
+original executando, sem explicação. **O mecanismo, lido em `definitions.php` e
+`src/V3/Modification/Data/FileSync.php`:**
+
+1. se o arquivo de sincronia é **mais novo** que o original → usa a cópia;
+2. se o original é **mais novo** (toda vez que edito um arquivo do núcleo) → tenta **regenerar**
+   a cópia reaplicando as modificações XML sobre o original;
+3. a regeneração **falha** — `extension/modification/log` não é gravável pelos containers — e o
+   `catch` devolve **o original**. O `application.log` registra isso: **225 mil** linhas
+   `modification() - update file: … Não foi possível abrir o arquivo para escrita`.
+
+Consequências: neste ambiente, para todo arquivo editado depois da sincronia, **os dois
+runtimes executam o original** — a comparação continua válida, mas as correções replicadas nas
+cópias **não estão sendo exercitadas**. Num ambiente com a pasta gravável, as cópias seriam
+**regeneradas a partir do original já portado** (o desejado), desde que as modificações XML
+ainda se apliquem. Manter as cópias corrigidas continua sendo o lado seguro.
 
 ##### ⚠ A bateria contatava um servidor EXTERNO real: `iss4_siss002.php`
 

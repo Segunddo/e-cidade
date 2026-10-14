@@ -52,7 +52,7 @@ class cl_histmpdaprov {
                  ed70_i_disciplina = int8 = Disciplina 
                  ";
    //funcao construtor da classe 
-   function cl_histmpdaprov() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("histmpdaprov"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_histmpdaprov {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed70_i_codigo = ($this->ed70_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed70_i_codigo"]:$this->ed70_i_codigo);
-       $this->ed70_i_historico = ($this->ed70_i_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed70_i_historico"]:$this->ed70_i_historico);
-       $this->ed70_i_disciplina = ($this->ed70_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed70_i_disciplina"]:$this->ed70_i_disciplina);
+       $this->ed70_i_codigo = ($this->ed70_i_codigo === 0 || $this->ed70_i_codigo === 0.0 || $this->ed70_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed70_i_codigo"]:$this->ed70_i_codigo);
+       $this->ed70_i_historico = ($this->ed70_i_historico === 0 || $this->ed70_i_historico === 0.0 || $this->ed70_i_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed70_i_historico"]:$this->ed70_i_historico);
+       $this->ed70_i_disciplina = ($this->ed70_i_disciplina === 0 || $this->ed70_i_disciplina === 0.0 || $this->ed70_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed70_i_disciplina"]:$this->ed70_i_disciplina);
      }else{
-       $this->ed70_i_codigo = ($this->ed70_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed70_i_codigo"]:$this->ed70_i_codigo);
+       $this->ed70_i_codigo = ($this->ed70_i_codigo === 0 || $this->ed70_i_codigo === 0.0 || $this->ed70_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed70_i_codigo"]:$this->ed70_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_histmpdaprov {
          $this->ed70_i_codigo = $ed70_i_codigo; 
        }
      }
-     if(($this->ed70_i_codigo == null) || ($this->ed70_i_codigo == "") ){ 
+     if(($this->ed70_i_codigo == null) || ($this->ed70_i_codigo === 0 || $this->ed70_i_codigo === 0.0 || $this->ed70_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed70_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_histmpdaprov {
    function sql_query ( $ed70_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_histmpdaprov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_histmpdaprov {
    function sql_query_file ( $ed70_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_histmpdaprov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
