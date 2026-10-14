@@ -57,7 +57,7 @@ class cl_avaliacaogrupopergunta {
                  db102_ordem = int4 = Ordem 
                  ";
    //funcao construtor da classe
-   function cl_avaliacaogrupopergunta() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avaliacaogrupopergunta");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,14 +74,14 @@ class cl_avaliacaogrupopergunta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db102_sequencial = ($this->db102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_sequencial"]:$this->db102_sequencial);
-       $this->db102_avaliacao = ($this->db102_avaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_avaliacao"]:$this->db102_avaliacao);
+       $this->db102_sequencial = ($this->db102_sequencial === 0 || $this->db102_sequencial === 0.0 || $this->db102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_sequencial"]:$this->db102_sequencial);
+       $this->db102_avaliacao = ($this->db102_avaliacao === 0 || $this->db102_avaliacao === 0.0 || $this->db102_avaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_avaliacao"]:$this->db102_avaliacao);
        $this->db102_descricao = ($this->db102_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_descricao"]:$this->db102_descricao);
        $this->db102_identificador = ($this->db102_identificador == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_identificador"]:$this->db102_identificador);
        $this->db102_identificadorcampo = ($this->db102_identificadorcampo == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_identificadorcampo"]:$this->db102_identificadorcampo);
-       $this->db102_ordem = ($this->db102_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_ordem"]:$this->db102_ordem);
+       $this->db102_ordem = ($this->db102_ordem === 0 || $this->db102_ordem === 0.0 || $this->db102_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_ordem"]:$this->db102_ordem);
      }else{
-       $this->db102_sequencial = ($this->db102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_sequencial"]:$this->db102_sequencial);
+       $this->db102_sequencial = ($this->db102_sequencial === 0 || $this->db102_sequencial === 0.0 || $this->db102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db102_sequencial"]:$this->db102_sequencial);
      }
    }
    // funcao para Inclusão
@@ -132,7 +132,7 @@ class cl_avaliacaogrupopergunta {
          $this->db102_sequencial = $db102_sequencial;
        }
      }
-     if(($this->db102_sequencial == null) || ($this->db102_sequencial == "") ){
+     if(($this->db102_sequencial == null) || ($this->db102_sequencial === 0 || $this->db102_sequencial === 0.0 || $this->db102_sequencial == "") ){
        $this->erro_sql = " Campo db102_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

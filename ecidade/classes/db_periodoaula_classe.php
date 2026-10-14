@@ -54,7 +54,7 @@ class cl_periodoaula
                  ";
 
     //funcao construtor da classe
-    function cl_periodoaula()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("periodoaula");
@@ -76,11 +76,11 @@ class cl_periodoaula
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed08_i_codigo = ($this->ed08_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed08_i_codigo"] : $this->ed08_i_codigo);
+            $this->ed08_i_codigo = ($this->ed08_i_codigo === 0 || $this->ed08_i_codigo === 0.0 || $this->ed08_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed08_i_codigo"] : $this->ed08_i_codigo);
             $this->ed08_c_descr = ($this->ed08_c_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed08_c_descr"] : $this->ed08_c_descr);
-            $this->ed08_i_sequencia = ($this->ed08_i_sequencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed08_i_sequencia"] : $this->ed08_i_sequencia);
+            $this->ed08_i_sequencia = ($this->ed08_i_sequencia === 0 || $this->ed08_i_sequencia === 0.0 || $this->ed08_i_sequencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed08_i_sequencia"] : $this->ed08_i_sequencia);
         } else {
-            $this->ed08_i_codigo = ($this->ed08_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed08_i_codigo"] : $this->ed08_i_codigo);
+            $this->ed08_i_codigo = ($this->ed08_i_codigo === 0 || $this->ed08_i_codigo === 0.0 || $this->ed08_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed08_i_codigo"] : $this->ed08_i_codigo);
         }
     }
 
@@ -124,7 +124,7 @@ class cl_periodoaula
                 $this->ed08_i_codigo = $ed08_i_codigo;
             }
         }
-        if (($this->ed08_i_codigo == null) || ($this->ed08_i_codigo == "")) {
+        if (($this->ed08_i_codigo == null) || ($this->ed08_i_codigo === 0 || $this->ed08_i_codigo === 0.0 || $this->ed08_i_codigo == "")) {
             $this->erro_sql = " Campo ed08_i_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

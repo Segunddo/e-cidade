@@ -63,13 +63,13 @@ class cl_regenciahorariodiscsemreg
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed175_codigo = ($this->ed175_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_codigo"] : $this->ed175_codigo);
-            $this->ed175_regencia = ($this->ed175_regencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_regencia"] : $this->ed175_regencia);
-            $this->ed175_diasemana = ($this->ed175_diasemana == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_diasemana"] : $this->ed175_diasemana);
-            $this->ed175_periodo = ($this->ed175_periodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_periodo"] : $this->ed175_periodo);
-            $this->ed175_rechumano = ($this->ed175_rechumano == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_rechumano"] : $this->ed175_rechumano);
+            $this->ed175_codigo = ($this->ed175_codigo === 0 || $this->ed175_codigo === 0.0 || $this->ed175_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_codigo"] : $this->ed175_codigo);
+            $this->ed175_regencia = ($this->ed175_regencia === 0 || $this->ed175_regencia === 0.0 || $this->ed175_regencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_regencia"] : $this->ed175_regencia);
+            $this->ed175_diasemana = ($this->ed175_diasemana === 0 || $this->ed175_diasemana === 0.0 || $this->ed175_diasemana == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_diasemana"] : $this->ed175_diasemana);
+            $this->ed175_periodo = ($this->ed175_periodo === 0 || $this->ed175_periodo === 0.0 || $this->ed175_periodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_periodo"] : $this->ed175_periodo);
+            $this->ed175_rechumano = ($this->ed175_rechumano === 0 || $this->ed175_rechumano === 0.0 || $this->ed175_rechumano == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_rechumano"] : $this->ed175_rechumano);
             $this->ed175_ativo = ($this->ed175_ativo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_ativo"] : $this->ed175_ativo);
-            $this->ed175_tipovinculo = ($this->ed175_tipovinculo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_tipovinculo"] : $this->ed175_tipovinculo);
+            $this->ed175_tipovinculo = ($this->ed175_tipovinculo === 0 || $this->ed175_tipovinculo === 0.0 || $this->ed175_tipovinculo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_tipovinculo"] : $this->ed175_tipovinculo);
             if ($this->ed175_datainicio == "") {
                 $this->ed175_datainicio_dia = ($this->ed175_datainicio_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_datainicio_dia"] : $this->ed175_datainicio_dia);
                 $this->ed175_datainicio_mes = ($this->ed175_datainicio_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_datainicio_mes"] : $this->ed175_datainicio_mes);
@@ -87,7 +87,7 @@ class cl_regenciahorariodiscsemreg
                 }
             }
         } else {
-            $this->ed175_codigo = ($this->ed175_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_codigo"] : $this->ed175_codigo);
+            $this->ed175_codigo = ($this->ed175_codigo === 0 || $this->ed175_codigo === 0.0 || $this->ed175_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed175_codigo"] : $this->ed175_codigo);
         }
     }
 
@@ -172,7 +172,7 @@ class cl_regenciahorariodiscsemreg
                 $this->ed175_codigo = $ed175_codigo;
             }
         }
-        if (($this->ed175_codigo == null) || ($this->ed175_codigo == "")) {
+        if (($this->ed175_codigo == null) || ($this->ed175_codigo === 0 || $this->ed175_codigo === 0.0 || $this->ed175_codigo == "")) {
             $this->erro_sql = " Campo ed175_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

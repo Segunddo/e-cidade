@@ -59,6 +59,14 @@ def fetch(port, page):
     out = r.stdout
     i = out.rfind(b'\n@@')
     code = out[i+3:].decode(errors='replace') if i >= 0 else '???'
+    if code == '000':
+        # O curl desistiu, mas o PHP CONTINUA rodando no servidor -- e segura o
+        # flock do arquivo de sessao. Como a sessao e compartilhada, toda tela
+        # seguinte trava nos DOIS runtimes e "timeout nos dois" parecia identico.
+        # Achado no edu4: `while(!feof(false))` e laco eterno no 5.6.
+        c = 'ecidade_php56' if port == 8080 else 'ecidade_php85'
+        sh(f"docker exec -u root {c} sh -c 'm=$(pgrep -o apache2); for p in $(pgrep apache2); do "
+           f"[ $p = $m ] && continue; [ \"$(cut -d\\  -f3 /proc/$p/stat)\" = R ] && kill $p; done; true'")
     return code, norm(out[:i] if i >= 0 else out)
 
 files = sorted(f for f in os.listdir('.')
@@ -67,10 +75,14 @@ if os.environ.get('ONLY'):
     files = os.environ['ONLY'].split(',')
 
 print(f"{len(files)} telas\n", flush=True)
-div = []
+div = []; tout = []
 for n, f in enumerate(files, 1):
     c56, b56 = fetch(8080, f)
     c85, b85 = fetch(8085, f)
+    if '000' in (c56, c85):
+        tout.append(f)
+        print(f"  TIMEOUT {f}  56={c56}  85={c85}  (nao conta como identica)", flush=True)
+        continue
     if not (c56 == c85 and b56 == b85):
         # CONFIRMAR antes de acusar. Relatorios em PDF carregam um horario
         # DENTRO do fluxo comprimido (FlateDecode), fora do alcance da
@@ -84,7 +96,7 @@ for n, f in enumerate(files, 1):
     if n % 50 == 0:
         print(f"  ... {n}/{len(files)}", flush=True)
 
-print(f"\n=== {len(files)-len(div)}/{len(files)} identicas, {len(div)} divergentes ===")
+print(f"\n=== {len(files)-len(div)-len(tout)}/{len(files)} identicas, {len(div)} divergentes, {len(tout)} timeout ===")
 if OUT and OUT != '/dev/null':
     with open(OUT, "w") as fh:
         for d in div:

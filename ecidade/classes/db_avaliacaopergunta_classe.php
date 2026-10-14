@@ -75,7 +75,7 @@ class cl_avaliacaopergunta {
                  db103_somenteleitura = bool = Identificador do campo para somente leitura
                  ";
    //funcao construtor da classe 
-   function cl_avaliacaopergunta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avaliacaopergunta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,23 +92,23 @@ class cl_avaliacaopergunta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db103_sequencial = ($this->db103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_sequencial"]:$this->db103_sequencial);
-       $this->db103_avaliacaotiporesposta = ($this->db103_avaliacaotiporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_avaliacaotiporesposta"]:$this->db103_avaliacaotiporesposta);
-       $this->db103_avaliacaogrupopergunta = ($this->db103_avaliacaogrupopergunta == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_avaliacaogrupopergunta"]:$this->db103_avaliacaogrupopergunta);
+       $this->db103_sequencial = ($this->db103_sequencial === 0 || $this->db103_sequencial === 0.0 || $this->db103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_sequencial"]:$this->db103_sequencial);
+       $this->db103_avaliacaotiporesposta = ($this->db103_avaliacaotiporesposta === 0 || $this->db103_avaliacaotiporesposta === 0.0 || $this->db103_avaliacaotiporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_avaliacaotiporesposta"]:$this->db103_avaliacaotiporesposta);
+       $this->db103_avaliacaogrupopergunta = ($this->db103_avaliacaogrupopergunta === 0 || $this->db103_avaliacaogrupopergunta === 0.0 || $this->db103_avaliacaogrupopergunta == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_avaliacaogrupopergunta"]:$this->db103_avaliacaogrupopergunta);
        $this->db103_descricao = ($this->db103_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_descricao"]:$this->db103_descricao);
        $this->db103_identificador = ($this->db103_identificador == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_identificador"]:$this->db103_identificador);
        $this->db103_obrigatoria = ($this->db103_obrigatoria == "f"?@$GLOBALS["HTTP_POST_VARS"]["db103_obrigatoria"]:$this->db103_obrigatoria);
        $this->db103_ativo = ($this->db103_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["db103_ativo"]:$this->db103_ativo);
-       $this->db103_ordem = ($this->db103_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_ordem"]:$this->db103_ordem);
-       $this->db103_tipo = ($this->db103_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_tipo"]:$this->db103_tipo);
+       $this->db103_ordem = ($this->db103_ordem === 0 || $this->db103_ordem === 0.0 || $this->db103_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_ordem"]:$this->db103_ordem);
+       $this->db103_tipo = ($this->db103_tipo === 0 || $this->db103_tipo === 0.0 || $this->db103_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_tipo"]:$this->db103_tipo);
        $this->db103_mascara = ($this->db103_mascara == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_mascara"]:$this->db103_mascara);
-       $this->db103_dblayoutcampo = ($this->db103_dblayoutcampo == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_dblayoutcampo"]:$this->db103_dblayoutcampo);
+       $this->db103_dblayoutcampo = ($this->db103_dblayoutcampo === 0 || $this->db103_dblayoutcampo === 0.0 || $this->db103_dblayoutcampo == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_dblayoutcampo"]:$this->db103_dblayoutcampo);
        $this->db103_perguntaidentificadora = ($this->db103_perguntaidentificadora == "f"?@$GLOBALS["HTTP_POST_VARS"]["db103_perguntaidentificadora"]:$this->db103_perguntaidentificadora);
        $this->db103_camposql = ($this->db103_camposql == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_camposql"]:$this->db103_camposql);
        $this->db103_identificadorcampo = ($this->db103_identificadorcampo == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_identificadorcampo"]:$this->db103_identificadorcampo);
        $this->db103_somenteleitura = ($this->db103_somenteleitura == "f"?@$GLOBALS["HTTP_POST_VARS"]["db103_somenteleitura"]:$this->db103_somenteleitura);
      }else{
-       $this->db103_sequencial = ($this->db103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_sequencial"]:$this->db103_sequencial);
+       $this->db103_sequencial = ($this->db103_sequencial === 0 || $this->db103_sequencial === 0.0 || $this->db103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db103_sequencial"]:$this->db103_sequencial);
      }
    }
    // funcao para Inclusão
@@ -210,7 +210,7 @@ class cl_avaliacaopergunta {
          $this->db103_sequencial = $db103_sequencial; 
        }
      }
-     if(($this->db103_sequencial == null) || ($this->db103_sequencial == "") ){ 
+     if(($this->db103_sequencial == null) || ($this->db103_sequencial === 0 || $this->db103_sequencial === 0.0 || $this->db103_sequencial == "") ){ 
        $this->erro_sql = " Campo db103_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

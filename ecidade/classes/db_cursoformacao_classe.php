@@ -79,15 +79,15 @@ class cl_cursoformacao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed94_i_codigo = ($this->ed94_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_i_codigo"]:$this->ed94_i_codigo);
-       $this->ed94_i_codclasse = ($this->ed94_i_codclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_i_codclasse"]:$this->ed94_i_codclasse);
+       $this->ed94_i_codigo = ($this->ed94_i_codigo === 0 || $this->ed94_i_codigo === 0.0 || $this->ed94_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_i_codigo"]:$this->ed94_i_codigo);
+       $this->ed94_i_codclasse = ($this->ed94_i_codclasse === 0 || $this->ed94_i_codclasse === 0.0 || $this->ed94_i_codclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_i_codclasse"]:$this->ed94_i_codclasse);
        $this->ed94_c_descrclasse = ($this->ed94_c_descrclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_c_descrclasse"]:$this->ed94_c_descrclasse);
        $this->ed94_c_codigocenso = ($this->ed94_c_codigocenso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_c_codigocenso"]:$this->ed94_c_codigocenso);
        $this->ed94_c_descr = ($this->ed94_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_c_descr"]:$this->ed94_c_descr);
-       $this->ed94_i_grauacademico = ($this->ed94_i_grauacademico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_i_grauacademico"]:$this->ed94_i_grauacademico);
+       $this->ed94_i_grauacademico = ($this->ed94_i_grauacademico === 0 || $this->ed94_i_grauacademico === 0.0 || $this->ed94_i_grauacademico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_i_grauacademico"]:$this->ed94_i_grauacademico);
        $this->ed94_ativo = ($this->ed94_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed94_ativo"]:$this->ed94_ativo);
      }else{
-       $this->ed94_i_codigo = ($this->ed94_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_i_codigo"]:$this->ed94_i_codigo);
+       $this->ed94_i_codigo = ($this->ed94_i_codigo === 0 || $this->ed94_i_codigo === 0.0 || $this->ed94_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed94_i_codigo"]:$this->ed94_i_codigo);
      }
    }
 
@@ -172,7 +172,7 @@ class cl_cursoformacao
          $this->ed94_i_codigo = $ed94_i_codigo;
        }
      }
-     if(($this->ed94_i_codigo == null) || ($this->ed94_i_codigo == "") ){
+     if(($this->ed94_i_codigo == null) || ($this->ed94_i_codigo === 0 || $this->ed94_i_codigo === 0.0 || $this->ed94_i_codigo == "") ){
        $this->erro_sql = " Campo ed94_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

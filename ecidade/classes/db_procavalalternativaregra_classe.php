@@ -56,7 +56,7 @@ class cl_procavalalternativaregra {
                  ed282_i_formaavaliacao = int8 = Forma de Avaliação 
                  ";
    //funcao construtor da classe 
-   function cl_procavalalternativaregra() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procavalalternativaregra"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_procavalalternativaregra {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed282_i_codigo = ($this->ed282_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed282_i_codigo"]:$this->ed282_i_codigo);
-       $this->ed282_i_procavalalternativa = ($this->ed282_i_procavalalternativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed282_i_procavalalternativa"]:$this->ed282_i_procavalalternativa);
-       $this->ed282_i_codavaliacao = ($this->ed282_i_codavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed282_i_codavaliacao"]:$this->ed282_i_codavaliacao);
+       $this->ed282_i_codigo = ($this->ed282_i_codigo === 0 || $this->ed282_i_codigo === 0.0 || $this->ed282_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed282_i_codigo"]:$this->ed282_i_codigo);
+       $this->ed282_i_procavalalternativa = ($this->ed282_i_procavalalternativa === 0 || $this->ed282_i_procavalalternativa === 0.0 || $this->ed282_i_procavalalternativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed282_i_procavalalternativa"]:$this->ed282_i_procavalalternativa);
+       $this->ed282_i_codavaliacao = ($this->ed282_i_codavaliacao === 0 || $this->ed282_i_codavaliacao === 0.0 || $this->ed282_i_codavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed282_i_codavaliacao"]:$this->ed282_i_codavaliacao);
        $this->ed282_i_tipoaval = ($this->ed282_i_tipoaval == ""?@$GLOBALS["HTTP_POST_VARS"]["ed282_i_tipoaval"]:$this->ed282_i_tipoaval);
        $this->ed282_i_formaavaliacao = ($this->ed282_i_formaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed282_i_formaavaliacao"]:$this->ed282_i_formaavaliacao);
      }else{
-       $this->ed282_i_codigo = ($this->ed282_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed282_i_codigo"]:$this->ed282_i_codigo);
+       $this->ed282_i_codigo = ($this->ed282_i_codigo === 0 || $this->ed282_i_codigo === 0.0 || $this->ed282_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed282_i_codigo"]:$this->ed282_i_codigo);
      }
    }
    // funcao para inclusao
@@ -140,7 +140,7 @@ class cl_procavalalternativaregra {
          $this->ed282_i_codigo = $ed282_i_codigo; 
        }
      }
-     if(($this->ed282_i_codigo == null) || ($this->ed282_i_codigo == "") ){ 
+     if(($this->ed282_i_codigo == null) || ($this->ed282_i_codigo === 0 || $this->ed282_i_codigo === 0.0 || $this->ed282_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed282_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -408,7 +408,7 @@ class cl_procavalalternativaregra {
    function sql_query ( $ed282_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_procavalalternativaregra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_procavalalternativaregra {
    function sql_query_file ( $ed282_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_procavalalternativaregra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

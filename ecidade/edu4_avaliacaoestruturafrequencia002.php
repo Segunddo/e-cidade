@@ -33,7 +33,8 @@
   require_once(modification("dbforms/db_funcoes.php"));
   require_once(modification("libs/db_stdlibwebseller.php"));
 
-  parse_str($_SERVER["QUERY_STRING"]);
+  parse_str($_SERVER["QUERY_STRING"], $__qs);
+  extract($__qs);
   db_postmemory($_POST);
   $oDaoAvaliacaoEstruturaFrequencia      = new cl_avaliacaoestruturafrequencia();
   $oDaoAvaliacaoEstruturaRegraFrequencia = new cl_avaliacaoestruturaregrafrequencia();
@@ -65,7 +66,6 @@
 
       db_msgbox("Já existe uma estrutura de Frequência configurada para o ano informado.");
       db_redireciona("edu4_avaliacaoestruturafrequencia002.php{$sParametros}");
-      break;
     }
 
     db_inicio_transacao();

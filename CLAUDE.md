@@ -67,7 +67,7 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 **Onde paramos:** **ÁREA TRIBUTÁRIO CONCLUÍDA; ÁREA EDUCAÇÃO INICIADA** (branch
 `2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
-`map`) `edu3_` + variantes `edu0x_`/`edu_` e `edu2_`; faltam **`edu4_`** e **`edu1_`**. Ver *ÁREA EDUCAÇÃO*.
+`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_` e `edu4_`; falta só **`edu1_`**. Ver *ÁREA EDUCAÇÃO*.
 
 | | |
 |---|---|
@@ -75,8 +75,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu2\|edu3\|edu0\|edu(?=_))[0-9]*_` — **2.463 telas** + 367 por `map` |
-| **Próximo passo** | **`edu4_`** (148 telas), depois `edu1_` (733, o maior lote do projeto) Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu2\|edu3\|edu4\|edu0\|edu(?=_))[0-9]*_` — **2.611 telas** + 367 por `map` |
+| **Próximo passo** | **`edu1_`** (733 telas, o maior lote do projeto) — quebrar em sublotes Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -88,7 +88,7 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 docker volume create ecidade_sessions && docker volume create ecidade_tmp
 docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
 docker exec ecidade_php56 chmod 1777 /tmp      # o volume nasce root:root 755
-chmod -R 777 ecidade/storage ecidade/bootstrap/cache && chmod 777 ecidade/extension/log
+chmod -R 777 ecidade/storage ecidade/bootstrap/cache 2>/dev/null; chmod 777 ecidade/extension/log   # SEM && : o -R falha em cache do container e abortaria o resto
 chmod 666 ecidade/extension/log/*.log   # os ARQUIVOS, nao so a pasta -- senao TODA tela autenticada da 500
 chmod 777 ecidade/tmp ecidade/arquivos        # SEM isto, 11% das telas falham antes de executar
 docker compose -f docker-compose.php85.yml up -d
@@ -3062,6 +3062,7 @@ por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` n
 | `mer` + 20 `mat`/`pro` | 507 | 198 | 506/507 | 163/164 | 3.270 linhas, 0 div. | **207/207** |
 | `edu3_` + 13 variantes | 591 | 100 + 24 da 9ª lacuna + 9 à mão | 591/591 | 402/404 | 11.451 linhas, 402 classes | **71/71** |
 | `edu2_` | 813 | 67 (38 Rector + 29 à mão) | 813/813 | 430/432 | 12.262 linhas, 414 classes | **259/259** |
+| `edu4_` | 793 | 110 (101 Rector + 9 à mão) | 793/793 | 501/503 | 13.626 linhas, 483 classes | **140/148** + 8 caracterizadas |
 
 **`bib`** — 76 pelo Rector (242 guardas, 152 `split` todos `#`, 39 construtores, 33
 `parse_str`+`extract`, 3 parâmetros opcionais antes de obrigatórios, 1 `${$var}`), mais 3 à mão:
@@ -3161,6 +3162,54 @@ que emite várias linhas por classe. Em laço, uma classe por `php`: 402 de 404.
 
 Núcleo tocado (`std/DBDate.php`, `libs/db_stdlibwebseller.php`) → **bateria completa**: Fase A
 1.807/1.813, `map` 367/367, Educação anterior 388/391 — todas na linha de base.
+
+**`edu4_`** — à mão: 2 `break` inalcançáveis removidos (logo depois de `db_redireciona()`, que
+termina em `exit` — conferido no original **e** na cópia do `modification/`, com `grep -a`), 2
+ternários aninhados em linhas de concatenação (o `.` liga antes do `==`; a associação à esquerda
+do 5.6 preserva até o bug de "ESTADUAL" nunca aparecer, conferido em 4 entradas), 13 guardas
+`pg_*` pelo ciclo, 2 `file_get_contents("")`, 1 `count((array))` (só a linha que apareceu; há
+outras 4 iguais no arquivo) e **`pg_last_error()` sem conexão** — `false` no 5.6, `Error` no
+8.5 — com o mesmo `try/catch (Throwable)` do `DBDate`. Regressão: núcleo intocado; `con`+`pro`+
+`prot` roteadas 70/70.
+
+##### ⚠ CATEGORIA NOVA (edu4): `while (!feof(false))` — LAÇO ETERNO no 5.6, 500 no 8.5
+
+```php
+$ponteiro = fopen($arquivo_erro, "r");     // GET sem parametros: "" -> false
+while (!feof($ponteiro)) { ... }           // 5.6: feof(false) = false -> NUNCA termina
+                                           // 8.5: fopen("") e ValueError -> 500 imediato
+```
+
+**8 telas** (`exportarsituacaoaluno002`, `importacaoatualizacaoaluno002`, `importarcodigoinep002`,
+`importarcodigoinep_2009_002`, `importarmatriculainep002`, `atualizacadastrocenso002`,
+`atualizacadastrocenso_2009_002`, `verifexportcenso002`). Um worker do 5.6 ficou **32 minutos a
+100% de CPU** antes de eu encerrá-lo. **Não corrigidas, e é decisão:** a correção "fiel"
+reproduziria um laço infinito. Quebram nos dois — o 5.6 pendurando um worker, o 8.5 com um
+500 —, e cabem em *"uma tela que quebra igual nos dois não é problema nosso"*. Só disparam com
+o `GET` sem parâmetros; no uso real a tela anterior passa o caminho do arquivo.
+
+##### ⚠ O INSTRUMENTO, de novo: timeout nos dois contava como IDÊNTICO — e travava o resto
+
+O `cmp.py` desistia em 60 s, mas **o PHP seguia rodando** no servidor, segurando o `flock` do
+arquivo de sessão. Como a sessão é compartilhada, **toda tela seguinte travava nos dois
+runtimes** — e "000 nos dois" era contado como idêntico. Sintoma: bateria de 148 telas passando
+de 10 minutos, e duas telas inocentes (`exportarsituacaoalunonovo001`, `…aluno.RPC.php`)
+aparecendo como "travadas" por virem logo depois de um órfão.
+
+Corrigido no `cmp.py`: `000` em qualquer lado vira **`TIMEOUT`**, contado à parte, e o worker
+órfão (estado `R`) daquele container é encerrado. Refeita a bateria: 132 idênticas, 10
+divergentes, 6 timeouts — e as duas inocentes ficaram idênticas.
+
+Duas armadilhas no diagnóstico, as duas da família *verificação que falha em silêncio*:
+
+- **`ls -l /proc/<pid>/fd` dá `Permission denied`** dentro do container (restrição de
+  ptrace), e com `2>/dev/null` o resultado vazio pareceu "nenhum processo segura a sessão".
+  Duas hipóteses descartadas com base numa checagem que não enxergava nada.
+- **`grep` sem `-a`** sobre `libs/db_stdlib.php` (LATIN-1) não achou o `exit` do
+  `db_redireciona` — o arquivo foi tratado como binário.
+
+**Baterias anteriores:** nenhuma teve duração anormal, que é o sintoma deste defeito; o risco
+de "timeout contado como idêntico" existia, mas não há sinal de que tenha ocorrido.
 
 #### ⚠ 9ª LACUNA: `getdao` em minúsculas — a enumeração era sensível a maiúsculas no MÉTODO
 

@@ -54,7 +54,7 @@ class cl_escolagestorcenso {
                  ed325_email = varchar(40) = Email 
                  ";
    //funcao construtor da classe 
-   function cl_escolagestorcenso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("escolagestorcenso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_escolagestorcenso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed325_sequencial = ($this->ed325_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_sequencial"]:$this->ed325_sequencial);
-       $this->ed325_escola = ($this->ed325_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_escola"]:$this->ed325_escola);
-       $this->ed325_rechumano = ($this->ed325_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_rechumano"]:$this->ed325_rechumano);
+       $this->ed325_sequencial = ($this->ed325_sequencial === 0 || $this->ed325_sequencial === 0.0 || $this->ed325_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_sequencial"]:$this->ed325_sequencial);
+       $this->ed325_escola = ($this->ed325_escola === 0 || $this->ed325_escola === 0.0 || $this->ed325_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_escola"]:$this->ed325_escola);
+       $this->ed325_rechumano = ($this->ed325_rechumano === 0 || $this->ed325_rechumano === 0.0 || $this->ed325_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_rechumano"]:$this->ed325_rechumano);
        $this->ed325_email = ($this->ed325_email == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_email"]:$this->ed325_email);
      }else{
-       $this->ed325_sequencial = ($this->ed325_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_sequencial"]:$this->ed325_sequencial);
+       $this->ed325_sequencial = ($this->ed325_sequencial === 0 || $this->ed325_sequencial === 0.0 || $this->ed325_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_sequencial"]:$this->ed325_sequencial);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_escolagestorcenso {
          $this->ed325_sequencial = $ed325_sequencial; 
        }
      }
-     if(($this->ed325_sequencial == null) || ($this->ed325_sequencial == "") ){ 
+     if(($this->ed325_sequencial == null) || ($this->ed325_sequencial === 0 || $this->ed325_sequencial === 0.0 || $this->ed325_sequencial == "") ){ 
        $this->erro_sql = " Campo ed325_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -373,7 +373,7 @@ class cl_escolagestorcenso {
    function sql_query ( $ed325_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -411,7 +411,7 @@ class cl_escolagestorcenso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_escolagestorcenso {
    function sql_query_file ( $ed325_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_escolagestorcenso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -461,7 +461,7 @@ class cl_escolagestorcenso {
      
      if ($sCampos != "*" ){
        
-       $sCampos_sql = split("#",$sCampos);
+       $sCampos_sql = preg_split("#\\##m",$sCampos);
        $virgula = "";
        
        for($i=0;$i<sizeof($sCampos_sql);$i++){
@@ -518,7 +518,7 @@ class cl_escolagestorcenso {
      if ($ordem != null) {
        
        $sSql       .= " order by ";
-       $sCampos_sql = split("#", $ordem);
+       $sCampos_sql = preg_split("#\\##m", $ordem);
        $virgula     = "";
        
        for($i = 0; $i < sizeof($sCampos_sql); $i++) {

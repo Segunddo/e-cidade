@@ -54,7 +54,7 @@ class cl_db_sysarqcamp {
                  codsequencia = int4 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_db_sysarqcamp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysarqcamp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,14 +71,14 @@ class cl_db_sysarqcamp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
-       $this->codcam = ($this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
-       $this->seqarq = ($this->seqarq == ""?@$GLOBALS["HTTP_POST_VARS"]["seqarq"]:$this->seqarq);
-       $this->codsequencia = ($this->codsequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["codsequencia"]:$this->codsequencia);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codcam = ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
+       $this->seqarq = ($this->seqarq === 0 || $this->seqarq === 0.0 || $this->seqarq == ""?@$GLOBALS["HTTP_POST_VARS"]["seqarq"]:$this->seqarq);
+       $this->codsequencia = ($this->codsequencia === 0 || $this->codsequencia === 0.0 || $this->codsequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["codsequencia"]:$this->codsequencia);
      }else{
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
-       $this->codcam = ($this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
-       $this->seqarq = ($this->seqarq == ""?@$GLOBALS["HTTP_POST_VARS"]["seqarq"]:$this->seqarq);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codcam = ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
+       $this->seqarq = ($this->seqarq === 0 || $this->seqarq === 0.0 || $this->seqarq == ""?@$GLOBALS["HTTP_POST_VARS"]["seqarq"]:$this->seqarq);
      }
    }
    // funcao para inclusao
@@ -96,7 +96,7 @@ class cl_db_sysarqcamp {
        $this->codarq = $codarq; 
        $this->codcam = $codcam; 
        $this->seqarq = $seqarq; 
-     if(($this->codarq == null) || ($this->codarq == "") ){ 
+     if(($this->codarq == null) || ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == "") ){ 
        $this->erro_sql = " Campo codarq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -104,7 +104,7 @@ class cl_db_sysarqcamp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->codcam == null) || ($this->codcam == "") ){ 
+     if(($this->codcam == null) || ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == "") ){ 
        $this->erro_sql = " Campo codcam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -112,7 +112,7 @@ class cl_db_sysarqcamp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->seqarq == null) || ($this->seqarq == "") ){ 
+     if(($this->seqarq == null) || ($this->seqarq === 0 || $this->seqarq === 0.0 || $this->seqarq == "") ){ 
        $this->erro_sql = " Campo seqarq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -393,7 +393,7 @@ class cl_db_sysarqcamp {
    function sql_query ( $codarq=null,$codcam=null,$seqarq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_db_sysarqcamp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_db_sysarqcamp {
    function sql_query_file ( $codarq=null,$codcam=null,$seqarq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_db_sysarqcamp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -54,7 +54,7 @@ class cl_parecerlegenda {
                  ed91_sigla = varchar(3) = Sigla 
                  ";
    //funcao construtor da classe 
-   function cl_parecerlegenda() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parecerlegenda"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_parecerlegenda {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed91_i_codigo = ($this->ed91_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed91_i_codigo"]:$this->ed91_i_codigo);
+       $this->ed91_i_codigo = ($this->ed91_i_codigo === 0 || $this->ed91_i_codigo === 0.0 || $this->ed91_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed91_i_codigo"]:$this->ed91_i_codigo);
        $this->ed91_c_descr = ($this->ed91_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed91_c_descr"]:$this->ed91_c_descr);
-       $this->ed91_i_escola = ($this->ed91_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed91_i_escola"]:$this->ed91_i_escola);
+       $this->ed91_i_escola = ($this->ed91_i_escola === 0 || $this->ed91_i_escola === 0.0 || $this->ed91_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed91_i_escola"]:$this->ed91_i_escola);
        $this->ed91_sigla = ($this->ed91_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["ed91_sigla"]:$this->ed91_sigla);
      }else{
-       $this->ed91_i_codigo = ($this->ed91_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed91_i_codigo"]:$this->ed91_i_codigo);
+       $this->ed91_i_codigo = ($this->ed91_i_codigo === 0 || $this->ed91_i_codigo === 0.0 || $this->ed91_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed91_i_codigo"]:$this->ed91_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_parecerlegenda {
          $this->ed91_i_codigo = $ed91_i_codigo; 
        }
      }
-     if(($this->ed91_i_codigo == null) || ($this->ed91_i_codigo == "") ){ 
+     if(($this->ed91_i_codigo == null) || ($this->ed91_i_codigo === 0 || $this->ed91_i_codigo === 0.0 || $this->ed91_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed91_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_parecerlegenda {
    function sql_query ( $ed91_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_parecerlegenda {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_parecerlegenda {
    function sql_query_file ( $ed91_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_parecerlegenda {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

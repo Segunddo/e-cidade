@@ -52,7 +52,7 @@ class cl_transfaprov {
                  ed251_i_diariodestino = int8 = Avaliação de destino 
                  ";
    //funcao construtor da classe
-   function cl_transfaprov() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("transfaprov");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_transfaprov {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed251_i_codigo = ($this->ed251_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed251_i_codigo"]:$this->ed251_i_codigo);
-       $this->ed251_i_diarioorigem = ($this->ed251_i_diarioorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed251_i_diarioorigem"]:$this->ed251_i_diarioorigem);
-       $this->ed251_i_diariodestino = ($this->ed251_i_diariodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed251_i_diariodestino"]:$this->ed251_i_diariodestino);
+       $this->ed251_i_codigo = ($this->ed251_i_codigo === 0 || $this->ed251_i_codigo === 0.0 || $this->ed251_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed251_i_codigo"]:$this->ed251_i_codigo);
+       $this->ed251_i_diarioorigem = ($this->ed251_i_diarioorigem === 0 || $this->ed251_i_diarioorigem === 0.0 || $this->ed251_i_diarioorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed251_i_diarioorigem"]:$this->ed251_i_diarioorigem);
+       $this->ed251_i_diariodestino = ($this->ed251_i_diariodestino === 0 || $this->ed251_i_diariodestino === 0.0 || $this->ed251_i_diariodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed251_i_diariodestino"]:$this->ed251_i_diariodestino);
      }else{
-       $this->ed251_i_codigo = ($this->ed251_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed251_i_codigo"]:$this->ed251_i_codigo);
+       $this->ed251_i_codigo = ($this->ed251_i_codigo === 0 || $this->ed251_i_codigo === 0.0 || $this->ed251_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed251_i_codigo"]:$this->ed251_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_transfaprov {
          $this->ed251_i_codigo = $ed251_i_codigo;
        }
      }
-     if(($this->ed251_i_codigo == null) || ($this->ed251_i_codigo == "") ){
+     if(($this->ed251_i_codigo == null) || ($this->ed251_i_codigo === 0 || $this->ed251_i_codigo === 0.0 || $this->ed251_i_codigo == "") ){
        $this->erro_sql = " Campo ed251_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -53,7 +53,7 @@ class cl_censoregradisc {
                  ed272_ano = int4 = Ano 
                  ";
    //funcao construtor da classe 
-   function cl_censoregradisc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("censoregradisc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -70,12 +70,12 @@ class cl_censoregradisc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed272_i_codigo = ($this->ed272_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed272_i_codigo"]:$this->ed272_i_codigo);
-       $this->ed272_i_censoetapa = ($this->ed272_i_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed272_i_censoetapa"]:$this->ed272_i_censoetapa);
-       $this->ed272_i_censodisciplina = ($this->ed272_i_censodisciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed272_i_censodisciplina"]:$this->ed272_i_censodisciplina);
-       $this->ed272_ano = ($this->ed272_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed272_ano"]:$this->ed272_ano);
+       $this->ed272_i_codigo = ($this->ed272_i_codigo === 0 || $this->ed272_i_codigo === 0.0 || $this->ed272_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed272_i_codigo"]:$this->ed272_i_codigo);
+       $this->ed272_i_censoetapa = ($this->ed272_i_censoetapa === 0 || $this->ed272_i_censoetapa === 0.0 || $this->ed272_i_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed272_i_censoetapa"]:$this->ed272_i_censoetapa);
+       $this->ed272_i_censodisciplina = ($this->ed272_i_censodisciplina === 0 || $this->ed272_i_censodisciplina === 0.0 || $this->ed272_i_censodisciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed272_i_censodisciplina"]:$this->ed272_i_censodisciplina);
+       $this->ed272_ano = ($this->ed272_ano === 0 || $this->ed272_ano === 0.0 || $this->ed272_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed272_ano"]:$this->ed272_ano);
      }else{
-       $this->ed272_i_codigo = ($this->ed272_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed272_i_codigo"]:$this->ed272_i_codigo);
+       $this->ed272_i_codigo = ($this->ed272_i_codigo === 0 || $this->ed272_i_codigo === 0.0 || $this->ed272_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed272_i_codigo"]:$this->ed272_i_codigo);
      }
    }
    // funcao para inclusao
@@ -132,7 +132,7 @@ class cl_censoregradisc {
          $this->ed272_i_codigo = $ed272_i_codigo; 
        }
      }
-     if(($this->ed272_i_codigo == null) || ($this->ed272_i_codigo == "") ){ 
+     if(($this->ed272_i_codigo == null) || ($this->ed272_i_codigo === 0 || $this->ed272_i_codigo === 0.0 || $this->ed272_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed272_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

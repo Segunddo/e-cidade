@@ -63,7 +63,7 @@ class cl_lab_bpamagnetico {
                  la55_o_arquivo = oid = Arquivo
                  ";
    //funcao construtor da classe
-   function cl_lab_bpamagnetico() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_bpamagnetico");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,9 +80,9 @@ class cl_lab_bpamagnetico {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la55_i_codigo = ($this->la55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_codigo"]:$this->la55_i_codigo);
-       $this->la55_i_fechamento = ($this->la55_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_fechamento"]:$this->la55_i_fechamento);
-       $this->la55_i_usuario = ($this->la55_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_usuario"]:$this->la55_i_usuario);
+       $this->la55_i_codigo = ($this->la55_i_codigo === 0 || $this->la55_i_codigo === 0.0 || $this->la55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_codigo"]:$this->la55_i_codigo);
+       $this->la55_i_fechamento = ($this->la55_i_fechamento === 0 || $this->la55_i_fechamento === 0.0 || $this->la55_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_fechamento"]:$this->la55_i_fechamento);
+       $this->la55_i_usuario = ($this->la55_i_usuario === 0 || $this->la55_i_usuario === 0.0 || $this->la55_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_usuario"]:$this->la55_i_usuario);
        if($this->la55_d_data == ""){
          $this->la55_d_data_dia = ($this->la55_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_d_data_dia"]:$this->la55_d_data_dia);
          $this->la55_d_data_mes = ($this->la55_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_d_data_mes"]:$this->la55_d_data_mes);
@@ -93,7 +93,7 @@ class cl_lab_bpamagnetico {
        }
        $this->la55_c_hora = ($this->la55_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_c_hora"]:$this->la55_c_hora);
        $this->la55_t_arquivo = ($this->la55_t_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_t_arquivo"]:$this->la55_t_arquivo);
-       $this->la55_o_arquivo = ($this->la55_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_o_arquivo"]:$this->la55_o_arquivo);
+       $this->la55_o_arquivo = ($this->la55_o_arquivo === 0 || $this->la55_o_arquivo === 0.0 || $this->la55_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_o_arquivo"]:$this->la55_o_arquivo);
      }else{
      }
    }
@@ -430,7 +430,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $oid = null,$campos="lab_bpamagnetico.oid,*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -453,7 +453,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -466,7 +466,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

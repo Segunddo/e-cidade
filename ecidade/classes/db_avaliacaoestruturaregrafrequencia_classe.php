@@ -52,7 +52,7 @@ class cl_avaliacaoestruturaregrafrequencia {
                  ed329_regraarredondamento = int4 = Regra de Arredondamento 
                  ";
    //funcao construtor da classe 
-   function cl_avaliacaoestruturaregrafrequencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avaliacaoestruturaregrafrequencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_avaliacaoestruturaregrafrequencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed329_sequencial = ($this->ed329_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_sequencial"]:$this->ed329_sequencial);
-       $this->ed329_avaliacaoestruturafrequencia = ($this->ed329_avaliacaoestruturafrequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_avaliacaoestruturafrequencia"]:$this->ed329_avaliacaoestruturafrequencia);
-       $this->ed329_regraarredondamento = ($this->ed329_regraarredondamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_regraarredondamento"]:$this->ed329_regraarredondamento);
+       $this->ed329_sequencial = ($this->ed329_sequencial === 0 || $this->ed329_sequencial === 0.0 || $this->ed329_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_sequencial"]:$this->ed329_sequencial);
+       $this->ed329_avaliacaoestruturafrequencia = ($this->ed329_avaliacaoestruturafrequencia === 0 || $this->ed329_avaliacaoestruturafrequencia === 0.0 || $this->ed329_avaliacaoestruturafrequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_avaliacaoestruturafrequencia"]:$this->ed329_avaliacaoestruturafrequencia);
+       $this->ed329_regraarredondamento = ($this->ed329_regraarredondamento === 0 || $this->ed329_regraarredondamento === 0.0 || $this->ed329_regraarredondamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_regraarredondamento"]:$this->ed329_regraarredondamento);
      }else{
-       $this->ed329_sequencial = ($this->ed329_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_sequencial"]:$this->ed329_sequencial);
+       $this->ed329_sequencial = ($this->ed329_sequencial === 0 || $this->ed329_sequencial === 0.0 || $this->ed329_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_sequencial"]:$this->ed329_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_avaliacaoestruturaregrafrequencia {
          $this->ed329_sequencial = $ed329_sequencial; 
        }
      }
-     if(($this->ed329_sequencial == null) || ($this->ed329_sequencial == "") ){ 
+     if(($this->ed329_sequencial == null) || ($this->ed329_sequencial === 0 || $this->ed329_sequencial === 0.0 || $this->ed329_sequencial == "") ){ 
        $this->erro_sql = " Campo ed329_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_avaliacaoestruturaregrafrequencia {
    function sql_query ( $ed329_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_avaliacaoestruturaregrafrequencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_avaliacaoestruturaregrafrequencia {
    function sql_query_file ( $ed329_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_avaliacaoestruturaregrafrequencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

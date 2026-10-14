@@ -52,7 +52,7 @@ class cl_turmaacativnova {
                  ed274_c_nome = char(70) = Nome da Outra Atividade
                  ";
    //funcao construtor da classe
-   function cl_turmaacativnova() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("turmaacativnova");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_turmaacativnova {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed274_i_codigo = ($this->ed274_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_codigo"]:$this->ed274_i_codigo);
-       $this->ed274_i_turmaacativ = ($this->ed274_i_turmaacativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_turmaacativ"]:$this->ed274_i_turmaacativ);
+       $this->ed274_i_codigo = ($this->ed274_i_codigo === 0 || $this->ed274_i_codigo === 0.0 || $this->ed274_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_codigo"]:$this->ed274_i_codigo);
+       $this->ed274_i_turmaacativ = ($this->ed274_i_turmaacativ === 0 || $this->ed274_i_turmaacativ === 0.0 || $this->ed274_i_turmaacativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_turmaacativ"]:$this->ed274_i_turmaacativ);
        $this->ed274_c_nome = ($this->ed274_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_c_nome"]:$this->ed274_c_nome);
      }else{
-       $this->ed274_i_codigo = ($this->ed274_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_codigo"]:$this->ed274_i_codigo);
+       $this->ed274_i_codigo = ($this->ed274_i_codigo === 0 || $this->ed274_i_codigo === 0.0 || $this->ed274_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_codigo"]:$this->ed274_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_turmaacativnova {
          $this->ed274_i_codigo = $ed274_i_codigo;
        }
      }
-     if(($this->ed274_i_codigo == null) || ($this->ed274_i_codigo == "") ){
+     if(($this->ed274_i_codigo == null) || ($this->ed274_i_codigo === 0 || $this->ed274_i_codigo === 0.0 || $this->ed274_i_codigo == "") ){
        $this->erro_sql = " Campo ed274_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_turmaacativnova {
    function sql_query ( $ed274_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_turmaacativnova {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_turmaacativnova {
    function sql_query_file ( $ed274_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_turmaacativnova {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

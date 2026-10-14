@@ -52,7 +52,7 @@ class cl_avaliacaoresposta {
                  db106_resposta = text = Resposta 
                  ";
    //funcao construtor da classe 
-   function cl_avaliacaoresposta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avaliacaoresposta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_avaliacaoresposta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db106_sequencial = ($this->db106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db106_sequencial"]:$this->db106_sequencial);
-       $this->db106_avaliacaoperguntaopcao = ($this->db106_avaliacaoperguntaopcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db106_avaliacaoperguntaopcao"]:$this->db106_avaliacaoperguntaopcao);
+       $this->db106_sequencial = ($this->db106_sequencial === 0 || $this->db106_sequencial === 0.0 || $this->db106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db106_sequencial"]:$this->db106_sequencial);
+       $this->db106_avaliacaoperguntaopcao = ($this->db106_avaliacaoperguntaopcao === 0 || $this->db106_avaliacaoperguntaopcao === 0.0 || $this->db106_avaliacaoperguntaopcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db106_avaliacaoperguntaopcao"]:$this->db106_avaliacaoperguntaopcao);
        $this->db106_resposta = ($this->db106_resposta == ""?@$GLOBALS["HTTP_POST_VARS"]["db106_resposta"]:$this->db106_resposta);
      }else{
-       $this->db106_sequencial = ($this->db106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db106_sequencial"]:$this->db106_sequencial);
+       $this->db106_sequencial = ($this->db106_sequencial === 0 || $this->db106_sequencial === 0.0 || $this->db106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db106_sequencial"]:$this->db106_sequencial);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_avaliacaoresposta {
          $this->db106_sequencial = $db106_sequencial; 
        }
      }
-     if(($this->db106_sequencial == null) || ($this->db106_sequencial == "") ){ 
+     if(($this->db106_sequencial == null) || ($this->db106_sequencial === 0 || $this->db106_sequencial === 0.0 || $this->db106_sequencial == "") ){ 
        $this->erro_sql = " Campo db106_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -357,7 +357,7 @@ class cl_avaliacaoresposta {
    function sql_query ( $db106_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_avaliacaoresposta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_avaliacaoresposta {
    function sql_query_file ( $db106_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_avaliacaoresposta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

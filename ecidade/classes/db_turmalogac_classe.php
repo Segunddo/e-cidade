@@ -65,7 +65,7 @@ class cl_turmalogac {
                  ed288_i_codigoant = int4 = Código Anterioor 
                  ";
    //funcao construtor da classe 
-   function cl_turmalogac() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("turmalogac"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,9 +82,9 @@ class cl_turmalogac {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed288_i_codigo = ($this->ed288_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_codigo"]:$this->ed288_i_codigo);
-       $this->ed288_i_usuario = ($this->ed288_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_usuario"]:$this->ed288_i_usuario);
-       $this->ed288_i_escola = ($this->ed288_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_escola"]:$this->ed288_i_escola);
+       $this->ed288_i_codigo = ($this->ed288_i_codigo === 0 || $this->ed288_i_codigo === 0.0 || $this->ed288_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_codigo"]:$this->ed288_i_codigo);
+       $this->ed288_i_usuario = ($this->ed288_i_usuario === 0 || $this->ed288_i_usuario === 0.0 || $this->ed288_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_usuario"]:$this->ed288_i_usuario);
+       $this->ed288_i_escola = ($this->ed288_i_escola === 0 || $this->ed288_i_escola === 0.0 || $this->ed288_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_escola"]:$this->ed288_i_escola);
        if($this->ed288_d_data == ""){
          $this->ed288_d_data_dia = ($this->ed288_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_d_data_dia"]:$this->ed288_d_data_dia);
          $this->ed288_d_data_mes = ($this->ed288_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_d_data_mes"]:$this->ed288_d_data_mes);
@@ -94,11 +94,11 @@ class cl_turmalogac {
          }
        }
        $this->ed288_c_hora = ($this->ed288_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_c_hora"]:$this->ed288_c_hora);
-       $this->ed288_i_tipoturma = ($this->ed288_i_tipoturma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_tipoturma"]:$this->ed288_i_tipoturma);
-       $this->ed288_i_turmaac = ($this->ed288_i_turmaac == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_turmaac"]:$this->ed288_i_turmaac);
-       $this->ed288_i_codigoant = ($this->ed288_i_codigoant == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_codigoant"]:$this->ed288_i_codigoant);
+       $this->ed288_i_tipoturma = ($this->ed288_i_tipoturma === 0 || $this->ed288_i_tipoturma === 0.0 || $this->ed288_i_tipoturma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_tipoturma"]:$this->ed288_i_tipoturma);
+       $this->ed288_i_turmaac = ($this->ed288_i_turmaac === 0 || $this->ed288_i_turmaac === 0.0 || $this->ed288_i_turmaac == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_turmaac"]:$this->ed288_i_turmaac);
+       $this->ed288_i_codigoant = ($this->ed288_i_codigoant === 0 || $this->ed288_i_codigoant === 0.0 || $this->ed288_i_codigoant == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_codigoant"]:$this->ed288_i_codigoant);
      }else{
-       $this->ed288_i_codigo = ($this->ed288_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_codigo"]:$this->ed288_i_codigo);
+       $this->ed288_i_codigo = ($this->ed288_i_codigo === 0 || $this->ed288_i_codigo === 0.0 || $this->ed288_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed288_i_codigo"]:$this->ed288_i_codigo);
      }
    }
    // funcao para inclusao
@@ -191,7 +191,7 @@ class cl_turmalogac {
          $this->ed288_i_codigo = $ed288_i_codigo; 
        }
      }
-     if(($this->ed288_i_codigo == null) || ($this->ed288_i_codigo == "") ){ 
+     if(($this->ed288_i_codigo == null) || ($this->ed288_i_codigo === 0 || $this->ed288_i_codigo === 0.0 || $this->ed288_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed288_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -539,7 +539,7 @@ class cl_turmalogac {
    function sql_query ( $ed288_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -563,7 +563,7 @@ class cl_turmalogac {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -576,7 +576,7 @@ class cl_turmalogac {
    function sql_query_file ( $ed288_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -597,7 +597,7 @@ class cl_turmalogac {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

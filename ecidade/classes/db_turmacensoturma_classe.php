@@ -54,7 +54,7 @@ class cl_turmacensoturma {
                  ed343_principal = bool = Principal
                  ";
    //funcao construtor da classe
-   function cl_turmacensoturma() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("turmacensoturma");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_turmacensoturma {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed343_sequencia = ($this->ed343_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed343_sequencia"]:$this->ed343_sequencia);
-       $this->ed343_turmacenso = ($this->ed343_turmacenso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed343_turmacenso"]:$this->ed343_turmacenso);
-       $this->ed343_turma = ($this->ed343_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed343_turma"]:$this->ed343_turma);
+       $this->ed343_sequencia = ($this->ed343_sequencia === 0 || $this->ed343_sequencia === 0.0 || $this->ed343_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed343_sequencia"]:$this->ed343_sequencia);
+       $this->ed343_turmacenso = ($this->ed343_turmacenso === 0 || $this->ed343_turmacenso === 0.0 || $this->ed343_turmacenso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed343_turmacenso"]:$this->ed343_turmacenso);
+       $this->ed343_turma = ($this->ed343_turma === 0 || $this->ed343_turma === 0.0 || $this->ed343_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed343_turma"]:$this->ed343_turma);
        $this->ed343_principal = ($this->ed343_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed343_principal"]:$this->ed343_principal);
      }else{
-       $this->ed343_sequencia = ($this->ed343_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed343_sequencia"]:$this->ed343_sequencia);
+       $this->ed343_sequencia = ($this->ed343_sequencia === 0 || $this->ed343_sequencia === 0.0 || $this->ed343_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed343_sequencia"]:$this->ed343_sequencia);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_turmacensoturma {
          $this->ed343_sequencia = $ed343_sequencia;
        }
      }
-     if(($this->ed343_sequencia == null) || ($this->ed343_sequencia == "") ){
+     if(($this->ed343_sequencia == null) || ($this->ed343_sequencia === 0 || $this->ed343_sequencia === 0.0 || $this->ed343_sequencia == "") ){
        $this->erro_sql = " Campo ed343_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

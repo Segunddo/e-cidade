@@ -52,7 +52,7 @@ class cl_edu_numalunobloqueado {
                  ed289_i_turma = int4 = Turma 
                  ";
    //funcao construtor da classe 
-   function cl_edu_numalunobloqueado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("edu_numalunobloqueado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_edu_numalunobloqueado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed289_i_codigo = ($this->ed289_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed289_i_codigo"]:$this->ed289_i_codigo);
-       $this->ed289_i_numaluno = ($this->ed289_i_numaluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed289_i_numaluno"]:$this->ed289_i_numaluno);
-       $this->ed289_i_turma = ($this->ed289_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed289_i_turma"]:$this->ed289_i_turma);
+       $this->ed289_i_codigo = ($this->ed289_i_codigo === 0 || $this->ed289_i_codigo === 0.0 || $this->ed289_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed289_i_codigo"]:$this->ed289_i_codigo);
+       $this->ed289_i_numaluno = ($this->ed289_i_numaluno === 0 || $this->ed289_i_numaluno === 0.0 || $this->ed289_i_numaluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed289_i_numaluno"]:$this->ed289_i_numaluno);
+       $this->ed289_i_turma = ($this->ed289_i_turma === 0 || $this->ed289_i_turma === 0.0 || $this->ed289_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed289_i_turma"]:$this->ed289_i_turma);
      }else{
-       $this->ed289_i_codigo = ($this->ed289_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed289_i_codigo"]:$this->ed289_i_codigo);
+       $this->ed289_i_codigo = ($this->ed289_i_codigo === 0 || $this->ed289_i_codigo === 0.0 || $this->ed289_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed289_i_codigo"]:$this->ed289_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_edu_numalunobloqueado {
          $this->ed289_i_codigo = $ed289_i_codigo; 
        }
      }
-     if(($this->ed289_i_codigo == null) || ($this->ed289_i_codigo == "") ){ 
+     if(($this->ed289_i_codigo == null) || ($this->ed289_i_codigo === 0 || $this->ed289_i_codigo === 0.0 || $this->ed289_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed289_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_edu_numalunobloqueado {
    function sql_query ( $ed289_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_edu_numalunobloqueado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_edu_numalunobloqueado {
    function sql_query_file ( $ed289_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_edu_numalunobloqueado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

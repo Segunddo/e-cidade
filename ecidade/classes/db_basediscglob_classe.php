@@ -52,7 +52,7 @@ class cl_basediscglob {
                  ed89_i_qtdperiodos = int4 = Períodos 
                  ";
    //funcao construtor da classe 
-   function cl_basediscglob() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("basediscglob"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_basediscglob {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed89_i_codigo = ($this->ed89_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed89_i_codigo"]:$this->ed89_i_codigo);
-       $this->ed89_i_disciplina = ($this->ed89_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed89_i_disciplina"]:$this->ed89_i_disciplina);
-       $this->ed89_i_qtdperiodos = ($this->ed89_i_qtdperiodos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed89_i_qtdperiodos"]:$this->ed89_i_qtdperiodos);
+       $this->ed89_i_codigo = ($this->ed89_i_codigo === 0 || $this->ed89_i_codigo === 0.0 || $this->ed89_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed89_i_codigo"]:$this->ed89_i_codigo);
+       $this->ed89_i_disciplina = ($this->ed89_i_disciplina === 0 || $this->ed89_i_disciplina === 0.0 || $this->ed89_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed89_i_disciplina"]:$this->ed89_i_disciplina);
+       $this->ed89_i_qtdperiodos = ($this->ed89_i_qtdperiodos === 0 || $this->ed89_i_qtdperiodos === 0.0 || $this->ed89_i_qtdperiodos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed89_i_qtdperiodos"]:$this->ed89_i_qtdperiodos);
      }else{
-       $this->ed89_i_codigo = ($this->ed89_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed89_i_codigo"]:$this->ed89_i_codigo);
+       $this->ed89_i_codigo = ($this->ed89_i_codigo === 0 || $this->ed89_i_codigo === 0.0 || $this->ed89_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed89_i_codigo"]:$this->ed89_i_codigo);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_basediscglob {
        return false;
      }
        $this->ed89_i_codigo = $ed89_i_codigo; 
-     if(($this->ed89_i_codigo == null) || ($this->ed89_i_codigo == "") ){ 
+     if(($this->ed89_i_codigo == null) || ($this->ed89_i_codigo === 0 || $this->ed89_i_codigo === 0.0 || $this->ed89_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed89_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -336,7 +336,7 @@ class cl_basediscglob {
    function sql_query ( $ed89_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_basediscglob {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -374,7 +374,7 @@ class cl_basediscglob {
    function sql_query_file ( $ed89_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_basediscglob {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

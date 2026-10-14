@@ -98,7 +98,7 @@ class cl_escolaestrutura {
                  ed255_i_formaocupacao = int4 = Forma de Ocupação do Prédio 
                  ";
    //funcao construtor da classe 
-   function cl_escolaestrutura() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("escolaestrutura"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -115,34 +115,34 @@ class cl_escolaestrutura {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed255_i_codigo = ($this->ed255_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_codigo"]:$this->ed255_i_codigo);
-       $this->ed255_i_escola = ($this->ed255_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_escola"]:$this->ed255_i_escola);
-       $this->ed255_i_compartilhado = ($this->ed255_i_compartilhado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_compartilhado"]:$this->ed255_i_compartilhado);
-       $this->ed255_i_escolacompartilhada = ($this->ed255_i_escolacompartilhada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_escolacompartilhada"]:$this->ed255_i_escolacompartilhada);
-       $this->ed255_i_salaexistente = ($this->ed255_i_salaexistente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_salaexistente"]:$this->ed255_i_salaexistente);
-       $this->ed255_i_salautilizada = ($this->ed255_i_salautilizada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_salautilizada"]:$this->ed255_i_salautilizada);
+       $this->ed255_i_codigo = ($this->ed255_i_codigo === 0 || $this->ed255_i_codigo === 0.0 || $this->ed255_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_codigo"]:$this->ed255_i_codigo);
+       $this->ed255_i_escola = ($this->ed255_i_escola === 0 || $this->ed255_i_escola === 0.0 || $this->ed255_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_escola"]:$this->ed255_i_escola);
+       $this->ed255_i_compartilhado = ($this->ed255_i_compartilhado === 0 || $this->ed255_i_compartilhado === 0.0 || $this->ed255_i_compartilhado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_compartilhado"]:$this->ed255_i_compartilhado);
+       $this->ed255_i_escolacompartilhada = ($this->ed255_i_escolacompartilhada === 0 || $this->ed255_i_escolacompartilhada === 0.0 || $this->ed255_i_escolacompartilhada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_escolacompartilhada"]:$this->ed255_i_escolacompartilhada);
+       $this->ed255_i_salaexistente = ($this->ed255_i_salaexistente === 0 || $this->ed255_i_salaexistente === 0.0 || $this->ed255_i_salaexistente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_salaexistente"]:$this->ed255_i_salaexistente);
+       $this->ed255_i_salautilizada = ($this->ed255_i_salautilizada === 0 || $this->ed255_i_salautilizada === 0.0 || $this->ed255_i_salautilizada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_salautilizada"]:$this->ed255_i_salautilizada);
        $this->ed255_c_abastagua = ($this->ed255_c_abastagua == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_c_abastagua"]:$this->ed255_c_abastagua);
        $this->ed255_c_abastenergia = ($this->ed255_c_abastenergia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_c_abastenergia"]:$this->ed255_c_abastenergia);
-       $this->ed255_i_aguafiltrada = ($this->ed255_i_aguafiltrada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_aguafiltrada"]:$this->ed255_i_aguafiltrada);
+       $this->ed255_i_aguafiltrada = ($this->ed255_i_aguafiltrada === 0 || $this->ed255_i_aguafiltrada === 0.0 || $this->ed255_i_aguafiltrada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_aguafiltrada"]:$this->ed255_i_aguafiltrada);
        $this->ed255_c_esgotosanitario = ($this->ed255_c_esgotosanitario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_c_esgotosanitario"]:$this->ed255_c_esgotosanitario);
        $this->ed255_c_destinolixo = ($this->ed255_c_destinolixo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_c_destinolixo"]:$this->ed255_c_destinolixo);
        $this->ed255_c_localizacao = ($this->ed255_c_localizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_c_localizacao"]:$this->ed255_c_localizacao);
        $this->ed255_c_dependencias = ($this->ed255_c_dependencias == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_c_dependencias"]:$this->ed255_c_dependencias);
        $this->ed255_c_equipamentos = ($this->ed255_c_equipamentos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_c_equipamentos"]:$this->ed255_c_equipamentos);
-       $this->ed255_i_computadores = ($this->ed255_i_computadores == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_computadores"]:$this->ed255_i_computadores);
-       $this->ed255_i_qtdcomp = ($this->ed255_i_qtdcomp == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_qtdcomp"]:$this->ed255_i_qtdcomp);
-       $this->ed255_i_qtdcompadm = ($this->ed255_i_qtdcompadm == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_qtdcompadm"]:$this->ed255_i_qtdcompadm);
-       $this->ed255_i_qtdcompalu = ($this->ed255_i_qtdcompalu == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_qtdcompalu"]:$this->ed255_i_qtdcompalu);
-       $this->ed255_i_internet = ($this->ed255_i_internet == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_internet"]:$this->ed255_i_internet);
-       $this->ed255_i_bandalarga = ($this->ed255_i_bandalarga == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_bandalarga"]:$this->ed255_i_bandalarga);
-       $this->ed255_i_alimentacao = ($this->ed255_i_alimentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_alimentacao"]:$this->ed255_i_alimentacao);
-       $this->ed255_i_ativcomplementar = ($this->ed255_i_ativcomplementar == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_ativcomplementar"]:$this->ed255_i_ativcomplementar);
+       $this->ed255_i_computadores = ($this->ed255_i_computadores === 0 || $this->ed255_i_computadores === 0.0 || $this->ed255_i_computadores == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_computadores"]:$this->ed255_i_computadores);
+       $this->ed255_i_qtdcomp = ($this->ed255_i_qtdcomp === 0 || $this->ed255_i_qtdcomp === 0.0 || $this->ed255_i_qtdcomp == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_qtdcomp"]:$this->ed255_i_qtdcomp);
+       $this->ed255_i_qtdcompadm = ($this->ed255_i_qtdcompadm === 0 || $this->ed255_i_qtdcompadm === 0.0 || $this->ed255_i_qtdcompadm == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_qtdcompadm"]:$this->ed255_i_qtdcompadm);
+       $this->ed255_i_qtdcompalu = ($this->ed255_i_qtdcompalu === 0 || $this->ed255_i_qtdcompalu === 0.0 || $this->ed255_i_qtdcompalu == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_qtdcompalu"]:$this->ed255_i_qtdcompalu);
+       $this->ed255_i_internet = ($this->ed255_i_internet === 0 || $this->ed255_i_internet === 0.0 || $this->ed255_i_internet == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_internet"]:$this->ed255_i_internet);
+       $this->ed255_i_bandalarga = ($this->ed255_i_bandalarga === 0 || $this->ed255_i_bandalarga === 0.0 || $this->ed255_i_bandalarga == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_bandalarga"]:$this->ed255_i_bandalarga);
+       $this->ed255_i_alimentacao = ($this->ed255_i_alimentacao === 0 || $this->ed255_i_alimentacao === 0.0 || $this->ed255_i_alimentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_alimentacao"]:$this->ed255_i_alimentacao);
+       $this->ed255_i_ativcomplementar = ($this->ed255_i_ativcomplementar === 0 || $this->ed255_i_ativcomplementar === 0.0 || $this->ed255_i_ativcomplementar == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_ativcomplementar"]:$this->ed255_i_ativcomplementar);
        $this->ed255_c_materdidatico = ($this->ed255_c_materdidatico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_c_materdidatico"]:$this->ed255_c_materdidatico);
-       $this->ed255_i_aee = ($this->ed255_i_aee == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_aee"]:$this->ed255_i_aee);
-       $this->ed255_i_efciclos = ($this->ed255_i_efciclos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_efciclos"]:$this->ed255_i_efciclos);
-       $this->ed255_i_formaocupacao = ($this->ed255_i_formaocupacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_formaocupacao"]:$this->ed255_i_formaocupacao);
+       $this->ed255_i_aee = ($this->ed255_i_aee === 0 || $this->ed255_i_aee === 0.0 || $this->ed255_i_aee == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_aee"]:$this->ed255_i_aee);
+       $this->ed255_i_efciclos = ($this->ed255_i_efciclos === 0 || $this->ed255_i_efciclos === 0.0 || $this->ed255_i_efciclos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_efciclos"]:$this->ed255_i_efciclos);
+       $this->ed255_i_formaocupacao = ($this->ed255_i_formaocupacao === 0 || $this->ed255_i_formaocupacao === 0.0 || $this->ed255_i_formaocupacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_formaocupacao"]:$this->ed255_i_formaocupacao);
      }else{
-       $this->ed255_i_codigo = ($this->ed255_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_codigo"]:$this->ed255_i_codigo);
+       $this->ed255_i_codigo = ($this->ed255_i_codigo === 0 || $this->ed255_i_codigo === 0.0 || $this->ed255_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed255_i_codigo"]:$this->ed255_i_codigo);
      }
    }
    // funcao para inclusao
@@ -340,7 +340,7 @@ class cl_escolaestrutura {
          $this->ed255_i_codigo = $ed255_i_codigo; 
        }
      }
-     if(($this->ed255_i_codigo == null) || ($this->ed255_i_codigo == "") ){ 
+     if(($this->ed255_i_codigo == null) || ($this->ed255_i_codigo === 0 || $this->ed255_i_codigo === 0.0 || $this->ed255_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed255_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -959,7 +959,7 @@ class cl_escolaestrutura {
    function sql_query ( $ed255_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -989,7 +989,7 @@ class cl_escolaestrutura {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1002,7 +1002,7 @@ class cl_escolaestrutura {
    function sql_query_file ( $ed255_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1023,7 +1023,7 @@ class cl_escolaestrutura {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

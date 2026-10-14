@@ -55,7 +55,7 @@ class cl_disciplina
                  ";
 
     //funcao construtor da classe
-    function cl_disciplina()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("disciplina");
@@ -77,12 +77,12 @@ class cl_disciplina
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed12_i_codigo = ($this->ed12_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed12_i_codigo"] : $this->ed12_i_codigo);
-            $this->ed12_i_ensino = ($this->ed12_i_ensino == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed12_i_ensino"] : $this->ed12_i_ensino);
-            $this->ed12_i_caddisciplina = ($this->ed12_i_caddisciplina == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed12_i_caddisciplina"] : $this->ed12_i_caddisciplina);
+            $this->ed12_i_codigo = ($this->ed12_i_codigo === 0 || $this->ed12_i_codigo === 0.0 || $this->ed12_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed12_i_codigo"] : $this->ed12_i_codigo);
+            $this->ed12_i_ensino = ($this->ed12_i_ensino === 0 || $this->ed12_i_ensino === 0.0 || $this->ed12_i_ensino == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed12_i_ensino"] : $this->ed12_i_ensino);
+            $this->ed12_i_caddisciplina = ($this->ed12_i_caddisciplina === 0 || $this->ed12_i_caddisciplina === 0.0 || $this->ed12_i_caddisciplina == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed12_i_caddisciplina"] : $this->ed12_i_caddisciplina);
             $this->ed12_matrizcurricular = ($this->ed12_matrizcurricular == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed12_matrizcurricular"] : $this->ed12_matrizcurricular);
         } else {
-            $this->ed12_i_codigo = ($this->ed12_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed12_i_codigo"] : $this->ed12_i_codigo);
+            $this->ed12_i_codigo = ($this->ed12_i_codigo === 0 || $this->ed12_i_codigo === 0.0 || $this->ed12_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed12_i_codigo"] : $this->ed12_i_codigo);
         }
     }
 
@@ -136,7 +136,7 @@ class cl_disciplina
                 $this->ed12_i_codigo = $ed12_i_codigo;
             }
         }
-        if (($this->ed12_i_codigo == null) || ($this->ed12_i_codigo == "")) {
+        if (($this->ed12_i_codigo == null) || ($this->ed12_i_codigo === 0 || $this->ed12_i_codigo === 0.0 || $this->ed12_i_codigo == "")) {
             $this->erro_sql = " Campo ed12_i_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -438,7 +438,7 @@ class cl_disciplina
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -465,7 +465,7 @@ class cl_disciplina
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -479,7 +479,7 @@ class cl_disciplina
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_disciplina
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -516,7 +516,7 @@ class cl_disciplina
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_disciplina
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -560,7 +560,7 @@ class cl_disciplina
         $sSql = 'select ';
         if ($sCampos != '*') {
 
-            $sCamposSql = split('#', $sCampos);
+            $sCamposSql = preg_split('#\##m', $sCampos);
             $sVirgula = '';
             for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 
@@ -589,7 +589,7 @@ class cl_disciplina
         if ($sOrdem != null) {
 
             $sSql .= ' order by ';
-            $sCamposSql = split('#', $sOrdem);
+            $sCamposSql = preg_split('#\##m', $sOrdem);
             $sVirgula = '';
             for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 
@@ -609,7 +609,7 @@ class cl_disciplina
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -637,7 +637,7 @@ class cl_disciplina
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -651,7 +651,7 @@ class cl_disciplina
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -679,7 +679,7 @@ class cl_disciplina
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];

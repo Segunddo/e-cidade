@@ -50,7 +50,8 @@ include(modification("classes/db_periodocalendario_classe.php"));
 include(modification("classes/db_transfaprov_classe.php"));
 include(modification("classes/db_serieequiv_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $resultedu= eduparametros(db_getsession("DB_coddepto"));
 $escola = db_getsession("DB_coddepto");
@@ -116,19 +117,19 @@ if(!isset($incluir)){
  }
  $codequivorig = ($codequivorig==""?0:$codequivorig).",".$etapaorigem;
  $result = $clregencia->sql_record($clregencia->sql_query("","ed59_i_codigo,ed232_i_codigo,ed232_c_descr,ed232_c_abrev,ed220_i_procedimento as procorigem,ed57_c_descr,ed57_i_escola,fc_nomeetapaturma(ed59_i_turma) as ed11_c_descr,ed59_i_ordenacao","ed59_i_ordenacao"," ed59_i_turma = $turmaorigem AND ed59_i_serie in ($etapaorigem)"));
- $procorigem = pg_result($result,0,'procorigem');
+ $procorigem = ($result ? pg_result($result,0,'procorigem') : null);
  $linhas = $clregencia->numrows;
  $result1 = $clregencia->sql_record($clregencia->sql_query("","ed59_i_codigo as regdestino,ed232_i_codigo as coddestino,ed232_c_descr as descrdestino,ed220_i_procedimento as procdestino,ed57_c_descr as ed57_c_descrdest,ed57_i_escola as ed57_i_escoladest,fc_nomeetapaturma(ed59_i_turma) as ed11_c_descrdest,ed59_i_ordenacao","ed59_i_ordenacao"," ed59_i_turma = $turmadestino AND ed59_i_serie in ($codequivorig)"));
- $procdestino = pg_result($result1,0,'procdestino');
+ $procdestino = ($result1 ? pg_result($result1,0,'procdestino') : null);
  $linhas1 = $clregencia->numrows;
  ?>
  <tr>
   <td colspan="2" width="48%" valign="top" bgcolor="#CCCCCC">
-   <b>TURMA DE ORIGEM: ( <?=pg_result($result,0,'ed57_c_descr')?>&nbsp;&nbsp;&nbsp;<?=pg_result($result,0,'ed11_c_descr')?> - Escola: <?=pg_result($result,0,'ed57_i_escola')?> )</b>
+   <b>TURMA DE ORIGEM: ( <?=($result ? pg_result($result,0,'ed57_c_descr') : null)?>&nbsp;&nbsp;&nbsp;<?=($result ? pg_result($result,0,'ed11_c_descr') : null)?> - Escola: <?=($result ? pg_result($result,0,'ed57_i_escola') : null)?> )</b>
   </td>
   <td></td>
   <td colspan="2" width="48%" valign="top" bgcolor="#CCCCCC">
-   <b>TURMA ATUAL: ( <?=pg_result($result1,0,'ed57_c_descrdest')?>&nbsp;&nbsp;&nbsp;<?=pg_result($result1,0,'ed11_c_descrdest')?> - Escola: <?=pg_result($result1,0,'ed57_i_escoladest')?> )</b>
+   <b>TURMA ATUAL: ( <?=($result1 ? pg_result($result1,0,'ed57_c_descrdest') : null)?>&nbsp;&nbsp;&nbsp;<?=($result1 ? pg_result($result1,0,'ed11_c_descrdest') : null)?> - Escola: <?=($result1 ? pg_result($result1,0,'ed57_i_escoladest') : null)?> )</b>
   </td>
  </tr>
  <?
