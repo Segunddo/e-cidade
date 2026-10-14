@@ -22,7 +22,7 @@ for tela in sys.argv[1:]:
     subprocess.run(["docker","exec","-u","root","ecidade_php56","sh","-c",f"cp /tmp/_sess.bak {SESS}; chown www-data:www-data {SESS}"])
     subprocess.run(["curl","-s","-o","/dev/null","-b",f"ECIDADEWINDOWMAIN={SID}",f"http://localhost:8085/{tela}"])
     log=open("ecidade/extension/log/error.log","rb").read()
-    m=re.search(rb"with message '(pg_\w+)\(\): Argument #1 \(\$result\) must be of type PgSql.Result, false given' in (?:/var/www/html/)?(\S+) on line (\d+)",log)
+    m=re.search(rb"with message '(pg_\w+)\(\): Argument #1 \(\$result\) must be of type PgSql.Result, (?:false|null) given' in (?:/var/www/html/)?(\S+) on line (\d+)",log)
     if not m:
         e=re.search(rb"E_ERROR - (.{0,200})",log); print(tela,"fim:", e.group(1).decode("latin1") if e else "sem fatal"); break
     f="ecidade/"+m.group(2).decode(); l=int(m.group(3)); ls=open(f,"rb").read().split(b"\n")

@@ -95,22 +95,22 @@ class cl_rhregime
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh30_codreg = ($this->rh30_codreg == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_codreg"]:$this->rh30_codreg);
-       $this->rh30_vinculomanad = ($this->rh30_vinculomanad == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_vinculomanad"]:$this->rh30_vinculomanad);
+       $this->rh30_codreg = ($this->rh30_codreg === 0 || $this->rh30_codreg === 0.0 || $this->rh30_codreg == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_codreg"]:$this->rh30_codreg);
+       $this->rh30_vinculomanad = ($this->rh30_vinculomanad === 0 || $this->rh30_vinculomanad === 0.0 || $this->rh30_vinculomanad == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_vinculomanad"]:$this->rh30_vinculomanad);
        $this->rh30_descr = ($this->rh30_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_descr"]:$this->rh30_descr);
-       $this->rh30_regime = ($this->rh30_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_regime"]:$this->rh30_regime);
+       $this->rh30_regime = ($this->rh30_regime === 0 || $this->rh30_regime === 0.0 || $this->rh30_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_regime"]:$this->rh30_regime);
        $this->rh30_vinculo = ($this->rh30_vinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_vinculo"]:$this->rh30_vinculo);
-       $this->rh30_instit = ($this->rh30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_instit"]:$this->rh30_instit);
-       $this->rh30_naturezaregime = ($this->rh30_naturezaregime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_naturezaregime"]:$this->rh30_naturezaregime);
-       $this->rh30_utilizacao = ($this->rh30_utilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_utilizacao"]:$this->rh30_utilizacao);
-       $this->rh30_periodoaquisitivo = ($this->rh30_periodoaquisitivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_periodoaquisitivo"]:$this->rh30_periodoaquisitivo);
-       $this->rh30_periodogozoferias = ($this->rh30_periodogozoferias == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_periodogozoferias"]:$this->rh30_periodogozoferias);
+       $this->rh30_instit = ($this->rh30_instit === 0 || $this->rh30_instit === 0.0 || $this->rh30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_instit"]:$this->rh30_instit);
+       $this->rh30_naturezaregime = ($this->rh30_naturezaregime === 0 || $this->rh30_naturezaregime === 0.0 || $this->rh30_naturezaregime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_naturezaregime"]:$this->rh30_naturezaregime);
+       $this->rh30_utilizacao = ($this->rh30_utilizacao === 0 || $this->rh30_utilizacao === 0.0 || $this->rh30_utilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_utilizacao"]:$this->rh30_utilizacao);
+       $this->rh30_periodoaquisitivo = ($this->rh30_periodoaquisitivo === 0 || $this->rh30_periodoaquisitivo === 0.0 || $this->rh30_periodoaquisitivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_periodoaquisitivo"]:$this->rh30_periodoaquisitivo);
+       $this->rh30_periodogozoferias = ($this->rh30_periodogozoferias === 0 || $this->rh30_periodogozoferias === 0.0 || $this->rh30_periodogozoferias == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_periodogozoferias"]:$this->rh30_periodogozoferias);
        $this->rh30_vinculoemprego = ($this->rh30_vinculoemprego == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh30_vinculoemprego"]:$this->rh30_vinculoemprego);
-       $this->rh30_codigocategoria = ($this->rh30_codigocategoria == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_codigocategoria"]:$this->rh30_codigocategoria);
-       $this->rh30_admissao = ($this->rh30_admissao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_admissao"]:$this->rh30_admissao);
-       $this->rh30_provimento = ($this->rh30_provimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_provimento"]:$this->rh30_provimento);
+       $this->rh30_codigocategoria = ($this->rh30_codigocategoria === 0 || $this->rh30_codigocategoria === 0.0 || $this->rh30_codigocategoria == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_codigocategoria"]:$this->rh30_codigocategoria);
+       $this->rh30_admissao = ($this->rh30_admissao === 0 || $this->rh30_admissao === 0.0 || $this->rh30_admissao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_admissao"]:$this->rh30_admissao);
+       $this->rh30_provimento = ($this->rh30_provimento === 0 || $this->rh30_provimento === 0.0 || $this->rh30_provimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_provimento"]:$this->rh30_provimento);
      }else{
-       $this->rh30_codreg = ($this->rh30_codreg == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_codreg"]:$this->rh30_codreg);
+       $this->rh30_codreg = ($this->rh30_codreg === 0 || $this->rh30_codreg === 0.0 || $this->rh30_codreg == ""?@$GLOBALS["HTTP_POST_VARS"]["rh30_codreg"]:$this->rh30_codreg);
      }
    }
 
@@ -246,7 +246,7 @@ class cl_rhregime
          $this->rh30_codreg = $rh30_codreg;
        }
      }
-     if(($this->rh30_codreg == null) || ($this->rh30_codreg == "") ){
+     if(($this->rh30_codreg == null) || ($this->rh30_codreg === 0 || $this->rh30_codreg === 0.0 || $this->rh30_codreg == "") ){
        $this->erro_sql = " Campo rh30_codreg não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -817,7 +817,7 @@ class cl_rhregime
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -842,7 +842,7 @@ class cl_rhregime
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_rechumanopessoal {
                  ed284_i_rhpessoal = int8 = Código Rhpessoal 
                  ";
    //funcao construtor da classe 
-   function cl_rechumanopessoal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rechumanopessoal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rechumanopessoal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed284_i_codigo = ($this->ed284_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed284_i_codigo"]:$this->ed284_i_codigo);
-       $this->ed284_i_rechumano = ($this->ed284_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed284_i_rechumano"]:$this->ed284_i_rechumano);
-       $this->ed284_i_rhpessoal = ($this->ed284_i_rhpessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed284_i_rhpessoal"]:$this->ed284_i_rhpessoal);
+       $this->ed284_i_codigo = ($this->ed284_i_codigo === 0 || $this->ed284_i_codigo === 0.0 || $this->ed284_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed284_i_codigo"]:$this->ed284_i_codigo);
+       $this->ed284_i_rechumano = ($this->ed284_i_rechumano === 0 || $this->ed284_i_rechumano === 0.0 || $this->ed284_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed284_i_rechumano"]:$this->ed284_i_rechumano);
+       $this->ed284_i_rhpessoal = ($this->ed284_i_rhpessoal === 0 || $this->ed284_i_rhpessoal === 0.0 || $this->ed284_i_rhpessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed284_i_rhpessoal"]:$this->ed284_i_rhpessoal);
      }else{
-       $this->ed284_i_codigo = ($this->ed284_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed284_i_codigo"]:$this->ed284_i_codigo);
+       $this->ed284_i_codigo = ($this->ed284_i_codigo === 0 || $this->ed284_i_codigo === 0.0 || $this->ed284_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed284_i_codigo"]:$this->ed284_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rechumanopessoal {
          $this->ed284_i_codigo = $ed284_i_codigo; 
        }
      }
-     if(($this->ed284_i_codigo == null) || ($this->ed284_i_codigo == "") ){ 
+     if(($this->ed284_i_codigo == null) || ($this->ed284_i_codigo === 0 || $this->ed284_i_codigo === 0.0 || $this->ed284_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed284_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_rechumanopessoal {
    function sql_query ( $ed284_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_rechumanopessoal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_rechumanopessoal {
    function sql_query_file ( $ed284_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_rechumanopessoal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

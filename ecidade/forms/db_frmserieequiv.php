@@ -39,7 +39,7 @@ $clrotulo->label("ed11_i_codigo");
  $num = pg_num_rows($sql_result);
  $conta = "";
  while ($row=pg_fetch_array($sql_result)){
-  $conta = $conta+1;
+  $conta = (int)$conta+1;
   $cod_curso = $row["ed10_i_codigo"];
   echo "new Array(\n";
   $sub_result = $clserie->sql_record($clserie->sql_query("","ed11_i_codigo,ed11_c_descr","ed11_i_sequencia"," ed11_i_ensino = '$cod_curso'"));
@@ -50,7 +50,7 @@ $clrotulo->label("ed11_i_codigo");
    while ($rowx=pg_fetch_array($sub_result)){
     $codigo_base=$rowx["ed11_i_codigo"];
     $base_nome=$rowx["ed11_c_descr"];
-    $conta_sub=$conta_sub+1;
+    $conta_sub=(int)$conta_sub+1;
     if ($conta_sub==$num_sub){
      echo "new Array(\"$base_nome\", $codigo_base)\n";
      $conta_sub = "";

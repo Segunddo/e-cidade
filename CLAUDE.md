@@ -65,10 +65,9 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** **ÁREA TRIBUTÁRIO CONCLUÍDA; ÁREA EDUCAÇÃO INICIADA** (branch
-`2educacao-migrado`). Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
-`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e os **sublotes A, B e C do `edu1_`** (a–p);
-falta só o sublote D (q–v). Ver *ÁREA EDUCAÇÃO*.
+**Onde paramos:** **ÁREAS TRIBUTÁRIO E EDUCAÇÃO CONCLUÍDAS** (branch `2educacao-migrado`).
+Educação: 5/5 módulos, **555/555 telas de menu** no PHP 8.5. Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*. Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
+`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e os 4 sublotes do `edu1_` — todo o prefixo `edu` (1.211 arquivos). Ver *ÁREA EDUCAÇÃO*.
 
 | | |
 |---|---|
@@ -76,8 +75,8 @@ falta só o sublote D (q–v). Ver *ÁREA EDUCAÇÃO*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu2\|edu3\|edu4\|edu0\|edu(?=_))[0-9]*_\|edu1_[a-p])` — **3.144 telas** + 367 por `map` |
-| **Próximo passo** | **`edu1_` sublote D** (`q`–`v`, 200 telas) — o último da área Educação Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu)[0-9]*_)` — **3.344 arquivos** + 367 por `map` |
+| **Próximo passo** | **decisão do usuário**: próxima área (ver *DIMENSIONAMENTO DAS PRÓXIMAS ÁREAS*), comparação com o TCC de referência, ou o relatório Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3067,6 +3066,7 @@ por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` n
 | `edu1_` A (a–c) | 819 | 127 Rector + 15 à mão | 819/819 | 449/451 | 12.436 linhas, 433 classes | **194/196** |
 | `edu1_` B (d–m) | 482 | 115 Rector + ~16 à mão | 482/482 | 158/158 | 5.081 linhas, 156 classes | **203/205** |
 | `edu1_` C (n–p) | 312 | 82 Rector + 4 à mão | 312/312 | 101/101 | 3.259 linhas, 100 classes | **130/132** |
+| `edu1_` D (q–z) | 545 | 118 Rector + 8 à mão | 545/545 | 222/222 | 6.911 linhas, 220 classes | **200/200** |
 
 **`bib`** — 76 pelo Rector (242 guardas, 152 `split` todos `#`, 39 construtores, 33
 `parse_str`+`extract`, 3 parâmetros opcionais antes de obrigatórios, 1 `${$var}`), mais 3 à mão:
@@ -3244,6 +3244,55 @@ prévio, 9 divergências na 1ª bateria fechadas por 6 guardas `pg_*` (as duas r
 padrão de `escolabase`/`calendarioescola`). **Interseção com todos os universos verificados
 vazia e núcleo intocado → sem bateria de regressão**, pela regra proporcional — a segunda vez
 desde o `cai`.
+
+**Sublote D** — faixa `q-z`, não `q-v`, para não depender de não haver letra depois do `v`
+(196+205+132+200 = **733**, todas as telas `edu1_`). 7 divergências, todas fechadas — **bateria
+perfeita**: 10 guardas `pg_*` (o ciclo passou a casar também "null given"), 1 constante
+indefinida, e **contador iniciado com `""`** (`$conta = ""; $conta = $conta + 1`) — `1` no 5.6,
+`TypeError` no 8.5; `(int)$conta + 1` reproduz o 5.6 com o tipo certo (é a manifestação que o
+TCC de referência corrigiu no PHP8-20 trocando `""` por `0`). Regressão: núcleo intocado;
+interseção só com `rec` (1 classe) → a tela `rec` roteada idêntica.
+
+Com o `edu` inteiro portado, o `location` voltou a ter **um `edu` só** no grupo principal, no
+lugar de `edu2|edu3|edu4|edu0|edu(?=_)` + a faixa `edu1_[a-p]`. Conferido: `^edu[0-9]*_` casa
+exatamente os 1.211 arquivos, e não há outro arquivo começando por `edu` na raiz.
+
+### 🏁 ÁREA EDUCAÇÃO CONCLUÍDA
+
+| | |
+|---|---|
+| **Módulos completos** | **5 de 5** — Escola 226, Secretaria 214, Alimentação Escolar 62, Biblioteca 39, Transporte Escolar 14 |
+| **Telas de menu servidas pelo PHP 8.5** | **555 de 555** (o menu tem 556; uma entrada aponta para arquivo inexistente) |
+| Arquivos roteados | 1.533 por prefixo (`edu` 1.211, `mer` 187, `bib` 98, `tre` 19, `sec` 12, `esc` 3, `rel` 1) + 20 por `map` |
+| **Telas comparadas byte-a-byte** | **1.534 idênticas de 1.551 — 98,9%** |
+| Divergências | **17, todas caracterizadas, nenhuma defeito de migração** |
+| Baterias perfeitas | `tre`, `esc`+`rel`+`sec`, `mer`, `edu3_`, `edu2_`, `edu1_` D |
+
+As 17: **8** telas de importação do `edu4` que entram em laço eterno no 5.6 (`feof(false)`) e dão
+500 no 8.5; **6** telas do `edu1` que quebram também no 5.6 (objeto nunca instanciado —
+`calendarioescola`, `escolabase`, `procescola`, 002/003 de cada); **3** artefatos da bateria no
+`bib` (iframe sem parâmetros e dois fragmentos de include).
+
+Custo efetivo, em arquivos alterados por lote:
+
+```
+tre 3   esc/rel/sec 19   bib 79   mer+mat/pro 198   edu3+var 133 (inclui os 24 da 9a lacuna)
+edu2 67   edu4 110   edu1 A 142   B 128   C 86   D 126              ~1.091 arquivos
+```
+
+O dimensionamento previa **969** para o escopo A (prefixos inteiros); saiu em ~1.091 — +13%, na
+mesma direção da Fase B (428 previstos, ~526 reais). A diferença vem das lacunas descobertas no
+caminho (9ª lacuna: +30 arquivos) e das correções à mão, que a estimativa estática não enxerga.
+
+**Núcleo tocado na área:** `std/DBDate.php` (`cal_days_in_month`), `dbforms/db_classesgenericas.php`
+(`reset/sizeof/key` sobre nulo), `dbforms/db_funcoes.php` (os dois ramos do `db_select`) e
+`libs/db_stdlibwebseller.php` — todas com bateria completa na linha de base.
+
+**O que a comparação com o TCC de referência agora permite**, sobre o mesmo módulo e os mesmos
+1.211 arquivos `edu`: medir quantas guardas `0 == ""` faltam na branch dele (já confirmado em 4
+classes), rodar a nossa bateria contra a saída dele, e comparar custo e defeitos encontrados
+pelos dois critérios de validação. Não foi feito ainda — é o próximo passo natural, se o usuário
+quiser.
 
 ##### ⚠ O instrumento, de novo: resposta cortada pelo `curl -m 60` virava divergência
 
