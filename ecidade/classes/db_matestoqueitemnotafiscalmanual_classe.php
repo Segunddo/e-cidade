@@ -57,7 +57,7 @@ class cl_matestoqueitemnotafiscalmanual {
                  m79_data = date = Data da Nota 
                  ";
    //funcao construtor da classe 
-   function cl_matestoqueitemnotafiscalmanual() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matestoqueitemnotafiscalmanual"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_matestoqueitemnotafiscalmanual {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m79_sequencial = ($this->m79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m79_sequencial"]:$this->m79_sequencial);
-       $this->m79_matestoqueitem = ($this->m79_matestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m79_matestoqueitem"]:$this->m79_matestoqueitem);
+       $this->m79_sequencial = ($this->m79_sequencial === 0 || $this->m79_sequencial === 0.0 || $this->m79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m79_sequencial"]:$this->m79_sequencial);
+       $this->m79_matestoqueitem = ($this->m79_matestoqueitem === 0 || $this->m79_matestoqueitem === 0.0 || $this->m79_matestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m79_matestoqueitem"]:$this->m79_matestoqueitem);
        $this->m79_notafiscal = ($this->m79_notafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["m79_notafiscal"]:$this->m79_notafiscal);
        if($this->m79_data == ""){
          $this->m79_data_dia = ($this->m79_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["m79_data_dia"]:$this->m79_data_dia);
@@ -86,7 +86,7 @@ class cl_matestoqueitemnotafiscalmanual {
          }
        }
      }else{
-       $this->m79_sequencial = ($this->m79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m79_sequencial"]:$this->m79_sequencial);
+       $this->m79_sequencial = ($this->m79_sequencial === 0 || $this->m79_sequencial === 0.0 || $this->m79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m79_sequencial"]:$this->m79_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_matestoqueitemnotafiscalmanual {
          $this->m79_sequencial = $m79_sequencial; 
        }
      }
-     if(($this->m79_sequencial == null) || ($this->m79_sequencial == "") ){ 
+     if(($this->m79_sequencial == null) || ($this->m79_sequencial === 0 || $this->m79_sequencial === 0.0 || $this->m79_sequencial == "") ){ 
        $this->erro_sql = " Campo m79_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -415,7 +415,7 @@ class cl_matestoqueitemnotafiscalmanual {
    function sql_query ( $m79_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_matestoqueitemnotafiscalmanual {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_matestoqueitemnotafiscalmanual {
    function sql_query_file ( $m79_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -472,7 +472,7 @@ class cl_matestoqueitemnotafiscalmanual {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

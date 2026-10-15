@@ -84,6 +84,10 @@ def citados(p):                                        # 3a lacuna: aberto por J
 
 rx = re.compile(r'^' + PREF + r'[0-9]*_', re.IGNORECASE)   # 1a lacuna: maiusculas
 telas = sorted(f for f in os.listdir(".") if os.path.isfile(f) and f.endswith(".php") and rx.match(f))
+# Lote que nao e um prefixo (ex.: telas de menu soltas): TELAS=a.php,b.php -- o
+# <prefixo> passa a ser so o nome dos arquivos de saida.
+if os.environ.get("TELAS"):
+    telas = sorted(os.environ["TELAS"].split(","))
 js = set().union(*[citados(f) for f in telas]) - set(telas)
 universo, fila = set(telas) | js, list(telas) + sorted(js)
 while fila:

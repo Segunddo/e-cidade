@@ -67,7 +67,8 @@ db_app::import("Dotacao");
 db_app::import("contabilidade.contacorrente.*");
 
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $oPost = db_utils::postMemory($_POST);

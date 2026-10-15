@@ -66,7 +66,9 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
 **Onde paramos:** **ÁREAS TRIBUTÁRIO E EDUCAÇÃO CONCLUÍDAS** (branch `2educacao-migrado`).
-Educação: 5/5 módulos, **555/555 telas de menu** no PHP 8.5. Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
+Conferido pelo proxy, tela de menu por tela de menu (15/10/2026): **Tributário 1.059/1.059** e **Educação
+480/480** arquivos de menu existentes servidos pelo PHP 8.5 — depois de fechar a *10ª LACUNA* (14 telas
+que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 **Comparação com o TCC de referência FEITA** — ver *⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA*. Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
 `map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e os 4 sublotes do `edu1_` — todo o prefixo `edu` (1.211 arquivos). Ver *ÁREA EDUCAÇÃO*.
 
@@ -2891,6 +2893,15 @@ Feito com as ferramentas do `scratchpad/` da branch `2educacao-migrado` (versõe
 por `TELAS=a.php,b.php`. O `paridade-56.ini` (criado na Educação) estava montado, como na linha de
 base 2.154/2.160.
 
+**Na Educação (`2educacao-migrado`), as 3 telas `mat1_matestoqueini001/002/003`** (abertas com
+`?entrada=true`; também são do Patrimonial, então passam ao 8.5 para as duas áreas, como as `cai`
+compartilhadas com Financeiro). Trazida a correção do gerador por *merge* da `1tributario-migrado`
+(não rebase: as duas branches já estão publicadas). Universo 137, 94 já pagos, **4 alterados** (Rector:
+3 guardas, 3 construtores, 3 `split`, 1 `parse_str`); `php -l` 137/137 nos dois; classes 87/87 (só o
+artefato conhecido de `RequisicaoMaterial`); escrita 83 classes idênticas; bateria **6/6** (com e sem
+`?entrada=true`); regressão pela interseção com `con` → 31/31. O `enumera.py` ganhou `TELAS=a.php,b.php`
+para lotes que não são um prefixo.
+
 **Lição, a décima da mesma família:** a conferência partia da lista que o gerador produziu. Quem
 achou foi a conferência independente — perguntar ao sistema em execução, tela por tela.
 
@@ -3298,7 +3309,7 @@ exatamente os 1.211 arquivos, e não há outro arquivo começando por `edu` na r
 | | |
 |---|---|
 | **Módulos completos** | **5 de 5** — Escola 226, Secretaria 214, Alimentação Escolar 62, Biblioteca 39, Transporte Escolar 14 |
-| **Telas de menu servidas pelo PHP 8.5** | **555 de 555** (o menu tem 556; uma entrada aponta para arquivo inexistente) |
+| **Telas de menu servidas pelo PHP 8.5** | **555 de 555** (o menu tem 556; uma entrada aponta para arquivo inexistente). ⚠ Contagem por módulo; conferida pelo proxy em 15/10, eram 477 de 480 arquivos distintos — as 3 `mat1_matestoqueini` da *10ª LACUNA*, agora portadas: **480/480** |
 | Arquivos roteados | 1.533 por prefixo (`edu` 1.211, `mer` 187, `bib` 98, `tre` 19, `sec` 12, `esc` 3, `rel` 1) + 20 por `map` |
 | **Telas comparadas byte-a-byte** | **1.534 idênticas de 1.551 — 98,9%** |
 | Divergências | **17, todas caracterizadas, nenhuma defeito de migração** |
