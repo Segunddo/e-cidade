@@ -24,13 +24,15 @@ FASE_A = "'cem','itb','itbi','agu','agua','jur','div','mar','not','fis','iss','d
 # o Python nao decodifica como UTF-8: o sintoma e um UnicodeDecodeError, nao um
 # erro de SQL. Mesma familia da armadilha de encoding do resto do projeto.
 SQL = ("\\copy (WITH ta AS ("
-  "SELECT DISTINCT lower(di.funcao) AS tela, replace(a.at25_descr,'DB:','') AS area "
+  "SELECT DISTINCT lower(split_part(di.funcao,'?',1)) AS tela, replace(a.at25_descr,'DB:','') AS area "
   "FROM configuracoes.atendcadareamod am "
   "JOIN configuracoes.atendcadarea a ON a.at26_sequencial=am.at26_codarea "
   "JOIN configuracoes.db_modulos m ON m.id_item=am.at26_id_item "
   "JOIN configuracoes.db_menu dm ON dm.modulo=m.id_item "
   "JOIN configuracoes.db_itensmenu di ON di.id_item=dm.id_item_filho "
-  "WHERE di.funcao ~ '^[A-Za-z]+[0-9]*_.*\\.php$') "
+  # 10a lacuna: o menu guarda telas COM parametro (`con1_manutexto.php?db_opcao=x`).
+  # Sem o split_part o `\.php$` as excluia em silencio -- 13 telas de menu ficaram no 5.6.
+  "WHERE split_part(di.funcao,'?',1) ~ '^[A-Za-z]+[0-9]*_.*\\.php$') "
   "SELECT DISTINCT tela, area FROM ta WHERE "
   f"lower(substring(tela from '^[A-Za-z]+')) NOT IN ({FASE_A}) "
   "ORDER BY 1) TO '/tmp/faseb_all.txt'")
