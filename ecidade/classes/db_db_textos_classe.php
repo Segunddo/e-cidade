@@ -52,7 +52,7 @@ class cl_db_textos {
                  conteudotexto = text = conteudo do texto 
                  ";
    //funcao construtor da classe 
-   function cl_db_textos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_textos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_db_textos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_instit = ($this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
+       $this->id_instit = ($this->id_instit === 0 || $this->id_instit === 0.0 || $this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
        $this->descrtexto = ($this->descrtexto == ""?@$GLOBALS["HTTP_POST_VARS"]["descrtexto"]:$this->descrtexto);
        $this->conteudotexto = ($this->conteudotexto == ""?@$GLOBALS["HTTP_POST_VARS"]["conteudotexto"]:$this->conteudotexto);
      }else{
-       $this->id_instit = ($this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
+       $this->id_instit = ($this->id_instit === 0 || $this->id_instit === 0.0 || $this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
        $this->descrtexto = ($this->descrtexto == ""?@$GLOBALS["HTTP_POST_VARS"]["descrtexto"]:$this->descrtexto);
      }
    }
@@ -82,7 +82,7 @@ class cl_db_textos {
       $this->atualizacampos();
        $this->id_instit = $id_instit; 
        $this->descrtexto = $descrtexto; 
-     if(($this->id_instit == null) || ($this->id_instit == "") ){ 
+     if(($this->id_instit == null) || ($this->id_instit === 0 || $this->id_instit === 0.0 || $this->id_instit == "") ){ 
        $this->erro_sql = " Campo id_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -332,7 +332,7 @@ class cl_db_textos {
    function sql_query ( $id_instit=null,$descrtexto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_db_textos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -376,7 +376,7 @@ class cl_db_textos {
    function sql_query_file ( $id_instit=null,$descrtexto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_db_textos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

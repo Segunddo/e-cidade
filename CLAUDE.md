@@ -2856,6 +2856,41 @@ servidos pelo 5.6. Estão **portados** (entram pelo universo das sete frentes) e
 dois runtimes, mas não estão roteados. Rotear o resto exigiria estender o `map` com os
 arquivos fora do menu, que o banco não sabe classificar por área.
 
+### ⚠ 10ª LACUNA (15/10/2026): 11 telas de menu nunca entraram no `map` — o "100%" valia 1.048/1.059
+
+Achada perguntando ao proxy, tela de menu por tela de menu, qual runtime responde
+(`X-Ecidade-Runtime` em `http://localhost:8090/w/2/<tela>`), em vez de confiar nas listas.
+
+**Causa:** em `db_itensmenu.funcao` a tela vem com parâmetro (`con1_manutexto.php?db_opcao=alvara_p1`,
+`cad1_iptubase001.php?tipoImovel=1`). O `WHERE funcao ~ '\.php$'` do `gera_map_faseb.py` exigia que
+o texto **terminasse** em `.php` e as descartava em silêncio. Só afeta o `map`: o `location` casa o
+nome e ignora o parâmetro. Corrigido com `split_part(funcao,'?',1)` no `SELECT` e no `WHERE`.
+A 11ª, `sys4_geradorteladinamica001.php`, tinha outra causa: o prefixo `sys` não estava em lista nenhuma.
+
+As 11: `cad1_iptubaixa001`, `cad1_iptubase001/002`, `cad2_relatorios_001`, `cad3_conscadastronovo_001`,
+`cai1_arrevenc002`, `cai2_relcaixa_001`, `cai4_baixabanco002`, `cai4_debcontapedaba002`,
+`con1_manutexto`, `sys4_geradorteladinamica001`.
+
+| Passo | Resultado |
+|---|---|
+| Universo (sete frentes, a partir das 11) | 101 arquivos, 48 já pagos |
+| **Alterados** | **7** (Rector: 4 `ereg`/`split`, 3 guardas, 3 construtores, 2 `parse_str`, 1 offset `{}`); convergiu na 2ª passada, só regras vetadas |
+| Remanescentes (contador por token) | 0 — os 2 de `db_db_config_classe.php` são o falso positivo já registrado |
+| Portão de funções contra o 5.6 | 0 ausentes |
+| `php -l` nos dois runtimes | 101/101 |
+| Classes / caminho de escrita | 39/40 idênticas (a 40ª, `cl_iptuconstr_extends`, foge da convenção de nome do harness nos dois) / 1.516 linhas idênticas |
+| **Bateria** | **13/13** sem parâmetro e **88/88 entradas de menu COM o parâmetro** |
+| Regressão (interseção com `cad`/`con`/`pro`/`rec`) | `map` inteiro 347/347 |
+| **Roteamento conferido pelo proxy** | **1.059 de 1.059** telas de menu existentes no 8.5 (7 entradas apontam para arquivo inexistente) |
+
+Feito com as ferramentas do `scratchpad/` da branch `2educacao-migrado` (versões com TIMEOUT,
+`PULAR` e o `re.I` da 9ª lacuna), copiadas para fora da árvore; o `enumera.py` recebeu as telas
+por `TELAS=a.php,b.php`. O `paridade-56.ini` (criado na Educação) estava montado, como na linha de
+base 2.154/2.160.
+
+**Lição, a décima da mesma família:** a conferência partia da lista que o gerador produziu. Quem
+achou foi a conferência independente — perguntar ao sistema em execução, tela por tela.
+
 ### ✅ NÍVEL 3 EM ESCALA — 18 telas roteadas, 14 módulos, zero divergências
 
 O maior ponto fraco declarado do trabalho era este: **as 6.552 guardas `0 == ""` são 60% de

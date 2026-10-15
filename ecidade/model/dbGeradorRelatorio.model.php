@@ -465,11 +465,11 @@ class dbGeradorRelatorio {
 
     foreach ($aFrom as $sTipoRel => $sSql) {
 
-      $aPalavrasFrom = split("[\n ]+",trim($sSql));
+      $aPalavrasFrom = preg_split("#[\n ]+#m",trim($sSql));
 
       foreach ($aPalavrasFrom as $iInd => $sValor) {
         $sPalavra = trim($sValor);
-        if ( isset($sPalavra{0}) && $sPalavra{0} == '$' ){
+        if ( isset($sPalavra[0]) && $sPalavra[0] == '$' ){
           $oVariavel = new dbVariaveisRelatorio($sPalavra,"","","varchar");
           if (!isset($this->aVariaveis[$sPalavra])) {
             $this->addVariavel($sPalavra,$oVariavel);
@@ -1066,7 +1066,7 @@ class dbGeradorRelatorio {
             $sOperador = "";
           }
 
-          if ( trim($sValor)!= "" && is_string($sValor) && $sValor{0} != "$" ){
+          if ( trim($sValor)!= "" && is_string($sValor) && $sValor[0] != "$" ){
             $sWhere[]  = $sOperador." \"".$sNomeCampo."\" ".$sCondicao." '".$sValor."' ";
           } else if (trim($sCondicao) == "in") {
             $sWhere[]  = $sOperador." \"".$sNomeCampo."\" ".$sCondicao." (".$sValor.") ";

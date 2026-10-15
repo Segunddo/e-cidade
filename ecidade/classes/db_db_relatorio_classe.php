@@ -65,7 +65,7 @@ class cl_db_relatorio
                  db63_db_relatorioorigem = int4 = Origem Relatório 
                  ";
   //funcao construtor da classe 
-  function cl_db_relatorio()
+  function __construct()
   {
     //classes dos rotulos dos campos
     $this->rotulo = new rotulo("db_relatorio");
@@ -85,9 +85,9 @@ class cl_db_relatorio
   function atualizacampos($exclusao = false)
   {
     if ($exclusao == false) {
-      $this->db63_sequencial = ($this->db63_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_sequencial"] : $this->db63_sequencial);
-      $this->db63_db_gruporelatorio = ($this->db63_db_gruporelatorio == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_db_gruporelatorio"] : $this->db63_db_gruporelatorio);
-      $this->db63_db_tiporelatorio = ($this->db63_db_tiporelatorio == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_db_tiporelatorio"] : $this->db63_db_tiporelatorio);
+      $this->db63_sequencial = ($this->db63_sequencial === 0 || $this->db63_sequencial === 0.0 || $this->db63_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_sequencial"] : $this->db63_sequencial);
+      $this->db63_db_gruporelatorio = ($this->db63_db_gruporelatorio === 0 || $this->db63_db_gruporelatorio === 0.0 || $this->db63_db_gruporelatorio == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_db_gruporelatorio"] : $this->db63_db_gruporelatorio);
+      $this->db63_db_tiporelatorio = ($this->db63_db_tiporelatorio === 0 || $this->db63_db_tiporelatorio === 0.0 || $this->db63_db_tiporelatorio == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_db_tiporelatorio"] : $this->db63_db_tiporelatorio);
       $this->db63_nomerelatorio = ($this->db63_nomerelatorio == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_nomerelatorio"] : $this->db63_nomerelatorio);
       $this->db63_versao_xml = ($this->db63_versao_xml == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_versao_xml"] : $this->db63_versao_xml);
       if ($this->db63_data == "") {
@@ -99,9 +99,9 @@ class cl_db_relatorio
         }
       }
       $this->db63_xmlestruturarel = ($this->db63_xmlestruturarel == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_xmlestruturarel"] : $this->db63_xmlestruturarel);
-      $this->db63_db_relatorioorigem = ($this->db63_db_relatorioorigem == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_db_relatorioorigem"] : $this->db63_db_relatorioorigem);
+      $this->db63_db_relatorioorigem = ($this->db63_db_relatorioorigem === 0 || $this->db63_db_relatorioorigem === 0.0 || $this->db63_db_relatorioorigem == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_db_relatorioorigem"] : $this->db63_db_relatorioorigem);
     } else {
-      $this->db63_sequencial = ($this->db63_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_sequencial"] : $this->db63_sequencial);
+      $this->db63_sequencial = ($this->db63_sequencial === 0 || $this->db63_sequencial === 0.0 || $this->db63_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db63_sequencial"] : $this->db63_sequencial);
     }
   }
   // funcao para inclusao
@@ -195,7 +195,7 @@ class cl_db_relatorio
         $this->db63_sequencial = $db63_sequencial;
       }
     }
-    if (($this->db63_sequencial == null) || ($this->db63_sequencial == "")) {
+    if (($this->db63_sequencial == null) || ($this->db63_sequencial === 0 || $this->db63_sequencial === 0.0 || $this->db63_sequencial == "")) {
       $this->erro_sql = " Campo db63_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
