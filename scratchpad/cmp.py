@@ -38,7 +38,7 @@ NORM = [
     (re.compile(rb'tmp\\?/[A-Za-z0-9_]+\.(?:csv|txt)'), b'tmp/X.arq'),
     # A pagina de erro monta URL absoluta a partir de HTTP_HOST (ver $DB_URL_ABS),
     # entao ela carrega a porta do runtime que a serviu. Diferenca por construcao.
-    (re.compile(rb'localhost:80(80|85|86)'),         b'localhost:PORT'),
+    (re.compile(rb'localhost:80(80|85|86|87)'),         b'localhost:PORT'),
     # Data de criacao gravada dentro do PDF pelo FPDF: muda se as duas
     # requisicoes cairem em segundos diferentes. Passou a aparecer depois que
     # tmp/ virou gravavel e os relatorios comecaram a ser gerados de fato.
@@ -90,7 +90,7 @@ def fetch(port, page):
 # Lado B configuravel: PORTA_B=8086 compara o 5.6 com o codigo do TCC de referencia
 # (container ecidade_tcc_gerson). O padrao continua sendo o nosso 8.5.
 PORTA_B = int(os.environ.get('PORTA_B', '8085'))
-CONTAINER_B = {8085: 'ecidade_php85', 8086: 'ecidade_tcc_gerson'}[PORTA_B]
+CONTAINER_B = {8085: 'ecidade_php85', 8086: 'ecidade_tcc_gerson', 8087: 'ecidade_lar12'}[PORTA_B]
 files = sorted(f for f in os.listdir('.')
                if re.match(PREF, f, re.IGNORECASE) and f.endswith('.php'))
 if os.environ.get('ONLY'):

@@ -4268,6 +4268,47 @@ Pendência para demonstrar o piloto no navegador: **sessão compartilhada entre 
 (hoje 5.6 grava em `/var/lib/php/sessions` e 8.5 em `/tmp`, isolados). O cookie não é obstáculo —
 cookies de `localhost` são compartilhados entre portas.
 
+### ✅ MEDIÇÃO (14/10/2026): o Laravel pode migrar em PARALELO — com `vendor/` separado
+
+**A dependência:** nenhuma versão do Laravel roda no 5.6 **e** no 8.5 (5.4 é a última do 5.6 e
+não roda no 8; a 12 exige 8.2–8.5, a 13 exige 8.3–8.5). Como os dois containers montam o mesmo
+`vendor/`, atualizar o Laravel ali derruba o 5.6. **A saída é um `vendor/` próprio do 8.5**, montado
+por cima de `/var/www/html/vendor` só no lado 8.5 — o 5.6 não é tocado.
+
+Montagem da medição (nada na árvore versionada mudou além de `cmp.py`):
+`ecidade/tmp/lar12/` (gitignored) com `composer.json` = o atual com `laravel/framework ^12.0` e o
+resto `*`; 4º container `ecidade_lar12` na porta **8087**, mesma imagem do 8.5, com o vendor novo,
+`bootstrap/cache` e `storage/` também sobrepostos (o Laravel 12 escreveria cache no formato dele e
+quebraria os runtimes 5.4).
+
+| Medição | Resultado |
+|---|---|
+| Pacotes que **não resolvem** com Laravel 12 | **4**: `silex/silex`, `proner/phppimaco` (mpdf 7, PHP ≤ 7.3), `dbseller/phinx_postgres` (phinx 0.10 / symfony antigo), `dbseller/sdk-api-pix-bb` (guzzle 6, ou 7.5.0 com alertas de segurança) |
+| Resolvidos | 135 pacotes; Laravel 12.70, Passport 13.10, symfony 7/8, guzzle 7, phpspreadsheet 5, dompdf 3, mpdf 8 |
+| **Legado sobre o vendor novo** | **3.294 telas** (Fase A + Educação): **3.271 idênticas ao 5.6**; as 15 divergentes + 8 timeouts são **exatamente** as 23 da linha de base. **Zero regressão.** |
+| Classes de `app/`+`src/` que deixam de carregar | **29 de 3.910** (21 `src/Console`: `execute()` sem `: int` do symfony 7; 8 `app/`: `Handler::report(Exception)`, `BaseDeferredProvider::register()`, traits de Auth removidas, Pimaco) |
+| Boot do Laravel 12 | **não inicializa** — morre no 1º provider (`BaseDeferredProvider`); `/v4/oauth/token` dá 500 |
+| APIs removidas (estático) | 50 `DB::raw` em `app/` (10.0), 10 helpers `str_*`/`array_*` (6.0), 5 `$dates` (10.0), 1 `Passport::routes()` (11.0), 105 usos de PhpOffice (1.8 → 5) |
+| Uso do Silex | só a API REST `api/V1` (20 arquivos); o `use Silex\Application` do `app.php` é import sem uso |
+
+**⚠ O Passport 13 NÃO convive com o 5.6 no banco compartilhado:** a migração dele apaga
+`user_id`, `redirect`, `personal_access_client`, `password_client` de `oauth_clients` (usados
+pelo Passport 4) e passa a exigir segredo com hash. **Usar Passport 12.4** — aceita Laravel 12 e
+só acrescenta colunas opcionais (`secret` nullable, `provider`), o que o Passport 4 tolera. O
+password grant (o login usa) vem desligado no 12: `Passport::enablePasswordGrant()`.
+
+**Conclusão:** o legado não depende do Laravel novo nem é afetado por ele — 3.294 telas iguais.
+O custo está todo na camada HTTP (`app/` + `api/V1`), que hoje nem inicializa. A ordem certa é
+trocar o vendor do 8.5 **cedo** (cada área migrada depois disso não precisa ser reverificada) e
+portar `app/` em paralelo, com o login e o `/v4/*` ficando no 5.6 até o boot funcionar.
+
+**Três falhas do instrumento nesta medição**, mesma família de sempre: o laço de eliminação do
+Composer tratava erro de clone SSH como "resolveu" (corrigido: sucesso = existir `composer.lock`);
+o `xargs` aborta a lista inteira quando um `php` sai com 255 (fatal) — 574 de 3.910 testados até
+o invólucro `exit 0`; e o `cmp.py` não normalizava `localhost:8087`, gerando 129 falsos positivos.
+
+Remover: `docker rm -f ecidade_lar12` e `rm -rf ecidade/tmp/lar12`.
+
 ### PERMISSÕES: `storage/` bloqueava o login nos DOIS ambientes
 
 `storage/` e `bootstrap/cache` eram `775 diego`, e nenhum container (uid 33) conseguia escrever.
