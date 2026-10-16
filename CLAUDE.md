@@ -4355,6 +4355,85 @@ o invólucro `exit 0`; e o `cmp.py` não normalizava `localhost:8087`, gerando 1
 
 Remover: `docker rm -f ecidade_lar12` e `rm -rf ecidade/tmp/lar12`.
 
+### 📐 LARAVEL SÓ PARA O TRIBUTÁRIO (16/10/2026) — o que a área usa, medido
+
+| | |
+|---|---|
+| Rotas de API do domínio | **74**, em 4 módulos: ISSQN 27, Arrecadação 25, ITBI 14, Cadastro 8 (os outros 12 arquivos de rota estão vazios; `routes/web/tributario/*` também) |
+| Código Laravel do domínio | `app/Domain/Tributario`: **220 arquivos** (Arrecadação 71, ITBI 64, ISSQN 50, Cadastro 35) + `app/Domain/Core` 12 |
+| **Telas legadas que chamam a API por JavaScript** | **14**: TEF (`arr2_operacoespendentestef00*`, `cai3_gerfinanc075`), PIX (`cai3_gerfinanc001`, `cai1_pix002`), parcelamentos vencidos (`arr4_*parc_venc`), alvará por eventos e ordem de serviço (`iss4_*`), Redesim (`iss179_inscricaoredesim`), veículos do ISSQN (2 `forms/`), tipo de débito (`forms/db_frmarretipo002`), parâmetros do número cadastral (`cad4_*`) |
+| Telas legadas que usam classes de `app/` | 18 (precisam continuar compatíveis com as duas versões do Laravel) |
+| Rotas do ITBI | middleware `clientCredential` = **aplicação externa** (ITBI online); nenhuma tela legada as chama |
+| API Silex `api/V1` | 1 rota do Tributário (`TributarioControllerProvider`: `post recibo`) |
+| Pacote travado que o Tributário usa | **`dbseller/sdk-api-pix-bb`** — `app/Domain/Tributario/Arrecadacao/Pix/Bancos/BancoDoBrasil.php` (`Swagger\Client`) |
+
+**Ponto cego que isto revela, válido JÁ:** as 14 telas são servidas pelo 8.5, mas o AJAX delas
+vai a `/v4/api/tributario/*`, que o proxy manda ao **5.6**. A bateria (`curl`, sem JS) nunca
+exercitou essas chamadas. E sem o proxy, abertas no `:8085`, a chamada iria ao Laravel 5.4 sob
+PHP 8.5 e falharia.
+
+**Pontos a verificar antes de estimar:** (1) ~~se o Passport 12 do 8.5 aceita o token emitido
+pelo Passport 4 do 5.6~~ **TESTADO (16/10/2026): aceita** — ver abaixo; (2) PIX e TEF chamam serviços reais de terceiros (banco, adquirente)
+— testes automáticos não podem contatá-los, exigem sandbox ou dublê.
+
+#### ✅ TESTE: o token do Passport 4 (5.6) vale no Passport novo (8.5)
+
+Token **real**, pedido a `POST :8080/v4/oauth/token` com o cliente `9999999` e o usuário
+`dbseller` (HTTP 200; JWT RS256, `aud`=9999999, `sub`=1). Conferido com `ResourceServer` do
+`league/oauth2-server` — a classe que o Passport usa para validar o *bearer* —, com a chave
+`storage/oauth-public.key` e a revogação lida de `oauth_access_tokens` no banco compartilhado:
+
+| `league/oauth2-server` | token real | controle: `sub` adulterado | controle: revogado |
+|---|---|---|---|
+| **8.5.5** (o do Passport 12.4) + `lcobucci/jwt` 5.6.1 | **ACEITO** (usuário 1, cliente 9999999) | RECUSADO | RECUSADO |
+| **9.4.1** (o do Passport 13) | **ACEITO** | RECUSADO | RECUSADO |
+
+5.6 usa `league/oauth2-server` 6.1.1 + `lcobucci/jwt` 3.3.3. **Consequência: o login pode ficar
+no 5.6 e as rotas `/v4/api/tributario/*` irem para o 8.5** — o login vira a última peça.
+
+**O que o teste NÃO cobre:** a camada do Passport acima do `ResourceServer` (o `TokenGuard`
+carrega o cliente de `oauth_clients` e o usuário pelo *provider* de autenticação), que só roda
+com o Laravel 12 inicializando. As colunas de `oauth_access_tokens` são as mesmas nas duas
+versões; `oauth_clients` muda no 13, por isso a escolha do 12.4 continua valendo.
+
+**Armadilha do instrumento:** a primeira execução deu `Invalid key supplied` nas duas versões —
+o container `ecidade_lar12` sobrepõe `storage/` com uma pasta vazia, e a chave não estava lá.
+Era o teste, não a compatibilidade. Verificador versionado: `scratchpad/valida_token.php <vendor/autoload.php> <token> <oauth-public.key>`.
+
+### 🗣️ PONTOS LEVADOS AO ORIENTADOR (15/10/2026) — decisão pendente
+
+**1. O nginx é necessário?** Para **medir** a migração, não: `cmp.py`, harness de classes,
+caminho de escrita e nível 3 falam direto com `:8080` e `:8085`, e nenhum número do trabalho
+passa pelo proxy. Para **operar** o sistema migrado, sim: o login só roda no 5.6 (Laravel),
+os links relativos mantêm o usuário na porta em que entrou, e duas portas são duas origens
+para o navegador (as janelas do desktop param de conversar — "Sessão inválida (12)"). Sem a
+fachada não há *strangler fig*, só dois sistemas lado a lado. Se o escopo for só medir, o
+passo 8 da receita (rotear), o `nginx.conf`, o `map` e o `gera_map_faseb.py` saem do
+escopo, e a métrica principal passa a ser **equivalência** (telas idênticas ao 5.6), não
+roteamento. A regra de "rodar nos dois PHPs" continua: ela vem do código compartilhado.
+
+**2. Como se compara sem login no 8.5?** O login é feito uma vez no 5.6; a sessão é um
+arquivo no volume `ecidade_sessions`, que os dois containers leem; as telas legadas leem o
+usuário por `db_getsession()`, sem Laravel. O `cmp.py` restaura a sessão antes de cada
+requisição e usa o mesmo cookie nas duas portas.
+
+**3. "A tela funciona?" ≠ "a tela é equivalente".** O que está provado com força é a
+equivalência. Limites declarados: GET sem parâmetros; "idêntica no erro" conta como
+equivalente; tabela vazia não exercita nada; o JS não é executado; fluxos de escrita reais só
+em 18 telas (nível 3); nenhuma validação de regra de negócio por especialista. Opções
+oferecidas para verificação humana: (A) roteiro de teste funcional navegando pelo `:8090`,
+(B) relatório HTML da bateria com as duas versões renderizadas lado a lado, (C) capturas
+de tela com o Firefox *headless* (mais frágil por causa da sessão).
+
+**4. Como o TCC de referência fazia login sem o Laravel.** Commit `bc51ef4d5` (PHP8-1):
+reescreveu `templates/template_login_e-cidade.php` com `js_acessar_jquery()`, que **pula o
+`POST /v4/oauth/token`** e abre `abrir.php?sAuth=base64(DB_login=..&DB_senha=md5(..))` direto
+— quem valida a senha e abre a sessão é o `abrir.php`, legado. Sem token, a API `/v4/*` fica
+fora da verificação dele. É mudança de comportamento do login, viável só no big-bang. Para nós,
+sugere entrar direto no `:8085` pelo mesmo `abrir.php?sAuth=…`, **sem alterar arquivo** —
+**não testado**: falta ver se o `abrir.php` abre a sessão no 8.5 e o que fazem as telas não
+migradas servidas pelo 8.5.
+
 ### PERMISSÕES: `storage/` bloqueava o login nos DOIS ambientes
 
 `storage/` e `bootstrap/cache` eram `775 diego`, e nenhum container (uid 33) conseguia escrever.
