@@ -106,13 +106,13 @@ class cl_tipoasse
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->h12_codigo = ($this->h12_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_codigo"] : $this->h12_codigo);
+            $this->h12_codigo = ($this->h12_codigo === 0 || $this->h12_codigo === 0.0 || $this->h12_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_codigo"] : $this->h12_codigo);
             $this->h12_assent = ($this->h12_assent == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_assent"] : $this->h12_assent);
             $this->h12_descr = ($this->h12_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_descr"] : $this->h12_descr);
-            $this->h12_dias = ($this->h12_dias == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_dias"] : $this->h12_dias);
+            $this->h12_dias = ($this->h12_dias === 0 || $this->h12_dias === 0.0 || $this->h12_dias == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_dias"] : $this->h12_dias);
             $this->h12_relvan = ($this->h12_relvan == "f" ? @$GLOBALS["HTTP_POST_VARS"]["h12_relvan"] : $this->h12_relvan);
             $this->h12_relass = ($this->h12_relass == "f" ? @$GLOBALS["HTTP_POST_VARS"]["h12_relass"] : $this->h12_relass);
-            $this->h12_reltot = ($this->h12_reltot == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_reltot"] : $this->h12_reltot);
+            $this->h12_reltot = ($this->h12_reltot === 0 || $this->h12_reltot === 0.0 || $this->h12_reltot == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_reltot"] : $this->h12_reltot);
             $this->h12_relgra = ($this->h12_relgra == "f" ? @$GLOBALS["HTTP_POST_VARS"]["h12_relgra"] : $this->h12_relgra);
             $this->h12_tipo = ($this->h12_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_tipo"] : $this->h12_tipo);
             $this->h12_graefe = ($this->h12_graefe == "f" ? @$GLOBALS["HTTP_POST_VARS"]["h12_graefe"] : $this->h12_graefe);
@@ -120,12 +120,12 @@ class cl_tipoasse
             $this->h12_tipefe = ($this->h12_tipefe == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_tipefe"] : $this->h12_tipefe);
             $this->h12_regenc = ($this->h12_regenc == "f" ? @$GLOBALS["HTTP_POST_VARS"]["h12_regenc"] : $this->h12_regenc);
             $this->h12_vinculaperiodoaquisitivo = ($this->h12_vinculaperiodoaquisitivo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["h12_vinculaperiodoaquisitivo"] : $this->h12_vinculaperiodoaquisitivo);
-            $this->h12_tiporeajuste = ($this->h12_tiporeajuste == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_tiporeajuste"] : $this->h12_tiporeajuste);
-            $this->h12_natureza = ($this->h12_natureza == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_natureza"] : $this->h12_natureza);
+            $this->h12_tiporeajuste = ($this->h12_tiporeajuste === 0 || $this->h12_tiporeajuste === 0.0 || $this->h12_tiporeajuste == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_tiporeajuste"] : $this->h12_tiporeajuste);
+            $this->h12_natureza = ($this->h12_natureza === 0 || $this->h12_natureza === 0.0 || $this->h12_natureza == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_natureza"] : $this->h12_natureza);
             $this->h12_gerafaltas = ($this->h12_gerafaltas == "f" ? @$GLOBALS["HTTP_POST_VARS"]["h12_gerafaltas"] : $this->h12_gerafaltas);
             $this->h12_permiteduplicar = ($this->h12_permiteduplicar === true ? 't': 'f');
         } else {
-            $this->h12_codigo = ($this->h12_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_codigo"] : $this->h12_codigo);
+            $this->h12_codigo = ($this->h12_codigo === 0 || $this->h12_codigo === 0.0 || $this->h12_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["h12_codigo"] : $this->h12_codigo);
         }
     }
 
@@ -298,7 +298,7 @@ class cl_tipoasse
                 $this->h12_codigo = $h12_codigo;
             }
         }
-        if (($this->h12_codigo == null) || ($this->h12_codigo == "")) {
+        if (($this->h12_codigo == null) || ($this->h12_codigo === 0 || $this->h12_codigo === 0.0 || $this->h12_codigo == "")) {
             $this->erro_sql = " Campo h12_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

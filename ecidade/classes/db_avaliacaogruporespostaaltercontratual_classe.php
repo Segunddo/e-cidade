@@ -55,7 +55,7 @@ class cl_avaliacaogruporespostaaltercontratual
                  ";
 
     //funcao construtor da classe
-    function cl_avaliacaogruporespostaaltercontratual()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("avaliacaogruporespostaaltercontratual");
@@ -77,12 +77,12 @@ class cl_avaliacaogruporespostaaltercontratual
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->eso20_sequencial = ($this->eso20_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso20_sequencial"] : $this->eso20_sequencial);
-            $this->eso20_avaliacaogruporesposta = ($this->eso20_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso20_avaliacaogruporesposta"] : $this->eso20_avaliacaogruporesposta);
-            $this->eso20_cgm = ($this->eso20_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso20_cgm"] : $this->eso20_cgm);
-            $this->eso20_rhpessoal = ($this->eso20_rhpessoal == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso20_rhpessoal"] : $this->eso20_rhpessoal);
+            $this->eso20_sequencial = ($this->eso20_sequencial === 0 || $this->eso20_sequencial === 0.0 || $this->eso20_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso20_sequencial"] : $this->eso20_sequencial);
+            $this->eso20_avaliacaogruporesposta = ($this->eso20_avaliacaogruporesposta === 0 || $this->eso20_avaliacaogruporesposta === 0.0 || $this->eso20_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso20_avaliacaogruporesposta"] : $this->eso20_avaliacaogruporesposta);
+            $this->eso20_cgm = ($this->eso20_cgm === 0 || $this->eso20_cgm === 0.0 || $this->eso20_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso20_cgm"] : $this->eso20_cgm);
+            $this->eso20_rhpessoal = ($this->eso20_rhpessoal === 0 || $this->eso20_rhpessoal === 0.0 || $this->eso20_rhpessoal == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso20_rhpessoal"] : $this->eso20_rhpessoal);
         } else {
-            $this->eso20_sequencial = ($this->eso20_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso20_sequencial"] : $this->eso20_sequencial);
+            $this->eso20_sequencial = ($this->eso20_sequencial === 0 || $this->eso20_sequencial === 0.0 || $this->eso20_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso20_sequencial"] : $this->eso20_sequencial);
         }
     }
 
@@ -141,7 +141,7 @@ class cl_avaliacaogruporespostaaltercontratual
                 $this->eso20_sequencial = $eso20_sequencial;
             }
         }
-        if (($this->eso20_sequencial == null) || ($this->eso20_sequencial == "")) {
+        if (($this->eso20_sequencial == null) || ($this->eso20_sequencial === 0 || $this->eso20_sequencial === 0.0 || $this->eso20_sequencial == "")) {
             $this->erro_sql = " Campo eso20_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

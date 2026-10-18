@@ -82,8 +82,8 @@ class cl_rhcargo
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh04_instit = ($this->rh04_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_instit"]:$this->rh04_instit);
-       $this->rh04_codigo = ($this->rh04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_codigo"]:$this->rh04_codigo);
+       $this->rh04_instit = ($this->rh04_instit === 0 || $this->rh04_instit === 0.0 || $this->rh04_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_instit"]:$this->rh04_instit);
+       $this->rh04_codigo = ($this->rh04_codigo === 0 || $this->rh04_codigo === 0.0 || $this->rh04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_codigo"]:$this->rh04_codigo);
        $this->rh04_descr = ($this->rh04_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_descr"]:$this->rh04_descr);
        if($this->rh04_datafinal == ""){
          $this->rh04_datafinal_dia = ($this->rh04_datafinal_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_datafinal_dia"]:$this->rh04_datafinal_dia);
@@ -103,8 +103,8 @@ class cl_rhcargo
        }
        $this->rh04_descricaoatividades = ($this->rh04_descricaoatividades == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_descricaoatividades"]:$this->rh04_descricaoatividades);
      }else{
-       $this->rh04_instit = ($this->rh04_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_instit"]:$this->rh04_instit);
-       $this->rh04_codigo = ($this->rh04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_codigo"]:$this->rh04_codigo);
+       $this->rh04_instit = ($this->rh04_instit === 0 || $this->rh04_instit === 0.0 || $this->rh04_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_instit"]:$this->rh04_instit);
+       $this->rh04_codigo = ($this->rh04_codigo === 0 || $this->rh04_codigo === 0.0 || $this->rh04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh04_codigo"]:$this->rh04_codigo);
      }
    }
 
@@ -150,7 +150,7 @@ class cl_rhcargo
          $this->rh04_codigo = $rh04_codigo; 
        }
      }
-     if(($this->rh04_codigo == null) || ($this->rh04_codigo == "") ){ 
+     if(($this->rh04_codigo == null) || ($this->rh04_codigo === 0 || $this->rh04_codigo === 0.0 || $this->rh04_codigo == "") ){ 
        $this->erro_sql = " Campo rh04_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -158,7 +158,7 @@ class cl_rhcargo
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh04_instit == null) || ($this->rh04_instit == "") ){ 
+     if(($this->rh04_instit == null) || ($this->rh04_instit === 0 || $this->rh04_instit === 0.0 || $this->rh04_instit == "") ){ 
        $this->erro_sql = " Campo rh04_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

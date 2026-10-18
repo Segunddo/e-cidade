@@ -42,7 +42,7 @@ class cl_db_cadattdinamicoatributos {
                  db109_fixo = bool = Fixo 
                  ";
    //funcao construtor da classe 
-   function cl_db_cadattdinamicoatributos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_cadattdinamicoatributos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -59,19 +59,19 @@ class cl_db_cadattdinamicoatributos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db109_sequencial = ($this->db109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_sequencial"]:$this->db109_sequencial);
-       $this->db109_db_cadattdinamico = ($this->db109_db_cadattdinamico == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_db_cadattdinamico"]:$this->db109_db_cadattdinamico);
-       $this->db109_codcam = ($this->db109_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_codcam"]:$this->db109_codcam);
+       $this->db109_sequencial = ($this->db109_sequencial === 0 || $this->db109_sequencial === 0.0 || $this->db109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_sequencial"]:$this->db109_sequencial);
+       $this->db109_db_cadattdinamico = ($this->db109_db_cadattdinamico === 0 || $this->db109_db_cadattdinamico === 0.0 || $this->db109_db_cadattdinamico == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_db_cadattdinamico"]:$this->db109_db_cadattdinamico);
+       $this->db109_codcam = ($this->db109_codcam === 0 || $this->db109_codcam === 0.0 || $this->db109_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_codcam"]:$this->db109_codcam);
        $this->db109_descricao = ($this->db109_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_descricao"]:$this->db109_descricao);
        $this->db109_valordefault = ($this->db109_valordefault == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_valordefault"]:$this->db109_valordefault);
-       $this->db109_tipo = ($this->db109_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_tipo"]:$this->db109_tipo);
+       $this->db109_tipo = ($this->db109_tipo === 0 || $this->db109_tipo === 0.0 || $this->db109_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_tipo"]:$this->db109_tipo);
        $this->db109_nome = ($this->db109_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_nome"]:$this->db109_nome);
        $this->db109_obrigatorio = ($this->db109_obrigatorio == "f"?@$GLOBALS["HTTP_POST_VARS"]["db109_obrigatorio"]:$this->db109_obrigatorio);
        $this->db109_ativo = ($this->db109_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["db109_ativo"]:$this->db109_ativo);
        $this->db109_db_formulas = ($this->db109_db_formulas == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_db_formulas"]:$this->db109_db_formulas);
        $this->db109_fixo = ($this->db109_fixo == "f"?@$GLOBALS["HTTP_POST_VARS"]["db109_fixo"]:$this->db109_fixo);
      }else{
-       $this->db109_sequencial = ($this->db109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_sequencial"]:$this->db109_sequencial);
+       $this->db109_sequencial = ($this->db109_sequencial === 0 || $this->db109_sequencial === 0.0 || $this->db109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db109_sequencial"]:$this->db109_sequencial);
      }
    }
    // funcao para Inclusão
@@ -149,7 +149,7 @@ class cl_db_cadattdinamicoatributos {
          $this->db109_sequencial = $db109_sequencial; 
        }
      }
-     if(($this->db109_sequencial == null) || ($this->db109_sequencial == "") ){ 
+     if(($this->db109_sequencial == null) || ($this->db109_sequencial === 0 || $this->db109_sequencial === 0.0 || $this->db109_sequencial == "") ){ 
        $this->erro_sql = " Campo db109_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

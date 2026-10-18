@@ -51,7 +51,7 @@ class cl_db_cadattdinamicoatributosopcoes {
                  db18_valor = varchar(200) = Valor
                  ";
    //funcao construtor da classe
-   function cl_db_cadattdinamicoatributosopcoes() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_cadattdinamicoatributosopcoes");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -68,12 +68,12 @@ class cl_db_cadattdinamicoatributosopcoes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db18_sequencial = ($this->db18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db18_sequencial"]:$this->db18_sequencial);
-       $this->db18_cadattdinamicoatributos = ($this->db18_cadattdinamicoatributos == ""?@$GLOBALS["HTTP_POST_VARS"]["db18_cadattdinamicoatributos"]:$this->db18_cadattdinamicoatributos);
+       $this->db18_sequencial = ($this->db18_sequencial === 0 || $this->db18_sequencial === 0.0 || $this->db18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db18_sequencial"]:$this->db18_sequencial);
+       $this->db18_cadattdinamicoatributos = ($this->db18_cadattdinamicoatributos === 0 || $this->db18_cadattdinamicoatributos === 0.0 || $this->db18_cadattdinamicoatributos == ""?@$GLOBALS["HTTP_POST_VARS"]["db18_cadattdinamicoatributos"]:$this->db18_cadattdinamicoatributos);
        $this->db18_opcao = ($this->db18_opcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db18_opcao"]:$this->db18_opcao);
        $this->db18_valor = ($this->db18_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["db18_valor"]:$this->db18_valor);
      }else{
-       $this->db18_sequencial = ($this->db18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db18_sequencial"]:$this->db18_sequencial);
+       $this->db18_sequencial = ($this->db18_sequencial === 0 || $this->db18_sequencial === 0.0 || $this->db18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db18_sequencial"]:$this->db18_sequencial);
      }
    }
    // funcao para Inclusão
@@ -130,7 +130,7 @@ class cl_db_cadattdinamicoatributosopcoes {
          $this->db18_sequencial = $db18_sequencial;
        }
      }
-     if(($this->db18_sequencial == null) || ($this->db18_sequencial == "") ){
+     if(($this->db18_sequencial == null) || ($this->db18_sequencial === 0 || $this->db18_sequencial === 0.0 || $this->db18_sequencial == "") ){
        $this->erro_sql = " Campo db18_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

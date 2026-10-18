@@ -100,15 +100,15 @@ class cl_rhfuncao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh37_instit = ($this->rh37_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_instit"]:$this->rh37_instit);
-       $this->rh37_funcao = ($this->rh37_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_funcao"]:$this->rh37_funcao);
+       $this->rh37_instit = ($this->rh37_instit === 0 || $this->rh37_instit === 0.0 || $this->rh37_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_instit"]:$this->rh37_instit);
+       $this->rh37_funcao = ($this->rh37_funcao === 0 || $this->rh37_funcao === 0.0 || $this->rh37_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_funcao"]:$this->rh37_funcao);
        $this->rh37_descr = ($this->rh37_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_descr"]:$this->rh37_descr);
-       $this->rh37_vagas = ($this->rh37_vagas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_vagas"]:$this->rh37_vagas);
+       $this->rh37_vagas = ($this->rh37_vagas === 0 || $this->rh37_vagas === 0.0 || $this->rh37_vagas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_vagas"]:$this->rh37_vagas);
        $this->rh37_cbo = ($this->rh37_cbo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_cbo"]:$this->rh37_cbo);
        $this->rh37_lei = ($this->rh37_lei == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_lei"]:$this->rh37_lei);
        $this->rh37_class = ($this->rh37_class == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_class"]:$this->rh37_class);
        $this->rh37_ativo = ($this->rh37_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh37_ativo"]:$this->rh37_ativo);
-       $this->rh37_funcaogrupo = ($this->rh37_funcaogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_funcaogrupo"]:$this->rh37_funcaogrupo);
+       $this->rh37_funcaogrupo = ($this->rh37_funcaogrupo === 0 || $this->rh37_funcaogrupo === 0.0 || $this->rh37_funcaogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_funcaogrupo"]:$this->rh37_funcaogrupo);
        if($this->rh37_datainicial == ""){
          $this->rh37_datainicial_dia = ($this->rh37_datainicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_datainicial_dia"]:$this->rh37_datainicial_dia);
          $this->rh37_datainicial_mes = ($this->rh37_datainicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_datainicial_mes"]:$this->rh37_datainicial_mes);
@@ -126,12 +126,12 @@ class cl_rhfuncao
          }
        }
        $this->rh37_descricaocompleta = ($this->rh37_descricaocompleta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_descricaocompleta"]:$this->rh37_descricaocompleta);
-       $this->rh37_rhinstrucao = ($this->rh37_rhinstrucao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_rhinstrucao"]:$this->rh37_rhinstrucao);
+       $this->rh37_rhinstrucao = ($this->rh37_rhinstrucao === 0 || $this->rh37_rhinstrucao === 0.0 || $this->rh37_rhinstrucao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_rhinstrucao"]:$this->rh37_rhinstrucao);
        $this->rh37_descricaoatividades = ($this->rh37_descricaoatividades == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_descricaoatividades"]:$this->rh37_descricaoatividades);
        $this->rh37_acumcargo = ($this->rh37_acumcargo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_acumcargo"]:$this->rh37_acumcargo);
      }else{
-       $this->rh37_instit = ($this->rh37_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_instit"]:$this->rh37_instit);
-       $this->rh37_funcao = ($this->rh37_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_funcao"]:$this->rh37_funcao);
+       $this->rh37_instit = ($this->rh37_instit === 0 || $this->rh37_instit === 0.0 || $this->rh37_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_instit"]:$this->rh37_instit);
+       $this->rh37_funcao = ($this->rh37_funcao === 0 || $this->rh37_funcao === 0.0 || $this->rh37_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh37_funcao"]:$this->rh37_funcao);
      }
    }
 
@@ -176,7 +176,7 @@ class cl_rhfuncao
      }
        $this->rh37_funcao = $rh37_funcao; 
        $this->rh37_instit = $rh37_instit; 
-     if(($this->rh37_funcao == null) || ($this->rh37_funcao == "") ){ 
+     if(($this->rh37_funcao == null) || ($this->rh37_funcao === 0 || $this->rh37_funcao === 0.0 || $this->rh37_funcao == "") ){ 
        $this->erro_sql = " Campo rh37_funcao não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -184,7 +184,7 @@ class cl_rhfuncao
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh37_instit == null) || ($this->rh37_instit == "") ){ 
+     if(($this->rh37_instit == null) || ($this->rh37_instit === 0 || $this->rh37_instit === 0.0 || $this->rh37_instit == "") ){ 
        $this->erro_sql = " Campo rh37_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -673,7 +673,7 @@ class cl_rhfuncao
    function sql_query_cgm ( $rh37_funcao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -705,7 +705,7 @@ class cl_rhfuncao
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -78,8 +78,8 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu)[0-9]*_)` — **3.344 arquivos** + 367 por `map` |
-| **Próximo passo** | **decisão do usuário**: próxima área (ver *DIMENSIONAMENTO DAS PRÓXIMAS ÁREAS*) ou o relatório Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu|rh|eso)[0-9]*_)` — **3.438 arquivos** + 367 por `map` |
+| **Próximo passo** | **Área RECURSOS HUMANOS em andamento** (branch `3recursoshumanos-migrado`, ver *ÁREA RECURSOS HUMANOS*): `rh`+`eso` feitos; próximo `rec`, depois `pes` em sublotes. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3360,6 +3360,44 @@ caminho (9ª lacuna: +30 arquivos) e das correções à mão, que a estimativa e
 **Núcleo tocado na área:** `std/DBDate.php` (`cal_days_in_month`), `dbforms/db_classesgenericas.php`
 (`reset/sizeof/key` sobre nulo), `dbforms/db_funcoes.php` (os dois ramos do `db_select`) e
 `libs/db_stdlibwebseller.php` — todas com bateria completa na linha de base.
+
+### 📐 ÁREA RECURSOS HUMANOS — dimensionada e INICIADA (branch `3recursoshumanos-migrado`)
+
+4 módulos no banco: Pessoal 507 telas, RH 138, eSocial 39, Estágio Probatório 26. Os
+prefixos principais são praticamente exclusivos da área:
+
+| Prefixo | Telas de RH no menu | Em outra área | Em disco | A alterar (prefixo inteiro) |
+|---|---|---|---|---|
+| `pes` | 499 | 2 (Financeiro) | 1.155 | 684 |
+| `rec` | 159 | 3 (Assist. Social) + 1 (Tributário, já no `map`) | 279 | 147 |
+| `eso` | 33 | 3 (Integrações) | 85 | 27 |
+| `rh` | 4 | — | 9 | 2 |
+| `es`, `con`, `cai`, `lic`, `sped` | ~10 | compartilhados | — | via `map` |
+
+**Escopo, o mesmo das duas áreas anteriores:** Fase A = `pes`/`rec`/`eso`/`rh` inteiros
+(1.528 arquivos, universo 2.687, ~826 a alterar), roteados por `location`; Fase B = as ~10
+telas compartilhadas, pelo `map`. Ordem: `rh`+`eso` → `rec` → `pes` (em sublotes).
+
+**Nível 3 e a folha:** a base de exemplo tem **1 servidor** (`rhpessoal`), 3 funções, 2
+lotações e **zero** linhas de cálculo (`gerfsal`, `gerfcom`, `gerfres`) e de ponto (`pontofs`,
+`pontofx`). Decisão do usuário: nível 3 nos **cadastros** durante o porte; o cenário de
+**cálculo** (cadastrar servidores e ponto pelo 5.6 e comparar o SQL do cálculo) fica como etapa
+separada, ao fim da área. Atenção: o banco não tem volume de persistência — o cenário teria de
+ser salvo em dump.
+
+| Lote | Universo | Alterados | `php -l` 5.6/8.5 | Classes | Escrita | **Bateria** |
+|---|---|---|---|---|---|---|
+| `rh`+`eso` | 239 | 29 (Rector, 1 passada + confirmação) | 239/239 | 74/74 | 2.213 linhas, 53 classes, 0 div. | **94/94** |
+
+**`rh`+`eso`** — nenhum arquivo de tela precisou mudar: os 29 são 16 `classes/` e 13 `func_`.
+Rector só com regras já vetadas (16 guardas, 13 `parse_str`+`extract`, 10 construtores, 4
+`split` todos `"#"`, 2 parâmetros opcionais); portão de funções: só `extract`/`preg_split`. As 21
+classes sem saída no harness de escrita não têm `atualizacampos()` nem propriedade inteira — as
+mesmas nos dois runtimes. Das 94 telas, 93 dão 200; `eso02_preenchimentoesocial001.php` dá 500
+**nos dois** (exceção de negócio "Nenhum tipo de formulário selecionado", tela aberta sem
+parâmetro). Log do PostgreSQL: nenhum erro de SQL na bateria. Regressão: núcleo intocado;
+interseção só com o universo do `con` (`db_rhpesrescisao_classe.php`) → as 31 telas `con`
+roteadas: **31/31**.
 
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
 
