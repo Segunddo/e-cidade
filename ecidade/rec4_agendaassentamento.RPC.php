@@ -426,4 +426,4 @@ try {
     $oRetorno->sMessage = urlencode($eErro->getMessage());
 }
 
-echo JSON::stringify($oRetorno);
+echo JSON::create()->stringify($oRetorno);

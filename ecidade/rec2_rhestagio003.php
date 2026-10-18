@@ -146,7 +146,7 @@ $sSQLRel .= "                              and rh02_instit = {$iInstit}";
 $sSQLRel .= "       {$inner_join}";
 $sSQLRel .= " where {$sWhere}";
 $rsRel  = @db_query($sSQLRel);
-$iNumRows = pg_num_rows($rsRel);
+$iNumRows = ($rsRel ? pg_num_rows($rsRel) : null);
 $pdf                  = new scpdf();
 $pdf->open();
 $pdf1                 = new db_impcarne($pdf,'51');

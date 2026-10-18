@@ -38,7 +38,7 @@ class cl_agendaassentamento {
                  h82_formulaprorrogafim = int4 = Fórmula de Prorrogação do Fim 
                  ";
    //funcao construtor da classe 
-   function cl_agendaassentamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("agendaassentamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -55,17 +55,17 @@ class cl_agendaassentamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h82_sequencial = ($this->h82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_sequencial"]:$this->h82_sequencial);
-       $this->h82_tipoassentamento = ($this->h82_tipoassentamento == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_tipoassentamento"]:$this->h82_tipoassentamento);
-       $this->h82_formulainicio = ($this->h82_formulainicio == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_formulainicio"]:$this->h82_formulainicio);
-       $this->h82_formulacondicao = ($this->h82_formulacondicao == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_formulacondicao"]:$this->h82_formulacondicao);
-       $this->h82_selecao = ($this->h82_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_selecao"]:$this->h82_selecao);
-       $this->h82_instit = ($this->h82_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_instit"]:$this->h82_instit);
-       $this->h82_formulafim = ($this->h82_formulafim == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_formulafim"]:$this->h82_formulafim);
-       $this->h82_formulafaltasperiodo = ($this->h82_formulafaltasperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_formulafaltasperiodo"]:$this->h82_formulafaltasperiodo);
-       $this->h82_formulaprorrogafim = ($this->h82_formulaprorrogafim == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_formulaprorrogafim"]:$this->h82_formulaprorrogafim);
+       $this->h82_sequencial = ($this->h82_sequencial === 0 || $this->h82_sequencial === 0.0 || $this->h82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_sequencial"]:$this->h82_sequencial);
+       $this->h82_tipoassentamento = ($this->h82_tipoassentamento === 0 || $this->h82_tipoassentamento === 0.0 || $this->h82_tipoassentamento == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_tipoassentamento"]:$this->h82_tipoassentamento);
+       $this->h82_formulainicio = ($this->h82_formulainicio === 0 || $this->h82_formulainicio === 0.0 || $this->h82_formulainicio == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_formulainicio"]:$this->h82_formulainicio);
+       $this->h82_formulacondicao = ($this->h82_formulacondicao === 0 || $this->h82_formulacondicao === 0.0 || $this->h82_formulacondicao == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_formulacondicao"]:$this->h82_formulacondicao);
+       $this->h82_selecao = ($this->h82_selecao === 0 || $this->h82_selecao === 0.0 || $this->h82_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_selecao"]:$this->h82_selecao);
+       $this->h82_instit = ($this->h82_instit === 0 || $this->h82_instit === 0.0 || $this->h82_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_instit"]:$this->h82_instit);
+       $this->h82_formulafim = ($this->h82_formulafim === 0 || $this->h82_formulafim === 0.0 || $this->h82_formulafim == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_formulafim"]:$this->h82_formulafim);
+       $this->h82_formulafaltasperiodo = ($this->h82_formulafaltasperiodo === 0 || $this->h82_formulafaltasperiodo === 0.0 || $this->h82_formulafaltasperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_formulafaltasperiodo"]:$this->h82_formulafaltasperiodo);
+       $this->h82_formulaprorrogafim = ($this->h82_formulaprorrogafim === 0 || $this->h82_formulaprorrogafim === 0.0 || $this->h82_formulaprorrogafim == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_formulaprorrogafim"]:$this->h82_formulaprorrogafim);
      }else{
-       $this->h82_sequencial = ($this->h82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_sequencial"]:$this->h82_sequencial);
+       $this->h82_sequencial = ($this->h82_sequencial === 0 || $this->h82_sequencial === 0.0 || $this->h82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h82_sequencial"]:$this->h82_sequencial);
      }
    }
    // funcao para Inclusão
@@ -149,7 +149,7 @@ class cl_agendaassentamento {
          $this->h82_sequencial = $h82_sequencial; 
        }
      }
-     if(($this->h82_sequencial == null) || ($this->h82_sequencial == "") ){ 
+     if(($this->h82_sequencial == null) || ($this->h82_sequencial === 0 || $this->h82_sequencial === 0.0 || $this->h82_sequencial == "") ){ 
        $this->erro_sql = " Campo h82_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -29,7 +29,8 @@ require_once(modification("fpdf151/impcarne.php"));
 require_once(modification("fpdf151/pdf.php"));
 require_once(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $sql_nome       = "select * from tipoasse where h12_assent = '$tipo';";
 $res_nome       = db_query($sql_nome);
 $virg_nome      = '';

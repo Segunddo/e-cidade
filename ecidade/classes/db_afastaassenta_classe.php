@@ -45,8 +45,8 @@ class cl_afastaassenta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h81_assenta = ($this->h81_assenta == ""?@$GLOBALS["HTTP_POST_VARS"]["h81_assenta"]:$this->h81_assenta);
-       $this->h81_afasta = ($this->h81_afasta == ""?@$GLOBALS["HTTP_POST_VARS"]["h81_afasta"]:$this->h81_afasta);
+       $this->h81_assenta = ($this->h81_assenta === 0 || $this->h81_assenta === 0.0 || $this->h81_assenta == ""?@$GLOBALS["HTTP_POST_VARS"]["h81_assenta"]:$this->h81_assenta);
+       $this->h81_afasta = ($this->h81_afasta === 0 || $this->h81_afasta === 0.0 || $this->h81_afasta == ""?@$GLOBALS["HTTP_POST_VARS"]["h81_afasta"]:$this->h81_afasta);
      }else{
      }
    }

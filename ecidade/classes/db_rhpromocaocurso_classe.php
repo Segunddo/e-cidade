@@ -52,7 +52,7 @@ class cl_rhpromocaocurso {
                  h74_rhpromocao = int4 = Promoção 
                  ";
    //funcao construtor da classe 
-   function cl_rhpromocaocurso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhpromocaocurso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rhpromocaocurso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h74_sequencial = ($this->h74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h74_sequencial"]:$this->h74_sequencial);
-       $this->h74_rhcurso = ($this->h74_rhcurso == ""?@$GLOBALS["HTTP_POST_VARS"]["h74_rhcurso"]:$this->h74_rhcurso);
-       $this->h74_rhpromocao = ($this->h74_rhpromocao == ""?@$GLOBALS["HTTP_POST_VARS"]["h74_rhpromocao"]:$this->h74_rhpromocao);
+       $this->h74_sequencial = ($this->h74_sequencial === 0 || $this->h74_sequencial === 0.0 || $this->h74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h74_sequencial"]:$this->h74_sequencial);
+       $this->h74_rhcurso = ($this->h74_rhcurso === 0 || $this->h74_rhcurso === 0.0 || $this->h74_rhcurso == ""?@$GLOBALS["HTTP_POST_VARS"]["h74_rhcurso"]:$this->h74_rhcurso);
+       $this->h74_rhpromocao = ($this->h74_rhpromocao === 0 || $this->h74_rhpromocao === 0.0 || $this->h74_rhpromocao == ""?@$GLOBALS["HTTP_POST_VARS"]["h74_rhpromocao"]:$this->h74_rhpromocao);
      }else{
-       $this->h74_sequencial = ($this->h74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h74_sequencial"]:$this->h74_sequencial);
+       $this->h74_sequencial = ($this->h74_sequencial === 0 || $this->h74_sequencial === 0.0 || $this->h74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h74_sequencial"]:$this->h74_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rhpromocaocurso {
          $this->h74_sequencial = $h74_sequencial; 
        }
      }
-     if(($this->h74_sequencial == null) || ($this->h74_sequencial == "") ){ 
+     if(($this->h74_sequencial == null) || ($this->h74_sequencial === 0 || $this->h74_sequencial === 0.0 || $this->h74_sequencial == "") ){ 
        $this->erro_sql = " Campo h74_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_rhpromocaocurso {
    function sql_query ( $h74_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_rhpromocaocurso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_rhpromocaocurso {
    function sql_query_file ( $h74_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_rhpromocaocurso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

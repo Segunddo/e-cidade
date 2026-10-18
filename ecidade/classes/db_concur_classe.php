@@ -81,7 +81,7 @@ class cl_concur {
                  h06_nrproc = varchar(16) = No. Processo 
                  ";
    //funcao construtor da classe 
-   function cl_concur() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("concur"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -98,7 +98,7 @@ class cl_concur {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h06_refer = ($this->h06_refer == ""?@$GLOBALS["HTTP_POST_VARS"]["h06_refer"]:$this->h06_refer);
+       $this->h06_refer = ($this->h06_refer === 0 || $this->h06_refer === 0.0 || $this->h06_refer == ""?@$GLOBALS["HTTP_POST_VARS"]["h06_refer"]:$this->h06_refer);
        $this->h06_eaber = ($this->h06_eaber == ""?@$GLOBALS["HTTP_POST_VARS"]["h06_eaber"]:$this->h06_eaber);
        if($this->h06_daber == ""){
          $this->h06_daber_dia = ($this->h06_daber_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h06_daber_dia"]:$this->h06_daber_dia);
@@ -144,7 +144,7 @@ class cl_concur {
        }
        $this->h06_nrproc = ($this->h06_nrproc == ""?@$GLOBALS["HTTP_POST_VARS"]["h06_nrproc"]:$this->h06_nrproc);
      }else{
-       $this->h06_refer = ($this->h06_refer == ""?@$GLOBALS["HTTP_POST_VARS"]["h06_refer"]:$this->h06_refer);
+       $this->h06_refer = ($this->h06_refer === 0 || $this->h06_refer === 0.0 || $this->h06_refer == ""?@$GLOBALS["HTTP_POST_VARS"]["h06_refer"]:$this->h06_refer);
      }
    }
    // funcao para inclusao
@@ -190,7 +190,7 @@ class cl_concur {
        $this->h06_dpubl = "null";
      }
        $this->h06_refer = $h06_refer; 
-     if(($this->h06_refer == null) || ($this->h06_refer == "") ){ 
+     if(($this->h06_refer == null) || ($this->h06_refer === 0 || $this->h06_refer === 0.0 || $this->h06_refer == "") ){ 
        $this->erro_sql = " Campo h06_refer nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -541,7 +541,7 @@ class cl_concur {
    function sql_query ( $h06_refer=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -562,7 +562,7 @@ class cl_concur {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -574,7 +574,7 @@ class cl_concur {
    function sql_query_file ( $h06_refer=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -595,7 +595,7 @@ class cl_concur {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

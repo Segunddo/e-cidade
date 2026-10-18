@@ -78,8 +78,8 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu|rh|eso)[0-9]*_)` — **3.438 arquivos** + 367 por `map` |
-| **Próximo passo** | **Área RECURSOS HUMANOS em andamento** (branch `3recursoshumanos-migrado`, ver *ÁREA RECURSOS HUMANOS*): `rh`+`eso` feitos; próximo `rec`, depois `pes` em sublotes. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec)[0-9]*_)` — **3.717 arquivos** + 367 por `map` |
+| **Próximo passo** | **Área RECURSOS HUMANOS em andamento** (branch `3recursoshumanos-migrado`, ver *ÁREA RECURSOS HUMANOS*): `rh`+`eso` e `rec` feitos; próximo `pes` em sublotes. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3388,6 +3388,7 @@ ser salvo em dump.
 | Lote | Universo | Alterados | `php -l` 5.6/8.5 | Classes | Escrita | **Bateria** |
 |---|---|---|---|---|---|---|
 | `rh`+`eso` | 239 | 29 (Rector, 1 passada + confirmação) | 239/239 | 74/74 | 2.213 linhas, 53 classes, 0 div. | **94/94** |
+| `rec` | 568 | 134 Rector + 15 à mão | 568/568 | 171/172 | 4.893 linhas, 139 classes, 0 div. | **278/279** + 1 caracterizada |
 
 **`rh`+`eso`** — nenhum arquivo de tela precisou mudar: os 29 são 16 `classes/` e 13 `func_`.
 Rector só com regras já vetadas (16 guardas, 13 `parse_str`+`extract`, 10 construtores, 4
@@ -3398,6 +3399,43 @@ mesmas nos dois runtimes. Das 94 telas, 93 dão 200; `eso02_preenchimentoesocial
 parâmetro). Log do PostgreSQL: nenhum erro de SQL na bateria. Regressão: núcleo intocado;
 interseção só com o universo do `con` (`db_rhpesrescisao_classe.php`) → as 31 telas `con`
 roteadas: **31/31**.
+
+**`rec`** — Rector em 134 arquivos, só regras vetadas (66 guardas, 61 `split`/`ereg` com 2
+`"\|"`, 61 `parse_str`+`extract`, 61 construtores, 2 parâmetros opcionais, 1 `${$var}`). À mão:
+
+- **Octal inválido, segunda aparição** — `rec2_certcomprobatorio002.php` e `rec2_vantagens002.php`
+  (bloco copiado): `$mar1[08]`/`[09]`. No 5.6 os dois valem `0`, então `wv_protel` é
+  **sobrescrito** por `wv_inf` — bug pré-existente, preservado com `[0]` (medido: mesmas chaves,
+  mesma ordem, mesmos valores). O Rector acusou o primeiro como `errors: 1`; o segundo **não
+  estava nos alvos** — o `enumera.py` não detecta octal — e só o `php -l` do 8.5 sobre o
+  universo o pegou. Rodar o lint no universo, não só nos alterados, se pagou de novo.
+- 10 guardas `pg_*` (`null`) em 9 telas, pelo ciclo; o log do PostgreSQL confirma SQL quebrada
+  (erros de sintaxe em `and`/`group`). Nenhuma variável guardada é comparada com `===`.
+- 2 `count(null)` → `count((array)…)`.
+- **NÚCLEO `libs/db_libpessoal.php`, `db_val()`**: `$string+0` com string totalmente não
+  numérica — `0` no 5.6, `TypeError` no 8.5 (medido em 9 entradas; `"12abc"`, `"1.5"`, `null`
+  são iguais nos dois). Correção: `try { return $string+0; } catch (TypeError $e) { if
+  (is_string($string)) return 0; throw $e; }` — idêntica nas 9 entradas, inclusive no tipo, e
+  qualquer outro erro segue como antes. Não há cópia no `modification/`.
+- **`is_resource()` sobre resultado do PostgreSQL, de novo** — `forms/db_frmtipoasse.php`: o
+  `<select>` de natureza saía **vazio** no 8.5 (9 opções a menos, HTTP 200 nos dois).
+  `|| is_object(…)`.
+- **CATEGORIA NOVA: método NÃO estático chamado estaticamente** — `JSON::stringify($x)` em
+  `rec4_agendaassentamento.RPC.php`. No 5.6 era aviso E_STRICT e funcionava (o método não usa
+  `$this`); no 8 é `Error`. A base usa `JSON::create()->stringify(…)` em 680 pontos e a forma
+  estática em **3** (esta + 2 em `pes4_eventofinanceiroautomatico.RPC.php`, do lote `pes`).
+  Corrigido no ponto de chamada, para a forma das outras 680 — sem mexer na classe do núcleo.
+- **Caracterizada, não corrigida:** `rec2_espelhoponto002.php` — `fopen()` de
+  `tmp/dados_espelho_ponto_{id}.txt` sem o `id` devolve `false`, e o `while (!feof(false))` da
+  linha 71 é **laço eterno no 5.6** (um worker ficou 11 min a ~45% de CPU e segurou o lock da
+  sessão); no 8.5 é 500 no `fgets`. Mesma decisão das 8 telas do `edu4`.
+
+Regressão: o núcleo foi tocado, mas **só o corpo de `db_val()` mudou**, e a forma da correção
+garante que toda entrada que não era fatal devolve o mesmo valor — logo nenhum módulo já
+verificado (todos sem fatal em `db_val`) pode mudar. `db_val` só é chamada por `pes`, `rec`,
+`model/pessoal/` e o próprio `db_libpessoal.php`. Rodadas: interseção real (universo do `cai`,
+`db_afasta_classe.php` + o núcleo) → 105/105 telas `cai` roteadas; amostra `not`+`mar`+`inf`
+79/79. **Não** rodada a bateria completa de ~3.700 telas — decisão consciente, pelo argumento acima.
 
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
 

@@ -52,7 +52,7 @@ class cl_portariatipodocindividual {
                  h37_modportariaindividual = int4 = Modelo Portaria Individual 
                  ";
    //funcao construtor da classe 
-   function cl_portariatipodocindividual() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("portariatipodocindividual"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_portariatipodocindividual {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h37_sequencial = ($this->h37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h37_sequencial"]:$this->h37_sequencial);
-       $this->h37_portariatipo = ($this->h37_portariatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h37_portariatipo"]:$this->h37_portariatipo);
-       $this->h37_modportariaindividual = ($this->h37_modportariaindividual == ""?@$GLOBALS["HTTP_POST_VARS"]["h37_modportariaindividual"]:$this->h37_modportariaindividual);
+       $this->h37_sequencial = ($this->h37_sequencial === 0 || $this->h37_sequencial === 0.0 || $this->h37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h37_sequencial"]:$this->h37_sequencial);
+       $this->h37_portariatipo = ($this->h37_portariatipo === 0 || $this->h37_portariatipo === 0.0 || $this->h37_portariatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h37_portariatipo"]:$this->h37_portariatipo);
+       $this->h37_modportariaindividual = ($this->h37_modportariaindividual === 0 || $this->h37_modportariaindividual === 0.0 || $this->h37_modportariaindividual == ""?@$GLOBALS["HTTP_POST_VARS"]["h37_modportariaindividual"]:$this->h37_modportariaindividual);
      }else{
-       $this->h37_sequencial = ($this->h37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h37_sequencial"]:$this->h37_sequencial);
+       $this->h37_sequencial = ($this->h37_sequencial === 0 || $this->h37_sequencial === 0.0 || $this->h37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h37_sequencial"]:$this->h37_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_portariatipodocindividual {
          $this->h37_sequencial = $h37_sequencial; 
        }
      }
-     if(($this->h37_sequencial == null) || ($this->h37_sequencial == "") ){ 
+     if(($this->h37_sequencial == null) || ($this->h37_sequencial === 0 || $this->h37_sequencial === 0.0 || $this->h37_sequencial == "") ){ 
        $this->erro_sql = " Campo h37_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

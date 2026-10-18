@@ -56,7 +56,7 @@ class cl_rhestagioavaliacaoobs {
                  h61_recomendacoes = text = Recomendações 
                  ";
    //funcao construtor da classe 
-   function cl_rhestagioavaliacaoobs() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhestagioavaliacaoobs"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_rhestagioavaliacaoobs {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h61_sequencial = ($this->h61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h61_sequencial"]:$this->h61_sequencial);
-       $this->h61_rhestagioavaliacao = ($this->h61_rhestagioavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h61_rhestagioavaliacao"]:$this->h61_rhestagioavaliacao);
-       $this->h61_tipo = ($this->h61_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h61_tipo"]:$this->h61_tipo);
+       $this->h61_sequencial = ($this->h61_sequencial === 0 || $this->h61_sequencial === 0.0 || $this->h61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h61_sequencial"]:$this->h61_sequencial);
+       $this->h61_rhestagioavaliacao = ($this->h61_rhestagioavaliacao === 0 || $this->h61_rhestagioavaliacao === 0.0 || $this->h61_rhestagioavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h61_rhestagioavaliacao"]:$this->h61_rhestagioavaliacao);
+       $this->h61_tipo = ($this->h61_tipo === 0 || $this->h61_tipo === 0.0 || $this->h61_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h61_tipo"]:$this->h61_tipo);
        $this->h61_observacoes = ($this->h61_observacoes == ""?@$GLOBALS["HTTP_POST_VARS"]["h61_observacoes"]:$this->h61_observacoes);
        $this->h61_recomendacoes = ($this->h61_recomendacoes == ""?@$GLOBALS["HTTP_POST_VARS"]["h61_recomendacoes"]:$this->h61_recomendacoes);
      }else{
-       $this->h61_sequencial = ($this->h61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h61_sequencial"]:$this->h61_sequencial);
+       $this->h61_sequencial = ($this->h61_sequencial === 0 || $this->h61_sequencial === 0.0 || $this->h61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h61_sequencial"]:$this->h61_sequencial);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_rhestagioavaliacaoobs {
          $this->h61_sequencial = $h61_sequencial; 
        }
      }
-     if(($this->h61_sequencial == null) || ($this->h61_sequencial == "") ){ 
+     if(($this->h61_sequencial == null) || ($this->h61_sequencial === 0 || $this->h61_sequencial === 0.0 || $this->h61_sequencial == "") ){ 
        $this->erro_sql = " Campo h61_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -385,7 +385,7 @@ class cl_rhestagioavaliacaoobs {
    function sql_query ( $h61_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -409,7 +409,7 @@ class cl_rhestagioavaliacaoobs {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_rhestagioavaliacaoobs {
    function sql_query_file ( $h61_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -442,7 +442,7 @@ class cl_rhestagioavaliacaoobs {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -454,7 +454,7 @@ class cl_rhestagioavaliacaoobs {
    function sql_querytipo( $h61_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_rhestagioavaliacaoobs {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

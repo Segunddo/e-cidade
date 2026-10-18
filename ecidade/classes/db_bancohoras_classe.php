@@ -63,7 +63,7 @@ class cl_bancohoras {
                  rh126_observacao = text = Observação
                  ";
    //funcao construtor da classe
-   function cl_bancohoras() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bancohoras");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_bancohoras {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh126_sequencial = ($this->rh126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_sequencial"]:$this->rh126_sequencial);
-       $this->rh126_regist = ($this->rh126_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_regist"]:$this->rh126_regist);
+       $this->rh126_sequencial = ($this->rh126_sequencial === 0 || $this->rh126_sequencial === 0.0 || $this->rh126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_sequencial"]:$this->rh126_sequencial);
+       $this->rh126_regist = ($this->rh126_regist === 0 || $this->rh126_regist === 0.0 || $this->rh126_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_regist"]:$this->rh126_regist);
        $this->rh126_soma = ($this->rh126_soma == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh126_soma"]:$this->rh126_soma);
        if($this->rh126_data == ""){
          $this->rh126_data_dia = ($this->rh126_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_data_dia"]:$this->rh126_data_dia);
@@ -91,11 +91,11 @@ class cl_bancohoras {
             $this->rh126_data = $this->rh126_data_ano."-".$this->rh126_data_mes."-".$this->rh126_data_dia;
          }
        }
-       $this->rh126_horas = ($this->rh126_horas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_horas"]:$this->rh126_horas);
-       $this->rh126_minutos = ($this->rh126_minutos == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_minutos"]:$this->rh126_minutos);
+       $this->rh126_horas = ($this->rh126_horas === 0 || $this->rh126_horas === 0.0 || $this->rh126_horas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_horas"]:$this->rh126_horas);
+       $this->rh126_minutos = ($this->rh126_minutos === 0 || $this->rh126_minutos === 0.0 || $this->rh126_minutos == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_minutos"]:$this->rh126_minutos);
        $this->rh126_observacao = ($this->rh126_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_observacao"]:$this->rh126_observacao);
      }else{
-       $this->rh126_sequencial = ($this->rh126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_sequencial"]:$this->rh126_sequencial);
+       $this->rh126_sequencial = ($this->rh126_sequencial === 0 || $this->rh126_sequencial === 0.0 || $this->rh126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_sequencial"]:$this->rh126_sequencial);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_bancohoras {
          $this->rh126_sequencial = $rh126_sequencial;
        }
      }
-     if(($this->rh126_sequencial == null) || ($this->rh126_sequencial == "") ){
+     if(($this->rh126_sequencial == null) || ($this->rh126_sequencial === 0 || $this->rh126_sequencial === 0.0 || $this->rh126_sequencial == "") ){
        $this->erro_sql = " Campo rh126_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -512,7 +512,7 @@ class cl_bancohoras {
    function sql_query ( $rh126_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -541,7 +541,7 @@ class cl_bancohoras {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -554,7 +554,7 @@ class cl_bancohoras {
    function sql_query_file ( $rh126_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -575,7 +575,7 @@ class cl_bancohoras {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -36,7 +36,8 @@ require_once modification("classes/db_rhpessoal_classe.php");
 require_once modification("classes/db_portariaassenta_classe.php");
 require_once modification("classes/db_portariatipo_classe.php");
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 $clportaria        = new cl_portaria;

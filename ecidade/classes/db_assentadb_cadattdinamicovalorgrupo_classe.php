@@ -70,11 +70,11 @@ class cl_assentadb_cadattdinamicovalorgrupo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h80_db_cadattdinamicovalorgrupo = ($this->h80_db_cadattdinamicovalorgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["h80_db_cadattdinamicovalorgrupo"]:$this->h80_db_cadattdinamicovalorgrupo);
-       $this->h80_assenta = ($this->h80_assenta == ""?@$GLOBALS["HTTP_POST_VARS"]["h80_assenta"]:$this->h80_assenta);
+       $this->h80_db_cadattdinamicovalorgrupo = ($this->h80_db_cadattdinamicovalorgrupo === 0 || $this->h80_db_cadattdinamicovalorgrupo === 0.0 || $this->h80_db_cadattdinamicovalorgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["h80_db_cadattdinamicovalorgrupo"]:$this->h80_db_cadattdinamicovalorgrupo);
+       $this->h80_assenta = ($this->h80_assenta === 0 || $this->h80_assenta === 0.0 || $this->h80_assenta == ""?@$GLOBALS["HTTP_POST_VARS"]["h80_assenta"]:$this->h80_assenta);
      }else{
-       $this->h80_db_cadattdinamicovalorgrupo = ($this->h80_db_cadattdinamicovalorgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["h80_db_cadattdinamicovalorgrupo"]:$this->h80_db_cadattdinamicovalorgrupo);
-       $this->h80_assenta = ($this->h80_assenta == ""?@$GLOBALS["HTTP_POST_VARS"]["h80_assenta"]:$this->h80_assenta);
+       $this->h80_db_cadattdinamicovalorgrupo = ($this->h80_db_cadattdinamicovalorgrupo === 0 || $this->h80_db_cadattdinamicovalorgrupo === 0.0 || $this->h80_db_cadattdinamicovalorgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["h80_db_cadattdinamicovalorgrupo"]:$this->h80_db_cadattdinamicovalorgrupo);
+       $this->h80_assenta = ($this->h80_assenta === 0 || $this->h80_assenta === 0.0 || $this->h80_assenta == ""?@$GLOBALS["HTTP_POST_VARS"]["h80_assenta"]:$this->h80_assenta);
      }
    }
    // funcao para Inclusão
@@ -84,7 +84,7 @@ class cl_assentadb_cadattdinamicovalorgrupo {
       $this->atualizacampos();
        $this->h80_assenta = $h80_assenta;
        $this->h80_db_cadattdinamicovalorgrupo = $h80_db_cadattdinamicovalorgrupo;
-     if(($this->h80_assenta == null) || ($this->h80_assenta == "") ){
+     if(($this->h80_assenta == null) || ($this->h80_assenta === 0 || $this->h80_assenta === 0.0 || $this->h80_assenta == "") ){
        $this->erro_sql = " Campo h80_assenta não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -92,7 +92,7 @@ class cl_assentadb_cadattdinamicovalorgrupo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->h80_db_cadattdinamicovalorgrupo == null) || ($this->h80_db_cadattdinamicovalorgrupo == "") ){
+     if(($this->h80_db_cadattdinamicovalorgrupo == null) || ($this->h80_db_cadattdinamicovalorgrupo === 0 || $this->h80_db_cadattdinamicovalorgrupo === 0.0 || $this->h80_db_cadattdinamicovalorgrupo == "") ){
        $this->erro_sql = " Campo h80_db_cadattdinamicovalorgrupo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

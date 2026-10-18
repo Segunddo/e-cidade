@@ -127,22 +127,22 @@ if (isset($oPost->excluir)) {
   	$h31_anousu       = $oPortaria->h31_anousu;
   	$h31_amparolegal  = $oPortaria->h31_amparolegal;
   	
-  	$aDtInicio = split("-",$oPortaria->h31_dtinicio);
+  	$aDtInicio = preg_split("#\\-#m",$oPortaria->h31_dtinicio);
   	$h31_dtinicio_dia = $aDtInicio[2];     
   	$h31_dtinicio_mes = $aDtInicio[1];
   	$h31_dtinicio_ano = $aDtInicio[0];  	
 
-  	$aDtPortaria = split("-",$oPortaria->h31_dtportaria); 
+  	$aDtPortaria = preg_split("#\\-#m",$oPortaria->h31_dtportaria); 
   	$h31_dtportaria_dia = $aDtPortaria[2];
   	$h31_dtportaria_mes = $aDtPortaria[1];
   	$h31_dtportaria_ano = $aDtPortaria[0];    
   	
-  	$aDtConc = split("-",$oPortaria->h16_dtconc);    
+  	$aDtConc = preg_split("#\\-#m",$oPortaria->h16_dtconc);    
   	$h16_dtconc_dia = $aDtConc[2];
   	$h16_dtconc_mes = $aDtConc[1];
   	$h16_dtconc_ano = $aDtConc[0];
   	  	  	
-  	$aDtTerm = split("-",$oPortaria->h16_dtterm);  		      
+  	$aDtTerm = preg_split("#\\-#m",$oPortaria->h16_dtterm);  		      
     $h16_dtterm_dia = $aDtTerm[2];        
     $h16_dtterm_mes = $aDtTerm[1];
     $h16_dtterm_ano = $aDtTerm[0];

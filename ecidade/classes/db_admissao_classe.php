@@ -101,7 +101,7 @@ class cl_admissao {
                  h07_justif = varchar(100) = Justificativa 
                  ";
    //funcao construtor da classe 
-   function cl_admissao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("admissao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -118,7 +118,7 @@ class cl_admissao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h07_regist = ($this->h07_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["h07_regist"]:$this->h07_regist);
+       $this->h07_regist = ($this->h07_regist === 0 || $this->h07_regist === 0.0 || $this->h07_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["h07_regist"]:$this->h07_regist);
        $this->h07_tipadm = ($this->h07_tipadm == ""?@$GLOBALS["HTTP_POST_VARS"]["h07_tipadm"]:$this->h07_tipadm);
        if($this->h07_dato == ""){
          $this->h07_dato_dia = @$GLOBALS["HTTP_POST_VARS"]["h07_dato_dia"];
@@ -181,7 +181,7 @@ class cl_admissao {
        }
        $this->h07_justif = ($this->h07_justif == ""?@$GLOBALS["HTTP_POST_VARS"]["h07_justif"]:$this->h07_justif);
      }else{
-       $this->h07_regist = ($this->h07_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["h07_regist"]:$this->h07_regist);
+       $this->h07_regist = ($this->h07_regist === 0 || $this->h07_regist === 0.0 || $this->h07_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["h07_regist"]:$this->h07_regist);
      }
    }
    // funcao para inclusao
@@ -221,7 +221,7 @@ class cl_admissao {
        $this->h07_termin = "null";
      }
        $this->h07_regist = $h07_regist; 
-     if(($this->h07_regist == null) || ($this->h07_regist == "") ){ 
+     if(($this->h07_regist == null) || ($this->h07_regist === 0 || $this->h07_regist === 0.0 || $this->h07_regist == "") ){ 
        $this->erro_sql = " Campo h07_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -642,7 +642,7 @@ class cl_admissao {
    function sql_query ( $h07_regist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -673,7 +673,7 @@ class cl_admissao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -686,7 +686,7 @@ class cl_admissao {
    function sql_query_file ( $h07_regist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -707,7 +707,7 @@ class cl_admissao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -720,7 +720,7 @@ class cl_admissao {
   function sql_query_dados ( $h07_regist=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -748,7 +748,7 @@ class cl_admissao {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -761,7 +761,7 @@ class cl_admissao {
   function sqlQueryAdmissao ( $h07_regist=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -788,7 +788,7 @@ class cl_admissao {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

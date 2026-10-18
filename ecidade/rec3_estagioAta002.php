@@ -65,7 +65,7 @@ $SQLQuesitos .= " where h57_sequencial = {$get->iCodExame}                      
 $SQLQuesitos .= " group by  h51_descr,h51_sequencial                                                             ";
 $SQLQuesitos .= " order by h51_sequencial                                                                        ";
 $rQuesitos    = db_query($SQLQuesitos);
-for ($j = 0; $j < pg_num_rows($rQuesitos); $j++){
+for ($j = 0; $j < ($rQuesitos ? pg_num_rows($rQuesitos) : null); $j++){
 
   $oQuesitos = db_utils::fieldsMemory($rQuesitos, $j);
   $aQuesitos[$oQuesitos->h51_sequencial] = array("descricao" => $oQuesitos->h51_descr, "pontos" => $oQuesitos->pontos); 

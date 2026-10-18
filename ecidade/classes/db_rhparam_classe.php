@@ -68,7 +68,7 @@ class cl_rhparam {
                  h36_temposemcontribuicao = int4 = Tempo sem Contribuição 
                  ";
    //funcao construtor da classe 
-   function cl_rhparam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhparam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,19 +85,19 @@ class cl_rhparam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h36_modtermoposse = ($this->h36_modtermoposse == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_modtermoposse"]:$this->h36_modtermoposse);
-       $this->h36_instit = ($this->h36_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_instit"]:$this->h36_instit);
-       $this->h36_modportariacoletiva = ($this->h36_modportariacoletiva == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_modportariacoletiva"]:$this->h36_modportariacoletiva);
-       $this->h36_modportariaindividual = ($this->h36_modportariaindividual == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_modportariaindividual"]:$this->h36_modportariaindividual);
-       $this->h36_ultimaportaria = ($this->h36_ultimaportaria == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_ultimaportaria"]:$this->h36_ultimaportaria);
-       $this->h36_intersticio = ($this->h36_intersticio == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_intersticio"]:$this->h36_intersticio);
-       $this->h36_pontuacaominpromocao = ($this->h36_pontuacaominpromocao == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_pontuacaominpromocao"]:$this->h36_pontuacaominpromocao);
-       $this->h36_tempocontribuicaorgps = ($this->h36_tempocontribuicaorgps == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_tempocontribuicaorgps"]:$this->h36_tempocontribuicaorgps);
-       $this->h36_tempocontribuicaorpps = ($this->h36_tempocontribuicaorpps == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_tempocontribuicaorpps"]:$this->h36_tempocontribuicaorpps);
-       $this->h36_temposficticios = ($this->h36_temposficticios == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_temposficticios"]:$this->h36_temposficticios);
-       $this->h36_temposemcontribuicao = ($this->h36_temposemcontribuicao == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_temposemcontribuicao"]:$this->h36_temposemcontribuicao);
+       $this->h36_modtermoposse = ($this->h36_modtermoposse === 0 || $this->h36_modtermoposse === 0.0 || $this->h36_modtermoposse == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_modtermoposse"]:$this->h36_modtermoposse);
+       $this->h36_instit = ($this->h36_instit === 0 || $this->h36_instit === 0.0 || $this->h36_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_instit"]:$this->h36_instit);
+       $this->h36_modportariacoletiva = ($this->h36_modportariacoletiva === 0 || $this->h36_modportariacoletiva === 0.0 || $this->h36_modportariacoletiva == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_modportariacoletiva"]:$this->h36_modportariacoletiva);
+       $this->h36_modportariaindividual = ($this->h36_modportariaindividual === 0 || $this->h36_modportariaindividual === 0.0 || $this->h36_modportariaindividual == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_modportariaindividual"]:$this->h36_modportariaindividual);
+       $this->h36_ultimaportaria = ($this->h36_ultimaportaria === 0 || $this->h36_ultimaportaria === 0.0 || $this->h36_ultimaportaria == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_ultimaportaria"]:$this->h36_ultimaportaria);
+       $this->h36_intersticio = ($this->h36_intersticio === 0 || $this->h36_intersticio === 0.0 || $this->h36_intersticio == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_intersticio"]:$this->h36_intersticio);
+       $this->h36_pontuacaominpromocao = ($this->h36_pontuacaominpromocao === 0 || $this->h36_pontuacaominpromocao === 0.0 || $this->h36_pontuacaominpromocao == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_pontuacaominpromocao"]:$this->h36_pontuacaominpromocao);
+       $this->h36_tempocontribuicaorgps = ($this->h36_tempocontribuicaorgps === 0 || $this->h36_tempocontribuicaorgps === 0.0 || $this->h36_tempocontribuicaorgps == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_tempocontribuicaorgps"]:$this->h36_tempocontribuicaorgps);
+       $this->h36_tempocontribuicaorpps = ($this->h36_tempocontribuicaorpps === 0 || $this->h36_tempocontribuicaorpps === 0.0 || $this->h36_tempocontribuicaorpps == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_tempocontribuicaorpps"]:$this->h36_tempocontribuicaorpps);
+       $this->h36_temposficticios = ($this->h36_temposficticios === 0 || $this->h36_temposficticios === 0.0 || $this->h36_temposficticios == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_temposficticios"]:$this->h36_temposficticios);
+       $this->h36_temposemcontribuicao = ($this->h36_temposemcontribuicao === 0 || $this->h36_temposemcontribuicao === 0.0 || $this->h36_temposemcontribuicao == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_temposemcontribuicao"]:$this->h36_temposemcontribuicao);
      }else{
-       $this->h36_instit = ($this->h36_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_instit"]:$this->h36_instit);
+       $this->h36_instit = ($this->h36_instit === 0 || $this->h36_instit === 0.0 || $this->h36_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h36_instit"]:$this->h36_instit);
      }
    }
    // funcao para Inclusão
@@ -146,7 +146,7 @@ class cl_rhparam {
        $this->h36_temposemcontribuicao = 'null';
      }
        $this->h36_instit = $h36_instit; 
-     if(($this->h36_instit == null) || ($this->h36_instit == "") ){ 
+     if(($this->h36_instit == null) || ($this->h36_instit === 0 || $this->h36_instit === 0.0 || $this->h36_instit == "") ){ 
        $this->erro_sql = " Campo h36_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -557,7 +557,7 @@ class cl_rhparam {
   function sql_query_rhparam ( $oid = null,$campos="rhparam.oid,*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -589,7 +589,7 @@ class cl_rhparam {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

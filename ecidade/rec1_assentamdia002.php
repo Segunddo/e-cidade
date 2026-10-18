@@ -33,7 +33,8 @@ include(modification("classes/db_assmeio_classe.php"));
 include(modification("classes/db_assenta_classe.php"));
 include(modification("classes/db_tipoasse_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $classmeio = new cl_assmeio;
 $classenta = new cl_assenta;
@@ -69,7 +70,7 @@ if(isset($alterar)){
   $h16_codigo = $h22_codigo;
   $h16_regist = $h22_regist;
   $h16_assent = $h22_assent;
-  $arr_dtconc = split('-',$h22_dtconc);
+  $arr_dtconc = preg_split('#\-#m',$h22_dtconc);
   $h16_dtconc_dia = $arr_dtconc[2];
   $h16_dtconc_mes = $arr_dtconc[1]; 
   $h16_dtconc_ano = $arr_dtconc[0]; 
@@ -79,7 +80,7 @@ if(isset($alterar)){
   $h16_atofic = $h22_atofic;
   $h16_quant  = $h22_quant;
   $h16_perc   = $h22_perc;
-  $arr_dtterm = split('-',$h22_dtterm);
+  $arr_dtterm = preg_split('#\-#m',$h22_dtterm);
   $h16_dtterm_dia = $arr_dtterm[2];
   $h16_dtterm_mes = $arr_dtterm[1]; 
   $h16_dtterm_ano = $arr_dtterm[0]; 

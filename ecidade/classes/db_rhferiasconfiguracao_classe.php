@@ -30,7 +30,7 @@ class cl_rhferiasconfiguracao {
                  rh168_tipoassentamentopecunia = int4 = Assentamento Para Abono em Pecúnia 
                  ";
    //funcao construtor da classe 
-   function cl_rhferiasconfiguracao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhferiasconfiguracao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_rhferiasconfiguracao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh168_sequencial = ($this->rh168_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh168_sequencial"]:$this->rh168_sequencial);
-       $this->rh168_tipoassentamentoferias = ($this->rh168_tipoassentamentoferias == ""?@$GLOBALS["HTTP_POST_VARS"]["rh168_tipoassentamentoferias"]:$this->rh168_tipoassentamentoferias);
-       $this->rh168_tipoassentamentoabono = ($this->rh168_tipoassentamentoabono == ""?@$GLOBALS["HTTP_POST_VARS"]["rh168_tipoassentamentoabono"]:$this->rh168_tipoassentamentoabono);
+       $this->rh168_sequencial = ($this->rh168_sequencial === 0 || $this->rh168_sequencial === 0.0 || $this->rh168_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh168_sequencial"]:$this->rh168_sequencial);
+       $this->rh168_tipoassentamentoferias = ($this->rh168_tipoassentamentoferias === 0 || $this->rh168_tipoassentamentoferias === 0.0 || $this->rh168_tipoassentamentoferias == ""?@$GLOBALS["HTTP_POST_VARS"]["rh168_tipoassentamentoferias"]:$this->rh168_tipoassentamentoferias);
+       $this->rh168_tipoassentamentoabono = ($this->rh168_tipoassentamentoabono === 0 || $this->rh168_tipoassentamentoabono === 0.0 || $this->rh168_tipoassentamentoabono == ""?@$GLOBALS["HTTP_POST_VARS"]["rh168_tipoassentamentoabono"]:$this->rh168_tipoassentamentoabono);
        $this->rh168_ultimoperiodoaquisitivo = ($this->rh168_ultimoperiodoaquisitivo == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh168_ultimoperiodoaquisitivo"]:$this->rh168_ultimoperiodoaquisitivo);
-       $this->rh168_tipoassentamentopecunia = ($this->rh168_tipoassentamentopecunia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh168_tipoassentamentopecunia"]:$this->rh168_tipoassentamentopecunia);
+       $this->rh168_tipoassentamentopecunia = ($this->rh168_tipoassentamentopecunia === 0 || $this->rh168_tipoassentamentopecunia === 0.0 || $this->rh168_tipoassentamentopecunia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh168_tipoassentamentopecunia"]:$this->rh168_tipoassentamentopecunia);
      }else{
-       $this->rh168_sequencial = ($this->rh168_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh168_sequencial"]:$this->rh168_sequencial);
+       $this->rh168_sequencial = ($this->rh168_sequencial === 0 || $this->rh168_sequencial === 0.0 || $this->rh168_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh168_sequencial"]:$this->rh168_sequencial);
      }
    }
    // funcao para Inclusão
@@ -98,7 +98,7 @@ class cl_rhferiasconfiguracao {
          $this->rh168_sequencial = $rh168_sequencial; 
        }
      }
-     if(($this->rh168_sequencial == null) || ($this->rh168_sequencial == "") ){ 
+     if(($this->rh168_sequencial == null) || ($this->rh168_sequencial === 0 || $this->rh168_sequencial === 0.0 || $this->rh168_sequencial == "") ){ 
        $this->erro_sql = " Campo rh168_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

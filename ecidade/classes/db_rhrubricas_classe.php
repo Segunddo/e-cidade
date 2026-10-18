@@ -112,7 +112,7 @@ class cl_rhrubricas implements PesquisaRubricas
                  ";
 
     //funcao construtor da classe
-    function cl_rhrubricas()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("rhrubricas");
@@ -136,38 +136,38 @@ class cl_rhrubricas implements PesquisaRubricas
         if ($exclusao == false) {
             $this->rh27_rubric = ($this->rh27_rubric == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_rubric"] : $this->rh27_rubric);
             $this->rh27_descr = ($this->rh27_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_descr"] : $this->rh27_descr);
-            $this->rh27_pd = ($this->rh27_pd == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_pd"] : $this->rh27_pd);
-            $this->rh27_quant = ($this->rh27_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_quant"] : $this->rh27_quant);
+            $this->rh27_pd = ($this->rh27_pd === 0 || $this->rh27_pd === 0.0 || $this->rh27_pd == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_pd"] : $this->rh27_pd);
+            $this->rh27_quant = ($this->rh27_quant === 0 || $this->rh27_quant === 0.0 || $this->rh27_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_quant"] : $this->rh27_quant);
             $this->rh27_cond2 = ($this->rh27_cond2 == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_cond2"] : $this->rh27_cond2);
             $this->rh27_cond3 = ($this->rh27_cond3 == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_cond3"] : $this->rh27_cond3);
             $this->rh27_form = ($this->rh27_form == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_form"] : $this->rh27_form);
             $this->rh27_form2 = ($this->rh27_form2 == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_form2"] : $this->rh27_form2);
             $this->rh27_form3 = ($this->rh27_form3 == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_form3"] : $this->rh27_form3);
             $this->rh27_formq = ($this->rh27_formq == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_formq"] : $this->rh27_formq);
-            $this->rh27_calc1 = ($this->rh27_calc1 == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_calc1"] : $this->rh27_calc1);
-            $this->rh27_calc2 = ($this->rh27_calc2 == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_calc2"] : $this->rh27_calc2);
+            $this->rh27_calc1 = ($this->rh27_calc1 === 0 || $this->rh27_calc1 === 0.0 || $this->rh27_calc1 == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_calc1"] : $this->rh27_calc1);
+            $this->rh27_calc2 = ($this->rh27_calc2 === 0 || $this->rh27_calc2 === 0.0 || $this->rh27_calc2 == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_calc2"] : $this->rh27_calc2);
             $this->rh27_calc3 = ($this->rh27_calc3 == "f" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_calc3"] : $this->rh27_calc3);
-            $this->rh27_tipo = ($this->rh27_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_tipo"] : $this->rh27_tipo);
+            $this->rh27_tipo = ($this->rh27_tipo === 0 || $this->rh27_tipo === 0.0 || $this->rh27_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_tipo"] : $this->rh27_tipo);
             $this->rh27_limdat = ($this->rh27_limdat == "f" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_limdat"] : $this->rh27_limdat);
             $this->rh27_presta = ($this->rh27_presta == "f" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_presta"] : $this->rh27_presta);
             $this->rh27_calcp = ($this->rh27_calcp == "f" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_calcp"] : $this->rh27_calcp);
             $this->rh27_propq = ($this->rh27_propq == "f" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_propq"] : $this->rh27_propq);
             $this->rh27_propi = ($this->rh27_propi == "f" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_propi"] : $this->rh27_propi);
             $this->rh27_obs = ($this->rh27_obs == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_obs"] : $this->rh27_obs);
-            $this->rh27_instit = ($this->rh27_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_instit"] : $this->rh27_instit);
+            $this->rh27_instit = ($this->rh27_instit === 0 || $this->rh27_instit === 0.0 || $this->rh27_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_instit"] : $this->rh27_instit);
             $this->rh27_ativo = ($this->rh27_ativo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_ativo"] : $this->rh27_ativo);
             $this->rh27_complementarautomatica = ($this->rh27_complementarautomatica == "f" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_complementarautomatica"] : $this->rh27_complementarautomatica);
-            $this->rh27_valorpadrao = ($this->rh27_valorpadrao == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_valorpadrao"] : $this->rh27_valorpadrao);
-            $this->rh27_quantidadepadrao = ($this->rh27_quantidadepadrao == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_quantidadepadrao"] : $this->rh27_quantidadepadrao);
-            $this->rh27_rhfundamentacaolegal = ($this->rh27_rhfundamentacaolegal == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_rhfundamentacaolegal"] : $this->rh27_rhfundamentacaolegal);
-            $this->rh27_valorlimite = ($this->rh27_valorlimite == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_valorlimite"] : $this->rh27_valorlimite);
-            $this->rh27_quantidadelimite = ($this->rh27_quantidadelimite == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_quantidadelimite"] : $this->rh27_quantidadelimite);
+            $this->rh27_valorpadrao = ($this->rh27_valorpadrao === 0 || $this->rh27_valorpadrao === 0.0 || $this->rh27_valorpadrao == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_valorpadrao"] : $this->rh27_valorpadrao);
+            $this->rh27_quantidadepadrao = ($this->rh27_quantidadepadrao === 0 || $this->rh27_quantidadepadrao === 0.0 || $this->rh27_quantidadepadrao == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_quantidadepadrao"] : $this->rh27_quantidadepadrao);
+            $this->rh27_rhfundamentacaolegal = ($this->rh27_rhfundamentacaolegal === 0 || $this->rh27_rhfundamentacaolegal === 0.0 || $this->rh27_rhfundamentacaolegal == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_rhfundamentacaolegal"] : $this->rh27_rhfundamentacaolegal);
+            $this->rh27_valorlimite = ($this->rh27_valorlimite === 0 || $this->rh27_valorlimite === 0.0 || $this->rh27_valorlimite == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_valorlimite"] : $this->rh27_valorlimite);
+            $this->rh27_quantidadelimite = ($this->rh27_quantidadelimite === 0 || $this->rh27_quantidadelimite === 0.0 || $this->rh27_quantidadelimite == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_quantidadelimite"] : $this->rh27_quantidadelimite);
             $this->rh27_tipobloqueio = ($this->rh27_tipobloqueio == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_tipobloqueio"] : $this->rh27_tipobloqueio);
             $this->rh27_periodolancamento = ($this->rh27_periodolancamento == "f" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_periodolancamento"] : $this->rh27_periodolancamento);
-            $this->rh27_previdenciacomplementar = ($this->rh27_previdenciacomplementar == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_previdenciacomplementar"] : $this->rh27_previdenciacomplementar);
+            $this->rh27_previdenciacomplementar = ($this->rh27_previdenciacomplementar === 0 || $this->rh27_previdenciacomplementar === 0.0 || $this->rh27_previdenciacomplementar == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_previdenciacomplementar"] : $this->rh27_previdenciacomplementar);
         } else {
             $this->rh27_rubric = ($this->rh27_rubric == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_rubric"] : $this->rh27_rubric);
-            $this->rh27_instit = ($this->rh27_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_instit"] : $this->rh27_instit);
+            $this->rh27_instit = ($this->rh27_instit === 0 || $this->rh27_instit === 0.0 || $this->rh27_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh27_instit"] : $this->rh27_instit);
         }
     }
 
@@ -381,7 +381,7 @@ class cl_rhrubricas implements PesquisaRubricas
             $this->erro_status = "0";
             return false;
         }
-        if (($this->rh27_instit == null) || ($this->rh27_instit == "")) {
+        if (($this->rh27_instit == null) || ($this->rh27_instit === 0 || $this->rh27_instit === 0.0 || $this->rh27_instit == "")) {
             $this->erro_sql = " Campo rh27_instit não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -1455,11 +1455,11 @@ class cl_rhrubricas implements PesquisaRubricas
         $ordem = null,
         $dbwhere = "",
         $basereg = "",
-        $regist
+        $regist = null
     ) {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1501,7 +1501,7 @@ class cl_rhrubricas implements PesquisaRubricas
         //echo $sql;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];

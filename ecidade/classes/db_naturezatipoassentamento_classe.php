@@ -24,7 +24,7 @@ class cl_naturezatipoassentamento {
                  rh159_descricao = varchar(30) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_naturezatipoassentamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("naturezatipoassentamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -41,10 +41,10 @@ class cl_naturezatipoassentamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh159_sequencial = ($this->rh159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh159_sequencial"]:$this->rh159_sequencial);
+       $this->rh159_sequencial = ($this->rh159_sequencial === 0 || $this->rh159_sequencial === 0.0 || $this->rh159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh159_sequencial"]:$this->rh159_sequencial);
        $this->rh159_descricao = ($this->rh159_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh159_descricao"]:$this->rh159_descricao);
      }else{
-       $this->rh159_sequencial = ($this->rh159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh159_sequencial"]:$this->rh159_sequencial);
+       $this->rh159_sequencial = ($this->rh159_sequencial === 0 || $this->rh159_sequencial === 0.0 || $this->rh159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh159_sequencial"]:$this->rh159_sequencial);
      }
    }
    // funcao para Inclusão
@@ -83,7 +83,7 @@ class cl_naturezatipoassentamento {
          $this->rh159_sequencial = $rh159_sequencial; 
        }
      }
-     if(($this->rh159_sequencial == null) || ($this->rh159_sequencial == "") ){ 
+     if(($this->rh159_sequencial == null) || ($this->rh159_sequencial === 0 || $this->rh159_sequencial === 0.0 || $this->rh159_sequencial == "") ){ 
        $this->erro_sql = " Campo rh159_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

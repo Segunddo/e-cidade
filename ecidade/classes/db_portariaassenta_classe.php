@@ -52,7 +52,7 @@ class cl_portariaassenta {
                  h33_portaria = int8 = Portaria 
                  ";
    //funcao construtor da classe 
-   function cl_portariaassenta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("portariaassenta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_portariaassenta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h33_sequencial = ($this->h33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h33_sequencial"]:$this->h33_sequencial);
-       $this->h33_assenta = ($this->h33_assenta == ""?@$GLOBALS["HTTP_POST_VARS"]["h33_assenta"]:$this->h33_assenta);
-       $this->h33_portaria = ($this->h33_portaria == ""?@$GLOBALS["HTTP_POST_VARS"]["h33_portaria"]:$this->h33_portaria);
+       $this->h33_sequencial = ($this->h33_sequencial === 0 || $this->h33_sequencial === 0.0 || $this->h33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h33_sequencial"]:$this->h33_sequencial);
+       $this->h33_assenta = ($this->h33_assenta === 0 || $this->h33_assenta === 0.0 || $this->h33_assenta == ""?@$GLOBALS["HTTP_POST_VARS"]["h33_assenta"]:$this->h33_assenta);
+       $this->h33_portaria = ($this->h33_portaria === 0 || $this->h33_portaria === 0.0 || $this->h33_portaria == ""?@$GLOBALS["HTTP_POST_VARS"]["h33_portaria"]:$this->h33_portaria);
      }else{
-       $this->h33_sequencial = ($this->h33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h33_sequencial"]:$this->h33_sequencial);
+       $this->h33_sequencial = ($this->h33_sequencial === 0 || $this->h33_sequencial === 0.0 || $this->h33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h33_sequencial"]:$this->h33_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_portariaassenta {
          $this->h33_sequencial = $h33_sequencial; 
        }
      }
-     if(($this->h33_sequencial == null) || ($this->h33_sequencial == "") ){ 
+     if(($this->h33_sequencial == null) || ($this->h33_sequencial === 0 || $this->h33_sequencial === 0.0 || $this->h33_sequencial == "") ){ 
        $this->erro_sql = " Campo h33_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_portariaassenta {
    function sql_query ( $h33_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_portariaassenta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_portariaassenta {
    function sql_query_file ( $h33_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_portariaassenta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
