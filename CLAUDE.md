@@ -3081,6 +3081,32 @@ Implantação). Contando telas distintas, Tributário tem 1.031 (o 1.056 conta p
 **Escolhida: Educação** — não a maior nem a mais barata, mas a única que permite comparar as
 duas estratégias (big-bang 8.4 do TCC de referência × strangler fig 8.5) **sobre o mesmo módulo**.
 
+#### Refeito em 18/10/2026, depois da Educação — `scratchpad/dimensiona.py`
+
+Mesmo método, agora reproduzível: telas de menu existentes em disco que o 8.5 ainda não serve
+(nem pelo `location` nem pelo `map`), fecho das sete frentes pelo `enumera.py` (`TELAS=`).
+Conferência do instrumento: Tributário e Educação saem com **0 faltando** (1.066 − 7 fantasmas
+= 1.059 e 481 − 1 = 480, os mesmos números conferidos pelo proxy em 15/10).
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | **A alterar** | em 13/10 |
+|---|---|---|---|---|---|---|
+| Financeiro | 6 | 949 | 2.674 | 401 | **771** | 788 |
+| Patrimonial | 8 | 713 | 2.239 | 419 | **622** | 674 |
+| Saúde | 8 | 492 | 1.322 | 165 | **505** | 507 |
+| Recursos Humanos | 4 | 700 | 1.989 | 337 | **486** | 492 |
+| Configuração | 1 | 203 | 920 | 361 | **173** | 219 |
+| Assistência Social | 2 | 67 | 323 | 131 | **62** | 73 |
+| Cidadão | 1 | 35 | 109 | 35 | **13** | 13 |
+| Integrações / Gestor | 1+1 | 13+7 | 77+41 | 39+21 | **9+8** | 5+8 |
+
+União: **2.358** (era 2.783). A Educação pré-pagou ~425 arquivos das outras áreas, sobretudo
+Patrimonial (−52, as `mat`) e Configuração (−46). Saúde e RH quase não mudaram: são as áreas com
+menos código em comum com as já feitas. "Telas que faltam" no Financeiro subiu de 910 para 949
+porque a correção da 10ª lacuna passou a contar as entradas de menu com parâmetro.
+
+Ressalvas de leitura: "a alterar" é estimativa estática — nas duas áreas feitas o real saiu
+13–23% acima (correções à mão e lacunas) — e não conta os commits `EXPERIMENTO:` como pagos.
+
 ### 📐 ÁREA EDUCAÇÃO — dimensionada e INICIADA
 
 Ao contrário do Tributário, quase não tem prefixo compartilhado:
