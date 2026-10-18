@@ -3361,6 +3361,15 @@ caminho (9ª lacuna: +30 arquivos) e das correções à mão, que a estimativa e
 (`reset/sizeof/key` sobre nulo), `dbforms/db_funcoes.php` (os dois ramos do `db_select`) e
 `libs/db_stdlibwebseller.php` — todas com bateria completa na linha de base.
 
+**⚠ 11ª LACUNA (18/10/2026, achada no RH): duas classes da área não CARREGAVAM no 8.5.**
+`ImportacaoCenso2012` e `importacaoCodigoInep2010` (universo do `edu4`) tinham assinatura
+incompatível com a mãe `importacaoCenso` — LSP entre ARQUIVOS, que o `php -l` não vê (olha um
+arquivo por vez) e o harness de classes não vê (só `classes/`). Entram só nas importações do
+Censo/INEP com arquivo enviado — as mesmas telas que, por GET sem parâmetro, são os laços
+eternos do 5.6. Corrigidas como o catálogo manda (parâmetro da mãe, opcional, na filha):
+`getDadosAluno($oLinha, $lPesquisaInep = false)` e `atualizaDadosTurma($oLinha, $iAnoCenso = null)`.
+Detector novo: `scratchpad/carrega_arquivo.php` (na branch do RH). Bateria `edu4`: 140/148, linha de base.
+
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
 
 Feita sobre **o mesmo universo** (os ~2.795 arquivos que as sete frentes alcançam a partir das
