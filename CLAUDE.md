@@ -78,8 +78,8 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec)[0-9]*_)` — **3.717 arquivos** + 367 por `map` |
-| **Próximo passo** | **Área RECURSOS HUMANOS em andamento** (branch `3recursoshumanos-migrado`, ver *ÁREA RECURSOS HUMANOS*): `rh`+`eso` e `rec` feitos; próximo `pes` em sublotes. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes3\|pes4)[0-9]*_)` — **3.987 arquivos** + 367 por `map` |
+| **Próximo passo** | **Área RECURSOS HUMANOS em andamento** (branch `3recursoshumanos-migrado`, ver *ÁREA RECURSOS HUMANOS*): `rh`+`eso`, `rec` e `pes3`+`pes4` feitos; próximo `pes1`, depois `pes2` (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3398,6 +3398,7 @@ ser salvo em dump.
 |---|---|---|---|---|---|---|
 | `rh`+`eso` | 239 | 29 (Rector, 1 passada + confirmação) | 239/239 | 74/74 | 2.213 linhas, 53 classes, 0 div. | **94/94** |
 | `rec` | 568 | 134 Rector + 15 à mão | 568/568 | 171/172 | 4.893 linhas, 139 classes, 0 div. | **278/279** + 1 caracterizada |
+| `pes3`+`pes4` | 900 | 148 Rector + ~30 à mão | 900/900 | 440/443 (3 artefatos conhecidos) | 12.839 linhas, 0 div. além dos artefatos | **269/270** + 1 pendente (`.phar`) |
 
 **`rh`+`eso`** — nenhum arquivo de tela precisou mudar: os 29 são 16 `classes/` e 13 `func_`.
 Rector só com regras já vetadas (16 guardas, 13 `parse_str`+`extract`, 10 construtores, 4
@@ -3445,6 +3446,67 @@ verificado (todos sem fatal em `db_val`) pode mudar. `db_val` só é chamada por
 `model/pessoal/` e o próprio `db_libpessoal.php`. Rodadas: interseção real (universo do `cai`,
 `db_afasta_classe.php` + o núcleo) → 105/105 telas `cai` roteadas; amostra `not`+`mar`+`inf`
 79/79. **Não** rodada a bateria completa de ~3.700 telas — decisão consciente, pelo argumento acima.
+
+**`pes3`+`pes4`** (primeiro sublote do `pes`, 270 telas) — 21 divergências na 1ª bateria → 1.
+
+- **11ª LACUNA: LSP entre ARQUIVOS — classes que nem CARREGAM no 8.5.** `FolhaPagamentoSalario`,
+  `…Adiantamento` e `…Suplementar` tinham 3 métodos incompatíveis com a mãe `FolhaPagamento`
+  (`getProximoNumero`, `getFolhasFechadasCompetencia`, `hasFolhaAberta`), e `PontoFerias::
+  adicionarRegistro(RegistroPontoFerias …)` restringia o tipo da mãe `Ponto`. Fatal ao declarar
+  a classe; o `php -l` não vê (um arquivo por vez) e o harness de classes não vê (só `classes/`).
+  Correção do catálogo — parâmetro da mãe como **opcional** na filha, como a própria
+  `FolhaPagamentoComplementar` já fazia; em `hasFolhaAberta` o 1º parâmetro perdeu o *hint*
+  `DBCompetencia`, mas o corpo o repassa à mãe, que mantém o *hint* (a checagem continua um nível
+  abaixo). Em `PontoFerias` o tipo virou `RegistroPonto` — a única diferença para o 5.6 é aceitar
+  um `RegistroPonto` que não seja de férias, que lá era *catchable fatal*; os 2 chamadores reais
+  passam `RegistroPontoFerias`.
+  **Detector novo, versionado: `scratchpad/carrega_arquivo.php`** — inclui um arquivo com o
+  bootstrap da aplicação e diz `OK` ou o fatal; rodar um por processo nos dois runtimes sobre os
+  arquivos com `extends`/`implements`. Validado contra a versão antiga de `FolhaPagamentoSalario`.
+  Varrido também nos universos já verificados: **2 classes da Educação** (corrigidas na
+  `2educacao-migrado`, ver a nota na área Educação) e **10 fora de escopo** — só nos universos de
+  prefixo inteiro de `con`/`cai` (relatórios DCASP/RREO, autenticadoras térmicas,
+  `PadArquivoEscritorTXT`), de Financeiro/Patrimonial: **pendentes para quando essas áreas vierem**.
+- **A denylist cresceu para 30 (SÉTIMA vez):** `AddParamBasedOnParentClassMethodRector` copia o
+  parâmetro da mãe como **obrigatório** — quebraria `FolhaPagamentoSuplementar::getProximoNumero()`
+  chamado sem argumento — e só vê os alvos, deixando as irmãs fatais.
+- **`OptionalParametersAfterRequiredRector`, conferida no `dvr`, falhou aqui:** com parâmetro
+  **tipado** ela emite `?FolhaPagamento $x = null` (PHP 7.1 — *parse error* no 5.6), em
+  `classes/db_rhhistoricocalculo_classe.php`. Corrigido para `FolhaPagamento $x = null` (aceito
+  nos dois; idêntico em 3 entradas). Achado pelo `php -l` **no 5.6 sobre o universo**. A regra
+  fica (é segura sem tipo), mas o lint do 5.6 sobre o universo é obrigatório depois dela.
+- **Duas regras novas ACEITAS, medidas:** `ConsistentImplodeRector` (`implode($a, ',')` → ordem
+  nova; a antiga é fatal no 8) e `ReplaceEachAssignmentWithKeyCurrentRector` (`$x = each($a)` →
+  `key`/`current`/`next`, que é a correção do catálogo; o caso tinha `reset()` antes e depois).
+- **4 `each()` à mão** (2 `while (list(…) = each(…))` nos modelos de folha, 2 `list() = each()`
+  em `pes4_relinconsistenciasiprev002.php`) com `key`/`current`/`next` + `is_array` — medido
+  idêntico ao `each()` do 5.6 em 5 casos (vazio, nulo, numérico, associativo com `null`,
+  ponteiro no meio), e o 8.5 com a forma nova igual ao 5.6 com a original.
+- **Octal, terceira aparição, com bug latente que muda dado:** `pes4_rhfopag91002.php`,
+  `db_substr($cLinha, 08, 15)` — no 5.6 `08` vale **0**, então a matrícula da importação do FOPAG
+  é lida da coluna 0, não da 8 (o layout pede 8: o PIS começa em 23 = 8+15). Preservado com `0`.
+- **NÚCLEO `libs/db_app.utils.php`:** `DB_VERSION` indefinida (telas que chamam `db_app` antes de
+  `db_conecta`, que a define) → `(defined('DB_VERSION') ? DB_VERSION : 'DB_VERSION')` nas 4
+  ocorrências; com a constante definida o valor é idêntico. Sem cópia no `modification/`.
+- Restante: guardas `pg_*` (`null`) em 9 telas pelo ciclo; `count`/`implode`/`array_reverse`/
+  `ksort`/`array_walk` sobre nulo com `is_array`/`(array)` **só na linha que apareceu** (há linhas
+  iguais não tocadas em `pes4_differias002` e `model/manad.model.php`); `(int)` em `"" + 1`;
+  `stdClass` onde o 5.6 o criava sozinho (posto na linha da 1ª escrita, não no `decode`); as 2
+  últimas chamadas estáticas `JSON::parse`/`stringify` da base.
+- **12ª LACUNA, PENDENTE: biblioteca dentro de `.phar`.** `ext/php/PHPExcel.phar` — **19 de 189**
+  arquivos não compilam no 8.5 (0 no 5.6); nenhuma das sete frentes enxerga dentro de um `.phar`.
+  Usado só por `pes4_geracaoarquivorefeisul.RPC.php`, que **fica no 5.6** por uma `location` de
+  exceção no nginx (antes da regra geral). Portar = extrair, portar como o `dbagata/`, reempacotar.
+
+Regressão: interseção real com universos verificados = 1 classe do `prot` + o núcleo
+`db_app.utils.php` (que só muda onde `DB_VERSION` não existe — antes fatal no 8.5) → `prot`
+roteadas 4/4, amostra `not`+`mar`+`inf`+`tre` 98/98. Roteamento: `pes3` e `pes4` no `location`;
+`pes1_`/`pes2_` seguem no 5.6.
+
+**PARA RETOMAR:** faltam `pes1` (370 telas, ~337 a alterar) e `pes2` (515, ~310), depois a Fase B
+(as ~10 telas de `es`/`con`/`cai`/`lic`/`sped` pelo `map`), o `.phar`, o nível 3 nos cadastros e o
+cenário de cálculo. A sessão autenticada usada foi `98d016cc…`; os ciclos de guarda precisam de
+`/tmp/_sess.bak` no 5.6 (o `cmp.py` o cria ao rodar).
 
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
 

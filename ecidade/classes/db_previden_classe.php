@@ -78,7 +78,7 @@ class cl_previden
                  ";
 
     //funcao construtor da classe
-    function cl_previden()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("previden");
@@ -100,26 +100,26 @@ class cl_previden
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->r60_anousu = ($this->r60_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_anousu"] : $this->r60_anousu);
-            $this->r60_mesusu = ($this->r60_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_mesusu"] : $this->r60_mesusu);
-            $this->r60_numcgm = ($this->r60_numcgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_numcgm"] : $this->r60_numcgm);
-            $this->r60_tbprev = ($this->r60_tbprev == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_tbprev"] : $this->r60_tbprev);
+            $this->r60_anousu = ($this->r60_anousu === 0 || $this->r60_anousu === 0.0 || $this->r60_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_anousu"] : $this->r60_anousu);
+            $this->r60_mesusu = ($this->r60_mesusu === 0 || $this->r60_mesusu === 0.0 || $this->r60_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_mesusu"] : $this->r60_mesusu);
+            $this->r60_numcgm = ($this->r60_numcgm === 0 || $this->r60_numcgm === 0.0 || $this->r60_numcgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_numcgm"] : $this->r60_numcgm);
+            $this->r60_tbprev = ($this->r60_tbprev === 0 || $this->r60_tbprev === 0.0 || $this->r60_tbprev == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_tbprev"] : $this->r60_tbprev);
             $this->r60_rubric = ($this->r60_rubric == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_rubric"] : $this->r60_rubric);
-            $this->r60_regist = ($this->r60_regist == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_regist"] : $this->r60_regist);
+            $this->r60_regist = ($this->r60_regist === 0 || $this->r60_regist === 0.0 || $this->r60_regist == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_regist"] : $this->r60_regist);
             $this->r60_folha = ($this->r60_folha == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_folha"] : $this->r60_folha);
-            $this->r60_base = ($this->r60_base == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_base"] : $this->r60_base);
-            $this->r60_dprev = ($this->r60_dprev == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_dprev"] : $this->r60_dprev);
-            $this->r60_pdesc = ($this->r60_pdesc == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_pdesc"] : $this->r60_pdesc);
-            $this->r60_novod = ($this->r60_novod == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_novod"] : $this->r60_novod);
-            $this->r60_novop = ($this->r60_novop == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_novop"] : $this->r60_novop);
+            $this->r60_base = ($this->r60_base === 0 || $this->r60_base === 0.0 || $this->r60_base == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_base"] : $this->r60_base);
+            $this->r60_dprev = ($this->r60_dprev === 0 || $this->r60_dprev === 0.0 || $this->r60_dprev == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_dprev"] : $this->r60_dprev);
+            $this->r60_pdesc = ($this->r60_pdesc === 0 || $this->r60_pdesc === 0.0 || $this->r60_pdesc == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_pdesc"] : $this->r60_pdesc);
+            $this->r60_novod = ($this->r60_novod === 0 || $this->r60_novod === 0.0 || $this->r60_novod == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_novod"] : $this->r60_novod);
+            $this->r60_novop = ($this->r60_novop === 0 || $this->r60_novop === 0.0 || $this->r60_novop == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_novop"] : $this->r60_novop);
             $this->r60_altera = ($this->r60_altera == "f" ? @$GLOBALS["HTTP_POST_VARS"]["r60_altera"] : $this->r60_altera);
             $this->r60_ajuste = ($this->r60_ajuste == "f" ? @$GLOBALS["HTTP_POST_VARS"]["r60_ajuste"] : $this->r60_ajuste);
-            $this->r60_basef = ($this->r60_basef == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_basef"] : $this->r60_basef);
+            $this->r60_basef = ($this->r60_basef === 0 || $this->r60_basef === 0.0 || $this->r60_basef == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_basef"] : $this->r60_basef);
         } else {
-            $this->r60_anousu = ($this->r60_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_anousu"] : $this->r60_anousu);
-            $this->r60_mesusu = ($this->r60_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_mesusu"] : $this->r60_mesusu);
-            $this->r60_numcgm = ($this->r60_numcgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_numcgm"] : $this->r60_numcgm);
-            $this->r60_tbprev = ($this->r60_tbprev == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_tbprev"] : $this->r60_tbprev);
+            $this->r60_anousu = ($this->r60_anousu === 0 || $this->r60_anousu === 0.0 || $this->r60_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_anousu"] : $this->r60_anousu);
+            $this->r60_mesusu = ($this->r60_mesusu === 0 || $this->r60_mesusu === 0.0 || $this->r60_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_mesusu"] : $this->r60_mesusu);
+            $this->r60_numcgm = ($this->r60_numcgm === 0 || $this->r60_numcgm === 0.0 || $this->r60_numcgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_numcgm"] : $this->r60_numcgm);
+            $this->r60_tbprev = ($this->r60_tbprev === 0 || $this->r60_tbprev === 0.0 || $this->r60_tbprev == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_tbprev"] : $this->r60_tbprev);
             $this->r60_rubric = ($this->r60_rubric == "" ? @$GLOBALS["HTTP_POST_VARS"]["r60_rubric"] : $this->r60_rubric);
         }
     }
@@ -243,7 +243,7 @@ class cl_previden
         $this->r60_numcgm = $r60_numcgm;
         $this->r60_tbprev = $r60_tbprev;
         $this->r60_rubric = $r60_rubric;
-        if (($this->r60_anousu == null) || ($this->r60_anousu == "")) {
+        if (($this->r60_anousu == null) || ($this->r60_anousu === 0 || $this->r60_anousu === 0.0 || $this->r60_anousu == "")) {
             $this->erro_sql = " Campo r60_anousu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -253,7 +253,7 @@ class cl_previden
 
             return false;
         }
-        if (($this->r60_mesusu == null) || ($this->r60_mesusu == "")) {
+        if (($this->r60_mesusu == null) || ($this->r60_mesusu === 0 || $this->r60_mesusu === 0.0 || $this->r60_mesusu == "")) {
             $this->erro_sql = " Campo r60_mesusu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -263,7 +263,7 @@ class cl_previden
 
             return false;
         }
-        if (($this->r60_numcgm == null) || ($this->r60_numcgm == "")) {
+        if (($this->r60_numcgm == null) || ($this->r60_numcgm === 0 || $this->r60_numcgm === 0.0 || $this->r60_numcgm == "")) {
             $this->erro_sql = " Campo r60_numcgm nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -273,7 +273,7 @@ class cl_previden
 
             return false;
         }
-        if (($this->r60_tbprev == null) || ($this->r60_tbprev == "")) {
+        if (($this->r60_tbprev == null) || ($this->r60_tbprev === 0 || $this->r60_tbprev === 0.0 || $this->r60_tbprev == "")) {
             $this->erro_sql = " Campo r60_tbprev nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

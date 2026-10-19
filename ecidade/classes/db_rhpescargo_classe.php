@@ -73,11 +73,11 @@ class cl_rhpescargo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh20_seqpes = ($this->rh20_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh20_seqpes"]:$this->rh20_seqpes);
-       $this->rh20_cargo = ($this->rh20_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh20_cargo"]:$this->rh20_cargo);
-       $this->rh20_instit = ($this->rh20_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh20_instit"]:$this->rh20_instit);
+       $this->rh20_seqpes = ($this->rh20_seqpes === 0 || $this->rh20_seqpes === 0.0 || $this->rh20_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh20_seqpes"]:$this->rh20_seqpes);
+       $this->rh20_cargo = ($this->rh20_cargo === 0 || $this->rh20_cargo === 0.0 || $this->rh20_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh20_cargo"]:$this->rh20_cargo);
+       $this->rh20_instit = ($this->rh20_instit === 0 || $this->rh20_instit === 0.0 || $this->rh20_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh20_instit"]:$this->rh20_instit);
      }else{
-       $this->rh20_seqpes = ($this->rh20_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh20_seqpes"]:$this->rh20_seqpes);
+       $this->rh20_seqpes = ($this->rh20_seqpes === 0 || $this->rh20_seqpes === 0.0 || $this->rh20_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh20_seqpes"]:$this->rh20_seqpes);
      }
    }
    // funcao para inclusao
@@ -102,7 +102,7 @@ class cl_rhpescargo {
        return false;
      }
        $this->rh20_seqpes = $rh20_seqpes; 
-     if(($this->rh20_seqpes == null) || ($this->rh20_seqpes == "") ){ 
+     if(($this->rh20_seqpes == null) || ($this->rh20_seqpes === 0 || $this->rh20_seqpes === 0.0 || $this->rh20_seqpes == "") ){ 
        $this->erro_sql = " Campo rh20_seqpes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -404,7 +404,7 @@ class cl_rhpescargo {
      }
      return $sql;
   }
-   function sql_query_retorno ( $rh20_seqpes=null,$campos="*",$ordem=null,$dbwhere="",$anonovo,$mesnovo){ 
+   function sql_query_retorno ( $rh20_seqpes=null,$campos="*",$ordem=null,$dbwhere="",$anonovo = null,$mesnovo = null){ 
      $sql = "select ";
      if($campos != "*" ){
        $campos_sql = explode("#",$campos);

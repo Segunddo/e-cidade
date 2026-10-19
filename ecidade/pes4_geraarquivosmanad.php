@@ -155,7 +155,7 @@ foreach ($aLinhasArquivo as $chave => $aValor) {
 	$sIdent     = $aValor['ident'];
 	$iTipoLinha = $aValor['tipolinha'];
 	$rsTMP      = db_query($sSqlTMP);
-	$iTMP       = pg_num_rows($rsTMP);
+	$iTMP       = ($rsTMP ? pg_num_rows($rsTMP) : null);
 	if (! $rsTMP){
 		//fechaJanela("Erro processando tabela : {$sIdent}");
 		die("ERRO : ".pg_last_error().$sSqlTMP);

@@ -83,7 +83,7 @@ class manad {
     $sSqlK050 .= "   and rhpessoalmov.rh02_mesusu   <= {$iMesUsuFim})) ";
 	$sSqlK050 .= "   and rhpessoalmov.rh02_instit = {$iInstit} ";
 
-     $tabelaPrevidencia = implode(', ', $tabelas);
+     $tabelaPrevidencia = (is_array($tabelas) ? implode(', ', $tabelas) : null); // implode(null): NULL no 5.6
      if ( !empty($tabelaPrevidencia ) ){
         $sSqlK050 .= "   and rhpessoalmov.rh02_tbprev in ({$tabelaPrevidencia}) ";
      }
@@ -124,7 +124,7 @@ class manad {
   
   function getSqlK250($iInstit, $sDataini, $sDatafim, $tabelas = array() ) {
 
-      $tabelaPrevidencia = implode(', ', $tabelas);
+      $tabelaPrevidencia = (is_array($tabelas) ? implode(', ', $tabelas) : null);
       $filtraTabelaPrevidenciaria = '';
       if ( !empty($tabelaPrevidencia ) ){
           $filtraTabelaPrevidenciaria = " and rhpessoalmov.rh02_tbprev in ({$tabelaPrevidencia}) ";
@@ -362,7 +362,7 @@ class manad {
   
   function getSqlK300($iInstit,$sDataini,$sDatafim, $tabelas = array() ) {
 
-      $tabelaPrevidencia = implode(', ', $tabelas);
+      $tabelaPrevidencia = (is_array($tabelas) ? implode(', ', $tabelas) : null);
       $filtraTabelaPrevidenciaria = '';
       if ( !empty($tabelaPrevidencia ) ){
           $filtraTabelaPrevidenciaria = " and rhpessoalmov.rh02_tbprev in ({$tabelaPrevidencia}) ";

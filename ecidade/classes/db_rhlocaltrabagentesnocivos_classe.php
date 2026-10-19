@@ -57,17 +57,17 @@ class cl_rhlocaltrabagentesnocivos
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh256_sequencial = ($this->rh256_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_sequencial"]:$this->rh256_sequencial);
-       $this->rh256_rhlocaltrab = ($this->rh256_rhlocaltrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_rhlocaltrab"]:$this->rh256_rhlocaltrab);
-       $this->rh256_instituicao = ($this->rh256_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_instituicao"]:$this->rh256_instituicao);
+       $this->rh256_sequencial = ($this->rh256_sequencial === 0 || $this->rh256_sequencial === 0.0 || $this->rh256_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_sequencial"]:$this->rh256_sequencial);
+       $this->rh256_rhlocaltrab = ($this->rh256_rhlocaltrab === 0 || $this->rh256_rhlocaltrab === 0.0 || $this->rh256_rhlocaltrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_rhlocaltrab"]:$this->rh256_rhlocaltrab);
+       $this->rh256_instituicao = ($this->rh256_instituicao === 0 || $this->rh256_instituicao === 0.0 || $this->rh256_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_instituicao"]:$this->rh256_instituicao);
        $this->rh256_agentenocivo = ($this->rh256_agentenocivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_agentenocivo"]:$this->rh256_agentenocivo);
-       $this->rh256_tipoavaliacao = ($this->rh256_tipoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_tipoavaliacao"]:$this->rh256_tipoavaliacao);
+       $this->rh256_tipoavaliacao = ($this->rh256_tipoavaliacao === 0 || $this->rh256_tipoavaliacao === 0.0 || $this->rh256_tipoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_tipoavaliacao"]:$this->rh256_tipoavaliacao);
        $this->rh256_intensidadeconcentracao = ($this->rh256_intensidadeconcentracao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_intensidadeconcentracao"]:$this->rh256_intensidadeconcentracao);
        $this->rh256_tolerancialimite = ($this->rh256_tolerancialimite == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_tolerancialimite"]:$this->rh256_tolerancialimite);
        $this->rh256_medida = ($this->rh256_medida == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_medida"]:$this->rh256_medida);
        $this->rh256_tecnicamedicao = ($this->rh256_tecnicamedicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_tecnicamedicao"]:$this->rh256_tecnicamedicao);
      }else{
-       $this->rh256_sequencial = ($this->rh256_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_sequencial"]:$this->rh256_sequencial);
+       $this->rh256_sequencial = ($this->rh256_sequencial === 0 || $this->rh256_sequencial === 0.0 || $this->rh256_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh256_sequencial"]:$this->rh256_sequencial);
      }
    }
 
@@ -119,7 +119,7 @@ class cl_rhlocaltrabagentesnocivos
          $this->rh256_sequencial = $rh256_sequencial; 
        }
      }
-     if(($this->rh256_sequencial == null) || ($this->rh256_sequencial == "") ){ 
+     if(($this->rh256_sequencial == null) || ($this->rh256_sequencial === 0 || $this->rh256_sequencial === 0.0 || $this->rh256_sequencial == "") ){ 
        $this->erro_sql = " Campo rh256_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

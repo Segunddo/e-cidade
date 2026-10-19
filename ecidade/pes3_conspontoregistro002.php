@@ -40,7 +40,8 @@ include(modification("classes/db_pontof13_classe.php"));
 include(modification("classes/db_pontocom_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("libs/db_sql.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 //db_postmemory($HTTP_GET_VARS,2);
 //echo "<BR><BR>".$HTTP_SERVER_VARS['QUERY_STRING'];
@@ -273,7 +274,8 @@ function js_relatorio(){
                           <input class="btcols" type="text" name="z01_numcgm" value="<?=@$z01_numcgm?>" size="5" readonly> 
                           &nbsp;&nbsp;&nbsp; 
                           <?
-					      parse_str($arg);
+					      parse_str($arg, $__qs);
+                          extract($__qs);
 					      echo "<strong style=\"color:blue\">";
 					      db_ancora("$Lr01_regist","js_mostrapessoal();return false;", 1);
 					      echo "</strong>

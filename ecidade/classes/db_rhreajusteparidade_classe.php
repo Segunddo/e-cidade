@@ -45,10 +45,10 @@ class cl_rhreajusteparidade {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh148_sequencial = ($this->rh148_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh148_sequencial"]:$this->rh148_sequencial);
+       $this->rh148_sequencial = ($this->rh148_sequencial === 0 || $this->rh148_sequencial === 0.0 || $this->rh148_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh148_sequencial"]:$this->rh148_sequencial);
        $this->rh148_descricao = ($this->rh148_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh148_descricao"]:$this->rh148_descricao);
      }else{
-       $this->rh148_sequencial = ($this->rh148_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh148_sequencial"]:$this->rh148_sequencial);
+       $this->rh148_sequencial = ($this->rh148_sequencial === 0 || $this->rh148_sequencial === 0.0 || $this->rh148_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh148_sequencial"]:$this->rh148_sequencial);
      }
    }
    // funcao para inclusao
@@ -64,7 +64,7 @@ class cl_rhreajusteparidade {
        return false;
      }
        $this->rh148_sequencial = $rh148_sequencial; 
-     if(($this->rh148_sequencial == null) || ($this->rh148_sequencial == "") ){ 
+     if(($this->rh148_sequencial == null) || ($this->rh148_sequencial === 0 || $this->rh148_sequencial === 0.0 || $this->rh148_sequencial == "") ){ 
        $this->erro_sql = " Campo rh148_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

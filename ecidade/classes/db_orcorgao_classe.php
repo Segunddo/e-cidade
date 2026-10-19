@@ -58,7 +58,7 @@ class cl_orcorgao {
                  o40_finali = text = Finalidade 
                  ";
    //funcao construtor da classe 
-   function cl_orcorgao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcorgao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,15 +75,15 @@ class cl_orcorgao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o40_anousu = ($this->o40_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_anousu"]:$this->o40_anousu);
-       $this->o40_orgao = ($this->o40_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_orgao"]:$this->o40_orgao);
+       $this->o40_anousu = ($this->o40_anousu === 0 || $this->o40_anousu === 0.0 || $this->o40_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_anousu"]:$this->o40_anousu);
+       $this->o40_orgao = ($this->o40_orgao === 0 || $this->o40_orgao === 0.0 || $this->o40_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_orgao"]:$this->o40_orgao);
        $this->o40_codtri = ($this->o40_codtri == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_codtri"]:$this->o40_codtri);
        $this->o40_descr = ($this->o40_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_descr"]:$this->o40_descr);
-       $this->o40_instit = ($this->o40_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_instit"]:$this->o40_instit);
+       $this->o40_instit = ($this->o40_instit === 0 || $this->o40_instit === 0.0 || $this->o40_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_instit"]:$this->o40_instit);
        $this->o40_finali = ($this->o40_finali == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_finali"]:$this->o40_finali);
      }else{
-       $this->o40_anousu = ($this->o40_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_anousu"]:$this->o40_anousu);
-       $this->o40_orgao = ($this->o40_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_orgao"]:$this->o40_orgao);
+       $this->o40_anousu = ($this->o40_anousu === 0 || $this->o40_anousu === 0.0 || $this->o40_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_anousu"]:$this->o40_anousu);
+       $this->o40_orgao = ($this->o40_orgao === 0 || $this->o40_orgao === 0.0 || $this->o40_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o40_orgao"]:$this->o40_orgao);
      }
    }
    // funcao para inclusao
@@ -118,7 +118,7 @@ class cl_orcorgao {
      }
        $this->o40_anousu = $o40_anousu; 
        $this->o40_orgao = $o40_orgao; 
-     if(($this->o40_anousu == null) || ($this->o40_anousu == "") ){ 
+     if(($this->o40_anousu == null) || ($this->o40_anousu === 0 || $this->o40_anousu === 0.0 || $this->o40_anousu == "") ){ 
        $this->erro_sql = " Campo o40_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -126,7 +126,7 @@ class cl_orcorgao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o40_orgao == null) || ($this->o40_orgao == "") ){ 
+     if(($this->o40_orgao == null) || ($this->o40_orgao === 0 || $this->o40_orgao === 0.0 || $this->o40_orgao == "") ){ 
        $this->erro_sql = " Campo o40_orgao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

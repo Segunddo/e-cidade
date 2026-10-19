@@ -80,7 +80,7 @@ class cl_ajusteir {
                  r61_ajuste = boolean = informa se e do mesmo numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_ajusteir() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ajusteir"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -97,29 +97,29 @@ class cl_ajusteir {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r61_anousu = ($this->r61_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_anousu"]:$this->r61_anousu);
-       $this->r61_mesusu = ($this->r61_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_mesusu"]:$this->r61_mesusu);
-       $this->r61_numcgm = ($this->r61_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_numcgm"]:$this->r61_numcgm);
+       $this->r61_anousu = ($this->r61_anousu === 0 || $this->r61_anousu === 0.0 || $this->r61_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_anousu"]:$this->r61_anousu);
+       $this->r61_mesusu = ($this->r61_mesusu === 0 || $this->r61_mesusu === 0.0 || $this->r61_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_mesusu"]:$this->r61_mesusu);
+       $this->r61_numcgm = ($this->r61_numcgm === 0 || $this->r61_numcgm === 0.0 || $this->r61_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_numcgm"]:$this->r61_numcgm);
        $this->r61_rubric = ($this->r61_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_rubric"]:$this->r61_rubric);
-       $this->r61_regist = ($this->r61_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_regist"]:$this->r61_regist);
+       $this->r61_regist = ($this->r61_regist === 0 || $this->r61_regist === 0.0 || $this->r61_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_regist"]:$this->r61_regist);
        $this->r61_folha = ($this->r61_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_folha"]:$this->r61_folha);
-       $this->r61_base = ($this->r61_base == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_base"]:$this->r61_base);
-       $this->r61_depend = ($this->r61_depend == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_depend"]:$this->r61_depend);
-       $this->r61_deduc = ($this->r61_deduc == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_deduc"]:$this->r61_deduc);
-       $this->r61_didade = ($this->r61_didade == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_didade"]:$this->r61_didade);
-       $this->r61_dprev = ($this->r61_dprev == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_dprev"]:$this->r61_dprev);
-       $this->r61_descir = ($this->r61_descir == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_descir"]:$this->r61_descir);
-       $this->r61_percir = ($this->r61_percir == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_percir"]:$this->r61_percir);
-       $this->r61_novod = ($this->r61_novod == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_novod"]:$this->r61_novod);
-       $this->r61_novop = ($this->r61_novop == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_novop"]:$this->r61_novop);
+       $this->r61_base = ($this->r61_base === 0 || $this->r61_base === 0.0 || $this->r61_base == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_base"]:$this->r61_base);
+       $this->r61_depend = ($this->r61_depend === 0 || $this->r61_depend === 0.0 || $this->r61_depend == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_depend"]:$this->r61_depend);
+       $this->r61_deduc = ($this->r61_deduc === 0 || $this->r61_deduc === 0.0 || $this->r61_deduc == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_deduc"]:$this->r61_deduc);
+       $this->r61_didade = ($this->r61_didade === 0 || $this->r61_didade === 0.0 || $this->r61_didade == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_didade"]:$this->r61_didade);
+       $this->r61_dprev = ($this->r61_dprev === 0 || $this->r61_dprev === 0.0 || $this->r61_dprev == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_dprev"]:$this->r61_dprev);
+       $this->r61_descir = ($this->r61_descir === 0 || $this->r61_descir === 0.0 || $this->r61_descir == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_descir"]:$this->r61_descir);
+       $this->r61_percir = ($this->r61_percir === 0 || $this->r61_percir === 0.0 || $this->r61_percir == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_percir"]:$this->r61_percir);
+       $this->r61_novod = ($this->r61_novod === 0 || $this->r61_novod === 0.0 || $this->r61_novod == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_novod"]:$this->r61_novod);
+       $this->r61_novop = ($this->r61_novop === 0 || $this->r61_novop === 0.0 || $this->r61_novop == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_novop"]:$this->r61_novop);
        $this->r61_altera = ($this->r61_altera == "f"?@$GLOBALS["HTTP_POST_VARS"]["r61_altera"]:$this->r61_altera);
        $this->r61_ajuste = ($this->r61_ajuste == "f"?@$GLOBALS["HTTP_POST_VARS"]["r61_ajuste"]:$this->r61_ajuste);
      }else{
-       $this->r61_anousu = ($this->r61_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_anousu"]:$this->r61_anousu);
-       $this->r61_mesusu = ($this->r61_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_mesusu"]:$this->r61_mesusu);
-       $this->r61_numcgm = ($this->r61_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_numcgm"]:$this->r61_numcgm);
+       $this->r61_anousu = ($this->r61_anousu === 0 || $this->r61_anousu === 0.0 || $this->r61_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_anousu"]:$this->r61_anousu);
+       $this->r61_mesusu = ($this->r61_mesusu === 0 || $this->r61_mesusu === 0.0 || $this->r61_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_mesusu"]:$this->r61_mesusu);
+       $this->r61_numcgm = ($this->r61_numcgm === 0 || $this->r61_numcgm === 0.0 || $this->r61_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_numcgm"]:$this->r61_numcgm);
        $this->r61_rubric = ($this->r61_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_rubric"]:$this->r61_rubric);
-       $this->r61_regist = ($this->r61_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_regist"]:$this->r61_regist);
+       $this->r61_regist = ($this->r61_regist === 0 || $this->r61_regist === 0.0 || $this->r61_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_regist"]:$this->r61_regist);
        $this->r61_folha = ($this->r61_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["r61_folha"]:$this->r61_folha);
      }
    }
@@ -231,7 +231,7 @@ class cl_ajusteir {
        $this->r61_rubric = $r61_rubric; 
        $this->r61_regist = $r61_regist; 
        $this->r61_folha = $r61_folha; 
-     if(($this->r61_anousu == null) || ($this->r61_anousu == "") ){ 
+     if(($this->r61_anousu == null) || ($this->r61_anousu === 0 || $this->r61_anousu === 0.0 || $this->r61_anousu == "") ){ 
        $this->erro_sql = " Campo r61_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -239,7 +239,7 @@ class cl_ajusteir {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r61_mesusu == null) || ($this->r61_mesusu == "") ){ 
+     if(($this->r61_mesusu == null) || ($this->r61_mesusu === 0 || $this->r61_mesusu === 0.0 || $this->r61_mesusu == "") ){ 
        $this->erro_sql = " Campo r61_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -247,7 +247,7 @@ class cl_ajusteir {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r61_numcgm == null) || ($this->r61_numcgm == "") ){ 
+     if(($this->r61_numcgm == null) || ($this->r61_numcgm === 0 || $this->r61_numcgm === 0.0 || $this->r61_numcgm == "") ){ 
        $this->erro_sql = " Campo r61_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -263,7 +263,7 @@ class cl_ajusteir {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r61_regist == null) || ($this->r61_regist == "") ){ 
+     if(($this->r61_regist == null) || ($this->r61_regist === 0 || $this->r61_regist === 0.0 || $this->r61_regist == "") ){ 
        $this->erro_sql = " Campo r61_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -836,7 +836,7 @@ class cl_ajusteir {
    function sql_query ( $r61_anousu=null,$r61_mesusu=null,$r61_numcgm=null,$r61_rubric=null,$r61_regist=null,$r61_folha=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -906,7 +906,7 @@ class cl_ajusteir {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -919,7 +919,7 @@ class cl_ajusteir {
    function sql_query_file ( $r61_anousu=null,$r61_mesusu=null,$r61_numcgm=null,$r61_rubric=null,$r61_regist=null,$r61_folha=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -980,7 +980,7 @@ class cl_ajusteir {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

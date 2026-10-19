@@ -855,7 +855,8 @@ abstract class FolhaPagamento {
       $aRegistrosRestaurar[$oServidor->getMatricula()] = $this->getHistoricoRegistrosPonto($oServidor);
     }
 
-    while ( list($iMatricula, $aRegistros) = each($aRegistrosRestaurar) ) {
+    while ( is_array($aRegistrosRestaurar) && ($iMatricula = key($aRegistrosRestaurar)) !== null ) { // each() removido no PHP 8: key/current/next reproduzem o ponteiro
+      $aRegistros = current($aRegistrosRestaurar); next($aRegistrosRestaurar);
 
       $oPonto = $oServidor->getPonto($this->getTabelaPonto());
 

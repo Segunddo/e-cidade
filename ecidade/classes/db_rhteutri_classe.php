@@ -69,7 +69,7 @@ class cl_rhteutri {
                  rh67_data = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_rhteutri() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhteutri"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -86,15 +86,15 @@ class cl_rhteutri {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh67_sequencial = ($this->rh67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_sequencial"]:$this->rh67_sequencial);
-       $this->rh67_regist = ($this->rh67_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_regist"]:$this->rh67_regist);
-       $this->rh67_rhtipovale = ($this->rh67_rhtipovale == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_rhtipovale"]:$this->rh67_rhtipovale);
+       $this->rh67_sequencial = ($this->rh67_sequencial === 0 || $this->rh67_sequencial === 0.0 || $this->rh67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_sequencial"]:$this->rh67_sequencial);
+       $this->rh67_regist = ($this->rh67_regist === 0 || $this->rh67_regist === 0.0 || $this->rh67_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_regist"]:$this->rh67_regist);
+       $this->rh67_rhtipovale = ($this->rh67_rhtipovale === 0 || $this->rh67_rhtipovale === 0.0 || $this->rh67_rhtipovale == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_rhtipovale"]:$this->rh67_rhtipovale);
        $this->rh67_cartao = ($this->rh67_cartao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_cartao"]:$this->rh67_cartao);
-       $this->rh67_grupo = ($this->rh67_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_grupo"]:$this->rh67_grupo);
-       $this->rh67_dias = ($this->rh67_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_dias"]:$this->rh67_dias);
-       $this->rh67_vales = ($this->rh67_vales == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_vales"]:$this->rh67_vales);
+       $this->rh67_grupo = ($this->rh67_grupo === 0 || $this->rh67_grupo === 0.0 || $this->rh67_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_grupo"]:$this->rh67_grupo);
+       $this->rh67_dias = ($this->rh67_dias === 0 || $this->rh67_dias === 0.0 || $this->rh67_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_dias"]:$this->rh67_dias);
+       $this->rh67_vales = ($this->rh67_vales === 0 || $this->rh67_vales === 0.0 || $this->rh67_vales == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_vales"]:$this->rh67_vales);
        $this->rh67_ativo = ($this->rh67_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh67_ativo"]:$this->rh67_ativo);
-       $this->rh67_db_usuarios = ($this->rh67_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_db_usuarios"]:$this->rh67_db_usuarios);
+       $this->rh67_db_usuarios = ($this->rh67_db_usuarios === 0 || $this->rh67_db_usuarios === 0.0 || $this->rh67_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_db_usuarios"]:$this->rh67_db_usuarios);
        if($this->rh67_data == ""){
          $this->rh67_data_dia = ($this->rh67_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_data_dia"]:$this->rh67_data_dia);
          $this->rh67_data_mes = ($this->rh67_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_data_mes"]:$this->rh67_data_mes);
@@ -104,7 +104,7 @@ class cl_rhteutri {
          }
        }
      }else{
-       $this->rh67_sequencial = ($this->rh67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_sequencial"]:$this->rh67_sequencial);
+       $this->rh67_sequencial = ($this->rh67_sequencial === 0 || $this->rh67_sequencial === 0.0 || $this->rh67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_sequencial"]:$this->rh67_sequencial);
      }
    }
    // funcao para inclusao
@@ -209,7 +209,7 @@ class cl_rhteutri {
          $this->rh67_sequencial = $rh67_sequencial; 
        }
      }
-     if(($this->rh67_sequencial == null) || ($this->rh67_sequencial == "") ){ 
+     if(($this->rh67_sequencial == null) || ($this->rh67_sequencial === 0 || $this->rh67_sequencial === 0.0 || $this->rh67_sequencial == "") ){ 
        $this->erro_sql = " Campo rh67_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -588,7 +588,7 @@ class cl_rhteutri {
    function sql_query ( $rh67_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -619,7 +619,7 @@ class cl_rhteutri {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -631,7 +631,7 @@ class cl_rhteutri {
    function sql_query_file ( $rh67_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -652,7 +652,7 @@ class cl_rhteutri {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

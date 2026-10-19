@@ -36,7 +36,7 @@ class cl_rhconsignadomovimentoservidorrubrica {
                  rh153_totalparcelas = varchar(3) = Total de Parcelas 
                  ";
    //funcao construtor da classe 
-   function cl_rhconsignadomovimentoservidorrubrica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhconsignadomovimentoservidorrubrica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -53,16 +53,16 @@ class cl_rhconsignadomovimentoservidorrubrica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh153_sequencial = ($this->rh153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_sequencial"]:$this->rh153_sequencial);
-       $this->rh153_consignadomovimentoservidor = ($this->rh153_consignadomovimentoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_consignadomovimentoservidor"]:$this->rh153_consignadomovimentoservidor);
-       $this->rh153_instit = ($this->rh153_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_instit"]:$this->rh153_instit);
-       $this->rh153_rubrica = ($this->rh153_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_rubrica"]:$this->rh153_rubrica);
+       $this->rh153_sequencial = ($this->rh153_sequencial === 0 || $this->rh153_sequencial === 0.0 || $this->rh153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_sequencial"]:$this->rh153_sequencial);
+       $this->rh153_consignadomovimentoservidor = ($this->rh153_consignadomovimentoservidor === 0 || $this->rh153_consignadomovimentoservidor === 0.0 || $this->rh153_consignadomovimentoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_consignadomovimentoservidor"]:$this->rh153_consignadomovimentoservidor);
+       $this->rh153_instit = ($this->rh153_instit === 0 || $this->rh153_instit === 0.0 || $this->rh153_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_instit"]:$this->rh153_instit);
+       $this->rh153_rubrica = ($this->rh153_rubrica === 0 || $this->rh153_rubrica === 0.0 || $this->rh153_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_rubrica"]:$this->rh153_rubrica);
        $this->rh153_valordescontar = ($this->rh153_valordescontar == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_valordescontar"]:$this->rh153_valordescontar);
        $this->rh153_valordescontado = ($this->rh153_valordescontado == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_valordescontado"]:$this->rh153_valordescontado);
        $this->rh153_parcela = ($this->rh153_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_parcela"]:$this->rh153_parcela);
        $this->rh153_totalparcelas = ($this->rh153_totalparcelas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_totalparcelas"]:$this->rh153_totalparcelas);
      }else{
-       $this->rh153_sequencial = ($this->rh153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_sequencial"]:$this->rh153_sequencial);
+       $this->rh153_sequencial = ($this->rh153_sequencial === 0 || $this->rh153_sequencial === 0.0 || $this->rh153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh153_sequencial"]:$this->rh153_sequencial);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_rhconsignadomovimentoservidorrubrica {
          $this->rh153_sequencial = $rh153_sequencial; 
        }
      }
-     if(($this->rh153_sequencial == null) || ($this->rh153_sequencial == "") ){ 
+     if(($this->rh153_sequencial == null) || ($this->rh153_sequencial === 0 || $this->rh153_sequencial === 0.0 || $this->rh153_sequencial == "") ){ 
        $this->erro_sql = " Campo rh153_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

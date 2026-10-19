@@ -83,13 +83,13 @@ function diferencaferias($subpes)
       db_selectmax("cadferia", "select * from cadferia ".bb_condicaosubpes("r30_" ).$condicaoaux .$condicao_selecao );
 //      echo "<BR> select * from cadferia ".bb_condicaosubpes("r30_" ).$condicaoaux .$condicao_selecao;
 //      db_criatabela(db_query("select * from cadferia ".bb_condicaosubpes("r30_" ).$condicaoaux .$condicao_selecao));
-      $max_total = count($cadferia);
+      $max_total = count((array)$cadferia);
     } else {
       $condicaoaux  = " and ( r30_proc1 = ".db_sqlformat($subpes ). " or r30_proc2 = ".db_sqlformat($subpes ).")";
       db_selectmax("cadferia", "select * from cadferia ".bb_condicaosubpes("r30_" ).$condicaoaux .$condicao_selecao);
 //      echo "<BR> select * from cadferia ".bb_condicaosubpes("r30_" ).$condicaoaux .$condicao_selecao;
 //      db_criatabela(db_query("select * from cadferia ".bb_condicaosubpes("r30_" ).$condicaoaux .$condicao_selecao));
-      $max_total = count($cadferia);
+      $max_total = count((array)$cadferia);
       $chave_seek2 = "999999";
     }
     $matriz1 = array();
@@ -106,7 +106,7 @@ function diferencaferias($subpes)
     $matriz1[10] = "r29_mesusu";
     $matriz1[11] = "r29_instit";
     $contador = 1;
-    for ($Icadferia=0; $Icadferia<count($cadferia); $Icadferia++) {
+    for ($Icadferia=0; $Icadferia<count((array)$cadferia); $Icadferia++) {
       if (db_empty($cadferia[$Icadferia]["r30_proc2"]) ) {
         $r30_dias = "r30_dias1";
         $r30_proc = "r30_proc1";

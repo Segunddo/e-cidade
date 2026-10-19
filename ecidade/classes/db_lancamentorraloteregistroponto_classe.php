@@ -26,7 +26,7 @@ class cl_lancamentorraloteregistroponto {
                  rh174_loteregistroponto = int4 = Código do Lote de Registros do Ponto 
                  ";
    //funcao construtor da classe 
-   function cl_lancamentorraloteregistroponto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lancamentorraloteregistroponto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_lancamentorraloteregistroponto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh174_sequencial = ($this->rh174_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh174_sequencial"]:$this->rh174_sequencial);
-       $this->rh174_lancamentorra = ($this->rh174_lancamentorra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh174_lancamentorra"]:$this->rh174_lancamentorra);
-       $this->rh174_loteregistroponto = ($this->rh174_loteregistroponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh174_loteregistroponto"]:$this->rh174_loteregistroponto);
+       $this->rh174_sequencial = ($this->rh174_sequencial === 0 || $this->rh174_sequencial === 0.0 || $this->rh174_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh174_sequencial"]:$this->rh174_sequencial);
+       $this->rh174_lancamentorra = ($this->rh174_lancamentorra === 0 || $this->rh174_lancamentorra === 0.0 || $this->rh174_lancamentorra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh174_lancamentorra"]:$this->rh174_lancamentorra);
+       $this->rh174_loteregistroponto = ($this->rh174_loteregistroponto === 0 || $this->rh174_loteregistroponto === 0.0 || $this->rh174_loteregistroponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh174_loteregistroponto"]:$this->rh174_loteregistroponto);
      }else{
-       $this->rh174_sequencial = ($this->rh174_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh174_sequencial"]:$this->rh174_sequencial);
+       $this->rh174_sequencial = ($this->rh174_sequencial === 0 || $this->rh174_sequencial === 0.0 || $this->rh174_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh174_sequencial"]:$this->rh174_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_lancamentorraloteregistroponto {
          $this->rh174_sequencial = $rh174_sequencial; 
        }
      }
-     if(($this->rh174_sequencial == null) || ($this->rh174_sequencial == "") ){ 
+     if(($this->rh174_sequencial == null) || ($this->rh174_sequencial === 0 || $this->rh174_sequencial === 0.0 || $this->rh174_sequencial == "") ){ 
        $this->erro_sql = " Campo rh174_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

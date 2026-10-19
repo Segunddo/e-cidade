@@ -64,7 +64,8 @@ $clrotulo->label('r13_descr');
 $clrotulo->label('r37_descr');
 $clrotulo->label('rh02_lota');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $head3 = "CADASTRO DE CÓDIGOS";
 $head5 = "PERÍODO : ".$mes." / ".$ano;
@@ -107,7 +108,7 @@ $sql = $clrhpessoal->sql_query_pesquisa(
                                          $mes
                                        );
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0 || $xxnum==false){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Códigos cadastrados no período de '.$mes.' / '.$ano);
 }

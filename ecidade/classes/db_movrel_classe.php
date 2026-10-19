@@ -64,7 +64,7 @@ class cl_movrel {
                  r54_lancad = bool = Lançado 
                  ";
    //funcao construtor da classe 
-   function cl_movrel() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("movrel"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,14 +81,14 @@ class cl_movrel {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r54_instit = ($this->r54_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_instit"]:$this->r54_instit);
+       $this->r54_instit = ($this->r54_instit === 0 || $this->r54_instit === 0.0 || $this->r54_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_instit"]:$this->r54_instit);
        $this->r54_anomes = ($this->r54_anomes == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_anomes"]:$this->r54_anomes);
        $this->r54_codrel = ($this->r54_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_codrel"]:$this->r54_codrel);
-       $this->r54_regist = ($this->r54_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_regist"]:$this->r54_regist);
+       $this->r54_regist = ($this->r54_regist === 0 || $this->r54_regist === 0.0 || $this->r54_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_regist"]:$this->r54_regist);
        $this->r54_codeve = ($this->r54_codeve == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_codeve"]:$this->r54_codeve);
-       $this->r54_quant1 = ($this->r54_quant1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant1"]:$this->r54_quant1);
-       $this->r54_quant2 = ($this->r54_quant2 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant2"]:$this->r54_quant2);
-       $this->r54_quant3 = ($this->r54_quant3 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant3"]:$this->r54_quant3);
+       $this->r54_quant1 = ($this->r54_quant1 === 0 || $this->r54_quant1 === 0.0 || $this->r54_quant1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant1"]:$this->r54_quant1);
+       $this->r54_quant2 = ($this->r54_quant2 === 0 || $this->r54_quant2 === 0.0 || $this->r54_quant2 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant2"]:$this->r54_quant2);
+       $this->r54_quant3 = ($this->r54_quant3 === 0 || $this->r54_quant3 === 0.0 || $this->r54_quant3 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant3"]:$this->r54_quant3);
        $this->r54_lancad = ($this->r54_lancad == "f"?@$GLOBALS["HTTP_POST_VARS"]["r54_lancad"]:$this->r54_lancad);
      }else{
      }
@@ -452,7 +452,7 @@ class cl_movrel {
    function sql_query ( $oid = null,$campos="movrel.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_movrel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -489,7 +489,7 @@ class cl_movrel {
    function sql_query_dados ( $oid = null,$campos="movrel.oid,*",$ordem=null,$dbwhere="",$ano="",$mes=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_movrel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_movrel {
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -557,7 +557,7 @@ class cl_movrel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -569,7 +569,7 @@ class cl_movrel {
    function sql_query_gerfsal ( $oid = null,$campos="movrel.oid,*",$ordem=null,$dbwhere="",$ano="",$mes="",$rubric="",$regist=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -602,7 +602,7 @@ class cl_movrel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

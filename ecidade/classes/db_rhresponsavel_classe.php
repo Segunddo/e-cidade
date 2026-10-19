@@ -52,7 +52,7 @@ class cl_rhresponsavel {
                  rh107_nome = char(40) = Nome 
                  ";
    //funcao construtor da classe 
-   function cl_rhresponsavel() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhresponsavel"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rhresponsavel {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh107_sequencial = ($this->rh107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh107_sequencial"]:$this->rh107_sequencial);
-       $this->rh107_numcgm = ($this->rh107_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh107_numcgm"]:$this->rh107_numcgm);
+       $this->rh107_sequencial = ($this->rh107_sequencial === 0 || $this->rh107_sequencial === 0.0 || $this->rh107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh107_sequencial"]:$this->rh107_sequencial);
+       $this->rh107_numcgm = ($this->rh107_numcgm === 0 || $this->rh107_numcgm === 0.0 || $this->rh107_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh107_numcgm"]:$this->rh107_numcgm);
        $this->rh107_nome = ($this->rh107_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["rh107_nome"]:$this->rh107_nome);
      }else{
-       $this->rh107_sequencial = ($this->rh107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh107_sequencial"]:$this->rh107_sequencial);
+       $this->rh107_sequencial = ($this->rh107_sequencial === 0 || $this->rh107_sequencial === 0.0 || $this->rh107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh107_sequencial"]:$this->rh107_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rhresponsavel {
          $this->rh107_sequencial = $rh107_sequencial; 
        }
      }
-     if(($this->rh107_sequencial == null) || ($this->rh107_sequencial == "") ){ 
+     if(($this->rh107_sequencial == null) || ($this->rh107_sequencial === 0 || $this->rh107_sequencial === 0.0 || $this->rh107_sequencial == "") ){ 
        $this->erro_sql = " Campo rh107_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_rhresponsavel {
    function sql_query ( $rh107_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_rhresponsavel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_rhresponsavel {
    function sql_query_file ( $rh107_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_rhresponsavel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

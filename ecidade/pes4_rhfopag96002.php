@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_libpessoal.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 global $cfpess,$subpes;
 
@@ -79,7 +80,7 @@ global $subpes,$ponto;
                                order by rh66_pis");
 //echo "<BR> ".$sql;exit;      
       db_criatermometro('calculo_folha','Concluido...','blue',1,'Inserindo rubrica no ponto');
-      for($Ipes=0;$Ipes < count($rhfopag);$Ipes++){
+      for($Ipes=0;$Ipes < count((array)$rhfopag);$Ipes++){
           db_atutermometro($Ipes,count($rhfopag),'calculo_folha',1);
           if($ponto == 's'){
               $condicaoaux = " and r10_rubric = ".db_sqlformat($rh27_rubric)." and r10_regist = ".db_sqlformat( $rhfopag[$Ipes]["rh66_regist"] );

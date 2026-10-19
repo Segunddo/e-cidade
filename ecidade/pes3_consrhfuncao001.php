@@ -33,7 +33,8 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("libs/db_sql.php"));
 require_once(modification("classes/db_rhregime_classe.php"));
   
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clrotulo = new rotulocampo;
 $clrotulo->label("rh37_funcao");
 $clrotulo->label("rh37_descr");

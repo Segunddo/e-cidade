@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_libpessoal.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 //parse_str($HTTP_SERVER_VARS['HTTP_USER_AGENT']);
 $e_linux = strpos(strtolower($HTTP_USER_AGENT),'linux') ;
@@ -183,7 +184,7 @@ global $fopag_dtpago,
       global $pessoal;
       db_selectmax("pessoal", $sql);
 //echo "<BR> ".$sql;exit;      
-      while($Ipes < count($pessoal)){
+      while($Ipes < count((array)$pessoal)){
          $pis = $pessoal[$Ipes]["r01_pis"];
          $tem_pis_igual = false;
          while($Ipes < count($pessoal) && $pis == $pessoal[$Ipes]["r01_pis"]){

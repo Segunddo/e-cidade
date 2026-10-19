@@ -54,7 +54,7 @@ class cl_fgtsfer {
                  r40_valor = float8 = Valor base p/ fgts 
                  ";
    //funcao construtor da classe 
-   function cl_fgtsfer() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fgtsfer"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,10 +71,10 @@ class cl_fgtsfer {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r40_regist = ($this->r40_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r40_regist"]:$this->r40_regist);
+       $this->r40_regist = ($this->r40_regist === 0 || $this->r40_regist === 0.0 || $this->r40_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r40_regist"]:$this->r40_regist);
        $this->r40_proc = ($this->r40_proc == ""?@$GLOBALS["HTTP_POST_VARS"]["r40_proc"]:$this->r40_proc);
        $this->r40_recol = ($this->r40_recol == ""?@$GLOBALS["HTTP_POST_VARS"]["r40_recol"]:$this->r40_recol);
-       $this->r40_valor = ($this->r40_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r40_valor"]:$this->r40_valor);
+       $this->r40_valor = ($this->r40_valor === 0 || $this->r40_valor === 0.0 || $this->r40_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r40_valor"]:$this->r40_valor);
      }else{
      }
    }

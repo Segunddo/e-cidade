@@ -78,12 +78,12 @@ class cl_rubricasusuario implements PesquisaRubricas
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->rh219_sequencial = ($this->rh219_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh219_sequencial"] : $this->rh219_sequencial);
-            $this->rh219_usuario = ($this->rh219_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh219_usuario"] : $this->rh219_usuario);
-            $this->rh219_instituicao = ($this->rh219_instituicao == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh219_instituicao"] : $this->rh219_instituicao);
+            $this->rh219_sequencial = ($this->rh219_sequencial === 0 || $this->rh219_sequencial === 0.0 || $this->rh219_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh219_sequencial"] : $this->rh219_sequencial);
+            $this->rh219_usuario = ($this->rh219_usuario === 0 || $this->rh219_usuario === 0.0 || $this->rh219_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh219_usuario"] : $this->rh219_usuario);
+            $this->rh219_instituicao = ($this->rh219_instituicao === 0 || $this->rh219_instituicao === 0.0 || $this->rh219_instituicao == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh219_instituicao"] : $this->rh219_instituicao);
             $this->rh219_rubrica = ($this->rh219_rubrica == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh219_rubrica"] : $this->rh219_rubrica);
         } else {
-            $this->rh219_sequencial = ($this->rh219_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh219_sequencial"] : $this->rh219_sequencial);
+            $this->rh219_sequencial = ($this->rh219_sequencial === 0 || $this->rh219_sequencial === 0.0 || $this->rh219_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh219_sequencial"] : $this->rh219_sequencial);
         }
     }
 
@@ -147,7 +147,7 @@ class cl_rubricasusuario implements PesquisaRubricas
                 $this->rh219_sequencial = $rh219_sequencial;
             }
         }
-        if (($this->rh219_sequencial == null) || ($this->rh219_sequencial == "")) {
+        if (($this->rh219_sequencial == null) || ($this->rh219_sequencial === 0 || $this->rh219_sequencial === 0.0 || $this->rh219_sequencial == "")) {
             $this->erro_sql = " Campo rh219_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

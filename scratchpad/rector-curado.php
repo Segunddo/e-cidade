@@ -133,4 +133,9 @@ return RectorConfig::configure()
         Rector\Php53\Rector\Variable\ReplaceHttpServerVarsByServerRector::class,
         // acrescenta 2o argumento SEM extract(): as variaveis somem do escopo, em silencio
         Rector\Php72\Rector\FuncCall\ParseStrWithResultArgumentRector::class,
+        // LSP: copia o parametro da mae como OBRIGATORIO na filha -- quebra quem chama
+        // sem argumento (FolhaPagamentoSuplementar::getProximoNumero() em
+        // pes4_aberturasuplementar001.php) e so ve os alvos, deixando irmas fatais.
+        // Tratar a mao: parametro da mae como OPCIONAL, como FolhaPagamentoComplementar faz.
+        Rector\Php80\Rector\ClassMethod\AddParamBasedOnParentClassMethodRector::class,
     ]);

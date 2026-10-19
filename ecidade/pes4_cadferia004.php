@@ -313,7 +313,7 @@ if((isset($r30_regist) && !isset($semdireito)) || isset($enviar_selecao) || (iss
   } else if ( isset($campomatriculas) && trim($campomatriculas) != "" ) {
   	
     $retorno = 'true';
-    $arr_matriculas = split(",", $campomatriculas);
+    $arr_matriculas = preg_split("#,#m", $campomatriculas);
     $r30_regist = array_shift($arr_matriculas);
     $campomatriculas = implode(",", $arr_matriculas);
   }
@@ -324,11 +324,11 @@ if((isset($r30_regist) && !isset($semdireito)) || isset($enviar_selecao) || (iss
     if($clrhpesrescisao->numrows > 0){
       $rescindido = true;
     } else {
-    	
+
       $result_admissao = $clrhpessoal->sql_record($clrhpessoal->sql_query_cgm($r30_regist,"z01_nome,z01_numcgm,rh01_admiss"));
-      
+
       if ($clrhpessoal->numrows > 0) {
-      	
+
         db_fieldsmemory($result_admissao, 0);
         $nexistfunc = false;
       }

@@ -42,7 +42,7 @@ class cl_rhfolhapagamento
                  ";
 
     //funcao construtor da classe
-    function cl_rhfolhapagamento()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("rhfolhapagamento");
@@ -65,18 +65,18 @@ class cl_rhfolhapagamento
     {
         if ($exclusao == false) {
 
-            $this->rh141_sequencial = ($this->rh141_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_sequencial"] : $this->rh141_sequencial);
+            $this->rh141_sequencial = ($this->rh141_sequencial === 0 || $this->rh141_sequencial === 0.0 || $this->rh141_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_sequencial"] : $this->rh141_sequencial);
             $this->rh141_codigo = ($this->rh141_codigo === "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_codigo"] : $this->rh141_codigo);
-            $this->rh141_anoref = ($this->rh141_anoref == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_anoref"] : $this->rh141_anoref);
-            $this->rh141_mesref = ($this->rh141_mesref == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_mesref"] : $this->rh141_mesref);
-            $this->rh141_anousu = ($this->rh141_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_anousu"] : $this->rh141_anousu);
-            $this->rh141_mesusu = ($this->rh141_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_mesusu"] : $this->rh141_mesusu);
-            $this->rh141_instit = ($this->rh141_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_instit"] : $this->rh141_instit);
-            $this->rh141_tipofolha = ($this->rh141_tipofolha == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_tipofolha"] : $this->rh141_tipofolha);
+            $this->rh141_anoref = ($this->rh141_anoref === 0 || $this->rh141_anoref === 0.0 || $this->rh141_anoref == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_anoref"] : $this->rh141_anoref);
+            $this->rh141_mesref = ($this->rh141_mesref === 0 || $this->rh141_mesref === 0.0 || $this->rh141_mesref == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_mesref"] : $this->rh141_mesref);
+            $this->rh141_anousu = ($this->rh141_anousu === 0 || $this->rh141_anousu === 0.0 || $this->rh141_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_anousu"] : $this->rh141_anousu);
+            $this->rh141_mesusu = ($this->rh141_mesusu === 0 || $this->rh141_mesusu === 0.0 || $this->rh141_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_mesusu"] : $this->rh141_mesusu);
+            $this->rh141_instit = ($this->rh141_instit === 0 || $this->rh141_instit === 0.0 || $this->rh141_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_instit"] : $this->rh141_instit);
+            $this->rh141_tipofolha = ($this->rh141_tipofolha === 0 || $this->rh141_tipofolha === 0.0 || $this->rh141_tipofolha == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_tipofolha"] : $this->rh141_tipofolha);
             $this->rh141_aberto = ($this->rh141_aberto == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_aberto"] : $this->rh141_aberto);
             $this->rh141_descricao = ($this->rh141_descricao == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_descricao"] : $this->rh141_descricao);
         } else {
-            $this->rh141_sequencial = ($this->rh141_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_sequencial"] : $this->rh141_sequencial);
+            $this->rh141_sequencial = ($this->rh141_sequencial === 0 || $this->rh141_sequencial === 0.0 || $this->rh141_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh141_sequencial"] : $this->rh141_sequencial);
         }
     }
 
@@ -213,7 +213,7 @@ class cl_rhfolhapagamento
                 $this->rh141_sequencial = $rh141_sequencial;
             }
         }
-        if (($this->rh141_sequencial == null) || ($this->rh141_sequencial == "")) {
+        if (($this->rh141_sequencial == null) || ($this->rh141_sequencial === 0 || $this->rh141_sequencial === 0.0 || $this->rh141_sequencial == "")) {
             $this->erro_sql = " Campo rh141_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

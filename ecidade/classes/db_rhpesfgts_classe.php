@@ -63,7 +63,7 @@ class cl_rhpesfgts {
                  rh15_contac_d = varchar(2) = Dígito da Conta do FGTS 
                  ";
    //funcao construtor da classe 
-   function cl_rhpesfgts() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhpesfgts"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,7 +80,7 @@ class cl_rhpesfgts {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh15_regist = ($this->rh15_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh15_regist"]:$this->rh15_regist);
+       $this->rh15_regist = ($this->rh15_regist === 0 || $this->rh15_regist === 0.0 || $this->rh15_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh15_regist"]:$this->rh15_regist);
        if($this->rh15_data == ""){
          $this->rh15_data_dia = ($this->rh15_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh15_data_dia"]:$this->rh15_data_dia);
          $this->rh15_data_mes = ($this->rh15_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh15_data_mes"]:$this->rh15_data_mes);
@@ -95,7 +95,7 @@ class cl_rhpesfgts {
        $this->rh15_contac = ($this->rh15_contac == ""?@$GLOBALS["HTTP_POST_VARS"]["rh15_contac"]:$this->rh15_contac);
        $this->rh15_contac_d = ($this->rh15_contac_d == ""?@$GLOBALS["HTTP_POST_VARS"]["rh15_contac_d"]:$this->rh15_contac_d);
      }else{
-       $this->rh15_regist = ($this->rh15_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh15_regist"]:$this->rh15_regist);
+       $this->rh15_regist = ($this->rh15_regist === 0 || $this->rh15_regist === 0.0 || $this->rh15_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh15_regist"]:$this->rh15_regist);
      }
    }
    // funcao para inclusao
@@ -138,7 +138,7 @@ class cl_rhpesfgts {
        return false;
      }
        $this->rh15_regist = $rh15_regist; 
-     if(($this->rh15_regist == null) || ($this->rh15_regist == "") ){ 
+     if(($this->rh15_regist == null) || ($this->rh15_regist === 0 || $this->rh15_regist === 0.0 || $this->rh15_regist == "") ){ 
        $this->erro_sql = " Campo rh15_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

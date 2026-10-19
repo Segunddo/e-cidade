@@ -36,10 +36,10 @@ class db_app {
     $aFiles                       = array();
     $aFiles["estilos.css"]        = "<link href='estilos.css' rel='stylesheet' type='text/css'>";
     $aFiles["grid.style.css"]     = "<link href='estilos/grid.style.css' rel='stylesheet' type='text/css'>";
-    $aFiles["scripts.js"]         = "<script language='JavaScript' type='text/javascript' src='scripts/scripts.js?version=".DB_VERSION."'></script>";
-    $aFiles["strings.js"]         = "<script language='JavaScript' type='text/javascript' src='scripts/strings.js?version=".DB_VERSION."'></script>";
-    $aFiles["datagrid.widget.js"] = "<script language='JavaScript' type='text/javascript' src='scripts/datagrid.widget.js?version=".DB_VERSION."'></script>";
-    $aFiles["prototype.js"]       = "<script language='JavaScript' type='text/javascript' src='scripts/prototype.js?version=".DB_VERSION."'></script>";
+    $aFiles["scripts.js"]         = "<script language='JavaScript' type='text/javascript' src='scripts/scripts.js?version=".(defined('DB_VERSION') ? DB_VERSION : 'DB_VERSION')."'></script>";
+    $aFiles["strings.js"]         = "<script language='JavaScript' type='text/javascript' src='scripts/strings.js?version=".(defined('DB_VERSION') ? DB_VERSION : 'DB_VERSION')."'></script>";
+    $aFiles["datagrid.widget.js"] = "<script language='JavaScript' type='text/javascript' src='scripts/datagrid.widget.js?version=".(defined('DB_VERSION') ? DB_VERSION : 'DB_VERSION')."'></script>";
+    $aFiles["prototype.js"]       = "<script language='JavaScript' type='text/javascript' src='scripts/prototype.js?version=".(defined('DB_VERSION') ? DB_VERSION : 'DB_VERSION')."'></script>";
     $aFileToLoad = is_array($files) ? $files : explode(",", $files);
 
     foreach ($aFileToLoad as $index => $filename) {

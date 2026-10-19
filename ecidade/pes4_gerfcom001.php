@@ -71,7 +71,7 @@ if(isset($incluir)){
   if($clgerfcom->numrows > 0){
     db_fieldsmemory($result_semest, 0);
   }
-  $r48_semest = $semestatual  + 1;
+  $r48_semest = (int)$semestatual  + 1; // "" + 1 era 1 no 5.6
 }
 ?>
 <html>

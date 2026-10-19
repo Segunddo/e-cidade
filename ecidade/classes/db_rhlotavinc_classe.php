@@ -64,7 +64,7 @@ class cl_rhlotavinc {
                  rh25_funcao = int4 = Função
                  ";
    //funcao construtor da classe
-   function cl_rhlotavinc() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhlotavinc");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_rhlotavinc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh25_codlotavinc = ($this->rh25_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_codlotavinc"]:$this->rh25_codlotavinc);
-       $this->rh25_codigo = ($this->rh25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_codigo"]:$this->rh25_codigo);
+       $this->rh25_codlotavinc = ($this->rh25_codlotavinc === 0 || $this->rh25_codlotavinc === 0.0 || $this->rh25_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_codlotavinc"]:$this->rh25_codlotavinc);
+       $this->rh25_codigo = ($this->rh25_codigo === 0 || $this->rh25_codigo === 0.0 || $this->rh25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_codigo"]:$this->rh25_codigo);
        $this->rh25_vinculo = ($this->rh25_vinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_vinculo"]:$this->rh25_vinculo);
-       $this->rh25_anousu = ($this->rh25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_anousu"]:$this->rh25_anousu);
-       $this->rh25_projativ = ($this->rh25_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_projativ"]:$this->rh25_projativ);
-       $this->rh25_recurso = ($this->rh25_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_recurso"]:$this->rh25_recurso);
-       $this->rh25_programa = ($this->rh25_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_programa"]:$this->rh25_programa);
-       $this->rh25_subfuncao = ($this->rh25_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_subfuncao"]:$this->rh25_subfuncao);
-       $this->rh25_funcao = ($this->rh25_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_funcao"]:$this->rh25_funcao);
+       $this->rh25_anousu = ($this->rh25_anousu === 0 || $this->rh25_anousu === 0.0 || $this->rh25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_anousu"]:$this->rh25_anousu);
+       $this->rh25_projativ = ($this->rh25_projativ === 0 || $this->rh25_projativ === 0.0 || $this->rh25_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_projativ"]:$this->rh25_projativ);
+       $this->rh25_recurso = ($this->rh25_recurso === 0 || $this->rh25_recurso === 0.0 || $this->rh25_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_recurso"]:$this->rh25_recurso);
+       $this->rh25_programa = ($this->rh25_programa === 0 || $this->rh25_programa === 0.0 || $this->rh25_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_programa"]:$this->rh25_programa);
+       $this->rh25_subfuncao = ($this->rh25_subfuncao === 0 || $this->rh25_subfuncao === 0.0 || $this->rh25_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_subfuncao"]:$this->rh25_subfuncao);
+       $this->rh25_funcao = ($this->rh25_funcao === 0 || $this->rh25_funcao === 0.0 || $this->rh25_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_funcao"]:$this->rh25_funcao);
      }else{
-       $this->rh25_codlotavinc = ($this->rh25_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_codlotavinc"]:$this->rh25_codlotavinc);
+       $this->rh25_codlotavinc = ($this->rh25_codlotavinc === 0 || $this->rh25_codlotavinc === 0.0 || $this->rh25_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh25_codlotavinc"]:$this->rh25_codlotavinc);
      }
    }
    // funcao para inclusao
@@ -175,7 +175,7 @@ class cl_rhlotavinc {
          $this->rh25_codlotavinc = $rh25_codlotavinc;
        }
      }
-     if(($this->rh25_codlotavinc == null) || ($this->rh25_codlotavinc == "") ){
+     if(($this->rh25_codlotavinc == null) || ($this->rh25_codlotavinc === 0 || $this->rh25_codlotavinc === 0.0 || $this->rh25_codlotavinc == "") ){
        $this->erro_sql = " Campo rh25_codlotavinc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

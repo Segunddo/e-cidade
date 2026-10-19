@@ -58,7 +58,7 @@ class cl_rhbases {
                  rh32_instit = int4 = codigo da instituicao 
                  ";
    //funcao construtor da classe 
-   function cl_rhbases() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhbases"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,7 +80,7 @@ class cl_rhbases {
        $this->rh32_calqua = ($this->rh32_calqua == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh32_calqua"]:$this->rh32_calqua);
        $this->rh32_mesant = ($this->rh32_mesant == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh32_mesant"]:$this->rh32_mesant);
        $this->rh32_pfixo = ($this->rh32_pfixo == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh32_pfixo"]:$this->rh32_pfixo);
-       $this->rh32_instit = ($this->rh32_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh32_instit"]:$this->rh32_instit);
+       $this->rh32_instit = ($this->rh32_instit === 0 || $this->rh32_instit === 0.0 || $this->rh32_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh32_instit"]:$this->rh32_instit);
      }else{
        $this->rh32_base = ($this->rh32_base == ""?@$GLOBALS["HTTP_POST_VARS"]["rh32_base"]:$this->rh32_base);
      }
@@ -429,7 +429,7 @@ class cl_rhbases {
    function sql_query ( $rh32_base=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_rhbases {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -463,7 +463,7 @@ class cl_rhbases {
    function sql_query_file ( $rh32_base=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_rhbases {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -496,7 +496,7 @@ class cl_rhbases {
    function sql_query_rubricas ( $rh32_base=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -519,7 +519,7 @@ class cl_rhbases {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

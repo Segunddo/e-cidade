@@ -56,6 +56,7 @@ $oRetorno = new stdClass();
 $oRetorno->status  = 1;
 $oRetorno->message = "";
 $oRetorno->itens   = array();
+if ($oParam === null || $oParam === false || $oParam === "") { $oParam = new stdClass(); } // o 5.6 criava stdClass sozinho para null/false/""
 if (!isset($oParam->sSemestre)) {
   $oParam->sSemestre = 0;
 }

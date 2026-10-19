@@ -29,7 +29,8 @@
 include(modification("libs/db_libpessoal.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_rhfopag_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_POST_VARS,2);
 $clrhfopag = new cl_rhfopag;
 
@@ -84,7 +85,7 @@ function ImportaArquivo($AArquivo,$exclui){
     $nRegistro++;
 
     $cLinha = $LinhasArquivo[$cL];     
-    $rh66_regist = db_val(trim(db_substr($cLinha, 08,15)));
+    $rh66_regist = db_val(trim(db_substr($cLinha, 0,15))); // octal invalido: no 5.6 `08` vale 0 (o layout pede 8) -- preservado
     $rh66_pis    = db_substr($cLinha, 23,11);
     $rh66_valor  = str_replace(",",".",db_substr($cLinha,107,11))*1;
     $rh66_proces = db_substr($cLinha,151,01);

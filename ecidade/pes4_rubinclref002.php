@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 
@@ -41,7 +42,8 @@ $sigla_ponto = array("r90"=>"pontofx","r10"=>"pontofs","r47"=>"pontocom","r21"=>
 if($ponto2 != $sigla_ponto[$ponto1] || $rh27_rub1 != $rh27_rubric || $ano2 != $ano1 || $mes2 != $mes1){ 
    $clgerasql = new cl_gera_sql_folha;
   
-   parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+   parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+   extract($__qs);
    //echo "<BR> ".$HTTP_SERVER_VARS['QUERY_STRING'];exit;
    $clgerasql->inner_rub = false;
    $clgerasql->usar_ger = true;

@@ -47,12 +47,12 @@ class cl_rhlocaltrabequipamentoprotecaoepi
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh259_sequencial = ($this->rh259_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh259_sequencial"]:$this->rh259_sequencial);
-       $this->rh259_rhlocaltrabequipamentoprotecao = ($this->rh259_rhlocaltrabequipamentoprotecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh259_rhlocaltrabequipamentoprotecao"]:$this->rh259_rhlocaltrabequipamentoprotecao);
+       $this->rh259_sequencial = ($this->rh259_sequencial === 0 || $this->rh259_sequencial === 0.0 || $this->rh259_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh259_sequencial"]:$this->rh259_sequencial);
+       $this->rh259_rhlocaltrabequipamentoprotecao = ($this->rh259_rhlocaltrabequipamentoprotecao === 0 || $this->rh259_rhlocaltrabequipamentoprotecao === 0.0 || $this->rh259_rhlocaltrabequipamentoprotecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh259_rhlocaltrabequipamentoprotecao"]:$this->rh259_rhlocaltrabequipamentoprotecao);
        $this->rh259_documentoavaliacao = ($this->rh259_documentoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh259_documentoavaliacao"]:$this->rh259_documentoavaliacao);
        $this->rh259_descricao = ($this->rh259_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh259_descricao"]:$this->rh259_descricao);
      }else{
-       $this->rh259_sequencial = ($this->rh259_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh259_sequencial"]:$this->rh259_sequencial);
+       $this->rh259_sequencial = ($this->rh259_sequencial === 0 || $this->rh259_sequencial === 0.0 || $this->rh259_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh259_sequencial"]:$this->rh259_sequencial);
      }
    }
 
@@ -92,7 +92,7 @@ class cl_rhlocaltrabequipamentoprotecaoepi
          $this->rh259_sequencial = $rh259_sequencial; 
        }
      }
-     if(($this->rh259_sequencial == null) || ($this->rh259_sequencial == "") ){ 
+     if(($this->rh259_sequencial == null) || ($this->rh259_sequencial === 0 || $this->rh259_sequencial === 0.0 || $this->rh259_sequencial == "") ){ 
        $this->erro_sql = " Campo rh259_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -90,7 +90,11 @@ $oIframe                = new cl_iframe_alterar_excluir();
 
                   if ( !isset($oRequest->rh143_folhapagamento) ) {
                     reset($aCodigosFolha);
-                    $aCodigo                        = each($aCodigosFolha);
+                    $aCodigo[1] = current($aCodigosFolha);
+                    $aCodigo['value'] = current($aCodigosFolha);
+                    $aCodigo[0] = key($aCodigosFolha);
+                    $aCodigo['key'] = key($aCodigosFolha);
+                    next($aCodigosFolha);
                     $iCodigo                        = $aCodigo[0];
                     $oRequest->rh143_folhapagamento = $rh143_folhapagamento = $iCodigo;
                     reset($aCodigosFolha);

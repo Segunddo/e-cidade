@@ -53,7 +53,7 @@ class cl_rhhistoricopensao {
                  rh145_rhfolhapagamento = int4 = Folha de Pagamento 
                  ";
    //funcao construtor da classe 
-   function cl_rhhistoricopensao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhhistoricopensao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -70,12 +70,12 @@ class cl_rhhistoricopensao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh145_sequencial = ($this->rh145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh145_sequencial"]:$this->rh145_sequencial);
-       $this->rh145_pensao = ($this->rh145_pensao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh145_pensao"]:$this->rh145_pensao);
-       $this->rh145_valor = ($this->rh145_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh145_valor"]:$this->rh145_valor);
-       $this->rh145_rhfolhapagamento = ($this->rh145_rhfolhapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh145_rhfolhapagamento"]:$this->rh145_rhfolhapagamento);
+       $this->rh145_sequencial = ($this->rh145_sequencial === 0 || $this->rh145_sequencial === 0.0 || $this->rh145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh145_sequencial"]:$this->rh145_sequencial);
+       $this->rh145_pensao = ($this->rh145_pensao === 0 || $this->rh145_pensao === 0.0 || $this->rh145_pensao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh145_pensao"]:$this->rh145_pensao);
+       $this->rh145_valor = ($this->rh145_valor === 0 || $this->rh145_valor === 0.0 || $this->rh145_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh145_valor"]:$this->rh145_valor);
+       $this->rh145_rhfolhapagamento = ($this->rh145_rhfolhapagamento === 0 || $this->rh145_rhfolhapagamento === 0.0 || $this->rh145_rhfolhapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh145_rhfolhapagamento"]:$this->rh145_rhfolhapagamento);
      }else{
-       $this->rh145_sequencial = ($this->rh145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh145_sequencial"]:$this->rh145_sequencial);
+       $this->rh145_sequencial = ($this->rh145_sequencial === 0 || $this->rh145_sequencial === 0.0 || $this->rh145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh145_sequencial"]:$this->rh145_sequencial);
      }
    }
    // funcao para inclusao
@@ -132,7 +132,7 @@ class cl_rhhistoricopensao {
          $this->rh145_sequencial = $rh145_sequencial; 
        }
      }
-     if(($this->rh145_sequencial == null) || ($this->rh145_sequencial == "") ){ 
+     if(($this->rh145_sequencial == null) || ($this->rh145_sequencial === 0 || $this->rh145_sequencial === 0.0 || $this->rh145_sequencial == "") ){ 
        $this->erro_sql = " Campo rh145_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

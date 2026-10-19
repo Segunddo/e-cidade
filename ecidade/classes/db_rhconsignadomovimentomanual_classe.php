@@ -32,7 +32,7 @@ class cl_rhconsignadomovimentomanual {
                  rh182_mes = int4 = Mês da competência 
                  ";
    //funcao construtor da classe 
-   function cl_rhconsignadomovimentomanual() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhconsignadomovimentomanual"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -49,14 +49,14 @@ class cl_rhconsignadomovimentomanual {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh182_sequencial = ($this->rh182_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_sequencial"]:$this->rh182_sequencial);
-       $this->rh182_rhconsignadomovimento = ($this->rh182_rhconsignadomovimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_rhconsignadomovimento"]:$this->rh182_rhconsignadomovimento);
-       $this->rh182_rhconsignadomovimentoservidor = ($this->rh182_rhconsignadomovimentoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_rhconsignadomovimentoservidor"]:$this->rh182_rhconsignadomovimentoservidor);
+       $this->rh182_sequencial = ($this->rh182_sequencial === 0 || $this->rh182_sequencial === 0.0 || $this->rh182_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_sequencial"]:$this->rh182_sequencial);
+       $this->rh182_rhconsignadomovimento = ($this->rh182_rhconsignadomovimento === 0 || $this->rh182_rhconsignadomovimento === 0.0 || $this->rh182_rhconsignadomovimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_rhconsignadomovimento"]:$this->rh182_rhconsignadomovimento);
+       $this->rh182_rhconsignadomovimentoservidor = ($this->rh182_rhconsignadomovimentoservidor === 0 || $this->rh182_rhconsignadomovimentoservidor === 0.0 || $this->rh182_rhconsignadomovimentoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_rhconsignadomovimentoservidor"]:$this->rh182_rhconsignadomovimentoservidor);
        $this->rh182_processado = ($this->rh182_processado == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh182_processado"]:$this->rh182_processado);
-       $this->rh182_ano = ($this->rh182_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_ano"]:$this->rh182_ano);
-       $this->rh182_mes = ($this->rh182_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_mes"]:$this->rh182_mes);
+       $this->rh182_ano = ($this->rh182_ano === 0 || $this->rh182_ano === 0.0 || $this->rh182_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_ano"]:$this->rh182_ano);
+       $this->rh182_mes = ($this->rh182_mes === 0 || $this->rh182_mes === 0.0 || $this->rh182_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_mes"]:$this->rh182_mes);
      }else{
-       $this->rh182_sequencial = ($this->rh182_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_sequencial"]:$this->rh182_sequencial);
+       $this->rh182_sequencial = ($this->rh182_sequencial === 0 || $this->rh182_sequencial === 0.0 || $this->rh182_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh182_sequencial"]:$this->rh182_sequencial);
      }
    }
    // funcao para Inclusão
@@ -131,7 +131,7 @@ class cl_rhconsignadomovimentomanual {
          $this->rh182_sequencial = $rh182_sequencial; 
        }
      }
-     if(($this->rh182_sequencial == null) || ($this->rh182_sequencial == "") ){ 
+     if(($this->rh182_sequencial == null) || ($this->rh182_sequencial === 0 || $this->rh182_sequencial === 0.0 || $this->rh182_sequencial == "") ){ 
        $this->erro_sql = " Campo rh182_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

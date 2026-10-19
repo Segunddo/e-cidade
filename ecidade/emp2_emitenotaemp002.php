@@ -63,7 +63,8 @@ $clcgmalt           = new cl_cgmalt;
 $cldb_pcforneconpad = new cl_pcforneconpad;
 $clempempitem       = new cl_empempitem;
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $head3 = "CADASTRO DE CÓDIGOS";

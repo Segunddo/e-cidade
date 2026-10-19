@@ -52,7 +52,7 @@ class cl_rharquivossiprev {
                  rh94_nomeclasse = varchar(100) = Nome da classe a ser utitilizada 
                  ";
    //funcao construtor da classe 
-   function cl_rharquivossiprev() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rharquivossiprev"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rharquivossiprev {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh94_sequencial = ($this->rh94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_sequencial"]:$this->rh94_sequencial);
+       $this->rh94_sequencial = ($this->rh94_sequencial === 0 || $this->rh94_sequencial === 0.0 || $this->rh94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_sequencial"]:$this->rh94_sequencial);
        $this->rh94_descricao = ($this->rh94_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_descricao"]:$this->rh94_descricao);
        $this->rh94_nomeclasse = ($this->rh94_nomeclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_nomeclasse"]:$this->rh94_nomeclasse);
      }else{
-       $this->rh94_sequencial = ($this->rh94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_sequencial"]:$this->rh94_sequencial);
+       $this->rh94_sequencial = ($this->rh94_sequencial === 0 || $this->rh94_sequencial === 0.0 || $this->rh94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_sequencial"]:$this->rh94_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rharquivossiprev {
          $this->rh94_sequencial = $rh94_sequencial; 
        }
      }
-     if(($this->rh94_sequencial == null) || ($this->rh94_sequencial == "") ){ 
+     if(($this->rh94_sequencial == null) || ($this->rh94_sequencial === 0 || $this->rh94_sequencial === 0.0 || $this->rh94_sequencial == "") ){ 
        $this->erro_sql = " Campo rh94_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_rharquivossiprev {
    function sql_query ( $rh94_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_rharquivossiprev {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_rharquivossiprev {
    function sql_query_file ( $rh94_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_rharquivossiprev {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

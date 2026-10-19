@@ -68,7 +68,7 @@ class cl_rhvisavalecad {
                  rh49_percdep = int4 = Perc. Depósito 
                  ";
    //funcao construtor da classe 
-   function cl_rhvisavalecad() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhvisavalecad"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,19 +85,19 @@ class cl_rhvisavalecad {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh49_codigo = ($this->rh49_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_codigo"]:$this->rh49_codigo);
-       $this->rh49_anousu = ($this->rh49_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_anousu"]:$this->rh49_anousu);
-       $this->rh49_mesusu = ($this->rh49_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_mesusu"]:$this->rh49_mesusu);
-       $this->rh49_numcgm = ($this->rh49_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_numcgm"]:$this->rh49_numcgm);
-       $this->rh49_regist = ($this->rh49_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_regist"]:$this->rh49_regist);
-       $this->rh49_valor = ($this->rh49_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_valor"]:$this->rh49_valor);
-       $this->rh49_instit = ($this->rh49_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_instit"]:$this->rh49_instit);
-       $this->rh49_perc = ($this->rh49_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_perc"]:$this->rh49_perc);
-       $this->rh49_diasafasta = ($this->rh49_diasafasta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_diasafasta"]:$this->rh49_diasafasta);
-       $this->rh49_valormes = ($this->rh49_valormes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_valormes"]:$this->rh49_valormes);
-       $this->rh49_percdep = ($this->rh49_percdep == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_percdep"]:$this->rh49_percdep);
+       $this->rh49_codigo = ($this->rh49_codigo === 0 || $this->rh49_codigo === 0.0 || $this->rh49_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_codigo"]:$this->rh49_codigo);
+       $this->rh49_anousu = ($this->rh49_anousu === 0 || $this->rh49_anousu === 0.0 || $this->rh49_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_anousu"]:$this->rh49_anousu);
+       $this->rh49_mesusu = ($this->rh49_mesusu === 0 || $this->rh49_mesusu === 0.0 || $this->rh49_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_mesusu"]:$this->rh49_mesusu);
+       $this->rh49_numcgm = ($this->rh49_numcgm === 0 || $this->rh49_numcgm === 0.0 || $this->rh49_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_numcgm"]:$this->rh49_numcgm);
+       $this->rh49_regist = ($this->rh49_regist === 0 || $this->rh49_regist === 0.0 || $this->rh49_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_regist"]:$this->rh49_regist);
+       $this->rh49_valor = ($this->rh49_valor === 0 || $this->rh49_valor === 0.0 || $this->rh49_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_valor"]:$this->rh49_valor);
+       $this->rh49_instit = ($this->rh49_instit === 0 || $this->rh49_instit === 0.0 || $this->rh49_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_instit"]:$this->rh49_instit);
+       $this->rh49_perc = ($this->rh49_perc === 0 || $this->rh49_perc === 0.0 || $this->rh49_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_perc"]:$this->rh49_perc);
+       $this->rh49_diasafasta = ($this->rh49_diasafasta === 0 || $this->rh49_diasafasta === 0.0 || $this->rh49_diasafasta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_diasafasta"]:$this->rh49_diasafasta);
+       $this->rh49_valormes = ($this->rh49_valormes === 0 || $this->rh49_valormes === 0.0 || $this->rh49_valormes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_valormes"]:$this->rh49_valormes);
+       $this->rh49_percdep = ($this->rh49_percdep === 0 || $this->rh49_percdep === 0.0 || $this->rh49_percdep == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_percdep"]:$this->rh49_percdep);
      }else{
-       $this->rh49_codigo = ($this->rh49_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_codigo"]:$this->rh49_codigo);
+       $this->rh49_codigo = ($this->rh49_codigo === 0 || $this->rh49_codigo === 0.0 || $this->rh49_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh49_codigo"]:$this->rh49_codigo);
      }
    }
    // funcao para inclusao
@@ -205,7 +205,7 @@ class cl_rhvisavalecad {
          $this->rh49_codigo = $rh49_codigo; 
        }
      }
-     if(($this->rh49_codigo == null) || ($this->rh49_codigo == "") ){ 
+     if(($this->rh49_codigo == null) || ($this->rh49_codigo === 0 || $this->rh49_codigo === 0.0 || $this->rh49_codigo == "") ){ 
        $this->erro_sql = " Campo rh49_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -584,7 +584,7 @@ class cl_rhvisavalecad {
    function sql_query ( $rh49_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
    	$sql = "select ";
    	if($campos != "*" ){
-   		$campos_sql = split("#",$campos);
+   		$campos_sql = preg_split("#\\##m",$campos);
    		$virgula = "";
    		for($i=0;$i<sizeof($campos_sql);$i++){
    			$sql .= $virgula.$campos_sql[$i];
@@ -617,7 +617,7 @@ class cl_rhvisavalecad {
     $sql .= $sql2;
     if($ordem != null ){
     	$sql .= " order by ";
-    	$campos_sql = split("#",$ordem);
+    	$campos_sql = preg_split("#\\##m",$ordem);
     	$virgula = "";
     	for($i=0;$i<sizeof($campos_sql);$i++){
     		$sql .= $virgula.$campos_sql[$i];
@@ -630,7 +630,7 @@ class cl_rhvisavalecad {
    function sql_query_file ( $rh49_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -651,7 +651,7 @@ class cl_rhvisavalecad {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -663,7 +663,7 @@ class cl_rhvisavalecad {
    function sql_query_documentos ( $rh49_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -692,7 +692,7 @@ class cl_rhvisavalecad {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -704,7 +704,7 @@ class cl_rhvisavalecad {
    function sql_query_lotaexe ( $rh49_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -741,7 +741,7 @@ class cl_rhvisavalecad {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

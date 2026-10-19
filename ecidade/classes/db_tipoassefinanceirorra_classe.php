@@ -38,7 +38,7 @@ class cl_tipoassefinanceirorra {
                  rh172_rubricamolestia = char(4) = Isenção por Moléstia 
                  ";
    //funcao construtor da classe 
-   function cl_tipoassefinanceirorra() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoassefinanceirorra"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -55,17 +55,17 @@ class cl_tipoassefinanceirorra {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh172_sequencial = ($this->rh172_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_sequencial"]:$this->rh172_sequencial);
-       $this->rh172_tipoasse = ($this->rh172_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_tipoasse"]:$this->rh172_tipoasse);
+       $this->rh172_sequencial = ($this->rh172_sequencial === 0 || $this->rh172_sequencial === 0.0 || $this->rh172_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_sequencial"]:$this->rh172_sequencial);
+       $this->rh172_tipoasse = ($this->rh172_tipoasse === 0 || $this->rh172_tipoasse === 0.0 || $this->rh172_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_tipoasse"]:$this->rh172_tipoasse);
        $this->rh172_rubricaprevidencia = ($this->rh172_rubricaprevidencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_rubricaprevidencia"]:$this->rh172_rubricaprevidencia);
        $this->rh172_rubricaprovento = ($this->rh172_rubricaprovento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_rubricaprovento"]:$this->rh172_rubricaprovento);
        $this->rh172_rubricapensao = ($this->rh172_rubricapensao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_rubricapensao"]:$this->rh172_rubricapensao);
        $this->rh172_rubricairrf = ($this->rh172_rubricairrf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_rubricairrf"]:$this->rh172_rubricairrf);
        $this->rh172_rubricaparceladeducao = ($this->rh172_rubricaparceladeducao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_rubricaparceladeducao"]:$this->rh172_rubricaparceladeducao);
-       $this->rh172_instit = ($this->rh172_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_instit"]:$this->rh172_instit);
+       $this->rh172_instit = ($this->rh172_instit === 0 || $this->rh172_instit === 0.0 || $this->rh172_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_instit"]:$this->rh172_instit);
        $this->rh172_rubricamolestia = ($this->rh172_rubricamolestia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_rubricamolestia"]:$this->rh172_rubricamolestia);
      }else{
-       $this->rh172_sequencial = ($this->rh172_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_sequencial"]:$this->rh172_sequencial);
+       $this->rh172_sequencial = ($this->rh172_sequencial === 0 || $this->rh172_sequencial === 0.0 || $this->rh172_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh172_sequencial"]:$this->rh172_sequencial);
      }
    }
    // funcao para Inclusão
@@ -167,7 +167,7 @@ class cl_tipoassefinanceirorra {
          $this->rh172_sequencial = $rh172_sequencial; 
        }
      }
-     if(($this->rh172_sequencial == null) || ($this->rh172_sequencial == "") ){ 
+     if(($this->rh172_sequencial == null) || ($this->rh172_sequencial === 0 || $this->rh172_sequencial === 0.0 || $this->rh172_sequencial == "") ){ 
        $this->erro_sql = " Campo rh172_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

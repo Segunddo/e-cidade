@@ -316,7 +316,7 @@ class PontoFerias extends Ponto {
    * @param RegistroPontoFerias $oRegistro
    * @return bool
    */
-  public function adicionarRegistro( RegistroPontoFerias $oRegistroPonto, $lSubstituir = true ) {
+  public function adicionarRegistro( RegistroPonto $oRegistroPonto, $lSubstituir = true ) { // LSP: tipo da mae (era RegistroPontoFerias)
 
     $sCodigoRubrica = $oRegistroPonto->getRubrica()->getCodigo().$oRegistroPonto->getTipoPagamento();
 

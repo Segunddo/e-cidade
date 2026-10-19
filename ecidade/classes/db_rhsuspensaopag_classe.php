@@ -71,7 +71,7 @@ class cl_rhsuspensaopag {
                  rh101_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_rhsuspensaopag() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhsuspensaopag"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -88,8 +88,8 @@ class cl_rhsuspensaopag {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh101_sequencial = ($this->rh101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_sequencial"]:$this->rh101_sequencial);
-       $this->rh101_regist = ($this->rh101_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_regist"]:$this->rh101_regist);
+       $this->rh101_sequencial = ($this->rh101_sequencial === 0 || $this->rh101_sequencial === 0.0 || $this->rh101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_sequencial"]:$this->rh101_sequencial);
+       $this->rh101_regist = ($this->rh101_regist === 0 || $this->rh101_regist === 0.0 || $this->rh101_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_regist"]:$this->rh101_regist);
        if($this->rh101_dtcadastro == ""){
          $this->rh101_dtcadastro_dia = @$GLOBALS["HTTP_POST_VARS"]["rh101_dtcadastro_dia"];
          $this->rh101_dtcadastro_mes = @$GLOBALS["HTTP_POST_VARS"]["rh101_dtcadastro_mes"];
@@ -98,7 +98,7 @@ class cl_rhsuspensaopag {
             $this->rh101_dtcadastro = $this->rh101_dtcadastro_ano."-".$this->rh101_dtcadastro_mes."-".$this->rh101_dtcadastro_dia;
          }
        }
-       $this->rh101_usuario = ($this->rh101_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_usuario"]:$this->rh101_usuario);
+       $this->rh101_usuario = ($this->rh101_usuario === 0 || $this->rh101_usuario === 0.0 || $this->rh101_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_usuario"]:$this->rh101_usuario);
        if($this->rh101_dtinicial == ""){
          $this->rh101_dtinicial_dia = @$GLOBALS["HTTP_POST_VARS"]["rh101_dtinicial_dia"];
          $this->rh101_dtinicial_mes = @$GLOBALS["HTTP_POST_VARS"]["rh101_dtinicial_mes"];
@@ -125,7 +125,7 @@ class cl_rhsuspensaopag {
        }
        $this->rh101_obs = ($this->rh101_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_obs"]:$this->rh101_obs);
      }else{
-       $this->rh101_sequencial = ($this->rh101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_sequencial"]:$this->rh101_sequencial);
+       $this->rh101_sequencial = ($this->rh101_sequencial === 0 || $this->rh101_sequencial === 0.0 || $this->rh101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_sequencial"]:$this->rh101_sequencial);
      }
    }
    // funcao para inclusao
@@ -203,7 +203,7 @@ class cl_rhsuspensaopag {
          $this->rh101_sequencial = $rh101_sequencial; 
        }
      }
-     if(($this->rh101_sequencial == null) || ($this->rh101_sequencial == "") ){ 
+     if(($this->rh101_sequencial == null) || ($this->rh101_sequencial === 0 || $this->rh101_sequencial === 0.0 || $this->rh101_sequencial == "") ){ 
        $this->erro_sql = " Campo rh101_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -549,7 +549,7 @@ class cl_rhsuspensaopag {
    function sql_query ( $rh101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -578,7 +578,7 @@ class cl_rhsuspensaopag {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -591,7 +591,7 @@ class cl_rhsuspensaopag {
    function sql_query_file ( $rh101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -612,7 +612,7 @@ class cl_rhsuspensaopag {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

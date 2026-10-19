@@ -50,7 +50,7 @@ class cl_rhipenumcgm {
                  rh63_numcgm = int4 = CGM 
                  ";
    //funcao construtor da classe 
-   function cl_rhipenumcgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhipenumcgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_rhipenumcgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh63_sequencia = ($this->rh63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_sequencia"]:$this->rh63_sequencia);
-       $this->rh63_numcgm = ($this->rh63_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_numcgm"]:$this->rh63_numcgm);
+       $this->rh63_sequencia = ($this->rh63_sequencia === 0 || $this->rh63_sequencia === 0.0 || $this->rh63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_sequencia"]:$this->rh63_sequencia);
+       $this->rh63_numcgm = ($this->rh63_numcgm === 0 || $this->rh63_numcgm === 0.0 || $this->rh63_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_numcgm"]:$this->rh63_numcgm);
      }else{
-       $this->rh63_sequencia = ($this->rh63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_sequencia"]:$this->rh63_sequencia);
+       $this->rh63_sequencia = ($this->rh63_sequencia === 0 || $this->rh63_sequencia === 0.0 || $this->rh63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_sequencia"]:$this->rh63_sequencia);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhipenumcgm {
        return false;
      }
        $this->rh63_sequencia = $rh63_sequencia; 
-     if(($this->rh63_sequencia == null) || ($this->rh63_sequencia == "") ){ 
+     if(($this->rh63_sequencia == null) || ($this->rh63_sequencia === 0 || $this->rh63_sequencia === 0.0 || $this->rh63_sequencia == "") ){ 
        $this->erro_sql = " Campo rh63_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_rhipenumcgm {
    function sql_query ( $rh63_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -328,7 +328,7 @@ class cl_rhipenumcgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -340,7 +340,7 @@ class cl_rhipenumcgm {
    function sql_query_file ( $rh63_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_rhipenumcgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

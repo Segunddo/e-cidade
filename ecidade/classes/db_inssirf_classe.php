@@ -113,15 +113,15 @@ class cl_inssirf
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->r33_instit = ($this->r33_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_instit"]:$this->r33_instit);
-       $this->r33_codigo = ($this->r33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_codigo"]:$this->r33_codigo);
-       $this->r33_anousu = ($this->r33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_anousu"]:$this->r33_anousu);
-       $this->r33_mesusu = ($this->r33_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_mesusu"]:$this->r33_mesusu);
-       $this->r33_codtab = ($this->r33_codtab == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_codtab"]:$this->r33_codtab);
-       $this->r33_inic = ($this->r33_inic == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_inic"]:$this->r33_inic);
-       $this->r33_fim = ($this->r33_fim == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_fim"]:$this->r33_fim);
-       $this->r33_perc = ($this->r33_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_perc"]:$this->r33_perc);
-       $this->r33_deduzi = ($this->r33_deduzi == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_deduzi"]:$this->r33_deduzi);
+       $this->r33_instit = ($this->r33_instit === 0 || $this->r33_instit === 0.0 || $this->r33_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_instit"]:$this->r33_instit);
+       $this->r33_codigo = ($this->r33_codigo === 0 || $this->r33_codigo === 0.0 || $this->r33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_codigo"]:$this->r33_codigo);
+       $this->r33_anousu = ($this->r33_anousu === 0 || $this->r33_anousu === 0.0 || $this->r33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_anousu"]:$this->r33_anousu);
+       $this->r33_mesusu = ($this->r33_mesusu === 0 || $this->r33_mesusu === 0.0 || $this->r33_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_mesusu"]:$this->r33_mesusu);
+       $this->r33_codtab = ($this->r33_codtab === 0 || $this->r33_codtab === 0.0 || $this->r33_codtab == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_codtab"]:$this->r33_codtab);
+       $this->r33_inic = ($this->r33_inic === 0 || $this->r33_inic === 0.0 || $this->r33_inic == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_inic"]:$this->r33_inic);
+       $this->r33_fim = ($this->r33_fim === 0 || $this->r33_fim === 0.0 || $this->r33_fim == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_fim"]:$this->r33_fim);
+       $this->r33_perc = ($this->r33_perc === 0 || $this->r33_perc === 0.0 || $this->r33_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_perc"]:$this->r33_perc);
+       $this->r33_deduzi = ($this->r33_deduzi === 0 || $this->r33_deduzi === 0.0 || $this->r33_deduzi == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_deduzi"]:$this->r33_deduzi);
        $this->r33_nome = ($this->r33_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_nome"]:$this->r33_nome);
        $this->r33_tipo = ($this->r33_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_tipo"]:$this->r33_tipo);
        $this->r33_rubmat = ($this->r33_rubmat == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_rubmat"]:$this->r33_rubmat);
@@ -137,8 +137,8 @@ class cl_inssirf
        $this->r33_rublicencapremio = ($this->r33_rublicencapremio == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_rublicencapremio"]:$this->r33_rublicencapremio);
        $this->r33_tiposegregacao = ($this->r33_tiposegregacao == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_tiposegregacao"]:$this->r33_tiposegregacao);
      }else{
-       $this->r33_instit = ($this->r33_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_instit"]:$this->r33_instit);
-       $this->r33_codigo = ($this->r33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_codigo"]:$this->r33_codigo);
+       $this->r33_instit = ($this->r33_instit === 0 || $this->r33_instit === 0.0 || $this->r33_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_instit"]:$this->r33_instit);
+       $this->r33_codigo = ($this->r33_codigo === 0 || $this->r33_codigo === 0.0 || $this->r33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r33_codigo"]:$this->r33_codigo);
      }
    }
 

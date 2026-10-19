@@ -62,7 +62,7 @@ class cl_bases {
                  r08_instit = int4 = codigo da instituicao 
                  ";
    //funcao construtor da classe 
-   function cl_bases() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bases"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,19 +79,19 @@ class cl_bases {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r08_anousu = ($this->r08_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_anousu"]:$this->r08_anousu);
-       $this->r08_mesusu = ($this->r08_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_mesusu"]:$this->r08_mesusu);
+       $this->r08_anousu = ($this->r08_anousu === 0 || $this->r08_anousu === 0.0 || $this->r08_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_anousu"]:$this->r08_anousu);
+       $this->r08_mesusu = ($this->r08_mesusu === 0 || $this->r08_mesusu === 0.0 || $this->r08_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_mesusu"]:$this->r08_mesusu);
        $this->r08_codigo = ($this->r08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_codigo"]:$this->r08_codigo);
        $this->r08_descr = ($this->r08_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_descr"]:$this->r08_descr);
        $this->r08_calqua = ($this->r08_calqua == "f"?@$GLOBALS["HTTP_POST_VARS"]["r08_calqua"]:$this->r08_calqua);
        $this->r08_mesant = ($this->r08_mesant == "f"?@$GLOBALS["HTTP_POST_VARS"]["r08_mesant"]:$this->r08_mesant);
        $this->r08_pfixo = ($this->r08_pfixo == "f"?@$GLOBALS["HTTP_POST_VARS"]["r08_pfixo"]:$this->r08_pfixo);
-       $this->r08_instit = ($this->r08_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_instit"]:$this->r08_instit);
+       $this->r08_instit = ($this->r08_instit === 0 || $this->r08_instit === 0.0 || $this->r08_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_instit"]:$this->r08_instit);
      }else{
-       $this->r08_anousu = ($this->r08_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_anousu"]:$this->r08_anousu);
-       $this->r08_mesusu = ($this->r08_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_mesusu"]:$this->r08_mesusu);
+       $this->r08_anousu = ($this->r08_anousu === 0 || $this->r08_anousu === 0.0 || $this->r08_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_anousu"]:$this->r08_anousu);
+       $this->r08_mesusu = ($this->r08_mesusu === 0 || $this->r08_mesusu === 0.0 || $this->r08_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_mesusu"]:$this->r08_mesusu);
        $this->r08_codigo = ($this->r08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_codigo"]:$this->r08_codigo);
-       $this->r08_instit = ($this->r08_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_instit"]:$this->r08_instit);
+       $this->r08_instit = ($this->r08_instit === 0 || $this->r08_instit === 0.0 || $this->r08_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r08_instit"]:$this->r08_instit);
      }
    }
    // funcao para inclusao
@@ -137,7 +137,7 @@ class cl_bases {
        $this->r08_mesusu = $r08_mesusu; 
        $this->r08_codigo = $r08_codigo; 
        $this->r08_instit = $r08_instit; 
-     if(($this->r08_anousu == null) || ($this->r08_anousu == "") ){ 
+     if(($this->r08_anousu == null) || ($this->r08_anousu === 0 || $this->r08_anousu === 0.0 || $this->r08_anousu == "") ){ 
        $this->erro_sql = " Campo r08_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -145,7 +145,7 @@ class cl_bases {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r08_mesusu == null) || ($this->r08_mesusu == "") ){ 
+     if(($this->r08_mesusu == null) || ($this->r08_mesusu === 0 || $this->r08_mesusu === 0.0 || $this->r08_mesusu == "") ){ 
        $this->erro_sql = " Campo r08_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -161,7 +161,7 @@ class cl_bases {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r08_instit == null) || ($this->r08_instit == "") ){ 
+     if(($this->r08_instit == null) || ($this->r08_instit === 0 || $this->r08_instit === 0.0 || $this->r08_instit == "") ){ 
        $this->erro_sql = " Campo r08_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -533,7 +533,7 @@ class cl_bases {
    function sql_query ( $r08_anousu=null,$r08_mesusu=null,$r08_codigo=null,$r08_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -580,7 +580,7 @@ class cl_bases {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -592,7 +592,7 @@ class cl_bases {
    function sql_query_file ( $r08_anousu=null,$r08_mesusu=null,$r08_codigo=null,$r08_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -637,7 +637,7 @@ class cl_bases {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -649,7 +649,7 @@ class cl_bases {
    function sql_query_rubricas ( $r08_anousu=null,$r08_mesusu=null,$r08_codigo=null,$r08_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -700,7 +700,7 @@ class cl_bases {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
