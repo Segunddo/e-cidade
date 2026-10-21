@@ -65,7 +65,8 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** **ÁREAS TRIBUTÁRIO E EDUCAÇÃO CONCLUÍDAS** (branch `2educacao-migrado`).
+**Onde paramos:** **ÁREAS TRIBUTÁRIO E EDUCAÇÃO CONCLUÍDAS** (branch `2educacao-migrado`), e **RECURSOS HUMANOS
+com 701/701 telas de menu no 8.5** (branch `3recursoshumanos-migrado`; faltam o nível 3 e o cálculo da folha).
 Conferido pelo proxy, tela de menu por tela de menu (15/10/2026): **Tributário 1.059/1.059** e **Educação
 480/480** arquivos de menu existentes servidos pelo PHP 8.5 — depois de fechar a *10ª LACUNA* (14 telas
 que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
@@ -78,8 +79,8 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 367 por `map` |
-| **Próximo passo** | **Área RECURSOS HUMANOS em andamento** (branch `3recursoshumanos-migrado`, ver *ÁREA RECURSOS HUMANOS*): Fase A concluída (`rh`, `eso`, `rec`, `pes` inteiros); próximo: Fase B (~10 telas pelo `map`) (ver *PARA RETOMAR* na seção). |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 390 por `map` |
+| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Faltam o nível 3 nos cadastros e o cenário de cálculo da folha — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3576,10 +3577,55 @@ exceção do `.phar` continua antes dele.
 | **Bateria** | **1.526 / 1.528** — as 2 restantes são o laço eterno do 5.6 (`rec2_espelhoponto002`) e a pendente do `.phar`. Entre as idênticas estão `eso02_preenchimentoesocial001` (o mesmo 500 de negócio nos dois) e as 9 do `pes2` que não compilam no 5.6 (falham igual) |
 | Arquivos alterados | **849** nos cinco lotes (contados pelo git) |
 
-**PARA RETOMAR:** a Fase B
-(as ~10 telas de `es`/`con`/`cai`/`lic`/`sped` pelo `map`), o `.phar`, o nível 3 nos cadastros e o
-cenário de cálculo. A sessão autenticada usada foi `98d016cc…`; os ciclos de guarda precisam de
-`/tmp/_sess.bak` no 5.6 (o `cmp.py` o cria ao rodar).
+#### Fase B da área RH — as 10 telas de prefixo compartilhado, pelo `map`
+
+Medido pelo banco depois da Fase A: **10 telas** de menu de RH ainda no 5.6 — `cai2_relslip001`,
+`cai3_reemiteplanilha001` (também de Financeiro), 5 `con4_*` (eSocial e Pessoal), `es04_s1299fechamentoeventos001`,
+`lic4_geracaoeditais001` (também de Patrimonial) e `sped04_retornoevento001` (também de Integrações).
+Mesma decisão da Fase B do Tributário: as compartilhadas vão junto — o código é o mesmo nos dois runtimes.
+
+| | |
+|---|---|
+| Universo (sete frentes, `TELAS=`) | 76 arquivos, 42 já pagos |
+| **Alterados** | **3** classes (Rector: guardas, `split`, construtores; só regras vetadas, 1 passada) |
+| `php -l` / remanescentes / funções / LSP | 76/76 nos dois · 0 · só `preg_split` · 0 de 7 |
+| Classes / escrita | 24/24 · 1.277 linhas idênticas |
+| **Bateria** | **10/10**, todas 200 com conteúdo real |
+| Regressão | interseção com universos verificados **vazia**, núcleo intocado → não rodada |
+
+`gera_map_faseb.py` passou a conhecer `rh`/`eso`/`rec`/`pes` como prefixos do `location`, e recebe o lote
+`recurs:cai,con,es,lic,sped`. Diff do `map`: **+10 entradas, −1** (`rec4_avaliacao001`, a tela `rec` do
+Tributário, que o `location` agora cobre). Reproduzir: `python3 scratchpad/gera_map_faseb.py
+tribut:amb,pre,cad,cai,pro,con,prot,rec,dv,sys educa:mat,pro recurs:cai,con,es,lic,sped`.
+
+### 🏁 ÁREA RECURSOS HUMANOS — TELAS DE MENU CONCLUÍDAS
+
+Conferido **pelo proxy, tela de menu por tela de menu** (`X-Ecidade-Runtime` em `/w/2/<tela>`), não pelas
+listas: **701 de 701** telas de menu existentes em disco servidas pelo PHP 8.5 (705 entradas, 4 fantasmas:
+`pes1_cadastropensoes001/002`, `rec1_libbasecalculo`, `rec2_folhaponto01`).
+
+| | |
+|---|---|
+| Módulos | **4 de 4** — Pessoal, RH, eSocial, Estágio Probatório |
+| Telas comparadas byte-a-byte | **1.536 / 1.538** (Fase A 1.526/1.528 + Fase B 10/10) |
+| Divergências | **2**, caracterizadas: o laço eterno do 5.6 em `rec2_espelhoponto002` e a pendente do `.phar` |
+| Arquivos alterados | **852** (849 na Fase A + 3 na Fase B) |
+| Lacunas novas | **11ª** (LSP entre arquivos — detector `carrega_arquivo.php`) e **12ª** (biblioteca em `.phar`) |
+| Denylist do Rector | 29 → **31** |
+
+**O que NÃO está feito na área, e precisa estar claro no relatório:**
+
+1. **`ext/php/PHPExcel.phar`** (12ª lacuna) — 19 de 189 arquivos não compilam no 8.5; a única tela que o usa
+   (`pes4_geracaoarquivorefeisul.RPC.php`, não é item de menu) fica no 5.6 por exceção no nginx.
+2. **Nível 3 (POST real) nos cadastros** — combinado para esta área e **ainda não rodado** em nenhuma tela de RH.
+3. **O cenário de cálculo da folha** — a base tem 1 servidor e zero cálculo; exige cadastrar pelo 5.6 e salvar
+   em dump (o banco não tem volume de persistência). Até ele ser feito, o cálculo da folha **não foi exercitado**
+   pela comparação — a bateria GET só abre as telas.
+4. Os **9 arquivos do `pes2` que não compilam nem no 5.6** (8 de arquivo bancário) — defeito da referência,
+   intocados por decisão.
+
+**PARA RETOMAR:** os itens 2 e 3 acima (e o 1, se houver tempo). A sessão autenticada usada foi `98d016cc…`;
+os ciclos de guarda precisam de `/tmp/_sess.bak` no 5.6 (o `cmp.py` o cria ao rodar).
 
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
 
