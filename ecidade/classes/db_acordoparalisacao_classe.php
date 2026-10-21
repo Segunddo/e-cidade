@@ -55,8 +55,8 @@ class cl_acordoparalisacao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ac47_sequencial = ($this->ac47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac47_sequencial"]:$this->ac47_sequencial);
-       $this->ac47_acordo = ($this->ac47_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac47_acordo"]:$this->ac47_acordo);
+       $this->ac47_sequencial = ($this->ac47_sequencial === 0 || $this->ac47_sequencial === 0.0 || $this->ac47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac47_sequencial"]:$this->ac47_sequencial);
+       $this->ac47_acordo = ($this->ac47_acordo === 0 || $this->ac47_acordo === 0.0 || $this->ac47_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac47_acordo"]:$this->ac47_acordo);
        if($this->ac47_datainicio == ""){
          $this->ac47_datainicio_dia = ($this->ac47_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac47_datainicio_dia"]:$this->ac47_datainicio_dia);
          $this->ac47_datainicio_mes = ($this->ac47_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ac47_datainicio_mes"]:$this->ac47_datainicio_mes);
@@ -73,9 +73,9 @@ class cl_acordoparalisacao
             $this->ac47_datafim = $this->ac47_datafim_ano."-".$this->ac47_datafim_mes."-".$this->ac47_datafim_dia;
          }
        }
-       $this->ac47_acordoevento = ($this->ac47_acordoevento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac47_acordoevento"]:$this->ac47_acordoevento);
+       $this->ac47_acordoevento = ($this->ac47_acordoevento === 0 || $this->ac47_acordoevento === 0.0 || $this->ac47_acordoevento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac47_acordoevento"]:$this->ac47_acordoevento);
      }else{
-       $this->ac47_sequencial = ($this->ac47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac47_sequencial"]:$this->ac47_sequencial);
+       $this->ac47_sequencial = ($this->ac47_sequencial === 0 || $this->ac47_sequencial === 0.0 || $this->ac47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac47_sequencial"]:$this->ac47_sequencial);
      }
    }
     public function incluir($ac47_sequencial)
@@ -130,7 +130,7 @@ class cl_acordoparalisacao
          $this->ac47_sequencial = $ac47_sequencial; 
        }
      }
-     if(($this->ac47_sequencial == null) || ($this->ac47_sequencial == "") ){ 
+     if(($this->ac47_sequencial == null) || ($this->ac47_sequencial === 0 || $this->ac47_sequencial === 0.0 || $this->ac47_sequencial == "") ){ 
        $this->erro_sql = " Campo ac47_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

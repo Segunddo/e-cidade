@@ -52,7 +52,7 @@ class cl_issarquivoretencaodisarq {
                  q145_disarq = int4 = Disarq
                  ";
    //funcao construtor da classe
-   function cl_issarquivoretencaodisarq() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issarquivoretencaodisarq");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_issarquivoretencaodisarq {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q145_sequencial = ($this->q145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q145_sequencial"]:$this->q145_sequencial);
-       $this->q145_issarquivoretencao = ($this->q145_issarquivoretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["q145_issarquivoretencao"]:$this->q145_issarquivoretencao);
-       $this->q145_disarq = ($this->q145_disarq == ""?@$GLOBALS["HTTP_POST_VARS"]["q145_disarq"]:$this->q145_disarq);
+       $this->q145_sequencial = ($this->q145_sequencial === 0 || $this->q145_sequencial === 0.0 || $this->q145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q145_sequencial"]:$this->q145_sequencial);
+       $this->q145_issarquivoretencao = ($this->q145_issarquivoretencao === 0 || $this->q145_issarquivoretencao === 0.0 || $this->q145_issarquivoretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["q145_issarquivoretencao"]:$this->q145_issarquivoretencao);
+       $this->q145_disarq = ($this->q145_disarq === 0 || $this->q145_disarq === 0.0 || $this->q145_disarq == ""?@$GLOBALS["HTTP_POST_VARS"]["q145_disarq"]:$this->q145_disarq);
      }else{
-       $this->q145_sequencial = ($this->q145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q145_sequencial"]:$this->q145_sequencial);
+       $this->q145_sequencial = ($this->q145_sequencial === 0 || $this->q145_sequencial === 0.0 || $this->q145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q145_sequencial"]:$this->q145_sequencial);
      }
    }
    // funcao para Inclusão
@@ -121,7 +121,7 @@ class cl_issarquivoretencaodisarq {
          $this->q145_sequencial = $q145_sequencial;
        }
      }
-     if(($this->q145_sequencial == null) || ($this->q145_sequencial == "") ){
+     if(($this->q145_sequencial == null) || ($this->q145_sequencial === 0 || $this->q145_sequencial === 0.0 || $this->q145_sequencial == "") ){
        $this->erro_sql = " Campo q145_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

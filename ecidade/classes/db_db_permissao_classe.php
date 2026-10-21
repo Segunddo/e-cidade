@@ -58,7 +58,7 @@ class cl_db_permissao {
                  id_modulo = int4 = ID módulo 
                  ";
    //funcao construtor da classe 
-   function cl_db_permissao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_permissao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,18 +75,18 @@ class cl_db_permissao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
        $this->permissaoativa = ($this->permissaoativa == ""?@$GLOBALS["HTTP_POST_VARS"]["permissaoativa"]:$this->permissaoativa);
-       $this->anousu = ($this->anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["anousu"]:$this->anousu);
-       $this->id_instit = ($this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
-       $this->id_modulo = ($this->id_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["id_modulo"]:$this->id_modulo);
+       $this->anousu = ($this->anousu === 0 || $this->anousu === 0.0 || $this->anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["anousu"]:$this->anousu);
+       $this->id_instit = ($this->id_instit === 0 || $this->id_instit === 0.0 || $this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
+       $this->id_modulo = ($this->id_modulo === 0 || $this->id_modulo === 0.0 || $this->id_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["id_modulo"]:$this->id_modulo);
      }else{
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
-       $this->anousu = ($this->anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["anousu"]:$this->anousu);
-       $this->id_instit = ($this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
-       $this->id_modulo = ($this->id_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["id_modulo"]:$this->id_modulo);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->anousu = ($this->anousu === 0 || $this->anousu === 0.0 || $this->anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["anousu"]:$this->anousu);
+       $this->id_instit = ($this->id_instit === 0 || $this->id_instit === 0.0 || $this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
+       $this->id_modulo = ($this->id_modulo === 0 || $this->id_modulo === 0.0 || $this->id_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["id_modulo"]:$this->id_modulo);
      }
    }
    // funcao para inclusao
@@ -106,7 +106,7 @@ class cl_db_permissao {
        $this->anousu = $anousu; 
        $this->id_instit = $id_instit; 
        $this->id_modulo = $id_modulo; 
-     if(($this->id_usuario == null) || ($this->id_usuario == "") ){ 
+     if(($this->id_usuario == null) || ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "") ){ 
        $this->erro_sql = " Campo id_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -114,7 +114,7 @@ class cl_db_permissao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->id_item == null) || ($this->id_item == "") ){ 
+     if(($this->id_item == null) || ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == "") ){ 
        $this->erro_sql = " Campo id_item nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -122,7 +122,7 @@ class cl_db_permissao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->anousu == null) || ($this->anousu == "") ){ 
+     if(($this->anousu == null) || ($this->anousu === 0 || $this->anousu === 0.0 || $this->anousu == "") ){ 
        $this->erro_sql = " Campo anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -130,7 +130,7 @@ class cl_db_permissao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->id_instit == null) || ($this->id_instit == "") ){ 
+     if(($this->id_instit == null) || ($this->id_instit === 0 || $this->id_instit === 0.0 || $this->id_instit == "") ){ 
        $this->erro_sql = " Campo id_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -138,7 +138,7 @@ class cl_db_permissao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->id_modulo == null) || ($this->id_modulo == "") ){ 
+     if(($this->id_modulo == null) || ($this->id_modulo === 0 || $this->id_modulo === 0.0 || $this->id_modulo == "") ){ 
        $this->erro_sql = " Campo id_modulo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -485,7 +485,7 @@ class cl_db_permissao {
    function sql_query ( $id_usuario=null,$id_item=null,$anousu=null,$id_instit=null,$id_modulo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_db_permissao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -551,7 +551,7 @@ class cl_db_permissao {
    function sql_query_file ( $id_usuario=null,$id_item=null,$anousu=null,$id_instit=null,$id_modulo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -604,7 +604,7 @@ class cl_db_permissao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

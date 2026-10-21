@@ -58,7 +58,7 @@ class cl_econsigmovimento {
                  rh133_relatorio = oid = Relatório de  Importação 
                  ";
    //funcao construtor da classe 
-   function cl_econsigmovimento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("econsigmovimento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,17 +75,17 @@ class cl_econsigmovimento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh133_sequencial  = ($this->rh133_sequencial  == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_sequencial"]    : $this->rh133_sequencial);
-       $this->rh133_ano         = ($this->rh133_ano         == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_ano"]           : $this->rh133_ano);
-       $this->rh133_mes         = ($this->rh133_mes         == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_mes"]           : $this->rh133_mes);
+       $this->rh133_sequencial  = ($this->rh133_sequencial === 0 || $this->rh133_sequencial === 0.0 || $this->rh133_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_sequencial"]    : $this->rh133_sequencial);
+       $this->rh133_ano         = ($this->rh133_ano === 0 || $this->rh133_ano === 0.0 || $this->rh133_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_ano"]           : $this->rh133_ano);
+       $this->rh133_mes         = ($this->rh133_mes === 0 || $this->rh133_mes === 0.0 || $this->rh133_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_mes"]           : $this->rh133_mes);
        $this->rh133_nomearquivo = ($this->rh133_nomearquivo == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_nomearquivo"]   : $this->rh133_nomearquivo);
-       $this->rh133_instit      = ($this->rh133_instit      == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_instit"]        : $this->rh133_instit);
-       $this->rh133_relatorio   = ($this->rh133_relatorio   == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_relatorio"]     : $this->rh133_relatorio);
+       $this->rh133_instit      = ($this->rh133_instit === 0 || $this->rh133_instit === 0.0 || $this->rh133_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_instit"]        : $this->rh133_instit);
+       $this->rh133_relatorio   = ($this->rh133_relatorio === 0 || $this->rh133_relatorio === 0.0 || $this->rh133_relatorio == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh133_relatorio"]     : $this->rh133_relatorio);
 
        $this->rh133_relatorio   = empty($this->rh133_relatorio) ? "NULL" : $this->rh133_relatorio;
 
      }else{
-       $this->rh133_sequencial = ($this->rh133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh133_sequencial"]:$this->rh133_sequencial);
+       $this->rh133_sequencial = ($this->rh133_sequencial === 0 || $this->rh133_sequencial === 0.0 || $this->rh133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh133_sequencial"]:$this->rh133_sequencial);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_econsigmovimento {
          $this->rh133_sequencial = $rh133_sequencial; 
        }
      }
-     if(($this->rh133_sequencial == null) || ($this->rh133_sequencial == "") ){ 
+     if(($this->rh133_sequencial == null) || ($this->rh133_sequencial === 0 || $this->rh133_sequencial === 0.0 || $this->rh133_sequencial == "") ){ 
        $this->erro_sql = " Campo rh133_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -498,7 +498,7 @@ class cl_econsigmovimento {
      return $sql;
   }
 
-  public function sql_pesquisa_servidor($iMatricula = null, $iAnoUsu, $iMesUsu, $iInstit) {
+  public function sql_pesquisa_servidor($iMatricula = null, $iAnoUsu = null, $iMesUsu = null, $iInstit = null) {
 
     $sSql  = "   SELECT econsigmovimentoservidor.rh134_regist as matricula,                                                                                            ";
     $sSql .= "      econsigmovimentoservidorrubrica.rh135_rubrica as rubrica,                                                                                          "; 

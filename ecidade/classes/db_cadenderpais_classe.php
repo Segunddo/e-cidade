@@ -54,7 +54,7 @@ class cl_cadenderpais {
                  db70_codigoreceita = int8 = Código da Receita
                  ";
    //funcao construtor da classe
-   function cl_cadenderpais() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadenderpais");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_cadenderpais {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db70_sequencial = ($this->db70_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db70_sequencial"]:$this->db70_sequencial);
+       $this->db70_sequencial = ($this->db70_sequencial === 0 || $this->db70_sequencial === 0.0 || $this->db70_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db70_sequencial"]:$this->db70_sequencial);
        $this->db70_descricao = ($this->db70_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db70_descricao"]:$this->db70_descricao);
        $this->db70_sigla = ($this->db70_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["db70_sigla"]:$this->db70_sigla);
        $this->db70_codigoreceita = ($this->db70_codigoreceita == ""?@$GLOBALS["HTTP_POST_VARS"]["db70_codigoreceita"]:$this->db70_codigoreceita);
      }else{
-       $this->db70_sequencial = ($this->db70_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db70_sequencial"]:$this->db70_sequencial);
+       $this->db70_sequencial = ($this->db70_sequencial === 0 || $this->db70_sequencial === 0.0 || $this->db70_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db70_sequencial"]:$this->db70_sequencial);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_cadenderpais {
          $this->db70_sequencial = $db70_sequencial;
        }
      }
-     if(($this->db70_sequencial == null) || ($this->db70_sequencial == "") ){
+     if(($this->db70_sequencial == null) || ($this->db70_sequencial === 0 || $this->db70_sequencial === 0.0 || $this->db70_sequencial == "") ){
        $this->erro_sql = " Campo db70_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

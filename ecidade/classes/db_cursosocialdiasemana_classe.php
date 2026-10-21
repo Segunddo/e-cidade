@@ -52,7 +52,7 @@ class cl_cursosocialdiasemana {
                  as20_diasemana = int4 = Dia da Semana 
                  ";
    //funcao construtor da classe 
-   function cl_cursosocialdiasemana() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cursosocialdiasemana"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cursosocialdiasemana {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->as20_sequencial = ($this->as20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as20_sequencial"]:$this->as20_sequencial);
-       $this->as20_cursosocial = ($this->as20_cursosocial == ""?@$GLOBALS["HTTP_POST_VARS"]["as20_cursosocial"]:$this->as20_cursosocial);
-       $this->as20_diasemana = ($this->as20_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["as20_diasemana"]:$this->as20_diasemana);
+       $this->as20_sequencial = ($this->as20_sequencial === 0 || $this->as20_sequencial === 0.0 || $this->as20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as20_sequencial"]:$this->as20_sequencial);
+       $this->as20_cursosocial = ($this->as20_cursosocial === 0 || $this->as20_cursosocial === 0.0 || $this->as20_cursosocial == ""?@$GLOBALS["HTTP_POST_VARS"]["as20_cursosocial"]:$this->as20_cursosocial);
+       $this->as20_diasemana = ($this->as20_diasemana === 0 || $this->as20_diasemana === 0.0 || $this->as20_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["as20_diasemana"]:$this->as20_diasemana);
      }else{
-       $this->as20_sequencial = ($this->as20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as20_sequencial"]:$this->as20_sequencial);
+       $this->as20_sequencial = ($this->as20_sequencial === 0 || $this->as20_sequencial === 0.0 || $this->as20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as20_sequencial"]:$this->as20_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cursosocialdiasemana {
          $this->as20_sequencial = $as20_sequencial; 
        }
      }
-     if(($this->as20_sequencial == null) || ($this->as20_sequencial == "") ){ 
+     if(($this->as20_sequencial == null) || ($this->as20_sequencial === 0 || $this->as20_sequencial === 0.0 || $this->as20_sequencial == "") ){ 
        $this->erro_sql = " Campo as20_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_cursosocialdiasemana {
    function sql_query ( $as20_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_cursosocialdiasemana {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_cursosocialdiasemana {
    function sql_query_file ( $as20_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_cursosocialdiasemana {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

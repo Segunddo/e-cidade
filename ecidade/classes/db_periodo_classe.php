@@ -89,17 +89,17 @@ class cl_periodo
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->o114_sequencial = ($this->o114_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_sequencial"] : $this->o114_sequencial);
+            $this->o114_sequencial = ($this->o114_sequencial === 0 || $this->o114_sequencial === 0.0 || $this->o114_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_sequencial"] : $this->o114_sequencial);
             $this->o114_descricao = ($this->o114_descricao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_descricao"] : $this->o114_descricao);
-            $this->o114_qdtporano = ($this->o114_qdtporano == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_qdtporano"] : $this->o114_qdtporano);
-            $this->o114_diainicial = ($this->o114_diainicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_diainicial"] : $this->o114_diainicial);
-            $this->o114_mesinicial = ($this->o114_mesinicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_mesinicial"] : $this->o114_mesinicial);
-            $this->o114_diafinal = ($this->o114_diafinal == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_diafinal"] : $this->o114_diafinal);
-            $this->o114_mesfinal = ($this->o114_mesfinal == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_mesfinal"] : $this->o114_mesfinal);
+            $this->o114_qdtporano = ($this->o114_qdtporano === 0 || $this->o114_qdtporano === 0.0 || $this->o114_qdtporano == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_qdtporano"] : $this->o114_qdtporano);
+            $this->o114_diainicial = ($this->o114_diainicial === 0 || $this->o114_diainicial === 0.0 || $this->o114_diainicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_diainicial"] : $this->o114_diainicial);
+            $this->o114_mesinicial = ($this->o114_mesinicial === 0 || $this->o114_mesinicial === 0.0 || $this->o114_mesinicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_mesinicial"] : $this->o114_mesinicial);
+            $this->o114_diafinal = ($this->o114_diafinal === 0 || $this->o114_diafinal === 0.0 || $this->o114_diafinal == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_diafinal"] : $this->o114_diafinal);
+            $this->o114_mesfinal = ($this->o114_mesfinal === 0 || $this->o114_mesfinal === 0.0 || $this->o114_mesfinal == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_mesfinal"] : $this->o114_mesfinal);
             $this->o114_sigla = ($this->o114_sigla == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_sigla"] : $this->o114_sigla);
-            $this->o114_ordem = ($this->o114_ordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_ordem"] : $this->o114_ordem);
+            $this->o114_ordem = ($this->o114_ordem === 0 || $this->o114_ordem === 0.0 || $this->o114_ordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_ordem"] : $this->o114_ordem);
         } else {
-            $this->o114_sequencial = ($this->o114_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_sequencial"] : $this->o114_sequencial);
+            $this->o114_sequencial = ($this->o114_sequencial === 0 || $this->o114_sequencial === 0.0 || $this->o114_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o114_sequencial"] : $this->o114_sequencial);
         }
     }
 
@@ -206,7 +206,7 @@ class cl_periodo
         } else {
             $this->o114_sequencial = $o114_sequencial;
         }
-        if (($this->o114_sequencial == null) || ($this->o114_sequencial == "")) {
+        if (($this->o114_sequencial == null) || ($this->o114_sequencial === 0 || $this->o114_sequencial === 0.0 || $this->o114_sequencial == "")) {
             $this->erro_sql = " Campo o114_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -749,7 +749,7 @@ class cl_periodo
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -772,7 +772,7 @@ class cl_periodo
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -787,7 +787,7 @@ class cl_periodo
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -810,7 +810,7 @@ class cl_periodo
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];

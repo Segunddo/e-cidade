@@ -56,7 +56,7 @@ class cl_conlancaminventario {
                  c85_anousu = int4 = Exercício 
                  ";
    //funcao construtor da classe 
-   function cl_conlancaminventario() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancaminventario"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_conlancaminventario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c85_sequencial = ($this->c85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_sequencial"]:$this->c85_sequencial);
-       $this->c85_codlan = ($this->c85_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_codlan"]:$this->c85_codlan);
-       $this->c85_escriturainventario = ($this->c85_escriturainventario == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_escriturainventario"]:$this->c85_escriturainventario);
-       $this->c85_reduz = ($this->c85_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_reduz"]:$this->c85_reduz);
-       $this->c85_anousu = ($this->c85_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_anousu"]:$this->c85_anousu);
+       $this->c85_sequencial = ($this->c85_sequencial === 0 || $this->c85_sequencial === 0.0 || $this->c85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_sequencial"]:$this->c85_sequencial);
+       $this->c85_codlan = ($this->c85_codlan === 0 || $this->c85_codlan === 0.0 || $this->c85_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_codlan"]:$this->c85_codlan);
+       $this->c85_escriturainventario = ($this->c85_escriturainventario === 0 || $this->c85_escriturainventario === 0.0 || $this->c85_escriturainventario == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_escriturainventario"]:$this->c85_escriturainventario);
+       $this->c85_reduz = ($this->c85_reduz === 0 || $this->c85_reduz === 0.0 || $this->c85_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_reduz"]:$this->c85_reduz);
+       $this->c85_anousu = ($this->c85_anousu === 0 || $this->c85_anousu === 0.0 || $this->c85_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_anousu"]:$this->c85_anousu);
      }else{
-       $this->c85_sequencial = ($this->c85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_sequencial"]:$this->c85_sequencial);
+       $this->c85_sequencial = ($this->c85_sequencial === 0 || $this->c85_sequencial === 0.0 || $this->c85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c85_sequencial"]:$this->c85_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_conlancaminventario {
          $this->c85_sequencial = $c85_sequencial; 
        }
      }
-     if(($this->c85_sequencial == null) || ($this->c85_sequencial == "") ){ 
+     if(($this->c85_sequencial == null) || ($this->c85_sequencial === 0 || $this->c85_sequencial === 0.0 || $this->c85_sequencial == "") ){ 
        $this->erro_sql = " Campo c85_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -423,7 +423,7 @@ class cl_conlancaminventario {
    function sql_query ( $c85_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -453,7 +453,7 @@ class cl_conlancaminventario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -466,7 +466,7 @@ class cl_conlancaminventario {
    function sql_query_file ( $c85_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -487,7 +487,7 @@ class cl_conlancaminventario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

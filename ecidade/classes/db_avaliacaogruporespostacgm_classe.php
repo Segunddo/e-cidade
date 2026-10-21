@@ -26,7 +26,7 @@ class cl_avaliacaogruporespostacgm {
                  eso03_cgm = int4 = CGM
                  ";
    //funcao construtor da classe
-   function cl_avaliacaogruporespostacgm() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avaliacaogruporespostacgm");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_avaliacaogruporespostacgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->eso03_sequencial = ($this->eso03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso03_sequencial"]:$this->eso03_sequencial);
-       $this->eso03_avaliacaogruporesposta = ($this->eso03_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["eso03_avaliacaogruporesposta"]:$this->eso03_avaliacaogruporesposta);
-       $this->eso03_cgm = ($this->eso03_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["eso03_cgm"]:$this->eso03_cgm);
+       $this->eso03_sequencial = ($this->eso03_sequencial === 0 || $this->eso03_sequencial === 0.0 || $this->eso03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso03_sequencial"]:$this->eso03_sequencial);
+       $this->eso03_avaliacaogruporesposta = ($this->eso03_avaliacaogruporesposta === 0 || $this->eso03_avaliacaogruporesposta === 0.0 || $this->eso03_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["eso03_avaliacaogruporesposta"]:$this->eso03_avaliacaogruporesposta);
+       $this->eso03_cgm = ($this->eso03_cgm === 0 || $this->eso03_cgm === 0.0 || $this->eso03_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["eso03_cgm"]:$this->eso03_cgm);
      }else{
-       $this->eso03_sequencial = ($this->eso03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso03_sequencial"]:$this->eso03_sequencial);
+       $this->eso03_sequencial = ($this->eso03_sequencial === 0 || $this->eso03_sequencial === 0.0 || $this->eso03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso03_sequencial"]:$this->eso03_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_avaliacaogruporespostacgm {
          $this->eso03_sequencial = $eso03_sequencial;
        }
      }
-     if(($this->eso03_sequencial == null) || ($this->eso03_sequencial == "") ){
+     if(($this->eso03_sequencial == null) || ($this->eso03_sequencial === 0 || $this->eso03_sequencial === 0.0 || $this->eso03_sequencial == "") ){
        $this->erro_sql = " Campo eso03_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

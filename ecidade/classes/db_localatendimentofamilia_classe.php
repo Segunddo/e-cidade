@@ -68,7 +68,7 @@ class cl_localatendimentofamilia {
                  as23_db_usuario = int4 = Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_localatendimentofamilia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("localatendimentofamilia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,9 +85,9 @@ class cl_localatendimentofamilia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->as23_sequencial = ($this->as23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_sequencial"]:$this->as23_sequencial);
-       $this->as23_localatendimentosocial = ($this->as23_localatendimentosocial == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_localatendimentosocial"]:$this->as23_localatendimentosocial);
-       $this->as23_cidadaofamilia = ($this->as23_cidadaofamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_cidadaofamilia"]:$this->as23_cidadaofamilia);
+       $this->as23_sequencial = ($this->as23_sequencial === 0 || $this->as23_sequencial === 0.0 || $this->as23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_sequencial"]:$this->as23_sequencial);
+       $this->as23_localatendimentosocial = ($this->as23_localatendimentosocial === 0 || $this->as23_localatendimentosocial === 0.0 || $this->as23_localatendimentosocial == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_localatendimentosocial"]:$this->as23_localatendimentosocial);
+       $this->as23_cidadaofamilia = ($this->as23_cidadaofamilia === 0 || $this->as23_cidadaofamilia === 0.0 || $this->as23_cidadaofamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_cidadaofamilia"]:$this->as23_cidadaofamilia);
        if($this->as23_datavinculo == ""){
          $this->as23_datavinculo_dia = ($this->as23_datavinculo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_datavinculo_dia"]:$this->as23_datavinculo_dia);
          $this->as23_datavinculo_mes = ($this->as23_datavinculo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_datavinculo_mes"]:$this->as23_datavinculo_mes);
@@ -106,9 +106,9 @@ class cl_localatendimentofamilia {
        }
        $this->as23_observacao = ($this->as23_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_observacao"]:$this->as23_observacao);
        $this->as23_ativo = ($this->as23_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["as23_ativo"]:$this->as23_ativo);
-       $this->as23_db_usuario = ($this->as23_db_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_db_usuario"]:$this->as23_db_usuario);
+       $this->as23_db_usuario = ($this->as23_db_usuario === 0 || $this->as23_db_usuario === 0.0 || $this->as23_db_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_db_usuario"]:$this->as23_db_usuario);
      }else{
-       $this->as23_sequencial = ($this->as23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_sequencial"]:$this->as23_sequencial);
+       $this->as23_sequencial = ($this->as23_sequencial === 0 || $this->as23_sequencial === 0.0 || $this->as23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as23_sequencial"]:$this->as23_sequencial);
      }
    }
    // funcao para inclusao
@@ -180,7 +180,7 @@ class cl_localatendimentofamilia {
          $this->as23_sequencial = $as23_sequencial; 
        }
      }
-     if(($this->as23_sequencial == null) || ($this->as23_sequencial == "") ){ 
+     if(($this->as23_sequencial == null) || ($this->as23_sequencial === 0 || $this->as23_sequencial === 0.0 || $this->as23_sequencial == "") ){ 
        $this->erro_sql = " Campo as23_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -528,7 +528,7 @@ class cl_localatendimentofamilia {
    function sql_query ( $as23_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -553,7 +553,7 @@ class cl_localatendimentofamilia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -566,7 +566,7 @@ class cl_localatendimentofamilia {
    function sql_query_file ( $as23_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -587,7 +587,7 @@ class cl_localatendimentofamilia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

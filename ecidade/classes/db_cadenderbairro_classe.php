@@ -54,7 +54,7 @@ class cl_cadenderbairro {
                  db73_sigla = varchar(2) = Sigla do Bairro 
                  ";
    //funcao construtor da classe 
-   function cl_cadenderbairro() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadenderbairro"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_cadenderbairro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db73_sequencial = ($this->db73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db73_sequencial"]:$this->db73_sequencial);
-       $this->db73_cadendermunicipio = ($this->db73_cadendermunicipio == ""?@$GLOBALS["HTTP_POST_VARS"]["db73_cadendermunicipio"]:$this->db73_cadendermunicipio);
+       $this->db73_sequencial = ($this->db73_sequencial === 0 || $this->db73_sequencial === 0.0 || $this->db73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db73_sequencial"]:$this->db73_sequencial);
+       $this->db73_cadendermunicipio = ($this->db73_cadendermunicipio === 0 || $this->db73_cadendermunicipio === 0.0 || $this->db73_cadendermunicipio == ""?@$GLOBALS["HTTP_POST_VARS"]["db73_cadendermunicipio"]:$this->db73_cadendermunicipio);
        $this->db73_descricao = ($this->db73_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db73_descricao"]:$this->db73_descricao);
        $this->db73_sigla = ($this->db73_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["db73_sigla"]:$this->db73_sigla);
      }else{
-       $this->db73_sequencial = ($this->db73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db73_sequencial"]:$this->db73_sequencial);
+       $this->db73_sequencial = ($this->db73_sequencial === 0 || $this->db73_sequencial === 0.0 || $this->db73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db73_sequencial"]:$this->db73_sequencial);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_cadenderbairro {
          $this->db73_sequencial = $db73_sequencial; 
        }
      }
-     if(($this->db73_sequencial == null) || ($this->db73_sequencial == "") ){ 
+     if(($this->db73_sequencial == null) || ($this->db73_sequencial === 0 || $this->db73_sequencial === 0.0 || $this->db73_sequencial == "") ){ 
        $this->erro_sql = " Campo db73_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

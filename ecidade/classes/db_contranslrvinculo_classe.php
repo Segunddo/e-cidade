@@ -52,7 +52,7 @@ class cl_contranslrvinculo {
                  c116_contranslrestorno = int4 = Regra de lançamento para estorno 
                  ";
    //funcao construtor da classe 
-   function cl_contranslrvinculo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contranslrvinculo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_contranslrvinculo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c116_sequencial = ($this->c116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c116_sequencial"]:$this->c116_sequencial);
-       $this->c116_contranslrinclusao = ($this->c116_contranslrinclusao == ""?@$GLOBALS["HTTP_POST_VARS"]["c116_contranslrinclusao"]:$this->c116_contranslrinclusao);
-       $this->c116_contranslrestorno = ($this->c116_contranslrestorno == ""?@$GLOBALS["HTTP_POST_VARS"]["c116_contranslrestorno"]:$this->c116_contranslrestorno);
+       $this->c116_sequencial = ($this->c116_sequencial === 0 || $this->c116_sequencial === 0.0 || $this->c116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c116_sequencial"]:$this->c116_sequencial);
+       $this->c116_contranslrinclusao = ($this->c116_contranslrinclusao === 0 || $this->c116_contranslrinclusao === 0.0 || $this->c116_contranslrinclusao == ""?@$GLOBALS["HTTP_POST_VARS"]["c116_contranslrinclusao"]:$this->c116_contranslrinclusao);
+       $this->c116_contranslrestorno = ($this->c116_contranslrestorno === 0 || $this->c116_contranslrestorno === 0.0 || $this->c116_contranslrestorno == ""?@$GLOBALS["HTTP_POST_VARS"]["c116_contranslrestorno"]:$this->c116_contranslrestorno);
      }else{
-       $this->c116_sequencial = ($this->c116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c116_sequencial"]:$this->c116_sequencial);
+       $this->c116_sequencial = ($this->c116_sequencial === 0 || $this->c116_sequencial === 0.0 || $this->c116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c116_sequencial"]:$this->c116_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_contranslrvinculo {
          $this->c116_sequencial = $c116_sequencial; 
        }
      }
-     if(($this->c116_sequencial == null) || ($this->c116_sequencial == "") ){ 
+     if(($this->c116_sequencial == null) || ($this->c116_sequencial === 0 || $this->c116_sequencial === 0.0 || $this->c116_sequencial == "") ){ 
        $this->erro_sql = " Campo c116_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_contranslrvinculo {
    function sql_query ( $c116_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_contranslrvinculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_contranslrvinculo {
    function sql_query_file ( $c116_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_contranslrvinculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -68,7 +68,7 @@ class cl_benshistoricocalculobem {
                  t58_valorresidualanterior = numeric(10) = Valor residual anterior
                  ";
    //funcao construtor da classe
-   function cl_benshistoricocalculobem() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("benshistoricocalculobem");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,19 +85,19 @@ class cl_benshistoricocalculobem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t58_sequencial = ($this->t58_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_sequencial"]:$this->t58_sequencial);
-       $this->t58_benstipodepreciacao = ($this->t58_benstipodepreciacao == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_benstipodepreciacao"]:$this->t58_benstipodepreciacao);
-       $this->t58_benshistoricocalculo = ($this->t58_benshistoricocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_benshistoricocalculo"]:$this->t58_benshistoricocalculo);
-       $this->t58_bens = ($this->t58_bens == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_bens"]:$this->t58_bens);
+       $this->t58_sequencial = ($this->t58_sequencial === 0 || $this->t58_sequencial === 0.0 || $this->t58_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_sequencial"]:$this->t58_sequencial);
+       $this->t58_benstipodepreciacao = ($this->t58_benstipodepreciacao === 0 || $this->t58_benstipodepreciacao === 0.0 || $this->t58_benstipodepreciacao == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_benstipodepreciacao"]:$this->t58_benstipodepreciacao);
+       $this->t58_benshistoricocalculo = ($this->t58_benshistoricocalculo === 0 || $this->t58_benshistoricocalculo === 0.0 || $this->t58_benshistoricocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_benshistoricocalculo"]:$this->t58_benshistoricocalculo);
+       $this->t58_bens = ($this->t58_bens === 0 || $this->t58_bens === 0.0 || $this->t58_bens == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_bens"]:$this->t58_bens);
        $this->t58_valorcalculado = ($this->t58_valorcalculado === ""?@$GLOBALS["HTTP_POST_VARS"]["t58_valorcalculado"]:$this->t58_valorcalculado);
-       $this->t58_valorresidual = ($this->t58_valorresidual == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_valorresidual"]:$this->t58_valorresidual);
-       $this->t58_valoranterior = ($this->t58_valoranterior == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_valoranterior"]:$this->t58_valoranterior);
-       $this->t58_valoratual = ($this->t58_valoratual == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_valoratual"]:$this->t58_valoratual);
-       $this->t58_percentualdepreciado = ($this->t58_percentualdepreciado == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_percentualdepreciado"]:$this->t58_percentualdepreciado);
-       $this->t58_vidautilanterior = ($this->t58_vidautilanterior == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_vidautilanterior"]:$this->t58_vidautilanterior);
-       $this->t58_valorresidualanterior = ($this->t58_valorresidualanterior == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_valorresidualanterior"]:$this->t58_valorresidualanterior);
+       $this->t58_valorresidual = ($this->t58_valorresidual === 0 || $this->t58_valorresidual === 0.0 || $this->t58_valorresidual == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_valorresidual"]:$this->t58_valorresidual);
+       $this->t58_valoranterior = ($this->t58_valoranterior === 0 || $this->t58_valoranterior === 0.0 || $this->t58_valoranterior == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_valoranterior"]:$this->t58_valoranterior);
+       $this->t58_valoratual = ($this->t58_valoratual === 0 || $this->t58_valoratual === 0.0 || $this->t58_valoratual == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_valoratual"]:$this->t58_valoratual);
+       $this->t58_percentualdepreciado = ($this->t58_percentualdepreciado === 0 || $this->t58_percentualdepreciado === 0.0 || $this->t58_percentualdepreciado == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_percentualdepreciado"]:$this->t58_percentualdepreciado);
+       $this->t58_vidautilanterior = ($this->t58_vidautilanterior === 0 || $this->t58_vidautilanterior === 0.0 || $this->t58_vidautilanterior == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_vidautilanterior"]:$this->t58_vidautilanterior);
+       $this->t58_valorresidualanterior = ($this->t58_valorresidualanterior === 0 || $this->t58_valorresidualanterior === 0.0 || $this->t58_valorresidualanterior == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_valorresidualanterior"]:$this->t58_valorresidualanterior);
      }else{
-       $this->t58_sequencial = ($this->t58_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_sequencial"]:$this->t58_sequencial);
+       $this->t58_sequencial = ($this->t58_sequencial === 0 || $this->t58_sequencial === 0.0 || $this->t58_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t58_sequencial"]:$this->t58_sequencial);
      }
    }
    // funcao para inclusao
@@ -205,7 +205,7 @@ class cl_benshistoricocalculobem {
          $this->t58_sequencial = $t58_sequencial;
        }
      }
-     if(($this->t58_sequencial == null) || ($this->t58_sequencial == "") ){
+     if(($this->t58_sequencial == null) || ($this->t58_sequencial === 0 || $this->t58_sequencial === 0.0 || $this->t58_sequencial == "") ){
        $this->erro_sql = " Campo t58_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -36,7 +36,7 @@ class cl_classificacaocredores {
                  cc30_ordem = int4 = Ordem 
                  ";
    //funcao construtor da classe 
-   function cl_classificacaocredores() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("classificacaocredores"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -53,16 +53,16 @@ class cl_classificacaocredores {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc30_codigo = ($this->cc30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_codigo"]:$this->cc30_codigo);
+       $this->cc30_codigo = ($this->cc30_codigo === 0 || $this->cc30_codigo === 0.0 || $this->cc30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_codigo"]:$this->cc30_codigo);
        $this->cc30_descricao = ($this->cc30_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_descricao"]:$this->cc30_descricao);
-       $this->cc30_contagemdias = ($this->cc30_contagemdias == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_contagemdias"]:$this->cc30_contagemdias);
-       $this->cc30_diasvencimento = ($this->cc30_diasvencimento == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_diasvencimento"]:$this->cc30_diasvencimento);
-       $this->cc30_valorinicial = ($this->cc30_valorinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_valorinicial"]:$this->cc30_valorinicial);
-       $this->cc30_valorfinal = ($this->cc30_valorfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_valorfinal"]:$this->cc30_valorfinal);
+       $this->cc30_contagemdias = ($this->cc30_contagemdias === 0 || $this->cc30_contagemdias === 0.0 || $this->cc30_contagemdias == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_contagemdias"]:$this->cc30_contagemdias);
+       $this->cc30_diasvencimento = ($this->cc30_diasvencimento === 0 || $this->cc30_diasvencimento === 0.0 || $this->cc30_diasvencimento == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_diasvencimento"]:$this->cc30_diasvencimento);
+       $this->cc30_valorinicial = ($this->cc30_valorinicial === 0 || $this->cc30_valorinicial === 0.0 || $this->cc30_valorinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_valorinicial"]:$this->cc30_valorinicial);
+       $this->cc30_valorfinal = ($this->cc30_valorfinal === 0 || $this->cc30_valorfinal === 0.0 || $this->cc30_valorfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_valorfinal"]:$this->cc30_valorfinal);
        $this->cc30_dispensa = ($this->cc30_dispensa == "f"?@$GLOBALS["HTTP_POST_VARS"]["cc30_dispensa"]:$this->cc30_dispensa);
-       $this->cc30_ordem = ($this->cc30_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_ordem"]:$this->cc30_ordem);
+       $this->cc30_ordem = ($this->cc30_ordem === 0 || $this->cc30_ordem === 0.0 || $this->cc30_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_ordem"]:$this->cc30_ordem);
      }else{
-       $this->cc30_codigo = ($this->cc30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_codigo"]:$this->cc30_codigo);
+       $this->cc30_codigo = ($this->cc30_codigo === 0 || $this->cc30_codigo === 0.0 || $this->cc30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cc30_codigo"]:$this->cc30_codigo);
      }
    }
    // funcao para Inclusão
@@ -119,7 +119,7 @@ class cl_classificacaocredores {
          $this->cc30_codigo = $cc30_codigo; 
        }
      }
-     if(($this->cc30_codigo == null) || ($this->cc30_codigo == "") ){ 
+     if(($this->cc30_codigo == null) || ($this->cc30_codigo === 0 || $this->cc30_codigo === 0.0 || $this->cc30_codigo == "") ){ 
        $this->erro_sql = " Campo cc30_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

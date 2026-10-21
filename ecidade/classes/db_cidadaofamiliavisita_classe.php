@@ -63,7 +63,7 @@ class cl_cidadaofamiliavisita {
                  as05_visitatipo = int4 = Sequencial 
                  ";
    //funcao construtor da classe 
-   function cl_cidadaofamiliavisita() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cidadaofamiliavisita"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_cidadaofamiliavisita {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->as05_sequencial = ($this->as05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_sequencial"]:$this->as05_sequencial);
-       $this->as05_cidadaofamilia = ($this->as05_cidadaofamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_cidadaofamilia"]:$this->as05_cidadaofamilia);
+       $this->as05_sequencial = ($this->as05_sequencial === 0 || $this->as05_sequencial === 0.0 || $this->as05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_sequencial"]:$this->as05_sequencial);
+       $this->as05_cidadaofamilia = ($this->as05_cidadaofamilia === 0 || $this->as05_cidadaofamilia === 0.0 || $this->as05_cidadaofamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_cidadaofamilia"]:$this->as05_cidadaofamilia);
        if($this->as05_datavisita == ""){
          $this->as05_datavisita_dia = ($this->as05_datavisita_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_datavisita_dia"]:$this->as05_datavisita_dia);
          $this->as05_datavisita_mes = ($this->as05_datavisita_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_datavisita_mes"]:$this->as05_datavisita_mes);
@@ -92,10 +92,10 @@ class cl_cidadaofamiliavisita {
        }
        $this->as05_observacao = ($this->as05_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_observacao"]:$this->as05_observacao);
        $this->as05_horavisita = ($this->as05_horavisita == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_horavisita"]:$this->as05_horavisita);
-       $this->as05_profissional = ($this->as05_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_profissional"]:$this->as05_profissional);
-       $this->as05_visitatipo = ($this->as05_visitatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_visitatipo"]:$this->as05_visitatipo);
+       $this->as05_profissional = ($this->as05_profissional === 0 || $this->as05_profissional === 0.0 || $this->as05_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_profissional"]:$this->as05_profissional);
+       $this->as05_visitatipo = ($this->as05_visitatipo === 0 || $this->as05_visitatipo === 0.0 || $this->as05_visitatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_visitatipo"]:$this->as05_visitatipo);
      }else{
-       $this->as05_sequencial = ($this->as05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_sequencial"]:$this->as05_sequencial);
+       $this->as05_sequencial = ($this->as05_sequencial === 0 || $this->as05_sequencial === 0.0 || $this->as05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as05_sequencial"]:$this->as05_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_cidadaofamiliavisita {
          $this->as05_sequencial = $as05_sequencial; 
        }
      }
-     if(($this->as05_sequencial == null) || ($this->as05_sequencial == "") ){ 
+     if(($this->as05_sequencial == null) || ($this->as05_sequencial === 0 || $this->as05_sequencial === 0.0 || $this->as05_sequencial == "") ){ 
        $this->erro_sql = " Campo as05_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -482,7 +482,7 @@ class cl_cidadaofamiliavisita {
    function sql_query ( $as05_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -506,7 +506,7 @@ class cl_cidadaofamiliavisita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -519,7 +519,7 @@ class cl_cidadaofamiliavisita {
    function sql_query_file ( $as05_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -540,7 +540,7 @@ class cl_cidadaofamiliavisita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -561,7 +561,7 @@ class cl_cidadaofamiliavisita {
     $sql = "select ";
     if ($campos != "*" ) {
       
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -592,7 +592,7 @@ class cl_cidadaofamiliavisita {
     if ($ordem != null) {
       
       $sql       .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula    = "";
       for($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -607,7 +607,7 @@ class cl_cidadaofamiliavisita {
     $sql = "select ";
     if ($campos != "*" ) {
       
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -639,7 +639,7 @@ class cl_cidadaofamiliavisita {
     if ($ordem != null ) {
       
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -656,7 +656,7 @@ class cl_cidadaofamiliavisita {
     $sql = "select ";
     if ($campos != "*" ) {
   
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
   
@@ -685,7 +685,7 @@ class cl_cidadaofamiliavisita {
     if ($ordem != null ) {
   
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
   
       for ($i = 0; $i < sizeof($campos_sql); $i++) {

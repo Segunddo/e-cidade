@@ -26,7 +26,7 @@ class cl_classificacaocredoresevento {
                  cc35_empprestatip = int4 = Tipo de Evento 
                  ";
    //funcao construtor da classe 
-   function cl_classificacaocredoresevento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("classificacaocredoresevento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_classificacaocredoresevento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc35_sequencial = ($this->cc35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc35_sequencial"]:$this->cc35_sequencial);
-       $this->cc35_classificacaocredores = ($this->cc35_classificacaocredores == ""?@$GLOBALS["HTTP_POST_VARS"]["cc35_classificacaocredores"]:$this->cc35_classificacaocredores);
-       $this->cc35_empprestatip = ($this->cc35_empprestatip == ""?@$GLOBALS["HTTP_POST_VARS"]["cc35_empprestatip"]:$this->cc35_empprestatip);
+       $this->cc35_sequencial = ($this->cc35_sequencial === 0 || $this->cc35_sequencial === 0.0 || $this->cc35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc35_sequencial"]:$this->cc35_sequencial);
+       $this->cc35_classificacaocredores = ($this->cc35_classificacaocredores === 0 || $this->cc35_classificacaocredores === 0.0 || $this->cc35_classificacaocredores == ""?@$GLOBALS["HTTP_POST_VARS"]["cc35_classificacaocredores"]:$this->cc35_classificacaocredores);
+       $this->cc35_empprestatip = ($this->cc35_empprestatip === 0 || $this->cc35_empprestatip === 0.0 || $this->cc35_empprestatip == ""?@$GLOBALS["HTTP_POST_VARS"]["cc35_empprestatip"]:$this->cc35_empprestatip);
      }else{
-       $this->cc35_sequencial = ($this->cc35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc35_sequencial"]:$this->cc35_sequencial);
+       $this->cc35_sequencial = ($this->cc35_sequencial === 0 || $this->cc35_sequencial === 0.0 || $this->cc35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc35_sequencial"]:$this->cc35_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_classificacaocredoresevento {
          $this->cc35_sequencial = $cc35_sequencial; 
        }
      }
-     if(($this->cc35_sequencial == null) || ($this->cc35_sequencial == "") ){ 
+     if(($this->cc35_sequencial == null) || ($this->cc35_sequencial === 0 || $this->cc35_sequencial === 0.0 || $this->cc35_sequencial == "") ){ 
        $this->erro_sql = " Campo cc35_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

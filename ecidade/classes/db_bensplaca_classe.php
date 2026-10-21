@@ -65,7 +65,7 @@ class cl_bensplaca {
                  t41_excluido = boolean = Indica se histórico de placa foi excluído
                  ";
    //funcao construtor da classe
-   function cl_bensplaca() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bensplaca");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,10 +82,10 @@ class cl_bensplaca {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t41_codigo = ($this->t41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_codigo"]:$this->t41_codigo);
-       $this->t41_bem = ($this->t41_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_bem"]:$this->t41_bem);
+       $this->t41_codigo = ($this->t41_codigo === 0 || $this->t41_codigo === 0.0 || $this->t41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_codigo"]:$this->t41_codigo);
+       $this->t41_bem = ($this->t41_bem === 0 || $this->t41_bem === 0.0 || $this->t41_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_bem"]:$this->t41_bem);
        $this->t41_placa = ($this->t41_placa == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_placa"]:$this->t41_placa);
-       $this->t41_placaseq = ($this->t41_placaseq == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_placaseq"]:$this->t41_placaseq);
+       $this->t41_placaseq = ($this->t41_placaseq === 0 || $this->t41_placaseq === 0.0 || $this->t41_placaseq == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_placaseq"]:$this->t41_placaseq);
        $this->t41_obs = ($this->t41_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_obs"]:$this->t41_obs);
        if($this->t41_data == ""){
          $this->t41_data_dia = ($this->t41_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_data_dia"]:$this->t41_data_dia);
@@ -95,10 +95,10 @@ class cl_bensplaca {
             $this->t41_data = $this->t41_data_ano."-".$this->t41_data_mes."-".$this->t41_data_dia;
          }
        }
-       $this->t41_usuario = ($this->t41_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_usuario"]:$this->t41_usuario);
+       $this->t41_usuario = ($this->t41_usuario === 0 || $this->t41_usuario === 0.0 || $this->t41_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_usuario"]:$this->t41_usuario);
        $this->t41_excluido = ($this->t41_excluido == "f"?@$GLOBALS["HTTP_POST_VARS"]["t41_excluido"]:$this->t41_excluido);
      }else{
-       $this->t41_codigo = ($this->t41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_codigo"]:$this->t41_codigo);
+       $this->t41_codigo = ($this->t41_codigo === 0 || $this->t41_codigo === 0.0 || $this->t41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t41_codigo"]:$this->t41_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_bensplaca {
          $this->t41_codigo = $t41_codigo;
        }
      }
-     if(($this->t41_codigo == null) || ($this->t41_codigo == "") ){
+     if(($this->t41_codigo == null) || ($this->t41_codigo === 0 || $this->t41_codigo === 0.0 || $this->t41_codigo == "") ){
        $this->erro_sql = " Campo t41_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -489,7 +489,7 @@ class cl_bensplaca {
    function sql_query ( $t41_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -515,7 +515,7 @@ class cl_bensplaca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_bensplaca {
    function sql_query_file ( $t41_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -548,7 +548,7 @@ class cl_bensplaca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -565,7 +565,7 @@ class cl_bensplaca {
      $sql = "select ";
      if($campos != "*" ) {
 
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++) {
 
@@ -592,7 +592,7 @@ class cl_bensplaca {
      if($ordem != null ) {
 
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++) {
 
@@ -616,7 +616,7 @@ class cl_bensplaca {
    	$sql = "select ";
    	if ($campos != "*" ) {
 
-   		$campos_sql = split("#",$campos);
+   		$campos_sql = preg_split("#\\##m",$campos);
    		$virgula    = "";
 
    		for ($i = 0;$i < sizeof($campos_sql); $i++) {
@@ -642,7 +642,7 @@ class cl_bensplaca {
    	if ($ordem != null) {
 
    		$sql       .= " order by ";
-   		$campos_sql = split("#",$ordem);
+   		$campos_sql = preg_split("#\\##m",$ordem);
    		$virgula    = "";
 
    		for ($i = 0; $i < sizeof($campos_sql); $i++) {

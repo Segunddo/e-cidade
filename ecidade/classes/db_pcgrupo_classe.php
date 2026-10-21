@@ -73,12 +73,12 @@ class cl_pcgrupo {
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->pc03_codgrupo = ($this->pc03_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc03_codgrupo"]:$this->pc03_codgrupo);
+       $this->pc03_codgrupo = ($this->pc03_codgrupo === 0 || $this->pc03_codgrupo === 0.0 || $this->pc03_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc03_codgrupo"]:$this->pc03_codgrupo);
        $this->pc03_descrgrupo = ($this->pc03_descrgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc03_descrgrupo"]:$this->pc03_descrgrupo);
        $this->pc03_ativo = ($this->pc03_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc03_ativo"]:$this->pc03_ativo);
-       $this->pc03_natureza = ($this->pc03_natureza == ""?@$GLOBALS["HTTP_POST_VARS"]["pc03_natureza"]:$this->pc03_natureza);
+       $this->pc03_natureza = ($this->pc03_natureza === 0 || $this->pc03_natureza === 0.0 || $this->pc03_natureza == ""?@$GLOBALS["HTTP_POST_VARS"]["pc03_natureza"]:$this->pc03_natureza);
      }else{
-       $this->pc03_codgrupo = ($this->pc03_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc03_codgrupo"]:$this->pc03_codgrupo);
+       $this->pc03_codgrupo = ($this->pc03_codgrupo === 0 || $this->pc03_codgrupo === 0.0 || $this->pc03_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc03_codgrupo"]:$this->pc03_codgrupo);
      }
    }
 
@@ -136,7 +136,7 @@ class cl_pcgrupo {
          $this->pc03_codgrupo = $pc03_codgrupo; 
        }
      }
-     if(($this->pc03_codgrupo == null) || ($this->pc03_codgrupo == "") ){ 
+     if(($this->pc03_codgrupo == null) || ($this->pc03_codgrupo === 0 || $this->pc03_codgrupo === 0.0 || $this->pc03_codgrupo == "") ){ 
        $this->erro_sql = " Campo pc03_codgrupo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

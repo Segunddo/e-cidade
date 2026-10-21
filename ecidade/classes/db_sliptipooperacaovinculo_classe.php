@@ -50,7 +50,7 @@ class cl_sliptipooperacaovinculo {
                  k153_slipoperacaotipo = int4 = Tipo de Operação 
                  ";
    //funcao construtor da classe 
-   function cl_sliptipooperacaovinculo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sliptipooperacaovinculo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_sliptipooperacaovinculo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k153_slip = ($this->k153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slip"]:$this->k153_slip);
-       $this->k153_slipoperacaotipo = ($this->k153_slipoperacaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slipoperacaotipo"]:$this->k153_slipoperacaotipo);
+       $this->k153_slip = ($this->k153_slip === 0 || $this->k153_slip === 0.0 || $this->k153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slip"]:$this->k153_slip);
+       $this->k153_slipoperacaotipo = ($this->k153_slipoperacaotipo === 0 || $this->k153_slipoperacaotipo === 0.0 || $this->k153_slipoperacaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slipoperacaotipo"]:$this->k153_slipoperacaotipo);
      }else{
-       $this->k153_slip = ($this->k153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slip"]:$this->k153_slip);
+       $this->k153_slip = ($this->k153_slip === 0 || $this->k153_slip === 0.0 || $this->k153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slip"]:$this->k153_slip);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sliptipooperacaovinculo {
        return false;
      }
        $this->k153_slip = $k153_slip; 
-     if(($this->k153_slip == null) || ($this->k153_slip == "") ){ 
+     if(($this->k153_slip == null) || ($this->k153_slip === 0 || $this->k153_slip === 0.0 || $this->k153_slip == "") ){ 
        $this->erro_sql = " Campo k153_slip nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -306,7 +306,7 @@ class cl_sliptipooperacaovinculo {
    function sql_query ( $k153_slip=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_sliptipooperacaovinculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -343,7 +343,7 @@ class cl_sliptipooperacaovinculo {
    function sql_query_file ( $k153_slip=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_sliptipooperacaovinculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

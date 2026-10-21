@@ -75,7 +75,7 @@ class cl_inventario {
   t75_db_depart = int4 = Departamento
   ";
   //funcao construtor da classe
-  function cl_inventario() {
+  function __construct() {
     //classes dos rotulos dos campos
     $this->rotulo = new rotulo("inventario");
     $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,7 +92,7 @@ class cl_inventario {
   // funcao para atualizar campos
   function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->t75_sequencial = ($this->t75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_sequencial"]:$this->t75_sequencial);
+      $this->t75_sequencial = ($this->t75_sequencial === 0 || $this->t75_sequencial === 0.0 || $this->t75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_sequencial"]:$this->t75_sequencial);
       if($this->t75_dataabertura == ""){
         $this->t75_dataabertura_dia = ($this->t75_dataabertura_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_dataabertura_dia"]:$this->t75_dataabertura_dia);
         $this->t75_dataabertura_mes = ($this->t75_dataabertura_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_dataabertura_mes"]:$this->t75_dataabertura_mes);
@@ -117,14 +117,14 @@ class cl_inventario {
           $this->t75_periodofinal = $this->t75_periodofinal_ano."-".$this->t75_periodofinal_mes."-".$this->t75_periodofinal_dia;
         }
       }
-      $this->t75_exercicio = ($this->t75_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_exercicio"]:$this->t75_exercicio);
-      $this->t75_processo = ($this->t75_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_processo"]:$this->t75_processo);
-      $this->t75_acordocomissao = ($this->t75_acordocomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_acordocomissao"]:$this->t75_acordocomissao);
+      $this->t75_exercicio = ($this->t75_exercicio === 0 || $this->t75_exercicio === 0.0 || $this->t75_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_exercicio"]:$this->t75_exercicio);
+      $this->t75_processo = ($this->t75_processo === 0 || $this->t75_processo === 0.0 || $this->t75_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_processo"]:$this->t75_processo);
+      $this->t75_acordocomissao = ($this->t75_acordocomissao === 0 || $this->t75_acordocomissao === 0.0 || $this->t75_acordocomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_acordocomissao"]:$this->t75_acordocomissao);
       $this->t75_observacao = ($this->t75_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_observacao"]:$this->t75_observacao);
-      $this->t75_situacao = ($this->t75_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_situacao"]:$this->t75_situacao);
-      $this->t75_db_depart = ($this->t75_db_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_db_depart"]:$this->t75_db_depart);
+      $this->t75_situacao = ($this->t75_situacao === 0 || $this->t75_situacao === 0.0 || $this->t75_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_situacao"]:$this->t75_situacao);
+      $this->t75_db_depart = ($this->t75_db_depart === 0 || $this->t75_db_depart === 0.0 || $this->t75_db_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_db_depart"]:$this->t75_db_depart);
     }else{
-      $this->t75_sequencial = ($this->t75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_sequencial"]:$this->t75_sequencial);
+      $this->t75_sequencial = ($this->t75_sequencial === 0 || $this->t75_sequencial === 0.0 || $this->t75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t75_sequencial"]:$this->t75_sequencial);
     }
   }
   // funcao para inclusao
@@ -214,7 +214,7 @@ class cl_inventario {
         $this->t75_sequencial = $t75_sequencial;
       }
     }
-    if(($this->t75_sequencial == null) || ($this->t75_sequencial == "") ){
+    if(($this->t75_sequencial == null) || ($this->t75_sequencial === 0 || $this->t75_sequencial === 0.0 || $this->t75_sequencial == "") ){
       $this->erro_sql = " Campo t75_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -607,7 +607,7 @@ class cl_inventario {
   function sql_query ( $t75_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -638,7 +638,7 @@ class cl_inventario {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -651,7 +651,7 @@ class cl_inventario {
   function sql_query_file ( $t75_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -672,7 +672,7 @@ class cl_inventario {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -690,7 +690,7 @@ class cl_inventario {
   function sql_querybensvinculados ( $t75_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select distinct ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -723,7 +723,7 @@ class cl_inventario {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -737,7 +737,7 @@ class cl_inventario {
   function sql_query_left_processo ( $t75_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -768,7 +768,7 @@ class cl_inventario {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

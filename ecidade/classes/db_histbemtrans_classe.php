@@ -50,7 +50,7 @@ class cl_histbemtrans {
                  t97_codtran = int8 = Sequencial da lançamento das transferências 
                  ";
    //funcao construtor da classe 
-   function cl_histbemtrans() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("histbemtrans"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_histbemtrans {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t97_histbem = ($this->t97_histbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t97_histbem"]:$this->t97_histbem);
-       $this->t97_codtran = ($this->t97_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t97_codtran"]:$this->t97_codtran);
+       $this->t97_histbem = ($this->t97_histbem === 0 || $this->t97_histbem === 0.0 || $this->t97_histbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t97_histbem"]:$this->t97_histbem);
+       $this->t97_codtran = ($this->t97_codtran === 0 || $this->t97_codtran === 0.0 || $this->t97_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t97_codtran"]:$this->t97_codtran);
      }else{
-       $this->t97_histbem = ($this->t97_histbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t97_histbem"]:$this->t97_histbem);
-       $this->t97_codtran = ($this->t97_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t97_codtran"]:$this->t97_codtran);
+       $this->t97_histbem = ($this->t97_histbem === 0 || $this->t97_histbem === 0.0 || $this->t97_histbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t97_histbem"]:$this->t97_histbem);
+       $this->t97_codtran = ($this->t97_codtran === 0 || $this->t97_codtran === 0.0 || $this->t97_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t97_codtran"]:$this->t97_codtran);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_histbemtrans {
       $this->atualizacampos();
        $this->t97_histbem = $t97_histbem; 
        $this->t97_codtran = $t97_codtran; 
-     if(($this->t97_histbem == null) || ($this->t97_histbem == "") ){ 
+     if(($this->t97_histbem == null) || ($this->t97_histbem === 0 || $this->t97_histbem === 0.0 || $this->t97_histbem == "") ){ 
        $this->erro_sql = " Campo t97_histbem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_histbemtrans {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->t97_codtran == null) || ($this->t97_codtran == "") ){ 
+     if(($this->t97_codtran == null) || ($this->t97_codtran === 0 || $this->t97_codtran === 0.0 || $this->t97_codtran == "") ){ 
        $this->erro_sql = " Campo t97_codtran nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_histbemtrans {
    function sql_query ( $t97_histbem=null,$t97_codtran=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -354,7 +354,7 @@ class cl_histbemtrans {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -366,7 +366,7 @@ class cl_histbemtrans {
    function sql_query_file ( $t97_histbem=null,$t97_codtran=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_histbemtrans {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

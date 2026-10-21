@@ -61,7 +61,7 @@ class cl_liclicitemanu {
                  l07_liclicitem = int8 = Item da licitação 
                  ";
    //funcao construtor da classe 
-   function cl_liclicitemanu() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liclicitemanu"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,8 +78,8 @@ class cl_liclicitemanu {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l07_codigo = ($this->l07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_codigo"]:$this->l07_codigo);
-       $this->l07_usuario = ($this->l07_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_usuario"]:$this->l07_usuario);
+       $this->l07_codigo = ($this->l07_codigo === 0 || $this->l07_codigo === 0.0 || $this->l07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_codigo"]:$this->l07_codigo);
+       $this->l07_usuario = ($this->l07_usuario === 0 || $this->l07_usuario === 0.0 || $this->l07_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_usuario"]:$this->l07_usuario);
        if($this->l07_data == ""){
          $this->l07_data_dia = ($this->l07_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_data_dia"]:$this->l07_data_dia);
          $this->l07_data_mes = ($this->l07_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_data_mes"]:$this->l07_data_mes);
@@ -90,9 +90,9 @@ class cl_liclicitemanu {
        }
        $this->l07_hora = ($this->l07_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_hora"]:$this->l07_hora);
        $this->l07_motivo = ($this->l07_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_motivo"]:$this->l07_motivo);
-       $this->l07_liclicitem = ($this->l07_liclicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_liclicitem"]:$this->l07_liclicitem);
+       $this->l07_liclicitem = ($this->l07_liclicitem === 0 || $this->l07_liclicitem === 0.0 || $this->l07_liclicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_liclicitem"]:$this->l07_liclicitem);
      }else{
-       $this->l07_codigo = ($this->l07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_codigo"]:$this->l07_codigo);
+       $this->l07_codigo = ($this->l07_codigo === 0 || $this->l07_codigo === 0.0 || $this->l07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l07_codigo"]:$this->l07_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_liclicitemanu {
          $this->l07_codigo = $l07_codigo; 
        }
      }
-     if(($this->l07_codigo == null) || ($this->l07_codigo == "") ){ 
+     if(($this->l07_codigo == null) || ($this->l07_codigo === 0 || $this->l07_codigo === 0.0 || $this->l07_codigo == "") ){ 
        $this->erro_sql = " Campo l07_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_liclicitemanu {
    function sql_query ( $l07_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_liclicitemanu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -513,7 +513,7 @@ class cl_liclicitemanu {
    function sql_query_anu ( $l07_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -542,7 +542,7 @@ class cl_liclicitemanu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -554,7 +554,7 @@ class cl_liclicitemanu {
    function sql_query_file ( $l07_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -575,7 +575,7 @@ class cl_liclicitemanu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

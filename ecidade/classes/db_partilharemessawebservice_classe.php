@@ -54,7 +54,7 @@ class cl_partilharemessawebservice {
                  v89_resposta = text = Resposta 
                  ";
    //funcao construtor da classe 
-   function cl_partilharemessawebservice() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("partilharemessawebservice"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_partilharemessawebservice {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v89_sequencial = ($this->v89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v89_sequencial"]:$this->v89_sequencial);
-       $this->v89_numnov = ($this->v89_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["v89_numnov"]:$this->v89_numnov);
-       $this->v89_db_remessawebservice = ($this->v89_db_remessawebservice == ""?@$GLOBALS["HTTP_POST_VARS"]["v89_db_remessawebservice"]:$this->v89_db_remessawebservice);
+       $this->v89_sequencial = ($this->v89_sequencial === 0 || $this->v89_sequencial === 0.0 || $this->v89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v89_sequencial"]:$this->v89_sequencial);
+       $this->v89_numnov = ($this->v89_numnov === 0 || $this->v89_numnov === 0.0 || $this->v89_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["v89_numnov"]:$this->v89_numnov);
+       $this->v89_db_remessawebservice = ($this->v89_db_remessawebservice === 0 || $this->v89_db_remessawebservice === 0.0 || $this->v89_db_remessawebservice == ""?@$GLOBALS["HTTP_POST_VARS"]["v89_db_remessawebservice"]:$this->v89_db_remessawebservice);
        $this->v89_resposta = ($this->v89_resposta == ""?@$GLOBALS["HTTP_POST_VARS"]["v89_resposta"]:$this->v89_resposta);
      }else{
-       $this->v89_sequencial = ($this->v89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v89_sequencial"]:$this->v89_sequencial);
+       $this->v89_sequencial = ($this->v89_sequencial === 0 || $this->v89_sequencial === 0.0 || $this->v89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v89_sequencial"]:$this->v89_sequencial);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_partilharemessawebservice {
          $this->v89_sequencial = $v89_sequencial; 
        }
      }
-     if(($this->v89_sequencial == null) || ($this->v89_sequencial == "") ){ 
+     if(($this->v89_sequencial == null) || ($this->v89_sequencial === 0 || $this->v89_sequencial === 0.0 || $this->v89_sequencial == "") ){ 
        $this->erro_sql = " Campo v89_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -374,7 +374,7 @@ class cl_partilharemessawebservice {
    function sql_query ( $v89_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_partilharemessawebservice {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -411,7 +411,7 @@ class cl_partilharemessawebservice {
    function sql_query_file ( $v89_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_partilharemessawebservice {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

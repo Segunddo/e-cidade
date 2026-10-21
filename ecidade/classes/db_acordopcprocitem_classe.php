@@ -56,7 +56,7 @@ class cl_acordopcprocitem {
                  ac23_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_acordopcprocitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordopcprocitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_acordopcprocitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac23_sequencial = ($this->ac23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_sequencial"]:$this->ac23_sequencial);
-       $this->ac23_pcprocitem = ($this->ac23_pcprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_pcprocitem"]:$this->ac23_pcprocitem);
-       $this->ac23_acordoitem = ($this->ac23_acordoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_acordoitem"]:$this->ac23_acordoitem);
-       $this->ac23_quantidade = ($this->ac23_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_quantidade"]:$this->ac23_quantidade);
-       $this->ac23_valor = ($this->ac23_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_valor"]:$this->ac23_valor);
+       $this->ac23_sequencial = ($this->ac23_sequencial === 0 || $this->ac23_sequencial === 0.0 || $this->ac23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_sequencial"]:$this->ac23_sequencial);
+       $this->ac23_pcprocitem = ($this->ac23_pcprocitem === 0 || $this->ac23_pcprocitem === 0.0 || $this->ac23_pcprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_pcprocitem"]:$this->ac23_pcprocitem);
+       $this->ac23_acordoitem = ($this->ac23_acordoitem === 0 || $this->ac23_acordoitem === 0.0 || $this->ac23_acordoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_acordoitem"]:$this->ac23_acordoitem);
+       $this->ac23_quantidade = ($this->ac23_quantidade === 0 || $this->ac23_quantidade === 0.0 || $this->ac23_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_quantidade"]:$this->ac23_quantidade);
+       $this->ac23_valor = ($this->ac23_valor === 0 || $this->ac23_valor === 0.0 || $this->ac23_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_valor"]:$this->ac23_valor);
      }else{
-       $this->ac23_sequencial = ($this->ac23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_sequencial"]:$this->ac23_sequencial);
+       $this->ac23_sequencial = ($this->ac23_sequencial === 0 || $this->ac23_sequencial === 0.0 || $this->ac23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac23_sequencial"]:$this->ac23_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_acordopcprocitem {
          $this->ac23_sequencial = $ac23_sequencial; 
        }
      }
-     if(($this->ac23_sequencial == null) || ($this->ac23_sequencial == "") ){ 
+     if(($this->ac23_sequencial == null) || ($this->ac23_sequencial === 0 || $this->ac23_sequencial === 0.0 || $this->ac23_sequencial == "") ){ 
        $this->erro_sql = " Campo ac23_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -398,7 +398,7 @@ class cl_acordopcprocitem {
    function sql_query ( $ac23_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_acordopcprocitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_acordopcprocitem {
    function sql_query_file ( $ac23_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_acordopcprocitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_acordopcprocitem {
    function sql_query_acordo ( $ac23_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_acordopcprocitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

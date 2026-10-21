@@ -60,7 +60,7 @@ class cl_benstransforigemdestino {
                  t34_departamentoorigem = int4 = Departamento Origem 
                  ";
    //funcao construtor da classe 
-   function cl_benstransforigemdestino() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("benstransforigemdestino"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_benstransforigemdestino {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t34_sequencial = ($this->t34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_sequencial"]:$this->t34_sequencial);
-       $this->t34_transferencia = ($this->t34_transferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_transferencia"]:$this->t34_transferencia);
-       $this->t34_bem = ($this->t34_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_bem"]:$this->t34_bem);
+       $this->t34_sequencial = ($this->t34_sequencial === 0 || $this->t34_sequencial === 0.0 || $this->t34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_sequencial"]:$this->t34_sequencial);
+       $this->t34_transferencia = ($this->t34_transferencia === 0 || $this->t34_transferencia === 0.0 || $this->t34_transferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_transferencia"]:$this->t34_transferencia);
+       $this->t34_bem = ($this->t34_bem === 0 || $this->t34_bem === 0.0 || $this->t34_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_bem"]:$this->t34_bem);
        $this->t34_divisaoorigem = ($this->t34_divisaoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_divisaoorigem"]:$this->t34_divisaoorigem);
        $this->t34_divisaodestino = ($this->t34_divisaodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_divisaodestino"]:$this->t34_divisaodestino);
-       $this->t34_departamentodestino = ($this->t34_departamentodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_departamentodestino"]:$this->t34_departamentodestino);
-       $this->t34_departamentoorigem = ($this->t34_departamentoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_departamentoorigem"]:$this->t34_departamentoorigem);
+       $this->t34_departamentodestino = ($this->t34_departamentodestino === 0 || $this->t34_departamentodestino === 0.0 || $this->t34_departamentodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_departamentodestino"]:$this->t34_departamentodestino);
+       $this->t34_departamentoorigem = ($this->t34_departamentoorigem === 0 || $this->t34_departamentoorigem === 0.0 || $this->t34_departamentoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_departamentoorigem"]:$this->t34_departamentoorigem);
      }else{
-       $this->t34_sequencial = ($this->t34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_sequencial"]:$this->t34_sequencial);
+       $this->t34_sequencial = ($this->t34_sequencial === 0 || $this->t34_sequencial === 0.0 || $this->t34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t34_sequencial"]:$this->t34_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_benstransforigemdestino {
          $this->t34_sequencial = $t34_sequencial; 
        }
      }
-     if(($this->t34_sequencial == null) || ($this->t34_sequencial == "") ){ 
+     if(($this->t34_sequencial == null) || ($this->t34_sequencial === 0 || $this->t34_sequencial === 0.0 || $this->t34_sequencial == "") ){ 
        $this->erro_sql = " Campo t34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -460,7 +460,7 @@ class cl_benstransforigemdestino {
    function sql_query ( $t34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -503,7 +503,7 @@ class cl_benstransforigemdestino {
      
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
 
        for($i=0;$i<sizeof($campos_sql);$i++){
@@ -517,7 +517,7 @@ class cl_benstransforigemdestino {
    function sql_query_file ( $t34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_benstransforigemdestino {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_benstransforigemdestino {
   function sql_query_desprocessamento ( $t34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -574,7 +574,7 @@ class cl_benstransforigemdestino {
       $sql .= $sql2;
       if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
       $sql .= $virgula.$campos_sql[$i];

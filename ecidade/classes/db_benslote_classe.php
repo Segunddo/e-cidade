@@ -52,7 +52,7 @@ class cl_benslote {
                  t43_bem = int8 = Código do bem 
                  ";
    //funcao construtor da classe 
-   function cl_benslote() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("benslote"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_benslote {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t43_codigo = ($this->t43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t43_codigo"]:$this->t43_codigo);
-       $this->t43_codlote = ($this->t43_codlote == ""?@$GLOBALS["HTTP_POST_VARS"]["t43_codlote"]:$this->t43_codlote);
-       $this->t43_bem = ($this->t43_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t43_bem"]:$this->t43_bem);
+       $this->t43_codigo = ($this->t43_codigo === 0 || $this->t43_codigo === 0.0 || $this->t43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t43_codigo"]:$this->t43_codigo);
+       $this->t43_codlote = ($this->t43_codlote === 0 || $this->t43_codlote === 0.0 || $this->t43_codlote == ""?@$GLOBALS["HTTP_POST_VARS"]["t43_codlote"]:$this->t43_codlote);
+       $this->t43_bem = ($this->t43_bem === 0 || $this->t43_bem === 0.0 || $this->t43_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t43_bem"]:$this->t43_bem);
      }else{
-       $this->t43_codigo = ($this->t43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t43_codigo"]:$this->t43_codigo);
+       $this->t43_codigo = ($this->t43_codigo === 0 || $this->t43_codigo === 0.0 || $this->t43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t43_codigo"]:$this->t43_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_benslote {
          $this->t43_codigo = $t43_codigo; 
        }
      }
-     if(($this->t43_codigo == null) || ($this->t43_codigo == "") ){ 
+     if(($this->t43_codigo == null) || ($this->t43_codigo === 0 || $this->t43_codigo === 0.0 || $this->t43_codigo == "") ){ 
        $this->erro_sql = " Campo t43_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

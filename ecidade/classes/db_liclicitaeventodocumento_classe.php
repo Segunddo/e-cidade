@@ -30,7 +30,7 @@ class cl_liclicitaeventodocumento {
                  l47_tipodocumento = varchar(3) = Tipo de Documento 
                  ";
    //funcao construtor da classe 
-   function cl_liclicitaeventodocumento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liclicitaeventodocumento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_liclicitaeventodocumento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l47_sequencial = ($this->l47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l47_sequencial"]:$this->l47_sequencial);
-       $this->l47_liclicitaevento = ($this->l47_liclicitaevento == ""?@$GLOBALS["HTTP_POST_VARS"]["l47_liclicitaevento"]:$this->l47_liclicitaevento);
+       $this->l47_sequencial = ($this->l47_sequencial === 0 || $this->l47_sequencial === 0.0 || $this->l47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l47_sequencial"]:$this->l47_sequencial);
+       $this->l47_liclicitaevento = ($this->l47_liclicitaevento === 0 || $this->l47_liclicitaevento === 0.0 || $this->l47_liclicitaevento == ""?@$GLOBALS["HTTP_POST_VARS"]["l47_liclicitaevento"]:$this->l47_liclicitaevento);
        $this->l47_nomearquivo = ($this->l47_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l47_nomearquivo"]:$this->l47_nomearquivo);
-       $this->l47_arquivo = ($this->l47_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l47_arquivo"]:$this->l47_arquivo);
+       $this->l47_arquivo = ($this->l47_arquivo === 0 || $this->l47_arquivo === 0.0 || $this->l47_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l47_arquivo"]:$this->l47_arquivo);
        $this->l47_tipodocumento = ($this->l47_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["l47_tipodocumento"]:$this->l47_tipodocumento);
      }else{
-       $this->l47_sequencial = ($this->l47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l47_sequencial"]:$this->l47_sequencial);
+       $this->l47_sequencial = ($this->l47_sequencial === 0 || $this->l47_sequencial === 0.0 || $this->l47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l47_sequencial"]:$this->l47_sequencial);
      }
    }
    // funcao para Inclusão
@@ -119,7 +119,7 @@ class cl_liclicitaeventodocumento {
          $this->l47_sequencial = $l47_sequencial; 
        }
      }
-     if(($this->l47_sequencial == null) || ($this->l47_sequencial == "") ){ 
+     if(($this->l47_sequencial == null) || ($this->l47_sequencial === 0 || $this->l47_sequencial === 0.0 || $this->l47_sequencial == "") ){ 
        $this->erro_sql = " Campo l47_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
