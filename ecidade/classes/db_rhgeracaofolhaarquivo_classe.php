@@ -67,7 +67,7 @@ class cl_rhgeracaofolhaarquivo {
                  rh105_instit = int4 = Instituição
                  ";
    //funcao construtor da classe
-   function cl_rhgeracaofolhaarquivo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhgeracaofolhaarquivo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,7 +84,7 @@ class cl_rhgeracaofolhaarquivo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh105_sequencial = ($this->rh105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_sequencial"]:$this->rh105_sequencial);
+       $this->rh105_sequencial = ($this->rh105_sequencial === 0 || $this->rh105_sequencial === 0.0 || $this->rh105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_sequencial"]:$this->rh105_sequencial);
        if($this->rh105_dtgeracao == ""){
          $this->rh105_dtgeracao_dia = @$GLOBALS["HTTP_POST_VARS"]["rh105_dtgeracao_dia"];
          $this->rh105_dtgeracao_mes = @$GLOBALS["HTTP_POST_VARS"]["rh105_dtgeracao_mes"];
@@ -101,14 +101,14 @@ class cl_rhgeracaofolhaarquivo {
             $this->rh105_dtdeposito = $this->rh105_dtdeposito_ano."-".$this->rh105_dtdeposito_mes."-".$this->rh105_dtdeposito_dia;
          }
        }
-       $this->rh105_codarq = ($this->rh105_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_codarq"]:$this->rh105_codarq);
+       $this->rh105_codarq = ($this->rh105_codarq === 0 || $this->rh105_codarq === 0.0 || $this->rh105_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_codarq"]:$this->rh105_codarq);
        $this->rh105_codbcofebraban = ($this->rh105_codbcofebraban == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_codbcofebraban"]:$this->rh105_codbcofebraban);
-       $this->rh105_tipoarq = ($this->rh105_tipoarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_tipoarq"]:$this->rh105_tipoarq);
-       $this->rh105_folha = ($this->rh105_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_folha"]:$this->rh105_folha);
+       $this->rh105_tipoarq = ($this->rh105_tipoarq === 0 || $this->rh105_tipoarq === 0.0 || $this->rh105_tipoarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_tipoarq"]:$this->rh105_tipoarq);
+       $this->rh105_folha = ($this->rh105_folha === 0 || $this->rh105_folha === 0.0 || $this->rh105_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_folha"]:$this->rh105_folha);
        $this->rh105_arquivotxt = ($this->rh105_arquivotxt == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_arquivotxt"]:$this->rh105_arquivotxt);
-       $this->rh105_instit = ($this->rh105_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_instit"]:$this->rh105_instit);
+       $this->rh105_instit = ($this->rh105_instit === 0 || $this->rh105_instit === 0.0 || $this->rh105_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_instit"]:$this->rh105_instit);
      }else{
-       $this->rh105_sequencial = ($this->rh105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_sequencial"]:$this->rh105_sequencial);
+       $this->rh105_sequencial = ($this->rh105_sequencial === 0 || $this->rh105_sequencial === 0.0 || $this->rh105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_sequencial"]:$this->rh105_sequencial);
      }
    }
    // funcao para inclusao
@@ -201,7 +201,7 @@ class cl_rhgeracaofolhaarquivo {
          $this->rh105_sequencial = $rh105_sequencial;
        }
      }
-     if(($this->rh105_sequencial == null) || ($this->rh105_sequencial == "") ){
+     if(($this->rh105_sequencial == null) || ($this->rh105_sequencial === 0 || $this->rh105_sequencial === 0.0 || $this->rh105_sequencial == "") ){
        $this->erro_sql = " Campo rh105_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -562,7 +562,7 @@ class cl_rhgeracaofolhaarquivo {
    function sql_query ( $rh105_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -589,7 +589,7 @@ class cl_rhgeracaofolhaarquivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -602,7 +602,7 @@ class cl_rhgeracaofolhaarquivo {
    function sql_query_file ( $rh105_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -623,7 +623,7 @@ class cl_rhgeracaofolhaarquivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

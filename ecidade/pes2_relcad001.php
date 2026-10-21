@@ -100,7 +100,7 @@ if(isset($salvarrelatorio)){
 			if($cldb_relattabelas->erro_status == 0) {
 				$erro_msg = $cldb_relattabelas->erro_msg;
 				$sqlerro = true;
-				break;
+				exit; // era break fora de laco: no 5.6 a execucao morria aqui ("Cannot break/continue 1 level")
 			}
 	  }
 	
@@ -109,7 +109,7 @@ if(isset($salvarrelatorio)){
 			if($cldb_relatselecionados->erro_status == 0) {
 				$erro_msg = $cldb_relatselecionados->erro_msg;
 				$sqlerro = true;
-				break;
+				exit; // era break fora de laco: no 5.6 a execucao morria aqui
 			}
 	  }
 	
@@ -118,7 +118,7 @@ if(isset($salvarrelatorio)){
 			if($cldb_relatfiltros->erro_status == 0) {
 				$erro_msg = $cldb_relatfiltros->erro_msg;
 				$sqlerro = true;
-				break;
+				exit; // era break fora de laco: no 5.6 a execucao morria aqui
 			}
 	  }
 	
@@ -127,7 +127,7 @@ if(isset($salvarrelatorio)){
 				if($cldb_relatcabec->erro_status == 0) {
 					$erro_msg = $cldb_relatcabec->erro_msg;
 					$sqlerro = true;
-					break;
+					exit; // era break fora de laco: no 5.6 a execucao morria aqui
 				}
 	  }
 	
@@ -136,7 +136,7 @@ if(isset($salvarrelatorio)){
 			if($cldb_relatsoma->erro_status == 0) {
 				$erro_msg = $cldb_relatsoma->erro_msg;
 				$sqlerro = true;
-				break;
+				exit; // era break fora de laco: no 5.6 a execucao morria aqui
 			}
 	  }
 	
@@ -145,7 +145,7 @@ if(isset($salvarrelatorio)){
 			if($cldb_relatquebra->erro_status == 0) {
 				$erro_msg = $cldb_relatquebra->erro_msg;
 				$sqlerro = true;
-				break;
+				exit; // era break fora de laco: no 5.6 a execucao morria aqui
 			}
 	  }
   }else{
@@ -188,7 +188,7 @@ if(isset($salvarrelatorio)){
   }
 
   if($sqlerro == false){
-  	$arr_tabelas_selecionadas = split(",",$campo_auxilio_tabelasel);
+  	$arr_tabelas_selecionadas = preg_split("#,#m",$campo_auxilio_tabelasel);
   	for($i=0; $i<count($arr_tabelas_selecionadas); $i++){
 		  $cldb_relattabelas->db92_codrel = $db91_codrel;
 		  $cldb_relattabelas->db92_codarq = $arr_tabelas_selecionadas[$i];
@@ -202,7 +202,7 @@ if(isset($salvarrelatorio)){
   }
 
   if($sqlerro == false){
-  	$arr_camposs_selecionados = split(",",$campo_auxilio_sselecion);
+  	$arr_camposs_selecionados = preg_split("#,#m",$campo_auxilio_sselecion);
   	for($i=0; $i<count($arr_camposs_selecionados); $i++){
 		  $cldb_relatselecionados->db93_codrel = $db91_codrel;
 		  $cldb_relatselecionados->db93_codcam = $arr_camposs_selecionados[$i];
@@ -218,8 +218,8 @@ if(isset($salvarrelatorio)){
   for($i=1; $i<4; $i++){
 	  if($sqlerro == false){
 	  	$variavelteste = "campo_camporecb_filtro".$i;
-	  	if(trim($$variavelteste) != ""){
-		  	$arr_filtros_selecionados1 = split("#",$$variavelteste);
+	  	if(trim(${$variavelteste}) != ""){
+		  	$arr_filtros_selecionados1 = preg_split("#\\##m",${$variavelteste});
 		  	$campofiltro01 = $arr_filtros_selecionados1[0];
 		  	$valorfiltro11 = $arr_filtros_selecionados1[1];
 		  	$valorfiltro12 = "";
@@ -243,10 +243,10 @@ if(isset($salvarrelatorio)){
   for($i=1; $i<7; $i++){
 	  if($sqlerro == false){
 	  	$variavelteste = "campo_camporecb_comple".$i;
-	  	if(trim($$variavelteste) != ""){
+	  	if(trim(${$variavelteste}) != ""){
         $linha = ($i+1);
 			  $cldb_relatcabec->db95_codrel = $db91_codrel;
-			  $cldb_relatcabec->db95_compl  = $$variavelteste;
+			  $cldb_relatcabec->db95_compl  = ${$variavelteste};
 			  $cldb_relatcabec->db95_linha  = $linha;
 			  $cldb_relatcabec->incluir(null);
 				if($cldb_relatcabec->erro_status == 0) {
@@ -259,7 +259,7 @@ if(isset($salvarrelatorio)){
   }
 
   if($sqlerro == false){
-  	$arr_camposs_somatoriocam = split(",",$campo_camporecb_somator);
+  	$arr_camposs_somatoriocam = preg_split("#,#m",$campo_camporecb_somator);
   	for($i=0; $i<count($arr_camposs_somatoriocam); $i++){
 		  $cldb_relatsoma->db96_codrel = $db91_codrel;
 		  $cldb_relatsoma->db96_codcam = $arr_camposs_somatoriocam[$i];
@@ -273,8 +273,8 @@ if(isset($salvarrelatorio)){
   }
 
   if($sqlerro == false){
-  	$arr_camposs_quebrapagcam = split(",",$campo_camporecb_qbrapor);
-  	$arr_camposs_totalizacams = split(",",$campo_camporecb_totaliz);
+  	$arr_camposs_quebrapagcam = preg_split("#,#m",$campo_camporecb_qbrapor);
+  	$arr_camposs_totalizacams = preg_split("#,#m",$campo_camporecb_totaliz);
   	for($i=0; $i<count($arr_camposs_quebrapagcam); $i++){
   		$totaliza = "false";
   		if(in_array($arr_camposs_quebrapagcam[$i],$arr_camposs_totalizacams)){
@@ -340,10 +340,10 @@ if(isset($salvarrelatorio)){
   	$campo_seleciona_filtros.= $virgul.$db94_codcam;
   	$camporecebefiltro = "campo_camporecb_filtro".($i+1);
   	$camporecebedadosf = "filtro".($i+1);
-  	$$camporecebefiltro = $db94_codcam."#".$db94_valini;
-  	$$camporecebedadosf = $db94_codcam;
+  	${$camporecebefiltro} = $db94_codcam."#".$db94_valini;
+  	${$camporecebedadosf} = $db94_codcam;
   	if(trim($db94_valfim) != ""){
-  	  $$camporecebefiltro.= "#".$db94_valfim;
+  	  ${$camporecebefiltro}.= "#".$db94_valfim;
   	}
   	$virgul = ",";
   }
@@ -358,7 +358,7 @@ if(isset($salvarrelatorio)){
   for($i=0; $i<$cldb_relatcabec->numrows; $i++){
   	db_fieldsmemory($result_cabec, $i);
   	$campocomplementar = "campo_camporecb_comple".($db95_linha-1);
-  	$$campocomplementar = $db95_compl;
+  	${$campocomplementar} = $db95_compl;
   }
 
   $virgul = "";

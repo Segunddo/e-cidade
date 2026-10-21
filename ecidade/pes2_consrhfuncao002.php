@@ -300,7 +300,7 @@ for($x = 0; $x < pg_numrows($result_funcoes); $x ++) {
     $linha .= $ocupados.$separador;
     $linha .= $saldo.$separador;
 
-    fputs($fArquivo,$linha."\n");
+    if (is_resource($fArquivo)) fputs($fArquivo,$linha."\n"); // fputs(null): false sem efeito no 5.6
   }
 
 }
@@ -355,7 +355,7 @@ else  {
     $linha .= $totalocup.$separador;
     $linha .= $totalsald.$separador;
 
-    fputs($fArquivo,$linha."\n");
+    if (is_resource($fArquivo)) fputs($fArquivo,$linha."\n");
 
-    fclose($fArquivo);
+    if (is_resource($fArquivo)) fclose($fArquivo); // fclose(null): false sem efeito no 5.6
 }

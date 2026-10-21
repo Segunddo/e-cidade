@@ -36,7 +36,8 @@ $clrotulo->label('r01_funcao');
 $clrotulo->label('r37_descr');
 $clrotulo->label('lei');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $oGet = db_utils::postMemory($_GET,0);
 
@@ -73,7 +74,7 @@ $sSql .= " {$sWhere}                                                            
 $sSql .= " order by r37_descr,rh37_funcao,z01_nome                                     ";
 
 $rsSql = db_query($sSql);
-$iRows = pg_numrows($rsSql);
+$iRows = ($rsSql ? pg_numrows($rsSql) : null);
 if ($iRows == 0) {
   $sMsg = "Não existem funcionários no período de {$oGet->mes} / {$oGet->ano}";
   db_redireciona("db_erros.php?fechar=true&db_erro={$sMsg}");

@@ -78,8 +78,8 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes1\|pes3\|pes4)[0-9]*_)` — **4.357 arquivos** + 367 por `map` |
-| **Próximo passo** | **Área RECURSOS HUMANOS em andamento** (branch `3recursoshumanos-migrado`, ver *ÁREA RECURSOS HUMANOS*): `rh`+`eso`, `rec`, `pes3`+`pes4` e `pes1` feitos; próximo `pes2` (ver *PARA RETOMAR* na seção). |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 367 por `map` |
+| **Próximo passo** | **Área RECURSOS HUMANOS em andamento** (branch `3recursoshumanos-migrado`, ver *ÁREA RECURSOS HUMANOS*): Fase A concluída (`rh`, `eso`, `rec`, `pes` inteiros); próximo: Fase B (~10 telas pelo `map`) (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3400,6 +3400,7 @@ ser salvo em dump.
 | `rec` | 568 | 134 Rector + 15 à mão | 568/568 | 171/172 | 4.893 linhas, 139 classes, 0 div. | **278/279** + 1 caracterizada |
 | `pes3`+`pes4` | 900 | 148 Rector + ~30 à mão | 900/900 | 440/443 (3 artefatos conhecidos) | 12.839 linhas, 0 div. além dos artefatos | **269/270** + 1 pendente (`.phar`) |
 | `pes1` | 1.142 | 256 Rector + 3 à mão | 1.142/1.142 | 482/485 (3 artefatos conhecidos) | 13.257 linhas, 0 div. além dos artefatos | **370/370** |
+| `pes2` | 775 | 233 Rector + ~200 à mão | 766/766 portáveis (9 já não compilam no 5.6) | 170/170 | 6.276 linhas, 0 div. | **515/515** |
 
 **`rh`+`eso`** — nenhum arquivo de tela precisou mudar: os 29 são 16 `classes/` e 13 `func_`.
 Rector só com regras já vetadas (16 guardas, 13 `parse_str`+`extract`, 10 construtores, 4
@@ -3528,7 +3529,54 @@ escrita) agora é versionado — a cópia fora do repositório sumiu entre sess�
 estar no `/tmp` compartilhado dos containers. O portão de funções passou a ignorar comentários de
 linha (era a origem do falso positivo `mae` do sublote anterior).
 
-**PARA RETOMAR:** falta `pes2` (515 telas, ~310), depois a Fase B
+**`pes2`** (515 telas, último sublote — quase todo de relatórios) — 344/515 na 1ª bateria → **515/515**.
+
+- **185 guardas `pg_*` (`null`) pelo ciclo, em 145 arquivos** — o maior volume do projeto. Causa medida no log
+  do PostgreSQL: as telas `*002.php` são relatórios que a bateria abre **sem os parâmetros** do formulário
+  anterior, e a SQL sai com buracos (`… = and …`: 615 erros de sintaxe perto de `and`, 131 perto de
+  `join`). O 5.6 seguia com `false`, caía no "sem dados" e redirecionava (~110 bytes); o 8.5 parava no
+  `pg_numrows`. Revisão: **nenhuma** das variáveis guardadas é comparada com `===`/`!==` nos 145 arquivos.
+- **9 arquivos que já NÃO compilam no 5.6**, deixados intocados como os do `dbagata/`: as 8 telas de
+  **geração de arquivo bancário da folha** (`pes2_*emitearqbanco*`, `*contramatricial002`,
+  `emitebb200lay002`, `emitearqbancocnab240_002`) — passagem por referência na **chamada**
+  (`db_setaPropriedadesLayoutTxt(&$x, …)`), erro de compilação desde o PHP 5.4 — e
+  `pes2_arrcontramatricial001.php`. Os `split`/`parse_str` que sobram no universo estão todos neles
+  (contador por *token* sobre os 766 portáveis: zero).
+- **Denylist 30 → 31 (OITAVA vez): `RemoveReferenceFromCallRector`.** Remove o `&` dessas chamadas — só
+  pode agir em código que já não compila no 5.6, então toda aplicação dela é **conserto**.
+- **`break` fora de laço**: `pes2_relcad001.php` — 6 blocos de erro alcançáveis → `exit;`, com o `php -l` do
+  8.5 dirigindo um a um (os 6 `break` restantes estão em laços); `pes2_relfichafinanceiratxt002.php` —
+  logo depois de `db_redireciona()` (que termina em `exit` no original e na cópia) → removido.
+- **5 `each()` em `fpdf151/pdf2.php`** (parte da dívida da *6ª lacuna*): forma `key`/`current`/`next` dentro
+  da condição do `while`, medida idêntica ao `each()` do 5.6 inclusive com `break` e na posição do
+  ponteiro depois do laço. O `pdf4.php` ainda tem 5 `each()`, não alcançados.
+- Família "argumento inválido virou `TypeError`/`ValueError`", na linha que apareceu: `mktime()` com
+  `substr()` de data vazia (o 5.6 recebia `false` → 0 → `mktime(0,0,0,0,0,0)` = 943927200; `(int)` em cada
+  `substr` reproduz), `file("")`, `fputs`/`fclose(null)`, `count`/`sizeof(false)` (= 1 no 5.6, igual a
+  `(array)false`), `cal_days_in_month` (`try`/`catch`), `db_formatar()` com 1 argumento (o `null` explícito),
+  `pg_result` aninhado e `stdClass` sobre `null`.
+- **9ª manifestação da RFC das comparações — NÚCLEO `fpdf151/fpdf.php:967`, `Cell()`:** `if($align=='R')`
+  com o alinhamento passado como inteiro `0`. No 5.6 `0 == 'R'` é verdadeiro e a célula saía **à direita**;
+  no 8.5, à esquerda. HTTP 200, PDF válido, 2 bytes de diferença — só descomprimindo o `FlateDecode` se via
+  o `x` da célula mudar de 35,79 para 17,01. Correção `|| $align===0 || $align===0.0`, igual ao 5.6 em 10
+  valores. As irmãs `=='J'` (l. 1157) e `=='U'/'D'` (l. 2907–2932) têm a mesma forma e **não** foram tocadas
+  (não apareceram). Sem cópia no `modification/`.
+
+Regressão: o núcleo foi tocado (`fpdf.php`), mas a mudança só altera o caso em que o 8.5 já gerava PDF
+diferente do 5.6 — e todas as baterias anteriores comparam bytes de PDF. Rodada mesmo assim a bateria dos
+lotes de RH já verificados + relatórios `iss2_`: **1.084/1.086**, exatamente as duas caracterizadas (`.phar` e
+`rec2_espelhoponto002`). Roteamento: com os 1.155 `pes*_` portados, o `location` voltou a um `pes` só; a
+exceção do `.phar` continua antes dele.
+
+#### 🏁 FASE A DA ÁREA RH CONCLUÍDA — `rh`, `eso`, `rec`, `pes` inteiros
+
+| | |
+|---|---|
+| Telas roteadas por `location` | **1.528** (`pes` 1.155, `rec` 279, `eso` 85, `rh` 9), menos 1 exceção do `.phar` |
+| **Bateria** | **1.526 / 1.528** — as 2 restantes são o laço eterno do 5.6 (`rec2_espelhoponto002`) e a pendente do `.phar`. Entre as idênticas estão `eso02_preenchimentoesocial001` (o mesmo 500 de negócio nos dois) e as 9 do `pes2` que não compilam no 5.6 (falham igual) |
+| Arquivos alterados | **849** nos cinco lotes (contados pelo git) |
+
+**PARA RETOMAR:** a Fase B
 (as ~10 telas de `es`/`con`/`cai`/`lic`/`sped` pelo `map`), o `.phar`, o nível 3 nos cadastros e o
 cenário de cálculo. A sessão autenticada usada foi `98d016cc…`; os ciclos de guarda precisam de
 `/tmp/_sess.bak` no 5.6 (o `cmp.py` o cria ao rodar).

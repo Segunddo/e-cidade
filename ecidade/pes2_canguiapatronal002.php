@@ -33,7 +33,8 @@ $clbasesr = new cl_basesr;
 
 $sql_in = $clbasesr->sql_query_file($ano,$mes,"B995",null,db_getsession("DB_instit"),"r09_rubric");
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $sql_inst = "select * from db_config where codigo = ".db_getsession("DB_instit");
@@ -57,7 +58,7 @@ $res_nome = db_query($sql_nome);
 $virg_nome = '';
 $descr_nome = '';
 
-for($inome=0;$inome<pg_numrows($res_nome);$inome++){
+for($inome=0;$inome<($res_nome ? pg_numrows($res_nome) : null);$inome++){
  db_fieldsmemory($res_nome,$inome);
  $descr_nome .= $virg_nome.$r33_nome;
  $virg_nome   = ', '; 
@@ -78,7 +79,7 @@ $dev      = 0;
 $desco    = 0;
 $patronal = 0;
 
-for($inome=0;$inome<pg_numrows($res_nome);$inome++){
+for($inome=0;$inome<($res_nome ? pg_numrows($res_nome) : null);$inome++){
     db_fieldsmemory($res_nome,$inome);
 
     if($recurso == 'g'){

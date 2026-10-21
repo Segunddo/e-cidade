@@ -34,7 +34,8 @@ require_once(modification("classes/db_rharqbanco_classe.php"));
 require_once(modification("classes/db_rhgeracaofolhaarquivo_classe.php"));
 require_once(modification("classes/db_rhgeracaofolhaarquivoreg_classe.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 $oGet = db_utils::postMemory($HTTP_GET_VARS);
 
 $clRhGeracaoFolha = new cl_rhgeracaofolha();
@@ -63,14 +64,14 @@ try {
   $oDadosArquivoBancario = db_utils::fieldsMemory($rsArquivoBancario,0);
 
   if(isset($oGet->datageracao) && $oGet->datageracao!=""){
-    $datag = split('-',$oGet->datageracao);
+    $datag = preg_split('#\-#m',$oGet->datageracao);
     $datag_dia=$datag[2];
     $datag_mes=$datag[1];
     $datag_ano=$datag[0];
   }
 
   if(isset($oGet->datadeposito) && $oGet->datadeposito!=""){
-    $datad = split('-',$oGet->datadeposito);
+    $datad = preg_split('#\-#m',$oGet->datadeposito);
     $datad_dia = $datad[2];
     $datad_mes = $datad[1];
     $datad_ano = $datad[0];

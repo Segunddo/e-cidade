@@ -35,7 +35,8 @@ include(modification("classes/db_pensao_classe.php"));
 include(modification("classes/db_rharqbanco_classe.php"));
 include(modification("classes/db_orctiporec_classe.php"));
 require_once modification("libs/db_utils.php");
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 
@@ -114,13 +115,13 @@ if($clrharqbanco->numrows>0){
     $horageracao = date("H:i:s");
 
     if(isset($datageracao) && $datageracao!=""){
-      $datag = split('-',$datageracao);
+      $datag = preg_split('#\-#m',$datageracao);
       $datag_dia = $datag[2];
       $datag_mes = $datag[1];
       $datag_ano = $datag[0];
     }
     if(isset($datadeposit) && $datadeposit!=""){
-      $datad = split('-',$datadeposit);
+      $datad = preg_split('#\-#m',$datadeposit);
       $datad_dia = $datad[2];
       $datad_mes = $datad[1];
       $datad_ano = $datad[0];

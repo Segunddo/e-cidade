@@ -54,7 +54,7 @@ class cl_db_relatcabec {
                  db95_linha = int4 = Linha cabeçalho 
                  ";
    //funcao construtor da classe 
-   function cl_db_relatcabec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_relatcabec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_db_relatcabec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db95_codigo = ($this->db95_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codigo"]:$this->db95_codigo);
-       $this->db95_codrel = ($this->db95_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codrel"]:$this->db95_codrel);
+       $this->db95_codigo = ($this->db95_codigo === 0 || $this->db95_codigo === 0.0 || $this->db95_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codigo"]:$this->db95_codigo);
+       $this->db95_codrel = ($this->db95_codrel === 0 || $this->db95_codrel === 0.0 || $this->db95_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codrel"]:$this->db95_codrel);
        $this->db95_compl = ($this->db95_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_compl"]:$this->db95_compl);
-       $this->db95_linha = ($this->db95_linha == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_linha"]:$this->db95_linha);
+       $this->db95_linha = ($this->db95_linha === 0 || $this->db95_linha === 0.0 || $this->db95_linha == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_linha"]:$this->db95_linha);
      }else{
-       $this->db95_codigo = ($this->db95_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codigo"]:$this->db95_codigo);
+       $this->db95_codigo = ($this->db95_codigo === 0 || $this->db95_codigo === 0.0 || $this->db95_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codigo"]:$this->db95_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_db_relatcabec {
          $this->db95_codigo = $db95_codigo; 
        }
      }
-     if(($this->db95_codigo == null) || ($this->db95_codigo == "") ){ 
+     if(($this->db95_codigo == null) || ($this->db95_codigo === 0 || $this->db95_codigo === 0.0 || $this->db95_codigo == "") ){ 
        $this->erro_sql = " Campo db95_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_db_relatcabec {
    function sql_query ( $db95_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -412,7 +412,7 @@ class cl_db_relatcabec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_db_relatcabec {
    function sql_query_file ( $db95_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_db_relatcabec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

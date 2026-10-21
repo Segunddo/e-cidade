@@ -31,7 +31,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('rh61_regist');
 $clrotulo->label('z01_nome');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $orderby = " z01_nome ";
 $ordenacao = "Alfabética";
@@ -80,7 +81,7 @@ $sql = "select rh01_regist as matricula,
 //// db_query - executa $sql no banco e gera um RECORDSET criado na variável $resultado_sql com os dados da execução
 //// da variável $sql no $resultado_sql = db_query($sql);
 //// pg_numrows - verifica quantas linhas vieram no RECORDSET e coloca o resultado na variávei $qtd_linhas_sql
-$qtd_linhas_sql = pg_numrows($resultado_sql);
+$qtd_linhas_sql = ($resultado_sql ? pg_numrows($resultado_sql) : null);
 if($qtd_linhas_sql == 0){
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários cadastrados no período.');
 }

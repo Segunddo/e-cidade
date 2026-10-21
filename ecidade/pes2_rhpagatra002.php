@@ -42,7 +42,8 @@ $clrotulo->label('r70_estrut');
 $clrotulo->label('r70_codigo');
 $clrotulo->label('rh60_codigo');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $head3 = "RELATÓRIO DE SALÁRIOS ATRASADOS";
 if(isset($anousu) && trim($anousu) != "" && isset($mesusu) && trim($mesusu) != ""){

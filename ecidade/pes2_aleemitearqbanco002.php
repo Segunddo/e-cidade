@@ -34,7 +34,8 @@ include(modification("classes/db_folha_classe.php"));
 include(modification("classes/db_rharqbanco_classe.php"));
 include(modification("classes/db_orctiporec_classe.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $cllayouts_bb  = new LayoutBB;
@@ -100,14 +101,14 @@ if($clrharqbanco->numrows>0){
     $descricaobanco = $db90_descr;
  
     if(isset($datagera) && $datagera!=""){
-      $datag = split('-',$datagera);
+      $datag = preg_split('#\-#m',$datagera);
       $datag_dia=$datag[2];
       $datag_mes=$datag[1];
       $datag_ano=$datag[0];
     }
  
     if(isset($datadeposit) && $datadeposit!=""){
-      $datad = split('-',$datadeposit);
+      $datad = preg_split('#\-#m',$datadeposit);
       $datad_dia = $datad[2];
       $datad_mes = $datad[1];
       $datad_ano = $datad[0];
@@ -157,13 +158,13 @@ if($clrharqbanco->numrows>0){
     $horageracao = date("H").date("i").date("s");
  
     if(isset($datageracao) && $datageracao!=""){
-      $datag = split('-',$datageracao);
+      $datag = preg_split('#\-#m',$datageracao);
       $datag_dia = $datag[2];
       $datag_mes = $datag[1];
       $datag_ano = $datag[0];
     }
     if(isset($datadeposit) && $datadeposit!=""){
-      $datad = split('-',$datadeposit);
+      $datad = preg_split('#\-#m',$datadeposit);
       $datad_dia = $datad[2];
       $datad_mes = $datad[1];
       $datad_ano = $datad[0];

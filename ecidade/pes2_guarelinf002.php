@@ -37,7 +37,8 @@ $clrotulo->label('rh01_nasc');
 $clrotulo->label('rh08_descr');
 $clrotulo->label('rh31_dtnasc');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $where = "";
 if ($lista != "") {
@@ -86,7 +87,7 @@ and rh05_seqpes is null
 //echo $sql ; exit;
 
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários no período de '.$mes.' / '.$ano);
 

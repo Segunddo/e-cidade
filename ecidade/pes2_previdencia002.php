@@ -245,7 +245,7 @@ if ( $filtro == 0 || $filtro == 1 ) {
 
 
 
-    $xxnum = pg_numrows($rsDadosPrev);
+    $xxnum = ($rsDadosPrev ? pg_numrows($rsDadosPrev) : null);
     
     /* 
      * T.42515

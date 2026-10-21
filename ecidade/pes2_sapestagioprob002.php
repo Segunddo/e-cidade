@@ -35,7 +35,8 @@ $clrotulo->label('rh01_admiss');
 $clrotulo->label('rh37_descr');
 $clrotulo->label('r70_descr');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $head3 = "FUNCIONÁRIOS ADMITIDOS";
 $head5 = "PERÍODO : ".db_formatar($datai,'d')." até ".db_formatar($dataf,'d');
@@ -81,9 +82,9 @@ $sql = "select * from
        ";
 
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
-   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários admitidos no período de '.db_formatar($datai).' e '.db_formatar($dataf));
+   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários admitidos no período de '.db_formatar($datai, null).' e '.db_formatar($dataf, null));
 }
 
 $pdf = new PDF();

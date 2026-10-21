@@ -938,7 +938,7 @@ abstract class FolhaPagamento {
     $rsRhFolhaPagamento      = db_query($sSqlRhFolhaPagamento);
     $aFolhaPagamento         = array();
 
-    for ( $iCodigoFolha = 0; $iCodigoFolha < pg_num_rows( $rsRhFolhaPagamento ); $iCodigoFolha++ ) {
+    for ( $iCodigoFolha = 0; $iCodigoFolha < ($rsRhFolhaPagamento ? pg_num_rows( $rsRhFolhaPagamento ) : null); $iCodigoFolha++ ) {
 
       $oDadosFolha     = db_utils::fieldsMemory( $rsRhFolhaPagamento, $iCodigoFolha );
 

@@ -50,7 +50,8 @@ $clrhpescargo = new cl_rhpescargo;
 $clrhrubricas = new cl_rhrubricas;
 $clrotulo = new rotulocampo;
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_GET_VARS);
 $oGet = db_utils::postMemory($_GET);
 
@@ -72,7 +73,7 @@ $virg_das_rubricas = "";
 $impressao_rubricas = false;
 if (trim($rubricas_selecionadas_text) != "") {
     $impressao_rubricas = true;
-    $arr_das_rubricas = split(",", $rubricas_selecionadas_text);
+    $arr_das_rubricas = preg_split("#,#m", $rubricas_selecionadas_text);
     for ($i = 0; $i < count($arr_das_rubricas); $i++) {
         $db_where_rubricas .= $virg_das_rubricas . "'" . $arr_das_rubricas[$i] . "'";
         $virg_das_rubricas = ",";
@@ -108,7 +109,7 @@ $db_where_matriculas = "";
 $sp_where_matriculas = "";
 $virg_das_matriculas = "";
 if (trim($matriculas_selecionadas_text) != "") {
-    $arr_das_matriculas = split(",", $matriculas_selecionadas_text);
+    $arr_das_matriculas = preg_split("#,#m", $matriculas_selecionadas_text);
     for ($i = 0; $i < count($arr_das_matriculas); $i++) {
         $sp_where_matriculas .= $virg_das_matriculas . $arr_das_matriculas[$i];
         $virg_das_matriculas = ",";
@@ -298,7 +299,7 @@ $sql_dados_gerfs .= "          rubric      \n";
 $aMatriculasProcessadas = array();
 $result_dados_gerfs = db_query($sql_dados_gerfs);
 
-$numrows_dados_gerfs = pg_numrows($result_dados_gerfs);
+$numrows_dados_gerfs = ($result_dados_gerfs ? pg_numrows($result_dados_gerfs) : null);
 $mes_anterior = "";
 $ano_anterior = "";
 $contaIarray = 1;
@@ -447,7 +448,7 @@ if ($impressao_rubricas == false) {
             }
 
             $anos_meses = $arr_mostrar[$oServidor->regist][$ii];
-            $arr_wheres = split("_", $arr_mes_ano[$oServidor->regist][$ii]);
+            $arr_wheres = preg_split("#_#m", $arr_mes_ano[$oServidor->regist][$ii]);
             $sql_dados_work_ficha_financ = "";
 
             // For para montar os SQL's
@@ -906,7 +907,7 @@ function imprimedadosbase_1($anos_e_meses, $crub, $drub, $q1, $q2, $q3, $v1, $v2
     global $alt;
     global $pdf;
 
-    $arr_anos_e_meses = split("_", $anos_e_meses);
+    $arr_anos_e_meses = preg_split("#_#m", $anos_e_meses);
 
     $muda_linha1 = 0;
     $muda_linha2 = 0;
@@ -1029,7 +1030,7 @@ function imprimetotaisrubrica_1($anos_e_meses, $q1, $q2, $q3, $p1, $p2, $p3, $d1
     global $alt;
     global $pdf;
 
-    $arr_anos_e_meses = split("_", $anos_e_meses);
+    $arr_anos_e_meses = preg_split("#_#m", $anos_e_meses);
 
     $muda_linha1 = 0;
     $muda_linha2 = 0;
@@ -1082,7 +1083,7 @@ function imprimedadosrubrica_1($anos_e_meses, $crub, $drub, $q1, $q2, $q3, $p1, 
     global $alt;
     global $pdf;
 
-    $arr_anos_e_meses = split("_", $anos_e_meses);
+    $arr_anos_e_meses = preg_split("#_#m", $anos_e_meses);
 
     $muda_linha1 = 0;
     $muda_linha2 = 0;
@@ -1119,7 +1120,7 @@ function imprimecabecalho_1($anos_e_meses)
     global $alt;
     global $pdf;
 
-    $arr_anos_e_meses = split("_", $anos_e_meses);
+    $arr_anos_e_meses = preg_split("#_#m", $anos_e_meses);
 
     $muda_linha1 = 0;
     $muda_linha2 = 0;

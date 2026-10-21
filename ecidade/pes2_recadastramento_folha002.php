@@ -64,7 +64,8 @@ $clrotulo->label('z01_cgccpf');
 $clrotulo->label('r13_descr');
 $clrotulo->label('r37_descr');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 if($ordem == 'a'){
@@ -144,7 +145,7 @@ $orderby
        ";
 // die($sql);exit;
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if($xxnum == 0 || $xxnum==false){
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Códigos cadastrados no período de '.$mes.' / '.$ano);
 }

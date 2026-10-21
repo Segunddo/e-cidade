@@ -34,7 +34,8 @@ $clrotulo->label('r06_descr');
 $clrotulo->label('r06_elemen');
 $clrotulo->label('r06_pd');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $rubrica = 'R992';
@@ -48,7 +49,7 @@ $sql1 = "select r06_codigo,
 //echo $sql1;exit;
 $result1 = db_query($sql1);
 db_fieldsmemory($result1,0);
-if (pg_numrows($result1) == 0){
+if (($result1 ? pg_numrows($result1) : null) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Rubrica não cadastrada no período de '.$mes.' / '.$ano);
 }
 

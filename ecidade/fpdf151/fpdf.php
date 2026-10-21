@@ -964,7 +964,7 @@ function Cell($w,$h=0,$txt='',$border=0,$ln=0,$align='',$fill=0,$link='',$preenc
   }
   if($txt!='' && $txt!==0 && $txt!==0.0)
   {
-    if($align=='R')
+    if($align=='R' || $align===0 || $align===0.0) // no 5.6 0=='R' era true: alinhamento 0 saia a direita
       $dx=$w-$this->cMargin-$this->GetStringWidth($txt);
     elseif($align=='C')
       $dx=($w-$this->GetStringWidth($txt))/2;

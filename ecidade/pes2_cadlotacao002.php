@@ -37,7 +37,8 @@ $clrotulo->label('r13_descro');
 $clrotulo->label('r70_estrut');
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $sWhere = '';
 $sTipo = 'Todos';

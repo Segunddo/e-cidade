@@ -55,7 +55,7 @@ $head5 = "Percentual: {$r11_percentualipe}%";
 
 $sSql = $clipe->sql_query_relatorio_ipergs($oGet->iAno, $oGet->iMes, db_getsession("DB_instit"), $oGet->sTipo, $oGet->lUnificado, $oGet->sListaLotacoes);
 $rsDados = db_query($sSql);
-$iLinhas = pg_numrows($rsDados);
+$iLinhas = ($rsDados ? pg_numrows($rsDados) : null);
 
 if ($iLinhas == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem dados para o IPE no período de '.$oGet->mes.' / '.$oGet->ano);

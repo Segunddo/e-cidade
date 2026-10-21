@@ -32,7 +32,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('r01_regist');
 $clrotulo->label('z01_nome');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $head3 = "FUNCIONÁRIOS SEM VALE NO PONTO";
@@ -61,7 +62,7 @@ $sql = "
 //echo $sql ; exit;
 
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Funcionários Sem Vale Cadastrado no período de '.$mes.' / '.$ano);
 

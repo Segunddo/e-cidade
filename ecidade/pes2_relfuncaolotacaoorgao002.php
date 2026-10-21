@@ -166,7 +166,7 @@ if( !empty( $sWhereSelecao ) ){
 $oDaoRhpessoalmov  = new cl_rhpessoalmov();
 $sSqlRhpessoalmov  = $oDaoRhpessoalmov->sql_servidorCargoLotacaoSecretarias( $sCampos, $sWhere, $sOrder, $iInstit, $iAnoUsu, $iMesUsu );
 $rsDAORhpessoalmov = db_query($sSqlRhpessoalmov);
-if ( pg_numrows($rsDAORhpessoalmov) == 0 ){
+if ( ($rsDAORhpessoalmov ? pg_numrows($rsDAORhpessoalmov) : null) == 0 ){
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários no período de '.$iMesUsu.' / '.$iAnoUsu);
 }
 

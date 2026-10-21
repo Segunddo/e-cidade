@@ -45,7 +45,8 @@ require_once(modification("src/Financeiro/Orcamento/Recurso/IdentificadorUso.php
 require_once(modification("src/Financeiro/Orcamento/Recurso/Grupo.php"));
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $chave_o15_descr = isset($chave_o15_descr) ? stripslashes($chave_o15_descr) : '';
 $dataSessao = date('Y-m-d', db_getsession('DB_datausu'));

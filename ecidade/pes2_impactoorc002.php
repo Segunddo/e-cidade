@@ -30,7 +30,8 @@ include(modification("libs/db_sql.php"));
 include(modification("classes/db_selecao_classe.php"));
 $clselecao = new cl_selecao;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $head3 = "RELAÇÃO DE CARGOS / PADRÃO";
@@ -108,7 +109,7 @@ order by rh37_funcao,r02_codigo,z01_nome;
 //echo $sql ; exit;
 //die ($sql);
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem cálculos para o período de '.$mes.' / '.$ano);
 

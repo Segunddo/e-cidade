@@ -138,4 +138,8 @@ return RectorConfig::configure()
         // pes4_aberturasuplementar001.php) e so ve os alvos, deixando irmas fatais.
         // Tratar a mao: parametro da mae como OPCIONAL, como FolhaPagamentoComplementar faz.
         Rector\Php80\Rector\ClassMethod\AddParamBasedOnParentClassMethodRector::class,
+        // f(&$x) na CHAMADA e erro de compilacao desde o PHP 5.4: so existe em arquivo que
+        // ja NAO compila no 5.6 (8 telas de arquivo bancario do pes2). Remover o & os
+        // consertaria nos dois runtimes -- muda a saida do 5.6, e conserto, nao migracao.
+        Rector\Php54\Rector\FuncCall\RemoveReferenceFromCallRector::class,
     ]);

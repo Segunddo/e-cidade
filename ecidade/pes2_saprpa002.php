@@ -33,7 +33,8 @@ $clrotulo->label('r13_codigo');
 $clrotulo->label('r13_descr');
 $clrotulo->label('r13_descro');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $head3 = "RELAÇÃO DE RPAs";
 $head5 = "PERÍODO : ".db_formatar($dataini,'d')." A ".db_formatar($datafin,'d');
@@ -68,7 +69,7 @@ where c60_estrut like '3339036%'
 
 $result = db_query($sql);
 
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem RPA no período de '.$mes.' / '.$ano);
 }

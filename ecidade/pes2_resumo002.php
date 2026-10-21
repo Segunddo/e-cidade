@@ -32,7 +32,8 @@ require_once(modification("libs/db_conecta.php"));
 require_once(modification("libs/db_sql.php"));
 require_once(modification("libs/db_utils.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $instit = db_getsession("DB_instit");
 
@@ -50,7 +51,7 @@ $sValoresPatronais = " select distinct r33_codtab,
                           and r33_instit = $instit";
 
 $rsValoresPatronais = db_query($sValoresPatronais);
-$iNunRows           = pg_num_rows($rsValoresPatronais);
+$iNunRows           = ($rsValoresPatronais ? pg_num_rows($rsValoresPatronais) : null);
 
 if($iNunRows > 0){
   $aValoresPatronais = db_utils::getCollectionByRecord($rsValoresPatronais);
@@ -600,7 +601,7 @@ if ($tipo == "l"){
 //echo $sql ;exit;
 $result = db_query($sql);
 //db_criatabela($result);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem lançamentos no período de '.$mes.' / '.$ano.$erroajuda.".");
 

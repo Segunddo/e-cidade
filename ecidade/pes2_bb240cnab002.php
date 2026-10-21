@@ -38,7 +38,8 @@ require_once modification("libs/db_libgertxtfolha.php");
 require_once modification("dbforms/db_funcoes.php");
 require_once modification("fpdf151/assinatura.php");
 
-parse_str(base64_decode($_SERVER["QUERY_STRING"]));
+parse_str(base64_decode($_SERVER["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 $cllayouts_bb  = new LayoutBB;
@@ -120,14 +121,14 @@ try {
        $horageracao = date("H").':'.date("i").':'.date("s");
        
        if (isset($datageracao) && $datageracao!="") {
-         $datag = split('-',$datageracao);
+         $datag = preg_split('#\-#m',$datageracao);
          $datag_dia = $datag[2];
          $datag_mes = $datag[1];
          $datag_ano = $datag[0];
        }
        
        if (isset($datadeposit) && $datadeposit!="") {
-         $datad = split('-',$datadeposit);
+         $datad = preg_split('#\-#m',$datadeposit);
          $datad_dia = $datad[2];
          $datad_mes = $datad[1];
          $datad_ano = $datad[0];

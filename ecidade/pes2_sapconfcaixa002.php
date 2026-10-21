@@ -34,13 +34,14 @@ $clrotulo->label('r06_descr');
 $clrotulo->label('r06_elemen');
 $clrotulo->label('r06_pd');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 //$ano = 2005;
 //$mes = 8;
   
   if($db_rec != ''){
-    $split_rec = split('-',$db_rec);
+    $split_rec = preg_split('#\-#m',$db_rec);
     $virg = '';
     $xreceitas = '';
     for($x = 0 ;$x < sizeof($split_rec);$x++){
@@ -49,7 +50,7 @@ parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
     }
   }
   if($db_ded_rec != ''){
-    $split_ded_rec = split('-',$db_ded_rec);
+    $split_ded_rec = preg_split('#\-#m',$db_ded_rec);
     $virg = '';
     $xded_rec = '';
     for($xx = 0 ;$xx < sizeof($split_ded_rec);$xx++){
@@ -58,7 +59,7 @@ parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
     }
   }
   if($db_desp_ext != ''){
-    $split_desp_ext = split('-',$db_desp_ext);
+    $split_desp_ext = preg_split('#\-#m',$db_desp_ext);
     $virg = '';
     $xdesp_ext = '';
     for($xxx = 0 ;$xxx < sizeof($split_desp_ext);$xxx++){
@@ -246,7 +247,7 @@ order by recurso
 
 $result = db_query($sql);
 //db_criatabela($result);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Códigos cadastrados no período de '.$mes.' / '.$ano);
 

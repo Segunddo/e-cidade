@@ -45,9 +45,9 @@ class cl_formulario_relcampos {
 	  $valcam = $this->nomecampo;
 		$codigo = $this->varcodigo;
 		$descri = $this->vardescri;
-   	global $$codigo,$$descri,$$valcam;
-   	if(!isset($$valcam)){
-   		$$valcam = 0;
+   	global ${$codigo},${$descri},${$valcam};
+   	if(!isset(${$valcam})){
+   		${$valcam} = 0;
    	}
 
     if(trim($this->sqltabelas) != "" || count($this->arr_alter) > 0){
@@ -68,12 +68,12 @@ class cl_formulario_relcampos {
 
 	    for($i=0; $i<pg_numrows($result_tabelas); $i++){
 	    	db_fieldsmemory($result_tabelas, $i);
-	    	$arr_tabless[$$codigo] = $$codigo;
-	   	  $arr_tabelas[$$codigo] = $$descri;
+	    	$arr_tabless[${$codigo}] = ${$codigo};
+	   	  $arr_tabelas[${$codigo}] = ${$descri};
 	    }
      
       if(count($arr_tabelas) == 2){
-      	$$valcam = $$codigo;
+      	${$valcam} = ${$codigo};
       }
 
       echo "
@@ -94,8 +94,8 @@ class cl_formulario_relcampos {
 	            </tr>
            ";
 
-      if($$valcam != 0){
-      	$sql_camposTABLES = "select distinct codarq as codigodatabela, sigla as sigladoarquivo from db_sysarquivo where db_sysarquivo.codarq = ".$$valcam;
+      if(${$valcam} != 0){
+      	$sql_camposTABLES = "select distinct codarq as codigodatabela, sigla as sigladoarquivo from db_sysarquivo where db_sysarquivo.codarq = ".${$valcam};
       	$result_camposTABLES = @db_query($sql_camposTABLES);
         if($result_camposTABLES == false){
         	db_msgbox("Erro ao buscar campos da tabela escolhida");
@@ -113,7 +113,7 @@ class cl_formulario_relcampos {
 								                                     left  join db_sysforkey   on  db_sysforkey.codarq = db_sysarquivo.codarq
 								                              where     trim(rotulo) <> ''
 								                                    and rotulo is not null
-								                                    and db_sysarquivo.codarq = ".$$valcam."
+								                                    and db_sysarquivo.codarq = ".${$valcam}."
                                              ) x on x.arquivo = codarq
                              where     trim(rotulo) <> ''
                                    and rotulo is not null
@@ -134,7 +134,7 @@ class cl_formulario_relcampos {
 										                                      left  join  db_sysarquivo  on  db_sysarquivo.codarq = db_sysforkey.referen
 										                               where      trim(rotulo) <> ''
 										                                      and rotulo is not null
-				      			                                      and db_sysforkey.referen = ".$$valcam."
+				      			                                      and db_sysforkey.referen = ".${$valcam}."
 		                                              ) x on x.arquivo = codarq
 		                              where     trim(rotulo) <> ''
 	 	                                    and rotulo is not null
@@ -236,7 +236,7 @@ class cl_formulario_relcampos {
         	}
         }
         if(isset($campo_auxilio_sselecion) && $campo_auxilio_sselecion != ""){
-          $arr_selecionados = split(",",$campo_auxilio_sselecion);
+          $arr_selecionados = preg_split("#,#m",$campo_auxilio_sselecion);
           for($i=0; $i<count($arr_selecionados); $i++){
         		$result_campos = @db_query("select db_syscampo.codcam, rotulo, conteudo from db_syscampo where codcam in (".$campo_auxilio_sselecion.") ");
         		if($result_campos != false){

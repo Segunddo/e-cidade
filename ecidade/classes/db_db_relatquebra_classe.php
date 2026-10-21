@@ -54,7 +54,7 @@ class cl_db_relatquebra {
                  db97_totaliza = bool = Totalizar 
                  ";
    //funcao construtor da classe 
-   function cl_db_relatquebra() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_relatquebra"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_db_relatquebra {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db97_codigo = ($this->db97_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codigo"]:$this->db97_codigo);
-       $this->db97_codrel = ($this->db97_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codrel"]:$this->db97_codrel);
-       $this->db97_codcam = ($this->db97_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codcam"]:$this->db97_codcam);
+       $this->db97_codigo = ($this->db97_codigo === 0 || $this->db97_codigo === 0.0 || $this->db97_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codigo"]:$this->db97_codigo);
+       $this->db97_codrel = ($this->db97_codrel === 0 || $this->db97_codrel === 0.0 || $this->db97_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codrel"]:$this->db97_codrel);
+       $this->db97_codcam = ($this->db97_codcam === 0 || $this->db97_codcam === 0.0 || $this->db97_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codcam"]:$this->db97_codcam);
        $this->db97_totaliza = ($this->db97_totaliza == "f"?@$GLOBALS["HTTP_POST_VARS"]["db97_totaliza"]:$this->db97_totaliza);
      }else{
-       $this->db97_codigo = ($this->db97_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codigo"]:$this->db97_codigo);
+       $this->db97_codigo = ($this->db97_codigo === 0 || $this->db97_codigo === 0.0 || $this->db97_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codigo"]:$this->db97_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_db_relatquebra {
          $this->db97_codigo = $db97_codigo; 
        }
      }
-     if(($this->db97_codigo == null) || ($this->db97_codigo == "") ){ 
+     if(($this->db97_codigo == null) || ($this->db97_codigo === 0 || $this->db97_codigo === 0.0 || $this->db97_codigo == "") ){ 
        $this->erro_sql = " Campo db97_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_db_relatquebra {
    function sql_query ( $db97_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_db_relatquebra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_db_relatquebra {
    function sql_query_file ( $db97_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_db_relatquebra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

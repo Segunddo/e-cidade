@@ -42,7 +42,8 @@ $clgerasql = new cl_gera_sql_folha;
 $clselecao = new cl_selecao;
 $clrhcadregime = new cl_rhcadregime;
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $clgerasql->inner_rub = false;
 $clgerasql->usar_ger = true;
@@ -418,7 +419,7 @@ if ($afastado == 'n') {
 $sql_dados1 .= " order by {$orderBY}";
 
 $result_dados = db_query($sql_dados1);
-$numrows_dados = pg_numrows($result_dados);
+$numrows_dados = ($result_dados ? pg_numrows($result_dados) : null);
 
 if($numrows_dados == 0){
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem lançamentos no período de '.$mes.' / '.$ano);

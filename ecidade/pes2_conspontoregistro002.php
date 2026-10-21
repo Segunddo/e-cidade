@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_rhpessoal_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 $clrhpessoal = new cl_rhpessoal;
@@ -97,7 +98,7 @@ if (trim($opcao) != '') {
 }
 $result = db_query($sql);
 
-$numrows = pg_numrows($result); 
+$numrows = ($result ? pg_numrows($result) : null); 
 if($numrows == 0){
   db_redireciona("db_erros.php?fechar=true&db_erro=Nenhum registro encontrado");
 }

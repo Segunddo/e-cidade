@@ -100,7 +100,7 @@ try {
 
    $resource = db_query($sSql);  
 
-   if (pg_num_rows($resource) == 0) {
+   if (($resource ? pg_num_rows($resource) : null) == 0) {
        throw new BusinessException("Não há férias cadastradas para a competência informada.");
    }
 

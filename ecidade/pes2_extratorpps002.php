@@ -29,7 +29,8 @@ require(modification("fpdf151/scpdf.php"));
 include(modification("fpdf151/impcarne.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $sqlpref = "select * from db_config where codigo = ".db_getsession("DB_instit");
@@ -147,7 +148,7 @@ order by rh02_lota, z01_nome;
 $result = db_query($sql);
 //db_criatabela($result);exit;
 include(modification("libs/db_conecta.php"));
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 //if ($xxnum == 0){
 //   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Códigos cadastrados no período de '.$mes.' / '.$ano);
 //}
@@ -177,7 +178,7 @@ if($ano == 2005){
   $patr = 14;
   $func =  8;
 }
-for($x = 0; $x < pg_numrows($result);$x++){
+for($x = 0; $x < ($result ? pg_numrows($result) : null);$x++){
    db_fieldsmemory($result,$x);
    $pdf1->nome     = $z01_nome;
    $pdf1->cnpj     = $z01_cgccpf;

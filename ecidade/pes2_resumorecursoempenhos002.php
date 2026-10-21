@@ -179,7 +179,7 @@ $sSql .= "  order by recurso,rubric \n";
 
 $rsResultado = db_query($sSql);
 
-if (pg_num_rows($rsResultado) == 0) {
+if (($rsResultado ? pg_num_rows($rsResultado) : null) == 0) {
 	db_redireciona('db_erros.php?fechar=true&db_erro=Não nenhum registro encontrado no período de '.$oGet->iMes.' / '.$oGet->iAno);
 }
 

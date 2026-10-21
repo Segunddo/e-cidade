@@ -37,6 +37,7 @@ require(modification("libs/JSON.php"));
 
 $oJson    = new services_json();
 $oParam   = $oJson->decode(str_replace("\\","",$_GET["json"]));
+if ($oParam === null || $oParam === false || $oParam === "") { $oParam = new stdClass(); } // o 5.6 criava stdClass sozinho para null/false/""
 $oParam->iTipo = 10;
 /**
  * Consultamos todos os recursos que existam no calculo da folha
@@ -87,7 +88,7 @@ $sSqlRecursos .= "   and rh79_mesusu =  {$oParam->iMesFolha}";
 $sSqlRecursos .= "       {$sWhereSlip}";
 $sSqlRecursos .= " order by o15_codigo";
 $rsRecursos    = db_query($sSqlRecursos);
-if (pg_num_rows($rsRecursos) > 0) {
+if (($rsRecursos ? pg_num_rows($rsRecursos) : null) > 0) {
   
   $iNumRowsRecursos = pg_num_rows($rsRecursos);
   for ($i = 0; $i < $iNumRowsRecursos; $i++) {

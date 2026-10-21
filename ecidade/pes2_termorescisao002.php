@@ -37,7 +37,8 @@ require_once(modification("classes/db_rhdepend_classe.php"));
 require_once(modification("classes/db_cfpess_classe.php"));
 require_once(modification("classes/db_rhpessoalmov_classe.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 $oDaoCfpess      = new cl_cfpess;
@@ -101,7 +102,7 @@ if (DBPessoal::utilizaFiltroLotacoesPorUsuario()) {
 $sql_cad = $cl_rhpessoalmov->sql_query_rescisao_afastamento($anofolha,$mesfolha,$dbwhere);
 $result_cad = db_query($sql_cad);
 
-$xxnum = pg_numrows($result_cad);
+$xxnum = ($result_cad ? pg_numrows($result_cad) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existe rescisões para os funcionarios escolhidos no período de '.$mesfolha.' / '.$anofolha);
 }

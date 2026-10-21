@@ -56,7 +56,7 @@ class cl_db_relat {
                  db91_nomearq = varchar(40) = Nome do arquivo PDF gerado 
                  ";
    //funcao construtor da classe 
-   function cl_db_relat() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_relat"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_db_relat {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db91_codrel = ($this->db91_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db91_codrel"]:$this->db91_codrel);
+       $this->db91_codrel = ($this->db91_codrel === 0 || $this->db91_codrel === 0.0 || $this->db91_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db91_codrel"]:$this->db91_codrel);
        $this->db91_descr = ($this->db91_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db91_descr"]:$this->db91_descr);
        $this->db91_quebra = ($this->db91_quebra == "f"?@$GLOBALS["HTTP_POST_VARS"]["db91_quebra"]:$this->db91_quebra);
        $this->db91_todos = ($this->db91_todos == "f"?@$GLOBALS["HTTP_POST_VARS"]["db91_todos"]:$this->db91_todos);
        $this->db91_nomearq = ($this->db91_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["db91_nomearq"]:$this->db91_nomearq);
      }else{
-       $this->db91_codrel = ($this->db91_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db91_codrel"]:$this->db91_codrel);
+       $this->db91_codrel = ($this->db91_codrel === 0 || $this->db91_codrel === 0.0 || $this->db91_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db91_codrel"]:$this->db91_codrel);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_db_relat {
          $this->db91_codrel = $db91_codrel; 
        }
      }
-     if(($this->db91_codrel == null) || ($this->db91_codrel == "") ){ 
+     if(($this->db91_codrel == null) || ($this->db91_codrel === 0 || $this->db91_codrel === 0.0 || $this->db91_codrel == "") ){ 
        $this->erro_sql = " Campo db91_codrel nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -403,7 +403,7 @@ class cl_db_relat {
    function sql_query ( $db91_codrel=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_db_relat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_db_relat {
    function sql_query_file ( $db91_codrel=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_db_relat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

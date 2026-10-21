@@ -54,7 +54,7 @@ $sSqlDadosArquivo = "select distinct
 											and rhautonomolanc.rh89_mesusu = {$oGet->iMesCompetencia}  ";
 
 $rsDadosArquivo = db_query($sSqlDadosArquivo);										  
-$iLinhasArquivo = pg_num_rows($rsDadosArquivo);										  
+$iLinhasArquivo = ($rsDadosArquivo ? pg_num_rows($rsDadosArquivo) : null);										  
 
 if ($iLinhasArquivo == 0 ) {
 	$sMsg = "Nenhum registro encontrado para a competência {$oGet->iAnoCompetencia}/{$oGet->iMesCompetencia}";

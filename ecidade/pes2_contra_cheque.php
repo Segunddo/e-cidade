@@ -419,7 +419,7 @@ if (pg_num_rows($rsResult)) {
 }
 
 $rsResult = db_query($sSql);
-$iNumRow  = pg_num_rows($rsResult);
+$iNumRow  = ($rsResult ? pg_num_rows($rsResult) : null);
 
 /**
  * Se não trazer nenhum registro.
