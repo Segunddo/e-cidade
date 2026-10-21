@@ -142,4 +142,20 @@ return RectorConfig::configure()
         // ja NAO compila no 5.6 (8 telas de arquivo bancario do pes2). Remover o & os
         // consertaria nos dois runtimes -- muda a saida do 5.6, e conserto, nao migracao.
         Rector\Php54\Rector\FuncCall\RemoveReferenceFromCallRector::class,
+
+        // --- PHPExcel.phar (biblioteca de terceiros): oito regras que nunca tinham disparado ---
+        // APAGOU parent::__construct() legitimo (a mae BIFFwriter TEM __construct; o Rector nao a
+        // resolveu): o construtor da mae deixaria de rodar no 8.5, em silencio.
+        Rector\DeadCode\Rector\StaticCall\RemoveParentCallWithoutParentRector::class,
+        // emite <=> (PHP 7.0) e array_key_first() (PHP 7.3): parse error / funcao ausente no 5.6
+        Rector\Php70\Rector\If_\IfToSpaceshipRector::class,
+        Rector\Php73\Rector\FuncCall\ArrayKeysToArrayKeyFirstLastRector::class,
+        // (string) na agulha do strpos: o 8 ja trata agulha int como string; no 5.6 int era
+        // CODIGO de caractere -- o cast nao muda o 8.5 e MUDA o 5.6
+        Rector\Php73\Rector\FuncCall\StringifyStrNeedlesRector::class,
+        // modernizacao equivalente, nao exigida pela versao de destino
+        Rector\Php52\Rector\Switch_\ContinueToBreakInSwitchRector::class,
+        Rector\Php55\Rector\Class_\ClassConstantToSelfClassRector::class,
+        Rector\Php53\Rector\FuncCall\DirNameFileConstantToDirConstantRector::class,
+        Rector\Php56\Rector\FuncCall\PowToExpRector::class,
     ]);

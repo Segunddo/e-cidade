@@ -66,7 +66,7 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
 **Onde paramos:** **ÁREAS TRIBUTÁRIO E EDUCAÇÃO CONCLUÍDAS** (branch `2educacao-migrado`), e **RECURSOS HUMANOS
-com 701/701 telas de menu no 8.5** (branch `3recursoshumanos-migrado`; faltam o nível 3 e o cálculo da folha).
+com 701/701 telas de menu no 8.5** (branch `3recursoshumanos-migrado`; falta o cenário de cálculo da folha).
 Conferido pelo proxy, tela de menu por tela de menu (15/10/2026): **Tributário 1.059/1.059** e **Educação
 480/480** arquivos de menu existentes servidos pelo PHP 8.5 — depois de fechar a *10ª LACUNA* (14 telas
 que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
@@ -80,7 +80,7 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 390 por `map` |
-| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Faltam o nível 3 nos cadastros e o cenário de cálculo da folha — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
+| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros feito (37 idênticos, 0 divergentes) e `.phar` portado; falta o cenário de cálculo da folha — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3496,7 +3496,7 @@ verificado (todos sem fatal em `db_val`) pode mudar. `db_val` só é chamada por
   iguais não tocadas em `pes4_differias002` e `model/manad.model.php`); `(int)` em `"" + 1`;
   `stdClass` onde o 5.6 o criava sozinho (posto na linha da 1ª escrita, não no `decode`); as 2
   últimas chamadas estáticas `JSON::parse`/`stringify` da base.
-- **12ª LACUNA, PENDENTE: biblioteca dentro de `.phar`.** `ext/php/PHPExcel.phar` — **19 de 189**
+- **12ª LACUNA (RESOLVIDA depois — ver *PHPExcel.phar PORTADO*): biblioteca dentro de `.phar`.** `ext/php/PHPExcel.phar` — **19 de 189**
   arquivos não compilam no 8.5 (0 no 5.6); nenhuma das sete frentes enxerga dentro de um `.phar`.
   Usado só por `pes4_geracaoarquivorefeisul.RPC.php`, que **fica no 5.6** por uma `location` de
   exceção no nginx (antes da regra geral). Portar = extrair, portar como o `dbagata/`, reempacotar.
@@ -3607,25 +3607,81 @@ listas: **701 de 701** telas de menu existentes em disco servidas pelo PHP 8.5 (
 | | |
 |---|---|
 | Módulos | **4 de 4** — Pessoal, RH, eSocial, Estágio Probatório |
-| Telas comparadas byte-a-byte | **1.536 / 1.538** (Fase A 1.526/1.528 + Fase B 10/10) |
-| Divergências | **2**, caracterizadas: o laço eterno do 5.6 em `rec2_espelhoponto002` e a pendente do `.phar` |
+| Telas comparadas byte-a-byte | **1.537 / 1.538** (Fase A 1.527/1.528 + Fase B 10/10) |
+| Divergências | **1**, caracterizada: o laço eterno do 5.6 em `rec2_espelhoponto002` |
 | Arquivos alterados | **852** (849 na Fase A + 3 na Fase B) |
-| Lacunas novas | **11ª** (LSP entre arquivos — detector `carrega_arquivo.php`) e **12ª** (biblioteca em `.phar`) |
-| Denylist do Rector | 29 → **31** |
+| Lacunas novas | **11ª** (LSP entre arquivos — detector `carrega_arquivo.php`) e **12ª** (biblioteca em `.phar`, resolvida) |
+| Denylist do Rector | 29 → **39** |
 
-**O que NÃO está feito na área, e precisa estar claro no relatório:**
+#### ✅ `ext/php/PHPExcel.phar` PORTADO — a 12ª lacuna fecha
 
-1. **`ext/php/PHPExcel.phar`** (12ª lacuna) — 19 de 189 arquivos não compilam no 8.5; a única tela que o usa
-   (`pes4_geracaoarquivorefeisul.RPC.php`, não é item de menu) fica no 5.6 por exceção no nginx.
-2. **Nível 3 (POST real) nos cadastros** — combinado para esta área e **ainda não rodado** em nenhuma tela de RH.
-3. **O cenário de cálculo da folha** — a base tem 1 servidor e zero cálculo; exige cadastrar pelo 5.6 e salvar
-   em dump (o banco não tem volume de persistência). Até ele ser feito, o cálculo da folha **não foi exercitado**
-   pela comparação — a bateria GET só abre as telas.
-4. Os **9 arquivos do `pes2` que não compilam nem no 5.6** (8 de arquivo bancário) — defeito da referência,
-   intocados por decisão.
+Extraído (228 arquivos, 189 PHP) para `ecidade/tmp/phar_porte/`, portado e **reempacotado com o PHP 5.6**
+(o runtime de referência), com o mesmo *stub* e assinatura SHA-1 — mesma lista de 228 arquivos.
 
-**PARA RETOMAR:** os itens 2 e 3 acima (e o 1, se houver tempo). A sessão autenticada usada foi `98d016cc…`;
-os ciclos de guarda precisam de `/tmp/_sess.bak` no 5.6 (o `cmp.py` o cria ao rodar).
+- Rector: 30 arquivos (19 offsets `{}`, 10 parâmetros opcionais, 2 `implode`, 1 construtor) + 8 `?Tipo`
+  removidos à mão + 1 `break` inalcançável (depois de `return`) removido. `php -l` **189/189 nos dois**.
+- **A biblioteca de terceiros disparou NOVE regras inéditas**, e **oito foram vetadas** (denylist 31 → **39**):
+  - **`RemoveParentCallWithoutParentRector` apagou `parent::__construct()` LEGÍTIMO** nas duas classes do
+    escritor Excel5 — a mãe `BIFFwriter` **tem** `__construct`, o Rector não a resolveu. O construtor da mãe
+    deixaria de rodar no 8.5, em silêncio — e o Excel5 é exatamente o escritor que a tela usa. A mais
+    perigosa da rodada.
+  - `IfToSpaceshipRector` (`<=>`) e `ArrayKeysToArrayKeyFirstLastRector` (`array_key_first`): não existem no 5.6.
+  - `StringifyStrNeedlesRector`: `(string)` na agulha do `strpos`. O 8 já trata agulha inteira como string,
+    então a regra não muda o 8.5 — mas **muda o 5.6**, onde agulha inteira era código de caractere.
+  - `ContinueToBreakInSwitch`, `ClassConstantToSelfClass`, `DirNameFileConstantToDirConstant`, `PowToExp`:
+    modernização equivalente, não exigida.
+  - **Armadilha do instrumento:** 4 dos 8 nomes de classe que escrevi na denylist estavam no namespace
+    errado; com o nome errado a regra simplesmente não seria vetada. Conferido arquivo a arquivo (39/39).
+- **Teste funcional** (`scratchpad/teste_phar.php`): carrega as 170 classes de nome convencional pelo
+  autoloader do próprio PHPExcel (pega LSP, construtores, declaração) e gera um XLS pelo escritor
+  **Excel5** com texto, número, data, moeda e acento. **5.6 com o `.phar` original = 5.6 com o novo = 8.5
+  com o novo**, byte a byte, descontados os 16 bytes do carimbo de hora do contêiner OLE — que diferem
+  entre duas execuções do próprio original. O original no 8.5 dá *parse error* (`String.php:529`).
+- A tela `pes4_geracaoarquivorefeisul.RPC.php` ficou idêntica (também com a ação real `gerarArquivo`, que
+  nos dois para na mesma mensagem de configuração ausente) e **a exceção do nginx foi removida**.
+
+#### ✅ NÍVEL 3 (POST real) nos cadastros de RH
+
+As **77** telas de inclusão do menu de RH; **70** mapeadas para a tabela pela convenção de nome
+(`pes1_rhfuncao001` → `rhfuncao`, só quando a classe `db_<tabela>_classe.php` existe).
+
+| Veredito | Telas |
+|---|---|
+| **IDÊNTICO** — o mesmo SQL de negócio gravado nos dois runtimes | **37** |
+| **DIVERGE** | **0** |
+| INCONCLUSIVO — o payload automático não passou na validação (nada gravado nos dois) | 30 |
+| ABORTADO — a restauração esbarrou em FK (`pensao`, `rhipe`) | 2 |
+| sem formulário para montar (`pes1_rhcadregime001`) | 1 |
+
+**O harness mudou, porque em RH a restauração não funcionava:** ela apagava a tabela **inteira** e a
+repovoava, e em RH quase todo cadastro auxiliar é referenciado pelo `rhpessoal` — o `DELETE` esbarrava na
+FK já no primeiro teste (`rhestcivil`). Agora a cópia fica numa tabela auxiliar no banco e a restauração é
+**por diferença**, comparando a linha inteira: apaga só o que não estava no snapshot e reinsere o que
+sumiu, e confere a contagem no fim. A FK continua sendo a rede de segurança. Validado na demonstração do
+Cemitério (idêntico → diverge → idêntico, tabela intacta).
+
+**⚠ Os dois ABORTADOS deixaram dado de teste no banco** — a tela gravou também numa tabela FILHA fora do
+conjunto (`pensaoretencao`, `rhipenumcgm`/`rhiperegist`), a FK barrou o `DELETE` do pai e o harness parou
+sem apagar nada às cegas (correto), mas as linhas ficaram. Limpas à mão numa transação (5 linhas, todas de
+tabelas que estavam vazias no snapshot) e as 3 sequências devolvidas ao valor anterior. Para não depender
+de conferência manual, o harness agora **avisa** quando o SQL de negócio grava numa tabela fora do conjunto
+restaurado (o único caso entre os IDÊNTICOS, `rec1_tipoasse001` → `tipoassedb_cadattdinamico`, não deixou
+nada: o `INSERT` extra falhou pela FK e a transação da tela desfez tudo, nos dois).
+
+**Limite:** os 30 INCONCLUSIVOS precisam de payload montado à mão, lendo cada formulário — o mesmo custo
+registrado no Tributário (~2 a 4 telas por sessão). 37 telas idênticas, em 3 dos 4 módulos, sustentam a
+afirmação para os cadastros; **não** dizem nada sobre o cálculo.
+
+**O que NÃO está feito na área:**
+
+1. **O cenário de cálculo da folha** — a base tem 1 servidor e zero cálculo; exige cadastrar servidores e
+   ponto pelo 5.6, salvar em dump (o banco não tem volume de persistência) e comparar o SQL do cálculo.
+   Até ele ser feito, o cálculo da folha **não foi exercitado** pela comparação.
+2. Os 30 cadastros INCONCLUSIVOS no nível 3.
+3. Os **9 arquivos do `pes2` que não compilam nem no 5.6** — defeito da referência, intocados por decisão.
+
+**PARA RETOMAR:** o cenário de cálculo (item 1). A sessão autenticada usada foi `98d016cc…`; os ciclos de
+guarda precisam de `/tmp/_sess.bak` no 5.6 (o `cmp.py` o cria ao rodar).
 
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
 

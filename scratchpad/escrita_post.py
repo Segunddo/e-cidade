@@ -44,11 +44,19 @@ def sequencias(t):
     r = sh(DB + ' -tAc "' + q + '"')
     return [x for x in r.stdout.decode("latin1").split() if x]
 
+def copia(t):
+    return "public._n3snap_" + t.replace(".", "_")
+
 def snapshot():
-    """COPY de cada tabela + last_value das sequencias. LATIN1 -- nao decodificar.
+    """Copia de cada tabela NO BANCO (tabela auxiliar) + last_value das sequencias.
     Sem repor a sequencia, o segundo runtime recebe o numero seguinte e o INSERT
     diverge por motivo benigno."""
-    snap = {t: sh(f'{DB} -c "COPY {t} TO STDOUT"').stdout for t in TABELAS}
+    snap = {}
+    for t in TABELAS:
+        r = sh(f'{DB} -c "DROP TABLE IF EXISTS {copia(t)}; CREATE TABLE {copia(t)} AS SELECT * FROM {t}"')
+        if r.returncode != 0:
+            sys.exit(f"ABORTADO: nao consegui copiar {t}: {r.stderr.decode('latin1')[:200]}")
+        snap[t] = sh(f'{DB} -tAc "select count(*) from {t}"').stdout.decode().strip()
     seq = {}
     for t in TABELAS:
         for sq in sequencias(t):
@@ -57,14 +65,23 @@ def snapshot():
     return snap
 
 def restaurar(snap):
-    """DELETE respeita FK e falha se alguem referencia -- e a rede de seguranca.
-    TRUNCATE CASCADE apagaria tabelas vizinhas em silencio."""
+    """Restaura so a DIFERENCA, comparando a linha inteira: apaga o que nao estava no
+    snapshot e reinsere o que sumiu. Apagar a tabela inteira (como era) falhava em
+    toda tabela referenciada por FK -- em RH, quase todo cadastro auxiliar e
+    referenciado por rhpessoal. O DELETE continua respeitando FK: se uma linha NOVA
+    estiver referenciada, falha e aborta (rede de seguranca). TRUNCATE CASCADE
+    apagaria tabelas vizinhas em silencio."""
     for t in TABELAS:                      # apaga filho -> pai
-        r = sh(f'{DB} -c "DELETE FROM {t}"')
+        r = sh(f'{DB} -c "DELETE FROM {t} x WHERE NOT EXISTS (SELECT 1 FROM {copia(t)} s WHERE s::text = x::text)"')
         if r.returncode != 0:
-            sys.exit(f"ABORTADO: nao consegui limpar {t}: {r.stderr.decode('latin1')[:200]}")
+            sys.exit(f"ABORTADO: nao consegui restaurar {t}: {r.stderr.decode('latin1')[:200]}")
     for t in reversed(TABELAS):            # repovoa pai -> filho
-        sh(f'{DB} -c "COPY {t} FROM STDIN"', entrada=snap[t])
+        r = sh(f'{DB} -c "INSERT INTO {t} SELECT * FROM {copia(t)} s WHERE NOT EXISTS (SELECT 1 FROM {t} x WHERE x::text = s::text)"')
+        if r.returncode != 0:
+            sys.exit(f"ABORTADO: nao consegui repovoar {t}: {r.stderr.decode('latin1')[:200]}")
+        n = sh(f'{DB} -tAc "select count(*) from {t}"').stdout.decode().strip()
+        if n != snap[t]:
+            sys.exit(f"ABORTADO: {t} tinha {snap[t]} linhas e ficou com {n} depois do restore")
     for sq, v in snap['__seq__'].items():
         lv, chamada = [x.strip() for x in v.split('|')]
         cal = 'true' if chamada == 't' else 'false'
@@ -115,11 +132,13 @@ def requisitar(porta):
 
 sh(f"docker exec -u root ecidade_php56 cp {SESS} /tmp/_sess.bak")
 snap = snapshot()
-print("  snapshot: " + "  ".join(t + "=" + str(len(snap[t].splitlines())) + " linhas"
+print("  snapshot: " + "  ".join(t + "=" + snap[t] + " linhas"
       for t in TABELAS) + "  | sequencias=" + str(len(snap["__seq__"])))
 
 a = requisitar(8080); restaurar(snap)
 b = requisitar(8085); restaurar(snap)
+for t in TABELAS:
+    sh(f'{DB} -c "DROP TABLE IF EXISTS {copia(t)}"')
 print(f"  statements: 5.6={len(a)}  8.5={len(b)}")
 
 # so o que escreve -- e onde o defeito aparece
@@ -136,6 +155,17 @@ print(f"  destes, escrita de NEGOCIO: 5.6={len(na)}  8.5={len(nb)}")
 for s in na[:6]: print(f"    5.6> {s.decode('latin1')[:140]}")
 for s in nb[:6]: print(f"    8.5> {s.decode('latin1')[:140]}")
 ea, eb = na, nb
+
+# So as tabelas passadas na linha de comando sao restauradas. Se a tela grava em
+# outra, essa escrita FICA no banco (ou, se ela referencia linha nova, o restore
+# aborta pela FK -- foi o que aconteceu com pensao/pensaoretencao e rhipe/rhipenumcgm
+# no RH, e as linhas de teste tiveram de ser apagadas a mao).
+alvo = re.compile(rb'^\s*(?:insert\s+into|update|delete\s+from)\s+([\w.]+)', re.I)
+fora = sorted({m.group(1).decode('latin1').split('.')[-1].lower() for s in na + nb
+               for m in [alvo.match(s)] if m} - {t.split('.')[-1].lower() for t in TABELAS})
+if fora:
+    print(f"  ATENCAO: a tela gravou tambem em {', '.join(fora)}, que NAO e restaurada.")
+    print( "     Conferir se ficou linha de teste e, na proxima vez, incluir a tabela no 2o argumento.")
 
 # INCONCLUSIVO != IDENTICO. Com os dois lados vazios o teste nao exercitou nada
 # -- payload errado, tela inexistente, validacao recusando antes do INSERT. Sem
