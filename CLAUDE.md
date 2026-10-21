@@ -2906,6 +2906,17 @@ para lotes que não são um prefixo.
 **Lição, a décima da mesma família:** a conferência partia da lista que o gerador produziu. Quem
 achou foi a conferência independente — perguntar ao sistema em execução, tela por tela.
 
+### ⚠ 13ª LACUNA (21/10/2026, achada no RH): classes de `model/` carregadas por AUTOLOAD, sem `cl_`
+
+A frente de autoload resolvia só `new cl_*` e `db_utils::getDao()` (as classes de `classes/`). Classes de
+`model/` e `std/` usadas por `new Classe` ou `Classe::metodo()`, carregadas pelo autoloader sem nenhum
+`include`, **não entravam em universo nenhum**. Achada porque o cálculo da folha morreu em
+`AjustePrevidencia::…` (RH). Medido no universo verificado do Tributário: **580 arquivos** de `model/`/`std/`
+alcançados e fora do universo — mas, por ser código OO mais novo, só **1** precisava de porte:
+`model/diversos/ImportacaoDiversosCobrancaAdministrativa.model.php`, `split("#", …)` → `explode` (separador
+literal, medido igual no 5.6). Nenhuma LSP nas 157 classes com `extends`. O fecho alcança também um modelo
+da Educação (`unset($this)`), corrigido na branch dela.
+
 ### ✅ NÍVEL 3 EM ESCALA — 18 telas roteadas, 14 módulos, zero divergências
 
 O maior ponto fraco declarado do trabalho era este: **as 6.552 guardas `0 == ""` são 60% de
@@ -3370,6 +3381,13 @@ Censo/INEP com arquivo enviado — as mesmas telas que, por GET sem parâmetro, 
 eternos do 5.6. Corrigidas como o catálogo manda (parâmetro da mãe, opcional, na filha):
 `getDadosAluno($oLinha, $lPesquisaInep = false)` e `atualizaDadosTurma($oLinha, $iAnoCenso = null)`.
 Detector novo: `scratchpad/carrega_arquivo.php` (na branch do RH). Bateria `edu4`: 140/148, linha de base.
+
+**⚠ 13ª LACUNA (21/10/2026, achada no RH): classes de `model/` carregadas por autoload, sem `cl_`.**
+`new Classe`/`Classe::` de `model/`/`std/` sem `include` não entravam em universo nenhum. No universo da
+Educação o fecho alcança **596 arquivos** fora dele; só **1** precisava de porte:
+`model/educacao/progressaoparcial/ProgressaoParcialVinculoDisciplina.model.php` — `unset($this)`, erro de
+compilação desde o PHP 7.1. No 5.6 só desligava a variável local e era a última instrução do método:
+removido. Nenhuma LSP nas 172 classes com `extends`.
 
 ### 📐 ÁREA RECURSOS HUMANOS — dimensionada e INICIADA (branch `3recursoshumanos-migrado`)
 
