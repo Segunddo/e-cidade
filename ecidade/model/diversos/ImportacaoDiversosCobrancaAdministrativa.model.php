@@ -197,7 +197,7 @@ class ImportacaoDiversosCobrancaAdministrativa extends ImportacaoGeralDiversos
 
         $subsql = "select ";
 
-        $campos_sql = split("#", $campos);
+        $campos_sql = explode("#", $campos);
         $virgula = "";
 
         for($i = 0; $i < sizeof($campos_sql); $i++) {
