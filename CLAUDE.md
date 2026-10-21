@@ -3381,6 +3381,13 @@ eternos do 5.6. Corrigidas como o catálogo manda (parâmetro da mãe, opcional,
 `getDadosAluno($oLinha, $lPesquisaInep = false)` e `atualizaDadosTurma($oLinha, $iAnoCenso = null)`.
 Detector novo: `scratchpad/carrega_arquivo.php` (na branch do RH). Bateria `edu4`: 140/148, linha de base.
 
+**⚠ 13ª LACUNA (21/10/2026, achada no RH): classes de `model/` carregadas por autoload, sem `cl_`.**
+`new Classe`/`Classe::` de `model/`/`std/` sem `include` não entravam em universo nenhum. No universo da
+Educação o fecho alcança **596 arquivos** fora dele; só **1** precisava de porte:
+`model/educacao/progressaoparcial/ProgressaoParcialVinculoDisciplina.model.php` — `unset($this)`, erro de
+compilação desde o PHP 7.1. No 5.6 só desligava a variável local e era a última instrução do método:
+removido. Nenhuma LSP nas 172 classes com `extends`.
+
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
 
 Feita sobre **o mesmo universo** (os ~2.795 arquivos que as sete frentes alcançam a partir das
