@@ -66,7 +66,7 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
 **Onde paramos:** **ÁREAS TRIBUTÁRIO E EDUCAÇÃO CONCLUÍDAS** (branch `2educacao-migrado`), e **RECURSOS HUMANOS
-com 701/701 telas de menu no 8.5** (branch `3recursoshumanos-migrado`; cálculo da folha verificado; 13ª lacuna em aberto).
+com 701/701 telas de menu no 8.5** (branch `3recursoshumanos-migrado`; cálculo da folha verificado; 13ª lacuna fechada).
 Conferido pelo proxy, tela de menu por tela de menu (15/10/2026): **Tributário 1.059/1.059** e **Educação
 480/480** arquivos de menu existentes servidos pelo PHP 8.5 — depois de fechar a *10ª LACUNA* (14 telas
 que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
@@ -80,7 +80,7 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 390 por `map` |
-| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros, `.phar` e cálculo da folha (6 tipos idênticos) feitos. **Pendente: decisão sobre os 361 arquivos da 13ª lacuna** — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
+| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros, `.phar` e cálculo da folha (6 tipos idênticos) feitos. **13ª lacuna fechada: 316 DAOs portados** (ver *Os DAOs que os modelos instanciam*). Restam os 30 cadastros INCONCLUSIVOS do nível 3 — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3757,12 +3757,12 @@ que também nunca entraram em universo. **União nas três áreas: 361 arquivos 
 (296 com construtor PHP 4, 357 com guarda `0 == ""` faltando, 205 com `split`). Mecânico para o Rector,
 mas o construtor PHP 4 que não roda é a falha silenciosa mais grave do catálogo.
 
-**DECISÃO PENDENTE (do usuário):** portar os 361 — proposta: na branch do Tributário (a base), trazidos por
-merge às outras duas, verificados por `php -l` nos dois runtimes e pelos harnesses de classes e de escrita
-(a interseção com os universos já verificados é vazia: nenhuma bateria de regressão exigida).
+**DECIDIDO E FEITO (21/10/2026):** portados na branch do Tributário e trazidos por merge — dos 361, 45 já
+estavam pagos por commits `EXPERIMENTO:`; os **316** restantes estão na seção *Os DAOs que os modelos
+instanciam* (área Tributário): `php -l` 316/316 nos dois, classes 315/315 e escrita 0 divergentes.
 
 **O que NÃO está feito na área:** os 30 cadastros INCONCLUSIVOS no nível 3 (payload à mão); os 9 arquivos do
-`pes2` que não compilam nem no 5.6 (defeito da referência, intocados); e os 361 da 13ª lacuna.
+`pes2` que não compilam nem no 5.6 (defeito da referência, intocados).
 
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
 
