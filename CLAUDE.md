@@ -2905,6 +2905,17 @@ para lotes que não são um prefixo.
 **Lição, a décima da mesma família:** a conferência partia da lista que o gerador produziu. Quem
 achou foi a conferência independente — perguntar ao sistema em execução, tela por tela.
 
+### ⚠ 13ª LACUNA (21/10/2026, achada no RH): classes de `model/` carregadas por AUTOLOAD, sem `cl_`
+
+A frente de autoload resolvia só `new cl_*` e `db_utils::getDao()` (as classes de `classes/`). Classes de
+`model/` e `std/` usadas por `new Classe` ou `Classe::metodo()`, carregadas pelo autoloader sem nenhum
+`include`, **não entravam em universo nenhum**. Achada porque o cálculo da folha morreu em
+`AjustePrevidencia::…` (RH). Medido no universo verificado do Tributário: **580 arquivos** de `model/`/`std/`
+alcançados e fora do universo — mas, por ser código OO mais novo, só **1** precisava de porte:
+`model/diversos/ImportacaoDiversosCobrancaAdministrativa.model.php`, `split("#", …)` → `explode` (separador
+literal, medido igual no 5.6). Nenhuma LSP nas 157 classes com `extends`. O fecho alcança também um modelo
+da Educação (`unset($this)`), corrigido na branch dela.
+
 ### ✅ NÍVEL 3 EM ESCALA — 18 telas roteadas, 14 módulos, zero divergências
 
 O maior ponto fraco declarado do trabalho era este: **as 6.552 guardas `0 == ""` são 60% de
