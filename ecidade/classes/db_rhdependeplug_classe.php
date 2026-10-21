@@ -49,11 +49,11 @@ class cl_rhdependeplug {
    var $dp01_processo       = 0;
    var $dp01_cpf            = 0;
    var $dp01_sexo           = 0;
-  
+
 
 
    //funcao construtor da classe 
-   function cl_rhdependeplug() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhdependeplug"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,7 +79,7 @@ class cl_rhdependeplug {
        $this->erro_status = "0";
        return false;
      }
-    
+
      $sql = "
               insert into rhdependeplug(
                                        dp01_rhdepend 
@@ -88,7 +88,7 @@ class cl_rhdependeplug {
                                       ,dp01_processo                                   
                                       ,dp01_cpf                                   
                                       ,dp01_sexo                                   
-                                     
+
                        )
                 values (
                                 $this->dp01_rhdepend 
@@ -100,7 +100,7 @@ class cl_rhdependeplug {
                       )";
 // die($sql);
      $result = db_query($sql);
-                                     
+
      if($result==false){ 
        $this->erro_banco = str_replace("\n","",@pg_last_error());
        if( strpos(strtolower($this->erro_banco),"duplicate key") != 0 ){
@@ -145,7 +145,7 @@ class cl_rhdependeplug {
                                           dp01_regist   = $this->dp01_regist
                                     and   dp01_rhdepend = $this->dp01_rhdepend ";   
      $result = db_query($sql);
- 
+
      if($result==false ){ 
        $this->erro_banco  = str_replace("\n","",@pg_last_error());
        $this->erro_sql    = "Processo Não Alterado. Alteração Abortada.\\n";

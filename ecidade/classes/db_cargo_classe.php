@@ -54,7 +54,7 @@ class cl_cargo {
                  r65_descr = varchar(30) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_cargo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cargo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,14 +71,14 @@ class cl_cargo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r65_anousu = ($this->r65_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_anousu"]:$this->r65_anousu);
-       $this->r65_mesusu = ($this->r65_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_mesusu"]:$this->r65_mesusu);
-       $this->r65_cargo = ($this->r65_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_cargo"]:$this->r65_cargo);
+       $this->r65_anousu = ($this->r65_anousu === 0 || $this->r65_anousu === 0.0 || $this->r65_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_anousu"]:$this->r65_anousu);
+       $this->r65_mesusu = ($this->r65_mesusu === 0 || $this->r65_mesusu === 0.0 || $this->r65_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_mesusu"]:$this->r65_mesusu);
+       $this->r65_cargo = ($this->r65_cargo === 0 || $this->r65_cargo === 0.0 || $this->r65_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_cargo"]:$this->r65_cargo);
        $this->r65_descr = ($this->r65_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_descr"]:$this->r65_descr);
      }else{
-       $this->r65_anousu = ($this->r65_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_anousu"]:$this->r65_anousu);
-       $this->r65_mesusu = ($this->r65_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_mesusu"]:$this->r65_mesusu);
-       $this->r65_cargo = ($this->r65_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_cargo"]:$this->r65_cargo);
+       $this->r65_anousu = ($this->r65_anousu === 0 || $this->r65_anousu === 0.0 || $this->r65_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_anousu"]:$this->r65_anousu);
+       $this->r65_mesusu = ($this->r65_mesusu === 0 || $this->r65_mesusu === 0.0 || $this->r65_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_mesusu"]:$this->r65_mesusu);
+       $this->r65_cargo = ($this->r65_cargo === 0 || $this->r65_cargo === 0.0 || $this->r65_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["r65_cargo"]:$this->r65_cargo);
      }
    }
    // funcao para inclusao
@@ -96,7 +96,7 @@ class cl_cargo {
        $this->r65_anousu = $r65_anousu; 
        $this->r65_mesusu = $r65_mesusu; 
        $this->r65_cargo = $r65_cargo; 
-     if(($this->r65_anousu == null) || ($this->r65_anousu == "") ){ 
+     if(($this->r65_anousu == null) || ($this->r65_anousu === 0 || $this->r65_anousu === 0.0 || $this->r65_anousu == "") ){ 
        $this->erro_sql = " Campo r65_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -104,7 +104,7 @@ class cl_cargo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r65_mesusu == null) || ($this->r65_mesusu == "") ){ 
+     if(($this->r65_mesusu == null) || ($this->r65_mesusu === 0 || $this->r65_mesusu === 0.0 || $this->r65_mesusu == "") ){ 
        $this->erro_sql = " Campo r65_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -112,7 +112,7 @@ class cl_cargo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r65_cargo == null) || ($this->r65_cargo == "") ){ 
+     if(($this->r65_cargo == null) || ($this->r65_cargo === 0 || $this->r65_cargo === 0.0 || $this->r65_cargo == "") ){ 
        $this->erro_sql = " Campo r65_cargo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -393,7 +393,7 @@ class cl_cargo {
    function sql_query ( $r65_anousu=null,$r65_mesusu=null,$r65_cargo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_cargo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -442,7 +442,7 @@ class cl_cargo {
    function sql_query_file ( $r65_anousu=null,$r65_mesusu=null,$r65_cargo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -479,7 +479,7 @@ class cl_cargo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

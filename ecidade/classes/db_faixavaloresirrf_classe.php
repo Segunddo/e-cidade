@@ -28,7 +28,7 @@ class cl_faixavaloresirrf {
                  rh175_deducao = float8 = Valor da Dedução 
                  ";
    //funcao construtor da classe 
-   function cl_faixavaloresirrf() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("faixavaloresirrf"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_faixavaloresirrf {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh175_sequencial = ($this->rh175_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh175_sequencial"]:$this->rh175_sequencial);
-       $this->rh175_db_faixavalores = ($this->rh175_db_faixavalores == ""?@$GLOBALS["HTTP_POST_VARS"]["rh175_db_faixavalores"]:$this->rh175_db_faixavalores);
-       $this->rh175_percentual = ($this->rh175_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["rh175_percentual"]:$this->rh175_percentual);
-       $this->rh175_deducao = ($this->rh175_deducao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh175_deducao"]:$this->rh175_deducao);
+       $this->rh175_sequencial = ($this->rh175_sequencial === 0 || $this->rh175_sequencial === 0.0 || $this->rh175_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh175_sequencial"]:$this->rh175_sequencial);
+       $this->rh175_db_faixavalores = ($this->rh175_db_faixavalores === 0 || $this->rh175_db_faixavalores === 0.0 || $this->rh175_db_faixavalores == ""?@$GLOBALS["HTTP_POST_VARS"]["rh175_db_faixavalores"]:$this->rh175_db_faixavalores);
+       $this->rh175_percentual = ($this->rh175_percentual === 0 || $this->rh175_percentual === 0.0 || $this->rh175_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["rh175_percentual"]:$this->rh175_percentual);
+       $this->rh175_deducao = ($this->rh175_deducao === 0 || $this->rh175_deducao === 0.0 || $this->rh175_deducao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh175_deducao"]:$this->rh175_deducao);
      }else{
-       $this->rh175_sequencial = ($this->rh175_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh175_sequencial"]:$this->rh175_sequencial);
+       $this->rh175_sequencial = ($this->rh175_sequencial === 0 || $this->rh175_sequencial === 0.0 || $this->rh175_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh175_sequencial"]:$this->rh175_sequencial);
      }
    }
    // funcao para Inclusão
@@ -107,7 +107,7 @@ class cl_faixavaloresirrf {
          $this->rh175_sequencial = $rh175_sequencial; 
        }
      }
-     if(($this->rh175_sequencial == null) || ($this->rh175_sequencial == "") ){ 
+     if(($this->rh175_sequencial == null) || ($this->rh175_sequencial === 0 || $this->rh175_sequencial === 0.0 || $this->rh175_sequencial == "") ){ 
        $this->erro_sql = " Campo rh175_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

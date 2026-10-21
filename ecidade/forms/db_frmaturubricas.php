@@ -46,7 +46,7 @@ $TRTDF = "
 $tagaf = true;
 
 if(isset($valores_campos_rel)){
-	$arr_pontos = split(",",$valores_campos_rel);
+	$arr_pontos = preg_split("#,#m",$valores_campos_rel);
 	$pontosselecionados = "<table cellspacing='10' width='100%'>";
 	for($ii=0; $ii<count($arr_pontos); $ii++){
 		$ponto = $arr_pontos[$ii];

@@ -24,7 +24,7 @@ class cl_tipodeficiencia {
                  rh150_descricao = varchar(50) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_tipodeficiencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipodeficiencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -41,10 +41,10 @@ class cl_tipodeficiencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh150_sequencial = ($this->rh150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh150_sequencial"]:$this->rh150_sequencial);
+       $this->rh150_sequencial = ($this->rh150_sequencial === 0 || $this->rh150_sequencial === 0.0 || $this->rh150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh150_sequencial"]:$this->rh150_sequencial);
        $this->rh150_descricao = ($this->rh150_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh150_descricao"]:$this->rh150_descricao);
      }else{
-       $this->rh150_sequencial = ($this->rh150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh150_sequencial"]:$this->rh150_sequencial);
+       $this->rh150_sequencial = ($this->rh150_sequencial === 0 || $this->rh150_sequencial === 0.0 || $this->rh150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh150_sequencial"]:$this->rh150_sequencial);
      }
    }
    // funcao para inclusao
@@ -83,7 +83,7 @@ class cl_tipodeficiencia {
          $this->rh150_sequencial = $rh150_sequencial; 
        }
      }
-     if(($this->rh150_sequencial == null) || ($this->rh150_sequencial == "") ){ 
+     if(($this->rh150_sequencial == null) || ($this->rh150_sequencial === 0 || $this->rh150_sequencial === 0.0 || $this->rh150_sequencial == "") ){ 
        $this->erro_sql = " Campo rh150_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

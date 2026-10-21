@@ -43,10 +43,10 @@ class cl_siopesegmentoatuacao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->si07_segmento = ($this->si07_segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["si07_segmento"]:$this->si07_segmento);
+       $this->si07_segmento = ($this->si07_segmento === 0 || $this->si07_segmento === 0.0 || $this->si07_segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["si07_segmento"]:$this->si07_segmento);
        $this->si07_descricao = ($this->si07_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["si07_descricao"]:$this->si07_descricao);
      }else{
-       $this->si07_segmento = ($this->si07_segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["si07_segmento"]:$this->si07_segmento);
+       $this->si07_segmento = ($this->si07_segmento === 0 || $this->si07_segmento === 0.0 || $this->si07_segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["si07_segmento"]:$this->si07_segmento);
      }
    }
 
@@ -86,7 +86,7 @@ class cl_siopesegmentoatuacao
          $this->si07_segmento = $si07_segmento; 
        }
      }
-     if(($this->si07_segmento == null) || ($this->si07_segmento == "") ){ 
+     if(($this->si07_segmento == null) || ($this->si07_segmento === 0 || $this->si07_segmento === 0.0 || $this->si07_segmento == "") ){ 
        $this->erro_sql = " Campo si07_segmento não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

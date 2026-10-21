@@ -54,7 +54,7 @@ class cl_rhcontasrec {
                  rh41_anousu = int4 = Ano 
                  ";
    //funcao construtor da classe 
-   function cl_rhcontasrec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhcontasrec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,15 +71,15 @@ class cl_rhcontasrec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh41_conta = ($this->rh41_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_conta"]:$this->rh41_conta);
-       $this->rh41_codigo = ($this->rh41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_codigo"]:$this->rh41_codigo);
-       $this->rh41_instit = ($this->rh41_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_instit"]:$this->rh41_instit);
-       $this->rh41_anousu = ($this->rh41_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_anousu"]:$this->rh41_anousu);
+       $this->rh41_conta = ($this->rh41_conta === 0 || $this->rh41_conta === 0.0 || $this->rh41_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_conta"]:$this->rh41_conta);
+       $this->rh41_codigo = ($this->rh41_codigo === 0 || $this->rh41_codigo === 0.0 || $this->rh41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_codigo"]:$this->rh41_codigo);
+       $this->rh41_instit = ($this->rh41_instit === 0 || $this->rh41_instit === 0.0 || $this->rh41_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_instit"]:$this->rh41_instit);
+       $this->rh41_anousu = ($this->rh41_anousu === 0 || $this->rh41_anousu === 0.0 || $this->rh41_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_anousu"]:$this->rh41_anousu);
      }else{
-       $this->rh41_conta = ($this->rh41_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_conta"]:$this->rh41_conta);
-       $this->rh41_codigo = ($this->rh41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_codigo"]:$this->rh41_codigo);
-       $this->rh41_instit = ($this->rh41_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_instit"]:$this->rh41_instit);
-       $this->rh41_anousu = ($this->rh41_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_anousu"]:$this->rh41_anousu);
+       $this->rh41_conta = ($this->rh41_conta === 0 || $this->rh41_conta === 0.0 || $this->rh41_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_conta"]:$this->rh41_conta);
+       $this->rh41_codigo = ($this->rh41_codigo === 0 || $this->rh41_codigo === 0.0 || $this->rh41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_codigo"]:$this->rh41_codigo);
+       $this->rh41_instit = ($this->rh41_instit === 0 || $this->rh41_instit === 0.0 || $this->rh41_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_instit"]:$this->rh41_instit);
+       $this->rh41_anousu = ($this->rh41_anousu === 0 || $this->rh41_anousu === 0.0 || $this->rh41_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh41_anousu"]:$this->rh41_anousu);
      }
    }
    // funcao para inclusao
@@ -89,7 +89,7 @@ class cl_rhcontasrec {
        $this->rh41_codigo = $rh41_codigo; 
        $this->rh41_instit = $rh41_instit; 
        $this->rh41_anousu = $rh41_anousu; 
-     if(($this->rh41_conta == null) || ($this->rh41_conta == "") ){ 
+     if(($this->rh41_conta == null) || ($this->rh41_conta === 0 || $this->rh41_conta === 0.0 || $this->rh41_conta == "") ){ 
        $this->erro_sql = " Campo rh41_conta nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -97,7 +97,7 @@ class cl_rhcontasrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh41_codigo == null) || ($this->rh41_codigo == "") ){ 
+     if(($this->rh41_codigo == null) || ($this->rh41_codigo === 0 || $this->rh41_codigo === 0.0 || $this->rh41_codigo == "") ){ 
        $this->erro_sql = " Campo rh41_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -105,7 +105,7 @@ class cl_rhcontasrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh41_instit == null) || ($this->rh41_instit == "") ){ 
+     if(($this->rh41_instit == null) || ($this->rh41_instit === 0 || $this->rh41_instit === 0.0 || $this->rh41_instit == "") ){ 
        $this->erro_sql = " Campo rh41_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -113,7 +113,7 @@ class cl_rhcontasrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh41_anousu == null) || ($this->rh41_anousu == "") ){ 
+     if(($this->rh41_anousu == null) || ($this->rh41_anousu === 0 || $this->rh41_anousu === 0.0 || $this->rh41_anousu == "") ){ 
        $this->erro_sql = " Campo rh41_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -429,7 +429,7 @@ class cl_rhcontasrec {
    function sql_query ( $rh41_conta=null,$rh41_codigo=null,$rh41_instit=null,$rh41_anousu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_rhcontasrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -493,7 +493,7 @@ class cl_rhcontasrec {
    function sql_query_file ( $rh41_conta=null,$rh41_codigo=null,$rh41_instit=null,$rh41_anousu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_rhcontasrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -551,7 +551,7 @@ class cl_rhcontasrec {
   function sql_query_contas ( $rh41_conta=null,$rh41_codigo=null,$rh41_instit=null,$rh41_anousu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -606,7 +606,7 @@ class cl_rhcontasrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -38,7 +38,8 @@ include(modification("classes/db_orcreservasol_classe.php"));
 include(modification("classes/db_pcparam_classe.php"));
 include(modification("classes/db_empparametro_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 //echo $HTTP_SERVER_VARS["QUERY_STRING"]; exit;
 

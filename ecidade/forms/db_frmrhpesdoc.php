@@ -296,7 +296,7 @@ db_input('rh16_ctps_d',4,$Irh16_ctps_d,true,'text',$db_opcao,"")
 		  	$rh16_data_emissao_cnh_dia = '';
 
 		  	if( isset($rh16_data_emissao_cnh) && $rh16_data_emissao_cnh != ""){
-		  		list( $rh16_data_emissao_cnh_ano, $rh16_data_emissao_cnh_mes, $rh16_data_emissao_cnh_dia ) = split( "[-]", $rh16_data_emissao_cnh );
+		  		list( $rh16_data_emissao_cnh_ano, $rh16_data_emissao_cnh_mes, $rh16_data_emissao_cnh_dia ) = preg_split( "#[\\-]#m", $rh16_data_emissao_cnh );
 		  	}
 		  	db_inputdata('rh16_data_emissao_cnh',$rh16_data_emissao_cnh_dia,$rh16_data_emissao_cnh_mes,$rh16_data_emissao_cnh_ano,true,'text',$db_opcao,"")
 		  	?>
@@ -322,7 +322,7 @@ db_input('rh16_ctps_d',4,$Irh16_ctps_d,true,'text',$db_opcao,"")
 	  	  	$rh16_data_orgao_classe_dia = '';
 
 	  	  	if( isset($rh16_data_orgao_classe) && $rh16_data_orgao_classe != ""){
-	  	  		list( $rh16_data_orgao_classe_ano, $rh16_data_orgao_classe_mes, $rh16_data_orgao_classe_dia ) = split( "[-]", $rh16_data_orgao_classe );
+	  	  		list( $rh16_data_orgao_classe_ano, $rh16_data_orgao_classe_mes, $rh16_data_orgao_classe_dia ) = preg_split( "#[\\-]#m", $rh16_data_orgao_classe );
 	  	  	}
 	  	  	db_inputdata('rh16_data_orgao_classe',$rh16_data_orgao_classe_dia,$rh16_data_orgao_classe_mes,$rh16_data_orgao_classe_ano,true,'text',$db_opcao,"")
 	  	  	?>
@@ -347,7 +347,7 @@ db_input('rh16_ctps_d',4,$Irh16_ctps_d,true,'text',$db_opcao,"")
 	  	  	$rh16_data_validade_orgao_classe_dia = '';
 
 	  	  	if( isset($rh16_data_validade_orgao_classe) && $rh16_data_validade_orgao_classe != ""){
-	  	  		list( $rh16_data_validade_orgao_classe_ano, $rh16_data_validade_orgao_classe_mes, $rh16_data_validade_orgao_classe_dia ) = split( "[-]", $rh16_data_validade_orgao_classe );
+	  	  		list( $rh16_data_validade_orgao_classe_ano, $rh16_data_validade_orgao_classe_mes, $rh16_data_validade_orgao_classe_dia ) = preg_split( "#[\\-]#m", $rh16_data_validade_orgao_classe );
 	  	  	}
 	  	  	db_inputdata('rh16_data_validade_orgao_classe',$rh16_data_validade_orgao_classe_dia,$rh16_data_validade_orgao_classe_mes,$rh16_data_validade_orgao_classe_ano,true,'text',$db_opcao,"")
 	  	  	?>
@@ -383,7 +383,7 @@ db_input('rh16_ctps_d',4,$Irh16_ctps_d,true,'text',$db_opcao,"")
 	  	  	$rh16_data_emissao_rne_dia = '';
 
 	  	  	if( isset($rh16_data_emissao_rne) && $rh16_data_emissao_rne != ""){
-	  	  		list( $rh16_data_emissao_rne_ano, $rh16_data_emissao_rne_mes, $rh16_data_emissao_rne_dia ) = split( "[-]", $rh16_data_emissao_rne );
+	  	  		list( $rh16_data_emissao_rne_ano, $rh16_data_emissao_rne_mes, $rh16_data_emissao_rne_dia ) = preg_split( "#[\\-]#m", $rh16_data_emissao_rne );
 	  	  	}
 	  	  	db_inputdata('rh16_data_emissao_rne',$rh16_data_emissao_rne_dia,$rh16_data_emissao_rne_mes,$rh16_data_emissao_rne_ano,true,'text',$db_opcao,"")
 	  	  	?>
@@ -398,7 +398,7 @@ db_input('rh16_ctps_d',4,$Irh16_ctps_d,true,'text',$db_opcao,"")
 	  	  	$rh16_data_entrada_rne_dia = '';
 
 	  	  	if( isset($rh16_data_entrada_rne) && $rh16_data_entrada_rne != ""){
-	  	  		list( $rh16_data_entrada_rne_ano, $rh16_data_entrada_rne_mes, $rh16_data_entrada_rne_dia ) = split( "[-]", $rh16_data_entrada_rne );
+	  	  		list( $rh16_data_entrada_rne_ano, $rh16_data_entrada_rne_mes, $rh16_data_entrada_rne_dia ) = preg_split( "#[\\-]#m", $rh16_data_entrada_rne );
 	  	  	}
 	  	  	db_inputdata('rh16_data_entrada_rne',$rh16_data_entrada_rne_dia,$rh16_data_entrada_rne_mes,$rh16_data_entrada_rne_ano,true,'text',$db_opcao,"")
 	  	  	?>
@@ -415,7 +415,7 @@ db_input('rh16_ctps_d',4,$Irh16_ctps_d,true,'text',$db_opcao,"")
 	  	  	$rh16_data_validade_rne_dia = '';
 
 	  	  	if( isset($rh16_data_validade_rne) && $rh16_data_validade_rne != ""){
-	  	  		list( $rh16_data_validade_rne_ano, $rh16_data_validade_rne_mes, $rh16_data_validade_rne_dia ) = split( "[-]", $rh16_data_validade_rne );
+	  	  		list( $rh16_data_validade_rne_ano, $rh16_data_validade_rne_mes, $rh16_data_validade_rne_dia ) = preg_split( "#[\\-]#m", $rh16_data_validade_rne );
 	  	  	}
 	  	  	db_inputdata('rh16_data_validade_rne',$rh16_data_validade_rne_dia,$rh16_data_validade_rne_mes,$rh16_data_validade_rne_ano,true,'text',$db_opcao,"")
 	  	  	?>
@@ -484,7 +484,7 @@ db_input('rh16_ctps_d',4,$Irh16_ctps_d,true,'text',$db_opcao,"")
 	  	  	  $z01_identdtexp_ano = ''  ;
 
 	  	  	  if( isset($z01_identdtexp) && $z01_identdtexp != ""){
-	  	  	  	list( $z01_identdtexp_ano, $z01_identdtexp_mes, $z01_identdtexp_dia ) = split( "[-]", $z01_identdtexp );
+	  	  	  	list( $z01_identdtexp_ano, $z01_identdtexp_mes, $z01_identdtexp_dia ) = preg_split( "#[\\-]#m", $z01_identdtexp );
 	  	  	  }
             db_inputdata ( 'z01_identdtexp', @$z01_identdtexp_dia, @$z01_identdtexp_mes, @$z01_identdtexp_ano, true, 'text', 3 );
 	  	  	?>

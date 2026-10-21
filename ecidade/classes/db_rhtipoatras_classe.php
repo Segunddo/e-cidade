@@ -50,7 +50,7 @@ class cl_rhtipoatras {
                  rh60_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_rhtipoatras() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhtipoatras"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_rhtipoatras {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh60_codigo = ($this->rh60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh60_codigo"]:$this->rh60_codigo);
+       $this->rh60_codigo = ($this->rh60_codigo === 0 || $this->rh60_codigo === 0.0 || $this->rh60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh60_codigo"]:$this->rh60_codigo);
        $this->rh60_descr = ($this->rh60_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh60_descr"]:$this->rh60_descr);
      }else{
-       $this->rh60_codigo = ($this->rh60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh60_codigo"]:$this->rh60_codigo);
+       $this->rh60_codigo = ($this->rh60_codigo === 0 || $this->rh60_codigo === 0.0 || $this->rh60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh60_codigo"]:$this->rh60_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_rhtipoatras {
          $this->rh60_codigo = $rh60_codigo; 
        }
      }
-     if(($this->rh60_codigo == null) || ($this->rh60_codigo == "") ){ 
+     if(($this->rh60_codigo == null) || ($this->rh60_codigo === 0 || $this->rh60_codigo === 0.0 || $this->rh60_codigo == "") ){ 
        $this->erro_sql = " Campo rh60_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_rhtipoatras {
    function sql_query ( $rh60_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_rhtipoatras {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_rhtipoatras {
    function sql_query_file ( $rh60_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_rhtipoatras {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -49,7 +49,8 @@ $clpontofs         = new cl_pontofs;
 $clcfpess          = new cl_cfpess;
 $clrhrubricas      = new cl_rhrubricas;
 $clafastaassenta   = new cl_afastaassenta;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $db_botao = false;
 $db_opcao = 33;
 

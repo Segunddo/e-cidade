@@ -28,7 +28,7 @@ class cl_rubricadescontoconsignado {
                  rh140_ordem = int4 = Ordem 
                  ";
    //funcao construtor da classe 
-   function cl_rubricadescontoconsignado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rubricadescontoconsignado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_rubricadescontoconsignado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh140_sequencial = ($this->rh140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh140_sequencial"]:$this->rh140_sequencial);
+       $this->rh140_sequencial = ($this->rh140_sequencial === 0 || $this->rh140_sequencial === 0.0 || $this->rh140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh140_sequencial"]:$this->rh140_sequencial);
        $this->rh140_rubric = ($this->rh140_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh140_rubric"]:$this->rh140_rubric);
-       $this->rh140_instit = ($this->rh140_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh140_instit"]:$this->rh140_instit);
-       $this->rh140_ordem = ($this->rh140_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh140_ordem"]:$this->rh140_ordem);
+       $this->rh140_instit = ($this->rh140_instit === 0 || $this->rh140_instit === 0.0 || $this->rh140_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh140_instit"]:$this->rh140_instit);
+       $this->rh140_ordem = ($this->rh140_ordem === 0 || $this->rh140_ordem === 0.0 || $this->rh140_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh140_ordem"]:$this->rh140_ordem);
      }else{
-       $this->rh140_sequencial = ($this->rh140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh140_sequencial"]:$this->rh140_sequencial);
+       $this->rh140_sequencial = ($this->rh140_sequencial === 0 || $this->rh140_sequencial === 0.0 || $this->rh140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh140_sequencial"]:$this->rh140_sequencial);
      }
    }
    // funcao para inclusao
@@ -107,7 +107,7 @@ class cl_rubricadescontoconsignado {
          $this->rh140_sequencial = $rh140_sequencial; 
        }
      }
-     if(($this->rh140_sequencial == null) || ($this->rh140_sequencial == "") ){ 
+     if(($this->rh140_sequencial == null) || ($this->rh140_sequencial === 0 || $this->rh140_sequencial === 0.0 || $this->rh140_sequencial == "") ){ 
        $this->erro_sql = " Campo rh140_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -387,7 +387,7 @@ class cl_rubricadescontoconsignado {
    function sql_query ( $rh140_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -412,7 +412,7 @@ class cl_rubricadescontoconsignado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_rubricadescontoconsignado {
    function sql_query_file ( $rh140_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_rubricadescontoconsignado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

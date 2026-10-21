@@ -56,7 +56,7 @@ class cl_rhpeslota {
                  rh10_percrateio = int4 = Percentual de Reteio 
                  ";
    //funcao construtor da classe 
-   function cl_rhpeslota() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhpeslota"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,16 +73,16 @@ class cl_rhpeslota {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh10_anousu = ($this->rh10_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_anousu"]:$this->rh10_anousu);
-       $this->rh10_mesusu = ($this->rh10_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_mesusu"]:$this->rh10_mesusu);
-       $this->rh10_regist = ($this->rh10_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_regist"]:$this->rh10_regist);
-       $this->rh10_lotac = ($this->rh10_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_lotac"]:$this->rh10_lotac);
-       $this->rh10_percrateio = ($this->rh10_percrateio == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_percrateio"]:$this->rh10_percrateio);
+       $this->rh10_anousu = ($this->rh10_anousu === 0 || $this->rh10_anousu === 0.0 || $this->rh10_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_anousu"]:$this->rh10_anousu);
+       $this->rh10_mesusu = ($this->rh10_mesusu === 0 || $this->rh10_mesusu === 0.0 || $this->rh10_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_mesusu"]:$this->rh10_mesusu);
+       $this->rh10_regist = ($this->rh10_regist === 0 || $this->rh10_regist === 0.0 || $this->rh10_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_regist"]:$this->rh10_regist);
+       $this->rh10_lotac = ($this->rh10_lotac === 0 || $this->rh10_lotac === 0.0 || $this->rh10_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_lotac"]:$this->rh10_lotac);
+       $this->rh10_percrateio = ($this->rh10_percrateio === 0 || $this->rh10_percrateio === 0.0 || $this->rh10_percrateio == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_percrateio"]:$this->rh10_percrateio);
      }else{
-       $this->rh10_anousu = ($this->rh10_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_anousu"]:$this->rh10_anousu);
-       $this->rh10_mesusu = ($this->rh10_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_mesusu"]:$this->rh10_mesusu);
-       $this->rh10_regist = ($this->rh10_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_regist"]:$this->rh10_regist);
-       $this->rh10_lotac = ($this->rh10_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_lotac"]:$this->rh10_lotac);
+       $this->rh10_anousu = ($this->rh10_anousu === 0 || $this->rh10_anousu === 0.0 || $this->rh10_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_anousu"]:$this->rh10_anousu);
+       $this->rh10_mesusu = ($this->rh10_mesusu === 0 || $this->rh10_mesusu === 0.0 || $this->rh10_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_mesusu"]:$this->rh10_mesusu);
+       $this->rh10_regist = ($this->rh10_regist === 0 || $this->rh10_regist === 0.0 || $this->rh10_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_regist"]:$this->rh10_regist);
+       $this->rh10_lotac = ($this->rh10_lotac === 0 || $this->rh10_lotac === 0.0 || $this->rh10_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["rh10_lotac"]:$this->rh10_lotac);
      }
    }
    // funcao para inclusao
@@ -101,7 +101,7 @@ class cl_rhpeslota {
        $this->rh10_mesusu = $rh10_mesusu; 
        $this->rh10_regist = $rh10_regist; 
        $this->rh10_lotac = $rh10_lotac; 
-     if(($this->rh10_anousu == null) || ($this->rh10_anousu == "") ){ 
+     if(($this->rh10_anousu == null) || ($this->rh10_anousu === 0 || $this->rh10_anousu === 0.0 || $this->rh10_anousu == "") ){ 
        $this->erro_sql = " Campo rh10_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -109,7 +109,7 @@ class cl_rhpeslota {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh10_mesusu == null) || ($this->rh10_mesusu == "") ){ 
+     if(($this->rh10_mesusu == null) || ($this->rh10_mesusu === 0 || $this->rh10_mesusu === 0.0 || $this->rh10_mesusu == "") ){ 
        $this->erro_sql = " Campo rh10_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -117,7 +117,7 @@ class cl_rhpeslota {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh10_regist == null) || ($this->rh10_regist == "") ){ 
+     if(($this->rh10_regist == null) || ($this->rh10_regist === 0 || $this->rh10_regist === 0.0 || $this->rh10_regist == "") ){ 
        $this->erro_sql = " Campo rh10_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -125,7 +125,7 @@ class cl_rhpeslota {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh10_lotac == null) || ($this->rh10_lotac == "") ){ 
+     if(($this->rh10_lotac == null) || ($this->rh10_lotac === 0 || $this->rh10_lotac === 0.0 || $this->rh10_lotac == "") ){ 
        $this->erro_sql = " Campo rh10_lotac nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -437,7 +437,7 @@ class cl_rhpeslota {
    function sql_query ( $rh10_anousu=null,$rh10_mesusu=null,$rh10_regist=null,$rh10_lotac=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -505,7 +505,7 @@ class cl_rhpeslota {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -517,7 +517,7 @@ class cl_rhpeslota {
    function sql_query_file ( $rh10_anousu=null,$rh10_mesusu=null,$rh10_regist=null,$rh10_lotac=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -562,7 +562,7 @@ class cl_rhpeslota {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

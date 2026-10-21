@@ -44,7 +44,7 @@ $diaif = db_dias_mes($anoii,$mesii);                               // QUANTIDADE
 
 // DIA, MÊS E ANO INICIAL DO PERÍODO FINAL
 $datafinal = date("d-m-Y",mktime(0,0,0,($mesii+1),$diaii,$anoii)); // BUSCA PÓXIMO MÊS
-$arr_datafinal = split("-",$datafinal);                            // QUEBRA DATA NUM ARRAY
+$arr_datafinal = preg_split("#\\-#m",$datafinal);                            // QUEBRA DATA NUM ARRAY
 $diafi = "01";                                                     // PRIMEIRO DIA DO MÊS
 $mesfi = $arr_datafinal[1];                                        // MÊS DO PERÍODO FINAL (POSIÇÃO 1 DENTRO DO ARRAY)
 $anofi = $arr_datafinal[2];                                        // ANO DO PERÍODO FINAL (POSIÇÃO 2 DENTRO DO ARRAY)

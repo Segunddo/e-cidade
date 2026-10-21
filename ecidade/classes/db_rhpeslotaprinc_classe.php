@@ -54,7 +54,7 @@ class cl_rhpeslotaprinc {
                  rh11_lotac = int4 = Lotação 
                  ";
    //funcao construtor da classe 
-   function cl_rhpeslotaprinc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhpeslotaprinc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,15 +71,15 @@ class cl_rhpeslotaprinc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh11_anousu = ($this->rh11_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_anousu"]:$this->rh11_anousu);
-       $this->rh11_mesusu = ($this->rh11_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_mesusu"]:$this->rh11_mesusu);
-       $this->rh11_regist = ($this->rh11_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_regist"]:$this->rh11_regist);
-       $this->rh11_lotac = ($this->rh11_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_lotac"]:$this->rh11_lotac);
+       $this->rh11_anousu = ($this->rh11_anousu === 0 || $this->rh11_anousu === 0.0 || $this->rh11_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_anousu"]:$this->rh11_anousu);
+       $this->rh11_mesusu = ($this->rh11_mesusu === 0 || $this->rh11_mesusu === 0.0 || $this->rh11_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_mesusu"]:$this->rh11_mesusu);
+       $this->rh11_regist = ($this->rh11_regist === 0 || $this->rh11_regist === 0.0 || $this->rh11_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_regist"]:$this->rh11_regist);
+       $this->rh11_lotac = ($this->rh11_lotac === 0 || $this->rh11_lotac === 0.0 || $this->rh11_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_lotac"]:$this->rh11_lotac);
      }else{
-       $this->rh11_anousu = ($this->rh11_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_anousu"]:$this->rh11_anousu);
-       $this->rh11_mesusu = ($this->rh11_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_mesusu"]:$this->rh11_mesusu);
-       $this->rh11_regist = ($this->rh11_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_regist"]:$this->rh11_regist);
-       $this->rh11_lotac = ($this->rh11_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_lotac"]:$this->rh11_lotac);
+       $this->rh11_anousu = ($this->rh11_anousu === 0 || $this->rh11_anousu === 0.0 || $this->rh11_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_anousu"]:$this->rh11_anousu);
+       $this->rh11_mesusu = ($this->rh11_mesusu === 0 || $this->rh11_mesusu === 0.0 || $this->rh11_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_mesusu"]:$this->rh11_mesusu);
+       $this->rh11_regist = ($this->rh11_regist === 0 || $this->rh11_regist === 0.0 || $this->rh11_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_regist"]:$this->rh11_regist);
+       $this->rh11_lotac = ($this->rh11_lotac === 0 || $this->rh11_lotac === 0.0 || $this->rh11_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["rh11_lotac"]:$this->rh11_lotac);
      }
    }
    // funcao para inclusao
@@ -89,7 +89,7 @@ class cl_rhpeslotaprinc {
        $this->rh11_mesusu = $rh11_mesusu; 
        $this->rh11_regist = $rh11_regist; 
        $this->rh11_lotac = $rh11_lotac; 
-     if(($this->rh11_anousu == null) || ($this->rh11_anousu == "") ){ 
+     if(($this->rh11_anousu == null) || ($this->rh11_anousu === 0 || $this->rh11_anousu === 0.0 || $this->rh11_anousu == "") ){ 
        $this->erro_sql = " Campo rh11_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -97,7 +97,7 @@ class cl_rhpeslotaprinc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh11_mesusu == null) || ($this->rh11_mesusu == "") ){ 
+     if(($this->rh11_mesusu == null) || ($this->rh11_mesusu === 0 || $this->rh11_mesusu === 0.0 || $this->rh11_mesusu == "") ){ 
        $this->erro_sql = " Campo rh11_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -105,7 +105,7 @@ class cl_rhpeslotaprinc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh11_regist == null) || ($this->rh11_regist == "") ){ 
+     if(($this->rh11_regist == null) || ($this->rh11_regist === 0 || $this->rh11_regist === 0.0 || $this->rh11_regist == "") ){ 
        $this->erro_sql = " Campo rh11_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -113,7 +113,7 @@ class cl_rhpeslotaprinc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh11_lotac == null) || ($this->rh11_lotac == "") ){ 
+     if(($this->rh11_lotac == null) || ($this->rh11_lotac === 0 || $this->rh11_lotac === 0.0 || $this->rh11_lotac == "") ){ 
        $this->erro_sql = " Campo rh11_lotac nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -406,7 +406,7 @@ class cl_rhpeslotaprinc {
    function sql_query ( $rh11_anousu=null,$rh11_mesusu=null,$rh11_regist=null,$rh11_lotac=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_rhpeslotaprinc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_rhpeslotaprinc {
    function sql_query_file ( $rh11_anousu=null,$rh11_mesusu=null,$rh11_regist=null,$rh11_lotac=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_rhpeslotaprinc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

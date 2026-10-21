@@ -78,8 +78,8 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes3\|pes4)[0-9]*_)` — **3.987 arquivos** + 367 por `map` |
-| **Próximo passo** | **Área RECURSOS HUMANOS em andamento** (branch `3recursoshumanos-migrado`, ver *ÁREA RECURSOS HUMANOS*): `rh`+`eso`, `rec` e `pes3`+`pes4` feitos; próximo `pes1`, depois `pes2` (ver *PARA RETOMAR* na seção). |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes1\|pes3\|pes4)[0-9]*_)` — **4.357 arquivos** + 367 por `map` |
+| **Próximo passo** | **Área RECURSOS HUMANOS em andamento** (branch `3recursoshumanos-migrado`, ver *ÁREA RECURSOS HUMANOS*): `rh`+`eso`, `rec`, `pes3`+`pes4` e `pes1` feitos; próximo `pes2` (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3399,6 +3399,7 @@ ser salvo em dump.
 | `rh`+`eso` | 239 | 29 (Rector, 1 passada + confirmação) | 239/239 | 74/74 | 2.213 linhas, 53 classes, 0 div. | **94/94** |
 | `rec` | 568 | 134 Rector + 15 à mão | 568/568 | 171/172 | 4.893 linhas, 139 classes, 0 div. | **278/279** + 1 caracterizada |
 | `pes3`+`pes4` | 900 | 148 Rector + ~30 à mão | 900/900 | 440/443 (3 artefatos conhecidos) | 12.839 linhas, 0 div. além dos artefatos | **269/270** + 1 pendente (`.phar`) |
+| `pes1` | 1.142 | 256 Rector + 3 à mão | 1.142/1.142 | 482/485 (3 artefatos conhecidos) | 13.257 linhas, 0 div. além dos artefatos | **370/370** |
 
 **`rh`+`eso`** — nenhum arquivo de tela precisou mudar: os 29 são 16 `classes/` e 13 `func_`.
 Rector só com regras já vetadas (16 guardas, 13 `parse_str`+`extract`, 10 construtores, 4
@@ -3503,7 +3504,31 @@ Regressão: interseção real com universos verificados = 1 classe do `prot` + o
 roteadas 4/4, amostra `not`+`mar`+`inf`+`tre` 98/98. Roteamento: `pes3` e `pes4` no `location`;
 `pes1_`/`pes2_` seguem no 5.6.
 
-**PARA RETOMAR:** faltam `pes1` (370 telas, ~337 a alterar) e `pes2` (515, ~310), depois a Fase B
+**`pes1`** (370 telas, 2º sublote) — **369/370 já na 1ª bateria**, o melhor do RH; a única era
+uma guarda `pg_*` (`null` numa comparação `== 0`, que dá o mesmo resultado nos dois). Rector só com
+regras vetadas, convergiu na 2ª passada. À mão, 3 pontos:
+
+- **`split()` com o padrão numa VARIÁVEL digitada pelo usuário** (`pes1_importainfla001.php`,
+  `split($separador, …)`, separador vindo do formulário, padrão `;`). O Rector gera
+  `preg_split('#' . preg_quote($separador) . '#m', …)` — **literal** —, mas o `split()` POSIX tratava o
+  separador como **regex**. Medido no 5.6: com `.` ele quebra em todo caractere, com `\|` separa no
+  pipe, e com `|` sozinho (alternativa vazia, erro em POSIX) devolve **`false`**; a forma do Rector
+  erra os três. Corrigido para a forma regex mais o caso da alternativa vazia — **idêntica ao `split()`
+  do 5.6 em 13 separadores**, nos dois runtimes. Lição: a vantagem do Rector no `split` (converte
+  regex certo) vale para padrão **literal no código**; com padrão em variável ele chuta "literal".
+- 1 `while (list() = each())` com `key`/`current`/`next` + `is_array` (forma já medida).
+- 1 guarda `pg_*`.
+
+`libs/db_libgertxtfolha.php` foi tocado, mas só os universos do `pes` o alcançam — não pede bateria.
+Regressão: interseção só com o `prot` (`classes/db_solicita_classe.php`) → 4/4. Detector de LSP:
+nada novo nas 70 classes com `extends` do universo. Roteamento: `pes1` no `location`.
+
+**FERRAMENTAL:** `scratchpad/porclasse.sh` (uma classe por processo para os harnesses de classes e de
+escrita) agora é versionado — a cópia fora do repositório sumiu entre sessões e só sobreviveu por
+estar no `/tmp` compartilhado dos containers. O portão de funções passou a ignorar comentários de
+linha (era a origem do falso positivo `mae` do sublote anterior).
+
+**PARA RETOMAR:** falta `pes2` (515 telas, ~310), depois a Fase B
 (as ~10 telas de `es`/`con`/`cai`/`lic`/`sped` pelo `map`), o `.phar`, o nível 3 nos cadastros e o
 cenário de cálculo. A sessão autenticada usada foi `98d016cc…`; os ciclos de guarda precisam de
 `/tmp/_sess.bak` no 5.6 (o `cmp.py` o cria ao rodar).

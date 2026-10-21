@@ -42,7 +42,7 @@ class ReajustePadroes{
    * @param integer $iMesUsu       Mes da Competência
    * @param integer $iTipoReajuste Tipo de Reajuste
    */
-  public function ReajustePadroes($iAnoUsu, $iMesUsu, $iTipoReajuste){
+  public function __construct($iAnoUsu, $iMesUsu, $iTipoReajuste){
 
     $this->iAnoUsu       = $iAnoUsu;
     $this->iMesUsu       = $iMesUsu;

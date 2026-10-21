@@ -60,7 +60,7 @@ class cl_rhlotavincativ {
                  rh39_funcao = int4 = Função 
                  ";
    //funcao construtor da classe 
-   function cl_rhlotavincativ() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhlotavincativ"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,16 +77,16 @@ class cl_rhlotavincativ {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh39_codlotavinc = ($this->rh39_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_codlotavinc"]:$this->rh39_codlotavinc);
-       $this->rh39_codelenov = ($this->rh39_codelenov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_codelenov"]:$this->rh39_codelenov);
-       $this->rh39_anousu = ($this->rh39_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_anousu"]:$this->rh39_anousu);
-       $this->rh39_projativ = ($this->rh39_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_projativ"]:$this->rh39_projativ);
-       $this->rh39_programa = ($this->rh39_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_programa"]:$this->rh39_programa);
-       $this->rh39_subfuncao = ($this->rh39_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_subfuncao"]:$this->rh39_subfuncao);
-       $this->rh39_funcao = ($this->rh39_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_funcao"]:$this->rh39_funcao);
+       $this->rh39_codlotavinc = ($this->rh39_codlotavinc === 0 || $this->rh39_codlotavinc === 0.0 || $this->rh39_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_codlotavinc"]:$this->rh39_codlotavinc);
+       $this->rh39_codelenov = ($this->rh39_codelenov === 0 || $this->rh39_codelenov === 0.0 || $this->rh39_codelenov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_codelenov"]:$this->rh39_codelenov);
+       $this->rh39_anousu = ($this->rh39_anousu === 0 || $this->rh39_anousu === 0.0 || $this->rh39_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_anousu"]:$this->rh39_anousu);
+       $this->rh39_projativ = ($this->rh39_projativ === 0 || $this->rh39_projativ === 0.0 || $this->rh39_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_projativ"]:$this->rh39_projativ);
+       $this->rh39_programa = ($this->rh39_programa === 0 || $this->rh39_programa === 0.0 || $this->rh39_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_programa"]:$this->rh39_programa);
+       $this->rh39_subfuncao = ($this->rh39_subfuncao === 0 || $this->rh39_subfuncao === 0.0 || $this->rh39_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_subfuncao"]:$this->rh39_subfuncao);
+       $this->rh39_funcao = ($this->rh39_funcao === 0 || $this->rh39_funcao === 0.0 || $this->rh39_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_funcao"]:$this->rh39_funcao);
      }else{
-       $this->rh39_codlotavinc = ($this->rh39_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_codlotavinc"]:$this->rh39_codlotavinc);
-       $this->rh39_codelenov = ($this->rh39_codelenov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_codelenov"]:$this->rh39_codelenov);
+       $this->rh39_codlotavinc = ($this->rh39_codlotavinc === 0 || $this->rh39_codlotavinc === 0.0 || $this->rh39_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_codlotavinc"]:$this->rh39_codlotavinc);
+       $this->rh39_codelenov = ($this->rh39_codelenov === 0 || $this->rh39_codelenov === 0.0 || $this->rh39_codelenov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh39_codelenov"]:$this->rh39_codelenov);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_rhlotavincativ {
      }
        $this->rh39_codlotavinc = $rh39_codlotavinc; 
        $this->rh39_codelenov = $rh39_codelenov; 
-     if(($this->rh39_codlotavinc == null) || ($this->rh39_codlotavinc == "") ){ 
+     if(($this->rh39_codlotavinc == null) || ($this->rh39_codlotavinc === 0 || $this->rh39_codlotavinc === 0.0 || $this->rh39_codlotavinc == "") ){ 
        $this->erro_sql = " Campo rh39_codlotavinc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -120,7 +120,7 @@ class cl_rhlotavincativ {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh39_codelenov == null) || ($this->rh39_codelenov == "") ){ 
+     if(($this->rh39_codelenov == null) || ($this->rh39_codelenov === 0 || $this->rh39_codelenov === 0.0 || $this->rh39_codelenov == "") ){ 
        $this->erro_sql = " Campo rh39_codelenov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -429,7 +429,7 @@ class cl_rhlotavincativ {
    function sql_query ( $rh39_codlotavinc=null,$rh39_codelenov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_rhlotavincativ {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_rhlotavincativ {
    function sql_query_file ( $rh39_codlotavinc=null,$rh39_codelenov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -513,7 +513,7 @@ class cl_rhlotavincativ {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

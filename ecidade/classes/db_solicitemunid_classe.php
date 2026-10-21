@@ -52,7 +52,7 @@ class cl_solicitemunid {
                  pc17_codigo = int8 = Código do registro 
                  ";
    //funcao construtor da classe 
-   function cl_solicitemunid() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("solicitemunid"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_solicitemunid {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc17_unid = ($this->pc17_unid == ""?@$GLOBALS["HTTP_POST_VARS"]["pc17_unid"]:$this->pc17_unid);
-       $this->pc17_quant = ($this->pc17_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["pc17_quant"]:$this->pc17_quant);
-       $this->pc17_codigo = ($this->pc17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc17_codigo"]:$this->pc17_codigo);
+       $this->pc17_unid = ($this->pc17_unid === 0 || $this->pc17_unid === 0.0 || $this->pc17_unid == ""?@$GLOBALS["HTTP_POST_VARS"]["pc17_unid"]:$this->pc17_unid);
+       $this->pc17_quant = ($this->pc17_quant === 0 || $this->pc17_quant === 0.0 || $this->pc17_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["pc17_quant"]:$this->pc17_quant);
+       $this->pc17_codigo = ($this->pc17_codigo === 0 || $this->pc17_codigo === 0.0 || $this->pc17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc17_codigo"]:$this->pc17_codigo);
      }else{
-       $this->pc17_codigo = ($this->pc17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc17_codigo"]:$this->pc17_codigo);
+       $this->pc17_codigo = ($this->pc17_codigo === 0 || $this->pc17_codigo === 0.0 || $this->pc17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc17_codigo"]:$this->pc17_codigo);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_solicitemunid {
        return false;
      }
        $this->pc17_codigo = $pc17_codigo; 
-     if(($this->pc17_codigo == null) || ($this->pc17_codigo == "") ){ 
+     if(($this->pc17_codigo == null) || ($this->pc17_codigo === 0 || $this->pc17_codigo === 0.0 || $this->pc17_codigo == "") ){ 
        $this->erro_sql = " Campo pc17_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -336,7 +336,7 @@ class cl_solicitemunid {
    function sql_query ( $pc17_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -360,7 +360,7 @@ class cl_solicitemunid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

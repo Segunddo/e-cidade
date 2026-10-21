@@ -62,7 +62,7 @@ class cl_rhpesjustica {
                  rh61_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_rhpesjustica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhpesjustica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,8 +79,8 @@ class cl_rhpesjustica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh61_codigo = ($this->rh61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh61_codigo"]:$this->rh61_codigo);
-       $this->rh61_regist = ($this->rh61_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh61_regist"]:$this->rh61_regist);
+       $this->rh61_codigo = ($this->rh61_codigo === 0 || $this->rh61_codigo === 0.0 || $this->rh61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh61_codigo"]:$this->rh61_codigo);
+       $this->rh61_regist = ($this->rh61_regist === 0 || $this->rh61_regist === 0.0 || $this->rh61_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh61_regist"]:$this->rh61_regist);
        if($this->rh61_dataini == ""){
          $this->rh61_dataini_dia = ($this->rh61_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh61_dataini_dia"]:$this->rh61_dataini_dia);
          $this->rh61_dataini_mes = ($this->rh61_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh61_dataini_mes"]:$this->rh61_dataini_mes);
@@ -99,7 +99,7 @@ class cl_rhpesjustica {
        }
        $this->rh61_obs = ($this->rh61_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["rh61_obs"]:$this->rh61_obs);
      }else{
-       $this->rh61_codigo = ($this->rh61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh61_codigo"]:$this->rh61_codigo);
+       $this->rh61_codigo = ($this->rh61_codigo === 0 || $this->rh61_codigo === 0.0 || $this->rh61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh61_codigo"]:$this->rh61_codigo);
      }
    }
    // funcao para inclusao
@@ -156,7 +156,7 @@ class cl_rhpesjustica {
          $this->rh61_codigo = $rh61_codigo; 
        }
      }
-     if(($this->rh61_codigo == null) || ($this->rh61_codigo == "") ){ 
+     if(($this->rh61_codigo == null) || ($this->rh61_codigo === 0 || $this->rh61_codigo === 0.0 || $this->rh61_codigo == "") ){ 
        $this->erro_sql = " Campo rh61_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -451,7 +451,7 @@ class cl_rhpesjustica {
    function sql_query ( $rh61_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -487,7 +487,7 @@ class cl_rhpesjustica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_rhpesjustica {
    function sql_query_file ( $rh61_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_rhpesjustica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_rhpesjustica {
    function sql_query_cgm ( $rh61_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -555,7 +555,7 @@ class cl_rhpesjustica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

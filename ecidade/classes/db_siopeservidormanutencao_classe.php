@@ -72,12 +72,12 @@ class cl_siopeservidormanutencao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->si06_servidor = ($this->si06_servidor == ""?@$GLOBALS["HTTP_POST_VARS"]["si06_servidor"]:$this->si06_servidor);
-       $this->si06_categoria = ($this->si06_categoria == ""?@$GLOBALS["HTTP_POST_VARS"]["si06_categoria"]:$this->si06_categoria);
-       $this->si06_situacao = ($this->si06_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["si06_situacao"]:$this->si06_situacao);
-       $this->si06_segmento = ($this->si06_segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["si06_segmento"]:$this->si06_segmento);
+       $this->si06_servidor = ($this->si06_servidor === 0 || $this->si06_servidor === 0.0 || $this->si06_servidor == ""?@$GLOBALS["HTTP_POST_VARS"]["si06_servidor"]:$this->si06_servidor);
+       $this->si06_categoria = ($this->si06_categoria === 0 || $this->si06_categoria === 0.0 || $this->si06_categoria == ""?@$GLOBALS["HTTP_POST_VARS"]["si06_categoria"]:$this->si06_categoria);
+       $this->si06_situacao = ($this->si06_situacao === 0 || $this->si06_situacao === 0.0 || $this->si06_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["si06_situacao"]:$this->si06_situacao);
+       $this->si06_segmento = ($this->si06_segmento === 0 || $this->si06_segmento === 0.0 || $this->si06_segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["si06_segmento"]:$this->si06_segmento);
      }else{
-       $this->si06_servidor = ($this->si06_servidor == ""?@$GLOBALS["HTTP_POST_VARS"]["si06_servidor"]:$this->si06_servidor);
+       $this->si06_servidor = ($this->si06_servidor === 0 || $this->si06_servidor === 0.0 || $this->si06_servidor == ""?@$GLOBALS["HTTP_POST_VARS"]["si06_servidor"]:$this->si06_servidor);
      }
    }
 
@@ -112,7 +112,7 @@ class cl_siopeservidormanutencao
        return false;
      }
        $this->si06_servidor = $si06_servidor; 
-     if(($this->si06_servidor == null) || ($this->si06_servidor == "") ){ 
+     if(($this->si06_servidor == null) || ($this->si06_servidor === 0 || $this->si06_servidor === 0.0 || $this->si06_servidor == "") ){ 
        $this->erro_sql = " Campo si06_servidor não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

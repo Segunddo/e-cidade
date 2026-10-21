@@ -58,7 +58,7 @@ class cl_db_sysfuncoes {
                  triggerfuncao = char(1) = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_db_sysfuncoes() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysfuncoes"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_db_sysfuncoes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codfuncao = ($this->codfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["codfuncao"]:$this->codfuncao);
+       $this->codfuncao = ($this->codfuncao === 0 || $this->codfuncao === 0.0 || $this->codfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["codfuncao"]:$this->codfuncao);
        $this->nomefuncao = ($this->nomefuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["nomefuncao"]:$this->nomefuncao);
        $this->nomearquivo = ($this->nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["nomearquivo"]:$this->nomearquivo);
        $this->obsfuncao = ($this->obsfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["obsfuncao"]:$this->obsfuncao);
        $this->corpofuncao = ($this->corpofuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["corpofuncao"]:$this->corpofuncao);
        $this->triggerfuncao = ($this->triggerfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["triggerfuncao"]:$this->triggerfuncao);
      }else{
-       $this->codfuncao = ($this->codfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["codfuncao"]:$this->codfuncao);
+       $this->codfuncao = ($this->codfuncao === 0 || $this->codfuncao === 0.0 || $this->codfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["codfuncao"]:$this->codfuncao);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_db_sysfuncoes {
          $this->codfuncao = $codfuncao; 
        }
      }
-     if(($this->codfuncao == null) || ($this->codfuncao == "") ){ 
+     if(($this->codfuncao == null) || ($this->codfuncao === 0 || $this->codfuncao === 0.0 || $this->codfuncao == "") ){ 
        $this->erro_sql = " Campo codfuncao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -452,7 +452,7 @@ class cl_db_sysfuncoes {
    function sql_query ( $codfuncao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -474,7 +474,7 @@ class cl_db_sysfuncoes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_db_sysfuncoes {
    function sql_query_file ( $codfuncao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -507,7 +507,7 @@ class cl_db_sysfuncoes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -28,7 +28,7 @@ class cl_db_faixavalores {
                  db150_final = float8 = Fim da Faixa 
                  ";
    //funcao construtor da classe 
-   function cl_db_faixavalores() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_faixavalores"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_db_faixavalores {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db150_sequencial = ($this->db150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db150_sequencial"]:$this->db150_sequencial);
-       $this->db150_db_tabelavalores = ($this->db150_db_tabelavalores == ""?@$GLOBALS["HTTP_POST_VARS"]["db150_db_tabelavalores"]:$this->db150_db_tabelavalores);
-       $this->db150_inicio = ($this->db150_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["db150_inicio"]:$this->db150_inicio);
-       $this->db150_final = ($this->db150_final == ""?@$GLOBALS["HTTP_POST_VARS"]["db150_final"]:$this->db150_final);
+       $this->db150_sequencial = ($this->db150_sequencial === 0 || $this->db150_sequencial === 0.0 || $this->db150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db150_sequencial"]:$this->db150_sequencial);
+       $this->db150_db_tabelavalores = ($this->db150_db_tabelavalores === 0 || $this->db150_db_tabelavalores === 0.0 || $this->db150_db_tabelavalores == ""?@$GLOBALS["HTTP_POST_VARS"]["db150_db_tabelavalores"]:$this->db150_db_tabelavalores);
+       $this->db150_inicio = ($this->db150_inicio === 0 || $this->db150_inicio === 0.0 || $this->db150_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["db150_inicio"]:$this->db150_inicio);
+       $this->db150_final = ($this->db150_final === 0 || $this->db150_final === 0.0 || $this->db150_final == ""?@$GLOBALS["HTTP_POST_VARS"]["db150_final"]:$this->db150_final);
      }else{
-       $this->db150_sequencial = ($this->db150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db150_sequencial"]:$this->db150_sequencial);
+       $this->db150_sequencial = ($this->db150_sequencial === 0 || $this->db150_sequencial === 0.0 || $this->db150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db150_sequencial"]:$this->db150_sequencial);
      }
    }
    // funcao para Inclusão
@@ -107,7 +107,7 @@ class cl_db_faixavalores {
          $this->db150_sequencial = $db150_sequencial; 
        }
      }
-     if(($this->db150_sequencial == null) || ($this->db150_sequencial == "") ){ 
+     if(($this->db150_sequencial == null) || ($this->db150_sequencial === 0 || $this->db150_sequencial === 0.0 || $this->db150_sequencial == "") ){ 
        $this->erro_sql = " Campo db150_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

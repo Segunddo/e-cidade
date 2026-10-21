@@ -52,7 +52,7 @@ class cl_rhlotavincrec {
                  rh43_recurso = int4 = Recurso 
                  ";
    //funcao construtor da classe 
-   function cl_rhlotavincrec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhlotavincrec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_rhlotavincrec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh43_codlotavinc = ($this->rh43_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh43_codlotavinc"]:$this->rh43_codlotavinc);
-       $this->rh43_codelenov = ($this->rh43_codelenov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh43_codelenov"]:$this->rh43_codelenov);
-       $this->rh43_recurso = ($this->rh43_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh43_recurso"]:$this->rh43_recurso);
+       $this->rh43_codlotavinc = ($this->rh43_codlotavinc === 0 || $this->rh43_codlotavinc === 0.0 || $this->rh43_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh43_codlotavinc"]:$this->rh43_codlotavinc);
+       $this->rh43_codelenov = ($this->rh43_codelenov === 0 || $this->rh43_codelenov === 0.0 || $this->rh43_codelenov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh43_codelenov"]:$this->rh43_codelenov);
+       $this->rh43_recurso = ($this->rh43_recurso === 0 || $this->rh43_recurso === 0.0 || $this->rh43_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh43_recurso"]:$this->rh43_recurso);
      }else{
-       $this->rh43_codlotavinc = ($this->rh43_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh43_codlotavinc"]:$this->rh43_codlotavinc);
-       $this->rh43_codelenov = ($this->rh43_codelenov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh43_codelenov"]:$this->rh43_codelenov);
+       $this->rh43_codlotavinc = ($this->rh43_codlotavinc === 0 || $this->rh43_codlotavinc === 0.0 || $this->rh43_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh43_codlotavinc"]:$this->rh43_codlotavinc);
+       $this->rh43_codelenov = ($this->rh43_codelenov === 0 || $this->rh43_codelenov === 0.0 || $this->rh43_codelenov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh43_codelenov"]:$this->rh43_codelenov);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_rhlotavincrec {
      }
        $this->rh43_codlotavinc = $rh43_codlotavinc; 
        $this->rh43_codelenov = $rh43_codelenov; 
-     if(($this->rh43_codlotavinc == null) || ($this->rh43_codlotavinc == "") ){ 
+     if(($this->rh43_codlotavinc == null) || ($this->rh43_codlotavinc === 0 || $this->rh43_codlotavinc === 0.0 || $this->rh43_codlotavinc == "") ){ 
        $this->erro_sql = " Campo rh43_codlotavinc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_rhlotavincrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh43_codelenov == null) || ($this->rh43_codelenov == "") ){ 
+     if(($this->rh43_codelenov == null) || ($this->rh43_codelenov === 0 || $this->rh43_codelenov === 0.0 || $this->rh43_codelenov == "") ){ 
        $this->erro_sql = " Campo rh43_codelenov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_rhlotavincrec {
    function sql_query ( $rh43_codlotavinc=null,$rh43_codelenov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_rhlotavincrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_rhlotavincrec {
    function sql_query_file ( $rh43_codlotavinc=null,$rh43_codelenov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_rhlotavincrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

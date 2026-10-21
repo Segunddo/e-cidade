@@ -32,7 +32,7 @@ class cl_cargorhrubricas {
                  rh176_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_cargorhrubricas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cargorhrubricas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -49,14 +49,14 @@ class cl_cargorhrubricas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh176_sequencial = ($this->rh176_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_sequencial"]:$this->rh176_sequencial);
-       $this->rh176_cargo = ($this->rh176_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_cargo"]:$this->rh176_cargo);
+       $this->rh176_sequencial = ($this->rh176_sequencial === 0 || $this->rh176_sequencial === 0.0 || $this->rh176_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_sequencial"]:$this->rh176_sequencial);
+       $this->rh176_cargo = ($this->rh176_cargo === 0 || $this->rh176_cargo === 0.0 || $this->rh176_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_cargo"]:$this->rh176_cargo);
        $this->rh176_rubrica = ($this->rh176_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_rubrica"]:$this->rh176_rubrica);
-       $this->rh176_instit = ($this->rh176_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_instit"]:$this->rh176_instit);
-       $this->rh176_quantidade = ($this->rh176_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_quantidade"]:$this->rh176_quantidade);
-       $this->rh176_valor = ($this->rh176_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_valor"]:$this->rh176_valor);
+       $this->rh176_instit = ($this->rh176_instit === 0 || $this->rh176_instit === 0.0 || $this->rh176_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_instit"]:$this->rh176_instit);
+       $this->rh176_quantidade = ($this->rh176_quantidade === 0 || $this->rh176_quantidade === 0.0 || $this->rh176_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_quantidade"]:$this->rh176_quantidade);
+       $this->rh176_valor = ($this->rh176_valor === 0 || $this->rh176_valor === 0.0 || $this->rh176_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_valor"]:$this->rh176_valor);
      }else{
-       $this->rh176_sequencial = ($this->rh176_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_sequencial"]:$this->rh176_sequencial);
+       $this->rh176_sequencial = ($this->rh176_sequencial === 0 || $this->rh176_sequencial === 0.0 || $this->rh176_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh176_sequencial"]:$this->rh176_sequencial);
      }
    }
    // funcao para Inclusão
@@ -131,7 +131,7 @@ class cl_cargorhrubricas {
          $this->rh176_sequencial = $rh176_sequencial; 
        }
      }
-     if(($this->rh176_sequencial == null) || ($this->rh176_sequencial == "") ){ 
+     if(($this->rh176_sequencial == null) || ($this->rh176_sequencial === 0 || $this->rh176_sequencial === 0.0 || $this->rh176_sequencial == "") ){ 
        $this->erro_sql = " Campo rh176_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

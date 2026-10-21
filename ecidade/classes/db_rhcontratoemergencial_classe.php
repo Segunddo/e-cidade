@@ -49,7 +49,7 @@ class cl_rhcontratoemergencial {
                  rh163_matricula = int4 = Matricula 
                  ";
    //funcao construtor da classe 
-   function cl_rhcontratoemergencial() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhcontratoemergencial"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -66,10 +66,10 @@ class cl_rhcontratoemergencial {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh163_sequencial = ($this->rh163_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh163_sequencial"]:$this->rh163_sequencial);
-       $this->rh163_matricula = ($this->rh163_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["rh163_matricula"]:$this->rh163_matricula);
+       $this->rh163_sequencial = ($this->rh163_sequencial === 0 || $this->rh163_sequencial === 0.0 || $this->rh163_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh163_sequencial"]:$this->rh163_sequencial);
+       $this->rh163_matricula = ($this->rh163_matricula === 0 || $this->rh163_matricula === 0.0 || $this->rh163_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["rh163_matricula"]:$this->rh163_matricula);
      }else{
-       $this->rh163_sequencial = ($this->rh163_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh163_sequencial"]:$this->rh163_sequencial);
+       $this->rh163_sequencial = ($this->rh163_sequencial === 0 || $this->rh163_sequencial === 0.0 || $this->rh163_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh163_sequencial"]:$this->rh163_sequencial);
      }
    }
    // funcao para Inclusão
@@ -108,7 +108,7 @@ class cl_rhcontratoemergencial {
          $this->rh163_sequencial = $rh163_sequencial; 
        }
      }
-     if(($this->rh163_sequencial == null) || ($this->rh163_sequencial == "") ){ 
+     if(($this->rh163_sequencial == null) || ($this->rh163_sequencial === 0 || $this->rh163_sequencial === 0.0 || $this->rh163_sequencial == "") ){ 
        $this->erro_sql = " Campo rh163_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

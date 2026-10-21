@@ -129,11 +129,11 @@ class cl_rescisao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r59_instit = ($this->r59_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_instit"]:$this->r59_instit);
-       $this->r59_anousu = ($this->r59_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_anousu"]:$this->r59_anousu);
-       $this->r59_mesusu = ($this->r59_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_mesusu"]:$this->r59_mesusu);
-       $this->r59_regime = ($this->r59_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_regime"]:$this->r59_regime);
-       $this->r59_causa = ($this->r59_causa == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_causa"]:$this->r59_causa);
+       $this->r59_instit = ($this->r59_instit === 0 || $this->r59_instit === 0.0 || $this->r59_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_instit"]:$this->r59_instit);
+       $this->r59_anousu = ($this->r59_anousu === 0 || $this->r59_anousu === 0.0 || $this->r59_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_anousu"]:$this->r59_anousu);
+       $this->r59_mesusu = ($this->r59_mesusu === 0 || $this->r59_mesusu === 0.0 || $this->r59_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_mesusu"]:$this->r59_mesusu);
+       $this->r59_regime = ($this->r59_regime === 0 || $this->r59_regime === 0.0 || $this->r59_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_regime"]:$this->r59_regime);
+       $this->r59_causa = ($this->r59_causa === 0 || $this->r59_causa === 0.0 || $this->r59_causa == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_causa"]:$this->r59_causa);
        $this->r59_descr = ($this->r59_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_descr"]:$this->r59_descr);
        $this->r59_caub = ($this->r59_caub == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_caub"]:$this->r59_caub);
        $this->r59_descr1 = ($this->r59_descr1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_descr1"]:$this->r59_descr1);
@@ -142,9 +142,9 @@ class cl_rescisao {
        $this->r59_13sal = ($this->r59_13sal == "f"?@$GLOBALS["HTTP_POST_VARS"]["r59_13sal"]:$this->r59_13sal);
        $this->r59_fvenc = ($this->r59_fvenc == "f"?@$GLOBALS["HTTP_POST_VARS"]["r59_fvenc"]:$this->r59_fvenc);
        $this->r59_fprop = ($this->r59_fprop == "f"?@$GLOBALS["HTTP_POST_VARS"]["r59_fprop"]:$this->r59_fprop);
-       $this->r59_tercof = ($this->r59_tercof == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_tercof"]:$this->r59_tercof);
+       $this->r59_tercof = ($this->r59_tercof === 0 || $this->r59_tercof === 0.0 || $this->r59_tercof == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_tercof"]:$this->r59_tercof);
        $this->r59_codsaq = ($this->r59_codsaq == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_codsaq"]:$this->r59_codsaq);
-       $this->r59_mfgts = ($this->r59_mfgts == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_mfgts"]:$this->r59_mfgts);
+       $this->r59_mfgts = ($this->r59_mfgts === 0 || $this->r59_mfgts === 0.0 || $this->r59_mfgts == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_mfgts"]:$this->r59_mfgts);
        $this->r59_479clt = ($this->r59_479clt == "f"?@$GLOBALS["HTTP_POST_VARS"]["r59_479clt"]:$this->r59_479clt);
        $this->r59_grfp = ($this->r59_grfp == "f"?@$GLOBALS["HTTP_POST_VARS"]["r59_grfp"]:$this->r59_grfp);
        $this->r59_finss = ($this->r59_finss == "f"?@$GLOBALS["HTTP_POST_VARS"]["r59_finss"]:$this->r59_finss);
@@ -157,15 +157,15 @@ class cl_rescisao {
        $this->r59_rfgts = ($this->r59_rfgts == "f"?@$GLOBALS["HTTP_POST_VARS"]["r59_rfgts"]:$this->r59_rfgts);
        $this->r59_rirrf = ($this->r59_rirrf == "f"?@$GLOBALS["HTTP_POST_VARS"]["r59_rirrf"]:$this->r59_rirrf);
        $this->r59_movsef = ($this->r59_movsef == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_movsef"]:$this->r59_movsef);
-       $this->r59_causaafastamento = ($this->r59_causaafastamento == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_causaafastamento"]:$this->r59_causaafastamento);
-       $this->r59_motivoesocial = ($this->r59_motivoesocial == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_motivoesocial"]:$this->r59_motivoesocial);
-       $this->r59_cessacaobeneficios = ($this->r59_cessacaobeneficios == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_cessacaobeneficios"]:$this->r59_cessacaobeneficios);
+       $this->r59_causaafastamento = ($this->r59_causaafastamento === 0 || $this->r59_causaafastamento === 0.0 || $this->r59_causaafastamento == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_causaafastamento"]:$this->r59_causaafastamento);
+       $this->r59_motivoesocial = ($this->r59_motivoesocial === 0 || $this->r59_motivoesocial === 0.0 || $this->r59_motivoesocial == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_motivoesocial"]:$this->r59_motivoesocial);
+       $this->r59_cessacaobeneficios = ($this->r59_cessacaobeneficios === 0 || $this->r59_cessacaobeneficios === 0.0 || $this->r59_cessacaobeneficios == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_cessacaobeneficios"]:$this->r59_cessacaobeneficios);
      }else{
-       $this->r59_instit = ($this->r59_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_instit"]:$this->r59_instit);
-       $this->r59_anousu = ($this->r59_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_anousu"]:$this->r59_anousu);
-       $this->r59_mesusu = ($this->r59_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_mesusu"]:$this->r59_mesusu);
-       $this->r59_regime = ($this->r59_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_regime"]:$this->r59_regime);
-       $this->r59_causa = ($this->r59_causa == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_causa"]:$this->r59_causa);
+       $this->r59_instit = ($this->r59_instit === 0 || $this->r59_instit === 0.0 || $this->r59_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_instit"]:$this->r59_instit);
+       $this->r59_anousu = ($this->r59_anousu === 0 || $this->r59_anousu === 0.0 || $this->r59_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_anousu"]:$this->r59_anousu);
+       $this->r59_mesusu = ($this->r59_mesusu === 0 || $this->r59_mesusu === 0.0 || $this->r59_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_mesusu"]:$this->r59_mesusu);
+       $this->r59_regime = ($this->r59_regime === 0 || $this->r59_regime === 0.0 || $this->r59_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_regime"]:$this->r59_regime);
+       $this->r59_causa = ($this->r59_causa === 0 || $this->r59_causa === 0.0 || $this->r59_causa == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_causa"]:$this->r59_causa);
        $this->r59_caub = ($this->r59_caub == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_caub"]:$this->r59_caub);
        $this->r59_menos1 = ($this->r59_menos1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r59_menos1"]:$this->r59_menos1);
      }
@@ -360,7 +360,7 @@ class cl_rescisao {
        $this->r59_caub = $r59_caub; 
        $this->r59_menos1 = $r59_menos1; 
        $this->r59_instit = $r59_instit; 
-     if(($this->r59_anousu == null) || ($this->r59_anousu == "") ){ 
+     if(($this->r59_anousu == null) || ($this->r59_anousu === 0 || $this->r59_anousu === 0.0 || $this->r59_anousu == "") ){ 
        $this->erro_sql = " Campo r59_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -368,7 +368,7 @@ class cl_rescisao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r59_mesusu == null) || ($this->r59_mesusu == "") ){ 
+     if(($this->r59_mesusu == null) || ($this->r59_mesusu === 0 || $this->r59_mesusu === 0.0 || $this->r59_mesusu == "") ){ 
        $this->erro_sql = " Campo r59_mesusu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -376,7 +376,7 @@ class cl_rescisao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r59_regime == null) || ($this->r59_regime == "") ){ 
+     if(($this->r59_regime == null) || ($this->r59_regime === 0 || $this->r59_regime === 0.0 || $this->r59_regime == "") ){ 
        $this->erro_sql = " Campo r59_regime não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -384,7 +384,7 @@ class cl_rescisao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r59_causa == null) || ($this->r59_causa == "") ){ 
+     if(($this->r59_causa == null) || ($this->r59_causa === 0 || $this->r59_causa === 0.0 || $this->r59_causa == "") ){ 
        $this->erro_sql = " Campo r59_causa não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -408,7 +408,7 @@ class cl_rescisao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r59_instit == null) || ($this->r59_instit == "") ){ 
+     if(($this->r59_instit == null) || ($this->r59_instit === 0 || $this->r59_instit === 0.0 || $this->r59_instit == "") ){ 
        $this->erro_sql = " Campo r59_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -1370,7 +1370,7 @@ class cl_rescisao {
   }
 
   // funcao do sql 
-  public function naoExcluirComRescisaoCadastrada ($r59_regime = null,$r59_causa = null,$r59_caub = null,$r59_menos1 = null, $iInstituicao) {
+  public function naoExcluirComRescisaoCadastrada ($r59_regime = null,$r59_causa = null,$r59_caub = null,$r59_menos1 = null, $iInstituicao = null) {
 
     $sSql  = "SELECT DISTINCT *                                                             ";
     $sSql .= "FROM gerfres                                                                            ";

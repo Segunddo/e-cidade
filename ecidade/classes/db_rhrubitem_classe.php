@@ -50,7 +50,7 @@ class cl_rhrubitem {
                  rh13_item = int4 = Código do Material 
                  ";
    //funcao construtor da classe 
-   function cl_rhrubitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhrubitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -68,7 +68,7 @@ class cl_rhrubitem {
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->rh13_rubric = ($this->rh13_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_rubric"]:$this->rh13_rubric);
-       $this->rh13_item = ($this->rh13_item == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_item"]:$this->rh13_item);
+       $this->rh13_item = ($this->rh13_item === 0 || $this->rh13_item === 0.0 || $this->rh13_item == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_item"]:$this->rh13_item);
      }else{
        $this->rh13_rubric = ($this->rh13_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_rubric"]:$this->rh13_rubric);
      }
@@ -303,7 +303,7 @@ class cl_rhrubitem {
    function sql_query ( $rh13_rubric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -327,7 +327,7 @@ class cl_rhrubitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -340,7 +340,7 @@ class cl_rhrubitem {
    function sql_query_file ( $rh13_rubric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_rhrubitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

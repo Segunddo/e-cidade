@@ -26,7 +26,7 @@ class cl_db_tabelavalores {
                  db149_db_tabelavalorestipo = int4 = Identificador do TIpo 
                  ";
    //funcao construtor da classe 
-   function cl_db_tabelavalores() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_tabelavalores"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_db_tabelavalores {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db149_sequencial = ($this->db149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db149_sequencial"]:$this->db149_sequencial);
+       $this->db149_sequencial = ($this->db149_sequencial === 0 || $this->db149_sequencial === 0.0 || $this->db149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db149_sequencial"]:$this->db149_sequencial);
        $this->db149_descricao = ($this->db149_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db149_descricao"]:$this->db149_descricao);
-       $this->db149_db_tabelavalorestipo = ($this->db149_db_tabelavalorestipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db149_db_tabelavalorestipo"]:$this->db149_db_tabelavalorestipo);
+       $this->db149_db_tabelavalorestipo = ($this->db149_db_tabelavalorestipo === 0 || $this->db149_db_tabelavalorestipo === 0.0 || $this->db149_db_tabelavalorestipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db149_db_tabelavalorestipo"]:$this->db149_db_tabelavalorestipo);
      }else{
-       $this->db149_sequencial = ($this->db149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db149_sequencial"]:$this->db149_sequencial);
+       $this->db149_sequencial = ($this->db149_sequencial === 0 || $this->db149_sequencial === 0.0 || $this->db149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db149_sequencial"]:$this->db149_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_db_tabelavalores {
          $this->db149_sequencial = $db149_sequencial; 
        }
      }
-     if(($this->db149_sequencial == null) || ($this->db149_sequencial == "") ){ 
+     if(($this->db149_sequencial == null) || ($this->db149_sequencial === 0 || $this->db149_sequencial === 0.0 || $this->db149_sequencial == "") ){ 
        $this->erro_sql = " Campo db149_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

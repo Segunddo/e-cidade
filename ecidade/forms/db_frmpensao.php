@@ -68,12 +68,12 @@ $clrotulo->label("e21_descricao");
               <?php
               if(isset($r52_dtincl)){
                 if((strpos(strtoupper("#".$r52_dtincl),'-')+0) > 0 ){
-                  $arr_dtincl = split("-",$r52_dtincl);
+                  $arr_dtincl = preg_split("#\\-#m",$r52_dtincl);
       	          $r52_dtincl_dia = $arr_dtincl[2];
       	          $r52_dtincl_mes = $arr_dtincl[1];
       	          $r52_dtincl_ano = $arr_dtincl[0];
                 }else{
-              		$arr_dtincl = split("/",$r52_dtincl);
+              		$arr_dtincl = preg_split("#\\/#m",$r52_dtincl);
       	          $r52_dtincl_dia = $arr_dtincl[0];
       	          $r52_dtincl_mes = $arr_dtincl[1];
       	          $r52_dtincl_ano = $arr_dtincl[2];

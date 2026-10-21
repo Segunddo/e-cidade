@@ -54,7 +54,7 @@ class cl_rhcfpessmatr {
                  rh13_unificada = bool = Controle Unificado da Matrícula 
                  ";
    //funcao construtor da classe 
-   function cl_rhcfpessmatr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhcfpessmatr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_rhcfpessmatr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh13_sequencia = ($this->rh13_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_sequencia"]:$this->rh13_sequencia);
-       $this->rh13_instit = ($this->rh13_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_instit"]:$this->rh13_instit);
-       $this->rh13_matricula = ($this->rh13_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_matricula"]:$this->rh13_matricula);
+       $this->rh13_sequencia = ($this->rh13_sequencia === 0 || $this->rh13_sequencia === 0.0 || $this->rh13_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_sequencia"]:$this->rh13_sequencia);
+       $this->rh13_instit = ($this->rh13_instit === 0 || $this->rh13_instit === 0.0 || $this->rh13_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_instit"]:$this->rh13_instit);
+       $this->rh13_matricula = ($this->rh13_matricula === 0 || $this->rh13_matricula === 0.0 || $this->rh13_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_matricula"]:$this->rh13_matricula);
        $this->rh13_unificada = ($this->rh13_unificada == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh13_unificada"]:$this->rh13_unificada);
      }else{
-       $this->rh13_sequencia = ($this->rh13_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_sequencia"]:$this->rh13_sequencia);
+       $this->rh13_sequencia = ($this->rh13_sequencia === 0 || $this->rh13_sequencia === 0.0 || $this->rh13_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_sequencia"]:$this->rh13_sequencia);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_rhcfpessmatr {
          $this->rh13_sequencia = $rh13_sequencia; 
        }
      }
-     if(($this->rh13_sequencia == null) || ($this->rh13_sequencia == "") ){ 
+     if(($this->rh13_sequencia == null) || ($this->rh13_sequencia === 0 || $this->rh13_sequencia === 0.0 || $this->rh13_sequencia == "") ){ 
        $this->erro_sql = " Campo rh13_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_rhcfpessmatr {
    function sql_query ( $rh13_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_rhcfpessmatr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_rhcfpessmatr {
    function sql_query_file ( $rh13_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_rhcfpessmatr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

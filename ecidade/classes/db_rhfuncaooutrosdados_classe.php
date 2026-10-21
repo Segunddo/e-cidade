@@ -72,12 +72,12 @@ class cl_rhfuncaooutrosdados
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh267_instit = ($this->rh267_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh267_instit"]:$this->rh267_instit);
-       $this->rh267_rhfuncao = ($this->rh267_rhfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh267_rhfuncao"]:$this->rh267_rhfuncao);
-       $this->rh267_codigo = ($this->rh267_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh267_codigo"]:$this->rh267_codigo);
+       $this->rh267_instit = ($this->rh267_instit === 0 || $this->rh267_instit === 0.0 || $this->rh267_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh267_instit"]:$this->rh267_instit);
+       $this->rh267_rhfuncao = ($this->rh267_rhfuncao === 0 || $this->rh267_rhfuncao === 0.0 || $this->rh267_rhfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh267_rhfuncao"]:$this->rh267_rhfuncao);
+       $this->rh267_codigo = ($this->rh267_codigo === 0 || $this->rh267_codigo === 0.0 || $this->rh267_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh267_codigo"]:$this->rh267_codigo);
        $this->rh267_dados = ($this->rh267_dados == ""?@$GLOBALS["HTTP_POST_VARS"]["rh267_dados"]:$this->rh267_dados);
      }else{
-       $this->rh267_codigo = ($this->rh267_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh267_codigo"]:$this->rh267_codigo);
+       $this->rh267_codigo = ($this->rh267_codigo === 0 || $this->rh267_codigo === 0.0 || $this->rh267_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh267_codigo"]:$this->rh267_codigo);
      }
    }
 
@@ -135,7 +135,7 @@ class cl_rhfuncaooutrosdados
          $this->rh267_codigo = $rh267_codigo; 
        }
      }
-     if(($this->rh267_codigo == null) || ($this->rh267_codigo == "") ){ 
+     if(($this->rh267_codigo == null) || ($this->rh267_codigo === 0 || $this->rh267_codigo === 0.0 || $this->rh267_codigo == "") ){ 
        $this->erro_sql = " Campo rh267_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -54,7 +54,7 @@ class cl_movcasadassefip {
                  r67_reto = varchar(2) = Código do Retorno 
                  ";
    //funcao construtor da classe
-   function cl_movcasadassefip() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("movcasadassefip");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_movcasadassefip {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r67_anousu = ($this->r67_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_anousu"]:$this->r67_anousu);
-       $this->r67_mesusu = ($this->r67_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_mesusu"]:$this->r67_mesusu);
+       $this->r67_anousu = ($this->r67_anousu === 0 || $this->r67_anousu === 0.0 || $this->r67_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_anousu"]:$this->r67_anousu);
+       $this->r67_mesusu = ($this->r67_mesusu === 0 || $this->r67_mesusu === 0.0 || $this->r67_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_mesusu"]:$this->r67_mesusu);
        $this->r67_afast = ($this->r67_afast == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_afast"]:$this->r67_afast);
        $this->r67_reto = ($this->r67_reto == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_reto"]:$this->r67_reto);
      }else{
-       $this->r67_anousu = ($this->r67_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_anousu"]:$this->r67_anousu);
-       $this->r67_mesusu = ($this->r67_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_mesusu"]:$this->r67_mesusu);
+       $this->r67_anousu = ($this->r67_anousu === 0 || $this->r67_anousu === 0.0 || $this->r67_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_anousu"]:$this->r67_anousu);
+       $this->r67_mesusu = ($this->r67_mesusu === 0 || $this->r67_mesusu === 0.0 || $this->r67_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_mesusu"]:$this->r67_mesusu);
        $this->r67_afast = ($this->r67_afast == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_afast"]:$this->r67_afast);
        $this->r67_reto = ($this->r67_reto == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_reto"]:$this->r67_reto);
      }
@@ -89,7 +89,7 @@ class cl_movcasadassefip {
        $this->r67_mesusu = $r67_mesusu;
        $this->r67_afast = $r67_afast;
        $this->r67_reto = $r67_reto;
-     if(($this->r67_anousu == null) || ($this->r67_anousu == "") ){
+     if(($this->r67_anousu == null) || ($this->r67_anousu === 0 || $this->r67_anousu === 0.0 || $this->r67_anousu == "") ){
        $this->erro_sql = " Campo r67_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -97,7 +97,7 @@ class cl_movcasadassefip {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r67_mesusu == null) || ($this->r67_mesusu == "") ){
+     if(($this->r67_mesusu == null) || ($this->r67_mesusu === 0 || $this->r67_mesusu === 0.0 || $this->r67_mesusu == "") ){
        $this->erro_sql = " Campo r67_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -454,7 +454,7 @@ class cl_movcasadassefip {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -466,7 +466,7 @@ class cl_movcasadassefip {
    function sql_query_file ( $r67_anousu=null,$r67_mesusu=null,$r67_afast=null,$r67_reto=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_movcasadassefip {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
