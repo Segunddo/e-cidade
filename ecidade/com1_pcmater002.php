@@ -34,7 +34,8 @@ include(modification("classes/db_pcmaterele_classe.php"));
 include(modification("classes/db_pcgrupo_classe.php"));
 include(modification("classes/db_pcsubgrupo_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clpcmater = new cl_pcmater;
 $clpcmaterele = new cl_pcmaterele;
@@ -77,7 +78,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Alterar
   }
 
   if($sqlerro==false){  	
-    $arr =  split("XX",$codeles);
+    $arr =  preg_split("#XX#m",$codeles);
     for($i=0; $i<count($arr); $i++ ){
        $elemento = $arr[$i];  
        if(trim($elemento)!=""){

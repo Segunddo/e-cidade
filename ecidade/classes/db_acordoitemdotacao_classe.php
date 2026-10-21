@@ -58,7 +58,7 @@ class cl_acordoitemdotacao {
                  ac22_quantidade = float8 = Quantidade
                  ";
    //funcao construtor da classe
-   function cl_acordoitemdotacao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoitemdotacao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_acordoitemdotacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac22_sequencial = ($this->ac22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_sequencial"]:$this->ac22_sequencial);
-       $this->ac22_coddot = ($this->ac22_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_coddot"]:$this->ac22_coddot);
-       $this->ac22_anousu = ($this->ac22_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_anousu"]:$this->ac22_anousu);
-       $this->ac22_acordoitem = ($this->ac22_acordoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_acordoitem"]:$this->ac22_acordoitem);
-       $this->ac22_valor = ($this->ac22_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_valor"]:$this->ac22_valor);
-       $this->ac22_quantidade = ($this->ac22_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_quantidade"]:$this->ac22_quantidade);
+       $this->ac22_sequencial = ($this->ac22_sequencial === 0 || $this->ac22_sequencial === 0.0 || $this->ac22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_sequencial"]:$this->ac22_sequencial);
+       $this->ac22_coddot = ($this->ac22_coddot === 0 || $this->ac22_coddot === 0.0 || $this->ac22_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_coddot"]:$this->ac22_coddot);
+       $this->ac22_anousu = ($this->ac22_anousu === 0 || $this->ac22_anousu === 0.0 || $this->ac22_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_anousu"]:$this->ac22_anousu);
+       $this->ac22_acordoitem = ($this->ac22_acordoitem === 0 || $this->ac22_acordoitem === 0.0 || $this->ac22_acordoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_acordoitem"]:$this->ac22_acordoitem);
+       $this->ac22_valor = ($this->ac22_valor === 0 || $this->ac22_valor === 0.0 || $this->ac22_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_valor"]:$this->ac22_valor);
+       $this->ac22_quantidade = ($this->ac22_quantidade === 0 || $this->ac22_quantidade === 0.0 || $this->ac22_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_quantidade"]:$this->ac22_quantidade);
      }else{
-       $this->ac22_sequencial = ($this->ac22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_sequencial"]:$this->ac22_sequencial);
+       $this->ac22_sequencial = ($this->ac22_sequencial === 0 || $this->ac22_sequencial === 0.0 || $this->ac22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac22_sequencial"]:$this->ac22_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_acordoitemdotacao {
          $this->ac22_sequencial = $ac22_sequencial;
        }
      }
-     if(($this->ac22_sequencial == null) || ($this->ac22_sequencial == "") ){
+     if(($this->ac22_sequencial == null) || ($this->ac22_sequencial === 0 || $this->ac22_sequencial === 0.0 || $this->ac22_sequencial == "") ){
        $this->erro_sql = " Campo ac22_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

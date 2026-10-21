@@ -26,7 +26,7 @@ class cl_processocompralote {
                  pc68_pcproc = int8 = Processo de Compra 
                  ";
    //funcao construtor da classe 
-   function cl_processocompralote() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("processocompralote"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_processocompralote {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc68_sequencial = ($this->pc68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc68_sequencial"]:$this->pc68_sequencial);
+       $this->pc68_sequencial = ($this->pc68_sequencial === 0 || $this->pc68_sequencial === 0.0 || $this->pc68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc68_sequencial"]:$this->pc68_sequencial);
        $this->pc68_nome = ($this->pc68_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["pc68_nome"]:$this->pc68_nome);
-       $this->pc68_pcproc = ($this->pc68_pcproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc68_pcproc"]:$this->pc68_pcproc);
+       $this->pc68_pcproc = ($this->pc68_pcproc === 0 || $this->pc68_pcproc === 0.0 || $this->pc68_pcproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc68_pcproc"]:$this->pc68_pcproc);
      }else{
-       $this->pc68_sequencial = ($this->pc68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc68_sequencial"]:$this->pc68_sequencial);
+       $this->pc68_sequencial = ($this->pc68_sequencial === 0 || $this->pc68_sequencial === 0.0 || $this->pc68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc68_sequencial"]:$this->pc68_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_processocompralote {
          $this->pc68_sequencial = $pc68_sequencial; 
        }
      }
-     if(($this->pc68_sequencial == null) || ($this->pc68_sequencial == "") ){ 
+     if(($this->pc68_sequencial == null) || ($this->pc68_sequencial === 0 || $this->pc68_sequencial === 0.0 || $this->pc68_sequencial == "") ){ 
        $this->erro_sql = " Campo pc68_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

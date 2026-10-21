@@ -43,10 +43,10 @@ class cl_slipdepartamento
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->k211_slip = ($this->k211_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k211_slip"]:$this->k211_slip);
-       $this->k211_depart = ($this->k211_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["k211_depart"]:$this->k211_depart);
+       $this->k211_slip = ($this->k211_slip === 0 || $this->k211_slip === 0.0 || $this->k211_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k211_slip"]:$this->k211_slip);
+       $this->k211_depart = ($this->k211_depart === 0 || $this->k211_depart === 0.0 || $this->k211_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["k211_depart"]:$this->k211_depart);
      }else{
-       $this->k211_slip = ($this->k211_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k211_slip"]:$this->k211_slip);
+       $this->k211_slip = ($this->k211_slip === 0 || $this->k211_slip === 0.0 || $this->k211_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k211_slip"]:$this->k211_slip);
      }
    }
 
@@ -63,7 +63,7 @@ class cl_slipdepartamento
        return false;
      }
        $this->k211_slip = $k211_slip; 
-     if(($this->k211_slip == null) || ($this->k211_slip == "") ){ 
+     if(($this->k211_slip == null) || ($this->k211_slip === 0 || $this->k211_slip === 0.0 || $this->k211_slip == "") ){ 
        $this->erro_sql = " Campo k211_slip não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

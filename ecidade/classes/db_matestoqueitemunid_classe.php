@@ -54,7 +54,7 @@ class cl_matestoqueitemunid {
                  m75_quantmult = float8 = Quant. Multiplicadora 
                  ";
    //funcao construtor da classe 
-   function cl_matestoqueitemunid() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matestoqueitemunid"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_matestoqueitemunid {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m75_codmatestoqueitem = ($this->m75_codmatestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m75_codmatestoqueitem"]:$this->m75_codmatestoqueitem);
-       $this->m75_codmatunid = ($this->m75_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m75_codmatunid"]:$this->m75_codmatunid);
-       $this->m75_quant = ($this->m75_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["m75_quant"]:$this->m75_quant);
-       $this->m75_quantmult = ($this->m75_quantmult == ""?@$GLOBALS["HTTP_POST_VARS"]["m75_quantmult"]:$this->m75_quantmult);
+       $this->m75_codmatestoqueitem = ($this->m75_codmatestoqueitem === 0 || $this->m75_codmatestoqueitem === 0.0 || $this->m75_codmatestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m75_codmatestoqueitem"]:$this->m75_codmatestoqueitem);
+       $this->m75_codmatunid = ($this->m75_codmatunid === 0 || $this->m75_codmatunid === 0.0 || $this->m75_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m75_codmatunid"]:$this->m75_codmatunid);
+       $this->m75_quant = ($this->m75_quant === 0 || $this->m75_quant === 0.0 || $this->m75_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["m75_quant"]:$this->m75_quant);
+       $this->m75_quantmult = ($this->m75_quantmult === 0 || $this->m75_quantmult === 0.0 || $this->m75_quantmult == ""?@$GLOBALS["HTTP_POST_VARS"]["m75_quantmult"]:$this->m75_quantmult);
      }else{
-       $this->m75_codmatestoqueitem = ($this->m75_codmatestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m75_codmatestoqueitem"]:$this->m75_codmatestoqueitem);
+       $this->m75_codmatestoqueitem = ($this->m75_codmatestoqueitem === 0 || $this->m75_codmatestoqueitem === 0.0 || $this->m75_codmatestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m75_codmatestoqueitem"]:$this->m75_codmatestoqueitem);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_matestoqueitemunid {
        return false;
      }
        $this->m75_codmatestoqueitem = $m75_codmatestoqueitem; 
-     if(($this->m75_codmatestoqueitem == null) || ($this->m75_codmatestoqueitem == "") ){ 
+     if(($this->m75_codmatestoqueitem == null) || ($this->m75_codmatestoqueitem === 0 || $this->m75_codmatestoqueitem === 0.0 || $this->m75_codmatestoqueitem == "") ){ 
        $this->erro_sql = " Campo m75_codmatestoqueitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -367,7 +367,7 @@ class cl_matestoqueitemunid {
    function sql_query ( $m75_codmatestoqueitem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_matestoqueitemunid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -403,7 +403,7 @@ class cl_matestoqueitemunid {
    function sql_query_file ( $m75_codmatestoqueitem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_matestoqueitemunid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

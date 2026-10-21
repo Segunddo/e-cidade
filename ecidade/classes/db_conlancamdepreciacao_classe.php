@@ -52,7 +52,7 @@ class cl_conlancamdepreciacao {
                  c106_codlan = int4 = Código Lançamento 
                  ";
    //funcao construtor da classe 
-   function cl_conlancamdepreciacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancamdepreciacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_conlancamdepreciacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c106_sequencial = ($this->c106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c106_sequencial"]:$this->c106_sequencial);
-       $this->c106_bensdepreciacaolancamento = ($this->c106_bensdepreciacaolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["c106_bensdepreciacaolancamento"]:$this->c106_bensdepreciacaolancamento);
-       $this->c106_codlan = ($this->c106_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c106_codlan"]:$this->c106_codlan);
+       $this->c106_sequencial = ($this->c106_sequencial === 0 || $this->c106_sequencial === 0.0 || $this->c106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c106_sequencial"]:$this->c106_sequencial);
+       $this->c106_bensdepreciacaolancamento = ($this->c106_bensdepreciacaolancamento === 0 || $this->c106_bensdepreciacaolancamento === 0.0 || $this->c106_bensdepreciacaolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["c106_bensdepreciacaolancamento"]:$this->c106_bensdepreciacaolancamento);
+       $this->c106_codlan = ($this->c106_codlan === 0 || $this->c106_codlan === 0.0 || $this->c106_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c106_codlan"]:$this->c106_codlan);
      }else{
-       $this->c106_sequencial = ($this->c106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c106_sequencial"]:$this->c106_sequencial);
+       $this->c106_sequencial = ($this->c106_sequencial === 0 || $this->c106_sequencial === 0.0 || $this->c106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c106_sequencial"]:$this->c106_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_conlancamdepreciacao {
          $this->c106_sequencial = $c106_sequencial; 
        }
      }
-     if(($this->c106_sequencial == null) || ($this->c106_sequencial == "") ){ 
+     if(($this->c106_sequencial == null) || ($this->c106_sequencial === 0 || $this->c106_sequencial === 0.0 || $this->c106_sequencial == "") ){ 
        $this->erro_sql = " Campo c106_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_conlancamdepreciacao {
    function sql_query ( $c106_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_conlancamdepreciacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_conlancamdepreciacao {
    function sql_query_file ( $c106_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_conlancamdepreciacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

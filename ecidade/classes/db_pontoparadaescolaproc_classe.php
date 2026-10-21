@@ -51,7 +51,7 @@ class cl_pontoparadaescolaproc {
                  tre13_escolaproc = int4 = Escola de Procedência 
                  ";
    //funcao construtor da classe 
-   function cl_pontoparadaescolaproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pontoparadaescolaproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -68,11 +68,11 @@ class cl_pontoparadaescolaproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre13_sequencial = ($this->tre13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre13_sequencial"]:$this->tre13_sequencial);
-       $this->tre13_pontoparada = ($this->tre13_pontoparada == ""?@$GLOBALS["HTTP_POST_VARS"]["tre13_pontoparada"]:$this->tre13_pontoparada);
-       $this->tre13_escolaproc = ($this->tre13_escolaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["tre13_escolaproc"]:$this->tre13_escolaproc);
+       $this->tre13_sequencial = ($this->tre13_sequencial === 0 || $this->tre13_sequencial === 0.0 || $this->tre13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre13_sequencial"]:$this->tre13_sequencial);
+       $this->tre13_pontoparada = ($this->tre13_pontoparada === 0 || $this->tre13_pontoparada === 0.0 || $this->tre13_pontoparada == ""?@$GLOBALS["HTTP_POST_VARS"]["tre13_pontoparada"]:$this->tre13_pontoparada);
+       $this->tre13_escolaproc = ($this->tre13_escolaproc === 0 || $this->tre13_escolaproc === 0.0 || $this->tre13_escolaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["tre13_escolaproc"]:$this->tre13_escolaproc);
      }else{
-       $this->tre13_sequencial = ($this->tre13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre13_sequencial"]:$this->tre13_sequencial);
+       $this->tre13_sequencial = ($this->tre13_sequencial === 0 || $this->tre13_sequencial === 0.0 || $this->tre13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre13_sequencial"]:$this->tre13_sequencial);
      }
    }
    // funcao para Inclusão
@@ -120,7 +120,7 @@ class cl_pontoparadaescolaproc {
          $this->tre13_sequencial = $tre13_sequencial; 
        }
      }
-     if(($this->tre13_sequencial == null) || ($this->tre13_sequencial == "") ){ 
+     if(($this->tre13_sequencial == null) || ($this->tre13_sequencial === 0 || $this->tre13_sequencial === 0.0 || $this->tre13_sequencial == "") ){ 
        $this->erro_sql = " Campo tre13_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

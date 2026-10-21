@@ -62,7 +62,7 @@ class cl_pontoparada {
                  tre04_tipo = int4 = Tipo
                  ";
    //funcao construtor da classe
-   function cl_pontoparada() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pontoparada");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_pontoparada {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre04_sequencial = ($this->tre04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_sequencial"]:$this->tre04_sequencial);
-       $this->tre04_cadenderbairrocadenderrua = ($this->tre04_cadenderbairrocadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_cadenderbairrocadenderrua"]:$this->tre04_cadenderbairrocadenderrua);
+       $this->tre04_sequencial = ($this->tre04_sequencial === 0 || $this->tre04_sequencial === 0.0 || $this->tre04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_sequencial"]:$this->tre04_sequencial);
+       $this->tre04_cadenderbairrocadenderrua = ($this->tre04_cadenderbairrocadenderrua === 0 || $this->tre04_cadenderbairrocadenderrua === 0.0 || $this->tre04_cadenderbairrocadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_cadenderbairrocadenderrua"]:$this->tre04_cadenderbairrocadenderrua);
        $this->tre04_nome = ($this->tre04_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_nome"]:$this->tre04_nome);
        $this->tre04_abreviatura = ($this->tre04_abreviatura == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_abreviatura"]:$this->tre04_abreviatura);
        $this->tre04_pontoreferencia = ($this->tre04_pontoreferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_pontoreferencia"]:$this->tre04_pontoreferencia);
-       $this->tre04_latitude = ($this->tre04_latitude == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_latitude"]:$this->tre04_latitude);
-       $this->tre04_longitude = ($this->tre04_longitude == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_longitude"]:$this->tre04_longitude);
-       $this->tre04_tipo = ($this->tre04_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_tipo"]:$this->tre04_tipo);
+       $this->tre04_latitude = ($this->tre04_latitude === 0 || $this->tre04_latitude === 0.0 || $this->tre04_latitude == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_latitude"]:$this->tre04_latitude);
+       $this->tre04_longitude = ($this->tre04_longitude === 0 || $this->tre04_longitude === 0.0 || $this->tre04_longitude == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_longitude"]:$this->tre04_longitude);
+       $this->tre04_tipo = ($this->tre04_tipo === 0 || $this->tre04_tipo === 0.0 || $this->tre04_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_tipo"]:$this->tre04_tipo);
      }else{
-       $this->tre04_sequencial = ($this->tre04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_sequencial"]:$this->tre04_sequencial);
+       $this->tre04_sequencial = ($this->tre04_sequencial === 0 || $this->tre04_sequencial === 0.0 || $this->tre04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_sequencial"]:$this->tre04_sequencial);
      }
    }
    // funcao para inclusao
@@ -160,7 +160,7 @@ class cl_pontoparada {
          $this->tre04_sequencial = $tre04_sequencial;
        }
      }
-     if(($this->tre04_sequencial == null) || ($this->tre04_sequencial == "") ){
+     if(($this->tre04_sequencial == null) || ($this->tre04_sequencial === 0 || $this->tre04_sequencial === 0.0 || $this->tre04_sequencial == "") ){
        $this->erro_sql = " Campo tre04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -489,7 +489,7 @@ class cl_pontoparada {
    function sql_query ( $tre04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -513,7 +513,7 @@ class cl_pontoparada {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -526,7 +526,7 @@ class cl_pontoparada {
    function sql_query_file ( $tre04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -547,7 +547,7 @@ class cl_pontoparada {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -561,7 +561,7 @@ class cl_pontoparada {
   function sql_query_departamento ( $tre04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -584,7 +584,7 @@ class cl_pontoparada {
           $sql .= $sql2;
           if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
               $sql .= $virgula.$campos_sql[$i];
@@ -600,7 +600,7 @@ class cl_pontoparada {
 
     if ($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
 
       for ($i=0;$i<sizeof($campos_sql);$i++) {
@@ -633,7 +633,7 @@ class cl_pontoparada {
     if ($ordem != null ) {
 
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
 
       for ($i = 0; $i < sizeof($campos_sql); $i++) {

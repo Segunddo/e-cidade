@@ -63,7 +63,7 @@ class cl_pcproc {
                  pc80_tipoprocesso = int4 = Tipo de Processo 
                  ";
    //funcao construtor da classe 
-   function cl_pcproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,7 +80,7 @@ class cl_pcproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc80_codproc = ($this->pc80_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_codproc"]:$this->pc80_codproc);
+       $this->pc80_codproc = ($this->pc80_codproc === 0 || $this->pc80_codproc === 0.0 || $this->pc80_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_codproc"]:$this->pc80_codproc);
        if($this->pc80_data == ""){
          $this->pc80_data_dia = ($this->pc80_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_data_dia"]:$this->pc80_data_dia);
          $this->pc80_data_mes = ($this->pc80_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_data_mes"]:$this->pc80_data_mes);
@@ -89,13 +89,13 @@ class cl_pcproc {
             $this->pc80_data = $this->pc80_data_ano."-".$this->pc80_data_mes."-".$this->pc80_data_dia;
          }
        }
-       $this->pc80_usuario = ($this->pc80_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_usuario"]:$this->pc80_usuario);
-       $this->pc80_depto = ($this->pc80_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_depto"]:$this->pc80_depto);
+       $this->pc80_usuario = ($this->pc80_usuario === 0 || $this->pc80_usuario === 0.0 || $this->pc80_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_usuario"]:$this->pc80_usuario);
+       $this->pc80_depto = ($this->pc80_depto === 0 || $this->pc80_depto === 0.0 || $this->pc80_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_depto"]:$this->pc80_depto);
        $this->pc80_resumo = ($this->pc80_resumo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_resumo"]:$this->pc80_resumo);
-       $this->pc80_situacao = ($this->pc80_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_situacao"]:$this->pc80_situacao);
-       $this->pc80_tipoprocesso = ($this->pc80_tipoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_tipoprocesso"]:$this->pc80_tipoprocesso);
+       $this->pc80_situacao = ($this->pc80_situacao === 0 || $this->pc80_situacao === 0.0 || $this->pc80_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_situacao"]:$this->pc80_situacao);
+       $this->pc80_tipoprocesso = ($this->pc80_tipoprocesso === 0 || $this->pc80_tipoprocesso === 0.0 || $this->pc80_tipoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_tipoprocesso"]:$this->pc80_tipoprocesso);
      }else{
-       $this->pc80_codproc = ($this->pc80_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_codproc"]:$this->pc80_codproc);
+       $this->pc80_codproc = ($this->pc80_codproc === 0 || $this->pc80_codproc === 0.0 || $this->pc80_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc80_codproc"]:$this->pc80_codproc);
      }
    }
    // funcao para inclusao
@@ -164,7 +164,7 @@ class cl_pcproc {
          $this->pc80_codproc = $pc80_codproc; 
        }
      }
-     if(($this->pc80_codproc == null) || ($this->pc80_codproc == "") ){ 
+     if(($this->pc80_codproc == null) || ($this->pc80_codproc === 0 || $this->pc80_codproc === 0.0 || $this->pc80_codproc == "") ){ 
        $this->erro_sql = " Campo pc80_codproc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -74,7 +74,7 @@ class cl_cidadaobeneficio {
                  as08_justificativa = text = Justificativa 
                  ";
    //funcao construtor da classe 
-   function cl_cidadaobeneficio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cidadaobeneficio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -91,10 +91,10 @@ class cl_cidadaobeneficio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->as08_sequencial = ($this->as08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_sequencial"]:$this->as08_sequencial);
-       $this->as08_programasocial = ($this->as08_programasocial == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_programasocial"]:$this->as08_programasocial);
-       $this->as08_mes = ($this->as08_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_mes"]:$this->as08_mes);
-       $this->as08_ano = ($this->as08_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_ano"]:$this->as08_ano);
+       $this->as08_sequencial = ($this->as08_sequencial === 0 || $this->as08_sequencial === 0.0 || $this->as08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_sequencial"]:$this->as08_sequencial);
+       $this->as08_programasocial = ($this->as08_programasocial === 0 || $this->as08_programasocial === 0.0 || $this->as08_programasocial == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_programasocial"]:$this->as08_programasocial);
+       $this->as08_mes = ($this->as08_mes === 0 || $this->as08_mes === 0.0 || $this->as08_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_mes"]:$this->as08_mes);
+       $this->as08_ano = ($this->as08_ano === 0 || $this->as08_ano === 0.0 || $this->as08_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_ano"]:$this->as08_ano);
        $this->as08_situacao = ($this->as08_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_situacao"]:$this->as08_situacao);
        $this->as08_nis = ($this->as08_nis == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_nis"]:$this->as08_nis);
        $this->as08_tipobeneficio = ($this->as08_tipobeneficio == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_tipobeneficio"]:$this->as08_tipobeneficio);
@@ -117,7 +117,7 @@ class cl_cidadaobeneficio {
        $this->as08_motivo = ($this->as08_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_motivo"]:$this->as08_motivo);
        $this->as08_justificativa = ($this->as08_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_justificativa"]:$this->as08_justificativa);
      }else{
-       $this->as08_sequencial = ($this->as08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_sequencial"]:$this->as08_sequencial);
+       $this->as08_sequencial = ($this->as08_sequencial === 0 || $this->as08_sequencial === 0.0 || $this->as08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as08_sequencial"]:$this->as08_sequencial);
      }
    }
    // funcao para inclusao
@@ -216,7 +216,7 @@ class cl_cidadaobeneficio {
          $this->as08_sequencial = $as08_sequencial; 
        }
      }
-     if(($this->as08_sequencial == null) || ($this->as08_sequencial == "") ){ 
+     if(($this->as08_sequencial == null) || ($this->as08_sequencial === 0 || $this->as08_sequencial === 0.0 || $this->as08_sequencial == "") ){ 
        $this->erro_sql = " Campo as08_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -600,7 +600,7 @@ class cl_cidadaobeneficio {
    function sql_query ( $as08_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -621,7 +621,7 @@ class cl_cidadaobeneficio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -634,7 +634,7 @@ class cl_cidadaobeneficio {
    function sql_query_file ( $as08_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -655,7 +655,7 @@ class cl_cidadaobeneficio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -670,7 +670,7 @@ class cl_cidadaobeneficio {
   	
   	$sql = "select ";
   	if ($campos != "*" ) {
-  		$campos_sql = split("#",$campos);
+  		$campos_sql = preg_split("#\\##m",$campos);
   		$virgula = "";
   		for ($i = 0; $i < sizeof($campos_sql); $i++) {
   			
@@ -699,7 +699,7 @@ class cl_cidadaobeneficio {
   	if ($ordem != null) {
   		
   		$sql       .= " order by ";
-  		$campos_sql = split("#",$ordem);
+  		$campos_sql = preg_split("#\\##m",$ordem);
   		$virgula    = "";
   		for ($i = 0; $i < sizeof($campos_sql); $i++) {
   			

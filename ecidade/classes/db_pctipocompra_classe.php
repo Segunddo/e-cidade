@@ -72,12 +72,12 @@ class cl_pctipocompra
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->pc50_codcom = ($this->pc50_codcom == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc50_codcom"] : $this->pc50_codcom);
+            $this->pc50_codcom = ($this->pc50_codcom === 0 || $this->pc50_codcom === 0.0 || $this->pc50_codcom == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc50_codcom"] : $this->pc50_codcom);
             $this->pc50_descr = ($this->pc50_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc50_descr"] : $this->pc50_descr);
-            $this->pc50_pctipocompratribunal = ($this->pc50_pctipocompratribunal == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc50_pctipocompratribunal"] : $this->pc50_pctipocompratribunal);
+            $this->pc50_pctipocompratribunal = ($this->pc50_pctipocompratribunal === 0 || $this->pc50_pctipocompratribunal === 0.0 || $this->pc50_pctipocompratribunal == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc50_pctipocompratribunal"] : $this->pc50_pctipocompratribunal);
             $this->pc50_ativo = ($this->pc50_ativo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["pc50_ativo"] : $this->pc50_ativo);
         } else {
-            $this->pc50_codcom = ($this->pc50_codcom == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc50_codcom"] : $this->pc50_codcom);
+            $this->pc50_codcom = ($this->pc50_codcom === 0 || $this->pc50_codcom === 0.0 || $this->pc50_codcom == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc50_codcom"] : $this->pc50_codcom);
         }
     }
 
@@ -108,7 +108,7 @@ class cl_pctipocompra
         }
 
         $this->pc50_codcom = $pc50_codcom;
-        if (($this->pc50_codcom == null) || ($this->pc50_codcom == "")) {
+        if (($this->pc50_codcom == null) || ($this->pc50_codcom === 0 || $this->pc50_codcom === 0.0 || $this->pc50_codcom == "")) {
             $this->erro_sql = " Campo pc50_codcom não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

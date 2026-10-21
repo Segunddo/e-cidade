@@ -58,7 +58,7 @@ class cl_pcsubgrupo {
                  pc04_tipoutil = int4 = Utilizado 
                  ";
    //funcao construtor da classe 
-   function cl_pcsubgrupo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcsubgrupo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_pcsubgrupo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc04_codsubgrupo = ($this->pc04_codsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codsubgrupo"]:$this->pc04_codsubgrupo);
+       $this->pc04_codsubgrupo = ($this->pc04_codsubgrupo === 0 || $this->pc04_codsubgrupo === 0.0 || $this->pc04_codsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codsubgrupo"]:$this->pc04_codsubgrupo);
        $this->pc04_descrsubgrupo = ($this->pc04_descrsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_descrsubgrupo"]:$this->pc04_descrsubgrupo);
-       $this->pc04_codgrupo = ($this->pc04_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codgrupo"]:$this->pc04_codgrupo);
-       $this->pc04_codtipo = ($this->pc04_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codtipo"]:$this->pc04_codtipo);
+       $this->pc04_codgrupo = ($this->pc04_codgrupo === 0 || $this->pc04_codgrupo === 0.0 || $this->pc04_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codgrupo"]:$this->pc04_codgrupo);
+       $this->pc04_codtipo = ($this->pc04_codtipo === 0 || $this->pc04_codtipo === 0.0 || $this->pc04_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codtipo"]:$this->pc04_codtipo);
        $this->pc04_ativo = ($this->pc04_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc04_ativo"]:$this->pc04_ativo);
-       $this->pc04_tipoutil = ($this->pc04_tipoutil == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_tipoutil"]:$this->pc04_tipoutil);
+       $this->pc04_tipoutil = ($this->pc04_tipoutil === 0 || $this->pc04_tipoutil === 0.0 || $this->pc04_tipoutil == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_tipoutil"]:$this->pc04_tipoutil);
      }else{
-       $this->pc04_codsubgrupo = ($this->pc04_codsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codsubgrupo"]:$this->pc04_codsubgrupo);
+       $this->pc04_codsubgrupo = ($this->pc04_codsubgrupo === 0 || $this->pc04_codsubgrupo === 0.0 || $this->pc04_codsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codsubgrupo"]:$this->pc04_codsubgrupo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_pcsubgrupo {
          $this->pc04_codsubgrupo = $pc04_codsubgrupo; 
        }
      }
-     if(($this->pc04_codsubgrupo == null) || ($this->pc04_codsubgrupo == "") ){ 
+     if(($this->pc04_codsubgrupo == null) || ($this->pc04_codsubgrupo === 0 || $this->pc04_codsubgrupo === 0.0 || $this->pc04_codsubgrupo == "") ){ 
        $this->erro_sql = " Campo pc04_codsubgrupo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -452,7 +452,7 @@ class cl_pcsubgrupo {
    function sql_query ( $pc04_codsubgrupo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_pcsubgrupo {
    function sql_query_orcelement ( $pc04_codsubgrupo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_pcsubgrupo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -63,7 +63,7 @@ class cl_transferenciafinanceirarecebimento {
                  k151_estornado = bool = Estornado 
                  ";
    //funcao construtor da classe 
-   function cl_transferenciafinanceirarecebimento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("transferenciafinanceirarecebimento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,10 +80,10 @@ class cl_transferenciafinanceirarecebimento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k151_sequencial = ($this->k151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_sequencial"]:$this->k151_sequencial);
-       $this->k151_transferenciafinanceira = ($this->k151_transferenciafinanceira == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_transferenciafinanceira"]:$this->k151_transferenciafinanceira);
-       $this->k151_slip = ($this->k151_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_slip"]:$this->k151_slip);
-       $this->k151_db_usuario = ($this->k151_db_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_db_usuario"]:$this->k151_db_usuario);
+       $this->k151_sequencial = ($this->k151_sequencial === 0 || $this->k151_sequencial === 0.0 || $this->k151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_sequencial"]:$this->k151_sequencial);
+       $this->k151_transferenciafinanceira = ($this->k151_transferenciafinanceira === 0 || $this->k151_transferenciafinanceira === 0.0 || $this->k151_transferenciafinanceira == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_transferenciafinanceira"]:$this->k151_transferenciafinanceira);
+       $this->k151_slip = ($this->k151_slip === 0 || $this->k151_slip === 0.0 || $this->k151_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_slip"]:$this->k151_slip);
+       $this->k151_db_usuario = ($this->k151_db_usuario === 0 || $this->k151_db_usuario === 0.0 || $this->k151_db_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_db_usuario"]:$this->k151_db_usuario);
        $this->k151_hora = ($this->k151_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_hora"]:$this->k151_hora);
        if($this->k151_data == ""){
          $this->k151_data_dia = ($this->k151_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_data_dia"]:$this->k151_data_dia);
@@ -95,7 +95,7 @@ class cl_transferenciafinanceirarecebimento {
        }
        $this->k151_estornado = ($this->k151_estornado == "f"?@$GLOBALS["HTTP_POST_VARS"]["k151_estornado"]:$this->k151_estornado);
      }else{
-       $this->k151_sequencial = ($this->k151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_sequencial"]:$this->k151_sequencial);
+       $this->k151_sequencial = ($this->k151_sequencial === 0 || $this->k151_sequencial === 0.0 || $this->k151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k151_sequencial"]:$this->k151_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_transferenciafinanceirarecebimento {
          $this->k151_sequencial = $k151_sequencial; 
        }
      }
-     if(($this->k151_sequencial == null) || ($this->k151_sequencial == "") ){ 
+     if(($this->k151_sequencial == null) || ($this->k151_sequencial === 0 || $this->k151_sequencial === 0.0 || $this->k151_sequencial == "") ){ 
        $this->erro_sql = " Campo k151_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -508,7 +508,7 @@ class cl_transferenciafinanceirarecebimento {
    function sql_query ( $k151_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -535,7 +535,7 @@ class cl_transferenciafinanceirarecebimento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -548,7 +548,7 @@ class cl_transferenciafinanceirarecebimento {
    function sql_query_file ( $k151_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -569,7 +569,7 @@ class cl_transferenciafinanceirarecebimento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

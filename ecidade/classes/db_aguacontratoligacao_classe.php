@@ -50,7 +50,7 @@ class cl_aguacontratoligacao {
                  x55_aguacontrato = int4 = Contrato
                  ";
    //funcao construtor da classe
-   function cl_aguacontratoligacao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacontratoligacao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -110,7 +110,7 @@ class cl_aguacontratoligacao {
          $this->x55_sequencial = $x55_sequencial;
        }
      }
-     if(($this->x55_sequencial == null) || ($this->x55_sequencial == "") ){
+     if(($this->x55_sequencial == null) || ($this->x55_sequencial === 0 || $this->x55_sequencial === 0.0 || $this->x55_sequencial == "") ){
        $this->erro_sql = " Campo x55_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

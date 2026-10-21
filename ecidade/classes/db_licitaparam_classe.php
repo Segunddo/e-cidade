@@ -83,16 +83,16 @@ class cl_licitaparam
   public function atualizacampos($exclusao = false)
   {
     if ($exclusao == false) {
-      $this->l12_instit = ($this->l12_instit == ""?db_getsession("DB_instit"):$this->l12_instit);
+      $this->l12_instit = ($this->l12_instit === 0 || $this->l12_instit === 0.0 || $this->l12_instit == ""?db_getsession("DB_instit"):$this->l12_instit);
       $this->l12_escolherprocesso = ($this->l12_escolherprocesso == "f" ? @$GLOBALS["HTTP_POST_VARS"]["l12_escolherprocesso"] : $this->l12_escolherprocesso);
       $this->l12_escolheprotocolo = ($this->l12_escolheprotocolo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["l12_escolheprotocolo"] : $this->l12_escolheprotocolo);
-      $this->l12_qtdediasliberacaoweb = ($this->l12_qtdediasliberacaoweb == "" ? @$GLOBALS["HTTP_POST_VARS"]["l12_qtdediasliberacaoweb"] : $this->l12_qtdediasliberacaoweb);
-      $this->l12_tipoliberacaoweb = ($this->l12_tipoliberacaoweb == "" ? @$GLOBALS["HTTP_POST_VARS"]["l12_tipoliberacaoweb"] : $this->l12_tipoliberacaoweb);
-      $this->l12_limitetamanhoarquivo = ($this->l12_limitetamanhoarquivo == "" ? @$GLOBALS["HTTP_POST_VARS"]["l12_limitetamanhoarquivo"] : $this->l12_limitetamanhoarquivo);
+      $this->l12_qtdediasliberacaoweb = ($this->l12_qtdediasliberacaoweb === 0 || $this->l12_qtdediasliberacaoweb === 0.0 || $this->l12_qtdediasliberacaoweb == "" ? @$GLOBALS["HTTP_POST_VARS"]["l12_qtdediasliberacaoweb"] : $this->l12_qtdediasliberacaoweb);
+      $this->l12_tipoliberacaoweb = ($this->l12_tipoliberacaoweb === 0 || $this->l12_tipoliberacaoweb === 0.0 || $this->l12_tipoliberacaoweb == "" ? @$GLOBALS["HTTP_POST_VARS"]["l12_tipoliberacaoweb"] : $this->l12_tipoliberacaoweb);
+      $this->l12_limitetamanhoarquivo = ($this->l12_limitetamanhoarquivo === 0 || $this->l12_limitetamanhoarquivo === 0.0 || $this->l12_limitetamanhoarquivo == "" ? @$GLOBALS["HTTP_POST_VARS"]["l12_limitetamanhoarquivo"] : $this->l12_limitetamanhoarquivo);
       $this->l12_urlapi = ($this->l12_urlapi == "" ? @$GLOBALS["HTTP_POST_VARS"]["l12_urlapi"] : $this->l12_urlapi);
       $this->l12_token = ($this->l12_token == "" ? @$GLOBALS["HTTP_POST_VARS"]["l12_token"] : $this->l12_token);
     } else {
-      $this->l12_instit = ($this->l12_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["l12_instit"] : $this->l12_instit);
+      $this->l12_instit = ($this->l12_instit === 0 || $this->l12_instit === 0.0 || $this->l12_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["l12_instit"] : $this->l12_instit);
     }
   }
 
@@ -146,7 +146,7 @@ class cl_licitaparam
     }
     
     $this->l12_instit = $l12_instit;
-    if (($this->l12_instit == null) || ($this->l12_instit == "")) {
+    if (($this->l12_instit == null) || ($this->l12_instit === 0 || $this->l12_instit === 0.0 || $this->l12_instit == "")) {
       $this->erro_sql = " Campo l12_instit não declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

@@ -56,7 +56,7 @@ class cl_orcreceitaval {
                  o71_valor = float8 = Valor
                  ";
    //funcao construtor da classe
-   function cl_orcreceitaval() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcreceitaval");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,16 +73,16 @@ class cl_orcreceitaval {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o71_anousu = ($this->o71_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_anousu"]:$this->o71_anousu);
-       $this->o71_codrec = ($this->o71_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_codrec"]:$this->o71_codrec);
-       $this->o71_coddoc = ($this->o71_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_coddoc"]:$this->o71_coddoc);
-       $this->o71_mes = ($this->o71_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_mes"]:$this->o71_mes);
-       $this->o71_valor = ($this->o71_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_valor"]:$this->o71_valor);
+       $this->o71_anousu = ($this->o71_anousu === 0 || $this->o71_anousu === 0.0 || $this->o71_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_anousu"]:$this->o71_anousu);
+       $this->o71_codrec = ($this->o71_codrec === 0 || $this->o71_codrec === 0.0 || $this->o71_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_codrec"]:$this->o71_codrec);
+       $this->o71_coddoc = ($this->o71_coddoc === 0 || $this->o71_coddoc === 0.0 || $this->o71_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_coddoc"]:$this->o71_coddoc);
+       $this->o71_mes = ($this->o71_mes === 0 || $this->o71_mes === 0.0 || $this->o71_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_mes"]:$this->o71_mes);
+       $this->o71_valor = ($this->o71_valor === 0 || $this->o71_valor === 0.0 || $this->o71_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_valor"]:$this->o71_valor);
      }else{
-       $this->o71_anousu = ($this->o71_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_anousu"]:$this->o71_anousu);
-       $this->o71_codrec = ($this->o71_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_codrec"]:$this->o71_codrec);
-       $this->o71_coddoc = ($this->o71_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_coddoc"]:$this->o71_coddoc);
-       $this->o71_mes = ($this->o71_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_mes"]:$this->o71_mes);
+       $this->o71_anousu = ($this->o71_anousu === 0 || $this->o71_anousu === 0.0 || $this->o71_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_anousu"]:$this->o71_anousu);
+       $this->o71_codrec = ($this->o71_codrec === 0 || $this->o71_codrec === 0.0 || $this->o71_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_codrec"]:$this->o71_codrec);
+       $this->o71_coddoc = ($this->o71_coddoc === 0 || $this->o71_coddoc === 0.0 || $this->o71_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_coddoc"]:$this->o71_coddoc);
+       $this->o71_mes = ($this->o71_mes === 0 || $this->o71_mes === 0.0 || $this->o71_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_mes"]:$this->o71_mes);
      }
    }
    // funcao para inclusao
@@ -101,7 +101,7 @@ class cl_orcreceitaval {
        $this->o71_codrec = $o71_codrec;
        $this->o71_coddoc = $o71_coddoc;
        $this->o71_mes = $o71_mes;
-     if(($this->o71_anousu == null) || ($this->o71_anousu == "") ){
+     if(($this->o71_anousu == null) || ($this->o71_anousu === 0 || $this->o71_anousu === 0.0 || $this->o71_anousu == "") ){
        $this->erro_sql = " Campo o71_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -109,7 +109,7 @@ class cl_orcreceitaval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o71_codrec == null) || ($this->o71_codrec == "") ){
+     if(($this->o71_codrec == null) || ($this->o71_codrec === 0 || $this->o71_codrec === 0.0 || $this->o71_codrec == "") ){
        $this->erro_sql = " Campo o71_codrec nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -117,7 +117,7 @@ class cl_orcreceitaval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o71_coddoc == null) || ($this->o71_coddoc == "") ){
+     if(($this->o71_coddoc == null) || ($this->o71_coddoc === 0 || $this->o71_coddoc === 0.0 || $this->o71_coddoc == "") ){
        $this->erro_sql = " Campo o71_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -125,7 +125,7 @@ class cl_orcreceitaval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o71_mes == null) || ($this->o71_mes == "") ){
+     if(($this->o71_mes == null) || ($this->o71_mes === 0 || $this->o71_mes === 0.0 || $this->o71_mes == "") ){
        $this->erro_sql = " Campo o71_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -449,7 +449,7 @@ class cl_orcreceitaval {
    function sql_query ( $o71_anousu=null,$o71_codrec=null,$o71_coddoc=null,$o71_mes=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_orcreceitaval {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -514,7 +514,7 @@ class cl_orcreceitaval {
    function sql_query_file ( $o71_anousu=null,$o71_codrec=null,$o71_coddoc=null,$o71_mes=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -559,7 +559,7 @@ class cl_orcreceitaval {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

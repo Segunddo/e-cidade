@@ -54,7 +54,7 @@ class cl_contrans {
                  c45_instit = int4 = codigo da instituicao 
                  ";
    //funcao construtor da classe 
-   function cl_contrans() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contrans"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_contrans {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c45_seqtrans = ($this->c45_seqtrans == ""?@$GLOBALS["HTTP_POST_VARS"]["c45_seqtrans"]:$this->c45_seqtrans);
-       $this->c45_anousu = ($this->c45_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c45_anousu"]:$this->c45_anousu);
-       $this->c45_coddoc = ($this->c45_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c45_coddoc"]:$this->c45_coddoc);
-       $this->c45_instit = ($this->c45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c45_instit"]:$this->c45_instit);
+       $this->c45_seqtrans = ($this->c45_seqtrans === 0 || $this->c45_seqtrans === 0.0 || $this->c45_seqtrans == ""?@$GLOBALS["HTTP_POST_VARS"]["c45_seqtrans"]:$this->c45_seqtrans);
+       $this->c45_anousu = ($this->c45_anousu === 0 || $this->c45_anousu === 0.0 || $this->c45_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c45_anousu"]:$this->c45_anousu);
+       $this->c45_coddoc = ($this->c45_coddoc === 0 || $this->c45_coddoc === 0.0 || $this->c45_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c45_coddoc"]:$this->c45_coddoc);
+       $this->c45_instit = ($this->c45_instit === 0 || $this->c45_instit === 0.0 || $this->c45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c45_instit"]:$this->c45_instit);
      }else{
-       $this->c45_seqtrans = ($this->c45_seqtrans == ""?@$GLOBALS["HTTP_POST_VARS"]["c45_seqtrans"]:$this->c45_seqtrans);
+       $this->c45_seqtrans = ($this->c45_seqtrans === 0 || $this->c45_seqtrans === 0.0 || $this->c45_seqtrans == ""?@$GLOBALS["HTTP_POST_VARS"]["c45_seqtrans"]:$this->c45_seqtrans);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_contrans {
          $this->c45_seqtrans = $c45_seqtrans; 
        }
      }
-     if(($this->c45_seqtrans == null) || ($this->c45_seqtrans == "") ){ 
+     if(($this->c45_seqtrans == null) || ($this->c45_seqtrans === 0 || $this->c45_seqtrans === 0.0 || $this->c45_seqtrans == "") ){ 
        $this->erro_sql = " Campo c45_seqtrans nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_contrans {
    function sql_query ( $c45_seqtrans=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -412,7 +412,7 @@ class cl_contrans {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_contrans {
   function sql_query_evento_contabil ( $c45_seqtrans=null,$campos="*",$ordem=null,$dbwhere=""){
   	$sql = "select ";
   	if($campos != "*" ){
-  		$campos_sql = split("#",$campos);
+  		$campos_sql = preg_split("#\\##m",$campos);
   		$virgula = "";
   		for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_contrans {
   		$sql .= $sql2;
   		if($ordem != null ){
   		$sql .= " order by ";
-  			$campos_sql = split("#",$ordem);
+  			$campos_sql = preg_split("#\\##m",$ordem);
   			$virgula = "";
   			for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];
@@ -464,7 +464,7 @@ class cl_contrans {
    function sql_query_file ( $c45_seqtrans=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -485,7 +485,7 @@ class cl_contrans {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -498,7 +498,7 @@ class cl_contrans {
   function sql_query_vinculo ( $c45_seqtrans=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_contrans {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -543,7 +543,7 @@ class cl_contrans {
   function sql_queryVinculoEmpRestoTipoLiquidacao ( $c45_seqtrans=null,$campos="*",$ordem=null,$dbwhere=""){
   	$sql = "select ";
   	if($campos != "*" ){
-  		$campos_sql = split("#",$campos);
+  		$campos_sql = preg_split("#\\##m",$campos);
   		$virgula = "";
   		for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];
@@ -574,7 +574,7 @@ class cl_contrans {
   		$sql .= $sql2;
   		if($ordem != null ){
   		$sql .= " order by ";
-  			$campos_sql = split("#",$ordem);
+  			$campos_sql = preg_split("#\\##m",$ordem);
   			$virgula = "";
   			for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];

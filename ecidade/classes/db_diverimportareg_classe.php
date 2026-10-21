@@ -52,7 +52,7 @@ class cl_diverimportareg {
                  dv12_diverimporta = int8 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_diverimportareg() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diverimportareg"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_diverimportareg {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->dv12_sequencial = ($this->dv12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv12_sequencial"]:$this->dv12_sequencial);
-       $this->dv12_diversos = ($this->dv12_diversos == ""?@$GLOBALS["HTTP_POST_VARS"]["dv12_diversos"]:$this->dv12_diversos);
-       $this->dv12_diverimporta = ($this->dv12_diverimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["dv12_diverimporta"]:$this->dv12_diverimporta);
+       $this->dv12_sequencial = ($this->dv12_sequencial === 0 || $this->dv12_sequencial === 0.0 || $this->dv12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv12_sequencial"]:$this->dv12_sequencial);
+       $this->dv12_diversos = ($this->dv12_diversos === 0 || $this->dv12_diversos === 0.0 || $this->dv12_diversos == ""?@$GLOBALS["HTTP_POST_VARS"]["dv12_diversos"]:$this->dv12_diversos);
+       $this->dv12_diverimporta = ($this->dv12_diverimporta === 0 || $this->dv12_diverimporta === 0.0 || $this->dv12_diverimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["dv12_diverimporta"]:$this->dv12_diverimporta);
      }else{
-       $this->dv12_sequencial = ($this->dv12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv12_sequencial"]:$this->dv12_sequencial);
+       $this->dv12_sequencial = ($this->dv12_sequencial === 0 || $this->dv12_sequencial === 0.0 || $this->dv12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv12_sequencial"]:$this->dv12_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_diverimportareg {
          $this->dv12_sequencial = $dv12_sequencial; 
        }
      }
-     if(($this->dv12_sequencial == null) || ($this->dv12_sequencial == "") ){ 
+     if(($this->dv12_sequencial == null) || ($this->dv12_sequencial === 0 || $this->dv12_sequencial === 0.0 || $this->dv12_sequencial == "") ){ 
        $this->erro_sql = " Campo dv12_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_diverimportareg {
    function sql_query ( $dv12_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_diverimportareg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_diverimportareg {
    function sql_query_file ( $dv12_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_diverimportareg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

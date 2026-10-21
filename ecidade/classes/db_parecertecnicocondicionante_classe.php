@@ -52,7 +52,7 @@ class cl_parecertecnicocondicionante {
                  am12_condicionante = int4 = Condicionante
                  ";
    //funcao construtor da classe
-   function cl_parecertecnicocondicionante() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parecertecnicocondicionante");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_parecertecnicocondicionante {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am12_sequencial = ($this->am12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am12_sequencial"]:$this->am12_sequencial);
-       $this->am12_parecertecnico = ($this->am12_parecertecnico == ""?@$GLOBALS["HTTP_POST_VARS"]["am12_parecertecnico"]:$this->am12_parecertecnico);
-       $this->am12_condicionante = ($this->am12_condicionante == ""?@$GLOBALS["HTTP_POST_VARS"]["am12_condicionante"]:$this->am12_condicionante);
+       $this->am12_sequencial = ($this->am12_sequencial === 0 || $this->am12_sequencial === 0.0 || $this->am12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am12_sequencial"]:$this->am12_sequencial);
+       $this->am12_parecertecnico = ($this->am12_parecertecnico === 0 || $this->am12_parecertecnico === 0.0 || $this->am12_parecertecnico == ""?@$GLOBALS["HTTP_POST_VARS"]["am12_parecertecnico"]:$this->am12_parecertecnico);
+       $this->am12_condicionante = ($this->am12_condicionante === 0 || $this->am12_condicionante === 0.0 || $this->am12_condicionante == ""?@$GLOBALS["HTTP_POST_VARS"]["am12_condicionante"]:$this->am12_condicionante);
      }else{
-       $this->am12_sequencial = ($this->am12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am12_sequencial"]:$this->am12_sequencial);
+       $this->am12_sequencial = ($this->am12_sequencial === 0 || $this->am12_sequencial === 0.0 || $this->am12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am12_sequencial"]:$this->am12_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_parecertecnicocondicionante {
          $this->am12_sequencial = $am12_sequencial;
        }
      }
-     if(($this->am12_sequencial == null) || ($this->am12_sequencial == "") ){
+     if(($this->am12_sequencial == null) || ($this->am12_sequencial === 0 || $this->am12_sequencial === 0.0 || $this->am12_sequencial == "") ){
        $this->erro_sql = " Campo am12_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -24,7 +24,7 @@ class cl_econsigmotivo {
                  rh147_motivo = varchar(100) = Motivo 
                  ";
    //funcao construtor da classe 
-   function cl_econsigmotivo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("econsigmotivo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -41,10 +41,10 @@ class cl_econsigmotivo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh147_sequencial = ($this->rh147_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh147_sequencial"]:$this->rh147_sequencial);
+       $this->rh147_sequencial = ($this->rh147_sequencial === 0 || $this->rh147_sequencial === 0.0 || $this->rh147_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh147_sequencial"]:$this->rh147_sequencial);
        $this->rh147_motivo = ($this->rh147_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh147_motivo"]:$this->rh147_motivo);
      }else{
-       $this->rh147_sequencial = ($this->rh147_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh147_sequencial"]:$this->rh147_sequencial);
+       $this->rh147_sequencial = ($this->rh147_sequencial === 0 || $this->rh147_sequencial === 0.0 || $this->rh147_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh147_sequencial"]:$this->rh147_sequencial);
      }
    }
    // funcao para inclusao
@@ -83,7 +83,7 @@ class cl_econsigmotivo {
          $this->rh147_sequencial = $rh147_sequencial; 
        }
      }
-     if(($this->rh147_sequencial == null) || ($this->rh147_sequencial == "") ){ 
+     if(($this->rh147_sequencial == null) || ($this->rh147_sequencial === 0 || $this->rh147_sequencial === 0.0 || $this->rh147_sequencial == "") ){ 
        $this->erro_sql = " Campo rh147_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -56,7 +56,7 @@ class cl_cursosocialcidadao {
                  as22_observacao = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_cursosocialcidadao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cursosocialcidadao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_cursosocialcidadao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->as22_sequencial = ($this->as22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_sequencial"]:$this->as22_sequencial);
-       $this->as22_cursosocial = ($this->as22_cursosocial == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_cursosocial"]:$this->as22_cursosocial);
-       $this->as22_cidadao = ($this->as22_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_cidadao"]:$this->as22_cidadao);
-       $this->as22_cidadao_seq = ($this->as22_cidadao_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_cidadao_seq"]:$this->as22_cidadao_seq);
+       $this->as22_sequencial = ($this->as22_sequencial === 0 || $this->as22_sequencial === 0.0 || $this->as22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_sequencial"]:$this->as22_sequencial);
+       $this->as22_cursosocial = ($this->as22_cursosocial === 0 || $this->as22_cursosocial === 0.0 || $this->as22_cursosocial == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_cursosocial"]:$this->as22_cursosocial);
+       $this->as22_cidadao = ($this->as22_cidadao === 0 || $this->as22_cidadao === 0.0 || $this->as22_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_cidadao"]:$this->as22_cidadao);
+       $this->as22_cidadao_seq = ($this->as22_cidadao_seq === 0 || $this->as22_cidadao_seq === 0.0 || $this->as22_cidadao_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_cidadao_seq"]:$this->as22_cidadao_seq);
        $this->as22_observacao = ($this->as22_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_observacao"]:$this->as22_observacao);
      }else{
-       $this->as22_sequencial = ($this->as22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_sequencial"]:$this->as22_sequencial);
+       $this->as22_sequencial = ($this->as22_sequencial === 0 || $this->as22_sequencial === 0.0 || $this->as22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as22_sequencial"]:$this->as22_sequencial);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_cursosocialcidadao {
          $this->as22_sequencial = $as22_sequencial; 
        }
      }
-     if(($this->as22_sequencial == null) || ($this->as22_sequencial == "") ){ 
+     if(($this->as22_sequencial == null) || ($this->as22_sequencial === 0 || $this->as22_sequencial === 0.0 || $this->as22_sequencial == "") ){ 
        $this->erro_sql = " Campo as22_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -426,7 +426,7 @@ class cl_cursosocialcidadao {
    function sql_query ( $as22_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_cursosocialcidadao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -465,7 +465,7 @@ class cl_cursosocialcidadao {
    function sql_query_file ( $as22_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_cursosocialcidadao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -500,7 +500,7 @@ class cl_cursosocialcidadao {
     $sql = "select ";
     if ($campos != "*" ) {
       
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -529,7 +529,7 @@ class cl_cursosocialcidadao {
     if ($ordem != null ) {
       
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       for($i = 0; $i < sizeof($campos_sql); $i++) {
         

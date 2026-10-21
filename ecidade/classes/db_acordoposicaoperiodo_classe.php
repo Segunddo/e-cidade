@@ -64,7 +64,7 @@ class cl_acordoposicaoperiodo {
                  ac36_numero = int4 = Numero 
                  ";
    //funcao construtor da classe 
-   function cl_acordoposicaoperiodo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoposicaoperiodo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,8 +81,8 @@ class cl_acordoposicaoperiodo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac36_sequencial = ($this->ac36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_sequencial"]:$this->ac36_sequencial);
-       $this->ac36_acordoposicao = ($this->ac36_acordoposicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_acordoposicao"]:$this->ac36_acordoposicao);
+       $this->ac36_sequencial = ($this->ac36_sequencial === 0 || $this->ac36_sequencial === 0.0 || $this->ac36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_sequencial"]:$this->ac36_sequencial);
+       $this->ac36_acordoposicao = ($this->ac36_acordoposicao === 0 || $this->ac36_acordoposicao === 0.0 || $this->ac36_acordoposicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_acordoposicao"]:$this->ac36_acordoposicao);
        if($this->ac36_datainicial == ""){
          $this->ac36_datainicial_dia = ($this->ac36_datainicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_datainicial_dia"]:$this->ac36_datainicial_dia);
          $this->ac36_datainicial_mes = ($this->ac36_datainicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_datainicial_mes"]:$this->ac36_datainicial_mes);
@@ -100,9 +100,9 @@ class cl_acordoposicaoperiodo {
          }
        }
        $this->ac36_descricao = ($this->ac36_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_descricao"]:$this->ac36_descricao);
-       $this->ac36_numero = ($this->ac36_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_numero"]:$this->ac36_numero);
+       $this->ac36_numero = ($this->ac36_numero === 0 || $this->ac36_numero === 0.0 || $this->ac36_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_numero"]:$this->ac36_numero);
      }else{
-       $this->ac36_sequencial = ($this->ac36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_sequencial"]:$this->ac36_sequencial);
+       $this->ac36_sequencial = ($this->ac36_sequencial === 0 || $this->ac36_sequencial === 0.0 || $this->ac36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_sequencial"]:$this->ac36_sequencial);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_acordoposicaoperiodo {
          $this->ac36_sequencial = $ac36_sequencial; 
        }
      }
-     if(($this->ac36_sequencial == null) || ($this->ac36_sequencial == "") ){ 
+     if(($this->ac36_sequencial == null) || ($this->ac36_sequencial === 0 || $this->ac36_sequencial === 0.0 || $this->ac36_sequencial == "") ){ 
        $this->erro_sql = " Campo ac36_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -501,7 +501,7 @@ class cl_acordoposicaoperiodo {
    function sql_query ( $ac36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_acordoposicaoperiodo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_acordoposicaoperiodo {
    function sql_query_file ( $ac36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -559,7 +559,7 @@ class cl_acordoposicaoperiodo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

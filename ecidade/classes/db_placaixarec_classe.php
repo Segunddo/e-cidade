@@ -73,7 +73,7 @@ class cl_placaixarec {
                  k81_concarpeculiar = varchar(100) = C. Peculiar/C. Aplicação
                  ";
    //funcao construtor da classe
-   function cl_placaixarec() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("placaixarec");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,13 +90,13 @@ class cl_placaixarec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k81_seqpla = ($this->k81_seqpla == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_seqpla"]:$this->k81_seqpla);
-       $this->k81_codpla = ($this->k81_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_codpla"]:$this->k81_codpla);
-       $this->k81_conta = ($this->k81_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_conta"]:$this->k81_conta);
-       $this->k81_receita = ($this->k81_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_receita"]:$this->k81_receita);
-       $this->k81_valor = ($this->k81_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_valor"]:$this->k81_valor);
+       $this->k81_seqpla = ($this->k81_seqpla === 0 || $this->k81_seqpla === 0.0 || $this->k81_seqpla == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_seqpla"]:$this->k81_seqpla);
+       $this->k81_codpla = ($this->k81_codpla === 0 || $this->k81_codpla === 0.0 || $this->k81_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_codpla"]:$this->k81_codpla);
+       $this->k81_conta = ($this->k81_conta === 0 || $this->k81_conta === 0.0 || $this->k81_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_conta"]:$this->k81_conta);
+       $this->k81_receita = ($this->k81_receita === 0 || $this->k81_receita === 0.0 || $this->k81_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_receita"]:$this->k81_receita);
+       $this->k81_valor = ($this->k81_valor === 0 || $this->k81_valor === 0.0 || $this->k81_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_valor"]:$this->k81_valor);
        $this->k81_obs = ($this->k81_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_obs"]:$this->k81_obs);
-       $this->k81_codigo = ($this->k81_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_codigo"]:$this->k81_codigo);
+       $this->k81_codigo = ($this->k81_codigo === 0 || $this->k81_codigo === 0.0 || $this->k81_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_codigo"]:$this->k81_codigo);
        if($this->k81_datareceb == ""){
          $this->k81_datareceb_dia = ($this->k81_datareceb_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_datareceb_dia"]:$this->k81_datareceb_dia);
          $this->k81_datareceb_mes = ($this->k81_datareceb_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_datareceb_mes"]:$this->k81_datareceb_mes);
@@ -106,11 +106,11 @@ class cl_placaixarec {
          }
        }
        $this->k81_operbanco = ($this->k81_operbanco == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_operbanco"]:$this->k81_operbanco);
-       $this->k81_origem = ($this->k81_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_origem"]:$this->k81_origem);
-       $this->k81_numcgm = ($this->k81_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_numcgm"]:$this->k81_numcgm);
+       $this->k81_origem = ($this->k81_origem === 0 || $this->k81_origem === 0.0 || $this->k81_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_origem"]:$this->k81_origem);
+       $this->k81_numcgm = ($this->k81_numcgm === 0 || $this->k81_numcgm === 0.0 || $this->k81_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_numcgm"]:$this->k81_numcgm);
        $this->k81_concarpeculiar = ($this->k81_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_concarpeculiar"]:$this->k81_concarpeculiar);
      }else{
-       $this->k81_seqpla = ($this->k81_seqpla == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_seqpla"]:$this->k81_seqpla);
+       $this->k81_seqpla = ($this->k81_seqpla === 0 || $this->k81_seqpla === 0.0 || $this->k81_seqpla == ""?@$GLOBALS["HTTP_POST_VARS"]["k81_seqpla"]:$this->k81_seqpla);
      }
    }
    // funcao para inclusao
@@ -221,7 +221,7 @@ class cl_placaixarec {
          $this->k81_seqpla = $k81_seqpla;
        }
      }
-     if(($this->k81_seqpla == null) || ($this->k81_seqpla == "") ){
+     if(($this->k81_seqpla == null) || ($this->k81_seqpla === 0 || $this->k81_seqpla === 0.0 || $this->k81_seqpla == "") ){
        $this->erro_sql = " Campo k81_seqpla nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -627,7 +627,7 @@ class cl_placaixarec {
    function sql_query ( $k81_seqpla=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -657,7 +657,7 @@ class cl_placaixarec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -670,7 +670,7 @@ class cl_placaixarec {
    function sql_query_file ( $k81_seqpla=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -691,7 +691,7 @@ class cl_placaixarec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -703,7 +703,7 @@ class cl_placaixarec {
    function sql_query_matric_inscr ( $k81_seqpla=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -738,7 +738,7 @@ class cl_placaixarec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -751,7 +751,7 @@ class cl_placaixarec {
   function sql_query_origem( $k81_seqpla=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -774,7 +774,7 @@ class cl_placaixarec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

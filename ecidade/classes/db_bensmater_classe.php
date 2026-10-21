@@ -59,7 +59,7 @@ class cl_bensmater {
                  t53_garant = date = Garantia 
                  ";
    //funcao construtor da classe 
-   function cl_bensmater() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bensmater"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,10 +76,10 @@ class cl_bensmater {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t53_codbem = ($this->t53_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t53_codbem"]:$this->t53_codbem);
+       $this->t53_codbem = ($this->t53_codbem === 0 || $this->t53_codbem === 0.0 || $this->t53_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t53_codbem"]:$this->t53_codbem);
        $this->t53_ntfisc = ($this->t53_ntfisc == ""?@$GLOBALS["HTTP_POST_VARS"]["t53_ntfisc"]:$this->t53_ntfisc);
        $this->t53_empen = ($this->t53_empen == ""?@$GLOBALS["HTTP_POST_VARS"]["t53_empen"]:$this->t53_empen);
-       $this->t53_ordem = ($this->t53_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["t53_ordem"]:$this->t53_ordem);
+       $this->t53_ordem = ($this->t53_ordem === 0 || $this->t53_ordem === 0.0 || $this->t53_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["t53_ordem"]:$this->t53_ordem);
        if($this->t53_garant == ""){
          $this->t53_garant_dia = ($this->t53_garant_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t53_garant_dia"]:$this->t53_garant_dia);
          $this->t53_garant_mes = ($this->t53_garant_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t53_garant_mes"]:$this->t53_garant_mes);
@@ -89,7 +89,7 @@ class cl_bensmater {
          }
        }
      }else{
-       $this->t53_codbem = ($this->t53_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t53_codbem"]:$this->t53_codbem);
+       $this->t53_codbem = ($this->t53_codbem === 0 || $this->t53_codbem === 0.0 || $this->t53_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t53_codbem"]:$this->t53_codbem);
      }
    }
    // funcao para inclusao
@@ -120,7 +120,7 @@ class cl_bensmater {
        return false;
      }
        $this->t53_codbem = $t53_codbem; 
-     if(($this->t53_codbem == null) || ($this->t53_codbem == "") ){ 
+     if(($this->t53_codbem == null) || ($this->t53_codbem === 0 || $this->t53_codbem === 0.0 || $this->t53_codbem == "") ){ 
        $this->erro_sql = " Campo t53_codbem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -396,7 +396,7 @@ class cl_bensmater {
    function sql_query ( $t53_codbem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_bensmater {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_bensmater {
    function sql_query_file ( $t53_codbem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_bensmater {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_bensmater {
    function sql_query_bensmater ( $t53_codbem=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -494,7 +494,7 @@ class cl_bensmater {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

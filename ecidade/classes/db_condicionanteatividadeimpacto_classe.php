@@ -52,7 +52,7 @@ class cl_condicionanteatividadeimpacto {
                  am11_atividadeimpacto = int4 = Atividade
                  ";
    //funcao construtor da classe
-   function cl_condicionanteatividadeimpacto() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("condicionanteatividadeimpacto");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_condicionanteatividadeimpacto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am11_sequencial = ($this->am11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am11_sequencial"]:$this->am11_sequencial);
-       $this->am11_condicionante = ($this->am11_condicionante == ""?@$GLOBALS["HTTP_POST_VARS"]["am11_condicionante"]:$this->am11_condicionante);
-       $this->am11_atividadeimpacto = ($this->am11_atividadeimpacto == ""?@$GLOBALS["HTTP_POST_VARS"]["am11_atividadeimpacto"]:$this->am11_atividadeimpacto);
+       $this->am11_sequencial = ($this->am11_sequencial === 0 || $this->am11_sequencial === 0.0 || $this->am11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am11_sequencial"]:$this->am11_sequencial);
+       $this->am11_condicionante = ($this->am11_condicionante === 0 || $this->am11_condicionante === 0.0 || $this->am11_condicionante == ""?@$GLOBALS["HTTP_POST_VARS"]["am11_condicionante"]:$this->am11_condicionante);
+       $this->am11_atividadeimpacto = ($this->am11_atividadeimpacto === 0 || $this->am11_atividadeimpacto === 0.0 || $this->am11_atividadeimpacto == ""?@$GLOBALS["HTTP_POST_VARS"]["am11_atividadeimpacto"]:$this->am11_atividadeimpacto);
      }else{
-       $this->am11_sequencial = ($this->am11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am11_sequencial"]:$this->am11_sequencial);
+       $this->am11_sequencial = ($this->am11_sequencial === 0 || $this->am11_sequencial === 0.0 || $this->am11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am11_sequencial"]:$this->am11_sequencial);
      }
    }
    // funcao para Inclusão
@@ -121,7 +121,7 @@ class cl_condicionanteatividadeimpacto {
          $this->am11_sequencial = $am11_sequencial;
        }
      }
-     if(($this->am11_sequencial == null) || ($this->am11_sequencial == "") ){
+     if(($this->am11_sequencial == null) || ($this->am11_sequencial === 0 || $this->am11_sequencial === 0.0 || $this->am11_sequencial == "") ){
        $this->erro_sql = " Campo am11_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

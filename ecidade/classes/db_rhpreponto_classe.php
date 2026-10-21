@@ -36,7 +36,7 @@ class cl_rhpreponto {
                  rh149_competencia = varchar(7) = Competência 
                  ";
    //funcao construtor da classe 
-   function cl_rhpreponto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhpreponto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -53,16 +53,16 @@ class cl_rhpreponto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh149_sequencial = ($this->rh149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_sequencial"]:$this->rh149_sequencial);
-       $this->rh149_instit = ($this->rh149_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_instit"]:$this->rh149_instit);
-       $this->rh149_regist = ($this->rh149_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_regist"]:$this->rh149_regist);
+       $this->rh149_sequencial = ($this->rh149_sequencial === 0 || $this->rh149_sequencial === 0.0 || $this->rh149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_sequencial"]:$this->rh149_sequencial);
+       $this->rh149_instit = ($this->rh149_instit === 0 || $this->rh149_instit === 0.0 || $this->rh149_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_instit"]:$this->rh149_instit);
+       $this->rh149_regist = ($this->rh149_regist === 0 || $this->rh149_regist === 0.0 || $this->rh149_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_regist"]:$this->rh149_regist);
        $this->rh149_rubric = ($this->rh149_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_rubric"]:$this->rh149_rubric);
-       $this->rh149_valor = ($this->rh149_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_valor"]:$this->rh149_valor);
-       $this->rh149_quantidade = ($this->rh149_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_quantidade"]:$this->rh149_quantidade);
-       $this->rh149_tipofolha = ($this->rh149_tipofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_tipofolha"]:$this->rh149_tipofolha);
+       $this->rh149_valor = ($this->rh149_valor === 0 || $this->rh149_valor === 0.0 || $this->rh149_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_valor"]:$this->rh149_valor);
+       $this->rh149_quantidade = ($this->rh149_quantidade === 0 || $this->rh149_quantidade === 0.0 || $this->rh149_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_quantidade"]:$this->rh149_quantidade);
+       $this->rh149_tipofolha = ($this->rh149_tipofolha === 0 || $this->rh149_tipofolha === 0.0 || $this->rh149_tipofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_tipofolha"]:$this->rh149_tipofolha);
        $this->rh149_competencia = ($this->rh149_competencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_competencia"]:$this->rh149_competencia);
      }else{
-       $this->rh149_sequencial = ($this->rh149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_sequencial"]:$this->rh149_sequencial);
+       $this->rh149_sequencial = ($this->rh149_sequencial === 0 || $this->rh149_sequencial === 0.0 || $this->rh149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh149_sequencial"]:$this->rh149_sequencial);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_rhpreponto {
          $this->rh149_sequencial = $rh149_sequencial; 
        }
      }
-     if(($this->rh149_sequencial == null) || ($this->rh149_sequencial == "") ){ 
+     if(($this->rh149_sequencial == null) || ($this->rh149_sequencial === 0 || $this->rh149_sequencial === 0.0 || $this->rh149_sequencial == "") ){ 
        $this->erro_sql = " Campo rh149_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

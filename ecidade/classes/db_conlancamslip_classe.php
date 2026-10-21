@@ -50,7 +50,7 @@ class cl_conlancamslip {
                  c84_slip = int4 = Código Slip 
                  ";
    //funcao construtor da classe 
-   function cl_conlancamslip() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancamslip"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_conlancamslip {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c84_conlancam = ($this->c84_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_conlancam"]:$this->c84_conlancam);
-       $this->c84_slip = ($this->c84_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_slip"]:$this->c84_slip);
+       $this->c84_conlancam = ($this->c84_conlancam === 0 || $this->c84_conlancam === 0.0 || $this->c84_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_conlancam"]:$this->c84_conlancam);
+       $this->c84_slip = ($this->c84_slip === 0 || $this->c84_slip === 0.0 || $this->c84_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_slip"]:$this->c84_slip);
      }else{
-       $this->c84_conlancam = ($this->c84_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_conlancam"]:$this->c84_conlancam);
+       $this->c84_conlancam = ($this->c84_conlancam === 0 || $this->c84_conlancam === 0.0 || $this->c84_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_conlancam"]:$this->c84_conlancam);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_conlancamslip {
        return false;
      }
        $this->c84_conlancam = $c84_conlancam; 
-     if(($this->c84_conlancam == null) || ($this->c84_conlancam == "") ){ 
+     if(($this->c84_conlancam == null) || ($this->c84_conlancam === 0 || $this->c84_conlancam === 0.0 || $this->c84_conlancam == "") ){ 
        $this->erro_sql = " Campo c84_conlancam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -306,7 +306,7 @@ class cl_conlancamslip {
    function sql_query ( $c84_conlancam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_conlancamslip {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -343,7 +343,7 @@ class cl_conlancamslip {
    function sql_query_file ( $c84_conlancam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_conlancamslip {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -377,7 +377,7 @@ class cl_conlancamslip {
   function sql_query_lancamento_slip( $c84_conlancam=null,$campos="*",$ordem=null,$dbwhere="") { 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_conlancamslip {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -66,7 +66,7 @@ class cl_inventariobem
                  ";
 
     //funcao construtor da classe
-    function cl_inventariobem()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("inventariobem");
@@ -88,17 +88,17 @@ class cl_inventariobem
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->t77_sequencial = ($this->t77_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_sequencial"] : $this->t77_sequencial);
-            $this->t77_inventario = ($this->t77_inventario == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_inventario"] : $this->t77_inventario);
-            $this->t77_bens = ($this->t77_bens == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_bens"] : $this->t77_bens);
-            $this->t77_db_depart = ($this->t77_db_depart == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_db_depart"] : $this->t77_db_depart);
-            $this->t77_departdiv = ($this->t77_departdiv == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_departdiv"] : $this->t77_departdiv);
-            $this->t77_situabens = ($this->t77_situabens == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_situabens"] : $this->t77_situabens);
-            $this->t77_valordepreciavel = ($this->t77_valordepreciavel == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_valordepreciavel"] : $this->t77_valordepreciavel);
-            $this->t77_valorresidual = ($this->t77_valorresidual == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_valorresidual"] : $this->t77_valorresidual);
-            $this->t77_vidautil = ($this->t77_vidautil == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_vidautil"] : $this->t77_vidautil);
+            $this->t77_sequencial = ($this->t77_sequencial === 0 || $this->t77_sequencial === 0.0 || $this->t77_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_sequencial"] : $this->t77_sequencial);
+            $this->t77_inventario = ($this->t77_inventario === 0 || $this->t77_inventario === 0.0 || $this->t77_inventario == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_inventario"] : $this->t77_inventario);
+            $this->t77_bens = ($this->t77_bens === 0 || $this->t77_bens === 0.0 || $this->t77_bens == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_bens"] : $this->t77_bens);
+            $this->t77_db_depart = ($this->t77_db_depart === 0 || $this->t77_db_depart === 0.0 || $this->t77_db_depart == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_db_depart"] : $this->t77_db_depart);
+            $this->t77_departdiv = ($this->t77_departdiv === 0 || $this->t77_departdiv === 0.0 || $this->t77_departdiv == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_departdiv"] : $this->t77_departdiv);
+            $this->t77_situabens = ($this->t77_situabens === 0 || $this->t77_situabens === 0.0 || $this->t77_situabens == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_situabens"] : $this->t77_situabens);
+            $this->t77_valordepreciavel = ($this->t77_valordepreciavel === 0 || $this->t77_valordepreciavel === 0.0 || $this->t77_valordepreciavel == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_valordepreciavel"] : $this->t77_valordepreciavel);
+            $this->t77_valorresidual = ($this->t77_valorresidual === 0 || $this->t77_valorresidual === 0.0 || $this->t77_valorresidual == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_valorresidual"] : $this->t77_valorresidual);
+            $this->t77_vidautil = ($this->t77_vidautil === 0 || $this->t77_vidautil === 0.0 || $this->t77_vidautil == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_vidautil"] : $this->t77_vidautil);
         } else {
-            $this->t77_sequencial = ($this->t77_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_sequencial"] : $this->t77_sequencial);
+            $this->t77_sequencial = ($this->t77_sequencial === 0 || $this->t77_sequencial === 0.0 || $this->t77_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["t77_sequencial"] : $this->t77_sequencial);
         }
     }
 
@@ -174,7 +174,7 @@ class cl_inventariobem
                 $this->t77_sequencial = $t77_sequencial;
             }
         }
-        if (($this->t77_sequencial == null) || ($this->t77_sequencial == "")) {
+        if (($this->t77_sequencial == null) || ($this->t77_sequencial === 0 || $this->t77_sequencial === 0.0 || $this->t77_sequencial == "")) {
             $this->erro_sql = " Campo t77_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
