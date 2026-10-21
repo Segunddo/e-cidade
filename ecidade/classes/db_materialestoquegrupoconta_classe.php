@@ -56,7 +56,7 @@ class cl_materialestoquegrupoconta {
                  m66_codconvpd = int4 = Conta VPD
                  ";
    //funcao construtor da classe
-   function cl_materialestoquegrupoconta() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("materialestoquegrupoconta");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_materialestoquegrupoconta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m66_sequencial = ($this->m66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_sequencial"]:$this->m66_sequencial);
-       $this->m66_materialestoquegrupo = ($this->m66_materialestoquegrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_materialestoquegrupo"]:$this->m66_materialestoquegrupo);
-       $this->m66_codcon = ($this->m66_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_codcon"]:$this->m66_codcon);
-       $this->m66_anousu = ($this->m66_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_anousu"]:$this->m66_anousu);
-       $this->m66_codconvpd = ($this->m66_codconvpd == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_codconvpd"]:$this->m66_codconvpd);
+       $this->m66_sequencial = ($this->m66_sequencial === 0 || $this->m66_sequencial === 0.0 || $this->m66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_sequencial"]:$this->m66_sequencial);
+       $this->m66_materialestoquegrupo = ($this->m66_materialestoquegrupo === 0 || $this->m66_materialestoquegrupo === 0.0 || $this->m66_materialestoquegrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_materialestoquegrupo"]:$this->m66_materialestoquegrupo);
+       $this->m66_codcon = ($this->m66_codcon === 0 || $this->m66_codcon === 0.0 || $this->m66_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_codcon"]:$this->m66_codcon);
+       $this->m66_anousu = ($this->m66_anousu === 0 || $this->m66_anousu === 0.0 || $this->m66_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_anousu"]:$this->m66_anousu);
+       $this->m66_codconvpd = ($this->m66_codconvpd === 0 || $this->m66_codconvpd === 0.0 || $this->m66_codconvpd == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_codconvpd"]:$this->m66_codconvpd);
      }else{
-       $this->m66_sequencial = ($this->m66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_sequencial"]:$this->m66_sequencial);
+       $this->m66_sequencial = ($this->m66_sequencial === 0 || $this->m66_sequencial === 0.0 || $this->m66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m66_sequencial"]:$this->m66_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_materialestoquegrupoconta {
          $this->m66_sequencial = $m66_sequencial;
        }
      }
-     if(($this->m66_sequencial == null) || ($this->m66_sequencial == "") ){
+     if(($this->m66_sequencial == null) || ($this->m66_sequencial === 0 || $this->m66_sequencial === 0.0 || $this->m66_sequencial == "") ){
        $this->erro_sql = " Campo m66_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -376,7 +376,7 @@ class cl_materialestoquegrupoconta {
    function sql_query ( $m66_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -403,7 +403,7 @@ class cl_materialestoquegrupoconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_materialestoquegrupoconta {
    function sql_query_file ( $m66_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_materialestoquegrupoconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

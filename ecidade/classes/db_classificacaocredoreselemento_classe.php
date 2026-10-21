@@ -30,7 +30,7 @@ class cl_classificacaocredoreselemento {
                  cc32_exclusao = bool = Exclus?o
                  ";
    //funcao construtor da classe
-   function cl_classificacaocredoreselemento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("classificacaocredoreselemento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_classificacaocredoreselemento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc32_sequencial = ($this->cc32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc32_sequencial"]:$this->cc32_sequencial);
-       $this->cc32_classificacaocredores = ($this->cc32_classificacaocredores == ""?@$GLOBALS["HTTP_POST_VARS"]["cc32_classificacaocredores"]:$this->cc32_classificacaocredores);
-       $this->cc32_codcon = ($this->cc32_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["cc32_codcon"]:$this->cc32_codcon);
-       $this->cc32_anousu = ($this->cc32_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["cc32_anousu"]:$this->cc32_anousu);
+       $this->cc32_sequencial = ($this->cc32_sequencial === 0 || $this->cc32_sequencial === 0.0 || $this->cc32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc32_sequencial"]:$this->cc32_sequencial);
+       $this->cc32_classificacaocredores = ($this->cc32_classificacaocredores === 0 || $this->cc32_classificacaocredores === 0.0 || $this->cc32_classificacaocredores == ""?@$GLOBALS["HTTP_POST_VARS"]["cc32_classificacaocredores"]:$this->cc32_classificacaocredores);
+       $this->cc32_codcon = ($this->cc32_codcon === 0 || $this->cc32_codcon === 0.0 || $this->cc32_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["cc32_codcon"]:$this->cc32_codcon);
+       $this->cc32_anousu = ($this->cc32_anousu === 0 || $this->cc32_anousu === 0.0 || $this->cc32_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["cc32_anousu"]:$this->cc32_anousu);
        $this->cc32_exclusao = ($this->cc32_exclusao == "f"?@$GLOBALS["HTTP_POST_VARS"]["cc32_exclusao"]:$this->cc32_exclusao);
      }else{
-       $this->cc32_sequencial = ($this->cc32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc32_sequencial"]:$this->cc32_sequencial);
+       $this->cc32_sequencial = ($this->cc32_sequencial === 0 || $this->cc32_sequencial === 0.0 || $this->cc32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc32_sequencial"]:$this->cc32_sequencial);
      }
    }
    // funcao para Inclusão
@@ -119,7 +119,7 @@ class cl_classificacaocredoreselemento {
          $this->cc32_sequencial = $cc32_sequencial;
        }
      }
-     if(($this->cc32_sequencial == null) || ($this->cc32_sequencial == "") ){
+     if(($this->cc32_sequencial == null) || ($this->cc32_sequencial === 0 || $this->cc32_sequencial === 0.0 || $this->cc32_sequencial == "") ){
        $this->erro_sql = " Campo cc32_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

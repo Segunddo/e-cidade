@@ -52,7 +52,7 @@ class cl_pcorcamdescla {
                  pc32_motivo = text = Motivo da desclassificação
                  ";
    //funcao construtor da classe
-   function cl_pcorcamdescla() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcorcamdescla");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_pcorcamdescla {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc32_orcamitem = ($this->pc32_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc32_orcamitem"]:$this->pc32_orcamitem);
-       $this->pc32_orcamforne = ($this->pc32_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc32_orcamforne"]:$this->pc32_orcamforne);
+       $this->pc32_orcamitem = ($this->pc32_orcamitem === 0 || $this->pc32_orcamitem === 0.0 || $this->pc32_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc32_orcamitem"]:$this->pc32_orcamitem);
+       $this->pc32_orcamforne = ($this->pc32_orcamforne === 0 || $this->pc32_orcamforne === 0.0 || $this->pc32_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc32_orcamforne"]:$this->pc32_orcamforne);
        $this->pc32_motivo = ($this->pc32_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc32_motivo"]:$this->pc32_motivo);
      }else{
-       $this->pc32_orcamitem = ($this->pc32_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc32_orcamitem"]:$this->pc32_orcamitem);
-       $this->pc32_orcamforne = ($this->pc32_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc32_orcamforne"]:$this->pc32_orcamforne);
+       $this->pc32_orcamitem = ($this->pc32_orcamitem === 0 || $this->pc32_orcamitem === 0.0 || $this->pc32_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc32_orcamitem"]:$this->pc32_orcamitem);
+       $this->pc32_orcamforne = ($this->pc32_orcamforne === 0 || $this->pc32_orcamforne === 0.0 || $this->pc32_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc32_orcamforne"]:$this->pc32_orcamforne);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_pcorcamdescla {
      }
        $this->pc32_orcamitem = $pc32_orcamitem;
        $this->pc32_orcamforne = $pc32_orcamforne;
-     if(($this->pc32_orcamitem == null) || ($this->pc32_orcamitem == "") ){
+     if(($this->pc32_orcamitem == null) || ($this->pc32_orcamitem === 0 || $this->pc32_orcamitem === 0.0 || $this->pc32_orcamitem == "") ){
        $this->erro_sql = " Campo pc32_orcamitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_pcorcamdescla {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pc32_orcamforne == null) || ($this->pc32_orcamforne == "") ){
+     if(($this->pc32_orcamforne == null) || ($this->pc32_orcamforne === 0 || $this->pc32_orcamforne === 0.0 || $this->pc32_orcamforne == "") ){
        $this->erro_sql = " Campo pc32_orcamforne nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

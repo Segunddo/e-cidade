@@ -56,7 +56,7 @@ class cl_econsigmovimentoservidorrubrica {
                  rh135_valor = float4 = Valor Rubrica 
                  ";
    //funcao construtor da classe 
-   function cl_econsigmovimentoservidorrubrica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("econsigmovimentoservidorrubrica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_econsigmovimentoservidorrubrica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh135_sequencial = ($this->rh135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_sequencial"]:$this->rh135_sequencial);
-       $this->rh135_econsigmovimentoservidor = ($this->rh135_econsigmovimentoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_econsigmovimentoservidor"]:$this->rh135_econsigmovimentoservidor);
+       $this->rh135_sequencial = ($this->rh135_sequencial === 0 || $this->rh135_sequencial === 0.0 || $this->rh135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_sequencial"]:$this->rh135_sequencial);
+       $this->rh135_econsigmovimentoservidor = ($this->rh135_econsigmovimentoservidor === 0 || $this->rh135_econsigmovimentoservidor === 0.0 || $this->rh135_econsigmovimentoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_econsigmovimentoservidor"]:$this->rh135_econsigmovimentoservidor);
        $this->rh135_rubrica = ($this->rh135_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_rubrica"]:$this->rh135_rubrica);
-       $this->rh135_instit = ($this->rh135_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_instit"]:$this->rh135_instit);
-       $this->rh135_valor = ($this->rh135_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_valor"]:$this->rh135_valor);
+       $this->rh135_instit = ($this->rh135_instit === 0 || $this->rh135_instit === 0.0 || $this->rh135_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_instit"]:$this->rh135_instit);
+       $this->rh135_valor = ($this->rh135_valor === 0 || $this->rh135_valor === 0.0 || $this->rh135_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_valor"]:$this->rh135_valor);
      }else{
-       $this->rh135_sequencial = ($this->rh135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_sequencial"]:$this->rh135_sequencial);
+       $this->rh135_sequencial = ($this->rh135_sequencial === 0 || $this->rh135_sequencial === 0.0 || $this->rh135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh135_sequencial"]:$this->rh135_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_econsigmovimentoservidorrubrica {
          $this->rh135_sequencial = $rh135_sequencial; 
        }
      }
-     if(($this->rh135_sequencial == null) || ($this->rh135_sequencial == "") ){ 
+     if(($this->rh135_sequencial == null) || ($this->rh135_sequencial === 0 || $this->rh135_sequencial === 0.0 || $this->rh135_sequencial == "") ){ 
        $this->erro_sql = " Campo rh135_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

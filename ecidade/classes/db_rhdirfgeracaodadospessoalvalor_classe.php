@@ -60,7 +60,7 @@ class cl_rhdirfgeracaodadospessoalvalor {
                  rh98_instit = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_rhdirfgeracaodadospessoalvalor() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhdirfgeracaodadospessoalvalor"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_rhdirfgeracaodadospessoalvalor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh98_sequencial = ($this->rh98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_sequencial"]:$this->rh98_sequencial);
-       $this->rh98_rhdirfgeracaodadospessoal = ($this->rh98_rhdirfgeracaodadospessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_rhdirfgeracaodadospessoal"]:$this->rh98_rhdirfgeracaodadospessoal);
-       $this->rh98_rhdirftipovalor = ($this->rh98_rhdirftipovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_rhdirftipovalor"]:$this->rh98_rhdirftipovalor);
+       $this->rh98_sequencial = ($this->rh98_sequencial === 0 || $this->rh98_sequencial === 0.0 || $this->rh98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_sequencial"]:$this->rh98_sequencial);
+       $this->rh98_rhdirfgeracaodadospessoal = ($this->rh98_rhdirfgeracaodadospessoal === 0 || $this->rh98_rhdirfgeracaodadospessoal === 0.0 || $this->rh98_rhdirfgeracaodadospessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_rhdirfgeracaodadospessoal"]:$this->rh98_rhdirfgeracaodadospessoal);
+       $this->rh98_rhdirftipovalor = ($this->rh98_rhdirftipovalor === 0 || $this->rh98_rhdirftipovalor === 0.0 || $this->rh98_rhdirftipovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_rhdirftipovalor"]:$this->rh98_rhdirftipovalor);
        $this->rh98_tipoirrf = ($this->rh98_tipoirrf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_tipoirrf"]:$this->rh98_tipoirrf);
-       $this->rh98_mes = ($this->rh98_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_mes"]:$this->rh98_mes);
-       $this->rh98_valor = ($this->rh98_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_valor"]:$this->rh98_valor);
-       $this->rh98_instit = ($this->rh98_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_instit"]:$this->rh98_instit);
+       $this->rh98_mes = ($this->rh98_mes === 0 || $this->rh98_mes === 0.0 || $this->rh98_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_mes"]:$this->rh98_mes);
+       $this->rh98_valor = ($this->rh98_valor === 0 || $this->rh98_valor === 0.0 || $this->rh98_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_valor"]:$this->rh98_valor);
+       $this->rh98_instit = ($this->rh98_instit === 0 || $this->rh98_instit === 0.0 || $this->rh98_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_instit"]:$this->rh98_instit);
      }else{
-       $this->rh98_sequencial = ($this->rh98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_sequencial"]:$this->rh98_sequencial);
+       $this->rh98_sequencial = ($this->rh98_sequencial === 0 || $this->rh98_sequencial === 0.0 || $this->rh98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh98_sequencial"]:$this->rh98_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_rhdirfgeracaodadospessoalvalor {
          $this->rh98_sequencial = $rh98_sequencial; 
        }
      }
-     if(($this->rh98_sequencial == null) || ($this->rh98_sequencial == "") ){ 
+     if(($this->rh98_sequencial == null) || ($this->rh98_sequencial === 0 || $this->rh98_sequencial === 0.0 || $this->rh98_sequencial == "") ){ 
        $this->erro_sql = " Campo rh98_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -496,7 +496,7 @@ class cl_rhdirfgeracaodadospessoalvalor {
    function sql_query ( $rh98_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -521,7 +521,7 @@ class cl_rhdirfgeracaodadospessoalvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_rhdirfgeracaodadospessoalvalor {
    function sql_query_file ( $rh98_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -555,7 +555,7 @@ class cl_rhdirfgeracaodadospessoalvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

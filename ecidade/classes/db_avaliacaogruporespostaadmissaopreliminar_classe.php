@@ -49,13 +49,13 @@ class cl_avaliacaogruporespostaadmissaopreliminar
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->eso18_sequencial = ($this->eso18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_sequencial"]:$this->eso18_sequencial);
-       $this->eso18_avaliacaogruporesposta = ($this->eso18_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_avaliacaogruporesposta"]:$this->eso18_avaliacaogruporesposta);
-       $this->eso18_cgm = ($this->eso18_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_cgm"]:$this->eso18_cgm);
+       $this->eso18_sequencial = ($this->eso18_sequencial === 0 || $this->eso18_sequencial === 0.0 || $this->eso18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_sequencial"]:$this->eso18_sequencial);
+       $this->eso18_avaliacaogruporesposta = ($this->eso18_avaliacaogruporesposta === 0 || $this->eso18_avaliacaogruporesposta === 0.0 || $this->eso18_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_avaliacaogruporesposta"]:$this->eso18_avaliacaogruporesposta);
+       $this->eso18_cgm = ($this->eso18_cgm === 0 || $this->eso18_cgm === 0.0 || $this->eso18_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_cgm"]:$this->eso18_cgm);
        $this->eso18_cpf = ($this->eso18_cpf == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_cpf"]:$this->eso18_cpf);
-       $this->eso18_regist = ($this->eso18_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_regist"]:$this->eso18_regist);
+       $this->eso18_regist = ($this->eso18_regist === 0 || $this->eso18_regist === 0.0 || $this->eso18_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_regist"]:$this->eso18_regist);
      }else{
-       $this->eso18_sequencial = ($this->eso18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_sequencial"]:$this->eso18_sequencial);
+       $this->eso18_sequencial = ($this->eso18_sequencial === 0 || $this->eso18_sequencial === 0.0 || $this->eso18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso18_sequencial"]:$this->eso18_sequencial);
      }
    }
 
@@ -122,7 +122,7 @@ class cl_avaliacaogruporespostaadmissaopreliminar
          $this->eso18_sequencial = $eso18_sequencial; 
        }
      }
-     if(($this->eso18_sequencial == null) || ($this->eso18_sequencial == "") ){ 
+     if(($this->eso18_sequencial == null) || ($this->eso18_sequencial === 0 || $this->eso18_sequencial === 0.0 || $this->eso18_sequencial == "") ){ 
        $this->erro_sql = " Campo eso18_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -54,7 +54,7 @@ class cl_itinerariologradouro {
                  tre10_ordem = int4 = Ordem 
                  ";
    //funcao construtor da classe 
-   function cl_itinerariologradouro() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itinerariologradouro"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_itinerariologradouro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre10_sequencial = ($this->tre10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_sequencial"]:$this->tre10_sequencial);
-       $this->tre10_linhatransporteitinerario = ($this->tre10_linhatransporteitinerario == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_linhatransporteitinerario"]:$this->tre10_linhatransporteitinerario);
-       $this->tre10_cadenderbairrocadenderrua = ($this->tre10_cadenderbairrocadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_cadenderbairrocadenderrua"]:$this->tre10_cadenderbairrocadenderrua);
-       $this->tre10_ordem = ($this->tre10_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_ordem"]:$this->tre10_ordem);
+       $this->tre10_sequencial = ($this->tre10_sequencial === 0 || $this->tre10_sequencial === 0.0 || $this->tre10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_sequencial"]:$this->tre10_sequencial);
+       $this->tre10_linhatransporteitinerario = ($this->tre10_linhatransporteitinerario === 0 || $this->tre10_linhatransporteitinerario === 0.0 || $this->tre10_linhatransporteitinerario == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_linhatransporteitinerario"]:$this->tre10_linhatransporteitinerario);
+       $this->tre10_cadenderbairrocadenderrua = ($this->tre10_cadenderbairrocadenderrua === 0 || $this->tre10_cadenderbairrocadenderrua === 0.0 || $this->tre10_cadenderbairrocadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_cadenderbairrocadenderrua"]:$this->tre10_cadenderbairrocadenderrua);
+       $this->tre10_ordem = ($this->tre10_ordem === 0 || $this->tre10_ordem === 0.0 || $this->tre10_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_ordem"]:$this->tre10_ordem);
      }else{
-       $this->tre10_sequencial = ($this->tre10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_sequencial"]:$this->tre10_sequencial);
+       $this->tre10_sequencial = ($this->tre10_sequencial === 0 || $this->tre10_sequencial === 0.0 || $this->tre10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_sequencial"]:$this->tre10_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_itinerariologradouro {
          $this->tre10_sequencial = $tre10_sequencial; 
        }
      }
-     if(($this->tre10_sequencial == null) || ($this->tre10_sequencial == "") ){ 
+     if(($this->tre10_sequencial == null) || ($this->tre10_sequencial === 0 || $this->tre10_sequencial === 0.0 || $this->tre10_sequencial == "") ){ 
        $this->erro_sql = " Campo tre10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -413,7 +413,7 @@ class cl_itinerariologradouro {
    function sql_query ( $tre10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_itinerariologradouro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_itinerariologradouro {
    function sql_query_file ( $tre10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_itinerariologradouro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

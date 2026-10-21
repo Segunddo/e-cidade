@@ -59,7 +59,7 @@ class cl_abatimentoutilizacaodestino {
                  k170_valor = float4 = k170_valor 
                  ";
    //funcao construtor da classe 
-   function cl_abatimentoutilizacaodestino() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("abatimentoutilizacaodestino"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,13 +76,13 @@ class cl_abatimentoutilizacaodestino {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k170_utilizacao = ($this->k170_utilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_utilizacao"]:$this->k170_utilizacao);
-       $this->k170_numpre = ($this->k170_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_numpre"]:$this->k170_numpre);
-       $this->k170_numpar = ($this->k170_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_numpar"]:$this->k170_numpar);
-       $this->k170_receit = ($this->k170_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_receit"]:$this->k170_receit);
-       $this->k170_hist = ($this->k170_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_hist"]:$this->k170_hist);
-       $this->k170_tipo = ($this->k170_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_tipo"]:$this->k170_tipo);
-       $this->k170_valor = ($this->k170_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_valor"]:$this->k170_valor);
+       $this->k170_utilizacao = ($this->k170_utilizacao === 0 || $this->k170_utilizacao === 0.0 || $this->k170_utilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_utilizacao"]:$this->k170_utilizacao);
+       $this->k170_numpre = ($this->k170_numpre === 0 || $this->k170_numpre === 0.0 || $this->k170_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_numpre"]:$this->k170_numpre);
+       $this->k170_numpar = ($this->k170_numpar === 0 || $this->k170_numpar === 0.0 || $this->k170_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_numpar"]:$this->k170_numpar);
+       $this->k170_receit = ($this->k170_receit === 0 || $this->k170_receit === 0.0 || $this->k170_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_receit"]:$this->k170_receit);
+       $this->k170_hist = ($this->k170_hist === 0 || $this->k170_hist === 0.0 || $this->k170_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_hist"]:$this->k170_hist);
+       $this->k170_tipo = ($this->k170_tipo === 0 || $this->k170_tipo === 0.0 || $this->k170_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_tipo"]:$this->k170_tipo);
+       $this->k170_valor = ($this->k170_valor === 0 || $this->k170_valor === 0.0 || $this->k170_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k170_valor"]:$this->k170_valor);
      }else{
      }
    }

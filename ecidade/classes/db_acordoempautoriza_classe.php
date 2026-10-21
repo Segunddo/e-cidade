@@ -52,7 +52,7 @@ class cl_acordoempautoriza {
                  ac45_empautoriza = int4 = Autorização do Acordo 
                  ";
    //funcao construtor da classe 
-   function cl_acordoempautoriza() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoempautoriza"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_acordoempautoriza {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac45_sequencial = ($this->ac45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac45_sequencial"]:$this->ac45_sequencial);
-       $this->ac45_acordo = ($this->ac45_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac45_acordo"]:$this->ac45_acordo);
-       $this->ac45_empautoriza = ($this->ac45_empautoriza == ""?@$GLOBALS["HTTP_POST_VARS"]["ac45_empautoriza"]:$this->ac45_empautoriza);
+       $this->ac45_sequencial = ($this->ac45_sequencial === 0 || $this->ac45_sequencial === 0.0 || $this->ac45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac45_sequencial"]:$this->ac45_sequencial);
+       $this->ac45_acordo = ($this->ac45_acordo === 0 || $this->ac45_acordo === 0.0 || $this->ac45_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac45_acordo"]:$this->ac45_acordo);
+       $this->ac45_empautoriza = ($this->ac45_empautoriza === 0 || $this->ac45_empautoriza === 0.0 || $this->ac45_empautoriza == ""?@$GLOBALS["HTTP_POST_VARS"]["ac45_empautoriza"]:$this->ac45_empautoriza);
      }else{
-       $this->ac45_sequencial = ($this->ac45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac45_sequencial"]:$this->ac45_sequencial);
+       $this->ac45_sequencial = ($this->ac45_sequencial === 0 || $this->ac45_sequencial === 0.0 || $this->ac45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac45_sequencial"]:$this->ac45_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_acordoempautoriza {
          $this->ac45_sequencial = $ac45_sequencial; 
        }
      }
-     if(($this->ac45_sequencial == null) || ($this->ac45_sequencial == "") ){ 
+     if(($this->ac45_sequencial == null) || ($this->ac45_sequencial === 0 || $this->ac45_sequencial === 0.0 || $this->ac45_sequencial == "") ){ 
        $this->erro_sql = " Campo ac45_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_acordoempautoriza {
    function sql_query ( $ac45_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_acordoempautoriza {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_acordoempautoriza {
   function sql_queryAutorizacaoAcordo ( $ac45_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_acordoempautoriza {
       $sql .= $sql2;
       if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
       $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_acordoempautoriza {
    function sql_query_file ( $ac45_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -465,7 +465,7 @@ class cl_acordoempautoriza {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -50,7 +50,7 @@ class cl_pcmaterele {
                  pc07_codele = int4 = Código Elemento
                  ";
    //funcao construtor da classe
-   function cl_pcmaterele() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcmaterele");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_pcmaterele {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc07_codmater = ($this->pc07_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc07_codmater"]:$this->pc07_codmater);
-       $this->pc07_codele = ($this->pc07_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc07_codele"]:$this->pc07_codele);
+       $this->pc07_codmater = ($this->pc07_codmater === 0 || $this->pc07_codmater === 0.0 || $this->pc07_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc07_codmater"]:$this->pc07_codmater);
+       $this->pc07_codele = ($this->pc07_codele === 0 || $this->pc07_codele === 0.0 || $this->pc07_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc07_codele"]:$this->pc07_codele);
      }else{
-       $this->pc07_codmater = ($this->pc07_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc07_codmater"]:$this->pc07_codmater);
-       $this->pc07_codele = ($this->pc07_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc07_codele"]:$this->pc07_codele);
+       $this->pc07_codmater = ($this->pc07_codmater === 0 || $this->pc07_codmater === 0.0 || $this->pc07_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc07_codmater"]:$this->pc07_codmater);
+       $this->pc07_codele = ($this->pc07_codele === 0 || $this->pc07_codele === 0.0 || $this->pc07_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc07_codele"]:$this->pc07_codele);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_pcmaterele {
       $this->atualizacampos();
        $this->pc07_codmater = $pc07_codmater;
        $this->pc07_codele = $pc07_codele;
-     if(($this->pc07_codmater == null) || ($this->pc07_codmater == "") ){
+     if(($this->pc07_codmater == null) || ($this->pc07_codmater === 0 || $this->pc07_codmater === 0.0 || $this->pc07_codmater == "") ){
        $this->erro_sql = " Campo pc07_codmater nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_pcmaterele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pc07_codele == null) || ($this->pc07_codele == "") ){
+     if(($this->pc07_codele == null) || ($this->pc07_codele === 0 || $this->pc07_codele === 0.0 || $this->pc07_codele == "") ){
        $this->erro_sql = " Campo pc07_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -363,7 +363,7 @@ class cl_pcmaterele {
    function sql_query_file ( $pc07_codmater=null,$pc07_codele=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_pcmaterele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_pcmaterele {
    function sql_query_funcaut ( $pc07_codmater=null,$pc07_codele=null,$campos="*",$ordem=null,$dbwhere="", $sElemento = null){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -454,7 +454,7 @@ class cl_pcmaterele {
 //     $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -466,7 +466,7 @@ class cl_pcmaterele {
    function sql_query_funcautele ( $pc07_codmater=null,$pc07_codele=null,$campos="*",$ordem=null,$dbwhere="", $sWhereElemento = null){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -516,7 +516,7 @@ class cl_pcmaterele {
 //die($sql);
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -528,7 +528,7 @@ class cl_pcmaterele {
    function sql_query_funcauteledescr ( $pc07_codmater=null,$pc07_codele=null,$campos="*",$ordem=null,$dbwhere="", $sWhereElemento = null){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_pcmaterele {
        $sql .= $campos;
      }
 
-     $where_sql = split("#",$dbwhere);
+     $where_sql = preg_split("#\\##m",$dbwhere);
      $where1 = $where_sql[0];
      $where2 = $where_sql[1];
 
@@ -582,7 +582,7 @@ class cl_pcmaterele {
 //die($sql);
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

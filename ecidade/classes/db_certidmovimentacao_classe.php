@@ -57,7 +57,7 @@ class cl_certidmovimentacao {
                  v32_tipo = int4 = Tipo Movimentação
                  ";
    //funcao construtor da classe
-   function cl_certidmovimentacao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("certidmovimentacao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_certidmovimentacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v32_sequencial = ($this->v32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v32_sequencial"]:$this->v32_sequencial);
-       $this->v32_certidcartorio = ($this->v32_certidcartorio == ""?@$GLOBALS["HTTP_POST_VARS"]["v32_certidcartorio"]:$this->v32_certidcartorio);
+       $this->v32_sequencial = ($this->v32_sequencial === 0 || $this->v32_sequencial === 0.0 || $this->v32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v32_sequencial"]:$this->v32_sequencial);
+       $this->v32_certidcartorio = ($this->v32_certidcartorio === 0 || $this->v32_certidcartorio === 0.0 || $this->v32_certidcartorio == ""?@$GLOBALS["HTTP_POST_VARS"]["v32_certidcartorio"]:$this->v32_certidcartorio);
        if($this->v32_datamovimentacao == ""){
          $this->v32_datamovimentacao_dia = ($this->v32_datamovimentacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v32_datamovimentacao_dia"]:$this->v32_datamovimentacao_dia);
          $this->v32_datamovimentacao_mes = ($this->v32_datamovimentacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v32_datamovimentacao_mes"]:$this->v32_datamovimentacao_mes);
@@ -84,9 +84,9 @@ class cl_certidmovimentacao {
             $this->v32_datamovimentacao = $this->v32_datamovimentacao_ano."-".$this->v32_datamovimentacao_mes."-".$this->v32_datamovimentacao_dia;
          }
        }
-       $this->v32_tipo = ($this->v32_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v32_tipo"]:$this->v32_tipo);
+       $this->v32_tipo = ($this->v32_tipo === 0 || $this->v32_tipo === 0.0 || $this->v32_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v32_tipo"]:$this->v32_tipo);
      }else{
-       $this->v32_sequencial = ($this->v32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v32_sequencial"]:$this->v32_sequencial);
+       $this->v32_sequencial = ($this->v32_sequencial === 0 || $this->v32_sequencial === 0.0 || $this->v32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v32_sequencial"]:$this->v32_sequencial);
      }
    }
    // funcao para Inclusão
@@ -143,7 +143,7 @@ class cl_certidmovimentacao {
          $this->v32_sequencial = $v32_sequencial;
        }
      }
-     if(($this->v32_sequencial == null) || ($this->v32_sequencial == "") ){
+     if(($this->v32_sequencial == null) || ($this->v32_sequencial === 0 || $this->v32_sequencial === 0.0 || $this->v32_sequencial == "") ){
        $this->erro_sql = " Campo v32_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

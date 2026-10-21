@@ -30,7 +30,7 @@ class cl_avaliacaogruporespostaconta
                  ";
 
     //funcao construtor da classe
-    function cl_avaliacaogruporespostaconta()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("avaliacaogruporespostaconta");
@@ -52,12 +52,12 @@ class cl_avaliacaogruporespostaconta
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->c06_sequencial = ($this->c06_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c06_sequencial"] : $this->c06_sequencial);
-            $this->c06_conta = ($this->c06_conta == "" ? @$GLOBALS["HTTP_POST_VARS"]["c06_conta"] : $this->c06_conta);
-            $this->c06_avaliacaogruporesposta = ($this->c06_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["c06_avaliacaogruporesposta"] : $this->c06_avaliacaogruporesposta);
-            $this->c06_ano = ($this->c06_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["c06_ano"] : $this->c06_ano);
+            $this->c06_sequencial = ($this->c06_sequencial === 0 || $this->c06_sequencial === 0.0 || $this->c06_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c06_sequencial"] : $this->c06_sequencial);
+            $this->c06_conta = ($this->c06_conta === 0 || $this->c06_conta === 0.0 || $this->c06_conta == "" ? @$GLOBALS["HTTP_POST_VARS"]["c06_conta"] : $this->c06_conta);
+            $this->c06_avaliacaogruporesposta = ($this->c06_avaliacaogruporesposta === 0 || $this->c06_avaliacaogruporesposta === 0.0 || $this->c06_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["c06_avaliacaogruporesposta"] : $this->c06_avaliacaogruporesposta);
+            $this->c06_ano = ($this->c06_ano === 0 || $this->c06_ano === 0.0 || $this->c06_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["c06_ano"] : $this->c06_ano);
         } else {
-            $this->c06_sequencial = ($this->c06_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c06_sequencial"] : $this->c06_sequencial);
+            $this->c06_sequencial = ($this->c06_sequencial === 0 || $this->c06_sequencial === 0.0 || $this->c06_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c06_sequencial"] : $this->c06_sequencial);
         }
     }
 
@@ -121,7 +121,7 @@ class cl_avaliacaogruporespostaconta
                 $this->c06_sequencial = $c06_sequencial;
             }
         }
-        if (($this->c06_sequencial == null) || ($this->c06_sequencial == "")) {
+        if (($this->c06_sequencial == null) || ($this->c06_sequencial === 0 || $this->c06_sequencial === 0.0 || $this->c06_sequencial == "")) {
             $this->erro_sql = " Campo c06_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

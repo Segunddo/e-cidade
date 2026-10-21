@@ -99,7 +99,7 @@ class cl_veiculos
                  ";
 
     //funcao construtor da classe
-    function cl_veiculos()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("veiculos");
@@ -121,22 +121,22 @@ class cl_veiculos
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ve01_codigo = ($this->ve01_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_codigo"] : $this->ve01_codigo);
+            $this->ve01_codigo = ($this->ve01_codigo === 0 || $this->ve01_codigo === 0.0 || $this->ve01_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_codigo"] : $this->ve01_codigo);
             $this->ve01_placa = ($this->ve01_placa == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_placa"] : $this->ve01_placa);
-            $this->ve01_veiccadtipo = ($this->ve01_veiccadtipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadtipo"] : $this->ve01_veiccadtipo);
-            $this->ve01_veiccadmarca = ($this->ve01_veiccadmarca == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadmarca"] : $this->ve01_veiccadmarca);
-            $this->ve01_veiccadmodelo = ($this->ve01_veiccadmodelo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadmodelo"] : $this->ve01_veiccadmodelo);
-            $this->ve01_veiccadcor = ($this->ve01_veiccadcor == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadcor"] : $this->ve01_veiccadcor);
-            $this->ve01_veiccadproced = ($this->ve01_veiccadproced == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadproced"] : $this->ve01_veiccadproced);
-            $this->ve01_veiccadcateg = ($this->ve01_veiccadcateg == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadcateg"] : $this->ve01_veiccadcateg);
+            $this->ve01_veiccadtipo = ($this->ve01_veiccadtipo === 0 || $this->ve01_veiccadtipo === 0.0 || $this->ve01_veiccadtipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadtipo"] : $this->ve01_veiccadtipo);
+            $this->ve01_veiccadmarca = ($this->ve01_veiccadmarca === 0 || $this->ve01_veiccadmarca === 0.0 || $this->ve01_veiccadmarca == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadmarca"] : $this->ve01_veiccadmarca);
+            $this->ve01_veiccadmodelo = ($this->ve01_veiccadmodelo === 0 || $this->ve01_veiccadmodelo === 0.0 || $this->ve01_veiccadmodelo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadmodelo"] : $this->ve01_veiccadmodelo);
+            $this->ve01_veiccadcor = ($this->ve01_veiccadcor === 0 || $this->ve01_veiccadcor === 0.0 || $this->ve01_veiccadcor == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadcor"] : $this->ve01_veiccadcor);
+            $this->ve01_veiccadproced = ($this->ve01_veiccadproced === 0 || $this->ve01_veiccadproced === 0.0 || $this->ve01_veiccadproced == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadproced"] : $this->ve01_veiccadproced);
+            $this->ve01_veiccadcateg = ($this->ve01_veiccadcateg === 0 || $this->ve01_veiccadcateg === 0.0 || $this->ve01_veiccadcateg == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadcateg"] : $this->ve01_veiccadcateg);
             $this->ve01_chassi = ($this->ve01_chassi == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_chassi"] : $this->ve01_chassi);
-            $this->ve01_ranavam = ($this->ve01_ranavam == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_ranavam"] : $this->ve01_ranavam);
-            $this->ve01_placanum = ($this->ve01_placanum == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_placanum"] : $this->ve01_placanum);
+            $this->ve01_ranavam = ($this->ve01_ranavam === 0 || $this->ve01_ranavam === 0.0 || $this->ve01_ranavam == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_ranavam"] : $this->ve01_ranavam);
+            $this->ve01_placanum = ($this->ve01_placanum === 0 || $this->ve01_placanum === 0.0 || $this->ve01_placanum == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_placanum"] : $this->ve01_placanum);
             $this->ve01_certif = ($this->ve01_certif == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_certif"] : $this->ve01_certif);
-            $this->ve01_quantpotencia = ($this->ve01_quantpotencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_quantpotencia"] : $this->ve01_quantpotencia);
-            $this->ve01_veiccadpotencia = ($this->ve01_veiccadpotencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadpotencia"] : $this->ve01_veiccadpotencia);
-            $this->ve01_quantcapacidad = ($this->ve01_quantcapacidad == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_quantcapacidad"] : $this->ve01_quantcapacidad);
-            $this->ve01_veiccadtipocapacidade = ($this->ve01_veiccadtipocapacidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadtipocapacidade"] : $this->ve01_veiccadtipocapacidade);
+            $this->ve01_quantpotencia = ($this->ve01_quantpotencia === 0 || $this->ve01_quantpotencia === 0.0 || $this->ve01_quantpotencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_quantpotencia"] : $this->ve01_quantpotencia);
+            $this->ve01_veiccadpotencia = ($this->ve01_veiccadpotencia === 0 || $this->ve01_veiccadpotencia === 0.0 || $this->ve01_veiccadpotencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadpotencia"] : $this->ve01_veiccadpotencia);
+            $this->ve01_quantcapacidad = ($this->ve01_quantcapacidad === 0 || $this->ve01_quantcapacidad === 0.0 || $this->ve01_quantcapacidad == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_quantcapacidad"] : $this->ve01_quantcapacidad);
+            $this->ve01_veiccadtipocapacidade = ($this->ve01_veiccadtipocapacidade === 0 || $this->ve01_veiccadtipocapacidade === 0.0 || $this->ve01_veiccadtipocapacidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadtipocapacidade"] : $this->ve01_veiccadtipocapacidade);
 
             if ($this->ve01_dtaquis == "") {
                 $this->ve01_dtaquis_dia = ($this->ve01_dtaquis_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_dtaquis_dia"] : $this->ve01_dtaquis_dia);
@@ -147,15 +147,15 @@ class cl_veiculos
                 }
             }
 
-            $this->ve01_veiccadcategcnh = ($this->ve01_veiccadcategcnh == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadcategcnh"] : $this->ve01_veiccadcategcnh);
-            $this->ve01_anofab = ($this->ve01_anofab == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_anofab"] : $this->ve01_anofab);
-            $this->ve01_anomod = ($this->ve01_anomod == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_anomod"] : $this->ve01_anomod);
-            $this->ve01_ceplocalidades = ($this->ve01_ceplocalidades == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_ceplocalidades"] : $this->ve01_ceplocalidades);
-            $this->ve01_ativo = ($this->ve01_ativo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_ativo"] : $this->ve01_ativo);
-            $this->ve01_veictipoabast = ($this->ve01_veictipoabast == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veictipoabast"] : $this->ve01_veictipoabast);
-            $this->ve01_medidaini = ($this->ve01_medidaini == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_medidaini"] : $this->ve01_medidaini);
+            $this->ve01_veiccadcategcnh = ($this->ve01_veiccadcategcnh === 0 || $this->ve01_veiccadcategcnh === 0.0 || $this->ve01_veiccadcategcnh == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veiccadcategcnh"] : $this->ve01_veiccadcategcnh);
+            $this->ve01_anofab = ($this->ve01_anofab === 0 || $this->ve01_anofab === 0.0 || $this->ve01_anofab == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_anofab"] : $this->ve01_anofab);
+            $this->ve01_anomod = ($this->ve01_anomod === 0 || $this->ve01_anomod === 0.0 || $this->ve01_anomod == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_anomod"] : $this->ve01_anomod);
+            $this->ve01_ceplocalidades = ($this->ve01_ceplocalidades === 0 || $this->ve01_ceplocalidades === 0.0 || $this->ve01_ceplocalidades == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_ceplocalidades"] : $this->ve01_ceplocalidades);
+            $this->ve01_ativo = ($this->ve01_ativo === 0 || $this->ve01_ativo === 0.0 || $this->ve01_ativo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_ativo"] : $this->ve01_ativo);
+            $this->ve01_veictipoabast = ($this->ve01_veictipoabast === 0 || $this->ve01_veictipoabast === 0.0 || $this->ve01_veictipoabast == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_veictipoabast"] : $this->ve01_veictipoabast);
+            $this->ve01_medidaini = ($this->ve01_medidaini === 0 || $this->ve01_medidaini === 0.0 || $this->ve01_medidaini == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_medidaini"] : $this->ve01_medidaini);
         } else {
-            $this->ve01_codigo = ($this->ve01_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_codigo"] : $this->ve01_codigo);
+            $this->ve01_codigo = ($this->ve01_codigo === 0 || $this->ve01_codigo === 0.0 || $this->ve01_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve01_codigo"] : $this->ve01_codigo);
         }
     }
 
@@ -444,7 +444,7 @@ class cl_veiculos
                 $this->ve01_codigo = $ve01_codigo;
             }
         }
-        if (($this->ve01_codigo == null) || ($this->ve01_codigo == "")) {
+        if (($this->ve01_codigo == null) || ($this->ve01_codigo === 0 || $this->ve01_codigo === 0.0 || $this->ve01_codigo == "")) {
             $this->erro_sql = " Campo ve01_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -1714,7 +1714,7 @@ class cl_veiculos
         return $sqlproximamedida;
     }
 
-    function sql_query_medida_between($ve01_codigo = null, $dDataInicial, $sHoraInicial, $dDataFinal, $sHoraFinal)
+    function sql_query_medida_between($ve01_codigo = null, $dDataInicial = null, $sHoraInicial = null, $dDataFinal = null, $sHoraFinal = null)
     {
         // Select para Buscar Medida da Ultima Retirada, Ultima Devolução ou Ultimo Abastecimento com base numa Data e Hora
         $sqlultimamedida = "select * ";

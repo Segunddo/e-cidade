@@ -52,7 +52,7 @@ class cl_aguacategoriaconsumo {
                  x13_descricao = varchar(100) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_aguacategoriaconsumo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacategoriaconsumo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_aguacategoriaconsumo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x13_sequencial = ($this->x13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x13_sequencial"]:$this->x13_sequencial);
-       $this->x13_exercicio = ($this->x13_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["x13_exercicio"]:$this->x13_exercicio);
+       $this->x13_sequencial = ($this->x13_sequencial === 0 || $this->x13_sequencial === 0.0 || $this->x13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x13_sequencial"]:$this->x13_sequencial);
+       $this->x13_exercicio = ($this->x13_exercicio === 0 || $this->x13_exercicio === 0.0 || $this->x13_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["x13_exercicio"]:$this->x13_exercicio);
        $this->x13_descricao = ($this->x13_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["x13_descricao"]:$this->x13_descricao);
      }else{
-       $this->x13_sequencial = ($this->x13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x13_sequencial"]:$this->x13_sequencial);
+       $this->x13_sequencial = ($this->x13_sequencial === 0 || $this->x13_sequencial === 0.0 || $this->x13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x13_sequencial"]:$this->x13_sequencial);
      }
    }
    // funcao para Inclusão
@@ -121,7 +121,7 @@ class cl_aguacategoriaconsumo {
          $this->x13_sequencial = $x13_sequencial; 
        }
      }
-     if(($this->x13_sequencial == null) || ($this->x13_sequencial == "") ){ 
+     if(($this->x13_sequencial == null) || ($this->x13_sequencial === 0 || $this->x13_sequencial === 0.0 || $this->x13_sequencial == "") ){ 
        $this->erro_sql = " Campo x13_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

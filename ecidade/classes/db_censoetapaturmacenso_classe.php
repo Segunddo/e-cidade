@@ -54,7 +54,7 @@ class cl_censoetapaturmacenso {
                  ed134_ano = int4 = Ano
                  ";
    //funcao construtor da classe
-   function cl_censoetapaturmacenso() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("censoetapaturmacenso");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_censoetapaturmacenso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed134_codigo = ($this->ed134_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_codigo"]:$this->ed134_codigo);
-       $this->ed134_turmacenso = ($this->ed134_turmacenso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_turmacenso"]:$this->ed134_turmacenso);
-       $this->ed134_censoetapa = ($this->ed134_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_censoetapa"]:$this->ed134_censoetapa);
-       $this->ed134_ano = ($this->ed134_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_ano"]:$this->ed134_ano);
+       $this->ed134_codigo = ($this->ed134_codigo === 0 || $this->ed134_codigo === 0.0 || $this->ed134_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_codigo"]:$this->ed134_codigo);
+       $this->ed134_turmacenso = ($this->ed134_turmacenso === 0 || $this->ed134_turmacenso === 0.0 || $this->ed134_turmacenso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_turmacenso"]:$this->ed134_turmacenso);
+       $this->ed134_censoetapa = ($this->ed134_censoetapa === 0 || $this->ed134_censoetapa === 0.0 || $this->ed134_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_censoetapa"]:$this->ed134_censoetapa);
+       $this->ed134_ano = ($this->ed134_ano === 0 || $this->ed134_ano === 0.0 || $this->ed134_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_ano"]:$this->ed134_ano);
      }else{
-       $this->ed134_codigo = ($this->ed134_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_codigo"]:$this->ed134_codigo);
+       $this->ed134_codigo = ($this->ed134_codigo === 0 || $this->ed134_codigo === 0.0 || $this->ed134_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed134_codigo"]:$this->ed134_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_censoetapaturmacenso {
          $this->ed134_codigo = $ed134_codigo;
        }
      }
-     if(($this->ed134_codigo == null) || ($this->ed134_codigo == "") ){
+     if(($this->ed134_codigo == null) || ($this->ed134_codigo === 0 || $this->ed134_codigo === 0.0 || $this->ed134_codigo == "") ){
        $this->erro_sql = " Campo ed134_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

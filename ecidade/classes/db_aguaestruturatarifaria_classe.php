@@ -62,7 +62,7 @@ class cl_aguaestruturatarifaria {
                  x37_aguacategoriaconsumo = int4 = Código da Categoria de Consumo
                  ";
    //funcao construtor da classe
-   function cl_aguaestruturatarifaria() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguaestruturatarifaria");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_aguaestruturatarifaria {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x37_sequencial = ($this->x37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_sequencial"]:$this->x37_sequencial);
-       $this->x37_aguaconsumotipo = ($this->x37_aguaconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_aguaconsumotipo"]:$this->x37_aguaconsumotipo);
-       $this->x37_tipoestrutura = ($this->x37_tipoestrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_tipoestrutura"]:$this->x37_tipoestrutura);
-       $this->x37_valorinicial = ($this->x37_valorinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_valorinicial"]:$this->x37_valorinicial);
-       $this->x37_valorfinal = ($this->x37_valorfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_valorfinal"]:$this->x37_valorfinal);
-       $this->x37_valor = ($this->x37_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_valor"]:$this->x37_valor);
-       $this->x37_percentual = ($this->x37_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_percentual"]:$this->x37_percentual);
-       $this->x37_aguacategoriaconsumo = ($this->x37_aguacategoriaconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_aguacategoriaconsumo"]:$this->x37_aguacategoriaconsumo);
+       $this->x37_sequencial = ($this->x37_sequencial === 0 || $this->x37_sequencial === 0.0 || $this->x37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_sequencial"]:$this->x37_sequencial);
+       $this->x37_aguaconsumotipo = ($this->x37_aguaconsumotipo === 0 || $this->x37_aguaconsumotipo === 0.0 || $this->x37_aguaconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_aguaconsumotipo"]:$this->x37_aguaconsumotipo);
+       $this->x37_tipoestrutura = ($this->x37_tipoestrutura === 0 || $this->x37_tipoestrutura === 0.0 || $this->x37_tipoestrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_tipoestrutura"]:$this->x37_tipoestrutura);
+       $this->x37_valorinicial = ($this->x37_valorinicial === 0 || $this->x37_valorinicial === 0.0 || $this->x37_valorinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_valorinicial"]:$this->x37_valorinicial);
+       $this->x37_valorfinal = ($this->x37_valorfinal === 0 || $this->x37_valorfinal === 0.0 || $this->x37_valorfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_valorfinal"]:$this->x37_valorfinal);
+       $this->x37_valor = ($this->x37_valor === 0 || $this->x37_valor === 0.0 || $this->x37_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_valor"]:$this->x37_valor);
+       $this->x37_percentual = ($this->x37_percentual === 0 || $this->x37_percentual === 0.0 || $this->x37_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_percentual"]:$this->x37_percentual);
+       $this->x37_aguacategoriaconsumo = ($this->x37_aguacategoriaconsumo === 0 || $this->x37_aguacategoriaconsumo === 0.0 || $this->x37_aguacategoriaconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_aguacategoriaconsumo"]:$this->x37_aguacategoriaconsumo);
      }else{
-       $this->x37_sequencial = ($this->x37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_sequencial"]:$this->x37_sequencial);
+       $this->x37_sequencial = ($this->x37_sequencial === 0 || $this->x37_sequencial === 0.0 || $this->x37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x37_sequencial"]:$this->x37_sequencial);
      }
    }
    // funcao para Inclusão
@@ -157,7 +157,7 @@ class cl_aguaestruturatarifaria {
          $this->x37_sequencial = $x37_sequencial;
        }
      }
-     if(($this->x37_sequencial == null) || ($this->x37_sequencial == "") ){
+     if(($this->x37_sequencial == null) || ($this->x37_sequencial === 0 || $this->x37_sequencial === 0.0 || $this->x37_sequencial == "") ){
        $this->erro_sql = " Campo x37_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

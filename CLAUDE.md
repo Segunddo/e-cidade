@@ -2902,6 +2902,27 @@ alcançados e fora do universo — mas, por ser código OO mais novo, só **1** 
 literal, medido igual no 5.6). Nenhuma LSP nas 157 classes com `extends`. O fecho alcança também um modelo
 da Educação (`unset($this)`), corrigido na branch dela.
 
+**Os DAOs que os modelos instanciam (21/10/2026) — PORTADOS.** Com a 8ª frente no `enumera.py`, o fecho segue
+dos modelos até `classes/`, e nas três áreas apareceram **316** arquivos não portados (361 menos 45 já pagos
+por commits `EXPERIMENTO:`): **315 classes de dados** (`classes/db_<tabela>_classe.php`) e 1 tela
+(`com1_pcmater002.php`). Domínios: 168 de Financeiro/Patrimonial (acordos, patrimônio, compras,
+contabilidade…), 32 de configurações (endereços), 32 de Tributário, 28 de Educação, 24 de RH, 31 de outras
+áreas. **Decisão do usuário: portar todos agora**, não na aparição — os 296 construtores PHP 4 só fazem
+`rotulo`/`pagina_retorno` (falha visível), mas as **1.442 guardas `0 == ""`** faltando são a falha silenciosa,
+que nunca "aparece". O que importa é a tela migrada alcançar a classe, não a área dona da tabela.
+
+| | |
+|---|---|
+| Rector | 316 alterados, convergiu na 2ª passada; só regras já vetadas |
+| Remanescentes (contador por *token*) | 0 em todas as categorias |
+| Portão de funções / `?Tipo` | só `extract`/`preg_split` / nenhum |
+| `php -l` | 316/316 nos dois runtimes |
+| Classes (uma por processo) | 315/315 idênticas (a 316ª é a tela) — carregar todas no 8.5 também descarta LSP |
+| Escrita | 7.432 linhas, **0 divergentes**, 1.678 campos lidos do POST |
+| Regressão | interseção com os universos verificados vazia → sem bateria |
+
+Feito nesta branch (a base) e levado por merge a `2educacao-migrado` e `3recursoshumanos-migrado`.
+
 ### ✅ NÍVEL 3 EM ESCALA — 18 telas roteadas, 14 módulos, zero divergências
 
 O maior ponto fraco declarado do trabalho era este: **as 6.552 guardas `0 == ""` são 60% de

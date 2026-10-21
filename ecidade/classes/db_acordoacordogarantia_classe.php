@@ -54,7 +54,7 @@ class cl_acordoacordogarantia {
                  ac12_texto = text = Texto 
                  ";
    //funcao construtor da classe 
-   function cl_acordoacordogarantia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoacordogarantia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_acordoacordogarantia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac12_sequencial = ($this->ac12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac12_sequencial"]:$this->ac12_sequencial);
-       $this->ac12_acordo = ($this->ac12_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac12_acordo"]:$this->ac12_acordo);
-       $this->ac12_acordogarantia = ($this->ac12_acordogarantia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac12_acordogarantia"]:$this->ac12_acordogarantia);
+       $this->ac12_sequencial = ($this->ac12_sequencial === 0 || $this->ac12_sequencial === 0.0 || $this->ac12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac12_sequencial"]:$this->ac12_sequencial);
+       $this->ac12_acordo = ($this->ac12_acordo === 0 || $this->ac12_acordo === 0.0 || $this->ac12_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac12_acordo"]:$this->ac12_acordo);
+       $this->ac12_acordogarantia = ($this->ac12_acordogarantia === 0 || $this->ac12_acordogarantia === 0.0 || $this->ac12_acordogarantia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac12_acordogarantia"]:$this->ac12_acordogarantia);
        $this->ac12_texto = ($this->ac12_texto == ""?@$GLOBALS["HTTP_POST_VARS"]["ac12_texto"]:$this->ac12_texto);
      }else{
-       $this->ac12_sequencial = ($this->ac12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac12_sequencial"]:$this->ac12_sequencial);
+       $this->ac12_sequencial = ($this->ac12_sequencial === 0 || $this->ac12_sequencial === 0.0 || $this->ac12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac12_sequencial"]:$this->ac12_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_acordoacordogarantia {
          $this->ac12_sequencial = $ac12_sequencial; 
        }
      }
-     if(($this->ac12_sequencial == null) || ($this->ac12_sequencial == "") ){ 
+     if(($this->ac12_sequencial == null) || ($this->ac12_sequencial === 0 || $this->ac12_sequencial === 0.0 || $this->ac12_sequencial == "") ){ 
        $this->erro_sql = " Campo ac12_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_acordoacordogarantia {
    function sql_query ( $ac12_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_acordoacordogarantia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_acordoacordogarantia {
    function sql_query_file ( $ac12_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_acordoacordogarantia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

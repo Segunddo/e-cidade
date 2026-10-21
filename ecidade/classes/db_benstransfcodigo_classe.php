@@ -54,7 +54,7 @@ class cl_benstransfcodigo {
                  t95_histor = text = Histórico 
                  ";
    //funcao construtor da classe 
-   function cl_benstransfcodigo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("benstransfcodigo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_benstransfcodigo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t95_codtran = ($this->t95_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_codtran"]:$this->t95_codtran);
-       $this->t95_codbem = ($this->t95_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_codbem"]:$this->t95_codbem);
-       $this->t95_situac = ($this->t95_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_situac"]:$this->t95_situac);
+       $this->t95_codtran = ($this->t95_codtran === 0 || $this->t95_codtran === 0.0 || $this->t95_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_codtran"]:$this->t95_codtran);
+       $this->t95_codbem = ($this->t95_codbem === 0 || $this->t95_codbem === 0.0 || $this->t95_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_codbem"]:$this->t95_codbem);
+       $this->t95_situac = ($this->t95_situac === 0 || $this->t95_situac === 0.0 || $this->t95_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_situac"]:$this->t95_situac);
        $this->t95_histor = pg_escape_string(($this->t95_histor == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_histor"]:$this->t95_histor));
      }else{
-       $this->t95_codtran = ($this->t95_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_codtran"]:$this->t95_codtran);
-       $this->t95_codbem = ($this->t95_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_codbem"]:$this->t95_codbem);
+       $this->t95_codtran = ($this->t95_codtran === 0 || $this->t95_codtran === 0.0 || $this->t95_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_codtran"]:$this->t95_codtran);
+       $this->t95_codbem = ($this->t95_codbem === 0 || $this->t95_codbem === 0.0 || $this->t95_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t95_codbem"]:$this->t95_codbem);
      }
    }
    // funcao para inclusao
@@ -94,7 +94,7 @@ class cl_benstransfcodigo {
      }
        $this->t95_codtran = $t95_codtran; 
        $this->t95_codbem = $t95_codbem; 
-     if(($this->t95_codtran == null) || ($this->t95_codtran == "") ){ 
+     if(($this->t95_codtran == null) || ($this->t95_codtran === 0 || $this->t95_codtran === 0.0 || $this->t95_codtran == "") ){ 
        $this->erro_sql = " Campo t95_codtran nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -102,7 +102,7 @@ class cl_benstransfcodigo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->t95_codbem == null) || ($this->t95_codbem == "") ){ 
+     if(($this->t95_codbem == null) || ($this->t95_codbem === 0 || $this->t95_codbem === 0.0 || $this->t95_codbem == "") ){ 
        $this->erro_sql = " Campo t95_codbem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -363,7 +363,7 @@ class cl_benstransfcodigo {
    function sql_query ( $t95_codtran=null,$t95_codbem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_benstransfcodigo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_benstransfcodigo {
    function sql_query_file ( $t95_codtran=null,$t95_codbem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_benstransfcodigo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_benstransfcodigo {
    function sql_query_benstransf ( $t95_codtran=null,$t95_codbem=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -490,7 +490,7 @@ class cl_benstransfcodigo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -547,7 +547,7 @@ class cl_benstransfcodigo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -559,7 +559,7 @@ class cl_benstransfcodigo {
    function sql_query_div ( $t95_codtran=null,$t95_codbem=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -598,7 +598,7 @@ class cl_benstransfcodigo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

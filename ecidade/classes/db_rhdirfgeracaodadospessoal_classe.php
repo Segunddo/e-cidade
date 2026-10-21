@@ -58,7 +58,7 @@ class cl_rhdirfgeracaodadospessoal {
                  rh96_tipo = int4 = Tipo da geracao 
                  ";
    //funcao construtor da classe 
-   function cl_rhdirfgeracaodadospessoal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhdirfgeracaodadospessoal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_rhdirfgeracaodadospessoal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh96_sequencial = ($this->rh96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_sequencial"]:$this->rh96_sequencial);
-       $this->rh96_rhdirfgeracao = ($this->rh96_rhdirfgeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_rhdirfgeracao"]:$this->rh96_rhdirfgeracao);
-       $this->rh96_numcgm = ($this->rh96_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_numcgm"]:$this->rh96_numcgm);
-       $this->rh96_regist = ($this->rh96_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_regist"]:$this->rh96_regist);
+       $this->rh96_sequencial = ($this->rh96_sequencial === 0 || $this->rh96_sequencial === 0.0 || $this->rh96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_sequencial"]:$this->rh96_sequencial);
+       $this->rh96_rhdirfgeracao = ($this->rh96_rhdirfgeracao === 0 || $this->rh96_rhdirfgeracao === 0.0 || $this->rh96_rhdirfgeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_rhdirfgeracao"]:$this->rh96_rhdirfgeracao);
+       $this->rh96_numcgm = ($this->rh96_numcgm === 0 || $this->rh96_numcgm === 0.0 || $this->rh96_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_numcgm"]:$this->rh96_numcgm);
+       $this->rh96_regist = ($this->rh96_regist === 0 || $this->rh96_regist === 0.0 || $this->rh96_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_regist"]:$this->rh96_regist);
        $this->rh96_cpfcnpj = ($this->rh96_cpfcnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_cpfcnpj"]:$this->rh96_cpfcnpj);
-       $this->rh96_tipo = ($this->rh96_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_tipo"]:$this->rh96_tipo);
+       $this->rh96_tipo = ($this->rh96_tipo === 0 || $this->rh96_tipo === 0.0 || $this->rh96_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_tipo"]:$this->rh96_tipo);
      }else{
-       $this->rh96_sequencial = ($this->rh96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_sequencial"]:$this->rh96_sequencial);
+       $this->rh96_sequencial = ($this->rh96_sequencial === 0 || $this->rh96_sequencial === 0.0 || $this->rh96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh96_sequencial"]:$this->rh96_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_rhdirfgeracaodadospessoal {
          $this->rh96_sequencial = $rh96_sequencial; 
        }
      }
-     if(($this->rh96_sequencial == null) || ($this->rh96_sequencial == "") ){ 
+     if(($this->rh96_sequencial == null) || ($this->rh96_sequencial === 0 || $this->rh96_sequencial === 0.0 || $this->rh96_sequencial == "") ){ 
        $this->erro_sql = " Campo rh96_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -462,7 +462,7 @@ class cl_rhdirfgeracaodadospessoal {
    function sql_query ( $rh96_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_rhdirfgeracaodadospessoal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_rhdirfgeracaodadospessoal {
    function sql_query_file ( $rh96_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_rhdirfgeracaodadospessoal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

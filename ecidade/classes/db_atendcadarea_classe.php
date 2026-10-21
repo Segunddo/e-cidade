@@ -52,7 +52,7 @@ class cl_atendcadarea {
                  at25_figura = varchar(100) = Figura 
                  ";
    //funcao construtor da classe 
-   function cl_atendcadarea() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("atendcadarea"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_atendcadarea {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at26_sequencial = ($this->at26_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_sequencial"]:$this->at26_sequencial);
+       $this->at26_sequencial = ($this->at26_sequencial === 0 || $this->at26_sequencial === 0.0 || $this->at26_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_sequencial"]:$this->at26_sequencial);
        $this->at25_descr = ($this->at25_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_descr"]:$this->at25_descr);
        $this->at25_figura = ($this->at25_figura == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_figura"]:$this->at25_figura);
      }else{
-       $this->at26_sequencial = ($this->at26_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_sequencial"]:$this->at26_sequencial);
+       $this->at26_sequencial = ($this->at26_sequencial === 0 || $this->at26_sequencial === 0.0 || $this->at26_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_sequencial"]:$this->at26_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_atendcadarea {
          $this->at26_sequencial = $at26_sequencial; 
        }
      }
-     if(($this->at26_sequencial == null) || ($this->at26_sequencial == "") ){ 
+     if(($this->at26_sequencial == null) || ($this->at26_sequencial === 0 || $this->at26_sequencial === 0.0 || $this->at26_sequencial == "") ){ 
        $this->erro_sql = " Campo at26_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_atendcadarea {
    function sql_query ( $at26_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_atendcadarea {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_atendcadarea {
    function sql_query_file ( $at26_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_atendcadarea {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

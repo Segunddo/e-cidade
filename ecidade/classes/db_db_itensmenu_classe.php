@@ -62,7 +62,7 @@ class cl_db_itensmenu {
                  libcliente = bool = Se item de menu está liberado para cliente 
                  ";
    //funcao construtor da classe 
-   function cl_db_itensmenu() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_itensmenu"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,7 +79,7 @@ class cl_db_itensmenu {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
        $this->descricao = ($this->descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["descricao"]:$this->descricao);
        $this->help = ($this->help == ""?@$GLOBALS["HTTP_POST_VARS"]["help"]:$this->help);
        $this->funcao = ($this->funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["funcao"]:$this->funcao);
@@ -88,7 +88,7 @@ class cl_db_itensmenu {
        $this->desctec = ($this->desctec == ""?@$GLOBALS["HTTP_POST_VARS"]["desctec"]:$this->desctec);
        $this->libcliente = ($this->libcliente == "f"?@$GLOBALS["HTTP_POST_VARS"]["libcliente"]:$this->libcliente);
      }else{
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
      }
    }
    // funcao para inclusao
@@ -172,7 +172,7 @@ class cl_db_itensmenu {
          $this->id_item = $id_item; 
        }
      }
-     if(($this->id_item == null) || ($this->id_item == "") ){ 
+     if(($this->id_item == null) || ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == "") ){ 
        $this->erro_sql = " Campo id_item nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

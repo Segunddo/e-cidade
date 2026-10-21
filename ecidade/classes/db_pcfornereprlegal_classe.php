@@ -64,7 +64,7 @@ class cl_pcfornereprlegal {
                  pc81_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_pcfornereprlegal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcfornereprlegal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,9 +81,9 @@ class cl_pcfornereprlegal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc81_sequencia = ($this->pc81_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_sequencia"]:$this->pc81_sequencia);
-       $this->pc81_cgmforn = ($this->pc81_cgmforn == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_cgmforn"]:$this->pc81_cgmforn);
-       $this->pc81_cgmresp = ($this->pc81_cgmresp == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_cgmresp"]:$this->pc81_cgmresp);
+       $this->pc81_sequencia = ($this->pc81_sequencia === 0 || $this->pc81_sequencia === 0.0 || $this->pc81_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_sequencia"]:$this->pc81_sequencia);
+       $this->pc81_cgmforn = ($this->pc81_cgmforn === 0 || $this->pc81_cgmforn === 0.0 || $this->pc81_cgmforn == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_cgmforn"]:$this->pc81_cgmforn);
+       $this->pc81_cgmresp = ($this->pc81_cgmresp === 0 || $this->pc81_cgmresp === 0.0 || $this->pc81_cgmresp == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_cgmresp"]:$this->pc81_cgmresp);
        if($this->pc81_datini == ""){
          $this->pc81_datini_dia = ($this->pc81_datini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_datini_dia"]:$this->pc81_datini_dia);
          $this->pc81_datini_mes = ($this->pc81_datini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_datini_mes"]:$this->pc81_datini_mes);
@@ -102,7 +102,7 @@ class cl_pcfornereprlegal {
        }
        $this->pc81_obs = ($this->pc81_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_obs"]:$this->pc81_obs);
      }else{
-       $this->pc81_sequencia = ($this->pc81_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_sequencia"]:$this->pc81_sequencia);
+       $this->pc81_sequencia = ($this->pc81_sequencia === 0 || $this->pc81_sequencia === 0.0 || $this->pc81_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc81_sequencia"]:$this->pc81_sequencia);
      }
    }
    // funcao para inclusao
@@ -162,7 +162,7 @@ class cl_pcfornereprlegal {
          $this->pc81_sequencia = $pc81_sequencia; 
        }
      }
-     if(($this->pc81_sequencia == null) || ($this->pc81_sequencia == "") ){ 
+     if(($this->pc81_sequencia == null) || ($this->pc81_sequencia === 0 || $this->pc81_sequencia === 0.0 || $this->pc81_sequencia == "") ){ 
        $this->erro_sql = " Campo pc81_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -493,7 +493,7 @@ class cl_pcfornereprlegal {
    function sql_query_file ( $pc81_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -514,7 +514,7 @@ class cl_pcfornereprlegal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

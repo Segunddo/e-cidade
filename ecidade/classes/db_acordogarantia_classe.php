@@ -59,7 +59,7 @@ class cl_acordogarantia {
                  ac11_validade = date = Data de Validade 
                  ";
    //funcao construtor da classe 
-   function cl_acordogarantia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordogarantia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,7 +76,7 @@ class cl_acordogarantia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac11_sequencial = ($this->ac11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac11_sequencial"]:$this->ac11_sequencial);
+       $this->ac11_sequencial = ($this->ac11_sequencial === 0 || $this->ac11_sequencial === 0.0 || $this->ac11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac11_sequencial"]:$this->ac11_sequencial);
        $this->ac11_descricao = ($this->ac11_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac11_descricao"]:$this->ac11_descricao);
        $this->ac11_obs = ($this->ac11_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ac11_obs"]:$this->ac11_obs);
        $this->ac11_textopadrao = ($this->ac11_textopadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac11_textopadrao"]:$this->ac11_textopadrao);
@@ -89,7 +89,7 @@ class cl_acordogarantia {
          }
        }
      }else{
-       $this->ac11_sequencial = ($this->ac11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac11_sequencial"]:$this->ac11_sequencial);
+       $this->ac11_sequencial = ($this->ac11_sequencial === 0 || $this->ac11_sequencial === 0.0 || $this->ac11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac11_sequencial"]:$this->ac11_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_acordogarantia {
          $this->ac11_sequencial = $ac11_sequencial; 
        }
      }
-     if(($this->ac11_sequencial == null) || ($this->ac11_sequencial == "") ){ 
+     if(($this->ac11_sequencial == null) || ($this->ac11_sequencial === 0 || $this->ac11_sequencial === 0.0 || $this->ac11_sequencial == "") ){ 
        $this->erro_sql = " Campo ac11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -446,7 +446,7 @@ class cl_acordogarantia {
    function sql_query ( $ac11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -467,7 +467,7 @@ class cl_acordogarantia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_acordogarantia {
    function sql_query_file ( $ac11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_acordogarantia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

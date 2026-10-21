@@ -52,7 +52,7 @@ class cl_histbemdiv {
                  t32_divisao = int4 = Código da divisão 
                  ";
    //funcao construtor da classe 
-   function cl_histbemdiv() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("histbemdiv"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_histbemdiv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t32_codigo = ($this->t32_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t32_codigo"]:$this->t32_codigo);
-       $this->t32_histbem = ($this->t32_histbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t32_histbem"]:$this->t32_histbem);
-       $this->t32_divisao = ($this->t32_divisao == ""?@$GLOBALS["HTTP_POST_VARS"]["t32_divisao"]:$this->t32_divisao);
+       $this->t32_codigo = ($this->t32_codigo === 0 || $this->t32_codigo === 0.0 || $this->t32_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t32_codigo"]:$this->t32_codigo);
+       $this->t32_histbem = ($this->t32_histbem === 0 || $this->t32_histbem === 0.0 || $this->t32_histbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t32_histbem"]:$this->t32_histbem);
+       $this->t32_divisao = ($this->t32_divisao === 0 || $this->t32_divisao === 0.0 || $this->t32_divisao == ""?@$GLOBALS["HTTP_POST_VARS"]["t32_divisao"]:$this->t32_divisao);
      }else{
-       $this->t32_codigo = ($this->t32_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t32_codigo"]:$this->t32_codigo);
+       $this->t32_codigo = ($this->t32_codigo === 0 || $this->t32_codigo === 0.0 || $this->t32_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t32_codigo"]:$this->t32_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_histbemdiv {
          $this->t32_codigo = $t32_codigo; 
        }
      }
-     if(($this->t32_codigo == null) || ($this->t32_codigo == "") ){ 
+     if(($this->t32_codigo == null) || ($this->t32_codigo === 0 || $this->t32_codigo === 0.0 || $this->t32_codigo == "") ){ 
        $this->erro_sql = " Campo t32_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_histbemdiv {
    function sql_query ( $t32_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_histbemdiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_histbemdiv {
    function sql_query_file ( $t32_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_histbemdiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

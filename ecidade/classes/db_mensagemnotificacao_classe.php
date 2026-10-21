@@ -64,7 +64,7 @@ class cl_mensagemnotificacao {
                  db134_mensagemretorno = varchar(150) = Mensagem de Retorno 
                  ";
    //funcao construtor da classe 
-   function cl_mensagemnotificacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mensagemnotificacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,8 +81,8 @@ class cl_mensagemnotificacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db134_sequencial = ($this->db134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db134_sequencial"]:$this->db134_sequencial);
-       $this->db134_mensagemnotificacaotipo = ($this->db134_mensagemnotificacaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db134_mensagemnotificacaotipo"]:$this->db134_mensagemnotificacaotipo);
+       $this->db134_sequencial = ($this->db134_sequencial === 0 || $this->db134_sequencial === 0.0 || $this->db134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db134_sequencial"]:$this->db134_sequencial);
+       $this->db134_mensagemnotificacaotipo = ($this->db134_mensagemnotificacaotipo === 0 || $this->db134_mensagemnotificacaotipo === 0.0 || $this->db134_mensagemnotificacaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db134_mensagemnotificacaotipo"]:$this->db134_mensagemnotificacaotipo);
        $this->db134_enviada = ($this->db134_enviada == "f"?@$GLOBALS["HTTP_POST_VARS"]["db134_enviada"]:$this->db134_enviada);
        $this->db134_telefone = ($this->db134_telefone == ""?@$GLOBALS["HTTP_POST_VARS"]["db134_telefone"]:$this->db134_telefone);
        $this->db134_email = ($this->db134_email == ""?@$GLOBALS["HTTP_POST_VARS"]["db134_email"]:$this->db134_email);
@@ -91,7 +91,7 @@ class cl_mensagemnotificacao {
        $this->db134_mensagem = ($this->db134_mensagem == ""?@$GLOBALS["HTTP_POST_VARS"]["db134_mensagem"]:$this->db134_mensagem);
        $this->db134_mensagemretorno = ($this->db134_mensagemretorno == ""?@$GLOBALS["HTTP_POST_VARS"]["db134_mensagemretorno"]:$this->db134_mensagemretorno);
      }else{
-       $this->db134_sequencial = ($this->db134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db134_sequencial"]:$this->db134_sequencial);
+       $this->db134_sequencial = ($this->db134_sequencial === 0 || $this->db134_sequencial === 0.0 || $this->db134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db134_sequencial"]:$this->db134_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_mensagemnotificacao {
          $this->db134_sequencial = $db134_sequencial; 
        }
      }
-     if(($this->db134_sequencial == null) || ($this->db134_sequencial == "") ){ 
+     if(($this->db134_sequencial == null) || ($this->db134_sequencial === 0 || $this->db134_sequencial === 0.0 || $this->db134_sequencial == "") ){ 
        $this->erro_sql = " Campo db134_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -495,7 +495,7 @@ class cl_mensagemnotificacao {
    function sql_query ( $db134_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -517,7 +517,7 @@ class cl_mensagemnotificacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -530,7 +530,7 @@ class cl_mensagemnotificacao {
    function sql_query_file ( $db134_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -551,7 +551,7 @@ class cl_mensagemnotificacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

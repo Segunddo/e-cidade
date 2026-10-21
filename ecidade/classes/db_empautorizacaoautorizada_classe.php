@@ -43,10 +43,10 @@ class cl_empautorizacaoautorizada
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->id = ($this->id == ""?@$GLOBALS["HTTP_POST_VARS"]["id"]:$this->id);
-            $this->empautoriza_id = ($this->empautoriza_id == ""?@$GLOBALS["HTTP_POST_VARS"]["empautoriza_id"]:$this->empautoriza_id);
+            $this->id = ($this->id === 0 || $this->id === 0.0 || $this->id == ""?@$GLOBALS["HTTP_POST_VARS"]["id"]:$this->id);
+            $this->empautoriza_id = ($this->empautoriza_id === 0 || $this->empautoriza_id === 0.0 || $this->empautoriza_id == ""?@$GLOBALS["HTTP_POST_VARS"]["empautoriza_id"]:$this->empautoriza_id);
         } else {
-            $this->id = ($this->id == ""?@$GLOBALS["HTTP_POST_VARS"]["id"]:$this->id);
+            $this->id = ($this->id === 0 || $this->id === 0.0 || $this->id == ""?@$GLOBALS["HTTP_POST_VARS"]["id"]:$this->id);
         }
     }
 
@@ -63,7 +63,7 @@ class cl_empautorizacaoautorizada
             return false;
         }
         $this->id = db_utils::fieldsMemory(db_query("select nextval('empautorizacaoautorizada_id_seq') as id"), 0)->id;
-        if (($this->id == null) || ($this->id == "")) {
+        if (($this->id == null) || ($this->id === 0 || $this->id === 0.0 || $this->id == "")) {
             $this->erro_sql = " Campo id não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

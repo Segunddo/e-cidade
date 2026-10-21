@@ -26,7 +26,7 @@ class cl_classificacaocredoresrecurso {
                  cc33_orctiporec = int4 = Recurso 
                  ";
    //funcao construtor da classe 
-   function cl_classificacaocredoresrecurso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("classificacaocredoresrecurso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_classificacaocredoresrecurso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc33_sequencial = ($this->cc33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc33_sequencial"]:$this->cc33_sequencial);
-       $this->cc33_classificacaocredores = ($this->cc33_classificacaocredores == ""?@$GLOBALS["HTTP_POST_VARS"]["cc33_classificacaocredores"]:$this->cc33_classificacaocredores);
-       $this->cc33_orctiporec = ($this->cc33_orctiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["cc33_orctiporec"]:$this->cc33_orctiporec);
+       $this->cc33_sequencial = ($this->cc33_sequencial === 0 || $this->cc33_sequencial === 0.0 || $this->cc33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc33_sequencial"]:$this->cc33_sequencial);
+       $this->cc33_classificacaocredores = ($this->cc33_classificacaocredores === 0 || $this->cc33_classificacaocredores === 0.0 || $this->cc33_classificacaocredores == ""?@$GLOBALS["HTTP_POST_VARS"]["cc33_classificacaocredores"]:$this->cc33_classificacaocredores);
+       $this->cc33_orctiporec = ($this->cc33_orctiporec === 0 || $this->cc33_orctiporec === 0.0 || $this->cc33_orctiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["cc33_orctiporec"]:$this->cc33_orctiporec);
      }else{
-       $this->cc33_sequencial = ($this->cc33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc33_sequencial"]:$this->cc33_sequencial);
+       $this->cc33_sequencial = ($this->cc33_sequencial === 0 || $this->cc33_sequencial === 0.0 || $this->cc33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc33_sequencial"]:$this->cc33_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_classificacaocredoresrecurso {
          $this->cc33_sequencial = $cc33_sequencial; 
        }
      }
-     if(($this->cc33_sequencial == null) || ($this->cc33_sequencial == "") ){ 
+     if(($this->cc33_sequencial == null) || ($this->cc33_sequencial === 0 || $this->cc33_sequencial === 0.0 || $this->cc33_sequencial == "") ){ 
        $this->erro_sql = " Campo cc33_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

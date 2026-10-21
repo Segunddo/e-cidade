@@ -54,7 +54,7 @@ class cl_cadenderparam {
                  db99_cadendermunicipio = int4 = Código do Municipio 
                  ";
    //funcao construtor da classe 
-   function cl_cadenderparam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadenderparam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_cadenderparam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db99_sequencial = ($this->db99_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db99_sequencial"]:$this->db99_sequencial);
-       $this->db99_cadenderpais = ($this->db99_cadenderpais == ""?@$GLOBALS["HTTP_POST_VARS"]["db99_cadenderpais"]:$this->db99_cadenderpais);
-       $this->db99_cadenderestado = ($this->db99_cadenderestado == ""?@$GLOBALS["HTTP_POST_VARS"]["db99_cadenderestado"]:$this->db99_cadenderestado);
-       $this->db99_cadendermunicipio = ($this->db99_cadendermunicipio == ""?@$GLOBALS["HTTP_POST_VARS"]["db99_cadendermunicipio"]:$this->db99_cadendermunicipio);
+       $this->db99_sequencial = ($this->db99_sequencial === 0 || $this->db99_sequencial === 0.0 || $this->db99_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db99_sequencial"]:$this->db99_sequencial);
+       $this->db99_cadenderpais = ($this->db99_cadenderpais === 0 || $this->db99_cadenderpais === 0.0 || $this->db99_cadenderpais == ""?@$GLOBALS["HTTP_POST_VARS"]["db99_cadenderpais"]:$this->db99_cadenderpais);
+       $this->db99_cadenderestado = ($this->db99_cadenderestado === 0 || $this->db99_cadenderestado === 0.0 || $this->db99_cadenderestado == ""?@$GLOBALS["HTTP_POST_VARS"]["db99_cadenderestado"]:$this->db99_cadenderestado);
+       $this->db99_cadendermunicipio = ($this->db99_cadendermunicipio === 0 || $this->db99_cadendermunicipio === 0.0 || $this->db99_cadendermunicipio == ""?@$GLOBALS["HTTP_POST_VARS"]["db99_cadendermunicipio"]:$this->db99_cadendermunicipio);
      }else{
-       $this->db99_sequencial = ($this->db99_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db99_sequencial"]:$this->db99_sequencial);
+       $this->db99_sequencial = ($this->db99_sequencial === 0 || $this->db99_sequencial === 0.0 || $this->db99_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db99_sequencial"]:$this->db99_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_cadenderparam {
          $this->db99_sequencial = $db99_sequencial; 
        }
      }
-     if(($this->db99_sequencial == null) || ($this->db99_sequencial == "") ){ 
+     if(($this->db99_sequencial == null) || ($this->db99_sequencial === 0 || $this->db99_sequencial === 0.0 || $this->db99_sequencial == "") ){ 
        $this->erro_sql = " Campo db99_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

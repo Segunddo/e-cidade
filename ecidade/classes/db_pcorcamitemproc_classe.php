@@ -50,7 +50,7 @@ class cl_pcorcamitemproc {
                  pc31_pcprocitem = int8 = Código sequencial do item no processo 
                  ";
     //funcao construtor da classe
-    function cl_pcorcamitemproc() {
+    function __construct() {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("pcorcamitemproc");
         $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_pcorcamitemproc {
     // funcao para atualizar campos
     function atualizacampos($exclusao=false) {
         if($exclusao==false){
-            $this->pc31_orcamitem = ($this->pc31_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_orcamitem"]:$this->pc31_orcamitem);
-            $this->pc31_pcprocitem = ($this->pc31_pcprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_pcprocitem"]:$this->pc31_pcprocitem);
+            $this->pc31_orcamitem = ($this->pc31_orcamitem === 0 || $this->pc31_orcamitem === 0.0 || $this->pc31_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_orcamitem"]:$this->pc31_orcamitem);
+            $this->pc31_pcprocitem = ($this->pc31_pcprocitem === 0 || $this->pc31_pcprocitem === 0.0 || $this->pc31_pcprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_pcprocitem"]:$this->pc31_pcprocitem);
         }else{
-            $this->pc31_orcamitem = ($this->pc31_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_orcamitem"]:$this->pc31_orcamitem);
-            $this->pc31_pcprocitem = ($this->pc31_pcprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_pcprocitem"]:$this->pc31_pcprocitem);
+            $this->pc31_orcamitem = ($this->pc31_orcamitem === 0 || $this->pc31_orcamitem === 0.0 || $this->pc31_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_orcamitem"]:$this->pc31_orcamitem);
+            $this->pc31_pcprocitem = ($this->pc31_pcprocitem === 0 || $this->pc31_pcprocitem === 0.0 || $this->pc31_pcprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_pcprocitem"]:$this->pc31_pcprocitem);
         }
     }
     // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_pcorcamitemproc {
         $this->atualizacampos();
         $this->pc31_orcamitem = $pc31_orcamitem;
         $this->pc31_pcprocitem = $pc31_pcprocitem;
-        if(($this->pc31_orcamitem == null) || ($this->pc31_orcamitem == "") ){
+        if(($this->pc31_orcamitem == null) || ($this->pc31_orcamitem === 0 || $this->pc31_orcamitem === 0.0 || $this->pc31_orcamitem == "") ){
             $this->erro_sql = " Campo pc31_orcamitem nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_pcorcamitemproc {
             $this->erro_status = "0";
             return false;
         }
-        if(($this->pc31_pcprocitem == null) || ($this->pc31_pcprocitem == "") ){
+        if(($this->pc31_pcprocitem == null) || ($this->pc31_pcprocitem === 0 || $this->pc31_pcprocitem === 0.0 || $this->pc31_pcprocitem == "") ){
             $this->erro_sql = " Campo pc31_pcprocitem nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_pcorcamitemproc {
     function sql_query ( $pc31_orcamitem=null,$pc31_pcprocitem=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -352,7 +352,7 @@ class cl_pcorcamitemproc {
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_pcorcamitemproc {
     function sql_query_file ( $pc31_orcamitem=null,$pc31_pcprocitem=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_pcorcamitemproc {
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_pcorcamitemproc {
     function sql_query_orcam ( $pc31_orcamitem=null,$pc31_pcprocitem=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_pcorcamitemproc {
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_pcorcamitemproc {
     function sql_query_solicitem ( $pc31_orcamitem=null,$pc31_pcprocitem=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -491,7 +491,7 @@ class cl_pcorcamitemproc {
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];

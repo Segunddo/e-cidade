@@ -46,7 +46,7 @@ class cl_acordocomissaomembro {
                  ac07_arquivo = oid = Arquivo
                  ";
     //funcao construtor da classe
-    function cl_acordocomissaomembro() {
+    function __construct() {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("acordocomissaomembro");
         $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -63,10 +63,10 @@ class cl_acordocomissaomembro {
     // funcao para atualizar campos
     function atualizacampos($exclusao=false) {
         if($exclusao==false){
-            $this->ac07_sequencial = ($this->ac07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_sequencial"]:$this->ac07_sequencial);
-            $this->ac07_acordocomissao = ($this->ac07_acordocomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_acordocomissao"]:$this->ac07_acordocomissao);
-            $this->ac07_numcgm = ($this->ac07_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_numcgm"]:$this->ac07_numcgm);
-            $this->ac07_tipomembro = ($this->ac07_tipomembro == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_tipomembro"]:$this->ac07_tipomembro);
+            $this->ac07_sequencial = ($this->ac07_sequencial === 0 || $this->ac07_sequencial === 0.0 || $this->ac07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_sequencial"]:$this->ac07_sequencial);
+            $this->ac07_acordocomissao = ($this->ac07_acordocomissao === 0 || $this->ac07_acordocomissao === 0.0 || $this->ac07_acordocomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_acordocomissao"]:$this->ac07_acordocomissao);
+            $this->ac07_numcgm = ($this->ac07_numcgm === 0 || $this->ac07_numcgm === 0.0 || $this->ac07_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_numcgm"]:$this->ac07_numcgm);
+            $this->ac07_tipomembro = ($this->ac07_tipomembro === 0 || $this->ac07_tipomembro === 0.0 || $this->ac07_tipomembro == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_tipomembro"]:$this->ac07_tipomembro);
             if($this->ac07_datainicio == ""){
                 $this->ac07_datainicio_dia = ($this->ac07_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_datainicio_dia"]:$this->ac07_datainicio_dia);
                 $this->ac07_datainicio_mes = ($this->ac07_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_datainicio_mes"]:$this->ac07_datainicio_mes);
@@ -84,11 +84,11 @@ class cl_acordocomissaomembro {
                 }
             }
             $this->ac07_numeroatodesignacao = ($this->ac07_numeroatodesignacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_numeroatodesignacao"]:$this->ac07_numeroatodesignacao);
-            $this->ac07_anoatodesignacao = ($this->ac07_anoatodesignacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_anoatodesignacao"]:$this->ac07_anoatodesignacao);
+            $this->ac07_anoatodesignacao = ($this->ac07_anoatodesignacao === 0 || $this->ac07_anoatodesignacao === 0.0 || $this->ac07_anoatodesignacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_anoatodesignacao"]:$this->ac07_anoatodesignacao);
             $this->ac07_nomearquivo = ($this->ac07_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_nomearquivo"]:$this->ac07_nomearquivo);
-            $this->ac07_arquivo = ($this->ac07_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_arquivo"]:$this->ac07_arquivo);
+            $this->ac07_arquivo = ($this->ac07_arquivo === 0 || $this->ac07_arquivo === 0.0 || $this->ac07_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_arquivo"]:$this->ac07_arquivo);
         }else{
-            $this->ac07_sequencial = ($this->ac07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_sequencial"]:$this->ac07_sequencial);
+            $this->ac07_sequencial = ($this->ac07_sequencial === 0 || $this->ac07_sequencial === 0.0 || $this->ac07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac07_sequencial"]:$this->ac07_sequencial);
         }
     }
     // funcao para Inclusão
@@ -148,7 +148,7 @@ class cl_acordocomissaomembro {
                 $this->ac07_sequencial = $ac07_sequencial;
             }
         }
-        if(($this->ac07_sequencial == null) || ($this->ac07_sequencial == "") ){
+        if(($this->ac07_sequencial == null) || ($this->ac07_sequencial === 0 || $this->ac07_sequencial === 0.0 || $this->ac07_sequencial == "") ){
             $this->erro_sql = " Campo ac07_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

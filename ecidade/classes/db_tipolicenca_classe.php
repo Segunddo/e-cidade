@@ -50,7 +50,7 @@ class cl_tipolicenca {
                  am09_descricao = varchar(50) = Descrição da Licença
                  ";
    //funcao construtor da classe
-   function cl_tipolicenca() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipolicenca");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_tipolicenca {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am09_sequencial = ($this->am09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am09_sequencial"]:$this->am09_sequencial);
+       $this->am09_sequencial = ($this->am09_sequencial === 0 || $this->am09_sequencial === 0.0 || $this->am09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am09_sequencial"]:$this->am09_sequencial);
        $this->am09_descricao = ($this->am09_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["am09_descricao"]:$this->am09_descricao);
      }else{
-       $this->am09_sequencial = ($this->am09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am09_sequencial"]:$this->am09_sequencial);
+       $this->am09_sequencial = ($this->am09_sequencial === 0 || $this->am09_sequencial === 0.0 || $this->am09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am09_sequencial"]:$this->am09_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tipolicenca {
          $this->am09_sequencial = $am09_sequencial;
        }
      }
-     if(($this->am09_sequencial == null) || ($this->am09_sequencial == "") ){
+     if(($this->am09_sequencial == null) || ($this->am09_sequencial === 0 || $this->am09_sequencial === 0.0 || $this->am09_sequencial == "") ){
        $this->erro_sql = " Campo am09_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
