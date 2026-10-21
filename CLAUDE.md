@@ -66,7 +66,7 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
 **Onde paramos:** **ÁREAS TRIBUTÁRIO E EDUCAÇÃO CONCLUÍDAS** (branch `2educacao-migrado`), e **RECURSOS HUMANOS
-com 701/701 telas de menu no 8.5** (branch `3recursoshumanos-migrado`; falta o cenário de cálculo da folha).
+com 701/701 telas de menu no 8.5** (branch `3recursoshumanos-migrado`; cálculo da folha verificado; 13ª lacuna em aberto).
 Conferido pelo proxy, tela de menu por tela de menu (15/10/2026): **Tributário 1.059/1.059** e **Educação
 480/480** arquivos de menu existentes servidos pelo PHP 8.5 — depois de fechar a *10ª LACUNA* (14 telas
 que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
@@ -80,7 +80,7 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 390 por `map` |
-| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros feito (37 idênticos, 0 divergentes) e `.phar` portado; falta o cenário de cálculo da folha — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
+| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros, `.phar` e cálculo da folha (6 tipos idênticos) feitos. **Pendente: decisão sobre os 361 arquivos da 13ª lacuna** — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3690,16 +3690,58 @@ nada: o `INSERT` extra falhou pela FK e a transação da tela desfez tudo, nos d
 registrado no Tributário (~2 a 4 telas por sessão). 37 telas idênticas, em 3 dos 4 módulos, sustentam a
 afirmação para os cadastros; **não** dizem nada sobre o cálculo.
 
-**O que NÃO está feito na área:**
+#### ✅ CENÁRIO DE CÁLCULO DA FOLHA — os 6 tipos idênticos nos dois runtimes
 
-1. **O cenário de cálculo da folha** — a base tem 1 servidor e zero cálculo; exige cadastrar servidores e
-   ponto pelo 5.6, salvar em dump (o banco não tem volume de persistência) e comparar o SQL do cálculo.
-   Até ele ser feito, o cálculo da folha **não foi exercitado** pela comparação.
-2. Os 30 cadastros INCONCLUSIVOS no nível 3.
-3. Os **9 arquivos do `pes2` que não compilam nem no 5.6** — defeito da referência, intocados por decisão.
+A competência da folha da base é **02/2013** e a matrícula 1 tem movimento nela — o cenário usa o servidor
+existente. O cálculo é disparado por `pes4_gerafolha002.php` em modo automático
+(`lAutomatico=1&iPonto=<tipo>&iMatricula=1`) e comparado pelo nível 3 (SQL de negócio emitido).
 
-**PARA RETOMAR:** o cenário de cálculo (item 1). A sessão autenticada usada foi `98d016cc…`; os ciclos de
-guarda precisam de `/tmp/_sess.bak` no 5.6 (o `cmp.py` o cria ao rodar).
+| Tipo (`iPonto`) | Resultado |
+|---|---|
+| 1 Salário, **com ponto semeado** (`0001` qtd 30 → fórmula `F010/30` pelo `eval`; `0002` valor 150,50) | **IDÊNTICO** — 139 statements, 8 escritas, incluindo o `INSERT` em `gerfsal` |
+| 2 Adiantamento · 3 Férias · 4 Rescisão · 5 13º · 8 Complementar | **IDÊNTICOS** |
+
+O ponto foi semeado direto no banco (2 linhas em `pontofs`), tomado pelo snapshot do harness e **apagado no
+fim** — o banco voltou ao estado original (folha e ponto vazios, sequências intactas).
+
+**Antes das correções, o cálculo de salário PARAVA no meio no 8.5** — 59 statements contra 89, sem gravar o
+resultado. Nenhuma bateria GET chegaria aqui. As causas, uma a uma, pelo ciclo de diagnóstico:
+
+- **NÚCLEO `model/pessoal/std/DBPessoal.model.php`**: `$F032 = $F032 - $F031` com `$F031 = ''` (sonda: dias
+  trabalhados vindos do ponto eletrônico vazio). `'28' - ''` = 28 no 5.6, `TypeError` no 8.5. Correção
+  `($x === '' ? 0 : $x)`, medida igual ao 5.6 em 6 casos inclusive no tipo.
+- **`pes4_gerafolha004.php` (o motor, ~10 mil linhas)**: o total líquido `$tot_prov + $salfamilia - $tot_desc`
+  com `$tot_desc = ''` — mesma correção; e 4 `count(null)` → `(array)`. A comparação `'150.5' > ''`, logo
+  acima, é string com string nos dois runtimes (verdadeira nos dois) — não precisou de nada.
+- `CalculoPensao.model.php`: 2 `count(null)`.
+- **e a 13ª lacuna** (abaixo): o cálculo morreu em `AjustePrevidencia::…`, num arquivo que não estava em
+  universo nenhum.
+
+Regressão: bateria completa do `pes` **1.155/1.155** (5 PDFs divergiram sob carga pelo horário dentro do
+fluxo comprimido e ficaram idênticos isolados).
+
+#### ⚠ 13ª LACUNA — classes carregadas por AUTOLOAD fora de `classes/`
+
+`AjustePrevidencia` é chamada como `AjustePrevidencia::ajustar(…)` pelo motor, carregada pelo autoloader, sem
+`include`. A frente de autoload só resolvia `new cl_*` e `getDao()`. Medido no universo de RH: **557**
+arquivos de `model/`/`std/` alcançados por `new Classe`/`Classe::` e fora do universo. Neles: **5 classes que
+nem carregavam no 8.5** (LSP — `FolhaPagamento13o` e `FolhaPagamentoRescisao`, irmãs das três já corrigidas;
+`ProcessamentoPontoConsignadosCaixa`), **6 `each()`** em 3 modelos de folha. Corrigidos e verificados (lint e
+carga nos dois runtimes). Nas áreas concluídas: 1 `split` no Tributário e 1 `unset($this)` na Educação,
+corrigidos **nas branches delas** e trazidos por merge (`c1a450c78`, `448bd26fb`, `7f4efcb32`).
+
+**`enumera.py` ganhou a oitava frente** (mapa classe → arquivo de `model/`/`std/`). Com ela, o fecho segue dos
+modelos até `classes/` — e mostrou que a medição acima **subestimava**: os modelos instanciam classes de dados
+que também nunca entraram em universo. **União nas três áreas: 361 arquivos a alterar, 357 em `classes/`**
+(296 com construtor PHP 4, 357 com guarda `0 == ""` faltando, 205 com `split`). Mecânico para o Rector,
+mas o construtor PHP 4 que não roda é a falha silenciosa mais grave do catálogo.
+
+**DECISÃO PENDENTE (do usuário):** portar os 361 — proposta: na branch do Tributário (a base), trazidos por
+merge às outras duas, verificados por `php -l` nos dois runtimes e pelos harnesses de classes e de escrita
+(a interseção com os universos já verificados é vazia: nenhuma bateria de regressão exigida).
+
+**O que NÃO está feito na área:** os 30 cadastros INCONCLUSIVOS no nível 3 (payload à mão); os 9 arquivos do
+`pes2` que não compilam nem no 5.6 (defeito da referência, intocados); e os 361 da 13ª lacuna.
 
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
 

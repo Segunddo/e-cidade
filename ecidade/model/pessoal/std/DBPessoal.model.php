@@ -376,7 +376,7 @@ abstract class DBPessoal
 
         $F033 = db_utils::fieldsMemory($rsF033, 0)->f033;
 
-        $F032 = $F032 - $F031;
+        $F032 = ($F032 === '' ? 0 : $F032) - ($F031 === '' ? 0 : $F031); // "" em aritmetica: 0 no 5.6, TypeError no 8
 
 
         $fs = db_utils::fieldsMemory($rsSqlVar, 0);

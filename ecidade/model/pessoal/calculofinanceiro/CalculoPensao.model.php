@@ -249,7 +249,7 @@ class CalculoPensao {
 		$contador        = 1;
 		$primeira_pensao = true;
 
-		if (count($pensao)>0) {
+		if (count((array)$pensao)>0) {
 			$minha_calcula_pensao=true;
 		}
 
@@ -260,7 +260,7 @@ class CalculoPensao {
 			echo "</pre>";
 		}
 
-		for ($Ipensao=0; $Ipensao<count($pensao); $Ipensao++) {
+		for ($Ipensao=0; $Ipensao<count((array)$pensao); $Ipensao++) {
 
 
 			$oServidor = ServidorRepository::getInstanciaByCodigo(

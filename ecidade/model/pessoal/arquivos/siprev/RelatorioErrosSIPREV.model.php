@@ -133,8 +133,8 @@ class RelatorioErrosSIPREV {
     foreach ($cabecalhos as $item) {
 
       $QUEBRA = ++$indice == $itens;
-      list($chave, $valor)      = each($dados);
-      list($largura, $conteudo) = each($item);
+      $chave = $valor = null; if (is_array($dados) && key($dados) !== null) { $chave = key($dados); $valor = current($dados); next($dados); } /* each() removido no PHP 8 */
+      $largura = $conteudo = null; if (is_array($item) && key($item) !== null) { $largura = key($item); $conteudo = current($item); next($item); }
       $pdf->cell($item['largura'], self::ALTURA_LINHA, " " .$valor, self::BORDA, $QUEBRA, "L", !self::PREENCHE);
     }
   }

@@ -205,7 +205,7 @@ abstract class ArquivoEConsigRepository {
     * Percorre os servidores da matriz criada e insere na tabela, para que, com os códigos gerados sejam incluidas as 
     * rubricas.
     */
-   while ( list($iMatricula, $aRegistros) = each($aServidores) ) {
+   while(is_array($aServidores) && (($iMatricula = key($aServidores)) !== null) && ((($aRegistros = current($aServidores)) || true) && (next($aServidores) || true))) /* each() removido no PHP 8 */ {
 
     foreach ($aRegistros['aRegistros'] as $oItemRegistro) {
 

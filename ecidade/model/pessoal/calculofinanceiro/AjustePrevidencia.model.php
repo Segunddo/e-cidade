@@ -1272,7 +1272,7 @@ class AjustePrevidencia
         $aServidores = ServidorRepository::getServidoresByCgm($oCGM);
         $lTodosInativos = true;
 
-        while (list($iIndice, $oServidor) = each($aServidores)) {
+        while(is_array($aServidores) && (($iIndice = key($aServidores)) !== null) && ((($oServidor = current($aServidores)) || true) && (next($aServidores) || true))) /* each() removido no PHP 8 */ {
 
             if ($oServidor->getVinculo()->getTipo() == VinculoServidor::VINCULO_ATIVO) {
                 $lTodosInativos = false;
@@ -1310,7 +1310,7 @@ class AjustePrevidencia
                 break;
         }
 
-        while (list($iCgm, $aRubricas) = each(self::$aValoresBase)) {
+        while(is_array(self::$aValoresBase) && (($iCgm = key(self::$aValoresBase)) !== null) && ((($aRubricas = current(self::$aValoresBase)) || true) && (next(self::$aValoresBase) || true))) /* each() removido no PHP 8 */ {
 
             LogCalculoFolha::write('Inicio do Laco CGM atual: ' . $iCgm);
 
@@ -1334,7 +1334,7 @@ class AjustePrevidencia
 
             $aValores = array();
 
-            while (list($iMatricula, $oEvento) = each($aEventos)) {
+            while(is_array($aEventos) && (($iMatricula = key($aEventos)) !== null) && ((($oEvento = current($aEventos)) || true) && (next($aEventos) || true))) /* each() removido no PHP 8 */ {
 
                 $aValores[$iMatricula] = $oEvento->getValor();
                 $nTotalBases += $oEvento->getValor();
