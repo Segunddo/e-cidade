@@ -80,7 +80,7 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 390 por `map` |
-| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros, `.phar` e cálculo da folha (6 tipos idênticos) feitos. **13ª lacuna fechada: 316 DAOs portados** (ver *Os DAOs que os modelos instanciam*). Restam os 30 cadastros INCONCLUSIVOS do nível 3 — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
+| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros, `.phar` e cálculo da folha (6 tipos idênticos) feitos. **13ª lacuna fechada: 316 DAOs portados** (ver *Os DAOs que os modelos instanciam*). Nível 3: **66/70 cadastros idênticos** (2 quebram no 5.6, 2 dependem do cenário do estágio probatório) — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3686,11 +3686,13 @@ As **77** telas de inclusão do menu de RH; **70** mapeadas para a tabela pela c
 
 | Veredito | Telas |
 |---|---|
-| **IDÊNTICO** — o mesmo SQL de negócio gravado nos dois runtimes | **37** |
-| **DIVERGE** | **0** |
-| INCONCLUSIVO — o payload automático não passou na validação (nada gravado nos dois) | 30 |
-| ABORTADO — a restauração esbarrou em FK (`pensao`, `rhipe`) | 2 |
-| sem formulário para montar (`pes1_rhcadregime001`) | 1 |
+| | 1ª rodada (payload automático) | **Depois dos payloads à mão (22/10/2026)** |
+|---|---|---|
+| **IDÊNTICO** — o mesmo SQL de negócio gravado nos dois runtimes | 37 | **66** |
+| **DIVERGE** | 0 | **0** |
+| INCONCLUSIVO / ABORTADO | 31 / 2 | — |
+| quebram **também no 5.6** (caracterizadas) | — | 2 |
+| dependem de cenário que a base não tem (estágio probatório) | — | 2 |
 
 **O harness mudou, porque em RH a restauração não funcionava:** ela apagava a tabela **inteira** e a
 repovoava, e em RH quase todo cadastro auxiliar é referenciado pelo `rhpessoal` — o `DELETE` esbarrava na
@@ -3707,9 +3709,39 @@ de conferência manual, o harness agora **avisa** quando o SQL de negócio grava
 restaurado (o único caso entre os IDÊNTICOS, `rec1_tipoasse001` → `tipoassedb_cadattdinamico`, não deixou
 nada: o `INSERT` extra falhou pela FK e a transação da tela desfez tudo, nos dois).
 
-**Limite:** os 30 INCONCLUSIVOS precisam de payload montado à mão, lendo cada formulário — o mesmo custo
-registrado no Tributário (~2 a 4 telas por sessão). 37 telas idênticas, em 3 dos 4 módulos, sustentam a
-afirmação para os cadastros; **não** dizem nada sobre o cálculo.
+**Os 33 que não gravaram na 1ª rodada (22/10/2026): 29 resolvidos, todos IDÊNTICOS.** Os payloads que
+funcionaram estão versionados em **`scratchpad/n3_rh_payloads.tsv`** (tela, tabelas restauradas, payload).
+As causas, que valem como receita para as próximas áreas:
+
+| Causa | Telas | O que resolveu |
+|---|---|---|
+| **chave digitada** — a tabela não tem sequência; o gerador deixa a chave vazia e a classe recusa ("Chave Primaria zerada") | 10 (`pesdiver`, `rhempresavt`, `vtfempr`, `areas`, `flegal`, `rharqbanco`, `curric`, `rhcontasrec`, `rhsindicato`, `padroes`) | valor livre, conferido antes no banco |
+| **tela com abas** — a tela do menu é só o contêiner; o formulário está no iframe `*004.php`/`*005.php` | 13 | gerar o payload e postar **na tela interna** (todas roteadas pelo 8.5 pelo prefixo) |
+| **grava por RPC** — o JavaScript monta um JSON e chama um `.RPC.php` | 4 | postar no RPC com o JSON (`json={…}`) ou os campos + `acao=…` |
+| **tabela filha fora do conjunto** — a restauração esbarra na FK e aborta | 4 (`pensao`, `rhipe`, `relrub`, `assenta`) | acrescentar a filha, antes da mãe, no 2º argumento |
+| a convenção de nome errou a tabela (`rhbases` grava em `bases`) | 1 | o aviso `ATENCAO` do harness apontou |
+
+Três exigiram **semear dado ausente** na base ou ficaram com cobertura parcial: `regraponto` exige uma
+`selecao` (FK) e a tabela está vazia, então foi semeada 1 linha e apagada depois; em
+`rhempenhofolhaexcecaorubrica` só a gravação da **regra** foi exercitada, porque as exceções por rubrica
+exigem orçamento de 2026 (`orcunidade` vai até 2015, `orctiporec` vazia); `rhpessoal004` deu DIVERGE na 1ª
+tentativa só pelo sequencial de `registrapontoeletronicohistorico`, que não estava no conjunto. Com a tabela
+incluída, IDÊNTICO.
+
+**As 4 que restam, e por quê:**
+
+- `pes1_rhfuncao001` e `pes1_rhcadregime001` **quebram também no 5.6**, com a mesma resposta nos dois
+  runtimes. `rhfuncao` chama `isParaiba()`, que não existe em lugar nenhum, e a página para antes do botão;
+  `rhcadregime` dá "Erro interno" já no GET. É impossível incluir pelo 5.6: defeito pré-existente, intocado.
+- `rec1_rhestagioavaliacao001` e `rec1_rhestagioresultado001` dependem da cadeia agenda → perguntas do
+  quesito → avaliação → resultado, e a base tem `rhestagioagenda`, `rhestagioquesitopergunta` e
+  `rhestagioavaliacao` **vazias**. Exercitá-las exige montar o cenário, como o da folha.
+
+**Limpeza:** quatro execuções abortaram ou gravaram fora do conjunto restaurado e deixaram linhas de teste
+(`pensao`/`rhipe` de novo, `relrub`, `bases`, `assenta`). Todas foram removidas numa transação, conferindo
+pelo log do PostgreSQL o que cada uma gravou, e as sequências voltaram ao valor anterior. O valor anterior
+foi deduzido do próprio log: se o `INSERT` recebeu 1, a sequência estava em (1, não chamada). Ao fim, o banco
+está como no início, e nenhuma tabela `_n3snap_*` ficou para trás.
 
 #### ✅ CENÁRIO DE CÁLCULO DA FOLHA — os 6 tipos idênticos nos dois runtimes
 
@@ -3761,7 +3793,7 @@ mas o construtor PHP 4 que não roda é a falha silenciosa mais grave do catálo
 estavam pagos por commits `EXPERIMENTO:`; os **316** restantes estão na seção *Os DAOs que os modelos
 instanciam* (área Tributário): `php -l` 316/316 nos dois, classes 315/315 e escrita 0 divergentes.
 
-**O que NÃO está feito na área:** os 30 cadastros INCONCLUSIVOS no nível 3 (payload à mão); os 9 arquivos do
+**O que NÃO está feito na área:** o cenário do estágio probatório (as 2 últimas telas do nível 3); os 9 arquivos do
 `pes2` que não compilam nem no 5.6 (defeito da referência, intocados).
 
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
