@@ -13,10 +13,10 @@ import os, re, subprocess, sys, collections
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ECI = os.path.join(RAIZ, "ecidade")
-JA = ("TRIBUT", "EDUCA")                       # areas concluidas
+JA = ("TRIBUT", "EDUCA", "RECURSOS")           # areas concluidas
 
 # o mesmo regex do `location` do nginx (docker/proxy/nginx.conf)
-LOC = re.compile(r"^(?:cem|itbi?|agua?|jur|div|mar|not|fis|iss|dvr|arr|tri|inf|tra|tre|esc|rel|sec|bib|mer|edu)[0-9]*_", re.I)
+LOC = re.compile(r"^(?:cem|itbi?|agua?|jur|div|mar|not|fis|iss|dvr|arr|tri|inf|tra|tre|esc|rel|sec|bib|mer|edu|rh|eso|rec|pes)[0-9]*_", re.I)
 MAP = {l.split()[0] for l in open(os.path.join(RAIZ, "docker/proxy/faseb_map.conf"))
        if l.strip() and not l.startswith("#")}
 

@@ -3140,6 +3140,35 @@ porque a correção da 10ª lacuna passou a contar as entradas de menu com parâ
 Ressalvas de leitura: "a alterar" é estimativa estática — nas duas áreas feitas o real saiu
 13–23% acima (correções à mão e lacunas) — e não conta os commits `EXPERIMENTO:` como pagos.
 
+#### Refeito em 22/10/2026, depois de Recursos Humanos
+
+`dimensiona.py` passou a contar RH como concluída e a conhecer `rh|eso|rec|pes` no `location`. Conferência
+do instrumento: Tributário, Educação e RH saem com **0 telas faltando** (fantasmas 7, 1 e 4, os mesmos
+registrados).
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | **A alterar** | em 18/10 |
+|---|---|---|---|---|---|---|
+| Financeiro | 6 | 945 | 3.586 | 881 | **641** | 771 |
+| Saúde | 8 | 492 | 2.482 | 704 | **534** | 505 |
+| Patrimonial | 8 | 712 | 3.075 | 873 | **469** | 622 |
+| Configuração | 1 | 203 | 1.923 | 848 | **137** | 173 |
+| Assistência Social | 2 | 64 | 1.405 | 682 | **50** | 62 |
+| Cidadão | 1 | 35 | 1.066 | 539 | **29** | 13 |
+| Integrações / Gestor | 1+1 | 9+7 | 1.015+375 | 538+162 | **20+18** | 9+8 |
+
+União: **1.711** (era 2.358). Duas coisas mudaram ao mesmo tempo, e a leitura precisa separá-las:
+
+- **O que RH pré-pagou.** Patrimonial (−153) e Financeiro (−130) caíram mais: RH tocou muitas classes de
+  `classes/` compartilhadas com eles — inclusive os 316 DAOs da 13ª lacuna, 168 deles de domínios de
+  Financeiro/Patrimonial. As telas que faltam caíram pouco (Financeiro 949 → 945, Assistência Social 67 → 64,
+  Integrações 13 → 9, Patrimonial 713 → 712) — são as telas compartilhadas que a Fase B de RH roteou pelo `map`.
+- **A 8ª frente da enumeração (13ª lacuna).** O fecho agora segue `new Classe`/`Classe::` de `model/`/`std/`
+  até `classes/`, e por isso **todos os universos cresceram muito** (Financeiro 2.674 → 3.586). "Universo" e
+  "já pago" **não são comparáveis** com a tabela de 18/10. Nas áreas com pouco código em comum com as já
+  feitas, a frente nova achou mais trabalho do que o pago: Saúde +29, Cidadão +16, Integrações +11, Gestor +10.
+  Esses aumentos são correções de medição, não regressão: em 18/10 essas classes já precisavam de porte, só
+  não eram enxergadas.
+
 ### 📐 ÁREA EDUCAÇÃO — dimensionada e INICIADA
 
 Ao contrário do Tributário, quase não tem prefixo compartilhado:
