@@ -125,8 +125,12 @@ def norm(s):
 def requisitar(porta):
     restaurar_sessao()
     antes = linhas_log()
-    sh(f"curl -s -m 60 -b 'ECIDADEWINDOWMAIN={SID}' -X POST "
-       f"--data '{PAYLOAD}' -o /dev/null http://localhost:{porta}/{TELA}")
+    # Varios POSTs separados por "|||" correm em sequencia na MESMA sessao (restaurada
+    # so antes do primeiro): fluxos que guardam estado na sessao entre requisicoes,
+    # como a avaliacao do estagio probatorio (respostas em $_SESSION, gravadas no fim).
+    for parte in PAYLOAD.split("|||"):
+        sh(f"curl -s -m 60 -b 'ECIDADEWINDOWMAIN={SID}' -X POST "
+           f"--data '{parte}' -o /dev/null http://localhost:{porta}/{TELA}")
     sh("sleep 1")
     return [norm(s) for s in capturar(antes)]
 

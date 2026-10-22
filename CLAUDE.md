@@ -80,7 +80,7 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 390 por `map` |
-| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros, `.phar` e cálculo da folha (6 tipos idênticos) feitos. **13ª lacuna fechada: 316 DAOs portados** (ver *Os DAOs que os modelos instanciam*). Nível 3: **66/70 cadastros idênticos** (2 quebram no 5.6, 2 dependem do cenário do estágio probatório) — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
+| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros, `.phar` e cálculo da folha (6 tipos idênticos) feitos. **13ª lacuna fechada: 316 DAOs portados** (ver *Os DAOs que os modelos instanciam*). Nível 3: **68/70 cadastros idênticos** (as 2 restantes quebram também no 5.6; estágio probatório por cenário semeado) — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
@@ -3688,11 +3688,10 @@ As **77** telas de inclusão do menu de RH; **70** mapeadas para a tabela pela c
 |---|---|
 | | 1ª rodada (payload automático) | **Depois dos payloads à mão (22/10/2026)** |
 |---|---|---|
-| **IDÊNTICO** — o mesmo SQL de negócio gravado nos dois runtimes | 37 | **66** |
+| **IDÊNTICO** — o mesmo SQL de negócio gravado nos dois runtimes | 37 | **68** |
 | **DIVERGE** | 0 | **0** |
 | INCONCLUSIVO / ABORTADO | 31 / 2 | — |
 | quebram **também no 5.6** (caracterizadas) | — | 2 |
-| dependem de cenário que a base não tem (estágio probatório) | — | 2 |
 
 **O harness mudou, porque em RH a restauração não funcionava:** ela apagava a tabela **inteira** e a
 repovoava, e em RH quase todo cadastro auxiliar é referenciado pelo `rhpessoal` — o `DELETE` esbarrava na
@@ -3728,14 +3727,23 @@ exigem orçamento de 2026 (`orcunidade` vai até 2015, `orctiporec` vazia); `rhp
 tentativa só pelo sequencial de `registrapontoeletronicohistorico`, que não estava no conjunto. Com a tabela
 incluída, IDÊNTICO.
 
-**As 4 que restam, e por quê:**
+**As 2 que restam, e por quê:**
 
 - `pes1_rhfuncao001` e `pes1_rhcadregime001` **quebram também no 5.6**, com a mesma resposta nos dois
   runtimes. `rhfuncao` chama `isParaiba()`, que não existe em lugar nenhum, e a página para antes do botão;
   `rhcadregime` dá "Erro interno" já no GET. É impossível incluir pelo 5.6: defeito pré-existente, intocado.
-- `rec1_rhestagioavaliacao001` e `rec1_rhestagioresultado001` dependem da cadeia agenda → perguntas do
-  quesito → avaliação → resultado, e a base tem `rhestagioagenda`, `rhestagioquesitopergunta` e
-  `rhestagioavaliacao` **vazias**. Exercitá-las exige montar o cenário, como o da folha.
+**Estágio probatório — CENÁRIO montado (22/10/2026), as 2 telas IDÊNTICAS.** Avaliação e resultado dependem
+da cadeia agenda → pergunta do quesito → avaliação → resultado, e a base tinha essas tabelas vazias. Foram
+semeadas **8 linhas** (id 901, `SEMENTE_N3`): critério, pergunta e resposta possível do quesito 1, agenda e
+data agendada da matrícula 1, comissão, período do estágio e um `portariatipo` para o tipo de assentamento
+de aprovação. Todas foram apagadas no fim; o banco voltou ao original.
+
+- **Avaliação**: grava por `rec4_rpcexame.php` em **três requisições na mesma sessão** — abrir o exame,
+  `salvarResposta` (a resposta fica em `$_SESSION["avaliacao"]`) e `salvarExame`, que grava. O
+  `escrita_post.py` passou a aceitar vários POSTs separados por `|||`, restaurando a sessão só antes do
+  primeiro. Resultado: `rhestagioavaliacao` + `rhestagioavaliacaoresposta`, **idênticos**.
+- **Resultado**: um POST que grava em cadeia `portaria` → `assenta` → `portariaassenta` →
+  `rhestagioresultado`, **idênticos** nos quatro.
 
 **Limpeza:** quatro execuções abortaram ou gravaram fora do conjunto restaurado e deixaram linhas de teste
 (`pensao`/`rhipe` de novo, `relrub`, `bases`, `assenta`). Todas foram removidas numa transação, conferindo
@@ -3793,7 +3801,7 @@ mas o construtor PHP 4 que não roda é a falha silenciosa mais grave do catálo
 estavam pagos por commits `EXPERIMENTO:`; os **316** restantes estão na seção *Os DAOs que os modelos
 instanciam* (área Tributário): `php -l` 316/316 nos dois, classes 315/315 e escrita 0 divergentes.
 
-**O que NÃO está feito na área:** o cenário do estágio probatório (as 2 últimas telas do nível 3); os 9 arquivos do
+**O que NÃO está feito na área:** os 9 arquivos do
 `pes2` que não compilam nem no 5.6 (defeito da referência, intocados).
 
 ### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)

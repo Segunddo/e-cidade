@@ -37,3 +37,15 @@ pes1_rhrubricas.RPC.php	regrapontorhrubricas,regraponto	json={"sExecucao":"inclu
 # so a regra: as excecoes por rubrica exigem orcamento de 2026 (orcunidade, orctiporec...), ausente na base
 pes1_rhempenhofolhaexcecaorubrica.RPC.php	rhempenhofolhaexcecaorubrica,rhempenhofolhaexcecaoregra	json={"sExecucao":"salvar","iSequencial":"","sDescricao":"TESTE_N3","iOrgao":"","iUnidade":"","iProjetoAtividade":"","iRecurso":"","iPrograma":"","iFuncao":"","iSubFuncao":"","iCaracteristica":"000","iDesdobramento":"","iTipoFolha":"1","aRubricas":[]}
 rec1_assentamentos.RPC.php	assentamentofuncional,assenta	acao=incluiAssentamento&h16_codigo=&h16_regist=1&h12_codigo=1&h16_assent=1&h16_dtconc=31/12/2026&h16_dtterm=31/12/2026&h16_quant=1&h16_nrport=1&h16_atofic=TESTE_N3&h16_anoato=2026&h16_histor=TESTE_N3&sOpcaoAssentamento=2&iPeriodoAquisitivo=
+# Estagio probatorio: CENARIO semeado (8 linhas, id 901, apagadas no fim; ordem inversa para apagar)
+#   insert into rhestagiocriterio values (901,1,'SEMENTE_N3',10);
+#   insert into rhestagioquesitopergunta values (901,1,'SEMENTE_N3');
+#   insert into rhestagioquesitoresposta values (901,901,901,'SEMENTE_N3');
+#   insert into rhestagioagenda (h57_sequencial,h57_rhestagio,h57_regist,h57_nroaval,h57_instit) values (901,1,1,1,1);
+#   insert into rhestagioagendadata values (901,901,'2026-12-31',1);
+#   insert into rhestagiocomissao values (901,'2026-01-01','2026-12-31','SEMENTE_N3',1);
+#   insert into rhestagioperiodo values (901,1,'SEMENTE_N3',36,1);
+#   insert into portariatipo (h30_sequencial,h30_tipoasse,h30_portariaenvolv,h30_portariatipoato,h30_portariaproced) values (901,1,1,1,1);
+# Avaliacao: TRES requisicoes na mesma sessao (separadas por |||): as respostas ficam em $_SESSION ate o salvarExame
+rec4_rpcexame.php	rhestagioavaliacaoresposta,rhestagioavaliacao	json={"method":"getDadosExame","iCodExame":"901","iCodQuesito":"","refresh":"1"}|||json={"method":"salvarResposta","iCodExame":"901","iCodQuestao":"901","iResposta":"901","iTipo":"1","sObsPergunta":"","sObsRecomendacao":""}|||json={"method":"salvarExame","iCodExame":"901","h56_estagiocomissao":"901","h56_avaliador":"1"}
+rec1_rhestagioresultado001.php	rhestagioresultado,portariaassenta,assenta,portaria	incluir=Incluir&h65_rhestagioagenda=901&h65_resultado=A&h65_data=31/12/2026&h31_numero=901&h65_pontos=10&h65_observacao=TESTE_N3
