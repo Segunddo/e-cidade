@@ -140,9 +140,10 @@ class Falta extends BaseHora implements Horas
         if($this->getDiaTrabalho()->getJornada()->isDSR() || $this->getDiaTrabalho()->getJornada()->isFolga()) {
 
             $this->logger->debug("-- SEM falta, data nao eh dia de trabalho. ");
-            $msgDia = $this->getDiaTrabalho()->getJornada()->isDSR() ? 'Data eh um DSR.'
-                : $this->getDiaTrabalho()->getJornada()->isFolga() ? 'Data eh uma FOLGA'
-                    : $this->getDiaTrabalho()->getFeriado() ? 'Data eh um FERIADO' : '';
+            // PHP 8: parenteses a esquerda, a associacao do 5.6 (preserva o resultado original)
+            $msgDia = (($this->getDiaTrabalho()->getJornada()->isDSR() ? 'Data eh um DSR.'
+                : $this->getDiaTrabalho()->getJornada()->isFolga()) ? 'Data eh uma FOLGA'
+                    : $this->getDiaTrabalho()->getFeriado()) ? 'Data eh um FERIADO' : '';
             $this->logger->debug("-- {$msgDia}");
 
             return $this->getHoraZerada();
