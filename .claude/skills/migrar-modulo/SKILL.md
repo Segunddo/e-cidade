@@ -420,7 +420,7 @@ outro prefixo.
 # classificando cada iframe/redirecionamento pelo mesmo criterio do nginx
 python3 scratchpad/redirecionamentos.py <SID> /tmp/redir.tsv TRIBUT,EDUCA,RECURSOS,<NOVA_AREA>
 # grep e nao awk de proposito: o carregador da skill troca cifrao+numero pelos argumentos
-grep -P '^NO_5\.6\t' /tmp/redir.tsv | grep -vP '\tcorpo\.php\t'   # TEM de sair vazio
+grep -P '^NO_5\.6\t' /tmp/redir.tsv | grep -vP '\t(corpo|db_erros)\.php\t'   # TEM de sair vazio
 ```
 
 Para cada linha `NO_5.6`:
@@ -442,7 +442,9 @@ Para cada linha `NO_5.6`:
    Ponha na lista só o destino direto. Depois de rotear, **rode o levantamento de novo**: ele
    abre as telas já roteadas e acusa o segundo salto (as abas do contêiner), se ficou algum.
 3. **`corpo.php`** é o "voltar ao início" depois de erro ou de configuração ausente
-   (`numpref` não configurado, rotina desativada). Não é lacuna.
+   (`numpref` não configurado, rotina desativada), e **`db_erros.php?db_erro=…`** é a página
+   genérica de mensagem de erro (dois `lic1_*` caem nela por configuração ausente na base). Não
+   são formulário nem lacuna.
 4. **pasta** (`dbforms/…`) e **inexistente** não são lacuna. O proxy não roteia por pasta, e o
    `/tmp` compartilhado resolve. Ignore.
 

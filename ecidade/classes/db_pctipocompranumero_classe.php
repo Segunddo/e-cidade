@@ -52,7 +52,7 @@ class cl_pctipocompranumero {
                  pc51_numeracao = int8 = Numeração 
                  ";
    //funcao construtor da classe 
-   function cl_pctipocompranumero() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pctipocompranumero"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,9 +69,9 @@ class cl_pctipocompranumero {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc51_codtipocom = ($this->pc51_codtipocom == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_codtipocom"]:$this->pc51_codtipocom);
-       $this->pc51_anonumer = ($this->pc51_anonumer == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_anonumer"]:$this->pc51_anonumer);
-       $this->pc51_numeracao = ($this->pc51_numeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_numeracao"]:$this->pc51_numeracao);
+       $this->pc51_codtipocom = ($this->pc51_codtipocom === 0 || $this->pc51_codtipocom === 0.0 || $this->pc51_codtipocom == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_codtipocom"]:$this->pc51_codtipocom);
+       $this->pc51_anonumer = ($this->pc51_anonumer === 0 || $this->pc51_anonumer === 0.0 || $this->pc51_anonumer == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_anonumer"]:$this->pc51_anonumer);
+       $this->pc51_numeracao = ($this->pc51_numeracao === 0 || $this->pc51_numeracao === 0.0 || $this->pc51_numeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_numeracao"]:$this->pc51_numeracao);
      }else{
      }
    }
@@ -360,7 +360,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $oid = null,$campos="pctipocompranumero.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -412,7 +412,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

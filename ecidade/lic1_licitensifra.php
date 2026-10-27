@@ -90,7 +90,7 @@ if (!empty($chaves) && isset($chaves)){
   }
 
   if (trim($cods) == ""){
-    $info = split('#',$chaves);
+    $info = preg_split('#\##m',$chaves);
     $vir  = "";
     for($xx = 0; $xx < count($info); $xx++){
       if (trim($info[$xx]) != ""){
@@ -127,7 +127,7 @@ if (!empty($chaves) && isset($chaves)){
            }
 
            if (strlen(trim($itens_incluidos)) > 0){
-                $arr_itens = split(",",$itens_incluidos);
+                $arr_itens = preg_split("#,#m",$itens_incluidos);
            }
       }
 
@@ -146,7 +146,7 @@ if (!empty($chaves) && isset($chaves)){
 
     //echo "FIM ".$cods; exit;
     if ($sqlerro == false) {
-  	  $dados = split('#',$chaves);
+  	  $dados = preg_split('#\##m',$chaves);
       $sql_ult_ordem  = "select l21_ordem ";
       $sql_ult_ordem .= "from liclicitem ";
       $sql_ult_ordem .= "where l21_codliclicita=$licitacao ";

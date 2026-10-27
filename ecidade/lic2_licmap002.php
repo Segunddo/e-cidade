@@ -42,7 +42,8 @@ $clempparametro = new cl_empparametro();
 $clrotulo = new rotulocampo();
 $clrotulo->label('');
 
-parse_str($HTTP_SERVER_VARS ['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS ['QUERY_STRING'], $__qs);
+extract($__qs);
 //echo $HTTP_SERVER_VARS['QUERY_STRING'];
 
 /**

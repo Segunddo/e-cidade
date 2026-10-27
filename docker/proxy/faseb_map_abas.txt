@@ -176,3 +176,6 @@ cai4_lista003.php
 hab1_avaliacao005.php
 pro1_areascomplementares001.php
 pro1_obrasconstr001.php
+#
+# 27/10/2026 -- Patrimonial: aba de Protocolo aberta pelas telas de Ouvidoria (ouv1_tipoproc001/002).
+pro1_andpadrao001.php

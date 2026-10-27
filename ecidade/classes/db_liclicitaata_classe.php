@@ -56,7 +56,7 @@ class cl_liclicitaata {
                  l39_posicaoinicial = bool = Posição Inicial do Registro 
                  ";
    //funcao construtor da classe 
-   function cl_liclicitaata() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liclicitaata"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_liclicitaata {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l39_sequencial = ($this->l39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_sequencial"]:$this->l39_sequencial);
-       $this->l39_arquivo = ($this->l39_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_arquivo"]:$this->l39_arquivo);
+       $this->l39_sequencial = ($this->l39_sequencial === 0 || $this->l39_sequencial === 0.0 || $this->l39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_sequencial"]:$this->l39_sequencial);
+       $this->l39_arquivo = ($this->l39_arquivo === 0 || $this->l39_arquivo === 0.0 || $this->l39_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_arquivo"]:$this->l39_arquivo);
        $this->l39_arqnome = ($this->l39_arqnome == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_arqnome"]:$this->l39_arqnome);
-       $this->l39_liclicita = ($this->l39_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_liclicita"]:$this->l39_liclicita);
+       $this->l39_liclicita = ($this->l39_liclicita === 0 || $this->l39_liclicita === 0.0 || $this->l39_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_liclicita"]:$this->l39_liclicita);
        $this->l39_posicaoinicial = ($this->l39_posicaoinicial == "f"?@$GLOBALS["HTTP_POST_VARS"]["l39_posicaoinicial"]:$this->l39_posicaoinicial);
      }else{
-       $this->l39_sequencial = ($this->l39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_sequencial"]:$this->l39_sequencial);
+       $this->l39_sequencial = ($this->l39_sequencial === 0 || $this->l39_sequencial === 0.0 || $this->l39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_sequencial"]:$this->l39_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_liclicitaata {
          $this->l39_sequencial = $l39_sequencial; 
        }
      }
-     if(($this->l39_sequencial == null) || ($this->l39_sequencial == "") ){ 
+     if(($this->l39_sequencial == null) || ($this->l39_sequencial === 0 || $this->l39_sequencial === 0.0 || $this->l39_sequencial == "") ){ 
        $this->erro_sql = " Campo l39_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_liclicitaata {
    function sql_query ( $l39_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_liclicitaata {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -463,7 +463,7 @@ class cl_liclicitaata {
    function sql_query_file ( $l39_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_liclicitaata {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

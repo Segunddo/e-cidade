@@ -54,7 +54,7 @@ class cl_pccflicitapar {
                  l25_numero = int8 = Numeração 
                  ";
    //funcao construtor da classe 
-   function cl_pccflicitapar() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pccflicitapar"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_pccflicitapar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l25_codigo = ($this->l25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l25_codigo"]:$this->l25_codigo);
-       $this->l25_codcflicita = ($this->l25_codcflicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l25_codcflicita"]:$this->l25_codcflicita);
-       $this->l25_anousu = ($this->l25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["l25_anousu"]:$this->l25_anousu);
-       $this->l25_numero = ($this->l25_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["l25_numero"]:$this->l25_numero);
+       $this->l25_codigo = ($this->l25_codigo === 0 || $this->l25_codigo === 0.0 || $this->l25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l25_codigo"]:$this->l25_codigo);
+       $this->l25_codcflicita = ($this->l25_codcflicita === 0 || $this->l25_codcflicita === 0.0 || $this->l25_codcflicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l25_codcflicita"]:$this->l25_codcflicita);
+       $this->l25_anousu = ($this->l25_anousu === 0 || $this->l25_anousu === 0.0 || $this->l25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["l25_anousu"]:$this->l25_anousu);
+       $this->l25_numero = ($this->l25_numero === 0 || $this->l25_numero === 0.0 || $this->l25_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["l25_numero"]:$this->l25_numero);
      }else{
-       $this->l25_codigo = ($this->l25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l25_codigo"]:$this->l25_codigo);
+       $this->l25_codigo = ($this->l25_codigo === 0 || $this->l25_codigo === 0.0 || $this->l25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l25_codigo"]:$this->l25_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_pccflicitapar {
          $this->l25_codigo = $l25_codigo; 
        }
      }
-     if(($this->l25_codigo == null) || ($this->l25_codigo == "") ){ 
+     if(($this->l25_codigo == null) || ($this->l25_codigo === 0 || $this->l25_codigo === 0.0 || $this->l25_codigo == "") ){ 
        $this->erro_sql = " Campo l25_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -503,7 +503,7 @@ class cl_pccflicitapar {
    function sql_query ( $l25_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_pccflicitapar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_pccflicitapar {
    function sql_query_file ( $l25_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -560,7 +560,7 @@ class cl_pccflicitapar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -573,7 +573,7 @@ class cl_pccflicitapar {
 function sql_query_modalidade ( $l25_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -595,7 +595,7 @@ function sql_query_modalidade ( $l25_codigo=null,$campos="*",$ordem=null,$dbwher
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -608,7 +608,7 @@ function sql_query_modalidade ( $l25_codigo=null,$campos="*",$ordem=null,$dbwher
 function sql_query_mod_licita( $l25_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -632,7 +632,7 @@ function sql_query_mod_licita( $l25_codigo=null,$campos="*",$ordem=null,$dbwhere
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

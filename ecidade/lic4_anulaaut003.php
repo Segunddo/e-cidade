@@ -86,7 +86,7 @@ $db_botao = true;
 $sqlerro   = false;
 if (isset($incluir)) {
 
-  $valor = split(",",$valores);
+  $valor = preg_split("#,#m",$valores);
   // arrays para dados do empautoriza
   $arr_vals = Array();
   $arr_cgms = Array();
@@ -113,7 +113,7 @@ if (isset($incluir)) {
   }
   for ($i = 0; $i < sizeof($valor); $i++) {
 
-    $dados = split("_",$valor[$i]);
+    $dados = preg_split("#_#m",$valor[$i]);
 
     $rsParam = $clpcparam->sql_record($clpcparam->sql_query_file(db_getsession("DB_instit"), "pc30_contrandsol"));
     $oParam  = db_utils::fieldsMemory($rsParam,0);

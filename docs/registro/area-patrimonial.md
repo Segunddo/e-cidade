@@ -29,6 +29,7 @@ compartilhados, pelo `map`. Ordem: do menor para o maior.
 | Lote | Universo | Alterados | `php -l` 5.6/8.5 | Classes | Escrita | **Bateria** |
 |---|---|---|---|---|---|---|
 | `ac`+`aco`+`ouv` | 1.727 | 60 Rector + 8 à mão | 1.727/1.727 | 892, só artefatos conhecidos | 22.684 linhas, só artefatos conhecidos | **168/168** |
+| `lic` | 2.586 (9 frentes) | 65 Rector | 2.586/2.586 | 26/26 | 588 linhas, 0 div. | **163/163** |
 
 **Lote 1 — `ac`+`aco`+`ouv`** (Contratos e Ouvidoria, 168 telas, roteadas no `location`). Rector só com regras já vetadas (37 guardas,
 37 construtores, 32 `ereg`/`split` — os 143 `split` literais: 142 `"#"`, 1 `"/"` —, 23 `parse_str`+`extract`),
@@ -52,6 +53,24 @@ construtor: o 5.6 segue com aviso, o 8.5 lança `ArgumentCountError` no harness)
 
 Regressão: núcleo intocado; interseção com `con`/`prot`/`pro`/`cai` → as 244 telas desses prefixos no `map`:
 **244/244**.
+
+**Lote 2 — `lic`** (Licitações, 163 telas, roteadas no `location`; variantes `lic1_`…`lic4_`). Primeiro lote
+enumerado com as **nove frentes**: universo 2.586 (o lote 1, com oito, tinha 1.727). Rector em 65 arquivos, só
+regras já vetadas (33 `parse_str`+`extract`, 30 `ereg`/`split`, 26 guardas, 24 construtores, 3 `${$var}`), 0 na
+2ª passada; `split` todos literais (`"#"` 92, `","` 13, `"_"` 6, `":"` 1). **Nenhuma correção à mão** e **bateria
+perfeita na primeira rodada**, a primeira da área. LSP: 717 de 733 com `extends` carregam nos dois, 0 só no 5.6.
+
+Regressão: interseção dos 65 alterados com o universo do que o 8.5 já serve **vazia**, núcleo intocado → sem
+bateria, pela regra proporcional. Roteamento: `lic` no `location` e nas três cópias do critério
+(`gera_map_faseb.py`, `dimensiona.py`, `redirecionamentos.py`); o `map` regenerado perdeu
+`lic4_geracaoeditais001` (a tela compartilhada da Fase B do RH, agora coberta pelo `location`).
+
+**Passo 8b sobre Patrimonial** (256 telas roteadas): `ouv1_tipoproc001/002` abriam a aba
+`pro1_andpadrao001.php` no 5.6 (a 14ª lacuna, contêiner de Ouvidoria, aba de Protocolo). Nada a portar — a aba e
+o universo dela já estavam portados (os 11 "alvos" eram o falso positivo do detector por bytes, 0 pelo contador
+por *token*) —, aba idêntica nos dois, acrescentada a `faseb_map_abas.txt`. Os dois `lic1_*` que redirecionam
+para `db_erros.php?db_erro=…` caem na página genérica de mensagem de erro: não é lacuna. Levantamento refeito:
+nada indo ao 5.6.
 
 ### ⚠ 15ª LACUNA (27/10/2026, achada no lote 1): classes COM NAMESPACE, fora de todos os universos
 

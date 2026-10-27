@@ -52,7 +52,7 @@ class cl_cflicitatemplateata {
                  l37_db_documentotemplate = int4 = Temaplate Ata 
                  ";
    //funcao construtor da classe 
-   function cl_cflicitatemplateata() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cflicitatemplateata"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cflicitatemplateata {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l37_sequencial = ($this->l37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l37_sequencial"]:$this->l37_sequencial);
-       $this->l37_cflicita = ($this->l37_cflicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l37_cflicita"]:$this->l37_cflicita);
-       $this->l37_db_documentotemplate = ($this->l37_db_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["l37_db_documentotemplate"]:$this->l37_db_documentotemplate);
+       $this->l37_sequencial = ($this->l37_sequencial === 0 || $this->l37_sequencial === 0.0 || $this->l37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l37_sequencial"]:$this->l37_sequencial);
+       $this->l37_cflicita = ($this->l37_cflicita === 0 || $this->l37_cflicita === 0.0 || $this->l37_cflicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l37_cflicita"]:$this->l37_cflicita);
+       $this->l37_db_documentotemplate = ($this->l37_db_documentotemplate === 0 || $this->l37_db_documentotemplate === 0.0 || $this->l37_db_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["l37_db_documentotemplate"]:$this->l37_db_documentotemplate);
      }else{
-       $this->l37_sequencial = ($this->l37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l37_sequencial"]:$this->l37_sequencial);
+       $this->l37_sequencial = ($this->l37_sequencial === 0 || $this->l37_sequencial === 0.0 || $this->l37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l37_sequencial"]:$this->l37_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cflicitatemplateata {
          $this->l37_sequencial = $l37_sequencial; 
        }
      }
-     if(($this->l37_sequencial == null) || ($this->l37_sequencial == "") ){ 
+     if(($this->l37_sequencial == null) || ($this->l37_sequencial === 0 || $this->l37_sequencial === 0.0 || $this->l37_sequencial == "") ){ 
        $this->erro_sql = " Campo l37_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_cflicitatemplateata {
    function sql_query ( $l37_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_cflicitatemplateata {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_cflicitatemplateata {
    function sql_query_file ( $l37_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_cflicitatemplateata {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

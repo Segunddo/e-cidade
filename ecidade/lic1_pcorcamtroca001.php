@@ -115,7 +115,7 @@ if (isset($l20_codigo) && $l20_codigo) {
 if (isset($confirmar) && trim($confirmar) != "") {
 
 
-  $vitens       = split(":",$itens);
+  $vitens       = preg_split("#:#m",$itens);
   $vpcorcamjulg = array(array());
   $linha        = 0;
 
@@ -124,7 +124,7 @@ if (isset($confirmar) && trim($confirmar) != "") {
   for ($i = 0; $i < count($vitens); $i++) {
 
     $str   = $vitens[$i];
-    $vetor = split(",",$str);
+    $vetor = preg_split("#,#m",$str);
     $item = trim($vetor[0]);
     $fornecedor = trim($vetor[1]);
 

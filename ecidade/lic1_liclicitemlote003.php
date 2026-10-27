@@ -33,7 +33,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 include(modification("classes/db_liclicitemlote_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clliclicitemlote        = new cl_liclicitemlote;
@@ -44,7 +45,7 @@ $clliclicitemlote->rotulo->label();
 $erro_msg = "";
 
 if (isset($excluir)&&trim($excluir)!=""){
-     $vetor_lotes = split(",",$l04_descricao);
+     $vetor_lotes = preg_split("#,#m",$l04_descricao);
      $sqlerro     = false;
 
 
