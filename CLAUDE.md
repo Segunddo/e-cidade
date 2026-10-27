@@ -83,7 +83,7 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 548 por `map` (390 telas de menu + 158 abas da 14ª lacuna, `faseb_map_abas.txt`) |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 555 por `map` (390 telas de menu + 165 abas e destinos da 14ª lacuna, `faseb_map_abas.txt`) |
 | **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros, `.phar` e cálculo da folha (6 tipos idênticos) feitos. **13ª lacuna fechada: 316 DAOs portados** (ver *Os DAOs que os modelos instanciam*). Nível 3: **68/70 cadastros idênticos** (as 2 restantes quebram também no 5.6; estágio probatório por cenário semeado) — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |

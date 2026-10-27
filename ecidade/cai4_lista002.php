@@ -1066,7 +1066,7 @@ if (!$lSqlErro) {
         $oParms->sResultado = pg_result_error($rResult);
         $lSqlErro = true;
         $sErroMsg = _M('tributario.notificacoes.cai4_lista002.erro_executar_query_inclui', $oParms);
-        break;
+        exit; // PHP 8: era `break` fora de laco -- fatal de execucao no 5.6, que morria aqui
       }
 
     }

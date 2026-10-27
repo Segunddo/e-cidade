@@ -393,8 +393,9 @@ formulário num `<iframe>` (`cad1_face001` → `cad1_face004`) ou redirecionam
 (`db_redireciona(...)`). Esse destino **não está no menu**. Por isso o `map`, gerado do banco,
 não o conhece, e ele fica no 5.6. A tela "está no 8.5" e o formulário que o usuário preenche
 roda no 5.6. Nenhuma bateria acusa isso: as duas telas são idênticas, só que servidas pelo
-runtime errado. Em 26/10/2026 eram **158 abas** atrás de 90 telas de menu das três áreas
-concluídas.
+runtime errado. Em 26/10/2026 eram **158 abas** atrás de 90 telas de menu e **3 destinos de
+redirecionamento** atrás de 5 telas de menu, nas três áreas concluídas. Os dois são a mesma lacuna e
+se corrigem do mesmo jeito.
 
 O problema só aparece no roteamento por **lista** (`map`). No roteamento por **prefixo**
 (`location`) a aba vai junto com o contêiner. Mas rode a verificação sempre: o destino pode ser de
@@ -413,8 +414,18 @@ Para cada linha `NO_5.6`:
    no `enumera.py` e siga os passos 4 a 7, com bateria nos destinos. Depois acrescente o nome,
    em minúscula, a `docker/proxy/faseb_map_abas.txt` e regenere o `map` com o mesmo comando do
    cabeçalho de `faseb_map.conf`. O gerador lê a lista.
-2. **redireciona** → mesma coisa. Se o destino abrir a própria cadeia (`hab1_avaliacao002` →
-   `…005`), rode de novo depois de rotear: o script segue o segundo salto pelas telas já no 8.5.
+2. **redireciona** → mesma receita do iframe, com dois cuidados:
+   - **o destino costuma ser um contêiner de abas.** `eso1_cadastroavaliacoes002` redireciona
+     para `hab1_avaliacao002`, que abre as abas `hab1_avaliacao005`, `…grupopergunta001` etc. O
+     `enumera.py` não segue essas abas a partir do destino. Ponha no `TELAS=` a **família
+     inteira** (`ls | grep -i '^hab1_avaliacao'`) e os arquivos que as abas citam;
+   - **o redirecionamento costuma ser condicional.** `cai4_lista001` só redireciona quando a
+     prefeitura não usa o sistema de água; `pro1_obras00x` só redireciona sem o parâmetro `abas`.
+     A bateria compara os dois ramos: a tela de menu (que redireciona por GET sem parâmetros) e
+     o destino.
+
+   Ponha na lista só o destino direto. Depois de rotear, **rode o levantamento de novo**: ele
+   abre as telas já roteadas e acusa o segundo salto (as abas do contêiner), se ficou algum.
 3. **`corpo.php`** é o "voltar ao início" depois de erro ou de configuração ausente
    (`numpref` não configurado, rotina desativada). Não é lacuna.
 4. **pasta** (`dbforms/…`) e **inexistente** não são lacuna. O proxy não roteia por pasta, e o

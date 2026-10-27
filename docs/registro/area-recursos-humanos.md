@@ -464,3 +464,22 @@ para a aparição.
 
 `func_selinstit.php` e `verifica.php` são abertos também por telas do 5.6, que agora os recebem do 8.5. Isso é
 seguro porque o código portado roda nos dois runtimes. A verificação entrou na skill como **passo 8b**.
+
+**Os REDIRECIONAMENTOS também foram migrados (26/10/2026, usuário).** Destinos diretos: `hab1_avaliacao002`
+(de `eso1_cadastroavaliacoes002`), `cai4_lista01` (de `cai4_lista001`, quando a prefeitura não usa o sistema
+de água) e `pro1_obras005` (de `pro1_obras001/002/003` sem o parâmetro `abas`).
+
+| | |
+|---|---|
+| Lote 1 (`TELAS=`) | os 3 destinos, a **família `hab1_avaliacao*` inteira** (9) e o que as abas dela citam (`hab1_carga001`, `con4_avaliacaoquestionario`): universo 394, **3 alterados** — `pro1_obras005` (`parse_str`), `db_avaliacaotipo_classe` e `db_avaliacaotiporesposta_classe` (guardas, construtor PHP 4, `ereg`) |
+| Segundo salto (levantamento refeito) | 4 abas abertas pelos destinos: `hab1_avaliacao005`, `cai4_lista003`, `pro1_areascomplementares001`, `pro1_obrasconstr001`. Universo 388, **1 alterado** (`func_procedencia`, `parse_str`) |
+| À mão | `cai4_lista002.php:1069` — `break` fora de laço (fatal de **compilação** no 8.5), no ramo de erro do `INSERT` em `listadeb`. Alcançável, então **`exit;`**, que reproduz o 5.6 (morria ali). Achado só pelo `php -l` no **universo**: o arquivo nenhum alvo continha |
+| `php -l` / remanescentes | universos inteiros nos dois runtimes, 0 erros; contador por *token* 0 |
+| Classes / escrita | 2/2 · 34 linhas idênticas |
+| **Baterias** | lote 18/18 (inclui as 5 telas de menu que redirecionam), segundo salto 7/7, `cai4_lista002`/`003` 2/2 |
+| Regressão | `pro` roteadas 45/45 (`pro1_obras005`), `cai` roteadas 153/153 (`func_procedencia`) |
+| Roteamento | +7 em `faseb_map_abas.txt` → `map` com **555** entradas |
+| **Levantamento final** | 2.848 telas no 8.5 examinadas: **0 iframes e 0 redirecionamentos ao 5.6** (sobram só os 4 `corpo.php`, que não são lacuna) |
+
+Lição para a skill: o destino de um redirecionamento é quase sempre um **contêiner de abas** que o `enumera.py` não
+segue. Portar a família inteira e rodar o levantamento até sair vazio — aqui foram três rodadas.

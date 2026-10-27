@@ -166,3 +166,13 @@ pro2_obrasreltec001.php
 pro2_obrasreltipores001.php
 prot1_comparanomes.php
 verifica.php
+#
+# 26/10/2026 -- destinos de REDIRECIONAMENTO (db_redireciona / location.href) das mesmas areas.
+cai4_lista01.php
+hab1_avaliacao002.php
+pro1_obras005.php
+# segundo salto: abas que os destinos acima abrem
+cai4_lista003.php
+hab1_avaliacao005.php
+pro1_areascomplementares001.php
+pro1_obrasconstr001.php
