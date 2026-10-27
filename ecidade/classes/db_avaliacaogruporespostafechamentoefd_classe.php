@@ -49,13 +49,13 @@ class cl_avaliacaogruporespostafechamentoefd
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->eso32_sequencial = ($this->eso32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_sequencial"]:$this->eso32_sequencial);
-       $this->eso32_avaliacaogruporesposta = ($this->eso32_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_avaliacaogruporesposta"]:$this->eso32_avaliacaogruporesposta);
-       $this->eso32_cgmcontribuinte = ($this->eso32_cgmcontribuinte == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_cgmcontribuinte"]:$this->eso32_cgmcontribuinte);
-       $this->eso32_ano = ($this->eso32_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_ano"]:$this->eso32_ano);
-       $this->eso32_mes = ($this->eso32_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_mes"]:$this->eso32_mes);
+       $this->eso32_sequencial = ($this->eso32_sequencial === 0 || $this->eso32_sequencial === 0.0 || $this->eso32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_sequencial"]:$this->eso32_sequencial);
+       $this->eso32_avaliacaogruporesposta = ($this->eso32_avaliacaogruporesposta === 0 || $this->eso32_avaliacaogruporesposta === 0.0 || $this->eso32_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_avaliacaogruporesposta"]:$this->eso32_avaliacaogruporesposta);
+       $this->eso32_cgmcontribuinte = ($this->eso32_cgmcontribuinte === 0 || $this->eso32_cgmcontribuinte === 0.0 || $this->eso32_cgmcontribuinte == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_cgmcontribuinte"]:$this->eso32_cgmcontribuinte);
+       $this->eso32_ano = ($this->eso32_ano === 0 || $this->eso32_ano === 0.0 || $this->eso32_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_ano"]:$this->eso32_ano);
+       $this->eso32_mes = ($this->eso32_mes === 0 || $this->eso32_mes === 0.0 || $this->eso32_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_mes"]:$this->eso32_mes);
      }else{
-       $this->eso32_sequencial = ($this->eso32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_sequencial"]:$this->eso32_sequencial);
+       $this->eso32_sequencial = ($this->eso32_sequencial === 0 || $this->eso32_sequencial === 0.0 || $this->eso32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso32_sequencial"]:$this->eso32_sequencial);
      }
    }
 
@@ -122,7 +122,7 @@ class cl_avaliacaogruporespostafechamentoefd
          $this->eso32_sequencial = $eso32_sequencial; 
        }
      }
-     if(($this->eso32_sequencial == null) || ($this->eso32_sequencial == "") ){ 
+     if(($this->eso32_sequencial == null) || ($this->eso32_sequencial === 0 || $this->eso32_sequencial === 0.0 || $this->eso32_sequencial == "") ){ 
        $this->erro_sql = " Campo eso32_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

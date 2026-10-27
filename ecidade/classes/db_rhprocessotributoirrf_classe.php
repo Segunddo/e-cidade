@@ -73,25 +73,25 @@ class cl_rhprocessotributoirrf
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh299_sequencial = ($this->rh299_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_sequencial"]:$this->rh299_sequencial);
-       $this->rh299_sequencialprocessoservidor = ($this->rh299_sequencialprocessoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_sequencialprocessoservidor"]:$this->rh299_sequencialprocessoservidor);
-       $this->rh299_tpcr = ($this->rh299_tpcr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_tpcr"]:$this->rh299_tpcr);
-       $this->rh299_vcr = ($this->rh299_vcr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vcr"]:$this->rh299_vcr);
+       $this->rh299_sequencial = ($this->rh299_sequencial === 0 || $this->rh299_sequencial === 0.0 || $this->rh299_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_sequencial"]:$this->rh299_sequencial);
+       $this->rh299_sequencialprocessoservidor = ($this->rh299_sequencialprocessoservidor === 0 || $this->rh299_sequencialprocessoservidor === 0.0 || $this->rh299_sequencialprocessoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_sequencialprocessoservidor"]:$this->rh299_sequencialprocessoservidor);
+       $this->rh299_tpcr = ($this->rh299_tpcr === 0 || $this->rh299_tpcr === 0.0 || $this->rh299_tpcr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_tpcr"]:$this->rh299_tpcr);
+       $this->rh299_vcr = ($this->rh299_vcr === 0 || $this->rh299_vcr === 0.0 || $this->rh299_vcr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vcr"]:$this->rh299_vcr);
        $this->rh299_pagamento = ($this->rh299_pagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_pagamento"]:$this->rh299_pagamento);
-       $this->rh299_vrrendtrib = ($this->rh299_vrrendtrib == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrrendtrib"]:$this->rh299_vrrendtrib);
-       $this->rh299_vrrendtrib13 = ($this->rh299_vrrendtrib13 == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrrendtrib13"]:$this->rh299_vrrendtrib13);
-       $this->rh299_vrrendmolegrave = ($this->rh299_vrrendmolegrave == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrrendmolegrave"]:$this->rh299_vrrendmolegrave);
-       $this->rh299_vrrendisen65 = ($this->rh299_vrrendisen65 == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrrendisen65"]:$this->rh299_vrrendisen65);
-       $this->rh299_vrjurosmora = ($this->rh299_vrjurosmora == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrjurosmora"]:$this->rh299_vrjurosmora);
-       $this->rh299_vrrendisenntrib = ($this->rh299_vrrendisenntrib == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrrendisenntrib"]:$this->rh299_vrrendisenntrib);
+       $this->rh299_vrrendtrib = ($this->rh299_vrrendtrib === 0 || $this->rh299_vrrendtrib === 0.0 || $this->rh299_vrrendtrib == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrrendtrib"]:$this->rh299_vrrendtrib);
+       $this->rh299_vrrendtrib13 = ($this->rh299_vrrendtrib13 === 0 || $this->rh299_vrrendtrib13 === 0.0 || $this->rh299_vrrendtrib13 == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrrendtrib13"]:$this->rh299_vrrendtrib13);
+       $this->rh299_vrrendmolegrave = ($this->rh299_vrrendmolegrave === 0 || $this->rh299_vrrendmolegrave === 0.0 || $this->rh299_vrrendmolegrave == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrrendmolegrave"]:$this->rh299_vrrendmolegrave);
+       $this->rh299_vrrendisen65 = ($this->rh299_vrrendisen65 === 0 || $this->rh299_vrrendisen65 === 0.0 || $this->rh299_vrrendisen65 == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrrendisen65"]:$this->rh299_vrrendisen65);
+       $this->rh299_vrjurosmora = ($this->rh299_vrjurosmora === 0 || $this->rh299_vrjurosmora === 0.0 || $this->rh299_vrjurosmora == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrjurosmora"]:$this->rh299_vrjurosmora);
+       $this->rh299_vrrendisenntrib = ($this->rh299_vrrendisenntrib === 0 || $this->rh299_vrrendisenntrib === 0.0 || $this->rh299_vrrendisenntrib == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrrendisenntrib"]:$this->rh299_vrrendisenntrib);
        $this->rh299_descisenntrib = ($this->rh299_descisenntrib == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_descisenntrib"]:$this->rh299_descisenntrib);
-       $this->rh299_vrprevoficial = ($this->rh299_vrprevoficial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrprevoficial"]:$this->rh299_vrprevoficial);
+       $this->rh299_vrprevoficial = ($this->rh299_vrprevoficial === 0 || $this->rh299_vrprevoficial === 0.0 || $this->rh299_vrprevoficial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vrprevoficial"]:$this->rh299_vrprevoficial);
        $this->rh299_descrra = ($this->rh299_descrra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_descrra"]:$this->rh299_descrra);
-       $this->rh299_qtdmesesrra = ($this->rh299_qtdmesesrra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_qtdmesesrra"]:$this->rh299_qtdmesesrra);
-       $this->rh299_vlrdespcustas = ($this->rh299_vlrdespcustas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vlrdespcustas"]:$this->rh299_vlrdespcustas);
-       $this->rh299_vlrdespadvogados = ($this->rh299_vlrdespadvogados == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vlrdespadvogados"]:$this->rh299_vlrdespadvogados);
+       $this->rh299_qtdmesesrra = ($this->rh299_qtdmesesrra === 0 || $this->rh299_qtdmesesrra === 0.0 || $this->rh299_qtdmesesrra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_qtdmesesrra"]:$this->rh299_qtdmesesrra);
+       $this->rh299_vlrdespcustas = ($this->rh299_vlrdespcustas === 0 || $this->rh299_vlrdespcustas === 0.0 || $this->rh299_vlrdespcustas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vlrdespcustas"]:$this->rh299_vlrdespcustas);
+       $this->rh299_vlrdespadvogados = ($this->rh299_vlrdespadvogados === 0 || $this->rh299_vlrdespadvogados === 0.0 || $this->rh299_vlrdespadvogados == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_vlrdespadvogados"]:$this->rh299_vlrdespadvogados);
      }else{
-       $this->rh299_sequencial = ($this->rh299_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_sequencial"]:$this->rh299_sequencial);
+       $this->rh299_sequencial = ($this->rh299_sequencial === 0 || $this->rh299_sequencial === 0.0 || $this->rh299_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh299_sequencial"]:$this->rh299_sequencial);
      }
    }
 
@@ -173,7 +173,7 @@ class cl_rhprocessotributoirrf
          $this->rh299_sequencial = $rh299_sequencial; 
        }
      }
-     if(($this->rh299_sequencial == null) || ($this->rh299_sequencial == "") ){ 
+     if(($this->rh299_sequencial == null) || ($this->rh299_sequencial === 0 || $this->rh299_sequencial === 0.0 || $this->rh299_sequencial == "") ){ 
        $this->erro_sql = " Campo rh299_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

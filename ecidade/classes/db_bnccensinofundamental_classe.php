@@ -166,7 +166,7 @@ class cl_bnccensinofundamental
                 $this->ed148_sequencial = $ed148_sequencial;
             }
         }
-        if (($this->ed148_sequencial == null) || ($this->ed148_sequencial == "")) {
+        if (($this->ed148_sequencial == null) || ($this->ed148_sequencial === 0 || $this->ed148_sequencial === 0.0 || $this->ed148_sequencial == "")) {
             $this->erro_sql = " Campo ed148_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -450,7 +450,7 @@ class cl_bnccensinofundamental
         $this->excluir(null, $whereExcluir);
     }
 
-    public function alterarObjetoConhecimento($ed148_sequencial = null, $where)
+    public function alterarObjetoConhecimento($ed148_sequencial = null, $where = null)
     {
        
         $sql = " update bnccensinofundamental set ed148_objeto_conhecimento = '{$this->ed148_objeto_conhecimento}'";

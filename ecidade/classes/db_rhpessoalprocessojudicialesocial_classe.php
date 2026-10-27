@@ -64,14 +64,14 @@ class cl_rhpessoalprocessojudicialesocial
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh270_sequencial = ($this->rh270_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_sequencial"]:$this->rh270_sequencial);
+       $this->rh270_sequencial = ($this->rh270_sequencial === 0 || $this->rh270_sequencial === 0.0 || $this->rh270_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_sequencial"]:$this->rh270_sequencial);
        $this->rh270_nrproctrab = ($this->rh270_nrproctrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_nrproctrab"]:$this->rh270_nrproctrab);
        $this->rh270_obsproctrab = ($this->rh270_obsproctrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_obsproctrab"]:$this->rh270_obsproctrab);
        $this->rh270_dtsent = ($this->rh270_dtsent == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_dtsent"]:$this->rh270_dtsent);
        $this->rh270_ufvara = ($this->rh270_ufvara == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_ufvara"]:$this->rh270_ufvara);
-       $this->rh270_codmunic = ($this->rh270_codmunic == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_codmunic"]:$this->rh270_codmunic);
-       $this->rh270_idvara = ($this->rh270_idvara == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_idvara"]:$this->rh270_idvara);
-       $this->rh270_origem = ($this->rh270_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_origem"]:$this->rh270_origem);
+       $this->rh270_codmunic = ($this->rh270_codmunic === 0 || $this->rh270_codmunic === 0.0 || $this->rh270_codmunic == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_codmunic"]:$this->rh270_codmunic);
+       $this->rh270_idvara = ($this->rh270_idvara === 0 || $this->rh270_idvara === 0.0 || $this->rh270_idvara == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_idvara"]:$this->rh270_idvara);
+       $this->rh270_origem = ($this->rh270_origem === 0 || $this->rh270_origem === 0.0 || $this->rh270_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_origem"]:$this->rh270_origem);
        if($this->rh270_dtccp == ""){
          $this->rh270_dtccp_dia = ($this->rh270_dtccp_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_dtccp_dia"]:$this->rh270_dtccp_dia);
          $this->rh270_dtccp_mes = ($this->rh270_dtccp_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_dtccp_mes"]:$this->rh270_dtccp_mes);
@@ -80,10 +80,10 @@ class cl_rhpessoalprocessojudicialesocial
             $this->rh270_dtccp = $this->rh270_dtccp_ano."-".$this->rh270_dtccp_mes."-".$this->rh270_dtccp_dia;
          }
        }
-       $this->rh270_tpccp = ($this->rh270_tpccp == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_tpccp"]:$this->rh270_tpccp);
+       $this->rh270_tpccp = ($this->rh270_tpccp === 0 || $this->rh270_tpccp === 0.0 || $this->rh270_tpccp == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_tpccp"]:$this->rh270_tpccp);
        $this->rh270_cnpjccp = ($this->rh270_cnpjccp == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_cnpjccp"]:$this->rh270_cnpjccp);
      }else{
-       $this->rh270_sequencial = ($this->rh270_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_sequencial"]:$this->rh270_sequencial);
+       $this->rh270_sequencial = ($this->rh270_sequencial === 0 || $this->rh270_sequencial === 0.0 || $this->rh270_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh270_sequencial"]:$this->rh270_sequencial);
      }
    }
 
@@ -132,7 +132,7 @@ class cl_rhpessoalprocessojudicialesocial
          $this->rh270_sequencial = $rh270_sequencial; 
        }
      }
-     if(($this->rh270_sequencial == null) || ($this->rh270_sequencial == "") ){ 
+     if(($this->rh270_sequencial == null) || ($this->rh270_sequencial === 0 || $this->rh270_sequencial === 0.0 || $this->rh270_sequencial == "") ){ 
        $this->erro_sql = " Campo rh270_sequencial nðo declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
