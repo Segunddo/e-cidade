@@ -50,7 +50,7 @@ class AlteracaoDadosServidorFormatter extends ServidorFormatter
      * @param array $dados
      * @return array
      */
-    public function formatar($servidores)
+    public function formatar($servidores, $alteracao = false) // PHP 8 (LSP): parametro da mae, opcional
     {
         $retorno = [];
 

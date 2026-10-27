@@ -284,7 +284,7 @@ abstract class FluxoCaixa2020 extends RelatoriosLegaisBase implements FluxoCaixa
      *
      * @throws Exception
      */
-    public function getDados()
+    public function getDados($trazerConfiguracaoPadrao = true)
     {
         $this->aLinhasConsistencia = $this->getLinhasRelatorio();
         $this->organizaLinhasPorTipoDeCalculo();

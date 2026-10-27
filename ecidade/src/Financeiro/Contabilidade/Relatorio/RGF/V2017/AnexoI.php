@@ -217,7 +217,7 @@ class AnexoI extends ProcessamentoRelatorioLegal {
   /**
    * @return array
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     if ( empty($this->aLinhasConsistencia) ) {
 
