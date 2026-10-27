@@ -45,11 +45,11 @@ class cl_areaprocedimentocomposicaoresultado
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed160_codigo = ($this->ed160_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed160_codigo"]:$this->ed160_codigo);
-       $this->ed160_areaprocedimentoresultado = ($this->ed160_areaprocedimentoresultado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed160_areaprocedimentoresultado"]:$this->ed160_areaprocedimentoresultado);
-       $this->ed160_areaprocedimentoavaliacao = ($this->ed160_areaprocedimentoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed160_areaprocedimentoavaliacao"]:$this->ed160_areaprocedimentoavaliacao);
+       $this->ed160_codigo = ($this->ed160_codigo === 0 || $this->ed160_codigo === 0.0 || $this->ed160_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed160_codigo"]:$this->ed160_codigo);
+       $this->ed160_areaprocedimentoresultado = ($this->ed160_areaprocedimentoresultado === 0 || $this->ed160_areaprocedimentoresultado === 0.0 || $this->ed160_areaprocedimentoresultado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed160_areaprocedimentoresultado"]:$this->ed160_areaprocedimentoresultado);
+       $this->ed160_areaprocedimentoavaliacao = ($this->ed160_areaprocedimentoavaliacao === 0 || $this->ed160_areaprocedimentoavaliacao === 0.0 || $this->ed160_areaprocedimentoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed160_areaprocedimentoavaliacao"]:$this->ed160_areaprocedimentoavaliacao);
      }else{
-       $this->ed160_codigo = ($this->ed160_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed160_codigo"]:$this->ed160_codigo);
+       $this->ed160_codigo = ($this->ed160_codigo === 0 || $this->ed160_codigo === 0.0 || $this->ed160_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed160_codigo"]:$this->ed160_codigo);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_areaprocedimentocomposicaoresultado
          $this->ed160_codigo = $ed160_codigo; 
        }
      }
-     if(($this->ed160_codigo == null) || ($this->ed160_codigo == "") ){ 
+     if(($this->ed160_codigo == null) || ($this->ed160_codigo === 0 || $this->ed160_codigo === 0.0 || $this->ed160_codigo == "") ){ 
        $this->erro_sql = " Campo ed160_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

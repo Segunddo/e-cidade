@@ -68,7 +68,7 @@ class cl_orcprograma {
                  o54_estrategiaimp = text = Estratégia de Implementação do Programa
                  ";
    //funcao construtor da classe
-   function cl_orcprograma() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcprograma");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,8 +85,8 @@ class cl_orcprograma {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o54_anousu = ($this->o54_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_anousu"]:$this->o54_anousu);
-       $this->o54_programa = ($this->o54_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_programa"]:$this->o54_programa);
+       $this->o54_anousu = ($this->o54_anousu === 0 || $this->o54_anousu === 0.0 || $this->o54_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_anousu"]:$this->o54_anousu);
+       $this->o54_programa = ($this->o54_programa === 0 || $this->o54_programa === 0.0 || $this->o54_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_programa"]:$this->o54_programa);
        $this->o54_descr = ($this->o54_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_descr"]:$this->o54_descr);
        $this->o54_codtri = ($this->o54_codtri == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_codtri"]:$this->o54_codtri);
        $this->o54_finali = ($this->o54_finali == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_finali"]:$this->o54_finali);
@@ -94,11 +94,11 @@ class cl_orcprograma {
        $this->o54_publicoalvo = ($this->o54_publicoalvo == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_publicoalvo"]:$this->o54_publicoalvo);
        $this->o54_justificativa = ($this->o54_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_justificativa"]:$this->o54_justificativa);
        $this->o54_objsetorassociado = ($this->o54_objsetorassociado == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_objsetorassociado"]:$this->o54_objsetorassociado);
-       $this->o54_tipoprograma = ($this->o54_tipoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_tipoprograma"]:$this->o54_tipoprograma);
+       $this->o54_tipoprograma = ($this->o54_tipoprograma === 0 || $this->o54_tipoprograma === 0.0 || $this->o54_tipoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_tipoprograma"]:$this->o54_tipoprograma);
        $this->o54_estrategiaimp = ($this->o54_estrategiaimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_estrategiaimp"]:$this->o54_estrategiaimp);
      }else{
-       $this->o54_anousu = ($this->o54_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_anousu"]:$this->o54_anousu);
-       $this->o54_programa = ($this->o54_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_programa"]:$this->o54_programa);
+       $this->o54_anousu = ($this->o54_anousu === 0 || $this->o54_anousu === 0.0 || $this->o54_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_anousu"]:$this->o54_anousu);
+       $this->o54_programa = ($this->o54_programa === 0 || $this->o54_programa === 0.0 || $this->o54_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o54_programa"]:$this->o54_programa);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_orcprograma {
      }
        $this->o54_anousu = $o54_anousu;
        $this->o54_programa = $o54_programa;
-     if(($this->o54_anousu == null) || ($this->o54_anousu == "") ){
+     if(($this->o54_anousu == null) || ($this->o54_anousu === 0 || $this->o54_anousu === 0.0 || $this->o54_anousu == "") ){
        $this->erro_sql = " Campo o54_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -141,7 +141,7 @@ class cl_orcprograma {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o54_programa == null) || ($this->o54_programa == "") ){
+     if(($this->o54_programa == null) || ($this->o54_programa === 0 || $this->o54_programa === 0.0 || $this->o54_programa == "") ){
        $this->erro_sql = " Campo o54_programa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -115,7 +115,7 @@ class cl_contribuicaosindicalperiodosidicatos
                 $this->eso31_sequencial = $eso31_sequencial;
             }
         }
-        if (($this->eso31_sequencial == null) || ($this->eso31_sequencial == "")) {
+        if (($this->eso31_sequencial == null) || ($this->eso31_sequencial === 0 || $this->eso31_sequencial === 0.0 || $this->eso31_sequencial == "")) {
             $this->erro_sql = " Campo eso31_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -199,13 +199,13 @@ class cl_contribuicaosindicalperiodosidicatos
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->eso31_sequencial = ($this->eso31_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_sequencial"] : $this->eso31_sequencial);
-            $this->eso31_rhsindicato = ($this->eso31_rhsindicato == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_rhsindicato"] : $this->eso31_rhsindicato);
-            $this->eso31_tipo = ($this->eso31_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_tipo"] : $this->eso31_tipo);
-            $this->eso31_valor = ($this->eso31_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_valor"] : $this->eso31_valor);
-            $this->eso31_contribuicaosindicalperiodo = ($this->eso31_contribuicaosindicalperiodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_contribuicaosindicalperiodo"] : $this->eso31_contribuicaosindicalperiodo);
+            $this->eso31_sequencial = ($this->eso31_sequencial === 0 || $this->eso31_sequencial === 0.0 || $this->eso31_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_sequencial"] : $this->eso31_sequencial);
+            $this->eso31_rhsindicato = ($this->eso31_rhsindicato === 0 || $this->eso31_rhsindicato === 0.0 || $this->eso31_rhsindicato == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_rhsindicato"] : $this->eso31_rhsindicato);
+            $this->eso31_tipo = ($this->eso31_tipo === 0 || $this->eso31_tipo === 0.0 || $this->eso31_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_tipo"] : $this->eso31_tipo);
+            $this->eso31_valor = ($this->eso31_valor === 0 || $this->eso31_valor === 0.0 || $this->eso31_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_valor"] : $this->eso31_valor);
+            $this->eso31_contribuicaosindicalperiodo = ($this->eso31_contribuicaosindicalperiodo === 0 || $this->eso31_contribuicaosindicalperiodo === 0.0 || $this->eso31_contribuicaosindicalperiodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_contribuicaosindicalperiodo"] : $this->eso31_contribuicaosindicalperiodo);
         } else {
-            $this->eso31_sequencial = ($this->eso31_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_sequencial"] : $this->eso31_sequencial);
+            $this->eso31_sequencial = ($this->eso31_sequencial === 0 || $this->eso31_sequencial === 0.0 || $this->eso31_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso31_sequencial"] : $this->eso31_sequencial);
         }
     }
 

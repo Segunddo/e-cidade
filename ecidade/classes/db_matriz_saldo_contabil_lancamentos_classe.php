@@ -59,18 +59,18 @@ class cl_matriz_saldo_contabil_lancamentos
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c133_ending_balance = ($this->c133_ending_balance == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_ending_balance"]:$this->c133_ending_balance);
-       $this->c133_period_change_credit = ($this->c133_period_change_credit == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_period_change_credit"]:$this->c133_period_change_credit);
-       $this->c133_period_change_debit = ($this->c133_period_change_debit == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_period_change_debit"]:$this->c133_period_change_debit);
-       $this->c133_beginning_balance = ($this->c133_beginning_balance == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_beginning_balance"]:$this->c133_beginning_balance);
+       $this->c133_ending_balance = ($this->c133_ending_balance === 0 || $this->c133_ending_balance === 0.0 || $this->c133_ending_balance == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_ending_balance"]:$this->c133_ending_balance);
+       $this->c133_period_change_credit = ($this->c133_period_change_credit === 0 || $this->c133_period_change_credit === 0.0 || $this->c133_period_change_credit == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_period_change_credit"]:$this->c133_period_change_credit);
+       $this->c133_period_change_debit = ($this->c133_period_change_debit === 0 || $this->c133_period_change_debit === 0.0 || $this->c133_period_change_debit == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_period_change_debit"]:$this->c133_period_change_debit);
+       $this->c133_beginning_balance = ($this->c133_beginning_balance === 0 || $this->c133_beginning_balance === 0.0 || $this->c133_beginning_balance == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_beginning_balance"]:$this->c133_beginning_balance);
        $this->c133_atributos = ($this->c133_atributos == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_atributos"]:$this->c133_atributos);
        $this->c133_estrutural = ($this->c133_estrutural == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_estrutural"]:$this->c133_estrutural);
-       $this->c133_matriz_saldo_contabil = ($this->c133_matriz_saldo_contabil == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_matriz_saldo_contabil"]:$this->c133_matriz_saldo_contabil);
-       $this->c133_sequencial = ($this->c133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_sequencial"]:$this->c133_sequencial);
+       $this->c133_matriz_saldo_contabil = ($this->c133_matriz_saldo_contabil === 0 || $this->c133_matriz_saldo_contabil === 0.0 || $this->c133_matriz_saldo_contabil == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_matriz_saldo_contabil"]:$this->c133_matriz_saldo_contabil);
+       $this->c133_sequencial = ($this->c133_sequencial === 0 || $this->c133_sequencial === 0.0 || $this->c133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_sequencial"]:$this->c133_sequencial);
        $this->c133_natureza = ($this->c133_natureza == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_natureza"]:$this->c133_natureza);
        $this->c133_natureza_final = ($this->c133_natureza_final == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_natureza_final"]:$this->c133_natureza_final);
      }else{
-       $this->c133_sequencial = ($this->c133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_sequencial"]:$this->c133_sequencial);
+       $this->c133_sequencial = ($this->c133_sequencial === 0 || $this->c133_sequencial === 0.0 || $this->c133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c133_sequencial"]:$this->c133_sequencial);
      }
    }
 
@@ -181,7 +181,7 @@ class cl_matriz_saldo_contabil_lancamentos
          $this->c133_sequencial = $c133_sequencial; 
        }
      }
-     if(($this->c133_sequencial == null) || ($this->c133_sequencial == "") ){ 
+     if(($this->c133_sequencial == null) || ($this->c133_sequencial === 0 || $this->c133_sequencial === 0.0 || $this->c133_sequencial == "") ){ 
        $this->erro_sql = " Campo c133_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
