@@ -4,7 +4,7 @@ Oct 25, 2026 · @Diego
 
 **Para quem quer entender, ou repetir, como se prova que uma tela migrada para o PHP 8.5 se comporta igual à original.** A primeira parte descreve os testes automáticos que produzem os números do trabalho. A segunda ensina a fazer a mesma verificação à mão, pelo navegador e pelo banco, sem rodar script nenhum. No fim há um roteiro curto de demonstração.
 
-O registro completo, com cada número e cada defeito encontrado, fica no `CLAUDE.md`. O passo a passo do porte de um módulo está em `docs/migrar-um-modulo.md`.
+O registro completo, com cada número e cada defeito encontrado, fica em `docs/registro/` (índice no fim do `CLAUDE.md`). O passo a passo do porte de um módulo está em `docs/migrar-um-modulo.md`.
 
 ## 1. A ideia central: o sistema antigo é o gabarito
 

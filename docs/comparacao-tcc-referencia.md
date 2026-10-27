@@ -351,4 +351,4 @@ docker rm -f ecidade_tcc_gerson && git worktree remove ecidade/tmp/tcc_gerson
 ```
 
 Os detalhes de cada medição, as decisões tomadas no caminho e as armadilhas encontradas estão
-na seção *⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA* do `CLAUDE.md`.
+na seção *⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA* de `docs/registro/trabalho-relacionado.md`.

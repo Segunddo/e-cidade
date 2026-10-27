@@ -5,8 +5,9 @@ description: Porta um módulo legado do e-cidade de PHP 5.6 para 8.5 mantendo co
 
 # Migrar um módulo para PHP 8.5
 
-O contexto, os números e o **porquê** de cada decisão estão no `CLAUDE.md` da raiz. Este
-arquivo é só o **procedimento**. Quando os dois divergirem, o `CLAUDE.md` manda.
+O contexto, os números e o **porquê** de cada decisão estão no `CLAUDE.md` da raiz e em `docs/registro/`
+(índice no fim do `CLAUDE.md`). Este arquivo é só o **procedimento**. Quando os dois divergirem,
+o registro manda.
 
 **Critério de sucesso do módulo:** todas as telas do prefixo respondem byte-a-byte idêntico
 entre `:8080` (5.6) e `:8085` (8.5), com sessão autenticada — e cada divergência restante está
@@ -107,7 +108,7 @@ para `explode` devolve a string inteira sem separar — **dado errado, sem erro 
 split(" +", "um   dois")   -> ["um","dois"]      explode(" +", ...) -> ["um   dois"]
 ```
 
-Se o inventário trouxer categoria que não está no `CLAUDE.md`, **pare e investigue** antes de
+Se o inventário trouxer categoria que não está no catálogo (`docs/registro/`), **pare e investigue** antes de
 transformar. Toda categoria nova até hoje veio daí.
 
 ## Passo 4 — Aplicar (Rector, desde o `iss`)
@@ -394,8 +395,8 @@ o resultado da bateria, e **cada categoria ou lacuna nova** encontrada. Antes:
 git add -A -- ':!docker/database/ecidade_base.sql' ':!docker/database/ecidade_base.sql.gz'
 ```
 
-Atualizar o `CLAUDE.md`: seção do módulo, cabeçalho de estado (módulos portados, rota, próximo
-módulo) e qualquer categoria nova.
+Atualizar o registro: seção do módulo no `docs/registro/area-<área>.md`, cabeçalho de estado do
+`CLAUDE.md` (módulos portados, rota, próximo módulo) e qualquer categoria nova.
 
 ## Limites que precisam ser declarados junto com o número
 
@@ -409,7 +410,7 @@ módulo) e qualquer categoria nova.
 
 ## Quando parar e perguntar
 
-- Categoria de incompatibilidade que não está no `CLAUDE.md`.
+- Categoria de incompatibilidade que não está no catálogo (`docs/registro/`).
 - Correção que mudaria **comportamento**, não só compatibilidade (ex.: consertar um bug
   pré-existente que o 5.6 também tem).
 - `porta.py` abortou com caso ambíguo.

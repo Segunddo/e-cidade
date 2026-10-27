@@ -4,7 +4,7 @@ Oct 16, 2026 · @Diego
 
 **Para quem vai migrar o Laravel, de 5.4 para 12.** O código legado (as telas `*.php` da raiz, `classes/`, `libs/`…) já roda em PHP 8.5 nas áreas Tributário e Educação, e essa parte **não é sua**. A sua é a camada HTTP do Laravel: `app/`, `routes/`, o login (Passport) e a API REST antiga (`api/V1`, Silex).
 
-Tudo o que está aqui foi **medido** neste repositório, não suposto. O que ainda não se sabe está marcado como **não medido**. O registro completo, com o porquê de cada decisão, fica no `CLAUDE.md`: procure por *MEDIÇÃO (14/10/2026)*, *LARAVEL SÓ PARA O TRIBUTÁRIO* e *TESTE: o token*.
+Tudo o que está aqui foi **medido** neste repositório, não suposto. O que ainda não se sabe está marcado como **não medido**. O registro completo, com o porquê de cada decisão, fica em `docs/registro/laravel.md`: procure por *MEDIÇÃO (14/10/2026)*, *LARAVEL SÓ PARA O TRIBUTÁRIO* e *TESTE: o token*.
 
 **Se é a sua primeira vez no projeto, comece pelo §0.** Ele explica o que é o sistema, onde fica cada coisa e como ver tudo funcionando antes de mudar qualquer linha. Os §1 a §9 supõem que você já passou por ele.
 
@@ -95,7 +95,7 @@ Para subir o ambiente, use os comandos da seção *Como subir o ambiente* do `CL
    Ele acontece no boot, antes de qualquer rota.
 5. Leia o §1 em diante.
 
-Se algo no passo 1 ou 2 não funcionar, o problema é de ambiente, não do Laravel. O `CLAUDE.md` tem uma seção para cada armadilha de ambiente já encontrada (permissões, sessão, `/tmp`).
+Se algo no passo 1 ou 2 não funcionar, o problema é de ambiente, não do Laravel. O `docs/registro/ambiente.md` tem uma seção para cada armadilha de ambiente já encontrada (permissões, sessão, `/tmp`).
 
 ## 1. O problema em uma frase
 
