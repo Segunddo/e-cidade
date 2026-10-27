@@ -57,17 +57,17 @@ class cl_areaprocedimentoavaliacao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed158_codigo = ($this->ed158_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_codigo"]:$this->ed158_codigo);
-       $this->ed158_areaprocedimento = ($this->ed158_areaprocedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_areaprocedimento"]:$this->ed158_areaprocedimento);
-       $this->ed158_formaavaliacao = ($this->ed158_formaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_formaavaliacao"]:$this->ed158_formaavaliacao);
-       $this->ed158_periodoavaliacao = ($this->ed158_periodoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_periodoavaliacao"]:$this->ed158_periodoavaliacao);
+       $this->ed158_codigo = ($this->ed158_codigo === 0 || $this->ed158_codigo === 0.0 || $this->ed158_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_codigo"]:$this->ed158_codigo);
+       $this->ed158_areaprocedimento = ($this->ed158_areaprocedimento === 0 || $this->ed158_areaprocedimento === 0.0 || $this->ed158_areaprocedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_areaprocedimento"]:$this->ed158_areaprocedimento);
+       $this->ed158_formaavaliacao = ($this->ed158_formaavaliacao === 0 || $this->ed158_formaavaliacao === 0.0 || $this->ed158_formaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_formaavaliacao"]:$this->ed158_formaavaliacao);
+       $this->ed158_periodoavaliacao = ($this->ed158_periodoavaliacao === 0 || $this->ed158_periodoavaliacao === 0.0 || $this->ed158_periodoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_periodoavaliacao"]:$this->ed158_periodoavaliacao);
        $this->ed158_tipo = ($this->ed158_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_tipo"]:$this->ed158_tipo);
-       $this->ed158_ordem_elemento = ($this->ed158_ordem_elemento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_ordem_elemento"]:$this->ed158_ordem_elemento);
+       $this->ed158_ordem_elemento = ($this->ed158_ordem_elemento === 0 || $this->ed158_ordem_elemento === 0.0 || $this->ed158_ordem_elemento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_ordem_elemento"]:$this->ed158_ordem_elemento);
        $this->ed158_formaobtencao = ($this->ed158_formaobtencao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_formaobtencao"]:$this->ed158_formaobtencao);
-       $this->ed158_peso = ($this->ed158_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_peso"]:$this->ed158_peso);
-       $this->ed158_ordem = ($this->ed158_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_ordem"]:$this->ed158_ordem);
+       $this->ed158_peso = ($this->ed158_peso === 0 || $this->ed158_peso === 0.0 || $this->ed158_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_peso"]:$this->ed158_peso);
+       $this->ed158_ordem = ($this->ed158_ordem === 0 || $this->ed158_ordem === 0.0 || $this->ed158_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_ordem"]:$this->ed158_ordem);
      }else{
-       $this->ed158_codigo = ($this->ed158_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_codigo"]:$this->ed158_codigo);
+       $this->ed158_codigo = ($this->ed158_codigo === 0 || $this->ed158_codigo === 0.0 || $this->ed158_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed158_codigo"]:$this->ed158_codigo);
      }
    }
 
@@ -158,7 +158,7 @@ class cl_areaprocedimentoavaliacao
          $this->ed158_codigo = $ed158_codigo; 
        }
      }
-     if(($this->ed158_codigo == null) || ($this->ed158_codigo == "") ){ 
+     if(($this->ed158_codigo == null) || ($this->ed158_codigo === 0 || $this->ed158_codigo === 0.0 || $this->ed158_codigo == "") ){ 
        $this->erro_sql = " Campo ed158_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

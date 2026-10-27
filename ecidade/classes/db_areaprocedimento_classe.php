@@ -43,10 +43,10 @@ class cl_areaprocedimento
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed157_codigo = ($this->ed157_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed157_codigo"]:$this->ed157_codigo);
-       $this->ed157_procedimento = ($this->ed157_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed157_procedimento"]:$this->ed157_procedimento);
+       $this->ed157_codigo = ($this->ed157_codigo === 0 || $this->ed157_codigo === 0.0 || $this->ed157_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed157_codigo"]:$this->ed157_codigo);
+       $this->ed157_procedimento = ($this->ed157_procedimento === 0 || $this->ed157_procedimento === 0.0 || $this->ed157_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed157_procedimento"]:$this->ed157_procedimento);
      }else{
-       $this->ed157_codigo = ($this->ed157_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed157_codigo"]:$this->ed157_codigo);
+       $this->ed157_codigo = ($this->ed157_codigo === 0 || $this->ed157_codigo === 0.0 || $this->ed157_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed157_codigo"]:$this->ed157_codigo);
      }
    }
 
@@ -86,7 +86,7 @@ class cl_areaprocedimento
          $this->ed157_codigo = $ed157_codigo; 
        }
      }
-     if(($this->ed157_codigo == null) || ($this->ed157_codigo == "") ){ 
+     if(($this->ed157_codigo == null) || ($this->ed157_codigo === 0 || $this->ed157_codigo === 0.0 || $this->ed157_codigo == "") ){ 
        $this->erro_sql = " Campo ed157_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

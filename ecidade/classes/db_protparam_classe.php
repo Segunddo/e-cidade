@@ -80,7 +80,7 @@ class cl_protparam {
                  p90_depandamentopadrao = int4 = Departamento default na inclusão automática de um Andamento Padrão ao incluir um Tipo de Processo
                  ";
    //funcao construtor da classe 
-   function cl_protparam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("protparam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -102,18 +102,18 @@ class cl_protparam {
        $this->p90_valcpfcnpj = ($this->p90_valcpfcnpj == "f"?@$GLOBALS["HTTP_POST_VARS"]["p90_valcpfcnpj"]:$this->p90_valcpfcnpj);
        $this->p90_impusuproc = ($this->p90_impusuproc == "f"?@$GLOBALS["HTTP_POST_VARS"]["p90_impusuproc"]:$this->p90_impusuproc);
        $this->p90_debiaber = ($this->p90_debiaber == "f"?@$GLOBALS["HTTP_POST_VARS"]["p90_debiaber"]:$this->p90_debiaber);
-       $this->p90_taxagrupo = ($this->p90_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_taxagrupo"]:$this->p90_taxagrupo);
+       $this->p90_taxagrupo = ($this->p90_taxagrupo === 0 || $this->p90_taxagrupo === 0.0 || $this->p90_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_taxagrupo"]:$this->p90_taxagrupo);
        $this->p90_histpadcert = ($this->p90_histpadcert == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_histpadcert"]:$this->p90_histpadcert);
        $this->p90_despachoob = ($this->p90_despachoob == "f"?@$GLOBALS["HTTP_POST_VARS"]["p90_despachoob"]:$this->p90_despachoob);
-       $this->p90_minchardesp = ($this->p90_minchardesp == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_minchardesp"]:$this->p90_minchardesp);
+       $this->p90_minchardesp = ($this->p90_minchardesp === 0 || $this->p90_minchardesp === 0.0 || $this->p90_minchardesp == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_minchardesp"]:$this->p90_minchardesp);
        $this->p90_andatual = ($this->p90_andatual == "f"?@$GLOBALS["HTTP_POST_VARS"]["p90_andatual"]:$this->p90_andatual);
-       $this->p90_traminic = ($this->p90_traminic == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_traminic"]:$this->p90_traminic);
-       $this->p90_modelcapaproc = ($this->p90_modelcapaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_modelcapaproc"]:$this->p90_modelcapaproc);
+       $this->p90_traminic = ($this->p90_traminic === 0 || $this->p90_traminic === 0.0 || $this->p90_traminic == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_traminic"]:$this->p90_traminic);
+       $this->p90_modelcapaproc = ($this->p90_modelcapaproc === 0 || $this->p90_modelcapaproc === 0.0 || $this->p90_modelcapaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_modelcapaproc"]:$this->p90_modelcapaproc);
        $this->p90_imprimevar = ($this->p90_imprimevar == "f"?@$GLOBALS["HTTP_POST_VARS"]["p90_imprimevar"]:$this->p90_imprimevar);
-       $this->p90_instit = ($this->p90_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_instit"]:$this->p90_instit);
+       $this->p90_instit = ($this->p90_instit === 0 || $this->p90_instit === 0.0 || $this->p90_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_instit"]:$this->p90_instit);
        $this->p90_impdepto = ($this->p90_impdepto == "f"?@$GLOBALS["HTTP_POST_VARS"]["p90_impdepto"]:$this->p90_impdepto);
-       $this->p90_db_documentotemplate = ($this->p90_db_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_db_documentotemplate"]:$this->p90_db_documentotemplate);
-       $this->p90_depandamentopadrao = ($this->p90_depandamentopadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_depandamentopadrao"]:$this->p90_depandamentopadrao);
+       $this->p90_db_documentotemplate = ($this->p90_db_documentotemplate === 0 || $this->p90_db_documentotemplate === 0.0 || $this->p90_db_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_db_documentotemplate"]:$this->p90_db_documentotemplate);
+       $this->p90_depandamentopadrao = ($this->p90_depandamentopadrao === 0 || $this->p90_depandamentopadrao === 0.0 || $this->p90_depandamentopadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["p90_depandamentopadrao"]:$this->p90_depandamentopadrao);
      }else{
      }
    }

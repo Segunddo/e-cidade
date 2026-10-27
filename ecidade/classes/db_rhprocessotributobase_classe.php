@@ -57,17 +57,17 @@ class cl_rhprocessotributobase
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh288_sequencial = ($this->rh288_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_sequencial"]:$this->rh288_sequencial);
-       $this->rh288_sequencialprocessoservidor = ($this->rh288_sequencialprocessoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_sequencialprocessoservidor"]:$this->rh288_sequencialprocessoservidor);
+       $this->rh288_sequencial = ($this->rh288_sequencial === 0 || $this->rh288_sequencial === 0.0 || $this->rh288_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_sequencial"]:$this->rh288_sequencial);
+       $this->rh288_sequencialprocessoservidor = ($this->rh288_sequencialprocessoservidor === 0 || $this->rh288_sequencialprocessoservidor === 0.0 || $this->rh288_sequencialprocessoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_sequencialprocessoservidor"]:$this->rh288_sequencialprocessoservidor);
        $this->rh288_peref = ($this->rh288_peref == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_peref"]:$this->rh288_peref);
-       $this->rh288_vrbccpmensal = ($this->rh288_vrbccpmensal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_vrbccpmensal"]:$this->rh288_vrbccpmensal);
-       $this->rh288_vrbccp13 = ($this->rh288_vrbccp13 == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_vrbccp13"]:$this->rh288_vrbccp13);
-       $this->rh288_vrrendirrf = ($this->rh288_vrrendirrf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_vrrendirrf"]:$this->rh288_vrrendirrf);
-       $this->rh288_vrrendirrf13 = ($this->rh288_vrrendirrf13 == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_vrrendirrf13"]:$this->rh288_vrrendirrf13);
+       $this->rh288_vrbccpmensal = ($this->rh288_vrbccpmensal === 0 || $this->rh288_vrbccpmensal === 0.0 || $this->rh288_vrbccpmensal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_vrbccpmensal"]:$this->rh288_vrbccpmensal);
+       $this->rh288_vrbccp13 = ($this->rh288_vrbccp13 === 0 || $this->rh288_vrbccp13 === 0.0 || $this->rh288_vrbccp13 == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_vrbccp13"]:$this->rh288_vrbccp13);
+       $this->rh288_vrrendirrf = ($this->rh288_vrrendirrf === 0 || $this->rh288_vrrendirrf === 0.0 || $this->rh288_vrrendirrf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_vrrendirrf"]:$this->rh288_vrrendirrf);
+       $this->rh288_vrrendirrf13 = ($this->rh288_vrrendirrf13 === 0 || $this->rh288_vrrendirrf13 === 0.0 || $this->rh288_vrrendirrf13 == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_vrrendirrf13"]:$this->rh288_vrrendirrf13);
        $this->rh288_pagamento = ($this->rh288_pagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_pagamento"]:$this->rh288_pagamento);
        $this->rh288_observacao = ($this->rh288_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_observacao"]:$this->rh288_observacao);
      }else{
-       $this->rh288_sequencial = ($this->rh288_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_sequencial"]:$this->rh288_sequencial);
+       $this->rh288_sequencial = ($this->rh288_sequencial === 0 || $this->rh288_sequencial === 0.0 || $this->rh288_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh288_sequencial"]:$this->rh288_sequencial);
      }
    }
 
@@ -128,7 +128,7 @@ class cl_rhprocessotributobase
          $this->rh288_sequencial = $rh288_sequencial; 
        }
      }
-     if(($this->rh288_sequencial == null) || ($this->rh288_sequencial == "") ){ 
+     if(($this->rh288_sequencial == null) || ($this->rh288_sequencial === 0 || $this->rh288_sequencial === 0.0 || $this->rh288_sequencial == "") ){ 
        $this->erro_sql = " Campo rh288_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

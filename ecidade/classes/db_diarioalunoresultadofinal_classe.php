@@ -45,11 +45,11 @@ class cl_diarioalunoresultadofinal
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed165_codigo = ($this->ed165_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed165_codigo"] : $this->ed165_codigo);
-            $this->ed165_diarioaluno = ($this->ed165_diarioaluno == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed165_diarioaluno"] : $this->ed165_diarioaluno);
+            $this->ed165_codigo = ($this->ed165_codigo === 0 || $this->ed165_codigo === 0.0 || $this->ed165_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed165_codigo"] : $this->ed165_codigo);
+            $this->ed165_diarioaluno = ($this->ed165_diarioaluno === 0 || $this->ed165_diarioaluno === 0.0 || $this->ed165_diarioaluno == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed165_diarioaluno"] : $this->ed165_diarioaluno);
             $this->ed165_resultado_final = ($this->ed165_resultado_final == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed165_resultado_final"] : $this->ed165_resultado_final);
         } else {
-            $this->ed165_codigo = ($this->ed165_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed165_codigo"] : $this->ed165_codigo);
+            $this->ed165_codigo = ($this->ed165_codigo === 0 || $this->ed165_codigo === 0.0 || $this->ed165_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed165_codigo"] : $this->ed165_codigo);
         }
     }
 
@@ -90,7 +90,7 @@ class cl_diarioalunoresultadofinal
                 $this->ed165_codigo = $ed165_codigo;
             }
         }
-        if (($this->ed165_codigo == null) || ($this->ed165_codigo == "")) {
+        if (($this->ed165_codigo == null) || ($this->ed165_codigo === 0 || $this->ed165_codigo === 0.0 || $this->ed165_codigo == "")) {
             $this->erro_sql = " Campo ed165_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
