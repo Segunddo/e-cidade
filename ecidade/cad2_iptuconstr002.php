@@ -28,7 +28,8 @@
 require_once(modification("fpdf151/pdf.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $head4 = "CARACTERÍSTICAS DE CONSTRUÇÕES";
 $oPdf  = new PDF();
@@ -48,7 +49,7 @@ if(isset($relatorio1)){
   // $chaves = são as caracteristicas da aba com as caracteristicas
   if(isset($chaves) && $chaves != ""){
 
-    $chaves = split("#",$chaves);
+    $chaves = preg_split("#\\##m",$chaves);
     for($i=0;$i<sizeof($chaves);$i++){
 
       // concatena na $codigo o código das caracteristicas selecionadas
@@ -198,8 +199,8 @@ if(isset($setor) && $setor != ""){
     $quadra1 = $quadra;
     if(isset($setor) && $setor != ""){
 
-      $chaves  = split(",",$setor);
-      $chaves1 = split(",",$quadra);
+      $chaves  = preg_split("#,#m",$setor);
+      $chaves1 = preg_split("#,#m",$quadra);
       $and     = "";
       $setor   = "";
       $and     = "";
@@ -743,8 +744,8 @@ if(isset($setores) && $setores != ""){
 
   if(isset($setor) && $setor != ""){
 
-    $chaves  = split(",",$setores);
-    $chaves1 = split(",",$quadra);
+    $chaves  = preg_split("#,#m",$setores);
+    $chaves1 = preg_split("#,#m",$quadra);
     $and     = "";
     $setores = "";
 

@@ -386,6 +386,49 @@ for u in login.php <pref>1_x.php w/2/<pref>2_y.php; do
 done
 ```
 
+### Passo 8b — abas e redirecionamentos que voltam ao 5.6 (14ª lacuna)
+
+Rotear a tela do menu **não basta**. Muitas telas são só um contêiner: ao abrir, carregam o
+formulário num `<iframe>` (`cad1_face001` → `cad1_face004`) ou redirecionam
+(`db_redireciona(...)`). Esse destino **não está no menu**. Por isso o `map`, gerado do banco,
+não o conhece, e ele fica no 5.6. A tela "está no 8.5" e o formulário que o usuário preenche
+roda no 5.6. Nenhuma bateria acusa isso: as duas telas são idênticas, só que servidas pelo
+runtime errado. Em 26/10/2026 eram **158 abas** atrás de 90 telas de menu das três áreas
+concluídas.
+
+O problema só aparece no roteamento por **lista** (`map`). No roteamento por **prefixo**
+(`location`) a aba vai junto com o contêiner. Mas rode a verificação sempre: o destino pode ser de
+outro prefixo.
+
+```bash
+# GET no 8.5 de cada tela de menu da area (e das abas ja roteadas: segundo salto),
+# classificando cada iframe/redirecionamento pelo mesmo criterio do nginx
+python3 scratchpad/redirecionamentos.py <SID> /tmp/redir.tsv TRIBUT,EDUCA,RECURSOS,<NOVA_AREA>
+awk -F'\t' '$1=="NO_5.6" && $4!="corpo.php"' /tmp/redir.tsv   # TEM de sair vazio
+```
+
+Para cada linha `NO_5.6`:
+
+1. **iframe** → portar o universo dos destinos. Use `TELAS=<destinos com a grafia do disco>`
+   no `enumera.py` e siga os passos 4 a 7, com bateria nos destinos. Depois acrescente o nome,
+   em minúscula, a `docker/proxy/faseb_map_abas.txt` e regenere o `map` com o mesmo comando do
+   cabeçalho de `faseb_map.conf`. O gerador lê a lista.
+2. **redireciona** → mesma coisa. Se o destino abrir a própria cadeia (`hab1_avaliacao002` →
+   `…005`), rode de novo depois de rotear: o script segue o segundo salto pelas telas já no 8.5.
+3. **`corpo.php`** é o "voltar ao início" depois de erro ou de configuração ausente
+   (`numpref` não configurado, rotina desativada). Não é lacuna.
+4. **pasta** (`dbforms/…`) e **inexistente** não são lacuna. O proxy não roteia por pasta, e o
+   `/tmp` compartilhado resolve. Ignore.
+
+Os destinos são, em geral, compartilhados: `func_selinstit.php` e `verifica.php` são abertos
+também por telas do 5.6, que passam a recebê-los do 8.5. É seguro porque o código portado roda
+nos dois runtimes, e é por isso que o porte e a bateria vêm **antes** de acrescentá-los à lista.
+
+**Limite:** o script só vê o que a tela faz **ao abrir, por GET sem parâmetros**. Abas criadas
+por JavaScript ao clicar e redirecionamentos que dependem de dado ficam de fora. O resultado é
+uma cota inferior. Na navegação manual, confira o `X-Ecidade-Runtime` dos iframes nas
+ferramentas do navegador.
+
 ## Passo 9 — Commit
 
 Um commit por módulo, revertível. A mensagem registra a tabela de correções com quantidades,

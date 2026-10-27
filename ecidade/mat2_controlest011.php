@@ -90,6 +90,8 @@ $cliframe_seleciona = new cl_iframe_seleciona;
            $cliframe_seleciona->campos  = "m91_depto, descrdepto";
            $cliframe_seleciona->legenda="Almoxarifados";
            $cliframe_seleciona->sql=$sql;    
+           // PHP 8: o 5.6 criava stdClass ao atribuir propriedade a variavel nula/indefinida
+           if (!isset($cliframe_seleciona_grupo) || $cliframe_seleciona_grupo === false || $cliframe_seleciona_grupo === "") { $cliframe_seleciona_grupo = new stdClass(); }
            $cliframe_seleciona_grupo->sql_marca=$sql_marca;
            $cliframe_seleciona->iframe_height ="250";
            $cliframe_seleciona->iframe_width ="380";

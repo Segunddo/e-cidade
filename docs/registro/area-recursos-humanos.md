@@ -445,3 +445,22 @@ caminhos:
 
 Os 8 arquivos com `parse_str`/`split` entram no porte quando o prefixo dono for portado inteiro. Ao migrar a
 próxima área, rodar `redirecionamentos.py` (com o `SQL` estendido à área) junto da conferência pelo proxy.
+
+**REVISTO no mesmo dia (26/10/2026, usuário): os IFRAMES foram migrados agora.** Os redirecionamentos ficam
+para a aparição.
+
+| | |
+|---|---|
+| Destinos de iframe no 5.6 | **158** (`cad` 83, `cai`/`Cai` 45, `mat` 17, `pro` 9, `con` 1, `prot` 1, `func_selinstit`, `verifica.php`), atrás de 90 entradas de menu |
+| Universo (`enumera.py`, `TELAS=`) | 1.402 arquivos, 747 já pagos, **62 a alterar** |
+| Rector | **37** alterados (26 `parse_str`+`extract`, 15 `ereg`/`split`, 11 guardas, 11 construtores, 2 `${$var}`, 1 `implode`), só regras já vetadas; 0 na 2ª passada. Os outros 25 alvos já não tinham remanescente (contador por *token*: 0 em todas as categorias) |
+| À mão | `mat2_controlest011.php:93`: `$cliframe_seleciona_grupo->sql_marca = …` sobre variável **nunca atribuída** (erro de digitação do original: o objeto é `$cliframe_seleciona`). O 5.6 criava `stdClass` com aviso, o 8.5 lança `Error`. Correção fiel do catálogo: criar o `stdClass` quando a variável é indefinida, `null`, `false` ou `""` |
+| Portão de funções / `php -l` | só `extract`/`preg_split` · 1.402/1.402 nos dois runtimes |
+| Classes / escrita | 11/11 idênticas · 203 linhas idênticas |
+| **Bateria das abas** | **158/158** |
+| Regressão (interseção com `cad`/`cai`/`con`/`pro`/`prot`/`mer`) | `map` inteiro 390/390, `mer` 187/187 |
+| Roteamento | `docker/proxy/faseb_map_abas.txt` (versionado), lido pelo `gera_map_faseb.py`: **+158 entradas, −0** no `map` (548). Config testada em container descartável antes do recreate |
+| **Levantamento refeito** | 2.841 telas no 8.5 examinadas (menu + 423 abas já roteadas, para pegar o **segundo salto**): **0 iframes ao 5.6**. Sobram 9 redirecionamentos: os 5 conhecidos (`hab1_avaliacao002`, `cai4_lista01`, `pro1_obras005` ×3) e 4 para `corpo.php` (não é lacuna) |
+
+`func_selinstit.php` e `verifica.php` são abertos também por telas do 5.6, que agora os recebem do 8.5. Isso é
+seguro porque o código portado roda nos dois runtimes. A verificação entrou na skill como **passo 8b**.

@@ -35,7 +35,8 @@ include(modification("classes/db_projmelhoriasmatric_classe.php"));
 $clprojmelhorias = new cl_projmelhorias;
 $clprojmelhoriasmatric = new cl_projmelhoriasmatric;
 $clprojmelhoriasmatric->rotulo->label();
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 ?>
 <html>
 <head>
@@ -144,13 +145,13 @@ function js_marca(obj){
             <?
             if(isset($dados)){
     
-              $ma = split("XX",$dados);
+              $ma = preg_split("#XX#m",$dados);
 
               for($k=0; $k<sizeof($ma); $k++){
         
                 if($ma[$k]!=""){
         
-                  $dad = split("-",$ma[$k]);
+                  $dad = preg_split("#\\-#m",$ma[$k]);
                   echo "<tr id='linha_".$dad[0]."'>";
                   echo "  <td align='center' > ";
                   echo "    <input type='checkbox' name='CHECK_".$dad[0]."' checked ".($db_opcao==3||$db_opcao==33||$db_opcao==22?'disabled':'')."> ";

@@ -39,7 +39,8 @@ $clrotulo->label('desconto');
 $clrotulo->label('k01_descr');
 $clrotulo->label('k02_descr');
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $dbwhere = "";
 $dtini =  $dtini_ano."-".$dtini_mes."-".$dtini_dia; // operacao
 $dtfim =  $dtfim_ano."-".$dtfim_mes."-".$dtfim_dia;

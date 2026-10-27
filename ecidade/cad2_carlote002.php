@@ -36,7 +36,8 @@ $cliptubase = new cl_iptubase;
 $cliptucalh = new cl_iptucalh;
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -59,7 +60,7 @@ $total = 0;
 $valores = 0;
 if(isset($relatorio1)){
   if(isset($chaves) && $chaves != ""){
-    $chaves = split("#",$chaves);
+    $chaves = preg_split("#\\##m",$chaves);
     for($i=0;$i<sizeof($chaves);$i++){
       if($codigo == ""){
 	      $codigo .= substr($chaves[$i],0,(strpos($chaves[$i],"-")));
@@ -166,8 +167,8 @@ if(isset($setor) && $setor != ""){
     $setor1  = $setor;
     $quadra1 = $quadra;
     if(isset($setor) && $setor != ""){
-      $chaves  = split(",",$setor);
-      $chaves1 = split(",",$quadra);
+      $chaves  = preg_split("#,#m",$setor);
+      $chaves1 = preg_split("#,#m",$quadra);
       $or      = "";
       $setor   = "";
       for($i=0;$i<sizeof($chaves);$i++){
@@ -180,7 +181,7 @@ if(isset($setor) && $setor != ""){
   $and = " and ";
 }else{
 	if(isset($sosetor) && $sosetor != ""){
-    $chaves  = split(",",$sosetor);
+    $chaves  = preg_split("#,#m",$sosetor);
     $virgula = "";
     $setor   = "and j34_setor in ( ";	
     for($i=0;$i<sizeof($chaves);$i++){
@@ -205,9 +206,9 @@ if(isset($setor) && $setor != ""){
   for($x=0;$x<$numrows2;$x++){
      db_fieldsmemory($rsResult,$x);
      $nomevar = "check".$x;
-     if (isset($$nomevar) && $$nomevar != ""){
+     if (isset(${$nomevar}) && ${$nomevar} != ""){
       	$totalvars ++;
-        $cod = $$nomevar;
+        $cod = ${$nomevar};
     		$codcase .= $cod.",";
     		$colunas.=$j17_descr." - ";
      }    
@@ -512,8 +513,8 @@ if(isset($chaves_caract) && $chaves_caract != ""){
 $pdf->MultiCell(280,05,"CARACTERÍSTICAS NÃO LISTADAS ->  ".@$cod,1,"L");
 if(isset($setores) && $setores != ""){
   if(isset($setor) && $setor != ""){
-    $chaves = split(",",$setores);
-    $chaves1 = split(",",$quadra);
+    $chaves = preg_split("#,#m",$setores);
+    $chaves1 = preg_split("#,#m",$quadra);
     $and = "";
     $setores = "";
     for($i=0;$i<sizeof($chaves);$i++){

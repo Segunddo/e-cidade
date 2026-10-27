@@ -33,7 +33,8 @@ $cliptubase    = new cl_iptubase;
 $oDaoCaracter  = new cl_caracter();
 
 db_postmemory( $_POST );
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"], $__qs );
+extract($__qs);
 
 ///////////////////////////////////////////////////////////////////////
 $head4 = "RELATÓRIO DE FACE DE QUADRA";
@@ -57,7 +58,7 @@ if( isset( $relatorio1 ) ) {
 
   if (isset($chaves) && $chaves != "") {
 
-    $chaves = split( "#", $chaves );
+    $chaves = preg_split( "#\\##m", $chaves );
 
     for( $i = 0; $i < sizeof($chaves); $i++ ) {
 
@@ -126,8 +127,8 @@ if (isset($setor) && $setor != "") {
 
     if (isset($setor) && $setor != "") {
 
-      $chaves  = split( ",", $setor );
-      $chaves1 = split( ",", $quadra );
+      $chaves  = preg_split( "#,#m", $setor );
+      $chaves1 = preg_split( "#,#m", $quadra );
       $or      = "";
       $setor   = "";
 
@@ -390,8 +391,8 @@ if (isset($setores) && $setores != "") {
 
   if (isset($setor) && $setor != "") {
 
-    $chaves  = split( ",", $setores );
-    $chaves1 = split( ",", $quadra );
+    $chaves  = preg_split( "#,#m", $setores );
+    $chaves1 = preg_split( "#,#m", $quadra );
     $and     = "";
     $setores = "";
 

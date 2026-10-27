@@ -2,13 +2,19 @@
 """Telas de menu servidas pelo 8.5 que, ao abrir, mandam o navegador para uma tela que
 o proxy serve pelo 5.6 (redirecionamento imediato ou iframe carregado na abertura).
 
-Uso: python3 redirecionamentos.py <SID> <saida.tsv>
+Uso: python3 redirecionamentos.py <SID> <saida.tsv> [AREA,AREA...]
+     (areas: inicio do nome em atendcadarea, sem "DB:"; padrao TRIBUT,EDUCA,RECURSOS)
+
+Saida: uma linha por (classe, tipo, tela de origem, destino, areas). Classe NO_5.6 e o
+que importa: destino que o proxy manda ao 5.6. Os destinos que JA estao no 8.5 (abas
+roteadas) tambem sao abertos, para pegar o segundo salto.
 """
 import os, re, subprocess, sys, collections
 
 RAIZ = "/home/diego/e-cidade"
 ECI = os.path.join(RAIZ, "ecidade")
 SID, SAIDA = sys.argv[1], sys.argv[2]
+AREAS = (sys.argv[3] if len(sys.argv) > 3 else "TRIBUT,EDUCA,RECURSOS").upper().split(",")
 SESS = f"/var/lib/php/sessions/sess_{SID}"
 
 # mesmo criterio do nginx: location por prefixo + map por nome exato
@@ -24,7 +30,7 @@ SQL = ("SELECT DISTINCT replace(a.at25_descr,'DB:',''), m.nome_modulo, di.funcao
        "JOIN configuracoes.db_menu dm ON dm.modulo=m.id_item "
        "JOIN configuracoes.db_itensmenu di ON di.id_item=dm.id_item_filho "
        "WHERE split_part(di.funcao,'?',1) ~ '^[A-Za-z]+[0-9]*_.*\\.php$' "
-       "AND (a.at25_descr ILIKE '%TRIBUT%' OR a.at25_descr ILIKE '%EDUCA%' OR a.at25_descr ILIKE '%RECURSOS%')")
+       "AND (" + " OR ".join(f"a.at25_descr ILIKE '%{a}%'" for a in AREAS) + ")")
 out = subprocess.run(["docker", "exec", "-e", "PGCLIENTENCODING=UTF8", "ecidade_database", "psql", "-U", "postgres",
                       "-d", "ecidade", "-tA", "-F", "\t", "-c", SQL], capture_output=True, check=True).stdout.decode()
 
@@ -47,7 +53,9 @@ def destino(url):
     return u
 
 linhas, n = [], 0
-for funcao in sorted(itens):
+fila, vistos = sorted(itens), set(f.lower() for f in itens)
+while fila:
+    funcao = fila.pop(0)
     n += 1
     sh(f"docker exec -u root ecidade_php56 sh -c 'cp /tmp/_sess.bak {SESS}; chown www-data:www-data {SESS}'")
     r = sh(f"curl -s -m 60 -D - -b 'ECIDADEWINDOWMAIN={SID}' 'http://localhost:8085/{funcao}'")
@@ -65,15 +73,19 @@ for funcao in sorted(itens):
         elif d.lower() not in disco:
             classe = "inexistente"
         elif no85(disco[d.lower()]):
-            continue                               # destino tambem no 8.5: sem problema
+            # destino tambem no 8.5: sem problema -- mas abri-lo tambem, porque a aba
+            # pode abrir outra aba (segundo salto), que a lista do menu nao conhece
+            if d.lower() not in vistos:
+                vistos.add(d.lower()); fila.append(disco[d.lower()]); itens[disco[d.lower()]] |= itens[funcao]
+            continue
         else:
             classe = "NO_5.6"
         areas = "; ".join(sorted(f"{a}/{mo}" for a, mo in itens[funcao]))
         linhas.append((classe, tipo, funcao, d, areas))
-    if n % 200 == 0: print(f"  ... {n}/{len(itens)}", flush=True)
+    if n % 200 == 0: print(f"  ... {n}/{len(vistos)}", flush=True)
 
 with open(SAIDA, "w") as f:
     for l in sorted(set(linhas)): f.write("\t".join(l) + "\n")
-print(f"telas de menu no 8.5 examinadas: {len(itens)}")
+print(f"telas no 8.5 examinadas: {n} (menu + abas ja roteadas)")
 c = collections.Counter((l[0], l[1]) for l in set(linhas))
 for k, v in sorted(c.items()): print(f"  {k[0]:12s} {k[1]:12s} {v}")
