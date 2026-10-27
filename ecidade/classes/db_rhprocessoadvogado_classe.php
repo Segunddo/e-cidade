@@ -49,13 +49,13 @@ class cl_rhprocessoadvogado
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh303_sequencial = ($this->rh303_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_sequencial"]:$this->rh303_sequencial);
-       $this->rh303_sequencialtributoirrf = ($this->rh303_sequencialtributoirrf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_sequencialtributoirrf"]:$this->rh303_sequencialtributoirrf);
-       $this->rh303_tpInsc = ($this->rh303_tpInsc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_tpInsc"]:$this->rh303_tpInsc);
+       $this->rh303_sequencial = ($this->rh303_sequencial === 0 || $this->rh303_sequencial === 0.0 || $this->rh303_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_sequencial"]:$this->rh303_sequencial);
+       $this->rh303_sequencialtributoirrf = ($this->rh303_sequencialtributoirrf === 0 || $this->rh303_sequencialtributoirrf === 0.0 || $this->rh303_sequencialtributoirrf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_sequencialtributoirrf"]:$this->rh303_sequencialtributoirrf);
+       $this->rh303_tpInsc = ($this->rh303_tpInsc === 0 || $this->rh303_tpInsc === 0.0 || $this->rh303_tpInsc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_tpInsc"]:$this->rh303_tpInsc);
        $this->rh303_nrInsc = ($this->rh303_nrInsc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_nrInsc"]:$this->rh303_nrInsc);
-       $this->rh303_vlradv = ($this->rh303_vlradv == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_vlradv"]:$this->rh303_vlradv);
+       $this->rh303_vlradv = ($this->rh303_vlradv === 0 || $this->rh303_vlradv === 0.0 || $this->rh303_vlradv == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_vlradv"]:$this->rh303_vlradv);
      }else{
-       $this->rh303_sequencial = ($this->rh303_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_sequencial"]:$this->rh303_sequencial);
+       $this->rh303_sequencial = ($this->rh303_sequencial === 0 || $this->rh303_sequencial === 0.0 || $this->rh303_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh303_sequencial"]:$this->rh303_sequencial);
      }
    }
 
@@ -101,7 +101,7 @@ class cl_rhprocessoadvogado
          $this->rh303_sequencial = $rh303_sequencial; 
        }
      }
-     if(($this->rh303_sequencial == null) || ($this->rh303_sequencial == "") ){ 
+     if(($this->rh303_sequencial == null) || ($this->rh303_sequencial === 0 || $this->rh303_sequencial === 0.0 || $this->rh303_sequencial == "") ){ 
        $this->erro_sql = " Campo rh303_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

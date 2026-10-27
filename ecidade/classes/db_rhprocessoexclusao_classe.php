@@ -60,8 +60,8 @@ class cl_rhprocessoexclusao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh300_sequencial = ($this->rh300_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh300_sequencial"]:$this->rh300_sequencial);
-       $this->rh300_sequencialprocessoservidor = ($this->rh300_sequencialprocessoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh300_sequencialprocessoservidor"]:$this->rh300_sequencialprocessoservidor);
+       $this->rh300_sequencial = ($this->rh300_sequencial === 0 || $this->rh300_sequencial === 0.0 || $this->rh300_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh300_sequencial"]:$this->rh300_sequencial);
+       $this->rh300_sequencialprocessoservidor = ($this->rh300_sequencialprocessoservidor === 0 || $this->rh300_sequencialprocessoservidor === 0.0 || $this->rh300_sequencialprocessoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh300_sequencialprocessoservidor"]:$this->rh300_sequencialprocessoservidor);
        $this->rh300_tpevento = ($this->rh300_tpevento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh300_tpevento"]:$this->rh300_tpevento);
        $this->rh300_nrrecevt = ($this->rh300_nrrecevt == ""?@$GLOBALS["HTTP_POST_VARS"]["rh300_nrrecevt"]:$this->rh300_nrrecevt);
        $this->rh300_nrproctrab = ($this->rh300_nrproctrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh300_nrproctrab"]:$this->rh300_nrproctrab);
@@ -77,7 +77,7 @@ class cl_rhprocessoexclusao
        }
        $this->rh300_referencia = ($this->rh300_referencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh300_referencia"]:$this->rh300_referencia);
      }else{
-       $this->rh300_sequencial = ($this->rh300_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh300_sequencial"]:$this->rh300_sequencial);
+       $this->rh300_sequencial = ($this->rh300_sequencial === 0 || $this->rh300_sequencial === 0.0 || $this->rh300_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh300_sequencial"]:$this->rh300_sequencial);
      }
    }
 
@@ -126,7 +126,7 @@ class cl_rhprocessoexclusao
          $this->rh300_sequencial = $rh300_sequencial; 
        }
      }
-     if(($this->rh300_sequencial == null) || ($this->rh300_sequencial == "") ){ 
+     if(($this->rh300_sequencial == null) || ($this->rh300_sequencial === 0 || $this->rh300_sequencial === 0.0 || $this->rh300_sequencial == "") ){ 
        $this->erro_sql = " Campo rh300_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

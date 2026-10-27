@@ -61,8 +61,8 @@ class cl_rhpessoalprocessodesligamento
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh279_sequencial = ($this->rh279_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_sequencial"]:$this->rh279_sequencial);
-       $this->rh279_sequencialprocessovinculo = ($this->rh279_sequencialprocessovinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_sequencialprocessovinculo"]:$this->rh279_sequencialprocessovinculo);
+       $this->rh279_sequencial = ($this->rh279_sequencial === 0 || $this->rh279_sequencial === 0.0 || $this->rh279_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_sequencial"]:$this->rh279_sequencial);
+       $this->rh279_sequencialprocessovinculo = ($this->rh279_sequencialprocessovinculo === 0 || $this->rh279_sequencialprocessovinculo === 0.0 || $this->rh279_sequencialprocessovinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_sequencialprocessovinculo"]:$this->rh279_sequencialprocessovinculo);
        if($this->rh279_dtdeslig == ""){
          $this->rh279_dtdeslig_dia = ($this->rh279_dtdeslig_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_dtdeslig_dia"]:$this->rh279_dtdeslig_dia);
          $this->rh279_dtdeslig_mes = ($this->rh279_dtdeslig_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_dtdeslig_mes"]:$this->rh279_dtdeslig_mes);
@@ -80,11 +80,11 @@ class cl_rhpessoalprocessodesligamento
             $this->rh279_dtprojfimapi = $this->rh279_dtprojfimapi_ano."-".$this->rh279_dtprojfimapi_mes."-".$this->rh279_dtprojfimapi_dia;
          }
        }
-       $this->rh279_pensalim = ($this->rh279_pensalim == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_pensalim"]:$this->rh279_pensalim);
-       $this->rh279_percaliment = ($this->rh279_percaliment == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_percaliment"]:$this->rh279_percaliment);
-       $this->rh279_vlralim = ($this->rh279_vlralim == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_vlralim"]:$this->rh279_vlralim);
+       $this->rh279_pensalim = ($this->rh279_pensalim === 0 || $this->rh279_pensalim === 0.0 || $this->rh279_pensalim == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_pensalim"]:$this->rh279_pensalim);
+       $this->rh279_percaliment = ($this->rh279_percaliment === 0 || $this->rh279_percaliment === 0.0 || $this->rh279_percaliment == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_percaliment"]:$this->rh279_percaliment);
+       $this->rh279_vlralim = ($this->rh279_vlralim === 0 || $this->rh279_vlralim === 0.0 || $this->rh279_vlralim == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_vlralim"]:$this->rh279_vlralim);
      }else{
-       $this->rh279_sequencial = ($this->rh279_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_sequencial"]:$this->rh279_sequencial);
+       $this->rh279_sequencial = ($this->rh279_sequencial === 0 || $this->rh279_sequencial === 0.0 || $this->rh279_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh279_sequencial"]:$this->rh279_sequencial);
      }
    }
 
@@ -139,7 +139,7 @@ class cl_rhpessoalprocessodesligamento
          $this->rh279_sequencial = $rh279_sequencial; 
        }
      }
-     if(($this->rh279_sequencial == null) || ($this->rh279_sequencial == "") ){ 
+     if(($this->rh279_sequencial == null) || ($this->rh279_sequencial === 0 || $this->rh279_sequencial === 0.0 || $this->rh279_sequencial == "") ){ 
        $this->erro_sql = " Campo rh279_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -52,10 +52,10 @@ class cl_rhpessoalprocessomudanca
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh280_sequencial = ($this->rh280_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_sequencial"]:$this->rh280_sequencial);
-       $this->rh280_sequencialprocessocontrato = ($this->rh280_sequencialprocessocontrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_sequencialprocessocontrato"]:$this->rh280_sequencialprocessocontrato);
-       $this->rh280_codcateg = ($this->rh280_codcateg == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_codcateg"]:$this->rh280_codcateg);
-       $this->rh280_natividade = ($this->rh280_natividade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_natividade"]:$this->rh280_natividade);
+       $this->rh280_sequencial = ($this->rh280_sequencial === 0 || $this->rh280_sequencial === 0.0 || $this->rh280_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_sequencial"]:$this->rh280_sequencial);
+       $this->rh280_sequencialprocessocontrato = ($this->rh280_sequencialprocessocontrato === 0 || $this->rh280_sequencialprocessocontrato === 0.0 || $this->rh280_sequencialprocessocontrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_sequencialprocessocontrato"]:$this->rh280_sequencialprocessocontrato);
+       $this->rh280_codcateg = ($this->rh280_codcateg === 0 || $this->rh280_codcateg === 0.0 || $this->rh280_codcateg == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_codcateg"]:$this->rh280_codcateg);
+       $this->rh280_natividade = ($this->rh280_natividade === 0 || $this->rh280_natividade === 0.0 || $this->rh280_natividade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_natividade"]:$this->rh280_natividade);
        if($this->rh280_dtmudcategativ == ""){
          $this->rh280_dtmudcategativ_dia = ($this->rh280_dtmudcategativ_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_dtmudcategativ_dia"]:$this->rh280_dtmudcategativ_dia);
          $this->rh280_dtmudcategativ_mes = ($this->rh280_dtmudcategativ_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_dtmudcategativ_mes"]:$this->rh280_dtmudcategativ_mes);
@@ -65,7 +65,7 @@ class cl_rhpessoalprocessomudanca
          }
        }
      }else{
-       $this->rh280_sequencial = ($this->rh280_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_sequencial"]:$this->rh280_sequencial);
+       $this->rh280_sequencial = ($this->rh280_sequencial === 0 || $this->rh280_sequencial === 0.0 || $this->rh280_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh280_sequencial"]:$this->rh280_sequencial);
      }
    }
 
@@ -114,7 +114,7 @@ class cl_rhpessoalprocessomudanca
          $this->rh280_sequencial = $rh280_sequencial; 
        }
      }
-     if(($this->rh280_sequencial == null) || ($this->rh280_sequencial == "") ){ 
+     if(($this->rh280_sequencial == null) || ($this->rh280_sequencial === 0 || $this->rh280_sequencial === 0.0 || $this->rh280_sequencial == "") ){ 
        $this->erro_sql = " Campo rh280_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

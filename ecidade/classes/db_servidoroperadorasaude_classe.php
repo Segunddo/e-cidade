@@ -55,16 +55,16 @@ class cl_servidoroperadorasaude
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->rh222_sequencial = ($this->rh222_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_sequencial"] : $this->rh222_sequencial);
-            $this->rh222_valor = ($this->rh222_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_valor"] : $this->rh222_valor);
+            $this->rh222_sequencial = ($this->rh222_sequencial === 0 || $this->rh222_sequencial === 0.0 || $this->rh222_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_sequencial"] : $this->rh222_sequencial);
+            $this->rh222_valor = ($this->rh222_valor === 0 || $this->rh222_valor === 0.0 || $this->rh222_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_valor"] : $this->rh222_valor);
             $this->rh222_rubrica = ($this->rh222_rubrica == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_rubrica"] : $this->rh222_rubrica);
-            $this->rh222_servidor = ($this->rh222_servidor == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_servidor"] : $this->rh222_servidor);
-            $this->rh222_operadorasaude = ($this->rh222_operadorasaude == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_operadorasaude"] : $this->rh222_operadorasaude);
-            $this->rh222_instituicao = ($this->rh222_instituicao == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_instituicao"] : $this->rh222_instituicao);
-            $this->rh222_mes = ($this->rh222_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_mes"] : $this->rh222_mes);
-            $this->rh222_ano = ($this->rh222_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_ano"] : $this->rh222_ano);
+            $this->rh222_servidor = ($this->rh222_servidor === 0 || $this->rh222_servidor === 0.0 || $this->rh222_servidor == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_servidor"] : $this->rh222_servidor);
+            $this->rh222_operadorasaude = ($this->rh222_operadorasaude === 0 || $this->rh222_operadorasaude === 0.0 || $this->rh222_operadorasaude == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_operadorasaude"] : $this->rh222_operadorasaude);
+            $this->rh222_instituicao = ($this->rh222_instituicao === 0 || $this->rh222_instituicao === 0.0 || $this->rh222_instituicao == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_instituicao"] : $this->rh222_instituicao);
+            $this->rh222_mes = ($this->rh222_mes === 0 || $this->rh222_mes === 0.0 || $this->rh222_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_mes"] : $this->rh222_mes);
+            $this->rh222_ano = ($this->rh222_ano === 0 || $this->rh222_ano === 0.0 || $this->rh222_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_ano"] : $this->rh222_ano);
         } else {
-            $this->rh222_sequencial = ($this->rh222_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_sequencial"] : $this->rh222_sequencial);
+            $this->rh222_sequencial = ($this->rh222_sequencial === 0 || $this->rh222_sequencial === 0.0 || $this->rh222_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["rh222_sequencial"] : $this->rh222_sequencial);
         }
     }
 
@@ -167,7 +167,7 @@ class cl_servidoroperadorasaude
                 $this->rh222_sequencial = $rh222_sequencial;
             }
         }
-        if (($this->rh222_sequencial == null) || ($this->rh222_sequencial == "")) {
+        if (($this->rh222_sequencial == null) || ($this->rh222_sequencial === 0 || $this->rh222_sequencial === 0.0 || $this->rh222_sequencial == "")) {
             $this->erro_sql = " Campo rh222_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

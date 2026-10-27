@@ -51,14 +51,14 @@ class cl_avaliacaogruporespostaexclusaoeventosefd
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->eso29_sequencial = ($this->eso29_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_sequencial"] : $this->eso29_sequencial);
-            $this->eso29_avaliacaogruporesposta = ($this->eso29_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_avaliacaogruporesposta"] : $this->eso29_avaliacaogruporesposta);
-            $this->eso29_cgm = ($this->eso29_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_cgm"] : $this->eso29_cgm);
+            $this->eso29_sequencial = ($this->eso29_sequencial === 0 || $this->eso29_sequencial === 0.0 || $this->eso29_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_sequencial"] : $this->eso29_sequencial);
+            $this->eso29_avaliacaogruporesposta = ($this->eso29_avaliacaogruporesposta === 0 || $this->eso29_avaliacaogruporesposta === 0.0 || $this->eso29_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_avaliacaogruporesposta"] : $this->eso29_avaliacaogruporesposta);
+            $this->eso29_cgm = ($this->eso29_cgm === 0 || $this->eso29_cgm === 0.0 || $this->eso29_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_cgm"] : $this->eso29_cgm);
             $this->eso29_protocolo = ($this->eso29_protocolo == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_protocolo"] : $this->eso29_protocolo);
             $this->eso29_periodo = ($this->eso29_periodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_periodo"] : $this->eso29_periodo);
             $this->eso29_data = ($this->eso29_data == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_data"] : $this->eso29_data);
         } else {
-            $this->eso29_sequencial = ($this->eso29_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_sequencial"] : $this->eso29_sequencial);
+            $this->eso29_sequencial = ($this->eso29_sequencial === 0 || $this->eso29_sequencial === 0.0 || $this->eso29_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso29_sequencial"] : $this->eso29_sequencial);
         }
     }
 
@@ -132,7 +132,7 @@ class cl_avaliacaogruporespostaexclusaoeventosefd
                 $this->eso29_sequencial = $eso29_sequencial;
             }
         }
-        if (($this->eso29_sequencial == null) || ($this->eso29_sequencial == "")) {
+        if (($this->eso29_sequencial == null) || ($this->eso29_sequencial === 0 || $this->eso29_sequencial === 0.0 || $this->eso29_sequencial == "")) {
             $this->erro_sql = " Campo eso29_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

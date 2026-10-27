@@ -103,7 +103,7 @@ class cl_contribuicaosindicalperiodo
                 $this->eso30_sequencial = $eso30_sequencial;
             }
         }
-        if (($this->eso30_sequencial == null) || ($this->eso30_sequencial == "")) {
+        if (($this->eso30_sequencial == null) || ($this->eso30_sequencial === 0 || $this->eso30_sequencial === 0.0 || $this->eso30_sequencial == "")) {
             $this->erro_sql = " Campo eso30_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -182,12 +182,12 @@ class cl_contribuicaosindicalperiodo
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->eso30_sequencial = ($this->eso30_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso30_sequencial"] : $this->eso30_sequencial);
-            $this->eso30_empregador = ($this->eso30_empregador == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso30_empregador"] : $this->eso30_empregador);
-            $this->eso30_indicativo_periodo = ($this->eso30_indicativo_periodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso30_indicativo_periodo"] : $this->eso30_indicativo_periodo);
+            $this->eso30_sequencial = ($this->eso30_sequencial === 0 || $this->eso30_sequencial === 0.0 || $this->eso30_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso30_sequencial"] : $this->eso30_sequencial);
+            $this->eso30_empregador = ($this->eso30_empregador === 0 || $this->eso30_empregador === 0.0 || $this->eso30_empregador == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso30_empregador"] : $this->eso30_empregador);
+            $this->eso30_indicativo_periodo = ($this->eso30_indicativo_periodo === 0 || $this->eso30_indicativo_periodo === 0.0 || $this->eso30_indicativo_periodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso30_indicativo_periodo"] : $this->eso30_indicativo_periodo);
             $this->eso30_periodo = ($this->eso30_periodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso30_periodo"] : $this->eso30_periodo);
         } else {
-            $this->eso30_sequencial = ($this->eso30_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso30_sequencial"] : $this->eso30_sequencial);
+            $this->eso30_sequencial = ($this->eso30_sequencial === 0 || $this->eso30_sequencial === 0.0 || $this->eso30_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso30_sequencial"] : $this->eso30_sequencial);
         }
     }
 

@@ -47,12 +47,12 @@ class cl_rhprocessoreducaosuspensa
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh308_sequencial = ($this->rh308_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh308_sequencial"]:$this->rh308_sequencial);
-       $this->rh308_sequencialvalorretencao = ($this->rh308_sequencialvalorretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh308_sequencialvalorretencao"]:$this->rh308_sequencialvalorretencao);
-       $this->rh308_indtpdeducao = ($this->rh308_indtpdeducao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh308_indtpdeducao"]:$this->rh308_indtpdeducao);
-       $this->rh308_vlrdedsusp = ($this->rh308_vlrdedsusp == ""?@$GLOBALS["HTTP_POST_VARS"]["rh308_vlrdedsusp"]:$this->rh308_vlrdedsusp);
+       $this->rh308_sequencial = ($this->rh308_sequencial === 0 || $this->rh308_sequencial === 0.0 || $this->rh308_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh308_sequencial"]:$this->rh308_sequencial);
+       $this->rh308_sequencialvalorretencao = ($this->rh308_sequencialvalorretencao === 0 || $this->rh308_sequencialvalorretencao === 0.0 || $this->rh308_sequencialvalorretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh308_sequencialvalorretencao"]:$this->rh308_sequencialvalorretencao);
+       $this->rh308_indtpdeducao = ($this->rh308_indtpdeducao === 0 || $this->rh308_indtpdeducao === 0.0 || $this->rh308_indtpdeducao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh308_indtpdeducao"]:$this->rh308_indtpdeducao);
+       $this->rh308_vlrdedsusp = ($this->rh308_vlrdedsusp === 0 || $this->rh308_vlrdedsusp === 0.0 || $this->rh308_vlrdedsusp == ""?@$GLOBALS["HTTP_POST_VARS"]["rh308_vlrdedsusp"]:$this->rh308_vlrdedsusp);
      }else{
-       $this->rh308_sequencial = ($this->rh308_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh308_sequencial"]:$this->rh308_sequencial);
+       $this->rh308_sequencial = ($this->rh308_sequencial === 0 || $this->rh308_sequencial === 0.0 || $this->rh308_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh308_sequencial"]:$this->rh308_sequencial);
      }
    }
 
@@ -104,7 +104,7 @@ class cl_rhprocessoreducaosuspensa
          $this->rh308_sequencial = $rh308_sequencial; 
        }
      }
-     if(($this->rh308_sequencial == null) || ($this->rh308_sequencial == "") ){ 
+     if(($this->rh308_sequencial == null) || ($this->rh308_sequencial === 0 || $this->rh308_sequencial === 0.0 || $this->rh308_sequencial == "") ){ 
        $this->erro_sql = " Campo rh308_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

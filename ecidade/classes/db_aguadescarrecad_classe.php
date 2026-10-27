@@ -73,7 +73,7 @@ class cl_aguadescarrecad {
                  x35_tipojm = int4 = Tipo de juro e multa 
                  ";
    //funcao construtor da classe 
-   function cl_aguadescarrecad() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguadescarrecad"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,9 +90,9 @@ class cl_aguadescarrecad {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x35_numpre = ($this->x35_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_numpre"]:$this->x35_numpre);
-       $this->x35_numpar = ($this->x35_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_numpar"]:$this->x35_numpar);
-       $this->x35_numcgm = ($this->x35_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_numcgm"]:$this->x35_numcgm);
+       $this->x35_numpre = ($this->x35_numpre === 0 || $this->x35_numpre === 0.0 || $this->x35_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_numpre"]:$this->x35_numpre);
+       $this->x35_numpar = ($this->x35_numpar === 0 || $this->x35_numpar === 0.0 || $this->x35_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_numpar"]:$this->x35_numpar);
+       $this->x35_numcgm = ($this->x35_numcgm === 0 || $this->x35_numcgm === 0.0 || $this->x35_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_numcgm"]:$this->x35_numcgm);
        if($this->x35_dtoper == ""){
          $this->x35_dtoper_dia = @$GLOBALS["HTTP_POST_VARS"]["x35_dtoper_dia"];
          $this->x35_dtoper_mes = @$GLOBALS["HTTP_POST_VARS"]["x35_dtoper_mes"];
@@ -101,9 +101,9 @@ class cl_aguadescarrecad {
             $this->x35_dtoper = $this->x35_dtoper_ano."-".$this->x35_dtoper_mes."-".$this->x35_dtoper_dia;
          }
        }
-       $this->x35_receit = ($this->x35_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_receit"]:$this->x35_receit);
-       $this->x35_hist = ($this->x35_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_hist"]:$this->x35_hist);
-       $this->x35_valor = ($this->x35_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_valor"]:$this->x35_valor);
+       $this->x35_receit = ($this->x35_receit === 0 || $this->x35_receit === 0.0 || $this->x35_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_receit"]:$this->x35_receit);
+       $this->x35_hist = ($this->x35_hist === 0 || $this->x35_hist === 0.0 || $this->x35_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_hist"]:$this->x35_hist);
+       $this->x35_valor = ($this->x35_valor === 0 || $this->x35_valor === 0.0 || $this->x35_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_valor"]:$this->x35_valor);
        if($this->x35_dtvenc == ""){
          $this->x35_dtvenc_dia = @$GLOBALS["HTTP_POST_VARS"]["x35_dtvenc_dia"];
          $this->x35_dtvenc_mes = @$GLOBALS["HTTP_POST_VARS"]["x35_dtvenc_mes"];
@@ -112,10 +112,10 @@ class cl_aguadescarrecad {
             $this->x35_dtvenc = $this->x35_dtvenc_ano."-".$this->x35_dtvenc_mes."-".$this->x35_dtvenc_dia;
          }
        }
-       $this->x35_numtot = ($this->x35_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_numtot"]:$this->x35_numtot);
-       $this->x35_numdig = ($this->x35_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_numdig"]:$this->x35_numdig);
-       $this->x35_tipo = ($this->x35_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_tipo"]:$this->x35_tipo);
-       $this->x35_tipojm = ($this->x35_tipojm == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_tipojm"]:$this->x35_tipojm);
+       $this->x35_numtot = ($this->x35_numtot === 0 || $this->x35_numtot === 0.0 || $this->x35_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_numtot"]:$this->x35_numtot);
+       $this->x35_numdig = ($this->x35_numdig === 0 || $this->x35_numdig === 0.0 || $this->x35_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_numdig"]:$this->x35_numdig);
+       $this->x35_tipo = ($this->x35_tipo === 0 || $this->x35_tipo === 0.0 || $this->x35_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_tipo"]:$this->x35_tipo);
+       $this->x35_tipojm = ($this->x35_tipojm === 0 || $this->x35_tipojm === 0.0 || $this->x35_tipojm == ""?@$GLOBALS["HTTP_POST_VARS"]["x35_tipojm"]:$this->x35_tipojm);
      }else{
      }
    }
@@ -586,7 +586,7 @@ class cl_aguadescarrecad {
    function sql_query ( $oid = null,$campos="aguadescarrecad.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -615,7 +615,7 @@ class cl_aguadescarrecad {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -628,7 +628,7 @@ class cl_aguadescarrecad {
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -646,7 +646,7 @@ class cl_aguadescarrecad {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
