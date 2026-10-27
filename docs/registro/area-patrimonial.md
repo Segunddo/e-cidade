@@ -30,7 +30,7 @@ compartilhados, pelo `map`. Ordem: do menor para o maior.
 |---|---|---|---|---|---|---|
 | `ac`+`aco`+`ouv` | 1.727 | 60 Rector + 8 à mão | 1.727/1.727 | 892, só artefatos conhecidos | 22.684 linhas, só artefatos conhecidos | **168/168** |
 
-**Lote 1 — `ac`+`aco`+`ouv`** (Contratos e Ouvidoria, 168 telas). Rector só com regras já vetadas (37 guardas,
+**Lote 1 — `ac`+`aco`+`ouv`** (Contratos e Ouvidoria, 168 telas, roteadas no `location`). Rector só com regras já vetadas (37 guardas,
 37 construtores, 32 `ereg`/`split` — os 143 `split` literais: 142 `"#"`, 1 `"/"` —, 23 `parse_str`+`extract`),
 0 na 2ª passada. À mão:
 

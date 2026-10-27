@@ -23,7 +23,7 @@ if not LOTES: sys.exit("informe ao menos um <area>:<prefixos>")
 
 # Prefixos ja roteados por `location` (Fase A) -- ficam de fora do map.
 FASE_A = "'cem','itb','itbi','agu','agua','jur','div','mar','not','fis','iss','dvr','arr','tri','inf','tra'," \
-         "'tre','esc','rel','sec','bib','mer','edu','rh','eso','rec','pes'"
+         "'tre','esc','rel','sec','bib','mer','edu','rh','eso','rec','pes','ac','aco','ouv'"
 # ATENCAO: `\\copy` e meta-comando do psql e tem de caber em UMA LINHA.
 # Quebrado em varias, o psql falha -- e a mensagem de erro vem em LATIN-1, que
 # o Python nao decodifica como UTF-8: o sintoma e um UnicodeDecodeError, nao um

@@ -16,7 +16,7 @@ ECI = os.path.join(RAIZ, "ecidade")
 JA = ("TRIBUT", "EDUCA", "RECURSOS")           # areas concluidas
 
 # o mesmo regex do `location` do nginx (docker/proxy/nginx.conf)
-LOC = re.compile(r"^(?:cem|itbi?|agua?|jur|div|mar|not|fis|iss|dvr|arr|tri|inf|tra|tre|esc|rel|sec|bib|mer|edu|rh|eso|rec|pes)[0-9]*_", re.I)
+LOC = re.compile(r"^(?:cem|itbi?|agua?|jur|div|mar|not|fis|iss|dvr|arr|tri|inf|tra|tre|esc|rel|sec|bib|mer|edu|rh|eso|rec|pes|ac|aco|ouv)[0-9]*_", re.I)
 MAP = {l.split()[0] for l in open(os.path.join(RAIZ, "docker/proxy/faseb_map.conf"))
        if l.strip() and not l.startswith("#")}
 
