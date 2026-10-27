@@ -62,7 +62,7 @@ class cl_veicmotoristascentral {
                  ve41_dtfim = date = Final 
                  ";
    //funcao construtor da classe 
-   function cl_veicmotoristascentral() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veicmotoristascentral"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,9 +79,9 @@ class cl_veicmotoristascentral {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve41_sequencial = ($this->ve41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve41_sequencial"]:$this->ve41_sequencial);
-       $this->ve41_veicmotoristas = ($this->ve41_veicmotoristas == ""?@$GLOBALS["HTTP_POST_VARS"]["ve41_veicmotoristas"]:$this->ve41_veicmotoristas);
-       $this->ve41_veiccadcentral = ($this->ve41_veiccadcentral == ""?@$GLOBALS["HTTP_POST_VARS"]["ve41_veiccadcentral"]:$this->ve41_veiccadcentral);
+       $this->ve41_sequencial = ($this->ve41_sequencial === 0 || $this->ve41_sequencial === 0.0 || $this->ve41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve41_sequencial"]:$this->ve41_sequencial);
+       $this->ve41_veicmotoristas = ($this->ve41_veicmotoristas === 0 || $this->ve41_veicmotoristas === 0.0 || $this->ve41_veicmotoristas == ""?@$GLOBALS["HTTP_POST_VARS"]["ve41_veicmotoristas"]:$this->ve41_veicmotoristas);
+       $this->ve41_veiccadcentral = ($this->ve41_veiccadcentral === 0 || $this->ve41_veiccadcentral === 0.0 || $this->ve41_veiccadcentral == ""?@$GLOBALS["HTTP_POST_VARS"]["ve41_veiccadcentral"]:$this->ve41_veiccadcentral);
        if($this->ve41_dtini == ""){
          $this->ve41_dtini_dia = ($this->ve41_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve41_dtini_dia"]:$this->ve41_dtini_dia);
          $this->ve41_dtini_mes = ($this->ve41_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve41_dtini_mes"]:$this->ve41_dtini_mes);
@@ -99,7 +99,7 @@ class cl_veicmotoristascentral {
          }
        }
      }else{
-       $this->ve41_sequencial = ($this->ve41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve41_sequencial"]:$this->ve41_sequencial);
+       $this->ve41_sequencial = ($this->ve41_sequencial === 0 || $this->ve41_sequencial === 0.0 || $this->ve41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve41_sequencial"]:$this->ve41_sequencial);
      }
    }
    // funcao para inclusao
@@ -159,7 +159,7 @@ class cl_veicmotoristascentral {
          $this->ve41_sequencial = $ve41_sequencial; 
        }
      }
-     if(($this->ve41_sequencial == null) || ($this->ve41_sequencial == "") ){ 
+     if(($this->ve41_sequencial == null) || ($this->ve41_sequencial === 0 || $this->ve41_sequencial === 0.0 || $this->ve41_sequencial == "") ){ 
        $this->erro_sql = " Campo ve41_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -445,7 +445,7 @@ class cl_veicmotoristascentral {
    function sql_query ( $ve41_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -472,7 +472,7 @@ class cl_veicmotoristascentral {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_veicmotoristascentral {
    function sql_query_file ( $ve41_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -505,7 +505,7 @@ class cl_veicmotoristascentral {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

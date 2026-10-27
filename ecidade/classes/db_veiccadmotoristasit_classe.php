@@ -50,7 +50,7 @@ class cl_veiccadmotoristasit {
                  ve33_descr = varchar(40) = Descrição da Situação de Condutores 
                  ";
    //funcao construtor da classe 
-   function cl_veiccadmotoristasit() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veiccadmotoristasit"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_veiccadmotoristasit {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve33_codigo = ($this->ve33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve33_codigo"]:$this->ve33_codigo);
+       $this->ve33_codigo = ($this->ve33_codigo === 0 || $this->ve33_codigo === 0.0 || $this->ve33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve33_codigo"]:$this->ve33_codigo);
        $this->ve33_descr = ($this->ve33_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve33_descr"]:$this->ve33_descr);
      }else{
-       $this->ve33_codigo = ($this->ve33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve33_codigo"]:$this->ve33_codigo);
+       $this->ve33_codigo = ($this->ve33_codigo === 0 || $this->ve33_codigo === 0.0 || $this->ve33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve33_codigo"]:$this->ve33_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_veiccadmotoristasit {
          $this->ve33_codigo = $ve33_codigo; 
        }
      }
-     if(($this->ve33_codigo == null) || ($this->ve33_codigo == "") ){ 
+     if(($this->ve33_codigo == null) || ($this->ve33_codigo === 0 || $this->ve33_codigo === 0.0 || $this->ve33_codigo == "") ){ 
        $this->erro_sql = " Campo ve33_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_veiccadmotoristasit {
    function sql_query ( $ve33_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_veiccadmotoristasit {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_veiccadmotoristasit {
    function sql_query_file ( $ve33_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_veiccadmotoristasit {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

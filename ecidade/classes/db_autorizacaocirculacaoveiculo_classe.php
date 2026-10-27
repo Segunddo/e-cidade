@@ -73,7 +73,7 @@ class cl_autorizacaocirculacaoveiculo {
                  ve13_departamento = int4 = Departamento 
                  ";
    //funcao construtor da classe 
-   function cl_autorizacaocirculacaoveiculo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("autorizacaocirculacaoveiculo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,10 +90,10 @@ class cl_autorizacaocirculacaoveiculo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve13_sequencial = ($this->ve13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_sequencial"]:$this->ve13_sequencial);
-       $this->ve13_instituicao = ($this->ve13_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_instituicao"]:$this->ve13_instituicao);
-       $this->ve13_veiculo = ($this->ve13_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_veiculo"]:$this->ve13_veiculo);
-       $this->ve13_motorista = ($this->ve13_motorista == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_motorista"]:$this->ve13_motorista);
+       $this->ve13_sequencial = ($this->ve13_sequencial === 0 || $this->ve13_sequencial === 0.0 || $this->ve13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_sequencial"]:$this->ve13_sequencial);
+       $this->ve13_instituicao = ($this->ve13_instituicao === 0 || $this->ve13_instituicao === 0.0 || $this->ve13_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_instituicao"]:$this->ve13_instituicao);
+       $this->ve13_veiculo = ($this->ve13_veiculo === 0 || $this->ve13_veiculo === 0.0 || $this->ve13_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_veiculo"]:$this->ve13_veiculo);
+       $this->ve13_motorista = ($this->ve13_motorista === 0 || $this->ve13_motorista === 0.0 || $this->ve13_motorista == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_motorista"]:$this->ve13_motorista);
        if($this->ve13_datainicial == ""){
          $this->ve13_datainicial_dia = ($this->ve13_datainicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_datainicial_dia"]:$this->ve13_datainicial_dia);
          $this->ve13_datainicial_mes = ($this->ve13_datainicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_datainicial_mes"]:$this->ve13_datainicial_mes);
@@ -119,9 +119,9 @@ class cl_autorizacaocirculacaoveiculo {
          }
        }
        $this->ve13_observacao = ($this->ve13_observacao === null?@$GLOBALS["HTTP_POST_VARS"]["ve13_observacao"]:$this->ve13_observacao);
-       $this->ve13_departamento = ($this->ve13_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_departamento"]:$this->ve13_departamento);
+       $this->ve13_departamento = ($this->ve13_departamento === 0 || $this->ve13_departamento === 0.0 || $this->ve13_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_departamento"]:$this->ve13_departamento);
      }else{
-       $this->ve13_sequencial = ($this->ve13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_sequencial"]:$this->ve13_sequencial);
+       $this->ve13_sequencial = ($this->ve13_sequencial === 0 || $this->ve13_sequencial === 0.0 || $this->ve13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve13_sequencial"]:$this->ve13_sequencial);
      }
    }
    // funcao para Inclusão
@@ -214,7 +214,7 @@ class cl_autorizacaocirculacaoveiculo {
          $this->ve13_sequencial = $ve13_sequencial; 
        }
      }
-     if(($this->ve13_sequencial == null) || ($this->ve13_sequencial == "") ){ 
+     if(($this->ve13_sequencial == null) || ($this->ve13_sequencial === 0 || $this->ve13_sequencial === 0.0 || $this->ve13_sequencial == "") ){ 
        $this->erro_sql = " Campo ve13_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

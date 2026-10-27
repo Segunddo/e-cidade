@@ -61,7 +61,7 @@ class cl_veicitensobrigbaixa {
                  ve10_motivo = text = Motivo 
                  ";
    //funcao construtor da classe 
-   function cl_veicitensobrigbaixa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veicitensobrigbaixa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,9 +78,9 @@ class cl_veicitensobrigbaixa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve10_sequencial = ($this->ve10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_sequencial"]:$this->ve10_sequencial);
-       $this->ve10_veiccaditensobrigtipobaixa = ($this->ve10_veiccaditensobrigtipobaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_veiccaditensobrigtipobaixa"]:$this->ve10_veiccaditensobrigtipobaixa);
-       $this->ve10_veicitensobrig = ($this->ve10_veicitensobrig == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_veicitensobrig"]:$this->ve10_veicitensobrig);
+       $this->ve10_sequencial = ($this->ve10_sequencial === 0 || $this->ve10_sequencial === 0.0 || $this->ve10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_sequencial"]:$this->ve10_sequencial);
+       $this->ve10_veiccaditensobrigtipobaixa = ($this->ve10_veiccaditensobrigtipobaixa === 0 || $this->ve10_veiccaditensobrigtipobaixa === 0.0 || $this->ve10_veiccaditensobrigtipobaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_veiccaditensobrigtipobaixa"]:$this->ve10_veiccaditensobrigtipobaixa);
+       $this->ve10_veicitensobrig = ($this->ve10_veicitensobrig === 0 || $this->ve10_veicitensobrig === 0.0 || $this->ve10_veicitensobrig == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_veicitensobrig"]:$this->ve10_veicitensobrig);
        if($this->ve10_data == ""){
          $this->ve10_data_dia = ($this->ve10_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_data_dia"]:$this->ve10_data_dia);
          $this->ve10_data_mes = ($this->ve10_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_data_mes"]:$this->ve10_data_mes);
@@ -92,7 +92,7 @@ class cl_veicitensobrigbaixa {
        $this->ve10_hora = ($this->ve10_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_hora"]:$this->ve10_hora);
        $this->ve10_motivo = ($this->ve10_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_motivo"]:$this->ve10_motivo);
      }else{
-       $this->ve10_sequencial = ($this->ve10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_sequencial"]:$this->ve10_sequencial);
+       $this->ve10_sequencial = ($this->ve10_sequencial === 0 || $this->ve10_sequencial === 0.0 || $this->ve10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve10_sequencial"]:$this->ve10_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_veicitensobrigbaixa {
          $this->ve10_sequencial = $ve10_sequencial; 
        }
      }
-     if(($this->ve10_sequencial == null) || ($this->ve10_sequencial == "") ){ 
+     if(($this->ve10_sequencial == null) || ($this->ve10_sequencial === 0 || $this->ve10_sequencial === 0.0 || $this->ve10_sequencial == "") ){ 
        $this->erro_sql = " Campo ve10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_veicitensobrigbaixa {
    function sql_query ( $ve10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_veicitensobrigbaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -513,7 +513,7 @@ class cl_veicitensobrigbaixa {
    function sql_query_file ( $ve10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_veicitensobrigbaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

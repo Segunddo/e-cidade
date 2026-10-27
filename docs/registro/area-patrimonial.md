@@ -30,6 +30,7 @@ compartilhados, pelo `map`. Ordem: do menor para o maior.
 |---|---|---|---|---|---|---|
 | `ac`+`aco`+`ouv` | 1.727 | 60 Rector + 8 à mão | 1.727/1.727 | 892, só artefatos conhecidos | 22.684 linhas, só artefatos conhecidos | **168/168** |
 | `lic` | 2.586 (9 frentes) | 65 Rector | 2.586/2.586 | 26/26 | 588 linhas, 0 div. | **163/163** |
+| `vei` | 2.062 | 134 Rector + 2 à mão | 2.062/2.062 | 43/43 | 935 linhas, 0 div. | **172/172** |
 
 **Lote 1 — `ac`+`aco`+`ouv`** (Contratos e Ouvidoria, 168 telas, roteadas no `location`). Rector só com regras já vetadas (37 guardas,
 37 construtores, 32 `ereg`/`split` — os 143 `split` literais: 142 `"#"`, 1 `"/"` —, 23 `parse_str`+`extract`),
@@ -71,6 +72,14 @@ o universo dela já estavam portados (os 11 "alvos" eram o falso positivo do det
 por *token*) —, aba idêntica nos dois, acrescentada a `faseb_map_abas.txt`. Os dois `lic1_*` que redirecionam
 para `db_erros.php?db_erro=…` caem na página genérica de mensagem de erro: não é lacuna. Levantamento refeito:
 nada indo ao 5.6.
+
+**Lote 3 — `vei`** (Veículos, 172 telas, roteadas no `location`; `vei1_`…`vei4_`). Universo 2.062. Rector em 134
+arquivos, só regras já vetadas (90 `parse_str`+`extract`, 43 guardas, 43 construtores, 40 `ereg`/`split` — 175
+`split` com `"#"`, 3 com `","`), 0 na 2ª passada. À mão, 2 guardas `pg_*` (`null`) pelo `guarda_ciclo.py`, em
+`vei2_relcentralveiculoso002` e `vei2_veiccentral002` (relatórios abertos sem os parâmetros do formulário;
+`$result_central` não é comparado com `===`). Bateria 170/172 → **172/172**. LSP: 367 de 379 com `extends` carregam
+nos dois, 0 só no 5.6. Regressão: interseção com o universo servido e com o do `lic` vazia, núcleo intocado → sem
+bateria. Passo 8b depois de rotear (391 telas de Patrimonial no 8.5): nada indo ao 5.6.
 
 ### ⚠ 15ª LACUNA (27/10/2026, achada no lote 1): classes COM NAMESPACE, fora de todos os universos
 

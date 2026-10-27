@@ -50,7 +50,7 @@ class cl_veiccadcomb {
                  ve26_descr = varchar(40) = Descrição do Combustível 
                  ";
    //funcao construtor da classe 
-   function cl_veiccadcomb() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veiccadcomb"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_veiccadcomb {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve26_codigo = ($this->ve26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve26_codigo"]:$this->ve26_codigo);
+       $this->ve26_codigo = ($this->ve26_codigo === 0 || $this->ve26_codigo === 0.0 || $this->ve26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve26_codigo"]:$this->ve26_codigo);
        $this->ve26_descr = ($this->ve26_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve26_descr"]:$this->ve26_descr);
      }else{
-       $this->ve26_codigo = ($this->ve26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve26_codigo"]:$this->ve26_codigo);
+       $this->ve26_codigo = ($this->ve26_codigo === 0 || $this->ve26_codigo === 0.0 || $this->ve26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve26_codigo"]:$this->ve26_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_veiccadcomb {
          $this->ve26_codigo = $ve26_codigo; 
        }
      }
-     if(($this->ve26_codigo == null) || ($this->ve26_codigo == "") ){ 
+     if(($this->ve26_codigo == null) || ($this->ve26_codigo === 0 || $this->ve26_codigo === 0.0 || $this->ve26_codigo == "") ){ 
        $this->erro_sql = " Campo ve26_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_veiccadcomb {
    function sql_query ( $ve26_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_veiccadcomb {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_veiccadcomb {
    function sql_query_file ( $ve26_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_veiccadcomb {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_veicresp {
                  ve02_numcgm = int4 = Responsável 
                  ";
    //funcao construtor da classe 
-   function cl_veicresp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veicresp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_veicresp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve02_codigo = ($this->ve02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_codigo"]:$this->ve02_codigo);
-       $this->ve02_veiculo = ($this->ve02_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_veiculo"]:$this->ve02_veiculo);
-       $this->ve02_numcgm = ($this->ve02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_numcgm"]:$this->ve02_numcgm);
+       $this->ve02_codigo = ($this->ve02_codigo === 0 || $this->ve02_codigo === 0.0 || $this->ve02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_codigo"]:$this->ve02_codigo);
+       $this->ve02_veiculo = ($this->ve02_veiculo === 0 || $this->ve02_veiculo === 0.0 || $this->ve02_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_veiculo"]:$this->ve02_veiculo);
+       $this->ve02_numcgm = ($this->ve02_numcgm === 0 || $this->ve02_numcgm === 0.0 || $this->ve02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_numcgm"]:$this->ve02_numcgm);
      }else{
-       $this->ve02_codigo = ($this->ve02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_codigo"]:$this->ve02_codigo);
+       $this->ve02_codigo = ($this->ve02_codigo === 0 || $this->ve02_codigo === 0.0 || $this->ve02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_codigo"]:$this->ve02_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veicresp {
          $this->ve02_codigo = $ve02_codigo; 
        }
      }
-     if(($this->ve02_codigo == null) || ($this->ve02_codigo == "") ){ 
+     if(($this->ve02_codigo == null) || ($this->ve02_codigo === 0 || $this->ve02_codigo === 0.0 || $this->ve02_codigo == "") ){ 
        $this->erro_sql = " Campo ve02_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_veicresp {
    function sql_query ( $ve02_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_veicresp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_veicresp {
    function sql_query_file ( $ve02_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_veicresp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

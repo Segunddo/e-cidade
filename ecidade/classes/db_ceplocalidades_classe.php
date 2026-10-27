@@ -62,7 +62,7 @@ class cl_ceplocalidades {
                  cp05_codsubordinacao = int8 = Codigo Subordinação 
                  ";
    //funcao construtor da classe 
-   function cl_ceplocalidades() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ceplocalidades"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_ceplocalidades {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cp05_codlocalidades = ($this->cp05_codlocalidades == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codlocalidades"]:$this->cp05_codlocalidades);
+       $this->cp05_codlocalidades = ($this->cp05_codlocalidades === 0 || $this->cp05_codlocalidades === 0.0 || $this->cp05_codlocalidades == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codlocalidades"]:$this->cp05_codlocalidades);
        $this->cp05_sigla = ($this->cp05_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_sigla"]:$this->cp05_sigla);
        $this->cp05_localidades = ($this->cp05_localidades == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_localidades"]:$this->cp05_localidades);
        $this->cp05_cepinicial = ($this->cp05_cepinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_cepinicial"]:$this->cp05_cepinicial);
        $this->cp05_cepfinal = ($this->cp05_cepfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_cepfinal"]:$this->cp05_cepfinal);
        $this->cp05_tipo = ($this->cp05_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_tipo"]:$this->cp05_tipo);
        $this->cp05_situacao = ($this->cp05_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_situacao"]:$this->cp05_situacao);
-       $this->cp05_codsubordinacao = ($this->cp05_codsubordinacao == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codsubordinacao"]:$this->cp05_codsubordinacao);
+       $this->cp05_codsubordinacao = ($this->cp05_codsubordinacao === 0 || $this->cp05_codsubordinacao === 0.0 || $this->cp05_codsubordinacao == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codsubordinacao"]:$this->cp05_codsubordinacao);
      }else{
-       $this->cp05_codlocalidades = ($this->cp05_codlocalidades == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codlocalidades"]:$this->cp05_codlocalidades);
+       $this->cp05_codlocalidades = ($this->cp05_codlocalidades === 0 || $this->cp05_codlocalidades === 0.0 || $this->cp05_codlocalidades == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codlocalidades"]:$this->cp05_codlocalidades);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_ceplocalidades {
          $this->cp05_codlocalidades = $cp05_codlocalidades; 
        }
      }
-     if(($this->cp05_codlocalidades == null) || ($this->cp05_codlocalidades == "") ){ 
+     if(($this->cp05_codlocalidades == null) || ($this->cp05_codlocalidades === 0 || $this->cp05_codlocalidades === 0.0 || $this->cp05_codlocalidades == "") ){ 
        $this->erro_sql = " Campo cp05_codlocalidades nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -514,7 +514,7 @@ class cl_ceplocalidades {
    function sql_query ( $cp05_codlocalidades=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -536,7 +536,7 @@ class cl_ceplocalidades {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -548,7 +548,7 @@ class cl_ceplocalidades {
    function sql_query_file ( $cp05_codlocalidades=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -569,7 +569,7 @@ class cl_ceplocalidades {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

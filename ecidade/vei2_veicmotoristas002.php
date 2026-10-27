@@ -34,7 +34,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('z01_nome');
 $clrotulo->label('ve30_descr');
 $clrotulo->label('ve33_descr');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $where=" ve36_coddepto = " . db_getsession("DB_coddepto");
 $and="";
 if($ordem == "a") {

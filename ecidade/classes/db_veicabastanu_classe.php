@@ -63,7 +63,7 @@ class cl_veicabastanu
                  ";
 
     //funcao construtor da classe
-    function cl_veicabastanu()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("veicabastanu");
@@ -85,8 +85,8 @@ class cl_veicabastanu
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ve74_codigo = ($this->ve74_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_codigo"] : $this->ve74_codigo);
-            $this->ve74_veicabast = ($this->ve74_veicabast == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_veicabast"] : $this->ve74_veicabast);
+            $this->ve74_codigo = ($this->ve74_codigo === 0 || $this->ve74_codigo === 0.0 || $this->ve74_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_codigo"] : $this->ve74_codigo);
+            $this->ve74_veicabast = ($this->ve74_veicabast === 0 || $this->ve74_veicabast === 0.0 || $this->ve74_veicabast == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_veicabast"] : $this->ve74_veicabast);
             $this->ve74_motivo = ($this->ve74_motivo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_motivo"] : $this->ve74_motivo);
             if ($this->ve74_data == "") {
                 $this->ve74_data_dia = ($this->ve74_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_data_dia"] : $this->ve74_data_dia);
@@ -97,9 +97,9 @@ class cl_veicabastanu
                 }
             }
             $this->ve74_hora = ($this->ve74_hora == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_hora"] : $this->ve74_hora);
-            $this->ve74_usuario = ($this->ve74_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_usuario"] : $this->ve74_usuario);
+            $this->ve74_usuario = ($this->ve74_usuario === 0 || $this->ve74_usuario === 0.0 || $this->ve74_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_usuario"] : $this->ve74_usuario);
         } else {
-            $this->ve74_codigo = ($this->ve74_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_codigo"] : $this->ve74_codigo);
+            $this->ve74_codigo = ($this->ve74_codigo === 0 || $this->ve74_codigo === 0.0 || $this->ve74_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve74_codigo"] : $this->ve74_codigo);
         }
     }
 
@@ -190,7 +190,7 @@ class cl_veicabastanu
                 $this->ve74_codigo = $ve74_codigo;
             }
         }
-        if (($this->ve74_codigo == null) || ($this->ve74_codigo == "")) {
+        if (($this->ve74_codigo == null) || ($this->ve74_codigo === 0 || $this->ve74_codigo === 0.0 || $this->ve74_codigo == "")) {
             $this->erro_sql = " Campo ve74_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

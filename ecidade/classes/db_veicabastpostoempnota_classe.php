@@ -54,7 +54,7 @@ class cl_veicabastpostoempnota
                  ";
 
     //funcao construtor da classe
-    function cl_veicabastpostoempnota()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("veicabastpostoempnota");
@@ -76,11 +76,11 @@ class cl_veicabastpostoempnota
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ve72_codigo = ($this->ve72_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve72_codigo"] : $this->ve72_codigo);
-            $this->ve72_veicabastposto = ($this->ve72_veicabastposto == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve72_veicabastposto"] : $this->ve72_veicabastposto);
-            $this->ve72_empnota = ($this->ve72_empnota == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve72_empnota"] : $this->ve72_empnota);
+            $this->ve72_codigo = ($this->ve72_codigo === 0 || $this->ve72_codigo === 0.0 || $this->ve72_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve72_codigo"] : $this->ve72_codigo);
+            $this->ve72_veicabastposto = ($this->ve72_veicabastposto === 0 || $this->ve72_veicabastposto === 0.0 || $this->ve72_veicabastposto == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve72_veicabastposto"] : $this->ve72_veicabastposto);
+            $this->ve72_empnota = ($this->ve72_empnota === 0 || $this->ve72_empnota === 0.0 || $this->ve72_empnota == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve72_empnota"] : $this->ve72_empnota);
         } else {
-            $this->ve72_codigo = ($this->ve72_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve72_codigo"] : $this->ve72_codigo);
+            $this->ve72_codigo = ($this->ve72_codigo === 0 || $this->ve72_codigo === 0.0 || $this->ve72_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve72_codigo"] : $this->ve72_codigo);
         }
     }
 
@@ -130,7 +130,7 @@ class cl_veicabastpostoempnota
                 $this->ve72_codigo = $ve72_codigo;
             }
         }
-        if (($this->ve72_codigo == null) || ($this->ve72_codigo == "")) {
+        if (($this->ve72_codigo == null) || ($this->ve72_codigo === 0 || $this->ve72_codigo === 0.0 || $this->ve72_codigo == "")) {
             $this->erro_sql = " Campo ve72_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

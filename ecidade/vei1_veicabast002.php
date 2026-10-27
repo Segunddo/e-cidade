@@ -40,7 +40,8 @@ include(modification("classes/db_veiculos_classe.php"));
 include(modification("classes/db_veictipoabast_classe.php"));
 include(modification("classes/db_veicretirada_classe.php"));
 require(modification("libs/db_app.utils.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clveiculos              = new cl_veiculos;

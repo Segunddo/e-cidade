@@ -54,7 +54,7 @@ class cl_veicabastposto {
                  ve71_nota = varchar(20) = Nº da nota fiscal 
                  ";
    //funcao construtor da classe 
-   function cl_veicabastposto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veicabastposto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_veicabastposto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve71_codigo = ($this->ve71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_codigo"]:$this->ve71_codigo);
-       $this->ve71_veicabast = ($this->ve71_veicabast == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_veicabast"]:$this->ve71_veicabast);
-       $this->ve71_veiccadposto = ($this->ve71_veiccadposto == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_veiccadposto"]:$this->ve71_veiccadposto);
+       $this->ve71_codigo = ($this->ve71_codigo === 0 || $this->ve71_codigo === 0.0 || $this->ve71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_codigo"]:$this->ve71_codigo);
+       $this->ve71_veicabast = ($this->ve71_veicabast === 0 || $this->ve71_veicabast === 0.0 || $this->ve71_veicabast == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_veicabast"]:$this->ve71_veicabast);
+       $this->ve71_veiccadposto = ($this->ve71_veiccadposto === 0 || $this->ve71_veiccadposto === 0.0 || $this->ve71_veiccadposto == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_veiccadposto"]:$this->ve71_veiccadposto);
        $this->ve71_nota = ($this->ve71_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_nota"]:$this->ve71_nota);
      }else{
-       $this->ve71_codigo = ($this->ve71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_codigo"]:$this->ve71_codigo);
+       $this->ve71_codigo = ($this->ve71_codigo === 0 || $this->ve71_codigo === 0.0 || $this->ve71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_codigo"]:$this->ve71_codigo);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_veicabastposto {
          $this->ve71_codigo = $ve71_codigo; 
        }
      }
-     if(($this->ve71_codigo == null) || ($this->ve71_codigo == "") ){ 
+     if(($this->ve71_codigo == null) || ($this->ve71_codigo === 0 || $this->ve71_codigo === 0.0 || $this->ve71_codigo == "") ){ 
        $this->erro_sql = " Campo ve71_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -380,7 +380,7 @@ class cl_veicabastposto {
    function sql_query ( $ve71_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_veicabastposto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_veicabastposto {
    function sql_query_file ( $ve71_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -440,7 +440,7 @@ class cl_veicabastposto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_veicabastposto {
    function sql_query_tip ( $ve71_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_veicabastposto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
