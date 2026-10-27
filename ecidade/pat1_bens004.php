@@ -477,7 +477,7 @@ if (isset($incluir)) {
               break;
             }
           } else if (isset($dadmat) && trim($dadmat)!="") {
-            $dados_mat = split(",",$dadmat);
+            $dados_mat = preg_split("#,#m",$dadmat);
             $clbensmater->t53_codbem = $t52_bem;
             //				  					db_msgbox($dados_mat[0]." --- ".$dados_mat[1]." --- ".$dados_mat[2]." --- ".$dados_mat[3]);
             $clbensmater->t53_ntfisc = $dados_mat[0];

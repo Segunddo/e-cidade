@@ -29,7 +29,7 @@ class cl_levantamentopatrimonial {
                  p13_data = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_levantamentopatrimonial() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("levantamentopatrimonial"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -46,8 +46,8 @@ class cl_levantamentopatrimonial {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p13_sequencial = ($this->p13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p13_sequencial"]:$this->p13_sequencial);
-       $this->p13_departamento = ($this->p13_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["p13_departamento"]:$this->p13_departamento);
+       $this->p13_sequencial = ($this->p13_sequencial === 0 || $this->p13_sequencial === 0.0 || $this->p13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p13_sequencial"]:$this->p13_sequencial);
+       $this->p13_departamento = ($this->p13_departamento === 0 || $this->p13_departamento === 0.0 || $this->p13_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["p13_departamento"]:$this->p13_departamento);
        if($this->p13_data == ""){
          $this->p13_data_dia = ($this->p13_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p13_data_dia"]:$this->p13_data_dia);
          $this->p13_data_mes = ($this->p13_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["p13_data_mes"]:$this->p13_data_mes);
@@ -57,7 +57,7 @@ class cl_levantamentopatrimonial {
          }
        }
      }else{
-       $this->p13_sequencial = ($this->p13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p13_sequencial"]:$this->p13_sequencial);
+       $this->p13_sequencial = ($this->p13_sequencial === 0 || $this->p13_sequencial === 0.0 || $this->p13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p13_sequencial"]:$this->p13_sequencial);
      }
    }
    // funcao para Inclusão
@@ -105,7 +105,7 @@ class cl_levantamentopatrimonial {
          $this->p13_sequencial = $p13_sequencial; 
        }
      }
-     if(($this->p13_sequencial == null) || ($this->p13_sequencial == "") ){ 
+     if(($this->p13_sequencial == null) || ($this->p13_sequencial === 0 || $this->p13_sequencial === 0.0 || $this->p13_sequencial == "") ){ 
        $this->erro_sql = " Campo p13_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

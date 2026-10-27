@@ -96,7 +96,7 @@ final class impressaoOS214_plus extends impressao {
 	 * Método para finalizar os comandos
 	 * @param string $sFinalizadorCoamando
 	 */
-	public function rodarComandos(){
+	public function rodarComandos($sFinalizadorComando = ''){ // PHP 8 (LSP): parametro da mae, opcional
 		$sFinalizadorComando = chr(13);
 		parent::rodarComandos($sFinalizadorComando);
 

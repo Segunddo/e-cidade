@@ -50,7 +50,7 @@ class cl_apolitem {
                  t82_codbem = int8 = Código do bem 
                  ";
    //funcao construtor da classe 
-   function cl_apolitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("apolitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_apolitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t82_codapo = ($this->t82_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codapo"]:$this->t82_codapo);
-       $this->t82_codbem = ($this->t82_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codbem"]:$this->t82_codbem);
+       $this->t82_codapo = ($this->t82_codapo === 0 || $this->t82_codapo === 0.0 || $this->t82_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codapo"]:$this->t82_codapo);
+       $this->t82_codbem = ($this->t82_codbem === 0 || $this->t82_codbem === 0.0 || $this->t82_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codbem"]:$this->t82_codbem);
      }else{
-       $this->t82_codapo = ($this->t82_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codapo"]:$this->t82_codapo);
-       $this->t82_codbem = ($this->t82_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codbem"]:$this->t82_codbem);
+       $this->t82_codapo = ($this->t82_codapo === 0 || $this->t82_codapo === 0.0 || $this->t82_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codapo"]:$this->t82_codapo);
+       $this->t82_codbem = ($this->t82_codbem === 0 || $this->t82_codbem === 0.0 || $this->t82_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codbem"]:$this->t82_codbem);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_apolitem {
       $this->atualizacampos();
        $this->t82_codapo = $t82_codapo; 
        $this->t82_codbem = $t82_codbem; 
-     if(($this->t82_codapo == null) || ($this->t82_codapo == "") ){ 
+     if(($this->t82_codapo == null) || ($this->t82_codapo === 0 || $this->t82_codapo === 0.0 || $this->t82_codapo == "") ){ 
        $this->erro_sql = " Campo t82_codapo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_apolitem {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->t82_codbem == null) || ($this->t82_codbem == "") ){ 
+     if(($this->t82_codbem == null) || ($this->t82_codbem === 0 || $this->t82_codbem === 0.0 || $this->t82_codbem == "") ){ 
        $this->erro_sql = " Campo t82_codbem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_apolitem {
    function sql_query ( $t82_codapo=null,$t82_codbem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -353,7 +353,7 @@ class cl_apolitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_apolitem {
    function sql_query_apolice ( $t82_codapo=null,$t82_codbem=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_apolitem {
 $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -408,7 +408,7 @@ $sql .= $sql2;
    function sql_query_file ( $t82_codapo=null,$t82_codbem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ $sql .= $sql2;
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -54,7 +54,7 @@ class cl_bensmotbaixa
                  ";
 
     //funcao construtor da classe
-    function cl_bensmotbaixa()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("bensmotbaixa");
@@ -76,11 +76,11 @@ class cl_bensmotbaixa
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->t51_motivo = ($this->t51_motivo == "" ? @$GLOBALS["HTTP_POST_VARS"]["t51_motivo"] : $this->t51_motivo);
+            $this->t51_motivo = ($this->t51_motivo === 0 || $this->t51_motivo === 0.0 || $this->t51_motivo == "" ? @$GLOBALS["HTTP_POST_VARS"]["t51_motivo"] : $this->t51_motivo);
             $this->t51_descr = ($this->t51_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["t51_descr"] : $this->t51_descr);
             $this->t51_anexoobrigatorio = ($this->t51_anexoobrigatorio == "" ? @$GLOBALS["HTTP_POST_VARS"]["t51_anexoobrigatorio"] : $this->t51_anexoobrigatorio);
         } else {
-            $this->t51_motivo = ($this->t51_motivo == "" ? @$GLOBALS["HTTP_POST_VARS"]["t51_motivo"] : $this->t51_motivo);
+            $this->t51_motivo = ($this->t51_motivo === 0 || $this->t51_motivo === 0.0 || $this->t51_motivo == "" ? @$GLOBALS["HTTP_POST_VARS"]["t51_motivo"] : $this->t51_motivo);
         }
     }
 
@@ -127,7 +127,7 @@ class cl_bensmotbaixa
                 $this->t51_motivo = $t51_motivo;
             }
         }
-        if (($this->t51_motivo == null) || ($this->t51_motivo == "")) {
+        if (($this->t51_motivo == null) || ($this->t51_motivo === 0 || $this->t51_motivo === 0.0 || $this->t51_motivo == "")) {
             $this->erro_sql = " Campo t51_motivo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

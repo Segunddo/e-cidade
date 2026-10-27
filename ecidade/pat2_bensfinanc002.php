@@ -37,7 +37,8 @@ $clrotulo->label('t64_descr');
 $clrotulo->label('c60_estrut');
 $clrotulo->label('c60_descr');
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $sCampos = "";
 $sJoin = " inner join clabens         on clabens.t64_codcla          = bens.t52_codcla ";
@@ -430,7 +431,7 @@ if (isset($listabens) && $listabens != "") {
             if (isset($data_base_fim) && trim($data_base_fim) != '') {
                 $sData = implode('-', array_reverse(explode('/', $data_base_fim)));
             }
-            if (isset($$sqldBaixaFim) && trim($dBaixaFim) != '') {
+            if (isset(${$sqldBaixaFim}) && trim($dBaixaFim) != '') {
                 $sData = implode('-', array_reverse(explode('/', $dBaixaFim)));
             }
             $sWhere .= ($lPeriodoBaixa) ? $sWhereSemBaixa : " and (t55_codbem is null or t55_baixa > '{$sData}') ";
@@ -480,7 +481,7 @@ if($tipoData == 1) {
 $head7 = $sHeadBaixa;
 
 $result = db_query($sql);
-$totalLinhas = pg_num_rows($result);
+$totalLinhas = ($result ? pg_num_rows($result) : null);
 
 if ($totalLinhas == 0) {
     $sMsg = _M('patrimonial.patrimonio.pat2_bensfinanc002.nao_existem_bens');

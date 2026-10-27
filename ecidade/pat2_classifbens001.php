@@ -214,7 +214,7 @@ function js_mostraclabens11(chave1,chave2){
                         $cldb_estrut->funcao_onchange ='js_pesquisat64_class(false);';
                         $cldb_estrut->nome    = "t64_class";
                         $cldb_estrut->db_opcao= 1;
-                        if(isset($t06_codcla) && $t06_codcla!=""){
+                        if(isset($t06_codcla) && $t06_codcla != "" && $t06_codcla !== 0 && $t06_codcla !== 0.0){
                           $cldb_estrut->db_mascara(@$t06_codcla);
                         }else{
                           db_msgbox($msg_erro);
@@ -248,7 +248,7 @@ function js_mostraclabens11(chave1,chave2){
                     $cldb_estrut->funcao_onchange ='js_pesquisat64_class1(false);';
                     $cldb_estrut->nome    = "t64_class1";
                     $cldb_estrut->db_opcao= 1;
-                    if(isset($t06_codcla) && $t06_codcla!=""){
+                    if(isset($t06_codcla) && $t06_codcla != "" && $t06_codcla !== 0 && $t06_codcla !== 0.0){
                       $cldb_estrut->db_mascara(@$t06_codcla);
                     }else{
                       db_msgbox($msg_erro);

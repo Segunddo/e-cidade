@@ -176,7 +176,7 @@ $t52_bem = 5;
     </td>
   </tr>
   <?
-    $data = split("-",$t52_dtaqu);
+    $data = preg_split("#\\-#m",$t52_dtaqu);
     $t52_dtaqu_dia = $data[2];
     $t52_dtaqu_mes = $data[1];
     $t52_dtaqu_ano = $data[0];

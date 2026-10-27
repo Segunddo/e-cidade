@@ -42,7 +42,8 @@ $clrotulo->label('descrdepto');
 $clrotulo->label('t64_descr');
 $clrotulo->label('t64_class');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $res_cfpatriplaca = $clcfpatriplaca->sql_record($clcfpatriplaca->sql_query_file(db_getsession("DB_instit")));
 if ($clcfpatriplaca->numrows > 0){

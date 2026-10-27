@@ -50,7 +50,7 @@ class cl_situabens {
                  t70_descr = varchar(40) = Descrição da situação 
                  ";
    //funcao construtor da classe 
-   function cl_situabens() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("situabens"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_situabens {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t70_situac = ($this->t70_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["t70_situac"]:$this->t70_situac);
+       $this->t70_situac = ($this->t70_situac === 0 || $this->t70_situac === 0.0 || $this->t70_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["t70_situac"]:$this->t70_situac);
        $this->t70_descr = ($this->t70_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["t70_descr"]:$this->t70_descr);
      }else{
-       $this->t70_situac = ($this->t70_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["t70_situac"]:$this->t70_situac);
+       $this->t70_situac = ($this->t70_situac === 0 || $this->t70_situac === 0.0 || $this->t70_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["t70_situac"]:$this->t70_situac);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_situabens {
          $this->t70_situac = $t70_situac; 
        }
      }
-     if(($this->t70_situac == null) || ($this->t70_situac == "") ){ 
+     if(($this->t70_situac == null) || ($this->t70_situac === 0 || $this->t70_situac === 0.0 || $this->t70_situac == "") ){ 
        $this->erro_sql = " Campo t70_situac nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_situabens {
    function sql_query ( $t70_situac=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_situabens {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_situabens {
    function sql_query_file ( $t70_situac=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_situabens {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_situabens {
    function sql_query_histbem ( $t70_situac=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_situabens {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

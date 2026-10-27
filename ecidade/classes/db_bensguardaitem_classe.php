@@ -66,7 +66,7 @@ class cl_bensguardaitem {
                  t22_usuario = int4 = Cod. Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_bensguardaitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bensguardaitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,9 +83,9 @@ class cl_bensguardaitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t22_codigo = ($this->t22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_codigo"]:$this->t22_codigo);
-       $this->t22_bensguarda = ($this->t22_bensguarda == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_bensguarda"]:$this->t22_bensguarda);
-       $this->t22_bem = ($this->t22_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_bem"]:$this->t22_bem);
+       $this->t22_codigo = ($this->t22_codigo === 0 || $this->t22_codigo === 0.0 || $this->t22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_codigo"]:$this->t22_codigo);
+       $this->t22_bensguarda = ($this->t22_bensguarda === 0 || $this->t22_bensguarda === 0.0 || $this->t22_bensguarda == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_bensguarda"]:$this->t22_bensguarda);
+       $this->t22_bem = ($this->t22_bem === 0 || $this->t22_bem === 0.0 || $this->t22_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_bem"]:$this->t22_bem);
        if($this->t22_dtini == ""){
          $this->t22_dtini_dia = ($this->t22_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_dtini_dia"]:$this->t22_dtini_dia);
          $this->t22_dtini_mes = ($this->t22_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_dtini_mes"]:$this->t22_dtini_mes);
@@ -103,9 +103,9 @@ class cl_bensguardaitem {
          }
        }
        $this->t22_obs = ($this->t22_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_obs"]:$this->t22_obs);
-       $this->t22_usuario = ($this->t22_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_usuario"]:$this->t22_usuario);
+       $this->t22_usuario = ($this->t22_usuario === 0 || $this->t22_usuario === 0.0 || $this->t22_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_usuario"]:$this->t22_usuario);
      }else{
-       $this->t22_codigo = ($this->t22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_codigo"]:$this->t22_codigo);
+       $this->t22_codigo = ($this->t22_codigo === 0 || $this->t22_codigo === 0.0 || $this->t22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_codigo"]:$this->t22_codigo);
      }
    }
    // funcao para inclusao
@@ -174,7 +174,7 @@ class cl_bensguardaitem {
          $this->t22_codigo = $t22_codigo; 
        }
      }
-     if(($this->t22_codigo == null) || ($this->t22_codigo == "") ){ 
+     if(($this->t22_codigo == null) || ($this->t22_codigo === 0 || $this->t22_codigo === 0.0 || $this->t22_codigo == "") ){ 
        $this->erro_sql = " Campo t22_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -489,7 +489,7 @@ class cl_bensguardaitem {
    function sql_query ( $t22_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -517,7 +517,7 @@ class cl_bensguardaitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -529,7 +529,7 @@ class cl_bensguardaitem {
    function sql_query_dev ( $t22_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -559,7 +559,7 @@ class cl_bensguardaitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -571,7 +571,7 @@ class cl_bensguardaitem {
    function sql_query_file ( $t22_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -592,7 +592,7 @@ class cl_bensguardaitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

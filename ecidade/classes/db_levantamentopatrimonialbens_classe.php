@@ -26,7 +26,7 @@ class cl_levantamentopatrimonialbens {
                  p14_placa = varchar(50) = Placa 
                  ";
    //funcao construtor da classe 
-   function cl_levantamentopatrimonialbens() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("levantamentopatrimonialbens"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_levantamentopatrimonialbens {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p14_sequencial = ($this->p14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p14_sequencial"]:$this->p14_sequencial);
-       $this->p14_levantamentopatrimonial = ($this->p14_levantamentopatrimonial == ""?@$GLOBALS["HTTP_POST_VARS"]["p14_levantamentopatrimonial"]:$this->p14_levantamentopatrimonial);
+       $this->p14_sequencial = ($this->p14_sequencial === 0 || $this->p14_sequencial === 0.0 || $this->p14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p14_sequencial"]:$this->p14_sequencial);
+       $this->p14_levantamentopatrimonial = ($this->p14_levantamentopatrimonial === 0 || $this->p14_levantamentopatrimonial === 0.0 || $this->p14_levantamentopatrimonial == ""?@$GLOBALS["HTTP_POST_VARS"]["p14_levantamentopatrimonial"]:$this->p14_levantamentopatrimonial);
        $this->p14_placa = ($this->p14_placa == ""?@$GLOBALS["HTTP_POST_VARS"]["p14_placa"]:$this->p14_placa);
      }else{
-       $this->p14_sequencial = ($this->p14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p14_sequencial"]:$this->p14_sequencial);
+       $this->p14_sequencial = ($this->p14_sequencial === 0 || $this->p14_sequencial === 0.0 || $this->p14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p14_sequencial"]:$this->p14_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_levantamentopatrimonialbens {
          $this->p14_sequencial = $p14_sequencial; 
        }
      }
-     if(($this->p14_sequencial == null) || ($this->p14_sequencial == "") ){ 
+     if(($this->p14_sequencial == null) || ($this->p14_sequencial === 0 || $this->p14_sequencial === 0.0 || $this->p14_sequencial == "") ){ 
        $this->erro_sql = " Campo p14_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

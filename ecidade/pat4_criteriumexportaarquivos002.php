@@ -65,14 +65,14 @@ include(modification("dbforms/db_layouttxt.php"));
 			
 			$aParametros 	= $oJson->decode(str_replace("\\", "", $oGet->aParametros));
 		//	print_r($_GET);exit();
-			$iCountItem = count($aParametros);
+			$iCountItem = count((array)$aParametros);
 			$iCodigoUsuario = $oGet->idusuario;
 			$iCodigoDepto   = $oGet->coddepto;
 			$sQueryUsuarioCriterium = "select t08_id_usuario,t08_sequencial,t08_seqsinc 
 																	from usuariocriterium 
 																	where t08_sequencial = $iCodigoUsuario";
 			$resQueryUsuarioCriterium = db_query($sQueryUsuarioCriterium);
-			if(pg_num_rows($resQueryUsuarioCriterium)>0){
+			if(($resQueryUsuarioCriterium ? pg_num_rows($resQueryUsuarioCriterium) : null)>0){
 				$rowQueryUsuarioCriterium = pg_fetch_object($resQueryUsuarioCriterium);
 				$iCodDBUsuario 	= $rowQueryUsuarioCriterium->t08_id_usuario;
 				$iCodSequencial = $rowQueryUsuarioCriterium->t08_seqsinc;

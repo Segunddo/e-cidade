@@ -305,7 +305,7 @@ function js_escondeFieldsetMaterial(){
         $cldb_estrut->nome            = "t64_class";
         $cldb_estrut->db_opcao        = $db_opcao;
         
-        if ( isset($t06_codcla) && $t06_codcla != "" ) {
+        if ( isset($t06_codcla) && $t06_codcla != "" && $t06_codcla !== 0 && $t06_codcla !== 0.0 ) {
           $cldb_estrut->db_mascara(@$t06_codcla);
         } else {
           db_msgbox($msg_erro);

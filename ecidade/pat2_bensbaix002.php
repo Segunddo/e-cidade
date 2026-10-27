@@ -54,7 +54,8 @@ $clrotulo->label("t64_descr"); //descrição classificação
 $clrotulo->label("descrdepto"); //descrição do depart
 $clrotulo->label("t51_descr"); //descrição do motivo da baixa
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $relbaix    = "t52_instit = ".db_getsession("DB_instit");
 $msg        = "";

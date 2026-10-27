@@ -60,7 +60,8 @@ $clcfpatri      = new cl_cfpatri;
 $clcfpatriplaca = new cl_cfpatriplaca;
 $clbenstransfcodigo = new cl_benstransfcodigo;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 if(isset($db_atualizar) || isset($alterar)){
   $db_opcao = 2;
   $db_botao = true;

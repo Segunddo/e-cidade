@@ -59,7 +59,7 @@ class cl_benscadlote {
                  t42_usuario = int4 = Cod. Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_benscadlote() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("benscadlote"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,7 +76,7 @@ class cl_benscadlote {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t42_codigo = ($this->t42_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_codigo"]:$this->t42_codigo);
+       $this->t42_codigo = ($this->t42_codigo === 0 || $this->t42_codigo === 0.0 || $this->t42_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_codigo"]:$this->t42_codigo);
        $this->t42_descr = ($this->t42_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_descr"]:$this->t42_descr);
        if($this->t42_data == ""){
          $this->t42_data_dia = ($this->t42_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_data_dia"]:$this->t42_data_dia);
@@ -87,9 +87,9 @@ class cl_benscadlote {
          }
        }
        $this->t42_hora = ($this->t42_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_hora"]:$this->t42_hora);
-       $this->t42_usuario = ($this->t42_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_usuario"]:$this->t42_usuario);
+       $this->t42_usuario = ($this->t42_usuario === 0 || $this->t42_usuario === 0.0 || $this->t42_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_usuario"]:$this->t42_usuario);
      }else{
-       $this->t42_codigo = ($this->t42_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_codigo"]:$this->t42_codigo);
+       $this->t42_codigo = ($this->t42_codigo === 0 || $this->t42_codigo === 0.0 || $this->t42_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_codigo"]:$this->t42_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_benscadlote {
          $this->t42_codigo = $t42_codigo; 
        }
      }
-     if(($this->t42_codigo == null) || ($this->t42_codigo == "") ){ 
+     if(($this->t42_codigo == null) || ($this->t42_codigo === 0 || $this->t42_codigo === 0.0 || $this->t42_codigo == "") ){ 
        $this->erro_sql = " Campo t42_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -445,7 +445,7 @@ class cl_benscadlote {
    function sql_query ( $t42_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -467,7 +467,7 @@ class cl_benscadlote {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -479,7 +479,7 @@ class cl_benscadlote {
    function sql_query_file ( $t42_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -500,7 +500,7 @@ class cl_benscadlote {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

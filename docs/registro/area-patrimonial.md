@@ -31,6 +31,7 @@ compartilhados, pelo `map`. Ordem: do menor para o maior.
 | `ac`+`aco`+`ouv` | 1.727 | 60 Rector + 8 à mão | 1.727/1.727 | 892, só artefatos conhecidos | 22.684 linhas, só artefatos conhecidos | **168/168** |
 | `lic` | 2.586 (9 frentes) | 65 Rector | 2.586/2.586 | 26/26 | 588 linhas, 0 div. | **163/163** |
 | `vei` | 2.062 | 134 Rector + 2 à mão | 2.062/2.062 | 43/43 | 935 linhas, 0 div. | **172/172** |
+| `pat` | 2.165 | 98 Rector + 13 à mão | 2.165/2.165 | 24/24 | 519 linhas, 0 div. | **261/261** |
 
 **Lote 1 — `ac`+`aco`+`ouv`** (Contratos e Ouvidoria, 168 telas, roteadas no `location`). Rector só com regras já vetadas (37 guardas,
 37 construtores, 32 `ereg`/`split` — os 143 `split` literais: 142 `"#"`, 1 `"/"` —, 23 `parse_str`+`extract`),
@@ -80,6 +81,53 @@ arquivos, só regras já vetadas (90 `parse_str`+`extract`, 43 guardas, 43 const
 `$result_central` não é comparado com `===`). Bateria 170/172 → **172/172**. LSP: 367 de 379 com `extends` carregam
 nos dois, 0 só no 5.6. Regressão: interseção com o universo servido e com o do `lic` vazia, núcleo intocado → sem
 bateria. Passo 8b depois de rotear (391 telas de Patrimonial no 8.5): nada indo ao 5.6.
+
+**Lote 4 — `pat`** (Patrimônio, 261 telas, roteadas no `location`; variantes `pat1_`…`pat4_` e **`pat_`** sem dígito,
+`pat_campanha_publicitaria.php`, que o `[0-9]*` cobre). Universo 2.165. Rector em 98 arquivos, só regras já vetadas
+(71 `parse_str`+`extract`, 23 guardas, 23 construtores, 23 `ereg`/`split`, 2 `${$var}`). Os 8 `ereg_replace` com
+classes de acentos LATIN-1 que o detector por bytes apontou em `pat4_imprimeetiquetas002.php` estão **comentados**
+(`//`) — o Rector, corretamente, não os tocou.
+
+À mão:
+
+- **LSP:** `model/impressao.argoxOS214.php` e `…OS214_plus.php` declaravam `rodarComandos()` sem o parâmetro opcional
+  da mãe `impressao::rodarComandos($sFinalizadorComando = '')` — não carregavam no 8.5. Parâmetro da mãe acrescentado;
+  a primeira linha do corpo já **atribui** `$sFinalizadorComando` (`"\n"` / `chr(13)`), então o padrão não muda nada.
+- **`break` fora de laço** em `pat1_bens005.php:228`, no ramo de erro de `incluir()`, alcançável → **`exit;`**.
+- **NÚCLEO `db_mascara()`** (`dbforms/db_classesgenericas.php` + cópia do `modification/`): `pg_num_rows(false)` quando a
+  SQL termina em `where db77_codestrut=` (código vazio; 20 "erro de sintaxe no fim da entrada" no log do PostgreSQL).
+  `($result ? pg_num_rows($result) : null)`: no 5.6 `NULL > 0` é falso e a tela segue para "Não existe estrutural…" +
+  `exit`, o mesmo caminho. Derrubava `pat1_clabens001/002/003` e `pat2_bensdepart001`.
+- 6 guardas `pg_*` (`null`) pelo ciclo — uma delas em **`src/Patrimonial/Patrimonio/Bem/Model/Bem.php:116`**, alcançado
+  só pela 9ª frente —, e 2 `count(null)` → `count((array)…)`.
+- **6 telas truncadas SEM fatal no log** (`pat1_bens004/005`, `pat1_bensaltlote001/005`, `pat1_bensglobal001`,
+  `pat2_classifbens001`): o **`0 != ""` na forma NEGADA** (6ª manifestação da RFC, a mesma do `cai`). Com `cfpatri`
+  vazia o formulário faz `$t06_codcla = 0`, e `if (isset($t06_codcla) && $t06_codcla != "")` é falso no 5.6 (mostra
+  "Estrutural não cadastrado no parâmetro.") e **verdadeiro no 8.5** (chama `db_mascara(0)`, que encerra a página).
+  Guarda do catálogo, `$x != "" && $x !== 0 && $x !== 0.0`, nas 5 linhas (`forms/db_frmbens.php`,
+  `db_frmbensaltlote.php`, `db_frm_bensglobal.php`, `pat2_classifbens001.php` ×2).
+
+Bateria 245/261 → **261/261**. LSP: 371 de 387 com `extends` carregam nos dois (antes das impressoras: 2 só no 5.6).
+Núcleo tocado → **bateria completa**: **5.350/5.374** (as 24 caracterizadas; uma das telas de laço eterno do `edu4` saiu
+como TIMEOUT em vez de DIVERGE, mesma tela e mesma causa) e `map` **555/555**. Passo 8b depois de rotear (540 telas de
+Patrimonial no 8.5): nada indo ao 5.6.
+
+#### ⚠ PENDENTE DE MEDIÇÃO: a forma negada `$this->campo != ""` nas classes de dados
+
+O `GuardaComparacaoLiteralRector` só cobre `==`. A forma `!=`, com propriedade inteira e **sem `trim()`**, aparece
+**7.372 vezes em 1.865 classes** — 7.338 no bloco de **auditoria** do `alterar()`
+(`if (isset(POST[x]) || $this->x != "") insert into db_acount …`) e **34 no SQL de negócio** (`SET` do `alterar()`,
+`WHERE` do `excluir()`). Nenhuma bateria a veria: o nível 1 não executa `alterar()`, e o nível 3 descarta a auditoria.
+
+**Ressalva, não medida ainda:** em quase todo fluxo o `alterar()` roda depois do `atualizacampos()`, que já com a
+guarda do `==` troca o `0` de campo ausente do formulário pelo `null` do POST — e `null != ""` é falso **nos dois**.
+A forma negada só dispara quando a propriedade ainda vale o inteiro `0` na comparação. Os 7.372 contam onde o padrão
+existe, não onde muda resultado.
+
+**Decisão do usuário (27/10/2026): medir antes de escolher.** Próximo passo: estender o caminho de escrita (nível 1)
+para executar `alterar()` sem o campo no POST e comparar o SQL de negócio e de auditoria montados por cada runtime.
+Opções em aberto depois da medição: (1) estender a regra do Rector para `!=` e aplicar pela cadeia; (2) só as que de
+fato divergem no negócio; (3) só registrar.
 
 ### ⚠ 15ª LACUNA (27/10/2026, achada no lote 1): classes COM NAMESPACE, fora de todos os universos
 
