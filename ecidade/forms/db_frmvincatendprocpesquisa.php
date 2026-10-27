@@ -43,7 +43,7 @@ $sqlProcessoOuvidoria = " select ov09_sequencial,
                            where ov09_protprocesso = {$iP58_CodProc} ";
 
 $rsProcessoOuvidoria = db_query($sqlProcessoOuvidoria);
-$iProcessoOuvidoria  = pg_num_rows($rsProcessoOuvidoria);
+$iProcessoOuvidoria  = ($rsProcessoOuvidoria ? pg_num_rows($rsProcessoOuvidoria) : null);
 
 if ($iProcessoOuvidoria > 0) {
 	$oProcessoOuvidoria = db_utils::fieldsMemory($rsProcessoOuvidoria,0);

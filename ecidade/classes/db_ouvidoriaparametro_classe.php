@@ -54,7 +54,7 @@ class cl_ouvidoriaparametro {
                  ov06_db_documentotemplate = int4 = Documento Template
                  ";
    //funcao construtor da classe
-   function cl_ouvidoriaparametro() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ouvidoriaparametro");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_ouvidoriaparametro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov06_instit = ($this->ov06_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_instit"]:$this->ov06_instit);
-       $this->ov06_anousu = ($this->ov06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_anousu"]:$this->ov06_anousu);
-       $this->ov06_tiponumprocesso = ($this->ov06_tiponumprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_tiponumprocesso"]:$this->ov06_tiponumprocesso);
-       $this->ov06_db_documentotemplate = ($this->ov06_db_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_db_documentotemplate"]:$this->ov06_db_documentotemplate);
+       $this->ov06_instit = ($this->ov06_instit === 0 || $this->ov06_instit === 0.0 || $this->ov06_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_instit"]:$this->ov06_instit);
+       $this->ov06_anousu = ($this->ov06_anousu === 0 || $this->ov06_anousu === 0.0 || $this->ov06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_anousu"]:$this->ov06_anousu);
+       $this->ov06_tiponumprocesso = ($this->ov06_tiponumprocesso === 0 || $this->ov06_tiponumprocesso === 0.0 || $this->ov06_tiponumprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_tiponumprocesso"]:$this->ov06_tiponumprocesso);
+       $this->ov06_db_documentotemplate = ($this->ov06_db_documentotemplate === 0 || $this->ov06_db_documentotemplate === 0.0 || $this->ov06_db_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_db_documentotemplate"]:$this->ov06_db_documentotemplate);
      }else{
-       $this->ov06_instit = ($this->ov06_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_instit"]:$this->ov06_instit);
-       $this->ov06_anousu = ($this->ov06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_anousu"]:$this->ov06_anousu);
+       $this->ov06_instit = ($this->ov06_instit === 0 || $this->ov06_instit === 0.0 || $this->ov06_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_instit"]:$this->ov06_instit);
+       $this->ov06_anousu = ($this->ov06_anousu === 0 || $this->ov06_anousu === 0.0 || $this->ov06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ov06_anousu"]:$this->ov06_anousu);
      }
    }
    // funcao para inclusao
@@ -97,7 +97,7 @@ class cl_ouvidoriaparametro {
      }
        $this->ov06_instit = $ov06_instit;
        $this->ov06_anousu = $ov06_anousu;
-     if(($this->ov06_instit == null) || ($this->ov06_instit == "") ){
+     if(($this->ov06_instit == null) || ($this->ov06_instit === 0 || $this->ov06_instit === 0.0 || $this->ov06_instit == "") ){
        $this->erro_sql = " Campo ov06_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -105,7 +105,7 @@ class cl_ouvidoriaparametro {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->ov06_anousu == null) || ($this->ov06_anousu == "") ){
+     if(($this->ov06_anousu == null) || ($this->ov06_anousu === 0 || $this->ov06_anousu === 0.0 || $this->ov06_anousu == "") ){
        $this->erro_sql = " Campo ov06_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -405,7 +405,8 @@ outro prefixo.
 # GET no 8.5 de cada tela de menu da area (e das abas ja roteadas: segundo salto),
 # classificando cada iframe/redirecionamento pelo mesmo criterio do nginx
 python3 scratchpad/redirecionamentos.py <SID> /tmp/redir.tsv TRIBUT,EDUCA,RECURSOS,<NOVA_AREA>
-awk -F'\t' '$1=="NO_5.6" && $4!="corpo.php"' /tmp/redir.tsv   # TEM de sair vazio
+# grep e nao awk de proposito: o carregador da skill troca cifrao+numero pelos argumentos
+grep -P '^NO_5\.6\t' /tmp/redir.tsv | grep -vP '\tcorpo\.php\t'   # TEM de sair vazio
 ```
 
 Para cada linha `NO_5.6`:

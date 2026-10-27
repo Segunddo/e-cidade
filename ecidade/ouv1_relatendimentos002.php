@@ -33,7 +33,8 @@ include(modification("classes/db_db_depart_classe.php"));
 
 $cldepartamento = new cl_db_depart();
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_GET_VARS);
 
 //db_redireciona('db_erros.php?fechar=true&db_erro=Nenhum processo encontrado!');
@@ -202,7 +203,7 @@ $background = 0;
 $sDeptoAnterior = ($quebra == 2?"":$aRelatorio[0]->descrdepto . " - " ) . $aRelatorio[0]->depto_destino;
 
 for ($iInd=0; $iInd<$iNumRows; $iInd++) {
-	
+
 	if (array_key_exists(($quebra == 2?"":$aRelatorio[$iInd]->descrdepto . " - " ) . $aRelatorio[$iInd]->depto_destino,$aTotalPorDepto)) {
 	  $aTotalPorDepto[($quebra == 2?"":$aRelatorio[$iInd]->descrdepto . " - " ) . $aRelatorio[$iInd]->depto_destino]++;
 	}else{
@@ -228,7 +229,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 	}else{
     $aTotalPorSituacao[$aRelatorio[$iInd]->situacao] = 1;
 	}
-	
+
 	if($pdf->GetY() > $pdf->h - 25){
   		$pdf->AddPage('L');
   	}
@@ -244,7 +245,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 		  	$pdf->Ln(1);
 				$pdf->Cell(100,5,"Total de Atendimentos *",0,0,"L",1);
 				$pdf->Cell(20,5,$aTotalPorDepto[$sDeptoAnterior],0,1,"C",1);
-						
+
   			//Imprime resumo por Tipo de Processo
   			if($tipoprocesso == 'S'){
 					if($pdf->GetY() > $pdf->h - 30){
@@ -256,7 +257,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 					$pdf->Cell(100,5,"Tipo de Processo",0,0,"L",1);
 					$pdf->Cell(20,5,"Total",0,1,"C",1);
 					$pdf->SetFont('Arial','',7);
-					
+
 					$background = 1;
 					asort($aTotalParcialPorTipo);
 					$aPorTipo =  array_reverse($aTotalParcialPorTipo);
@@ -267,7 +268,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 						$background = $background == 1 ? 0 : 1;
 						$pdf->Cell(100,5,$key,0,0,"L",$background);
 						$pdf->Cell(20,5,$value,0,1,"C",$background);
-					
+
 					}
   			}
   			//Imprime resumo por Forma de Reclamação
@@ -281,7 +282,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 					$pdf->Cell(100,5,"Forma de Reclamação",0,0,"L",1);
 					$pdf->Cell(20,5,"Total",0,1,"C",1);
 					$pdf->SetFont('Arial','',7);
-					
+
 					$background = 1;
 					asort($aTotalParcialPorForma);
 					$aPorForma = array_reverse($aTotalParcialPorForma);
@@ -292,7 +293,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 						$background = $background == 1 ? 0 : 1;
 						$pdf->Cell(100,5,$key,0,0,"L",$background);
 						$pdf->Cell(20,5,$value,0,1,"C",$background);
-					
+
 					}
   			}
   			//Imprime resumo por Situacão
@@ -306,7 +307,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 					$pdf->Cell(100,5,"Situação",0,0,"L",1);
 					$pdf->Cell(20,5,"Total",0,1,"C",1);
 					$pdf->SetFont('Arial','',7);
-					
+
 					$background = 1;
 					asort($aTotalParcialPorSituacao);
 					$aPorTipo =  array_reverse($aTotalParcialPorSituacao);
@@ -330,7 +331,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 					$pdf->Cell(100,5,"Ouvidor",0,0,"L",1);
 					$pdf->Cell(20,5,"Total",0,1,"C",1);
 					$pdf->SetFont('Arial','',7);
-					
+
 					$background = 1;
 					asort($aTotalParcialPorOuvidor);
 					$aPorTipo =  array_reverse($aTotalParcialPorOuvidor);
@@ -395,9 +396,9 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
     $pdf->setfillcolor(180);
   if ($lQuebraPorOuvidor && !array_key_exists($aRelatorio[$iInd]->nomeouvidor,$aOuvidorImpressos) ){
   	//echo "<b>Quebra por ouvidor : ".$aRelatorio[$iInd]->nomeouvidor."</b><br>";
-  	
+
   	$pdf->Ln();
-  	
+
   	$pdf->Cell(30,5,'OUVIDOR: ',0,0,'L',0);
 	  $pdf->Cell(10,5,$aRelatorio[$iInd]->ov01_usuario." - ".$aRelatorio[$iInd]->nomeouvidor,0,1,'L',1);
 	  $pdf_cabecalho = true;   	
@@ -409,7 +410,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 	  $pdf_cabecalho = true;  	
   }
   $pdf->setfillcolor(235);
-	
+
   if($pdf->GetY() > $pdf->h - 25 || $pdf_cabecalho == true){
   	if($pdf->GetY() > $pdf->h - 25){
   		$pdf->AddPage('L');
@@ -423,7 +424,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 	  $bordat = 0;
 	  $pdf->SetFont('Arial','b',7);
 	  $pdf->ln(2);
-		
+
 		$pdf->Cell(20,5,"Atendimento"   ,1,0,"C",1);
 		$pdf->Cell(60,5,"Tipo de Processo"   ,1,0,"C",1);
 		$pdf->Cell(15,5,"Data"			         ,1,0,"C",1);
@@ -440,7 +441,7 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
   	$pdf->SetFont('Arial','',7);
 	  //$pdf->ln(2);
 		$background = $background == 1 ? 0 : 1;
-		
+
 		$pdf->Cell(20,5,$aRelatorio[$iInd]->ov01_numero  					,0,0,"C",$background);
 		$pdf->Cell(60,5,substr($aRelatorio[$iInd]->tipoprocesso		,0,38)		,0,0,"L",$background);
 		$pdf->Cell(15,5,db_formatar($aRelatorio[$iInd]->data,'d')	,0,0,"C",$background);
@@ -482,11 +483,11 @@ for ($iInd=0; $iInd<$iNumRows; $iInd++) {
 		}else{
 			$aTotalParcialPorSituacao[$aRelatorio[$iInd]->situacao] = 1;
 		}
-		
+
   $aDeptosImpressos[ ($quebra == 2?"":str_pad( $aRelatorio[$iInd]->ov01_depart, 5, '0', STR_PAD_LEFT )) . $aRelatorio[$iInd]->depto_destino] = ($quebra == 2?"":str_pad( $aRelatorio[$iInd]->ov01_depart, 5, '0', STR_PAD_LEFT )) . $aRelatorio[$iInd]->depto_destino;
   $aOuvidorImpressos[$aRelatorio[$iInd]->nomeouvidor] = $aRelatorio[$iInd]->nomeouvidor;
   $aTiposImpressos[$aRelatorio[$iInd]->tipoprocesso]  = $aRelatorio[$iInd]->tipoprocesso;
-  
+
   $sDeptoAnterior = ($quebra == 2?"":$aRelatorio[$iInd]->descrdepto . " - " ) . $aRelatorio[$iInd]->depto_destino;
 
 //  echo $aRelatorio[$iInd]->ov01_numero . " - " . $sDeptoAnterior . "<br>";

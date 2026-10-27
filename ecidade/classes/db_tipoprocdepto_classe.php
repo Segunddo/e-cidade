@@ -52,7 +52,7 @@ class cl_tipoprocdepto {
                  p41_coddepto = int4 = Código do Departamento
                  ";
    //funcao construtor da classe
-   function cl_tipoprocdepto() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoprocdepto");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_tipoprocdepto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p41_sequencial = ($this->p41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p41_sequencial"]:$this->p41_sequencial);
-       $this->p41_tipoproc = ($this->p41_tipoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p41_tipoproc"]:$this->p41_tipoproc);
-       $this->p41_coddepto = ($this->p41_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["p41_coddepto"]:$this->p41_coddepto);
+       $this->p41_sequencial = ($this->p41_sequencial === 0 || $this->p41_sequencial === 0.0 || $this->p41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p41_sequencial"]:$this->p41_sequencial);
+       $this->p41_tipoproc = ($this->p41_tipoproc === 0 || $this->p41_tipoproc === 0.0 || $this->p41_tipoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p41_tipoproc"]:$this->p41_tipoproc);
+       $this->p41_coddepto = ($this->p41_coddepto === 0 || $this->p41_coddepto === 0.0 || $this->p41_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["p41_coddepto"]:$this->p41_coddepto);
      }else{
-       $this->p41_sequencial = ($this->p41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p41_sequencial"]:$this->p41_sequencial);
+       $this->p41_sequencial = ($this->p41_sequencial === 0 || $this->p41_sequencial === 0.0 || $this->p41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p41_sequencial"]:$this->p41_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tipoprocdepto {
          $this->p41_sequencial = $p41_sequencial;
        }
      }
-     if(($this->p41_sequencial == null) || ($this->p41_sequencial == "") ){
+     if(($this->p41_sequencial == null) || ($this->p41_sequencial === 0 || $this->p41_sequencial === 0.0 || $this->p41_sequencial == "") ){
        $this->erro_sql = " Campo p41_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

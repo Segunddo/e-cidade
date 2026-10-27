@@ -77,7 +77,7 @@ $sQueryCidadaoCgm .= "	 	 where c.ov02_sequencial = $ov02_sequencial and ov02_at
 $rsQueryCidadaoCgm = db_query($sQueryCidadaoCgm);
 
 $cidadao_false = true;;
-if(pg_num_rows($rsQueryCidadaoCgm)>0){
+if(($rsQueryCidadaoCgm ? pg_num_rows($rsQueryCidadaoCgm) : null)>0){
 	db_fieldsmemory($rsQueryCidadaoCgm,0);
 	$cidadao_false = false;
 }

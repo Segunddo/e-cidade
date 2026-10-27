@@ -26,7 +26,7 @@ class cl_mensageriaacordo {
                  ac51_mensagem = text = Mensagem 
                  ";
    //funcao construtor da classe 
-   function cl_mensageriaacordo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mensageriaacordo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_mensageriaacordo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac51_sequencial = ($this->ac51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_sequencial"]:$this->ac51_sequencial);
+       $this->ac51_sequencial = ($this->ac51_sequencial === 0 || $this->ac51_sequencial === 0.0 || $this->ac51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_sequencial"]:$this->ac51_sequencial);
        $this->ac51_assunto = ($this->ac51_assunto == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_assunto"]:$this->ac51_assunto);
        $this->ac51_mensagem = ($this->ac51_mensagem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_mensagem"]:$this->ac51_mensagem);
      }else{
-       $this->ac51_sequencial = ($this->ac51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_sequencial"]:$this->ac51_sequencial);
+       $this->ac51_sequencial = ($this->ac51_sequencial === 0 || $this->ac51_sequencial === 0.0 || $this->ac51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_sequencial"]:$this->ac51_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_mensageriaacordo {
          $this->ac51_sequencial = $ac51_sequencial; 
        }
      }
-     if(($this->ac51_sequencial == null) || ($this->ac51_sequencial == "") ){ 
+     if(($this->ac51_sequencial == null) || ($this->ac51_sequencial === 0 || $this->ac51_sequencial === 0.0 || $this->ac51_sequencial == "") ){ 
        $this->erro_sql = " Campo ac51_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -356,7 +356,7 @@ class cl_mensageriaacordo {
    function sql_query ( $ac51_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -377,7 +377,7 @@ class cl_mensageriaacordo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_mensageriaacordo {
    function sql_query_file ( $ac51_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -411,7 +411,7 @@ class cl_mensageriaacordo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

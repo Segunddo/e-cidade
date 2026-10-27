@@ -26,7 +26,7 @@ class cl_mensageriaacordoprocessados {
                  ac53_acordo = int4 = Acordo 
                  ";
    //funcao construtor da classe 
-   function cl_mensageriaacordoprocessados() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mensageriaacordoprocessados"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_mensageriaacordoprocessados {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac53_sequencial = ($this->ac53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_sequencial"]:$this->ac53_sequencial);
-       $this->ac53_mensageriaacordodb_usuarios = ($this->ac53_mensageriaacordodb_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_mensageriaacordodb_usuarios"]:$this->ac53_mensageriaacordodb_usuarios);
-       $this->ac53_acordo = ($this->ac53_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_acordo"]:$this->ac53_acordo);
+       $this->ac53_sequencial = ($this->ac53_sequencial === 0 || $this->ac53_sequencial === 0.0 || $this->ac53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_sequencial"]:$this->ac53_sequencial);
+       $this->ac53_mensageriaacordodb_usuarios = ($this->ac53_mensageriaacordodb_usuarios === 0 || $this->ac53_mensageriaacordodb_usuarios === 0.0 || $this->ac53_mensageriaacordodb_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_mensageriaacordodb_usuarios"]:$this->ac53_mensageriaacordodb_usuarios);
+       $this->ac53_acordo = ($this->ac53_acordo === 0 || $this->ac53_acordo === 0.0 || $this->ac53_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_acordo"]:$this->ac53_acordo);
      }else{
-       $this->ac53_sequencial = ($this->ac53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_sequencial"]:$this->ac53_sequencial);
+       $this->ac53_sequencial = ($this->ac53_sequencial === 0 || $this->ac53_sequencial === 0.0 || $this->ac53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_sequencial"]:$this->ac53_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_mensageriaacordoprocessados {
          $this->ac53_sequencial = $ac53_sequencial; 
        }
      }
-     if(($this->ac53_sequencial == null) || ($this->ac53_sequencial == "") ){ 
+     if(($this->ac53_sequencial == null) || ($this->ac53_sequencial === 0 || $this->ac53_sequencial === 0.0 || $this->ac53_sequencial == "") ){ 
        $this->erro_sql = " Campo ac53_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -356,7 +356,7 @@ class cl_mensageriaacordoprocessados {
    function sql_query ( $ac53_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_mensageriaacordoprocessados {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_mensageriaacordoprocessados {
    function sql_query_file ( $ac53_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_mensageriaacordoprocessados {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

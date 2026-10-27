@@ -52,7 +52,7 @@ class cl_ouvidoriaatendimentolocal {
                  ov24_ouvidoriaatendimento = int4 = Atendimento 
                  ";
    //funcao construtor da classe
-   function cl_ouvidoriaatendimentolocal() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ouvidoriaatendimentolocal");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_ouvidoriaatendimentolocal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov24_sequencial = ($this->ov24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov24_sequencial"]:$this->ov24_sequencial);
-       $this->ov24_ouvidoriacadlocal = ($this->ov24_ouvidoriacadlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["ov24_ouvidoriacadlocal"]:$this->ov24_ouvidoriacadlocal);
-       $this->ov24_ouvidoriaatendimento = ($this->ov24_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov24_ouvidoriaatendimento"]:$this->ov24_ouvidoriaatendimento);
+       $this->ov24_sequencial = ($this->ov24_sequencial === 0 || $this->ov24_sequencial === 0.0 || $this->ov24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov24_sequencial"]:$this->ov24_sequencial);
+       $this->ov24_ouvidoriacadlocal = ($this->ov24_ouvidoriacadlocal === 0 || $this->ov24_ouvidoriacadlocal === 0.0 || $this->ov24_ouvidoriacadlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["ov24_ouvidoriacadlocal"]:$this->ov24_ouvidoriacadlocal);
+       $this->ov24_ouvidoriaatendimento = ($this->ov24_ouvidoriaatendimento === 0 || $this->ov24_ouvidoriaatendimento === 0.0 || $this->ov24_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov24_ouvidoriaatendimento"]:$this->ov24_ouvidoriaatendimento);
      }else{
-       $this->ov24_sequencial = ($this->ov24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov24_sequencial"]:$this->ov24_sequencial);
+       $this->ov24_sequencial = ($this->ov24_sequencial === 0 || $this->ov24_sequencial === 0.0 || $this->ov24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov24_sequencial"]:$this->ov24_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_ouvidoriaatendimentolocal {
          $this->ov24_sequencial = $ov24_sequencial;
        }
      }
-     if(($this->ov24_sequencial == null) || ($this->ov24_sequencial == "") ){
+     if(($this->ov24_sequencial == null) || ($this->ov24_sequencial === 0 || $this->ov24_sequencial === 0.0 || $this->ov24_sequencial == "") ){
        $this->erro_sql = " Campo ov24_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

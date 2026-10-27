@@ -52,7 +52,7 @@ class cl_ouvidoriacadlocalgeral {
                  ov28_descricao = varchar(500) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_ouvidoriacadlocalgeral() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ouvidoriacadlocalgeral"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_ouvidoriacadlocalgeral {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov28_sequencial = ($this->ov28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov28_sequencial"]:$this->ov28_sequencial);
-       $this->ov28_ouvidoriacadlocal = ($this->ov28_ouvidoriacadlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["ov28_ouvidoriacadlocal"]:$this->ov28_ouvidoriacadlocal);
+       $this->ov28_sequencial = ($this->ov28_sequencial === 0 || $this->ov28_sequencial === 0.0 || $this->ov28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov28_sequencial"]:$this->ov28_sequencial);
+       $this->ov28_ouvidoriacadlocal = ($this->ov28_ouvidoriacadlocal === 0 || $this->ov28_ouvidoriacadlocal === 0.0 || $this->ov28_ouvidoriacadlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["ov28_ouvidoriacadlocal"]:$this->ov28_ouvidoriacadlocal);
        $this->ov28_descricao = ($this->ov28_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov28_descricao"]:$this->ov28_descricao);
      }else{
-       $this->ov28_sequencial = ($this->ov28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov28_sequencial"]:$this->ov28_sequencial);
+       $this->ov28_sequencial = ($this->ov28_sequencial === 0 || $this->ov28_sequencial === 0.0 || $this->ov28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov28_sequencial"]:$this->ov28_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_ouvidoriacadlocalgeral {
          $this->ov28_sequencial = $ov28_sequencial; 
        }
      }
-     if(($this->ov28_sequencial == null) || ($this->ov28_sequencial == "") ){ 
+     if(($this->ov28_sequencial == null) || ($this->ov28_sequencial === 0 || $this->ov28_sequencial === 0.0 || $this->ov28_sequencial == "") ){ 
        $this->erro_sql = " Campo ov28_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_ouvidoriacadlocalgeral {
    function sql_query ( $ov28_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_ouvidoriacadlocalgeral {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_ouvidoriacadlocalgeral {
    function sql_query_file ( $ov28_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_ouvidoriacadlocalgeral {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

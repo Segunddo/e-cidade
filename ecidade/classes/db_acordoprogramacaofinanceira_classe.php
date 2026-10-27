@@ -52,7 +52,7 @@ class cl_acordoprogramacaofinanceira {
                  ac34_acordo = int4 = Acordo 
                  ";
    //funcao construtor da classe
-   function cl_acordoprogramacaofinanceira() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoprogramacaofinanceira");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_acordoprogramacaofinanceira {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac34_sequencial = ($this->ac34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac34_sequencial"]:$this->ac34_sequencial);
-       $this->ac34_programacaofinanceira = ($this->ac34_programacaofinanceira == ""?@$GLOBALS["HTTP_POST_VARS"]["ac34_programacaofinanceira"]:$this->ac34_programacaofinanceira);
-       $this->ac34_acordo = ($this->ac34_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac34_acordo"]:$this->ac34_acordo);
+       $this->ac34_sequencial = ($this->ac34_sequencial === 0 || $this->ac34_sequencial === 0.0 || $this->ac34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac34_sequencial"]:$this->ac34_sequencial);
+       $this->ac34_programacaofinanceira = ($this->ac34_programacaofinanceira === 0 || $this->ac34_programacaofinanceira === 0.0 || $this->ac34_programacaofinanceira == ""?@$GLOBALS["HTTP_POST_VARS"]["ac34_programacaofinanceira"]:$this->ac34_programacaofinanceira);
+       $this->ac34_acordo = ($this->ac34_acordo === 0 || $this->ac34_acordo === 0.0 || $this->ac34_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac34_acordo"]:$this->ac34_acordo);
      }else{
-       $this->ac34_sequencial = ($this->ac34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac34_sequencial"]:$this->ac34_sequencial);
+       $this->ac34_sequencial = ($this->ac34_sequencial === 0 || $this->ac34_sequencial === 0.0 || $this->ac34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac34_sequencial"]:$this->ac34_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_acordoprogramacaofinanceira {
          $this->ac34_sequencial = $ac34_sequencial;
        }
      }
-     if(($this->ac34_sequencial == null) || ($this->ac34_sequencial == "") ){
+     if(($this->ac34_sequencial == null) || ($this->ac34_sequencial === 0 || $this->ac34_sequencial === 0.0 || $this->ac34_sequencial == "") ){
        $this->erro_sql = " Campo ac34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_acordoprogramacaofinanceira {
    function sql_query ( $ac34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_acordoprogramacaofinanceira {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_acordoprogramacaofinanceira {
    function sql_query_file ( $ac34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_acordoprogramacaofinanceira {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
