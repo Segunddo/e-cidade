@@ -9,7 +9,7 @@ namespace ECidade\Financeiro\Contabilidade\Relatorio\DCASP\Model;
  */
 interface FluxoCaixa
 {
-    public function getDados();
+    public function getDados($trazerConfiguracaoPadrao = true);
     public function getInstituicoes($lObjeto = false);
     public function getNomePeriodo();
     public function getAno();
