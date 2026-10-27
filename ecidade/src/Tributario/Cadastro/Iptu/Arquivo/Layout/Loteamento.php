@@ -8,7 +8,7 @@ final class Loteamento extends Layout
     
     private $posicao;
 
-    public function get($sequencial, $posicao)
+    public function get($sequencial, $posicao = null) // PHP 8 (LSP): a mae aceita 1 argumento
     {
         $sequencial++;
         $posicao++;

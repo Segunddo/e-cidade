@@ -55,7 +55,7 @@ class AnexoX extends \RelatoriosLegaisBase
    *
    * @return array - Colecao de stdClass
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $aRetorno        = array();
     $oLinhaRelatorio = new linhaRelatorioContabil($this->iCodigoRelatorio, 1);
