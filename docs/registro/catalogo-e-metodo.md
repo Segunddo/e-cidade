@@ -486,3 +486,69 @@ Não foram tocados por serem mudança de comportamento, não migração. Valem m
 - `std/DBString.php:661` — o `ereg_replace(",", "\.", ...)` insere uma barra invertida
   literal (`1234,56` → `1234\.56`), que depois vai para `number_format()`. Comportamento
   preservado fielmente com `str_replace`, mas o resultado provavelmente não é o pretendido.
+
+## Movido de `trabalho-relacionado.md` em 27/10/2026
+
+> Estas subseções estavam fisicamente depois da comparação com o TCC no `CLAUDE.md` antigo, e a divisão de
+> 26/10 as levou junto. Texto sem alteração.
+
+##### ⚠ CORREÇÃO ao catálogo: por que é o ORIGINAL que executa, e não a cópia do `modification/`
+
+A seção *CRÍTICO: `modification()`* diz que as cópias executam; a sonda do `pre` mostrou o
+original executando, sem explicação. **O mecanismo, lido em `definitions.php` e
+`src/V3/Modification/Data/FileSync.php`:**
+
+1. se o arquivo de sincronia é **mais novo** que o original → usa a cópia;
+2. se o original é **mais novo** (toda vez que edito um arquivo do núcleo) → tenta **regenerar**
+   a cópia reaplicando as modificações XML sobre o original;
+3. a regeneração **falha** — `extension/modification/log` não é gravável pelos containers — e o
+   `catch` devolve **o original**. O `application.log` registra isso: **225 mil** linhas
+   `modification() - update file: … Não foi possível abrir o arquivo para escrita`.
+
+Consequências: neste ambiente, para todo arquivo editado depois da sincronia, **os dois
+runtimes executam o original** — a comparação continua válida, mas as correções replicadas nas
+cópias **não estão sendo exercitadas**. Num ambiente com a pasta gravável, as cópias seriam
+**regeneradas a partir do original já portado** (o desejado), desde que as modificações XML
+ainda se apliquem. Manter as cópias corrigidas continua sendo o lado seguro.
+
+##### ⚠ A bateria contatava um servidor EXTERNO real: `iss4_siss002.php`
+
+Apareceu como `TIMEOUT` nos dois runtimes, numa tela antes idêntica. É um script de lote (lê
+`$argv`) com **IP de terceiro fixo no código**: `$DB_SERVIDOR_SISS = "200.192.137.56"`
+(`colocation.sissbr.com.br`). Cada execução da bateria disparava um `pg_connect` a esse
+servidor; hoje ele leva **134 s** para desistir, igual nos dois — antes a rede recusava na hora.
+Não é regressão; é rede. Mas **testes automatizados não podem contatar serviço real de
+terceiros**: o `cmp.py` ganhou a lista `PULAR`, reportada como `PULADA`.
+
+
+##### ⚠ O INSTRUMENTO, de novo: timeout nos dois contava como IDÊNTICO — e travava o resto
+
+O `cmp.py` desistia em 60 s, mas **o PHP seguia rodando** no servidor, segurando o `flock` do
+arquivo de sessão. Como a sessão é compartilhada, **toda tela seguinte travava nos dois
+runtimes** — e "000 nos dois" era contado como idêntico. Sintoma: bateria de 148 telas passando
+de 10 minutos, e duas telas inocentes (`exportarsituacaoalunonovo001`, `…aluno.RPC.php`)
+aparecendo como "travadas" por virem logo depois de um órfão.
+
+Corrigido no `cmp.py`: `000` em qualquer lado vira **`TIMEOUT`**, contado à parte, e o worker
+órfão (estado `R`) daquele container é encerrado. Refeita a bateria: 132 idênticas, 10
+divergentes, 6 timeouts — e as duas inocentes ficaram idênticas.
+
+Duas armadilhas no diagnóstico, as duas da família *verificação que falha em silêncio*:
+
+- **`ls -l /proc/<pid>/fd` dá `Permission denied`** dentro do container (restrição de
+  ptrace), e com `2>/dev/null` o resultado vazio pareceu "nenhum processo segura a sessão".
+  Duas hipóteses descartadas com base numa checagem que não enxergava nada.
+- **`grep` sem `-a`** sobre `libs/db_stdlib.php` (LATIN-1) não achou o `exit` do
+  `db_redireciona` — o arquivo foi tratado como binário.
+
+**Baterias anteriores:** nenhuma teve duração anormal, que é o sintoma deste defeito; o risco
+de "timeout contado como idêntico" existia, mas não há sinal de que tenha ocorrido.
+
+
+#### ARMADILHA DE FERRAMENTAL: o opcache do 8.5 revalida a cada 2 s
+
+Automatizei o ciclo "requisitar → ler o fatal → guardar a linha → repetir". Ele aplicou a
+mesma guarda **15 vezes aninhada** na mesma linha: o 8.5 tem `opcache.revalidate_freq = 2`, e
+a requisição seguinte chegava antes da revalidação, executando o código antigo e acusando o
+mesmo fatal. Desfeito (uma guarda por linha, diff conferido). **Esperar 3 s depois de editar e
+antes de requisitar.** O 5.6 não tem opcache, então o sintoma só aparece de um lado.

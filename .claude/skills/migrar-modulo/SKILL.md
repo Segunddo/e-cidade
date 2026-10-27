@@ -57,10 +57,24 @@ python3 scratchpad/enumera.py <prefixo>      # gera tmp/<pref>_universo.txt e _a
 ls | grep -icE '^<prefixo>[0-9]*_.*\.php$'   # DEVE bater com "telas" do enumerador
 ```
 
-O enumerador cobre as **sete frentes** (prefixo, includes transitivos, nomes citados em
+O enumerador cobre **nove frentes** (prefixo, includes transitivos, nomes citados em
 strings que o JavaScript abre, autoload — `new cl_*` **e** `db_utils::getDao('x')` —,
-bibliotecas vendorizadas, pasta inteira da lib). Cada uma nasceu de uma lacuna que deixou
-arquivo sem porte.
+bibliotecas vendorizadas, pasta inteira da lib, classes de `model/`/`std/` por nome curto, e
+**classes com namespace**: `use ECidade\…;`, `new \ECidade\…` e os serviços que o `bootstrap.php`
+registra por chave de texto, resolvidos em `src/`/`app/`/`api/` por `scratchpad/ns_fecho.py`).
+Cada uma nasceu de uma lacuna que deixou arquivo sem porte. A 9ª (15ª lacuna) faz o universo
+crescer bastante, porque o fecho segue de `src/` até `classes/`: no lote 1 de Patrimonial ele foi
+de 1.727 para 2.801 arquivos.
+
+Arquivos de `src/`/`app/` têm duas armadilhas próprias, as duas medidas:
+- **o `php -l` não basta**: a classe filha pode não *carregar* no 8.5 por assinatura incompatível
+  com a mãe em outro arquivo (LSP). Rode `scratchpad/carrega_arquivo.php` nos dois runtimes sobre os
+  que têm `extends`/`implements`, e compare só o que dá OK no 5.6 e falha no 8.5;
+- **método homônimo em classe com namespace não é construtor**, nem no 5.6 (PHP 5.3.3). Não renomeie.
+
+Para medir uma lacuna nova retroativamente: `TELAS=@arquivo` aceita a lista de partida (ex.: tudo o
+que o 8.5 serve), e `SEM_NS=1` desliga a 9ª frente. Compare os alvos com e sem, e passe o
+`conta_tokens.php` só na diferença. O detector por bytes casa com a própria guarda.
 
 **Variantes de prefixo matam o porte em silêncio.** Já aconteceu três vezes:
 

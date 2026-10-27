@@ -272,3 +272,85 @@ Educação o fecho alcança **596 arquivos** fora dele; só **1** precisava de p
 `model/educacao/progressaoparcial/ProgressaoParcialVinculoDisciplina.model.php` — `unset($this)`, erro de
 compilação desde o PHP 7.1. No 5.6 só desligava a variável local e era a última instrução do método:
 removido. Nenhuma LSP nas 172 classes com `extends`.
+
+## Movido de `trabalho-relacionado.md` em 27/10/2026
+
+> Estas subseções estavam fisicamente depois da comparação com o TCC no `CLAUDE.md` antigo, e a divisão de
+> 26/10 as levou junto. Texto sem alteração.
+
+##### ⚠ O instrumento, de novo: resposta cortada pelo `curl -m 60` virava divergência
+
+`mer3_mer_nutriitem002.php` leva **~53 s nos dois runtimes** (495 alimentos, uma consulta por
+item). Sob a carga da bateria passa de 60 s, o `curl` corta a resposta — **com código 200** — e
+cada lado corta num ponto diferente: 1,3 MB contra 1,3 MB, depois 2,65 MB contra 2,48 MB.
+Isolada, dá 2.652.582 bytes idênticos nas duas portas. O `cmp.py` passou a registrar o
+`time_total` e trata resposta que bate no limite como `TIMEOUT`. `bib2_reditoras002` (1 byte) é
+o horário dentro do PDF comprimido: idêntica em 4 repetições isoladas.
+
+
+##### ⚠ CATEGORIA NOVA (edu4): `while (!feof(false))` — LAÇO ETERNO no 5.6, 500 no 8.5
+
+```php
+$ponteiro = fopen($arquivo_erro, "r");     // GET sem parametros: "" -> false
+while (!feof($ponteiro)) { ... }           // 5.6: feof(false) = false -> NUNCA termina
+                                           // 8.5: fopen("") e ValueError -> 500 imediato
+```
+
+**8 telas** (`exportarsituacaoaluno002`, `importacaoatualizacaoaluno002`, `importarcodigoinep002`,
+`importarcodigoinep_2009_002`, `importarmatriculainep002`, `atualizacadastrocenso002`,
+`atualizacadastrocenso_2009_002`, `verifexportcenso002`). Um worker do 5.6 ficou **32 minutos a
+100% de CPU** antes de eu encerrá-lo. **Não corrigidas, e é decisão:** a correção "fiel"
+reproduziria um laço infinito. Quebram nos dois — o 5.6 pendurando um worker, o 8.5 com um
+500 —, e cabem em *"uma tela que quebra igual nos dois não é problema nosso"*. Só disparam com
+o `GET` sem parâmetros; no uso real a tela anterior passa o caminho do arquivo.
+
+
+#### ⚠ 9ª LACUNA: `getdao` em minúsculas — a enumeração era sensível a maiúsculas no MÉTODO
+
+`edu3_atolegal001.php` morria com `label() on null`:
+
+```php
+$oDaoAtoLegal = db_utils::getdao('atolegal');   // minusculas
+$oDaoAtoLegal->rotulo->label();                 // rotulo nulo: o construtor PHP 4 nao rodou
+```
+
+A 7ª frente procurava `getDao` com regex sensível a caso; PHP não diferencia maiúsculas em nome
+de método. Escala na base: `getDao` 4.020 chamadas, **`getdao` 766, `getDAO` 13, `GetDao` 2 —
+781 chamadas em 244 arquivos invisíveis**. As frentes de `include`/`require` e `new cl_*`
+tinham a mesma fraqueza; as três passaram a `re.I`, e a resolução do nome tenta também o
+arquivo em minúsculas.
+
+Impacto medido **retroativamente** (universo novo − universo antigo, por lote): Tributário
+**+1 arquivo** (`iss`); Educação **+30**, porque o `getdao` minúsculo é idioma do código de
+Educação. Dos 30, **24 ainda precisavam de porte** (17 construtores PHP 4, 21 com guardas
+faltando) — 16 deles nos lotes `rel`/`sec`/`bib`/`mer` já commitados, e
+`db_issmovalvaraprocesso_classe.php` no `iss`. Portados neste lote; baterias refeitas de todos
+os lotes afetados: `tre` 19/19, `esc`+`rel`+`sec` 16/16, `bib` 95/98, `mer` 187/187, `map`
+20/20, `iss` 397/400, `con`+`rec` roteadas 31/31 — **todas na linha de base**.
+
+É a nona vez da mesma falha de método, e a segunda de maiúsculas (a primeira foi `Cem1_` no
+nome do arquivo). Achada como as outras: por uma tela que quebrou, não por varredura.
+
+
+#### CATEGORIA (bib): octal inválido — a correção fiel PRESERVA o bug
+
+`bib1_reserva004.php:64`, fatal de compilação no 8.5 (*Invalid numeric literal*), arquivo que
+nenhuma regra do Rector tocou:
+
+```php
+if($mes == 04 || $mes == 06 || $mes == 09 || $mes == 11){   // meses de 30 dias
+```
+
+```
+PHP 5.6:  var_dump(09, 08, 019)  ->  int(0) int(0) int(1)   (para no 1o digito invalido)
+PHP 7+:   parse error
+```
+
+No 5.6 `$mes == 09` é `$mes == 0`: **setembro nunca entra no ramo dos meses de 30 dias** —
+bug pré-existente no cálculo da data da reserva. Corrigido para `0`, com comentário, e não
+para `9`: escrever `9` mudaria a saída do `:8080`.
+
+Correções: 104 guardas `== <literal>`, 34 `split` → `preg_split` (todos `#`), 17 construtores,
+4 `parse_str`+`extract`. O Rector aplicou só regras já vetadas — **denylist inalterada (29)**.
+Entre os alvos estão `db_turma_classe.php` e `db_matricula_classe.php`, duas das quatro classes
+em que a branch do TCC de referência deixou as guardas `0 == ""` de fora.

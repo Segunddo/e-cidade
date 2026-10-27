@@ -87,7 +87,7 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros, `.phar` e cálculo da folha (6 tipos idênticos) feitos. **13ª lacuna fechada: 316 DAOs portados** (ver *Os DAOs que os modelos instanciam*). Nível 3: **68/70 cadastros idênticos** (as 2 restantes quebram também no 5.6; estágio probatório por cenário semeado) — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
-| Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
+| Frentes de enumeração | **nove** — a 8ª (classes de `model/`/`std/`, 13ª lacuna) e a 9ª (classes com namespace em `src/`/`app/`/`api/` e serviços do `bootstrap.php`, **15ª lacuna**, `scratchpad/ns_fecho.py`); todas insensíveis a maiúsculas desde a 9ª lacuna (`getdao`) |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
@@ -207,7 +207,7 @@ Registro (o que antes ficava todo aqui), em `docs/registro/`:
 | `area-tributario.md` | estratégia por área, portar ≠ rotear, prefixos exclusivos × compartilhados, ordem, **receita de 9 passos e as sete frentes**; núcleo, pilotos `tra`/`cem`, cada módulo da Fase A e da Fase B com suas categorias novas, denylist do Rector, bateria proporcional, 3ª–10ª e 13ª lacunas, nível 3 em escala, `tmp/` 777, guardas `pg_*` |
 | `area-educacao.md` | Educação: lotes, sublotes do `edu1`, 9ª e 11ª lacunas, conclusão |
 | `area-recursos-humanos.md` | RH: lotes, `.phar` (12ª lacuna), nível 3 nos cadastros e estágio, cálculo da folha, 13ª lacuna; **14ª lacuna** (telas de menu que mandam ao 5.6, decisão: tratar na aparição) |
-| `area-patrimonial.md` | Patrimonial (em andamento, branch `4patrimonial-migrado`): dimensionamento por prefixo, lotes |
+| `area-patrimonial.md` | Patrimonial (em andamento, branch `4patrimonial-migrado`): dimensionamento por prefixo, lotes; **15ª lacuna** (classes com namespace em `src/`/`app/`, 9ª frente, correção pela cadeia de branches) |
 | `dimensionamento.md` | dimensionamento das áreas restantes (13/10, 18/10 e 22/10) |
 | `trabalho-relacionado.md` | monografia do TCC de referência, análise dos commits e a comparação medida sobre o mesmo universo |
 | `catalogo-e-metodo.md` | `while read`, `modification()`, LSP e `=& new`, `php -l` na base inteira, experimento do Rector, cobertura dos caminhos de escrita (níveis 1–3), decisões de porte, bugs latentes |

@@ -52,3 +52,56 @@ construtor: o 5.6 segue com aviso, o 8.5 lança `ArgumentCountError` no harness)
 
 Regressão: núcleo intocado; interseção com `con`/`prot`/`pro`/`cai` → as 244 telas desses prefixos no `map`:
 **244/244**.
+
+### ⚠ 15ª LACUNA (27/10/2026, achada no lote 1): classes COM NAMESPACE, fora de todos os universos
+
+**Como apareceu:** `ouv4_solicitacaoprocessoeletronico.RPC.php` dava `ParseError` no 8.5 dentro de
+`src/Patrimonial/Protocolo/Container.php`, um arquivo que **nenhum universo listava**, nem o do lote nem o
+das áreas já entregues. As oito frentes resolvem `include`, `new cl_*`, `getDao()` e as classes de
+`model/`/`std/` por nome curto. Não resolvem nomes com namespace (`use ECidade\…;`, `new \ECidade\…`),
+carregados pelo autoloader de `bootstrap.php` (`ECidade\` → `src/`, `ECidade\Api\` → `api/`) e pelo do
+Composer (`App\` → `app/`). Também não resolvem os serviços que o `bootstrap.php` registra por **chave de
+texto** (`Registry::get('app.container')->get('patrimonial.container')`). O RPC chegava ao `Container` por
+esse segundo caminho.
+
+**Instrumento:** `scratchpad/ns_fecho.py`, que também roda sozinho, é chamado pelo `enumera.py` como a
+**9ª frente**, dentro de `diretas()`. Assim o fecho segue de `src/` até `classes/`. Junto com ele vieram:
+`SEM_NS=1` para medir sem a frente, e `TELAS=@arquivo` para listas grandes.
+
+**Medido em duas etapas.** A primeira medição parou nos arquivos com namespace e subestimou:
+
+| | |
+|---|---|
+| Arquivos de `src/`/`app/`/`api/` alcançados pelas áreas e nunca verificados | **2.304** |
+| Destes, que **não compilam** no 8.5 | 3: `Horas/Falta.php` (RH, ternário aninhado), `MatrizSaldoContabil/Repository/Lancamento.php` (`$valor{1}`), `Protocolo/Container.php` (espaço depois da barra do nome qualificado) |
+| Que **não carregam** no 8.5 (LSP, mãe em outro arquivo) | 18: 12 `getDados()` de relatórios DCASP/RGF/RREO, `Loteamento::get`, `ArretipoRepository::find`, `ReciboCollection::add`, `AlteracaoDadosServidorFormatter::formatar` |
+| **Dado errado em silêncio** | `src/Tributario/Cadastro/Iptu/EmissaoTXT.php:768`: `split('\.', …)`. No 8.5 o polyfill do `vendor/` faz `explode('\.')` e **não separa** (`'01.02.003'` vira um elemento só). → `explode('.')`, idêntico ao `split` do 5.6 em 7 casos |
+| Falso alarme conferido | `Importar::Importar()` em classe com namespace **não** é construtor nem no 5.6 (regra do PHP 5.3.3, medida). Renomear mudaria o 5.6; o detector agora ignora arquivo com `namespace` |
+
+A segunda medição, com o fecho seguindo de `src/` até `classes/`, foi feita sobre os **5.654 arquivos que o
+8.5 serve hoje** (prefixos do `location` + `map`): o universo foi de 10.380 para **12.343**, com **73
+arquivos novos a portar**. São 71 classes de dados com **354 guardas `0 == ""` faltando** e 15 construtores
+PHP 4, mais `pro4_capaprocesso.php` (`parse_str`). A mesma medição achou **3 classes de Água** que já estavam
+no universo servido e nunca tinham sido portadas (`db_aguadescarrecad`, `db_aguadescarrehist`,
+`db_declaracaoquitacaocarneagua`). As demais pendências da linha de base são as já registradas: os 9 do
+`pes2` e o `mer1_mer_desper_und003`, que não compilam no 5.6, e o `tra`, órfão.
+
+**Onde foi corrigida:** na branch da área mais antiga que alcança os arquivos, **`1tributario-migrado`**, que
+já alcança todos (`arr`, `cad`, `cai`, `dvr`, `jur`, o fecho da 13ª lacuna do Tributário). Depois desceu
+pela cadeia por merge, sem conflito.
+
+| Commit (branch 1) | Conteúdo | Verificação |
+|---|---|---|
+| `4669105ab` | o `split`, os 3 que não compilavam, as 18 LSP | lint nos dois; carga dos 2.304: **2.291 OK nos dois** (os 13 restantes falham igual, sem sessão no harness); Tributário 1.807/1.813, `map` 358/358 |
+| `318904a08` | os 76 arquivos de `classes/` (Rector, só regras vetadas) | remanescentes 0; funções 0 ausentes; lint 76/76; classes 75/75; escrita **1.943 linhas idênticas** — **antes do porte, 338 campos em 74 classes divergiam do 5.6** |
+
+Baterias depois de cada merge: Educação 1.514/1.531 + 1 timeout e `map` 381/381; RH 1.527/1.528 e `map`
+555/555. Todas na linha de base.
+
+**Bateria completa sobre o código unido** (branch 4, depois dos três merges): todos os prefixos do `location`
+das quatro áreas e o `map` inteiro. **5.015/5.039 idênticas** (22 divergentes + 2 timeouts) e `map` **555/555**.
+As 24 são exatamente as já caracterizadas: 6 do Tributário, 17 da Educação e 1 de RH, cada uma no registro da
+sua área. As 168 telas do lote 1 de Patrimonial: todas idênticas.
+
+**Lição, a 15ª da mesma família:** a verificação partia da lista que a enumeração produziu, e a enumeração não
+conhecia um terceiro mecanismo de carga de classe. Quem achou foi a bateria: uma tela que quebrou.
