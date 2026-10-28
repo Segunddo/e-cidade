@@ -513,7 +513,7 @@ class cl_rhferiasperiodo {
              $resac = db_query("insert into db_acount values($acount,3374,18967,'".AddSlashes(pg_result($resaco,$conresaco,'rh110_sequencial'))."','$this->rh110_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["rh110_rhferias"]) || $this->rh110_rhferias != "")
              $resac = db_query("insert into db_acount values($acount,3374,18968,'".AddSlashes(pg_result($resaco,$conresaco,'rh110_rhferias'))."','$this->rh110_rhferias',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["rh110_dias"]) || $this->rh110_dias != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["rh110_dias"]) || ($this->rh110_dias != "" && $this->rh110_dias !== 0 && $this->rh110_dias !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3374,18969,'".AddSlashes(pg_result($resaco,$conresaco,'rh110_dias'))."','$this->rh110_dias',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["rh110_datainicial"]) || $this->rh110_datainicial != "")
              $resac = db_query("insert into db_acount values($acount,3374,18970,'".AddSlashes(pg_result($resaco,$conresaco,'rh110_datainicial'))."','$this->rh110_datainicial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");

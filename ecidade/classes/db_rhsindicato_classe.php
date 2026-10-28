@@ -302,7 +302,7 @@ class cl_rhsindicato
                     $acount = pg_result($resac, 0, 0);
                     $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
                     $resac = db_query("insert into db_acountkey values($acount,19592,'$this->rh116_sequencial','A')");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh116_sequencial"]) || $this->rh116_sequencial != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh116_sequencial"]) || ($this->rh116_sequencial != "" && $this->rh116_sequencial !== 0 && $this->rh116_sequencial !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,3481,19592,'" . AddSlashes(pg_result($resaco,
                                 $conresaco,
                                 'rh116_sequencial')) . "','$this->rh116_sequencial'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");

@@ -425,7 +425,7 @@ class cl_obrasender
              $resac = db_query("insert into db_acount values($acount,952,5929,'".AddSlashes(pg_result($resaco,$conresaco,'ob07_compl'))."','$this->ob07_compl',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["ob07_bairro"]) || $this->ob07_bairro != "")
              $resac = db_query("insert into db_acount values($acount,952,5930,'".AddSlashes(pg_result($resaco,$conresaco,'ob07_bairro'))."','$this->ob07_bairro',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["ob07_areaatual"]) || $this->ob07_areaatual != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["ob07_areaatual"]) || ($this->ob07_areaatual != "" && $this->ob07_areaatual !== 0 && $this->ob07_areaatual !== 0.0))
              $resac = db_query("insert into db_acount values($acount,952,5931,'".AddSlashes(pg_result($resaco,$conresaco,'ob07_areaatual'))."','$this->ob07_areaatual',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["ob07_unidades"]) || $this->ob07_unidades != "")
              $resac = db_query("insert into db_acount values($acount,952,5932,'".AddSlashes(pg_result($resaco,$conresaco,'ob07_unidades'))."','$this->ob07_unidades',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
@@ -435,9 +435,9 @@ class cl_obrasender
              $resac = db_query("insert into db_acount values($acount,952,5934,'".AddSlashes(pg_result($resaco,$conresaco,'ob07_inicio'))."','$this->ob07_inicio',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["ob07_fim"]) || $this->ob07_fim != "")
              $resac = db_query("insert into db_acount values($acount,952,5935,'".AddSlashes(pg_result($resaco,$conresaco,'ob07_fim'))."','$this->ob07_fim',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["ob07_areadescoberta"]) || $this->ob07_areadescoberta != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["ob07_areadescoberta"]) || ($this->ob07_areadescoberta != "" && $this->ob07_areadescoberta !== 0 && $this->ob07_areadescoberta !== 0.0))
              $resac = db_query("insert into db_acount values($acount,952,1010579,'".AddSlashes(pg_result($resaco,$conresaco,'ob07_areadescoberta'))."','$this->ob07_areadescoberta',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["ob07_areacoberta"]) || $this->ob07_areacoberta != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["ob07_areacoberta"]) || ($this->ob07_areacoberta != "" && $this->ob07_areacoberta !== 0 && $this->ob07_areacoberta !== 0.0))
              $resac = db_query("insert into db_acount values($acount,952,1010578,'".AddSlashes(pg_result($resaco,$conresaco,'ob07_areacoberta'))."','$this->ob07_areacoberta',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          }
        }

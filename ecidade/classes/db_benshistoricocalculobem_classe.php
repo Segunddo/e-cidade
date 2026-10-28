@@ -435,7 +435,7 @@ class cl_benshistoricocalculobem {
            $resac = db_query("insert into db_acount values($acount,3285,18567,'".AddSlashes(pg_result($resaco,$conresaco,'t58_benshistoricocalculo'))."','$this->t58_benshistoricocalculo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["t58_bens"]) || $this->t58_bens != "")
            $resac = db_query("insert into db_acount values($acount,3285,18568,'".AddSlashes(pg_result($resaco,$conresaco,'t58_bens'))."','$this->t58_bens',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         if(isset($GLOBALS["HTTP_POST_VARS"]["t58_valorcalculado"]) || $this->t58_valorcalculado != "")
+         if(isset($GLOBALS["HTTP_POST_VARS"]["t58_valorcalculado"]) || ($this->t58_valorcalculado != "" && $this->t58_valorcalculado !== 0 && $this->t58_valorcalculado !== 0.0))
            $resac = db_query("insert into db_acount values($acount,3285,18569,'".AddSlashes(pg_result($resaco,$conresaco,'t58_valorcalculado'))."','$this->t58_valorcalculado',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["t58_valorresidual"]) || $this->t58_valorresidual != "")
            $resac = db_query("insert into db_acount values($acount,3285,18570,'".AddSlashes(pg_result($resaco,$conresaco,'t58_valorresidual'))."','$this->t58_valorresidual',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");

@@ -410,7 +410,7 @@ class cl_aguacontrato {
            $acount = pg_result($resac,0,0);
            $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac = db_query("insert into db_acountkey values($acount,22031,'$this->x54_sequencial','A')");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x54_sequencial"]) || $this->x54_sequencial != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x54_sequencial"]) || ($this->x54_sequencial != "" && $this->x54_sequencial !== 0 && $this->x54_sequencial !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3966,22031,'".AddSlashes(pg_result($resaco,$conresaco,'x54_sequencial'))."','$this->x54_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["x54_aguabase"]) || $this->x54_aguabase != "")
              $resac = db_query("insert into db_acount values($acount,3966,22032,'".AddSlashes(pg_result($resaco,$conresaco,'x54_aguabase'))."','$this->x54_aguabase',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
@@ -424,7 +424,7 @@ class cl_aguacontrato {
              $resac = db_query("insert into db_acount values($acount,3966,22036,'".AddSlashes(pg_result($resaco,$conresaco,'x54_datafinal'))."','$this->x54_datafinal',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["x54_nis"]) || $this->x54_nis != "")
              $resac = db_query("insert into db_acount values($acount,3966,22040,'".AddSlashes(pg_result($resaco,$conresaco,'x54_nis'))."','$this->x54_nis',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x54_cgm"]) || $this->x54_cgm != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x54_cgm"]) || ($this->x54_cgm != "" && $this->x54_cgm !== 0 && $this->x54_cgm !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3966,22041,'".AddSlashes(pg_result($resaco,$conresaco,'x54_cgm'))."','$this->x54_cgm',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["x54_aguacategoriaconsumo"]) || $this->x54_aguacategoriaconsumo != "")
              $resac = db_query("insert into db_acount values($acount,3966,22074,'".AddSlashes(pg_result($resaco,$conresaco,'x54_aguacategoriaconsumo'))."','$this->x54_aguacategoriaconsumo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
@@ -432,7 +432,7 @@ class cl_aguacontrato {
              $resac = db_query("insert into db_acount values($acount,3966,22122,'".AddSlashes(pg_result($resaco,$conresaco,'x54_condominio'))."','$this->x54_condominio',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["x54_aguatipocontrato"]) || $this->x54_aguatipocontrato != "")
              $resac = db_query("insert into db_acount values($acount,3966,22123,'".AddSlashes(pg_result($resaco,$conresaco,'x54_aguatipocontrato'))."','$this->x54_aguatipocontrato',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x54_responsavelpagamento"]) || $this->x54_responsavelpagamento != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x54_responsavelpagamento"]) || ($this->x54_responsavelpagamento != "" && $this->x54_responsavelpagamento !== 0 && $this->x54_responsavelpagamento !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3966,22419,'".AddSlashes(pg_result($resaco,$conresaco,'x54_responsavelpagamento'))."','$this->x54_responsavelpagamento',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["x54_emitiroutrosdebitos"]) || $this->x54_emitiroutrosdebitos != "")
              $resac = db_query("insert into db_acount values($acount,3966,1009271,'".AddSlashes(pg_result($resaco,$conresaco,'x54_emitiroutrosdebitos'))."','$this->x54_emitiroutrosdebitos',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
