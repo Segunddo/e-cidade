@@ -311,11 +311,11 @@ class cl_aguaisencaocgm {
            $acount = pg_result($resac,0,0);
            $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac = db_query("insert into db_acountkey values($acount,22080,'$this->x56_sequencial','A')");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x56_sequencial"]) || $this->x56_sequencial != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x56_sequencial"]) || ($this->x56_sequencial != "" && $this->x56_sequencial !== 0 && $this->x56_sequencial !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3977,22080,'".AddSlashes(pg_result($resaco,$conresaco,'x56_sequencial'))."','$this->x56_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x56_aguaisencaotipo"]) || $this->x56_aguaisencaotipo != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x56_aguaisencaotipo"]) || ($this->x56_aguaisencaotipo != "" && $this->x56_aguaisencaotipo !== 0 && $this->x56_aguaisencaotipo !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3977,22081,'".AddSlashes(pg_result($resaco,$conresaco,'x56_aguaisencaotipo'))."','$this->x56_aguaisencaotipo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x56_cgm"]) || $this->x56_cgm != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x56_cgm"]) || ($this->x56_cgm != "" && $this->x56_cgm !== 0 && $this->x56_cgm !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3977,22082,'".AddSlashes(pg_result($resaco,$conresaco,'x56_cgm'))."','$this->x56_cgm',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["x56_datainicial"]) || $this->x56_datainicial != "")
              $resac = db_query("insert into db_acount values($acount,3977,22083,'".AddSlashes(pg_result($resaco,$conresaco,'x56_datainicial'))."','$this->x56_datainicial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");

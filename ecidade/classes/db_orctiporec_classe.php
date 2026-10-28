@@ -447,15 +447,15 @@ class cl_orctiporec
                         $resac = db_query("insert into db_acount values($acount,749,18132,'" . AddSlashes(pg_result($resaco, $conresaco, 'o15_db_estruturavalor')) . "','$this->o15_db_estruturavalor'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     if (isset($GLOBALS["HTTP_POST_VARS"]["o15_codigosiconfi"]) || $this->o15_codigosiconfi != "")
                         $resac = db_query("insert into db_acount values($acount,749,1009636,'" . AddSlashes(pg_result($resaco, $conresaco, 'o15_codigosiconfi')) . "','$this->o15_codigosiconfi'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["o15_loaidentificadoruso"]) || $this->o15_loaidentificadoruso != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["o15_loaidentificadoruso"]) || ($this->o15_loaidentificadoruso != "" && $this->o15_loaidentificadoruso !== 0 && $this->o15_loaidentificadoruso !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,749,1010114,'" . AddSlashes(pg_result($resaco, $conresaco, 'o15_loaidentificadoruso')) . "','$this->o15_loaidentificadoruso'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["o15_loatipo"]) || $this->o15_loatipo != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["o15_loatipo"]) || ($this->o15_loatipo != "" && $this->o15_loatipo !== 0 && $this->o15_loatipo !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,749,1010116,'" . AddSlashes(pg_result($resaco, $conresaco, 'o15_loatipo')) . "','$this->o15_loatipo'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["o15_loagrupo"]) || $this->o15_loagrupo != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["o15_loagrupo"]) || ($this->o15_loagrupo != "" && $this->o15_loagrupo !== 0 && $this->o15_loagrupo !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,749,1010117,'" . AddSlashes(pg_result($resaco, $conresaco, 'o15_loagrupo')) . "','$this->o15_loagrupo'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     if (isset($GLOBALS["HTTP_POST_VARS"]["o15_loaespecificacao"]) || $this->o15_loaespecificacao != "")
                         $resac = db_query("insert into db_acount values($acount,749,1010118,'" . AddSlashes(pg_result($resaco, $conresaco, 'o15_loaespecificacao')) . "','$this->o15_loaespecificacao'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["o15_complemento"]) || $this->o15_complemento != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["o15_complemento"]) || ($this->o15_complemento != "" && $this->o15_complemento !== 0 && $this->o15_complemento !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,749,1011286,'" . AddSlashes(pg_result($resaco, $conresaco, 'o15_complemento')) . "','$this->o15_complemento'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     if (isset($GLOBALS["HTTP_POST_VARS"]["o15_recurso"]) || $this->o15_recurso != "")
                         $resac = db_query("insert into db_acount values($acount,749,1011803,'" . AddSlashes(pg_result($resaco, $conresaco, 'o15_recurso')) . "','$this->o15_recurso'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");

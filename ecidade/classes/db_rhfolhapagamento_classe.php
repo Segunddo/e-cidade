@@ -503,7 +503,7 @@ class cl_rhfolhapagamento
                             $conresaco,
                             'rh141_sequencial')) . "','$this->rh141_sequencial'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh141_codigo"]) || $this->rh141_codigo != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh141_codigo"]) || ($this->rh141_codigo != "" && $this->rh141_codigo !== 0 && $this->rh141_codigo !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,3727,20707,'" . AddSlashes(pg_result($resaco,
                             $conresaco,
                             'rh141_codigo')) . "','$this->rh141_codigo'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");

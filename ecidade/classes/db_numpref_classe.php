@@ -2081,7 +2081,7 @@ class cl_numpref
                         $resac = db_query("insert into db_acount values($acount,318,20229,'" . AddSlashes(pg_result($resaco, $conresaco, 'k03_diasvalidadecertidao')) . "','$this->k03_diasvalidadecertidao'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     if (isset($GLOBALS["HTTP_POST_VARS"]["k03_diasreemissaocertidao"]) || $this->k03_diasreemissaocertidao != "")
                         $resac = db_query("insert into db_acount values($acount,318,20230,'" . AddSlashes(pg_result($resaco, $conresaco, 'k03_diasreemissaocertidao')) . "','$this->k03_diasreemissaocertidao'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["k03_toleranciacredito"]) || $this->k03_toleranciacredito != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["k03_toleranciacredito"]) || ($this->k03_toleranciacredito != "" && $this->k03_toleranciacredito !== 0 && $this->k03_toleranciacredito !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,318,20614,'" . AddSlashes(pg_result($resaco, $conresaco, 'k03_toleranciacredito')) . "','$this->k03_toleranciacredito'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
 
 

@@ -372,7 +372,7 @@ class cl_protprocessodocumento
                       $acount = pg_result($resac, 0, 0);
                       $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
                       $resac = db_query("insert into db_acountkey values($acount,20296,'$this->p01_sequencial','A')");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["p01_sequencial"]) || $this->p01_sequencial != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["p01_sequencial"]) || ($this->p01_sequencial != "" && $this->p01_sequencial !== 0 && $this->p01_sequencial !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,3649,20296,'".AddSlashes(pg_result($resaco, $conresaco, 'p01_sequencial'))."','$this->p01_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
                     }
                     if (isset($GLOBALS["HTTP_POST_VARS"]["p01_protprocesso"]) || $this->p01_protprocesso != "") {
@@ -409,7 +409,7 @@ class cl_protprocessodocumento
                     if (isset($GLOBALS["HTTP_POST_VARS"]["p01_documento_hash"]) || $this->p01_documento_hash ) {
                         $resac = db_query("insert into db_acount values($acount,3649,1014453,'".AddSlashes(pg_result($resaco, $conresaco, 'p01_documento_hash'))."','$this->p01_documento_hash',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["p01_ordem"]) || $this->p01_ordem != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["p01_ordem"]) || ($this->p01_ordem != "" && $this->p01_ordem !== 0 && $this->p01_ordem !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,3649,1011248,'".AddSlashes(pg_result($resaco, $conresaco, 'p01_ordem'))."','$this->p01_ordem',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
                     }
                 }
