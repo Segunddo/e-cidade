@@ -197,11 +197,11 @@ class cl_jetomcomissao
            $acount = pg_result($resac,0,0);
            $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac = db_query("insert into db_acountkey values($acount,1010828,'$this->rh242_sequencial','A')");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["rh242_sequencial"]) || $this->rh242_sequencial != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["rh242_sequencial"]) || ($this->rh242_sequencial != "" && $this->rh242_sequencial !== 0 && $this->rh242_sequencial !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1010487,1010828,'".AddSlashes(pg_result($resaco,$conresaco,'rh242_sequencial'))."','$this->rh242_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["rh242_descricao"]) || $this->rh242_descricao != "")
              $resac = db_query("insert into db_acount values($acount,1010487,1010829,'".AddSlashes(pg_result($resaco,$conresaco,'rh242_descricao'))."','$this->rh242_descricao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["rh242_instit"]) || $this->rh242_instit != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["rh242_instit"]) || ($this->rh242_instit != "" && $this->rh242_instit !== 0 && $this->rh242_instit !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1010487,1010830,'".AddSlashes(pg_result($resaco,$conresaco,'rh242_instit'))."','$this->rh242_instit',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          }
        }

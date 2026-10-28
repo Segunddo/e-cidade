@@ -776,7 +776,7 @@ class cl_orcparamseq
                             'o69_grupoexclusao'
                         )) . "','$this->o69_grupoexclusao'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["o69_nivel"]) || $this->o69_nivel != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["o69_nivel"]) || ($this->o69_nivel != "" && $this->o69_nivel !== 0 && $this->o69_nivel !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,1082,8988,'" . AddSlashes(pg_result(
                             $resaco,
                             $conresaco,
@@ -839,7 +839,7 @@ class cl_orcparamseq
                             'o69_totalizador'
                         )) . "','$this->o69_totalizador'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["o69_ordem"]) || $this->o69_ordem != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["o69_ordem"]) || ($this->o69_ordem != "" && $this->o69_ordem !== 0 && $this->o69_ordem !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,1082,17723,'" . AddSlashes(pg_result(
                             $resaco,
                             $conresaco,
@@ -1512,7 +1512,7 @@ class cl_orcparamseq
                         'o69_grupoexclusao'
                     )) . "','$this->o69_grupoexclusao'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 }
-                if (isset($GLOBALS["HTTP_POST_VARS"]["o69_nivel"]) || $this->o69_nivel != "") {
+                if (isset($GLOBALS["HTTP_POST_VARS"]["o69_nivel"]) || ($this->o69_nivel != "" && $this->o69_nivel !== 0 && $this->o69_nivel !== 0.0)) {
                     $resac = db_query("insert into db_acount values($acount,1082,8988,'" . AddSlashes(pg_result(
                         $resaco,
                         $conresaco,

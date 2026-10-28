@@ -341,9 +341,9 @@ class cl_db_estruturavalor
                     $resac = db_query("insert into db_acount values($acount,3173,17963,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_descricao')) . "','$this->db121_descricao'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 if (isset($GLOBALS["HTTP_POST_VARS"]["db121_estruturavalorpai"]) || $this->db121_estruturavalorpai != "")
                     $resac = db_query("insert into db_acount values($acount,3173,17964,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_estruturavalorpai')) . "','$this->db121_estruturavalorpai'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                if (isset($GLOBALS["HTTP_POST_VARS"]["db121_nivel"]) || $this->db121_nivel != "")
+                if (isset($GLOBALS["HTTP_POST_VARS"]["db121_nivel"]) || ($this->db121_nivel != "" && $this->db121_nivel !== 0 && $this->db121_nivel !== 0.0))
                     $resac = db_query("insert into db_acount values($acount,3173,17965,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_nivel')) . "','$this->db121_nivel'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                if (isset($GLOBALS["HTTP_POST_VARS"]["db121_tipoconta"]) || $this->db121_tipoconta != "")
+                if (isset($GLOBALS["HTTP_POST_VARS"]["db121_tipoconta"]) || ($this->db121_tipoconta != "" && $this->db121_tipoconta !== 0 && $this->db121_tipoconta !== 0.0))
                     $resac = db_query("insert into db_acount values($acount,3173,17966,'" . AddSlashes(pg_fetch_result($resaco, $conresaco, 'db121_tipoconta')) . "','$this->db121_tipoconta'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
             }
         }

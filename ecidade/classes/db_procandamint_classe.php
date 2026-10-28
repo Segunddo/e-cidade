@@ -406,7 +406,7 @@ class cl_procandamint {
              $resac = db_query("insert into db_acount values($acount,1059,6448,'".AddSlashes(pg_result($resaco,$conresaco,'p78_data'))."','$this->p78_data',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["p78_hora"]) || $this->p78_hora != "")
              $resac = db_query("insert into db_acount values($acount,1059,6449,'".AddSlashes(pg_result($resaco,$conresaco,'p78_hora'))."','$this->p78_hora',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["p78_usuario"]) || $this->p78_usuario != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["p78_usuario"]) || ($this->p78_usuario != "" && $this->p78_usuario !== 0 && $this->p78_usuario !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1059,6450,'".AddSlashes(pg_result($resaco,$conresaco,'p78_usuario'))."','$this->p78_usuario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["p78_despacho"]) || $this->p78_despacho != "")
              $resac = db_query("insert into db_acount values($acount,1059,6451,'".AddSlashes(pg_result($resaco,$conresaco,'p78_despacho'))."','$this->p78_despacho',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
