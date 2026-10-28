@@ -294,7 +294,7 @@ class cl_agrupamentorubrica {
            $resac = db_query("insert into db_acount values($acount,3478,19559,'".AddSlashes(pg_result($resaco,$conresaco,'rh113_descricao'))."','$this->rh113_descricao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["rh113_tipo"]) || $this->rh113_tipo != "")
            $resac = db_query("insert into db_acount values($acount,3478,19561,'".AddSlashes(pg_result($resaco,$conresaco,'rh113_tipo'))."','$this->rh113_tipo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         if(isset($GLOBALS["HTTP_POST_VARS"]["rh113_tipogrupo"]) || $this->rh113_tipogrupo != "")
+         if(isset($GLOBALS["HTTP_POST_VARS"]["rh113_tipogrupo"]) || ($this->rh113_tipogrupo != "" && $this->rh113_tipogrupo !== 0 && $this->rh113_tipogrupo !== 0.0))
            $resac = db_query("insert into db_acount values($acount,3478,1011850,'".AddSlashes(pg_result($resaco,$conresaco,'rh113_tipogrupo'))."','$this->rh113_tipogrupo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
