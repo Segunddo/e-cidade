@@ -296,6 +296,47 @@ tocar no banco. Divergência significa que o 5.6 lê o valor do formulário e o 
 Atenção ao literal: além de `== ""` existe `== "f"` e `== " "`. Qualquer literal
 **não-numérico** tem o mesmo defeito, porque o 5.6 o coagia para 0.
 
+### Passo 6c — a forma NEGADA `$this->x != ""` (o Rector não cobre)
+
+O `GuardaComparacaoLiteralRector` só trata `==`. A forma `!=` com propriedade inteira e **sem
+`trim()`** está sobretudo no bloco de auditoria do `alterar()`:
+
+```php
+if (isset($GLOBALS["HTTP_POST_VARS"]["x"]) || $this->x != "")   // 5.6: 0 != "" falso; 8.5: verdadeiro
+    insert into db_acount (...)                                  // o 8.5 grava uma alteracao para 0
+```
+
+O padrão aparece milhares de vezes, mas só muda resultado quando a propriedade ainda vale o
+inteiro `0` na comparação. Normalmente o `atualizacampos()` já troca o `0` de campo ausente pelo
+`null` do POST. Por isso **meça antes de corrigir**, com duas peças:
+
+```bash
+python3 scratchpad/negada_alvos.py tmp/negada.tsv   # estatico: classe, campo, metodo, modo do atualizacampos, auditoria/negocio
+cut -f1 ecidade/tmp/negada.tsv | sort -u > ecidade/tmp/negada_cls.txt
+for v in 56 85; do
+  docker cp scratchpad/negada.php ecidade_php$v:/tmp/negada.php
+  # UM arquivo temporario POR RUNTIME: o /tmp e compartilhado entre os containers, e um
+  # nome comum fez os dois lacos se sobrescreverem (metade das linhas sumiu de um lado)
+  docker exec -i -e V=$v ecidade_php$v sh -c 'cd /var/www/html; while read c; do
+      grep -F "$(printf "%s\t" "$c")" tmp/negada.tsv > /tmp/_neg_$V.tsv
+      php -d display_errors=0 /tmp/negada.php /tmp/_neg_$V.tsv 2>/dev/null </dev/null; done' \
+    < ecidade/tmp/negada_cls.txt > /tmp/neg_$v.txt
+done
+```
+
+Compare as duas saídas pela chave (classe, campo, método) e separe:
+- **valor diferente** (5.6 `NULL`, 8.5 `0`): falta a guarda do `==` no `atualizacampos()`, então a
+  classe não está portada. Se ela estiver no universo do lote, é falha do passo 4;
+- **mesmo valor `0`, resultado diferente**: é a forma negada. Corrija **só esses pontos**, só
+  dentro do método medido, com `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)`, e rode o
+  `negada_alvos.py` de novo. Ele ignora a ocorrência já guardada, então os pontos corrigidos têm
+  de sumir.
+
+O `negada.php` mede o **estado** (`valor != ""`), não executa o código corrigido. Depois de
+corrigir, ele continua acusando, e quem confirma é o `negada_alvos.py`. Medido em 27/10/2026:
+7.367 pares, 89 da forma negada, **74 em 28 classes servidas, todos de auditoria**. As classes
+que um lote novo trouxer para o universo servido precisam passar por isto.
+
 ### Nível 3: POST real (dirigido, não em bateria)
 
 Quando o passo 6b apontar uma classe com campo inteiro não-chave, vale confirmar com um `POST`

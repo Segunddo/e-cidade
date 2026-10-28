@@ -112,7 +112,7 @@ Núcleo tocado → **bateria completa**: **5.350/5.374** (as 24 caracterizadas; 
 como TIMEOUT em vez de DIVERGE, mesma tela e mesma causa) e `map` **555/555**. Passo 8b depois de rotear (540 telas de
 Patrimonial no 8.5): nada indo ao 5.6.
 
-#### ⚠ PENDENTE DE MEDIÇÃO: a forma negada `$this->campo != ""` nas classes de dados
+#### ✅ A forma negada `$this->campo != ""` nas classes de dados — MEDIDA e CORRIGIDA
 
 O `GuardaComparacaoLiteralRector` só cobre `==`. A forma `!=`, com propriedade inteira e **sem `trim()`**, aparece
 **7.372 vezes em 1.865 classes** — 7.338 no bloco de **auditoria** do `alterar()`
@@ -124,10 +124,34 @@ guarda do `==` troca o `0` de campo ausente do formulário pelo `null` do POST �
 A forma negada só dispara quando a propriedade ainda vale o inteiro `0` na comparação. Os 7.372 contam onde o padrão
 existe, não onde muda resultado.
 
-**Decisão do usuário (27/10/2026): medir antes de escolher.** Próximo passo: estender o caminho de escrita (nível 1)
-para executar `alterar()` sem o campo no POST e comparar o SQL de negócio e de auditoria montados por cada runtime.
-Opções em aberto depois da medição: (1) estender a regra do Rector para `!=` e aplicar pela cadeia; (2) só as que de
-fato divergem no negócio; (3) só registrar.
+**MEDIDO e CORRIGIDO (27/10/2026).** Instrumento: `scratchpad/negada_alvos.py` (estático: classe, campo, método,
+modo do `atualizacampos()` que vem antes no mesmo método, auditoria × negócio) e `scratchpad/negada.php` (reproduz o
+estado com POST vazio, campo ausente, e imprime `valor != ""`), nos dois runtimes. Passo 6c da skill.
+
+| | Pares | |
+|---|---|---|
+| medidos | 7.367 | |
+| mesmo resultado nos dois | 5.274 | |
+| valor diferente (5.6 `NULL`, 8.5 `0`): falta a guarda do `==` | 2.004 | **0 nas classes servidas**; são classes de áreas ainda não migradas, e a regra própria corrige quando a área vier |
+| **mesmo valor `0`, só a forma negada muda** | 89 | **74 em 28 classes servidas, todos de auditoria**; 15 em classes não servidas |
+| dos 89, no SQL de negócio | 1 | `db_cgs_und_classe::alterarExt` (Saúde), não servida |
+
+Das 34 ocorrências de negócio que a contagem estática apontava, 33 não divergem: o `atualizacampos()` neutraliza.
+**Impacto real, então:** nenhum valor de negócio diferente. Só a trilha de auditoria (`db_acount`) das 28 classes,
+que no 8.5 registrava uma alteração para 0 que o 5.6 não registrava.
+
+**Decisão do usuário: corrigir.** Guarda `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)` nos 74 pontos, só
+dentro do método medido, pela cadeia: **25 classes na branch 1** (`d2674aa3c`), as 2 portadas no RH
+(`db_agrupamentorubrica`, `db_rhfolhapagamento`) na branch 3 (`4fdaecd2a`) e `db_veicmanut` (lote 3) na branch 4.
+Verificado: lint nos dois runtimes; remanescentes 0 (o `negada_alvos.py` passou a ignorar a ocorrência já guardada,
+senão casaria com a própria guarda, como o detector do `==`); classes e escrita idênticas.
+Bateria completa sobre o código unido (branch 4): **5.611/5.635** (as 24 caracterizadas, conferidas nome a nome)
+e `map` **555/555**.
+
+**Limite do instrumento, registrado:** o `negada.php` mede o estado, não executa o código. Depois da correção ele
+continua acusando os mesmos pares; quem prova a correção é o detector de remanescentes. Na primeira rodada, os dois
+runtimes, rodando em paralelo, escreveram o mesmo `/tmp/_neg1.tsv` (o `/tmp` é **compartilhado**) e metade das
+linhas sumiu de um lado. Corrigido com um arquivo por runtime.
 
 ### ⚠ 15ª LACUNA (27/10/2026, achada no lote 1): classes COM NAMESPACE, fora de todos os universos
 

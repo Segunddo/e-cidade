@@ -637,9 +637,9 @@ class cl_veicmanut {
              $resac = db_query("insert into db_acount values($acount,1603,9352,'".AddSlashes(pg_result($resaco,$conresaco,'ve62_veiculos'))."','$this->ve62_veiculos',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["ve62_dtmanut"]) || $this->ve62_dtmanut != "")
              $resac = db_query("insert into db_acount values($acount,1603,9328,'".AddSlashes(pg_result($resaco,$conresaco,'ve62_dtmanut'))."','$this->ve62_dtmanut',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["ve62_vlrmobra"]) || $this->ve62_vlrmobra != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["ve62_vlrmobra"]) || ($this->ve62_vlrmobra != "" && $this->ve62_vlrmobra !== 0 && $this->ve62_vlrmobra !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1603,9329,'".AddSlashes(pg_result($resaco,$conresaco,'ve62_vlrmobra'))."','$this->ve62_vlrmobra',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["ve62_vlrpecas"]) || $this->ve62_vlrpecas != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["ve62_vlrpecas"]) || ($this->ve62_vlrpecas != "" && $this->ve62_vlrpecas !== 0 && $this->ve62_vlrpecas !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1603,9330,'".AddSlashes(pg_result($resaco,$conresaco,'ve62_vlrpecas'))."','$this->ve62_vlrpecas',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["ve62_descr"]) || $this->ve62_descr != "")
              $resac = db_query("insert into db_acount values($acount,1603,9331,'".AddSlashes(pg_result($resaco,$conresaco,'ve62_descr'))."','$this->ve62_descr',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
