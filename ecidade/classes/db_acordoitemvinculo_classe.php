@@ -351,11 +351,11 @@ class cl_acordoitemvinculo {
            $resac = db_query("insert into db_acount values($acount,3037,17183,'".AddSlashes(pg_result($resaco,$conresaco,'ac33_acordoitemfilho'))."','$this->ac33_acordoitemfilho',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          if(isset($GLOBALS["HTTP_POST_VARS"]["ac33_tipo"]) || $this->ac33_tipo != "")
            $resac = db_query("insert into db_acount values($acount,3037,17184,'".AddSlashes(pg_result($resaco,$conresaco,'ac33_tipo'))."','$this->ac33_tipo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         if(isset($GLOBALS["HTTP_POST_VARS"]["ac33_quantidade"]) || $this->ac33_quantidade != "")
+         if(isset($GLOBALS["HTTP_POST_VARS"]["ac33_quantidade"]) || ($this->ac33_quantidade != "" && $this->ac33_quantidade !== 0 && $this->ac33_quantidade !== 0.0))
            $resac = db_query("insert into db_acount values($acount,3037,17185,'".AddSlashes(pg_result($resaco,$conresaco,'ac33_quantidade'))."','$this->ac33_quantidade',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         if(isset($GLOBALS["HTTP_POST_VARS"]["ac33_valorunitario"]) || $this->ac33_valorunitario != "")
+         if(isset($GLOBALS["HTTP_POST_VARS"]["ac33_valorunitario"]) || ($this->ac33_valorunitario != "" && $this->ac33_valorunitario !== 0 && $this->ac33_valorunitario !== 0.0))
            $resac = db_query("insert into db_acount values($acount,3037,17186,'".AddSlashes(pg_result($resaco,$conresaco,'ac33_valorunitario'))."','$this->ac33_valorunitario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-         if(isset($GLOBALS["HTTP_POST_VARS"]["ac33_valortotal"]) || $this->ac33_valortotal != "")
+         if(isset($GLOBALS["HTTP_POST_VARS"]["ac33_valortotal"]) || ($this->ac33_valortotal != "" && $this->ac33_valortotal !== 0 && $this->ac33_valortotal !== 0.0))
            $resac = db_query("insert into db_acount values($acount,3037,17187,'".AddSlashes(pg_result($resaco,$conresaco,'ac33_valortotal'))."','$this->ac33_valortotal',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
        }
      }
