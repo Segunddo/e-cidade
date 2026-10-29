@@ -64,13 +64,13 @@ $db_botao = false;
 
 if(isset($incluir)){
   $sqlerro = false;
-  $qualelemento = split(",",$valores);
+  $qualelemento = preg_split("#,#m",$valores);
   for($i=0;$i<sizeof($qualelemento);$i++){
     if($sqlerro==false){
       $subelemento = $qualelemento[$i];
-      $solicitem = split("_",$subelemento);
+      $solicitem = preg_split("#_#m",$subelemento);
       $pc18_solicitem = $solicitem[1];
-      $clsolicitemele->incluir($pc18_solicitem,$$subelemento);
+      $clsolicitemele->incluir($pc18_solicitem,${$subelemento});
       $erro_msg = $clsolicitemele->erro_msg;
       if($clsolicitemele->erro_status==0){
 	$sqlerro=true;
@@ -197,7 +197,7 @@ if(isset($pc80_codproc)){
 		    $arr_elementos = Array();
 		    for($ii=0;$ii<$numrows_elementos;$ii++){
 		      db_fieldsmemory($result_orcelemento,$ii);
-		      $arr_elementos[$$nomeelemento] = $o56_elemento.' - '.$o56_descr;
+		      $arr_elementos[${$nomeelemento}] = $o56_elemento.' - '.$o56_descr;
 		    }
 		    if(sizeof($arr_elementos)>0){
 		      echo "  <tr>\n";

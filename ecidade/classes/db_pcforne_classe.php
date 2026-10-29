@@ -81,7 +81,7 @@ class cl_pcforne
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->pc60_numcgm = ($this->pc60_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc60_numcgm"]:$this->pc60_numcgm);
+       $this->pc60_numcgm = ($this->pc60_numcgm === 0 || $this->pc60_numcgm === 0.0 || $this->pc60_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc60_numcgm"]:$this->pc60_numcgm);
        if($this->pc60_dtlanc == ""){
          $this->pc60_dtlanc_dia = ($this->pc60_dtlanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc60_dtlanc_dia"]:$this->pc60_dtlanc_dia);
          $this->pc60_dtlanc_mes = ($this->pc60_dtlanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc60_dtlanc_mes"]:$this->pc60_dtlanc_mes);
@@ -93,10 +93,10 @@ class cl_pcforne
        $this->pc60_obs = ($this->pc60_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["pc60_obs"]:$this->pc60_obs);
        $this->pc60_bloqueado = ($this->pc60_bloqueado == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc60_bloqueado"]:$this->pc60_bloqueado);
        $this->pc60_hora = ($this->pc60_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["pc60_hora"]:$this->pc60_hora);
-       $this->pc60_usuario = ($this->pc60_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc60_usuario"]:$this->pc60_usuario);
+       $this->pc60_usuario = ($this->pc60_usuario === 0 || $this->pc60_usuario === 0.0 || $this->pc60_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc60_usuario"]:$this->pc60_usuario);
        $this->pc60_indicativocprb = ($this->pc60_indicativocprb == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc60_indicativocprb"]:$this->pc60_indicativocprb);
      }else{
-       $this->pc60_numcgm = ($this->pc60_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc60_numcgm"]:$this->pc60_numcgm);
+       $this->pc60_numcgm = ($this->pc60_numcgm === 0 || $this->pc60_numcgm === 0.0 || $this->pc60_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc60_numcgm"]:$this->pc60_numcgm);
      }
    }
 
@@ -149,7 +149,7 @@ class cl_pcforne
        return false;
      }
        $this->pc60_numcgm = $pc60_numcgm;
-     if(($this->pc60_numcgm == null) || ($this->pc60_numcgm == "") ){
+     if(($this->pc60_numcgm == null) || ($this->pc60_numcgm === 0 || $this->pc60_numcgm === 0.0 || $this->pc60_numcgm == "") ){
        $this->erro_sql = " Campo pc60_numcgm não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -533,7 +533,7 @@ class cl_pcforne
    function sql_query_conta ( $pc60_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -556,7 +556,7 @@ class cl_pcforne
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

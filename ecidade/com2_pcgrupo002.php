@@ -35,7 +35,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('pc03_codgrupo');
 $clrotulo->label('pc03_descrgrupo');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 if($ordem == "a") {

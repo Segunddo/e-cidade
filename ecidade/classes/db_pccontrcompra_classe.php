@@ -50,7 +50,7 @@ class cl_pccontrcompra {
                  p72_codcom = int4 = Código do tipo de compra 
                  ";
    //funcao construtor da classe 
-   function cl_pccontrcompra() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pccontrcompra"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_pccontrcompra {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p72_codcontr = ($this->p72_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcontr"]:$this->p72_codcontr);
-       $this->p72_codcom = ($this->p72_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcom"]:$this->p72_codcom);
+       $this->p72_codcontr = ($this->p72_codcontr === 0 || $this->p72_codcontr === 0.0 || $this->p72_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcontr"]:$this->p72_codcontr);
+       $this->p72_codcom = ($this->p72_codcom === 0 || $this->p72_codcom === 0.0 || $this->p72_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcom"]:$this->p72_codcom);
      }else{
-       $this->p72_codcontr = ($this->p72_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcontr"]:$this->p72_codcontr);
+       $this->p72_codcontr = ($this->p72_codcontr === 0 || $this->p72_codcontr === 0.0 || $this->p72_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcontr"]:$this->p72_codcontr);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_pccontrcompra {
        return false;
      }
        $this->p72_codcontr = $p72_codcontr; 
-     if(($this->p72_codcontr == null) || ($this->p72_codcontr == "") ){ 
+     if(($this->p72_codcontr == null) || ($this->p72_codcontr === 0 || $this->p72_codcontr === 0.0 || $this->p72_codcontr == "") ){ 
        $this->erro_sql = " Campo p72_codcontr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_pccontrcompra {
    function sql_query ( $p72_codcontr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_pccontrcompra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_pccontrcompra {
    function sql_query_file ( $p72_codcontr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_pccontrcompra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

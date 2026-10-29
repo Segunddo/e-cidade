@@ -52,7 +52,7 @@ class cl_pccontrdep {
                  p74_perc = float8 = Percentual aditivo 
                  ";
    //funcao construtor da classe 
-   function cl_pccontrdep() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pccontrdep"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_pccontrdep {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p74_codcontr = ($this->p74_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p74_codcontr"]:$this->p74_codcontr);
-       $this->p74_valor = ($this->p74_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["p74_valor"]:$this->p74_valor);
-       $this->p74_perc = ($this->p74_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["p74_perc"]:$this->p74_perc);
+       $this->p74_codcontr = ($this->p74_codcontr === 0 || $this->p74_codcontr === 0.0 || $this->p74_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p74_codcontr"]:$this->p74_codcontr);
+       $this->p74_valor = ($this->p74_valor === 0 || $this->p74_valor === 0.0 || $this->p74_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["p74_valor"]:$this->p74_valor);
+       $this->p74_perc = ($this->p74_perc === 0 || $this->p74_perc === 0.0 || $this->p74_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["p74_perc"]:$this->p74_perc);
      }else{
-       $this->p74_codcontr = ($this->p74_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p74_codcontr"]:$this->p74_codcontr);
+       $this->p74_codcontr = ($this->p74_codcontr === 0 || $this->p74_codcontr === 0.0 || $this->p74_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p74_codcontr"]:$this->p74_codcontr);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_pccontrdep {
        return false;
      }
        $this->p74_codcontr = $p74_codcontr; 
-     if(($this->p74_codcontr == null) || ($this->p74_codcontr == "") ){ 
+     if(($this->p74_codcontr == null) || ($this->p74_codcontr === 0 || $this->p74_codcontr === 0.0 || $this->p74_codcontr == "") ){ 
        $this->erro_sql = " Campo p74_codcontr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -336,7 +336,7 @@ class cl_pccontrdep {
    function sql_query ( $p74_codcontr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -360,7 +360,7 @@ class cl_pccontrdep {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -372,7 +372,7 @@ class cl_pccontrdep {
    function sql_query_file ( $p74_codcontr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_pccontrdep {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

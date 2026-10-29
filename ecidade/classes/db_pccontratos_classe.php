@@ -67,7 +67,7 @@ class cl_pccontratos {
                  p71_dtfim = date = Data final do contrato 
                  ";
    //funcao construtor da classe 
-   function cl_pccontratos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pccontratos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,7 +84,7 @@ class cl_pccontratos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p71_codcontr = ($this->p71_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_codcontr"]:$this->p71_codcontr);
+       $this->p71_codcontr = ($this->p71_codcontr === 0 || $this->p71_codcontr === 0.0 || $this->p71_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_codcontr"]:$this->p71_codcontr);
        if($this->p71_datalanc == ""){
          $this->p71_datalanc_dia = ($this->p71_datalanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_datalanc_dia"]:$this->p71_datalanc_dia);
          $this->p71_datalanc_mes = ($this->p71_datalanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_datalanc_mes"]:$this->p71_datalanc_mes);
@@ -93,8 +93,8 @@ class cl_pccontratos {
             $this->p71_datalanc = $this->p71_datalanc_ano."-".$this->p71_datalanc_mes."-".$this->p71_datalanc_dia;
          }
        }
-       $this->p71_numcgm = ($this->p71_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_numcgm"]:$this->p71_numcgm);
-       $this->p71_codtipo = ($this->p71_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_codtipo"]:$this->p71_codtipo);
+       $this->p71_numcgm = ($this->p71_numcgm === 0 || $this->p71_numcgm === 0.0 || $this->p71_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_numcgm"]:$this->p71_numcgm);
+       $this->p71_codtipo = ($this->p71_codtipo === 0 || $this->p71_codtipo === 0.0 || $this->p71_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_codtipo"]:$this->p71_codtipo);
        if($this->p71_dtini == ""){
          $this->p71_dtini_dia = ($this->p71_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_dtini_dia"]:$this->p71_dtini_dia);
          $this->p71_dtini_mes = ($this->p71_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_dtini_mes"]:$this->p71_dtini_mes);
@@ -112,7 +112,7 @@ class cl_pccontratos {
          }
        }
      }else{
-       $this->p71_codcontr = ($this->p71_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_codcontr"]:$this->p71_codcontr);
+       $this->p71_codcontr = ($this->p71_codcontr === 0 || $this->p71_codcontr === 0.0 || $this->p71_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p71_codcontr"]:$this->p71_codcontr);
      }
    }
    // funcao para inclusao
@@ -187,7 +187,7 @@ class cl_pccontratos {
          $this->p71_codcontr = $p71_codcontr; 
        }
      }
-     if(($this->p71_codcontr == null) || ($this->p71_codcontr == "") ){ 
+     if(($this->p71_codcontr == null) || ($this->p71_codcontr === 0 || $this->p71_codcontr === 0.0 || $this->p71_codcontr == "") ){ 
        $this->erro_sql = " Campo p71_codcontr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -524,7 +524,7 @@ class cl_pccontratos {
    function sql_query ( $p71_codcontr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -547,7 +547,7 @@ class cl_pccontratos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -559,7 +559,7 @@ class cl_pccontratos {
    function sql_query_file ( $p71_codcontr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -580,7 +580,7 @@ class cl_pccontratos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

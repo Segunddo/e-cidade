@@ -80,7 +80,7 @@ if ($clorcparametro->numrows >0){
   // parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
   // se usa subelemento ...
   // $o50_subelem='t';
-  $arr = split("XX",@$codele);
+  $arr = preg_split("#XX#m",@$codele);
   $nexclui = false;
   if(isset($o50_subelem) && ($o50_subelem=="t")){  	
     $result = $clpcsubgrupo->sql_record($clpcsubgrupo->sql_query_orcelement(null,
@@ -113,7 +113,7 @@ if ($clorcparametro->numrows >0){
                                                           and e55_codele=$o56_codele 
                                                           and e54_anulad is null 
                                                           and e54_anousu = ".db_getsession("DB_anousu"));
-          
+
 	      $result_trancaele = $clempautitem->sql_record($sSqlItens);
 	      $trancaele = false;
 	      if($clempautitem->numrows>0 && !isset($impmater)){
@@ -154,7 +154,7 @@ if ($clorcparametro->numrows >0){
       }
     };//end for
   } else {
-  	
+
     $sWhereGrupo = "o56_anousu = ".db_getsession("DB_anousu");
 
 		if ( !empty($codsubgrupo) ) {

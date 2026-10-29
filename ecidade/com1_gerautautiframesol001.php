@@ -329,11 +329,11 @@ if (isset ($incluir)) {
 		$vir = "";
 		if ($sqlerro == false && isset ($pc22_codorc) && trim($pc22_codorc) != "") {
 
-			$arr_recebe = split(",", $valores);
+			$arr_recebe = preg_split("#,#m", $valores);
 
 			for ($i = 0; $i < sizeof($arr_recebe); $i ++) {
 
-				$splitARR        = split("_", $arr_recebe[$i]);
+				$splitARR        = preg_split("#_#m", $arr_recebe[$i]);
 				$contadorARR     = $splitARR[1];
 				$pc11_codigo     = $splitARR[2];
 				$pc13_coddot     = $splitARR[3];
@@ -529,7 +529,7 @@ if (isset ($incluir)) {
 				}
 			}
 
-			$arr_comitens = split(",", $aSeqDotacoes[$i +1]);
+			$arr_comitens = preg_split("#,#m", $aSeqDotacoes[$i +1]);
 			if ($sqlerro == true) {
 				$arr_comitens = Array ();
 			}
@@ -876,7 +876,7 @@ if ($ninclui == true) {
 		db_fieldsmemory($result, 0, true);
 
 		$valdisp = 'valdisp_'.$contador;
-		$$valdisp = (0 + $atual_menos_reservado) + $saldodotacoes[$pc13_coddot];
+		${$valdisp} = (0 + $atual_menos_reservado) + $saldodotacoes[$pc13_coddot];
 
 		if (($codele_ant != $pc18_codele) or ($dot_ant != $pc13_coddot)) {
 			$testatot = 0;
@@ -913,7 +913,7 @@ if ($ninclui == true) {
 		$simnao = "Não";
 		$simnaod = "disabled";
 		$bordas = "bordas01";
-		if ($$valdisp >= 0) {
+		if (${$valdisp} >= 0) {
 			$result_altext = $clorcreservasol->sql_record($clorcreservasol->sql_query_orcreserva(
 			                                              null,
 			                                              null,
@@ -928,7 +928,7 @@ if ($ninclui == true) {
 			}
 			if ($clorcreservasol->numrows > 0) {
 				db_fieldsmemory($result_altext, 0, true);
-				$$valdisp += $o80_valor;
+				${$valdisp} += $o80_valor;
 
 				if (isset ($valor) && isset ($quantidade)) {
 					if ($o80_valor < $valor * $pc13_quant) {
@@ -940,7 +940,7 @@ if ($ninclui == true) {
 					}
 				}
 			}
-			if ($$valdisp >= $testatot) {
+			if (${$valdisp} >= $testatot) {
 				$altcoddot = true;
 				$simnao = "Sim";
 				$simnaod = "";

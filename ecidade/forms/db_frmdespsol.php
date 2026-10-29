@@ -55,7 +55,7 @@ function js_submit_form(){
     	$dis="";
 		$sql=$clsolicita->sql_query_andsol("distinct pc11_numero,pc11_codigo,pc11_quant,pc11_seq,pc11_vlrun,pc11_resum,pc01_codmater,pc01_descrmater,pc01_servico,pc17_unid,pc17_quant,m61_descr,m61_usaquant","where pc10_numero=$pc10_numero and  p64_codtran is not null and y.pc43_depto=".db_getsession("DB_coddepto"));
 		$result=db_query($sql);		
-		if (pg_numrows($result)==0){
+		if (($result ? pg_numrows($result) : null)==0){
 			$dis="disabled";
 		}
 		$cliframe_seleciona->campos = "pc11_numero,pc11_codigo,pc11_quant,pc11_seq,pc11_vlrun,pc11_resum,pc01_codmater,pc01_descrmater,pc01_servico,pc17_unid,m61_descr,pc17_quant";

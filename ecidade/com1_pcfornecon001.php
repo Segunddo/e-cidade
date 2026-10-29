@@ -35,7 +35,8 @@ require_once(modification("classes/db_pcforne_classe.php"));
 require_once(modification("classes/db_empagemovconta_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 $clpcfornecon = new cl_pcfornecon;
 $clpcforneconpad = new cl_pcforneconpad;

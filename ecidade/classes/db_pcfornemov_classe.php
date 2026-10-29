@@ -59,7 +59,7 @@ class cl_pcfornemov {
                  pc62_id_usuario = int4 = Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_pcfornemov() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcfornemov"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,8 +76,8 @@ class cl_pcfornemov {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc62_codmov = ($this->pc62_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_codmov"]:$this->pc62_codmov);
-       $this->pc62_numcgm = ($this->pc62_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_numcgm"]:$this->pc62_numcgm);
+       $this->pc62_codmov = ($this->pc62_codmov === 0 || $this->pc62_codmov === 0.0 || $this->pc62_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_codmov"]:$this->pc62_codmov);
+       $this->pc62_numcgm = ($this->pc62_numcgm === 0 || $this->pc62_numcgm === 0.0 || $this->pc62_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_numcgm"]:$this->pc62_numcgm);
        if($this->pc62_dtlanc == ""){
          $this->pc62_dtlanc_dia = ($this->pc62_dtlanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_dtlanc_dia"]:$this->pc62_dtlanc_dia);
          $this->pc62_dtlanc_mes = ($this->pc62_dtlanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_dtlanc_mes"]:$this->pc62_dtlanc_mes);
@@ -87,9 +87,9 @@ class cl_pcfornemov {
          }
        }
        $this->pc62_hist = ($this->pc62_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_hist"]:$this->pc62_hist);
-       $this->pc62_id_usuario = ($this->pc62_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_id_usuario"]:$this->pc62_id_usuario);
+       $this->pc62_id_usuario = ($this->pc62_id_usuario === 0 || $this->pc62_id_usuario === 0.0 || $this->pc62_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_id_usuario"]:$this->pc62_id_usuario);
      }else{
-       $this->pc62_codmov = ($this->pc62_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_codmov"]:$this->pc62_codmov);
+       $this->pc62_codmov = ($this->pc62_codmov === 0 || $this->pc62_codmov === 0.0 || $this->pc62_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_codmov"]:$this->pc62_codmov);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_pcfornemov {
          $this->pc62_codmov = $pc62_codmov; 
        }
      }
-     if(($this->pc62_codmov == null) || ($this->pc62_codmov == "") ){ 
+     if(($this->pc62_codmov == null) || ($this->pc62_codmov === 0 || $this->pc62_codmov === 0.0 || $this->pc62_codmov == "") ){ 
        $this->erro_sql = " Campo pc62_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -445,7 +445,7 @@ class cl_pcfornemov {
    function sql_query ( $pc62_codmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_pcfornemov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_pcfornemov {
    function sql_query_file ( $pc62_codmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

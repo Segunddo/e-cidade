@@ -372,7 +372,7 @@ $sSql = "select distinct
           inner join pcmater          on pc01_codmater  = pc16_codmater  
           where pc11_numero = $importado";
 $rsResult = db_query($sSql);
-$iNumrows = pg_numrows($rsResult);
+$iNumrows = ($rsResult ? pg_numrows($rsResult) : null);
 if ($iNumrows > 0) {
 ?>
     <table>

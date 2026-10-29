@@ -70,7 +70,7 @@ class cl_pcfornecertif {
                  pc74_validade = date = Data de Validade 
                  ";
    //funcao construtor da classe 
-   function cl_pcfornecertif() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcfornecertif"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,11 +87,11 @@ class cl_pcfornecertif {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc74_codigo = ($this->pc74_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_codigo"]:$this->pc74_codigo);
-       $this->pc74_pcforne = ($this->pc74_pcforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_pcforne"]:$this->pc74_pcforne);
-       $this->pc74_pctipocertif = ($this->pc74_pctipocertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_pctipocertif"]:$this->pc74_pctipocertif);
+       $this->pc74_codigo = ($this->pc74_codigo === 0 || $this->pc74_codigo === 0.0 || $this->pc74_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_codigo"]:$this->pc74_codigo);
+       $this->pc74_pcforne = ($this->pc74_pcforne === 0 || $this->pc74_pcforne === 0.0 || $this->pc74_pcforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_pcforne"]:$this->pc74_pcforne);
+       $this->pc74_pctipocertif = ($this->pc74_pctipocertif === 0 || $this->pc74_pctipocertif === 0.0 || $this->pc74_pctipocertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_pctipocertif"]:$this->pc74_pctipocertif);
        $this->pc74_solicitante = ($this->pc74_solicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_solicitante"]:$this->pc74_solicitante);
-       $this->pc74_usuario = ($this->pc74_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_usuario"]:$this->pc74_usuario);
+       $this->pc74_usuario = ($this->pc74_usuario === 0 || $this->pc74_usuario === 0.0 || $this->pc74_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_usuario"]:$this->pc74_usuario);
        if($this->pc74_data == ""){
          $this->pc74_data_dia = ($this->pc74_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_data_dia"]:$this->pc74_data_dia);
          $this->pc74_data_mes = ($this->pc74_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_data_mes"]:$this->pc74_data_mes);
@@ -101,7 +101,7 @@ class cl_pcfornecertif {
          }
        }
        $this->pc74_hora = ($this->pc74_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_hora"]:$this->pc74_hora);
-       $this->pc74_coddepto = ($this->pc74_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_coddepto"]:$this->pc74_coddepto);
+       $this->pc74_coddepto = ($this->pc74_coddepto === 0 || $this->pc74_coddepto === 0.0 || $this->pc74_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_coddepto"]:$this->pc74_coddepto);
        if($this->pc74_validade == ""){
          $this->pc74_validade_dia = ($this->pc74_validade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_validade_dia"]:$this->pc74_validade_dia);
          $this->pc74_validade_mes = ($this->pc74_validade_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_validade_mes"]:$this->pc74_validade_mes);
@@ -111,7 +111,7 @@ class cl_pcfornecertif {
          }
        }
      }else{
-       $this->pc74_codigo = ($this->pc74_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_codigo"]:$this->pc74_codigo);
+       $this->pc74_codigo = ($this->pc74_codigo === 0 || $this->pc74_codigo === 0.0 || $this->pc74_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc74_codigo"]:$this->pc74_codigo);
      }
    }
    // funcao para inclusao
@@ -204,7 +204,7 @@ class cl_pcfornecertif {
          $this->pc74_codigo = $pc74_codigo; 
        }
      }
-     if(($this->pc74_codigo == null) || ($this->pc74_codigo == "") ){ 
+     if(($this->pc74_codigo == null) || ($this->pc74_codigo === 0 || $this->pc74_codigo === 0.0 || $this->pc74_codigo == "") ){ 
        $this->erro_sql = " Campo pc74_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -558,7 +558,7 @@ class cl_pcfornecertif {
    function sql_query ( $pc74_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -586,7 +586,7 @@ class cl_pcfornecertif {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -599,7 +599,7 @@ class cl_pcfornecertif {
    function sql_query_file ( $pc74_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -620,7 +620,7 @@ class cl_pcfornecertif {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

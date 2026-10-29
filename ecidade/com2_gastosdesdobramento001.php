@@ -38,7 +38,8 @@ $clcriaabas      = new cl_criaabas;
 $clcriaabas->scrolling="yes";
 $clorcsuplemtipo = new cl_orcsuplemtipo;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $abas    = array();

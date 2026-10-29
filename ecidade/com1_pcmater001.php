@@ -58,7 +58,7 @@ if(((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Inclui
     $codmater =  $clpcmater->pc01_codmater;
   }
   if($sqlerro==false){
-    $arr =  split("XX",$codeles);
+    $arr =  preg_split("#XX#m",$codeles);
     for($i=0; $i<count($arr); $i++ ){
       if($sqlerro==false){
         $elemento = $arr[$i];  

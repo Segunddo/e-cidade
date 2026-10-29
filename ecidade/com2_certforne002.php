@@ -50,7 +50,8 @@ $clpctipocertifcom  = new cl_pctipocertifcom;
 $clpcparam          = new cl_pcparam;
 $clpctipocertif     = new cl_pctipocertif;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 $sWhere       = "";

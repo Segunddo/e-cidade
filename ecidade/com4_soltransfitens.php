@@ -88,11 +88,11 @@ if (isset ($incluir)&&$incluir!="") {
 	db_inicio_transacao();
 	
 	$arr_dados = array();
-	$dados 	   = split('#', $valores);
+	$dados 	   = preg_split('#\##m', $valores);
 	
 	for($w=0;$w<count($dados);$w++){
 		if (trim($dados[$w])!=""){
-			$info=split('_', $dados[$w]);
+			$info=preg_split('#_#m', $dados[$w]);
 			if (array_key_exists($info[2],$arr_dados)){	    	
 	    		$esp="#";
 			} else{
@@ -104,7 +104,7 @@ if (isset ($incluir)&&$incluir!="") {
 	reset($arr_dados);
 	for($w=0;$w<count($arr_dados);$w++){
 		$depto_dest=key($arr_dados);		
-		$cod_ord=split('#',$arr_dados[$depto_dest]);
+		$cod_ord=preg_split('#\##m',$arr_dados[$depto_dest]);
 		$clproctransfer->p62_hora = db_hora();
 		$clproctransfer->p62_dttran = date("Y-m-d", db_getsession("DB_datausu"));
 		$clproctransfer->p62_id_usuario = db_getsession("DB_id_usuario");
@@ -118,7 +118,7 @@ if (isset ($incluir)&&$incluir!="") {
 			$erro_msg=$clproctransfer->erro_msg;
 		}		
 		for($i=0;$i<count($cod_ord);$i++){
-			$info_item=split("_",$cod_ord[$i]);
+			$info_item=preg_split("#_#m",$cod_ord[$i]);
 			$solicitem=$info_item[0];
 			$ordem=$info_item[1];
 			if ($sqlerro == false) {

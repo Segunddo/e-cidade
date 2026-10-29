@@ -191,7 +191,7 @@ if ($db_opcao == 1) {
             <?php
             if (!isset($pc64_contabanco)) {
               $result_contapadrao = db_query($clpcfornecon->sql_query_padrao(null, "pc63_contabanco", "", "pc63_numcgm=$pc63_numcgm"));
-              if (pg_num_rows($result_contapadrao) > 0) {
+              if (($result_contapadrao ? pg_num_rows($result_contapadrao) : null) > 0) {
                 $pc64_contabanco = "f";
               } else {
                 $pc64_contabanco = "t";

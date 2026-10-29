@@ -50,7 +50,7 @@ class cl_pcandpadraodepto {
                  pc46_depart = int4 = Depart. 
                  ";
    //funcao construtor da classe 
-   function cl_pcandpadraodepto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcandpadraodepto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_pcandpadraodepto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc46_pcandpadrao = ($this->pc46_pcandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_pcandpadrao"]:$this->pc46_pcandpadrao);
-       $this->pc46_depart = ($this->pc46_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_depart"]:$this->pc46_depart);
+       $this->pc46_pcandpadrao = ($this->pc46_pcandpadrao === 0 || $this->pc46_pcandpadrao === 0.0 || $this->pc46_pcandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_pcandpadrao"]:$this->pc46_pcandpadrao);
+       $this->pc46_depart = ($this->pc46_depart === 0 || $this->pc46_depart === 0.0 || $this->pc46_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_depart"]:$this->pc46_depart);
      }else{
-       $this->pc46_pcandpadrao = ($this->pc46_pcandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_pcandpadrao"]:$this->pc46_pcandpadrao);
+       $this->pc46_pcandpadrao = ($this->pc46_pcandpadrao === 0 || $this->pc46_pcandpadrao === 0.0 || $this->pc46_pcandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_pcandpadrao"]:$this->pc46_pcandpadrao);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_pcandpadraodepto {
        return false;
      }
        $this->pc46_pcandpadrao = $pc46_pcandpadrao; 
-     if(($this->pc46_pcandpadrao == null) || ($this->pc46_pcandpadrao == "") ){ 
+     if(($this->pc46_pcandpadrao == null) || ($this->pc46_pcandpadrao === 0 || $this->pc46_pcandpadrao === 0.0 || $this->pc46_pcandpadrao == "") ){ 
        $this->erro_sql = " Campo pc46_pcandpadrao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_pcandpadraodepto {
    function sql_query ( $pc46_pcandpadrao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_pcandpadraodepto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_pcandpadraodepto {
    function sql_query_file ( $pc46_pcandpadrao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_pcandpadraodepto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

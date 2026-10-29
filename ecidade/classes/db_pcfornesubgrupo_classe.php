@@ -52,7 +52,7 @@ class cl_pcfornesubgrupo {
                  pc76_pcsubgrupo = int4 = Código do Subgrupo 
                  ";
    //funcao construtor da classe 
-   function cl_pcfornesubgrupo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcfornesubgrupo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_pcfornesubgrupo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc76_codigo = ($this->pc76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_codigo"]:$this->pc76_codigo);
-       $this->pc76_pcforne = ($this->pc76_pcforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_pcforne"]:$this->pc76_pcforne);
-       $this->pc76_pcsubgrupo = ($this->pc76_pcsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_pcsubgrupo"]:$this->pc76_pcsubgrupo);
+       $this->pc76_codigo = ($this->pc76_codigo === 0 || $this->pc76_codigo === 0.0 || $this->pc76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_codigo"]:$this->pc76_codigo);
+       $this->pc76_pcforne = ($this->pc76_pcforne === 0 || $this->pc76_pcforne === 0.0 || $this->pc76_pcforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_pcforne"]:$this->pc76_pcforne);
+       $this->pc76_pcsubgrupo = ($this->pc76_pcsubgrupo === 0 || $this->pc76_pcsubgrupo === 0.0 || $this->pc76_pcsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_pcsubgrupo"]:$this->pc76_pcsubgrupo);
      }else{
-       $this->pc76_codigo = ($this->pc76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_codigo"]:$this->pc76_codigo);
+       $this->pc76_codigo = ($this->pc76_codigo === 0 || $this->pc76_codigo === 0.0 || $this->pc76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_codigo"]:$this->pc76_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_pcfornesubgrupo {
          $this->pc76_codigo = $pc76_codigo; 
        }
      }
-     if(($this->pc76_codigo == null) || ($this->pc76_codigo == "") ){ 
+     if(($this->pc76_codigo == null) || ($this->pc76_codigo === 0 || $this->pc76_codigo === 0.0 || $this->pc76_codigo == "") ){ 
        $this->erro_sql = " Campo pc76_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_pcfornesubgrupo {
    function sql_query ( $pc76_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_pcfornesubgrupo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_pcfornesubgrupo {
    function sql_query_file ( $pc76_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_pcfornesubgrupo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

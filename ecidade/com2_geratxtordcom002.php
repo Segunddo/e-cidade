@@ -54,7 +54,7 @@ if ($clabre_arquivo->arquivo != false) {
 		$cont = $w +1;
         fputs($clabre_arquivo->arquivo, substr($m51_data,0,10).$vir);
         fputs($clabre_arquivo->arquivo, substr($m51_codordem,0,8).$vir);
-        $arr_data=split("-",$m51_data);
+        $arr_data=preg_split("#\\-#m",$m51_data);
         fputs($clabre_arquivo->arquivo, substr($arr_data[0],0,4).$vir);
         fputs($clabre_arquivo->arquivo, substr("ORDINARIO",0,20).$vir);
         fputs($clabre_arquivo->arquivo, substr($z01_nome,0,60).$vir);

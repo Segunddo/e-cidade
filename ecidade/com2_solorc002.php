@@ -58,7 +58,8 @@ db_fieldsmemory($resultpref,0);
 $rsParam           = $clpcparam->sql_record($clpcparam->sql_query(null,"*",null,"pc30_instit = ".db_getsession("DB_instit")));
 $oParam            = db_utils::fieldsMemory($rsParam,0);
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 
 // This function was in file com2_procorc002.php
@@ -96,7 +97,7 @@ $fornecedores = "";
 $vir = "";
 
 if(isset($forne) && $forne != "branco"){
-  $arr_forne = split("forn_",$forne);
+  $arr_forne = preg_split("#forn_#m",$forne);
   for($i=1;$i<sizeof($arr_forne);$i++){
     $fornecedores .= $vir.$arr_forne[$i];
     $vir = ",";
@@ -128,7 +129,7 @@ $sqlVerifica = "
 $pgObject = db_query($sqlVerifica);
 
 // Flag que indica se é ou não orçamento de processo de compras
-$flagProcessoCompras = pg_num_rows($pgObject) > 0 ? false : true;
+$flagProcessoCompras = ($pgObject ? pg_num_rows($pgObject) : null) > 0 ? false : true;
 
 $result_pcorcamforne = $clpcorcamforne->sql_record($clpcorcamforne->sql_query(null,"pc20_codorc,pc20_dtate,pc20_hrate,pc20_obs,pc20_prazoentrega, pc20_validadeorcamento,z01_nome,z01_numcgm,z01_cgccpf,z01_ender,z01_compl,z01_munic,z01_uf,z01_cep,z01_telef,z01_fax,z01_contato","z01_numcgm","pc21_codorc=$pc20_codorc $fornecedores"));
 $numrows_pcorcamforne = $clpcorcamforne->numrows;

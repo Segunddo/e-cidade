@@ -32,6 +32,7 @@ compartilhados, pelo `map`. Ordem: do menor para o maior.
 | `lic` | 2.586 (9 frentes) | 65 Rector | 2.586/2.586 | 26/26 | 588 linhas, 0 div. | **163/163** |
 | `vei` | 2.062 | 134 Rector + 2 à mão | 2.062/2.062 | 43/43 | 935 linhas, 0 div. | **172/172** |
 | `pat` | 2.165 | 98 Rector + 13 à mão | 2.165/2.165 | 24/24 | 519 linhas, 0 div. | **261/261** |
+| `com` | 2.297 | 181 Rector + 11 à mão | 2.297/2.297 | 44/44 | 1.012 linhas, 0 div. | **372/372** |
 
 **Lote 1 — `ac`+`aco`+`ouv`** (Contratos e Ouvidoria, 168 telas, roteadas no `location`). Rector só com regras já vetadas (37 guardas,
 37 construtores, 32 `ereg`/`split` — os 143 `split` literais: 142 `"#"`, 1 `"/"` —, 23 `parse_str`+`extract`),
@@ -111,6 +112,43 @@ Bateria 245/261 → **261/261**. LSP: 371 de 387 com `extends` carregam nos dois
 Núcleo tocado → **bateria completa**: **5.350/5.374** (as 24 caracterizadas; uma das telas de laço eterno do `edu4` saiu
 como TIMEOUT em vez de DIVERGE, mesma tela e mesma causa) e `map` **555/555**. Passo 8b depois de rotear (540 telas de
 Patrimonial no 8.5): nada indo ao 5.6.
+
+**Lote 5 — `com`** (Compras, 372 telas, roteadas no `location`; `com1_`…`com4_`). Universo 2.297. Rector em 181
+arquivos, só regras já vetadas (107 `parse_str`+`extract`, 80 `ereg`/`split`, 44 guardas, 43 construtores, 8
+`${$var}`), 0 na 2ª passada; `split` todos literais (`"#"`, `"_"`, `"-"`, `","`, `"XX"`, `"valor_"`…). Passo 6c (forma
+negada) nas classes do universo: 2.132 pares, **0 divergentes**. LSP: 372 de 386 com `extends` carregam nos dois, 0 só
+no 5.6. Bateria 363/372 → **372/372**. À mão:
+
+- 7 guardas `pg_*` (`null`): 6 pelo ciclo (`db_frmpcfornecon`, `com2_procreservasaldo002`, `com2_solorc002`,
+  `com3_pcforne006`, `com4_altdotacsol001`, `db_frmdespsol` — este compara com `== 0`, e `null == 0` é verdadeiro
+  nos dois) e 1 à mão em `com1_pcfornemov001.php:87`, `pg_result(db_query(…), 0, 0)` com a consulta direto no
+  argumento, que o ciclo não trata: a consulta vai para uma variável e o `pg_result` só roda se ela não for falsa
+  (`null` no outro caso, o valor do 5.6).
+- **Aritmética com `null`/`""`** em `forms/db_frmseldotac.php:53-54` (`$pc11_quant - $pc13_quantmax`, com a soma vazia
+  do banco chegando como `""`): `TypeError` no 8.5. Medido no 5.6 em 6 casos: `(float)` acerta o valor mas troca o
+  tipo onde o 5.6 dava inteiro; a forma do precedente do RH, `($x === null || $x === '' ? 0 : $x)` em cada operando,
+  reproduz **valor e tipo** nos 6.
+- **A forma negada, de novo, fora das classes:** `forms/db_frmsolicitemiframe.php`, `if (isset($pc11_vlrun) &&
+  $pc11_vlrun != "")` com `0` — o 5.6 emite o JavaScript que lê o campo da tela, o 8.5 fixava `valor = '0'`. Guarda do
+  catálogo. O `negada_alvos.py` só olha `classes/`; em formulário e tela ela só aparece pela bateria.
+- `com1_solicitemiframe001` chama `isParaiba()`, que existe em `app/Helpers/Configuracao/VerificaEstado.php` mas **nada
+  carrega** (nem o Composer nem a base legada): quebra **igual nos dois**, como `pes1_rhfuncao001` no RH. Pré-existente.
+
+Regressão: interseção dos 187 alterados com o universo servido **vazia**, núcleo intocado → sem bateria. `com` no
+`location` e nas três cópias do critério; o `map` não tinha entradas `com`. Passo 8b depois de rotear (713 telas de
+Patrimonial no 8.5): nada indo ao 5.6.
+
+#### 🏁 FASE A DE PATRIMONIAL CONCLUÍDA — `ac`, `aco`, `ouv`, `lic`, `vei`, `pat`, `com`
+
+| | |
+|---|---|
+| Telas roteadas por `location` | **1.136** (`com` 372, `pat` 261, `vei` 172, `lic` 163, `ouv` 88, `aco` 64, `ac` 16) |
+| Bateria | **1.136/1.136** |
+| Arquivos alterados | ~600 (Rector 538 + à mão ~45) |
+| Lacunas e categorias | **15ª lacuna** (classes com namespace, 9ª frente, corrigida pela cadeia); a **forma negada** do `0 == ""` (medida, 74 pontos de auditoria corrigidos pela cadeia, e 6 linhas em formulários) |
+
+Falta a **Fase B**: as telas de menu de Patrimonial nos prefixos compartilhados (`mat`, `pro`, `con`, `prot`, `emp`, `func`,
+`cai`, `orc`, `cad`, `processo`), pelo `map`.
 
 #### ✅ A forma negada `$this->campo != ""` nas classes de dados — MEDIDA e CORRIGIDA
 

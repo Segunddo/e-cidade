@@ -38,7 +38,7 @@ if(isset($solicita) && trim($solicita)!=""){
   if($clsolicitem->numrows>0){  	
     $desabilita = false;
     db_fieldsmemory($sql_solicita,0);
-    $arr_data = split("-",$pc10_data);
+    $arr_data = preg_split("#\\-#m",$pc10_data);
     $pc10_data_dia = $arr_data[2];
     $pc10_data_mes = $arr_data[1];
     $pc10_data_ano = $arr_data[0];

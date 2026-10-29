@@ -34,7 +34,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_pcmater_classe.php"));
 db_postmemory($HTTP_POST_VARS);
 db_postmemory($HTTP_GET_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clpcmater = new cl_pcmater;
 $clpcmater->rotulo->label();
 $clrotulo = new rotulocampo;
@@ -52,7 +53,7 @@ if (isset($incluir)){
   for($i=0; $i<$ta; $i++){
     $chave=key($vt);
     if(substr($chave,0,5)=="CHECK"){
-      $dados=split("_",$chave);
+      $dados=preg_split("#_#m",$chave);
       if ($dados[1]!=""){
       	  $clpcmater->pc01_ativo = 't';
       	  $clpcmater->pc01_codmater =  $dados[1] ;

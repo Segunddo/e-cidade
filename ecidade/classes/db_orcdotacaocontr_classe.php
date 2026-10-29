@@ -54,7 +54,7 @@ class cl_orcdotacaocontr {
                  o61_codigo = int4 = Contra Recurso 
                  ";
    //funcao construtor da classe 
-   function cl_orcdotacaocontr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcdotacaocontr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_orcdotacaocontr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o61_sequencial = ($this->o61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o61_sequencial"]:$this->o61_sequencial);
-       $this->o61_anousu = ($this->o61_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o61_anousu"]:$this->o61_anousu);
-       $this->o61_coddot = ($this->o61_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o61_coddot"]:$this->o61_coddot);
-       $this->o61_codigo = ($this->o61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o61_codigo"]:$this->o61_codigo);
+       $this->o61_sequencial = ($this->o61_sequencial === 0 || $this->o61_sequencial === 0.0 || $this->o61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o61_sequencial"]:$this->o61_sequencial);
+       $this->o61_anousu = ($this->o61_anousu === 0 || $this->o61_anousu === 0.0 || $this->o61_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o61_anousu"]:$this->o61_anousu);
+       $this->o61_coddot = ($this->o61_coddot === 0 || $this->o61_coddot === 0.0 || $this->o61_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o61_coddot"]:$this->o61_coddot);
+       $this->o61_codigo = ($this->o61_codigo === 0 || $this->o61_codigo === 0.0 || $this->o61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o61_codigo"]:$this->o61_codigo);
      }else{
-       $this->o61_sequencial = ($this->o61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o61_sequencial"]:$this->o61_sequencial);
+       $this->o61_sequencial = ($this->o61_sequencial === 0 || $this->o61_sequencial === 0.0 || $this->o61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o61_sequencial"]:$this->o61_sequencial);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_orcdotacaocontr {
          $this->o61_sequencial = $o61_sequencial; 
        }
      }
-     if(($this->o61_sequencial == null) || ($this->o61_sequencial == "") ){ 
+     if(($this->o61_sequencial == null) || ($this->o61_sequencial === 0 || $this->o61_sequencial === 0.0 || $this->o61_sequencial == "") ){ 
        $this->erro_sql = " Campo o61_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -381,7 +381,7 @@ class cl_orcdotacaocontr {
    function sql_query ( $o61_anousu=null,$o61_coddot=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_orcdotacaocontr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_orcdotacaocontr {
    function sql_query_file ( $o61_anousu=null,$o61_coddot=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -472,7 +472,7 @@ class cl_orcdotacaocontr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_orcdotacaocontr {
    function sql_query_rec ( $o61_anousu=null,$o61_coddot=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -516,7 +516,7 @@ class cl_orcdotacaocontr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

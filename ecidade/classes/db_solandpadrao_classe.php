@@ -56,7 +56,7 @@ class cl_solandpadrao {
                  pc47_pctipoandam = int4 = Código Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_solandpadrao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("solandpadrao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_solandpadrao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc47_codigo = ($this->pc47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_codigo"]:$this->pc47_codigo);
-       $this->pc47_solicitem = ($this->pc47_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_solicitem"]:$this->pc47_solicitem);
-       $this->pc47_ordem = ($this->pc47_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_ordem"]:$this->pc47_ordem);
-       $this->pc47_dias = ($this->pc47_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_dias"]:$this->pc47_dias);
-       $this->pc47_pctipoandam = ($this->pc47_pctipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_pctipoandam"]:$this->pc47_pctipoandam);
+       $this->pc47_codigo = ($this->pc47_codigo === 0 || $this->pc47_codigo === 0.0 || $this->pc47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_codigo"]:$this->pc47_codigo);
+       $this->pc47_solicitem = ($this->pc47_solicitem === 0 || $this->pc47_solicitem === 0.0 || $this->pc47_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_solicitem"]:$this->pc47_solicitem);
+       $this->pc47_ordem = ($this->pc47_ordem === 0 || $this->pc47_ordem === 0.0 || $this->pc47_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_ordem"]:$this->pc47_ordem);
+       $this->pc47_dias = ($this->pc47_dias === 0 || $this->pc47_dias === 0.0 || $this->pc47_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_dias"]:$this->pc47_dias);
+       $this->pc47_pctipoandam = ($this->pc47_pctipoandam === 0 || $this->pc47_pctipoandam === 0.0 || $this->pc47_pctipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_pctipoandam"]:$this->pc47_pctipoandam);
      }else{
-       $this->pc47_codigo = ($this->pc47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_codigo"]:$this->pc47_codigo);
+       $this->pc47_codigo = ($this->pc47_codigo === 0 || $this->pc47_codigo === 0.0 || $this->pc47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_codigo"]:$this->pc47_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_solandpadrao {
          $this->pc47_codigo = $pc47_codigo; 
        }
      }
-     if(($this->pc47_codigo == null) || ($this->pc47_codigo == "") ){ 
+     if(($this->pc47_codigo == null) || ($this->pc47_codigo === 0 || $this->pc47_codigo === 0.0 || $this->pc47_codigo == "") ){ 
        $this->erro_sql = " Campo pc47_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_solandpadrao {
    function sql_query ( $pc47_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_solandpadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_solandpadrao {
    function sql_query_depto ( $pc47_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -479,7 +479,7 @@ class cl_solandpadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -491,7 +491,7 @@ class cl_solandpadrao {
    function sql_query_file ( $pc47_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -512,7 +512,7 @@ class cl_solandpadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

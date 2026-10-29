@@ -52,7 +52,7 @@ class cl_liberafornecedorpcproc {
                  pc84_pcproc = int4 = Processo Compra 
                  ";
    //funcao construtor da classe 
-   function cl_liberafornecedorpcproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liberafornecedorpcproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_liberafornecedorpcproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc84_sequencial = ($this->pc84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc84_sequencial"]:$this->pc84_sequencial);
-       $this->pc84_liberafornecedor = ($this->pc84_liberafornecedor == ""?@$GLOBALS["HTTP_POST_VARS"]["pc84_liberafornecedor"]:$this->pc84_liberafornecedor);
-       $this->pc84_pcproc = ($this->pc84_pcproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc84_pcproc"]:$this->pc84_pcproc);
+       $this->pc84_sequencial = ($this->pc84_sequencial === 0 || $this->pc84_sequencial === 0.0 || $this->pc84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc84_sequencial"]:$this->pc84_sequencial);
+       $this->pc84_liberafornecedor = ($this->pc84_liberafornecedor === 0 || $this->pc84_liberafornecedor === 0.0 || $this->pc84_liberafornecedor == ""?@$GLOBALS["HTTP_POST_VARS"]["pc84_liberafornecedor"]:$this->pc84_liberafornecedor);
+       $this->pc84_pcproc = ($this->pc84_pcproc === 0 || $this->pc84_pcproc === 0.0 || $this->pc84_pcproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc84_pcproc"]:$this->pc84_pcproc);
      }else{
-       $this->pc84_sequencial = ($this->pc84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc84_sequencial"]:$this->pc84_sequencial);
+       $this->pc84_sequencial = ($this->pc84_sequencial === 0 || $this->pc84_sequencial === 0.0 || $this->pc84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc84_sequencial"]:$this->pc84_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_liberafornecedorpcproc {
          $this->pc84_sequencial = $pc84_sequencial; 
        }
      }
-     if(($this->pc84_sequencial == null) || ($this->pc84_sequencial == "") ){ 
+     if(($this->pc84_sequencial == null) || ($this->pc84_sequencial === 0 || $this->pc84_sequencial === 0.0 || $this->pc84_sequencial == "") ){ 
        $this->erro_sql = " Campo pc84_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_liberafornecedorpcproc {
    function sql_query ( $pc84_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_liberafornecedorpcproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_liberafornecedorpcproc {
    function sql_query_file ( $pc84_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_liberafornecedorpcproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

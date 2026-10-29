@@ -80,12 +80,13 @@ $resultpref        = db_query($sqlpref);
 db_fieldsmemory($resultpref,0);
 $rsParam           = $clpcparam->sql_record($clpcparam->sql_query(db_getsession("DB_instit"),"*"));
 $oParam            = db_utils::fieldsMemory($rsParam,0);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $fornecedores = "";
 $vir = "";
 if(isset($forne) && $forne != "branco"){
-  $arr_forne = split("forn_",$forne);
+  $arr_forne = preg_split("#forn_#m",$forne);
   for($i=1;$i<sizeof($arr_forne);$i++){
     $fornecedores .= $vir.$arr_forne[$i];
     $vir = ",";

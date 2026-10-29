@@ -84,7 +84,7 @@ if (isset ($chaves)) {
 	}
 	}
 	*/
-	$info = split('#', $chaves);
+	$info = preg_split('#\##m', $chaves);
 	if (trim($cods) != "") {
 		$vir = ",";
 	} else {
@@ -106,7 +106,7 @@ if (isset ($chaves)) {
 	if (isset ($incluir) && trim($incluir) != "") {
 		$sqlerro = false;
 		db_inicio_transacao();
-		$dados = split(',', $cods);
+		$dados = preg_split('#,#m', $cods);
 		if (count($dados)) {
 			$result_deptorec = $clpcandpadraodepto->sql_record($clpcandpadraodepto->sql_query(null, "*", null, "pc45_ordem = 2 and pc45_instit=".db_getsession("DB_instit")));
 			if ($clpcandpadraodepto->numrows > 0) {

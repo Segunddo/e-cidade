@@ -71,7 +71,7 @@ class cl_solicitalog {
                  pc15_opcao = int4 = Opção 
                  ";
    //funcao construtor da classe 
-   function cl_solicitalog() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("solicitalog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -88,14 +88,14 @@ class cl_solicitalog {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc15_codigo = ($this->pc15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_codigo"]:$this->pc15_codigo);
-       $this->pc15_numsol = ($this->pc15_numsol == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_numsol"]:$this->pc15_numsol);
-       $this->pc15_codproc = ($this->pc15_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_codproc"]:$this->pc15_codproc);
-       $this->pc15_codliclicita = ($this->pc15_codliclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_codliclicita"]:$this->pc15_codliclicita);
-       $this->pc15_solicitem = ($this->pc15_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_solicitem"]:$this->pc15_solicitem);
-       $this->pc15_quant = ($this->pc15_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_quant"]:$this->pc15_quant);
-       $this->pc15_vlrun = ($this->pc15_vlrun == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_vlrun"]:$this->pc15_vlrun);
-       $this->pc15_id_usuario = ($this->pc15_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_id_usuario"]:$this->pc15_id_usuario);
+       $this->pc15_codigo = ($this->pc15_codigo === 0 || $this->pc15_codigo === 0.0 || $this->pc15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_codigo"]:$this->pc15_codigo);
+       $this->pc15_numsol = ($this->pc15_numsol === 0 || $this->pc15_numsol === 0.0 || $this->pc15_numsol == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_numsol"]:$this->pc15_numsol);
+       $this->pc15_codproc = ($this->pc15_codproc === 0 || $this->pc15_codproc === 0.0 || $this->pc15_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_codproc"]:$this->pc15_codproc);
+       $this->pc15_codliclicita = ($this->pc15_codliclicita === 0 || $this->pc15_codliclicita === 0.0 || $this->pc15_codliclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_codliclicita"]:$this->pc15_codliclicita);
+       $this->pc15_solicitem = ($this->pc15_solicitem === 0 || $this->pc15_solicitem === 0.0 || $this->pc15_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_solicitem"]:$this->pc15_solicitem);
+       $this->pc15_quant = ($this->pc15_quant === 0 || $this->pc15_quant === 0.0 || $this->pc15_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_quant"]:$this->pc15_quant);
+       $this->pc15_vlrun = ($this->pc15_vlrun === 0 || $this->pc15_vlrun === 0.0 || $this->pc15_vlrun == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_vlrun"]:$this->pc15_vlrun);
+       $this->pc15_id_usuario = ($this->pc15_id_usuario === 0 || $this->pc15_id_usuario === 0.0 || $this->pc15_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_id_usuario"]:$this->pc15_id_usuario);
        if($this->pc15_data == ""){
          $this->pc15_data_dia = ($this->pc15_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_data_dia"]:$this->pc15_data_dia);
          $this->pc15_data_mes = ($this->pc15_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_data_mes"]:$this->pc15_data_mes);
@@ -105,9 +105,9 @@ class cl_solicitalog {
          }
        }
        $this->pc15_hora = ($this->pc15_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_hora"]:$this->pc15_hora);
-       $this->pc15_opcao = ($this->pc15_opcao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_opcao"]:$this->pc15_opcao);
+       $this->pc15_opcao = ($this->pc15_opcao === 0 || $this->pc15_opcao === 0.0 || $this->pc15_opcao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_opcao"]:$this->pc15_opcao);
      }else{
-       $this->pc15_codigo = ($this->pc15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_codigo"]:$this->pc15_codigo);
+       $this->pc15_codigo = ($this->pc15_codigo === 0 || $this->pc15_codigo === 0.0 || $this->pc15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc15_codigo"]:$this->pc15_codigo);
      }
    }
    // funcao para inclusao
@@ -221,7 +221,7 @@ class cl_solicitalog {
          $this->pc15_codigo = $pc15_codigo; 
        }
      }
-     if(($this->pc15_codigo == null) || ($this->pc15_codigo == "") ){ 
+     if(($this->pc15_codigo == null) || ($this->pc15_codigo === 0 || $this->pc15_codigo === 0.0 || $this->pc15_codigo == "") ){ 
        $this->erro_sql = " Campo pc15_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -619,7 +619,7 @@ class cl_solicitalog {
    function sql_query ( $pc15_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -640,7 +640,7 @@ class cl_solicitalog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -652,7 +652,7 @@ class cl_solicitalog {
    function sql_query_file ( $pc15_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -673,7 +673,7 @@ class cl_solicitalog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

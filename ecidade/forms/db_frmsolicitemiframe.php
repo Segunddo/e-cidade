@@ -428,7 +428,7 @@
 	  }
 	  valor = 0;
 	  ";
-            if (isset($pc11_vlrun) && $pc11_vlrun!="") {
+            if (isset($pc11_vlrun) && $pc11_vlrun!="" && $pc11_vlrun!==0 && $pc11_vlrun!==0.0) {
                 echo "valor = '$pc11_vlrun';";
             } else {
                 echo "if(parent.document.form1.pc11_vlrun.value!=''){

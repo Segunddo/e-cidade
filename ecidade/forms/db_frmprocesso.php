@@ -158,7 +158,7 @@ function js_verifica_hora(valor,campo){
   $hora = "00";
   $minu = "00";
   if(isset($pc30_horas)){
-    $arr_horas = split(":",$pc30_horas);
+    $arr_horas = preg_split("#:#m",$pc30_horas);
     $hora = $arr_horas[0];
     $minu = $arr_horas[1];
   }

@@ -32,7 +32,8 @@ $clrotulo->label("p71_datalanc");
 $clrotulo->label("o58_orgao");
 include(modification("dbforms/db_classesgenericas.php"));
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_dotacao.location.href='com1_pccontrdot002.php?chavepesquisa=$p73_codcontr&chavepesquisa1=$p73_coddot'</script>";
