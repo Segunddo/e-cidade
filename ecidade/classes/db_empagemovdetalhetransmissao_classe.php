@@ -47,7 +47,7 @@ class cl_empagemovdetalhetransmissao {
                  e74_valormulta = float4 = Multa 
                  ";
    //funcao construtor da classe 
-   function cl_empagemovdetalhetransmissao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empagemovdetalhetransmissao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -64,10 +64,10 @@ class cl_empagemovdetalhetransmissao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e74_sequencial = ($this->e74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_sequencial"]:$this->e74_sequencial);
-       $this->e74_empagemov = ($this->e74_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_empagemov"]:$this->e74_empagemov);
+       $this->e74_sequencial = ($this->e74_sequencial === 0 || $this->e74_sequencial === 0.0 || $this->e74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_sequencial"]:$this->e74_sequencial);
+       $this->e74_empagemov = ($this->e74_empagemov === 0 || $this->e74_empagemov === 0.0 || $this->e74_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_empagemov"]:$this->e74_empagemov);
        $this->e74_codigodebarra = ($this->e74_codigodebarra == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_codigodebarra"]:$this->e74_codigodebarra);
-       $this->e74_valornominal = ($this->e74_valornominal == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_valornominal"]:$this->e74_valornominal);
+       $this->e74_valornominal = ($this->e74_valornominal === 0 || $this->e74_valornominal === 0.0 || $this->e74_valornominal == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_valornominal"]:$this->e74_valornominal);
        if($this->e74_datavencimento == ""){
          $this->e74_datavencimento_dia = ($this->e74_datavencimento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_datavencimento_dia"]:$this->e74_datavencimento_dia);
          $this->e74_datavencimento_mes = ($this->e74_datavencimento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_datavencimento_mes"]:$this->e74_datavencimento_mes);
@@ -76,15 +76,15 @@ class cl_empagemovdetalhetransmissao {
             $this->e74_datavencimento = $this->e74_datavencimento_ano."-".$this->e74_datavencimento_mes."-".$this->e74_datavencimento_dia;
          }
        }
-       $this->e74_valorjuros = ($this->e74_valorjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_valorjuros"]:$this->e74_valorjuros);
-       $this->e74_valordesconto = ($this->e74_valordesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_valordesconto"]:$this->e74_valordesconto);
-       $this->e74_tipofatura = ($this->e74_tipofatura == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_tipofatura"]:$this->e74_tipofatura);
+       $this->e74_valorjuros = ($this->e74_valorjuros === 0 || $this->e74_valorjuros === 0.0 || $this->e74_valorjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_valorjuros"]:$this->e74_valorjuros);
+       $this->e74_valordesconto = ($this->e74_valordesconto === 0 || $this->e74_valordesconto === 0.0 || $this->e74_valordesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_valordesconto"]:$this->e74_valordesconto);
+       $this->e74_tipofatura = ($this->e74_tipofatura === 0 || $this->e74_tipofatura === 0.0 || $this->e74_tipofatura == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_tipofatura"]:$this->e74_tipofatura);
        $this->e74_linhadigitavel = ($this->e74_linhadigitavel == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_linhadigitavel"]:$this->e74_linhadigitavel);
        $this->e74_finalidade = ($this->e74_finalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_finalidade"]:$this->e74_finalidade);
-       $this->e74_valorabatimento = ($this->e74_valorabatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_valorabatimento"]:$this->e74_valorabatimento);
-       $this->e74_valormulta = ($this->e74_valormulta == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_valormulta"]:$this->e74_valormulta);
+       $this->e74_valorabatimento = ($this->e74_valorabatimento === 0 || $this->e74_valorabatimento === 0.0 || $this->e74_valorabatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_valorabatimento"]:$this->e74_valorabatimento);
+       $this->e74_valormulta = ($this->e74_valormulta === 0 || $this->e74_valormulta === 0.0 || $this->e74_valormulta == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_valormulta"]:$this->e74_valormulta);
      }else{
-       $this->e74_sequencial = ($this->e74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_sequencial"]:$this->e74_sequencial);
+       $this->e74_sequencial = ($this->e74_sequencial === 0 || $this->e74_sequencial === 0.0 || $this->e74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e74_sequencial"]:$this->e74_sequencial);
      }
    }
    // funcao para Inclusão
@@ -144,7 +144,7 @@ class cl_empagemovdetalhetransmissao {
          $this->e74_sequencial = $e74_sequencial; 
        }
      }
-     if(($this->e74_sequencial == null) || ($this->e74_sequencial == "") ){ 
+     if(($this->e74_sequencial == null) || ($this->e74_sequencial === 0 || $this->e74_sequencial === 0.0 || $this->e74_sequencial == "") ){ 
        $this->erro_sql = " Campo e74_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

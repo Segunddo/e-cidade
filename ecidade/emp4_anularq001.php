@@ -45,7 +45,7 @@ $clempagetipo->rotulo->label();
 
 if(isset($cancelar)){
   $sqlerro = false;
-  $arr_movs = split(',',$movimentos);
+  $arr_movs = preg_split('#,#m',$movimentos);
   db_inicio_transacao();
   for($i=0;$i<sizeof($arr_movs);$i++){
     $codmov = $arr_movs[$i];

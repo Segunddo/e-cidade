@@ -159,7 +159,8 @@ $clempempret	  = new cl_empempret;
 $clempretencao	  = new cl_empretencao;
 
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 if (isset($e54_concarpeculiar) && trim(@$e54_concarpeculiar) != ""){

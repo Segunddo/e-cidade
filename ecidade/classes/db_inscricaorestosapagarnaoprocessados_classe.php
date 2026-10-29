@@ -56,7 +56,7 @@ class cl_inscricaorestosapagarnaoprocessados {
                  c107_processado = bool = Processado 
                  ";
    //funcao construtor da classe 
-   function cl_inscricaorestosapagarnaoprocessados() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("inscricaorestosapagarnaoprocessados"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_inscricaorestosapagarnaoprocessados {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c107_sequencial = ($this->c107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_sequencial"]:$this->c107_sequencial);
-       $this->c107_usuario = ($this->c107_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_usuario"]:$this->c107_usuario);
-       $this->c107_instit = ($this->c107_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_instit"]:$this->c107_instit);
-       $this->c107_ano = ($this->c107_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_ano"]:$this->c107_ano);
+       $this->c107_sequencial = ($this->c107_sequencial === 0 || $this->c107_sequencial === 0.0 || $this->c107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_sequencial"]:$this->c107_sequencial);
+       $this->c107_usuario = ($this->c107_usuario === 0 || $this->c107_usuario === 0.0 || $this->c107_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_usuario"]:$this->c107_usuario);
+       $this->c107_instit = ($this->c107_instit === 0 || $this->c107_instit === 0.0 || $this->c107_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_instit"]:$this->c107_instit);
+       $this->c107_ano = ($this->c107_ano === 0 || $this->c107_ano === 0.0 || $this->c107_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_ano"]:$this->c107_ano);
        $this->c107_processado = ($this->c107_processado == "f"?@$GLOBALS["HTTP_POST_VARS"]["c107_processado"]:$this->c107_processado);
      }else{
-       $this->c107_sequencial = ($this->c107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_sequencial"]:$this->c107_sequencial);
+       $this->c107_sequencial = ($this->c107_sequencial === 0 || $this->c107_sequencial === 0.0 || $this->c107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_sequencial"]:$this->c107_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_inscricaorestosapagarnaoprocessados {
          $this->c107_sequencial = $c107_sequencial; 
        }
      }
-     if(($this->c107_sequencial == null) || ($this->c107_sequencial == "") ){ 
+     if(($this->c107_sequencial == null) || ($this->c107_sequencial === 0 || $this->c107_sequencial === 0.0 || $this->c107_sequencial == "") ){ 
        $this->erro_sql = " Campo c107_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_inscricaorestosapagarnaoprocessados {
    function sql_query ( $c107_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_inscricaorestosapagarnaoprocessados {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_inscricaorestosapagarnaoprocessados {
    function sql_query_file ( $c107_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_inscricaorestosapagarnaoprocessados {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

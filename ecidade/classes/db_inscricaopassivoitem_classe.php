@@ -60,7 +60,7 @@ class cl_inscricaopassivoitem {
                  c38_observacao = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_inscricaopassivoitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("inscricaopassivoitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_inscricaopassivoitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c38_sequencial = ($this->c38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_sequencial"]:$this->c38_sequencial);
-       $this->c38_inscricaopassivo = ($this->c38_inscricaopassivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_inscricaopassivo"]:$this->c38_inscricaopassivo);
-       $this->c38_pcmater = ($this->c38_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_pcmater"]:$this->c38_pcmater);
-       $this->c38_quantidade = ($this->c38_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_quantidade"]:$this->c38_quantidade);
-       $this->c38_valorunitario = ($this->c38_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_valorunitario"]:$this->c38_valorunitario);
-       $this->c38_valortotal = ($this->c38_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_valortotal"]:$this->c38_valortotal);
+       $this->c38_sequencial = ($this->c38_sequencial === 0 || $this->c38_sequencial === 0.0 || $this->c38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_sequencial"]:$this->c38_sequencial);
+       $this->c38_inscricaopassivo = ($this->c38_inscricaopassivo === 0 || $this->c38_inscricaopassivo === 0.0 || $this->c38_inscricaopassivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_inscricaopassivo"]:$this->c38_inscricaopassivo);
+       $this->c38_pcmater = ($this->c38_pcmater === 0 || $this->c38_pcmater === 0.0 || $this->c38_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_pcmater"]:$this->c38_pcmater);
+       $this->c38_quantidade = ($this->c38_quantidade === 0 || $this->c38_quantidade === 0.0 || $this->c38_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_quantidade"]:$this->c38_quantidade);
+       $this->c38_valorunitario = ($this->c38_valorunitario === 0 || $this->c38_valorunitario === 0.0 || $this->c38_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_valorunitario"]:$this->c38_valorunitario);
+       $this->c38_valortotal = ($this->c38_valortotal === 0 || $this->c38_valortotal === 0.0 || $this->c38_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_valortotal"]:$this->c38_valortotal);
        $this->c38_observacao = ($this->c38_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_observacao"]:$this->c38_observacao);
      }else{
-       $this->c38_sequencial = ($this->c38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_sequencial"]:$this->c38_sequencial);
+       $this->c38_sequencial = ($this->c38_sequencial === 0 || $this->c38_sequencial === 0.0 || $this->c38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_sequencial"]:$this->c38_sequencial);
      }
    }
    // funcao para inclusao
@@ -160,7 +160,7 @@ class cl_inscricaopassivoitem {
          $this->c38_sequencial = $c38_sequencial; 
        }
      }
-     if(($this->c38_sequencial == null) || ($this->c38_sequencial == "") ){ 
+     if(($this->c38_sequencial == null) || ($this->c38_sequencial === 0 || $this->c38_sequencial === 0.0 || $this->c38_sequencial == "") ){ 
        $this->erro_sql = " Campo c38_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -466,7 +466,7 @@ class cl_inscricaopassivoitem {
    function sql_query ( $c38_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -496,7 +496,7 @@ class cl_inscricaopassivoitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_inscricaopassivoitem {
    function sql_query_file ( $c38_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -530,7 +530,7 @@ class cl_inscricaopassivoitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

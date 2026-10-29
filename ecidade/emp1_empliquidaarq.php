@@ -104,10 +104,10 @@
 
     //$arr_dados é um array com todos os elementos e seus valores
     //$dados =   $elemento-$valorliquidar#$elemento-$valorliquidar#elemen...
-    $arr_dados = split("#",$dados);
+    $arr_dados = preg_split("#\\##m",$dados);
     $tam = count($arr_dados);
     for($i=0; $i<$tam; $i++){
-	  $arr_ele = split("-",$arr_dados[$i]);
+	  $arr_ele = preg_split("#\\-#m",$arr_dados[$i]);
           $elemento =  $arr_ele[0];
 	  $valor    =  $arr_ele[1];
 
@@ -158,7 +158,7 @@
 
   //rotina pega as notas marcadas para atualizar os valores liquidados da notas
    if($sqlerro==false && isset($chaves) && $chaves!=''){
-      $arr_notas = split("#",$chaves);
+      $arr_notas = preg_split("#\\##m",$chaves);
       $tam = count($arr_notas);
       for($i=0; $i<$tam; $i++){
 	  $nota = $arr_notas[$i];
@@ -256,7 +256,7 @@
 	      /*conlancamnota*/
 
 	      if($sqlerro==false && isset($chaves) && $chaves!=''){
-                 $arr_notas = split("#",$chaves);
+                 $arr_notas = preg_split("#\\##m",$chaves);
                  $tam = count($arr_notas);
                  for($inota=0; $inota<$tam; $inota++){
                    $clconlancamnota->c66_codnota = $arr_notas[$inota];

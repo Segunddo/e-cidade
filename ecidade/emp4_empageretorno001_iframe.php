@@ -37,7 +37,8 @@ $clempage  = new cl_empage;
 $clempageconf  = new cl_empageconf;
 $clerrobanco  = new cl_errobanco;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;
@@ -134,12 +135,12 @@ function js_calcula(campo){
   db_input("codHeaderL",10,'',true,'text',1);
   db_input("codtraillL",10,'',true,'text',1);
   if(isset($geracampo)){
-    $arr_movimentos = split(",",$movimentos);
-    $arr_retlotsmov = split(",",$lotsdemovs);
-    $arr_codigomovs = split(",",$codigomovs);
-    $arr_dataretmov = split(",",$dataretmov);
-    $arr_valoresmov = split(",",$valoresmov);
-    $arr_codilotmov = split(",",$codlotsmov);
+    $arr_movimentos = preg_split("#,#m",$movimentos);
+    $arr_retlotsmov = preg_split("#,#m",$lotsdemovs);
+    $arr_codigomovs = preg_split("#,#m",$codigomovs);
+    $arr_dataretmov = preg_split("#,#m",$dataretmov);
+    $arr_valoresmov = preg_split("#,#m",$valoresmov);
+    $arr_codilotmov = preg_split("#,#m",$codlotsmov);
     $loteant = "";
     for($i=0;$i<$numrows;$i++){
       $impri = false;

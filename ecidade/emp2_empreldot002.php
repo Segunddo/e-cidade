@@ -34,7 +34,8 @@ include(modification("classes/db_orcorgao_classe.php"));
 include(modification("classes/db_empemphist_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clempempenho = new cl_empempenho;
 $clcgm = new cl_cgm;
@@ -321,7 +322,7 @@ if ($quebra=="g" and $tipo=="a"){
             $pdf->Cell(20,$tam,"$e60_emiss",0,0,"C",0);
             $pdf->Cell(80,$tam,db_formatar($o15_codigo,'recurso')." - $o15_descr",0,0,"L",0); // recurso
 	    $pdf->Cell(100,$tam,"",0,1,"L",0); //quebra linha
-	    
+
 	    // $pdf->setX(150);
 	    $pdf->Cell(20,$tam, "$e60_numcgm",'B',0,"R",0);
 	    $pdf->Cell(120,$tam,"$z01_nome  ",'B',0,"L",0);
@@ -409,7 +410,7 @@ if ($quebra=="g" and $tipo=="s"){
             $t_anu  += $e60_vlranu;
             $t_pag  += $e60_vlrpag;
             $t_total+= $total;
-	
+
             if ($x == ($rows -1)) {
 		 $pdf->Ln();
 		 $pdf->setX(110);
@@ -611,8 +612,8 @@ if ($quebra=="o" and $tipo=="s"){
             if ($pdf->gety() > $pdf->h - 40){
  	        $pdg->addpage("L"); 
 	    }
-	
-	    
+
+
             if ($imprime_header==true)
     	    {
                  $pdf->Ln();
@@ -657,7 +658,7 @@ if ($quebra=="o" and $tipo=="s"){
  	         $pdf->Cell(100,$tam,$dl_estrutural,0,1,"L",0); //quebra linha
                  $pdf->SetFont('Arial','',7);	 
 	    }
-       
+
             $pdf->Cell(20,$tam,$o40_orgao,0,0,"R",0);
             $pdf->Cell(100,$tam,$o40_descr,0,0,"L",0);
             $pdf->Cell(20,$tam,$e60_vlremp,0,0,"R",0);

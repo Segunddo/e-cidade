@@ -65,7 +65,7 @@ class cl_empnotasuspensao {
                  cc36_dataretorno = date = Data de Retorno
                  ";
   //funcao construtor da classe
-  function cl_empnotasuspensao() {
+  function __construct() {
 
     //classes dos rotulos dos campos
     $this->rotulo = new rotulo("empnotasuspensao");
@@ -126,7 +126,7 @@ class cl_empnotasuspensao {
         $this->cc36_sequencial = $cc36_sequencial;
       }
     }
-    if(($this->cc36_sequencial == null) || ($this->cc36_sequencial == "") ){
+    if(($this->cc36_sequencial == null) || ($this->cc36_sequencial === 0 || $this->cc36_sequencial === 0.0 || $this->cc36_sequencial == "") ){
       $this->erro_sql = " Campo cc36_sequencial não declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -297,9 +297,9 @@ class cl_empnotasuspensao {
           $acount = pg_result($resac,0,0);
           $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
           $resac = db_query("insert into db_acountkey values($acount,21966,'$this->cc36_sequencial','A')");
-          if (isset($GLOBALS["HTTP_POST_VARS"]["cc36_sequencial"]) || $this->cc36_sequencial != "")
+          if (isset($GLOBALS["HTTP_POST_VARS"]["cc36_sequencial"]) || ($this->cc36_sequencial != "" && $this->cc36_sequencial !== 0 && $this->cc36_sequencial !== 0.0))
             $resac = db_query("insert into db_acount values($acount,3954,21966,'".AddSlashes(pg_result($resaco,$conresaco,'cc36_sequencial'))."','$this->cc36_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-          if (isset($GLOBALS["HTTP_POST_VARS"]["cc36_empnota"]) || $this->cc36_empnota != "")
+          if (isset($GLOBALS["HTTP_POST_VARS"]["cc36_empnota"]) || ($this->cc36_empnota != "" && $this->cc36_empnota !== 0 && $this->cc36_empnota !== 0.0))
             $resac = db_query("insert into db_acount values($acount,3954,21967,'".AddSlashes(pg_result($resaco,$conresaco,'cc36_empnota'))."','$this->cc36_empnota',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
           if (isset($GLOBALS["HTTP_POST_VARS"]["cc36_justificativasuspensao"]) || $this->cc36_justificativasuspensao != "")
             $resac = db_query("insert into db_acount values($acount,3954,21968,'".AddSlashes(pg_result($resaco,$conresaco,'cc36_justificativasuspensao'))."','$this->cc36_justificativasuspensao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");

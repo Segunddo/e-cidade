@@ -43,7 +43,8 @@ include(modification("classes/db_pagordemele_classe.php"));
 include(modification("classes/db_empagemov_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clempempenho   = new cl_empempenho;
 $clorcdotacao   = new cl_orcdotacao;

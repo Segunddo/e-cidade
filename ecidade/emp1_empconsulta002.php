@@ -37,7 +37,8 @@ require_once(modification("classes/db_pagordem_classe.php"));
 require_once(modification("classes/db_empparametro_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $clempempenho = new cl_empempenho;
 $clpagordem   = new cl_pagordem;
 $clempparametro	  = new cl_empparametro;
@@ -126,7 +127,7 @@ if(isset($newsql) && $newsql=="true"){
       exit;
     }
     if (isset($e60_codemp) and $e60_codemp != "" ) {
-      $arr = split("/",$e60_codemp);
+      $arr = preg_split("#\\/#m",$e60_codemp);
       if(count($arr) == 2  && isset($arr[1]) && $arr[1] != '' ){
         $where_sql .= "e60_codemp =  '".$arr[0]."' and e60_anousu = ".$arr[1]." and ";
         $anousu = $arr[1];
@@ -205,7 +206,7 @@ if(isset($newsql) && $newsql=="true"){
     }
 
     if(isset($o50_estrutdespesa) && $o50_estrutdespesa!=""){
-      $matriz=split('\.',$o50_estrutdespesa);
+      $matriz=preg_split('#\.#m',$o50_estrutdespesa);
       for($i=0; $i<count($matriz); $i++){
         switch($i){
           case 0://orgao

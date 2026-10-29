@@ -101,7 +101,7 @@ if(!isset($emite_recibo_protocolo) and !isset($reemite_recibo)){
   //pega os numpres da ca3_gerfinanc002.php, separa e insere em db_reciboweb
   $result = db_query("select k00_codbco,k00_codage,k00_descr,k00_hist1,k00_hist2,k00_hist3,k00_hist4,k00_hist5,k00_hist6,k00_hist7,k00_hist8,k03_tipo,k00_tipoagrup from arretipo where k00_tipo = $tipo");
 
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
   	db_fim_transacao(true);
     echo "O código do banco não esta cadastrado no arquivo arretipo para este tipo.";
     exit;
@@ -134,7 +134,7 @@ if(!isset($emite_recibo_protocolo) and !isset($reemite_recibo)){
     for($i = 0;$i < $tam;$i++) {
       if(db_indexOf(key($vt) ,"CHECK") > 0){
         $numpres .= "N" . $vt[key($vt)];
-        $matnumpres = split("N", $vt[key($vt)]);
+        $matnumpres = preg_split("#N#m", $vt[key($vt)]);
 
         if (!isset($inicial)) {
           for ($contanumpres = 0; $contanumpres < sizeof($matnumpres); $contanumpres++) {
@@ -144,9 +144,9 @@ if(!isset($emite_recibo_protocolo) and !isset($reemite_recibo)){
               continue;
             }
 
-            $resultado = split("P",$numprecerto);
-            $numpar    = split("P",$resultado[1]);
-            $numpar    = split("R",$numpar[0]);
+            $resultado = preg_split("#P#m",$numprecerto);
+            $numpar    = preg_split("#P#m",$resultado[1]);
+            $numpar    = preg_split("#R#m",$numpar[0]);
 
             $sSqlInflatores  = " select distinct   ";
             $sSqlInflatores .= "        k00_numpar, ";
@@ -257,11 +257,11 @@ if(!isset($emite_recibo_protocolo) and !isset($reemite_recibo)){
 
     }
 
-    $numpres = split("N",$numpres);
+    $numpres = preg_split("#N#m",$numpres);
     $totalregistrospassados=0;
 
     for($iii = 0;$iii < sizeof($numpres);$iii++) {
-      $valores = split("P",$numpres[$iii]);
+      $valores = preg_split("#P#m",$numpres[$iii]);
       if ($numpres[$iii] <> "") {
         if(!isset($inicial)) {
           $totalregistrospassados+=sizeof($valores)-1;
@@ -304,7 +304,7 @@ if(!isset($emite_recibo_protocolo) and !isset($reemite_recibo)){
         continue;
       }
 
-      $valores = split("P",$numpres[$ii]);
+      $valores = preg_split("#P#m",$numpres[$ii]);
 
       if (isset($inicial)) {
 
@@ -338,7 +338,7 @@ if(!isset($emite_recibo_protocolo) and !isset($reemite_recibo)){
         }
       } else {
 
-        $numpar = split("R", $valores[1]);
+        $numpar = preg_split("#R#m", $valores[1]);
 
         if ($processarDescontoRecibo == 'true') {
           $desconto = recibodesconto($valores[0], $numpar[0], $tipo, $tipo_debito, $whereloteador, $totalregistrospassados, $totregistros);
@@ -1337,7 +1337,7 @@ $k00_mensagemdesconto .= "DESCONTO CONCEDIDO REFERENTE ";
 $temdesconto = false;
 for ($mensdesc=0; $mensdesc < pg_numrows($resultmensagemdesconto); $mensdesc++) {
   db_fieldsmemory($resultmensagemdesconto, $mensdesc);
-  $descrlei = split("#",$k40_descr);
+  $descrlei = preg_split("#\\##m",$k40_descr);
   $k00_mensagemdesconto .= $descrlei[0] . ($mensdesc == pg_numrows($resultmensagemdesconto)?"":"-");
   $temdesconto = true;
 }

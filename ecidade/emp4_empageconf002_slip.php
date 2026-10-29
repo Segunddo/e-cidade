@@ -45,7 +45,8 @@ $clempagemov  = new cl_empagemov;
 $clempagepag  = new cl_empagepag;
 $clempageslip  = new cl_empageslip;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;
@@ -65,7 +66,7 @@ $clrotulo->label("e83_codtipo");
 
 
 if(isset($movs)){
-  $arr_movs = split("XX",$movs);
+  $arr_movs = preg_split("#XX#m",$movs);
   $arr_m = array();
   for($i=0; $i<count($arr_movs); $i++){
     $arr_m[$arr_movs[$i]] = $arr_movs[$i];
@@ -177,7 +178,7 @@ function js_calcula(campo){
 
 
 	    $x= "valor_$e81_codmov";
-  	    $$x = $e81_valor;
+  	    ${$x} = $e81_valor;
             db_input("valor_$e81_codmov",10,'',true,'hidden',1);
 	    
 	    $xeque = '';

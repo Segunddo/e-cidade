@@ -54,7 +54,7 @@ if (isset($processar)&&$processar!=""){
   for($i=0; $i<$ta; $i++){
     $chave=key($vt);
     if(substr($chave,0,5)=="CHECK"){
-      $dados=split("_",$chave);
+      $dados=preg_split("#_#m",$chave);
       $lista.=$vir.$dados[1];
       $vir="_";
     }

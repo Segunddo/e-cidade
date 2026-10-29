@@ -32,7 +32,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_saltes_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clsaltes = new cl_saltes;
 $clsaltes->rotulo->label("k13_conta");

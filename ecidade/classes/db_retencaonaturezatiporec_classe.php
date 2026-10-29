@@ -52,7 +52,7 @@ class cl_retencaonaturezatiporec {
                  e31_retencaonatureza = int4 = Código  do IRRF 
                  ";
    //funcao construtor da classe 
-   function cl_retencaonaturezatiporec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("retencaonaturezatiporec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_retencaonaturezatiporec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e31_sequencial = ($this->e31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e31_sequencial"]:$this->e31_sequencial);
-       $this->e31_retencaotiporec = ($this->e31_retencaotiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["e31_retencaotiporec"]:$this->e31_retencaotiporec);
-       $this->e31_retencaonatureza = ($this->e31_retencaonatureza == ""?@$GLOBALS["HTTP_POST_VARS"]["e31_retencaonatureza"]:$this->e31_retencaonatureza);
+       $this->e31_sequencial = ($this->e31_sequencial === 0 || $this->e31_sequencial === 0.0 || $this->e31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e31_sequencial"]:$this->e31_sequencial);
+       $this->e31_retencaotiporec = ($this->e31_retencaotiporec === 0 || $this->e31_retencaotiporec === 0.0 || $this->e31_retencaotiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["e31_retencaotiporec"]:$this->e31_retencaotiporec);
+       $this->e31_retencaonatureza = ($this->e31_retencaonatureza === 0 || $this->e31_retencaonatureza === 0.0 || $this->e31_retencaonatureza == ""?@$GLOBALS["HTTP_POST_VARS"]["e31_retencaonatureza"]:$this->e31_retencaonatureza);
      }else{
-       $this->e31_sequencial = ($this->e31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e31_sequencial"]:$this->e31_sequencial);
+       $this->e31_sequencial = ($this->e31_sequencial === 0 || $this->e31_sequencial === 0.0 || $this->e31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e31_sequencial"]:$this->e31_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_retencaonaturezatiporec {
          $this->e31_sequencial = $e31_sequencial; 
        }
      }
-     if(($this->e31_sequencial == null) || ($this->e31_sequencial == "") ){ 
+     if(($this->e31_sequencial == null) || ($this->e31_sequencial === 0 || $this->e31_sequencial === 0.0 || $this->e31_sequencial == "") ){ 
        $this->erro_sql = " Campo e31_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_retencaonaturezatiporec {
    function sql_query ( $e31_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_retencaonaturezatiporec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_retencaonaturezatiporec {
    function sql_query_file ( $e31_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_retencaonaturezatiporec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

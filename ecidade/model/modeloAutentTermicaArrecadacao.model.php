@@ -65,7 +65,7 @@ class modeloAutentTermicaArrecadacao extends modeloAutentTermicaBasica {
 
   }
 
-  function imprimir() {
+  function imprimir($sStringCorpo = null) { // PHP 8 (LSP): parametro da mae, opcional
 
     $this->sBuffer .= $this->getResumo();
 

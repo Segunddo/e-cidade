@@ -35,7 +35,8 @@ include(modification("classes/db_db_config_classe.php"));
 $clempparametro	 = new  cl_empparametro;
 $cltipoinstit    = new  cl_db_config;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $result_instit = $cltipoinstit->sql_record($cltipoinstit->sql_query_tipoinstit(db_getsession("DB_instit"),"db21_tipoinstit",null,""));
@@ -169,7 +170,7 @@ for($i = 0;$i < pg_numrows($result);$i++){
    db_fieldsmemory($result,$i);
    
    if ($c72_complem != "") {
-     $matrizdados= split("Motivo:",$c72_complem);
+     $matrizdados= preg_split("#Motivo:#m",$c72_complem);
    }
    
    $pdf1->prefeitura       = $nomeinst;

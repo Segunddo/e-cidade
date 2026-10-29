@@ -54,7 +54,7 @@ class cl_pagordemtiporec {
                  e59_ipes = char(1) = Incidência Tipo Pessoal 
                  ";
    //funcao construtor da classe 
-   function cl_pagordemtiporec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pagordemtiporec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_pagordemtiporec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e59_sequen = ($this->e59_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_sequen"]:$this->e59_sequen);
-       $this->e59_codrec = ($this->e59_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_codrec"]:$this->e59_codrec);
-       $this->e59_aliquota = ($this->e59_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_aliquota"]:$this->e59_aliquota);
+       $this->e59_sequen = ($this->e59_sequen === 0 || $this->e59_sequen === 0.0 || $this->e59_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_sequen"]:$this->e59_sequen);
+       $this->e59_codrec = ($this->e59_codrec === 0 || $this->e59_codrec === 0.0 || $this->e59_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_codrec"]:$this->e59_codrec);
+       $this->e59_aliquota = ($this->e59_aliquota === 0 || $this->e59_aliquota === 0.0 || $this->e59_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_aliquota"]:$this->e59_aliquota);
        $this->e59_ipes = ($this->e59_ipes == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_ipes"]:$this->e59_ipes);
      }else{
-       $this->e59_sequen = ($this->e59_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_sequen"]:$this->e59_sequen);
+       $this->e59_sequen = ($this->e59_sequen === 0 || $this->e59_sequen === 0.0 || $this->e59_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_sequen"]:$this->e59_sequen);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_pagordemtiporec {
          $this->e59_sequen = $e59_sequen; 
        }
      }
-     if(($this->e59_sequen == null) || ($this->e59_sequen == "") ){ 
+     if(($this->e59_sequen == null) || ($this->e59_sequen === 0 || $this->e59_sequen === 0.0 || $this->e59_sequen == "") ){ 
        $this->erro_sql = " Campo e59_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_pagordemtiporec {
    function sql_query ( $e59_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_pagordemtiporec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_pagordemtiporec {
    function sql_query_file ( $e59_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_pagordemtiporec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -455,10 +455,10 @@ class cl_pagordemtiporec {
      }
      return $sql;
   }
-   function sql_query_retencao ( $e59_sequen=null,$campos="*",$ordem=null,$dbwhere="", $autori){ 
+   function sql_query_retencao ( $e59_sequen=null,$campos="*",$ordem=null,$dbwhere="", $autori = null){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -487,7 +487,7 @@ class cl_pagordemtiporec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

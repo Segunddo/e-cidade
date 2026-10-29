@@ -46,7 +46,8 @@ $clempagepag       = new cl_empagepag;
 $clrotulo          = new rotulocampo;
 
 //echo ($HTTP_SERVER_VARS["QUERY_STRING"]);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;
@@ -213,14 +214,14 @@ function js_calcula(campo){
           <td class='bordas' align='right'><small><?=$z01_nome?>  </small></td>
            <?
 	     $x= "z01_numcgm_$e81_codmov";
-  	     $$x = $z01_numcgm;
+  	     ${$x} = $z01_numcgm;
              db_input("z01_numcgm_$e81_codmov",10,'',true,'hidden',1);
             ?>       
           <td class='bordas' align='center'><small><?=$e60_emiss?>  </small></td>
           <td class='bordas' align='right'><small><?=number_format($e81_valor,"2",".","")?></small></td>
            <?
 	     $x= "valor_$e81_codmov";
-  	     $$x = $e81_valor;
+  	     ${$x} = $e81_valor;
              db_input("valor_$e81_codmov",10,'',true,'hidden',1);
             ?>       
 	  

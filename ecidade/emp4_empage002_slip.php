@@ -51,7 +51,8 @@ $clempageconf  = new cl_empageconf;
 $clslip       = new cl_slip;
 $clslipnum    = new cl_slipnum;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $db_opcao = 1;
@@ -186,11 +187,11 @@ function js_padrao(val){
 	    $xd = "descr_$k17_codigo";
 	    if($numrows05>0){
 	      db_fieldsmemory($result05,0);
-	      $$x = $codtipo;
-              $$xd = $e83_descr;
+	      ${$x} = $codtipo;
+              ${$xd} = $e83_descr;
 	    }else{
-	      $$x = '';
-              $$xd = '';
+	      ${$x} = '';
+              ${$xd} = '';
 	    }
 
 	    
@@ -200,7 +201,7 @@ function js_padrao(val){
          
 	   //coloca o valor com campo
 	    $x= "valor_$k17_codigo";
-	    $$x = number_format($k17_valor,"2",".","");
+	    ${$x} = number_format($k17_valor,"2",".","");
             db_input("valor_$k17_codigo",6,'',true,'hidden',1,1);
            //------------ 
 

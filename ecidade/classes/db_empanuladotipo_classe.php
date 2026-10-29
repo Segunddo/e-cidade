@@ -50,7 +50,7 @@ class cl_empanuladotipo {
                  e38_descr = varchar(50) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_empanuladotipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empanuladotipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_empanuladotipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e38_sequencial = ($this->e38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e38_sequencial"]:$this->e38_sequencial);
+       $this->e38_sequencial = ($this->e38_sequencial === 0 || $this->e38_sequencial === 0.0 || $this->e38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e38_sequencial"]:$this->e38_sequencial);
        $this->e38_descr = ($this->e38_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e38_descr"]:$this->e38_descr);
      }else{
-       $this->e38_sequencial = ($this->e38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e38_sequencial"]:$this->e38_sequencial);
+       $this->e38_sequencial = ($this->e38_sequencial === 0 || $this->e38_sequencial === 0.0 || $this->e38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e38_sequencial"]:$this->e38_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_empanuladotipo {
          $this->e38_sequencial = $e38_sequencial; 
        }
      }
-     if(($this->e38_sequencial == null) || ($this->e38_sequencial == "") ){ 
+     if(($this->e38_sequencial == null) || ($this->e38_sequencial === 0 || $this->e38_sequencial === 0.0 || $this->e38_sequencial == "") ){ 
        $this->erro_sql = " Campo e38_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

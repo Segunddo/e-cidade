@@ -44,10 +44,13 @@ Patrimonial, 469 previstos, ~710 reais).
 2. **`con` só pelas telas do Financeiro, pelo `map`.** 173 telas `con` são de Configuração e Cidadão, ainda
    pendentes; o prefixo inteiro custaria 706 arquivos em vez de 200. Pode ir inteiro depois dessas duas áreas.
 3. **Um lote por vez:** terminar, relatar e esperar o pedido do próximo (anotado no `CLAUDE.md`).
+4. **Bateria completa só no fim da área** (decidido depois do lote 1): em cada lote, a do próprio lote e, se tocar o
+   núcleo, a dirigida às telas que chegam ao trecho; a completa, e o envio, só no fim do Financeiro.
 
 | Lote | Universo | Alterados | `php -l` 5.6/8.5 | Classes | Escrita | **Bateria** |
 |---|---|---|---|---|---|---|
 | 1 `cus`+`pla`+`pl`+`tes` | 1.347 | 45 Rector + 2 à mão (+10 do passo 8b) | 1.347/1.347 | 17/17 | 369 linhas, 0 div. | **99/99** |
+| 2 `emp` | 3.409 | 295 Rector + ~30 à mão | 3.409/3.409 | 48/48 | 1.080 linhas, 0 div. | **458/458** |
 
 **Lote 1 — `cus`, `pla`, `pl`, `tes`** (Custos, Planejamento, Tesouraria; 99 arquivos, roteados no `location`).
 Rector em 45 arquivos, só regras já vetadas (28 `parse_str`+`extract`, 17 guardas, 15 construtores, 14 `split`, todos
@@ -73,4 +76,37 @@ tinha porte real a fazer: **10 classes** `orcparam*`/`conrelvalor` (60 guardas `
 `split` `"#"`), portadas pelo Rector; lint, classes 10/10 e escrita 220 linhas idênticas; 8/8 telas; fora do universo
 servido. As duas abas em `faseb_map_abas.txt`; levantamento refeito: nada indo ao 5.6.
 
-**Estado:** lote 1 concluído. Aguardando o pedido do lote 2 (`emp`).
+**Lote 2 — `emp`** (Empenho, 458 arquivos, roteados no `location`; `emp1_`…`emp4_`, `emp04_`, `emp_`). Os 2
+**`empenhos_*`** (`empenhos_fgts.php`, `empenhos_inss.php`) não casam `emp[0-9]*_` e ficaram de fora: **órfãos**, sem
+entrada no menu e sem ninguém que os cite (como o `tra`). Universo 3.409. Rector em 295 arquivos, só regras já vetadas
+(231 `parse_str`+`extract`, 95 `ereg`/`split`, 48 guardas, 42 construtores, 17 `${$var}`, 2 parâmetros opcionais, 1
+`implode`), 0 na 2ª passada. Separadores de `split` com metacaractere escapado (`"\|"`, `'\.'`, `"\."`) viraram
+`preg_split("#\\|#m")` / `("#\\.#m")` — **conferido no 5.6 em 6 casos: idêntico ao `split` POSIX**.
+
+À mão:
+
+- **LSP — as autenticadoras térmicas** registradas desde o RH como "pendentes para o Financeiro":
+  `modeloAutentTermicaArrecadacao/Empenho/Slip::imprimir()` sem o `$sStringCorpo` da mãe (sem padrão nela →
+  `= null` na filha) e `modeloAutenticadoraElginXprint::imprimir()` sem o `$sImprimir = ''` de `impressao`. Nenhuma
+  filha usa o nome. Carregam nos dois.
+- **Forma negada** (passo 6c): 2 pontos de auditoria em `db_empnotasuspensao_classe` (`cc36_empnota`,
+  `cc36_sequencial`), guardados com o **`scratchpad/negada_corrige.py`, agora versionado** (o script estava no
+  temporário da sessão e sumiu); 0 remanescentes.
+- 17 guardas `pg_*` (`null`) pelo ciclo, nenhuma variável comparada com `===` — duas delas no **NÚCLEO
+  `fpdf151/pdf.php:95/97`** (logo e URL do cabeçalho dos relatórios, quando a consulta a `db_config` falha) e uma em
+  `cai3_reemiterecibo.php`; mais uma em `emp2_confereretencoes002:264`.
+- `count(null)` → `count((array)…)`: 4 linhas em `emp2_confereretencoes002` (`recursos`, `credores`, `retencoes`,
+  `contas`), no mesmo caminho da requisição.
+- **`number_format()` com string**, `forms/db_frmempempdot.php:149`: medido no 5.6 — string **não numérica** devolve
+  `NULL`; string que **começa** por número usa a parte numérica. No 8.5 as duas são `TypeError`. Guarda que devolve
+  `null` na primeira e passa `(float)` na segunda: **idêntica ao 5.6 original em 10 casos, nos dois runtimes**.
+- Propriedade sobre `null` em `emp4_inforetencao.php:109` → o `stdClass` que o 5.6 criava.
+
+Bateria 439/458 → **458/458**. LSP: 846 de 863 com `extends` carregam nos dois depois das autenticadoras. Passo 6c:
+2.660 pares. Roteamento: `emp` no `location` e nas três cópias do critério; o `map` perdeu as 13 telas `emp` que a
+Fase B de Patrimonial tinha posto lá. Passo 8b (360 telas do Financeiro no 8.5): nada indo ao 5.6.
+
+**Regressão:** o `fpdf151/pdf.php` está em quase todo universo já servido, então a bateria dirigida seria a completa.
+Ver a decisão pedida ao usuário (abaixo, ou no próximo registro).
+
+**Estado:** lote 2 concluído. Aguardando o pedido do lote 3 (`orc`).

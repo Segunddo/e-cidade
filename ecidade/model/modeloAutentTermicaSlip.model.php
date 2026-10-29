@@ -40,7 +40,7 @@ class modeloAutentTermicaSlip extends modeloAutentTermicaBasica {
     parent::__construct($sIp,$sPorta,$iId,$sData,$iAutent);
   }
   
-  function imprimir() {
+  function imprimir($sStringCorpo = null) { // PHP 8 (LSP): parametro da mae, opcional
   	
   	$iCodSlip = $this->getSlip();
   	

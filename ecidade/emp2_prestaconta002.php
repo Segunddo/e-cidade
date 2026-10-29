@@ -41,14 +41,15 @@ $clrotulo->label('e45_data');
 $clrotulo->label('e45_acerta');
 $clrotulo->label('e45_conferido');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $xinstit = explode("-",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
 $flag_abrev = false;
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
   db_fieldsmemory($resultinst,$xins);
   if (strlen(trim($nomeinstabrev)) > 0){
        $descr_inst .= $xvirg.$nomeinstabrev;

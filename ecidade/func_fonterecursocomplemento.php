@@ -39,7 +39,8 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clconplanoexe = new cl_conplanoexe;
 $clorctiporec = new cl_orctiporec;

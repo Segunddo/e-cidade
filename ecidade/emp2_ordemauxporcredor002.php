@@ -42,7 +42,7 @@ $sCamposCredorCgm = " z01_numcgm, z01_nome, z01_ender, z01_munic, z01_cgccpf,e94
 //echo $clEmpAgeOrdemCgm->sql_query(null,$sCamposCredorCgm,null,$sWhereCredorCgm);
 $rsCredorCgm = $clEmpAgeOrdemCgm->sql_record($clEmpAgeOrdemCgm->sql_query(null,$sCamposCredorCgm,null,$sWhereCredorCgm)); 
 
-if(pg_num_rows($rsCredorCgm) > 0){
+if(($rsCredorCgm ? pg_num_rows($rsCredorCgm) : null) > 0){
 	
 	$oCredor = db_utils::fieldsMemory($rsCredorCgm,0);
 	
@@ -179,17 +179,17 @@ for($iNroVias = 0; $iNroVias < $iNroViaOrd; $iNroVias++){
 	$bgcolor = 0;
 	
 	for ($i = 0; $i < $iNumPagamentos; $i++) {
-		
+
 		$oPagamento = db_utils::fieldsMemory($rsPagamentos,$i);
-		
+
 		//Verifico se deu estouro de pagina para adicionar nova pagina
 		//inserindo os totais e o novo cabeçalho
 		if ($iPagina > 0 && ($pdf->gety() > $pdf->h -25) || $iPagina == 1) {
-			
+
 			$iPagina++;
 			if (($iPagina-1) > 1 ) {
 
-				
+
 	      $iPosX2 = $pdf->GetX();
 	      $iPosY2 = $pdf->GetY();
 	      $pdf->SetXY($iPosX1,$iPosY1+20);
@@ -215,9 +215,9 @@ for($iNroVias = 0; $iNroVias < $iNroViaOrd; $iNroVias++){
       $iPosY1 = $pdf->GetY();
 			//$iPagina++;
 		}
-		
+
 		//Impressão dos dados do corpo do relatorio
-		
+
 		$pdf->setfont('arial','',7);
 		$pdf->cell(10 ,4, $oPagamento->e50_codord               , "",0, "R", $bgcolor);
 		$pdf->cell(20 ,4, db_formatar($oPagamento->e50_data,'d'), "",0, "C", $bgcolor);
@@ -236,12 +236,12 @@ for($iNroVias = 0; $iNroVias < $iNroViaOrd; $iNroVias++){
 	  $oTotal->totVlrMov       += $oPagamento->e81_valor;
 	  $oTotal->totRet          += $oPagamento->valorretencao;
 	  $oTotal->totVlrLiq       += $vlrLiquido;	
-		
+
 		//Verifico se o indice é igual a 20 estourou a primeira pagina
 		if ($i == 20 || ($i+1 == $iNumPagamentos && $iNumPagamentos < 20)) {
-			
+
 			$iPagina++;
-			
+
 			$pdf->SetXY($iPosX1,$iPosY1+84);
 			$iPosX2 = $pdf->GetX();
 			$iPosY2 = $pdf->GetY();
@@ -257,7 +257,7 @@ for($iNroVias = 0; $iNroVias < $iNroViaOrd; $iNroVias++){
 			$pdf->Line($iPosX1+162,$iPosY1,$iPosX2+162,$iPosY2);
 			$pdf->Line($iPosX1+182,$iPosY1,$iPosX2+182,$iPosY2);
 			//$pdf->Line($iPosX1+202,$iPosY1,$iPosX2+202,$iPosY2);
-			
+
 			imprimeTotais($pdf,$alt,$oTotal);
 			$pdf->setfont('arial','',8);
 			if($iNumPagamentos > 20){
@@ -272,18 +272,18 @@ for($iNroVias = 0; $iNroVias < $iNroViaOrd; $iNroVias++){
 			$iPosY = $pdf->GetY();
 			$pdf->RoundedRect($iPosX,$iPosY,202,30,2);
 			$pdf->SetXY($iPosX,$iPosY+2);
-					
+
 			$pdf->MultiCell(200,4,substr($oCredor->e94_historico,0,840));
 			//Imprime Assinaturas somente na primeira página
 			$xcol = 5;
 			$xlin = 15;
-			
+
 			$oAssinatura = new stdClass();
 			$oAssinatura->emissao = $oCredor->e42_dtpagamento;
-			
+
 			$iInstituicao = db_getsession("DB_instit");
 			$total_emp    = $oPagamento->e60_vlremp;
-			
+
 			$sqlparag  = "select munic,db02_texto ";
 			$sqlparag .= "  from db_documento ";
 			$sqlparag .= "       inner join db_docparag  on db03_docum   = db04_docum ";
@@ -292,12 +292,12 @@ for($iNroVias = 0; $iNroVias < $iNroViaOrd; $iNroVias++){
 			$sqlparag .= "       inner join db_config    on db03_instit  = codigo ";
 			$sqlparag .= " where db03_tipodoc = 1500 and db03_instit = " . db_getsession("DB_instit")." order by db04_ordem ";
 			$resparag = db_query($sqlparag);
-			
-			
+
+
 			//$emissao = $oPagamento->e42_dtpagamento;
-			
+
 			if (@pg_num_rows($resparag) > 0) {
-			 
+
 			  $oTexto = db_utils::fieldsmemory($resparag,0);
 			  $sTexto = str_replace('$this->municpref', '$municpref', $oTexto->db02_texto);
 			  $sTexto = str_replace('$this->objpdf->', '$pdf->', $sTexto);
@@ -305,7 +305,7 @@ for($iNroVias = 0; $iNroVias < $iNroViaOrd; $iNroVias++){
 			  $municpref = $oTexto->munic;  
 			  eval($sTexto);
 			} else {
-			      
+
 			  $sqlparagpadrao  = "select munic,db61_texto ";
 			  $sqlparagpadrao .= "  from db_documentopadrao ";
 			  $sqlparagpadrao .= "       inner join db_docparagpadrao  on db62_coddoc   = db60_coddoc ";
@@ -313,17 +313,17 @@ for($iNroVias = 0; $iNroVias < $iNroViaOrd; $iNroVias++){
 			  $sqlparagpadrao .= "       inner join db_paragrafopadrao on db61_codparag = db62_codparag ";
 			  $sqlparagpadrao .= "       inner join db_config          on db03_instit   = codigo ";
 			  $sqlparagpadrao .= " where db60_tipodoc = 1500 and db60_instit = " . db_getsession("DB_instit")." order by db62_ordem";
-			    
+
 			  $resparagpadrao = db_query($sqlparagpadrao);
 			  if (@pg_num_rows($resparagpadrao) > 0) {
-			    
+
 			  	$oTexto = db_utils::fieldsmemory($resparagpadrao,0);
 			    $sTexto = str_replace('$this->municpref', '$municpref', $oTexto->db61_texto);
 			    $sTexto = str_replace('$this->objpdf->', '$pdf->', $sTexto);
 			    $sTexto = str_replace('$this->', '$oAssinatura->', $sTexto);
 			    $municpref = $oTexto->munic;
 			    eval($sTexto);
-			    
+
 			  }
 			}
 			$iPosX3 = 188;

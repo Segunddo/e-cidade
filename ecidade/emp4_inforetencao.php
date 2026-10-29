@@ -106,6 +106,7 @@ $sAno      = date("Y",db_getsession("DB_datausu"));
      $aNotas = db_utils::getCollectionByRecord($rsNotas);
    }
  }
+ if (!isset($oRetencao) || $oRetencao === false || $oRetencao === "") { $oRetencao = new stdClass(); } // PHP 8: o 5.6 criava o stdClass sozinho
  $oRetencao->aMovimentos = array();
  if (isset($_SESSION["retencaoNota{$oGet->iCodNota}"][$oGet->iCodRetencao])) {
    $oRetencao = $_SESSION["retencaoNota{$oGet->iCodNota}"][$oGet->iCodRetencao];

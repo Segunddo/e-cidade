@@ -93,10 +93,10 @@ if ($sqlerro == false) {
 }
 //array que irá armazenar os valores de cada elemento para fazer os lancamentos contabeis
 $arr_codeleval = array ();
-$arr_dados = split("#", $dados);
+$arr_dados = preg_split("#\\##m", $dados);
 $tam = count($arr_dados);
 for ($i = 0; $i < $tam; $i ++) {
-	$arr_ele = split("-", $arr_dados[$i]);
+	$arr_ele = preg_split("#\\-#m", $arr_dados[$i]);
 	//$arr_ele[0] é o codigo do elemento   $arr_ele[1] é o valor que será pago  $arr_ele[2] é o valor que já foi pago
 	$arr_codeleval[$arr_ele[0]] = $arr_ele[1];
 

@@ -40,7 +40,8 @@ include(modification("classes/db_empautitem_classe.php"));
 $clempautitem = new cl_empautitem;
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clorcdotacao = new cl_orcdotacao;
 $clempautidot = new cl_empautidot;

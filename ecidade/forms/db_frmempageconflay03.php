@@ -142,7 +142,7 @@ function js_anular(){
 	       <?
                   $result07= $clempage->sql_record($clempage->sql_query_file(null, "*", null, " e80_codage = $e80_codage and e80_instit = " . db_getsession("DB_instit")));
                   db_fieldsmemory($result07,0);    
-                   $arr_x  = split("-",$e80_data);
+                   $arr_x  = preg_split("#\\-#m",$e80_data);
 		   $e80_data_ano = $arr_x[0];
 		   $e80_data_mes = $arr_x[1];
 		   $e80_data_dia = $arr_x[2];

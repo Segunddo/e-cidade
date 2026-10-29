@@ -58,7 +58,7 @@ class cl_conlancamprovisaodecimoterceiro {
                  c100_escrituraprovisao = int4 = Escritura Provisao 
                  ";
    //funcao construtor da classe 
-   function cl_conlancamprovisaodecimoterceiro() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancamprovisaodecimoterceiro"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_conlancamprovisaodecimoterceiro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c100_sequencial = ($this->c100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_sequencial"]:$this->c100_sequencial);
-       $this->c100_codlan = ($this->c100_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_codlan"]:$this->c100_codlan);
-       $this->c100_instit = ($this->c100_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_instit"]:$this->c100_instit);
-       $this->c100_mes = ($this->c100_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_mes"]:$this->c100_mes);
-       $this->c100_ano = ($this->c100_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_ano"]:$this->c100_ano);
-       $this->c100_escrituraprovisao = ($this->c100_escrituraprovisao == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_escrituraprovisao"]:$this->c100_escrituraprovisao);
+       $this->c100_sequencial = ($this->c100_sequencial === 0 || $this->c100_sequencial === 0.0 || $this->c100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_sequencial"]:$this->c100_sequencial);
+       $this->c100_codlan = ($this->c100_codlan === 0 || $this->c100_codlan === 0.0 || $this->c100_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_codlan"]:$this->c100_codlan);
+       $this->c100_instit = ($this->c100_instit === 0 || $this->c100_instit === 0.0 || $this->c100_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_instit"]:$this->c100_instit);
+       $this->c100_mes = ($this->c100_mes === 0 || $this->c100_mes === 0.0 || $this->c100_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_mes"]:$this->c100_mes);
+       $this->c100_ano = ($this->c100_ano === 0 || $this->c100_ano === 0.0 || $this->c100_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_ano"]:$this->c100_ano);
+       $this->c100_escrituraprovisao = ($this->c100_escrituraprovisao === 0 || $this->c100_escrituraprovisao === 0.0 || $this->c100_escrituraprovisao == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_escrituraprovisao"]:$this->c100_escrituraprovisao);
      }else{
-       $this->c100_sequencial = ($this->c100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_sequencial"]:$this->c100_sequencial);
+       $this->c100_sequencial = ($this->c100_sequencial === 0 || $this->c100_sequencial === 0.0 || $this->c100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_sequencial"]:$this->c100_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_conlancamprovisaodecimoterceiro {
          $this->c100_sequencial = $c100_sequencial; 
        }
      }
-     if(($this->c100_sequencial == null) || ($this->c100_sequencial == "") ){ 
+     if(($this->c100_sequencial == null) || ($this->c100_sequencial === 0 || $this->c100_sequencial === 0.0 || $this->c100_sequencial == "") ){ 
        $this->erro_sql = " Campo c100_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -453,7 +453,7 @@ class cl_conlancamprovisaodecimoterceiro {
    function sql_query ( $c100_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_conlancamprovisaodecimoterceiro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -493,7 +493,7 @@ class cl_conlancamprovisaodecimoterceiro {
    function sql_query_file ( $c100_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -514,7 +514,7 @@ class cl_conlancamprovisaodecimoterceiro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

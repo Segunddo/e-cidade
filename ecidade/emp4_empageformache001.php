@@ -69,7 +69,8 @@ db_postmemory($HTTP_POST_VARS);
 $db_opcao  = 1;
 $db_botao  = false;
 $lLiberado = true;
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 
 // 
 $verifica_cheques_duplicados = false; // permite duplicação de cheques, sem verificação de duplicidade

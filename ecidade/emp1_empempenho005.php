@@ -84,7 +84,8 @@ $clempautitem = new cl_empautitem;
 $clempelemento = new cl_empelemento;
 $clempempitem = new cl_empempitem;
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 $db_opcao = 22;
 $db_botao = false;

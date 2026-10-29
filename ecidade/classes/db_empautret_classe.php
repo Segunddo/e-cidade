@@ -50,7 +50,7 @@ class cl_empautret {
                  e66_seqretencao = int4 = Retenção 
                  ";
    //funcao construtor da classe 
-   function cl_empautret() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empautret"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_empautret {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e66_autori = ($this->e66_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e66_autori"]:$this->e66_autori);
-       $this->e66_seqretencao = ($this->e66_seqretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["e66_seqretencao"]:$this->e66_seqretencao);
+       $this->e66_autori = ($this->e66_autori === 0 || $this->e66_autori === 0.0 || $this->e66_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e66_autori"]:$this->e66_autori);
+       $this->e66_seqretencao = ($this->e66_seqretencao === 0 || $this->e66_seqretencao === 0.0 || $this->e66_seqretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["e66_seqretencao"]:$this->e66_seqretencao);
      }else{
-       $this->e66_autori = ($this->e66_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e66_autori"]:$this->e66_autori);
-       $this->e66_seqretencao = ($this->e66_seqretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["e66_seqretencao"]:$this->e66_seqretencao);
+       $this->e66_autori = ($this->e66_autori === 0 || $this->e66_autori === 0.0 || $this->e66_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e66_autori"]:$this->e66_autori);
+       $this->e66_seqretencao = ($this->e66_seqretencao === 0 || $this->e66_seqretencao === 0.0 || $this->e66_seqretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["e66_seqretencao"]:$this->e66_seqretencao);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_empautret {
       $this->atualizacampos();
        $this->e66_autori = $e66_autori; 
        $this->e66_seqretencao = $e66_seqretencao; 
-     if(($this->e66_autori == null) || ($this->e66_autori == "") ){ 
+     if(($this->e66_autori == null) || ($this->e66_autori === 0 || $this->e66_autori === 0.0 || $this->e66_autori == "") ){ 
        $this->erro_sql = " Campo e66_autori nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_empautret {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e66_seqretencao == null) || ($this->e66_seqretencao == "") ){ 
+     if(($this->e66_seqretencao == null) || ($this->e66_seqretencao === 0 || $this->e66_seqretencao === 0.0 || $this->e66_seqretencao == "") ){ 
        $this->erro_sql = " Campo e66_seqretencao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -372,7 +372,7 @@ class cl_empautret {
    function sql_query ( $e66_autori=null,$e66_seqretencao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -408,7 +408,7 @@ class cl_empautret {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_empautret {
    function sql_query_file ( $e66_autori=null,$e66_seqretencao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -449,7 +449,7 @@ class cl_empautret {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -461,7 +461,7 @@ class cl_empautret {
    function sql_query_retencao ( $e66_autori=null,$e66_seqretencao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_empautret {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -63,7 +63,8 @@ db_postmemory($HTTP_POST_VARS);
 
 $db_opcao = 1;
 $db_botao = false;
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 
 //rotina que pega o nome do prefeito
 $result00 = $cldb_config->sql_record($cldb_config->sql_query_file(db_getsession("DB_instit"), "pref as prefeito,munic as municipio"));
@@ -135,7 +136,7 @@ if(isset($atualizar) || isset($prever)){
     $cgmprinc = '';
     $nome_nominal = false;
 
-    $arr = split("XX", $movs);
+    $arr = preg_split("#XX#m", $movs);
     $tot_valor = 0;
     $nomes = '';
 
@@ -191,7 +192,7 @@ if(isset($atualizar) || isset($prever)){
 	          $erro_msg = "Conta sem saldo disponível para este valor. Verifique.\\n\\nCheque não gerado.";
 	          break;
 	        }
-		    
+
 	        ///////////////////////////////////////////////////////
 	        ///////////////////////////////////////////////////////
           }
@@ -367,7 +368,7 @@ if(isset($atualizar) && $sqlerro==false){
   db_inicio_transacao();
 
   // Valores
-  $arr = split("XX", $movs);
+  $arr = preg_split("#XX#m", $movs);
   $arr_movs = array ();
   for($i=0; $i<count($arr); $i++){
     $mov = $arr[$i];
@@ -376,7 +377,7 @@ if(isset($atualizar) && $sqlerro==false){
     $arr_movs[$mov] = $e81_valor;
   }
 
- 
+
   $val = (float) trim(db_formatar(($tot_valor / $cheques), 'p', '', 2));
   $tot_val = '0';
 
@@ -397,14 +398,14 @@ if(isset($atualizar) && $sqlerro==false){
 	      }
 	    }
 	    $arr_cheque[$s] = $val;
-	
-	  
+
+
 	    $vals .= $sep.$val;
 	    $sep = '#';
 	    $cheq = $arr_chequeseq[$s];
 	  }
   }else{
-		$arr_cheque = split("-",$valor_dos_cheques);
+		$arr_cheque = preg_split("#\\-#m",$valor_dos_cheques);
 	  for($s=0; $s<$cheques; $s++){
 	    // Rotina que define os valores
       $vals .= $sep.$arr_cheque[$s];
@@ -468,9 +469,9 @@ if(isset($atualizar) && $sqlerro==false){
     }
   }
 
-  $arr_cods = split("#", $cods);
+  $arr_cods = preg_split("#\\##m", $cods);
   for($i=0; $i<count($arr_cods); $i++){
-    $arr = split("-", $arr_cods[$i]);
+    $arr = preg_split("#\\-#m", $arr_cods[$i]);
     $cheq = $arr[0];
     $mov = $arr[1];
     $val = $arr[2];
@@ -503,7 +504,7 @@ if(isset($atualizar) && $sqlerro==false){
     }
 
     if($sqlerro == false){
-      $arr = split("XX", $movs);
+      $arr = preg_split("#XX#m", $movs);
       for($i=0; $i<count($arr); $i++){
         $mov = $arr[$i];
         // Inclui na tabela empageconf
@@ -747,8 +748,8 @@ if((isset($emite_vals) && $emite_vals != '' && empty($prever)  || isset($reemite
           document.form1.verso_imp.value  = '$verso_imp';\n";
   echo "</script>";
 
-  $arr_vals = split("#", $emite_vals);
-  $arr_cheque = split(",", $cheque_imp);
+  $arr_vals = preg_split("#\\##m", $emite_vals);
+  $arr_cheque = preg_split("#,#m", $cheque_imp);
   
   $reemitevalor=$total;
 
@@ -847,7 +848,7 @@ if(isset($emiteverso)){
   $ver = str_replace("\n", ' ###', $emiteverso);
   $emiteverso = str_replace("\r", '', $ver);
 
-  $arr_i = split("###", $emiteverso);
+  $arr_i = preg_split("#\\#\\#\\##m", $emiteverso);
   if($k11_tipoimpcheque == 5){
     $fd = fsockopen($ip_imprime, $k11_portaimpcheque);
   //  $imprimir_ver = chr(27).chr(119).'1';

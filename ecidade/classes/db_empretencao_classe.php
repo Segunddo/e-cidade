@@ -56,7 +56,7 @@ class cl_empretencao {
                  e65_hist = text = Histórico 
                  ";
    //funcao construtor da classe 
-   function cl_empretencao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empretencao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_empretencao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e65_seq = ($this->e65_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_seq"]:$this->e65_seq);
-       $this->e65_receita = ($this->e65_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_receita"]:$this->e65_receita);
-       $this->e65_aliquota = ($this->e65_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_aliquota"]:$this->e65_aliquota);
-       $this->e65_valor = ($this->e65_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_valor"]:$this->e65_valor);
+       $this->e65_seq = ($this->e65_seq === 0 || $this->e65_seq === 0.0 || $this->e65_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_seq"]:$this->e65_seq);
+       $this->e65_receita = ($this->e65_receita === 0 || $this->e65_receita === 0.0 || $this->e65_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_receita"]:$this->e65_receita);
+       $this->e65_aliquota = ($this->e65_aliquota === 0 || $this->e65_aliquota === 0.0 || $this->e65_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_aliquota"]:$this->e65_aliquota);
+       $this->e65_valor = ($this->e65_valor === 0 || $this->e65_valor === 0.0 || $this->e65_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_valor"]:$this->e65_valor);
        $this->e65_hist = ($this->e65_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_hist"]:$this->e65_hist);
      }else{
-       $this->e65_seq = ($this->e65_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_seq"]:$this->e65_seq);
+       $this->e65_seq = ($this->e65_seq === 0 || $this->e65_seq === 0.0 || $this->e65_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_seq"]:$this->e65_seq);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_empretencao {
          $this->e65_seq = $e65_seq; 
        }
      }
-     if(($this->e65_seq == null) || ($this->e65_seq == "") ){ 
+     if(($this->e65_seq == null) || ($this->e65_seq === 0 || $this->e65_seq === 0.0 || $this->e65_seq == "") ){ 
        $this->erro_sql = " Campo e65_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -403,7 +403,7 @@ class cl_empretencao {
    function sql_query ( $e65_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_empretencao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_empretencao {
    function sql_query_file ( $e65_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_empretencao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

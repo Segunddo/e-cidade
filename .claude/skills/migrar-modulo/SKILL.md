@@ -328,7 +328,8 @@ Compare as duas saídas pela chave (classe, campo, método) e separe:
 - **valor diferente** (5.6 `NULL`, 8.5 `0`): falta a guarda do `==` no `atualizacampos()`, então a
   classe não está portada. Se ela estiver no universo do lote, é falha do passo 4;
 - **mesmo valor `0`, resultado diferente**: é a forma negada. Corrija **só esses pontos**, só
-  dentro do método medido, com `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)`, e rode o
+  dentro do método medido, com `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)` — ponha os
+  pares (classe, campo, método) num TSV e use `python3 scratchpad/negada_corrige.py <tsv>` —, e rode o
   `negada_alvos.py` de novo. Ele ignora a ocorrência já guardada, então os pontos corrigidos têm
   de sumir.
 
@@ -419,7 +420,21 @@ find extension/modification -name '<arquivo>'     # existe copia?
 docker exec -u root ecidade_php56 chmod 666 /var/www/html/<caminho da copia>
 ```
 
-Depois de alterar núcleo, **refazer as baterias dos módulos já portados**, não só a do atual.
+Depois de alterar núcleo, **não** rode a bateria completa a cada lote (decisão do usuário, 29/10/2026). Ela roda
+**uma vez no fim da área**, antes do envio. No lote, rode uma **bateria dirigida** às telas que chegam ao trecho
+alterado:
+
+```bash
+# 1. quem chama a funcao/metodo alterado (grep -a: 64% da base e LATIN-1)
+grep -arl --include='*.php' 'makeCollectionFromRecord' ecidade | sed 's#^ecidade/##' > /tmp/chamam.txt
+# 2. telas JA SERVIDAS cujo universo contem algum chamador: os universos por lote estao em ecidade/tmp/<lote>_universo.txt
+for u in ecidade/tmp/*_universo.txt; do grep -qxFf /tmp/chamam.txt "$u" && echo "$u"; done
+# 3. rodar o cmp.py nas telas desses lotes (o prefixo de cada um, ou ONLY= com as telas do map)
+```
+
+Se a lista de lotes alcançados for quase tudo (como numa função de `db_stdlib`), aí sim a bateria completa no lote.
+O envio ao GitHub fica para depois da bateria completa do fim da área. Se ela achar regressão, use `git bisect`
+entre os commits de lote.
 
 ## Passo 8 — Roteamento
 

@@ -42,7 +42,8 @@ $clempagemov = new cl_empagemov;
 $clempagegera = new cl_empagegera;
 $clempageconf = new cl_empageconf;
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;
@@ -71,7 +72,7 @@ if(isset($atualizar)){
     }else{
       $gera = $clempagegera->e87_codgera;
     } 
-    $arr =  split("XX",$movs);
+    $arr =  preg_split("#XX#m",$movs);
     $tot_valor ='';
     for($i=0; $i<count($arr); $i++ ){
        $mov = $arr[$i];  

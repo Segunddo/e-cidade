@@ -52,7 +52,7 @@ class cl_emprestotipo {
                  e90_estrut = varchar(20) = Elemento 
                  ";
    //funcao construtor da classe 
-   function cl_emprestotipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("emprestotipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_emprestotipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e90_codigo = ($this->e90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codigo"]:$this->e90_codigo);
+       $this->e90_codigo = ($this->e90_codigo === 0 || $this->e90_codigo === 0.0 || $this->e90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codigo"]:$this->e90_codigo);
        $this->e90_descr = ($this->e90_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_descr"]:$this->e90_descr);
        $this->e90_estrut = ($this->e90_estrut == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_estrut"]:$this->e90_estrut);
      }else{
-       $this->e90_codigo = ($this->e90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codigo"]:$this->e90_codigo);
+       $this->e90_codigo = ($this->e90_codigo === 0 || $this->e90_codigo === 0.0 || $this->e90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codigo"]:$this->e90_codigo);
      }
    }
    // funcao para inclusao
@@ -89,7 +89,7 @@ class cl_emprestotipo {
        return false;
      }
        $this->e90_codigo = $e90_codigo; 
-     if(($this->e90_codigo == null) || ($this->e90_codigo == "") ){ 
+     if(($this->e90_codigo == null) || ($this->e90_codigo === 0 || $this->e90_codigo === 0.0 || $this->e90_codigo == "") ){ 
        $this->erro_sql = " Campo e90_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_emprestotipo {
    function sql_query ( $e90_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -339,7 +339,7 @@ class cl_emprestotipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -351,7 +351,7 @@ class cl_emprestotipo {
    function sql_query_file ( $e90_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -372,7 +372,7 @@ class cl_emprestotipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

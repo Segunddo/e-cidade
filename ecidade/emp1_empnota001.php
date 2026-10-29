@@ -42,7 +42,8 @@ $clempempenho = new cl_empempenho;
 
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 if(isset($e69_numemp)){
   $result = $clempempenho->sql_record($clempempenho->sql_query_empnome($e69_numemp,"z01_nome")); 
@@ -73,10 +74,10 @@ if(isset($incluir)){
 
 
   if($sqlerro==false){
-    $arr_dados = split("#",$dados);
+    $arr_dados = preg_split("#\\##m",$dados);
     $tam = count($arr_dados);
     for($i=0; $i<$tam; $i++){
-      $arr_ele = split("-",$arr_dados[$i]);
+      $arr_ele = preg_split("#\\-#m",$arr_dados[$i]);
           $elemento = $arr_ele[0];   
           $valor = $arr_ele[1];   
 

@@ -26,7 +26,7 @@ class cl_conlancaminscrestosapagar {
                  c108_inscricaorestosapagar = int4 = Sequencial
                  ";
    //funcao construtor da classe
-   function cl_conlancaminscrestosapagar() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancaminscrestosapagar");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_conlancaminscrestosapagar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c108_sequencial = ($this->c108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_sequencial"]:$this->c108_sequencial);
-       $this->c108_codlan = ($this->c108_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_codlan"]:$this->c108_codlan);
-       $this->c108_inscricaorestosapagar = ($this->c108_inscricaorestosapagar == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_inscricaorestosapagar"]:$this->c108_inscricaorestosapagar);
+       $this->c108_sequencial = ($this->c108_sequencial === 0 || $this->c108_sequencial === 0.0 || $this->c108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_sequencial"]:$this->c108_sequencial);
+       $this->c108_codlan = ($this->c108_codlan === 0 || $this->c108_codlan === 0.0 || $this->c108_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_codlan"]:$this->c108_codlan);
+       $this->c108_inscricaorestosapagar = ($this->c108_inscricaorestosapagar === 0 || $this->c108_inscricaorestosapagar === 0.0 || $this->c108_inscricaorestosapagar == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_inscricaorestosapagar"]:$this->c108_inscricaorestosapagar);
      }else{
-       $this->c108_sequencial = ($this->c108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_sequencial"]:$this->c108_sequencial);
+       $this->c108_sequencial = ($this->c108_sequencial === 0 || $this->c108_sequencial === 0.0 || $this->c108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_sequencial"]:$this->c108_sequencial);
      }
    }
    // funcao para Inclusão
@@ -98,7 +98,7 @@ class cl_conlancaminscrestosapagar {
      }
 
 
-     if(($this->c108_sequencial == null) || ($this->c108_sequencial == "") ){
+     if(($this->c108_sequencial == null) || ($this->c108_sequencial === 0 || $this->c108_sequencial === 0.0 || $this->c108_sequencial == "") ){
        $this->erro_sql = " Campo c108_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -35,7 +35,8 @@ include(modification("classes/db_pagordem_classe.php"));
 include(modification("classes/db_pcmater_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clempempaut  = new cl_empempaut;
 $clempempenho = new cl_empempenho;
 $clempautitem = new cl_empautitem;
@@ -73,25 +74,25 @@ if(isset($e60_numemp) && trim($e60_numemp) != ""){
 	$dbwhereEMP = " e60_numemp = ".$e60_numemp;
 	$and = " and ";
 	$HEAD = "head2";
-	$$HEAD = "Número do empenho - ".$e60_numemp;
+	${$HEAD} = "Número do empenho - ".$e60_numemp;
 	$HEAD = "head3";
 	$result_empenho = $clempempenho->sql_record($clempempenho->sql_query_file($e60_numemp,"e60_codemp as codemp,e60_anousu as anousu"));
 	if($clempempenho->numrows > 0){
 		db_fieldsmemory($result_empenho, 0);
-	  $$HEAD = "Empenho - ".$codemp." / ".$anousu;
+	  ${$HEAD} = "Empenho - ".$codemp." / ".$anousu;
 	}
 	$nh = 4;
 }else{
 	if(isset($e60_codemp) && $e60_codemp != "" ) {
-	  $arr = split("/",$e60_codemp);
+	  $arr = preg_split("#\\/#m",$e60_codemp);
 	  if(count($arr) == 2  && isset($arr[1]) && $arr[1] != '' ){
 	  	$dbwhereEMP .= " e60_codemp =  ".$arr[0]." and e60_anousu = ".$arr[1];
 	  	$HEAD = "head".$nh;
-	  	$$HEAD = "Empenho - ".$arr[0]." / ".$arr[1];
+	  	${$HEAD} = "Empenho - ".$arr[0]." / ".$arr[1];
 	  }else{
 	  	$dbwhereEMP .= " e60_codemp =  ".$arr[0]." and e60_anousu = ".db_getsession("DB_anousu");
 	  	$HEAD = "head".$nh;
-	  	$$HEAD = "Empenho - ".$arr[0]." / ".db_getsession("DB_anousu");
+	  	${$HEAD} = "Empenho - ".$arr[0]." / ".db_getsession("DB_anousu");
 	  }
 	  $and = " and ";
 	  $nh++;
@@ -113,18 +114,18 @@ if(isset($o58_coddot) && $o58_coddot != "") {
 	$dbwhereEMP .= $and." o58_coddot=$o58_coddot ";
 	$and = " and ";
 	$HEAD = "head".$nh;
-	$$HEAD = "Dotação - ".$o58_coddot;
+	${$HEAD} = "Dotação - ".$o58_coddot;
 	$nh++;
 }
 if(isset($pc01_codmater) && $pc01_codmater != "") {
 	$dbwhereEMP .= $and." pc01_codmater = $pc01_codmater ";
 	$and = " and ";
 	$HEAD = "head".$nh;
-	$$HEAD = "Material - ".$pc01_codmater;
+	${$HEAD} = "Material - ".$pc01_codmater;
 	$result_material = $clpcmater->sql_record($clpcmater->sql_query_file($pc01_codmater,"pc01_descrmater as dmater"));
 	if($clpcmater->numrows > 0){
 		db_fieldsmemory($result_material, 0);
-		$$HEAD.= " * ".$dmater;
+		${$HEAD}.= " * ".$dmater;
 	}
 	$nh++;
 }
@@ -132,11 +133,11 @@ if(isset($z01_numcgm) && $z01_numcgm != "") {
 	$dbwhereEMP .= $and." e60_numcgm = $z01_numcgm ";
 	$and = " and ";
 	$HEAD = "head".$nh;
-	$$HEAD = "CGM - ".$z01_numcgm;
+	${$HEAD} = "CGM - ".$z01_numcgm;
 	$result_cgm = $clcgm->sql_record($clcgm->sql_query_file($z01_numcgm,"z01_cgm as ncgm"));
 	if($clcgm->numrows > 0){
 		db_fieldsmemory($result_cgm, 0);
-		$$HEAD.= " * ".$ncgm;
+		${$HEAD}.= " * ".$ncgm;
 	}
 	$nh++;
 }
@@ -144,7 +145,7 @@ if(isset($e53_codord) && $e53_codord !=""){
 	$dbwhereEMP .= $and." e50_codord = $e53_codord ";
 	$and = " and ";
 	$HEAD = "head".$nh;
-	$$HEAD = "Ordem - ".$e53_codord;
+	${$HEAD} = "Ordem - ".$e53_codord;
 	$nh++;
 }
 
@@ -159,7 +160,7 @@ if((isset($dt1) && $dt1 != "") && (isset($dt2) && $dt2 != "")){
   if((isset($dt1) && $dt1 != "") && (isset($dt2) && $dt2 != "")){
     $sql = $clempempenho->sql_query_itemmaterial(null, $campos, "pc01_codmater,z01_numcgm,e60_numemp",$dbwhereEMP." ".$and." e60_emiss between '".$dt1."' and '".$dt2."' and e60_instit = ".db_getsession("DB_instit"));
     $HEAD = "head".$nh;
-		$$HEAD = "Período - ".db_formatar($dt1,"d")." a ".db_formatar($dt2,"d");
+		${$HEAD} = "Período - ".db_formatar($dt1,"d")." a ".db_formatar($dt2,"d");
 		$nh++;
   }  
 // }

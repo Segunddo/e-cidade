@@ -37,7 +37,8 @@ $clpagordemtiporec = new cl_pagordemtiporec;
 $clempautret = new cl_empautret;
 $clempretencao = new cl_empretencao;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $op = 1;
 $db_opcao = 1;
 $db_botao = true;
@@ -52,9 +53,9 @@ if(isset($incluir)){
   }
 
   if($sqlerro == false && trim($valores_selecionados) != ""){
-    $arr_dados_linha = split("\|",$valores_selecionados);
+    $arr_dados_linha = preg_split("#\\|#m",$valores_selecionados);
     for($i=0; $i<count($arr_dados_linha); $i++){
-      $arr_dados = split("_",$arr_dados_linha[$i]);
+      $arr_dados = preg_split("#_#m",$arr_dados_linha[$i]);
       $clempretencao->e65_receita = $arr_dados[1];
       $clempretencao->e65_aliquota= $arr_dados[2];
       $clempretencao->e65_valor   = $arr_dados[3];

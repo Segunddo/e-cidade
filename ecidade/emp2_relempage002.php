@@ -31,7 +31,8 @@ require_once(modification("libs/db_utils.php"));
 require_once(modification("classes/db_empage_classe.php"));
 require_once(modification("classes/db_empagemovconta_classe.php"));
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $oGet         = db_utils::postMemory($_GET);
 
@@ -88,7 +89,7 @@ if ($clempage->numrows > 0) {
     $aCodigosAgendas[] = $oAgenda->e80_codage;
   }
 
-  $sCodigosAgendas = implode($aCodigosAgendas, ",");
+  $sCodigosAgendas = implode(",", $aCodigosAgendas);
 
 } else {
   db_redireciona("db_erros.php?fechar=true&db_erro=Nenhum registro encontrado no períodio informado.");

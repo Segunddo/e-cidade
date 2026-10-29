@@ -40,7 +40,8 @@ include(modification("classes/db_conlancamdoc_classe.php"));
 include(modification("classes/db_empempitem_classe.php"));
 db_postmemory($HTTP_POST_VARS);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clselorcdotacao = new cl_selorcdotacao();
 $clorcelemento = new cl_orcelemento;
@@ -298,9 +299,9 @@ if ($tipo=="a"){
 	    }
             if ($imprime_header==true) {
                  $pdf->Ln();
-		 
+
 		 $pdf->SetFont('Arial','B',7);	 
-		 
+
                  if ($agrupar == "a") {
 		   $pdf->Cell(45,$tam,strtoupper($RLe60_numcgm),1,0,"C",1);
 		   $pdf->Cell(80,$tam,strtoupper($RLz01_nome),1,0,"C",1);  
@@ -308,7 +309,7 @@ if ($tipo=="a"){
 		   $pdf->Cell(72,$tam,"MOVIMENTAÇÃO",1,0,"C",1);  
 		   $pdf->Cell(54,$tam,"SALDO A PAGAR",1,1,"C",1);  
 		 }
-                 
+
                  if ($tipo=="a"){
 		   $pdf->Cell(15,$tam,"N°",1,0,"C",1);
 		   $pdf->Cell(15,$tam,"EMP.",1,0,"C",1);	 
@@ -332,7 +333,7 @@ if ($tipo=="a"){
 		   $pdf->Cell(18,$tam,"LIQUIDADO",1,0,"C",1);
 		   $pdf->Cell(18,$tam,"NAO LIQUID",1,0,"C",1);
 		   $pdf->Cell(18,$tam,"GERAL",1,1,"C",1);   //quebra linha
-		   
+
 		   if ($mostralan == "m") {
 		     $pdf->Cell(40,$tam,"",0,0,"C",0);
 		     $pdf->Cell(20,$tam,"DATA",1,0,"C",1);
@@ -349,7 +350,7 @@ if ($tipo=="a"){
 		     $pdf->Cell(102,$tam,"COMPLEMENTO",1,1,"C",1); // quebra linha1
 		   }	 
 		 }
-		 
+
 		 $pdf->SetFont('Arial','',7);	
 		 $imprime_header=false;
             }
@@ -379,16 +380,16 @@ if ($tipo=="a"){
 		$quantimp=0;
 	        $pdf->Ln();
 		$pdf->SetFont('Arial','B',8);	
-		
+
                 if ($agrupar == "a") {
 		  $pdf->Cell(45,$tam,"$e60_numcgm",0,0,"C",0);
 		  $pdf->Cell(80,$tam,"$z01_nome",0,0,"L",0);
 		  $pdf->Cell(25,$tam,$z01_cgccpf,0,0,"C",0);  
 		  $pdf->Cell(72,$tam,$z01_munic,0,1,"L",0);
 		}
-		
+
   		$pdf->SetFont('Arial','',7);	
-	 
+
 	    }
 	    if ($agrupar == "a") {
 	      $preenche = 1;
@@ -426,7 +427,7 @@ if ($tipo=="a"){
 	      }
 
 	      if ($mostralan == "m") {
-		
+
 		$reslancam=$clconlancamemp->sql_record($clconlancamemp->sql_query("","*",""," c75_numemp = $e60_numemp " . ($processar == "a"?"":" and c75_data between '$dataesp1' and '$dataesp2'")));
 		  $rows_lancamemp = $clconlancamemp->numrows;
 		  for ($lancemp=0; $lancemp < $rows_lancamemp; $lancemp++) {
@@ -459,7 +460,7 @@ if ($tipo=="a"){
 		  $pdf->Cell(20,$tam,"",0,1,"R",$preenche);
 		}
 	      }
-	      
+
 	    }
 
 	    $pdf->Ln(1);
@@ -561,8 +562,8 @@ if ($tipo=="s"){
                  $pdf->Cell(20,$tam,db_formatar($t_pag,'f'),"T",0,"R",1);
                  $pdf->Cell(22,$tam,db_formatar($t_total,'f'),"T",1,"R",1);   //quebra linha
 	 	 $pdf->SetFont('Arial','',7);	
-	   
-	   
+
+
 	   }
 	   /* */
  
@@ -744,8 +745,8 @@ if ($hist=="h"){
 		 $pdf->Cell(22,$tam,db_formatar($t_emp1 - $t_anu1 - $t_liq1,'f'),"T",0,"R",1);
 		 $pdf->Cell(22,$tam,db_formatar($t_emp1 - $t_anu1 - $t_pag1,'f'),"T",1,"R",1); // quebra linha
 		 $pdf->SetFont('Arial','',7);	
-	   
-	   
+
+
 	   }
 	   /* */
  

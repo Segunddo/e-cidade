@@ -46,7 +46,8 @@ $clempageconfgera = new cl_empageconfgera;
 $clempageconfcanc = new cl_empageconfcanc;
 $oDaoEmpAgeNota   = new cl_empagenotasordem;
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;
@@ -58,7 +59,7 @@ if(isset($atualizar)){
   
     
 
-    $arr =  split("XX",$movs);
+    $arr =  preg_split("#XX#m",$movs);
     $tot_valor ='';
     for($i=0; $i<count($arr); $i++ ){
        $mov = $arr[$i];  
@@ -265,7 +266,7 @@ if(isset($atualizar)){
   if($sqlerro == true){
     db_msgbox($erro_msg);
   }else{
-           
+
   echo "<script>";
 echo "           parent.location.href='emp4_empage001.php?e80_codage=$e80_codage';\n";
   echo "</script>";
@@ -274,7 +275,7 @@ echo "           parent.location.href='emp4_empage001.php?e80_codage=$e80_codage
   db_msgbox($erro_msg);
   echo "<script>";
   echo "  parent.db_iframe_cheque.hide();";
-  
+
   echo "</script>";
   */
   }

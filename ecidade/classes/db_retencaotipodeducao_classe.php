@@ -54,7 +54,7 @@ class cl_retencaotipodeducao {
                  e24_descricao = varchar(40) = Descrição da Dedução 
                  ";
    //funcao construtor da classe 
-   function cl_retencaotipodeducao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("retencaotipodeducao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_retencaotipodeducao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e24_sequencial = ($this->e24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e24_sequencial"]:$this->e24_sequencial);
-       $this->e24_pcmater = ($this->e24_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["e24_pcmater"]:$this->e24_pcmater);
-       $this->e24_aliquota = ($this->e24_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e24_aliquota"]:$this->e24_aliquota);
+       $this->e24_sequencial = ($this->e24_sequencial === 0 || $this->e24_sequencial === 0.0 || $this->e24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e24_sequencial"]:$this->e24_sequencial);
+       $this->e24_pcmater = ($this->e24_pcmater === 0 || $this->e24_pcmater === 0.0 || $this->e24_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["e24_pcmater"]:$this->e24_pcmater);
+       $this->e24_aliquota = ($this->e24_aliquota === 0 || $this->e24_aliquota === 0.0 || $this->e24_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e24_aliquota"]:$this->e24_aliquota);
        $this->e24_descricao = ($this->e24_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["e24_descricao"]:$this->e24_descricao);
      }else{
-       $this->e24_sequencial = ($this->e24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e24_sequencial"]:$this->e24_sequencial);
+       $this->e24_sequencial = ($this->e24_sequencial === 0 || $this->e24_sequencial === 0.0 || $this->e24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e24_sequencial"]:$this->e24_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_retencaotipodeducao {
          $this->e24_sequencial = $e24_sequencial; 
        }
      }
-     if(($this->e24_sequencial == null) || ($this->e24_sequencial == "") ){ 
+     if(($this->e24_sequencial == null) || ($this->e24_sequencial === 0 || $this->e24_sequencial === 0.0 || $this->e24_sequencial == "") ){ 
        $this->erro_sql = " Campo e24_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_retencaotipodeducao {
    function sql_query ( $e24_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_retencaotipodeducao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_retencaotipodeducao {
    function sql_query_file ( $e24_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_retencaotipodeducao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

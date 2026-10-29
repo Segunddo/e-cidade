@@ -52,7 +52,7 @@ class cl_retencaotiporeccgm {
                  e48_cgm = int4 = CGM 
                  ";
    //funcao construtor da classe 
-   function cl_retencaotiporeccgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("retencaotiporeccgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_retencaotiporeccgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e48_sequencial = ($this->e48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e48_sequencial"]:$this->e48_sequencial);
-       $this->e48_retencaotiporec = ($this->e48_retencaotiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["e48_retencaotiporec"]:$this->e48_retencaotiporec);
-       $this->e48_cgm = ($this->e48_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["e48_cgm"]:$this->e48_cgm);
+       $this->e48_sequencial = ($this->e48_sequencial === 0 || $this->e48_sequencial === 0.0 || $this->e48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e48_sequencial"]:$this->e48_sequencial);
+       $this->e48_retencaotiporec = ($this->e48_retencaotiporec === 0 || $this->e48_retencaotiporec === 0.0 || $this->e48_retencaotiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["e48_retencaotiporec"]:$this->e48_retencaotiporec);
+       $this->e48_cgm = ($this->e48_cgm === 0 || $this->e48_cgm === 0.0 || $this->e48_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["e48_cgm"]:$this->e48_cgm);
      }else{
-       $this->e48_sequencial = ($this->e48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e48_sequencial"]:$this->e48_sequencial);
+       $this->e48_sequencial = ($this->e48_sequencial === 0 || $this->e48_sequencial === 0.0 || $this->e48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e48_sequencial"]:$this->e48_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_retencaotiporeccgm {
          $this->e48_sequencial = $e48_sequencial; 
        }
      }
-     if(($this->e48_sequencial == null) || ($this->e48_sequencial == "") ){ 
+     if(($this->e48_sequencial == null) || ($this->e48_sequencial === 0 || $this->e48_sequencial === 0.0 || $this->e48_sequencial == "") ){ 
        $this->erro_sql = " Campo e48_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_retencaotiporeccgm {
    function sql_query ( $e48_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_retencaotiporeccgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_retencaotiporeccgm {
    function sql_query_file ( $e48_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_retencaotiporeccgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

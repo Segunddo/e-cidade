@@ -59,7 +59,7 @@ class cl_inscricaopassivaanulada {
                  c39_observacao = text = Motivo 
                  ";
    //funcao construtor da classe 
-   function cl_inscricaopassivaanulada() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("inscricaopassivaanulada"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,9 +76,9 @@ class cl_inscricaopassivaanulada {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c39_sequencial = ($this->c39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_sequencial"]:$this->c39_sequencial);
-       $this->c39_inscricaopassivo = ($this->c39_inscricaopassivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_inscricaopassivo"]:$this->c39_inscricaopassivo);
-       $this->c39_db_usuarios = ($this->c39_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_db_usuarios"]:$this->c39_db_usuarios);
+       $this->c39_sequencial = ($this->c39_sequencial === 0 || $this->c39_sequencial === 0.0 || $this->c39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_sequencial"]:$this->c39_sequencial);
+       $this->c39_inscricaopassivo = ($this->c39_inscricaopassivo === 0 || $this->c39_inscricaopassivo === 0.0 || $this->c39_inscricaopassivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_inscricaopassivo"]:$this->c39_inscricaopassivo);
+       $this->c39_db_usuarios = ($this->c39_db_usuarios === 0 || $this->c39_db_usuarios === 0.0 || $this->c39_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_db_usuarios"]:$this->c39_db_usuarios);
        if($this->c39_data == ""){
          $this->c39_data_dia = ($this->c39_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_data_dia"]:$this->c39_data_dia);
          $this->c39_data_mes = ($this->c39_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_data_mes"]:$this->c39_data_mes);
@@ -89,7 +89,7 @@ class cl_inscricaopassivaanulada {
        }
        $this->c39_observacao = ($this->c39_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_observacao"]:$this->c39_observacao);
      }else{
-       $this->c39_sequencial = ($this->c39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_sequencial"]:$this->c39_sequencial);
+       $this->c39_sequencial = ($this->c39_sequencial === 0 || $this->c39_sequencial === 0.0 || $this->c39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_sequencial"]:$this->c39_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_inscricaopassivaanulada {
          $this->c39_sequencial = $c39_sequencial; 
        }
      }
-     if(($this->c39_sequencial == null) || ($this->c39_sequencial == "") ){ 
+     if(($this->c39_sequencial == null) || ($this->c39_sequencial === 0 || $this->c39_sequencial === 0.0 || $this->c39_sequencial == "") ){ 
        $this->erro_sql = " Campo c39_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -446,7 +446,7 @@ class cl_inscricaopassivaanulada {
    function sql_query ( $c39_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -474,7 +474,7 @@ class cl_inscricaopassivaanulada {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -487,7 +487,7 @@ class cl_inscricaopassivaanulada {
    function sql_query_file ( $c39_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -508,7 +508,7 @@ class cl_inscricaopassivaanulada {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

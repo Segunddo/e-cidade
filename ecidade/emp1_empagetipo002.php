@@ -33,7 +33,8 @@ include(modification("classes/db_empagetipo_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_conplanoconta_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 $clempagetipo    = new cl_empagetipo;

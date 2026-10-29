@@ -169,7 +169,7 @@ $sSqlBuscaEmpenhos .= "          where {$sImplodeWhere}                         
 $sSqlBuscaEmpenhos .= "          order by {$sImplodeOrderBy}) as xxx                                               ";
 $sSqlBuscaEmpenhos .= " where {$sWhereEmpenho}                                                                     ";
 $rsExecutaBuscaEmpenho = db_query($sSqlBuscaEmpenhos);
-$iLinhasRetornadasBuscaEmpenho = pg_num_rows($rsExecutaBuscaEmpenho);
+$iLinhasRetornadasBuscaEmpenho = ($rsExecutaBuscaEmpenho ? pg_num_rows($rsExecutaBuscaEmpenho) : null);
 if ($iLinhasRetornadasBuscaEmpenho == 0) {
   db_redireciona("db_erros.php?fechar=true&db_erro=Não existem empenhos para o filtro selecionado.");
 }

@@ -60,7 +60,8 @@ $clempageconfgera = new cl_empageconfgera;
 $clempagemod      = new cl_empagemod;
 $cldb_bancos      = new cl_db_bancos;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $db_opcao = 1;
@@ -79,7 +80,7 @@ if(isset($mostra)){
   
   db_inicio_transacao();
   $sqlerro = false;
-  $arr_movimentos = split(",",$movimentos);  
+  $arr_movimentos = preg_split("#,#m",$movimentos);  
   for($i=0; $i < sizeof($arr_movimentos); $i++) {
   	
     $movimento = $arr_movimentos[$i];
@@ -181,8 +182,8 @@ if(isset($mostra)){
 
 
       if($sqlerro == false){
-	$arr_data  = split("-",$e87_data);
-	$arr_datap = split("-",$e87_dataproc);
+	$arr_data  = preg_split("#\\-#m",$e87_data);
+	$arr_datap = preg_split("#\\-#m",$e87_dataproc);
 	$data    =  $arr_data[2].$arr_data[1].$arr_data[0];
 	$dat_cred = $arr_datap[2].$arr_datap[1].$arr_datap[0];
 	/// criar campo de sequencia do arquivo no empagetipo.
@@ -199,7 +200,7 @@ if(isset($mostra)){
 	}
 	
 	if($sqlerro == false){
-	
+
 	  if($banco == '001'){
 	    $dbanco = db_formatar('BANCO DO BRASIL','s',' ',30,'d',0);
 	  }else{
@@ -231,7 +232,7 @@ if(isset($mostra)){
 
 	  $numero_dia = 2;
 	  $seq_arq = 1; 
-	  
+
 	  ///// HEADER DO ARQUIVO
 	  if($banco=="041"){
 	    $conta_pre   = db_formatar(str_replace('.','',str_replace('-','',$c63_conta.$dvconta_pre)),'s','0',10,'e',0);
@@ -296,7 +297,7 @@ if(isset($mostra)){
 	    $cllayout_BBBS->geraHEADERArqBB();
 	  }  
 	  ///// FINAL HEADER DO ARQUIVO
-	  
+
 	  $seq_header   = 0;
 	  $xconta       = '';
 	  $registro     = 1;
@@ -326,7 +327,7 @@ if(isset($mostra)){
 		}
 		$tipopag = "03";
 	      }
-	      
+
 	      if($seq_header != 0){
 		///// TRAILLER DO LOTE
 		$cllayout_BBBS->BBBStraillerL_001_003 = $banco; 
@@ -370,7 +371,7 @@ if(isset($mostra)){
 		  }
 		}
 	      }
-	      
+
 	      // HEADER DO LOTE
 	      if($banco=="041"){
 		$conta_pre   = db_formatar(str_replace('.','',str_replace('-','',$c63_conta.$dvconta_pre)),'s','0',10,'e',0);
@@ -441,16 +442,16 @@ if(isset($mostra)){
 	      }
 	      // FINAL HEADER DO LOTE
 	    }
-	    
+
 	    $seq_detalhe += 1;
 	    $tot_valor    = 0;
 	    $numero_lote  = 1;
-	    
+
 	    $tama =  strlen($pc63_conta);
 	    if($tama>11){
 	      $pc63_conta = substr($pc63_conta,($tama-11));
 	    }
-	    
+
 	    if($tam == 14){
 	      $conf = 2;
 	      $cgccpf = $z01_cgccpf;
@@ -461,7 +462,7 @@ if(isset($mostra)){
 	      $conf = 3;
 	      $cgccpf= str_repeat('0',14);
 	    }
-	    
+
 	    $registro += 1;
 	    $compensacao = "   ";
 	    if($pc63_banco == $banco || $valorori<5000){
@@ -478,7 +479,7 @@ if(isset($mostra)){
 
 	    $agencia_fav = $pc63_agencia;
 	    $conta_fav   = db_formatar(str_replace('.','',str_replace('-','',trim($pc63_conta))),'s','0',12,'e',0);
-	    
+
 	    $dvagencia_fav = "0";
 	    $dvconta_fav   = "0";
 	    $dvagconta_fav = "0";
@@ -504,7 +505,7 @@ if(isset($mostra)){
 	    if($banco == '001' && $pc63_banco == '001'){
 	      $dvagconta_fav = '0';
 	    }
-	     
+
 	    // REGISTROS 
 	    if($banco=="041"){
 	      $cllayout_BBBS->BSregist_001_003 = $banco; 
@@ -606,8 +607,8 @@ if(isset($mostra)){
 	    $valor_header += $valor;
 	    // FINAL REGISTROS 
 	  }
-	  
-	    
+
+
 	  ///// TRAILLER DO LOTE
 	  $cllayout_BBBS->BBBStraillerL_001_003 = $banco; 
 	  $cllayout_BBBS->BBBStraillerL_004_007 = db_formatar($seq_header,'s','0',4,'e',0);
@@ -622,7 +623,7 @@ if(isset($mostra)){
 	  $valor_header = 0;
 	  $registro += 1;
 	  ///// FINAL DO TRAILLER DO LOTE
-	  
+
 
 	  ////  TRAILLER DO ARQUIVO
 	  $registro += 1;

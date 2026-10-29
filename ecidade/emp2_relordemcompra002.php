@@ -30,7 +30,8 @@ include(modification("libs/db_sql.php"));
 include(modification("classes/db_matordem_classe.php"));
 include(modification("classes/db_matordemitem_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $clmatordem = new cl_matordem;
 $clmatordemitem = new cl_matordemitem;

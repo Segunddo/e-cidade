@@ -43,7 +43,8 @@ $clrotulo->label('e69_dtrecebe');
 $clrotulo->label('z01_nome');
 $clrotulo->label('z01_numcgm');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 // db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 
@@ -124,7 +125,7 @@ $tpag_anu  =  0;
 $tpag_pag  =  0;
 
 
-for($x = 0; $x < pg_numrows($result);$x++){
+for($x = 0; $x < ($result ? pg_numrows($result) : null);$x++){
    db_fieldsmemory($result,$x,true);
 
    // codigo não repete o cgm

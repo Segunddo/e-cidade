@@ -45,11 +45,11 @@ class cl_pagordemoutrosdados
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->e172_codigo = ($this->e172_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e172_codigo"]:$this->e172_codigo);
-       $this->e172_pagordem = ($this->e172_pagordem == ""?@$GLOBALS["HTTP_POST_VARS"]["e172_pagordem"]:$this->e172_pagordem);
+       $this->e172_codigo = ($this->e172_codigo === 0 || $this->e172_codigo === 0.0 || $this->e172_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e172_codigo"]:$this->e172_codigo);
+       $this->e172_pagordem = ($this->e172_pagordem === 0 || $this->e172_pagordem === 0.0 || $this->e172_pagordem == ""?@$GLOBALS["HTTP_POST_VARS"]["e172_pagordem"]:$this->e172_pagordem);
        $this->e172_dados = ($this->e172_dados == ""?@$GLOBALS["HTTP_POST_VARS"]["e172_dados"]:$this->e172_dados);
      }else{
-       $this->e172_codigo = ($this->e172_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e172_codigo"]:$this->e172_codigo);
+       $this->e172_codigo = ($this->e172_codigo === 0 || $this->e172_codigo === 0.0 || $this->e172_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e172_codigo"]:$this->e172_codigo);
      }
    }
 
@@ -89,7 +89,7 @@ class cl_pagordemoutrosdados
          $this->e172_codigo = $e172_codigo;
        }
      }
-     if(($this->e172_codigo == null) || ($this->e172_codigo == "") ){
+     if(($this->e172_codigo == null) || ($this->e172_codigo === 0 || $this->e172_codigo === 0.0 || $this->e172_codigo == "") ){
        $this->erro_sql = " Campo e172_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -150,7 +150,7 @@ class cl_pagordemoutrosdados
      return true;
    }
 
-    public function alterar($e172_codigo=null,$e172_pagordem)
+    public function alterar($e172_codigo=null,$e172_pagordem = null)
     {
       $this->atualizacampos();
      $sql = " update pagordemoutrosdados set ";

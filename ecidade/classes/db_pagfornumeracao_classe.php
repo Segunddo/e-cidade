@@ -28,7 +28,7 @@ class cl_pagfornumeracao {
                  o152_empagegera = int4 = Código da Remessa 
                  ";
    //funcao construtor da classe 
-   function cl_pagfornumeracao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pagfornumeracao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_pagfornumeracao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o152_sequencial = ($this->o152_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o152_sequencial"]:$this->o152_sequencial);
-       $this->o152_instit = ($this->o152_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o152_instit"]:$this->o152_instit);
-       $this->o152_numero = ($this->o152_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["o152_numero"]:$this->o152_numero);
-       $this->o152_empagegera = ($this->o152_empagegera == ""?@$GLOBALS["HTTP_POST_VARS"]["o152_empagegera"]:$this->o152_empagegera);
+       $this->o152_sequencial = ($this->o152_sequencial === 0 || $this->o152_sequencial === 0.0 || $this->o152_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o152_sequencial"]:$this->o152_sequencial);
+       $this->o152_instit = ($this->o152_instit === 0 || $this->o152_instit === 0.0 || $this->o152_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o152_instit"]:$this->o152_instit);
+       $this->o152_numero = ($this->o152_numero === 0 || $this->o152_numero === 0.0 || $this->o152_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["o152_numero"]:$this->o152_numero);
+       $this->o152_empagegera = ($this->o152_empagegera === 0 || $this->o152_empagegera === 0.0 || $this->o152_empagegera == ""?@$GLOBALS["HTTP_POST_VARS"]["o152_empagegera"]:$this->o152_empagegera);
      }else{
-       $this->o152_sequencial = ($this->o152_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o152_sequencial"]:$this->o152_sequencial);
+       $this->o152_sequencial = ($this->o152_sequencial === 0 || $this->o152_sequencial === 0.0 || $this->o152_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o152_sequencial"]:$this->o152_sequencial);
      }
    }
    // funcao para Inclusão
@@ -107,7 +107,7 @@ class cl_pagfornumeracao {
          $this->o152_sequencial = $o152_sequencial; 
        }
      }
-     if(($this->o152_sequencial == null) || ($this->o152_sequencial == "") ){ 
+     if(($this->o152_sequencial == null) || ($this->o152_sequencial === 0 || $this->o152_sequencial === 0.0 || $this->o152_sequencial == "") ){ 
        $this->erro_sql = " Campo o152_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

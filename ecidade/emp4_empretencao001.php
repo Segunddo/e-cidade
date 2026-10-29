@@ -40,7 +40,8 @@ $clrotulo->label('c83_variavel');
 $clrotulo->label('e53_valor');
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $op = 1;
 $db_opcao = 1;
@@ -248,8 +249,8 @@ if ($clpagordemtiporec->numrows > 0) {
                 <td>
                   <? 
                      $v = 'receita_chk_'.$cont;
-                     $$v   = $e59_codrec;
-                     global $$v;                  
+                     ${$v}   = $e59_codrec;
+                     global ${$v};                  
                      db_input('receita_chk_'.$cont, 10, '', true, 'text',3);
                 
                   ?></td>
@@ -257,8 +258,8 @@ if ($clpagordemtiporec->numrows > 0) {
                 <td align=right>
                 <?
                        $v = 'aliquota_chk_'.$cont;
-                       $$v   = $e59_aliquota;
-                       global $$v;
+                       ${$v}   = $e59_aliquota;
+                       global ${$v};
                        db_input('aliquota_chk_'.$cont, 15, $Ie53_valor, true, 'text',3, '','','','text-align:right')
                 ?>
                 </td>

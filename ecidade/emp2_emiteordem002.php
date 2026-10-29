@@ -35,7 +35,8 @@ require_once(modification("classes/db_pagordemele_classe.php"));
 $oGet = db_utils::postMemory($_GET);
 
 db_postmemory($_GET);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clpagordem     = new cl_pagordem;
 $clpagordemele  = new cl_pagordemele;
 

@@ -50,7 +50,8 @@ $clempagepag = new cl_empagepag;
 $clempageslip = new cl_empageslip;
 $clpcfornecon = new cl_pcfornecon;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $db_opcao = 1;
@@ -170,9 +171,9 @@ if(isset($atualizar)){
   //-----------------------------------
   //rotina que inclui os movimentos
   if($sqlerro==false && $ords !=''){
-    $arr =  split("XX",$ords);
+    $arr =  preg_split("#XX#m",$ords);
     for($i=0; $i<count($arr); $i++ ){
-       $dad = split("-",$arr[$i]);
+       $dad = preg_split("#\\-#m",$arr[$i]);
        $ord = $dad[0];
        $emp = $dad[1];
        $val = $dad[2];

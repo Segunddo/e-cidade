@@ -36,7 +36,8 @@ include(modification("classes/db_pagordemele_classe.php"));
 $clpagordemrec = new cl_pagordemrec;
 $clpagordemele = new cl_pagordemele;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 ?>
 <html>
 <head>

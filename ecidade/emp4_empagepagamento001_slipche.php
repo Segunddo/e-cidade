@@ -58,7 +58,8 @@ require_once(modification("dbforms/db_classesgenericas.php"));
 $cliframe_seleciona = new cl_iframe_seleciona;
 
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $db_opcao = 1;
@@ -105,12 +106,12 @@ if(isset($e80_codage) && $e80_codage != ''){
 }
 
 if(isset($dtfi) && trim($dtfi)!="" and (!isset($dtDataChequeFinal))){
-  $arr_data = split("_",$dtfi);
+  $arr_data = preg_split("#_#m",$dtfi);
   $dbwhere .= " and e86_data = '".$arr_data[0]."-".$arr_data[1]."-".$arr_data[2]."'";
 }
 if (isset($dtDataChequeFinal) && isset($dtfi) && trim($dtfi)!="") {
 
-   $arr_data      = split("_",$dtfi);
+   $arr_data      = preg_split("#_#m",$dtfi);
    $dtChequeFinal = implode("-",array_reverse(explode("/", $dtDataChequeFinal))); 
    $dbwhere      .= " and e86_data between '".$arr_data[0]."-".$arr_data[1]."-".$arr_data[2]."'";
    $dbwhere      .= " and '{$dtChequeFinal}'";

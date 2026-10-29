@@ -112,7 +112,8 @@ $clsaltes = new cl_saltes;
 $clconlancamord	  = new cl_conlancamord;
 $clconlancamlr	  = new cl_conlancamlr;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 //retorna os arrays de lancamento...
@@ -126,7 +127,7 @@ if (isset($confirmar)){
   $db_opcao = 2;
   $db_botao = true;
   try {
-    
+
     $sqlerro = false;
     db_inicio_transacao();
     $oOrdemPagamento = new ordemPagamento($e50_codord);
@@ -135,33 +136,33 @@ if (isset($confirmar)){
     $oOrdemPagamento->setConta($k13_conta);
     $oOrdemPagamento->setValorPago($vlrpag);
     $oOrdemPagamento->pagarOrdem();
-    
+
     $sqlerro       = false;
     $erro_msg      = "Pagamento efetuado com sucesso.";
     $k11_tipautent = $oOrdemPagamento->oAutentica->k11_tipautent;
     $retorno       = $oOrdemPagamento->getRetornoautenticacao();
     $e60_anousu    = $oOrdemPagamento->oDadosOrdem->e60_anousu;
     if ($oOrdemPagamento->iCodLanc != "") {
-      
+
       $sSqlComplemento = $clconlancamcompl->sql_query_file($oOrdemPagamento->iCodLanc);
       $rsComplemento   = $clconlancamcompl->sql_record($sSqlComplemento); 
       if ($clconlancamcompl->numrows > 0) {
-        
+
         $oComplemento                  = db_utils::fieldsMemory($rsComplemento,0); 
         $clconlancamcompl->c72_codlan  = $oOrdemPagamento->iCodLanc;
         $clconlancamcompl->c72_complem = $k12_cheque . "{$oComplemento->c72_complem}";
         $clconlancamcompl->alterar($oOrdemPagamento->iCodLanc);
-        
+
       } else if ($k12_cheque != "") {
-        
+
         $clconlancamcompl->c72_codlan  = $oOrdemPagamento->iCodLanc;
         $clconlancamcompl->c72_complem = "$k12_cheque";
         $clconlancamcompl->incluir($oOrdemPagamento->iCodLanc);
         if ($clconlancamcompl->erro_status == 0) {
-        
+
          $sqlerro  = true;
          $erro_msg = $clconlancamcompl->erro_msg; 
-         
+
         }  
       }
     }
@@ -195,7 +196,7 @@ if (isset($confirmar)){
   /*
   $fd = @fsockopen(db_getsession('DB_ip'),4444);  
   if ($fd) {
-    
+
     fputs($fd, chr(15)."$retorno".chr(18).chr(10).chr(13));
     fclose($fd);
     $reimpressao = true;
@@ -221,7 +222,7 @@ if(isset($pag_emp) && empty($confirmar)){
   $db_botao = true;
    //rotina que traz os dados de empempenho
    if(isset($e60_codemp) && $e60_codemp !=''){
-      $arr = split("/",$e60_codemp);
+      $arr = preg_split("#\\/#m",$e60_codemp);
       if(count($arr) == 2  && isset($arr[1]) && $arr[1] != '' ){
 	$dbwhere_ano = " and e60_anousu = ".$arr[1];
       }else{

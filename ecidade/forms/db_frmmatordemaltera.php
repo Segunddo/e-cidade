@@ -75,7 +75,7 @@ if(isset($m51_codordem) && $m51_codordem!=''){
  ");
  
 
- $rs = pg_fetch_assoc($aux);
+ $rs = ($aux ? pg_fetch_assoc($aux) : null);
 
  $labelDepartamento = $rs['pc01_servico'] == 't' ? 'Departamento' : 'Depósito';
 

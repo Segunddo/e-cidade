@@ -53,7 +53,8 @@ $clpcfornecon  = new cl_pcfornecon;
 $clempageconfche  = new cl_empageconfche;
 
 //echo ($HTTP_SERVER_VARS["QUERY_STRING"]);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;
@@ -363,7 +364,7 @@ for ($i=0; $i<$numrows09; $i++) {
 	//echo "<br><br><br><br><br>";
   
   $x= "e60_numemp_$e50_codord";
-  $$x = $e60_numemp;
+  ${$x} = $e60_numemp;
   
   //--------------------------------------
   // rotina que verifica se tem movimento para a ordem nesta agenda.. se tiver ele marca o campo checkbox
@@ -376,7 +377,7 @@ for ($i=0; $i<$numrows09; $i++) {
 	//db_criatabela($result01);
   if ($clempagemov->numrows > 0) {
     db_fieldsmemory($result01,0,true);
-		
+
     if (trim($e86_codmov)=="" or trim($e90_correto) == "f") {
       $xeque = "checked";
 		} else {
@@ -397,15 +398,15 @@ for ($i=0; $i<$numrows09; $i++) {
       $passou = true;
     }
 
-    
+
     //---------------------------------------------------------
     //pega o tipo do movimento
     $result01 = $clempagepag->sql_record($clempagepag->sql_query_file($e81_codmov,null,"e85_codtipo"));
     if ($clempagepag->numrows>0) {
       db_fieldsmemory($result01,0,true);
       $x= "e83_codtipo_$e50_codord";
-      $$x = $e85_codtipo;
-      
+      ${$x} = $e85_codtipo;
+
       $dbwhere02 = " or e83_codtipo=$e85_codtipo";
     }
     //-------------------------------------------------------------
@@ -422,7 +423,7 @@ for ($i=0; $i<$numrows09; $i++) {
 
   //coloca o valor com campo
   $x= "valor_$e50_codord";
-  $$x = number_format($e81_valor,"2",".","");
+  ${$x} = number_format($e81_valor,"2",".","");
   
   // rotina que verifica se existe valor disponível
 	// comentado por evandro em 11/07/2007, pois ordens que tinham cheques sem pagar estavam aparecendo para agendar novamente
@@ -445,7 +446,7 @@ for ($i=0; $i<$numrows09; $i++) {
   $tot_valor = 0;
 	
   if ($numrows03 > 0) {
-		
+
 		for ($reg=0; $reg < pg_numrows($result03); $reg++) {
 			db_fieldsmemory($result03,$reg);
 
@@ -457,7 +458,7 @@ for ($i=0; $i<$numrows09; $i++) {
 			if (pg_numrows($result04) == 0) {
 				$tot_valor += $e81_valor_mov;
 			} else {
-				
+
 				// se foi emitido cheque pelo botao emitir cheque (Manutencao de Agenda) e nao está pago este cheque
 				$sql6 = "	select	empageconfche.e91_codcheque,
 													empageconfche.e91_valor,
@@ -475,7 +476,7 @@ for ($i=0; $i<$numrows09; $i++) {
 						if ($k12_codmov == "") {
 							$tot_valor += $e91_valor;
 						}
-						
+
 					}
 
 				} else {
@@ -492,7 +493,7 @@ for ($i=0; $i<$numrows09; $i++) {
 					}
 
 				}
-			
+
 //						left join empageconfche on empageconfche.e91_codmov = empagemov.e81_codmov
 //						left join empageconf		on empageconf.e86_codmov = empageconfche.e91_codmov 
 //						left join corconf				on empageconfche.e91_codcheque = corconf.k12_codmov
@@ -504,7 +505,7 @@ for ($i=0; $i<$numrows09; $i++) {
 //////////			echo "$reg - $e81_codmov - $e81_valor_mov - " . pg_numrows($result04) . "<br>";
 
 		}
- 
+
 //////////    echo "<br>tot_valor: $tot_valor<br>";
 		
   } else {
@@ -530,7 +531,7 @@ for ($i=0; $i<$numrows09; $i++) {
   //echo "<br><br>$e50_codord --- $disponivel = (float)$total - ((float)$tot_valor - (float)$e81_valor);";
   
   $x= "disponivel_$e50_codord";
-  $$x = number_format($disponivel,"2",".","");
+  ${$x} = number_format($disponivel,"2",".","");
 
 //////////	echo "desativado: " . ($desativado == true?"true":"false") . "<br>";
 
@@ -589,11 +590,11 @@ for ($i=0; $i<$numrows09; $i++) {
 
   if (isset($e83_codtipo) && $xeque == '' ) {
     $t = "e83_codtipo_$e50_codord";
-    $$t = $e83_codtipo;
+    ${$t} = $e83_codtipo;
   } else {
 		if (sizeof($arr) == 2) {
 			$t = "e83_codtipo_$e50_codord";
-			$$t = $codtipo;
+			${$t} = $codtipo;
 		}
 	}
   

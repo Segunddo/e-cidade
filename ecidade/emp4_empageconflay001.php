@@ -57,7 +57,8 @@ $clempagemod  = new cl_empagemod;
 
 
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $db_botao = false;
@@ -105,11 +106,11 @@ if(isset($atualizar) || isset($adicionar)){
   }
   //-----------------------------------
  //inclui na tabela empageconf
-    $arr =  split("XX",$movs);
+    $arr =  preg_split("#XX#m",$movs);
     $tot_valor ='';
     for($i=0; $i<count($arr); $i++ ){
        $mov = $arr[$i];  
-       
+
        if($sqlerro==false){
    $clempageconf->e86_codmov = $mov;
 //   $clempageconf->e86_data   = date("Y-m-d",db_getsession("DB_datausu"));
@@ -123,7 +124,7 @@ if(isset($atualizar) || isset($adicionar)){
          $sqlerro = true;
    }     
        }  
-   
+
    //-------------
    //manutenção empageconfgera
    //soh quando for banco do brasil
@@ -131,7 +132,7 @@ if(isset($atualizar) || isset($adicionar)){
      $clempageconfgera->e90_codmov   = $mov;
      $clempageconfgera->e90_codgera = $gera;
          $clempageconfgera->e90_correto = "true";
-                 
+
      $clempageconfgera->incluir($mov,$gera);
      $erro_msg = $clempageconfgera->erro_msg;
      if($clempageconfgera->erro_status==0){
@@ -304,7 +305,7 @@ $numrows =  pg_numrows($result);
 
       $agencia_fav = db_formatar(str_replace('-','',$pc63_agencia),'s','0',5,'e',0);
       $conta_fav   = db_formatar(str_replace('-','',$pc63_conta),'s','0',13,'e',0);
-      
+
       $cllayouts_bb->corp01 = '1' ;           // fixo 
       $cllayouts_bb->corp02 = ' ' ;           // brancos 
       $cllayouts_bb->corp03 = $conf ;         // indicador de conferencia
