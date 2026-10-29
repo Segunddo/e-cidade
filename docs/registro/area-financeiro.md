@@ -45,4 +45,32 @@ Patrimonial, 469 previstos, ~710 reais).
    pendentes; o prefixo inteiro custaria 706 arquivos em vez de 200. Pode ir inteiro depois dessas duas áreas.
 3. **Um lote por vez:** terminar, relatar e esperar o pedido do próximo (anotado no `CLAUDE.md`).
 
-**Estado:** nenhum lote iniciado. Aguardando o pedido do lote 1.
+| Lote | Universo | Alterados | `php -l` 5.6/8.5 | Classes | Escrita | **Bateria** |
+|---|---|---|---|---|---|---|
+| 1 `cus`+`pla`+`pl`+`tes` | 1.347 | 45 Rector + 2 à mão (+10 do passo 8b) | 1.347/1.347 | 17/17 | 369 linhas, 0 div. | **99/99** |
+
+**Lote 1 — `cus`, `pla`, `pl`, `tes`** (Custos, Planejamento, Tesouraria; 99 arquivos, roteados no `location`).
+Rector em 45 arquivos, só regras já vetadas (28 `parse_str`+`extract`, 17 guardas, 15 construtores, 14 `split`, todos
+`"#"`), 0 na 2ª passada. LSP 320/320; passo 6c (forma negada) 1.251 pares, 0 divergentes. Bateria 93/99 → **99/99**,
+com 2 guardas `pg_*` (`null`) — as duas sobre SQL que falha sem os parâmetros do formulário, e a variável só limita um
+`for` (`$i < null` é falso nos dois):
+
+- `model/linhaRelatorioContabil.model.php:193` (derrubava `pla2_anexos_ldo001`, `pla2_anexos_rreo001`,
+  `pla2_anexos_rreo_consolida001`, `pla2_planejamento_previsao_rcl001`);
+- **NÚCLEO `libs/db_utils.php:331`**, `db_utils::makeCollectionFromRecord()` (derrubava
+  `pla2_fator_correcao_despesa/receita`). Sem cópia no `modification/`.
+
+Núcleo tocado → **bateria completa**: **6.082/6.106** (as 24 caracterizadas) e `map` **822/822**.
+
+Ruído caracterizado: `pla2_anexos_ldo001.php` gera **8.392 erros de SQL por requisição, igual nos dois runtimes** (uma
+consulta inválida por linha do relatório aberto sem parâmetros) — pré-existente; a bateria refaz o par, daí 67 mil
+erros no log do PostgreSQL numa rodada.
+
+Roteamento: `cus|pla|pl|tes` no `location` e nas três cópias do critério; `teste.php` e `planilha.php` (que não casam)
+seguem no 5.6. **Passo 8b** (187 telas do Financeiro no 8.5): 31 telas `pla2_*` de relatórios legais abriam duas
+abas de Contabilidade no 5.6, `con2_conrelnotas.php` e `con4_parametrosrelatorioslegais001.php`. O universo delas
+tinha porte real a fazer: **10 classes** `orcparam*`/`conrelvalor` (60 guardas `0 == ""`, 6 construtores PHP 4, 28
+`split` `"#"`), portadas pelo Rector; lint, classes 10/10 e escrita 220 linhas idênticas; 8/8 telas; fora do universo
+servido. As duas abas em `faseb_map_abas.txt`; levantamento refeito: nada indo ao 5.6.
+
+**Estado:** lote 1 concluído. Aguardando o pedido do lote 2 (`emp`).

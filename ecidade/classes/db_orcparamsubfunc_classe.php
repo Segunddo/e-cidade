@@ -56,7 +56,7 @@ class cl_orcparamsubfunc {
                  o44_instit = int4 = instituicao 
                  ";
    //funcao construtor da classe 
-   function cl_orcparamsubfunc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcparamsubfunc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,15 +73,15 @@ class cl_orcparamsubfunc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o44_anousu = ($this->o44_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_anousu"]:$this->o44_anousu);
-       $this->o44_codparrel = ($this->o44_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_codparrel"]:$this->o44_codparrel);
-       $this->o44_sequencia = ($this->o44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_sequencia"]:$this->o44_sequencia);
-       $this->o44_subfunc = ($this->o44_subfunc == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_subfunc"]:$this->o44_subfunc);
-       $this->o44_instit = ($this->o44_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_instit"]:$this->o44_instit);
+       $this->o44_anousu = ($this->o44_anousu === 0 || $this->o44_anousu === 0.0 || $this->o44_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_anousu"]:$this->o44_anousu);
+       $this->o44_codparrel = ($this->o44_codparrel === 0 || $this->o44_codparrel === 0.0 || $this->o44_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_codparrel"]:$this->o44_codparrel);
+       $this->o44_sequencia = ($this->o44_sequencia === 0 || $this->o44_sequencia === 0.0 || $this->o44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_sequencia"]:$this->o44_sequencia);
+       $this->o44_subfunc = ($this->o44_subfunc === 0 || $this->o44_subfunc === 0.0 || $this->o44_subfunc == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_subfunc"]:$this->o44_subfunc);
+       $this->o44_instit = ($this->o44_instit === 0 || $this->o44_instit === 0.0 || $this->o44_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_instit"]:$this->o44_instit);
      }else{
-       $this->o44_anousu = ($this->o44_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_anousu"]:$this->o44_anousu);
-       $this->o44_codparrel = ($this->o44_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_codparrel"]:$this->o44_codparrel);
-       $this->o44_sequencia = ($this->o44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_sequencia"]:$this->o44_sequencia);
+       $this->o44_anousu = ($this->o44_anousu === 0 || $this->o44_anousu === 0.0 || $this->o44_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_anousu"]:$this->o44_anousu);
+       $this->o44_codparrel = ($this->o44_codparrel === 0 || $this->o44_codparrel === 0.0 || $this->o44_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_codparrel"]:$this->o44_codparrel);
+       $this->o44_sequencia = ($this->o44_sequencia === 0 || $this->o44_sequencia === 0.0 || $this->o44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_sequencia"]:$this->o44_sequencia);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_orcparamsubfunc {
        $this->o44_anousu = $o44_anousu; 
        $this->o44_codparrel = $o44_codparrel; 
        $this->o44_sequencia = $o44_sequencia; 
-     if(($this->o44_anousu == null) || ($this->o44_anousu == "") ){ 
+     if(($this->o44_anousu == null) || ($this->o44_anousu === 0 || $this->o44_anousu === 0.0 || $this->o44_anousu == "") ){ 
        $this->erro_sql = " Campo o44_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -116,7 +116,7 @@ class cl_orcparamsubfunc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o44_codparrel == null) || ($this->o44_codparrel == "") ){ 
+     if(($this->o44_codparrel == null) || ($this->o44_codparrel === 0 || $this->o44_codparrel === 0.0 || $this->o44_codparrel == "") ){ 
        $this->erro_sql = " Campo o44_codparrel nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -124,7 +124,7 @@ class cl_orcparamsubfunc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o44_sequencia == null) || ($this->o44_sequencia == "") ){ 
+     if(($this->o44_sequencia == null) || ($this->o44_sequencia === 0 || $this->o44_sequencia === 0.0 || $this->o44_sequencia == "") ){ 
        $this->erro_sql = " Campo o44_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -433,7 +433,7 @@ class cl_orcparamsubfunc {
    function sql_query ( $o44_anousu=null,$o44_codparrel=null,$o44_sequencia=null,$o44_subfunc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_orcparamsubfunc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -493,7 +493,7 @@ class cl_orcparamsubfunc {
    function sql_query_file ( $o44_anousu=null,$o44_codparrel=null,$o44_sequencia=null,$o44_subfunc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_orcparamsubfunc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

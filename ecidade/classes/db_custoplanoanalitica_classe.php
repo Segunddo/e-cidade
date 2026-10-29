@@ -52,7 +52,7 @@ class cl_custoplanoanalitica {
                  cc04_custoplano = int4 = Custo Plano 
                  ";
    //funcao construtor da classe 
-   function cl_custoplanoanalitica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("custoplanoanalitica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_custoplanoanalitica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc04_sequencial = ($this->cc04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc04_sequencial"]:$this->cc04_sequencial);
-       $this->cc04_coddepto = ($this->cc04_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["cc04_coddepto"]:$this->cc04_coddepto);
-       $this->cc04_custoplano = ($this->cc04_custoplano == ""?@$GLOBALS["HTTP_POST_VARS"]["cc04_custoplano"]:$this->cc04_custoplano);
+       $this->cc04_sequencial = ($this->cc04_sequencial === 0 || $this->cc04_sequencial === 0.0 || $this->cc04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc04_sequencial"]:$this->cc04_sequencial);
+       $this->cc04_coddepto = ($this->cc04_coddepto === 0 || $this->cc04_coddepto === 0.0 || $this->cc04_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["cc04_coddepto"]:$this->cc04_coddepto);
+       $this->cc04_custoplano = ($this->cc04_custoplano === 0 || $this->cc04_custoplano === 0.0 || $this->cc04_custoplano == ""?@$GLOBALS["HTTP_POST_VARS"]["cc04_custoplano"]:$this->cc04_custoplano);
      }else{
-       $this->cc04_sequencial = ($this->cc04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc04_sequencial"]:$this->cc04_sequencial);
+       $this->cc04_sequencial = ($this->cc04_sequencial === 0 || $this->cc04_sequencial === 0.0 || $this->cc04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc04_sequencial"]:$this->cc04_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_custoplanoanalitica {
          $this->cc04_sequencial = $cc04_sequencial; 
        }
      }
-     if(($this->cc04_sequencial == null) || ($this->cc04_sequencial == "") ){ 
+     if(($this->cc04_sequencial == null) || ($this->cc04_sequencial === 0 || $this->cc04_sequencial === 0.0 || $this->cc04_sequencial == "") ){ 
        $this->erro_sql = " Campo cc04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -362,7 +362,7 @@ class cl_custoplanoanalitica {
    function sql_query ( $cc04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_custoplanoanalitica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_custoplanoanalitica {
  function sql_query_planocusto ( $cc04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_custoplanoanalitica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_custoplanoanalitica {
    function sql_query_file ( $cc04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -462,7 +462,7 @@ class cl_custoplanoanalitica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -474,7 +474,7 @@ class cl_custoplanoanalitica {
   function sql_query_left ( $cc04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_custoplanoanalitica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

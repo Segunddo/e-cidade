@@ -52,7 +52,7 @@ class cl_custocriteriopcmater {
                  cc10_custocriteriorateio = int4 = Criterio de Rateio 
                  ";
    //funcao construtor da classe 
-   function cl_custocriteriopcmater() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("custocriteriopcmater"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_custocriteriopcmater {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc10_sequencial = ($this->cc10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc10_sequencial"]:$this->cc10_sequencial);
-       $this->cc10_pcmater = ($this->cc10_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["cc10_pcmater"]:$this->cc10_pcmater);
-       $this->cc10_custocriteriorateio = ($this->cc10_custocriteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc10_custocriteriorateio"]:$this->cc10_custocriteriorateio);
+       $this->cc10_sequencial = ($this->cc10_sequencial === 0 || $this->cc10_sequencial === 0.0 || $this->cc10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc10_sequencial"]:$this->cc10_sequencial);
+       $this->cc10_pcmater = ($this->cc10_pcmater === 0 || $this->cc10_pcmater === 0.0 || $this->cc10_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["cc10_pcmater"]:$this->cc10_pcmater);
+       $this->cc10_custocriteriorateio = ($this->cc10_custocriteriorateio === 0 || $this->cc10_custocriteriorateio === 0.0 || $this->cc10_custocriteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc10_custocriteriorateio"]:$this->cc10_custocriteriorateio);
      }else{
-       $this->cc10_sequencial = ($this->cc10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc10_sequencial"]:$this->cc10_sequencial);
+       $this->cc10_sequencial = ($this->cc10_sequencial === 0 || $this->cc10_sequencial === 0.0 || $this->cc10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc10_sequencial"]:$this->cc10_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_custocriteriopcmater {
          $this->cc10_sequencial = $cc10_sequencial; 
        }
      }
-     if(($this->cc10_sequencial == null) || ($this->cc10_sequencial == "") ){ 
+     if(($this->cc10_sequencial == null) || ($this->cc10_sequencial === 0 || $this->cc10_sequencial === 0.0 || $this->cc10_sequencial == "") ){ 
        $this->erro_sql = " Campo cc10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_custocriteriopcmater {
    function sql_query ( $cc10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_custocriteriopcmater {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_custocriteriopcmater {
    function sql_query_file ( $cc10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_custocriteriopcmater {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_custoplanotipoconta {
                  cc03_custotipoconta = int4 = Custo do tipo de conta 
                  ";
    //funcao construtor da classe 
-   function cl_custoplanotipoconta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("custoplanotipoconta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_custoplanotipoconta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc03_sequencial = ($this->cc03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_sequencial"]:$this->cc03_sequencial);
-       $this->cc03_custoplanoanalitica = ($this->cc03_custoplanoanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_custoplanoanalitica"]:$this->cc03_custoplanoanalitica);
-       $this->cc03_custotipoconta = ($this->cc03_custotipoconta == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_custotipoconta"]:$this->cc03_custotipoconta);
+       $this->cc03_sequencial = ($this->cc03_sequencial === 0 || $this->cc03_sequencial === 0.0 || $this->cc03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_sequencial"]:$this->cc03_sequencial);
+       $this->cc03_custoplanoanalitica = ($this->cc03_custoplanoanalitica === 0 || $this->cc03_custoplanoanalitica === 0.0 || $this->cc03_custoplanoanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_custoplanoanalitica"]:$this->cc03_custoplanoanalitica);
+       $this->cc03_custotipoconta = ($this->cc03_custotipoconta === 0 || $this->cc03_custotipoconta === 0.0 || $this->cc03_custotipoconta == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_custotipoconta"]:$this->cc03_custotipoconta);
      }else{
-       $this->cc03_sequencial = ($this->cc03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_sequencial"]:$this->cc03_sequencial);
+       $this->cc03_sequencial = ($this->cc03_sequencial === 0 || $this->cc03_sequencial === 0.0 || $this->cc03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_sequencial"]:$this->cc03_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_custoplanotipoconta {
          $this->cc03_sequencial = $cc03_sequencial; 
        }
      }
-     if(($this->cc03_sequencial == null) || ($this->cc03_sequencial == "") ){ 
+     if(($this->cc03_sequencial == null) || ($this->cc03_sequencial === 0 || $this->cc03_sequencial === 0.0 || $this->cc03_sequencial == "") ){ 
        $this->erro_sql = " Campo cc03_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -361,7 +361,7 @@ class cl_custoplanotipoconta {
    function sql_query ( $cc03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_custoplanotipoconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_custoplanotipoconta {
    function sql_query_file ( $cc03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_custoplanotipoconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

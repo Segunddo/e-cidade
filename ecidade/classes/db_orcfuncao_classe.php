@@ -74,13 +74,13 @@ class cl_orcfuncao
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->o52_funcao = ($this->o52_funcao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o52_funcao"] : $this->o52_funcao);
+            $this->o52_funcao = ($this->o52_funcao === 0 || $this->o52_funcao === 0.0 || $this->o52_funcao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o52_funcao"] : $this->o52_funcao);
             $this->o52_descr = ($this->o52_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["o52_descr"] : $this->o52_descr);
             $this->o52_codtri = ($this->o52_codtri == "" ? @$GLOBALS["HTTP_POST_VARS"]["o52_codtri"] : $this->o52_codtri);
             $this->o52_finali = ($this->o52_finali == "" ? @$GLOBALS["HTTP_POST_VARS"]["o52_finali"] : $this->o52_finali);
             $this->o52_siconfi = ($this->o52_siconfi == "" ? @$GLOBALS["HTTP_POST_VARS"]["o52_siconfi"] : $this->o52_siconfi);
         } else {
-            $this->o52_funcao = ($this->o52_funcao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o52_funcao"] : $this->o52_funcao);
+            $this->o52_funcao = ($this->o52_funcao === 0 || $this->o52_funcao === 0.0 || $this->o52_funcao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o52_funcao"] : $this->o52_funcao);
         }
     }
 
@@ -115,7 +115,7 @@ class cl_orcfuncao
             return false;
         }
         $this->o52_funcao = $o52_funcao;
-        if (($this->o52_funcao == null) || ($this->o52_funcao == "")) {
+        if (($this->o52_funcao == null) || ($this->o52_funcao === 0 || $this->o52_funcao === 0.0 || $this->o52_funcao == "")) {
             $this->erro_sql = " Campo o52_funcao não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

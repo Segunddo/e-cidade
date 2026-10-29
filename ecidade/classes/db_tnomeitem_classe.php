@@ -53,7 +53,7 @@ class cl_tnomeitem {
                  yx_tipo = char(1) = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_tnomeitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tnomeitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -70,13 +70,13 @@ class cl_tnomeitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->yx_coditem = ($this->yx_coditem == ""?@$GLOBALS["HTTP_POST_VARS"]["yx_coditem"]:$this->yx_coditem);
-       $this->yx_codigo = ($this->yx_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["yx_codigo"]:$this->yx_codigo);
-       $this->yx_valor = ($this->yx_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["yx_valor"]:$this->yx_valor);
+       $this->yx_coditem = ($this->yx_coditem === 0 || $this->yx_coditem === 0.0 || $this->yx_coditem == ""?@$GLOBALS["HTTP_POST_VARS"]["yx_coditem"]:$this->yx_coditem);
+       $this->yx_codigo = ($this->yx_codigo === 0 || $this->yx_codigo === 0.0 || $this->yx_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["yx_codigo"]:$this->yx_codigo);
+       $this->yx_valor = ($this->yx_valor === 0 || $this->yx_valor === 0.0 || $this->yx_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["yx_valor"]:$this->yx_valor);
        $this->yx_sexo = ($this->yx_sexo == "f"?@$GLOBALS["HTTP_POST_VARS"]["yx_sexo"]:$this->yx_sexo);
        $this->yx_tipo = ($this->yx_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["yx_tipo"]:$this->yx_tipo);
      }else{
-       $this->yx_coditem = ($this->yx_coditem == ""?@$GLOBALS["HTTP_POST_VARS"]["yx_coditem"]:$this->yx_coditem);
+       $this->yx_coditem = ($this->yx_coditem === 0 || $this->yx_coditem === 0.0 || $this->yx_coditem == ""?@$GLOBALS["HTTP_POST_VARS"]["yx_coditem"]:$this->yx_coditem);
      }
    }
    // funcao para inclusao
@@ -142,7 +142,7 @@ class cl_tnomeitem {
          $this->yx_coditem = $yx_coditem; 
        }
      }
-     if(($this->yx_coditem == null) || ($this->yx_coditem == "") ){ 
+     if(($this->yx_coditem == null) || ($this->yx_coditem === 0 || $this->yx_coditem === 0.0 || $this->yx_coditem == "") ){ 
        $this->erro_sql = " Campo yx_coditem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -395,7 +395,7 @@ class cl_tnomeitem {
    function sql_query ( $yx_coditem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_tnomeitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_tnomeitem {
    function sql_query_file ( $yx_coditem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_tnomeitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -243,3 +243,7 @@ prot1_cadgeralmunic005.php
 prot1_cadgeralmunic006.php
 # segundo salto: aba aberta por pro1_cgmcorreto004
 pro1_cgmerrado001.php
+#
+# 29/10/2026 -- Financeiro, lote 1: abas de Contabilidade abertas pelas telas pla2_* (relatorios legais).
+con2_conrelnotas.php
+con4_parametrosrelatorioslegais001.php
