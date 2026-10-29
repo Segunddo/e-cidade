@@ -85,7 +85,7 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes\|ac\|aco\|ouv\|lic\|vei\|pat\|com)[0-9]*_)` — **6.073 arquivos** + 822 por `map` (595 telas de menu + 227 abas e destinos da 14ª lacuna, `faseb_map_abas.txt`) |
-| **Próximo passo** | **Área PATRIMONIAL CONCLUÍDA** (743/743 pelo proxy). Próxima área: decisão do usuário — ver `dimensionamento.md` (refazer com `scratchpad/dimensiona.py`, que já conta Patrimonial como concluída). |
+| **Próximo passo** | **Área FINANCEIRO dimensionada e dividida em 6 lotes** (branch `5financeiro-migrado`; ver `area-financeiro.md`). **Aguardando o usuário pedir o lote 1** — um lote por vez. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **nove** — a 8ª (classes de `model/`/`std/`, 13ª lacuna) e a 9ª (classes com namespace em `src/`/`app/`/`api/` e serviços do `bootstrap.php`, **15ª lacuna**, `scratchpad/ns_fecho.py`); todas insensíveis a maiúsculas desde a 9ª lacuna (`getdao`) |
@@ -167,6 +167,11 @@ e 8.0); as outras 15 exigidas pelo `composer.json` estão todas presentes.
 Regras que valem em toda sessão. Cada uma custou um defeito ou um alarme falso; a história está no
 arquivo indicado.
 
+- **UM LOTE POR VEZ (pedido do usuário, 29/10/2026):** terminar o lote (porte, verificação, roteamento, registro,
+  commit local), relatar e **ESPERAR o usuário pedir o próximo**. Não emendar um lote no outro, nem começar o
+  primeiro lote de uma área nova sem o pedido. Vale também para correções que surgirem no meio: relatar e
+  perguntar antes de abrir uma frente nova.
+
 - **Git:** nunca commitar `docker/database/ecidade_base.sql` (314 MB) nem encenar a remoção do `.gz`:
   `git add -A -- ':!docker/database/ecidade_base.sql' ':!docker/database/ecidade_base.sql.gz'`.
   Commit/push só quando o usuário pedir. Correções de área em branch própria, cadeia de merge
@@ -208,7 +213,8 @@ Registro (o que antes ficava todo aqui), em `docs/registro/`:
 | `area-tributario.md` | estratégia por área, portar ≠ rotear, prefixos exclusivos × compartilhados, ordem, **receita de 9 passos e as sete frentes**; núcleo, pilotos `tra`/`cem`, cada módulo da Fase A e da Fase B com suas categorias novas, denylist do Rector, bateria proporcional, 3ª–10ª e 13ª lacunas, nível 3 em escala, `tmp/` 777, guardas `pg_*` |
 | `area-educacao.md` | Educação: lotes, sublotes do `edu1`, 9ª e 11ª lacunas, conclusão |
 | `area-recursos-humanos.md` | RH: lotes, `.phar` (12ª lacuna), nível 3 nos cadastros e estágio, cálculo da folha, 13ª lacuna; **14ª lacuna** (telas de menu que mandam ao 5.6, decisão: tratar na aparição) |
-| `area-patrimonial.md` | Patrimonial (em andamento, branch `4patrimonial-migrado`): dimensionamento por prefixo, lotes; **15ª lacuna** (classes com namespace em `src/`/`app/`, 9ª frente, correção pela cadeia de branches) |
+| `area-patrimonial.md` | Patrimonial (**concluída**, branch `4patrimonial-migrado`): dimensionamento por prefixo, lotes; **15ª lacuna** (classes com namespace em `src/`/`app/`, 9ª frente, correção pela cadeia de branches) |
+| `area-financeiro.md` | Financeiro (em andamento, branch `5financeiro-migrado`): módulos, prefixos, divisão em lotes e as decisões do usuário (`cai` inteiro, `con` só pelas telas) |
 | `dimensionamento.md` | dimensionamento das áreas restantes (13/10, 18/10 e 22/10) |
 | `trabalho-relacionado.md` | monografia do TCC de referência, análise dos commits e a comparação medida sobre o mesmo universo |
 | `catalogo-e-metodo.md` | `while read`, `modification()`, LSP e `=& new`, `php -l` na base inteira, experimento do Rector, cobertura dos caminhos de escrita (níveis 1–3), decisões de porte, bugs latentes |

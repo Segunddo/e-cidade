@@ -82,3 +82,29 @@ União: **1.711** (era 2.358). Duas coisas mudaram ao mesmo tempo, e a leitura p
   feitas, a frente nova achou mais trabalho do que o pago: Saúde +29, Cidadão +16, Integrações +11, Gestor +10.
   Esses aumentos são correções de medição, não regressão: em 18/10 essas classes já precisavam de porte, só
   não eram enxergadas.
+
+#### Refeito em 29/10/2026, depois de Patrimonial
+
+`dimensiona.py` passou a contar Patrimonial como concluída (`JA` com `PATRIM`) e a conhecer `ac|aco|ouv|lic|vei|pat|com` no
+`location`. Esta é a primeira medição com a **9ª frente** (classes com namespace, 15ª lacuna), por isso todos os universos
+cresceram.
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | **A alterar** | em 22/10 |
+|---|---|---|---|---|---|---|
+| Financeiro | 6 | 926 | 5.007 | 999 | **601** | 641 |
+| Saúde | 8 | 489 | 3.036 | 748 | **530** | 534 |
+| Configuração | 1 | 201 | 2.521 | 892 | **127** | 137 |
+| Assistência Social | 2 | 62 | 1.918 | 725 | **48** | 50 |
+| Cidadão | 1 | 35 | 1.828 | 706 | **29** | 29 |
+| Integrações | 1 | 9 | 1.823 | 712 | **18** | 20 |
+| Gestor | 1 | 7 | 1.089 | 347 | **19** | 18 |
+
+União: **1.254** (era 1.711). Patrimonial pré-pagou sobretudo Financeiro (−40; as classes de empenho, contratos e compras
+são compartilhadas) e Configuração (−10). As telas que faltam caíram pouco (Financeiro 945 → 926), porque são as telas
+compartilhadas que a Fase B de Patrimonial roteou pelo `map`. Gestor subiu 1 (18 → 19): a 9ª frente alcança uma classe
+que antes não era vista. É correção de medição, não regressão.
+
+Ressalva de leitura, a mesma de antes: "a alterar" é estimativa estática. Nas quatro áreas feitas, o real saiu acima por
+causa das correções à mão e das lacunas descobertas no caminho. Em Patrimonial, a estimativa era 469 e o real foi ~710:
+Fase A ~580 (538 pelo Rector + ~45 à mão) e Fase B ~130 (110 pelo Rector, 16 nas abas do passo 8b, 2 à mão). As
+correções da 15ª lacuna e da forma negada foram feitas nas branches das áreas anteriores e não entram nessa conta.
