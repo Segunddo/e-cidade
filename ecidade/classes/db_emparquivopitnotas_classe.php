@@ -52,7 +52,7 @@ class cl_emparquivopitnotas {
                  e15_empnotadadospit = int4 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_emparquivopitnotas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("emparquivopitnotas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_emparquivopitnotas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e15_sequencial = ($this->e15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e15_sequencial"]:$this->e15_sequencial);
-       $this->e15_emparquivopit = ($this->e15_emparquivopit == ""?@$GLOBALS["HTTP_POST_VARS"]["e15_emparquivopit"]:$this->e15_emparquivopit);
-       $this->e15_empnotadadospit = ($this->e15_empnotadadospit == ""?@$GLOBALS["HTTP_POST_VARS"]["e15_empnotadadospit"]:$this->e15_empnotadadospit);
+       $this->e15_sequencial = ($this->e15_sequencial === 0 || $this->e15_sequencial === 0.0 || $this->e15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e15_sequencial"]:$this->e15_sequencial);
+       $this->e15_emparquivopit = ($this->e15_emparquivopit === 0 || $this->e15_emparquivopit === 0.0 || $this->e15_emparquivopit == ""?@$GLOBALS["HTTP_POST_VARS"]["e15_emparquivopit"]:$this->e15_emparquivopit);
+       $this->e15_empnotadadospit = ($this->e15_empnotadadospit === 0 || $this->e15_empnotadadospit === 0.0 || $this->e15_empnotadadospit == ""?@$GLOBALS["HTTP_POST_VARS"]["e15_empnotadadospit"]:$this->e15_empnotadadospit);
      }else{
-       $this->e15_sequencial = ($this->e15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e15_sequencial"]:$this->e15_sequencial);
+       $this->e15_sequencial = ($this->e15_sequencial === 0 || $this->e15_sequencial === 0.0 || $this->e15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e15_sequencial"]:$this->e15_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_emparquivopitnotas {
          $this->e15_sequencial = $e15_sequencial; 
        }
      }
-     if(($this->e15_sequencial == null) || ($this->e15_sequencial == "") ){ 
+     if(($this->e15_sequencial == null) || ($this->e15_sequencial === 0 || $this->e15_sequencial === 0.0 || $this->e15_sequencial == "") ){ 
        $this->erro_sql = " Campo e15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_emparquivopitnotas {
    function sql_query ( $e15_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_emparquivopitnotas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_emparquivopitnotas {
    function sql_query_file ( $e15_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_emparquivopitnotas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

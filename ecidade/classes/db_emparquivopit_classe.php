@@ -73,7 +73,7 @@ class cl_emparquivopit {
                  e14_dtfinal = date = Data Final 
                  ";
    //funcao construtor da classe 
-   function cl_emparquivopit() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("emparquivopit"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,8 +90,8 @@ class cl_emparquivopit {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e14_sequencial = ($this->e14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e14_sequencial"]:$this->e14_sequencial);
-       $this->e14_idusuario = ($this->e14_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["e14_idusuario"]:$this->e14_idusuario);
+       $this->e14_sequencial = ($this->e14_sequencial === 0 || $this->e14_sequencial === 0.0 || $this->e14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e14_sequencial"]:$this->e14_sequencial);
+       $this->e14_idusuario = ($this->e14_idusuario === 0 || $this->e14_idusuario === 0.0 || $this->e14_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["e14_idusuario"]:$this->e14_idusuario);
        $this->e14_nomearquivo = ($this->e14_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["e14_nomearquivo"]:$this->e14_nomearquivo);
        $this->e14_hora = ($this->e14_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["e14_hora"]:$this->e14_hora);
        if($this->e14_dtarquivo == ""){
@@ -121,7 +121,7 @@ class cl_emparquivopit {
          }
        }
      }else{
-       $this->e14_sequencial = ($this->e14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e14_sequencial"]:$this->e14_sequencial);
+       $this->e14_sequencial = ($this->e14_sequencial === 0 || $this->e14_sequencial === 0.0 || $this->e14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e14_sequencial"]:$this->e14_sequencial);
      }
    }
    // funcao para inclusao
@@ -214,7 +214,7 @@ class cl_emparquivopit {
          $this->e14_sequencial = $e14_sequencial; 
        }
      }
-     if(($this->e14_sequencial == null) || ($this->e14_sequencial == "") ){ 
+     if(($this->e14_sequencial == null) || ($this->e14_sequencial === 0 || $this->e14_sequencial === 0.0 || $this->e14_sequencial == "") ){ 
        $this->erro_sql = " Campo e14_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -600,7 +600,7 @@ class cl_emparquivopit {
    function sql_query ( $e14_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -622,7 +622,7 @@ class cl_emparquivopit {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -635,7 +635,7 @@ class cl_emparquivopit {
    function sql_query_file ( $e14_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -656,7 +656,7 @@ class cl_emparquivopit {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -669,7 +669,7 @@ class cl_emparquivopit {
   function sql_query_ativo ( $e14_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -696,7 +696,7 @@ class cl_emparquivopit {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -84,12 +84,12 @@ if(trim($instit)!=""){
 // ** Como o campo com as unidades vem separadas por um '_' informando:
 //   ÓRGAO_UNIDADE, o filtro separa o órgao da unidade, colocando os órgãos no select. OBSERVAR MAIS ABAIXO
 if(trim($unidade)!=""){
-  $arr_unidades = split(",",$unidade);
+  $arr_unidades = preg_split("#,#m",$unidade);
   $unidade      = "";
   $nsorgao      = "";
   $vir          = "";
   for($i=0;$i<count($arr_unidades);$i++){
-  	$orgunid  = split("_",$arr_unidades[$i]);
+  	$orgunid  = preg_split("#_#m",$arr_unidades[$i]);
   	$nsorgao .= $vir.$orgunid[0];
   	$unidade .= $vir.$orgunid[1];
   	$vir      = ",";
@@ -714,7 +714,7 @@ for($i=0;$i<$index;$i++){
       }
 
       // Busca o ELEMENTO E DESDOBRAMENTO corrente
-      $testaelemento = split("_",$arr_index2["$i2"]);
+      $testaelemento = preg_split("#_#m",$arr_index2["$i2"]);
 
       // Posição 0 - Elemento e posição 1 - Desdobramento
       $mostraelemento = $testaelemento["0"];

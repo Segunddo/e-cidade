@@ -34,7 +34,7 @@ class cl_programacaofinanceiraparcela {
                  k118_reconhecido = bool = Reconhecido 
                  ";
    //funcao construtor da classe
-   function cl_programacaofinanceiraparcela() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("programacaofinanceiraparcela");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -51,15 +51,15 @@ class cl_programacaofinanceiraparcela {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k118_sequencial = ($this->k118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_sequencial"]:$this->k118_sequencial);
-       $this->k118_programacaofinanceira = ($this->k118_programacaofinanceira == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_programacaofinanceira"]:$this->k118_programacaofinanceira);
-       $this->k118_parcela = ($this->k118_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_parcela"]:$this->k118_parcela);
-       $this->k118_valor = ($this->k118_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_valor"]:$this->k118_valor);
-       $this->k118_ano = ($this->k118_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_ano"]:$this->k118_ano);
-       $this->k118_mes = ($this->k118_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_mes"]:$this->k118_mes);
+       $this->k118_sequencial = ($this->k118_sequencial === 0 || $this->k118_sequencial === 0.0 || $this->k118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_sequencial"]:$this->k118_sequencial);
+       $this->k118_programacaofinanceira = ($this->k118_programacaofinanceira === 0 || $this->k118_programacaofinanceira === 0.0 || $this->k118_programacaofinanceira == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_programacaofinanceira"]:$this->k118_programacaofinanceira);
+       $this->k118_parcela = ($this->k118_parcela === 0 || $this->k118_parcela === 0.0 || $this->k118_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_parcela"]:$this->k118_parcela);
+       $this->k118_valor = ($this->k118_valor === 0 || $this->k118_valor === 0.0 || $this->k118_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_valor"]:$this->k118_valor);
+       $this->k118_ano = ($this->k118_ano === 0 || $this->k118_ano === 0.0 || $this->k118_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_ano"]:$this->k118_ano);
+       $this->k118_mes = ($this->k118_mes === 0 || $this->k118_mes === 0.0 || $this->k118_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_mes"]:$this->k118_mes);
        $this->k118_reconhecido = ($this->k118_reconhecido == "f"?@$GLOBALS["HTTP_POST_VARS"]["k118_reconhecido"]:$this->k118_reconhecido);
      }else{
-       $this->k118_sequencial = ($this->k118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_sequencial"]:$this->k118_sequencial);
+       $this->k118_sequencial = ($this->k118_sequencial === 0 || $this->k118_sequencial === 0.0 || $this->k118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k118_sequencial"]:$this->k118_sequencial);
      }
    }
    // funcao para Inclusão
@@ -137,7 +137,7 @@ class cl_programacaofinanceiraparcela {
          $this->k118_sequencial = $k118_sequencial;
        }
      }
-     if(($this->k118_sequencial == null) || ($this->k118_sequencial == "") ){
+     if(($this->k118_sequencial == null) || ($this->k118_sequencial === 0 || $this->k118_sequencial === 0.0 || $this->k118_sequencial == "") ){
        $this->erro_sql = " Campo k118_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

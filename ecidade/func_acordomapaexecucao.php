@@ -36,7 +36,8 @@ define('EXECUCAO_CONTRATO_FINANCEIRA', 1);
 define('EXECUCAO_FINANCEIRA_EMPENHO', 2);
 $oGet = db_utils::postMemory($_GET);
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $oDaoAcordo = new cl_acordo;
 $oDaoAcordo->rotulo->label();

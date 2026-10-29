@@ -34,14 +34,15 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_orcdotacao_classe.php"));
 include(modification("classes/db_orcelemento_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 // recebe a variavel db_input_retorno com o nome do objeto que será atualizado com os dados selecionados
 
 if (isset($instit) && $instit!=""){
   // recebeu instituição
-  $array_instit = split(',',$instit);
+  $array_instit = preg_split('#,#m',$instit);
 } else {
   $array_instit[0]= db_getsession("DB_instit");
   $instit= db_getsession("DB_instit");

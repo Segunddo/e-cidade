@@ -34,7 +34,8 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_matestoque_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $oGet = db_utils::postMemory($_GET);
 
@@ -167,7 +168,7 @@ $clrotulo->label("m60_descr");
         if ($oDaoMateEstoque->numrows > 0) {
 
           db_fieldsmemory($rsMateEstoque,0);
-          echo "<script>".$funcao_js."('" . $$sRetorno . "', false);</script>";
+          echo "<script>".$funcao_js."('" . ${$sRetorno} . "', false);</script>";
 
         } else {
           echo "<script>".$funcao_js."('Chave(".$pesquisa_chave.") não Encontrado',true);</script>";

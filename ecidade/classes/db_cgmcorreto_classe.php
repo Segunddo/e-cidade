@@ -63,7 +63,7 @@ class cl_cgmcorreto {
                  z10_instit = int4 = Cod. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_cgmcorreto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgmcorreto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_cgmcorreto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z10_codigo = ($this->z10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_codigo"]:$this->z10_codigo);
-       $this->z10_numcgm = ($this->z10_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_numcgm"]:$this->z10_numcgm);
+       $this->z10_codigo = ($this->z10_codigo === 0 || $this->z10_codigo === 0.0 || $this->z10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_codigo"]:$this->z10_codigo);
+       $this->z10_numcgm = ($this->z10_numcgm === 0 || $this->z10_numcgm === 0.0 || $this->z10_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_numcgm"]:$this->z10_numcgm);
        if($this->z10_data == ""){
          $this->z10_data_dia = ($this->z10_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_data_dia"]:$this->z10_data_dia);
          $this->z10_data_mes = ($this->z10_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_data_mes"]:$this->z10_data_mes);
@@ -91,11 +91,11 @@ class cl_cgmcorreto {
          }
        }
        $this->z10_hora = ($this->z10_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_hora"]:$this->z10_hora);
-       $this->z10_login = ($this->z10_login == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_login"]:$this->z10_login);
+       $this->z10_login = ($this->z10_login === 0 || $this->z10_login === 0.0 || $this->z10_login == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_login"]:$this->z10_login);
        $this->z10_proc = ($this->z10_proc == "f"?@$GLOBALS["HTTP_POST_VARS"]["z10_proc"]:$this->z10_proc);
-       $this->z10_instit = ($this->z10_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_instit"]:$this->z10_instit);
+       $this->z10_instit = ($this->z10_instit === 0 || $this->z10_instit === 0.0 || $this->z10_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_instit"]:$this->z10_instit);
      }else{
-       $this->z10_codigo = ($this->z10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_codigo"]:$this->z10_codigo);
+       $this->z10_codigo = ($this->z10_codigo === 0 || $this->z10_codigo === 0.0 || $this->z10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["z10_codigo"]:$this->z10_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_cgmcorreto {
          $this->z10_codigo = $z10_codigo; 
        }
      }
-     if(($this->z10_codigo == null) || ($this->z10_codigo == "") ){ 
+     if(($this->z10_codigo == null) || ($this->z10_codigo === 0 || $this->z10_codigo === 0.0 || $this->z10_codigo == "") ){ 
        $this->erro_sql = " Campo z10_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -507,7 +507,7 @@ class cl_cgmcorreto {
    function sql_query ( $z10_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -531,7 +531,7 @@ class cl_cgmcorreto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -543,7 +543,7 @@ class cl_cgmcorreto {
    function sql_query_file ( $z10_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -564,7 +564,7 @@ class cl_cgmcorreto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -576,7 +576,7 @@ class cl_cgmcorreto {
    function sql_query_cgmduploprocessado ( $z10_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -600,7 +600,7 @@ class cl_cgmcorreto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

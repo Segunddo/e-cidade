@@ -53,22 +53,23 @@ $clcgm							= new cl_cgm;
 $cldbdepart 				= new cl_db_depart;
 $clmatestoqueitemoc = new cl_matestoqueitemoc;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 if (isset($altera)){
   db_inicio_transacao();
   $valor_total=0;
   $sqlerro = false;
-  $dados=split("quant_","$valores");
-  $valordoitem=split("valor_","$val");
+  $dados=preg_split("#quant_#m","$valores");
+  $valordoitem=preg_split("#valor_#m","$val");
   for ($i=1;$i<sizeof($dados);$i++){
     if ($sqlerro==false){
-      $numero=split("_",$dados[$i]);
+      $numero=preg_split("#_#m",$dados[$i]);
       $numemp=$numero[0];
       $sequen=$numero[1];
       $quanti=$numero[3];
-      $vlsoitem=split("_",$valordoitem[$i]);
+      $vlsoitem=preg_split("#_#m",$valordoitem[$i]);
       $vl_soma_item=$vlsoitem[1];
       if(strpos(trim($vl_soma_item),',')!=""){
 	        $vl_soma_item=str_replace('.','',$vl_soma_item);
@@ -116,11 +117,11 @@ if ($sqlerro==false){
 
 for ($i=1;$i<sizeof($dados);$i++){
   if ($sqlerro==false){
-    $numero=split("_",$dados[$i]);
+    $numero=preg_split("#_#m",$dados[$i]);
     $numemp=$numero[0];
     $sequen=$numero[1];
     $quanti=$numero[3];
-    $vlsoitem=split("_",$valordoitem[$i]);
+    $vlsoitem=preg_split("#_#m",$valordoitem[$i]);
     $vl_soma_item=$vlsoitem[1];
 
     $result_item=$clmatordemitem->sql_record($clmatordemitem->sql_query_file(null,"*",null,"m52_codordem = $m51_codordem and  m52_numemp = $numemp and m52_sequen = $sequen "));

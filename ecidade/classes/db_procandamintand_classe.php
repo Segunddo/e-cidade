@@ -52,7 +52,7 @@ class cl_procandamintand
                  ";
 
     //funcao construtor da classe
-    function cl_procandamintand()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("procandamintand");
@@ -74,8 +74,8 @@ class cl_procandamintand
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->p86_codtrans = ($this->p86_codtrans == "" ? @$GLOBALS["HTTP_POST_VARS"]["p86_codtrans"] : $this->p86_codtrans);
-            $this->p86_codandam = ($this->p86_codandam == "" ? @$GLOBALS["HTTP_POST_VARS"]["p86_codandam"] : $this->p86_codandam);
+            $this->p86_codtrans = ($this->p86_codtrans === 0 || $this->p86_codtrans === 0.0 || $this->p86_codtrans == "" ? @$GLOBALS["HTTP_POST_VARS"]["p86_codtrans"] : $this->p86_codtrans);
+            $this->p86_codandam = ($this->p86_codandam === 0 || $this->p86_codandam === 0.0 || $this->p86_codandam == "" ? @$GLOBALS["HTTP_POST_VARS"]["p86_codandam"] : $this->p86_codandam);
         } else {
         }
     }

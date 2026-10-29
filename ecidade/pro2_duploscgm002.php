@@ -31,7 +31,8 @@ include(modification("classes/db_cgm_classe.php"));
 $clcgm = new cl_cgm;
 $clcgm->rotulo->label();
 $clrotulo = new rotulocampo;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $campos = "";
@@ -148,10 +149,10 @@ for($i=0;$i<$numrows_cgm;$i++){
   $where = "";
   $and   = "      ";
   for($ii=0;$ii<sizeof($campos_where);$ii++){
-    if(!isset($$campos_where[$ii]) || $$campos_where[$ii]==""){
-      $where .= $and.($campos_where[$ii] != "z01_numero"? "(trim(". $campos_where[$ii].")='".$$campos_where[$ii]."' or ".$campos_where[$ii]." is null)":$campos_where[$ii]."=".$$campos_where[$ii]);
+    if(!isset(${$campos_where}[$ii]) || ${$campos_where}[$ii]==""){
+      $where .= $and.($campos_where[$ii] != "z01_numero"? "(trim(". $campos_where[$ii].")='".${$campos_where}[$ii]."' or ".$campos_where[$ii]." is null)":$campos_where[$ii]."=".${$campos_where}[$ii]);
     }else{
-      $where .= $and.($campos_where[$ii] != "z01_numero"? "trim(". $campos_where[$ii].")='".$$campos_where[$ii]."'":$campos_where[$ii]."=".$$campos_where[$ii]);
+      $where .= $and.($campos_where[$ii] != "z01_numero"? "trim(". $campos_where[$ii].")='".${$campos_where}[$ii]."'":$campos_where[$ii]."=".${$campos_where}[$ii]);
     }
     $and    = "      and      ";
   }
@@ -204,20 +205,20 @@ for($i=0;$i<$numrows_cgm;$i++){
     }
     if($iii == 0 || $muda_pag==true){
       $pdf->setfont('arial','b',7);
-      $pdf->cell(75,$alt,@$$campos_where[0],"LT",0,"L",1);
-      $pdf->cell(25,$alt,@$$campos_where[1],"T",0,"L",1);
-      $pdf->cell(75,$alt,@$$campos_where[2],"T",0,"L",1);
-      $pdf->cell(20,$alt,@$$campos_where[3],"T",0,"L",1);
-      $pdf->cell(40,$alt,@$$campos_where[4],"T",0,"L",1);
+      $pdf->cell(75,$alt,@${$campos_where}[0],"LT",0,"L",1);
+      $pdf->cell(25,$alt,@${$campos_where}[1],"T",0,"L",1);
+      $pdf->cell(75,$alt,@${$campos_where}[2],"T",0,"L",1);
+      $pdf->cell(20,$alt,@${$campos_where}[3],"T",0,"L",1);
+      $pdf->cell(40,$alt,@${$campos_where}[4],"T",0,"L",1);
       if($index>=5){
-	$pdf->cell(40,$alt,@$$campos_where[5],"TR",1,"L",1);
+	$pdf->cell(40,$alt,@${$campos_where}[5],"TR",1,"L",1);
       }else{
 	$pdf->cell(10,$alt,"","T",0,"R",1);
 	$pdf->cell(15,$alt,"Registros:","LT",0,"L",1);
 	$pdf->cell(15,$alt,@$count,"TR",1,"R",1);
       }
       if($index>5){
-	$pdf->cell(75,$alt,@$$campos_where[6],"L",0,"L",1);
+	$pdf->cell(75,$alt,@${$campos_where}[6],"L",0,"L",1);
 	$pdf->cell(170,$alt,"",0,0,"R",1);
 	$pdf->cell(15,$alt,"Registros:","LT",0,"L",1);
 	$pdf->cell(15,$alt,@$count,"TR",1,"R",1);

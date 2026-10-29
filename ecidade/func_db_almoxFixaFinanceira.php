@@ -34,7 +34,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_db_almox_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $oPost = db_utils::postmemory($_POST,0);
 $oGet  = db_utils::postmemory($_GET,0);

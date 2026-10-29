@@ -41,7 +41,7 @@ $clproctransfer     = new cl_proctransfer;
 $clproctransferproc = new cl_proctransferproc;
 
 if (isset($cancel)) {
-    $codigoProcessos = split(',', $listaproc);
+    $codigoProcessos = preg_split('#,#m', $listaproc);
 
     foreach ($codigoProcessos as $codigoProcesso) {
         $processo = ProcessoRepositorio::encontrar($codigoProcesso);

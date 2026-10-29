@@ -34,7 +34,8 @@ include(modification("classes/db_cgm_classe.php"));
 include(modification("classes/db_empempenho_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clcgm = new cl_cgm;
 $clcgm->rotulo->label("z01_numcgm");
@@ -91,7 +92,7 @@ $clempempenho = new cl_empempenho;
       if(!isset($pesquisa_chave)){
         if(isset($chave_z01_numcgm) && (trim($chave_z01_numcgm)!="") ){
              $sql = $clempempenho->sql_query(null,$campos,"e60_numcgm","e60_numcgm = $chave_z01_numcgm"); 
-	     
+
 	     db_lovrot($sql,15,"()","",$funcao_js);	 
         }else if(isset($chave_z01_nome) && (trim($chave_z01_nome)!="") ){
              $sql = $clempempenho->sql_query(null,$campos,"z01_nome"," z01_nome like '$chave_z01_nome%' " ); 
@@ -99,7 +100,7 @@ $clempempenho = new cl_empempenho;
         }else if(isset($chave_z01_cgccpf) && (trim($chave_z01_cgccpf)!="") ){
              $sql = $clempempenho->sql_query(null,$campos,"z01_cgccpf"," z01_cgccpf like '$chave_z01_cgccpf%' " ); 
              db_lovrot($sql,15,"()","",$funcao_js);
- 
+
         }else{
 	    //  $sql = $clempempenho->sql_query(null,$campos,"e60_numcgm"); 
         } 

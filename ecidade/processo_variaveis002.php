@@ -36,7 +36,8 @@ $clrotulo->label('p51_descr');
 $clrotulo->label('nomecam');
 $clrotulo->label('p54_obrigatorio');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $ordem = "a";

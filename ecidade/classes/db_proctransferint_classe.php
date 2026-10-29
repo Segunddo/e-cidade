@@ -63,7 +63,7 @@ class cl_proctransferint
                  ";
 
     //funcao construtor da classe
-    function cl_proctransferint()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("proctransferint");
@@ -85,7 +85,7 @@ class cl_proctransferint
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->p88_codigo = ($this->p88_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["p88_codigo"] : $this->p88_codigo);
+            $this->p88_codigo = ($this->p88_codigo === 0 || $this->p88_codigo === 0.0 || $this->p88_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["p88_codigo"] : $this->p88_codigo);
             if ($this->p88_data == "") {
                 $this->p88_data_dia = ($this->p88_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["p88_data_dia"] : $this->p88_data_dia);
                 $this->p88_data_mes = ($this->p88_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["p88_data_mes"] : $this->p88_data_mes);
@@ -95,11 +95,11 @@ class cl_proctransferint
                 }
             }
             $this->p88_hora = ($this->p88_hora == "" ? @$GLOBALS["HTTP_POST_VARS"]["p88_hora"] : $this->p88_hora);
-            $this->p88_usuario = ($this->p88_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["p88_usuario"] : $this->p88_usuario);
+            $this->p88_usuario = ($this->p88_usuario === 0 || $this->p88_usuario === 0.0 || $this->p88_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["p88_usuario"] : $this->p88_usuario);
             $this->p88_despacho = ($this->p88_despacho == "" ? @$GLOBALS["HTTP_POST_VARS"]["p88_despacho"] : $this->p88_despacho);
             $this->p88_publico = ($this->p88_publico == "f" ? @$GLOBALS["HTTP_POST_VARS"]["p88_publico"] : $this->p88_publico);
         } else {
-            $this->p88_codigo = ($this->p88_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["p88_codigo"] : $this->p88_codigo);
+            $this->p88_codigo = ($this->p88_codigo === 0 || $this->p88_codigo === 0.0 || $this->p88_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["p88_codigo"] : $this->p88_codigo);
         }
     }
 
@@ -190,7 +190,7 @@ class cl_proctransferint
                 $this->p88_codigo = $p88_codigo;
             }
         }
-        if (($this->p88_codigo == null) || ($this->p88_codigo == "")) {
+        if (($this->p88_codigo == null) || ($this->p88_codigo === 0 || $this->p88_codigo === 0.0 || $this->p88_codigo == "")) {
             $this->erro_sql = " Campo p88_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

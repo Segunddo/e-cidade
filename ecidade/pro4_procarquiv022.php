@@ -109,7 +109,7 @@ if (isset($incluir)){
   for($i=0; $i<$ta; $i++){
     $chave=key($vt);
     if(substr($chave,0,5)=="CHECK"){
-      $dados=split("_",$chave);
+      $dados=preg_split("#_#m",$chave);
       $p67_codproc=$dados[1];
       $clprocarquiv->p67_id_usuario = db_getsession("DB_id_usuario");
       $clprocarquiv->p67_coddepto = db_getsession("DB_coddepto");

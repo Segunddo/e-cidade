@@ -150,6 +150,52 @@ Patrimonial no 8.5): nada indo ao 5.6.
 Falta a **Fase B**: as telas de menu de Patrimonial nos prefixos compartilhados (`mat`, `pro`, `con`, `prot`, `emp`, `func`,
 `cai`, `orc`, `cad`, `processo`), pelo `map`.
 
+### Fase B — as telas de menu dos prefixos compartilhados, pelo `map` (29/10/2026)
+
+**207 telas** de menu de Patrimonial ainda no 5.6: `mat` 72, `pro` 67, `con` 34, `emp` 13, `prot` 12, `func` 4, `orc` 2,
+`cad` 1, `cai` 1, `processo` 1. Universo (nove frentes, `TELAS=@`) 2.525, 911 já pagos. Rector em 110 arquivos, só
+regras já vetadas (70 `parse_str`+`extract`, 37 `ereg`/`split` literais, 32 guardas, 32 construtores, 5 `${$var}`, 1
+parâmetro opcional — lint do 5.6 no universo limpo, sem `?Tipo`). Classes 32/32, escrita 711 linhas, LSP 421/421,
+passo 6c 0 divergentes. Bateria 205/207 → **207/207**. À mão:
+
+- `classes/db_protparamglobal_classe.php:440`: `pg_fetch_assoc($pgObject, 'p06_tipo')` — o nome da coluna no lugar
+  do número da linha. **Medido no 5.6:** ele converte `'p06_tipo'` em 0 e devolve a primeira linha (sem linhas,
+  `false`). → `pg_fetch_assoc($pgObject, 0)`.
+- `prot4_tipo_processo.001.php:56`: `db_ancora('Processo', 'openPesquisa()')` com 2 argumentos, a função exige 3
+  ("argumentos faltando viram fatal"). → o 3º explícito, `null`, o valor que tinha no 5.6.
+
+`db_protparamglobal_classe.php` é alcançado por quase todo universo servido → **bateria completa**: **5.983/6.007**
+(as 24 caracterizadas, conferidas nome a nome) e `map` **762/762** (inclui as 207). Roteamento:
+`gera_map_faseb.py … patrim:mat,pro,con,emp,prot,func,orc,cad,cai,processo` — **+207 entradas, −0**.
+
+**Passo 8b (a 14ª lacuna, como esperado no roteamento por lista):** as telas da Fase B abriam **65 abas e 1
+redirecionamento** no 5.6 (`con1_cadenderrua004/5/6`, `mat1_db_almox004/5/6`, `mat1_matmater001/2/3`,
+`emp2_relempenho011`, `pro4_aba1protprocesso001`, `prot1_cadgeralmunic004/5/6`… e `pro1_cgmcorreto003` →
+`pro1_cgmcorreto004`). Os **60 destinos** distintos (com a família `pro1_cgmcorreto*`): universo 2.121, **14 a portar
+de verdade** (13 `parse_str` de 1 argumento, 1 arquivo com 3 `split` literais) pelo Rector — as 24 classes com
+"guarda faltando" eram o falso positivo do detector por bytes, 0 pelo contador por *token*. Bateria nos destinos e
+nas telas que os abrem: **92/92**. Na lista `faseb_map_abas.txt`; levantamento refeito: **segundo salto**,
+`pro1_cgmcorreto004` → `pro1_cgmerrado001` (família `pro1_cgmerrado*`, 2 `parse_str` portados), 4/4. Terceira
+rodada: **nada indo ao 5.6** (988 telas examinadas). `map` final: **822 entradas** (595 telas de menu + 227 abas e destinos).
+
+Regressão do lote de abas: os 16 arquivos portados (`func_*`, `emp2_*`, `pro1_cgmcorreto*`, `pro1_cgmerrado*`, um
+`forms/`) não estão no universo servido → sem bateria.
+
+### 🏁 ÁREA PATRIMONIAL CONCLUÍDA (29/10/2026)
+
+Conferido **pelo proxy, tela de menu por tela de menu** (`X-Ecidade-Runtime` em `/w/2/<tela>`): **743 de 743** telas de
+menu existentes servidas pelo PHP 8.5 (749 entradas; 6 apontam para arquivo inexistente: `mat4_alteraEntradaNota`,
+`pat1_bensconfplaca001/002/003`, `pat4_criteriumexportaarquivos001`, `pat4_criteriumimportaarquivos001`).
+
+| | |
+|---|---|
+| Módulos | **8 de 8** — Compras, Patrimônio, Protocolo, Veículos, Material, Licitações, Contratos, Ouvidoria |
+| Fase A (`location`) | `ac`, `aco`, `ouv`, `lic`, `vei`, `pat`, `com` — **1.136/1.136** |
+| Fase B (`map`) | 207 telas de menu + 61 abas/destinos — **207/207** e **92/92 + 4/4** |
+| Bateria do código unido | **5.983/6.007** (as 24 caracterizadas das áreas anteriores; nenhuma de Patrimonial) e `map` **762/762** |
+| Lacunas e categorias | **15ª lacuna** (classes com namespace, 9ª frente) e a **forma negada** do `0 == ""` (74 pontos de auditoria + 6 linhas em formulários), as duas corrigidas pela cadeia |
+| Branch | `4patrimonial-migrado` |
+
 #### ✅ A forma negada `$this->campo != ""` nas classes de dados — MEDIDA e CORRIGIDA
 
 O `GuardaComparacaoLiteralRector` só cobre `==`. A forma `!=`, com propriedade inteira e **sem `trim()`**, aparece

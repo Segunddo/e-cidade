@@ -43,7 +43,8 @@ require_once(modification("classes/db_empelemento_classe.php"));
 
 db_postmemory($_POST);
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clselorcdotacao = new cl_selorcdotacao();
 $clorcelemento   = new cl_orcelemento;

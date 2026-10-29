@@ -13,7 +13,7 @@ import os, re, subprocess, sys, collections
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ECI = os.path.join(RAIZ, "ecidade")
-JA = ("TRIBUT", "EDUCA", "RECURSOS")           # areas concluidas
+JA = ("TRIBUT", "EDUCA", "RECURSOS", "PATRIM")           # areas concluidas
 
 # o mesmo regex do `location` do nginx (docker/proxy/nginx.conf)
 LOC = re.compile(r"^(?:cem|itbi?|agua?|jur|div|mar|not|fis|iss|dvr|arr|tri|inf|tra|tre|esc|rel|sec|bib|mer|edu|rh|eso|rec|pes|ac|aco|ouv|lic|vei|pat|com)[0-9]*_", re.I)

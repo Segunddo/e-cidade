@@ -69,8 +69,9 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** **ÁREAS TRIBUTÁRIO E EDUCAÇÃO CONCLUÍDAS** (branch `2educacao-migrado`), e **RECURSOS HUMANOS
-com 701/701 telas de menu no 8.5** (branch `3recursoshumanos-migrado`; cálculo da folha verificado; 13ª lacuna fechada).
+**Onde paramos:** **ÁREAS TRIBUTÁRIO, EDUCAÇÃO, RECURSOS HUMANOS E PATRIMONIAL CONCLUÍDAS** — Patrimonial com
+**743/743 telas de menu no 8.5** conferidas pelo proxy (branch `4patrimonial-migrado`, 29/10/2026; ver `area-patrimonial.md`).
+RH com 701/701 (branch `3recursoshumanos-migrado`; cálculo da folha verificado; 13ª lacuna fechada).
 Conferido pelo proxy, tela de menu por tela de menu (15/10/2026): **Tributário 1.059/1.059** e **Educação
 480/480** arquivos de menu existentes servidos pelo PHP 8.5 — depois de fechar a *10ª LACUNA* (14 telas
 que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
@@ -83,8 +84,8 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes)[0-9]*_)` — **4.872 arquivos** + 555 por `map` (390 telas de menu + 165 abas e destinos da 14ª lacuna, `faseb_map_abas.txt`) |
-| **Próximo passo** | **Área RECURSOS HUMANOS: telas de menu CONCLUÍDAS** (branch `3recursoshumanos-migrado`, 701/701 pelo proxy). Nível 3 nos cadastros, `.phar` e cálculo da folha (6 tipos idênticos) feitos. **13ª lacuna fechada: 316 DAOs portados** (ver *Os DAOs que os modelos instanciam*). Nível 3: **68/70 cadastros idênticos** (as 2 restantes quebram também no 5.6; estágio probatório por cenário semeado) — ver *🏁 ÁREA RECURSOS HUMANOS* (ver *PARA RETOMAR* na seção). |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes\|ac\|aco\|ouv\|lic\|vei\|pat\|com)[0-9]*_)` — **6.073 arquivos** + 822 por `map` (595 telas de menu + 227 abas e destinos da 14ª lacuna, `faseb_map_abas.txt`) |
+| **Próximo passo** | **Área PATRIMONIAL CONCLUÍDA** (743/743 pelo proxy). Próxima área: decisão do usuário — ver `dimensionamento.md` (refazer com `scratchpad/dimensiona.py`, que já conta Patrimonial como concluída). |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **nove** — a 8ª (classes de `model/`/`std/`, 13ª lacuna) e a 9ª (classes com namespace em `src/`/`app/`/`api/` e serviços do `bootstrap.php`, **15ª lacuna**, `scratchpad/ns_fecho.py`); todas insensíveis a maiúsculas desde a 9ª lacuna (`getdao`) |

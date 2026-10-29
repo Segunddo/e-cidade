@@ -29,7 +29,8 @@ require_once(modification("fpdf151/pdf.php"));
 require_once(modification("classes/db_procandam_classe.php"));
 $aux02   = new cl_procandam;
 $aux     = new cl_procandam;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 db_postmemory($HTTP_GET_VARS);
 
@@ -226,9 +227,9 @@ $quantgeral=0;
 
 // seleciona todos os processos do departamento informado
 if ($tipo =="1") { // processos iniciados no departamento
-  
+
   if ($aux->numrows > 0 ) { // ln 40
-    
+
     $depto = "";  
     for ($x=0;$x <$aux->numrows ; $x++){
       db_fieldsmemory($res,$x,true);
@@ -254,7 +255,7 @@ if ($tipo =="1") { // processos iniciados no departamento
         $pdf->cell(80,4,'USUÁRIO ATUAL','0',1,'L',1);
         // cabeçalho dos processos
       }
-      
+
       /**
        * Trata o processo caso o mesmo seja de OUVIDORIA
        */
@@ -262,7 +263,7 @@ if ($tipo =="1") { // processos iniciados no departamento
       if ($p58_numero == "") {
         $sNumeroProcesso = "";
       }
-      
+
       $pdf->setx(10); 
       $pdf->cell(20,4,$p58_codproc,'0',0,'L',0);
       $pdf->cell(30,4,$sNumeroProcesso,'0',0,'R',0);
@@ -293,9 +294,9 @@ if ($tipo =="1") { // processos iniciados no departamento
   } // end if       
   
 } elseif ($tipo =="2"){ // processos iniciados no departamento
-  
+
   if ($aux->numrows > 0 ) { // ln 40
-    
+
     $depto = "";  
     for ($x=0;$x < $aux->numrows ; $x++) {
 
@@ -320,7 +321,7 @@ if ($tipo =="1") { // processos iniciados no departamento
         $pdf->cell(60,4,'ENTRADA','B',0,'L',1);
         $pdf->cell(60,4,'USUÁRIO ATUAL','B',1,'L',1);
       }
-      
+
       /**
        * Trata o processo caso o mesmo seja de OUVIDORIA
        */
@@ -328,7 +329,7 @@ if ($tipo =="1") { // processos iniciados no departamento
       if ($p58_numero == "") {
         $sNumeroProcesso = "";
       }
-      
+
 
 
       $pdf->setx(10); 
@@ -390,7 +391,7 @@ if ($tipo =="1") { // processos iniciados no departamento
         $pdf->ln();
         // cabeçalho dos processos
       }
-      
+
       /**
        * Trata o processo caso o mesmo seja de OUVIDORIA
        */
@@ -427,16 +428,16 @@ if ($tipo =="1") { // processos iniciados no departamento
   } // end if
 
 } elseif($tipo == 4) {
-  
+
   if ($aux->numrows > 0 ) {
-    
+
     $depto = "";
     for ($x=0;$x <$aux->numrows ; $x++){
-      
+
       db_fieldsmemory($res,$x,true);
-      
+
       if ($depto !=$p58_coddepto){ // mudou departamento
-        
+
         $pdf->setx(10);
         $pdf->cell(20,4,'','0',0,'R',1);
         $pdf->cell(260,4,'DEPARTAMENTO' ,'0',1,'L',1);  // <br>
@@ -456,7 +457,7 @@ if ($tipo =="1") { // processos iniciados no departamento
         $pdf->ln();
         // cabeçalho dos processos
       }
-  
+
       /**
        * Trata o processo caso o mesmo seja de OUVIDORIA
        */
@@ -472,19 +473,19 @@ if ($tipo =="1") { // processos iniciados no departamento
       $pdf->cell(70,4,substr($z01_nome,0,37),'0',0,'L',0);
       $pdf->cell(130,4,$nome,'0',0,'L',0);
       $pdf->ln();
-  
+
       $quant++;
       $quantgeral++;
-  
+
       if ($x == $aux->numrows-1 or $p58_coddepto != pg_result($res, $x+1, "p58_coddepto")) {
         $pdf->cell(20,4,"QUANTIDADE DE PROCESSOS DESTE DEPARTAMENTO: $quant",'0',0,'L',0);
         $pdf->ln(10);
         $quant=0;
       }
-  
+
       // quebra pagina
       if ($pdf->gety() > $pdf->h - 40 ){
-        
+
         $pdf->addpage("L");
         $depto="";
       }
