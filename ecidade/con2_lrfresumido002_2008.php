@@ -41,7 +41,8 @@ include(modification("classes/db_empresto_classe.php"));
 include(modification("classes/db_conrelvalor_classe.php"));
 require(modification("libs/db_libpostgres.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 //echo($HTTP_SERVER_VARS['QUERY_STRING']); exit;
 
@@ -631,7 +632,7 @@ if ($emite_rcl==1||$emite_ppp==1){
    */
 
   // se o ano atual  bissexto deve subtrair 366 somente se a data for superior a 28/02/200X
-  $dt = split('-',$dt_fin);  // mktime -- (mes,dia,ano)
+  $dt = preg_split('#\-#m',$dt_fin);  // mktime -- (mes,dia,ano)
   $dt_ini_ant = "{$anousu_ant}-01-01";
   $dt_fin_ant = "{$anousu_ant}-12-31";  
 
@@ -1268,7 +1269,7 @@ if ($emite_oper == 1) {
 
 }
 //////////////////////////////// Impresso do PDF /////////////////////////////////
-$xinstit    = split("-",$db_selinstit);
+$xinstit    = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select munic from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 db_fieldsmemory($resultinst,0);
 
@@ -1289,10 +1290,10 @@ if (!isset($arqinclude)){
   $head3  = "DEMONSTRATIVO SIMPLIFICADO DO RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA";
   $head4  = "ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL";
 
-  $mes    = split("-",$dt_ini); 
+  $mes    = preg_split("#\\-#m",$dt_ini); 
   $mesini = strtoupper(db_mes($mes[1]));
   $txt    = "JANEIRO";
-  $mes    = split("-",$dt_fin); 
+  $mes    = preg_split("#\\-#m",$dt_fin); 
   $mesfin = strtoupper(db_mes($mes[1]));
   $txt   .= " A $mesfin/$anousu";
 

@@ -32,9 +32,10 @@ include(modification("libs/db_sql.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("fpdf151/assinatura.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
@@ -63,12 +64,12 @@ $classinatura = new cl_assinatura;
   db_query("begin");
   db_query("create temp table t(o58_orgao int8,o58_unidade int8,o58_funcao int8,o58_subfuncao int8,o58_programa int8,o58_projativ int8,o58_elemento int8,o58_codigo int8)");
     
-  $xcampos = split("-",$orgaos);
+  $xcampos = preg_split("#\\-#m",$orgaos);
   
   for($i=0;$i < sizeof($xcampos);$i++){
      $where = '';
      $virgula = ''; 
-     $xxcampos = split("_",$xcampos[$i]);
+     $xxcampos = preg_split("#_#m",$xcampos[$i]);
      for($ii=0;$ii<sizeof($xxcampos);$ii++){
         if($ii > 0){
           $where .= $virgula.$xxcampos[$ii];

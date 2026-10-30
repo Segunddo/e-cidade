@@ -40,7 +40,8 @@ if (! isset($arqinclude)) { // se este arquivo não esta incluido por outro
   require_once(modification("libs/db_utils.php"));
   require_once(modification("model/linhaRelatorioContabil.model.php"));
   require_once(modification("model/relatorioContabil.model.php"));
-  parse_str($HTTP_SERVER_VARS ['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS ['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($_GET);
 
   $classinatura  = new cl_assinatura();
@@ -74,8 +75,8 @@ if ($sSiglaPeriodo == '1S' || $sSiglaPeriodo == '2S') {
 } else {
 
   $dados  = data_periodo($anousu,$sSiglaPeriodo);
-  $perini = split("-",$dados[0]);
-  $perfin = split("-",$dados[1]);
+  $perini = preg_split("#\\-#m",$dados[0]);
+  $perfin = preg_split("#\\-#m",$dados[1]);
 
   $mesini    = strtoupper(db_mes($perini[1]));
   $mesfin    = strtoupper(db_mes($perfin[1]));
@@ -512,7 +513,7 @@ $descr_inst = '';
 db_fieldsmemory($resultinst, 0);
 $descr_inst = $munic;
 
-$vdt_fin = split("-", $dt_fin);
+$vdt_fin = preg_split("#\\-#m", $dt_fin);
 
 $head1 = "MUNICÍPIO DE " . strtoupper($descr_inst);
 $head2 = "RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA";

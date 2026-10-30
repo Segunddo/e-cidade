@@ -36,7 +36,8 @@ include(modification("classes/db_conrelinfo_classe.php"));
 include(modification("classes/db_empresto_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $classinatura = new cl_assinatura;
 $orcparamrel  = new cl_orcparamrel;
@@ -555,7 +556,7 @@ if ($emite_balorc_rec==1){
           @db_query("drop table work_pl_estrutmae");     
           @db_query("rollback"); 
           // se o ano atual é bissexto deve subtrair 366 somente se a data for superior a 28/02/200X
-          $dt = split('-',$dt_fin);  // mktime -- (mes,dia,ano)
+          $dt = preg_split('#\-#m',$dt_fin);  // mktime -- (mes,dia,ano)
           $dt_ini_ant = date('Y-m-d',mktime(0,0,0,$dt[1],$dt[2]+1,$anousu_ant));
           $dt_fin_ant = $anousu_ant.'-12-31';  
 
@@ -1082,7 +1083,7 @@ if ($emite_balorc_rec==1){
                 $perc_apurado = ($total_despesa/$total_rcl) * 100;
               }
               //////////////////////////////// Impressão do PDF /////////////////////////////////
-              $xinstit = split("-",$db_selinstit);
+              $xinstit = preg_split("#\\-#m",$db_selinstit);
               $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
               $descr_inst = '';
               $xvirg = '';
@@ -1108,9 +1109,9 @@ if ($emite_balorc_rec==1){
               $head2 = $descr_inst;
               $head3 = "DEMONSTRATIVO SIMPLIFICADO DO RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA";
               $head4 = "ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL";
-              $mes   = split("-",$dt_ini); 
+              $mes   = preg_split("#\\-#m",$dt_ini); 
               $txt   = strtoupper(db_mes($mes[1]));
-              $dt    = split("-",$dt_fin);
+              $dt    = preg_split("#\\-#m",$dt_fin);
               $txt  .= " À ".strtoupper(db_mes($dt[1]))." $anousu ";;
               $head5 = "$txt";
 

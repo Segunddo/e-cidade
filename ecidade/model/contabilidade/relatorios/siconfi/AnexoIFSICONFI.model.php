@@ -59,7 +59,7 @@ class AnexoIFSICONFI extends RelatoriosLegaisBase implements AnexoSICONFI {
     }
   }
 
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
     parent::getDados();
 
     foreach ($this->aLinhasConsistencia as $oStdLinhaRelatorio) {

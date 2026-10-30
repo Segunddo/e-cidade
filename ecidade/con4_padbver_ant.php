@@ -29,7 +29,7 @@ class bver_ant {
   var $arq=null;
 
 
-  function bver_ant($header){
+  function __construct($header){
 
     umask(74);
     $this->arq = fopen("tmp/BVER_ANT.TXT",'w+');
@@ -37,7 +37,7 @@ class bver_ant {
     fputs($this->arq,"\r\n");
   }
 
-  function processa($instit=1,$data_ini="",$data_fim="",$tribinst,$subelemento="") {
+  function processa($instit=1,$data_ini="",$data_fim="",$tribinst = null,$subelemento="") {
 
     global $instituicoes,$contador,$nomeinst,$sinal_anterior,$sinal_final;
 

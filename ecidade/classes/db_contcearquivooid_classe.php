@@ -52,7 +52,7 @@ class cl_contcearquivooid {
                  c14_arquivo = oid = Arquivo 
                  ";
    //funcao construtor da classe 
-   function cl_contcearquivooid() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contcearquivooid"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_contcearquivooid {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c14_sequencial = ($this->c14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c14_sequencial"]:$this->c14_sequencial);
-       $this->c14_contcearquivo = ($this->c14_contcearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c14_contcearquivo"]:$this->c14_contcearquivo);
-       $this->c14_arquivo = ($this->c14_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c14_arquivo"]:$this->c14_arquivo);
+       $this->c14_sequencial = ($this->c14_sequencial === 0 || $this->c14_sequencial === 0.0 || $this->c14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c14_sequencial"]:$this->c14_sequencial);
+       $this->c14_contcearquivo = ($this->c14_contcearquivo === 0 || $this->c14_contcearquivo === 0.0 || $this->c14_contcearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c14_contcearquivo"]:$this->c14_contcearquivo);
+       $this->c14_arquivo = ($this->c14_arquivo === 0 || $this->c14_arquivo === 0.0 || $this->c14_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c14_arquivo"]:$this->c14_arquivo);
      }else{
-       $this->c14_sequencial = ($this->c14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c14_sequencial"]:$this->c14_sequencial);
+       $this->c14_sequencial = ($this->c14_sequencial === 0 || $this->c14_sequencial === 0.0 || $this->c14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c14_sequencial"]:$this->c14_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_contcearquivooid {
          $this->c14_sequencial = $c14_sequencial; 
        }
      }
-     if(($this->c14_sequencial == null) || ($this->c14_sequencial == "") ){ 
+     if(($this->c14_sequencial == null) || ($this->c14_sequencial === 0 || $this->c14_sequencial === 0.0 || $this->c14_sequencial == "") ){ 
        $this->erro_sql = " Campo c14_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_contcearquivooid {
    function sql_query ( $c14_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_contcearquivooid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_contcearquivooid {
    function sql_query_file ( $c14_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_contcearquivooid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -39,7 +39,8 @@ if (! isset($arqinclude)) { // se este arquivo não esta incluido por outro
   include(modification("classes/db_empresto_classe.php"));
   require_once(modification("libs/db_utils.php"));
   $iCodigoPeriodo  = $periodo;
-  parse_str($HTTP_SERVER_VARS ['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS ['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($_GET);
   
   $classinatura  = new cl_assinatura();
@@ -317,15 +318,15 @@ $saldo     = 0;
 $cancelado = 0;
 for($i = 0; $i < pg_numrows($result_restos_mde1); $i ++) {
   db_fieldsmemory($result_restos_mde1, $i);
-  
+
 //  Total de RP processado .....:  ($e91_vlrliq - $e91_vlrpag); 
 //  Total de RP não processado .:  ($e91_vlremp - $e91_vlranu - $e91_vlrliq);
 
 //  $saldo += (($e91_vlremp - $e91_vlranu - $vlranu) - ($e91_vlrpag + $vlrpag));
   $saldo     += (($e91_vlrliq - $e91_vlrpag) + ($e91_vlremp - $e91_vlranu - $e91_vlrliq));
-  
+
   $cancelado += $vlranuliq;
-  
+
   /*TAREFA 29391
     Comentado este trecho como solicitado na tarefa 29391
     if ($c70_anousu == $anousu) {
@@ -689,14 +690,14 @@ $n2 = 10;
 
 // end se incluido em outro arquivo
 
-$xinstit = split("-", $db_selinstit);
+$xinstit = preg_split("#\\-#m", $db_selinstit);
 $resultinst = db_query("select munic from db_config where codigo in (" . str_replace('-', ', ', $db_selinstit) . ") ");
 $descr_inst = '';
 db_fieldsmemory($resultinst, 0);
 $descr_inst = $munic;
 
-$vdt_ini = split("-", $dt_ini);
-$vdt_fin = split("-", $dt_fin);
+$vdt_ini = preg_split("#\\-#m", $dt_ini);
+$vdt_fin = preg_split("#\\-#m", $dt_fin);
 
 $head1 = "MUNICÍPIO DE " . strtoupper($descr_inst);
 $head2 = "RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA";
@@ -1327,7 +1328,7 @@ function cabecalhoDespesa($pdf,$aDescricao,$iLarguraColunaDescr,$iLarguraColunaV
     $pdf->cell($iLarguraColunaValor,$alt,$aDescricao["D3"],"L",0,"C",0); // D3
     $pdf->cell($iLarguraColunaValor,$alt,$aDescricao["E3"],"L",0,"C",0); // E3
     $pdf->cell($iLarguraColunaValor,$alt,$aDescricao["F3"],"L",1,"C",0); // F3
-    
+
     $pdf->cell($iLarguraColunaDescr,$alt,$aDescricao["A4"],"", 0,"C",0); // A4
     $pdf->cell($iLarguraColunaValor,$alt,$aDescricao["B4"],"L",0,"C",0); // B4
     $pdf->cell($iLarguraColunaValor,$alt,$aDescricao["C4"],"L",0,"C",0); // C4

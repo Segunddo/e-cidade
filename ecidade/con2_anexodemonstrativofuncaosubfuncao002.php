@@ -57,7 +57,7 @@ if ($oGet->sPeriodo == 'Mensal') {
 
 $dtAnousu     = db_getsession("DB_anousu");
 $sInstituicao = db_getsession("DB_instit");
-$xinstit      = split("-", $oGet->sOrigem);
+$xinstit      = preg_split("#\\-#m", $oGet->sOrigem);
 
 $rsInstituicao = db_query("select munic from db_config where codigo in (" . str_replace('-', ', ', $oGet->sOrigem)
                           . ") ");
@@ -92,13 +92,13 @@ if ($iNumeroLinhas != false) {
 db_query("begin");
 db_query("create temp table t(o58_orgao int8,o58_unidade int8,o58_funcao int8,o58_subfuncao int8,o58_programa int8,o58_projativ int8,o58_elemento int8,o58_codigo int8)");
 
-$sCampos = split("-", $sOrgao);
+$sCampos = preg_split("#\\-#m", $sOrgao);
 
 for ($i = 0; $i < sizeof($sCampos); $i++) {
 
   $sConcatenaWhere = '';
   $sVirgula        = '';
-  $sCamposSplit    = split("_", $sCampos[$i]);
+  $sCamposSplit    = preg_split("#_#m", $sCampos[$i]);
 
   for ($j = 0; $j < sizeof($sCamposSplit); $j++) {
 
@@ -174,8 +174,8 @@ $sData         = $sSiglaPeriodo;
 $sDadosPeriodo = data_periodo($dtAnousu, $sData);
 
 $sPeriodoImpressao       = strtoupper($sDadosPeriodo["periodo"]);
-$sPeriodoInicioImpressao = split("-", $sDadosPeriodo[0]);
-$sPeriodoFimImpressao    = split("-", $sDadosPeriodo[1]);
+$sPeriodoInicioImpressao = preg_split("#\\-#m", $sDadosPeriodo[0]);
+$sPeriodoFimImpressao    = preg_split("#\\-#m", $sDadosPeriodo[1]);
 
 $sMesInicial = strtoupper(db_mes($sPeriodoInicioImpressao[1]));
 $sMesFim     = strtoupper(db_mes($sPeriodoFimImpressao[1]));

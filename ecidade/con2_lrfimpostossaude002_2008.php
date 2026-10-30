@@ -38,7 +38,8 @@ if (! isset($arqinclude)) { // se este arquivo não esta incluido por outro
   include(modification("classes/db_orcparamrel_classe.php"));
   include(modification("classes/db_empresto_classe.php"));
   
-  parse_str($HTTP_SERVER_VARS ['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS ['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($_GET);
   
   $classinatura  = new cl_assinatura();
@@ -647,13 +648,13 @@ $n2 = 10;
 
 // end se incluido em outro arquivo
 
-$xinstit = split("-", $db_selinstit);
+$xinstit = preg_split("#\\-#m", $db_selinstit);
 $resultinst = db_query("select munic from db_config where codigo in (" . str_replace('-', ', ', $db_selinstit) . ") ");
 $descr_inst = '';
 db_fieldsmemory($resultinst, 0);
 $descr_inst = $munic;
 
-$vdt_fin = split("-", $dt_fin);
+$vdt_fin = preg_split("#\\-#m", $dt_fin);
 
 $head1 = "MUNICÍPIO DE " . strtoupper($descr_inst);
 $head2 = "RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA";
@@ -1252,7 +1253,7 @@ function cabecalhoDespesa($pdf,$aDescricao,$iLarguraColunaDescr,$iLarguraColunaV
     $pdf->cell($iLarguraColunaValor,$alt,$aDescricao["D3"],"L",0,"C",0); // D3
     $pdf->cell($iLarguraColunaValor,$alt,$aDescricao["E3"],"L",0,"C",0); // E3
     $pdf->cell($iLarguraColunaValor,$alt,$aDescricao["F3"],"L",1,"C",0); // F3
-    
+
     $pdf->cell($iLarguraColunaDescr,$alt,$aDescricao["A4"],"", 0,"C",0); // A4
     $pdf->cell($iLarguraColunaValor,$alt,$aDescricao["B4"],"L",0,"C",0); // B4
     $pdf->cell($iLarguraColunaValor,$alt,$aDescricao["C4"],"L",0,"C",0); // C4

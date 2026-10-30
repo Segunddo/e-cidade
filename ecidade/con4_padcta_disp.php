@@ -32,7 +32,7 @@ class cta_disp
 
     public $anousu = null;
 
-    function cta_disp($header)
+    function __construct($header)
     {
         $this->anousu = db_getsession("DB_anousu");
         umask(74);

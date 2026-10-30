@@ -31,7 +31,7 @@
 class orgao {
   var $arq = null;
   
-  function orgao($header){     
+  function __construct($header){     
      umask(74);
      $this->arq = fopen("tmp/ORGAO.TXT",'w+');
      fputs($this->arq,$header);
@@ -51,7 +51,7 @@ class orgao {
                $clarqpad->sql_query(null,"*",null," c54_nomearq = 'ORGAO.TXT' and c54_anousu=".db_getsession("DB_anousu")."  and c54_codtrib = $tribinst "));
     if($clarqpad->numrows > 0){
       db_fieldsmemory($res,0);
-      $rubant = split("\r\n",pg_result($res,0,"c54_arquivo"));
+      $rubant = preg_split("#\r\n#m",pg_result($res,0,"c54_arquivo"));
       for($yy=0;$yy<sizeof($rubant);$yy++){
          $contador++;
          $line = $rubant[$yy];
@@ -90,7 +90,7 @@ class orgao {
        $line = $anousu.$orgao.$nome; 
        fputs($this->arq,$line);
        fputs($this->arq,"\r\n");
-  
+
        $contador = $contador+1; // incrementa contador global
     }
 

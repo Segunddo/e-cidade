@@ -35,7 +35,8 @@ if (!isset($arqinclude)){ // se este arquivo não esta incluido por outro
  include(modification("libs/db_liborcamento.php"));
  include(modification("classes/db_conrelinfo_classe.php"));
  
- parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+ parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+ extract($__qs);
  db_postmemory($HTTP_SERVER_VARS);
 
  $clconrelinfo = new cl_conrelinfo;
@@ -64,9 +65,9 @@ if (!isset($arqinclude)){ // se este arquivo não esta incluido por outro
    $dt_ini = $dtini;
    $dt_fin = $dtfin;
  
-   $dt = split('-',$dt_ini);
+   $dt = preg_split('#\-#m',$dt_ini);
    $dt_ini_ant = (db_getsession("DB_anousu")-1).'-'.$dt[1].'-'.$dt[2];
-   $dt = split('-',$dt_fin);
+   $dt = preg_split('#\-#m',$dt_fin);
    $dt_fin_ant = (db_getsession("DB_anousu")-1).'-'.$dt[1].'-'.$dt[2];
 
  }  
@@ -282,7 +283,7 @@ for($x=0;$x< pg_numrows($result_rec);$x++){
 
 if (!isset($arqinclude)){ 
 
- $xinstit = split("-",$db_selinstit);
+ $xinstit = preg_split("#\\-#m",$db_selinstit);
  $resultinst = db_query("select munic from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
  db_fieldsmemory($resultinst,0);
  $descr_inst = $munic;
@@ -293,8 +294,8 @@ if (!isset($arqinclude)){
  $head5 = "ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL";
 
  $dados  = data_periodo($anousu,$periodo);
- $perini = split("-",$dados[0]);
- $perfin = split("-",$dados[1]);
+ $perini = preg_split("#\\-#m",$dados[0]);
+ $perfin = preg_split("#\\-#m",$dados[1]);
 
  $txtper = strtoupper($dados["periodo"]);
  $mesini = strtoupper(db_mes($perini[1]));
@@ -335,7 +336,7 @@ for($x=1;$x<=15;$x++){
       continue;
       // temos que subtrair a linha 9
   }
-   
+
   $receita_primaria_total[1] += $m_rec[$x][1]; // previsão atualizada
   $receita_primaria_total[2] += $m_rec[$x][2]; // arrecadado no bimestre
   $receita_primaria_total[3] += $m_rec[$x][3]; // arrecadado ate o bimestre

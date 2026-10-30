@@ -27,7 +27,7 @@
 
 class subprog {
   var $arq = null;
-  function subprog($header){
+  function __construct($header){
     //
      umask(74);
      $this->arq = fopen("tmp/SUBPROG.TXT",'w+');
@@ -50,7 +50,7 @@ class subprog {
         
     $virg="";
     if($clarqpad->numrows > 0){
-      $rubant = split("\r\n",pg_result($res,0,"c54_arquivo"));
+      $rubant = preg_split("#\r\n#m",pg_result($res,0,"c54_arquivo"));
       for($yy=0;$yy<sizeof($rubant);$yy++){
          $contador++;
          $line = $rubant[$yy];
@@ -94,7 +94,7 @@ class subprog {
 	   $line = $anousu.$codigo.$nome; 
 	   fputs($this->arq,$line);
 	   fputs($this->arq,"\r\n");
-    
+
 	   $contador = $contador+1; // incrementa contador global
        }
      }
@@ -108,7 +108,7 @@ class subprog {
 	   $line = $anousux.$codigo.$nome; 
 	   fputs($this->arq,$line);
 	   fputs($this->arq,"\r\n");
-    
+
 	   $contador = $contador+1; // incrementa contador global
      }
 

@@ -28,7 +28,7 @@
 class credor {
 
   var $arq=null;
-  function credor($header){
+  function __construct($header){
     //
      umask(74);
      $this->arq = fopen("tmp/CREDOR.TXT",'w+');
@@ -74,7 +74,7 @@ $sql = "select
 $res=db_query($sql);
 $rows = pg_numrows($res);
 for ($x=0;$x < $rows;$x++){
-   
+
    $codigo  = formatar(pg_result($res,$x,"codigo"),10,'n');
    $nome    = formatar(pg_result($res,$x,"nome"),60,'c');
    $cnpj    = formatar(pg_result($res,$x,"cnpj"),14,'n');
@@ -101,7 +101,7 @@ for ($x=0;$x < $rows;$x++){
   $line = $codigo.$nome.$cnpj.$cgc.$iss.$endereco.$cidade.$uf.$cep.$fone.$fax.$tipo.$tipoPessoa;
   fputs($this->arq,$line);
   fputs($this->arq,"\r\n");
-  
+
   $contador = $contador+1; // incrementa contador global
 }
    //  trailer

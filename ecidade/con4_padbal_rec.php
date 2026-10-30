@@ -34,7 +34,7 @@ class bal_rec
 {
     var $arq = null;
 
-    function bal_rec($header)
+    function __construct($header)
     {
         umask(74);
         $this->arq = fopen("tmp/BAL_REC.TXT", 'w+');

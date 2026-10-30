@@ -31,7 +31,7 @@ class receita
 {
     var $arq = null;
 
-    function receita($header)
+    function __construct($header)
     {
         umask(74);
         $this->arq = fopen("tmp/RECEITA.TXT", 'w+');

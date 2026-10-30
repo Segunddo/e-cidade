@@ -52,10 +52,11 @@ $nTotalRPinscritos     = 0;
 $nTotalRPinscritosRpps = 0;
 $sInstitRPPS           = '';
 ## Fim declaracao variaveis
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 $orcparamrel = new cl_orcparamrel;
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,
     nomeinstabrev,
     db21_tipoinstit,
@@ -140,8 +141,8 @@ if ($temcamara == true && $temprefa == false && $temadmind == false){
 //******************************************************************
 $dataini = $anousu.'-01-01';
 $datafin = $anousu.'-12-31';
-$dt1 = split('-',$dataini);
-$dt2 = split('-',$datafin);
+$dt1 = preg_split('#\-#m',$dataini);
+$dt2 = preg_split('#\-#m',$datafin);
 $tipo_emissao='periodo';
 if ($tipo_emissao=='periodo'){
     //$textodt = strtoupper(db_mes($dt1[1]))." A ".strtoupper(db_mes($dt2[1]))." DE ";

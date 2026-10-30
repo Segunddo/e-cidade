@@ -54,6 +54,7 @@ Patrimonial, 469 previstos, ~710 reais).
 | 3 `orc` | 3.037 | 345 Rector + ~125 à mão | 3.034/3.037 (as 3 restantes não compilam em nenhum) | 1.032 (diffs só do harness) | 25.379 linhas, diffs só do harness | **626/628** (2 caracterizadas) |
 | 4 `cai` inteiro | 3.988 | 273 Rector + ~230 à mão | 3.988/3.988 | 1.256 (diffs só do harness) | diffs só do harness | **739/740** (1 caracterizada) |
 | 5 `con` (telas do Financeiro) | 3.053 | 144 Rector + 21 LSP à mão | 3.053/3.053 | 1.010 (diffs só do harness) | diffs só do harness | **313/313** |
+| 6 `hab`/`age`/`pro` + abas | 2.535 | 66 Rector + 10 LSP + 1 comentário à mão | 2.513/2.535 (22 não compilam em nenhum) | 941 (diffs só do harness) | diffs só do harness | **91/91** + 6/6 do 2º nível |
 
 **Lote 1 — `cus`, `pla`, `pl`, `tes`** (Custos, Planejamento, Tesouraria; 99 arquivos, roteados no `location`).
 Rector em 45 arquivos, só regras já vetadas (28 `parse_str`+`extract`, 17 guardas, 15 construtores, 14 `split`, todos
@@ -310,4 +311,46 @@ do plano de contas (`con1_conplano004/011/022/033`, `con1_congrupo*`, `con1_plan
 redirecionamento `con2_anexo16_001 → con2_anexoXVI_001`. **Pelo plano aprovado, ficam para o lote 6** ("abas do passo 8b"):
 refazer `redirecionamentos.py <SID> out.tsv FINAN` regenera a lista.
 
-**Estado:** lote 5 concluído. Aguardando o pedido do lote 6 (`hab`, `age`, `pro` + as 86 abas do passo 8b).
+**Estado:** lote 5 concluído.
+
+**Lote 6 — `hab`, `age`, `pro` + as abas do passo 8b** (pelo `map`). Restavam do Financeiro, fora do `con`, só **5 telas de
+menu**: `hab1_workflow001/002/003`, `age4_atuasam30`, `pro4_parcelamentos001` (as `cad`/`sys` do Financeiro já estavam no `map`
+pelo Tributário). Somadas às **86 abas/destinos** do passo 8b do lote 5: **91 telas**, universo 2.535. Separadores literais;
+o `"\r\n"` conferido no 5.6 em 5 casos, idêntico. Rector em 66 arquivos, só regras vetadas (38 `parse_str`+`extract`, 48
+`ereg`/`split`, 25 construtores, 5 guardas, 2 parâmetros opcionais, 1 `${$var}`), 0 na passada seguinte; portão 0 ausentes;
+remanescentes 0.
+
+À mão:
+- **CATEGORIA NOVA: comentário `/*` sem fechamento** — `con2_lrfdispcaixa002.php:435`. No 5.6 é só aviso e **o resto do arquivo
+  vira comentário** (inclusive o `$pdf->Output()` e o `?>`: o relatório nunca emite o PDF — bug pré-existente); no PHP 7+ é
+  parse error, e o Rector nem lia o arquivo ("Unterminated comment"). Correção fiel: fechar o comentário **no fim do arquivo**,
+  mantendo comentado exatamente o que o 5.6 ignorava. Idêntico nos dois; depois disso o Rector portou o arquivo.
+- **LSP — 10 filhas de `RelatoriosLegaisBase`** com `getDados()` sem o parâmetro da mãe (`AnexoXIII/XIV/XV/XVI/XVIIBalancoGeral`,
+  `AnexoXVILRF`, `AnexoIFSICONFI`, `DemonstrativoDespesaEducacao/Saude`; a `AnexoXVI` veio do 2º nível). Com as 7 do lote 3 e as
+  18 do lote 5, são **35** corrigidas; as restantes das 47 contadas no lote 3 não estão em universo servido.
+
+`php -l`: **22 relatórios `con2_lrf*`/`con2_anexo16_002`/`con2_opercredito002` não compilam em nenhum dos dois, já antes do
+Rector** — passagem por referência na chamada (`assinaturas(&$pdf, …)`, "Call-time pass-by-reference has been removed", fatal
+desde o PHP 5.4). Pré-existente, intocado: as abas que os chamam quebram igual nos dois.
+
+Bateria **91/91 na primeira rodada**. Roteamento: lote `financ:con,hab,age,pro` no `gera_map_faseb.py` e as 86 abas em
+`faseb_map_abas.txt` → `map` 1.107. **Passo 8b refeito achou um 2º nível**: 5 destinos abertos pelas abas novas e pelas
+`hab1_workflow` (`con2_anexoXVI_011`, `hab1_workflow004/005/006`, `hab1_workflowativ001`). O universo deles tinha 3 arquivos
+fora do do lote, entre eles mais uma filha LSP (`AnexoXVIBalancoGeral`, corrigida); 6/6 idênticas (com o
+`con2_anexoXVI_002_2011` que elas abrem). Postos em `faseb_map_abas.txt` → **`map` 1.112 entradas** (805 telas + 320 abas).
+Levantamento refeito (1.344 telas do Financeiro no 8.5): **nada indo ao 5.6**.
+
+**Incidente: DISCO CHEIO (30/10/2026).** Ao gravar este registro, `/` chegou ao limite (66 de 69 GB; o que sobra é a reserva
+de 5% do ext4, só para root). Efeitos: (1) **este arquivo foi truncado para 0 bytes** — restaurado do commit e o texto
+reaplicado; (2) **o PostgreSQL caiu** ("não foi possível escrever no arquivo base/16391/29243"), mas o container só **parou**, sem
+ser removido, então os dados ficaram. Liberado com `docker builder prune` (1,4 GB de cache de build, autorizado pelo usuário; o
+`image prune` não liberou nada — as imagens "recuperáveis" têm tag e só sairiam com `-a`). Banco religado: WAL refeito, checkpoint
+de fim de recuperação, consultas e telas respondendo nos três endereços. Conferido depois: nenhum arquivo alterado ficou vazio e
+o `php -l` deu o mesmo resultado nos dois runtimes. **Lição: o banco sem volume de persistência sobrevive a parar, não a ser
+removido — e disco cheio o derruba sem aviso; conferir `df -h /` antes da bateria completa.** O maior ocupante restante em
+`ecidade/tmp` é o clone do TCC de referência (`tcc_gerson`, 1,1 GB).
+
+**Estado:** lote 6 concluído — **todos os lotes do Financeiro portados e roteados** (commits locais). Falta a etapa do fim da
+área: bateria completa (todos os prefixos do `location` + o `map` inteiro, com as regressões adiadas dos lotes 2, 3 e 4), a
+conferência pelo proxy de todas as telas de menu do Financeiro, e só então o envio. **O usuário pediu para sinalizar e esperar
+antes da bateria final.**

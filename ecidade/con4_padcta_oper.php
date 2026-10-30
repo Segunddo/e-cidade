@@ -28,7 +28,7 @@
 class cta_oper {
    var $arq = null;
 
-  function cta_oper($header){
+  function __construct($header){
     umask(74);
     $this->arq = fopen("tmp/CTA_OPER.TXT",'w+');
     fputs($this->arq,$header);

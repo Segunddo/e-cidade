@@ -43,7 +43,8 @@ if (!isset($arqinclude)){
   include(modification("classes/db_empresto_classe.php"));
   include(modification("classes/db_periodo_classe.php"));
   $iCodigoPeriodo = '';
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
   
   $classinatura    = new cl_assinatura;
@@ -925,7 +926,7 @@ if ($lUltimoPeriodo) {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if (!isset($arqinclude)){
-  $xinstit    = split("-",$db_selinstit);
+  $xinstit    = preg_split("#\\-#m",$db_selinstit);
   $resultinst = db_query("select munic from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
   db_fieldsmemory($resultinst,0);
 
@@ -937,8 +938,8 @@ if (!isset($arqinclude)){
   $head4 = "ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL";
 
   $dados  = data_periodo($anousu,$periodo_selecionado);
-  $perini = split("-",$dados[0]);
-  $perfin = split("-",$dados[1]);
+  $perini = preg_split("#\\-#m",$dados[0]);
+  $perfin = preg_split("#\\-#m",$dados[1]);
 
   $txtper = strtoupper($dados["periodo"]);
   $mesini = db_mes($perini[1],1);

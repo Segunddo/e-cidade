@@ -29,7 +29,7 @@
 class bvmovant {
   var $arq=null;
 
-  function bvmovant($header){
+  function __construct($header){
     umask(74);
     $this->arq = fopen("tmp/BVMOVANT.TXT",'w+');
     fputs($this->arq,$header);
@@ -435,7 +435,7 @@ class bvmovant {
   }
 
 
-  function processa($instit=1,$data_ini="",$data_fim="",$tribinst,$subelemento="") {
+  function processa($instit=1,$data_ini="",$data_fim="",$tribinst = null,$subelemento="") {
     global $instituicoes,$contador,$nomeinst,$sinal_anterior,$sinal_final;
     global $debito_1bin,$debito_2bin,$debito_3bin,$debito_4bin,$debito_5bin,$debito_6bin;
     global $credito_1bin,$credito_2bin,$credito_3bin,$credito_4bin,$credito_5bin,$credito_6bin;

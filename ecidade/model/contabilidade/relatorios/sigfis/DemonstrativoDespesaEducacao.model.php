@@ -42,7 +42,7 @@ class DemonstrativoDespesaEducacao extends RelatoriosLegaisBase {
     parent::__construct($iAnoUsu, $iCodigoRelatorio, $iCodigoPeriodo);
   }
   
-  public function getDados(){
+  public function getDados($trazerConfiguracaoPadrao = true){
     
     /**
      * buscamos os parametros relacionados ao periodo

@@ -53,7 +53,7 @@ class AnexoXVILRF extends RelatoriosLegaisBase  {
    *
    * @return array - Colecao de stdClass
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
 
     $aLinhas          = array();
