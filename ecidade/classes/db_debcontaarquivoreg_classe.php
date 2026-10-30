@@ -52,7 +52,7 @@ class cl_debcontaarquivoreg {
                  d73_tipo = int4 = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_debcontaarquivoreg() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("debcontaarquivoreg"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_debcontaarquivoreg {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d73_sequencial = ($this->d73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d73_sequencial"]:$this->d73_sequencial);
-       $this->d73_codigo = ($this->d73_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d73_codigo"]:$this->d73_codigo);
-       $this->d73_tipo = ($this->d73_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d73_tipo"]:$this->d73_tipo);
+       $this->d73_sequencial = ($this->d73_sequencial === 0 || $this->d73_sequencial === 0.0 || $this->d73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d73_sequencial"]:$this->d73_sequencial);
+       $this->d73_codigo = ($this->d73_codigo === 0 || $this->d73_codigo === 0.0 || $this->d73_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d73_codigo"]:$this->d73_codigo);
+       $this->d73_tipo = ($this->d73_tipo === 0 || $this->d73_tipo === 0.0 || $this->d73_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d73_tipo"]:$this->d73_tipo);
      }else{
-       $this->d73_sequencial = ($this->d73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d73_sequencial"]:$this->d73_sequencial);
+       $this->d73_sequencial = ($this->d73_sequencial === 0 || $this->d73_sequencial === 0.0 || $this->d73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d73_sequencial"]:$this->d73_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_debcontaarquivoreg {
          $this->d73_sequencial = $d73_sequencial; 
        }
      }
-     if(($this->d73_sequencial == null) || ($this->d73_sequencial == "") ){ 
+     if(($this->d73_sequencial == null) || ($this->d73_sequencial === 0 || $this->d73_sequencial === 0.0 || $this->d73_sequencial == "") ){ 
        $this->erro_sql = " Campo d73_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_debcontaarquivoreg {
    function sql_query ( $d73_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_debcontaarquivoreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_debcontaarquivoreg {
    function sql_query_file ( $d73_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_debcontaarquivoreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

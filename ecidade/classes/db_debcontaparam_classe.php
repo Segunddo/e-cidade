@@ -56,7 +56,7 @@ class cl_debcontaparam {
                  d62_mascara = varchar(25) = Mascara 
                  ";
    //funcao construtor da classe 
-   function cl_debcontaparam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("debcontaparam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,14 +73,14 @@ class cl_debcontaparam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d62_instituicao = ($this->d62_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_instituicao"]:$this->d62_instituicao);
-       $this->d62_banco = ($this->d62_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_banco"]:$this->d62_banco);
+       $this->d62_instituicao = ($this->d62_instituicao === 0 || $this->d62_instituicao === 0.0 || $this->d62_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_instituicao"]:$this->d62_instituicao);
+       $this->d62_banco = ($this->d62_banco === 0 || $this->d62_banco === 0.0 || $this->d62_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_banco"]:$this->d62_banco);
        $this->d62_convenio = ($this->d62_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_convenio"]:$this->d62_convenio);
-       $this->d62_ultimonsa = ($this->d62_ultimonsa == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_ultimonsa"]:$this->d62_ultimonsa);
+       $this->d62_ultimonsa = ($this->d62_ultimonsa === 0 || $this->d62_ultimonsa === 0.0 || $this->d62_ultimonsa == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_ultimonsa"]:$this->d62_ultimonsa);
        $this->d62_mascara = ($this->d62_mascara == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_mascara"]:$this->d62_mascara);
      }else{
-       $this->d62_instituicao = ($this->d62_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_instituicao"]:$this->d62_instituicao);
-       $this->d62_banco = ($this->d62_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_banco"]:$this->d62_banco);
+       $this->d62_instituicao = ($this->d62_instituicao === 0 || $this->d62_instituicao === 0.0 || $this->d62_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_instituicao"]:$this->d62_instituicao);
+       $this->d62_banco = ($this->d62_banco === 0 || $this->d62_banco === 0.0 || $this->d62_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_banco"]:$this->d62_banco);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_debcontaparam {
      }
        $this->d62_instituicao = $d62_instituicao; 
        $this->d62_banco = $d62_banco; 
-     if(($this->d62_instituicao == null) || ($this->d62_instituicao == "") ){ 
+     if(($this->d62_instituicao == null) || ($this->d62_instituicao === 0 || $this->d62_instituicao === 0.0 || $this->d62_instituicao == "") ){ 
        $this->erro_sql = " Campo d62_instituicao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -123,7 +123,7 @@ class cl_debcontaparam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d62_banco == null) || ($this->d62_banco == "") ){ 
+     if(($this->d62_banco == null) || ($this->d62_banco === 0 || $this->d62_banco === 0.0 || $this->d62_banco == "") ){ 
        $this->erro_sql = " Campo d62_banco nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -411,7 +411,7 @@ class cl_debcontaparam {
    function sql_query ( $d62_instituicao=null,$d62_banco=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_debcontaparam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -455,7 +455,7 @@ class cl_debcontaparam {
    function sql_query_file ( $d62_instituicao=null,$d62_banco=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_debcontaparam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

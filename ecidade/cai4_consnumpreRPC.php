@@ -40,7 +40,7 @@ $oJson   = $objJSON->decode(str_replace("\\","",$oPost->json));
 
 $sSqlParcelas = "select 0 as k00_numpar union select distinct k00_numpar from arrecad where k00_numpre = {$oJson->inumpre} order by k00_numpar";
 $rsParcelas = db_query($sSqlParcelas);
-$iNumRows   = pg_num_rows($rsParcelas);
+$iNumRows   = ($rsParcelas ? pg_num_rows($rsParcelas) : null);
 $aParcelas  = array();
 
 if($iNumRows > 1){

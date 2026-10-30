@@ -30,7 +30,8 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 if(isset($retorno)) {
   $result = db_query("select * from histcalc where k01_codigo = $retorno");
   db_fieldsmemory($result,0);

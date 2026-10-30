@@ -39,7 +39,8 @@ $clcfautent   = new cl_cfautent;
 $clautenticar = new cl_autenticar;
 $ip    = db_getsession("DB_ip");
 $porta = 5001;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 ?>
 <html>
 <head>

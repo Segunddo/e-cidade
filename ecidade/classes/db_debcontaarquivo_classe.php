@@ -73,7 +73,7 @@ class cl_debcontaarquivo {
                  d72_instit = int4 = Código da Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_debcontaarquivo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("debcontaarquivo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,9 +90,9 @@ class cl_debcontaarquivo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d72_codigo = ($this->d72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_codigo"]:$this->d72_codigo);
-       $this->d72_nsa = ($this->d72_nsa == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_nsa"]:$this->d72_nsa);
-       $this->d72_tipo = ($this->d72_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_tipo"]:$this->d72_tipo);
+       $this->d72_codigo = ($this->d72_codigo === 0 || $this->d72_codigo === 0.0 || $this->d72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_codigo"]:$this->d72_codigo);
+       $this->d72_nsa = ($this->d72_nsa === 0 || $this->d72_nsa === 0.0 || $this->d72_nsa == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_nsa"]:$this->d72_nsa);
+       $this->d72_tipo = ($this->d72_tipo === 0 || $this->d72_tipo === 0.0 || $this->d72_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_tipo"]:$this->d72_tipo);
        if($this->d72_data == ""){
          $this->d72_data_dia = ($this->d72_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_data_dia"]:$this->d72_data_dia);
          $this->d72_data_mes = ($this->d72_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_data_mes"]:$this->d72_data_mes);
@@ -102,15 +102,15 @@ class cl_debcontaarquivo {
          }
        }
        $this->d72_hora = ($this->d72_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_hora"]:$this->d72_hora);
-       $this->d72_usuario = ($this->d72_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_usuario"]:$this->d72_usuario);
+       $this->d72_usuario = ($this->d72_usuario === 0 || $this->d72_usuario === 0.0 || $this->d72_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_usuario"]:$this->d72_usuario);
        $this->d72_nome = ($this->d72_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_nome"]:$this->d72_nome);
        $this->d72_conteudo = ($this->d72_conteudo == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_conteudo"]:$this->d72_conteudo);
-       $this->d72_numpar = ($this->d72_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_numpar"]:$this->d72_numpar);
-       $this->d72_arretipo = ($this->d72_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_arretipo"]:$this->d72_arretipo);
-       $this->d72_banco = ($this->d72_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_banco"]:$this->d72_banco);
-       $this->d72_instit = ($this->d72_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_instit"]:$this->d72_instit);
+       $this->d72_numpar = ($this->d72_numpar === 0 || $this->d72_numpar === 0.0 || $this->d72_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_numpar"]:$this->d72_numpar);
+       $this->d72_arretipo = ($this->d72_arretipo === 0 || $this->d72_arretipo === 0.0 || $this->d72_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_arretipo"]:$this->d72_arretipo);
+       $this->d72_banco = ($this->d72_banco === 0 || $this->d72_banco === 0.0 || $this->d72_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_banco"]:$this->d72_banco);
+       $this->d72_instit = ($this->d72_instit === 0 || $this->d72_instit === 0.0 || $this->d72_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_instit"]:$this->d72_instit);
      }else{
-       $this->d72_codigo = ($this->d72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_codigo"]:$this->d72_codigo);
+       $this->d72_codigo = ($this->d72_codigo === 0 || $this->d72_codigo === 0.0 || $this->d72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d72_codigo"]:$this->d72_codigo);
      }
    }
    // funcao para inclusao
@@ -227,7 +227,7 @@ class cl_debcontaarquivo {
          $this->d72_codigo = $d72_codigo; 
        }
      }
-     if(($this->d72_codigo == null) || ($this->d72_codigo == "") ){ 
+     if(($this->d72_codigo == null) || ($this->d72_codigo === 0 || $this->d72_codigo === 0.0 || $this->d72_codigo == "") ){ 
        $this->erro_sql = " Campo d72_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -638,7 +638,7 @@ class cl_debcontaarquivo {
    function sql_query ( $d72_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -665,7 +665,7 @@ class cl_debcontaarquivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -677,7 +677,7 @@ class cl_debcontaarquivo {
    function sql_query_file ( $d72_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -698,7 +698,7 @@ class cl_debcontaarquivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -710,7 +710,7 @@ class cl_debcontaarquivo {
    function sql_query_tipo ( $d72_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -735,7 +735,7 @@ class cl_debcontaarquivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

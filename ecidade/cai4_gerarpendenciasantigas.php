@@ -53,11 +53,11 @@ $sqlerro = false;
 
 /* for excluindo da conciliacor */
 
-  $arrayCorrente = split(',',$dados);
+  $arrayCorrente = preg_split('#,#m',$dados);
   db_inicio_transacao();
   foreach ($arrayCorrente as $i => $dadoscorrente){
 
-    list ($id, $data, $autent) = split ('_', $dadoscorrente);
+    list ($id, $data, $autent) = preg_split ('#_#m', $dadoscorrente);
 		$data = substr($data,6,4)."-".substr($data,3,2)."-".substr($data,0,2);
 
     $clconciliacor->excluir(null," k84_id = $id and k84_autent = $autent and k84_data = '".$data."'");

@@ -29,10 +29,11 @@ set_time_limit(0);
 include(modification("libs/db_sql.php"));
 include(modification("libs/db_utils.php"));
 require(modification("fpdf151/pdf.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $sTiposDebitos = $tipos;
-$tipos 		  = split(",", $tipos);
+$tipos 		  = preg_split("#,#m", $tipos);
 
 if (isset ($db_datausu)) {
 	if (!checkdate(substr($db_datausu, 5, 2), substr($db_datausu, 8, 2), substr($db_datausu, 0, 4))) {

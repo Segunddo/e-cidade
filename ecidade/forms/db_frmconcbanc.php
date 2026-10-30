@@ -44,7 +44,7 @@ $sSqlValidaUltimaData .= "  from concilia ";
 $sSqlValidaUltimaData .= " where k68_contabancaria = {$conta}";
 $sSqlValidaUltimaData .= " having max(k68_data) = '{$data}'";
 $rsValidaUltimaData   = db_query($sSqlValidaUltimaData);
-if (pg_num_rows($rsValidaUltimaData) > 0) {
+if (($rsValidaUltimaData ? pg_num_rows($rsValidaUltimaData) : null) > 0) {
   $lUltimaData = true;
 }
 
@@ -58,7 +58,7 @@ $sSqlValidaUltimaConciliacao .= " where k68_contabancaria = {$conta} ";
 $sSqlValidaUltimaConciliacao .= "   and k68_conciliastatus in(1,3)";
 $sSqlValidaUltimaConciliacao .= " having max(k68_data) > '{$data}' ";
 $rsValidaUltimaConciliacao   = db_query($sSqlValidaUltimaConciliacao);
-if (pg_num_rows($rsValidaUltimaConciliacao) > 0) {
+if (($rsValidaUltimaConciliacao ? pg_num_rows($rsValidaUltimaConciliacao) : null) > 0) {
   $lDataMenorUltimaConciliacao = true;
 }
 
@@ -100,7 +100,7 @@ $rsReduz    = db_query($sSqlReduz);
 
 $sReduzidos = "Não Encontrado";
 $aReduzidos = array();
-if ( pg_numrows($rsReduz ) > 0) {
+if ( ($rsReduz ? pg_numrows($rsReduz ) : null) > 0) {
 
 
     for( $i=0; $i < pg_numrows($rsReduz ); $i++ ){

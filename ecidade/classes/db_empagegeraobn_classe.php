@@ -52,7 +52,7 @@ class cl_empagegeraobn {
                  e138_empagegera = int4 = Sequencial empagegera 
                  ";
    //funcao construtor da classe 
-   function cl_empagegeraobn() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empagegeraobn"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_empagegeraobn {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e138_sequencial = ($this->e138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e138_sequencial"]:$this->e138_sequencial);
-       $this->e138_numeracaoobn = ($this->e138_numeracaoobn == ""?@$GLOBALS["HTTP_POST_VARS"]["e138_numeracaoobn"]:$this->e138_numeracaoobn);
-       $this->e138_empagegera = ($this->e138_empagegera == ""?@$GLOBALS["HTTP_POST_VARS"]["e138_empagegera"]:$this->e138_empagegera);
+       $this->e138_sequencial = ($this->e138_sequencial === 0 || $this->e138_sequencial === 0.0 || $this->e138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e138_sequencial"]:$this->e138_sequencial);
+       $this->e138_numeracaoobn = ($this->e138_numeracaoobn === 0 || $this->e138_numeracaoobn === 0.0 || $this->e138_numeracaoobn == ""?@$GLOBALS["HTTP_POST_VARS"]["e138_numeracaoobn"]:$this->e138_numeracaoobn);
+       $this->e138_empagegera = ($this->e138_empagegera === 0 || $this->e138_empagegera === 0.0 || $this->e138_empagegera == ""?@$GLOBALS["HTTP_POST_VARS"]["e138_empagegera"]:$this->e138_empagegera);
      }else{
-       $this->e138_sequencial = ($this->e138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e138_sequencial"]:$this->e138_sequencial);
+       $this->e138_sequencial = ($this->e138_sequencial === 0 || $this->e138_sequencial === 0.0 || $this->e138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e138_sequencial"]:$this->e138_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_empagegeraobn {
          $this->e138_sequencial = $e138_sequencial; 
        }
      }
-     if(($this->e138_sequencial == null) || ($this->e138_sequencial == "") ){ 
+     if(($this->e138_sequencial == null) || ($this->e138_sequencial === 0 || $this->e138_sequencial === 0.0 || $this->e138_sequencial == "") ){ 
        $this->erro_sql = " Campo e138_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_empagegeraobn {
    function sql_query ( $e138_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_empagegeraobn {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_empagegeraobn {
    function sql_query_file ( $e138_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_empagegeraobn {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

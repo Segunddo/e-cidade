@@ -71,7 +71,8 @@ db_app::import("exceptions.*");
 $clautenticar = new cl_autenticar();
 $clcfautent = new cl_cfautent();
 
-parse_str($HTTP_SERVER_VARS ["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS ["QUERY_STRING"], $__qs);
+extract($__qs);
 $oGet  = db_utils::postMemory($HTTP_GET_VARS);
 $oPost = db_utils::postMemory($HTTP_POST_VARS);
 
@@ -318,8 +319,8 @@ if (!isset($oPost->reautentica) && $clautenticar->erro == false) {
 
   if (isset($oPost->codautent)) {
 
-    $aut1 = split(",", $oDadosAutenticadora->k11_aut1);
-    $aut2 = split(",", $oDadosAutenticadora->k11_aut2);
+    $aut1 = preg_split("#,#m", $oDadosAutenticadora->k11_aut1);
+    $aut2 = preg_split("#,#m", $oDadosAutenticadora->k11_aut2);
 
     $str_aut1 = "";
     if (trim($oDadosAutenticadora->k11_aut1) != "") {

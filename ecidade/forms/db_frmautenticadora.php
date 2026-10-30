@@ -39,7 +39,7 @@ if (@$k11_local == "") {
   $result = db_query($sql) or die($sql);
   if (pg_numrows($result) > 0) {
     db_fieldsmemory($result,0);
-    $palavras = split(" ",$nomeinst);
+    $palavras = preg_split("# #m",$nomeinst);
     $conta=0;
     for ($i=0; $i < sizeof($palavras); $i++) {
 //    echo $i . "-" . $palavras[$i] . "- conta: $conta<br>";

@@ -69,7 +69,7 @@ if($cgc!="87366159000102"){
   group by k12_conta,o08_reduz,k12_receit
   ");
 
-  $numrows = pg_numrows($result);
+  $numrows = ($result ? pg_numrows($result) : null);
   set_time_limit(0);
   $clabre_arquivo =  new cl_abre_arquivo("/prg/opt/zim/".str_replace("-","",$datai));
 

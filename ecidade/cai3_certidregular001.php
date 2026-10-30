@@ -49,7 +49,8 @@ require_once(modification("std/DBLargeObject.php"));
 require_once("std/db_stdClass.php");
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 try {
     // Objeto com informações do arquivo/caminho
@@ -134,7 +135,7 @@ function buscoDadosArquivoPdf($sTipoCertidao, $titulo, $origem, $codproc, $tipo)
     );
 }
 
-function buscaDadosCabecalhoPdf($titulo, $origem, $tipo, $textarea = "", $tipocertidao, $codproc)
+function buscaDadosCabecalhoPdf($titulo, $origem, $tipo, $textarea = "", $tipocertidao = null, $codproc = null)
 {
     $aQuery          = array();
     $sCampo          = getCamposTemplate($tipo, $titulo)->diasCertidao;
@@ -338,7 +339,7 @@ function salvaCertidao($oParamsArq)
     //  PROCESSO
     if ($oParamsArq->codproc != "") {
         if (strpos($oParamsArq->codproc, "/") > 0) {
-            $codproc = split("\/", $oParamsArq->codproc);
+            $codproc = preg_split("#\\/#m", $oParamsArq->codproc);
             $exercicio = $codproc[1];
             $codproc = $codproc[0];
         } else {

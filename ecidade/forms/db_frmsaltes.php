@@ -91,7 +91,7 @@ $oRotulo->label("coddepto");
                   <td nowrap title="<?=@$Tk13_limite?>"> <?=@$Lk13_limite?> </td>
                   <td>
                     <?
-                    @list($k13_limite_dia,$k13_limite_mes,$k13_limite_ano)= split("/",$k13_limite);
+                    @list($k13_limite_dia,$k13_limite_mes,$k13_limite_ano)= preg_split("#\\/#m",$k13_limite);
                     db_inputdata('k13_limite',@$k13_limite_dia,@$k13_limite_mes,@$k13_limite_ano,true,'text',$db_opcao,"");
                     ?>
                   </td>
@@ -104,7 +104,7 @@ $oRotulo->label("coddepto");
                 <tr>
                   <td nowrap title="<?=@$Tk13_dtimplantacao?>"> <?=@$Lk13_dtimplantacao?> </td>
                   <td><?
-                    @list($k13_dtimplantacao_dia,$k13_dtimplantacao_mes,$k13_dtimplantacao_ano)= split("/",$k13_dtimplantacao);
+                    @list($k13_dtimplantacao_dia,$k13_dtimplantacao_mes,$k13_dtimplantacao_ano)= preg_split("#\\/#m",$k13_dtimplantacao);
                     db_inputdata('k13_dtimplantacao',@$k13_dtimplantacao_dia,@$k13_dtimplantacao_mes,@$k13_dtimplantacao_ano,true,'text',$db_opcao,"");
                     ?>
                   </td>
@@ -127,7 +127,7 @@ $oRotulo->label("coddepto");
                 <tr>
                   <td nowrap title="<?=@$Tk13_datvlr?>"> <?=@$Lk13_datvlr?> </td>
                   <td><?
-                    @list($k13_datvlr_dia,$k13_datvlr_mes,$k13_datvlr_ano)= split("/",$k13_datvlr);
+                    @list($k13_datvlr_dia,$k13_datvlr_mes,$k13_datvlr_ano)= preg_split("#\\/#m",$k13_datvlr);
                     db_inputdata('k13_datvlr',@$k13_datvlr_dia,@$k13_datvlr_mes,@$k13_datvlr_ano,true,'text', 3,"");
                     ?>
                   </td>

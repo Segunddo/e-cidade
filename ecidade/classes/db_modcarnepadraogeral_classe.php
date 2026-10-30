@@ -64,7 +64,7 @@ class cl_modcarnepadraogeral {
                  k48_datafim = date = Data final 
                  ";
    //funcao construtor da classe 
-   function cl_modcarnepadraogeral() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("modcarnepadraogeral"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,10 +81,10 @@ class cl_modcarnepadraogeral {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k48_sequencial = ($this->k48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_sequencial"]:$this->k48_sequencial);
-       $this->k48_instit = ($this->k48_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_instit"]:$this->k48_instit);
-       $this->k48_cadmodcarne = ($this->k48_cadmodcarne == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_cadmodcarne"]:$this->k48_cadmodcarne);
-       $this->k48_cadtipomod = ($this->k48_cadtipomod == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_cadtipomod"]:$this->k48_cadtipomod);
+       $this->k48_sequencial = ($this->k48_sequencial === 0 || $this->k48_sequencial === 0.0 || $this->k48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_sequencial"]:$this->k48_sequencial);
+       $this->k48_instit = ($this->k48_instit === 0 || $this->k48_instit === 0.0 || $this->k48_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_instit"]:$this->k48_instit);
+       $this->k48_cadmodcarne = ($this->k48_cadmodcarne === 0 || $this->k48_cadmodcarne === 0.0 || $this->k48_cadmodcarne == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_cadmodcarne"]:$this->k48_cadmodcarne);
+       $this->k48_cadtipomod = ($this->k48_cadtipomod === 0 || $this->k48_cadtipomod === 0.0 || $this->k48_cadtipomod == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_cadtipomod"]:$this->k48_cadtipomod);
        if($this->k48_dataini == ""){
          $this->k48_dataini_dia = ($this->k48_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_dataini_dia"]:$this->k48_dataini_dia);
          $this->k48_dataini_mes = ($this->k48_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_dataini_mes"]:$this->k48_dataini_mes);
@@ -102,7 +102,7 @@ class cl_modcarnepadraogeral {
          }
        }
      }else{
-       $this->k48_sequencial = ($this->k48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_sequencial"]:$this->k48_sequencial);
+       $this->k48_sequencial = ($this->k48_sequencial === 0 || $this->k48_sequencial === 0.0 || $this->k48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_sequencial"]:$this->k48_sequencial);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_modcarnepadraogeral {
          $this->k48_sequencial = $k48_sequencial; 
        }
      }
-     if(($this->k48_sequencial == null) || ($this->k48_sequencial == "") ){ 
+     if(($this->k48_sequencial == null) || ($this->k48_sequencial === 0 || $this->k48_sequencial === 0.0 || $this->k48_sequencial == "") ){ 
        $this->erro_sql = " Campo k48_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -498,7 +498,7 @@ class cl_modcarnepadraogeral {
    function sql_query ( $k48_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_modcarnepadraogeral {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -536,7 +536,7 @@ class cl_modcarnepadraogeral {
    function sql_query_file ( $k48_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -557,7 +557,7 @@ class cl_modcarnepadraogeral {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

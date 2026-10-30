@@ -39,7 +39,8 @@ include(modification("classes/db_arrecad_classe.php"));
 require(modification("classes/db_cancdebitosconcarpeculiar_classe.php"));
 require_once(modification("classes/db_numpref_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $oPost = db_utils::postMemory($_POST);
@@ -80,7 +81,7 @@ if ((isset ($ver_matric) or isset ($ver_inscr) or isset ($ver_numcgm)) && !isset
       if (db_indexOf(key($vt), "CHECK") > 0) {
 
         $numpres = $vt[key($vt)];
-        $mat = split("N", $numpres);
+        $mat = preg_split("#N#m", $numpres);
         if (isset($oPost->marcarvencidas) && isset($oPost->marcartodas)) {
 
         	if ($oPost->marcarvencidas == 'true' && $oPost->marcartodas == 'false') {
@@ -91,9 +92,9 @@ if ((isset ($ver_matric) or isset ($ver_inscr) or isset ($ver_numcgm)) && !isset
 			          continue;
 			        }
 
-	            $numpre = split("P", $mat[$iInd]);
-	            $numpar = split("P", strstr($mat[$iInd], "P"));
-	            $numpar = split("R",$numpar[1]);
+	            $numpre = preg_split("#P#m", $mat[$iInd]);
+	            $numpar = preg_split("#P#m", strstr($mat[$iInd], "P"));
+	            $numpar = preg_split("#R#m",$numpar[1]);
 	            $receit = @$numpar[1];
 	            $numpar = $numpar[0];
 	            $numpre = $numpre[0];
@@ -121,9 +122,9 @@ if ((isset ($ver_matric) or isset ($ver_inscr) or isset ($ver_numcgm)) && !isset
 
 	            if ($mat[$j] == "") continue;
 
-	            $numpre = split("P", $mat[$j]);
-	            $numpar = split("P", strstr($mat[$j], "P"));
-	            $numpar = split("R",$numpar[1]);
+	            $numpre = preg_split("#P#m", $mat[$j]);
+	            $numpar = preg_split("#P#m", strstr($mat[$j], "P"));
+	            $numpar = preg_split("#R#m",$numpar[1]);
 	            $receit = @$numpar[1];
 	            $numpar = $numpar[0];
 	            $numpre = $numpre[0];
@@ -141,9 +142,9 @@ if ((isset ($ver_matric) or isset ($ver_inscr) or isset ($ver_numcgm)) && !isset
 
 	          if ($mat[$j] == "") continue;
 
-	          $numpre = split("P", $mat[$j]);
-	          $numpar = split("P", strstr($mat[$j], "P"));
-	          $numpar = split("R",$numpar[1]);
+	          $numpre = preg_split("#P#m", $mat[$j]);
+	          $numpar = preg_split("#P#m", strstr($mat[$j], "P"));
+	          $numpar = preg_split("#R#m",$numpar[1]);
 	          $receit = @$numpar[1];
 	          $numpar = $numpar[0];
 	          $numpre = $numpre[0];
@@ -202,16 +203,16 @@ if ((isset ($ver_matric) or isset ($ver_inscr) or isset ($ver_numcgm)) && !isset
 
           if ($oPost->marcarvencidas == 'true' && $oPost->marcartodas == 'false') {
 
-          	$mat = split("N", $v50_inicial);
+          	$mat = preg_split("#N#m", $v50_inicial);
             for ($iInd = 0; $iInd < count($mat); $iInd++) {
 
               if ($mat[$iInd] == "") {
                 continue;
               }
 
-              $numpre = split("P", $mat[$iInd]);
-              $numpar = split("P", strstr($mat[$iInd], "P"));
-              $numpar = split("R",$numpar[1]);
+              $numpre = preg_split("#P#m", $mat[$iInd]);
+              $numpar = preg_split("#P#m", strstr($mat[$iInd], "P"));
+              $numpar = preg_split("#R#m",$numpar[1]);
               $receit = @$numpar[1];
               $numpar = $numpar[0];
               $numpre = $numpre[0];
@@ -342,9 +343,9 @@ if (isset ($envia) && (@$k20_codigo == 0 || @$k20_codigo == "")) {
   }
 
   if ($sqlerro == false) {
-    $mat = split(",", $numpre);
-    $mat1 = split(",", $numpar);
-    $mat2 = split(",", $receit);
+    $mat = preg_split("#,#m", $numpre);
+    $mat1 = preg_split("#,#m", $numpar);
+    $mat2 = preg_split("#,#m", $receit);
     for ($i = 0; $i < count($mat); $i ++) {
       $numpre = $mat[$i];
       $numpar = $mat1[$i];
@@ -503,9 +504,9 @@ if (isset ($envia) && (@$k20_codigo == 0 || @$k20_codigo == "")) {
     }
   }
 
-  $mat = split(",", $numpre);
-  $mat1 = split(",", $numpar);
-  $mat2 = split(",", $receit);
+  $mat = preg_split("#,#m", $numpre);
+  $mat1 = preg_split("#,#m", $numpar);
+  $mat2 = preg_split("#,#m", $receit);
 
   for ($i = 0; $i < count($mat); $i ++) {
     $numpre = $mat[$i];

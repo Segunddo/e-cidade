@@ -52,7 +52,7 @@ class cl_debcontaarquivoregret {
                  d76_debcontaarqreg = int4 = Codigo sequencial 
                  ";
    //funcao construtor da classe 
-   function cl_debcontaarquivoregret() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("debcontaarquivoregret"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_debcontaarquivoregret {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d76_sequencial = ($this->d76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d76_sequencial"]:$this->d76_sequencial);
-       $this->d76_debcontatiporet = ($this->d76_debcontatiporet == ""?@$GLOBALS["HTTP_POST_VARS"]["d76_debcontatiporet"]:$this->d76_debcontatiporet);
-       $this->d76_debcontaarqreg = ($this->d76_debcontaarqreg == ""?@$GLOBALS["HTTP_POST_VARS"]["d76_debcontaarqreg"]:$this->d76_debcontaarqreg);
+       $this->d76_sequencial = ($this->d76_sequencial === 0 || $this->d76_sequencial === 0.0 || $this->d76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d76_sequencial"]:$this->d76_sequencial);
+       $this->d76_debcontatiporet = ($this->d76_debcontatiporet === 0 || $this->d76_debcontatiporet === 0.0 || $this->d76_debcontatiporet == ""?@$GLOBALS["HTTP_POST_VARS"]["d76_debcontatiporet"]:$this->d76_debcontatiporet);
+       $this->d76_debcontaarqreg = ($this->d76_debcontaarqreg === 0 || $this->d76_debcontaarqreg === 0.0 || $this->d76_debcontaarqreg == ""?@$GLOBALS["HTTP_POST_VARS"]["d76_debcontaarqreg"]:$this->d76_debcontaarqreg);
      }else{
-       $this->d76_sequencial = ($this->d76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d76_sequencial"]:$this->d76_sequencial);
+       $this->d76_sequencial = ($this->d76_sequencial === 0 || $this->d76_sequencial === 0.0 || $this->d76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d76_sequencial"]:$this->d76_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_debcontaarquivoregret {
          $this->d76_sequencial = $d76_sequencial; 
        }
      }
-     if(($this->d76_sequencial == null) || ($this->d76_sequencial == "") ){ 
+     if(($this->d76_sequencial == null) || ($this->d76_sequencial === 0 || $this->d76_sequencial === 0.0 || $this->d76_sequencial == "") ){ 
        $this->erro_sql = " Campo d76_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_debcontaarquivoregret {
    function sql_query ( $d76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_debcontaarquivoregret {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_debcontaarquivoregret {
    function sql_query_file ( $d76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_debcontaarquivoregret {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

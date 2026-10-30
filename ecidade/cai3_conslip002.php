@@ -48,7 +48,8 @@ $clrotulo->label('k17_autent');
 $clrotulo->label('c60_descr');
 $clrotulo->label('z01_nome');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_GET_VARS,2);exit;
 
 $where = "";

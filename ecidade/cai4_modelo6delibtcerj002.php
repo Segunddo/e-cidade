@@ -24,7 +24,7 @@ $nChequesNApresentados = 0;
 //Tipo 4
 $nCreditoAnexoIII      = 0;
 
-$iUltimoDiaMes         = cal_days_in_month(CAL_GREGORIAN, $oGet->iMes, $oGet->iAno);
+try { $iUltimoDiaMes         = cal_days_in_month(CAL_GREGORIAN, $oGet->iMes, $oGet->iAno); } catch (Throwable $e) { $iUltimoDiaMes = false; } // PHP 8: o 5.6 devolvia false
 $sDataRelatorio        = "{$iUltimoDiaMes}/{$oGet->iMes}/{$oGet->iAno}";
 
 if ((int)$oGet->iAno < (int)$iAnoSessao) {
@@ -462,7 +462,7 @@ function dadosBasicos($oGet) {
 
   $rsDadosBasico = db_query($sSqlBasico);
 
-  if (pg_numrows($rsDadosBasico) == 0) {
+  if (($rsDadosBasico ? pg_numrows($rsDadosBasico) : null) == 0) {
     $sSqlBasico  = " select k68_sequencial  as conciliacao,                                 ";
     $sSqlBasico .= "        db83_descricao  as descricao_conta,                             ";
     $sSqlBasico .= "        db89_db_bancos  as codigo_banco,                                ";

@@ -40,7 +40,8 @@ $clrotulo->label("k11_data");
 $db_opcao = 1;
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 if(isset($liberar) || isset($deslibera)){
   db_inicio_transacao();

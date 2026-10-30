@@ -91,7 +91,7 @@ where dtarquivo between '$datai' and '$dataf'
 order by $data a.k15_codbco,k15_codage,codret";
 //die($sql);
 $result = db_query($sql);
-$num = pg_numrows($result);
+$num = ($result ? pg_numrows($result) : null);
 if ( $num == 0 )
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existe movimento para o período '.db_formatar($datai,'d').' a '.db_formatar($dataf,'d'));
 

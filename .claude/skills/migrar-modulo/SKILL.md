@@ -412,6 +412,11 @@ grep -a 'E_ERROR\|Uncaught' extension/log/error.log | sed 's/\[20[^]]*\] //' | s
 das ~140 chamadas `pg_*` foi descartada de propósito. Cada correção nasce de um defeito
 observado.
 
+Dois ciclos automatizam isso, linha a linha: `SID=<sid> python3 scratchpad/guarda_ciclo.py <telas>`
+(resultado **falso**) e `SID=<sid> python3 scratchpad/campo_ciclo.py <telas>` (resultado válido **sem a
+coluna** pedida, `ValueError` no 8.5, e `pg_free_result(false)`). Alterne os dois até a tela parar
+de fatalar — uma guarda expõe a próxima (`cai3_gerfinanc004` precisou de cinco rodadas).
+
 **Ao corrigir arquivo do núcleo, replicar em `extension/modification`** — é a cópia que de
 fato executa para o usuário logado:
 

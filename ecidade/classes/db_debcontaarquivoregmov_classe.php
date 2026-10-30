@@ -59,7 +59,7 @@ class cl_debcontaarquivoregmov {
                  d75_numpar = int4 = Parcela 
                  ";
    //funcao construtor da classe 
-   function cl_debcontaarquivoregmov() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("debcontaarquivoregmov"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,8 +76,8 @@ class cl_debcontaarquivoregmov {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d75_sequencial = ($this->d75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_sequencial"]:$this->d75_sequencial);
-       $this->d75_codigo = ($this->d75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_codigo"]:$this->d75_codigo);
+       $this->d75_sequencial = ($this->d75_sequencial === 0 || $this->d75_sequencial === 0.0 || $this->d75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_sequencial"]:$this->d75_sequencial);
+       $this->d75_codigo = ($this->d75_codigo === 0 || $this->d75_codigo === 0.0 || $this->d75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_codigo"]:$this->d75_codigo);
        if($this->d75_venc == ""){
          $this->d75_venc_dia = ($this->d75_venc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_venc_dia"]:$this->d75_venc_dia);
          $this->d75_venc_mes = ($this->d75_venc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_venc_mes"]:$this->d75_venc_mes);
@@ -86,10 +86,10 @@ class cl_debcontaarquivoregmov {
             $this->d75_venc = $this->d75_venc_ano."-".$this->d75_venc_mes."-".$this->d75_venc_dia;
          }
        }
-       $this->d75_valor = ($this->d75_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_valor"]:$this->d75_valor);
-       $this->d75_numpar = ($this->d75_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_numpar"]:$this->d75_numpar);
+       $this->d75_valor = ($this->d75_valor === 0 || $this->d75_valor === 0.0 || $this->d75_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_valor"]:$this->d75_valor);
+       $this->d75_numpar = ($this->d75_numpar === 0 || $this->d75_numpar === 0.0 || $this->d75_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_numpar"]:$this->d75_numpar);
      }else{
-       $this->d75_sequencial = ($this->d75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_sequencial"]:$this->d75_sequencial);
+       $this->d75_sequencial = ($this->d75_sequencial === 0 || $this->d75_sequencial === 0.0 || $this->d75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_sequencial"]:$this->d75_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_debcontaarquivoregmov {
          $this->d75_sequencial = $d75_sequencial; 
        }
      }
-     if(($this->d75_sequencial == null) || ($this->d75_sequencial == "") ){ 
+     if(($this->d75_sequencial == null) || ($this->d75_sequencial === 0 || $this->d75_sequencial === 0.0 || $this->d75_sequencial == "") ){ 
        $this->erro_sql = " Campo d75_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -445,7 +445,7 @@ class cl_debcontaarquivoregmov {
    function sql_query ( $d75_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_debcontaarquivoregmov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_debcontaarquivoregmov {
    function sql_query_file ( $d75_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_debcontaarquivoregmov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

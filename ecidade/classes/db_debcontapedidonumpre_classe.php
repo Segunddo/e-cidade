@@ -50,7 +50,7 @@ class cl_debcontapedidonumpre {
                  d71_numpre = int4 = Numpre 
                  ";
    //funcao construtor da classe 
-   function cl_debcontapedidonumpre() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("debcontapedidonumpre"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_debcontapedidonumpre {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d71_codigo = ($this->d71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_codigo"]:$this->d71_codigo);
-       $this->d71_numpre = ($this->d71_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_numpre"]:$this->d71_numpre);
+       $this->d71_codigo = ($this->d71_codigo === 0 || $this->d71_codigo === 0.0 || $this->d71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_codigo"]:$this->d71_codigo);
+       $this->d71_numpre = ($this->d71_numpre === 0 || $this->d71_numpre === 0.0 || $this->d71_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_numpre"]:$this->d71_numpre);
      }else{
-       $this->d71_codigo = ($this->d71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_codigo"]:$this->d71_codigo);
+       $this->d71_codigo = ($this->d71_codigo === 0 || $this->d71_codigo === 0.0 || $this->d71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_codigo"]:$this->d71_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_debcontapedidonumpre {
        return false;
      }
        $this->d71_codigo = $d71_codigo; 
-     if(($this->d71_codigo == null) || ($this->d71_codigo == "") ){ 
+     if(($this->d71_codigo == null) || ($this->d71_codigo === 0 || $this->d71_codigo === 0.0 || $this->d71_codigo == "") ){ 
        $this->erro_sql = " Campo d71_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_debcontapedidonumpre {
    function sql_query ( $d71_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_debcontapedidonumpre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_debcontapedidonumpre {
    function sql_query_file ( $d71_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_debcontapedidonumpre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

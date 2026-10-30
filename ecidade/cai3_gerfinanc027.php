@@ -30,13 +30,14 @@ require(modification("libs/db_sql.php"));
 require(modification("libs/db_utils.php"));
 
 db_postmemory($HTTP_SERVER_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
-$DB_DATACALC = mktime(0,0,0,substr($db_datausu,5,2),substr($db_datausu,8,2),substr($db_datausu,0,4));
+$DB_DATACALC = mktime(0,0,0,(int)substr($db_datausu,5,2),(int)substr($db_datausu,8,2),(int)substr($db_datausu,0,4)); // PHP 8: o 5.6 recebia false (0) do substr vazio
 
 $sTiposDebitos            = $tipos;
-$aTipoDebitosSelecionados = split(",",$tipos);
-$aTipoDebitos             = split(",",$tipostodos);
+$aTipoDebitosSelecionados = preg_split("#,#m",$tipos);
+$aTipoDebitos             = preg_split("#,#m",$tipostodos);
 
 $sInfo  = "";
 $sInfo1 = "";
@@ -118,13 +119,13 @@ if (!empty($numcgm)) {
   
   if ($oDaoIptuBase->numrows > 0) {
     $oDadosProprietario = db_utils::fieldsMemory($rsDadosProprietario,0);
-    
+
     $sOrigemConsulta .= " - SQL: {$oDadosProprietario->j34_setor}/{$oDadosProprietario->j34_quadra}/{$oDadosProprietario->j34_lote} PQL: {$oDadosProprietario->pql_localizacao}";
     $sOrigemConsulta .= " - Logradouro: {$oDadosProprietario->tipopri} {$oDadosProprietario->nomepri}, {$oDadosProprietario->j39_numero} {$oDadosProprietario->j39_compl}";
-    
+
    //$iNumcgm       = $oDadosProprietario->z01_numcgm;
      $iNumcgm       = $oDadosProprietario->z01_cgmpri;
-    
+
    // echo "[ 1 ] " . $iNumcgm ."<br>";
     //die();
   }
@@ -145,10 +146,10 @@ if (!empty($numcgm)) {
   }
   
 } else if (!empty($numpre)) {
-  
+
 	$rsOutrosDebitos = debitos_numpre($numpre,0,0,$DB_DATACALC,$DB_anousu,0,'','k00_tipo,k00_numpre,k00_numpar,k00_receit');  
 	$rsDebitos       = debitos_numpre($numpre,0,0,$DB_DATACALC,$DB_anousu,0,'','k00_tipo,k00_numpre,k00_numpar,k00_receit', $sWhere);
-	
+
 	$sOrigemConsulta = "Código Arrecadação: ".$numpre;
 	$iNumcgm         = db_utils::fieldsMemory($rsDebitos,0)->k00_numcgm;
 	  //echo "[ 3 ] " . $iNumcgm ."<br>";
@@ -188,7 +189,7 @@ $oDadosTotal->total_geral     = 0;
 $oDadosTotal->custas_geral    = 0;    
 $lOutrosDebitos       = false;
 $lOutrosTipos         = false;
-if ( pg_num_rows($rsOutrosDebitos) > pg_numrows($rsDebitos)) {
+if ( ($rsOutrosDebitos ? pg_num_rows($rsOutrosDebitos) : null) > ($rsDebitos ? pg_numrows($rsDebitos) : null)) {
   $lOutrosDebitos = true;
 }
 
@@ -266,7 +267,7 @@ foreach ($oDadosDebitos as $aDados) {
     if ($oDaoDivida->numrows > 0 ) {
       $sExercicios = db_utils::fieldsMemory($rsDadosDivida,0)->exercicios;
       
-      $aDadosProcessado->divida_exercicios   = ereg_replace("[{}]", "",$sExercicios);
+      $aDadosProcessado->divida_exercicios   = preg_replace("#[\\{\\}]#m", "",$sExercicios);
       
       $aDadosProcessado->complemento_numpre  = " - Exercício: ".$aDadosProcessado->divida_exercicios;
         
@@ -312,7 +313,7 @@ foreach ($oDadosDebitos as $aDados) {
 
       $oDadosTermo = new stdClass();
       $oDadosTermo->parcel       = $aTermo->v07_parcel;
-      $oDadosTermo->parcel_exerc = ereg_replace("[{}]","",$aTermo->exercicios);
+      $oDadosTermo->parcel_exerc = preg_replace("#[\\{\\}]#m","",$aTermo->exercicios);
        
       $aDadosProcessado->termo               = $oDadosTermo;
       $aDadosProcessado->complemento_numpre  = " - Parcelamento : {$aTermo->v07_parcel} - Exercício(s): {$oDadosTermo->parcel_exerc}";
@@ -382,22 +383,22 @@ foreach ($oDadosDebitos as $aDados) {
              
              //Custas emitidas e não pagas
              if ($aDadosPartilha->v76_tipolancamento == 1 && $aDadosPartilha->v76_dtpagamento == "") {
-               
+
               $aDadosProcessado->custas_situacao = "Emitidas";
               $aDadosProcessado->custas_total    = $aDadosPartilha->total;  
-             
+
              //Custas emitidas e pagas
              } else if ($aDadosPartilha->v76_tipolancamento == 1 && $aDadosPartilha->v76_dtpagamento != "") {
-    
+
               $aDadosProcessado->custas_situacao = "Pagas";                
               $aDadosProcessado->custas_total    = '0';
-             
+
              //Custas lancadas manualmente           
              } else if ($aDadosPartilha->v76_tipolancamento == 2) {
-               
+
               $aDadosProcessado->custas_situacao = "Pagas";              
               $aDadosProcessado->custas_total    = '0';
-             
+
              //Custas isentas           
              } else if ($aDadosPartilha->v76_tipolancamento == 3) {
     
@@ -722,7 +723,7 @@ $sSqlSuspensao .= " 			      arresusp.k00_numpre,									                      
 $sSqlSuspensao .= " 			      arresusp.k00_numpar,									                            ";
 $sSqlSuspensao .= " 			      arresusp.k00_receit 									                            ";
 $rsSuspensao      = db_query($sSqlSuspensao);
-$iLinhasSuspensao = pg_num_rows($rsSuspensao);
+$iLinhasSuspensao = ($rsSuspensao ? pg_num_rows($rsSuspensao) : null);
 $aSuspensao		 = array();
 
 if ( $iLinhasSuspensao > 0 ) {

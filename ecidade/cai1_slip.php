@@ -30,7 +30,8 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $db_erro = "";
 db_postmemory($HTTP_POST_VARS);
 $instit = db_getsession("DB_instit");
@@ -80,7 +81,7 @@ $result_conta1 = db_query("select 0 as c01_reduz,'Nenhuma...' as c01_descr,'' as
  	                      from plano 
 						  where c01_reduz <> 0 and c01_anousu = ".db_getsession('DB_anousu').
 						  "' order by c01_estrut");
-if(pg_numrows($result_conta1) == 0){
+if(($result_conta1 ? pg_numrows($result_conta1) : null) == 0){
   echo "<script>parent.alert('Sem Contas Cadastradas no Plano de Contas.');</script>";
   exit;
 }

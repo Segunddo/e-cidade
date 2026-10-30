@@ -72,7 +72,7 @@ class cl_tabplansaldorecurso {
                  k111_debitoatualizado = float8 = Débito Atualizado 
                  ";
    //funcao construtor da classe 
-   function cl_tabplansaldorecurso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tabplansaldorecurso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,9 +89,9 @@ class cl_tabplansaldorecurso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k111_sequencial = ($this->k111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_sequencial"]:$this->k111_sequencial);
-       $this->k111_tabplan = ($this->k111_tabplan == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_tabplan"]:$this->k111_tabplan);
-       $this->k111_recurso = ($this->k111_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_recurso"]:$this->k111_recurso);
+       $this->k111_sequencial = ($this->k111_sequencial === 0 || $this->k111_sequencial === 0.0 || $this->k111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_sequencial"]:$this->k111_sequencial);
+       $this->k111_tabplan = ($this->k111_tabplan === 0 || $this->k111_tabplan === 0.0 || $this->k111_tabplan == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_tabplan"]:$this->k111_tabplan);
+       $this->k111_recurso = ($this->k111_recurso === 0 || $this->k111_recurso === 0.0 || $this->k111_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_recurso"]:$this->k111_recurso);
        if($this->k111_dataimplantacao == ""){
          $this->k111_dataimplantacao_dia = ($this->k111_dataimplantacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_dataimplantacao_dia"]:$this->k111_dataimplantacao_dia);
          $this->k111_dataimplantacao_mes = ($this->k111_dataimplantacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_dataimplantacao_mes"]:$this->k111_dataimplantacao_mes);
@@ -100,9 +100,9 @@ class cl_tabplansaldorecurso {
             $this->k111_dataimplantacao = $this->k111_dataimplantacao_ano."-".$this->k111_dataimplantacao_mes."-".$this->k111_dataimplantacao_dia;
          }
        }
-       $this->k111_creditoinicial = ($this->k111_creditoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_creditoinicial"]:$this->k111_creditoinicial);
-       $this->k111_debitoinicial = ($this->k111_debitoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_debitoinicial"]:$this->k111_debitoinicial);
-       $this->k111_anousu = ($this->k111_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_anousu"]:$this->k111_anousu);
+       $this->k111_creditoinicial = ($this->k111_creditoinicial === 0 || $this->k111_creditoinicial === 0.0 || $this->k111_creditoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_creditoinicial"]:$this->k111_creditoinicial);
+       $this->k111_debitoinicial = ($this->k111_debitoinicial === 0 || $this->k111_debitoinicial === 0.0 || $this->k111_debitoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_debitoinicial"]:$this->k111_debitoinicial);
+       $this->k111_anousu = ($this->k111_anousu === 0 || $this->k111_anousu === 0.0 || $this->k111_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_anousu"]:$this->k111_anousu);
        if($this->k111_dataatualizacao == ""){
          $this->k111_dataatualizacao_dia = ($this->k111_dataatualizacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_dataatualizacao_dia"]:$this->k111_dataatualizacao_dia);
          $this->k111_dataatualizacao_mes = ($this->k111_dataatualizacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_dataatualizacao_mes"]:$this->k111_dataatualizacao_mes);
@@ -111,10 +111,10 @@ class cl_tabplansaldorecurso {
             $this->k111_dataatualizacao = $this->k111_dataatualizacao_ano."-".$this->k111_dataatualizacao_mes."-".$this->k111_dataatualizacao_dia;
          }
        }
-       $this->k111_creditoatualizado = ($this->k111_creditoatualizado == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_creditoatualizado"]:$this->k111_creditoatualizado);
-       $this->k111_debitoatualizado = ($this->k111_debitoatualizado == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_debitoatualizado"]:$this->k111_debitoatualizado);
+       $this->k111_creditoatualizado = ($this->k111_creditoatualizado === 0 || $this->k111_creditoatualizado === 0.0 || $this->k111_creditoatualizado == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_creditoatualizado"]:$this->k111_creditoatualizado);
+       $this->k111_debitoatualizado = ($this->k111_debitoatualizado === 0 || $this->k111_debitoatualizado === 0.0 || $this->k111_debitoatualizado == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_debitoatualizado"]:$this->k111_debitoatualizado);
      }else{
-       $this->k111_sequencial = ($this->k111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_sequencial"]:$this->k111_sequencial);
+       $this->k111_sequencial = ($this->k111_sequencial === 0 || $this->k111_sequencial === 0.0 || $this->k111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k111_sequencial"]:$this->k111_sequencial);
      }
    }
    // funcao para inclusao
@@ -225,7 +225,7 @@ class cl_tabplansaldorecurso {
          $this->k111_sequencial = $k111_sequencial; 
        }
      }
-     if(($this->k111_sequencial == null) || ($this->k111_sequencial == "") ){ 
+     if(($this->k111_sequencial == null) || ($this->k111_sequencial === 0 || $this->k111_sequencial === 0.0 || $this->k111_sequencial == "") ){ 
        $this->erro_sql = " Campo k111_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -625,7 +625,7 @@ class cl_tabplansaldorecurso {
    function sql_query ( $k111_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -649,7 +649,7 @@ class cl_tabplansaldorecurso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -662,7 +662,7 @@ class cl_tabplansaldorecurso {
    function sql_query_file ( $k111_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -683,7 +683,7 @@ class cl_tabplansaldorecurso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -373,7 +373,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 
 //RECEITAS RECEBIDAS NO CAIXA
-$numlin = pg_numrows($resultorcamentaria);
+$numlin = ($resultorcamentaria ? pg_numrows($resultorcamentaria) : null);
 $cai_rec_orc = 0;
 $cai_rec_ext = 0;
 for ($i = 0; $i < $numlin; $i ++) {
@@ -389,7 +389,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 }
 
 //RECEITAS EXTRAS RECEBIDAS NO CAIXA
-$numlin = pg_numrows($resultextraorcamentaria);
+$numlin = ($resultextraorcamentaria ? pg_numrows($resultextraorcamentaria) : null);
 for ($i = 0; $i < $numlin; $i ++) {
   db_fieldsmemory($resultextraorcamentaria, $i);
 	if ($sis_debito == 5) {
@@ -399,7 +399,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 
 //DESPESAS ORÇAMENTARIAS PAGAS NO CAIXA
 //db_criatabela($resultdespesaorca);
-$numlin = pg_numrows($resultdespesaorca);
+$numlin = ($resultdespesaorca ? pg_numrows($resultdespesaorca) : null);
 $cai_desp_orca = 0;
 $cai_ret_bco_orca = 0;
 $cai_dep_bco_orca = 0;
@@ -411,7 +411,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 }
 
 //DESPESAS EXTRA-ORÇAMENTARIAS PAGAS NO CAIXA
-$numlin = pg_numrows($resultdespesaextra);
+$numlin = ($resultdespesaextra ? pg_numrows($resultdespesaextra) : null);
 $cai_desp_ext = 0;
 $cai_ret_bco = 0;
 $cai_dep_bco = 0;
@@ -439,7 +439,7 @@ $caixa_saldo_anterior = 0;
 $caixa_debitado = 0;
 $caixa_creditado = 0;
 $caixa_saldo_atual = 0;
-for ($i = 0; $i < pg_numrows($resultcontasmovimento); $i ++) {
+for ($i = 0; $i < ($resultcontasmovimento ? pg_numrows($resultcontasmovimento) : null); $i ++) {
 	db_fieldsmemory($resultcontasmovimento, $i);
 	if ($c60_codsis == 5) {
 		$caixa_saldo_anterior += $anterior;
@@ -502,7 +502,7 @@ $caixa_saldo_anterior = 0;
 $caixa_debitado = 0;
 $caixa_creditado = 0;
 $caixa_saldo_atual = 0;
-for ($i = 0; $i < pg_numrows($resultcontasmovimento); $i ++) {
+for ($i = 0; $i < ($resultcontasmovimento ? pg_numrows($resultcontasmovimento) : null); $i ++) {
 	db_fieldsmemory($resultcontasmovimento, $i);
 	if ($c60_codsis == 5) {
 		$caixa_saldo_anterior += $anterior;
@@ -533,7 +533,7 @@ $saldoc_creditado = 0;
 $saldoc_atual = 0;
 $pdf->SetTextColor(0);
 $pdf->SetFont('Arial', '', 8);
-for ($i = 0; $i < pg_numrows($resultcontasmovimento); $i ++) {
+for ($i = 0; $i < ($resultcontasmovimento ? pg_numrows($resultcontasmovimento) : null); $i ++) {
 	db_fieldsmemory($resultcontasmovimento, $i);
 	if ($pdf->gety() > ($pdf->h - 30)) {
 		$pdf->addpage();
@@ -670,7 +670,7 @@ $saldo_creditado = 0;
 $saldo_atual = 0;
 $pdf->SetTextColor(0);
 $pdf->SetFont('Arial', '', 8);
-for ($i = 0; $i < pg_numrows($resultcontasmovimento); $i ++) {
+for ($i = 0; $i < ($resultcontasmovimento ? pg_numrows($resultcontasmovimento) : null); $i ++) {
 	db_fieldsmemory($resultcontasmovimento, $i);
 	if ($contassemmov == "f" and $debitado == 0 and $creditado == 0 and $anterior==0 and $atual ==0) {
 		continue;
@@ -872,7 +872,7 @@ $pdf->SetFont('Arial', '', 6);
 
 // TRANSFERENCIAS
 
-$numlin = pg_numrows($resultdespesaextra);
+$numlin = ($resultdespesaextra ? pg_numrows($resultdespesaextra) : null);
 $total_valor = 0;
 $total_estorno = 0;
 $total_banco = 0;
@@ -1097,7 +1097,7 @@ order by k02_tipo,k12_conta,c60_descr,k12_receit;
 
 $resultreceitas = db_query($sql);
 
-$numlin = pg_numrows($resultreceitas);
+$numlin = ($resultreceitas ? pg_numrows($resultreceitas) : null);
 $total_valor = 0;
 $total_estorno = 0;
 $quebra = 0;
@@ -1175,7 +1175,7 @@ $saldo_atual = 0;
 $pdf->SetTextColor(0);
 $pdf->SetFont('Arial', 'b', 6);
 
-$numlin = pg_numrows($resultreceitas);
+$numlin = ($resultreceitas ? pg_numrows($resultreceitas) : null);
 $total_valor = 0;
 $total_estorno = 0;
 $quebra = 0;
@@ -1220,7 +1220,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 }
 
 
-$numlin = pg_numrows($resultextraorcamentaria);
+$numlin = ($resultextraorcamentaria ? pg_numrows($resultextraorcamentaria) : null);
 $quebra = 0;
 for ($z = 0; $z < $numlin; $z ++) {
 	db_fieldsmemory($resultextraorcamentaria, $z);
@@ -1290,7 +1290,7 @@ $pdf->cell(20, $alt, 'TOTAL', 1, 0, 'C', 0);
 $pdf->cell(20, $alt, 'TOTAL CONTA', 1, 1, 'C', 0);
 $pdf->SetTextColor(0);
 $pdf->SetFont('Arial', '', 6);
-$numlin = pg_numrows($resultdespesaorca);
+$numlin = ($resultdespesaorca ? pg_numrows($resultdespesaorca) : null);
 $total_valor = 0;
 $total_estorno = 0;
 $total_banco = 0;
@@ -1364,7 +1364,7 @@ $pdf->SetFont('Arial', '', 6);
 //echo 'Despesa Extra-Orçamentaria';
 //db_criatabela($resultdespesaextra);
 
-$numlin = pg_numrows($resultdespesaextra);
+$numlin = ($resultdespesaextra ? pg_numrows($resultdespesaextra) : null);
 $total_valor = 0;
 $total_estorno = 0;
 $total_banco = 0;

@@ -69,11 +69,11 @@ if ($intNumrows > 0 ){
 
 /* for excluindo da conciliacor */
 
-  $arrayCorrente = split(',',$dados);
+  $arrayCorrente = preg_split('#,#m',$dados);
   db_inicio_transacao();
   foreach ($arrayCorrente as $i => $dadoscorrente){
 
-    list ($id, $data, $autent) = split ('_', $dadoscorrente);
+    list ($id, $data, $autent) = preg_split ('#_#m', $dadoscorrente);
 		$data = substr($data,6,4)."-".substr($data,3,2)."-".substr($data,0,2);
 
     $clconciliapendcorrente->excluir(null," k89_id = $id and k89_autent = $autent and k89_data = '".$data."'");

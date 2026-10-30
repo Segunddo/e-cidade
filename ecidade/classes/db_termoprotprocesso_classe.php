@@ -52,7 +52,7 @@ class cl_termoprotprocesso {
                  v27_protprocesso = int4 = Código do Processo 
                  ";
    //funcao construtor da classe
-   function cl_termoprotprocesso() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termoprotprocesso");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_termoprotprocesso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v27_sequencial = ($this->v27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v27_sequencial"]:$this->v27_sequencial);
-       $this->v27_termo = ($this->v27_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["v27_termo"]:$this->v27_termo);
-       $this->v27_protprocesso = ($this->v27_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["v27_protprocesso"]:$this->v27_protprocesso);
+       $this->v27_sequencial = ($this->v27_sequencial === 0 || $this->v27_sequencial === 0.0 || $this->v27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v27_sequencial"]:$this->v27_sequencial);
+       $this->v27_termo = ($this->v27_termo === 0 || $this->v27_termo === 0.0 || $this->v27_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["v27_termo"]:$this->v27_termo);
+       $this->v27_protprocesso = ($this->v27_protprocesso === 0 || $this->v27_protprocesso === 0.0 || $this->v27_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["v27_protprocesso"]:$this->v27_protprocesso);
      }else{
-       $this->v27_sequencial = ($this->v27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v27_sequencial"]:$this->v27_sequencial);
+       $this->v27_sequencial = ($this->v27_sequencial === 0 || $this->v27_sequencial === 0.0 || $this->v27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v27_sequencial"]:$this->v27_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_termoprotprocesso {
          $this->v27_sequencial = $v27_sequencial;
        }
      }
-     if(($this->v27_sequencial == null) || ($this->v27_sequencial == "") ){
+     if(($this->v27_sequencial == null) || ($this->v27_sequencial === 0 || $this->v27_sequencial === 0.0 || $this->v27_sequencial == "") ){
        $this->erro_sql = " Campo v27_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

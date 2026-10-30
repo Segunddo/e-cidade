@@ -158,7 +158,7 @@ $iInstituicao = db_getsession("DB_instit");
             //echo $sSqlCreditosDisponiveis; die;
 
             $rsCreditosDisponiveis    = db_query($sSqlCreditosDisponiveis);
-            $iLinhasCreditos          = pg_num_rows($rsCreditosDisponiveis);
+            $iLinhasCreditos          = ($rsCreditosDisponiveis ? pg_num_rows($rsCreditosDisponiveis) : null);
 
             if ($iLinhasCreditos > 0) {
             ?>

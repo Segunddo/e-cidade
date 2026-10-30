@@ -50,7 +50,7 @@ class cl_corchequecgm {
                  k12_numcgm = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_corchequecgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("corchequecgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_corchequecgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k12_codcorcheque = ($this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
-       $this->k12_numcgm = ($this->k12_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numcgm"]:$this->k12_numcgm);
+       $this->k12_codcorcheque = ($this->k12_codcorcheque === 0 || $this->k12_codcorcheque === 0.0 || $this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
+       $this->k12_numcgm = ($this->k12_numcgm === 0 || $this->k12_numcgm === 0.0 || $this->k12_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numcgm"]:$this->k12_numcgm);
      }else{
-       $this->k12_codcorcheque = ($this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
+       $this->k12_codcorcheque = ($this->k12_codcorcheque === 0 || $this->k12_codcorcheque === 0.0 || $this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_corchequecgm {
        return false;
      }
        $this->k12_codcorcheque = $k12_codcorcheque; 
-     if(($this->k12_codcorcheque == null) || ($this->k12_codcorcheque == "") ){ 
+     if(($this->k12_codcorcheque == null) || ($this->k12_codcorcheque === 0 || $this->k12_codcorcheque === 0.0 || $this->k12_codcorcheque == "") ){ 
        $this->erro_sql = " Campo k12_codcorcheque nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_corchequecgm {
    function sql_query ( $k12_codcorcheque=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_corchequecgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_corchequecgm {
    function sql_query_file ( $k12_codcorcheque=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_corchequecgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

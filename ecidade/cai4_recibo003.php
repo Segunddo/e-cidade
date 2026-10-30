@@ -99,7 +99,7 @@ $sSqlArretipo = "select to_char(k00_txban,'99.99') as tx_banc, k00_taxaespecific
 $sqlArretipo_tx_banc = db_query($sSqlArretipo);
 
 //cria codigo de barras e linha digitável
-$taxabancaria = pg_result($sqlArretipo_tx_banc, 0, "tx_banc");
+$taxabancaria = ($sqlArretipo_tx_banc ? pg_result($sqlArretipo_tx_banc, 0, "tx_banc") : null);
 $taxaExpediente = 0;
 
 if (!isset($lReemissao)) {
@@ -179,7 +179,7 @@ if (!isset($lReemissao)) {
             $xcodtaxa = $codtaxa[$i];
         }
 
-        if ($valor[$i] == 0) {
+        if ((is_string($valor[$i]) && !is_numeric($valor[$i]) ? (float)$valor[$i] == 0 : $valor[$i] == 0)) { // PHP 8: "" == 0 era true no 5.6
             db_redireciona("db_erros.php?fechar=true&db_erro=O Recibo Com a Receita " . $rece[$i] . " Com Valor Zerado.");
         }
 

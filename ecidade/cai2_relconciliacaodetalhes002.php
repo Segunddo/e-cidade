@@ -57,7 +57,7 @@ $sSqlCodConcilia .= "   and k68_data = '{$sDataIniConciliacao}' ";
 $sSqlCodConcilia .= " order by k68_data ";
 
 $rsCodigoConcilia = db_query($sSqlCodConcilia);
-if (pg_num_rows($rsCodigoConcilia) == 0){
+if (($rsCodigoConcilia ? pg_num_rows($rsCodigoConcilia) : null) == 0){
     db_redireciona("db_erros.php?fechar=true&db_erro=Conta ($iConta) sem conciliação.");
 }
 

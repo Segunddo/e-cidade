@@ -41,7 +41,7 @@ $k00_inscr  = null;
 
 $oArrebanco = new stdClass;
 
-$mat_numpre = split("#",base64_decode(@$HTTP_SERVER_VARS['QUERY_STRING']));
+$mat_numpre = preg_split("#\\##m",base64_decode(@$HTTP_SERVER_VARS['QUERY_STRING']));
 //var_dump(base64_decode(@$HTTP_SERVER_VARS['QUERY_STRING']));
 //echo $mat_numpre[0]."-";
 //echo $mat_numpre[1]."-";
@@ -65,7 +65,7 @@ $sql = "select k03_tipo
         where k00_tipo = $tipo and k00_instit = ".db_getsession('DB_instit') ;
 //die($sql);
 $result = db_query($sql);
-$numrows = pg_numrows($result);
+$numrows = ($result ? pg_numrows($result) : null);
 if($numrows > 0){
   db_fieldsmemory($result,0);
 }else{

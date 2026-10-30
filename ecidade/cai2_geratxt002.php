@@ -56,7 +56,8 @@ $clrotulo->label("e53_vlranu");
 $clrotulo->label("e53_vlrpag");
 $clrotulo->label("e96_codigo");
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $oGet = db_utils::postMemory($_GET);
 

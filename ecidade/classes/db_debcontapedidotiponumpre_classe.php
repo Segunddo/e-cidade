@@ -54,7 +54,7 @@ class cl_debcontapedidotiponumpre {
                  d67_numpar = int4 = Parcela 
                  ";
    //funcao construtor da classe 
-   function cl_debcontapedidotiponumpre() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("debcontapedidotiponumpre"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_debcontapedidotiponumpre {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d67_sequencial = ($this->d67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d67_sequencial"]:$this->d67_sequencial);
-       $this->d67_codigo = ($this->d67_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d67_codigo"]:$this->d67_codigo);
-       $this->d67_numpre = ($this->d67_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["d67_numpre"]:$this->d67_numpre);
-       $this->d67_numpar = ($this->d67_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["d67_numpar"]:$this->d67_numpar);
+       $this->d67_sequencial = ($this->d67_sequencial === 0 || $this->d67_sequencial === 0.0 || $this->d67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d67_sequencial"]:$this->d67_sequencial);
+       $this->d67_codigo = ($this->d67_codigo === 0 || $this->d67_codigo === 0.0 || $this->d67_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d67_codigo"]:$this->d67_codigo);
+       $this->d67_numpre = ($this->d67_numpre === 0 || $this->d67_numpre === 0.0 || $this->d67_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["d67_numpre"]:$this->d67_numpre);
+       $this->d67_numpar = ($this->d67_numpar === 0 || $this->d67_numpar === 0.0 || $this->d67_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["d67_numpar"]:$this->d67_numpar);
      }else{
-       $this->d67_sequencial = ($this->d67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d67_sequencial"]:$this->d67_sequencial);
+       $this->d67_sequencial = ($this->d67_sequencial === 0 || $this->d67_sequencial === 0.0 || $this->d67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d67_sequencial"]:$this->d67_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_debcontapedidotiponumpre {
          $this->d67_sequencial = $d67_sequencial; 
        }
      }
-     if(($this->d67_sequencial == null) || ($this->d67_sequencial == "") ){ 
+     if(($this->d67_sequencial == null) || ($this->d67_sequencial === 0 || $this->d67_sequencial === 0.0 || $this->d67_sequencial == "") ){ 
        $this->erro_sql = " Campo d67_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_debcontapedidotiponumpre {
    function sql_query ( $d67_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_debcontapedidotiponumpre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_debcontapedidotiponumpre {
    function sql_query_file ( $d67_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_debcontapedidotiponumpre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

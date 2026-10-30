@@ -31,7 +31,8 @@ include(modification("classes/db_saltes_classe.php"));
 
 $clsaltes = new cl_saltes;
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 
 // Dados
 $sql = "select slip.*,
@@ -68,7 +69,7 @@ $array_recursos =  array();
 // print_r($array_recursos); exit;
 
 
-if (pg_numrows($dados) == 0) {
+if (($dados ? pg_numrows($dados) : null) == 0) {
 	echo "<script>
 	         alert('Documento de Slip não Cadastrado.');
 	         window.close();

@@ -35,7 +35,8 @@
  require_once(modification("std/DBLargeObject.php"));
  require_once(modification("classes/db_certidao_classe.php"));
 
- parse_str(base64_decode($_SERVER['QUERY_STRING']));
+ parse_str(base64_decode($_SERVER['QUERY_STRING']), $__qs);
+ extract($__qs);
  
  if($tipo_cert==1){
  	$tipo = "Positiva";

@@ -25,7 +25,8 @@
  *                                licenca/licenca_pt.txt
  */
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 require(modification("libs/db_stdlib.php"));
 require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
@@ -148,7 +149,7 @@ for ($contatipo1 = 0; $contatipo1 < sizeof($tipo1); $contatipo1++) {
   $valtotal = $valtotal - $entradaminima;
 
 
-  if ( ( round($valtotal/$ultparc,2) >= $vlrmin ) and ( $ultparc >= $ultmaxparc ) ) {
+  if ( ( round(($ultparc ? $valtotal/$ultparc : false),2) >= $vlrmin ) and ( $ultparc >= $ultmaxparc ) ) {
 
  $sSql = "select k40_controlavencimento
           from cadtipoparc

@@ -79,7 +79,7 @@ class cl_bancoaplic {
                  k90_cpsldaplicant = float8 = Saldo Aplicado Ant.-cp 
                  ";
    //funcao construtor da classe 
-   function cl_bancoaplic() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bancoaplic"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -96,8 +96,8 @@ class cl_bancoaplic {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k90_id = ($this->k90_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_id"]:$this->k90_id);
-       $this->k90_conta = ($this->k90_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_conta"]:$this->k90_conta);
+       $this->k90_id = ($this->k90_id === 0 || $this->k90_id === 0.0 || $this->k90_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_id"]:$this->k90_id);
+       $this->k90_conta = ($this->k90_conta === 0 || $this->k90_conta === 0.0 || $this->k90_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_conta"]:$this->k90_conta);
        if($this->k90_data == ""){
          $this->k90_data_dia = ($this->k90_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_data_dia"]:$this->k90_data_dia);
          $this->k90_data_mes = ($this->k90_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_data_mes"]:$this->k90_data_mes);
@@ -106,20 +106,20 @@ class cl_bancoaplic {
             $this->k90_data = $this->k90_data_ano."-".$this->k90_data_mes."-".$this->k90_data_dia;
          }
        }
-       $this->k90_cpvlraplic = ($this->k90_cpvlraplic == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_cpvlraplic"]:$this->k90_cpvlraplic);
-       $this->k90_cpvlrresg = ($this->k90_cpvlrresg == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_cpvlrresg"]:$this->k90_cpvlrresg);
-       $this->k90_cpsldaplic = ($this->k90_cpsldaplic == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_cpsldaplic"]:$this->k90_cpsldaplic);
-       $this->k90_pfsldaplicant = ($this->k90_pfsldaplicant == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_pfsldaplicant"]:$this->k90_pfsldaplicant);
-       $this->k90_pfvlraplic = ($this->k90_pfvlraplic == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_pfvlraplic"]:$this->k90_pfvlraplic);
-       $this->k90_pfvlrresg = ($this->k90_pfvlrresg == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_pfvlrresg"]:$this->k90_pfvlrresg);
-       $this->k90_pfsldaplicf = ($this->k90_pfsldaplicf == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_pfsldaplicf"]:$this->k90_pfsldaplicf);
-       $this->k90_vlrdisp = ($this->k90_vlrdisp == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_vlrdisp"]:$this->k90_vlrdisp);
-       $this->k90_sldtot = ($this->k90_sldtot == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_sldtot"]:$this->k90_sldtot);
-       $this->k90_codreceita = ($this->k90_codreceita == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_codreceita"]:$this->k90_codreceita);
-       $this->k90_vlrjuros = ($this->k90_vlrjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_vlrjuros"]:$this->k90_vlrjuros);
-       $this->k90_cpsldaplicant = ($this->k90_cpsldaplicant == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_cpsldaplicant"]:$this->k90_cpsldaplicant);
+       $this->k90_cpvlraplic = ($this->k90_cpvlraplic === 0 || $this->k90_cpvlraplic === 0.0 || $this->k90_cpvlraplic == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_cpvlraplic"]:$this->k90_cpvlraplic);
+       $this->k90_cpvlrresg = ($this->k90_cpvlrresg === 0 || $this->k90_cpvlrresg === 0.0 || $this->k90_cpvlrresg == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_cpvlrresg"]:$this->k90_cpvlrresg);
+       $this->k90_cpsldaplic = ($this->k90_cpsldaplic === 0 || $this->k90_cpsldaplic === 0.0 || $this->k90_cpsldaplic == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_cpsldaplic"]:$this->k90_cpsldaplic);
+       $this->k90_pfsldaplicant = ($this->k90_pfsldaplicant === 0 || $this->k90_pfsldaplicant === 0.0 || $this->k90_pfsldaplicant == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_pfsldaplicant"]:$this->k90_pfsldaplicant);
+       $this->k90_pfvlraplic = ($this->k90_pfvlraplic === 0 || $this->k90_pfvlraplic === 0.0 || $this->k90_pfvlraplic == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_pfvlraplic"]:$this->k90_pfvlraplic);
+       $this->k90_pfvlrresg = ($this->k90_pfvlrresg === 0 || $this->k90_pfvlrresg === 0.0 || $this->k90_pfvlrresg == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_pfvlrresg"]:$this->k90_pfvlrresg);
+       $this->k90_pfsldaplicf = ($this->k90_pfsldaplicf === 0 || $this->k90_pfsldaplicf === 0.0 || $this->k90_pfsldaplicf == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_pfsldaplicf"]:$this->k90_pfsldaplicf);
+       $this->k90_vlrdisp = ($this->k90_vlrdisp === 0 || $this->k90_vlrdisp === 0.0 || $this->k90_vlrdisp == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_vlrdisp"]:$this->k90_vlrdisp);
+       $this->k90_sldtot = ($this->k90_sldtot === 0 || $this->k90_sldtot === 0.0 || $this->k90_sldtot == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_sldtot"]:$this->k90_sldtot);
+       $this->k90_codreceita = ($this->k90_codreceita === 0 || $this->k90_codreceita === 0.0 || $this->k90_codreceita == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_codreceita"]:$this->k90_codreceita);
+       $this->k90_vlrjuros = ($this->k90_vlrjuros === 0 || $this->k90_vlrjuros === 0.0 || $this->k90_vlrjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_vlrjuros"]:$this->k90_vlrjuros);
+       $this->k90_cpsldaplicant = ($this->k90_cpsldaplicant === 0 || $this->k90_cpsldaplicant === 0.0 || $this->k90_cpsldaplicant == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_cpsldaplicant"]:$this->k90_cpsldaplicant);
      }else{
-       $this->k90_id = ($this->k90_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_id"]:$this->k90_id);
+       $this->k90_id = ($this->k90_id === 0 || $this->k90_id === 0.0 || $this->k90_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k90_id"]:$this->k90_id);
      }
    }
    // funcao para inclusao
@@ -209,7 +209,7 @@ class cl_bancoaplic {
          $this->k90_id = $k90_id; 
        }
      }
-     if(($this->k90_id == null) || ($this->k90_id == "") ){ 
+     if(($this->k90_id == null) || ($this->k90_id === 0 || $this->k90_id === 0.0 || $this->k90_id == "") ){ 
        $this->erro_sql = " Campo k90_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -623,7 +623,7 @@ class cl_bancoaplic {
    function sql_query ( $k90_id=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -647,7 +647,7 @@ class cl_bancoaplic {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -659,7 +659,7 @@ class cl_bancoaplic {
    function sql_query_file ( $k90_id=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -680,7 +680,7 @@ class cl_bancoaplic {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -422,7 +422,7 @@ if (!empty($ver_matric)) {
 
 $rs = db_query($sql);
 
-if (pg_num_rows($rs) > 0) {
+if (($rs ? pg_num_rows($rs) : null) > 0) {
     $cgm = db_utils::fieldsMemory($rs, 0);
     if (DBString::isCNPJ($cgm->z01_cgccpf) || DBString::isCPF($cgm->z01_cgccpf)) {
         $cgmInstance = CgmFactory::getInstanceByCgm($cgm->z01_numcgm);

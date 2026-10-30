@@ -66,7 +66,7 @@ if($datai == $dataf){
 	    where k11_data = '".$datai."' and k11_anousu = ".db_getsession("DB_anousu")." and k11_instit = ".db_getsession("DB_instit");
 
     $result = db_query($sql);
-    if(pg_numrows($result) > 0) {
+    if(($result ? pg_numrows($result) : null) > 0) {
 	db_fieldsmemory($result,0);
     }
 
@@ -109,7 +109,8 @@ $pdf->Cell($CoL6,5,"VALOR",1,1,"C",0);
 //$pdf->Cell($CoL7,5,"NUMPRE",1,0,"C",0);
 //$pdf->Cell($CoL8,5,"PARCELA",1,1,"C",0);
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $exercicio = $GLOBALS["DB_anousu"];
 //echo
 //$sql  = "select distinct a.k12_id,a.k12_data,a.k12_autent,
@@ -134,7 +135,7 @@ $sql  = "select a.k12_id,a.k12_data,a.k12_autent,
 		    $ordem ";
 //exit;
 $result = db_query($sql);
-$numrows = pg_numrows($result);
+$numrows = ($result ? pg_numrows($result) : null);
 $QuebraPagina = 10;
 $Total1 = 0;
 $Total2 = 0;

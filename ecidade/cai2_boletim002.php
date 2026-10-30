@@ -38,7 +38,8 @@ $clrotulo->label('k11_anousu');
 $clrotulo->label('k11_libera');
 $clrotulo->label('nomeinst');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 //verifica se as datas estão setadas para montar o where
@@ -101,7 +102,7 @@ $sql = "select * from ($sql) as x where 1=1 $where $wheremov order by k11_instit
 //echo "$sql";exit;
 $result = pg_query($sql);
 
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro= Informação não encontrada ! ');
 }

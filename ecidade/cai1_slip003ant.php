@@ -25,7 +25,8 @@
  *                                licenca/licenca_pt.txt 
  */
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 // trecho para relatorio
 $head1 = "Texto numero 1";
 $head2 = "Texto numero 2";
@@ -53,7 +54,7 @@ $pdf->AddPage();
 		       left outer join hist on slip.k17_hist = hist.c03_codigo and c03_anousu = ".db_getsession('DB_anousu')."
           where slip.k17_codigo = $numslip and k17_instit = " . db_getsession('DB_instit');
 $dados = db_query($sql);
-if(pg_numrows($dados)==0){
+if(($dados ? pg_numrows($dados) : null)==0){
    echo "<script>
          alert('Documento de Slip não Cadastrado.');
          window.close();
@@ -63,51 +64,51 @@ if(pg_numrows($dados)==0){
 $pdf->Image("imagens/forms/cai1_slip.jpeg",0 ,38 , 210);
 $pdf->SetFont('Arial','B',14);
 $Y=49;
-$pdf->Text(42,$Y,pg_result($dados,0,"k17_codigo"));
-$pdf->Text(130,$Y,pg_result($dados,0,"k17_valor"));
+$pdf->Text(42,$Y,($dados ? pg_result($dados,0,"k17_codigo") : null));
+$pdf->Text(130,$Y,($dados ? pg_result($dados,0,"k17_valor") : null));
 $pdf->Text(83,$Y+7,"valor extenso 1");
-$pdf->Text(42,$Y+11,pg_result($dados,0,"k17_data"));
+$pdf->Text(42,$Y+11,($dados ? pg_result($dados,0,"k17_data") : null));
 $pdf->Text(83,$Y+12,"valor extenso 2");
 
-$pdf->Text(42,$Y+28,pg_result($dados,0,"k17_debito"));
-$pdf->Text(50,$Y+28,pg_result($dados,0,"descr_debito"));
+$pdf->Text(42,$Y+28,($dados ? pg_result($dados,0,"k17_debito") : null));
+$pdf->Text(50,$Y+28,($dados ? pg_result($dados,0,"descr_debito") : null));
 
-$pdf->Text(42,$Y+41,pg_result($dados,0,"k17_credito"));
-$pdf->Text(50,$Y+41,pg_result($dados,0,"descr_credito"));
+$pdf->Text(42,$Y+41,($dados ? pg_result($dados,0,"k17_credito") : null));
+$pdf->Text(50,$Y+41,($dados ? pg_result($dados,0,"descr_credito") : null));
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Text(10,$Y+61,"Interessado:");
-$pdf->Text(40,$Y+61,pg_result($dados,0,"z01_nome"));
+$pdf->Text(40,$Y+61,($dados ? pg_result($dados,0,"z01_nome") : null));
 $pdf->Text(10,$Y+66,"Histórico:");
-$pdf->Text(40,$Y+66,pg_result($dados,0,"k17_texto"));
-$pdf->Text(10,$Y+81,pg_result($dados,0,"k17_hist"));
+$pdf->Text(40,$Y+66,($dados ? pg_result($dados,0,"k17_texto") : null));
+$pdf->Text(10,$Y+81,($dados ? pg_result($dados,0,"k17_hist") : null));
 $pdf->Text(15,$Y+81,"-");
-$pdf->Text(17,$Y+81,pg_result($dados,0,"descr_hist"));
+$pdf->Text(17,$Y+81,($dados ? pg_result($dados,0,"descr_hist") : null));
 
 $pdf->Image("imagens/forms/cai1_slip.jpeg",0 ,158, 210);
 
 $Y=169;
 $pdf->SetFont('Arial','B',14);
-$pdf->Text(42,$Y,pg_result($dados,0,"k17_codigo"));
-$pdf->Text(130,$Y,pg_result($dados,0,"k17_valor"));
+$pdf->Text(42,$Y,($dados ? pg_result($dados,0,"k17_codigo") : null));
+$pdf->Text(130,$Y,($dados ? pg_result($dados,0,"k17_valor") : null));
 $pdf->Text(83,$Y+7,"valor extenso 1");
-$pdf->Text(42,$Y+11,pg_result($dados,0,"k17_data"));
+$pdf->Text(42,$Y+11,($dados ? pg_result($dados,0,"k17_data") : null));
 $pdf->Text(83,$Y+12,"valor extenso 2");
 
-$pdf->Text(42,$Y+28,pg_result($dados,0,"k17_debito"));
-$pdf->Text(50,$Y+28,pg_result($dados,0,"descr_debito"));
+$pdf->Text(42,$Y+28,($dados ? pg_result($dados,0,"k17_debito") : null));
+$pdf->Text(50,$Y+28,($dados ? pg_result($dados,0,"descr_debito") : null));
 
-$pdf->Text(42,$Y+41,pg_result($dados,0,"k17_credito"));
-$pdf->Text(50,$Y+41,pg_result($dados,0,"descr_credito"));
+$pdf->Text(42,$Y+41,($dados ? pg_result($dados,0,"k17_credito") : null));
+$pdf->Text(50,$Y+41,($dados ? pg_result($dados,0,"descr_credito") : null));
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Text(10,$Y+61,"Interessado:");
-$pdf->Text(40,$Y+61,pg_result($dados,0,"z01_nome"));
+$pdf->Text(40,$Y+61,($dados ? pg_result($dados,0,"z01_nome") : null));
 $pdf->Text(10,$Y+66,"Histórico:");
-$pdf->Text(40,$Y+66,pg_result($dados,0,"k17_texto"));
-$pdf->Text(10,$Y+81,pg_result($dados,0,"k17_hist"));
+$pdf->Text(40,$Y+66,($dados ? pg_result($dados,0,"k17_texto") : null));
+$pdf->Text(10,$Y+81,($dados ? pg_result($dados,0,"k17_hist") : null));
 $pdf->Text(15,$Y+81,"-");
-$pdf->Text(17,$Y+81,pg_result($dados,0,"descr_hist"));
+$pdf->Text(17,$Y+81,($dados ? pg_result($dados,0,"descr_hist") : null));
 
 
 

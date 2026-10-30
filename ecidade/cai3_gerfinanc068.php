@@ -30,7 +30,8 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 ?>
@@ -99,7 +100,7 @@ $sqlprestador = "
 
 
 $resultprestador = db_query($sqlprestador);
-$linhasprestador=pg_num_rows($resultprestador);
+$linhasprestador=($resultprestador ? pg_num_rows($resultprestador) : null);
 	if($linhasprestador>0){
 		echo "<center>";
 

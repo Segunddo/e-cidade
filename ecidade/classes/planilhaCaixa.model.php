@@ -34,7 +34,7 @@ class planilhaCaixa {
    * @param integer $iCodPlanilha Código da planilha
    *
    */
-  function planilhaCaixa($iCodPlanilha) {
+  function __construct($iCodPlanilha) {
 
     $this->iPlanilha = $iCodPlanilha;
     $this->iAnoUsu   = db_getsession("DB_anousu");

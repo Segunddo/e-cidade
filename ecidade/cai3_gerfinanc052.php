@@ -132,7 +132,7 @@ $oGet  = db_utils::postMemory($_GET);
   $sSqlCreditosDisponiveis .= "      recibo.k00_tipo, k125_datalanc";
 
   $rsCreditosDisponiveis    = db_query($sSqlCreditosDisponiveis);
-  $iLinhasCreditos          = pg_num_rows($rsCreditosDisponiveis);
+  $iLinhasCreditos          = ($rsCreditosDisponiveis ? pg_num_rows($rsCreditosDisponiveis) : null);
   $aDadosSaida = array();
 
   /**
@@ -217,7 +217,7 @@ $oGet  = db_utils::postMemory($_GET);
   $sSqlCreditosCompensados .= " order by k170_numpre, k170_numpar, k157_data asc";
 
   $rsCreditosCompensados      = db_query($sSqlCreditosCompensados);
-  $iLinhasCreditosCompensados = pg_num_rows($rsCreditosCompensados);
+  $iLinhasCreditosCompensados = ($rsCreditosCompensados ? pg_num_rows($rsCreditosCompensados) : null);
 
   if (isset($oGet->devolucao)) {
     $iLinhasCreditosCompensados = 0;
@@ -279,7 +279,7 @@ $oGet  = db_utils::postMemory($_GET);
 
   $origemAbatimento = array();
   $idsAbatimentoDevolucao = '';
-  while ($row = pg_fetch_assoc($rsTransferencia)) {
+  while ($row = ($rsTransferencia ? pg_fetch_assoc($rsTransferencia) : null)) {
     $idsAbatimentoDevolucao .= $idsAbatimentoDevolucao ? ", {$row['k158_abatimentodestino']}" : $row['k158_abatimentodestino'];
     $origemAbatimento[$row['k158_abatimentodestino']] = $row['k158_abatimentoorigem'];
   }
@@ -313,7 +313,7 @@ $oGet  = db_utils::postMemory($_GET);
   ";
   
   $rsTransferenciaDados = db_query($sSqlTransferenciaDados);
-  $iLinhasTransferencia = pg_num_rows($rsTransferenciaDados);
+  $iLinhasTransferencia = ($rsTransferenciaDados ? pg_num_rows($rsTransferenciaDados) : null);
 
   if (isset($oGet->compensacao)) {
     $iLinhasTransferencia = 0;
@@ -368,7 +368,7 @@ $oGet  = db_utils::postMemory($_GET);
   ";
   // die($sqlDevolucao);
   $rsDevolucao = db_query($sqlDevolucao);
-  $iLinhasDevolucao = pg_num_rows($rsDevolucao);
+  $iLinhasDevolucao = ($rsDevolucao ? pg_num_rows($rsDevolucao) : null);
 
   if (isset($oGet->compensacao)) {
     $iLinhasDevolucao = 0;

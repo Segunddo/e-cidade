@@ -119,7 +119,7 @@ $oGet = db_utils::postMemory($_GET);
 
     $rsSqlVinculos = db_query($sSqlVinculoReceitas);
 
-    if( pg_num_rows($rsSqlVinculos) > 0 ){
+    if( ($rsSqlVinculos ? pg_num_rows($rsSqlVinculos) : null) > 0 ){
       
       $oPdf = new PDF();
       $oPdf->Open();

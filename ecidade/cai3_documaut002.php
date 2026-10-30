@@ -29,7 +29,8 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_corrente_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $clcorrente = new cl_corrente;
 $clrotulo   = new rotulocampo;
@@ -45,16 +46,16 @@ $clrotulo->label("pc63_agencia");
 $dbwhere = "where 1=1 and k12_instit = " . db_getsession("DB_instit");
 $data    = str_replace("/", "-", $lista_data);
 
-$vet_data = split(",", $data);
+$vet_data = preg_split("#,#m", $data);
 $virgula  = "";
 $data     = "";
 for ($i = 0; $i < sizeof($vet_data); $i++){
-    $datas = split("-",$vet_data[$i]);
+    $datas = preg_split("#\\-#m",$vet_data[$i]);
     $data .= $virgula . "'" . trim($datas[2]) . "-" . trim($datas[1]) . "-" . trim($datas[0]) . "'";
     $virgula = ", ";
 }
 
-$vet_estorn = split(",", $lista_estorn);
+$vet_estorn = preg_split("#,#m", $lista_estorn);
 $virgula = "";
 $estorno = "";
 for ($i=0; $i < sizeof($vet_estorn); $i++){
@@ -65,7 +66,7 @@ for ($i=0; $i < sizeof($vet_estorn); $i++){
 $lista_estorn = $estorno;
 
 if (isset($lista_nfs)&&trim($lista_nfs)!=""){
-     $vet_nfs = split(",",$lista_nfs);
+     $vet_nfs = preg_split("#,#m",$lista_nfs);
      $virgula = "";
      $notas   = "";
      for($i=0; $i < sizeof($vet_nfs); $i++){
@@ -203,7 +204,7 @@ $resultado = $clcorrente->sql_record($sql);
 
 //db_criatabela($resultado);
 
-if( pg_num_rows($resultado) == 0 ){
+if( ($resultado ? pg_num_rows($resultado) : null) == 0 ){
 
    $sql      = "select distinct
                        cgmempenho.z01_numcgm,

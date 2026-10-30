@@ -77,7 +77,7 @@ if ( isset($oPost->incluir)  ) {
   
   if (!$lSqlErro) {
 
-  	$aNumpres 	  = split("N",$oPost->sNumpres);
+  	$aNumpres 	  = preg_split("#N#m",$oPost->sNumpres);
   	$aDadosDebito = array();
 
 	  for ($i = 0; $i < count($aNumpres); $i++  ) {
@@ -86,9 +86,9 @@ if ( isset($oPost->incluir)  ) {
 			  continue;		
 		  }
 		  
-		  $iNumpre = split("P",$aNumpres[$i]);
-	    $iNumpar = split("P", strstr($aNumpres[$i],"P"));
-	    $iNumpar = split("R",$iNumpar[1]);
+		  $iNumpre = preg_split("#P#m",$aNumpres[$i]);
+	    $iNumpar = preg_split("#P#m", strstr($aNumpres[$i],"P"));
+	    $iNumpar = preg_split("#R#m",$iNumpar[1]);
 	    $iReceit = $iNumpar[1];
 	    $iNumpar = $iNumpar[0];
 	    $iNumpre = $iNumpre[0];
@@ -122,7 +122,7 @@ if ( isset($oPost->incluir)  ) {
   	
     if (db_indexOf(key($_POST), "CHECK")) {
     	
-      if ($_POST[key($_POST)]{0} == "N") {
+      if ($_POST[key($_POST)][0] == "N") {
       	$sPrefix = "";
       } else {
       	$sPrefix = "N";
@@ -140,7 +140,7 @@ if ( isset($oPost->incluir)  ) {
 	  
 	  if ($oGet->marcarvencidas == 'true' && $oGet->marcartodas == 'false') {
 	    
-	    $aNumpres   = split("N",$sNumpres);
+	    $aNumpres   = preg_split("#N#m",$sNumpres);
 	    $sNumpres   = "";
 
 	    for ($iInd = 0; $iInd < count($aNumpres); $iInd++) {
@@ -149,9 +149,9 @@ if ( isset($oPost->incluir)  ) {
 	        continue;   
 	      }
 	      
-	      $iNumpre = split("P",$aNumpres[$iInd]);  
-	      $iNumpar = split("P", strstr($aNumpres[$iInd],"P"));
-	      $iNumpar = split("R",$iNumpar[1]);
+	      $iNumpre = preg_split("#P#m",$aNumpres[$iInd]);  
+	      $iNumpar = preg_split("#P#m", strstr($aNumpres[$iInd],"P"));
+	      $iNumpar = preg_split("#R#m",$iNumpar[1]);
 	      $iReceit = $iNumpar[1];
 	      $iNumpar = $iNumpar[0];
 	      $iNumpre = $iNumpre[0];
@@ -272,7 +272,7 @@ $db_opcao = 1;
 				echo "    </tr>";
 				echo "    <tbody style='height:120px; overflow:scroll; overflow-x:hidden; background-color:white'>";
 				  	
-				$aNumpres 		  = split("N",$sNumpres);
+				$aNumpres 		  = preg_split("#N#m",$sNumpres);
 				$sMsgExisteDebito = "";
 				
 			  	$nTotHis = 0;
@@ -288,9 +288,9 @@ $db_opcao = 1;
 				    continue;		
 				  }
 
-			  	  $iNumpre = split("P",$aNumpres[$i]);
-		          $iNumpar = split("P", strstr($aNumpres[$i],"P"));
-		          $iNumpar = split("R",$iNumpar[1]);
+			  	  $iNumpre = preg_split("#P#m",$aNumpres[$i]);
+		          $iNumpar = preg_split("#P#m", strstr($aNumpres[$i],"P"));
+		          $iNumpar = preg_split("#R#m",$iNumpar[1]);
 
 		          $iReceit = $iNumpar[1];
 		          $iNumpar = $iNumpar[0];

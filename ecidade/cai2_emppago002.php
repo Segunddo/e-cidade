@@ -49,7 +49,8 @@ $clrotulo->label('k12_autent');
 $clrotulo->label('k13_conta');
 $clrotulo->label('k13_descr');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 if($ordem = 'e'){
@@ -137,7 +138,7 @@ where " . ($filtraemp == 0?"1 = 1":" tipo = '" . ($filtraemp == 1?"Emp":"RP") . 
 
 $result = db_query($sql);
 //db_criatabela($result);
-if (pg_numrows($result) == 0){
+if (($result ? pg_numrows($result) : null) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem empenhos pagos.');
 
 }

@@ -25,7 +25,8 @@
  *                                licenca/licenca_pt.txt 
  */
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 require_once(modification("libs/db_stdlib.php"));
 require_once(modification("libs/db_conecta.php"));
 require_once(modification("libs/db_sessoes.php"));
@@ -144,7 +145,7 @@ if(isset($ver_matric)){
     if(db_indexOf(key($vt),"CHECK") > 0){
     	
       $numpres = $vt[key($vt)];
-      $mat = split("N",$numpres);
+      $mat = preg_split("#N#m",$numpres);
       
       if (isset($oPost->marcarvencidas) && isset($oPost->marcartodas)) {
           
@@ -156,9 +157,9 @@ if(isset($ver_matric)){
               continue;   
             }
                 
-            $numpre = split("P", $mat[$iInd]);
-            $numpar = split("P", strstr($mat[$iInd], "P"));
-            $numpar = split("R",$numpar[1]);
+            $numpre = preg_split("#P#m", $mat[$iInd]);
+            $numpar = preg_split("#P#m", strstr($mat[$iInd], "P"));
+            $numpar = preg_split("#R#m",$numpar[1]);
             $receit = @$numpar[1];
             $numpar = $numpar[0];
             $numpre = $numpre[0];
@@ -186,9 +187,9 @@ if(isset($ver_matric)){
 	          if ($mat[$j] == "") {
 	            continue;
 	          }
-	          $numpre = split("P",$mat[$j]);
-	          $numpar = split("P",strstr($mat[$j],"P"));
-	          $numpar = split("R",$numpar[1]);
+	          $numpre = preg_split("#P#m",$mat[$j]);
+	          $numpar = preg_split("#P#m",strstr($mat[$j],"P"));
+	          $numpar = preg_split("#R#m",$numpar[1]);
 	          $numpar = $numpar[0];
 	          $numpre = $numpre[0];
 	          $numpar1 .= $virgula.$numpar;
@@ -203,9 +204,9 @@ if(isset($ver_matric)){
 	        if ($mat[$j] == "") {
 	          continue;
 	        }
-	        $numpre = split("P",$mat[$j]);
-	        $numpar = split("P",strstr($mat[$j],"P"));
-	        $numpar = split("R",$numpar[1]);
+	        $numpre = preg_split("#P#m",$mat[$j]);
+	        $numpar = preg_split("#P#m",strstr($mat[$j],"P"));
+	        $numpar = preg_split("#R#m",$numpar[1]);
 	        $numpar = $numpar[0];
 	        $numpre = $numpre[0];
 	        $numpar1 .= $virgula.$numpar;
@@ -219,8 +220,8 @@ if(isset($ver_matric)){
 }
 
 $lSqlErro = false;
-$mat  = split(",",$numpre1);
-$mat1 = split(",",$numpar1);
+$mat  = preg_split("#,#m",$numpre1);
+$mat1 = preg_split("#,#m",$numpar1);
 $aListaCertidao = array();
 
 if ($iFormaGeracao == 2 && $k03_tipo == 5) {

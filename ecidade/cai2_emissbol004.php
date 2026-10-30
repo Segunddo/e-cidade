@@ -105,7 +105,8 @@ $CoL8 = 25;
 $StrPad1 = 20;
 $StrPad2 = 26;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $exercicio = $GLOBALS["DB_anousu"];
 $sql  = "
          select distinct k12_conta,k13_descr as conta_saltes
@@ -136,13 +137,13 @@ $sql  = "
 $result = db_query($sql);
 //db_criatabela($result);
 //exit;
-$num = pg_numrows($result);
+$num = ($result ? pg_numrows($result) : null);
 //$num = 1;
 $xconta = '';
 for($conta=0;$conta<$num;$conta++){
   db_fieldsmemory($result,$conta);
   $seleciona_conta = ' and ( a.k12_conta = '.$k12_conta.' or e.k12_conta = '.$k12_conta.' )';
-  
+
   if($xconta != $k12_conta){
     $descr_conta = "CONTA : ".$k12_conta.' - '.$conta_saltes;
     $xconta = $k12_conta;
@@ -181,7 +182,7 @@ $sql  = "select x.*,
 		p.c60_descr as corlanc_descr,
 		e.k12_codigo as corlanc_slip,
 		z01_nome
-		
+
               from corrente a
 		   left join saltes  w on a.k12_conta  = w.k13_conta
 		   left join cornump b on b.k12_id     = a.k12_id
@@ -292,7 +293,7 @@ for($i=0;$i<$numrows;$i++){
     else
       $tt='Cre';
     $pdf->Cell($CoL5,5,"$tt-".@$corrente_conta,"T",0,"C",0);
- 
+
     $pdf->Cell(65,5,@$corrente_descr,"T",0,"L",0);
     if ($corrente_valor < 0){$pdf->SetTextColor(255,0,0);}
     $pdf->Cell($CoL6,5,"R$".str_pad(number_format($corrente_valor,2,",","."),14," ",STR_PAD_LEFT),"T",0,"R",0);

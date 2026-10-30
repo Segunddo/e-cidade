@@ -44,7 +44,8 @@ $k02_dtfrac_dia = null;
 $k02_dtfrac_mes = null;
 $k02_dtfrac_ano = null;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $oDaoTabrecjm->rotulo->label();
 $oDaoTabrecjmmulta->rotulo->label();

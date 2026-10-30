@@ -52,6 +52,7 @@ Patrimonial, 469 previstos, ~710 reais).
 | 1 `cus`+`pla`+`pl`+`tes` | 1.347 | 45 Rector + 2 à mão (+10 do passo 8b) | 1.347/1.347 | 17/17 | 369 linhas, 0 div. | **99/99** |
 | 2 `emp` | 3.409 | 295 Rector + ~30 à mão | 3.409/3.409 | 48/48 | 1.080 linhas, 0 div. | **458/458** |
 | 3 `orc` | 3.037 | 345 Rector + ~125 à mão | 3.034/3.037 (as 3 restantes não compilam em nenhum) | 1.032 (diffs só do harness) | 25.379 linhas, diffs só do harness | **626/628** (2 caracterizadas) |
+| 4 `cai` inteiro | 3.988 | 273 Rector + ~230 à mão | 3.988/3.988 | 1.256 (diffs só do harness) | diffs só do harness | **739/740** (1 caracterizada) |
 
 **Lote 1 — `cus`, `pla`, `pl`, `tes`** (Custos, Planejamento, Tesouraria; 99 arquivos, roteados no `location`).
 Rector em 45 arquivos, só regras já vetadas (28 `parse_str`+`extract`, 17 guardas, 15 construtores, 14 `split`, todos
@@ -194,4 +195,78 @@ outra data no cabeçalho. Guarda **só para `null`**: `($m === null ? 0 : $m)`. 
 o `mktime()` devolver `false`, não tratar como 0. Medido em 4 entradas. **O resultado depende do dia em que roda**, então a
 divergência pode sumir num mês e voltar no outro: tela com `mktime`/`date` sobre variável que pode faltar merece desconfiança.
 
-**Estado:** lote 3 concluído. Aguardando o pedido do lote 4 (`cai` inteiro).
+**Estado:** lote 3 concluído.
+
+**Lote 4 — `cai` inteiro** (Caixa, 740 telas `.php` em disco: `cai1_` 274 + **`Cai1_` 6, com maiúscula** — o `location` é
+`~*` e o `cmp.py` usa `re.IGNORECASE`, então entram —, `cai2_` 162, `cai3_` 101, `cai4_` 202; mais 5 sobras não executáveis:
+`.phpsap`, `.php.orig`, `.php.alterado`, `.php.bk2403`, `.phpant`). Universo 3.988. Separadores de `split` todos literais
+(`"#"` 217, `"P"` 36, `","` 25, `"R"` 18, `"N"` 14…); `"\/"` conferido no 5.6 em 5 casos, idêntico.
+
+**Denylist do Rector: 6º crescimento — `MultiExceptionCatchRector`.** Juntou dois `catch` de corpo igual em
+`cai4_arrecada007.php` em `catch (BusinessException|Exception $e)`, **sintaxe de PHP 7.1, parse error no 5.6**. Nunca tinha
+disparado: é o primeiro arquivo da base com dois `catch` idênticos em sequência. Pego no dry-run, antes de aplicar.
+Rector em 273 arquivos, só regras já vetadas depois disso (197 `parse_str`+`extract`, 80 `ereg`/`split`, 57 construtores,
+53 guardas, 1 parâmetro opcional, 1 offset `{}`, 1 `${$var}`), 0 na passada seguinte.
+
+`php -l`: 3 arquivos só quebravam no 8.5 (nenhum em nenhum dos dois antes):
+- **Octal inválido, 4ª aparição** — `cai2_devedores_002.php:353/355/362`, larguras de coluna `array(090,045,050)`: `090` e
+  `085` valem **0** no 5.6 (para no 1º dígito inválido) → escritos `0`, conforme o catálogo (`045`/`050`/`060` são octais
+  válidos e ficaram). O Rector **não processava o arquivo** ("Invalid numeric literal") e o `enumera.py` não detecta octal:
+  só o `php -l` do 8.5 apontou. Corrigido o octal, o Rector portou o arquivo na passada seguinte.
+- `break` fora de laço, alcançável (caminhos de erro) → `exit;`: `cai4_anularslip001.php:160`,
+  `cai4_processadebconta001.php:212/338`.
+- 2 `while (list() = each())` em `cai2_correceitas002.php` (nenhuma regra converte) → a forma `key`/`current`/`next` +
+  `is_array` medida no RH.
+
+Classes 1.256 e escrita: só os diffs conhecidos do harness (`ArgumentCountError`, agora também `planilhaCaixa`;
+`empenho → datausu`; o `.dd.xml` do eSocial). LSP 761/761. Forma negada: 3.080 pares, 0 divergentes.
+
+Bateria 660/740 → **739/740**. À mão:
+- **~164 guardas `pg_*`** (`null`) pelo ciclo, nenhuma seguida de `===`; fora do `cai`: `forms/db_frmcaitransflanc.php`,
+  `forms/db_frmconcbanc.php`, `forms/db_frmconcbanc_manual.php` e **`model/regraEmissao.model.php`** (alcançado pela emissão
+  de recibos do Tributário). Mais 3 `pg_result(db_query(...),0,"col")` em `cai3_gerfinanc004` (consulta vai para variável,
+  forma de Patrimonial) e 1 `pg_free_result(false)` (`cai3_gerfinanc033:95`; `NULL` no 5.6).
+- **CATEGORIA NOVA (abaixo): `pg_result()` com coluna que não existe no resultado** — ~41 linhas em `cai3_gerfinanc004/013`.
+- **10ª manifestação da RFC das comparações — `cai4_recibo003.php:182`, `$valor[$i] == 0`** com `$valor = array('')`: no 5.6
+  `'' == 0` é verdadeiro e a tela redireciona para "Recibo com valor zerado"; no 8.5 passava reto e tentava um
+  `insert into recibo` com valores vazios (que falhou — **sem linha de teste deixada**, conferido; `nextval` não consumido).
+  Guarda `(is_string($x) && !is_numeric($x) ? (float)$x == 0 : $x == 0)` — **não** o `? true :` do precedente do `db_select()`:
+  em valor monetário `"1,5" == 0` é **falso** no 5.6 (vale a parte numérica inicial), e o `? true` erraria. Medida em 14 valores
+  (inclusive `"0,00"`, `"1,5"`, `"1abc"`, `" 1"`, `"f"`): **8.5 com a guarda = 5.6 original em todos**.
+- `mktime()` com `substr()` de data vazia → `(int)` em cada `substr` (precedente do RH), só nas linhas que apareceram:
+  `cai3_gerfinanc004:44/258/261`, `cai3_gerfinanc013:48`, `cai3_gerfinanc027:36`.
+- Divisão por zero (`cai3_gerfinanc063:152`, `round($valtotal/$ultparc)`) → `($ultparc ? … : false)`; `round(false)` = 0 no 5.6.
+- `cal_days_in_month()` (`cai4_modelo6delibtcerj002:27`) → `try`/`catch (Throwable)`.
+- **Constante indefinida** `@Ik23_obs` (`cai4_processacanc003:90`, o `$` esquecido): no 5.6 vira a string `"Ik23_obs"`
+  (medido), no 8.5 é `Error` mesmo com `@` → escrita a string `'Ik23_obs'`.
+- `cai3_extrates002.php:42-49`: `db_query(...) . " inner join ..."` — o resultado é **concatenado** a um pedaço de SQL, então no
+  5.6 `$des` é sempre string ("Resource id #N …" ou só o pedaço) e o `pg_result($des,0,0)` devolve `NULL`. No 8.5 o objeto
+  `PgSql\Result` nem converte para string. Correção: `$des` vira `""` quando objeto e o `pg_result` só roda sobre não-string —
+  `NULL` sempre, como no 5.6. Bug pré-existente (a descrição da conta nunca sai no extrato), preservado.
+
+Caracterizada: `cai2_receisub002.php` — **quebra nos dois**: `$clagata->api` com `$clagata` nunca criado (conferido por sonda:
+`NULL` nos dois runtimes). O 5.6 morre sem saída; o 8.5 mostra "Erro interno". Pré-existente.
+
+Roteamento: `cai` no `location` e nas três cópias do critério (`location` agora **8.007 arquivos**); o `map` **perdeu as 108
+telas `cai`** que Tributário, RH e Patrimonial tinham posto lá (811 → **703**: 479 telas + 229 abas). Elas estão entre as 740
+da bateria, idênticas. **Passo 8b** (882 telas do Financeiro no 8.5): nada indo ao 5.6.
+
+**Regressão:** fora do `cai`, as guardas de `regraEmissao.model.php` e dos 3 forms só mudam o caminho em que o 8.5 antes
+parava com fatal, e o resto do universo é Rector de regras vetadas. Ficam para a **bateria completa do fim da área**.
+
+### CATEGORIA NOVA (cai): `pg_result()` com nome de coluna que não está no resultado
+
+```
+                                 5.6                 8.5
+pg_result($r, 0, "inexistente")  false (Warning)     ValueError "Argument #3 must be a field name from this result set"
+pg_free_result(false)            NULL (Warning)      TypeError
+```
+
+Parente da guarda `pg_*` sobre resultado falso, mas aqui o resultado **é válido**: a consulta devolveu outras colunas (em
+`cai3_gerfinanc004/013`, aberta sem parâmetros, o laço percorre um resultado sem `k00_numpre`, `vlrmulta`, `total`...). O
+`guarda_ciclo.py` não pega, porque a variável não é falsa. Correção, linha a linha na aparição:
+`(pg_field_num($r,"col") >= 0 ? pg_result($r,$l,"col") : false)` — `pg_field_num` devolve `-1` nos dois runtimes; medida igual
+ao 5.6 com coluna existente e inexistente. O `false` alimenta `+=`, `!=` e `Cell()` exatamente como no 5.6. Ciclo próprio,
+**`scratchpad/campo_ciclo.py`** (versionado), alternado com o `guarda_ciclo.py` até a tela parar de fatalar: uma guarda expõe a próxima.
+
+**Estado:** lote 4 concluído. Aguardando o pedido do lote 5 (`con`, só as telas do Financeiro, pelo `map`).

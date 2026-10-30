@@ -143,7 +143,7 @@ function js_geraarquivo() {
                    order by k00_numpar";
                  $resultnumpar = db_query($sqlnumpar);
 
-                 if (pg_numrows($resultnumpar) > 0) {
+                 if (($resultnumpar ? pg_numrows($resultnumpar) : null) > 0) {
                    ?>
                    <select name="numpar">
                    <?
