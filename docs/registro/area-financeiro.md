@@ -409,4 +409,4 @@ Abas e destinos (passo 8b) já conferidos no lote 6: nada indo ao 5.6.
 | Lotes | 6 + o `tra` à parte, commits locais na `5financeiro-migrado` |
 | Bateria completa do fim da área | `map` **1.112/1.112**; `location` **7.966/7.994** (as 28 registradas) |
 | Telas de menu pelo proxy | **993/993** no 8.5 (+ 13 fantasmas) |
-| Envio ao GitHub | **pendente — aguarda o pedido do usuário** |
+| Envio ao GitHub | **feito em 30/10/2026** — `origin/5financeiro-migrado` (`1554507e6`) |
