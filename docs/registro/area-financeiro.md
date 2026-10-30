@@ -396,7 +396,8 @@ fim da área fica 7.930 + 36 = **7.966/7.994**, as 28 restantes todas registrada
 
 Conferido **pelo proxy, tela de menu por tela de menu** (`X-Ecidade-Runtime` em `/w/2/<tela>`), a partir do banco
 (`atendcadareamod` → área FINANCEIRO → `db_menu` → `db_itensmenu`, sem excluir prefixo): **993 de 993** telas de menu existentes
-servidas pelo PHP 8.5 (1.006 entradas distintas em 6 módulos — Caixa 234, Contabilidade 341, Custos 17, Empenho 136,
+servidas pelo PHP 8.5 (**corrigido para 992/992** na medição seguinte: `cus1_custocriteriorateio003.php` está no menu como
+`Cus1_` e como `cus1_`, e foi contado duas vezes; 1.006 entradas distintas em 6 módulos — Caixa 234, Contabilidade 341, Custos 17, Empenho 136,
 Orçamento 270, Planejamento 30, contando entradas por módulo). **13 fantasmas** (arquivo inexistente em todo o repositório,
 quebram igual nos dois): `atualiza-receita-dbportal`, `con1_conplanoextra001/002/003`, `con4_gerarsicomanual`,
 `con4_gerarsicommensal`, `con4_sicomidentificadorunidade`, `con4_sicominformacaocomplementar`, `con4_sicomriscofiscal`,
@@ -408,5 +409,5 @@ Abas e destinos (passo 8b) já conferidos no lote 6: nada indo ao 5.6.
 | Módulos | **6 de 6** — Caixa, Contabilidade, Custos, Empenho, Orçamento, Planejamento |
 | Lotes | 6 + o `tra` à parte, commits locais na `5financeiro-migrado` |
 | Bateria completa do fim da área | `map` **1.112/1.112**; `location` **7.966/7.994** (as 28 registradas) |
-| Telas de menu pelo proxy | **993/993** no 8.5 (+ 13 fantasmas) |
+| Telas de menu pelo proxy | **992/992** no 8.5 (+ 13 fantasmas) |
 | Envio ao GitHub | **feito em 30/10/2026** — `origin/5financeiro-migrado` (`1554507e6`) |

@@ -108,3 +108,29 @@ Ressalva de leitura, a mesma de antes: "a alterar" é estimativa estática. Nas 
 causa das correções à mão e das lacunas descobertas no caminho. Em Patrimonial, a estimativa era 469 e o real foi ~710:
 Fase A ~580 (538 pelo Rector + ~45 à mão) e Fase B ~130 (110 pelo Rector, 16 nas abas do passo 8b, 2 à mão). As
 correções da 15ª lacuna e da forma negada foram feitas nas branches das áreas anteriores e não entram nessa conta.
+
+#### Refeito em 30/10/2026, depois do Financeiro
+
+`dimensiona.py` passou a contar o Financeiro como concluído (`JA` com `FINANC`); o `location` do script já tinha
+`cus|pla|pl|tes|emp|orc|cai`. Conferido à parte, pelo mesmo critério (banco → em disco → `location` ou `map`): **as cinco áreas
+concluídas têm 0 telas de menu fora do 8.5** — Tributário 1.059, Educação 480, Recursos Humanos 701, Patrimonial 743,
+Financeiro 992.
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | **A alterar** | em 29/10 |
+|---|---|---|---|---|---|---|
+| Saúde | 8 | 489 | 3.036 | 750 | **530** | 530 |
+| Configuração | 1 | 186 | 2.488 | 907 | **110** | 127 |
+| Assistência Social | 2 | 59 | 1.903 | 726 | **43** | 48 |
+| Cidadão | 1 | 35 | 1.828 | 709 | **28** | 29 |
+| Integrações | 1 | 9 | 1.823 | 715 | **17** | 18 |
+| Gestor | 1 | 7 | 1.089 | 347 | **19** | 19 |
+
+Fantasmas (entrada de menu sem arquivo): Configuração 5, Assistência Social 1, Cidadão 5. União: **668** (era 1.254 com o
+Financeiro). O Financeiro pré-pagou sobretudo Configuração (201 → 186 telas, 127 → 110 a alterar: telas `con`/`cai`
+compartilhadas que entraram pelo `map`) e um pouco de Assistência Social. **A Saúde não mudou** (530): não compartilha quase
+nada com o Financeiro, e é agora a maior área restante, com 489 telas, mais que todas as outras somadas (296).
+
+Ressalva de sempre: "a alterar" é estimativa estática. No Financeiro a estimativa era 601; o real foi **1.168 pelo Rector**
+(soma dos 6 lotes) **mais ~420 correções à mão** (LSP, guardas `pg_*`, `count(null)`, comentário sem fechamento), além do `tra`.
+A estimativa conta arquivos a partir das telas de menu; o porte por prefixo inteiro (`cai`) e as abas do passo 8b alcançaram
+muito mais.
