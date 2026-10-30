@@ -94,7 +94,7 @@ switch ($oGet->trimestre) {
     break;
 
 }
-$iUltimoDiaMes = cal_days_in_month(CAL_GREGORIAN,$iMesFim,$iAnoUsu);
+try { $iUltimoDiaMes = cal_days_in_month(CAL_GREGORIAN,$iMesFim,$iAnoUsu); } catch (Throwable $e) { $iUltimoDiaMes = false; } // PHP 8: o 5.6 devolvia false
 $datausu       = "{$iAnoUsu}-{$iMesFim}-$iUltimoDiaMes";  
 $head3         = $sPeriodo;
 $oDaoConvenio  = db_utils::getDao("pactoplano");
@@ -133,7 +133,7 @@ $sSqlDados    .= "          ) as planejado_acumulado ";
 $sSqlDados    .= " from   categoriapacto";
 $sSqlDados    .= " where o31_tipopacto = {$oConvenio->o16_tipopacto} order by o31_sequencial";
 $rsDados       = db_query($sSqlDados);
-$iTotalRows    = pg_num_rows($rsDados);
+$iTotalRows    = ($rsDados ? pg_num_rows($rsDados) : null);
 $aLinhaRelatorio = db_utils::getCollectionByRecord($rsDados);
 
 $iAlt = 4;

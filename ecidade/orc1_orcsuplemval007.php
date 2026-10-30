@@ -43,7 +43,8 @@ require_once(modification("classes/db_orcreceita_classe.php")); // receita
 require_once(modification("classes/db_orcorgao_classe.php")); // receita
 
 db_app::import("orcamento.suplementacao.*");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;

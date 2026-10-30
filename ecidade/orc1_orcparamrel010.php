@@ -51,7 +51,7 @@ if(isset($qreceitas)){
     $clorcparamfontes->excluir(db_getsession("DB_anousu"),$o42_codparrel);
   } 
   if($qreceitas!=""){
-    $rec = split("-",$qreceitas);
+    $rec = preg_split("#\\-#m",$qreceitas);
     for($i=0;$i<sizeof($rec);$i++){
       $clorcparamfontes->o43_anousu = db_getsession("DB_anousu");
       $clorcparamfontes->o43_codparrel = $o42_codparrel;
@@ -72,7 +72,7 @@ if(isset($qreceitas)){
     $clorcparamelemento->excluir(db_getsession("DB_anousu"),$o42_codparrel);
   } 
   if($qdespesas!=""){
-    $rec = split("-",$qdespesas);
+    $rec = preg_split("#\\-#m",$qdespesas);
     for($i=0;$i<sizeof($rec);$i++){
       $clorcparamelemento->o43_anousu = db_getsession("DB_anousu");
       $clorcparamelemento->o43_codparrel = $o42_codparrel;

@@ -55,16 +55,16 @@ class cl_fonterecurso
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->id = ($this->id == "" ? @$GLOBALS["HTTP_POST_VARS"]["id"] : $this->id);
-            $this->orctiporec_id = ($this->orctiporec_id == "" ? @$GLOBALS["HTTP_POST_VARS"]["orctiporec_id"] : $this->orctiporec_id);
-            $this->exercicio = ($this->exercicio == "" ? @$GLOBALS["HTTP_POST_VARS"]["exercicio"] : $this->exercicio);
+            $this->id = ($this->id === 0 || $this->id === 0.0 || $this->id == "" ? @$GLOBALS["HTTP_POST_VARS"]["id"] : $this->id);
+            $this->orctiporec_id = ($this->orctiporec_id === 0 || $this->orctiporec_id === 0.0 || $this->orctiporec_id == "" ? @$GLOBALS["HTTP_POST_VARS"]["orctiporec_id"] : $this->orctiporec_id);
+            $this->exercicio = ($this->exercicio === 0 || $this->exercicio === 0.0 || $this->exercicio == "" ? @$GLOBALS["HTTP_POST_VARS"]["exercicio"] : $this->exercicio);
             $this->codigo_siconfi = ($this->codigo_siconfi == "" ? @$GLOBALS["HTTP_POST_VARS"]["codigo_siconfi"] : $this->codigo_siconfi);
             $this->gestao = ($this->gestao == "" ? @$GLOBALS["HTTP_POST_VARS"]["gestao"] : $this->gestao);
-            $this->classificacaofr_id = ($this->classificacaofr_id == "" ? @$GLOBALS["HTTP_POST_VARS"]["classificacaofr_id"] : $this->classificacaofr_id);
+            $this->classificacaofr_id = ($this->classificacaofr_id === 0 || $this->classificacaofr_id === 0.0 || $this->classificacaofr_id == "" ? @$GLOBALS["HTTP_POST_VARS"]["classificacaofr_id"] : $this->classificacaofr_id);
             $this->tipo_detalhamento = ($this->tipo_detalhamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["tipo_detalhamento"] : $this->tipo_detalhamento);
             $this->descricao = ($this->descricao == "" ? @$GLOBALS["HTTP_POST_VARS"]["descricao"] : $this->descricao);
         } else {
-            $this->id = ($this->id == "" ? @$GLOBALS["HTTP_POST_VARS"]["id"] : $this->id);
+            $this->id = ($this->id === 0 || $this->id === 0.0 || $this->id == "" ? @$GLOBALS["HTTP_POST_VARS"]["id"] : $this->id);
         }
     }
 
@@ -146,7 +146,7 @@ class cl_fonterecurso
                 $this->id = $id;
             }
         }
-        if (($this->id == null) || ($this->id == "")) {
+        if (($this->id == null) || ($this->id === 0 || $this->id === 0.0 || $this->id == "")) {
             $this->erro_sql = " Campo id não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

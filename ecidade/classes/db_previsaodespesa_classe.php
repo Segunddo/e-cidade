@@ -58,7 +58,7 @@ class cl_previsaodespesa
                  ";
 
     //funcao construtor da classe
-    function cl_previsaodespesa()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("previsaodespesa");
@@ -80,26 +80,26 @@ class cl_previsaodespesa
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->c333_sequencial = ($this->c333_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_sequencial"] : $this->c333_sequencial);
-            $this->c333_ano = ($this->c333_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_ano"] : $this->c333_ano);
-            $this->c333_esferaorcamentaria = ($this->c333_esferaorcamentaria == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_esferaorcamentaria"] : $this->c333_esferaorcamentaria);
-            $this->c333_orcorgao = ($this->c333_orcorgao == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcorgao"] : $this->c333_orcorgao);
-            $this->c333_orcunidade = ($this->c333_orcunidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcunidade"] : $this->c333_orcunidade);
-            $this->c333_orcfuncao = ($this->c333_orcfuncao == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcfuncao"] : $this->c333_orcfuncao);
-            $this->c333_orcsubfuncao = ($this->c333_orcsubfuncao == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcsubfuncao"] : $this->c333_orcsubfuncao);
-            $this->c333_orcprograma = ($this->c333_orcprograma == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcprograma"] : $this->c333_orcprograma);
-            $this->c333_orcprojativ = ($this->c333_orcprojativ == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcprojativ"] : $this->c333_orcprojativ);
-            $this->c333_ppasubtitulolocalizadorgasto = ($this->c333_ppasubtitulolocalizadorgasto == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_ppasubtitulolocalizadorgasto"] : $this->c333_ppasubtitulolocalizadorgasto);
-            $this->c333_conplanoorcamento = ($this->c333_conplanoorcamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_conplanoorcamento"] : $this->c333_conplanoorcamento);
-            $this->c333_identificadoruso = ($this->c333_identificadoruso == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_identificadoruso"] : $this->c333_identificadoruso);
+            $this->c333_sequencial = ($this->c333_sequencial === 0 || $this->c333_sequencial === 0.0 || $this->c333_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_sequencial"] : $this->c333_sequencial);
+            $this->c333_ano = ($this->c333_ano === 0 || $this->c333_ano === 0.0 || $this->c333_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_ano"] : $this->c333_ano);
+            $this->c333_esferaorcamentaria = ($this->c333_esferaorcamentaria === 0 || $this->c333_esferaorcamentaria === 0.0 || $this->c333_esferaorcamentaria == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_esferaorcamentaria"] : $this->c333_esferaorcamentaria);
+            $this->c333_orcorgao = ($this->c333_orcorgao === 0 || $this->c333_orcorgao === 0.0 || $this->c333_orcorgao == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcorgao"] : $this->c333_orcorgao);
+            $this->c333_orcunidade = ($this->c333_orcunidade === 0 || $this->c333_orcunidade === 0.0 || $this->c333_orcunidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcunidade"] : $this->c333_orcunidade);
+            $this->c333_orcfuncao = ($this->c333_orcfuncao === 0 || $this->c333_orcfuncao === 0.0 || $this->c333_orcfuncao == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcfuncao"] : $this->c333_orcfuncao);
+            $this->c333_orcsubfuncao = ($this->c333_orcsubfuncao === 0 || $this->c333_orcsubfuncao === 0.0 || $this->c333_orcsubfuncao == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcsubfuncao"] : $this->c333_orcsubfuncao);
+            $this->c333_orcprograma = ($this->c333_orcprograma === 0 || $this->c333_orcprograma === 0.0 || $this->c333_orcprograma == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcprograma"] : $this->c333_orcprograma);
+            $this->c333_orcprojativ = ($this->c333_orcprojativ === 0 || $this->c333_orcprojativ === 0.0 || $this->c333_orcprojativ == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_orcprojativ"] : $this->c333_orcprojativ);
+            $this->c333_ppasubtitulolocalizadorgasto = ($this->c333_ppasubtitulolocalizadorgasto === 0 || $this->c333_ppasubtitulolocalizadorgasto === 0.0 || $this->c333_ppasubtitulolocalizadorgasto == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_ppasubtitulolocalizadorgasto"] : $this->c333_ppasubtitulolocalizadorgasto);
+            $this->c333_conplanoorcamento = ($this->c333_conplanoorcamento === 0 || $this->c333_conplanoorcamento === 0.0 || $this->c333_conplanoorcamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_conplanoorcamento"] : $this->c333_conplanoorcamento);
+            $this->c333_identificadoruso = ($this->c333_identificadoruso === 0 || $this->c333_identificadoruso === 0.0 || $this->c333_identificadoruso == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_identificadoruso"] : $this->c333_identificadoruso);
             $this->c333_tipodetalhamento = ($this->c333_tipodetalhamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_tipodetalhamento"] : $this->c333_tipodetalhamento);
             $this->c333_grupofonterecursos = ($this->c333_grupofonterecursos == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_grupofonterecursos"] : $this->c333_grupofonterecursos);
             $this->c333_especificacaofonte = ($this->c333_especificacaofonte == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_especificacaofonte"] : $this->c333_especificacaofonte);
             $this->c333_identificadorresultadoprimario = ($this->c333_identificadorresultadoprimario == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_identificadorresultadoprimario"] : $this->c333_identificadorresultadoprimario);
-            $this->c333_previsao = ($this->c333_previsao == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_previsao"] : $this->c333_previsao);
+            $this->c333_previsao = ($this->c333_previsao === 0 || $this->c333_previsao === 0.0 || $this->c333_previsao == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_previsao"] : $this->c333_previsao);
             $this->c333_planoorcamentario = ($this->c333_planoorcamentario == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_planoorcamentario"] : $this->c333_planoorcamentario);
         } else {
-            $this->c333_sequencial = ($this->c333_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_sequencial"] : $this->c333_sequencial);
+            $this->c333_sequencial = ($this->c333_sequencial === 0 || $this->c333_sequencial === 0.0 || $this->c333_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c333_sequencial"] : $this->c333_sequencial);
         }
     }
 
@@ -322,7 +322,7 @@ class cl_previsaodespesa
                 $this->c333_sequencial = $c333_sequencial;
             }
         }
-        if (($this->c333_sequencial == null) || ($this->c333_sequencial == "")) {
+        if (($this->c333_sequencial == null) || ($this->c333_sequencial === 0 || $this->c333_sequencial === 0.0 || $this->c333_sequencial == "")) {
             $this->erro_sql = " Campo c333_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

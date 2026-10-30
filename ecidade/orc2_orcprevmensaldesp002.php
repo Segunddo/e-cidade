@@ -296,7 +296,7 @@ $t12 = 0;
 
 $tt = 0;
 
-for ($i = 0; $i < pg_numrows($result); $i++) {
+for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i++) {
     db_fieldsmemory($result, $i);
 
     if ($nivel == 8) {

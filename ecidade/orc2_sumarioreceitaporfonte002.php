@@ -53,7 +53,7 @@ $rsInstituicoes = pg_exec("select codigo, nomeinst, nomeinstabrev
 $sDescricaoInstitucoes = '';
 $sVirg                 = '';
 $lAbrevia              = false;
-for ($iInstit = 0; $iInstit < pg_num_rows($rsInstituicoes); $iInstit++) {
+for ($iInstit = 0; $iInstit < ($rsInstituicoes ? pg_num_rows($rsInstituicoes) : null); $iInstit++) {
 
   $oInstit = db_utils::fieldsmemory($rsInstituicoes, $iInstit);
   if (strlen(trim($oInstit->nomeinstabrev)) > 0) {
@@ -115,7 +115,7 @@ $rsReceita = pg_query($sqlReceita);
 
 $aReceita = array();
 
-for ($i = 0; $i < pg_num_rows($rsReceita); $i++) {
+for ($i = 0; $i < ($rsReceita ? pg_num_rows($rsReceita) : null); $i++) {
 	db_fieldsmemory($rsReceita, $i);
 	$aReceita[$i]['codigo'] = $gestao;
 	$aReceita[$i]['descricao'] = $o15_descr;

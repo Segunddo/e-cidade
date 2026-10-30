@@ -35,7 +35,8 @@ require(modification("libs/db_liborcamento.php"));
 include(modification("classes/db_orcparametro_classe.php"));
 include(modification("classes/db_orcfontes_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clorcfontesdes = new cl_orcfontesdes;
 $clorcfontes = new cl_orcfontes;
@@ -47,10 +48,10 @@ $db_opcao = 33;
 if(isset($excluir)){
   $sqlerro=false;
   db_inicio_transacao();
-  $matriz03=split("#",$dados);
+  $matriz03=preg_split("#\\##m",$dados);
   $tamanho03=count($matriz03);
   for($i=0; $i<$tamanho03; $i++){
-    $matriz04=split("-",$matriz03[$i]);
+    $matriz04=preg_split("#\\-#m",$matriz03[$i]);
     $anousu=db_getsession('DB_anousu'); 
     
     $clorcfontesdes->o60_codfon = $matriz04[0];

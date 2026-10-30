@@ -43,10 +43,10 @@ include(modification("dbforms/db_funcoes.php"));
 (string)$sErro       = null;
 (string)$sForm       = null;
 (string)$sLabel      = null;
-(real)  $rValorIni   = 0;
-(real)  $rValorAtu   = 0;
-(real)  $rAcrescimos = 0;
-(real)  $rReducoes   = 0;
+(float) $rValorIni   = 0;
+(float) $rValorAtu   = 0;
+(float) $rAcrescimos = 0;
+(float) $rReducoes   = 0;
 (bool)  $lErro       = false;
 (bool)  $lSqlErro    = false;
 (bool)  $lNovo       = false;
@@ -187,17 +187,17 @@ if(isset($p->incluir)){
 		
 		    $iNumRows = $clorcreceita->numrows;
 		    if ($iNumRows > 0){
-       
+
 			   for ($i = 0;$i < $iNumRows;$i++){ 
-         
+
 				   $oRec  = db_utils::fieldsMemory($rsRec,$i);
            //verificando qual a origem dos valores.
   			   if ($p->c91_origem == 1){
-          
+
 					   $rValorIni = $oRec->o70_valor;
-       
+
 			     }elseif ($p->c91_origem == 2){
-               
+
 					  	if ($i > 0){	 
                 db_query('drop table work_receita');
 						  }
@@ -209,9 +209,9 @@ if(isset($p->incluir)){
 						 $oSre        = db_utils::fieldsMemory($rsSre,0);
 					   $rValorIni   = $oRec->o70_valor;
              $rAcrescimos = $oSre->saldo_prevadic_acum;   
-              
+
 				  }elseif ($p->c91_origem == 3){
-               
+
 					  	if ($i > 0){	 
                 db_query('drop table work_receita');
 						  }
@@ -241,16 +241,16 @@ if(isset($p->incluir)){
           $clorcduplicacao->o75_valorduplicar   = '0';
           $clorcduplicacao->o75_importar        = '0';
 				  $clorcduplicacao->incluir(null);
- 
+
 				   if ($clorcduplicacao->erro_status == 0){
-              
+
 							$lSqlErro = true;
 			        $sErro    = $clorcduplicacao->erro_msg;
               break;
 
 				 }
 				 if ($lSqlErro == false){
-            
+
             $clorcduplicacaoreceita->o77_orcduplicacao = $clorcduplicacao->o75_sequencial;
 					  $clorcduplicacaoreceita->o77_anousu        = $p->c91_anousuorigem;  
 						$clorcduplicacaoreceita->o77_codrec        = $oRec->o70_codrec;
@@ -266,7 +266,7 @@ if(isset($p->incluir)){
 						}
 
 				 }
-				 
+
 		/*	echo "<b>DOTACAO:</B>".$oDot->o58_coddot."<br>";
 		  echo "<b>INICIAL:</B>".$rValorIni."<br>";
 		  echo "<b>ACRESCIMO:</B>".$rAcrescimos."<br>";

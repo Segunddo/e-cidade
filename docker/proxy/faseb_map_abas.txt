@@ -247,3 +247,6 @@ pro1_cgmerrado001.php
 # 29/10/2026 -- Financeiro, lote 1: abas de Contabilidade abertas pelas telas pla2_* (relatorios legais).
 con2_conrelnotas.php
 con4_parametrosrelatorioslegais001.php
+# 30/10/2026 -- Financeiro, lote 3: abas de Contabilidade abertas pelas telas orc2_* (anexos e estimativa de renuncia).
+con2_filtrosrelatorios.php
+con2_estimativaRenunciaReceita011.php

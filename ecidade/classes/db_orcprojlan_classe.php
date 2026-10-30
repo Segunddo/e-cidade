@@ -55,7 +55,7 @@ class cl_orcprojlan {
                  o51_id_usuario = int8 = id do usuario 
                  ";
    //funcao construtor da classe 
-   function cl_orcprojlan() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcprojlan"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,7 +72,7 @@ class cl_orcprojlan {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o51_codproj = ($this->o51_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o51_codproj"]:$this->o51_codproj);
+       $this->o51_codproj = ($this->o51_codproj === 0 || $this->o51_codproj === 0.0 || $this->o51_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o51_codproj"]:$this->o51_codproj);
        if($this->o51_data == ""){
          $this->o51_data_dia = ($this->o51_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o51_data_dia"]:$this->o51_data_dia);
          $this->o51_data_mes = ($this->o51_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o51_data_mes"]:$this->o51_data_mes);
@@ -81,9 +81,9 @@ class cl_orcprojlan {
             $this->o51_data = $this->o51_data_ano."-".$this->o51_data_mes."-".$this->o51_data_dia;
          }
        }
-       $this->o51_id_usuario = ($this->o51_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o51_id_usuario"]:$this->o51_id_usuario);
+       $this->o51_id_usuario = ($this->o51_id_usuario === 0 || $this->o51_id_usuario === 0.0 || $this->o51_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o51_id_usuario"]:$this->o51_id_usuario);
      }else{
-       $this->o51_codproj = ($this->o51_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o51_codproj"]:$this->o51_codproj);
+       $this->o51_codproj = ($this->o51_codproj === 0 || $this->o51_codproj === 0.0 || $this->o51_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o51_codproj"]:$this->o51_codproj);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_orcprojlan {
        return false;
      }
        $this->o51_codproj = $o51_codproj; 
-     if(($this->o51_codproj == null) || ($this->o51_codproj == "") ){ 
+     if(($this->o51_codproj == null) || ($this->o51_codproj === 0 || $this->o51_codproj === 0.0 || $this->o51_codproj == "") ){ 
        $this->erro_sql = " Campo o51_codproj nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_orcprojlan {
    function sql_query ( $o51_codproj=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_orcprojlan {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_orcprojlan {
    function sql_query_file ( $o51_codproj=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_orcprojlan {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

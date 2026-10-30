@@ -66,7 +66,7 @@ $erro = false;
 // orgaos
 if (isset ($processa_fontes) && ($processa_fontes == 'Processar')) {
 	// obtem uma matriz de chaves
-	$chaves = split('#', $chaves);
+	$chaves = preg_split('#\##m', $chaves);
 	if (count($chaves) > 0) {
 		db_inicio_transacao();
 		for ($i = 0; $i < count($chaves); $i ++) {
@@ -94,7 +94,7 @@ if (isset ($processa_fontes) && ($processa_fontes == 'Processar')) {
 }
 // unidades
 if (isset ($processa_fontesdes) && ($processa_fontesdes == 'Processar')) {
-	$chaves = split('#', $chaves);
+	$chaves = preg_split('#\##m', $chaves);
 	if (count($chaves) > 0) {
 		db_inicio_transacao();
 		for ($i = 0; $i < count($chaves); $i ++) {
@@ -119,7 +119,7 @@ if (isset ($processa_fontesdes) && ($processa_fontesdes == 'Processar')) {
 } //
 // programa
 if (isset ($processa_receitas) && ($processa_receitas == 'Processar')) {
-	$chaves = split('#', $chaves);
+	$chaves = preg_split('#\##m', $chaves);
 	if (count($chaves) > 0) {
 		db_inicio_transacao();
 		for ($i = 0; $i < count($chaves); $i ++) {

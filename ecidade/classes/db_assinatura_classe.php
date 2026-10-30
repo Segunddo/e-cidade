@@ -39,7 +39,7 @@ function assinatura($codigo,$default='',$pos_paragrafo=""){
                     ");
         //db_criatabela($result);exit;
        $ass =  $default;
-       if(pg_numrows($result) > 0){
+       if(($result ? pg_numrows($result) : null) > 0){
          $ass = '';
          $ar = "";
          for($i=0;$i<pg_numrows($result);$i++){

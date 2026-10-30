@@ -40,7 +40,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('j14_nome');
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $dbwhere="";
 $and="";
 
@@ -311,7 +312,7 @@ $pdf->cell(40,$alt,"Próprios",1,0,"C",0);
 $pdf->cell(40,$alt,"Outros",1,0,"C",0);
 $pdf->cell(40,$alt,"Total",1,1,"C",0);
 
-$setano = split("-",$intanos);
+$setano = preg_split("#\\-#m",$intanos);
 $anoseti = $setano[0];
 $anosetf = $setano[1];
 $tot_livre = 0;

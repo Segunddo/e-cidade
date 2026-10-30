@@ -54,7 +54,7 @@ class cl_orcindicaindiceesperado {
                  o25_valor = float4 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_orcindicaindiceesperado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcindicaindiceesperado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_orcindicaindiceesperado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o25_sequencial = ($this->o25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_sequencial"]:$this->o25_sequencial);
-       $this->o25_orcindica = ($this->o25_orcindica == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_orcindica"]:$this->o25_orcindica);
-       $this->o25_anousu = ($this->o25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_anousu"]:$this->o25_anousu);
-       $this->o25_valor = ($this->o25_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_valor"]:$this->o25_valor);
+       $this->o25_sequencial = ($this->o25_sequencial === 0 || $this->o25_sequencial === 0.0 || $this->o25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_sequencial"]:$this->o25_sequencial);
+       $this->o25_orcindica = ($this->o25_orcindica === 0 || $this->o25_orcindica === 0.0 || $this->o25_orcindica == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_orcindica"]:$this->o25_orcindica);
+       $this->o25_anousu = ($this->o25_anousu === 0 || $this->o25_anousu === 0.0 || $this->o25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_anousu"]:$this->o25_anousu);
+       $this->o25_valor = ($this->o25_valor === 0 || $this->o25_valor === 0.0 || $this->o25_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_valor"]:$this->o25_valor);
      }else{
-       $this->o25_sequencial = ($this->o25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_sequencial"]:$this->o25_sequencial);
+       $this->o25_sequencial = ($this->o25_sequencial === 0 || $this->o25_sequencial === 0.0 || $this->o25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_sequencial"]:$this->o25_sequencial);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_orcindicaindiceesperado {
          $this->o25_sequencial = $o25_sequencial; 
        }
      }
-     if(($this->o25_sequencial == null) || ($this->o25_sequencial == "") ){ 
+     if(($this->o25_sequencial == null) || ($this->o25_sequencial === 0 || $this->o25_sequencial === 0.0 || $this->o25_sequencial == "") ){ 
        $this->erro_sql = " Campo o25_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -379,7 +379,7 @@ class cl_orcindicaindiceesperado {
    function sql_query ( $o25_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_orcindicaindiceesperado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_orcindicaindiceesperado {
    function sql_query_file ( $o25_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_orcindicaindiceesperado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

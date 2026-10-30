@@ -55,7 +55,7 @@ class cl_orcsuplemlan {
                  o49_id_usuario = int4 = Cod. Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_orcsuplemlan() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcsuplemlan"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,7 +72,7 @@ class cl_orcsuplemlan {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o49_codsup = ($this->o49_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o49_codsup"]:$this->o49_codsup);
+       $this->o49_codsup = ($this->o49_codsup === 0 || $this->o49_codsup === 0.0 || $this->o49_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o49_codsup"]:$this->o49_codsup);
        if($this->o49_data == ""){
          $this->o49_data_dia = ($this->o49_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o49_data_dia"]:$this->o49_data_dia);
          $this->o49_data_mes = ($this->o49_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o49_data_mes"]:$this->o49_data_mes);
@@ -81,9 +81,9 @@ class cl_orcsuplemlan {
             $this->o49_data = $this->o49_data_ano."-".$this->o49_data_mes."-".$this->o49_data_dia;
          }
        }
-       $this->o49_id_usuario = ($this->o49_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o49_id_usuario"]:$this->o49_id_usuario);
+       $this->o49_id_usuario = ($this->o49_id_usuario === 0 || $this->o49_id_usuario === 0.0 || $this->o49_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o49_id_usuario"]:$this->o49_id_usuario);
      }else{
-       $this->o49_codsup = ($this->o49_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o49_codsup"]:$this->o49_codsup);
+       $this->o49_codsup = ($this->o49_codsup === 0 || $this->o49_codsup === 0.0 || $this->o49_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o49_codsup"]:$this->o49_codsup);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_orcsuplemlan {
        return false;
      }
        $this->o49_codsup = $o49_codsup; 
-     if(($this->o49_codsup == null) || ($this->o49_codsup == "") ){ 
+     if(($this->o49_codsup == null) || ($this->o49_codsup === 0 || $this->o49_codsup === 0.0 || $this->o49_codsup == "") ){ 
        $this->erro_sql = " Campo o49_codsup nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_orcsuplemlan {
    function sql_query ( $o49_codsup=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_orcsuplemlan {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_orcsuplemlan {
    function sql_query_file ( $o49_codsup=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_orcsuplemlan {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

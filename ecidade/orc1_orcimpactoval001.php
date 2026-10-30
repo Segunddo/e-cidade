@@ -37,7 +37,8 @@ include(modification("classes/db_orcimpacto_classe.php"));
 include(modification("classes/db_orcelemento_classe.php"));
 
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clorcimpactoval     = new cl_orcimpactoval;
@@ -191,7 +192,7 @@ if(isset($incluir)){
 	  }  
 	  //final
 	  //-------------------------------------------------
-	  
+
 
 	  //rotina exclusão orcimpactotiporec------------------------------------------------
 	  if($sqlerro == false && isset($codseqimp) && $codseqimp != ''){
@@ -208,7 +209,7 @@ if(isset($incluir)){
 	  }
           //final
 	  //-----------------------------------------------------------------------------------
-	  
+
 	  //rotina de inclusão no orcimpactotiporec------------------------------------------------
 	  if($sqlerro == false ){
 	    $clorcimpactotiporec->o93_codseqimp = $codseqimp;

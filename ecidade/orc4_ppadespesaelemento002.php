@@ -119,7 +119,7 @@ $sSql .= "       o08_projativ,                                                  
 $sSql .= "       o55_descr                                                                                               ";
 
 $rsConsulta = db_query(analiseQueryPlanoOrcamento($sSql));
-$iNumRows = pg_num_rows($rsConsulta);
+$iNumRows = ($rsConsulta ? pg_num_rows($rsConsulta) : null);
 $aLinhasAcoes = db_utils::getCollectionByRecord($rsConsulta);
 
 /**

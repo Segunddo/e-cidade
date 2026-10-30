@@ -52,7 +52,7 @@ class cl_orcimpactorecmovmes {
                  o97_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_orcimpactorecmovmes() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcimpactorecmovmes"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_orcimpactorecmovmes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o97_sequen = ($this->o97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_sequen"]:$this->o97_sequen);
-       $this->o97_mes = ($this->o97_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_mes"]:$this->o97_mes);
-       $this->o97_valor = ($this->o97_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_valor"]:$this->o97_valor);
+       $this->o97_sequen = ($this->o97_sequen === 0 || $this->o97_sequen === 0.0 || $this->o97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_sequen"]:$this->o97_sequen);
+       $this->o97_mes = ($this->o97_mes === 0 || $this->o97_mes === 0.0 || $this->o97_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_mes"]:$this->o97_mes);
+       $this->o97_valor = ($this->o97_valor === 0 || $this->o97_valor === 0.0 || $this->o97_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_valor"]:$this->o97_valor);
      }else{
-       $this->o97_sequen = ($this->o97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_sequen"]:$this->o97_sequen);
-       $this->o97_mes = ($this->o97_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_mes"]:$this->o97_mes);
+       $this->o97_sequen = ($this->o97_sequen === 0 || $this->o97_sequen === 0.0 || $this->o97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_sequen"]:$this->o97_sequen);
+       $this->o97_mes = ($this->o97_mes === 0 || $this->o97_mes === 0.0 || $this->o97_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_mes"]:$this->o97_mes);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_orcimpactorecmovmes {
      }
        $this->o97_sequen = $o97_sequen; 
        $this->o97_mes = $o97_mes; 
-     if(($this->o97_sequen == null) || ($this->o97_sequen == "") ){ 
+     if(($this->o97_sequen == null) || ($this->o97_sequen === 0 || $this->o97_sequen === 0.0 || $this->o97_sequen == "") ){ 
        $this->erro_sql = " Campo o97_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_orcimpactorecmovmes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o97_mes == null) || ($this->o97_mes == "") ){ 
+     if(($this->o97_mes == null) || ($this->o97_mes === 0 || $this->o97_mes === 0.0 || $this->o97_mes == "") ){ 
        $this->erro_sql = " Campo o97_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_orcimpactorecmovmes {
    function sql_query ( $o97_sequen=null,$o97_mes=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_orcimpactorecmovmes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_orcimpactorecmovmes {
    function sql_query_file ( $o97_sequen=null,$o97_mes=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_orcimpactorecmovmes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

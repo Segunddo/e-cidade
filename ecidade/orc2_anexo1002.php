@@ -33,7 +33,8 @@ require_once(modification("libs/db_libcontabilidade.php"));
 require_once(modification("libs/db_utils.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $classinatura   = new cl_assinatura;
 
@@ -47,7 +48,7 @@ $sSqlInst    .= "        nomeinstabrev                                      ";
 $sSqlInst    .= "   from db_config                                          ";
 $sSqlInst    .= "  where codigo in(".str_replace('-',', ',$db_selinstit).") ";
 $rsSqlInst    = db_query($sSqlInst);
-$iNumRowsInst = pg_numrows($rsSqlInst);
+$iNumRowsInst = ($rsSqlInst ? pg_numrows($rsSqlInst) : null);
 
 $sDescrInst   = '';
 $sVirgula     = '';
@@ -106,7 +107,7 @@ $datafin    = $perfin;
 $result_rec = db_receitasaldo(11, 1, 3, true, $sWhere, $iAnoUsu, $dataini, $datafin);
 
 $valor = 0;
-for ($i = 0; $i < pg_numrows($result_rec); $i++) {
+for ($i = 0; $i < ($result_rec ? pg_numrows($result_rec) : null); $i++) {
 
   db_fieldsmemory($result_rec, $i);
   if ($tipo_impressao == "O") {
@@ -128,7 +129,7 @@ if ($tipo_impressao == "O") {
   $tipo_balanco = 1;
 }
 
-for ($i = 0; $i < pg_numrows($result_rec); $i++) {
+for ($i = 0; $i < ($result_rec ? pg_numrows($result_rec) : null); $i++) {
 
   db_fieldsmemory($result_rec, $i);
   if ($tipo_balanco == 1) {
@@ -231,7 +232,7 @@ if ($iAnoUsu < 2008) {
 
 
 $rsSqlWork1    = db_query($sSqlWork1);
-$iNumRowsWork1 = pg_numrows($rsSqlWork1);
+$iNumRowsWork1 = ($rsSqlWork1 ? pg_numrows($rsSqlWork1) : null);
 
 for ($i = 0; $i < $iNumRowsWork1; $i++) {
 
@@ -252,7 +253,7 @@ for ($i = 0; $i < $iNumRowsWork1; $i++) {
 
 $sSqlWork1     = "select * from work1 where substr(elemento,1,1) = '3' order by elemento";
 $rsSqlWork1    = db_query($sSqlWork1);
-$iNumRowsWork1 = pg_numrows($rsSqlWork1);
+$iNumRowsWork1 = ($rsSqlWork1 ? pg_numrows($rsSqlWork1) : null);
 
 for ($i = 0; $i < $iNumRowsWork1; $i++) {
 
@@ -362,7 +363,7 @@ $vlre   = array();
 
 $sSqlWork1     = "select * from work1 where substr(elemento,2,1) = '2' or substr(elemento,2,1) = '8' order by elemento";
 $rsSqlWork1    = db_query($sSqlWork1);
-$iNumRowsWork1 = pg_numrows($rsSqlWork1);
+$iNumRowsWork1 = ($rsSqlWork1 ? pg_numrows($rsSqlWork1) : null);
 
 for ($i = 0; $i < $iNumRowsWork1; $i++) {
 
@@ -388,7 +389,7 @@ for ($i = 0; $i < $iNumRowsWork1; $i++) {
 
 $sSqlWork1     = "select * from work1 where substr(elemento,1,1) = '3' order by elemento";
 $rsSqlWork1    = db_query($sSqlWork1);
-$iNumRowsWork1 = pg_numrows($rsSqlWork1);
+$iNumRowsWork1 = ($rsSqlWork1 ? pg_numrows($rsSqlWork1) : null);
 
 for ($i = 0; $i < $iNumRowsWork1; $i++) {
 
@@ -455,7 +456,7 @@ for ($i = 0; $i < $numreg; $i++) {
 
 $sSqlWork1     = "select * from work1 where elemento =   '390000000000000' or elemento = '370000000000000'";
 $rsSqlWork1    = db_query($sSqlWork1);
-$iNumRowsWork1 = pg_numrows($rsSqlWork1);
+$iNumRowsWork1 = ($rsSqlWork1 ? pg_numrows($rsSqlWork1) : null);
 
 if ($iNumRowsWork1 > 0) {
 

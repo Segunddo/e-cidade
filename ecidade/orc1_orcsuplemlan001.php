@@ -115,7 +115,7 @@ if (isset ($Processar) && $Processar =="Processar") {
 	
 	for ($i = 0; $i < sizeof($matriz); $i ++) {
 		$o46_codsup = $matriz[$i];
-	
+
 	    // aqui começa o novo código 
 		$teste = processa_suplementacao($o46_codsup,$data,$usuario);
 		if ($teste!=false){

@@ -56,7 +56,7 @@ class cl_orcsuplemdespesappa {
                  o136_concarpeculiar = varchar(100) = C.Peculiar/ C. Aplicação 
                  ";
    //funcao construtor da classe 
-   function cl_orcsuplemdespesappa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcsuplemdespesappa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_orcsuplemdespesappa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o136_sequencial = ($this->o136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_sequencial"]:$this->o136_sequencial);
-       $this->o136_orcsuplem = ($this->o136_orcsuplem == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_orcsuplem"]:$this->o136_orcsuplem);
-       $this->o136_ppaestimativadespesa = ($this->o136_ppaestimativadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_ppaestimativadespesa"]:$this->o136_ppaestimativadespesa);
-       $this->o136_valor = ($this->o136_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_valor"]:$this->o136_valor);
+       $this->o136_sequencial = ($this->o136_sequencial === 0 || $this->o136_sequencial === 0.0 || $this->o136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_sequencial"]:$this->o136_sequencial);
+       $this->o136_orcsuplem = ($this->o136_orcsuplem === 0 || $this->o136_orcsuplem === 0.0 || $this->o136_orcsuplem == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_orcsuplem"]:$this->o136_orcsuplem);
+       $this->o136_ppaestimativadespesa = ($this->o136_ppaestimativadespesa === 0 || $this->o136_ppaestimativadespesa === 0.0 || $this->o136_ppaestimativadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_ppaestimativadespesa"]:$this->o136_ppaestimativadespesa);
+       $this->o136_valor = ($this->o136_valor === 0 || $this->o136_valor === 0.0 || $this->o136_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_valor"]:$this->o136_valor);
        $this->o136_concarpeculiar = ($this->o136_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_concarpeculiar"]:$this->o136_concarpeculiar);
      }else{
-       $this->o136_sequencial = ($this->o136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_sequencial"]:$this->o136_sequencial);
+       $this->o136_sequencial = ($this->o136_sequencial === 0 || $this->o136_sequencial === 0.0 || $this->o136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_sequencial"]:$this->o136_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_orcsuplemdespesappa {
          $this->o136_sequencial = $o136_sequencial; 
        }
      }
-     if(($this->o136_sequencial == null) || ($this->o136_sequencial == "") ){ 
+     if(($this->o136_sequencial == null) || ($this->o136_sequencial === 0 || $this->o136_sequencial === 0.0 || $this->o136_sequencial == "") ){ 
        $this->erro_sql = " Campo o136_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_orcsuplemdespesappa {
    function sql_query ( $o136_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_orcsuplemdespesappa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_orcsuplemdespesappa {
    function sql_query_file ( $o136_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_orcsuplemdespesappa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -494,7 +494,7 @@ class cl_orcsuplemdespesappa {
   function sql_query_dotacaoppa ( $o136_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -518,7 +518,7 @@ class cl_orcsuplemdespesappa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

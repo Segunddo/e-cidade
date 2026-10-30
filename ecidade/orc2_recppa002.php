@@ -30,7 +30,8 @@ include(modification("libs/db_sql.php"));
 include(modification("classes/db_orcppalei_classe.php"));
 include(modification("libs/db_libcontabilidade.php"));
 include(modification("libs/db_liborcamento.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 
 $clorcppalei = new cl_orcppalei;
@@ -46,7 +47,7 @@ $anosql = Array();
 
 $ano1 = $ano;
 $ano = substr(str_replace('-',',',$ano1),1);
-$ano_arr = 	split(',',$ano);
+$ano_arr = 	preg_split('#,#m',$ano);
 $anoini =$ano_arr[0];
 $anofim = $ano_arr[count($ano_arr) - 1];
 

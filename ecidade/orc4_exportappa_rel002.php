@@ -36,7 +36,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_orcppa_classe.php"));
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 $clorcppa = new cl_orcppa;
@@ -59,7 +60,7 @@ $sql = "select orcppa.*, orcppaval.*
             ";            
 $res = db_query($sql);
 //db_criatabela($res);exit;
-if (pg_numrows($res) == 0 ){      
+if (($res ? pg_numrows($res) : null) == 0 ){      
     db_redireciona('db_erros.php?fechar=true&db_erro=Nenhum registro encontrado ! ');   
 }
 /*

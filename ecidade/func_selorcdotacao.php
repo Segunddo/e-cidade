@@ -34,7 +34,8 @@ include(modification("libs/db_liborcamento.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_orcelemento_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clorcelemento = new cl_orcelemento;
 
@@ -233,7 +234,7 @@ if (substr($nivel, 1, 1) == 'B') {
         $nivelb = 7;
         $anousu = db_getsession("DB_anousu");
         $res_grupo = $clorcelemento->sql_record($clorcelemento->sql_query_exercicio(
-            $anousu, split("-", $db_selinstit),
+            $anousu, preg_split("#\\-#m", $db_selinstit),
             null,
             " distinct (o56_codele), o56_elemento",
             "o56_elemento",

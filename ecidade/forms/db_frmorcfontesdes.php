@@ -37,7 +37,7 @@ $clrotulo->label("o50_estrutreceita");
 if(isset($atualizar) || isset($chavepesquisa)){
   $fonte_full=str_replace('.','',$o50_estrutreceita); 
   /*rotina que traz somente o código*/
-  $matriz= split("\.",$o50_estrutreceita);
+  $matriz= preg_split("#\\.#m",$o50_estrutreceita);
   $inicia=false;//variavel que indica que o nivel não tem mais filhos
   $tam=(count($matriz)-1);
   for($i=$tam; $i>=0; $i--){

@@ -46,10 +46,10 @@ $db_botao = true;
 if(isset($incluir)){
   $sqlerro=false;
   db_inicio_transacao();
-  $matriz03=split("#",$dados);
+  $matriz03=preg_split("#\\##m",$dados);
   $tamanho03=count($matriz03);
   for($i=0; $i<$tamanho03; $i++){
-    $matriz04=split("-",$matriz03[$i]);
+    $matriz04=preg_split("#\\-#m",$matriz03[$i]);
     $anousu=db_getsession('DB_anousu'); 
     $clorcfontesdes->o60_codfon = $matriz04[0];
     $clorcfontesdes->o60_perc   = $matriz04[1];

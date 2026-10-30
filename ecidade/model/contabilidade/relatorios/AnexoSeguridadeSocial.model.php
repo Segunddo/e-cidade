@@ -90,7 +90,7 @@ class AnexoSeguridadeSocial extends RelatoriosLegaisBase {
    * Retorna as Linhas do Relatório
    *
    */
-  public function getDados() { 
+  public function getDados($trazerConfiguracaoPadrao = true) { 
     
     /**
      * Se for selecionado "Origem/Fase" como Orçamento deve selecionar como padrão o mes de janeiro

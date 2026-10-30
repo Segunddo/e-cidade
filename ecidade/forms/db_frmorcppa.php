@@ -81,7 +81,7 @@ if(isset($atualizar)){
  if($estrutural  ==  ""){
        $tot='0';
  }else{
-   $matriz=split('\.',$estrutural); 
+   $matriz=preg_split('#\.#m',$estrutural); 
    $tot=count($matriz);
  }
  

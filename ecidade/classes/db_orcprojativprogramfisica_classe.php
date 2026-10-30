@@ -56,7 +56,7 @@ class cl_orcprojativprogramfisica {
                  o28_valor = float4 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_orcprojativprogramfisica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcprojativprogramfisica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_orcprojativprogramfisica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o28_sequencial = ($this->o28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_sequencial"]:$this->o28_sequencial);
-       $this->o28_orcprojativ = ($this->o28_orcprojativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_orcprojativ"]:$this->o28_orcprojativ);
-       $this->o28_anousu = ($this->o28_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_anousu"]:$this->o28_anousu);
-       $this->o28_anoref = ($this->o28_anoref == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_anoref"]:$this->o28_anoref);
-       $this->o28_valor = ($this->o28_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_valor"]:$this->o28_valor);
+       $this->o28_sequencial = ($this->o28_sequencial === 0 || $this->o28_sequencial === 0.0 || $this->o28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_sequencial"]:$this->o28_sequencial);
+       $this->o28_orcprojativ = ($this->o28_orcprojativ === 0 || $this->o28_orcprojativ === 0.0 || $this->o28_orcprojativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_orcprojativ"]:$this->o28_orcprojativ);
+       $this->o28_anousu = ($this->o28_anousu === 0 || $this->o28_anousu === 0.0 || $this->o28_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_anousu"]:$this->o28_anousu);
+       $this->o28_anoref = ($this->o28_anoref === 0 || $this->o28_anoref === 0.0 || $this->o28_anoref == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_anoref"]:$this->o28_anoref);
+       $this->o28_valor = ($this->o28_valor === 0 || $this->o28_valor === 0.0 || $this->o28_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_valor"]:$this->o28_valor);
      }else{
-       $this->o28_sequencial = ($this->o28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_sequencial"]:$this->o28_sequencial);
+       $this->o28_sequencial = ($this->o28_sequencial === 0 || $this->o28_sequencial === 0.0 || $this->o28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o28_sequencial"]:$this->o28_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_orcprojativprogramfisica {
          $this->o28_sequencial = $o28_sequencial; 
        }
      }
-     if(($this->o28_sequencial == null) || ($this->o28_sequencial == "") ){ 
+     if(($this->o28_sequencial == null) || ($this->o28_sequencial === 0 || $this->o28_sequencial === 0.0 || $this->o28_sequencial == "") ){ 
        $this->erro_sql = " Campo o28_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_orcprojativprogramfisica {
    function sql_query ( $o28_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_orcprojativprogramfisica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_orcprojativprogramfisica {
    function sql_query_file ( $o28_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_orcprojativprogramfisica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

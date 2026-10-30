@@ -43,7 +43,8 @@ $clrotulo->label("DBtxtmesacumulado");
 $clrotulo->label("DBtxtperiodoini");
 $clrotulo->label("DBtxtperiodofim");
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 $sAcumulado = null;
@@ -52,7 +53,7 @@ if (isset($diausu) && $diausu != "") {
 }
 $result = db_dotacaosaldo($nivel, 2, 2, true, " o58_coddot = {$coddot} and o58_anousu = {$anousu} ", $anousu, $dPeriodoIni, $dPeriodoFim);
 
-if (pg_numrows($result) > 0) {
+if (($result ? pg_numrows($result) : null) > 0) {
   db_fieldsmemory($result, 0);
 } else {
   db_redireciona("db_erros.php?fechar=true&db_erro=Dotação não cadastrada.");

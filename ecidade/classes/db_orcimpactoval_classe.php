@@ -56,7 +56,7 @@ class cl_orcimpactoval {
                  o91_proces = int4 = Processo 
                  ";
    //funcao construtor da classe 
-   function cl_orcimpactoval() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcimpactoval"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_orcimpactoval {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o91_codseqimp = ($this->o91_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_codseqimp"]:$this->o91_codseqimp);
-       $this->o91_codimp = ($this->o91_codimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_codimp"]:$this->o91_codimp);
-       $this->o91_exercicio = ($this->o91_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_exercicio"]:$this->o91_exercicio);
-       $this->o91_valor = ($this->o91_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_valor"]:$this->o91_valor);
-       $this->o91_proces = ($this->o91_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_proces"]:$this->o91_proces);
+       $this->o91_codseqimp = ($this->o91_codseqimp === 0 || $this->o91_codseqimp === 0.0 || $this->o91_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_codseqimp"]:$this->o91_codseqimp);
+       $this->o91_codimp = ($this->o91_codimp === 0 || $this->o91_codimp === 0.0 || $this->o91_codimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_codimp"]:$this->o91_codimp);
+       $this->o91_exercicio = ($this->o91_exercicio === 0 || $this->o91_exercicio === 0.0 || $this->o91_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_exercicio"]:$this->o91_exercicio);
+       $this->o91_valor = ($this->o91_valor === 0 || $this->o91_valor === 0.0 || $this->o91_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_valor"]:$this->o91_valor);
+       $this->o91_proces = ($this->o91_proces === 0 || $this->o91_proces === 0.0 || $this->o91_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_proces"]:$this->o91_proces);
      }else{
-       $this->o91_codseqimp = ($this->o91_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_codseqimp"]:$this->o91_codseqimp);
+       $this->o91_codseqimp = ($this->o91_codseqimp === 0 || $this->o91_codseqimp === 0.0 || $this->o91_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o91_codseqimp"]:$this->o91_codseqimp);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_orcimpactoval {
          $this->o91_codseqimp = $o91_codseqimp; 
        }
      }
-     if(($this->o91_codseqimp == null) || ($this->o91_codseqimp == "") ){ 
+     if(($this->o91_codseqimp == null) || ($this->o91_codseqimp === 0 || $this->o91_codseqimp === 0.0 || $this->o91_codseqimp == "") ){ 
        $this->erro_sql = " Campo o91_codseqimp nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_orcimpactoval {
    function sql_query ( $o91_codseqimp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_orcimpactoval {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -464,7 +464,7 @@ class cl_orcimpactoval {
    function sql_query_file ( $o91_codseqimp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -485,7 +485,7 @@ class cl_orcimpactoval {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -498,7 +498,7 @@ class cl_orcimpactoval {
    function sql_query_dad ( $o91_codseqimp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -524,7 +524,7 @@ class cl_orcimpactoval {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

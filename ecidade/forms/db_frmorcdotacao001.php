@@ -73,7 +73,7 @@ if (isset($atualizar)) {
     if ($o50_estrutdespesa == "") {
         $tot = '0';
     } else {
-        $matriz = split('\.', $o50_estrutdespesa);
+        $matriz = preg_split('#\.#m', $o50_estrutdespesa);
         $tot = count($matriz);
     }
 

@@ -78,7 +78,7 @@ class cl_orcprojeto {
                  o39_usalimite = bool = Usa limite da Loa 
                  ";
    //funcao construtor da classe 
-   function cl_orcprojeto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcprojeto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -95,11 +95,11 @@ class cl_orcprojeto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o39_codproj = ($this->o39_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_codproj"]:$this->o39_codproj);
+       $this->o39_codproj = ($this->o39_codproj === 0 || $this->o39_codproj === 0.0 || $this->o39_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_codproj"]:$this->o39_codproj);
        $this->o39_descr = ($this->o39_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_descr"]:$this->o39_descr);
-       $this->o39_codlei = ($this->o39_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_codlei"]:$this->o39_codlei);
-       $this->o39_tipoproj = ($this->o39_tipoproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_tipoproj"]:$this->o39_tipoproj);
-       $this->o39_anousu = ($this->o39_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_anousu"]:$this->o39_anousu);
+       $this->o39_codlei = ($this->o39_codlei === 0 || $this->o39_codlei === 0.0 || $this->o39_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_codlei"]:$this->o39_codlei);
+       $this->o39_tipoproj = ($this->o39_tipoproj === 0 || $this->o39_tipoproj === 0.0 || $this->o39_tipoproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_tipoproj"]:$this->o39_tipoproj);
+       $this->o39_anousu = ($this->o39_anousu === 0 || $this->o39_anousu === 0.0 || $this->o39_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_anousu"]:$this->o39_anousu);
        $this->o39_numero = ($this->o39_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_numero"]:$this->o39_numero);
        if($this->o39_data == ""){
          $this->o39_data_dia = ($this->o39_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_data_dia"]:$this->o39_data_dia);
@@ -123,7 +123,7 @@ class cl_orcprojeto {
        $this->o39_compllei = ($this->o39_compllei == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_compllei"]:$this->o39_compllei);
        $this->o39_usalimite = ($this->o39_usalimite == "f"?@$GLOBALS["HTTP_POST_VARS"]["o39_usalimite"]:$this->o39_usalimite);
      }else{
-       $this->o39_codproj = ($this->o39_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_codproj"]:$this->o39_codproj);
+       $this->o39_codproj = ($this->o39_codproj === 0 || $this->o39_codproj === 0.0 || $this->o39_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o39_codproj"]:$this->o39_codproj);
      }
    }
    // funcao para inclusao
@@ -198,7 +198,7 @@ class cl_orcprojeto {
          $this->o39_codproj = $o39_codproj; 
        }
      }
-     if(($this->o39_codproj == null) || ($this->o39_codproj == "") ){ 
+     if(($this->o39_codproj == null) || ($this->o39_codproj === 0 || $this->o39_codproj === 0.0 || $this->o39_codproj == "") ){ 
        $this->erro_sql = " Campo o39_codproj nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

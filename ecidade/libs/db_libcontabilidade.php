@@ -5182,7 +5182,7 @@ function db_elementosaldo(
 
     GLOBAL $o58_orgao, $o40_descr, $o58_unidade, $o41_descr, $o56_descr, $codele, $elemento, $descr, $dot_ini, $saldo_anterior, $empenhado, $anulado, $liquidado, $pago, $suplementado, $reduzido, $atual, $reservado, $atual_menos_reservado, $atual_a_pagar, $atual_a_pagar_liquidado, $empenhado_acumulado, $anulado_acumulado, $liquidado_acumulado, $pago_acumulado, $suplementado_acumulado, $reduzido_acumulado, $especial, $especial_acumulado, $suplemen;
     // for($i = 0;$i < 10;$i++){
-    for ($i = 0; $i < pg_numrows($result); $i++) {
+    for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i++) {
         db_fieldsmemory($result, $i);
         $tot_dot_ini = $dot_ini;
         $tot_saldo_anterior = $saldo_anterior;

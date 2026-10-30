@@ -30,7 +30,7 @@ class cl_previsaodespesalinhaspacto {
                  c41_valorlinha = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_previsaodespesalinhaspacto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("previsaodespesalinhaspacto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_previsaodespesalinhaspacto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c41_sequencial = ($this->c41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_sequencial"]:$this->c41_sequencial);
-       $this->c41_previsaodespesa = ($this->c41_previsaodespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_previsaodespesa"]:$this->c41_previsaodespesa);
-       $this->c41_linhaspacto = ($this->c41_linhaspacto == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_linhaspacto"]:$this->c41_linhaspacto);
-       $this->c41_previsaodespesaplano = ($this->c41_previsaodespesaplano == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_previsaodespesaplano"]:$this->c41_previsaodespesaplano);
-       $this->c41_valorlinha = ($this->c41_valorlinha == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_valorlinha"]:$this->c41_valorlinha);
+       $this->c41_sequencial = ($this->c41_sequencial === 0 || $this->c41_sequencial === 0.0 || $this->c41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_sequencial"]:$this->c41_sequencial);
+       $this->c41_previsaodespesa = ($this->c41_previsaodespesa === 0 || $this->c41_previsaodespesa === 0.0 || $this->c41_previsaodespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_previsaodespesa"]:$this->c41_previsaodespesa);
+       $this->c41_linhaspacto = ($this->c41_linhaspacto === 0 || $this->c41_linhaspacto === 0.0 || $this->c41_linhaspacto == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_linhaspacto"]:$this->c41_linhaspacto);
+       $this->c41_previsaodespesaplano = ($this->c41_previsaodespesaplano === 0 || $this->c41_previsaodespesaplano === 0.0 || $this->c41_previsaodespesaplano == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_previsaodespesaplano"]:$this->c41_previsaodespesaplano);
+       $this->c41_valorlinha = ($this->c41_valorlinha === 0 || $this->c41_valorlinha === 0.0 || $this->c41_valorlinha == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_valorlinha"]:$this->c41_valorlinha);
      }else{
-       $this->c41_sequencial = ($this->c41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_sequencial"]:$this->c41_sequencial);
+       $this->c41_sequencial = ($this->c41_sequencial === 0 || $this->c41_sequencial === 0.0 || $this->c41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c41_sequencial"]:$this->c41_sequencial);
      }
    }
    // funcao para Inclusão
@@ -119,7 +119,7 @@ class cl_previsaodespesalinhaspacto {
          $this->c41_sequencial = $c41_sequencial; 
        }
      }
-     if(($this->c41_sequencial == null) || ($this->c41_sequencial == "") ){ 
+     if(($this->c41_sequencial == null) || ($this->c41_sequencial === 0 || $this->c41_sequencial === 0.0 || $this->c41_sequencial == "") ){ 
        $this->erro_sql = " Campo c41_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

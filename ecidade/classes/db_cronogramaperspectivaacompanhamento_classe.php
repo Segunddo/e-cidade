@@ -28,7 +28,7 @@ class cl_cronogramaperspectivaacompanhamento {
                  o151_mes = int4 = Mês 
                  ";
    //funcao construtor da classe 
-   function cl_cronogramaperspectivaacompanhamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cronogramaperspectivaacompanhamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_cronogramaperspectivaacompanhamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o151_sequencial = ($this->o151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o151_sequencial"]:$this->o151_sequencial);
-       $this->o151_cronogramaperspectivaorigem = ($this->o151_cronogramaperspectivaorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["o151_cronogramaperspectivaorigem"]:$this->o151_cronogramaperspectivaorigem);
-       $this->o151_cronogramaperspectiva = ($this->o151_cronogramaperspectiva == ""?@$GLOBALS["HTTP_POST_VARS"]["o151_cronogramaperspectiva"]:$this->o151_cronogramaperspectiva);
-       $this->o151_mes = ($this->o151_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o151_mes"]:$this->o151_mes);
+       $this->o151_sequencial = ($this->o151_sequencial === 0 || $this->o151_sequencial === 0.0 || $this->o151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o151_sequencial"]:$this->o151_sequencial);
+       $this->o151_cronogramaperspectivaorigem = ($this->o151_cronogramaperspectivaorigem === 0 || $this->o151_cronogramaperspectivaorigem === 0.0 || $this->o151_cronogramaperspectivaorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["o151_cronogramaperspectivaorigem"]:$this->o151_cronogramaperspectivaorigem);
+       $this->o151_cronogramaperspectiva = ($this->o151_cronogramaperspectiva === 0 || $this->o151_cronogramaperspectiva === 0.0 || $this->o151_cronogramaperspectiva == ""?@$GLOBALS["HTTP_POST_VARS"]["o151_cronogramaperspectiva"]:$this->o151_cronogramaperspectiva);
+       $this->o151_mes = ($this->o151_mes === 0 || $this->o151_mes === 0.0 || $this->o151_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o151_mes"]:$this->o151_mes);
      }else{
-       $this->o151_sequencial = ($this->o151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o151_sequencial"]:$this->o151_sequencial);
+       $this->o151_sequencial = ($this->o151_sequencial === 0 || $this->o151_sequencial === 0.0 || $this->o151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o151_sequencial"]:$this->o151_sequencial);
      }
    }
    // funcao para Inclusão
@@ -107,7 +107,7 @@ class cl_cronogramaperspectivaacompanhamento {
          $this->o151_sequencial = $o151_sequencial; 
        }
      }
-     if(($this->o151_sequencial == null) || ($this->o151_sequencial == "") ){ 
+     if(($this->o151_sequencial == null) || ($this->o151_sequencial === 0 || $this->o151_sequencial === 0.0 || $this->o151_sequencial == "") ){ 
        $this->erro_sql = " Campo o151_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -78,7 +78,7 @@ class cl_orcppa {
                  o23_sitfinal = text = Sit. Final 
                  ";
    //funcao construtor da classe 
-   function cl_orcppa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcppa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -95,24 +95,24 @@ class cl_orcppa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o23_codppa = ($this->o23_codppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_codppa"]:$this->o23_codppa);
-       $this->o23_codleippa = ($this->o23_codleippa == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_codleippa"]:$this->o23_codleippa);
-       $this->o23_anoexe = ($this->o23_anoexe == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_anoexe"]:$this->o23_anoexe);
-       $this->o23_orgao = ($this->o23_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_orgao"]:$this->o23_orgao);
-       $this->o23_unidade = ($this->o23_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_unidade"]:$this->o23_unidade);
-       $this->o23_funcao = ($this->o23_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_funcao"]:$this->o23_funcao);
-       $this->o23_subfuncao = ($this->o23_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_subfuncao"]:$this->o23_subfuncao);
-       $this->o23_programa = ($this->o23_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_programa"]:$this->o23_programa);
+       $this->o23_codppa = ($this->o23_codppa === 0 || $this->o23_codppa === 0.0 || $this->o23_codppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_codppa"]:$this->o23_codppa);
+       $this->o23_codleippa = ($this->o23_codleippa === 0 || $this->o23_codleippa === 0.0 || $this->o23_codleippa == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_codleippa"]:$this->o23_codleippa);
+       $this->o23_anoexe = ($this->o23_anoexe === 0 || $this->o23_anoexe === 0.0 || $this->o23_anoexe == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_anoexe"]:$this->o23_anoexe);
+       $this->o23_orgao = ($this->o23_orgao === 0 || $this->o23_orgao === 0.0 || $this->o23_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_orgao"]:$this->o23_orgao);
+       $this->o23_unidade = ($this->o23_unidade === 0 || $this->o23_unidade === 0.0 || $this->o23_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_unidade"]:$this->o23_unidade);
+       $this->o23_funcao = ($this->o23_funcao === 0 || $this->o23_funcao === 0.0 || $this->o23_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_funcao"]:$this->o23_funcao);
+       $this->o23_subfuncao = ($this->o23_subfuncao === 0 || $this->o23_subfuncao === 0.0 || $this->o23_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_subfuncao"]:$this->o23_subfuncao);
+       $this->o23_programa = ($this->o23_programa === 0 || $this->o23_programa === 0.0 || $this->o23_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_programa"]:$this->o23_programa);
        $this->o23_programatxt = ($this->o23_programatxt == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_programatxt"]:$this->o23_programatxt);
-       $this->o23_acao = ($this->o23_acao == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_acao"]:$this->o23_acao);
+       $this->o23_acao = ($this->o23_acao === 0 || $this->o23_acao === 0.0 || $this->o23_acao == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_acao"]:$this->o23_acao);
        $this->o23_acaotxt = ($this->o23_acaotxt == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_acaotxt"]:$this->o23_acaotxt);
-       $this->o23_produto = ($this->o23_produto == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_produto"]:$this->o23_produto);
+       $this->o23_produto = ($this->o23_produto === 0 || $this->o23_produto === 0.0 || $this->o23_produto == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_produto"]:$this->o23_produto);
        $this->o23_unimed = ($this->o23_unimed == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_unimed"]:$this->o23_unimed);
-       $this->o23_indica = ($this->o23_indica == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_indica"]:$this->o23_indica);
+       $this->o23_indica = ($this->o23_indica === 0 || $this->o23_indica === 0.0 || $this->o23_indica == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_indica"]:$this->o23_indica);
        $this->o23_sitinicial = ($this->o23_sitinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_sitinicial"]:$this->o23_sitinicial);
        $this->o23_sitfinal = ($this->o23_sitfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_sitfinal"]:$this->o23_sitfinal);
      }else{
-       $this->o23_codppa = ($this->o23_codppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_codppa"]:$this->o23_codppa);
+       $this->o23_codppa = ($this->o23_codppa === 0 || $this->o23_codppa === 0.0 || $this->o23_codppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o23_codppa"]:$this->o23_codppa);
      }
    }
    // funcao para inclusao
@@ -259,7 +259,7 @@ class cl_orcppa {
          $this->o23_codppa = $o23_codppa; 
        }
      }
-     if(($this->o23_codppa == null) || ($this->o23_codppa == "") ){ 
+     if(($this->o23_codppa == null) || ($this->o23_codppa === 0 || $this->o23_codppa === 0.0 || $this->o23_codppa == "") ){ 
        $this->erro_sql = " Campo o23_codppa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -727,7 +727,7 @@ class cl_orcppa {
    function sql_query ( $o23_codppa=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -765,7 +765,7 @@ class cl_orcppa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -778,7 +778,7 @@ class cl_orcppa {
    function sql_query_file ( $o23_codppa=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -799,7 +799,7 @@ class cl_orcppa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -811,7 +811,7 @@ class cl_orcppa {
    function sql_query_compl ( $o23_codppa=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -842,7 +842,7 @@ class cl_orcppa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -859,7 +859,7 @@ class cl_orcppa {
    function sql_query_exporta ($exercicio="",$o23_codppa=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -897,7 +897,7 @@ class cl_orcppa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

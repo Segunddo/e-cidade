@@ -51,6 +51,7 @@ Patrimonial, 469 previstos, ~710 reais).
 |---|---|---|---|---|---|---|
 | 1 `cus`+`pla`+`pl`+`tes` | 1.347 | 45 Rector + 2 à mão (+10 do passo 8b) | 1.347/1.347 | 17/17 | 369 linhas, 0 div. | **99/99** |
 | 2 `emp` | 3.409 | 295 Rector + ~30 à mão | 3.409/3.409 | 48/48 | 1.080 linhas, 0 div. | **458/458** |
+| 3 `orc` | 3.037 | 345 Rector + ~125 à mão | 3.034/3.037 (as 3 restantes não compilam em nenhum) | 1.032 (diffs só do harness) | 25.379 linhas, diffs só do harness | **626/628** (2 caracterizadas) |
 
 **Lote 1 — `cus`, `pla`, `pl`, `tes`** (Custos, Planejamento, Tesouraria; 99 arquivos, roteados no `location`).
 Rector em 45 arquivos, só regras já vetadas (28 `parse_str`+`extract`, 17 guardas, 15 construtores, 14 `split`, todos
@@ -107,6 +108,90 @@ Bateria 439/458 → **458/458**. LSP: 846 de 863 com `extends` carregam nos dois
 Fase B de Patrimonial tinha posto lá. Passo 8b (360 telas do Financeiro no 8.5): nada indo ao 5.6.
 
 **Regressão:** o `fpdf151/pdf.php` está em quase todo universo já servido, então a bateria dirigida seria a completa.
-Ver a decisão pedida ao usuário (abaixo, ou no próximo registro).
+**Decisão do usuário (29/10/2026): adiada para a bateria completa do fim da área.** A guarda do `pdf.php` só muda
+o caminho em que a consulta a `db_config` falha, onde o 8.5 antes parava com fatal; tela já verificada como idêntica
+não passava por ali.
 
-**Estado:** lote 2 concluído. Aguardando o pedido do lote 3 (`orc`).
+**Lote 3 — `orc`** (Orçamento, 628 telas `.php` em disco, `orc1_`…`orc4_`, roteadas no `location`; mais 2 sobras não
+executáveis, `orc2_orcprojeto002.php.sap` e `orc2_reldespesas001.php_novo`). Universo 3.037. Separadores de `split`
+todos literais (`"#"` 384, `"-"` 44, `'\.'`, `"\_"`…); `"\_"` conferido no 5.6, idêntico. Rector em **345 arquivos**,
+0 na 2ª e na 3ª passada; uma regra **nova** apareceu, `RenameCastRector` (`(real)` → `(float)`): **conferida no 5.6 em 7
+casos, idêntica**, aceita (fora da denylist). Remanescentes 0; portão de funções 0 ausentes.
+
+`php -l`: 3 forms **não compilam em nenhum dos dois runtimes, já antes do Rector** (`forms/db_frmcronogramabasereceita.php`,
+`db_frmorcprojativsubprojeto.php`, `db_frmppadotacao.php`, "unexpected identifier db_input") — pré-existente, intocado.
+Dois só quebravam no 8.5, `break`/`continue` fora de laço, alcançáveis → **`exit;`** (catálogo):
+`orc2_orcppaval002.php` (3 `continue`, 277/281/285) e `orc4_importaduplicacao001.php` (2 `break`, 165/226).
+
+Classes 1.032 e escrita 25.379 linhas: só os diffs conhecidos do harness (`ArgumentCountError` dos `.model.php` com
+construtor obrigatório — `lancamentoContabil`, `ordemPagamento`, `RequisicaoMaterial`, `solicitacaoCompra` —; `empenho →
+datausu` sem sessão; `db_avaliacaogruporespostatrabalhointermitente` sem o `.dd.xml`, que lança no 8.5 e mata o 5.6).
+
+À mão:
+
+- **LSP — 7 filhas de `RelatoriosLegaisBase`** (`model/contabilidade/relatorios/Anexo{DemonstrativoReceitaPublica,
+  ProgramaObrasPrestacaoServico,QuadroDotacaoGoverno,ReceitaCorrenteLiquida,ReceitaLegislacao,SeguridadeSocial,
+  SumarioGeralReceita}`) declaravam `getDados()` sem o `$trazerConfiguracaoPadrao = true` da mãe → acrescentado na
+  filha; carregam nos dois. **Há mais 40 filhas com o mesmo defeito fora deste universo** (esperadas no lote 5, `con`).
+  LSP: 432 arquivos com `extends`/`implements`.
+- **Forma negada** (passo 6c): 2.508 pares; **8 pontos de auditoria** em `db_orcparamseqcoluna` (3) e
+  `db_orcparamseqinfocomplementar` (5), corrigidos com o `negada_corrige.py`; o detector caiu de 7.294 para 7.286.
+- **98 guardas `pg_*`** (`null`) pelo ciclo, nenhuma seguida de `===`/`!==` (nem a variável atribuída). Duas fora do
+  `orc`: `libs/db_libcontabilidade.php` e `classes/db_assinatura_classe.php`.
+- `count(null)` → `count((array)…)` ×3 (`orc1_orcprevrec003:242`, `orc2_reservas002:40/46`); `array_key_exists(k, null)`
+  → `(array)` ×2 (`orc2_demmetasanuais002:177`, `orc2_mestfisccompexercant002:182`; no 5.6 `NULL`, e o `!` dá o mesmo).
+- `stdClass` que o 5.6 criava ×2 (`orc2_cronogramafisicofinanc002` `$oTotal`, `orc2_convenioIRF1B002` `$oSaldoOrigem`).
+- `cal_days_in_month()` ×4 (`orc2_convenioIRF1A/B/C002`, `orc2_resumopedidocategorias002`): `try`/`catch (Throwable)` →
+  `false`, o padrão da Educação.
+- **NÚCLEO `fpdf151/fpdf.php`, `Cell()`**: altura `''` (4 relatórios `orc` passam `cell(25,'',…)`) era 0 no 5.6 e
+  `TypeError` no 8.5. `if (!is_numeric($h)) { $h = (float)$h; }` na entrada — o precedente do `(float)$ln`, no núcleo e não
+  na chamada. **Com altura numérica é no-op**, então tela já idêntica não muda de caminho. Sem cópia no `modification/`.
+- `substr('')` em `orc2_resumodesp002.php:63` e `mktime()` com mês `null` em `orc2_convenioIRF1C002.php:115`: as duas
+  **categorias novas** abaixo.
+
+Bateria 572/628 → **626/628**. As 2 caracterizadas:
+- `orc1_orcsuplem005.php` — **quebra nos dois**: `forms/db_frmorcsuplem.php:90` chama `$clorcprojeto->sql_record()` sem que
+  ninguém instancie `$clorcprojeto`. Saída idêntica até o fatal; o 8.5 só acrescenta a página "Erro interno". Pré-existente.
+- `orc2_orcprevmensalrec002.php` — PDF idêntico salvo o **horário do rodapé**, que fica dentro do fluxo comprimido
+  (fora do alcance da normalização do `cmp.py`); conferido descomprimindo os fluxos.
+
+Roteamento: `orc` no `location` e nas três cópias do critério (`location` agora **7.262 arquivos**); o `map` perdeu as 2
+telas `orc` de Patrimonial. **Passo 8b** (704 telas do Financeiro no 8.5): 3 telas `orc2_*` abriam no 5.6 duas abas de
+Contabilidade, `con2_filtrosrelatorios.php` e `con2_estimativaRenunciaReceita011.php`; o universo delas cabe inteiro no do
+`orc` (nada a portar), 2/2 idênticas, postas em `faseb_map_abas.txt` → `map` 811 entradas (587 + 229 abas). Levantamento
+refeito: nada indo ao 5.6.
+
+**Regressão:** três trechos fora do `orc` — o `Cell()` do núcleo e as guardas de `db_libcontabilidade` e `db_assinatura`
+— só mudam o caminho em que o 8.5 antes parava com fatal (ou, no `Cell()`, altura não numérica). Pela decisão do lote 2,
+ficam para a **bateria completa do fim da área**.
+
+### CATEGORIA NOVA (orc): `substr()` de string vazia é `false` no 5.6 — e `false == '0'` é verdadeiro
+
+```
+                          5.6       8.5
+substr(null, 0, 1)        false     ""
+substr('',   0, 1)        false     ""
+false == '0'              true      —
+""    == '0'              —         false
+```
+
+`orc2_resumodesp002.php:63`: `$nivelele = substr($nivelele,0,1)`, com `$nivelele` ausente. No 5.6 o `false` casa
+`if ($nivelele=='0')` e o relatório vai pelo `$tipo_rel = 1`; no 8.5 vai pelo `$tipo_rel = 2` e o PDF sai com outro layout
+(uma linha "Total" a mais) — **saída diferente sem erro nenhum**, só a bateria pega. Correção fiel, só na linha que
+divergiu: `((string)$x === "" ? false : substr($x,0,1))`, igual ao 5.6 original em 6 entradas (`null`, `''`, `'0'`, `'3'`,
+`'45'`, `0`) nos dois runtimes. Parente da do RH (`substr()` de data vazia → `false` → 0 no `mktime`). **Não varrer em
+massa:** só muda resultado quando o `false` é comparado com `'0'`/`0`/`''` ou testado com `===`.
+
+### CATEGORIA NOVA (orc): `mktime()` com argumento `null` significa AGORA no 8.5
+
+```
+mktime(0,0,0, null, 0, 2026)     5.6: mes 0 -> 30/11/2025     8.5: mes atual -> 30/09/2026 (em 30/10)
+```
+
+Desde o PHP 8.0 os parâmetros do `mktime()` são `?int` e `null` quer dizer "o valor atual" — a mesma família do
+`date($fmt, null)` do `dvr`. `orc2_convenioIRF1C002.php:115` (mês do trimestre que o `switch` não preencheu) imprimia
+outra data no cabeçalho. Guarda **só para `null`**: `($m === null ? 0 : $m)`. `(int)` não seria fiel, porque `''` no 5.6 faz
+o `mktime()` devolver `false`, não tratar como 0. Medido em 4 entradas. **O resultado depende do dia em que roda**, então a
+divergência pode sumir num mês e voltar no outro: tela com `mktime`/`date` sobre variável que pode faltar merece desconfiança.
+
+**Estado:** lote 3 concluído. Aguardando o pedido do lote 4 (`cai` inteiro).

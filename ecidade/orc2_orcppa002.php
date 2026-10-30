@@ -38,7 +38,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('j14_nome');
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $dbwhere="";
 $and="";
 
@@ -87,7 +88,7 @@ for($x=0; $x<$numrows01; $x++){
 	$pdf->setfont('arial','b',9);
 	$pdf->cell(140,6,"OBJETIVOS:",1,0,"L",0);
 	$pdf->cell(140,6,"META:",1,0,"L",0);
-	
+
 	$pdf->setfont('arial','',8);
 	$pdf->ln();
     }  

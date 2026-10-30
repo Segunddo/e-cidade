@@ -40,18 +40,19 @@ $clrotulo->label('r06_descr');
 $clrotulo->label('r06_elemen');
 $clrotulo->label('r06_pd');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $head2 = "RELATÓRIO DAS FONTES DA RECEITA - ANEXO 3";
 $head3 = "SEGUNDO A CATEGORIA ECONÔMICA";
 $head4 = "ANEXO (3) EXERCÍCIO: ".db_getsession("DB_anousu");
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
      $descr_inst .= $xvirg.$nomeinstabrev;
      $xvirg = ', ';
@@ -84,7 +85,7 @@ $troca = 1;
 $alt = 4;
 $aux = 0;
 $col = 0;
-for($x = 0; $x < pg_numrows($result);$x++){
+for($x = 0; $x < ($result ? pg_numrows($result) : null);$x++){
    db_fieldsmemory($result,$x);
    $sQuery 	= "select o57_finali from orcfontes where o57_fonte = '$o57_fonte' and o57_anousu = ".db_getsession("DB_anousu");
    $rsQuery = db_query($sQuery);

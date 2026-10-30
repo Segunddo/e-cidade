@@ -41,7 +41,7 @@ class AnexoReceitaCorrenteLiquida extends RelatoriosLegaisBase {
    *
    * @return array $aRetorno
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
     
     /**
      * Para executar este anexo é necessário buscar por todas as instituições

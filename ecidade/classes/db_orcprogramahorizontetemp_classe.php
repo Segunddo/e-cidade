@@ -64,7 +64,7 @@ class cl_orcprogramahorizontetemp {
                  o17_valor = float4 = Valor Global Estimado 
                  ";
    //funcao construtor da classe 
-   function cl_orcprogramahorizontetemp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcprogramahorizontetemp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,9 +81,9 @@ class cl_orcprogramahorizontetemp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o17_sequencial = ($this->o17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_sequencial"]:$this->o17_sequencial);
-       $this->o17_programa = ($this->o17_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_programa"]:$this->o17_programa);
-       $this->o17_anousu = ($this->o17_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_anousu"]:$this->o17_anousu);
+       $this->o17_sequencial = ($this->o17_sequencial === 0 || $this->o17_sequencial === 0.0 || $this->o17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_sequencial"]:$this->o17_sequencial);
+       $this->o17_programa = ($this->o17_programa === 0 || $this->o17_programa === 0.0 || $this->o17_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_programa"]:$this->o17_programa);
+       $this->o17_anousu = ($this->o17_anousu === 0 || $this->o17_anousu === 0.0 || $this->o17_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_anousu"]:$this->o17_anousu);
        if($this->o17_dataini == ""){
          $this->o17_dataini_dia = ($this->o17_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_dataini_dia"]:$this->o17_dataini_dia);
          $this->o17_dataini_mes = ($this->o17_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_dataini_mes"]:$this->o17_dataini_mes);
@@ -100,9 +100,9 @@ class cl_orcprogramahorizontetemp {
             $this->o17_datafin = $this->o17_datafin_ano."-".$this->o17_datafin_mes."-".$this->o17_datafin_dia;
          }
        }
-       $this->o17_valor = ($this->o17_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_valor"]:$this->o17_valor);
+       $this->o17_valor = ($this->o17_valor === 0 || $this->o17_valor === 0.0 || $this->o17_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_valor"]:$this->o17_valor);
      }else{
-       $this->o17_sequencial = ($this->o17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_sequencial"]:$this->o17_sequencial);
+       $this->o17_sequencial = ($this->o17_sequencial === 0 || $this->o17_sequencial === 0.0 || $this->o17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_sequencial"]:$this->o17_sequencial);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_orcprogramahorizontetemp {
          $this->o17_sequencial = $o17_sequencial; 
        }
      }
-     if(($this->o17_sequencial == null) || ($this->o17_sequencial == "") ){ 
+     if(($this->o17_sequencial == null) || ($this->o17_sequencial === 0 || $this->o17_sequencial === 0.0 || $this->o17_sequencial == "") ){ 
        $this->erro_sql = " Campo o17_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -501,7 +501,7 @@ class cl_orcprogramahorizontetemp {
    function sql_query ( $o17_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_orcprogramahorizontetemp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_orcprogramahorizontetemp {
    function sql_query_file ( $o17_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -559,7 +559,7 @@ class cl_orcprogramahorizontetemp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

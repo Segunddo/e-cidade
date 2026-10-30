@@ -58,7 +58,7 @@ class cl_orcprevdesp {
                  o35_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_orcprevdesp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcprevdesp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,17 +75,17 @@ class cl_orcprevdesp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o35_anousu = ($this->o35_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_anousu"]:$this->o35_anousu);
-       $this->o35_projativ = ($this->o35_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_projativ"]:$this->o35_projativ);
-       $this->o35_codigo = ($this->o35_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_codigo"]:$this->o35_codigo);
-       $this->o35_mes = ($this->o35_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_mes"]:$this->o35_mes);
-       $this->o35_perc = ($this->o35_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_perc"]:$this->o35_perc);
-       $this->o35_valor = ($this->o35_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_valor"]:$this->o35_valor);
+       $this->o35_anousu = ($this->o35_anousu === 0 || $this->o35_anousu === 0.0 || $this->o35_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_anousu"]:$this->o35_anousu);
+       $this->o35_projativ = ($this->o35_projativ === 0 || $this->o35_projativ === 0.0 || $this->o35_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_projativ"]:$this->o35_projativ);
+       $this->o35_codigo = ($this->o35_codigo === 0 || $this->o35_codigo === 0.0 || $this->o35_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_codigo"]:$this->o35_codigo);
+       $this->o35_mes = ($this->o35_mes === 0 || $this->o35_mes === 0.0 || $this->o35_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_mes"]:$this->o35_mes);
+       $this->o35_perc = ($this->o35_perc === 0 || $this->o35_perc === 0.0 || $this->o35_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_perc"]:$this->o35_perc);
+       $this->o35_valor = ($this->o35_valor === 0 || $this->o35_valor === 0.0 || $this->o35_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_valor"]:$this->o35_valor);
      }else{
-       $this->o35_anousu = ($this->o35_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_anousu"]:$this->o35_anousu);
-       $this->o35_projativ = ($this->o35_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_projativ"]:$this->o35_projativ);
-       $this->o35_codigo = ($this->o35_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_codigo"]:$this->o35_codigo);
-       $this->o35_mes = ($this->o35_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_mes"]:$this->o35_mes);
+       $this->o35_anousu = ($this->o35_anousu === 0 || $this->o35_anousu === 0.0 || $this->o35_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_anousu"]:$this->o35_anousu);
+       $this->o35_projativ = ($this->o35_projativ === 0 || $this->o35_projativ === 0.0 || $this->o35_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_projativ"]:$this->o35_projativ);
+       $this->o35_codigo = ($this->o35_codigo === 0 || $this->o35_codigo === 0.0 || $this->o35_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_codigo"]:$this->o35_codigo);
+       $this->o35_mes = ($this->o35_mes === 0 || $this->o35_mes === 0.0 || $this->o35_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o35_mes"]:$this->o35_mes);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_orcprevdesp {
        $this->o35_projativ = $o35_projativ; 
        $this->o35_codigo = $o35_codigo; 
        $this->o35_mes = $o35_mes; 
-     if(($this->o35_anousu == null) || ($this->o35_anousu == "") ){ 
+     if(($this->o35_anousu == null) || ($this->o35_anousu === 0 || $this->o35_anousu === 0.0 || $this->o35_anousu == "") ){ 
        $this->erro_sql = " Campo o35_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -121,7 +121,7 @@ class cl_orcprevdesp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o35_projativ == null) || ($this->o35_projativ == "") ){ 
+     if(($this->o35_projativ == null) || ($this->o35_projativ === 0 || $this->o35_projativ === 0.0 || $this->o35_projativ == "") ){ 
        $this->erro_sql = " Campo o35_projativ nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -129,7 +129,7 @@ class cl_orcprevdesp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o35_codigo == null) || ($this->o35_codigo == "") ){ 
+     if(($this->o35_codigo == null) || ($this->o35_codigo === 0 || $this->o35_codigo === 0.0 || $this->o35_codigo == "") ){ 
        $this->erro_sql = " Campo o35_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -137,7 +137,7 @@ class cl_orcprevdesp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o35_mes == null) || ($this->o35_mes == "") ){ 
+     if(($this->o35_mes == null) || ($this->o35_mes === 0 || $this->o35_mes === 0.0 || $this->o35_mes == "") ){ 
        $this->erro_sql = " Campo o35_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -468,7 +468,7 @@ class cl_orcprevdesp {
    function sql_query ( $o35_anousu=null,$o35_projativ=null,$o35_codigo=null,$o35_mes=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -517,7 +517,7 @@ class cl_orcprevdesp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -529,7 +529,7 @@ class cl_orcprevdesp {
    function sql_query_file ( $o35_anousu=null,$o35_projativ=null,$o35_codigo=null,$o35_mes=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -574,7 +574,7 @@ class cl_orcprevdesp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -56,7 +56,7 @@ class cl_orcimpactovalmov {
                  o64_proces = int4 = Processo 
                  ";
    //funcao construtor da classe 
-   function cl_orcimpactovalmov() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcimpactovalmov"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_orcimpactovalmov {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o64_codseqimpmov = ($this->o64_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codseqimpmov"]:$this->o64_codseqimpmov);
-       $this->o64_codimpmov = ($this->o64_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codimpmov"]:$this->o64_codimpmov);
-       $this->o64_exercicio = ($this->o64_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_exercicio"]:$this->o64_exercicio);
-       $this->o64_valor = ($this->o64_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_valor"]:$this->o64_valor);
-       $this->o64_proces = ($this->o64_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_proces"]:$this->o64_proces);
+       $this->o64_codseqimpmov = ($this->o64_codseqimpmov === 0 || $this->o64_codseqimpmov === 0.0 || $this->o64_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codseqimpmov"]:$this->o64_codseqimpmov);
+       $this->o64_codimpmov = ($this->o64_codimpmov === 0 || $this->o64_codimpmov === 0.0 || $this->o64_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codimpmov"]:$this->o64_codimpmov);
+       $this->o64_exercicio = ($this->o64_exercicio === 0 || $this->o64_exercicio === 0.0 || $this->o64_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_exercicio"]:$this->o64_exercicio);
+       $this->o64_valor = ($this->o64_valor === 0 || $this->o64_valor === 0.0 || $this->o64_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_valor"]:$this->o64_valor);
+       $this->o64_proces = ($this->o64_proces === 0 || $this->o64_proces === 0.0 || $this->o64_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_proces"]:$this->o64_proces);
      }else{
-       $this->o64_codseqimpmov = ($this->o64_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codseqimpmov"]:$this->o64_codseqimpmov);
+       $this->o64_codseqimpmov = ($this->o64_codseqimpmov === 0 || $this->o64_codseqimpmov === 0.0 || $this->o64_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codseqimpmov"]:$this->o64_codseqimpmov);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_orcimpactovalmov {
          $this->o64_codseqimpmov = $o64_codseqimpmov; 
        }
      }
-     if(($this->o64_codseqimpmov == null) || ($this->o64_codseqimpmov == "") ){ 
+     if(($this->o64_codseqimpmov == null) || ($this->o64_codseqimpmov === 0 || $this->o64_codseqimpmov === 0.0 || $this->o64_codseqimpmov == "") ){ 
        $this->erro_sql = " Campo o64_codseqimpmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_orcimpactovalmov {
    function sql_query ( $o64_codseqimpmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_orcimpactovalmov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -465,7 +465,7 @@ class cl_orcimpactovalmov {
    function sql_query_file ( $o64_codseqimpmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_orcimpactovalmov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_orcimpactovalmov {
    function sql_query_soma ( $o64_codseqimp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -522,7 +522,7 @@ class cl_orcimpactovalmov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_orcimpactovalmov {
    function sql_query_dad ( $o64_codseqimp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -560,7 +560,7 @@ class cl_orcimpactovalmov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

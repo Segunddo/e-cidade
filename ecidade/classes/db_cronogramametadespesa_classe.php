@@ -56,7 +56,7 @@ class cl_cronogramametadespesa {
                  o131_valor = float8 = Valor
                  ";
    //funcao construtor da classe
-   function cl_cronogramametadespesa() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cronogramametadespesa");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_cronogramametadespesa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o131_sequencial = ($this->o131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_sequencial"]:$this->o131_sequencial);
-       $this->o131_cronogramaperspectivadespesa = ($this->o131_cronogramaperspectivadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_cronogramaperspectivadespesa"]:$this->o131_cronogramaperspectivadespesa);
-       $this->o131_mes = ($this->o131_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_mes"]:$this->o131_mes);
-       $this->o131_percentual = ($this->o131_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_percentual"]:$this->o131_percentual);
-       $this->o131_valor = ($this->o131_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_valor"]:$this->o131_valor);
+       $this->o131_sequencial = ($this->o131_sequencial === 0 || $this->o131_sequencial === 0.0 || $this->o131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_sequencial"]:$this->o131_sequencial);
+       $this->o131_cronogramaperspectivadespesa = ($this->o131_cronogramaperspectivadespesa === 0 || $this->o131_cronogramaperspectivadespesa === 0.0 || $this->o131_cronogramaperspectivadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_cronogramaperspectivadespesa"]:$this->o131_cronogramaperspectivadespesa);
+       $this->o131_mes = ($this->o131_mes === 0 || $this->o131_mes === 0.0 || $this->o131_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_mes"]:$this->o131_mes);
+       $this->o131_percentual = ($this->o131_percentual === 0 || $this->o131_percentual === 0.0 || $this->o131_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_percentual"]:$this->o131_percentual);
+       $this->o131_valor = ($this->o131_valor === 0 || $this->o131_valor === 0.0 || $this->o131_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_valor"]:$this->o131_valor);
      }else{
-       $this->o131_sequencial = ($this->o131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_sequencial"]:$this->o131_sequencial);
+       $this->o131_sequencial = ($this->o131_sequencial === 0 || $this->o131_sequencial === 0.0 || $this->o131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_sequencial"]:$this->o131_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_cronogramametadespesa {
          $this->o131_sequencial = $o131_sequencial;
        }
      }
-     if(($this->o131_sequencial == null) || ($this->o131_sequencial == "") ){
+     if(($this->o131_sequencial == null) || ($this->o131_sequencial === 0 || $this->o131_sequencial === 0.0 || $this->o131_sequencial == "") ){
        $this->erro_sql = " Campo o131_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_cronogramametadespesa {
    function sql_query ( $o131_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -449,7 +449,7 @@ class cl_cronogramametadespesa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -462,7 +462,7 @@ class cl_cronogramametadespesa {
    function sql_query_file ( $o131_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -483,7 +483,7 @@ class cl_cronogramametadespesa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_cronogramametadespesa {
   function sql_query_metas ( $o131_sequencial=null,$campos="*",$ordem=null,$dbwhere="", $iMes=''){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -571,7 +571,7 @@ class cl_cronogramametadespesa {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

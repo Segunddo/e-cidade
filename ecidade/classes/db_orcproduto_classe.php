@@ -50,7 +50,7 @@ class cl_orcproduto {
                  o22_descrprod = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_orcproduto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcproduto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_orcproduto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o22_codproduto = ($this->o22_codproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o22_codproduto"]:$this->o22_codproduto);
+       $this->o22_codproduto = ($this->o22_codproduto === 0 || $this->o22_codproduto === 0.0 || $this->o22_codproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o22_codproduto"]:$this->o22_codproduto);
        $this->o22_descrprod = ($this->o22_descrprod == ""?@$GLOBALS["HTTP_POST_VARS"]["o22_descrprod"]:$this->o22_descrprod);
      }else{
-       $this->o22_codproduto = ($this->o22_codproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o22_codproduto"]:$this->o22_codproduto);
+       $this->o22_codproduto = ($this->o22_codproduto === 0 || $this->o22_codproduto === 0.0 || $this->o22_codproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o22_codproduto"]:$this->o22_codproduto);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_orcproduto {
          $this->o22_codproduto = $o22_codproduto; 
        }
      }
-     if(($this->o22_codproduto == null) || ($this->o22_codproduto == "") ){ 
+     if(($this->o22_codproduto == null) || ($this->o22_codproduto === 0 || $this->o22_codproduto === 0.0 || $this->o22_codproduto == "") ){ 
        $this->erro_sql = " Campo o22_codproduto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_orcproduto {
    function sql_query ( $o22_codproduto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_orcproduto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_orcproduto {
    function sql_query_file ( $o22_codproduto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_orcproduto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

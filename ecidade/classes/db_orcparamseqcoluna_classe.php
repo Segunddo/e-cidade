@@ -380,12 +380,12 @@ class cl_orcparamseqcoluna
                     $acount = pg_result($resac, 0, 0);
                     $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
                     $resac = db_query("insert into db_acountkey values($acount,14112,'$this->o115_sequencial','A')");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["o115_sequencial"]) || $this->o115_sequencial != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["o115_sequencial"]) || ($this->o115_sequencial != "" && $this->o115_sequencial !== 0 && $this->o115_sequencial !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,2482,14112,'" . AddSlashes(pg_result($resaco,
                                 $conresaco,
                                 'o115_sequencial')) . "','$this->o115_sequencial'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["o115_anousu"]) || $this->o115_anousu != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["o115_anousu"]) || ($this->o115_anousu != "" && $this->o115_anousu !== 0 && $this->o115_anousu !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,2482,14115,'" . AddSlashes(pg_result($resaco,
                                 $conresaco,
                                 'o115_anousu')) . "','$this->o115_anousu'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
@@ -395,7 +395,7 @@ class cl_orcparamseqcoluna
                                 $conresaco,
                                 'o115_descricao')) . "','$this->o115_descricao'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["o115_tipo"]) || $this->o115_tipo != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["o115_tipo"]) || ($this->o115_tipo != "" && $this->o115_tipo !== 0 && $this->o115_tipo !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,2482,14117,'" . AddSlashes(pg_result($resaco,
                                 $conresaco,
                                 'o115_tipo')) . "','$this->o115_tipo'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");

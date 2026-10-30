@@ -18,7 +18,7 @@ AREAS = (sys.argv[3] if len(sys.argv) > 3 else "TRIBUT,EDUCA,RECURSOS").upper().
 SESS = f"/var/lib/php/sessions/sess_{SID}"
 
 # mesmo criterio do nginx: location por prefixo + map por nome exato
-LOC = re.compile(r"^(?:cem|itbi?|agua?|jur|div|mar|not|fis|iss|dvr|arr|tri|inf|tra|tre|esc|rel|sec|bib|mer|edu|rh|eso|rec|pes|ac|aco|ouv|lic|vei|pat|com|cus|pla|pl|tes|emp)[0-9]*_", re.I)
+LOC = re.compile(r"^(?:cem|itbi?|agua?|jur|div|mar|not|fis|iss|dvr|arr|tri|inf|tra|tre|esc|rel|sec|bib|mer|edu|rh|eso|rec|pes|ac|aco|ouv|lic|vei|pat|com|cus|pla|pl|tes|emp|orc)[0-9]*_", re.I)
 MAP = {l.split()[0].lower() for l in open(os.path.join(RAIZ, "docker/proxy/faseb_map.conf"))
        if l.strip() and not l.startswith("#")}
 def no85(nome): return bool(LOC.match(nome)) or nome.lower() in MAP

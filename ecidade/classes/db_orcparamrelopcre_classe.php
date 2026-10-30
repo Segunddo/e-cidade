@@ -64,7 +64,7 @@ class cl_orcparamrelopcre {
                  o98_valor = float4 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_orcparamrelopcre() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcparamrelopcre"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_orcparamrelopcre {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o98_sequencial = ($this->o98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_sequencial"]:$this->o98_sequencial);
-       $this->o98_orcparamseq = ($this->o98_orcparamseq == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_orcparamseq"]:$this->o98_orcparamseq);
-       $this->o98_orcparamrel = ($this->o98_orcparamrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_orcparamrel"]:$this->o98_orcparamrel);
-       $this->o98_anousu = ($this->o98_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_anousu"]:$this->o98_anousu);
-       $this->o98_instit = ($this->o98_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_instit"]:$this->o98_instit);
+       $this->o98_sequencial = ($this->o98_sequencial === 0 || $this->o98_sequencial === 0.0 || $this->o98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_sequencial"]:$this->o98_sequencial);
+       $this->o98_orcparamseq = ($this->o98_orcparamseq === 0 || $this->o98_orcparamseq === 0.0 || $this->o98_orcparamseq == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_orcparamseq"]:$this->o98_orcparamseq);
+       $this->o98_orcparamrel = ($this->o98_orcparamrel === 0 || $this->o98_orcparamrel === 0.0 || $this->o98_orcparamrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_orcparamrel"]:$this->o98_orcparamrel);
+       $this->o98_anousu = ($this->o98_anousu === 0 || $this->o98_anousu === 0.0 || $this->o98_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_anousu"]:$this->o98_anousu);
+       $this->o98_instit = ($this->o98_instit === 0 || $this->o98_instit === 0.0 || $this->o98_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_instit"]:$this->o98_instit);
        $this->o98_identificacao = ($this->o98_identificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_identificacao"]:$this->o98_identificacao);
        $this->o98_credor = ($this->o98_credor == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_credor"]:$this->o98_credor);
        $this->o98_periodo = ($this->o98_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_periodo"]:$this->o98_periodo);
-       $this->o98_valor = ($this->o98_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_valor"]:$this->o98_valor);
+       $this->o98_valor = ($this->o98_valor === 0 || $this->o98_valor === 0.0 || $this->o98_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_valor"]:$this->o98_valor);
      }else{
-       $this->o98_sequencial = ($this->o98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_sequencial"]:$this->o98_sequencial);
+       $this->o98_sequencial = ($this->o98_sequencial === 0 || $this->o98_sequencial === 0.0 || $this->o98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_sequencial"]:$this->o98_sequencial);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_orcparamrelopcre {
          $this->o98_sequencial = $o98_sequencial; 
        }
      }
-     if(($this->o98_sequencial == null) || ($this->o98_sequencial == "") ){ 
+     if(($this->o98_sequencial == null) || ($this->o98_sequencial === 0 || $this->o98_sequencial === 0.0 || $this->o98_sequencial == "") ){ 
        $this->erro_sql = " Campo o98_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -545,7 +545,7 @@ class cl_orcparamrelopcre {
    function sql_query ( $o98_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -568,7 +568,7 @@ class cl_orcparamrelopcre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -580,7 +580,7 @@ class cl_orcparamrelopcre {
    function sql_query_file ( $o98_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -601,7 +601,7 @@ class cl_orcparamrelopcre {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

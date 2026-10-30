@@ -52,7 +52,7 @@ class cl_orcparamfontes {
                  o43_codfon = int4 = Código Fonte 
                  ";
    //funcao construtor da classe 
-   function cl_orcparamfontes() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcparamfontes"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,13 +69,13 @@ class cl_orcparamfontes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o43_anousu = ($this->o43_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_anousu"]:$this->o43_anousu);
-       $this->o43_codparrel = ($this->o43_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_codparrel"]:$this->o43_codparrel);
-       $this->o43_codfon = ($this->o43_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_codfon"]:$this->o43_codfon);
+       $this->o43_anousu = ($this->o43_anousu === 0 || $this->o43_anousu === 0.0 || $this->o43_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_anousu"]:$this->o43_anousu);
+       $this->o43_codparrel = ($this->o43_codparrel === 0 || $this->o43_codparrel === 0.0 || $this->o43_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_codparrel"]:$this->o43_codparrel);
+       $this->o43_codfon = ($this->o43_codfon === 0 || $this->o43_codfon === 0.0 || $this->o43_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_codfon"]:$this->o43_codfon);
      }else{
-       $this->o43_anousu = ($this->o43_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_anousu"]:$this->o43_anousu);
-       $this->o43_codparrel = ($this->o43_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_codparrel"]:$this->o43_codparrel);
-       $this->o43_codfon = ($this->o43_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_codfon"]:$this->o43_codfon);
+       $this->o43_anousu = ($this->o43_anousu === 0 || $this->o43_anousu === 0.0 || $this->o43_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_anousu"]:$this->o43_anousu);
+       $this->o43_codparrel = ($this->o43_codparrel === 0 || $this->o43_codparrel === 0.0 || $this->o43_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_codparrel"]:$this->o43_codparrel);
+       $this->o43_codfon = ($this->o43_codfon === 0 || $this->o43_codfon === 0.0 || $this->o43_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o43_codfon"]:$this->o43_codfon);
      }
    }
    // funcao para inclusao
@@ -84,7 +84,7 @@ class cl_orcparamfontes {
        $this->o43_anousu = $o43_anousu; 
        $this->o43_codparrel = $o43_codparrel; 
        $this->o43_codfon = $o43_codfon; 
-     if(($this->o43_anousu == null) || ($this->o43_anousu == "") ){ 
+     if(($this->o43_anousu == null) || ($this->o43_anousu === 0 || $this->o43_anousu === 0.0 || $this->o43_anousu == "") ){ 
        $this->erro_sql = " Campo o43_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -92,7 +92,7 @@ class cl_orcparamfontes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o43_codparrel == null) || ($this->o43_codparrel == "") ){ 
+     if(($this->o43_codparrel == null) || ($this->o43_codparrel === 0 || $this->o43_codparrel === 0.0 || $this->o43_codparrel == "") ){ 
        $this->erro_sql = " Campo o43_codparrel nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -100,7 +100,7 @@ class cl_orcparamfontes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o43_codfon == null) || ($this->o43_codfon == "") ){ 
+     if(($this->o43_codfon == null) || ($this->o43_codfon === 0 || $this->o43_codfon === 0.0 || $this->o43_codfon == "") ){ 
        $this->erro_sql = " Campo o43_codfon nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -362,7 +362,7 @@ class cl_orcparamfontes {
    function sql_query ( $o43_anousu=null,$o43_codparrel=null,$o43_codfon=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_orcparamfontes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_orcparamfontes {
    function sql_query_file ( $o43_anousu=null,$o43_codparrel=null,$o43_codfon=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_orcparamfontes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

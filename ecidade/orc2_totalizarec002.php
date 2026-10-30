@@ -39,7 +39,7 @@ require_once(modification("libs/db_sql.php"));
 //parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
 db_postmemory($_POST);
 
-$xinstit = split("-", $db_selinstit);
+$xinstit = preg_split("#\\-#m", $db_selinstit);
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in (" . str_replace('-', ', ', $db_selinstit) . ") ");
 $descr_inst = '';
 $xvirg = '';

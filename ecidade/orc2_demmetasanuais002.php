@@ -174,7 +174,7 @@ if ( $iLinhasDadosPIB > 0 ) {
 	}
 }
 
-if ( !array_key_exists($iAno1,$aPIB) ) {
+if ( !array_key_exists($iAno1,(array)$aPIB) ) {
 	db_redireciona("db_erros.php?fechar=true&db_erro=1 - Valor do PIB do Cenário Macroeconômico para o exercício $iAno1 não informado!");
 }
 
@@ -279,7 +279,7 @@ foreach ( $aListaAnos as $iIndAno => $iAno ) {
 // Busca valores "Corrente" da Despesa para cada ano
 foreach ( $aEstimativaDespesa as $iInd => $oDespesa ) {
 
-  if ( $oDespesa->iElemento{0} == 3 ) {
+  if ( $oDespesa->iElemento[0] == 3 ) {
 
   	foreach ( $aListaAnos as $iIndAno => $iAno ) {
   		$oDespesaTotal->aValores[$iAno]->Corrente += $oDespesa->aEstimativas[$iAno];

@@ -743,7 +743,7 @@ if (substr($nivel,1,1) == 'A'){
   $totunidaatual = 0;
   $pagina = 1;
 
-  for($k=0;$k<pg_numrows($result);$k++){
+  for($k=0;$k<($result ? pg_numrows($result) : null);$k++){
 
     db_fieldsmemory($result,$k);
     if($pdf->gety()>$pdf->h-30 || $pagina == 1){

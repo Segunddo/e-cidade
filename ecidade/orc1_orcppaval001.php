@@ -37,7 +37,8 @@ include(modification("classes/db_orcppa_classe.php"));
 include(modification("classes/db_orcelemento_classe.php"));
 
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 db_postmemory($HTTP_GET_VARS);
 
@@ -190,7 +191,7 @@ if(isset($incluir)){
 	  }  
 	  //final
 	  //-------------------------------------------------
-	  
+
 
 	  //rotina exclusão orcppatiporec------------------------------------------------
 	  if($sqlerro == false && isset($codseqppa) && $codseqppa != ''){
@@ -207,7 +208,7 @@ if(isset($incluir)){
 	  }
           //final
 	  //-----------------------------------------------------------------------------------
-	  
+
 	  //rotina de inclusão no orcppatiporec------------------------------------------------
 	  if($sqlerro == false ){
 	    $clorcppatiporec->o26_codseqppa = $codseqppa;
