@@ -347,8 +347,8 @@ ser removido, então os dados ficaram. Liberado com `docker builder prune` (1,4 
 `image prune` não liberou nada — as imagens "recuperáveis" têm tag e só sairiam com `-a`). Banco religado: WAL refeito, checkpoint
 de fim de recuperação, consultas e telas respondendo nos três endereços. Conferido depois: nenhum arquivo alterado ficou vazio e
 o `php -l` deu o mesmo resultado nos dois runtimes. **Lição: o banco sem volume de persistência sobrevive a parar, não a ser
-removido — e disco cheio o derruba sem aviso; conferir `df -h /` antes da bateria completa.** O maior ocupante restante em
-`ecidade/tmp` é o clone do TCC de referência (`tcc_gerson`, 1,1 GB).
+removido — e disco cheio o derruba sem aviso; conferir `df -h /` antes da bateria completa.** Depois, a pedido do usuário, removido o *worktree*
+do TCC de referência (`ecidade/tmp/tcc_gerson`, 1,1 GB; ver `trabalho-relacionado.md`) → **2,3 GB livres**.
 
 **Estado:** lote 6 concluído — **todos os lotes do Financeiro portados e roteados** (commits locais). Falta a etapa do fim da
 área: bateria completa (todos os prefixos do `location` + o `map` inteiro, com as regressões adiadas dos lotes 2, 3 e 4), a
