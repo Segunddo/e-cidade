@@ -369,3 +369,25 @@ antes da bateria final.**
   do Patrimonial — as baterias anteriores não a contavam. Fica para decisão do usuário (órfão no menu).
 - Nenhuma regressão nova; as regressões adiadas dos lotes 2, 3 e 4 (`fpdf151/pdf.php`, `Cell()`, `db_libcontabilidade`,
   `db_assinatura`, `regraEmissao`) não apareceram.
+
+**Lote à parte: o `tra` (30/10/2026, pedido do usuário, na branch atual).** O `tra` não é de área nenhuma (não há módulo
+Trânsito em `db_modulos`; 7 itens de menu, nenhum ligado à árvore), mas está no `location` e quebrava **só no 8.5** — pelo
+critério do projeto, problema nosso. Decidido corrigir na `5financeiro-migrado`, não na `1tributario-migrado` + merges:
+nenhuma outra branch toca esses arquivos. Universo 1.159; 37 alvos pelo enumerador:
+- **26 `parse_str` de 1 argumento** → Rector (só `ParseStrComExtractRector`, vetada), convergiu na 2ª passada.
+- **11 classes compartilhadas (`cgm*`, `db_db_uf`, `db_db_userinst`…) acusadas por `0 == ""`: FALSO POSITIVO do enumerador.**
+  Já estavam portadas pelos commits `EXPERIMENTO: …` do Rector (`8eab98d94`, `e6d157437`), e o `PAGO` do `enumera.py` só conta
+  commits `^Porta `. O Rector não alterou nenhuma (a regra pula guarda existente). Não corrigido no enumerador; quem o usar,
+  saiba que essas 11 aparecem em todo universo que as alcança.
+- **9 telas com `pg_num_rows/pg_fetch_array(false)`** (`tra2_estat*002`, `tra2_rvitimasacid002`, `tra4_lista*`,
+  `tra_estatdia002`) → `guarda_ciclo.py`, 26 linhas guardadas (`null`, igual ao 5.6).
+- **`libs/jpgraph/jpgraph.php`** (só a `tra_estatdia002` o usa; o `dbagata/` tem cópia própria): chamada estática a método
+  não estático é fatal no 8 (no 5.6, aviso). `JpGraphError::Install/Raise` e `Image::CreateFromString` viraram `static`
+  (nenhum usa `$this`; testado no 5.6 que `static` continua aceitando chamada por instância). `count($aDatay)` com `null` →
+  `count((array)$aDatay)` (padrão do projeto). **Não corrigidos, registrados:** `Image::GetWidth/GetHeight` e
+  `Graph::LoadBkgImage` são chamados estaticamente no gantt, nas bandeiras e no `IconPlot`, mas usam `$this` quando chamados
+  sem argumento — não podem virar `static`; nenhuma tela servida passa por eles. A cópia do `dbagata/classes/jpgraph/`
+  (`jpgraph_errhandler.inc.php`) tem o mesmo `JpGraphError` sem `static` — latente, não alcançado.
+
+`php -l` no universo: 0 falhas nos dois. Portão de funções: 0 ausentes. **Bateria `tra`: 62/62.** Com isso a bateria do
+fim da área fica 7.930 + 36 = **7.966/7.994**, as 28 restantes todas registradas.

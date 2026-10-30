@@ -531,11 +531,11 @@ class JpGraphErrObjectImg {
 // in all methods.
 //
 class JpGraphError {
-    function Install($aErrObject) {
+    static function Install($aErrObject) {
 	GLOBAL $__jpg_err;
 	$__jpg_err = $aErrObject;
     }
-    function Raise($aMsg,$aHalt=true){
+    static function Raise($aMsg,$aHalt=true){
 	GLOBAL $__jpg_err;
 	$tmp = new $__jpg_err;
 	$tmp->Raise($aMsg,$aHalt);
@@ -5644,7 +5644,7 @@ class Image {
 	return imagesy($aImg);
     }
     
-    function CreateFromString($aStr) {
+    static function CreateFromString($aStr) {
 	return imagecreatefromstring($aStr);
     }
 
@@ -7900,7 +7900,7 @@ class Plot {
 //---------------
 // CONSTRUCTOR
     function __construct(&$aDatay,$aDatax=false) {
-	$this->numpoints = count($aDatay);
+	$this->numpoints = count((array)$aDatay);
 	if( $this->numpoints==0 )
 	    JpGraphError::Raise(" Empty data array specified for plot. Must have at least one data point.");
 	$this->coords[0]=$aDatay;

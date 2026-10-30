@@ -45,7 +45,7 @@ from  (select (trim(r1.j14_nome)::varchar||
        FROM acidentes inner join ruas r1 on tr07_local1 = r1.j14_codigo 
             left outer join ruas r2 on tr07_local2 = r2.j14_codigo) as x group by rua order by rua;";
  $rs1 = db_query($sql1);
- $num_rows = pg_num_rows($rs1) + 2;
+ $num_rows = ($rs1 ? pg_num_rows($rs1) : null) + 2;
 
  for ($i = 1; $i <= 12 ;$i++){
       switch ($i){
@@ -84,7 +84,7 @@ from  (select (trim(r1.j14_nome)::varchar||
       $sum = 0;
       $x +=10;
    } 
- while ($ln1 = pg_fetch_array($rs1)){
+ while ($ln1 = ($rs1 ? pg_fetch_array($rs1) : null)){
     $pdf->setfont("Arial","",6); 
     $pdf->setx(10);
     $pdf->cell(80,5,$ln1["rua"],1,0,"L");

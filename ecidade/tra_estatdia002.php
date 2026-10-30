@@ -81,8 +81,8 @@
                   group by dia_semana order by dia_semana";
 
           $rs2      = db_query($sql2);
-          $numrows2 = pg_num_rows($rs2);
-          $ln       = pg_fetch_array($rs2);
+          $numrows2 = ($rs2 ? pg_num_rows($rs2) : null);
+          $ln       = ($rs2 ? pg_fetch_array($rs2) : null);
           $sum +=  $ln["quantidade"];
           if ($numrows2 > 0){
               $pdf->cell(10,5,$ln["quantidade"],1,1,"C");
@@ -136,7 +136,7 @@ while ($lng = pg_fetch_array($rsg)){
            group by mes order by x.mes";
 //echo $sqlm;exit;
 $rsm = db_query($sqlm);
-while ($lnm = pg_fetch_array($rsm)){
+while ($lnm = ($rsm ? pg_fetch_array($rsm) : null)){
       $legendm[] = $lnm["mes"];
       $totalm[]  = $lnm["total"];
  }

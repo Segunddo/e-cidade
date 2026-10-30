@@ -107,12 +107,12 @@
                 group by horas";
 
           $rs2      = db_query($sql2);
-            $numrows2 = pg_num_rows($rs2);
+            $numrows2 = ($rs2 ? pg_num_rows($rs2) : null);
            // if (!$rs2 or ($k == 14 and $i == 8)){
           //   echo $sql2;exit;
           // }
           }
-          $ln       = pg_fetch_array($rs2);
+          $ln       = ($rs2 ? pg_fetch_array($rs2) : null);
           $sum +=  $ln["quantidade"];
           if ($numrows2 > 0){
               $pdf->cell(10,5,$ln["total"],1,1,"C");

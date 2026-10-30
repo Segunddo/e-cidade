@@ -81,11 +81,11 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | | |
 |---|---|
 | Módulos portados | **16 de 16** — todos com 100% das telas de menu servidas pelo PHP 8.5 |
-| Também portado | `tra` — órfão no menu, sem uso prático |
+| Também portado | `tra` — órfão no menu; as 62 telas só ficaram idênticas no lote à parte de 30/10/2026 (`area-financeiro.md`) |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
 | Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes\|ac\|aco\|ouv\|lic\|vei\|pat\|com\|cus\|pla\|pl\|tes\|emp\|orc\|cai)[0-9]*_)` — **8.007 arquivos** + 1.112 por `map` (805 telas de menu + 320 abas e destinos da 14ª lacuna, `faseb_map_abas.txt`) |
-| **Próximo passo** | **Área FINANCEIRO dimensionada e dividida em 6 lotes** (branch `5financeiro-migrado`; ver `area-financeiro.md`). **Os 6 lotes concluídos (commits locais). Falta a bateria completa do fim da área — o usuário pediu para AVISAR E ESPERAR antes dela —, a conferência pelo proxy e o envio** — um lote por vez. |
+| **Próximo passo** | **Área FINANCEIRO dimensionada e dividida em 6 lotes** (branch `5financeiro-migrado`; ver `area-financeiro.md`). **Os 6 lotes + o `tra` concluídos, bateria completa do fim da área feita (`map` 1.112/1.112; `location` 7.966/7.994, as 28 registradas). Falta a conferência pelo proxy e o envio** (commits locais) — um lote por vez. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **nove** — a 8ª (classes de `model/`/`std/`, 13ª lacuna) e a 9ª (classes com namespace em `src/`/`app/`/`api/` e serviços do `bootstrap.php`, **15ª lacuna**, `scratchpad/ns_fecho.py`); todas insensíveis a maiúsculas desde a 9ª lacuna (`getdao`) |
