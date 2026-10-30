@@ -60,10 +60,10 @@ class cl_conencerramento
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c42_sequencial = ($this->c42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_sequencial"]:$this->c42_sequencial);
-       $this->c42_anousu = ($this->c42_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_anousu"]:$this->c42_anousu);
-       $this->c42_encerramentotipo = ($this->c42_encerramentotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_encerramentotipo"]:$this->c42_encerramentotipo);
-       $this->c42_usuario = ($this->c42_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_usuario"]:$this->c42_usuario);
+       $this->c42_sequencial = ($this->c42_sequencial === 0 || $this->c42_sequencial === 0.0 || $this->c42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_sequencial"]:$this->c42_sequencial);
+       $this->c42_anousu = ($this->c42_anousu === 0 || $this->c42_anousu === 0.0 || $this->c42_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_anousu"]:$this->c42_anousu);
+       $this->c42_encerramentotipo = ($this->c42_encerramentotipo === 0 || $this->c42_encerramentotipo === 0.0 || $this->c42_encerramentotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_encerramentotipo"]:$this->c42_encerramentotipo);
+       $this->c42_usuario = ($this->c42_usuario === 0 || $this->c42_usuario === 0.0 || $this->c42_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_usuario"]:$this->c42_usuario);
        if($this->c42_data == ""){
          $this->c42_data_dia = ($this->c42_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_data_dia"]:$this->c42_data_dia);
          $this->c42_data_mes = ($this->c42_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_data_mes"]:$this->c42_data_mes);
@@ -73,10 +73,10 @@ class cl_conencerramento
          }
        }
        $this->c42_hora = ($this->c42_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_hora"]:$this->c42_hora);
-       $this->c42_instit = ($this->c42_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_instit"]:$this->c42_instit);
-       $this->c42_coddoc = ($this->c42_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_coddoc"]:$this->c42_coddoc);
+       $this->c42_instit = ($this->c42_instit === 0 || $this->c42_instit === 0.0 || $this->c42_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_instit"]:$this->c42_instit);
+       $this->c42_coddoc = ($this->c42_coddoc === 0 || $this->c42_coddoc === 0.0 || $this->c42_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_coddoc"]:$this->c42_coddoc);
      }else{
-       $this->c42_sequencial = ($this->c42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_sequencial"]:$this->c42_sequencial);
+       $this->c42_sequencial = ($this->c42_sequencial === 0 || $this->c42_sequencial === 0.0 || $this->c42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c42_sequencial"]:$this->c42_sequencial);
      }
    }
 
@@ -164,7 +164,7 @@ class cl_conencerramento
          $this->c42_sequencial = $c42_sequencial;
        }
      }
-     if(($this->c42_sequencial == null) || ($this->c42_sequencial == "") ){
+     if(($this->c42_sequencial == null) || ($this->c42_sequencial === 0 || $this->c42_sequencial === 0.0 || $this->c42_sequencial == "") ){
        $this->erro_sql = " Campo c42_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -531,7 +531,7 @@ class cl_conencerramento
     function sql_query ( $c42_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -556,7 +556,7 @@ class cl_conencerramento
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -569,7 +569,7 @@ class cl_conencerramento
     function sql_query_file ( $c42_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -590,7 +590,7 @@ class cl_conencerramento
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];

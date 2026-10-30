@@ -32,7 +32,8 @@ include(modification("libs/db_liborcamento.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_conlancamdig_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clconlancamdig = new cl_conlancamdig;

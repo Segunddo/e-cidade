@@ -52,7 +52,7 @@ class cl_conplanosis {
                  c64_descr = varchar(60) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_conplanosis() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conplanosis"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_conplanosis {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c64_codpla = ($this->c64_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_codpla"]:$this->c64_codpla);
+       $this->c64_codpla = ($this->c64_codpla === 0 || $this->c64_codpla === 0.0 || $this->c64_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_codpla"]:$this->c64_codpla);
        $this->c64_estrut = ($this->c64_estrut == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_estrut"]:$this->c64_estrut);
        $this->c64_descr = ($this->c64_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_descr"]:$this->c64_descr);
      }else{
-       $this->c64_codpla = ($this->c64_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_codpla"]:$this->c64_codpla);
+       $this->c64_codpla = ($this->c64_codpla === 0 || $this->c64_codpla === 0.0 || $this->c64_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_codpla"]:$this->c64_codpla);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_conplanosis {
          $this->c64_codpla = $c64_codpla; 
        }
      }
-     if(($this->c64_codpla == null) || ($this->c64_codpla == "") ){ 
+     if(($this->c64_codpla == null) || ($this->c64_codpla === 0 || $this->c64_codpla === 0.0 || $this->c64_codpla == "") ){ 
        $this->erro_sql = " Campo c64_codpla nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -405,7 +405,7 @@ class cl_conplanosis {
    function sql_query ( $c64_codpla=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_conplanosis {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_conplanosis {
    function sql_query_file ( $c64_codpla=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_conplanosis {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_conplanosis {
    function sql_vs_planocontas ( $c64_codpla=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_conplanosis {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

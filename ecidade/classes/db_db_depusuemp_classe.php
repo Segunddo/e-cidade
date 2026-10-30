@@ -50,7 +50,7 @@ class cl_db_depusuemp {
                  db22_coddepto = int4 = Departamento 
                  ";
    //funcao construtor da classe 
-   function cl_db_depusuemp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_depusuemp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_db_depusuemp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db22_codperm = ($this->db22_codperm == ""?@$GLOBALS["HTTP_POST_VARS"]["db22_codperm"]:$this->db22_codperm);
-       $this->db22_coddepto = ($this->db22_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["db22_coddepto"]:$this->db22_coddepto);
+       $this->db22_codperm = ($this->db22_codperm === 0 || $this->db22_codperm === 0.0 || $this->db22_codperm == ""?@$GLOBALS["HTTP_POST_VARS"]["db22_codperm"]:$this->db22_codperm);
+       $this->db22_coddepto = ($this->db22_coddepto === 0 || $this->db22_coddepto === 0.0 || $this->db22_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["db22_coddepto"]:$this->db22_coddepto);
      }else{
-       $this->db22_codperm = ($this->db22_codperm == ""?@$GLOBALS["HTTP_POST_VARS"]["db22_codperm"]:$this->db22_codperm);
-       $this->db22_coddepto = ($this->db22_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["db22_coddepto"]:$this->db22_coddepto);
+       $this->db22_codperm = ($this->db22_codperm === 0 || $this->db22_codperm === 0.0 || $this->db22_codperm == ""?@$GLOBALS["HTTP_POST_VARS"]["db22_codperm"]:$this->db22_codperm);
+       $this->db22_coddepto = ($this->db22_coddepto === 0 || $this->db22_coddepto === 0.0 || $this->db22_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["db22_coddepto"]:$this->db22_coddepto);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_db_depusuemp {
       $this->atualizacampos();
        $this->db22_codperm = $db22_codperm; 
        $this->db22_coddepto = $db22_coddepto; 
-     if(($this->db22_codperm == null) || ($this->db22_codperm == "") ){ 
+     if(($this->db22_codperm == null) || ($this->db22_codperm === 0 || $this->db22_codperm === 0.0 || $this->db22_codperm == "") ){ 
        $this->erro_sql = " Campo db22_codperm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_db_depusuemp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->db22_coddepto == null) || ($this->db22_coddepto == "") ){ 
+     if(($this->db22_coddepto == null) || ($this->db22_coddepto === 0 || $this->db22_coddepto === 0.0 || $this->db22_coddepto == "") ){ 
        $this->erro_sql = " Campo db22_coddepto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_db_depusuemp {
    function sql_query ( $db22_codperm=null,$db22_coddepto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_db_depusuemp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_db_depusuemp {
    function sql_query_file ( $db22_codperm=null,$db22_coddepto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_db_depusuemp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

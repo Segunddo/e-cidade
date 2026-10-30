@@ -70,7 +70,7 @@ class cl_conlancambol {
                  c77_autent = int4 = Código Autenticação 
                  ";
    //funcao construtor da classe 
-   function cl_conlancambol() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancambol"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,9 +87,9 @@ class cl_conlancambol {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c77_codlan = ($this->c77_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_codlan"]:$this->c77_codlan);
-       $this->c77_anousu = ($this->c77_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_anousu"]:$this->c77_anousu);
-       $this->c77_boletim = ($this->c77_boletim == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_boletim"]:$this->c77_boletim);
+       $this->c77_codlan = ($this->c77_codlan === 0 || $this->c77_codlan === 0.0 || $this->c77_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_codlan"]:$this->c77_codlan);
+       $this->c77_anousu = ($this->c77_anousu === 0 || $this->c77_anousu === 0.0 || $this->c77_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_anousu"]:$this->c77_anousu);
+       $this->c77_boletim = ($this->c77_boletim === 0 || $this->c77_boletim === 0.0 || $this->c77_boletim == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_boletim"]:$this->c77_boletim);
        if($this->c77_databol == ""){
          $this->c77_databol_dia = ($this->c77_databol_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_databol_dia"]:$this->c77_databol_dia);
          $this->c77_databol_mes = ($this->c77_databol_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_databol_mes"]:$this->c77_databol_mes);
@@ -106,12 +106,12 @@ class cl_conlancambol {
             $this->c77_dataproc = $this->c77_dataproc_ano."-".$this->c77_dataproc_mes."-".$this->c77_dataproc_dia;
          }
        }
-       $this->c77_valor = ($this->c77_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_valor"]:$this->c77_valor);
-       $this->c77_instit = ($this->c77_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_instit"]:$this->c77_instit);
-       $this->c77_id = ($this->c77_id == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_id"]:$this->c77_id);
-       $this->c77_autent = ($this->c77_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_autent"]:$this->c77_autent);
+       $this->c77_valor = ($this->c77_valor === 0 || $this->c77_valor === 0.0 || $this->c77_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_valor"]:$this->c77_valor);
+       $this->c77_instit = ($this->c77_instit === 0 || $this->c77_instit === 0.0 || $this->c77_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_instit"]:$this->c77_instit);
+       $this->c77_id = ($this->c77_id === 0 || $this->c77_id === 0.0 || $this->c77_id == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_id"]:$this->c77_id);
+       $this->c77_autent = ($this->c77_autent === 0 || $this->c77_autent === 0.0 || $this->c77_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_autent"]:$this->c77_autent);
      }else{
-       $this->c77_codlan = ($this->c77_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_codlan"]:$this->c77_codlan);
+       $this->c77_codlan = ($this->c77_codlan === 0 || $this->c77_codlan === 0.0 || $this->c77_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c77_codlan"]:$this->c77_codlan);
      }
    }
    // funcao para inclusao
@@ -178,7 +178,7 @@ class cl_conlancambol {
        $this->c77_autent = "0";
      }
        $this->c77_codlan = $c77_codlan; 
-     if(($this->c77_codlan == null) || ($this->c77_codlan == "") ){ 
+     if(($this->c77_codlan == null) || ($this->c77_codlan === 0 || $this->c77_codlan === 0.0 || $this->c77_codlan == "") ){ 
        $this->erro_sql = " Campo c77_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -546,7 +546,7 @@ class cl_conlancambol {
    function sql_query ( $c77_codlan=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -571,7 +571,7 @@ class cl_conlancambol {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -583,7 +583,7 @@ class cl_conlancambol {
    function sql_query_file ( $c77_codlan=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -604,7 +604,7 @@ class cl_conlancambol {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

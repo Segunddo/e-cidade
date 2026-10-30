@@ -60,7 +60,7 @@ class cl_padsigapsubsidiosvereadores {
                  c16_subsidioextraordinario = float8 = Valor do Subsídio Extraordináro 
                  ";
    //funcao construtor da classe 
-   function cl_padsigapsubsidiosvereadores() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("padsigapsubsidiosvereadores"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_padsigapsubsidiosvereadores {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c16_sequencial = ($this->c16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_sequencial"]:$this->c16_sequencial);
-       $this->c16_mes = ($this->c16_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_mes"]:$this->c16_mes);
-       $this->c16_ano = ($this->c16_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_ano"]:$this->c16_ano);
-       $this->c16_numcgm = ($this->c16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_numcgm"]:$this->c16_numcgm);
-       $this->c16_instit = ($this->c16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_instit"]:$this->c16_instit);
-       $this->c16_subsidiomensal = ($this->c16_subsidiomensal == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_subsidiomensal"]:$this->c16_subsidiomensal);
-       $this->c16_subsidioextraordinario = ($this->c16_subsidioextraordinario == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_subsidioextraordinario"]:$this->c16_subsidioextraordinario);
+       $this->c16_sequencial = ($this->c16_sequencial === 0 || $this->c16_sequencial === 0.0 || $this->c16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_sequencial"]:$this->c16_sequencial);
+       $this->c16_mes = ($this->c16_mes === 0 || $this->c16_mes === 0.0 || $this->c16_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_mes"]:$this->c16_mes);
+       $this->c16_ano = ($this->c16_ano === 0 || $this->c16_ano === 0.0 || $this->c16_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_ano"]:$this->c16_ano);
+       $this->c16_numcgm = ($this->c16_numcgm === 0 || $this->c16_numcgm === 0.0 || $this->c16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_numcgm"]:$this->c16_numcgm);
+       $this->c16_instit = ($this->c16_instit === 0 || $this->c16_instit === 0.0 || $this->c16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_instit"]:$this->c16_instit);
+       $this->c16_subsidiomensal = ($this->c16_subsidiomensal === 0 || $this->c16_subsidiomensal === 0.0 || $this->c16_subsidiomensal == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_subsidiomensal"]:$this->c16_subsidiomensal);
+       $this->c16_subsidioextraordinario = ($this->c16_subsidioextraordinario === 0 || $this->c16_subsidioextraordinario === 0.0 || $this->c16_subsidioextraordinario == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_subsidioextraordinario"]:$this->c16_subsidioextraordinario);
      }else{
-       $this->c16_sequencial = ($this->c16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_sequencial"]:$this->c16_sequencial);
+       $this->c16_sequencial = ($this->c16_sequencial === 0 || $this->c16_sequencial === 0.0 || $this->c16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_sequencial"]:$this->c16_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_padsigapsubsidiosvereadores {
          $this->c16_sequencial = $c16_sequencial; 
        }
      }
-     if(($this->c16_sequencial == null) || ($this->c16_sequencial == "") ){ 
+     if(($this->c16_sequencial == null) || ($this->c16_sequencial === 0 || $this->c16_sequencial === 0.0 || $this->c16_sequencial == "") ){ 
        $this->erro_sql = " Campo c16_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -484,7 +484,7 @@ class cl_padsigapsubsidiosvereadores {
    function sql_query ( $c16_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -506,7 +506,7 @@ class cl_padsigapsubsidiosvereadores {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -519,7 +519,7 @@ class cl_padsigapsubsidiosvereadores {
    function sql_query_file ( $c16_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -540,7 +540,7 @@ class cl_padsigapsubsidiosvereadores {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

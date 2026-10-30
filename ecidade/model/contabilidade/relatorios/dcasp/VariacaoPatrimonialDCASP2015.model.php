@@ -115,7 +115,7 @@ class VariacaoPatrimonialDCASP2015 extends RelatoriosLegaisBase {
     $this->sTipo = $sTipoImpressao;
   }
 
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $this->aLinhasConsistencia = $this->getLinhasRelatorio();
     $this->processarTiposDeCalculo();

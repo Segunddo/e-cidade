@@ -53,6 +53,7 @@ Patrimonial, 469 previstos, ~710 reais).
 | 2 `emp` | 3.409 | 295 Rector + ~30 à mão | 3.409/3.409 | 48/48 | 1.080 linhas, 0 div. | **458/458** |
 | 3 `orc` | 3.037 | 345 Rector + ~125 à mão | 3.034/3.037 (as 3 restantes não compilam em nenhum) | 1.032 (diffs só do harness) | 25.379 linhas, diffs só do harness | **626/628** (2 caracterizadas) |
 | 4 `cai` inteiro | 3.988 | 273 Rector + ~230 à mão | 3.988/3.988 | 1.256 (diffs só do harness) | diffs só do harness | **739/740** (1 caracterizada) |
+| 5 `con` (telas do Financeiro) | 3.053 | 144 Rector + 21 LSP à mão | 3.053/3.053 | 1.010 (diffs só do harness) | diffs só do harness | **313/313** |
 
 **Lote 1 — `cus`, `pla`, `pl`, `tes`** (Custos, Planejamento, Tesouraria; 99 arquivos, roteados no `location`).
 Rector em 45 arquivos, só regras já vetadas (28 `parse_str`+`extract`, 17 guardas, 15 construtores, 14 `split`, todos
@@ -269,4 +270,44 @@ Parente da guarda `pg_*` sobre resultado falso, mas aqui o resultado **é válid
 ao 5.6 com coluna existente e inexistente. O `false` alimenta `+=`, `!=` e `Cell()` exatamente como no 5.6. Ciclo próprio,
 **`scratchpad/campo_ciclo.py`** (versionado), alternado com o `guarda_ciclo.py` até a tela parar de fatalar: uma guarda expõe a próxima.
 
-**Estado:** lote 4 concluído. Aguardando o pedido do lote 5 (`con`, só as telas do Financeiro, pelo `map`).
+**Estado:** lote 4 concluído.
+
+**Lote 5 — `con`, só as telas do Financeiro** (pelo `map`). O banco atribui ao Financeiro **322 telas `con`** de menu: 1 já
+estava no `map` e **8 não existem em disco** (`con1_conplanoextra001/002/003`, `con4_gerarsicomanual`, `con4_gerarsicommensal`,
+`con4_sicomidentificadorunidade`, `con4_sicominformacaocomplementar`, `con4_sicomriscofiscal` — entradas de menu órfãs, como as
+`cad1_iptupadrao*` do Tributário) → **313 telas**, o número do plano. Universo 3.053 (`TELAS=@`). Separadores todos literais;
+o `"\t"` (tabulação real) conferido no 5.6 em 5 casos, idêntico. Rector em **144 arquivos**, só regras vetadas (104
+`parse_str`+`extract`, 37 `ereg`/`split`, 34 guardas, 29 construtores, 1 `${$var}`), 0 nas duas passadas seguintes; portão 0
+ausentes; remanescentes 0; `php -l` 3.053/3.053 nos dois. Forma negada: 2.531 pares, 0 divergentes.
+
+**LSP — 21 classes** que carregam no 5.6 e não no 8.5 (614 arquivos com `extends`/`implements`):
+- **18 filhas de `RelatoriosLegaisBase`** com `getDados()` sem o `$trazerConfiguracaoPadrao = true` da mãe (as "40 pendentes"
+  do lote 3 — as do universo deste lote; `BalancoFinanceiroDCASP2017` herda de `…2015` e se resolveu com ela). Mesma correção.
+- `AnexoIVDemonstrativoRPPS::executarBalanceteDaReceita()` e `::executarBalanceteVerificacao()` sem os parâmetros opcionais da
+  mãe → copiados (a 2ª só apareceu depois de corrigida a 1ª: uma correção LSP expõe a próxima, porque o PHP para na primeira).
+- **CATEGORIA (LSP): a filha ESTREITA o tipo do parâmetro** — `PadArquivoEscritorTXT::criarArquivo(iPadArquivoTXTBase $o)`
+  contra `PadArquivoEscritor::criarArquivo(iPadArquivoBase $o)`, com `iPadArquivoTXTBase extends iPadArquivoBase`. No 5.6 é só
+  `E_STRICT`; no PHP 8 viola a contravariância e a classe nem é declarada ("Could not check compatibility" quando a interface
+  ainda não carregou, "must be compatible" quando já). Quebrava a RPC `con4_processarsigfis.RPC.php` (5.6: `{"status":1,...}`;
+  8.5: "Erro interno"). Correção mínima: a filha declara o tipo da mãe. Só muda algo se um objeto `iPadArquivoBase` que não é
+  TXT for passado — onde o 5.6 dava erro e o 8.5 aceitaria —, e o único chamador passa sempre classes `Sigfis*` TXT.
+  Armadilha à parte: o arquivo é `iPadArquivoTxtBase.interface.php` (`Txt`) e a interface `iPadArquivoTXTBase` (`TXT`) — um
+  `grep` sensível a caixa diz que ela não existe.
+- Os outros `FATAL` (`ICalculoMediaRubrica`/`ISistemaConta` não encontradas, `DisponibilidadeCaixaRestosPagar`,
+  `RubricaMapeador`) falham **nos dois** runtimes: o harness carrega o arquivo isolado. Não são regressão.
+
+Bateria **313/313 na primeira rodada** — nenhuma guarda `pg_*` necessária.
+
+**Roteamento:** `gera_map_faseb.py … financ:con` → `map` **+313, −0 = 1.016 entradas** (800 telas + 229 abas). **O nginx recusou
+o `map`**: "could not build map_hash, you should increase map_hash_bucket_size: 64" → `map_hash_bucket_size 128;` no
+`nginx.conf`, antes dos `map`. E um tropeço de procedimento: o teste encadeado como `nginx -t | tail -1 && up` recriou o proxy
+**com a config quebrada** (o `&&` olhou o status do `tail`) — ~1 min fora do ar, sem efeito na bateria (que usa as portas diretas).
+A skill agora traz o teste correto, sem pipe.
+
+**Passo 8b (1.248 telas do Financeiro no 8.5): 77 telas `con` abrem 86 abas/destinos ainda no 5.6** — os iframes de
+parâmetros dos relatórios legais (`con2_*011.php`, `con2_conrelinfo001.php`, `con2_conrelparametros.php`), as abas dos cadastros
+do plano de contas (`con1_conplano004/011/022/033`, `con1_congrupo*`, `con1_planocontapcasp*`…), `con4_processapad.php` e o
+redirecionamento `con2_anexo16_001 → con2_anexoXVI_001`. **Pelo plano aprovado, ficam para o lote 6** ("abas do passo 8b"):
+refazer `redirecionamentos.py <SID> out.tsv FINAN` regenera a lista.
+
+**Estado:** lote 5 concluído. Aguardando o pedido do lote 6 (`hab`, `age`, `pro` + as 86 abas do passo 8b).

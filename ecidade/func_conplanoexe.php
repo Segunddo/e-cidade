@@ -34,7 +34,8 @@ include(modification("classes/db_conplanoexe_classe.php"));
 include(modification("classes/db_conplano_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clconplanoexe = new cl_conplanoexe;
 $clconplano = new cl_conplano;

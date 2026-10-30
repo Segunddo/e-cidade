@@ -455,7 +455,15 @@ Três detalhes, cada um já causou roteamento silenciosamente errado:
 - **`(?:/w/[0-9]+)?`** — na navegação real o desktop prefixa tudo com o id da janela.
 
 ```bash
-docker compose -f docker-compose.proxy.yml up -d --force-recreate   # reload nao basta
+# Testar a config ANTES, num container descartavel, e recriar SO se o nginx -t passou.
+# Nao encadeie `nginx -t | tail -1 && up`: o && olha o status do tail, e uma config
+# quebrada derruba o proxy (aconteceu no lote 5 do Financeiro, com o map de 1.016
+# entradas: "could not build map_hash" -- resolvido com map_hash_bucket_size 128).
+IMG=$(docker inspect -f '{{.Config.Image}}' ecidade_proxy)
+NET=$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}' ecidade_proxy)
+docker run --rm --network $NET -v $PWD/docker/proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro \
+  -v $PWD/docker/proxy/faseb_map.conf:/etc/nginx/faseb_map.conf:ro $IMG nginx -t \
+  && docker compose -f docker-compose.proxy.yml up -d --force-recreate   # reload nao basta
 for u in login.php <pref>1_x.php w/2/<pref>2_y.php; do
   curl -s -D - -o /dev/null "http://localhost:8090/$u" | grep -i x-ecidade-runtime
 done

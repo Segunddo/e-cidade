@@ -52,7 +52,7 @@ class cl_conlancamreconhecimentocontabil {
                  c113_codlan = int4 = Código Lançamento 
                  ";
    //funcao construtor da classe 
-   function cl_conlancamreconhecimentocontabil() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancamreconhecimentocontabil"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_conlancamreconhecimentocontabil {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c113_sequencial = ($this->c113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_sequencial"]:$this->c113_sequencial);
-       $this->c113_reconhecimentocontabil = ($this->c113_reconhecimentocontabil == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_reconhecimentocontabil"]:$this->c113_reconhecimentocontabil);
-       $this->c113_codlan = ($this->c113_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_codlan"]:$this->c113_codlan);
+       $this->c113_sequencial = ($this->c113_sequencial === 0 || $this->c113_sequencial === 0.0 || $this->c113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_sequencial"]:$this->c113_sequencial);
+       $this->c113_reconhecimentocontabil = ($this->c113_reconhecimentocontabil === 0 || $this->c113_reconhecimentocontabil === 0.0 || $this->c113_reconhecimentocontabil == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_reconhecimentocontabil"]:$this->c113_reconhecimentocontabil);
+       $this->c113_codlan = ($this->c113_codlan === 0 || $this->c113_codlan === 0.0 || $this->c113_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_codlan"]:$this->c113_codlan);
      }else{
-       $this->c113_sequencial = ($this->c113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_sequencial"]:$this->c113_sequencial);
+       $this->c113_sequencial = ($this->c113_sequencial === 0 || $this->c113_sequencial === 0.0 || $this->c113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_sequencial"]:$this->c113_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_conlancamreconhecimentocontabil {
          $this->c113_sequencial = $c113_sequencial; 
        }
      }
-     if(($this->c113_sequencial == null) || ($this->c113_sequencial == "") ){ 
+     if(($this->c113_sequencial == null) || ($this->c113_sequencial === 0 || $this->c113_sequencial === 0.0 || $this->c113_sequencial == "") ){ 
        $this->erro_sql = " Campo c113_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_conlancamreconhecimentocontabil {
    function sql_query ( $c113_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_conlancamreconhecimentocontabil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_conlancamreconhecimentocontabil {
    function sql_query_file ( $c113_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_conlancamreconhecimentocontabil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,12 +450,12 @@ class cl_conlancamreconhecimentocontabil {
      }
      return $sql;
   }
-  
+
   // funcao do sql
   function sql_query_dadoslancamento ( $c113_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
   	$sql = "select ";
   	if($campos != "*" ){
-  		$campos_sql = split("#",$campos);
+  		$campos_sql = preg_split("#\\##m",$campos);
   		$virgula = "";
   		for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_conlancamreconhecimentocontabil {
   	$sql .= "      inner join reconhecimentocontabiltipo  on  reconhecimentocontabiltipo.c111_sequencial = reconhecimentocontabil.c112_reconhecimentocontabiltipo ";
   	$sql .= "      inner join conlancamcompl     					on  conlancam.c70_codlan                       = conlancamcompl.c72_codlan ";
   	$sql2 = "";
-  	
+
   	if($dbwhere==""){
   		if($c113_sequencial!=null ){
   			$sql2 .= " where conlancamreconhecimentocontabil.c113_sequencial = $c113_sequencial ";
@@ -481,7 +481,7 @@ class cl_conlancamreconhecimentocontabil {
   		$sql .= $sql2;
   		if($ordem != null ){
   		$sql .= " order by ";
-  			$campos_sql = split("#",$ordem);
+  			$campos_sql = preg_split("#\\##m",$ordem);
   			$virgula = "";
   			for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];

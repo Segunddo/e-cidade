@@ -47,7 +47,8 @@ if (!isset($arqinclude)){
   include(modification("classes/db_orcparamrel_classe.php"));
   include(modification("classes/db_empresto_classe.php"));
 
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
 
   $classinatura         = new cl_assinatura;
@@ -378,8 +379,8 @@ if (!isset($arqinclude)) {
   $head4 = "DEMONSTRATIVO DAS PARCERIAS PÚBLICO-PRIVADAS";
 
   $dados  = data_periodo($anousu,$periodo_selecionado);
-  $perini = split("-",$dados[0]);
-  $perfin = split("-",$dados[1]);
+  $perini = preg_split("#\\-#m",$dados[0]);
+  $perfin = preg_split("#\\-#m",$dados[1]);
 
   $txtper = strtoupper($dados["periodo"]);
   $mesini = db_mes($perini[1],1);

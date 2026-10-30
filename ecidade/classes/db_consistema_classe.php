@@ -52,7 +52,7 @@ class cl_consistema {
                  c52_descrred = varchar(1) = Descrição Reduzida 
                  ";
    //funcao construtor da classe 
-   function cl_consistema() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("consistema"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_consistema {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c52_codsis = ($this->c52_codsis == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_codsis"]:$this->c52_codsis);
+       $this->c52_codsis = ($this->c52_codsis === 0 || $this->c52_codsis === 0.0 || $this->c52_codsis == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_codsis"]:$this->c52_codsis);
        $this->c52_descr = ($this->c52_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_descr"]:$this->c52_descr);
        $this->c52_descrred = ($this->c52_descrred == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_descrred"]:$this->c52_descrred);
      }else{
-       $this->c52_codsis = ($this->c52_codsis == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_codsis"]:$this->c52_codsis);
+       $this->c52_codsis = ($this->c52_codsis === 0 || $this->c52_codsis === 0.0 || $this->c52_codsis == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_codsis"]:$this->c52_codsis);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_consistema {
        return false;
      }
        $this->c52_codsis = $c52_codsis; 
-     if(($this->c52_codsis == null) || ($this->c52_codsis == "") ){ 
+     if(($this->c52_codsis == null) || ($this->c52_codsis === 0 || $this->c52_codsis === 0.0 || $this->c52_codsis == "") ){ 
        $this->erro_sql = " Campo c52_codsis nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -336,7 +336,7 @@ class cl_consistema {
    function sql_query ( $c52_codsis=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -357,7 +357,7 @@ class cl_consistema {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -369,7 +369,7 @@ class cl_consistema {
    function sql_query_file ( $c52_codsis=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_consistema {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

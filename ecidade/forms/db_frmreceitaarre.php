@@ -172,7 +172,7 @@ if( isset($o70_codrec) && isset($cadastrar)){
   $result = db_query($sql);
   db_fieldsmemory($result,0);
 
-  $matriz= split("\.",$o50_estrutreceita);
+  $matriz= preg_split("#\\.#m",$o50_estrutreceita);
   $inicia=false;//variavel que indica que o nivel não tem mais filhos
   $tam=(count($matriz)-1);
   $codigos='';
@@ -191,7 +191,7 @@ if( isset($o70_codrec) && isset($cadastrar)){
       $codigos=$codigo."#".$codigos;
     }  
   }
-  $matriz02= split("#",$codigos);
+  $matriz02= preg_split("#\\##m",$codigos);
   $tam=count($matriz02);
   $espaco=3;   
   $esp='';
@@ -346,16 +346,16 @@ if( isset($o70_codrec) && isset($cadastrar)){
 	echo "<tr>";
 	echo "<td width=\"20%\">".$o57_fonte;
 	$codrec = "db_rec_".$o70_codrec;
-	global $$codrec;
-	$$codrec = $vlrperc;
+	global ${$codrec};
+	${$codrec} = $vlrperc;
 	db_input("db_rec_$o70_codrec",15,4,true,'hidden',3);
         echo "</td>";
 	echo "<td width=\"50%\" align=\"left\">$o57_descr</td>";
 	echo "<td width=\"10%\" align=\"center\">$o60_perc%</td>";
 	echo "<td width=\"20%\">";
 	$codrec = "vlrperc_".$o57_fonte;
-	global $$codrec;
-	$$codrec = db_formatar($vlrperc,'f');
+	global ${$codrec};
+	${$codrec} = db_formatar($vlrperc,'f');
 	db_input("vlrperc_$o57_fonte",15,4,true,'text',3);
 	echo "</td>";
 	echo "</tr>";

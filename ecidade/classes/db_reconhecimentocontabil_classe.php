@@ -58,7 +58,7 @@ class cl_reconhecimentocontabil {
                  c112_estornado = bool = Estornado 
                  ";
    //funcao construtor da classe 
-   function cl_reconhecimentocontabil() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("reconhecimentocontabil"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_reconhecimentocontabil {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c112_sequencial = ($this->c112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_sequencial"]:$this->c112_sequencial);
-       $this->c112_reconhecimentocontabiltipo = ($this->c112_reconhecimentocontabiltipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_reconhecimentocontabiltipo"]:$this->c112_reconhecimentocontabiltipo);
-       $this->c112_numcgm = ($this->c112_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_numcgm"]:$this->c112_numcgm);
+       $this->c112_sequencial = ($this->c112_sequencial === 0 || $this->c112_sequencial === 0.0 || $this->c112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_sequencial"]:$this->c112_sequencial);
+       $this->c112_reconhecimentocontabiltipo = ($this->c112_reconhecimentocontabiltipo === 0 || $this->c112_reconhecimentocontabiltipo === 0.0 || $this->c112_reconhecimentocontabiltipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_reconhecimentocontabiltipo"]:$this->c112_reconhecimentocontabiltipo);
+       $this->c112_numcgm = ($this->c112_numcgm === 0 || $this->c112_numcgm === 0.0 || $this->c112_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_numcgm"]:$this->c112_numcgm);
        $this->c112_processoadm = ($this->c112_processoadm == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_processoadm"]:$this->c112_processoadm);
-       $this->c112_valor = ($this->c112_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_valor"]:$this->c112_valor);
+       $this->c112_valor = ($this->c112_valor === 0 || $this->c112_valor === 0.0 || $this->c112_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_valor"]:$this->c112_valor);
        $this->c112_estornado = ($this->c112_estornado == "f"?@$GLOBALS["HTTP_POST_VARS"]["c112_estornado"]:$this->c112_estornado);
      }else{
-       $this->c112_sequencial = ($this->c112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_sequencial"]:$this->c112_sequencial);
+       $this->c112_sequencial = ($this->c112_sequencial === 0 || $this->c112_sequencial === 0.0 || $this->c112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_sequencial"]:$this->c112_sequencial);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_reconhecimentocontabil {
          $this->c112_sequencial = $c112_sequencial; 
        }
      }
-     if(($this->c112_sequencial == null) || ($this->c112_sequencial == "") ){ 
+     if(($this->c112_sequencial == null) || ($this->c112_sequencial === 0 || $this->c112_sequencial === 0.0 || $this->c112_sequencial == "") ){ 
        $this->erro_sql = " Campo c112_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -457,7 +457,7 @@ class cl_reconhecimentocontabil {
    function sql_query ( $c112_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_reconhecimentocontabil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -494,7 +494,7 @@ class cl_reconhecimentocontabil {
    function sql_query_file ( $c112_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -515,7 +515,7 @@ class cl_reconhecimentocontabil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

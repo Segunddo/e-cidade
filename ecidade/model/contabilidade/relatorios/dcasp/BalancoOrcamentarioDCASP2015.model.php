@@ -647,7 +647,7 @@ final class BalancoOrcamentarioDCASP2015 extends RelatoriosLegaisBase {
    * @see RelatoriosLegaisBase::getDados()
    * @return array
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $aLinhasConsistencia = parent::getDados();
     foreach (array(26, 50) as $iLinha) {

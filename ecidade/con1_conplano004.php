@@ -48,7 +48,8 @@ require_once(modification("classes/db_pcmaterele_classe.php"));
 require_once(modification("classes/db_emprestotipo_classe.php"));
 require_once(modification("classes/db_db_config_classe.php"));
 require_once modification("model/transacaoContabilLancamento.model.php");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;

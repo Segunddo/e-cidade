@@ -36,7 +36,7 @@ class PadArquivoEscritorTXT extends PadArquivoEscritor {
 	 * @param iPadArquivoTXTBase $oArquivo
 	 * @return caminho do arquivo
 	 */
-	public function  criarArquivo(iPadArquivoTXTBase $oArquivo) {
+	public function  criarArquivo(iPadArquivoBase $oArquivo) { // PHP 8: a filha nao pode estreitar o tipo da mae (LSP); o unico chamador passa iPadArquivoTXTBase
 		
 		/**
 		 * Instância dos objetos que serão utilizados para

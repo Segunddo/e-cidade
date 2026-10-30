@@ -56,7 +56,7 @@ class cl_conarquivospad {
                  c54_anousu = int4 = exercício 
                  ";
    //funcao construtor da classe 
-   function cl_conarquivospad() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conarquivospad"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_conarquivospad {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c54_codarq = ($this->c54_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["c54_codarq"]:$this->c54_codarq);
+       $this->c54_codarq = ($this->c54_codarq === 0 || $this->c54_codarq === 0.0 || $this->c54_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["c54_codarq"]:$this->c54_codarq);
        $this->c54_nomearq = ($this->c54_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["c54_nomearq"]:$this->c54_nomearq);
        $this->c54_arquivo = ($this->c54_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c54_arquivo"]:$this->c54_arquivo);
-       $this->c54_codtrib = ($this->c54_codtrib == ""?@$GLOBALS["HTTP_POST_VARS"]["c54_codtrib"]:$this->c54_codtrib);
-       $this->c54_anousu = ($this->c54_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c54_anousu"]:$this->c54_anousu);
+       $this->c54_codtrib = ($this->c54_codtrib === 0 || $this->c54_codtrib === 0.0 || $this->c54_codtrib == ""?@$GLOBALS["HTTP_POST_VARS"]["c54_codtrib"]:$this->c54_codtrib);
+       $this->c54_anousu = ($this->c54_anousu === 0 || $this->c54_anousu === 0.0 || $this->c54_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c54_anousu"]:$this->c54_anousu);
      }else{
-       $this->c54_codarq = ($this->c54_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["c54_codarq"]:$this->c54_codarq);
+       $this->c54_codarq = ($this->c54_codarq === 0 || $this->c54_codarq === 0.0 || $this->c54_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["c54_codarq"]:$this->c54_codarq);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_conarquivospad {
          $this->c54_codarq = $c54_codarq; 
        }
      }
-     if(($this->c54_codarq == null) || ($this->c54_codarq == "") ){ 
+     if(($this->c54_codarq == null) || ($this->c54_codarq === 0 || $this->c54_codarq === 0.0 || $this->c54_codarq == "") ){ 
        $this->erro_sql = " Campo c54_codarq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_conarquivospad {
    function sql_query ( $c54_codarq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_conarquivospad {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_conarquivospad {
    function sql_query_file ( $c54_codarq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_conarquivospad {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

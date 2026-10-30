@@ -32,7 +32,7 @@ final class BalancoPatrimonialDcasp extends RelatoriosLegaisBase {
 
   const CODIGO_RELATORIO = 131;
 
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $sWhereBalanceteVerificacao = " c61_instit in ({$this->getInstituicoes()}) ";
 
