@@ -354,3 +354,18 @@ do TCC de referência (`ecidade/tmp/tcc_gerson`, 1,1 GB; ver `trabalho-relaciona
 área: bateria completa (todos os prefixos do `location` + o `map` inteiro, com as regressões adiadas dos lotes 2, 3 e 4), a
 conferência pelo proxy de todas as telas de menu do Financeiro, e só então o envio. **O usuário pediu para sinalizar e esperar
 antes da bateria final.**
+
+**Bateria completa do fim da área (30/10/2026, autorizada pelo usuário):** todos os prefixos do `location` (7.994 telas,
+`iss4_siss002` pulada) e o `map` inteiro. **`map` 1.112/1.112.** `location` **7.930/7.994** (62 divergentes + 2 timeouts):
+- **28 já registradas**, conferidas nome a nome (ou pelo grupo em que o registro as descreve): as da Educação (`edu1_*002/003`
+  que quebram no 5.6, as 8 do Censo/INEP do `edu4`, fragmentos `bib2_comprovantemodelo_*`), as do Tributário (`agu`, `fis`,
+  `iss`, `cai2_receisub002`, `cai3_gerfinanc013`), o timeout de `rec2_espelhoponto002` e as 2 do Financeiro registradas no
+  lote 3 (`orc1_orcsuplem005`, que quebra nos dois; `orc2_orcprevmensalrec002`, horário no fluxo comprimido do PDF).
+- **36 do `tra`** (todas as telas `tra*_` com saída): 500 só no 8.5, `ArgumentCountError: parse_str() expects exactly 2
+  arguments` — `parse_str($HTTP_SERVER_VARS["QUERY_STRING"])` com 1 argumento. **Não é regressão do Financeiro:** os
+  arquivos não mudam desde a reorganização do repositório (o piloto `tra` foi portado antes de o `parse_str` virar categoria,
+  e não tocou estas telas), e nenhum include que roda antes da linha (`db_stdlib`, `db_conecta`, `db_sessoes`) mudou desde
+  a base da branch; o resultado não depende do módulo da sessão. É a pendência "o `tra`, órfão" já listada na linha de base
+  do Patrimonial — as baterias anteriores não a contavam. Fica para decisão do usuário (órfão no menu).
+- Nenhuma regressão nova; as regressões adiadas dos lotes 2, 3 e 4 (`fpdf151/pdf.php`, `Cell()`, `db_libcontabilidade`,
+  `db_assinatura`, `regraEmissao`) não apareceram.
