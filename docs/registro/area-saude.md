@@ -283,6 +283,28 @@ tela fora do `escrita_post.py`.**
 **Para medir a CGS** o harness precisaria (a) restaurar linha alterada por UPDATE em vez de DELETE+INSERT e (b) enxergar escrita
 de gatilho (comparar as tabelas por conteúdo, antes e depois, em vez de depender do log). Fica para decisão do usuário.
 
-**Estado:** os 7 lotes da Saúde concluídos (commits locais). Falta a etapa do fim da área: bateria completa (todos os prefixos
+### Bateria completa do fim da área (01/11/2026, autorizada pelo usuário)
+
+Todos os prefixos do `location` (9.245 telas; `iss4_siss002` pulada) e o `map` inteiro. **`map` 1.108/1.108.** `location`
+**9.213/9.245** (30 divergentes + 2 timeouts), conferidas nome a nome:
+- **26 da linha de base do Financeiro** (Educação, Tributário, as 2 `orc` do lote 3 do Financeiro, os timeouts
+  `edu4_verifexportcenso002` e `rec2_espelhoponto002`). Saiu da lista `cai3_gerfinanc013`, agora idêntica.
+- **3 da Saúde, caracterizadas nos lotes:** `lab2_mapacoletaconsulta`, `lab4_resultadomodelo1`, `sau2_bpa001`.
+- **`orc2_receitasDespesasPrevidenciariasServidores002`** — intermitente: idêntica nas 2 repetições isoladas. Mesmo caso da
+  `orc2_orcprevmensalrec002` (horário dentro do fluxo comprimido do PDF).
+- **`mer_subitem004.php`** — nunca portada (só a reorganização a tocou), servida pelo `location` desde o Educação
+  (`mer_`), e só agora apareceu: **a bateria rodou num DOMINGO.** Sem parâmetros, `date("w", mktime(0,0,0,$mes,$dia,$ano))`
+  com `null` dá 30/11/1999 (terça) no 5.6 e **hoje** no 8.5 (categoria do Financeiro: `mktime(null)` = agora); hoje é domingo,
+  então só o 8.5 dispara "não é um dia letivo" e limpa a data. Em dia útil os dois concordam — por isso as baterias anteriores
+  passaram. **Artefato:** as 3 chamadas reais (`forms/db_frmmer_subitem.php`) mandam sempre a data completa (duas recusam
+  campo vazio com "Preencha todos os campos da data!"; a terceira calcula a data por aritmética). Pelo caminho real,
+  **idêntica** em 4 datas (dia útil, sábado, domingo, Natal). Com `ano=&mes=&dia=` (que nenhuma chamadora manda) o 8.5 dá 500.
+  Não corrigida. **Lição:** a bateria completa não é reprodutível entre dias da semana para telas com `mktime`/`date` sobre
+  parâmetro ausente; uma divergência nova num fim de semana pede esse teste antes do `bisect`.
+
+Nenhuma regressão dos 7 lotes da Saúde.
+
+**Estado:** os 7 lotes da Saúde concluídos e a bateria completa feita (commits locais). Faltam a conferência pelo proxy das
+telas de menu da Saúde e o envio — cada um só com o pedido do usuário. Falta a etapa do fim da área: bateria completa (todos os prefixos
 do `location` + o `map` inteiro), a conferência pelo proxy das telas de menu da Saúde e o envio — cada uma só com o pedido do
 usuário.
