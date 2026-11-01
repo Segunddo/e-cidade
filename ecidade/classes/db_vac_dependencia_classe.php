@@ -54,7 +54,7 @@ class cl_vac_dependencia {
                  vc09_i_situacao = int4 = vc09_i_situacao 
                  ";
    //funcao construtor da classe 
-   function cl_vac_dependencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_dependencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_vac_dependencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc09_i_codigo = ($this->vc09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_codigo"]:$this->vc09_i_codigo);
-       $this->vc09_i_dependente = ($this->vc09_i_dependente == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_dependente"]:$this->vc09_i_dependente);
-       $this->vc09_i_dependencia = ($this->vc09_i_dependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_dependencia"]:$this->vc09_i_dependencia);
-       $this->vc09_i_situacao = ($this->vc09_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_situacao"]:$this->vc09_i_situacao);
+       $this->vc09_i_codigo = ($this->vc09_i_codigo === 0 || $this->vc09_i_codigo === 0.0 || $this->vc09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_codigo"]:$this->vc09_i_codigo);
+       $this->vc09_i_dependente = ($this->vc09_i_dependente === 0 || $this->vc09_i_dependente === 0.0 || $this->vc09_i_dependente == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_dependente"]:$this->vc09_i_dependente);
+       $this->vc09_i_dependencia = ($this->vc09_i_dependencia === 0 || $this->vc09_i_dependencia === 0.0 || $this->vc09_i_dependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_dependencia"]:$this->vc09_i_dependencia);
+       $this->vc09_i_situacao = ($this->vc09_i_situacao === 0 || $this->vc09_i_situacao === 0.0 || $this->vc09_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_situacao"]:$this->vc09_i_situacao);
      }else{
-       $this->vc09_i_codigo = ($this->vc09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_codigo"]:$this->vc09_i_codigo);
+       $this->vc09_i_codigo = ($this->vc09_i_codigo === 0 || $this->vc09_i_codigo === 0.0 || $this->vc09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_codigo"]:$this->vc09_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_vac_dependencia {
          $this->vc09_i_codigo = $vc09_i_codigo; 
        }
      }
-     if(($this->vc09_i_codigo == null) || ($this->vc09_i_codigo == "") ){ 
+     if(($this->vc09_i_codigo == null) || ($this->vc09_i_codigo === 0 || $this->vc09_i_codigo === 0.0 || $this->vc09_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc09_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_vac_dependencia {
    function sql_query ( $vc09_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_vac_dependencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_vac_dependencia {
    function sql_query_alt ( $vc09_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -454,7 +454,7 @@ class cl_vac_dependencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_vac_dependencia {
    function sql_query_file ( $vc09_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -489,7 +489,7 @@ class cl_vac_dependencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_cgs_undetnia {
                  s201_etnia = int4 = Etnia 
                  ";
    //funcao construtor da classe 
-   function cl_cgs_undetnia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgs_undetnia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cgs_undetnia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s201_codigo = ($this->s201_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_codigo"]:$this->s201_codigo);
-       $this->s201_cgs_unid = ($this->s201_cgs_unid == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_cgs_unid"]:$this->s201_cgs_unid);
-       $this->s201_etnia = ($this->s201_etnia == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_etnia"]:$this->s201_etnia);
+       $this->s201_codigo = ($this->s201_codigo === 0 || $this->s201_codigo === 0.0 || $this->s201_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_codigo"]:$this->s201_codigo);
+       $this->s201_cgs_unid = ($this->s201_cgs_unid === 0 || $this->s201_cgs_unid === 0.0 || $this->s201_cgs_unid == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_cgs_unid"]:$this->s201_cgs_unid);
+       $this->s201_etnia = ($this->s201_etnia === 0 || $this->s201_etnia === 0.0 || $this->s201_etnia == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_etnia"]:$this->s201_etnia);
      }else{
-       $this->s201_codigo = ($this->s201_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_codigo"]:$this->s201_codigo);
+       $this->s201_codigo = ($this->s201_codigo === 0 || $this->s201_codigo === 0.0 || $this->s201_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_codigo"]:$this->s201_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cgs_undetnia {
          $this->s201_codigo = $s201_codigo; 
        }
      }
-     if(($this->s201_codigo == null) || ($this->s201_codigo == "") ){ 
+     if(($this->s201_codigo == null) || ($this->s201_codigo === 0 || $this->s201_codigo === 0.0 || $this->s201_codigo == "") ){ 
        $this->erro_sql = " Campo s201_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_cgs_undetnia {
    function sql_query ( $s201_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_cgs_undetnia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_cgs_undetnia {
    function sql_query_file ( $s201_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_cgs_undetnia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

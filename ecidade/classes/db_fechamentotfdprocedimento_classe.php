@@ -60,7 +60,7 @@ class cl_fechamentotfdprocedimento {
                  tf40_paciente = bool = Se foi paciente 
                  ";
    //funcao construtor da classe 
-   function cl_fechamentotfdprocedimento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fechamentotfdprocedimento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_fechamentotfdprocedimento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf40_sequencial = ($this->tf40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_sequencial"]:$this->tf40_sequencial);
-       $this->tf40_tfd_fechamento = ($this->tf40_tfd_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_tfd_fechamento"]:$this->tf40_tfd_fechamento);
-       $this->tf40_tfd_pedidotfd = ($this->tf40_tfd_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_tfd_pedidotfd"]:$this->tf40_tfd_pedidotfd);
-       $this->tf40_cgs_und = ($this->tf40_cgs_und == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_cgs_und"]:$this->tf40_cgs_und);
-       $this->tf40_sau_procedimento = ($this->tf40_sau_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_sau_procedimento"]:$this->tf40_sau_procedimento);
+       $this->tf40_sequencial = ($this->tf40_sequencial === 0 || $this->tf40_sequencial === 0.0 || $this->tf40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_sequencial"]:$this->tf40_sequencial);
+       $this->tf40_tfd_fechamento = ($this->tf40_tfd_fechamento === 0 || $this->tf40_tfd_fechamento === 0.0 || $this->tf40_tfd_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_tfd_fechamento"]:$this->tf40_tfd_fechamento);
+       $this->tf40_tfd_pedidotfd = ($this->tf40_tfd_pedidotfd === 0 || $this->tf40_tfd_pedidotfd === 0.0 || $this->tf40_tfd_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_tfd_pedidotfd"]:$this->tf40_tfd_pedidotfd);
+       $this->tf40_cgs_und = ($this->tf40_cgs_und === 0 || $this->tf40_cgs_und === 0.0 || $this->tf40_cgs_und == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_cgs_und"]:$this->tf40_cgs_und);
+       $this->tf40_sau_procedimento = ($this->tf40_sau_procedimento === 0 || $this->tf40_sau_procedimento === 0.0 || $this->tf40_sau_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_sau_procedimento"]:$this->tf40_sau_procedimento);
        $this->tf40_faturamentoautomatico = ($this->tf40_faturamentoautomatico == "f"?@$GLOBALS["HTTP_POST_VARS"]["tf40_faturamentoautomatico"]:$this->tf40_faturamentoautomatico);
        $this->tf40_paciente = ($this->tf40_paciente == "f"?@$GLOBALS["HTTP_POST_VARS"]["tf40_paciente"]:$this->tf40_paciente);
      }else{
-       $this->tf40_sequencial = ($this->tf40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_sequencial"]:$this->tf40_sequencial);
+       $this->tf40_sequencial = ($this->tf40_sequencial === 0 || $this->tf40_sequencial === 0.0 || $this->tf40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf40_sequencial"]:$this->tf40_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_fechamentotfdprocedimento {
          $this->tf40_sequencial = $tf40_sequencial; 
        }
      }
-     if(($this->tf40_sequencial == null) || ($this->tf40_sequencial == "") ){ 
+     if(($this->tf40_sequencial == null) || ($this->tf40_sequencial === 0 || $this->tf40_sequencial === 0.0 || $this->tf40_sequencial == "") ){ 
        $this->erro_sql = " Campo tf40_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -506,7 +506,7 @@ class cl_fechamentotfdprocedimento {
    function sql_query ( $tf40_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_fechamentotfdprocedimento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -558,7 +558,7 @@ class cl_fechamentotfdprocedimento {
    function sql_query_file ( $tf40_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -579,7 +579,7 @@ class cl_fechamentotfdprocedimento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

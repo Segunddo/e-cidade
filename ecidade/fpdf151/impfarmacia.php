@@ -136,11 +136,11 @@ class db_impcarne extends cl_assinatura {
 
 //************************************************************//
     
-  function db_impcarne($objpdf,$impmodelo){
+  function __construct($objpdf,$impmodelo){
     $this->objpdf = $objpdf;
     $this->impmodelo = $impmodelo; 
   }
-  function muda_pag($pagina,$xlin,$xcol,$fornec="false",&$contapagina,$mais=1){
+  function muda_pag($pagina,$xlin,$xcol,$fornec="false",&$contapagina = null,$mais=1){
     global $resparag, $resparagpadrao, $db61_texto, $db02_texto, $maislin, $xtotal, $flag_rodape;
 
     $x = false;

@@ -45,6 +45,7 @@ da área, envio só depois dela.
 | Lote | Universo | Alterados | `php -l` 5.6/8.5 | Carga (LSP) | Classes | Escrita | Forma negada | **Bateria** |
 |---|---|---|---|---|---|---|---|---|
 | 1 `fum`+`hip`+`age`+`amb` | 1.896 | 26 Rector | 1.896/1.896 | 364/364 (11 falham nos dois) | 785 (diffs só do harness) | 19.640 linhas, diffs só do harness | 2.216 pares, 0 div. | **71/71** |
+| 2 `tfd`+`vac` | 2.194 | 157 Rector + 1 LSP + 1 forma negada à mão | 2.194/2.194 | 375/375 depois da LSP (13 falham nos dois) | 892 (diffs só do harness) | 22.712 linhas, diffs só do harness | 2.541 pares, 1 div. → corrigida | **164/164** |
 
 **Lote 1 — `fum`, `hip`, `age`, `amb`** (71 arquivos, roteados no `location`; 31/10/2026). Enumerador: 57 alvos, dos
 quais **11 são o falso positivo já registrado** no `tra` (`cgm*`, `db_db_uf`, `db_db_userinst`…: portados por commits
@@ -68,4 +69,33 @@ Bateria dirigida: das 16 classes alteradas, 2 (`db_sau_atualiza`, `db_sau_proced
 fora do lote usa as classes alteradas nem esses 20 arquivos (a única é `age4_municipiocotamensalexame001`, do lote).
 Nenhuma bateria dirigida a fazer.
 
-**Estado:** lote 1 concluído (commit local). Aguardando o pedido do lote 2 (`tfd`, `vac`).
+**Lote 2 — `tfd`, `vac`** (164 arquivos, roteados no `location`; 31/10/2026). 177 alvos (os 11 do falso positivo entre
+eles, intocados). `split()`: 411 `"#"`, 8 `'#'`, 1 `"/"` — todos literais (um `split('/')` a mais é JavaScript, em
+`forms/db_frmtfd_agendaprestsaida.php`). Rector em **157 arquivos**, só regras vetadas (105 guardas, 93 construtores, 86
+`split`, 49 `parse_str`, 3 `OptionalParametersAfterRequired` — todas sem tipo, então sem o `?Tipo` do RH), 0 na 2ª passada.
+Remanescentes 0; portão de funções 0 ausentes; lint 2.194/2.194 nos dois.
+
+À mão:
+- **LSP criada pelo próprio Rector:** a `OptionalParametersAfterRequiredRector` deu `= null` a `$sd04_i_medico` e
+  `$sd04_i_unidade` em `cl_cgs_und::sql_query_cgs_profissional` (vinham depois de `$z01_i_cgsund=null`). A filha
+  `cl_cgs_und_ext` (`classes/db_cgs_und_ext_classe.php`) declara os dois **obrigatórios** e passou a não carregar no 8.5
+  ("must be compatible"). Antes da regra era compatível: no PHP 8 um opcional antes de obrigatórios conta como obrigatório.
+  Corrigido espelhando a mãe (`= null` nos dois); as 2 chamadas (`func_cgs_und.php`) passam todos os argumentos. **Lição
+  para a skill: a `OptionalParametersAfterRequired` muda a assinatura da MÃE — conferir filhas fora do universo** (a carga
+  pegou porque a filha estava nele). As outras 2 ocorrências (`db_impcarne::muda_pag` em `fpdf151/impfarmacia.php`,
+  `cl_vac_aplica::sql_query_vacinasnaoaplicadas`) não têm subclasses.
+- **Forma negada, o caso de NEGÓCIO previsto:** `cl_cgs_und::alterarExt`, `z01_b_faleceu != ""` — o único dos 89 pares
+  medidos no Patrimonial que está no SQL de negócio, registrado então como "Saúde, não servida". Agora no universo:
+  `negada.php` 1 divergente em 2.541 (no 8.5 o `UPDATE` incluiria `z01_b_faleceu = '0'`). Guarda da categoria
+  (`negada_corrige.py`), decisão já tomada pelo usuário em 29/10; `negada_alvos.py` deixou de listar o par.
+
+Classes e escrita: só os diffs conhecidos do harness. Bateria **164/164 na primeira rodada**. Bateria dirigida (telas
+servidas fora do lote que usam algum dos 106 arquivos de `classes/` alterados ou `libs/db_dbf_class.php` /
+`fpdf151/impfarmacia.php`): só `amb4_acompanhamentoacs` (lote 1), **1/1**; os dois arquivos de `libs`/`fpdf151` só são usados
+por `far` (ainda no 5.6) e pelo próprio lote.
+
+Roteamento: `tfd|vac` no `location` e nos três scripts; `map` regenerado sem mudança (1.104; nenhuma tela `tfd`/`vac`
+estava nele). Conferido: `tfd1_`, `/w/2/vac1_` → 8.5; `login`, `far1_`, `sau1_` → 5.6. Passo 8b (131 telas da Saúde no
+8.5): nada indo ao 5.6 (4 iframes de pasta).
+
+**Estado:** lote 2 concluído (commit local). Aguardando o pedido do lote 3 (`lab`).

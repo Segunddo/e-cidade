@@ -62,7 +62,7 @@ class cl_tfd_prestadoracentralagend {
                  tf10_d_validadefim = date = Fim 
                  ";
    //funcao construtor da classe 
-   function cl_tfd_prestadoracentralagend() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_prestadoracentralagend"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,9 +79,9 @@ class cl_tfd_prestadoracentralagend {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf10_i_codigo = ($this->tf10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf10_i_codigo"]:$this->tf10_i_codigo);
-       $this->tf10_i_prestadora = ($this->tf10_i_prestadora == ""?@$GLOBALS["HTTP_POST_VARS"]["tf10_i_prestadora"]:$this->tf10_i_prestadora);
-       $this->tf10_i_centralagend = ($this->tf10_i_centralagend == ""?@$GLOBALS["HTTP_POST_VARS"]["tf10_i_centralagend"]:$this->tf10_i_centralagend);
+       $this->tf10_i_codigo = ($this->tf10_i_codigo === 0 || $this->tf10_i_codigo === 0.0 || $this->tf10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf10_i_codigo"]:$this->tf10_i_codigo);
+       $this->tf10_i_prestadora = ($this->tf10_i_prestadora === 0 || $this->tf10_i_prestadora === 0.0 || $this->tf10_i_prestadora == ""?@$GLOBALS["HTTP_POST_VARS"]["tf10_i_prestadora"]:$this->tf10_i_prestadora);
+       $this->tf10_i_centralagend = ($this->tf10_i_centralagend === 0 || $this->tf10_i_centralagend === 0.0 || $this->tf10_i_centralagend == ""?@$GLOBALS["HTTP_POST_VARS"]["tf10_i_centralagend"]:$this->tf10_i_centralagend);
        if($this->tf10_d_validadeini == ""){
          $this->tf10_d_validadeini_dia = ($this->tf10_d_validadeini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf10_d_validadeini_dia"]:$this->tf10_d_validadeini_dia);
          $this->tf10_d_validadeini_mes = ($this->tf10_d_validadeini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf10_d_validadeini_mes"]:$this->tf10_d_validadeini_mes);
@@ -99,7 +99,7 @@ class cl_tfd_prestadoracentralagend {
          }
        }
      }else{
-       $this->tf10_i_codigo = ($this->tf10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf10_i_codigo"]:$this->tf10_i_codigo);
+       $this->tf10_i_codigo = ($this->tf10_i_codigo === 0 || $this->tf10_i_codigo === 0.0 || $this->tf10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf10_i_codigo"]:$this->tf10_i_codigo);
      }
    }
    // funcao para inclusao
@@ -159,7 +159,7 @@ class cl_tfd_prestadoracentralagend {
          $this->tf10_i_codigo = $tf10_i_codigo; 
        }
      }
-     if(($this->tf10_i_codigo == null) || ($this->tf10_i_codigo == "") ){ 
+     if(($this->tf10_i_codigo == null) || ($this->tf10_i_codigo === 0 || $this->tf10_i_codigo === 0.0 || $this->tf10_i_codigo == "") ){ 
        $this->erro_sql = " Campo tf10_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -446,7 +446,7 @@ class cl_tfd_prestadoracentralagend {
    function sql_query ( $tf10_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -472,7 +472,7 @@ class cl_tfd_prestadoracentralagend {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -485,7 +485,7 @@ class cl_tfd_prestadoracentralagend {
    function sql_query_file ( $tf10_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -506,7 +506,7 @@ class cl_tfd_prestadoracentralagend {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_tfd_prestadoracentralagend {
 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -547,7 +547,7 @@ class cl_tfd_prestadoracentralagend {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

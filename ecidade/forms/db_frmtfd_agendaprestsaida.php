@@ -46,7 +46,7 @@ $clrotulo->label("tf01_i_rhcbo");
           </td>
           <td>
             <?php
-              $aData = split( "/", strftime("%d/%m/%Y", mktime(0, 0, 0, date("m"), date("d") - 30, date("Y"))));
+              $aData = preg_split( "#\\/#m", strftime("%d/%m/%Y", mktime(0, 0, 0, date("m"), date("d") - 30, date("Y"))));
               $dia1  = $aData[0];
               $mes1  = $aData[1];
               $ano1  = $aData[2];

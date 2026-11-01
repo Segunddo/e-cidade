@@ -45,11 +45,11 @@ class cl_cgsauditoria
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->z18_sequencial = ($this->z18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z18_sequencial"]:$this->z18_sequencial);
-       $this->z18_cgs = ($this->z18_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["z18_cgs"]:$this->z18_cgs);
+       $this->z18_sequencial = ($this->z18_sequencial === 0 || $this->z18_sequencial === 0.0 || $this->z18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z18_sequencial"]:$this->z18_sequencial);
+       $this->z18_cgs = ($this->z18_cgs === 0 || $this->z18_cgs === 0.0 || $this->z18_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["z18_cgs"]:$this->z18_cgs);
        $this->z18_usuario = ($this->z18_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["z18_usuario"]:$this->z18_usuario);
      }else{
-       $this->z18_sequencial = ($this->z18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z18_sequencial"]:$this->z18_sequencial);
+       $this->z18_sequencial = ($this->z18_sequencial === 0 || $this->z18_sequencial === 0.0 || $this->z18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z18_sequencial"]:$this->z18_sequencial);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_cgsauditoria
          $this->z18_sequencial = $z18_sequencial; 
        }
      }
-     if(($this->z18_sequencial == null) || ($this->z18_sequencial == "") ){ 
+     if(($this->z18_sequencial == null) || ($this->z18_sequencial === 0 || $this->z18_sequencial === 0.0 || $this->z18_sequencial == "") ){ 
        $this->erro_sql = " Campo z18_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -26,7 +26,7 @@ class cl_medicamentoslaboratoriorequiitem {
                  la44_requiitem = int4 = Exame 
                  ";
    //funcao construtor da classe 
-   function cl_medicamentoslaboratoriorequiitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("medicamentoslaboratoriorequiitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_medicamentoslaboratoriorequiitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la44_sequencial = ($this->la44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la44_sequencial"]:$this->la44_sequencial);
-       $this->la44_medicamentoslaboratorio = ($this->la44_medicamentoslaboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la44_medicamentoslaboratorio"]:$this->la44_medicamentoslaboratorio);
-       $this->la44_requiitem = ($this->la44_requiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["la44_requiitem"]:$this->la44_requiitem);
+       $this->la44_sequencial = ($this->la44_sequencial === 0 || $this->la44_sequencial === 0.0 || $this->la44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la44_sequencial"]:$this->la44_sequencial);
+       $this->la44_medicamentoslaboratorio = ($this->la44_medicamentoslaboratorio === 0 || $this->la44_medicamentoslaboratorio === 0.0 || $this->la44_medicamentoslaboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la44_medicamentoslaboratorio"]:$this->la44_medicamentoslaboratorio);
+       $this->la44_requiitem = ($this->la44_requiitem === 0 || $this->la44_requiitem === 0.0 || $this->la44_requiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["la44_requiitem"]:$this->la44_requiitem);
      }else{
-       $this->la44_sequencial = ($this->la44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la44_sequencial"]:$this->la44_sequencial);
+       $this->la44_sequencial = ($this->la44_sequencial === 0 || $this->la44_sequencial === 0.0 || $this->la44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la44_sequencial"]:$this->la44_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_medicamentoslaboratoriorequiitem {
          $this->la44_sequencial = $la44_sequencial; 
        }
      }
-     if(($this->la44_sequencial == null) || ($this->la44_sequencial == "") ){ 
+     if(($this->la44_sequencial == null) || ($this->la44_sequencial === 0 || $this->la44_sequencial === 0.0 || $this->la44_sequencial == "") ){ 
        $this->erro_sql = " Campo la44_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

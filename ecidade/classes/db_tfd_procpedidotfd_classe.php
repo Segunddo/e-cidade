@@ -52,7 +52,7 @@ class cl_tfd_procpedidotfd {
                  tf23_i_pedidotfd = int4 = Pedido 
                  ";
    //funcao construtor da classe 
-   function cl_tfd_procpedidotfd() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_procpedidotfd"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_tfd_procpedidotfd {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf23_i_codigo = ($this->tf23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf23_i_codigo"]:$this->tf23_i_codigo);
-       $this->tf23_i_procedimento = ($this->tf23_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf23_i_procedimento"]:$this->tf23_i_procedimento);
-       $this->tf23_i_pedidotfd = ($this->tf23_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf23_i_pedidotfd"]:$this->tf23_i_pedidotfd);
+       $this->tf23_i_codigo = ($this->tf23_i_codigo === 0 || $this->tf23_i_codigo === 0.0 || $this->tf23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf23_i_codigo"]:$this->tf23_i_codigo);
+       $this->tf23_i_procedimento = ($this->tf23_i_procedimento === 0 || $this->tf23_i_procedimento === 0.0 || $this->tf23_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf23_i_procedimento"]:$this->tf23_i_procedimento);
+       $this->tf23_i_pedidotfd = ($this->tf23_i_pedidotfd === 0 || $this->tf23_i_pedidotfd === 0.0 || $this->tf23_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf23_i_pedidotfd"]:$this->tf23_i_pedidotfd);
      }else{
-       $this->tf23_i_codigo = ($this->tf23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf23_i_codigo"]:$this->tf23_i_codigo);
+       $this->tf23_i_codigo = ($this->tf23_i_codigo === 0 || $this->tf23_i_codigo === 0.0 || $this->tf23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf23_i_codigo"]:$this->tf23_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tfd_procpedidotfd {
          $this->tf23_i_codigo = $tf23_i_codigo; 
        }
      }
-     if(($this->tf23_i_codigo == null) || ($this->tf23_i_codigo == "") ){ 
+     if(($this->tf23_i_codigo == null) || ($this->tf23_i_codigo === 0 || $this->tf23_i_codigo === 0.0 || $this->tf23_i_codigo == "") ){ 
        $this->erro_sql = " Campo tf23_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_tfd_procpedidotfd {
    function sql_query ( $tf23_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_tfd_procpedidotfd {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_tfd_procpedidotfd {
    function sql_query_file ( $tf23_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_tfd_procpedidotfd {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_tfd_procpedidotfd {
    function sql_query2 ( $tf23_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_tfd_procpedidotfd {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

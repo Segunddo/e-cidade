@@ -26,7 +26,7 @@ class cl_tiporeferenciaalnumericosexo {
                  la60_sexo = char(1) = Sexo 
                  ";
    //funcao construtor da classe 
-   function cl_tiporeferenciaalnumericosexo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tiporeferenciaalnumericosexo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_tiporeferenciaalnumericosexo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la60_sequencial = ($this->la60_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la60_sequencial"]:$this->la60_sequencial);
-       $this->la60_tiporeferencialnumerico = ($this->la60_tiporeferencialnumerico == ""?@$GLOBALS["HTTP_POST_VARS"]["la60_tiporeferencialnumerico"]:$this->la60_tiporeferencialnumerico);
+       $this->la60_sequencial = ($this->la60_sequencial === 0 || $this->la60_sequencial === 0.0 || $this->la60_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la60_sequencial"]:$this->la60_sequencial);
+       $this->la60_tiporeferencialnumerico = ($this->la60_tiporeferencialnumerico === 0 || $this->la60_tiporeferencialnumerico === 0.0 || $this->la60_tiporeferencialnumerico == ""?@$GLOBALS["HTTP_POST_VARS"]["la60_tiporeferencialnumerico"]:$this->la60_tiporeferencialnumerico);
        $this->la60_sexo = ($this->la60_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["la60_sexo"]:$this->la60_sexo);
      }else{
-       $this->la60_sequencial = ($this->la60_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la60_sequencial"]:$this->la60_sequencial);
+       $this->la60_sequencial = ($this->la60_sequencial === 0 || $this->la60_sequencial === 0.0 || $this->la60_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la60_sequencial"]:$this->la60_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_tiporeferenciaalnumericosexo {
          $this->la60_sequencial = $la60_sequencial; 
        }
      }
-     if(($this->la60_sequencial == null) || ($this->la60_sequencial == "") ){ 
+     if(($this->la60_sequencial == null) || ($this->la60_sequencial === 0 || $this->la60_sequencial === 0.0 || $this->la60_sequencial == "") ){ 
        $this->erro_sql = " Campo la60_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -356,7 +356,7 @@ class cl_tiporeferenciaalnumericosexo {
    function sql_query ( $la60_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -379,7 +379,7 @@ class cl_tiporeferenciaalnumericosexo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_tiporeferenciaalnumericosexo {
    function sql_query_file ( $la60_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_tiporeferenciaalnumericosexo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -61,7 +61,7 @@ class cl_tfd_pedidoregulado {
                  tf34_c_horasistema = char(5) = Hora do sistema 
                  ";
    //funcao construtor da classe 
-   function cl_tfd_pedidoregulado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_pedidoregulado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,10 +78,10 @@ class cl_tfd_pedidoregulado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf34_i_codigo = ($this->tf34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_i_codigo"]:$this->tf34_i_codigo);
-       $this->tf34_i_especmedico = ($this->tf34_i_especmedico == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_i_especmedico"]:$this->tf34_i_especmedico);
-       $this->tf34_i_pedidotfd = ($this->tf34_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_i_pedidotfd"]:$this->tf34_i_pedidotfd);
-       $this->tf34_i_login = ($this->tf34_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_i_login"]:$this->tf34_i_login);
+       $this->tf34_i_codigo = ($this->tf34_i_codigo === 0 || $this->tf34_i_codigo === 0.0 || $this->tf34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_i_codigo"]:$this->tf34_i_codigo);
+       $this->tf34_i_especmedico = ($this->tf34_i_especmedico === 0 || $this->tf34_i_especmedico === 0.0 || $this->tf34_i_especmedico == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_i_especmedico"]:$this->tf34_i_especmedico);
+       $this->tf34_i_pedidotfd = ($this->tf34_i_pedidotfd === 0 || $this->tf34_i_pedidotfd === 0.0 || $this->tf34_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_i_pedidotfd"]:$this->tf34_i_pedidotfd);
+       $this->tf34_i_login = ($this->tf34_i_login === 0 || $this->tf34_i_login === 0.0 || $this->tf34_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_i_login"]:$this->tf34_i_login);
        if($this->tf34_d_datasistema == ""){
          $this->tf34_d_datasistema_dia = ($this->tf34_d_datasistema_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_d_datasistema_dia"]:$this->tf34_d_datasistema_dia);
          $this->tf34_d_datasistema_mes = ($this->tf34_d_datasistema_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_d_datasistema_mes"]:$this->tf34_d_datasistema_mes);
@@ -92,7 +92,7 @@ class cl_tfd_pedidoregulado {
        }
        $this->tf34_c_horasistema = ($this->tf34_c_horasistema == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_c_horasistema"]:$this->tf34_c_horasistema);
      }else{
-       $this->tf34_i_codigo = ($this->tf34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_i_codigo"]:$this->tf34_i_codigo);
+       $this->tf34_i_codigo = ($this->tf34_i_codigo === 0 || $this->tf34_i_codigo === 0.0 || $this->tf34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf34_i_codigo"]:$this->tf34_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_tfd_pedidoregulado {
          $this->tf34_i_codigo = $tf34_i_codigo; 
        }
      }
-     if(($this->tf34_i_codigo == null) || ($this->tf34_i_codigo == "") ){ 
+     if(($this->tf34_i_codigo == null) || ($this->tf34_i_codigo === 0 || $this->tf34_i_codigo === 0.0 || $this->tf34_i_codigo == "") ){ 
        $this->erro_sql = " Campo tf34_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -477,7 +477,7 @@ class cl_tfd_pedidoregulado {
    function sql_query ( $tf34_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -510,7 +510,7 @@ class cl_tfd_pedidoregulado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_tfd_pedidoregulado {
    function sql_query_file ( $tf34_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_tfd_pedidoregulado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -557,7 +557,7 @@ class cl_tfd_pedidoregulado {
    function sql_query2 ( $tf34_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -591,7 +591,7 @@ class cl_tfd_pedidoregulado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

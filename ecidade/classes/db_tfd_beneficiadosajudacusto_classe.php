@@ -63,7 +63,7 @@ class cl_tfd_beneficiadosajudacusto {
                  tf15_observacao = varchar(100) = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_tfd_beneficiadosajudacusto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_beneficiadosajudacusto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,11 +80,11 @@ class cl_tfd_beneficiadosajudacusto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf15_i_codigo = ($this->tf15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_i_codigo"]:$this->tf15_i_codigo);
-       $this->tf15_i_cgsund = ($this->tf15_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_i_cgsund"]:$this->tf15_i_cgsund);
-       $this->tf15_i_ajudacusto = ($this->tf15_i_ajudacusto == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_i_ajudacusto"]:$this->tf15_i_ajudacusto);
-       $this->tf15_i_ajudacustopedido = ($this->tf15_i_ajudacustopedido == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_i_ajudacustopedido"]:$this->tf15_i_ajudacustopedido);
-       $this->tf15_f_valoremitido = ($this->tf15_f_valoremitido == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_f_valoremitido"]:$this->tf15_f_valoremitido);
+       $this->tf15_i_codigo = ($this->tf15_i_codigo === 0 || $this->tf15_i_codigo === 0.0 || $this->tf15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_i_codigo"]:$this->tf15_i_codigo);
+       $this->tf15_i_cgsund = ($this->tf15_i_cgsund === 0 || $this->tf15_i_cgsund === 0.0 || $this->tf15_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_i_cgsund"]:$this->tf15_i_cgsund);
+       $this->tf15_i_ajudacusto = ($this->tf15_i_ajudacusto === 0 || $this->tf15_i_ajudacusto === 0.0 || $this->tf15_i_ajudacusto == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_i_ajudacusto"]:$this->tf15_i_ajudacusto);
+       $this->tf15_i_ajudacustopedido = ($this->tf15_i_ajudacustopedido === 0 || $this->tf15_i_ajudacustopedido === 0.0 || $this->tf15_i_ajudacustopedido == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_i_ajudacustopedido"]:$this->tf15_i_ajudacustopedido);
+       $this->tf15_f_valoremitido = ($this->tf15_f_valoremitido === 0 || $this->tf15_f_valoremitido === 0.0 || $this->tf15_f_valoremitido == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_f_valoremitido"]:$this->tf15_f_valoremitido);
        if($this->tf15_d_data == ""){
          $this->tf15_d_data_dia = ($this->tf15_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_d_data_dia"]:$this->tf15_d_data_dia);
          $this->tf15_d_data_mes = ($this->tf15_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_d_data_mes"]:$this->tf15_d_data_mes);
@@ -95,7 +95,7 @@ class cl_tfd_beneficiadosajudacusto {
        }
        $this->tf15_observacao = ($this->tf15_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_observacao"]:$this->tf15_observacao);
      }else{
-       $this->tf15_i_codigo = ($this->tf15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_i_codigo"]:$this->tf15_i_codigo);
+       $this->tf15_i_codigo = ($this->tf15_i_codigo === 0 || $this->tf15_i_codigo === 0.0 || $this->tf15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf15_i_codigo"]:$this->tf15_i_codigo);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_tfd_beneficiadosajudacusto {
          $this->tf15_i_codigo = $tf15_i_codigo; 
        }
      }
-     if(($this->tf15_i_codigo == null) || ($this->tf15_i_codigo == "") ){ 
+     if(($this->tf15_i_codigo == null) || ($this->tf15_i_codigo === 0 || $this->tf15_i_codigo === 0.0 || $this->tf15_i_codigo == "") ){ 
        $this->erro_sql = " Campo tf15_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -490,7 +490,7 @@ class cl_tfd_beneficiadosajudacusto {
    function sql_query ( $tf15_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_tfd_beneficiadosajudacusto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -533,7 +533,7 @@ class cl_tfd_beneficiadosajudacusto {
    function sql_query_file ( $tf15_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -554,7 +554,7 @@ class cl_tfd_beneficiadosajudacusto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -567,7 +567,7 @@ class cl_tfd_beneficiadosajudacusto {
    function sql_query2 ( $tf15_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -595,7 +595,7 @@ class cl_tfd_beneficiadosajudacusto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

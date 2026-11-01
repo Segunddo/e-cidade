@@ -49,13 +49,13 @@ class cl_tfd_parametros
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->tf11_i_codigo = ($this->tf11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf11_i_codigo"]:$this->tf11_i_codigo);
-       $this->tf11_i_utilizagradehorario = ($this->tf11_i_utilizagradehorario == ""?@$GLOBALS["HTTP_POST_VARS"]["tf11_i_utilizagradehorario"]:$this->tf11_i_utilizagradehorario);
-       $this->tf11_i_campofoco = ($this->tf11_i_campofoco == ""?@$GLOBALS["HTTP_POST_VARS"]["tf11_i_campofoco"]:$this->tf11_i_campofoco);
-       $this->tf11_especmedico = ($this->tf11_especmedico == ""?@$GLOBALS["HTTP_POST_VARS"]["tf11_especmedico"]:$this->tf11_especmedico);
+       $this->tf11_i_codigo = ($this->tf11_i_codigo === 0 || $this->tf11_i_codigo === 0.0 || $this->tf11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf11_i_codigo"]:$this->tf11_i_codigo);
+       $this->tf11_i_utilizagradehorario = ($this->tf11_i_utilizagradehorario === 0 || $this->tf11_i_utilizagradehorario === 0.0 || $this->tf11_i_utilizagradehorario == ""?@$GLOBALS["HTTP_POST_VARS"]["tf11_i_utilizagradehorario"]:$this->tf11_i_utilizagradehorario);
+       $this->tf11_i_campofoco = ($this->tf11_i_campofoco === 0 || $this->tf11_i_campofoco === 0.0 || $this->tf11_i_campofoco == ""?@$GLOBALS["HTTP_POST_VARS"]["tf11_i_campofoco"]:$this->tf11_i_campofoco);
+       $this->tf11_especmedico = ($this->tf11_especmedico === 0 || $this->tf11_especmedico === 0.0 || $this->tf11_especmedico == ""?@$GLOBALS["HTTP_POST_VARS"]["tf11_especmedico"]:$this->tf11_especmedico);
        $this->tf11_obriga_hora_saida = ($this->tf11_obriga_hora_saida == "f"?@$GLOBALS["HTTP_POST_VARS"]["tf11_obriga_hora_saida"]:$this->tf11_obriga_hora_saida);
      }else{
-       $this->tf11_i_codigo = ($this->tf11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf11_i_codigo"]:$this->tf11_i_codigo);
+       $this->tf11_i_codigo = ($this->tf11_i_codigo === 0 || $this->tf11_i_codigo === 0.0 || $this->tf11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf11_i_codigo"]:$this->tf11_i_codigo);
      }
    }
 
@@ -116,7 +116,7 @@ class cl_tfd_parametros
          $this->tf11_i_codigo = $tf11_i_codigo;
        }
      }
-     if(($this->tf11_i_codigo == null) || ($this->tf11_i_codigo == "") ){
+     if(($this->tf11_i_codigo == null) || ($this->tf11_i_codigo === 0 || $this->tf11_i_codigo === 0.0 || $this->tf11_i_codigo == "") ){
        $this->erro_sql = " Campo tf11_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

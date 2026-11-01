@@ -80,7 +80,7 @@ class cl_lab_requisicao {
                  la22_c_contato = char(50) = Contato: 
                  ";
    //funcao construtor da classe
-   function cl_lab_requisicao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_requisicao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -97,10 +97,10 @@ class cl_lab_requisicao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la22_i_codigo = ($this->la22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_codigo"]:$this->la22_i_codigo);
-       $this->la22_i_departamento = ($this->la22_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_departamento"]:$this->la22_i_departamento);
-       $this->la22_i_usuario = ($this->la22_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_usuario"]:$this->la22_i_usuario);
-       $this->la22_i_cgs = ($this->la22_i_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_cgs"]:$this->la22_i_cgs);
+       $this->la22_i_codigo = ($this->la22_i_codigo === 0 || $this->la22_i_codigo === 0.0 || $this->la22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_codigo"]:$this->la22_i_codigo);
+       $this->la22_i_departamento = ($this->la22_i_departamento === 0 || $this->la22_i_departamento === 0.0 || $this->la22_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_departamento"]:$this->la22_i_departamento);
+       $this->la22_i_usuario = ($this->la22_i_usuario === 0 || $this->la22_i_usuario === 0.0 || $this->la22_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_usuario"]:$this->la22_i_usuario);
+       $this->la22_i_cgs = ($this->la22_i_cgs === 0 || $this->la22_i_cgs === 0.0 || $this->la22_i_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_cgs"]:$this->la22_i_cgs);
        $this->la22_c_responsavel = ($this->la22_c_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_c_responsavel"]:$this->la22_c_responsavel);
        if($this->la22_d_data == ""){
          $this->la22_d_data_dia = ($this->la22_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_d_data_dia"]:$this->la22_d_data_dia);
@@ -123,10 +123,10 @@ class cl_lab_requisicao {
        $this->la22_t_medicamento = ($this->la22_t_medicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_t_medicamento"]:$this->la22_t_medicamento);
        $this->la22_t_diagnostico = ($this->la22_t_diagnostico == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_t_diagnostico"]:$this->la22_t_diagnostico);
        $this->la22_t_observacao = ($this->la22_t_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_t_observacao"]:$this->la22_t_observacao);
-       $this->la22_i_autoriza = ($this->la22_i_autoriza == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_autoriza"]:$this->la22_i_autoriza);
+       $this->la22_i_autoriza = ($this->la22_i_autoriza === 0 || $this->la22_i_autoriza === 0.0 || $this->la22_i_autoriza == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_autoriza"]:$this->la22_i_autoriza);
        $this->la22_c_contato = ($this->la22_c_contato == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_c_contato"]:$this->la22_c_contato);
      }else{
-       $this->la22_i_codigo = ($this->la22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_codigo"]:$this->la22_i_codigo);
+       $this->la22_i_codigo = ($this->la22_i_codigo === 0 || $this->la22_i_codigo === 0.0 || $this->la22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la22_i_codigo"]:$this->la22_i_codigo);
      }
    }
    // funcao para inclusao
@@ -213,7 +213,7 @@ class cl_lab_requisicao {
          $this->la22_i_codigo = $la22_i_codigo;
        }
      }
-     if(($this->la22_i_codigo == null) || ($this->la22_i_codigo == "") ){
+     if(($this->la22_i_codigo == null) || ($this->la22_i_codigo === 0 || $this->la22_i_codigo === 0.0 || $this->la22_i_codigo == "") ){
        $this->erro_sql = " Campo la22_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

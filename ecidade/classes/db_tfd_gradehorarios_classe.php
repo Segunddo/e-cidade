@@ -68,7 +68,7 @@ class cl_tfd_gradehorarios {
                  tf02_c_localsaida = varchar(50) = Local da Saída 
                  ";
    //funcao construtor da classe 
-   function cl_tfd_gradehorarios() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_gradehorarios"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,10 +85,10 @@ class cl_tfd_gradehorarios {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf02_i_codigo = ($this->tf02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_codigo"]:$this->tf02_i_codigo);
-       $this->tf02_i_destino = ($this->tf02_i_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_destino"]:$this->tf02_i_destino);
-       $this->tf02_i_diasemana = ($this->tf02_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_diasemana"]:$this->tf02_i_diasemana);
-       $this->tf02_i_lotacao = ($this->tf02_i_lotacao == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_lotacao"]:$this->tf02_i_lotacao);
+       $this->tf02_i_codigo = ($this->tf02_i_codigo === 0 || $this->tf02_i_codigo === 0.0 || $this->tf02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_codigo"]:$this->tf02_i_codigo);
+       $this->tf02_i_destino = ($this->tf02_i_destino === 0 || $this->tf02_i_destino === 0.0 || $this->tf02_i_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_destino"]:$this->tf02_i_destino);
+       $this->tf02_i_diasemana = ($this->tf02_i_diasemana === 0 || $this->tf02_i_diasemana === 0.0 || $this->tf02_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_diasemana"]:$this->tf02_i_diasemana);
+       $this->tf02_i_lotacao = ($this->tf02_i_lotacao === 0 || $this->tf02_i_lotacao === 0.0 || $this->tf02_i_lotacao == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_lotacao"]:$this->tf02_i_lotacao);
        $this->tf02_c_horario = ($this->tf02_c_horario == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_c_horario"]:$this->tf02_c_horario);
        if($this->tf02_d_validadeini == ""){
          $this->tf02_d_validadeini_dia = ($this->tf02_d_validadeini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_d_validadeini_dia"]:$this->tf02_d_validadeini_dia);
@@ -108,7 +108,7 @@ class cl_tfd_gradehorarios {
        }
        $this->tf02_c_localsaida = ($this->tf02_c_localsaida == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_c_localsaida"]:$this->tf02_c_localsaida);
      }else{
-       $this->tf02_i_codigo = ($this->tf02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_codigo"]:$this->tf02_i_codigo);
+       $this->tf02_i_codigo = ($this->tf02_i_codigo === 0 || $this->tf02_i_codigo === 0.0 || $this->tf02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_codigo"]:$this->tf02_i_codigo);
      }
    }
    // funcao para inclusao
@@ -195,7 +195,7 @@ class cl_tfd_gradehorarios {
          $this->tf02_i_codigo = $tf02_i_codigo; 
        }
      }
-     if(($this->tf02_i_codigo == null) || ($this->tf02_i_codigo == "") ){ 
+     if(($this->tf02_i_codigo == null) || ($this->tf02_i_codigo === 0 || $this->tf02_i_codigo === 0.0 || $this->tf02_i_codigo == "") ){ 
        $this->erro_sql = " Campo tf02_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -539,7 +539,7 @@ class cl_tfd_gradehorarios {
    function sql_query ( $tf02_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -563,7 +563,7 @@ class cl_tfd_gradehorarios {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -576,7 +576,7 @@ class cl_tfd_gradehorarios {
    function sql_query_file ( $tf02_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -597,7 +597,7 @@ class cl_tfd_gradehorarios {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

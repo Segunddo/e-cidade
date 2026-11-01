@@ -72,7 +72,7 @@ class cl_vac_vacina {
                  vc06_c_prazo = char(20) = Prazo 
                  ";
    //funcao construtor da classe 
-   function cl_vac_vacina() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_vacina"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,21 +89,21 @@ class cl_vac_vacina {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc06_i_codigo = ($this->vc06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_codigo"]:$this->vc06_i_codigo);
+       $this->vc06_i_codigo = ($this->vc06_i_codigo === 0 || $this->vc06_i_codigo === 0.0 || $this->vc06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_codigo"]:$this->vc06_i_codigo);
        $this->vc06_c_descr = ($this->vc06_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_c_descr"]:$this->vc06_c_descr);
-       $this->vc06_i_basico = ($this->vc06_i_basico == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_basico"]:$this->vc06_i_basico);
+       $this->vc06_i_basico = ($this->vc06_i_basico === 0 || $this->vc06_i_basico === 0.0 || $this->vc06_i_basico == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_basico"]:$this->vc06_i_basico);
        $this->vc06_t_administacao = ($this->vc06_t_administacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_t_administacao"]:$this->vc06_t_administacao);
        $this->vc06_c_codpni = ($this->vc06_c_codpni == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_c_codpni"]:$this->vc06_c_codpni);
-       $this->vc06_i_tipovacina = ($this->vc06_i_tipovacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_tipovacina"]:$this->vc06_i_tipovacina);
-       $this->vc06_i_situacao = ($this->vc06_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_situacao"]:$this->vc06_i_situacao);
-       $this->vc06_i_orden = ($this->vc06_i_orden == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_orden"]:$this->vc06_i_orden);
+       $this->vc06_i_tipovacina = ($this->vc06_i_tipovacina === 0 || $this->vc06_i_tipovacina === 0.0 || $this->vc06_i_tipovacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_tipovacina"]:$this->vc06_i_tipovacina);
+       $this->vc06_i_situacao = ($this->vc06_i_situacao === 0 || $this->vc06_i_situacao === 0.0 || $this->vc06_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_situacao"]:$this->vc06_i_situacao);
+       $this->vc06_i_orden = ($this->vc06_i_orden === 0 || $this->vc06_i_orden === 0.0 || $this->vc06_i_orden == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_orden"]:$this->vc06_i_orden);
        $this->vc06_t_material = ($this->vc06_t_material == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_t_material"]:$this->vc06_t_material);
-       $this->vc06_n_quant = ($this->vc06_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_n_quant"]:$this->vc06_n_quant);
+       $this->vc06_n_quant = ($this->vc06_n_quant === 0 || $this->vc06_n_quant === 0.0 || $this->vc06_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_n_quant"]:$this->vc06_n_quant);
        $this->vc06_t_obs = ($this->vc06_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_t_obs"]:$this->vc06_t_obs);
-       $this->vc06_i_tipo = ($this->vc06_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_tipo"]:$this->vc06_i_tipo);
+       $this->vc06_i_tipo = ($this->vc06_i_tipo === 0 || $this->vc06_i_tipo === 0.0 || $this->vc06_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_tipo"]:$this->vc06_i_tipo);
        $this->vc06_c_prazo = ($this->vc06_c_prazo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_c_prazo"]:$this->vc06_c_prazo);
      }else{
-       $this->vc06_i_codigo = ($this->vc06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_codigo"]:$this->vc06_i_codigo);
+       $this->vc06_i_codigo = ($this->vc06_i_codigo === 0 || $this->vc06_i_codigo === 0.0 || $this->vc06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_codigo"]:$this->vc06_i_codigo);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_vac_vacina {
          $this->vc06_i_codigo = $vc06_i_codigo; 
        }
      }
-     if(($this->vc06_i_codigo == null) || ($this->vc06_i_codigo == "") ){ 
+     if(($this->vc06_i_codigo == null) || ($this->vc06_i_codigo === 0 || $this->vc06_i_codigo === 0.0 || $this->vc06_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc06_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -574,7 +574,7 @@ class cl_vac_vacina {
    function sql_query ( $vc06_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -596,7 +596,7 @@ class cl_vac_vacina {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -609,7 +609,7 @@ class cl_vac_vacina {
    function sql_query_file ( $vc06_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -630,7 +630,7 @@ class cl_vac_vacina {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -642,7 +642,7 @@ class cl_vac_vacina {
    function sql_query2 ( $vc06_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
   $sql = "select ";
   if($campos != "*" ){
-    $campos_sql = split("#",$campos);
+    $campos_sql = preg_split("#\\##m",$campos);
     $virgula = "";
     for($i=0;$i<sizeof($campos_sql);$i++){
       $sql .= $virgula.$campos_sql[$i];
@@ -667,7 +667,7 @@ class cl_vac_vacina {
   $sql .= $sql2;
   if($ordem != null ){
     $sql .= " order by ";
-    $campos_sql = split("#",$ordem);
+    $campos_sql = preg_split("#\\##m",$ordem);
     $virgula = "";
     for($i=0;$i<sizeof($campos_sql);$i++){
        $sql .= $virgula.$campos_sql[$i];

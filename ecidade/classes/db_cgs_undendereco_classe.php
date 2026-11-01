@@ -26,7 +26,7 @@ class cl_cgs_undendereco {
                  sd109_cgs_und = int4 = CGS 
                  ";
    //funcao construtor da classe 
-   function cl_cgs_undendereco() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgs_undendereco"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_cgs_undendereco {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd109_sequencial = ($this->sd109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd109_sequencial"]:$this->sd109_sequencial);
-       $this->sd109_endereco = ($this->sd109_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["sd109_endereco"]:$this->sd109_endereco);
-       $this->sd109_cgs_und = ($this->sd109_cgs_und == ""?@$GLOBALS["HTTP_POST_VARS"]["sd109_cgs_und"]:$this->sd109_cgs_und);
+       $this->sd109_sequencial = ($this->sd109_sequencial === 0 || $this->sd109_sequencial === 0.0 || $this->sd109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd109_sequencial"]:$this->sd109_sequencial);
+       $this->sd109_endereco = ($this->sd109_endereco === 0 || $this->sd109_endereco === 0.0 || $this->sd109_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["sd109_endereco"]:$this->sd109_endereco);
+       $this->sd109_cgs_und = ($this->sd109_cgs_und === 0 || $this->sd109_cgs_und === 0.0 || $this->sd109_cgs_und == ""?@$GLOBALS["HTTP_POST_VARS"]["sd109_cgs_und"]:$this->sd109_cgs_und);
      }else{
-       $this->sd109_sequencial = ($this->sd109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd109_sequencial"]:$this->sd109_sequencial);
+       $this->sd109_sequencial = ($this->sd109_sequencial === 0 || $this->sd109_sequencial === 0.0 || $this->sd109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd109_sequencial"]:$this->sd109_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_cgs_undendereco {
          $this->sd109_sequencial = $sd109_sequencial; 
        }
      }
-     if(($this->sd109_sequencial == null) || ($this->sd109_sequencial == "") ){ 
+     if(($this->sd109_sequencial == null) || ($this->sd109_sequencial === 0 || $this->sd109_sequencial === 0.0 || $this->sd109_sequencial == "") ){ 
        $this->erro_sql = " Campo sd109_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

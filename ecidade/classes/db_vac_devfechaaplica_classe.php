@@ -52,7 +52,7 @@ class cl_vac_devfechaaplica {
                  vc24_i_devolucao = int4 = Devolução 
                  ";
    //funcao construtor da classe 
-   function cl_vac_devfechaaplica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_devfechaaplica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_vac_devfechaaplica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc24_i_codigo = ($this->vc24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc24_i_codigo"]:$this->vc24_i_codigo);
-       $this->vc24_i_fechaaplica = ($this->vc24_i_fechaaplica == ""?@$GLOBALS["HTTP_POST_VARS"]["vc24_i_fechaaplica"]:$this->vc24_i_fechaaplica);
-       $this->vc24_i_devolucao = ($this->vc24_i_devolucao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc24_i_devolucao"]:$this->vc24_i_devolucao);
+       $this->vc24_i_codigo = ($this->vc24_i_codigo === 0 || $this->vc24_i_codigo === 0.0 || $this->vc24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc24_i_codigo"]:$this->vc24_i_codigo);
+       $this->vc24_i_fechaaplica = ($this->vc24_i_fechaaplica === 0 || $this->vc24_i_fechaaplica === 0.0 || $this->vc24_i_fechaaplica == ""?@$GLOBALS["HTTP_POST_VARS"]["vc24_i_fechaaplica"]:$this->vc24_i_fechaaplica);
+       $this->vc24_i_devolucao = ($this->vc24_i_devolucao === 0 || $this->vc24_i_devolucao === 0.0 || $this->vc24_i_devolucao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc24_i_devolucao"]:$this->vc24_i_devolucao);
      }else{
-       $this->vc24_i_codigo = ($this->vc24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc24_i_codigo"]:$this->vc24_i_codigo);
+       $this->vc24_i_codigo = ($this->vc24_i_codigo === 0 || $this->vc24_i_codigo === 0.0 || $this->vc24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc24_i_codigo"]:$this->vc24_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_vac_devfechaaplica {
          $this->vc24_i_codigo = $vc24_i_codigo; 
        }
      }
-     if(($this->vc24_i_codigo == null) || ($this->vc24_i_codigo == "") ){ 
+     if(($this->vc24_i_codigo == null) || ($this->vc24_i_codigo === 0 || $this->vc24_i_codigo === 0.0 || $this->vc24_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc24_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_vac_devfechaaplica {
    function sql_query ( $vc24_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_vac_devfechaaplica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_vac_devfechaaplica {
    function sql_query_file ( $vc24_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_vac_devfechaaplica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -55,7 +55,7 @@ class cl_tfd_motivoacompanhamento {
                  tf08_d_validade = date = Validade 
                  ";
    //funcao construtor da classe 
-   function cl_tfd_motivoacompanhamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_motivoacompanhamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,7 +72,7 @@ class cl_tfd_motivoacompanhamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf08_i_codigo = ($this->tf08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf08_i_codigo"]:$this->tf08_i_codigo);
+       $this->tf08_i_codigo = ($this->tf08_i_codigo === 0 || $this->tf08_i_codigo === 0.0 || $this->tf08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf08_i_codigo"]:$this->tf08_i_codigo);
        $this->tf08_c_descr = ($this->tf08_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["tf08_c_descr"]:$this->tf08_c_descr);
        if($this->tf08_d_validade == ""){
          $this->tf08_d_validade_dia = ($this->tf08_d_validade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf08_d_validade_dia"]:$this->tf08_d_validade_dia);
@@ -83,7 +83,7 @@ class cl_tfd_motivoacompanhamento {
          }
        }
      }else{
-       $this->tf08_i_codigo = ($this->tf08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf08_i_codigo"]:$this->tf08_i_codigo);
+       $this->tf08_i_codigo = ($this->tf08_i_codigo === 0 || $this->tf08_i_codigo === 0.0 || $this->tf08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf08_i_codigo"]:$this->tf08_i_codigo);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_tfd_motivoacompanhamento {
          $this->tf08_i_codigo = $tf08_i_codigo; 
        }
      }
-     if(($this->tf08_i_codigo == null) || ($this->tf08_i_codigo == "") ){ 
+     if(($this->tf08_i_codigo == null) || ($this->tf08_i_codigo === 0 || $this->tf08_i_codigo === 0.0 || $this->tf08_i_codigo == "") ){ 
        $this->erro_sql = " Campo tf08_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_tfd_motivoacompanhamento {
    function sql_query ( $tf08_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_tfd_motivoacompanhamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_tfd_motivoacompanhamento {
    function sql_query_file ( $tf08_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_tfd_motivoacompanhamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

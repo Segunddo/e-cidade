@@ -62,7 +62,7 @@ class cl_tfd_passageiroveiculo {
                  tf19_i_colo = int4 = Colo
                  ";
    //funcao construtor da classe
-   function cl_tfd_passageiroveiculo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_passageiroveiculo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_tfd_passageiroveiculo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf19_i_codigo = ($this->tf19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_codigo"]:$this->tf19_i_codigo);
-       $this->tf19_i_cgsund = ($this->tf19_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_cgsund"]:$this->tf19_i_cgsund);
-       $this->tf19_i_veiculodestino = ($this->tf19_i_veiculodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_veiculodestino"]:$this->tf19_i_veiculodestino);
-       $this->tf19_i_pedidotfd = ($this->tf19_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_pedidotfd"]:$this->tf19_i_pedidotfd);
-       $this->tf19_i_valido = ($this->tf19_i_valido == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_valido"]:$this->tf19_i_valido);
-       $this->tf19_i_tipopassageiro = ($this->tf19_i_tipopassageiro == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_tipopassageiro"]:$this->tf19_i_tipopassageiro);
-       $this->tf19_i_fica = ($this->tf19_i_fica == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_fica"]:$this->tf19_i_fica);
-       $this->tf19_i_colo = ($this->tf19_i_colo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_colo"]:$this->tf19_i_colo);
+       $this->tf19_i_codigo = ($this->tf19_i_codigo === 0 || $this->tf19_i_codigo === 0.0 || $this->tf19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_codigo"]:$this->tf19_i_codigo);
+       $this->tf19_i_cgsund = ($this->tf19_i_cgsund === 0 || $this->tf19_i_cgsund === 0.0 || $this->tf19_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_cgsund"]:$this->tf19_i_cgsund);
+       $this->tf19_i_veiculodestino = ($this->tf19_i_veiculodestino === 0 || $this->tf19_i_veiculodestino === 0.0 || $this->tf19_i_veiculodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_veiculodestino"]:$this->tf19_i_veiculodestino);
+       $this->tf19_i_pedidotfd = ($this->tf19_i_pedidotfd === 0 || $this->tf19_i_pedidotfd === 0.0 || $this->tf19_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_pedidotfd"]:$this->tf19_i_pedidotfd);
+       $this->tf19_i_valido = ($this->tf19_i_valido === 0 || $this->tf19_i_valido === 0.0 || $this->tf19_i_valido == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_valido"]:$this->tf19_i_valido);
+       $this->tf19_i_tipopassageiro = ($this->tf19_i_tipopassageiro === 0 || $this->tf19_i_tipopassageiro === 0.0 || $this->tf19_i_tipopassageiro == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_tipopassageiro"]:$this->tf19_i_tipopassageiro);
+       $this->tf19_i_fica = ($this->tf19_i_fica === 0 || $this->tf19_i_fica === 0.0 || $this->tf19_i_fica == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_fica"]:$this->tf19_i_fica);
+       $this->tf19_i_colo = ($this->tf19_i_colo === 0 || $this->tf19_i_colo === 0.0 || $this->tf19_i_colo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_colo"]:$this->tf19_i_colo);
      }else{
-       $this->tf19_i_codigo = ($this->tf19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_codigo"]:$this->tf19_i_codigo);
+       $this->tf19_i_codigo = ($this->tf19_i_codigo === 0 || $this->tf19_i_codigo === 0.0 || $this->tf19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf19_i_codigo"]:$this->tf19_i_codigo);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_tfd_passageiroveiculo {
          $this->tf19_i_codigo = $tf19_i_codigo;
        }
      }
-     if(($this->tf19_i_codigo == null) || ($this->tf19_i_codigo == "") ){
+     if(($this->tf19_i_codigo == null) || ($this->tf19_i_codigo === 0 || $this->tf19_i_codigo === 0.0 || $this->tf19_i_codigo == "") ){
        $this->erro_sql = " Campo tf19_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -515,7 +515,7 @@ class cl_tfd_passageiroveiculo {
    function sql_query ( $tf19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -551,7 +551,7 @@ class cl_tfd_passageiroveiculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -564,7 +564,7 @@ class cl_tfd_passageiroveiculo {
    function sql_query_file ( $tf19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -585,7 +585,7 @@ class cl_tfd_passageiroveiculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

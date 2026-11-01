@@ -52,7 +52,7 @@ class cl_lab_valorreferencia {
                  la27_i_atributo = int4 = Atributo 
                  ";
    //funcao construtor da classe 
-   function cl_lab_valorreferencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_valorreferencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_lab_valorreferencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la27_i_codigo = ($this->la27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la27_i_codigo"]:$this->la27_i_codigo);
-       $this->la27_i_unidade = ($this->la27_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["la27_i_unidade"]:$this->la27_i_unidade);
-       $this->la27_i_atributo = ($this->la27_i_atributo == ""?@$GLOBALS["HTTP_POST_VARS"]["la27_i_atributo"]:$this->la27_i_atributo);
+       $this->la27_i_codigo = ($this->la27_i_codigo === 0 || $this->la27_i_codigo === 0.0 || $this->la27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la27_i_codigo"]:$this->la27_i_codigo);
+       $this->la27_i_unidade = ($this->la27_i_unidade === 0 || $this->la27_i_unidade === 0.0 || $this->la27_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["la27_i_unidade"]:$this->la27_i_unidade);
+       $this->la27_i_atributo = ($this->la27_i_atributo === 0 || $this->la27_i_atributo === 0.0 || $this->la27_i_atributo == ""?@$GLOBALS["HTTP_POST_VARS"]["la27_i_atributo"]:$this->la27_i_atributo);
      }else{
-       $this->la27_i_codigo = ($this->la27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la27_i_codigo"]:$this->la27_i_codigo);
+       $this->la27_i_codigo = ($this->la27_i_codigo === 0 || $this->la27_i_codigo === 0.0 || $this->la27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la27_i_codigo"]:$this->la27_i_codigo);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_lab_valorreferencia {
          $this->la27_i_codigo = $la27_i_codigo; 
        }
      }
-     if(($this->la27_i_codigo == null) || ($this->la27_i_codigo == "") ){ 
+     if(($this->la27_i_codigo == null) || ($this->la27_i_codigo === 0 || $this->la27_i_codigo === 0.0 || $this->la27_i_codigo == "") ){ 
        $this->erro_sql = " Campo la27_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -348,7 +348,7 @@ class cl_lab_valorreferencia {
    function sql_query ( $la27_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -371,7 +371,7 @@ class cl_lab_valorreferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_lab_valorreferencia {
    function sql_query_file ( $la27_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_lab_valorreferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_lab_valorreferencia {
    function sql_query_tipos ( $la27_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_lab_valorreferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

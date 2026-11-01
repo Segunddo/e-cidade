@@ -79,16 +79,16 @@ class cl_lab_atributo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la25_i_codigo = ($this->la25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_i_codigo"]:$this->la25_i_codigo);
+       $this->la25_i_codigo = ($this->la25_i_codigo === 0 || $this->la25_i_codigo === 0.0 || $this->la25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_i_codigo"]:$this->la25_i_codigo);
        $this->la25_c_estrutural = ($this->la25_c_estrutural == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_c_estrutural"]:$this->la25_c_estrutural);
        $this->la25_c_descr = ($this->la25_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_c_descr"]:$this->la25_c_descr);
        $this->la25_c_tipo = ($this->la25_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_c_tipo"]:$this->la25_c_tipo);
-       $this->la25_i_nivel = ($this->la25_i_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_i_nivel"]:$this->la25_i_nivel);
-       $this->la25_sigla = ($this->la25_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_sigla"]:$this->la25_sigla);
-       $this->la25_formula = ($this->la25_formula == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_formula"]:$this->la25_formula);
+       $this->la25_i_nivel = ($this->la25_i_nivel === 0 || $this->la25_i_nivel === 0.0 || $this->la25_i_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_i_nivel"]:$this->la25_i_nivel);
+       $this->la25_sigla = ($this->la25_sigla === 0 || $this->la25_sigla === 0.0 || $this->la25_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_sigla"]:$this->la25_sigla);
+       $this->la25_formula = ($this->la25_formula === 0 || $this->la25_formula === 0.0 || $this->la25_formula == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_formula"]:$this->la25_formula);
        $this->la25_preenchimentoobrigatorio = ($this->la25_preenchimentoobrigatorio == "f"?@$GLOBALS["HTTP_POST_VARS"]["la25_preenchimentoobrigatorio"]:$this->la25_preenchimentoobrigatorio);
      }else{
-       $this->la25_i_codigo = ($this->la25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_i_codigo"]:$this->la25_i_codigo);
+       $this->la25_i_codigo = ($this->la25_i_codigo === 0 || $this->la25_i_codigo === 0.0 || $this->la25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la25_i_codigo"]:$this->la25_i_codigo);
      }
    }
    // funcao para inclusao
@@ -154,7 +154,7 @@ class cl_lab_atributo {
          $this->la25_i_codigo = $la25_i_codigo;
        }
      }
-     if(($this->la25_i_codigo == null) || ($this->la25_i_codigo == "") ){
+     if(($this->la25_i_codigo == null) || ($this->la25_i_codigo === 0 || $this->la25_i_codigo === 0.0 || $this->la25_i_codigo == "") ){
        $this->erro_sql = " Campo la25_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

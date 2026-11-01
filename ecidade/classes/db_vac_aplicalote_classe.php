@@ -54,7 +54,7 @@ class cl_vac_aplicalote {
                  vc17_i_matetoqueitemlote = int4 = Lote 
                  ";
    //funcao construtor da classe 
-   function cl_vac_aplicalote() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_aplicalote"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_vac_aplicalote {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc17_i_codigo = ($this->vc17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_codigo"]:$this->vc17_i_codigo);
-       $this->vc17_i_aplica = ($this->vc17_i_aplica == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_aplica"]:$this->vc17_i_aplica);
-       $this->vc17_i_sala = ($this->vc17_i_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_sala"]:$this->vc17_i_sala);
-       $this->vc17_i_matetoqueitemlote = ($this->vc17_i_matetoqueitemlote == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_matetoqueitemlote"]:$this->vc17_i_matetoqueitemlote);
+       $this->vc17_i_codigo = ($this->vc17_i_codigo === 0 || $this->vc17_i_codigo === 0.0 || $this->vc17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_codigo"]:$this->vc17_i_codigo);
+       $this->vc17_i_aplica = ($this->vc17_i_aplica === 0 || $this->vc17_i_aplica === 0.0 || $this->vc17_i_aplica == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_aplica"]:$this->vc17_i_aplica);
+       $this->vc17_i_sala = ($this->vc17_i_sala === 0 || $this->vc17_i_sala === 0.0 || $this->vc17_i_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_sala"]:$this->vc17_i_sala);
+       $this->vc17_i_matetoqueitemlote = ($this->vc17_i_matetoqueitemlote === 0 || $this->vc17_i_matetoqueitemlote === 0.0 || $this->vc17_i_matetoqueitemlote == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_matetoqueitemlote"]:$this->vc17_i_matetoqueitemlote);
      }else{
-       $this->vc17_i_codigo = ($this->vc17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_codigo"]:$this->vc17_i_codigo);
+       $this->vc17_i_codigo = ($this->vc17_i_codigo === 0 || $this->vc17_i_codigo === 0.0 || $this->vc17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_codigo"]:$this->vc17_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_vac_aplicalote {
          $this->vc17_i_codigo = $vc17_i_codigo; 
        }
      }
-     if(($this->vc17_i_codigo == null) || ($this->vc17_i_codigo == "") ){ 
+     if(($this->vc17_i_codigo == null) || ($this->vc17_i_codigo === 0 || $this->vc17_i_codigo === 0.0 || $this->vc17_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc17_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_vac_aplicalote {
    function sql_query ( $vc17_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_vac_aplicalote {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_vac_aplicalote {
    function sql_query_file ( $vc17_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -455,7 +455,7 @@ class cl_vac_aplicalote {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_vac_aplicalote {
 function sql_query2 ( $vc17_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
   $sql = "select ";
   if($campos != "*" ){
-    $campos_sql = split("#",$campos);
+    $campos_sql = preg_split("#\\##m",$campos);
     $virgula = "";
     for($i=0;$i<sizeof($campos_sql);$i++){
       $sql .= $virgula.$campos_sql[$i];
@@ -506,7 +506,7 @@ function sql_query2 ( $vc17_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
   $sql .= $sql2;
   if($ordem != null ){
     $sql .= " order by ";
-    $campos_sql = split("#",$ordem);
+    $campos_sql = preg_split("#\\##m",$ordem);
     $virgula = "";
     for($i=0;$i<sizeof($campos_sql);$i++){
       $sql .= $virgula.$campos_sql[$i];

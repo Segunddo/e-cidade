@@ -62,7 +62,7 @@ class cl_vac_campanha {
                  vc11_d_fim = date = Data fim 
                  ";
    //funcao construtor da classe 
-   function cl_vac_campanha() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_campanha"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,7 +79,7 @@ class cl_vac_campanha {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc11_i_codigo = ($this->vc11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_i_codigo"]:$this->vc11_i_codigo);
+       $this->vc11_i_codigo = ($this->vc11_i_codigo === 0 || $this->vc11_i_codigo === 0.0 || $this->vc11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_i_codigo"]:$this->vc11_i_codigo);
        $this->vc11_c_nome = ($this->vc11_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_c_nome"]:$this->vc11_c_nome);
        $this->vc11_c_descr = ($this->vc11_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_c_descr"]:$this->vc11_c_descr);
        if($this->vc11_d_inicio == ""){
@@ -99,7 +99,7 @@ class cl_vac_campanha {
          }
        }
      }else{
-       $this->vc11_i_codigo = ($this->vc11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_i_codigo"]:$this->vc11_i_codigo);
+       $this->vc11_i_codigo = ($this->vc11_i_codigo === 0 || $this->vc11_i_codigo === 0.0 || $this->vc11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_i_codigo"]:$this->vc11_i_codigo);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_vac_campanha {
          $this->vc11_i_codigo = $vc11_i_codigo; 
        }
      }
-     if(($this->vc11_i_codigo == null) || ($this->vc11_i_codigo == "") ){ 
+     if(($this->vc11_i_codigo == null) || ($this->vc11_i_codigo === 0 || $this->vc11_i_codigo === 0.0 || $this->vc11_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc11_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -470,7 +470,7 @@ class cl_vac_campanha {
    function sql_query ( $vc11_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -491,7 +491,7 @@ class cl_vac_campanha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_vac_campanha {
    function sql_query_file ( $vc11_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_vac_campanha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

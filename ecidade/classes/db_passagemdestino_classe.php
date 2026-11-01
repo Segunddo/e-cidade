@@ -68,11 +68,11 @@ class cl_passagemdestino {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf37_sequencial = ($this->tf37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf37_sequencial"]:$this->tf37_sequencial);
-       $this->tf37_valor = ($this->tf37_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["tf37_valor"]:$this->tf37_valor);
-       $this->tf37_destino = ($this->tf37_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf37_destino"]:$this->tf37_destino);
+       $this->tf37_sequencial = ($this->tf37_sequencial === 0 || $this->tf37_sequencial === 0.0 || $this->tf37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf37_sequencial"]:$this->tf37_sequencial);
+       $this->tf37_valor = ($this->tf37_valor === 0 || $this->tf37_valor === 0.0 || $this->tf37_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["tf37_valor"]:$this->tf37_valor);
+       $this->tf37_destino = ($this->tf37_destino === 0 || $this->tf37_destino === 0.0 || $this->tf37_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf37_destino"]:$this->tf37_destino);
      }else{
-       $this->tf37_sequencial = ($this->tf37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf37_sequencial"]:$this->tf37_sequencial);
+       $this->tf37_sequencial = ($this->tf37_sequencial === 0 || $this->tf37_sequencial === 0.0 || $this->tf37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf37_sequencial"]:$this->tf37_sequencial);
      }
    }
    // funcao para Inclusão
@@ -120,7 +120,7 @@ class cl_passagemdestino {
          $this->tf37_sequencial = $tf37_sequencial; 
        }
      }
-     if(($this->tf37_sequencial == null) || ($this->tf37_sequencial == "") ){ 
+     if(($this->tf37_sequencial == null) || ($this->tf37_sequencial === 0 || $this->tf37_sequencial === 0.0 || $this->tf37_sequencial == "") ){ 
        $this->erro_sql = " Campo tf37_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

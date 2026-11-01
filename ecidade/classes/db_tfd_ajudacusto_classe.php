@@ -68,7 +68,7 @@ class cl_tfd_ajudacusto {
                  tf12_acompanhente = bool = Paciente 
                  ";
    //funcao construtor da classe 
-   function cl_tfd_ajudacusto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_ajudacusto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,9 +85,9 @@ class cl_tfd_ajudacusto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf12_i_codigo = ($this->tf12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_i_codigo"]:$this->tf12_i_codigo);
-       $this->tf12_i_procedimento = ($this->tf12_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_i_procedimento"]:$this->tf12_i_procedimento);
-       $this->tf12_f_valor = ($this->tf12_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_f_valor"]:$this->tf12_f_valor);
+       $this->tf12_i_codigo = ($this->tf12_i_codigo === 0 || $this->tf12_i_codigo === 0.0 || $this->tf12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_i_codigo"]:$this->tf12_i_codigo);
+       $this->tf12_i_procedimento = ($this->tf12_i_procedimento === 0 || $this->tf12_i_procedimento === 0.0 || $this->tf12_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_i_procedimento"]:$this->tf12_i_procedimento);
+       $this->tf12_f_valor = ($this->tf12_f_valor === 0 || $this->tf12_f_valor === 0.0 || $this->tf12_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_f_valor"]:$this->tf12_f_valor);
        if($this->tf12_d_validadeini == ""){
          $this->tf12_d_validadeini_dia = ($this->tf12_d_validadeini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_d_validadeini_dia"]:$this->tf12_d_validadeini_dia);
          $this->tf12_d_validadeini_mes = ($this->tf12_d_validadeini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_d_validadeini_mes"]:$this->tf12_d_validadeini_mes);
@@ -108,7 +108,7 @@ class cl_tfd_ajudacusto {
        $this->tf12_descricao = ($this->tf12_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_descricao"]:$this->tf12_descricao);
        $this->tf12_acompanhente = ($this->tf12_acompanhente == "f"?@$GLOBALS["HTTP_POST_VARS"]["tf12_acompanhente"]:$this->tf12_acompanhente);
      }else{
-       $this->tf12_i_codigo = ($this->tf12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_i_codigo"]:$this->tf12_i_codigo);
+       $this->tf12_i_codigo = ($this->tf12_i_codigo === 0 || $this->tf12_i_codigo === 0.0 || $this->tf12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf12_i_codigo"]:$this->tf12_i_codigo);
      }
    }
    // funcao para inclusao
@@ -168,7 +168,7 @@ class cl_tfd_ajudacusto {
          $this->tf12_i_codigo = $tf12_i_codigo; 
        }
      }
-     if(($this->tf12_i_codigo == null) || ($this->tf12_i_codigo == "") ){ 
+     if(($this->tf12_i_codigo == null) || ($this->tf12_i_codigo === 0 || $this->tf12_i_codigo === 0.0 || $this->tf12_i_codigo == "") ){ 
        $this->erro_sql = " Campo tf12_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -501,7 +501,7 @@ class cl_tfd_ajudacusto {
    function sql_query ( $tf12_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -526,7 +526,7 @@ class cl_tfd_ajudacusto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_tfd_ajudacusto {
    function sql_query_file ( $tf12_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -560,7 +560,7 @@ class cl_tfd_ajudacusto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -572,7 +572,7 @@ class cl_tfd_ajudacusto {
    function sql_query2 ( $tf12_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -594,7 +594,7 @@ class cl_tfd_ajudacusto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -608,7 +608,7 @@ class cl_tfd_ajudacusto {
                                      a.sd63_i_anocomp desc, a.sd63_i_mescomp desc',$dbwhere="") { 
      $sql = "select distinct on (tf12_i_codigo) ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -631,7 +631,7 @@ class cl_tfd_ajudacusto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

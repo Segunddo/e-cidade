@@ -56,7 +56,8 @@ function getCns($iCgs) {
 $sqlpref  = "select * from db_config where codigo = ".db_getsession("DB_instit");
 $resultpref = db_query($sqlpref);
 db_fieldsmemory($resultpref,0);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $sCampos  = " tf15_f_valoremitido, a.z01_v_nome as retirado, cgs_und.z01_v_nome, a.z01_v_cgccpf, ";
 $sCampos .= " tf14_i_cgsretirou, a.z01_v_ident, tf14_c_horarecebimento, tf14_d_datarecebimento, ";

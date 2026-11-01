@@ -408,6 +408,11 @@ grep -a 'E_ERROR\|Uncaught' extension/log/error.log | sed 's/\[20[^]]*\] //' | s
 | Quebra **no `:8080`** e funciona no 8.5 | defeito da referência — registrar, não corrigir |
 | Não é tela (fragmento de include) | artefato do harness — caracterizar e seguir |
 
+**`OptionalParametersAfterRequiredRector` muda a assinatura da MÃE.** Ao dar `= null` a parâmetros de uma classe, a
+filha que declara os mesmos parâmetros como obrigatórios deixa de carregar no 8.5 ("must be compatible"). Para cada
+método que a regra tocou, procure `extends <Classe>` na base inteira (não só no universo) e espelhe os padrões na filha
+(lote 2 da Saúde, `cl_cgs_und_ext`).
+
 **Corrigir na aparição, não em massa.** Decisão registrada do projeto: a varredura preventiva
 das ~140 chamadas `pg_*` foi descartada de propósito. Cada correção nasce de um defeito
 observado.

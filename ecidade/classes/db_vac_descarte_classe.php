@@ -67,7 +67,7 @@ class cl_vac_descarte {
                  vc19_i_sala = int4 = Sala 
                  ";
    //funcao construtor da classe 
-   function cl_vac_descarte() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_descarte"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,11 +84,11 @@ class cl_vac_descarte {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc19_i_codigo = ($this->vc19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_codigo"]:$this->vc19_i_codigo);
-       $this->vc19_i_vacina = ($this->vc19_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_vacina"]:$this->vc19_i_vacina);
-       $this->vc19_n_quant = ($this->vc19_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_n_quant"]:$this->vc19_n_quant);
+       $this->vc19_i_codigo = ($this->vc19_i_codigo === 0 || $this->vc19_i_codigo === 0.0 || $this->vc19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_codigo"]:$this->vc19_i_codigo);
+       $this->vc19_i_vacina = ($this->vc19_i_vacina === 0 || $this->vc19_i_vacina === 0.0 || $this->vc19_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_vacina"]:$this->vc19_i_vacina);
+       $this->vc19_n_quant = ($this->vc19_n_quant === 0 || $this->vc19_n_quant === 0.0 || $this->vc19_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_n_quant"]:$this->vc19_n_quant);
        $this->vc19_t_obs = ($this->vc19_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_t_obs"]:$this->vc19_t_obs);
-       $this->vc19_i_usuario = ($this->vc19_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_usuario"]:$this->vc19_i_usuario);
+       $this->vc19_i_usuario = ($this->vc19_i_usuario === 0 || $this->vc19_i_usuario === 0.0 || $this->vc19_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_usuario"]:$this->vc19_i_usuario);
        if($this->vc19_d_data == ""){
          $this->vc19_d_data_dia = ($this->vc19_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_d_data_dia"]:$this->vc19_d_data_dia);
          $this->vc19_d_data_mes = ($this->vc19_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_d_data_mes"]:$this->vc19_d_data_mes);
@@ -98,10 +98,10 @@ class cl_vac_descarte {
          }
        }
        $this->vc19_c_hora = ($this->vc19_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_c_hora"]:$this->vc19_c_hora);
-       $this->vc19_i_matetoqueitemlote = ($this->vc19_i_matetoqueitemlote == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_matetoqueitemlote"]:$this->vc19_i_matetoqueitemlote);
-       $this->vc19_i_sala = ($this->vc19_i_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_sala"]:$this->vc19_i_sala);
+       $this->vc19_i_matetoqueitemlote = ($this->vc19_i_matetoqueitemlote === 0 || $this->vc19_i_matetoqueitemlote === 0.0 || $this->vc19_i_matetoqueitemlote == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_matetoqueitemlote"]:$this->vc19_i_matetoqueitemlote);
+       $this->vc19_i_sala = ($this->vc19_i_sala === 0 || $this->vc19_i_sala === 0.0 || $this->vc19_i_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_sala"]:$this->vc19_i_sala);
      }else{
-       $this->vc19_i_codigo = ($this->vc19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_codigo"]:$this->vc19_i_codigo);
+       $this->vc19_i_codigo = ($this->vc19_i_codigo === 0 || $this->vc19_i_codigo === 0.0 || $this->vc19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc19_i_codigo"]:$this->vc19_i_codigo);
      }
    }
    // funcao para inclusao
@@ -203,7 +203,7 @@ class cl_vac_descarte {
          $this->vc19_i_codigo = $vc19_i_codigo; 
        }
      }
-     if(($this->vc19_i_codigo == null) || ($this->vc19_i_codigo == "") ){ 
+     if(($this->vc19_i_codigo == null) || ($this->vc19_i_codigo === 0 || $this->vc19_i_codigo === 0.0 || $this->vc19_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc19_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -570,7 +570,7 @@ class cl_vac_descarte {
    function sql_query ( $vc19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -599,7 +599,7 @@ class cl_vac_descarte {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -612,7 +612,7 @@ class cl_vac_descarte {
    function sql_query_file ( $vc19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -633,7 +633,7 @@ class cl_vac_descarte {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -645,7 +645,7 @@ class cl_vac_descarte {
   function sql_query2 ( $vc19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -676,7 +676,7 @@ class cl_vac_descarte {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

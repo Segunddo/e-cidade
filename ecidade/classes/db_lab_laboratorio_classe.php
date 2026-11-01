@@ -66,7 +66,7 @@ class cl_lab_laboratorio {
                  la02_interfaceado = boolean = Possui interfaceamento
                  ";
    //funcao construtor da classe
-   function cl_lab_laboratorio() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_laboratorio");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,18 +83,18 @@ class cl_lab_laboratorio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la02_i_codigo = ($this->la02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_codigo"]:$this->la02_i_codigo);
-       $this->la02_i_tipo = ($this->la02_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_tipo"]:$this->la02_i_tipo);
+       $this->la02_i_codigo = ($this->la02_i_codigo === 0 || $this->la02_i_codigo === 0.0 || $this->la02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_codigo"]:$this->la02_i_codigo);
+       $this->la02_i_tipo = ($this->la02_i_tipo === 0 || $this->la02_i_tipo === 0.0 || $this->la02_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_tipo"]:$this->la02_i_tipo);
        $this->la02_c_descr = ($this->la02_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_c_descr"]:$this->la02_c_descr);
-       $this->la02_i_alvara = ($this->la02_i_alvara == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_alvara"]:$this->la02_i_alvara);
-       $this->la02_i_cnes = ($this->la02_i_cnes == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_cnes"]:$this->la02_i_cnes);
+       $this->la02_i_alvara = ($this->la02_i_alvara === 0 || $this->la02_i_alvara === 0.0 || $this->la02_i_alvara == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_alvara"]:$this->la02_i_alvara);
+       $this->la02_i_cnes = ($this->la02_i_cnes === 0 || $this->la02_i_cnes === 0.0 || $this->la02_i_cnes == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_cnes"]:$this->la02_i_cnes);
        $this->la02_c_endereco = ($this->la02_c_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_c_endereco"]:$this->la02_c_endereco);
-       $this->la02_i_telefone = ($this->la02_i_telefone == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_telefone"]:$this->la02_i_telefone);
+       $this->la02_i_telefone = ($this->la02_i_telefone === 0 || $this->la02_i_telefone === 0.0 || $this->la02_i_telefone == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_telefone"]:$this->la02_i_telefone);
        $this->la02_c_numero = ($this->la02_c_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_c_numero"]:$this->la02_c_numero);
-       $this->la02_i_turnoatend = ($this->la02_i_turnoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_turnoatend"]:$this->la02_i_turnoatend);
+       $this->la02_i_turnoatend = ($this->la02_i_turnoatend === 0 || $this->la02_i_turnoatend === 0.0 || $this->la02_i_turnoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_turnoatend"]:$this->la02_i_turnoatend);
        $this->la02_interfaceado = ($this->la02_interfaceado == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_interfaceado"]:$this->la02_interfaceado);
      }else{
-       $this->la02_i_codigo = ($this->la02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_codigo"]:$this->la02_i_codigo);
+       $this->la02_i_codigo = ($this->la02_i_codigo === 0 || $this->la02_i_codigo === 0.0 || $this->la02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_codigo"]:$this->la02_i_codigo);
      }
    }
    // funcao para inclusao
@@ -202,7 +202,7 @@ class cl_lab_laboratorio {
       $this->la02_interfaceado = $this->la02_interfaceado ? "'t'" : "'f'";
     }
 
-     if(($this->la02_i_codigo == null) || ($this->la02_i_codigo == "") ){
+     if(($this->la02_i_codigo == null) || ($this->la02_i_codigo === 0 || $this->la02_i_codigo === 0.0 || $this->la02_i_codigo == "") ){
        $this->erro_sql = " Campo la02_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -563,7 +563,7 @@ class cl_lab_laboratorio {
    function sql_query ( $la02_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -585,7 +585,7 @@ class cl_lab_laboratorio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -598,7 +598,7 @@ class cl_lab_laboratorio {
    function sql_query_file ( $la02_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -619,7 +619,7 @@ class cl_lab_laboratorio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -639,7 +639,7 @@ class cl_lab_laboratorio {
   	$sSql = "select ";
     if ($sCampos != "*" ) {
 
-      $aCampossql = split("#", $sCampos);
+      $aCampossql = preg_split("#\\##m", $sCampos);
       $sVirgula   = "";
       for ($i = 0; $i < sizeof($aCampossql); $i++) {
 
@@ -669,7 +669,7 @@ class cl_lab_laboratorio {
     if ($sOrdem != null) {
 
       $sSql      .= " order by ";
-      $aCampossql = split("#", $sOrdem);
+      $aCampossql = preg_split("#\\##m", $sOrdem);
       $sVirgula    = "";
       for ($i = 0; $i < sizeof($aCampossql); $i++) {
 

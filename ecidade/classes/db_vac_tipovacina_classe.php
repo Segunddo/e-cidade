@@ -50,7 +50,7 @@ class cl_vac_tipovacina {
                  vc04_c_descr = char(30) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_vac_tipovacina() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_tipovacina"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_vac_tipovacina {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc04_i_codigo = ($this->vc04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc04_i_codigo"]:$this->vc04_i_codigo);
+       $this->vc04_i_codigo = ($this->vc04_i_codigo === 0 || $this->vc04_i_codigo === 0.0 || $this->vc04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc04_i_codigo"]:$this->vc04_i_codigo);
        $this->vc04_c_descr = ($this->vc04_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc04_c_descr"]:$this->vc04_c_descr);
      }else{
-       $this->vc04_i_codigo = ($this->vc04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc04_i_codigo"]:$this->vc04_i_codigo);
+       $this->vc04_i_codigo = ($this->vc04_i_codigo === 0 || $this->vc04_i_codigo === 0.0 || $this->vc04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc04_i_codigo"]:$this->vc04_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_vac_tipovacina {
          $this->vc04_i_codigo = $vc04_i_codigo; 
        }
      }
-     if(($this->vc04_i_codigo == null) || ($this->vc04_i_codigo == "") ){ 
+     if(($this->vc04_i_codigo == null) || ($this->vc04_i_codigo === 0 || $this->vc04_i_codigo === 0.0 || $this->vc04_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc04_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_vac_tipovacina {
    function sql_query ( $vc04_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_vac_tipovacina {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_vac_tipovacina {
    function sql_query_file ( $vc04_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_vac_tipovacina {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

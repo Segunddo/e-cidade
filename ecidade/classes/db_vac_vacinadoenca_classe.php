@@ -52,7 +52,7 @@ class cl_vac_vacinadoenca {
                  vc10_i_cid = int4 = CID 
                  ";
    //funcao construtor da classe 
-   function cl_vac_vacinadoenca() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_vacinadoenca"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_vac_vacinadoenca {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc10_i_codigo = ($this->vc10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_codigo"]:$this->vc10_i_codigo);
-       $this->vc10_i_vacina = ($this->vc10_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_vacina"]:$this->vc10_i_vacina);
-       $this->vc10_i_cid = ($this->vc10_i_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_cid"]:$this->vc10_i_cid);
+       $this->vc10_i_codigo = ($this->vc10_i_codigo === 0 || $this->vc10_i_codigo === 0.0 || $this->vc10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_codigo"]:$this->vc10_i_codigo);
+       $this->vc10_i_vacina = ($this->vc10_i_vacina === 0 || $this->vc10_i_vacina === 0.0 || $this->vc10_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_vacina"]:$this->vc10_i_vacina);
+       $this->vc10_i_cid = ($this->vc10_i_cid === 0 || $this->vc10_i_cid === 0.0 || $this->vc10_i_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_cid"]:$this->vc10_i_cid);
      }else{
-       $this->vc10_i_codigo = ($this->vc10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_codigo"]:$this->vc10_i_codigo);
+       $this->vc10_i_codigo = ($this->vc10_i_codigo === 0 || $this->vc10_i_codigo === 0.0 || $this->vc10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_codigo"]:$this->vc10_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_vac_vacinadoenca {
          $this->vc10_i_codigo = $vc10_i_codigo; 
        }
      }
-     if(($this->vc10_i_codigo == null) || ($this->vc10_i_codigo == "") ){ 
+     if(($this->vc10_i_codigo == null) || ($this->vc10_i_codigo === 0 || $this->vc10_i_codigo === 0.0 || $this->vc10_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc10_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_vac_vacinadoenca {
    function sql_query ( $vc10_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_vac_vacinadoenca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_vac_vacinadoenca {
    function sql_query_file ( $vc10_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_vac_vacinadoenca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

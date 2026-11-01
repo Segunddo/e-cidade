@@ -66,7 +66,7 @@ class cl_lab_examematerial {
                  la19_d_fim = date = Fim 
                  ";
    //funcao construtor da classe 
-   function cl_lab_examematerial() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_examematerial"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,10 +83,10 @@ class cl_lab_examematerial {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la19_i_codigo = ($this->la19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_i_codigo"]:$this->la19_i_codigo);
-       $this->la19_i_materialcoleta = ($this->la19_i_materialcoleta == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_i_materialcoleta"]:$this->la19_i_materialcoleta);
-       $this->la19_i_metodo = ($this->la19_i_metodo == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_i_metodo"]:$this->la19_i_metodo);
-       $this->la19_i_exame = ($this->la19_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_i_exame"]:$this->la19_i_exame);
+       $this->la19_i_codigo = ($this->la19_i_codigo === 0 || $this->la19_i_codigo === 0.0 || $this->la19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_i_codigo"]:$this->la19_i_codigo);
+       $this->la19_i_materialcoleta = ($this->la19_i_materialcoleta === 0 || $this->la19_i_materialcoleta === 0.0 || $this->la19_i_materialcoleta == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_i_materialcoleta"]:$this->la19_i_materialcoleta);
+       $this->la19_i_metodo = ($this->la19_i_metodo === 0 || $this->la19_i_metodo === 0.0 || $this->la19_i_metodo == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_i_metodo"]:$this->la19_i_metodo);
+       $this->la19_i_exame = ($this->la19_i_exame === 0 || $this->la19_i_exame === 0.0 || $this->la19_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_i_exame"]:$this->la19_i_exame);
        $this->la19_c_amb = ($this->la19_c_amb == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_c_amb"]:$this->la19_c_amb);
        if($this->la19_d_inicio == ""){
          $this->la19_d_inicio_dia = ($this->la19_d_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_d_inicio_dia"]:$this->la19_d_inicio_dia);
@@ -105,7 +105,7 @@ class cl_lab_examematerial {
          }
        }
      }else{
-       $this->la19_i_codigo = ($this->la19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_i_codigo"]:$this->la19_i_codigo);
+       $this->la19_i_codigo = ($this->la19_i_codigo === 0 || $this->la19_i_codigo === 0.0 || $this->la19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la19_i_codigo"]:$this->la19_i_codigo);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_lab_examematerial {
          $this->la19_i_codigo = $la19_i_codigo; 
        }
      }
-     if(($this->la19_i_codigo == null) || ($this->la19_i_codigo == "") ){ 
+     if(($this->la19_i_codigo == null) || ($this->la19_i_codigo === 0 || $this->la19_i_codigo === 0.0 || $this->la19_i_codigo == "") ){ 
        $this->erro_sql = " Campo la19_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -484,7 +484,7 @@ class cl_lab_examematerial {
    function sql_query ( $la19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -508,7 +508,7 @@ class cl_lab_examematerial {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -521,7 +521,7 @@ class cl_lab_examematerial {
    function sql_query_file ( $la19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -542,7 +542,7 @@ class cl_lab_examematerial {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
