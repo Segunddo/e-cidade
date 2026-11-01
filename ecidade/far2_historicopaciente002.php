@@ -137,7 +137,7 @@ $sql = "select trim(fa04_i_cgsund || '-' || z01_v_nome || ' CPF - ' || z01_v_cgc
 
 //echo $sql;
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 
 if($linhas == 0 || count($cgss) <= 0)
 {

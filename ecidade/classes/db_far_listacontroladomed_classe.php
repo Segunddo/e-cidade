@@ -52,7 +52,7 @@ class cl_far_listacontroladomed {
                  fa35_i_medanvisa = int4 = medanvisa 
                  ";
    //funcao construtor da classe 
-   function cl_far_listacontroladomed() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("far_listacontroladomed"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_far_listacontroladomed {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa35_i_codigo = ($this->fa35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_codigo"]:$this->fa35_i_codigo);
-       $this->fa35_i_listacontrolado = ($this->fa35_i_listacontrolado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_listacontrolado"]:$this->fa35_i_listacontrolado);
-       $this->fa35_i_medanvisa = ($this->fa35_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_medanvisa"]:$this->fa35_i_medanvisa);
+       $this->fa35_i_codigo = ($this->fa35_i_codigo === 0 || $this->fa35_i_codigo === 0.0 || $this->fa35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_codigo"]:$this->fa35_i_codigo);
+       $this->fa35_i_listacontrolado = ($this->fa35_i_listacontrolado === 0 || $this->fa35_i_listacontrolado === 0.0 || $this->fa35_i_listacontrolado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_listacontrolado"]:$this->fa35_i_listacontrolado);
+       $this->fa35_i_medanvisa = ($this->fa35_i_medanvisa === 0 || $this->fa35_i_medanvisa === 0.0 || $this->fa35_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_medanvisa"]:$this->fa35_i_medanvisa);
      }else{
-       $this->fa35_i_codigo = ($this->fa35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_codigo"]:$this->fa35_i_codigo);
+       $this->fa35_i_codigo = ($this->fa35_i_codigo === 0 || $this->fa35_i_codigo === 0.0 || $this->fa35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_codigo"]:$this->fa35_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_far_listacontroladomed {
          $this->fa35_i_codigo = $fa35_i_codigo; 
        }
      }
-     if(($this->fa35_i_codigo == null) || ($this->fa35_i_codigo == "") ){ 
+     if(($this->fa35_i_codigo == null) || ($this->fa35_i_codigo === 0 || $this->fa35_i_codigo === 0.0 || $this->fa35_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa35_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_far_listacontroladomed {
    function sql_query ( $fa35_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_far_listacontroladomed {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_far_listacontroladomed {
    function sql_query_file ( $fa35_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_far_listacontroladomed {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

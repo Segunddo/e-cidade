@@ -279,7 +279,7 @@ for ($x = 0; $x < $veses; $x++) {
       }
 
       $result2    = db_query($sql2);
-      $linhas2    = pg_num_rows($result2);
+      $linhas2    = ($result2 ? pg_num_rows($result2) : null);
       db_fieldsmemory($result2, 0);
 
       $mes[$m]    = $quantidade;

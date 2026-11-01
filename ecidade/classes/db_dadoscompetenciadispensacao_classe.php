@@ -56,7 +56,7 @@ class cl_dadoscompetenciadispensacao {
                  fa61_cns = varchar(15) = CNS
                  ";
    //funcao construtor da classe
-   function cl_dadoscompetenciadispensacao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("dadoscompetenciadispensacao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,16 +73,16 @@ class cl_dadoscompetenciadispensacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa61_sequencial = ($this->fa61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_sequencial"]:$this->fa61_sequencial);
-       $this->fa61_far_retiradaitens = ($this->fa61_far_retiradaitens == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_far_retiradaitens"]:$this->fa61_far_retiradaitens);
-       $this->fa61_integracaohorus = ($this->fa61_integracaohorus == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_integracaohorus"]:$this->fa61_integracaohorus);
+       $this->fa61_sequencial = ($this->fa61_sequencial === 0 || $this->fa61_sequencial === 0.0 || $this->fa61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_sequencial"]:$this->fa61_sequencial);
+       $this->fa61_far_retiradaitens = ($this->fa61_far_retiradaitens === 0 || $this->fa61_far_retiradaitens === 0.0 || $this->fa61_far_retiradaitens == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_far_retiradaitens"]:$this->fa61_far_retiradaitens);
+       $this->fa61_integracaohorus = ($this->fa61_integracaohorus === 0 || $this->fa61_integracaohorus === 0.0 || $this->fa61_integracaohorus == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_integracaohorus"]:$this->fa61_integracaohorus);
        $this->fa61_enviar = ($this->fa61_enviar == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa61_enviar"]:$this->fa61_enviar);
        $this->fa61_validadohorus = ($this->fa61_validadohorus == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa61_validadohorus"]:$this->fa61_validadohorus);
-       $this->fa61_unidade = ($this->fa61_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_unidade"]:$this->fa61_unidade);
+       $this->fa61_unidade = ($this->fa61_unidade === 0 || $this->fa61_unidade === 0.0 || $this->fa61_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_unidade"]:$this->fa61_unidade);
        $this->fa61_cnes = ($this->fa61_cnes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_cnes"]:$this->fa61_cnes);
        $this->fa61_catmat = ($this->fa61_catmat == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_catmat"]:$this->fa61_catmat);
        $this->fa61_tipo = ($this->fa61_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_tipo"]:$this->fa61_tipo);
-       $this->fa61_valor = ($this->fa61_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_valor"]:$this->fa61_valor);
+       $this->fa61_valor = ($this->fa61_valor === 0 || $this->fa61_valor === 0.0 || $this->fa61_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_valor"]:$this->fa61_valor);
        if($this->fa61_validade == ""){
          $this->fa61_validade_dia = ($this->fa61_validade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_validade_dia"]:$this->fa61_validade_dia);
          $this->fa61_validade_mes = ($this->fa61_validade_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_validade_mes"]:$this->fa61_validade_mes);
@@ -92,7 +92,7 @@ class cl_dadoscompetenciadispensacao {
          }
        }
        $this->fa61_lote = ($this->fa61_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_lote"]:$this->fa61_lote);
-       $this->fa61_quantidade = ($this->fa61_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_quantidade"]:$this->fa61_quantidade);
+       $this->fa61_quantidade = ($this->fa61_quantidade === 0 || $this->fa61_quantidade === 0.0 || $this->fa61_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_quantidade"]:$this->fa61_quantidade);
        if($this->fa61_dispensacao == ""){
          $this->fa61_dispensacao_dia = ($this->fa61_dispensacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_dispensacao_dia"]:$this->fa61_dispensacao_dia);
          $this->fa61_dispensacao_mes = ($this->fa61_dispensacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_dispensacao_mes"]:$this->fa61_dispensacao_mes);
@@ -103,7 +103,7 @@ class cl_dadoscompetenciadispensacao {
        }
        $this->fa61_cns = ($this->fa61_cns == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_cns"]:$this->fa61_cns);
      }else{
-       $this->fa61_sequencial = ($this->fa61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_sequencial"]:$this->fa61_sequencial);
+       $this->fa61_sequencial = ($this->fa61_sequencial === 0 || $this->fa61_sequencial === 0.0 || $this->fa61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa61_sequencial"]:$this->fa61_sequencial);
      }
    }
    // funcao para Inclusão
@@ -235,7 +235,7 @@ class cl_dadoscompetenciadispensacao {
          $this->fa61_sequencial = $fa61_sequencial;
        }
      }
-     if(($this->fa61_sequencial == null) || ($this->fa61_sequencial == "") ){
+     if(($this->fa61_sequencial == null) || ($this->fa61_sequencial === 0 || $this->fa61_sequencial === 0.0 || $this->fa61_sequencial == "") ){
        $this->erro_sql = " Campo fa61_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

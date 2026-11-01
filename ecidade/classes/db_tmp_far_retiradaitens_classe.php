@@ -54,7 +54,7 @@ class cl_tmp_far_retiradaitens {
    var $tmp_far_retiradaitemlote = null;
    var $tmp_far_retiradarequisitante = null;
    var $tmp_far_retiradarequi = null;
-   
+
    // cria propriedade com as variaveis do arquivo 
    var $campos = "
                  fa06_i_codigo = int4 = Código 
@@ -65,7 +65,7 @@ class cl_tmp_far_retiradaitens {
                  fa06_t_controlado = char(2) = Med.Controlado
                  ";
    //funcao construtor da classe 
-   function cl_tmp_far_retiradaitens() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tmp_far_retiradaitens"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,14 +82,14 @@ class cl_tmp_far_retiradaitens {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa06_i_codigo = ($this->fa06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_codigo"]:$this->fa06_i_codigo);
+       $this->fa06_i_codigo = ($this->fa06_i_codigo === 0 || $this->fa06_i_codigo === 0.0 || $this->fa06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_codigo"]:$this->fa06_i_codigo);
        $this->fa06_t_posologia = ($this->fa06_t_posologia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_t_posologia"]:$this->fa06_t_posologia);
-       $this->fa06_i_retirada = ($this->fa06_i_retirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_retirada"]:$this->fa06_i_retirada);
-       $this->fa06_i_matersaude = ($this->fa06_i_matersaude == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_matersaude"]:$this->fa06_i_matersaude);
-       $this->fa06_f_quant = ($this->fa06_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_f_quant"]:$this->fa06_f_quant);
+       $this->fa06_i_retirada = ($this->fa06_i_retirada === 0 || $this->fa06_i_retirada === 0.0 || $this->fa06_i_retirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_retirada"]:$this->fa06_i_retirada);
+       $this->fa06_i_matersaude = ($this->fa06_i_matersaude === 0 || $this->fa06_i_matersaude === 0.0 || $this->fa06_i_matersaude == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_matersaude"]:$this->fa06_i_matersaude);
+       $this->fa06_f_quant = ($this->fa06_f_quant === 0 || $this->fa06_f_quant === 0.0 || $this->fa06_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_f_quant"]:$this->fa06_f_quant);
        $this->fa06_t_controlado = ($this->fa06_t_controlado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_t_controlado"]:$this->fa06_t_controlado);
      }else{
-       $this->fa06_i_codigo = ($this->fa06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_codigo"]:$this->fa06_i_codigo);
+       $this->fa06_i_codigo = ($this->fa06_i_codigo === 0 || $this->fa06_i_codigo === 0.0 || $this->fa06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_codigo"]:$this->fa06_i_codigo);
      }
    }
    // funcao para inclusao
@@ -152,7 +152,7 @@ class cl_tmp_far_retiradaitens {
          $this->fa06_i_codigo = $fa06_i_codigo; 
        }
      }
-     if(($this->fa06_i_codigo == null) || ($this->fa06_i_codigo == "") ){ 
+     if(($this->fa06_i_codigo == null) || ($this->fa06_i_codigo === 0 || $this->fa06_i_codigo === 0.0 || $this->fa06_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa06_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -445,7 +445,7 @@ class cl_tmp_far_retiradaitens {
    function sql_query ( $fa06_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_tmp_far_retiradaitens {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_tmp_far_retiradaitens {
    function sql_query_file ( $fa06_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_tmp_far_retiradaitens {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_tmp_far_retiradaitens {
   function sql_query_retiradaitens( $fa06_i_codigo=null,$campos="*",$ordem=null,$dbwhere="",$group_by=null){ 
      $sql = "select ";
      if($campos != "*"){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -559,7 +559,7 @@ class cl_tmp_far_retiradaitens {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -573,7 +573,7 @@ class cl_tmp_far_retiradaitens {
 function sql_query_matrequitens($m40_codigo=null,$campos="*",$ordem=null,$dbwhere="") {
     $sql = "select ";
     if ($campos != "*" ) {
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -604,7 +604,7 @@ function sql_query_matrequitens($m40_codigo=null,$campos="*",$ordem=null,$dbwher
     $sql .= $sql2;
     if ($ordem != null ) {
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for ($i=0; $i<sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -617,7 +617,7 @@ function sql_query_matrequitens($m40_codigo=null,$campos="*",$ordem=null,$dbwher
    function sql_query_posologia ( $fa06_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -660,7 +660,7 @@ function sql_query_matrequitens($m40_codigo=null,$campos="*",$ordem=null,$dbwher
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

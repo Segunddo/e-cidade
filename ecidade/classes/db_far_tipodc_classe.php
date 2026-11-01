@@ -50,7 +50,7 @@ class cl_far_tipodc {
                  fa27_c_denominacao = char(20) = Denominação 
                  ";
    //funcao construtor da classe 
-   function cl_far_tipodc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("far_tipodc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_far_tipodc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa27_i_codigo = ($this->fa27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa27_i_codigo"]:$this->fa27_i_codigo);
+       $this->fa27_i_codigo = ($this->fa27_i_codigo === 0 || $this->fa27_i_codigo === 0.0 || $this->fa27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa27_i_codigo"]:$this->fa27_i_codigo);
        $this->fa27_c_denominacao = ($this->fa27_c_denominacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa27_c_denominacao"]:$this->fa27_c_denominacao);
      }else{
-       $this->fa27_i_codigo = ($this->fa27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa27_i_codigo"]:$this->fa27_i_codigo);
+       $this->fa27_i_codigo = ($this->fa27_i_codigo === 0 || $this->fa27_i_codigo === 0.0 || $this->fa27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa27_i_codigo"]:$this->fa27_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_far_tipodc {
          $this->fa27_i_codigo = $fa27_i_codigo; 
        }
      }
-     if(($this->fa27_i_codigo == null) || ($this->fa27_i_codigo == "") ){ 
+     if(($this->fa27_i_codigo == null) || ($this->fa27_i_codigo === 0 || $this->fa27_i_codigo === 0.0 || $this->fa27_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa27_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_far_tipodc {
    function sql_query ( $fa27_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_far_tipodc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_far_tipodc {
    function sql_query_file ( $fa27_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_far_tipodc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

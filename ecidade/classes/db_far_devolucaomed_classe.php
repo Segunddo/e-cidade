@@ -58,7 +58,7 @@ class cl_far_devolucaomed {
                  fa23_i_cancelamento = int4 = Cancelamento 
                  ";
    //funcao construtor da classe 
-   function cl_far_devolucaomed() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("far_devolucaomed"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_far_devolucaomed {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa23_i_codigo = ($this->fa23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_codigo"]:$this->fa23_i_codigo);
-       $this->fa23_i_quantidade = ($this->fa23_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_quantidade"]:$this->fa23_i_quantidade);
+       $this->fa23_i_codigo = ($this->fa23_i_codigo === 0 || $this->fa23_i_codigo === 0.0 || $this->fa23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_codigo"]:$this->fa23_i_codigo);
+       $this->fa23_i_quantidade = ($this->fa23_i_quantidade === 0 || $this->fa23_i_quantidade === 0.0 || $this->fa23_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_quantidade"]:$this->fa23_i_quantidade);
        $this->fa23_c_motivo = ($this->fa23_c_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_c_motivo"]:$this->fa23_c_motivo);
-       $this->fa23_i_devolucao = ($this->fa23_i_devolucao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_devolucao"]:$this->fa23_i_devolucao);
-       $this->fa23_i_retiradaitens = ($this->fa23_i_retiradaitens == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_retiradaitens"]:$this->fa23_i_retiradaitens);
-       $this->fa23_i_cancelamento = ($this->fa23_i_cancelamento == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_cancelamento"]:$this->fa23_i_cancelamento);
+       $this->fa23_i_devolucao = ($this->fa23_i_devolucao === 0 || $this->fa23_i_devolucao === 0.0 || $this->fa23_i_devolucao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_devolucao"]:$this->fa23_i_devolucao);
+       $this->fa23_i_retiradaitens = ($this->fa23_i_retiradaitens === 0 || $this->fa23_i_retiradaitens === 0.0 || $this->fa23_i_retiradaitens == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_retiradaitens"]:$this->fa23_i_retiradaitens);
+       $this->fa23_i_cancelamento = ($this->fa23_i_cancelamento === 0 || $this->fa23_i_cancelamento === 0.0 || $this->fa23_i_cancelamento == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_cancelamento"]:$this->fa23_i_cancelamento);
      }else{
-       $this->fa23_i_codigo = ($this->fa23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_codigo"]:$this->fa23_i_codigo);
+       $this->fa23_i_codigo = ($this->fa23_i_codigo === 0 || $this->fa23_i_codigo === 0.0 || $this->fa23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa23_i_codigo"]:$this->fa23_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_far_devolucaomed {
          $this->fa23_i_codigo = $fa23_i_codigo; 
        }
      }
-     if(($this->fa23_i_codigo == null) || ($this->fa23_i_codigo == "") ){ 
+     if(($this->fa23_i_codigo == null) || ($this->fa23_i_codigo === 0 || $this->fa23_i_codigo === 0.0 || $this->fa23_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa23_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -453,7 +453,7 @@ class cl_far_devolucaomed {
    function sql_query ( $fa23_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -491,7 +491,7 @@ class cl_far_devolucaomed {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_far_devolucaomed {
    function sql_query_file ( $fa23_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_far_devolucaomed {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -537,7 +537,7 @@ class cl_far_devolucaomed {
    function sql_query_devolucao ( $fa23_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -561,7 +561,7 @@ class cl_far_devolucaomed {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -577,7 +577,7 @@ class cl_far_devolucaomed {
      
      $sSql = "select ";
      if($sCampos != "*" ){
-       $sCamposSql = split("#",$sCampos);
+       $sCamposSql = preg_split("#\\##m",$sCampos);
        $sVirgula = "";
 
        for ($i = 0; $i < sizeof($sCamposSql); $i++) {
@@ -613,7 +613,7 @@ class cl_far_devolucaomed {
 
      if ($sOrdem != null ) {
        $sSql .= " order by ";
-       $sCamposSql = split("#",$sOrdem);
+       $sCamposSql = preg_split("#\\##m",$sOrdem);
        $sVirgula = "";
        
        for ($i = 0; $i< sizeof($sCamposSql); $i++){

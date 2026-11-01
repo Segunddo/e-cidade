@@ -33,7 +33,8 @@ require(modification("libs/db_stdlibwebseller.php"));
 include(modification("fpdf151/impfarmacia.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $sErro = "";
 $dHoje = date("Y-m-d", db_getsession("DB_datausu"));

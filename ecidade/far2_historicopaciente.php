@@ -30,7 +30,8 @@ include(modification("libs/db_sql.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_far_retiradaitens_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $cl_far_retiradaitens = new cl_far_retiradaitens;
 
 

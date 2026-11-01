@@ -50,7 +50,7 @@ class cl_far_medreferencia {
                  fa19_c_medreferencia = char(50) = Nome 
                  ";
    //funcao construtor da classe 
-   function cl_far_medreferencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("far_medreferencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_far_medreferencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa19_i_codigo = ($this->fa19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa19_i_codigo"]:$this->fa19_i_codigo);
+       $this->fa19_i_codigo = ($this->fa19_i_codigo === 0 || $this->fa19_i_codigo === 0.0 || $this->fa19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa19_i_codigo"]:$this->fa19_i_codigo);
        $this->fa19_c_medreferencia = ($this->fa19_c_medreferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa19_c_medreferencia"]:$this->fa19_c_medreferencia);
      }else{
-       $this->fa19_i_codigo = ($this->fa19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa19_i_codigo"]:$this->fa19_i_codigo);
+       $this->fa19_i_codigo = ($this->fa19_i_codigo === 0 || $this->fa19_i_codigo === 0.0 || $this->fa19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa19_i_codigo"]:$this->fa19_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_far_medreferencia {
          $this->fa19_i_codigo = $fa19_i_codigo; 
        }
      }
-     if(($this->fa19_i_codigo == null) || ($this->fa19_i_codigo == "") ){ 
+     if(($this->fa19_i_codigo == null) || ($this->fa19_i_codigo === 0 || $this->fa19_i_codigo === 0.0 || $this->fa19_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa19_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_far_medreferencia {
    function sql_query ( $fa19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_far_medreferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_far_medreferencia {
    function sql_query_file ( $fa19_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_far_medreferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

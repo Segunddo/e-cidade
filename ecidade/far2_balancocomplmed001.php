@@ -36,7 +36,8 @@ include(modification("classes/db_far_farmacia_classe.php"));
 include(modification("classes/db_matestoqueinimei_classe.php"));
 include(modification("classes/db_matestoque_classe.php"));
 include(modification("classes/db_db_config_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $x=data_farmacia($ano,$periodo);

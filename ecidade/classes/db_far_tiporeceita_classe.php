@@ -63,20 +63,20 @@ class cl_far_tiporeceita
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fa03_i_codigo = ($this->fa03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_i_codigo"]:$this->fa03_i_codigo);
+       $this->fa03_i_codigo = ($this->fa03_i_codigo === 0 || $this->fa03_i_codigo === 0.0 || $this->fa03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_i_codigo"]:$this->fa03_i_codigo);
        $this->fa03_c_descr = ($this->fa03_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_c_descr"]:$this->fa03_c_descr);
        $this->fa03_c_profissional = ($this->fa03_c_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_c_profissional"]:$this->fa03_c_profissional);
        $this->fa03_c_posologia = ($this->fa03_c_posologia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_c_posologia"]:$this->fa03_c_posologia);
        $this->fa03_c_requisitante = ($this->fa03_c_requisitante == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_c_requisitante"]:$this->fa03_c_requisitante);
        $this->fa03_c_quant = ($this->fa03_c_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_c_quant"]:$this->fa03_c_quant);
        $this->fa03_c_numeroreceita = ($this->fa03_c_numeroreceita == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_c_numeroreceita"]:$this->fa03_c_numeroreceita);
-       $this->fa03_i_prescricaomedica = ($this->fa03_i_prescricaomedica == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_i_prescricaomedica"]:$this->fa03_i_prescricaomedica);
-       $this->fa03_i_ativa = ($this->fa03_i_ativa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_i_ativa"]:$this->fa03_i_ativa);
+       $this->fa03_i_prescricaomedica = ($this->fa03_i_prescricaomedica === 0 || $this->fa03_i_prescricaomedica === 0.0 || $this->fa03_i_prescricaomedica == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_i_prescricaomedica"]:$this->fa03_i_prescricaomedica);
+       $this->fa03_i_ativa = ($this->fa03_i_ativa === 0 || $this->fa03_i_ativa === 0.0 || $this->fa03_i_ativa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_i_ativa"]:$this->fa03_i_ativa);
        $this->fa03_data_prescricao = ($this->fa03_data_prescricao == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa03_data_prescricao"]:$this->fa03_data_prescricao);
-       $this->fa03_dias_prescricao = ($this->fa03_dias_prescricao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_dias_prescricao"]:$this->fa03_dias_prescricao);
+       $this->fa03_dias_prescricao = ($this->fa03_dias_prescricao === 0 || $this->fa03_dias_prescricao === 0.0 || $this->fa03_dias_prescricao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_dias_prescricao"]:$this->fa03_dias_prescricao);
        $this->fa03_numero_notificacao = ($this->fa03_numero_notificacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa03_numero_notificacao"]:$this->fa03_numero_notificacao);
      }else{
-       $this->fa03_i_codigo = ($this->fa03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_i_codigo"]:$this->fa03_i_codigo);
+       $this->fa03_i_codigo = ($this->fa03_i_codigo === 0 || $this->fa03_i_codigo === 0.0 || $this->fa03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa03_i_codigo"]:$this->fa03_i_codigo);
      }
    }
 
@@ -173,7 +173,7 @@ class cl_far_tiporeceita
          $this->fa03_i_codigo = $fa03_i_codigo;
        }
      }
-     if(($this->fa03_i_codigo == null) || ($this->fa03_i_codigo == "") ){
+     if(($this->fa03_i_codigo == null) || ($this->fa03_i_codigo === 0 || $this->fa03_i_codigo === 0.0 || $this->fa03_i_codigo == "") ){
        $this->erro_sql = " Campo fa03_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
