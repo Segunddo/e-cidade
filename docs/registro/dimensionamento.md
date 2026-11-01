@@ -134,3 +134,23 @@ Ressalva de sempre: "a alterar" é estimativa estática. No Financeiro a estimat
 (soma dos 6 lotes) **mais ~420 correções à mão** (LSP, guardas `pg_*`, `count(null)`, comentário sem fechamento), além do `tra`.
 A estimativa conta arquivos a partir das telas de menu; o porte por prefixo inteiro (`cai`) e as abas do passo 8b alcançaram
 muito mais.
+
+#### Refeito em 01/11/2026, depois da Saúde
+
+`dimensiona.py` com `JA` incluindo `SA` (o `location` do script já tinha os prefixos da Saúde). Conferido à parte: **as seis
+áreas concluídas têm 0 telas de menu fora do 8.5** — Tributário 1.059, Educação 480, Recursos Humanos 701, Patrimonial 743,
+Financeiro 992, Saúde 493.
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | A alterar (bruto) | **A alterar (real)** | em 30/10 (bruto) |
+|---|---|---|---|---|---|---|---|
+| Configuração | 1 | 185 | 2.479 | 905 | 109 | **98** | 110 |
+| Assistência Social | 2 | 59 | 1.903 | 726 | 43 | **32** | 43 |
+| Cidadão | 1 | 35 | 1.828 | 709 | 28 | **17** | 28 |
+| Integrações | 1 | 9 | 1.823 | 715 | 17 | **6** | 17 |
+| Gestor | 1 | 7 | 1.089 | 347 | 19 | **8** | 19 |
+
+União: **156 bruto, 145 real** (era 668 com a Saúde). **"Real" desconta as 11 classes do falso positivo** (`cgm*`, `db_db_uf`,
+`db_db_userinst`…), que estão nos alvos de **todas** as áreas: já foram portadas pelos commits `EXPERIMENTO` do Rector, e o
+`PAGO` do `enumera.py` só reconhece commits `^Porta ` (registrado no `tra`, 30/10). Nas medições anteriores elas também inflavam
+cada área em 11. A Saúde quase não pré-pagou as restantes (Configuração 110 → 109; as outras iguais): os prefixos dela são
+exclusivos. Fantasmas: Configuração 5, Cidadão 5, Assistência Social 1.
