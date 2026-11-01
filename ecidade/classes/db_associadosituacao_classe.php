@@ -43,10 +43,10 @@ class cl_associadosituacao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fm02_situacao = ($this->fm02_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fm02_situacao"]:$this->fm02_situacao);
+       $this->fm02_situacao = ($this->fm02_situacao === 0 || $this->fm02_situacao === 0.0 || $this->fm02_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fm02_situacao"]:$this->fm02_situacao);
        $this->fm02_descricao = ($this->fm02_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["fm02_descricao"]:$this->fm02_descricao);
      }else{
-       $this->fm02_situacao = ($this->fm02_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fm02_situacao"]:$this->fm02_situacao);
+       $this->fm02_situacao = ($this->fm02_situacao === 0 || $this->fm02_situacao === 0.0 || $this->fm02_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fm02_situacao"]:$this->fm02_situacao);
      }
    }
 
@@ -86,7 +86,7 @@ class cl_associadosituacao
          $this->fm02_situacao = $fm02_situacao; 
        }
      }
-     if(($this->fm02_situacao == null) || ($this->fm02_situacao == "") ){ 
+     if(($this->fm02_situacao == null) || ($this->fm02_situacao === 0 || $this->fm02_situacao === 0.0 || $this->fm02_situacao == "") ){ 
        $this->erro_sql = " Campo fm02_situacao não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

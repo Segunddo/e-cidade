@@ -61,7 +61,7 @@ class cl_sau_atualiza {
                  s100_c_hora = varchar(20) = Hora 
                  ";
    //funcao construtor da classe 
-   function cl_sau_atualiza() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_atualiza"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,10 +78,10 @@ class cl_sau_atualiza {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s100_i_codigo = ($this->s100_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_codigo"]:$this->s100_i_codigo);
-       $this->s100_i_login = ($this->s100_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_login"]:$this->s100_i_login);
-       $this->s100_i_mescomp = ($this->s100_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_mescomp"]:$this->s100_i_mescomp);
-       $this->s100_i_anocomp = ($this->s100_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_anocomp"]:$this->s100_i_anocomp);
+       $this->s100_i_codigo = ($this->s100_i_codigo === 0 || $this->s100_i_codigo === 0.0 || $this->s100_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_codigo"]:$this->s100_i_codigo);
+       $this->s100_i_login = ($this->s100_i_login === 0 || $this->s100_i_login === 0.0 || $this->s100_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_login"]:$this->s100_i_login);
+       $this->s100_i_mescomp = ($this->s100_i_mescomp === 0 || $this->s100_i_mescomp === 0.0 || $this->s100_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_mescomp"]:$this->s100_i_mescomp);
+       $this->s100_i_anocomp = ($this->s100_i_anocomp === 0 || $this->s100_i_anocomp === 0.0 || $this->s100_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_anocomp"]:$this->s100_i_anocomp);
        if($this->s100_d_data == ""){
          $this->s100_d_data_dia = ($this->s100_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_d_data_dia"]:$this->s100_d_data_dia);
          $this->s100_d_data_mes = ($this->s100_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_d_data_mes"]:$this->s100_d_data_mes);
@@ -92,7 +92,7 @@ class cl_sau_atualiza {
        }
        $this->s100_c_hora = ($this->s100_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_c_hora"]:$this->s100_c_hora);
      }else{
-       $this->s100_i_codigo = ($this->s100_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_codigo"]:$this->s100_i_codigo);
+       $this->s100_i_codigo = ($this->s100_i_codigo === 0 || $this->s100_i_codigo === 0.0 || $this->s100_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_codigo"]:$this->s100_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_sau_atualiza {
          $this->s100_i_codigo = $s100_i_codigo; 
        }
      }
-     if(($this->s100_i_codigo == null) || ($this->s100_i_codigo == "") ){ 
+     if(($this->s100_i_codigo == null) || ($this->s100_i_codigo === 0 || $this->s100_i_codigo === 0.0 || $this->s100_i_codigo == "") ){ 
        $this->erro_sql = " Campo s100_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -438,7 +438,7 @@ class cl_sau_atualiza {
    function sql_query ( $s100_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_sau_atualiza {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_sau_atualiza {
    function sql_query_file ( $s100_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -494,7 +494,7 @@ class cl_sau_atualiza {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

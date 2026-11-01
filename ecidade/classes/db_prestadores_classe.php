@@ -70,11 +70,11 @@ class cl_prestadores
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fm06_codigo = ($this->fm06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm06_codigo"]:$this->fm06_codigo);
-       $this->fm06_depart = ($this->fm06_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["fm06_depart"]:$this->fm06_depart);
-       $this->fm06_numcgm = ($this->fm06_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["fm06_numcgm"]:$this->fm06_numcgm);
+       $this->fm06_codigo = ($this->fm06_codigo === 0 || $this->fm06_codigo === 0.0 || $this->fm06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm06_codigo"]:$this->fm06_codigo);
+       $this->fm06_depart = ($this->fm06_depart === 0 || $this->fm06_depart === 0.0 || $this->fm06_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["fm06_depart"]:$this->fm06_depart);
+       $this->fm06_numcgm = ($this->fm06_numcgm === 0 || $this->fm06_numcgm === 0.0 || $this->fm06_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["fm06_numcgm"]:$this->fm06_numcgm);
      }else{
-       $this->fm06_codigo = ($this->fm06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm06_codigo"]:$this->fm06_codigo);
+       $this->fm06_codigo = ($this->fm06_codigo === 0 || $this->fm06_codigo === 0.0 || $this->fm06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm06_codigo"]:$this->fm06_codigo);
      }
    }
 
@@ -123,7 +123,7 @@ class cl_prestadores
          $this->fm06_codigo = $fm06_codigo; 
        }
      }
-     if(($this->fm06_codigo == null) || ($this->fm06_codigo == "") ){ 
+     if(($this->fm06_codigo == null) || ($this->fm06_codigo === 0 || $this->fm06_codigo === 0.0 || $this->fm06_codigo == "") ){ 
        $this->erro_sql = " Campo fm06_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

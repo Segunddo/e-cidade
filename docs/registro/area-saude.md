@@ -42,4 +42,30 @@ previstos, 1.168 pelo Rector + ~420 à mão).
 Financeiro. Valem as regras de sempre: um lote por vez (relatar e esperar o pedido do próximo), bateria completa só no fim
 da área, envio só depois dela.
 
-**Estado:** dimensionada; aguardando o pedido do lote 1.
+| Lote | Universo | Alterados | `php -l` 5.6/8.5 | Carga (LSP) | Classes | Escrita | Forma negada | **Bateria** |
+|---|---|---|---|---|---|---|---|---|
+| 1 `fum`+`hip`+`age`+`amb` | 1.896 | 26 Rector | 1.896/1.896 | 364/364 (11 falham nos dois) | 785 (diffs só do harness) | 19.640 linhas, diffs só do harness | 2.216 pares, 0 div. | **71/71** |
+
+**Lote 1 — `fum`, `hip`, `age`, `amb`** (71 arquivos, roteados no `location`; 31/10/2026). Enumerador: 57 alvos, dos
+quais **11 são o falso positivo já registrado** no `tra` (`cgm*`, `db_db_uf`, `db_db_userinst`…: portados por commits
+`EXPERIMENTO`, que o `PAGO` não reconhece) — o Rector não tocou nenhum. Os 22 `split()` são todos `"#"` literal.
+Rector em **26 arquivos**, só regras vetadas (15 `GuardaComparacaoLiteral`, 10 `ParseStrComExtract`, 6 `EregToPregMatch`
+— que converte `split("#")` em `preg_split("#\\##m")`, a forma das classes já portadas —, 6 `Php4Constructor`), 0 na 2ª
+passada. Remanescentes 0 pelo critério da própria regra (propriedade com padrão inteiro, literal não numérico): uma
+contagem sobre **todo** `$this->X == "…"` dá 251, mas são campos de texto, que não precisam de guarda. Portão de funções:
+0 ausentes. Nada à mão.
+
+Classes e escrita: só os diffs conhecidos do harness (`RequisicaoMaterial`/`solicitacaoCompra` com construtor obrigatório;
+`db_avaliacaogruporespostatrabalhointermitente` sem o `.dd.xml`). Bateria **71/71 na primeira rodada**.
+
+Roteamento: `fum|hip|age|amb` no `location` (e na `FASE_A` do `gera_map_faseb.py`, no `LOC` do `dimensiona.py` e do
+`redirecionamentos.py`); `map` regenerado → **1.104 entradas** (saíram `age4_atuasam30` e as 7 `amb`, agora pelo
+`location`). `nginx -t` num container descartável antes de recriar. Conferido: `fum1_`, `/w/2/hip2_`, `age4_`, `Amb1_`,
+`amb1_` → 8.5; `login.php` e `sau1_` → 5.6. Passo 8b (44 telas da Saúde no 8.5): nada indo ao 5.6 (1 iframe de pasta).
+
+Bateria dirigida: das 16 classes alteradas, 2 (`db_sau_atualiza`, `db_sau_procedimento`) estão no universo do `verif15`
+(tudo o que o 8.5 servia na 15ª lacuna), mas só porque 20 classes/modelos citam essas tabelas em SQL; nenhuma tela servida
+fora do lote usa as classes alteradas nem esses 20 arquivos (a única é `age4_municipiocotamensalexame001`, do lote).
+Nenhuma bateria dirigida a fazer.
+
+**Estado:** lote 1 concluído (commit local). Aguardando o pedido do lote 2 (`tfd`, `vac`).

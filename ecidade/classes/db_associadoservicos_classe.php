@@ -94,13 +94,13 @@ class cl_associadoservicos
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fm12_codigo = ($this->fm12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_codigo"]:$this->fm12_codigo);
-       $this->fm12_tpservico = ($this->fm12_tpservico == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_tpservico"]:$this->fm12_tpservico);
+       $this->fm12_codigo = ($this->fm12_codigo === 0 || $this->fm12_codigo === 0.0 || $this->fm12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_codigo"]:$this->fm12_codigo);
+       $this->fm12_tpservico = ($this->fm12_tpservico === 0 || $this->fm12_tpservico === 0.0 || $this->fm12_tpservico == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_tpservico"]:$this->fm12_tpservico);
        $this->fm12_descricao = ($this->fm12_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_descricao"]:$this->fm12_descricao);
        $this->fm12_autorizacao = ($this->fm12_autorizacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["fm12_autorizacao"]:$this->fm12_autorizacao);
        $this->fm12_odontograma = ($this->fm12_odontograma == "f"?@$GLOBALS["HTTP_POST_VARS"]["fm12_odontograma"]:$this->fm12_odontograma);
-       $this->fm12_idademin = ($this->fm12_idademin == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_idademin"]:$this->fm12_idademin);
-       $this->fm12_idademax = ($this->fm12_idademax == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_idademax"]:$this->fm12_idademax);
+       $this->fm12_idademin = ($this->fm12_idademin === 0 || $this->fm12_idademin === 0.0 || $this->fm12_idademin == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_idademin"]:$this->fm12_idademin);
+       $this->fm12_idademax = ($this->fm12_idademax === 0 || $this->fm12_idademax === 0.0 || $this->fm12_idademax == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_idademax"]:$this->fm12_idademax);
        if($this->fm12_validadeini == ""){
          $this->fm12_validadeini_dia = ($this->fm12_validadeini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_validadeini_dia"]:$this->fm12_validadeini_dia);
          $this->fm12_validadeini_mes = ($this->fm12_validadeini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_validadeini_mes"]:$this->fm12_validadeini_mes);
@@ -121,7 +121,7 @@ class cl_associadoservicos
        $this->fm12_feminino = ($this->fm12_feminino == "f"?@$GLOBALS["HTTP_POST_VARS"]["fm12_feminino"]:$this->fm12_feminino);
        $this->fm12_situacao = ($this->fm12_situacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["fm12_situacao"]:$this->fm12_situacao);
      }else{
-       $this->fm12_codigo = ($this->fm12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_codigo"]:$this->fm12_codigo);
+       $this->fm12_codigo = ($this->fm12_codigo === 0 || $this->fm12_codigo === 0.0 || $this->fm12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm12_codigo"]:$this->fm12_codigo);
      }
    }
 
@@ -233,7 +233,7 @@ class cl_associadoservicos
          $this->fm12_codigo = $fm12_codigo; 
        }
      }
-     if(($this->fm12_codigo == null) || ($this->fm12_codigo == "") ){ 
+     if(($this->fm12_codigo == null) || ($this->fm12_codigo === 0 || $this->fm12_codigo === 0.0 || $this->fm12_codigo == "") ){ 
        $this->erro_sql = " Campo fm12_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -80,7 +80,7 @@ class cl_sau_procedimento {
                  sd63_i_mescomp = int4 = Mes
                  ";
    //funcao construtor da classe
-   function cl_sau_procedimento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_procedimento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -97,25 +97,25 @@ class cl_sau_procedimento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd63_i_codigo = ($this->sd63_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_codigo"]:$this->sd63_i_codigo);
+       $this->sd63_i_codigo = ($this->sd63_i_codigo === 0 || $this->sd63_i_codigo === 0.0 || $this->sd63_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_codigo"]:$this->sd63_i_codigo);
        $this->sd63_c_procedimento = ($this->sd63_c_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_c_procedimento"]:$this->sd63_c_procedimento);
        $this->sd63_c_nome = ($this->sd63_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_c_nome"]:$this->sd63_c_nome);
-       $this->sd63_i_complexidade = ($this->sd63_i_complexidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_complexidade"]:$this->sd63_i_complexidade);
+       $this->sd63_i_complexidade = ($this->sd63_i_complexidade === 0 || $this->sd63_i_complexidade === 0.0 || $this->sd63_i_complexidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_complexidade"]:$this->sd63_i_complexidade);
        $this->sd63_c_sexo = ($this->sd63_c_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_c_sexo"]:$this->sd63_c_sexo);
-       $this->sd63_i_execucaomax = ($this->sd63_i_execucaomax == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_execucaomax"]:$this->sd63_i_execucaomax);
-       $this->sd63_i_maxdias = ($this->sd63_i_maxdias == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_maxdias"]:$this->sd63_i_maxdias);
-       $this->sd63_i_pontos = ($this->sd63_i_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_pontos"]:$this->sd63_i_pontos);
-       $this->sd63_i_idademin = ($this->sd63_i_idademin == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_idademin"]:$this->sd63_i_idademin);
-       $this->sd63_i_idademax = ($this->sd63_i_idademax == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_idademax"]:$this->sd63_i_idademax);
-       $this->sd63_f_sh = ($this->sd63_f_sh == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_f_sh"]:$this->sd63_f_sh);
-       $this->sd63_f_sa = ($this->sd63_f_sa == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_f_sa"]:$this->sd63_f_sa);
-       $this->sd63_f_sp = ($this->sd63_f_sp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_f_sp"]:$this->sd63_f_sp);
-       $this->sd63_i_financiamento = ($this->sd63_i_financiamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_financiamento"]:$this->sd63_i_financiamento);
-       $this->sd63_i_rubrica = ($this->sd63_i_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_rubrica"]:$this->sd63_i_rubrica);
-       $this->sd63_i_anocomp = ($this->sd63_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_anocomp"]:$this->sd63_i_anocomp);
-       $this->sd63_i_mescomp = ($this->sd63_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_mescomp"]:$this->sd63_i_mescomp);
+       $this->sd63_i_execucaomax = ($this->sd63_i_execucaomax === 0 || $this->sd63_i_execucaomax === 0.0 || $this->sd63_i_execucaomax == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_execucaomax"]:$this->sd63_i_execucaomax);
+       $this->sd63_i_maxdias = ($this->sd63_i_maxdias === 0 || $this->sd63_i_maxdias === 0.0 || $this->sd63_i_maxdias == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_maxdias"]:$this->sd63_i_maxdias);
+       $this->sd63_i_pontos = ($this->sd63_i_pontos === 0 || $this->sd63_i_pontos === 0.0 || $this->sd63_i_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_pontos"]:$this->sd63_i_pontos);
+       $this->sd63_i_idademin = ($this->sd63_i_idademin === 0 || $this->sd63_i_idademin === 0.0 || $this->sd63_i_idademin == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_idademin"]:$this->sd63_i_idademin);
+       $this->sd63_i_idademax = ($this->sd63_i_idademax === 0 || $this->sd63_i_idademax === 0.0 || $this->sd63_i_idademax == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_idademax"]:$this->sd63_i_idademax);
+       $this->sd63_f_sh = ($this->sd63_f_sh === 0 || $this->sd63_f_sh === 0.0 || $this->sd63_f_sh == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_f_sh"]:$this->sd63_f_sh);
+       $this->sd63_f_sa = ($this->sd63_f_sa === 0 || $this->sd63_f_sa === 0.0 || $this->sd63_f_sa == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_f_sa"]:$this->sd63_f_sa);
+       $this->sd63_f_sp = ($this->sd63_f_sp === 0 || $this->sd63_f_sp === 0.0 || $this->sd63_f_sp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_f_sp"]:$this->sd63_f_sp);
+       $this->sd63_i_financiamento = ($this->sd63_i_financiamento === 0 || $this->sd63_i_financiamento === 0.0 || $this->sd63_i_financiamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_financiamento"]:$this->sd63_i_financiamento);
+       $this->sd63_i_rubrica = ($this->sd63_i_rubrica === 0 || $this->sd63_i_rubrica === 0.0 || $this->sd63_i_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_rubrica"]:$this->sd63_i_rubrica);
+       $this->sd63_i_anocomp = ($this->sd63_i_anocomp === 0 || $this->sd63_i_anocomp === 0.0 || $this->sd63_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_anocomp"]:$this->sd63_i_anocomp);
+       $this->sd63_i_mescomp = ($this->sd63_i_mescomp === 0 || $this->sd63_i_mescomp === 0.0 || $this->sd63_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_mescomp"]:$this->sd63_i_mescomp);
      }else{
-       $this->sd63_i_codigo = ($this->sd63_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_codigo"]:$this->sd63_i_codigo);
+       $this->sd63_i_codigo = ($this->sd63_i_codigo === 0 || $this->sd63_i_codigo === 0.0 || $this->sd63_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd63_i_codigo"]:$this->sd63_i_codigo);
      }
    }
    // funcao para inclusao
@@ -283,7 +283,7 @@ class cl_sau_procedimento {
          $this->sd63_i_codigo = $sd63_i_codigo;
        }
      }
-     if(($this->sd63_i_codigo == null) || ($this->sd63_i_codigo == "") ){
+     if(($this->sd63_i_codigo == null) || ($this->sd63_i_codigo === 0 || $this->sd63_i_codigo === 0.0 || $this->sd63_i_codigo == "") ){
        $this->erro_sql = " Campo sd63_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -782,7 +782,7 @@ class cl_sau_procedimento {
    function sql_query ( $sd63_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -806,7 +806,7 @@ class cl_sau_procedimento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -819,7 +819,7 @@ class cl_sau_procedimento {
    function sql_query_file ( $sd63_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -840,7 +840,7 @@ class cl_sau_procedimento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
