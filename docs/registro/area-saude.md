@@ -304,7 +304,22 @@ Todos os prefixos do `location` (9.245 telas; `iss4_siss002` pulada) e o `map` i
 
 Nenhuma regressão dos 7 lotes da Saúde.
 
-**Estado:** os 7 lotes da Saúde concluídos e a bateria completa feita (commits locais). Faltam a conferência pelo proxy das
-telas de menu da Saúde e o envio — cada um só com o pedido do usuário. Falta a etapa do fim da área: bateria completa (todos os prefixos
+### 🏁 ÁREA SAÚDE CONCLUÍDA (01/11/2026)
+
+Conferido **pelo proxy, tela de menu por tela de menu** (`X-Ecidade-Runtime` em `/w/2/<tela>`), a partir do banco
+(`atendcadareamod` → área SAÚDE → `db_menu` → `db_itensmenu`, sem excluir prefixo; nomes resolvidos para a grafia do disco,
+sem diferença de maiúsculas): **493 de 493** telas de menu servidas pelo PHP 8.5, **0 fantasmas**. 534 entradas por módulo:
+Ambulatorial 210, Farmácia 105, Laboratório 77, Agendamento 41, TFD 40, Vacinas 36, fumam 15, Hiperdia 10. Abas e destinos
+(passo 8b): 601 telas examinadas no lote 7, nada indo ao 5.6.
+
+| | |
+|---|---|
+| Módulos | **8 de 8** — Ambulatorial, Farmácia, Laboratório, Agendamento, TFD, Vacinas, fumam, Hiperdia |
+| Lotes | 7, commits locais na `6saude-migrado` |
+| Alterados | ~1.050 arquivos pelo Rector (26 + 157 + 105 + 161 + 306 + 107 + 3, sobrepostos entre lotes) + ~75 à mão |
+| Nível 3 (POST real) | amostra de 6 telas, **6/6 idênticas**; CGS não medida (limite do harness) |
+| Bateria completa do fim da área | `map` **1.108/1.108**; `location` **9.213/9.245** (todas caracterizadas) |
+| Telas de menu pelo proxy | **493/493** no 8.5 |
+| Envio ao GitHub | **pendente — aguarda o pedido do usuário** | Falta a etapa do fim da área: bateria completa (todos os prefixos
 do `location` + o `map` inteiro), a conferência pelo proxy das telas de menu da Saúde e o envio — cada uma só com o pedido do
 usuário.
