@@ -236,6 +236,53 @@ Roteamento: `mat` é prefixo compartilhado (Patrimonial), então pelo `map`: lot
 de recriar. Conferido: as 3 telas (inclusive `/w/2/`) → 8.5; `login` → 5.6. **Passo 8b sobre a área inteira: 601 telas no
 8.5 examinadas (menu + abas), nada indo ao 5.6** (19 iframes de pasta).
 
+### Nível 3 (POST real) — amostra da Saúde (01/11/2026, pedido do usuário)
+
+Até aqui a Saúde só tinha o caminho de escrita verificado nos níveis 1–2 (`escrita.php`, forma negada); POST real só houve no
+Tributário e em RH. Amostra de uma tela de inclusão por prefixo (`scratchpad/demo_nivel3.sh` / `escrita_post.py`):
+
+| Tela | Tabela | Resultado |
+|---|---|---|
+| `far1_far_programa001` | `far_programa` | **IDÊNTICO** (INSERT de negócio e as demais escritas: 2 = 2) |
+| `lab1_lab_setor001` | `lab_setor` | **IDÊNTICO** (6 = 6 escritas) |
+| `tfd1_tfd_destino001` | `tfd_destino` | **IDÊNTICO** (10 = 10) |
+| `fum1_associadotiposservicos001` | `associadotiposservicos` | **IDÊNTICO** (2 = 2) |
+| `vac1_vac_sala001` | `vac_sala` | **IDÊNTICO** em 3 rodadas; a contagem de *statements* oscilou (30/31, 32/30, 30/30) trocando de lado — ruído de outras conexões no log compartilhado, não do runtime |
+| `sau1_unidades001` | `unidades` | **IDÊNTICO**, com payload à mão (`sd02_i_codigo=1` — a chave é o departamento, digitada — e CNES de 7 dígitos); o automático era inconclusivo |
+| `sau1_cgs_und002` (alteração de CGS) | `cgs_und` | **NÃO MEDIDO** — ver abaixo |
+| `sau1_cgs_und001` (inclusão de CGS) | `cgs*` | **NÃO MEDIDO** — ver abaixo |
+
+**`cl_cgs_und::alterarExt` é código morto:** nenhum arquivo o chama, e a coluna `z01_b_faleceu` nem existe em `cgs_und` (está em
+`cgs_und_ext`). A guarda da forma negada posta nele no lote 2 não muda o comportamento do sistema; não há POST que a exercite.
+
+**CGS: o harness não serve, e deixou dados no banco (limpos).** Duas causas, ambas do instrumento, não do porte:
+1. **"ABORTADO" NÃO significa "nada foi enviado".** O `escrita_post.py` restaura **entre** os runtimes: o POST do 5.6 já gravou
+   quando a restauração falha. A doc do `demo_nivel3.sh` dizia o contrário. Na alteração, a restauração apaga a linha mudada e a
+   reinsere, e a única CGS da base (a 0, "NAO INFORMADO") é referenciada por `cgs_undendereco` → abortou com a linha 0 alterada.
+2. **Gatilho que escreve fora das tabelas informadas:** `tg_cgs_endereco_inc_alt` (`fc_cgs_endereco_inc_alt`), em INSERT e
+   UPDATE de `cgs_und`, cria a cadeia de endereço (`cadendermunicipio`, `cadenderbairro`, `cadenderrua`, `cadenderruaruastipo`,
+   `cadenderbairrocadenderrua`, `cadenderlocal`, `endereco`, `cgs_undendereco`). Escrita de gatilho **não aparece no log**
+   (`log_statement` só registra o que o cliente manda), então nem a separação negócio/infra do harness a vê. O próprio UPDATE de
+   restauração que fiz na linha 0 disparou o gatilho e criou mais uma cadeia.
+
+Limpeza, com a prova de que cada linha era do teste: a linha 0 de `cgs_und` reposta coluna a coluna a partir da cópia do harness
+(23 colunas; conferida `row_to_json` igual); apagadas `cgs`/`cgs_und` 4, `cgs_cartaosus` 6, `cgs_und_ext` da CGS 0,
+`cgs_undendereco` 2–3, `endereco` 4–6, `cadenderlocal` 4–5, `cadenderbairrocadenderrua` 1.250.465–466, `cadenderrua` e
+`cadenderruaruastipo` 1.139.456–457, `cadenderbairro` 61.452, `cadendermunicipio` 31.179. Prova: **tudo acima do maior id do dump
+original** (`docker/database/ecidade_base.sql`, de 05/09), com os valores do payload (`'1'`, `'TESTE_N3'`), **cada sequência
+avançada exatamente pelo número de linhas novas**, e nenhuma referência fora da cadeia (agência bancária, CGM, itinerário/ponto de
+parada, CEP, parâmetros). Sequências devolvidas ao valor do dump (`cgs_undendereco` e `cgs_und_ext` ao estado "nunca chamada",
+`last_value` 1 com `is_called` falso, coerente com tabelas vazias no dump). Contagens finais iguais às do dump. Ficaram só os
+lançamentos de auditoria (`db_acount` 88.957–88.965), como nas rodadas de nível 3 anteriores (88.901–88.956 são de RH e Veículos).
+
+**Outro erro meu, no mesmo dia:** uma sondagem com `curl -X POST` direto ao 5.6, para ler a mensagem de validação de
+`sau1_unidades001`, **gravou de verdade** (uma linha em `unidades`) fora do harness, e a comparação seguinte saiu com chave
+duplicada nos dois lados. Linha apagada (CNES `'1'`, do payload da sondagem) e teste refeito. **Regra: nunca mandar POST a uma
+tela fora do `escrita_post.py`.**
+
+**Para medir a CGS** o harness precisaria (a) restaurar linha alterada por UPDATE em vez de DELETE+INSERT e (b) enxergar escrita
+de gatilho (comparar as tabelas por conteúdo, antes e depois, em vez de depender do log). Fica para decisão do usuário.
+
 **Estado:** os 7 lotes da Saúde concluídos (commits locais). Falta a etapa do fim da área: bateria completa (todos os prefixos
 do `location` + o `map` inteiro), a conferência pelo proxy das telas de menu da Saúde e o envio — cada uma só com o pedido do
 usuário.

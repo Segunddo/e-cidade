@@ -21,8 +21,10 @@
 #   INCONCLUSIVO  nada foi gravado: o formulario montado automaticamente nao passou
 #                 na validacao da tela (acontece em ~1/3 das telas); montar a mao
 #   ABORTADO      o banco recusou repor a tabela porque outra a referencia (chave
-#                 estrangeira) -- trava de seguranca: o teste para ANTES de enviar
-#                 o formulario e nada e alterado. Acrescentar a tabela filha citada
+#                 estrangeira). ATENCAO: a reposicao roda ENTRE os runtimes, entao o
+#                 POST do 5.6 JA GRAVOU quando isto aparece -- conferir e limpar a mao
+#                 (Saude, 01/11/2026: cgs_und). Gatilhos gravam em outras tabelas sem
+#                 aparecer no log. Acrescentar a tabela filha citada
 #                 na mensagem ao 2o argumento (filha primeiro), ou escolher outra tela
 #
 # Exige o ambiente no ar (5.6, 8.5 e banco). Nao altera nada de forma permanente:
