@@ -28,7 +28,7 @@ class cl_matmaterconteudomaterial {
                  m08_quantidade = float8 = Quantidade 
                  ";
    //funcao construtor da classe 
-   function cl_matmaterconteudomaterial() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matmaterconteudomaterial"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_matmaterconteudomaterial {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m08_codigo = ($this->m08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m08_codigo"]:$this->m08_codigo);
-       $this->m08_matmater = ($this->m08_matmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m08_matmater"]:$this->m08_matmater);
-       $this->m08_unidade = ($this->m08_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["m08_unidade"]:$this->m08_unidade);
-       $this->m08_quantidade = ($this->m08_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["m08_quantidade"]:$this->m08_quantidade);
+       $this->m08_codigo = ($this->m08_codigo === 0 || $this->m08_codigo === 0.0 || $this->m08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m08_codigo"]:$this->m08_codigo);
+       $this->m08_matmater = ($this->m08_matmater === 0 || $this->m08_matmater === 0.0 || $this->m08_matmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m08_matmater"]:$this->m08_matmater);
+       $this->m08_unidade = ($this->m08_unidade === 0 || $this->m08_unidade === 0.0 || $this->m08_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["m08_unidade"]:$this->m08_unidade);
+       $this->m08_quantidade = ($this->m08_quantidade === 0 || $this->m08_quantidade === 0.0 || $this->m08_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["m08_quantidade"]:$this->m08_quantidade);
      }else{
-       $this->m08_codigo = ($this->m08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m08_codigo"]:$this->m08_codigo);
+       $this->m08_codigo = ($this->m08_codigo === 0 || $this->m08_codigo === 0.0 || $this->m08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m08_codigo"]:$this->m08_codigo);
      }
    }
    // funcao para Inclusão
@@ -107,7 +107,7 @@ class cl_matmaterconteudomaterial {
          $this->m08_codigo = $m08_codigo; 
        }
      }
-     if(($this->m08_codigo == null) || ($this->m08_codigo == "") ){ 
+     if(($this->m08_codigo == null) || ($this->m08_codigo === 0 || $this->m08_codigo === 0.0 || $this->m08_codigo == "") ){ 
        $this->erro_sql = " Campo m08_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -50,6 +50,7 @@ da área, envio só depois dela.
 | 4 `far` | 2.223 | 161 Rector + 1 `magic_quotes` + 1 `break` + 6 guardas `pg_*` à mão | 2.223/2.223 | 389/389 (12 falham nos dois) | 895 (diffs só do harness) | 22.649 linhas, diffs só do harness | 2.511 pares, 0 div. | **192/192** |
 | 5 `sau1_` | 2.516 | 306 Rector + 2 `(int)` + 3 guardas de conexão à mão | 2.516/2.516 | 391/391 (12 falham nos dois) | 950 (diffs só do harness) | 23.965 linhas, diffs só do harness | 2.483 pares, 0 div. | **355/355** + dirigida 15/15 + aba 3/3 |
 | 6 `sau2_`+`sau3_`+`sau4_`+`sau_` | 2.759 | 107 Rector + 2 ternários + 1 `break` + 22 guardas `pg_*` à mão | 2.759/2.759 | 510/510 (14 falham nos dois) | 1.143 (diffs só do harness) | 28.584 linhas, diffs só do harness | 2.948 pares, 0 div. | **273/274** (1 caracterizada) |
+| 7 `mat` (3 telas) | 1.079 | 3 Rector | 1.079/1.079 | 1/1 | 1 classe, 0 div. | 21 linhas, 0 div. | 4 pares, 0 div. | **3/3** |
 
 **Lote 1 — `fum`, `hip`, `age`, `amb`** (71 arquivos, roteados no `location`; 31/10/2026). Enumerador: 57 alvos, dos
 quais **11 são o falso positivo já registrado** no `tra` (`cgm*`, `db_db_uf`, `db_db_userinst`…: portados por commits
@@ -222,4 +223,19 @@ Roteamento: **`sau1` → `sau`** no `location` e nos dois scripts; `sau` na `FAS
 Conferido: `sau1_`, `sau2_`, `sau3_`, `/w/2/sau4_…RPC`, `Sau_` → 8.5; `login` → 5.6. Passo 8b: nada indo ao 5.6 (19 iframes de
 pasta).
 
-**Estado:** lote 6 concluído (commit local). Aguardando o pedido do lote 7 (as 3 telas `mat` + abas do passo 8b).
+**Lote 7 — as 3 telas `mat` da Saúde + abas** (01/11/2026). Levantamento pelo banco depois do lote 6: das 493 telas de menu
+da Saúde em disco, faltavam só `mat1_matmaterconteudomaterial001/002/003` (Ambulatorial). Universo 1.079; 14 alvos, dos quais
+11 são o falso positivo conhecido. Rector em **3 arquivos** (`classes/db_matmaterconteudomaterial_classe.php` e as telas 002/003),
+só regras vetadas (2 `parse_str`, guardas, 1 construtor) — conferidas pelo diff, porque a simulação não gravou a saída: **o
+`/tmp` da máquina é limpo no reinício e levou a pasta de rascunho da sessão**, então recriá-la antes de usar. Remanescentes 0;
+lint 1.079/1.079; portão 0; carga, instância, escrita e forma negada (4 pares) idênticas. A classe só é usada pelas 3 telas e
+por `func_matmaterconteudomaterial.php` (não servida). Bateria **3/3**.
+
+Roteamento: `mat` é prefixo compartilhado (Patrimonial), então pelo `map`: lote **`sa:mat`** acrescentado ao comando do
+`gera_map_faseb.py` (a área casa pelo começo do nome; só a Saúde começa com "SA") → **`map` 1.108 entradas**. `nginx -t` antes
+de recriar. Conferido: as 3 telas (inclusive `/w/2/`) → 8.5; `login` → 5.6. **Passo 8b sobre a área inteira: 601 telas no
+8.5 examinadas (menu + abas), nada indo ao 5.6** (19 iframes de pasta).
+
+**Estado:** os 7 lotes da Saúde concluídos (commits locais). Falta a etapa do fim da área: bateria completa (todos os prefixos
+do `location` + o `map` inteiro), a conferência pelo proxy das telas de menu da Saúde e o envio — cada uma só com o pedido do
+usuário.
