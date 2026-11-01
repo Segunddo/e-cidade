@@ -49,6 +49,7 @@ da área, envio só depois dela.
 | 3 `lab` | 1.578 | 105 Rector + 4 guardas `pg_*` + 1 forma negada (formulário) à mão | 1.577/1.578 (1 não compila em nenhum) | 293/293 (12 falham nos dois) | 493 (diffs só do harness) | 12.886 linhas, diffs só do harness | 1.546 pares, 0 div. | **193/195** (2 caracterizadas) |
 | 4 `far` | 2.223 | 161 Rector + 1 `magic_quotes` + 1 `break` + 6 guardas `pg_*` à mão | 2.223/2.223 | 389/389 (12 falham nos dois) | 895 (diffs só do harness) | 22.649 linhas, diffs só do harness | 2.511 pares, 0 div. | **192/192** |
 | 5 `sau1_` | 2.516 | 306 Rector + 2 `(int)` + 3 guardas de conexão à mão | 2.516/2.516 | 391/391 (12 falham nos dois) | 950 (diffs só do harness) | 23.965 linhas, diffs só do harness | 2.483 pares, 0 div. | **355/355** + dirigida 15/15 + aba 3/3 |
+| 6 `sau2_`+`sau3_`+`sau4_`+`sau_` | 2.759 | 107 Rector + 2 ternários + 1 `break` + 22 guardas `pg_*` à mão | 2.759/2.759 | 510/510 (14 falham nos dois) | 1.143 (diffs só do harness) | 28.584 linhas, diffs só do harness | 2.948 pares, 0 div. | **273/274** (1 caracterizada) |
 
 **Lote 1 — `fum`, `hip`, `age`, `amb`** (71 arquivos, roteados no `location`; 31/10/2026). Enumerador: 57 alvos, dos
 quais **11 são o falso positivo já registrado** no `tra` (`cgm*`, `db_db_uf`, `db_db_userinst`…: portados por commits
@@ -189,4 +190,36 @@ como aba `a2`. `pro` é prefixo compartilhado, roteado por `map`. Universo da ab
 idênticas (75 linhas), forma negada sem pares; a aba **3/3** (sem parâmetro, com `z01_numcgm`, com `db_opcao`). Posta em
 `faseb_map_abas.txt` → **`map` 1.105 entradas**; levantamento refeito: nada indo ao 5.6 (16 iframes de pasta), sem 2º salto.
 
-**Estado:** lote 5 concluído (commit local). Aguardando o pedido do lote 6 (`sau2_`, `sau3_`, `sau4_`, `sau_`).
+**Lote 6 — `sau2_`, `sau3_`, `sau4_`, `sau_`** (274 arquivos: 116 + 34 + 121 + 3; o prefixo `sau` passa INTEIRO ao `location`;
+31/10/2026). 134 alvos. `split()`: 140 `"#"`, 1 `"XX"` — literais. Rector em **107 arquivos**, só regras vetadas (61 `parse_str`,
+41 guardas, 40 construtores, 37 `split`, 1 `${$var}`), 0 na 2ª passada; nenhuma `OptionalParametersAfterRequired`. Remanescentes
+0; portão 0 ausentes; carga 510/510.
+
+`php -l`: 3 arquivos compilavam no 5.6 e não no 8.5, todos de categoria do catálogo:
+- **Ternário aninhado sem parênteses** (`sau2_sau_encaminhamentos002.php:387`, `sau2_sau_encaminhamentos003.php:682`):
+  `empty($sexo) ? '' : $sexo == 'M' ? 'Masculino' : 'Feminino'`. No 5.6 associa à esquerda → parênteses à esquerda. Fiel ao
+  ponto de manter o defeito: sexo vazio sai **"Feminino"** nos dois (medido, 3 entradas).
+- **`break` fora de laço** (`sau4_ambulatorial.RPC.php:477`, ramo `duplicarCotas` sem grade de horário) → **`exit;`**. No 8.5
+  o RPC **inteiro** não compilava, derrubando todas as outras operações (`exec`) do arquivo, não só esse ramo.
+
+Bateria 251/274 → **273/274**. **22 guardas `pg_*`** em 22 telas (`sau2_*002/003` de relatório, `sau3_consultasaude003`,
+`sau4_agendamento001`, `sau4_agendamento_simplificado001`, `sau4_consultamedica004`, `sau4_prontuariomedico002`,
+`sau4_triagemproc001`): 21 pelo `guarda_ciclo.py`, e `sau2_cgscorretos002.php:60` à mão, porque o ciclo não casa
+`pg_numrows ( $result )` com espaço antes do parêntese. Nenhuma das 9 variáveis guardadas é comparada com `===`. Os
+`@pg_num_rows` viraram `@(... ? pg_num_rows(...) : null)`, equivalente.
+
+A 1 caracterizada: **`sau2_bpa001.php`** — a bateria a abre sem `?bpa=`, e `file("")` é `ValueError` no 8 (no 5.6, aviso e
+`false`; o `foreach` não itera). As 3 chamadoras (`model/saudeBPA.model.php`, `lab4_bpamagnetico002.php`,
+`libs/db_stdlibwebseller.php`) abrem sempre `sau2_bpa001.php?bpa=<arquivo de validação recém-gravado>`. Pelo caminho real,
+**idêntica** com 2 arquivos (linhas soltas; formato `tipo:campo,campo` com dois tipos, que exercita a troca de página e os
+totais).
+
+Classes e escrita: só os diffs conhecidos do harness (os do Financeiro: `empenho → datausu` sem sessão, `lancamentoContabil`,
+`ordemPagamento`; e os de sempre). Bateria dirigida: nenhuma tela servida fora do lote usa os 46 arquivos de `classes/` nem
+o formulário (`db_frmcgserrado`) alterados.
+
+Roteamento: **`sau1` → `sau`** no `location` e nos dois scripts; `sau` na `FASE_A` do gerador; `map` sem mudança (1.105).
+Conferido: `sau1_`, `sau2_`, `sau3_`, `/w/2/sau4_…RPC`, `Sau_` → 8.5; `login` → 5.6. Passo 8b: nada indo ao 5.6 (19 iframes de
+pasta).
+
+**Estado:** lote 6 concluído (commit local). Aguardando o pedido do lote 7 (as 3 telas `mat` + abas do passo 8b).

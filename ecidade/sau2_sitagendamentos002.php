@@ -28,7 +28,8 @@
 set_time_limit(0);
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
  $unidade = str_replace("X",",",$unidades);
  $data1   = str_replace("X","-",$data1);
  $data2   = str_replace("X","-",$data2);
@@ -49,7 +50,7 @@ $SQL= "  SELECT sd02_i_codigo,
       ";
 
 $Query = @db_query($SQL);
-$Linhas = @pg_num_rows($Query);
+$Linhas = @($Query ? pg_num_rows($Query) : null);
 if($Linhas == 0){
  echo "<table width='100%'>
         <tr>

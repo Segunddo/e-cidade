@@ -28,7 +28,7 @@ class cl_motivoalta {
                  sd01_finalizaatendimento = bool = Finaliza Atendimento 
                  ";
    //funcao construtor da classe 
-   function cl_motivoalta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("motivoalta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_motivoalta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd01_codigo = ($this->sd01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd01_codigo"]:$this->sd01_codigo);
-       $this->sd01_codigosus = ($this->sd01_codigosus == ""?@$GLOBALS["HTTP_POST_VARS"]["sd01_codigosus"]:$this->sd01_codigosus);
+       $this->sd01_codigo = ($this->sd01_codigo === 0 || $this->sd01_codigo === 0.0 || $this->sd01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd01_codigo"]:$this->sd01_codigo);
+       $this->sd01_codigosus = ($this->sd01_codigosus === 0 || $this->sd01_codigosus === 0.0 || $this->sd01_codigosus == ""?@$GLOBALS["HTTP_POST_VARS"]["sd01_codigosus"]:$this->sd01_codigosus);
        $this->sd01_descricao = ($this->sd01_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd01_descricao"]:$this->sd01_descricao);
        $this->sd01_finalizaatendimento = ($this->sd01_finalizaatendimento == "f"?@$GLOBALS["HTTP_POST_VARS"]["sd01_finalizaatendimento"]:$this->sd01_finalizaatendimento);
      }else{
-       $this->sd01_codigo = ($this->sd01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd01_codigo"]:$this->sd01_codigo);
+       $this->sd01_codigo = ($this->sd01_codigo === 0 || $this->sd01_codigo === 0.0 || $this->sd01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd01_codigo"]:$this->sd01_codigo);
      }
    }
    // funcao para inclusao
@@ -107,7 +107,7 @@ class cl_motivoalta {
          $this->sd01_codigo = $sd01_codigo; 
        }
      }
-     if(($this->sd01_codigo == null) || ($this->sd01_codigo == "") ){ 
+     if(($this->sd01_codigo == null) || ($this->sd01_codigo === 0 || $this->sd01_codigo === 0.0 || $this->sd01_codigo == "") ){ 
        $this->erro_sql = " Campo sd01_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

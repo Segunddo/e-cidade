@@ -52,7 +52,7 @@ class cl_medicocid {
                  sd56_i_cid = int4 = CID 
                  ";
    //funcao construtor da classe 
-   function cl_medicocid() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("medicocid"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_medicocid {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd56_i_codigo = ($this->sd56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd56_i_codigo"]:$this->sd56_i_codigo);
-       $this->sd56_i_profissional = ($this->sd56_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["sd56_i_profissional"]:$this->sd56_i_profissional);
-       $this->sd56_i_cid = ($this->sd56_i_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["sd56_i_cid"]:$this->sd56_i_cid);
+       $this->sd56_i_codigo = ($this->sd56_i_codigo === 0 || $this->sd56_i_codigo === 0.0 || $this->sd56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd56_i_codigo"]:$this->sd56_i_codigo);
+       $this->sd56_i_profissional = ($this->sd56_i_profissional === 0 || $this->sd56_i_profissional === 0.0 || $this->sd56_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["sd56_i_profissional"]:$this->sd56_i_profissional);
+       $this->sd56_i_cid = ($this->sd56_i_cid === 0 || $this->sd56_i_cid === 0.0 || $this->sd56_i_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["sd56_i_cid"]:$this->sd56_i_cid);
      }else{
-       $this->sd56_i_codigo = ($this->sd56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd56_i_codigo"]:$this->sd56_i_codigo);
+       $this->sd56_i_codigo = ($this->sd56_i_codigo === 0 || $this->sd56_i_codigo === 0.0 || $this->sd56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd56_i_codigo"]:$this->sd56_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_medicocid {
          $this->sd56_i_codigo = $sd56_i_codigo; 
        }
      }
-     if(($this->sd56_i_codigo == null) || ($this->sd56_i_codigo == "") ){ 
+     if(($this->sd56_i_codigo == null) || ($this->sd56_i_codigo === 0 || $this->sd56_i_codigo === 0.0 || $this->sd56_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd56_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_medicocid {
    function sql_query ( $sd56_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_medicocid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_medicocid {
    function sql_query_file ( $sd56_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_medicocid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

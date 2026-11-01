@@ -54,7 +54,7 @@ class cl_sau_agendaexameconfirmaresultado {
                  s134_c_valor = varchar(10) = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_sau_agendaexameconfirmaresultado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_agendaexameconfirmaresultado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_sau_agendaexameconfirmaresultado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s134_i_codigo = ($this->s134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_codigo"]:$this->s134_i_codigo);
-       $this->s134_i_agendaexameconfirma = ($this->s134_i_agendaexameconfirma == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_agendaexameconfirma"]:$this->s134_i_agendaexameconfirma);
-       $this->s134_i_examesatributos = ($this->s134_i_examesatributos == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_examesatributos"]:$this->s134_i_examesatributos);
+       $this->s134_i_codigo = ($this->s134_i_codigo === 0 || $this->s134_i_codigo === 0.0 || $this->s134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_codigo"]:$this->s134_i_codigo);
+       $this->s134_i_agendaexameconfirma = ($this->s134_i_agendaexameconfirma === 0 || $this->s134_i_agendaexameconfirma === 0.0 || $this->s134_i_agendaexameconfirma == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_agendaexameconfirma"]:$this->s134_i_agendaexameconfirma);
+       $this->s134_i_examesatributos = ($this->s134_i_examesatributos === 0 || $this->s134_i_examesatributos === 0.0 || $this->s134_i_examesatributos == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_examesatributos"]:$this->s134_i_examesatributos);
        $this->s134_c_valor = ($this->s134_c_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_c_valor"]:$this->s134_c_valor);
      }else{
-       $this->s134_i_codigo = ($this->s134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_codigo"]:$this->s134_i_codigo);
+       $this->s134_i_codigo = ($this->s134_i_codigo === 0 || $this->s134_i_codigo === 0.0 || $this->s134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_codigo"]:$this->s134_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_sau_agendaexameconfirmaresultado {
          $this->s134_i_codigo = $s134_i_codigo; 
        }
      }
-     if(($this->s134_i_codigo == null) || ($this->s134_i_codigo == "") ){ 
+     if(($this->s134_i_codigo == null) || ($this->s134_i_codigo === 0 || $this->s134_i_codigo === 0.0 || $this->s134_i_codigo == "") ){ 
        $this->erro_sql = " Campo s134_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_sau_agendaexameconfirmaresultado {
    function sql_query ( $s134_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_sau_agendaexameconfirmaresultado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_sau_agendaexameconfirmaresultado {
    function sql_query_file ( $s134_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_sau_agendaexameconfirmaresultado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -41,7 +41,8 @@ include(modification("dbforms/db_classesgenericas.php"));
 include(modification("classes/db_sau_motivo_ausencia_classe.php"));
 $clmotivo_ausencia = new cl_sau_motivo_ausencia;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;

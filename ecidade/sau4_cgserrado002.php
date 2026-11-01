@@ -32,14 +32,15 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_sau_cgserrado_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"] );
+parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"], $__qs );
+extract($__qs);
 db_postmemory ( $HTTP_POST_VARS );
 
 $clcgserrado = new cl_sau_cgserrado ( );
 $db_opcao = 22;
 $db_botao = false;
 if ((isset ( $HTTP_POST_VARS ["db_opcao"] ) && $HTTP_POST_VARS ["db_opcao"]) == "Alterar") {
-	
+
 	$sql1 = "select z01_v_nome from cgs_und where z01_i_cgsund = $s128_i_numcgs ";
 	$result1 = db_query ( $sql1 );
 	$linhas1 = pg_num_rows ( $result1 );
@@ -54,7 +55,7 @@ if ((isset ( $HTTP_POST_VARS ["db_opcao"] ) && $HTTP_POST_VARS ["db_opcao"]) == 
 	} else {
 		db_msgbox ( "O cgs digitato inválido" );
 	}
-	
+
 //$s128_||_nome = $z01_nome;
 
 

@@ -31,7 +31,8 @@ include(modification("libs/db_sql.php"));
 include(modification("classes/db_prontuariomedico_classe.php"));
 include(modification("classes/db_cgs_und_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 set_time_limit(0);
@@ -45,7 +46,7 @@ db_fieldsmemory($result,0);
 
 
 $query = @db_query($clprontuariomedico->sql_query("","*","sd32_d_atendimento desc ","sd32_i_numcgs = $cgs" ));
-$linhas = @pg_num_rows($query);
+$linhas = @($query ? pg_num_rows($query) : null);
 
 if($linhas == 0){
  echo "<table width='100%'>

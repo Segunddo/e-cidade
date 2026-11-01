@@ -29,7 +29,8 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_prontuarios_classe.php"));
 include(modification("classes/db_unidades_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 set_time_limit(0);
 $clunidades = new cl_unidades;
 $clprontuarios = new cl_prontuarios;
@@ -114,7 +115,7 @@ $sql_rel = "select db_depart.coddepto, descrdepto,
 ";
 //die( ">>>>>".$sql_rel );
 $query = @db_query($sql_rel);
-$linhas = @pg_num_rows($query);
+$linhas = @($query ? pg_num_rows($query) : null);
 
 if($linhas == 0){
  echo "<table width='100%'>

@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_cancdebitos_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clcancdebitos = new cl_cancdebitos;
 $clcancdebitos->rotulo->label();
 $unidade = str_replace("X",",",$unidades);
@@ -73,7 +74,7 @@ $result = db_query($sql);
 //db_criatabela($result);
 //exit;
 
-if(pg_num_rows($result) == 0){
+if(($result ? pg_num_rows($result) : null) == 0){
  echo "<table width='100%'>
         <tr>
          <td align='center'><font color='#FF0000' face='arial'><b>Nenhum Registro para o Relatório<br><input type='button' value='Fechar' onclick='window.close()'></b></font></td>

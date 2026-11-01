@@ -30,7 +30,8 @@ include(modification("libs/db_sql.php"));
 include(modification("libs/db_utils.php"));
 include(modification("classes/db_sau_agendatransporte_ext_classe.php"));
 $clsau_agendatransporte = new cl_sau_agendatransporte_ext;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 set_time_limit(0);
 
 
@@ -69,7 +70,7 @@ $pri = true;
        $result=$clsau_agendatransporte->sql_record($sql);
        $i=0;
        $ctr=26;
-       $linhas=pg_num_rows($result);
+       $linhas=($result ? pg_num_rows($result) : null);
        $e=1;
        $d=27;
        for($r=0;$r<26;$r++){

@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_prontuarios_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $clprontuarios = new cl_prontuarios;
 $clprontuarios->rotulo->label();
@@ -57,7 +58,7 @@ $data2 = str_replace("X","-",$data2);
                      sd02_c_razao";
 //echo $SQL_rel;
   $Query_rel = db_query($SQL_rel);
-  $Linhas_rel = pg_num_rows($Query_rel);
+  $Linhas_rel = ($Query_rel ? pg_num_rows($Query_rel) : null);
 if($Linhas_rel == 0){
  echo "<table width='100%'>
         <tr>

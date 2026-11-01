@@ -30,7 +30,7 @@ class cl_classificacaorisco {
                  sd78_cor = varchar(7) = Cor 
                  ";
    //funcao construtor da classe 
-   function cl_classificacaorisco() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("classificacaorisco"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_classificacaorisco {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd78_codigo = ($this->sd78_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd78_codigo"]:$this->sd78_codigo);
+       $this->sd78_codigo = ($this->sd78_codigo === 0 || $this->sd78_codigo === 0.0 || $this->sd78_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd78_codigo"]:$this->sd78_codigo);
        $this->sd78_descricao = ($this->sd78_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd78_descricao"]:$this->sd78_descricao);
-       $this->sd78_peso = ($this->sd78_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["sd78_peso"]:$this->sd78_peso);
+       $this->sd78_peso = ($this->sd78_peso === 0 || $this->sd78_peso === 0.0 || $this->sd78_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["sd78_peso"]:$this->sd78_peso);
        $this->sd78_labelcor = ($this->sd78_labelcor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd78_labelcor"]:$this->sd78_labelcor);
        $this->sd78_cor = ($this->sd78_cor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd78_cor"]:$this->sd78_cor);
      }else{
-       $this->sd78_codigo = ($this->sd78_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd78_codigo"]:$this->sd78_codigo);
+       $this->sd78_codigo = ($this->sd78_codigo === 0 || $this->sd78_codigo === 0.0 || $this->sd78_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd78_codigo"]:$this->sd78_codigo);
      }
    }
    // funcao para inclusao
@@ -119,7 +119,7 @@ class cl_classificacaorisco {
          $this->sd78_codigo = $sd78_codigo; 
        }
      }
-     if(($this->sd78_codigo == null) || ($this->sd78_codigo == "") ){ 
+     if(($this->sd78_codigo == null) || ($this->sd78_codigo === 0 || $this->sd78_codigo === 0.0 || $this->sd78_codigo == "") ){ 
        $this->erro_sql = " Campo sd78_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

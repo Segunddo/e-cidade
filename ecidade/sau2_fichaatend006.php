@@ -40,7 +40,8 @@ include_once(modification("classes/db_prontprofatend_ext_classe.php"));
 
 include_once(modification("dbforms/db_funcoes.php"));
 
-parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"] );
+parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"], $__qs );
+extract($__qs);
 db_postmemory ( $HTTP_POST_VARS );
 
 set_time_limit ( 0 );

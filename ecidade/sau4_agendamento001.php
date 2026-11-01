@@ -43,7 +43,7 @@ $clsau_config        = new cl_sau_config_ext;
 $clsau_upsparalisada = new cl_sau_upsparalisada_ext;
 
 $res_sau_config  = db_query( $clsau_config->sql_query_ext() );
-$booProced       = pg_num_rows( $res_sau_config ) > 0 && pg_result($res_sau_config, 0, "s103_c_agendaproc") == "S";
+$booProced       = ($res_sau_config ? pg_num_rows( $res_sau_config ) : null) > 0 && ($res_sau_config ? pg_result($res_sau_config, 0, "s103_c_agendaproc") : null) == "S";
 
 $sd02_c_centralagenda = "N";
 $upssolicitante       = db_getsession("DB_coddepto");

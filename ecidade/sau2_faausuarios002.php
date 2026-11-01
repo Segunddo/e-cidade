@@ -27,7 +27,8 @@
 
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $data1 = str_replace("X","-",$data1);
 $data2 = str_replace("X","-",$data2);
 $unidade = @$unidade;
@@ -96,9 +97,9 @@ if( !empty($unidade) ){
 
 }
 $query_pront = db_query($sql_pront);
-$linhas_pront = pg_num_rows($query_pront);
+$linhas_pront = ($query_pront ? pg_num_rows($query_pront) : null);
 $query_agenda = db_query($sql_agenda);
-$linhas_agenda = pg_num_rows($query_agenda);
+$linhas_agenda = ($query_agenda ? pg_num_rows($query_agenda) : null);
 
 if($linhas_pront == 0 and $linhas_agenda == 0){
  echo "<table width='100%'>

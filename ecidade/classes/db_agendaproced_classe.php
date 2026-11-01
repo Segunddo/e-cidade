@@ -52,7 +52,7 @@ class cl_agendaproced {
                  s125_i_procedimento = int8 = Procedimento 
                  ";
    //funcao construtor da classe 
-   function cl_agendaproced() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("agendaproced"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_agendaproced {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s125_i_codigo = ($this->s125_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s125_i_codigo"]:$this->s125_i_codigo);
-       $this->s125_i_agendamento = ($this->s125_i_agendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s125_i_agendamento"]:$this->s125_i_agendamento);
-       $this->s125_i_procedimento = ($this->s125_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["s125_i_procedimento"]:$this->s125_i_procedimento);
+       $this->s125_i_codigo = ($this->s125_i_codigo === 0 || $this->s125_i_codigo === 0.0 || $this->s125_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s125_i_codigo"]:$this->s125_i_codigo);
+       $this->s125_i_agendamento = ($this->s125_i_agendamento === 0 || $this->s125_i_agendamento === 0.0 || $this->s125_i_agendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s125_i_agendamento"]:$this->s125_i_agendamento);
+       $this->s125_i_procedimento = ($this->s125_i_procedimento === 0 || $this->s125_i_procedimento === 0.0 || $this->s125_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["s125_i_procedimento"]:$this->s125_i_procedimento);
      }else{
-       $this->s125_i_codigo = ($this->s125_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s125_i_codigo"]:$this->s125_i_codigo);
+       $this->s125_i_codigo = ($this->s125_i_codigo === 0 || $this->s125_i_codigo === 0.0 || $this->s125_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s125_i_codigo"]:$this->s125_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_agendaproced {
          $this->s125_i_codigo = $s125_i_codigo; 
        }
      }
-     if(($this->s125_i_codigo == null) || ($this->s125_i_codigo == "") ){ 
+     if(($this->s125_i_codigo == null) || ($this->s125_i_codigo === 0 || $this->s125_i_codigo === 0.0 || $this->s125_i_codigo == "") ){ 
        $this->erro_sql = " Campo s125_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_agendaproced {
    function sql_query ( $s125_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_agendaproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -403,7 +403,7 @@ class cl_agendaproced {
    function sql_query_procedimento ( $s125_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_agendaproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_agendaproced {
    function sql_query_file ( $s125_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_agendaproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

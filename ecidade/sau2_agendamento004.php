@@ -31,7 +31,8 @@ require_once(modification('libs/db_utils.php'));
 require_once(modification('libs/db_stdlibwebseller.php'));
 require_once(modification('classes/db_sau_config_ext_classe.php'));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 set_time_limit(0);
 
 function novoComprovante(FPDF $oPdf, $oAgendamento, $oDbConfig, $oSauConfig, $sIdade, $sDiaSemana) {

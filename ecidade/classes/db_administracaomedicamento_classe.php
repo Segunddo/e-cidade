@@ -39,7 +39,7 @@ class cl_administracaomedicamento {
                  sd105_medicamento = int4 = Medicamento
                  ";
    //funcao construtor da classe
-   function cl_administracaomedicamento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("administracaomedicamento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -56,11 +56,11 @@ class cl_administracaomedicamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd105_codigo = ($this->sd105_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_codigo"]:$this->sd105_codigo);
-       $this->sd105_usuario = ($this->sd105_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_usuario"]:$this->sd105_usuario);
-       $this->sd105_unidadesaida = ($this->sd105_unidadesaida == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_unidadesaida"]:$this->sd105_unidadesaida);
-       $this->sd105_quantidade = ($this->sd105_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_quantidade"]:$this->sd105_quantidade);
-       $this->sd105_quantidadetotal = ($this->sd105_quantidadetotal == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_quantidadetotal"]:$this->sd105_quantidadetotal);
+       $this->sd105_codigo = ($this->sd105_codigo === 0 || $this->sd105_codigo === 0.0 || $this->sd105_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_codigo"]:$this->sd105_codigo);
+       $this->sd105_usuario = ($this->sd105_usuario === 0 || $this->sd105_usuario === 0.0 || $this->sd105_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_usuario"]:$this->sd105_usuario);
+       $this->sd105_unidadesaida = ($this->sd105_unidadesaida === 0 || $this->sd105_unidadesaida === 0.0 || $this->sd105_unidadesaida == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_unidadesaida"]:$this->sd105_unidadesaida);
+       $this->sd105_quantidade = ($this->sd105_quantidade === 0 || $this->sd105_quantidade === 0.0 || $this->sd105_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_quantidade"]:$this->sd105_quantidade);
+       $this->sd105_quantidadetotal = ($this->sd105_quantidadetotal === 0 || $this->sd105_quantidadetotal === 0.0 || $this->sd105_quantidadetotal == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_quantidadetotal"]:$this->sd105_quantidadetotal);
        if($this->sd105_data == ""){
          $this->sd105_data_dia = ($this->sd105_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_data_dia"]:$this->sd105_data_dia);
          $this->sd105_data_mes = ($this->sd105_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_data_mes"]:$this->sd105_data_mes);
@@ -70,9 +70,9 @@ class cl_administracaomedicamento {
          }
        }
        $this->sd105_hora = ($this->sd105_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_hora"]:$this->sd105_hora);
-       $this->sd105_medicamento = ($this->sd105_medicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_medicamento"]:$this->sd105_medicamento);
+       $this->sd105_medicamento = ($this->sd105_medicamento === 0 || $this->sd105_medicamento === 0.0 || $this->sd105_medicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_medicamento"]:$this->sd105_medicamento);
      }else{
-       $this->sd105_codigo = ($this->sd105_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_codigo"]:$this->sd105_codigo);
+       $this->sd105_codigo = ($this->sd105_codigo === 0 || $this->sd105_codigo === 0.0 || $this->sd105_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd105_codigo"]:$this->sd105_codigo);
      }
    }
    // funcao para Inclusão
@@ -165,7 +165,7 @@ class cl_administracaomedicamento {
          $this->sd105_codigo = $sd105_codigo;
        }
      }
-     if(($this->sd105_codigo == null) || ($this->sd105_codigo == "") ){
+     if(($this->sd105_codigo == null) || ($this->sd105_codigo === 0 || $this->sd105_codigo === 0.0 || $this->sd105_codigo == "") ){
        $this->erro_sql = " Campo sd105_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

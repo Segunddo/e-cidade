@@ -36,7 +36,8 @@ $clcgscorreto = new cl_sau_cgscorreto ();
 $clrotulo->label("s127_i_numcgs");
 $clrotulo->label("z01_v_nome");
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 if (isset ($opcao) && $opcao == "alterar") {

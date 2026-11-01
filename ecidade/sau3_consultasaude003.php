@@ -35,7 +35,8 @@ include(modification("classes/db_cgs_und_classe.php"));
 include(modification("classes/db_prontuarios_classe.php"));
 include(modification("classes/db_prontproced_ext_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 set_time_limit(0);
@@ -49,7 +50,7 @@ $clcgs_und = new cl_cgs_und;
 $result = $clcgs_und->sql_record( $clcgs_und->sql_query( $cgs ) );
 db_fieldsmemory($result,0);
 $query = @db_query($clprontuariomedico->sql_query("","*, a.z01_nome as profissional","sd32_d_atendimento desc","sd32_i_numcgs = $cgs" ));
-$linhas = @pg_num_rows($query);
+$linhas = @($query ? pg_num_rows($query) : null);
 //die($clprontuariomedico->sql_query("","*","sd32_d_atendimento desc ","sd32_i_numcgs = $cgs" ));
 
 //die($clprontproced->sql_query_prontuario("","*,sau_cid.sd70_c_cid,sau_cid.sd70_c_nome,sau_procedimento.sd63_c_nome,sd29_t_tratamento,m.z01_nome as profissional","sd24_d_cadastro desc ","sd24_i_numcgs = $cgs" ));
@@ -60,7 +61,7 @@ $sSql = $clprontproced->sql_query_prontuario("", "sd24_v_motivo, sd24_v_pressao,
                                              " sd29_t_tratamento,m.z01_nome as profissional","sd24_d_cadastro desc ",
                                              "sd24_i_numcgs = $cgs" );
 $query1 = db_query($sSql);
-$linhas1 = pg_num_rows($query1);
+$linhas1 = ($query1 ? pg_num_rows($query1) : null);
 //die($clprontuarios->sql_query("","*","sd24_d_cadastro desc ","sd24_i_numcgs = $cgs" ));
 
 if($linhas == 0 && $linhas1 == 0 ){
@@ -145,7 +146,7 @@ for($p=0; $p<$linhas1; $p++){
       }
       $sd24_d_cadastro = substr($sd24_d_cadastro,8,2)."/".substr($sd24_d_cadastro,5,2)."/".substr($sd24_d_cadastro,0,4);
       $sd29_t_tratamento_ = trim(stripslashes($sd29_t_tratamento_));
-    
+
       $data = array("$sd24_d_cadastro  $sd24_c_cadastro",
                     "$profissional \n\n\n", 
                     "FAA                  ".$sd29_i_prontuario."          Atendente: $login".
@@ -156,7 +157,7 @@ for($p=0; $p<$linhas1; $p++){
                     "\nCID                   ".$sd70_c_nome_.
                     "\nProcedimento   ".trim($sd63_c_procedimento)." - ".str_pad($sd63_c_nome,60)
                     );
-    
+
        //Draw the border
 //     if($borda == true)
 //     $this->Rect($x,$y,$w,$h);

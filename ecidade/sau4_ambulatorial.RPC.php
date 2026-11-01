@@ -474,7 +474,7 @@ if ($oParam->exec == 'duplicarCotas') {
 
       $oDaoSauCotas->erro_status = "0";
       $oDaoSauCotas->erro_msg    = "Nenhuma grade de horario para a prestadora ".$oParam->aUps."!";
-      break;
+      exit;
 
     }
   }

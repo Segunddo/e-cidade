@@ -35,7 +35,7 @@ class cl_prontuariosmotivoalta {
                  sd25_db_usuarios = int4 = Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_prontuariosmotivoalta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prontuariosmotivoalta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -52,9 +52,9 @@ class cl_prontuariosmotivoalta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd25_codigo = ($this->sd25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_codigo"]:$this->sd25_codigo);
-       $this->sd25_motivoalta = ($this->sd25_motivoalta == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_motivoalta"]:$this->sd25_motivoalta);
-       $this->sd25_prontuarios = ($this->sd25_prontuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_prontuarios"]:$this->sd25_prontuarios);
+       $this->sd25_codigo = ($this->sd25_codigo === 0 || $this->sd25_codigo === 0.0 || $this->sd25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_codigo"]:$this->sd25_codigo);
+       $this->sd25_motivoalta = ($this->sd25_motivoalta === 0 || $this->sd25_motivoalta === 0.0 || $this->sd25_motivoalta == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_motivoalta"]:$this->sd25_motivoalta);
+       $this->sd25_prontuarios = ($this->sd25_prontuarios === 0 || $this->sd25_prontuarios === 0.0 || $this->sd25_prontuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_prontuarios"]:$this->sd25_prontuarios);
        if($this->sd25_data == ""){
          $this->sd25_data_dia = ($this->sd25_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_data_dia"]:$this->sd25_data_dia);
          $this->sd25_data_mes = ($this->sd25_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_data_mes"]:$this->sd25_data_mes);
@@ -64,9 +64,9 @@ class cl_prontuariosmotivoalta {
          }
        }
        $this->sd25_hora = ($this->sd25_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_hora"]:$this->sd25_hora);
-       $this->sd25_db_usuarios = ($this->sd25_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_db_usuarios"]:$this->sd25_db_usuarios);
+       $this->sd25_db_usuarios = ($this->sd25_db_usuarios === 0 || $this->sd25_db_usuarios === 0.0 || $this->sd25_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_db_usuarios"]:$this->sd25_db_usuarios);
      }else{
-       $this->sd25_codigo = ($this->sd25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_codigo"]:$this->sd25_codigo);
+       $this->sd25_codigo = ($this->sd25_codigo === 0 || $this->sd25_codigo === 0.0 || $this->sd25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_codigo"]:$this->sd25_codigo);
      }
    }
    // funcao para inclusao
@@ -141,7 +141,7 @@ class cl_prontuariosmotivoalta {
          $this->sd25_codigo = $sd25_codigo; 
        }
      }
-     if(($this->sd25_codigo == null) || ($this->sd25_codigo == "") ){ 
+     if(($this->sd25_codigo == null) || ($this->sd25_codigo === 0 || $this->sd25_codigo === 0.0 || $this->sd25_codigo == "") ){ 
        $this->erro_sql = " Campo sd25_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
