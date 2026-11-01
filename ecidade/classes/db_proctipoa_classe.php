@@ -50,7 +50,7 @@ class cl_proctipoa {
                  sd20_i_tipoatend = int8 = Tipo de Atendimento 
                  ";
    //funcao construtor da classe 
-   function cl_proctipoa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("proctipoa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_proctipoa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd20_i_procedimento = ($this->sd20_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd20_i_procedimento"]:$this->sd20_i_procedimento);
-       $this->sd20_i_tipoatend = ($this->sd20_i_tipoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["sd20_i_tipoatend"]:$this->sd20_i_tipoatend);
+       $this->sd20_i_procedimento = ($this->sd20_i_procedimento === 0 || $this->sd20_i_procedimento === 0.0 || $this->sd20_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd20_i_procedimento"]:$this->sd20_i_procedimento);
+       $this->sd20_i_tipoatend = ($this->sd20_i_tipoatend === 0 || $this->sd20_i_tipoatend === 0.0 || $this->sd20_i_tipoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["sd20_i_tipoatend"]:$this->sd20_i_tipoatend);
      }else{
      }
    }
@@ -250,7 +250,7 @@ $result = @db_query($sql);
    function sql_query ( $oid = null,$campos="proctipoa.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -274,7 +274,7 @@ $result = @db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -287,7 +287,7 @@ $result = @db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -305,7 +305,7 @@ $result = @db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

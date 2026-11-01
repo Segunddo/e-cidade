@@ -79,7 +79,7 @@ class cl_sau_agendaexames {
                  s113_c_encaminhamento = varchar(10) = Encaminhamento
                  ";
    //funcao construtor da classe
-   function cl_sau_agendaexames() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_agendaexames");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -96,9 +96,9 @@ class cl_sau_agendaexames {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s113_i_codigo = ($this->s113_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_codigo"]:$this->s113_i_codigo);
-       $this->s113_i_prestadorhorarios = ($this->s113_i_prestadorhorarios == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_prestadorhorarios"]:$this->s113_i_prestadorhorarios);
-       $this->s113_i_numcgs = ($this->s113_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_numcgs"]:$this->s113_i_numcgs);
+       $this->s113_i_codigo = ($this->s113_i_codigo === 0 || $this->s113_i_codigo === 0.0 || $this->s113_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_codigo"]:$this->s113_i_codigo);
+       $this->s113_i_prestadorhorarios = ($this->s113_i_prestadorhorarios === 0 || $this->s113_i_prestadorhorarios === 0.0 || $this->s113_i_prestadorhorarios == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_prestadorhorarios"]:$this->s113_i_prestadorhorarios);
+       $this->s113_i_numcgs = ($this->s113_i_numcgs === 0 || $this->s113_i_numcgs === 0.0 || $this->s113_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_numcgs"]:$this->s113_i_numcgs);
        if($this->s113_d_agendamento == ""){
          $this->s113_d_agendamento_dia = ($this->s113_d_agendamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_d_agendamento_dia"]:$this->s113_d_agendamento_dia);
          $this->s113_d_agendamento_mes = ($this->s113_d_agendamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_d_agendamento_mes"]:$this->s113_d_agendamento_mes);
@@ -115,9 +115,9 @@ class cl_sau_agendaexames {
             $this->s113_d_exame = $this->s113_d_exame_ano."-".$this->s113_d_exame_mes."-".$this->s113_d_exame_dia;
          }
        }
-       $this->s113_i_ficha = ($this->s113_i_ficha == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_ficha"]:$this->s113_i_ficha);
+       $this->s113_i_ficha = ($this->s113_i_ficha === 0 || $this->s113_i_ficha === 0.0 || $this->s113_i_ficha == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_ficha"]:$this->s113_i_ficha);
        $this->s113_c_hora = ($this->s113_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_c_hora"]:$this->s113_c_hora);
-       $this->s113_i_situacao = ($this->s113_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_situacao"]:$this->s113_i_situacao);
+       $this->s113_i_situacao = ($this->s113_i_situacao === 0 || $this->s113_i_situacao === 0.0 || $this->s113_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_situacao"]:$this->s113_i_situacao);
        if($this->s113_d_cadastro == ""){
          $this->s113_d_cadastro_dia = ($this->s113_d_cadastro_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_d_cadastro_dia"]:$this->s113_d_cadastro_dia);
          $this->s113_d_cadastro_mes = ($this->s113_d_cadastro_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_d_cadastro_mes"]:$this->s113_d_cadastro_mes);
@@ -127,10 +127,10 @@ class cl_sau_agendaexames {
          }
        }
        $this->s113_c_cadastro = ($this->s113_c_cadastro == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_c_cadastro"]:$this->s113_c_cadastro);
-       $this->s113_i_login = ($this->s113_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_login"]:$this->s113_i_login);
+       $this->s113_i_login = ($this->s113_i_login === 0 || $this->s113_i_login === 0.0 || $this->s113_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_login"]:$this->s113_i_login);
        $this->s113_c_encaminhamento = ($this->s113_c_encaminhamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_c_encaminhamento"]:$this->s113_c_encaminhamento);
      }else{
-       $this->s113_i_codigo = ($this->s113_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_codigo"]:$this->s113_i_codigo);
+       $this->s113_i_codigo = ($this->s113_i_codigo === 0 || $this->s113_i_codigo === 0.0 || $this->s113_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s113_i_codigo"]:$this->s113_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -238,7 +238,7 @@ class cl_sau_agendaexames {
          $this->s113_i_codigo = $s113_i_codigo;
        }
      }
-     if(($this->s113_i_codigo == null) || ($this->s113_i_codigo == "") ){
+     if(($this->s113_i_codigo == null) || ($this->s113_i_codigo === 0 || $this->s113_i_codigo === 0.0 || $this->s113_i_codigo == "") ){
        $this->erro_sql = " Campo s113_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -779,7 +779,7 @@ class cl_sau_agendaexames {
     return $sql;
   }
 
-  public function sql_query_grupo_competencia($sCampos = "*", $iGrupo, $iMes, $iAno){
+  public function sql_query_grupo_competencia($sCampos = "*", $iGrupo = null, $iMes = null, $iAno = null){
 
     $sSql  = " select $sCampos ";
     $sSql .= "   from sau_agendaexames ";

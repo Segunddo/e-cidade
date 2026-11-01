@@ -56,7 +56,7 @@ class cl_sau_medicosforarede {
                  s154_rhcbo = int4 = Código cbo 
                  ";
    //funcao construtor da classe 
-   function cl_sau_medicosforarede() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_medicosforarede"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_sau_medicosforarede {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s154_i_codigo = ($this->s154_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s154_i_codigo"]:$this->s154_i_codigo);
-       $this->s154_i_medico = ($this->s154_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["s154_i_medico"]:$this->s154_i_medico);
+       $this->s154_i_codigo = ($this->s154_i_codigo === 0 || $this->s154_i_codigo === 0.0 || $this->s154_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s154_i_codigo"]:$this->s154_i_codigo);
+       $this->s154_i_medico = ($this->s154_i_medico === 0 || $this->s154_i_medico === 0.0 || $this->s154_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["s154_i_medico"]:$this->s154_i_medico);
        $this->s154_c_nome = ($this->s154_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["s154_c_nome"]:$this->s154_c_nome);
        $this->s154_c_cns = ($this->s154_c_cns == ""?@$GLOBALS["HTTP_POST_VARS"]["s154_c_cns"]:$this->s154_c_cns);
        $this->s154_rhcbo = ($this->s154_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["s154_rhcbo"]:$this->s154_rhcbo);
      }else{
-       $this->s154_i_codigo = ($this->s154_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s154_i_codigo"]:$this->s154_i_codigo);
+       $this->s154_i_codigo = ($this->s154_i_codigo === 0 || $this->s154_i_codigo === 0.0 || $this->s154_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s154_i_codigo"]:$this->s154_i_codigo);
      }
    }
    // funcao para inclusao
@@ -130,7 +130,7 @@ class cl_sau_medicosforarede {
          $this->s154_i_codigo = $s154_i_codigo; 
        }
      }
-     if(($this->s154_i_codigo == null) || ($this->s154_i_codigo == "") ){ 
+     if(($this->s154_i_codigo == null) || ($this->s154_i_codigo === 0 || $this->s154_i_codigo === 0.0 || $this->s154_i_codigo == "") ){ 
        $this->erro_sql = " Campo s154_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -414,7 +414,7 @@ class cl_sau_medicosforarede {
    function sql_query ( $s154_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_sau_medicosforarede {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_sau_medicosforarede {
    function sql_query_file ( $s154_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -472,7 +472,7 @@ class cl_sau_medicosforarede {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

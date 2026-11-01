@@ -56,7 +56,7 @@ class cl_sau_procdetalhe {
                  sd74_i_mescomp = int4 = Mes 
                  ";
    //funcao construtor da classe 
-   function cl_sau_procdetalhe() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_procdetalhe"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_sau_procdetalhe {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd74_i_codigo = ($this->sd74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_codigo"]:$this->sd74_i_codigo);
-       $this->sd74_i_procedimento = ($this->sd74_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_procedimento"]:$this->sd74_i_procedimento);
-       $this->sd74_i_detalhe = ($this->sd74_i_detalhe == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_detalhe"]:$this->sd74_i_detalhe);
-       $this->sd74_i_anocomp = ($this->sd74_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_anocomp"]:$this->sd74_i_anocomp);
-       $this->sd74_i_mescomp = ($this->sd74_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_mescomp"]:$this->sd74_i_mescomp);
+       $this->sd74_i_codigo = ($this->sd74_i_codigo === 0 || $this->sd74_i_codigo === 0.0 || $this->sd74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_codigo"]:$this->sd74_i_codigo);
+       $this->sd74_i_procedimento = ($this->sd74_i_procedimento === 0 || $this->sd74_i_procedimento === 0.0 || $this->sd74_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_procedimento"]:$this->sd74_i_procedimento);
+       $this->sd74_i_detalhe = ($this->sd74_i_detalhe === 0 || $this->sd74_i_detalhe === 0.0 || $this->sd74_i_detalhe == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_detalhe"]:$this->sd74_i_detalhe);
+       $this->sd74_i_anocomp = ($this->sd74_i_anocomp === 0 || $this->sd74_i_anocomp === 0.0 || $this->sd74_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_anocomp"]:$this->sd74_i_anocomp);
+       $this->sd74_i_mescomp = ($this->sd74_i_mescomp === 0 || $this->sd74_i_mescomp === 0.0 || $this->sd74_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_mescomp"]:$this->sd74_i_mescomp);
      }else{
-       $this->sd74_i_codigo = ($this->sd74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_codigo"]:$this->sd74_i_codigo);
+       $this->sd74_i_codigo = ($this->sd74_i_codigo === 0 || $this->sd74_i_codigo === 0.0 || $this->sd74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_codigo"]:$this->sd74_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_sau_procdetalhe {
          $this->sd74_i_codigo = $sd74_i_codigo; 
        }
      }
-     if(($this->sd74_i_codigo == null) || ($this->sd74_i_codigo == "") ){ 
+     if(($this->sd74_i_codigo == null) || ($this->sd74_i_codigo === 0 || $this->sd74_i_codigo === 0.0 || $this->sd74_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd74_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_sau_procdetalhe {
    function sql_query ( $sd74_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_sau_procdetalhe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_sau_procdetalhe {
    function sql_query_file ( $sd74_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_sau_procdetalhe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

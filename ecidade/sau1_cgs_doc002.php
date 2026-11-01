@@ -33,7 +33,8 @@ require_once(modification("classes/db_cgs_und_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("libs/db_stdlibwebseller.php"));
 
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"], $__qs );
+extract($__qs);
 db_postmemory( $_POST );
 
 $clcgs        = new cl_cgs;

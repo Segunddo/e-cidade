@@ -50,7 +50,7 @@ class cl_sau_tipoproc {
                  sd93_c_nome = varchar(50) = Nome 
                  ";
    //funcao construtor da classe 
-   function cl_sau_tipoproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_tipoproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_sau_tipoproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd93_i_codigo = ($this->sd93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd93_i_codigo"]:$this->sd93_i_codigo);
+       $this->sd93_i_codigo = ($this->sd93_i_codigo === 0 || $this->sd93_i_codigo === 0.0 || $this->sd93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd93_i_codigo"]:$this->sd93_i_codigo);
        $this->sd93_c_nome = ($this->sd93_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd93_c_nome"]:$this->sd93_c_nome);
      }else{
-       $this->sd93_i_codigo = ($this->sd93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd93_i_codigo"]:$this->sd93_i_codigo);
+       $this->sd93_i_codigo = ($this->sd93_i_codigo === 0 || $this->sd93_i_codigo === 0.0 || $this->sd93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd93_i_codigo"]:$this->sd93_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_tipoproc {
          $this->sd93_i_codigo = $sd93_i_codigo; 
        }
      }
-     if(($this->sd93_i_codigo == null) || ($this->sd93_i_codigo == "") ){ 
+     if(($this->sd93_i_codigo == null) || ($this->sd93_i_codigo === 0 || $this->sd93_i_codigo === 0.0 || $this->sd93_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd93_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_sau_tipoproc {
    function sql_query ( $sd93_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_sau_tipoproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_sau_tipoproc {
    function sql_query_file ( $sd93_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_sau_tipoproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_grupoproc {
                  sd11_f_orcamento = float4 = Orçamento 
                  ";
    //funcao construtor da classe 
-   function cl_grupoproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("grupoproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,7 +71,7 @@ class cl_grupoproc {
      if($exclusao==false){
        $this->sd11_c_codigo = ($this->sd11_c_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd11_c_codigo"]:$this->sd11_c_codigo);
        $this->sd11_c_descr = ($this->sd11_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["sd11_c_descr"]:$this->sd11_c_descr);
-       $this->sd11_f_orcamento = ($this->sd11_f_orcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd11_f_orcamento"]:$this->sd11_f_orcamento);
+       $this->sd11_f_orcamento = ($this->sd11_f_orcamento === 0 || $this->sd11_f_orcamento === 0.0 || $this->sd11_f_orcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd11_f_orcamento"]:$this->sd11_f_orcamento);
      }else{
        $this->sd11_c_codigo = ($this->sd11_c_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd11_c_codigo"]:$this->sd11_c_codigo);
      }
@@ -336,7 +336,7 @@ class cl_grupoproc {
    function sql_query ( $sd11_c_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -357,7 +357,7 @@ class cl_grupoproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -369,7 +369,7 @@ class cl_grupoproc {
    function sql_query_file ( $sd11_c_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_grupoproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

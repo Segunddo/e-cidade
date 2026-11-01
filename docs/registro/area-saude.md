@@ -48,6 +48,7 @@ da área, envio só depois dela.
 | 2 `tfd`+`vac` | 2.194 | 157 Rector + 1 LSP + 1 forma negada à mão | 2.194/2.194 | 375/375 depois da LSP (13 falham nos dois) | 892 (diffs só do harness) | 22.712 linhas, diffs só do harness | 2.541 pares, 1 div. → corrigida | **164/164** |
 | 3 `lab` | 1.578 | 105 Rector + 4 guardas `pg_*` + 1 forma negada (formulário) à mão | 1.577/1.578 (1 não compila em nenhum) | 293/293 (12 falham nos dois) | 493 (diffs só do harness) | 12.886 linhas, diffs só do harness | 1.546 pares, 0 div. | **193/195** (2 caracterizadas) |
 | 4 `far` | 2.223 | 161 Rector + 1 `magic_quotes` + 1 `break` + 6 guardas `pg_*` à mão | 2.223/2.223 | 389/389 (12 falham nos dois) | 895 (diffs só do harness) | 22.649 linhas, diffs só do harness | 2.511 pares, 0 div. | **192/192** |
+| 5 `sau1_` | 2.516 | 306 Rector + 2 `(int)` + 3 guardas de conexão à mão | 2.516/2.516 | 391/391 (12 falham nos dois) | 950 (diffs só do harness) | 23.965 linhas, diffs só do harness | 2.483 pares, 0 div. | **355/355** + dirigida 15/15 + aba 3/3 |
 
 **Lote 1 — `fum`, `hip`, `age`, `amb`** (71 arquivos, roteados no `location`; 31/10/2026). Enumerador: 57 alvos, dos
 quais **11 são o falso positivo já registrado** no `tra` (`cgm*`, `db_db_uf`, `db_db_userinst`…: portados por commits
@@ -154,4 +155,38 @@ do lote usa os 66 arquivos de `classes/` alterados. Roteamento: `far` no `locati
 (1.104). Conferido: `far1_`, `/w/2/far2_`, `lab1_` → 8.5; `login`, `sau1_` → 5.6. Passo 8b (327 telas da Saúde no 8.5): nada
 indo ao 5.6 (9 iframes de pasta).
 
-**Estado:** lote 4 concluído (commit local). Aguardando o pedido do lote 5 (`sau1_`).
+**Lote 5 — `sau1_`** (355 arquivos, roteados no `location` como `sau1`; 31/10/2026). 328 alvos. `split()`: 384 `"#"`, 2 `'#'`,
+4 `"\\|"`, 1 `","`, 1 `"_"` — todos literais; o `"\\|"` (string PHP `\|`, pipe escapado em POSIX) vira
+`preg_split("#\\|#m")`, medido idêntico ao `split` do 5.6 em 4 entradas (`a|b||c`, vazio, sem separador, só o separador). Rector
+em **306 arquivos**, só regras vetadas (204 `parse_str`, 100 `split`, 92 construtores, 91 guardas, 4 `${$var}`, 4
+`OptionalParametersAfterRequired`), 0 na 2ª passada. Conferência das filhas (skill, desde o lote 2): das 3 classes cujas
+assinaturas mudaram, só `cl_sau_agendaexames` tem filha (`cl_sau_agendaexames_ext`), que não sobrescreve o método e carrega nos
+dois. Remanescentes 0; portão 0 ausentes; lint 2.516/2.516; carga 391/391.
+
+Bateria 353/355 → **355/355**. À mão:
+- **Aritmética com string** (catálogo): `forms/db_frmcgs_undoutros.php:99` e `:120`, contadores iniciados com `""` e somados a 1
+  (`$conta`, `$conta_sub`) — `TypeError` no 8. **`(int)`**, porque o 5.6 produzia inteiro ali (regra `(int)` × `(float)` do
+  Tributário). Só `sau1_cgs_undoutros002` usa o formulário.
+- **`pg_query()` com conexão `null`**: `sau1_valores001.php` chama `@db_query($conexao, …)` em 3 pontos, e `$conexao` nunca é
+  definida; dentro de `db_query()` (`libs/db_stdlib.php:107`) vira `pg_query(null, …)` — no 5.6 aviso e `NULL`, no 8
+  `TypeError`. **Corrigido na tela, não no núcleo:** `($conexao ? @db_query($conexao, …) : null)`. Das 54 chamadas
+  `db_query($<conexao>, …)` da base, só esta usa variável indefinida (as outras usam `$conn`, que o `db_conecta.php` define);
+  a guarda no `db_query()` cobriria casos futuros, mas é a `db_stdlib`, que quase tudo alcança, e exigiria a bateria completa
+  no lote. Os efeitos colaterais do `db_query()` depois do `pg_query` dependem de `DB_traceLog`/`DB_premenus`, ausentes na
+  sessão. Opção registrada para quando outro caso aparecer.
+
+Bateria dirigida: **15 telas servidas fora do lote** (Tributário, Educação, Patrimonial, Recursos Humanos e Saúde: `cai2_`,
+`edu1_rechumano*`, `ouv*.RPC`, `pro4_*`, `vac2_aerograma002`…) usam algum dos 99 arquivos de `classes/` alterados — **15/15**.
+
+Roteamento: **`sau1`** no `location` (e no `LOC` do `dimensiona.py` e do `redirecionamentos.py`; a `FASE_A` do gerador compara
+só as letras do prefixo, então `sau` entra nela no lote 6). Não existe `sau1[0-9]+_`. Conferido: `sau1_`, `/w/2/sau1_` → 8.5;
+`sau2_`, `sau4_`, `sau_`, `login` → 5.6. `sau4_importsus002.php` foi alterado neste lote (está no universo) e continua servido
+pelo 5.6 até o lote 6 — o código portado roda nos dois.
+
+**Passo 8b achou uma aba no 5.6:** `sau1_medicos000.php` (3 entradas de menu, `db_opcao` 1/22/33) abre `pro1_cgmdoc001.php`
+como aba `a2`. `pro` é prefixo compartilhado, roteado por `map`. Universo da aba: 12 alvos, os 11 do falso positivo e
+`classes/db_cgmdoc_classe.php`, já portada pela passada principal (estava no universo do lote). Instância e escrita
+idênticas (75 linhas), forma negada sem pares; a aba **3/3** (sem parâmetro, com `z01_numcgm`, com `db_opcao`). Posta em
+`faseb_map_abas.txt` → **`map` 1.105 entradas**; levantamento refeito: nada indo ao 5.6 (16 iframes de pasta), sem 2º salto.
+
+**Estado:** lote 5 concluído (commit local). Aguardando o pedido do lote 6 (`sau2_`, `sau3_`, `sau4_`, `sau_`).

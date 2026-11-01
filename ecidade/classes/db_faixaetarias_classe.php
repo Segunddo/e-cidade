@@ -54,7 +54,7 @@ class cl_faixaetarias {
                  sd13_c_descr = char(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_faixaetarias() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("faixaetarias"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_faixaetarias {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd13_i_codigo = ($this->sd13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd13_i_codigo"]:$this->sd13_i_codigo);
-       $this->sd13_i_inicial = ($this->sd13_i_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd13_i_inicial"]:$this->sd13_i_inicial);
-       $this->sd13_i_final = ($this->sd13_i_final == ""?@$GLOBALS["HTTP_POST_VARS"]["sd13_i_final"]:$this->sd13_i_final);
+       $this->sd13_i_codigo = ($this->sd13_i_codigo === 0 || $this->sd13_i_codigo === 0.0 || $this->sd13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd13_i_codigo"]:$this->sd13_i_codigo);
+       $this->sd13_i_inicial = ($this->sd13_i_inicial === 0 || $this->sd13_i_inicial === 0.0 || $this->sd13_i_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd13_i_inicial"]:$this->sd13_i_inicial);
+       $this->sd13_i_final = ($this->sd13_i_final === 0 || $this->sd13_i_final === 0.0 || $this->sd13_i_final == ""?@$GLOBALS["HTTP_POST_VARS"]["sd13_i_final"]:$this->sd13_i_final);
        $this->sd13_c_descr = ($this->sd13_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["sd13_c_descr"]:$this->sd13_c_descr);
      }else{
-       $this->sd13_i_codigo = ($this->sd13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd13_i_codigo"]:$this->sd13_i_codigo);
+       $this->sd13_i_codigo = ($this->sd13_i_codigo === 0 || $this->sd13_i_codigo === 0.0 || $this->sd13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd13_i_codigo"]:$this->sd13_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_faixaetarias {
          $this->sd13_i_codigo = $sd13_i_codigo; 
        }
      }
-     if(($this->sd13_i_codigo == null) || ($this->sd13_i_codigo == "") ){ 
+     if(($this->sd13_i_codigo == null) || ($this->sd13_i_codigo === 0 || $this->sd13_i_codigo === 0.0 || $this->sd13_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd13_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_faixaetarias {
    function sql_query ( $sd13_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -411,7 +411,7 @@ class cl_faixaetarias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_faixaetarias {
    function sql_query_file ( $sd13_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_faixaetarias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

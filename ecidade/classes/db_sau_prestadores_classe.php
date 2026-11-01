@@ -51,7 +51,7 @@ class cl_sau_prestadores {
                  s110_i_numcgm = int4 = CGM
                  ";
    //funcao construtor da classe
-   function cl_sau_prestadores() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_prestadores");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -68,10 +68,10 @@ class cl_sau_prestadores {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s110_i_codigo = ($this->s110_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s110_i_codigo"]:$this->s110_i_codigo);
-       $this->s110_i_numcgm = ($this->s110_i_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["s110_i_numcgm"]:$this->s110_i_numcgm);
+       $this->s110_i_codigo = ($this->s110_i_codigo === 0 || $this->s110_i_codigo === 0.0 || $this->s110_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s110_i_codigo"]:$this->s110_i_codigo);
+       $this->s110_i_numcgm = ($this->s110_i_numcgm === 0 || $this->s110_i_numcgm === 0.0 || $this->s110_i_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["s110_i_numcgm"]:$this->s110_i_numcgm);
      }else{
-       $this->s110_i_codigo = ($this->s110_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s110_i_codigo"]:$this->s110_i_codigo);
+       $this->s110_i_codigo = ($this->s110_i_codigo === 0 || $this->s110_i_codigo === 0.0 || $this->s110_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s110_i_codigo"]:$this->s110_i_codigo);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_sau_prestadores {
          $this->s110_i_codigo = $s110_i_codigo;
        }
      }
-     if(($this->s110_i_codigo == null) || ($this->s110_i_codigo == "") ){
+     if(($this->s110_i_codigo == null) || ($this->s110_i_codigo === 0 || $this->s110_i_codigo === 0.0 || $this->s110_i_codigo == "") ){
        $this->erro_sql = " Campo s110_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -330,7 +330,7 @@ class cl_sau_prestadores {
    function sql_query ( $s110_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -352,7 +352,7 @@ class cl_sau_prestadores {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_sau_prestadores {
    function sql_query_file ( $s110_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_sau_prestadores {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

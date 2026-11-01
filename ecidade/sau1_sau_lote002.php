@@ -33,7 +33,8 @@ include(modification("classes/db_sau_lote_classe.php"));
 include(modification("classes/db_sau_lotepront_ext_classe.php"));
 
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clsau_lote      = new cl_sau_lote;

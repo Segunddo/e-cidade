@@ -63,7 +63,7 @@ class cl_cgmsaida {
                  sd28_d_data = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_cgmsaida() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgmsaida"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,12 +80,12 @@ class cl_cgmsaida {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd28_i_codigo = ($this->sd28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_codigo"]:$this->sd28_i_codigo);
-       $this->sd28_i_cgm = ($this->sd28_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_cgm"]:$this->sd28_i_cgm);
-       $this->sd28_i_departamento = ($this->sd28_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_departamento"]:$this->sd28_i_departamento);
-       $this->sd28_i_material = ($this->sd28_i_material == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_material"]:$this->sd28_i_material);
-       $this->sd28_i_quantidade = ($this->sd28_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_quantidade"]:$this->sd28_i_quantidade);
-       $this->sd28_i_usuario = ($this->sd28_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_usuario"]:$this->sd28_i_usuario);
+       $this->sd28_i_codigo = ($this->sd28_i_codigo === 0 || $this->sd28_i_codigo === 0.0 || $this->sd28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_codigo"]:$this->sd28_i_codigo);
+       $this->sd28_i_cgm = ($this->sd28_i_cgm === 0 || $this->sd28_i_cgm === 0.0 || $this->sd28_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_cgm"]:$this->sd28_i_cgm);
+       $this->sd28_i_departamento = ($this->sd28_i_departamento === 0 || $this->sd28_i_departamento === 0.0 || $this->sd28_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_departamento"]:$this->sd28_i_departamento);
+       $this->sd28_i_material = ($this->sd28_i_material === 0 || $this->sd28_i_material === 0.0 || $this->sd28_i_material == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_material"]:$this->sd28_i_material);
+       $this->sd28_i_quantidade = ($this->sd28_i_quantidade === 0 || $this->sd28_i_quantidade === 0.0 || $this->sd28_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_quantidade"]:$this->sd28_i_quantidade);
+       $this->sd28_i_usuario = ($this->sd28_i_usuario === 0 || $this->sd28_i_usuario === 0.0 || $this->sd28_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_usuario"]:$this->sd28_i_usuario);
        if($this->sd28_d_data == ""){
          $this->sd28_d_data_dia = ($this->sd28_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_d_data_dia"]:$this->sd28_d_data_dia);
          $this->sd28_d_data_mes = ($this->sd28_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_d_data_mes"]:$this->sd28_d_data_mes);
@@ -95,7 +95,7 @@ class cl_cgmsaida {
          }
        }
      }else{
-       $this->sd28_i_codigo = ($this->sd28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_codigo"]:$this->sd28_i_codigo);
+       $this->sd28_i_codigo = ($this->sd28_i_codigo === 0 || $this->sd28_i_codigo === 0.0 || $this->sd28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_codigo"]:$this->sd28_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_cgmsaida {
          $this->sd28_i_codigo = $sd28_i_codigo; 
        }
      }
-     if(($this->sd28_i_codigo == null) || ($this->sd28_i_codigo == "") ){ 
+     if(($this->sd28_i_codigo == null) || ($this->sd28_i_codigo === 0 || $this->sd28_i_codigo === 0.0 || $this->sd28_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd28_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -505,7 +505,7 @@ class cl_cgmsaida {
    function sql_query ( $sd28_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_cgmsaida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_cgmsaida {
    function sql_query_file ( $sd28_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -566,7 +566,7 @@ class cl_cgmsaida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

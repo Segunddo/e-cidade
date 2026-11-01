@@ -96,7 +96,7 @@ $escola = db_getsession("DB_coddepto");
 
           while( $row = pg_fetch_array( $sql_result ) ) {
 
-            $conta     = $conta + 1;
+            $conta     = (int)$conta + 1;
             $cod_micro = $row["sd34_i_codigo"];
 
             echo "new Array(\n";
@@ -117,7 +117,7 @@ $escola = db_getsession("DB_coddepto");
 
                 $codigo_fam = $rowx["sd35_i_codigo"];
                 $nome_fam   = $rowx["sd33_v_descricao"];
-                $conta_sub  = $conta_sub + 1;
+                $conta_sub  = (int)$conta_sub + 1;
 
                 if( $conta_sub == $num_sub ) {
 

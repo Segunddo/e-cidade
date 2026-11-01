@@ -54,7 +54,7 @@ class cl_sau_gestaoativ {
                  sd47_i_indgestao = int4 = Indicador de Gestão 
                  ";
    //funcao construtor da classe 
-   function cl_sau_gestaoativ() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_gestaoativ"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_sau_gestaoativ {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd47_i_codigo = ($this->sd47_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd47_i_codigo"]:$this->sd47_i_codigo);
-       $this->sd47_i_unidade = ($this->sd47_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd47_i_unidade"]:$this->sd47_i_unidade);
-       $this->sd47_i_programa = ($this->sd47_i_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["sd47_i_programa"]:$this->sd47_i_programa);
-       $this->sd47_i_indgestao = ($this->sd47_i_indgestao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd47_i_indgestao"]:$this->sd47_i_indgestao);
+       $this->sd47_i_codigo = ($this->sd47_i_codigo === 0 || $this->sd47_i_codigo === 0.0 || $this->sd47_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd47_i_codigo"]:$this->sd47_i_codigo);
+       $this->sd47_i_unidade = ($this->sd47_i_unidade === 0 || $this->sd47_i_unidade === 0.0 || $this->sd47_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd47_i_unidade"]:$this->sd47_i_unidade);
+       $this->sd47_i_programa = ($this->sd47_i_programa === 0 || $this->sd47_i_programa === 0.0 || $this->sd47_i_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["sd47_i_programa"]:$this->sd47_i_programa);
+       $this->sd47_i_indgestao = ($this->sd47_i_indgestao === 0 || $this->sd47_i_indgestao === 0.0 || $this->sd47_i_indgestao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd47_i_indgestao"]:$this->sd47_i_indgestao);
      }else{
-       $this->sd47_i_codigo = ($this->sd47_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd47_i_codigo"]:$this->sd47_i_codigo);
+       $this->sd47_i_codigo = ($this->sd47_i_codigo === 0 || $this->sd47_i_codigo === 0.0 || $this->sd47_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd47_i_codigo"]:$this->sd47_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_sau_gestaoativ {
          $this->sd47_i_codigo = $sd47_i_codigo; 
        }
      }
-     if(($this->sd47_i_codigo == null) || ($this->sd47_i_codigo == "") ){ 
+     if(($this->sd47_i_codigo == null) || ($this->sd47_i_codigo === 0 || $this->sd47_i_codigo === 0.0 || $this->sd47_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd47_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_sau_gestaoativ {
    function sql_query ( $sd47_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_sau_gestaoativ {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_sau_gestaoativ {
    function sql_query_file ( $sd47_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_sau_gestaoativ {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

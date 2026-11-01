@@ -50,7 +50,7 @@ class cl_procgrupoa {
                  sd17_i_grupoatend = int8 = Grupo de Atendimento 
                  ";
    //funcao construtor da classe 
-   function cl_procgrupoa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procgrupoa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_procgrupoa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd17_i_procedimento = ($this->sd17_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd17_i_procedimento"]:$this->sd17_i_procedimento);
-       $this->sd17_i_grupoatend = ($this->sd17_i_grupoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["sd17_i_grupoatend"]:$this->sd17_i_grupoatend);
+       $this->sd17_i_procedimento = ($this->sd17_i_procedimento === 0 || $this->sd17_i_procedimento === 0.0 || $this->sd17_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd17_i_procedimento"]:$this->sd17_i_procedimento);
+       $this->sd17_i_grupoatend = ($this->sd17_i_grupoatend === 0 || $this->sd17_i_grupoatend === 0.0 || $this->sd17_i_grupoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["sd17_i_grupoatend"]:$this->sd17_i_grupoatend);
      }else{
      }
    }
@@ -248,7 +248,7 @@ class cl_procgrupoa {
    function sql_query ( $oid = null,$campos="procgrupoa.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -272,7 +272,7 @@ class cl_procgrupoa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -285,7 +285,7 @@ class cl_procgrupoa {
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -303,7 +303,7 @@ class cl_procgrupoa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

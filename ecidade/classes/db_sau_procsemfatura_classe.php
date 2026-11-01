@@ -52,7 +52,7 @@ class cl_sau_procsemfatura {
                  s146_c_descr = char(50) = Descriçao 
                  ";
    //funcao construtor da classe 
-   function cl_sau_procsemfatura() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_procsemfatura"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_sau_procsemfatura {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s146_i_codigo = ($this->s146_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s146_i_codigo"]:$this->s146_i_codigo);
+       $this->s146_i_codigo = ($this->s146_i_codigo === 0 || $this->s146_i_codigo === 0.0 || $this->s146_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s146_i_codigo"]:$this->s146_i_codigo);
        $this->s146_c_cod = ($this->s146_c_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["s146_c_cod"]:$this->s146_c_cod);
        $this->s146_c_descr = ($this->s146_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["s146_c_descr"]:$this->s146_c_descr);
      }else{
-       $this->s146_i_codigo = ($this->s146_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s146_i_codigo"]:$this->s146_i_codigo);
+       $this->s146_i_codigo = ($this->s146_i_codigo === 0 || $this->s146_i_codigo === 0.0 || $this->s146_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s146_i_codigo"]:$this->s146_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_sau_procsemfatura {
          $this->s146_i_codigo = $s146_i_codigo; 
        }
      }
-     if(($this->s146_i_codigo == null) || ($this->s146_i_codigo == "") ){ 
+     if(($this->s146_i_codigo == null) || ($this->s146_i_codigo === 0 || $this->s146_i_codigo === 0.0 || $this->s146_i_codigo == "") ){ 
        $this->erro_sql = " Campo s146_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_sau_procsemfatura {
    function sql_query ( $s146_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_sau_procsemfatura {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_sau_procsemfatura {
    function sql_query_file ( $s146_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_sau_procsemfatura {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

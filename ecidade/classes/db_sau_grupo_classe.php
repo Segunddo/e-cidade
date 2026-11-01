@@ -56,7 +56,7 @@ class cl_sau_grupo {
                  sd60_i_mescomp = int4 = Mes 
                  ";
    //funcao construtor da classe 
-   function cl_sau_grupo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_grupo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_sau_grupo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd60_i_codigo = ($this->sd60_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd60_i_codigo"]:$this->sd60_i_codigo);
+       $this->sd60_i_codigo = ($this->sd60_i_codigo === 0 || $this->sd60_i_codigo === 0.0 || $this->sd60_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd60_i_codigo"]:$this->sd60_i_codigo);
        $this->sd60_c_grupo = ($this->sd60_c_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd60_c_grupo"]:$this->sd60_c_grupo);
        $this->sd60_c_nome = ($this->sd60_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd60_c_nome"]:$this->sd60_c_nome);
-       $this->sd60_i_anocomp = ($this->sd60_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd60_i_anocomp"]:$this->sd60_i_anocomp);
-       $this->sd60_i_mescomp = ($this->sd60_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd60_i_mescomp"]:$this->sd60_i_mescomp);
+       $this->sd60_i_anocomp = ($this->sd60_i_anocomp === 0 || $this->sd60_i_anocomp === 0.0 || $this->sd60_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd60_i_anocomp"]:$this->sd60_i_anocomp);
+       $this->sd60_i_mescomp = ($this->sd60_i_mescomp === 0 || $this->sd60_i_mescomp === 0.0 || $this->sd60_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd60_i_mescomp"]:$this->sd60_i_mescomp);
      }else{
-       $this->sd60_i_codigo = ($this->sd60_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd60_i_codigo"]:$this->sd60_i_codigo);
+       $this->sd60_i_codigo = ($this->sd60_i_codigo === 0 || $this->sd60_i_codigo === 0.0 || $this->sd60_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd60_i_codigo"]:$this->sd60_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_sau_grupo {
          $this->sd60_i_codigo = $sd60_i_codigo; 
        }
      }
-     if(($this->sd60_i_codigo == null) || ($this->sd60_i_codigo == "") ){ 
+     if(($this->sd60_i_codigo == null) || ($this->sd60_i_codigo === 0 || $this->sd60_i_codigo === 0.0 || $this->sd60_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd60_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_sau_grupo {
    function sql_query ( $sd60_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -442,7 +442,7 @@ class cl_sau_grupo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -454,7 +454,7 @@ class cl_sau_grupo {
    function sql_query_file ( $sd60_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_sau_grupo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

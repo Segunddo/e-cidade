@@ -34,7 +34,7 @@ class cl_prontuarios_ext extends cl_prontuarios {
    function sql_query_ext ( $sd24_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -111,7 +111,7 @@ class cl_prontuarios_ext extends cl_prontuarios {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -124,7 +124,7 @@ class cl_prontuarios_ext extends cl_prontuarios {
    function sql_query_nolote_ext ( $sd24_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -186,7 +186,7 @@ class cl_prontuarios_ext extends cl_prontuarios {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -196,11 +196,11 @@ class cl_prontuarios_ext extends cl_prontuarios {
      return $sql;
   }
  
-  function sql_query_faas_por_profissional($sd24_i_codigo = null, $sd04_i_medico, $sd04_i_unidade, $campos = "*", $ordem = null, $dbwhere = "") { 
+  function sql_query_faas_por_profissional($sd24_i_codigo = null, $sd04_i_medico = null, $sd04_i_unidade = null, $campos = "*", $ordem = null, $dbwhere = "") { 
      $sql = "select distinct ";
      if($campos != "*" ) {
 
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++) {
 
@@ -234,7 +234,7 @@ class cl_prontuarios_ext extends cl_prontuarios {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

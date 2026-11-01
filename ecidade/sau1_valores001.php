@@ -52,7 +52,7 @@ elseif(isset($aterar))
 <?
  $proc  = $_GET["Procedimento"];
  $sqlvalor = "SELECT * FROM valores WHERE procedimento_i_codigo = $proc";
- $query = @db_query($conexao,$sqlvalor);
+ $query = ($conexao ? @db_query($conexao,$sqlvalor) : null);
  if($query)
  {
   $linhas = pg_num_rows($query);
@@ -251,7 +251,7 @@ if(isset($_GET["Array"]))
                  $Grava[15]
                 )
                 ";
- $insert = @db_query($conexao,$SqlValores);
+ $insert = ($conexao ? @db_query($conexao,$SqlValores) : null);
  if(!$insert)
  {
   $SqlValores = "UPDATE valores SET
@@ -273,7 +273,7 @@ if(isset($_GET["Array"]))
                   valor_f_total        = $Grava[16]
                  WHERE procedimento_i_codigo = $Grava[0]
                 ";
-  $update = @db_query($conexao,$SqlValores);
+  $update = ($conexao ? @db_query($conexao,$SqlValores) : null);
   if($update)
    $Msg = "Valores Atualizados!";
  }

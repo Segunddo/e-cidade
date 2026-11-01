@@ -63,7 +63,7 @@ class cl_prontsaida {
                  sd27_d_data = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_prontsaida() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prontsaida"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,12 +80,12 @@ class cl_prontsaida {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd27_i_codigo = ($this->sd27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_codigo"]:$this->sd27_i_codigo);
-       $this->sd27_i_prontuario = ($this->sd27_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_prontuario"]:$this->sd27_i_prontuario);
-       $this->sd27_i_departamento = ($this->sd27_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_departamento"]:$this->sd27_i_departamento);
-       $this->sd27_i_material = ($this->sd27_i_material == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_material"]:$this->sd27_i_material);
-       $this->sd27_i_quantidade = ($this->sd27_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_quantidade"]:$this->sd27_i_quantidade);
-       $this->sd27_i_usuario = ($this->sd27_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_usuario"]:$this->sd27_i_usuario);
+       $this->sd27_i_codigo = ($this->sd27_i_codigo === 0 || $this->sd27_i_codigo === 0.0 || $this->sd27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_codigo"]:$this->sd27_i_codigo);
+       $this->sd27_i_prontuario = ($this->sd27_i_prontuario === 0 || $this->sd27_i_prontuario === 0.0 || $this->sd27_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_prontuario"]:$this->sd27_i_prontuario);
+       $this->sd27_i_departamento = ($this->sd27_i_departamento === 0 || $this->sd27_i_departamento === 0.0 || $this->sd27_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_departamento"]:$this->sd27_i_departamento);
+       $this->sd27_i_material = ($this->sd27_i_material === 0 || $this->sd27_i_material === 0.0 || $this->sd27_i_material == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_material"]:$this->sd27_i_material);
+       $this->sd27_i_quantidade = ($this->sd27_i_quantidade === 0 || $this->sd27_i_quantidade === 0.0 || $this->sd27_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_quantidade"]:$this->sd27_i_quantidade);
+       $this->sd27_i_usuario = ($this->sd27_i_usuario === 0 || $this->sd27_i_usuario === 0.0 || $this->sd27_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_usuario"]:$this->sd27_i_usuario);
        if($this->sd27_d_data == ""){
          $this->sd27_d_data_dia = ($this->sd27_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_d_data_dia"]:$this->sd27_d_data_dia);
          $this->sd27_d_data_mes = ($this->sd27_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_d_data_mes"]:$this->sd27_d_data_mes);
@@ -95,7 +95,7 @@ class cl_prontsaida {
          }
        }
      }else{
-       $this->sd27_i_codigo = ($this->sd27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_codigo"]:$this->sd27_i_codigo);
+       $this->sd27_i_codigo = ($this->sd27_i_codigo === 0 || $this->sd27_i_codigo === 0.0 || $this->sd27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_codigo"]:$this->sd27_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_prontsaida {
          $this->sd27_i_codigo = $sd27_i_codigo; 
        }
      }
-     if(($this->sd27_i_codigo == null) || ($this->sd27_i_codigo == "") ){ 
+     if(($this->sd27_i_codigo == null) || ($this->sd27_i_codigo === 0 || $this->sd27_i_codigo === 0.0 || $this->sd27_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd27_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -507,7 +507,7 @@ class cl_prontsaida {
    function sql_query ( $sd27_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_prontsaida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -551,7 +551,7 @@ class cl_prontsaida {
    function sql_query_file ( $sd27_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -572,7 +572,7 @@ class cl_prontsaida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

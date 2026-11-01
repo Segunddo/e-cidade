@@ -63,7 +63,7 @@ class cl_procedimentos {
                  sd09_d_validade = date = Validade 
                  ";
    //funcao construtor da classe 
-   function cl_procedimentos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procedimentos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -98,10 +98,10 @@ class cl_procedimentos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd09_i_codigo = ($this->sd09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd09_i_codigo"]:$this->sd09_i_codigo);
+       $this->sd09_i_codigo = ($this->sd09_i_codigo === 0 || $this->sd09_i_codigo === 0.0 || $this->sd09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd09_i_codigo"]:$this->sd09_i_codigo);
        $this->sd09_c_grupoproc = ($this->sd09_c_grupoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd09_c_grupoproc"]:$this->sd09_c_grupoproc);
        $this->sd09_c_descr = ($this->sd09_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["sd09_c_descr"]:$this->sd09_c_descr);
-       $this->sd09_f_valor = ($this->sd09_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd09_f_valor"]:$this->sd09_f_valor);
+       $this->sd09_f_valor = ($this->sd09_f_valor === 0 || $this->sd09_f_valor === 0.0 || $this->sd09_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd09_f_valor"]:$this->sd09_f_valor);
        $this->sd09_b_pab = ($this->sd09_b_pab == false?@$GLOBALS["HTTP_POST_VARS"]["sd09_b_pab"]:$this->sd09_b_pab);
        $this->sd09_c_comp = ($this->sd09_c_comp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd09_c_comp"]:$this->sd09_c_comp);
        if($this->sd09_d_validade == ""){
@@ -113,7 +113,7 @@ class cl_procedimentos {
          }
        }
      }else{
-       $this->sd09_i_codigo = ($this->sd09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd09_i_codigo"]:$this->sd09_i_codigo);
+       $this->sd09_i_codigo = ($this->sd09_i_codigo === 0 || $this->sd09_i_codigo === 0.0 || $this->sd09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd09_i_codigo"]:$this->sd09_i_codigo);
      }
    }
    // funcao para inclusao
@@ -176,7 +176,7 @@ class cl_procedimentos {
          $this->sd09_i_codigo = $sd09_i_codigo; 
        }
      }
-     if(($this->sd09_i_codigo == null) || ($this->sd09_i_codigo == "") ){ 
+     if(($this->sd09_i_codigo == null) || ($this->sd09_i_codigo === 0 || $this->sd09_i_codigo === 0.0 || $this->sd09_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd09_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -471,7 +471,7 @@ class cl_procedimentos {
    function sql_query ( $sd09_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -493,7 +493,7 @@ class cl_procedimentos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -505,7 +505,7 @@ class cl_procedimentos {
    function sql_query_file ( $sd09_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -526,7 +526,7 @@ class cl_procedimentos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

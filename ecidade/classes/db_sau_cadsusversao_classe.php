@@ -50,7 +50,7 @@ class cl_sau_cadsusversao {
                  s150_i_versao = int4 = versao 
                  ";
    //funcao construtor da classe 
-   function cl_sau_cadsusversao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_cadsusversao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_sau_cadsusversao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s150_i_codigo = ($this->s150_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_codigo"]:$this->s150_i_codigo);
-       $this->s150_i_versao = ($this->s150_i_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_versao"]:$this->s150_i_versao);
+       $this->s150_i_codigo = ($this->s150_i_codigo === 0 || $this->s150_i_codigo === 0.0 || $this->s150_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_codigo"]:$this->s150_i_codigo);
+       $this->s150_i_versao = ($this->s150_i_versao === 0 || $this->s150_i_versao === 0.0 || $this->s150_i_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_versao"]:$this->s150_i_versao);
      }else{
-       $this->s150_i_codigo = ($this->s150_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_codigo"]:$this->s150_i_codigo);
+       $this->s150_i_codigo = ($this->s150_i_codigo === 0 || $this->s150_i_codigo === 0.0 || $this->s150_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_codigo"]:$this->s150_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_cadsusversao {
          $this->s150_i_codigo = $s150_i_codigo; 
        }
      }
-     if(($this->s150_i_codigo == null) || ($this->s150_i_codigo == "") ){ 
+     if(($this->s150_i_codigo == null) || ($this->s150_i_codigo === 0 || $this->s150_i_codigo === 0.0 || $this->s150_i_codigo == "") ){ 
        $this->erro_sql = " Campo s150_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_sau_cadsusversao {
    function sql_query ( $s150_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_sau_cadsusversao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_sau_cadsusversao {
    function sql_query_file ( $s150_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_sau_cadsusversao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
