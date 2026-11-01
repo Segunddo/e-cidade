@@ -52,7 +52,7 @@ class cl_lab_exasinonima {
                  la18_i_exame = int4 = Exame 
                  ";
    //funcao construtor da classe 
-   function cl_lab_exasinonima() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_exasinonima"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_lab_exasinonima {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la18_i_codigo = ($this->la18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_codigo"]:$this->la18_i_codigo);
-       $this->la18_i_sinonima = ($this->la18_i_sinonima == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_sinonima"]:$this->la18_i_sinonima);
-       $this->la18_i_exame = ($this->la18_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_exame"]:$this->la18_i_exame);
+       $this->la18_i_codigo = ($this->la18_i_codigo === 0 || $this->la18_i_codigo === 0.0 || $this->la18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_codigo"]:$this->la18_i_codigo);
+       $this->la18_i_sinonima = ($this->la18_i_sinonima === 0 || $this->la18_i_sinonima === 0.0 || $this->la18_i_sinonima == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_sinonima"]:$this->la18_i_sinonima);
+       $this->la18_i_exame = ($this->la18_i_exame === 0 || $this->la18_i_exame === 0.0 || $this->la18_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_exame"]:$this->la18_i_exame);
      }else{
-       $this->la18_i_codigo = ($this->la18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_codigo"]:$this->la18_i_codigo);
+       $this->la18_i_codigo = ($this->la18_i_codigo === 0 || $this->la18_i_codigo === 0.0 || $this->la18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_codigo"]:$this->la18_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_lab_exasinonima {
          $this->la18_i_codigo = $la18_i_codigo; 
        }
      }
-     if(($this->la18_i_codigo == null) || ($this->la18_i_codigo == "") ){ 
+     if(($this->la18_i_codigo == null) || ($this->la18_i_codigo === 0 || $this->la18_i_codigo === 0.0 || $this->la18_i_codigo == "") ){ 
        $this->erro_sql = " Campo la18_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_lab_exasinonima {
    function sql_query ( $la18_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_lab_exasinonima {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_lab_exasinonima {
    function sql_query_file ( $la18_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_lab_exasinonima {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

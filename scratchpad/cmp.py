@@ -5,7 +5,7 @@ Restaura uma sessao autenticada antes de CADA requisicao (uma requisicao a
 consome/reescreve) e normaliza os identificadores aleatorios, que senao geram
 falsos positivos -- alguns deles INTERMITENTES, que e o pior tipo.
 """
-import re, subprocess, sys, os
+import re, subprocess, sys, os, shlex
 
 # O projeto vive em ecidade/; sem isto o os.listdir('.') abaixo nao acha as telas.
 os.chdir(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'ecidade'))
@@ -64,7 +64,7 @@ def fetch(port, page):
     # a memoria do harness e o mata com SIGKILL. Truncada, ela perde o marcador
     # @@ e cai como divergente, que e o desfecho correto.
     r = sh(f"curl -s -m 60 -b 'ECIDADEWINDOWMAIN={SID}' "
-           f"-w '\\n@@%{{http_code}}@%{{time_total}}' http://localhost:{port}/{page} | head -c 5000000")
+           f"-w '\\n@@%{{http_code}}@%{{time_total}}' {shlex.quote(f'http://localhost:{port}/{page}')} | head -c 5000000")
     out = r.stdout
     i = out.rfind(b'\n@@')
     code = out[i+3:].decode(errors='replace') if i >= 0 else '???'

@@ -56,7 +56,7 @@ class cl_sau_proccbo {
                  sd96_i_mescomp = int4 = Mes 
                  ";
    //funcao construtor da classe 
-   function cl_sau_proccbo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_proccbo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_sau_proccbo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd96_i_codigo = ($this->sd96_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_codigo"]:$this->sd96_i_codigo);
-       $this->sd96_i_procedimento = ($this->sd96_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_procedimento"]:$this->sd96_i_procedimento);
-       $this->sd96_i_cbo = ($this->sd96_i_cbo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_cbo"]:$this->sd96_i_cbo);
-       $this->sd96_i_anocomp = ($this->sd96_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_anocomp"]:$this->sd96_i_anocomp);
-       $this->sd96_i_mescomp = ($this->sd96_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_mescomp"]:$this->sd96_i_mescomp);
+       $this->sd96_i_codigo = ($this->sd96_i_codigo === 0 || $this->sd96_i_codigo === 0.0 || $this->sd96_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_codigo"]:$this->sd96_i_codigo);
+       $this->sd96_i_procedimento = ($this->sd96_i_procedimento === 0 || $this->sd96_i_procedimento === 0.0 || $this->sd96_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_procedimento"]:$this->sd96_i_procedimento);
+       $this->sd96_i_cbo = ($this->sd96_i_cbo === 0 || $this->sd96_i_cbo === 0.0 || $this->sd96_i_cbo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_cbo"]:$this->sd96_i_cbo);
+       $this->sd96_i_anocomp = ($this->sd96_i_anocomp === 0 || $this->sd96_i_anocomp === 0.0 || $this->sd96_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_anocomp"]:$this->sd96_i_anocomp);
+       $this->sd96_i_mescomp = ($this->sd96_i_mescomp === 0 || $this->sd96_i_mescomp === 0.0 || $this->sd96_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_mescomp"]:$this->sd96_i_mescomp);
      }else{
-       $this->sd96_i_codigo = ($this->sd96_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_codigo"]:$this->sd96_i_codigo);
+       $this->sd96_i_codigo = ($this->sd96_i_codigo === 0 || $this->sd96_i_codigo === 0.0 || $this->sd96_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd96_i_codigo"]:$this->sd96_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_sau_proccbo {
          $this->sd96_i_codigo = $sd96_i_codigo; 
        }
      }
-     if(($this->sd96_i_codigo == null) || ($this->sd96_i_codigo == "") ){ 
+     if(($this->sd96_i_codigo == null) || ($this->sd96_i_codigo === 0 || $this->sd96_i_codigo === 0.0 || $this->sd96_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd96_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_sau_proccbo {
    function sql_query ( $sd96_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_sau_proccbo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_sau_proccbo {
    function sql_query_file ( $sd96_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_sau_proccbo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -497,14 +497,14 @@ class cl_sau_proccbo {
    * @param   int      $iRh70_sequencial        codigo da especialidade
    * @return  string   sql da busca
    */
-  function sql_query_procedimento_especialidade($sSd63_c_procedimento = null, $iRh70_sequencial, $sCampos = "*",
+  function sql_query_procedimento_especialidade($sSd63_c_procedimento = null, $iRh70_sequencial = null, $sCampos = "*",
                                                 $sOrdem = "" ,
                                                 $sDbwhere = "") {
  
     $sSql  = 'select ';
     if($sCampos != "*" ) {
 
-      $aCampos_sql = split("#",$sCampos);
+      $aCampos_sql = preg_split("#\\##m",$sCampos);
       $sVirgula = "";
       for($iCont = 0; $iCont < sizeof($aCampos_sql); $iCont++) {
 
@@ -568,13 +568,13 @@ class cl_sau_proccbo {
 
   }
 
-  function sql_query_func($iCodigo = null, $sCampos = '*', $sOrdem = null, $sDbWhere = '', $intUnidade,
+  function sql_query_func($iCodigo = null, $sCampos = '*', $sOrdem = null, $sDbWhere = '', $intUnidade = null,
                                                           $lFiltraServico = true , $sEspec = '',$lProcSemCBO = true) {
 
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
 
@@ -713,7 +713,7 @@ class cl_sau_proccbo {
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 

@@ -62,7 +62,7 @@ class cl_lab_labusuario {
                  la05_d_fim = date = Fim 
                  ";
    //funcao construtor da classe 
-   function cl_lab_labusuario() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_labusuario"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,9 +79,9 @@ class cl_lab_labusuario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la05_i_codigo = ($this->la05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la05_i_codigo"]:$this->la05_i_codigo);
-       $this->la05_i_laboratorio = ($this->la05_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la05_i_laboratorio"]:$this->la05_i_laboratorio);
-       $this->la05_i_usuario = ($this->la05_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la05_i_usuario"]:$this->la05_i_usuario);
+       $this->la05_i_codigo = ($this->la05_i_codigo === 0 || $this->la05_i_codigo === 0.0 || $this->la05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la05_i_codigo"]:$this->la05_i_codigo);
+       $this->la05_i_laboratorio = ($this->la05_i_laboratorio === 0 || $this->la05_i_laboratorio === 0.0 || $this->la05_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la05_i_laboratorio"]:$this->la05_i_laboratorio);
+       $this->la05_i_usuario = ($this->la05_i_usuario === 0 || $this->la05_i_usuario === 0.0 || $this->la05_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la05_i_usuario"]:$this->la05_i_usuario);
        if($this->la05_d_inicio == ""){
          $this->la05_d_inicio_dia = ($this->la05_d_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la05_d_inicio_dia"]:$this->la05_d_inicio_dia);
          $this->la05_d_inicio_mes = ($this->la05_d_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la05_d_inicio_mes"]:$this->la05_d_inicio_mes);
@@ -99,7 +99,7 @@ class cl_lab_labusuario {
          }
        }
      }else{
-       $this->la05_i_codigo = ($this->la05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la05_i_codigo"]:$this->la05_i_codigo);
+       $this->la05_i_codigo = ($this->la05_i_codigo === 0 || $this->la05_i_codigo === 0.0 || $this->la05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la05_i_codigo"]:$this->la05_i_codigo);
      }
    }
    // funcao para inclusao
@@ -159,7 +159,7 @@ class cl_lab_labusuario {
          $this->la05_i_codigo = $la05_i_codigo; 
        }
      }
-     if(($this->la05_i_codigo == null) || ($this->la05_i_codigo == "") ){ 
+     if(($this->la05_i_codigo == null) || ($this->la05_i_codigo === 0 || $this->la05_i_codigo === 0.0 || $this->la05_i_codigo == "") ){ 
        $this->erro_sql = " Campo la05_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

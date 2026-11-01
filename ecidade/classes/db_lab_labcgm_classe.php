@@ -52,7 +52,7 @@ class cl_lab_labcgm {
                  la04_i_laboratorio = int4 = Laboratório 
                  ";
    //funcao construtor da classe 
-   function cl_lab_labcgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_labcgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_lab_labcgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la04_i_codigo = ($this->la04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la04_i_codigo"]:$this->la04_i_codigo);
-       $this->la04_i_cgm = ($this->la04_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["la04_i_cgm"]:$this->la04_i_cgm);
-       $this->la04_i_laboratorio = ($this->la04_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la04_i_laboratorio"]:$this->la04_i_laboratorio);
+       $this->la04_i_codigo = ($this->la04_i_codigo === 0 || $this->la04_i_codigo === 0.0 || $this->la04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la04_i_codigo"]:$this->la04_i_codigo);
+       $this->la04_i_cgm = ($this->la04_i_cgm === 0 || $this->la04_i_cgm === 0.0 || $this->la04_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["la04_i_cgm"]:$this->la04_i_cgm);
+       $this->la04_i_laboratorio = ($this->la04_i_laboratorio === 0 || $this->la04_i_laboratorio === 0.0 || $this->la04_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la04_i_laboratorio"]:$this->la04_i_laboratorio);
      }else{
-       $this->la04_i_codigo = ($this->la04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la04_i_codigo"]:$this->la04_i_codigo);
+       $this->la04_i_codigo = ($this->la04_i_codigo === 0 || $this->la04_i_codigo === 0.0 || $this->la04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la04_i_codigo"]:$this->la04_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_lab_labcgm {
          $this->la04_i_codigo = $la04_i_codigo; 
        }
      }
-     if(($this->la04_i_codigo == null) || ($this->la04_i_codigo == "") ){ 
+     if(($this->la04_i_codigo == null) || ($this->la04_i_codigo === 0 || $this->la04_i_codigo === 0.0 || $this->la04_i_codigo == "") ){ 
        $this->erro_sql = " Campo la04_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_lab_labcgm {
    function sql_query ( $la04_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_lab_labcgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_lab_labcgm {
    function sql_query_file ( $la04_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_lab_labcgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

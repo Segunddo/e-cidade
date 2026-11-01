@@ -36,7 +36,8 @@ require_once(modification("classes/db_lab_valorreferenciasel_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_lab_valorrefselgrupo_classe.php"));
 
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"], $__qs );
+extract($__qs);
 db_postmemory($_POST);
 
 $cllab_valorreferencia          = new cl_lab_valorreferencia;

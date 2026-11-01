@@ -43,10 +43,10 @@ class cl_lab_grupo
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->la66_codigo = ($this->la66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la66_codigo"]:$this->la66_codigo);
+       $this->la66_codigo = ($this->la66_codigo === 0 || $this->la66_codigo === 0.0 || $this->la66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la66_codigo"]:$this->la66_codigo);
        $this->la66_descricao = ($this->la66_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["la66_descricao"]:$this->la66_descricao);
      }else{
-       $this->la66_codigo = ($this->la66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la66_codigo"]:$this->la66_codigo);
+       $this->la66_codigo = ($this->la66_codigo === 0 || $this->la66_codigo === 0.0 || $this->la66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la66_codigo"]:$this->la66_codigo);
      }
    }
 
@@ -86,7 +86,7 @@ class cl_lab_grupo
          $this->la66_codigo = $la66_codigo; 
        }
      }
-     if(($this->la66_codigo == null) || ($this->la66_codigo == "") ){ 
+     if(($this->la66_codigo == null) || ($this->la66_codigo === 0 || $this->la66_codigo === 0.0 || $this->la66_codigo == "") ){ 
        $this->erro_sql = " Campo la66_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

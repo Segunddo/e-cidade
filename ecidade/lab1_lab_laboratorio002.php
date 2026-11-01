@@ -37,7 +37,8 @@ include(modification("classes/db_lab_labdepart_classe.php"));
 include(modification("classes/db_lab_labcgm_classe.php"));
 include(modification("classes/db_lab_labusuario_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $cllab_laboratorio = new cl_lab_laboratorio;
 $cllab_labresp = new cl_lab_labresp;
@@ -71,7 +72,7 @@ if(isset($alterar)){
        db_redireciona(basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"])."?chavepesquisa=$la02_i_codigo");
 
      }
-     
+
      /* Verifico se ja existe algum registro na tabela lab_depart. Se sim, eu altero, senao eu incluo */
      $sSql = $cllab_labdepart->sql_query(null, '*', null, " la03_i_laboratorio = $la02_i_codigo ");
      $rsTmp = $cllab_labdepart->sql_record($sSql);
@@ -92,11 +93,11 @@ if(isset($alterar)){
      $cllab_labcgm->excluir(null, " la04_i_laboratorio = $la02_i_codigo "); // excluo algum registro que possa ter na lab_labcgm
 
    } else { // tipo externo
- 
+
      $sSql = $cllab_labcgm->sql_query(null, 'la04_i_codigo', null, " la04_i_laboratorio = $la02_i_codigo ");
      $rsTmp = $cllab_labcgm->sql_record($sSql);
      if($cllab_labcgm->numrows > 0) {
-       
+
        db_fieldsmemory($rsTmp, 0);
        $cllab_labcgm->la04_i_codigo = $la04_i_codigo;
        $cllab_labcgm->alterar($la04_i_codigo);

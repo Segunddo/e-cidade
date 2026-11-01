@@ -46,6 +46,7 @@ da área, envio só depois dela.
 |---|---|---|---|---|---|---|---|---|
 | 1 `fum`+`hip`+`age`+`amb` | 1.896 | 26 Rector | 1.896/1.896 | 364/364 (11 falham nos dois) | 785 (diffs só do harness) | 19.640 linhas, diffs só do harness | 2.216 pares, 0 div. | **71/71** |
 | 2 `tfd`+`vac` | 2.194 | 157 Rector + 1 LSP + 1 forma negada à mão | 2.194/2.194 | 375/375 depois da LSP (13 falham nos dois) | 892 (diffs só do harness) | 22.712 linhas, diffs só do harness | 2.541 pares, 1 div. → corrigida | **164/164** |
+| 3 `lab` | 1.578 | 105 Rector + 4 guardas `pg_*` + 1 forma negada (formulário) à mão | 1.577/1.578 (1 não compila em nenhum) | 293/293 (12 falham nos dois) | 493 (diffs só do harness) | 12.886 linhas, diffs só do harness | 1.546 pares, 0 div. | **193/195** (2 caracterizadas) |
 
 **Lote 1 — `fum`, `hip`, `age`, `amb`** (71 arquivos, roteados no `location`; 31/10/2026). Enumerador: 57 alvos, dos
 quais **11 são o falso positivo já registrado** no `tra` (`cgm*`, `db_db_uf`, `db_db_userinst`…: portados por commits
@@ -98,4 +99,40 @@ Roteamento: `tfd|vac` no `location` e nos três scripts; `map` regenerado sem mu
 estava nele). Conferido: `tfd1_`, `/w/2/vac1_` → 8.5; `login`, `far1_`, `sau1_` → 5.6. Passo 8b (131 telas da Saúde no
 8.5): nada indo ao 5.6 (4 iframes de pasta).
 
-**Estado:** lote 2 concluído (commit local). Aguardando o pedido do lote 3 (`lab`).
+**Lote 3 — `lab`** (195 arquivos, roteados no `location`; 31/10/2026). 121 alvos. `split()`: 136 `"#"`, 2 `'#'`. Rector em
+**105 arquivos**, só regras vetadas (72 `parse_str`, 31 guardas, 28 `split`, 27 construtores, 2
+`OptionalParametersAfterRequired`), 0 na passada seguinte. As 2 da regra de parâmetro opcional caíram numa mãe e na filha
+(`cl_sau_proccbo::sql_query_procedimento_especialidade`/`sql_query_func` e `cl_sau_proccbo_ext::sql_query_ext`, métodos
+diferentes): a carga confirmou que as duas continuam compatíveis — a conferência que a skill passou a pedir no lote 2.
+Remanescentes 0; portão 0 ausentes; carga 293/293 nos dois.
+
+- **`lab1_lab_labresp002.php` não compila em nenhum dos dois** (linha 69: `db_botao = true;`, sem o `$`) — o Rector não
+  lê o arquivo e o `parse_str` dele fica sem porte. Pré-existente, intocado: a tela quebra igual nos dois.
+
+Bateria 189/195 → **193/195**. À mão:
+- **4 guardas `pg_*`** (`guarda_ciclo.py`): `src/Saude/Laboratorio/Repository/ImportacaoRequisicaoInconsistenciaRepository.php`
+  117/122 (a 117 compara com `=== 0`: o 5.6 devolve `null` e a guarda também, então `null === 0` é falso nos dois — fiel) e
+  `lab2_producao001.php:96`.
+- **Forma negada num formulário** (categoria do Patrimonial): `forms/db_frmlab_laboratorio.php:149`,
+  `if(@$la02_i_tipo!="")` com `$la02_i_tipo = 0` emitia `js_tipo(0);` só no 8.5 (`lab1_lab_laboratorio002/003`). Guarda do
+  catálogo (`!== 0 && !== 0.0`).
+
+As 2 caracterizadas, nenhuma defeito de migração:
+- `lab2_mapacoletaconsulta.php` — a bateria a chama **sem parâmetros**: `mktime()` recebe `""` (no 5.6, `false` com aviso;
+  no 8, `TypeError`). O formulário (`lab2_mapacoleta001.php`) exige período e laboratório. Pelo caminho real, **5 casos
+  idênticos** (dois modelos, setor vazio e preenchido, dois períodos, laboratório vazio). Mesmo caso do `bib1_emprestimo002`
+  do Educação. Base sem dados: `laboratorio.lab_laboratorio` e `lab_labsetor` vazias, então o relatório com dados não foi
+  exercitado.
+- `lab4_resultadomodelo1.php` — fragmento incluído por `lab4_emissaoresultnovo002.php:603` (idêntica), que define
+  `$oDadosEstrutura`; aberto sozinho, atribui propriedade em `null`. Mesmo caso dos `bib2_comprovantemodelo_*`.
+
+**DEFEITO DO HARNESS, corrigido: o `cmp.py` cortava a URL no primeiro `&`.** O `curl` roda dentro de `bash -lc` com a URL sem
+aspas, e o `&` mandava o resto para segundo plano: `ONLY="tela.php?a=1&b=2"` comparava só `?a=1`. Achado aqui, porque os
+casos com parâmetros saíam divergentes pelo `cmp.py` e idênticos pelo `curl` direto. Corrigido com `shlex.quote`. Nenhum
+resultado registrado usou `ONLY` com mais de um parâmetro (conferido no registro); a bateria por prefixo não usa parâmetros.
+
+Bateria dirigida: nenhuma tela servida fora do lote usa os 32 arquivos de `classes/`, o repositório de `src/` nem o
+formulário alterados. Roteamento: `lab` no `location` e nos três scripts; `map` sem mudança (1.104). Conferido: `lab1_`,
+`/w/2/lab4_` → 8.5; `login`, `far1_`, `sau1_` → 5.6. Passo 8b (213 telas da Saúde no 8.5): nada indo ao 5.6.
+
+**Estado:** lote 3 concluído (commit local). Aguardando o pedido do lote 4 (`far`).

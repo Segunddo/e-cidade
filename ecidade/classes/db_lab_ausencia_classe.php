@@ -66,7 +66,7 @@ class cl_lab_ausencia {
                  la36_i_tipo = int8 = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_lab_ausencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_ausencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,8 +83,8 @@ class cl_lab_ausencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la36_i_codigo = ($this->la36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_i_codigo"]:$this->la36_i_codigo);
-       $this->la36_i_setorexame = ($this->la36_i_setorexame == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_i_setorexame"]:$this->la36_i_setorexame);
+       $this->la36_i_codigo = ($this->la36_i_codigo === 0 || $this->la36_i_codigo === 0.0 || $this->la36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_i_codigo"]:$this->la36_i_codigo);
+       $this->la36_i_setorexame = ($this->la36_i_setorexame === 0 || $this->la36_i_setorexame === 0.0 || $this->la36_i_setorexame == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_i_setorexame"]:$this->la36_i_setorexame);
        if($this->la36_d_ini == ""){
          $this->la36_d_ini_dia = ($this->la36_d_ini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_d_ini_dia"]:$this->la36_d_ini_dia);
          $this->la36_d_ini_mes = ($this->la36_d_ini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_d_ini_mes"]:$this->la36_d_ini_mes);
@@ -103,9 +103,9 @@ class cl_lab_ausencia {
        }
        $this->la36_c_horaini = ($this->la36_c_horaini == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_c_horaini"]:$this->la36_c_horaini);
        $this->la36_c_horafim = ($this->la36_c_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_c_horafim"]:$this->la36_c_horafim);
-       $this->la36_i_tipo = ($this->la36_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_i_tipo"]:$this->la36_i_tipo);
+       $this->la36_i_tipo = ($this->la36_i_tipo === 0 || $this->la36_i_tipo === 0.0 || $this->la36_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_i_tipo"]:$this->la36_i_tipo);
      }else{
-       $this->la36_i_codigo = ($this->la36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_i_codigo"]:$this->la36_i_codigo);
+       $this->la36_i_codigo = ($this->la36_i_codigo === 0 || $this->la36_i_codigo === 0.0 || $this->la36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la36_i_codigo"]:$this->la36_i_codigo);
      }
    }
    // funcao para inclusao
@@ -171,7 +171,7 @@ class cl_lab_ausencia {
          $this->la36_i_codigo = $la36_i_codigo; 
        }
      }
-     if(($this->la36_i_codigo == null) || ($this->la36_i_codigo == "") ){ 
+     if(($this->la36_i_codigo == null) || ($this->la36_i_codigo === 0 || $this->la36_i_codigo === 0.0 || $this->la36_i_codigo == "") ){ 
        $this->erro_sql = " Campo la36_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -496,7 +496,7 @@ class cl_lab_ausencia {
    function sql_query ( $la36_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -521,7 +521,7 @@ class cl_lab_ausencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_lab_ausencia {
    function sql_query_file ( $la36_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -555,7 +555,7 @@ class cl_lab_ausencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -567,7 +567,7 @@ class cl_lab_ausencia {
    function sql_query_laboratorio ( $la36_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -592,7 +592,7 @@ class cl_lab_ausencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

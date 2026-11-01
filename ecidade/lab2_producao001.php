@@ -93,7 +93,7 @@ $oDaolab_labusuario;
               $labs = [
                 'TODOS' => 'TODOS',
               ];
-              while($state = pg_fetch_array($rsLaboratorios)) {
+              while($state = ($rsLaboratorios ? pg_fetch_array($rsLaboratorios) : null)) {
                 $labs[$state['la02_i_codigo']] = $state['la02_c_descr'];
               }
               db_multiploselect("la02_i_codigo",

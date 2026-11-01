@@ -66,7 +66,7 @@ class cl_lab_parametros {
                  la49_habilitargrupo = boolean = Flag que quando True habilita uso de grupos de exames.
                  ";
    //funcao construtor da classe
-   function cl_lab_parametros() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_parametros");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,9 +83,9 @@ class cl_lab_parametros {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la49_i_codigo = ($this->la49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_i_codigo"]:$this->la49_i_codigo);
+       $this->la49_i_codigo = ($this->la49_i_codigo === 0 || $this->la49_i_codigo === 0.0 || $this->la49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_i_codigo"]:$this->la49_i_codigo);
        $this->la49_c_estrutural = ($this->la49_c_estrutural == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_c_estrutural"]:$this->la49_c_estrutural);
-       $this->la49_i_exameduplo = ($this->la49_i_exameduplo == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_i_exameduplo"]:$this->la49_i_exameduplo);
+       $this->la49_i_exameduplo = ($this->la49_i_exameduplo === 0 || $this->la49_i_exameduplo === 0.0 || $this->la49_i_exameduplo == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_i_exameduplo"]:$this->la49_i_exameduplo);
        $this->la49_modelocoletaamostra = ($this->la49_modelocoletaamostra == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_modelocoletaamostra"]:$this->la49_modelocoletaamostra);
        $this->la49_integracao = ($this->la49_integracao == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_integracao"]:$this->la49_integracao);
        $this->la49_habilitarabsurdo = ($this->la49_habilitarabsurdo == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_habilitarabsurdo"]:$this->la49_habilitarabsurdo);
@@ -94,7 +94,7 @@ class cl_lab_parametros {
        $this->la49_numerocontroleinterno = ($this->la49_numerocontroleinterno == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_numerocontroleinterno"]:$this->la49_numerocontroleinterno);
        $this->la49_habilitargrupo = ($this->la49_habilitargrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_habilitargrupo"]:$this->la49_habilitargrupo);
      }else{
-       $this->la49_i_codigo = ($this->la49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_i_codigo"]:$this->la49_i_codigo);
+       $this->la49_i_codigo = ($this->la49_i_codigo === 0 || $this->la49_i_codigo === 0.0 || $this->la49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_i_codigo"]:$this->la49_i_codigo);
      }
    }
    // funcao para inclusao
@@ -142,7 +142,7 @@ class cl_lab_parametros {
          $this->la49_i_codigo = $la49_i_codigo;
        }
      }
-     if(($this->la49_i_codigo == null) || ($this->la49_i_codigo == "") ){
+     if(($this->la49_i_codigo == null) || ($this->la49_i_codigo === 0 || $this->la49_i_codigo === 0.0 || $this->la49_i_codigo == "") ){
        $this->erro_sql = " Campo la49_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -459,7 +459,7 @@ class cl_lab_parametros {
    function sql_query ( $la49_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_lab_parametros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -493,7 +493,7 @@ class cl_lab_parametros {
    function sql_query_file ( $la49_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -514,7 +514,7 @@ class cl_lab_parametros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

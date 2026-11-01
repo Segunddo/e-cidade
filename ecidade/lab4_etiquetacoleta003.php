@@ -27,7 +27,8 @@
 
 include(modification("fpdf151/scpdf.php"));
 include(modification("classes/db_lab_requiitem_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $oDaoRequisicao = new cl_lab_requisicao;
 $sCampos         = "la22_i_cgs, la22_i_codigo, la08_i_codigo, la08_c_descr, z01_v_nome, la23_c_descr, la21_i_codigo";
