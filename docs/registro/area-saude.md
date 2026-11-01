@@ -320,6 +320,6 @@ Ambulatorial 210, Farmácia 105, Laboratório 77, Agendamento 41, TFD 40, Vacina
 | Nível 3 (POST real) | amostra de 6 telas, **6/6 idênticas**; CGS não medida (limite do harness) |
 | Bateria completa do fim da área | `map` **1.108/1.108**; `location` **9.213/9.245** (todas caracterizadas) |
 | Telas de menu pelo proxy | **493/493** no 8.5 |
-| Envio ao GitHub | **pendente — aguarda o pedido do usuário** | Falta a etapa do fim da área: bateria completa (todos os prefixos
+| Envio ao GitHub | **feito em 01/11/2026** — `origin/6saude-migrado` (`0865dc88f`) | Falta a etapa do fim da área: bateria completa (todos os prefixos
 do `location` + o `map` inteiro), a conferência pelo proxy das telas de menu da Saúde e o envio — cada uma só com o pedido do
 usuário.
