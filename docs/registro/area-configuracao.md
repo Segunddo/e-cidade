@@ -160,4 +160,4 @@ todo o repositório, quebram igual nos dois): `con1_leituraformulario001`, `con1
 | Alterados | 44 + 68 + 2 pelo Rector + ~205 pontos à mão (35 `each()`, 125+2 `fputs`/`fclose` guardados, 23 guardas `pg_*`/coluna, 3 de tipo) |
 | Bateria completa do fim da área | `map` **1.312/1.312**; `location` **9.298/9.331** (todas caracterizadas) |
 | Telas de menu pelo proxy | **204/204** no 8.5 (+ 5 fantasmas) |
-| Envio ao GitHub | **pendente — aguarda o pedido do usuário** |
+| Envio ao GitHub | **feito em 03/11/2026** — `origin/7configuracao-migrado` (`a142f5f49`) |
