@@ -210,7 +210,7 @@ if ( $oPost->tipo == "consultaCampos" ) {
   } else if ($oPost->tipo == "excluirCampos") {
 
 
-  	$aCampos = split(",",$oPost->aCampos);
+  	$aCampos = preg_split("#,#m",$oPost->aCampos);
 
   	foreach ( $aCampos as $sNomeCampo){
  	    unset($oXML->aColunas["Principal"][$sNomeCampo]);
@@ -626,7 +626,7 @@ if ( $oPost->tipo == "consultaCampos" ) {
 	    $sMsgErro = $cldb_relatorio->erro_msg;
 	  }
 
-		
+
 	  	$cldb_relatoriousuario->excluir(null,' db09_db_relatorio = '.$oXML->getCodRelatorio());
 
 	  	if($cldb_relatoriousuario->erro_status == 0){
@@ -646,7 +646,7 @@ if ( $oPost->tipo == "consultaCampos" ) {
                   }
                 }
 
-             
+
 	     $cldb_relatoriodepart->excluir(null, ' db07_db_relatorio = '.$oXML->getCodRelatorio());
 
 	     if($cldb_relatoriodepart->erro_status == 0){

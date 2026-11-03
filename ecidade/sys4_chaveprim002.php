@@ -58,7 +58,7 @@ foreach ($queryString as $key => $value) {
                         where a.codarq = $tabela
                         order by a.seqarq
                     ");
-                    $num_linhas = pg_numrows($result);
+                    $num_linhas = ($result ? pg_numrows($result) : null);
                     for ($i = 0; $i < $num_linhas; $i++) {
                         $nome_campo = pg_fieldname($result, 0);
                         $nome_campo = "#" . trim(pg_result($result, $i, $nome_campo)) . "#";

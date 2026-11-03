@@ -56,7 +56,7 @@ class cl_db_sysprikey {
                  camiden = int4 = Codigo Campo 
                  ";
    //funcao construtor da classe 
-   function cl_db_sysprikey() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysprikey"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,15 +73,15 @@ class cl_db_sysprikey {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
-       $this->codcam = ($this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
-       $this->sequen = ($this->sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["sequen"]:$this->sequen);
-       $this->referen = ($this->referen == ""?@$GLOBALS["HTTP_POST_VARS"]["referen"]:$this->referen);
-       $this->camiden = ($this->camiden == ""?@$GLOBALS["HTTP_POST_VARS"]["camiden"]:$this->camiden);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codcam = ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
+       $this->sequen = ($this->sequen === 0 || $this->sequen === 0.0 || $this->sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["sequen"]:$this->sequen);
+       $this->referen = ($this->referen === 0 || $this->referen === 0.0 || $this->referen == ""?@$GLOBALS["HTTP_POST_VARS"]["referen"]:$this->referen);
+       $this->camiden = ($this->camiden === 0 || $this->camiden === 0.0 || $this->camiden == ""?@$GLOBALS["HTTP_POST_VARS"]["camiden"]:$this->camiden);
      }else{
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
-       $this->codcam = ($this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
-       $this->sequen = ($this->sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["sequen"]:$this->sequen);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codcam = ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
+       $this->sequen = ($this->sequen === 0 || $this->sequen === 0.0 || $this->sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["sequen"]:$this->sequen);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_db_sysprikey {
        $this->codcam = $codcam; 
        $this->codarq = $codarq; 
        $this->sequen = $sequen; 
-     if(($this->codcam == null) || ($this->codcam == "") ){ 
+     if(($this->codcam == null) || ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == "") ){ 
        $this->erro_sql = " Campo codcam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -116,7 +116,7 @@ class cl_db_sysprikey {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->codarq == null) || ($this->codarq == "") ){ 
+     if(($this->codarq == null) || ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == "") ){ 
        $this->erro_sql = " Campo codarq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -124,7 +124,7 @@ class cl_db_sysprikey {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sequen == null) || ($this->sequen == "") ){ 
+     if(($this->sequen == null) || ($this->sequen === 0 || $this->sequen === 0.0 || $this->sequen == "") ){ 
        $this->erro_sql = " Campo sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -424,7 +424,7 @@ class cl_db_sysprikey {
    function sql_query ( $codcam=null,$codarq=null,$sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -463,7 +463,7 @@ class cl_db_sysprikey {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_db_sysprikey {
    function sql_query_file ( $codcam=null,$codarq=null,$sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -512,7 +512,7 @@ class cl_db_sysprikey {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

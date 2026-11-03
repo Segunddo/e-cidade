@@ -200,7 +200,7 @@ function verifica_diretorio($diretorio,$tarefa){
   if( file_exists($CVSEntries) ){
     $arquivos_cvs = file( $CVSEntries );
     for($arq=0;$arq<count($arquivos_cvs);$arq++){
-      $x = split("/",$arquivos_cvs[$arq]);
+      $x = preg_split("#\\/#m",$arquivos_cvs[$arq]);
       if(isset($x[1]) && $x[0] == null  ){
         $arq_cvs[ $diretorio.$x[1] ] = $diretorio.$arquivos_cvs[$arq];
       }
@@ -220,7 +220,7 @@ function verifica_diretorio($diretorio,$tarefa){
       if( file_exists($CVSEntries) ) {
         $arquivos_cvs = file( $CVSEntries );
         for($arq=0;$arq<count($arquivos_cvs);$arq++) {
-          $x = split("/",$arquivos_cvs[$arq]);
+          $x = preg_split("#\\/#m",$arquivos_cvs[$arq]);
           if(isset($x[1]) && $x[0] == null) {
             $arq_cvs[ $diretorio.$entry."/".$x[1] ] = $diretorio.$entry.$arquivos_cvs[$arq];
           }
@@ -285,7 +285,7 @@ if(!isset($arq_cvs)){
 
 for($ga=0;$ga<count($arq_cvs);$ga++){
 
-  $dados = split("/",$arq_cvs[key($arq_cvs)]);
+  $dados = preg_split("#\\/#m",$arq_cvs[key($arq_cvs)]);
 
   $totsplit = count($dados);
 

@@ -69,7 +69,7 @@ class cl_db_sysclasseatualizareg {
                  fonteoriginal = text = Fonte original 
                  ";
    //funcao construtor da classe 
-   function cl_db_sysclasseatualizareg() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysclasseatualizareg"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -86,9 +86,9 @@ class cl_db_sysclasseatualizareg {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codatualiza = ($this->codatualiza == ""?@$GLOBALS["HTTP_POST_VARS"]["codatualiza"]:$this->codatualiza);
+       $this->codatualiza = ($this->codatualiza === 0 || $this->codatualiza === 0.0 || $this->codatualiza == ""?@$GLOBALS["HTTP_POST_VARS"]["codatualiza"]:$this->codatualiza);
        $this->ip = ($this->ip == ""?@$GLOBALS["HTTP_POST_VARS"]["ip"]:$this->ip);
-       $this->codusu = ($this->codusu == ""?@$GLOBALS["HTTP_POST_VARS"]["codusu"]:$this->codusu);
+       $this->codusu = ($this->codusu === 0 || $this->codusu === 0.0 || $this->codusu == ""?@$GLOBALS["HTTP_POST_VARS"]["codusu"]:$this->codusu);
        if($this->dataalt == ""){
          $this->dataalt_dia = ($this->dataalt_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dataalt_dia"]:$this->dataalt_dia);
          $this->dataalt_mes = ($this->dataalt_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dataalt_mes"]:$this->dataalt_mes);
@@ -98,13 +98,13 @@ class cl_db_sysclasseatualizareg {
          }
        }
        $this->horaalt = ($this->horaalt == ""?@$GLOBALS["HTTP_POST_VARS"]["horaalt"]:$this->horaalt);
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
        $this->nomearq = ($this->nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["nomearq"]:$this->nomearq);
        $this->metodo = ($this->metodo == ""?@$GLOBALS["HTTP_POST_VARS"]["metodo"]:$this->metodo);
        $this->fontenovo = ($this->fontenovo == ""?@$GLOBALS["HTTP_POST_VARS"]["fontenovo"]:$this->fontenovo);
        $this->fonteoriginal = ($this->fonteoriginal == ""?@$GLOBALS["HTTP_POST_VARS"]["fonteoriginal"]:$this->fonteoriginal);
      }else{
-       $this->codatualiza = ($this->codatualiza == ""?@$GLOBALS["HTTP_POST_VARS"]["codatualiza"]:$this->codatualiza);
+       $this->codatualiza = ($this->codatualiza === 0 || $this->codatualiza === 0.0 || $this->codatualiza == ""?@$GLOBALS["HTTP_POST_VARS"]["codatualiza"]:$this->codatualiza);
      }
    }
    // funcao para inclusao
@@ -215,7 +215,7 @@ class cl_db_sysclasseatualizareg {
          $this->codatualiza = $codatualiza; 
        }
      }
-     if(($this->codatualiza == null) || ($this->codatualiza == "") ){ 
+     if(($this->codatualiza == null) || ($this->codatualiza === 0 || $this->codatualiza === 0.0 || $this->codatualiza == "") ){ 
        $this->erro_sql = " Campo codatualiza nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -600,7 +600,7 @@ class cl_db_sysclasseatualizareg {
    function sql_query ( $codatualiza=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -622,7 +622,7 @@ class cl_db_sysclasseatualizareg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -634,7 +634,7 @@ class cl_db_sysclasseatualizareg {
    function sql_query_file ( $codatualiza=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -655,7 +655,7 @@ class cl_db_sysclasseatualizareg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

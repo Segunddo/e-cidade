@@ -254,7 +254,7 @@ input {
                 $primary_key = "(";
                 $nomePK = trim(pg_result($result,$i,"nomearq"))."_";
                 for($p = 0;$p < $Npk;$p++) {
-                  $cc = split("_",trim(pg_result($pk,$p,"nomecam")));
+                  $cc = preg_split("#_#m",trim(pg_result($pk,$p,"nomecam")));
                   if(strlen(strstr(strtoupper(@$cc[1]),"ANOUSU")) > 0)
                     $nomePK = $nomePK."ae_";
                   else if(strlen(strstr(strtoupper(@$cc[1]),"MESUSU")) > 0)
@@ -328,7 +328,7 @@ if(isset($fk)) {
           $CampFK = $CampFK.trim(pg_result($fk,$f,"nomecam")).")";
         else
           $CampFK = $CampFK.trim(pg_result($fk,$f,"nomecam")).",";
-        $cc = split("_",trim(pg_result($fk,$f,"nomecam")));
+        $cc = preg_split("#_#m",trim(pg_result($fk,$f,"nomecam")));
         if(strlen(strstr(strtoupper(@$cc[1]),"ANOUSU")) > 0)
           $NomeFK = $NomeFK."ae_";
         else if(strlen(strstr(strtoupper(@$cc[1]),"MESEXE")) > 0)

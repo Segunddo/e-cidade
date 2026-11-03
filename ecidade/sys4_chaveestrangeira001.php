@@ -42,7 +42,7 @@ foreach ($queryString as $key => $value) {
 
 //$tabela = isset($HTTP_POST_VARS["tabela"])?$HTTP_POST_VARS["tabela"]:$tabela;
 $nomearq = db_query("select nomearq from db_sysarquivo where codarq = $tabela");
-$nomearq = pg_result($nomearq, 0, 0);
+$nomearq = ($nomearq ? pg_result($nomearq, 0, 0) : null);
 if (!isset($ref) && isset($HTTP_POST_VARS["ref"])) {
     $ref = $HTTP_POST_VARS["ref"];
 }
@@ -370,7 +370,7 @@ if (!isset($ref) && isset($HTTP_POST_VARS["ref"])) {
                     }
                 } else {
                     db_postmemory($HTTP_POST_VARS);
-                    $campos = split("\r\n", $alt_ind);
+                    $campos = preg_split("#\r\n#m", $alt_ind);
                     db_query("BEGIN");
                     $result = db_query("delete from db_sysforkey where codarq = $tabela and referen = $ref") or die("Erro(122) excluindo db_sysforkey");
                     for ($i = 0; $i < sizeof($campos) - 1; $i++) {

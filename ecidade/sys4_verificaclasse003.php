@@ -37,9 +37,9 @@
 	db_postmemory($_POST);
 	$usu= db_getsession("DB_id_usuario");
 
-	$arr = split("\|", $classes);
+	$arr = preg_split("#\\|#m", $classes);
 	$count = count($arr);
-  
+
   $lErro = false;
 	db_inicio_transacao();
 	$sqltab ="select * from pg_tables where tablename = 'temp_classeatualiza'";
@@ -68,14 +68,14 @@
         $lErro    = true;        
         break;
       }
-			
+
 			$cldb_sysclasses ->excluir ($codarq,$metodo);
       if ($cldb_sysclasses->erro_status == 0) {
          $sErroMsg = $cldb_sysclasses->erro_msg;
          $lErro    = true;
          break;
       }
-			 
+
 			$cldb_sysclasses->codarq      = $codarq;
 			$cldb_sysclasses->nomclasse   = $metodo;
 			$cldb_sysclasses->descrclasse = 'Atualizado pelo sistema';
@@ -89,7 +89,7 @@
 
 		}
 	}
-  
+
   db_fim_transacao($lErro);
   if ($lErro) {
     db_msgbox($sErroMsg);

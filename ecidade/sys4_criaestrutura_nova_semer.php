@@ -213,7 +213,7 @@ echo "</table>";
   $IND =  $_POST;
   $indice =@ $_POST["indice"];
   fputs($fd,"--DROP TABLE:\n");
-  while (list($campo,$valor) = each($_POST)){
+  while(is_array($_POST) && (($campo = key($_POST)) !== null) && (((($valor = current($_POST)) || true) && (next($_POST) || true)))) /* each() removido no PHP 8 */ {
      if (substr($campo,0,3) == "chk"){
           $campos  = db_query("select a.codarq,a.nomearq,m.codmod,m.nomemod
                               from   db_sysmodulo m
@@ -232,7 +232,7 @@ echo "</table>";
   }
   //cria drop sequences;
   fputs($fd,"--Criando drop sequences\n");
-  while (list($campo1,$valor1) = each($sequencias)){
+  while(is_array($sequencias) && (($campo1 = key($sequencias)) !== null) && (((($valor1 = current($sequencias)) || true) && (next($sequencias) || true)))) /* each() removido no PHP 8 */ {
      if (substr($campo1,0,3) == "chk"){
          $seq = db_query("select s.nomesequencia,s.incrseq,s.minvalueseq,maxvalueseq,startseq,s.cacheseq
 	                  from db_syssequencia s
@@ -248,7 +248,7 @@ echo "</table>";
  } 
   //cria  sequences;
   fputs($fd, "\n\n-- Criando  sequences\n");
-  while (list($campo2,$valor2) = each($csequencias)){
+  while(is_array($csequencias) && (($campo2 = key($csequencias)) !== null) && (((($valor2 = current($csequencias)) || true) && (next($csequencias) || true)))) /* each() removido no PHP 8 */ {
      if (substr($campo2,0,3) == "chk"){
          $cseq = db_query("select s.nomesequencia,s.incrseq,s.minvalueseq,maxvalueseq,startseq,s.cacheseq
 	                  from db_syssequencia s
@@ -270,7 +270,7 @@ echo "</table>";
    }
    //cria as tabelas e sua estrutura
      fputs($fd,"-- TABELAS E ESTRUTURA\n");
-    while (list($campo3,$valor3) = each($camp)){;
+    while(is_array($camp) && (($campo3 = key($camp)) !== null) && (((($valor3 = current($camp)) || true) && (next($camp) || true)))) /* each() removido no PHP 8 */ {;
        if (substr($campo3,0,3) == "chk"){
           $tabela  = db_query("select a.codarq,a.nomearq,m.codmod,m.nomemod
                               from   db_sysmodulo m
@@ -317,7 +317,7 @@ echo "</table>";
                 $primary_key = "(";
                 $nomePK = trim($nomearq)."_";
                 for($p = 0;$p < $Npk;$p++) {
-                  $cc = split("_",trim(pg_result($pk,$p,"nomecam")));
+                  $cc = preg_split("#_#m",trim(pg_result($pk,$p,"nomecam")));
                   if(strlen(strstr(strtoupper(@$cc[1]),"ANOUSU")) > 0)
                     $nomePK = $nomePK."ae_";
                   else if(strlen(strstr(strtoupper(@$cc[1]),"MESUSU")) > 0)
@@ -367,7 +367,7 @@ echo "</table>";
 // Foreign Key
 if (isset($fk)) {
    fputs ($fd,"\n\n\n-- CHAVE ESTRANGEIRA\n\n\n");
-   while (list($campo5,$valor5) = each($FKs)){
+   while(is_array($FKs) && (($campo5 = key($FKs)) !== null) && (((($valor5 = current($FKs)) || true) && (next($FKs) || true)))) /* each() removido no PHP 8 */ {
       if (substr($campo5,0,3) == "chk"){
           $grupo = db_query("select count(referen),referen
                             from db_sysforkey
@@ -393,7 +393,7 @@ if (isset($fk)) {
           $CampFK = $CampFK.trim(pg_result($fk,$f,"nomecam")).")";
 	   else
           $CampFK = $CampFK.trim(pg_result($fk,$f,"nomecam")).",";
-        $cc = split("_",trim(pg_result($fk,$f,"nomecam")));
+        $cc = preg_split("#_#m",trim(pg_result($fk,$f,"nomecam")));
         if(strlen(strstr(strtoupper(@$cc[1]),"ANOUSU")) > 0)
           $NomeFK = $NomeFK."ae_";
         else if(strlen(strstr(strtoupper(@$cc[1]),"MESEXE")) > 0)
@@ -418,7 +418,7 @@ if (isset($fk)) {
 // Indices
 if (isset($indice)) {
    fputs ($fd,"\n\n\n-- INDICES\n\n\n");
-   while (list($campo6,$valor6) = each($IND)){
+   while(is_array($IND) && (($campo6 = key($IND)) !== null) && (((($valor6 = current($IND)) || true) && (next($IND) || true)))) /* each() removido no PHP 8 */ {
       if (substr($campo6,0,3) == "chk"){
          $ind = db_query("select i.codind,i.nomeind,i.campounico
                          from db_sysindices i
@@ -479,7 +479,7 @@ if(isset($views)) {
 
 //triggers
 if(isset($triggers)) {
-  while (list($campo7,$valor7) = each($IND)){
+  while(is_array($IND) && (($campo7 = key($IND)) !== null) && (((($valor7 = current($IND)) || true) && (next($IND) || true)))) /* each() removido no PHP 8 */ {
      if (substr($campo7,0,3) == "chk"){
          $meta = "where a.codarq=$valor7";
      }else{

@@ -135,7 +135,7 @@
 	";
 	$result = db_query($sql);
 	$numrows = pg_numrows($result);
-	if (sizeof($usuarios)==1){
+	if (sizeof((array)$usuarios)==1){
 		$sqlPesqisaImpressorasDoUsuario = "
 			select d51_usuario, d51_impres
 			from perimp

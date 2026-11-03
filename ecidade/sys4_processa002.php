@@ -63,7 +63,7 @@ function db_fputs($variavel,$conteudo){
                               where a.codarq = $codarq  
                               order by codmod");
 	    
-           if(pg_numrows($campos) > 0){
+           if(($campos ? pg_numrows($campos) : null) > 0){
                db_fieldsmemory($campos,0);
                @db_query("DROP TABLE ".trim($nomearq));      	  
 	  }
@@ -75,7 +75,7 @@ function db_fputs($variavel,$conteudo){
 					  on a.codsequencia = s.codsequencia
 					  where a.codsequencia <> 0
 					  and a.codarq = $codarq");
-	   if (pg_numrows($seq) > 0){
+	   if (($seq ? pg_numrows($seq) : null) > 0){
               $rsseq = pg_fetch_array($seq);
   	      @db_query("DROP SEQUENCE ".$rsseq["nomesequencia"]);      	 
            }
@@ -87,7 +87,7 @@ function db_fputs($variavel,$conteudo){
 					  on a.codsequencia = s.codsequencia
 					  where a.codsequencia <> 0
 					  and a.codarq = $codarq");
-	   if (pg_numrows($cseq) > 0){
+	   if (($cseq ? pg_numrows($cseq) : null) > 0){
               $rscseq = pg_fetch_array($cseq);
   	      db_fputs($fd,"CREATE SEQUENCE ".$rsseq["nomesequencia"]."\n");
   	      db_fputs($fd,"INCREMENT ".trim($rscseq["incrseq"])."\n");
@@ -108,7 +108,7 @@ function db_fputs($variavel,$conteudo){
                               where a.codarq = $codarq  
                               order by codmod");
 	    
-           if(pg_numrows($tabela) > 0){
+           if(($tabela ? pg_numrows($tabela) : null) > 0){
                 db_fieldsmemory($tabela,0);
            }
           $campo = db_query("select c.nomecam,c.conteudo,c.valorinicial,s.nomesequencia,s.codsequencia
@@ -119,7 +119,7 @@ function db_fputs($variavel,$conteudo){
 		  	     on s.codsequencia = a.codsequencia
 			     where codarq = ".$codarq.
 			  "order by a.seqarq");
-	  $Ncampos = pg_numrows($campo);
+	  $Ncampos = ($campo ? pg_numrows($campo) : null);
 	  if ($Ncampos > 0) {
              db_fputs($fd, "\n-- Módulo: ".trim($nomemod)."\n");
              db_fputs($fd, "CREATE TABLE ".trim($nomearq)."(\n");      
@@ -144,7 +144,7 @@ function db_fputs($variavel,$conteudo){
                 $primary_key = "(";
                 $nomePK = trim($nomearq)."_";
                 for($p = 0;$p < $Npk;$p++) {
-                  $cc = split("_",trim(pg_result($pk,$p,"nomecam")));
+                  $cc = preg_split("#_#m",trim(pg_result($pk,$p,"nomecam")));
                   if(strlen(strstr(strtoupper(@$cc[1]),"ANOUSU")) > 0)
                     $nomePK = $nomePK."ae_";
                   else if(strlen(strstr(strtoupper(@$cc[1]),"MESUSU")) > 0)
@@ -196,7 +196,7 @@ function db_fputs($variavel,$conteudo){
                             where codarq = $codarq
                             group by referen");
           $nome = db_query("select nomearq from db_sysarquivo where codarq = $codarq");
-    $Ngrupo = pg_numrows($grupo);
+    $Ngrupo = ($grupo ? pg_numrows($grupo) : null);
     for($j = 0;$j < $Ngrupo;$j++) {
       $fk = db_query("select pai.nomearq as t_pai,c.nomecam
                      from db_sysforkey f
@@ -215,7 +215,7 @@ function db_fputs($variavel,$conteudo){
           $CampFK = $CampFK.trim(pg_result($fk,$f,"nomecam")).")";
 	   else
           $CampFK = $CampFK.trim(pg_result($fk,$f,"nomecam")).",";
-        $cc = split("_",trim(pg_result($fk,$f,"nomecam")));
+        $cc = preg_split("#_#m",trim(pg_result($fk,$f,"nomecam")));
         if(strlen(strstr(strtoupper(@$cc[1]),"ANOUSU")) > 0)
           $NomeFK = $NomeFK."ae_";
         else if(strlen(strstr(strtoupper(@$cc[1]),"MESEXE")) > 0)
@@ -246,7 +246,7 @@ function db_fputs($variavel,$conteudo){
                                on a.codarq = i.codarq
                          where a.codarq = $codarq");
           $nome = db_query("select nomearq from db_sysarquivo where codarq = $codarq");
-    if ($Ni = pg_numrows($ind) > 0) {
+    if ($Ni = ($ind ? pg_numrows($ind) : null) > 0) {
         for ($j = 0;$j < $Ni;$j++) {
         $Ncam = db_query("select c.nomecam
                          from db_syscampo c

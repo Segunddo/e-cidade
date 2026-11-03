@@ -108,25 +108,25 @@ exit;
 //$arquivo = "/tmp/"."func_".trim($nometab).".php";
 umask(74);
 $fd = fopen($arquivo, "w");
-fputs($fd, "<?php\n");
-fputs($fd, "\n");
+$fd && fputs($fd, "<?php\n");
+$fd && fputs($fd, "\n");
 for ($i = 0; $i < $numrows; $i++) {
-    fputs($fd, "require_once modification('libs/db_stdlib.php');\n");
-    fputs($fd, "require_once modification('libs/db_conecta.php');\n");
-    fputs($fd, "require_once modification('libs/db_sessoes.php');\n");
-    fputs($fd, "require_once modification('libs/db_usuariosonline.php');\n");
-    fputs($fd, "require_once modification('dbforms/db_funcoes.php');\n");
-    fputs($fd, "require_once modification('classes/db_" . trim(pg_fetch_result($result, $i,
+    $fd && fputs($fd, "require_once modification('libs/db_stdlib.php');\n");
+    $fd && fputs($fd, "require_once modification('libs/db_conecta.php');\n");
+    $fd && fputs($fd, "require_once modification('libs/db_sessoes.php');\n");
+    $fd && fputs($fd, "require_once modification('libs/db_usuariosonline.php');\n");
+    $fd && fputs($fd, "require_once modification('dbforms/db_funcoes.php');\n");
+    $fd && fputs($fd, "require_once modification('classes/db_" . trim(pg_fetch_result($result, $i,
             'nomearq')) . "_classe.php');\n");
-    fputs($fd, "\n");
-    fputs($fd, "db_postmemory(\$_POST);\n");
-    fputs($fd, "parse_str(\$_SERVER['QUERY_STRING'], \$queryString);\n");
-    fputs($fd, "\n");
-    fputs($fd, "foreach (\$queryString as \$key => \$value) {\n");
-    fputs($fd, "    \${\$key} = \$value;\n");
-    fputs($fd, "}\n");
-    fputs($fd, "\n");
-    fputs($fd,
+    $fd && fputs($fd, "\n");
+    $fd && fputs($fd, "db_postmemory(\$_POST);\n");
+    $fd && fputs($fd, "parse_str(\$_SERVER['QUERY_STRING'], \$queryString);\n");
+    $fd && fputs($fd, "\n");
+    $fd && fputs($fd, "foreach (\$queryString as \$key => \$value) {\n");
+    $fd && fputs($fd, "    \${\$key} = \$value;\n");
+    $fd && fputs($fd, "}\n");
+    $fd && fputs($fd, "\n");
+    $fd && fputs($fd,
         "\$cl" . trim(pg_fetch_result($result, $i, 'nomearq')) . " = new cl_" . trim(pg_fetch_result($result, $i,
             'nomearq')) . "();\n");
     $varpk = "";
@@ -140,31 +140,31 @@ for ($i = 0; $i < $numrows; $i++) {
     $Npk = pg_numrows($pk);
     if (pg_numrows($pk) > 0) {
         for ($p = 0; $p < $Npk; $p++) {
-            fputs($fd,
+            $fd && fputs($fd,
                 "\$cl" . trim(pg_fetch_result($result, $i, 'nomearq')) . "->rotulo->label('" . trim(pg_fetch_result($pk,
                     $p, 'nomecam')) . "');\n");
         }
         if (pg_result($pk, 0, 'camiden') != 0) {
-            fputs($fd,
+            $fd && fputs($fd,
                 "\$cl" . trim(pg_fetch_result($result, $i, 'nomearq')) . "->rotulo->label('" . trim(pg_fetch_result($pk,
                     0, 'campoca')) . "');\n");
         }
     }
-    fputs($fd, "\n");
-    fputs($fd, "?>\n");
-    fputs($fd, "<!doctype html>\n");
-    fputs($fd, "<html lang=\"pt-BR\">\n");
-    fputs($fd, "<head>\n");
-    fputs($fd, "    <meta charset=\"iso-8859-1\">\n");
-    fputs($fd, "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n");
-    fputs($fd, "    <link rel=\"stylesheet\" href=\"estilos.css\">\n");
-    fputs($fd, "    <script src=\"scripts/scripts.js\"></script>\n");
-    fputs($fd, "</head>\n");
-    fputs($fd, "<body>\n");
-    fputs($fd, "<form name=\"form2\" method=\"post\" class=\"container\">\n");
-    fputs($fd, "    <fieldset>\n");
-    fputs($fd, "        <legend>Dados para Pesquisa</legend>\n");
-    fputs($fd,
+    $fd && fputs($fd, "\n");
+    $fd && fputs($fd, "?>\n");
+    $fd && fputs($fd, "<!doctype html>\n");
+    $fd && fputs($fd, "<html lang=\"pt-BR\">\n");
+    $fd && fputs($fd, "<head>\n");
+    $fd && fputs($fd, "    <meta charset=\"iso-8859-1\">\n");
+    $fd && fputs($fd, "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n");
+    $fd && fputs($fd, "    <link rel=\"stylesheet\" href=\"estilos.css\">\n");
+    $fd && fputs($fd, "    <script src=\"scripts/scripts.js\"></script>\n");
+    $fd && fputs($fd, "</head>\n");
+    $fd && fputs($fd, "<body>\n");
+    $fd && fputs($fd, "<form name=\"form2\" method=\"post\" class=\"container\">\n");
+    $fd && fputs($fd, "    <fieldset>\n");
+    $fd && fputs($fd, "        <legend>Dados para Pesquisa</legend>\n");
+    $fd && fputs($fd,
         "        <table width=\"35%\" border=\"0\" align=\"center\" cellspacing=\"3\" class=\"form-container\">\n");
 
     if (pg_numrows($pk) > 0) {
@@ -175,56 +175,56 @@ for ($i = 0; $i < $numrows; $i++) {
 
             if (strpos(pg_result($pk, $p, 'nomecam'), 'anousu') == 0) {
 
-                fputs($fd, "            <tr>\n");
-                fputs($fd, '                <td><label for="chave_' . trim(pg_fetch_result($pk, $p,
+                $fd && fputs($fd, "            <tr>\n");
+                $fd && fputs($fd, '                <td><label for="chave_' . trim(pg_fetch_result($pk, $p,
                         'nomecam')) . '"><?=$L' . trim(pg_result($pk, $p, 'nomecam')) . '?></label></td>' . "\n");
-                fputs($fd, '                <td><?php db_input("' . trim(pg_result($pk, $p,
+                $fd && fputs($fd, '                <td><?php db_input("' . trim(pg_result($pk, $p,
                         'nomecam')) . '",' . trim(pg_result($pk, $p, 'tamanho')) . ', $I' . trim(pg_result($pk, $p,
                         'nomecam')) . ', true, "text", 4, "", "chave_' . trim(pg_result($pk, $p,
                         'nomecam')) . '"); ?></td>' . "\n");
-                fputs($fd, "            </tr>\n");
+                $fd && fputs($fd, "            </tr>\n");
             }
         }
 
         if (pg_result($pk, 0, 'camiden') != 0) {
 
-            fputs($fd, "            <tr>\n");
-            fputs($fd, '                <td><label for="chave_' . trim(pg_fetch_result($pk, 0,
+            $fd && fputs($fd, "            <tr>\n");
+            $fd && fputs($fd, '                <td><label for="chave_' . trim(pg_fetch_result($pk, 0,
                     'campoca')) . '"><?=$L' . trim(pg_result($pk, 0, 'campoca')) . '?></label></td>' . "\n");
-            fputs($fd,
+            $fd && fputs($fd,
                 '                <td><?php db_input("' . trim(pg_result($pk, 0, 'campoca')) . '",' . trim(pg_result($pk,
                     0, 'tamanho')) . ', $I' . trim(pg_result($pk, 0,
                     'campoca')) . ', true, "text", 4, "", "chave_' . trim(pg_result($pk, 0,
                     'campoca')) . '"); ?></td>' . "\n");
-            fputs($fd, "            </tr>\n");
+            $fd && fputs($fd, "            </tr>\n");
         }
     }
-    fputs($fd, "        </table>\n");
-    fputs($fd, "    </fieldset>\n");
-    fputs($fd, "    <input name=\"pesquisar\" type=\"submit\" id=\"pesquisar2\" value=\"Pesquisar\">\n");
-    fputs($fd, "    <input name=\"limpar\" type=\"reset\" id=\"limpar\" value=\"Limpar\" >\n");
-    fputs($fd,
+    $fd && fputs($fd, "        </table>\n");
+    $fd && fputs($fd, "    </fieldset>\n");
+    $fd && fputs($fd, "    <input name=\"pesquisar\" type=\"submit\" id=\"pesquisar2\" value=\"Pesquisar\">\n");
+    $fd && fputs($fd, "    <input name=\"limpar\" type=\"reset\" id=\"limpar\" value=\"Limpar\" >\n");
+    $fd && fputs($fd,
         "    <input name=\"Fechar\" type=\"button\" id=\"fechar\" value=\"Fechar\" onclick=\"parent.db_iframe_" . trim(pg_result($result,
             $i, 'nomearq')) . ".hide();\">\n");
-    fputs($fd, "</form>\n");
-    fputs($fd, "<?php\n");
-    fputs($fd, "if (isset(\$pesquisa_chave) === false) {\n");
-    fputs($fd, "    if (isset(\$campos) === false) {\n");
-    fputs($fd, '        if (file_exists("funcoes/db_func_' . trim(pg_result($result, $i,
+    $fd && fputs($fd, "</form>\n");
+    $fd && fputs($fd, "<?php\n");
+    $fd && fputs($fd, "if (isset(\$pesquisa_chave) === false) {\n");
+    $fd && fputs($fd, "    if (isset(\$campos) === false) {\n");
+    $fd && fputs($fd, '        if (file_exists("funcoes/db_func_' . trim(pg_result($result, $i,
             'nomearq')) . '.php") === true) {' . "\n");
-    fputs($fd, '            include(modification("funcoes/db_func_' . trim(pg_result($result, $i,
+    $fd && fputs($fd, '            include(modification("funcoes/db_func_' . trim(pg_result($result, $i,
             'nomearq')) . '.php"));' . "\n");
-    fputs($fd, '        } else {' . "\n");
+    $fd && fputs($fd, '        } else {' . "\n");
 
     if ($Npk > 0) {
-        fputs($fd, '            $campos = "' . trim(pg_result($result, $i, 'nomearq')) . '.*";' . "\n");
+        $fd && fputs($fd, '            $campos = "' . trim(pg_result($result, $i, 'nomearq')) . '.*";' . "\n");
     } else {
-        fputs($fd,
+        $fd && fputs($fd,
             '            $campos = "' . trim(pg_result($result, $i, 'nomearq')) . '.oid,' . trim(pg_result($result,
                 $i, 'nomearq')) . '.*";' . "\n");
     }
-    fputs($fd, "        }\n");
-    fputs($fd, "    }\n");
+    $fd && fputs($fd, "        }\n");
+    $fd && fputs($fd, "    }\n");
 
     if (pg_numrows($pk) > 0) {
         $Npk = pg_numrows($pk);
@@ -232,146 +232,146 @@ for ($i = 0; $i < $numrows; $i++) {
         if (strpos(pg_result($pk, 0, 'nomecam'), 'anousu') > 0) {
             $regpk = 1;
         }
-        fputs($fd, '        if(isset($chave_' . trim(pg_result($pk, $regpk,
+        $fd && fputs($fd, '        if(isset($chave_' . trim(pg_result($pk, $regpk,
                 'nomecam')) . ') && (trim($chave_' . trim(pg_result($pk, $regpk, 'nomecam')) . ')!="") ){' . "\n");
-        fputs($fd, '	         $sql = $cl' . trim(pg_result($result, $i, 'nomearq')) . '->sql_query(');
+        $fd && fputs($fd, '	         $sql = $cl' . trim(pg_result($result, $i, 'nomearq')) . '->sql_query(');
         for ($p = 0; $p < $Npk; $p++) {
             if ($regpk == 1 && $p == 0) {
-                fputs($fd, "db_getsession('DB_anousu'),");
+                $fd && fputs($fd, "db_getsession('DB_anousu'),");
             } else {
-                fputs($fd, '$chave_' . trim(pg_result($pk, $p, 'nomecam')) . ",");
+                $fd && fputs($fd, '$chave_' . trim(pg_result($pk, $p, 'nomecam')) . ",");
             }
         }
-        fputs($fd, '$campos,"' . trim(pg_result($pk, $regpk, 'nomecam')) . '");' . "\n");
+        $fd && fputs($fd, '$campos,"' . trim(pg_result($pk, $regpk, 'nomecam')) . '");' . "\n");
         if (pg_result($pk, 0, 'camiden') != 0) {
-            fputs($fd, '        }else if(isset($chave_' . trim(pg_result($pk, 0,
+            $fd && fputs($fd, '        }else if(isset($chave_' . trim(pg_result($pk, 0,
                     'campoca')) . ') && (trim($chave_' . trim(pg_result($pk, 0, 'campoca')) . ')!="") ){' . "\n");
-            fputs($fd, '	         $sql = $cl' . trim(pg_result($result, $i, 'nomearq')) . '->sql_query(');
+            $fd && fputs($fd, '	         $sql = $cl' . trim(pg_result($result, $i, 'nomearq')) . '->sql_query(');
             $virgula = "";
             for ($p = 0; $p < $Npk; $p++) {
                 if ($regpk == 1 && $p == 0) {
-                    fputs($fd, "db_getsession('DB_anousu')");
+                    $fd && fputs($fd, "db_getsession('DB_anousu')");
                 } else {
-                    fputs($fd, $virgula . '""');
+                    $fd && fputs($fd, $virgula . '""');
                 }
                 $virgula = ",";
             }
-            fputs($fd, ',$campos,"' . trim(pg_result($pk, 0, 'campoca')) . '"," ' . trim(pg_result($pk, 0,
+            $fd && fputs($fd, ',$campos,"' . trim(pg_result($pk, 0, 'campoca')) . '"," ' . trim(pg_result($pk, 0,
                     'campoca')) . ' like \'$chave_' . trim(pg_result($pk, 0, 'campoca')) . '%\' ");' . "\n");
         }
     } else {
-        fputs($fd, '	         $sql = $cl' . trim(pg_result($result, $i, 'nomearq')) . '->sql_query();' . "\n");
+        $fd && fputs($fd, '	         $sql = $cl' . trim(pg_result($result, $i, 'nomearq')) . '->sql_query();' . "\n");
     }
 
     if ($Npk > 0) {
-        fputs($fd, '        }else{' . "\n");
-        fputs($fd, '           $sql = $cl' . trim(pg_result($result, $i, 'nomearq')) . '->sql_query(');
+        $fd && fputs($fd, '        }else{' . "\n");
+        $fd && fputs($fd, '           $sql = $cl' . trim(pg_result($result, $i, 'nomearq')) . '->sql_query(');
         $virgula = "";
         for ($p = 0; $p < $Npk; $p++) {
             if ($regpk == 1 && $p == 0) {
-                fputs($fd, "db_getsession('DB_anousu')");
+                $fd && fputs($fd, "db_getsession('DB_anousu')");
             } else {
-                fputs($fd, $virgula . '""');
+                $fd && fputs($fd, $virgula . '""');
             }
             $virgula = ",";
         }
         if ($virgula == "") {
-            fputs($fd, $virgula . '""');
+            $fd && fputs($fd, $virgula . '""');
         }
-        fputs($fd, ',$campos,"');
+        $fd && fputs($fd, ',$campos,"');
         $virgula = "";
         for ($p = 0; $p < $Npk; $p++) {
-            fputs($fd, $virgula . trim(pg_result($pk, $p, 'nomecam')));
+            $fd && fputs($fd, $virgula . trim(pg_result($pk, $p, 'nomecam')));
             $virgula = "#";
         }
-        fputs($fd, '","");' . "\n");
-        fputs($fd, '        }' . "\n");
+        $fd && fputs($fd, '","");' . "\n");
+        $fd && fputs($fd, '        }' . "\n");
     }
 
-    fputs($fd, '        $repassa = array();' . "\n");
+    $fd && fputs($fd, '        $repassa = array();' . "\n");
 
     if (pg_numrows($pk) > 0) {
 
 
         $Npk = pg_numrows($pk);
 
-        fputs($fd, '        if(isset($chave_' . trim(pg_result($pk, 0, 'campoca')) . ')){' . "\n");
+        $fd && fputs($fd, '        if(isset($chave_' . trim(pg_result($pk, 0, 'campoca')) . ')){' . "\n");
 
-        fputs($fd, '          $repassa = array(');
+        $fd && fputs($fd, '          $repassa = array(');
         $separa = '';
 
-        fputs($fd, '"chave_' . trim(pg_result($pk, 0, 1)) . '"=>$' . 'chave_' . trim(pg_result($pk, 0, 1)));
-        fputs($fd,
+        $fd && fputs($fd, '"chave_' . trim(pg_result($pk, 0, 1)) . '"=>$' . 'chave_' . trim(pg_result($pk, 0, 1)));
+        $fd && fputs($fd,
             ',"chave_' . trim(pg_result($pk, 0, 'campoca')) . '"=>$' . 'chave_' . trim(pg_result($pk, 0, 'campoca')));
 
-        fputs($fd, ');' . "\n");
-        fputs($fd, '        }' . "\n");
+        $fd && fputs($fd, ');' . "\n");
+        $fd && fputs($fd, '        }' . "\n");
 
     }
 
-    fputs($fd, "        echo '<div class=\"container\">';\n");
-    fputs($fd, "        echo '  <fieldset>';\n");
-    fputs($fd, "        echo '    <legend>Resultado da Pesquisa</legend>';\n");
+    $fd && fputs($fd, "        echo '<div class=\"container\">';\n");
+    $fd && fputs($fd, "        echo '  <fieldset>';\n");
+    $fd && fputs($fd, "        echo '    <legend>Resultado da Pesquisa</legend>';\n");
 
-    fputs($fd, '          db_lovrot($sql,15,"()","",$funcao_js,"","NoMe",$repassa);' . "\n");
+    $fd && fputs($fd, '          db_lovrot($sql,15,"()","",$funcao_js,"","NoMe",$repassa);' . "\n");
 
-    fputs($fd, "        echo '  </fieldset>';\n");
-    fputs($fd, "        echo '</div>';\n");
+    $fd && fputs($fd, "        echo '  </fieldset>';\n");
+    $fd && fputs($fd, "        echo '</div>';\n");
 
-    fputs($fd, '      } else {' . "\n");
-    fputs($fd, '        if ($pesquisa_chave != null && $pesquisa_chave != "") {' . "\n");
+    $fd && fputs($fd, '      } else {' . "\n");
+    $fd && fputs($fd, '        if ($pesquisa_chave != null && $pesquisa_chave != "") {' . "\n");
 
-    fputs($fd, '          $result = $cl' . trim(pg_result($result, $i,
+    $fd && fputs($fd, '          $result = $cl' . trim(pg_result($result, $i,
             'nomearq')) . '->sql_record($cl' . trim(pg_result($result, $i,
             'nomearq')) . '->sql_query(' . (@$regpk == 1 ? 'db_getsession("DB_anousu"),' : '') . '$pesquisa_chave));' . "\n");
-    fputs($fd, '          if($cl' . trim(pg_result($result, $i, 'nomearq')) . '->numrows!=0){' . "\n");
-    fputs($fd, '            db_fieldsmemory($result,0);' . "\n");
-    fputs($fd, '            echo "<script>".$funcao_js."(');
+    $fd && fputs($fd, '          if($cl' . trim(pg_result($result, $i, 'nomearq')) . '->numrows!=0){' . "\n");
+    $fd && fputs($fd, '            db_fieldsmemory($result,0);' . "\n");
+    $fd && fputs($fd, '            echo "<script>".$funcao_js."(');
 
     if ($Npk > 0) {
         for ($p = 0; $p < 1; $p++) {
-            fputs($fd, "'$" . trim(pg_result($pk, 0, 'campoca')) . "'");
+            $fd && fputs($fd, "'$" . trim(pg_result($pk, 0, 'campoca')) . "'");
         }
     } else {
-        fputs($fd, "'$" . "oid'");
+        $fd && fputs($fd, "'$" . "oid'");
     }
-    fputs($fd, ',false);</script>";' . "\n");
-    fputs($fd, "        } else {\n");
-    fputs($fd,
+    $fd && fputs($fd, ',false);</script>";' . "\n");
+    $fd && fputs($fd, "        } else {\n");
+    $fd && fputs($fd,
         '            echo "<script>".$funcao_js."(\'Chave(".$pesquisa_chave.") não Encontrado\',true);</script>";' . "\n");
-    fputs($fd, "        }\n");
-    fputs($fd, "    } else {\n");
-    fputs($fd, "        echo \"<script>{\$funcao_js}('', false);</script>\";\n");
-    fputs($fd, "    }\n");
-    fputs($fd, "}\n");
-    fputs($fd, "?>\n");
-    fputs($fd, "</body>\n");
-    fputs($fd, "</html>\n");
-    fputs($fd, "<?php if (isset(\$pesquisa_chave) === false) { ?>\n");
-    fputs($fd, "    <script rel=\"script\" type=\"text/javascript\">\n");
+    $fd && fputs($fd, "        }\n");
+    $fd && fputs($fd, "    } else {\n");
+    $fd && fputs($fd, "        echo \"<script>{\$funcao_js}('', false);</script>\";\n");
+    $fd && fputs($fd, "    }\n");
+    $fd && fputs($fd, "}\n");
+    $fd && fputs($fd, "?>\n");
+    $fd && fputs($fd, "</body>\n");
+    $fd && fputs($fd, "</html>\n");
+    $fd && fputs($fd, "<?php if (isset(\$pesquisa_chave) === false) { ?>\n");
+    $fd && fputs($fd, "    <script rel=\"script\" type=\"text/javascript\">\n");
     if ($Npk > 0) {
         for ($p = 0; $p < 1; $p++) {
             if ($regpk == 1 && $p > 0) {
-                fputs($fd, '        document.form2.chave_' . trim(pg_result($pk, $p, 'nomecam')) . '.focus();' . "\n");
-                fputs($fd, '        document.form2.chave_' . trim(pg_result($pk, $p, 'nomecam')) . '.select();' . "\n");
+                $fd && fputs($fd, '        document.form2.chave_' . trim(pg_result($pk, $p, 'nomecam')) . '.focus();' . "\n");
+                $fd && fputs($fd, '        document.form2.chave_' . trim(pg_result($pk, $p, 'nomecam')) . '.select();' . "\n");
             }
         }
     }
-    fputs($fd, "    </script>\n");
-    fputs($fd, "<?php } ?>\n");
+    $fd && fputs($fd, "    </script>\n");
+    $fd && fputs($fd, "<?php } ?>\n");
     // fim dos java scripts
 }
 }
 if (pg_numrows($pk) > 0) {
 
-    fputs($fd, "<script rel=\"script\" type=\"text/javascript\">\n");
-    fputs($fd, '    js_tabulacaoforms("form2","chave_' . trim(pg_result($pk, 0,
+    $fd && fputs($fd, "<script rel=\"script\" type=\"text/javascript\">\n");
+    $fd && fputs($fd, '    js_tabulacaoforms("form2","chave_' . trim(pg_result($pk, 0,
             'campoca')) . '",true,1,"chave_' . trim(pg_result($pk, 0, 'campoca')) . '",true);' . "\n");
-    fputs($fd, "</script>\n");
+    $fd && fputs($fd, "</script>\n");
 
 }
 
-fclose($fd);
+$fd && fclose($fd);
 // cria funcao de campos a serem mostrados
 $root = substr($HTTP_SERVER_VARS['SCRIPT_FILENAME'], 0, strrpos($HTTP_SERVER_VARS['SCRIPT_FILENAME'], "/"));
 $arquivo = $root . "/funcoes/db_func_" . trim($nometab) . ".php";
@@ -402,8 +402,8 @@ if (file_exists($arquivo) && !is_writable($arquivo)) {
 }
 umask(74);
 $fd = fopen($arquivo, "w");
-fputs($fd, "<?\n");
-fputs($fd, '$campos = "' . $nometab . '.');
+$fd && fputs($fd, "<?\n");
+$fd && fputs($fd, '$campos = "' . $nometab . '.');
 $sql = "select trim(nomecam)
           from db_syscampo c
                inner join db_sysarqcamp p on p.codcam = c.codcam
@@ -416,21 +416,21 @@ if (pg_numrows($resultc) > 0) {
     for ($i = 0; $i < pg_numrows($resultc); $i++) {
         $nomec = pg_result($resultc, $i, 0);
         if (strpos($nomec, 'anousu') == 0) {
-            fputs($fd, $arqq . $nomec);
+            $fd && fputs($fd, $arqq . $nomec);
             $arqq = "," . $nometab . ".";
         } else {
             $temanousu = $nomec;
         }
     }
     if ($temanousu != "") {
-        fputs($fd, $arqq . $temanousu . " as db_" . $temanousu);
+        $fd && fputs($fd, $arqq . $temanousu . " as db_" . $temanousu);
     }
 }
-fputs($fd, '";' . "\n");
-fputs($fd, "?>\n");
+$fd && fputs($fd, '";' . "\n");
+$fd && fputs($fd, "?>\n");
 
 
-fclose($fd);
+$fd && fclose($fd);
 ?>
 
 <table width="100%">

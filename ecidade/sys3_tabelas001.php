@@ -30,7 +30,8 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 
 ?>
 <html>
@@ -107,7 +108,7 @@ input {
 
 	$result = db_query($sql_mod);
 	$nomemod = db_query("select nomemod from db_sysmodulo where codmod = $codmod");
-	$nomemod = pg_result($nomemod,0,0);
+	$nomemod = ($nomemod ? pg_result($nomemod,0,0) : null);
      ?>
 	<br>
 	<h3>Módulo: <?=$nomemod?></h3><Br>
@@ -128,7 +129,7 @@ input {
 	$cor1 = "#CAF59A";
 	$cor2 = "#B0FDD2";
 	$cor = "";
-	$numrows = pg_numrows($result);
+	$numrows = ($result ? pg_numrows($result) : null);
 	for($i = 0;$i < $numrows;$i++) {
 	  db_fieldsmemory($result,$i);
 	  echo "<tr bgcolor=\"".($cor = $cor==$cor1?$cor2:$cor1)."\" style=\"cursor: hand\" onClick=\"location.href='sys3_campos001.php?".base64_encode("tabela=$codarq")."'\">\n";

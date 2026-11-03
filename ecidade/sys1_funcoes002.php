@@ -29,7 +29,8 @@ require(modification("libs/db_stdlib.php"));
 require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 if(!isset($gerar)) {
   $result = db_query("select corpofuncao from db_sysfuncoes where nomefuncao = '$funcao'");
   if(pg_numrows($result)==0){

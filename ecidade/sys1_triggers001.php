@@ -33,7 +33,8 @@ include(modification("classes/db_db_sysarquivo_classe.php"));
 include(modification("classes/db_db_sysfuncoes_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 if(isset($retorno)) {
   $sql = "select  t.codtrigger,t.nometrigger,t.quandotrigger,t.eventotrigger,f.nomefuncao as db_funcao,f.codfuncao ,a.codarq ,a.nomearq 
           from db_systriggers t

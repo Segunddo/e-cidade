@@ -52,7 +52,7 @@ class cl_db_relatoriodepart {
                  db07_db_depart = int4 = Departamento 
                  ";
    //funcao construtor da classe 
-   function cl_db_relatoriodepart() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_relatoriodepart"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_db_relatoriodepart {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db07_sequencial = ($this->db07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db07_sequencial"]:$this->db07_sequencial);
-       $this->db07_db_relatorio = ($this->db07_db_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["db07_db_relatorio"]:$this->db07_db_relatorio);
-       $this->db07_db_depart = ($this->db07_db_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["db07_db_depart"]:$this->db07_db_depart);
+       $this->db07_sequencial = ($this->db07_sequencial === 0 || $this->db07_sequencial === 0.0 || $this->db07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db07_sequencial"]:$this->db07_sequencial);
+       $this->db07_db_relatorio = ($this->db07_db_relatorio === 0 || $this->db07_db_relatorio === 0.0 || $this->db07_db_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["db07_db_relatorio"]:$this->db07_db_relatorio);
+       $this->db07_db_depart = ($this->db07_db_depart === 0 || $this->db07_db_depart === 0.0 || $this->db07_db_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["db07_db_depart"]:$this->db07_db_depart);
      }else{
-       $this->db07_sequencial = ($this->db07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db07_sequencial"]:$this->db07_sequencial);
+       $this->db07_sequencial = ($this->db07_sequencial === 0 || $this->db07_sequencial === 0.0 || $this->db07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db07_sequencial"]:$this->db07_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_relatoriodepart {
          $this->db07_sequencial = $db07_sequencial; 
        }
      }
-     if(($this->db07_sequencial == null) || ($this->db07_sequencial == "") ){ 
+     if(($this->db07_sequencial == null) || ($this->db07_sequencial === 0 || $this->db07_sequencial === 0.0 || $this->db07_sequencial == "") ){ 
        $this->erro_sql = " Campo db07_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_db_relatoriodepart {
    function sql_query ( $db07_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_db_relatoriodepart {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_db_relatoriodepart {
    function sql_query_file ( $db07_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_db_relatoriodepart {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
