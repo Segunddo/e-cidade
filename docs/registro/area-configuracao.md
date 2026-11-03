@@ -145,5 +145,19 @@ bateria final da Saúde:
 
 Nenhuma regressão dos 3 lotes da Configuração.
 
-**Estado:** os 3 lotes da Configuração concluídos e a bateria completa feita (commits locais). Faltam a conferência pelo
-proxy das telas de menu da Configuração e o envio — cada um só com o pedido do usuário.
+### 🏁 ÁREA CONFIGURAÇÃO CONCLUÍDA (03/11/2026)
+
+Conferido **pelo proxy, tela de menu por tela de menu** (`X-Ecidade-Runtime` em `/w/2/<tela>`), a partir do banco
+(`atendcadareamod` → área CONFIGURAÇÃO → `db_menu` → `db_itensmenu`, sem excluir prefixo; nomes resolvidos para a grafia do
+disco): **204 de 204** telas de menu servidas pelo PHP 8.5 (209 entradas, 1 módulo). **5 fantasmas** (arquivo inexistente em
+todo o repositório, quebram igual nos dois): `con1_leituraformulario001`, `con1_organograma001/002`, `con2_organograma`,
+`con4_atualizapatch001`. Abas e destinos (passo 8b): 257 telas examinadas no lote 3, nada indo ao 5.6.
+
+| | |
+|---|---|
+| Módulos | **1 de 1** — Configuração |
+| Lotes | 3, commits locais na `7configuracao-migrado` |
+| Alterados | 44 + 68 + 2 pelo Rector + ~205 pontos à mão (35 `each()`, 125+2 `fputs`/`fclose` guardados, 23 guardas `pg_*`/coluna, 3 de tipo) |
+| Bateria completa do fim da área | `map` **1.312/1.312**; `location` **9.298/9.331** (todas caracterizadas) |
+| Telas de menu pelo proxy | **204/204** no 8.5 (+ 5 fantasmas) |
+| Envio ao GitHub | **pendente — aguarda o pedido do usuário** |
