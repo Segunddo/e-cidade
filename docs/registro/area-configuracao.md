@@ -130,5 +130,20 @@ Roteamento: os 42 em `faseb_map_abas.txt` → **`map` 1.312 entradas**; as 42 co
 **Passo 8b refeito: 257 telas da Configuração no 8.5 (menu + abas), nada indo ao 5.6 — sem segundo salto.** Pelo banco:
 **204/204** telas de menu da Configuração em disco no 8.5 (+ 5 fantasmas).
 
-**Estado:** os 3 lotes da Configuração concluídos (commits locais). Faltam a bateria completa do fim da área, a conferência
-pelo proxy e o envio — cada uma só com o pedido do usuário.
+### Bateria completa do fim da área (03/11/2026, terça, autorizada pelo usuário)
+
+Todos os prefixos do `location` (9.331 telas; `iss4_siss002` pulada) e o `map` inteiro. **`map` 1.312/1.312** (inclui as 156
+telas `con` e as 42 abas desta área). `location` **9.298/9.331** (30 divergentes + 3 timeouts), conferidas nome a nome contra a
+bateria final da Saúde:
+- **30 da linha de base da Saúde**, as mesmas.
+- **Saiu `mer_subitem004`** — como previsto: só diverge em fim de semana (`mktime(null)` = hoje no 8.5; ver `area-saude.md`).
+- **Entraram as 2 caracterizadas no lote 1:** `sys3_modulos002` (horário no rodapé do PDF de 813 páginas) e
+  `sys4_consultaXML.RPC` (aberto sem `sUrl`).
+- **3 timeouts:** os 2 de sempre (`edu4_verifexportcenso002`, `rec2_espelhoponto002`) e `edu4_importacaoatualizacaoaluno002`,
+  uma das 8 do Censo/INEP do Educação (laço eterno **no 5.6**); antes aparecia como divergente com o 5.6 em `000`, agora caiu
+  no teto de tempo. Mesma tela, mesma causa.
+
+Nenhuma regressão dos 3 lotes da Configuração.
+
+**Estado:** os 3 lotes da Configuração concluídos e a bateria completa feita (commits locais). Faltam a conferência pelo
+proxy das telas de menu da Configuração e o envio — cada um só com o pedido do usuário.
