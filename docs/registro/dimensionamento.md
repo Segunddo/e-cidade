@@ -154,3 +154,21 @@ União: **156 bruto, 145 real** (era 668 com a Saúde). **"Real" desconta as 11 
 `PAGO` do `enumera.py` só reconhece commits `^Porta ` (registrado no `tra`, 30/10). Nas medições anteriores elas também inflavam
 cada área em 11. A Saúde quase não pré-pagou as restantes (Configuração 110 → 109; as outras iguais): os prefixos dela são
 exclusivos. Fantasmas: Configuração 5, Cidadão 5, Assistência Social 1.
+
+#### Refeito em 03/11/2026, depois da Configuração
+
+`dimensiona.py` com `JA` incluindo `CONFIG`. Conferido à parte: **as sete áreas concluídas têm 0 telas de menu fora do 8.5** —
+Tributário 1.059, Educação 480, Recursos Humanos 701, Patrimonial 743, Financeiro 992, Saúde 493, Configuração 204.
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | A alterar (bruto) | **A alterar (real)** | em 01/11 (real) |
+|---|---|---|---|---|---|---|---|
+| Assistência Social | 2 | 57 | 1.901 | 726 | 43 | **32** | 32 |
+| Cidadão | 1 | 35 | 1.828 | 709 | 28 | **17** | 17 |
+| Integrações | 1 | 9 | 1.823 | 715 | 17 | **6** | 6 |
+| Gestor | 1 | 7 | 1.089 | 347 | 19 | **8** | 8 |
+
+União: **64 bruto, 53 real** (era 145 com a Configuração). "Real" desconta as 11 classes do falso positivo. A Configuração
+pré-pagou só telas da Assistência Social (59 → 57: entre as 10 telas de menu dela que já são servidas estão
+`hab1_avaliacao001/002/003`, roteadas no lote 1 da Configuração; as outras — `hab1_workflow001/002/003`, `pro3_conspro001`,
+`rec1_tabcurritipo001/002/003` — já vinham de áreas anteriores). Os "a alterar" não mudaram: os prefixos da Configuração
+(`sys`, `con`) não alcançam as classes das restantes. Fantasmas: Cidadão 5, Assistência Social 1.
