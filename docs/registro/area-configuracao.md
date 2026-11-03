@@ -38,6 +38,7 @@ pedido ao usuário `sudo truncate -s 0 $(docker inspect -f '{{.LogPath}}' ecidad
 |---|---|---|---|---|---|---|---|---|
 | 1 `sys` + 7 soltas | 1.897 | 44 Rector + 35 `each()` + 17 guardas `pg_*` + 1 de coluna + 3 de tipo à mão | 1.891/1.897 (6 não compilam em nenhum) | 371/371 (12 falham nos dois) | 776 (diffs só do harness) | diffs só do harness | 2.068 pares, 0 div. | **91/93** (2 caracterizadas) |
 | 2 `con` (156 telas) | 2.421 | 68 Rector + 4 guardas à mão | 2.421/2.421 | 436/436 (13 falham nos dois) | 975 (diffs só do harness) | diffs só do harness | 2.426 pares, 0 div. | **156/156** |
+| 3 abas (42 destinos) | 1.195 | 2 Rector + 1 guarda à mão | 1.195/1.195 | 282/282 (10 falham nos dois) | diffs só do harness | 0 fora dos conhecidos | 1.201 pares, 0 div. | **42/42** |
 
 **Lote 1 — `sys` inteiro + 7 telas soltas** (93 telas: `sys1_` 11, `sys3_` 7, `sys4_` 69 + `ate1_atendcadarea001/002/003`,
 `hab1_avaliacao001/003`, `mat4_reprocessalancamentosaidamaterial001`, `pro4_configuracaotelalogin`; 03/11/2026). 64 alvos, 53
@@ -115,4 +116,19 @@ Roteamento: lote **`conf:ate,hab,mat,pro,con`** no gerador → **`map` 1.270 ent
 `func_conspermissaoempenho.php`, `hab1_avaliacao004/006` e as `ate1_atendcadarea004/005/006` do lote 1. Lista em
 `ecidade/tmp/conf3_abas.txt`. **São o lote 3**, conforme o plano; até lá funcionam pelo 5.6 (sessão compartilhada).
 
-**Estado:** lote 2 concluído (commit local). Aguardando o pedido do lote 3 (as abas).
+**Lote 3 — as abas do passo 8b** (42 destinos distintos das 47 ligações dos lotes 1 e 2, todos existentes, nenhum já
+servido; 03/11/2026). Universo 1.195; 16 alvos, **5 reais**, e destes só 2 mudaram: Rector em `con1_db_versao004.php`
+(`parse_str` + `split("P")`, literal) e `con3_db_syscampo002.php` (`parse_str`); `db_caddocumento`/`db_orcunidade` já
+estavam portadas (o Rector não as tocou) e `con3_usuonline002` é o `split` comentado. Remanescentes 0; lint 1.195/1.195; carga
+282/282; forma negada 1.201 pares, 0 div.
+
+Bateria 39/42 → **42/42**: `con1_db_depart001/002/003` caíam em `forms/db_frmdb_depart.php:161`, `pg_numrows(false)` →
+guarda (`guarda_ciclo.py`). O formulário só é usado pelas abas `con1_db_depart*`/`con1_db_departender*`; os outros dois
+alterados, só por telas do próprio lote 2 (`con1_db_versao001/001a`, `con3_db_syscampo001`) — nenhuma bateria dirigida.
+
+Roteamento: os 42 em `faseb_map_abas.txt` → **`map` 1.312 entradas**; as 42 conferidas pelo proxy (`/w/2/`): **42/42 no 8.5**.
+**Passo 8b refeito: 257 telas da Configuração no 8.5 (menu + abas), nada indo ao 5.6 — sem segundo salto.** Pelo banco:
+**204/204** telas de menu da Configuração em disco no 8.5 (+ 5 fantasmas).
+
+**Estado:** os 3 lotes da Configuração concluídos (commits locais). Faltam a bateria completa do fim da área, a conferência
+pelo proxy e o envio — cada uma só com o pedido do usuário.

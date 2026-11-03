@@ -37,7 +37,8 @@ $cldb_versao = new cl_db_versao;
 $cldb_versaocpd = new cl_db_versaocpd;
 $cldb_versaousu = new cl_db_versaousu;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $db_opcao = 1;
 $db_botao = true;
 if(isset($incluir)){
@@ -58,7 +59,7 @@ if(isset($incluir)){
       echo "<script>alert('Não existe versão para esta release! Cadastre primeiro uma versao')</script>";
       exit;
      }
-     $matriz= split("P",$max);
+     $matriz= preg_split("#P#m",$max);
 //     $db30_codversao = $matriz[0]; 
      $db30_codrelease = $matriz[1];
   }
