@@ -61,7 +61,7 @@ class cl_db_tarefas {
                  db79_hora = char(5) = Hora 
                  ";
    //funcao construtor da classe 
-   function cl_db_tarefas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_tarefas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,9 +78,9 @@ class cl_db_tarefas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db79_codigo = ($this->db79_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_codigo"]:$this->db79_codigo);
-       $this->db79_id_usuario = ($this->db79_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_id_usuario"]:$this->db79_id_usuario);
-       $this->db79_tarefasit = ($this->db79_tarefasit == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_tarefasit"]:$this->db79_tarefasit);
+       $this->db79_codigo = ($this->db79_codigo === 0 || $this->db79_codigo === 0.0 || $this->db79_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_codigo"]:$this->db79_codigo);
+       $this->db79_id_usuario = ($this->db79_id_usuario === 0 || $this->db79_id_usuario === 0.0 || $this->db79_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_id_usuario"]:$this->db79_id_usuario);
+       $this->db79_tarefasit = ($this->db79_tarefasit === 0 || $this->db79_tarefasit === 0.0 || $this->db79_tarefasit == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_tarefasit"]:$this->db79_tarefasit);
        $this->db79_descr = ($this->db79_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_descr"]:$this->db79_descr);
        if($this->db79_data == ""){
          $this->db79_data_dia = ($this->db79_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_data_dia"]:$this->db79_data_dia);
@@ -92,7 +92,7 @@ class cl_db_tarefas {
        }
        $this->db79_hora = ($this->db79_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_hora"]:$this->db79_hora);
      }else{
-       $this->db79_codigo = ($this->db79_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_codigo"]:$this->db79_codigo);
+       $this->db79_codigo = ($this->db79_codigo === 0 || $this->db79_codigo === 0.0 || $this->db79_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db79_codigo"]:$this->db79_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_db_tarefas {
          $this->db79_codigo = $db79_codigo; 
        }
      }
-     if(($this->db79_codigo == null) || ($this->db79_codigo == "") ){ 
+     if(($this->db79_codigo == null) || ($this->db79_codigo === 0 || $this->db79_codigo === 0.0 || $this->db79_codigo == "") ){ 
        $this->erro_sql = " Campo db79_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_db_tarefas {
    function sql_query ( $db79_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_db_tarefas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_db_tarefas {
    function sql_query_file ( $db79_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_db_tarefas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -57,7 +57,7 @@ class cl_db_sysregrasacessocanc {
                  db49_observ = text = Descrição Cancelamento 
                  ";
    //funcao construtor da classe 
-   function cl_db_sysregrasacessocanc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysregrasacessocanc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_db_sysregrasacessocanc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db49_idacesso = ($this->db49_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_idacesso"]:$this->db49_idacesso);
-       $this->db49_id_usuario = ($this->db49_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_id_usuario"]:$this->db49_id_usuario);
+       $this->db49_idacesso = ($this->db49_idacesso === 0 || $this->db49_idacesso === 0.0 || $this->db49_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_idacesso"]:$this->db49_idacesso);
+       $this->db49_id_usuario = ($this->db49_id_usuario === 0 || $this->db49_id_usuario === 0.0 || $this->db49_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_id_usuario"]:$this->db49_id_usuario);
        if($this->db49_dtcancela == ""){
          $this->db49_dtcancela_dia = ($this->db49_dtcancela_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_dtcancela_dia"]:$this->db49_dtcancela_dia);
          $this->db49_dtcancela_mes = ($this->db49_dtcancela_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_dtcancela_mes"]:$this->db49_dtcancela_mes);
@@ -86,7 +86,7 @@ class cl_db_sysregrasacessocanc {
        }
        $this->db49_observ = ($this->db49_observ == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_observ"]:$this->db49_observ);
      }else{
-       $this->db49_idacesso = ($this->db49_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_idacesso"]:$this->db49_idacesso);
+       $this->db49_idacesso = ($this->db49_idacesso === 0 || $this->db49_idacesso === 0.0 || $this->db49_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_idacesso"]:$this->db49_idacesso);
      }
    }
    // funcao para inclusao
@@ -111,7 +111,7 @@ class cl_db_sysregrasacessocanc {
        return false;
      }
        $this->db49_idacesso = $db49_idacesso; 
-     if(($this->db49_idacesso == null) || ($this->db49_idacesso == "") ){ 
+     if(($this->db49_idacesso == null) || ($this->db49_idacesso === 0 || $this->db49_idacesso === 0.0 || $this->db49_idacesso == "") ){ 
        $this->erro_sql = " Campo db49_idacesso nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -373,7 +373,7 @@ class cl_db_sysregrasacessocanc {
    function sql_query ( $db49_idacesso=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_db_sysregrasacessocanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -409,7 +409,7 @@ class cl_db_sysregrasacessocanc {
    function sql_query_file ( $db49_idacesso=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_db_sysregrasacessocanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

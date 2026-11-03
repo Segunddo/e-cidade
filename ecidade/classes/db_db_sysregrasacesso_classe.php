@@ -71,7 +71,7 @@ class cl_db_sysregrasacesso {
                  db46_observ = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_db_sysregrasacesso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysregrasacesso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -88,7 +88,7 @@ class cl_db_sysregrasacesso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db46_idacesso = ($this->db46_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_idacesso"]:$this->db46_idacesso);
+       $this->db46_idacesso = ($this->db46_idacesso === 0 || $this->db46_idacesso === 0.0 || $this->db46_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_idacesso"]:$this->db46_idacesso);
        if($this->db46_dtinicio == ""){
          $this->db46_dtinicio_dia = ($this->db46_dtinicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_dtinicio_dia"]:$this->db46_dtinicio_dia);
          $this->db46_dtinicio_mes = ($this->db46_dtinicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_dtinicio_mes"]:$this->db46_dtinicio_mes);
@@ -107,7 +107,7 @@ class cl_db_sysregrasacesso {
          }
        }
        $this->db46_horafinal = ($this->db46_horafinal == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_horafinal"]:$this->db46_horafinal);
-       $this->db46_id_usuario = ($this->db46_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_id_usuario"]:$this->db46_id_usuario);
+       $this->db46_id_usuario = ($this->db46_id_usuario === 0 || $this->db46_id_usuario === 0.0 || $this->db46_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_id_usuario"]:$this->db46_id_usuario);
        if($this->db46_datacadastd == ""){
          $this->db46_datacadastd_dia = ($this->db46_datacadastd_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_datacadastd_dia"]:$this->db46_datacadastd_dia);
          $this->db46_datacadastd_mes = ($this->db46_datacadastd_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_datacadastd_mes"]:$this->db46_datacadastd_mes);
@@ -118,7 +118,7 @@ class cl_db_sysregrasacesso {
        }
        $this->db46_observ = ($this->db46_observ == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_observ"]:$this->db46_observ);
      }else{
-       $this->db46_idacesso = ($this->db46_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_idacesso"]:$this->db46_idacesso);
+       $this->db46_idacesso = ($this->db46_idacesso === 0 || $this->db46_idacesso === 0.0 || $this->db46_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_idacesso"]:$this->db46_idacesso);
      }
    }
    // funcao para inclusao
@@ -202,7 +202,7 @@ class cl_db_sysregrasacesso {
          $this->db46_idacesso = $db46_idacesso; 
        }
      }
-     if(($this->db46_idacesso == null) || ($this->db46_idacesso == "") ){ 
+     if(($this->db46_idacesso == null) || ($this->db46_idacesso === 0 || $this->db46_idacesso === 0.0 || $this->db46_idacesso == "") ){ 
        $this->erro_sql = " Campo db46_idacesso nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -568,7 +568,7 @@ class cl_db_sysregrasacesso {
    function sql_query ( $db46_idacesso=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -590,7 +590,7 @@ class cl_db_sysregrasacesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -602,7 +602,7 @@ class cl_db_sysregrasacesso {
    function sql_query_file ( $db46_idacesso=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -623,7 +623,7 @@ class cl_db_sysregrasacesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -66,7 +66,7 @@ class cl_db_paragrafopadrao {
                  db61_tipo = int4 = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_db_paragrafopadrao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_paragrafopadrao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,18 +83,18 @@ class cl_db_paragrafopadrao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db61_codparag = ($this->db61_codparag == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_codparag"]:$this->db61_codparag);
+       $this->db61_codparag = ($this->db61_codparag === 0 || $this->db61_codparag === 0.0 || $this->db61_codparag == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_codparag"]:$this->db61_codparag);
        $this->db61_descr = ($this->db61_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_descr"]:$this->db61_descr);
        $this->db61_texto = ($this->db61_texto == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_texto"]:$this->db61_texto);
-       $this->db61_alinha = ($this->db61_alinha == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_alinha"]:$this->db61_alinha);
-       $this->db61_inicia = ($this->db61_inicia == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_inicia"]:$this->db61_inicia);
-       $this->db61_espaco = ($this->db61_espaco == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_espaco"]:$this->db61_espaco);
+       $this->db61_alinha = ($this->db61_alinha === 0 || $this->db61_alinha === 0.0 || $this->db61_alinha == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_alinha"]:$this->db61_alinha);
+       $this->db61_inicia = ($this->db61_inicia === 0 || $this->db61_inicia === 0.0 || $this->db61_inicia == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_inicia"]:$this->db61_inicia);
+       $this->db61_espaco = ($this->db61_espaco === 0 || $this->db61_espaco === 0.0 || $this->db61_espaco == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_espaco"]:$this->db61_espaco);
        $this->db61_alinhamento = ($this->db61_alinhamento == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_alinhamento"]:$this->db61_alinhamento);
-       $this->db61_altura = ($this->db61_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_altura"]:$this->db61_altura);
-       $this->db61_largura = ($this->db61_largura == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_largura"]:$this->db61_largura);
-       $this->db61_tipo = ($this->db61_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_tipo"]:$this->db61_tipo);
+       $this->db61_altura = ($this->db61_altura === 0 || $this->db61_altura === 0.0 || $this->db61_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_altura"]:$this->db61_altura);
+       $this->db61_largura = ($this->db61_largura === 0 || $this->db61_largura === 0.0 || $this->db61_largura == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_largura"]:$this->db61_largura);
+       $this->db61_tipo = ($this->db61_tipo === 0 || $this->db61_tipo === 0.0 || $this->db61_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_tipo"]:$this->db61_tipo);
      }else{
-       $this->db61_codparag = ($this->db61_codparag == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_codparag"]:$this->db61_codparag);
+       $this->db61_codparag = ($this->db61_codparag === 0 || $this->db61_codparag === 0.0 || $this->db61_codparag == ""?@$GLOBALS["HTTP_POST_VARS"]["db61_codparag"]:$this->db61_codparag);
      }
    }
    // funcao para inclusao
@@ -205,7 +205,7 @@ class cl_db_paragrafopadrao {
          $this->db61_codparag = $db61_codparag; 
        }
      }
-     if(($this->db61_codparag == null) || ($this->db61_codparag == "") ){ 
+     if(($this->db61_codparag == null) || ($this->db61_codparag === 0 || $this->db61_codparag === 0.0 || $this->db61_codparag == "") ){ 
        $this->erro_sql = " Campo db61_codparag nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -576,7 +576,7 @@ class cl_db_paragrafopadrao {
    function sql_query ( $db61_codparag=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -597,7 +597,7 @@ class cl_db_paragrafopadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -609,7 +609,7 @@ class cl_db_paragrafopadrao {
    function sql_query_file ( $db61_codparag=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -630,7 +630,7 @@ class cl_db_paragrafopadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

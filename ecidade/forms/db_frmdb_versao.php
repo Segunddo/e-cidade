@@ -56,7 +56,7 @@ if(isset($versao) && $versao == 'n'){
     echo "<script>alert('Não existe versão para esta release! Cadastre primeiro uma versao')</script>";
     exit;
    }
-   $matriz= split("P",$max);
+   $matriz= preg_split("#P#m",$max);
    $db30_codversao = $matriz[0]; 
 //   $db30_codrelease = $matriz[1];
 }

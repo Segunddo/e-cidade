@@ -59,7 +59,7 @@ class cl_db_versaocpd {
                  db33_data = date = Data da Inclusão 
                  ";
    //funcao construtor da classe 
-   function cl_db_versaocpd() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_versaocpd"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,8 +76,8 @@ class cl_db_versaocpd {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db33_codcpd = ($this->db33_codcpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codcpd"]:$this->db33_codcpd);
-       $this->db33_codver = ($this->db33_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codver"]:$this->db33_codver);
+       $this->db33_codcpd = ($this->db33_codcpd === 0 || $this->db33_codcpd === 0.0 || $this->db33_codcpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codcpd"]:$this->db33_codcpd);
+       $this->db33_codver = ($this->db33_codver === 0 || $this->db33_codver === 0.0 || $this->db33_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codver"]:$this->db33_codver);
        $this->db33_obs = ($this->db33_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_obs"]:$this->db33_obs);
        $this->db33_obscpd = ($this->db33_obscpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_obscpd"]:$this->db33_obscpd);
        if($this->db33_data == ""){
@@ -89,7 +89,7 @@ class cl_db_versaocpd {
          }
        }
      }else{
-       $this->db33_codcpd = ($this->db33_codcpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codcpd"]:$this->db33_codcpd);
+       $this->db33_codcpd = ($this->db33_codcpd === 0 || $this->db33_codcpd === 0.0 || $this->db33_codcpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codcpd"]:$this->db33_codcpd);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_db_versaocpd {
          $this->db33_codcpd = $db33_codcpd; 
        }
      }
-     if(($this->db33_codcpd == null) || ($this->db33_codcpd == "") ){ 
+     if(($this->db33_codcpd == null) || ($this->db33_codcpd === 0 || $this->db33_codcpd === 0.0 || $this->db33_codcpd == "") ){ 
        $this->erro_sql = " Campo db33_codcpd nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -445,7 +445,7 @@ class cl_db_versaocpd {
    function sql_query ( $db33_codcpd=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -467,7 +467,7 @@ class cl_db_versaocpd {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -479,7 +479,7 @@ class cl_db_versaocpd {
    function sql_query_file ( $db33_codcpd=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -500,7 +500,7 @@ class cl_db_versaocpd {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

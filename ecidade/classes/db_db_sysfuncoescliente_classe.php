@@ -52,7 +52,7 @@ class cl_db_sysfuncoescliente {
                  db41_funcao = int4 = Código Função 
                  ";
    //funcao construtor da classe 
-   function cl_db_sysfuncoescliente() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysfuncoescliente"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_db_sysfuncoescliente {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db41_sysfuncoescliente = ($this->db41_sysfuncoescliente == ""?@$GLOBALS["HTTP_POST_VARS"]["db41_sysfuncoescliente"]:$this->db41_sysfuncoescliente);
-       $this->db41_cliente = ($this->db41_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["db41_cliente"]:$this->db41_cliente);
-       $this->db41_funcao = ($this->db41_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db41_funcao"]:$this->db41_funcao);
+       $this->db41_sysfuncoescliente = ($this->db41_sysfuncoescliente === 0 || $this->db41_sysfuncoescliente === 0.0 || $this->db41_sysfuncoescliente == ""?@$GLOBALS["HTTP_POST_VARS"]["db41_sysfuncoescliente"]:$this->db41_sysfuncoescliente);
+       $this->db41_cliente = ($this->db41_cliente === 0 || $this->db41_cliente === 0.0 || $this->db41_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["db41_cliente"]:$this->db41_cliente);
+       $this->db41_funcao = ($this->db41_funcao === 0 || $this->db41_funcao === 0.0 || $this->db41_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db41_funcao"]:$this->db41_funcao);
      }else{
-       $this->db41_sysfuncoescliente = ($this->db41_sysfuncoescliente == ""?@$GLOBALS["HTTP_POST_VARS"]["db41_sysfuncoescliente"]:$this->db41_sysfuncoescliente);
+       $this->db41_sysfuncoescliente = ($this->db41_sysfuncoescliente === 0 || $this->db41_sysfuncoescliente === 0.0 || $this->db41_sysfuncoescliente == ""?@$GLOBALS["HTTP_POST_VARS"]["db41_sysfuncoescliente"]:$this->db41_sysfuncoescliente);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_sysfuncoescliente {
          $this->db41_sysfuncoescliente = $db41_sysfuncoescliente; 
        }
      }
-     if(($this->db41_sysfuncoescliente == null) || ($this->db41_sysfuncoescliente == "") ){ 
+     if(($this->db41_sysfuncoescliente == null) || ($this->db41_sysfuncoescliente === 0 || $this->db41_sysfuncoescliente === 0.0 || $this->db41_sysfuncoescliente == "") ){ 
        $this->erro_sql = " Campo db41_sysfuncoescliente nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_db_sysfuncoescliente {
    function sql_query ( $db41_sysfuncoescliente=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_db_sysfuncoescliente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_db_sysfuncoescliente {
    function sql_query_file ( $db41_sysfuncoescliente=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_db_sysfuncoescliente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

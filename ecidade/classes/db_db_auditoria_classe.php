@@ -72,7 +72,7 @@ class cl_db_auditoria {
                  instit = int4 = Instituição
                  ";
    //funcao construtor da classe
-   function cl_db_auditoria() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_auditoria");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,21 +89,21 @@ class cl_db_auditoria {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sequencial = ($this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
+       $this->sequencial = ($this->sequencial === 0 || $this->sequencial === 0.0 || $this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
        $this->esquema = ($this->esquema == ""?@$GLOBALS["HTTP_POST_VARS"]["esquema"]:$this->esquema);
        $this->tabela = ($this->tabela == ""?@$GLOBALS["HTTP_POST_VARS"]["tabela"]:$this->tabela);
        $this->operacao = ($this->operacao == ""?@$GLOBALS["HTTP_POST_VARS"]["operacao"]:$this->operacao);
-       $this->transacao = ($this->transacao == ""?@$GLOBALS["HTTP_POST_VARS"]["transacao"]:$this->transacao);
-       $this->datahora_sessao = ($this->datahora_sessao == ""?@$GLOBALS["HTTP_POST_VARS"]["datahora_sessao"]:$this->datahora_sessao);
-       $this->datahora_servidor = ($this->datahora_servidor == ""?@$GLOBALS["HTTP_POST_VARS"]["datahora_servidor"]:$this->datahora_servidor);
+       $this->transacao = ($this->transacao === 0 || $this->transacao === 0.0 || $this->transacao == ""?@$GLOBALS["HTTP_POST_VARS"]["transacao"]:$this->transacao);
+       $this->datahora_sessao = ($this->datahora_sessao === 0 || $this->datahora_sessao === 0.0 || $this->datahora_sessao == ""?@$GLOBALS["HTTP_POST_VARS"]["datahora_sessao"]:$this->datahora_sessao);
+       $this->datahora_servidor = ($this->datahora_servidor === 0 || $this->datahora_servidor === 0.0 || $this->datahora_servidor == ""?@$GLOBALS["HTTP_POST_VARS"]["datahora_servidor"]:$this->datahora_servidor);
        $this->tempo = ($this->tempo == ""?@$GLOBALS["HTTP_POST_VARS"]["tempo"]:$this->tempo);
        $this->usuario = ($this->usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["usuario"]:$this->usuario);
        $this->chave = ($this->chave == ""?@$GLOBALS["HTTP_POST_VARS"]["chave"]:$this->chave);
        $this->mudancas = ($this->mudancas == ""?@$GLOBALS["HTTP_POST_VARS"]["mudancas"]:$this->mudancas);
-       $this->logacessa = ($this->logacessa == ""?@$GLOBALS["HTTP_POST_VARS"]["logacessa"]:$this->logacessa);
-       $this->instit = ($this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
+       $this->logacessa = ($this->logacessa === 0 || $this->logacessa === 0.0 || $this->logacessa == ""?@$GLOBALS["HTTP_POST_VARS"]["logacessa"]:$this->logacessa);
+       $this->instit = ($this->instit === 0 || $this->instit === 0.0 || $this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
      }else{
-       $this->sequencial = ($this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
+       $this->sequencial = ($this->sequencial === 0 || $this->sequencial === 0.0 || $this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
      }
    }
    // funcao para inclusao
@@ -217,7 +217,7 @@ class cl_db_auditoria {
          $this->sequencial = $sequencial;
        }
      }
-     if(($this->sequencial == null) || ($this->sequencial == "") ){
+     if(($this->sequencial == null) || ($this->sequencial === 0 || $this->sequencial === 0.0 || $this->sequencial == "") ){
        $this->erro_sql = " Campo sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -622,7 +622,7 @@ class cl_db_auditoria {
    function sql_query ( $sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -648,7 +648,7 @@ class cl_db_auditoria {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -661,7 +661,7 @@ class cl_db_auditoria {
    function sql_query_file ( $sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -682,7 +682,7 @@ class cl_db_auditoria {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -714,7 +714,7 @@ class cl_db_auditoria {
    *
    * @return string
    */
-  function sql_query_acessos( $sCampos = null, $iCodigoAcesso = null, $aParametros ) {
+  function sql_query_acessos( $sCampos = null, $iCodigoAcesso = null, $aParametros = null ) {
 
     $iInstituicao = db_getsession("DB_instit");
     if ( empty($sCampos) ) {

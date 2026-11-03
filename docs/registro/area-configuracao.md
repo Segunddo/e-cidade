@@ -37,6 +37,7 @@ pedido ao usuário `sudo truncate -s 0 $(docker inspect -f '{{.LogPath}}' ecidad
 | Lote | Universo | Alterados | `php -l` 5.6/8.5 | Carga (LSP) | Classes | Escrita | Forma negada | **Bateria** |
 |---|---|---|---|---|---|---|---|---|
 | 1 `sys` + 7 soltas | 1.897 | 44 Rector + 35 `each()` + 17 guardas `pg_*` + 1 de coluna + 3 de tipo à mão | 1.891/1.897 (6 não compilam em nenhum) | 371/371 (12 falham nos dois) | 776 (diffs só do harness) | diffs só do harness | 2.068 pares, 0 div. | **91/93** (2 caracterizadas) |
+| 2 `con` (156 telas) | 2.421 | 68 Rector + 4 guardas à mão | 2.421/2.421 | 436/436 (13 falham nos dois) | 975 (diffs só do harness) | diffs só do harness | 2.426 pares, 0 div. | **156/156** |
 
 **Lote 1 — `sys` inteiro + 7 telas soltas** (93 telas: `sys1_` 11, `sys3_` 7, `sys4_` 69 + `ate1_atendcadarea001/002/003`,
 `hab1_avaliacao001/003`, `mat4_reprocessalancamentosaidamaterial001`, `pro4_configuracaotelalogin`; 03/11/2026). 64 alvos, 53
@@ -86,4 +87,32 @@ no comando do gerador → **`map` 1.114 entradas** (+7; saiu `sys4_geradorteladi
 `ate1_atendcadarea001/002/003`) e `hab1_avaliacao004/006` (das `hab1_avaliacao001/003`). **Ficam para o lote 3** (abas),
 conforme o plano; até lá funcionam pelo 5.6 (sessão compartilhada).
 
-**Estado:** lote 1 concluído (commit local). Aguardando o pedido do lote 2 (as 156 telas `con` da Configuração).
+**Lote 2 — as 156 telas `con` da Configuração** (pelo `map`; 03/11/2026). 90 alvos, 79 reais. `split()`: 90 `"#"`, 2 `":"`,
+1 `"\\."`, `"\\n"`, `"_"`, `"P"` — literais. Rector em **68 arquivos**, só regras vetadas (42 `parse_str`, 25 `split`, 23 guardas,
+23 construtores, 1 `OptionalParametersAfterRequired` em `cl_db_auditoria::sql_query_acessos`, **sem subclasses** na base), 0 na
+2ª passada. Remanescentes 0: os 3 `split` que sobram em `con3_usuonline002.php` estão dentro de um comentário `/* … */` (linha
+86), e os 2 `each()` de `con4_registrosinconsistentes003.php` são JavaScript (`array.each(function…)`). Lint 2.421/2.421 nos
+dois; portão 0; carga 436/436.
+
+**Verificado no caminho: o Rector lê tag curta `<?`** (`short_open_tag` ligado nos dois runtimes) — testado com um arquivo
+mínimo nas duas formas. A suspeita veio do `con3_usuonline002`, que só tem `<?`; a causa era o comentário.
+
+Bateria 154/156 → **156/156**. À mão, alternando `campo_ciclo.py` e `guarda_ciclo.py`: `con1_caditens.php:443/444`
+(`pg_result(…, "libcliente")` sem a coluna → `false`; `false == "f"`/`"t"` é falso nos dois) e `con3_acount.php:82/101`
+(`pg_numrows(false)` em `for`).
+
+Bateria dirigida: **nenhuma tela servida fora do lote** usa as 23 classes alteradas — são de uso restrito (ajuda, versão,
+tarefas, regras de acesso, auditoria). Conferido à mão que as de uso geral não estão entre elas: `cl_db_config` (222 telas) e
+`cl_db_depart` (132) não mudaram; mudaram só as telas `con1_db_config005/006` e `con1_db_depart002/003`, que são abas.
+
+Roteamento: lote **`conf:ate,hab,mat,pro,con`** no gerador → **`map` 1.270 entradas** (+156). As 156 conferidas pelo proxy
+(`/w/2/`): **156/156 no 8.5**; `login` → 5.6.
+
+**Passo 8b (215 telas da Configuração no 8.5): 47 ligações a 42 destinos no 5.6** — as abas `*004/005/006` dos cadastros
+`con1_` (`caddocumento`, `db_config`, `db_estrutura`, `db_layouttxt`, `db_sysfuncoes`, `db_sysregrasacesso`, `db_usuarios`,
+`db_versao`), `con1_db_depart*`/`con1_db_departender*` (abas de `con1_depart00x`), `con1_db_imagens001`, `con1_workflow005`,
+`con3_db_syscampo002`, `con3_usuonline002`, `con4_carnes002`, `con4_docpadrao002/004`, `con4_docparag002/004`,
+`func_conspermissaoempenho.php`, `hab1_avaliacao004/006` e as `ate1_atendcadarea004/005/006` do lote 1. Lista em
+`ecidade/tmp/conf3_abas.txt`. **São o lote 3**, conforme o plano; até lá funcionam pelo 5.6 (sessão compartilhada).
+
+**Estado:** lote 2 concluído (commit local). Aguardando o pedido do lote 3 (as abas).

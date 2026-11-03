@@ -61,7 +61,7 @@ class cl_db_versaousu {
                  db32_data = date = Data da inclusão 
                  ";
    //funcao construtor da classe 
-   function cl_db_versaousu() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_versaousu"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,9 +78,9 @@ class cl_db_versaousu {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db32_codusu = ($this->db32_codusu == ""?@$GLOBALS["HTTP_POST_VARS"]["db32_codusu"]:$this->db32_codusu);
-       $this->db32_codver = ($this->db32_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db32_codver"]:$this->db32_codver);
-       $this->db32_id_item = ($this->db32_id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["db32_id_item"]:$this->db32_id_item);
+       $this->db32_codusu = ($this->db32_codusu === 0 || $this->db32_codusu === 0.0 || $this->db32_codusu == ""?@$GLOBALS["HTTP_POST_VARS"]["db32_codusu"]:$this->db32_codusu);
+       $this->db32_codver = ($this->db32_codver === 0 || $this->db32_codver === 0.0 || $this->db32_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db32_codver"]:$this->db32_codver);
+       $this->db32_id_item = ($this->db32_id_item === 0 || $this->db32_id_item === 0.0 || $this->db32_id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["db32_id_item"]:$this->db32_id_item);
        $this->db32_obs = ($this->db32_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["db32_obs"]:$this->db32_obs);
        $this->db32_obsdb = ($this->db32_obsdb == ""?@$GLOBALS["HTTP_POST_VARS"]["db32_obsdb"]:$this->db32_obsdb);
        if($this->db32_data == ""){
@@ -92,7 +92,7 @@ class cl_db_versaousu {
          }
        }
      }else{
-       $this->db32_codusu = ($this->db32_codusu == ""?@$GLOBALS["HTTP_POST_VARS"]["db32_codusu"]:$this->db32_codusu);
+       $this->db32_codusu = ($this->db32_codusu === 0 || $this->db32_codusu === 0.0 || $this->db32_codusu == ""?@$GLOBALS["HTTP_POST_VARS"]["db32_codusu"]:$this->db32_codusu);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_db_versaousu {
          $this->db32_codusu = $db32_codusu; 
        }
      }
-     if(($this->db32_codusu == null) || ($this->db32_codusu == "") ){ 
+     if(($this->db32_codusu == null) || ($this->db32_codusu === 0 || $this->db32_codusu === 0.0 || $this->db32_codusu == "") ){ 
        $this->erro_sql = " Campo db32_codusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_db_versaousu {
    function sql_query ( $db32_codusu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_db_versaousu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_db_versaousu {
    function sql_query_file ( $db32_codusu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_db_versaousu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

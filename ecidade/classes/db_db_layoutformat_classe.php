@@ -62,7 +62,7 @@ class cl_db_layoutformat {
                  db53_alinha = varchar(1) = Alinhamento 
                  ";
    //funcao construtor da classe 
-   function cl_db_layoutformat() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_layoutformat"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_db_layoutformat {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db53_codigo = ($this->db53_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_codigo"]:$this->db53_codigo);
+       $this->db53_codigo = ($this->db53_codigo === 0 || $this->db53_codigo === 0.0 || $this->db53_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_codigo"]:$this->db53_codigo);
        $this->db53_descr = ($this->db53_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_descr"]:$this->db53_descr);
        $this->db53_mascara = ($this->db53_mascara == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_mascara"]:$this->db53_mascara);
-       $this->db53_tipo = ($this->db53_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_tipo"]:$this->db53_tipo);
-       $this->db53_tamanho = ($this->db53_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_tamanho"]:$this->db53_tamanho);
-       $this->db53_decimais = ($this->db53_decimais == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_decimais"]:$this->db53_decimais);
+       $this->db53_tipo = ($this->db53_tipo === 0 || $this->db53_tipo === 0.0 || $this->db53_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_tipo"]:$this->db53_tipo);
+       $this->db53_tamanho = ($this->db53_tamanho === 0 || $this->db53_tamanho === 0.0 || $this->db53_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_tamanho"]:$this->db53_tamanho);
+       $this->db53_decimais = ($this->db53_decimais === 0 || $this->db53_decimais === 0.0 || $this->db53_decimais == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_decimais"]:$this->db53_decimais);
        $this->db53_caracdec = ($this->db53_caracdec == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_caracdec"]:$this->db53_caracdec);
        $this->db53_alinha = ($this->db53_alinha == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_alinha"]:$this->db53_alinha);
      }else{
-       $this->db53_codigo = ($this->db53_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_codigo"]:$this->db53_codigo);
+       $this->db53_codigo = ($this->db53_codigo === 0 || $this->db53_codigo === 0.0 || $this->db53_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db53_codigo"]:$this->db53_codigo);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_db_layoutformat {
          $this->db53_codigo = $db53_codigo; 
        }
      }
-     if(($this->db53_codigo == null) || ($this->db53_codigo == "") ){ 
+     if(($this->db53_codigo == null) || ($this->db53_codigo === 0 || $this->db53_codigo === 0.0 || $this->db53_codigo == "") ){ 
        $this->erro_sql = " Campo db53_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -454,7 +454,7 @@ class cl_db_layoutformat {
    function sql_query ( $db53_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_db_layoutformat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -487,7 +487,7 @@ class cl_db_layoutformat {
    function sql_query_file ( $db53_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -508,7 +508,7 @@ class cl_db_layoutformat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

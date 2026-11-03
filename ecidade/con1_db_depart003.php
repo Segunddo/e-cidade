@@ -45,7 +45,8 @@ $cldb_departorg   = new cl_db_departorg;
 $cldb_departender = new cl_db_departender;
 $cldb_config      = new cl_db_config;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $db_botao = false;
 $db_opcao = 33;

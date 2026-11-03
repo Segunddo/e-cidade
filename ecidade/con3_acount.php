@@ -79,7 +79,7 @@ db_postmemory($HTTP_POST_VARS);
     		      $sql .= " where m.codmod = ".$HTTP_POST_VARS["dbh_modulo"];						  
   			      $sql .= " order by nomearq";
   			      $result = db_query($sql);
-  			      for ($i=0;$i<pg_numrows($result);$i++) {
+  			      for ($i=0;$i<($result ? pg_numrows($result) : null);$i++) {
   			        echo '<option value="'.pg_result($result,$i,"codarq").'" '.(isset($HTTP_POST_VARS["dbh_tabela"]) && $HTTP_POST_VARS["dbh_tabela"] == pg_result($result,$i,"codarq")?"selected":"").'>'.pg_result($result,$i,"nomearq").'</option>';
   			      }
   			     ?>
@@ -98,7 +98,7 @@ db_postmemory($HTTP_POST_VARS);
   		        $sql .= " where m.codarq = ".$HTTP_POST_VARS["dbh_tabela"];						  
   			      $sql .= " order by m.seqarq";
   			      $result = db_query($sql);
-  			      for($i=0;$i<pg_numrows($result);$i++){
+  			      for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   			        echo '<option value="'.pg_result($result,$i,"codcam").'" '.(isset($HTTP_POST_VARS["dbh_campo"]) && $HTTP_POST_VARS["dbh_campo"] == pg_result($result,$i,"codcam")?"selected":"").'>'.pg_result($result,$i,"nomecam").'</option>';
   			      }
   			     ?>

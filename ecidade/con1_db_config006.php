@@ -35,7 +35,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("libs/db_app.utils.php"));
 require(modification("classes/db_db_configarquivos_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $cldb_config         = new cl_db_config;
