@@ -72,11 +72,11 @@ class cl_consistemaconta
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c65_sequencial = ($this->c65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_sequencial"]:$this->c65_sequencial);
+       $this->c65_sequencial = ($this->c65_sequencial === 0 || $this->c65_sequencial === 0.0 || $this->c65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_sequencial"]:$this->c65_sequencial);
        $this->c65_descricao = ($this->c65_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_descricao"]:$this->c65_descricao);
        $this->c65_sigla = ($this->c65_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_sigla"]:$this->c65_sigla);
      }else{
-       $this->c65_sequencial = ($this->c65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_sequencial"]:$this->c65_sequencial);
+       $this->c65_sequencial = ($this->c65_sequencial === 0 || $this->c65_sequencial === 0.0 || $this->c65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_sequencial"]:$this->c65_sequencial);
      }
    }
 
@@ -125,7 +125,7 @@ class cl_consistemaconta
          $this->c65_sequencial = $c65_sequencial; 
        }
      }
-     if(($this->c65_sequencial == null) || ($this->c65_sequencial == "") ){ 
+     if(($this->c65_sequencial == null) || ($this->c65_sequencial === 0 || $this->c65_sequencial === 0.0 || $this->c65_sequencial == "") ){ 
        $this->erro_sql = " Campo c65_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

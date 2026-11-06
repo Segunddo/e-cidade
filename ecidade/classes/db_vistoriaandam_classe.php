@@ -50,7 +50,7 @@ class cl_vistoriaandam {
                  y68_codandam = int8 = Codigo do Andamento Gerado 
                  ";
    //funcao construtor da classe 
-   function cl_vistoriaandam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vistoriaandam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_vistoriaandam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y68_codvist = ($this->y68_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_codvist"]:$this->y68_codvist);
-       $this->y68_codandam = ($this->y68_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_codandam"]:$this->y68_codandam);
+       $this->y68_codvist = (($this->y68_codvist === 0 || $this->y68_codvist === 0.0 || $this->y68_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y68_codvist"]:$this->y68_codvist);
+       $this->y68_codandam = (($this->y68_codandam === 0 || $this->y68_codandam === 0.0 || $this->y68_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y68_codandam"]:$this->y68_codandam);
      }else{
-       $this->y68_codvist = ($this->y68_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_codvist"]:$this->y68_codvist);
-       $this->y68_codandam = ($this->y68_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_codandam"]:$this->y68_codandam);
+       $this->y68_codvist = (($this->y68_codvist === 0 || $this->y68_codvist === 0.0 || $this->y68_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y68_codvist"]:$this->y68_codvist);
+       $this->y68_codandam = (($this->y68_codandam === 0 || $this->y68_codandam === 0.0 || $this->y68_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y68_codandam"]:$this->y68_codandam);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_vistoriaandam {
       $this->atualizacampos();
        $this->y68_codvist = $y68_codvist; 
        $this->y68_codandam = $y68_codandam; 
-     if(($this->y68_codvist == null) || ($this->y68_codvist == "") ){ 
+     if(($this->y68_codvist == null) || (($this->y68_codvist === 0 || $this->y68_codvist === 0.0 || $this->y68_codvist == "")) ){ 
        $this->erro_sql = " Campo y68_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_vistoriaandam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y68_codandam == null) || ($this->y68_codandam == "") ){ 
+     if(($this->y68_codandam == null) || (($this->y68_codandam === 0 || $this->y68_codandam === 0.0 || $this->y68_codandam == "")) ){ 
        $this->erro_sql = " Campo y68_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -366,7 +366,7 @@ class cl_vistoriaandam {
    function sql_query_file ( $y68_codvist=null,$y68_codandam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_vistoriaandam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

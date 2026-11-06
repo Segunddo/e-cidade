@@ -72,7 +72,7 @@ class cl_edital {
                  d01_perunica = int4 = Percentual desconto única 
                  ";
    //funcao construtor da classe 
-   function cl_edital() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("edital"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,10 +89,10 @@ class cl_edital {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d01_codedi = ($this->d01_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_codedi"]:$this->d01_codedi);
+       $this->d01_codedi = ($this->d01_codedi === 0 || $this->d01_codedi === 0.0 || $this->d01_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_codedi"]:$this->d01_codedi);
        $this->d01_numero = ($this->d01_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_numero"]:$this->d01_numero);
        $this->d01_descr = ($this->d01_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_descr"]:$this->d01_descr);
-       $this->d01_idlog = ($this->d01_idlog == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_idlog"]:$this->d01_idlog);
+       $this->d01_idlog = ($this->d01_idlog === 0 || $this->d01_idlog === 0.0 || $this->d01_idlog == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_idlog"]:$this->d01_idlog);
        if($this->d01_data == ""){
          $this->d01_data_dia = ($this->d01_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_data_dia"]:$this->d01_data_dia);
          $this->d01_data_mes = ($this->d01_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_data_mes"]:$this->d01_data_mes);
@@ -101,9 +101,9 @@ class cl_edital {
             $this->d01_data = $this->d01_data_ano."-".$this->d01_data_mes."-".$this->d01_data_dia;
          }
        }
-       $this->d01_perc = ($this->d01_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_perc"]:$this->d01_perc);
-       $this->d01_receit = ($this->d01_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_receit"]:$this->d01_receit);
-       $this->d01_numtot = ($this->d01_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_numtot"]:$this->d01_numtot);
+       $this->d01_perc = ($this->d01_perc === 0 || $this->d01_perc === 0.0 || $this->d01_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_perc"]:$this->d01_perc);
+       $this->d01_receit = ($this->d01_receit === 0 || $this->d01_receit === 0.0 || $this->d01_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_receit"]:$this->d01_receit);
+       $this->d01_numtot = ($this->d01_numtot === 0 || $this->d01_numtot === 0.0 || $this->d01_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_numtot"]:$this->d01_numtot);
        if($this->d01_privenc == ""){
          $this->d01_privenc_dia = ($this->d01_privenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_privenc_dia"]:$this->d01_privenc_dia);
          $this->d01_privenc_mes = ($this->d01_privenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_privenc_mes"]:$this->d01_privenc_mes);
@@ -112,9 +112,9 @@ class cl_edital {
             $this->d01_privenc = $this->d01_privenc_ano."-".$this->d01_privenc_mes."-".$this->d01_privenc_dia;
          }
        }
-       $this->d01_perunica = ($this->d01_perunica == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_perunica"]:$this->d01_perunica);
+       $this->d01_perunica = ($this->d01_perunica === 0 || $this->d01_perunica === 0.0 || $this->d01_perunica == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_perunica"]:$this->d01_perunica);
      }else{
-       $this->d01_codedi = ($this->d01_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_codedi"]:$this->d01_codedi);
+       $this->d01_codedi = ($this->d01_codedi === 0 || $this->d01_codedi === 0.0 || $this->d01_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d01_codedi"]:$this->d01_codedi);
      }
    }
    // funcao para inclusao
@@ -213,7 +213,7 @@ class cl_edital {
          $this->d01_codedi = $d01_codedi; 
        }
      }
-     if(($this->d01_codedi == null) || ($this->d01_codedi == "") ){ 
+     if(($this->d01_codedi == null) || ($this->d01_codedi === 0 || $this->d01_codedi === 0.0 || $this->d01_codedi == "") ){ 
        $this->erro_sql = " Campo d01_codedi nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -600,7 +600,7 @@ class cl_edital {
    function sql_query ( $d01_codedi=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -624,7 +624,7 @@ class cl_edital {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -636,7 +636,7 @@ class cl_edital {
    function sql_query_file ( $d01_codedi=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -657,7 +657,7 @@ class cl_edital {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -669,7 +669,7 @@ class cl_edital {
    function sql_query_servicos ( $d01_codedi=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -695,7 +695,7 @@ class cl_edital {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

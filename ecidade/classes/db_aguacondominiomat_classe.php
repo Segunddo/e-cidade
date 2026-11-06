@@ -50,7 +50,7 @@ class cl_aguacondominiomat {
                  x40_codcondominio = int4 = Código do Condomínio 
                  ";
    //funcao construtor da classe 
-   function cl_aguacondominiomat() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacondominiomat"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_aguacondominiomat {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x40_matric = ($this->x40_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_matric"]:$this->x40_matric);
-       $this->x40_codcondominio = ($this->x40_codcondominio == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_codcondominio"]:$this->x40_codcondominio);
+       $this->x40_matric = (($this->x40_matric === 0 || $this->x40_matric === 0.0 || ($this->x40_matric === 0 || $this->x40_matric === 0.0 || $this->x40_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_matric"]:$this->x40_matric);
+       $this->x40_codcondominio = (($this->x40_codcondominio === 0 || $this->x40_codcondominio === 0.0 || ($this->x40_codcondominio === 0 || $this->x40_codcondominio === 0.0 || $this->x40_codcondominio == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_codcondominio"]:$this->x40_codcondominio);
      }else{
-       $this->x40_matric = ($this->x40_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_matric"]:$this->x40_matric);
-       $this->x40_codcondominio = ($this->x40_codcondominio == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_codcondominio"]:$this->x40_codcondominio);
+       $this->x40_matric = (($this->x40_matric === 0 || $this->x40_matric === 0.0 || ($this->x40_matric === 0 || $this->x40_matric === 0.0 || $this->x40_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_matric"]:$this->x40_matric);
+       $this->x40_codcondominio = (($this->x40_codcondominio === 0 || $this->x40_codcondominio === 0.0 || ($this->x40_codcondominio === 0 || $this->x40_codcondominio === 0.0 || $this->x40_codcondominio == ""))?@$GLOBALS["HTTP_POST_VARS"]["x40_codcondominio"]:$this->x40_codcondominio);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_aguacondominiomat {
       $this->atualizacampos();
        $this->x40_codcondominio = $x40_codcondominio; 
        $this->x40_matric = $x40_matric; 
-     if(($this->x40_codcondominio == null) || ($this->x40_codcondominio == "") ){ 
+     if(($this->x40_codcondominio == null) || (($this->x40_codcondominio === 0 || $this->x40_codcondominio === 0.0 || ($this->x40_codcondominio === 0 || $this->x40_codcondominio === 0.0 || $this->x40_codcondominio == ""))) ){ 
        $this->erro_sql = " Campo x40_codcondominio nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_aguacondominiomat {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x40_matric == null) || ($this->x40_matric == "") ){ 
+     if(($this->x40_matric == null) || (($this->x40_matric === 0 || $this->x40_matric === 0.0 || ($this->x40_matric === 0 || $this->x40_matric === 0.0 || $this->x40_matric == ""))) ){ 
        $this->erro_sql = " Campo x40_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_aguacondominiomat {
    function sql_query ( $x40_codcondominio=null,$x40_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -353,7 +353,7 @@ class cl_aguacondominiomat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_aguacondominiomat {
    function sql_query_file ( $x40_codcondominio=null,$x40_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_aguacondominiomat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

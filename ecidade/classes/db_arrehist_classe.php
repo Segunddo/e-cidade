@@ -70,7 +70,7 @@ class cl_arrehist {
                  k00_idhist = int4 = Sequencia 
                  ";
    //funcao construtor da classe
-   function cl_arrehist() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("arrehist");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,9 +87,9 @@ class cl_arrehist {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
-       $this->k00_hist = ($this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
+       $this->k00_numpre = (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = (($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->k00_hist = (($this->k00_hist === 0 || $this->k00_hist === 0.0 || $this->k00_hist == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
        if($this->k00_dtoper == ""){
          $this->k00_dtoper_dia = ($this->k00_dtoper_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtoper_dia"]:$this->k00_dtoper_dia);
          $this->k00_dtoper_mes = ($this->k00_dtoper_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtoper_mes"]:$this->k00_dtoper_mes);
@@ -99,7 +99,7 @@ class cl_arrehist {
          }
        }
        $this->k00_hora = ($this->k00_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hora"]:$this->k00_hora);
-       $this->k00_id_usuario = ($this->k00_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_id_usuario"]:$this->k00_id_usuario);
+       $this->k00_id_usuario = (($this->k00_id_usuario === 0 || $this->k00_id_usuario === 0.0 || $this->k00_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_id_usuario"]:$this->k00_id_usuario);
        $this->k00_histtxt = ($this->k00_histtxt == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_histtxt"]:$this->k00_histtxt);
        if($this->k00_limithist == ""){
          $this->k00_limithist_dia = ($this->k00_limithist_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_limithist_dia"]:$this->k00_limithist_dia);
@@ -109,9 +109,9 @@ class cl_arrehist {
             $this->k00_limithist = $this->k00_limithist_ano."-".$this->k00_limithist_mes."-".$this->k00_limithist_dia;
          }
        }
-       $this->k00_idhist = ($this->k00_idhist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_idhist"]:$this->k00_idhist);
+       $this->k00_idhist = (($this->k00_idhist === 0 || $this->k00_idhist === 0.0 || $this->k00_idhist == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_idhist"]:$this->k00_idhist);
      }else{
-       $this->k00_idhist = ($this->k00_idhist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_idhist"]:$this->k00_idhist);
+       $this->k00_idhist = (($this->k00_idhist === 0 || $this->k00_idhist === 0.0 || $this->k00_idhist == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_idhist"]:$this->k00_idhist);
      }
    }
    // funcao para inclusao
@@ -207,7 +207,7 @@ class cl_arrehist {
          $this->k00_idhist = $k00_idhist;
        }
      }
-     if(($this->k00_idhist == null) || ($this->k00_idhist == "") ){
+     if(($this->k00_idhist == null) || (($this->k00_idhist === 0 || $this->k00_idhist === 0.0 || $this->k00_idhist == "")) ){
        $this->erro_sql = " Campo k00_idhist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

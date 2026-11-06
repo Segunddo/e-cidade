@@ -52,7 +52,7 @@ class cl_iptunaogeracarnecgm {
                  j68_numcgm = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_iptunaogeracarnecgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptunaogeracarnecgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_iptunaogeracarnecgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j68_sequencial = ($this->j68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_sequencial"]:$this->j68_sequencial);
-       $this->j68_naogeracarne = ($this->j68_naogeracarne == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_naogeracarne"]:$this->j68_naogeracarne);
-       $this->j68_numcgm = ($this->j68_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_numcgm"]:$this->j68_numcgm);
+       $this->j68_sequencial = ($this->j68_sequencial === 0 || $this->j68_sequencial === 0.0 || $this->j68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_sequencial"]:$this->j68_sequencial);
+       $this->j68_naogeracarne = ($this->j68_naogeracarne === 0 || $this->j68_naogeracarne === 0.0 || $this->j68_naogeracarne == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_naogeracarne"]:$this->j68_naogeracarne);
+       $this->j68_numcgm = ($this->j68_numcgm === 0 || $this->j68_numcgm === 0.0 || $this->j68_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_numcgm"]:$this->j68_numcgm);
      }else{
-       $this->j68_sequencial = ($this->j68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_sequencial"]:$this->j68_sequencial);
+       $this->j68_sequencial = ($this->j68_sequencial === 0 || $this->j68_sequencial === 0.0 || $this->j68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_sequencial"]:$this->j68_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_iptunaogeracarnecgm {
          $this->j68_sequencial = $j68_sequencial; 
        }
      }
-     if(($this->j68_sequencial == null) || ($this->j68_sequencial == "") ){ 
+     if(($this->j68_sequencial == null) || ($this->j68_sequencial === 0 || $this->j68_sequencial === 0.0 || $this->j68_sequencial == "") ){ 
        $this->erro_sql = " Campo j68_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_iptunaogeracarnecgm {
    function sql_query ( $j68_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_iptunaogeracarnecgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_iptunaogeracarnecgm {
    function sql_query_file ( $j68_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_iptunaogeracarnecgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -54,7 +54,7 @@ class cl_db_documentopadrao {
                  db60_instit = int4 = Cod. da Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_db_documentopadrao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_documentopadrao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_db_documentopadrao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db60_coddoc = ($this->db60_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_coddoc"]:$this->db60_coddoc);
+       $this->db60_coddoc = (($this->db60_coddoc === 0 || $this->db60_coddoc === 0.0 || $this->db60_coddoc == "")?@$GLOBALS["HTTP_POST_VARS"]["db60_coddoc"]:$this->db60_coddoc);
        $this->db60_descr = ($this->db60_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_descr"]:$this->db60_descr);
-       $this->db60_tipodoc = ($this->db60_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_tipodoc"]:$this->db60_tipodoc);
-       $this->db60_instit = ($this->db60_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_instit"]:$this->db60_instit);
+       $this->db60_tipodoc = (($this->db60_tipodoc === 0 || $this->db60_tipodoc === 0.0 || $this->db60_tipodoc == "")?@$GLOBALS["HTTP_POST_VARS"]["db60_tipodoc"]:$this->db60_tipodoc);
+       $this->db60_instit = (($this->db60_instit === 0 || $this->db60_instit === 0.0 || $this->db60_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["db60_instit"]:$this->db60_instit);
      }else{
-       $this->db60_coddoc = ($this->db60_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_coddoc"]:$this->db60_coddoc);
+       $this->db60_coddoc = (($this->db60_coddoc === 0 || $this->db60_coddoc === 0.0 || $this->db60_coddoc == "")?@$GLOBALS["HTTP_POST_VARS"]["db60_coddoc"]:$this->db60_coddoc);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_db_documentopadrao {
          $this->db60_coddoc = $db60_coddoc; 
        }
      }
-     if(($this->db60_coddoc == null) || ($this->db60_coddoc == "") ){ 
+     if(($this->db60_coddoc == null) || (($this->db60_coddoc === 0 || $this->db60_coddoc === 0.0 || $this->db60_coddoc == "")) ){ 
        $this->erro_sql = " Campo db60_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_db_documentopadrao {
    function sql_query ( $db60_coddoc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_db_documentopadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_db_documentopadrao {
    function sql_query_file ( $db60_coddoc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_db_documentopadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

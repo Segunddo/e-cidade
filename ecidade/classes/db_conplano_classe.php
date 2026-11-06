@@ -70,7 +70,7 @@ class cl_conplano {
 	c60_saldocontinuo = bool = Saldo Contínuo
 	";
 	//funcao construtor da classe
-	function cl_conplano() {
+	function __construct() {
 		//classes dos rotulos dos campos
 		$this->rotulo = new rotulo("conplano");
 		$this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,21 +87,21 @@ class cl_conplano {
 	// funcao para atualizar campos
 	function atualizacampos($exclusao=false) {
 		if($exclusao==false){
-			$this->c60_codcon = ($this->c60_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_codcon"]:$this->c60_codcon);
-			$this->c60_anousu = ($this->c60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_anousu"]:$this->c60_anousu);
+			$this->c60_codcon = ($this->c60_codcon === 0 || $this->c60_codcon === 0.0 || $this->c60_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_codcon"]:$this->c60_codcon);
+			$this->c60_anousu = ($this->c60_anousu === 0 || $this->c60_anousu === 0.0 || $this->c60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_anousu"]:$this->c60_anousu);
 			$this->c60_estrut = ($this->c60_estrut == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_estrut"]:$this->c60_estrut);
 			$this->c60_descr = ($this->c60_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_descr"]:$this->c60_descr);
 			$this->c60_finali = ($this->c60_finali == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_finali"]:$this->c60_finali);
-			$this->c60_codsis = ($this->c60_codsis == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_codsis"]:$this->c60_codsis);
-			$this->c60_codcla = ($this->c60_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_codcla"]:$this->c60_codcla);
-			$this->c60_consistemaconta = ($this->c60_consistemaconta == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_consistemaconta"]:$this->c60_consistemaconta);
+			$this->c60_codsis = ($this->c60_codsis === 0 || $this->c60_codsis === 0.0 || $this->c60_codsis == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_codsis"]:$this->c60_codsis);
+			$this->c60_codcla = ($this->c60_codcla === 0 || $this->c60_codcla === 0.0 || $this->c60_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_codcla"]:$this->c60_codcla);
+			$this->c60_consistemaconta = ($this->c60_consistemaconta === 0 || $this->c60_consistemaconta === 0.0 || $this->c60_consistemaconta == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_consistemaconta"]:$this->c60_consistemaconta);
 			$this->c60_identificadorfinanceiro = ($this->c60_identificadorfinanceiro == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_identificadorfinanceiro"]:$this->c60_identificadorfinanceiro);
-			$this->c60_naturezasaldo = ($this->c60_naturezasaldo == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_naturezasaldo"]:$this->c60_naturezasaldo);
+			$this->c60_naturezasaldo = ($this->c60_naturezasaldo === 0 || $this->c60_naturezasaldo === 0.0 || $this->c60_naturezasaldo == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_naturezasaldo"]:$this->c60_naturezasaldo);
 			$this->c60_funcao = ($this->c60_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_funcao"]:$this->c60_funcao);
 			$this->c60_saldocontinuo = ($this->c60_saldocontinuo == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_funcao"]:$this->c60_saldocontinuo);
 		}else{
-			$this->c60_codcon = ($this->c60_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_codcon"]:$this->c60_codcon);
-			$this->c60_anousu = ($this->c60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_anousu"]:$this->c60_anousu);
+			$this->c60_codcon = ($this->c60_codcon === 0 || $this->c60_codcon === 0.0 || $this->c60_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_codcon"]:$this->c60_codcon);
+			$this->c60_anousu = ($this->c60_anousu === 0 || $this->c60_anousu === 0.0 || $this->c60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c60_anousu"]:$this->c60_anousu);
 		}
 	}
 	// funcao para inclusao
@@ -194,7 +194,7 @@ class cl_conplano {
 				$this->c60_codcon = $c60_codcon;
 			}
 		}
-		if(($this->c60_codcon == null) || ($this->c60_codcon == "") ){
+		if(($this->c60_codcon == null) || ($this->c60_codcon === 0 || $this->c60_codcon === 0.0 || $this->c60_codcon == "") ){
 			$this->erro_sql = " Campo c60_codcon nao declarado.";
 			$this->erro_banco = "Chave Primaria zerada.";
 			$this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -202,7 +202,7 @@ class cl_conplano {
 			$this->erro_status = "0";
 			return false;
 		}
-		if(($this->c60_anousu == null) || ($this->c60_anousu == "") ){
+		if(($this->c60_anousu == null) || ($this->c60_anousu === 0 || $this->c60_anousu === 0.0 || $this->c60_anousu == "") ){
 			$this->erro_sql = " Campo c60_anousu nao declarado.";
 			$this->erro_banco = "Chave Primaria zerada.";
 			$this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

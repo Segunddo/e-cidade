@@ -52,7 +52,7 @@ class cl_arrematric {
                  k00_perc = float8 = Percentual em relação ao débito 
                  ";
    //funcao construtor da classe 
-   function cl_arrematric() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("arrematric"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_arrematric {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_matric = ($this->k00_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_matric"]:$this->k00_matric);
-       $this->k00_perc = ($this->k00_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_perc"]:$this->k00_perc);
+       $this->k00_numpre = (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_matric = (($this->k00_matric === 0 || $this->k00_matric === 0.0 || $this->k00_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_matric"]:$this->k00_matric);
+       $this->k00_perc = (($this->k00_perc === 0 || $this->k00_perc === 0.0 || $this->k00_perc == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_perc"]:$this->k00_perc);
      }else{
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_matric = ($this->k00_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_matric"]:$this->k00_matric);
+       $this->k00_numpre = (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_matric = (($this->k00_matric === 0 || $this->k00_matric === 0.0 || $this->k00_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_matric"]:$this->k00_matric);
      }
    }
    // funcao para inclusao
@@ -82,10 +82,10 @@ class cl_arrematric {
       $this->atualizacampos();
        $this->k00_numpre = $k00_numpre; 
        $this->k00_matric = $k00_matric; 
-       if(($this->k00_perc == null) || ($this->k00_perc == "") ){
+       if(($this->k00_perc == null) || (($this->k00_perc === 0 || $this->k00_perc === 0.0 || $this->k00_perc == "")) ){
        	 $this->k00_perc = 0;
        }
-       if(($this->k00_numpre == null) || ($this->k00_numpre == "") ){ 
+       if(($this->k00_numpre == null) || (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")) ){ 
        $this->erro_sql = " Campo k00_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -93,7 +93,7 @@ class cl_arrematric {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k00_matric == null) || ($this->k00_matric == "") ){ 
+     if(($this->k00_matric == null) || (($this->k00_matric === 0 || $this->k00_matric === 0.0 || $this->k00_matric == "")) ){ 
        $this->erro_sql = " Campo k00_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -343,7 +343,7 @@ class cl_arrematric {
    function sql_query ( $k00_numpre=null,$k00_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -375,7 +375,7 @@ class cl_arrematric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_arrematric {
    function sql_query_div ( $k00_numpre=null,$k00_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_arrematric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_arrematric {
    function sql_query_file ( $k00_numpre=null,$k00_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -461,7 +461,7 @@ class cl_arrematric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_arrematric {
    function sql_query_info ( $k00_numpre=null,$k00_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -505,7 +505,7 @@ class cl_arrematric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

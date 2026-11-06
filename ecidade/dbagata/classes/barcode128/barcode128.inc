@@ -24,7 +24,7 @@ For any suggestions or bug report please contact me : guinux@cosmoplazza.com
 		var $_codeset;
 		var $_pattern;
 
-		function barcode128( $data, $code_set = 'B' ) {
+		function __construct( $data, $code_set = 'B' ) {
 			$code_set = strtoupper($code_set);
 			if ( $code_set != 'A' && $code_set != 'B') user_error( 'barcode128 : Codeset \'' . $code_set . '\' not found.', E_USER_ERROR);
 

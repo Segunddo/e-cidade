@@ -52,7 +52,7 @@ class cl_matordemitemcustocriterio {
                  cc11_matordemitem = int4 = Código do Item 
                  ";
    //funcao construtor da classe 
-   function cl_matordemitemcustocriterio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matordemitemcustocriterio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_matordemitemcustocriterio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc11_sequencial = ($this->cc11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc11_sequencial"]:$this->cc11_sequencial);
-       $this->cc11_custocriteriorateio = ($this->cc11_custocriteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc11_custocriteriorateio"]:$this->cc11_custocriteriorateio);
-       $this->cc11_matordemitem = ($this->cc11_matordemitem == ""?@$GLOBALS["HTTP_POST_VARS"]["cc11_matordemitem"]:$this->cc11_matordemitem);
+       $this->cc11_sequencial = ($this->cc11_sequencial === 0 || $this->cc11_sequencial === 0.0 || $this->cc11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc11_sequencial"]:$this->cc11_sequencial);
+       $this->cc11_custocriteriorateio = ($this->cc11_custocriteriorateio === 0 || $this->cc11_custocriteriorateio === 0.0 || $this->cc11_custocriteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc11_custocriteriorateio"]:$this->cc11_custocriteriorateio);
+       $this->cc11_matordemitem = ($this->cc11_matordemitem === 0 || $this->cc11_matordemitem === 0.0 || $this->cc11_matordemitem == ""?@$GLOBALS["HTTP_POST_VARS"]["cc11_matordemitem"]:$this->cc11_matordemitem);
      }else{
-       $this->cc11_sequencial = ($this->cc11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc11_sequencial"]:$this->cc11_sequencial);
+       $this->cc11_sequencial = ($this->cc11_sequencial === 0 || $this->cc11_sequencial === 0.0 || $this->cc11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc11_sequencial"]:$this->cc11_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_matordemitemcustocriterio {
          $this->cc11_sequencial = $cc11_sequencial; 
        }
      }
-     if(($this->cc11_sequencial == null) || ($this->cc11_sequencial == "") ){ 
+     if(($this->cc11_sequencial == null) || ($this->cc11_sequencial === 0 || $this->cc11_sequencial === 0.0 || $this->cc11_sequencial == "") ){ 
        $this->erro_sql = " Campo cc11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_matordemitemcustocriterio {
    function sql_query ( $cc11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_matordemitemcustocriterio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_matordemitemcustocriterio {
    function sql_query_file ( $cc11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_matordemitemcustocriterio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

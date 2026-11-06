@@ -88,7 +88,7 @@ class cl_db_depart {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->coddepto = ($this->coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["coddepto"]:$this->coddepto);
+       $this->coddepto = (($this->coddepto === 0 || $this->coddepto === 0.0 || $this->coddepto == "")?@$GLOBALS["HTTP_POST_VARS"]["coddepto"]:$this->coddepto);
        $this->descrdepto = ($this->descrdepto == ""?@$GLOBALS["HTTP_POST_VARS"]["descrdepto"]:$this->descrdepto);
        $this->nomeresponsavel = ($this->nomeresponsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["nomeresponsavel"]:$this->nomeresponsavel);
        $this->emailresponsavel = ($this->emailresponsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["emaildepto"]:$this->emailresponsavel);
@@ -104,10 +104,10 @@ class cl_db_depart {
        $this->emaildepto = ($this->emaildepto == ""?@$GLOBALS["HTTP_POST_VARS"]["emaildepto"]:$this->emaildepto);
        $this->faxdepto = ($this->faxdepto == ""?@$GLOBALS["HTTP_POST_VARS"]["faxdepto"]:$this->faxdepto);
        $this->ramaldepto = ($this->ramaldepto == ""?@$GLOBALS["HTTP_POST_VARS"]["ramaldepto"]:$this->ramaldepto);
-       $this->instit = ($this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
-       $this->id_usuarioresp = ($this->id_usuarioresp == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuarioresp"]:$this->id_usuarioresp);
+       $this->instit = (($this->instit === 0 || $this->instit === 0.0 || $this->instit == "")?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
+       $this->id_usuarioresp = (($this->id_usuarioresp === 0 || $this->id_usuarioresp === 0.0 || $this->id_usuarioresp == "")?@$GLOBALS["HTTP_POST_VARS"]["id_usuarioresp"]:$this->id_usuarioresp);
      }else{
-       $this->coddepto = ($this->coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["coddepto"]:$this->coddepto);
+       $this->coddepto = (($this->coddepto === 0 || $this->coddepto === 0.0 || $this->coddepto == "")?@$GLOBALS["HTTP_POST_VARS"]["coddepto"]:$this->coddepto);
      }
    }
    // funcao para Inclusão
@@ -159,7 +159,7 @@ class cl_db_depart {
          $this->coddepto = $coddepto; 
        }
      }
-     if(($this->coddepto == null) || ($this->coddepto == "") ){ 
+     if(($this->coddepto == null) || (($this->coddepto === 0 || $this->coddepto === 0.0 || $this->coddepto == "")) ){ 
        $this->erro_sql = " Campo coddepto não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

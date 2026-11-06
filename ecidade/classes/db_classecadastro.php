@@ -143,7 +143,7 @@ class cl_ruas {
   var $rotulo = null;
   var $db_erro = null;
 
-  function cl_ruas() {
+  function __construct() {
     $this->rotulo = new rotulo("ruas");
   }
   function cldb_erro($uri){
@@ -224,7 +224,7 @@ class cl_ruas {
 }
 class cl_bairro {
   var $rotulo = null;
-  function cl_bairro() {
+  function __construct() {
     $this->rotulo = new rotulo("bairro");
   }
   function dadosCodigo($filtro = "") {
@@ -279,7 +279,7 @@ class cl_bairro {
 }
 class cl_setor {
   var $rotulo = null;
-  function cl_setor() {
+  function __construct() {
     $this->rotulo = new rotulo("setor");
   }
   function dadosCodigo($filtro = "") {

@@ -366,7 +366,7 @@ if (isset($oPost->incluir)) {
         if (count($aListaCaracUtil) > 1) {
           foreach ( $aListaCaracUtil as $aChave ) {
 
-            $aListaDadosCaracUtil = split("X", $aChave);
+            $aListaDadosCaracUtil = explode("X", $aChave);
 
             // $aListaDadosCaracUtil[0] -- Código da Característica
             // $aListaDadosCaracUtil[1] -- Valor  da Característica
@@ -516,7 +516,7 @@ if (isset($oPost->incluir)) {
 
     foreach ( $aListaFormaPag as $aChave ) {
 
-      $aListaValorFormaPag = split("X", $aChave);
+      $aListaValorFormaPag = explode("X", $aChave);
 
       // $aListaValorFormaPag[0]  -- Código da Forma de Pagamento da Transação
       // $aListaValorFormaPag[1]  -- Valor  da Forma de Pagamento da Transação

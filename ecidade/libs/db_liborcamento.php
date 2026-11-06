@@ -125,7 +125,7 @@ class cl_estrutura {
     $title = "T".$picture;
     $label = "L".$picture;
 
-    global $$label, $$title, $$picture, $mascara;
+    global ${$label}, ${$title}, ${$picture}, $mascara;
     if (!class_exists('cl_orcparametro')) {
       db_msgbox('Classe orcparametro não incluida!');
       exit;
@@ -165,8 +165,8 @@ class cl_estrutura {
   if ($this->input == false) {
     ?>
     <tr>
-      <td nowrap title="<?=@$$title?>">
-        <?=@$$label?>
+      <td nowrap title="<?=@${$title}?>">
+        <?=@${$label}?>
       </td>
       <td>
         <?
@@ -174,7 +174,7 @@ class cl_estrutura {
 
         }
         ?>
-        <input title="<?=@$$title?>" name="<?=$picture?>" maxlength='<?=$tamanho?>' size='<?=$this->size?>' type="text"  value="<?=@$$picture?>" onKeyPress="return js_mascara01_<?=$picture?>(event,this.value);"  <?=$funcao?> <?=($this->db_opcao==22||$this->db_opcao==33||$this->db_opcao==3?"readonly style=\"background-color:#DEB887\" ":"")?> >
+        <input title="<?=@${$title}?>" name="<?=$picture?>" maxlength='<?=$tamanho?>' size='<?=$this->size?>' type="text"  value="<?=@${$picture}?>" onKeyPress="return js_mascara01_<?=$picture?>(event,this.value);"  <?=$funcao?> <?=($this->db_opcao==22||$this->db_opcao==33||$this->db_opcao==3?"readonly style=\"background-color:#DEB887\" ":"")?> >
         <?
 
         if ($this->input == false) {
@@ -4625,7 +4625,7 @@ class cl_selorcdotacao {
 
       if ($this->elemento != null  && $ret_elemento ==true)
         if (trim($this->elemento)!=""){
-          $vet_elementos = split(",",$this->elemento);
+          $vet_elementos = preg_split("#,#m",$this->elemento);
           $and           = " and ";
           $or            = " or ";
           $elementos     = "e.o56_elemento like ";
@@ -4660,7 +4660,7 @@ class cl_selorcdotacao {
         $txt .= " and o58_projativ in ".$this->projativ;
       if ($this->elemento != null  && $ret_elemento ==true)
         if (trim($this->elemento)!=""){
-          $vet_elementos = split(",",$this->elemento);
+          $vet_elementos = preg_split("#,#m",$this->elemento);
           $and           = " and ";
           $or            = " or ";
           $elementos     = "o56_elemento like ";
@@ -4794,9 +4794,9 @@ class cl_selorcdotacao {
     $condicao_uniao = " ";
     $estrut    = "";
     if ($this->filtra_despesa != "geral") {
-      $qual_filtro = split('-', $this->filtra_despesa);
+      $qual_filtro = preg_split('#\-#m', $this->filtra_despesa);
       for ($f = 0; $f < sizeof($qual_filtro); $f ++) {
-        $ver = split("_", $qual_filtro[$f]);
+        $ver = preg_split("#_#m", $qual_filtro[$f]);
 
         if ($ver[0] == "instit") {
           $sele_work_instit .= $sepi.$ver[1];

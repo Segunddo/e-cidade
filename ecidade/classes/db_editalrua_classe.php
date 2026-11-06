@@ -70,7 +70,7 @@ class cl_editalrua {
                  d02_valorizacao = float8 = Percentual de valorizacao 
                  ";
    //funcao construtor da classe 
-   function cl_editalrua() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("editalrua"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,9 +87,9 @@ class cl_editalrua {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d02_contri = ($this->d02_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_contri"]:$this->d02_contri);
-       $this->d02_codedi = ($this->d02_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_codedi"]:$this->d02_codedi);
-       $this->d02_codigo = ($this->d02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_codigo"]:$this->d02_codigo);
+       $this->d02_contri = ($this->d02_contri === 0 || $this->d02_contri === 0.0 || $this->d02_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_contri"]:$this->d02_contri);
+       $this->d02_codedi = ($this->d02_codedi === 0 || $this->d02_codedi === 0.0 || $this->d02_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_codedi"]:$this->d02_codedi);
+       $this->d02_codigo = ($this->d02_codigo === 0 || $this->d02_codigo === 0.0 || $this->d02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_codigo"]:$this->d02_codigo);
        if($this->d02_dtauto == ""){
          $this->d02_dtauto_dia = ($this->d02_dtauto_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_dtauto_dia"]:$this->d02_dtauto_dia);
          $this->d02_dtauto_mes = ($this->d02_dtauto_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_dtauto_mes"]:$this->d02_dtauto_mes);
@@ -99,7 +99,7 @@ class cl_editalrua {
          }
        }
        $this->d02_autori = ($this->d02_autori == "f"?@$GLOBALS["HTTP_POST_VARS"]["d02_autori"]:$this->d02_autori);
-       $this->d02_idlog = ($this->d02_idlog == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_idlog"]:$this->d02_idlog);
+       $this->d02_idlog = ($this->d02_idlog === 0 || $this->d02_idlog === 0.0 || $this->d02_idlog == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_idlog"]:$this->d02_idlog);
        if($this->d02_data == ""){
          $this->d02_data_dia = ($this->d02_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_data_dia"]:$this->d02_data_dia);
          $this->d02_data_mes = ($this->d02_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_data_mes"]:$this->d02_data_mes);
@@ -108,10 +108,10 @@ class cl_editalrua {
             $this->d02_data = $this->d02_data_ano."-".$this->d02_data_mes."-".$this->d02_data_dia;
          }
        }
-       $this->d02_profun = ($this->d02_profun == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_profun"]:$this->d02_profun);
-       $this->d02_valorizacao = ($this->d02_valorizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_valorizacao"]:$this->d02_valorizacao);
+       $this->d02_profun = ($this->d02_profun === 0 || $this->d02_profun === 0.0 || $this->d02_profun == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_profun"]:$this->d02_profun);
+       $this->d02_valorizacao = ($this->d02_valorizacao === 0 || $this->d02_valorizacao === 0.0 || $this->d02_valorizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_valorizacao"]:$this->d02_valorizacao);
      }else{
-       $this->d02_contri = ($this->d02_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_contri"]:$this->d02_contri);
+       $this->d02_contri = ($this->d02_contri === 0 || $this->d02_contri === 0.0 || $this->d02_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d02_contri"]:$this->d02_contri);
      }
    }
    // funcao para inclusao
@@ -207,7 +207,7 @@ class cl_editalrua {
          $this->d02_contri = $d02_contri; 
        }
      }
-     if(($this->d02_contri == null) || ($this->d02_contri == "") ){ 
+     if(($this->d02_contri == null) || ($this->d02_contri === 0 || $this->d02_contri === 0.0 || $this->d02_contri == "") ){ 
        $this->erro_sql = " Campo d02_contri nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -569,7 +569,7 @@ class cl_editalrua {
    function sql_query ( $d02_contri=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -595,7 +595,7 @@ class cl_editalrua {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -607,7 +607,7 @@ class cl_editalrua {
    function sql_query_file ( $d02_contri=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -628,7 +628,7 @@ class cl_editalrua {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

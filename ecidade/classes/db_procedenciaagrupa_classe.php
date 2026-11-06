@@ -52,7 +52,7 @@ class cl_procedenciaagrupa {
                  v24_procedagrupa = int4 = Agrupar em 
                  ";
    //funcao construtor da classe 
-   function cl_procedenciaagrupa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procedenciaagrupa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_procedenciaagrupa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v24_sequencial = ($this->v24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_sequencial"]:$this->v24_sequencial);
-       $this->v24_proced = ($this->v24_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_proced"]:$this->v24_proced);
-       $this->v24_procedagrupa = ($this->v24_procedagrupa == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_procedagrupa"]:$this->v24_procedagrupa);
+       $this->v24_sequencial = (($this->v24_sequencial === 0 || $this->v24_sequencial === 0.0 || $this->v24_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v24_sequencial"]:$this->v24_sequencial);
+       $this->v24_proced = (($this->v24_proced === 0 || $this->v24_proced === 0.0 || $this->v24_proced == "")?@$GLOBALS["HTTP_POST_VARS"]["v24_proced"]:$this->v24_proced);
+       $this->v24_procedagrupa = (($this->v24_procedagrupa === 0 || $this->v24_procedagrupa === 0.0 || $this->v24_procedagrupa == "")?@$GLOBALS["HTTP_POST_VARS"]["v24_procedagrupa"]:$this->v24_procedagrupa);
      }else{
-       $this->v24_sequencial = ($this->v24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_sequencial"]:$this->v24_sequencial);
+       $this->v24_sequencial = (($this->v24_sequencial === 0 || $this->v24_sequencial === 0.0 || $this->v24_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v24_sequencial"]:$this->v24_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procedenciaagrupa {
          $this->v24_sequencial = $v24_sequencial; 
        }
      }
-     if(($this->v24_sequencial == null) || ($this->v24_sequencial == "") ){ 
+     if(($this->v24_sequencial == null) || (($this->v24_sequencial === 0 || $this->v24_sequencial === 0.0 || $this->v24_sequencial == "")) ){ 
        $this->erro_sql = " Campo v24_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_procedenciaagrupa {
    function sql_query ( $v24_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_procedenciaagrupa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_procedenciaagrupa {
    function sql_query_file ( $v24_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_procedenciaagrupa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_procedenciaagrupa {
   function sql_query_agrupa ( $v24_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -455,7 +455,7 @@ class cl_procedenciaagrupa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

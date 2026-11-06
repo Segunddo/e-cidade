@@ -74,7 +74,7 @@ class cl_itbialt {
                  it30_dataitbi = date = Data da itbi 
                  ";
    //funcao construtor da classe 
-   public function cl_itbialt() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbialt"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -91,9 +91,9 @@ class cl_itbialt {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it30_sequencial = ($this->it30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it30_sequencial"]:$this->it30_sequencial);
-       $this->it30_guia = ($this->it30_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it30_guia"]:$this->it30_guia);
-       $this->it30_usuario = ($this->it30_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["it30_usuario"]:$this->it30_usuario);
+       $this->it30_sequencial = (($this->it30_sequencial === 0 || $this->it30_sequencial === 0.0 || $this->it30_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it30_sequencial"]:$this->it30_sequencial);
+       $this->it30_guia = (($this->it30_guia === 0 || $this->it30_guia === 0.0 || $this->it30_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it30_guia"]:$this->it30_guia);
+       $this->it30_usuario = (($this->it30_usuario === 0 || $this->it30_usuario === 0.0 || $this->it30_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["it30_usuario"]:$this->it30_usuario);
        if($this->it30_dataalt == ""){
          $this->it30_dataalt_dia = ($this->it30_dataalt_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["it30_dataalt_dia"]:$this->it30_dataalt_dia);
          $this->it30_dataalt_mes = ($this->it30_dataalt_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["it30_dataalt_mes"]:$this->it30_dataalt_mes);
@@ -128,7 +128,7 @@ class cl_itbialt {
          }
        }
      }else{
-       $this->it30_sequencial = ($this->it30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it30_sequencial"]:$this->it30_sequencial);
+       $this->it30_sequencial = (($this->it30_sequencial === 0 || $this->it30_sequencial === 0.0 || $this->it30_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it30_sequencial"]:$this->it30_sequencial);
      }
    }
    // funcao para inclusao
@@ -221,7 +221,7 @@ class cl_itbialt {
          $this->it30_sequencial = $it30_sequencial; 
        }
      }
-     if(($this->it30_sequencial == null) || ($this->it30_sequencial == "") ){ 
+     if(($this->it30_sequencial == null) || (($this->it30_sequencial === 0 || $this->it30_sequencial === 0.0 || $this->it30_sequencial == "")) ){ 
        $this->erro_sql = " Campo it30_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

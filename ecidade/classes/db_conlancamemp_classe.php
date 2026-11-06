@@ -57,7 +57,7 @@ class cl_conlancamemp
                  ";
 
     //funcao construtor da classe
-    function cl_conlancamemp()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("conlancamemp");
@@ -79,8 +79,8 @@ class cl_conlancamemp
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->c75_codlan = ($this->c75_codlan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c75_codlan"] : $this->c75_codlan);
-            $this->c75_numemp = ($this->c75_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["c75_numemp"] : $this->c75_numemp);
+            $this->c75_codlan = ($this->c75_codlan === 0 || $this->c75_codlan === 0.0 || $this->c75_codlan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c75_codlan"] : $this->c75_codlan);
+            $this->c75_numemp = ($this->c75_numemp === 0 || $this->c75_numemp === 0.0 || $this->c75_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["c75_numemp"] : $this->c75_numemp);
             if ($this->c75_data == "") {
                 $this->c75_data_dia = ($this->c75_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["c75_data_dia"] : $this->c75_data_dia);
                 $this->c75_data_mes = ($this->c75_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["c75_data_mes"] : $this->c75_data_mes);
@@ -90,7 +90,7 @@ class cl_conlancamemp
                 }
             }
         } else {
-            $this->c75_codlan = ($this->c75_codlan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c75_codlan"] : $this->c75_codlan);
+            $this->c75_codlan = ($this->c75_codlan === 0 || $this->c75_codlan === 0.0 || $this->c75_codlan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c75_codlan"] : $this->c75_codlan);
         }
     }
 
@@ -117,7 +117,7 @@ class cl_conlancamemp
             return false;
         }
         $this->c75_codlan = $c75_codlan;
-        if (($this->c75_codlan == null) || ($this->c75_codlan == "")) {
+        if (($this->c75_codlan == null) || ($this->c75_codlan === 0 || $this->c75_codlan === 0.0 || $this->c75_codlan == "")) {
             $this->erro_sql = " Campo c75_codlan nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

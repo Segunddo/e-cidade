@@ -39,7 +39,8 @@ $clrotulo->label("j01_matric");
 $clrotulo->label("z01_nome");
 $clrotulo->label("d02_contri");
 $db_opcao = 1;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
    
 if(isset($j01_matric) && $j01_matric!=""){
@@ -177,7 +178,7 @@ function js_voltar(){
             for($i=0; $i<$numrows02; $i++){
 	     db_fieldsmemory($result02,$i);
 	     $x="edital_".$d05_contri;
-	     $$x=$d02_codedi."XX".$d01_descr;
+	     ${$x}=$d02_codedi."XX".$d01_descr;
              db_input("edital_$d05_contri",6,0,true,'hidden',1);
 	   }   
            ?>

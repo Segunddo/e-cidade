@@ -61,7 +61,7 @@ class cl_histbensocorrencia {
                  t69_hora = char(5) = Hora da Ocorrência 
                  ";
    //funcao construtor da classe 
-   function cl_histbensocorrencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("histbensocorrencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,9 +78,9 @@ class cl_histbensocorrencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t69_sequencial = ($this->t69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_sequencial"]:$this->t69_sequencial);
-       $this->t69_codbem = ($this->t69_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_codbem"]:$this->t69_codbem);
-       $this->t69_ocorrenciasbens = ($this->t69_ocorrenciasbens == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_ocorrenciasbens"]:$this->t69_ocorrenciasbens);
+       $this->t69_sequencial = ($this->t69_sequencial === 0 || $this->t69_sequencial === 0.0 || $this->t69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_sequencial"]:$this->t69_sequencial);
+       $this->t69_codbem = ($this->t69_codbem === 0 || $this->t69_codbem === 0.0 || $this->t69_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_codbem"]:$this->t69_codbem);
+       $this->t69_ocorrenciasbens = ($this->t69_ocorrenciasbens === 0 || $this->t69_ocorrenciasbens === 0.0 || $this->t69_ocorrenciasbens == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_ocorrenciasbens"]:$this->t69_ocorrenciasbens);
        $this->t69_obs = ($this->t69_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_obs"]:$this->t69_obs);
        if($this->t69_dthist == ""){
          $this->t69_dthist_dia = ($this->t69_dthist_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_dthist_dia"]:$this->t69_dthist_dia);
@@ -92,7 +92,7 @@ class cl_histbensocorrencia {
        }
        $this->t69_hora = ($this->t69_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_hora"]:$this->t69_hora);
      }else{
-       $this->t69_sequencial = ($this->t69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_sequencial"]:$this->t69_sequencial);
+       $this->t69_sequencial = ($this->t69_sequencial === 0 || $this->t69_sequencial === 0.0 || $this->t69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t69_sequencial"]:$this->t69_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_histbensocorrencia {
          $this->t69_sequencial = $t69_sequencial; 
        }
      }
-     if(($this->t69_sequencial == null) || ($this->t69_sequencial == "") ){ 
+     if(($this->t69_sequencial == null) || ($this->t69_sequencial === 0 || $this->t69_sequencial === 0.0 || $this->t69_sequencial == "") ){ 
        $this->erro_sql = " Campo t69_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -477,7 +477,7 @@ class cl_histbensocorrencia {
    function sql_query ( $t69_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -507,7 +507,7 @@ class cl_histbensocorrencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_histbensocorrencia {
    function sql_query_file ( $t69_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -541,7 +541,7 @@ class cl_histbensocorrencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

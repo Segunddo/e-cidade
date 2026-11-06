@@ -50,7 +50,7 @@ class cl_vistmatric {
                  y72_matric = int4 = Matrícula da Vistoria 
                  ";
    //funcao construtor da classe 
-   function cl_vistmatric() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vistmatric"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_vistmatric {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y72_codvist = ($this->y72_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y72_codvist"]:$this->y72_codvist);
-       $this->y72_matric = ($this->y72_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y72_matric"]:$this->y72_matric);
+       $this->y72_codvist = (($this->y72_codvist === 0 || $this->y72_codvist === 0.0 || $this->y72_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y72_codvist"]:$this->y72_codvist);
+       $this->y72_matric = (($this->y72_matric === 0 || $this->y72_matric === 0.0 || $this->y72_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["y72_matric"]:$this->y72_matric);
      }else{
-       $this->y72_codvist = ($this->y72_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y72_codvist"]:$this->y72_codvist);
+       $this->y72_codvist = (($this->y72_codvist === 0 || $this->y72_codvist === 0.0 || $this->y72_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y72_codvist"]:$this->y72_codvist);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_vistmatric {
        return false;
      }
        $this->y72_codvist = $y72_codvist; 
-     if(($this->y72_codvist == null) || ($this->y72_codvist == "") ){ 
+     if(($this->y72_codvist == null) || (($this->y72_codvist === 0 || $this->y72_codvist === 0.0 || $this->y72_codvist == "")) ){ 
        $this->erro_sql = " Campo y72_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_vistmatric {
    function sql_query ( $y72_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -331,7 +331,7 @@ class cl_vistmatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -343,7 +343,7 @@ class cl_vistmatric {
    function sql_query_file ( $y72_codvist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_vistmatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

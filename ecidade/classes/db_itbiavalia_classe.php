@@ -74,7 +74,7 @@ class cl_itbiavalia {
                  it14_desc = float8 = Desconto 
                  ";
    //funcao construtor da classe 
-   function cl_itbiavalia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbiavalia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -91,7 +91,7 @@ class cl_itbiavalia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it14_guia = ($this->it14_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_guia"]:$this->it14_guia);
+       $this->it14_guia = (($this->it14_guia === 0 || $this->it14_guia === 0.0 || $this->it14_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it14_guia"]:$this->it14_guia);
        if($this->it14_dtvenc == ""){
          $this->it14_dtvenc_dia = ($this->it14_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_dtvenc_dia"]:$this->it14_dtvenc_dia);
          $this->it14_dtvenc_mes = ($this->it14_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_dtvenc_mes"]:$this->it14_dtvenc_mes);
@@ -109,15 +109,15 @@ class cl_itbiavalia {
          }
        }
        $this->it14_obs = ($this->it14_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_obs"]:$this->it14_obs);
-       $this->it14_valoraval = ($this->it14_valoraval == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_valoraval"]:$this->it14_valoraval);
-       $this->it14_valorpaga = ($this->it14_valorpaga == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_valorpaga"]:$this->it14_valorpaga);
-       $this->it14_valoravalter = ($this->it14_valoravalter == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_valoravalter"]:$this->it14_valoravalter);
-       $this->it14_valoravalconstr = ($this->it14_valoravalconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_valoravalconstr"]:$this->it14_valoravalconstr);
-       $this->it14_id_usuario = ($this->it14_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_id_usuario"]:$this->it14_id_usuario);
+       $this->it14_valoraval = (($this->it14_valoraval === 0 || $this->it14_valoraval === 0.0 || $this->it14_valoraval == "")?@$GLOBALS["HTTP_POST_VARS"]["it14_valoraval"]:$this->it14_valoraval);
+       $this->it14_valorpaga = (($this->it14_valorpaga === 0 || $this->it14_valorpaga === 0.0 || $this->it14_valorpaga == "")?@$GLOBALS["HTTP_POST_VARS"]["it14_valorpaga"]:$this->it14_valorpaga);
+       $this->it14_valoravalter = (($this->it14_valoravalter === 0 || $this->it14_valoravalter === 0.0 || $this->it14_valoravalter == "")?@$GLOBALS["HTTP_POST_VARS"]["it14_valoravalter"]:$this->it14_valoravalter);
+       $this->it14_valoravalconstr = (($this->it14_valoravalconstr === 0 || $this->it14_valoravalconstr === 0.0 || $this->it14_valoravalconstr == "")?@$GLOBALS["HTTP_POST_VARS"]["it14_valoravalconstr"]:$this->it14_valoravalconstr);
+       $this->it14_id_usuario = (($this->it14_id_usuario === 0 || $this->it14_id_usuario === 0.0 || $this->it14_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["it14_id_usuario"]:$this->it14_id_usuario);
        $this->it14_hora = ($this->it14_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_hora"]:$this->it14_hora);
-       $this->it14_desc = ($this->it14_desc == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_desc"]:$this->it14_desc);
+       $this->it14_desc = (($this->it14_desc === 0 || $this->it14_desc === 0.0 || $this->it14_desc == "")?@$GLOBALS["HTTP_POST_VARS"]["it14_desc"]:$this->it14_desc);
      }else{
-       $this->it14_guia = ($this->it14_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it14_guia"]:$this->it14_guia);
+       $this->it14_guia = (($this->it14_guia === 0 || $this->it14_guia === 0.0 || $this->it14_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it14_guia"]:$this->it14_guia);
      }
    }
    // funcao para inclusao
@@ -205,7 +205,7 @@ class cl_itbiavalia {
        return false;
      }
        $this->it14_guia = $it14_guia; 
-     if(($this->it14_guia == null) || ($this->it14_guia == "") ){ 
+     if(($this->it14_guia == null) || (($this->it14_guia === 0 || $this->it14_guia === 0.0 || $this->it14_guia == "")) ){ 
        $this->erro_sql = " Campo it14_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -615,7 +615,7 @@ class cl_itbiavalia {
    function sql_query ( $it14_guia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -640,7 +640,7 @@ class cl_itbiavalia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -653,7 +653,7 @@ class cl_itbiavalia {
    function sql_query_file ( $it14_guia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -674,7 +674,7 @@ class cl_itbiavalia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

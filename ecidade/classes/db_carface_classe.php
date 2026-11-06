@@ -55,7 +55,7 @@ class cl_carface {
                  j38_datalancamento = date = Date de Lançamento
                  ";
    //funcao construtor da classe
-   function cl_carface() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("carface");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,8 +72,8 @@ class cl_carface {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j38_face = ($this->j38_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j38_face"]:$this->j38_face);
-       $this->j38_caract = ($this->j38_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j38_caract"]:$this->j38_caract);
+       $this->j38_face = ($this->j38_face === 0 || $this->j38_face === 0.0 || $this->j38_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j38_face"]:$this->j38_face);
+       $this->j38_caract = ($this->j38_caract === 0 || $this->j38_caract === 0.0 || $this->j38_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j38_caract"]:$this->j38_caract);
        if($this->j38_datalancamento == ""){
          $this->j38_datalancamento_dia = ($this->j38_datalancamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j38_datalancamento_dia"]:$this->j38_datalancamento_dia);
          $this->j38_datalancamento_mes = ($this->j38_datalancamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j38_datalancamento_mes"]:$this->j38_datalancamento_mes);
@@ -83,8 +83,8 @@ class cl_carface {
          }
        }
      }else{
-       $this->j38_face = ($this->j38_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j38_face"]:$this->j38_face);
-       $this->j38_caract = ($this->j38_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j38_caract"]:$this->j38_caract);
+       $this->j38_face = ($this->j38_face === 0 || $this->j38_face === 0.0 || $this->j38_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j38_face"]:$this->j38_face);
+       $this->j38_caract = ($this->j38_caract === 0 || $this->j38_caract === 0.0 || $this->j38_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j38_caract"]:$this->j38_caract);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_carface {
      }
        $this->j38_face = $j38_face;
        $this->j38_caract = $j38_caract;
-     if(($this->j38_face == null) || ($this->j38_face == "") ){
+     if(($this->j38_face == null) || ($this->j38_face === 0 || $this->j38_face === 0.0 || $this->j38_face == "") ){
        $this->erro_sql = " Campo j38_face nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -103,7 +103,7 @@ class cl_carface {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j38_caract == null) || ($this->j38_caract == "") ){
+     if(($this->j38_caract == null) || ($this->j38_caract === 0 || $this->j38_caract === 0.0 || $this->j38_caract == "") ){
        $this->erro_sql = " Campo j38_caract nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

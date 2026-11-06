@@ -56,7 +56,7 @@ class cl_cfpatriplaca {
                  t07_obrigplaca = bool = Obrigar informar placa 
                  ";
    //funcao construtor da classe 
-   function cl_cfpatriplaca() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cfpatriplaca"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_cfpatriplaca {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t07_instit = ($this->t07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t07_instit"]:$this->t07_instit);
-       $this->t07_confplaca = ($this->t07_confplaca == ""?@$GLOBALS["HTTP_POST_VARS"]["t07_confplaca"]:$this->t07_confplaca);
-       $this->t07_digseqplaca = ($this->t07_digseqplaca == ""?@$GLOBALS["HTTP_POST_VARS"]["t07_digseqplaca"]:$this->t07_digseqplaca);
-       $this->t07_sequencial = ($this->t07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t07_sequencial"]:$this->t07_sequencial);
+       $this->t07_instit = ($this->t07_instit === 0 || $this->t07_instit === 0.0 || $this->t07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t07_instit"]:$this->t07_instit);
+       $this->t07_confplaca = ($this->t07_confplaca === 0 || $this->t07_confplaca === 0.0 || $this->t07_confplaca == ""?@$GLOBALS["HTTP_POST_VARS"]["t07_confplaca"]:$this->t07_confplaca);
+       $this->t07_digseqplaca = ($this->t07_digseqplaca === 0 || $this->t07_digseqplaca === 0.0 || $this->t07_digseqplaca == ""?@$GLOBALS["HTTP_POST_VARS"]["t07_digseqplaca"]:$this->t07_digseqplaca);
+       $this->t07_sequencial = ($this->t07_sequencial === 0 || $this->t07_sequencial === 0.0 || $this->t07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t07_sequencial"]:$this->t07_sequencial);
        $this->t07_obrigplaca = ($this->t07_obrigplaca == "f"?@$GLOBALS["HTTP_POST_VARS"]["t07_obrigplaca"]:$this->t07_obrigplaca);
      }else{
-       $this->t07_instit = ($this->t07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t07_instit"]:$this->t07_instit);
+       $this->t07_instit = ($this->t07_instit === 0 || $this->t07_instit === 0.0 || $this->t07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t07_instit"]:$this->t07_instit);
      }
    }
    // funcao para inclusao
@@ -116,7 +116,7 @@ class cl_cfpatriplaca {
        $this->t07_obrigplaca = "t";
      }
        $this->t07_instit = $t07_instit; 
-     if(($this->t07_instit == null) || ($this->t07_instit == "") ){ 
+     if(($this->t07_instit == null) || ($this->t07_instit === 0 || $this->t07_instit === 0.0 || $this->t07_instit == "") ){ 
        $this->erro_sql = " Campo t07_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

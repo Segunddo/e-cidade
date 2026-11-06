@@ -54,11 +54,11 @@ class cl_andamentoemppreautorizacao
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->id = ($this->id == ""?@$GLOBALS["HTTP_POST_VARS"]["id"]:$this->id);
-            $this->empautoriza_id = ($this->empautoriza_id == ""?@$GLOBALS["HTTP_POST_VARS"]["empautoriza_id"]:$this->empautoriza_id);
-            $this->status_id = ($this->status_id == ""?@$GLOBALS["HTTP_POST_VARS"]["status_id"]:$this->status_id);
+            $this->id = ($this->id === 0 || $this->id === 0.0 || $this->id == ""?@$GLOBALS["HTTP_POST_VARS"]["id"]:$this->id);
+            $this->empautoriza_id = ($this->empautoriza_id === 0 || $this->empautoriza_id === 0.0 || $this->empautoriza_id == ""?@$GLOBALS["HTTP_POST_VARS"]["empautoriza_id"]:$this->empautoriza_id);
+            $this->status_id = ($this->status_id === 0 || $this->status_id === 0.0 || $this->status_id == ""?@$GLOBALS["HTTP_POST_VARS"]["status_id"]:$this->status_id);
             $this->observacao = ($this->observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["observacao"]:$this->observacao);
-            $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+            $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
             if ($this->data == "") {
                 $this->data_dia = ($this->data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["data_dia"]:$this->data_dia);
                 $this->data_mes = ($this->data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["data_mes"]:$this->data_mes);
@@ -68,7 +68,7 @@ class cl_andamentoemppreautorizacao
                 }
             }
         } else {
-            $this->id = ($this->id == ""?@$GLOBALS["HTTP_POST_VARS"]["id"]:$this->id);
+            $this->id = ($this->id === 0 || $this->id === 0.0 || $this->id == ""?@$GLOBALS["HTTP_POST_VARS"]["id"]:$this->id);
         }
     }
 
@@ -113,7 +113,7 @@ class cl_andamentoemppreautorizacao
         }
 
         $this->id = db_utils::fieldsMemory(db_query("select nextval('andamentoemppreautorizacao_id_seq') as id"), 0)->id;
-        if (($this->id == null) || ($this->id == "")) {
+        if (($this->id == null) || ($this->id === 0 || $this->id === 0.0 || $this->id == "")) {
             $this->erro_sql = " Campo id não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -58,7 +58,7 @@ class cl_arrebanco {
                  k00_nbant = varchar(30) = numero do banco antigo 
                  ";
    //funcao construtor da classe 
-   function cl_arrebanco() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("arrebanco"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,16 +75,16 @@ class cl_arrebanco {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
-       $this->k00_codbco = ($this->k00_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_codbco"]:$this->k00_codbco);
+       $this->k00_numpre = (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = (($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->k00_codbco = (($this->k00_codbco === 0 || $this->k00_codbco === 0.0 || $this->k00_codbco == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_codbco"]:$this->k00_codbco);
        $this->k00_codage = ($this->k00_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_codage"]:$this->k00_codage);
        $this->k00_numbco = ($this->k00_numbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numbco"]:$this->k00_numbco);
        $this->k00_nbant = ($this->k00_nbant == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_nbant"]:$this->k00_nbant);
      }else{
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
-       $this->k00_codbco = ($this->k00_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_codbco"]:$this->k00_codbco);
+       $this->k00_numpre = (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = (($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->k00_codbco = (($this->k00_codbco === 0 || $this->k00_codbco === 0.0 || $this->k00_codbco == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_codbco"]:$this->k00_codbco);
        $this->k00_codage = ($this->k00_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_codage"]:$this->k00_codage);
        $this->k00_numbco = ($this->k00_numbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numbco"]:$this->k00_numbco);
      }
@@ -106,7 +106,7 @@ class cl_arrebanco {
        $this->k00_codbco = $k00_codbco; 
        $this->k00_codage = $k00_codage; 
        $this->k00_numbco = $k00_numbco; 
-     if(($this->k00_numpre == null) || ($this->k00_numpre == "") ){ 
+     if(($this->k00_numpre == null) || (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")) ){ 
        $this->erro_sql = " Campo k00_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -114,7 +114,7 @@ class cl_arrebanco {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k00_numpar == null) || ($this->k00_numpar == "") ){ 
+     if(($this->k00_numpar == null) || (($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == "")) ){ 
        $this->erro_sql = " Campo k00_numpar nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -122,7 +122,7 @@ class cl_arrebanco {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k00_codbco == null) || ($this->k00_codbco == "") ){ 
+     if(($this->k00_codbco == null) || (($this->k00_codbco === 0 || $this->k00_codbco === 0.0 || $this->k00_codbco == "")) ){ 
        $this->erro_sql = " Campo k00_codbco nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -473,7 +473,7 @@ class cl_arrebanco {
    function sql_query ( $k00_numpre=null,$k00_numpar=null,$k00_codbco=null,$k00_codage=null,$k00_numbco=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -526,7 +526,7 @@ class cl_arrebanco {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_arrebanco {
    function sql_query_file ( $k00_numpre=null,$k00_numpar=null,$k00_codbco=null,$k00_codage=null,$k00_numbco=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -592,7 +592,7 @@ class cl_arrebanco {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -54,7 +54,7 @@ class cl_empprestarecibo {
                  e170_emppresta = int4 = Prestação de Contas 
                  ";
    //funcao construtor da classe 
-   function cl_empprestarecibo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empprestarecibo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_empprestarecibo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e170_sequencial = ($this->e170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_sequencial"]:$this->e170_sequencial);
-       $this->e170_numpre = ($this->e170_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_numpre"]:$this->e170_numpre);
-       $this->e170_numpar = ($this->e170_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_numpar"]:$this->e170_numpar);
-       $this->e170_emppresta = ($this->e170_emppresta == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_emppresta"]:$this->e170_emppresta);
+       $this->e170_sequencial = ($this->e170_sequencial === 0 || $this->e170_sequencial === 0.0 || $this->e170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_sequencial"]:$this->e170_sequencial);
+       $this->e170_numpre = ($this->e170_numpre === 0 || $this->e170_numpre === 0.0 || $this->e170_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_numpre"]:$this->e170_numpre);
+       $this->e170_numpar = ($this->e170_numpar === 0 || $this->e170_numpar === 0.0 || $this->e170_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_numpar"]:$this->e170_numpar);
+       $this->e170_emppresta = ($this->e170_emppresta === 0 || $this->e170_emppresta === 0.0 || $this->e170_emppresta == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_emppresta"]:$this->e170_emppresta);
      }else{
-       $this->e170_sequencial = ($this->e170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_sequencial"]:$this->e170_sequencial);
+       $this->e170_sequencial = ($this->e170_sequencial === 0 || $this->e170_sequencial === 0.0 || $this->e170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_sequencial"]:$this->e170_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_empprestarecibo {
          $this->e170_sequencial = $e170_sequencial; 
        }
      }
-     if(($this->e170_sequencial == null) || ($this->e170_sequencial == "") ){ 
+     if(($this->e170_sequencial == null) || ($this->e170_sequencial === 0 || $this->e170_sequencial === 0.0 || $this->e170_sequencial == "") ){ 
        $this->erro_sql = " Campo e170_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -413,7 +413,7 @@ class cl_empprestarecibo {
    function sql_query ( $e170_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_empprestarecibo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_empprestarecibo {
    function sql_query_file ( $e170_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_empprestarecibo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_empprestarecibo {
    function sql_query_recibo_empenho ( $e170_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_empprestarecibo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -522,7 +522,7 @@ class cl_empprestarecibo {
   function sql_query_fileRecibo ( $e170_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
   	$sql = "select ";
   	if($campos != "*" ){
-  		$campos_sql = split("#",$campos);
+  		$campos_sql = preg_split("#\\##m",$campos);
   		$virgula = "";
   		for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_empprestarecibo {
   		$sql .= $sql2;
   		if($ordem != null ){
   		$sql .= " order by ";
-  			$campos_sql = split("#",$ordem);
+  			$campos_sql = preg_split("#\\##m",$ordem);
   			$virgula = "";
   			for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];

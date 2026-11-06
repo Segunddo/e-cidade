@@ -52,7 +52,7 @@ class cl_cargrup {
                  j32_tipo = char(1) = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_cargrup() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cargrup"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cargrup {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j32_grupo = ($this->j32_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_grupo"]:$this->j32_grupo);
+       $this->j32_grupo = ($this->j32_grupo === 0 || $this->j32_grupo === 0.0 || $this->j32_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_grupo"]:$this->j32_grupo);
        $this->j32_descr = ($this->j32_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_descr"]:$this->j32_descr);
        $this->j32_tipo = ($this->j32_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_tipo"]:$this->j32_tipo);
      }else{
-       $this->j32_grupo = ($this->j32_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_grupo"]:$this->j32_grupo);
+       $this->j32_grupo = ($this->j32_grupo === 0 || $this->j32_grupo === 0.0 || $this->j32_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_grupo"]:$this->j32_grupo);
      }
    }
    // funcao para Inclusão
@@ -121,7 +121,7 @@ class cl_cargrup {
          $this->j32_grupo = $j32_grupo; 
        }
      }
-     if(($this->j32_grupo == null) || ($this->j32_grupo == "") ){ 
+     if(($this->j32_grupo == null) || ($this->j32_grupo === 0 || $this->j32_grupo === 0.0 || $this->j32_grupo == "") ){ 
        $this->erro_sql = " Campo j32_grupo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -362,7 +362,7 @@ class cl_cargrup {
    function sql_query ( $j32_grupo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_cargrup {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_cargrup {
    function sql_query_file ( $j32_grupo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_cargrup {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

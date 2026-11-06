@@ -52,7 +52,7 @@ class cl_disbancoprotprocesso {
                  k141_protprocesso = int4 = Cód. Processo 
                  ";
    //funcao construtor da classe 
-   function cl_disbancoprotprocesso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("disbancoprotprocesso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_disbancoprotprocesso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k141_sequencial = ($this->k141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k141_sequencial"]:$this->k141_sequencial);
-       $this->k141_disbancoprocesso = ($this->k141_disbancoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["k141_disbancoprocesso"]:$this->k141_disbancoprocesso);
-       $this->k141_protprocesso = ($this->k141_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["k141_protprocesso"]:$this->k141_protprocesso);
+       $this->k141_sequencial = ($this->k141_sequencial === 0 || $this->k141_sequencial === 0.0 || $this->k141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k141_sequencial"]:$this->k141_sequencial);
+       $this->k141_disbancoprocesso = ($this->k141_disbancoprocesso === 0 || $this->k141_disbancoprocesso === 0.0 || $this->k141_disbancoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["k141_disbancoprocesso"]:$this->k141_disbancoprocesso);
+       $this->k141_protprocesso = ($this->k141_protprocesso === 0 || $this->k141_protprocesso === 0.0 || $this->k141_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["k141_protprocesso"]:$this->k141_protprocesso);
      }else{
-       $this->k141_sequencial = ($this->k141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k141_sequencial"]:$this->k141_sequencial);
+       $this->k141_sequencial = ($this->k141_sequencial === 0 || $this->k141_sequencial === 0.0 || $this->k141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k141_sequencial"]:$this->k141_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_disbancoprotprocesso {
          $this->k141_sequencial = $k141_sequencial; 
        }
      }
-     if(($this->k141_sequencial == null) || ($this->k141_sequencial == "") ){ 
+     if(($this->k141_sequencial == null) || ($this->k141_sequencial === 0 || $this->k141_sequencial === 0.0 || $this->k141_sequencial == "") ){ 
        $this->erro_sql = " Campo k141_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_disbancoprotprocesso {
    function sql_query ( $k141_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_disbancoprotprocesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_disbancoprotprocesso {
    function sql_query_file ( $k141_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_disbancoprotprocesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -168,7 +168,7 @@ if(isset($oPost->alterar)){
 		    $aListaCaracImovel = explode("|",$oPost->valorCaracImovel);
 		    foreach ( $aListaCaracImovel as $aChave) {
 
-		      $aListaDadosCaracImovel = split("X", $aChave);
+		      $aListaDadosCaracImovel = explode("X", $aChave);
 
 		      $clitbiruralcaract->sql_record($clitbiruralcaract->sql_query_file($oPost->it01_guia, $aListaDadosCaracImovel[0]));
 		      $clitbiruralcaract->it19_guia   = $oPost->it01_guia;
@@ -193,7 +193,7 @@ if(isset($oPost->alterar)){
 	    $aListaCaracUtil = explode("|",$oPost->valorCaracUtil);
 	    foreach ( $aListaCaracUtil as $aChave) {
 
-	      $aListaDadosCaracUtil = split("X",$aChave);
+	      $aListaDadosCaracUtil = explode("X",$aChave);
 
 	      $clitbiruralcaract->sql_record($clitbiruralcaract->sql_query_file($oPost->it01_guia, $aListaDadosCaracUtil[0]));
 	      $clitbiruralcaract->it19_guia   = $oPost->it01_guia;

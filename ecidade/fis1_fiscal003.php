@@ -47,12 +47,12 @@ include(modification("classes/db_fandamusu_classe.php"));
 include(modification("classes/db_fisctestem_classe.php"));
 include(modification("classes/db_fiscarquivos_classe.php"));
 include(modification("classes/db_fiscalvistorias_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 if(!isset($abas)){
   echo "<script>location.href='fis1_fiscal005.php?db_opcao=3'</script>";
   exit;
 }
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clfiscal          = new cl_fiscal;
 $clfiscalvistorias = new cl_fiscalvistorias;

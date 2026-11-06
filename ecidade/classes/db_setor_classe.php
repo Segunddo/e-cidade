@@ -54,7 +54,7 @@ class cl_setor {
                  j30_aliter = float8 = Aliquota Territorial 
                  ";
    //funcao construtor da classe 
-   function cl_setor() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("setor"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,8 +73,8 @@ class cl_setor {
      if($exclusao==false){
        $this->j30_codi = ($this->j30_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["j30_codi"]:$this->j30_codi);
        $this->j30_descr = ($this->j30_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j30_descr"]:$this->j30_descr);
-       $this->j30_alipre = ($this->j30_alipre == ""?@$GLOBALS["HTTP_POST_VARS"]["j30_alipre"]:$this->j30_alipre);
-       $this->j30_aliter = ($this->j30_aliter == ""?@$GLOBALS["HTTP_POST_VARS"]["j30_aliter"]:$this->j30_aliter);
+       $this->j30_alipre = (($this->j30_alipre === 0 || $this->j30_alipre === 0.0 || $this->j30_alipre == "")?@$GLOBALS["HTTP_POST_VARS"]["j30_alipre"]:$this->j30_alipre);
+       $this->j30_aliter = (($this->j30_aliter === 0 || $this->j30_aliter === 0.0 || $this->j30_aliter == "")?@$GLOBALS["HTTP_POST_VARS"]["j30_aliter"]:$this->j30_aliter);
      }else{
        $this->j30_codi = ($this->j30_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["j30_codi"]:$this->j30_codi);
      }

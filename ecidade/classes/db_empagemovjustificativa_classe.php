@@ -28,7 +28,7 @@ class cl_empagemovjustificativa {
                  e09_justificativa = text = Justificativa
                  ";
    //funcao construtor da classe
-   function cl_empagemovjustificativa() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empagemovjustificativa");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_empagemovjustificativa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e09_sequencial = ($this->e09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e09_sequencial"]:$this->e09_sequencial);
-       $this->e09_codnota = ($this->e09_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e09_codnota"]:$this->e09_codnota);
-       $this->e09_codmov = ($this->e09_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e09_codmov"]:$this->e09_codmov);
+       $this->e09_sequencial = ($this->e09_sequencial === 0 || $this->e09_sequencial === 0.0 || $this->e09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e09_sequencial"]:$this->e09_sequencial);
+       $this->e09_codnota = ($this->e09_codnota === 0 || $this->e09_codnota === 0.0 || $this->e09_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e09_codnota"]:$this->e09_codnota);
+       $this->e09_codmov = ($this->e09_codmov === 0 || $this->e09_codmov === 0.0 || $this->e09_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e09_codmov"]:$this->e09_codmov);
        $this->e09_justificativa = ($this->e09_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["e09_justificativa"]:$this->e09_justificativa);
      }else{
-       $this->e09_codmov = ($this->e09_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e09_codmov"]:$this->e09_codmov);
+       $this->e09_codmov = ($this->e09_codmov === 0 || $this->e09_codmov === 0.0 || $this->e09_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e09_codmov"]:$this->e09_codmov);
      }
    }
    // funcao para Inclusão
@@ -98,7 +98,7 @@ class cl_empagemovjustificativa {
          $this->e09_sequencial = $e09_sequencial;
        }
      }
-     if(($this->e09_codmov == null) || ($this->e09_codmov == "") ){
+     if(($this->e09_codmov == null) || ($this->e09_codmov === 0 || $this->e09_codmov === 0.0 || $this->e09_codmov == "") ){
        $this->erro_sql = " Campo e09_codmov não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

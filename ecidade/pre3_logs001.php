@@ -88,7 +88,7 @@ input {
                   <tr bgcolor="#CCFF99"> 
                     <td width="12%"><strong>Ordenar:</strong></td>
                     <td width="88%" nowrap> <input type="radio" name="ascdesc" value="asc" <?=@$ascdesc=="asc"?"checked":""?>>
-                      ascendente&nbsp;&nbsp; <input name="ascdesc" type="radio" value="desc" <? echo !isset($ascdesc)?"checked":$ascdesc=="desc"?"checked":"" ?>>
+                      ascendente&nbsp;&nbsp; <input name="ascdesc" type="radio" value="desc" <? echo (!isset($ascdesc)?"checked":$ascdesc=="desc")?"checked":"" ?>>
                       descendente</td>
                   </tr>
                 </table></td>
@@ -101,7 +101,7 @@ input {
             </tr>
             <tr> 
               <td nowrap><strong>Por Data:</strong></td>
-              <td align="center" valign="middle" bgcolor="#CCFF99"> <input name="ordenar" type="radio" value="data" <? echo !isset($ordenar)?"checked":$ordenar=="data"?"checked":"" ?>></td>
+              <td align="center" valign="middle" bgcolor="#CCFF99"> <input name="ordenar" type="radio" value="data" <? echo (!isset($ordenar)?"checked":$ordenar=="data")?"checked":"" ?>></td>
               <td> 
 	        <?
                 db_inputdata('data','','','',true,'text',2);

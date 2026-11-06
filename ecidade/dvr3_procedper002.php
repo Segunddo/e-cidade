@@ -75,7 +75,8 @@ $pdf->Cell($CoL3,5,"COD.RECEITA",1,0,"C",0);
 $pdf->Cell($CoL4,5,"ARRECADACAO",1,0,"C",0);
 $pdf->Cell($CoL5,5,"ESTORNO",1,1,"C",0);
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 /*
 $result = db_query("
@@ -132,7 +133,7 @@ where arrec <> 0 or estorno <> 0 order by k02_estorc
 
 ");
 
-$numrows = pg_numrows($result);
+$numrows = ($result ? pg_numrows($result) : 0);
 $QuebraPagina = 10;
 $Total1 = 0;
 $Total2 = 0;
@@ -238,7 +239,7 @@ from plano
 ) as x
   on k02_estpla = c01_estrut and c01_anousu = ".$GLOBALS["DB_anousu"]."
 group by k02_estpla,c01_descr,k12_conta,k12_receit;");
-$numrows = pg_numrows($result);
+$numrows = ($result ? pg_numrows($result) : 0);
 
 if($numrows>0){
 
@@ -360,8 +361,8 @@ $result = db_query("select k12_conta,k02_tipo,sum(cornump.k12_valor)
 				   order by k02_tipo");
 $RecExtOrc = 0;
 $RecOrc    = 0;
-if(pg_numrows($result) > 0) {
-   for($i=0;$i<pg_numrows($result);$i++){
+if(($result ? pg_numrows($result) : 0) > 0) {
+   for($i=0;$i<($result ? pg_numrows($result) : 0);$i++){
      db_fieldsmemory($result,$i);
 	 if($k02_tipo=="E")
 	   $RecExtOrc = pg_result($result,$i,"sum");
@@ -383,7 +384,7 @@ $result = db_query("select corrente.k12_conta,sum(corrente.k12_valor)
 				   on corlanc.k12_conta = saltes.k13_conta
                    where corrente.k12_data  between '".$datai."' and '".$dataf."' ".$seleciona."
                    group by corrente.k12_conta");
-if(pg_numrows($result) > 0) {
+if(($result ? pg_numrows($result) : 0) > 0) {
   $RetiradaBanco = pg_result($result,0,"sum");
 } else {
   $RetiradaBanco = 0;
@@ -393,7 +394,7 @@ pg_freeresult($result);
 
 /////Saldo Anterior
 $result = db_query("select fc_saltessaldo(1,'$datai','$dataf',null)");
-if(pg_numrows($result) > 0) {
+if(($result ? pg_numrows($result) : 0) > 0) {
   $aux = pg_result($result,0,0);
   $aux = preg_split("/\s+/",$aux);
   $SaldoAnterior = str_replace(",","",$aux[1]);
@@ -414,7 +415,7 @@ $result = db_query("select corrente.k12_conta,sum(corrente.k12_valor)
                    where corrente.k12_data between '".$datai."' and '".$dataf."' ".$seleciona."
 				   and substr(coremp.k12_empen,7,2) = '".substr($GLOBALS["DB_anousu"],2)."'
                    group by corrente.k12_conta");
-if(pg_numrows($result) > 0) {
+if(($result ? pg_numrows($result) : 0) > 0) {
   $DespOrc = pg_result($result,0,"sum");
 } else {
   $DespOrc = 0;
@@ -429,7 +430,7 @@ $result = db_query("select corrente.k12_conta,sum(corrente.k12_valor)
                    where corrente.k12_data  between '".$datai."' and '".$dataf."' ".$seleciona."
 				   and substr(coremp.k12_empen,7,2) < '".substr($GLOBALS["DB_anousu"],2)."'
                    group by corrente.k12_conta");
-if(pg_numrows($result) > 0) {
+if(($result ? pg_numrows($result) : 0) > 0) {
   $DespExtOrc = pg_result($result,0,"sum");
 } else {
   $DespExtOrc = 0;
@@ -445,7 +446,7 @@ $result = db_query("select corlanc.k12_conta,sum(corrente.k12_valor)
 				   on corrente.k12_conta = saltes.k13_conta
                    where corrente.k12_data  between '".$datai."' and '".$dataf."' ".$seleciona."
                    group by corlanc.k12_conta");
-if(pg_numrows($result) > 0) {
+if(($result ? pg_numrows($result) : 0) > 0) {
   $DepositoBanco = pg_result($result,0,"sum");
 } else {
   $DepositoBanco = 0;

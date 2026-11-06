@@ -56,9 +56,9 @@ class cl_conciliapendcorrente
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->k89_sequencial = ($this->k89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_sequencial"]:$this->k89_sequencial);
-       $this->k89_concilia = ($this->k89_concilia == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_concilia"]:$this->k89_concilia);
-       $this->k89_id = ($this->k89_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_id"]:$this->k89_id);
+       $this->k89_sequencial = ($this->k89_sequencial === 0 || $this->k89_sequencial === 0.0 || $this->k89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_sequencial"]:$this->k89_sequencial);
+       $this->k89_concilia = ($this->k89_concilia === 0 || $this->k89_concilia === 0.0 || $this->k89_concilia == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_concilia"]:$this->k89_concilia);
+       $this->k89_id = ($this->k89_id === 0 || $this->k89_id === 0.0 || $this->k89_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_id"]:$this->k89_id);
        if($this->k89_data == ""){
          $this->k89_data_dia = ($this->k89_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_data_dia"]:$this->k89_data_dia);
          $this->k89_data_mes = ($this->k89_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_data_mes"]:$this->k89_data_mes);
@@ -67,11 +67,11 @@ class cl_conciliapendcorrente
             $this->k89_data = $this->k89_data_ano."-".$this->k89_data_mes."-".$this->k89_data_dia;
          }
        }
-       $this->k89_autent = ($this->k89_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_autent"]:$this->k89_autent);
-       $this->k89_conciliaorigem = ($this->k89_conciliaorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_conciliaorigem"]:$this->k89_conciliaorigem);
+       $this->k89_autent = ($this->k89_autent === 0 || $this->k89_autent === 0.0 || $this->k89_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_autent"]:$this->k89_autent);
+       $this->k89_conciliaorigem = ($this->k89_conciliaorigem === 0 || $this->k89_conciliaorigem === 0.0 || $this->k89_conciliaorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_conciliaorigem"]:$this->k89_conciliaorigem);
        $this->k89_justificativa = ($this->k89_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_justificativa"]:$this->k89_justificativa);
      }else{
-       $this->k89_sequencial = ($this->k89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_sequencial"]:$this->k89_sequencial);
+       $this->k89_sequencial = ($this->k89_sequencial === 0 || $this->k89_sequencial === 0.0 || $this->k89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k89_sequencial"]:$this->k89_sequencial);
      }
    }
 
@@ -147,7 +147,7 @@ class cl_conciliapendcorrente
          $this->k89_sequencial = $k89_sequencial; 
        }
      }
-     if(($this->k89_sequencial == null) || ($this->k89_sequencial == "") ){ 
+     if(($this->k89_sequencial == null) || ($this->k89_sequencial === 0 || $this->k89_sequencial === 0.0 || $this->k89_sequencial == "") ){ 
        $this->erro_sql = " Campo k89_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -52,7 +52,7 @@ class cl_conhist {
                  c50_descr = varchar(80) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_conhist() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conhist"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_conhist {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c50_codhist = ($this->c50_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c50_codhist"]:$this->c50_codhist);
+       $this->c50_codhist = ($this->c50_codhist === 0 || $this->c50_codhist === 0.0 || $this->c50_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c50_codhist"]:$this->c50_codhist);
        $this->c50_compl = ($this->c50_compl == "f"?@$GLOBALS["HTTP_POST_VARS"]["c50_compl"]:$this->c50_compl);
        $this->c50_descr = ($this->c50_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c50_descr"]:$this->c50_descr);
      }else{
-       $this->c50_codhist = ($this->c50_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c50_codhist"]:$this->c50_codhist);
+       $this->c50_codhist = ($this->c50_codhist === 0 || $this->c50_codhist === 0.0 || $this->c50_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c50_codhist"]:$this->c50_codhist);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_conhist {
        return false;
      }
        $this->c50_codhist = $c50_codhist; 
-     if(($this->c50_codhist == null) || ($this->c50_codhist == "") ){ 
+     if(($this->c50_codhist == null) || ($this->c50_codhist === 0 || $this->c50_codhist === 0.0 || $this->c50_codhist == "") ){ 
        $this->erro_sql = " Campo c50_codhist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -336,7 +336,7 @@ class cl_conhist {
    function sql_query ( $c50_codhist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -357,7 +357,7 @@ class cl_conhist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -369,7 +369,7 @@ class cl_conhist {
    function sql_query_file ( $c50_codhist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_conhist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

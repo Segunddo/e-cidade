@@ -50,7 +50,7 @@ class cl_carpadrao {
                  j33_codcaracter = int4 = Característica Principal 
                  ";
    //funcao construtor da classe 
-   function cl_carpadrao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("carpadrao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_carpadrao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j33_codgrupo = ($this->j33_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codgrupo"]:$this->j33_codgrupo);
-       $this->j33_codcaracter = ($this->j33_codcaracter == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codcaracter"]:$this->j33_codcaracter);
+       $this->j33_codgrupo = ($this->j33_codgrupo === 0 || $this->j33_codgrupo === 0.0 || $this->j33_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codgrupo"]:$this->j33_codgrupo);
+       $this->j33_codcaracter = ($this->j33_codcaracter === 0 || $this->j33_codcaracter === 0.0 || $this->j33_codcaracter == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codcaracter"]:$this->j33_codcaracter);
      }else{
-       $this->j33_codgrupo = ($this->j33_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codgrupo"]:$this->j33_codgrupo);
+       $this->j33_codgrupo = ($this->j33_codgrupo === 0 || $this->j33_codgrupo === 0.0 || $this->j33_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codgrupo"]:$this->j33_codgrupo);
      }
    }
    // funcao para Inclusão
@@ -86,7 +86,7 @@ class cl_carpadrao {
        return false;
      }
        $this->j33_codgrupo = $j33_codgrupo; 
-     if(($this->j33_codgrupo == null) || ($this->j33_codgrupo == "") ){ 
+     if(($this->j33_codgrupo == null) || ($this->j33_codgrupo === 0 || $this->j33_codgrupo === 0.0 || $this->j33_codgrupo == "") ){ 
        $this->erro_sql = " Campo j33_codgrupo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -311,7 +311,7 @@ class cl_carpadrao {
    function sql_query ( $j33_codgrupo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -335,7 +335,7 @@ class cl_carpadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -347,7 +347,7 @@ class cl_carpadrao {
    function sql_query_file ( $j33_codgrupo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -368,7 +368,7 @@ class cl_carpadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

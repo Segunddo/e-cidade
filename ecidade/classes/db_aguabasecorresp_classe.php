@@ -50,7 +50,7 @@ class cl_aguabasecorresp {
                  x32_matric = int4 = Matrícula 
                  ";
    //funcao construtor da classe 
-   function cl_aguabasecorresp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguabasecorresp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_aguabasecorresp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x32_codcorresp = ($this->x32_codcorresp == ""?@$GLOBALS["HTTP_POST_VARS"]["x32_codcorresp"]:$this->x32_codcorresp);
-       $this->x32_matric = ($this->x32_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x32_matric"]:$this->x32_matric);
+       $this->x32_codcorresp = (($this->x32_codcorresp === 0 || $this->x32_codcorresp === 0.0 || ($this->x32_codcorresp === 0 || $this->x32_codcorresp === 0.0 || $this->x32_codcorresp == ""))?@$GLOBALS["HTTP_POST_VARS"]["x32_codcorresp"]:$this->x32_codcorresp);
+       $this->x32_matric = (($this->x32_matric === 0 || $this->x32_matric === 0.0 || ($this->x32_matric === 0 || $this->x32_matric === 0.0 || $this->x32_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["x32_matric"]:$this->x32_matric);
      }else{
-       $this->x32_matric = ($this->x32_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x32_matric"]:$this->x32_matric);
+       $this->x32_matric = (($this->x32_matric === 0 || $this->x32_matric === 0.0 || ($this->x32_matric === 0 || $this->x32_matric === 0.0 || $this->x32_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["x32_matric"]:$this->x32_matric);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_aguabasecorresp {
        return false;
      }
        $this->x32_matric = $x32_matric; 
-     if(($this->x32_matric == null) || ($this->x32_matric == "") ){ 
+     if(($this->x32_matric == null) || (($this->x32_matric === 0 || $this->x32_matric === 0.0 || ($this->x32_matric === 0 || $this->x32_matric === 0.0 || $this->x32_matric == ""))) ){ 
        $this->erro_sql = " Campo x32_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_aguabasecorresp {
    function sql_query ( $x32_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -333,7 +333,7 @@ class cl_aguabasecorresp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -345,7 +345,7 @@ class cl_aguabasecorresp {
    function sql_query_file ( $x32_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -366,7 +366,7 @@ class cl_aguabasecorresp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

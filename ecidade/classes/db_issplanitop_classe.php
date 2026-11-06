@@ -52,7 +52,7 @@ class cl_issplanitop {
                  q96_pagordem = int8 = Codigo da ordem 
                  ";
    //funcao construtor da classe 
-   function cl_issplanitop() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issplanitop"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_issplanitop {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q96_sequencial = ($this->q96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q96_sequencial"]:$this->q96_sequencial);
-       $this->q96_issplanit = ($this->q96_issplanit == ""?@$GLOBALS["HTTP_POST_VARS"]["q96_issplanit"]:$this->q96_issplanit);
-       $this->q96_pagordem = ($this->q96_pagordem == ""?@$GLOBALS["HTTP_POST_VARS"]["q96_pagordem"]:$this->q96_pagordem);
+       $this->q96_sequencial = ($this->q96_sequencial === 0 || $this->q96_sequencial === 0.0 || $this->q96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q96_sequencial"]:$this->q96_sequencial);
+       $this->q96_issplanit = ($this->q96_issplanit === 0 || $this->q96_issplanit === 0.0 || $this->q96_issplanit == ""?@$GLOBALS["HTTP_POST_VARS"]["q96_issplanit"]:$this->q96_issplanit);
+       $this->q96_pagordem = ($this->q96_pagordem === 0 || $this->q96_pagordem === 0.0 || $this->q96_pagordem == ""?@$GLOBALS["HTTP_POST_VARS"]["q96_pagordem"]:$this->q96_pagordem);
      }else{
-       $this->q96_sequencial = ($this->q96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q96_sequencial"]:$this->q96_sequencial);
+       $this->q96_sequencial = ($this->q96_sequencial === 0 || $this->q96_sequencial === 0.0 || $this->q96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q96_sequencial"]:$this->q96_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_issplanitop {
          $this->q96_sequencial = $q96_sequencial; 
        }
      }
-     if(($this->q96_sequencial == null) || ($this->q96_sequencial == "") ){ 
+     if(($this->q96_sequencial == null) || ($this->q96_sequencial === 0 || $this->q96_sequencial === 0.0 || $this->q96_sequencial == "") ){ 
        $this->erro_sql = " Campo q96_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_issplanitop {
    function sql_query ( $q96_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_issplanitop {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_issplanitop {
    function sql_query_file ( $q96_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_issplanitop {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

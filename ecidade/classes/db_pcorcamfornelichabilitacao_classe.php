@@ -53,7 +53,7 @@ class cl_pcorcamfornelichabilitacao {
                  l17_situacao = int4 = Situação 
                  ";
    //funcao construtor da classe 
-   function cl_pcorcamfornelichabilitacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcorcamfornelichabilitacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -70,11 +70,11 @@ class cl_pcorcamfornelichabilitacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l17_sequencial = ($this->l17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l17_sequencial"]:$this->l17_sequencial);
-       $this->l17_pcorcamfornelic = ($this->l17_pcorcamfornelic == ""?@$GLOBALS["HTTP_POST_VARS"]["l17_pcorcamfornelic"]:$this->l17_pcorcamfornelic);
-       $this->l17_situacao = ($this->l17_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["l17_situacao"]:$this->l17_situacao);
+       $this->l17_sequencial = ($this->l17_sequencial === 0 || $this->l17_sequencial === 0.0 || $this->l17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l17_sequencial"]:$this->l17_sequencial);
+       $this->l17_pcorcamfornelic = ($this->l17_pcorcamfornelic === 0 || $this->l17_pcorcamfornelic === 0.0 || $this->l17_pcorcamfornelic == ""?@$GLOBALS["HTTP_POST_VARS"]["l17_pcorcamfornelic"]:$this->l17_pcorcamfornelic);
+       $this->l17_situacao = ($this->l17_situacao === 0 || $this->l17_situacao === 0.0 || $this->l17_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["l17_situacao"]:$this->l17_situacao);
      }else{
-       $this->l17_sequencial = ($this->l17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l17_sequencial"]:$this->l17_sequencial);
+       $this->l17_sequencial = ($this->l17_sequencial === 0 || $this->l17_sequencial === 0.0 || $this->l17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l17_sequencial"]:$this->l17_sequencial);
      }
    }
    // funcao para Inclusão
@@ -122,7 +122,7 @@ class cl_pcorcamfornelichabilitacao {
          $this->l17_sequencial = $l17_sequencial; 
        }
      }
-     if(($this->l17_sequencial == null) || ($this->l17_sequencial == "") ){ 
+     if(($this->l17_sequencial == null) || ($this->l17_sequencial === 0 || $this->l17_sequencial === 0.0 || $this->l17_sequencial == "") ){ 
        $this->erro_sql = " Campo l17_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

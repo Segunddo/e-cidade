@@ -45,11 +45,11 @@ class cl_rhpessoalprocessoabono
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh302_sequencial = ($this->rh302_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh302_sequencial"]:$this->rh302_sequencial);
-       $this->rh302_sequencialprocessocontrato = ($this->rh302_sequencialprocessocontrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh302_sequencialprocessocontrato"]:$this->rh302_sequencialprocessocontrato);
+       $this->rh302_sequencial = ($this->rh302_sequencial === 0 || $this->rh302_sequencial === 0.0 || $this->rh302_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh302_sequencial"]:$this->rh302_sequencial);
+       $this->rh302_sequencialprocessocontrato = ($this->rh302_sequencialprocessocontrato === 0 || $this->rh302_sequencialprocessocontrato === 0.0 || $this->rh302_sequencialprocessocontrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh302_sequencialprocessocontrato"]:$this->rh302_sequencialprocessocontrato);
        $this->rh302_anobase = ($this->rh302_anobase == ""?@$GLOBALS["HTTP_POST_VARS"]["rh302_anobase"]:$this->rh302_anobase);
      }else{
-       $this->rh302_sequencial = ($this->rh302_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh302_sequencial"]:$this->rh302_sequencial);
+       $this->rh302_sequencial = ($this->rh302_sequencial === 0 || $this->rh302_sequencial === 0.0 || $this->rh302_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh302_sequencial"]:$this->rh302_sequencial);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_rhpessoalprocessoabono
          $this->rh302_sequencial = $rh302_sequencial; 
        }
      }
-     if(($this->rh302_sequencial == null) || ($this->rh302_sequencial == "") ){ 
+     if(($this->rh302_sequencial == null) || ($this->rh302_sequencial === 0 || $this->rh302_sequencial === 0.0 || $this->rh302_sequencial == "") ){ 
        $this->erro_sql = " Campo rh302_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

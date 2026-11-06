@@ -50,7 +50,7 @@ class cl_termovistlanc {
                  y92_codvist = int4 = Código da Vistoria 
                  ";
    //funcao construtor da classe 
-   function cl_termovistlanc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termovistlanc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_termovistlanc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y92_termovist = ($this->y92_termovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y92_termovist"]:$this->y92_termovist);
-       $this->y92_codvist = ($this->y92_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y92_codvist"]:$this->y92_codvist);
+       $this->y92_termovist = (($this->y92_termovist === 0 || $this->y92_termovist === 0.0 || $this->y92_termovist == "")?@$GLOBALS["HTTP_POST_VARS"]["y92_termovist"]:$this->y92_termovist);
+       $this->y92_codvist = (($this->y92_codvist === 0 || $this->y92_codvist === 0.0 || $this->y92_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y92_codvist"]:$this->y92_codvist);
      }else{
      }
    }
@@ -252,7 +252,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $oid = null,$campos="termovistlanc.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -280,7 +280,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -292,7 +292,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -310,7 +310,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

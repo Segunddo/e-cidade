@@ -83,7 +83,7 @@ $p = "0";
           q45_codporte
 	";
    $result = db_query($sql);
-   $numrows = pg_numrows($result);
+   $numrows = ($result ? pg_numrows($result) : 0);
    if($numrows == 0){
     echo " <div align=\"center\">Nenhum registro cadastrado <br> <input type=\"button\" value=\"Fechar\" onclick=\"window.close()\"></div>";
     exit;

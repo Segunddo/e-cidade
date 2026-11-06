@@ -28,7 +28,7 @@ class cl_setorambulatorial {
                  sd91_local = int4 = Local 
                  ";
    //funcao construtor da classe 
-   function cl_setorambulatorial() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("setorambulatorial"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_setorambulatorial {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd91_codigo = ($this->sd91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_codigo"]:$this->sd91_codigo);
-       $this->sd91_unidades = ($this->sd91_unidades == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_unidades"]:$this->sd91_unidades);
+       $this->sd91_codigo = ($this->sd91_codigo === 0 || $this->sd91_codigo === 0.0 || $this->sd91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_codigo"]:$this->sd91_codigo);
+       $this->sd91_unidades = ($this->sd91_unidades === 0 || $this->sd91_unidades === 0.0 || $this->sd91_unidades == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_unidades"]:$this->sd91_unidades);
        $this->sd91_descricao = ($this->sd91_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_descricao"]:$this->sd91_descricao);
-       $this->sd91_local = ($this->sd91_local == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_local"]:$this->sd91_local);
+       $this->sd91_local = ($this->sd91_local === 0 || $this->sd91_local === 0.0 || $this->sd91_local == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_local"]:$this->sd91_local);
      }else{
-       $this->sd91_codigo = ($this->sd91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_codigo"]:$this->sd91_codigo);
+       $this->sd91_codigo = ($this->sd91_codigo === 0 || $this->sd91_codigo === 0.0 || $this->sd91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_codigo"]:$this->sd91_codigo);
      }
    }
    // funcao para inclusao
@@ -107,7 +107,7 @@ class cl_setorambulatorial {
          $this->sd91_codigo = $sd91_codigo; 
        }
      }
-     if(($this->sd91_codigo == null) || ($this->sd91_codigo == "") ){ 
+     if(($this->sd91_codigo == null) || ($this->sd91_codigo === 0 || $this->sd91_codigo === 0.0 || $this->sd91_codigo == "") ){ 
        $this->erro_sql = " Campo sd91_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

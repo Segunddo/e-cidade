@@ -50,7 +50,7 @@ class cl_parreciboitbi {
                  it17_codigo = int4 = codigo da receita 
                  ";
    //funcao construtor da classe 
-   public function cl_parreciboitbi() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parreciboitbi"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_parreciboitbi {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it17_numcgm = ($this->it17_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["it17_numcgm"]:$this->it17_numcgm);
-       $this->it17_codigo = ($this->it17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it17_codigo"]:$this->it17_codigo);
+       $this->it17_numcgm = (($this->it17_numcgm === 0 || $this->it17_numcgm === 0.0 || $this->it17_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["it17_numcgm"]:$this->it17_numcgm);
+       $this->it17_codigo = (($this->it17_codigo === 0 || $this->it17_codigo === 0.0 || $this->it17_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["it17_codigo"]:$this->it17_codigo);
      }else{
      }
    }

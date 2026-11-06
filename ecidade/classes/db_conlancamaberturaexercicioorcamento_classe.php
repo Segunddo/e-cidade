@@ -52,7 +52,7 @@ class cl_conlancamaberturaexercicioorcamento {
                  c105_aberturaexercicioorcamento = int4 = Sequencial 
                  ";
    //funcao construtor da classe
-   function cl_conlancamaberturaexercicioorcamento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancamaberturaexercicioorcamento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_conlancamaberturaexercicioorcamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c105_sequencial = ($this->c105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c105_sequencial"]:$this->c105_sequencial);
-       $this->c105_codlan = ($this->c105_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c105_codlan"]:$this->c105_codlan);
-       $this->c105_aberturaexercicioorcamento = ($this->c105_aberturaexercicioorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["c105_aberturaexercicioorcamento"]:$this->c105_aberturaexercicioorcamento);
+       $this->c105_sequencial = ($this->c105_sequencial === 0 || $this->c105_sequencial === 0.0 || $this->c105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c105_sequencial"]:$this->c105_sequencial);
+       $this->c105_codlan = ($this->c105_codlan === 0 || $this->c105_codlan === 0.0 || $this->c105_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c105_codlan"]:$this->c105_codlan);
+       $this->c105_aberturaexercicioorcamento = ($this->c105_aberturaexercicioorcamento === 0 || $this->c105_aberturaexercicioorcamento === 0.0 || $this->c105_aberturaexercicioorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["c105_aberturaexercicioorcamento"]:$this->c105_aberturaexercicioorcamento);
      }else{
-       $this->c105_sequencial = ($this->c105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c105_sequencial"]:$this->c105_sequencial);
+       $this->c105_sequencial = ($this->c105_sequencial === 0 || $this->c105_sequencial === 0.0 || $this->c105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c105_sequencial"]:$this->c105_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_conlancamaberturaexercicioorcamento {
          $this->c105_sequencial = $c105_sequencial;
        }
      }
-     if(($this->c105_sequencial == null) || ($this->c105_sequencial == "") ){
+     if(($this->c105_sequencial == null) || ($this->c105_sequencial === 0 || $this->c105_sequencial === 0.0 || $this->c105_sequencial == "") ){
        $this->erro_sql = " Campo c105_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_conlancamaberturaexercicioorcamento {
    function sql_query ( $c105_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_conlancamaberturaexercicioorcamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_conlancamaberturaexercicioorcamento {
    function sql_query_file ( $c105_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_conlancamaberturaexercicioorcamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_conlancamaberturaexercicioorcamento {
     function sql_query_documento ( $c105_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_conlancamaberturaexercicioorcamento {
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];

@@ -73,7 +73,7 @@ class cl_retencaoreceitas
                  ";
 
     //funcao construtor da classe
-    function cl_retencaoreceitas()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("retencaoreceitas");
@@ -95,9 +95,9 @@ class cl_retencaoreceitas
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e23_sequencial = ($this->e23_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_sequencial"] : $this->e23_sequencial);
-            $this->e23_retencaotiporec = ($this->e23_retencaotiporec == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_retencaotiporec"] : $this->e23_retencaotiporec);
-            $this->e23_retencaopagordem = ($this->e23_retencaopagordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_retencaopagordem"] : $this->e23_retencaopagordem);
+            $this->e23_sequencial = ($this->e23_sequencial === 0 || $this->e23_sequencial === 0.0 || $this->e23_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_sequencial"] : $this->e23_sequencial);
+            $this->e23_retencaotiporec = ($this->e23_retencaotiporec === 0 || $this->e23_retencaotiporec === 0.0 || $this->e23_retencaotiporec == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_retencaotiporec"] : $this->e23_retencaotiporec);
+            $this->e23_retencaopagordem = ($this->e23_retencaopagordem === 0 || $this->e23_retencaopagordem === 0.0 || $this->e23_retencaopagordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_retencaopagordem"] : $this->e23_retencaopagordem);
             if ($this->e23_dtcalculo == "") {
                 $this->e23_dtcalculo_dia = ($this->e23_dtcalculo_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_dtcalculo_dia"] : $this->e23_dtcalculo_dia);
                 $this->e23_dtcalculo_mes = ($this->e23_dtcalculo_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_dtcalculo_mes"] : $this->e23_dtcalculo_mes);
@@ -106,15 +106,15 @@ class cl_retencaoreceitas
                     $this->e23_dtcalculo = $this->e23_dtcalculo_ano . "-" . $this->e23_dtcalculo_mes . "-" . $this->e23_dtcalculo_dia;
                 }
             }
-            $this->e23_valor = ($this->e23_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_valor"] : $this->e23_valor);
-            $this->e23_deducao = ($this->e23_deducao == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_deducao"] : $this->e23_deducao);
-            $this->e23_valorbase = ($this->e23_valorbase == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_valorbase"] : $this->e23_valorbase);
-            $this->e23_aliquota = ($this->e23_aliquota == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_aliquota"] : $this->e23_aliquota);
-            $this->e23_valorretencao = ($this->e23_valorretencao == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_valorretencao"] : $this->e23_valorretencao);
+            $this->e23_valor = ($this->e23_valor === 0 || $this->e23_valor === 0.0 || $this->e23_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_valor"] : $this->e23_valor);
+            $this->e23_deducao = ($this->e23_deducao === 0 || $this->e23_deducao === 0.0 || $this->e23_deducao == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_deducao"] : $this->e23_deducao);
+            $this->e23_valorbase = ($this->e23_valorbase === 0 || $this->e23_valorbase === 0.0 || $this->e23_valorbase == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_valorbase"] : $this->e23_valorbase);
+            $this->e23_aliquota = ($this->e23_aliquota === 0 || $this->e23_aliquota === 0.0 || $this->e23_aliquota == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_aliquota"] : $this->e23_aliquota);
+            $this->e23_valorretencao = ($this->e23_valorretencao === 0 || $this->e23_valorretencao === 0.0 || $this->e23_valorretencao == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_valorretencao"] : $this->e23_valorretencao);
             $this->e23_ativo = ($this->e23_ativo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["e23_ativo"] : $this->e23_ativo);
             $this->e23_recolhido = ($this->e23_recolhido == "f" ? @$GLOBALS["HTTP_POST_VARS"]["e23_recolhido"] : $this->e23_recolhido);
         } else {
-            $this->e23_sequencial = ($this->e23_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_sequencial"] : $this->e23_sequencial);
+            $this->e23_sequencial = ($this->e23_sequencial === 0 || $this->e23_sequencial === 0.0 || $this->e23_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e23_sequencial"] : $this->e23_sequencial);
         }
     }
 
@@ -236,7 +236,7 @@ class cl_retencaoreceitas
                 $this->e23_sequencial = $e23_sequencial;
             }
         }
-        if (($this->e23_sequencial == null) || ($this->e23_sequencial == "")) {
+        if (($this->e23_sequencial == null) || ($this->e23_sequencial === 0 || $this->e23_sequencial === 0.0 || $this->e23_sequencial == "")) {
             $this->erro_sql = " Campo e23_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

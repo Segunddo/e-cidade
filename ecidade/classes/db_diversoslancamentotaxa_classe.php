@@ -31,7 +31,7 @@ class cl_diversoslancamentotaxa {
                  dv14_data_calculo = date = Data do Cálculo 
                  ";
    //funcao construtor da classe 
-   function cl_diversoslancamentotaxa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diversoslancamentotaxa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -48,9 +48,9 @@ class cl_diversoslancamentotaxa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->dv14_sequencial = ($this->dv14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv14_sequencial"]:$this->dv14_sequencial);
-       $this->dv14_diversos = ($this->dv14_diversos == ""?@$GLOBALS["HTTP_POST_VARS"]["dv14_diversos"]:$this->dv14_diversos);
-       $this->dv14_lancamentotaxadiversos = ($this->dv14_lancamentotaxadiversos == ""?@$GLOBALS["HTTP_POST_VARS"]["dv14_lancamentotaxadiversos"]:$this->dv14_lancamentotaxadiversos);
+       $this->dv14_sequencial = (($this->dv14_sequencial === 0 || $this->dv14_sequencial === 0.0 || $this->dv14_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["dv14_sequencial"]:$this->dv14_sequencial);
+       $this->dv14_diversos = (($this->dv14_diversos === 0 || $this->dv14_diversos === 0.0 || $this->dv14_diversos == "")?@$GLOBALS["HTTP_POST_VARS"]["dv14_diversos"]:$this->dv14_diversos);
+       $this->dv14_lancamentotaxadiversos = (($this->dv14_lancamentotaxadiversos === 0 || $this->dv14_lancamentotaxadiversos === 0.0 || $this->dv14_lancamentotaxadiversos == "")?@$GLOBALS["HTTP_POST_VARS"]["dv14_lancamentotaxadiversos"]:$this->dv14_lancamentotaxadiversos);
        if($this->dv14_data_calculo == ""){
          $this->dv14_data_calculo_dia = ($this->dv14_data_calculo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dv14_data_calculo_dia"]:$this->dv14_data_calculo_dia);
          $this->dv14_data_calculo_mes = ($this->dv14_data_calculo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dv14_data_calculo_mes"]:$this->dv14_data_calculo_mes);
@@ -60,7 +60,7 @@ class cl_diversoslancamentotaxa {
          }
        }
      }else{
-       $this->dv14_sequencial = ($this->dv14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv14_sequencial"]:$this->dv14_sequencial);
+       $this->dv14_sequencial = (($this->dv14_sequencial === 0 || $this->dv14_sequencial === 0.0 || $this->dv14_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["dv14_sequencial"]:$this->dv14_sequencial);
      }
    }
    // funcao para Inclusão
@@ -117,7 +117,7 @@ class cl_diversoslancamentotaxa {
          $this->dv14_sequencial = $dv14_sequencial; 
        }
      }
-     if(($this->dv14_sequencial == null) || ($this->dv14_sequencial == "") ){ 
+     if(($this->dv14_sequencial == null) || (($this->dv14_sequencial === 0 || $this->dv14_sequencial === 0.0 || $this->dv14_sequencial == "")) ){ 
        $this->erro_sql = " Campo dv14_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

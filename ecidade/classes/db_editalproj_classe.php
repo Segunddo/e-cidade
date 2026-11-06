@@ -50,7 +50,7 @@ class cl_editalproj {
                  d10_codigo = int4 = Código da lista de projeto 
                  ";
    //funcao construtor da classe 
-   function cl_editalproj() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("editalproj"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_editalproj {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d10_codedi = ($this->d10_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codedi"]:$this->d10_codedi);
-       $this->d10_codigo = ($this->d10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codigo"]:$this->d10_codigo);
+       $this->d10_codedi = ($this->d10_codedi === 0 || $this->d10_codedi === 0.0 || $this->d10_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codedi"]:$this->d10_codedi);
+       $this->d10_codigo = ($this->d10_codigo === 0 || $this->d10_codigo === 0.0 || $this->d10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codigo"]:$this->d10_codigo);
      }else{
-       $this->d10_codedi = ($this->d10_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codedi"]:$this->d10_codedi);
-       $this->d10_codigo = ($this->d10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codigo"]:$this->d10_codigo);
+       $this->d10_codedi = ($this->d10_codedi === 0 || $this->d10_codedi === 0.0 || $this->d10_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codedi"]:$this->d10_codedi);
+       $this->d10_codigo = ($this->d10_codigo === 0 || $this->d10_codigo === 0.0 || $this->d10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codigo"]:$this->d10_codigo);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_editalproj {
       $this->atualizacampos();
        $this->d10_codedi = $d10_codedi; 
        $this->d10_codigo = $d10_codigo; 
-     if(($this->d10_codedi == null) || ($this->d10_codedi == "") ){ 
+     if(($this->d10_codedi == null) || ($this->d10_codedi === 0 || $this->d10_codedi === 0.0 || $this->d10_codedi == "") ){ 
        $this->erro_sql = " Campo d10_codedi nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_editalproj {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d10_codigo == null) || ($this->d10_codigo == "") ){ 
+     if(($this->d10_codigo == null) || ($this->d10_codigo === 0 || $this->d10_codigo === 0.0 || $this->d10_codigo == "") ){ 
        $this->erro_sql = " Campo d10_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_editalproj {
    function sql_query ( $d10_codedi=null,$d10_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -352,7 +352,7 @@ class cl_editalproj {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_editalproj {
    function sql_query_file ( $d10_codedi=null,$d10_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_editalproj {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

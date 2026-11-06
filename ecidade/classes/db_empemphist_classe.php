@@ -50,7 +50,7 @@ class cl_empemphist {
                  e63_codhist = int4 = Histórico 
                  ";
    //funcao construtor da classe 
-   function cl_empemphist() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empemphist"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_empemphist {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e63_numemp = ($this->e63_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_numemp"]:$this->e63_numemp);
-       $this->e63_codhist = ($this->e63_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_codhist"]:$this->e63_codhist);
+       $this->e63_numemp = ($this->e63_numemp === 0 || $this->e63_numemp === 0.0 || $this->e63_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_numemp"]:$this->e63_numemp);
+       $this->e63_codhist = ($this->e63_codhist === 0 || $this->e63_codhist === 0.0 || $this->e63_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_codhist"]:$this->e63_codhist);
      }else{
-       $this->e63_numemp = ($this->e63_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_numemp"]:$this->e63_numemp);
+       $this->e63_numemp = ($this->e63_numemp === 0 || $this->e63_numemp === 0.0 || $this->e63_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_numemp"]:$this->e63_numemp);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_empemphist {
        return false;
      }
        $this->e63_numemp = $e63_numemp; 
-     if(($this->e63_numemp == null) || ($this->e63_numemp == "") ){ 
+     if(($this->e63_numemp == null) || ($this->e63_numemp === 0 || $this->e63_numemp === 0.0 || $this->e63_numemp == "") ){ 
        $this->erro_sql = " Campo e63_numemp nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_empemphist {
    function sql_query ( $e63_numemp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -332,7 +332,7 @@ class cl_empemphist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -344,7 +344,7 @@ class cl_empemphist {
    function sql_query_empenho( $e63_numemp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -374,7 +374,7 @@ class cl_empemphist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_empemphist {
    function sql_query_file ( $e63_numemp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_empemphist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

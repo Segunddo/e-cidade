@@ -158,11 +158,11 @@ for($i=0;$i<$numrows; $i++) {
 
    if ($pdf->gety() > $pdf->h - 40 || $troca != 0 ) {
      $pdf->AddPage();
-    
+
      $pdf->SetTextColor(0,0,0);
      $pdf->SetFillColor(220);
      $pdf->setfont('arial','B',8);
-        
+
      $pdf->Cell(20, 6, "Inscrição", 1, 0, "C", 1);
      $pdf->Cell(90, 6, 'Nome', 1, 0, "C", 1);
      $pdf->Cell(30, 6, 'Atividade', 1, 0, "C", 1);
@@ -177,14 +177,14 @@ for($i=0;$i<$numrows; $i++) {
      $pdf->Cell(30, 6, 'Quantidade',  1, 0, "C", 1);
      $pdf->Cell(20, 6, 'Área',  1, 0, "C", 1);
      $pdf->Cell(30, 6, 'Processo', 1, 0, "C", 1);
-     
+
      if ($sSituacao != 'A') {
        $pdf->Cell(20, 6, 'Data Baixa', 1, 0, "C", 1);
      }
      $pdf->Cell(20, 6, 'Situação', 1, 1, "C", 1);
-     
+
      $pdf->Ln(2);
-    
+
      $troca = 0;
    }
 
@@ -195,11 +195,11 @@ for($i=0;$i<$numrows; $i++) {
   }
   $pdf->SetFillColor($corfundo);
     $pdf->setfont('arial','',8);
-  
+
     $oInscricoes = db_utils::fieldsMemory($result,$i);
-    
+
   $oInscricoes->q07_datain = db_formatar($oInscricoes->q07_datain, 'd');
-  
+
   $pdf->cell(20,6,substr($oInscricoes->q02_inscr,0,10), '0',0,"C",1);
   $pdf->cell(90,6,substr($oInscricoes->z01_nome,0,45),0,0,"C",1);
   $pdf->cell(30,6,substr($oInscricoes->q07_ativ,0,15),0,0,"C",1);
@@ -207,13 +207,13 @@ for($i=0;$i<$numrows; $i++) {
   $pdf->cell(90,6,substr($oInscricoes->j14_nome,0,45),0,1,"C",1);
 //  $pdf->Ln();
   $pdf->cell($iTam,6,substr($oInscricoes->q02_numcgm,0,15),0,0,"C",1);
-  
+
   $tipo     = '';
   $cnpjcpf = '';
   if((strlen(trim($oInscricoes->z01_cgccpf)) <= 11) and (strlen(trim($oInscricoes->z01_cgccpf)!=''))){
     $tipo   = 'cpf';
     $cnpjcpf  = substr(db_formatar($oInscricoes->z01_cgccpf, $tipo),0,20);
-    
+
   }elseif(strlen(trim($oInscricoes->z01_cgccpf) > 11)) {
     $tipo   = 'cnpj';
     $cnpjcpf  = substr(db_formatar($oInscricoes->z01_cgccpf, $tipo),0,20);
@@ -227,7 +227,7 @@ for($i=0;$i<$numrows; $i++) {
   $pdf->cell(30,6,substr($oInscricoes->q30_quant,0,15),0,0,"C",1);
   $pdf->cell(20,6,substr($oInscricoes->q30_area,0,20),0,0,"C",1);
   $pdf->cell(30,6,substr($oInscricoes->q14_proces,0,15),0,0,"C",1);
-  
+
   if ($sSituacao != 'A') {
     $pdf->cell(20,6,db_formatar($oInscricoes->q02_dtbaix,'d'),0,0,"C",1);
   }

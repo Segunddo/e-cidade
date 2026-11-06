@@ -46,7 +46,8 @@ require_once(modification("libs/db_sql.php"));
 require_once(modification("libs/db_utils.php"));
 require_once(modification("libs/db_app.utils.php"));
 
-parse_str($HTTP_SERVER_VARS ['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS ['QUERY_STRING'], $__qs);
+extract($__qs);
 
 if (session_is_registered("DB_tipodebitoparcel")) {
     db_putsession("DB_tipodebitoparcel", "");

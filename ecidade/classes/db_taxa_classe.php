@@ -69,7 +69,7 @@ class cl_taxa {
                  ar36_honorario = bool = Campo honorario
                  ";
    //funcao construtor da classe
-   function cl_taxa() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("taxa");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -86,20 +86,20 @@ class cl_taxa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar36_sequencial = ($this->ar36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar36_sequencial"]:$this->ar36_sequencial);
-       $this->ar36_grupotaxa = ($this->ar36_grupotaxa == ""?@$GLOBALS["HTTP_POST_VARS"]["ar36_grupotaxa"]:$this->ar36_grupotaxa);
-       $this->ar36_receita = ($this->ar36_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["ar36_receita"]:$this->ar36_receita);
+       $this->ar36_sequencial = (($this->ar36_sequencial === 0 || $this->ar36_sequencial === 0.0 || $this->ar36_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["ar36_sequencial"]:$this->ar36_sequencial);
+       $this->ar36_grupotaxa = (($this->ar36_grupotaxa === 0 || $this->ar36_grupotaxa === 0.0 || $this->ar36_grupotaxa == "")?@$GLOBALS["HTTP_POST_VARS"]["ar36_grupotaxa"]:$this->ar36_grupotaxa);
+       $this->ar36_receita = (($this->ar36_receita === 0 || $this->ar36_receita === 0.0 || $this->ar36_receita == "")?@$GLOBALS["HTTP_POST_VARS"]["ar36_receita"]:$this->ar36_receita);
        $this->ar36_descricao = ($this->ar36_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar36_descricao"]:$this->ar36_descricao);
-       $this->ar36_perc = ($this->ar36_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["ar36_perc"]:$this->ar36_perc);
-       $this->ar36_valor = ($this->ar36_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ar36_valor"]:$this->ar36_valor);
-       $this->ar36_valormin = ($this->ar36_valormin == ""?@$GLOBALS["HTTP_POST_VARS"]["ar36_valormin"]:$this->ar36_valormin);
-       $this->ar36_valormax = ($this->ar36_valormax == ""?@$GLOBALS["HTTP_POST_VARS"]["ar36_valormax"]:$this->ar36_valormax);
+       $this->ar36_perc = (($this->ar36_perc === 0 || $this->ar36_perc === 0.0 || $this->ar36_perc == "")?@$GLOBALS["HTTP_POST_VARS"]["ar36_perc"]:$this->ar36_perc);
+       $this->ar36_valor = (($this->ar36_valor === 0 || $this->ar36_valor === 0.0 || $this->ar36_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["ar36_valor"]:$this->ar36_valor);
+       $this->ar36_valormin = (($this->ar36_valormin === 0 || $this->ar36_valormin === 0.0 || $this->ar36_valormin == "")?@$GLOBALS["HTTP_POST_VARS"]["ar36_valormin"]:$this->ar36_valormin);
+       $this->ar36_valormax = (($this->ar36_valormax === 0 || $this->ar36_valormax === 0.0 || $this->ar36_valormax == "")?@$GLOBALS["HTTP_POST_VARS"]["ar36_valormax"]:$this->ar36_valormax);
        $this->ar36_debitoscomprocesso = (empty($this->ar36_debitoscomprocesso) && isset($GLOBALS["HTTP_POST_VARS"]["ar36_debitoscomprocesso"]) ? $GLOBALS["HTTP_POST_VARS"]["ar36_debitoscomprocesso"] : $this->ar36_debitoscomprocesso);
        $this->ar36_debitossemprocesso = (empty($this->ar36_debitossemprocesso) && isset($GLOBALS["HTTP_POST_VARS"]["ar36_debitossemprocesso"]) ? $GLOBALS["HTTP_POST_VARS"]["ar36_debitossemprocesso"] : $this->ar36_debitossemprocesso);
        $this->ar36_aplicajurosmulta = (empty($this->ar36_aplicajurosmulta) && isset($GLOBALS["HTTP_POST_VARS"]["ar36_aplicajurosmulta"]) ? $GLOBALS["HTTP_POST_VARS"]["ar36_aplicajurosmulta"] : $this->ar36_aplicajurosmulta);
        $this->ar36_honorario = (empty($this->ar36_honorario) && isset($GLOBALS["HTTP_POST_VARS"]["ar36_honorario"]) ? $GLOBALS["HTTP_POST_VARS"]["ar36_honorario"] : $this->ar36_honorario);
      }else{
-       $this->ar36_sequencial = ($this->ar36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar36_sequencial"]:$this->ar36_sequencial);
+       $this->ar36_sequencial = (($this->ar36_sequencial === 0 || $this->ar36_sequencial === 0.0 || $this->ar36_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["ar36_sequencial"]:$this->ar36_sequencial);
      }
    }
    // funcao para Inclusão
@@ -204,7 +204,7 @@ class cl_taxa {
          $this->ar36_sequencial = $ar36_sequencial;
        }
      }
-     if(($this->ar36_sequencial == null) || ($this->ar36_sequencial == "") ){
+     if(($this->ar36_sequencial == null) || (($this->ar36_sequencial === 0 || $this->ar36_sequencial === 0.0 || $this->ar36_sequencial == "")) ){
        $this->erro_sql = " Campo ar36_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

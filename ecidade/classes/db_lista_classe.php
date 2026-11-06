@@ -63,7 +63,7 @@ class cl_lista {
                  k60_instit = int4 = Cód. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_lista() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lista"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,7 +80,7 @@ class cl_lista {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k60_codigo = ($this->k60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k60_codigo"]:$this->k60_codigo);
+       $this->k60_codigo = (($this->k60_codigo === 0 || $this->k60_codigo === 0.0 || $this->k60_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["k60_codigo"]:$this->k60_codigo);
        $this->k60_descr = ($this->k60_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k60_descr"]:$this->k60_descr);
        $this->k60_tipo = ($this->k60_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k60_tipo"]:$this->k60_tipo);
        if($this->k60_datadeb == ""){
@@ -92,10 +92,10 @@ class cl_lista {
          }
        }
        $this->k60_filtros = ($this->k60_filtros == ""?@$GLOBALS["HTTP_POST_VARS"]["k60_filtros"]:$this->k60_filtros);
-       $this->k60_usuario = ($this->k60_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k60_usuario"]:$this->k60_usuario);
-       $this->k60_instit = ($this->k60_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k60_instit"]:$this->k60_instit);
+       $this->k60_usuario = (($this->k60_usuario === 0 || $this->k60_usuario === 0.0 || $this->k60_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["k60_usuario"]:$this->k60_usuario);
+       $this->k60_instit = (($this->k60_instit === 0 || $this->k60_instit === 0.0 || $this->k60_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["k60_instit"]:$this->k60_instit);
      }else{
-       $this->k60_codigo = ($this->k60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k60_codigo"]:$this->k60_codigo);
+       $this->k60_codigo = (($this->k60_codigo === 0 || $this->k60_codigo === 0.0 || $this->k60_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["k60_codigo"]:$this->k60_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_lista {
          $this->k60_codigo = $k60_codigo; 
        }
      }
-     if(($this->k60_codigo == null) || ($this->k60_codigo == "") ){ 
+     if(($this->k60_codigo == null) || (($this->k60_codigo === 0 || $this->k60_codigo === 0.0 || $this->k60_codigo == "")) ){ 
        $this->erro_sql = " Campo k60_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -507,7 +507,7 @@ class cl_lista {
    function sql_query ( $k60_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -531,7 +531,7 @@ class cl_lista {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -543,7 +543,7 @@ class cl_lista {
    function sql_query_file ( $k60_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -564,7 +564,7 @@ class cl_lista {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -577,7 +577,7 @@ class cl_lista {
    function sql_query_prescricao ( $k60_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -601,7 +601,7 @@ class cl_lista {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -91,8 +91,8 @@ class cl_conlancam
     {
 
         if ($exclusao == false) {
-            $this->c70_codlan = ($this->c70_codlan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c70_codlan"] : $this->c70_codlan);
-            $this->c70_anousu = ($this->c70_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c70_anousu"] : $this->c70_anousu);
+            $this->c70_codlan = ($this->c70_codlan === 0 || $this->c70_codlan === 0.0 || $this->c70_codlan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c70_codlan"] : $this->c70_codlan);
+            $this->c70_anousu = ($this->c70_anousu === 0 || $this->c70_anousu === 0.0 || $this->c70_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c70_anousu"] : $this->c70_anousu);
             if ($this->c70_data == "") {
                 $this->c70_data_dia = ($this->c70_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["c70_data_dia"] : $this->c70_data_dia);
                 $this->c70_data_mes = ($this->c70_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["c70_data_mes"] : $this->c70_data_mes);
@@ -101,9 +101,9 @@ class cl_conlancam
                     $this->c70_data = $this->c70_data_ano . "-" . $this->c70_data_mes . "-" . $this->c70_data_dia;
                 }
             }
-            $this->c70_valor = ($this->c70_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["c70_valor"] : $this->c70_valor);
+            $this->c70_valor = ($this->c70_valor === 0 || $this->c70_valor === 0.0 || $this->c70_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["c70_valor"] : $this->c70_valor);
         } else {
-            $this->c70_codlan = ($this->c70_codlan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c70_codlan"] : $this->c70_codlan);
+            $this->c70_codlan = ($this->c70_codlan === 0 || $this->c70_codlan === 0.0 || $this->c70_codlan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c70_codlan"] : $this->c70_codlan);
         }
     }
 
@@ -174,7 +174,7 @@ class cl_conlancam
                 $this->c70_codlan = $c70_codlan;
             }
         }
-        if (($this->c70_codlan == null) || ($this->c70_codlan == "")) {
+        if (($this->c70_codlan == null) || ($this->c70_codlan === 0 || $this->c70_codlan === 0.0 || $this->c70_codlan == "")) {
             $this->erro_sql = " Campo c70_codlan nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -531,7 +531,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -554,7 +554,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -570,7 +570,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -593,7 +593,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -609,7 +609,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -644,7 +644,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -721,7 +721,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -751,7 +751,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -768,7 +768,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -795,7 +795,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -812,7 +812,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -847,7 +847,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -863,7 +863,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -894,7 +894,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -910,7 +910,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -945,7 +945,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -961,7 +961,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -990,7 +990,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1012,7 +1012,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1065,7 +1065,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1081,7 +1081,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1112,7 +1112,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1141,7 +1141,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1167,7 +1167,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1314,7 +1314,7 @@ class cl_conlancam
 
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1365,7 +1365,7 @@ class cl_conlancam
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1397,7 +1397,7 @@ class cl_conlancam
         return $sql;
     }
 
-    public function sql_query_lancamentos_by_competencia($sCampos_1 = '*', $sCampos_2, $sWhere = null, $sOrderBy = null)
+    public function sql_query_lancamentos_by_competencia($sCampos_1 = '*', $sCampos_2 = null, $sWhere = null, $sOrderBy = null)
     {
 
         if (empty($sCampos_2)) {

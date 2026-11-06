@@ -1124,11 +1124,11 @@ if (isset($geracarnes)) {
       // demais modelo 1
         $dtVencUnica = "";
         $vir         = "";
-        $dtudica     = split("U",$unica);
+        $dtudica     = preg_split("#U#m",$unica);
         $tam         = (count($dtudica));
 
         for($t=0; $t < $tam; $t++){
-            $dtvenc = split("=",$dtudica[$t]);
+            $dtvenc = preg_split("#=#m",$dtudica[$t]);
             if(trim($dtvenc[0])!=""){
               $dtVencUnica .= $vir.$dtvenc[0];
               $vir      =",";

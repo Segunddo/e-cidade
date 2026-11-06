@@ -58,7 +58,7 @@ class cl_ppaestimativareceita {
                  o06_concarpeculiar = varchar(100) = Caracteristica Peculiar
                  ";
    //funcao construtor da classe
-   function cl_ppaestimativareceita() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ppaestimativareceita");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_ppaestimativareceita {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o06_sequencial = ($this->o06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_sequencial"]:$this->o06_sequencial);
-       $this->o06_ppaestimativa = ($this->o06_ppaestimativa == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_ppaestimativa"]:$this->o06_ppaestimativa);
-       $this->o06_codrec = ($this->o06_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_codrec"]:$this->o06_codrec);
-       $this->o06_anousu = ($this->o06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_anousu"]:$this->o06_anousu);
-       $this->o06_ppaversao = ($this->o06_ppaversao == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_ppaversao"]:$this->o06_ppaversao);
+       $this->o06_sequencial = ($this->o06_sequencial === 0 || $this->o06_sequencial === 0.0 || $this->o06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_sequencial"]:$this->o06_sequencial);
+       $this->o06_ppaestimativa = ($this->o06_ppaestimativa === 0 || $this->o06_ppaestimativa === 0.0 || $this->o06_ppaestimativa == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_ppaestimativa"]:$this->o06_ppaestimativa);
+       $this->o06_codrec = ($this->o06_codrec === 0 || $this->o06_codrec === 0.0 || $this->o06_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_codrec"]:$this->o06_codrec);
+       $this->o06_anousu = ($this->o06_anousu === 0 || $this->o06_anousu === 0.0 || $this->o06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_anousu"]:$this->o06_anousu);
+       $this->o06_ppaversao = ($this->o06_ppaversao === 0 || $this->o06_ppaversao === 0.0 || $this->o06_ppaversao == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_ppaversao"]:$this->o06_ppaversao);
        $this->o06_concarpeculiar = ($this->o06_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_concarpeculiar"]:$this->o06_concarpeculiar);
      }else{
-       $this->o06_sequencial = ($this->o06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_sequencial"]:$this->o06_sequencial);
+       $this->o06_sequencial = ($this->o06_sequencial === 0 || $this->o06_sequencial === 0.0 || $this->o06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_sequencial"]:$this->o06_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_ppaestimativareceita {
          $this->o06_sequencial = $o06_sequencial;
        }
      }
-     if(($this->o06_sequencial == null) || ($this->o06_sequencial == "") ){
+     if(($this->o06_sequencial == null) || ($this->o06_sequencial === 0 || $this->o06_sequencial === 0.0 || $this->o06_sequencial == "") ){
        $this->erro_sql = " Campo o06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -403,7 +403,7 @@ class cl_ppaestimativareceita {
    function sql_query ( $o06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_ppaestimativareceita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_ppaestimativareceita {
    function sql_query_file ( $o06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -465,7 +465,7 @@ class cl_ppaestimativareceita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_ppaestimativareceita {
    function sql_query_analitica ( $o06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_ppaestimativareceita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_ppaestimativareceita {
     $sql = "select ";
     if ($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -557,7 +557,7 @@ class cl_ppaestimativareceita {
     if ($ordem != null ) {
 
       $sql       .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];
@@ -616,7 +616,7 @@ class cl_ppaestimativareceita {
     $sql = "select ";
     if ($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -645,7 +645,7 @@ class cl_ppaestimativareceita {
     if ($ordem != null ) {
 
       $sql       .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula.$campos_sql[$i];

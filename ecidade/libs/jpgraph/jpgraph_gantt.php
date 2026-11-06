@@ -341,7 +341,7 @@ class GanttGraph extends Graph {
 	if( $aWidth<  0 || $aHeight < 0 ) {
 	    JpgraphError::Raise("You can't specify negative sizes for Gantt graph dimensions. Use 0 to indicate that you want the library to automatically determine a dimension.");
 	}
-	Graph::Graph($aWidth,$aHeight,$aCachedName,$aTimeOut,$aInline);		
+	Graph::__construct($aWidth,$aHeight,$aCachedName,$aTimeOut,$aInline);		
 	$this->scale = new GanttScale($this->img);
 	if( $aWidth > 0 )
 		$this->img->SetMargin($aWidth/17,$aWidth/17,$aHeight/7,$aHeight/10);
@@ -3172,7 +3172,7 @@ class MileStone extends GanttPlotObject {
 //---------------
 // CONSTRUCTOR	
     function MileStone($aVPos,$aLabel,$aDate,$aCaption="") {
-	GanttPlotObject::GanttPlotObject();
+	GanttPlotObject::__construct();
 	$this->caption->Set($aCaption);
 	$this->caption->Align("left","center");
 	$this->caption->SetFont(FF_FONT1,FS_BOLD);
@@ -3272,7 +3272,7 @@ class GanttVLine extends GanttPlotObject {
 //---------------
 // CONSTRUCTOR	
     function GanttVLine($aDate,$aTitle="",$aColor="black",$aWeight=3,$aStyle="dashed") {
-	GanttPlotObject::GanttPlotObject();
+	GanttPlotObject::__construct();
 	$this->iLine = new LineProperty();
 	$this->iLine->SetColor($aColor);
 	$this->iLine->SetWeight($aWeight);

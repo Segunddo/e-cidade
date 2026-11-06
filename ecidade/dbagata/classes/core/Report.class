@@ -112,12 +112,12 @@ class Report
                         $Clause[1] = str_replace("\t",  ' ',  $Clause[1]);
                         
                         // substitui os AND de dentro de subselects do where
-                        $match_subselect_and = create_function('$matches', '
+                        $match_subselect_and = function ($matches) {
                         $return = $matches[0];
                         $return = str_replace(" AND ", "\n\t\t\t\t\tAND ", $return);
                         $return = str_replace(" and ", "\n\t\t\t\t\tAND ", $return);
                         return $return;
-                        ');
+                        };
                         $pattern = '/\(SELECT (.*) WHERE (.*)\)/i';
                         $Clause[1] = preg_replace_callback($pattern, $match_subselect_and, $Clause[1]);
                         

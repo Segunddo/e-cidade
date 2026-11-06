@@ -62,7 +62,7 @@ class cl_fiscalproc {
                  y29_tipofisc = int4 = Tipo de Fiscalização 
                  ";
    //funcao construtor da classe 
-   function cl_fiscalproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscalproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_fiscalproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y29_codtipo = ($this->y29_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y29_codtipo"]:$this->y29_codtipo);
+       $this->y29_codtipo = (($this->y29_codtipo === 0 || $this->y29_codtipo === 0.0 || $this->y29_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y29_codtipo"]:$this->y29_codtipo);
        $this->y29_descr = ($this->y29_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y29_descr"]:$this->y29_descr);
-       $this->y29_coddepto = ($this->y29_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["y29_coddepto"]:$this->y29_coddepto);
-       $this->y29_tipoandam = ($this->y29_tipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y29_tipoandam"]:$this->y29_tipoandam);
+       $this->y29_coddepto = (($this->y29_coddepto === 0 || $this->y29_coddepto === 0.0 || $this->y29_coddepto == "")?@$GLOBALS["HTTP_POST_VARS"]["y29_coddepto"]:$this->y29_coddepto);
+       $this->y29_tipoandam = (($this->y29_tipoandam === 0 || $this->y29_tipoandam === 0.0 || $this->y29_tipoandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y29_tipoandam"]:$this->y29_tipoandam);
        $this->y29_descr_obs = ($this->y29_descr_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y29_descr_obs"]:$this->y29_descr_obs);
-       $this->y29_dias = ($this->y29_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["y29_dias"]:$this->y29_dias);
+       $this->y29_dias = (($this->y29_dias === 0 || $this->y29_dias === 0.0 || $this->y29_dias == "")?@$GLOBALS["HTTP_POST_VARS"]["y29_dias"]:$this->y29_dias);
        $this->y29_tipoproced = ($this->y29_tipoproced == ""?@$GLOBALS["HTTP_POST_VARS"]["y29_tipoproced"]:$this->y29_tipoproced);
-       $this->y29_tipofisc = ($this->y29_tipofisc == ""?@$GLOBALS["HTTP_POST_VARS"]["y29_tipofisc"]:$this->y29_tipofisc);
+       $this->y29_tipofisc = (($this->y29_tipofisc === 0 || $this->y29_tipofisc === 0.0 || $this->y29_tipofisc == "")?@$GLOBALS["HTTP_POST_VARS"]["y29_tipofisc"]:$this->y29_tipofisc);
      }else{
-       $this->y29_codtipo = ($this->y29_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y29_codtipo"]:$this->y29_codtipo);
+       $this->y29_codtipo = (($this->y29_codtipo === 0 || $this->y29_codtipo === 0.0 || $this->y29_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y29_codtipo"]:$this->y29_codtipo);
      }
    }
    // funcao para inclusao
@@ -175,7 +175,7 @@ class cl_fiscalproc {
          $this->y29_codtipo = $y29_codtipo; 
        }
      }
-     if(($this->y29_codtipo == null) || ($this->y29_codtipo == "") ){ 
+     if(($this->y29_codtipo == null) || (($this->y29_codtipo === 0 || $this->y29_codtipo === 0.0 || $this->y29_codtipo == "")) ){ 
        $this->erro_sql = " Campo y29_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -502,7 +502,7 @@ class cl_fiscalproc {
    function sql_query ( $y29_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_fiscalproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_fiscalproc {
    function sql_query_file ( $y29_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -560,7 +560,7 @@ class cl_fiscalproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -572,7 +572,7 @@ class cl_fiscalproc {
    function sql_query_rec ( $y29_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -596,7 +596,7 @@ class cl_fiscalproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

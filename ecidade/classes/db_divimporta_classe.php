@@ -68,7 +68,7 @@ class cl_divimporta {
                  v02_instit = int4 = Cod. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_divimporta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("divimporta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,8 +85,8 @@ class cl_divimporta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v02_divimporta = ($this->v02_divimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_divimporta"]:$this->v02_divimporta);
-       $this->v02_usuario = ($this->v02_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_usuario"]:$this->v02_usuario);
+       $this->v02_divimporta = (($this->v02_divimporta === 0 || $this->v02_divimporta === 0.0 || $this->v02_divimporta == "")?@$GLOBALS["HTTP_POST_VARS"]["v02_divimporta"]:$this->v02_divimporta);
+       $this->v02_usuario = (($this->v02_usuario === 0 || $this->v02_usuario === 0.0 || $this->v02_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["v02_usuario"]:$this->v02_usuario);
        if($this->v02_data == ""){
          $this->v02_data_dia = ($this->v02_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_data_dia"]:$this->v02_data_dia);
          $this->v02_data_mes = ($this->v02_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_data_mes"]:$this->v02_data_mes);
@@ -105,10 +105,10 @@ class cl_divimporta {
             $this->v02_datafim = $this->v02_datafim_ano."-".$this->v02_datafim_mes."-".$this->v02_datafim_dia;
          }
        }
-       $this->v02_tipo = ($this->v02_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_tipo"]:$this->v02_tipo);
-       $this->v02_instit = ($this->v02_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_instit"]:$this->v02_instit);
+       $this->v02_tipo = (($this->v02_tipo === 0 || $this->v02_tipo === 0.0 || $this->v02_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["v02_tipo"]:$this->v02_tipo);
+       $this->v02_instit = (($this->v02_instit === 0 || $this->v02_instit === 0.0 || $this->v02_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["v02_instit"]:$this->v02_instit);
      }else{
-       $this->v02_divimporta = ($this->v02_divimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_divimporta"]:$this->v02_divimporta);
+       $this->v02_divimporta = (($this->v02_divimporta === 0 || $this->v02_divimporta === 0.0 || $this->v02_divimporta == "")?@$GLOBALS["HTTP_POST_VARS"]["v02_divimporta"]:$this->v02_divimporta);
      }
    }
    // funcao para inclusao
@@ -201,7 +201,7 @@ class cl_divimporta {
          $this->v02_divimporta = $v02_divimporta; 
        }
      }
-     if(($this->v02_divimporta == null) || ($this->v02_divimporta == "") ){ 
+     if(($this->v02_divimporta == null) || (($this->v02_divimporta === 0 || $this->v02_divimporta === 0.0 || $this->v02_divimporta == "")) ){ 
        $this->erro_sql = " Campo v02_divimporta nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -562,7 +562,7 @@ class cl_divimporta {
    function sql_query ( $v02_divimporta=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -585,7 +585,7 @@ class cl_divimporta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -597,7 +597,7 @@ class cl_divimporta {
    function sql_query_file ( $v02_divimporta=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -618,7 +618,7 @@ class cl_divimporta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

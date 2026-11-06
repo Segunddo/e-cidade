@@ -50,7 +50,7 @@ class cl_iptucalh {
                  j17_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_iptucalh() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptucalh"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_iptucalh {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j17_codhis = ($this->j17_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j17_codhis"]:$this->j17_codhis);
+       $this->j17_codhis = ($this->j17_codhis === 0 || $this->j17_codhis === 0.0 || $this->j17_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j17_codhis"]:$this->j17_codhis);
        $this->j17_descr = ($this->j17_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j17_descr"]:$this->j17_descr);
      }else{
-       $this->j17_codhis = ($this->j17_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j17_codhis"]:$this->j17_codhis);
+       $this->j17_codhis = ($this->j17_codhis === 0 || $this->j17_codhis === 0.0 || $this->j17_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j17_codhis"]:$this->j17_codhis);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_iptucalh {
          $this->j17_codhis = $j17_codhis; 
        }
      }
-     if(($this->j17_codhis == null) || ($this->j17_codhis == "") ){ 
+     if(($this->j17_codhis == null) || ($this->j17_codhis === 0 || $this->j17_codhis === 0.0 || $this->j17_codhis == "") ){ 
        $this->erro_sql = " Campo j17_codhis nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_iptucalh {
    function sql_query ( $j17_codhis=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_iptucalh {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_iptucalh {
    function sql_query_file ( $j17_codhis=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_iptucalh {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -129,7 +129,7 @@ class cl_tabrecjm {
                  k02_juroslimite = float4 = Limite de Juros 
                  ";
    //funcao construtor da classe 
-   function cl_tabrecjm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tabrecjm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -146,15 +146,15 @@ class cl_tabrecjm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k02_codjm = ($this->k02_codjm == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codjm"]:$this->k02_codjm);
+       $this->k02_codjm = ($this->k02_codjm === 0 || $this->k02_codjm === 0.0 || $this->k02_codjm == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codjm"]:$this->k02_codjm);
        $this->k02_corr = ($this->k02_corr == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_corr"]:$this->k02_corr);
-       $this->k02_juros = ($this->k02_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_juros"]:$this->k02_juros);
-       $this->k02_desco1 = ($this->k02_desco1 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco1"]:$this->k02_desco1);
-       $this->k02_desco2 = ($this->k02_desco2 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco2"]:$this->k02_desco2);
-       $this->k02_desco3 = ($this->k02_desco3 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco3"]:$this->k02_desco3);
-       $this->k02_desco4 = ($this->k02_desco4 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco4"]:$this->k02_desco4);
-       $this->k02_desco5 = ($this->k02_desco5 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco5"]:$this->k02_desco5);
-       $this->k02_desco6 = ($this->k02_desco6 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco6"]:$this->k02_desco6);
+       $this->k02_juros = ($this->k02_juros === 0 || $this->k02_juros === 0.0 || $this->k02_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_juros"]:$this->k02_juros);
+       $this->k02_desco1 = ($this->k02_desco1 === 0 || $this->k02_desco1 === 0.0 || $this->k02_desco1 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco1"]:$this->k02_desco1);
+       $this->k02_desco2 = ($this->k02_desco2 === 0 || $this->k02_desco2 === 0.0 || $this->k02_desco2 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco2"]:$this->k02_desco2);
+       $this->k02_desco3 = ($this->k02_desco3 === 0 || $this->k02_desco3 === 0.0 || $this->k02_desco3 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco3"]:$this->k02_desco3);
+       $this->k02_desco4 = ($this->k02_desco4 === 0 || $this->k02_desco4 === 0.0 || $this->k02_desco4 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco4"]:$this->k02_desco4);
+       $this->k02_desco5 = ($this->k02_desco5 === 0 || $this->k02_desco5 === 0.0 || $this->k02_desco5 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco5"]:$this->k02_desco5);
+       $this->k02_desco6 = ($this->k02_desco6 === 0 || $this->k02_desco6 === 0.0 || $this->k02_desco6 == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_desco6"]:$this->k02_desco6);
        if($this->k02_dtdes1 == ""){
          $this->k02_dtdes1_dia = ($this->k02_dtdes1_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_dtdes1_dia"]:$this->k02_dtdes1_dia);
          $this->k02_dtdes1_mes = ($this->k02_dtdes1_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_dtdes1_mes"]:$this->k02_dtdes1_mes);
@@ -212,22 +212,22 @@ class cl_tabrecjm {
             $this->k02_dtfrac = $this->k02_dtfrac_ano."-".$this->k02_dtfrac_mes."-".$this->k02_dtfrac_dia;
          }
        }
-       $this->k02_mulfra = ($this->k02_mulfra == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_mulfra"]:$this->k02_mulfra);
-       $this->k02_limmul = ($this->k02_limmul == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_limmul"]:$this->k02_limmul);
-       $this->k02_jurpar = ($this->k02_jurpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_jurpar"]:$this->k02_jurpar);
+       $this->k02_mulfra = ($this->k02_mulfra === 0 || $this->k02_mulfra === 0.0 || $this->k02_mulfra == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_mulfra"]:$this->k02_mulfra);
+       $this->k02_limmul = ($this->k02_limmul === 0 || $this->k02_limmul === 0.0 || $this->k02_limmul == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_limmul"]:$this->k02_limmul);
+       $this->k02_jurpar = ($this->k02_jurpar === 0 || $this->k02_jurpar === 0.0 || $this->k02_jurpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_jurpar"]:$this->k02_jurpar);
        $this->k02_desjm = ($this->k02_desjm == "f"?@$GLOBALS["HTTP_POST_VARS"]["k02_desjm"]:$this->k02_desjm);
        $this->k02_caldes = ($this->k02_caldes == "f"?@$GLOBALS["HTTP_POST_VARS"]["k02_caldes"]:$this->k02_caldes);
        $this->k02_jurdia = ($this->k02_jurdia == "f"?@$GLOBALS["HTTP_POST_VARS"]["k02_jurdia"]:$this->k02_jurdia);
        $this->k02_juracu = ($this->k02_juracu == "f"?@$GLOBALS["HTTP_POST_VARS"]["k02_juracu"]:$this->k02_juracu);
        $this->k02_corven = ($this->k02_corven == "f"?@$GLOBALS["HTTP_POST_VARS"]["k02_corven"]:$this->k02_corven);
-       $this->k02_instit = ($this->k02_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_instit"]:$this->k02_instit);
+       $this->k02_instit = ($this->k02_instit === 0 || $this->k02_instit === 0.0 || $this->k02_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_instit"]:$this->k02_instit);
        $this->k02_sabdom = ($this->k02_sabdom == "f"?@$GLOBALS["HTTP_POST_VARS"]["k02_sabdom"]:$this->k02_sabdom);
-       $this->lixojur = ($this->lixojur == ""?@$GLOBALS["HTTP_POST_VARS"]["lixojur"]:$this->lixojur);
-       $this->lixomul = ($this->lixomul == ""?@$GLOBALS["HTTP_POST_VARS"]["lixomul"]:$this->lixomul);
-       $this->k02_jurparate = ($this->k02_jurparate == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_jurparate"]:$this->k02_jurparate);
-       $this->k02_juroslimite = ($this->k02_juroslimite == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_juroslimite"]:$this->k02_juroslimite);
+       $this->lixojur = ($this->lixojur === 0 || $this->lixojur === 0.0 || $this->lixojur == ""?@$GLOBALS["HTTP_POST_VARS"]["lixojur"]:$this->lixojur);
+       $this->lixomul = ($this->lixomul === 0 || $this->lixomul === 0.0 || $this->lixomul == ""?@$GLOBALS["HTTP_POST_VARS"]["lixomul"]:$this->lixomul);
+       $this->k02_jurparate = ($this->k02_jurparate === 0 || $this->k02_jurparate === 0.0 || $this->k02_jurparate == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_jurparate"]:$this->k02_jurparate);
+       $this->k02_juroslimite = ($this->k02_juroslimite === 0 || $this->k02_juroslimite === 0.0 || $this->k02_juroslimite == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_juroslimite"]:$this->k02_juroslimite);
      }else{
-       $this->k02_codjm = ($this->k02_codjm == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codjm"]:$this->k02_codjm);
+       $this->k02_codjm = ($this->k02_codjm === 0 || $this->k02_codjm === 0.0 || $this->k02_codjm == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codjm"]:$this->k02_codjm);
      }
    }
    // funcao para inclusao
@@ -335,7 +335,7 @@ class cl_tabrecjm {
          $this->k02_codjm = $k02_codjm; 
        }
      }
-     if(($this->k02_codjm == null) || ($this->k02_codjm == "") ){ 
+     if(($this->k02_codjm == null) || ($this->k02_codjm === 0 || $this->k02_codjm === 0.0 || $this->k02_codjm == "") ){ 
        $this->erro_sql = " Campo k02_codjm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -931,7 +931,7 @@ class cl_tabrecjm {
    function sql_query ( $k02_codjm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -953,7 +953,7 @@ class cl_tabrecjm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -966,7 +966,7 @@ class cl_tabrecjm {
    function sql_query_file ( $k02_codjm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -987,7 +987,7 @@ class cl_tabrecjm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

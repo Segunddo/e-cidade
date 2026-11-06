@@ -63,7 +63,7 @@ final class ArretipoRepository extends ArrebaseRepository
      * @param integer $tipo
      * @return Arretipo
      */
-    public function find($tipo)
+    public function find($tipo, $identificador = null) // PHP 8 (LSP): parametro da mae, opcional
     {
         $sql = $this->dao->sql_query_file($tipo);
 

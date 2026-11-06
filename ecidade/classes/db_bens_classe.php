@@ -100,10 +100,10 @@ class cl_bens
     public function atualizacampos($exclusao = false)
     {
         if($exclusao==false){
-            $this->t52_bem = ($this->t52_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_bem"]:$this->t52_bem);
-            $this->t52_codcla = ($this->t52_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_codcla"]:$this->t52_codcla);
-            $this->t52_numcgm = ($this->t52_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_numcgm"]:$this->t52_numcgm);
-            $this->t52_valaqu = ($this->t52_valaqu == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_valaqu"]:$this->t52_valaqu);
+            $this->t52_bem = ($this->t52_bem === 0 || $this->t52_bem === 0.0 || $this->t52_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_bem"]:$this->t52_bem);
+            $this->t52_codcla = ($this->t52_codcla === 0 || $this->t52_codcla === 0.0 || $this->t52_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_codcla"]:$this->t52_codcla);
+            $this->t52_numcgm = ($this->t52_numcgm === 0 || $this->t52_numcgm === 0.0 || $this->t52_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_numcgm"]:$this->t52_numcgm);
+            $this->t52_valaqu = ($this->t52_valaqu === 0 || $this->t52_valaqu === 0.0 || $this->t52_valaqu == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_valaqu"]:$this->t52_valaqu);
             if($this->t52_dtaqu == ""){
                 $this->t52_dtaqu_dia = ($this->t52_dtaqu_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_dtaqu_dia"]:$this->t52_dtaqu_dia);
                 $this->t52_dtaqu_mes = ($this->t52_dtaqu_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_dtaqu_mes"]:$this->t52_dtaqu_mes);
@@ -115,12 +115,12 @@ class cl_bens
             $this->t52_ident = ($this->t52_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_ident"]:$this->t52_ident);
             $this->t52_descr = ($this->t52_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_descr"]:$this->t52_descr);
             $this->t52_obs = ($this->t52_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_obs"]:$this->t52_obs);
-            $this->t52_depart = ($this->t52_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_depart"]:$this->t52_depart);
-            $this->t52_instit = ($this->t52_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_instit"]:$this->t52_instit);
-            $this->t52_bensmarca = ($this->t52_bensmarca == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_bensmarca"]:$this->t52_bensmarca);
-            $this->t52_bensmedida = ($this->t52_bensmedida == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_bensmedida"]:$this->t52_bensmedida);
-            $this->t52_bensmodelo = ($this->t52_bensmodelo == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_bensmodelo"]:$this->t52_bensmodelo);
-            $this->t52_foto = ($this->t52_foto == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_foto"]:$this->t52_foto);
+            $this->t52_depart = ($this->t52_depart === 0 || $this->t52_depart === 0.0 || $this->t52_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_depart"]:$this->t52_depart);
+            $this->t52_instit = ($this->t52_instit === 0 || $this->t52_instit === 0.0 || $this->t52_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_instit"]:$this->t52_instit);
+            $this->t52_bensmarca = ($this->t52_bensmarca === 0 || $this->t52_bensmarca === 0.0 || $this->t52_bensmarca == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_bensmarca"]:$this->t52_bensmarca);
+            $this->t52_bensmedida = ($this->t52_bensmedida === 0 || $this->t52_bensmedida === 0.0 || $this->t52_bensmedida == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_bensmedida"]:$this->t52_bensmedida);
+            $this->t52_bensmodelo = ($this->t52_bensmodelo === 0 || $this->t52_bensmodelo === 0.0 || $this->t52_bensmodelo == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_bensmodelo"]:$this->t52_bensmodelo);
+            $this->t52_foto = ($this->t52_foto === 0 || $this->t52_foto === 0.0 || $this->t52_foto == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_foto"]:$this->t52_foto);
             if($this->t52_dtinclusao == ""){
                 $this->t52_dtinclusao_dia = ($this->t52_dtinclusao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_dtinclusao_dia"]:$this->t52_dtinclusao_dia);
                 $this->t52_dtinclusao_mes = ($this->t52_dtinclusao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_dtinclusao_mes"]:$this->t52_dtinclusao_mes);
@@ -130,7 +130,7 @@ class cl_bens
                 }
             }
         }else{
-            $this->t52_bem = ($this->t52_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_bem"]:$this->t52_bem);
+            $this->t52_bem = ($this->t52_bem === 0 || $this->t52_bem === 0.0 || $this->t52_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t52_bem"]:$this->t52_bem);
         }
     }
 
@@ -252,7 +252,7 @@ class cl_bens
                 $this->t52_bem = $t52_bem;
             }
         }
-        if(($this->t52_bem == null) || ($this->t52_bem == "") ){
+        if(($this->t52_bem == null) || ($this->t52_bem === 0 || $this->t52_bem === 0.0 || $this->t52_bem == "") ){
             $this->erro_sql = " Campo t52_bem no declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usurio: \\n\\n ".$this->erro_sql." \\n\\n";

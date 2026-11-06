@@ -54,9 +54,9 @@ class cl_rhpessoalprocessoestatutario
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh278_sequencial = ($this->rh278_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh278_sequencial"]:$this->rh278_sequencial);
-       $this->rh278_sequencialprocessovinculo = ($this->rh278_sequencialprocessovinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh278_sequencialprocessovinculo"]:$this->rh278_sequencialprocessovinculo);
-       $this->rh278_tplnsc = ($this->rh278_tplnsc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh278_tplnsc"]:$this->rh278_tplnsc);
+       $this->rh278_sequencial = ($this->rh278_sequencial === 0 || $this->rh278_sequencial === 0.0 || $this->rh278_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh278_sequencial"]:$this->rh278_sequencial);
+       $this->rh278_sequencialprocessovinculo = ($this->rh278_sequencialprocessovinculo === 0 || $this->rh278_sequencialprocessovinculo === 0.0 || $this->rh278_sequencialprocessovinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh278_sequencialprocessovinculo"]:$this->rh278_sequencialprocessovinculo);
+       $this->rh278_tplnsc = ($this->rh278_tplnsc === 0 || $this->rh278_tplnsc === 0.0 || $this->rh278_tplnsc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh278_tplnsc"]:$this->rh278_tplnsc);
        $this->rh278_nrlnsc = ($this->rh278_nrlnsc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh278_nrlnsc"]:$this->rh278_nrlnsc);
        $this->rh278_matricant = ($this->rh278_matricant == ""?@$GLOBALS["HTTP_POST_VARS"]["rh278_matricant"]:$this->rh278_matricant);
        if($this->rh278_dttransf == ""){
@@ -68,7 +68,7 @@ class cl_rhpessoalprocessoestatutario
          }
        }
      }else{
-       $this->rh278_sequencial = ($this->rh278_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh278_sequencial"]:$this->rh278_sequencial);
+       $this->rh278_sequencial = ($this->rh278_sequencial === 0 || $this->rh278_sequencial === 0.0 || $this->rh278_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh278_sequencial"]:$this->rh278_sequencial);
      }
    }
 
@@ -138,7 +138,7 @@ class cl_rhpessoalprocessoestatutario
          $this->rh278_sequencial = $rh278_sequencial; 
        }
      }
-     if(($this->rh278_sequencial == null) || ($this->rh278_sequencial == "") ){ 
+     if(($this->rh278_sequencial == null) || ($this->rh278_sequencial === 0 || $this->rh278_sequencial === 0.0 || $this->rh278_sequencial == "") ){ 
        $this->erro_sql = " Campo rh278_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

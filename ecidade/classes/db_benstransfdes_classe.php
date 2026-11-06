@@ -52,7 +52,7 @@ class cl_benstransfdes {
                  t94_divisao = int4 = Divisão 
                  ";
    //funcao construtor da classe 
-   function cl_benstransfdes() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("benstransfdes"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_benstransfdes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t94_codtran = ($this->t94_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t94_codtran"]:$this->t94_codtran);
-       $this->t94_depart = ($this->t94_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["t94_depart"]:$this->t94_depart);
-       $this->t94_divisao = ($this->t94_divisao == ""?@$GLOBALS["HTTP_POST_VARS"]["t94_divisao"]:$this->t94_divisao);
+       $this->t94_codtran = ($this->t94_codtran === 0 || $this->t94_codtran === 0.0 || $this->t94_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t94_codtran"]:$this->t94_codtran);
+       $this->t94_depart = ($this->t94_depart === 0 || $this->t94_depart === 0.0 || $this->t94_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["t94_depart"]:$this->t94_depart);
+       $this->t94_divisao = ($this->t94_divisao === 0 || $this->t94_divisao === 0.0 || $this->t94_divisao == ""?@$GLOBALS["HTTP_POST_VARS"]["t94_divisao"]:$this->t94_divisao);
      }else{
-       $this->t94_codtran = ($this->t94_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t94_codtran"]:$this->t94_codtran);
-       $this->t94_depart = ($this->t94_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["t94_depart"]:$this->t94_depart);
+       $this->t94_codtran = ($this->t94_codtran === 0 || $this->t94_codtran === 0.0 || $this->t94_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t94_codtran"]:$this->t94_codtran);
+       $this->t94_depart = ($this->t94_depart === 0 || $this->t94_depart === 0.0 || $this->t94_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["t94_depart"]:$this->t94_depart);
      }
    }
    // funcao para inclusao
@@ -85,7 +85,7 @@ class cl_benstransfdes {
      }
        $this->t94_codtran = $t94_codtran; 
        $this->t94_depart = $t94_depart; 
-     if(($this->t94_codtran == null) || ($this->t94_codtran == "") ){ 
+     if(($this->t94_codtran == null) || ($this->t94_codtran === 0 || $this->t94_codtran === 0.0 || $this->t94_codtran == "") ){ 
        $this->erro_sql = " Campo t94_codtran nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -93,7 +93,7 @@ class cl_benstransfdes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->t94_depart == null) || ($this->t94_depart == "") ){ 
+     if(($this->t94_depart == null) || ($this->t94_depart === 0 || $this->t94_depart === 0.0 || $this->t94_depart == "") ){ 
        $this->erro_sql = " Campo t94_depart nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -338,7 +338,7 @@ class cl_benstransfdes {
    function sql_query ( $t94_codtran=null,$t94_depart=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -371,7 +371,7 @@ class cl_benstransfdes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_benstransfdes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_benstransfdes {
    function sql_query_lote( $t94_codtran=null,$t94_depart=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -462,7 +462,7 @@ class cl_benstransfdes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

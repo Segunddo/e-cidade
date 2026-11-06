@@ -50,7 +50,7 @@ class cl_divmatric {
                  v01_matric = int4 = matricula do cadastro imobiliário 
                  ";
    //funcao construtor da classe 
-   function cl_divmatric() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("divmatric"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_divmatric {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v01_coddiv = ($this->v01_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
-       $this->v01_matric = ($this->v01_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_matric"]:$this->v01_matric);
+       $this->v01_coddiv = (($this->v01_coddiv === 0 || $this->v01_coddiv === 0.0 || $this->v01_coddiv == "")?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
+       $this->v01_matric = (($this->v01_matric === 0 || $this->v01_matric === 0.0 || $this->v01_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["v01_matric"]:$this->v01_matric);
      }else{
-       $this->v01_coddiv = ($this->v01_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
+       $this->v01_coddiv = (($this->v01_coddiv === 0 || $this->v01_coddiv === 0.0 || $this->v01_coddiv == "")?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_divmatric {
        return false;
      }
        $this->v01_coddiv = $v01_coddiv; 
-     if(($this->v01_coddiv == null) || ($this->v01_coddiv == "") ){ 
+     if(($this->v01_coddiv == null) || (($this->v01_coddiv === 0 || $this->v01_coddiv === 0.0 || $this->v01_coddiv == "")) ){ 
        $this->erro_sql = " Campo v01_coddiv nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_divmatric {
    function sql_query ( $v01_coddiv=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -332,7 +332,7 @@ class cl_divmatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -344,7 +344,7 @@ class cl_divmatric {
    function sql_query_file ( $v01_coddiv=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_divmatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -45,7 +45,8 @@ $clobrastec      = new cl_obrastec;
 $clobrastecnicos = new cl_obrastecnicos;
 $clobrasconstr   = new cl_obrasconstr;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 if(!isset($codigo) || $codigo==''){
   
@@ -159,7 +160,7 @@ if (pg_num_rows($resulttexto) == 0 || $resulttexto == false) {
 for( $xx = 0;$xx < pg_numrows($resulttexto);$xx ++ ){
   db_fieldsmemory($resulttexto,$xx);
   $text  = $descrtexto;
-  $$text = db_geratexto($conteudotexto);
+  ${$text} = db_geratexto($conteudotexto);
 }
 ////////relatorio
 $pdf->SetFont('Arial','B',15);

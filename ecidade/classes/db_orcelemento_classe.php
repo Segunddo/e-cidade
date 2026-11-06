@@ -58,7 +58,7 @@ class cl_orcelemento {
                  o56_orcado = bool = Orçado
                  ";
    //funcao construtor da classe
-   function cl_orcelemento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcelemento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,15 +75,15 @@ class cl_orcelemento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o56_codele = ($this->o56_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_codele"]:$this->o56_codele);
-       $this->o56_anousu = ($this->o56_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_anousu"]:$this->o56_anousu);
+       $this->o56_codele = ($this->o56_codele === 0 || $this->o56_codele === 0.0 || $this->o56_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_codele"]:$this->o56_codele);
+       $this->o56_anousu = ($this->o56_anousu === 0 || $this->o56_anousu === 0.0 || $this->o56_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_anousu"]:$this->o56_anousu);
        $this->o56_elemento = ($this->o56_elemento == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_elemento"]:$this->o56_elemento);
        $this->o56_descr = ($this->o56_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_descr"]:$this->o56_descr);
        $this->o56_finali = ($this->o56_finali == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_finali"]:$this->o56_finali);
        $this->o56_orcado = ($this->o56_orcado == "f"?@$GLOBALS["HTTP_POST_VARS"]["o56_orcado"]:$this->o56_orcado);
      }else{
-       $this->o56_codele = ($this->o56_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_codele"]:$this->o56_codele);
-       $this->o56_anousu = ($this->o56_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_anousu"]:$this->o56_anousu);
+       $this->o56_codele = ($this->o56_codele === 0 || $this->o56_codele === 0.0 || $this->o56_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_codele"]:$this->o56_codele);
+       $this->o56_anousu = ($this->o56_anousu === 0 || $this->o56_anousu === 0.0 || $this->o56_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o56_anousu"]:$this->o56_anousu);
      }
    }
    // funcao para inclusao
@@ -118,7 +118,7 @@ class cl_orcelemento {
      }
        $this->o56_codele = $o56_codele;
        $this->o56_anousu = $o56_anousu;
-     if(($this->o56_codele == null) || ($this->o56_codele == "") ){
+     if(($this->o56_codele == null) || ($this->o56_codele === 0 || $this->o56_codele === 0.0 || $this->o56_codele == "") ){
        $this->erro_sql = " Campo o56_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -126,7 +126,7 @@ class cl_orcelemento {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o56_anousu == null) || ($this->o56_anousu == "") ){
+     if(($this->o56_anousu == null) || ($this->o56_anousu === 0 || $this->o56_anousu === 0.0 || $this->o56_anousu == "") ){
        $this->erro_sql = " Campo o56_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

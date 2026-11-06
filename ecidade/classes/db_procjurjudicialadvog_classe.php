@@ -54,7 +54,7 @@ class cl_procjurjudicialadvog {
                  v65_principal = bool = Principal 
                  ";
    //funcao construtor da classe 
-   function cl_procjurjudicialadvog() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procjurjudicialadvog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_procjurjudicialadvog {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v65_sequencial = ($this->v65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v65_sequencial"]:$this->v65_sequencial);
-       $this->v65_advog = ($this->v65_advog == ""?@$GLOBALS["HTTP_POST_VARS"]["v65_advog"]:$this->v65_advog);
-       $this->v65_procjurjudicial = ($this->v65_procjurjudicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v65_procjurjudicial"]:$this->v65_procjurjudicial);
+       $this->v65_sequencial = ($this->v65_sequencial === 0 || $this->v65_sequencial === 0.0 || $this->v65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v65_sequencial"]:$this->v65_sequencial);
+       $this->v65_advog = ($this->v65_advog === 0 || $this->v65_advog === 0.0 || $this->v65_advog == ""?@$GLOBALS["HTTP_POST_VARS"]["v65_advog"]:$this->v65_advog);
+       $this->v65_procjurjudicial = ($this->v65_procjurjudicial === 0 || $this->v65_procjurjudicial === 0.0 || $this->v65_procjurjudicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v65_procjurjudicial"]:$this->v65_procjurjudicial);
        $this->v65_principal = ($this->v65_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["v65_principal"]:$this->v65_principal);
      }else{
-       $this->v65_sequencial = ($this->v65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v65_sequencial"]:$this->v65_sequencial);
+       $this->v65_sequencial = ($this->v65_sequencial === 0 || $this->v65_sequencial === 0.0 || $this->v65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v65_sequencial"]:$this->v65_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_procjurjudicialadvog {
          $this->v65_sequencial = $v65_sequencial; 
        }
      }
-     if(($this->v65_sequencial == null) || ($this->v65_sequencial == "") ){ 
+     if(($this->v65_sequencial == null) || ($this->v65_sequencial === 0 || $this->v65_sequencial === 0.0 || $this->v65_sequencial == "") ){ 
        $this->erro_sql = " Campo v65_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_procjurjudicialadvog {
    function sql_query ( $v65_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_procjurjudicialadvog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_procjurjudicialadvog {
    function sql_query_file ( $v65_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_procjurjudicialadvog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -465,7 +465,7 @@ class cl_procjurjudicialadvog {
    function sql_query_susp ( $v65_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_procjurjudicialadvog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

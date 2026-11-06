@@ -52,7 +52,7 @@ class cl_carconstr {
                  j48_caract = int4 = Caracteristica
                  ";
    //funcao construtor da classe
-   function cl_carconstr() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("carconstr");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,13 +69,13 @@ class cl_carconstr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j48_matric = ($this->j48_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j48_matric"]:$this->j48_matric);
-       $this->j48_idcons = ($this->j48_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j48_idcons"]:$this->j48_idcons);
-       $this->j48_caract = ($this->j48_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j48_caract"]:$this->j48_caract);
+       $this->j48_matric = (($this->j48_matric === 0 || $this->j48_matric === 0.0 || $this->j48_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j48_matric"]:$this->j48_matric);
+       $this->j48_idcons = (($this->j48_idcons === 0 || $this->j48_idcons === 0.0 || $this->j48_idcons == "")?@$GLOBALS["HTTP_POST_VARS"]["j48_idcons"]:$this->j48_idcons);
+       $this->j48_caract = (($this->j48_caract === 0 || $this->j48_caract === 0.0 || $this->j48_caract == "")?@$GLOBALS["HTTP_POST_VARS"]["j48_caract"]:$this->j48_caract);
      }else{
-       $this->j48_matric = ($this->j48_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j48_matric"]:$this->j48_matric);
-       $this->j48_idcons = ($this->j48_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j48_idcons"]:$this->j48_idcons);
-       $this->j48_caract = ($this->j48_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j48_caract"]:$this->j48_caract);
+       $this->j48_matric = (($this->j48_matric === 0 || $this->j48_matric === 0.0 || $this->j48_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j48_matric"]:$this->j48_matric);
+       $this->j48_idcons = (($this->j48_idcons === 0 || $this->j48_idcons === 0.0 || $this->j48_idcons == "")?@$GLOBALS["HTTP_POST_VARS"]["j48_idcons"]:$this->j48_idcons);
+       $this->j48_caract = (($this->j48_caract === 0 || $this->j48_caract === 0.0 || $this->j48_caract == "")?@$GLOBALS["HTTP_POST_VARS"]["j48_caract"]:$this->j48_caract);
      }
    }
    // funcao para inclusao
@@ -84,7 +84,7 @@ class cl_carconstr {
        $this->j48_matric = $j48_matric;
        $this->j48_idcons = $j48_idcons;
        $this->j48_caract = $j48_caract;
-     if(($this->j48_matric == null) || ($this->j48_matric == "") ){
+     if(($this->j48_matric == null) || (($this->j48_matric === 0 || $this->j48_matric === 0.0 || $this->j48_matric == "")) ){
        $this->erro_sql = " Campo j48_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -92,7 +92,7 @@ class cl_carconstr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j48_idcons == null) || ($this->j48_idcons == "") ){
+     if(($this->j48_idcons == null) || (($this->j48_idcons === 0 || $this->j48_idcons === 0.0 || $this->j48_idcons == "")) ){
        $this->erro_sql = " Campo j48_idcons nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -100,7 +100,7 @@ class cl_carconstr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j48_caract == null) || ($this->j48_caract == "") ){
+     if(($this->j48_caract == null) || (($this->j48_caract === 0 || $this->j48_caract === 0.0 || $this->j48_caract == "")) ){
        $this->erro_sql = " Campo j48_caract nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

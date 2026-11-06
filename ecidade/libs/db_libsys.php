@@ -112,7 +112,7 @@ class cl_dbagata {
   var $api;
   var $arquivo = "";
 
-  function cl_dbagata($_relatorio='') {
+  function __construct($_relatorio='') {
     $this->api = new \AgataAPI;
     $this->api->setLanguage('pt'); //'en', 'pt', 'es', 'de', 'fr', 'it', 'se'
 
@@ -143,7 +143,7 @@ class cl_dbagata {
      */
     $sSqlMenuAcess = "SELECT fc_montamenu(funcao) as menu from db_itensmenu where id_item =".db_getsession("DB_itemmenu_acessado");
     $rsMenuAcess   = db_query($sSqlMenuAcess);
-    $sMenuAcess    = substr(pg_result($rsMenuAcess,0,"menu"), 0, 50);
+    $sMenuAcess    = $rsMenuAcess ? substr(pg_result($rsMenuAcess,0,"menu"), 0, 50) : "";
 
     $this->api->setParameter('$db_item_menu_extenso',trim($sMenuAcess));
 

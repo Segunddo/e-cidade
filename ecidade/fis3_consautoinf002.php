@@ -32,13 +32,13 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_auto_classe.php"));
 include(modification("classes/db_autolocal_classe.php"));
 include(modification("classes/db_autoexec_classe.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 $clauto = new cl_auto;
 $clautolocal = new cl_autolocal;
 $clautoexec = new cl_autoexec;
 $sql = " ";
 $result = $clauto->sql_record($clauto->sql_query($codauto,"*",null," y50_codauto = $codauto and y50_instit = ".db_getsession('DB_instit') ));
-$num = pg_numrows($result);
+$num = ($result ? pg_numrows($result) : 0);
   
 ?>
 

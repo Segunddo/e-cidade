@@ -52,7 +52,7 @@ class cl_procvar {
                  p54_obrigatorio = bool = Obrigatório 
                  ";
    //funcao construtor da classe 
-   function cl_procvar() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procvar"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_procvar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p54_codigo = ($this->p54_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p54_codigo"]:$this->p54_codigo);
-       $this->p54_codcam = ($this->p54_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["p54_codcam"]:$this->p54_codcam);
+       $this->p54_codigo = ($this->p54_codigo === 0 || $this->p54_codigo === 0.0 || $this->p54_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p54_codigo"]:$this->p54_codigo);
+       $this->p54_codcam = ($this->p54_codcam === 0 || $this->p54_codcam === 0.0 || $this->p54_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["p54_codcam"]:$this->p54_codcam);
        $this->p54_obrigatorio = ($this->p54_obrigatorio == "f"?@$GLOBALS["HTTP_POST_VARS"]["p54_obrigatorio"]:$this->p54_obrigatorio);
      }else{
-       $this->p54_codigo = ($this->p54_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p54_codigo"]:$this->p54_codigo);
-       $this->p54_codcam = ($this->p54_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["p54_codcam"]:$this->p54_codcam);
+       $this->p54_codigo = ($this->p54_codigo === 0 || $this->p54_codigo === 0.0 || $this->p54_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p54_codigo"]:$this->p54_codigo);
+       $this->p54_codcam = ($this->p54_codcam === 0 || $this->p54_codcam === 0.0 || $this->p54_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["p54_codcam"]:$this->p54_codcam);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_procvar {
      }
        $this->p54_codigo = $p54_codigo; 
        $this->p54_codcam = $p54_codcam; 
-     if(($this->p54_codigo == null) || ($this->p54_codigo == "") ){ 
+     if(($this->p54_codigo == null) || ($this->p54_codigo === 0 || $this->p54_codigo === 0.0 || $this->p54_codigo == "") ){ 
        $this->erro_sql = " Campo p54_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_procvar {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p54_codcam == null) || ($this->p54_codcam == "") ){ 
+     if(($this->p54_codcam == null) || ($this->p54_codcam === 0 || $this->p54_codcam === 0.0 || $this->p54_codcam == "") ){ 
        $this->erro_sql = " Campo p54_codcam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -372,7 +372,7 @@ class cl_procvar {
    function sql_query ( $p54_codigo=null,$p54_codcam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_procvar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_procvar {
    function sql_query_file ( $p54_codigo=null,$p54_codcam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_procvar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_procvar {
    function sql_query_varconteudo ($p55_codproc=null,$p54_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -491,7 +491,7 @@ class cl_procvar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

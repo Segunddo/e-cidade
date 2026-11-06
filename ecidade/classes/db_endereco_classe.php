@@ -62,7 +62,7 @@ class cl_endereco {
                  db76_cep = char(8) = Cep 
                  ";
    //funcao construtor da classe 
-   function cl_endereco() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("endereco"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,8 +79,8 @@ class cl_endereco {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db76_sequencial = ($this->db76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_sequencial"]:$this->db76_sequencial);
-       $this->db76_cadenderlocal = ($this->db76_cadenderlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_cadenderlocal"]:$this->db76_cadenderlocal);
+       $this->db76_sequencial = ($this->db76_sequencial === 0 || $this->db76_sequencial === 0.0 || $this->db76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_sequencial"]:$this->db76_sequencial);
+       $this->db76_cadenderlocal = ($this->db76_cadenderlocal === 0 || $this->db76_cadenderlocal === 0.0 || $this->db76_cadenderlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_cadenderlocal"]:$this->db76_cadenderlocal);
        $this->db76_complemento = ($this->db76_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_complemento"]:$this->db76_complemento);
        $this->db76_caixapostal = ($this->db76_caixapostal == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_caixapostal"]:$this->db76_caixapostal);
        $this->db76_loteamento = ($this->db76_loteamento == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_loteamento"]:$this->db76_loteamento);
@@ -88,7 +88,7 @@ class cl_endereco {
        $this->db76_pontoref = ($this->db76_pontoref == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_pontoref"]:$this->db76_pontoref);
        $this->db76_cep = ($this->db76_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_cep"]:$this->db76_cep);
      }else{
-       $this->db76_sequencial = ($this->db76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_sequencial"]:$this->db76_sequencial);
+       $this->db76_sequencial = ($this->db76_sequencial === 0 || $this->db76_sequencial === 0.0 || $this->db76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db76_sequencial"]:$this->db76_sequencial);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_endereco {
          $this->db76_sequencial = $db76_sequencial; 
        }
      }
-     if(($this->db76_sequencial == null) || ($this->db76_sequencial == "") ){ 
+     if(($this->db76_sequencial == null) || ($this->db76_sequencial === 0 || $this->db76_sequencial === 0.0 || $this->db76_sequencial == "") ){ 
        $this->erro_sql = " Campo db76_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -407,7 +407,7 @@ class cl_endereco {
    function sql_query ( $db76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_endereco {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_endereco {
    function sql_query_file ( $db76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -464,7 +464,7 @@ class cl_endereco {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

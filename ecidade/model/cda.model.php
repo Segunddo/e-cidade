@@ -1223,7 +1223,7 @@ class cda
 
             $aRetornoDebitos = array();
             for ($i = 0; $i < count($aDebitos); $i++) {
-                if ($aDebitos[$i]->origem{0} == 'M') {
+                if ($aDebitos[$i]->origem[0] == 'M') {
                     if (isset($aDebitos[$i]->j34_setor) && $aDebitos[$i]->j34_setor != ""
                         && isset($aDebitos[$i]->j34_quadra) && $aDebitos[$i]->j34_quadra != ""
                         && isset($aDebitos[$i]->j34_lote) && $aDebitos[$i]->j34_lote != "") {
@@ -1232,7 +1232,7 @@ class cda
                     } else {
                         $aDebitos[$i]->origemdebito = $aDebitos[$i]->j34_lote;
                     }
-                } elseif ($aDebitos[$i]->origem{0} == 'I') {
+                } elseif ($aDebitos[$i]->origem[0] == 'I') {
                     $aDebitos[$i]->origemdebito = ucfirst($aDebitos[$i]->origem);
                 } else {
                     $aDebitos[$i]->origemdebito = ucfirst($aDebitos[$i]->origem);

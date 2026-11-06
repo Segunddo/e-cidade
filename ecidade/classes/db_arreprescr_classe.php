@@ -90,7 +90,7 @@ class cl_arreprescr {
                  k30_anulado = bool = Anulado 
                  ";
    //funcao construtor da classe 
-   function cl_arreprescr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("arreprescr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -107,10 +107,10 @@ class cl_arreprescr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k30_sequencial = ($this->k30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_sequencial"]:$this->k30_sequencial);
-       $this->k30_numpre = ($this->k30_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_numpre"]:$this->k30_numpre);
-       $this->k30_numpar = ($this->k30_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_numpar"]:$this->k30_numpar);
-       $this->k30_numcgm = ($this->k30_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_numcgm"]:$this->k30_numcgm);
+       $this->k30_sequencial = (($this->k30_sequencial === 0 || $this->k30_sequencial === 0.0 || $this->k30_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_sequencial"]:$this->k30_sequencial);
+       $this->k30_numpre = (($this->k30_numpre === 0 || $this->k30_numpre === 0.0 || $this->k30_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_numpre"]:$this->k30_numpre);
+       $this->k30_numpar = (($this->k30_numpar === 0 || $this->k30_numpar === 0.0 || $this->k30_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_numpar"]:$this->k30_numpar);
+       $this->k30_numcgm = (($this->k30_numcgm === 0 || $this->k30_numcgm === 0.0 || $this->k30_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_numcgm"]:$this->k30_numcgm);
        if($this->k30_dtoper == ""){
          $this->k30_dtoper_dia = ($this->k30_dtoper_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_dtoper_dia"]:$this->k30_dtoper_dia);
          $this->k30_dtoper_mes = ($this->k30_dtoper_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_dtoper_mes"]:$this->k30_dtoper_mes);
@@ -119,9 +119,9 @@ class cl_arreprescr {
             $this->k30_dtoper = $this->k30_dtoper_ano."-".$this->k30_dtoper_mes."-".$this->k30_dtoper_dia;
          }
        }
-       $this->k30_receit = ($this->k30_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_receit"]:$this->k30_receit);
-       $this->k30_hist = ($this->k30_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_hist"]:$this->k30_hist);
-       $this->k30_valor = ($this->k30_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_valor"]:$this->k30_valor);
+       $this->k30_receit = (($this->k30_receit === 0 || $this->k30_receit === 0.0 || $this->k30_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_receit"]:$this->k30_receit);
+       $this->k30_hist = (($this->k30_hist === 0 || $this->k30_hist === 0.0 || $this->k30_hist == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_hist"]:$this->k30_hist);
+       $this->k30_valor = (($this->k30_valor === 0 || $this->k30_valor === 0.0 || $this->k30_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_valor"]:$this->k30_valor);
        if($this->k30_dtvenc == ""){
          $this->k30_dtvenc_dia = ($this->k30_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_dtvenc_dia"]:$this->k30_dtvenc_dia);
          $this->k30_dtvenc_mes = ($this->k30_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_dtvenc_mes"]:$this->k30_dtvenc_mes);
@@ -130,18 +130,18 @@ class cl_arreprescr {
             $this->k30_dtvenc = $this->k30_dtvenc_ano."-".$this->k30_dtvenc_mes."-".$this->k30_dtvenc_dia;
          }
        }
-       $this->k30_numtot = ($this->k30_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_numtot"]:$this->k30_numtot);
-       $this->k30_numdig = ($this->k30_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_numdig"]:$this->k30_numdig);
-       $this->k30_tipo = ($this->k30_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_tipo"]:$this->k30_tipo);
-       $this->k30_tipojm = ($this->k30_tipojm == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_tipojm"]:$this->k30_tipojm);
-       $this->k30_prescricao = ($this->k30_prescricao == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_prescricao"]:$this->k30_prescricao);
-       $this->k30_vlrcorr = ($this->k30_vlrcorr == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_vlrcorr"]:$this->k30_vlrcorr);
-       $this->k30_vlrjuros = ($this->k30_vlrjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_vlrjuros"]:$this->k30_vlrjuros);
-       $this->k30_multa = ($this->k30_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_multa"]:$this->k30_multa);
-       $this->k30_desconto = ($this->k30_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_desconto"]:$this->k30_desconto);
+       $this->k30_numtot = (($this->k30_numtot === 0 || $this->k30_numtot === 0.0 || $this->k30_numtot == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_numtot"]:$this->k30_numtot);
+       $this->k30_numdig = (($this->k30_numdig === 0 || $this->k30_numdig === 0.0 || $this->k30_numdig == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_numdig"]:$this->k30_numdig);
+       $this->k30_tipo = (($this->k30_tipo === 0 || $this->k30_tipo === 0.0 || $this->k30_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_tipo"]:$this->k30_tipo);
+       $this->k30_tipojm = (($this->k30_tipojm === 0 || $this->k30_tipojm === 0.0 || $this->k30_tipojm == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_tipojm"]:$this->k30_tipojm);
+       $this->k30_prescricao = (($this->k30_prescricao === 0 || $this->k30_prescricao === 0.0 || $this->k30_prescricao == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_prescricao"]:$this->k30_prescricao);
+       $this->k30_vlrcorr = (($this->k30_vlrcorr === 0 || $this->k30_vlrcorr === 0.0 || $this->k30_vlrcorr == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_vlrcorr"]:$this->k30_vlrcorr);
+       $this->k30_vlrjuros = (($this->k30_vlrjuros === 0 || $this->k30_vlrjuros === 0.0 || $this->k30_vlrjuros == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_vlrjuros"]:$this->k30_vlrjuros);
+       $this->k30_multa = (($this->k30_multa === 0 || $this->k30_multa === 0.0 || $this->k30_multa == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_multa"]:$this->k30_multa);
+       $this->k30_desconto = (($this->k30_desconto === 0 || $this->k30_desconto === 0.0 || $this->k30_desconto == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_desconto"]:$this->k30_desconto);
        $this->k30_anulado = ($this->k30_anulado == "f"?@$GLOBALS["HTTP_POST_VARS"]["k30_anulado"]:$this->k30_anulado);
      }else{
-       $this->k30_sequencial = ($this->k30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k30_sequencial"]:$this->k30_sequencial);
+       $this->k30_sequencial = (($this->k30_sequencial === 0 || $this->k30_sequencial === 0.0 || $this->k30_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k30_sequencial"]:$this->k30_sequencial);
      }
    }
    // funcao para inclusao
@@ -333,7 +333,7 @@ class cl_arreprescr {
          $this->k30_sequencial = $k30_sequencial; 
        }
      }
-     if(($this->k30_sequencial == null) || ($this->k30_sequencial == "") ){ 
+     if(($this->k30_sequencial == null) || (($this->k30_sequencial === 0 || $this->k30_sequencial === 0.0 || $this->k30_sequencial == "")) ){ 
        $this->erro_sql = " Campo k30_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -904,7 +904,7 @@ class cl_arreprescr {
    function sql_query ( $k30_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -932,7 +932,7 @@ class cl_arreprescr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -945,7 +945,7 @@ class cl_arreprescr {
    function sql_query_file ( $k30_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -966,7 +966,7 @@ class cl_arreprescr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -989,7 +989,7 @@ class cl_arreprescr {
   
    if ( $sCampos != "*" ) {
   
-    $sCampos_sql = split("#", $sCampos);
+    $sCampos_sql = explode("#", $sCampos);
     $virgula    = "";
   
     for ($i = 0; $i < sizeof($sCampos_sql); $i++) {
@@ -1030,7 +1030,7 @@ class cl_arreprescr {
    if ( $sOrdem != null ) {
   
     $sSql       .= " order by ";
-    $sCampos_sql = split("#", $sOrdem);
+    $sCampos_sql = explode("#", $sOrdem);
     $virgula    = "";
   
     for ($i = 0; $i < sizeof($sCampos_sql); $i++) {

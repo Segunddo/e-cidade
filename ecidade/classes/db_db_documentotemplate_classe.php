@@ -56,7 +56,7 @@ class cl_db_documentotemplate {
                  db82_arquivo = oid = Arquivo
                  ";
    //funcao construtor da classe
-   function cl_db_documentotemplate() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_documentotemplate");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_db_documentotemplate {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db82_sequencial = ($this->db82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db82_sequencial"]:$this->db82_sequencial);
-       $this->db82_templatetipo = ($this->db82_templatetipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db82_templatetipo"]:$this->db82_templatetipo);
-       $this->db82_instit = ($this->db82_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db82_instit"]:$this->db82_instit);
+       $this->db82_sequencial = (($this->db82_sequencial === 0 || $this->db82_sequencial === 0.0 || $this->db82_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["db82_sequencial"]:$this->db82_sequencial);
+       $this->db82_templatetipo = (($this->db82_templatetipo === 0 || $this->db82_templatetipo === 0.0 || $this->db82_templatetipo == "")?@$GLOBALS["HTTP_POST_VARS"]["db82_templatetipo"]:$this->db82_templatetipo);
+       $this->db82_instit = (($this->db82_instit === 0 || $this->db82_instit === 0.0 || $this->db82_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["db82_instit"]:$this->db82_instit);
        $this->db82_descricao = ($this->db82_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db82_descricao"]:$this->db82_descricao);
-       $this->db82_arquivo = ($this->db82_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["db82_arquivo"]:$this->db82_arquivo);
+       $this->db82_arquivo = (($this->db82_arquivo === 0 || $this->db82_arquivo === 0.0 || $this->db82_arquivo == "")?@$GLOBALS["HTTP_POST_VARS"]["db82_arquivo"]:$this->db82_arquivo);
      }else{
-       $this->db82_sequencial = ($this->db82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db82_sequencial"]:$this->db82_sequencial);
+       $this->db82_sequencial = (($this->db82_sequencial === 0 || $this->db82_sequencial === 0.0 || $this->db82_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["db82_sequencial"]:$this->db82_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_db_documentotemplate {
          $this->db82_sequencial = $db82_sequencial;
        }
      }
-     if(($this->db82_sequencial == null) || ($this->db82_sequencial == "") ){
+     if(($this->db82_sequencial == null) || (($this->db82_sequencial === 0 || $this->db82_sequencial === 0.0 || $this->db82_sequencial == "")) ){
        $this->erro_sql = " Campo db82_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

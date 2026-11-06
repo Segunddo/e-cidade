@@ -56,7 +56,7 @@ class cl_cartorio {
                  v82_extrajudicial = bool = Extrajudicial
                  ";
    //funcao construtor da classe
-   function cl_cartorio() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cartorio");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_cartorio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v82_sequencial = ($this->v82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v82_sequencial"]:$this->v82_sequencial);
+       $this->v82_sequencial = (($this->v82_sequencial === 0 || $this->v82_sequencial === 0.0 || $this->v82_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v82_sequencial"]:$this->v82_sequencial);
        $this->v82_descricao = ($this->v82_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["v82_descricao"]:$this->v82_descricao);
-       $this->v82_numcgm = ($this->v82_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v82_numcgm"]:$this->v82_numcgm);
+       $this->v82_numcgm = (($this->v82_numcgm === 0 || $this->v82_numcgm === 0.0 || $this->v82_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["v82_numcgm"]:$this->v82_numcgm);
        $this->v82_obs = ($this->v82_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["v82_obs"]:$this->v82_obs);
        $this->v82_extrajudicial = ($this->v82_extrajudicial == "f"?@$GLOBALS["HTTP_POST_VARS"]["v82_extrajudicial"]:$this->v82_extrajudicial);
      }else{
-       $this->v82_sequencial = ($this->v82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v82_sequencial"]:$this->v82_sequencial);
+       $this->v82_sequencial = (($this->v82_sequencial === 0 || $this->v82_sequencial === 0.0 || $this->v82_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v82_sequencial"]:$this->v82_sequencial);
      }
    }
    // funcao para Inclusão
@@ -130,7 +130,7 @@ class cl_cartorio {
          $this->v82_sequencial = $v82_sequencial;
        }
      }
-     if(($this->v82_sequencial == null) || ($this->v82_sequencial == "") ){
+     if(($this->v82_sequencial == null) || (($this->v82_sequencial === 0 || $this->v82_sequencial === 0.0 || $this->v82_sequencial == "")) ){
        $this->erro_sql = " Campo v82_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

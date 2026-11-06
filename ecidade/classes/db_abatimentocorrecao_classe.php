@@ -30,7 +30,7 @@ class cl_abatimentocorrecao {
                  k167_abatimento = int4 = Código do Abatimento 
                  ";
    //funcao construtor da classe 
-   function cl_abatimentocorrecao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("abatimentocorrecao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,9 +47,9 @@ class cl_abatimentocorrecao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k167_sequencial = ($this->k167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k167_sequencial"]:$this->k167_sequencial);
-       $this->k167_valorantigo = ($this->k167_valorantigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k167_valorantigo"]:$this->k167_valorantigo);
-       $this->k167_valorcorrigido = ($this->k167_valorcorrigido == ""?@$GLOBALS["HTTP_POST_VARS"]["k167_valorcorrigido"]:$this->k167_valorcorrigido);
+       $this->k167_sequencial = ($this->k167_sequencial === 0 || $this->k167_sequencial === 0.0 || $this->k167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k167_sequencial"]:$this->k167_sequencial);
+       $this->k167_valorantigo = ($this->k167_valorantigo === 0 || $this->k167_valorantigo === 0.0 || $this->k167_valorantigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k167_valorantigo"]:$this->k167_valorantigo);
+       $this->k167_valorcorrigido = ($this->k167_valorcorrigido === 0 || $this->k167_valorcorrigido === 0.0 || $this->k167_valorcorrigido == ""?@$GLOBALS["HTTP_POST_VARS"]["k167_valorcorrigido"]:$this->k167_valorcorrigido);
        if($this->k167_data == ""){
          $this->k167_data_dia = @$GLOBALS["HTTP_POST_VARS"]["k167_data_dia"];
          $this->k167_data_mes = @$GLOBALS["HTTP_POST_VARS"]["k167_data_mes"];
@@ -58,9 +58,9 @@ class cl_abatimentocorrecao {
             $this->k167_data = $this->k167_data_ano."-".$this->k167_data_mes."-".$this->k167_data_dia;
          }
        }
-       $this->k167_abatimento = ($this->k167_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k167_abatimento"]:$this->k167_abatimento);
+       $this->k167_abatimento = ($this->k167_abatimento === 0 || $this->k167_abatimento === 0.0 || $this->k167_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k167_abatimento"]:$this->k167_abatimento);
      }else{
-       $this->k167_sequencial = ($this->k167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k167_sequencial"]:$this->k167_sequencial);
+       $this->k167_sequencial = ($this->k167_sequencial === 0 || $this->k167_sequencial === 0.0 || $this->k167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k167_sequencial"]:$this->k167_sequencial);
      }
    }
    // funcao para inclusao
@@ -126,7 +126,7 @@ class cl_abatimentocorrecao {
          $this->k167_sequencial = $k167_sequencial; 
        }
      }
-     if(($this->k167_sequencial == null) || ($this->k167_sequencial == "") ){ 
+     if(($this->k167_sequencial == null) || ($this->k167_sequencial === 0 || $this->k167_sequencial === 0.0 || $this->k167_sequencial == "") ){ 
        $this->erro_sql = " Campo k167_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -403,7 +403,7 @@ class cl_abatimentocorrecao {
    function sql_query ( $k167_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_abatimentocorrecao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -442,7 +442,7 @@ class cl_abatimentocorrecao {
    function sql_query_file ( $k167_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -463,7 +463,7 @@ class cl_abatimentocorrecao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

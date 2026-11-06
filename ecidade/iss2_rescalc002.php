@@ -38,7 +38,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('z01_nome');
 $clrotulo->label('q02_inscr');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $where=" 1=1 ";
 
 if ($tipo=="E"){

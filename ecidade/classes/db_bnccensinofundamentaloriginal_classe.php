@@ -78,7 +78,7 @@ class cl_bnccensinofundamentaloriginal
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed166_sequencial = ($this->ed166_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed166_sequencial"] : $this->ed166_sequencial);
+            $this->ed166_sequencial = ($this->ed166_sequencial === 0 || $this->ed166_sequencial === 0.0 || $this->ed166_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed166_sequencial"] : $this->ed166_sequencial);
             $this->ed166_disciplina = ($this->ed166_disciplina == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed166_disciplina"] : $this->ed166_disciplina);
             $this->ed166_etapa = ($this->ed166_etapa == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed166_etapa"] : $this->ed166_etapa);
             $this->ed166_codigo = ($this->ed166_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed166_codigo"] : $this->ed166_codigo);
@@ -86,7 +86,7 @@ class cl_bnccensinofundamentaloriginal
             $this->ed166_objeto_conhecimento = ($this->ed166_objeto_conhecimento == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed166_objeto_conhecimento"] : $this->ed166_objeto_conhecimento);
             $this->ed166_habilidade = ($this->ed166_habilidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed166_habilidade"] : $this->ed166_habilidade);
         } else {
-            $this->ed166_sequencial = ($this->ed166_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed166_sequencial"] : $this->ed166_sequencial);
+            $this->ed166_sequencial = ($this->ed166_sequencial === 0 || $this->ed166_sequencial === 0.0 || $this->ed166_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed166_sequencial"] : $this->ed166_sequencial);
         }
     }
 
@@ -171,7 +171,7 @@ class cl_bnccensinofundamentaloriginal
                 $this->ed166_sequencial = $ed166_sequencial;
             }
         }
-        if (($this->ed166_sequencial == null) || ($this->ed166_sequencial == "")) {
+        if (($this->ed166_sequencial == null) || ($this->ed166_sequencial === 0 || $this->ed166_sequencial === 0.0 || $this->ed166_sequencial == "")) {
             $this->erro_sql = " Campo ed166_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -547,7 +547,7 @@ class cl_bnccensinofundamentaloriginal
         return $sql;
     }
 
-    public function sql_query_completa($ed166_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "", $ano)
+    public function sql_query_completa($ed166_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "", $ano = null)
     {
         $sql = "select {$campos}
                 from bnccensinofundamentaloriginal

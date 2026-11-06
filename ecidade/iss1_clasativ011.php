@@ -72,7 +72,7 @@ if ((isset($q12_classe) && $q12_classe!="") && (isset($atualizar))){
   for($i=0; $i<$ta; $i++){
     $chave=key($vt);
     if(substr($chave,0,5)=="CHECK"){
-      $dados=split("_",$chave); 
+      $dados=preg_split("#_#m",$chave); 
       $clclasativ->q82_ativ=$dados[1];
       $clclasativ->q82_classe=$q12_classe;
       $clclasativ->incluir($dados[1],$q12_classe);

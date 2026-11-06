@@ -45,11 +45,11 @@ class cl_areahistmpsdisc
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed171_codigo = ($this->ed171_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed171_codigo"]:$this->ed171_codigo);
-       $this->ed171_historicompsarea = ($this->ed171_historicompsarea == ""?@$GLOBALS["HTTP_POST_VARS"]["ed171_historicompsarea"]:$this->ed171_historicompsarea);
-       $this->ed171_histmpsdisc = ($this->ed171_histmpsdisc == ""?@$GLOBALS["HTTP_POST_VARS"]["ed171_histmpsdisc"]:$this->ed171_histmpsdisc);
+       $this->ed171_codigo = ($this->ed171_codigo === 0 || $this->ed171_codigo === 0.0 || $this->ed171_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed171_codigo"]:$this->ed171_codigo);
+       $this->ed171_historicompsarea = ($this->ed171_historicompsarea === 0 || $this->ed171_historicompsarea === 0.0 || $this->ed171_historicompsarea == ""?@$GLOBALS["HTTP_POST_VARS"]["ed171_historicompsarea"]:$this->ed171_historicompsarea);
+       $this->ed171_histmpsdisc = ($this->ed171_histmpsdisc === 0 || $this->ed171_histmpsdisc === 0.0 || $this->ed171_histmpsdisc == ""?@$GLOBALS["HTTP_POST_VARS"]["ed171_histmpsdisc"]:$this->ed171_histmpsdisc);
      }else{
-       $this->ed171_codigo = ($this->ed171_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed171_codigo"]:$this->ed171_codigo);
+       $this->ed171_codigo = ($this->ed171_codigo === 0 || $this->ed171_codigo === 0.0 || $this->ed171_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed171_codigo"]:$this->ed171_codigo);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_areahistmpsdisc
          $this->ed171_codigo = $ed171_codigo; 
        }
      }
-     if(($this->ed171_codigo == null) || ($this->ed171_codigo == "") ){ 
+     if(($this->ed171_codigo == null) || ($this->ed171_codigo === 0 || $this->ed171_codigo === 0.0 || $this->ed171_codigo == "") ){ 
        $this->erro_sql = " Campo ed171_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

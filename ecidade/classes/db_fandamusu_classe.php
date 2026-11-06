@@ -52,7 +52,7 @@ class cl_fandamusu {
                  y40_obs = text = Observação do Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_fandamusu() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fandamusu"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_fandamusu {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y40_codandam = ($this->y40_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y40_codandam"]:$this->y40_codandam);
-       $this->y40_id_usuario = ($this->y40_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y40_id_usuario"]:$this->y40_id_usuario);
+       $this->y40_codandam = (($this->y40_codandam === 0 || $this->y40_codandam === 0.0 || $this->y40_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y40_codandam"]:$this->y40_codandam);
+       $this->y40_id_usuario = (($this->y40_id_usuario === 0 || $this->y40_id_usuario === 0.0 || $this->y40_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["y40_id_usuario"]:$this->y40_id_usuario);
        $this->y40_obs = ($this->y40_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y40_obs"]:$this->y40_obs);
      }else{
-       $this->y40_codandam = ($this->y40_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y40_codandam"]:$this->y40_codandam);
-       $this->y40_id_usuario = ($this->y40_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y40_id_usuario"]:$this->y40_id_usuario);
+       $this->y40_codandam = (($this->y40_codandam === 0 || $this->y40_codandam === 0.0 || $this->y40_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["y40_codandam"]:$this->y40_codandam);
+       $this->y40_id_usuario = (($this->y40_id_usuario === 0 || $this->y40_id_usuario === 0.0 || $this->y40_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["y40_id_usuario"]:$this->y40_id_usuario);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_fandamusu {
      }
        $this->y40_codandam = $y40_codandam; 
        $this->y40_id_usuario = $y40_id_usuario; 
-     if(($this->y40_codandam == null) || ($this->y40_codandam == "") ){ 
+     if(($this->y40_codandam == null) || (($this->y40_codandam === 0 || $this->y40_codandam === 0.0 || $this->y40_codandam == "")) ){ 
        $this->erro_sql = " Campo y40_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_fandamusu {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y40_id_usuario == null) || ($this->y40_id_usuario == "") ){ 
+     if(($this->y40_id_usuario == null) || (($this->y40_id_usuario === 0 || $this->y40_id_usuario === 0.0 || $this->y40_id_usuario == "")) ){ 
        $this->erro_sql = " Campo y40_id_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_fandamusu {
    function sql_query ( $y40_codandam=null,$y40_id_usuario=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_fandamusu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_fandamusu {
    function sql_query_file ( $y40_codandam=null,$y40_id_usuario=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_fandamusu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

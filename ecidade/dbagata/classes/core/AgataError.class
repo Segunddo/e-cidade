@@ -27,7 +27,7 @@
 
 class AgataError
 {
-    function AgataError($message)
+    function __construct($message)
     {
         $this->Message = strip_tags($message);
     }

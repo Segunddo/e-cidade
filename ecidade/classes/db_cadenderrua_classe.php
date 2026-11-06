@@ -62,7 +62,7 @@ class cl_cadenderrua {
                  db74_cep = char(8) = Cep 
                  ";
    //funcao construtor da classe 
-   function cl_cadenderrua() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadenderrua"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_cadenderrua {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db74_sequencial = ($this->db74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_sequencial"]:$this->db74_sequencial);
-       $this->db74_cadendermunicipio = ($this->db74_cadendermunicipio == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_cadendermunicipio"]:$this->db74_cadendermunicipio);
+       $this->db74_sequencial = ($this->db74_sequencial === 0 || $this->db74_sequencial === 0.0 || $this->db74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_sequencial"]:$this->db74_sequencial);
+       $this->db74_cadendermunicipio = ($this->db74_cadendermunicipio === 0 || $this->db74_cadendermunicipio === 0.0 || $this->db74_cadendermunicipio == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_cadendermunicipio"]:$this->db74_cadendermunicipio);
        $this->db74_descricao = ($this->db74_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_descricao"]:$this->db74_descricao);
-       $this->db74_bairroinicial = ($this->db74_bairroinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_bairroinicial"]:$this->db74_bairroinicial);
-       $this->db74_bairrofinal = ($this->db74_bairrofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_bairrofinal"]:$this->db74_bairrofinal);
-       $this->db74_numinicial = ($this->db74_numinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_numinicial"]:$this->db74_numinicial);
-       $this->db74_numfinal = ($this->db74_numfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_numfinal"]:$this->db74_numfinal);
+       $this->db74_bairroinicial = ($this->db74_bairroinicial === 0 || $this->db74_bairroinicial === 0.0 || $this->db74_bairroinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_bairroinicial"]:$this->db74_bairroinicial);
+       $this->db74_bairrofinal = ($this->db74_bairrofinal === 0 || $this->db74_bairrofinal === 0.0 || $this->db74_bairrofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_bairrofinal"]:$this->db74_bairrofinal);
+       $this->db74_numinicial = ($this->db74_numinicial === 0 || $this->db74_numinicial === 0.0 || $this->db74_numinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_numinicial"]:$this->db74_numinicial);
+       $this->db74_numfinal = ($this->db74_numfinal === 0 || $this->db74_numfinal === 0.0 || $this->db74_numfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_numfinal"]:$this->db74_numfinal);
        $this->db74_cep = ($this->db74_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_cep"]:$this->db74_cep);
      }else{
-       $this->db74_sequencial = ($this->db74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_sequencial"]:$this->db74_sequencial);
+       $this->db74_sequencial = ($this->db74_sequencial === 0 || $this->db74_sequencial === 0.0 || $this->db74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db74_sequencial"]:$this->db74_sequencial);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_cadenderrua {
          $this->db74_sequencial = $db74_sequencial; 
        }
      }
-     if(($this->db74_sequencial == null) || ($this->db74_sequencial == "") ){ 
+     if(($this->db74_sequencial == null) || ($this->db74_sequencial === 0 || $this->db74_sequencial === 0.0 || $this->db74_sequencial == "") ){ 
        $this->erro_sql = " Campo db74_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

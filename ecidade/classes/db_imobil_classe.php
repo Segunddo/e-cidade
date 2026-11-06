@@ -50,7 +50,7 @@ class cl_imobil {
                  j44_numcgm = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_imobil() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("imobil"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_imobil {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j44_matric = ($this->j44_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j44_matric"]:$this->j44_matric);
-       $this->j44_numcgm = ($this->j44_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j44_numcgm"]:$this->j44_numcgm);
+       $this->j44_matric = (($this->j44_matric === 0 || $this->j44_matric === 0.0 || $this->j44_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j44_matric"]:$this->j44_matric);
+       $this->j44_numcgm = (($this->j44_numcgm === 0 || $this->j44_numcgm === 0.0 || $this->j44_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["j44_numcgm"]:$this->j44_numcgm);
      }else{
-       $this->j44_matric = ($this->j44_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j44_matric"]:$this->j44_matric);
+       $this->j44_matric = (($this->j44_matric === 0 || $this->j44_matric === 0.0 || $this->j44_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j44_matric"]:$this->j44_matric);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_imobil {
        return false;
      }
        $this->j44_matric = $j44_matric; 
-     if(($this->j44_matric == null) || ($this->j44_matric == "") ){ 
+     if(($this->j44_matric == null) || (($this->j44_matric === 0 || $this->j44_matric === 0.0 || $this->j44_matric == "")) ){ 
        $this->erro_sql = " Campo j44_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_imobil {
    function sql_query ( $j44_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_imobil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_imobil {
    function sql_query_file ( $j44_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_imobil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -375,7 +375,7 @@ class cl_imobil {
    function sql_query_nome ( $j44_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_imobil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

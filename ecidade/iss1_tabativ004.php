@@ -725,7 +725,7 @@ $sSqlAlvaraAuto .= "         inner join classe on q82_classe = q12_classe       
 $sSqlAlvaraAuto .= "    where q07_inscr = {$q07_inscr}                                           ";
 
 $rsAlvaraAuto      = db_query($sSqlAlvaraAuto);
-$iLinhasAlvaraAuto = pg_num_rows($rsAlvaraAuto);
+$iLinhasAlvaraAuto = ($rsAlvaraAuto ? pg_num_rows($rsAlvaraAuto) : 0);
 $aAlvaraAuto       = array();
 $lGeraAutomatico   = 'true';
 $lPermanente       = 'false';

@@ -115,7 +115,7 @@ class cl_parissqn {
                  q60_portepadraomei = int8 = Porte Padrão MEI 
                  ";
    //funcao construtor da classe
-   public function cl_parissqn() 
+   public function __construct() 
    {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parissqn");
@@ -135,28 +135,28 @@ class cl_parissqn {
    public function atualizacampos($exclusao = false) 
    {
      if($exclusao==false){
-       $this->q60_receit = ($this->q60_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_receit"]:$this->q60_receit);
-       $this->q60_tipo = ($this->q60_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_tipo"]:$this->q60_tipo);
-       $this->q60_aliq = ($this->q60_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_aliq"]:$this->q60_aliq);
-       $this->q60_codvencvar = ($this->q60_codvencvar == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_codvencvar"]:$this->q60_codvencvar);
-       $this->q60_histsemmov = ($this->q60_histsemmov == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_histsemmov"]:$this->q60_histsemmov);
+       $this->q60_receit = (($this->q60_receit === 0 || $this->q60_receit === 0.0 || $this->q60_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_receit"]:$this->q60_receit);
+       $this->q60_tipo = (($this->q60_tipo === 0 || $this->q60_tipo === 0.0 || $this->q60_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_tipo"]:$this->q60_tipo);
+       $this->q60_aliq = (($this->q60_aliq === 0 || $this->q60_aliq === 0.0 || $this->q60_aliq == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_aliq"]:$this->q60_aliq);
+       $this->q60_codvencvar = (($this->q60_codvencvar === 0 || $this->q60_codvencvar === 0.0 || $this->q60_codvencvar == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_codvencvar"]:$this->q60_codvencvar);
+       $this->q60_histsemmov = (($this->q60_histsemmov === 0 || $this->q60_histsemmov === 0.0 || $this->q60_histsemmov == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_histsemmov"]:$this->q60_histsemmov);
        $this->q60_impcodativ = ($this->q60_impcodativ == "f"?@$GLOBALS["HTTP_POST_VARS"]["q60_impcodativ"]:$this->q60_impcodativ);
        $this->q60_impobsativ = ($this->q60_impobsativ == "f"?@$GLOBALS["HTTP_POST_VARS"]["q60_impobsativ"]:$this->q60_impobsativ);
        $this->q60_impdatas = ($this->q60_impdatas == "f"?@$GLOBALS["HTTP_POST_VARS"]["q60_impdatas"]:$this->q60_impdatas);
        $this->q60_impobsissqn = ($this->q60_impobsissqn == "f"?@$GLOBALS["HTTP_POST_VARS"]["q60_impobsissqn"]:$this->q60_impobsissqn);
-       $this->q60_modalvara = ($this->q60_modalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_modalvara"]:$this->q60_modalvara);
-       $this->q60_integrasani = ($this->q60_integrasani == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_integrasani"]:$this->q60_integrasani);
-       $this->q60_campoutilcalc = ($this->q60_campoutilcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_campoutilcalc"]:$this->q60_campoutilcalc);
-       $this->q60_alvbaixadiv = ($this->q60_alvbaixadiv == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_alvbaixadiv"]:$this->q60_alvbaixadiv);
+       $this->q60_modalvara = (($this->q60_modalvara === 0 || $this->q60_modalvara === 0.0 || $this->q60_modalvara == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_modalvara"]:$this->q60_modalvara);
+       $this->q60_integrasani = (($this->q60_integrasani === 0 || $this->q60_integrasani === 0.0 || $this->q60_integrasani == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_integrasani"]:$this->q60_integrasani);
+       $this->q60_campoutilcalc = (($this->q60_campoutilcalc === 0 || $this->q60_campoutilcalc === 0.0 || $this->q60_campoutilcalc == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_campoutilcalc"]:$this->q60_campoutilcalc);
+       $this->q60_alvbaixadiv = (($this->q60_alvbaixadiv === 0 || $this->q60_alvbaixadiv === 0.0 || $this->q60_alvbaixadiv == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_alvbaixadiv"]:$this->q60_alvbaixadiv);
        $this->q60_notaavulsapesjur = ($this->q60_notaavulsapesjur == "f"?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsapesjur"]:$this->q60_notaavulsapesjur);
-       $this->q60_notaavulsavias = ($this->q60_notaavulsavias == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsavias"]:$this->q60_notaavulsavias);
-       $this->q60_notaavulsavlrmin = ($this->q60_notaavulsavlrmin == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsavlrmin"]:$this->q60_notaavulsavlrmin);
-       $this->q60_notaavulsamax = ($this->q60_notaavulsamax == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsamax"]:$this->q60_notaavulsamax);
-       $this->q60_notaavulsaultimanota = ($this->q60_notaavulsaultimanota == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsaultimanota"]:$this->q60_notaavulsaultimanota);
-       $this->q60_notaavulsadiasprazo = ($this->q60_notaavulsadiasprazo == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsadiasprazo"]:$this->q60_notaavulsadiasprazo);
-       $this->q60_tipopermalvara = ($this->q60_tipopermalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_tipopermalvara"]:$this->q60_tipopermalvara);
-       $this->q60_tiponumcertbaixa = ($this->q60_tiponumcertbaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_tiponumcertbaixa"]:$this->q60_tiponumcertbaixa);
-       $this->q60_templatealvara = ($this->q60_templatealvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_templatealvara"]:$this->q60_templatealvara);
+       $this->q60_notaavulsavias = (($this->q60_notaavulsavias === 0 || $this->q60_notaavulsavias === 0.0 || $this->q60_notaavulsavias == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsavias"]:$this->q60_notaavulsavias);
+       $this->q60_notaavulsavlrmin = (($this->q60_notaavulsavlrmin === 0 || $this->q60_notaavulsavlrmin === 0.0 || $this->q60_notaavulsavlrmin == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsavlrmin"]:$this->q60_notaavulsavlrmin);
+       $this->q60_notaavulsamax = (($this->q60_notaavulsamax === 0 || $this->q60_notaavulsamax === 0.0 || $this->q60_notaavulsamax == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsamax"]:$this->q60_notaavulsamax);
+       $this->q60_notaavulsaultimanota = (($this->q60_notaavulsaultimanota === 0 || $this->q60_notaavulsaultimanota === 0.0 || $this->q60_notaavulsaultimanota == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsaultimanota"]:$this->q60_notaavulsaultimanota);
+       $this->q60_notaavulsadiasprazo = (($this->q60_notaavulsadiasprazo === 0 || $this->q60_notaavulsadiasprazo === 0.0 || $this->q60_notaavulsadiasprazo == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_notaavulsadiasprazo"]:$this->q60_notaavulsadiasprazo);
+       $this->q60_tipopermalvara = (($this->q60_tipopermalvara === 0 || $this->q60_tipopermalvara === 0.0 || $this->q60_tipopermalvara == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_tipopermalvara"]:$this->q60_tipopermalvara);
+       $this->q60_tiponumcertbaixa = (($this->q60_tiponumcertbaixa === 0 || $this->q60_tiponumcertbaixa === 0.0 || $this->q60_tiponumcertbaixa == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_tiponumcertbaixa"]:$this->q60_tiponumcertbaixa);
+       $this->q60_templatealvara = (($this->q60_templatealvara === 0 || $this->q60_templatealvara === 0.0 || $this->q60_templatealvara == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_templatealvara"]:$this->q60_templatealvara);
        if($this->q60_dataimpmei == ""){
          $this->q60_dataimpmei_dia = ($this->q60_dataimpmei_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_dataimpmei_dia"]:$this->q60_dataimpmei_dia);
          $this->q60_dataimpmei_mes = ($this->q60_dataimpmei_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_dataimpmei_mes"]:$this->q60_dataimpmei_mes);
@@ -165,16 +165,16 @@ class cl_parissqn {
             $this->q60_dataimpmei = $this->q60_dataimpmei_ano."-".$this->q60_dataimpmei_mes."-".$this->q60_dataimpmei_dia;
          }
        }
-       $this->q60_bloqemiscertbaixa = ($this->q60_bloqemiscertbaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_bloqemiscertbaixa"]:$this->q60_bloqemiscertbaixa);
-       $this->q60_isstipoalvaraper = ($this->q60_isstipoalvaraper == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_isstipoalvaraper"]:$this->q60_isstipoalvaraper);
-       $this->q60_isstipoalvaraprov = ($this->q60_isstipoalvaraprov == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_isstipoalvaraprov"]:$this->q60_isstipoalvaraprov);
+       $this->q60_bloqemiscertbaixa = (($this->q60_bloqemiscertbaixa === 0 || $this->q60_bloqemiscertbaixa === 0.0 || $this->q60_bloqemiscertbaixa == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_bloqemiscertbaixa"]:$this->q60_bloqemiscertbaixa);
+       $this->q60_isstipoalvaraper = (($this->q60_isstipoalvaraper === 0 || $this->q60_isstipoalvaraper === 0.0 || $this->q60_isstipoalvaraper == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_isstipoalvaraper"]:$this->q60_isstipoalvaraper);
+       $this->q60_isstipoalvaraprov = (($this->q60_isstipoalvaraprov === 0 || $this->q60_isstipoalvaraprov === 0.0 || $this->q60_isstipoalvaraprov == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_isstipoalvaraprov"]:$this->q60_isstipoalvaraprov);
        $this->q60_parcelasalvara = ($this->q60_parcelasalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_parcelasalvara"]:$this->q60_parcelasalvara);
-       $this->q60_templatebaixaalvaranormal = ($this->q60_templatebaixaalvaranormal == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_templatebaixaalvaranormal"]:$this->q60_templatebaixaalvaranormal);
-       $this->q60_templatebaixaalvaraoficial = ($this->q60_templatebaixaalvaraoficial == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_templatebaixaalvaraoficial"]:$this->q60_templatebaixaalvaraoficial);
+       $this->q60_templatebaixaalvaranormal = (($this->q60_templatebaixaalvaranormal === 0 || $this->q60_templatebaixaalvaranormal === 0.0 || $this->q60_templatebaixaalvaranormal == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_templatebaixaalvaranormal"]:$this->q60_templatebaixaalvaranormal);
+       $this->q60_templatebaixaalvaraoficial = (($this->q60_templatebaixaalvaraoficial === 0 || $this->q60_templatebaixaalvaraoficial === 0.0 || $this->q60_templatebaixaalvaraoficial == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_templatebaixaalvaraoficial"]:$this->q60_templatebaixaalvaraoficial);
        $this->q60_parcelasissqn = ($this->q60_parcelasissqn == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_parcelasissqn"]:$this->q60_parcelasissqn);
        $this->q60_templatebicveiculo = ($this->q60_templatebicveiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_templatebicveiculo"]:$this->q60_templatebicveiculo);
        $this->q60_formaaliquotarbt = ($this->q60_formaaliquotarbt == null?@$GLOBALS["HTTP_POST_VARS"]["q60_formaaliquotarbt"]:$this->q60_formaaliquotarbt);
-       $this->q60_portepadraomei = ($this->q60_portepadraomei == ""?@$GLOBALS["HTTP_POST_VARS"]["q60_portepadraomei"]:$this->q60_portepadraomei);
+       $this->q60_portepadraomei = (($this->q60_portepadraomei === 0 || $this->q60_portepadraomei === 0.0 || $this->q60_portepadraomei == "")?@$GLOBALS["HTTP_POST_VARS"]["q60_portepadraomei"]:$this->q60_portepadraomei);
      }else{
      }
    }
@@ -972,7 +972,7 @@ class cl_parissqn {
    public function sql_query ( $oid = null,$campos="parissqn.oid,*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1007,7 +1007,7 @@ class cl_parissqn {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1020,7 +1020,7 @@ class cl_parissqn {
   public function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1038,7 +1038,7 @@ class cl_parissqn {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

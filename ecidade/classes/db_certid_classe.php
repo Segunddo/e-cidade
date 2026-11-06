@@ -76,7 +76,7 @@ class cl_certid {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v13_certid = ($this->v13_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
+       $this->v13_certid = (($this->v13_certid === 0 || $this->v13_certid === 0.0 || $this->v13_certid == "")?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
        if($this->v13_dtemis == ""){
          $this->v13_dtemis_dia = ($this->v13_dtemis_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_dtemis_dia"]:$this->v13_dtemis_dia);
          $this->v13_dtemis_mes = ($this->v13_dtemis_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_dtemis_mes"]:$this->v13_dtemis_mes);
@@ -85,11 +85,11 @@ class cl_certid {
             $this->v13_dtemis = $this->v13_dtemis_ano."-".$this->v13_dtemis_mes."-".$this->v13_dtemis_dia;
          }
        }
-       $this->v13_memo = ($this->v13_memo == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_memo"]:$this->v13_memo);
+       $this->v13_memo = (($this->v13_memo === 0 || $this->v13_memo === 0.0 || $this->v13_memo == "")?@$GLOBALS["HTTP_POST_VARS"]["v13_memo"]:$this->v13_memo);
        $this->v13_login = ($this->v13_login == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_login"]:$this->v13_login);
-       $this->v13_instit = ($this->v13_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_instit"]:$this->v13_instit);
+       $this->v13_instit = (($this->v13_instit === 0 || $this->v13_instit === 0.0 || $this->v13_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["v13_instit"]:$this->v13_instit);
      }else{
-       $this->v13_certid = ($this->v13_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
+       $this->v13_certid = (($this->v13_certid === 0 || $this->v13_certid === 0.0 || $this->v13_certid == "")?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
      }
    }
    // funcao para inclusao
@@ -132,7 +132,7 @@ class cl_certid {
        return false;
      }
        $this->v13_certid = $v13_certid;
-     if(($this->v13_certid == null) || ($this->v13_certid == "") ){
+     if(($this->v13_certid == null) || (($this->v13_certid === 0 || $this->v13_certid === 0.0 || $this->v13_certid == "")) ){
        $this->erro_sql = " Campo v13_certid nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

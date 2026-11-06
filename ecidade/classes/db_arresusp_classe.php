@@ -88,7 +88,7 @@ class cl_arresusp {
                  k00_vlrdes = float8 = Valor do desconto 
                  ";
    //funcao construtor da classe 
-   function cl_arresusp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("arresusp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -105,11 +105,11 @@ class cl_arresusp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_sequencial = ($this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
-       $this->k00_suspensao = ($this->k00_suspensao == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_suspensao"]:$this->k00_suspensao);
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
-       $this->k00_numcgm = ($this->k00_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numcgm"]:$this->k00_numcgm);
+       $this->k00_sequencial = ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
+       $this->k00_suspensao = ($this->k00_suspensao === 0 || $this->k00_suspensao === 0.0 || $this->k00_suspensao == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_suspensao"]:$this->k00_suspensao);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = ($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->k00_numcgm = ($this->k00_numcgm === 0 || $this->k00_numcgm === 0.0 || $this->k00_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numcgm"]:$this->k00_numcgm);
        if($this->k00_dtoper == ""){
          $this->k00_dtoper_dia = ($this->k00_dtoper_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtoper_dia"]:$this->k00_dtoper_dia);
          $this->k00_dtoper_mes = ($this->k00_dtoper_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtoper_mes"]:$this->k00_dtoper_mes);
@@ -118,9 +118,9 @@ class cl_arresusp {
             $this->k00_dtoper = $this->k00_dtoper_ano."-".$this->k00_dtoper_mes."-".$this->k00_dtoper_dia;
          }
        }
-       $this->k00_receit = ($this->k00_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_receit"]:$this->k00_receit);
-       $this->k00_hist = ($this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
-       $this->k00_valor = ($this->k00_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_valor"]:$this->k00_valor);
+       $this->k00_receit = ($this->k00_receit === 0 || $this->k00_receit === 0.0 || $this->k00_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_receit"]:$this->k00_receit);
+       $this->k00_hist = ($this->k00_hist === 0 || $this->k00_hist === 0.0 || $this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
+       $this->k00_valor = ($this->k00_valor === 0 || $this->k00_valor === 0.0 || $this->k00_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_valor"]:$this->k00_valor);
        if($this->k00_dtvenc == ""){
          $this->k00_dtvenc_dia = ($this->k00_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtvenc_dia"]:$this->k00_dtvenc_dia);
          $this->k00_dtvenc_mes = ($this->k00_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtvenc_mes"]:$this->k00_dtvenc_mes);
@@ -129,16 +129,16 @@ class cl_arresusp {
             $this->k00_dtvenc = $this->k00_dtvenc_ano."-".$this->k00_dtvenc_mes."-".$this->k00_dtvenc_dia;
          }
        }
-       $this->k00_numtot = ($this->k00_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numtot"]:$this->k00_numtot);
-       $this->k00_numdig = ($this->k00_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numdig"]:$this->k00_numdig);
-       $this->k00_tipo = ($this->k00_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_tipo"]:$this->k00_tipo);
-       $this->k00_tipojm = ($this->k00_tipojm == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_tipojm"]:$this->k00_tipojm);
-       $this->k00_vlrcor = ($this->k00_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrcor"]:$this->k00_vlrcor);
-       $this->k00_vlrjur = ($this->k00_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrjur"]:$this->k00_vlrjur);
-       $this->k00_vlrmul = ($this->k00_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrmul"]:$this->k00_vlrmul);
-       $this->k00_vlrdes = ($this->k00_vlrdes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrdes"]:$this->k00_vlrdes);
+       $this->k00_numtot = ($this->k00_numtot === 0 || $this->k00_numtot === 0.0 || $this->k00_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numtot"]:$this->k00_numtot);
+       $this->k00_numdig = ($this->k00_numdig === 0 || $this->k00_numdig === 0.0 || $this->k00_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numdig"]:$this->k00_numdig);
+       $this->k00_tipo = ($this->k00_tipo === 0 || $this->k00_tipo === 0.0 || $this->k00_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_tipo"]:$this->k00_tipo);
+       $this->k00_tipojm = ($this->k00_tipojm === 0 || $this->k00_tipojm === 0.0 || $this->k00_tipojm == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_tipojm"]:$this->k00_tipojm);
+       $this->k00_vlrcor = ($this->k00_vlrcor === 0 || $this->k00_vlrcor === 0.0 || $this->k00_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrcor"]:$this->k00_vlrcor);
+       $this->k00_vlrjur = ($this->k00_vlrjur === 0 || $this->k00_vlrjur === 0.0 || $this->k00_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrjur"]:$this->k00_vlrjur);
+       $this->k00_vlrmul = ($this->k00_vlrmul === 0 || $this->k00_vlrmul === 0.0 || $this->k00_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrmul"]:$this->k00_vlrmul);
+       $this->k00_vlrdes = ($this->k00_vlrdes === 0 || $this->k00_vlrdes === 0.0 || $this->k00_vlrdes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrdes"]:$this->k00_vlrdes);
      }else{
-       $this->k00_sequencial = ($this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
+       $this->k00_sequencial = ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
      }
    }
    // funcao para inclusao
@@ -315,7 +315,7 @@ class cl_arresusp {
          $this->k00_sequencial = $k00_sequencial; 
        }
      }
-     if(($this->k00_sequencial == null) || ($this->k00_sequencial == "") ){ 
+     if(($this->k00_sequencial == null) || ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == "") ){ 
        $this->erro_sql = " Campo k00_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -861,7 +861,7 @@ class cl_arresusp {
    function sql_query ( $k00_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -886,7 +886,7 @@ class cl_arresusp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -899,7 +899,7 @@ class cl_arresusp {
    function sql_query_file ( $k00_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -920,7 +920,7 @@ class cl_arresusp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

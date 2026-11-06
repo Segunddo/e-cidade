@@ -59,7 +59,7 @@ class cl_notificacao {
                  k50_instit = int4 = Cód. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_notificacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notificacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,8 +76,8 @@ class cl_notificacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k50_notifica = ($this->k50_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k50_notifica"]:$this->k50_notifica);
-       $this->k50_procede = ($this->k50_procede == ""?@$GLOBALS["HTTP_POST_VARS"]["k50_procede"]:$this->k50_procede);
+       $this->k50_notifica = (($this->k50_notifica === 0 || $this->k50_notifica === 0.0 || $this->k50_notifica == "")?@$GLOBALS["HTTP_POST_VARS"]["k50_notifica"]:$this->k50_notifica);
+       $this->k50_procede = (($this->k50_procede === 0 || $this->k50_procede === 0.0 || $this->k50_procede == "")?@$GLOBALS["HTTP_POST_VARS"]["k50_procede"]:$this->k50_procede);
        if($this->k50_dtemite == ""){
          $this->k50_dtemite_dia = ($this->k50_dtemite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k50_dtemite_dia"]:$this->k50_dtemite_dia);
          $this->k50_dtemite_mes = ($this->k50_dtemite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k50_dtemite_mes"]:$this->k50_dtemite_mes);
@@ -87,9 +87,9 @@ class cl_notificacao {
          }
        }
        $this->k50_obs = ($this->k50_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k50_obs"]:$this->k50_obs);
-       $this->k50_instit = ($this->k50_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k50_instit"]:$this->k50_instit);
+       $this->k50_instit = (($this->k50_instit === 0 || $this->k50_instit === 0.0 || $this->k50_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["k50_instit"]:$this->k50_instit);
      }else{
-       $this->k50_notifica = ($this->k50_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k50_notifica"]:$this->k50_notifica);
+       $this->k50_notifica = (($this->k50_notifica === 0 || $this->k50_notifica === 0.0 || $this->k50_notifica == "")?@$GLOBALS["HTTP_POST_VARS"]["k50_notifica"]:$this->k50_notifica);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_notificacao {
          $this->k50_notifica = $k50_notifica; 
        }
      }
-     if(($this->k50_notifica == null) || ($this->k50_notifica == "") ){ 
+     if(($this->k50_notifica == null) || (($this->k50_notifica === 0 || $this->k50_notifica === 0.0 || $this->k50_notifica == "")) ){ 
        $this->erro_sql = " Campo k50_notifica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

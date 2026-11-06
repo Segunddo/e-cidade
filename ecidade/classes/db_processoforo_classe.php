@@ -73,7 +73,7 @@ class cl_processoforo
                  ";
 
     //funcao construtor da classe
-    function cl_processoforo()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("processoforo");
@@ -95,11 +95,11 @@ class cl_processoforo
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->v70_sequencial = ($this->v70_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_sequencial"] : $this->v70_sequencial);
+            $this->v70_sequencial = (($this->v70_sequencial === 0 || $this->v70_sequencial === 0.0 || $this->v70_sequencial == "") ? @$GLOBALS["HTTP_POST_VARS"]["v70_sequencial"] : $this->v70_sequencial);
             $this->v70_codforo = ($this->v70_codforo == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_codforo"] : $this->v70_codforo);
-            $this->v70_processoforomov = ($this->v70_processoforomov == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_processoforomov"] : $this->v70_processoforomov);
-            $this->v70_id_usuario = ($this->v70_id_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_id_usuario"] : $this->v70_id_usuario);
-            $this->v70_vara = ($this->v70_vara == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_vara"] : $this->v70_vara);
+            $this->v70_processoforomov = (($this->v70_processoforomov === 0 || $this->v70_processoforomov === 0.0 || $this->v70_processoforomov == "") ? @$GLOBALS["HTTP_POST_VARS"]["v70_processoforomov"] : $this->v70_processoforomov);
+            $this->v70_id_usuario = (($this->v70_id_usuario === 0 || $this->v70_id_usuario === 0.0 || $this->v70_id_usuario == "") ? @$GLOBALS["HTTP_POST_VARS"]["v70_id_usuario"] : $this->v70_id_usuario);
+            $this->v70_vara = (($this->v70_vara === 0 || $this->v70_vara === 0.0 || $this->v70_vara == "") ? @$GLOBALS["HTTP_POST_VARS"]["v70_vara"] : $this->v70_vara);
             if ($this->v70_data == "") {
                 $this->v70_data_dia = ($this->v70_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_data_dia"] : $this->v70_data_dia);
                 $this->v70_data_mes = ($this->v70_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_data_mes"] : $this->v70_data_mes);
@@ -108,13 +108,13 @@ class cl_processoforo
                     $this->v70_data = $this->v70_data_ano . "-" . $this->v70_data_mes . "-" . $this->v70_data_dia;
                 }
             }
-            $this->v70_valorinicial = ($this->v70_valorinicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_valorinicial"] : $this->v70_valorinicial);
+            $this->v70_valorinicial = (($this->v70_valorinicial === 0 || $this->v70_valorinicial === 0.0 || $this->v70_valorinicial == "") ? @$GLOBALS["HTTP_POST_VARS"]["v70_valorinicial"] : $this->v70_valorinicial);
             $this->v70_observacao = ($this->v70_observacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_observacao"] : $this->v70_observacao);
             $this->v70_anulado = ($this->v70_anulado == "f" ? @$GLOBALS["HTTP_POST_VARS"]["v70_anulado"] : $this->v70_anulado);
-            $this->v70_instit = ($this->v70_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_instit"] : $this->v70_instit);
-            $this->v70_cartorio = ($this->v70_cartorio == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_cartorio"] : $this->v70_cartorio);
+            $this->v70_instit = (($this->v70_instit === 0 || $this->v70_instit === 0.0 || $this->v70_instit == "") ? @$GLOBALS["HTTP_POST_VARS"]["v70_instit"] : $this->v70_instit);
+            $this->v70_cartorio = (($this->v70_cartorio === 0 || $this->v70_cartorio === 0.0 || $this->v70_cartorio == "") ? @$GLOBALS["HTTP_POST_VARS"]["v70_cartorio"] : $this->v70_cartorio);
         } else {
-            $this->v70_sequencial = ($this->v70_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["v70_sequencial"] : $this->v70_sequencial);
+            $this->v70_sequencial = (($this->v70_sequencial === 0 || $this->v70_sequencial === 0.0 || $this->v70_sequencial == "") ? @$GLOBALS["HTTP_POST_VARS"]["v70_sequencial"] : $this->v70_sequencial);
         }
     }
 
@@ -224,7 +224,7 @@ class cl_processoforo
                 $this->v70_sequencial = $v70_sequencial;
             }
         }
-        if (($this->v70_sequencial == null) || ($this->v70_sequencial == "")) {
+        if (($this->v70_sequencial == null) || (($this->v70_sequencial === 0 || $this->v70_sequencial === 0.0 || $this->v70_sequencial == ""))) {
             $this->erro_sql = " Campo v70_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

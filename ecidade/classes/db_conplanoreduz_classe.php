@@ -60,7 +60,7 @@ class cl_conplanoreduz
                  ";
 
     //funcao construtor da classe
-    function cl_conplanoreduz()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("conplanoreduz");
@@ -82,15 +82,15 @@ class cl_conplanoreduz
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->c61_codcon = ($this->c61_codcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_codcon"] : $this->c61_codcon);
-            $this->c61_anousu = ($this->c61_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_anousu"] : $this->c61_anousu);
-            $this->c61_reduz = ($this->c61_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_reduz"] : $this->c61_reduz);
-            $this->c61_instit = ($this->c61_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_instit"] : $this->c61_instit);
-            $this->c61_codigo = ($this->c61_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_codigo"] : $this->c61_codigo);
-            $this->c61_contrapartida = ($this->c61_contrapartida == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_contrapartida"] : $this->c61_contrapartida);
+            $this->c61_codcon = ($this->c61_codcon === 0 || $this->c61_codcon === 0.0 || $this->c61_codcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_codcon"] : $this->c61_codcon);
+            $this->c61_anousu = ($this->c61_anousu === 0 || $this->c61_anousu === 0.0 || $this->c61_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_anousu"] : $this->c61_anousu);
+            $this->c61_reduz = ($this->c61_reduz === 0 || $this->c61_reduz === 0.0 || $this->c61_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_reduz"] : $this->c61_reduz);
+            $this->c61_instit = ($this->c61_instit === 0 || $this->c61_instit === 0.0 || $this->c61_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_instit"] : $this->c61_instit);
+            $this->c61_codigo = ($this->c61_codigo === 0 || $this->c61_codigo === 0.0 || $this->c61_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_codigo"] : $this->c61_codigo);
+            $this->c61_contrapartida = ($this->c61_contrapartida === 0 || $this->c61_contrapartida === 0.0 || $this->c61_contrapartida == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_contrapartida"] : $this->c61_contrapartida);
         } else {
-            $this->c61_anousu = ($this->c61_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_anousu"] : $this->c61_anousu);
-            $this->c61_reduz = ($this->c61_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_reduz"] : $this->c61_reduz);
+            $this->c61_anousu = ($this->c61_anousu === 0 || $this->c61_anousu === 0.0 || $this->c61_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_anousu"] : $this->c61_anousu);
+            $this->c61_reduz = ($this->c61_reduz === 0 || $this->c61_reduz === 0.0 || $this->c61_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c61_reduz"] : $this->c61_reduz);
         }
     }
 
@@ -162,7 +162,7 @@ class cl_conplanoreduz
                 $this->c61_reduz = $c61_reduz;
             }
         }
-        if (($this->c61_reduz == null) || ($this->c61_reduz == "")) {
+        if (($this->c61_reduz == null) || ($this->c61_reduz === 0 || $this->c61_reduz === 0.0 || $this->c61_reduz == "")) {
             $this->erro_sql = " Campo c61_reduz nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -172,7 +172,7 @@ class cl_conplanoreduz
 
             return false;
         }
-        if (($this->c61_anousu == null) || ($this->c61_anousu == "")) {
+        if (($this->c61_anousu == null) || ($this->c61_anousu === 0 || $this->c61_anousu === 0.0 || $this->c61_anousu == "")) {
             $this->erro_sql = " Campo c61_anousu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

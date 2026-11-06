@@ -61,7 +61,7 @@ class cl_pcorcamfornelic {
                  pc31_tipocondicao = int4 = Tipo de Condição
                  ";
    //funcao construtor da classe
-   function cl_pcorcamfornelic() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcorcamfornelic");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,7 +78,7 @@ class cl_pcorcamfornelic {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc31_orcamforne = ($this->pc31_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_orcamforne"]:$this->pc31_orcamforne);
+       $this->pc31_orcamforne = ($this->pc31_orcamforne === 0 || $this->pc31_orcamforne === 0.0 || $this->pc31_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_orcamforne"]:$this->pc31_orcamforne);
        $this->pc31_nomeretira = ($this->pc31_nomeretira == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_nomeretira"]:$this->pc31_nomeretira);
        if($this->pc31_dtretira == ""){
          $this->pc31_dtretira_dia = ($this->pc31_dtretira_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_dtretira_dia"]:$this->pc31_dtretira_dia);
@@ -89,10 +89,10 @@ class cl_pcorcamfornelic {
          }
        }
        $this->pc31_horaretira = ($this->pc31_horaretira == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_horaretira"]:$this->pc31_horaretira);
-       $this->pc31_liclicitatipoempresa = ($this->pc31_liclicitatipoempresa == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_liclicitatipoempresa"]:$this->pc31_liclicitatipoempresa);
+       $this->pc31_liclicitatipoempresa = ($this->pc31_liclicitatipoempresa === 0 || $this->pc31_liclicitatipoempresa === 0.0 || $this->pc31_liclicitatipoempresa == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_liclicitatipoempresa"]:$this->pc31_liclicitatipoempresa);
        $this->pc31_tipocondicao = ($this->pc31_tipocondicao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_tipocondicao"]:$this->pc31_tipocondicao);
      }else{
-       $this->pc31_orcamforne = ($this->pc31_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_orcamforne"]:$this->pc31_orcamforne);
+       $this->pc31_orcamforne = ($this->pc31_orcamforne === 0 || $this->pc31_orcamforne === 0.0 || $this->pc31_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc31_orcamforne"]:$this->pc31_orcamforne);
      }
    }
    // funcao para Inclusão
@@ -126,7 +126,7 @@ class cl_pcorcamfornelic {
        return false;
      }
        $this->pc31_orcamforne = $pc31_orcamforne;
-     if(($this->pc31_orcamforne == null) || ($this->pc31_orcamforne == "") ){
+     if(($this->pc31_orcamforne == null) || ($this->pc31_orcamforne === 0 || $this->pc31_orcamforne === 0.0 || $this->pc31_orcamforne == "") ){
        $this->erro_sql = " Campo pc31_orcamforne não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

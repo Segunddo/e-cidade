@@ -63,7 +63,7 @@ class cl_contrib {
                  d07_venal = float8 = Valor venal 
                  ";
    //funcao construtor da classe 
-   function cl_contrib() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contrib"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,11 +80,11 @@ class cl_contrib {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d07_contri = ($this->d07_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_contri"]:$this->d07_contri);
-       $this->d07_matric = ($this->d07_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_matric"]:$this->d07_matric);
-       $this->d07_idbql = ($this->d07_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_idbql"]:$this->d07_idbql);
-       $this->d07_vlrdes = ($this->d07_vlrdes == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_vlrdes"]:$this->d07_vlrdes);
-       $this->d07_valor = ($this->d07_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_valor"]:$this->d07_valor);
+       $this->d07_contri = ($this->d07_contri === 0 || $this->d07_contri === 0.0 || $this->d07_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_contri"]:$this->d07_contri);
+       $this->d07_matric = ($this->d07_matric === 0 || $this->d07_matric === 0.0 || $this->d07_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_matric"]:$this->d07_matric);
+       $this->d07_idbql = ($this->d07_idbql === 0 || $this->d07_idbql === 0.0 || $this->d07_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_idbql"]:$this->d07_idbql);
+       $this->d07_vlrdes = ($this->d07_vlrdes === 0 || $this->d07_vlrdes === 0.0 || $this->d07_vlrdes == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_vlrdes"]:$this->d07_vlrdes);
+       $this->d07_valor = ($this->d07_valor === 0 || $this->d07_valor === 0.0 || $this->d07_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_valor"]:$this->d07_valor);
        if($this->d07_data == ""){
          $this->d07_data_dia = ($this->d07_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_data_dia"]:$this->d07_data_dia);
          $this->d07_data_mes = ($this->d07_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_data_mes"]:$this->d07_data_mes);
@@ -93,10 +93,10 @@ class cl_contrib {
             $this->d07_data = $this->d07_data_ano."-".$this->d07_data_mes."-".$this->d07_data_dia;
          }
        }
-       $this->d07_venal = ($this->d07_venal == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_venal"]:$this->d07_venal);
+       $this->d07_venal = ($this->d07_venal === 0 || $this->d07_venal === 0.0 || $this->d07_venal == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_venal"]:$this->d07_venal);
      }else{
-       $this->d07_contri = ($this->d07_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_contri"]:$this->d07_contri);
-       $this->d07_matric = ($this->d07_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_matric"]:$this->d07_matric);
+       $this->d07_contri = ($this->d07_contri === 0 || $this->d07_contri === 0.0 || $this->d07_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_contri"]:$this->d07_contri);
+       $this->d07_matric = ($this->d07_matric === 0 || $this->d07_matric === 0.0 || $this->d07_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d07_matric"]:$this->d07_matric);
      }
    }
    // funcao para inclusao
@@ -149,7 +149,7 @@ class cl_contrib {
      }
        $this->d07_contri = $d07_contri; 
        $this->d07_matric = $d07_matric; 
-     if(($this->d07_contri == null) || ($this->d07_contri == "") ){ 
+     if(($this->d07_contri == null) || ($this->d07_contri === 0 || $this->d07_contri === 0.0 || $this->d07_contri == "") ){ 
        $this->erro_sql = " Campo d07_contri nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -157,7 +157,7 @@ class cl_contrib {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d07_matric == null) || ($this->d07_matric == "") ){ 
+     if(($this->d07_matric == null) || ($this->d07_matric === 0 || $this->d07_matric === 0.0 || $this->d07_matric == "") ){ 
        $this->erro_sql = " Campo d07_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -515,7 +515,7 @@ class cl_contrib {
    function sql_query ( $d07_contri=null,$d07_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_contrib {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -564,7 +564,7 @@ class cl_contrib {
    function sql_query_file ( $d07_contri=null,$d07_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -593,7 +593,7 @@ class cl_contrib {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -605,7 +605,7 @@ class cl_contrib {
    function sql_query_not ( $d07_contri=null,$d07_matric=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -645,7 +645,7 @@ class cl_contrib {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

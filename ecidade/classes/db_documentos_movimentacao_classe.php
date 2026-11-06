@@ -58,11 +58,11 @@ class cl_documentos_movimentacao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->p117_codigo = ($this->p117_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_codigo"]:$this->p117_codigo);
-       $this->p117_documento_andamento = ($this->p117_documento_andamento == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_documento_andamento"]:$this->p117_documento_andamento);
-       $this->p117_id_usuario = ($this->p117_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_id_usuario"]:$this->p117_id_usuario);
-       $this->p117_protprocessodocumento = ($this->p117_protprocessodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_protprocessodocumento"]:$this->p117_protprocessodocumento);
-       $this->p117_processo_atividadesexecucao = ($this->p117_processo_atividadesexecucao == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_processo_atividadesexecucao"]:$this->p117_processo_atividadesexecucao);
+       $this->p117_codigo = ($this->p117_codigo === 0 || $this->p117_codigo === 0.0 || $this->p117_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_codigo"]:$this->p117_codigo);
+       $this->p117_documento_andamento = ($this->p117_documento_andamento === 0 || $this->p117_documento_andamento === 0.0 || $this->p117_documento_andamento == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_documento_andamento"]:$this->p117_documento_andamento);
+       $this->p117_id_usuario = ($this->p117_id_usuario === 0 || $this->p117_id_usuario === 0.0 || $this->p117_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_id_usuario"]:$this->p117_id_usuario);
+       $this->p117_protprocessodocumento = ($this->p117_protprocessodocumento === 0 || $this->p117_protprocessodocumento === 0.0 || $this->p117_protprocessodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_protprocessodocumento"]:$this->p117_protprocessodocumento);
+       $this->p117_processo_atividadesexecucao = ($this->p117_processo_atividadesexecucao === 0 || $this->p117_processo_atividadesexecucao === 0.0 || $this->p117_processo_atividadesexecucao == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_processo_atividadesexecucao"]:$this->p117_processo_atividadesexecucao);
        if($this->p117_data == ""){
          $this->p117_data_dia = ($this->p117_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_data_dia"]:$this->p117_data_dia);
          $this->p117_data_mes = ($this->p117_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_data_mes"]:$this->p117_data_mes);
@@ -72,7 +72,7 @@ class cl_documentos_movimentacao
          }
        }
      }else{
-       $this->p117_codigo = ($this->p117_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_codigo"]:$this->p117_codigo);
+       $this->p117_codigo = ($this->p117_codigo === 0 || $this->p117_codigo === 0.0 || $this->p117_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p117_codigo"]:$this->p117_codigo);
      }
    }
 
@@ -166,7 +166,7 @@ class cl_documentos_movimentacao
          $this->p117_codigo = $p117_codigo;
        }
      }
-     if(($this->p117_codigo == null) || ($this->p117_codigo == "") ){
+     if(($this->p117_codigo == null) || ($this->p117_codigo === 0 || $this->p117_codigo === 0.0 || $this->p117_codigo == "") ){
        $this->erro_sql = " Campo p117_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

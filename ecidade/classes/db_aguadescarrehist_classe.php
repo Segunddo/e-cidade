@@ -67,7 +67,7 @@ class cl_aguadescarrehist {
                  x36_idhist = int4 = Sequencia 
                  ";
    //funcao construtor da classe 
-   function cl_aguadescarrehist() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguadescarrehist"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,9 +84,9 @@ class cl_aguadescarrehist {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x36_numpre = ($this->x36_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_numpre"]:$this->x36_numpre);
-       $this->x36_numpar = ($this->x36_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_numpar"]:$this->x36_numpar);
-       $this->x36_hist = ($this->x36_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_hist"]:$this->x36_hist);
+       $this->x36_numpre = ($this->x36_numpre === 0 || $this->x36_numpre === 0.0 || $this->x36_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_numpre"]:$this->x36_numpre);
+       $this->x36_numpar = ($this->x36_numpar === 0 || $this->x36_numpar === 0.0 || $this->x36_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_numpar"]:$this->x36_numpar);
+       $this->x36_hist = ($this->x36_hist === 0 || $this->x36_hist === 0.0 || $this->x36_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_hist"]:$this->x36_hist);
        if($this->x36_dtoper == ""){
          $this->x36_dtoper_dia = @$GLOBALS["HTTP_POST_VARS"]["x36_dtoper_dia"];
          $this->x36_dtoper_mes = @$GLOBALS["HTTP_POST_VARS"]["x36_dtoper_mes"];
@@ -96,7 +96,7 @@ class cl_aguadescarrehist {
          }
        }
        $this->x36_hora = ($this->x36_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_hora"]:$this->x36_hora);
-       $this->x36_id_usuario = ($this->x36_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_id_usuario"]:$this->x36_id_usuario);
+       $this->x36_id_usuario = ($this->x36_id_usuario === 0 || $this->x36_id_usuario === 0.0 || $this->x36_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_id_usuario"]:$this->x36_id_usuario);
        $this->x36_histtxt = ($this->x36_histtxt == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_histtxt"]:$this->x36_histtxt);
        if($this->x36_limithist == ""){
          $this->x36_limithist_dia = @$GLOBALS["HTTP_POST_VARS"]["x36_limithist_dia"];
@@ -106,7 +106,7 @@ class cl_aguadescarrehist {
             $this->x36_limithist = $this->x36_limithist_ano."-".$this->x36_limithist_mes."-".$this->x36_limithist_dia;
          }
        }
-       $this->x36_idhist = ($this->x36_idhist == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_idhist"]:$this->x36_idhist);
+       $this->x36_idhist = ($this->x36_idhist === 0 || $this->x36_idhist === 0.0 || $this->x36_idhist == ""?@$GLOBALS["HTTP_POST_VARS"]["x36_idhist"]:$this->x36_idhist);
      }else{
      }
    }
@@ -466,7 +466,7 @@ class cl_aguadescarrehist {
    function sql_query ( $oid = null,$campos="aguadescarrehist.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -489,7 +489,7 @@ class cl_aguadescarrehist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_aguadescarrehist {
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_aguadescarrehist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

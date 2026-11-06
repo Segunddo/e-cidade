@@ -50,7 +50,7 @@ class cl_autoinscr {
                  y52_inscr = int4 = Inscricao 
                  ";
    //funcao construtor da classe 
-   function cl_autoinscr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("autoinscr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_autoinscr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y52_codauto = ($this->y52_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y52_codauto"]:$this->y52_codauto);
-       $this->y52_inscr = ($this->y52_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y52_inscr"]:$this->y52_inscr);
+       $this->y52_codauto = (($this->y52_codauto === 0 || $this->y52_codauto === 0.0 || $this->y52_codauto == "")?@$GLOBALS["HTTP_POST_VARS"]["y52_codauto"]:$this->y52_codauto);
+       $this->y52_inscr = (($this->y52_inscr === 0 || $this->y52_inscr === 0.0 || $this->y52_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["y52_inscr"]:$this->y52_inscr);
      }else{
-       $this->y52_codauto = ($this->y52_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y52_codauto"]:$this->y52_codauto);
+       $this->y52_codauto = (($this->y52_codauto === 0 || $this->y52_codauto === 0.0 || $this->y52_codauto == "")?@$GLOBALS["HTTP_POST_VARS"]["y52_codauto"]:$this->y52_codauto);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_autoinscr {
        return false;
      }
        $this->y52_codauto = $y52_codauto; 
-     if(($this->y52_codauto == null) || ($this->y52_codauto == "") ){ 
+     if(($this->y52_codauto == null) || (($this->y52_codauto === 0 || $this->y52_codauto === 0.0 || $this->y52_codauto == "")) ){ 
        $this->erro_sql = " Campo y52_codauto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_autoinscr {
    function sql_query ( $y52_codauto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_autoinscr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_autoinscr {
    function sql_query_file ( $y52_codauto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_autoinscr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_aguaconsumorec_classe.php"));
 include(modification("classes/db_aguaconsumo_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $claguaconsumorec = new cl_aguaconsumorec;
 $claguaconsumo = new cl_aguaconsumo;

@@ -52,7 +52,7 @@ class cl_cursosocialcidadaoausencia {
                  as18_cursocialcidadao = int4 = Curso 
                  ";
    //funcao construtor da classe 
-   function cl_cursosocialcidadaoausencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cursosocialcidadaoausencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cursosocialcidadaoausencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->as18_sequencial = ($this->as18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as18_sequencial"]:$this->as18_sequencial);
-       $this->as18_cursosocialaula = ($this->as18_cursosocialaula == ""?@$GLOBALS["HTTP_POST_VARS"]["as18_cursosocialaula"]:$this->as18_cursosocialaula);
-       $this->as18_cursocialcidadao = ($this->as18_cursocialcidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["as18_cursocialcidadao"]:$this->as18_cursocialcidadao);
+       $this->as18_sequencial = ($this->as18_sequencial === 0 || $this->as18_sequencial === 0.0 || $this->as18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as18_sequencial"]:$this->as18_sequencial);
+       $this->as18_cursosocialaula = ($this->as18_cursosocialaula === 0 || $this->as18_cursosocialaula === 0.0 || $this->as18_cursosocialaula == ""?@$GLOBALS["HTTP_POST_VARS"]["as18_cursosocialaula"]:$this->as18_cursosocialaula);
+       $this->as18_cursocialcidadao = ($this->as18_cursocialcidadao === 0 || $this->as18_cursocialcidadao === 0.0 || $this->as18_cursocialcidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["as18_cursocialcidadao"]:$this->as18_cursocialcidadao);
      }else{
-       $this->as18_sequencial = ($this->as18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as18_sequencial"]:$this->as18_sequencial);
+       $this->as18_sequencial = ($this->as18_sequencial === 0 || $this->as18_sequencial === 0.0 || $this->as18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as18_sequencial"]:$this->as18_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cursosocialcidadaoausencia {
          $this->as18_sequencial = $as18_sequencial; 
        }
      }
-     if(($this->as18_sequencial == null) || ($this->as18_sequencial == "") ){ 
+     if(($this->as18_sequencial == null) || ($this->as18_sequencial === 0 || $this->as18_sequencial === 0.0 || $this->as18_sequencial == "") ){ 
        $this->erro_sql = " Campo as18_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_cursosocialcidadaoausencia {
    function sql_query ( $as18_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -408,7 +408,7 @@ class cl_cursosocialcidadaoausencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_cursosocialcidadaoausencia {
    function sql_query_file ( $as18_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -442,7 +442,7 @@ class cl_cursosocialcidadaoausencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

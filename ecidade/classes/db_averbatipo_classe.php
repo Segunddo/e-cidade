@@ -59,7 +59,7 @@ class cl_averbatipo {
                  j93_averbagrupo = int4 = Grupo 
                  ";
    //funcao construtor da classe 
-   function cl_averbatipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("averbatipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,9 +76,9 @@ class cl_averbatipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j93_codigo = ($this->j93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_codigo"]:$this->j93_codigo);
+       $this->j93_codigo = ($this->j93_codigo === 0 || $this->j93_codigo === 0.0 || $this->j93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_codigo"]:$this->j93_codigo);
        $this->j93_descr = ($this->j93_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_descr"]:$this->j93_descr);
-       $this->j93_regra = ($this->j93_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_regra"]:$this->j93_regra);
+       $this->j93_regra = ($this->j93_regra === 0 || $this->j93_regra === 0.0 || $this->j93_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_regra"]:$this->j93_regra);
        if($this->j93_datalimite == ""){
          $this->j93_datalimite_dia = ($this->j93_datalimite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_datalimite_dia"]:$this->j93_datalimite_dia);
          $this->j93_datalimite_mes = ($this->j93_datalimite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_datalimite_mes"]:$this->j93_datalimite_mes);
@@ -87,9 +87,9 @@ class cl_averbatipo {
             $this->j93_datalimite = $this->j93_datalimite_ano."-".$this->j93_datalimite_mes."-".$this->j93_datalimite_dia;
          }
        }
-       $this->j93_averbagrupo = ($this->j93_averbagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_averbagrupo"]:$this->j93_averbagrupo);
+       $this->j93_averbagrupo = ($this->j93_averbagrupo === 0 || $this->j93_averbagrupo === 0.0 || $this->j93_averbagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_averbagrupo"]:$this->j93_averbagrupo);
      }else{
-       $this->j93_codigo = ($this->j93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_codigo"]:$this->j93_codigo);
+       $this->j93_codigo = ($this->j93_codigo === 0 || $this->j93_codigo === 0.0 || $this->j93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_codigo"]:$this->j93_codigo);
      }
    }
    // funcao para inclusao
@@ -149,7 +149,7 @@ class cl_averbatipo {
          $this->j93_codigo = $j93_codigo; 
        }
      }
-     if(($this->j93_codigo == null) || ($this->j93_codigo == "") ){ 
+     if(($this->j93_codigo == null) || ($this->j93_codigo === 0 || $this->j93_codigo === 0.0 || $this->j93_codigo == "") ){ 
        $this->erro_sql = " Campo j93_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_averbatipo {
    function sql_query ( $j93_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_averbatipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -455,7 +455,7 @@ class cl_averbatipo {
    function sql_query_file ( $j93_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -476,7 +476,7 @@ class cl_averbatipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

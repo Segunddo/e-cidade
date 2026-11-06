@@ -52,7 +52,7 @@ class cl_cgmtipoempresa {
                  z03_tipoempresa = int4 = Código Tipo Empresa 
                  ";
   //funcao construtor da classe 
-  public function cl_cgmtipoempresa() { 
+  public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgmtipoempresa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cgmtipoempresa {
   // funcao para atualizar campos
   public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z03_sequencial = ($this->z03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z03_sequencial"]:$this->z03_sequencial);
-       $this->z03_numcgm = ($this->z03_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z03_numcgm"]:$this->z03_numcgm);
-       $this->z03_tipoempresa = ($this->z03_tipoempresa == ""?@$GLOBALS["HTTP_POST_VARS"]["z03_tipoempresa"]:$this->z03_tipoempresa);
+       $this->z03_sequencial = (($this->z03_sequencial === 0 || $this->z03_sequencial === 0.0 || $this->z03_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["z03_sequencial"]:$this->z03_sequencial);
+       $this->z03_numcgm = (($this->z03_numcgm === 0 || $this->z03_numcgm === 0.0 || $this->z03_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["z03_numcgm"]:$this->z03_numcgm);
+       $this->z03_tipoempresa = (($this->z03_tipoempresa === 0 || $this->z03_tipoempresa === 0.0 || $this->z03_tipoempresa == "")?@$GLOBALS["HTTP_POST_VARS"]["z03_tipoempresa"]:$this->z03_tipoempresa);
      }else{
-       $this->z03_sequencial = ($this->z03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z03_sequencial"]:$this->z03_sequencial);
+       $this->z03_sequencial = (($this->z03_sequencial === 0 || $this->z03_sequencial === 0.0 || $this->z03_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["z03_sequencial"]:$this->z03_sequencial);
      }
   }
   // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cgmtipoempresa {
          $this->z03_sequencial = $z03_sequencial; 
        }
      }
-     if(($this->z03_sequencial == null) || ($this->z03_sequencial == "") ){ 
+     if(($this->z03_sequencial == null) || (($this->z03_sequencial === 0 || $this->z03_sequencial === 0.0 || $this->z03_sequencial == "")) ){ 
        $this->erro_sql = " Campo z03_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

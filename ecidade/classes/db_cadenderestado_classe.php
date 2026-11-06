@@ -54,7 +54,7 @@ class cl_cadenderestado {
                  db71_descricao = varchar(100) = Descrição do Estado 
                  ";
    //funcao construtor da classe 
-   function cl_cadenderestado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadenderestado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_cadenderestado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db71_sequencial = ($this->db71_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db71_sequencial"]:$this->db71_sequencial);
-       $this->db71_cadenderpais = ($this->db71_cadenderpais == ""?@$GLOBALS["HTTP_POST_VARS"]["db71_cadenderpais"]:$this->db71_cadenderpais);
+       $this->db71_sequencial = ($this->db71_sequencial === 0 || $this->db71_sequencial === 0.0 || $this->db71_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db71_sequencial"]:$this->db71_sequencial);
+       $this->db71_cadenderpais = ($this->db71_cadenderpais === 0 || $this->db71_cadenderpais === 0.0 || $this->db71_cadenderpais == ""?@$GLOBALS["HTTP_POST_VARS"]["db71_cadenderpais"]:$this->db71_cadenderpais);
        $this->db71_sigla = ($this->db71_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["db71_sigla"]:$this->db71_sigla);
        $this->db71_descricao = ($this->db71_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db71_descricao"]:$this->db71_descricao);
      }else{
-       $this->db71_sequencial = ($this->db71_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db71_sequencial"]:$this->db71_sequencial);
+       $this->db71_sequencial = ($this->db71_sequencial === 0 || $this->db71_sequencial === 0.0 || $this->db71_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db71_sequencial"]:$this->db71_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_cadenderestado {
          $this->db71_sequencial = $db71_sequencial; 
        }
      }
-     if(($this->db71_sequencial == null) || ($this->db71_sequencial == "") ){ 
+     if(($this->db71_sequencial == null) || ($this->db71_sequencial === 0 || $this->db71_sequencial === 0.0 || $this->db71_sequencial == "") ){ 
        $this->erro_sql = " Campo db71_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

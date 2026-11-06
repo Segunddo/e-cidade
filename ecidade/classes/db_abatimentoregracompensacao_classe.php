@@ -54,7 +54,7 @@ class cl_abatimentoregracompensacao {
                  k156_observacao = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_abatimentoregracompensacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("abatimentoregracompensacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_abatimentoregracompensacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k156_sequencial = ($this->k156_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k156_sequencial"]:$this->k156_sequencial);
-       $this->k156_abatimento = ($this->k156_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k156_abatimento"]:$this->k156_abatimento);
-       $this->k156_regracompensacao = ($this->k156_regracompensacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k156_regracompensacao"]:$this->k156_regracompensacao);
+       $this->k156_sequencial = ($this->k156_sequencial === 0 || $this->k156_sequencial === 0.0 || $this->k156_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k156_sequencial"]:$this->k156_sequencial);
+       $this->k156_abatimento = ($this->k156_abatimento === 0 || $this->k156_abatimento === 0.0 || $this->k156_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k156_abatimento"]:$this->k156_abatimento);
+       $this->k156_regracompensacao = ($this->k156_regracompensacao === 0 || $this->k156_regracompensacao === 0.0 || $this->k156_regracompensacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k156_regracompensacao"]:$this->k156_regracompensacao);
        $this->k156_observacao = ($this->k156_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k156_observacao"]:$this->k156_observacao);
      }else{
-       $this->k156_sequencial = ($this->k156_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k156_sequencial"]:$this->k156_sequencial);
+       $this->k156_sequencial = ($this->k156_sequencial === 0 || $this->k156_sequencial === 0.0 || $this->k156_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k156_sequencial"]:$this->k156_sequencial);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_abatimentoregracompensacao {
          $this->k156_sequencial = $k156_sequencial; 
        }
      }
-     if(($this->k156_sequencial == null) || ($this->k156_sequencial == "") ){ 
+     if(($this->k156_sequencial == null) || ($this->k156_sequencial === 0 || $this->k156_sequencial === 0.0 || $this->k156_sequencial == "") ){ 
        $this->erro_sql = " Campo k156_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -373,7 +373,7 @@ class cl_abatimentoregracompensacao {
    function sql_query ( $k156_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_abatimentoregracompensacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_abatimentoregracompensacao {
    function sql_query_file ( $k156_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_abatimentoregracompensacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

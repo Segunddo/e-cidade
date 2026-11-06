@@ -52,7 +52,7 @@ class cl_bensempnotaitem {
                  e136_empnotaitem = int4 = Empnotaitem 
                  ";
    //funcao construtor da classe 
-   function cl_bensempnotaitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bensempnotaitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_bensempnotaitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e136_sequencial = ($this->e136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e136_sequencial"]:$this->e136_sequencial);
-       $this->e136_bens = ($this->e136_bens == ""?@$GLOBALS["HTTP_POST_VARS"]["e136_bens"]:$this->e136_bens);
-       $this->e136_empnotaitem = ($this->e136_empnotaitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e136_empnotaitem"]:$this->e136_empnotaitem);
+       $this->e136_sequencial = ($this->e136_sequencial === 0 || $this->e136_sequencial === 0.0 || $this->e136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e136_sequencial"]:$this->e136_sequencial);
+       $this->e136_bens = ($this->e136_bens === 0 || $this->e136_bens === 0.0 || $this->e136_bens == ""?@$GLOBALS["HTTP_POST_VARS"]["e136_bens"]:$this->e136_bens);
+       $this->e136_empnotaitem = ($this->e136_empnotaitem === 0 || $this->e136_empnotaitem === 0.0 || $this->e136_empnotaitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e136_empnotaitem"]:$this->e136_empnotaitem);
      }else{
-       $this->e136_sequencial = ($this->e136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e136_sequencial"]:$this->e136_sequencial);
+       $this->e136_sequencial = ($this->e136_sequencial === 0 || $this->e136_sequencial === 0.0 || $this->e136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e136_sequencial"]:$this->e136_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_bensempnotaitem {
          $this->e136_sequencial = $e136_sequencial; 
        }
      }
-     if(($this->e136_sequencial == null) || ($this->e136_sequencial == "") ){ 
+     if(($this->e136_sequencial == null) || ($this->e136_sequencial === 0 || $this->e136_sequencial === 0.0 || $this->e136_sequencial == "") ){ 
        $this->erro_sql = " Campo e136_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

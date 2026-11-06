@@ -64,7 +64,7 @@ class cl_solicitaregistropreco {
                  pc54_formacontrole = int4 = Forma de Controle
                  ";
    //funcao construtor da classe
-   function cl_solicitaregistropreco() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("solicitaregistropreco");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,8 +81,8 @@ class cl_solicitaregistropreco {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc54_sequencial = ($this->pc54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc54_sequencial"]:$this->pc54_sequencial);
-       $this->pc54_solicita = ($this->pc54_solicita == ""?@$GLOBALS["HTTP_POST_VARS"]["pc54_solicita"]:$this->pc54_solicita);
+       $this->pc54_sequencial = ($this->pc54_sequencial === 0 || $this->pc54_sequencial === 0.0 || $this->pc54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc54_sequencial"]:$this->pc54_sequencial);
+       $this->pc54_solicita = ($this->pc54_solicita === 0 || $this->pc54_solicita === 0.0 || $this->pc54_solicita == ""?@$GLOBALS["HTTP_POST_VARS"]["pc54_solicita"]:$this->pc54_solicita);
        if($this->pc54_datainicio == ""){
          $this->pc54_datainicio_dia = ($this->pc54_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc54_datainicio_dia"]:$this->pc54_datainicio_dia);
          $this->pc54_datainicio_mes = ($this->pc54_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc54_datainicio_mes"]:$this->pc54_datainicio_mes);
@@ -100,9 +100,9 @@ class cl_solicitaregistropreco {
          }
        }
        $this->pc54_liberado = ($this->pc54_liberado == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc54_liberado"]:$this->pc54_liberado);
-       $this->pc54_formacontrole = ($this->pc54_formacontrole == ""?@$GLOBALS["HTTP_POST_VARS"]["pc54_formacontrole"]:$this->pc54_formacontrole);
+       $this->pc54_formacontrole = ($this->pc54_formacontrole === 0 || $this->pc54_formacontrole === 0.0 || $this->pc54_formacontrole == ""?@$GLOBALS["HTTP_POST_VARS"]["pc54_formacontrole"]:$this->pc54_formacontrole);
      }else{
-       $this->pc54_sequencial = ($this->pc54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc54_sequencial"]:$this->pc54_sequencial);
+       $this->pc54_sequencial = ($this->pc54_sequencial === 0 || $this->pc54_sequencial === 0.0 || $this->pc54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc54_sequencial"]:$this->pc54_sequencial);
      }
    }
    // funcao para inclusao
@@ -171,7 +171,7 @@ class cl_solicitaregistropreco {
          $this->pc54_sequencial = $pc54_sequencial;
        }
      }
-     if(($this->pc54_sequencial == null) || ($this->pc54_sequencial == "") ){
+     if(($this->pc54_sequencial == null) || ($this->pc54_sequencial === 0 || $this->pc54_sequencial === 0.0 || $this->pc54_sequencial == "") ){
        $this->erro_sql = " Campo pc54_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -551,7 +551,7 @@ class cl_solicitaregistropreco {
    function sql_query_solicitaanulada ( $pc54_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -578,7 +578,7 @@ class cl_solicitaregistropreco {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -590,7 +590,7 @@ class cl_solicitaregistropreco {
    function sql_query_origem ( $pc54_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -618,7 +618,7 @@ class cl_solicitaregistropreco {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -631,7 +631,7 @@ class cl_solicitaregistropreco {
   function sql_query_registro_licitacao ( $pc54_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -666,7 +666,7 @@ class cl_solicitaregistropreco {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -679,7 +679,7 @@ class cl_solicitaregistropreco {
   function sql_query_registro_compilacao ( $pc54_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -705,7 +705,7 @@ class cl_solicitaregistropreco {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

@@ -28,7 +28,8 @@
 set_time_limit(0);
 include(modification("libs/db_sql.php"));
 require(modification("fpdf151/pdf.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 if (isset($campo)){
   $empr = "and b.k00_inscr in (".str_replace("-",",",$campo).") ";
@@ -50,7 +51,7 @@ $anofin = substr($dataf,0,4);
    }else{
       @$xmax  .= " 0 as xx".$x;
    }
-   $mesini += 1;
+   $mesini = (int)$mesini + 1;
    if ($mesini > 12){
       $anoini += 1;
       $mesini = 1;
@@ -148,7 +149,7 @@ if ($tipo == 'c'){
 //echo $sql;exit;
 $result = db_query($sql) or die($sql);
 //db_criatabela($result);
-$num = pg_numrows($result);
+$num = pg_num_rows($result);
 if ($num == 0 ){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existe pagamentos efetuados no período de '.db_formatar($datai,'d').' até '.db_formatar($dataf,'d'));
 }
@@ -192,7 +193,7 @@ for ($x = 1; $x < 13;$x++){
     $pdf->cell($espaco,$altura,db_formatar($mesini,'s','0',2,'e').'/'.$anoini,1,0,'C',1);
    }
    
-   $mesini += 1;
+   $mesini = (int)$mesini + 1;
    if ($mesini > 12){
       $anoini += 1;
       $mesini = 1;
@@ -216,7 +217,7 @@ for ( $i = 0; $i < $num; $i++) {
          }else{
             $pdf->cell($espaco,$altura,db_formatar($mesini,'s','0',2,'e').'/'.$anoini,1,0,'C',1);
          }
-         $mesini += 1;
+         $mesini = (int)$mesini + 1;
          if ($mesini > 12){
             $anoini += 1;
             $mesini = 1;

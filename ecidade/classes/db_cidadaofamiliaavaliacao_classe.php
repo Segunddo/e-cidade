@@ -52,7 +52,7 @@ class cl_cidadaofamiliaavaliacao {
                  as06_avaliacaogruporesposta = int4 = Avaliação 
                  ";
    //funcao construtor da classe 
-   function cl_cidadaofamiliaavaliacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cidadaofamiliaavaliacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cidadaofamiliaavaliacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->as06_sequencial = ($this->as06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as06_sequencial"]:$this->as06_sequencial);
-       $this->as06_cidadaofamilia = ($this->as06_cidadaofamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["as06_cidadaofamilia"]:$this->as06_cidadaofamilia);
-       $this->as06_avaliacaogruporesposta = ($this->as06_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["as06_avaliacaogruporesposta"]:$this->as06_avaliacaogruporesposta);
+       $this->as06_sequencial = ($this->as06_sequencial === 0 || $this->as06_sequencial === 0.0 || $this->as06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as06_sequencial"]:$this->as06_sequencial);
+       $this->as06_cidadaofamilia = ($this->as06_cidadaofamilia === 0 || $this->as06_cidadaofamilia === 0.0 || $this->as06_cidadaofamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["as06_cidadaofamilia"]:$this->as06_cidadaofamilia);
+       $this->as06_avaliacaogruporesposta = ($this->as06_avaliacaogruporesposta === 0 || $this->as06_avaliacaogruporesposta === 0.0 || $this->as06_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["as06_avaliacaogruporesposta"]:$this->as06_avaliacaogruporesposta);
      }else{
-       $this->as06_sequencial = ($this->as06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as06_sequencial"]:$this->as06_sequencial);
+       $this->as06_sequencial = ($this->as06_sequencial === 0 || $this->as06_sequencial === 0.0 || $this->as06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as06_sequencial"]:$this->as06_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cidadaofamiliaavaliacao {
          $this->as06_sequencial = $as06_sequencial; 
        }
      }
-     if(($this->as06_sequencial == null) || ($this->as06_sequencial == "") ){ 
+     if(($this->as06_sequencial == null) || ($this->as06_sequencial === 0 || $this->as06_sequencial === 0.0 || $this->as06_sequencial == "") ){ 
        $this->erro_sql = " Campo as06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -369,7 +369,7 @@ class cl_cidadaofamiliaavaliacao {
    function sql_query ( $as06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_cidadaofamiliaavaliacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_cidadaofamiliaavaliacao {
    function sql_query_file ( $as06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_cidadaofamiliaavaliacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

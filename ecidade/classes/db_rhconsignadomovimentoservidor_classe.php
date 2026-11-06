@@ -30,7 +30,7 @@ class cl_rhconsignadomovimentoservidor {
                  rh152_consignadomotivo = int4 = Motivo 
                  ";
    //funcao construtor da classe 
-   function cl_rhconsignadomovimentoservidor() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhconsignadomovimentoservidor"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_rhconsignadomovimentoservidor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh152_sequencial = ($this->rh152_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh152_sequencial"]:$this->rh152_sequencial);
-       $this->rh152_consignadomovimento = ($this->rh152_consignadomovimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh152_consignadomovimento"]:$this->rh152_consignadomovimento);
+       $this->rh152_sequencial = ($this->rh152_sequencial === 0 || $this->rh152_sequencial === 0.0 || $this->rh152_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh152_sequencial"]:$this->rh152_sequencial);
+       $this->rh152_consignadomovimento = ($this->rh152_consignadomovimento === 0 || $this->rh152_consignadomovimento === 0.0 || $this->rh152_consignadomovimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh152_consignadomovimento"]:$this->rh152_consignadomovimento);
        $this->rh152_regist = ($this->rh152_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh152_regist"]:$this->rh152_regist);
        $this->rh152_nome = ($this->rh152_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["rh152_nome"]:$this->rh152_nome);
-       $this->rh152_consignadomotivo = ($this->rh152_consignadomotivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh152_consignadomotivo"]:$this->rh152_consignadomotivo);
+       $this->rh152_consignadomotivo = ($this->rh152_consignadomotivo === 0 || $this->rh152_consignadomotivo === 0.0 || $this->rh152_consignadomotivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh152_consignadomotivo"]:$this->rh152_consignadomotivo);
      }else{
-       $this->rh152_sequencial = ($this->rh152_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh152_sequencial"]:$this->rh152_sequencial);
+       $this->rh152_sequencial = ($this->rh152_sequencial === 0 || $this->rh152_sequencial === 0.0 || $this->rh152_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh152_sequencial"]:$this->rh152_sequencial);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_rhconsignadomovimentoservidor {
          $this->rh152_sequencial = $rh152_sequencial; 
        }
      }
-     if(($this->rh152_sequencial == null) || ($this->rh152_sequencial == "") ){ 
+     if(($this->rh152_sequencial == null) || ($this->rh152_sequencial === 0 || $this->rh152_sequencial === 0.0 || $this->rh152_sequencial == "") ){ 
        $this->erro_sql = " Campo rh152_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

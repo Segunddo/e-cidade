@@ -54,7 +54,7 @@ class cl_conplanoconplanoorcamento {
                  c72_anousu = int4 = Anousu
                  ";
    //funcao construtor da classe
-   function cl_conplanoconplanoorcamento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conplanoconplanoorcamento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_conplanoconplanoorcamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c72_sequencial = ($this->c72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_sequencial"]:$this->c72_sequencial);
-       $this->c72_conplano = ($this->c72_conplano == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_conplano"]:$this->c72_conplano);
-       $this->c72_conplanoorcamento = ($this->c72_conplanoorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_conplanoorcamento"]:$this->c72_conplanoorcamento);
-       $this->c72_anousu = ($this->c72_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_anousu"]:$this->c72_anousu);
+       $this->c72_sequencial = ($this->c72_sequencial === 0 || $this->c72_sequencial === 0.0 || $this->c72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_sequencial"]:$this->c72_sequencial);
+       $this->c72_conplano = ($this->c72_conplano === 0 || $this->c72_conplano === 0.0 || $this->c72_conplano == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_conplano"]:$this->c72_conplano);
+       $this->c72_conplanoorcamento = ($this->c72_conplanoorcamento === 0 || $this->c72_conplanoorcamento === 0.0 || $this->c72_conplanoorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_conplanoorcamento"]:$this->c72_conplanoorcamento);
+       $this->c72_anousu = ($this->c72_anousu === 0 || $this->c72_anousu === 0.0 || $this->c72_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_anousu"]:$this->c72_anousu);
      }else{
-       $this->c72_sequencial = ($this->c72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_sequencial"]:$this->c72_sequencial);
+       $this->c72_sequencial = ($this->c72_sequencial === 0 || $this->c72_sequencial === 0.0 || $this->c72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_sequencial"]:$this->c72_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_conplanoconplanoorcamento {
          $this->c72_sequencial = $c72_sequencial;
        }
      }
-     if(($this->c72_sequencial == null) || ($this->c72_sequencial == "") ){
+     if(($this->c72_sequencial == null) || ($this->c72_sequencial === 0 || $this->c72_sequencial === 0.0 || $this->c72_sequencial == "") ){
        $this->erro_sql = " Campo c72_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

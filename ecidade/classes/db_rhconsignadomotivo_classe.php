@@ -24,7 +24,7 @@ class cl_rhconsignadomotivo {
                  rh154_motivo = varchar(100) = Motivo da Rejeição 
                  ";
    //funcao construtor da classe 
-   function cl_rhconsignadomotivo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhconsignadomotivo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -41,10 +41,10 @@ class cl_rhconsignadomotivo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh154_sequencial = ($this->rh154_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh154_sequencial"]:$this->rh154_sequencial);
+       $this->rh154_sequencial = ($this->rh154_sequencial === 0 || $this->rh154_sequencial === 0.0 || $this->rh154_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh154_sequencial"]:$this->rh154_sequencial);
        $this->rh154_motivo = ($this->rh154_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh154_motivo"]:$this->rh154_motivo);
      }else{
-       $this->rh154_sequencial = ($this->rh154_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh154_sequencial"]:$this->rh154_sequencial);
+       $this->rh154_sequencial = ($this->rh154_sequencial === 0 || $this->rh154_sequencial === 0.0 || $this->rh154_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh154_sequencial"]:$this->rh154_sequencial);
      }
    }
    // funcao para inclusao
@@ -83,7 +83,7 @@ class cl_rhconsignadomotivo {
          $this->rh154_sequencial = $rh154_sequencial; 
        }
      }
-     if(($this->rh154_sequencial == null) || ($this->rh154_sequencial == "") ){ 
+     if(($this->rh154_sequencial == null) || ($this->rh154_sequencial === 0 || $this->rh154_sequencial === 0.0 || $this->rh154_sequencial == "") ){ 
        $this->erro_sql = " Campo rh154_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

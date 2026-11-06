@@ -105,13 +105,13 @@ class cl_conlancamval
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->c69_sequen = ($this->c69_sequen == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_sequen"] : $this->c69_sequen);
-            $this->c69_anousu = ($this->c69_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_anousu"] : $this->c69_anousu);
-            $this->c69_codlan = ($this->c69_codlan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_codlan"] : $this->c69_codlan);
-            $this->c69_codhist = ($this->c69_codhist == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_codhist"] : $this->c69_codhist);
-            $this->c69_credito = ($this->c69_credito == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_credito"] : $this->c69_credito);
-            $this->c69_debito = ($this->c69_debito == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_debito"] : $this->c69_debito);
-            $this->c69_valor = ($this->c69_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_valor"] : $this->c69_valor);
+            $this->c69_sequen = ($this->c69_sequen === 0 || $this->c69_sequen === 0.0 || $this->c69_sequen == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_sequen"] : $this->c69_sequen);
+            $this->c69_anousu = ($this->c69_anousu === 0 || $this->c69_anousu === 0.0 || $this->c69_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_anousu"] : $this->c69_anousu);
+            $this->c69_codlan = ($this->c69_codlan === 0 || $this->c69_codlan === 0.0 || $this->c69_codlan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_codlan"] : $this->c69_codlan);
+            $this->c69_codhist = ($this->c69_codhist === 0 || $this->c69_codhist === 0.0 || $this->c69_codhist == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_codhist"] : $this->c69_codhist);
+            $this->c69_credito = ($this->c69_credito === 0 || $this->c69_credito === 0.0 || $this->c69_credito == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_credito"] : $this->c69_credito);
+            $this->c69_debito = ($this->c69_debito === 0 || $this->c69_debito === 0.0 || $this->c69_debito == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_debito"] : $this->c69_debito);
+            $this->c69_valor = ($this->c69_valor === 0 || $this->c69_valor === 0.0 || $this->c69_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_valor"] : $this->c69_valor);
             if ($this->c69_data == "") {
                 $this->c69_data_dia = ($this->c69_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_data_dia"] : $this->c69_data_dia);
                 $this->c69_data_mes = ($this->c69_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_data_mes"] : $this->c69_data_mes);
@@ -121,7 +121,7 @@ class cl_conlancamval
                 }
             }
         } else {
-            $this->c69_sequen = ($this->c69_sequen == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_sequen"] : $this->c69_sequen);
+            $this->c69_sequen = ($this->c69_sequen === 0 || $this->c69_sequen === 0.0 || $this->c69_sequen == "" ? @$GLOBALS["HTTP_POST_VARS"]["c69_sequen"] : $this->c69_sequen);
         }
     }
 

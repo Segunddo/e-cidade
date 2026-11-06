@@ -63,7 +63,7 @@ class cl_aguacortematmov {
                  x42_leitura = int8 = Última Leitura do Hidrômetro 
                  ";
    //funcao construtor da classe 
-   function cl_aguacortematmov() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacortematmov"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,9 +80,9 @@ class cl_aguacortematmov {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x42_codmov = ($this->x42_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["x42_codmov"]:$this->x42_codmov);
-       $this->x42_codsituacao = ($this->x42_codsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x42_codsituacao"]:$this->x42_codsituacao);
-       $this->x42_codcortemat = ($this->x42_codcortemat == ""?@$GLOBALS["HTTP_POST_VARS"]["x42_codcortemat"]:$this->x42_codcortemat);
+       $this->x42_codmov = (($this->x42_codmov === 0 || $this->x42_codmov === 0.0 || ($this->x42_codmov === 0 || $this->x42_codmov === 0.0 || $this->x42_codmov == ""))?@$GLOBALS["HTTP_POST_VARS"]["x42_codmov"]:$this->x42_codmov);
+       $this->x42_codsituacao = (($this->x42_codsituacao === 0 || $this->x42_codsituacao === 0.0 || ($this->x42_codsituacao === 0 || $this->x42_codsituacao === 0.0 || $this->x42_codsituacao == ""))?@$GLOBALS["HTTP_POST_VARS"]["x42_codsituacao"]:$this->x42_codsituacao);
+       $this->x42_codcortemat = (($this->x42_codcortemat === 0 || $this->x42_codcortemat === 0.0 || ($this->x42_codcortemat === 0 || $this->x42_codcortemat === 0.0 || $this->x42_codcortemat == ""))?@$GLOBALS["HTTP_POST_VARS"]["x42_codcortemat"]:$this->x42_codcortemat);
        $this->x42_historico = ($this->x42_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["x42_historico"]:$this->x42_historico);
        if($this->x42_data == ""){
          $this->x42_data_dia = ($this->x42_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x42_data_dia"]:$this->x42_data_dia);
@@ -92,10 +92,10 @@ class cl_aguacortematmov {
             $this->x42_data = $this->x42_data_ano."-".$this->x42_data_mes."-".$this->x42_data_dia;
          }
        }
-       $this->x42_usuario = ($this->x42_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x42_usuario"]:$this->x42_usuario);
-       $this->x42_leitura = ($this->x42_leitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x42_leitura"]:$this->x42_leitura);
+       $this->x42_usuario = (($this->x42_usuario === 0 || $this->x42_usuario === 0.0 || ($this->x42_usuario === 0 || $this->x42_usuario === 0.0 || $this->x42_usuario == ""))?@$GLOBALS["HTTP_POST_VARS"]["x42_usuario"]:$this->x42_usuario);
+       $this->x42_leitura = (($this->x42_leitura === 0 || $this->x42_leitura === 0.0 || ($this->x42_leitura === 0 || $this->x42_leitura === 0.0 || $this->x42_leitura == ""))?@$GLOBALS["HTTP_POST_VARS"]["x42_leitura"]:$this->x42_leitura);
      }else{
-       $this->x42_codmov = ($this->x42_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["x42_codmov"]:$this->x42_codmov);
+       $this->x42_codmov = (($this->x42_codmov === 0 || $this->x42_codmov === 0.0 || ($this->x42_codmov === 0 || $this->x42_codmov === 0.0 || $this->x42_codmov == ""))?@$GLOBALS["HTTP_POST_VARS"]["x42_codmov"]:$this->x42_codmov);
      }
    }
    // funcao para inclusao
@@ -173,7 +173,7 @@ class cl_aguacortematmov {
          $this->x42_codmov = $x42_codmov; 
        }
      }
-     if(($this->x42_codmov == null) || ($this->x42_codmov == "") ){ 
+     if(($this->x42_codmov == null) || (($this->x42_codmov === 0 || $this->x42_codmov === 0.0 || ($this->x42_codmov === 0 || $this->x42_codmov === 0.0 || $this->x42_codmov == ""))) ){ 
        $this->erro_sql = " Campo x42_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -496,7 +496,7 @@ class cl_aguacortematmov {
    function sql_query ( $x42_codmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -522,7 +522,7 @@ class cl_aguacortematmov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -535,7 +535,7 @@ class cl_aguacortematmov {
    function sql_query_file ( $x42_codmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -556,7 +556,7 @@ class cl_aguacortematmov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -32,7 +32,7 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("it01_guia");
 $clrotulo->label("z01_nome");
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_old.location.href='itb1_itbipropriold002.php?chavepesquisa=$it20_guia&it20_numcgm=$it20_numcgm'</script>";

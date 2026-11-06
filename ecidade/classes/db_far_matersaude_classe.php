@@ -77,7 +77,7 @@ class cl_far_matersaude {
                  fa01_medicamentos = int4 = medicamentos
                  ";
    //funcao construtor da classe
-   function cl_far_matersaude() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("far_matersaude");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -94,24 +94,24 @@ class cl_far_matersaude {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa01_i_codigo = ($this->fa01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codigo"]:$this->fa01_i_codigo);
+       $this->fa01_i_codigo = ($this->fa01_i_codigo === 0 || $this->fa01_i_codigo === 0.0 || $this->fa01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codigo"]:$this->fa01_i_codigo);
        $this->fa01_t_obs = ($this->fa01_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_t_obs"]:$this->fa01_t_obs);
-       $this->fa01_i_codmater = ($this->fa01_i_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codmater"]:$this->fa01_i_codmater);
-       $this->fa01_i_class = ($this->fa01_i_class == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_class"]:$this->fa01_i_class);
+       $this->fa01_i_codmater = ($this->fa01_i_codmater === 0 || $this->fa01_i_codmater === 0.0 || $this->fa01_i_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codmater"]:$this->fa01_i_codmater);
+       $this->fa01_i_class = ($this->fa01_i_class === 0 || $this->fa01_i_class === 0.0 || $this->fa01_i_class == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_class"]:$this->fa01_i_class);
        $this->fa01_c_nomegenerico = ($this->fa01_c_nomegenerico == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_c_nomegenerico"]:$this->fa01_c_nomegenerico);
-       $this->fa01_i_medanvisa = ($this->fa01_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medanvisa"]:$this->fa01_i_medanvisa);
-       $this->fa01_i_prescricaomed = ($this->fa01_i_prescricaomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_prescricaomed"]:$this->fa01_i_prescricaomed);
-       $this->fa01_i_classemed = ($this->fa01_i_classemed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_classemed"]:$this->fa01_i_classemed);
-       $this->fa01_i_listacontroladomed = ($this->fa01_i_listacontroladomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_listacontroladomed"]:$this->fa01_i_listacontroladomed);
-       $this->fa01_i_medrefemed = ($this->fa01_i_medrefemed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medrefemed"]:$this->fa01_i_medrefemed);
-       $this->fa01_i_laboratoriomed = ($this->fa01_i_laboratoriomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_laboratoriomed"]:$this->fa01_i_laboratoriomed);
-       $this->fa01_i_formafarmaceuticamed = ($this->fa01_i_formafarmaceuticamed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_formafarmaceuticamed"]:$this->fa01_i_formafarmaceuticamed);
-       $this->fa01_i_concentracaomed = ($this->fa01_i_concentracaomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_concentracaomed"]:$this->fa01_i_concentracaomed);
-       $this->fa01_i_medhiperdia = ($this->fa01_i_medhiperdia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medhiperdia"]:$this->fa01_i_medhiperdia);
+       $this->fa01_i_medanvisa = ($this->fa01_i_medanvisa === 0 || $this->fa01_i_medanvisa === 0.0 || $this->fa01_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medanvisa"]:$this->fa01_i_medanvisa);
+       $this->fa01_i_prescricaomed = ($this->fa01_i_prescricaomed === 0 || $this->fa01_i_prescricaomed === 0.0 || $this->fa01_i_prescricaomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_prescricaomed"]:$this->fa01_i_prescricaomed);
+       $this->fa01_i_classemed = ($this->fa01_i_classemed === 0 || $this->fa01_i_classemed === 0.0 || $this->fa01_i_classemed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_classemed"]:$this->fa01_i_classemed);
+       $this->fa01_i_listacontroladomed = ($this->fa01_i_listacontroladomed === 0 || $this->fa01_i_listacontroladomed === 0.0 || $this->fa01_i_listacontroladomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_listacontroladomed"]:$this->fa01_i_listacontroladomed);
+       $this->fa01_i_medrefemed = ($this->fa01_i_medrefemed === 0 || $this->fa01_i_medrefemed === 0.0 || $this->fa01_i_medrefemed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medrefemed"]:$this->fa01_i_medrefemed);
+       $this->fa01_i_laboratoriomed = ($this->fa01_i_laboratoriomed === 0 || $this->fa01_i_laboratoriomed === 0.0 || $this->fa01_i_laboratoriomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_laboratoriomed"]:$this->fa01_i_laboratoriomed);
+       $this->fa01_i_formafarmaceuticamed = ($this->fa01_i_formafarmaceuticamed === 0 || $this->fa01_i_formafarmaceuticamed === 0.0 || $this->fa01_i_formafarmaceuticamed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_formafarmaceuticamed"]:$this->fa01_i_formafarmaceuticamed);
+       $this->fa01_i_concentracaomed = ($this->fa01_i_concentracaomed === 0 || $this->fa01_i_concentracaomed === 0.0 || $this->fa01_i_concentracaomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_concentracaomed"]:$this->fa01_i_concentracaomed);
+       $this->fa01_i_medhiperdia = ($this->fa01_i_medhiperdia === 0 || $this->fa01_i_medhiperdia === 0.0 || $this->fa01_i_medhiperdia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medhiperdia"]:$this->fa01_i_medhiperdia);
        $this->fa01_codigobarras = ($this->fa01_codigobarras == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_codigobarras"]:$this->fa01_codigobarras);
        $this->fa01_medicamentos = ($this->fa01_medicamentos == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_medicamentos"]:$this->fa01_medicamentos);
      }else{
-       $this->fa01_i_codigo = ($this->fa01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codigo"]:$this->fa01_i_codigo);
+       $this->fa01_i_codigo = ($this->fa01_i_codigo === 0 || $this->fa01_i_codigo === 0.0 || $this->fa01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codigo"]:$this->fa01_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -195,7 +195,7 @@ class cl_far_matersaude {
          $this->fa01_i_codigo = $fa01_i_codigo;
        //}
      }
-     if(($this->fa01_i_codigo == null) || ($this->fa01_i_codigo == "") ){
+     if(($this->fa01_i_codigo == null) || ($this->fa01_i_codigo === 0 || $this->fa01_i_codigo === 0.0 || $this->fa01_i_codigo == "") ){
        $this->erro_sql = " Campo fa01_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -689,7 +689,7 @@ class cl_far_matersaude {
 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -719,7 +719,7 @@ class cl_far_matersaude {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -732,7 +732,7 @@ class cl_far_matersaude {
 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -758,7 +758,7 @@ class cl_far_matersaude {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -777,7 +777,7 @@ class cl_far_matersaude {
 
     if ($sCampos != "*" ) {
 
-      $sCampos_sql = split("#",$sCampos);
+      $sCampos_sql = preg_split("#\\##m",$sCampos);
       $sVirgula    = "";
 
       for( $i = 0; $i < sizeof($sCampos_sql); $i++ ) {
@@ -815,7 +815,7 @@ class cl_far_matersaude {
     if( $sOrdem != null ) {
 
       $sSql        .= " order by ";
-      $sCampos_sql  = split( "#", $sOrdem );
+      $sCampos_sql  = preg_split( "#\\##m", $sOrdem );
       $sVirgula     = "";
 
       for( $i = 0; $i < sizeof($sCampos_sql); $i++ ) {
@@ -836,7 +836,7 @@ class cl_far_matersaude {
      $sSql = "select ";
      if ($sCampos != "*") {
 
-       $sCampos_sql = split("#",$sCampos);
+       $sCampos_sql = preg_split("#\\##m",$sCampos);
        $sVirgula    = "";
        for ($i = 0; $i < sizeof($sCampos_sql); $i++) {
 
@@ -867,7 +867,7 @@ class cl_far_matersaude {
      if ($sOrdem != null) {
 
        $sSql        .= " order by ";
-       $sCampos_sql  = split("#",$sOrdem);
+       $sCampos_sql  = preg_split("#\\##m",$sOrdem);
        $sVirgula     = "";
        for ($i = 0; $i < sizeof($sCampos_sql); $i++){
 
@@ -893,7 +893,7 @@ class cl_far_matersaude {
      $sSql = "select ";
      if ($sCampos != "*") {
 
-       $sCampos_sql = split("#",$sCampos);
+       $sCampos_sql = preg_split("#\\##m",$sCampos);
        $sVirgula    = "";
        for ($i = 0; $i < sizeof($sCampos_sql); $i++) {
 
@@ -925,7 +925,7 @@ class cl_far_matersaude {
      if ($sOrdem != null) {
 
        $sSql        .= " order by ";
-       $sCampos_sql  = split("#",$sOrdem);
+       $sCampos_sql  = preg_split("#\\##m",$sOrdem);
        $sVirgula     = "";
        for ($i = 0; $i < sizeof($sCampos_sql); $i++){
 
@@ -951,7 +951,7 @@ class cl_far_matersaude {
      $sSql = "select ";
      if ($sCampos != "*") {
 
-       $sCampos_sql = split("#",$sCampos);
+       $sCampos_sql = preg_split("#\\##m",$sCampos);
        $sVirgula    = "";
        for ($i = 0; $i < sizeof($sCampos_sql); $i++) {
 
@@ -1016,7 +1016,7 @@ class cl_far_matersaude {
      if ($sOrdem != null) {
 
        $sSql        .= " order by ";
-       $sCampos_sql  = split("#",$sOrdem);
+       $sCampos_sql  = preg_split("#\\##m",$sOrdem);
        $sVirgula     = "";
        for ($i = 0; $i < sizeof($sCampos_sql); $i++){
 
@@ -1170,7 +1170,7 @@ class cl_far_matersaude {
     $sSql = "select ";
     if ($sCampos != "*") {
 
-      $sCampos_sql = split("#",$sCampos);
+      $sCampos_sql = preg_split("#\\##m",$sCampos);
       $sVirgula    = "";
       for ($i = 0; $i < sizeof($sCampos_sql); $i++) {
 
@@ -1200,7 +1200,7 @@ class cl_far_matersaude {
     if ($sOrdem != null) {
 
       $sSql        .= " order by ";
-      $sCampos_sql  = split("#",$sOrdem);
+      $sCampos_sql  = preg_split("#\\##m",$sOrdem);
       $sVirgula     = "";
       for ($i = 0; $i < sizeof($sCampos_sql); $i++){
 
@@ -1245,7 +1245,7 @@ class cl_far_matersaude {
 
     $sql = "select distinct ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1275,7 +1275,7 @@ class cl_far_matersaude {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

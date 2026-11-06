@@ -24,7 +24,8 @@
  *  Copia da licenca no diretorio licenca/licenca_en.txt
  *                                licenca/licenca_pt.txt
  */
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 use ECidade\Tributario\Arrecadacao\CGF\Repository\Certidao as RepositoryCertidao;
 
@@ -147,7 +148,7 @@ function adicionarCabecalhoTabelaDebitos($mostraDadosCda = false)
 }
 
 
-function adicionarCorpoTabelaDebitos($mostraDadosCda = false, $tabela, $campo, $valor, $DB_DATACALC, $tipo)
+function adicionarCorpoTabelaDebitos($mostraDadosCda = false, $tabela = null, $campo = null, $valor = null, $DB_DATACALC = null, $tipo = null)
 {
     global $Tv50_inicial, $Tv70_codforo, $Tv50_advog, $Tnome, $Tv54_descr, $Tv52_descr, $Tv53_descr, $Tv50_codmov, $numrows;
     $sLinhaRegistros = "";

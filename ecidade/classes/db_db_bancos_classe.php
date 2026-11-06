@@ -56,7 +56,7 @@ class cl_db_bancos {
                  db90_logo = oid = Arquivo do logo 
                  ";
    //funcao construtor da classe
-   function cl_db_bancos() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_bancos");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,7 +77,7 @@ class cl_db_bancos {
        $this->db90_descr = ($this->db90_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_descr"]:$this->db90_descr);
        $this->db90_digban = ($this->db90_digban == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_digban"]:$this->db90_digban);
        $this->db90_abrev = ($this->db90_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_abrev"]:$this->db90_abrev);
-       $this->db90_logo = ($this->db90_logo == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_logo"]:$this->db90_logo);
+       $this->db90_logo = (($this->db90_logo === 0 || $this->db90_logo === 0.0 || $this->db90_logo == "")?@$GLOBALS["HTTP_POST_VARS"]["db90_logo"]:$this->db90_logo);
      }else{
        $this->db90_codban = ($this->db90_codban == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_codban"]:$this->db90_codban);
      }
@@ -344,7 +344,7 @@ class cl_db_bancos {
    function sql_query ( $db90_codban=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_db_bancos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -377,7 +377,7 @@ class cl_db_bancos {
    function sql_query_empage ( $db90_codban=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_db_bancos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_db_bancos {
    function sql_query_file ( $db90_codban=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_db_bancos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

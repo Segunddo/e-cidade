@@ -62,7 +62,7 @@ class cl_configdbprefarretipo {
                  w17_dtfim = date = Vencimento Final 
                  ";
    //funcao construtor da classe 
-   function cl_configdbprefarretipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("configdbprefarretipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,9 +79,9 @@ class cl_configdbprefarretipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->w17_sequencial = ($this->w17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["w17_sequencial"]:$this->w17_sequencial);
-       $this->w17_arretipo = ($this->w17_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["w17_arretipo"]:$this->w17_arretipo);
-       $this->w17_instit = ($this->w17_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["w17_instit"]:$this->w17_instit);
+       $this->w17_sequencial = ($this->w17_sequencial === 0 || $this->w17_sequencial === 0.0 || $this->w17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["w17_sequencial"]:$this->w17_sequencial);
+       $this->w17_arretipo = ($this->w17_arretipo === 0 || $this->w17_arretipo === 0.0 || $this->w17_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["w17_arretipo"]:$this->w17_arretipo);
+       $this->w17_instit = ($this->w17_instit === 0 || $this->w17_instit === 0.0 || $this->w17_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["w17_instit"]:$this->w17_instit);
        if($this->w17_dtini == ""){
          $this->w17_dtini_dia = ($this->w17_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["w17_dtini_dia"]:$this->w17_dtini_dia);
          $this->w17_dtini_mes = ($this->w17_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["w17_dtini_mes"]:$this->w17_dtini_mes);
@@ -99,7 +99,7 @@ class cl_configdbprefarretipo {
          }
        }
      }else{
-       $this->w17_sequencial = ($this->w17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["w17_sequencial"]:$this->w17_sequencial);
+       $this->w17_sequencial = ($this->w17_sequencial === 0 || $this->w17_sequencial === 0.0 || $this->w17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["w17_sequencial"]:$this->w17_sequencial);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_configdbprefarretipo {
          $this->w17_sequencial = $w17_sequencial; 
        }
      }
-     if(($this->w17_sequencial == null) || ($this->w17_sequencial == "") ){ 
+     if(($this->w17_sequencial == null) || ($this->w17_sequencial === 0 || $this->w17_sequencial === 0.0 || $this->w17_sequencial == "") ){ 
        $this->erro_sql = " Campo w17_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -470,7 +470,7 @@ class cl_configdbprefarretipo {
    function sql_query ( $w17_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -496,7 +496,7 @@ class cl_configdbprefarretipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_configdbprefarretipo {
    function sql_query_file ( $w17_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -530,7 +530,7 @@ class cl_configdbprefarretipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

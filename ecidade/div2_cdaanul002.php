@@ -33,7 +33,7 @@ $clacertid =  new cl_acertid;
 $clrotulo  = new rotulocampo;
 $clrotulo->label('');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 
 $where = " v15_instit = ".db_getsession('DB_instit');
 $and   = "";

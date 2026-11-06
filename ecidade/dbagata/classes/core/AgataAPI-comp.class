@@ -32,7 +32,7 @@
 /*******************************************************************************/
 class AgataAPI
 {
-    function AgataAPI()
+    function __construct()
     {
         # Define the Agata's Path
         define('AGATA_PATH', substr(__FILE__,0,-33));

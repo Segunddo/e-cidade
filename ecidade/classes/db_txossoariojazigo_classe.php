@@ -52,7 +52,7 @@ class cl_txossoariojazigo {
                  cm30_i_itenserv = int4 = Código Item Serviço
                  ";
    //funcao construtor da classe
-   function cl_txossoariojazigo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("txossoariojazigo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_txossoariojazigo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm30_i_codigo = ($this->cm30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm30_i_codigo"]:$this->cm30_i_codigo);
-       $this->cm30_i_ossoariojazigo = ($this->cm30_i_ossoariojazigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm30_i_ossoariojazigo"]:$this->cm30_i_ossoariojazigo);
-       $this->cm30_i_itenserv = ($this->cm30_i_itenserv == ""?@$GLOBALS["HTTP_POST_VARS"]["cm30_i_itenserv"]:$this->cm30_i_itenserv);
+       $this->cm30_i_codigo = (($this->cm30_i_codigo === 0 || $this->cm30_i_codigo === 0.0 || $this->cm30_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm30_i_codigo"]:$this->cm30_i_codigo);
+       $this->cm30_i_ossoariojazigo = (($this->cm30_i_ossoariojazigo === 0 || $this->cm30_i_ossoariojazigo === 0.0 || $this->cm30_i_ossoariojazigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm30_i_ossoariojazigo"]:$this->cm30_i_ossoariojazigo);
+       $this->cm30_i_itenserv = (($this->cm30_i_itenserv === 0 || $this->cm30_i_itenserv === 0.0 || $this->cm30_i_itenserv == "")?@$GLOBALS["HTTP_POST_VARS"]["cm30_i_itenserv"]:$this->cm30_i_itenserv);
      }else{
-       $this->cm30_i_codigo = ($this->cm30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm30_i_codigo"]:$this->cm30_i_codigo);
+       $this->cm30_i_codigo = (($this->cm30_i_codigo === 0 || $this->cm30_i_codigo === 0.0 || $this->cm30_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm30_i_codigo"]:$this->cm30_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_txossoariojazigo {
          $this->cm30_i_codigo = $cm30_i_codigo;
        }
      }
-     if(($this->cm30_i_codigo == null) || ($this->cm30_i_codigo == "") ){
+     if(($this->cm30_i_codigo == null) || (($this->cm30_i_codigo === 0 || $this->cm30_i_codigo === 0.0 || $this->cm30_i_codigo == "")) ){
        $this->erro_sql = " Campo cm30_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_txossoariojazigo {
    function sql_query ( $cm30_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_txossoariojazigo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_txossoariojazigo {
    function sql_query_file ( $cm30_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_txossoariojazigo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

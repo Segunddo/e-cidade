@@ -50,7 +50,7 @@ class cl_logradcep {
                  j65_ceplog = int8 = Código do Logradouro 
                  ";
    //funcao construtor da classe 
-   function cl_logradcep() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("logradcep"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_logradcep {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j65_lograd = ($this->j65_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["j65_lograd"]:$this->j65_lograd);
-       $this->j65_ceplog = ($this->j65_ceplog == ""?@$GLOBALS["HTTP_POST_VARS"]["j65_ceplog"]:$this->j65_ceplog);
+       $this->j65_lograd = ($this->j65_lograd === 0 || $this->j65_lograd === 0.0 || $this->j65_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["j65_lograd"]:$this->j65_lograd);
+       $this->j65_ceplog = ($this->j65_ceplog === 0 || $this->j65_ceplog === 0.0 || $this->j65_ceplog == ""?@$GLOBALS["HTTP_POST_VARS"]["j65_ceplog"]:$this->j65_ceplog);
      }else{
      }
    }
@@ -252,7 +252,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $j65_lograd=null,$j65_ceplog=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -284,7 +284,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -296,7 +296,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $j65_lograd=null,$j65_ceplog=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -325,7 +325,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -337,7 +337,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_info ( $j65_lograd=null,$j65_ceplog=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -368,7 +368,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

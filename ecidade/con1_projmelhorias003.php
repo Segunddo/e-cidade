@@ -70,11 +70,11 @@ if (isset($confirma)) {
             $sqlerro = true;
         }
     }
-    $tes = split("X",$testada);
-    $eixo = split("X",$eixo);
-    $obs = split("X",$obs);
+    $tes = preg_split("#X#m",$testada);
+    $eixo = preg_split("#X#m",$eixo);
+    $obs = preg_split("#X#m",$obs);
     for ($ii=0; $ii < sizeof($tes); $ii++) {
-        $chave = split('-',$tes[$ii]);
+        $chave = preg_split('#\-#m',$tes[$ii]);
         $clprojmelhoriasmatric->d41_codigo = $clprojmelhorias->d40_codigo;
         $clprojmelhoriasmatric->d41_matric = $chave[0];
         $clprojmelhoriasmatric->d41_testada = $chave[1]+0;

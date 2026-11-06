@@ -50,7 +50,7 @@ class cl_liclicitaitemlog {
                  l14_xml = text = XML com os itens 
                  ";
    //funcao construtor da classe 
-   function cl_liclicitaitemlog() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liclicitaitemlog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_liclicitaitemlog {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l14_liclicita = ($this->l14_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l14_liclicita"]:$this->l14_liclicita);
+       $this->l14_liclicita = ($this->l14_liclicita === 0 || $this->l14_liclicita === 0.0 || $this->l14_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l14_liclicita"]:$this->l14_liclicita);
        $this->l14_xml = ($this->l14_xml == ""?@$GLOBALS["HTTP_POST_VARS"]["l14_xml"]:$this->l14_xml);
      }else{
-       $this->l14_liclicita = ($this->l14_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l14_liclicita"]:$this->l14_liclicita);
+       $this->l14_liclicita = ($this->l14_liclicita === 0 || $this->l14_liclicita === 0.0 || $this->l14_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l14_liclicita"]:$this->l14_liclicita);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_liclicitaitemlog {
        return false;
      }
        $this->l14_liclicita = $l14_liclicita; 
-     if(($this->l14_liclicita == null) || ($this->l14_liclicita == "") ){ 
+     if(($this->l14_liclicita == null) || ($this->l14_liclicita === 0 || $this->l14_liclicita === 0.0 || $this->l14_liclicita == "") ){ 
        $this->erro_sql = " Campo l14_liclicita nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -306,7 +306,7 @@ class cl_liclicitaitemlog {
    function sql_query ( $l14_liclicita=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -334,7 +334,7 @@ class cl_liclicitaitemlog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -347,7 +347,7 @@ class cl_liclicitaitemlog {
    function sql_query_file ( $l14_liclicita=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -368,7 +368,7 @@ class cl_liclicitaitemlog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

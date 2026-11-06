@@ -50,7 +50,7 @@ class cl_criterioatividadeimpacto {
                  am01_descricao = varchar(50) = Critério de Medição
                  ";
    //funcao construtor da classe
-   function cl_criterioatividadeimpacto() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("criterioatividadeimpacto");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_criterioatividadeimpacto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am01_sequencial = ($this->am01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am01_sequencial"]:$this->am01_sequencial);
+       $this->am01_sequencial = ($this->am01_sequencial === 0 || $this->am01_sequencial === 0.0 || $this->am01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am01_sequencial"]:$this->am01_sequencial);
        $this->am01_descricao = ($this->am01_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["am01_descricao"]:$this->am01_descricao);
      }else{
-       $this->am01_sequencial = ($this->am01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am01_sequencial"]:$this->am01_sequencial);
+       $this->am01_sequencial = ($this->am01_sequencial === 0 || $this->am01_sequencial === 0.0 || $this->am01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am01_sequencial"]:$this->am01_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_criterioatividadeimpacto {
          $this->am01_sequencial = $am01_sequencial;
        }
      }
-     if(($this->am01_sequencial == null) || ($this->am01_sequencial == "") ){
+     if(($this->am01_sequencial == null) || ($this->am01_sequencial === 0 || $this->am01_sequencial === 0.0 || $this->am01_sequencial == "") ){
        $this->erro_sql = " Campo am01_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

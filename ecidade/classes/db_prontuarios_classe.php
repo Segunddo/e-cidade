@@ -96,7 +96,7 @@ class cl_prontuarios {
                  ";
                  
    //funcao construtor da classe
-   function cl_prontuarios() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prontuarios");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -113,12 +113,12 @@ class cl_prontuarios {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd24_i_codigo = ($this->sd24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_codigo"]:$this->sd24_i_codigo);
-       $this->sd24_i_ano = ($this->sd24_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_ano"]:$this->sd24_i_ano);
-       $this->sd24_i_mes = ($this->sd24_i_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_mes"]:$this->sd24_i_mes);
-       $this->sd24_i_seq = ($this->sd24_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_seq"]:$this->sd24_i_seq);
-       $this->sd24_i_unidade = ($this->sd24_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_unidade"]:$this->sd24_i_unidade);
-       $this->sd24_i_numcgs = ($this->sd24_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_numcgs"]:$this->sd24_i_numcgs);
+       $this->sd24_i_codigo = ($this->sd24_i_codigo === 0 || $this->sd24_i_codigo === 0.0 || $this->sd24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_codigo"]:$this->sd24_i_codigo);
+       $this->sd24_i_ano = ($this->sd24_i_ano === 0 || $this->sd24_i_ano === 0.0 || $this->sd24_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_ano"]:$this->sd24_i_ano);
+       $this->sd24_i_mes = ($this->sd24_i_mes === 0 || $this->sd24_i_mes === 0.0 || $this->sd24_i_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_mes"]:$this->sd24_i_mes);
+       $this->sd24_i_seq = ($this->sd24_i_seq === 0 || $this->sd24_i_seq === 0.0 || $this->sd24_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_seq"]:$this->sd24_i_seq);
+       $this->sd24_i_unidade = ($this->sd24_i_unidade === 0 || $this->sd24_i_unidade === 0.0 || $this->sd24_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_unidade"]:$this->sd24_i_unidade);
+       $this->sd24_i_numcgs = ($this->sd24_i_numcgs === 0 || $this->sd24_i_numcgs === 0.0 || $this->sd24_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_numcgs"]:$this->sd24_i_numcgs);
        $this->sd24_v_motivo = ($this->sd24_v_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_v_motivo"]:$this->sd24_v_motivo);
        if($this->sd24_d_cadastro == ""){
          $this->sd24_d_cadastro_dia = ($this->sd24_d_cadastro_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_d_cadastro_dia"]:$this->sd24_d_cadastro_dia);
@@ -130,21 +130,21 @@ class cl_prontuarios {
        }
        $this->sd24_c_cadastro = ($this->sd24_c_cadastro == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_c_cadastro"]:$this->sd24_c_cadastro);
        $this->sd24_v_pressao = ($this->sd24_v_pressao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_v_pressao"]:$this->sd24_v_pressao);
-       $this->sd24_f_peso = ($this->sd24_f_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_f_peso"]:$this->sd24_f_peso);
-       $this->sd24_f_temperatura = ($this->sd24_f_temperatura == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_f_temperatura"]:$this->sd24_f_temperatura);
-       $this->sd24_i_profissional = ($this->sd24_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_profissional"]:$this->sd24_i_profissional);
+       $this->sd24_f_peso = ($this->sd24_f_peso === 0 || $this->sd24_f_peso === 0.0 || $this->sd24_f_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_f_peso"]:$this->sd24_f_peso);
+       $this->sd24_f_temperatura = ($this->sd24_f_temperatura === 0 || $this->sd24_f_temperatura === 0.0 || $this->sd24_f_temperatura == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_f_temperatura"]:$this->sd24_f_temperatura);
+       $this->sd24_i_profissional = ($this->sd24_i_profissional === 0 || $this->sd24_i_profissional === 0.0 || $this->sd24_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_profissional"]:$this->sd24_i_profissional);
        $this->sd24_t_diagnostico = ($this->sd24_t_diagnostico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_t_diagnostico"]:$this->sd24_t_diagnostico);
-       $this->sd24_i_siasih = ($this->sd24_i_siasih == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_siasih"]:$this->sd24_i_siasih);
+       $this->sd24_i_siasih = ($this->sd24_i_siasih === 0 || $this->sd24_i_siasih === 0.0 || $this->sd24_i_siasih == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_siasih"]:$this->sd24_i_siasih);
        $this->sd24_c_digitada = ($this->sd24_c_digitada == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_c_digitada"]:$this->sd24_c_digitada);
-       $this->sd24_i_login = ($this->sd24_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_login"]:$this->sd24_i_login);
-       $this->sd24_i_motivo = ($this->sd24_i_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_motivo"]:$this->sd24_i_motivo);
-       $this->sd24_i_tipo = ($this->sd24_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_tipo"]:$this->sd24_i_tipo);
-       $this->sd24_i_acaoprog = ($this->sd24_i_acaoprog == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_acaoprog"]:$this->sd24_i_acaoprog);
-       $this->sd24_setorambulatorial = ($this->sd24_setorambulatorial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_setorambulatorial"]:$this->sd24_setorambulatorial);
-       $this->sd24_idadegestacional = ($this->sd24_idadegestacional == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_idadegestacional"]:$this->sd24_idadegestacional);
+       $this->sd24_i_login = ($this->sd24_i_login === 0 || $this->sd24_i_login === 0.0 || $this->sd24_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_login"]:$this->sd24_i_login);
+       $this->sd24_i_motivo = ($this->sd24_i_motivo === 0 || $this->sd24_i_motivo === 0.0 || $this->sd24_i_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_motivo"]:$this->sd24_i_motivo);
+       $this->sd24_i_tipo = ($this->sd24_i_tipo === 0 || $this->sd24_i_tipo === 0.0 || $this->sd24_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_tipo"]:$this->sd24_i_tipo);
+       $this->sd24_i_acaoprog = ($this->sd24_i_acaoprog === 0 || $this->sd24_i_acaoprog === 0.0 || $this->sd24_i_acaoprog == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_acaoprog"]:$this->sd24_i_acaoprog);
+       $this->sd24_setorambulatorial = ($this->sd24_setorambulatorial === 0 || $this->sd24_setorambulatorial === 0.0 || $this->sd24_setorambulatorial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_setorambulatorial"]:$this->sd24_setorambulatorial);
+       $this->sd24_idadegestacional = ($this->sd24_idadegestacional === 0 || $this->sd24_idadegestacional === 0.0 || $this->sd24_idadegestacional == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_idadegestacional"]:$this->sd24_idadegestacional);
        $this->sd24_dum = ($this->sd24_dum == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_dum"]:$this->sd24_dum);
      }else{
-       $this->sd24_i_codigo = ($this->sd24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_codigo"]:$this->sd24_i_codigo);
+       $this->sd24_i_codigo = ($this->sd24_i_codigo === 0 || $this->sd24_i_codigo === 0.0 || $this->sd24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd24_i_codigo"]:$this->sd24_i_codigo);
      }
    }
    // funcao para inclusao
@@ -279,7 +279,7 @@ class cl_prontuarios {
          $this->sd24_i_codigo = $sd24_i_codigo;
        }
      }
-     if(($this->sd24_i_codigo == null) || ($this->sd24_i_codigo == "") ){
+     if(($this->sd24_i_codigo == null) || ($this->sd24_i_codigo === 0 || $this->sd24_i_codigo === 0.0 || $this->sd24_i_codigo == "") ){
        $this->erro_sql = " Campo sd24_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -912,12 +912,12 @@ class cl_prontuarios {
  /**
   * Gera o SQL para a busca das FAAs de um profissional (filtra por unidade tambem)
   */
-  function sql_query_faas_profissional($sd24_i_codigo = null, $sd04_i_medico, $sd04_i_unidade, $campos = "*",
+  function sql_query_faas_profissional($sd24_i_codigo = null, $sd04_i_medico = null, $sd04_i_unidade = null, $campos = "*",
                                                                        $ordem = null, $dbwhere = "") {
     $sql = "select distinct ";
     if($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++) {
 
@@ -951,7 +951,7 @@ class cl_prontuarios {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -964,7 +964,7 @@ class cl_prontuarios {
 function sql_query_prontuarios( $sd24_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
  $sql = "select ";
  if($campos != "*" ){
-    $campos_sql = split("#",$campos);
+    $campos_sql = preg_split("#\\##m",$campos);
     $virgula = "";
     for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -988,7 +988,7 @@ function sql_query_prontuarios( $sd24_i_codigo=null,$campos="*",$ordem=null,$dbw
       $sql .= $sql2;
    if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
           $sql .= $virgula.$campos_sql[$i];
@@ -1000,7 +1000,7 @@ function sql_query_prontuarios( $sd24_i_codigo=null,$campos="*",$ordem=null,$dbw
    function sql_query_cgs($sd24_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
  $sql = "select ";
  if($campos != "*" ){
-    $campos_sql = split("#",$campos);
+    $campos_sql = preg_split("#\\##m",$campos);
     $virgula = "";
     for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -1023,7 +1023,7 @@ function sql_query_prontuarios( $sd24_i_codigo=null,$campos="*",$ordem=null,$dbw
       $sql .= $sql2;
    if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
           $sql .= $virgula.$campos_sql[$i];
@@ -1037,7 +1037,7 @@ function sql_query_prontuarios( $sd24_i_codigo=null,$campos="*",$ordem=null,$dbw
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
 
@@ -1078,7 +1078,7 @@ function sql_query_prontuarios( $sd24_i_codigo=null,$campos="*",$ordem=null,$dbw
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 

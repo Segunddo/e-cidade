@@ -52,15 +52,15 @@ set_time_limit(0);
 
 $erro = false;
 $descricao_erro = false;
-$unicas = array();
+$unicas = [];
 $ordena = "";
 
 if ($selunica != "") {
 
-    $vt = split("U", $selunica);
+    $vt = preg_split("#U#m", $selunica);
     foreach ($vt as $i => $v) {
 
-        $check = split("=", $v);
+        $check = preg_split("#=#m", $v);
         if (isset($check) && $check != "") {
             array_push($unicas, $check[0] . "-" . $check[1] . "-" . $check[2]) . "#";
         }
@@ -90,7 +90,7 @@ $sQuebraLinha = "\r\n";
   </body>
   </html>
 <?php
-$aNumpres = array("L" => "", "S" => "");
+$aNumpres = ["L" => "", "S" => ""];
 try {
     $oRegraEmissao = new regraEmissao($k00_tipo, 9, db_getsession('DB_instit'),
       date("Y-m-d", db_getsession("DB_datausu")), db_getsession('DB_ip'));
@@ -377,8 +377,8 @@ if ($result == false || pg_num_rows($result) == 0) {
 
     $iTotalLinhas20 = 0;
     $nTotalParcelas20 = 0;
-    $parcelasTaxaExpedienteLayout = array();
-    $unicasTaxaExpedienteLayout = array();
+    $parcelasTaxaExpedienteLayout = [];
+    $unicasTaxaExpedienteLayout = [];
 
     /**
      * Executa o laço duas vezes
@@ -401,7 +401,7 @@ if ($result == false || pg_num_rows($result) == 0) {
         $clabre_arquivo = new cl_abre_arquivo($nomedoarquivo);
 
         if ($clabre_arquivo->arquivo != false) {
-            $quantidade = pg_numrows($result);
+            $quantidade = pg_num_rows($result);
 
             global $contador;
             $contador = 0;
@@ -415,14 +415,14 @@ if ($result == false || pg_num_rows($result) == 0) {
                 $buscarReceitaTaxaExpediente = true;
                 $valorTaxaExpediente = 0;
                 $receitaTaxaExpediente = null;
-                $parcelasTaxaExpediente = array();
+                $parcelasTaxaExpediente = [];
 
                 db_fieldsmemory($result, $i);
                 db_atutermometro($i, $quantidade, 'termometro');
 
                 $resultiss = $clissbase->empresa_record($clissbase->empresa_query($q01_inscr));
 
-                if ($resultiss == false or pg_numrows($resultiss) == 0) {
+                if ($resultiss == false or pg_num_rows($resultiss) == 0) {
                     continue;
                 }
 
@@ -458,7 +458,7 @@ if ($result == false || pg_num_rows($result) == 0) {
 
                 $sqvalorMax = "select max(k00_numpar) as parcelamaxima, sum(k00_valor) as total_debito from arrecad where k00_numpre = $q01_numpre";
                 $rsValorMax = db_query($sqvalorMax) or die($sqvalorMax);
-                $intNumrowsValorMax = pg_numrows($rsValorMax);
+                $intNumrowsValorMax = pg_num_rows($rsValorMax);
                 $parcelamaxima = 0;
                 if ($intNumrowsValorMax > 0) {
                     db_fieldsmemory($rsValorMax, 0);
@@ -505,7 +505,7 @@ if ($result == false || pg_num_rows($result) == 0) {
                 $sqlVistorias .= "   and ( select count(*) from arrecad where arrecad.k00_numpre = vistorianumpre.y69_numpre ) > 0 ";
 
                 $rsVistorias = db_query($sqlVistorias) or die($sqlVistorias);
-                $intNumrowsVistorias = pg_numrows($rsVistorias);
+                $intNumrowsVistorias = pg_num_rows($rsVistorias);
 
                 if ($k03_tipo == 5 and $intNumrowsVistorias == 0) {
                     continue;
@@ -528,7 +528,7 @@ if ($result == false || pg_num_rows($result) == 0) {
                         }
                     }
 
-                    if ($tipo == "fixo" and pg_result($resultarr, 0, 'k00_tipo') == $tipodebitoarrecad) {
+                    if ($tipo == "fixo" and pg_fetch_result($resultarr, 0, 'k00_tipo') == $tipodebitoarrecad) {
                         if ($gerar == "dados") {
                             $tipo_geracao = "ISSQN FIXO";
                             if ($tipotxt == "txt") {
@@ -536,7 +536,7 @@ if ($result == false || pg_num_rows($result) == 0) {
                             }
                         }
                     } else {
-                        if ($tipo == "variavel" and pg_result($resultarr, 0, 'k00_tipo') == $tipodebitoarrecad) {
+                        if ($tipo == "variavel" and pg_fetch_result($resultarr, 0, 'k00_tipo') == $tipodebitoarrecad) {
                             if ($gerar == "dados") {
                                 $tipo_geracao = "ISSQN VARIAVEL";
                                 if ($tipotxt == "txt") {
@@ -616,7 +616,7 @@ if ($result == false || pg_num_rows($result) == 0) {
                             }
 
                             $quantunica_linha10 = 0;
-                            
+
                             if (isset($unicas) && sizeof($unicas) > 0 && $unicas[0] != "--") {
                                 for ($unica = 0; $unica < sizeof($unicas); $unica++) {
                                     $vencunica = substr($unicas[$unica], 0, 10);
@@ -646,7 +646,7 @@ $sqlFindUnica .= " ) as unica                                                   
                                     $resultfin1 = db_query($sqlFindUnica);
 
                                     if ($resultfin1 != false) {
-                                        if (pg_numrows($resultfin1) > 0) {
+                                        if (pg_num_rows($resultfin1) > 0) {
                                             $quantunica_linha10 = 1;
                                         }
                                     }
@@ -800,7 +800,7 @@ $sqlFindUnica .= " ) as unica                                                   
                     $linha20 = "BSJR20";
 
                     if (isset($unicas) && sizeof($unicas) > 0 && $unicas[0] != "--") {
-                        $aNumpres = array("L" => "", "S" => "");
+                        $aNumpres = ["L" => "", "S" => ""];
 
                         if (!empty($q01_numpre) && $numpre_sanitario == $q01_numpre) {
                             $aNumpres["L"] = $y69_numpre; //indice L para localizacao
@@ -811,7 +811,7 @@ $sqlFindUnica .= " ) as unica                                                   
                         if (!empty($numpre_sanitario)) {
                             $aNumpres["S"] = $numpre_sanitario;  //indice S para sanitario
                         }
-                        
+
                         foreach ($aNumpres as $sChave => $numpre_vistoria) {
                             for ($unica = 0; $unica < sizeof($unicas); $unica++) {
                                 $vencunica = substr($unicas[$unica], 0, 10);
@@ -858,8 +858,8 @@ $sqlFindUnica .= " ) as unica                                                   
                                     /**
                                      * Gera fincanceiro
                                      */
-                                    if (pg_numrows($resultfin1) > 0) {
-                                        for ($unicontParc1 = 0; $unicontParc1 < pg_numrows($resultfin1); $unicontParc1++) {
+                                    if (pg_num_rows($resultfin1) > 0) {
+                                        for ($unicontParc1 = 0; $unicontParc1 < pg_num_rows($resultfin1); $unicontParc1++) {
                                             db_fieldsmemory($resultfin1, $unicontParc1);
 
                                             if ($gerar == "dados") { // if orginal
@@ -1025,8 +1025,8 @@ $sqlFindUnica .= " ) as unica                                                   
                                                     } elseif ($k03_tipo == 2) {
                                                         $sqltipcalc = "select q81_descr from ativtipo inner join tipcalc on q81_codigo = q80_tipcal where q80_ativ = $q07_ativ and q81_cadcalc = 2";
                                                         $resulttipcalc = db_query($sqltipcalc) or die($sqltipcalc);
-                                                        if (pg_numrows($resulttipcalc) > 0) {
-                                                            $q81_descr = pg_result($resulttipcalc, 0, 0);
+                                                        if (pg_num_rows($resulttipcalc) > 0) {
+                                                            $q81_descr = pg_fetch_result($resulttipcalc, 0, 0);
                                                         } else {
                                                             $q81_descr = "";
                                                         }
@@ -1051,7 +1051,7 @@ $sqlFindUnica .= " ) as unica                                                   
                                                     // parte 1
                                                     $sqlmsg = "select k00_msgparc from arretipo where k00_tipo = $tipodebitoarrecad";
                                                     $result_mesg = db_query($sqlmsg) or die($sqlmsg);
-                                                    $msg = substr(str_pad(pg_result($result_mesg, 0, 0), 281, " ",
+                                                    $msg = substr(str_pad(pg_fetch_result($result_mesg, 0, 0), 281, " ",
                                                       STR_PAD_RIGHT), 0, 281);
 
                                                     $imp_linha50 = "BSJR50";
@@ -1412,7 +1412,7 @@ $sqlFindUnica .= " ) as unica                                                   
                     $sqlSanitario .= "   and (select count(*) from arrecad where arrecad.k00_numpre = vistorianumpre.y69_numpre) > 0";
 
                     $rsSanitario = db_query($sqlSanitario);
-                    $intNumrowsSanitario = pg_numrows($rsSanitario);
+                    $intNumrowsSanitario = pg_num_rows($rsSanitario);
 
                     if ($lGerarVistorias) {
                         if ($gerar == "dados") {
@@ -1771,7 +1771,7 @@ function geraArrecad(
         $resultfin = db_query($sqlGeraArrecad) or die($sqlGeraArrecad);
 
         if ($resultfin) {
-            if (pg_numrows($resultfin) > 0) {
+            if (pg_num_rows($resultfin) > 0) {
                 if ($tipotxt == "txt") {
                     fputs($arquivo, str_pad($numpar, 3, "0", STR_PAD_LEFT));
                 }
@@ -1908,7 +1908,7 @@ function geraArrecad(
 
                     // Convênio BSJ,BDL
                 } else {
-                    if (in_array($iTipoConvenio, array(1, 2))) {
+                    if (in_array($iTipoConvenio, [1, 2])) {
                         if ($tipotxt == "txt") { // ###falta###
                             $iTamCarteira = 6;
 
@@ -1919,7 +1919,7 @@ function geraArrecad(
                             $rsCendete = db_query($sSqlCedente) or die($sSqlCedente);
 
                             if (pg_num_rows($rsCendete) > 0) {
-                                $iTamCedente = strlen(pg_result($rsCendete, 'ar13_cedente', 0));
+                                $iTamCedente = strlen(pg_fetch_result($rsCendete, 'ar13_cedente', 0));
                             } else {
                                 $iTamCedente = 7;
                             }
@@ -2019,8 +2019,8 @@ function geraArrecad(
                     } elseif ($k03_tipo == 2) {
                         $sqltipcalc = "select q81_descr from ativtipo inner join tipcalc on q81_codigo = q80_tipcal where q80_ativ = $q07_ativ and q81_cadcalc = 2";
                         $resulttipcalc = db_query($sqltipcalc) or die($sqltipcalc);
-                        if (pg_numrows($resulttipcalc) > 0) {
-                            $q81_descr = pg_result($resulttipcalc, 0, 0);
+                        if (pg_num_rows($resulttipcalc) > 0) {
+                            $q81_descr = pg_fetch_result($resulttipcalc, 0, 0);
                         } else {
                             $q81_descr = "";
                         }
@@ -2042,7 +2042,7 @@ function geraArrecad(
                     // parte 1
                     $sqlmsg = "select k00_msgparc from arretipo where k00_tipo = $tipodebitoarrecad";
                     $result_mesg = db_query($sqlmsg) or die($sqlmsg);
-                    $msg = substr(str_pad(pg_result($result_mesg, 0, 0), 281, " ", STR_PAD_RIGHT), 0, 281);
+                    $msg = substr(str_pad(pg_fetch_result($result_mesg, 0, 0), 281, " ", STR_PAD_RIGHT), 0, 281);
 
                     $imp_linha50 = "BSJR50";
                     $imp_linha50 .= $msg;
@@ -2084,7 +2084,7 @@ function geraArrecad(
 function getValorTaxaExpediente($numnov)
 {
     $repository = new RecibopagaRepository(DataBase::getInstance(), new \cl_recibopaga());
-    $where = array("k00_numnov = {$numnov}", "k00_hist = " . TaxaEspecificaModel::CODIGO_HISTORICO);
+    $where = ["k00_numnov = {$numnov}", "k00_hist = " . TaxaEspecificaModel::CODIGO_HISTORICO];
     $reciboPaga = $repository->findAll(implode(' AND ', $where))->get(0);
 
     return $reciboPaga->getValor();
@@ -2098,8 +2098,8 @@ function getValorTaxaExpediente($numnov)
 function getReceitaTaxaExpediente($numnov)
 {
     $dao = new \cl_recibopaga();
-    $campos = array('tabdesc.k07_codigo as receita');
-    $where = array("recibopaga.k00_numnov = {$numnov}");
+    $campos = ['tabdesc.k07_codigo as receita'];
+    $where = ["recibopaga.k00_numnov = {$numnov}"];
 
     $sql = $dao->sqlTaxaEspecifica($campos, $where);
     $rs = db_query($sql);

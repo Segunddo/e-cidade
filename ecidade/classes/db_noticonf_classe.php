@@ -61,7 +61,7 @@ class cl_noticonf {
                  k54_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_noticonf() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("noticonf"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,8 +78,8 @@ class cl_noticonf {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k54_notifica = ($this->k54_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k54_notifica"]:$this->k54_notifica);
-       $this->k54_codigo = ($this->k54_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k54_codigo"]:$this->k54_codigo);
+       $this->k54_notifica = (($this->k54_notifica === 0 || $this->k54_notifica === 0.0 || $this->k54_notifica == "")?@$GLOBALS["HTTP_POST_VARS"]["k54_notifica"]:$this->k54_notifica);
+       $this->k54_codigo = (($this->k54_codigo === 0 || $this->k54_codigo === 0.0 || $this->k54_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["k54_codigo"]:$this->k54_codigo);
        if($this->k54_data == ""){
          $this->k54_data_dia = ($this->k54_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k54_data_dia"]:$this->k54_data_dia);
          $this->k54_data_mes = ($this->k54_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k54_data_mes"]:$this->k54_data_mes);
@@ -92,7 +92,7 @@ class cl_noticonf {
        $this->k54_assinante = ($this->k54_assinante == ""?@$GLOBALS["HTTP_POST_VARS"]["k54_assinante"]:$this->k54_assinante);
        $this->k54_obs = ($this->k54_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k54_obs"]:$this->k54_obs);
      }else{
-       $this->k54_notifica = ($this->k54_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k54_notifica"]:$this->k54_notifica);
+       $this->k54_notifica = (($this->k54_notifica === 0 || $this->k54_notifica === 0.0 || $this->k54_notifica == "")?@$GLOBALS["HTTP_POST_VARS"]["k54_notifica"]:$this->k54_notifica);
      }
    }
    // funcao para inclusao
@@ -126,7 +126,7 @@ class cl_noticonf {
        return false;
      }
        $this->k54_notifica = $k54_notifica; 
-     if(($this->k54_notifica == null) || ($this->k54_notifica == "") ){ 
+     if(($this->k54_notifica == null) || (($this->k54_notifica === 0 || $this->k54_notifica === 0.0 || $this->k54_notifica == "")) ){ 
        $this->erro_sql = " Campo k54_notifica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -423,7 +423,7 @@ class cl_noticonf {
    function sql_query ( $k54_notifica=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_noticonf {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_noticonf {
    function sql_query_file ( $k54_notifica=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_noticonf {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

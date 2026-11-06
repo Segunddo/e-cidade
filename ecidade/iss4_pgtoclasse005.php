@@ -28,7 +28,8 @@
 set_time_limit(0);
 include(modification("libs/db_sql.php"));
 require(modification("fpdf151/pdf.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS);
 if ($atividades != ""){
   $atividades = "and b.q07_ativ in (".str_replace("-",",",$atividades).")";
@@ -293,7 +294,7 @@ if ($tipo == 'c'){
 }
 //echo $sql;exit;
 $result = db_query($sql);
-$num = pg_numrows($result);
+$num = pg_num_rows($result);
 if ($num == 0 ){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existe pagamentos efetuados no período de '.db_formatar($datai,'d').' até '.db_formatar($dataf,'d'));
 }

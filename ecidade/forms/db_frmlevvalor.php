@@ -39,7 +39,7 @@ $cllevvalor->rotulo->label();
 $clrotulo = new rotulocampo;
 $clrotulo->label("y60_contato");
 $data = date("d-m-Y",db_getsession("DB_datausu"));
-$data = split('-',$data);
+$data = explode('-',$data);
 $dia  = $data[0];
 $mes  = $data[1];
 $ano  = $data[2];
@@ -161,15 +161,15 @@ db_input('y63_sequencia',10,$Iy63_sequencia,true,'text',3);
       <?
       $result=$cllevanta->sql_record($cllevanta->sql_query_file($y63_codlev,"y60_dtini,y60_dtfim"));
       db_fieldsmemory($result,0);
-      $arr_ini = split("-",$y60_dtini);
-      $arr_fim = split("-",$y60_dtfim);
+      $arr_ini = explode("-",$y60_dtini);
+      $arr_fim = explode("-",$y60_dtfim);
       $ini = $arr_ini[0];
       $fim = $arr_fim[0];
 
       $anos=array();
 
       //Pega os exercícios do periodo
-      for($i=$ini; $i<$fim+1; $i++){
+      for($i=$ini; $i<(int)$fim+1; $i++){
        $anos[$i]=$i;
       }
 

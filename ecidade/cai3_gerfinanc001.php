@@ -44,7 +44,7 @@ require_once(modification("libs/db_utils.php"));
 require_once(modification("libs/db_app.utils.php"));
 require_once(modification("classes/db_cfiptu_classe.php"));
 use App\Domain\Tributario\ISSQN\Services\WebIss\ConsultaSituacaoContribuinteService;
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); extract($__qs);
 
 $dotenv = new \Dotenv\Dotenv('./');
 $dotenv->load();
@@ -1481,7 +1481,7 @@ if (isset($HTTP_POST_VARS ["pesquisar"]) || isset($matricula) || isset($inscrica
                                             echo "<b> <font color=red> - LOTEAMENTO - </b>";
                                         }
 
-                                        parse_str($arg);
+                                        parse_str($arg, $__qs); extract($__qs);
                                         if (isset($matric)) {
                                             $sTipoChavePesquisa = "matricula";
                                             if (!$bloqueiaLinkCTM) {

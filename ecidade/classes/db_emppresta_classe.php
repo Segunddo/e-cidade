@@ -76,7 +76,7 @@ class cl_emppresta {
                  e45_datalimiteaplicacao = date = Data Limite para Aplicação
                  ";
    //funcao construtor da classe
-   function cl_emppresta() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("emppresta");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -93,7 +93,7 @@ class cl_emppresta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e45_numemp = ($this->e45_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_numemp"]:$this->e45_numemp);
+       $this->e45_numemp = ($this->e45_numemp === 0 || $this->e45_numemp === 0.0 || $this->e45_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_numemp"]:$this->e45_numemp);
        if($this->e45_data == ""){
          $this->e45_data_dia = ($this->e45_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_data_dia"]:$this->e45_data_dia);
          $this->e45_data_mes = ($this->e45_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_data_mes"]:$this->e45_data_mes);
@@ -103,7 +103,7 @@ class cl_emppresta {
          }
        }
        $this->e45_obs = ($this->e45_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_obs"]:$this->e45_obs);
-       $this->e45_tipo = ($this->e45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_tipo"]:$this->e45_tipo);
+       $this->e45_tipo = ($this->e45_tipo === 0 || $this->e45_tipo === 0.0 || $this->e45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_tipo"]:$this->e45_tipo);
        if($this->e45_acerta == ""){
          $this->e45_acerta_dia = ($this->e45_acerta_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_acerta_dia"]:$this->e45_acerta_dia);
          $this->e45_acerta_mes = ($this->e45_acerta_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_acerta_mes"]:$this->e45_acerta_mes);
@@ -121,7 +121,7 @@ class cl_emppresta {
          }
        }
        $this->e45_codmov = ($this->e45_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_codmov"]:$this->e45_codmov);
-       $this->e45_sequencial = ($this->e45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_sequencial"]:$this->e45_sequencial);
+       $this->e45_sequencial = ($this->e45_sequencial === 0 || $this->e45_sequencial === 0.0 || $this->e45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_sequencial"]:$this->e45_sequencial);
        $this->e45_processoadministrativo = ($this->e45_processoadministrativo == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_processoadministrativo"]:$this->e45_processoadministrativo);
        if($this->e45_datalimiteaplicacao == ""){
          $this->e45_datalimiteaplicacao_dia = ($this->e45_datalimiteaplicacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_datalimiteaplicacao_dia"]:$this->e45_datalimiteaplicacao_dia);
@@ -132,7 +132,7 @@ class cl_emppresta {
          }
        }
      }else{
-       $this->e45_sequencial = ($this->e45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_sequencial"]:$this->e45_sequencial);
+       $this->e45_sequencial = ($this->e45_sequencial === 0 || $this->e45_sequencial === 0.0 || $this->e45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e45_sequencial"]:$this->e45_sequencial);
      }
    }
    // funcao para inclusao
@@ -198,7 +198,7 @@ class cl_emppresta {
          $this->e45_sequencial = $e45_sequencial;
        }
      }
-     if(($this->e45_sequencial == null) || ($this->e45_sequencial == "") ){
+     if(($this->e45_sequencial == null) || ($this->e45_sequencial === 0 || $this->e45_sequencial === 0.0 || $this->e45_sequencial == "") ){
        $this->erro_sql = " Campo e45_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -39,7 +39,7 @@ class cl_movimentacaoprontuario {
                  sd102_observacao = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_movimentacaoprontuario() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("movimentacaoprontuario"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -56,10 +56,10 @@ class cl_movimentacaoprontuario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd102_codigo = ($this->sd102_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_codigo"]:$this->sd102_codigo);
-       $this->sd102_prontuarios = ($this->sd102_prontuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_prontuarios"]:$this->sd102_prontuarios);
-       $this->sd102_db_usuarios = ($this->sd102_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_db_usuarios"]:$this->sd102_db_usuarios);
-       $this->sd102_setorambulatorial = ($this->sd102_setorambulatorial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_setorambulatorial"]:$this->sd102_setorambulatorial);
+       $this->sd102_codigo = ($this->sd102_codigo === 0 || $this->sd102_codigo === 0.0 || $this->sd102_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_codigo"]:$this->sd102_codigo);
+       $this->sd102_prontuarios = ($this->sd102_prontuarios === 0 || $this->sd102_prontuarios === 0.0 || $this->sd102_prontuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_prontuarios"]:$this->sd102_prontuarios);
+       $this->sd102_db_usuarios = ($this->sd102_db_usuarios === 0 || $this->sd102_db_usuarios === 0.0 || $this->sd102_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_db_usuarios"]:$this->sd102_db_usuarios);
+       $this->sd102_setorambulatorial = ($this->sd102_setorambulatorial === 0 || $this->sd102_setorambulatorial === 0.0 || $this->sd102_setorambulatorial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_setorambulatorial"]:$this->sd102_setorambulatorial);
        if($this->sd102_data == ""){
          $this->sd102_data_dia = ($this->sd102_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_data_dia"]:$this->sd102_data_dia);
          $this->sd102_data_mes = ($this->sd102_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_data_mes"]:$this->sd102_data_mes);
@@ -69,10 +69,10 @@ class cl_movimentacaoprontuario {
          }
        }
        $this->sd102_hora = ($this->sd102_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_hora"]:$this->sd102_hora);
-       $this->sd102_situacao = ($this->sd102_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_situacao"]:$this->sd102_situacao);
+       $this->sd102_situacao = ($this->sd102_situacao === 0 || $this->sd102_situacao === 0.0 || $this->sd102_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_situacao"]:$this->sd102_situacao);
        $this->sd102_observacao = ($this->sd102_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_observacao"]:$this->sd102_observacao);
      }else{
-       $this->sd102_codigo = ($this->sd102_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_codigo"]:$this->sd102_codigo);
+       $this->sd102_codigo = ($this->sd102_codigo === 0 || $this->sd102_codigo === 0.0 || $this->sd102_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd102_codigo"]:$this->sd102_codigo);
      }
    }
    // funcao para inclusao
@@ -156,7 +156,7 @@ class cl_movimentacaoprontuario {
          $this->sd102_codigo = $sd102_codigo; 
        }
      }
-     if(($this->sd102_codigo == null) || ($this->sd102_codigo == "") ){ 
+     if(($this->sd102_codigo == null) || ($this->sd102_codigo === 0 || $this->sd102_codigo === 0.0 || $this->sd102_codigo == "") ){ 
        $this->erro_sql = " Campo sd102_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

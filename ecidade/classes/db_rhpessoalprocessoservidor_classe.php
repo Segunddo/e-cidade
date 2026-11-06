@@ -49,13 +49,13 @@ class cl_rhpessoalprocessoservidor
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh271_sequencial = ($this->rh271_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_sequencial"]:$this->rh271_sequencial);
-       $this->rh271_sequencialprocesso = ($this->rh271_sequencialprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_sequencialprocesso"]:$this->rh271_sequencialprocesso);
-       $this->rh271_matricula = ($this->rh271_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_matricula"]:$this->rh271_matricula);
-       $this->rh271_codcateg = ($this->rh271_codcateg == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_codcateg"]:$this->rh271_codcateg);
-       $this->rh271_instit = ($this->rh271_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_instit"]:$this->rh271_instit);
+       $this->rh271_sequencial = ($this->rh271_sequencial === 0 || $this->rh271_sequencial === 0.0 || $this->rh271_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_sequencial"]:$this->rh271_sequencial);
+       $this->rh271_sequencialprocesso = ($this->rh271_sequencialprocesso === 0 || $this->rh271_sequencialprocesso === 0.0 || $this->rh271_sequencialprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_sequencialprocesso"]:$this->rh271_sequencialprocesso);
+       $this->rh271_matricula = ($this->rh271_matricula === 0 || $this->rh271_matricula === 0.0 || $this->rh271_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_matricula"]:$this->rh271_matricula);
+       $this->rh271_codcateg = ($this->rh271_codcateg === 0 || $this->rh271_codcateg === 0.0 || $this->rh271_codcateg == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_codcateg"]:$this->rh271_codcateg);
+       $this->rh271_instit = ($this->rh271_instit === 0 || $this->rh271_instit === 0.0 || $this->rh271_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_instit"]:$this->rh271_instit);
      }else{
-       $this->rh271_sequencial = ($this->rh271_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_sequencial"]:$this->rh271_sequencial);
+       $this->rh271_sequencial = ($this->rh271_sequencial === 0 || $this->rh271_sequencial === 0.0 || $this->rh271_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh271_sequencial"]:$this->rh271_sequencial);
      }
    }
 
@@ -104,7 +104,7 @@ class cl_rhpessoalprocessoservidor
          $this->rh271_sequencial = $rh271_sequencial; 
        }
      }
-     if(($this->rh271_sequencial == null) || ($this->rh271_sequencial == "") ){ 
+     if(($this->rh271_sequencial == null) || ($this->rh271_sequencial === 0 || $this->rh271_sequencial === 0.0 || $this->rh271_sequencial == "") ){ 
        $this->erro_sql = " Campo rh271_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

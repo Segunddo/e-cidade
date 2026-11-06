@@ -55,16 +55,16 @@ class cl_rhprocessovalorretencao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh307_sequencial = ($this->rh307_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_sequencial"]:$this->rh307_sequencial);
-       $this->rh307_sequencialretencao = ($this->rh307_sequencialretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_sequencialretencao"]:$this->rh307_sequencialretencao);
-       $this->rh307_indapuracao = ($this->rh307_indapuracao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_indapuracao"]:$this->rh307_indapuracao);
-       $this->rh307_vlrnretido = ($this->rh307_vlrnretido == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_vlrnretido"]:$this->rh307_vlrnretido);
-       $this->rh307_vlrdepjud = ($this->rh307_vlrdepjud == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_vlrdepjud"]:$this->rh307_vlrdepjud);
-       $this->rh307_vlrcmpanocal = ($this->rh307_vlrcmpanocal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_vlrcmpanocal"]:$this->rh307_vlrcmpanocal);
-       $this->rh307_vlrcmpanoant = ($this->rh307_vlrcmpanoant == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_vlrcmpanoant"]:$this->rh307_vlrcmpanoant);
-       $this->rh307_vlrrendsusp = ($this->rh307_vlrrendsusp == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_vlrrendsusp"]:$this->rh307_vlrrendsusp);
+       $this->rh307_sequencial = ($this->rh307_sequencial === 0 || $this->rh307_sequencial === 0.0 || $this->rh307_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_sequencial"]:$this->rh307_sequencial);
+       $this->rh307_sequencialretencao = ($this->rh307_sequencialretencao === 0 || $this->rh307_sequencialretencao === 0.0 || $this->rh307_sequencialretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_sequencialretencao"]:$this->rh307_sequencialretencao);
+       $this->rh307_indapuracao = ($this->rh307_indapuracao === 0 || $this->rh307_indapuracao === 0.0 || $this->rh307_indapuracao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_indapuracao"]:$this->rh307_indapuracao);
+       $this->rh307_vlrnretido = ($this->rh307_vlrnretido === 0 || $this->rh307_vlrnretido === 0.0 || $this->rh307_vlrnretido == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_vlrnretido"]:$this->rh307_vlrnretido);
+       $this->rh307_vlrdepjud = ($this->rh307_vlrdepjud === 0 || $this->rh307_vlrdepjud === 0.0 || $this->rh307_vlrdepjud == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_vlrdepjud"]:$this->rh307_vlrdepjud);
+       $this->rh307_vlrcmpanocal = ($this->rh307_vlrcmpanocal === 0 || $this->rh307_vlrcmpanocal === 0.0 || $this->rh307_vlrcmpanocal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_vlrcmpanocal"]:$this->rh307_vlrcmpanocal);
+       $this->rh307_vlrcmpanoant = ($this->rh307_vlrcmpanoant === 0 || $this->rh307_vlrcmpanoant === 0.0 || $this->rh307_vlrcmpanoant == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_vlrcmpanoant"]:$this->rh307_vlrcmpanoant);
+       $this->rh307_vlrrendsusp = ($this->rh307_vlrrendsusp === 0 || $this->rh307_vlrrendsusp === 0.0 || $this->rh307_vlrrendsusp == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_vlrrendsusp"]:$this->rh307_vlrrendsusp);
      }else{
-       $this->rh307_sequencial = ($this->rh307_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_sequencial"]:$this->rh307_sequencial);
+       $this->rh307_sequencial = ($this->rh307_sequencial === 0 || $this->rh307_sequencial === 0.0 || $this->rh307_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh307_sequencial"]:$this->rh307_sequencial);
      }
    }
 
@@ -122,7 +122,7 @@ class cl_rhprocessovalorretencao
          $this->rh307_sequencial = $rh307_sequencial; 
        }
      }
-     if(($this->rh307_sequencial == null) || ($this->rh307_sequencial == "") ){ 
+     if(($this->rh307_sequencial == null) || ($this->rh307_sequencial === 0 || $this->rh307_sequencial === 0.0 || $this->rh307_sequencial == "") ){ 
        $this->erro_sql = " Campo rh307_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

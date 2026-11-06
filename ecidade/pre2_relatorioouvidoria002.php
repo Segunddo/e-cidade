@@ -90,7 +90,7 @@ if(!empty($dataini) && !empty($datafim)) {
 $sqlTotalCategorias .= " ORDER BY w03_codtipo";
 $rsTotalCategorias = $cl_db_ouvidoria->sql_record($sqlTotalCategorias); 
 $totalCategorias = db_utils::getCollectionByRecord($rsTotalCategorias);
-$iOuvidorias = pg_num_rows($rsOuvidorias);
+$iOuvidorias = ($rsOuvidorias ? pg_num_rows($rsOuvidorias) : 0);
 if ($iOuvidorias == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Consulta sem registros.');
 }

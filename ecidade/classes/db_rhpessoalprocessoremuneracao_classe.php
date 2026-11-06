@@ -54,8 +54,8 @@ class cl_rhpessoalprocessoremuneracao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh272_sequencial = ($this->rh272_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_sequencial"]:$this->rh272_sequencial);
-       $this->rh272_sequencialprocessocontrato = ($this->rh272_sequencialprocessocontrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_sequencialprocessocontrato"]:$this->rh272_sequencialprocessocontrato);
+       $this->rh272_sequencial = ($this->rh272_sequencial === 0 || $this->rh272_sequencial === 0.0 || $this->rh272_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_sequencial"]:$this->rh272_sequencial);
+       $this->rh272_sequencialprocessocontrato = ($this->rh272_sequencialprocessocontrato === 0 || $this->rh272_sequencialprocessocontrato === 0.0 || $this->rh272_sequencialprocessocontrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_sequencialprocessocontrato"]:$this->rh272_sequencialprocessocontrato);
        if($this->rh272_dtremun == ""){
          $this->rh272_dtremun_dia = ($this->rh272_dtremun_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_dtremun_dia"]:$this->rh272_dtremun_dia);
          $this->rh272_dtremun_mes = ($this->rh272_dtremun_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_dtremun_mes"]:$this->rh272_dtremun_mes);
@@ -64,11 +64,11 @@ class cl_rhpessoalprocessoremuneracao
             $this->rh272_dtremun = $this->rh272_dtremun_ano."-".$this->rh272_dtremun_mes."-".$this->rh272_dtremun_dia;
          }
        }
-       $this->rh272_vrsalfx = ($this->rh272_vrsalfx == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_vrsalfx"]:$this->rh272_vrsalfx);
-       $this->rh272_undSalFixo = ($this->rh272_undSalFixo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_undSalFixo"]:$this->rh272_undSalFixo);
+       $this->rh272_vrsalfx = ($this->rh272_vrsalfx === 0 || $this->rh272_vrsalfx === 0.0 || $this->rh272_vrsalfx == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_vrsalfx"]:$this->rh272_vrsalfx);
+       $this->rh272_undSalFixo = ($this->rh272_undSalFixo === 0 || $this->rh272_undSalFixo === 0.0 || $this->rh272_undSalFixo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_undSalFixo"]:$this->rh272_undSalFixo);
        $this->rh272_dscSalVar = ($this->rh272_dscSalVar == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_dscSalVar"]:$this->rh272_dscSalVar);
      }else{
-       $this->rh272_sequencial = ($this->rh272_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_sequencial"]:$this->rh272_sequencial);
+       $this->rh272_sequencial = ($this->rh272_sequencial === 0 || $this->rh272_sequencial === 0.0 || $this->rh272_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh272_sequencial"]:$this->rh272_sequencial);
      }
    }
 
@@ -129,7 +129,7 @@ class cl_rhpessoalprocessoremuneracao
          $this->rh272_sequencial = $rh272_sequencial; 
        }
      }
-     if(($this->rh272_sequencial == null) || ($this->rh272_sequencial == "") ){ 
+     if(($this->rh272_sequencial == null) || ($this->rh272_sequencial === 0 || $this->rh272_sequencial === 0.0 || $this->rh272_sequencial == "") ){ 
        $this->erro_sql = " Campo rh272_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

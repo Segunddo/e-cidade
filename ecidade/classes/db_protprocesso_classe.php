@@ -107,8 +107,8 @@ class cl_protprocesso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p58_codproc = ($this->p58_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_codproc"]:$this->p58_codproc);
-       $this->p58_codigo = ($this->p58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_codigo"]:$this->p58_codigo);
+       $this->p58_codproc = (($this->p58_codproc === 0 || $this->p58_codproc === 0.0 || $this->p58_codproc == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_codproc"]:$this->p58_codproc);
+       $this->p58_codigo = (($this->p58_codigo === 0 || $this->p58_codigo === 0.0 || $this->p58_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_codigo"]:$this->p58_codigo);
        if($this->p58_dtproc == ""){
          $this->p58_dtproc_dia = ($this->p58_dtproc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_dtproc_dia"]:$this->p58_dtproc_dia);
          $this->p58_dtproc_mes = ($this->p58_dtproc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_dtproc_mes"]:$this->p58_dtproc_mes);
@@ -117,25 +117,25 @@ class cl_protprocesso {
             $this->p58_dtproc = $this->p58_dtproc_ano."-".$this->p58_dtproc_mes."-".$this->p58_dtproc_dia;
          }
        }
-       $this->p58_id_usuario = ($this->p58_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_id_usuario"]:$this->p58_id_usuario);
-       $this->p58_numcgm = ($this->p58_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_numcgm"]:$this->p58_numcgm);
+       $this->p58_id_usuario = (($this->p58_id_usuario === 0 || $this->p58_id_usuario === 0.0 || $this->p58_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_id_usuario"]:$this->p58_id_usuario);
+       $this->p58_numcgm = (($this->p58_numcgm === 0 || $this->p58_numcgm === 0.0 || $this->p58_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_numcgm"]:$this->p58_numcgm);
        $this->p58_requer = ($this->p58_requer == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_requer"]:$this->p58_requer);
-       $this->p58_coddepto = ($this->p58_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_coddepto"]:$this->p58_coddepto);
-       $this->p58_codandam = ($this->p58_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_codandam"]:$this->p58_codandam);
+       $this->p58_coddepto = (($this->p58_coddepto === 0 || $this->p58_coddepto === 0.0 || $this->p58_coddepto == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_coddepto"]:$this->p58_coddepto);
+       $this->p58_codandam = (($this->p58_codandam === 0 || $this->p58_codandam === 0.0 || $this->p58_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_codandam"]:$this->p58_codandam);
        $this->p58_obs = ($this->p58_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_obs"]:$this->p58_obs);
        $this->p58_despacho = ($this->p58_despacho == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_despacho"]:$this->p58_despacho);
        $this->p58_hora = ($this->p58_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_hora"]:$this->p58_hora);
        $this->p58_interno = ($this->p58_interno == "f"?@$GLOBALS["HTTP_POST_VARS"]["p58_interno"]:$this->p58_interno);
        $this->p58_publico = ($this->p58_publico == "f"?@$GLOBALS["HTTP_POST_VARS"]["p58_publico"]:$this->p58_publico);
-       $this->p58_instit = ($this->p58_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_instit"]:$this->p58_instit);
+       $this->p58_instit = (($this->p58_instit === 0 || $this->p58_instit === 0.0 || $this->p58_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_instit"]:$this->p58_instit);
        $this->p58_numero = ($this->p58_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_numero"]:$this->p58_numero);
-       $this->p58_ano = ($this->p58_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_ano"]:$this->p58_ano);
-       $this->p58_tipoprocesso = ($this->p58_tipoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_tipoprocesso"]:$this->p58_tipoprocesso);
-       $this->p58_orgao = ($this->p58_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_orgao"]:$this->p58_orgao);
-       $this->p58_processopai = ($this->p58_processopai == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_processopai"]:$this->p58_processopai);
-       $this->p58_volume = ($this->p58_volume == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_volume"]:$this->p58_volume);
+       $this->p58_ano = (($this->p58_ano === 0 || $this->p58_ano === 0.0 || $this->p58_ano == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_ano"]:$this->p58_ano);
+       $this->p58_tipoprocesso = (($this->p58_tipoprocesso === 0 || $this->p58_tipoprocesso === 0.0 || $this->p58_tipoprocesso == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_tipoprocesso"]:$this->p58_tipoprocesso);
+       $this->p58_orgao = (($this->p58_orgao === 0 || $this->p58_orgao === 0.0 || $this->p58_orgao == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_orgao"]:$this->p58_orgao);
+       $this->p58_processopai = (($this->p58_processopai === 0 || $this->p58_processopai === 0.0 || $this->p58_processopai == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_processopai"]:$this->p58_processopai);
+       $this->p58_volume = (($this->p58_volume === 0 || $this->p58_volume === 0.0 || $this->p58_volume == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_volume"]:$this->p58_volume);
      }else{
-       $this->p58_codproc = ($this->p58_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p58_codproc"]:$this->p58_codproc);
+       $this->p58_codproc = (($this->p58_codproc === 0 || $this->p58_codproc === 0.0 || $this->p58_codproc == "")?@$GLOBALS["HTTP_POST_VARS"]["p58_codproc"]:$this->p58_codproc);
      }
    }
    // funcao para inclusao
@@ -274,7 +274,7 @@ class cl_protprocesso {
          $this->p58_codproc = $p58_codproc;
        }
      }
-     if(($this->p58_codproc == null) || ($this->p58_codproc == "") ){
+     if(($this->p58_codproc == null) || (($this->p58_codproc === 0 || $this->p58_codproc === 0.0 || $this->p58_codproc == "")) ){
        $this->erro_sql = " Campo p58_codproc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

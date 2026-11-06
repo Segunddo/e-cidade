@@ -32,7 +32,8 @@ include(modification("classes/db_listainscr_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 include(modification("classes/db_issbase_classe.php"));
 
-parse_str ( $HTTP_SERVER_VARS ['QUERY_STRING'] );
+parse_str ( $HTTP_SERVER_VARS ['QUERY_STRING'], $__qs );
+extract($__qs);
 $cllistainscr = new cl_listainscr ( );
 $cllistainscrcab = new cl_listainscrcab ( );
 $clcgm = new cl_cgm ( );
@@ -80,7 +81,7 @@ $sSql = "select codigo,
 //die($sSql);
 $rsSql = db_query ( $sSql );
 
-if (pg_numrows ( $rsSql ) > 0) {
+if (pg_num_rows ( $rsSql ) > 0) {
 	db_fieldsmemory ( $rsSql, 0 );
 }
 

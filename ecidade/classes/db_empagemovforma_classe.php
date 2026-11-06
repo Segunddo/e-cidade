@@ -50,7 +50,7 @@ class cl_empagemovforma {
                  e97_codforma = int4 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_empagemovforma() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empagemovforma"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_empagemovforma {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e97_codmov = ($this->e97_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codmov"]:$this->e97_codmov);
-       $this->e97_codforma = ($this->e97_codforma == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codforma"]:$this->e97_codforma);
+       $this->e97_codmov = ($this->e97_codmov === 0 || $this->e97_codmov === 0.0 || $this->e97_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codmov"]:$this->e97_codmov);
+       $this->e97_codforma = ($this->e97_codforma === 0 || $this->e97_codforma === 0.0 || $this->e97_codforma == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codforma"]:$this->e97_codforma);
      }else{
-       $this->e97_codmov = ($this->e97_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codmov"]:$this->e97_codmov);
+       $this->e97_codmov = ($this->e97_codmov === 0 || $this->e97_codmov === 0.0 || $this->e97_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codmov"]:$this->e97_codmov);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_empagemovforma {
        return false;
      }
        $this->e97_codmov = $e97_codmov; 
-     if(($this->e97_codmov == null) || ($this->e97_codmov == "") ){ 
+     if(($this->e97_codmov == null) || ($this->e97_codmov === 0 || $this->e97_codmov === 0.0 || $this->e97_codmov == "") ){ 
        $this->erro_sql = " Campo e97_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_empagemovforma {
    function sql_query ( $e97_codmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_empagemovforma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_empagemovforma {
    function sql_query_file ( $e97_codmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_empagemovforma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

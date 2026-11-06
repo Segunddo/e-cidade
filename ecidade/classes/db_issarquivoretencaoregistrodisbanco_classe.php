@@ -52,7 +52,7 @@ class cl_issarquivoretencaoregistrodisbanco {
                  q94_disbanco = int4 = Código Disbanco
                  ";
    //funcao construtor da classe
-   function cl_issarquivoretencaoregistrodisbanco() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issarquivoretencaoregistrodisbanco");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_issarquivoretencaoregistrodisbanco {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q94_sequencial = ($this->q94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q94_sequencial"]:$this->q94_sequencial);
-       $this->q94_issarquivoretencaoregistro = ($this->q94_issarquivoretencaoregistro == ""?@$GLOBALS["HTTP_POST_VARS"]["q94_issarquivoretencaoregistro"]:$this->q94_issarquivoretencaoregistro);
-       $this->q94_disbanco = ($this->q94_disbanco == ""?@$GLOBALS["HTTP_POST_VARS"]["q94_disbanco"]:$this->q94_disbanco);
+       $this->q94_sequencial = ($this->q94_sequencial === 0 || $this->q94_sequencial === 0.0 || $this->q94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q94_sequencial"]:$this->q94_sequencial);
+       $this->q94_issarquivoretencaoregistro = ($this->q94_issarquivoretencaoregistro === 0 || $this->q94_issarquivoretencaoregistro === 0.0 || $this->q94_issarquivoretencaoregistro == ""?@$GLOBALS["HTTP_POST_VARS"]["q94_issarquivoretencaoregistro"]:$this->q94_issarquivoretencaoregistro);
+       $this->q94_disbanco = ($this->q94_disbanco === 0 || $this->q94_disbanco === 0.0 || $this->q94_disbanco == ""?@$GLOBALS["HTTP_POST_VARS"]["q94_disbanco"]:$this->q94_disbanco);
      }else{
-       $this->q94_sequencial = ($this->q94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q94_sequencial"]:$this->q94_sequencial);
+       $this->q94_sequencial = ($this->q94_sequencial === 0 || $this->q94_sequencial === 0.0 || $this->q94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q94_sequencial"]:$this->q94_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_issarquivoretencaoregistrodisbanco {
          $this->q94_sequencial = $q94_sequencial;
        }
      }
-     if(($this->q94_sequencial == null) || ($this->q94_sequencial == "") ){
+     if(($this->q94_sequencial == null) || ($this->q94_sequencial === 0 || $this->q94_sequencial === 0.0 || $this->q94_sequencial == "") ){
        $this->erro_sql = " Campo q94_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

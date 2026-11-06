@@ -109,7 +109,7 @@ class cl_termo {
                  v07_vlrdes = float8 = Valor Desconto 
                  ";
    //funcao construtor da classe
-   function cl_termo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -126,7 +126,7 @@ class cl_termo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v07_parcel = ($this->v07_parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_parcel"]:$this->v07_parcel);
+       $this->v07_parcel = (($this->v07_parcel === 0 || $this->v07_parcel === 0.0 || $this->v07_parcel == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_parcel"]:$this->v07_parcel);
        if($this->v07_dtlanc == ""){
          $this->v07_dtlanc_dia = ($this->v07_dtlanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_dtlanc_dia"]:$this->v07_dtlanc_dia);
          $this->v07_dtlanc_mes = ($this->v07_dtlanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_dtlanc_mes"]:$this->v07_dtlanc_mes);
@@ -135,10 +135,10 @@ class cl_termo {
             $this->v07_dtlanc = $this->v07_dtlanc_ano."-".$this->v07_dtlanc_mes."-".$this->v07_dtlanc_dia;
          }
        }
-       $this->v07_valor = ($this->v07_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_valor"]:$this->v07_valor);
-       $this->v07_numpre = ($this->v07_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_numpre"]:$this->v07_numpre);
-       $this->v07_totpar = ($this->v07_totpar == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_totpar"]:$this->v07_totpar);
-       $this->v07_vlrpar = ($this->v07_vlrpar == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrpar"]:$this->v07_vlrpar);
+       $this->v07_valor = (($this->v07_valor === 0 || $this->v07_valor === 0.0 || $this->v07_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_valor"]:$this->v07_valor);
+       $this->v07_numpre = (($this->v07_numpre === 0 || $this->v07_numpre === 0.0 || $this->v07_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_numpre"]:$this->v07_numpre);
+       $this->v07_totpar = (($this->v07_totpar === 0 || $this->v07_totpar === 0.0 || $this->v07_totpar == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_totpar"]:$this->v07_totpar);
+       $this->v07_vlrpar = (($this->v07_vlrpar === 0 || $this->v07_vlrpar === 0.0 || $this->v07_vlrpar == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrpar"]:$this->v07_vlrpar);
        if($this->v07_dtvenc == ""){
          $this->v07_dtvenc_dia = ($this->v07_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_dtvenc_dia"]:$this->v07_dtvenc_dia);
          $this->v07_dtvenc_mes = ($this->v07_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_dtvenc_mes"]:$this->v07_dtvenc_mes);
@@ -147,7 +147,7 @@ class cl_termo {
             $this->v07_dtvenc = $this->v07_dtvenc_ano."-".$this->v07_dtvenc_mes."-".$this->v07_dtvenc_dia;
          }
        }
-       $this->v07_vlrent = ($this->v07_vlrent == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrent"]:$this->v07_vlrent);
+       $this->v07_vlrent = (($this->v07_vlrent === 0 || $this->v07_vlrent === 0.0 || $this->v07_vlrent == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrent"]:$this->v07_vlrent);
        if($this->v07_datpri == ""){
          $this->v07_datpri_dia = ($this->v07_datpri_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_datpri_dia"]:$this->v07_datpri_dia);
          $this->v07_datpri_mes = ($this->v07_datpri_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_datpri_mes"]:$this->v07_datpri_mes);
@@ -156,25 +156,25 @@ class cl_termo {
             $this->v07_datpri = $this->v07_datpri_ano."-".$this->v07_datpri_mes."-".$this->v07_datpri_dia;
          }
        }
-       $this->v07_vlrmul = ($this->v07_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrmul"]:$this->v07_vlrmul);
-       $this->v07_vlrjur = ($this->v07_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrjur"]:$this->v07_vlrjur);
-       $this->v07_perjur = ($this->v07_perjur == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_perjur"]:$this->v07_perjur);
-       $this->v07_permul = ($this->v07_permul == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_permul"]:$this->v07_permul);
-       $this->v07_login = ($this->v07_login == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_login"]:$this->v07_login);
-       $this->v07_mtermo = ($this->v07_mtermo == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_mtermo"]:$this->v07_mtermo);
-       $this->v07_numcgm = ($this->v07_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_numcgm"]:$this->v07_numcgm);
+       $this->v07_vlrmul = (($this->v07_vlrmul === 0 || $this->v07_vlrmul === 0.0 || $this->v07_vlrmul == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrmul"]:$this->v07_vlrmul);
+       $this->v07_vlrjur = (($this->v07_vlrjur === 0 || $this->v07_vlrjur === 0.0 || $this->v07_vlrjur == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrjur"]:$this->v07_vlrjur);
+       $this->v07_perjur = (($this->v07_perjur === 0 || $this->v07_perjur === 0.0 || $this->v07_perjur == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_perjur"]:$this->v07_perjur);
+       $this->v07_permul = (($this->v07_permul === 0 || $this->v07_permul === 0.0 || $this->v07_permul == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_permul"]:$this->v07_permul);
+       $this->v07_login = (($this->v07_login === 0 || $this->v07_login === 0.0 || $this->v07_login == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_login"]:$this->v07_login);
+       $this->v07_mtermo = (($this->v07_mtermo === 0 || $this->v07_mtermo === 0.0 || $this->v07_mtermo == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_mtermo"]:$this->v07_mtermo);
+       $this->v07_numcgm = (($this->v07_numcgm === 0 || $this->v07_numcgm === 0.0 || $this->v07_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_numcgm"]:$this->v07_numcgm);
        $this->v07_hist = ($this->v07_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_hist"]:$this->v07_hist);
-       $this->v07_ultpar = ($this->v07_ultpar == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_ultpar"]:$this->v07_ultpar);
-       $this->v07_desconto = ($this->v07_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_desconto"]:$this->v07_desconto);
-       $this->v07_descjur = ($this->v07_descjur == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_descjur"]:$this->v07_descjur);
-       $this->v07_descmul = ($this->v07_descmul == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_descmul"]:$this->v07_descmul);
-       $this->v07_situacao = ($this->v07_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_situacao"]:$this->v07_situacao);
-       $this->v07_instit = ($this->v07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_instit"]:$this->v07_instit);
-       $this->v07_vlrhis = ($this->v07_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrhis"]:$this->v07_vlrhis);
-       $this->v07_vlrcor = ($this->v07_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrcor"]:$this->v07_vlrcor);
-       $this->v07_vlrdes = ($this->v07_vlrdes == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrdes"]:$this->v07_vlrdes);
+       $this->v07_ultpar = (($this->v07_ultpar === 0 || $this->v07_ultpar === 0.0 || $this->v07_ultpar == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_ultpar"]:$this->v07_ultpar);
+       $this->v07_desconto = (($this->v07_desconto === 0 || $this->v07_desconto === 0.0 || $this->v07_desconto == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_desconto"]:$this->v07_desconto);
+       $this->v07_descjur = (($this->v07_descjur === 0 || $this->v07_descjur === 0.0 || $this->v07_descjur == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_descjur"]:$this->v07_descjur);
+       $this->v07_descmul = (($this->v07_descmul === 0 || $this->v07_descmul === 0.0 || $this->v07_descmul == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_descmul"]:$this->v07_descmul);
+       $this->v07_situacao = (($this->v07_situacao === 0 || $this->v07_situacao === 0.0 || $this->v07_situacao == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_situacao"]:$this->v07_situacao);
+       $this->v07_instit = (($this->v07_instit === 0 || $this->v07_instit === 0.0 || $this->v07_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_instit"]:$this->v07_instit);
+       $this->v07_vlrhis = (($this->v07_vlrhis === 0 || $this->v07_vlrhis === 0.0 || $this->v07_vlrhis == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrhis"]:$this->v07_vlrhis);
+       $this->v07_vlrcor = (($this->v07_vlrcor === 0 || $this->v07_vlrcor === 0.0 || $this->v07_vlrcor == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrcor"]:$this->v07_vlrcor);
+       $this->v07_vlrdes = (($this->v07_vlrdes === 0 || $this->v07_vlrdes === 0.0 || $this->v07_vlrdes == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_vlrdes"]:$this->v07_vlrdes);
      }else{
-       $this->v07_parcel = ($this->v07_parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_parcel"]:$this->v07_parcel);
+       $this->v07_parcel = (($this->v07_parcel === 0 || $this->v07_parcel === 0.0 || $this->v07_parcel == "")?@$GLOBALS["HTTP_POST_VARS"]["v07_parcel"]:$this->v07_parcel);
      }
    }
    // funcao para inclusao
@@ -429,7 +429,7 @@ class cl_termo {
          $this->v07_parcel = $v07_parcel;
        }
      }
-     if(($this->v07_parcel == null) || ($this->v07_parcel == "") ){
+     if(($this->v07_parcel == null) || (($this->v07_parcel === 0 || $this->v07_parcel === 0.0 || $this->v07_parcel == "")) ){
        $this->erro_sql = " Campo v07_parcel nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

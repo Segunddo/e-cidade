@@ -56,7 +56,7 @@ class cl_concarpeculiar {
                  c58_estrutural = varchar(100) = Código
                  ";
    //funcao construtor da classe
-   function cl_concarpeculiar() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("concarpeculiar");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,8 +75,8 @@ class cl_concarpeculiar {
      if($exclusao==false){
        $this->c58_sequencial = ($this->c58_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c58_sequencial"]:$this->c58_sequencial);
        $this->c58_descr = ($this->c58_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c58_descr"]:$this->c58_descr);
-       $this->c58_tipo = ($this->c58_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c58_tipo"]:$this->c58_tipo);
-       $this->c58_db_estruturavalor = ($this->c58_db_estruturavalor == ""?@$GLOBALS["HTTP_POST_VARS"]["c58_db_estruturavalor"]:$this->c58_db_estruturavalor);
+       $this->c58_tipo = ($this->c58_tipo === 0 || $this->c58_tipo === 0.0 || $this->c58_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c58_tipo"]:$this->c58_tipo);
+       $this->c58_db_estruturavalor = ($this->c58_db_estruturavalor === 0 || $this->c58_db_estruturavalor === 0.0 || $this->c58_db_estruturavalor == ""?@$GLOBALS["HTTP_POST_VARS"]["c58_db_estruturavalor"]:$this->c58_db_estruturavalor);
        $this->c58_estrutural = ($this->c58_estrutural == ""?@$GLOBALS["HTTP_POST_VARS"]["c58_estrutural"]:$this->c58_estrutural);
      }else{
        $this->c58_sequencial = ($this->c58_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c58_sequencial"]:$this->c58_sequencial);

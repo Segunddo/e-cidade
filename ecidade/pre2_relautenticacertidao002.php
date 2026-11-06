@@ -69,7 +69,7 @@ if (isset($id_usuario)) {
   $sqlCertidaoAutentica .= " order by {$sOrder}                                                                               ";
 
   $rsCertidaoAutentica  = db_query($sqlCertidaoAutentica);
-  $iCertidaoAutentica   = pg_num_rows($rsCertidaoAutentica);
+  $iCertidaoAutentica   = ($rsCertidaoAutentica ? pg_num_rows($rsCertidaoAutentica) : 0);
   
   if ($iCertidaoAutentica == 0) {
     db_redireciona('db_erros.php?fechar=true&db_erro=Não foram encontrados registros para esse(s) filtro(s).');

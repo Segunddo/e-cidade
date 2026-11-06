@@ -52,7 +52,7 @@ class cl_licsituacao {
                  l08_altera = bool = Altera 
                  ";
    //funcao construtor da classe 
-   function cl_licsituacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("licsituacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_licsituacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l08_sequencial = ($this->l08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l08_sequencial"]:$this->l08_sequencial);
+       $this->l08_sequencial = ($this->l08_sequencial === 0 || $this->l08_sequencial === 0.0 || $this->l08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l08_sequencial"]:$this->l08_sequencial);
        $this->l08_descr = ($this->l08_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["l08_descr"]:$this->l08_descr);
        $this->l08_altera = ($this->l08_altera == "f"?@$GLOBALS["HTTP_POST_VARS"]["l08_altera"]:$this->l08_altera);
      }else{
-       $this->l08_sequencial = ($this->l08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l08_sequencial"]:$this->l08_sequencial);
+       $this->l08_sequencial = ($this->l08_sequencial === 0 || $this->l08_sequencial === 0.0 || $this->l08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l08_sequencial"]:$this->l08_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_licsituacao {
          $this->l08_sequencial = $l08_sequencial; 
        }
      }
-     if(($this->l08_sequencial == null) || ($this->l08_sequencial == "") ){ 
+     if(($this->l08_sequencial == null) || ($this->l08_sequencial === 0 || $this->l08_sequencial === 0.0 || $this->l08_sequencial == "") ){ 
        $this->erro_sql = " Campo l08_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_licsituacao {
    function sql_query ( $l08_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_licsituacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_licsituacao {
    function sql_query_file ( $l08_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_licsituacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

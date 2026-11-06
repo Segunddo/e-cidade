@@ -70,7 +70,7 @@ class cl_solicitem
                  ";
 
     //funcao construtor da classe
-    function cl_solicitem()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("solicitem");
@@ -92,11 +92,11 @@ class cl_solicitem
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->pc11_codigo = ($this->pc11_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_codigo"] : $this->pc11_codigo);
-            $this->pc11_numero = ($this->pc11_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_numero"] : $this->pc11_numero);
-            $this->pc11_seq = ($this->pc11_seq == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_seq"] : $this->pc11_seq);
-            $this->pc11_quant = ($this->pc11_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_quant"] : $this->pc11_quant);
-            $this->pc11_vlrun = ($this->pc11_vlrun == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_vlrun"] : $this->pc11_vlrun);
+            $this->pc11_codigo = ($this->pc11_codigo === 0 || $this->pc11_codigo === 0.0 || $this->pc11_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_codigo"] : $this->pc11_codigo);
+            $this->pc11_numero = ($this->pc11_numero === 0 || $this->pc11_numero === 0.0 || $this->pc11_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_numero"] : $this->pc11_numero);
+            $this->pc11_seq = ($this->pc11_seq === 0 || $this->pc11_seq === 0.0 || $this->pc11_seq == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_seq"] : $this->pc11_seq);
+            $this->pc11_quant = ($this->pc11_quant === 0 || $this->pc11_quant === 0.0 || $this->pc11_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_quant"] : $this->pc11_quant);
+            $this->pc11_vlrun = ($this->pc11_vlrun === 0 || $this->pc11_vlrun === 0.0 || $this->pc11_vlrun == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_vlrun"] : $this->pc11_vlrun);
             $this->pc11_prazo = ($this->pc11_prazo == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_prazo"] : $this->pc11_prazo);
             $this->pc11_pgto = ($this->pc11_pgto == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_pgto"] : $this->pc11_pgto);
             $this->pc11_resum = ($this->pc11_resum == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_resum"] : $this->pc11_resum);
@@ -104,7 +104,7 @@ class cl_solicitem
             $this->pc11_liberado = ($this->pc11_liberado == "f" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_liberado"] : $this->pc11_liberado);
             $this->pc11_servicoquantidade = ($this->pc11_servicoquantidade == "f" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_servicoquantidade"] : $this->pc11_servicoquantidade);
         } else {
-            $this->pc11_codigo = ($this->pc11_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_codigo"] : $this->pc11_codigo);
+            $this->pc11_codigo = ($this->pc11_codigo === 0 || $this->pc11_codigo === 0.0 || $this->pc11_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc11_codigo"] : $this->pc11_codigo);
         }
     }
 
@@ -184,7 +184,7 @@ class cl_solicitem
                 $this->pc11_codigo = $pc11_codigo;
             }
         }
-        if (($this->pc11_codigo == null) || ($this->pc11_codigo == "")) {
+        if (($this->pc11_codigo == null) || ($this->pc11_codigo === 0 || $this->pc11_codigo === 0.0 || $this->pc11_codigo == "")) {
             $this->erro_sql = " Campo pc11_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

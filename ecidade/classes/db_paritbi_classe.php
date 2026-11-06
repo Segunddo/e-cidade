@@ -104,18 +104,18 @@ class cl_paritbi {
    public function atualizacampos($exclusao = false)
    {
      if($exclusao==false){
-       $this->it24_anousu = ($this->it24_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_anousu"]:$this->it24_anousu);
-       $this->it24_grupoespbenfurbana = ($this->it24_grupoespbenfurbana == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_grupoespbenfurbana"]:$this->it24_grupoespbenfurbana);
-       $this->it24_grupotipobenfurbana = ($this->it24_grupotipobenfurbana == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_grupotipobenfurbana"]:$this->it24_grupotipobenfurbana);
-       $this->it24_grupoespbenfrural = ($this->it24_grupoespbenfrural == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_grupoespbenfrural"]:$this->it24_grupoespbenfrural);
-       $this->it24_grupotipobenfrural = ($this->it24_grupotipobenfrural == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_grupotipobenfrural"]:$this->it24_grupotipobenfrural);
-       $this->it24_grupoutilterrarural = ($this->it24_grupoutilterrarural == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_grupoutilterrarural"]:$this->it24_grupoutilterrarural);
-       $this->it24_grupodistrterrarural = ($this->it24_grupodistrterrarural == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_grupodistrterrarural"]:$this->it24_grupodistrterrarural);
-       $this->it24_grupopadraoconstrutivobenurbana = ($this->it24_grupopadraoconstrutivobenurbana == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_grupopadraoconstrutivobenurbana"]:$this->it24_grupopadraoconstrutivobenurbana);
-       $this->it24_diasvctoitbi = ($this->it24_diasvctoitbi == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_diasvctoitbi"]:$this->it24_diasvctoitbi);
-       $this->it24_alteraguialib = ($this->it24_alteraguialib == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_alteraguialib"]:$this->it24_alteraguialib);
+       $this->it24_anousu = (($this->it24_anousu === 0 || $this->it24_anousu === 0.0 || $this->it24_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_anousu"]:$this->it24_anousu);
+       $this->it24_grupoespbenfurbana = (($this->it24_grupoespbenfurbana === 0 || $this->it24_grupoespbenfurbana === 0.0 || $this->it24_grupoespbenfurbana == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_grupoespbenfurbana"]:$this->it24_grupoespbenfurbana);
+       $this->it24_grupotipobenfurbana = (($this->it24_grupotipobenfurbana === 0 || $this->it24_grupotipobenfurbana === 0.0 || $this->it24_grupotipobenfurbana == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_grupotipobenfurbana"]:$this->it24_grupotipobenfurbana);
+       $this->it24_grupoespbenfrural = (($this->it24_grupoespbenfrural === 0 || $this->it24_grupoespbenfrural === 0.0 || $this->it24_grupoespbenfrural == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_grupoespbenfrural"]:$this->it24_grupoespbenfrural);
+       $this->it24_grupotipobenfrural = (($this->it24_grupotipobenfrural === 0 || $this->it24_grupotipobenfrural === 0.0 || $this->it24_grupotipobenfrural == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_grupotipobenfrural"]:$this->it24_grupotipobenfrural);
+       $this->it24_grupoutilterrarural = (($this->it24_grupoutilterrarural === 0 || $this->it24_grupoutilterrarural === 0.0 || $this->it24_grupoutilterrarural == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_grupoutilterrarural"]:$this->it24_grupoutilterrarural);
+       $this->it24_grupodistrterrarural = (($this->it24_grupodistrterrarural === 0 || $this->it24_grupodistrterrarural === 0.0 || $this->it24_grupodistrterrarural == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_grupodistrterrarural"]:$this->it24_grupodistrterrarural);
+       $this->it24_grupopadraoconstrutivobenurbana = (($this->it24_grupopadraoconstrutivobenurbana === 0 || $this->it24_grupopadraoconstrutivobenurbana === 0.0 || $this->it24_grupopadraoconstrutivobenurbana == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_grupopadraoconstrutivobenurbana"]:$this->it24_grupopadraoconstrutivobenurbana);
+       $this->it24_diasvctoitbi = (($this->it24_diasvctoitbi === 0 || $this->it24_diasvctoitbi === 0.0 || $this->it24_diasvctoitbi == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_diasvctoitbi"]:$this->it24_diasvctoitbi);
+       $this->it24_alteraguialib = (($this->it24_alteraguialib === 0 || $this->it24_alteraguialib === 0.0 || $this->it24_alteraguialib == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_alteraguialib"]:$this->it24_alteraguialib);
        $this->it24_impsituacaodeb = ($this->it24_impsituacaodeb == "f"?@$GLOBALS["HTTP_POST_VARS"]["it24_impsituacaodeb"]:$this->it24_impsituacaodeb);
-       $this->it24_taxabancaria = ($this->it24_taxabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_taxabancaria"]:$this->it24_taxabancaria);
+       $this->it24_taxabancaria = (($this->it24_taxabancaria === 0 || $this->it24_taxabancaria === 0.0 || $this->it24_taxabancaria == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_taxabancaria"]:$this->it24_taxabancaria);
        $this->it24_cgmobrigatorio = ($this->it24_cgmobrigatorio == "f"?@$GLOBALS["HTTP_POST_VARS"]["it24_cgmobrigatorio"]:$this->it24_cgmobrigatorio);
        $this->it24_solicitanotificacao = ($this->it24_solicitanotificacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["it24_solicitanotificacao"]:$this->it24_solicitanotificacao);
        $this->it24_carregavalorvenal = ($this->it24_carregavalorvenal == "f"?@$GLOBALS["HTTP_POST_VARS"]["it24_carregavalorvenal"]:$this->it24_carregavalorvenal);
@@ -125,7 +125,7 @@ class cl_paritbi {
        $this->it24_carregaconstrucoesbenfeitoriasitbi = ($this->it24_carregaconstrucoesbenfeitoriasitbi == "f"?@$GLOBALS["HTTP_POST_VARS"]["it24_carregaconstrucoesbenfeitoriasitbi"]:$this->it24_carregaconstrucoesbenfeitoriasitbi);
        $this->it24_emiteguiaquitacao = ($this->it24_emiteguiaquitacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["it24_emiteguiaquitacao"]:$this->it24_emiteguiaquitacao);
      }else{
-       $this->it24_anousu = ($this->it24_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["it24_anousu"]:$this->it24_anousu);
+       $this->it24_anousu = (($this->it24_anousu === 0 || $this->it24_anousu === 0.0 || $this->it24_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["it24_anousu"]:$this->it24_anousu);
      }
    }
    // funcao para inclusao
@@ -259,7 +259,7 @@ class cl_paritbi {
       return false;
     }
        $this->it24_anousu = $it24_anousu;
-     if(($this->it24_anousu == null) || ($this->it24_anousu == "") ){
+     if(($this->it24_anousu == null) || (($this->it24_anousu === 0 || $this->it24_anousu === 0.0 || $this->it24_anousu == "")) ){
        $this->erro_sql = " Campo it24_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

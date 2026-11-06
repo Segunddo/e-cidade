@@ -55,7 +55,7 @@ class cl_tiaf {
                  y90_atend = bool = Atendido 
                  ";
    //funcao construtor da classe 
-   function cl_tiaf() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tiaf"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,7 +72,7 @@ class cl_tiaf {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y90_codtiaf = ($this->y90_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y90_codtiaf"]:$this->y90_codtiaf);
+       $this->y90_codtiaf = (($this->y90_codtiaf === 0 || $this->y90_codtiaf === 0.0 || $this->y90_codtiaf == "")?@$GLOBALS["HTTP_POST_VARS"]["y90_codtiaf"]:$this->y90_codtiaf);
        if($this->y90_data == ""){
          $this->y90_data_dia = ($this->y90_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y90_data_dia"]:$this->y90_data_dia);
          $this->y90_data_mes = ($this->y90_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y90_data_mes"]:$this->y90_data_mes);
@@ -83,7 +83,7 @@ class cl_tiaf {
        }
        $this->y90_atend = ($this->y90_atend == "f"?@$GLOBALS["HTTP_POST_VARS"]["y90_atend"]:$this->y90_atend);
      }else{
-       $this->y90_codtiaf = ($this->y90_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y90_codtiaf"]:$this->y90_codtiaf);
+       $this->y90_codtiaf = (($this->y90_codtiaf === 0 || $this->y90_codtiaf === 0.0 || $this->y90_codtiaf == "")?@$GLOBALS["HTTP_POST_VARS"]["y90_codtiaf"]:$this->y90_codtiaf);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_tiaf {
          $this->y90_codtiaf = $y90_codtiaf; 
        }
      }
-     if(($this->y90_codtiaf == null) || ($this->y90_codtiaf == "") ){ 
+     if(($this->y90_codtiaf == null) || (($this->y90_codtiaf === 0 || $this->y90_codtiaf === 0.0 || $this->y90_codtiaf == "")) ){ 
        $this->erro_sql = " Campo y90_codtiaf nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -383,7 +383,7 @@ class cl_tiaf {
    function sql_query ( $y90_codtiaf=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_tiaf {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_tiaf {
    function sql_query_file ( $y90_codtiaf=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_tiaf {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -449,7 +449,7 @@ class cl_tiaf {
    function sql_querytiaf ( $y90_codtiaf=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -495,7 +495,7 @@ class cl_tiaf {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

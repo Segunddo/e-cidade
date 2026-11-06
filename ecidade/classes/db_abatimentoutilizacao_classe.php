@@ -39,7 +39,7 @@ class cl_abatimentoutilizacao {
                  k157_observacao = text =  
                  ";
    //funcao construtor da classe 
-   function cl_abatimentoutilizacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("abatimentoutilizacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -56,7 +56,7 @@ class cl_abatimentoutilizacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k157_sequencial = ($this->k157_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_sequencial"]:$this->k157_sequencial);
+       $this->k157_sequencial = ($this->k157_sequencial === 0 || $this->k157_sequencial === 0.0 || $this->k157_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_sequencial"]:$this->k157_sequencial);
        $this->k157_tipoutilizacao = ($this->k157_tipoutilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_tipoutilizacao"]:$this->k157_tipoutilizacao);
        if($this->k157_data == ""){
          $this->k157_data_dia = ($this->k157_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_data_dia"]:$this->k157_data_dia);
@@ -66,13 +66,13 @@ class cl_abatimentoutilizacao {
             $this->k157_data = $this->k157_data_ano."-".$this->k157_data_mes."-".$this->k157_data_dia;
          }
        }
-       $this->k157_valor = ($this->k157_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_valor"]:$this->k157_valor);
+       $this->k157_valor = ($this->k157_valor === 0 || $this->k157_valor === 0.0 || $this->k157_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_valor"]:$this->k157_valor);
        $this->k157_hora = ($this->k157_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_hora"]:$this->k157_hora);
-       $this->k157_usuario = ($this->k157_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_usuario"]:$this->k157_usuario);
-       $this->k157_abatimento = ($this->k157_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_abatimento"]:$this->k157_abatimento);
+       $this->k157_usuario = ($this->k157_usuario === 0 || $this->k157_usuario === 0.0 || $this->k157_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_usuario"]:$this->k157_usuario);
+       $this->k157_abatimento = ($this->k157_abatimento === 0 || $this->k157_abatimento === 0.0 || $this->k157_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_abatimento"]:$this->k157_abatimento);
        $this->k157_observacao = ($this->k157_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_observacao"]:$this->k157_observacao);
      }else{
-       $this->k157_sequencial = ($this->k157_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_sequencial"]:$this->k157_sequencial);
+       $this->k157_sequencial = ($this->k157_sequencial === 0 || $this->k157_sequencial === 0.0 || $this->k157_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k157_sequencial"]:$this->k157_sequencial);
      }
    }
    // funcao para Inclusão
@@ -159,7 +159,7 @@ class cl_abatimentoutilizacao {
          $this->k157_sequencial = $k157_sequencial; 
        }
      }
-     if(($this->k157_sequencial == null) || ($this->k157_sequencial == "") ){ 
+     if(($this->k157_sequencial == null) || ($this->k157_sequencial === 0 || $this->k157_sequencial === 0.0 || $this->k157_sequencial == "") ){ 
        $this->erro_sql = " Campo k157_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

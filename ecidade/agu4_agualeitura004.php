@@ -34,7 +34,7 @@ include(modification("classes/db_agualeituracancela_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 require_once(modification("libs/db_app.utils.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($_POST);
 $clagualeitura            = new cl_agualeitura;
 $clagualeituracancela     = new cl_agualeituracancela;

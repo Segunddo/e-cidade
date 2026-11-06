@@ -52,7 +52,7 @@ class cl_iptutaxa {
                  j19_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_iptutaxa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptutaxa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_iptutaxa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j19_anousu = ($this->j19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_anousu"]:$this->j19_anousu);
-       $this->j19_receit = ($this->j19_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_receit"]:$this->j19_receit);
-       $this->j19_valor = ($this->j19_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_valor"]:$this->j19_valor);
+       $this->j19_anousu = ($this->j19_anousu === 0 || $this->j19_anousu === 0.0 || $this->j19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_anousu"]:$this->j19_anousu);
+       $this->j19_receit = ($this->j19_receit === 0 || $this->j19_receit === 0.0 || $this->j19_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_receit"]:$this->j19_receit);
+       $this->j19_valor = ($this->j19_valor === 0 || $this->j19_valor === 0.0 || $this->j19_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_valor"]:$this->j19_valor);
      }else{
-       $this->j19_anousu = ($this->j19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_anousu"]:$this->j19_anousu);
-       $this->j19_receit = ($this->j19_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_receit"]:$this->j19_receit);
+       $this->j19_anousu = ($this->j19_anousu === 0 || $this->j19_anousu === 0.0 || $this->j19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_anousu"]:$this->j19_anousu);
+       $this->j19_receit = ($this->j19_receit === 0 || $this->j19_receit === 0.0 || $this->j19_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_receit"]:$this->j19_receit);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_iptutaxa {
      }
        $this->j19_anousu = $j19_anousu; 
        $this->j19_receit = $j19_receit; 
-     if(($this->j19_anousu == null) || ($this->j19_anousu == "") ){ 
+     if(($this->j19_anousu == null) || ($this->j19_anousu === 0 || $this->j19_anousu === 0.0 || $this->j19_anousu == "") ){ 
        $this->erro_sql = " Campo j19_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_iptutaxa {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j19_receit == null) || ($this->j19_receit == "") ){ 
+     if(($this->j19_receit == null) || ($this->j19_receit === 0 || $this->j19_receit === 0.0 || $this->j19_receit == "") ){ 
        $this->erro_sql = " Campo j19_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_iptutaxa {
    function sql_query ( $j19_anousu=null,$j19_receit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_iptutaxa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_iptutaxa {
    function sql_query_file ( $j19_anousu=null,$j19_receit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_iptutaxa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

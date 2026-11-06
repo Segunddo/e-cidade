@@ -30,7 +30,7 @@ class cl_rhconsignacaobancolayout {
                  rh178_instit = int4 = Instituiçao 
                  ";
    //funcao construtor da classe 
-   function cl_rhconsignacaobancolayout() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhconsignacaobancolayout"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_rhconsignacaobancolayout {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh178_sequencial = ($this->rh178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh178_sequencial"]:$this->rh178_sequencial);
+       $this->rh178_sequencial = ($this->rh178_sequencial === 0 || $this->rh178_sequencial === 0.0 || $this->rh178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh178_sequencial"]:$this->rh178_sequencial);
        $this->rh178_db_banco = ($this->rh178_db_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["rh178_db_banco"]:$this->rh178_db_banco);
-       $this->rh178_layout = ($this->rh178_layout == ""?@$GLOBALS["HTTP_POST_VARS"]["rh178_layout"]:$this->rh178_layout);
+       $this->rh178_layout = ($this->rh178_layout === 0 || $this->rh178_layout === 0.0 || $this->rh178_layout == ""?@$GLOBALS["HTTP_POST_VARS"]["rh178_layout"]:$this->rh178_layout);
        $this->rh178_rubrica = ($this->rh178_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh178_rubrica"]:$this->rh178_rubrica);
-       $this->rh178_instit = ($this->rh178_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh178_instit"]:$this->rh178_instit);
+       $this->rh178_instit = ($this->rh178_instit === 0 || $this->rh178_instit === 0.0 || $this->rh178_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh178_instit"]:$this->rh178_instit);
      }else{
-       $this->rh178_sequencial = ($this->rh178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh178_sequencial"]:$this->rh178_sequencial);
+       $this->rh178_sequencial = ($this->rh178_sequencial === 0 || $this->rh178_sequencial === 0.0 || $this->rh178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh178_sequencial"]:$this->rh178_sequencial);
      }
    }
    // funcao para Inclusão
@@ -119,7 +119,7 @@ class cl_rhconsignacaobancolayout {
          $this->rh178_sequencial = $rh178_sequencial; 
        }
      }
-     if(($this->rh178_sequencial == null) || ($this->rh178_sequencial == "") ){ 
+     if(($this->rh178_sequencial == null) || ($this->rh178_sequencial === 0 || $this->rh178_sequencial === 0.0 || $this->rh178_sequencial == "") ){ 
        $this->erro_sql = " Campo rh178_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

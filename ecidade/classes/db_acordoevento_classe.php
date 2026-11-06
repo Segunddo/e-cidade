@@ -39,7 +39,7 @@ class cl_acordoevento {
                  ac55_descricaopublicacao = varchar(100) = Descrição da Publicação
                  ";
    //funcao construtor da classe
-   function cl_acordoevento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoevento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,7 +75,7 @@ class cl_acordoevento {
        $this->ac55_anoprocesso = (empty($this->ac55_anoprocesso) ? 'null' : $this->ac55_anoprocesso);
        $this->ac55_descricaopublicacao = (empty($this->ac55_descricaopublicacao) ? '' : $this->ac55_descricaopublicacao);
      } else {
-       $this->ac55_sequencial = ($this->ac55_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac55_sequencial"]:$this->ac55_sequencial);
+       $this->ac55_sequencial = ($this->ac55_sequencial === 0 || $this->ac55_sequencial === 0.0 || $this->ac55_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac55_sequencial"]:$this->ac55_sequencial);
      }
    }
    // funcao para Inclusão
@@ -132,7 +132,7 @@ class cl_acordoevento {
          $this->ac55_sequencial = $ac55_sequencial;
        }
      }
-     if(($this->ac55_sequencial == null) || ($this->ac55_sequencial == "") ){
+     if(($this->ac55_sequencial == null) || ($this->ac55_sequencial === 0 || $this->ac55_sequencial === 0.0 || $this->ac55_sequencial == "") ){
        $this->erro_sql = " Campo ac55_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

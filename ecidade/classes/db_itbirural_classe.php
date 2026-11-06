@@ -64,7 +64,7 @@ class cl_itbirural {
                  it18_coordenadas = varchar(50) = Longitude/Latitude 
                  ";
    //funcao construtor da classe 
-   function cl_itbirural() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbirural"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_itbirural {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it18_guia = ($this->it18_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it18_guia"]:$this->it18_guia);
-       $this->it18_frente = ($this->it18_frente == ""?@$GLOBALS["HTTP_POST_VARS"]["it18_frente"]:$this->it18_frente);
-       $this->it18_fundos = ($this->it18_fundos == ""?@$GLOBALS["HTTP_POST_VARS"]["it18_fundos"]:$this->it18_fundos);
-       $this->it18_prof = ($this->it18_prof == ""?@$GLOBALS["HTTP_POST_VARS"]["it18_prof"]:$this->it18_prof);
+       $this->it18_guia = (($this->it18_guia === 0 || $this->it18_guia === 0.0 || $this->it18_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it18_guia"]:$this->it18_guia);
+       $this->it18_frente = (($this->it18_frente === 0 || $this->it18_frente === 0.0 || $this->it18_frente == "")?@$GLOBALS["HTTP_POST_VARS"]["it18_frente"]:$this->it18_frente);
+       $this->it18_fundos = (($this->it18_fundos === 0 || $this->it18_fundos === 0.0 || $this->it18_fundos == "")?@$GLOBALS["HTTP_POST_VARS"]["it18_fundos"]:$this->it18_fundos);
+       $this->it18_prof = (($this->it18_prof === 0 || $this->it18_prof === 0.0 || $this->it18_prof == "")?@$GLOBALS["HTTP_POST_VARS"]["it18_prof"]:$this->it18_prof);
        $this->it18_localimovel = ($this->it18_localimovel == ""?@$GLOBALS["HTTP_POST_VARS"]["it18_localimovel"]:$this->it18_localimovel);
-       $this->it18_distcidade = ($this->it18_distcidade == ""?@$GLOBALS["HTTP_POST_VARS"]["it18_distcidade"]:$this->it18_distcidade);
+       $this->it18_distcidade = (($this->it18_distcidade === 0 || $this->it18_distcidade === 0.0 || $this->it18_distcidade == "")?@$GLOBALS["HTTP_POST_VARS"]["it18_distcidade"]:$this->it18_distcidade);
        $this->it18_nomelograd = ($this->it18_nomelograd == ""?@$GLOBALS["HTTP_POST_VARS"]["it18_nomelograd"]:$this->it18_nomelograd);
-       $this->it18_area = ($this->it18_area == ""?@$GLOBALS["HTTP_POST_VARS"]["it18_area"]:$this->it18_area);
+       $this->it18_area = (($this->it18_area === 0 || $this->it18_area === 0.0 || $this->it18_area == "")?@$GLOBALS["HTTP_POST_VARS"]["it18_area"]:$this->it18_area);
        $this->it18_coordenadas = ($this->it18_coordenadas == ""?@$GLOBALS["HTTP_POST_VARS"]["it18_coordenadas"]:$this->it18_coordenadas);
      }else{
-       $this->it18_guia = ($this->it18_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it18_guia"]:$this->it18_guia);
+       $this->it18_guia = (($this->it18_guia === 0 || $this->it18_guia === 0.0 || $this->it18_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it18_guia"]:$this->it18_guia);
      }
    }
    // funcao para inclusao
@@ -128,7 +128,7 @@ class cl_itbirural {
        return false;
      }
        $this->it18_guia = $it18_guia; 
-     if(($this->it18_guia == null) || ($this->it18_guia == "") ){ 
+     if(($this->it18_guia == null) || (($this->it18_guia === 0 || $this->it18_guia === 0.0 || $this->it18_guia == "")) ){ 
        $this->erro_sql = " Campo it18_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -439,7 +439,7 @@ class cl_itbirural {
    function sql_query ( $it18_guia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -464,7 +464,7 @@ class cl_itbirural {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_itbirural {
    function sql_query_file ( $it18_guia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -498,7 +498,7 @@ class cl_itbirural {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_itbirural {
    function sql_query_dados( $it18_guia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_itbirural {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

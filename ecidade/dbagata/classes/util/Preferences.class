@@ -34,7 +34,7 @@ class Preferences extends CommonForm
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function Preferences(&$container)
+    function __construct(&$container)
     {
         $this->container = &$container;
     }

@@ -67,11 +67,11 @@ class cl_arqproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p68_codarquiv = ($this->p68_codarquiv == ""?@$GLOBALS["HTTP_POST_VARS"]["p68_codarquiv"]:$this->p68_codarquiv);
-       $this->p68_codproc = ($this->p68_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p68_codproc"]:$this->p68_codproc);
+       $this->p68_codarquiv = ($this->p68_codarquiv === 0 || $this->p68_codarquiv === 0.0 || $this->p68_codarquiv == ""?@$GLOBALS["HTTP_POST_VARS"]["p68_codarquiv"]:$this->p68_codarquiv);
+       $this->p68_codproc = ($this->p68_codproc === 0 || $this->p68_codproc === 0.0 || $this->p68_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p68_codproc"]:$this->p68_codproc);
      }else{
-       $this->p68_codarquiv = ($this->p68_codarquiv == ""?@$GLOBALS["HTTP_POST_VARS"]["p68_codarquiv"]:$this->p68_codarquiv);
-       $this->p68_codproc = ($this->p68_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p68_codproc"]:$this->p68_codproc);
+       $this->p68_codarquiv = ($this->p68_codarquiv === 0 || $this->p68_codarquiv === 0.0 || $this->p68_codarquiv == ""?@$GLOBALS["HTTP_POST_VARS"]["p68_codarquiv"]:$this->p68_codarquiv);
+       $this->p68_codproc = ($this->p68_codproc === 0 || $this->p68_codproc === 0.0 || $this->p68_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p68_codproc"]:$this->p68_codproc);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_arqproc {
        $this->atualizacampos();
        $this->p68_codarquiv = $p68_codarquiv; 
        $this->p68_codproc = $p68_codproc; 
-     if(($this->p68_codarquiv == null) || ($this->p68_codarquiv == "") ){ 
+     if(($this->p68_codarquiv == null) || ($this->p68_codarquiv === 0 || $this->p68_codarquiv === 0.0 || $this->p68_codarquiv == "") ){ 
        $this->erro_sql = " Campo p68_codarquiv nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_arqproc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p68_codproc == null) || ($this->p68_codproc == "") ){ 
+     if(($this->p68_codproc == null) || ($this->p68_codproc === 0 || $this->p68_codproc === 0.0 || $this->p68_codproc == "") ){ 
        $this->erro_sql = " Campo p68_codproc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -321,7 +321,7 @@ class cl_arqproc {
    function sql_query ( $p68_codarquiv=null,$p68_codproc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_arqproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_arqproc {
    function sql_query_file ( $p68_codarquiv=null,$p68_codproc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_arqproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_arqproc {
    function sql_query_consprocarquiv ( $p68_codarquiv=null,$p68_codproc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_arqproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

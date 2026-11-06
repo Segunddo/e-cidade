@@ -55,7 +55,7 @@ class cl_notaserv {
                  cm09_d_emissao = date = Emissão
                  ";
    //funcao construtor da classe
-   function cl_notaserv() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notaserv");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,8 +72,8 @@ class cl_notaserv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm09_i_codigo = ($this->cm09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm09_i_codigo"]:$this->cm09_i_codigo);
-       $this->cm09_i_sepultamento = ($this->cm09_i_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm09_i_sepultamento"]:$this->cm09_i_sepultamento);
+       $this->cm09_i_codigo = (($this->cm09_i_codigo === 0 || $this->cm09_i_codigo === 0.0 || $this->cm09_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm09_i_codigo"]:$this->cm09_i_codigo);
+       $this->cm09_i_sepultamento = (($this->cm09_i_sepultamento === 0 || $this->cm09_i_sepultamento === 0.0 || $this->cm09_i_sepultamento == "")?@$GLOBALS["HTTP_POST_VARS"]["cm09_i_sepultamento"]:$this->cm09_i_sepultamento);
        if($this->cm09_d_emissao == ""){
          $this->cm09_d_emissao_dia = ($this->cm09_d_emissao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm09_d_emissao_dia"]:$this->cm09_d_emissao_dia);
          $this->cm09_d_emissao_mes = ($this->cm09_d_emissao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm09_d_emissao_mes"]:$this->cm09_d_emissao_mes);
@@ -83,7 +83,7 @@ class cl_notaserv {
          }
        }
      }else{
-       $this->cm09_i_codigo = ($this->cm09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm09_i_codigo"]:$this->cm09_i_codigo);
+       $this->cm09_i_codigo = (($this->cm09_i_codigo === 0 || $this->cm09_i_codigo === 0.0 || $this->cm09_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm09_i_codigo"]:$this->cm09_i_codigo);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_notaserv {
          $this->cm09_i_codigo = $cm09_i_codigo;
        }
      }
-     if(($this->cm09_i_codigo == null) || ($this->cm09_i_codigo == "") ){
+     if(($this->cm09_i_codigo == null) || (($this->cm09_i_codigo === 0 || $this->cm09_i_codigo === 0.0 || $this->cm09_i_codigo == "")) ){
        $this->erro_sql = " Campo cm09_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -381,7 +381,7 @@ class cl_notaserv {
    function sql_query ( $cm09_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -410,7 +410,7 @@ class cl_notaserv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_notaserv {
    function sql_query_file ( $cm09_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_notaserv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

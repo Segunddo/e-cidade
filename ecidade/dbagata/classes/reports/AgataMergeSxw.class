@@ -329,7 +329,7 @@ class AgataMergeSxw extends AgataMerge
             {
                 $lineN ++;
                 $page = $this->page;
-                $Line = ereg_replace("\"", "\\\"", $Line);
+                $Line = preg_replace("#\"#", "\\\"", $Line);
                 eval ("\$Line = \"$Line\";");
             }
 
@@ -432,7 +432,7 @@ class AgataMergeSxw extends AgataMerge
                 $i ++;
                 foreach ($Lines as $Line)
                 {
-                    $Line = ereg_replace("\"", "\\\"", $Line);
+                    $Line = preg_replace("#\"#", "\\\"", $Line);
                     foreach ($replace as $this_text =>$that_text)
                     {
                         $Line = str_replace($this_text, $that_text, $Line);

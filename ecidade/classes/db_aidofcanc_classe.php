@@ -61,7 +61,7 @@ class cl_aidofcanc {
                  y03_tipocanc = bool = Cancelamento 
                  ";
    //funcao construtor da classe 
-   function cl_aidofcanc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aidofcanc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,8 +78,8 @@ class cl_aidofcanc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y03_codigo = ($this->y03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_codigo"]:$this->y03_codigo);
-       $this->y03_aidof = ($this->y03_aidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_aidof"]:$this->y03_aidof);
+       $this->y03_codigo = (($this->y03_codigo === 0 || $this->y03_codigo === 0.0 || $this->y03_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y03_codigo"]:$this->y03_codigo);
+       $this->y03_aidof = (($this->y03_aidof === 0 || $this->y03_aidof === 0.0 || $this->y03_aidof == "")?@$GLOBALS["HTTP_POST_VARS"]["y03_aidof"]:$this->y03_aidof);
        if($this->y03_data == ""){
          $this->y03_data_dia = ($this->y03_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_data_dia"]:$this->y03_data_dia);
          $this->y03_data_mes = ($this->y03_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_data_mes"]:$this->y03_data_mes);
@@ -88,11 +88,11 @@ class cl_aidofcanc {
             $this->y03_data = $this->y03_data_ano."-".$this->y03_data_mes."-".$this->y03_data_dia;
          }
        }
-       $this->y03_usuario = ($this->y03_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_usuario"]:$this->y03_usuario);
+       $this->y03_usuario = (($this->y03_usuario === 0 || $this->y03_usuario === 0.0 || $this->y03_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["y03_usuario"]:$this->y03_usuario);
        $this->y03_obs = ($this->y03_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_obs"]:$this->y03_obs);
        $this->y03_tipocanc = ($this->y03_tipocanc == "f"?@$GLOBALS["HTTP_POST_VARS"]["y03_tipocanc"]:$this->y03_tipocanc);
      }else{
-       $this->y03_codigo = ($this->y03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_codigo"]:$this->y03_codigo);
+       $this->y03_codigo = (($this->y03_codigo === 0 || $this->y03_codigo === 0.0 || $this->y03_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y03_codigo"]:$this->y03_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_aidofcanc {
          $this->y03_codigo = $y03_codigo; 
        }
      }
-     if(($this->y03_codigo == null) || ($this->y03_codigo == "") ){ 
+     if(($this->y03_codigo == null) || (($this->y03_codigo === 0 || $this->y03_codigo === 0.0 || $this->y03_codigo == "")) ){ 
        $this->erro_sql = " Campo y03_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_aidofcanc {
    function sql_query ( $y03_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -503,7 +503,7 @@ class cl_aidofcanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -515,7 +515,7 @@ class cl_aidofcanc {
    function sql_query_file ( $y03_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -536,7 +536,7 @@ class cl_aidofcanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -548,7 +548,7 @@ class cl_aidofcanc {
    function sql_query_nome ( $y03_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -576,7 +576,7 @@ class cl_aidofcanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

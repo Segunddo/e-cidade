@@ -55,15 +55,15 @@ class cl_lancamentorra {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh173_sequencial = ($this->rh173_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_sequencial"]:$this->rh173_sequencial);
-       $this->rh173_assentamentorra = ($this->rh173_assentamentorra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_assentamentorra"]:$this->rh173_assentamentorra);
-       $this->rh173_valorlancado = ($this->rh173_valorlancado == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_valorlancado"]:$this->rh173_valorlancado);
-       $this->rh173_encargos = ($this->rh173_encargos == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_encargos"]:$this->rh173_encargos);
-       $this->rh173_pensao = ($this->rh173_pensao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_pensao"]:$this->rh173_pensao);
-       $this->rh173_baseprevidencia = ($this->rh173_baseprevidencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_baseprevidencia"]:$this->rh173_baseprevidencia);
-       $this->rh173_baseirrf = ($this->rh173_baseirrf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_baseirrf"]:$this->rh173_baseirrf);
+       $this->rh173_sequencial = ($this->rh173_sequencial === 0 || $this->rh173_sequencial === 0.0 || $this->rh173_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_sequencial"]:$this->rh173_sequencial);
+       $this->rh173_assentamentorra = ($this->rh173_assentamentorra === 0 || $this->rh173_assentamentorra === 0.0 || $this->rh173_assentamentorra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_assentamentorra"]:$this->rh173_assentamentorra);
+       $this->rh173_valorlancado = ($this->rh173_valorlancado === 0 || $this->rh173_valorlancado === 0.0 || $this->rh173_valorlancado == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_valorlancado"]:$this->rh173_valorlancado);
+       $this->rh173_encargos = ($this->rh173_encargos === 0 || $this->rh173_encargos === 0.0 || $this->rh173_encargos == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_encargos"]:$this->rh173_encargos);
+       $this->rh173_pensao = ($this->rh173_pensao === 0 || $this->rh173_pensao === 0.0 || $this->rh173_pensao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_pensao"]:$this->rh173_pensao);
+       $this->rh173_baseprevidencia = ($this->rh173_baseprevidencia === 0 || $this->rh173_baseprevidencia === 0.0 || $this->rh173_baseprevidencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_baseprevidencia"]:$this->rh173_baseprevidencia);
+       $this->rh173_baseirrf = ($this->rh173_baseirrf === 0 || $this->rh173_baseirrf === 0.0 || $this->rh173_baseirrf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_baseirrf"]:$this->rh173_baseirrf);
      }else{
-       $this->rh173_sequencial = ($this->rh173_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_sequencial"]:$this->rh173_sequencial);
+       $this->rh173_sequencial = ($this->rh173_sequencial === 0 || $this->rh173_sequencial === 0.0 || $this->rh173_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh173_sequencial"]:$this->rh173_sequencial);
      }
    }
    // funcao para Inclusão
@@ -147,7 +147,7 @@ class cl_lancamentorra {
          $this->rh173_sequencial = $rh173_sequencial; 
        }
      }
-     if(($this->rh173_sequencial == null) || ($this->rh173_sequencial == "") ){ 
+     if(($this->rh173_sequencial == null) || ($this->rh173_sequencial === 0 || $this->rh173_sequencial === 0.0 || $this->rh173_sequencial == "") ){ 
        $this->erro_sql = " Campo rh173_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

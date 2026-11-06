@@ -52,7 +52,7 @@ class cl_cadenderruaruastipo {
                  db85_ruastipo = int4 = Código do Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_cadenderruaruastipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadenderruaruastipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cadenderruaruastipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db85_sequencial = ($this->db85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db85_sequencial"]:$this->db85_sequencial);
-       $this->db85_cadenderrua = ($this->db85_cadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["db85_cadenderrua"]:$this->db85_cadenderrua);
-       $this->db85_ruastipo = ($this->db85_ruastipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db85_ruastipo"]:$this->db85_ruastipo);
+       $this->db85_sequencial = ($this->db85_sequencial === 0 || $this->db85_sequencial === 0.0 || $this->db85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db85_sequencial"]:$this->db85_sequencial);
+       $this->db85_cadenderrua = ($this->db85_cadenderrua === 0 || $this->db85_cadenderrua === 0.0 || $this->db85_cadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["db85_cadenderrua"]:$this->db85_cadenderrua);
+       $this->db85_ruastipo = ($this->db85_ruastipo === 0 || $this->db85_ruastipo === 0.0 || $this->db85_ruastipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db85_ruastipo"]:$this->db85_ruastipo);
      }else{
-       $this->db85_sequencial = ($this->db85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db85_sequencial"]:$this->db85_sequencial);
+       $this->db85_sequencial = ($this->db85_sequencial === 0 || $this->db85_sequencial === 0.0 || $this->db85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db85_sequencial"]:$this->db85_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cadenderruaruastipo {
          $this->db85_sequencial = $db85_sequencial; 
        }
      }
-     if(($this->db85_sequencial == null) || ($this->db85_sequencial == "") ){ 
+     if(($this->db85_sequencial == null) || ($this->db85_sequencial === 0 || $this->db85_sequencial === 0.0 || $this->db85_sequencial == "") ){ 
        $this->erro_sql = " Campo db85_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

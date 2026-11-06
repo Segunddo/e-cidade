@@ -63,7 +63,7 @@ class cl_acordomovimentacao {
                  ac10_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_acordomovimentacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordomovimentacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,10 +80,10 @@ class cl_acordomovimentacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac10_sequencial = ($this->ac10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_sequencial"]:$this->ac10_sequencial);
-       $this->ac10_acordomovimentacaotipo = ($this->ac10_acordomovimentacaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_acordomovimentacaotipo"]:$this->ac10_acordomovimentacaotipo);
-       $this->ac10_acordo = ($this->ac10_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_acordo"]:$this->ac10_acordo);
-       $this->ac10_id_usuario = ($this->ac10_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_id_usuario"]:$this->ac10_id_usuario);
+       $this->ac10_sequencial = ($this->ac10_sequencial === 0 || $this->ac10_sequencial === 0.0 || $this->ac10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_sequencial"]:$this->ac10_sequencial);
+       $this->ac10_acordomovimentacaotipo = ($this->ac10_acordomovimentacaotipo === 0 || $this->ac10_acordomovimentacaotipo === 0.0 || $this->ac10_acordomovimentacaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_acordomovimentacaotipo"]:$this->ac10_acordomovimentacaotipo);
+       $this->ac10_acordo = ($this->ac10_acordo === 0 || $this->ac10_acordo === 0.0 || $this->ac10_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_acordo"]:$this->ac10_acordo);
+       $this->ac10_id_usuario = ($this->ac10_id_usuario === 0 || $this->ac10_id_usuario === 0.0 || $this->ac10_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_id_usuario"]:$this->ac10_id_usuario);
        if($this->ac10_datamovimento == ""){
          $this->ac10_datamovimento_dia = ($this->ac10_datamovimento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_datamovimento_dia"]:$this->ac10_datamovimento_dia);
          $this->ac10_datamovimento_mes = ($this->ac10_datamovimento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_datamovimento_mes"]:$this->ac10_datamovimento_mes);
@@ -95,7 +95,7 @@ class cl_acordomovimentacao {
        $this->ac10_hora = ($this->ac10_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_hora"]:$this->ac10_hora);
        $this->ac10_obs = ($this->ac10_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_obs"]:$this->ac10_obs);
      }else{
-       $this->ac10_sequencial = ($this->ac10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_sequencial"]:$this->ac10_sequencial);
+       $this->ac10_sequencial = ($this->ac10_sequencial === 0 || $this->ac10_sequencial === 0.0 || $this->ac10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_sequencial"]:$this->ac10_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_acordomovimentacao {
          $this->ac10_sequencial = $ac10_sequencial; 
        }
      }
-     if(($this->ac10_sequencial == null) || ($this->ac10_sequencial == "") ){ 
+     if(($this->ac10_sequencial == null) || ($this->ac10_sequencial === 0 || $this->ac10_sequencial === 0.0 || $this->ac10_sequencial == "") ){ 
        $this->erro_sql = " Campo ac10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -508,7 +508,7 @@ class cl_acordomovimentacao {
    function sql_query ( $ac10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_acordomovimentacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -551,7 +551,7 @@ class cl_acordomovimentacao {
    function sql_query_file ( $ac10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -572,7 +572,7 @@ class cl_acordomovimentacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -585,7 +585,7 @@ class cl_acordomovimentacao {
 function sql_query_verificacancelado ( $ac10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -612,7 +612,7 @@ function sql_query_verificacancelado ( $ac10_sequencial=null,$campos="*",$ordem=
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -625,7 +625,7 @@ function sql_query_verificacancelado ( $ac10_sequencial=null,$campos="*",$ordem=
    function sql_query_acertaracordo ( $ac10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -648,7 +648,7 @@ function sql_query_verificacancelado ( $ac10_sequencial=null,$campos="*",$ordem=
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

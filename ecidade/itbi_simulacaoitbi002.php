@@ -234,7 +234,7 @@ $y = 140;
 $imposto_avalia = str_replace(".", "", $imposto_avalia);
 $imposto_avalia = str_replace(",", ".", $imposto_avalia);
 
-$valorDesconto = $oTipoTransacao->it04_desconto * ($imposto_avalia / 100);
+$valorDesconto = $oTipoTransacao->it04_desconto * ((float)$imposto_avalia / 100);
 
 $subtotal = $imposto_avalia;
 foreach($dadosDasTaxas as $taxas) {
@@ -268,7 +268,7 @@ foreach($dadosDasTaxas as $taxas) {
 
 }
 
-$totalRecolher = $subtotal - $valorDesconto;
+$totalRecolher = (float)$subtotal - (float)$valorDesconto;
 
 
 

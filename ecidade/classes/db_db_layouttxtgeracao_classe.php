@@ -67,7 +67,7 @@ class cl_db_layouttxtgeracao {
                  db55_conteudo = text = Conteudo do txt 
                  ";
    //funcao construtor da classe 
-   function cl_db_layouttxtgeracao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_layouttxtgeracao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,9 +84,9 @@ class cl_db_layouttxtgeracao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db55_sequencial = ($this->db55_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_sequencial"]:$this->db55_sequencial);
-       $this->db55_layouttxt = ($this->db55_layouttxt == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_layouttxt"]:$this->db55_layouttxt);
-       $this->db55_seqlayout = ($this->db55_seqlayout == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_seqlayout"]:$this->db55_seqlayout);
+       $this->db55_sequencial = (($this->db55_sequencial === 0 || $this->db55_sequencial === 0.0 || $this->db55_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["db55_sequencial"]:$this->db55_sequencial);
+       $this->db55_layouttxt = (($this->db55_layouttxt === 0 || $this->db55_layouttxt === 0.0 || $this->db55_layouttxt == "")?@$GLOBALS["HTTP_POST_VARS"]["db55_layouttxt"]:$this->db55_layouttxt);
+       $this->db55_seqlayout = (($this->db55_seqlayout === 0 || $this->db55_seqlayout === 0.0 || $this->db55_seqlayout == "")?@$GLOBALS["HTTP_POST_VARS"]["db55_seqlayout"]:$this->db55_seqlayout);
        if($this->db55_data == ""){
          $this->db55_data_dia = ($this->db55_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_data_dia"]:$this->db55_data_dia);
          $this->db55_data_mes = ($this->db55_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_data_mes"]:$this->db55_data_mes);
@@ -96,12 +96,12 @@ class cl_db_layouttxtgeracao {
          }
        }
        $this->db55_hora = ($this->db55_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_hora"]:$this->db55_hora);
-       $this->db55_usuario = ($this->db55_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_usuario"]:$this->db55_usuario);
+       $this->db55_usuario = (($this->db55_usuario === 0 || $this->db55_usuario === 0.0 || $this->db55_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["db55_usuario"]:$this->db55_usuario);
        $this->db55_nomearq = ($this->db55_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_nomearq"]:$this->db55_nomearq);
        $this->db55_obs = ($this->db55_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_obs"]:$this->db55_obs);
        $this->db55_conteudo = ($this->db55_conteudo == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_conteudo"]:$this->db55_conteudo);
      }else{
-       $this->db55_sequencial = ($this->db55_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db55_sequencial"]:$this->db55_sequencial);
+       $this->db55_sequencial = (($this->db55_sequencial === 0 || $this->db55_sequencial === 0.0 || $this->db55_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["db55_sequencial"]:$this->db55_sequencial);
      }
    }
    // funcao para inclusao
@@ -176,7 +176,7 @@ class cl_db_layouttxtgeracao {
          $this->db55_sequencial = $db55_sequencial; 
        }
      }
-     if(($this->db55_sequencial == null) || ($this->db55_sequencial == "") ){ 
+     if(($this->db55_sequencial == null) || (($this->db55_sequencial === 0 || $this->db55_sequencial === 0.0 || $this->db55_sequencial == "")) ){ 
        $this->erro_sql = " Campo db55_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -515,7 +515,7 @@ class cl_db_layouttxtgeracao {
    function sql_query ( $db55_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_db_layouttxtgeracao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -550,7 +550,7 @@ class cl_db_layouttxtgeracao {
    function sql_query_file ( $db55_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -571,7 +571,7 @@ class cl_db_layouttxtgeracao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -194,11 +194,11 @@ class cl_matriz_saldo_contabil
            $acount = pg_result($resac,0,0);
            $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac = db_query("insert into db_acountkey values($acount,1010461,'$this->c132_sequencial','A')");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["c132_ano"]) || $this->c132_ano != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["c132_ano"]) || ($this->c132_ano != "" && $this->c132_ano !== 0 && $this->c132_ano !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1010444,1010463,'".AddSlashes(pg_result($resaco,$conresaco,'c132_ano'))."','$this->c132_ano',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["c132_mes"]) || $this->c132_mes != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["c132_mes"]) || ($this->c132_mes != "" && $this->c132_mes !== 0 && $this->c132_mes !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1010444,1010462,'".AddSlashes(pg_result($resaco,$conresaco,'c132_mes'))."','$this->c132_mes',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["c132_sequencial"]) || $this->c132_sequencial != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["c132_sequencial"]) || ($this->c132_sequencial != "" && $this->c132_sequencial !== 0 && $this->c132_sequencial !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1010444,1010461,'".AddSlashes(pg_result($resaco,$conresaco,'c132_sequencial'))."','$this->c132_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          }
        }

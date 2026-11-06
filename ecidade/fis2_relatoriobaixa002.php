@@ -40,7 +40,7 @@ $clsaniatividade = new cl_saniatividade;
 $clsaniatividade->rotulo->label();
 $clsanitario->rotulo->label();
 //db_postmemory($HTTP_SERVER_VARS,2);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 if(isset($dataini) && $dataini != "--" && $datafim == "--"){
   $data = " y83_dtfim >= '$dataini' ";
 }elseif(isset($dataini) && $dataini != "--" && isset($datafim) && $datafim != "--"){

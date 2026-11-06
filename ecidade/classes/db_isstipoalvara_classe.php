@@ -70,7 +70,7 @@ class cl_isstipoalvara {
                  q98_tipovalidade = int4 = Tipo de Validade 
                  ";
    //funcao construtor da classe 
-   function cl_isstipoalvara() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isstipoalvara"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,20 +87,20 @@ class cl_isstipoalvara {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q98_sequencial = ($this->q98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q98_sequencial"]:$this->q98_sequencial);
-       $this->q98_documento = ($this->q98_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["q98_documento"]:$this->q98_documento);
-       $this->q98_issgrupotipoalvara = ($this->q98_issgrupotipoalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["q98_issgrupotipoalvara"]:$this->q98_issgrupotipoalvara);
+       $this->q98_sequencial = (($this->q98_sequencial === 0 || $this->q98_sequencial === 0.0 || $this->q98_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q98_sequencial"]:$this->q98_sequencial);
+       $this->q98_documento = (($this->q98_documento === 0 || $this->q98_documento === 0.0 || $this->q98_documento == "")?@$GLOBALS["HTTP_POST_VARS"]["q98_documento"]:$this->q98_documento);
+       $this->q98_issgrupotipoalvara = (($this->q98_issgrupotipoalvara === 0 || $this->q98_issgrupotipoalvara === 0.0 || $this->q98_issgrupotipoalvara == "")?@$GLOBALS["HTTP_POST_VARS"]["q98_issgrupotipoalvara"]:$this->q98_issgrupotipoalvara);
        $this->q98_descricao = ($this->q98_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["q98_descricao"]:$this->q98_descricao);
        $this->q98_permitetransformacao = ($this->q98_permitetransformacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["q98_permitetransformacao"]:$this->q98_permitetransformacao);
        $this->q98_gerataxa = ($this->q98_gerataxa == "f"?@$GLOBALS["HTTP_POST_VARS"]["q98_gerataxa"]:$this->q98_gerataxa);
-       $this->q98_instit = ($this->q98_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["q98_instit"]:$this->q98_instit);
-       $this->q98_quantvalidade = ($this->q98_quantvalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["q98_quantvalidade"]:$this->q98_quantvalidade);
+       $this->q98_instit = (($this->q98_instit === 0 || $this->q98_instit === 0.0 || $this->q98_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["q98_instit"]:$this->q98_instit);
+       $this->q98_quantvalidade = (($this->q98_quantvalidade === 0 || $this->q98_quantvalidade === 0.0 || $this->q98_quantvalidade == "")?@$GLOBALS["HTTP_POST_VARS"]["q98_quantvalidade"]:$this->q98_quantvalidade);
        $this->q98_permiterenovacao = ($this->q98_permiterenovacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["q98_permiterenovacao"]:$this->q98_permiterenovacao);
-       $this->q98_quantrenovacao = ($this->q98_quantrenovacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q98_quantrenovacao"]:$this->q98_quantrenovacao);
+       $this->q98_quantrenovacao = (($this->q98_quantrenovacao === 0 || $this->q98_quantrenovacao === 0.0 || $this->q98_quantrenovacao == "")?@$GLOBALS["HTTP_POST_VARS"]["q98_quantrenovacao"]:$this->q98_quantrenovacao);
        $this->q98_permiteimpressao = ($this->q98_permiteimpressao == "f"?@$GLOBALS["HTTP_POST_VARS"]["q98_permiteimpressao"]:$this->q98_permiteimpressao);
-       $this->q98_tipovalidade = ($this->q98_tipovalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["q98_tipovalidade"]:$this->q98_tipovalidade);
+       $this->q98_tipovalidade = (($this->q98_tipovalidade === 0 || $this->q98_tipovalidade === 0.0 || $this->q98_tipovalidade == "")?@$GLOBALS["HTTP_POST_VARS"]["q98_tipovalidade"]:$this->q98_tipovalidade);
      }else{
-       $this->q98_sequencial = ($this->q98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q98_sequencial"]:$this->q98_sequencial);
+       $this->q98_sequencial = (($this->q98_sequencial === 0 || $this->q98_sequencial === 0.0 || $this->q98_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q98_sequencial"]:$this->q98_sequencial);
      }
    }
    // funcao para inclusao
@@ -211,7 +211,7 @@ class cl_isstipoalvara {
          $this->q98_sequencial = $q98_sequencial; 
        }
      }
-     if(($this->q98_sequencial == null) || ($this->q98_sequencial == "") ){ 
+     if(($this->q98_sequencial == null) || (($this->q98_sequencial === 0 || $this->q98_sequencial === 0.0 || $this->q98_sequencial == "")) ){ 
        $this->erro_sql = " Campo q98_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -600,7 +600,7 @@ class cl_isstipoalvara {
    function sql_query ( $q98_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -625,7 +625,7 @@ class cl_isstipoalvara {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -638,7 +638,7 @@ class cl_isstipoalvara {
    function sql_query_file ( $q98_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -659,7 +659,7 @@ class cl_isstipoalvara {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -672,7 +672,7 @@ class cl_isstipoalvara {
    function sql_query_tipocomalvaravinculado($q98_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -698,7 +698,7 @@ class cl_isstipoalvara {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

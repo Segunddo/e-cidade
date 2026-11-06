@@ -23,11 +23,11 @@ For any suggestions or bug report please contact me : guinux@cosmoplazza.com
 		var $_bar_width;
 		var $_data;
 		
-		function pdfbarcode128( $data, $char_width ) {
+		function __construct( $data, $char_width ) {
 			$this->_bar_width = round($char_width/11, 1);
 			$this->_char_width = $this->_bar_width * 11;
 			$this->_data = $data;
-			$this->barcode128($data);
+			parent::__construct($data);
 		}
 		
 		function get_width() {
@@ -64,7 +64,7 @@ For any suggestions or bug report please contact me : guinux@cosmoplazza.com
 			$x += $this->_bar_width*10;
 
 			foreach($this->_pattern as $pos=>$digit) {
-				$digit = split( ' ', $digit);
+				$digit = explode( ' ', $digit);
 				$bar = true;
 				foreach ($digit as $tmp=>$nb) {
 					$this->_draw_line( $x, $y, $nb, $bar_height, $bar );

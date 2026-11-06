@@ -58,7 +58,7 @@ class cl_arreckey {
                  k00_tipo = int4 = Tipo de Débito 
                  ";
    //funcao construtor da classe 
-   function cl_arreckey() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("arreckey"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_arreckey {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_sequencial = ($this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
-       $this->k00_receit = ($this->k00_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_receit"]:$this->k00_receit);
-       $this->k00_hist = ($this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
-       $this->k00_tipo = ($this->k00_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_tipo"]:$this->k00_tipo);
+       $this->k00_sequencial = (($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
+       $this->k00_numpre = (($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = (($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->k00_receit = (($this->k00_receit === 0 || $this->k00_receit === 0.0 || $this->k00_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_receit"]:$this->k00_receit);
+       $this->k00_hist = (($this->k00_hist === 0 || $this->k00_hist === 0.0 || $this->k00_hist == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
+       $this->k00_tipo = (($this->k00_tipo === 0 || $this->k00_tipo === 0.0 || $this->k00_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_tipo"]:$this->k00_tipo);
      }else{
-       $this->k00_sequencial = ($this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
+       $this->k00_sequencial = (($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_arreckey {
          $this->k00_sequencial = $k00_sequencial; 
        }
      }
-     if(($this->k00_sequencial == null) || ($this->k00_sequencial == "") ){ 
+     if(($this->k00_sequencial == null) || (($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == "")) ){ 
        $this->erro_sql = " Campo k00_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -453,7 +453,7 @@ class cl_arreckey {
    function sql_query ( $k00_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_arreckey {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -490,7 +490,7 @@ class cl_arreckey {
    function sql_query_file ( $k00_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_arreckey {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

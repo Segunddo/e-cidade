@@ -47,12 +47,12 @@ class cl_processo_atividadesexecucao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->p118_codigo = ($this->p118_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p118_codigo"]:$this->p118_codigo);
-       $this->p118_protprocesso = ($this->p118_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["p118_protprocesso"]:$this->p118_protprocesso);
-       $this->p118_atividadesexecucao = ($this->p118_atividadesexecucao == ""?@$GLOBALS["HTTP_POST_VARS"]["p118_atividadesexecucao"]:$this->p118_atividadesexecucao);
-       $this->p118_ordem = ($this->p118_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["p118_ordem"]:$this->p118_ordem);
+       $this->p118_codigo = ($this->p118_codigo === 0 || $this->p118_codigo === 0.0 || $this->p118_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p118_codigo"]:$this->p118_codigo);
+       $this->p118_protprocesso = ($this->p118_protprocesso === 0 || $this->p118_protprocesso === 0.0 || $this->p118_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["p118_protprocesso"]:$this->p118_protprocesso);
+       $this->p118_atividadesexecucao = ($this->p118_atividadesexecucao === 0 || $this->p118_atividadesexecucao === 0.0 || $this->p118_atividadesexecucao == ""?@$GLOBALS["HTTP_POST_VARS"]["p118_atividadesexecucao"]:$this->p118_atividadesexecucao);
+       $this->p118_ordem = ($this->p118_ordem === 0 || $this->p118_ordem === 0.0 || $this->p118_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["p118_ordem"]:$this->p118_ordem);
      }else{
-       $this->p118_codigo = ($this->p118_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p118_codigo"]:$this->p118_codigo);
+       $this->p118_codigo = ($this->p118_codigo === 0 || $this->p118_codigo === 0.0 || $this->p118_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p118_codigo"]:$this->p118_codigo);
      }
    }
 
@@ -110,7 +110,7 @@ class cl_processo_atividadesexecucao
          $this->p118_codigo = $p118_codigo; 
        }
      }
-     if(($this->p118_codigo == null) || ($this->p118_codigo == "") ){ 
+     if(($this->p118_codigo == null) || ($this->p118_codigo === 0 || $this->p118_codigo === 0.0 || $this->p118_codigo == "") ){ 
        $this->erro_sql = " Campo p118_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

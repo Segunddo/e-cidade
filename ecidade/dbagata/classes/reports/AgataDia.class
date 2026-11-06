@@ -1,7 +1,7 @@
 <?php
 class Dia extends AgataCore
 {
-    function Dia($agataDB, $agataConfig, $FileName, $aTables, $agataTbLinks, $project, $posAction)
+    function __construct($agataDB, $agataConfig, $FileName, $aTables, $agataTbLinks, $project, $posAction)
     {
         $this->FileName     = $FileName;
         $this->agataDB      = $agataDB;
@@ -259,12 +259,12 @@ class Dia extends AgataCore
                                 $columns["$c1"] = true;
                                 $columns["$c2"] = true;
 
-                                $a = ereg_replace(',','\.',  $a);
-                                $b = ereg_replace(',','\.',  $b);
-                                $d = ereg_replace(',','\.',  $d);
-                                $c1 = ereg_replace(',','\.', $c1);
-                                $c2 = ereg_replace(',','\.', $c2);
-                                $line = ereg_replace(',','\.', $line);
+                                $a = preg_replace('#,#','\.',  $a);
+                                $b = preg_replace('#,#','\.',  $b);
+                                $d = preg_replace('#,#','\.',  $d);
+                                $c1 = preg_replace('#,#','\.', $c1);
+                                $c2 = preg_replace('#,#','\.', $c2);
+                                $line = preg_replace('#,#','\.', $line);
 
                                 $tmp1 = $lines[$table];
                                 $tmp2 = $lines[$table2];                                                                                                      

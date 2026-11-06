@@ -52,7 +52,7 @@ class cl_dividaprotprocesso {
                  v88_protprocesso = int4 = Número do processo 
                  ";
    //funcao construtor da classe 
-   function cl_dividaprotprocesso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("dividaprotprocesso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_dividaprotprocesso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v88_sequencial = ($this->v88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_sequencial"]:$this->v88_sequencial);
-       $this->v88_divida = ($this->v88_divida == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_divida"]:$this->v88_divida);
-       $this->v88_protprocesso = ($this->v88_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_protprocesso"]:$this->v88_protprocesso);
+       $this->v88_sequencial = (($this->v88_sequencial === 0 || $this->v88_sequencial === 0.0 || $this->v88_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v88_sequencial"]:$this->v88_sequencial);
+       $this->v88_divida = (($this->v88_divida === 0 || $this->v88_divida === 0.0 || $this->v88_divida == "")?@$GLOBALS["HTTP_POST_VARS"]["v88_divida"]:$this->v88_divida);
+       $this->v88_protprocesso = (($this->v88_protprocesso === 0 || $this->v88_protprocesso === 0.0 || $this->v88_protprocesso == "")?@$GLOBALS["HTTP_POST_VARS"]["v88_protprocesso"]:$this->v88_protprocesso);
      }else{
-       $this->v88_sequencial = ($this->v88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_sequencial"]:$this->v88_sequencial);
+       $this->v88_sequencial = (($this->v88_sequencial === 0 || $this->v88_sequencial === 0.0 || $this->v88_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v88_sequencial"]:$this->v88_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_dividaprotprocesso {
          $this->v88_sequencial = $v88_sequencial; 
        }
      }
-     if(($this->v88_sequencial == null) || ($this->v88_sequencial == "") ){ 
+     if(($this->v88_sequencial == null) || (($this->v88_sequencial === 0 || $this->v88_sequencial === 0.0 || $this->v88_sequencial == "")) ){ 
        $this->erro_sql = " Campo v88_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -366,7 +366,7 @@ class cl_dividaprotprocesso {
    function sql_query ( $v88_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_dividaprotprocesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -410,7 +410,7 @@ class cl_dividaprotprocesso {
    function sql_query_file ( $v88_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_dividaprotprocesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

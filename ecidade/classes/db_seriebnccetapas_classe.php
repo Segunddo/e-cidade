@@ -203,11 +203,11 @@ class cl_seriebnccetapas
                     $acount = pg_result($resac, 0, 0);
                     $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
                     $resac = db_query("insert into db_acountkey values($acount,1010933,'$this->ed154_sequencial','A')");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed154_sequencial"]) || $this->ed154_sequencial != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed154_sequencial"]) || ($this->ed154_sequencial != "" && $this->ed154_sequencial !== 0 && $this->ed154_sequencial !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010507,1010933,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed154_sequencial')) . "','$this->ed154_sequencial'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed154_serie"]) || $this->ed154_serie != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed154_serie"]) || ($this->ed154_serie != "" && $this->ed154_serie !== 0 && $this->ed154_serie !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010507,1010935,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed154_serie')) . "','$this->ed154_serie'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed154_bnccetapa"]) || $this->ed154_bnccetapa != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed154_bnccetapa"]) || ($this->ed154_bnccetapa != "" && $this->ed154_bnccetapa !== 0 && $this->ed154_bnccetapa !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010507,1010934,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed154_bnccetapa')) . "','$this->ed154_bnccetapa'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 }
             }

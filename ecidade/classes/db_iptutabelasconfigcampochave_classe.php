@@ -52,7 +52,7 @@ class cl_iptutabelasconfigcampochave {
                  j124_iptutabelasconfig = int4 = Código da Tabela de Configuração 
                  ";
    //funcao construtor da classe 
-   function cl_iptutabelasconfigcampochave() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptutabelasconfigcampochave"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_iptutabelasconfigcampochave {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j124_sequencial = ($this->j124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j124_sequencial"]:$this->j124_sequencial);
-       $this->j124_codcam = ($this->j124_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["j124_codcam"]:$this->j124_codcam);
-       $this->j124_iptutabelasconfig = ($this->j124_iptutabelasconfig == ""?@$GLOBALS["HTTP_POST_VARS"]["j124_iptutabelasconfig"]:$this->j124_iptutabelasconfig);
+       $this->j124_sequencial = ($this->j124_sequencial === 0 || $this->j124_sequencial === 0.0 || $this->j124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j124_sequencial"]:$this->j124_sequencial);
+       $this->j124_codcam = ($this->j124_codcam === 0 || $this->j124_codcam === 0.0 || $this->j124_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["j124_codcam"]:$this->j124_codcam);
+       $this->j124_iptutabelasconfig = ($this->j124_iptutabelasconfig === 0 || $this->j124_iptutabelasconfig === 0.0 || $this->j124_iptutabelasconfig == ""?@$GLOBALS["HTTP_POST_VARS"]["j124_iptutabelasconfig"]:$this->j124_iptutabelasconfig);
      }else{
-       $this->j124_sequencial = ($this->j124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j124_sequencial"]:$this->j124_sequencial);
+       $this->j124_sequencial = ($this->j124_sequencial === 0 || $this->j124_sequencial === 0.0 || $this->j124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j124_sequencial"]:$this->j124_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_iptutabelasconfigcampochave {
          $this->j124_sequencial = $j124_sequencial; 
        }
      }
-     if(($this->j124_sequencial == null) || ($this->j124_sequencial == "") ){ 
+     if(($this->j124_sequencial == null) || ($this->j124_sequencial === 0 || $this->j124_sequencial === 0.0 || $this->j124_sequencial == "") ){ 
        $this->erro_sql = " Campo j124_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_iptutabelasconfigcampochave {
    function sql_query ( $j124_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_iptutabelasconfigcampochave {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_iptutabelasconfigcampochave {
    function sql_query_file ( $j124_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_iptutabelasconfigcampochave {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

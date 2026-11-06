@@ -54,7 +54,7 @@ class cl_itbiruralcaract {
                  it19_tipocaract = int4 = Tipo de Característica
                  ";
    //funcao construtor da classe
-   public function cl_itbiruralcaract() {
+   public function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbiruralcaract");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_itbiruralcaract {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it19_guia = ($this->it19_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it19_guia"]:$this->it19_guia);
-       $this->it19_codigo = ($this->it19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it19_codigo"]:$this->it19_codigo);
-       $this->it19_valor = ($this->it19_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["it19_valor"]:$this->it19_valor);
-       $this->it19_tipocaract = ($this->it19_tipocaract == ""?@$GLOBALS["HTTP_POST_VARS"]["it19_tipocaract"]:$this->it19_tipocaract);
+       $this->it19_guia = (($this->it19_guia === 0 || $this->it19_guia === 0.0 || $this->it19_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it19_guia"]:$this->it19_guia);
+       $this->it19_codigo = (($this->it19_codigo === 0 || $this->it19_codigo === 0.0 || $this->it19_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["it19_codigo"]:$this->it19_codigo);
+       $this->it19_valor = (($this->it19_valor === 0 || $this->it19_valor === 0.0 || $this->it19_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["it19_valor"]:$this->it19_valor);
+       $this->it19_tipocaract = (($this->it19_tipocaract === 0 || $this->it19_tipocaract === 0.0 || $this->it19_tipocaract == "")?@$GLOBALS["HTTP_POST_VARS"]["it19_tipocaract"]:$this->it19_tipocaract);
      }else{
-       $this->it19_guia = ($this->it19_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it19_guia"]:$this->it19_guia);
-       $this->it19_codigo = ($this->it19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it19_codigo"]:$this->it19_codigo);
+       $this->it19_guia = (($this->it19_guia === 0 || $this->it19_guia === 0.0 || $this->it19_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it19_guia"]:$this->it19_guia);
+       $this->it19_codigo = (($this->it19_codigo === 0 || $this->it19_codigo === 0.0 || $this->it19_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["it19_codigo"]:$this->it19_codigo);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_itbiruralcaract {
      }
        $this->it19_guia = $it19_guia;
        $this->it19_codigo = $it19_codigo;
-     if(($this->it19_guia == null) || ($this->it19_guia == "") ){
+     if(($this->it19_guia == null) || (($this->it19_guia === 0 || $this->it19_guia === 0.0 || $this->it19_guia == "")) ){
        $this->erro_sql = " Campo it19_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_itbiruralcaract {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->it19_codigo == null) || ($this->it19_codigo == "") ){
+     if(($this->it19_codigo == null) || (($this->it19_codigo === 0 || $this->it19_codigo === 0.0 || $this->it19_codigo == "")) ){
        $this->erro_sql = " Campo it19_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -33,7 +33,8 @@
 //$func_iframe->titulo='Pesquisa';
 //$func_iframe->iniciarVisivel = false;
 //$func_iframe->mostrar();
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 if (!isset($pesa)) {
 	$pesa = '';
 }

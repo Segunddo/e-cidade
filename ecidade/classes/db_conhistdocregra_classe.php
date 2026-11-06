@@ -56,7 +56,7 @@ class cl_conhistdocregra {
                  c92_anousu = int4 = Ano Exercício
                  ";
    //funcao construtor da classe
-   function cl_conhistdocregra() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conhistdocregra");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_conhistdocregra {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c92_sequencial = ($this->c92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c92_sequencial"]:$this->c92_sequencial);
-       $this->c92_conhistdoc = ($this->c92_conhistdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c92_conhistdoc"]:$this->c92_conhistdoc);
+       $this->c92_sequencial = ($this->c92_sequencial === 0 || $this->c92_sequencial === 0.0 || $this->c92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c92_sequencial"]:$this->c92_sequencial);
+       $this->c92_conhistdoc = ($this->c92_conhistdoc === 0 || $this->c92_conhistdoc === 0.0 || $this->c92_conhistdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c92_conhistdoc"]:$this->c92_conhistdoc);
        $this->c92_descricao = ($this->c92_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["c92_descricao"]:$this->c92_descricao);
        $this->c92_regra = ($this->c92_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["c92_regra"]:$this->c92_regra);
-       $this->c92_anousu = ($this->c92_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c92_anousu"]:$this->c92_anousu);
+       $this->c92_anousu = ($this->c92_anousu === 0 || $this->c92_anousu === 0.0 || $this->c92_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c92_anousu"]:$this->c92_anousu);
      }else{
-       $this->c92_sequencial = ($this->c92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c92_sequencial"]:$this->c92_sequencial);
+       $this->c92_sequencial = ($this->c92_sequencial === 0 || $this->c92_sequencial === 0.0 || $this->c92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c92_sequencial"]:$this->c92_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_conhistdocregra {
          $this->c92_sequencial = $c92_sequencial;
        }
      }
-     if(($this->c92_sequencial == null) || ($this->c92_sequencial == "") ){
+     if(($this->c92_sequencial == null) || ($this->c92_sequencial === 0 || $this->c92_sequencial === 0.0 || $this->c92_sequencial == "") ){
        $this->erro_sql = " Campo c92_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

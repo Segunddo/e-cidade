@@ -58,7 +58,7 @@ class cl_certdiv {
                  v14_vlrmul = float8 = valor da multa 
                  ";
    //funcao construtor da classe 
-   function cl_certdiv() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("certdiv"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,15 +75,15 @@ class cl_certdiv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v14_certid = ($this->v14_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v14_certid"]:$this->v14_certid);
-       $this->v14_coddiv = ($this->v14_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v14_coddiv"]:$this->v14_coddiv);
-       $this->v14_vlrhis = ($this->v14_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["v14_vlrhis"]:$this->v14_vlrhis);
-       $this->v14_vlrcor = ($this->v14_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["v14_vlrcor"]:$this->v14_vlrcor);
-       $this->v14_vlrjur = ($this->v14_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["v14_vlrjur"]:$this->v14_vlrjur);
-       $this->v14_vlrmul = ($this->v14_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["v14_vlrmul"]:$this->v14_vlrmul);
+       $this->v14_certid = (($this->v14_certid === 0 || $this->v14_certid === 0.0 || $this->v14_certid == "")?@$GLOBALS["HTTP_POST_VARS"]["v14_certid"]:$this->v14_certid);
+       $this->v14_coddiv = (($this->v14_coddiv === 0 || $this->v14_coddiv === 0.0 || $this->v14_coddiv == "")?@$GLOBALS["HTTP_POST_VARS"]["v14_coddiv"]:$this->v14_coddiv);
+       $this->v14_vlrhis = (($this->v14_vlrhis === 0 || $this->v14_vlrhis === 0.0 || $this->v14_vlrhis == "")?@$GLOBALS["HTTP_POST_VARS"]["v14_vlrhis"]:$this->v14_vlrhis);
+       $this->v14_vlrcor = (($this->v14_vlrcor === 0 || $this->v14_vlrcor === 0.0 || $this->v14_vlrcor == "")?@$GLOBALS["HTTP_POST_VARS"]["v14_vlrcor"]:$this->v14_vlrcor);
+       $this->v14_vlrjur = (($this->v14_vlrjur === 0 || $this->v14_vlrjur === 0.0 || $this->v14_vlrjur == "")?@$GLOBALS["HTTP_POST_VARS"]["v14_vlrjur"]:$this->v14_vlrjur);
+       $this->v14_vlrmul = (($this->v14_vlrmul === 0 || $this->v14_vlrmul === 0.0 || $this->v14_vlrmul == "")?@$GLOBALS["HTTP_POST_VARS"]["v14_vlrmul"]:$this->v14_vlrmul);
      }else{
-       $this->v14_certid = ($this->v14_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v14_certid"]:$this->v14_certid);
-       $this->v14_coddiv = ($this->v14_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v14_coddiv"]:$this->v14_coddiv);
+       $this->v14_certid = (($this->v14_certid === 0 || $this->v14_certid === 0.0 || $this->v14_certid == "")?@$GLOBALS["HTTP_POST_VARS"]["v14_certid"]:$this->v14_certid);
+       $this->v14_coddiv = (($this->v14_coddiv === 0 || $this->v14_coddiv === 0.0 || $this->v14_coddiv == "")?@$GLOBALS["HTTP_POST_VARS"]["v14_coddiv"]:$this->v14_coddiv);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_certdiv {
      }
        $this->v14_certid = $v14_certid; 
        $this->v14_coddiv = $v14_coddiv; 
-     if(($this->v14_certid == null) || ($this->v14_certid == "") ){ 
+     if(($this->v14_certid == null) || (($this->v14_certid === 0 || $this->v14_certid === 0.0 || $this->v14_certid == "")) ){ 
        $this->erro_sql = " Campo v14_certid nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -135,7 +135,7 @@ class cl_certdiv {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->v14_coddiv == null) || ($this->v14_coddiv == "") ){ 
+     if(($this->v14_coddiv == null) || (($this->v14_coddiv === 0 || $this->v14_coddiv === 0.0 || $this->v14_coddiv == "")) ){ 
        $this->erro_sql = " Campo v14_coddiv nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -442,7 +442,7 @@ class cl_certdiv {
    function sql_query ( $v14_certid=null,$v14_coddiv=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_certdiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_certdiv {
 		 
 		 $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -529,7 +529,7 @@ class cl_certdiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -541,7 +541,7 @@ class cl_certdiv {
    function sql_query_file ( $v14_certid=null,$v14_coddiv=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -570,7 +570,7 @@ class cl_certdiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

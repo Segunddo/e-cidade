@@ -52,7 +52,7 @@ class cl_liclicitaproc {
                  l34_liclicita = int4 = Licitação 
                  ";
    //funcao construtor da classe 
-   function cl_liclicitaproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liclicitaproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_liclicitaproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l34_sequencial = ($this->l34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l34_sequencial"]:$this->l34_sequencial);
-       $this->l34_protprocesso = ($this->l34_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["l34_protprocesso"]:$this->l34_protprocesso);
-       $this->l34_liclicita = ($this->l34_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l34_liclicita"]:$this->l34_liclicita);
+       $this->l34_sequencial = ($this->l34_sequencial === 0 || $this->l34_sequencial === 0.0 || $this->l34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l34_sequencial"]:$this->l34_sequencial);
+       $this->l34_protprocesso = ($this->l34_protprocesso === 0 || $this->l34_protprocesso === 0.0 || $this->l34_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["l34_protprocesso"]:$this->l34_protprocesso);
+       $this->l34_liclicita = ($this->l34_liclicita === 0 || $this->l34_liclicita === 0.0 || $this->l34_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l34_liclicita"]:$this->l34_liclicita);
      }else{
-       $this->l34_sequencial = ($this->l34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l34_sequencial"]:$this->l34_sequencial);
+       $this->l34_sequencial = ($this->l34_sequencial === 0 || $this->l34_sequencial === 0.0 || $this->l34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l34_sequencial"]:$this->l34_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_liclicitaproc {
          $this->l34_sequencial = $l34_sequencial; 
        }
      }
-     if(($this->l34_sequencial == null) || ($this->l34_sequencial == "") ){ 
+     if(($this->l34_sequencial == null) || ($this->l34_sequencial === 0 || $this->l34_sequencial === 0.0 || $this->l34_sequencial == "") ){ 
        $this->erro_sql = " Campo l34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -52,7 +52,7 @@ class cl_aguasitleitura {
                  x17_regra = int4 = Regra 
                  ";
    //funcao construtor da classe 
-   function cl_aguasitleitura() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguasitleitura"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_aguasitleitura {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x17_codigo = ($this->x17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_codigo"]:$this->x17_codigo);
+       $this->x17_codigo = (($this->x17_codigo === 0 || $this->x17_codigo === 0.0 || ($this->x17_codigo === 0 || $this->x17_codigo === 0.0 || $this->x17_codigo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x17_codigo"]:$this->x17_codigo);
        $this->x17_descr = ($this->x17_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_descr"]:$this->x17_descr);
-       $this->x17_regra = ($this->x17_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_regra"]:$this->x17_regra);
+       $this->x17_regra = (($this->x17_regra === 0 || $this->x17_regra === 0.0 || ($this->x17_regra === 0 || $this->x17_regra === 0.0 || $this->x17_regra == ""))?@$GLOBALS["HTTP_POST_VARS"]["x17_regra"]:$this->x17_regra);
      }else{
-       $this->x17_codigo = ($this->x17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_codigo"]:$this->x17_codigo);
+       $this->x17_codigo = (($this->x17_codigo === 0 || $this->x17_codigo === 0.0 || ($this->x17_codigo === 0 || $this->x17_codigo === 0.0 || $this->x17_codigo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x17_codigo"]:$this->x17_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aguasitleitura {
          $this->x17_codigo = $x17_codigo; 
        }
      }
-     if(($this->x17_codigo == null) || ($this->x17_codigo == "") ){ 
+     if(($this->x17_codigo == null) || (($this->x17_codigo === 0 || $this->x17_codigo === 0.0 || ($this->x17_codigo === 0 || $this->x17_codigo === 0.0 || $this->x17_codigo == ""))) ){ 
        $this->erro_sql = " Campo x17_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_aguasitleitura {
    function sql_query ( $x17_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_aguasitleitura {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_aguasitleitura {
    function sql_query_file ( $x17_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_aguasitleitura {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

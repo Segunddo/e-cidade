@@ -48,7 +48,7 @@ $oGet  = db_utils::postMemory($_GET);
 $filtro = !empty($oGet->filtro) ? $oGet->filtro : 0;
 
 if (!isset($pesquisar)) {
-	parse_str($_SERVER["QUERY_STRING"]);
+	parse_str($_SERVER["QUERY_STRING"], $__qs); extract($__qs);
 }
 
 $clcgm		= new cl_cgm;

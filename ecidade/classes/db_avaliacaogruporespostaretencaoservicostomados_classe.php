@@ -51,14 +51,14 @@ class cl_avaliacaogruporespostaretencaoservicostomados
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->efd04_sequencial = ($this->efd04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_sequencial"]:$this->efd04_sequencial);
-       $this->efd04_avaliacaogruporesposta = ($this->efd04_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_avaliacaogruporesposta"]:$this->efd04_avaliacaogruporesposta);
-       $this->efd04_cgmcontribuinte = ($this->efd04_cgmcontribuinte == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_cgmcontribuinte"]:$this->efd04_cgmcontribuinte);
-       $this->efd04_cgmprestador = ($this->efd04_cgmprestador == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_cgmprestador"]:$this->efd04_cgmprestador);
-       $this->efd04_ano = ($this->efd04_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_ano"]:$this->efd04_ano);
-       $this->efd04_mes = ($this->efd04_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_mes"]:$this->efd04_mes);
+       $this->efd04_sequencial = ($this->efd04_sequencial === 0 || $this->efd04_sequencial === 0.0 || $this->efd04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_sequencial"]:$this->efd04_sequencial);
+       $this->efd04_avaliacaogruporesposta = ($this->efd04_avaliacaogruporesposta === 0 || $this->efd04_avaliacaogruporesposta === 0.0 || $this->efd04_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_avaliacaogruporesposta"]:$this->efd04_avaliacaogruporesposta);
+       $this->efd04_cgmcontribuinte = ($this->efd04_cgmcontribuinte === 0 || $this->efd04_cgmcontribuinte === 0.0 || $this->efd04_cgmcontribuinte == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_cgmcontribuinte"]:$this->efd04_cgmcontribuinte);
+       $this->efd04_cgmprestador = ($this->efd04_cgmprestador === 0 || $this->efd04_cgmprestador === 0.0 || $this->efd04_cgmprestador == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_cgmprestador"]:$this->efd04_cgmprestador);
+       $this->efd04_ano = ($this->efd04_ano === 0 || $this->efd04_ano === 0.0 || $this->efd04_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_ano"]:$this->efd04_ano);
+       $this->efd04_mes = ($this->efd04_mes === 0 || $this->efd04_mes === 0.0 || $this->efd04_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_mes"]:$this->efd04_mes);
      }else{
-       $this->efd04_sequencial = ($this->efd04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_sequencial"]:$this->efd04_sequencial);
+       $this->efd04_sequencial = ($this->efd04_sequencial === 0 || $this->efd04_sequencial === 0.0 || $this->efd04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd04_sequencial"]:$this->efd04_sequencial);
      }
    }
 

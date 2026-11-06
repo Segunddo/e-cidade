@@ -65,12 +65,12 @@ class cl_documentos_andamento
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->p116_codigo = ($this->p116_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_codigo"]:$this->p116_codigo);
+       $this->p116_codigo = ($this->p116_codigo === 0 || $this->p116_codigo === 0.0 || $this->p116_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_codigo"]:$this->p116_codigo);
        $this->p116_descricao = ($this->p116_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_descricao"]:$this->p116_descricao);
-       $this->p116_protprocesso = ($this->p116_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_protprocesso"]:$this->p116_protprocesso);
-       $this->p116_protprocessodocumento = ($this->p116_protprocessodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_protprocessodocumento"]:$this->p116_protprocessodocumento);
-       $this->p116_atividade_atual = ($this->p116_atividade_atual == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_atividade_atual"]:$this->p116_atividade_atual);
-       $this->p116_proxima_atividade = ($this->p116_proxima_atividade == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_proxima_atividade"]:$this->p116_proxima_atividade);
+       $this->p116_protprocesso = ($this->p116_protprocesso === 0 || $this->p116_protprocesso === 0.0 || $this->p116_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_protprocesso"]:$this->p116_protprocesso);
+       $this->p116_protprocessodocumento = ($this->p116_protprocessodocumento === 0 || $this->p116_protprocessodocumento === 0.0 || $this->p116_protprocessodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_protprocessodocumento"]:$this->p116_protprocessodocumento);
+       $this->p116_atividade_atual = ($this->p116_atividade_atual === 0 || $this->p116_atividade_atual === 0.0 || $this->p116_atividade_atual == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_atividade_atual"]:$this->p116_atividade_atual);
+       $this->p116_proxima_atividade = ($this->p116_proxima_atividade === 0 || $this->p116_proxima_atividade === 0.0 || $this->p116_proxima_atividade == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_proxima_atividade"]:$this->p116_proxima_atividade);
        if($this->p116_data_criacao == ""){
          $this->p116_data_criacao_dia = ($this->p116_data_criacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_data_criacao_dia"]:$this->p116_data_criacao_dia);
          $this->p116_data_criacao_mes = ($this->p116_data_criacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_data_criacao_mes"]:$this->p116_data_criacao_mes);
@@ -87,10 +87,10 @@ class cl_documentos_andamento
             $this->p116_data_modificacao = $this->p116_data_modificacao_ano."-".$this->p116_data_modificacao_mes."-".$this->p116_data_modificacao_dia;
          }
        }
-       $this->p116_codigo_origem = ($this->p116_codigo_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_codigo_origem"]:$this->p116_codigo_origem);
+       $this->p116_codigo_origem = ($this->p116_codigo_origem === 0 || $this->p116_codigo_origem === 0.0 || $this->p116_codigo_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_codigo_origem"]:$this->p116_codigo_origem);
        $this->p116_qrcode = ($this->p116_qrcode == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_qrcode"]:$this->p116_qrcode);
      }else{
-       $this->p116_codigo = ($this->p116_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_codigo"]:$this->p116_codigo);
+       $this->p116_codigo = ($this->p116_codigo === 0 || $this->p116_codigo === 0.0 || $this->p116_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p116_codigo"]:$this->p116_codigo);
      }
    }
 
@@ -196,7 +196,7 @@ class cl_documentos_andamento
          $this->p116_codigo = $p116_codigo;
        }
      }
-     if(($this->p116_codigo == null) || ($this->p116_codigo == "") ){
+     if(($this->p116_codigo == null) || ($this->p116_codigo === 0 || $this->p116_codigo === 0.0 || $this->p116_codigo == "") ){
        $this->erro_sql = " Campo p116_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

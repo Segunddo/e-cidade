@@ -52,7 +52,7 @@ class cl_contranslrelemento {
                  c114_elemento = varchar(15) = Elemento 
                  ";
    //funcao construtor da classe 
-   function cl_contranslrelemento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contranslrelemento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_contranslrelemento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c114_sequencial = ($this->c114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c114_sequencial"]:$this->c114_sequencial);
-       $this->c114_contranslr = ($this->c114_contranslr == ""?@$GLOBALS["HTTP_POST_VARS"]["c114_contranslr"]:$this->c114_contranslr);
+       $this->c114_sequencial = ($this->c114_sequencial === 0 || $this->c114_sequencial === 0.0 || $this->c114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c114_sequencial"]:$this->c114_sequencial);
+       $this->c114_contranslr = ($this->c114_contranslr === 0 || $this->c114_contranslr === 0.0 || $this->c114_contranslr == ""?@$GLOBALS["HTTP_POST_VARS"]["c114_contranslr"]:$this->c114_contranslr);
        $this->c114_elemento = ($this->c114_elemento == ""?@$GLOBALS["HTTP_POST_VARS"]["c114_elemento"]:$this->c114_elemento);
      }else{
-       $this->c114_sequencial = ($this->c114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c114_sequencial"]:$this->c114_sequencial);
+       $this->c114_sequencial = ($this->c114_sequencial === 0 || $this->c114_sequencial === 0.0 || $this->c114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c114_sequencial"]:$this->c114_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_contranslrelemento {
          $this->c114_sequencial = $c114_sequencial; 
        }
      }
-     if(($this->c114_sequencial == null) || ($this->c114_sequencial == "") ){ 
+     if(($this->c114_sequencial == null) || ($this->c114_sequencial === 0 || $this->c114_sequencial === 0.0 || $this->c114_sequencial == "") ){ 
        $this->erro_sql = " Campo c114_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_contranslrelemento {
    function sql_query ( $c114_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_contranslrelemento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_contranslrelemento {
    function sql_query_file ( $c114_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_contranslrelemento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

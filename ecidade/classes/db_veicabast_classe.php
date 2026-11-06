@@ -80,7 +80,7 @@ class cl_veicabast
                  ";
 
     //funcao construtor da classe
-    function cl_veicabast()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("veicabast");
@@ -102,9 +102,9 @@ class cl_veicabast
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ve70_codigo = ($this->ve70_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_codigo"] : $this->ve70_codigo);
-            $this->ve70_veiculos = ($this->ve70_veiculos == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_veiculos"] : $this->ve70_veiculos);
-            $this->ve70_veiculoscomb = ($this->ve70_veiculoscomb == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_veiculoscomb"] : $this->ve70_veiculoscomb);
+            $this->ve70_codigo = ($this->ve70_codigo === 0 || $this->ve70_codigo === 0.0 || $this->ve70_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_codigo"] : $this->ve70_codigo);
+            $this->ve70_veiculos = ($this->ve70_veiculos === 0 || $this->ve70_veiculos === 0.0 || $this->ve70_veiculos == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_veiculos"] : $this->ve70_veiculos);
+            $this->ve70_veiculoscomb = ($this->ve70_veiculoscomb === 0 || $this->ve70_veiculoscomb === 0.0 || $this->ve70_veiculoscomb == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_veiculoscomb"] : $this->ve70_veiculoscomb);
             if ($this->ve70_dtabast == "") {
                 $this->ve70_dtabast_dia = ($this->ve70_dtabast_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_dtabast_dia"] : $this->ve70_dtabast_dia);
                 $this->ve70_dtabast_mes = ($this->ve70_dtabast_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_dtabast_mes"] : $this->ve70_dtabast_mes);
@@ -113,12 +113,12 @@ class cl_veicabast
                     $this->ve70_dtabast = $this->ve70_dtabast_ano . "-" . $this->ve70_dtabast_mes . "-" . $this->ve70_dtabast_dia;
                 }
             }
-            $this->ve70_litros = ($this->ve70_litros == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_litros"] : $this->ve70_litros);
-            $this->ve70_valor = ($this->ve70_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_valor"] : $this->ve70_valor);
-            $this->ve70_vlrun = ($this->ve70_vlrun == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_vlrun"] : $this->ve70_vlrun);
-            $this->ve70_medida = ($this->ve70_medida == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_medida"] : $this->ve70_medida);
-            $this->ve70_ativo = ($this->ve70_ativo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_ativo"] : $this->ve70_ativo);
-            $this->ve70_usuario = ($this->ve70_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_usuario"] : $this->ve70_usuario);
+            $this->ve70_litros = ($this->ve70_litros === 0 || $this->ve70_litros === 0.0 || $this->ve70_litros == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_litros"] : $this->ve70_litros);
+            $this->ve70_valor = ($this->ve70_valor === 0 || $this->ve70_valor === 0.0 || $this->ve70_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_valor"] : $this->ve70_valor);
+            $this->ve70_vlrun = ($this->ve70_vlrun === 0 || $this->ve70_vlrun === 0.0 || $this->ve70_vlrun == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_vlrun"] : $this->ve70_vlrun);
+            $this->ve70_medida = ($this->ve70_medida === 0 || $this->ve70_medida === 0.0 || $this->ve70_medida == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_medida"] : $this->ve70_medida);
+            $this->ve70_ativo = ($this->ve70_ativo === 0 || $this->ve70_ativo === 0.0 || $this->ve70_ativo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_ativo"] : $this->ve70_ativo);
+            $this->ve70_usuario = ($this->ve70_usuario === 0 || $this->ve70_usuario === 0.0 || $this->ve70_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_usuario"] : $this->ve70_usuario);
             if ($this->ve70_data == "") {
                 $this->ve70_data_dia = ($this->ve70_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_data_dia"] : $this->ve70_data_dia);
                 $this->ve70_data_mes = ($this->ve70_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_data_mes"] : $this->ve70_data_mes);
@@ -130,7 +130,7 @@ class cl_veicabast
             $this->ve70_hora = ($this->ve70_hora == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_hora"] : $this->ve70_hora);
             $this->ve70_observacao = ($this->ve70_observacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_observacao"] : $this->ve70_observacao);
         } else {
-            $this->ve70_codigo = ($this->ve70_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_codigo"] : $this->ve70_codigo);
+            $this->ve70_codigo = ($this->ve70_codigo === 0 || $this->ve70_codigo === 0.0 || $this->ve70_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve70_codigo"] : $this->ve70_codigo);
         }
     }
 
@@ -271,7 +271,7 @@ class cl_veicabast
                 $this->ve70_codigo = $ve70_codigo;
             }
         }
-        if (($this->ve70_codigo == null) || ($this->ve70_codigo == "")) {
+        if (($this->ve70_codigo == null) || ($this->ve70_codigo === 0 || $this->ve70_codigo === 0.0 || $this->ve70_codigo == "")) {
             $this->erro_sql = " Campo ve70_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

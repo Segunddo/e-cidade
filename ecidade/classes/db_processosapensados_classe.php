@@ -52,7 +52,7 @@ class cl_processosapensados {
                  p30_procapensado = int4 = Processo Apensado 
                  ";
    //funcao construtor da classe 
-   function cl_processosapensados() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("processosapensados"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_processosapensados {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p30_sequencial = ($this->p30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p30_sequencial"]:$this->p30_sequencial);
-       $this->p30_procprincipal = ($this->p30_procprincipal == ""?@$GLOBALS["HTTP_POST_VARS"]["p30_procprincipal"]:$this->p30_procprincipal);
-       $this->p30_procapensado = ($this->p30_procapensado == ""?@$GLOBALS["HTTP_POST_VARS"]["p30_procapensado"]:$this->p30_procapensado);
+       $this->p30_sequencial = ($this->p30_sequencial === 0 || $this->p30_sequencial === 0.0 || $this->p30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p30_sequencial"]:$this->p30_sequencial);
+       $this->p30_procprincipal = ($this->p30_procprincipal === 0 || $this->p30_procprincipal === 0.0 || $this->p30_procprincipal == ""?@$GLOBALS["HTTP_POST_VARS"]["p30_procprincipal"]:$this->p30_procprincipal);
+       $this->p30_procapensado = ($this->p30_procapensado === 0 || $this->p30_procapensado === 0.0 || $this->p30_procapensado == ""?@$GLOBALS["HTTP_POST_VARS"]["p30_procapensado"]:$this->p30_procapensado);
      }else{
-       $this->p30_sequencial = ($this->p30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p30_sequencial"]:$this->p30_sequencial);
+       $this->p30_sequencial = ($this->p30_sequencial === 0 || $this->p30_sequencial === 0.0 || $this->p30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p30_sequencial"]:$this->p30_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_processosapensados {
          $this->p30_sequencial = $p30_sequencial; 
        }
      }
-     if(($this->p30_sequencial == null) || ($this->p30_sequencial == "") ){ 
+     if(($this->p30_sequencial == null) || ($this->p30_sequencial === 0 || $this->p30_sequencial === 0.0 || $this->p30_sequencial == "") ){ 
        $this->erro_sql = " Campo p30_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

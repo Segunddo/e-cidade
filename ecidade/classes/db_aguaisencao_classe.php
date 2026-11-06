@@ -66,7 +66,7 @@ class cl_aguaisencao {
                  x10_processo = int4 = Processo 
                  ";
    //funcao construtor da classe 
-   function cl_aguaisencao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguaisencao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,10 +83,10 @@ class cl_aguaisencao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x10_matric = ($this->x10_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x10_matric"]:$this->x10_matric);
+       $this->x10_matric = (($this->x10_matric === 0 || $this->x10_matric === 0.0 || ($this->x10_matric === 0 || $this->x10_matric === 0.0 || $this->x10_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["x10_matric"]:$this->x10_matric);
        $this->x10_obs = ($this->x10_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["x10_obs"]:$this->x10_obs);
-       $this->x10_codisencao = ($this->x10_codisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["x10_codisencao"]:$this->x10_codisencao);
-       $this->x10_codisencaotipo = ($this->x10_codisencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x10_codisencaotipo"]:$this->x10_codisencaotipo);
+       $this->x10_codisencao = (($this->x10_codisencao === 0 || $this->x10_codisencao === 0.0 || ($this->x10_codisencao === 0 || $this->x10_codisencao === 0.0 || $this->x10_codisencao == ""))?@$GLOBALS["HTTP_POST_VARS"]["x10_codisencao"]:$this->x10_codisencao);
+       $this->x10_codisencaotipo = (($this->x10_codisencaotipo === 0 || $this->x10_codisencaotipo === 0.0 || ($this->x10_codisencaotipo === 0 || $this->x10_codisencaotipo === 0.0 || $this->x10_codisencaotipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x10_codisencaotipo"]:$this->x10_codisencaotipo);
        if($this->x10_dtini == ""){
          $this->x10_dtini_dia = ($this->x10_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x10_dtini_dia"]:$this->x10_dtini_dia);
          $this->x10_dtini_mes = ($this->x10_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x10_dtini_mes"]:$this->x10_dtini_mes);
@@ -103,9 +103,9 @@ class cl_aguaisencao {
             $this->x10_dtfim = $this->x10_dtfim_ano."-".$this->x10_dtfim_mes."-".$this->x10_dtfim_dia;
          }
        }
-       $this->x10_processo = ($this->x10_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["x10_processo"]:$this->x10_processo);
+       $this->x10_processo = (($this->x10_processo === 0 || $this->x10_processo === 0.0 || ($this->x10_processo === 0 || $this->x10_processo === 0.0 || $this->x10_processo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x10_processo"]:$this->x10_processo);
      }else{
-       $this->x10_codisencao = ($this->x10_codisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["x10_codisencao"]:$this->x10_codisencao);
+       $this->x10_codisencao = (($this->x10_codisencao === 0 || $this->x10_codisencao === 0.0 || ($this->x10_codisencao === 0 || $this->x10_codisencao === 0.0 || $this->x10_codisencao == ""))?@$GLOBALS["HTTP_POST_VARS"]["x10_codisencao"]:$this->x10_codisencao);
      }
    }
    // funcao para inclusao
@@ -189,7 +189,7 @@ class cl_aguaisencao {
          $this->x10_codisencao = $x10_codisencao; 
        }
      }
-     if(($this->x10_codisencao == null) || ($this->x10_codisencao == "") ){ 
+     if(($this->x10_codisencao == null) || (($this->x10_codisencao === 0 || $this->x10_codisencao === 0.0 || ($this->x10_codisencao === 0 || $this->x10_codisencao === 0.0 || $this->x10_codisencao == ""))) ){ 
        $this->erro_sql = " Campo x10_codisencao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -531,7 +531,7 @@ class cl_aguaisencao {
    function sql_query ( $x10_codisencao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -557,7 +557,7 @@ class cl_aguaisencao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -569,7 +569,7 @@ class cl_aguaisencao {
    function sql_query_file ( $x10_codisencao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -590,7 +590,7 @@ class cl_aguaisencao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

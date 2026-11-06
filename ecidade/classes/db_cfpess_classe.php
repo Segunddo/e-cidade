@@ -315,17 +315,17 @@ class cl_cfpess
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->r11_instit = ($this->r11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_instit"]:$this->r11_instit);
-       $this->r11_anousu = ($this->r11_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_anousu"]:$this->r11_anousu);
-       $this->r11_mesusu = ($this->r11_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_mesusu"]:$this->r11_mesusu);
+       $this->r11_instit = (($this->r11_instit === 0 || $this->r11_instit === 0.0 || $this->r11_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_instit"]:$this->r11_instit);
+       $this->r11_anousu = (($this->r11_anousu === 0 || $this->r11_anousu === 0.0 || $this->r11_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_anousu"]:$this->r11_anousu);
+       $this->r11_mesusu = (($this->r11_mesusu === 0 || $this->r11_mesusu === 0.0 || $this->r11_mesusu == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_mesusu"]:$this->r11_mesusu);
        $this->r11_codaec = ($this->r11_codaec == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_codaec"]:$this->r11_codaec);
        $this->r11_natest = ($this->r11_natest == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_natest"]:$this->r11_natest);
-       $this->r11_cdfpas = ($this->r11_cdfpas == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_cdfpas"]:$this->r11_cdfpas);
-       $this->r11_cdactr = ($this->r11_cdactr == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_cdactr"]:$this->r11_cdactr);
-       $this->r11_peactr = ($this->r11_peactr == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_peactr"]:$this->r11_peactr);
-       $this->r11_pctemp = ($this->r11_pctemp == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_pctemp"]:$this->r11_pctemp);
-       $this->r11_pcterc = ($this->r11_pcterc == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_pcterc"]:$this->r11_pcterc);
-       $this->r11_fgts12 = ($this->r11_fgts12 == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_fgts12"]:$this->r11_fgts12);
+       $this->r11_cdfpas = (($this->r11_cdfpas === 0 || $this->r11_cdfpas === 0.0 || $this->r11_cdfpas == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_cdfpas"]:$this->r11_cdfpas);
+       $this->r11_cdactr = (($this->r11_cdactr === 0 || $this->r11_cdactr === 0.0 || $this->r11_cdactr == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_cdactr"]:$this->r11_cdactr);
+       $this->r11_peactr = (($this->r11_peactr === 0 || $this->r11_peactr === 0.0 || $this->r11_peactr == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_peactr"]:$this->r11_peactr);
+       $this->r11_pctemp = (($this->r11_pctemp === 0 || $this->r11_pctemp === 0.0 || $this->r11_pctemp == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_pctemp"]:$this->r11_pctemp);
+       $this->r11_pcterc = (($this->r11_pcterc === 0 || $this->r11_pcterc === 0.0 || $this->r11_pcterc == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_pcterc"]:$this->r11_pcterc);
+       $this->r11_fgts12 = (($this->r11_fgts12 === 0 || $this->r11_fgts12 === 0.0 || $this->r11_fgts12 == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_fgts12"]:$this->r11_fgts12);
        $this->r11_cdcef = ($this->r11_cdcef == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_cdcef"]:$this->r11_cdcef);
        $this->r11_cdfgts = ($this->r11_cdfgts == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_cdfgts"]:$this->r11_cdfgts);
        if($this->r11_ultger == ""){
@@ -344,7 +344,7 @@ class cl_cfpess
             $this->r11_ultfec = $this->r11_ultfec_ano."-".$this->r11_ultfec_mes."-".$this->r11_ultfec_dia;
          }
        }
-       $this->r11_arredn = ($this->r11_arredn == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_arredn"]:$this->r11_arredn);
+       $this->r11_arredn = (($this->r11_arredn === 0 || $this->r11_arredn === 0.0 || $this->r11_arredn == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_arredn"]:$this->r11_arredn);
        $this->r11_sald13 = ($this->r11_sald13 == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_sald13"]:$this->r11_sald13);
        if($this->r11_datai == ""){
          $this->r11_datai_dia = ($this->r11_datai_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_datai_dia"]:$this->r11_datai_dia);
@@ -363,13 +363,13 @@ class cl_cfpess
          }
        }
        $this->r11_fecha = ($this->r11_fecha == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_fecha"]:$this->r11_fecha);
-       $this->r11_ultreg = ($this->r11_ultreg == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_ultreg"]:$this->r11_ultreg);
-       $this->r11_codipe = ($this->r11_codipe == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_codipe"]:$this->r11_codipe);
-       $this->r11_mes13 = ($this->r11_mes13 == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_mes13"]:$this->r11_mes13);
-       $this->r11_tbprev = ($this->r11_tbprev == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_tbprev"]:$this->r11_tbprev);
+       $this->r11_ultreg = (($this->r11_ultreg === 0 || $this->r11_ultreg === 0.0 || $this->r11_ultreg == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_ultreg"]:$this->r11_ultreg);
+       $this->r11_codipe = (($this->r11_codipe === 0 || $this->r11_codipe === 0.0 || $this->r11_codipe == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_codipe"]:$this->r11_codipe);
+       $this->r11_mes13 = (($this->r11_mes13 === 0 || $this->r11_mes13 === 0.0 || $this->r11_mes13 == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_mes13"]:$this->r11_mes13);
+       $this->r11_tbprev = (($this->r11_tbprev === 0 || $this->r11_tbprev === 0.0 || $this->r11_tbprev == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_tbprev"]:$this->r11_tbprev);
        $this->r11_confer = ($this->r11_confer == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_confer"]:$this->r11_confer);
-       $this->r11_valor = ($this->r11_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_valor"]:$this->r11_valor);
-       $this->r11_dtipe = ($this->r11_dtipe == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_dtipe"]:$this->r11_dtipe);
+       $this->r11_valor = (($this->r11_valor === 0 || $this->r11_valor === 0.0 || $this->r11_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_valor"]:$this->r11_valor);
+       $this->r11_dtipe = (($this->r11_dtipe === 0 || $this->r11_dtipe === 0.0 || $this->r11_dtipe == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_dtipe"]:$this->r11_dtipe);
        $this->r11_implan = ($this->r11_implan == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_implan"]:$this->r11_implan);
        $this->r11_subpes = ($this->r11_subpes == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_subpes"]:$this->r11_subpes);
        $this->r11_rubmat = ($this->r11_rubmat == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_rubmat"]:$this->r11_rubmat);
@@ -377,7 +377,7 @@ class cl_cfpess
        $this->r11_elepen = ($this->r11_elepen == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_elepen"]:$this->r11_elepen);
        $this->r11_rubnat = ($this->r11_rubnat == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_rubnat"]:$this->r11_rubnat);
        $this->r11_rubdec = ($this->r11_rubdec == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_rubdec"]:$this->r11_rubdec);
-       $this->r11_qtdcal = ($this->r11_qtdcal == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_qtdcal"]:$this->r11_qtdcal);
+       $this->r11_qtdcal = (($this->r11_qtdcal === 0 || $this->r11_qtdcal === 0.0 || $this->r11_qtdcal == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_qtdcal"]:$this->r11_qtdcal);
        $this->r11_palime = ($this->r11_palime == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_palime"]:$this->r11_palime);
        $this->r11_altfer = ($this->r11_altfer == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_altfer"]:$this->r11_altfer);
        $this->r11_ferias = ($this->r11_ferias == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_ferias"]:$this->r11_ferias);
@@ -396,14 +396,14 @@ class cl_cfpess
        $this->r11_desliq = ($this->r11_desliq == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_desliq"]:$this->r11_desliq);
        $this->r11_propae = ($this->r11_propae == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_propae"]:$this->r11_propae);
        $this->r11_propac = ($this->r11_propac == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_propac"]:$this->r11_propac);
-       $this->r11_codestrut = ($this->r11_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_codestrut"]:$this->r11_codestrut);
+       $this->r11_codestrut = (($this->r11_codestrut === 0 || $this->r11_codestrut === 0.0 || $this->r11_codestrut == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_codestrut"]:$this->r11_codestrut);
        $this->r11_geracontipe = ($this->r11_geracontipe == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_geracontipe"]:$this->r11_geracontipe);
        $this->r11_13ferias = ($this->r11_13ferias == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_13ferias"]:$this->r11_13ferias);
        $this->r11_pagarferias = ($this->r11_pagarferias == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_pagarferias"]:$this->r11_pagarferias);
        $this->r11_vtfer = ($this->r11_vtfer == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_vtfer"]:$this->r11_vtfer);
        $this->r11_vtcons = ($this->r11_vtcons == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_vtcons"]:$this->r11_vtcons);
        $this->r11_vtmpro = ($this->r11_vtmpro == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_vtmpro"]:$this->r11_vtmpro);
-       $this->r11_localtrab = ($this->r11_localtrab == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_localtrab"]:$this->r11_localtrab);
+       $this->r11_localtrab = (($this->r11_localtrab === 0 || $this->r11_localtrab === 0.0 || $this->r11_localtrab == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_localtrab"]:$this->r11_localtrab);
        if($this->r11_databaseatra == ""){
          $this->r11_databaseatra_dia = ($this->r11_databaseatra_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_databaseatra_dia"]:$this->r11_databaseatra_dia);
          $this->r11_databaseatra_mes = ($this->r11_databaseatra_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_databaseatra_mes"]:$this->r11_databaseatra_mes);
@@ -417,18 +417,18 @@ class cl_cfpess
        $this->r11_concatdv = ($this->r11_concatdv == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_concatdv"]:$this->r11_concatdv);
        $this->r11_infla = ($this->r11_infla == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_infla"]:$this->r11_infla);
        $this->r11_baseipe = ($this->r11_baseipe == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_baseipe"]:$this->r11_baseipe);
-       $this->r11_txadm = ($this->r11_txadm == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_txadm"]:$this->r11_txadm);
-       $this->r11_modanalitica = ($this->r11_modanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_modanalitica"]:$this->r11_modanalitica);
+       $this->r11_txadm = (($this->r11_txadm === 0 || $this->r11_txadm === 0.0 || $this->r11_txadm == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_txadm"]:$this->r11_txadm);
+       $this->r11_modanalitica = (($this->r11_modanalitica === 0 || $this->r11_modanalitica === 0.0 || $this->r11_modanalitica == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_modanalitica"]:$this->r11_modanalitica);
        $this->r11_viravalemes = ($this->r11_viravalemes == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_viravalemes"]:$this->r11_viravalemes);
-       $this->r11_histslip = ($this->r11_histslip == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_histslip"]:$this->r11_histslip);
+       $this->r11_histslip = (($this->r11_histslip === 0 || $this->r11_histslip === 0.0 || $this->r11_histslip == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_histslip"]:$this->r11_histslip);
        $this->r11_mensagempadraotxt = ($this->r11_mensagempadraotxt == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_mensagempadraotxt"]:$this->r11_mensagempadraotxt);
        $this->r11_recpatrafasta = ($this->r11_recpatrafasta == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_recpatrafasta"]:$this->r11_recpatrafasta);
-       $this->r11_relatoriocontracheque = ($this->r11_relatoriocontracheque == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_relatoriocontracheque"]:$this->r11_relatoriocontracheque);
-       $this->r11_relatorioempenhofolha = ($this->r11_relatorioempenhofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_relatorioempenhofolha"]:$this->r11_relatorioempenhofolha);
-       $this->r11_relatoriocomprovanterendimentos = ($this->r11_relatoriocomprovanterendimentos == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_relatoriocomprovanterendimentos"]:$this->r11_relatoriocomprovanterendimentos);
-       $this->r11_relatoriotermorescisao = ($this->r11_relatoriotermorescisao == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_relatoriotermorescisao"]:$this->r11_relatoriotermorescisao);
+       $this->r11_relatoriocontracheque = (($this->r11_relatoriocontracheque === 0 || $this->r11_relatoriocontracheque === 0.0 || $this->r11_relatoriocontracheque == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_relatoriocontracheque"]:$this->r11_relatoriocontracheque);
+       $this->r11_relatorioempenhofolha = (($this->r11_relatorioempenhofolha === 0 || $this->r11_relatorioempenhofolha === 0.0 || $this->r11_relatorioempenhofolha == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_relatorioempenhofolha"]:$this->r11_relatorioempenhofolha);
+       $this->r11_relatoriocomprovanterendimentos = (($this->r11_relatoriocomprovanterendimentos === 0 || $this->r11_relatoriocomprovanterendimentos === 0.0 || $this->r11_relatoriocomprovanterendimentos == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_relatoriocomprovanterendimentos"]:$this->r11_relatoriocomprovanterendimentos);
+       $this->r11_relatoriotermorescisao = (($this->r11_relatoriotermorescisao === 0 || $this->r11_relatoriotermorescisao === 0.0 || $this->r11_relatoriotermorescisao == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_relatoriotermorescisao"]:$this->r11_relatoriotermorescisao);
        $this->r11_geraretencaoempenho = ($this->r11_geraretencaoempenho == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_geraretencaoempenho"]:$this->r11_geraretencaoempenho);
-       $this->r11_percentualipe = ($this->r11_percentualipe == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_percentualipe"]:$this->r11_percentualipe);
+       $this->r11_percentualipe = (($this->r11_percentualipe === 0 || $this->r11_percentualipe === 0.0 || $this->r11_percentualipe == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_percentualipe"]:$this->r11_percentualipe);
        if($this->r11_datainiciovigenciarpps == ""){
          $this->r11_datainiciovigenciarpps_dia = ($this->r11_datainiciovigenciarpps_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_datainiciovigenciarpps_dia"]:$this->r11_datainiciovigenciarpps_dia);
          $this->r11_datainiciovigenciarpps_mes = ($this->r11_datainiciovigenciarpps_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_datainiciovigenciarpps_mes"]:$this->r11_datainiciovigenciarpps_mes);
@@ -437,7 +437,7 @@ class cl_cfpess
             $this->r11_datainiciovigenciarpps = $this->r11_datainiciovigenciarpps_ano."-".$this->r11_datainiciovigenciarpps_mes."-".$this->r11_datainiciovigenciarpps_dia;
          }
        }
-       $this->r11_sistemacontroleponto = ($this->r11_sistemacontroleponto == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_sistemacontroleponto"]:$this->r11_sistemacontroleponto);
+       $this->r11_sistemacontroleponto = (($this->r11_sistemacontroleponto === 0 || $this->r11_sistemacontroleponto === 0.0 || $this->r11_sistemacontroleponto == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_sistemacontroleponto"]:$this->r11_sistemacontroleponto);
        $this->r11_baseconsignada = ($this->r11_baseconsignada == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_baseconsignada"]:$this->r11_baseconsignada);
        $this->r11_abonoprevidencia = ($this->r11_abonoprevidencia == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_abonoprevidencia"]:$this->r11_abonoprevidencia);
        $this->r11_compararferias = ($this->r11_compararferias == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_compararferias"]:$this->r11_compararferias);
@@ -452,7 +452,7 @@ class cl_cfpess
        $this->r11_baserrapensaoalimenticia = ($this->r11_baserrapensaoalimenticia == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_baserrapensaoalimenticia"]:$this->r11_baserrapensaoalimenticia);
        $this->r11_baserrairrf = ($this->r11_baserrairrf == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_baserrairrf"]:$this->r11_baserrairrf);
        $this->r11_baserraparcelaisenta = ($this->r11_baserraparcelaisenta == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_baserraparcelaisenta"]:$this->r11_baserraparcelaisenta);
-       $this->r11_tabelavaloresrra = ($this->r11_tabelavaloresrra == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_tabelavaloresrra"]:$this->r11_tabelavaloresrra);
+       $this->r11_tabelavaloresrra = (($this->r11_tabelavaloresrra === 0 || $this->r11_tabelavaloresrra === 0.0 || $this->r11_tabelavaloresrra == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_tabelavaloresrra"]:$this->r11_tabelavaloresrra);
        $this->r11_basefgintegral = ($this->r11_basefgintegral == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_basefgintegral"]:$this->r11_basefgintegral);
        $this->r11_basefgparcial = ($this->r11_basefgparcial == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_basefgparcial"]:$this->r11_basefgparcial);
        $this->r11_rubricaabonopecuniario = ($this->r11_rubricaabonopecuniario == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_rubricaabonopecuniario"]:$this->r11_rubricaabonopecuniario);
@@ -495,9 +495,9 @@ class cl_cfpess
        $this->r11_bloqueiocompetenciaaberta = ($this->r11_bloqueiocompetenciaaberta == "f"?@$GLOBALS["HTTP_POST_VARS"]["r11_bloqueiocompetenciaaberta"]:$this->r11_bloqueiocompetenciaaberta);
        $this->r11_rubricadifsalario = ($this->r11_rubricadifsalario == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_rubricadifsalario"]:$this->r11_rubricadifsalario);
      }else{
-       $this->r11_instit = ($this->r11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_instit"]:$this->r11_instit);
-       $this->r11_anousu = ($this->r11_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_anousu"]:$this->r11_anousu);
-       $this->r11_mesusu = ($this->r11_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r11_mesusu"]:$this->r11_mesusu);
+       $this->r11_instit = (($this->r11_instit === 0 || $this->r11_instit === 0.0 || $this->r11_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_instit"]:$this->r11_instit);
+       $this->r11_anousu = (($this->r11_anousu === 0 || $this->r11_anousu === 0.0 || $this->r11_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_anousu"]:$this->r11_anousu);
+       $this->r11_mesusu = (($this->r11_mesusu === 0 || $this->r11_mesusu === 0.0 || $this->r11_mesusu == "")?@$GLOBALS["HTTP_POST_VARS"]["r11_mesusu"]:$this->r11_mesusu);
      }
    }
 
@@ -753,7 +753,7 @@ class cl_cfpess
        $this->r11_anousu = $r11_anousu;
        $this->r11_mesusu = $r11_mesusu;
        $this->r11_instit = $r11_instit;
-    if(($this->r11_anousu == null) || ($this->r11_anousu == "") ){
+    if(($this->r11_anousu == null) || (($this->r11_anousu === 0 || $this->r11_anousu === 0.0 || $this->r11_anousu == "")) ){
        $this->erro_sql = " Campo r11_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -761,7 +761,7 @@ class cl_cfpess
        $this->erro_status = "0";
        return false;
     }
-    if(($this->r11_mesusu == null) || ($this->r11_mesusu == "") ){
+    if(($this->r11_mesusu == null) || (($this->r11_mesusu === 0 || $this->r11_mesusu === 0.0 || $this->r11_mesusu == "")) ){
        $this->erro_sql = " Campo r11_mesusu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -769,7 +769,7 @@ class cl_cfpess
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r11_instit == null) || ($this->r11_instit == "") ){
+     if(($this->r11_instit == null) || (($this->r11_instit === 0 || $this->r11_instit === 0.0 || $this->r11_instit == "")) ){
        $this->erro_sql = " Campo r11_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -3295,7 +3295,7 @@ class cl_cfpess
    function sql_query_rubr ( $r11_anousu=null,$r11_mesusu=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -3329,7 +3329,7 @@ class cl_cfpess
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -3341,7 +3341,7 @@ class cl_cfpess
    function sql_query_parametro ( $r11_anousu=null,$r11_mesusu=null,$r11_instit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -3394,7 +3394,7 @@ class cl_cfpess
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

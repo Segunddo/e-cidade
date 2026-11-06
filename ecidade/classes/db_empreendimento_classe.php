@@ -70,7 +70,7 @@ class cl_empreendimento {
                  am05_protprocesso = int4 = Protocolo
                  ";
    //funcao construtor da classe
-   function cl_empreendimento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empreendimento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,20 +87,20 @@ class cl_empreendimento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am05_sequencial = ($this->am05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_sequencial"]:$this->am05_sequencial);
+       $this->am05_sequencial = ($this->am05_sequencial === 0 || $this->am05_sequencial === 0.0 || $this->am05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_sequencial"]:$this->am05_sequencial);
        $this->am05_nome = ($this->am05_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_nome"]:$this->am05_nome);
        $this->am05_nomefanta = ($this->am05_nomefanta == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_nomefanta"]:$this->am05_nomefanta);
-       $this->am05_numero = ($this->am05_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_numero"]:$this->am05_numero);
+       $this->am05_numero = ($this->am05_numero === 0 || $this->am05_numero === 0.0 || $this->am05_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_numero"]:$this->am05_numero);
        $this->am05_complemento = ($this->am05_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_complemento"]:$this->am05_complemento);
        $this->am05_cep = ($this->am05_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_cep"]:$this->am05_cep);
-       $this->am05_bairro = ($this->am05_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_bairro"]:$this->am05_bairro);
-       $this->am05_ruas = ($this->am05_ruas == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_ruas"]:$this->am05_ruas);
+       $this->am05_bairro = ($this->am05_bairro === 0 || $this->am05_bairro === 0.0 || $this->am05_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_bairro"]:$this->am05_bairro);
+       $this->am05_ruas = ($this->am05_ruas === 0 || $this->am05_ruas === 0.0 || $this->am05_ruas == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_ruas"]:$this->am05_ruas);
        $this->am05_cnpj = ($this->am05_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_cnpj"]:$this->am05_cnpj);
-       $this->am05_cgm = ($this->am05_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_cgm"]:$this->am05_cgm);
-       $this->am05_areatotal = ($this->am05_areatotal == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_areatotal"]:$this->am05_areatotal);
-       $this->am05_protprocesso = ($this->am05_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_protprocesso"]:$this->am05_protprocesso);
+       $this->am05_cgm = ($this->am05_cgm === 0 || $this->am05_cgm === 0.0 || $this->am05_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_cgm"]:$this->am05_cgm);
+       $this->am05_areatotal = ($this->am05_areatotal === 0 || $this->am05_areatotal === 0.0 || $this->am05_areatotal == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_areatotal"]:$this->am05_areatotal);
+       $this->am05_protprocesso = ($this->am05_protprocesso === 0 || $this->am05_protprocesso === 0.0 || $this->am05_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_protprocesso"]:$this->am05_protprocesso);
      }else{
-       $this->am05_sequencial = ($this->am05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_sequencial"]:$this->am05_sequencial);
+       $this->am05_sequencial = ($this->am05_sequencial === 0 || $this->am05_sequencial === 0.0 || $this->am05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am05_sequencial"]:$this->am05_sequencial);
      }
    }
    // funcao para Inclusão
@@ -187,7 +187,7 @@ class cl_empreendimento {
          $this->am05_sequencial = $am05_sequencial;
        }
      }
-     if(($this->am05_sequencial == null) || ($this->am05_sequencial == "") ){
+     if(($this->am05_sequencial == null) || ($this->am05_sequencial === 0 || $this->am05_sequencial === 0.0 || $this->am05_sequencial == "") ){
        $this->erro_sql = " Campo am05_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

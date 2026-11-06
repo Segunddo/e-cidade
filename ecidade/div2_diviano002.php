@@ -29,7 +29,7 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 $clrotulo = new rotulocampo;
 $clrotulo->label('');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 $head3 = "POSIÇÃO DA DÍVIDA";
 $head5 = "$info : $val";
 if ($info=='CGM'){
@@ -91,7 +91,7 @@ $sql_parc="select v07_parcel,
 
 $result_norm=db_query($sql_norm);
 $result_parc=db_query($sql_parc);
-if (pg_numrows($result_norm)==0&&pg_numrows($result_parc)==0){
+if (($result_norm ? pg_numrows($result_norm) : 0)==0&&($result_parc ? pg_numrows($result_parc) : 0)==0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem dividas.');
 }
 $pdf = new PDF(); 

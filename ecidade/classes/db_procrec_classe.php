@@ -52,7 +52,7 @@ class cl_procrec {
                  p52_valor = float8 = Valor da Taxa 
                  ";
    //funcao construtor da classe 
-   function cl_procrec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procrec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_procrec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p52_codigo = ($this->p52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codigo"]:$this->p52_codigo);
-       $this->p52_codrec = ($this->p52_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codrec"]:$this->p52_codrec);
-       $this->p52_valor = ($this->p52_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_valor"]:$this->p52_valor);
+       $this->p52_codigo = ($this->p52_codigo === 0 || $this->p52_codigo === 0.0 || $this->p52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codigo"]:$this->p52_codigo);
+       $this->p52_codrec = ($this->p52_codrec === 0 || $this->p52_codrec === 0.0 || $this->p52_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codrec"]:$this->p52_codrec);
+       $this->p52_valor = ($this->p52_valor === 0 || $this->p52_valor === 0.0 || $this->p52_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_valor"]:$this->p52_valor);
      }else{
-       $this->p52_codigo = ($this->p52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codigo"]:$this->p52_codigo);
-       $this->p52_codrec = ($this->p52_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codrec"]:$this->p52_codrec);
+       $this->p52_codigo = ($this->p52_codigo === 0 || $this->p52_codigo === 0.0 || $this->p52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codigo"]:$this->p52_codigo);
+       $this->p52_codrec = ($this->p52_codrec === 0 || $this->p52_codrec === 0.0 || $this->p52_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codrec"]:$this->p52_codrec);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_procrec {
      }
        $this->p52_codigo = $p52_codigo; 
        $this->p52_codrec = $p52_codrec; 
-     if(($this->p52_codigo == null) || ($this->p52_codigo == "") ){ 
+     if(($this->p52_codigo == null) || ($this->p52_codigo === 0 || $this->p52_codigo === 0.0 || $this->p52_codigo == "") ){ 
        $this->erro_sql = " Campo p52_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_procrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p52_codrec == null) || ($this->p52_codrec == "") ){ 
+     if(($this->p52_codrec == null) || ($this->p52_codrec === 0 || $this->p52_codrec === 0.0 || $this->p52_codrec == "") ){ 
        $this->erro_sql = " Campo p52_codrec nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_procrec {
    function sql_query ( $p52_codigo=null,$p52_codrec=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_procrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_procrec {
    function sql_query_file ( $p52_codigo=null,$p52_codrec=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_procrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

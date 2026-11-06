@@ -33,14 +33,14 @@ require_once(modification("classes/db_fiscalproc_classe.php"));
 require_once(modification("classes/db_fiscalprocpa_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 if(!isset($abas)){
 
   echo "<script>location.href='fis1_fiscalproc005.php?db_opcao=3'</script>";
   exit;
 }
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clfiscalproc   = new cl_fiscalproc;

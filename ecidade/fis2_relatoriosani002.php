@@ -41,7 +41,7 @@ $clsanitario = new cl_sanitario;
 $clsaniatividade = new cl_saniatividade;
 $clsaniatividade->rotulo->label();
 $clsanitario->rotulo->label();
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 //print_r($HTTP_SERVER_VARS['QUERY_STRING']);
 //exit;
 

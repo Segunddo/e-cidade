@@ -34,7 +34,8 @@ include(modification("classes/db_cgm_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $clcgm          = new cl_cgm;
 $clissbase      = new cl_issbase;
@@ -169,7 +170,7 @@ if(isset($postback)){
 		echo "<script>
 						alert($erro);		
 					</script>";
-		parent.mo_camada('atividades');
+		\PARENT.mo_camada('atividades');
 		db_redireciona("iss1_issbase017.php?nomenu=nops&chavepesquisa=$q02_inscr&opcao=$opcao");
 	}
 }

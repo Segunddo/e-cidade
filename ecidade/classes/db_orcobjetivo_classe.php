@@ -56,7 +56,7 @@ class cl_orcobjetivo {
                  o143_objetivo = text = Objetivo 
                  ";
    //funcao construtor da classe 
-   function cl_orcobjetivo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcobjetivo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_orcobjetivo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o143_sequencial = ($this->o143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_sequencial"]:$this->o143_sequencial);
-       $this->o143_orcorgaoorgao = ($this->o143_orcorgaoorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_orcorgaoorgao"]:$this->o143_orcorgaoorgao);
-       $this->o143_orcorgaoanousu = ($this->o143_orcorgaoanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_orcorgaoanousu"]:$this->o143_orcorgaoanousu);
+       $this->o143_sequencial = ($this->o143_sequencial === 0 || $this->o143_sequencial === 0.0 || $this->o143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_sequencial"]:$this->o143_sequencial);
+       $this->o143_orcorgaoorgao = ($this->o143_orcorgaoorgao === 0 || $this->o143_orcorgaoorgao === 0.0 || $this->o143_orcorgaoorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_orcorgaoorgao"]:$this->o143_orcorgaoorgao);
+       $this->o143_orcorgaoanousu = ($this->o143_orcorgaoanousu === 0 || $this->o143_orcorgaoanousu === 0.0 || $this->o143_orcorgaoanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_orcorgaoanousu"]:$this->o143_orcorgaoanousu);
        $this->o143_descricao = ($this->o143_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_descricao"]:$this->o143_descricao);
        $this->o143_objetivo = ($this->o143_objetivo == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_objetivo"]:$this->o143_objetivo);
      }else{
-       $this->o143_sequencial = ($this->o143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_sequencial"]:$this->o143_sequencial);
+       $this->o143_sequencial = ($this->o143_sequencial === 0 || $this->o143_sequencial === 0.0 || $this->o143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_sequencial"]:$this->o143_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_orcobjetivo {
          $this->o143_sequencial = $o143_sequencial; 
        }
      }
-     if(($this->o143_sequencial == null) || ($this->o143_sequencial == "") ){ 
+     if(($this->o143_sequencial == null) || ($this->o143_sequencial === 0 || $this->o143_sequencial === 0.0 || $this->o143_sequencial == "") ){ 
        $this->erro_sql = " Campo o143_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -441,7 +441,7 @@ class cl_orcobjetivo {
    function sql_query ( $o143_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -464,7 +464,7 @@ class cl_orcobjetivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_orcobjetivo {
    function sql_query_file ( $o143_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -498,7 +498,7 @@ class cl_orcobjetivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

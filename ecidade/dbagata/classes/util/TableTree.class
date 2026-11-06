@@ -34,7 +34,7 @@ class TableTree extends GtkCTree
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function TableTree($Title, $nick)
+    function __construct($Title, $nick)
     {
         GtkCTree::GtkCTree(1, 0, array($Title));
         GtkCTree::set_selection_mode(GTK_SELECTION_SINGLE);

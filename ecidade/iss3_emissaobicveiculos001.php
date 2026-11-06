@@ -60,7 +60,7 @@ try {
 
     $rsTipoAlvara    = $clisstipoalvara->sql_record($sSqlTipoAlvara);
 
-    if(pg_num_rows($rsTipoAlvara) < 1){
+    if(($rsTipoAlvara ? pg_num_rows($rsTipoAlvara) : 0) < 1){
         throw new Exception("Configuração de Template BIC de veículos não encontrada");
     }
 

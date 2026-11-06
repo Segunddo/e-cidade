@@ -36,7 +36,8 @@ $clcaracter = new cl_caracter;
 $clcarpadrao = new cl_carpadrao;
 $db_opcao = 2;
 $db_botao = false;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 if(isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"]=="Alterar"){
    db_inicio_transacao();

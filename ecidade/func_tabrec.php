@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_tabrec_classe.php"));
 db_postmemory($HTTP_POST_VARS);
 db_postmemory($HTTP_GET_VARS);
-parse_str($HTTP_SERVER_VARS ["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS ["QUERY_STRING"], $__qs); extract($__qs);
 
 $cltabrec = new cl_tabrec();
 $cltabrec->rotulo->label("k02_codigo");

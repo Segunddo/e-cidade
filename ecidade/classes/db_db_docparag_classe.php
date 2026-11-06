@@ -52,7 +52,7 @@ class cl_db_docparag {
                  db04_ordem = int4 = Ordem do parágrafo 
                  ";
    //funcao construtor da classe 
-   function cl_db_docparag() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_docparag"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_db_docparag {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db04_docum = ($this->db04_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["db04_docum"]:$this->db04_docum);
-       $this->db04_idparag = ($this->db04_idparag == ""?@$GLOBALS["HTTP_POST_VARS"]["db04_idparag"]:$this->db04_idparag);
-       $this->db04_ordem = ($this->db04_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db04_ordem"]:$this->db04_ordem);
+       $this->db04_docum = (($this->db04_docum === 0 || $this->db04_docum === 0.0 || $this->db04_docum == "")?@$GLOBALS["HTTP_POST_VARS"]["db04_docum"]:$this->db04_docum);
+       $this->db04_idparag = (($this->db04_idparag === 0 || $this->db04_idparag === 0.0 || $this->db04_idparag == "")?@$GLOBALS["HTTP_POST_VARS"]["db04_idparag"]:$this->db04_idparag);
+       $this->db04_ordem = (($this->db04_ordem === 0 || $this->db04_ordem === 0.0 || $this->db04_ordem == "")?@$GLOBALS["HTTP_POST_VARS"]["db04_ordem"]:$this->db04_ordem);
      }else{
-       $this->db04_docum = ($this->db04_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["db04_docum"]:$this->db04_docum);
-       $this->db04_idparag = ($this->db04_idparag == ""?@$GLOBALS["HTTP_POST_VARS"]["db04_idparag"]:$this->db04_idparag);
+       $this->db04_docum = (($this->db04_docum === 0 || $this->db04_docum === 0.0 || $this->db04_docum == "")?@$GLOBALS["HTTP_POST_VARS"]["db04_docum"]:$this->db04_docum);
+       $this->db04_idparag = (($this->db04_idparag === 0 || $this->db04_idparag === 0.0 || $this->db04_idparag == "")?@$GLOBALS["HTTP_POST_VARS"]["db04_idparag"]:$this->db04_idparag);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_db_docparag {
      }
        $this->db04_docum = $db04_docum; 
        $this->db04_idparag = $db04_idparag; 
-     if(($this->db04_docum == null) || ($this->db04_docum == "") ){ 
+     if(($this->db04_docum == null) || (($this->db04_docum === 0 || $this->db04_docum === 0.0 || $this->db04_docum == "")) ){ 
        $this->erro_sql = " Campo db04_docum nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_db_docparag {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->db04_idparag == null) || ($this->db04_idparag == "") ){ 
+     if(($this->db04_idparag == null) || (($this->db04_idparag === 0 || $this->db04_idparag === 0.0 || $this->db04_idparag == "")) ){ 
        $this->erro_sql = " Campo db04_idparag nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

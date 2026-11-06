@@ -62,7 +62,7 @@ class cl_isencao {
                  v10_usuario = int4 = Cod. Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_isencao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isencao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,8 +79,8 @@ class cl_isencao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v10_sequencial = ($this->v10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_sequencial"]:$this->v10_sequencial);
-       $this->v10_isencaotipo = ($this->v10_isencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_isencaotipo"]:$this->v10_isencaotipo);
+       $this->v10_sequencial = ($this->v10_sequencial === 0 || $this->v10_sequencial === 0.0 || $this->v10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_sequencial"]:$this->v10_sequencial);
+       $this->v10_isencaotipo = ($this->v10_isencaotipo === 0 || $this->v10_isencaotipo === 0.0 || $this->v10_isencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_isencaotipo"]:$this->v10_isencaotipo);
        if($this->v10_dtisen == ""){
          $this->v10_dtisen_dia = ($this->v10_dtisen_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_dtisen_dia"]:$this->v10_dtisen_dia);
          $this->v10_dtisen_mes = ($this->v10_dtisen_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_dtisen_mes"]:$this->v10_dtisen_mes);
@@ -97,9 +97,9 @@ class cl_isencao {
             $this->v10_dtlan = $this->v10_dtlan_ano."-".$this->v10_dtlan_mes."-".$this->v10_dtlan_dia;
          }
        }
-       $this->v10_usuario = ($this->v10_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_usuario"]:$this->v10_usuario);
+       $this->v10_usuario = ($this->v10_usuario === 0 || $this->v10_usuario === 0.0 || $this->v10_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_usuario"]:$this->v10_usuario);
      }else{
-       $this->v10_sequencial = ($this->v10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_sequencial"]:$this->v10_sequencial);
+       $this->v10_sequencial = ($this->v10_sequencial === 0 || $this->v10_sequencial === 0.0 || $this->v10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_sequencial"]:$this->v10_sequencial);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_isencao {
          $this->v10_sequencial = $v10_sequencial; 
        }
      }
-     if(($this->v10_sequencial == null) || ($this->v10_sequencial == "") ){ 
+     if(($this->v10_sequencial == null) || ($this->v10_sequencial === 0 || $this->v10_sequencial === 0.0 || $this->v10_sequencial == "") ){ 
        $this->erro_sql = " Campo v10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -469,7 +469,7 @@ class cl_isencao {
    function sql_query ( $v10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_isencao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_isencao {
    function sql_query_file ( $v10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_isencao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -537,7 +537,7 @@ class cl_isencao {
    function sql_query_func ( $v10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -563,7 +563,7 @@ class cl_isencao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

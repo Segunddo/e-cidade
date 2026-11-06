@@ -407,7 +407,7 @@ include modification("jpgraph_gradient.php");
 // The default trivial text error handler.
 //=============================================================
 class JpGraphErrObject {
-    function JpGraphErrObject() {
+    function __construct() {
 	// Empty. Reserved for future use
     }
 
@@ -694,7 +694,7 @@ class JpgTimer {
     var $idx;	
 //---------------
 // CONSTRUCTOR
-    function JpgTimer() {
+    function __construct() {
 	$this->idx=0;
     }
 
@@ -734,7 +734,7 @@ class DateLocale {
 
 //---------------
 // CONSTRUCTOR	
-    function DateLocale() {
+    function __construct() {
 	settype($this->iDayAbb, 'array');
 	settype($this->iShortDay, 'array');
 	settype($this->iShortMonth, 'array');
@@ -763,8 +763,8 @@ class DateLocale {
 
 	for ( $i = 0, $ofs = 0 - strftime('%w'); $i < 7; $i++, $ofs++ ){
 	    $day = strftime('%a', strtotime("$ofs day"));
-	    $day{0} = strtoupper($day{0});
-	    $this->iDayAbb[$aLocale][]= $day{0};
+	    $day[0] = strtoupper($day[0]);
+	    $this->iDayAbb[$aLocale][]= $day[0];
 	    $this->iShortDay[$aLocale][]= $day;
 	}
 
@@ -817,7 +817,7 @@ $gJpgDateLocale = new DateLocale();
 class FuncGenerator {
     var $iFunc='',$iXFunc='',$iMin,$iMax,$iStepSize;
 	
-    function FuncGenerator($aFunc,$aXFunc='') {
+    function __construct($aFunc,$aXFunc='') {
 	$this->iFunc = $aFunc;
 	$this->iXFunc = $aXFunc;
     }
@@ -855,7 +855,7 @@ class Footer {
     var $iRightMargin = 3;
     var $iBottomMargin = 3;
 
-    function Footer() {
+    function __construct() {
 	$this->left = new Text();
 	$this->left->ParagraphAlign('left');
 	$this->center = new Text();
@@ -864,7 +864,7 @@ class Footer {
 	$this->right->ParagraphAlign('right');
     }
 
-    function Stroke($aImg) {
+    function Stroke($aImg, $x = null, $y = null) {
 	$y = $aImg->height - $this->iBottomMargin;
 	$x = $this->iLeftMargin;
 	$this->left->Align('left','bottom');
@@ -956,7 +956,7 @@ class Graph {
     // aTimeOut		Timeout in minutes for image in cache
     // aInline		If true the image is streamed back in the call to Stroke()
     //			If false the image is just created in the cache
-    function Graph($aWidth=300,$aHeight=200,$aCachedName="",$aTimeOut=0,$aInline=true) {
+    function __construct($aWidth=300,$aHeight=200,$aCachedName="",$aTimeOut=0,$aInline=true) {
 	GLOBAL $gJpgBrandTiming;
 	// If timing is used create a new timing object
 	if( $gJpgBrandTiming ) {
@@ -1495,7 +1495,7 @@ class Graph {
 
 	if( $aCSIMName=='' ) {
 	    // create a random map name
-	    srand ((double) microtime() * 1000000);
+	    srand ((float) microtime() * 1000000);
 	    $r = rand(0,100000);
 	    $aCSIMName='__mapname'.$r.'__';
 	}
@@ -1552,7 +1552,7 @@ class Graph {
 		// us from recursively coming here again
 		$urlarg='?'._CSIM_DISPLAY.'=1';
 
-		while( list($key,$value) = each($HTTP_GET_VARS) ) {
+		foreach( (array)$HTTP_GET_VARS as $key => $value ) {
 		    if( is_array($value) ) {
 			$n = count($value);
 			for( $i=0; $i < $n; ++$i ) {
@@ -2778,7 +2778,7 @@ class TTF {
     var $font_files,$style_names;
 //---------------
 // CONSTRUCTOR
-    function TTF() {
+    function __construct() {
 	$this->style_names=array(FS_NORMAL=>'normal',FS_BOLD=>'bold',FS_ITALIC=>'italic',FS_BOLDITALIC=>'bolditalic');
 	// File names for available fonts
 	$this->font_files=array(
@@ -2884,7 +2884,7 @@ class Text {
 // CONSTRUCTOR
 
     // Create new text at absolute pixel coordinates
-    function Text($aTxt="",$aXAbsPos=0,$aYAbsPos=0) {
+    function __construct($aTxt="",$aXAbsPos=0,$aYAbsPos=0) {
 	if( ! is_string($aTxt) ) {
 	    JpGraphError::Raise('First argument to Text::Text() must be s atring.');
 	}
@@ -3102,7 +3102,7 @@ class GraphTabTitle extends Text{
     var $corner = 6 , $posx = 7, $posy = 4;
     var $color='darkred',$fillcolor='lightyellow',$bordercolor='black';
     var $align = 'left', $width=TABTITLE_WIDTHFIT;
-    function GraphTabTitle() {
+    function __construct() {
 	$this->t = '';
 	$this->font_style = FS_BOLD;
 	$this->hide = true;
@@ -3123,7 +3123,7 @@ class GraphTabTitle extends Text{
 	$this->align = $aAlign;
     }
 
-    function SetPos($aAlign) {
+    function SetPos($aAlign=0,$aYAbsPos=0,$aHAlign='left',$aVAlign='top') {
 	$this->align = $aAlign;
     }
     
@@ -3140,7 +3140,7 @@ class GraphTabTitle extends Text{
 	$this->corner = $aD ;
     }
 
-    function Stroke($aImg) {
+    function Stroke($aImg, $x = null, $y = null) {
 	if( $this->hide ) 
 	    return;
 	$this->boxed = false;
@@ -3221,8 +3221,8 @@ class SuperScriptText extends Text {
     var $iSDir=0;
     var $iSimple=false;
 
-    function SuperScriptText($aTxt="",$aSuper="",$aXAbsPos=0,$aYAbsPos=0) {
-	parent::Text($aTxt,$aXAbsPos,$aYAbsPos);
+    function __construct($aTxt="",$aSuper="",$aXAbsPos=0,$aYAbsPos=0) {
+	parent::__construct($aTxt,$aXAbsPos,$aYAbsPos);
 	$this->iSuper = $aSuper;
     }
 
@@ -3262,7 +3262,7 @@ class SuperScriptText extends Text {
     }
 
     // Total width of text
-    function GetWidth(&$aImg) {
+    function GetWidth($aImg) {
 	$aImg->SetFont($this->font_family,$this->font_style,$this->font_size);
 	$w = $aImg->GetTextWidth($this->t);
 	$aImg->SetFont($this->sfont_family,$this->sfont_style,$this->sfont_size);
@@ -3272,7 +3272,7 @@ class SuperScriptText extends Text {
     }
 	
     // Hight of font (approximate the height of the text)
-    function GetFontHeight(&$aImg) {
+    function GetFontHeight($aImg) {
 	$aImg->SetFont($this->font_family,$this->font_style,$this->font_size);	
 	$h = $aImg->GetFontHeight();
 	$aImg->SetFont($this->sfont_family,$this->sfont_style,$this->sfont_size);
@@ -3281,7 +3281,7 @@ class SuperScriptText extends Text {
     }
 
     // Hight of text
-    function GetTextHeight(&$aImg) {
+    function GetTextHeight($aImg) {
 	$aImg->SetFont($this->font_family,$this->font_style,$this->font_size);
 	$h = $aImg->GetTextHeight($this->t);
 	$aImg->SetFont($this->sfont_family,$this->sfont_style,$this->sfont_size);
@@ -3399,7 +3399,7 @@ class Grid {
     var $fill=false,$fillcolor=array('#EFEFEF','#BBCCFF');
 //---------------
 // CONSTRUCTOR
-    function Grid(&$aAxis) {
+    function __construct(&$aAxis) {
 	$this->scale = &$aAxis->scale;
 	$this->img = &$aAxis->img;
     }
@@ -3561,7 +3561,7 @@ class Axis {
 
 //---------------
 // CONSTRUCTOR
-    function Axis(&$img,&$aScale,$color=array(0,0,0)) {
+    function __construct(&$img,&$aScale,$color=array(0,0,0)) {
 	$this->img = &$img;
 	$this->scale = &$aScale;
 	$this->color = $color;
@@ -3985,7 +3985,7 @@ class Ticks {
 
 //---------------
 // CONSTRUCTOR
-    function Ticks(&$aScale) {
+    function __construct(&$aScale) {
 	$this->scale=&$aScale;
 	$this->precision = -1;
     }
@@ -4103,7 +4103,7 @@ class LinearTicks extends Ticks {
     var $text_label_start=0;
 //---------------
 // CONSTRUCTOR
-    function LinearTicks() {
+    function __construct() {
 	$this->precision = -1;
     }
 
@@ -4920,7 +4920,7 @@ class LinearScale {
 class RGB {
     var $rgb_table;
     var $img;
-    function RGB($aImg=null) {
+    function __construct($aImg=null) {
 	$this->img = $aImg;
 		
 	// Conversion array between color names and RGB
@@ -5511,7 +5511,7 @@ class Image {
 
     //---------------
     // CONSTRUCTOR
-    function Image($aWidth,$aHeight,$aFormat=DEFAULT_GFORMAT) {
+    function __construct($aWidth,$aHeight,$aFormat=DEFAULT_GFORMAT) {
 	$this->CreateImgCanvas($aWidth,$aHeight);
 	$this->SetAutoMargin();		
 
@@ -5725,7 +5725,7 @@ class Image {
 
     // Get the specific height for a text string
     function GetTextHeight($txt="",$angle=0) {
-	$tmp = split("\n",$txt);
+	$tmp = explode("\n",$txt);
 	$n = count($tmp);
 	$m=0;
 	for($i=0; $i< $n; ++$i)
@@ -5770,7 +5770,7 @@ class Image {
     // Get actual width of text in absolute pixels
     function GetTextWidth($txt,$angle=0) {
 
-	$tmp = split("\n",$txt);
+	$tmp = explode("\n",$txt);
 	$n = count($tmp);
 	if( $this->font_family <= FF_FONT2+1 ) {
 
@@ -5910,8 +5910,8 @@ class Image {
 	if( $dir==90 )
 	    imagestringup($this->img,$this->font_family,$x,$y,$txt,$this->current_color);
 	else {
-	    if( ereg("\n",$txt) ) { 
-		$tmp = split("\n",$txt);
+	    if( preg_match("/\n/",$txt) ) { 
+		$tmp = explode("\n",$txt);
 		for($i=0; $i < count($tmp); ++$i) {
 		    $w1 = $this->GetTextWidth($tmp[$i]);
 		    if( $paragraph_align=="left" ) {
@@ -6029,7 +6029,7 @@ class Image {
 	    $oy=$y;
 	}
 
-	if( !ereg("\n",$txt) || ($dir>0 && ereg("\n",$txt)) ) {
+	if( !preg_match("/\n/",$txt) || ($dir>0 && preg_match("/\n/",$txt)) ) {
 	    // Format a single line
 
 	    $txt = $this->AddTxtCR($txt);
@@ -6091,7 +6091,7 @@ class Image {
 	    $w=$this->GetTextWidth($txt);
 
 	    $y -= $linemargin/2;
-	    $tmp = split("\n",$txt);
+	    $tmp = explode("\n",$txt);
 	    $nl = count($tmp);
 	    $h = $nl * $fh;
 
@@ -7061,8 +7061,8 @@ class RotImage extends Image {
     var $a=0;
     var $dx=0,$dy=0,$transx=0,$transy=0; 
 	
-    function RotImage($aWidth,$aHeight,$a=0,$aFormat=DEFAULT_GFORMAT) {
-	$this->Image($aWidth,$aHeight,$aFormat);
+    function __construct($aWidth,$aHeight,$a=0,$aFormat=DEFAULT_GFORMAT) {
+	parent::__construct($aWidth,$aHeight,$aFormat);
 	$this->dx=$this->left_margin+$this->plotwidth/2;
 	$this->dy=$this->top_margin+$this->plotheight/2;
 	$this->SetAngle($a);	
@@ -7128,7 +7128,7 @@ class RotImage extends Image {
 	parent::Arc($xc,$yc,$w,$h,$s,$e);
     }
 
-    function FilledArc($xc,$yc,$w,$h,$s,$e) {
+    function FilledArc($xc, $yc, $w, $h, $s, $e, $style = '') {
 	list($xc,$yc) = $this->Rotate($xc,$yc);
 	$s += $this->a;
 	$e += $this->a;
@@ -7208,7 +7208,7 @@ class ImgStreamCache {
     var $timeout=0; 	// Infinite timeout
     //---------------
     // CONSTRUCTOR
-    function ImgStreamCache(&$aImg, $aCacheDir=CACHE_DIR) {
+    function __construct(&$aImg, $aCacheDir=CACHE_DIR) {
 	$this->img = &$aImg;
 	$this->cache_dir = $aCacheDir;
     }
@@ -7383,7 +7383,7 @@ class Legend {
     var $reverse = false ;
 //---------------
 // CONSTRUCTOR
-    function Legend() {
+    function __construct() {
 	// Empty
     }
 //---------------
@@ -7788,7 +7788,7 @@ class IconPlot {
     var $iAnchors = array('left','right','top','bottom','center');
     var $iCountryFlag='',$iCountryStdSize=3;
 
-    function IconPlot($aFile="",$aX=0,$aY=0,$aScale=1.0,$aMix=100) {
+    function __construct($aFile="",$aX=0,$aY=0,$aScale=1.0,$aMix=100) {
 	$this->iFile = $aFile;
 	$this->iX=$aX;
 	$this->iY=$aY;
@@ -7899,7 +7899,7 @@ class Plot {
     var $legendcsimalt='';
 //---------------
 // CONSTRUCTOR
-    function Plot(&$aDatay,$aDatax=false) {
+    function __construct(&$aDatay,$aDatax=false) {
 	$this->numpoints = count($aDatay);
 	if( $this->numpoints==0 )
 	    JpGraphError::Raise(" Empty data array specified for plot. Must have at least one data point.");
@@ -8059,7 +8059,7 @@ require_once modification("jpgraph_plotmark.inc") ;
 class Rectangle {
     var $x,$y,$w,$h;
     var $xe, $ye;
-    function Rectangle($aX,$aY,$aWidth,$aHeight) {
+    function __construct($aX,$aY,$aWidth,$aHeight) {
 	$this->x=$aX;
 	$this->y=$aY;
 	$this->w=$aWidth;
@@ -8084,7 +8084,7 @@ class RectPattern {
     var $linespacing;	// Line spacing in pixels
     var $iBackgroundColor=-1;  // Default is no background fill
 	
-    function RectPattern($aColor,$aWeight=1) {
+    function __construct($aColor,$aWeight=1) {
 	$this->color = $aColor;
 	$this->weight = $aWeight;		
     }
@@ -8139,8 +8139,8 @@ class RectPattern {
 //=====================================================================
 class RectPatternSolid extends RectPattern {
 
-    function RectPatternSolid($aColor="black",$aWeight=1) {
-	parent::RectPattern($aColor,$aWeight);
+    function __construct($aColor="black",$aWeight=1) {
+	parent::__construct($aColor,$aWeight);
     }
 
     function DoPattern(&$aImg) {
@@ -8156,8 +8156,8 @@ class RectPatternSolid extends RectPattern {
 //=====================================================================
 class RectPatternHor extends RectPattern {
 		
-    function RectPatternHor($aColor="black",$aWeight=1,$aLineSpacing=7) {
-	parent::RectPattern($aColor,$aWeight);
+    function __construct($aColor="black",$aWeight=1,$aLineSpacing=7) {
+	parent::__construct($aColor,$aWeight);
 	$this->linespacing = $aLineSpacing;
     }
 		
@@ -8179,8 +8179,8 @@ class RectPatternHor extends RectPattern {
 class RectPatternVert extends RectPattern {
     var $linespacing=10;	// Line spacing in pixels
 		
-    function RectPatternVert($aColor="black",$aWeight=1,$aLineSpacing=7) {
-	parent::RectPattern($aColor,$aWeight);
+    function __construct($aColor="black",$aWeight=1,$aLineSpacing=7) {
+	parent::__construct($aColor,$aWeight);
 	$this->linespacing = $aLineSpacing;
     }
 
@@ -8206,8 +8206,8 @@ class RectPatternVert extends RectPattern {
 class RectPatternRDiag extends RectPattern {
     var $linespacing;	// Line spacing in pixels
 		
-    function RectPatternRDiag($aColor="black",$aWeight=1,$aLineSpacing=12) {
-	parent::RectPattern($aColor,$aWeight);
+    function __construct($aColor="black",$aWeight=1,$aLineSpacing=12) {
+	parent::__construct($aColor,$aWeight);
 	$this->linespacing = $aLineSpacing;
     }
 
@@ -8276,9 +8276,9 @@ class RectPatternRDiag extends RectPattern {
 class RectPatternLDiag extends RectPattern {
     var $linespacing;	// Line spacing in pixels
 		
-    function RectPatternLDiag($aColor="black",$aWeight=1,$aLineSpacing=12) {
+    function __construct($aColor="black",$aWeight=1,$aLineSpacing=12) {
 	$this->linespacing = $aLineSpacing;
-	parent::RectPattern($aColor,$aWeight);
+	parent::__construct($aColor,$aWeight);
     }
 
     function DoPattern(&$aImg) {
@@ -8344,8 +8344,8 @@ class RectPattern3DPlane extends RectPattern {
     // top of the band. Specifies how fast the lines
     // converge.
 
-    function RectPattern3DPlane($aColor="black",$aWeight=1) {
-	parent::RectPattern($aColor,$aWeight);
+    function __construct($aColor="black",$aWeight=1) {
+	parent::__construct($aColor,$aWeight);
 	$this->SetDensity(10);  // Slightly larger default
     }
 
@@ -8458,8 +8458,8 @@ class RectPattern3DPlane extends RectPattern {
 class RectPatternCross extends RectPattern {
     var $vert=null;
     var $hor=null;
-    function RectPatternCross($aColor="black",$aWeight=1) {
-	parent::RectPattern($aColor,$aWeight);
+    function __construct($aColor="black",$aWeight=1) {
+	parent::__construct($aColor,$aWeight);
 	$this->vert = new RectPatternVert($aColor,$aWeight);
 	$this->hor  = new RectPatternHor($aColor,$aWeight);
     }
@@ -8494,8 +8494,8 @@ class RectPatternCross extends RectPattern {
 class RectPatternDiagCross extends RectPattern {
     var $left=null;
     var $right=null;
-    function RectPatternDiagCross($aColor="black",$aWeight=1) {
-	parent::RectPattern($aColor,$aWeight);
+    function __construct($aColor="black",$aWeight=1) {
+	parent::__construct($aColor,$aWeight);
 	$this->right = new RectPatternRDiag($aColor,$aWeight);
 	$this->left  = new RectPatternLDiag($aColor,$aWeight);
     }
@@ -8528,7 +8528,7 @@ class RectPatternDiagCross extends RectPattern {
 // Factory class for rectangular pattern 
 //=====================================================================
 class RectPatternFactory {
-    function RectPatternFactory() {
+    function __construct() {
 	// Empty
     }
     function Create($aPattern,$aColor,$aWeight=1) {
@@ -8576,7 +8576,7 @@ class PlotBand {
     var $depth;
     var $dir, $min, $max;
 
-    function PlotBand($aDir,$aPattern,$aMin,$aMax,$aColor="black",$aWeight=1,$aDepth=DEPTH_BACK) {
+    function __construct($aDir,$aPattern,$aMin,$aMax,$aColor="black",$aWeight=1,$aDepth=DEPTH_BACK) {
 	$f =  new RectPatternFactory();
 	$this->prect = $f->Create($aPattern,$aColor,$aWeight);
 	if( is_numeric($aMin) && is_numeric($aMax) && ($aMin > $aMax) ) 
@@ -8678,7 +8678,7 @@ class PlotLine {
 
 //---------------
 // CONSTRUCTOR
-    function PlotLine($aDir=HORIZONTAL,$aPos=0,$aColor="black",$aWeight=1) {
+    function __construct($aDir=HORIZONTAL,$aPos=0,$aColor="black",$aWeight=1) {
 	$this->direction = $aDir;
 	$this->color=$aColor;
 	$this->weight=$aWeight;

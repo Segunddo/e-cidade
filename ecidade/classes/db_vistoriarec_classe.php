@@ -54,7 +54,7 @@ class cl_vistoriarec {
                  y76_descr = varchar(50) = Descrição do Valor 
                  ";
    //funcao construtor da classe 
-   function cl_vistoriarec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vistoriarec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_vistoriarec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y76_codvist = ($this->y76_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y76_codvist"]:$this->y76_codvist);
-       $this->y76_receita = ($this->y76_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["y76_receita"]:$this->y76_receita);
-       $this->y76_valor = ($this->y76_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y76_valor"]:$this->y76_valor);
+       $this->y76_codvist = (($this->y76_codvist === 0 || $this->y76_codvist === 0.0 || $this->y76_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y76_codvist"]:$this->y76_codvist);
+       $this->y76_receita = (($this->y76_receita === 0 || $this->y76_receita === 0.0 || $this->y76_receita == "")?@$GLOBALS["HTTP_POST_VARS"]["y76_receita"]:$this->y76_receita);
+       $this->y76_valor = (($this->y76_valor === 0 || $this->y76_valor === 0.0 || $this->y76_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["y76_valor"]:$this->y76_valor);
        $this->y76_descr = ($this->y76_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y76_descr"]:$this->y76_descr);
      }else{
-       $this->y76_codvist = ($this->y76_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y76_codvist"]:$this->y76_codvist);
-       $this->y76_receita = ($this->y76_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["y76_receita"]:$this->y76_receita);
+       $this->y76_codvist = (($this->y76_codvist === 0 || $this->y76_codvist === 0.0 || $this->y76_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y76_codvist"]:$this->y76_codvist);
+       $this->y76_receita = (($this->y76_receita === 0 || $this->y76_receita === 0.0 || $this->y76_receita == "")?@$GLOBALS["HTTP_POST_VARS"]["y76_receita"]:$this->y76_receita);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_vistoriarec {
      }
        $this->y76_codvist = $y76_codvist; 
        $this->y76_receita = $y76_receita; 
-     if(($this->y76_codvist == null) || ($this->y76_codvist == "") ){ 
+     if(($this->y76_codvist == null) || (($this->y76_codvist === 0 || $this->y76_codvist === 0.0 || $this->y76_codvist == "")) ){ 
        $this->erro_sql = " Campo y76_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_vistoriarec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y76_receita == null) || ($this->y76_receita == "") ){ 
+     if(($this->y76_receita == null) || (($this->y76_receita === 0 || $this->y76_receita === 0.0 || $this->y76_receita == "")) ){ 
        $this->erro_sql = " Campo y76_receita nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -380,7 +380,7 @@ class cl_vistoriarec {
    function sql_query ( $y76_codvist=null,$y76_receita=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_vistoriarec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_vistoriarec {
    function sql_query_file ( $y76_codvist=null,$y76_receita=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_vistoriarec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

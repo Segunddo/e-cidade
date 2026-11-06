@@ -49,13 +49,13 @@ class cl_rhprocessodependente
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh304_sequencial = ($this->rh304_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_sequencial"]:$this->rh304_sequencial);
-       $this->rh304_sequencialtributoirrf = ($this->rh304_sequencialtributoirrf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_sequencialtributoirrf"]:$this->rh304_sequencialtributoirrf);
-       $this->rh304_tprend = ($this->rh304_tprend == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_tprend"]:$this->rh304_tprend);
+       $this->rh304_sequencial = ($this->rh304_sequencial === 0 || $this->rh304_sequencial === 0.0 || $this->rh304_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_sequencial"]:$this->rh304_sequencial);
+       $this->rh304_sequencialtributoirrf = ($this->rh304_sequencialtributoirrf === 0 || $this->rh304_sequencialtributoirrf === 0.0 || $this->rh304_sequencialtributoirrf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_sequencialtributoirrf"]:$this->rh304_sequencialtributoirrf);
+       $this->rh304_tprend = ($this->rh304_tprend === 0 || $this->rh304_tprend === 0.0 || $this->rh304_tprend == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_tprend"]:$this->rh304_tprend);
        $this->rh304_cpfdep = ($this->rh304_cpfdep == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_cpfdep"]:$this->rh304_cpfdep);
-       $this->rh304_vlrdeducao = ($this->rh304_vlrdeducao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_vlrdeducao"]:$this->rh304_vlrdeducao);
+       $this->rh304_vlrdeducao = ($this->rh304_vlrdeducao === 0 || $this->rh304_vlrdeducao === 0.0 || $this->rh304_vlrdeducao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_vlrdeducao"]:$this->rh304_vlrdeducao);
      }else{
-       $this->rh304_sequencial = ($this->rh304_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_sequencial"]:$this->rh304_sequencial);
+       $this->rh304_sequencial = ($this->rh304_sequencial === 0 || $this->rh304_sequencial === 0.0 || $this->rh304_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh304_sequencial"]:$this->rh304_sequencial);
      }
    }
 
@@ -101,7 +101,7 @@ class cl_rhprocessodependente
          $this->rh304_sequencial = $rh304_sequencial; 
        }
      }
-     if(($this->rh304_sequencial == null) || ($this->rh304_sequencial == "") ){ 
+     if(($this->rh304_sequencial == null) || ($this->rh304_sequencial === 0 || $this->rh304_sequencial === 0.0 || $this->rh304_sequencial == "") ){ 
        $this->erro_sql = " Campo rh304_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

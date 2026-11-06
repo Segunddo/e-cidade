@@ -30,7 +30,8 @@ include(modification("libs/db_utils.php"));
 require_once(modification('fpdf151/PDF_Label.php'));
 
 db_postmemory($HTTP_SERVER_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $instit = db_getsession("DB_instit");
 $sqlinst = "select * from db_config where codigo = ".db_getsession("DB_instit");
 db_fieldsmemory(db_query($sqlinst),0,true);
@@ -280,7 +281,7 @@ for($x=$lim1;$x < $lim2;$x++) {
     $resultender = db_query($sqlender);
     db_fieldsmemory($resultender,0);
 
-    $endereco = split("#",$fc_iptuender);
+    $endereco = preg_split("#\\##m",$fc_iptuender);
 
     $z01_ender    = @$endereco[0];
     $z01_numero   = @$endereco[1];

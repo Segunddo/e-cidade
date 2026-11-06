@@ -25,7 +25,7 @@
  *                                licenca/licenca_pt.txt 
  */
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 if(!isset($abas)){
   echo "<script>location.href='fis1_vistorias005.php?db_opcao=3&inscr=1'</script>";
   exit;
@@ -49,7 +49,7 @@ include(modification("classes/db_vistlocal_classe.php"));
 include(modification("classes/db_vistexec_classe.php"));
 include(modification("classes/db_vistestem_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clvistorias      = new cl_vistorias;
@@ -168,7 +168,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Excluir
 			$erromsg =  "VISTUSUARIO - ".$clvistusuario->erro_msg;		
 			$sqlerro = true;
 			db_msgbox($erromsg);
-			break;
+			exit;
 		}
 
 		$clvistoriaandam->excluir($y70_codvist,$y70_ultandam);
@@ -176,7 +176,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Excluir
 			$erromsg =  "VISTORIAANDAM - ".$clvistoriaandam->erro_msg;		
 			$sqlerro = true;
 			db_msgbox($erromsg);
-			break;
+			exit;
 		}
 
 		$clvistorias->excluir($y70_codvist);

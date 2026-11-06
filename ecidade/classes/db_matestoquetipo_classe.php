@@ -54,7 +54,7 @@ class cl_matestoquetipo {
                  m81_tipo = int4 = Tipo da Movimentação 
                  ";
    //funcao construtor da classe 
-   function cl_matestoquetipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matestoquetipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_matestoquetipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m81_codtipo = ($this->m81_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m81_codtipo"]:$this->m81_codtipo);
+       $this->m81_codtipo = ($this->m81_codtipo === 0 || $this->m81_codtipo === 0.0 || $this->m81_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m81_codtipo"]:$this->m81_codtipo);
        $this->m81_descr = ($this->m81_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["m81_descr"]:$this->m81_descr);
        $this->m81_entrada = ($this->m81_entrada == "f"?@$GLOBALS["HTTP_POST_VARS"]["m81_entrada"]:$this->m81_entrada);
-       $this->m81_tipo = ($this->m81_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m81_tipo"]:$this->m81_tipo);
+       $this->m81_tipo = ($this->m81_tipo === 0 || $this->m81_tipo === 0.0 || $this->m81_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m81_tipo"]:$this->m81_tipo);
      }else{
-       $this->m81_codtipo = ($this->m81_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m81_codtipo"]:$this->m81_codtipo);
+       $this->m81_codtipo = ($this->m81_codtipo === 0 || $this->m81_codtipo === 0.0 || $this->m81_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m81_codtipo"]:$this->m81_codtipo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_matestoquetipo {
          $this->m81_codtipo = $m81_codtipo; 
        }
      }
-     if(($this->m81_codtipo == null) || ($this->m81_codtipo == "") ){ 
+     if(($this->m81_codtipo == null) || ($this->m81_codtipo === 0 || $this->m81_codtipo === 0.0 || $this->m81_codtipo == "") ){ 
        $this->erro_sql = " Campo m81_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_matestoquetipo {
    function sql_query ( $m81_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -412,7 +412,7 @@ class cl_matestoquetipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_matestoquetipo {
    function sql_query_file ( $m81_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_matestoquetipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -60,7 +60,7 @@ $numeropg = isset($numeropg)?$numeropg:0;
 
 db_sel_instit(null, "db21_usasisagua");
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 
 $exercicio = db_getsession("DB_anousu");
 $borda        = 1;

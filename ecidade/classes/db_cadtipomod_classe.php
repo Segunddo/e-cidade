@@ -50,7 +50,7 @@ class cl_cadtipomod {
                  k46_descr = varchar(40) = Descrição do tipo de modelo 
                  ";
    //funcao construtor da classe 
-   function cl_cadtipomod() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadtipomod"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_cadtipomod {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k46_sequencial = ($this->k46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k46_sequencial"]:$this->k46_sequencial);
+       $this->k46_sequencial = ($this->k46_sequencial === 0 || $this->k46_sequencial === 0.0 || $this->k46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k46_sequencial"]:$this->k46_sequencial);
        $this->k46_descr = ($this->k46_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k46_descr"]:$this->k46_descr);
      }else{
-       $this->k46_sequencial = ($this->k46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k46_sequencial"]:$this->k46_sequencial);
+       $this->k46_sequencial = ($this->k46_sequencial === 0 || $this->k46_sequencial === 0.0 || $this->k46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k46_sequencial"]:$this->k46_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_cadtipomod {
          $this->k46_sequencial = $k46_sequencial; 
        }
      }
-     if(($this->k46_sequencial == null) || ($this->k46_sequencial == "") ){ 
+     if(($this->k46_sequencial == null) || ($this->k46_sequencial === 0 || $this->k46_sequencial === 0.0 || $this->k46_sequencial == "") ){ 
        $this->erro_sql = " Campo k46_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_cadtipomod {
    function sql_query ( $k46_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_cadtipomod {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_cadtipomod {
    function sql_query_file ( $k46_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_cadtipomod {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -34,7 +34,7 @@ class FileDialog
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function FileDialog($title, $filter = null, $extrabutton = null, $firstdir = null, $Action = null, $Parameter = null, $Networks = null)
+    function __construct($title, $filter = null, $extrabutton = null, $firstdir = null, $Action = null, $Parameter = null, $Networks = null)
     {
         global $Pixmaps;
         
@@ -322,7 +322,7 @@ class FileDialog
         $EntryPath = $this->EntryPath;
         $file = $EntryPath->get_text();
         
-        if (eregi("[*]", $file))
+        if (preg_match("#[*]#i", $file))
         {
             new Dialog(_a('Contain illegal characters'));
         }
@@ -512,7 +512,7 @@ class DirListing extends GtkCList
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function DirListing($gdkwindow, $array)
+    function __construct($gdkwindow, $array)
     {
         GtkCList::GtkCList(count($array), $array);
         GtkCList::connect_object('select-row', array($this, 'GoDir'));

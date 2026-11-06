@@ -52,7 +52,7 @@ class cl_averbadecisaojudicial {
                  j101_processojudicial = varchar(20) = Processo Judicial 
                  ";
    //funcao construtor da classe 
-   function cl_averbadecisaojudicial() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("averbadecisaojudicial"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_averbadecisaojudicial {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j101_sequencial = ($this->j101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j101_sequencial"]:$this->j101_sequencial);
-       $this->j101_averbacao = ($this->j101_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j101_averbacao"]:$this->j101_averbacao);
+       $this->j101_sequencial = ($this->j101_sequencial === 0 || $this->j101_sequencial === 0.0 || $this->j101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j101_sequencial"]:$this->j101_sequencial);
+       $this->j101_averbacao = ($this->j101_averbacao === 0 || $this->j101_averbacao === 0.0 || $this->j101_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j101_averbacao"]:$this->j101_averbacao);
        $this->j101_processojudicial = ($this->j101_processojudicial == ""?@$GLOBALS["HTTP_POST_VARS"]["j101_processojudicial"]:$this->j101_processojudicial);
      }else{
-       $this->j101_sequencial = ($this->j101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j101_sequencial"]:$this->j101_sequencial);
+       $this->j101_sequencial = ($this->j101_sequencial === 0 || $this->j101_sequencial === 0.0 || $this->j101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j101_sequencial"]:$this->j101_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_averbadecisaojudicial {
          $this->j101_sequencial = $j101_sequencial; 
        }
      }
-     if(($this->j101_sequencial == null) || ($this->j101_sequencial == "") ){ 
+     if(($this->j101_sequencial == null) || ($this->j101_sequencial === 0 || $this->j101_sequencial === 0.0 || $this->j101_sequencial == "") ){ 
        $this->erro_sql = " Campo j101_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_averbadecisaojudicial {
    function sql_query ( $j101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_averbadecisaojudicial {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_averbadecisaojudicial {
    function sql_query_file ( $j101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_averbadecisaojudicial {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

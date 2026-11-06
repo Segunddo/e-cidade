@@ -52,7 +52,7 @@ class cl_certidcartorio {
                  v31_cartorio = int4 = Cartório
                  ";
    //funcao construtor da classe
-   function cl_certidcartorio() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("certidcartorio");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_certidcartorio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v31_sequencial = ($this->v31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v31_sequencial"]:$this->v31_sequencial);
-       $this->v31_certid = ($this->v31_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v31_certid"]:$this->v31_certid);
-       $this->v31_cartorio = ($this->v31_cartorio == ""?@$GLOBALS["HTTP_POST_VARS"]["v31_cartorio"]:$this->v31_cartorio);
+       $this->v31_sequencial = ($this->v31_sequencial === 0 || $this->v31_sequencial === 0.0 || $this->v31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v31_sequencial"]:$this->v31_sequencial);
+       $this->v31_certid = ($this->v31_certid === 0 || $this->v31_certid === 0.0 || $this->v31_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v31_certid"]:$this->v31_certid);
+       $this->v31_cartorio = ($this->v31_cartorio === 0 || $this->v31_cartorio === 0.0 || $this->v31_cartorio == ""?@$GLOBALS["HTTP_POST_VARS"]["v31_cartorio"]:$this->v31_cartorio);
      }else{
-       $this->v31_sequencial = ($this->v31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v31_sequencial"]:$this->v31_sequencial);
+       $this->v31_sequencial = ($this->v31_sequencial === 0 || $this->v31_sequencial === 0.0 || $this->v31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v31_sequencial"]:$this->v31_sequencial);
      }
    }
    // funcao para Inclusão
@@ -121,7 +121,7 @@ class cl_certidcartorio {
          $this->v31_sequencial = $v31_sequencial;
        }
      }
-     if(($this->v31_sequencial == null) || ($this->v31_sequencial == "") ){
+     if(($this->v31_sequencial == null) || ($this->v31_sequencial === 0 || $this->v31_sequencial === 0.0 || $this->v31_sequencial == "") ){
        $this->erro_sql = " Campo v31_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

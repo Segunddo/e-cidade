@@ -47,7 +47,7 @@ define('DB_BIBLIOT', true);
 
 require_once(modification("fpdf151/scpdf.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clrotulo = new rotulocampo;
@@ -559,7 +559,7 @@ if (isset($_GET["lista"])) {
             $resultender = db_query($sqlender);
             db_fieldsmemory($resultender, 0);
 
-            $endereco = split("#", $fc_iptuender);
+            $endereco = explode("#", $fc_iptuender);
 
             if (sizeof($endereco) < 7) {
                 $z01_ender = "";

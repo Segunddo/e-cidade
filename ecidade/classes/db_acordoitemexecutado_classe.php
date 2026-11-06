@@ -73,7 +73,7 @@ class cl_acordoitemexecutado {
                  ac29_datafinal = date = Data Final
                  ";
    //funcao construtor da classe
-   function cl_acordoitemexecutado() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoitemexecutado");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,11 +90,11 @@ class cl_acordoitemexecutado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac29_sequencial = ($this->ac29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_sequencial"]:$this->ac29_sequencial);
-       $this->ac29_acordoitem = ($this->ac29_acordoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_acordoitem"]:$this->ac29_acordoitem);
-       $this->ac29_quantidade = ($this->ac29_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_quantidade"]:$this->ac29_quantidade);
-       $this->ac29_valor = ($this->ac29_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_valor"]:$this->ac29_valor);
-       $this->ac29_tipo = ($this->ac29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_tipo"]:$this->ac29_tipo);
+       $this->ac29_sequencial = ($this->ac29_sequencial === 0 || $this->ac29_sequencial === 0.0 || $this->ac29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_sequencial"]:$this->ac29_sequencial);
+       $this->ac29_acordoitem = ($this->ac29_acordoitem === 0 || $this->ac29_acordoitem === 0.0 || $this->ac29_acordoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_acordoitem"]:$this->ac29_acordoitem);
+       $this->ac29_quantidade = ($this->ac29_quantidade === 0 || $this->ac29_quantidade === 0.0 || $this->ac29_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_quantidade"]:$this->ac29_quantidade);
+       $this->ac29_valor = ($this->ac29_valor === 0 || $this->ac29_valor === 0.0 || $this->ac29_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_valor"]:$this->ac29_valor);
+       $this->ac29_tipo = ($this->ac29_tipo === 0 || $this->ac29_tipo === 0.0 || $this->ac29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_tipo"]:$this->ac29_tipo);
        $this->ac29_automatico = ($this->ac29_automatico == "f"?@$GLOBALS["HTTP_POST_VARS"]["ac29_automatico"]:$this->ac29_automatico);
        $this->ac29_numeroprocesso = ($this->ac29_numeroprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_numeroprocesso"]:$this->ac29_numeroprocesso);
        $this->ac29_notafiscal = ($this->ac29_notafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_notafiscal"]:$this->ac29_notafiscal);
@@ -116,7 +116,7 @@ class cl_acordoitemexecutado {
          }
        }
      }else{
-       $this->ac29_sequencial = ($this->ac29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_sequencial"]:$this->ac29_sequencial);
+       $this->ac29_sequencial = ($this->ac29_sequencial === 0 || $this->ac29_sequencial === 0.0 || $this->ac29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac29_sequencial"]:$this->ac29_sequencial);
      }
    }
    // funcao para Inclusão
@@ -209,7 +209,7 @@ class cl_acordoitemexecutado {
          $this->ac29_sequencial = $ac29_sequencial;
        }
      }
-     if(($this->ac29_sequencial == null) || ($this->ac29_sequencial == "") ){
+     if(($this->ac29_sequencial == null) || ($this->ac29_sequencial === 0 || $this->ac29_sequencial === 0.0 || $this->ac29_sequencial == "") ){
        $this->erro_sql = " Campo ac29_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

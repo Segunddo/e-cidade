@@ -52,7 +52,7 @@ class cl_atividadeimpactoporte {
                  am04_porteatividadeimpacto = int4 = Porte 
                  ";
    //funcao construtor da classe 
-   function cl_atividadeimpactoporte() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("atividadeimpactoporte"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_atividadeimpactoporte {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am04_sequencial = ($this->am04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am04_sequencial"]:$this->am04_sequencial);
-       $this->am04_atividadeimpacto = ($this->am04_atividadeimpacto == ""?@$GLOBALS["HTTP_POST_VARS"]["am04_atividadeimpacto"]:$this->am04_atividadeimpacto);
-       $this->am04_porteatividadeimpacto = ($this->am04_porteatividadeimpacto == ""?@$GLOBALS["HTTP_POST_VARS"]["am04_porteatividadeimpacto"]:$this->am04_porteatividadeimpacto);
+       $this->am04_sequencial = ($this->am04_sequencial === 0 || $this->am04_sequencial === 0.0 || $this->am04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am04_sequencial"]:$this->am04_sequencial);
+       $this->am04_atividadeimpacto = ($this->am04_atividadeimpacto === 0 || $this->am04_atividadeimpacto === 0.0 || $this->am04_atividadeimpacto == ""?@$GLOBALS["HTTP_POST_VARS"]["am04_atividadeimpacto"]:$this->am04_atividadeimpacto);
+       $this->am04_porteatividadeimpacto = ($this->am04_porteatividadeimpacto === 0 || $this->am04_porteatividadeimpacto === 0.0 || $this->am04_porteatividadeimpacto == ""?@$GLOBALS["HTTP_POST_VARS"]["am04_porteatividadeimpacto"]:$this->am04_porteatividadeimpacto);
      }else{
-       $this->am04_sequencial = ($this->am04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am04_sequencial"]:$this->am04_sequencial);
+       $this->am04_sequencial = ($this->am04_sequencial === 0 || $this->am04_sequencial === 0.0 || $this->am04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am04_sequencial"]:$this->am04_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_atividadeimpactoporte {
          $this->am04_sequencial = $am04_sequencial; 
        }
      }
-     if(($this->am04_sequencial == null) || ($this->am04_sequencial == "") ){ 
+     if(($this->am04_sequencial == null) || ($this->am04_sequencial === 0 || $this->am04_sequencial === 0.0 || $this->am04_sequencial == "") ){ 
        $this->erro_sql = " Campo am04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

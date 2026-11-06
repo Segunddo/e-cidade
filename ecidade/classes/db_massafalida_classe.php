@@ -57,7 +57,7 @@ class cl_massafalida {
                  j58_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_massafalida() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("massafalida"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,7 +74,7 @@ class cl_massafalida {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j58_codigo = ($this->j58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j58_codigo"]:$this->j58_codigo);
+       $this->j58_codigo = ($this->j58_codigo === 0 || $this->j58_codigo === 0.0 || $this->j58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j58_codigo"]:$this->j58_codigo);
        if($this->j58_data == ""){
          $this->j58_data_dia = ($this->j58_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j58_data_dia"]:$this->j58_data_dia);
          $this->j58_data_mes = ($this->j58_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j58_data_mes"]:$this->j58_data_mes);
@@ -83,10 +83,10 @@ class cl_massafalida {
             $this->j58_data = $this->j58_data_ano."-".$this->j58_data_mes."-".$this->j58_data_dia;
          }
        }
-       $this->j58_numcgm = ($this->j58_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j58_numcgm"]:$this->j58_numcgm);
+       $this->j58_numcgm = ($this->j58_numcgm === 0 || $this->j58_numcgm === 0.0 || $this->j58_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j58_numcgm"]:$this->j58_numcgm);
        $this->j58_obs = ($this->j58_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["j58_obs"]:$this->j58_obs);
      }else{
-       $this->j58_codigo = ($this->j58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j58_codigo"]:$this->j58_codigo);
+       $this->j58_codigo = ($this->j58_codigo === 0 || $this->j58_codigo === 0.0 || $this->j58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j58_codigo"]:$this->j58_codigo);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_massafalida {
          $this->j58_codigo = $j58_codigo; 
        }
      }
-     if(($this->j58_codigo == null) || ($this->j58_codigo == "") ){ 
+     if(($this->j58_codigo == null) || ($this->j58_codigo === 0 || $this->j58_codigo === 0.0 || $this->j58_codigo == "") ){ 
        $this->erro_sql = " Campo j58_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -414,7 +414,7 @@ class cl_massafalida {
    function sql_query ( $j58_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_massafalida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_massafalida {
    function sql_query_file ( $j58_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_massafalida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

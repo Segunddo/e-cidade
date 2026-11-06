@@ -55,7 +55,7 @@ class cl_tiafprazo {
                  y96_prazo = date = Data do prazo 
                  ";
    //funcao construtor da classe 
-   function cl_tiafprazo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tiafprazo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,8 +72,8 @@ class cl_tiafprazo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y96_codigo = ($this->y96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
-       $this->y96_codtiaf = ($this->y96_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codtiaf"]:$this->y96_codtiaf);
+       $this->y96_codigo = (($this->y96_codigo === 0 || $this->y96_codigo === 0.0 || $this->y96_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
+       $this->y96_codtiaf = (($this->y96_codtiaf === 0 || $this->y96_codtiaf === 0.0 || $this->y96_codtiaf == "")?@$GLOBALS["HTTP_POST_VARS"]["y96_codtiaf"]:$this->y96_codtiaf);
        if($this->y96_prazo == ""){
          $this->y96_prazo_dia = ($this->y96_prazo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_prazo_dia"]:$this->y96_prazo_dia);
          $this->y96_prazo_mes = ($this->y96_prazo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_prazo_mes"]:$this->y96_prazo_mes);
@@ -83,7 +83,7 @@ class cl_tiafprazo {
          }
        }
      }else{
-       $this->y96_codigo = ($this->y96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
+       $this->y96_codigo = (($this->y96_codigo === 0 || $this->y96_codigo === 0.0 || $this->y96_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_tiafprazo {
          $this->y96_codigo = $y96_codigo; 
        }
      }
-     if(($this->y96_codigo == null) || ($this->y96_codigo == "") ){ 
+     if(($this->y96_codigo == null) || (($this->y96_codigo === 0 || $this->y96_codigo === 0.0 || $this->y96_codigo == "")) ){ 
        $this->erro_sql = " Campo y96_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -383,7 +383,7 @@ class cl_tiafprazo {
    function sql_query ( $y96_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_tiafprazo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_tiafprazo {
    function sql_query_file ( $y96_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_tiafprazo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_tiafprazo {
    function sql_queryproc ( $y96_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_tiafprazo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

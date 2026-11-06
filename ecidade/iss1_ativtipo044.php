@@ -80,7 +80,7 @@ if ((isset($q81_codigo) && $q81_codigo!="") && (isset($atualizar))){
   for($i=0; $i<$ta; $i++){
     $chave=key($vt);
     if(substr($chave,0,5)=="CHECK"){
-      $dados=split("_",$chave); 
+      $dados=preg_split("#_#m",$chave); 
       $clativtipo->q80_ativ=$dados[1];
       $clativtipo->q80_tipcal=$q81_codigo;
       $clativtipo->incluir($dados[1],$q81_codigo);

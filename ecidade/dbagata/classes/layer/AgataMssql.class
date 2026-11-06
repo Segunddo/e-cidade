@@ -108,7 +108,7 @@ class AgataMssql
      */
     function FreeResult($result)
     {
-        if (is_resource($result))
+        if ((is_resource($result) || is_object($result)))
         {
             return @mssql_free_result($result);
         }

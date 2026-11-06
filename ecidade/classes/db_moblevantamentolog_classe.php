@@ -72,7 +72,7 @@ class cl_moblevantamentolog {
                  j98_lixo = varchar(1) = Coleta Lixo 
                  ";
    //funcao construtor da classe 
-   function cl_moblevantamentolog() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("moblevantamentolog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,12 +89,12 @@ class cl_moblevantamentolog {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j98_sequen = ($this->j98_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_sequen"]:$this->j98_sequen);
-       $this->j98_codimporta = ($this->j98_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_codimporta"]:$this->j98_codimporta);
-       $this->j98_matric = ($this->j98_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_matric"]:$this->j98_matric);
-       $this->j98_codigo = ($this->j98_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_codigo"]:$this->j98_codigo);
+       $this->j98_sequen = ($this->j98_sequen === 0 || $this->j98_sequen === 0.0 || $this->j98_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_sequen"]:$this->j98_sequen);
+       $this->j98_codimporta = ($this->j98_codimporta === 0 || $this->j98_codimporta === 0.0 || $this->j98_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_codimporta"]:$this->j98_codimporta);
+       $this->j98_matric = ($this->j98_matric === 0 || $this->j98_matric === 0.0 || $this->j98_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_matric"]:$this->j98_matric);
+       $this->j98_codigo = ($this->j98_codigo === 0 || $this->j98_codigo === 0.0 || $this->j98_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_codigo"]:$this->j98_codigo);
        $this->j98_testada = ($this->j98_testada == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_testada"]:$this->j98_testada);
-       $this->j98_pavim = ($this->j98_pavim == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_pavim"]:$this->j98_pavim);
+       $this->j98_pavim = ($this->j98_pavim === 0 || $this->j98_pavim === 0.0 || $this->j98_pavim == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_pavim"]:$this->j98_pavim);
        $this->j98_agua = ($this->j98_agua == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_agua"]:$this->j98_agua);
        $this->j98_esgoto = ($this->j98_esgoto == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_esgoto"]:$this->j98_esgoto);
        $this->j98_eletrica = ($this->j98_eletrica == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_eletrica"]:$this->j98_eletrica);
@@ -103,7 +103,7 @@ class cl_moblevantamentolog {
        $this->j98_telefonia = ($this->j98_telefonia == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_telefonia"]:$this->j98_telefonia);
        $this->j98_lixo = ($this->j98_lixo == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_lixo"]:$this->j98_lixo);
      }else{
-       $this->j98_sequen = ($this->j98_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_sequen"]:$this->j98_sequen);
+       $this->j98_sequen = ($this->j98_sequen === 0 || $this->j98_sequen === 0.0 || $this->j98_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_sequen"]:$this->j98_sequen);
      }
    }
    // funcao para inclusao
@@ -241,7 +241,7 @@ class cl_moblevantamentolog {
          $this->j98_sequen = $j98_sequen; 
        }
      }
-     if(($this->j98_sequen == null) || ($this->j98_sequen == "") ){ 
+     if(($this->j98_sequen == null) || ($this->j98_sequen === 0 || $this->j98_sequen === 0.0 || $this->j98_sequen == "") ){ 
        $this->erro_sql = " Campo j98_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -669,7 +669,7 @@ class cl_moblevantamentolog {
    function sql_query ( $j98_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -692,7 +692,7 @@ class cl_moblevantamentolog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -704,7 +704,7 @@ class cl_moblevantamentolog {
    function sql_query_file ( $j98_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -725,7 +725,7 @@ class cl_moblevantamentolog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

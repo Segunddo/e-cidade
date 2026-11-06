@@ -70,7 +70,7 @@ class cl_ossoariopart {
                  cm02_d_entrada = date = Entrada
                  ";
    //funcao construtor da classe
-   function cl_ossoariopart() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ossoariopart");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,13 +87,13 @@ class cl_ossoariopart {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm02_i_codigo = ($this->cm02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm02_i_codigo"]:$this->cm02_i_codigo);
-       $this->cm02_i_processo = ($this->cm02_i_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm02_i_processo"]:$this->cm02_i_processo);
-       $this->cm02_i_proprietario = ($this->cm02_i_proprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm02_i_proprietario"]:$this->cm02_i_proprietario);
+       $this->cm02_i_codigo = (($this->cm02_i_codigo === 0 || $this->cm02_i_codigo === 0.0 || $this->cm02_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm02_i_codigo"]:$this->cm02_i_codigo);
+       $this->cm02_i_processo = (($this->cm02_i_processo === 0 || $this->cm02_i_processo === 0.0 || $this->cm02_i_processo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm02_i_processo"]:$this->cm02_i_processo);
+       $this->cm02_i_proprietario = (($this->cm02_i_proprietario === 0 || $this->cm02_i_proprietario === 0.0 || $this->cm02_i_proprietario == "")?@$GLOBALS["HTTP_POST_VARS"]["cm02_i_proprietario"]:$this->cm02_i_proprietario);
        $this->cm02_c_quadra = ($this->cm02_c_quadra == ""?@$GLOBALS["HTTP_POST_VARS"]["cm02_c_quadra"]:$this->cm02_c_quadra);
-       $this->cm02_i_lote = ($this->cm02_i_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["cm02_i_lote"]:$this->cm02_i_lote);
-       $this->cm02_f_metragem1 = ($this->cm02_f_metragem1 == ""?@$GLOBALS["HTTP_POST_VARS"]["cm02_f_metragem1"]:$this->cm02_f_metragem1);
-       $this->cm02_f_metragem2 = ($this->cm02_f_metragem2 == ""?@$GLOBALS["HTTP_POST_VARS"]["cm02_f_metragem2"]:$this->cm02_f_metragem2);
+       $this->cm02_i_lote = (($this->cm02_i_lote === 0 || $this->cm02_i_lote === 0.0 || $this->cm02_i_lote == "")?@$GLOBALS["HTTP_POST_VARS"]["cm02_i_lote"]:$this->cm02_i_lote);
+       $this->cm02_f_metragem1 = (($this->cm02_f_metragem1 === 0 || $this->cm02_f_metragem1 === 0.0 || $this->cm02_f_metragem1 == "")?@$GLOBALS["HTTP_POST_VARS"]["cm02_f_metragem1"]:$this->cm02_f_metragem1);
+       $this->cm02_f_metragem2 = (($this->cm02_f_metragem2 === 0 || $this->cm02_f_metragem2 === 0.0 || $this->cm02_f_metragem2 == "")?@$GLOBALS["HTTP_POST_VARS"]["cm02_f_metragem2"]:$this->cm02_f_metragem2);
        if($this->cm02_d_aquisicao == ""){
          $this->cm02_d_aquisicao_dia = ($this->cm02_d_aquisicao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm02_d_aquisicao_dia"]:$this->cm02_d_aquisicao_dia);
          $this->cm02_d_aquisicao_mes = ($this->cm02_d_aquisicao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm02_d_aquisicao_mes"]:$this->cm02_d_aquisicao_mes);
@@ -111,7 +111,7 @@ class cl_ossoariopart {
          }
        }
      }else{
-       $this->cm02_i_codigo = ($this->cm02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm02_i_codigo"]:$this->cm02_i_codigo);
+       $this->cm02_i_codigo = (($this->cm02_i_codigo === 0 || $this->cm02_i_codigo === 0.0 || $this->cm02_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm02_i_codigo"]:$this->cm02_i_codigo);
      }
    }
    // funcao para inclusao
@@ -213,7 +213,7 @@ class cl_ossoariopart {
          $this->cm02_i_codigo = $cm02_i_codigo;
        }
      }
-     if(($this->cm02_i_codigo == null) || ($this->cm02_i_codigo == "") ){
+     if(($this->cm02_i_codigo == null) || (($this->cm02_i_codigo === 0 || $this->cm02_i_codigo === 0.0 || $this->cm02_i_codigo == "")) ){
        $this->erro_sql = " Campo cm02_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -593,7 +593,7 @@ class cl_ossoariopart {
    function sql_query ( $cm02_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -620,7 +620,7 @@ class cl_ossoariopart {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -632,7 +632,7 @@ class cl_ossoariopart {
    function sql_query_file ( $cm02_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -653,7 +653,7 @@ class cl_ossoariopart {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

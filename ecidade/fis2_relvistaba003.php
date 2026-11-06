@@ -53,7 +53,7 @@ $clrotulo->label("y10_codigo");
 $clrotulo->label("y10_codi");
 $clrotulo->label("y11_codigo");
 $clrotulo->label("y11_codi");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 ?>
 <html>

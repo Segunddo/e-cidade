@@ -38,7 +38,7 @@ db_postmemory($HTTP_POST_VARS);
 
 $get = db_utils::postMemory($_GET);
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 $cldivida = new cl_divida;
 $cIptubase = new cl_iptubase;
 $clrotulo = new rotulocampo;

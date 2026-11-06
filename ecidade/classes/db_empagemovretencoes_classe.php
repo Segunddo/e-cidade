@@ -49,13 +49,13 @@ class cl_empagemovretencoes
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e145_codigo = ($this->e145_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_codigo"] : $this->e145_codigo);
-            $this->e145_pagordem_id = ($this->e145_pagordem_id == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_pagordem_id"] : $this->e145_pagordem_id);
-            $this->e145_movimento_original = ($this->e145_movimento_original == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_movimento_original"] : $this->e145_movimento_original);
-            $this->e145_movimento_retencao = ($this->e145_movimento_retencao == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_movimento_retencao"] : $this->e145_movimento_retencao);
-            $this->e145_valor_retencao = ($this->e145_valor_retencao == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_valor_retencao"] : $this->e145_valor_retencao);
+            $this->e145_codigo = ($this->e145_codigo === 0 || $this->e145_codigo === 0.0 || $this->e145_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_codigo"] : $this->e145_codigo);
+            $this->e145_pagordem_id = ($this->e145_pagordem_id === 0 || $this->e145_pagordem_id === 0.0 || $this->e145_pagordem_id == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_pagordem_id"] : $this->e145_pagordem_id);
+            $this->e145_movimento_original = ($this->e145_movimento_original === 0 || $this->e145_movimento_original === 0.0 || $this->e145_movimento_original == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_movimento_original"] : $this->e145_movimento_original);
+            $this->e145_movimento_retencao = ($this->e145_movimento_retencao === 0 || $this->e145_movimento_retencao === 0.0 || $this->e145_movimento_retencao == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_movimento_retencao"] : $this->e145_movimento_retencao);
+            $this->e145_valor_retencao = ($this->e145_valor_retencao === 0 || $this->e145_valor_retencao === 0.0 || $this->e145_valor_retencao == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_valor_retencao"] : $this->e145_valor_retencao);
         } else {
-            $this->e145_codigo = ($this->e145_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_codigo"] : $this->e145_codigo);
+            $this->e145_codigo = ($this->e145_codigo === 0 || $this->e145_codigo === 0.0 || $this->e145_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e145_codigo"] : $this->e145_codigo);
         }
     }
 
@@ -122,7 +122,7 @@ class cl_empagemovretencoes
                 $this->e145_codigo = $e145_codigo;
             }
         }
-        if (($this->e145_codigo == null) || ($this->e145_codigo == "")) {
+        if (($this->e145_codigo == null) || ($this->e145_codigo === 0 || $this->e145_codigo === 0.0 || $this->e145_codigo == "")) {
             $this->erro_sql = " Campo e145_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

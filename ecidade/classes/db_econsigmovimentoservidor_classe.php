@@ -57,7 +57,7 @@ class cl_econsigmovimentoservidor {
                  rh134_nome = varchar(50) = Nome do Servidor 
                  ";
    //funcao construtor da classe 
-   function cl_econsigmovimentoservidor() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("econsigmovimentoservidor"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,13 +74,13 @@ class cl_econsigmovimentoservidor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh134_sequencial = ($this->rh134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_sequencial"]:$this->rh134_sequencial);
-       $this->rh134_econsigmovimento = ($this->rh134_econsigmovimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_econsigmovimento"]:$this->rh134_econsigmovimento);
-       $this->rh134_regist = ($this->rh134_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_regist"]:$this->rh134_regist);
-       $this->rh134_econsigmotivo = ($this->rh134_econsigmotivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_econsigmotivo"]:$this->rh134_econsigmotivo);
+       $this->rh134_sequencial = ($this->rh134_sequencial === 0 || $this->rh134_sequencial === 0.0 || $this->rh134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_sequencial"]:$this->rh134_sequencial);
+       $this->rh134_econsigmovimento = ($this->rh134_econsigmovimento === 0 || $this->rh134_econsigmovimento === 0.0 || $this->rh134_econsigmovimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_econsigmovimento"]:$this->rh134_econsigmovimento);
+       $this->rh134_regist = ($this->rh134_regist === 0 || $this->rh134_regist === 0.0 || $this->rh134_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_regist"]:$this->rh134_regist);
+       $this->rh134_econsigmotivo = ($this->rh134_econsigmotivo === 0 || $this->rh134_econsigmotivo === 0.0 || $this->rh134_econsigmotivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_econsigmotivo"]:$this->rh134_econsigmotivo);
        $this->rh134_nome = ($this->rh134_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_nome"]:$this->rh134_nome);
      }else{
-       $this->rh134_sequencial = ($this->rh134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_sequencial"]:$this->rh134_sequencial);
+       $this->rh134_sequencial = ($this->rh134_sequencial === 0 || $this->rh134_sequencial === 0.0 || $this->rh134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh134_sequencial"]:$this->rh134_sequencial);
      }
    }
    // funcao para inclusao
@@ -137,7 +137,7 @@ class cl_econsigmovimentoservidor {
          $this->rh134_sequencial = $rh134_sequencial; 
        }
      }
-     if(($this->rh134_sequencial == null) || ($this->rh134_sequencial == "") ){ 
+     if(($this->rh134_sequencial == null) || ($this->rh134_sequencial === 0 || $this->rh134_sequencial === 0.0 || $this->rh134_sequencial == "") ){ 
        $this->erro_sql = " Campo rh134_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

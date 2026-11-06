@@ -49,13 +49,13 @@ class cl_avaliacaogruporespostarhpessoal
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->eso02_sequencial = ($this->eso02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso02_sequencial"]:$this->eso02_sequencial);
-       $this->eso02_avaliacaogruporesposta = ($this->eso02_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["eso02_avaliacaogruporesposta"]:$this->eso02_avaliacaogruporesposta);
-       $this->eso02_rhpessoal = ($this->eso02_rhpessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["eso02_rhpessoal"]:$this->eso02_rhpessoal);
-         $this->eso02_empregador = ($this->eso02_empregador == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso02_empregador"] : $this->eso02_empregador);
-         $this->eso02_avaliacao = ($this->eso02_avaliacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso02_avaliacao"] : $this->eso02_avaliacao);
+       $this->eso02_sequencial = ($this->eso02_sequencial === 0 || $this->eso02_sequencial === 0.0 || $this->eso02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso02_sequencial"]:$this->eso02_sequencial);
+       $this->eso02_avaliacaogruporesposta = ($this->eso02_avaliacaogruporesposta === 0 || $this->eso02_avaliacaogruporesposta === 0.0 || $this->eso02_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["eso02_avaliacaogruporesposta"]:$this->eso02_avaliacaogruporesposta);
+       $this->eso02_rhpessoal = ($this->eso02_rhpessoal === 0 || $this->eso02_rhpessoal === 0.0 || $this->eso02_rhpessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["eso02_rhpessoal"]:$this->eso02_rhpessoal);
+         $this->eso02_empregador = ($this->eso02_empregador === 0 || $this->eso02_empregador === 0.0 || $this->eso02_empregador == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso02_empregador"] : $this->eso02_empregador);
+         $this->eso02_avaliacao = ($this->eso02_avaliacao === 0 || $this->eso02_avaliacao === 0.0 || $this->eso02_avaliacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso02_avaliacao"] : $this->eso02_avaliacao);
      }else{
-       $this->eso02_sequencial = ($this->eso02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso02_sequencial"]:$this->eso02_sequencial);
+       $this->eso02_sequencial = ($this->eso02_sequencial === 0 || $this->eso02_sequencial === 0.0 || $this->eso02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso02_sequencial"]:$this->eso02_sequencial);
      }
    }
 
@@ -124,7 +124,7 @@ class cl_avaliacaogruporespostarhpessoal
            $this->eso02_sequencial = $eso02_sequencial;
        }
      }
-        if (($this->eso02_sequencial == null) || ($this->eso02_sequencial == "")) {
+        if (($this->eso02_sequencial == null) || ($this->eso02_sequencial === 0 || $this->eso02_sequencial === 0.0 || $this->eso02_sequencial == "")) {
        $this->erro_sql = " Campo eso02_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

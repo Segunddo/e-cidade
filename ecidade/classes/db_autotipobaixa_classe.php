@@ -50,7 +50,7 @@ class cl_autotipobaixa {
                  y86_codbaixaproc = int4 = Codigo da Baixa da Procedência do auto 
                  ";
    //funcao construtor da classe 
-   function cl_autotipobaixa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("autotipobaixa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_autotipobaixa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y86_codautotipo = ($this->y86_codautotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y86_codautotipo"]:$this->y86_codautotipo);
-       $this->y86_codbaixaproc = ($this->y86_codbaixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y86_codbaixaproc"]:$this->y86_codbaixaproc);
+       $this->y86_codautotipo = (($this->y86_codautotipo === 0 || $this->y86_codautotipo === 0.0 || $this->y86_codautotipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y86_codautotipo"]:$this->y86_codautotipo);
+       $this->y86_codbaixaproc = (($this->y86_codbaixaproc === 0 || $this->y86_codbaixaproc === 0.0 || $this->y86_codbaixaproc == "")?@$GLOBALS["HTTP_POST_VARS"]["y86_codbaixaproc"]:$this->y86_codbaixaproc);
      }else{
-       $this->y86_codautotipo = ($this->y86_codautotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y86_codautotipo"]:$this->y86_codautotipo);
+       $this->y86_codautotipo = (($this->y86_codautotipo === 0 || $this->y86_codautotipo === 0.0 || $this->y86_codautotipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y86_codautotipo"]:$this->y86_codautotipo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_autotipobaixa {
        return false;
      }
        $this->y86_codautotipo = $y86_codautotipo; 
-     if(($this->y86_codautotipo == null) || ($this->y86_codautotipo == "") ){ 
+     if(($this->y86_codautotipo == null) || (($this->y86_codautotipo === 0 || $this->y86_codautotipo === 0.0 || $this->y86_codautotipo == "")) ){ 
        $this->erro_sql = " Campo y86_codautotipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_autotipobaixa {
    function sql_query ( $y86_codautotipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -333,7 +333,7 @@ class cl_autotipobaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -345,7 +345,7 @@ class cl_autotipobaixa {
    function sql_query_file ( $y86_codautotipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -366,7 +366,7 @@ class cl_autotipobaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

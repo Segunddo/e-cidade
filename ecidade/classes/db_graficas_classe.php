@@ -60,7 +60,7 @@ class cl_graficas {
                  y20_datalimiteimpressao = date = Data limite de impressão fiscal 
                  ";
    //funcao construtor da classe 
-   function cl_graficas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("graficas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,8 +77,8 @@ class cl_graficas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y20_grafica = ($this->y20_grafica == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_grafica"]:$this->y20_grafica);
-       $this->y20_id_usuario = ($this->y20_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_id_usuario"]:$this->y20_id_usuario);
+       $this->y20_grafica = (($this->y20_grafica === 0 || $this->y20_grafica === 0.0 || $this->y20_grafica == "")?@$GLOBALS["HTTP_POST_VARS"]["y20_grafica"]:$this->y20_grafica);
+       $this->y20_id_usuario = (($this->y20_id_usuario === 0 || $this->y20_id_usuario === 0.0 || $this->y20_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["y20_id_usuario"]:$this->y20_id_usuario);
        if($this->y20_data == ""){
          $this->y20_data_dia = ($this->y20_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_data_dia"]:$this->y20_data_dia);
          $this->y20_data_mes = ($this->y20_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_data_mes"]:$this->y20_data_mes);
@@ -96,7 +96,7 @@ class cl_graficas {
          }
        }
      }else{
-       $this->y20_grafica = ($this->y20_grafica == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_grafica"]:$this->y20_grafica);
+       $this->y20_grafica = (($this->y20_grafica === 0 || $this->y20_grafica === 0.0 || $this->y20_grafica == "")?@$GLOBALS["HTTP_POST_VARS"]["y20_grafica"]:$this->y20_grafica);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_graficas {
        $this->y20_datalimiteimpressao = "null";
      }
        $this->y20_grafica = $y20_grafica; 
-     if(($this->y20_grafica == null) || ($this->y20_grafica == "") ){ 
+     if(($this->y20_grafica == null) || (($this->y20_grafica === 0 || $this->y20_grafica === 0.0 || $this->y20_grafica == "")) ){ 
        $this->erro_sql = " Campo y20_grafica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -414,7 +414,7 @@ class cl_graficas {
    function sql_query ( $y20_grafica=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_graficas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_graficas {
    function sql_query_file ( $y20_grafica=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_graficas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

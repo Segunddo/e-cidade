@@ -739,7 +739,7 @@ class Lancamento extends BaseClassRepository
             /**
              * Quando a receita for de dedução, devemos inverter o valor para deduzir do grupo.
              */
-            if ($dado->sigla == Model\InformacaoComplementar::INFO_COMP_TIPO_NR && $valor{1} == 9) {
+            if ($dado->sigla == Model\InformacaoComplementar::INFO_COMP_TIPO_NR && $valor[1] == 9) {
                 $lancamento->valor = $lancamento->valor * -1;
             }
             // removido substr pois deve ser realizado o mapeamento com o plano do governo

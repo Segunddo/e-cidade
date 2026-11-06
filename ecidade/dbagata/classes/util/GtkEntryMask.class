@@ -36,7 +36,7 @@ class GtkEntryMask extends GtkEntry
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function GtkEntryMask($mask)
+    function __construct($mask)
     {
         GtkEntry::GtkEntry();
         GtkEntry::set_max_length(strlen(trim($mask)));
@@ -114,15 +114,15 @@ class GtkEntryMask extends GtkEntry
         # en: matches the typed char with the mask char
         # pt: compara o caracter digitado com o da máscara
         if ($mask_char == '9')
-            $valid = ereg("([0-9])", $text_char);
+            $valid = preg_match("#([0-9])#", $text_char);
         elseif ($mask_char == 'a')
-            $valid = ereg("([a-z])", $text_char);
+            $valid = preg_match("#([a-z])#", $text_char);
         elseif ($mask_char == 'A')
-            $valid = ereg("([A-Z])", $text_char);
+            $valid = preg_match("#([A-Z])#", $text_char);
         elseif ($mask_char == 'X')
-            $valid = (ereg("([a-z])", $text_char) or
-                    ereg("([A-Z])", $text_char) or
-                    ereg("([0-9])", $text_char));
+            $valid = (preg_match("#([a-z])#", $text_char) or
+                    preg_match("#([A-Z])#", $text_char) or
+                    preg_match("#([0-9])#", $text_char));
 
         # en: if not valid, removes this last typed char
         # pt: se não válido, remove este último caracter

@@ -25,7 +25,7 @@
  *                                licenca/licenca_pt.txt 
  */
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 if(!isset($abas)){
   echo "<script>location.href='fis3_fandam005.php?db_opcao=2'</script>";
   exit;
@@ -41,7 +41,7 @@ include(modification("classes/db_tipovistorias_classe.php"));
 include(modification("classes/db_fandamusu_classe.php"));
 include(modification("classes/db_fandam_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clvistorias     = new cl_vistorias;
 $clvistusuario   = new cl_vistusuario;

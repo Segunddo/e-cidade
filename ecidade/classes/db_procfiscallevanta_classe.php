@@ -52,7 +52,7 @@ class cl_procfiscallevanta {
                  y112_levanta = int4 = Levantamento 
                  ";
    //funcao construtor da classe 
-   function cl_procfiscallevanta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procfiscallevanta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_procfiscallevanta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y112_sequencial = ($this->y112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_sequencial"]:$this->y112_sequencial);
-       $this->y112_procfiscal = ($this->y112_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_procfiscal"]:$this->y112_procfiscal);
-       $this->y112_levanta = ($this->y112_levanta == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_levanta"]:$this->y112_levanta);
+       $this->y112_sequencial = (($this->y112_sequencial === 0 || $this->y112_sequencial === 0.0 || $this->y112_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y112_sequencial"]:$this->y112_sequencial);
+       $this->y112_procfiscal = (($this->y112_procfiscal === 0 || $this->y112_procfiscal === 0.0 || $this->y112_procfiscal == "")?@$GLOBALS["HTTP_POST_VARS"]["y112_procfiscal"]:$this->y112_procfiscal);
+       $this->y112_levanta = (($this->y112_levanta === 0 || $this->y112_levanta === 0.0 || $this->y112_levanta == "")?@$GLOBALS["HTTP_POST_VARS"]["y112_levanta"]:$this->y112_levanta);
      }else{
-       $this->y112_sequencial = ($this->y112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_sequencial"]:$this->y112_sequencial);
+       $this->y112_sequencial = (($this->y112_sequencial === 0 || $this->y112_sequencial === 0.0 || $this->y112_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y112_sequencial"]:$this->y112_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procfiscallevanta {
          $this->y112_sequencial = $y112_sequencial; 
        }
      }
-     if(($this->y112_sequencial == null) || ($this->y112_sequencial == "") ){ 
+     if(($this->y112_sequencial == null) || (($this->y112_sequencial === 0 || $this->y112_sequencial === 0.0 || $this->y112_sequencial == "")) ){ 
        $this->erro_sql = " Campo y112_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_procfiscallevanta {
    function sql_query ( $y112_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_procfiscallevanta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_procfiscallevanta {
    function sql_query_file ( $y112_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_procfiscallevanta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

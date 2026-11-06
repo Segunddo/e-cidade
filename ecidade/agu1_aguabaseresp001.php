@@ -33,7 +33,7 @@
   include(modification("classes/db_aguabase_classe.php"));
   include(modification("dbforms/db_funcoes.php"));
   
-  parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+  parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
   db_postmemory($HTTP_POST_VARS);
 
   $claguabaseresp = new cl_aguabaseresp;

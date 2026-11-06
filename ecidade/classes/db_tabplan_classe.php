@@ -54,7 +54,7 @@ class cl_tabplan {
                  k02_estpla = varchar(15) = Estrutural 
                  ";
    //funcao construtor da classe 
-   function cl_tabplan() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tabplan"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_tabplan {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k02_anousu = ($this->k02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_anousu"]:$this->k02_anousu);
-       $this->k02_codigo = ($this->k02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codigo"]:$this->k02_codigo);
-       $this->k02_reduz = ($this->k02_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_reduz"]:$this->k02_reduz);
+       $this->k02_anousu = ($this->k02_anousu === 0 || $this->k02_anousu === 0.0 || $this->k02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_anousu"]:$this->k02_anousu);
+       $this->k02_codigo = ($this->k02_codigo === 0 || $this->k02_codigo === 0.0 || $this->k02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codigo"]:$this->k02_codigo);
+       $this->k02_reduz = ($this->k02_reduz === 0 || $this->k02_reduz === 0.0 || $this->k02_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_reduz"]:$this->k02_reduz);
        $this->k02_estpla = ($this->k02_estpla == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_estpla"]:$this->k02_estpla);
      }else{
-       $this->k02_anousu = ($this->k02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_anousu"]:$this->k02_anousu);
-       $this->k02_codigo = ($this->k02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codigo"]:$this->k02_codigo);
+       $this->k02_anousu = ($this->k02_anousu === 0 || $this->k02_anousu === 0.0 || $this->k02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_anousu"]:$this->k02_anousu);
+       $this->k02_codigo = ($this->k02_codigo === 0 || $this->k02_codigo === 0.0 || $this->k02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codigo"]:$this->k02_codigo);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_tabplan {
      }
        $this->k02_codigo = $k02_codigo; 
        $this->k02_anousu = $k02_anousu; 
-     if(($this->k02_codigo == null) || ($this->k02_codigo == "") ){ 
+     if(($this->k02_codigo == null) || ($this->k02_codigo === 0 || $this->k02_codigo === 0.0 || $this->k02_codigo == "") ){ 
        $this->erro_sql = " Campo k02_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_tabplan {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k02_anousu == null) || ($this->k02_anousu == "") ){ 
+     if(($this->k02_anousu == null) || ($this->k02_anousu === 0 || $this->k02_anousu === 0.0 || $this->k02_anousu == "") ){ 
        $this->erro_sql = " Campo k02_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -380,7 +380,7 @@ class cl_tabplan {
    function sql_query ( $k02_codigo=null,$k02_anousu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -412,7 +412,7 @@ class cl_tabplan {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_tabplan {
    function sql_query_file ( $k02_codigo=null,$k02_anousu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -453,7 +453,7 @@ class cl_tabplan {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

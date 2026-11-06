@@ -64,7 +64,7 @@ class cl_tiafdoc {
                  y99_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_tiafdoc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tiafdoc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,9 +81,9 @@ class cl_tiafdoc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y99_coddoc = ($this->y99_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_coddoc"]:$this->y99_coddoc);
-       $this->y99_codtiaf = ($this->y99_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_codtiaf"]:$this->y99_codtiaf);
-       $this->y99_tiafdoc = ($this->y99_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_tiafdoc"]:$this->y99_tiafdoc);
+       $this->y99_coddoc = (($this->y99_coddoc === 0 || $this->y99_coddoc === 0.0 || $this->y99_coddoc == "")?@$GLOBALS["HTTP_POST_VARS"]["y99_coddoc"]:$this->y99_coddoc);
+       $this->y99_codtiaf = (($this->y99_codtiaf === 0 || $this->y99_codtiaf === 0.0 || $this->y99_codtiaf == "")?@$GLOBALS["HTTP_POST_VARS"]["y99_codtiaf"]:$this->y99_codtiaf);
+       $this->y99_tiafdoc = (($this->y99_tiafdoc === 0 || $this->y99_tiafdoc === 0.0 || $this->y99_tiafdoc == "")?@$GLOBALS["HTTP_POST_VARS"]["y99_tiafdoc"]:$this->y99_tiafdoc);
        if($this->y99_dtini == ""){
          $this->y99_dtini_dia = ($this->y99_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_dtini_dia"]:$this->y99_dtini_dia);
          $this->y99_dtini_mes = ($this->y99_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_dtini_mes"]:$this->y99_dtini_mes);
@@ -102,7 +102,7 @@ class cl_tiafdoc {
        }
        $this->y99_obs = ($this->y99_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_obs"]:$this->y99_obs);
      }else{
-       $this->y99_coddoc = ($this->y99_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_coddoc"]:$this->y99_coddoc);
+       $this->y99_coddoc = (($this->y99_coddoc === 0 || $this->y99_coddoc === 0.0 || $this->y99_coddoc == "")?@$GLOBALS["HTTP_POST_VARS"]["y99_coddoc"]:$this->y99_coddoc);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_tiafdoc {
          $this->y99_coddoc = $y99_coddoc; 
        }
      }
-     if(($this->y99_coddoc == null) || ($this->y99_coddoc == "") ){ 
+     if(($this->y99_coddoc == null) || (($this->y99_coddoc === 0 || $this->y99_coddoc === 0.0 || $this->y99_coddoc == "")) ){ 
        $this->erro_sql = " Campo y99_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -500,7 +500,7 @@ class cl_tiafdoc {
    function sql_query ( $y99_coddoc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_tiafdoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -535,7 +535,7 @@ class cl_tiafdoc {
    function sql_query_file ( $y99_coddoc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -556,7 +556,7 @@ class cl_tiafdoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

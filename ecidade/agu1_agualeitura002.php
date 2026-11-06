@@ -33,7 +33,7 @@ require_once (modification("dbforms/db_funcoes.php"));
 
 use ECidade\Tributario\Agua\Repository\Leitura as LeituraRepository;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clagualeitura = new cl_agualeitura;

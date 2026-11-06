@@ -50,7 +50,7 @@ class cl_autocgm {
                  y54_numcgm = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_autocgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("autocgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_autocgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y54_codauto = ($this->y54_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y54_codauto"]:$this->y54_codauto);
-       $this->y54_numcgm = ($this->y54_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y54_numcgm"]:$this->y54_numcgm);
+       $this->y54_codauto = (($this->y54_codauto === 0 || $this->y54_codauto === 0.0 || $this->y54_codauto == "")?@$GLOBALS["HTTP_POST_VARS"]["y54_codauto"]:$this->y54_codauto);
+       $this->y54_numcgm = (($this->y54_numcgm === 0 || $this->y54_numcgm === 0.0 || $this->y54_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["y54_numcgm"]:$this->y54_numcgm);
      }else{
-       $this->y54_codauto = ($this->y54_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y54_codauto"]:$this->y54_codauto);
+       $this->y54_codauto = (($this->y54_codauto === 0 || $this->y54_codauto === 0.0 || $this->y54_codauto == "")?@$GLOBALS["HTTP_POST_VARS"]["y54_codauto"]:$this->y54_codauto);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_autocgm {
        return false;
      }
        $this->y54_codauto = $y54_codauto; 
-     if(($this->y54_codauto == null) || ($this->y54_codauto == "") ){ 
+     if(($this->y54_codauto == null) || (($this->y54_codauto === 0 || $this->y54_codauto === 0.0 || $this->y54_codauto == "")) ){ 
        $this->erro_sql = " Campo y54_codauto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_autocgm {
    function sql_query ( $y54_codauto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_autocgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_autocgm {
    function sql_query_file ( $y54_codauto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_autocgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -26,7 +26,7 @@
  */
 
 require_once(modification("libs/db_conecta.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $db_botao=1;

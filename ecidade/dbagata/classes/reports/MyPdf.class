@@ -4,9 +4,9 @@ class MyPdf extends FPDF
 
     public $TopMargin;
 
-    function MyPdf($orientation, $unit, $format, $headerCallback)
+    function __construct($orientation, $unit, $format, $headerCallback)
     {
-        FPDF::FPDF($orientation, $unit, $format);
+        FPDF::__construct($orientation, $unit, $format);
         $this->LineHeight = 20;
         $this->headerCallback = $headerCallback;
     }

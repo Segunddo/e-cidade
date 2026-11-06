@@ -856,7 +856,7 @@ $aOperacoes = $operacoestefRepository->get();
                                    id="<?= $item->k195_sequencial ?>"
                                    value="<?= $item->k195_sequencial ?>"
                                    style="margin-left: 0px"
-                                   <?= (in_array($item->k195_sequencial, $aOperacoesSalvas) ? "checked" : "") ?>
+                                   <?= ((is_array($aOperacoesSalvas) && in_array($item->k195_sequencial, $aOperacoesSalvas)) ? "checked" : "") ?>
                             >
                             <label for="<?= $item->k195_sequencial ?>" style="position: relative; top: -5px">
                                 <?= $item->k195_descricao ?>

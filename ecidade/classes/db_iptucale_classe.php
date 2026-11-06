@@ -60,7 +60,7 @@ class cl_iptucale {
                  j22_valor = float8 = Valor venal 
                  ";
    //funcao construtor da classe 
-   function cl_iptucale() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptucale"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,17 +77,17 @@ class cl_iptucale {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j22_anousu = ($this->j22_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j22_anousu"]:$this->j22_anousu);
-       $this->j22_matric = ($this->j22_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j22_matric"]:$this->j22_matric);
-       $this->j22_idcons = ($this->j22_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j22_idcons"]:$this->j22_idcons);
-       $this->j22_areaed = ($this->j22_areaed == ""?@$GLOBALS["HTTP_POST_VARS"]["j22_areaed"]:$this->j22_areaed);
-       $this->j22_vm2 = ($this->j22_vm2 == ""?@$GLOBALS["HTTP_POST_VARS"]["j22_vm2"]:$this->j22_vm2);
-       $this->j22_pontos = ($this->j22_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["j22_pontos"]:$this->j22_pontos);
-       $this->j22_valor = ($this->j22_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j22_valor"]:$this->j22_valor);
+       $this->j22_anousu = (($this->j22_anousu === 0 || $this->j22_anousu === 0.0 || $this->j22_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["j22_anousu"]:$this->j22_anousu);
+       $this->j22_matric = (($this->j22_matric === 0 || $this->j22_matric === 0.0 || $this->j22_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j22_matric"]:$this->j22_matric);
+       $this->j22_idcons = (($this->j22_idcons === 0 || $this->j22_idcons === 0.0 || $this->j22_idcons == "")?@$GLOBALS["HTTP_POST_VARS"]["j22_idcons"]:$this->j22_idcons);
+       $this->j22_areaed = (($this->j22_areaed === 0 || $this->j22_areaed === 0.0 || $this->j22_areaed == "")?@$GLOBALS["HTTP_POST_VARS"]["j22_areaed"]:$this->j22_areaed);
+       $this->j22_vm2 = (($this->j22_vm2 === 0 || $this->j22_vm2 === 0.0 || $this->j22_vm2 == "")?@$GLOBALS["HTTP_POST_VARS"]["j22_vm2"]:$this->j22_vm2);
+       $this->j22_pontos = (($this->j22_pontos === 0 || $this->j22_pontos === 0.0 || $this->j22_pontos == "")?@$GLOBALS["HTTP_POST_VARS"]["j22_pontos"]:$this->j22_pontos);
+       $this->j22_valor = (($this->j22_valor === 0 || $this->j22_valor === 0.0 || $this->j22_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["j22_valor"]:$this->j22_valor);
      }else{
-       $this->j22_anousu = ($this->j22_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j22_anousu"]:$this->j22_anousu);
-       $this->j22_matric = ($this->j22_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j22_matric"]:$this->j22_matric);
-       $this->j22_idcons = ($this->j22_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j22_idcons"]:$this->j22_idcons);
+       $this->j22_anousu = (($this->j22_anousu === 0 || $this->j22_anousu === 0.0 || $this->j22_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["j22_anousu"]:$this->j22_anousu);
+       $this->j22_matric = (($this->j22_matric === 0 || $this->j22_matric === 0.0 || $this->j22_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j22_matric"]:$this->j22_matric);
+       $this->j22_idcons = (($this->j22_idcons === 0 || $this->j22_idcons === 0.0 || $this->j22_idcons == "")?@$GLOBALS["HTTP_POST_VARS"]["j22_idcons"]:$this->j22_idcons);
      }
    }
    // funcao para inclusao
@@ -132,7 +132,7 @@ class cl_iptucale {
        $this->j22_anousu = $j22_anousu; 
        $this->j22_matric = $j22_matric; 
        $this->j22_idcons = $j22_idcons; 
-     if(($this->j22_anousu == null) || ($this->j22_anousu == "") ){ 
+     if(($this->j22_anousu == null) || (($this->j22_anousu === 0 || $this->j22_anousu === 0.0 || $this->j22_anousu == "")) ){ 
        $this->erro_sql = " Campo j22_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -140,7 +140,7 @@ class cl_iptucale {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j22_matric == null) || ($this->j22_matric == "") ){ 
+     if(($this->j22_matric == null) || (($this->j22_matric === 0 || $this->j22_matric === 0.0 || $this->j22_matric == "")) ){ 
        $this->erro_sql = " Campo j22_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -148,7 +148,7 @@ class cl_iptucale {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j22_idcons == null) || ($this->j22_idcons == "") ){ 
+     if(($this->j22_idcons == null) || (($this->j22_idcons === 0 || $this->j22_idcons === 0.0 || $this->j22_idcons == "")) ){ 
        $this->erro_sql = " Campo j22_idcons nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -486,7 +486,7 @@ class cl_iptucale {
    function sql_query ( $j22_anousu=null,$j22_matric=null,$j22_idcons=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -528,7 +528,7 @@ class cl_iptucale {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -540,7 +540,7 @@ class cl_iptucale {
    function sql_query_file ( $j22_anousu=null,$j22_matric=null,$j22_idcons=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -577,7 +577,7 @@ class cl_iptucale {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

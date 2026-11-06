@@ -26,7 +26,7 @@ class cl_rhdirfgeracaopessoalpensionista {
                  rh202_rhdirfgeracaopessoal = int4 = Geração dados pessoal 
                  ";
    //funcao construtor da classe 
-   function cl_rhdirfgeracaopessoalpensionista() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhdirfgeracaopessoalpensionista"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_rhdirfgeracaopessoalpensionista {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh202_sequencial = ($this->rh202_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh202_sequencial"]:$this->rh202_sequencial);
-       $this->rh202_numcgm = ($this->rh202_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh202_numcgm"]:$this->rh202_numcgm);
-       $this->rh202_rhdirfgeracaopessoal = ($this->rh202_rhdirfgeracaopessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh202_rhdirfgeracaopessoal"]:$this->rh202_rhdirfgeracaopessoal);
+       $this->rh202_sequencial = ($this->rh202_sequencial === 0 || $this->rh202_sequencial === 0.0 || $this->rh202_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh202_sequencial"]:$this->rh202_sequencial);
+       $this->rh202_numcgm = ($this->rh202_numcgm === 0 || $this->rh202_numcgm === 0.0 || $this->rh202_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh202_numcgm"]:$this->rh202_numcgm);
+       $this->rh202_rhdirfgeracaopessoal = ($this->rh202_rhdirfgeracaopessoal === 0 || $this->rh202_rhdirfgeracaopessoal === 0.0 || $this->rh202_rhdirfgeracaopessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh202_rhdirfgeracaopessoal"]:$this->rh202_rhdirfgeracaopessoal);
      }else{
-       $this->rh202_sequencial = ($this->rh202_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh202_sequencial"]:$this->rh202_sequencial);
+       $this->rh202_sequencial = ($this->rh202_sequencial === 0 || $this->rh202_sequencial === 0.0 || $this->rh202_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh202_sequencial"]:$this->rh202_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_rhdirfgeracaopessoalpensionista {
          $this->rh202_sequencial = $rh202_sequencial; 
        }
      }
-     if(($this->rh202_sequencial == null) || ($this->rh202_sequencial == "") ){ 
+     if(($this->rh202_sequencial == null) || ($this->rh202_sequencial === 0 || $this->rh202_sequencial === 0.0 || $this->rh202_sequencial == "") ){ 
        $this->erro_sql = " Campo rh202_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

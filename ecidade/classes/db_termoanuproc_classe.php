@@ -52,7 +52,7 @@ class cl_termoanuproc {
                  v22_processo = int4 = Código do processo 
                  ";
    //funcao construtor da classe 
-   function cl_termoanuproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termoanuproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_termoanuproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v22_sequencial = ($this->v22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v22_sequencial"]:$this->v22_sequencial);
-       $this->v22_termoanu = ($this->v22_termoanu == ""?@$GLOBALS["HTTP_POST_VARS"]["v22_termoanu"]:$this->v22_termoanu);
-       $this->v22_processo = ($this->v22_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["v22_processo"]:$this->v22_processo);
+       $this->v22_sequencial = (($this->v22_sequencial === 0 || $this->v22_sequencial === 0.0 || $this->v22_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v22_sequencial"]:$this->v22_sequencial);
+       $this->v22_termoanu = (($this->v22_termoanu === 0 || $this->v22_termoanu === 0.0 || $this->v22_termoanu == "")?@$GLOBALS["HTTP_POST_VARS"]["v22_termoanu"]:$this->v22_termoanu);
+       $this->v22_processo = (($this->v22_processo === 0 || $this->v22_processo === 0.0 || $this->v22_processo == "")?@$GLOBALS["HTTP_POST_VARS"]["v22_processo"]:$this->v22_processo);
      }else{
-       $this->v22_sequencial = ($this->v22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v22_sequencial"]:$this->v22_sequencial);
+       $this->v22_sequencial = (($this->v22_sequencial === 0 || $this->v22_sequencial === 0.0 || $this->v22_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v22_sequencial"]:$this->v22_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_termoanuproc {
          $this->v22_sequencial = $v22_sequencial; 
        }
      }
-     if(($this->v22_sequencial == null) || ($this->v22_sequencial == "") ){ 
+     if(($this->v22_sequencial == null) || (($this->v22_sequencial === 0 || $this->v22_sequencial === 0.0 || $this->v22_sequencial == "")) ){ 
        $this->erro_sql = " Campo v22_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_termoanuproc {
    function sql_query ( $v22_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_termoanuproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_termoanuproc {
    function sql_query_file ( $v22_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_termoanuproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

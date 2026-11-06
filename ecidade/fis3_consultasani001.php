@@ -33,7 +33,7 @@ require_once(modification("classes/db_sanitario_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 
 $clsanitario = new cl_sanitario;
 $clrotulo    = new rotulocampo;

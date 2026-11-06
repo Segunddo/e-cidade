@@ -30,7 +30,7 @@ include(modification("classes/db_iptubase_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 include(modification("classes/db_sanitario_classe.php"));
 include(modification("classes/db_vistorias_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $db_botao=1;
 $db_opcao=1;

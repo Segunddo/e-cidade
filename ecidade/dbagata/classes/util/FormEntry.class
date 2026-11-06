@@ -34,7 +34,7 @@ class FormEntry extends CommonForm
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function FormEntry($mensagem, $CheckVars, $container = null, $simpleColumn = false)
+    function __construct($mensagem, $CheckVars, $container = null, $simpleColumn = false)
     {
         if ($container)
         {

@@ -50,7 +50,7 @@ class cl_slipanul {
                  k18_motivo = text = Motivo 
                  ";
    //funcao construtor da classe 
-   function cl_slipanul() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("slipanul"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,17 +67,17 @@ class cl_slipanul {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k18_codigo = ($this->k18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k18_codigo"]:$this->k18_codigo);
+       $this->k18_codigo = ($this->k18_codigo === 0 || $this->k18_codigo === 0.0 || $this->k18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k18_codigo"]:$this->k18_codigo);
        $this->k18_motivo = ($this->k18_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["k18_motivo"]:$this->k18_motivo);
      }else{
-       $this->k18_codigo = ($this->k18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k18_codigo"]:$this->k18_codigo);
+       $this->k18_codigo = ($this->k18_codigo === 0 || $this->k18_codigo === 0.0 || $this->k18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k18_codigo"]:$this->k18_codigo);
      }
    }
    // funcao para inclusao
    function incluir ($k18_codigo){ 
       $this->atualizacampos();
        $this->k18_codigo = $k18_codigo; 
-     if(($this->k18_codigo == null) || ($this->k18_codigo == "") ){ 
+     if(($this->k18_codigo == null) || ($this->k18_codigo === 0 || $this->k18_codigo === 0.0 || $this->k18_codigo == "") ){ 
        $this->erro_sql = " Campo k18_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -287,7 +287,7 @@ class cl_slipanul {
    function sql_query ( $k18_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -310,7 +310,7 @@ class cl_slipanul {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -322,7 +322,7 @@ class cl_slipanul {
    function sql_query_file ( $k18_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -343,7 +343,7 @@ class cl_slipanul {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

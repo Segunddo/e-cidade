@@ -34,7 +34,7 @@ include(modification("classes/db_vistorias_classe.php"));
 include(modification("classes/db_vistlocal_classe.php"));
 include(modification("classes/db_vistexec_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 $clvistorias = new cl_vistorias;
 $clvistexec = new cl_vistexec;
 $clvistlocal = new cl_vistlocal;

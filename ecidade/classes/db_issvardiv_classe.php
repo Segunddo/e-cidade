@@ -50,7 +50,7 @@ class cl_issvardiv {
                  q19_issvar = int8 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_issvardiv() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issvardiv"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_issvardiv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q19_coddiv = ($this->q19_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["q19_coddiv"]:$this->q19_coddiv);
-       $this->q19_issvar = ($this->q19_issvar == ""?@$GLOBALS["HTTP_POST_VARS"]["q19_issvar"]:$this->q19_issvar);
+       $this->q19_coddiv = (($this->q19_coddiv === 0 || $this->q19_coddiv === 0.0 || $this->q19_coddiv == "")?@$GLOBALS["HTTP_POST_VARS"]["q19_coddiv"]:$this->q19_coddiv);
+       $this->q19_issvar = (($this->q19_issvar === 0 || $this->q19_issvar === 0.0 || $this->q19_issvar == "")?@$GLOBALS["HTTP_POST_VARS"]["q19_issvar"]:$this->q19_issvar);
      }else{
-       $this->q19_coddiv = ($this->q19_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["q19_coddiv"]:$this->q19_coddiv);
-       $this->q19_issvar = ($this->q19_issvar == ""?@$GLOBALS["HTTP_POST_VARS"]["q19_issvar"]:$this->q19_issvar);
+       $this->q19_coddiv = (($this->q19_coddiv === 0 || $this->q19_coddiv === 0.0 || $this->q19_coddiv == "")?@$GLOBALS["HTTP_POST_VARS"]["q19_coddiv"]:$this->q19_coddiv);
+       $this->q19_issvar = (($this->q19_issvar === 0 || $this->q19_issvar === 0.0 || $this->q19_issvar == "")?@$GLOBALS["HTTP_POST_VARS"]["q19_issvar"]:$this->q19_issvar);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_issvardiv {
       $this->atualizacampos();
        $this->q19_coddiv = $q19_coddiv; 
        $this->q19_issvar = $q19_issvar; 
-     if(($this->q19_coddiv == null) || ($this->q19_coddiv == "") ){ 
+     if(($this->q19_coddiv == null) || (($this->q19_coddiv === 0 || $this->q19_coddiv === 0.0 || $this->q19_coddiv == "")) ){ 
        $this->erro_sql = " Campo q19_coddiv nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_issvardiv {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q19_issvar == null) || ($this->q19_issvar == "") ){ 
+     if(($this->q19_issvar == null) || (($this->q19_issvar === 0 || $this->q19_issvar === 0.0 || $this->q19_issvar == "")) ){ 
        $this->erro_sql = " Campo q19_issvar nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_issvardiv {
    function sql_query ( $q19_coddiv=null,$q19_issvar=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -351,7 +351,7 @@ class cl_issvardiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_issvardiv {
    function sql_query_file ( $q19_coddiv=null,$q19_issvar=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_issvardiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

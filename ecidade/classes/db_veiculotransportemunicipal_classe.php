@@ -54,7 +54,7 @@ class cl_veiculotransportemunicipal {
                  tre01_numeropassageiros = int4 = Número de Passageiros
                  ";
    //funcao construtor da classe
-   function cl_veiculotransportemunicipal() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veiculotransportemunicipal");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_veiculotransportemunicipal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre01_sequencial = ($this->tre01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre01_sequencial"]:$this->tre01_sequencial);
-       $this->tre01_tipotransportemunicipal = ($this->tre01_tipotransportemunicipal == ""?@$GLOBALS["HTTP_POST_VARS"]["tre01_tipotransportemunicipal"]:$this->tre01_tipotransportemunicipal);
+       $this->tre01_sequencial = ($this->tre01_sequencial === 0 || $this->tre01_sequencial === 0.0 || $this->tre01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre01_sequencial"]:$this->tre01_sequencial);
+       $this->tre01_tipotransportemunicipal = ($this->tre01_tipotransportemunicipal === 0 || $this->tre01_tipotransportemunicipal === 0.0 || $this->tre01_tipotransportemunicipal == ""?@$GLOBALS["HTTP_POST_VARS"]["tre01_tipotransportemunicipal"]:$this->tre01_tipotransportemunicipal);
        $this->tre01_identificacao = ($this->tre01_identificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["tre01_identificacao"]:$this->tre01_identificacao);
-       $this->tre01_numeropassageiros = ($this->tre01_numeropassageiros == ""?@$GLOBALS["HTTP_POST_VARS"]["tre01_numeropassageiros"]:$this->tre01_numeropassageiros);
+       $this->tre01_numeropassageiros = ($this->tre01_numeropassageiros === 0 || $this->tre01_numeropassageiros === 0.0 || $this->tre01_numeropassageiros == ""?@$GLOBALS["HTTP_POST_VARS"]["tre01_numeropassageiros"]:$this->tre01_numeropassageiros);
      }else{
-       $this->tre01_sequencial = ($this->tre01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre01_sequencial"]:$this->tre01_sequencial);
+       $this->tre01_sequencial = ($this->tre01_sequencial === 0 || $this->tre01_sequencial === 0.0 || $this->tre01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre01_sequencial"]:$this->tre01_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_veiculotransportemunicipal {
          $this->tre01_sequencial = $tre01_sequencial;
        }
      }
-     if(($this->tre01_sequencial == null) || ($this->tre01_sequencial == "") ){
+     if(($this->tre01_sequencial == null) || ($this->tre01_sequencial === 0 || $this->tre01_sequencial === 0.0 || $this->tre01_sequencial == "") ){
        $this->erro_sql = " Campo tre01_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -413,7 +413,7 @@ class cl_veiculotransportemunicipal {
    function sql_query ( $tre01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_veiculotransportemunicipal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_veiculotransportemunicipal {
    function sql_query_file ( $tre01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_veiculotransportemunicipal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_veiculotransportemunicipal {
   function sql_query_vinculo_veiculo ( $tre01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -505,7 +505,7 @@ class cl_veiculotransportemunicipal {
           $sql .= $sql2;
           if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
               $sql .= $virgula.$campos_sql[$i];
@@ -519,7 +519,7 @@ class cl_veiculotransportemunicipal {
     
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -546,7 +546,7 @@ class cl_veiculotransportemunicipal {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

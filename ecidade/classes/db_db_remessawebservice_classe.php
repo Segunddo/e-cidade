@@ -66,7 +66,7 @@ class cl_db_remessawebservice {
                  db127_processada = bool = Processada 
                  ";
    //funcao construtor da classe 
-   function cl_db_remessawebservice() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_remessawebservice"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,9 +83,9 @@ class cl_db_remessawebservice {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db127_sequencial = ($this->db127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db127_sequencial"]:$this->db127_sequencial);
-       $this->db127_sistemaexterno = ($this->db127_sistemaexterno == ""?@$GLOBALS["HTTP_POST_VARS"]["db127_sistemaexterno"]:$this->db127_sistemaexterno);
-       $this->db127_usuario = ($this->db127_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db127_usuario"]:$this->db127_usuario);
+       $this->db127_sequencial = ($this->db127_sequencial === 0 || $this->db127_sequencial === 0.0 || $this->db127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db127_sequencial"]:$this->db127_sequencial);
+       $this->db127_sistemaexterno = ($this->db127_sistemaexterno === 0 || $this->db127_sistemaexterno === 0.0 || $this->db127_sistemaexterno == ""?@$GLOBALS["HTTP_POST_VARS"]["db127_sistemaexterno"]:$this->db127_sistemaexterno);
+       $this->db127_usuario = ($this->db127_usuario === 0 || $this->db127_usuario === 0.0 || $this->db127_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db127_usuario"]:$this->db127_usuario);
        $this->db127_descricao = ($this->db127_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db127_descricao"]:$this->db127_descricao);
        if($this->db127_datacriacao == ""){
          $this->db127_datacriacao_dia = ($this->db127_datacriacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db127_datacriacao_dia"]:$this->db127_datacriacao_dia);
@@ -105,7 +105,7 @@ class cl_db_remessawebservice {
        }
        $this->db127_processada = ($this->db127_processada == "f"?@$GLOBALS["HTTP_POST_VARS"]["db127_processada"]:$this->db127_processada);
      }else{
-       $this->db127_sequencial = ($this->db127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db127_sequencial"]:$this->db127_sequencial);
+       $this->db127_sequencial = ($this->db127_sequencial === 0 || $this->db127_sequencial === 0.0 || $this->db127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db127_sequencial"]:$this->db127_sequencial);
      }
    }
    // funcao para inclusao
@@ -183,7 +183,7 @@ class cl_db_remessawebservice {
          $this->db127_sequencial = $db127_sequencial; 
        }
      }
-     if(($this->db127_sequencial == null) || ($this->db127_sequencial == "") ){ 
+     if(($this->db127_sequencial == null) || ($this->db127_sequencial === 0 || $this->db127_sequencial === 0.0 || $this->db127_sequencial == "") ){ 
        $this->erro_sql = " Campo db127_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -508,7 +508,7 @@ class cl_db_remessawebservice {
    function sql_query ( $db127_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -531,7 +531,7 @@ class cl_db_remessawebservice {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_db_remessawebservice {
    function sql_query_file ( $db127_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -565,7 +565,7 @@ class cl_db_remessawebservice {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

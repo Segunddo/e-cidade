@@ -52,7 +52,7 @@ class cl_notificadoc {
                  k100_notifica = int4 = Notificação 
                  ";
    //funcao construtor da classe 
-   function cl_notificadoc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notificadoc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_notificadoc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k100_sequencial = ($this->k100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k100_sequencial"]:$this->k100_sequencial);
-       $this->k100_db_documento = ($this->k100_db_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["k100_db_documento"]:$this->k100_db_documento);
-       $this->k100_notifica = ($this->k100_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k100_notifica"]:$this->k100_notifica);
+       $this->k100_sequencial = ($this->k100_sequencial === 0 || $this->k100_sequencial === 0.0 || $this->k100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k100_sequencial"]:$this->k100_sequencial);
+       $this->k100_db_documento = ($this->k100_db_documento === 0 || $this->k100_db_documento === 0.0 || $this->k100_db_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["k100_db_documento"]:$this->k100_db_documento);
+       $this->k100_notifica = ($this->k100_notifica === 0 || $this->k100_notifica === 0.0 || $this->k100_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k100_notifica"]:$this->k100_notifica);
      }else{
-       $this->k100_sequencial = ($this->k100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k100_sequencial"]:$this->k100_sequencial);
+       $this->k100_sequencial = ($this->k100_sequencial === 0 || $this->k100_sequencial === 0.0 || $this->k100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k100_sequencial"]:$this->k100_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_notificadoc {
          $this->k100_sequencial = $k100_sequencial; 
        }
      }
-     if(($this->k100_sequencial == null) || ($this->k100_sequencial == "") ){ 
+     if(($this->k100_sequencial == null) || ($this->k100_sequencial === 0 || $this->k100_sequencial === 0.0 || $this->k100_sequencial == "") ){ 
        $this->erro_sql = " Campo k100_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -364,7 +364,7 @@ class cl_notificadoc {
    function sql_query ( $k100_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_notificadoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -403,7 +403,7 @@ class cl_notificadoc {
    function sql_query_file ( $k100_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_notificadoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

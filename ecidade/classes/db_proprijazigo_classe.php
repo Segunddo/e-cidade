@@ -83,7 +83,7 @@ class cl_proprijazigo {
                  cm29_d_pronto = date = Pronto 
                  ";
    //funcao construtor da classe 
-   function cl_proprijazigo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("proprijazigo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -100,9 +100,9 @@ class cl_proprijazigo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm29_i_codigo = ($this->cm29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm29_i_codigo"]:$this->cm29_i_codigo);
-       $this->cm29_i_propricemit = ($this->cm29_i_propricemit == ""?@$GLOBALS["HTTP_POST_VARS"]["cm29_i_propricemit"]:$this->cm29_i_propricemit);
-       $this->cm29_i_termo = ($this->cm29_i_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm29_i_termo"]:$this->cm29_i_termo);
+       $this->cm29_i_codigo = (($this->cm29_i_codigo === 0 || $this->cm29_i_codigo === 0.0 || $this->cm29_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm29_i_codigo"]:$this->cm29_i_codigo);
+       $this->cm29_i_propricemit = (($this->cm29_i_propricemit === 0 || $this->cm29_i_propricemit === 0.0 || $this->cm29_i_propricemit == "")?@$GLOBALS["HTTP_POST_VARS"]["cm29_i_propricemit"]:$this->cm29_i_propricemit);
+       $this->cm29_i_termo = (($this->cm29_i_termo === 0 || $this->cm29_i_termo === 0.0 || $this->cm29_i_termo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm29_i_termo"]:$this->cm29_i_termo);
        if($this->cm29_d_termo == ""){
          $this->cm29_d_termo_dia = ($this->cm29_d_termo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm29_d_termo_dia"]:$this->cm29_d_termo_dia);
          $this->cm29_d_termo_mes = ($this->cm29_d_termo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm29_d_termo_mes"]:$this->cm29_d_termo_mes);
@@ -112,7 +112,7 @@ class cl_proprijazigo {
          }
        }
        $this->cm29_t_termo = ($this->cm29_t_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm29_t_termo"]:$this->cm29_t_termo);
-       $this->cm29_i_concessao = ($this->cm29_i_concessao == ""?@$GLOBALS["HTTP_POST_VARS"]["cm29_i_concessao"]:$this->cm29_i_concessao);
+       $this->cm29_i_concessao = (($this->cm29_i_concessao === 0 || $this->cm29_i_concessao === 0.0 || $this->cm29_i_concessao == "")?@$GLOBALS["HTTP_POST_VARS"]["cm29_i_concessao"]:$this->cm29_i_concessao);
        if($this->cm29_d_concessao == ""){
          $this->cm29_d_concessao_dia = ($this->cm29_d_concessao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm29_d_concessao_dia"]:$this->cm29_d_concessao_dia);
          $this->cm29_d_concessao_mes = ($this->cm29_d_concessao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm29_d_concessao_mes"]:$this->cm29_d_concessao_mes);
@@ -147,7 +147,7 @@ class cl_proprijazigo {
          }
        }
      }else{
-       $this->cm29_i_codigo = ($this->cm29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm29_i_codigo"]:$this->cm29_i_codigo);
+       $this->cm29_i_codigo = (($this->cm29_i_codigo === 0 || $this->cm29_i_codigo === 0.0 || $this->cm29_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm29_i_codigo"]:$this->cm29_i_codigo);
      }
    }
    // funcao para inclusao
@@ -219,7 +219,7 @@ class cl_proprijazigo {
          $this->cm29_i_codigo = $cm29_i_codigo; 
        }
      }
-     if(($this->cm29_i_codigo == null) || ($this->cm29_i_codigo == "") ){ 
+     if(($this->cm29_i_codigo == null) || (($this->cm29_i_codigo === 0 || $this->cm29_i_codigo === 0.0 || $this->cm29_i_codigo == "")) ){ 
        $this->erro_sql = " Campo cm29_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -571,7 +571,7 @@ class cl_proprijazigo {
    function sql_query ( $cm29_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -596,7 +596,7 @@ class cl_proprijazigo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -608,7 +608,7 @@ class cl_proprijazigo {
    function sql_query_file ( $cm29_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -629,7 +629,7 @@ class cl_proprijazigo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

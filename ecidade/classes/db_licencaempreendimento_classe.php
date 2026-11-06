@@ -52,7 +52,7 @@ class cl_licencaempreendimento {
                  am13_arquivo = oid = Arquivo
                  ";
    //funcao construtor da classe
-   function cl_licencaempreendimento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("licencaempreendimento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_licencaempreendimento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am13_sequencial = ($this->am13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am13_sequencial"]:$this->am13_sequencial);
-       $this->am13_parecertecnico = ($this->am13_parecertecnico == ""?@$GLOBALS["HTTP_POST_VARS"]["am13_parecertecnico"]:$this->am13_parecertecnico);
-       $this->am13_arquivo = ($this->am13_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["am13_arquivo"]:$this->am13_arquivo);
+       $this->am13_sequencial = ($this->am13_sequencial === 0 || $this->am13_sequencial === 0.0 || $this->am13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am13_sequencial"]:$this->am13_sequencial);
+       $this->am13_parecertecnico = ($this->am13_parecertecnico === 0 || $this->am13_parecertecnico === 0.0 || $this->am13_parecertecnico == ""?@$GLOBALS["HTTP_POST_VARS"]["am13_parecertecnico"]:$this->am13_parecertecnico);
+       $this->am13_arquivo = ($this->am13_arquivo === 0 || $this->am13_arquivo === 0.0 || $this->am13_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["am13_arquivo"]:$this->am13_arquivo);
      }else{
-       $this->am13_sequencial = ($this->am13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am13_sequencial"]:$this->am13_sequencial);
+       $this->am13_sequencial = ($this->am13_sequencial === 0 || $this->am13_sequencial === 0.0 || $this->am13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am13_sequencial"]:$this->am13_sequencial);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_licencaempreendimento {
          $this->am13_sequencial = $am13_sequencial;
        }
      }
-     if(($this->am13_sequencial == null) || ($this->am13_sequencial == "") ){
+     if(($this->am13_sequencial == null) || ($this->am13_sequencial === 0 || $this->am13_sequencial === 0.0 || $this->am13_sequencial == "") ){
        $this->erro_sql = " Campo am13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

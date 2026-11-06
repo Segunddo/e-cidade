@@ -59,7 +59,7 @@ class cl_notiemissao {
                  k136_usuario = int4 = Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_notiemissao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notiemissao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,8 +76,8 @@ class cl_notiemissao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k136_sequencial = ($this->k136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_sequencial"]:$this->k136_sequencial);
-       $this->k136_notificatipogeracao = ($this->k136_notificatipogeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_notificatipogeracao"]:$this->k136_notificatipogeracao);
+       $this->k136_sequencial = (($this->k136_sequencial === 0 || $this->k136_sequencial === 0.0 || $this->k136_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k136_sequencial"]:$this->k136_sequencial);
+       $this->k136_notificatipogeracao = (($this->k136_notificatipogeracao === 0 || $this->k136_notificatipogeracao === 0.0 || $this->k136_notificatipogeracao == "")?@$GLOBALS["HTTP_POST_VARS"]["k136_notificatipogeracao"]:$this->k136_notificatipogeracao);
        $this->k136_recibo = ($this->k136_recibo == "f"?@$GLOBALS["HTTP_POST_VARS"]["k136_recibo"]:$this->k136_recibo);
        if($this->k136_data == ""){
          $this->k136_data_dia = ($this->k136_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_data_dia"]:$this->k136_data_dia);
@@ -87,9 +87,9 @@ class cl_notiemissao {
             $this->k136_data = $this->k136_data_ano."-".$this->k136_data_mes."-".$this->k136_data_dia;
          }
        }
-       $this->k136_usuario = ($this->k136_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_usuario"]:$this->k136_usuario);
+       $this->k136_usuario = (($this->k136_usuario === 0 || $this->k136_usuario === 0.0 || $this->k136_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["k136_usuario"]:$this->k136_usuario);
      }else{
-       $this->k136_sequencial = ($this->k136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_sequencial"]:$this->k136_sequencial);
+       $this->k136_sequencial = (($this->k136_sequencial === 0 || $this->k136_sequencial === 0.0 || $this->k136_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k136_sequencial"]:$this->k136_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_notiemissao {
          $this->k136_sequencial = $k136_sequencial; 
        }
      }
-     if(($this->k136_sequencial == null) || ($this->k136_sequencial == "") ){ 
+     if(($this->k136_sequencial == null) || (($this->k136_sequencial === 0 || $this->k136_sequencial === 0.0 || $this->k136_sequencial == "")) ){ 
        $this->erro_sql = " Campo k136_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -446,7 +446,7 @@ class cl_notiemissao {
    function sql_query ( $k136_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_notiemissao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_notiemissao {
    function sql_query_file ( $k136_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_notiemissao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

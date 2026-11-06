@@ -35,7 +35,7 @@ require_once(modification("classes/db_sanitario_classe.php"));
 require_once(modification("classes/db_sanibaixa_classe.php"));
 require_once(modification("classes/db_sanibaixaproc_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clsaniatividade    = new cl_saniatividade;
@@ -63,7 +63,7 @@ if(isset($HTTP_POST_VARS["db_opcao"]) && $db_opcao == "Baixar"){
 
   if(isset($chaves) && $chaves != ""){
     db_inicio_transacao();
-    $chaves = split("#",$chaves);
+    $chaves = explode("#",$chaves);
     $db_opcao = 2;
     $sqlqtativ = "select * from saniatividade
 					where y83_codsani = $y83_codsani and y83_dtfim is null";

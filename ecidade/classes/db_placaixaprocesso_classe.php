@@ -26,7 +26,7 @@ class cl_placaixaprocesso {
                  k144_numeroprocesso = varchar(15) = numero processo 
                  ";
    //funcao construtor da classe 
-   function cl_placaixaprocesso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("placaixaprocesso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_placaixaprocesso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k144_sequencial = ($this->k144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k144_sequencial"]:$this->k144_sequencial);
-       $this->k144_placaixa = ($this->k144_placaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["k144_placaixa"]:$this->k144_placaixa);
+       $this->k144_sequencial = ($this->k144_sequencial === 0 || $this->k144_sequencial === 0.0 || $this->k144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k144_sequencial"]:$this->k144_sequencial);
+       $this->k144_placaixa = ($this->k144_placaixa === 0 || $this->k144_placaixa === 0.0 || $this->k144_placaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["k144_placaixa"]:$this->k144_placaixa);
        $this->k144_numeroprocesso = ($this->k144_numeroprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["k144_numeroprocesso"]:$this->k144_numeroprocesso);
      }else{
-       $this->k144_sequencial = ($this->k144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k144_sequencial"]:$this->k144_sequencial);
+       $this->k144_sequencial = ($this->k144_sequencial === 0 || $this->k144_sequencial === 0.0 || $this->k144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k144_sequencial"]:$this->k144_sequencial);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_placaixaprocesso {
          $this->k144_sequencial = $k144_sequencial; 
        }
      }
-     if(($this->k144_sequencial == null) || ($this->k144_sequencial == "") ){ 
+     if(($this->k144_sequencial == null) || ($this->k144_sequencial === 0 || $this->k144_sequencial === 0.0 || $this->k144_sequencial == "") ){ 
        $this->erro_sql = " Campo k144_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -338,7 +338,7 @@ class cl_placaixaprocesso {
    function sql_query ( $k144_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_placaixaprocesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -374,7 +374,7 @@ class cl_placaixaprocesso {
    function sql_query_file ( $k144_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_placaixaprocesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

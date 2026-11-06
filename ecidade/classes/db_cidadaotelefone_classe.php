@@ -64,7 +64,7 @@ class cl_cidadaotelefone {
                  ov07_principal = bool = Principal 
                  ";
    //funcao construtor da classe 
-   function cl_cidadaotelefone() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cidadaotelefone"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,18 +81,18 @@ class cl_cidadaotelefone {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov07_sequencial = ($this->ov07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_sequencial"]:$this->ov07_sequencial);
-       $this->ov07_seq = ($this->ov07_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_seq"]:$this->ov07_seq);
-       $this->ov07_cidadao = ($this->ov07_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_cidadao"]:$this->ov07_cidadao);
+       $this->ov07_sequencial = ($this->ov07_sequencial === 0 || $this->ov07_sequencial === 0.0 || $this->ov07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_sequencial"]:$this->ov07_sequencial);
+       $this->ov07_seq = ($this->ov07_seq === 0 || $this->ov07_seq === 0.0 || $this->ov07_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_seq"]:$this->ov07_seq);
+       $this->ov07_cidadao = ($this->ov07_cidadao === 0 || $this->ov07_cidadao === 0.0 || $this->ov07_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_cidadao"]:$this->ov07_cidadao);
        $this->ov07_numero = ($this->ov07_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_numero"]:$this->ov07_numero);
-       $this->ov07_tipotelefone = ($this->ov07_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_tipotelefone"]:$this->ov07_tipotelefone);
+       $this->ov07_tipotelefone = ($this->ov07_tipotelefone === 0 || $this->ov07_tipotelefone === 0.0 || $this->ov07_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_tipotelefone"]:$this->ov07_tipotelefone);
        $this->ov07_ddd = ($this->ov07_ddd == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_ddd"]:$this->ov07_ddd);
        $this->ov07_ramal = ($this->ov07_ramal == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_ramal"]:$this->ov07_ramal);
        $this->ov07_obs = ($this->ov07_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_obs"]:$this->ov07_obs);
        $this->ov07_principal = ($this->ov07_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["ov07_principal"]:$this->ov07_principal);
      }else{
-       $this->ov07_sequencial = ($this->ov07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_sequencial"]:$this->ov07_sequencial);
-       $this->ov07_seq = ($this->ov07_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_seq"]:$this->ov07_seq);
+       $this->ov07_sequencial = ($this->ov07_sequencial === 0 || $this->ov07_sequencial === 0.0 || $this->ov07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_sequencial"]:$this->ov07_sequencial);
+       $this->ov07_seq = ($this->ov07_seq === 0 || $this->ov07_seq === 0.0 || $this->ov07_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov07_seq"]:$this->ov07_seq);
      }
    }
    // funcao para inclusao
@@ -164,7 +164,7 @@ class cl_cidadaotelefone {
          $this->ov07_sequencial = $ov07_sequencial; 
        }
      }
-     if(($this->ov07_sequencial == null) || ($this->ov07_sequencial == "") ){ 
+     if(($this->ov07_sequencial == null) || ($this->ov07_sequencial === 0 || $this->ov07_sequencial === 0.0 || $this->ov07_sequencial == "") ){ 
        $this->erro_sql = " Campo ov07_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -501,7 +501,7 @@ class cl_cidadaotelefone {
    function sql_query ( $ov07_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -526,7 +526,7 @@ class cl_cidadaotelefone {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_cidadaotelefone {
    function sql_query_file ( $ov07_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -560,7 +560,7 @@ class cl_cidadaotelefone {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -572,7 +572,7 @@ class cl_cidadaotelefone {
    function sql_query_telefonetipo ( $ov07_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -594,7 +594,7 @@ class cl_cidadaotelefone {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

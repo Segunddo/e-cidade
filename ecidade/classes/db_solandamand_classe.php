@@ -50,7 +50,7 @@ class cl_solandamand {
                  pc42_codandam = int4 = Código Andamento do Proc. 
                  ";
    //funcao construtor da classe 
-   function cl_solandamand() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("solandamand"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_solandamand {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc42_solandam = ($this->pc42_solandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc42_solandam"]:$this->pc42_solandam);
-       $this->pc42_codandam = ($this->pc42_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc42_codandam"]:$this->pc42_codandam);
+       $this->pc42_solandam = (($this->pc42_solandam === 0 || $this->pc42_solandam === 0.0 || $this->pc42_solandam == "")?@$GLOBALS["HTTP_POST_VARS"]["pc42_solandam"]:$this->pc42_solandam);
+       $this->pc42_codandam = (($this->pc42_codandam === 0 || $this->pc42_codandam === 0.0 || $this->pc42_codandam == "")?@$GLOBALS["HTTP_POST_VARS"]["pc42_codandam"]:$this->pc42_codandam);
      }else{
-       $this->pc42_solandam = ($this->pc42_solandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc42_solandam"]:$this->pc42_solandam);
+       $this->pc42_solandam = (($this->pc42_solandam === 0 || $this->pc42_solandam === 0.0 || $this->pc42_solandam == "")?@$GLOBALS["HTTP_POST_VARS"]["pc42_solandam"]:$this->pc42_solandam);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_solandamand {
        return false;
      }
        $this->pc42_solandam = $pc42_solandam; 
-     if(($this->pc42_solandam == null) || ($this->pc42_solandam == "") ){ 
+     if(($this->pc42_solandam == null) || (($this->pc42_solandam === 0 || $this->pc42_solandam === 0.0 || $this->pc42_solandam == "")) ){ 
        $this->erro_sql = " Campo pc42_solandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_solandamand {
    function sql_query ( $pc42_solandam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_solandamand {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_solandamand {
    function sql_query_file ( $pc42_solandam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_solandamand {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

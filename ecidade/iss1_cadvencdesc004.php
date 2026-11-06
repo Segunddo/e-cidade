@@ -31,7 +31,8 @@ include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clrotulo = new rotulocampo;
 $clcriaabas     = new cl_criaabas;
 ?>
@@ -56,11 +57,11 @@ $clcriaabas     = new cl_criaabas;
   <tr> 
      <td>
      <?
-       $clcriaabas->identifica = array("cadvencdesc"=>"Vencimento","cadvenc"=>"Datas");//nome do iframe e o label    
-       $clcriaabas->title      = array("cadvencdesc"=>"Descrição dos vencimentos","cadvenc"=>"Datas do vencimento");//nome do iframe e o label    
-       $clcriaabas->src = array("cadvencdesc"=>"iss1_cadvencdesc014.php");  //nome do iframe e SRC  
-       $clcriaabas->sizecampo= array("cadvencdesc"=>"10");    
-       $clcriaabas->disabled= array("cadvenc"=>"true");    
+       $clcriaabas->identifica = ["cadvencdesc"=>"Vencimento","cadvenc"=>"Datas"];//nome do iframe e o label    
+       $clcriaabas->title      = ["cadvencdesc"=>"Descrição dos vencimentos","cadvenc"=>"Datas do vencimento"];//nome do iframe e o label    
+       $clcriaabas->src = ["cadvencdesc"=>"iss1_cadvencdesc014.php"];  //nome do iframe e SRC  
+       $clcriaabas->sizecampo= ["cadvencdesc"=>"10"];    
+       $clcriaabas->disabled= ["cadvenc"=>"true"];    
        $clcriaabas->cria_abas();    
      ?> 
      </td>

@@ -34,7 +34,7 @@ class TextArea extends GtkText
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-	function TextArea()
+	function __construct()
 	{
         GtkText::GtkText();
         GtkText::set_editable(true);

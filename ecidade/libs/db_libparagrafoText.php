@@ -30,7 +30,7 @@ class libParagrafoText{
 
   var $oParag = null;
 
-  function libParagrafoText( $oParag ){
+  function __construct( $oParag ){
     $this->oParag = $oParag;
   }
 

@@ -52,7 +52,7 @@ class cl_averbaguiaitbi {
                  j103_averbaguia = int4 = Averba Guia 
                  ";
    //funcao construtor da classe 
-   function cl_averbaguiaitbi() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("averbaguiaitbi"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_averbaguiaitbi {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j103_sequencial = ($this->j103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_sequencial"]:$this->j103_sequencial);
-       $this->j103_itbi = ($this->j103_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_itbi"]:$this->j103_itbi);
-       $this->j103_averbaguia = ($this->j103_averbaguia == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_averbaguia"]:$this->j103_averbaguia);
+       $this->j103_sequencial = ($this->j103_sequencial === 0 || $this->j103_sequencial === 0.0 || $this->j103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_sequencial"]:$this->j103_sequencial);
+       $this->j103_itbi = ($this->j103_itbi === 0 || $this->j103_itbi === 0.0 || $this->j103_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_itbi"]:$this->j103_itbi);
+       $this->j103_averbaguia = ($this->j103_averbaguia === 0 || $this->j103_averbaguia === 0.0 || $this->j103_averbaguia == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_averbaguia"]:$this->j103_averbaguia);
      }else{
-       $this->j103_sequencial = ($this->j103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_sequencial"]:$this->j103_sequencial);
+       $this->j103_sequencial = ($this->j103_sequencial === 0 || $this->j103_sequencial === 0.0 || $this->j103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_sequencial"]:$this->j103_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_averbaguiaitbi {
          $this->j103_sequencial = $j103_sequencial; 
        }
      }
-     if(($this->j103_sequencial == null) || ($this->j103_sequencial == "") ){ 
+     if(($this->j103_sequencial == null) || ($this->j103_sequencial === 0 || $this->j103_sequencial === 0.0 || $this->j103_sequencial == "") ){ 
        $this->erro_sql = " Campo j103_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_averbaguiaitbi {
    function sql_query ( $j103_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_averbaguiaitbi {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_averbaguiaitbi {
    function sql_query_file ( $j103_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_averbaguiaitbi {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

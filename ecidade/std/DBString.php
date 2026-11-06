@@ -658,7 +658,7 @@ abstract class DBString {
    */
   static public function numeroPorExtenso($iNumero, $lMaiusculo = false) {
 
-    $nValor = ereg_replace(",", "\.", $iNumero);
+    $nValor = str_replace(",", "\.", $iNumero);
 
     $zeros = '000.000.000,00';
     $nValor = number_format($nValor,2);

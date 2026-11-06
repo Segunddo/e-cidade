@@ -63,7 +63,7 @@ class cl_transfmarca {
                  ma02_t_obs = text = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_transfmarca() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("transfmarca"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,11 +80,11 @@ class cl_transfmarca {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ma02_i_codigo = ($this->ma02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_codigo"]:$this->ma02_i_codigo);
-       $this->ma02_i_marca = ($this->ma02_i_marca == ""?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_marca"]:$this->ma02_i_marca);
-       $this->ma02_i_propant = ($this->ma02_i_propant == ""?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_propant"]:$this->ma02_i_propant);
-       $this->ma02_i_propnovo = ($this->ma02_i_propnovo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_propnovo"]:$this->ma02_i_propnovo);
-       $this->ma02_i_codproc = ($this->ma02_i_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_codproc"]:$this->ma02_i_codproc);
+       $this->ma02_i_codigo = (($this->ma02_i_codigo === 0 || $this->ma02_i_codigo === 0.0 || $this->ma02_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_codigo"]:$this->ma02_i_codigo);
+       $this->ma02_i_marca = (($this->ma02_i_marca === 0 || $this->ma02_i_marca === 0.0 || $this->ma02_i_marca == "")?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_marca"]:$this->ma02_i_marca);
+       $this->ma02_i_propant = (($this->ma02_i_propant === 0 || $this->ma02_i_propant === 0.0 || $this->ma02_i_propant == "")?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_propant"]:$this->ma02_i_propant);
+       $this->ma02_i_propnovo = (($this->ma02_i_propnovo === 0 || $this->ma02_i_propnovo === 0.0 || $this->ma02_i_propnovo == "")?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_propnovo"]:$this->ma02_i_propnovo);
+       $this->ma02_i_codproc = (($this->ma02_i_codproc === 0 || $this->ma02_i_codproc === 0.0 || $this->ma02_i_codproc == "")?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_codproc"]:$this->ma02_i_codproc);
        if($this->ma02_d_data == ""){
          $this->ma02_d_data_dia = ($this->ma02_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ma02_d_data_dia"]:$this->ma02_d_data_dia);
          $this->ma02_d_data_mes = ($this->ma02_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ma02_d_data_mes"]:$this->ma02_d_data_mes);
@@ -95,7 +95,7 @@ class cl_transfmarca {
        }
        $this->ma02_t_obs = ($this->ma02_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ma02_t_obs"]:$this->ma02_t_obs);
      }else{
-       $this->ma02_i_codigo = ($this->ma02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_codigo"]:$this->ma02_i_codigo);
+       $this->ma02_i_codigo = (($this->ma02_i_codigo === 0 || $this->ma02_i_codigo === 0.0 || $this->ma02_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["ma02_i_codigo"]:$this->ma02_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_transfmarca {
          $this->ma02_i_codigo = $ma02_i_codigo; 
        }
      }
-     if(($this->ma02_i_codigo == null) || ($this->ma02_i_codigo == "") ){ 
+     if(($this->ma02_i_codigo == null) || (($this->ma02_i_codigo === 0 || $this->ma02_i_codigo === 0.0 || $this->ma02_i_codigo == "")) ){ 
        $this->erro_sql = " Campo ma02_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -507,7 +507,7 @@ class cl_transfmarca {
    function sql_query ( $ma02_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_transfmarca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -550,7 +550,7 @@ class cl_transfmarca {
    function sql_query_file ( $ma02_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -571,7 +571,7 @@ class cl_transfmarca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

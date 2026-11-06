@@ -41,7 +41,7 @@ require_once(modification("model/cda.model.php"));
 require_once(modification("libs/db_conecta.php"));
 use ECidade\Tributario\Divida\Service\TermoInscricaoService;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 
 if( empty($proced) ){
   $proced = 0;
@@ -86,7 +86,7 @@ if (!isset($certid) || empty($certid)) {
   and v01_instit = {$instit}";
 
   $rsDivida = db_query($sql);
-  $numeroDiv = pg_num_rows($rsDivida);
+  $numeroDiv = ($rsDivida ? pg_num_rows($rsDivida) : 0);
 
   if ($numeroDiv > 0) {
     for ($iNumero = 0; $iNumero < $numeroDiv; $iNumero++) {       

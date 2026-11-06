@@ -65,8 +65,8 @@ class OdoGraph extends Graph {
     var $iOdoColor = "lightblue";
     var $caption;
 
-    function OdoGraph($aWidth=-1,$aHeight=-1,$aCachedName="",$aTimeOut=0,$aInline=true) {
-	Graph::Graph($aWidth,$aHeight,$aCachedName,$aTimeOut,$aInline);		
+    function __construct($aWidth=-1,$aHeight=-1,$aCachedName="",$aTimeOut=0,$aInline=true) {
+	Graph::__construct($aWidth,$aHeight,$aCachedName,$aTimeOut,$aInline);		
 	$this->SetColor($this->iOdoColor);
 	$this->img->SetMargin(5,5,5,5);
 	$this->SetMarginColor("steelblue");
@@ -166,7 +166,7 @@ class OdoNeedle extends LineProperty {
     var $iLineWeight=1;
     var $iShadowColor="gray:0.7",$iShadow=false, $idxShadow=4, $idyShadow=4;
 
-    function OdoNeedle() {
+    function __construct() {
 	$this->iArrowSize = array(
 	    3,5, 3,8, 3,15,    // SS, SM, SL
 	    4,7, 4,12, 5,20,    // MS, MM, ML
@@ -323,7 +323,7 @@ class OdoScale {
     var $iFormatStr = "%d";
     var $iLabelPosition=0.8; 
 
-    function OdoScale($aStartAngle,$aEndAngle) {
+    function __construct($aStartAngle,$aEndAngle) {
 	$this->label = new Text();
 	$this->iStartAngle = $aStartAngle * M_PI/180;
 	$this->iEndAngle = $aEndAngle * M_PI/180;
@@ -449,7 +449,7 @@ class Odometer {
     var $iMargin=5;
     var $caption,$iCaptionMargin=0;
 
-    function Odometer($aStyle=ODO_HALF) {
+    function __construct($aStyle=ODO_HALF) {
 	// Set default position
 	$this->xc = 0.5;
 	if( $aStyle == ODO_FULL ) {
@@ -661,7 +661,7 @@ class Odometer {
 class LayoutVert {
     var $iObj;
 
-    function LayoutVert($aObjArr) {
+    function __construct($aObjArr) {
 	if( !is_array($aObjArr) )
 	    $aObjArr = array($aObjArr);
 	$this->iObj = $aObjArr;
@@ -705,7 +705,7 @@ class LayoutVert {
 class LayoutHor {
     var $iObj;
 
-    function LayoutHor($aObjArr) {
+    function __construct($aObjArr) {
 	if( !is_array($aObjArr) )
 	    $aObjArr = array($aObjArr);
 	$this->iObj = $aObjArr;

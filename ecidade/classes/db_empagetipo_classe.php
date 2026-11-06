@@ -60,7 +60,7 @@ class cl_empagetipo {
                  e83_codigocompromisso = varchar(4) = Código do Compromisso
                  ";
     //funcao construtor da classe
-    function cl_empagetipo() {
+    function __construct() {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("empagetipo");
         $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_empagetipo {
     // funcao para atualizar campos
     function atualizacampos($exclusao=false) {
         if($exclusao==false){
-            $this->e83_codtipo = ($this->e83_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_codtipo"]:$this->e83_codtipo);
+            $this->e83_codtipo = ($this->e83_codtipo === 0 || $this->e83_codtipo === 0.0 || $this->e83_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_codtipo"]:$this->e83_codtipo);
             $this->e83_descr = ($this->e83_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_descr"]:$this->e83_descr);
-            $this->e83_conta = ($this->e83_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_conta"]:$this->e83_conta);
-            $this->e83_codmod = ($this->e83_codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_codmod"]:$this->e83_codmod);
+            $this->e83_conta = ($this->e83_conta === 0 || $this->e83_conta === 0.0 || $this->e83_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_conta"]:$this->e83_conta);
+            $this->e83_codmod = ($this->e83_codmod === 0 || $this->e83_codmod === 0.0 || $this->e83_codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_codmod"]:$this->e83_codmod);
             $this->e83_convenio = ($this->e83_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_convenio"]:$this->e83_convenio);
-            $this->e83_sequencia = ($this->e83_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_sequencia"]:$this->e83_sequencia);
+            $this->e83_sequencia = ($this->e83_sequencia === 0 || $this->e83_sequencia === 0.0 || $this->e83_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_sequencia"]:$this->e83_sequencia);
             $this->e83_codigocompromisso = ($this->e83_codigocompromisso == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_codigocompromisso"]:$this->e83_codigocompromisso);
         }else{
-            $this->e83_codtipo = ($this->e83_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_codtipo"]:$this->e83_codtipo);
+            $this->e83_codtipo = ($this->e83_codtipo === 0 || $this->e83_codtipo === 0.0 || $this->e83_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e83_codtipo"]:$this->e83_codtipo);
         }
     }
     // funcao para inclusao
@@ -160,7 +160,7 @@ class cl_empagetipo {
                 $this->e83_codtipo = $e83_codtipo;
             }
         }
-        if(($this->e83_codtipo == null) || ($this->e83_codtipo == "") ){
+        if(($this->e83_codtipo == null) || ($this->e83_codtipo === 0 || $this->e83_codtipo === 0.0 || $this->e83_codtipo == "") ){
             $this->erro_sql = " Campo e83_codtipo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -783,7 +783,7 @@ class cl_empagetipo {
         }
         return $sql;
     }
-    function sql_query_contas_vinculadas ($e83_codtipo=null,$campos="*",$ordem=null,$sWhere, $lVinculadas = false) {
+    function sql_query_contas_vinculadas ($e83_codtipo=null,$campos="*",$ordem=null,$sWhere = null, $lVinculadas = false) {
 
         $sSql = "select ";
         if($campos != "*" ){
@@ -845,7 +845,7 @@ class cl_empagetipo {
         return $sSql;
     }
 
-    function sql_query_contas_vinculadas_rp ($e83_codtipo=null,$campos="*",$ordem=null,$sWhere, $lVinculadas = false) {
+    function sql_query_contas_vinculadas_rp ($e83_codtipo=null,$campos="*",$ordem=null,$sWhere = null, $lVinculadas = false) {
 
        $lVinculadas  = false;
         $sSql = "select ";

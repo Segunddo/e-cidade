@@ -54,7 +54,7 @@ class cl_empageformacgm {
                  e28_empagetipo = int4 = Código da conta pagadora 
                  ";
    //funcao construtor da classe 
-   function cl_empageformacgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empageformacgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_empageformacgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e28_sequencial = ($this->e28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e28_sequencial"]:$this->e28_sequencial);
-       $this->e28_numcgm = ($this->e28_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["e28_numcgm"]:$this->e28_numcgm);
-       $this->e28_empageforma = ($this->e28_empageforma == ""?@$GLOBALS["HTTP_POST_VARS"]["e28_empageforma"]:$this->e28_empageforma);
-       $this->e28_empagetipo = ($this->e28_empagetipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e28_empagetipo"]:$this->e28_empagetipo);
+       $this->e28_sequencial = ($this->e28_sequencial === 0 || $this->e28_sequencial === 0.0 || $this->e28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e28_sequencial"]:$this->e28_sequencial);
+       $this->e28_numcgm = ($this->e28_numcgm === 0 || $this->e28_numcgm === 0.0 || $this->e28_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["e28_numcgm"]:$this->e28_numcgm);
+       $this->e28_empageforma = ($this->e28_empageforma === 0 || $this->e28_empageforma === 0.0 || $this->e28_empageforma == ""?@$GLOBALS["HTTP_POST_VARS"]["e28_empageforma"]:$this->e28_empageforma);
+       $this->e28_empagetipo = ($this->e28_empagetipo === 0 || $this->e28_empagetipo === 0.0 || $this->e28_empagetipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e28_empagetipo"]:$this->e28_empagetipo);
      }else{
-       $this->e28_sequencial = ($this->e28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e28_sequencial"]:$this->e28_sequencial);
+       $this->e28_sequencial = ($this->e28_sequencial === 0 || $this->e28_sequencial === 0.0 || $this->e28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e28_sequencial"]:$this->e28_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_empageformacgm {
          $this->e28_sequencial = $e28_sequencial; 
        }
      }
-     if(($this->e28_sequencial == null) || ($this->e28_sequencial == "") ){ 
+     if(($this->e28_sequencial == null) || ($this->e28_sequencial === 0 || $this->e28_sequencial === 0.0 || $this->e28_sequencial == "") ){ 
        $this->erro_sql = " Campo e28_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_empageformacgm {
    function sql_query ( $e28_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_empageformacgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_empageformacgm {
    function sql_query_file ( $e28_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_empageformacgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -47,7 +47,7 @@ $clrotulo->label("cp06_logradouro");
 $db_opcao = 1;
 $db_botao = true;
 if(isset($incluir)){
-  $logs_split = split(',',$logs);
+  $logs_split = preg_split('#,#m',$logs);
   for($i=0;$i<count($logs_split);$i++){
      $cllogradcep->incluir($j14_codigo,$logs_split[$i]); 
   }

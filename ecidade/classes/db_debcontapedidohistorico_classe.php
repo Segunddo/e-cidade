@@ -73,7 +73,7 @@ class cl_debcontapedidohistorico {
                  d83_codret = int4 = Codigo do Arquivo Retorno
                  ";
    //funcao construtor da classe
-   function cl_debcontapedidohistorico() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("debcontapedidohistorico");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -91,9 +91,9 @@ class cl_debcontapedidohistorico {
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->d83_sequencial = ($this->d83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_sequencial"]:$this->d83_sequencial);
-       $this->d83_debcontapedido = ($this->d83_debcontapedido == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_debcontapedido"]:$this->d83_debcontapedido);
-       $this->d83_instit = ($this->d83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_instit"]:$this->d83_instit);
-       $this->d83_banco = ($this->d83_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_banco"]:$this->d83_banco);
+       $this->d83_debcontapedido = ($this->d83_debcontapedido === 0 || $this->d83_debcontapedido === 0.0 || $this->d83_debcontapedido == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_debcontapedido"]:$this->d83_debcontapedido);
+       $this->d83_instit = ($this->d83_instit === 0 || $this->d83_instit === 0.0 || $this->d83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_instit"]:$this->d83_instit);
+       $this->d83_banco = ($this->d83_banco === 0 || $this->d83_banco === 0.0 || $this->d83_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_banco"]:$this->d83_banco);
        $this->d83_agencia = ($this->d83_agencia == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_agencia"]:$this->d83_agencia);
        $this->d83_conta = ($this->d83_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_conta"]:$this->d83_conta);
        if($this->d83_datalanc == ""){
@@ -105,10 +105,10 @@ class cl_debcontapedidohistorico {
          }
        }
        $this->d83_horalanc = ($this->d83_horalanc == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_horalanc"]:$this->d83_horalanc);
-       $this->d83_status = ($this->d83_status == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_status"]:$this->d83_status);
-       $this->d83_acao = ($this->d83_acao == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_acao"]:$this->d83_acao);
+       $this->d83_status = ($this->d83_status === 0 || $this->d83_status === 0.0 || $this->d83_status == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_status"]:$this->d83_status);
+       $this->d83_acao = ($this->d83_acao === 0 || $this->d83_acao === 0.0 || $this->d83_acao == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_acao"]:$this->d83_acao);
        $this->d83_idempresa = ($this->d83_idempresa == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_idempresa"]:$this->d83_idempresa);
-       $this->d83_codret = ($this->d83_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_codret"]:$this->d83_codret);
+       $this->d83_codret = ($this->d83_codret === 0 || $this->d83_codret === 0.0 || $this->d83_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_codret"]:$this->d83_codret);
      }else{
        $this->d83_sequencial = ($this->d83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_sequencial"]:$this->d83_sequencial);
      }
@@ -332,7 +332,7 @@ class cl_debcontapedidohistorico {
    function sql_query ( $d83_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -356,7 +356,7 @@ class cl_debcontapedidohistorico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -369,7 +369,7 @@ class cl_debcontapedidohistorico {
    function sql_query_file ( $d83_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_debcontapedidohistorico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_debcontapedidohistorico {
    function sql_query_info ( $d83_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_debcontapedidohistorico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_debcontapedidohistorico {
   function sql_query_deb_conta($d83_sequencial=null,$campos="*",$ordem=null,$dbwhere="") {
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_debcontapedidohistorico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

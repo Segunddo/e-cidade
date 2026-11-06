@@ -32,7 +32,8 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_ativid_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $clativid = new cl_ativid;
 $clativid->rotulo->label("q03_ativ");
 $clativid->rotulo->label("q03_descr");
@@ -130,7 +131,7 @@ $clrotulo->label('rh70_estrutural');
       <?
 
       $chave_q03_descr = addslashes($chave_q03_descr);
-      $repassa = array("tipo_pesquisa"=>@$tipo_pesquisa);
+      $repassa = ["tipo_pesquisa"=>@$tipo_pesquisa];
 
       if( isset($tipo_pesquisa) && $tipo_pesquisa == 'cnpj'){
 

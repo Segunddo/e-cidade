@@ -53,7 +53,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Alterar
   }
 
   $j58_codigo=$clmassafalida->j58_codigo;
-  $matriz=split("#",$matriculas);
+  $matriz=preg_split("#\\##m",$matriculas);
   for($i=0;$i<sizeof($matriz);$i++){
     
    $clmassamat->j59_codigo=$j58_codigo;

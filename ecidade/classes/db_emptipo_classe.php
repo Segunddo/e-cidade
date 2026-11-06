@@ -50,7 +50,7 @@ class cl_emptipo {
                  e41_descr = varchar(60) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_emptipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("emptipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_emptipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e41_codtipo = ($this->e41_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e41_codtipo"]:$this->e41_codtipo);
+       $this->e41_codtipo = ($this->e41_codtipo === 0 || $this->e41_codtipo === 0.0 || $this->e41_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e41_codtipo"]:$this->e41_codtipo);
        $this->e41_descr = ($this->e41_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e41_descr"]:$this->e41_descr);
      }else{
-       $this->e41_codtipo = ($this->e41_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e41_codtipo"]:$this->e41_codtipo);
+       $this->e41_codtipo = ($this->e41_codtipo === 0 || $this->e41_codtipo === 0.0 || $this->e41_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e41_codtipo"]:$this->e41_codtipo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_emptipo {
        return false;
      }
        $this->e41_codtipo = $e41_codtipo; 
-     if(($this->e41_codtipo == null) || ($this->e41_codtipo == "") ){ 
+     if(($this->e41_codtipo == null) || ($this->e41_codtipo === 0 || $this->e41_codtipo === 0.0 || $this->e41_codtipo == "") ){ 
        $this->erro_sql = " Campo e41_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

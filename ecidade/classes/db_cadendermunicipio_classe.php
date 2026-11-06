@@ -58,7 +58,7 @@ class cl_cadendermunicipio {
                  db72_cepfinal = varchar(8) = Cep Final 
                  ";
    //funcao construtor da classe 
-   function cl_cadendermunicipio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadendermunicipio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_cadendermunicipio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db72_sequencial = ($this->db72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db72_sequencial"]:$this->db72_sequencial);
-       $this->db72_cadenderestado = ($this->db72_cadenderestado == ""?@$GLOBALS["HTTP_POST_VARS"]["db72_cadenderestado"]:$this->db72_cadenderestado);
+       $this->db72_sequencial = ($this->db72_sequencial === 0 || $this->db72_sequencial === 0.0 || $this->db72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db72_sequencial"]:$this->db72_sequencial);
+       $this->db72_cadenderestado = ($this->db72_cadenderestado === 0 || $this->db72_cadenderestado === 0.0 || $this->db72_cadenderestado == ""?@$GLOBALS["HTTP_POST_VARS"]["db72_cadenderestado"]:$this->db72_cadenderestado);
        $this->db72_descricao = ($this->db72_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db72_descricao"]:$this->db72_descricao);
        $this->db72_sigla = ($this->db72_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["db72_sigla"]:$this->db72_sigla);
        $this->db72_cepinicial = ($this->db72_cepinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["db72_cepinicial"]:$this->db72_cepinicial);
        $this->db72_cepfinal = ($this->db72_cepfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["db72_cepfinal"]:$this->db72_cepfinal);
      }else{
-       $this->db72_sequencial = ($this->db72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db72_sequencial"]:$this->db72_sequencial);
+       $this->db72_sequencial = ($this->db72_sequencial === 0 || $this->db72_sequencial === 0.0 || $this->db72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db72_sequencial"]:$this->db72_sequencial);
      }
    }
    // funcao para inclusao
@@ -130,7 +130,7 @@ class cl_cadendermunicipio {
          $this->db72_sequencial = $db72_sequencial; 
        }
      }
-     if(($this->db72_sequencial == null) || ($this->db72_sequencial == "") ){ 
+     if(($this->db72_sequencial == null) || ($this->db72_sequencial === 0 || $this->db72_sequencial === 0.0 || $this->db72_sequencial == "") ){ 
        $this->erro_sql = " Campo db72_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -62,7 +62,7 @@ class cl_discla {
                  instit = int4 = Instituição
                  ";
    //funcao construtor da classe
-   function cl_discla() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("discla");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,8 +79,8 @@ class cl_discla {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codcla = ($this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
-       $this->codret = ($this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
+       $this->codcla = ($this->codcla === 0 || $this->codcla === 0.0 || $this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
+       $this->codret = ($this->codret === 0 || $this->codret === 0.0 || $this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
        if($this->dtcla == ""){
          $this->dtcla_dia = ($this->dtcla_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dtcla_dia"]:$this->dtcla_dia);
          $this->dtcla_mes = ($this->dtcla_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dtcla_mes"]:$this->dtcla_mes);
@@ -97,9 +97,9 @@ class cl_discla {
             $this->dtaute = $this->dtaute_ano."-".$this->dtaute_mes."-".$this->dtaute_dia;
          }
        }
-       $this->instit = ($this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
+       $this->instit = ($this->instit === 0 || $this->instit === 0.0 || $this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
      }else{
-       $this->codcla = ($this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
+       $this->codcla = ($this->codcla === 0 || $this->codcla === 0.0 || $this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_discla {
          $this->codcla = $codcla;
        }
      }
-     if(($this->codcla == null) || ($this->codcla == "") ){
+     if(($this->codcla == null) || ($this->codcla === 0 || $this->codcla === 0.0 || $this->codcla == "") ){
        $this->erro_sql = " Campo codcla nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_discla {
    function sql_query ( $codcla=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_discla {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -517,7 +517,7 @@ class cl_discla {
    function sql_query_file ( $codcla=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_discla {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -551,7 +551,7 @@ class cl_discla {
   function sql_query_classificacao ( $codcla=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -574,7 +574,7 @@ class cl_discla {
           $sql .= $sql2;
           if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
               $sql .= $virgula.$campos_sql[$i];

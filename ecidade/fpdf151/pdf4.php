@@ -113,7 +113,7 @@ $this->SetLeftMargin($S);
         $this->wLine=$w;
         $this->hLine=$h;
         $this->Text=trim($txt);
-        $this->Text=ereg_replace("\n|\r|\t","",$this->Text);
+        $this->Text=preg_replace("#\n|\r|\t#m","",$this->Text);
         $this->border=$border;
         $this->align=$align;
         $this->fill=$fill;
@@ -164,7 +164,7 @@ $this->SetLeftMargin($S);
 
     function Padding()
     {
-        if(ereg("^.+,",$this->Padding)) {
+        if(preg_match("#^.+,#m",$this->Padding)) {
             $tab=explode(",",$this->Padding);
             $this->lPadding=$tab[0];
             $this->tPadding=$tab[1];
@@ -267,11 +267,11 @@ $this->SetLeftMargin($S);
                     break;
                 else
                 {
-                    if(ereg("B",$style1))
+                    if(preg_match("#B#m",$style1))
                         $style['b']="B";
-                    if(ereg("I",$style1))
+                    if(preg_match("#I#m",$style1))
                         $style['i']="I";
-                    if(ereg("U",$style1))
+                    if(preg_match("#U#m",$style1))
                         $style['u']="U";
                 } 
             }
@@ -323,19 +323,19 @@ $this->SetLeftMargin($S);
     {
         $tab=array();
         // Closing tag
-        if(ereg("^(</([^>]+)>).*",$text,$regs)) {
+        if(preg_match("#^(<\\/([^>]+)>).*#m",$text,$regs)) {
             $tab[1]="c";
             $tab[2]=trim($regs[2]);
         }
         // Opening tag
-        else if(ereg("^(<([^>]+)>).*",$text,$regs)) {
-            $regs[2]=ereg_replace("^a","a ",$regs[2]);
+        else if(preg_match("#^(<([^>]+)>).*#m",$text,$regs)) {
+            $regs[2]=preg_replace("#^a#m","a ",$regs[2]);
             $tab[1]="o";
             $tab[2]=trim($regs[2]);
 
             // Presence of attributes
-            if(ereg("(.+) (.+)='(.+)' *",$regs[2])) {
-                $tab1=split(" +",$regs[2]);
+            if(preg_match("#(.+) (.+)='(.+)' *#m",$regs[2])) {
+                $tab1=preg_split("# +#m",$regs[2]);
                 $tab[2]=trim($tab1[0]);
                 while(list($i,$couple)=each($tab1))
                 {
@@ -350,12 +350,12 @@ $this->SetLeftMargin($S);
             }
         }
          // Space
-         else if(ereg("^( ).*",$text,$regs)) {
+         else if(preg_match("#^( ).*#m",$text,$regs)) {
             $tab[1]="s";
             $tab[2]=$regs[1];
         }
         // Text
-        else if(ereg("^([^< ]+).*",$text,$regs)) {
+        else if(preg_match("#^([^< ]+).*#m",$text,$regs)) {
             $tab[1]="t";
             $tab[2]=trim($regs[1]);
         }
@@ -463,8 +463,8 @@ $this->SetLeftMargin($S);
             $i=0;
         }
         else {
-            ereg("^(( *(<([^>]+)>)* *)*)(.*)",$this->Text,$regs);
-            $regs[1]=ereg_replace(" ", "", $regs[1]);
+            preg_match("#^(( *(<([^>]+)>)* *)*)(.*)#m",$this->Text,$regs);
+            $regs[1]=preg_replace("# #m", "", $regs[1]);
             $this->Text=$regs[1].$regs[5];
             $i=-1;
         }
@@ -617,7 +617,7 @@ $ru) ? " e " : "").$ru;
 	                 Trocando o " E " por " e ", fica muito + apresentável! 
                      Rodrigo Cerqueira, rodrigobc@fte.com.br
                     */
-			  if ($rt) $rt=ereg_replace(" E "," e ",ucwords($rt));
+			  if ($rt) $rt=preg_replace("# E #m"," e ",ucwords($rt));
                           return (($rt) ? ($rt) : "Zero"); 
          } 
 

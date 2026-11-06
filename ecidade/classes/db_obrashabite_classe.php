@@ -152,12 +152,12 @@ class cl_obrashabite
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ob09_codhab = ($this->ob09_codhab == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_codhab"] : $this->ob09_codhab);
-            $this->ob09_engprefeitura = ($this->ob09_engprefeitura == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_engprefeitura"] : $this->ob09_engprefeitura);
-            $this->ob09_codconstr = ($this->ob09_codconstr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_codconstr"] : $this->ob09_codconstr);
-            $this->ob09_habite = ($this->ob09_habite == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_habite"] : $this->ob09_habite);
+            $this->ob09_codhab = ($this->ob09_codhab === 0 || $this->ob09_codhab === 0.0 || $this->ob09_codhab == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_codhab"] : $this->ob09_codhab);
+            $this->ob09_engprefeitura = ($this->ob09_engprefeitura === 0 || $this->ob09_engprefeitura === 0.0 || $this->ob09_engprefeitura == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_engprefeitura"] : $this->ob09_engprefeitura);
+            $this->ob09_codconstr = ($this->ob09_codconstr === 0 || $this->ob09_codconstr === 0.0 || $this->ob09_codconstr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_codconstr"] : $this->ob09_codconstr);
+            $this->ob09_habite = ($this->ob09_habite === 0 || $this->ob09_habite === 0.0 || $this->ob09_habite == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_habite"] : $this->ob09_habite);
             $this->ob09_parcial = ($this->ob09_parcial === "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_parcial"] : $this->ob09_parcial);
-            $this->ob09_area = ($this->ob09_area == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_area"] : $this->ob09_area);
+            $this->ob09_area = ($this->ob09_area === 0 || $this->ob09_area === 0.0 || $this->ob09_area == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_area"] : $this->ob09_area);
             $this->ob09_obs = ($this->ob09_obs == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_obs"] : $this->ob09_obs);
             $this->ob09_obsinss = ($this->ob09_obsinss == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_obsinss"] : $this->ob09_obsinss);
             $this->ob09_logradcorresp = ($this->ob09_logradcorresp == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_logradcorresp"] : $this->ob09_logradcorresp);
@@ -165,7 +165,7 @@ class cl_obrashabite
             $this->ob09_compl = ($this->ob09_compl == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_compl"] : $this->ob09_compl);
             $this->ob09_bairrocorresp = ($this->ob09_bairrocorresp == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_bairrocorresp"] : $this->ob09_bairrocorresp);
             $this->ob09_codibgemunic = ($this->ob09_codibgemunic == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_codibgemunic"] : $this->ob09_codibgemunic);
-            $this->ob09_anousu = ($this->ob09_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_anousu"] : $this->ob09_anousu);
+            $this->ob09_anousu = ($this->ob09_anousu === 0 || $this->ob09_anousu === 0.0 || $this->ob09_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_anousu"] : $this->ob09_anousu);
             $this->ob09_data = ($this->ob09_data == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_data"] : $this->ob09_data);
             $this->ob09_ativo = ($this->ob09_ativo === "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_ativo"] : $this->ob09_ativo);
             $this->ob09_datacancelamentoreativacao = ($this->ob09_datacancelamentoreativacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_datacancelamentoreativacao"] : $this->ob09_datacancelamentoreativacao);
@@ -186,7 +186,7 @@ class cl_obrashabite
                 $this->ob09_datacancelamentoreativacao = "{$data[2]}-{$data[1]}-{$data[0]}";
             }
         } else {
-            $this->ob09_codhab = ($this->ob09_codhab == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_codhab"] : $this->ob09_codhab);
+            $this->ob09_codhab = ($this->ob09_codhab === 0 || $this->ob09_codhab === 0.0 || $this->ob09_codhab == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob09_codhab"] : $this->ob09_codhab);
         }
     }
 
@@ -796,7 +796,7 @@ class cl_obrashabite
    function sql_query_obco ( $ob09_codhab=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -824,7 +824,7 @@ class cl_obrashabite
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -836,7 +836,7 @@ class cl_obrashabite
    function sql_query_engpref ( $ob09_codhab=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -859,7 +859,7 @@ class cl_obrashabite
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -871,7 +871,7 @@ class cl_obrashabite
    function sql_query_obras_habite ( $ob09_codhab=null,$campos="*",$ordem=null,$dbwhere=""){
 		$sql = "select ";
 		if($campos != "*" ){
-			$campos_sql = split("#",$campos);
+			$campos_sql = preg_split("#\\##m",$campos);
 			$virgula = "";
 			for($i=0;$i<sizeof($campos_sql);$i++){
 				$sql .= $virgula.$campos_sql[$i];
@@ -903,7 +903,7 @@ class cl_obrashabite
 		$sql .= $sql2;
 		if($ordem != null ){
 			$sql .= " order by ";
-			$campos_sql = split("#",$ordem);
+			$campos_sql = preg_split("#\\##m",$ordem);
 			$virgula = "";
 			for($i=0;$i<sizeof($campos_sql);$i++){
 				$sql .= $virgula.$campos_sql[$i];

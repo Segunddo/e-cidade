@@ -28,7 +28,7 @@
 set_time_limit(0);
 include(modification("libs/db_sql.php"));
 require(modification("fpdf151/pdf.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 //echo $exerc;
 //exit;
 if ( $ordem == 'v01_proced' ){
@@ -127,7 +127,7 @@ $tvlrjuros2 = 0;
 $tvlrmulta2 = 0;
 $tvlrdesconto2 = 0;
 $ttotal2 = 0;
-for($s=0;$s<pg_numrows($result2);$s++){
+for($s=0;$s<($result2 ? pg_numrows($result2) : 0);$s++){
   db_fieldsmemory($result2,$s);
   if ( $ordem == 'v01_proced' ){
      if ($quebra != $v01_proced.'-'.$v03_dcomp){

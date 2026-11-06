@@ -52,7 +52,7 @@ class cl_aguaconsumorec {
                  x20_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_aguaconsumorec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguaconsumorec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_aguaconsumorec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x20_codconsumotipo = ($this->x20_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumotipo"]:$this->x20_codconsumotipo);
-       $this->x20_codconsumo = ($this->x20_codconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumo"]:$this->x20_codconsumo);
-       $this->x20_valor = ($this->x20_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_valor"]:$this->x20_valor);
+       $this->x20_codconsumotipo = (($this->x20_codconsumotipo === 0 || $this->x20_codconsumotipo === 0.0 || ($this->x20_codconsumotipo === 0 || $this->x20_codconsumotipo === 0.0 || $this->x20_codconsumotipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumotipo"]:$this->x20_codconsumotipo);
+       $this->x20_codconsumo = (($this->x20_codconsumo === 0 || $this->x20_codconsumo === 0.0 || ($this->x20_codconsumo === 0 || $this->x20_codconsumo === 0.0 || $this->x20_codconsumo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumo"]:$this->x20_codconsumo);
+       $this->x20_valor = (($this->x20_valor === 0 || $this->x20_valor === 0.0 || ($this->x20_valor === 0 || $this->x20_valor === 0.0 || $this->x20_valor == ""))?@$GLOBALS["HTTP_POST_VARS"]["x20_valor"]:$this->x20_valor);
      }else{
-       $this->x20_codconsumotipo = ($this->x20_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumotipo"]:$this->x20_codconsumotipo);
-       $this->x20_codconsumo = ($this->x20_codconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumo"]:$this->x20_codconsumo);
+       $this->x20_codconsumotipo = (($this->x20_codconsumotipo === 0 || $this->x20_codconsumotipo === 0.0 || ($this->x20_codconsumotipo === 0 || $this->x20_codconsumotipo === 0.0 || $this->x20_codconsumotipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumotipo"]:$this->x20_codconsumotipo);
+       $this->x20_codconsumo = (($this->x20_codconsumo === 0 || $this->x20_codconsumo === 0.0 || ($this->x20_codconsumo === 0 || $this->x20_codconsumo === 0.0 || $this->x20_codconsumo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumo"]:$this->x20_codconsumo);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_aguaconsumorec {
      }
        $this->x20_codconsumo = $x20_codconsumo; 
        $this->x20_codconsumotipo = $x20_codconsumotipo; 
-     if(($this->x20_codconsumo == null) || ($this->x20_codconsumo == "") ){ 
+     if(($this->x20_codconsumo == null) || (($this->x20_codconsumo === 0 || $this->x20_codconsumo === 0.0 || ($this->x20_codconsumo === 0 || $this->x20_codconsumo === 0.0 || $this->x20_codconsumo == ""))) ){ 
        $this->erro_sql = " Campo x20_codconsumo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_aguaconsumorec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x20_codconsumotipo == null) || ($this->x20_codconsumotipo == "") ){ 
+     if(($this->x20_codconsumotipo == null) || (($this->x20_codconsumotipo === 0 || $this->x20_codconsumotipo === 0.0 || ($this->x20_codconsumotipo === 0 || $this->x20_codconsumotipo === 0.0 || $this->x20_codconsumotipo == ""))) ){ 
        $this->erro_sql = " Campo x20_codconsumotipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_aguaconsumorec {
    function sql_query ( $x20_codconsumo=null,$x20_codconsumotipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_aguaconsumorec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_aguaconsumorec {
    function sql_query_file ( $x20_codconsumo=null,$x20_codconsumotipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_aguaconsumorec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -54,7 +54,7 @@ class cl_cadenderbairrocadenderrua
                  ";
 
     //funcao construtor da classe
-    function cl_cadenderbairrocadenderrua()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("cadenderbairrocadenderrua");
@@ -76,11 +76,11 @@ class cl_cadenderbairrocadenderrua
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->db87_sequencial = ($this->db87_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db87_sequencial"] : $this->db87_sequencial);
-            $this->db87_cadenderrua = ($this->db87_cadenderrua == "" ? @$GLOBALS["HTTP_POST_VARS"]["db87_cadenderrua"] : $this->db87_cadenderrua);
-            $this->db87_cadenderbairro = ($this->db87_cadenderbairro == "" ? @$GLOBALS["HTTP_POST_VARS"]["db87_cadenderbairro"] : $this->db87_cadenderbairro);
+            $this->db87_sequencial = ($this->db87_sequencial === 0 || $this->db87_sequencial === 0.0 || $this->db87_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db87_sequencial"] : $this->db87_sequencial);
+            $this->db87_cadenderrua = ($this->db87_cadenderrua === 0 || $this->db87_cadenderrua === 0.0 || $this->db87_cadenderrua == "" ? @$GLOBALS["HTTP_POST_VARS"]["db87_cadenderrua"] : $this->db87_cadenderrua);
+            $this->db87_cadenderbairro = ($this->db87_cadenderbairro === 0 || $this->db87_cadenderbairro === 0.0 || $this->db87_cadenderbairro == "" ? @$GLOBALS["HTTP_POST_VARS"]["db87_cadenderbairro"] : $this->db87_cadenderbairro);
         } else {
-            $this->db87_sequencial = ($this->db87_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db87_sequencial"] : $this->db87_sequencial);
+            $this->db87_sequencial = ($this->db87_sequencial === 0 || $this->db87_sequencial === 0.0 || $this->db87_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db87_sequencial"] : $this->db87_sequencial);
         }
     }
 
@@ -138,7 +138,7 @@ class cl_cadenderbairrocadenderrua
                 $this->db87_sequencial = $db87_sequencial;
             }
         }
-        if (($this->db87_sequencial == null) || ($this->db87_sequencial == "")) {
+        if (($this->db87_sequencial == null) || ($this->db87_sequencial === 0 || $this->db87_sequencial === 0.0 || $this->db87_sequencial == "")) {
             $this->erro_sql = " Campo db87_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

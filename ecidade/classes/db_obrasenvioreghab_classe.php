@@ -54,7 +54,7 @@ class cl_obrasenvioreghab {
                  ob18_protocolo = int4 = Protocolo
                  ";
    //funcao construtor da classe
-   function cl_obrasenvioreghab() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obrasenvioreghab");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_obrasenvioreghab {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob18_codigo = ($this->ob18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob18_codigo"]:$this->ob18_codigo);
-       $this->ob18_codobraenvioreg = ($this->ob18_codobraenvioreg == ""?@$GLOBALS["HTTP_POST_VARS"]["ob18_codobraenvioreg"]:$this->ob18_codobraenvioreg);
-       $this->ob18_codhabite = ($this->ob18_codhabite == ""?@$GLOBALS["HTTP_POST_VARS"]["ob18_codhabite"]:$this->ob18_codhabite);
+       $this->ob18_codigo = ($this->ob18_codigo === 0 || $this->ob18_codigo === 0.0 || $this->ob18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob18_codigo"]:$this->ob18_codigo);
+       $this->ob18_codobraenvioreg = ($this->ob18_codobraenvioreg === 0 || $this->ob18_codobraenvioreg === 0.0 || $this->ob18_codobraenvioreg == ""?@$GLOBALS["HTTP_POST_VARS"]["ob18_codobraenvioreg"]:$this->ob18_codobraenvioreg);
+       $this->ob18_codhabite = ($this->ob18_codhabite === 0 || $this->ob18_codhabite === 0.0 || $this->ob18_codhabite == ""?@$GLOBALS["HTTP_POST_VARS"]["ob18_codhabite"]:$this->ob18_codhabite);
        $this->ob18_protocolo = ($this->ob18_protocolo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob18_protocolo"]:$this->ob18_protocolo);
      }else{
-       $this->ob18_codigo = ($this->ob18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob18_codigo"]:$this->ob18_codigo);
+       $this->ob18_codigo = ($this->ob18_codigo === 0 || $this->ob18_codigo === 0.0 || $this->ob18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob18_codigo"]:$this->ob18_codigo);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_obrasenvioreghab {
          $this->ob18_codigo = $ob18_codigo;
        }
      }
-     if(($this->ob18_codigo == null) || ($this->ob18_codigo == "") ){
+     if(($this->ob18_codigo == null) || ($this->ob18_codigo === 0 || $this->ob18_codigo === 0.0 || $this->ob18_codigo == "") ){
        $this->erro_sql = " Campo ob18_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -374,7 +374,7 @@ class cl_obrasenvioreghab {
    function sql_query ( $ob18_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_obrasenvioreghab {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -412,7 +412,7 @@ class cl_obrasenvioreghab {
    function sql_query_file ( $ob18_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_obrasenvioreghab {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

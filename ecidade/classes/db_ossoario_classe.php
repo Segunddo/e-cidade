@@ -59,7 +59,7 @@ class cl_ossoario {
                  cm06_t_obs = text = Observações
                  ";
    //funcao construtor da classe
-   function cl_ossoario() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ossoario");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,9 +76,9 @@ class cl_ossoario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm06_i_codigo = ($this->cm06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm06_i_codigo"]:$this->cm06_i_codigo);
-       $this->cm06_i_sepultamento = ($this->cm06_i_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm06_i_sepultamento"]:$this->cm06_i_sepultamento);
-       $this->cm06_i_ossoario = ($this->cm06_i_ossoario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm06_i_ossoario"]:$this->cm06_i_ossoario);
+       $this->cm06_i_codigo = (($this->cm06_i_codigo === 0 || $this->cm06_i_codigo === 0.0 || $this->cm06_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm06_i_codigo"]:$this->cm06_i_codigo);
+       $this->cm06_i_sepultamento = (($this->cm06_i_sepultamento === 0 || $this->cm06_i_sepultamento === 0.0 || $this->cm06_i_sepultamento == "")?@$GLOBALS["HTTP_POST_VARS"]["cm06_i_sepultamento"]:$this->cm06_i_sepultamento);
+       $this->cm06_i_ossoario = (($this->cm06_i_ossoario === 0 || $this->cm06_i_ossoario === 0.0 || $this->cm06_i_ossoario == "")?@$GLOBALS["HTTP_POST_VARS"]["cm06_i_ossoario"]:$this->cm06_i_ossoario);
        if($this->cm06_d_entrada == ""){
          $this->cm06_d_entrada_dia = ($this->cm06_d_entrada_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm06_d_entrada_dia"]:$this->cm06_d_entrada_dia);
          $this->cm06_d_entrada_mes = ($this->cm06_d_entrada_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm06_d_entrada_mes"]:$this->cm06_d_entrada_mes);
@@ -89,7 +89,7 @@ class cl_ossoario {
        }
        $this->cm06_t_obs = ($this->cm06_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["cm06_t_obs"]:$this->cm06_t_obs);
      }else{
-       $this->cm06_i_codigo = ($this->cm06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm06_i_codigo"]:$this->cm06_i_codigo);
+       $this->cm06_i_codigo = (($this->cm06_i_codigo === 0 || $this->cm06_i_codigo === 0.0 || $this->cm06_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm06_i_codigo"]:$this->cm06_i_codigo);
      }
    }
    // funcao para inclusao
@@ -150,7 +150,7 @@ class cl_ossoario {
          $this->cm06_i_codigo = $cm06_i_codigo;
        }
      }
-     if(($this->cm06_i_codigo == null) || ($this->cm06_i_codigo == "") ){
+     if(($this->cm06_i_codigo == null) || (($this->cm06_i_codigo === 0 || $this->cm06_i_codigo === 0.0 || $this->cm06_i_codigo == "")) ){
        $this->erro_sql = " Campo cm06_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -441,7 +441,7 @@ class cl_ossoario {
    function sql_query ( $cm06_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_ossoario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_ossoario {
    function sql_query_file ( $cm06_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -503,7 +503,7 @@ class cl_ossoario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

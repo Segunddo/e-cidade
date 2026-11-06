@@ -52,7 +52,7 @@ class cl_saltesextra {
                  k109_contaextra = int4 = Conta Extra Orçamentaria
                  ";
    //funcao construtor da classe
-   function cl_saltesextra() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("saltesextra");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_saltesextra {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k109_sequencial = ($this->k109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k109_sequencial"]:$this->k109_sequencial);
-       $this->k109_saltes = ($this->k109_saltes == ""?@$GLOBALS["HTTP_POST_VARS"]["k109_saltes"]:$this->k109_saltes);
-       $this->k109_contaextra = ($this->k109_contaextra == ""?@$GLOBALS["HTTP_POST_VARS"]["k109_contaextra"]:$this->k109_contaextra);
+       $this->k109_sequencial = ($this->k109_sequencial === 0 || $this->k109_sequencial === 0.0 || $this->k109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k109_sequencial"]:$this->k109_sequencial);
+       $this->k109_saltes = ($this->k109_saltes === 0 || $this->k109_saltes === 0.0 || $this->k109_saltes == ""?@$GLOBALS["HTTP_POST_VARS"]["k109_saltes"]:$this->k109_saltes);
+       $this->k109_contaextra = ($this->k109_contaextra === 0 || $this->k109_contaextra === 0.0 || $this->k109_contaextra == ""?@$GLOBALS["HTTP_POST_VARS"]["k109_contaextra"]:$this->k109_contaextra);
      }else{
-       $this->k109_sequencial = ($this->k109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k109_sequencial"]:$this->k109_sequencial);
+       $this->k109_sequencial = ($this->k109_sequencial === 0 || $this->k109_sequencial === 0.0 || $this->k109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k109_sequencial"]:$this->k109_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_saltesextra {
          $this->k109_sequencial = $k109_sequencial;
        }
      }
-     if(($this->k109_sequencial == null) || ($this->k109_sequencial == "") ){
+     if(($this->k109_sequencial == null) || ($this->k109_sequencial === 0 || $this->k109_sequencial === 0.0 || $this->k109_sequencial == "") ){
        $this->erro_sql = " Campo k109_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

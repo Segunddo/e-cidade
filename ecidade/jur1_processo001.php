@@ -61,7 +61,7 @@ if(isset($HTTP_POST_VARS["enviar"])) {
 					        $data,
 					        '$v50_movim')";
   $result = db_query($sql) or die("Erro(34) inserindo em juridico");
-  $aux_autor = split("#",$aux_autor);
+  $aux_autor = explode("#",$aux_autor);
   $tam = sizeof($aux_autor);
   for($i = 1;$i < $tam;$i++)
     $result = db_query("INSERT INTO autproc VALUES($v50_codigo,'".$aux_autor[$i]."',$i)") or die("Erro(37) inserindo em autproc: $i");

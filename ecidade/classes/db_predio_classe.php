@@ -52,7 +52,7 @@ class cl_predio {
                  j111_sequencial = int4 = Código Sequencial 
                  ";
    //funcao construtor da classe 
-   function cl_predio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("predio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_predio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j111_condominio = ($this->j111_condominio == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_condominio"]:$this->j111_condominio);
+       $this->j111_condominio = ($this->j111_condominio === 0 || $this->j111_condominio === 0.0 || $this->j111_condominio == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_condominio"]:$this->j111_condominio);
        $this->j111_nome = ($this->j111_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_nome"]:$this->j111_nome);
-       $this->j111_sequencial = ($this->j111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_sequencial"]:$this->j111_sequencial);
+       $this->j111_sequencial = ($this->j111_sequencial === 0 || $this->j111_sequencial === 0.0 || $this->j111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_sequencial"]:$this->j111_sequencial);
      }else{
-       $this->j111_sequencial = ($this->j111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_sequencial"]:$this->j111_sequencial);
+       $this->j111_sequencial = ($this->j111_sequencial === 0 || $this->j111_sequencial === 0.0 || $this->j111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_sequencial"]:$this->j111_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_predio {
          $this->j111_sequencial = $j111_sequencial; 
        }
      }
-     if(($this->j111_sequencial == null) || ($this->j111_sequencial == "") ){ 
+     if(($this->j111_sequencial == null) || ($this->j111_sequencial === 0 || $this->j111_sequencial === 0.0 || $this->j111_sequencial == "") ){ 
        $this->erro_sql = " Campo j111_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_predio {
    function sql_query ( $j111_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_predio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_predio {
    function sql_query_file ( $j111_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_predio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

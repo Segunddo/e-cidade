@@ -66,7 +66,7 @@ class cl_procfiscal {
                  y100_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_procfiscal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procfiscal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,10 +83,10 @@ class cl_procfiscal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y100_sequencial = ($this->y100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_sequencial"]:$this->y100_sequencial);
-       $this->y100_coddepto = ($this->y100_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_coddepto"]:$this->y100_coddepto);
-       $this->y100_instit = ($this->y100_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_instit"]:$this->y100_instit);
-       $this->y100_procfiscalcadtipo = ($this->y100_procfiscalcadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_procfiscalcadtipo"]:$this->y100_procfiscalcadtipo);
+       $this->y100_sequencial = (($this->y100_sequencial === 0 || $this->y100_sequencial === 0.0 || $this->y100_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y100_sequencial"]:$this->y100_sequencial);
+       $this->y100_coddepto = (($this->y100_coddepto === 0 || $this->y100_coddepto === 0.0 || $this->y100_coddepto == "")?@$GLOBALS["HTTP_POST_VARS"]["y100_coddepto"]:$this->y100_coddepto);
+       $this->y100_instit = (($this->y100_instit === 0 || $this->y100_instit === 0.0 || $this->y100_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["y100_instit"]:$this->y100_instit);
+       $this->y100_procfiscalcadtipo = (($this->y100_procfiscalcadtipo === 0 || $this->y100_procfiscalcadtipo === 0.0 || $this->y100_procfiscalcadtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y100_procfiscalcadtipo"]:$this->y100_procfiscalcadtipo);
        if($this->y100_dtinicial == ""){
          $this->y100_dtinicial_dia = ($this->y100_dtinicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_dtinicial_dia"]:$this->y100_dtinicial_dia);
          $this->y100_dtinicial_mes = ($this->y100_dtinicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_dtinicial_mes"]:$this->y100_dtinicial_mes);
@@ -105,7 +105,7 @@ class cl_procfiscal {
        }
        $this->y100_obs = ($this->y100_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_obs"]:$this->y100_obs);
      }else{
-       $this->y100_sequencial = ($this->y100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_sequencial"]:$this->y100_sequencial);
+       $this->y100_sequencial = (($this->y100_sequencial === 0 || $this->y100_sequencial === 0.0 || $this->y100_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y100_sequencial"]:$this->y100_sequencial);
      }
    }
    // funcao para inclusao
@@ -183,7 +183,7 @@ class cl_procfiscal {
          $this->y100_sequencial = $y100_sequencial; 
        }
      }
-     if(($this->y100_sequencial == null) || ($this->y100_sequencial == "") ){ 
+     if(($this->y100_sequencial == null) || (($this->y100_sequencial === 0 || $this->y100_sequencial === 0.0 || $this->y100_sequencial == "")) ){ 
        $this->erro_sql = " Campo y100_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -507,7 +507,7 @@ class cl_procfiscal {
    function sql_query ( $y100_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -533,7 +533,7 @@ class cl_procfiscal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_procfiscal {
    function sql_query_file ( $y100_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -566,7 +566,7 @@ class cl_procfiscal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

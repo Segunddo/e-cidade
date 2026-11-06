@@ -51,7 +51,8 @@ $clrotulo->label("j01_matric");
 $clrotulo->label("z01_nome");
 $db_opcao = 1;
 $db_botao = true;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 //echo "<br><br><br><br><br>";

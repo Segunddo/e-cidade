@@ -50,7 +50,7 @@ class cl_obraspropri {
                  ob03_numcgm = int4 = Proprietário da obra 
                  ";
    //funcao construtor da classe 
-   function cl_obraspropri() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obraspropri"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_obraspropri {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob03_codobra = ($this->ob03_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob03_codobra"]:$this->ob03_codobra);
-       $this->ob03_numcgm = ($this->ob03_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ob03_numcgm"]:$this->ob03_numcgm);
+       $this->ob03_codobra = ($this->ob03_codobra === 0 || $this->ob03_codobra === 0.0 || $this->ob03_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob03_codobra"]:$this->ob03_codobra);
+       $this->ob03_numcgm = ($this->ob03_numcgm === 0 || $this->ob03_numcgm === 0.0 || $this->ob03_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ob03_numcgm"]:$this->ob03_numcgm);
      }else{
-       $this->ob03_codobra = ($this->ob03_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob03_codobra"]:$this->ob03_codobra);
+       $this->ob03_codobra = ($this->ob03_codobra === 0 || $this->ob03_codobra === 0.0 || $this->ob03_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob03_codobra"]:$this->ob03_codobra);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_obraspropri {
        return false;
      }
        $this->ob03_codobra = $ob03_codobra; 
-     if(($this->ob03_codobra == null) || ($this->ob03_codobra == "") ){ 
+     if(($this->ob03_codobra == null) || ($this->ob03_codobra === 0 || $this->ob03_codobra === 0.0 || $this->ob03_codobra == "") ){ 
        $this->erro_sql = " Campo ob03_codobra nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_obraspropri {
    function sql_query ( $ob03_codobra=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_obraspropri {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_obraspropri {
    function sql_query_file ( $ob03_codobra=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_obraspropri {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

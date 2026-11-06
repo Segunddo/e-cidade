@@ -35,7 +35,7 @@ class cl_empagemov
                  ";
 
     //funcao construtor da classe
-    public function cl_empagemov()
+    public function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("empagemov");
@@ -57,9 +57,9 @@ class cl_empagemov
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e81_codmov = ($this->e81_codmov == "" ? @$GLOBALS["HTTP_POST_VARS"]["e81_codmov"] : $this->e81_codmov);
-            $this->e81_codage = ($this->e81_codage == "" ? @$GLOBALS["HTTP_POST_VARS"]["e81_codage"] : $this->e81_codage);
-            $this->e81_numemp = ($this->e81_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e81_numemp"] : $this->e81_numemp);
+            $this->e81_codmov = ($this->e81_codmov === 0 || $this->e81_codmov === 0.0 || $this->e81_codmov == "" ? @$GLOBALS["HTTP_POST_VARS"]["e81_codmov"] : $this->e81_codmov);
+            $this->e81_codage = ($this->e81_codage === 0 || $this->e81_codage === 0.0 || $this->e81_codage == "" ? @$GLOBALS["HTTP_POST_VARS"]["e81_codage"] : $this->e81_codage);
+            $this->e81_numemp = ($this->e81_numemp === 0 || $this->e81_numemp === 0.0 || $this->e81_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e81_numemp"] : $this->e81_numemp);
             $this->e81_valor = ($this->e81_valor === "" ? @$GLOBALS["HTTP_POST_VARS"]["e81_valor"] : $this->e81_valor);
             if ($this->e81_cancelado == "") {
                 $this->e81_cancelado_dia = ($this->e81_cancelado_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["e81_cancelado_dia"] : $this->e81_cancelado_dia);
@@ -70,7 +70,7 @@ class cl_empagemov
                 }
             }
         } else {
-            $this->e81_codmov = ($this->e81_codmov == "" ? @$GLOBALS["HTTP_POST_VARS"]["e81_codmov"] : $this->e81_codmov);
+            $this->e81_codmov = ($this->e81_codmov === 0 || $this->e81_codmov === 0.0 || $this->e81_codmov == "" ? @$GLOBALS["HTTP_POST_VARS"]["e81_codmov"] : $this->e81_codmov);
         }
     }
 
@@ -132,7 +132,7 @@ class cl_empagemov
                 $this->e81_codmov = $e81_codmov;
             }
         }
-        if (($this->e81_codmov == null) || ($this->e81_codmov == "")) {
+        if (($this->e81_codmov == null) || ($this->e81_codmov === 0 || $this->e81_codmov === 0.0 || $this->e81_codmov == "")) {
             $this->erro_sql = " Campo e81_codmov nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

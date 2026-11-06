@@ -77,7 +77,7 @@ class cl_procjur {
                  v62_instit = int4 = Instituição
                  ";
    //funcao construtor da classe
-   function cl_procjur() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procjur");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -94,8 +94,8 @@ class cl_procjur {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v62_sequencial = ($this->v62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_sequencial"]:$this->v62_sequencial);
-       $this->v62_procjurtipo = ($this->v62_procjurtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_procjurtipo"]:$this->v62_procjurtipo);
+       $this->v62_sequencial = ($this->v62_sequencial === 0 || $this->v62_sequencial === 0.0 || $this->v62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_sequencial"]:$this->v62_sequencial);
+       $this->v62_procjurtipo = ($this->v62_procjurtipo === 0 || $this->v62_procjurtipo === 0.0 || $this->v62_procjurtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_procjurtipo"]:$this->v62_procjurtipo);
        $this->v62_descricao = ($this->v62_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_descricao"]:$this->v62_descricao);
        if($this->v62_data == ""){
          $this->v62_data_dia = ($this->v62_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_data_dia"]:$this->v62_data_dia);
@@ -106,7 +106,7 @@ class cl_procjur {
          }
        }
        $this->v62_hora = ($this->v62_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_hora"]:$this->v62_hora);
-       $this->v62_usuario = ($this->v62_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_usuario"]:$this->v62_usuario);
+       $this->v62_usuario = ($this->v62_usuario === 0 || $this->v62_usuario === 0.0 || $this->v62_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_usuario"]:$this->v62_usuario);
        if($this->v62_dataini == ""){
          $this->v62_dataini_dia = ($this->v62_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_dataini_dia"]:$this->v62_dataini_dia);
          $this->v62_dataini_mes = ($this->v62_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_dataini_mes"]:$this->v62_dataini_mes);
@@ -123,11 +123,11 @@ class cl_procjur {
             $this->v62_datafim = $this->v62_datafim_ano."-".$this->v62_datafim_mes."-".$this->v62_datafim_dia;
          }
        }
-       $this->v62_situacao = ($this->v62_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_situacao"]:$this->v62_situacao);
+       $this->v62_situacao = ($this->v62_situacao === 0 || $this->v62_situacao === 0.0 || $this->v62_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_situacao"]:$this->v62_situacao);
        $this->v62_obs = ($this->v62_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_obs"]:$this->v62_obs);
-       $this->v62_instit = ($this->v62_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_instit"]:$this->v62_instit);
+       $this->v62_instit = ($this->v62_instit === 0 || $this->v62_instit === 0.0 || $this->v62_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_instit"]:$this->v62_instit);
      }else{
-       $this->v62_sequencial = ($this->v62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_sequencial"]:$this->v62_sequencial);
+       $this->v62_sequencial = ($this->v62_sequencial === 0 || $this->v62_sequencial === 0.0 || $this->v62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_sequencial"]:$this->v62_sequencial);
      }
    }
    // funcao para Inclusão
@@ -232,7 +232,7 @@ class cl_procjur {
          $this->v62_sequencial = $v62_sequencial;
        }
      }
-     if(($this->v62_sequencial == null) || ($this->v62_sequencial == "") ){
+     if(($this->v62_sequencial == null) || ($this->v62_sequencial === 0 || $this->v62_sequencial === 0.0 || $this->v62_sequencial == "") ){
        $this->erro_sql = " Campo v62_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -719,7 +719,7 @@ class cl_procjur {
    function sql_query_susp ( $v62_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -752,7 +752,7 @@ class cl_procjur {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

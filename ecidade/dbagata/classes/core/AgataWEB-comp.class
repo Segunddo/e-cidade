@@ -32,7 +32,7 @@
 /*******************************************************************************/
 class AgataWEB
 {
-    function AgataWEB()
+    function __construct()
     {
         
     }

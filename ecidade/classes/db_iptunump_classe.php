@@ -52,7 +52,7 @@ class cl_iptunump {
                  j20_numpre = int4 = Numpre 
                  ";
    //funcao construtor da classe 
-   function cl_iptunump() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptunump"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_iptunump {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j20_anousu = ($this->j20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_anousu"]:$this->j20_anousu);
-       $this->j20_matric = ($this->j20_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_matric"]:$this->j20_matric);
-       $this->j20_numpre = ($this->j20_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_numpre"]:$this->j20_numpre);
+       $this->j20_anousu = (($this->j20_anousu === 0 || $this->j20_anousu === 0.0 || $this->j20_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["j20_anousu"]:$this->j20_anousu);
+       $this->j20_matric = (($this->j20_matric === 0 || $this->j20_matric === 0.0 || $this->j20_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j20_matric"]:$this->j20_matric);
+       $this->j20_numpre = (($this->j20_numpre === 0 || $this->j20_numpre === 0.0 || $this->j20_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["j20_numpre"]:$this->j20_numpre);
      }else{
-       $this->j20_anousu = ($this->j20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_anousu"]:$this->j20_anousu);
-       $this->j20_matric = ($this->j20_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_matric"]:$this->j20_matric);
+       $this->j20_anousu = (($this->j20_anousu === 0 || $this->j20_anousu === 0.0 || $this->j20_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["j20_anousu"]:$this->j20_anousu);
+       $this->j20_matric = (($this->j20_matric === 0 || $this->j20_matric === 0.0 || $this->j20_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j20_matric"]:$this->j20_matric);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_iptunump {
      }
        $this->j20_anousu = $j20_anousu; 
        $this->j20_matric = $j20_matric; 
-     if(($this->j20_anousu == null) || ($this->j20_anousu == "") ){ 
+     if(($this->j20_anousu == null) || (($this->j20_anousu === 0 || $this->j20_anousu === 0.0 || $this->j20_anousu == "")) ){ 
        $this->erro_sql = " Campo j20_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_iptunump {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j20_matric == null) || ($this->j20_matric == "") ){ 
+     if(($this->j20_matric == null) || (($this->j20_matric === 0 || $this->j20_matric === 0.0 || $this->j20_matric == "")) ){ 
        $this->erro_sql = " Campo j20_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_iptunump {
    function sql_query ( $j20_anousu=null,$j20_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_iptunump {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_iptunump {
    function sql_query_ender ( $j20_anousu=null,$j20_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_iptunump {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_iptunump {
    function sql_query_file ( $j20_anousu=null,$j20_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_iptunump {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -487,7 +487,7 @@ class cl_iptunump {
    function sql_query_ender_taxa ( $j20_anousu=null,$j20_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -546,7 +546,7 @@ class cl_iptunump {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

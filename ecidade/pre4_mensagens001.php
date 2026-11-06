@@ -35,7 +35,8 @@ try {
   $iInstituicao  = db_getsession("DB_instit");
   $clconfigdbpref = new cl_configdbpref();
 
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
 
   $rsParametro = db_query(
     $clconfigdbpref->sql_query_file($iInstituicao,"w13_exigecpfcnpjmatricula,w13_exigecpfcnpjinscricao")

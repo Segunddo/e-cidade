@@ -58,7 +58,7 @@ class cl_contacorrentesaldo {
                  c29_credito = float4 = Crédito
                  ";
   //funcao construtor da classe
-  function cl_contacorrentesaldo() {
+  function __construct() {
     //classes dos rotulos dos campos
     $this->rotulo = new rotulo("contacorrentesaldo");
     $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_contacorrentesaldo {
   // funcao para atualizar campos
   function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->c29_sequencial = ($this->c29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_sequencial"]:$this->c29_sequencial);
-      $this->c29_contacorrentedetalhe = ($this->c29_contacorrentedetalhe == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_contacorrentedetalhe"]:$this->c29_contacorrentedetalhe);
-      $this->c29_anousu = ($this->c29_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_anousu"]:$this->c29_anousu);
-      $this->c29_mesusu = ($this->c29_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_mesusu"]:$this->c29_mesusu);
-      $this->c29_debito = ($this->c29_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_debito"]:$this->c29_debito);
-      $this->c29_credito = ($this->c29_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_credito"]:$this->c29_credito);
+      $this->c29_sequencial = ($this->c29_sequencial === 0 || $this->c29_sequencial === 0.0 || $this->c29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_sequencial"]:$this->c29_sequencial);
+      $this->c29_contacorrentedetalhe = ($this->c29_contacorrentedetalhe === 0 || $this->c29_contacorrentedetalhe === 0.0 || $this->c29_contacorrentedetalhe == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_contacorrentedetalhe"]:$this->c29_contacorrentedetalhe);
+      $this->c29_anousu = ($this->c29_anousu === 0 || $this->c29_anousu === 0.0 || $this->c29_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_anousu"]:$this->c29_anousu);
+      $this->c29_mesusu = ($this->c29_mesusu === 0 || $this->c29_mesusu === 0.0 || $this->c29_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_mesusu"]:$this->c29_mesusu);
+      $this->c29_debito = ($this->c29_debito === 0 || $this->c29_debito === 0.0 || $this->c29_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_debito"]:$this->c29_debito);
+      $this->c29_credito = ($this->c29_credito === 0 || $this->c29_credito === 0.0 || $this->c29_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_credito"]:$this->c29_credito);
     }else{
-      $this->c29_sequencial = ($this->c29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_sequencial"]:$this->c29_sequencial);
+      $this->c29_sequencial = ($this->c29_sequencial === 0 || $this->c29_sequencial === 0.0 || $this->c29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_sequencial"]:$this->c29_sequencial);
     }
   }
   // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_contacorrentesaldo {
         $this->c29_sequencial = $c29_sequencial;
       }
     }
-    if(($this->c29_sequencial == null) || ($this->c29_sequencial == "") ){
+    if(($this->c29_sequencial == null) || ($this->c29_sequencial === 0 || $this->c29_sequencial === 0.0 || $this->c29_sequencial == "") ){
       $this->erro_sql = " Campo c29_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -468,7 +468,7 @@ class cl_contacorrentesaldo {
   function sql_query ( $c29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -500,7 +500,7 @@ class cl_contacorrentesaldo {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -513,7 +513,7 @@ class cl_contacorrentesaldo {
   function sql_query_buscasaldo($c29_sequencial=null,$campos="*",$ordem=null,$dbwhere="") {
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_contacorrentesaldo {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -553,7 +553,7 @@ class cl_contacorrentesaldo {
   function sql_query_file ( $c29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -574,7 +574,7 @@ class cl_contacorrentesaldo {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

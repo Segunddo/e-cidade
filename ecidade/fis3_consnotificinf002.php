@@ -33,7 +33,7 @@ include(modification("classes/db_fiscal_classe.php"));
 include(modification("classes/db_fiscalocal_classe.php"));
 include(modification("classes/db_fiscexec_classe.php"));
 include(modification("classes/db_fiscalbaixa_classe.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 $clfiscal = new cl_fiscal;
 $clfiscalocal = new cl_fiscalocal;
 $clfiscexec = new cl_fiscexec;
@@ -41,7 +41,7 @@ $clfiscalbaixa = new cl_fiscalbaixa;
 $sql = " ";
 //echo ($clfiscal->sql_query($codfiscal,"*",null," y30_instit = ".db_getsession('DB_instit')));
 $result = $clfiscal->sql_record($clfiscal->sql_query($codfiscal,"*",null," y30_codnoti = $codfiscal and y30_instit = ".db_getsession('DB_instit')));
-$num = pg_numrows($result);
+$num = ($result ? pg_numrows($result) : 0);
   
 ?>
 

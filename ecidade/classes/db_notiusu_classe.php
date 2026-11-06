@@ -57,7 +57,7 @@ class cl_notiusu {
                  k52_hora = varchar(5) = Hora 
                  ";
    //funcao construtor da classe 
-   function cl_notiusu() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notiusu"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_notiusu {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k52_notifica = ($this->k52_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k52_notifica"]:$this->k52_notifica);
-       $this->k52_id_usuario = ($this->k52_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k52_id_usuario"]:$this->k52_id_usuario);
+       $this->k52_notifica = ($this->k52_notifica === 0 || $this->k52_notifica === 0.0 || $this->k52_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k52_notifica"]:$this->k52_notifica);
+       $this->k52_id_usuario = ($this->k52_id_usuario === 0 || $this->k52_id_usuario === 0.0 || $this->k52_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k52_id_usuario"]:$this->k52_id_usuario);
        if($this->k52_data == ""){
          $this->k52_data_dia = ($this->k52_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k52_data_dia"]:$this->k52_data_dia);
          $this->k52_data_mes = ($this->k52_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k52_data_mes"]:$this->k52_data_mes);
@@ -86,7 +86,7 @@ class cl_notiusu {
        }
        $this->k52_hora = ($this->k52_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k52_hora"]:$this->k52_hora);
      }else{
-       $this->k52_notifica = ($this->k52_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k52_notifica"]:$this->k52_notifica);
+       $this->k52_notifica = ($this->k52_notifica === 0 || $this->k52_notifica === 0.0 || $this->k52_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k52_notifica"]:$this->k52_notifica);
      }
    }
    // funcao para inclusao
@@ -120,7 +120,7 @@ class cl_notiusu {
        return false;
      }
        $this->k52_notifica = $k52_notifica; 
-     if(($this->k52_notifica == null) || ($this->k52_notifica == "") ){ 
+     if(($this->k52_notifica == null) || ($this->k52_notifica === 0 || $this->k52_notifica === 0.0 || $this->k52_notifica == "") ){ 
        $this->erro_sql = " Campo k52_notifica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -397,7 +397,7 @@ class cl_notiusu {
    function sql_query ( $k52_notifica=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_notiusu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_notiusu {
    function sql_query_file ( $k52_notifica=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -454,7 +454,7 @@ class cl_notiusu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

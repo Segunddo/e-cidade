@@ -413,7 +413,7 @@ if (!function_exists("db_multiploselect")) {
                                 style="width:<?= $width ?>px" multiple
                                 onDblClick="js_db_multiploselect_incluir_item(this,document.form1.<?= $objsel ?>);">
                             <?php
-                            if (gettype($recordnsel) == "resource") {
+                            if ((gettype($recordnsel) == "resource" || is_object($recordnsel))) {
                                 $numrows_recnsel = pg_numrows($recordnsel);
                                 for ($i = 0; $i < $numrows_recnsel; $i++) {
                                     db_fieldsmemory($recordnsel, $i);
@@ -472,7 +472,7 @@ if (!function_exists("db_multiploselect")) {
                                 style="width:<?= $width ?>px" multiple
                                 onDblClick="js_db_multiploselect_incluir_item(this,document.form1.<?= $objnsel ?>);">
                             <?php
-                            if (gettype($recordsel) == "resource") {
+                            if ((gettype($recordsel) == "resource" || is_object($recordsel))) {
                                 $numrows_recsel = pg_numrows($recordsel);
                                 for ($i = 0; $i < $numrows_recsel; $i++) {
                                     db_fieldsmemory($recordsel, $i);
@@ -856,7 +856,7 @@ if (!function_exists("db_selectrecord")) {
                 $nomedescr = $nome . "descr";
             }
 
-            if (is_resource($record)) {
+            if (is_resource($record) || is_object($record)) {
                 for ($sqli = 0; $sqli < pg_numrows($record); $sqli++) {
                     if (pg_result($record, $sqli, 0) == @ $GLOBALS[$nome]) {
                         $nomec = pg_fieldname($record, 1);
@@ -924,7 +924,7 @@ if (!function_exists("db_selectmultiple")) {
                 ?>
             >
                 <?php
-                if (gettype($record) == "resource") {
+                if ((gettype($record) == "resource" || is_object($record))) {
                     for ($sqli = 0; $sqli < pg_numrows($record); $sqli++) {
                         if ($sqli % 2 == 0) {
                             $color = "#D7CC06";
@@ -981,7 +981,7 @@ if (!function_exists("db_selectmultiple")) {
             <?php
         } else {
             if (!is_int($record_select) && $record_select != false) {
-                if (gettype($record) == "resource") {
+                if ((gettype($record) == "resource" || is_object($record))) {
                     if (pg_numrows($record_select) > 0) {
                         db_selectrecord($nome, $record_select, true, ($db_opcao == 3 ? 2 : $db_opcao), "", $nomevar = "", $bgcolor = "", $todos = "", $onchange = "");
                     }
@@ -1048,11 +1048,11 @@ if (!function_exists("db_select")) {
                 $nomevar = $nomevar == "" ? $nome : $nomevar;
 
                 //x = array("a"=>"1","2")
-                reset($db_matriz);
-                for ($i = 0; $i < sizeof($db_matriz); $i++) {
+                if (is_array($db_matriz)) { reset($db_matriz); }
+                for ($i = 0; $i < sizeof((array)$db_matriz); $i++) {
                     ?>
                     <option
-                        value="<?= key($db_matriz) ?>" <?= (@$GLOBALS[$nomevar] == key($db_matriz) ? "selected" : "") ?>><?= $db_matriz[key($db_matriz)] ?></option>
+                        value="<?= key($db_matriz) ?>" <?= (@$GLOBALS[$nomevar] == key($db_matriz) || (@$GLOBALS[$nomevar] === "" && (is_string(key($db_matriz)) && !is_numeric(key($db_matriz)) ? true : key($db_matriz) == 0)) ? "selected" : "") ?>><?= $db_matriz[key($db_matriz)] ?></option>
                     <?php
 
 
@@ -1066,8 +1066,8 @@ if (!function_exists("db_select")) {
             global $$nome_select_descr, $$nome;
             $$nome = $GLOBALS[$nome];
 
-            reset($db_matriz);
-            for ($matsel = 0; $matsel < sizeof($db_matriz); $matsel++) {
+            if (is_array($db_matriz)) { reset($db_matriz); }
+            for ($matsel = 0; $matsel < sizeof((array)$db_matriz); $matsel++) {
                 if (key($db_matriz) == $$nome) {
                     $$nome_select_descr = $db_matriz[key($db_matriz)];
                     $$nome = key($db_matriz);
@@ -1154,7 +1154,7 @@ if (!function_exists("db_inputdata")) {
         <input name="<?= ($nomevar == "" ? $nome : $nomevar) . "_ano" ?>" type="hidden" title=""
                id="<?= ($nomevar == "" ? $nome : $nomevar) . "_ano" ?>" value="<?= @$ano ?>" size="4" maxlength="4">
         <?php
-        if (($db_opcao < 3) || ($db_opcao == 4)) {
+        if (((float)$db_opcao < 3) || ($db_opcao == 4)) {
             ?>
             <script>
                 var PosMouseY, PosMoudeX;

@@ -70,7 +70,7 @@ class cl_orcparametro {
                  o50_estruturacp = int4 = Código Estrutura
                  ";
    //funcao construtor da classe
-   function cl_orcparametro() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcparametro");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,20 +87,20 @@ class cl_orcparametro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o50_anousu = ($this->o50_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_anousu"]:$this->o50_anousu);
-       $this->o50_coddot = ($this->o50_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_coddot"]:$this->o50_coddot);
+       $this->o50_anousu = ($this->o50_anousu === 0 || $this->o50_anousu === 0.0 || $this->o50_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_anousu"]:$this->o50_anousu);
+       $this->o50_coddot = ($this->o50_coddot === 0 || $this->o50_coddot === 0.0 || $this->o50_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_coddot"]:$this->o50_coddot);
        $this->o50_subelem = ($this->o50_subelem == "f"?@$GLOBALS["HTTP_POST_VARS"]["o50_subelem"]:$this->o50_subelem);
-       $this->o50_programa = ($this->o50_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_programa"]:$this->o50_programa);
+       $this->o50_programa = ($this->o50_programa === 0 || $this->o50_programa === 0.0 || $this->o50_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_programa"]:$this->o50_programa);
        $this->o50_estrutdespesa = ($this->o50_estrutdespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_estrutdespesa"]:$this->o50_estrutdespesa);
        $this->o50_estrutelemento = ($this->o50_estrutelemento == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_estrutelemento"]:$this->o50_estrutelemento);
        $this->o50_estrutreceita = ($this->o50_estrutreceita == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_estrutreceita"]:$this->o50_estrutreceita);
        $this->o50_tipoproj = ($this->o50_tipoproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_tipoproj"]:$this->o50_tipoproj);
        $this->o50_utilizapacto = ($this->o50_utilizapacto == "f"?@$GLOBALS["HTTP_POST_VARS"]["o50_utilizapacto"]:$this->o50_utilizapacto);
        $this->o50_liberadecimalppa = ($this->o50_liberadecimalppa == "f"?@$GLOBALS["HTTP_POST_VARS"]["o50_liberadecimalppa"]:$this->o50_liberadecimalppa);
-       $this->o50_estruturarecurso = ($this->o50_estruturarecurso == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_estruturarecurso"]:$this->o50_estruturarecurso);
-       $this->o50_estruturacp = ($this->o50_estruturacp == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_estruturacp"]:$this->o50_estruturacp);
+       $this->o50_estruturarecurso = ($this->o50_estruturarecurso === 0 || $this->o50_estruturarecurso === 0.0 || $this->o50_estruturarecurso == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_estruturarecurso"]:$this->o50_estruturarecurso);
+       $this->o50_estruturacp = ($this->o50_estruturacp === 0 || $this->o50_estruturacp === 0.0 || $this->o50_estruturacp == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_estruturacp"]:$this->o50_estruturacp);
      }else{
-       $this->o50_anousu = ($this->o50_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_anousu"]:$this->o50_anousu);
+       $this->o50_anousu = ($this->o50_anousu === 0 || $this->o50_anousu === 0.0 || $this->o50_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o50_anousu"]:$this->o50_anousu);
      }
    }
    // funcao para inclusao
@@ -206,7 +206,7 @@ class cl_orcparametro {
        return false;
      }
        $this->o50_anousu = $o50_anousu;
-     if(($this->o50_anousu == null) || ($this->o50_anousu == "") ){
+     if(($this->o50_anousu == null) || ($this->o50_anousu === 0 || $this->o50_anousu === 0.0 || $this->o50_anousu == "") ){
        $this->erro_sql = " Campo o50_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

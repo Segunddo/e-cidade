@@ -52,7 +52,7 @@ class cl_cidadaofamiliacadastrounico {
                  as15_codigofamiliarcadastrounico = varchar(20) = Família no Cadastro Único 
                  ";
    //funcao construtor da classe 
-   function cl_cidadaofamiliacadastrounico() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cidadaofamiliacadastrounico"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cidadaofamiliacadastrounico {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->as15_sequencial = ($this->as15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as15_sequencial"]:$this->as15_sequencial);
-       $this->as15_cidadaofamilia = ($this->as15_cidadaofamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["as15_cidadaofamilia"]:$this->as15_cidadaofamilia);
+       $this->as15_sequencial = ($this->as15_sequencial === 0 || $this->as15_sequencial === 0.0 || $this->as15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as15_sequencial"]:$this->as15_sequencial);
+       $this->as15_cidadaofamilia = ($this->as15_cidadaofamilia === 0 || $this->as15_cidadaofamilia === 0.0 || $this->as15_cidadaofamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["as15_cidadaofamilia"]:$this->as15_cidadaofamilia);
        $this->as15_codigofamiliarcadastrounico = ($this->as15_codigofamiliarcadastrounico == ""?@$GLOBALS["HTTP_POST_VARS"]["as15_codigofamiliarcadastrounico"]:$this->as15_codigofamiliarcadastrounico);
      }else{
-       $this->as15_sequencial = ($this->as15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as15_sequencial"]:$this->as15_sequencial);
+       $this->as15_sequencial = ($this->as15_sequencial === 0 || $this->as15_sequencial === 0.0 || $this->as15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as15_sequencial"]:$this->as15_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cidadaofamiliacadastrounico {
          $this->as15_sequencial = $as15_sequencial; 
        }
      }
-     if(($this->as15_sequencial == null) || ($this->as15_sequencial == "") ){ 
+     if(($this->as15_sequencial == null) || ($this->as15_sequencial === 0 || $this->as15_sequencial === 0.0 || $this->as15_sequencial == "") ){ 
        $this->erro_sql = " Campo as15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_cidadaofamiliacadastrounico {
    function sql_query ( $as15_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_cidadaofamiliacadastrounico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_cidadaofamiliacadastrounico {
    function sql_query_file ( $as15_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_cidadaofamiliacadastrounico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

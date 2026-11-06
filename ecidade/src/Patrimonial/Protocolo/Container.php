@@ -18,7 +18,7 @@ final class Container extends ContainerAbstract
     {
         $this->content = array(
             'DataBaseLegacy' => function ($container) {
-                return \ ECidade\V3\Datasource\Database::getInstance();
+                return \ECidade\V3\Datasource\Database::getInstance();
             },
             'Processo\ProcessoEletronico\Service\ConsultaProcessos' => function ($container) {
 

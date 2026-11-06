@@ -52,7 +52,7 @@ class cl_atendcadareamod {
                  at26_id_item = int4 = Módulo 
                  ";
    //funcao construtor da classe 
-   function cl_atendcadareamod() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("atendcadareamod"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_atendcadareamod {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at26_sequencia = ($this->at26_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_sequencia"]:$this->at26_sequencia);
-       $this->at26_codarea = ($this->at26_codarea == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_codarea"]:$this->at26_codarea);
-       $this->at26_id_item = ($this->at26_id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_id_item"]:$this->at26_id_item);
+       $this->at26_sequencia = ($this->at26_sequencia === 0 || $this->at26_sequencia === 0.0 || $this->at26_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_sequencia"]:$this->at26_sequencia);
+       $this->at26_codarea = ($this->at26_codarea === 0 || $this->at26_codarea === 0.0 || $this->at26_codarea == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_codarea"]:$this->at26_codarea);
+       $this->at26_id_item = ($this->at26_id_item === 0 || $this->at26_id_item === 0.0 || $this->at26_id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_id_item"]:$this->at26_id_item);
      }else{
-       $this->at26_sequencia = ($this->at26_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_sequencia"]:$this->at26_sequencia);
+       $this->at26_sequencia = ($this->at26_sequencia === 0 || $this->at26_sequencia === 0.0 || $this->at26_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at26_sequencia"]:$this->at26_sequencia);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_atendcadareamod {
          $this->at26_sequencia = $at26_sequencia; 
        }
      }
-     if(($this->at26_sequencia == null) || ($this->at26_sequencia == "") ){ 
+     if(($this->at26_sequencia == null) || ($this->at26_sequencia === 0 || $this->at26_sequencia === 0.0 || $this->at26_sequencia == "") ){ 
        $this->erro_sql = " Campo at26_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_atendcadareamod {
    function sql_query ( $at26_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_atendcadareamod {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_atendcadareamod {
    function sql_query_file ( $at26_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_atendcadareamod {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

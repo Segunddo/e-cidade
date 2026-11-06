@@ -50,7 +50,7 @@ class cl_obrasresp {
                  ob10_numcgm = int4 = Responsável da obra 
                  ";
    //funcao construtor da classe 
-   function cl_obrasresp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obrasresp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_obrasresp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob10_codobra = ($this->ob10_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_codobra"]:$this->ob10_codobra);
-       $this->ob10_numcgm = ($this->ob10_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_numcgm"]:$this->ob10_numcgm);
+       $this->ob10_codobra = ($this->ob10_codobra === 0 || $this->ob10_codobra === 0.0 || $this->ob10_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_codobra"]:$this->ob10_codobra);
+       $this->ob10_numcgm = ($this->ob10_numcgm === 0 || $this->ob10_numcgm === 0.0 || $this->ob10_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_numcgm"]:$this->ob10_numcgm);
      }else{
-       $this->ob10_codobra = ($this->ob10_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_codobra"]:$this->ob10_codobra);
+       $this->ob10_codobra = ($this->ob10_codobra === 0 || $this->ob10_codobra === 0.0 || $this->ob10_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_codobra"]:$this->ob10_codobra);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_obrasresp {
        return false;
      }
        $this->ob10_codobra = $ob10_codobra; 
-     if(($this->ob10_codobra == null) || ($this->ob10_codobra == "") ){ 
+     if(($this->ob10_codobra == null) || ($this->ob10_codobra === 0 || $this->ob10_codobra === 0.0 || $this->ob10_codobra == "") ){ 
        $this->erro_sql = " Campo ob10_codobra nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_obrasresp {
    function sql_query ( $ob10_codobra=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_obrasresp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_obrasresp {
    function sql_query_file ( $ob10_codobra=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_obrasresp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

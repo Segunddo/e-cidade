@@ -34,7 +34,7 @@ class MemoArea
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function MemoArea($mensagem)
+    function __construct($mensagem)
     {
         if (isGui)
         {

@@ -83,7 +83,7 @@ $sql = "
        ";
 			
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : 0);
 db_fieldsmemory($result,0);
 
 $sqlvistoria = "								
@@ -97,7 +97,7 @@ $sqlvistoria = "
 								where y109_procfiscal =	$procfiscal					";
 								
 $rsvistorias     = db_query($sqlvistoria);								
-$linhasvistorias = pg_num_rows($rsvistorias);			
+$linhasvistorias = ($rsvistorias ? pg_num_rows($rsvistorias) : 0);			
 
 
 $sqlnotificacao = "
@@ -109,7 +109,7 @@ $sqlnotificacao = "
 									 left join fiscalinscr on y34_codnoti=y30_codnoti
 									 where y110_procfiscal =$procfiscal ";
 $rsnotificacao     = db_query($sqlnotificacao);								
-$linhasnotificacao = pg_num_rows($rsnotificacao);
+$linhasnotificacao = ($rsnotificacao ? pg_num_rows($rsnotificacao) : 0);
 
 $sqlauto = "select y54_numcgm,y53_matric,y52_inscr,y50_codauto,y50_data,y50_nome 
             from procfiscalauto 
@@ -119,7 +119,7 @@ $sqlauto = "select y54_numcgm,y53_matric,y52_inscr,y50_codauto,y50_data,y50_nome
 						left  join autoinscr  on y52_codauto = y50_codauto 
 						where y111_procfiscal = $procfiscal ";
 $rsauto     = db_query($sqlauto);								
-$linhasauto = pg_num_rows($rsauto);	
+$linhasauto = ($rsauto ? pg_num_rows($rsauto) : 0);	
 	
 $sqllevanta = "select y62_inscr,y93_numcgm,y60_codlev,y60_data 
                from procfiscallevanta 
@@ -128,7 +128,7 @@ $sqllevanta = "select y62_inscr,y93_numcgm,y60_codlev,y60_data
 							 left  join levinscr on y62_codlev = y60_codlev 
 							 where y112_procfiscal = $procfiscal";
 $rslevanta     = db_query($sqllevanta);								
-$linhaslevanta = pg_num_rows($rslevanta);		
+$linhaslevanta = ($rslevanta ? pg_num_rows($rslevanta) : 0);		
 
 $sqlvarfix = "select q33_codigo,q33_inscr,z01_nome as nome_lanc ,q33_data 
               from procfiscalvarfix 
@@ -137,7 +137,7 @@ $sqlvarfix = "select q33_codigo,q33_inscr,z01_nome as nome_lanc ,q33_data
 							inner join cgm on q02_numcgm=z01_numcgm 
 							where y113_procfiscal = $procfiscal ";
 $rsvarfix     = db_query($sqlvarfix);								
-$linhasvarfix = pg_num_rows($rsvarfix);		
+$linhasvarfix = ($rsvarfix ? pg_num_rows($rsvarfix) : 0);		
 ?>
 
 <html>

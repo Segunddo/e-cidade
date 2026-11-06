@@ -50,7 +50,7 @@ class cl_tiafinscr {
                  y94_inscr = int4 = Inscrição no ISSQN 
                  ";
    //funcao construtor da classe 
-   function cl_tiafinscr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tiafinscr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_tiafinscr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y94_codtiaf = ($this->y94_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y94_codtiaf"]:$this->y94_codtiaf);
-       $this->y94_inscr = ($this->y94_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y94_inscr"]:$this->y94_inscr);
+       $this->y94_codtiaf = (($this->y94_codtiaf === 0 || $this->y94_codtiaf === 0.0 || $this->y94_codtiaf == "")?@$GLOBALS["HTTP_POST_VARS"]["y94_codtiaf"]:$this->y94_codtiaf);
+       $this->y94_inscr = (($this->y94_inscr === 0 || $this->y94_inscr === 0.0 || $this->y94_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["y94_inscr"]:$this->y94_inscr);
      }else{
      }
    }
@@ -252,7 +252,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $y94_codtiaf=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -276,7 +276,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -288,7 +288,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $y94_codtiaf=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -309,7 +309,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

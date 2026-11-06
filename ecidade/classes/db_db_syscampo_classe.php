@@ -96,21 +96,21 @@ class cl_db_syscampo
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->codcam = ($this->codcam == "" ? @$GLOBALS["HTTP_POST_VARS"]["codcam"] : $this->codcam);
+            $this->codcam = (($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == "") ? @$GLOBALS["HTTP_POST_VARS"]["codcam"] : $this->codcam);
             $this->nomecam = ($this->nomecam == "" ? @$GLOBALS["HTTP_POST_VARS"]["nomecam"] : $this->nomecam);
             $this->conteudo = ($this->conteudo == "" ? @$GLOBALS["HTTP_POST_VARS"]["conteudo"] : $this->conteudo);
             $this->descricao = ($this->descricao == "" ? @$GLOBALS["HTTP_POST_VARS"]["descricao"] : $this->descricao);
             $this->valorinicial = ($this->valorinicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["valorinicial"] : $this->valorinicial);
             $this->rotulo = ($this->rotulo == "" ? @$GLOBALS["HTTP_POST_VARS"]["rotulo"] : $this->rotulo);
-            $this->tamanho = ($this->tamanho == "" ? @$GLOBALS["HTTP_POST_VARS"]["tamanho"] : $this->tamanho);
+            $this->tamanho = (($this->tamanho === 0 || $this->tamanho === 0.0 || $this->tamanho == "") ? @$GLOBALS["HTTP_POST_VARS"]["tamanho"] : $this->tamanho);
             $this->nulo = ($this->nulo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["nulo"] : $this->nulo);
             $this->maiusculo = ($this->maiusculo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["maiusculo"] : $this->maiusculo);
             $this->autocompl = ($this->autocompl == "f" ? @$GLOBALS["HTTP_POST_VARS"]["autocompl"] : $this->autocompl);
-            $this->aceitatipo = ($this->aceitatipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["aceitatipo"] : $this->aceitatipo);
+            $this->aceitatipo = (($this->aceitatipo === 0 || $this->aceitatipo === 0.0 || $this->aceitatipo == "") ? @$GLOBALS["HTTP_POST_VARS"]["aceitatipo"] : $this->aceitatipo);
             $this->tipoobj = ($this->tipoobj == "" ? @$GLOBALS["HTTP_POST_VARS"]["tipoobj"] : $this->tipoobj);
             $this->rotulorel = ($this->rotulorel == "" ? @$GLOBALS["HTTP_POST_VARS"]["rotulorel"] : $this->rotulorel);
         } else {
-            $this->codcam = ($this->codcam == "" ? @$GLOBALS["HTTP_POST_VARS"]["codcam"] : $this->codcam);
+            $this->codcam = (($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == "") ? @$GLOBALS["HTTP_POST_VARS"]["codcam"] : $this->codcam);
         }
     }
 
@@ -283,7 +283,7 @@ class cl_db_syscampo
                 $this->codcam = $codcam;
             }
         }
-        if (($this->codcam == null) || ($this->codcam == "")) {
+        if (($this->codcam == null) || (($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == ""))) {
             $this->erro_sql = " Campo codcam nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -965,7 +965,7 @@ class cl_db_syscampo
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = explode("#", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -986,7 +986,7 @@ class cl_db_syscampo
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = explode("#", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1000,7 +1000,7 @@ class cl_db_syscampo
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = explode("#", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1025,7 +1025,7 @@ class cl_db_syscampo
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = explode("#", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1039,7 +1039,7 @@ class cl_db_syscampo
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = explode("#", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1060,7 +1060,7 @@ class cl_db_syscampo
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = explode("#", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];

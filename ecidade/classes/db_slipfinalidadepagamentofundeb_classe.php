@@ -52,7 +52,7 @@ class cl_slipfinalidadepagamentofundeb {
                  e153_finalidadepagamentofundeb = int4 = Seq. Finalidade Pagamento Fundeb 
                  ";
    //funcao construtor da classe 
-   function cl_slipfinalidadepagamentofundeb() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("slipfinalidadepagamentofundeb"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_slipfinalidadepagamentofundeb {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e153_sequencial = ($this->e153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_sequencial"]:$this->e153_sequencial);
-       $this->e153_slip = ($this->e153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_slip"]:$this->e153_slip);
-       $this->e153_finalidadepagamentofundeb = ($this->e153_finalidadepagamentofundeb == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_finalidadepagamentofundeb"]:$this->e153_finalidadepagamentofundeb);
+       $this->e153_sequencial = ($this->e153_sequencial === 0 || $this->e153_sequencial === 0.0 || $this->e153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_sequencial"]:$this->e153_sequencial);
+       $this->e153_slip = ($this->e153_slip === 0 || $this->e153_slip === 0.0 || $this->e153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_slip"]:$this->e153_slip);
+       $this->e153_finalidadepagamentofundeb = ($this->e153_finalidadepagamentofundeb === 0 || $this->e153_finalidadepagamentofundeb === 0.0 || $this->e153_finalidadepagamentofundeb == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_finalidadepagamentofundeb"]:$this->e153_finalidadepagamentofundeb);
      }else{
-       $this->e153_sequencial = ($this->e153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_sequencial"]:$this->e153_sequencial);
+       $this->e153_sequencial = ($this->e153_sequencial === 0 || $this->e153_sequencial === 0.0 || $this->e153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_sequencial"]:$this->e153_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_slipfinalidadepagamentofundeb {
          $this->e153_sequencial = $e153_sequencial; 
        }
      }
-     if(($this->e153_sequencial == null) || ($this->e153_sequencial == "") ){ 
+     if(($this->e153_sequencial == null) || ($this->e153_sequencial === 0 || $this->e153_sequencial === 0.0 || $this->e153_sequencial == "") ){ 
        $this->erro_sql = " Campo e153_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_slipfinalidadepagamentofundeb {
    function sql_query ( $e153_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_slipfinalidadepagamentofundeb {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_slipfinalidadepagamentofundeb {
    function sql_query_file ( $e153_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -440,7 +440,7 @@ class cl_slipfinalidadepagamentofundeb {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

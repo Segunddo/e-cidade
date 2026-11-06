@@ -60,7 +60,7 @@ class cl_cemiteriorural {
                  cm16_c_telefone = char(14) = Telefone 
                  ";
    //funcao construtor da classe 
-   function cl_cemiteriorural() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cemiteriorural"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,7 +77,7 @@ class cl_cemiteriorural {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm16_i_cemiterio = ($this->cm16_i_cemiterio == ""?@$GLOBALS["HTTP_POST_VARS"]["cm16_i_cemiterio"]:$this->cm16_i_cemiterio);
+       $this->cm16_i_cemiterio = (($this->cm16_i_cemiterio === 0 || $this->cm16_i_cemiterio === 0.0 || $this->cm16_i_cemiterio == "")?@$GLOBALS["HTTP_POST_VARS"]["cm16_i_cemiterio"]:$this->cm16_i_cemiterio);
        $this->cm16_c_nome = ($this->cm16_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["cm16_c_nome"]:$this->cm16_c_nome);
        $this->cm16_c_endereco = ($this->cm16_c_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["cm16_c_endereco"]:$this->cm16_c_endereco);
        $this->cm16_c_cidade = ($this->cm16_c_cidade == ""?@$GLOBALS["HTTP_POST_VARS"]["cm16_c_cidade"]:$this->cm16_c_cidade);
@@ -85,7 +85,7 @@ class cl_cemiteriorural {
        $this->cm16_c_cep = ($this->cm16_c_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["cm16_c_cep"]:$this->cm16_c_cep);
        $this->cm16_c_telefone = ($this->cm16_c_telefone == ""?@$GLOBALS["HTTP_POST_VARS"]["cm16_c_telefone"]:$this->cm16_c_telefone);
      }else{
-       $this->cm16_i_cemiterio = ($this->cm16_i_cemiterio == ""?@$GLOBALS["HTTP_POST_VARS"]["cm16_i_cemiterio"]:$this->cm16_i_cemiterio);
+       $this->cm16_i_cemiterio = (($this->cm16_i_cemiterio === 0 || $this->cm16_i_cemiterio === 0.0 || $this->cm16_i_cemiterio == "")?@$GLOBALS["HTTP_POST_VARS"]["cm16_i_cemiterio"]:$this->cm16_i_cemiterio);
      }
    }
    // funcao para inclusao
@@ -119,7 +119,7 @@ class cl_cemiteriorural {
        return false;
      }
        $this->cm16_i_cemiterio = $cm16_i_cemiterio; 
-     if(($this->cm16_i_cemiterio == null) || ($this->cm16_i_cemiterio == "") ){ 
+     if(($this->cm16_i_cemiterio == null) || (($this->cm16_i_cemiterio === 0 || $this->cm16_i_cemiterio === 0.0 || $this->cm16_i_cemiterio == "")) ){ 
        $this->erro_sql = " Campo cm16_i_cemiterio nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -406,7 +406,7 @@ class cl_cemiteriorural {
    function sql_query ( $cm16_i_cemiterio=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_cemiteriorural {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -440,7 +440,7 @@ class cl_cemiteriorural {
    function sql_query_file ( $cm16_i_cemiterio=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -461,7 +461,7 @@ class cl_cemiteriorural {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

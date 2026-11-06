@@ -52,7 +52,7 @@ class cl_averbaguia {
                  j104_guia = varchar(20) = Guia 
                  ";
    //funcao construtor da classe 
-   function cl_averbaguia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("averbaguia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_averbaguia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j104_sequencial = ($this->j104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j104_sequencial"]:$this->j104_sequencial);
-       $this->j104_averbacao = ($this->j104_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j104_averbacao"]:$this->j104_averbacao);
+       $this->j104_sequencial = ($this->j104_sequencial === 0 || $this->j104_sequencial === 0.0 || $this->j104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j104_sequencial"]:$this->j104_sequencial);
+       $this->j104_averbacao = ($this->j104_averbacao === 0 || $this->j104_averbacao === 0.0 || $this->j104_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j104_averbacao"]:$this->j104_averbacao);
        $this->j104_guia = ($this->j104_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["j104_guia"]:$this->j104_guia);
      }else{
-       $this->j104_sequencial = ($this->j104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j104_sequencial"]:$this->j104_sequencial);
+       $this->j104_sequencial = ($this->j104_sequencial === 0 || $this->j104_sequencial === 0.0 || $this->j104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j104_sequencial"]:$this->j104_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_averbaguia {
          $this->j104_sequencial = $j104_sequencial; 
        }
      }
-     if(($this->j104_sequencial == null) || ($this->j104_sequencial == "") ){ 
+     if(($this->j104_sequencial == null) || ($this->j104_sequencial === 0 || $this->j104_sequencial === 0.0 || $this->j104_sequencial == "") ){ 
        $this->erro_sql = " Campo j104_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_averbaguia {
    function sql_query ( $j104_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_averbaguia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_averbaguia {
    function sql_query_file ( $j104_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_averbaguia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

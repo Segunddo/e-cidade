@@ -36,7 +36,8 @@ include(modification("classes/db_tabrec_classe.php"));
 include(modification("fpdf151/pdf.php"));
 $clinfcab = new cl_infcab;
 $clinfcor = new cl_infcor;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 if ( $i03_codigo == null ) {
   db_redireciona('db_erros.php?fechar=true&db_erro=Código da lista nao preenchido!');
 }

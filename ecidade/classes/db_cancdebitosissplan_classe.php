@@ -52,7 +52,7 @@ class cl_cancdebitosissplan {
                  q78_issplan = int4 = Planilha 
                  ";
    //funcao construtor da classe 
-   function cl_cancdebitosissplan() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cancdebitosissplan"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cancdebitosissplan {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q78_sequencial = ($this->q78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_sequencial"]:$this->q78_sequencial);
-       $this->q78_cancdebitos = ($this->q78_cancdebitos == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_cancdebitos"]:$this->q78_cancdebitos);
-       $this->q78_issplan = ($this->q78_issplan == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_issplan"]:$this->q78_issplan);
+       $this->q78_sequencial = (($this->q78_sequencial === 0 || $this->q78_sequencial === 0.0 || $this->q78_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q78_sequencial"]:$this->q78_sequencial);
+       $this->q78_cancdebitos = (($this->q78_cancdebitos === 0 || $this->q78_cancdebitos === 0.0 || $this->q78_cancdebitos == "")?@$GLOBALS["HTTP_POST_VARS"]["q78_cancdebitos"]:$this->q78_cancdebitos);
+       $this->q78_issplan = (($this->q78_issplan === 0 || $this->q78_issplan === 0.0 || $this->q78_issplan == "")?@$GLOBALS["HTTP_POST_VARS"]["q78_issplan"]:$this->q78_issplan);
      }else{
-       $this->q78_sequencial = ($this->q78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_sequencial"]:$this->q78_sequencial);
+       $this->q78_sequencial = (($this->q78_sequencial === 0 || $this->q78_sequencial === 0.0 || $this->q78_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q78_sequencial"]:$this->q78_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cancdebitosissplan {
          $this->q78_sequencial = $q78_sequencial; 
        }
      }
-     if(($this->q78_sequencial == null) || ($this->q78_sequencial == "") ){ 
+     if(($this->q78_sequencial == null) || (($this->q78_sequencial === 0 || $this->q78_sequencial === 0.0 || $this->q78_sequencial == "")) ){ 
        $this->erro_sql = " Campo q78_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_cancdebitosissplan {
    function sql_query ( $q78_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_cancdebitosissplan {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_cancdebitosissplan {
    function sql_query_file ( $q78_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_cancdebitosissplan {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

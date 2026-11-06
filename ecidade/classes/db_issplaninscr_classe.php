@@ -52,7 +52,7 @@ class cl_issplaninscr {
                  q24_inscr = int4 = inscrição 
                  ";
    //funcao construtor da classe 
-   function cl_issplaninscr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issplaninscr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_issplaninscr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q24_sequencial = ($this->q24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_sequencial"]:$this->q24_sequencial);
-       $this->q24_planilha = ($this->q24_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_planilha"]:$this->q24_planilha);
-       $this->q24_inscr = ($this->q24_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_inscr"]:$this->q24_inscr);
+       $this->q24_sequencial = ($this->q24_sequencial === 0 || $this->q24_sequencial === 0.0 || $this->q24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_sequencial"]:$this->q24_sequencial);
+       $this->q24_planilha = ($this->q24_planilha === 0 || $this->q24_planilha === 0.0 || $this->q24_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_planilha"]:$this->q24_planilha);
+       $this->q24_inscr = ($this->q24_inscr === 0 || $this->q24_inscr === 0.0 || $this->q24_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_inscr"]:$this->q24_inscr);
      }else{
-       $this->q24_sequencial = ($this->q24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_sequencial"]:$this->q24_sequencial);
+       $this->q24_sequencial = ($this->q24_sequencial === 0 || $this->q24_sequencial === 0.0 || $this->q24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_sequencial"]:$this->q24_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_issplaninscr {
          $this->q24_sequencial = $q24_sequencial; 
        }
      }
-     if(($this->q24_sequencial == null) || ($this->q24_sequencial == "") ){ 
+     if(($this->q24_sequencial == null) || ($this->q24_sequencial === 0 || $this->q24_sequencial === 0.0 || $this->q24_sequencial == "") ){ 
        $this->erro_sql = " Campo q24_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_issplaninscr {
    function sql_query ( $q24_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_issplaninscr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_issplaninscr {
    function sql_query_file ( $q24_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_issplaninscr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -41,7 +41,8 @@ $clrotulo->label("d02_contri");
 $clrotulo->label("j01_matric");
 $clrotulo->label("z01_nome");
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $db_opcao = 1;
    if(isset($d02_contri) && $d02_contri!=""){

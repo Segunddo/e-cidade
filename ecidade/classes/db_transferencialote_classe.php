@@ -32,7 +32,7 @@ class cl_transferencialote {
                  ed137_data = varchar(20) = Data
                  ";
    //funcao construtor da classe
-   function cl_transferencialote() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("transferencialote");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -49,14 +49,14 @@ class cl_transferencialote {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed137_sequencial = ($this->ed137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_sequencial"]:$this->ed137_sequencial);
-       $this->ed137_escolaorigem = ($this->ed137_escolaorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_escolaorigem"]:$this->ed137_escolaorigem);
-       $this->ed137_usuario = ($this->ed137_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_usuario"]:$this->ed137_usuario);
+       $this->ed137_sequencial = ($this->ed137_sequencial === 0 || $this->ed137_sequencial === 0.0 || $this->ed137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_sequencial"]:$this->ed137_sequencial);
+       $this->ed137_escolaorigem = ($this->ed137_escolaorigem === 0 || $this->ed137_escolaorigem === 0.0 || $this->ed137_escolaorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_escolaorigem"]:$this->ed137_escolaorigem);
+       $this->ed137_usuario = ($this->ed137_usuario === 0 || $this->ed137_usuario === 0.0 || $this->ed137_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_usuario"]:$this->ed137_usuario);
        $this->ed137_escolarede = ($this->ed137_escolarede == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_escolarede"]:$this->ed137_escolarede);
-       $this->ed137_escola = ($this->ed137_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_escola"]:$this->ed137_escola);
+       $this->ed137_escola = ($this->ed137_escola === 0 || $this->ed137_escola === 0.0 || $this->ed137_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_escola"]:$this->ed137_escola);
        $this->ed137_data = ($this->ed137_data == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_data"]:$this->ed137_data);
      }else{
-       $this->ed137_sequencial = ($this->ed137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_sequencial"]:$this->ed137_sequencial);
+       $this->ed137_sequencial = ($this->ed137_sequencial === 0 || $this->ed137_sequencial === 0.0 || $this->ed137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed137_sequencial"]:$this->ed137_sequencial);
      }
    }
    // funcao para Inclusão
@@ -133,7 +133,7 @@ class cl_transferencialote {
          $this->ed137_sequencial = $ed137_sequencial;
        }
      }
-     if(($this->ed137_sequencial == null) || ($this->ed137_sequencial == "") ){
+     if(($this->ed137_sequencial == null) || ($this->ed137_sequencial === 0 || $this->ed137_sequencial === 0.0 || $this->ed137_sequencial == "") ){
        $this->erro_sql = " Campo ed137_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

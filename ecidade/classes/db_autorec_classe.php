@@ -54,7 +54,7 @@ class cl_autorec {
                  y57_valor = float8 = Valor da Receita
                  ";
    //funcao construtor da classe
-   function cl_autorec() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("autorec");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_autorec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y57_codauto = ($this->y57_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y57_codauto"]:$this->y57_codauto);
-       $this->y57_receit = ($this->y57_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y57_receit"]:$this->y57_receit);
+       $this->y57_codauto = (($this->y57_codauto === 0 || $this->y57_codauto === 0.0 || $this->y57_codauto == "")?@$GLOBALS["HTTP_POST_VARS"]["y57_codauto"]:$this->y57_codauto);
+       $this->y57_receit = (($this->y57_receit === 0 || $this->y57_receit === 0.0 || $this->y57_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["y57_receit"]:$this->y57_receit);
        $this->y57_descr = ($this->y57_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y57_descr"]:$this->y57_descr);
-       $this->y57_valor = ($this->y57_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y57_valor"]:$this->y57_valor);
+       $this->y57_valor = (($this->y57_valor === 0 || $this->y57_valor === 0.0 || $this->y57_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["y57_valor"]:$this->y57_valor);
      }else{
-       $this->y57_codauto = ($this->y57_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y57_codauto"]:$this->y57_codauto);
-       $this->y57_receit = ($this->y57_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y57_receit"]:$this->y57_receit);
+       $this->y57_codauto = (($this->y57_codauto === 0 || $this->y57_codauto === 0.0 || $this->y57_codauto == "")?@$GLOBALS["HTTP_POST_VARS"]["y57_codauto"]:$this->y57_codauto);
+       $this->y57_receit = (($this->y57_receit === 0 || $this->y57_receit === 0.0 || $this->y57_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["y57_receit"]:$this->y57_receit);
      }
    }
    // funcao para inclusao
@@ -97,7 +97,7 @@ class cl_autorec {
      }
        $this->y57_codauto = $y57_codauto;
        $this->y57_receit = $y57_receit;
-     if(($this->y57_codauto == null) || ($this->y57_codauto == "") ){
+     if(($this->y57_codauto == null) || (($this->y57_codauto === 0 || $this->y57_codauto === 0.0 || $this->y57_codauto == "")) ){
        $this->erro_sql = " Campo y57_codauto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -105,7 +105,7 @@ class cl_autorec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y57_receit == null) || ($this->y57_receit == "") ){
+     if(($this->y57_receit == null) || (($this->y57_receit === 0 || $this->y57_receit === 0.0 || $this->y57_receit == "")) ){
        $this->erro_sql = " Campo y57_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -368,7 +368,7 @@ class cl_autorec {
    function sql_query ( $y57_codauto=null,$y57_receit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_autorec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_autorec {
    function sql_query_file ( $y57_codauto=null,$y57_receit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -442,7 +442,7 @@ class cl_autorec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

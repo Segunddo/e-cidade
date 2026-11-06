@@ -42,7 +42,7 @@ $clfiscalmatric  = new cl_fiscalmatric;
 $clrotulo        = new rotulocampo;
 $clrotulo->label('y30_codnoti');
 $clrotulo->label('y30_nome');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 //-----------------------BUSCA AS INFORMAÇÕES DA NOTIFICAÇÃO--------------------------
 $result = $clfiscal->sql_record($clfiscal->sql_query_info($codfiscal,"*"," y30_codnoti = $codfiscal and y30_instit = ".db_getsession('DB_instit') ));
@@ -56,7 +56,7 @@ if ($clfiscal->numrows>0){
 $identificacao = (trim($z01_nomecomple) != ''?$z01_nomecomple:$z01_nome);
 $cpf           = $z01_cgccpf;
 $hora          = $y30_hora;
-$arr_data      = split("/",$y30_data);
+$arr_data      = explode("/",$y30_data);
 $dia           = $arr_data[0];
 $mes           = db_mes($arr_data[1]);
 $ano           = $arr_data[2];

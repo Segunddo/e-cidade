@@ -52,7 +52,7 @@ class cl_certidaoexistenciaprotprocesso {
                  j134_protprocesso = int4 = Processo certidão existência 
                  ";
    //funcao construtor da classe 
-   function cl_certidaoexistenciaprotprocesso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("certidaoexistenciaprotprocesso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_certidaoexistenciaprotprocesso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j134_sequencial = ($this->j134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_sequencial"]:$this->j134_sequencial);
-       $this->j134_certidaoexistencia = ($this->j134_certidaoexistencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_certidaoexistencia"]:$this->j134_certidaoexistencia);
-       $this->j134_protprocesso = ($this->j134_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_protprocesso"]:$this->j134_protprocesso);
+       $this->j134_sequencial = ($this->j134_sequencial === 0 || $this->j134_sequencial === 0.0 || $this->j134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_sequencial"]:$this->j134_sequencial);
+       $this->j134_certidaoexistencia = ($this->j134_certidaoexistencia === 0 || $this->j134_certidaoexistencia === 0.0 || $this->j134_certidaoexistencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_certidaoexistencia"]:$this->j134_certidaoexistencia);
+       $this->j134_protprocesso = ($this->j134_protprocesso === 0 || $this->j134_protprocesso === 0.0 || $this->j134_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_protprocesso"]:$this->j134_protprocesso);
      }else{
-       $this->j134_sequencial = ($this->j134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_sequencial"]:$this->j134_sequencial);
+       $this->j134_sequencial = ($this->j134_sequencial === 0 || $this->j134_sequencial === 0.0 || $this->j134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_sequencial"]:$this->j134_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_certidaoexistenciaprotprocesso {
          $this->j134_sequencial = $j134_sequencial; 
        }
      }
-     if(($this->j134_sequencial == null) || ($this->j134_sequencial == "") ){ 
+     if(($this->j134_sequencial == null) || ($this->j134_sequencial === 0 || $this->j134_sequencial === 0.0 || $this->j134_sequencial == "") ){ 
        $this->erro_sql = " Campo j134_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_certidaoexistenciaprotprocesso {
    function sql_query ( $j134_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_certidaoexistenciaprotprocesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_certidaoexistenciaprotprocesso {
    function sql_query_file ( $j134_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_certidaoexistenciaprotprocesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

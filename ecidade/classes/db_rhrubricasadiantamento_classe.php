@@ -23,7 +23,7 @@ class cl_rhrubricasadiantamento {
                  rh262_instituicao = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_rhrubricasadiantamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhrubricasadiantamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -42,11 +42,11 @@ class cl_rhrubricasadiantamento {
      if($exclusao==false){
        $this->rh262_rubrica_principal = ($this->rh262_rubrica_principal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh262_rubrica_principal"]:$this->rh262_rubrica_principal);
        $this->rh262_rubrica_adiantamento = ($this->rh262_rubrica_adiantamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh262_rubrica_adiantamento"]:$this->rh262_rubrica_adiantamento);
-       $this->rh262_instituicao = ($this->rh262_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh262_instituicao"]:$this->rh262_instituicao);
+       $this->rh262_instituicao = (($this->rh262_instituicao === 0 || $this->rh262_instituicao === 0.0 || $this->rh262_instituicao == "")?@$GLOBALS["HTTP_POST_VARS"]["rh262_instituicao"]:$this->rh262_instituicao);
      }else{
        $this->rh262_rubrica_principal = ($this->rh262_rubrica_principal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh262_rubrica_principal"]:$this->rh262_rubrica_principal);
        $this->rh262_rubrica_adiantamento = ($this->rh262_rubrica_adiantamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh262_rubrica_adiantamento"]:$this->rh262_rubrica_adiantamento);
-       $this->rh262_instituicao = ($this->rh262_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh262_instituicao"]:$this->rh262_instituicao);
+       $this->rh262_instituicao = (($this->rh262_instituicao === 0 || $this->rh262_instituicao === 0.0 || $this->rh262_instituicao == "")?@$GLOBALS["HTTP_POST_VARS"]["rh262_instituicao"]:$this->rh262_instituicao);
      }
    }
    // funcao para inclusao
@@ -71,7 +71,7 @@ class cl_rhrubricasadiantamento {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh262_instituicao == null) || ($this->rh262_instituicao == "") ){ 
+     if(($this->rh262_instituicao == null) || (($this->rh262_instituicao === 0 || $this->rh262_instituicao === 0.0 || $this->rh262_instituicao == "")) ){ 
        $this->erro_sql = " Campo rh262_instituicao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -287,7 +287,7 @@ class cl_rhrubricasadiantamento {
    function sql_query ( $rh262_rubrica_principal=null,$rh262_rubrica_adiantamento=null,$rh262_instituicao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -325,7 +325,7 @@ class cl_rhrubricasadiantamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -338,7 +338,7 @@ class cl_rhrubricasadiantamento {
    function sql_query_file ( $rh262_rubrica_principal=null,$rh262_rubrica_adiantamento=null,$rh262_instituicao=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -375,7 +375,7 @@ class cl_rhrubricasadiantamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -59,7 +59,7 @@ class cl_obrassituacaolog {
                  ob29_obs = text = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_obrassituacaolog() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obrassituacaolog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,9 +76,9 @@ class cl_obrassituacaolog {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob29_sequencial = ($this->ob29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_sequencial"]:$this->ob29_sequencial);
-       $this->ob29_obras = ($this->ob29_obras == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_obras"]:$this->ob29_obras);
-       $this->ob29_obrassituacao = ($this->ob29_obrassituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_obrassituacao"]:$this->ob29_obrassituacao);
+       $this->ob29_sequencial = ($this->ob29_sequencial === 0 || $this->ob29_sequencial === 0.0 || $this->ob29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_sequencial"]:$this->ob29_sequencial);
+       $this->ob29_obras = ($this->ob29_obras === 0 || $this->ob29_obras === 0.0 || $this->ob29_obras == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_obras"]:$this->ob29_obras);
+       $this->ob29_obrassituacao = ($this->ob29_obrassituacao === 0 || $this->ob29_obrassituacao === 0.0 || $this->ob29_obrassituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_obrassituacao"]:$this->ob29_obrassituacao);
        if($this->ob29_data == ""){
          $this->ob29_data_dia = ($this->ob29_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_data_dia"]:$this->ob29_data_dia);
          $this->ob29_data_mes = ($this->ob29_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_data_mes"]:$this->ob29_data_mes);
@@ -89,7 +89,7 @@ class cl_obrassituacaolog {
        }
        $this->ob29_obs = ($this->ob29_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_obs"]:$this->ob29_obs);
      }else{
-       $this->ob29_sequencial = ($this->ob29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_sequencial"]:$this->ob29_sequencial);
+       $this->ob29_sequencial = ($this->ob29_sequencial === 0 || $this->ob29_sequencial === 0.0 || $this->ob29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_sequencial"]:$this->ob29_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_obrassituacaolog {
          $this->ob29_sequencial = $ob29_sequencial; 
        }
      }
-     if(($this->ob29_sequencial == null) || ($this->ob29_sequencial == "") ){ 
+     if(($this->ob29_sequencial == null) || ($this->ob29_sequencial === 0 || $this->ob29_sequencial === 0.0 || $this->ob29_sequencial == "") ){ 
        $this->erro_sql = " Campo ob29_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -446,7 +446,7 @@ class cl_obrassituacaolog {
    function sql_query ( $ob29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_obrassituacaolog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -483,7 +483,7 @@ class cl_obrassituacaolog {
    function sql_query_file ( $ob29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_obrassituacaolog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_obrassituacaolog {
   function sql_query_obras_situacoes ( $ob29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
   	$sql = "select ";
   	if($campos != "*" ){
-  		$campos_sql = split("#",$campos);
+  		$campos_sql = preg_split("#\\##m",$campos);
   		$virgula = "";
   		for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];
@@ -559,7 +559,7 @@ class cl_obrassituacaolog {
   	$sql .= $sql2;
   	if($ordem != null ){
   		$sql .= " order by ";
-  		$campos_sql = split("#",$ordem);
+  		$campos_sql = preg_split("#\\##m",$ordem);
   		$virgula = "";
   		for($i=0;$i<sizeof($campos_sql);$i++){
   			$sql .= $virgula.$campos_sql[$i];

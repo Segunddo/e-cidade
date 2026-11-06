@@ -93,7 +93,7 @@ class cl_aidof {
                  y08_datalimiteliberada = date = Data limite liberada 
                  ";
    //funcao construtor da classe 
-   function cl_aidof() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aidof"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -110,9 +110,9 @@ class cl_aidof {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y08_codigo = ($this->y08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_codigo"]:$this->y08_codigo);
-       $this->y08_nota = ($this->y08_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_nota"]:$this->y08_nota);
-       $this->y08_inscr = ($this->y08_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_inscr"]:$this->y08_inscr);
+       $this->y08_codigo = (($this->y08_codigo === 0 || $this->y08_codigo === 0.0 || $this->y08_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y08_codigo"]:$this->y08_codigo);
+       $this->y08_nota = (($this->y08_nota === 0 || $this->y08_nota === 0.0 || $this->y08_nota == "")?@$GLOBALS["HTTP_POST_VARS"]["y08_nota"]:$this->y08_nota);
+       $this->y08_inscr = (($this->y08_inscr === 0 || $this->y08_inscr === 0.0 || $this->y08_inscr == "")?@$GLOBALS["HTTP_POST_VARS"]["y08_inscr"]:$this->y08_inscr);
        if($this->y08_dtlanc == ""){
          $this->y08_dtlanc_dia = ($this->y08_dtlanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_dtlanc_dia"]:$this->y08_dtlanc_dia);
          $this->y08_dtlanc_mes = ($this->y08_dtlanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_dtlanc_mes"]:$this->y08_dtlanc_mes);
@@ -121,13 +121,13 @@ class cl_aidof {
             $this->y08_dtlanc = $this->y08_dtlanc_ano."-".$this->y08_dtlanc_mes."-".$this->y08_dtlanc_dia;
          }
        }
-       $this->y08_notain = ($this->y08_notain == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_notain"]:$this->y08_notain);
-       $this->y08_notafi = ($this->y08_notafi == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_notafi"]:$this->y08_notafi);
-       $this->y08_numcgm = ($this->y08_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_numcgm"]:$this->y08_numcgm);
+       $this->y08_notain = (($this->y08_notain === 0 || $this->y08_notain === 0.0 || $this->y08_notain == "")?@$GLOBALS["HTTP_POST_VARS"]["y08_notain"]:$this->y08_notain);
+       $this->y08_notafi = (($this->y08_notafi === 0 || $this->y08_notafi === 0.0 || $this->y08_notafi == "")?@$GLOBALS["HTTP_POST_VARS"]["y08_notafi"]:$this->y08_notafi);
+       $this->y08_numcgm = (($this->y08_numcgm === 0 || $this->y08_numcgm === 0.0 || $this->y08_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["y08_numcgm"]:$this->y08_numcgm);
        $this->y08_obs = ($this->y08_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_obs"]:$this->y08_obs);
-       $this->y08_login = ($this->y08_login == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_login"]:$this->y08_login);
-       $this->y08_quantsol = ($this->y08_quantsol == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_quantsol"]:$this->y08_quantsol);
-       $this->y08_quantlib = ($this->y08_quantlib == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_quantlib"]:$this->y08_quantlib);
+       $this->y08_login = (($this->y08_login === 0 || $this->y08_login === 0.0 || $this->y08_login == "")?@$GLOBALS["HTTP_POST_VARS"]["y08_login"]:$this->y08_login);
+       $this->y08_quantsol = (($this->y08_quantsol === 0 || $this->y08_quantsol === 0.0 || $this->y08_quantsol == "")?@$GLOBALS["HTTP_POST_VARS"]["y08_quantsol"]:$this->y08_quantsol);
+       $this->y08_quantlib = (($this->y08_quantlib === 0 || $this->y08_quantlib === 0.0 || $this->y08_quantlib == "")?@$GLOBALS["HTTP_POST_VARS"]["y08_quantlib"]:$this->y08_quantlib);
        $this->y08_cancel = ($this->y08_cancel == "f"?@$GLOBALS["HTTP_POST_VARS"]["y08_cancel"]:$this->y08_cancel);
        if($this->y08_dataliberacaografica == ""){
          $this->y08_dataliberacaografica_dia = ($this->y08_dataliberacaografica_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_dataliberacaografica_dia"]:$this->y08_dataliberacaografica_dia);
@@ -162,7 +162,7 @@ class cl_aidof {
          }
        }
      }else{
-       $this->y08_codigo = ($this->y08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y08_codigo"]:$this->y08_codigo);
+       $this->y08_codigo = (($this->y08_codigo === 0 || $this->y08_codigo === 0.0 || $this->y08_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y08_codigo"]:$this->y08_codigo);
      }
    }
    // funcao para inclusao
@@ -288,7 +288,7 @@ class cl_aidof {
          $this->y08_codigo = $y08_codigo; 
        }
      }
-     if(($this->y08_codigo == null) || ($this->y08_codigo == "") ){ 
+     if(($this->y08_codigo == null) || (($this->y08_codigo === 0 || $this->y08_codigo === 0.0 || $this->y08_codigo == "")) ){ 
        $this->erro_sql = " Campo y08_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -779,7 +779,7 @@ class cl_aidof {
    function sql_query ( $y08_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -808,7 +808,7 @@ class cl_aidof {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -821,7 +821,7 @@ class cl_aidof {
    function sql_query_file ( $y08_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -842,7 +842,7 @@ class cl_aidof {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -854,7 +854,7 @@ class cl_aidof {
    function sql_query_aidof ( $y08_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -876,7 +876,7 @@ class cl_aidof {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_orcreservarhempenhofolha {
                  o120_rhempenhofolha = int4 = Código Empenho 
                  ";
    //funcao construtor da classe 
-   function cl_orcreservarhempenhofolha() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcreservarhempenhofolha"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_orcreservarhempenhofolha {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o120_sequencial = ($this->o120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o120_sequencial"]:$this->o120_sequencial);
-       $this->o120_orcreserva = ($this->o120_orcreserva == ""?@$GLOBALS["HTTP_POST_VARS"]["o120_orcreserva"]:$this->o120_orcreserva);
-       $this->o120_rhempenhofolha = ($this->o120_rhempenhofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["o120_rhempenhofolha"]:$this->o120_rhempenhofolha);
+       $this->o120_sequencial = ($this->o120_sequencial === 0 || $this->o120_sequencial === 0.0 || $this->o120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o120_sequencial"]:$this->o120_sequencial);
+       $this->o120_orcreserva = ($this->o120_orcreserva === 0 || $this->o120_orcreserva === 0.0 || $this->o120_orcreserva == ""?@$GLOBALS["HTTP_POST_VARS"]["o120_orcreserva"]:$this->o120_orcreserva);
+       $this->o120_rhempenhofolha = ($this->o120_rhempenhofolha === 0 || $this->o120_rhempenhofolha === 0.0 || $this->o120_rhempenhofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["o120_rhempenhofolha"]:$this->o120_rhempenhofolha);
      }else{
-       $this->o120_sequencial = ($this->o120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o120_sequencial"]:$this->o120_sequencial);
+       $this->o120_sequencial = ($this->o120_sequencial === 0 || $this->o120_sequencial === 0.0 || $this->o120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o120_sequencial"]:$this->o120_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_orcreservarhempenhofolha {
          $this->o120_sequencial = $o120_sequencial; 
        }
      }
-     if(($this->o120_sequencial == null) || ($this->o120_sequencial == "") ){ 
+     if(($this->o120_sequencial == null) || ($this->o120_sequencial === 0 || $this->o120_sequencial === 0.0 || $this->o120_sequencial == "") ){ 
        $this->erro_sql = " Campo o120_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_orcreservarhempenhofolha {
    function sql_query ( $o120_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_orcreservarhempenhofolha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_orcreservarhempenhofolha {
    function sql_query_file ( $o120_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_orcreservarhempenhofolha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

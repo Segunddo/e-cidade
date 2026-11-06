@@ -52,7 +52,7 @@ class cl_tabrecarretipo {
                  k79_receit = int4 = Receita 
                  ";
    //funcao construtor da classe 
-   function cl_tabrecarretipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tabrecarretipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_tabrecarretipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k79_sequencial = ($this->k79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_sequencial"]:$this->k79_sequencial);
-       $this->k79_arretipo = ($this->k79_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_arretipo"]:$this->k79_arretipo);
-       $this->k79_receit = ($this->k79_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_receit"]:$this->k79_receit);
+       $this->k79_sequencial = ($this->k79_sequencial === 0 || $this->k79_sequencial === 0.0 || $this->k79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_sequencial"]:$this->k79_sequencial);
+       $this->k79_arretipo = ($this->k79_arretipo === 0 || $this->k79_arretipo === 0.0 || $this->k79_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_arretipo"]:$this->k79_arretipo);
+       $this->k79_receit = ($this->k79_receit === 0 || $this->k79_receit === 0.0 || $this->k79_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_receit"]:$this->k79_receit);
      }else{
-       $this->k79_sequencial = ($this->k79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_sequencial"]:$this->k79_sequencial);
+       $this->k79_sequencial = ($this->k79_sequencial === 0 || $this->k79_sequencial === 0.0 || $this->k79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_sequencial"]:$this->k79_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tabrecarretipo {
          $this->k79_sequencial = $k79_sequencial; 
        }
      }
-     if(($this->k79_sequencial == null) || ($this->k79_sequencial == "") ){ 
+     if(($this->k79_sequencial == null) || ($this->k79_sequencial === 0 || $this->k79_sequencial === 0.0 || $this->k79_sequencial == "") ){ 
        $this->erro_sql = " Campo k79_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_tabrecarretipo {
    function sql_query ( $k79_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_tabrecarretipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_tabrecarretipo {
    function sql_query_file ( $k79_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_tabrecarretipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

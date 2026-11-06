@@ -51,14 +51,14 @@ class cl_avaliacaogruporespostaefdprocesso
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->efd02_sequencial = ($this->efd02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_sequencial"]:$this->efd02_sequencial);
-       $this->efd02_cgm = ($this->efd02_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_cgm"]:$this->efd02_cgm);
+       $this->efd02_sequencial = ($this->efd02_sequencial === 0 || $this->efd02_sequencial === 0.0 || $this->efd02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_sequencial"]:$this->efd02_sequencial);
+       $this->efd02_cgm = ($this->efd02_cgm === 0 || $this->efd02_cgm === 0.0 || $this->efd02_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_cgm"]:$this->efd02_cgm);
        $this->efd02_processo = ($this->efd02_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_processo"]:$this->efd02_processo);
-       $this->efd02_tipoprocesso = ($this->efd02_tipoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_tipoprocesso"]:$this->efd02_tipoprocesso);
-       $this->efd02_avaliacaogruporesposta = ($this->efd02_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_avaliacaogruporesposta"]:$this->efd02_avaliacaogruporesposta);
-       $this->efd02_avaliacao = ($this->efd02_avaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_avaliacao"]:$this->efd02_avaliacao);
+       $this->efd02_tipoprocesso = ($this->efd02_tipoprocesso === 0 || $this->efd02_tipoprocesso === 0.0 || $this->efd02_tipoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_tipoprocesso"]:$this->efd02_tipoprocesso);
+       $this->efd02_avaliacaogruporesposta = ($this->efd02_avaliacaogruporesposta === 0 || $this->efd02_avaliacaogruporesposta === 0.0 || $this->efd02_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_avaliacaogruporesposta"]:$this->efd02_avaliacaogruporesposta);
+       $this->efd02_avaliacao = ($this->efd02_avaliacao === 0 || $this->efd02_avaliacao === 0.0 || $this->efd02_avaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_avaliacao"]:$this->efd02_avaliacao);
      }else{
-       $this->efd02_sequencial = ($this->efd02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_sequencial"]:$this->efd02_sequencial);
+       $this->efd02_sequencial = ($this->efd02_sequencial === 0 || $this->efd02_sequencial === 0.0 || $this->efd02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd02_sequencial"]:$this->efd02_sequencial);
      }
    }
 
@@ -134,7 +134,7 @@ class cl_avaliacaogruporespostaefdprocesso
          $this->efd02_sequencial = $efd02_sequencial; 
        }
      }
-     if(($this->efd02_sequencial == null) || ($this->efd02_sequencial == "") ){ 
+     if(($this->efd02_sequencial == null) || ($this->efd02_sequencial === 0 || $this->efd02_sequencial === 0.0 || $this->efd02_sequencial == "") ){ 
        $this->erro_sql = " Campo efd02_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

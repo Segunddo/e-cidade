@@ -57,7 +57,7 @@ class cl_conlancamrec {
                  c74_data = date = Data
                  ";
    //funcao construtor da classe
-   function cl_conlancamrec() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancamrec");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,9 +74,9 @@ class cl_conlancamrec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c74_codlan = ($this->c74_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c74_codlan"]:$this->c74_codlan);
-       $this->c74_anousu = ($this->c74_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c74_anousu"]:$this->c74_anousu);
-       $this->c74_codrec = ($this->c74_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["c74_codrec"]:$this->c74_codrec);
+       $this->c74_codlan = ($this->c74_codlan === 0 || $this->c74_codlan === 0.0 || $this->c74_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c74_codlan"]:$this->c74_codlan);
+       $this->c74_anousu = ($this->c74_anousu === 0 || $this->c74_anousu === 0.0 || $this->c74_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c74_anousu"]:$this->c74_anousu);
+       $this->c74_codrec = ($this->c74_codrec === 0 || $this->c74_codrec === 0.0 || $this->c74_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["c74_codrec"]:$this->c74_codrec);
        if($this->c74_data == ""){
          $this->c74_data_dia = ($this->c74_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c74_data_dia"]:$this->c74_data_dia);
          $this->c74_data_mes = ($this->c74_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c74_data_mes"]:$this->c74_data_mes);
@@ -86,7 +86,7 @@ class cl_conlancamrec {
          }
        }
      }else{
-       $this->c74_codlan = ($this->c74_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c74_codlan"]:$this->c74_codlan);
+       $this->c74_codlan = ($this->c74_codlan === 0 || $this->c74_codlan === 0.0 || $this->c74_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c74_codlan"]:$this->c74_codlan);
      }
    }
    // funcao para inclusao
@@ -120,7 +120,7 @@ class cl_conlancamrec {
        return false;
      }
        $this->c74_codlan = $c74_codlan;
-     if(($this->c74_codlan == null) || ($this->c74_codlan == "") ){
+     if(($this->c74_codlan == null) || ($this->c74_codlan === 0 || $this->c74_codlan === 0.0 || $this->c74_codlan == "") ){
        $this->erro_sql = " Campo c74_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -405,7 +405,7 @@ class cl_conlancamrec {
    function sql_query ( $c74_codlan=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_conlancamrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_conlancamrec {
    function sql_query_file ( $c74_codlan=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -467,7 +467,7 @@ class cl_conlancamrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_conlancamrec {
     $sql = "select ";
     if($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++) {
 
@@ -514,7 +514,7 @@ class cl_conlancamrec {
     if($ordem != null ) {
 
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++) {
 
@@ -530,7 +530,7 @@ class cl_conlancamrec {
     $sql = "select ";
     if($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++) {
 
@@ -561,7 +561,7 @@ class cl_conlancamrec {
     if($ordem != null ) {
 
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++) {
 

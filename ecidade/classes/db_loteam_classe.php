@@ -56,7 +56,7 @@ class cl_loteam {
                  j34_areato = float8 = Área Total 
                  ";
    //funcao construtor da classe 
-   function cl_loteam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("loteam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_loteam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j34_loteam = ($this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
+       $this->j34_loteam = ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
        $this->j34_descr = ($this->j34_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_descr"]:$this->j34_descr);
-       $this->j34_areacc = ($this->j34_areacc == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areacc"]:$this->j34_areacc);
-       $this->j34_areapc = ($this->j34_areapc == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areapc"]:$this->j34_areapc);
-       $this->j34_areato = ($this->j34_areato == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areato"]:$this->j34_areato);
+       $this->j34_areacc = ($this->j34_areacc === 0 || $this->j34_areacc === 0.0 || $this->j34_areacc == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areacc"]:$this->j34_areacc);
+       $this->j34_areapc = ($this->j34_areapc === 0 || $this->j34_areapc === 0.0 || $this->j34_areapc == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areapc"]:$this->j34_areapc);
+       $this->j34_areato = ($this->j34_areato === 0 || $this->j34_areato === 0.0 || $this->j34_areato == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areato"]:$this->j34_areato);
      }else{
-       $this->j34_loteam = ($this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
+       $this->j34_loteam = ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_loteam {
          $this->j34_loteam = $j34_loteam; 
        }
      }
-     if(($this->j34_loteam == null) || ($this->j34_loteam == "") ){ 
+     if(($this->j34_loteam == null) || ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == "") ){ 
        $this->erro_sql = " Campo j34_loteam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -397,7 +397,7 @@ class cl_loteam {
    function sql_query ( $j34_loteam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_loteam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_loteam {
    function sql_query_file ( $j34_loteam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_loteam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

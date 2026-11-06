@@ -63,7 +63,7 @@ class cl_liclicitasituacao {
                  l11_hora = char(5) = Hora do Movimento 
                  ";
    //funcao construtor da classe 
-   function cl_liclicitasituacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liclicitasituacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,10 +80,10 @@ class cl_liclicitasituacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l11_sequencial = ($this->l11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_sequencial"]:$this->l11_sequencial);
-       $this->l11_id_usuario = ($this->l11_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_id_usuario"]:$this->l11_id_usuario);
-       $this->l11_licsituacao = ($this->l11_licsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_licsituacao"]:$this->l11_licsituacao);
-       $this->l11_liclicita = ($this->l11_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_liclicita"]:$this->l11_liclicita);
+       $this->l11_sequencial = ($this->l11_sequencial === 0 || $this->l11_sequencial === 0.0 || $this->l11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_sequencial"]:$this->l11_sequencial);
+       $this->l11_id_usuario = ($this->l11_id_usuario === 0 || $this->l11_id_usuario === 0.0 || $this->l11_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_id_usuario"]:$this->l11_id_usuario);
+       $this->l11_licsituacao = ($this->l11_licsituacao === 0 || $this->l11_licsituacao === 0.0 || $this->l11_licsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_licsituacao"]:$this->l11_licsituacao);
+       $this->l11_liclicita = ($this->l11_liclicita === 0 || $this->l11_liclicita === 0.0 || $this->l11_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_liclicita"]:$this->l11_liclicita);
        $this->l11_obs = ($this->l11_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_obs"]:$this->l11_obs);
        if($this->l11_data == ""){
          $this->l11_data_dia = ($this->l11_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_data_dia"]:$this->l11_data_dia);
@@ -95,7 +95,7 @@ class cl_liclicitasituacao {
        }
        $this->l11_hora = ($this->l11_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_hora"]:$this->l11_hora);
      }else{
-       $this->l11_sequencial = ($this->l11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_sequencial"]:$this->l11_sequencial);
+       $this->l11_sequencial = ($this->l11_sequencial === 0 || $this->l11_sequencial === 0.0 || $this->l11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l11_sequencial"]:$this->l11_sequencial);
      }
    }
    // funcao para inclusao
@@ -164,7 +164,7 @@ class cl_liclicitasituacao {
          $this->l11_sequencial = $l11_sequencial; 
        }
      }
-     if(($this->l11_sequencial == null) || ($this->l11_sequencial == "") ){ 
+     if(($this->l11_sequencial == null) || ($this->l11_sequencial === 0 || $this->l11_sequencial === 0.0 || $this->l11_sequencial == "") ){ 
        $this->erro_sql = " Campo l11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

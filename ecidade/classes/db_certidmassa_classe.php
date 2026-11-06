@@ -48,7 +48,7 @@ class cl_certidmassa {
                  v13_certid = int4 = certidao 
                  ";
    //funcao construtor da classe 
-   function cl_certidmassa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("certidmassa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -65,16 +65,16 @@ class cl_certidmassa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v13_certid = ($this->v13_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
+       $this->v13_certid = ($this->v13_certid === 0 || $this->v13_certid === 0.0 || $this->v13_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
      }else{
-       $this->v13_certid = ($this->v13_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
+       $this->v13_certid = ($this->v13_certid === 0 || $this->v13_certid === 0.0 || $this->v13_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
      }
    }
    // funcao para inclusao
    function incluir ($v13_certid){ 
       $this->atualizacampos();
        $this->v13_certid = $v13_certid; 
-     if(($this->v13_certid == null) || ($this->v13_certid == "") ){ 
+     if(($this->v13_certid == null) || ($this->v13_certid === 0 || $this->v13_certid === 0.0 || $this->v13_certid == "") ){ 
        $this->erro_sql = " Campo v13_certid nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -297,7 +297,7 @@ class cl_certidmassa {
    function sql_query ( $v13_certid=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -321,7 +321,7 @@ class cl_certidmassa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -334,7 +334,7 @@ class cl_certidmassa {
    function sql_query_file ( $v13_certid=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -355,7 +355,7 @@ class cl_certidmassa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

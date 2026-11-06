@@ -50,7 +50,7 @@ class cl_isenexe {
                  j47_anousu = int4 = Exercicio 
                  ";
    //funcao construtor da classe 
-   function cl_isenexe() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isenexe"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_isenexe {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j47_codigo = ($this->j47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_codigo"]:$this->j47_codigo);
-       $this->j47_anousu = ($this->j47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_anousu"]:$this->j47_anousu);
+       $this->j47_codigo = ($this->j47_codigo === 0 || $this->j47_codigo === 0.0 || $this->j47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_codigo"]:$this->j47_codigo);
+       $this->j47_anousu = ($this->j47_anousu === 0 || $this->j47_anousu === 0.0 || $this->j47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_anousu"]:$this->j47_anousu);
      }else{
-       $this->j47_codigo = ($this->j47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_codigo"]:$this->j47_codigo);
-       $this->j47_anousu = ($this->j47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_anousu"]:$this->j47_anousu);
+       $this->j47_codigo = ($this->j47_codigo === 0 || $this->j47_codigo === 0.0 || $this->j47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_codigo"]:$this->j47_codigo);
+       $this->j47_anousu = ($this->j47_anousu === 0 || $this->j47_anousu === 0.0 || $this->j47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_anousu"]:$this->j47_anousu);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_isenexe {
       $this->atualizacampos();
        $this->j47_codigo = $j47_codigo; 
        $this->j47_anousu = $j47_anousu; 
-     if(($this->j47_codigo == null) || ($this->j47_codigo == "") ){ 
+     if(($this->j47_codigo == null) || ($this->j47_codigo === 0 || $this->j47_codigo === 0.0 || $this->j47_codigo == "") ){ 
        $this->erro_sql = " Campo j47_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_isenexe {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j47_anousu == null) || ($this->j47_anousu == "") ){ 
+     if(($this->j47_anousu == null) || ($this->j47_anousu === 0 || $this->j47_anousu === 0.0 || $this->j47_anousu == "") ){ 
        $this->erro_sql = " Campo j47_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_isenexe {
    function sql_query ( $j47_codigo=null,$j47_anousu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_isenexe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_isenexe {
    function sql_query_file ( $j47_codigo=null,$j47_anousu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_isenexe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

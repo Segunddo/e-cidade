@@ -50,7 +50,7 @@ class cl_liclicitacadattdinamicovalorgrupo {
                  l16_liclicita = int4 = Licitação
                  ";
    //funcao construtor da classe
-   function cl_liclicitacadattdinamicovalorgrupo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liclicitacadattdinamicovalorgrupo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_liclicitacadattdinamicovalorgrupo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l16_sequencial = ($this->l16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l16_sequencial"]:$this->l16_sequencial);
-       $this->l16_cadattdinamicovalorgrupo = ($this->l16_cadattdinamicovalorgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["l16_cadattdinamicovalorgrupo"]:$this->l16_cadattdinamicovalorgrupo);
-       $this->l16_liclicita = ($this->l16_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l16_liclicita"]:$this->l16_liclicita);
+       $this->l16_sequencial = ($this->l16_sequencial === 0 || $this->l16_sequencial === 0.0 || $this->l16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l16_sequencial"]:$this->l16_sequencial);
+       $this->l16_cadattdinamicovalorgrupo = ($this->l16_cadattdinamicovalorgrupo === 0 || $this->l16_cadattdinamicovalorgrupo === 0.0 || $this->l16_cadattdinamicovalorgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["l16_cadattdinamicovalorgrupo"]:$this->l16_cadattdinamicovalorgrupo);
+       $this->l16_liclicita = ($this->l16_liclicita === 0 || $this->l16_liclicita === 0.0 || $this->l16_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l16_liclicita"]:$this->l16_liclicita);
      }else{
-       $this->l16_sequencial = ($this->l16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l16_sequencial"]:$this->l16_sequencial);
+       $this->l16_sequencial = ($this->l16_sequencial === 0 || $this->l16_sequencial === 0.0 || $this->l16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l16_sequencial"]:$this->l16_sequencial);
      }
    }
    // funcao para Inclusão
@@ -119,7 +119,7 @@ class cl_liclicitacadattdinamicovalorgrupo {
          $this->l16_sequencial = $l16_sequencial;
        }
      }
-     if(($this->l16_sequencial == null) || ($this->l16_sequencial == "") ){
+     if(($this->l16_sequencial == null) || ($this->l16_sequencial === 0 || $this->l16_sequencial === 0.0 || $this->l16_sequencial == "") ){
        $this->erro_sql = " Campo l16_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

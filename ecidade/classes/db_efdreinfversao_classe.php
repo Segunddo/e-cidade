@@ -43,10 +43,10 @@ class cl_efdreinfversao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->efd01_sequencial = ($this->efd01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd01_sequencial"]:$this->efd01_sequencial);
+       $this->efd01_sequencial = ($this->efd01_sequencial === 0 || $this->efd01_sequencial === 0.0 || $this->efd01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd01_sequencial"]:$this->efd01_sequencial);
        $this->efd01_versao = ($this->efd01_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["efd01_versao"]:$this->efd01_versao);
      }else{
-       $this->efd01_sequencial = ($this->efd01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd01_sequencial"]:$this->efd01_sequencial);
+       $this->efd01_sequencial = ($this->efd01_sequencial === 0 || $this->efd01_sequencial === 0.0 || $this->efd01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["efd01_sequencial"]:$this->efd01_sequencial);
      }
    }
 
@@ -86,7 +86,7 @@ class cl_efdreinfversao
          $this->efd01_sequencial = $efd01_sequencial; 
        }
      }
-     if(($this->efd01_sequencial == null) || ($this->efd01_sequencial == "") ){ 
+     if(($this->efd01_sequencial == null) || ($this->efd01_sequencial === 0 || $this->efd01_sequencial === 0.0 || $this->efd01_sequencial == "") ){ 
        $this->erro_sql = " Campo efd01_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -75,7 +75,7 @@ class cl_iptuisen {
                  j46_arealo = float8 = Área do lote M2
                  ";
    //funcao construtor da classe
-   function cl_iptuisen() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptuisen");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,9 +92,9 @@ class cl_iptuisen {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j46_codigo = ($this->j46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_codigo"]:$this->j46_codigo);
-       $this->j46_matric = ($this->j46_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_matric"]:$this->j46_matric);
-       $this->j46_tipo = ($this->j46_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_tipo"]:$this->j46_tipo);
+       $this->j46_codigo = ($this->j46_codigo === 0 || $this->j46_codigo === 0.0 || $this->j46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_codigo"]:$this->j46_codigo);
+       $this->j46_matric = ($this->j46_matric === 0 || $this->j46_matric === 0.0 || $this->j46_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_matric"]:$this->j46_matric);
+       $this->j46_tipo = ($this->j46_tipo === 0 || $this->j46_tipo === 0.0 || $this->j46_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_tipo"]:$this->j46_tipo);
        if($this->j46_dtini == ""){
          $this->j46_dtini_dia = ($this->j46_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_dtini_dia"]:$this->j46_dtini_dia);
          $this->j46_dtini_mes = ($this->j46_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_dtini_mes"]:$this->j46_dtini_mes);
@@ -111,7 +111,7 @@ class cl_iptuisen {
             $this->j46_dtfim = $this->j46_dtfim_ano."-".$this->j46_dtfim_mes."-".$this->j46_dtfim_dia;
          }
        }
-       $this->j46_perc = ($this->j46_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_perc"]:$this->j46_perc);
+       $this->j46_perc = ($this->j46_perc === 0 || $this->j46_perc === 0.0 || $this->j46_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_perc"]:$this->j46_perc);
        if($this->j46_dtinc == ""){
          $this->j46_dtinc_dia = ($this->j46_dtinc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_dtinc_dia"]:$this->j46_dtinc_dia);
          $this->j46_dtinc_mes = ($this->j46_dtinc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_dtinc_mes"]:$this->j46_dtinc_mes);
@@ -120,11 +120,11 @@ class cl_iptuisen {
             $this->j46_dtinc = $this->j46_dtinc_ano."-".$this->j46_dtinc_mes."-".$this->j46_dtinc_dia;
          }
        }
-       $this->j46_idusu = ($this->j46_idusu == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_idusu"]:$this->j46_idusu);
+       $this->j46_idusu = ($this->j46_idusu === 0 || $this->j46_idusu === 0.0 || $this->j46_idusu == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_idusu"]:$this->j46_idusu);
        $this->j46_hist = ($this->j46_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_hist"]:$this->j46_hist);
-       $this->j46_arealo = ($this->j46_arealo == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_arealo"]:$this->j46_arealo);
+       $this->j46_arealo = ($this->j46_arealo === 0 || $this->j46_arealo === 0.0 || $this->j46_arealo == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_arealo"]:$this->j46_arealo);
      }else{
-       $this->j46_codigo = ($this->j46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_codigo"]:$this->j46_codigo);
+       $this->j46_codigo = ($this->j46_codigo === 0 || $this->j46_codigo === 0.0 || $this->j46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j46_codigo"]:$this->j46_codigo);
      }
    }
    // funcao para inclusao
@@ -223,7 +223,7 @@ class cl_iptuisen {
          $this->j46_codigo = $j46_codigo;
        }
      }
-     if(($this->j46_codigo == null) || ($this->j46_codigo == "") ){
+     if(($this->j46_codigo == null) || ($this->j46_codigo === 0 || $this->j46_codigo === 0.0 || $this->j46_codigo == "") ){
        $this->erro_sql = " Campo j46_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

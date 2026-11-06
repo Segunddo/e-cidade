@@ -41,7 +41,7 @@ $clrotulo->label('v01_exerc');
 $clrotulo->label('v01_proced');
 $clrotulo->label('v03_descr');
 
-//parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+//parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_GET_VARS);
 db_postmemory($HTTP_SERVER_VARS);
 

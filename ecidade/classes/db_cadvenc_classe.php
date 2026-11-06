@@ -63,7 +63,7 @@ class cl_cadvenc {
                  q82_calculaparcvenc = bool = Calcula Parcela Vencida
                  ";
    //funcao construtor da classe
-   function cl_cadvenc() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadvenc");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_cadvenc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q82_codigo = ($this->q82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_codigo"]:$this->q82_codigo);
-       $this->q82_parc = ($this->q82_parc == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_parc"]:$this->q82_parc);
+       $this->q82_codigo = (($this->q82_codigo === 0 || $this->q82_codigo === 0.0 || $this->q82_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["q82_codigo"]:$this->q82_codigo);
+       $this->q82_parc = (($this->q82_parc === 0 || $this->q82_parc === 0.0 || $this->q82_parc == "")?@$GLOBALS["HTTP_POST_VARS"]["q82_parc"]:$this->q82_parc);
        if($this->q82_venc == ""){
          $this->q82_venc_dia = ($this->q82_venc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_venc_dia"]:$this->q82_venc_dia);
          $this->q82_venc_mes = ($this->q82_venc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_venc_mes"]:$this->q82_venc_mes);
@@ -91,12 +91,12 @@ class cl_cadvenc {
          }
        }
        $this->q82_desc = ($this->q82_desc == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_desc"]:$this->q82_desc);
-       $this->q82_perc = ($this->q82_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_perc"]:$this->q82_perc);
-       $this->q82_hist = ($this->q82_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_hist"]:$this->q82_hist);
+       $this->q82_perc = (($this->q82_perc === 0 || $this->q82_perc === 0.0 || $this->q82_perc == "")?@$GLOBALS["HTTP_POST_VARS"]["q82_perc"]:$this->q82_perc);
+       $this->q82_hist = (($this->q82_hist === 0 || $this->q82_hist === 0.0 || $this->q82_hist == "")?@$GLOBALS["HTTP_POST_VARS"]["q82_hist"]:$this->q82_hist);
        $this->q82_calculaparcvenc = ($this->q82_calculaparcvenc == "f"?@$GLOBALS["HTTP_POST_VARS"]["q82_calculaparcvenc"]:$this->q82_calculaparcvenc);
      }else{
-       $this->q82_codigo = ($this->q82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_codigo"]:$this->q82_codigo);
-       $this->q82_parc = ($this->q82_parc == ""?@$GLOBALS["HTTP_POST_VARS"]["q82_parc"]:$this->q82_parc);
+       $this->q82_codigo = (($this->q82_codigo === 0 || $this->q82_codigo === 0.0 || $this->q82_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["q82_codigo"]:$this->q82_codigo);
+       $this->q82_parc = (($this->q82_parc === 0 || $this->q82_parc === 0.0 || $this->q82_parc == "")?@$GLOBALS["HTTP_POST_VARS"]["q82_parc"]:$this->q82_parc);
      }
    }
    // funcao para inclusao
@@ -149,7 +149,7 @@ class cl_cadvenc {
      }
        $this->q82_codigo = $q82_codigo;
        $this->q82_parc = $q82_parc;
-     if(($this->q82_codigo == null) || ($this->q82_codigo == "") ){
+     if(($this->q82_codigo == null) || (($this->q82_codigo === 0 || $this->q82_codigo === 0.0 || $this->q82_codigo == "")) ){
        $this->erro_sql = " Campo q82_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -157,7 +157,7 @@ class cl_cadvenc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q82_parc == null) || ($this->q82_parc == "") ){
+     if(($this->q82_parc == null) || (($this->q82_parc === 0 || $this->q82_parc === 0.0 || $this->q82_parc == "")) ){
        $this->erro_sql = " Campo q82_parc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -498,7 +498,7 @@ class cl_cadvenc {
    function sql_query ( $q82_codigo=null,$q82_parc=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -531,7 +531,7 @@ class cl_cadvenc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_cadvenc {
    function sql_query_file ( $q82_codigo=null,$q82_parc=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -573,7 +573,7 @@ class cl_cadvenc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

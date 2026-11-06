@@ -52,7 +52,7 @@ class cl_cadtipoorigem {
                  k14_cadorigem = int4 = Codigo 
                  ";
    //funcao construtor da classe 
-   function cl_cadtipoorigem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadtipoorigem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cadtipoorigem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k14_sequencial = ($this->k14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_sequencial"]:$this->k14_sequencial);
-       $this->k14_cadtipo = ($this->k14_cadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_cadtipo"]:$this->k14_cadtipo);
-       $this->k14_cadorigem = ($this->k14_cadorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_cadorigem"]:$this->k14_cadorigem);
+       $this->k14_sequencial = ($this->k14_sequencial === 0 || $this->k14_sequencial === 0.0 || $this->k14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_sequencial"]:$this->k14_sequencial);
+       $this->k14_cadtipo = ($this->k14_cadtipo === 0 || $this->k14_cadtipo === 0.0 || $this->k14_cadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_cadtipo"]:$this->k14_cadtipo);
+       $this->k14_cadorigem = ($this->k14_cadorigem === 0 || $this->k14_cadorigem === 0.0 || $this->k14_cadorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_cadorigem"]:$this->k14_cadorigem);
      }else{
-       $this->k14_sequencial = ($this->k14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_sequencial"]:$this->k14_sequencial);
+       $this->k14_sequencial = ($this->k14_sequencial === 0 || $this->k14_sequencial === 0.0 || $this->k14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_sequencial"]:$this->k14_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cadtipoorigem {
          $this->k14_sequencial = $k14_sequencial; 
        }
      }
-     if(($this->k14_sequencial == null) || ($this->k14_sequencial == "") ){ 
+     if(($this->k14_sequencial == null) || ($this->k14_sequencial === 0 || $this->k14_sequencial === 0.0 || $this->k14_sequencial == "") ){ 
        $this->erro_sql = " Campo k14_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_cadtipoorigem {
    function sql_query ( $k14_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_cadtipoorigem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_cadtipoorigem {
    function sql_query_file ( $k14_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_cadtipoorigem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

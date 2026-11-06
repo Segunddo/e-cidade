@@ -235,13 +235,13 @@ if ($db_opcao == 1) {
                             $pos = strpos($k02_limite, "-");
                             if ($pos == true) {
 
-                                $limite = split('-', $k02_limite);
+                                $limite = preg_split('#\-#m', $k02_limite);
                                 $k02_limite_dia = $limite[2];
                                 $k02_limite_mes = $limite[1];
                                 $k02_limite_ano = $limite[0];
                             } else {
 
-                                $limite = split('/', $k02_limite);
+                                $limite = preg_split('#\/#m', $k02_limite);
                                 $k02_limite_dia = $limite[0];
                                 $k02_limite_mes = $limite[1];
                                 $k02_limite_ano = $limite[2];

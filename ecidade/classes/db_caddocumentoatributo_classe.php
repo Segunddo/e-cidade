@@ -60,7 +60,7 @@ class cl_caddocumentoatributo {
                  db45_tamanho = int4 = Tamanho do Campo 
                  ";
    //funcao construtor da classe 
-   function cl_caddocumentoatributo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("caddocumentoatributo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_caddocumentoatributo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db45_sequencial = ($this->db45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_sequencial"]:$this->db45_sequencial);
-       $this->db45_caddocumento = ($this->db45_caddocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_caddocumento"]:$this->db45_caddocumento);
-       $this->db45_codcam = ($this->db45_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_codcam"]:$this->db45_codcam);
+       $this->db45_sequencial = ($this->db45_sequencial === 0 || $this->db45_sequencial === 0.0 || $this->db45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_sequencial"]:$this->db45_sequencial);
+       $this->db45_caddocumento = ($this->db45_caddocumento === 0 || $this->db45_caddocumento === 0.0 || $this->db45_caddocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_caddocumento"]:$this->db45_caddocumento);
+       $this->db45_codcam = ($this->db45_codcam === 0 || $this->db45_codcam === 0.0 || $this->db45_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_codcam"]:$this->db45_codcam);
        $this->db45_descricao = ($this->db45_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_descricao"]:$this->db45_descricao);
        $this->db45_valordefault = ($this->db45_valordefault == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_valordefault"]:$this->db45_valordefault);
-       $this->db45_tipo = ($this->db45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_tipo"]:$this->db45_tipo);
-       $this->db45_tamanho = ($this->db45_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_tamanho"]:$this->db45_tamanho);
+       $this->db45_tipo = ($this->db45_tipo === 0 || $this->db45_tipo === 0.0 || $this->db45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_tipo"]:$this->db45_tipo);
+       $this->db45_tamanho = ($this->db45_tamanho === 0 || $this->db45_tamanho === 0.0 || $this->db45_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_tamanho"]:$this->db45_tamanho);
      }else{
-       $this->db45_sequencial = ($this->db45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_sequencial"]:$this->db45_sequencial);
+       $this->db45_sequencial = ($this->db45_sequencial === 0 || $this->db45_sequencial === 0.0 || $this->db45_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db45_sequencial"]:$this->db45_sequencial);
      }
    }
    // funcao para inclusao
@@ -154,7 +154,7 @@ class cl_caddocumentoatributo {
          $this->db45_sequencial = $db45_sequencial; 
        }
      }
-     if(($this->db45_sequencial == null) || ($this->db45_sequencial == "") ){ 
+     if(($this->db45_sequencial == null) || ($this->db45_sequencial === 0 || $this->db45_sequencial === 0.0 || $this->db45_sequencial == "") ){ 
        $this->erro_sql = " Campo db45_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -454,7 +454,7 @@ class cl_caddocumentoatributo {
    function sql_query ( $db45_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_caddocumentoatributo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -490,7 +490,7 @@ class cl_caddocumentoatributo {
    function sql_query_file ( $db45_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_caddocumentoatributo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

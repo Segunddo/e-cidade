@@ -54,7 +54,7 @@ class cl_sliprecurso {
                  k29_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_sliprecurso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sliprecurso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_sliprecurso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k29_sequencial = ($this->k29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k29_sequencial"]:$this->k29_sequencial);
-       $this->k29_slip = ($this->k29_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k29_slip"]:$this->k29_slip);
-       $this->k29_recurso = ($this->k29_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["k29_recurso"]:$this->k29_recurso);
-       $this->k29_valor = ($this->k29_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k29_valor"]:$this->k29_valor);
+       $this->k29_sequencial = ($this->k29_sequencial === 0 || $this->k29_sequencial === 0.0 || $this->k29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k29_sequencial"]:$this->k29_sequencial);
+       $this->k29_slip = ($this->k29_slip === 0 || $this->k29_slip === 0.0 || $this->k29_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k29_slip"]:$this->k29_slip);
+       $this->k29_recurso = ($this->k29_recurso === 0 || $this->k29_recurso === 0.0 || $this->k29_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["k29_recurso"]:$this->k29_recurso);
+       $this->k29_valor = ($this->k29_valor === 0 || $this->k29_valor === 0.0 || $this->k29_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k29_valor"]:$this->k29_valor);
      }else{
-       $this->k29_sequencial = ($this->k29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k29_sequencial"]:$this->k29_sequencial);
+       $this->k29_sequencial = ($this->k29_sequencial === 0 || $this->k29_sequencial === 0.0 || $this->k29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k29_sequencial"]:$this->k29_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_sliprecurso {
          $this->k29_sequencial = $k29_sequencial; 
        }
      }
-     if(($this->k29_sequencial == null) || ($this->k29_sequencial == "") ){ 
+     if(($this->k29_sequencial == null) || ($this->k29_sequencial === 0 || $this->k29_sequencial === 0.0 || $this->k29_sequencial == "") ){ 
        $this->erro_sql = " Campo k29_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_sliprecurso {
    function sql_query ( $k29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_sliprecurso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_sliprecurso {
    function sql_query_file ( $k29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_sliprecurso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

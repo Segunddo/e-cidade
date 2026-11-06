@@ -56,7 +56,7 @@ class cl_caddocumentoatributovalor
                  ";
 
     //funcao construtor da classe
-    function cl_caddocumentoatributovalor()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("caddocumentoatributovalor");
@@ -78,12 +78,12 @@ class cl_caddocumentoatributovalor
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->db43_sequencial = ($this->db43_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db43_sequencial"] : $this->db43_sequencial);
-            $this->db43_documento = ($this->db43_documento == "" ? @$GLOBALS["HTTP_POST_VARS"]["db43_documento"] : $this->db43_documento);
-            $this->db43_caddocumentoatributo = ($this->db43_caddocumentoatributo == "" ? @$GLOBALS["HTTP_POST_VARS"]["db43_caddocumentoatributo"] : $this->db43_caddocumentoatributo);
+            $this->db43_sequencial = ($this->db43_sequencial === 0 || $this->db43_sequencial === 0.0 || $this->db43_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db43_sequencial"] : $this->db43_sequencial);
+            $this->db43_documento = ($this->db43_documento === 0 || $this->db43_documento === 0.0 || $this->db43_documento == "" ? @$GLOBALS["HTTP_POST_VARS"]["db43_documento"] : $this->db43_documento);
+            $this->db43_caddocumentoatributo = ($this->db43_caddocumentoatributo === 0 || $this->db43_caddocumentoatributo === 0.0 || $this->db43_caddocumentoatributo == "" ? @$GLOBALS["HTTP_POST_VARS"]["db43_caddocumentoatributo"] : $this->db43_caddocumentoatributo);
             $this->db43_valor = ($this->db43_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["db43_valor"] : $this->db43_valor);
         } else {
-            $this->db43_sequencial = ($this->db43_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db43_sequencial"] : $this->db43_sequencial);
+            $this->db43_sequencial = ($this->db43_sequencial === 0 || $this->db43_sequencial === 0.0 || $this->db43_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db43_sequencial"] : $this->db43_sequencial);
         }
     }
 
@@ -141,7 +141,7 @@ class cl_caddocumentoatributovalor
                 $this->db43_sequencial = $db43_sequencial;
             }
         }
-        if (($this->db43_sequencial == null) || ($this->db43_sequencial == "")) {
+        if (($this->db43_sequencial == null) || ($this->db43_sequencial === 0 || $this->db43_sequencial === 0.0 || $this->db43_sequencial == "")) {
             $this->erro_sql = " Campo db43_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

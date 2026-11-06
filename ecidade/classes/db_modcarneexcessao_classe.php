@@ -52,7 +52,7 @@ class cl_modcarneexcessao {
                  k36_ip = varchar(15) = IP 
                  ";
    //funcao construtor da classe 
-   function cl_modcarneexcessao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("modcarneexcessao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_modcarneexcessao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k36_sequencial = ($this->k36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k36_sequencial"]:$this->k36_sequencial);
-       $this->k36_modcarnepadrao = ($this->k36_modcarnepadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["k36_modcarnepadrao"]:$this->k36_modcarnepadrao);
+       $this->k36_sequencial = ($this->k36_sequencial === 0 || $this->k36_sequencial === 0.0 || $this->k36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k36_sequencial"]:$this->k36_sequencial);
+       $this->k36_modcarnepadrao = ($this->k36_modcarnepadrao === 0 || $this->k36_modcarnepadrao === 0.0 || $this->k36_modcarnepadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["k36_modcarnepadrao"]:$this->k36_modcarnepadrao);
        $this->k36_ip = ($this->k36_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["k36_ip"]:$this->k36_ip);
      }else{
-       $this->k36_sequencial = ($this->k36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k36_sequencial"]:$this->k36_sequencial);
+       $this->k36_sequencial = ($this->k36_sequencial === 0 || $this->k36_sequencial === 0.0 || $this->k36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k36_sequencial"]:$this->k36_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_modcarneexcessao {
          $this->k36_sequencial = $k36_sequencial; 
        }
      }
-     if(($this->k36_sequencial == null) || ($this->k36_sequencial == "") ){ 
+     if(($this->k36_sequencial == null) || ($this->k36_sequencial === 0 || $this->k36_sequencial === 0.0 || $this->k36_sequencial == "") ){ 
        $this->erro_sql = " Campo k36_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_modcarneexcessao {
    function sql_query ( $k36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_modcarneexcessao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_modcarneexcessao {
    function sql_query_file ( $k36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_modcarneexcessao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

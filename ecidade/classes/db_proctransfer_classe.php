@@ -80,7 +80,7 @@ class cl_proctransfer {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p62_codtran = ($this->p62_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["p62_codtran"]:$this->p62_codtran);
+       $this->p62_codtran = (($this->p62_codtran === 0 || $this->p62_codtran === 0.0 || $this->p62_codtran == "")?@$GLOBALS["HTTP_POST_VARS"]["p62_codtran"]:$this->p62_codtran);
        if($this->p62_dttran == ""){
          $this->p62_dttran_dia = ($this->p62_dttran_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p62_dttran_dia"]:$this->p62_dttran_dia);
          $this->p62_dttran_mes = ($this->p62_dttran_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["p62_dttran_mes"]:$this->p62_dttran_mes);
@@ -89,13 +89,13 @@ class cl_proctransfer {
             $this->p62_dttran = $this->p62_dttran_ano."-".$this->p62_dttran_mes."-".$this->p62_dttran_dia;
          }
        }
-       $this->p62_id_usuario = ($this->p62_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p62_id_usuario"]:$this->p62_id_usuario);
-       $this->p62_coddepto = ($this->p62_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["p62_coddepto"]:$this->p62_coddepto);
+       $this->p62_id_usuario = (($this->p62_id_usuario === 0 || $this->p62_id_usuario === 0.0 || $this->p62_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["p62_id_usuario"]:$this->p62_id_usuario);
+       $this->p62_coddepto = (($this->p62_coddepto === 0 || $this->p62_coddepto === 0.0 || $this->p62_coddepto == "")?@$GLOBALS["HTTP_POST_VARS"]["p62_coddepto"]:$this->p62_coddepto);
        $this->p62_id_usorec = ($this->p62_id_usorec === "") ? @$GLOBALS["HTTP_POST_VARS"]["p62_id_usorec"] : $this->p62_id_usorec;
-       $this->p62_coddeptorec = ($this->p62_coddeptorec == ""?@$GLOBALS["HTTP_POST_VARS"]["p62_coddeptorec"]:$this->p62_coddeptorec);
+       $this->p62_coddeptorec = (($this->p62_coddeptorec === 0 || $this->p62_coddeptorec === 0.0 || $this->p62_coddeptorec == "")?@$GLOBALS["HTTP_POST_VARS"]["p62_coddeptorec"]:$this->p62_coddeptorec);
        $this->p62_hora = ($this->p62_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["p62_hora"]:$this->p62_hora);
      }else{
-       $this->p62_codtran = ($this->p62_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["p62_codtran"]:$this->p62_codtran);
+       $this->p62_codtran = (($this->p62_codtran === 0 || $this->p62_codtran === 0.0 || $this->p62_codtran == "")?@$GLOBALS["HTTP_POST_VARS"]["p62_codtran"]:$this->p62_codtran);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_proctransfer {
          $this->p62_codtran = $p62_codtran;
        }
      }
-     if(($this->p62_codtran == null) || ($this->p62_codtran == "") ){
+     if(($this->p62_codtran == null) || (($this->p62_codtran === 0 || $this->p62_codtran === 0.0 || $this->p62_codtran == "")) ){
        $this->erro_sql = " Campo p62_codtran nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

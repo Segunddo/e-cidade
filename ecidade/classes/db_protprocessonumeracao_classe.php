@@ -60,7 +60,7 @@ class cl_protprocessonumeracao {
                  p07_prottipodocumentoprocesso = Tipo de Documento
                  ";
    //funcao construtor da classe
-   function cl_protprocessonumeracao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("protprocessonumeracao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,14 +77,14 @@ class cl_protprocessonumeracao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p07_sequencial = ($this->p07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_sequencial"]:$this->p07_sequencial);
-       $this->p07_instit = ($this->p07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_instit"]:$this->p07_instit);
-       $this->p07_ano = ($this->p07_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_ano"]:$this->p07_ano);
-       $this->p07_proximonumero = ($this->p07_proximonumero == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_proximonumero"]:$this->p07_proximonumero);
-       $this->p07_orgao = ($this->p07_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_orgao"]:$this->p07_orgao);
-       $this->p07_prottipodocumentoprocesso = ($this->p07_prottipodocumentoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_prottipodocumentoprocesso"]:$this->p07_prottipodocumentoprocesso);
+       $this->p07_sequencial = ($this->p07_sequencial === 0 || $this->p07_sequencial === 0.0 || $this->p07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_sequencial"]:$this->p07_sequencial);
+       $this->p07_instit = ($this->p07_instit === 0 || $this->p07_instit === 0.0 || $this->p07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_instit"]:$this->p07_instit);
+       $this->p07_ano = ($this->p07_ano === 0 || $this->p07_ano === 0.0 || $this->p07_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_ano"]:$this->p07_ano);
+       $this->p07_proximonumero = ($this->p07_proximonumero === 0 || $this->p07_proximonumero === 0.0 || $this->p07_proximonumero == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_proximonumero"]:$this->p07_proximonumero);
+       $this->p07_orgao = ($this->p07_orgao === 0 || $this->p07_orgao === 0.0 || $this->p07_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_orgao"]:$this->p07_orgao);
+       $this->p07_prottipodocumentoprocesso = ($this->p07_prottipodocumentoprocesso === 0 || $this->p07_prottipodocumentoprocesso === 0.0 || $this->p07_prottipodocumentoprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_prottipodocumentoprocesso"]:$this->p07_prottipodocumentoprocesso);
      }else{
-       $this->p07_sequencial = ($this->p07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_sequencial"]:$this->p07_sequencial);
+       $this->p07_sequencial = ($this->p07_sequencial === 0 || $this->p07_sequencial === 0.0 || $this->p07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p07_sequencial"]:$this->p07_sequencial);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_protprocessonumeracao {
          $this->p07_proximonumero = $p07_proximonumero;
        }
      }
-     if(($this->p07_sequencial == null) || ($this->p07_sequencial == "") ){
+     if(($this->p07_sequencial == null) || ($this->p07_sequencial === 0 || $this->p07_sequencial === 0.0 || $this->p07_sequencial == "") ){
        $this->erro_sql = " Campo p07_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

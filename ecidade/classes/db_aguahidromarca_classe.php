@@ -52,7 +52,7 @@ class cl_aguahidromarca {
                  x03_sigla = varchar(15) = Sigla 
                  ";
    //funcao construtor da classe 
-   function cl_aguahidromarca() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguahidromarca"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_aguahidromarca {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x03_codmarca = ($this->x03_codmarca == ""?@$GLOBALS["HTTP_POST_VARS"]["x03_codmarca"]:$this->x03_codmarca);
+       $this->x03_codmarca = (($this->x03_codmarca === 0 || $this->x03_codmarca === 0.0 || ($this->x03_codmarca === 0 || $this->x03_codmarca === 0.0 || $this->x03_codmarca == ""))?@$GLOBALS["HTTP_POST_VARS"]["x03_codmarca"]:$this->x03_codmarca);
        $this->x03_nomemarca = ($this->x03_nomemarca == ""?@$GLOBALS["HTTP_POST_VARS"]["x03_nomemarca"]:$this->x03_nomemarca);
        $this->x03_sigla = ($this->x03_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["x03_sigla"]:$this->x03_sigla);
      }else{
-       $this->x03_codmarca = ($this->x03_codmarca == ""?@$GLOBALS["HTTP_POST_VARS"]["x03_codmarca"]:$this->x03_codmarca);
+       $this->x03_codmarca = (($this->x03_codmarca === 0 || $this->x03_codmarca === 0.0 || ($this->x03_codmarca === 0 || $this->x03_codmarca === 0.0 || $this->x03_codmarca == ""))?@$GLOBALS["HTTP_POST_VARS"]["x03_codmarca"]:$this->x03_codmarca);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aguahidromarca {
          $this->x03_codmarca = $x03_codmarca; 
        }
      }
-     if(($this->x03_codmarca == null) || ($this->x03_codmarca == "") ){ 
+     if(($this->x03_codmarca == null) || (($this->x03_codmarca === 0 || $this->x03_codmarca === 0.0 || ($this->x03_codmarca === 0 || $this->x03_codmarca === 0.0 || $this->x03_codmarca == ""))) ){ 
        $this->erro_sql = " Campo x03_codmarca nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_aguahidromarca {
    function sql_query ( $x03_codmarca=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_aguahidromarca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_aguahidromarca {
    function sql_query_file ( $x03_codmarca=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_aguahidromarca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

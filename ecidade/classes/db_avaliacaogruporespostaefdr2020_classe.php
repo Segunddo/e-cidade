@@ -127,7 +127,7 @@ class cl_avaliacaogruporespostaefdr2020
                 $this->efd05_sequencial = $efd05_sequencial;
             }
         }
-        if (($this->efd05_sequencial == null) || ($this->efd05_sequencial == "")) {
+        if (($this->efd05_sequencial == null) || ($this->efd05_sequencial === 0 || $this->efd05_sequencial === 0.0 || $this->efd05_sequencial == "")) {
             $this->erro_sql = " Campo efd05_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -216,14 +216,14 @@ class cl_avaliacaogruporespostaefdr2020
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->efd05_sequencial = ($this->efd05_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_sequencial"] : $this->efd05_sequencial);
-            $this->efd05_cgm = ($this->efd05_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_cgm"] : $this->efd05_cgm);
+            $this->efd05_sequencial = ($this->efd05_sequencial === 0 || $this->efd05_sequencial === 0.0 || $this->efd05_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_sequencial"] : $this->efd05_sequencial);
+            $this->efd05_cgm = ($this->efd05_cgm === 0 || $this->efd05_cgm === 0.0 || $this->efd05_cgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_cgm"] : $this->efd05_cgm);
             $this->efd05_inscricaoprestadora = ($this->efd05_inscricaoprestadora == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_inscricaoprestadora"] : $this->efd05_inscricaoprestadora);
             $this->efd05_competencia = ($this->efd05_competencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_competencia"] : $this->efd05_competencia);
-            $this->efd05_avaliacaogruporesposta = ($this->efd05_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_avaliacaogruporesposta"] : $this->efd05_avaliacaogruporesposta);
-            $this->efd05_avaliacao = ($this->efd05_avaliacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_avaliacao"] : $this->efd05_avaliacao);
+            $this->efd05_avaliacaogruporesposta = ($this->efd05_avaliacaogruporesposta === 0 || $this->efd05_avaliacaogruporesposta === 0.0 || $this->efd05_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_avaliacaogruporesposta"] : $this->efd05_avaliacaogruporesposta);
+            $this->efd05_avaliacao = ($this->efd05_avaliacao === 0 || $this->efd05_avaliacao === 0.0 || $this->efd05_avaliacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_avaliacao"] : $this->efd05_avaliacao);
         } else {
-            $this->efd05_sequencial = ($this->efd05_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_sequencial"] : $this->efd05_sequencial);
+            $this->efd05_sequencial = ($this->efd05_sequencial === 0 || $this->efd05_sequencial === 0.0 || $this->efd05_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["efd05_sequencial"] : $this->efd05_sequencial);
         }
     }
 

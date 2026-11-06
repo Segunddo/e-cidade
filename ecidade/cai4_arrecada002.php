@@ -39,7 +39,8 @@ if (isset($HTTP_POST_VARS ["calcula"])) {
   $naocalcula = true;
 }
 
-parse_str($HTTP_SERVER_VARS ["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS ["QUERY_STRING"], $__qs);
+extract($__qs);
 
 if (isset($HTTP_POST_VARS ["codrec"])) {
   $codrec = $HTTP_POST_VARS ["codrec"];

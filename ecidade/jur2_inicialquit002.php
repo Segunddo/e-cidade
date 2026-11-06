@@ -44,10 +44,10 @@ $clrotulo              = new rotulocampo;
 
 $clrotulo->label('');
 $clrotulo->label('');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 if (isset($dadosini)&&$dadosini!=""){
-  $matriz = split("xx",$dadosini);
+  $matriz = explode("xx",$dadosini);
 }
 $result = $cldb_docparag->sql_record($cldb_docparag->sql_query(null,null,"db_docparag.*,db02_alinhamento,db02_texto,db02_espaca,db02_alinha,db02_inicia","db04_ordem","db03_tipodoc=4"));
 $numrows = $cldb_docparag->numrows;
@@ -57,9 +57,9 @@ if ($numrows == 0 ) {
 $pdf = new PDF1();
 $pdf->Open();
 $pdf->AliasNbPages();
-for($q=0;$q<sizeof($matriz);$q++){
+for($q=0;$q<sizeof((array)$matriz);$q++){
   if ($matriz[$q]!=""){
-	$dadosi = split("ww",$matriz[$q]);
+	$dadosi = explode("ww",$matriz[$q]);
 	$inicial = $dadosi[0];
 	$chave = $dadosi[1];
 	$modo = $dadosi[2];

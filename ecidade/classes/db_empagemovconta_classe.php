@@ -50,7 +50,7 @@ class cl_empagemovconta {
                  e98_contabanco = int4 = Código Conta 
                  ";
    //funcao construtor da classe 
-   function cl_empagemovconta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empagemovconta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_empagemovconta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e98_codmov = ($this->e98_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_codmov"]:$this->e98_codmov);
-       $this->e98_contabanco = ($this->e98_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_contabanco"]:$this->e98_contabanco);
+       $this->e98_codmov = ($this->e98_codmov === 0 || $this->e98_codmov === 0.0 || $this->e98_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_codmov"]:$this->e98_codmov);
+       $this->e98_contabanco = ($this->e98_contabanco === 0 || $this->e98_contabanco === 0.0 || $this->e98_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_contabanco"]:$this->e98_contabanco);
      }else{
-       $this->e98_codmov = ($this->e98_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_codmov"]:$this->e98_codmov);
+       $this->e98_codmov = ($this->e98_codmov === 0 || $this->e98_codmov === 0.0 || $this->e98_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_codmov"]:$this->e98_codmov);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_empagemovconta {
        return false;
      }
        $this->e98_codmov = $e98_codmov; 
-     if(($this->e98_codmov == null) || ($this->e98_codmov == "") ){ 
+     if(($this->e98_codmov == null) || ($this->e98_codmov === 0 || $this->e98_codmov === 0.0 || $this->e98_codmov == "") ){ 
        $this->erro_sql = " Campo e98_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_empagemovconta {
    function sql_query ( $e98_codmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -332,7 +332,7 @@ class cl_empagemovconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -344,7 +344,7 @@ class cl_empagemovconta {
    function sql_query_conta ( $e98_codmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -367,7 +367,7 @@ class cl_empagemovconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -379,7 +379,7 @@ class cl_empagemovconta {
    function sql_query_contausada ( $e98_codmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_empagemovconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_empagemovconta {
    function sql_query_file ( $e98_codmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_empagemovconta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

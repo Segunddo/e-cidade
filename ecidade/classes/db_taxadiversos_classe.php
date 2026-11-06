@@ -34,7 +34,7 @@ class cl_taxadiversos {
                  y119_tipo_calculo = char(1) = Tipo de Cálculo 
                  ";
    //funcao construtor da classe 
-   function cl_taxadiversos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("taxadiversos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -51,15 +51,15 @@ class cl_taxadiversos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y119_sequencial = ($this->y119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y119_sequencial"]:$this->y119_sequencial);
-       $this->y119_grupotaxadiversos = ($this->y119_grupotaxadiversos == ""?@$GLOBALS["HTTP_POST_VARS"]["y119_grupotaxadiversos"]:$this->y119_grupotaxadiversos);
+       $this->y119_sequencial = (($this->y119_sequencial === 0 || $this->y119_sequencial === 0.0 || $this->y119_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y119_sequencial"]:$this->y119_sequencial);
+       $this->y119_grupotaxadiversos = (($this->y119_grupotaxadiversos === 0 || $this->y119_grupotaxadiversos === 0.0 || $this->y119_grupotaxadiversos == "")?@$GLOBALS["HTTP_POST_VARS"]["y119_grupotaxadiversos"]:$this->y119_grupotaxadiversos);
        $this->y119_natureza = ($this->y119_natureza == ""?@$GLOBALS["HTTP_POST_VARS"]["y119_natureza"]:$this->y119_natureza);
-       $this->y119_formula = ($this->y119_formula == ""?@$GLOBALS["HTTP_POST_VARS"]["y119_formula"]:$this->y119_formula);
+       $this->y119_formula = (($this->y119_formula === 0 || $this->y119_formula === 0.0 || $this->y119_formula == "")?@$GLOBALS["HTTP_POST_VARS"]["y119_formula"]:$this->y119_formula);
        $this->y119_unidade = ($this->y119_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["y119_unidade"]:$this->y119_unidade);
        $this->y119_tipo_periodo = ($this->y119_tipo_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["y119_tipo_periodo"]:$this->y119_tipo_periodo);
        $this->y119_tipo_calculo = ($this->y119_tipo_calculo == ""?@$GLOBALS["HTTP_POST_VARS"]["y119_tipo_calculo"]:$this->y119_tipo_calculo);
      }else{
-       $this->y119_sequencial = ($this->y119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y119_sequencial"]:$this->y119_sequencial);
+       $this->y119_sequencial = (($this->y119_sequencial === 0 || $this->y119_sequencial === 0.0 || $this->y119_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y119_sequencial"]:$this->y119_sequencial);
      }
    }
    // funcao para Inclusão
@@ -143,7 +143,7 @@ class cl_taxadiversos {
          $this->y119_sequencial = $y119_sequencial; 
        }
      }
-     if(($this->y119_sequencial == null) || ($this->y119_sequencial == "") ){ 
+     if(($this->y119_sequencial == null) || (($this->y119_sequencial === 0 || $this->y119_sequencial === 0.0 || $this->y119_sequencial == "")) ){ 
        $this->erro_sql = " Campo y119_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

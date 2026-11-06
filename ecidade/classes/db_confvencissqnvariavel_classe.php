@@ -58,7 +58,7 @@ class cl_confvencissqnvariavel {
                  q144_valor = float4 = Valor Mínimo 
                  ";
    //funcao construtor da classe 
-   function cl_confvencissqnvariavel() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("confvencissqnvariavel"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,16 +75,16 @@ class cl_confvencissqnvariavel {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q144_sequencial = ($this->q144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q144_sequencial"]:$this->q144_sequencial);
-       $this->q144_ano = ($this->q144_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q144_ano"]:$this->q144_ano);
-       $this->q144_codvenc = ($this->q144_codvenc == ""?@$GLOBALS["HTTP_POST_VARS"]["q144_codvenc"]:$this->q144_codvenc);
-       $this->q144_receita = ($this->q144_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["q144_receita"]:$this->q144_receita);
-       $this->q144_tipo = ($this->q144_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q144_tipo"]:$this->q144_tipo);
-       $this->q144_hist = ($this->q144_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["q144_hist"]:$this->q144_hist);
-       $this->q144_diavenc = ($this->q144_diavenc == ""?@$GLOBALS["HTTP_POST_VARS"]["q144_diavenc"]:$this->q144_diavenc);
-       $this->q144_valor = ($this->q144_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q144_valor"]:$this->q144_valor);
+       $this->q144_sequencial = (($this->q144_sequencial === 0 || $this->q144_sequencial === 0.0 || $this->q144_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q144_sequencial"]:$this->q144_sequencial);
+       $this->q144_ano = (($this->q144_ano === 0 || $this->q144_ano === 0.0 || $this->q144_ano == "")?@$GLOBALS["HTTP_POST_VARS"]["q144_ano"]:$this->q144_ano);
+       $this->q144_codvenc = (($this->q144_codvenc === 0 || $this->q144_codvenc === 0.0 || $this->q144_codvenc == "")?@$GLOBALS["HTTP_POST_VARS"]["q144_codvenc"]:$this->q144_codvenc);
+       $this->q144_receita = (($this->q144_receita === 0 || $this->q144_receita === 0.0 || $this->q144_receita == "")?@$GLOBALS["HTTP_POST_VARS"]["q144_receita"]:$this->q144_receita);
+       $this->q144_tipo = (($this->q144_tipo === 0 || $this->q144_tipo === 0.0 || $this->q144_tipo == "")?@$GLOBALS["HTTP_POST_VARS"]["q144_tipo"]:$this->q144_tipo);
+       $this->q144_hist = (($this->q144_hist === 0 || $this->q144_hist === 0.0 || $this->q144_hist == "")?@$GLOBALS["HTTP_POST_VARS"]["q144_hist"]:$this->q144_hist);
+       $this->q144_diavenc = (($this->q144_diavenc === 0 || $this->q144_diavenc === 0.0 || $this->q144_diavenc == "")?@$GLOBALS["HTTP_POST_VARS"]["q144_diavenc"]:$this->q144_diavenc);
+       $this->q144_valor = (($this->q144_valor === 0 || $this->q144_valor === 0.0 || $this->q144_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["q144_valor"]:$this->q144_valor);
      }else{
-       $this->q144_sequencial = ($this->q144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q144_sequencial"]:$this->q144_sequencial);
+       $this->q144_sequencial = (($this->q144_sequencial === 0 || $this->q144_sequencial === 0.0 || $this->q144_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["q144_sequencial"]:$this->q144_sequencial);
      }
    }
    // funcao para inclusao
@@ -180,7 +180,7 @@ class cl_confvencissqnvariavel {
          $this->q144_sequencial = $q144_sequencial; 
        }
      }
-     if(($this->q144_sequencial == null) || ($this->q144_sequencial == "") ){ 
+     if(($this->q144_sequencial == null) || (($this->q144_sequencial === 0 || $this->q144_sequencial === 0.0 || $this->q144_sequencial == "")) ){ 
        $this->erro_sql = " Campo q144_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

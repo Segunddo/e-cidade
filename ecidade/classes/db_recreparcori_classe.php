@@ -54,7 +54,7 @@ class cl_recreparcori {
                  k70_vezesfim = int4 = Vezes final 
                  ";
    //funcao construtor da classe 
-   function cl_recreparcori() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("recreparcori"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_recreparcori {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k70_codigo = ($this->k70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k70_codigo"]:$this->k70_codigo);
-       $this->k70_recori = ($this->k70_recori == ""?@$GLOBALS["HTTP_POST_VARS"]["k70_recori"]:$this->k70_recori);
-       $this->k70_vezesini = ($this->k70_vezesini == ""?@$GLOBALS["HTTP_POST_VARS"]["k70_vezesini"]:$this->k70_vezesini);
-       $this->k70_vezesfim = ($this->k70_vezesfim == ""?@$GLOBALS["HTTP_POST_VARS"]["k70_vezesfim"]:$this->k70_vezesfim);
+       $this->k70_codigo = ($this->k70_codigo === 0 || $this->k70_codigo === 0.0 || $this->k70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k70_codigo"]:$this->k70_codigo);
+       $this->k70_recori = ($this->k70_recori === 0 || $this->k70_recori === 0.0 || $this->k70_recori == ""?@$GLOBALS["HTTP_POST_VARS"]["k70_recori"]:$this->k70_recori);
+       $this->k70_vezesini = ($this->k70_vezesini === 0 || $this->k70_vezesini === 0.0 || $this->k70_vezesini == ""?@$GLOBALS["HTTP_POST_VARS"]["k70_vezesini"]:$this->k70_vezesini);
+       $this->k70_vezesfim = ($this->k70_vezesfim === 0 || $this->k70_vezesfim === 0.0 || $this->k70_vezesfim == ""?@$GLOBALS["HTTP_POST_VARS"]["k70_vezesfim"]:$this->k70_vezesfim);
      }else{
-       $this->k70_codigo = ($this->k70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k70_codigo"]:$this->k70_codigo);
+       $this->k70_codigo = ($this->k70_codigo === 0 || $this->k70_codigo === 0.0 || $this->k70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k70_codigo"]:$this->k70_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_recreparcori {
          $this->k70_codigo = $k70_codigo; 
        }
      }
-     if(($this->k70_codigo == null) || ($this->k70_codigo == "") ){ 
+     if(($this->k70_codigo == null) || ($this->k70_codigo === 0 || $this->k70_codigo === 0.0 || $this->k70_codigo == "") ){ 
        $this->erro_sql = " Campo k70_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_recreparcori {
    function sql_query ( $k70_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_recreparcori {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_recreparcori {
    function sql_query_file ( $k70_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_recreparcori {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -461,7 +461,7 @@ class cl_recreparcori {
   function sql_query_dadosrec( $k70_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_recreparcori {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

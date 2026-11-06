@@ -60,7 +60,7 @@ class cl_orcparamseqsigap {
                  o141_ano = int4 = Ano
                  ";
    //funcao construtor da classe
-   function cl_orcparamseqsigap() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcparamseqsigap");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_orcparamseqsigap {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o141_sequencial = ($this->o141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_sequencial"]:$this->o141_sequencial);
+       $this->o141_sequencial = ($this->o141_sequencial === 0 || $this->o141_sequencial === 0.0 || $this->o141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_sequencial"]:$this->o141_sequencial);
        $this->o141_contasigap = ($this->o141_contasigap == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_contasigap"]:$this->o141_contasigap);
        $this->o141_descricao = ($this->o141_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_descricao"]:$this->o141_descricao);
        $this->o141_estrutural = ($this->o141_estrutural == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_estrutural"]:$this->o141_estrutural);
-       $this->o141_orcparamseq = ($this->o141_orcparamseq == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_orcparamseq"]:$this->o141_orcparamseq);
-       $this->o141_orcparamrel = ($this->o141_orcparamrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_orcparamrel"]:$this->o141_orcparamrel);
-       $this->o141_ano = ($this->o141_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_ano"]:$this->o141_ano);
+       $this->o141_orcparamseq = ($this->o141_orcparamseq === 0 || $this->o141_orcparamseq === 0.0 || $this->o141_orcparamseq == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_orcparamseq"]:$this->o141_orcparamseq);
+       $this->o141_orcparamrel = ($this->o141_orcparamrel === 0 || $this->o141_orcparamrel === 0.0 || $this->o141_orcparamrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_orcparamrel"]:$this->o141_orcparamrel);
+       $this->o141_ano = ($this->o141_ano === 0 || $this->o141_ano === 0.0 || $this->o141_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_ano"]:$this->o141_ano);
      }else{
-       $this->o141_sequencial = ($this->o141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_sequencial"]:$this->o141_sequencial);
+       $this->o141_sequencial = ($this->o141_sequencial === 0 || $this->o141_sequencial === 0.0 || $this->o141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o141_sequencial"]:$this->o141_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_orcparamseqsigap {
          $this->o141_sequencial = $o141_sequencial;
        }
      }
-     if(($this->o141_sequencial == null) || ($this->o141_sequencial == "") ){
+     if(($this->o141_sequencial == null) || ($this->o141_sequencial === 0 || $this->o141_sequencial === 0.0 || $this->o141_sequencial == "") ){
        $this->erro_sql = " Campo o141_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

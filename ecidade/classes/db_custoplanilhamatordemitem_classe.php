@@ -52,7 +52,7 @@ class cl_custoplanilhamatordemitem {
                  cc20_matordemitemcustocriterio = int4 = Mat. Ordem item Custo Criterio 
                  ";
    //funcao construtor da classe 
-   function cl_custoplanilhamatordemitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("custoplanilhamatordemitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_custoplanilhamatordemitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc20_sequencial = ($this->cc20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc20_sequencial"]:$this->cc20_sequencial);
-       $this->cc20_custoplanilhaapuracao = ($this->cc20_custoplanilhaapuracao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc20_custoplanilhaapuracao"]:$this->cc20_custoplanilhaapuracao);
-       $this->cc20_matordemitemcustocriterio = ($this->cc20_matordemitemcustocriterio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc20_matordemitemcustocriterio"]:$this->cc20_matordemitemcustocriterio);
+       $this->cc20_sequencial = ($this->cc20_sequencial === 0 || $this->cc20_sequencial === 0.0 || $this->cc20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc20_sequencial"]:$this->cc20_sequencial);
+       $this->cc20_custoplanilhaapuracao = ($this->cc20_custoplanilhaapuracao === 0 || $this->cc20_custoplanilhaapuracao === 0.0 || $this->cc20_custoplanilhaapuracao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc20_custoplanilhaapuracao"]:$this->cc20_custoplanilhaapuracao);
+       $this->cc20_matordemitemcustocriterio = ($this->cc20_matordemitemcustocriterio === 0 || $this->cc20_matordemitemcustocriterio === 0.0 || $this->cc20_matordemitemcustocriterio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc20_matordemitemcustocriterio"]:$this->cc20_matordemitemcustocriterio);
      }else{
-       $this->cc20_sequencial = ($this->cc20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc20_sequencial"]:$this->cc20_sequencial);
+       $this->cc20_sequencial = ($this->cc20_sequencial === 0 || $this->cc20_sequencial === 0.0 || $this->cc20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc20_sequencial"]:$this->cc20_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_custoplanilhamatordemitem {
          $this->cc20_sequencial = $cc20_sequencial; 
        }
      }
-     if(($this->cc20_sequencial == null) || ($this->cc20_sequencial == "") ){ 
+     if(($this->cc20_sequencial == null) || ($this->cc20_sequencial === 0 || $this->cc20_sequencial === 0.0 || $this->cc20_sequencial == "") ){ 
        $this->erro_sql = " Campo cc20_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_custoplanilhamatordemitem {
    function sql_query ( $cc20_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_custoplanilhamatordemitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_custoplanilhamatordemitem {
    function sql_query_file ( $cc20_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_custoplanilhamatordemitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -54,7 +54,7 @@ class cl_parnotificacao {
                  k102_tipoemissao = int4 = Emitir Notificações 
                  ";
    //funcao construtor da classe 
-   function cl_parnotificacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parnotificacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_parnotificacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k102_anousu = ($this->k102_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k102_anousu"]:$this->k102_anousu);
-       $this->k102_docnotpadrao = ($this->k102_docnotpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["k102_docnotpadrao"]:$this->k102_docnotpadrao);
-       $this->k102_instit = ($this->k102_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k102_instit"]:$this->k102_instit);
-       $this->k102_tipoemissao = ($this->k102_tipoemissao == ""?@$GLOBALS["HTTP_POST_VARS"]["k102_tipoemissao"]:$this->k102_tipoemissao);
+       $this->k102_anousu = (($this->k102_anousu === 0 || $this->k102_anousu === 0.0 || $this->k102_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["k102_anousu"]:$this->k102_anousu);
+       $this->k102_docnotpadrao = (($this->k102_docnotpadrao === 0 || $this->k102_docnotpadrao === 0.0 || $this->k102_docnotpadrao == "")?@$GLOBALS["HTTP_POST_VARS"]["k102_docnotpadrao"]:$this->k102_docnotpadrao);
+       $this->k102_instit = (($this->k102_instit === 0 || $this->k102_instit === 0.0 || $this->k102_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["k102_instit"]:$this->k102_instit);
+       $this->k102_tipoemissao = (($this->k102_tipoemissao === 0 || $this->k102_tipoemissao === 0.0 || $this->k102_tipoemissao == "")?@$GLOBALS["HTTP_POST_VARS"]["k102_tipoemissao"]:$this->k102_tipoemissao);
      }else{
-       $this->k102_anousu = ($this->k102_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k102_anousu"]:$this->k102_anousu);
+       $this->k102_anousu = (($this->k102_anousu === 0 || $this->k102_anousu === 0.0 || $this->k102_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["k102_anousu"]:$this->k102_anousu);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_parnotificacao {
        return false;
      }
        $this->k102_anousu = $k102_anousu; 
-     if(($this->k102_anousu == null) || ($this->k102_anousu == "") ){ 
+     if(($this->k102_anousu == null) || (($this->k102_anousu === 0 || $this->k102_anousu === 0.0 || $this->k102_anousu == "")) ){ 
        $this->erro_sql = " Campo k102_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

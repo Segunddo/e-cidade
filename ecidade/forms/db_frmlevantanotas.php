@@ -296,9 +296,9 @@ db_input('y79_ordem',10,$Iy79_ordem,true,'hidden');
 function js_monta(){
 <?
 if(isset($notas)){
-  $matriz01=split('HHH',$notas);
+  $matriz01=explode('HHH',$notas);
   for($i=0; $i<count($matriz01); $i++){
-    $matriz=split('_sep_',$matriz01[$i]);
+    $matriz=explode('_sep_',$matriz01[$i]);
     if($db_opcao==33){
       echo " js_incluirlinhas_disabled('".$matriz[3]."','".$matriz[0]."','".$matriz[1]."','".$matriz[2]."');\n\n  ";
     }else{

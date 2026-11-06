@@ -152,7 +152,7 @@
   }
   
   $result = db_query($sSql);
-  $linhas = pg_num_rows($result);
+  $linhas = ($result ? pg_num_rows($result) : 0);
   
   if ($linhas == 0) {
     db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');

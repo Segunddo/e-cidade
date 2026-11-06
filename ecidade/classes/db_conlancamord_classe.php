@@ -55,7 +55,7 @@ class cl_conlancamord {
                  c80_data = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_conlancamord() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancamord"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,8 +72,8 @@ class cl_conlancamord {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c80_codlan = ($this->c80_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_codlan"]:$this->c80_codlan);
-       $this->c80_codord = ($this->c80_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_codord"]:$this->c80_codord);
+       $this->c80_codlan = ($this->c80_codlan === 0 || $this->c80_codlan === 0.0 || $this->c80_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_codlan"]:$this->c80_codlan);
+       $this->c80_codord = ($this->c80_codord === 0 || $this->c80_codord === 0.0 || $this->c80_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_codord"]:$this->c80_codord);
        if($this->c80_data == ""){
          $this->c80_data_dia = ($this->c80_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_data_dia"]:$this->c80_data_dia);
          $this->c80_data_mes = ($this->c80_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_data_mes"]:$this->c80_data_mes);
@@ -83,7 +83,7 @@ class cl_conlancamord {
          }
        }
      }else{
-       $this->c80_codlan = ($this->c80_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_codlan"]:$this->c80_codlan);
+       $this->c80_codlan = ($this->c80_codlan === 0 || $this->c80_codlan === 0.0 || $this->c80_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_codlan"]:$this->c80_codlan);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_conlancamord {
        return false;
      }
        $this->c80_codlan = $c80_codlan; 
-     if(($this->c80_codlan == null) || ($this->c80_codlan == "") ){ 
+     if(($this->c80_codlan == null) || ($this->c80_codlan === 0 || $this->c80_codlan === 0.0 || $this->c80_codlan == "") ){ 
        $this->erro_sql = " Campo c80_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_conlancamord {
    function sql_query ( $c80_codlan=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_conlancamord {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_conlancamord {
    function sql_query_file ( $c80_codlan=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_conlancamord {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

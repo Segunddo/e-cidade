@@ -67,7 +67,7 @@ class cl_lancamentotaxadiversos {
                  y120_issbase = int4 = Inscrição Municipal 
                  ";
   //funcao construtor da classe
-  function cl_lancamentotaxadiversos() {
+  function __construct() {
     //classes dos rotulos dos campos
     $this->rotulo = new rotulo("lancamentotaxadiversos");
     $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,11 +84,11 @@ class cl_lancamentotaxadiversos {
   // funcao para atualizar campos
   function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->y120_sequencial = ($this->y120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y120_sequencial"]:$this->y120_sequencial);
-      $this->y120_cgm = ($this->y120_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y120_cgm"]:$this->y120_cgm);
-      $this->y120_taxadiversos = ($this->y120_taxadiversos == ""?@$GLOBALS["HTTP_POST_VARS"]["y120_taxadiversos"]:$this->y120_taxadiversos);
-      $this->y120_unidade = ($this->y120_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["y120_unidade"]:$this->y120_unidade);
-      $this->y120_periodo = ($this->y120_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["y120_periodo"]:$this->y120_periodo);
+      $this->y120_sequencial = (($this->y120_sequencial === 0 || $this->y120_sequencial === 0.0 || $this->y120_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y120_sequencial"]:$this->y120_sequencial);
+      $this->y120_cgm = (($this->y120_cgm === 0 || $this->y120_cgm === 0.0 || $this->y120_cgm == "")?@$GLOBALS["HTTP_POST_VARS"]["y120_cgm"]:$this->y120_cgm);
+      $this->y120_taxadiversos = (($this->y120_taxadiversos === 0 || $this->y120_taxadiversos === 0.0 || $this->y120_taxadiversos == "")?@$GLOBALS["HTTP_POST_VARS"]["y120_taxadiversos"]:$this->y120_taxadiversos);
+      $this->y120_unidade = (($this->y120_unidade === 0 || $this->y120_unidade === 0.0 || $this->y120_unidade == "")?@$GLOBALS["HTTP_POST_VARS"]["y120_unidade"]:$this->y120_unidade);
+      $this->y120_periodo = (($this->y120_periodo === 0 || $this->y120_periodo === 0.0 || $this->y120_periodo == "")?@$GLOBALS["HTTP_POST_VARS"]["y120_periodo"]:$this->y120_periodo);
       if($this->y120_datainicio == ""){
         $this->y120_datainicio_dia = ($this->y120_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y120_datainicio_dia"]:$this->y120_datainicio_dia);
         $this->y120_datainicio_mes = ($this->y120_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y120_datainicio_mes"]:$this->y120_datainicio_mes);
@@ -107,7 +107,7 @@ class cl_lancamentotaxadiversos {
       }
       $this->y120_issbase = ($this->y120_issbase == ""?@$GLOBALS["HTTP_POST_VARS"]["y120_issbase"]:$this->y120_issbase);
     }else{
-      $this->y120_sequencial = ($this->y120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y120_sequencial"]:$this->y120_sequencial);
+      $this->y120_sequencial = (($this->y120_sequencial === 0 || $this->y120_sequencial === 0.0 || $this->y120_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y120_sequencial"]:$this->y120_sequencial);
     }
   }
   // funcao para Inclusão
@@ -170,7 +170,7 @@ class cl_lancamentotaxadiversos {
         $this->y120_sequencial = $y120_sequencial;
       }
     }
-    if(($this->y120_sequencial == null) || ($this->y120_sequencial == "") ){
+    if(($this->y120_sequencial == null) || (($this->y120_sequencial === 0 || $this->y120_sequencial === 0.0 || $this->y120_sequencial == "")) ){
       $this->erro_sql = " Campo y120_sequencial não declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

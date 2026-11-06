@@ -31,7 +31,8 @@
   include(modification("libs/db_usuariosonline.php"));
   include(modification("classes/db_issplanit_classe.php"));
   include(modification("classes/db_issplanitinscr_classe.php"));
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   $clissplanit = new cl_issplanit;
   $clissplanitinscr = new cl_issplanitinscr;
   $clissplanit->rotulo->label();
@@ -85,7 +86,7 @@
 								order by q21_nota ";
 							//	die("xxxxxxxxxx".$sql1);
 				$result1 = db_query($sql1);			
-        $linhas  = pg_num_rows($result1);
+        $linhas  = ($result1 ? pg_num_rows($result1) : 0);
         $notas="";
         $susteni="";
 	for($c=0; $c<$linhas; $c++){

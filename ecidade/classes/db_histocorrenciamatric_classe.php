@@ -52,7 +52,7 @@ class cl_histocorrenciamatric {
                  ar25_histocorrencia = int4 = Código Histórico 
                  ";
    //funcao construtor da classe 
-   function cl_histocorrenciamatric() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("histocorrenciamatric"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_histocorrenciamatric {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar25_sequencial = ($this->ar25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar25_sequencial"]:$this->ar25_sequencial);
-       $this->ar25_matric = ($this->ar25_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["ar25_matric"]:$this->ar25_matric);
-       $this->ar25_histocorrencia = ($this->ar25_histocorrencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar25_histocorrencia"]:$this->ar25_histocorrencia);
+       $this->ar25_sequencial = (($this->ar25_sequencial === 0 || $this->ar25_sequencial === 0.0 || ($this->ar25_sequencial === 0 || $this->ar25_sequencial === 0.0 || $this->ar25_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["ar25_sequencial"]:$this->ar25_sequencial);
+       $this->ar25_matric = (($this->ar25_matric === 0 || $this->ar25_matric === 0.0 || ($this->ar25_matric === 0 || $this->ar25_matric === 0.0 || $this->ar25_matric == ""))?@$GLOBALS["HTTP_POST_VARS"]["ar25_matric"]:$this->ar25_matric);
+       $this->ar25_histocorrencia = (($this->ar25_histocorrencia === 0 || $this->ar25_histocorrencia === 0.0 || ($this->ar25_histocorrencia === 0 || $this->ar25_histocorrencia === 0.0 || $this->ar25_histocorrencia == ""))?@$GLOBALS["HTTP_POST_VARS"]["ar25_histocorrencia"]:$this->ar25_histocorrencia);
      }else{
-       $this->ar25_sequencial = ($this->ar25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar25_sequencial"]:$this->ar25_sequencial);
+       $this->ar25_sequencial = (($this->ar25_sequencial === 0 || $this->ar25_sequencial === 0.0 || ($this->ar25_sequencial === 0 || $this->ar25_sequencial === 0.0 || $this->ar25_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["ar25_sequencial"]:$this->ar25_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_histocorrenciamatric {
          $this->ar25_sequencial = $ar25_sequencial; 
        }
      }
-     if(($this->ar25_sequencial == null) || ($this->ar25_sequencial == "") ){ 
+     if(($this->ar25_sequencial == null) || (($this->ar25_sequencial === 0 || $this->ar25_sequencial === 0.0 || ($this->ar25_sequencial === 0 || $this->ar25_sequencial === 0.0 || $this->ar25_sequencial == ""))) ){ 
        $this->erro_sql = " Campo ar25_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_histocorrenciamatric {
    function sql_query ( $ar25_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_histocorrenciamatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_histocorrenciamatric {
    function sql_query_file ( $ar25_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_histocorrenciamatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

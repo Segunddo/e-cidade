@@ -54,7 +54,7 @@ class cl_aguaisencaorec {
                  x26_codconsumotipo = int4 = Consumo 
                  ";
    //funcao construtor da classe 
-   function cl_aguaisencaorec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguaisencaorec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_aguaisencaorec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x26_codisencao = ($this->x26_codisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencao"]:$this->x26_codisencao);
-       $this->x26_codisencaorec = ($this->x26_codisencaorec == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencaorec"]:$this->x26_codisencaorec);
-       $this->x26_percentual = ($this->x26_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_percentual"]:$this->x26_percentual);
-       $this->x26_codconsumotipo = ($this->x26_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codconsumotipo"]:$this->x26_codconsumotipo);
+       $this->x26_codisencao = (($this->x26_codisencao === 0 || $this->x26_codisencao === 0.0 || ($this->x26_codisencao === 0 || $this->x26_codisencao === 0.0 || $this->x26_codisencao == ""))?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencao"]:$this->x26_codisencao);
+       $this->x26_codisencaorec = (($this->x26_codisencaorec === 0 || $this->x26_codisencaorec === 0.0 || ($this->x26_codisencaorec === 0 || $this->x26_codisencaorec === 0.0 || $this->x26_codisencaorec == ""))?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencaorec"]:$this->x26_codisencaorec);
+       $this->x26_percentual = (($this->x26_percentual === 0 || $this->x26_percentual === 0.0 || ($this->x26_percentual === 0 || $this->x26_percentual === 0.0 || $this->x26_percentual == ""))?@$GLOBALS["HTTP_POST_VARS"]["x26_percentual"]:$this->x26_percentual);
+       $this->x26_codconsumotipo = (($this->x26_codconsumotipo === 0 || $this->x26_codconsumotipo === 0.0 || ($this->x26_codconsumotipo === 0 || $this->x26_codconsumotipo === 0.0 || $this->x26_codconsumotipo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x26_codconsumotipo"]:$this->x26_codconsumotipo);
      }else{
-       $this->x26_codisencao = ($this->x26_codisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencao"]:$this->x26_codisencao);
-       $this->x26_codisencaorec = ($this->x26_codisencaorec == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencaorec"]:$this->x26_codisencaorec);
+       $this->x26_codisencao = (($this->x26_codisencao === 0 || $this->x26_codisencao === 0.0 || ($this->x26_codisencao === 0 || $this->x26_codisencao === 0.0 || $this->x26_codisencao == ""))?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencao"]:$this->x26_codisencao);
+       $this->x26_codisencaorec = (($this->x26_codisencaorec === 0 || $this->x26_codisencaorec === 0.0 || ($this->x26_codisencaorec === 0 || $this->x26_codisencaorec === 0.0 || $this->x26_codisencaorec == ""))?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencaorec"]:$this->x26_codisencaorec);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_aguaisencaorec {
          $this->x26_codisencaorec = $x26_codisencaorec; 
        }
      }
-     if(($this->x26_codisencaorec == null) || ($this->x26_codisencaorec == "") ){ 
+     if(($this->x26_codisencaorec == null) || (($this->x26_codisencaorec === 0 || $this->x26_codisencaorec === 0.0 || ($this->x26_codisencaorec === 0 || $this->x26_codisencaorec === 0.0 || $this->x26_codisencaorec == ""))) ){ 
        $this->erro_sql = " Campo x26_codisencaorec nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_aguaisencaorec {
    function sql_query ( $x26_codisencaorec=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -409,7 +409,7 @@ class cl_aguaisencaorec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_aguaisencaorec {
    function sql_query_file ( $x26_codisencaorec=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -442,7 +442,7 @@ class cl_aguaisencaorec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

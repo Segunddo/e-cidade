@@ -26,7 +26,7 @@ class cl_pagordemdescontoempanulado {
                  e06_pagordemdesconto = int4 = Desconto da Ordem de Pagamento
                  ";
    //funcao construtor da classe
-   function cl_pagordemdescontoempanulado() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pagordemdescontoempanulado");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_pagordemdescontoempanulado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e06_sequencial = ($this->e06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e06_sequencial"]:$this->e06_sequencial);
-       $this->e06_empanulado = ($this->e06_empanulado == ""?@$GLOBALS["HTTP_POST_VARS"]["e06_empanulado"]:$this->e06_empanulado);
-       $this->e06_pagordemdesconto = ($this->e06_pagordemdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["e06_pagordemdesconto"]:$this->e06_pagordemdesconto);
+       $this->e06_sequencial = ($this->e06_sequencial === 0 || $this->e06_sequencial === 0.0 || $this->e06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e06_sequencial"]:$this->e06_sequencial);
+       $this->e06_empanulado = ($this->e06_empanulado === 0 || $this->e06_empanulado === 0.0 || $this->e06_empanulado == ""?@$GLOBALS["HTTP_POST_VARS"]["e06_empanulado"]:$this->e06_empanulado);
+       $this->e06_pagordemdesconto = ($this->e06_pagordemdesconto === 0 || $this->e06_pagordemdesconto === 0.0 || $this->e06_pagordemdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["e06_pagordemdesconto"]:$this->e06_pagordemdesconto);
      }else{
-       $this->e06_empanulado = ($this->e06_empanulado == ""?@$GLOBALS["HTTP_POST_VARS"]["e06_empanulado"]:$this->e06_empanulado);
+       $this->e06_empanulado = ($this->e06_empanulado === 0 || $this->e06_empanulado === 0.0 || $this->e06_empanulado == ""?@$GLOBALS["HTTP_POST_VARS"]["e06_empanulado"]:$this->e06_empanulado);
      }
    }
    // funcao para Inclusão
@@ -86,7 +86,7 @@ class cl_pagordemdescontoempanulado {
          $this->e06_sequencial = $e06_sequencial;
        }
      }
-     if(($this->e06_empanulado == null) || ($this->e06_empanulado == "") ){
+     if(($this->e06_empanulado == null) || ($this->e06_empanulado === 0 || $this->e06_empanulado === 0.0 || $this->e06_empanulado == "") ){
        $this->erro_sql = " Campo e06_empanulado não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -387,7 +387,7 @@ class cl_pagordemdescontoempanulado {
      return $sql;
   }
 
-  public function sql_query_itens_empenho($sCampos = "*", $sWhere) {
+  public function sql_query_itens_empenho($sCampos = "*", $sWhere = null) {
 
     $sSql  = "   select {$sCampos} ";
     $sSql .= "     from pagordemdescontoempanulado ";

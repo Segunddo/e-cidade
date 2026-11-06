@@ -55,7 +55,7 @@ class cl_obrasconstr {
                  ob08_tipolanc = int4 = Tipo de Lançamento 
                  ";
    //funcao construtor da classe 
-   function cl_obrasconstr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obrasconstr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,14 +72,14 @@ class cl_obrasconstr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob08_codconstr = ($this->ob08_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codconstr"]:$this->ob08_codconstr);
-       $this->ob08_codobra = ($this->ob08_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codobra"]:$this->ob08_codobra);
-       $this->ob08_ocupacao = ($this->ob08_ocupacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_ocupacao"]:$this->ob08_ocupacao);
-       $this->ob08_tipoconstr = ($this->ob08_tipoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_tipoconstr"]:$this->ob08_tipoconstr);
-       $this->ob08_area = ($this->ob08_area == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_area"]:$this->ob08_area);
-       $this->ob08_tipolanc = ($this->ob08_tipolanc == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_tipolanc"]:$this->ob08_tipolanc);
+       $this->ob08_codconstr = ($this->ob08_codconstr === 0 || $this->ob08_codconstr === 0.0 || $this->ob08_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codconstr"]:$this->ob08_codconstr);
+       $this->ob08_codobra = ($this->ob08_codobra === 0 || $this->ob08_codobra === 0.0 || $this->ob08_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codobra"]:$this->ob08_codobra);
+       $this->ob08_ocupacao = ($this->ob08_ocupacao === 0 || $this->ob08_ocupacao === 0.0 || $this->ob08_ocupacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_ocupacao"]:$this->ob08_ocupacao);
+       $this->ob08_tipoconstr = ($this->ob08_tipoconstr === 0 || $this->ob08_tipoconstr === 0.0 || $this->ob08_tipoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_tipoconstr"]:$this->ob08_tipoconstr);
+       $this->ob08_area = ($this->ob08_area === 0 || $this->ob08_area === 0.0 || $this->ob08_area == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_area"]:$this->ob08_area);
+       $this->ob08_tipolanc = ($this->ob08_tipolanc === 0 || $this->ob08_tipolanc === 0.0 || $this->ob08_tipolanc == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_tipolanc"]:$this->ob08_tipolanc);
      }else{
-       $this->ob08_codconstr = ($this->ob08_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codconstr"]:$this->ob08_codconstr);
+       $this->ob08_codconstr = ($this->ob08_codconstr === 0 || $this->ob08_codconstr === 0.0 || $this->ob08_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codconstr"]:$this->ob08_codconstr);
      }
    }
    // funcao para inclusao
@@ -154,7 +154,7 @@ class cl_obrasconstr {
          $this->ob08_codconstr = $ob08_codconstr; 
        }
      }
-     if(($this->ob08_codconstr == null) || ($this->ob08_codconstr == "") ){ 
+     if(($this->ob08_codconstr == null) || ($this->ob08_codconstr === 0 || $this->ob08_codconstr === 0.0 || $this->ob08_codconstr == "") ){ 
        $this->erro_sql = " Campo ob08_codconstr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -443,7 +443,7 @@ class cl_obrasconstr {
    function sql_query ( $ob08_codconstr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_obrasconstr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -483,7 +483,7 @@ class cl_obrasconstr {
    function sql_query_file ( $ob08_codconstr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_obrasconstr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -516,7 +516,7 @@ class cl_obrasconstr {
    function sql_query_alvara ( $ob08_codconstr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -542,7 +542,7 @@ class cl_obrasconstr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -554,7 +554,7 @@ class cl_obrasconstr {
    function sql_query_ender ( $ob08_codconstr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -589,7 +589,7 @@ class cl_obrasconstr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -602,7 +602,7 @@ class cl_obrasconstr {
 	function sql_query_alvara_habite ( $ob08_codconstr=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -629,7 +629,7 @@ class cl_obrasconstr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

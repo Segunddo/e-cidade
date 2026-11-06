@@ -240,7 +240,7 @@ if ($db_opcao == 1) {
                   <td>
                       <?php
                       if (empty($v01_dtvenc_dia) && $db_opcao == 1) {
-                          $data = split("-", verifica_data($dia, $mes, $ano));
+                          $data = explode("-", verifica_data($dia, $mes, $ano));
                           $v01_dtvenc_dia = $dia;
                           $v01_dtvenc_mes = $mes;
                           $v01_dtvenc_ano = $ano;

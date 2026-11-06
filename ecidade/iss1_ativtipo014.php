@@ -36,7 +36,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("q81_codigo");
 $clrotulo->label("q81_descr");
 $clrotulo->label("q85_descr");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 echo"
 <script>
 	parent.document.form1.atualizar.disabled=true;
@@ -62,7 +63,7 @@ if(isset($atualizar)){
   for($i=0; $i<$ta; $i++){
     $chave=key($vt);
     if(substr($chave,0,5)=="CHECK"){
-      $dados=split("_",$chave); 
+      $dados=preg_split("#_#m",$chave); 
       $clativtipo->q80_ativ=$q80_ativ;
       $clativtipo->q80_tipcal=$dados[1];
       $clativtipo->incluir($q80_ativ,$dados[1]);

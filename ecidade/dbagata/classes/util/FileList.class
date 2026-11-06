@@ -27,7 +27,7 @@
 
 class FileList extends GtkCList
 {
-    function FileList($title, $names)
+    function __construct($title, $names)
     {
         $this->names = $names;
         GtkCList::GtkCList(1, array($title));

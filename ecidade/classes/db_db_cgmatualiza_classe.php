@@ -162,7 +162,7 @@ class cl_db_cgmatualiza {
                  w11_cgmnovo = bool = CGM novo 
                  ";
    //funcao construtor da classe 
-   function cl_db_cgmatualiza() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_cgmatualiza"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -179,10 +179,10 @@ class cl_db_cgmatualiza {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->w11_sequencial = ($this->w11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_sequencial"]:$this->w11_sequencial);
+       $this->w11_sequencial = ($this->w11_sequencial === 0 || $this->w11_sequencial === 0.0 || $this->w11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_sequencial"]:$this->w11_sequencial);
        $this->w11_nome = ($this->w11_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_nome"]:$this->w11_nome);
        $this->w11_ender = ($this->w11_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_ender"]:$this->w11_ender);
-       $this->w11_numero = ($this->w11_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_numero"]:$this->w11_numero);
+       $this->w11_numero = ($this->w11_numero === 0 || $this->w11_numero === 0.0 || $this->w11_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_numero"]:$this->w11_numero);
        $this->w11_compl = ($this->w11_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_compl"]:$this->w11_compl);
        $this->w11_bairro = ($this->w11_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_bairro"]:$this->w11_bairro);
        $this->w11_munic = ($this->w11_munic == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_munic"]:$this->w11_munic);
@@ -199,12 +199,12 @@ class cl_db_cgmatualiza {
        }
        $this->w11_telef = ($this->w11_telef == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_telef"]:$this->w11_telef);
        $this->w11_ident = ($this->w11_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_ident"]:$this->w11_ident);
-       $this->w11_login = ($this->w11_login == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_login"]:$this->w11_login);
+       $this->w11_login = ($this->w11_login === 0 || $this->w11_login === 0.0 || $this->w11_login == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_login"]:$this->w11_login);
        $this->w11_incest = ($this->w11_incest == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_incest"]:$this->w11_incest);
        $this->w11_telcel = ($this->w11_telcel == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_telcel"]:$this->w11_telcel);
        $this->w11_email = ($this->w11_email == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_email"]:$this->w11_email);
        $this->w11_endcon = ($this->w11_endcon == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_endcon"]:$this->w11_endcon);
-       $this->w11_numcon = ($this->w11_numcon == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_numcon"]:$this->w11_numcon);
+       $this->w11_numcon = ($this->w11_numcon === 0 || $this->w11_numcon === 0.0 || $this->w11_numcon == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_numcon"]:$this->w11_numcon);
        $this->w11_comcon = ($this->w11_comcon == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_comcon"]:$this->w11_comcon);
        $this->w11_baicon = ($this->w11_baicon == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_baicon"]:$this->w11_baicon);
        $this->w11_muncon = ($this->w11_muncon == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_muncon"]:$this->w11_muncon);
@@ -214,10 +214,10 @@ class cl_db_cgmatualiza {
        $this->w11_telcon = ($this->w11_telcon == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_telcon"]:$this->w11_telcon);
        $this->w11_celcon = ($this->w11_celcon == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_celcon"]:$this->w11_celcon);
        $this->w11_emailc = ($this->w11_emailc == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_emailc"]:$this->w11_emailc);
-       $this->w11_nacion = ($this->w11_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_nacion"]:$this->w11_nacion);
-       $this->w11_estciv = ($this->w11_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_estciv"]:$this->w11_estciv);
+       $this->w11_nacion = ($this->w11_nacion === 0 || $this->w11_nacion === 0.0 || $this->w11_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_nacion"]:$this->w11_nacion);
+       $this->w11_estciv = ($this->w11_estciv === 0 || $this->w11_estciv === 0.0 || $this->w11_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_estciv"]:$this->w11_estciv);
        $this->w11_profis = ($this->w11_profis == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_profis"]:$this->w11_profis);
-       $this->w11_tipcre = ($this->w11_tipcre == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_tipcre"]:$this->w11_tipcre);
+       $this->w11_tipcre = ($this->w11_tipcre === 0 || $this->w11_tipcre === 0.0 || $this->w11_tipcre == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_tipcre"]:$this->w11_tipcre);
        $this->w11_cgccpf = ($this->w11_cgccpf == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_cgccpf"]:$this->w11_cgccpf);
        $this->w11_fax = ($this->w11_fax == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_fax"]:$this->w11_fax);
        if($this->w11_nasc == ""){
@@ -271,7 +271,7 @@ class cl_db_cgmatualiza {
        $this->w11_revisado = ($this->w11_revisado == "f"?@$GLOBALS["HTTP_POST_VARS"]["w11_revisado"]:$this->w11_revisado);
        $this->w11_cgmnovo = ($this->w11_cgmnovo == "f"?@$GLOBALS["HTTP_POST_VARS"]["w11_cgmnovo"]:$this->w11_cgmnovo);
      }else{
-       $this->w11_sequencial = ($this->w11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_sequencial"]:$this->w11_sequencial);
+       $this->w11_sequencial = ($this->w11_sequencial === 0 || $this->w11_sequencial === 0.0 || $this->w11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["w11_sequencial"]:$this->w11_sequencial);
      }
    }
    // funcao para inclusao
@@ -382,7 +382,7 @@ class cl_db_cgmatualiza {
          $this->w11_sequencial = $w11_sequencial; 
        }
      }
-     if(($this->w11_sequencial == null) || ($this->w11_sequencial == "") ){ 
+     if(($this->w11_sequencial == null) || ($this->w11_sequencial === 0 || $this->w11_sequencial === 0.0 || $this->w11_sequencial == "") ){ 
        $this->erro_sql = " Campo w11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -1155,7 +1155,7 @@ class cl_db_cgmatualiza {
    function sql_query ( $w11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1176,7 +1176,7 @@ class cl_db_cgmatualiza {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1188,7 +1188,7 @@ class cl_db_cgmatualiza {
    function sql_query_file ( $w11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1209,7 +1209,7 @@ class cl_db_cgmatualiza {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

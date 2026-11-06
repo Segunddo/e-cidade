@@ -29,7 +29,8 @@ set_time_limit(0);
 include(modification("libs/db_sql.php"));
 require(modification("fpdf151/pdf.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 //tratamento de erros
@@ -77,7 +78,7 @@ switch ($ordem) {
 }
 
 // prepara o array com todos os meses do ano usado na consulta SQL
-$aMeses			=array(); 
+$aMeses			=[]; 
 $aMeses[1]		="janeiro";
 $aMeses[2]		="fevereiro";
 $aMeses[3]		="marco";
@@ -248,7 +249,7 @@ $sSql .= "							end as z01_nome,                             ";
 
 $msgErro = "Ocorreu erro durante o processamento das informações!<br />Entre em contato com o Administrador do Sistema!";
 $result = db_query($sSql) or die(pg_last_error());
-$num = pg_numrows($result);
+$num = pg_num_rows($result);
 if ($num == 0 ) {
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existe pagamentos efetuados no período de '.$mesini."/".$ano." até ".$mesfim."/".$ano);
 }

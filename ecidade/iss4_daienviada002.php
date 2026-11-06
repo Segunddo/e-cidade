@@ -28,7 +28,8 @@
 set_time_limit(0);
 include(modification("libs/db_sql.php"));
 include(modification("fpdf151/pdf.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $pdf = new pdf();
 $pdf->Open();
 $pdf->AliasNbPages();
@@ -63,7 +64,7 @@ where tipo = 3 and w04_enviado is not true
 order by w04_inscr;		
 ";
 $result = db_query($sql);
-$num = pg_numrows($result);
+$num = pg_num_rows($result);
 $linha = 70;
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',8);
@@ -71,7 +72,7 @@ $pdf->Cell(15,05,"Inscrição",1,0,"C",1);
 $pdf->Cell(70,05,"Razão Social",1,0,"C",1);
 $pdf->Cell(70,05,"Endereço",1,0,"C",1);
 $pdf->Cell(25,05,"Telefone",1,1,"C",1);
-for($s=0;$s<pg_numrows($result);$s++){
+for($s=0;$s<pg_num_rows($result);$s++){
   db_fieldsmemory($result,$s);
   $pdf->SetFont('Arial','',8);
   $pdf->Cell(15,05,$q02_inscr,0,0,"C",0);

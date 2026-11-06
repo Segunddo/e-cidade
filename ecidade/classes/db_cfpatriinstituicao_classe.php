@@ -55,7 +55,7 @@ class cl_cfpatriinstituicao {
                  t59_dataimplanatacaodepreciacao = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_cfpatriinstituicao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cfpatriinstituicao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,8 +72,8 @@ class cl_cfpatriinstituicao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t59_sequencial = ($this->t59_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t59_sequencial"]:$this->t59_sequencial);
-       $this->t59_instituicao = ($this->t59_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["t59_instituicao"]:$this->t59_instituicao);
+       $this->t59_sequencial = ($this->t59_sequencial === 0 || $this->t59_sequencial === 0.0 || $this->t59_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t59_sequencial"]:$this->t59_sequencial);
+       $this->t59_instituicao = ($this->t59_instituicao === 0 || $this->t59_instituicao === 0.0 || $this->t59_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["t59_instituicao"]:$this->t59_instituicao);
        if($this->t59_dataimplanatacaodepreciacao == ""){
          $this->t59_dataimplanatacaodepreciacao_dia = ($this->t59_dataimplanatacaodepreciacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t59_dataimplanatacaodepreciacao_dia"]:$this->t59_dataimplanatacaodepreciacao_dia);
          $this->t59_dataimplanatacaodepreciacao_mes = ($this->t59_dataimplanatacaodepreciacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t59_dataimplanatacaodepreciacao_mes"]:$this->t59_dataimplanatacaodepreciacao_mes);
@@ -83,7 +83,7 @@ class cl_cfpatriinstituicao {
          }
        }
      }else{
-       $this->t59_sequencial = ($this->t59_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t59_sequencial"]:$this->t59_sequencial);
+       $this->t59_sequencial = ($this->t59_sequencial === 0 || $this->t59_sequencial === 0.0 || $this->t59_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t59_sequencial"]:$this->t59_sequencial);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_cfpatriinstituicao {
          $this->t59_sequencial = $t59_sequencial; 
        }
      }
-     if(($this->t59_sequencial == null) || ($this->t59_sequencial == "") ){ 
+     if(($this->t59_sequencial == null) || ($this->t59_sequencial === 0 || $this->t59_sequencial === 0.0 || $this->t59_sequencial == "") ){ 
        $this->erro_sql = " Campo t59_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

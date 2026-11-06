@@ -30,7 +30,7 @@ class libParagrafoCodPhp {
   
   var $oParag = null;
   
-  function libParagrafoCodPhp( $oParag  ){
+  function __construct( $oParag  ){
     $this->oParag = $oParag;    
   }
   

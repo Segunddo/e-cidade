@@ -52,7 +52,7 @@ class cl_termoanusimula {
                  v20_termoanu = int4 = Código sequencial 
                  ";
    //funcao construtor da classe 
-   function cl_termoanusimula() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termoanusimula"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_termoanusimula {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v20_sequencial = ($this->v20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_sequencial"]:$this->v20_sequencial);
-       $this->v20_termosimula = ($this->v20_termosimula == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_termosimula"]:$this->v20_termosimula);
-       $this->v20_termoanu = ($this->v20_termoanu == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_termoanu"]:$this->v20_termoanu);
+       $this->v20_sequencial = ($this->v20_sequencial === 0 || $this->v20_sequencial === 0.0 || $this->v20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_sequencial"]:$this->v20_sequencial);
+       $this->v20_termosimula = ($this->v20_termosimula === 0 || $this->v20_termosimula === 0.0 || $this->v20_termosimula == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_termosimula"]:$this->v20_termosimula);
+       $this->v20_termoanu = ($this->v20_termoanu === 0 || $this->v20_termoanu === 0.0 || $this->v20_termoanu == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_termoanu"]:$this->v20_termoanu);
      }else{
-       $this->v20_sequencial = ($this->v20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_sequencial"]:$this->v20_sequencial);
+       $this->v20_sequencial = ($this->v20_sequencial === 0 || $this->v20_sequencial === 0.0 || $this->v20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_sequencial"]:$this->v20_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_termoanusimula {
          $this->v20_sequencial = $v20_sequencial; 
        }
      }
-     if(($this->v20_sequencial == null) || ($this->v20_sequencial == "") ){ 
+     if(($this->v20_sequencial == null) || ($this->v20_sequencial === 0 || $this->v20_sequencial === 0.0 || $this->v20_sequencial == "") ){ 
        $this->erro_sql = " Campo v20_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_termoanusimula {
    function sql_query ( $v20_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_termoanusimula {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_termoanusimula {
    function sql_query_file ( $v20_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_termoanusimula {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

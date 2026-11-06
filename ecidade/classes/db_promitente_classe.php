@@ -54,7 +54,7 @@ class cl_promitente {
                  j41_promitipo = char(1) = Tipo do promitente 
                  ";
    //funcao construtor da classe 
-   function cl_promitente() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("promitente"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_promitente {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j41_matric = ($this->j41_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j41_matric"]:$this->j41_matric);
-       $this->j41_numcgm = ($this->j41_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j41_numcgm"]:$this->j41_numcgm);
+       $this->j41_matric = (($this->j41_matric === 0 || $this->j41_matric === 0.0 || $this->j41_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j41_matric"]:$this->j41_matric);
+       $this->j41_numcgm = (($this->j41_numcgm === 0 || $this->j41_numcgm === 0.0 || $this->j41_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["j41_numcgm"]:$this->j41_numcgm);
        $this->j41_tipopro = ($this->j41_tipopro == "f"?@$GLOBALS["HTTP_POST_VARS"]["j41_tipopro"]:$this->j41_tipopro);
        $this->j41_promitipo = ($this->j41_promitipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j41_promitipo"]:$this->j41_promitipo);
      }else{
-       $this->j41_matric = ($this->j41_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j41_matric"]:$this->j41_matric);
-       $this->j41_numcgm = ($this->j41_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j41_numcgm"]:$this->j41_numcgm);
+       $this->j41_matric = (($this->j41_matric === 0 || $this->j41_matric === 0.0 || $this->j41_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j41_matric"]:$this->j41_matric);
+       $this->j41_numcgm = (($this->j41_numcgm === 0 || $this->j41_numcgm === 0.0 || $this->j41_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["j41_numcgm"]:$this->j41_numcgm);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_promitente {
      }
        $this->j41_matric = $j41_matric; 
        $this->j41_numcgm = $j41_numcgm; 
-     if(($this->j41_matric == null) || ($this->j41_matric == "") ){ 
+     if(($this->j41_matric == null) || (($this->j41_matric === 0 || $this->j41_matric === 0.0 || $this->j41_matric == "")) ){ 
        $this->erro_sql = " Campo j41_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_promitente {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j41_numcgm == null) || ($this->j41_numcgm == "") ){ 
+     if(($this->j41_numcgm == null) || (($this->j41_numcgm === 0 || $this->j41_numcgm === 0.0 || $this->j41_numcgm == "")) ){ 
        $this->erro_sql = " Campo j41_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

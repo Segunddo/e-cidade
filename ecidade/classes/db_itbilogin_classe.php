@@ -50,7 +50,7 @@ class cl_itbilogin {
                  it13_id_usuario = int4 = Cod. Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_itbilogin() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbilogin"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_itbilogin {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it13_guia = ($this->it13_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it13_guia"]:$this->it13_guia);
-       $this->it13_id_usuario = ($this->it13_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["it13_id_usuario"]:$this->it13_id_usuario);
+       $this->it13_guia = (($this->it13_guia === 0 || $this->it13_guia === 0.0 || $this->it13_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it13_guia"]:$this->it13_guia);
+       $this->it13_id_usuario = (($this->it13_id_usuario === 0 || $this->it13_id_usuario === 0.0 || $this->it13_id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["it13_id_usuario"]:$this->it13_id_usuario);
      }else{
-       $this->it13_guia = ($this->it13_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it13_guia"]:$this->it13_guia);
+       $this->it13_guia = (($this->it13_guia === 0 || $this->it13_guia === 0.0 || $this->it13_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it13_guia"]:$this->it13_guia);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_itbilogin {
        return false;
      }
        $this->it13_guia = $it13_guia; 
-     if(($this->it13_guia == null) || ($this->it13_guia == "") ){ 
+     if(($this->it13_guia == null) || (($this->it13_guia === 0 || $this->it13_guia === 0.0 || $this->it13_guia == "")) ){ 
        $this->erro_sql = " Campo it13_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_itbilogin {
    function sql_query ( $it13_guia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_itbilogin {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_itbilogin {
    function sql_query_file ( $it13_guia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_itbilogin {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

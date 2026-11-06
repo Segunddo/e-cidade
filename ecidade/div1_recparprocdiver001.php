@@ -33,7 +33,7 @@ require_once(modification("classes/db_recparprocdiver_classe.php"));
 require_once(modification("classes/db_procdiver_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clrecparprocdiver = new cl_recparprocdiver;

@@ -26,7 +26,7 @@ class cl_transferencialotematricula {
                  ed138_matricula = int4 = Matrícula 
                  ";
    //funcao construtor da classe 
-   function cl_transferencialotematricula() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("transferencialotematricula"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_transferencialotematricula {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed138_sequencial = ($this->ed138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed138_sequencial"]:$this->ed138_sequencial);
-       $this->ed138_transferencialote = ($this->ed138_transferencialote == ""?@$GLOBALS["HTTP_POST_VARS"]["ed138_transferencialote"]:$this->ed138_transferencialote);
-       $this->ed138_matricula = ($this->ed138_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed138_matricula"]:$this->ed138_matricula);
+       $this->ed138_sequencial = ($this->ed138_sequencial === 0 || $this->ed138_sequencial === 0.0 || $this->ed138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed138_sequencial"]:$this->ed138_sequencial);
+       $this->ed138_transferencialote = ($this->ed138_transferencialote === 0 || $this->ed138_transferencialote === 0.0 || $this->ed138_transferencialote == ""?@$GLOBALS["HTTP_POST_VARS"]["ed138_transferencialote"]:$this->ed138_transferencialote);
+       $this->ed138_matricula = ($this->ed138_matricula === 0 || $this->ed138_matricula === 0.0 || $this->ed138_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed138_matricula"]:$this->ed138_matricula);
      }else{
-       $this->ed138_sequencial = ($this->ed138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed138_sequencial"]:$this->ed138_sequencial);
+       $this->ed138_sequencial = ($this->ed138_sequencial === 0 || $this->ed138_sequencial === 0.0 || $this->ed138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed138_sequencial"]:$this->ed138_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_transferencialotematricula {
          $this->ed138_sequencial = $ed138_sequencial; 
        }
      }
-     if(($this->ed138_sequencial == null) || ($this->ed138_sequencial == "") ){ 
+     if(($this->ed138_sequencial == null) || ($this->ed138_sequencial === 0 || $this->ed138_sequencial === 0.0 || $this->ed138_sequencial == "") ){ 
        $this->erro_sql = " Campo ed138_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

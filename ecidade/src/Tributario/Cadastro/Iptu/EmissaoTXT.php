@@ -765,7 +765,7 @@ class EmissaoTXT
             $j40_refant = "....";
         }
 
-        $sqlsub = split('\.', $j40_refant);
+        $sqlsub = explode('.', $j40_refant); // PHP 8: split() POSIX '\.' = ponto literal; o polyfill do vendor fazia explode('\.') e nao separava
 
         if ($this->sTipoGeracao == static::TIPO_EMISSAO_TXT) {
             if (isset($sqlsub)) {

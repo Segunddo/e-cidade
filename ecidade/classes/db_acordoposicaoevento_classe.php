@@ -26,7 +26,7 @@ class cl_acordoposicaoevento {
                  ac56_acordoposicao = int4 = Posiçao do Acordo 
                  ";
    //funcao construtor da classe 
-   function cl_acordoposicaoevento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoposicaoevento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_acordoposicaoevento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac56_sequencial = ($this->ac56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac56_sequencial"]:$this->ac56_sequencial);
-       $this->ac56_acordoevento = ($this->ac56_acordoevento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac56_acordoevento"]:$this->ac56_acordoevento);
-       $this->ac56_acordoposicao = ($this->ac56_acordoposicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac56_acordoposicao"]:$this->ac56_acordoposicao);
+       $this->ac56_sequencial = ($this->ac56_sequencial === 0 || $this->ac56_sequencial === 0.0 || $this->ac56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac56_sequencial"]:$this->ac56_sequencial);
+       $this->ac56_acordoevento = ($this->ac56_acordoevento === 0 || $this->ac56_acordoevento === 0.0 || $this->ac56_acordoevento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac56_acordoevento"]:$this->ac56_acordoevento);
+       $this->ac56_acordoposicao = ($this->ac56_acordoposicao === 0 || $this->ac56_acordoposicao === 0.0 || $this->ac56_acordoposicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac56_acordoposicao"]:$this->ac56_acordoposicao);
      }else{
-       $this->ac56_sequencial = ($this->ac56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac56_sequencial"]:$this->ac56_sequencial);
+       $this->ac56_sequencial = ($this->ac56_sequencial === 0 || $this->ac56_sequencial === 0.0 || $this->ac56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac56_sequencial"]:$this->ac56_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_acordoposicaoevento {
          $this->ac56_sequencial = $ac56_sequencial; 
        }
      }
-     if(($this->ac56_sequencial == null) || ($this->ac56_sequencial == "") ){ 
+     if(($this->ac56_sequencial == null) || ($this->ac56_sequencial === 0 || $this->ac56_sequencial === 0.0 || $this->ac56_sequencial == "") ){ 
        $this->erro_sql = " Campo ac56_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

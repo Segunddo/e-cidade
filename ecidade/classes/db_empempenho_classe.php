@@ -114,11 +114,11 @@ class cl_empempenho
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->e60_numemp = ($this->e60_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_numemp"]:$this->e60_numemp);
+       $this->e60_numemp = ($this->e60_numemp === 0 || $this->e60_numemp === 0.0 || $this->e60_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_numemp"]:$this->e60_numemp);
        $this->e60_codemp = ($this->e60_codemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_codemp"]:$this->e60_codemp);
-       $this->e60_anousu = ($this->e60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_anousu"]:$this->e60_anousu);
-       $this->e60_coddot = ($this->e60_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_coddot"]:$this->e60_coddot);
-       $this->e60_numcgm = ($this->e60_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_numcgm"]:$this->e60_numcgm);
+       $this->e60_anousu = ($this->e60_anousu === 0 || $this->e60_anousu === 0.0 || $this->e60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_anousu"]:$this->e60_anousu);
+       $this->e60_coddot = ($this->e60_coddot === 0 || $this->e60_coddot === 0.0 || $this->e60_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_coddot"]:$this->e60_coddot);
+       $this->e60_numcgm = ($this->e60_numcgm === 0 || $this->e60_numcgm === 0.0 || $this->e60_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_numcgm"]:$this->e60_numcgm);
        if($this->e60_emiss == ""){
          $this->e60_emiss_dia = ($this->e60_emiss_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_emiss_dia"]:$this->e60_emiss_dia);
          $this->e60_emiss_mes = ($this->e60_emiss_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_emiss_mes"]:$this->e60_emiss_mes);
@@ -135,23 +135,23 @@ class cl_empempenho
             $this->e60_vencim = $this->e60_vencim_ano."-".$this->e60_vencim_mes."-".$this->e60_vencim_dia;
          }
        }
-       $this->e60_vlrorc = ($this->e60_vlrorc == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_vlrorc"]:$this->e60_vlrorc);
-       $this->e60_vlremp = ($this->e60_vlremp == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_vlremp"]:$this->e60_vlremp);
-       $this->e60_vlrliq = ($this->e60_vlrliq == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_vlrliq"]:$this->e60_vlrliq);
-       $this->e60_vlrpag = ($this->e60_vlrpag == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_vlrpag"]:$this->e60_vlrpag);
-       $this->e60_vlranu = ($this->e60_vlranu == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_vlranu"]:$this->e60_vlranu);
-       $this->e60_codtipo = ($this->e60_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_codtipo"]:$this->e60_codtipo);
+       $this->e60_vlrorc = ($this->e60_vlrorc === 0 || $this->e60_vlrorc === 0.0 || $this->e60_vlrorc == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_vlrorc"]:$this->e60_vlrorc);
+       $this->e60_vlremp = ($this->e60_vlremp === 0 || $this->e60_vlremp === 0.0 || $this->e60_vlremp == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_vlremp"]:$this->e60_vlremp);
+       $this->e60_vlrliq = ($this->e60_vlrliq === 0 || $this->e60_vlrliq === 0.0 || $this->e60_vlrliq == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_vlrliq"]:$this->e60_vlrliq);
+       $this->e60_vlrpag = ($this->e60_vlrpag === 0 || $this->e60_vlrpag === 0.0 || $this->e60_vlrpag == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_vlrpag"]:$this->e60_vlrpag);
+       $this->e60_vlranu = ($this->e60_vlranu === 0 || $this->e60_vlranu === 0.0 || $this->e60_vlranu == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_vlranu"]:$this->e60_vlranu);
+       $this->e60_codtipo = ($this->e60_codtipo === 0 || $this->e60_codtipo === 0.0 || $this->e60_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_codtipo"]:$this->e60_codtipo);
        $this->e60_resumo = ($this->e60_resumo == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_resumo"]:$this->e60_resumo);
        $this->e60_destin = ($this->e60_destin == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_destin"]:$this->e60_destin);
-       $this->e60_salant = ($this->e60_salant == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_salant"]:$this->e60_salant);
-       $this->e60_instit = ($this->e60_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_instit"]:$this->e60_instit);
-       $this->e60_codcom = ($this->e60_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_codcom"]:$this->e60_codcom);
+       $this->e60_salant = ($this->e60_salant === 0 || $this->e60_salant === 0.0 || $this->e60_salant == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_salant"]:$this->e60_salant);
+       $this->e60_instit = ($this->e60_instit === 0 || $this->e60_instit === 0.0 || $this->e60_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_instit"]:$this->e60_instit);
+       $this->e60_codcom = ($this->e60_codcom === 0 || $this->e60_codcom === 0.0 || $this->e60_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_codcom"]:$this->e60_codcom);
        $this->e60_tipol = ($this->e60_tipol == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_tipol"]:$this->e60_tipol);
        $this->e60_numerol = ($this->e60_numerol == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_numerol"]:$this->e60_numerol);
        $this->migra_elemento = ($this->migra_elemento == ""?@$GLOBALS["HTTP_POST_VARS"]["migra_elemento"]:$this->migra_elemento);
        $this->e60_concarpeculiar = ($this->e60_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_concarpeculiar"]:$this->e60_concarpeculiar);
      }else{
-       $this->e60_numemp = ($this->e60_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_numemp"]:$this->e60_numemp);
+       $this->e60_numemp = ($this->e60_numemp === 0 || $this->e60_numemp === 0.0 || $this->e60_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e60_numemp"]:$this->e60_numemp);
      }
    }
 
@@ -320,7 +320,7 @@ class cl_empempenho
          $this->e60_numemp = $e60_numemp;
        }
      }
-     if(($this->e60_numemp == null) || ($this->e60_numemp == "") ){
+     if(($this->e60_numemp == null) || ($this->e60_numemp === 0 || $this->e60_numemp === 0.0 || $this->e60_numemp == "") ){
        $this->erro_sql = " Campo e60_numemp não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

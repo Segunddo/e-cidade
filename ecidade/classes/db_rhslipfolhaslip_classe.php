@@ -52,7 +52,7 @@ class cl_rhslipfolhaslip {
                  rh82_slip = int4 = SLIP 
                  ";
    //funcao construtor da classe 
-   function cl_rhslipfolhaslip() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhslipfolhaslip"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rhslipfolhaslip {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh82_sequencial = ($this->rh82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh82_sequencial"]:$this->rh82_sequencial);
-       $this->rh82_rhslipfolha = ($this->rh82_rhslipfolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh82_rhslipfolha"]:$this->rh82_rhslipfolha);
-       $this->rh82_slip = ($this->rh82_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["rh82_slip"]:$this->rh82_slip);
+       $this->rh82_sequencial = ($this->rh82_sequencial === 0 || $this->rh82_sequencial === 0.0 || $this->rh82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh82_sequencial"]:$this->rh82_sequencial);
+       $this->rh82_rhslipfolha = ($this->rh82_rhslipfolha === 0 || $this->rh82_rhslipfolha === 0.0 || $this->rh82_rhslipfolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh82_rhslipfolha"]:$this->rh82_rhslipfolha);
+       $this->rh82_slip = ($this->rh82_slip === 0 || $this->rh82_slip === 0.0 || $this->rh82_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["rh82_slip"]:$this->rh82_slip);
      }else{
-       $this->rh82_sequencial = ($this->rh82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh82_sequencial"]:$this->rh82_sequencial);
+       $this->rh82_sequencial = ($this->rh82_sequencial === 0 || $this->rh82_sequencial === 0.0 || $this->rh82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh82_sequencial"]:$this->rh82_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rhslipfolhaslip {
          $this->rh82_sequencial = $rh82_sequencial; 
        }
      }
-     if(($this->rh82_sequencial == null) || ($this->rh82_sequencial == "") ){ 
+     if(($this->rh82_sequencial == null) || ($this->rh82_sequencial === 0 || $this->rh82_sequencial === 0.0 || $this->rh82_sequencial == "") ){ 
        $this->erro_sql = " Campo rh82_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_rhslipfolhaslip {
    function sql_query ( $rh82_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_rhslipfolhaslip {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_rhslipfolhaslip {
    function sql_query_file ( $rh82_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_rhslipfolhaslip {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

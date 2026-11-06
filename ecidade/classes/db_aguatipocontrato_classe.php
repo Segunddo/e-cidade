@@ -50,7 +50,7 @@ class cl_aguatipocontrato {
                  x39_descricao = varchar(100) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_aguatipocontrato() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguatipocontrato"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_aguatipocontrato {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x39_sequencial = ($this->x39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x39_sequencial"]:$this->x39_sequencial);
+       $this->x39_sequencial = ($this->x39_sequencial === 0 || $this->x39_sequencial === 0.0 || $this->x39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x39_sequencial"]:$this->x39_sequencial);
        $this->x39_descricao = ($this->x39_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["x39_descricao"]:$this->x39_descricao);
      }else{
-       $this->x39_sequencial = ($this->x39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x39_sequencial"]:$this->x39_sequencial);
+       $this->x39_sequencial = ($this->x39_sequencial === 0 || $this->x39_sequencial === 0.0 || $this->x39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x39_sequencial"]:$this->x39_sequencial);
      }
    }
    // funcao para Inclusão
@@ -109,7 +109,7 @@ class cl_aguatipocontrato {
          $this->x39_sequencial = $x39_sequencial; 
        }
      }
-     if(($this->x39_sequencial == null) || ($this->x39_sequencial == "") ){ 
+     if(($this->x39_sequencial == null) || ($this->x39_sequencial === 0 || $this->x39_sequencial === 0.0 || $this->x39_sequencial == "") ){ 
        $this->erro_sql = " Campo x39_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

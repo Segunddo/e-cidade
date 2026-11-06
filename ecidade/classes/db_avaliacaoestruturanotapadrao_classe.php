@@ -60,7 +60,7 @@ class cl_avaliacaoestruturanotapadrao {
                  ed139_ano = int4 = Ano
                  ";
    //funcao construtor da classe
-   function cl_avaliacaoestruturanotapadrao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avaliacaoestruturanotapadrao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_avaliacaoestruturanotapadrao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed139_sequencial = ($this->ed139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_sequencial"]:$this->ed139_sequencial);
-       $this->ed139_db_estrutura = ($this->ed139_db_estrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_db_estrutura"]:$this->ed139_db_estrutura);
+       $this->ed139_sequencial = ($this->ed139_sequencial === 0 || $this->ed139_sequencial === 0.0 || $this->ed139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_sequencial"]:$this->ed139_sequencial);
+       $this->ed139_db_estrutura = ($this->ed139_db_estrutura === 0 || $this->ed139_db_estrutura === 0.0 || $this->ed139_db_estrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_db_estrutura"]:$this->ed139_db_estrutura);
        $this->ed139_ativo = ($this->ed139_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_ativo"]:$this->ed139_ativo);
        $this->ed139_arredondamedia = ($this->ed139_arredondamedia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_arredondamedia"]:$this->ed139_arredondamedia);
-       $this->ed139_regraarredondamento = ($this->ed139_regraarredondamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_regraarredondamento"]:$this->ed139_regraarredondamento);
+       $this->ed139_regraarredondamento = ($this->ed139_regraarredondamento === 0 || $this->ed139_regraarredondamento === 0.0 || $this->ed139_regraarredondamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_regraarredondamento"]:$this->ed139_regraarredondamento);
        $this->ed139_observacao = ($this->ed139_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_observacao"]:$this->ed139_observacao);
-       $this->ed139_ano = ($this->ed139_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_ano"]:$this->ed139_ano);
+       $this->ed139_ano = ($this->ed139_ano === 0 || $this->ed139_ano === 0.0 || $this->ed139_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_ano"]:$this->ed139_ano);
      }else{
-       $this->ed139_sequencial = ($this->ed139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_sequencial"]:$this->ed139_sequencial);
+       $this->ed139_sequencial = ($this->ed139_sequencial === 0 || $this->ed139_sequencial === 0.0 || $this->ed139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed139_sequencial"]:$this->ed139_sequencial);
      }
    }
    // funcao para Inclusão
@@ -154,7 +154,7 @@ class cl_avaliacaoestruturanotapadrao {
          $this->ed139_sequencial = $ed139_sequencial;
        }
      }
-     if(($this->ed139_sequencial == null) || ($this->ed139_sequencial == "") ){
+     if(($this->ed139_sequencial == null) || ($this->ed139_sequencial === 0 || $this->ed139_sequencial === 0.0 || $this->ed139_sequencial == "") ){
        $this->erro_sql = " Campo ed139_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

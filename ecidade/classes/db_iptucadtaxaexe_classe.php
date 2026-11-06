@@ -88,21 +88,21 @@ class cl_iptucadtaxaexe
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->j08_iptucadtaxaexe = ($this->j08_iptucadtaxaexe == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_iptucadtaxaexe"] : $this->j08_iptucadtaxaexe);
-            $this->j08_iptucadtaxa = ($this->j08_iptucadtaxa == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_iptucadtaxa"] : $this->j08_iptucadtaxa);
-            $this->j08_tabrec = ($this->j08_tabrec == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_tabrec"] : $this->j08_tabrec);
-            $this->j08_valor = ($this->j08_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_valor"] : $this->j08_valor);
-            $this->j08_aliq = ($this->j08_aliq == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_aliq"] : $this->j08_aliq);
-            $this->j08_anousu = ($this->j08_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_anousu"] : $this->j08_anousu);
-            $this->j08_iptucalh = ($this->j08_iptucalh == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_iptucalh"] : $this->j08_iptucalh);
-            $this->j08_db_sysfuncoes = ($this->j08_db_sysfuncoes == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_db_sysfuncoes"] : $this->j08_db_sysfuncoes);
-            $this->j08_histisen = ($this->j08_histisen == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_histisen"] : $this->j08_histisen);
-            $this->j08_cadvencdesc = ($this->j08_cadvencdesc == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_cadvencdesc"] : $this->j08_cadvencdesc);
-            $this->j08_arretipo = ($this->j08_arretipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_arretipo"] : $this->j08_arretipo);
-            $this->j08_procdiver = ($this->j08_procdiver == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_procdiver"] : $this->j08_procdiver);
+            $this->j08_iptucadtaxaexe = ($this->j08_iptucadtaxaexe === 0 || $this->j08_iptucadtaxaexe === 0.0 || $this->j08_iptucadtaxaexe == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_iptucadtaxaexe"] : $this->j08_iptucadtaxaexe);
+            $this->j08_iptucadtaxa = ($this->j08_iptucadtaxa === 0 || $this->j08_iptucadtaxa === 0.0 || $this->j08_iptucadtaxa == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_iptucadtaxa"] : $this->j08_iptucadtaxa);
+            $this->j08_tabrec = ($this->j08_tabrec === 0 || $this->j08_tabrec === 0.0 || $this->j08_tabrec == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_tabrec"] : $this->j08_tabrec);
+            $this->j08_valor = ($this->j08_valor === 0 || $this->j08_valor === 0.0 || $this->j08_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_valor"] : $this->j08_valor);
+            $this->j08_aliq = ($this->j08_aliq === 0 || $this->j08_aliq === 0.0 || $this->j08_aliq == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_aliq"] : $this->j08_aliq);
+            $this->j08_anousu = ($this->j08_anousu === 0 || $this->j08_anousu === 0.0 || $this->j08_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_anousu"] : $this->j08_anousu);
+            $this->j08_iptucalh = ($this->j08_iptucalh === 0 || $this->j08_iptucalh === 0.0 || $this->j08_iptucalh == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_iptucalh"] : $this->j08_iptucalh);
+            $this->j08_db_sysfuncoes = ($this->j08_db_sysfuncoes === 0 || $this->j08_db_sysfuncoes === 0.0 || $this->j08_db_sysfuncoes == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_db_sysfuncoes"] : $this->j08_db_sysfuncoes);
+            $this->j08_histisen = ($this->j08_histisen === 0 || $this->j08_histisen === 0.0 || $this->j08_histisen == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_histisen"] : $this->j08_histisen);
+            $this->j08_cadvencdesc = ($this->j08_cadvencdesc === 0 || $this->j08_cadvencdesc === 0.0 || $this->j08_cadvencdesc == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_cadvencdesc"] : $this->j08_cadvencdesc);
+            $this->j08_arretipo = ($this->j08_arretipo === 0 || $this->j08_arretipo === 0.0 || $this->j08_arretipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_arretipo"] : $this->j08_arretipo);
+            $this->j08_procdiver = ($this->j08_procdiver === 0 || $this->j08_procdiver === 0.0 || $this->j08_procdiver == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_procdiver"] : $this->j08_procdiver);
         } else {
-            $this->j08_iptucadtaxaexe = ($this->j08_iptucadtaxaexe == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_iptucadtaxaexe"] : $this->j08_iptucadtaxaexe);
-            $this->j08_iptucadtaxa = ($this->j08_iptucadtaxa == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_iptucadtaxa"] : $this->j08_iptucadtaxa);
+            $this->j08_iptucadtaxaexe = ($this->j08_iptucadtaxaexe === 0 || $this->j08_iptucadtaxaexe === 0.0 || $this->j08_iptucadtaxaexe == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_iptucadtaxaexe"] : $this->j08_iptucadtaxaexe);
+            $this->j08_iptucadtaxa = ($this->j08_iptucadtaxa === 0 || $this->j08_iptucadtaxa === 0.0 || $this->j08_iptucadtaxa == "" ? @$GLOBALS["HTTP_POST_VARS"]["j08_iptucadtaxa"] : $this->j08_iptucadtaxa);
         }
     }
 
@@ -235,7 +235,7 @@ class cl_iptucadtaxaexe
                 $this->j08_iptucadtaxaexe = $j08_iptucadtaxaexe;
             }
         }
-        if (($this->j08_iptucadtaxaexe == null) || ($this->j08_iptucadtaxaexe == "")) {
+        if (($this->j08_iptucadtaxaexe == null) || ($this->j08_iptucadtaxaexe === 0 || $this->j08_iptucadtaxaexe === 0.0 || $this->j08_iptucadtaxaexe == "")) {
             $this->erro_sql = " Campo j08_iptucadtaxaexe não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

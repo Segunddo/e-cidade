@@ -54,7 +54,7 @@ class cl_linhatransportepontoparada {
                  tre11_ordem = int4 = Ordem 
                  ";
    //funcao construtor da classe 
-   function cl_linhatransportepontoparada() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("linhatransportepontoparada"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_linhatransportepontoparada {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre11_sequencial = ($this->tre11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_sequencial"]:$this->tre11_sequencial);
-       $this->tre11_pontoparada = ($this->tre11_pontoparada == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_pontoparada"]:$this->tre11_pontoparada);
-       $this->tre11_itinerariologradouro = ($this->tre11_itinerariologradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_itinerariologradouro"]:$this->tre11_itinerariologradouro);
-       $this->tre11_ordem = ($this->tre11_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_ordem"]:$this->tre11_ordem);
+       $this->tre11_sequencial = ($this->tre11_sequencial === 0 || $this->tre11_sequencial === 0.0 || $this->tre11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_sequencial"]:$this->tre11_sequencial);
+       $this->tre11_pontoparada = ($this->tre11_pontoparada === 0 || $this->tre11_pontoparada === 0.0 || $this->tre11_pontoparada == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_pontoparada"]:$this->tre11_pontoparada);
+       $this->tre11_itinerariologradouro = ($this->tre11_itinerariologradouro === 0 || $this->tre11_itinerariologradouro === 0.0 || $this->tre11_itinerariologradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_itinerariologradouro"]:$this->tre11_itinerariologradouro);
+       $this->tre11_ordem = ($this->tre11_ordem === 0 || $this->tre11_ordem === 0.0 || $this->tre11_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_ordem"]:$this->tre11_ordem);
      }else{
-       $this->tre11_sequencial = ($this->tre11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_sequencial"]:$this->tre11_sequencial);
+       $this->tre11_sequencial = ($this->tre11_sequencial === 0 || $this->tre11_sequencial === 0.0 || $this->tre11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_sequencial"]:$this->tre11_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_linhatransportepontoparada {
          $this->tre11_sequencial = $tre11_sequencial; 
        }
      }
-     if(($this->tre11_sequencial == null) || ($this->tre11_sequencial == "") ){ 
+     if(($this->tre11_sequencial == null) || ($this->tre11_sequencial === 0 || $this->tre11_sequencial === 0.0 || $this->tre11_sequencial == "") ){ 
        $this->erro_sql = " Campo tre11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -413,7 +413,7 @@ class cl_linhatransportepontoparada {
    function sql_query ( $tre11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_linhatransportepontoparada {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_linhatransportepontoparada {
    function sql_query_file ( $tre11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_linhatransportepontoparada {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_linhatransportepontoparada {
     $sql = "select ";
     if ($campos != "*" ) {
       
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
       
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -517,7 +517,7 @@ class cl_linhatransportepontoparada {
     if ($ordem != null ) {
       
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       
       for ($i = 0; $i < sizeof($campos_sql); $i++) {

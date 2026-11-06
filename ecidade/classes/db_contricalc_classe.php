@@ -54,7 +54,7 @@ class cl_contricalc {
                  d09_numpre = int4 = Numpre 
                  ";
    //funcao construtor da classe 
-   function cl_contricalc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contricalc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_contricalc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d09_sequencial = ($this->d09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d09_sequencial"]:$this->d09_sequencial);
-       $this->d09_contri = ($this->d09_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d09_contri"]:$this->d09_contri);
-       $this->d09_matric = ($this->d09_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d09_matric"]:$this->d09_matric);
-       $this->d09_numpre = ($this->d09_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["d09_numpre"]:$this->d09_numpre);
+       $this->d09_sequencial = ($this->d09_sequencial === 0 || $this->d09_sequencial === 0.0 || $this->d09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d09_sequencial"]:$this->d09_sequencial);
+       $this->d09_contri = ($this->d09_contri === 0 || $this->d09_contri === 0.0 || $this->d09_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d09_contri"]:$this->d09_contri);
+       $this->d09_matric = ($this->d09_matric === 0 || $this->d09_matric === 0.0 || $this->d09_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d09_matric"]:$this->d09_matric);
+       $this->d09_numpre = ($this->d09_numpre === 0 || $this->d09_numpre === 0.0 || $this->d09_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["d09_numpre"]:$this->d09_numpre);
      }else{
-       $this->d09_sequencial = ($this->d09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d09_sequencial"]:$this->d09_sequencial);
+       $this->d09_sequencial = ($this->d09_sequencial === 0 || $this->d09_sequencial === 0.0 || $this->d09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d09_sequencial"]:$this->d09_sequencial);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_contricalc {
        return false;
      }
        $this->d09_sequencial = $d09_sequencial; 
-     if(($this->d09_sequencial == null) || ($this->d09_sequencial == "") ){ 
+     if(($this->d09_sequencial == null) || ($this->d09_sequencial === 0 || $this->d09_sequencial === 0.0 || $this->d09_sequencial == "") ){ 
        $this->erro_sql = " Campo d09_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -441,7 +441,7 @@ class cl_contricalc {
 
      $this->d09_contri = $d09_contri;
      $this->d09_matric = $d09_matric;
-     if(($this->d09_contri == null) || ($this->d09_contri == "") ){
+     if(($this->d09_contri == null) || ($this->d09_contri === 0 || $this->d09_contri === 0.0 || $this->d09_contri == "") ){
        $this->erro_sql = " Campo d09_contri nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -450,7 +450,7 @@ class cl_contricalc {
        return false;
      }
 
-     if(($this->d09_matric == null) || ($this->d09_matric == "") ){
+     if(($this->d09_matric == null) || ($this->d09_matric === 0 || $this->d09_matric === 0.0 || $this->d09_matric == "") ){
        $this->erro_sql = " Campo d09_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -501,7 +501,7 @@ class cl_contricalc {
    function sql_query ( $d09_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_contricalc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_contricalc {
    function sql_query_file ( $d09_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -560,7 +560,7 @@ class cl_contricalc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

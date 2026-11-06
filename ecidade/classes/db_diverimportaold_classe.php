@@ -56,7 +56,7 @@ class cl_diverimportaold {
                  dv13_receita = int4 = Receita 
                  ";
    //funcao construtor da classe 
-   function cl_diverimportaold() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diverimportaold"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_diverimportaold {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->dv13_sequencial = ($this->dv13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_sequencial"]:$this->dv13_sequencial);
-       $this->dv13_diversos = ($this->dv13_diversos == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_diversos"]:$this->dv13_diversos);
-       $this->dv13_numpre = ($this->dv13_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_numpre"]:$this->dv13_numpre);
-       $this->dv13_numpar = ($this->dv13_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_numpar"]:$this->dv13_numpar);
-       $this->dv13_receita = ($this->dv13_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_receita"]:$this->dv13_receita);
+       $this->dv13_sequencial = ($this->dv13_sequencial === 0 || $this->dv13_sequencial === 0.0 || $this->dv13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_sequencial"]:$this->dv13_sequencial);
+       $this->dv13_diversos = ($this->dv13_diversos === 0 || $this->dv13_diversos === 0.0 || $this->dv13_diversos == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_diversos"]:$this->dv13_diversos);
+       $this->dv13_numpre = ($this->dv13_numpre === 0 || $this->dv13_numpre === 0.0 || $this->dv13_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_numpre"]:$this->dv13_numpre);
+       $this->dv13_numpar = ($this->dv13_numpar === 0 || $this->dv13_numpar === 0.0 || $this->dv13_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_numpar"]:$this->dv13_numpar);
+       $this->dv13_receita = ($this->dv13_receita === 0 || $this->dv13_receita === 0.0 || $this->dv13_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_receita"]:$this->dv13_receita);
      }else{
-       $this->dv13_sequencial = ($this->dv13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_sequencial"]:$this->dv13_sequencial);
+       $this->dv13_sequencial = ($this->dv13_sequencial === 0 || $this->dv13_sequencial === 0.0 || $this->dv13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_sequencial"]:$this->dv13_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_diverimportaold {
          $this->dv13_sequencial = $dv13_sequencial; 
        }
      }
-     if(($this->dv13_sequencial == null) || ($this->dv13_sequencial == "") ){ 
+     if(($this->dv13_sequencial == null) || ($this->dv13_sequencial === 0 || $this->dv13_sequencial === 0.0 || $this->dv13_sequencial == "") ){ 
        $this->erro_sql = " Campo dv13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_diverimportaold {
    function sql_query ( $dv13_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_diverimportaold {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -463,7 +463,7 @@ class cl_diverimportaold {
    function sql_query_file ( $dv13_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_diverimportaold {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

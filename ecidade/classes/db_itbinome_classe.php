@@ -78,7 +78,7 @@ class cl_itbinome {
                  it03_mail = varchar(50) = e-mail
                  ";
    //funcao construtor da classe
-   public function cl_itbinome() {
+   public function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbinome");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -95,15 +95,15 @@ class cl_itbinome {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it03_seq = ($this->it03_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_seq"]:$this->it03_seq);
-       $this->it03_guia = ($this->it03_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_guia"]:$this->it03_guia);
+       $this->it03_seq = (($this->it03_seq === 0 || $this->it03_seq === 0.0 || $this->it03_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["it03_seq"]:$this->it03_seq);
+       $this->it03_guia = (($this->it03_guia === 0 || $this->it03_guia === 0.0 || $this->it03_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it03_guia"]:$this->it03_guia);
        $this->it03_tipo = ($this->it03_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_tipo"]:$this->it03_tipo);
        $this->it03_princ = ($this->it03_princ == "f"?(!empty(@$GLOBALS["HTTP_POST_VARS"]["it03_princ"]) ? @$GLOBALS["HTTP_POST_VARS"]["it03_princ"] : $this->it03_princ):$this->it03_princ);
        $this->it03_nome = ($this->it03_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_nome"]:$this->it03_nome);
        $this->it03_sexo = ($this->it03_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_sexo"]:$this->it03_sexo);
        $this->it03_cpfcnpj = ($this->it03_cpfcnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_cpfcnpj"]:$this->it03_cpfcnpj);
        $this->it03_endereco = ($this->it03_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_endereco"]:$this->it03_endereco);
-       $this->it03_numero = ($this->it03_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_numero"]:$this->it03_numero);
+       $this->it03_numero = (($this->it03_numero === 0 || $this->it03_numero === 0.0 || $this->it03_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["it03_numero"]:$this->it03_numero);
        $this->it03_compl = ($this->it03_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_compl"]:$this->it03_compl);
        $this->it03_cxpostal = ($this->it03_cxpostal == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_cxpostal"]:$this->it03_cxpostal);
        $this->it03_bairro = ($this->it03_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_bairro"]:$this->it03_bairro);
@@ -112,7 +112,7 @@ class cl_itbinome {
        $this->it03_cep = ($this->it03_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_cep"]:$this->it03_cep);
        $this->it03_mail = ($this->it03_mail == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_mail"]:$this->it03_mail);
      }else{
-       $this->it03_seq = ($this->it03_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["it03_seq"]:$this->it03_seq);
+       $this->it03_seq = (($this->it03_seq === 0 || $this->it03_seq === 0.0 || $this->it03_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["it03_seq"]:$this->it03_seq);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_itbinome {
          $this->it03_seq = $it03_seq;
        }
      }
-     if(($this->it03_seq == null) || ($this->it03_seq == "") ){
+     if(($this->it03_seq == null) || (($this->it03_seq === 0 || $this->it03_seq === 0.0 || $this->it03_seq == "")) ){
        $this->erro_sql = " Campo it03_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -185,14 +185,14 @@ class cl_db_config
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->codigo = ($this->codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["codigo"]:$this->codigo);
+       $this->codigo = (($this->codigo === 0 || $this->codigo === 0.0 || $this->codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["codigo"]:$this->codigo);
        $this->nomeinst = ($this->nomeinst == ""?@$GLOBALS["HTTP_POST_VARS"]["nomeinst"]:$this->nomeinst);
        $this->ender = ($this->ender == ""?@$GLOBALS["HTTP_POST_VARS"]["ender"]:$this->ender);
        $this->munic = ($this->munic == ""?@$GLOBALS["HTTP_POST_VARS"]["munic"]:$this->munic);
        $this->uf = ($this->uf == ""?@$GLOBALS["HTTP_POST_VARS"]["uf"]:$this->uf);
        $this->telef = ($this->telef == ""?@$GLOBALS["HTTP_POST_VARS"]["telef"]:$this->telef);
-       $this->ident = ($this->ident == ""?@$GLOBALS["HTTP_POST_VARS"]["ident"]:$this->ident);
-       $this->tx_banc = ($this->tx_banc == ""?@$GLOBALS["HTTP_POST_VARS"]["tx_banc"]:$this->tx_banc);
+       $this->ident = (($this->ident === 0 || $this->ident === 0.0 || $this->ident == "")?@$GLOBALS["HTTP_POST_VARS"]["ident"]:$this->ident);
+       $this->tx_banc = (($this->tx_banc === 0 || $this->tx_banc === 0.0 || $this->tx_banc == "")?@$GLOBALS["HTTP_POST_VARS"]["tx_banc"]:$this->tx_banc);
        $this->numbanco = ($this->numbanco == ""?@$GLOBALS["HTTP_POST_VARS"]["numbanco"]:$this->numbanco);
        $this->url = ($this->url == ""?@$GLOBALS["HTTP_POST_VARS"]["url"]:$this->url);
        $this->logo = ($this->logo == ""?@$GLOBALS["HTTP_POST_VARS"]["logo"]:$this->logo);
@@ -205,7 +205,7 @@ class cl_db_config
             $this->dtcont = $this->dtcont_ano."-".$this->dtcont_mes."-".$this->dtcont_dia;
          }
        }
-       $this->diario = ($this->diario == ""?@$GLOBALS["HTTP_POST_VARS"]["diario"]:$this->diario);
+       $this->diario = (($this->diario === 0 || $this->diario === 0.0 || $this->diario == "")?@$GLOBALS["HTTP_POST_VARS"]["diario"]:$this->diario);
        $this->pref = ($this->pref == ""?@$GLOBALS["HTTP_POST_VARS"]["pref"]:$this->pref);
        $this->vicepref = ($this->vicepref == ""?@$GLOBALS["HTTP_POST_VARS"]["vicepref"]:$this->vicepref);
        $this->fax = ($this->fax == ""?@$GLOBALS["HTTP_POST_VARS"]["fax"]:$this->fax);
@@ -215,21 +215,21 @@ class cl_db_config
        $this->tsocios = ($this->tsocios == "f"?@$GLOBALS["HTTP_POST_VARS"]["tsocios"]:$this->tsocios);
        $this->prefeitura = ($this->prefeitura == "f"?@$GLOBALS["HTTP_POST_VARS"]["prefeitura"]:$this->prefeitura);
        $this->bairro = ($this->bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["bairro"]:$this->bairro);
-       $this->numcgm = ($this->numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["numcgm"]:$this->numcgm);
+       $this->numcgm = (($this->numcgm === 0 || $this->numcgm === 0.0 || $this->numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["numcgm"]:$this->numcgm);
        $this->codtrib = ($this->codtrib == ""?@$GLOBALS["HTTP_POST_VARS"]["codtrib"]:$this->codtrib);
-       $this->tribinst = ($this->tribinst == ""?@$GLOBALS["HTTP_POST_VARS"]["tribinst"]:$this->tribinst);
-       $this->segmento = ($this->segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["segmento"]:$this->segmento);
-       $this->formvencfebraban = ($this->formvencfebraban == ""?@$GLOBALS["HTTP_POST_VARS"]["formvencfebraban"]:$this->formvencfebraban);
-       $this->numero = ($this->numero == ""?@$GLOBALS["HTTP_POST_VARS"]["numero"]:$this->numero);
+       $this->tribinst = (($this->tribinst === 0 || $this->tribinst === 0.0 || $this->tribinst == "")?@$GLOBALS["HTTP_POST_VARS"]["tribinst"]:$this->tribinst);
+       $this->segmento = (($this->segmento === 0 || $this->segmento === 0.0 || $this->segmento == "")?@$GLOBALS["HTTP_POST_VARS"]["segmento"]:$this->segmento);
+       $this->formvencfebraban = (($this->formvencfebraban === 0 || $this->formvencfebraban === 0.0 || $this->formvencfebraban == "")?@$GLOBALS["HTTP_POST_VARS"]["formvencfebraban"]:$this->formvencfebraban);
+       $this->numero = (($this->numero === 0 || $this->numero === 0.0 || $this->numero == "")?@$GLOBALS["HTTP_POST_VARS"]["numero"]:$this->numero);
        $this->nomedebconta = ($this->nomedebconta == ""?@$GLOBALS["HTTP_POST_VARS"]["nomedebconta"]:$this->nomedebconta);
-       $this->db21_tipoinstit = ($this->db21_tipoinstit == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_tipoinstit"]:$this->db21_tipoinstit);
-       $this->db21_ativo = ($this->db21_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_ativo"]:$this->db21_ativo);
-       $this->db21_regracgmiss = ($this->db21_regracgmiss == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_regracgmiss"]:$this->db21_regracgmiss);
-       $this->db21_regracgmiptu = ($this->db21_regracgmiptu == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_regracgmiptu"]:$this->db21_regracgmiptu);
-       $this->db21_codcli = ($this->db21_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_codcli"]:$this->db21_codcli);
+       $this->db21_tipoinstit = (($this->db21_tipoinstit === 0 || $this->db21_tipoinstit === 0.0 || $this->db21_tipoinstit == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_tipoinstit"]:$this->db21_tipoinstit);
+       $this->db21_ativo = (($this->db21_ativo === 0 || $this->db21_ativo === 0.0 || $this->db21_ativo == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_ativo"]:$this->db21_ativo);
+       $this->db21_regracgmiss = (($this->db21_regracgmiss === 0 || $this->db21_regracgmiss === 0.0 || $this->db21_regracgmiss == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_regracgmiss"]:$this->db21_regracgmiss);
+       $this->db21_regracgmiptu = (($this->db21_regracgmiptu === 0 || $this->db21_regracgmiptu === 0.0 || $this->db21_regracgmiptu == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_regracgmiptu"]:$this->db21_regracgmiptu);
+       $this->db21_codcli = (($this->db21_codcli === 0 || $this->db21_codcli === 0.0 || $this->db21_codcli == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_codcli"]:$this->db21_codcli);
        $this->nomeinstabrev = ($this->nomeinstabrev == ""?@$GLOBALS["HTTP_POST_VARS"]["nomeinstabrev"]:$this->nomeinstabrev);
        $this->db21_usasisagua = ($this->db21_usasisagua == "f"?@$GLOBALS["HTTP_POST_VARS"]["db21_usasisagua"]:$this->db21_usasisagua);
-       $this->db21_codigomunicipoestado = ($this->db21_codigomunicipoestado == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_codigomunicipoestado"]:$this->db21_codigomunicipoestado);
+       $this->db21_codigomunicipoestado = (($this->db21_codigomunicipoestado === 0 || $this->db21_codigomunicipoestado === 0.0 || $this->db21_codigomunicipoestado == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_codigomunicipoestado"]:$this->db21_codigomunicipoestado);
        if($this->db21_datalimite == ""){
          $this->db21_datalimite_dia = ($this->db21_datalimite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_datalimite_dia"]:$this->db21_datalimite_dia);
          $this->db21_datalimite_mes = ($this->db21_datalimite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_datalimite_mes"]:$this->db21_datalimite_mes);
@@ -248,22 +248,22 @@ class cl_db_config
        }
        $this->db21_compl = ($this->db21_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_compl"]:$this->db21_compl);
        $this->email = ($this->email == ""?@$GLOBALS["HTTP_POST_VARS"]["email"]:$this->email);
-       $this->db21_imgmarcadagua = ($this->db21_imgmarcadagua == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_imgmarcadagua"]:$this->db21_imgmarcadagua);
-       $this->db21_esfera = ($this->db21_esfera == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_esfera"]:$this->db21_esfera);
-       $this->db21_tipopoder = ($this->db21_tipopoder == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_tipopoder"]:$this->db21_tipopoder);
-       $this->db21_codtj = ($this->db21_codtj == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_codtj"]:$this->db21_codtj);
+       $this->db21_imgmarcadagua = (($this->db21_imgmarcadagua === 0 || $this->db21_imgmarcadagua === 0.0 || $this->db21_imgmarcadagua == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_imgmarcadagua"]:$this->db21_imgmarcadagua);
+       $this->db21_esfera = (($this->db21_esfera === 0 || $this->db21_esfera === 0.0 || $this->db21_esfera == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_esfera"]:$this->db21_esfera);
+       $this->db21_tipopoder = (($this->db21_tipopoder === 0 || $this->db21_tipopoder === 0.0 || $this->db21_tipopoder == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_tipopoder"]:$this->db21_tipopoder);
+       $this->db21_codtj = (($this->db21_codtj === 0 || $this->db21_codtj === 0.0 || $this->db21_codtj == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_codtj"]:$this->db21_codtj);
        $this->db21_codsiconfi = ($this->db21_codsiconfi == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_codsiconfi"]:$this->db21_codsiconfi);
        $this->db21_unidade_gestora_rpps = ($this->db21_unidade_gestora_rpps == "f"?@$GLOBALS["HTTP_POST_VARS"]["db21_unidade_gestora_rpps"]:$this->db21_unidade_gestora_rpps);
-       $this->db21_esfera_op = ($this->db21_esfera_op == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_esfera_op"]:$this->db21_esfera_op);
-       $this->db21_valor_teto_remuneratorio = ($this->db21_valor_teto_remuneratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_valor_teto_remuneratorio"]:$this->db21_valor_teto_remuneratorio);
+       $this->db21_esfera_op = (($this->db21_esfera_op === 0 || $this->db21_esfera_op === 0.0 || $this->db21_esfera_op == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_esfera_op"]:$this->db21_esfera_op);
+       $this->db21_valor_teto_remuneratorio = (($this->db21_valor_teto_remuneratorio === 0 || $this->db21_valor_teto_remuneratorio === 0.0 || $this->db21_valor_teto_remuneratorio == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_valor_teto_remuneratorio"]:$this->db21_valor_teto_remuneratorio);
        $this->db21_ente_federativo_resp = ($this->db21_ente_federativo_resp == "f"?@$GLOBALS["HTTP_POST_VARS"]["db21_ente_federativo_resp"]:$this->db21_ente_federativo_resp);
        $this->db21_cnpj_efr = ($this->db21_cnpj_efr == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_cnpj_efr"]:$this->db21_cnpj_efr);
        $this->db21_efr_previdencia_compl = ($this->db21_efr_previdencia_compl == "f"?@$GLOBALS["HTTP_POST_VARS"]["db21_efr_previdencia_compl"]:$this->db21_efr_previdencia_compl);
        $this->db21_possui_rpps = ($this->db21_possui_rpps == "f"?@$GLOBALS["HTTP_POST_VARS"]["db21_possui_rpps"]:$this->db21_possui_rpps);
-       $this->db21_departamento = ($this->db21_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_departamento"]:$this->db21_departamento);
+       $this->db21_departamento = (($this->db21_departamento === 0 || $this->db21_departamento === 0.0 || $this->db21_departamento == "")?@$GLOBALS["HTTP_POST_VARS"]["db21_departamento"]:$this->db21_departamento);
        $this->db21_descr_depart_abrev = ($this->db21_descr_depart_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["db21_descr_depart_abrev"]:$this->db21_descr_depart_abrev);
      }else{
-       $this->codigo = ($this->codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["codigo"]:$this->codigo);
+       $this->codigo = (($this->codigo === 0 || $this->codigo === 0.0 || $this->codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["codigo"]:$this->codigo);
      }
    }
 
@@ -637,7 +637,7 @@ class cl_db_config
          $this->codigo = $codigo;
        }
      }
-     if(($this->codigo == null) || ($this->codigo == "") ){
+     if(($this->codigo == null) || (($this->codigo === 0 || $this->codigo === 0.0 || $this->codigo == "")) ){
        $this->erro_sql = " Campo codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -752,8 +752,8 @@ class cl_db_config
                                ,$this->db21_codtj
                                ,'$this->db21_codsiconfi'
                                ,'$this->db21_unidade_gestora_rpps'
-                               ,".($this->db21_esfera_op == "null" || $this->db21_esfera_op == ""?"null":"'".$this->db21_esfera_op."'")."
-                               ,".($this->db21_valor_teto_remuneratorio == "null" || $this->db21_valor_teto_remuneratorio == ""?"null":$this->db21_valor_teto_remuneratorio)."
+                               ,".($this->db21_esfera_op == "null" || ($this->db21_esfera_op === 0 || $this->db21_esfera_op === 0.0 || $this->db21_esfera_op == "")?"null":"'".$this->db21_esfera_op."'")."
+                               ,".($this->db21_valor_teto_remuneratorio == "null" || ($this->db21_valor_teto_remuneratorio === 0 || $this->db21_valor_teto_remuneratorio === 0.0 || $this->db21_valor_teto_remuneratorio == "")?"null":$this->db21_valor_teto_remuneratorio)."
                                ,'$this->db21_ente_federativo_resp'
                                ,".($this->db21_cnpj_efr == "null" || $this->db21_cnpj_efr == ""?"null":"'".$this->db21_cnpj_efr."'")."
                                ,'$this->db21_efr_previdencia_compl'

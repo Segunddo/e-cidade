@@ -109,13 +109,13 @@ if (isset($lancar)) {
   }
   
   $data				= date("Y-m-d",db_getsession("DB_datausu"));
-  $matriz01	  = split('#',$chaves);  
+  $matriz01	  = explode('#',$chaves);  
   
   $jateminscr = "";
   
 	for ($q = 0; $q < count($matriz01); $q++ ) {
     
-		$arr_dad = split('-',$matriz01[$q]);  
+		$arr_dad = explode('-',$matriz01[$q]);  
     
 		$numpre     = $arr_dad[0];
     $numpar     = $arr_dad[1];
@@ -225,7 +225,7 @@ if (isset($lancar)) {
       $cldivida->v01_livro      =  "";
       $cldivida->v01_folha      =  "";
       $cldivida->v01_dtvenc     =  $k00_dtvenc;
-      // $arr    = split("-", $k00_dtvenc);
+      // $arr    = explode("-", $k00_dtvenc);
       // $dtoper = "{$arr[0]}-{$arr[1]}-01";
       $cldivida->v01_dtoper  = $k00_dtoper;
       $cldivida->v01_valor   = $k00_valor;

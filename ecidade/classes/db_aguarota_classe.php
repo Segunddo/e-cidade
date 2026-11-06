@@ -50,7 +50,7 @@ class cl_aguarota {
                  x06_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_aguarota() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguarota"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_aguarota {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x06_codrota = ($this->x06_codrota == ""?@$GLOBALS["HTTP_POST_VARS"]["x06_codrota"]:$this->x06_codrota);
+       $this->x06_codrota = (($this->x06_codrota === 0 || $this->x06_codrota === 0.0 || ($this->x06_codrota === 0 || $this->x06_codrota === 0.0 || $this->x06_codrota == ""))?@$GLOBALS["HTTP_POST_VARS"]["x06_codrota"]:$this->x06_codrota);
        $this->x06_descr = ($this->x06_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["x06_descr"]:$this->x06_descr);
      }else{
-       $this->x06_codrota = ($this->x06_codrota == ""?@$GLOBALS["HTTP_POST_VARS"]["x06_codrota"]:$this->x06_codrota);
+       $this->x06_codrota = (($this->x06_codrota === 0 || $this->x06_codrota === 0.0 || ($this->x06_codrota === 0 || $this->x06_codrota === 0.0 || $this->x06_codrota == ""))?@$GLOBALS["HTTP_POST_VARS"]["x06_codrota"]:$this->x06_codrota);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_aguarota {
          $this->x06_codrota = $x06_codrota; 
        }
      }
-     if(($this->x06_codrota == null) || ($this->x06_codrota == "") ){ 
+     if(($this->x06_codrota == null) || (($this->x06_codrota === 0 || $this->x06_codrota === 0.0 || ($this->x06_codrota === 0 || $this->x06_codrota === 0.0 || $this->x06_codrota == ""))) ){ 
        $this->erro_sql = " Campo x06_codrota nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_aguarota {
    function sql_query ( $x06_codrota=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_aguarota {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_aguarota {
    function sql_query_file ( $x06_codrota=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_aguarota {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

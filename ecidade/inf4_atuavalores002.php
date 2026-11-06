@@ -33,7 +33,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_infcab_classe.php"));
 include(modification("classes/db_infcor_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS,2);
 
 $clinfcab = new cl_infcab;
@@ -64,7 +65,7 @@ if ( isset($i03_descr) && $i03_descr != "" ) {
 
      $i04_dados = "i04_dados$i";
 
-     $matriz = split("#",$$i04_dados);
+     $matriz = preg_split("#\\##m",${$i04_dados});
 
      $clinfcor->i04_codigo   = $clinfcab->i03_codigo;
      $clinfcor->i04_seq	     = $i;

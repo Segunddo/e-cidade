@@ -65,7 +65,7 @@ class cl_retiradas {
                  cm08_t_obs = text = Observações
                  ";
    //funcao construtor da classe
-   function cl_retiradas() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("retiradas");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,9 +82,9 @@ class cl_retiradas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm08_i_codigo = ($this->cm08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm08_i_codigo"]:$this->cm08_i_codigo);
-       $this->cm08_i_sepultamento = ($this->cm08_i_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm08_i_sepultamento"]:$this->cm08_i_sepultamento);
-       $this->cm08_i_retirante = ($this->cm08_i_retirante == ""?@$GLOBALS["HTTP_POST_VARS"]["cm08_i_retirante"]:$this->cm08_i_retirante);
+       $this->cm08_i_codigo = (($this->cm08_i_codigo === 0 || $this->cm08_i_codigo === 0.0 || $this->cm08_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm08_i_codigo"]:$this->cm08_i_codigo);
+       $this->cm08_i_sepultamento = (($this->cm08_i_sepultamento === 0 || $this->cm08_i_sepultamento === 0.0 || $this->cm08_i_sepultamento == "")?@$GLOBALS["HTTP_POST_VARS"]["cm08_i_sepultamento"]:$this->cm08_i_sepultamento);
+       $this->cm08_i_retirante = (($this->cm08_i_retirante === 0 || $this->cm08_i_retirante === 0.0 || $this->cm08_i_retirante == "")?@$GLOBALS["HTTP_POST_VARS"]["cm08_i_retirante"]:$this->cm08_i_retirante);
        $this->cm08_c_parentesco = ($this->cm08_c_parentesco == ""?@$GLOBALS["HTTP_POST_VARS"]["cm08_c_parentesco"]:$this->cm08_c_parentesco);
        $this->cm08_c_causa = ($this->cm08_c_causa == ""?@$GLOBALS["HTTP_POST_VARS"]["cm08_c_causa"]:$this->cm08_c_causa);
        $this->cm08_c_destino = ($this->cm08_c_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["cm08_c_destino"]:$this->cm08_c_destino);
@@ -98,7 +98,7 @@ class cl_retiradas {
        }
        $this->cm08_t_obs = ($this->cm08_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["cm08_t_obs"]:$this->cm08_t_obs);
      }else{
-       $this->cm08_i_codigo = ($this->cm08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm08_i_codigo"]:$this->cm08_i_codigo);
+       $this->cm08_i_codigo = (($this->cm08_i_codigo === 0 || $this->cm08_i_codigo === 0.0 || $this->cm08_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm08_i_codigo"]:$this->cm08_i_codigo);
      }
    }
    // funcao para inclusao
@@ -182,7 +182,7 @@ class cl_retiradas {
          $this->cm08_i_codigo = $cm08_i_codigo;
        }
      }
-     if(($this->cm08_i_codigo == null) || ($this->cm08_i_codigo == "") ){
+     if(($this->cm08_i_codigo == null) || (($this->cm08_i_codigo === 0 || $this->cm08_i_codigo === 0.0 || $this->cm08_i_codigo == "")) ){
        $this->erro_sql = " Campo cm08_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -520,7 +520,7 @@ class cl_retiradas {
    function sql_query ( $cm08_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -550,7 +550,7 @@ class cl_retiradas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -562,7 +562,7 @@ class cl_retiradas {
    function sql_query_file ( $cm08_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -583,7 +583,7 @@ class cl_retiradas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

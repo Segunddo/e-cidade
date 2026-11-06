@@ -32,7 +32,8 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_isstipoalvara_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $clisstipoalvara = new cl_isstipoalvara;
 $clisstipoalvara->rotulo->label("q98_sequencial");
 $clisstipoalvara->rotulo->label("q98_descricao");
@@ -141,9 +142,9 @@ $clisstipoalvara->rotulo->label("q98_descricao");
 
         }
 
-        $repassa = array();
+        $repassa = [];
         if(isset($chave_q98_descricao)){
-          $repassa = array("chave_q98_sequencial"=>$chave_q98_sequencial,"chave_q98_descricao"=>$chave_q98_descricao);
+          $repassa = ["chave_q98_sequencial"=>$chave_q98_sequencial,"chave_q98_descricao"=>$chave_q98_descricao];
         }
 
         //echo $sql;

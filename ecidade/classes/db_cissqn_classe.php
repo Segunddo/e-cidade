@@ -65,7 +65,7 @@ class cl_cissqn {
                  q04_perccorrepadrao = float4 = Percentual Correção Padrão 
                  ";
    //funcao construtor da classe 
-   function cl_cissqn() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cissqn"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,9 +82,9 @@ class cl_cissqn {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q04_anousu = ($this->q04_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q04_anousu"]:$this->q04_anousu);
+       $this->q04_anousu = (($this->q04_anousu === 0 || $this->q04_anousu === 0.0 || $this->q04_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["q04_anousu"]:$this->q04_anousu);
        $this->q04_inflat = ($this->q04_inflat == ""?@$GLOBALS["HTTP_POST_VARS"]["q04_inflat"]:$this->q04_inflat);
-       $this->q04_vbase = ($this->q04_vbase == ""?@$GLOBALS["HTTP_POST_VARS"]["q04_vbase"]:$this->q04_vbase);
+       $this->q04_vbase = (($this->q04_vbase === 0 || $this->q04_vbase === 0.0 || $this->q04_vbase == "")?@$GLOBALS["HTTP_POST_VARS"]["q04_vbase"]:$this->q04_vbase);
        if($this->q04_dtbase == ""){
          $this->q04_dtbase_dia = ($this->q04_dtbase_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q04_dtbase_dia"]:$this->q04_dtbase_dia);
          $this->q04_dtbase_mes = ($this->q04_dtbase_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q04_dtbase_mes"]:$this->q04_dtbase_mes);
@@ -93,12 +93,12 @@ class cl_cissqn {
             $this->q04_dtbase = $this->q04_dtbase_ano."-".$this->q04_dtbase_mes."-".$this->q04_dtbase_dia;
          }
        }
-       $this->q04_proced = ($this->q04_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["q04_proced"]:$this->q04_proced);
-       $this->q04_calfixvar = ($this->q04_calfixvar == ""?@$GLOBALS["HTTP_POST_VARS"]["q04_calfixvar"]:$this->q04_calfixvar);
-       $this->q04_diasvcto = ($this->q04_diasvcto == ""?@$GLOBALS["HTTP_POST_VARS"]["q04_diasvcto"]:$this->q04_diasvcto);
-       $this->q04_perccorrepadrao = ($this->q04_perccorrepadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["q04_perccorrepadrao"]:$this->q04_perccorrepadrao);
+       $this->q04_proced = (($this->q04_proced === 0 || $this->q04_proced === 0.0 || $this->q04_proced == "")?@$GLOBALS["HTTP_POST_VARS"]["q04_proced"]:$this->q04_proced);
+       $this->q04_calfixvar = (($this->q04_calfixvar === 0 || $this->q04_calfixvar === 0.0 || $this->q04_calfixvar == "")?@$GLOBALS["HTTP_POST_VARS"]["q04_calfixvar"]:$this->q04_calfixvar);
+       $this->q04_diasvcto = (($this->q04_diasvcto === 0 || $this->q04_diasvcto === 0.0 || $this->q04_diasvcto == "")?@$GLOBALS["HTTP_POST_VARS"]["q04_diasvcto"]:$this->q04_diasvcto);
+       $this->q04_perccorrepadrao = (($this->q04_perccorrepadrao === 0 || $this->q04_perccorrepadrao === 0.0 || $this->q04_perccorrepadrao == "")?@$GLOBALS["HTTP_POST_VARS"]["q04_perccorrepadrao"]:$this->q04_perccorrepadrao);
      }else{
-       $this->q04_anousu = ($this->q04_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q04_anousu"]:$this->q04_anousu);
+       $this->q04_anousu = (($this->q04_anousu === 0 || $this->q04_anousu === 0.0 || $this->q04_anousu == "")?@$GLOBALS["HTTP_POST_VARS"]["q04_anousu"]:$this->q04_anousu);
      }
    }
    // funcao para inclusao
@@ -168,7 +168,7 @@ class cl_cissqn {
        return false;
      }
        $this->q04_anousu = $q04_anousu; 
-     if(($this->q04_anousu == null) || ($this->q04_anousu == "") ){ 
+     if(($this->q04_anousu == null) || (($this->q04_anousu === 0 || $this->q04_anousu === 0.0 || $this->q04_anousu == "")) ){ 
        $this->erro_sql = " Campo q04_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

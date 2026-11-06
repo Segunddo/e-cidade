@@ -74,7 +74,7 @@ if ((isset($q41_codporte) && $q41_codporte!="") && (isset($q41_codclasse) && $q4
   for($i=0; $i<$ta; $i++){
     $chave=key($vt);
     if(substr($chave,0,5)=="CHECK"){
-      $dados=split("_",$chave); 
+      $dados=preg_split("#_#m",$chave); 
       $clissportetipo->q41_codporte = $q41_codporte; 
       $clissportetipo->q41_codclasse= $q41_codclasse; 
       $clissportetipo->q41_codtipcalc = $dados[1]; 

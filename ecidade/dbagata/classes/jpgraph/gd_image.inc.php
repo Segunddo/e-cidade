@@ -15,7 +15,7 @@
 class RGB {
     var $rgb_table;
     var $img;
-    function RGB(&$aImg) {
+    function __construct(&$aImg) {
 	$this->img = &$aImg;
 		
 	// Conversion array between color names and RGB
@@ -595,7 +595,7 @@ class Image {
 
     //---------------
     // CONSTRUCTOR
-    function Image($aWidth,$aHeight,$aFormat=DEFAULT_GFORMAT,$aSetAutoMargin=true) {
+    function __construct($aWidth,$aHeight,$aFormat=DEFAULT_GFORMAT,$aSetAutoMargin=true) {
 	$this->CreateImgCanvas($aWidth,$aHeight);
 	if( $aSetAutoMargin ) 
 	    $this->SetAutoMargin();		
@@ -780,7 +780,7 @@ class Image {
 
     // Get the specific height for a text string
     function GetTextHeight($txt="",$angle=0) {
-	$tmp = split("\n",$txt);
+	$tmp = explode("\n",$txt);
 	$n = count($tmp);
 	$m=0;
 	for($i=0; $i< $n; ++$i)
@@ -825,7 +825,7 @@ class Image {
     // Get actual width of text in absolute pixels
     function GetTextWidth($txt,$angle=0) {
 
-	$tmp = split("\n",$txt);
+	$tmp = explode("\n",$txt);
 	$n = count($tmp);
 	if( $this->font_family <= FF_FONT2+1 ) {
 
@@ -981,8 +981,8 @@ class Image {
 	    }
 	}
 	else {
-	    if( ereg("\n",$txt) ) { 
-		$tmp = split("\n",$txt);
+	    if( preg_match("#\n#",$txt) ) { 
+		$tmp = explode("\n",$txt);
 		for($i=0; $i < count($tmp); ++$i) {
 		    $w1 = $this->GetTextWidth($tmp[$i]);
 		    if( $paragraph_align=="left" ) {
@@ -1113,7 +1113,7 @@ class Image {
 	    $oy=$y;
 	}
 
-	if( !ereg("\n",$txt) || ($dir>0 && ereg("\n",$txt)) ) {
+	if( !preg_match("#\n#",$txt) || ($dir>0 && preg_match("#\n#",$txt)) ) {
 	    // Format a single line
 
 	    $txt = $this->AddTxtCR($txt);
@@ -1189,7 +1189,7 @@ class Image {
 	    $w=$this->GetTextWidth($txt);
 
 	    $y -= $linemargin/2;
-	    $tmp = split("\n",$txt);
+	    $tmp = explode("\n",$txt);
 	    $nl = count($tmp);
 	    $h = $nl * $fh;
 
@@ -2012,8 +2012,8 @@ class RotImage extends Image {
     var $a=0;
     var $dx=0,$dy=0,$transx=0,$transy=0; 
 	
-    function RotImage($aWidth,$aHeight,$a=0,$aFormat=DEFAULT_GFORMAT,$aSetAutoMargin=true) {
-	$this->Image($aWidth,$aHeight,$aFormat,$aSetAutoMargin);
+    function __construct($aWidth,$aHeight,$a=0,$aFormat=DEFAULT_GFORMAT,$aSetAutoMargin=true) {
+	parent::__construct($aWidth,$aHeight,$aFormat,$aSetAutoMargin);
 	$this->dx=$this->left_margin+$this->plotwidth/2;
 	$this->dy=$this->top_margin+$this->plotheight/2;
 	$this->SetAngle($a);	
@@ -2073,7 +2073,7 @@ class RotImage extends Image {
 	parent::Arc($xc,$yc,$w,$h,$s,$e);
     }
 
-    function FilledArc($xc,$yc,$w,$h,$s,$e) {
+    function FilledArc($xc,$yc,$w,$h,$s,$e,$style='') {
 	list($xc,$yc) = $this->Rotate($xc,$yc);
 	$s += $this->a;
 	$e += $this->a;

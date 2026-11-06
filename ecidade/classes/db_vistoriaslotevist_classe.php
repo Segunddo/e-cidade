@@ -54,7 +54,7 @@ class cl_vistoriaslotevist {
                  y05_codmsg = int4 = codigo da mensagem 
                  ";
    //funcao construtor da classe 
-   function cl_vistoriaslotevist() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vistoriaslotevist"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_vistoriaslotevist {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y05_vistoriaslotevist = ($this->y05_vistoriaslotevist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
-       $this->y05_vistoriaslote = ($this->y05_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
-       $this->y05_codvist = ($this->y05_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_codvist"]:$this->y05_codvist);
-       $this->y05_codmsg = ($this->y05_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_codmsg"]:$this->y05_codmsg);
+       $this->y05_vistoriaslotevist = (($this->y05_vistoriaslotevist === 0 || $this->y05_vistoriaslotevist === 0.0 || $this->y05_vistoriaslotevist == "")?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
+       $this->y05_vistoriaslote = (($this->y05_vistoriaslote === 0 || $this->y05_vistoriaslote === 0.0 || $this->y05_vistoriaslote == "")?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
+       $this->y05_codvist = (($this->y05_codvist === 0 || $this->y05_codvist === 0.0 || $this->y05_codvist == "")?@$GLOBALS["HTTP_POST_VARS"]["y05_codvist"]:$this->y05_codvist);
+       $this->y05_codmsg = (($this->y05_codmsg === 0 || $this->y05_codmsg === 0.0 || $this->y05_codmsg == "")?@$GLOBALS["HTTP_POST_VARS"]["y05_codmsg"]:$this->y05_codmsg);
      }else{
-       $this->y05_vistoriaslotevist = ($this->y05_vistoriaslotevist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
-       $this->y05_vistoriaslote = ($this->y05_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
+       $this->y05_vistoriaslotevist = (($this->y05_vistoriaslotevist === 0 || $this->y05_vistoriaslotevist === 0.0 || $this->y05_vistoriaslotevist == "")?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
+       $this->y05_vistoriaslote = (($this->y05_vistoriaslote === 0 || $this->y05_vistoriaslote === 0.0 || $this->y05_vistoriaslote == "")?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_vistoriaslotevist {
          $this->y05_vistoriaslotevist = $y05_vistoriaslotevist; 
        }
      }
-     if(($this->y05_vistoriaslotevist == null) || ($this->y05_vistoriaslotevist == "") ){ 
+     if(($this->y05_vistoriaslotevist == null) || (($this->y05_vistoriaslotevist === 0 || $this->y05_vistoriaslotevist === 0.0 || $this->y05_vistoriaslotevist == "")) ){ 
        $this->erro_sql = " Campo y05_vistoriaslotevist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_vistoriaslotevist {
    function sql_query ( $y05_vistoriaslotevist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -411,7 +411,7 @@ class cl_vistoriaslotevist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_vistoriaslotevist {
    function sql_query_file ( $y05_vistoriaslotevist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_vistoriaslotevist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

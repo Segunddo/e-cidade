@@ -52,7 +52,7 @@ class cl_empanuladoele {
                  e95_valor = float8 = Valor elemento 
                  ";
    //funcao construtor da classe 
-   function cl_empanuladoele() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empanuladoele"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_empanuladoele {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e95_codanu = ($this->e95_codanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codanu"]:$this->e95_codanu);
-       $this->e95_codele = ($this->e95_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codele"]:$this->e95_codele);
-       $this->e95_valor = ($this->e95_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_valor"]:$this->e95_valor);
+       $this->e95_codanu = ($this->e95_codanu === 0 || $this->e95_codanu === 0.0 || $this->e95_codanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codanu"]:$this->e95_codanu);
+       $this->e95_codele = ($this->e95_codele === 0 || $this->e95_codele === 0.0 || $this->e95_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codele"]:$this->e95_codele);
+       $this->e95_valor = ($this->e95_valor === 0 || $this->e95_valor === 0.0 || $this->e95_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_valor"]:$this->e95_valor);
      }else{
-       $this->e95_codanu = ($this->e95_codanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codanu"]:$this->e95_codanu);
+       $this->e95_codanu = ($this->e95_codanu === 0 || $this->e95_codanu === 0.0 || $this->e95_codanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codanu"]:$this->e95_codanu);
      }
    }
    // funcao para inclusao
@@ -89,7 +89,7 @@ class cl_empanuladoele {
        return false;
      }
        $this->e95_codanu = $e95_codanu; 
-     if(($this->e95_codanu == null) || ($this->e95_codanu == "") ){ 
+     if(($this->e95_codanu == null) || ($this->e95_codanu === 0 || $this->e95_codanu === 0.0 || $this->e95_codanu == "") ){ 
        $this->erro_sql = " Campo e95_codanu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -97,7 +97,7 @@ class cl_empanuladoele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e95_codele == null) || ($this->e95_codele == "") ){ 
+     if(($this->e95_codele == null) || ($this->e95_codele === 0 || $this->e95_codele === 0.0 || $this->e95_codele == "") ){ 
        $this->erro_sql = " Campo e95_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -344,7 +344,7 @@ class cl_empanuladoele {
    function sql_query ( $e95_codanu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -367,7 +367,7 @@ class cl_empanuladoele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -379,7 +379,7 @@ class cl_empanuladoele {
    function sql_query_file ( $e95_codanu=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_empanuladoele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

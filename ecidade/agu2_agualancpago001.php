@@ -86,13 +86,13 @@ function js_emite(){
 <?
 $sqlano = "select x22_exerc as anoini from aguacalc order by x22_exerc desc limit 1;";
 $resultano = db_query($sqlano) or die($sqlano);
-db_fieldsmemory($resultano);
+db_fieldsmemory($resultano, 0);
 
 $sqlano = "select x22_exerc as anofim from aguacalc order by x22_exerc limit 1;";
 $resultano = db_query($sqlano) or die($sqlano);
-db_fieldsmemory($resultano);
+db_fieldsmemory($resultano, 0);
 
-for($i=$anoini;$i >= $anofim;$i--){
+for($i=$anoini;(float)$i >= (float)$anofim;$i--){
   echo "<option value=$i>$i</option>\n";
 }
 

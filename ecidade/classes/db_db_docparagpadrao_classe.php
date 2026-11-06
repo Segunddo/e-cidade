@@ -52,7 +52,7 @@ class cl_db_docparagpadrao {
                  db62_ordem = int4 = Ordem do Parágrafo 
                  ";
    //funcao construtor da classe 
-   function cl_db_docparagpadrao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_docparagpadrao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_db_docparagpadrao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db62_coddoc = ($this->db62_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db62_coddoc"]:$this->db62_coddoc);
-       $this->db62_codparag = ($this->db62_codparag == ""?@$GLOBALS["HTTP_POST_VARS"]["db62_codparag"]:$this->db62_codparag);
-       $this->db62_ordem = ($this->db62_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db62_ordem"]:$this->db62_ordem);
+       $this->db62_coddoc = (($this->db62_coddoc === 0 || $this->db62_coddoc === 0.0 || $this->db62_coddoc == "")?@$GLOBALS["HTTP_POST_VARS"]["db62_coddoc"]:$this->db62_coddoc);
+       $this->db62_codparag = (($this->db62_codparag === 0 || $this->db62_codparag === 0.0 || $this->db62_codparag == "")?@$GLOBALS["HTTP_POST_VARS"]["db62_codparag"]:$this->db62_codparag);
+       $this->db62_ordem = (($this->db62_ordem === 0 || $this->db62_ordem === 0.0 || $this->db62_ordem == "")?@$GLOBALS["HTTP_POST_VARS"]["db62_ordem"]:$this->db62_ordem);
      }else{
-       $this->db62_coddoc = ($this->db62_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db62_coddoc"]:$this->db62_coddoc);
-       $this->db62_codparag = ($this->db62_codparag == ""?@$GLOBALS["HTTP_POST_VARS"]["db62_codparag"]:$this->db62_codparag);
+       $this->db62_coddoc = (($this->db62_coddoc === 0 || $this->db62_coddoc === 0.0 || $this->db62_coddoc == "")?@$GLOBALS["HTTP_POST_VARS"]["db62_coddoc"]:$this->db62_coddoc);
+       $this->db62_codparag = (($this->db62_codparag === 0 || $this->db62_codparag === 0.0 || $this->db62_codparag == "")?@$GLOBALS["HTTP_POST_VARS"]["db62_codparag"]:$this->db62_codparag);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_db_docparagpadrao {
      }
        $this->db62_coddoc = $db62_coddoc; 
        $this->db62_codparag = $db62_codparag; 
-     if(($this->db62_coddoc == null) || ($this->db62_coddoc == "") ){ 
+     if(($this->db62_coddoc == null) || (($this->db62_coddoc === 0 || $this->db62_coddoc === 0.0 || $this->db62_coddoc == "")) ){ 
        $this->erro_sql = " Campo db62_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_db_docparagpadrao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->db62_codparag == null) || ($this->db62_codparag == "") ){ 
+     if(($this->db62_codparag == null) || (($this->db62_codparag === 0 || $this->db62_codparag === 0.0 || $this->db62_codparag == "")) ){ 
        $this->erro_sql = " Campo db62_codparag nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

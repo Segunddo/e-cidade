@@ -95,14 +95,14 @@ class cl_db_usuarios
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_usuario = (($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
        $this->nome = ($this->nome == ""?@$GLOBALS["HTTP_POST_VARS"]["nome"]:$this->nome);
        $this->login = ($this->login == ""?@$GLOBALS["HTTP_POST_VARS"]["login"]:$this->login);
        $this->senha = ($this->senha == ""?@$GLOBALS["HTTP_POST_VARS"]["senha"]:$this->senha);
-       $this->usuarioativo = ($this->usuarioativo == ""?@$GLOBALS["HTTP_POST_VARS"]["usuarioativo"]:$this->usuarioativo);
+       $this->usuarioativo = (($this->usuarioativo === 0 || $this->usuarioativo === 0.0 || $this->usuarioativo == "")?@$GLOBALS["HTTP_POST_VARS"]["usuarioativo"]:$this->usuarioativo);
        $this->email = ($this->email == ""?@$GLOBALS["HTTP_POST_VARS"]["email"]:$this->email);
-       $this->usuext = ($this->usuext == ""?@$GLOBALS["HTTP_POST_VARS"]["usuext"]:$this->usuext);
-       $this->administrador = ($this->administrador == ""?@$GLOBALS["HTTP_POST_VARS"]["administrador"]:$this->administrador);
+       $this->usuext = (($this->usuext === 0 || $this->usuext === 0.0 || $this->usuext == "")?@$GLOBALS["HTTP_POST_VARS"]["usuext"]:$this->usuext);
+       $this->administrador = (($this->administrador === 0 || $this->administrador === 0.0 || $this->administrador == "")?@$GLOBALS["HTTP_POST_VARS"]["administrador"]:$this->administrador);
        if($this->datatoken == ""){
          $this->datatoken_dia = ($this->datatoken_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["datatoken_dia"]:$this->datatoken_dia);
          $this->datatoken_mes = ($this->datatoken_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["datatoken_mes"]:$this->datatoken_mes);
@@ -119,9 +119,9 @@ class cl_db_usuarios
             $this->dataexpira = $this->dataexpira_ano."-".$this->dataexpira_mes."-".$this->dataexpira_dia;
          }
        }
-       $this->liberalotacao = ($this->liberalotacao == ""?@$GLOBALS["HTTP_POST_VARS"]["liberalotacao"]:$this->liberalotacao);
+       $this->liberalotacao = (($this->liberalotacao === 0 || $this->liberalotacao === 0.0 || $this->liberalotacao == "")?@$GLOBALS["HTTP_POST_VARS"]["liberalotacao"]:$this->liberalotacao);
      }else{
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_usuario = (($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
      }
    }
 
@@ -215,7 +215,7 @@ class cl_db_usuarios
         $this->id_usuario = $id_usuario;
       }
     }
-    if(($this->id_usuario == null) || ($this->id_usuario == "") ){ 
+    if(($this->id_usuario == null) || (($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "")) ){ 
        $this->erro_sql = " Campo id_usuario não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

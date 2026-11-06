@@ -59,18 +59,18 @@ class cl_clabens
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->t64_codcla = ($this->t64_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_codcla"]:$this->t64_codcla);
+       $this->t64_codcla = ($this->t64_codcla === 0 || $this->t64_codcla === 0.0 || $this->t64_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_codcla"]:$this->t64_codcla);
        $this->t64_class = ($this->t64_class == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_class"]:$this->t64_class);
        $this->t64_descr = ($this->t64_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_descr"]:$this->t64_descr);
        $this->t64_obs = ($this->t64_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_obs"]:$this->t64_obs);
        $this->t64_analitica = ($this->t64_analitica == "f"?@$GLOBALS["HTTP_POST_VARS"]["t64_analitica"]:$this->t64_analitica);
-       $this->t64_bemtipos = ($this->t64_bemtipos == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_bemtipos"]:$this->t64_bemtipos);
-       $this->t64_benstipodepreciacao = ($this->t64_benstipodepreciacao == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_benstipodepreciacao"]:$this->t64_benstipodepreciacao);
-       $this->t64_vidautil = ($this->t64_vidautil == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_vidautil"]:$this->t64_vidautil);
-       $this->t64_instit = ($this->t64_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_instit"]:$this->t64_instit);
-       $this->t64_valorresidual = ($this->t64_valorresidual == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_valorresidual"]:$this->t64_valorresidual);
+       $this->t64_bemtipos = ($this->t64_bemtipos === 0 || $this->t64_bemtipos === 0.0 || $this->t64_bemtipos == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_bemtipos"]:$this->t64_bemtipos);
+       $this->t64_benstipodepreciacao = ($this->t64_benstipodepreciacao === 0 || $this->t64_benstipodepreciacao === 0.0 || $this->t64_benstipodepreciacao == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_benstipodepreciacao"]:$this->t64_benstipodepreciacao);
+       $this->t64_vidautil = ($this->t64_vidautil === 0 || $this->t64_vidautil === 0.0 || $this->t64_vidautil == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_vidautil"]:$this->t64_vidautil);
+       $this->t64_instit = ($this->t64_instit === 0 || $this->t64_instit === 0.0 || $this->t64_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_instit"]:$this->t64_instit);
+       $this->t64_valorresidual = ($this->t64_valorresidual === 0 || $this->t64_valorresidual === 0.0 || $this->t64_valorresidual == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_valorresidual"]:$this->t64_valorresidual);
      }else{
-       $this->t64_codcla = ($this->t64_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_codcla"]:$this->t64_codcla);
+       $this->t64_codcla = ($this->t64_codcla === 0 || $this->t64_codcla === 0.0 || $this->t64_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["t64_codcla"]:$this->t64_codcla);
      }
    }
 
@@ -167,7 +167,7 @@ class cl_clabens
          $this->t64_codcla = $t64_codcla;
        }
      }
-     if(($this->t64_codcla == null) || ($this->t64_codcla == "") ){
+     if(($this->t64_codcla == null) || ($this->t64_codcla === 0 || $this->t64_codcla === 0.0 || $this->t64_codcla == "") ){
        $this->erro_sql = " Campo t64_codcla não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

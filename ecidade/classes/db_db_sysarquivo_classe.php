@@ -70,7 +70,7 @@ class cl_db_sysarquivo {
                  naolibform = bool = Não Lib.. Form
                  ";
    //funcao construtor da classe
-   function cl_db_sysarquivo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysarquivo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,7 +87,7 @@ class cl_db_sysarquivo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
        $this->nomearq = ($this->nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["nomearq"]:$this->nomearq);
        $this->descricao = ($this->descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["descricao"]:$this->descricao);
        $this->sigla = ($this->sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["sigla"]:$this->sigla);
@@ -100,13 +100,13 @@ class cl_db_sysarquivo {
          }
        }
        $this->rotulo = ($this->rotulo == ""?@$GLOBALS["HTTP_POST_VARS"]["rotulo"]:$this->rotulo);
-       $this->tipotabela = ($this->tipotabela == ""?@$GLOBALS["HTTP_POST_VARS"]["tipotabela"]:$this->tipotabela);
+       $this->tipotabela = ($this->tipotabela === 0 || $this->tipotabela === 0.0 || $this->tipotabela == ""?@$GLOBALS["HTTP_POST_VARS"]["tipotabela"]:$this->tipotabela);
        $this->naolibclass = ($this->naolibclass == "f"?@$GLOBALS["HTTP_POST_VARS"]["naolibclass"]:$this->naolibclass);
        $this->naolibfunc = ($this->naolibfunc == "f"?@$GLOBALS["HTTP_POST_VARS"]["naolibfunc"]:$this->naolibfunc);
        $this->naolibprog = ($this->naolibprog == "f"?@$GLOBALS["HTTP_POST_VARS"]["naolibprog"]:$this->naolibprog);
        $this->naolibform = ($this->naolibform == "f"?@$GLOBALS["HTTP_POST_VARS"]["naolibform"]:$this->naolibform);
      }else{
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
      }
    }
    // funcao para inclusao
@@ -217,7 +217,7 @@ class cl_db_sysarquivo {
          $this->codarq = $codarq;
        }
      }
-     if(($this->codarq == null) || ($this->codarq == "") ){
+     if(($this->codarq == null) || ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == "") ){
        $this->erro_sql = " Campo codarq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

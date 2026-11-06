@@ -45,11 +45,11 @@ class cl_empagemovhistorico
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->e141_sequencial = ($this->e141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e141_sequencial"]:$this->e141_sequencial);
-       $this->e141_empagemov = ($this->e141_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e141_empagemov"]:$this->e141_empagemov);
+       $this->e141_sequencial = ($this->e141_sequencial === 0 || $this->e141_sequencial === 0.0 || $this->e141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e141_sequencial"]:$this->e141_sequencial);
+       $this->e141_empagemov = ($this->e141_empagemov === 0 || $this->e141_empagemov === 0.0 || $this->e141_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e141_empagemov"]:$this->e141_empagemov);
        $this->e141_historico = ($this->e141_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["e141_historico"]:$this->e141_historico);
      }else{
-       $this->e141_sequencial = ($this->e141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e141_sequencial"]:$this->e141_sequencial);
+       $this->e141_sequencial = ($this->e141_sequencial === 0 || $this->e141_sequencial === 0.0 || $this->e141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e141_sequencial"]:$this->e141_sequencial);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_empagemovhistorico
          $this->e141_sequencial = $e141_sequencial; 
        }
      }
-     if(($this->e141_sequencial == null) || ($this->e141_sequencial == "") ){ 
+     if(($this->e141_sequencial == null) || ($this->e141_sequencial === 0 || $this->e141_sequencial === 0.0 || $this->e141_sequencial == "") ){ 
        $this->erro_sql = " Campo e141_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

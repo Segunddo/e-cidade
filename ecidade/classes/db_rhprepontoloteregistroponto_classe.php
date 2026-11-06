@@ -26,7 +26,7 @@ class cl_rhprepontoloteregistroponto {
                  rh156_loteregistroponto = int4 = loteregistroponto 
                  ";
    //funcao construtor da classe 
-   function cl_rhprepontoloteregistroponto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhprepontoloteregistroponto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_rhprepontoloteregistroponto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh156_sequencial = ($this->rh156_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh156_sequencial"]:$this->rh156_sequencial);
-       $this->rh156_rhpreponto = ($this->rh156_rhpreponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh156_rhpreponto"]:$this->rh156_rhpreponto);
-       $this->rh156_loteregistroponto = ($this->rh156_loteregistroponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh156_loteregistroponto"]:$this->rh156_loteregistroponto);
+       $this->rh156_sequencial = ($this->rh156_sequencial === 0 || $this->rh156_sequencial === 0.0 || $this->rh156_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh156_sequencial"]:$this->rh156_sequencial);
+       $this->rh156_rhpreponto = ($this->rh156_rhpreponto === 0 || $this->rh156_rhpreponto === 0.0 || $this->rh156_rhpreponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh156_rhpreponto"]:$this->rh156_rhpreponto);
+       $this->rh156_loteregistroponto = ($this->rh156_loteregistroponto === 0 || $this->rh156_loteregistroponto === 0.0 || $this->rh156_loteregistroponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh156_loteregistroponto"]:$this->rh156_loteregistroponto);
      }else{
-       $this->rh156_sequencial = ($this->rh156_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh156_sequencial"]:$this->rh156_sequencial);
+       $this->rh156_sequencial = ($this->rh156_sequencial === 0 || $this->rh156_sequencial === 0.0 || $this->rh156_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh156_sequencial"]:$this->rh156_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_rhprepontoloteregistroponto {
          $this->rh156_sequencial = $rh156_sequencial; 
        }
      }
-     if(($this->rh156_sequencial == null) || ($this->rh156_sequencial == "") ){ 
+     if(($this->rh156_sequencial == null) || ($this->rh156_sequencial === 0 || $this->rh156_sequencial === 0.0 || $this->rh156_sequencial == "") ){ 
        $this->erro_sql = " Campo rh156_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

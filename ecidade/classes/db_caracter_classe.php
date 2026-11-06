@@ -54,7 +54,7 @@ class cl_caracter {
                  j31_pontos = int4 = Pontos 
                  ";
    //funcao construtor da classe
-   function cl_caracter() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("caracter");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_caracter {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j31_codigo = ($this->j31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j31_codigo"]:$this->j31_codigo);
+       $this->j31_codigo = (($this->j31_codigo === 0 || $this->j31_codigo === 0.0 || $this->j31_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["j31_codigo"]:$this->j31_codigo);
        $this->j31_descr = ($this->j31_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j31_descr"]:$this->j31_descr);
-       $this->j31_grupo = ($this->j31_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j31_grupo"]:$this->j31_grupo);
-       $this->j31_pontos = ($this->j31_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["j31_pontos"]:$this->j31_pontos);
+       $this->j31_grupo = (($this->j31_grupo === 0 || $this->j31_grupo === 0.0 || $this->j31_grupo == "")?@$GLOBALS["HTTP_POST_VARS"]["j31_grupo"]:$this->j31_grupo);
+       $this->j31_pontos = (($this->j31_pontos === 0 || $this->j31_pontos === 0.0 || $this->j31_pontos == "")?@$GLOBALS["HTTP_POST_VARS"]["j31_pontos"]:$this->j31_pontos);
      }else{
-       $this->j31_codigo = ($this->j31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j31_codigo"]:$this->j31_codigo);
+       $this->j31_codigo = (($this->j31_codigo === 0 || $this->j31_codigo === 0.0 || $this->j31_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["j31_codigo"]:$this->j31_codigo);
      }
    }
    // funcao para Inclusão
@@ -133,7 +133,7 @@ class cl_caracter {
          $this->j31_codigo = $j31_codigo;
        }
      }
-     if(($this->j31_codigo == null) || ($this->j31_codigo == "") ){ 
+     if(($this->j31_codigo == null) || (($this->j31_codigo === 0 || $this->j31_codigo === 0.0 || $this->j31_codigo == "")) ){ 
        $this->erro_sql = " Campo j31_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

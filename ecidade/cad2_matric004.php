@@ -36,11 +36,12 @@ $cliframe_seleciona = new cl_iframe_seleciona;
 $clface->rotulo->label();
 $clrotulo = new rotulocampo;
 $clrotulo->label("z01_nome");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($j34_setor) && $j34_setor != "") {
 
-  $setor = split(",",$j34_setor);
+  $setor = preg_split("#,#m",$j34_setor);
   $vir = "";
   $set = "";
 	$set2 = "";

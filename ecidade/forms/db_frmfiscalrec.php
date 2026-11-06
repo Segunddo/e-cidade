@@ -32,7 +32,7 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("y30_data");
 $clrotulo->label("k02_descr");
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 
 if(isset($receita) && $receita != "" && isset($valor) && $valor != ""){
   echo "<script>parent.iframe_receitas.location.href = 'fis1_fiscalrec002.php?y42_codnoti=$y42_codnoti&y42_receit=$receita&valor=$valor&y42_descr=$descr&abas=1&db_opcao=Alterar'</script>";

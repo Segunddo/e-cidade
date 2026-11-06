@@ -34,7 +34,7 @@ $clfiscarquivos->rotulo->label();
 $clrotulo = new rotulocampo;
 $clrotulo->label("y30_data");
 $clrotulo->label("db02_descr");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_artigos.location.href='fis1_fiscarquivos002.php?chavepesquisa=$y26_codnoti&chavepesquisa1=$y26_idparag'</script>";

@@ -52,7 +52,7 @@ class cl_procedarretipo {
                  v06_arretipo = int4 = Arretipo 
                  ";
    //funcao construtor da classe 
-   function cl_procedarretipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procedarretipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_procedarretipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v06_sequencial = ($this->v06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_sequencial"]:$this->v06_sequencial);
-       $this->v06_proced = ($this->v06_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_proced"]:$this->v06_proced);
-       $this->v06_arretipo = ($this->v06_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_arretipo"]:$this->v06_arretipo);
+       $this->v06_sequencial = (($this->v06_sequencial === 0 || $this->v06_sequencial === 0.0 || $this->v06_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v06_sequencial"]:$this->v06_sequencial);
+       $this->v06_proced = (($this->v06_proced === 0 || $this->v06_proced === 0.0 || $this->v06_proced == "")?@$GLOBALS["HTTP_POST_VARS"]["v06_proced"]:$this->v06_proced);
+       $this->v06_arretipo = (($this->v06_arretipo === 0 || $this->v06_arretipo === 0.0 || $this->v06_arretipo == "")?@$GLOBALS["HTTP_POST_VARS"]["v06_arretipo"]:$this->v06_arretipo);
      }else{
-       $this->v06_sequencial = ($this->v06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_sequencial"]:$this->v06_sequencial);
+       $this->v06_sequencial = (($this->v06_sequencial === 0 || $this->v06_sequencial === 0.0 || $this->v06_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v06_sequencial"]:$this->v06_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procedarretipo {
          $this->v06_sequencial = $v06_sequencial; 
        }
      }
-     if(($this->v06_sequencial == null) || ($this->v06_sequencial == "") ){ 
+     if(($this->v06_sequencial == null) || (($this->v06_sequencial === 0 || $this->v06_sequencial === 0.0 || $this->v06_sequencial == "")) ){ 
        $this->erro_sql = " Campo v06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_procedarretipo {
    function sql_query ( $v06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_procedarretipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_procedarretipo {
    function sql_query_file ( $v06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_procedarretipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

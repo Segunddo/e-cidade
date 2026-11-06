@@ -60,7 +60,7 @@ class cl_cadmodcarne {
                  k47_tipoconvenio = int4 = Tipo de convenio 
                  ";
    //funcao construtor da classe 
-   function cl_cadmodcarne() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadmodcarne"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_cadmodcarne {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k47_sequencial = ($this->k47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_sequencial"]:$this->k47_sequencial);
+       $this->k47_sequencial = ($this->k47_sequencial === 0 || $this->k47_sequencial === 0.0 || $this->k47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_sequencial"]:$this->k47_sequencial);
        $this->k47_descr = ($this->k47_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_descr"]:$this->k47_descr);
        $this->k47_obs = ($this->k47_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_obs"]:$this->k47_obs);
-       $this->k47_altura = ($this->k47_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_altura"]:$this->k47_altura);
-       $this->k47_largura = ($this->k47_largura == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_largura"]:$this->k47_largura);
+       $this->k47_altura = ($this->k47_altura === 0 || $this->k47_altura === 0.0 || $this->k47_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_altura"]:$this->k47_altura);
+       $this->k47_largura = ($this->k47_largura === 0 || $this->k47_largura === 0.0 || $this->k47_largura == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_largura"]:$this->k47_largura);
        $this->k47_orientacao = ($this->k47_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_orientacao"]:$this->k47_orientacao);
-       $this->k47_tipoconvenio = ($this->k47_tipoconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_tipoconvenio"]:$this->k47_tipoconvenio);
+       $this->k47_tipoconvenio = ($this->k47_tipoconvenio === 0 || $this->k47_tipoconvenio === 0.0 || $this->k47_tipoconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_tipoconvenio"]:$this->k47_tipoconvenio);
      }else{
-       $this->k47_sequencial = ($this->k47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_sequencial"]:$this->k47_sequencial);
+       $this->k47_sequencial = ($this->k47_sequencial === 0 || $this->k47_sequencial === 0.0 || $this->k47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_sequencial"]:$this->k47_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_cadmodcarne {
          $this->k47_sequencial = $k47_sequencial; 
        }
      }
-     if(($this->k47_sequencial == null) || ($this->k47_sequencial == "") ){ 
+     if(($this->k47_sequencial == null) || ($this->k47_sequencial === 0 || $this->k47_sequencial === 0.0 || $this->k47_sequencial == "") ){ 
        $this->erro_sql = " Campo k47_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -423,7 +423,7 @@ class cl_cadmodcarne {
    function sql_query ( $k47_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_cadmodcarne {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_cadmodcarne {
    function sql_query_file ( $k47_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_cadmodcarne {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -55,7 +55,7 @@ $oDaoItbiCancela = new cl_itbicancela();
     $sSqlGuiasCanceladas .= " where itbicancela.it16_guia = {$oGet->guia}                                       ";
 
     $rsSqlGuiasCanceladas  = db_query($sSqlGuiasCanceladas);
-    if(pg_num_rows($rsSqlGuiasCanceladas) == 0) {
+    if(!$rsSqlGuiasCanceladas || pg_num_rows($rsSqlGuiasCanceladas) == 0) {
 
       echo "<p>Nenhum Registro Retornado</p>";
       exit;

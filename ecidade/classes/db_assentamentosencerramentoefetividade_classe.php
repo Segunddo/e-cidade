@@ -350,7 +350,7 @@ class cl_assentamentosencerramentoefetividade
                     $acount = pg_result($resac, 0, 0);
                     $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
                     $resac = db_query("insert into db_acountkey values($acount,1010551,'$this->rh230_sequencial','A')");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh230_instituicao"]) || $this->rh230_instituicao != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh230_instituicao"]) || ($this->rh230_instituicao != "" && $this->rh230_instituicao !== 0 && $this->rh230_instituicao !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,1010454,1010555,'" . AddSlashes(pg_result(
                             $resaco,
                             $conresaco,
@@ -364,21 +364,21 @@ class cl_assentamentosencerramentoefetividade
                             'rh230_mes'
                         )) . "','$this->rh230_mes'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh230_ano"]) || $this->rh230_ano != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh230_ano"]) || ($this->rh230_ano != "" && $this->rh230_ano !== 0 && $this->rh230_ano !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,1010454,1010553,'" . AddSlashes(pg_result(
                             $resaco,
                             $conresaco,
                             'rh230_ano'
                         )) . "','$this->rh230_ano'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh230_assentamento"]) || $this->rh230_assentamento != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh230_assentamento"]) || ($this->rh230_assentamento != "" && $this->rh230_assentamento !== 0 && $this->rh230_assentamento !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,1010454,1010552,'" . AddSlashes(pg_result(
                             $resaco,
                             $conresaco,
                             'rh230_assentamento'
                         )) . "','$this->rh230_assentamento'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh230_sequencial"]) || $this->rh230_sequencial != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh230_sequencial"]) || ($this->rh230_sequencial != "" && $this->rh230_sequencial !== 0 && $this->rh230_sequencial !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,1010454,1010551,'" . AddSlashes(pg_result(
                             $resaco,
                             $conresaco,

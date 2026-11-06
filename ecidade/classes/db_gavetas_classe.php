@@ -64,7 +64,7 @@ class cl_gavetas {
                  cm27_i_gaveta = int4 = N da Gaveta
                  ";
    //funcao construtor da classe
-   function cl_gavetas() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("gavetas");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,8 +81,8 @@ class cl_gavetas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm27_i_codigo = ($this->cm27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm27_i_codigo"]:$this->cm27_i_codigo);
-       $this->cm27_i_restogaveta = ($this->cm27_i_restogaveta == ""?@$GLOBALS["HTTP_POST_VARS"]["cm27_i_restogaveta"]:$this->cm27_i_restogaveta);
+       $this->cm27_i_codigo = (($this->cm27_i_codigo === 0 || $this->cm27_i_codigo === 0.0 || $this->cm27_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm27_i_codigo"]:$this->cm27_i_codigo);
+       $this->cm27_i_restogaveta = (($this->cm27_i_restogaveta === 0 || $this->cm27_i_restogaveta === 0.0 || $this->cm27_i_restogaveta == "")?@$GLOBALS["HTTP_POST_VARS"]["cm27_i_restogaveta"]:$this->cm27_i_restogaveta);
        if($this->cm27_d_exumprevista == ""){
          $this->cm27_d_exumprevista_dia = ($this->cm27_d_exumprevista_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm27_d_exumprevista_dia"]:$this->cm27_d_exumprevista_dia);
          $this->cm27_d_exumprevista_mes = ($this->cm27_d_exumprevista_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm27_d_exumprevista_mes"]:$this->cm27_d_exumprevista_mes);
@@ -100,9 +100,9 @@ class cl_gavetas {
          }
        }
        $this->cm27_c_ossoario = ($this->cm27_c_ossoario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm27_c_ossoario"]:$this->cm27_c_ossoario);
-       $this->cm27_i_gaveta = ($this->cm27_i_gaveta == ""?@$GLOBALS["HTTP_POST_VARS"]["cm27_i_gaveta"]:$this->cm27_i_gaveta);
+       $this->cm27_i_gaveta = (($this->cm27_i_gaveta === 0 || $this->cm27_i_gaveta === 0.0 || $this->cm27_i_gaveta == "")?@$GLOBALS["HTTP_POST_VARS"]["cm27_i_gaveta"]:$this->cm27_i_gaveta);
      }else{
-       $this->cm27_i_codigo = ($this->cm27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm27_i_codigo"]:$this->cm27_i_codigo);
+       $this->cm27_i_codigo = (($this->cm27_i_codigo === 0 || $this->cm27_i_codigo === 0.0 || $this->cm27_i_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["cm27_i_codigo"]:$this->cm27_i_codigo);
      }
    }
    // funcao para inclusao
@@ -156,7 +156,7 @@ class cl_gavetas {
          $this->cm27_i_codigo = $cm27_i_codigo;
        }
      }
-     if(($this->cm27_i_codigo == null) || ($this->cm27_i_codigo == "") ){
+     if(($this->cm27_i_codigo == null) || (($this->cm27_i_codigo === 0 || $this->cm27_i_codigo === 0.0 || $this->cm27_i_codigo == "")) ){
        $this->erro_sql = " Campo cm27_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -435,7 +435,7 @@ class cl_gavetas {
    function sql_query ( $cm27_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_gavetas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_gavetas {
    function sql_query_file ( $cm27_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_gavetas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

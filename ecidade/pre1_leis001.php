@@ -50,7 +50,8 @@ closedir($dir);
 if($verifica_execucao)
   exit;
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 if(isset($retorno)) {
   $result = db_query("select id_lei,numerolei,to_char(datalei,'DD') as datalei_dia,to_char(datalei,'MM') as datalei_mes,to_char(datalei,'YYYY') as datalei_ano,ementa from db_leis where id_lei = $retorno");
   db_fieldsmemory($result,0);  

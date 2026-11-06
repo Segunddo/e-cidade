@@ -28,7 +28,7 @@ class cl_infracaotransito {
                  i05_descricao = varchar(100) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_infracaotransito() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("infracaotransito"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_infracaotransito {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->i05_sequencial = ($this->i05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["i05_sequencial"]:$this->i05_sequencial);
+       $this->i05_sequencial = ($this->i05_sequencial === 0 || $this->i05_sequencial === 0.0 || $this->i05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["i05_sequencial"]:$this->i05_sequencial);
        $this->i05_codigo = ($this->i05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i05_codigo"]:$this->i05_codigo);
-       $this->i05_nivel = ($this->i05_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["i05_nivel"]:$this->i05_nivel);
+       $this->i05_nivel = ($this->i05_nivel === 0 || $this->i05_nivel === 0.0 || $this->i05_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["i05_nivel"]:$this->i05_nivel);
        $this->i05_descricao = ($this->i05_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["i05_descricao"]:$this->i05_descricao);
      }else{
-       $this->i05_sequencial = ($this->i05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["i05_sequencial"]:$this->i05_sequencial);
+       $this->i05_sequencial = ($this->i05_sequencial === 0 || $this->i05_sequencial === 0.0 || $this->i05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["i05_sequencial"]:$this->i05_sequencial);
      }
    }
    // funcao para Inclusão
@@ -107,7 +107,7 @@ class cl_infracaotransito {
          $this->i05_sequencial = $i05_sequencial; 
        }
      }
-     if(($this->i05_sequencial == null) || ($this->i05_sequencial == "") ){ 
+     if(($this->i05_sequencial == null) || ($this->i05_sequencial === 0 || $this->i05_sequencial === 0.0 || $this->i05_sequencial == "") ){ 
        $this->erro_sql = " Campo i05_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -60,7 +60,7 @@ class cl_obrasalvarahistorico {
                  ob35_datafinal = date = Data Final 
                  ";
    //funcao construtor da classe 
-   function cl_obrasalvarahistorico() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obrasalvarahistorico"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,8 +77,8 @@ class cl_obrasalvarahistorico {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob35_sequencial = ($this->ob35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob35_sequencial"]:$this->ob35_sequencial);
-       $this->ob35_codobra = ($this->ob35_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob35_codobra"]:$this->ob35_codobra);
+       $this->ob35_sequencial = ($this->ob35_sequencial === 0 || $this->ob35_sequencial === 0.0 || $this->ob35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob35_sequencial"]:$this->ob35_sequencial);
+       $this->ob35_codobra = ($this->ob35_codobra === 0 || $this->ob35_codobra === 0.0 || $this->ob35_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob35_codobra"]:$this->ob35_codobra);
        if($this->ob35_datainicial == ""){
          $this->ob35_datainicial_dia = ($this->ob35_datainicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ob35_datainicial_dia"]:$this->ob35_datainicial_dia);
          $this->ob35_datainicial_mes = ($this->ob35_datainicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ob35_datainicial_mes"]:$this->ob35_datainicial_mes);
@@ -96,7 +96,7 @@ class cl_obrasalvarahistorico {
          }
        }
      }else{
-       $this->ob35_sequencial = ($this->ob35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob35_sequencial"]:$this->ob35_sequencial);
+       $this->ob35_sequencial = ($this->ob35_sequencial === 0 || $this->ob35_sequencial === 0.0 || $this->ob35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob35_sequencial"]:$this->ob35_sequencial);
      }
    }
    // funcao para inclusao
@@ -144,7 +144,7 @@ class cl_obrasalvarahistorico {
          $this->ob35_sequencial = $ob35_sequencial; 
        }
      }
-     if(($this->ob35_sequencial == null) || ($this->ob35_sequencial == "") ){ 
+     if(($this->ob35_sequencial == null) || ($this->ob35_sequencial === 0 || $this->ob35_sequencial === 0.0 || $this->ob35_sequencial == "") ){ 
        $this->erro_sql = " Campo ob35_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -434,7 +434,7 @@ class cl_obrasalvarahistorico {
    function sql_query ( $ob35_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_obrasalvarahistorico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_obrasalvarahistorico {
    function sql_query_file ( $ob35_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -491,7 +491,7 @@ class cl_obrasalvarahistorico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

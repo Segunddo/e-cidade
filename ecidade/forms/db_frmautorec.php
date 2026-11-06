@@ -34,7 +34,7 @@ $clrotulo->label("k02_descr");
 include(modification("dbforms/db_classesgenericas.php"));
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_receitas.location.href='fis1_autorec002.php?chavepesquisa=$y57_codauto&chavepesquisa1=$y57_receit&y59_codauto=$y59_codauto'</script>";
 }

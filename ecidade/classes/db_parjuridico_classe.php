@@ -78,7 +78,7 @@ class cl_parjuridico
                  v19_advogadopadrao = int4 = Advogado padrão";
 
     //funcao construtor da classe
-    function cl_parjuridico()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("parjuridico");
@@ -100,23 +100,23 @@ class cl_parjuridico
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->v19_anousu = ($this->v19_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_anousu"] : $this->v19_anousu);
-            $this->v19_instit = ($this->v19_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_instit"] : $this->v19_instit);
-            $this->v19_envolinicialiptu = ($this->v19_envolinicialiptu == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_envolinicialiptu"] : $this->v19_envolinicialiptu);
-            $this->v19_envolinicialiss = ($this->v19_envolinicialiss == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_envolinicialiss"] : $this->v19_envolinicialiss);
+            $this->v19_anousu = (($this->v19_anousu === 0 || $this->v19_anousu === 0.0 || $this->v19_anousu == "") ? @$GLOBALS["HTTP_POST_VARS"]["v19_anousu"] : $this->v19_anousu);
+            $this->v19_instit = (($this->v19_instit === 0 || $this->v19_instit === 0.0 || $this->v19_instit == "") ? @$GLOBALS["HTTP_POST_VARS"]["v19_instit"] : $this->v19_instit);
+            $this->v19_envolinicialiptu = (($this->v19_envolinicialiptu === 0 || $this->v19_envolinicialiptu === 0.0 || $this->v19_envolinicialiptu == "") ? @$GLOBALS["HTTP_POST_VARS"]["v19_envolinicialiptu"] : $this->v19_envolinicialiptu);
+            $this->v19_envolinicialiss = (($this->v19_envolinicialiss === 0 || $this->v19_envolinicialiss === 0.0 || $this->v19_envolinicialiss == "") ? @$GLOBALS["HTTP_POST_VARS"]["v19_envolinicialiss"] : $this->v19_envolinicialiss);
             $this->v19_envolprinciptu = ($this->v19_envolprinciptu == "f" ? @$GLOBALS["HTTP_POST_VARS"]["v19_envolprinciptu"] : $this->v19_envolprinciptu);
-            $this->v19_vlrexecmin = ($this->v19_vlrexecmin == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_vlrexecmin"] : $this->v19_vlrexecmin);
+            $this->v19_vlrexecmin = (($this->v19_vlrexecmin === 0 || $this->v19_vlrexecmin === 0.0 || $this->v19_vlrexecmin == "") ? @$GLOBALS["HTTP_POST_VARS"]["v19_vlrexecmin"] : $this->v19_vlrexecmin);
             $this->v19_partilha = ($this->v19_partilha == "f" ? @$GLOBALS["HTTP_POST_VARS"]["v19_partilha"] : $this->v19_partilha);
-            $this->v19_templateinicialquitada = ($this->v19_templateinicialquitada == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_templateinicialquitada"] : $this->v19_templateinicialquitada);
-            $this->v19_templateparcelamento = ($this->v19_templateparcelamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_templateparcelamento"] : $this->v19_templateparcelamento);
+            $this->v19_templateinicialquitada = (($this->v19_templateinicialquitada === 0 || $this->v19_templateinicialquitada === 0.0 || $this->v19_templateinicialquitada == "") ? @$GLOBALS["HTTP_POST_VARS"]["v19_templateinicialquitada"] : $this->v19_templateinicialquitada);
+            $this->v19_templateparcelamento = (($this->v19_templateparcelamento === 0 || $this->v19_templateparcelamento === 0.0 || $this->v19_templateparcelamento == "") ? @$GLOBALS["HTTP_POST_VARS"]["v19_templateparcelamento"] : $this->v19_templateparcelamento);
             $this->v19_urlwebservice = ($this->v19_urlwebservice == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_urlwebservice"] : $this->v19_urlwebservice);
             $this->v19_login = ($this->v19_login == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_login"] : $this->v19_login);
             $this->v19_senha = ($this->v19_senha == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_senha"] : $this->v19_senha);
             $this->v19_codorgao = ($this->v19_codorgao == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_codorgao"] : $this->v19_codorgao);
             $this->v19_consultaanaliticainicial = ($this->v19_consultaanaliticainicial == "f" ? @$GLOBALS["HTTP_POST_VARS"]["v19_consultaanaliticainicial"] : $this->v19_consultaanaliticainicial);
         } else {
-            $this->v19_anousu = ($this->v19_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_anousu"] : $this->v19_anousu);
-            $this->v19_instit = ($this->v19_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_instit"] : $this->v19_instit);
+            $this->v19_anousu = (($this->v19_anousu === 0 || $this->v19_anousu === 0.0 || $this->v19_anousu == "") ? @$GLOBALS["HTTP_POST_VARS"]["v19_anousu"] : $this->v19_anousu);
+            $this->v19_instit = (($this->v19_instit === 0 || $this->v19_instit === 0.0 || $this->v19_instit == "") ? @$GLOBALS["HTTP_POST_VARS"]["v19_instit"] : $this->v19_instit);
         }
     }
 
@@ -186,7 +186,7 @@ class cl_parjuridico
         }
         $this->v19_anousu = $v19_anousu;
         $this->v19_instit = $v19_instit;
-        if (($this->v19_anousu == null) || ($this->v19_anousu == "")) {
+        if (($this->v19_anousu == null) || (($this->v19_anousu === 0 || $this->v19_anousu === 0.0 || $this->v19_anousu == ""))) {
             $this->erro_sql = " Campo v19_anousu não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -194,7 +194,7 @@ class cl_parjuridico
             $this->erro_status = "0";
             return false;
         }
-        if (($this->v19_instit == null) || ($this->v19_instit == "")) {
+        if (($this->v19_instit == null) || (($this->v19_instit === 0 || $this->v19_instit === 0.0 || $this->v19_instit == ""))) {
             $this->erro_sql = " Campo v19_instit não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -1095,7 +1095,7 @@ class cl_parjuridico
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = explode("#", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -1129,7 +1129,7 @@ class cl_parjuridico
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = explode("#", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];

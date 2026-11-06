@@ -33,7 +33,7 @@ require_once(modification("std/db_stdClass.php"));
 require_once(modification("classes/db_parjuridico_classe.php"));
 require_once(modification("classes/db_cgm_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 
 $oPost           = db_utils::postMemory($_POST);
 $oGet            = db_utils::postMemory($_GET);

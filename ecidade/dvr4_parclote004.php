@@ -65,13 +65,13 @@ $pdf->SetMargins(5,2);
 db_query("BEGIN");
 
 for($k = 148;$k < 298;$k++) {
-//for($k = 0;$k < pg_numrows($principal);$k++) {
+//for($k = 0;$k < ($principal ? pg_numrows($principal) : 0);$k++) {
    db_fieldsmemory($principal,$k) ;
    $ver_numcgm = $j01_numcgm;
    $matric = $j01_matric;
    $ver_matric = $j01_matric;
    $totpar = db_query("select k00_numpre,k00_numpar,k00_numtot from arrecad where k00_numpre = $k00_numpre ");
-for($volta = 0;$volta < pg_numrows($totpar);$volta++) {
+for($volta = 0;$volta < ($totpar ? pg_numrows($totpar) : 0);$volta++) {
    db_fieldsmemory($totpar,$volta);
   //gera um nuvo numpre. "numnov"
   $result = db_query("select k00_descr,k00_codbco,k00_codage,k00_txban,k00_rectx,k00_hist1,k00_hist2,
@@ -99,7 +99,7 @@ for($volta = 0;$volta < pg_numrows($totpar);$volta++) {
   $DadosPagamento = db_query($sql);
 
   $k00_valor = 0;
-  for($i=0;$i<pg_numrows($DadosPagamento);$i++){
+  for($i=0;$i<($DadosPagamento ? pg_numrows($DadosPagamento) : 0);$i++){
     $k00_valor  += pg_result($DadosPagamento,$i,"valor");
   } 
   //faz um somatorio do valor
@@ -191,7 +191,7 @@ for($volta = 0;$volta < pg_numrows($totpar);$volta++) {
 			     inner join arrecad r on a.k00_numpre = r.k00_numpre 
 			where k00_matric = $j01_matric and k00_dtvenc < '".date('Y-m-d',db_getsession("DB_datausu"))."'::date limit 1";
 	$result = db_query($sql);
-    if(pg_numrows($result)!=0){
+    if(($result ? pg_numrows($result) : 0)!=0){
 	   $temdivida = "Existem Débitos Pendente. Verifique sua Situação.";
 	}else{    
 	   $temdivida = "";
@@ -208,7 +208,7 @@ for($volta = 0;$volta < pg_numrows($totpar);$volta++) {
   		                j22_matric = $j01_matric) e
 			where j23_matric = $j01_matric and j23_anousu = ".db_getsession("DB_anousu");
 	$result = db_query($sql);
-    if(pg_numrows($result)==0){
+    if(($result ? pg_numrows($result) : 0)==0){
 	   echo "Carne nao gerado para este Imóvel.";
 	   exit;
 	}
@@ -223,7 +223,7 @@ for($volta = 0;$volta < pg_numrows($totpar);$volta++) {
 				   from cadban
                    where k15_codbco = $k00_codbco and
 				   k15_codage = '$k00_codage'");
-  if(pg_numrows($result) > 0) {	
+  if(($result ? pg_numrows($result) : 0) > 0) {	
     $k15_local=pg_result($result,0,0);
     $k15_aceite=pg_result($result,0,1);
     $k15_carte=pg_result($result,0,2);

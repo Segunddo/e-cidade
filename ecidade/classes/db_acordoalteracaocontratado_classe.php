@@ -49,13 +49,13 @@ class cl_acordoalteracaocontratado
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ac60_sequencial = ($this->ac60_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_sequencial"]:$this->ac60_sequencial);
-       $this->ac60_acordo = ($this->ac60_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_acordo"]:$this->ac60_acordo);
-       $this->ac60_posicao = ($this->ac60_posicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_posicao"]:$this->ac60_posicao);
-       $this->ac60_anterior = ($this->ac60_anterior == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_anterior"]:$this->ac60_anterior);
-       $this->ac60_novo = ($this->ac60_novo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_novo"]:$this->ac60_novo);
+       $this->ac60_sequencial = ($this->ac60_sequencial === 0 || $this->ac60_sequencial === 0.0 || $this->ac60_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_sequencial"]:$this->ac60_sequencial);
+       $this->ac60_acordo = ($this->ac60_acordo === 0 || $this->ac60_acordo === 0.0 || $this->ac60_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_acordo"]:$this->ac60_acordo);
+       $this->ac60_posicao = ($this->ac60_posicao === 0 || $this->ac60_posicao === 0.0 || $this->ac60_posicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_posicao"]:$this->ac60_posicao);
+       $this->ac60_anterior = ($this->ac60_anterior === 0 || $this->ac60_anterior === 0.0 || $this->ac60_anterior == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_anterior"]:$this->ac60_anterior);
+       $this->ac60_novo = ($this->ac60_novo === 0 || $this->ac60_novo === 0.0 || $this->ac60_novo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_novo"]:$this->ac60_novo);
      }else{
-       $this->ac60_sequencial = ($this->ac60_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_sequencial"]:$this->ac60_sequencial);
+       $this->ac60_sequencial = ($this->ac60_sequencial === 0 || $this->ac60_sequencial === 0.0 || $this->ac60_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac60_sequencial"]:$this->ac60_sequencial);
      }
    }
 
@@ -122,7 +122,7 @@ class cl_acordoalteracaocontratado
          $this->ac60_sequencial = $ac60_sequencial;
        }
      }
-     if(($this->ac60_sequencial == null) || ($this->ac60_sequencial == "") ){
+     if(($this->ac60_sequencial == null) || ($this->ac60_sequencial === 0 || $this->ac60_sequencial === 0.0 || $this->ac60_sequencial == "") ){
        $this->erro_sql = " Campo ac60_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

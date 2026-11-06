@@ -52,7 +52,7 @@ class cl_obrasenvioreg {
                  ob17_codobra = int4 = Código da obra 
                  ";
    //funcao construtor da classe 
-   function cl_obrasenvioreg() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obrasenvioreg"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,13 +69,13 @@ class cl_obrasenvioreg {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob17_codobrasenvioreg = ($this->ob17_codobrasenvioreg == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvioreg"]:$this->ob17_codobrasenvioreg);
-       $this->ob17_codobrasenvio = ($this->ob17_codobrasenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvio"]:$this->ob17_codobrasenvio);
-       $this->ob17_codobra = ($this->ob17_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobra"]:$this->ob17_codobra);
+       $this->ob17_codobrasenvioreg = ($this->ob17_codobrasenvioreg === 0 || $this->ob17_codobrasenvioreg === 0.0 || $this->ob17_codobrasenvioreg == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvioreg"]:$this->ob17_codobrasenvioreg);
+       $this->ob17_codobrasenvio = ($this->ob17_codobrasenvio === 0 || $this->ob17_codobrasenvio === 0.0 || $this->ob17_codobrasenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvio"]:$this->ob17_codobrasenvio);
+       $this->ob17_codobra = ($this->ob17_codobra === 0 || $this->ob17_codobra === 0.0 || $this->ob17_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobra"]:$this->ob17_codobra);
      }else{
-       $this->ob17_codobrasenvioreg = ($this->ob17_codobrasenvioreg == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvioreg"]:$this->ob17_codobrasenvioreg);
-       $this->ob17_codobrasenvio = ($this->ob17_codobrasenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvio"]:$this->ob17_codobrasenvio);
-       $this->ob17_codobra = ($this->ob17_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobra"]:$this->ob17_codobra);
+       $this->ob17_codobrasenvioreg = ($this->ob17_codobrasenvioreg === 0 || $this->ob17_codobrasenvioreg === 0.0 || $this->ob17_codobrasenvioreg == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvioreg"]:$this->ob17_codobrasenvioreg);
+       $this->ob17_codobrasenvio = ($this->ob17_codobrasenvio === 0 || $this->ob17_codobrasenvio === 0.0 || $this->ob17_codobrasenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvio"]:$this->ob17_codobrasenvio);
+       $this->ob17_codobra = ($this->ob17_codobra === 0 || $this->ob17_codobra === 0.0 || $this->ob17_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobra"]:$this->ob17_codobra);
      }
    }
    // funcao para inclusao
@@ -105,7 +105,7 @@ class cl_obrasenvioreg {
          $this->ob17_codobrasenvioreg = $ob17_codobrasenvioreg; 
        }
      }
-     if(($this->ob17_codobrasenvioreg == null) || ($this->ob17_codobrasenvioreg == "") ){ 
+     if(($this->ob17_codobrasenvioreg == null) || ($this->ob17_codobrasenvioreg === 0 || $this->ob17_codobrasenvioreg === 0.0 || $this->ob17_codobrasenvioreg == "") ){ 
        $this->erro_sql = " Campo ob17_codobrasenvioreg nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -343,7 +343,7 @@ class cl_obrasenvioreg {
    function sql_query ( $ob17_codobrasenvioreg=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -368,7 +368,7 @@ class cl_obrasenvioreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_obrasenvioreg {
    function sql_query_file ( $ob17_codobrasenvioreg=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_obrasenvioreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -58,7 +58,7 @@ class cl_cidadaofiliacao {
                  ov29_cidadaovinculo_seq = int4 = Cidadão Vínculo Sequencial 
                  ";
    //funcao construtor da classe 
-   function cl_cidadaofiliacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cidadaofiliacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_cidadaofiliacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov29_sequencial = ($this->ov29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_sequencial"]:$this->ov29_sequencial);
-       $this->ov29_cidadao = ($this->ov29_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_cidadao"]:$this->ov29_cidadao);
-       $this->ov29_cidadao_seq = ($this->ov29_cidadao_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_cidadao_seq"]:$this->ov29_cidadao_seq);
-       $this->ov29_tipofamiliar = ($this->ov29_tipofamiliar == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_tipofamiliar"]:$this->ov29_tipofamiliar);
-       $this->ov29_cidadaovinculo = ($this->ov29_cidadaovinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_cidadaovinculo"]:$this->ov29_cidadaovinculo);
-       $this->ov29_cidadaovinculo_seq = ($this->ov29_cidadaovinculo_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_cidadaovinculo_seq"]:$this->ov29_cidadaovinculo_seq);
+       $this->ov29_sequencial = ($this->ov29_sequencial === 0 || $this->ov29_sequencial === 0.0 || $this->ov29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_sequencial"]:$this->ov29_sequencial);
+       $this->ov29_cidadao = ($this->ov29_cidadao === 0 || $this->ov29_cidadao === 0.0 || $this->ov29_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_cidadao"]:$this->ov29_cidadao);
+       $this->ov29_cidadao_seq = ($this->ov29_cidadao_seq === 0 || $this->ov29_cidadao_seq === 0.0 || $this->ov29_cidadao_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_cidadao_seq"]:$this->ov29_cidadao_seq);
+       $this->ov29_tipofamiliar = ($this->ov29_tipofamiliar === 0 || $this->ov29_tipofamiliar === 0.0 || $this->ov29_tipofamiliar == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_tipofamiliar"]:$this->ov29_tipofamiliar);
+       $this->ov29_cidadaovinculo = ($this->ov29_cidadaovinculo === 0 || $this->ov29_cidadaovinculo === 0.0 || $this->ov29_cidadaovinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_cidadaovinculo"]:$this->ov29_cidadaovinculo);
+       $this->ov29_cidadaovinculo_seq = ($this->ov29_cidadaovinculo_seq === 0 || $this->ov29_cidadaovinculo_seq === 0.0 || $this->ov29_cidadaovinculo_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_cidadaovinculo_seq"]:$this->ov29_cidadaovinculo_seq);
      }else{
-       $this->ov29_sequencial = ($this->ov29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_sequencial"]:$this->ov29_sequencial);
+       $this->ov29_sequencial = ($this->ov29_sequencial === 0 || $this->ov29_sequencial === 0.0 || $this->ov29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov29_sequencial"]:$this->ov29_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_cidadaofiliacao {
          $this->ov29_sequencial = $ov29_sequencial; 
        }
      }
-     if(($this->ov29_sequencial == null) || ($this->ov29_sequencial == "") ){ 
+     if(($this->ov29_sequencial == null) || ($this->ov29_sequencial === 0 || $this->ov29_sequencial === 0.0 || $this->ov29_sequencial == "") ){ 
        $this->erro_sql = " Campo ov29_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -475,7 +475,7 @@ class cl_cidadaofiliacao {
    function sql_query ( $ov29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_cidadaofiliacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -512,7 +512,7 @@ class cl_cidadaofiliacao {
    function sql_query_file ( $ov29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -533,7 +533,7 @@ class cl_cidadaofiliacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -64,7 +64,7 @@ class cl_aguaconsumo {
                  x19_zona = int4 = Zona 
                  ";
    //funcao construtor da classe 
-   function cl_aguaconsumo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguaconsumo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_aguaconsumo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x19_codconsumo = ($this->x19_codconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x19_codconsumo"]:$this->x19_codconsumo);
-       $this->x19_exerc = ($this->x19_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["x19_exerc"]:$this->x19_exerc);
-       $this->x19_areaini = ($this->x19_areaini == ""?@$GLOBALS["HTTP_POST_VARS"]["x19_areaini"]:$this->x19_areaini);
-       $this->x19_areafim = ($this->x19_areafim == ""?@$GLOBALS["HTTP_POST_VARS"]["x19_areafim"]:$this->x19_areafim);
-       $this->x19_caract = ($this->x19_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["x19_caract"]:$this->x19_caract);
-       $this->x19_conspadrao = ($this->x19_conspadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["x19_conspadrao"]:$this->x19_conspadrao);
+       $this->x19_codconsumo = (($this->x19_codconsumo === 0 || $this->x19_codconsumo === 0.0 || ($this->x19_codconsumo === 0 || $this->x19_codconsumo === 0.0 || $this->x19_codconsumo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x19_codconsumo"]:$this->x19_codconsumo);
+       $this->x19_exerc = (($this->x19_exerc === 0 || $this->x19_exerc === 0.0 || ($this->x19_exerc === 0 || $this->x19_exerc === 0.0 || $this->x19_exerc == ""))?@$GLOBALS["HTTP_POST_VARS"]["x19_exerc"]:$this->x19_exerc);
+       $this->x19_areaini = (($this->x19_areaini === 0 || $this->x19_areaini === 0.0 || ($this->x19_areaini === 0 || $this->x19_areaini === 0.0 || $this->x19_areaini == ""))?@$GLOBALS["HTTP_POST_VARS"]["x19_areaini"]:$this->x19_areaini);
+       $this->x19_areafim = (($this->x19_areafim === 0 || $this->x19_areafim === 0.0 || ($this->x19_areafim === 0 || $this->x19_areafim === 0.0 || $this->x19_areafim == ""))?@$GLOBALS["HTTP_POST_VARS"]["x19_areafim"]:$this->x19_areafim);
+       $this->x19_caract = (($this->x19_caract === 0 || $this->x19_caract === 0.0 || ($this->x19_caract === 0 || $this->x19_caract === 0.0 || $this->x19_caract == ""))?@$GLOBALS["HTTP_POST_VARS"]["x19_caract"]:$this->x19_caract);
+       $this->x19_conspadrao = (($this->x19_conspadrao === 0 || $this->x19_conspadrao === 0.0 || ($this->x19_conspadrao === 0 || $this->x19_conspadrao === 0.0 || $this->x19_conspadrao == ""))?@$GLOBALS["HTTP_POST_VARS"]["x19_conspadrao"]:$this->x19_conspadrao);
        $this->x19_descr = ($this->x19_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["x19_descr"]:$this->x19_descr);
        $this->x19_ativo = ($this->x19_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["x19_ativo"]:$this->x19_ativo);
-       $this->x19_zona = ($this->x19_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["x19_zona"]:$this->x19_zona);
+       $this->x19_zona = (($this->x19_zona === 0 || $this->x19_zona === 0.0 || ($this->x19_zona === 0 || $this->x19_zona === 0.0 || $this->x19_zona == ""))?@$GLOBALS["HTTP_POST_VARS"]["x19_zona"]:$this->x19_zona);
      }else{
-       $this->x19_codconsumo = ($this->x19_codconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x19_codconsumo"]:$this->x19_codconsumo);
+       $this->x19_codconsumo = (($this->x19_codconsumo === 0 || $this->x19_codconsumo === 0.0 || ($this->x19_codconsumo === 0 || $this->x19_codconsumo === 0.0 || $this->x19_codconsumo == ""))?@$GLOBALS["HTTP_POST_VARS"]["x19_codconsumo"]:$this->x19_codconsumo);
      }
    }
    // funcao para inclusao
@@ -187,7 +187,7 @@ class cl_aguaconsumo {
          $this->x19_codconsumo = $x19_codconsumo; 
        }
      }
-     if(($this->x19_codconsumo == null) || ($this->x19_codconsumo == "") ){ 
+     if(($this->x19_codconsumo == null) || (($this->x19_codconsumo === 0 || $this->x19_codconsumo === 0.0 || ($this->x19_codconsumo === 0 || $this->x19_codconsumo === 0.0 || $this->x19_codconsumo == ""))) ){ 
        $this->erro_sql = " Campo x19_codconsumo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -534,7 +534,7 @@ class cl_aguaconsumo {
    function sql_query ( $x19_codconsumo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -557,7 +557,7 @@ class cl_aguaconsumo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -570,7 +570,7 @@ class cl_aguaconsumo {
    function sql_query_file ( $x19_codconsumo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -591,7 +591,7 @@ class cl_aguaconsumo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

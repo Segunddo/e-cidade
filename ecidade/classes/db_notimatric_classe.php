@@ -50,7 +50,7 @@ class cl_notimatric {
                  k55_matric = int4 = Matrícula Imóvel 
                  ";
    //funcao construtor da classe 
-   function cl_notimatric() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notimatric"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_notimatric {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k55_notifica = ($this->k55_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_notifica"]:$this->k55_notifica);
-       $this->k55_matric = ($this->k55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_matric"]:$this->k55_matric);
+       $this->k55_notifica = ($this->k55_notifica === 0 || $this->k55_notifica === 0.0 || $this->k55_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_notifica"]:$this->k55_notifica);
+       $this->k55_matric = ($this->k55_matric === 0 || $this->k55_matric === 0.0 || $this->k55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_matric"]:$this->k55_matric);
      }else{
-       $this->k55_notifica = ($this->k55_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_notifica"]:$this->k55_notifica);
-       $this->k55_matric = ($this->k55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_matric"]:$this->k55_matric);
+       $this->k55_notifica = ($this->k55_notifica === 0 || $this->k55_notifica === 0.0 || $this->k55_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_notifica"]:$this->k55_notifica);
+       $this->k55_matric = ($this->k55_matric === 0 || $this->k55_matric === 0.0 || $this->k55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_matric"]:$this->k55_matric);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_notimatric {
       $this->atualizacampos();
        $this->k55_notifica = $k55_notifica; 
        $this->k55_matric = $k55_matric; 
-     if(($this->k55_notifica == null) || ($this->k55_notifica == "") ){ 
+     if(($this->k55_notifica == null) || ($this->k55_notifica === 0 || $this->k55_notifica === 0.0 || $this->k55_notifica == "") ){ 
        $this->erro_sql = " Campo k55_notifica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_notimatric {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k55_matric == null) || ($this->k55_matric == "") ){ 
+     if(($this->k55_matric == null) || ($this->k55_matric === 0 || $this->k55_matric === 0.0 || $this->k55_matric == "") ){ 
        $this->erro_sql = " Campo k55_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -324,7 +324,7 @@ class cl_notimatric {
    function sql_query ( $k55_notifica=null,$k55_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -358,7 +358,7 @@ class cl_notimatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -370,7 +370,7 @@ class cl_notimatric {
    function sql_query_arrecad ( $k55_notifica=null,$k55_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_notimatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_notimatric {
    function sql_query_file ( $k55_notifica=null,$k55_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_notimatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

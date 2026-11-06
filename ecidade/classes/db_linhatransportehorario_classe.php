@@ -54,7 +54,7 @@ class cl_linhatransportehorario {
                  tre07_horachegada = varchar(5) = Hora de Chegada 
                  ";
    //funcao construtor da classe 
-   function cl_linhatransportehorario() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("linhatransportehorario"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_linhatransportehorario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre07_sequencial = ($this->tre07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_sequencial"]:$this->tre07_sequencial);
-       $this->tre07_linhatransporteitinerario = ($this->tre07_linhatransporteitinerario == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_linhatransporteitinerario"]:$this->tre07_linhatransporteitinerario);
+       $this->tre07_sequencial = ($this->tre07_sequencial === 0 || $this->tre07_sequencial === 0.0 || $this->tre07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_sequencial"]:$this->tre07_sequencial);
+       $this->tre07_linhatransporteitinerario = ($this->tre07_linhatransporteitinerario === 0 || $this->tre07_linhatransporteitinerario === 0.0 || $this->tre07_linhatransporteitinerario == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_linhatransporteitinerario"]:$this->tre07_linhatransporteitinerario);
        $this->tre07_horasaida = ($this->tre07_horasaida == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_horasaida"]:$this->tre07_horasaida);
        $this->tre07_horachegada = ($this->tre07_horachegada == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_horachegada"]:$this->tre07_horachegada);
      }else{
-       $this->tre07_sequencial = ($this->tre07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_sequencial"]:$this->tre07_sequencial);
+       $this->tre07_sequencial = ($this->tre07_sequencial === 0 || $this->tre07_sequencial === 0.0 || $this->tre07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_sequencial"]:$this->tre07_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_linhatransportehorario {
          $this->tre07_sequencial = $tre07_sequencial; 
        }
      }
-     if(($this->tre07_sequencial == null) || ($this->tre07_sequencial == "") ){ 
+     if(($this->tre07_sequencial == null) || ($this->tre07_sequencial === 0 || $this->tre07_sequencial === 0.0 || $this->tre07_sequencial == "") ){ 
        $this->erro_sql = " Campo tre07_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -413,7 +413,7 @@ class cl_linhatransportehorario {
    function sql_query ( $tre07_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_linhatransportehorario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -449,7 +449,7 @@ class cl_linhatransportehorario {
    function sql_query_file ( $tre07_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_linhatransportehorario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

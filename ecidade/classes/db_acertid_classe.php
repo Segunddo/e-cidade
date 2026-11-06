@@ -65,7 +65,7 @@ class cl_acertid {
                  v15_observacao = text = Observação
                  ";
    //funcao construtor da classe
-   function cl_acertid() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acertid");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,8 +82,8 @@ class cl_acertid {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v15_codigo = ($this->v15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_codigo"]:$this->v15_codigo);
-       $this->v15_certid = ($this->v15_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_certid"]:$this->v15_certid);
+       $this->v15_codigo = (($this->v15_codigo === 0 || $this->v15_codigo === 0.0 || $this->v15_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["v15_codigo"]:$this->v15_codigo);
+       $this->v15_certid = (($this->v15_certid === 0 || $this->v15_certid === 0.0 || $this->v15_certid == "")?@$GLOBALS["HTTP_POST_VARS"]["v15_certid"]:$this->v15_certid);
        if($this->v15_data == ""){
          $this->v15_data_dia = ($this->v15_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_data_dia"]:$this->v15_data_dia);
          $this->v15_data_mes = ($this->v15_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_data_mes"]:$this->v15_data_mes);
@@ -93,12 +93,12 @@ class cl_acertid {
          }
        }
        $this->v15_hora = ($this->v15_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_hora"]:$this->v15_hora);
-       $this->v15_usuario = ($this->v15_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_usuario"]:$this->v15_usuario);
+       $this->v15_usuario = (($this->v15_usuario === 0 || $this->v15_usuario === 0.0 || $this->v15_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["v15_usuario"]:$this->v15_usuario);
        $this->v15_parcial = ($this->v15_parcial == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_parcial"]:$this->v15_parcial);
-       $this->v15_instit = ($this->v15_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_instit"]:$this->v15_instit);
+       $this->v15_instit = (($this->v15_instit === 0 || $this->v15_instit === 0.0 || $this->v15_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["v15_instit"]:$this->v15_instit);
        $this->v15_observacao = ($this->v15_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_observacao"]:$this->v15_observacao);
      }else{
-       $this->v15_codigo = ($this->v15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_codigo"]:$this->v15_codigo);
+       $this->v15_codigo = (($this->v15_codigo === 0 || $this->v15_codigo === 0.0 || $this->v15_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["v15_codigo"]:$this->v15_codigo);
      }
    }
    // funcao para inclusao
@@ -182,7 +182,7 @@ class cl_acertid {
          $this->v15_codigo = $v15_codigo;
        }
      }
-     if(($this->v15_codigo == null) || ($this->v15_codigo == "") ){
+     if(($this->v15_codigo == null) || (($this->v15_codigo === 0 || $this->v15_codigo === 0.0 || $this->v15_codigo == "")) ){
        $this->erro_sql = " Campo v15_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -521,7 +521,7 @@ class cl_acertid {
    function sql_query ( $v15_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_acertid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -558,7 +558,7 @@ class cl_acertid {
    function sql_query_file ( $v15_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -579,7 +579,7 @@ class cl_acertid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -592,7 +592,7 @@ class cl_acertid {
 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -624,7 +624,7 @@ class cl_acertid {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

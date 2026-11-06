@@ -20,7 +20,7 @@ $__jpg_err_locale = DEFAULT_ERR_LOCALE;
 // Handles the retrieval of localized error messages
 class ErrMsgText {
     var $lt=NULL;
-    function ErrMsgText() {
+    function __construct() {
 	GLOBAL $__jpg_err_locale;
 	$file = 'lang/'.$__jpg_err_locale.'.inc.php';
 
@@ -124,7 +124,7 @@ class JpGraphErrObject {
     var $iTitle = "JpGraph Error";
     var $iDest = false;
 
-    function JpGraphErrObject() {
+    function __construct() {
 	// Empty. Reserved for future use
     }
 

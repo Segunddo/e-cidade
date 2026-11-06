@@ -102,9 +102,9 @@ class cl_iptubase
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->j01_matric = ($this->j01_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_matric"]:$this->j01_matric);
-       $this->j01_numcgm = ($this->j01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_numcgm"]:$this->j01_numcgm);
-       $this->j01_idbql = ($this->j01_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_idbql"]:$this->j01_idbql);
+       $this->j01_matric = (($this->j01_matric === 0 || $this->j01_matric === 0.0 || $this->j01_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_matric"]:$this->j01_matric);
+       $this->j01_numcgm = (($this->j01_numcgm === 0 || $this->j01_numcgm === 0.0 || $this->j01_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_numcgm"]:$this->j01_numcgm);
+       $this->j01_idbql = (($this->j01_idbql === 0 || $this->j01_idbql === 0.0 || $this->j01_idbql == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_idbql"]:$this->j01_idbql);
        if($this->j01_baixa == ""){
          $this->j01_baixa_dia = ($this->j01_baixa_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_baixa_dia"]:$this->j01_baixa_dia);
          $this->j01_baixa_mes = ($this->j01_baixa_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_baixa_mes"]:$this->j01_baixa_mes);
@@ -113,11 +113,11 @@ class cl_iptubase
             $this->j01_baixa = $this->j01_baixa_ano."-".$this->j01_baixa_mes."-".$this->j01_baixa_dia;
          }
        }
-       $this->j01_codave = ($this->j01_codave == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_codave"]:$this->j01_codave);
-       $this->j01_fracao = ($this->j01_fracao == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_fracao"]:$this->j01_fracao);
-       $this->j01_tipoimovel = ($this->j01_tipoimovel == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_tipoimovel"]:$this->j01_tipoimovel);
+       $this->j01_codave = (($this->j01_codave === 0 || $this->j01_codave === 0.0 || $this->j01_codave == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_codave"]:$this->j01_codave);
+       $this->j01_fracao = (($this->j01_fracao === 0 || $this->j01_fracao === 0.0 || $this->j01_fracao == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_fracao"]:$this->j01_fracao);
+       $this->j01_tipoimovel = (($this->j01_tipoimovel === 0 || $this->j01_tipoimovel === 0.0 || $this->j01_tipoimovel == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_tipoimovel"]:$this->j01_tipoimovel);
        $this->j01_distrito = ($this->j01_distrito == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_distrito"]:$this->j01_distrito);
-       $this->j01_hectare = ($this->j01_hectare == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_hectare"]:$this->j01_hectare);
+       $this->j01_hectare = (($this->j01_hectare === 0 || $this->j01_hectare === 0.0 || $this->j01_hectare == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_hectare"]:$this->j01_hectare);
        $this->j01_situcad = ($this->j01_situcad == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_situcad"]:$this->j01_situcad);
        if($this->j01_datacad == ""){
          $this->j01_datacad_dia = ($this->j01_datacad_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_datacad_dia"]:$this->j01_datacad_dia);
@@ -127,13 +127,13 @@ class cl_iptubase
             $this->j01_datacad = $this->j01_datacad_ano."-".$this->j01_datacad_mes."-".$this->j01_datacad_dia;
          }
        }
-       $this->j01_processo = ($this->j01_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_processo"]:$this->j01_processo);
-       $this->j01_incra = ($this->j01_incra == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_incra"]:$this->j01_incra);
+       $this->j01_processo = (($this->j01_processo === 0 || $this->j01_processo === 0.0 || $this->j01_processo == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_processo"]:$this->j01_processo);
+       $this->j01_incra = (($this->j01_incra === 0 || $this->j01_incra === 0.0 || $this->j01_incra == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_incra"]:$this->j01_incra);
        $this->j01_descrlocal = ($this->j01_descrlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_descrlocal"]:$this->j01_descrlocal);
-       $this->j01_unidade = ($this->j01_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_unidade"]:$this->j01_unidade);
-       $this->j01_areaprivativa = ($this->j01_areaprivativa == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_areaprivativa"]:$this->j01_areaprivativa);
+       $this->j01_unidade = (($this->j01_unidade === 0 || $this->j01_unidade === 0.0 || $this->j01_unidade == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_unidade"]:$this->j01_unidade);
+       $this->j01_areaprivativa = (($this->j01_areaprivativa === 0 || $this->j01_areaprivativa === 0.0 || $this->j01_areaprivativa == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_areaprivativa"]:$this->j01_areaprivativa);
      }else{
-       $this->j01_matric = ($this->j01_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j01_matric"]:$this->j01_matric);
+       $this->j01_matric = (($this->j01_matric === 0 || $this->j01_matric === 0.0 || $this->j01_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j01_matric"]:$this->j01_matric);
      }
    }
 
@@ -251,7 +251,7 @@ class cl_iptubase
          $this->j01_matric = $j01_matric; 
        }
      }
-     if(($this->j01_matric == null) || ($this->j01_matric == "") ){ 
+     if(($this->j01_matric == null) || (($this->j01_matric === 0 || $this->j01_matric === 0.0 || $this->j01_matric == "")) ){ 
        $this->erro_sql = " Campo j01_matric não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

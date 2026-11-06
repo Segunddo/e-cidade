@@ -42,7 +42,7 @@ $clrotulo->label('v03_descr');
 
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 //db_postmemory($HTTP_POST_VARS,2);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 $head2 = 'RELATÓRIO DA DÍVIDA POR EXERCÍCIO';
 $head5 = '';
 $head6 = '';
@@ -87,7 +87,7 @@ if(isset($exerc)){
   $selexercicios = ' and v01_exerc > '.str_replace("-",",",$exerc).' ';
   $anos=str_replace("-",",",$exerc);
   $head4 = "Exercicíos Selecionados: $anos ";
-	$matanos=split("-",$exerc);
+	$matanos=explode("-",$exerc);
 	$menorexerc=0;
 	$maiorexerc=0;
 	for ($contanos=0; $contanos < sizeof($matanos); $contanos++) {
@@ -389,7 +389,7 @@ if ($proced != "" or $agproced == "S") {
 }
 //die($sql_exe);
 $result = db_query($sql_exe);
-if(pg_numrows($result)==0){
+if(($result ? pg_numrows($result) : 0)==0){
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem dividas em aberto. ($exercicios).');
 }
 //die ($sql);

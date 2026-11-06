@@ -122,7 +122,7 @@ if(isset($mostrahtml) and $mostrahtml== true){
 
   $sqlinstit = "select codigo from db_config where prefeitura is true";
   $rsInstit  = db_query($conn ,$sqlinstit);
-  $instit    = pg_result($rsInstit,0,0);
+  $instit    = pg_fetch_result($rsInstit,0,0);
 
   $sqlSessao  = "SELECT fc_startsession()";
   $rsSessao   = db_query($conn, $sqlSessao) or die("Problema com a sessão");
@@ -132,7 +132,7 @@ if(isset($mostrahtml) and $mostrahtml== true){
 
   $sql = "select nextval('db_logsacessa_codsequen_seq')";
   $result = db_query($sql) or die($sql);
-  $codsequen = pg_result($result, 0, 0);
+  $codsequen = pg_fetch_result($result, 0, 0);
 
 }
 
@@ -238,9 +238,9 @@ if($cancelaProcessamento == false){
       db_log("", $sArquivoLog);
     }
 
-    
+
     for ($at=0;$at<$linhasAtiv; $at++) {
-      
+
       if(isset($mostrahtml) and $mostrahtml== true){
         db_atutermometro($at, $linhasAtiv, 'termometro');
       }else{
@@ -267,7 +267,7 @@ if($cancelaProcessamento == false){
                                                       false,
                                                       ".dbValida( $dt_exp,'date')."
                                                       )";
- 
+
         $resultCadAtiv = @db_query($conn2,$incluiCadAtiv) ;
         if($resultCadAtiv==false){
           db_log("Erro: \n sql = $incluiCadAtiv", null, 1);
@@ -292,7 +292,7 @@ if($cancelaProcessamento == false){
   $vir= "";
   //echo "<br> inserir dados na tb_i
   //inserir dados na tb_inter_empr
-  
+
   $sqlissbase = "
 					select distinct on(issbase.q02_inscr)
 					  issbase.q02_inscr  as inscricao,
@@ -321,7 +321,7 @@ if($cancelaProcessamento == false){
           left  join ruas        on issruas.j14_codigo    = ruas.j14_codigo
           $whereinscr
           ";
-  
+
   $resultissbase = db_query($conn,$sqlissbase);
   $linhasissbase = pg_num_rows($resultissbase);
   if(isset($mostrahtml) and $mostrahtml== true){
@@ -439,15 +439,15 @@ if($cancelaProcessamento == false){
       }
 
      //############## PROCESSANDO INSCRICOES - ATIVIDADES  ##############
-     
+
      $sqlTavativ = " select q07_ativ,q07_datain,q07_datafi from tabativ where q07_inscr = $inscricao ";
      $resultTabativ = db_query($conn , $sqlTavativ);
      $linhasTabativ = pg_num_rows($resultTabativ);
      if($linhasTabativ > 0){
-     
+
        for($ta=0;$ta<$linhasTabativ;$ta++){
          db_fieldsmemory($resultTabativ, $ta);
-         
+
          //verificar se ja tem esta atividade gravada no SISS
          $sqlAtiv_contrib = " select * from tb_ativ_contrib where ccm = $inscricao  and codativ = $q07_ativ ";
          $resultAtiv_contrib = db_query($conn2 , $sqlAtiv_contrib );
@@ -469,7 +469,7 @@ if($cancelaProcessamento == false){
                                                                ".dbValida( $dt_exp,'date')."
                                                              )";
            $resultIncluiAtiv_contrib = db_query($conn2, $incluiAtiv_contrib);
-           
+
            if($resultIncluiAtiv_contrib==false){
              db_log("Erro: \n sql = $incluiAtiv_contrib", null, 1);
              db_query($conn,'rollback');
@@ -488,7 +488,7 @@ if($cancelaProcessamento == false){
        }
      }
      // Processa aidof
-     
+
      $sqlAidof = "select  q09_nota, y08_dtlanc,y08_notain,y08_notafi from aidof inner join notasiss on q09_codigo = y08_nota where y08_inscr = $inscricao";
      $resultAidof = db_query($conn, $sqlAidof);
      $linhasAidof = pg_num_rows($resultAidof);
@@ -504,7 +504,7 @@ if($cancelaProcessamento == false){
          $resultAidofSiss = db_query($conn2,$sqlVerAidofSiss);
          $linhasAidofSiss = pg_num_rows($resultAidofSiss);
          if($linhasAidofSiss ==0){
-           
+
            $incluiAidof = " Insert into tb_contrib_aidof (ccm,num_ini,num_fim,serie,dt_lib,controle,dt_exp)
                                                  values  ($inscricao,
                                                           ".dbValida( $y08_notain,'int').",
@@ -527,8 +527,8 @@ if($cancelaProcessamento == false){
                db_log("Incluida Aidof para inscrição : {$inscricao}", $sArquivoLog,2,true,true);
              }
            }
-            
- 
+
+
          }
        }
      }
@@ -557,7 +557,7 @@ if($cancelaProcessamento == false){
               $resultSimplesSiss = db_query($conn2,$sqlVerSimplesSiss);
               $linhasSimplesSiss = pg_num_rows($resultSimplesSiss);
               if($linhasSimplesSiss == 0 ){
-                
+
                 $IncluiSimples = "insert into tb_simples (cnpj,mes,ano,valor,controle,dt_exp)
                                               values     (".dbValida( $cnpj,'string').",
                                                           ".dbValida( $q23_mesusu,'int').",
@@ -602,7 +602,7 @@ if($cancelaProcessamento == false){
       echo"<script>document.getElementById('titulo').innerHTML='PROCESSANDO EMPRESAS'; </script>";
       db_log("PROCESSANDO ESCRITÓRIOS  total = $linhasEscritorio ", $sArquivoLog,2 );
     }else{
-  
+
       db_log("PROCESSANDO ESCRITÓRIOS  total = $linhasEscritorio ", $sArquivoLog );
       db_log("", $sArquivoLog);
     }
@@ -618,7 +618,7 @@ if($cancelaProcessamento == false){
       }
 
       // verifica se ja tem escritorio em SISS
-      
+
       $sqlEscrSiss = "select * from tb_escritorios where codescr = $q10_numcgm ";
       $resultEscrSiss = db_query($conn2,$sqlEscrSiss);
       $linhasEscrSiss = pg_num_rows($resultEscrSiss);
@@ -818,7 +818,7 @@ if($linhasBuscaBoleto > 0){
         db_log("Processando Boleto giss. Documento = $documento, Data Vencimento = $dt_venc, Mês/Ano = $mes/$ano, Valor = $valor", $sArquivoLog, 2, true,true);
 
 
-        $vt= array();
+        $vt= [];
         $clissvar->q05_numpre = $documento;
         $clissvar->q05_numpar = $mes;
         $clissvar->q05_valor  = $valor;
@@ -867,11 +867,11 @@ if($linhasBuscaBoleto > 0){
           db_log("Boleto processado com sucesso!...(issvar = ".$clissvar->q05_codigo.", numpre = $documento, parcela = $mes)", $sArquivoLog, 2, true,true);
 
           // guarda  as informações dos registros que foram gerados issvar, para alterar o campo controle no giss
-          $arrayGiss[] = array('ccm'    => $ccm,
+          $arrayGiss[] = ['ccm'    => $ccm,
               'documento'   => $documento,
               'mes' => $mes,
               'ano' => $ano
-              );
+              ];
         }
 
       }
@@ -915,9 +915,9 @@ db_log("Final.: " . date( "H:i:s"), $sArquivoLog);
 db_log("\n *** FINAL Script ".$sNomeScript." *** \n\n", $sArquivoLog);
 
 function dbValida($valor,$tipo){
-  $aValorDefault = array('int'    => "0",
+  $aValorDefault = ['int'    => "0",
   'date'   => "null",
-  'string' => "null" );
+  'string' => "null" ];
   if ($valor != '') {
     if($tipo == 'int'){
       return $valor;
@@ -937,7 +937,7 @@ function dbValidaNumero($string){
   $tamanho = strlen($string);
   $string2 = "";
   for($tm=0;$tm<$tamanho;$tm++){
-    $letra = $string{$tm};
+    $letra = $string[$tm];
     // echo "<br>letra = $letra";
     if($letra=='0' or $letra=='1' or $letra=='2' or $letra=='3' or $letra=='4' or
     $letra=='5' or $letra=='6' or $letra=='7' or $letra=='8' or $letra=='9' ){

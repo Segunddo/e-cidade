@@ -26,7 +26,7 @@ class cl_mensagerialicencaprocessado {
                  am15_licencaempreendimento = int4 = Licença 
                  ";
    //funcao construtor da classe 
-   function cl_mensagerialicencaprocessado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mensagerialicencaprocessado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_mensagerialicencaprocessado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am15_sequencial = ($this->am15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am15_sequencial"]:$this->am15_sequencial);
-       $this->am15_mensagerialicencadb_usuarios = ($this->am15_mensagerialicencadb_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["am15_mensagerialicencadb_usuarios"]:$this->am15_mensagerialicencadb_usuarios);
-       $this->am15_licencaempreendimento = ($this->am15_licencaempreendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["am15_licencaempreendimento"]:$this->am15_licencaempreendimento);
+       $this->am15_sequencial = ($this->am15_sequencial === 0 || $this->am15_sequencial === 0.0 || $this->am15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am15_sequencial"]:$this->am15_sequencial);
+       $this->am15_mensagerialicencadb_usuarios = ($this->am15_mensagerialicencadb_usuarios === 0 || $this->am15_mensagerialicencadb_usuarios === 0.0 || $this->am15_mensagerialicencadb_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["am15_mensagerialicencadb_usuarios"]:$this->am15_mensagerialicencadb_usuarios);
+       $this->am15_licencaempreendimento = ($this->am15_licencaempreendimento === 0 || $this->am15_licencaempreendimento === 0.0 || $this->am15_licencaempreendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["am15_licencaempreendimento"]:$this->am15_licencaempreendimento);
      }else{
-       $this->am15_sequencial = ($this->am15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am15_sequencial"]:$this->am15_sequencial);
+       $this->am15_sequencial = ($this->am15_sequencial === 0 || $this->am15_sequencial === 0.0 || $this->am15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am15_sequencial"]:$this->am15_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_mensagerialicencaprocessado {
          $this->am15_sequencial = $am15_sequencial; 
        }
      }
-     if(($this->am15_sequencial == null) || ($this->am15_sequencial == "") ){ 
+     if(($this->am15_sequencial == null) || ($this->am15_sequencial === 0 || $this->am15_sequencial === 0.0 || $this->am15_sequencial == "") ){ 
        $this->erro_sql = " Campo am15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

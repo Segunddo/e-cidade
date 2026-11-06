@@ -29,7 +29,7 @@ class cl_acordoencerramentolicitacon {
                  ac58_data = date = Data
                  ";
    //funcao construtor da classe
-   function cl_acordoencerramentolicitacon() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoencerramentolicitacon");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -46,8 +46,8 @@ class cl_acordoencerramentolicitacon {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac58_sequencial = ($this->ac58_sequencial == ""?(isset($GLOBALS["HTTP_POST_VARS"]["ac58_sequencial"]) ? $GLOBALS["HTTP_POST_VARS"]["ac58_sequencial"] : null):$this->ac58_sequencial);
-       $this->ac58_acordo = ($this->ac58_acordo == ""?(isset($GLOBALS["HTTP_POST_VARS"]["ac58_acordo"]) ? $GLOBALS["HTTP_POST_VARS"]["ac58_acordo"] : null):$this->ac58_acordo);
+       $this->ac58_sequencial = ($this->ac58_sequencial === 0 || $this->ac58_sequencial === 0.0 || $this->ac58_sequencial == ""?(isset($GLOBALS["HTTP_POST_VARS"]["ac58_sequencial"]) ? $GLOBALS["HTTP_POST_VARS"]["ac58_sequencial"] : null):$this->ac58_sequencial);
+       $this->ac58_acordo = ($this->ac58_acordo === 0 || $this->ac58_acordo === 0.0 || $this->ac58_acordo == ""?(isset($GLOBALS["HTTP_POST_VARS"]["ac58_acordo"]) ? $GLOBALS["HTTP_POST_VARS"]["ac58_acordo"] : null):$this->ac58_acordo);
        if($this->ac58_data == ""){
          $this->ac58_data_dia = ($this->ac58_data_dia == ""?(isset($GLOBALS["HTTP_POST_VARS"]["ac58_data_dia"]) ? $GLOBALS["HTTP_POST_VARS"]["ac58_data_dia"] : null):$this->ac58_data_dia);
          $this->ac58_data_mes = ($this->ac58_data_mes == ""?(isset($GLOBALS["HTTP_POST_VARS"]["ac58_data_mes"]) ? $GLOBALS["HTTP_POST_VARS"]["ac58_data_mes"] : null):$this->ac58_data_mes);
@@ -57,7 +57,7 @@ class cl_acordoencerramentolicitacon {
          }
        }
      }else{
-       $this->ac58_sequencial = ($this->ac58_sequencial == ""?(isset($GLOBALS["HTTP_POST_VARS"]["ac58_sequencial"]) ? $GLOBALS["HTTP_POST_VARS"]["ac58_sequencial"] : null):$this->ac58_sequencial);
+       $this->ac58_sequencial = ($this->ac58_sequencial === 0 || $this->ac58_sequencial === 0.0 || $this->ac58_sequencial == ""?(isset($GLOBALS["HTTP_POST_VARS"]["ac58_sequencial"]) ? $GLOBALS["HTTP_POST_VARS"]["ac58_sequencial"] : null):$this->ac58_sequencial);
      }
    }
    // funcao para Inclusão
@@ -105,7 +105,7 @@ class cl_acordoencerramentolicitacon {
          $this->ac58_sequencial = $ac58_sequencial;
        }
      }
-     if(($this->ac58_sequencial == null) || ($this->ac58_sequencial == "") ){
+     if(($this->ac58_sequencial == null) || ($this->ac58_sequencial === 0 || $this->ac58_sequencial === 0.0 || $this->ac58_sequencial == "") ){
        $this->erro_sql = " Campo ac58_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

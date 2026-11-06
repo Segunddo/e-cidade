@@ -54,7 +54,7 @@ class cl_setorfiscalvalor {
                  j82_valorterreno = float8 = Valor m2 terreno 
                  ";
    //funcao construtor da classe 
-   function cl_setorfiscalvalor() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("setorfiscalvalor"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_setorfiscalvalor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j82_codigo = ($this->j82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_codigo"]:$this->j82_codigo);
-       $this->j82_setorfiscal = ($this->j82_setorfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_setorfiscal"]:$this->j82_setorfiscal);
-       $this->j82_anousu = ($this->j82_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_anousu"]:$this->j82_anousu);
-       $this->j82_valorterreno = ($this->j82_valorterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_valorterreno"]:$this->j82_valorterreno);
+       $this->j82_codigo = ($this->j82_codigo === 0 || $this->j82_codigo === 0.0 || $this->j82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_codigo"]:$this->j82_codigo);
+       $this->j82_setorfiscal = ($this->j82_setorfiscal === 0 || $this->j82_setorfiscal === 0.0 || $this->j82_setorfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_setorfiscal"]:$this->j82_setorfiscal);
+       $this->j82_anousu = ($this->j82_anousu === 0 || $this->j82_anousu === 0.0 || $this->j82_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_anousu"]:$this->j82_anousu);
+       $this->j82_valorterreno = ($this->j82_valorterreno === 0 || $this->j82_valorterreno === 0.0 || $this->j82_valorterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_valorterreno"]:$this->j82_valorterreno);
      }else{
-       $this->j82_codigo = ($this->j82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_codigo"]:$this->j82_codigo);
+       $this->j82_codigo = ($this->j82_codigo === 0 || $this->j82_codigo === 0.0 || $this->j82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_codigo"]:$this->j82_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_setorfiscalvalor {
          $this->j82_codigo = $j82_codigo; 
        }
      }
-     if(($this->j82_codigo == null) || ($this->j82_codigo == "") ){ 
+     if(($this->j82_codigo == null) || ($this->j82_codigo === 0 || $this->j82_codigo === 0.0 || $this->j82_codigo == "") ){ 
        $this->erro_sql = " Campo j82_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_setorfiscalvalor {
    function sql_query ( $j82_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_setorfiscalvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_setorfiscalvalor {
    function sql_query_file ( $j82_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_setorfiscalvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

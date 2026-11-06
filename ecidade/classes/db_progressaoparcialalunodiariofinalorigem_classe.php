@@ -52,7 +52,7 @@ class cl_progressaoparcialalunodiariofinalorigem {
                  ed107_diariofinal = int4 = Diário Final 
                  ";
    //funcao construtor da classe
-   function cl_progressaoparcialalunodiariofinalorigem() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("progressaoparcialalunodiariofinalorigem");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_progressaoparcialalunodiariofinalorigem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed107_sequencial = ($this->ed107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_sequencial"]:$this->ed107_sequencial);
-       $this->ed107_progressaoparcialaluno = ($this->ed107_progressaoparcialaluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_progressaoparcialaluno"]:$this->ed107_progressaoparcialaluno);
-       $this->ed107_diariofinal = ($this->ed107_diariofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_diariofinal"]:$this->ed107_diariofinal);
+       $this->ed107_sequencial = ($this->ed107_sequencial === 0 || $this->ed107_sequencial === 0.0 || $this->ed107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_sequencial"]:$this->ed107_sequencial);
+       $this->ed107_progressaoparcialaluno = ($this->ed107_progressaoparcialaluno === 0 || $this->ed107_progressaoparcialaluno === 0.0 || $this->ed107_progressaoparcialaluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_progressaoparcialaluno"]:$this->ed107_progressaoparcialaluno);
+       $this->ed107_diariofinal = ($this->ed107_diariofinal === 0 || $this->ed107_diariofinal === 0.0 || $this->ed107_diariofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_diariofinal"]:$this->ed107_diariofinal);
      }else{
-       $this->ed107_sequencial = ($this->ed107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_sequencial"]:$this->ed107_sequencial);
+       $this->ed107_sequencial = ($this->ed107_sequencial === 0 || $this->ed107_sequencial === 0.0 || $this->ed107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_sequencial"]:$this->ed107_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_progressaoparcialalunodiariofinalorigem {
          $this->ed107_sequencial = $ed107_sequencial;
        }
      }
-     if(($this->ed107_sequencial == null) || ($this->ed107_sequencial == "") ){
+     if(($this->ed107_sequencial == null) || ($this->ed107_sequencial === 0 || $this->ed107_sequencial === 0.0 || $this->ed107_sequencial == "") ){
        $this->erro_sql = " Campo ed107_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

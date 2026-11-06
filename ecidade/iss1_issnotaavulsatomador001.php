@@ -108,7 +108,7 @@ if (isset($get->q51_sequencial)){
 
       	$oNota           = db_utils::fieldsmemory($rsNota,0);
         $q51_numnota     = $oNota->q51_numnota;
-				$q51_dtemiss     = split("-",$oNota->q51_dtemiss);
+				$q51_dtemiss     = preg_split("#\\-#m",$oNota->q51_dtemiss);
         $q51_dtemiss_dia = $q51_dtemiss[2];
         $q51_dtemiss_mes = $q51_dtemiss[1];
         $q51_dtemiss_ano = $q51_dtemiss[0];

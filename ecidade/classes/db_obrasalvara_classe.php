@@ -96,8 +96,8 @@ class cl_obrasalvara
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ob04_codobra = ($this->ob04_codobra == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_codobra"] : $this->ob04_codobra);
-            $this->ob04_alvara = ($this->ob04_alvara == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_alvara"] : $this->ob04_alvara);
+            $this->ob04_codobra = ($this->ob04_codobra === 0 || $this->ob04_codobra === 0.0 || $this->ob04_codobra == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_codobra"] : $this->ob04_codobra);
+            $this->ob04_alvara = ($this->ob04_alvara === 0 || $this->ob04_alvara === 0.0 || $this->ob04_alvara == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_alvara"] : $this->ob04_alvara);
             $this->ob04_processo = ($this->ob04_processo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_processo"] : $this->ob04_processo);
             $this->ob04_titularprocesso = ($this->ob04_titularprocesso == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_titularprocesso"] : $this->ob04_titularprocesso);
             $this->ob04_obsprocesso = ($this->ob04_obsprocesso == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_obsprocesso"] : $this->ob04_obsprocesso);
@@ -134,9 +134,9 @@ class cl_obrasalvara
 
             $this->ob04_classe = ($this->ob04_classe == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_classe"] : $this->ob04_classe);
             $this->ob04_ativo = ($this->ob04_ativo === "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_ativo"] : $this->ob04_ativo);
-            $this->ob04_idalvara = ($this->ob04_idalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["ob04_idalvara"]:$this->ob04_idalvara);
+            $this->ob04_idalvara = ($this->ob04_idalvara === 0 || $this->ob04_idalvara === 0.0 || $this->ob04_idalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["ob04_idalvara"]:$this->ob04_idalvara);
         } else {
-            $this->ob04_codobra = ($this->ob04_codobra == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_codobra"] : $this->ob04_codobra);
+            $this->ob04_codobra = ($this->ob04_codobra === 0 || $this->ob04_codobra === 0.0 || $this->ob04_codobra == "" ? @$GLOBALS["HTTP_POST_VARS"]["ob04_codobra"] : $this->ob04_codobra);
         }
     }
 
@@ -831,7 +831,7 @@ class cl_obrasalvara
    public function sql_query_txt ( $ob04_codobra=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -858,7 +858,7 @@ class cl_obrasalvara
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -870,7 +870,7 @@ class cl_obrasalvara
    public function sql_queryobras ( $ob04_codobra=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -893,7 +893,7 @@ class cl_obrasalvara
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -957,7 +957,7 @@ class cl_obrasalvara
 
     return $sSql;
   }
-   public function sql_query_obrasalvaras_relatorio($sCampos = "*", $sWhere, $lHabite = null, $sOrderBy = null) {
+   public function sql_query_obrasalvaras_relatorio($sCampos = "*", $sWhere = null, $lHabite = null, $sOrderBy = null) {
   	
     $sSql  = "select distinct {$sCampos}                                                                  \n";
     $sSql .= "  from obrasalvara                                                                    \n";
@@ -1107,7 +1107,7 @@ class cl_obrasalvara
     	}
     }
   	
-  	if(($this->ob04_codobra == null) || ($this->ob04_codobra == "") ){
+  	if(($this->ob04_codobra == null) || ($this->ob04_codobra === 0 || $this->ob04_codobra === 0.0 || $this->ob04_codobra == "") ){
   		$this->erro_sql = " Campo ob04_codobra nao declarado.";
   		$this->erro_banco = "Chave Primaria zerada.";
   		$this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

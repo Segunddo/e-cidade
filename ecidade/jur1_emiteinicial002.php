@@ -111,7 +111,9 @@ if(isset($alterar)){
     $sqlerro = true;
     db_msgbox($erromsg);
     db_redireciona("jur1_emiteinicial002.php?chavepesquisa=$v50_inicial");
-    break;
+    // COMPAT PHP 8: `break` fora de laco/switch era warning no 5.6 e e FATAL DE
+    // COMPILACAO desde o PHP 7.0. Aqui era inalcancavel -- db_redireciona() termina
+    // em exit (libs/db_stdlib.php:1545) -- entao remove-lo preserva a semantica.
   }
 
   $sqlPardiv = "select v04_tipoinicial,v04_tipocertidao as tipocertidao from pardiv where v04_instit  = ".db_getsession('DB_instit') ;

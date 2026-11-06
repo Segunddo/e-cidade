@@ -56,7 +56,7 @@ class cl_empreendimentoatividadeimpacto {
                  am06_atividadeimpactoporte = int4 = Porte
                  ";
    //funcao construtor da classe
-   function cl_empreendimentoatividadeimpacto() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empreendimentoatividadeimpacto");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_empreendimentoatividadeimpacto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am06_sequencial = ($this->am06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am06_sequencial"]:$this->am06_sequencial);
-       $this->am06_atividadeimpacto = ($this->am06_atividadeimpacto == ""?@$GLOBALS["HTTP_POST_VARS"]["am06_atividadeimpacto"]:$this->am06_atividadeimpacto);
-       $this->am06_empreendimento = ($this->am06_empreendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["am06_empreendimento"]:$this->am06_empreendimento);
+       $this->am06_sequencial = ($this->am06_sequencial === 0 || $this->am06_sequencial === 0.0 || $this->am06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am06_sequencial"]:$this->am06_sequencial);
+       $this->am06_atividadeimpacto = ($this->am06_atividadeimpacto === 0 || $this->am06_atividadeimpacto === 0.0 || $this->am06_atividadeimpacto == ""?@$GLOBALS["HTTP_POST_VARS"]["am06_atividadeimpacto"]:$this->am06_atividadeimpacto);
+       $this->am06_empreendimento = ($this->am06_empreendimento === 0 || $this->am06_empreendimento === 0.0 || $this->am06_empreendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["am06_empreendimento"]:$this->am06_empreendimento);
        $this->am06_principal = ($this->am06_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["am06_principal"]:$this->am06_principal);
-       $this->am06_atividadeimpactoporte = ($this->am06_atividadeimpactoporte == ""?@$GLOBALS["HTTP_POST_VARS"]["am06_atividadeimpactoporte"]:$this->am06_atividadeimpactoporte);
+       $this->am06_atividadeimpactoporte = ($this->am06_atividadeimpactoporte === 0 || $this->am06_atividadeimpactoporte === 0.0 || $this->am06_atividadeimpactoporte == ""?@$GLOBALS["HTTP_POST_VARS"]["am06_atividadeimpactoporte"]:$this->am06_atividadeimpactoporte);
      }else{
-       $this->am06_sequencial = ($this->am06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am06_sequencial"]:$this->am06_sequencial);
+       $this->am06_sequencial = ($this->am06_sequencial === 0 || $this->am06_sequencial === 0.0 || $this->am06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am06_sequencial"]:$this->am06_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_empreendimentoatividadeimpacto {
          $this->am06_sequencial = $am06_sequencial;
        }
      }
-     if(($this->am06_sequencial == null) || ($this->am06_sequencial == "") ){
+     if(($this->am06_sequencial == null) || ($this->am06_sequencial === 0 || $this->am06_sequencial === 0.0 || $this->am06_sequencial == "") ){
        $this->erro_sql = " Campo am06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

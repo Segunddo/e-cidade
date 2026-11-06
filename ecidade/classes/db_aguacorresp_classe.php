@@ -60,7 +60,7 @@ class cl_aguacorresp {
                  x02_complemento = varchar(20) = Complemento 
                  ";
    //funcao construtor da classe 
-   function cl_aguacorresp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacorresp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_aguacorresp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x02_codcorresp = ($this->x02_codcorresp == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codcorresp"]:$this->x02_codcorresp);
-       $this->x02_codbairro = ($this->x02_codbairro == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codbairro"]:$this->x02_codbairro);
-       $this->x02_codrua = ($this->x02_codrua == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codrua"]:$this->x02_codrua);
-       $this->x02_numero = ($this->x02_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_numero"]:$this->x02_numero);
-       $this->x02_rota = ($this->x02_rota == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_rota"]:$this->x02_rota);
+       $this->x02_codcorresp = (($this->x02_codcorresp === 0 || $this->x02_codcorresp === 0.0 || ($this->x02_codcorresp === 0 || $this->x02_codcorresp === 0.0 || $this->x02_codcorresp == ""))?@$GLOBALS["HTTP_POST_VARS"]["x02_codcorresp"]:$this->x02_codcorresp);
+       $this->x02_codbairro = (($this->x02_codbairro === 0 || $this->x02_codbairro === 0.0 || ($this->x02_codbairro === 0 || $this->x02_codbairro === 0.0 || $this->x02_codbairro == ""))?@$GLOBALS["HTTP_POST_VARS"]["x02_codbairro"]:$this->x02_codbairro);
+       $this->x02_codrua = (($this->x02_codrua === 0 || $this->x02_codrua === 0.0 || ($this->x02_codrua === 0 || $this->x02_codrua === 0.0 || $this->x02_codrua == ""))?@$GLOBALS["HTTP_POST_VARS"]["x02_codrua"]:$this->x02_codrua);
+       $this->x02_numero = (($this->x02_numero === 0 || $this->x02_numero === 0.0 || ($this->x02_numero === 0 || $this->x02_numero === 0.0 || $this->x02_numero == ""))?@$GLOBALS["HTTP_POST_VARS"]["x02_numero"]:$this->x02_numero);
+       $this->x02_rota = (($this->x02_rota === 0 || $this->x02_rota === 0.0 || ($this->x02_rota === 0 || $this->x02_rota === 0.0 || $this->x02_rota == ""))?@$GLOBALS["HTTP_POST_VARS"]["x02_rota"]:$this->x02_rota);
        $this->x02_orientacao = ($this->x02_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_orientacao"]:$this->x02_orientacao);
        $this->x02_complemento = ($this->x02_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_complemento"]:$this->x02_complemento);
      }else{
-       $this->x02_codcorresp = ($this->x02_codcorresp == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codcorresp"]:$this->x02_codcorresp);
+       $this->x02_codcorresp = (($this->x02_codcorresp === 0 || $this->x02_codcorresp === 0.0 || ($this->x02_codcorresp === 0 || $this->x02_codcorresp === 0.0 || $this->x02_codcorresp == ""))?@$GLOBALS["HTTP_POST_VARS"]["x02_codcorresp"]:$this->x02_codcorresp);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_aguacorresp {
          $this->x02_codcorresp = $x02_codcorresp; 
        }
      }
-     if(($this->x02_codcorresp == null) || ($this->x02_codcorresp == "") ){ 
+     if(($this->x02_codcorresp == null) || (($this->x02_codcorresp === 0 || $this->x02_codcorresp === 0.0 || ($this->x02_codcorresp === 0 || $this->x02_codcorresp === 0.0 || $this->x02_codcorresp == ""))) ){ 
        $this->erro_sql = " Campo x02_codcorresp nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -484,7 +484,7 @@ class cl_aguacorresp {
    function sql_query ( $x02_codcorresp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -507,7 +507,7 @@ class cl_aguacorresp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_aguacorresp {
    function sql_query_file ( $x02_codcorresp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -541,7 +541,7 @@ class cl_aguacorresp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

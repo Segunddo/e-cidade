@@ -65,7 +65,7 @@ class cl_bensdepreciacao {
                  t44_ultimaavaliacao = date =  
                  ";
    //funcao construtor da classe 
-   function cl_bensdepreciacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bensdepreciacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,13 +82,13 @@ class cl_bensdepreciacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t44_sequencial = ($this->t44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_sequencial"]:$this->t44_sequencial);
-       $this->t44_bens = ($this->t44_bens == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_bens"]:$this->t44_bens);
-       $this->t44_benstipoaquisicao = ($this->t44_benstipoaquisicao == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_benstipoaquisicao"]:$this->t44_benstipoaquisicao);
-       $this->t44_benstipodepreciacao = ($this->t44_benstipodepreciacao == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_benstipodepreciacao"]:$this->t44_benstipodepreciacao);
-       $this->t44_vidautil = ($this->t44_vidautil == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_vidautil"]:$this->t44_vidautil);
-       $this->t44_valoratual = ($this->t44_valoratual == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_valoratual"]:$this->t44_valoratual);
-       $this->t44_valorresidual = ($this->t44_valorresidual == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_valorresidual"]:$this->t44_valorresidual);
+       $this->t44_sequencial = ($this->t44_sequencial === 0 || $this->t44_sequencial === 0.0 || $this->t44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_sequencial"]:$this->t44_sequencial);
+       $this->t44_bens = ($this->t44_bens === 0 || $this->t44_bens === 0.0 || $this->t44_bens == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_bens"]:$this->t44_bens);
+       $this->t44_benstipoaquisicao = ($this->t44_benstipoaquisicao === 0 || $this->t44_benstipoaquisicao === 0.0 || $this->t44_benstipoaquisicao == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_benstipoaquisicao"]:$this->t44_benstipoaquisicao);
+       $this->t44_benstipodepreciacao = ($this->t44_benstipodepreciacao === 0 || $this->t44_benstipodepreciacao === 0.0 || $this->t44_benstipodepreciacao == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_benstipodepreciacao"]:$this->t44_benstipodepreciacao);
+       $this->t44_vidautil = ($this->t44_vidautil === 0 || $this->t44_vidautil === 0.0 || $this->t44_vidautil == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_vidautil"]:$this->t44_vidautil);
+       $this->t44_valoratual = ($this->t44_valoratual === 0 || $this->t44_valoratual === 0.0 || $this->t44_valoratual == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_valoratual"]:$this->t44_valoratual);
+       $this->t44_valorresidual = ($this->t44_valorresidual === 0 || $this->t44_valorresidual === 0.0 || $this->t44_valorresidual == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_valorresidual"]:$this->t44_valorresidual);
        if($this->t44_ultimaavaliacao == ""){
          $this->t44_ultimaavaliacao_dia = ($this->t44_ultimaavaliacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_ultimaavaliacao_dia"]:$this->t44_ultimaavaliacao_dia);
          $this->t44_ultimaavaliacao_mes = ($this->t44_ultimaavaliacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_ultimaavaliacao_mes"]:$this->t44_ultimaavaliacao_mes);
@@ -98,7 +98,7 @@ class cl_bensdepreciacao {
          }
        }
      }else{
-       $this->t44_sequencial = ($this->t44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_sequencial"]:$this->t44_sequencial);
+       $this->t44_sequencial = ($this->t44_sequencial === 0 || $this->t44_sequencial === 0.0 || $this->t44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t44_sequencial"]:$this->t44_sequencial);
      }
    }
    // funcao para inclusao
@@ -191,7 +191,7 @@ class cl_bensdepreciacao {
          $this->t44_sequencial = $t44_sequencial; 
        }
      }
-     if(($this->t44_sequencial == null) || ($this->t44_sequencial == "") ){ 
+     if(($this->t44_sequencial == null) || ($this->t44_sequencial === 0 || $this->t44_sequencial === 0.0 || $this->t44_sequencial == "") ){ 
        $this->erro_sql = " Campo t44_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -539,7 +539,7 @@ class cl_bensdepreciacao {
    function sql_query ( $t44_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -570,7 +570,7 @@ class cl_bensdepreciacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -583,7 +583,7 @@ class cl_bensdepreciacao {
    function sql_query_file ( $t44_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -604,7 +604,7 @@ class cl_bensdepreciacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -618,7 +618,7 @@ class cl_bensdepreciacao {
 
     $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -641,7 +641,7 @@ class cl_bensdepreciacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

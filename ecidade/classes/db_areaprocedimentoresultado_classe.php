@@ -49,13 +49,13 @@ class cl_areaprocedimentoresultado
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed159_codigo = ($this->ed159_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_codigo"]:$this->ed159_codigo);
-       $this->ed159_areaprocedimento = ($this->ed159_areaprocedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_areaprocedimento"]:$this->ed159_areaprocedimento);
-       $this->ed159_formaavaliacao = ($this->ed159_formaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_formaavaliacao"]:$this->ed159_formaavaliacao);
-       $this->ed159_resultado = ($this->ed159_resultado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_resultado"]:$this->ed159_resultado);
+       $this->ed159_codigo = ($this->ed159_codigo === 0 || $this->ed159_codigo === 0.0 || $this->ed159_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_codigo"]:$this->ed159_codigo);
+       $this->ed159_areaprocedimento = ($this->ed159_areaprocedimento === 0 || $this->ed159_areaprocedimento === 0.0 || $this->ed159_areaprocedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_areaprocedimento"]:$this->ed159_areaprocedimento);
+       $this->ed159_formaavaliacao = ($this->ed159_formaavaliacao === 0 || $this->ed159_formaavaliacao === 0.0 || $this->ed159_formaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_formaavaliacao"]:$this->ed159_formaavaliacao);
+       $this->ed159_resultado = ($this->ed159_resultado === 0 || $this->ed159_resultado === 0.0 || $this->ed159_resultado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_resultado"]:$this->ed159_resultado);
        $this->ed159_formaobtencao = ($this->ed159_formaobtencao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_formaobtencao"]:$this->ed159_formaobtencao);
      }else{
-       $this->ed159_codigo = ($this->ed159_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_codigo"]:$this->ed159_codigo);
+       $this->ed159_codigo = ($this->ed159_codigo === 0 || $this->ed159_codigo === 0.0 || $this->ed159_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed159_codigo"]:$this->ed159_codigo);
      }
    }
 
@@ -122,7 +122,7 @@ class cl_areaprocedimentoresultado
          $this->ed159_codigo = $ed159_codigo; 
        }
      }
-     if(($this->ed159_codigo == null) || ($this->ed159_codigo == "") ){ 
+     if(($this->ed159_codigo == null) || ($this->ed159_codigo === 0 || $this->ed159_codigo === 0.0 || $this->ed159_codigo == "") ){ 
        $this->erro_sql = " Campo ed159_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

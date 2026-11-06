@@ -31,7 +31,7 @@ class libParagrafoTabela {
   var $oParag = null;
   var $aTabela = array();      
   
-  function libParagrafoTabela( $oParag, $aTabela ){
+  function __construct( $oParag, $aTabela ){
     
     $this->oParag  = $oParag;
     $this->aTabela = $aTabela;

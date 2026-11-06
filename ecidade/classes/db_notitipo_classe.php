@@ -52,7 +52,7 @@ class cl_notitipo {
                  k51_confirma = bool = Recebimento 
                  ";
    //funcao construtor da classe 
-   function cl_notitipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("notitipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_notitipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k51_procede = ($this->k51_procede == ""?@$GLOBALS["HTTP_POST_VARS"]["k51_procede"]:$this->k51_procede);
+       $this->k51_procede = ($this->k51_procede === 0 || $this->k51_procede === 0.0 || $this->k51_procede == ""?@$GLOBALS["HTTP_POST_VARS"]["k51_procede"]:$this->k51_procede);
        $this->k51_descr = ($this->k51_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k51_descr"]:$this->k51_descr);
        $this->k51_confirma = ($this->k51_confirma == "f"?@$GLOBALS["HTTP_POST_VARS"]["k51_confirma"]:$this->k51_confirma);
      }else{
-       $this->k51_procede = ($this->k51_procede == ""?@$GLOBALS["HTTP_POST_VARS"]["k51_procede"]:$this->k51_procede);
+       $this->k51_procede = ($this->k51_procede === 0 || $this->k51_procede === 0.0 || $this->k51_procede == ""?@$GLOBALS["HTTP_POST_VARS"]["k51_procede"]:$this->k51_procede);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_notitipo {
          $this->k51_procede = $k51_procede; 
        }
      }
-     if(($this->k51_procede == null) || ($this->k51_procede == "") ){ 
+     if(($this->k51_procede == null) || ($this->k51_procede === 0 || $this->k51_procede === 0.0 || $this->k51_procede == "") ){ 
        $this->erro_sql = " Campo k51_procede nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -362,7 +362,7 @@ class cl_notitipo {
    function sql_query ( $k51_procede=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_notitipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_notitipo {
    function sql_query_file ( $k51_procede=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_notitipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

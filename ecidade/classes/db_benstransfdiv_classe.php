@@ -54,7 +54,7 @@ class cl_benstransfdiv {
                  t31_divisao = int4 = Código da divisão 
                  ";
    //funcao construtor da classe 
-   function cl_benstransfdiv() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("benstransfdiv"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_benstransfdiv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t31_codigo = ($this->t31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t31_codigo"]:$this->t31_codigo);
-       $this->t31_codtran = ($this->t31_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t31_codtran"]:$this->t31_codtran);
-       $this->t31_bem = ($this->t31_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t31_bem"]:$this->t31_bem);
-       $this->t31_divisao = ($this->t31_divisao == ""?@$GLOBALS["HTTP_POST_VARS"]["t31_divisao"]:$this->t31_divisao);
+       $this->t31_codigo = ($this->t31_codigo === 0 || $this->t31_codigo === 0.0 || $this->t31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t31_codigo"]:$this->t31_codigo);
+       $this->t31_codtran = ($this->t31_codtran === 0 || $this->t31_codtran === 0.0 || $this->t31_codtran == ""?@$GLOBALS["HTTP_POST_VARS"]["t31_codtran"]:$this->t31_codtran);
+       $this->t31_bem = ($this->t31_bem === 0 || $this->t31_bem === 0.0 || $this->t31_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t31_bem"]:$this->t31_bem);
+       $this->t31_divisao = ($this->t31_divisao === 0 || $this->t31_divisao === 0.0 || $this->t31_divisao == ""?@$GLOBALS["HTTP_POST_VARS"]["t31_divisao"]:$this->t31_divisao);
      }else{
-       $this->t31_codigo = ($this->t31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t31_codigo"]:$this->t31_codigo);
+       $this->t31_codigo = ($this->t31_codigo === 0 || $this->t31_codigo === 0.0 || $this->t31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t31_codigo"]:$this->t31_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_benstransfdiv {
          $this->t31_codigo = $t31_codigo; 
        }
      }
-     if(($this->t31_codigo == null) || ($this->t31_codigo == "") ){ 
+     if(($this->t31_codigo == null) || ($this->t31_codigo === 0 || $this->t31_codigo === 0.0 || $this->t31_codigo == "") ){ 
        $this->erro_sql = " Campo t31_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_benstransfdiv {
    function sql_query ( $t31_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_benstransfdiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_benstransfdiv {
    function sql_query_file ( $t31_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -454,7 +454,7 @@ class cl_benstransfdiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

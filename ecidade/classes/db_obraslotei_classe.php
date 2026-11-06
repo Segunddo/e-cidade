@@ -54,7 +54,7 @@ class cl_obraslotei {
                  ob06_lote = varchar(4) = Lote 
                  ";
    //funcao construtor da classe 
-   function cl_obraslotei() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obraslotei"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_obraslotei {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob06_codobra = ($this->ob06_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_codobra"]:$this->ob06_codobra);
+       $this->ob06_codobra = ($this->ob06_codobra === 0 || $this->ob06_codobra === 0.0 || $this->ob06_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_codobra"]:$this->ob06_codobra);
        $this->ob06_setor = ($this->ob06_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_setor"]:$this->ob06_setor);
        $this->ob06_quadra = ($this->ob06_quadra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_quadra"]:$this->ob06_quadra);
        $this->ob06_lote = ($this->ob06_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_lote"]:$this->ob06_lote);
      }else{
-       $this->ob06_codobra = ($this->ob06_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_codobra"]:$this->ob06_codobra);
+       $this->ob06_codobra = ($this->ob06_codobra === 0 || $this->ob06_codobra === 0.0 || $this->ob06_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_codobra"]:$this->ob06_codobra);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_obraslotei {
        return false;
      }
        $this->ob06_codobra = $ob06_codobra; 
-     if(($this->ob06_codobra == null) || ($this->ob06_codobra == "") ){ 
+     if(($this->ob06_codobra == null) || ($this->ob06_codobra === 0 || $this->ob06_codobra === 0.0 || $this->ob06_codobra == "") ){ 
        $this->erro_sql = " Campo ob06_codobra nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -367,7 +367,7 @@ class cl_obraslotei {
    function sql_query ( $ob06_codobra=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_obraslotei {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_obraslotei {
    function sql_query_file ( $ob06_codobra=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_obraslotei {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

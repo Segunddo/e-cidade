@@ -64,7 +64,7 @@ $sSql = "select k00_dtpaga,
                   inner join histcalc on k01_codigo          =  arrepaga.k00_hist                   
          where  arrepaga.k00_numpre = ".$objNumpreNota->q52_numpre;                          
 $rsPago   = db_query($sSql);       
-$iNumRows = pg_num_rows($rsPago);
+$iNumRows = ($rsPago ? pg_num_rows($rsPago) : 0);
 if ($iNumRows == 0){       
 
    $sSql = "select k20_data, 
@@ -77,7 +77,7 @@ if ($iNumRows == 0){
                    inner join cancdebitos    on k20_codigo = k21_codigo                         
             where  k00_numpre = ".$objNumpreNota->q52_numpre;                          
    $rsCanc  = db_query($sSql);       
-   $iNumRows = pg_num_rows($rsCanc);
+   $iNumRows = ($rsCanc ? pg_num_rows($rsCanc) : 0);
    if ($iNumRows == 0){       
      $sSql = "select k00_dtvenc, 
                      arrecad.k00_valor,

@@ -52,7 +52,7 @@ class cl_isencaotipo {
                  v11_regra = int4 = Regra 
                  ";
    //funcao construtor da classe 
-   function cl_isencaotipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isencaotipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_isencaotipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v11_sequencial = ($this->v11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v11_sequencial"]:$this->v11_sequencial);
+       $this->v11_sequencial = ($this->v11_sequencial === 0 || $this->v11_sequencial === 0.0 || $this->v11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v11_sequencial"]:$this->v11_sequencial);
        $this->v11_descr = ($this->v11_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["v11_descr"]:$this->v11_descr);
-       $this->v11_regra = ($this->v11_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["v11_regra"]:$this->v11_regra);
+       $this->v11_regra = ($this->v11_regra === 0 || $this->v11_regra === 0.0 || $this->v11_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["v11_regra"]:$this->v11_regra);
      }else{
-       $this->v11_sequencial = ($this->v11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v11_sequencial"]:$this->v11_sequencial);
+       $this->v11_sequencial = ($this->v11_sequencial === 0 || $this->v11_sequencial === 0.0 || $this->v11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v11_sequencial"]:$this->v11_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_isencaotipo {
          $this->v11_sequencial = $v11_sequencial; 
        }
      }
-     if(($this->v11_sequencial == null) || ($this->v11_sequencial == "") ){ 
+     if(($this->v11_sequencial == null) || ($this->v11_sequencial === 0 || $this->v11_sequencial === 0.0 || $this->v11_sequencial == "") ){ 
        $this->erro_sql = " Campo v11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_isencaotipo {
    function sql_query ( $v11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_isencaotipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_isencaotipo {
    function sql_query_file ( $v11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_isencaotipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

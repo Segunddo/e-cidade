@@ -52,7 +52,7 @@ class cl_placaixarecmatric {
                  k77_matric = int4 = Mátricula 
                  ";
    //funcao construtor da classe 
-   function cl_placaixarecmatric() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("placaixarecmatric"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_placaixarecmatric {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k77_sequencial = ($this->k77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_sequencial"]:$this->k77_sequencial);
-       $this->k77_placaixarec = ($this->k77_placaixarec == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_placaixarec"]:$this->k77_placaixarec);
-       $this->k77_matric = ($this->k77_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_matric"]:$this->k77_matric);
+       $this->k77_sequencial = ($this->k77_sequencial === 0 || $this->k77_sequencial === 0.0 || $this->k77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_sequencial"]:$this->k77_sequencial);
+       $this->k77_placaixarec = ($this->k77_placaixarec === 0 || $this->k77_placaixarec === 0.0 || $this->k77_placaixarec == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_placaixarec"]:$this->k77_placaixarec);
+       $this->k77_matric = ($this->k77_matric === 0 || $this->k77_matric === 0.0 || $this->k77_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_matric"]:$this->k77_matric);
      }else{
-       $this->k77_sequencial = ($this->k77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_sequencial"]:$this->k77_sequencial);
+       $this->k77_sequencial = ($this->k77_sequencial === 0 || $this->k77_sequencial === 0.0 || $this->k77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_sequencial"]:$this->k77_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_placaixarecmatric {
          $this->k77_sequencial = $k77_sequencial; 
        }
      }
-     if(($this->k77_sequencial == null) || ($this->k77_sequencial == "") ){ 
+     if(($this->k77_sequencial == null) || ($this->k77_sequencial === 0 || $this->k77_sequencial === 0.0 || $this->k77_sequencial == "") ){ 
        $this->erro_sql = " Campo k77_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_placaixarecmatric {
    function sql_query ( $k77_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_placaixarecmatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_placaixarecmatric {
    function sql_query_file ( $k77_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_placaixarecmatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

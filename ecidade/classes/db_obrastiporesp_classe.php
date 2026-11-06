@@ -50,7 +50,7 @@ class cl_obrastiporesp {
                  ob02_descr = varchar(50) = Descrição do tipo de responsável 
                  ";
    //funcao construtor da classe 
-   function cl_obrastiporesp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obrastiporesp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_obrastiporesp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob02_cod = ($this->ob02_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["ob02_cod"]:$this->ob02_cod);
+       $this->ob02_cod = ($this->ob02_cod === 0 || $this->ob02_cod === 0.0 || $this->ob02_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["ob02_cod"]:$this->ob02_cod);
        $this->ob02_descr = ($this->ob02_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob02_descr"]:$this->ob02_descr);
      }else{
-       $this->ob02_cod = ($this->ob02_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["ob02_cod"]:$this->ob02_cod);
+       $this->ob02_cod = ($this->ob02_cod === 0 || $this->ob02_cod === 0.0 || $this->ob02_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["ob02_cod"]:$this->ob02_cod);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_obrastiporesp {
          $this->ob02_cod = $ob02_cod; 
        }
      }
-     if(($this->ob02_cod == null) || ($this->ob02_cod == "") ){ 
+     if(($this->ob02_cod == null) || ($this->ob02_cod === 0 || $this->ob02_cod === 0.0 || $this->ob02_cod == "") ){ 
        $this->erro_sql = " Campo ob02_cod nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_obrastiporesp {
    function sql_query ( $ob02_cod=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_obrastiporesp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_obrastiporesp {
    function sql_query_file ( $ob02_cod=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_obrastiporesp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_contlot {
                  d05_testad = float8 = Testada 
                  ";
    //funcao construtor da classe 
-   function cl_contlot() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contlot"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_contlot {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d05_contri = ($this->d05_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_contri"]:$this->d05_contri);
-       $this->d05_idbql = ($this->d05_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_idbql"]:$this->d05_idbql);
-       $this->d05_testad = ($this->d05_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_testad"]:$this->d05_testad);
+       $this->d05_contri = ($this->d05_contri === 0 || $this->d05_contri === 0.0 || $this->d05_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_contri"]:$this->d05_contri);
+       $this->d05_idbql = ($this->d05_idbql === 0 || $this->d05_idbql === 0.0 || $this->d05_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_idbql"]:$this->d05_idbql);
+       $this->d05_testad = ($this->d05_testad === 0 || $this->d05_testad === 0.0 || $this->d05_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_testad"]:$this->d05_testad);
      }else{
-       $this->d05_contri = ($this->d05_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_contri"]:$this->d05_contri);
-       $this->d05_idbql = ($this->d05_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_idbql"]:$this->d05_idbql);
+       $this->d05_contri = ($this->d05_contri === 0 || $this->d05_contri === 0.0 || $this->d05_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_contri"]:$this->d05_contri);
+       $this->d05_idbql = ($this->d05_idbql === 0 || $this->d05_idbql === 0.0 || $this->d05_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_idbql"]:$this->d05_idbql);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_contlot {
      }
        $this->d05_contri = $d05_contri; 
        $this->d05_idbql = $d05_idbql; 
-     if(($this->d05_contri == null) || ($this->d05_contri == "") ){ 
+     if(($this->d05_contri == null) || ($this->d05_contri === 0 || $this->d05_contri === 0.0 || $this->d05_contri == "") ){ 
        $this->erro_sql = " Campo d05_contri nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_contlot {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d05_idbql == null) || ($this->d05_idbql == "") ){ 
+     if(($this->d05_idbql == null) || ($this->d05_idbql === 0 || $this->d05_idbql === 0.0 || $this->d05_idbql == "") ){ 
        $this->erro_sql = " Campo d05_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -358,7 +358,7 @@ class cl_contlot {
    function sql_query ( $d05_contri=null,$d05_idbql=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_contlot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_contlot {
    function sql_query_file ( $d05_contri=null,$d05_idbql=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_contlot {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -26,7 +26,7 @@ class cl_rhdirfgeracaopessoalvalorprevidencia {
                  rh204_numcgm = int4 = Previdência 
                  ";
    //funcao construtor da classe 
-   function cl_rhdirfgeracaopessoalvalorprevidencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhdirfgeracaopessoalvalorprevidencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_rhdirfgeracaopessoalvalorprevidencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh204_sequencial = ($this->rh204_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh204_sequencial"]:$this->rh204_sequencial);
-       $this->rh204_rhdirfgeracaodadospessoalvalor = ($this->rh204_rhdirfgeracaodadospessoalvalor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh204_rhdirfgeracaodadospessoalvalor"]:$this->rh204_rhdirfgeracaodadospessoalvalor);
-       $this->rh204_numcgm = ($this->rh204_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh204_numcgm"]:$this->rh204_numcgm);
+       $this->rh204_sequencial = ($this->rh204_sequencial === 0 || $this->rh204_sequencial === 0.0 || $this->rh204_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh204_sequencial"]:$this->rh204_sequencial);
+       $this->rh204_rhdirfgeracaodadospessoalvalor = ($this->rh204_rhdirfgeracaodadospessoalvalor === 0 || $this->rh204_rhdirfgeracaodadospessoalvalor === 0.0 || $this->rh204_rhdirfgeracaodadospessoalvalor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh204_rhdirfgeracaodadospessoalvalor"]:$this->rh204_rhdirfgeracaodadospessoalvalor);
+       $this->rh204_numcgm = ($this->rh204_numcgm === 0 || $this->rh204_numcgm === 0.0 || $this->rh204_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh204_numcgm"]:$this->rh204_numcgm);
      }else{
-       $this->rh204_sequencial = ($this->rh204_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh204_sequencial"]:$this->rh204_sequencial);
+       $this->rh204_sequencial = ($this->rh204_sequencial === 0 || $this->rh204_sequencial === 0.0 || $this->rh204_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh204_sequencial"]:$this->rh204_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_rhdirfgeracaopessoalvalorprevidencia {
          $this->rh204_sequencial = $rh204_sequencial; 
        }
      }
-     if(($this->rh204_sequencial == null) || ($this->rh204_sequencial == "") ){ 
+     if(($this->rh204_sequencial == null) || ($this->rh204_sequencial === 0 || $this->rh204_sequencial === 0.0 || $this->rh204_sequencial == "") ){ 
        $this->erro_sql = " Campo rh204_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -73,13 +73,13 @@ class cl_isentaxa {
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->j56_codigo = ($this->j56_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j56_codigo"]:$this->j56_codigo);
-       $this->j56_receit = ($this->j56_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j56_receit"]:$this->j56_receit);
-       $this->j56_perc = ($this->j56_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["j56_perc"]:$this->j56_perc);
+       $this->j56_codigo = ($this->j56_codigo === 0 || $this->j56_codigo === 0.0 || $this->j56_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j56_codigo"]:$this->j56_codigo);
+       $this->j56_receit = ($this->j56_receit === 0 || $this->j56_receit === 0.0 || $this->j56_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j56_receit"]:$this->j56_receit);
+       $this->j56_perc = ($this->j56_perc === 0 || $this->j56_perc === 0.0 || $this->j56_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["j56_perc"]:$this->j56_perc);
        $this->j56_iptucadtaxaexe = ($this->j56_iptucadtaxaexe === "" ? @$GLOBALS["HTTP_POST_VARS"]["j56_iptucadtaxaexe"] : $this->j56_iptucadtaxaexe);
      }else{
-       $this->j56_codigo = ($this->j56_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j56_codigo"]:$this->j56_codigo);
-       $this->j56_receit = ($this->j56_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j56_receit"]:$this->j56_receit);
+       $this->j56_codigo = ($this->j56_codigo === 0 || $this->j56_codigo === 0.0 || $this->j56_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j56_codigo"]:$this->j56_codigo);
+       $this->j56_receit = ($this->j56_receit === 0 || $this->j56_receit === 0.0 || $this->j56_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j56_receit"]:$this->j56_receit);
      }
    }
 
@@ -97,7 +97,7 @@ class cl_isentaxa {
      }
        $this->j56_codigo = $j56_codigo;
        $this->j56_receit = $j56_receit;
-     if(($this->j56_codigo == null) || ($this->j56_codigo == "") ){
+     if(($this->j56_codigo == null) || ($this->j56_codigo === 0 || $this->j56_codigo === 0.0 || $this->j56_codigo == "") ){
        $this->erro_sql = " Campo j56_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -105,7 +105,7 @@ class cl_isentaxa {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j56_receit == null) || ($this->j56_receit == "") ){
+     if(($this->j56_receit == null) || ($this->j56_receit === 0 || $this->j56_receit === 0.0 || $this->j56_receit == "") ){
        $this->erro_sql = " Campo j56_receit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -26,7 +26,7 @@ import('phpdocwriter.pdw_document');
 class pdw_textbox extends pdw_document
 {
 
-function pdw_textbox(&$obj,$params)
+function __construct(&$obj,$params)
 {
 // 	if (is_object($obj) && (get_class($obj)=="document" || get_class($obj)=="image" || get_class($obj)=="textbox"))
 // 	{

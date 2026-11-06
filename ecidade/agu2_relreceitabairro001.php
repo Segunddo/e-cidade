@@ -121,7 +121,7 @@ function js_emite(){
  		                                            from aguacalc;";
 								    $resultano = db_query($sqlano) or die($sqlano);
 								    $oAnos   = db_utils::fieldsMemory($resultano,0,false,false,false);								  
-								    for($i=$oAnos->anofim;$i >= $oAnos->anoini;$i--){
+								    for($i=$oAnos->anofim;(float)$i >= (float)$oAnos->anoini;$i--){
 								    	echo "<option value=$i".($ano==$i?" selected=selected":"").">$i</option>\n";
 								    }								  
 								?>

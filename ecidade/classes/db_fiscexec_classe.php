@@ -56,7 +56,7 @@ class cl_fiscexec {
                  y13_compl = varchar(10) = Complemento 
                  ";
    //funcao construtor da classe 
-   function cl_fiscexec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscexec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_fiscexec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y13_codnoti = ($this->y13_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y13_codnoti"]:$this->y13_codnoti);
-       $this->y13_codigo = ($this->y13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y13_codigo"]:$this->y13_codigo);
-       $this->y13_codi = ($this->y13_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["y13_codi"]:$this->y13_codi);
-       $this->y13_numero = ($this->y13_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y13_numero"]:$this->y13_numero);
+       $this->y13_codnoti = (($this->y13_codnoti === 0 || $this->y13_codnoti === 0.0 || $this->y13_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y13_codnoti"]:$this->y13_codnoti);
+       $this->y13_codigo = (($this->y13_codigo === 0 || $this->y13_codigo === 0.0 || $this->y13_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["y13_codigo"]:$this->y13_codigo);
+       $this->y13_codi = (($this->y13_codi === 0 || $this->y13_codi === 0.0 || $this->y13_codi == "")?@$GLOBALS["HTTP_POST_VARS"]["y13_codi"]:$this->y13_codi);
+       $this->y13_numero = (($this->y13_numero === 0 || $this->y13_numero === 0.0 || $this->y13_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["y13_numero"]:$this->y13_numero);
        $this->y13_compl = ($this->y13_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["y13_compl"]:$this->y13_compl);
      }else{
-       $this->y13_codnoti = ($this->y13_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y13_codnoti"]:$this->y13_codnoti);
+       $this->y13_codnoti = (($this->y13_codnoti === 0 || $this->y13_codnoti === 0.0 || $this->y13_codnoti == "")?@$GLOBALS["HTTP_POST_VARS"]["y13_codnoti"]:$this->y13_codnoti);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_fiscexec {
        return false;
      }
        $this->y13_codnoti = $y13_codnoti; 
-     if(($this->y13_codnoti == null) || ($this->y13_codnoti == "") ){ 
+     if(($this->y13_codnoti == null) || (($this->y13_codnoti === 0 || $this->y13_codnoti === 0.0 || $this->y13_codnoti == "")) ){ 
        $this->erro_sql = " Campo y13_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -380,7 +380,7 @@ class cl_fiscexec {
    function sql_query ( $y13_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_fiscexec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_fiscexec {
    function sql_query_file ( $y13_codnoti=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_fiscexec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

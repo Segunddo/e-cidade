@@ -166,7 +166,7 @@ class cl_bnccensinofundamental
                 $this->ed148_sequencial = $ed148_sequencial;
             }
         }
-        if (($this->ed148_sequencial == null) || ($this->ed148_sequencial == "")) {
+        if (($this->ed148_sequencial == null) || ($this->ed148_sequencial === 0 || $this->ed148_sequencial === 0.0 || $this->ed148_sequencial == "")) {
             $this->erro_sql = " Campo ed148_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -367,7 +367,7 @@ class cl_bnccensinofundamental
                     $acount = pg_result($resac, 0, 0);
                     $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
                     $resac = db_query("insert into db_acountkey values($acount,1010915,'$this->ed148_sequencial','A')");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed148_sequencial"]) || $this->ed148_sequencial != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed148_sequencial"]) || ($this->ed148_sequencial != "" && $this->ed148_sequencial !== 0 && $this->ed148_sequencial !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010503,1010915,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed148_sequencial')) . "','$this->ed148_sequencial'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     if (isset($GLOBALS["HTTP_POST_VARS"]["ed148_disciplina"]) || $this->ed148_disciplina != "")
                         $resac = db_query("insert into db_acount values($acount,1010503,1010916,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed148_disciplina')) . "','$this->ed148_disciplina'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
@@ -381,7 +381,7 @@ class cl_bnccensinofundamental
                         $resac = db_query("insert into db_acount values($acount,1010503,1010920,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed148_objeto_conhecimento')) . "','$this->ed148_objeto_conhecimento'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     if (isset($GLOBALS["HTTP_POST_VARS"]["ed148_habilidade"]) || $this->ed148_habilidade != "")
                         $resac = db_query("insert into db_acount values($acount,1010503,1010921,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed148_habilidade')) . "','$this->ed148_habilidade'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed148_ano"]) || $this->ed148_ano != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed148_ano"]) || ($this->ed148_ano != "" && $this->ed148_ano !== 0 && $this->ed148_ano !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010503,1011781,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed148_ano')) . "','$this->ed148_ano'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 }
             }
@@ -450,7 +450,7 @@ class cl_bnccensinofundamental
         $this->excluir(null, $whereExcluir);
     }
 
-    public function alterarObjetoConhecimento($ed148_sequencial = null, $where)
+    public function alterarObjetoConhecimento($ed148_sequencial = null, $where = null)
     {
        
         $sql = " update bnccensinofundamental set ed148_objeto_conhecimento = '{$this->ed148_objeto_conhecimento}'";

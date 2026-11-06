@@ -51,7 +51,7 @@ class cl_obrasrenovacaoalvara
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ob33_codobra = ($this->ob33_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob33_codobra"]:$this->ob33_codobra);
+       $this->ob33_codobra = ($this->ob33_codobra === 0 || $this->ob33_codobra === 0.0 || $this->ob33_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob33_codobra"]:$this->ob33_codobra);
        if($this->ob33_dtrenovacao == ""){
          $this->ob33_dtrenovacao_dia = ($this->ob33_dtrenovacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ob33_dtrenovacao_dia"]:$this->ob33_dtrenovacao_dia);
          $this->ob33_dtrenovacao_mes = ($this->ob33_dtrenovacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ob33_dtrenovacao_mes"]:$this->ob33_dtrenovacao_mes);

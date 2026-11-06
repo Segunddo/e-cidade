@@ -31,7 +31,8 @@ require_once(modification("libs/db_sessoes.php"));
 require_once(modification("libs/db_usuariosonline.php"));
 require_once(modification("dbforms/db_classesgenericas.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clrotulo = new rotulocampo;
 $clcriaabas     = new cl_criaabas;
 $sChavePesquisa = "";
@@ -60,15 +61,15 @@ if (isset($chave_pesquisa)) {
   <tr> 
      <td>
      <?
-	     $clcriaabas->identifica = array("alvara"       => "Cadastro de Tipo de Alvará",
-	                                     "departamento"   => "Departamentos");//nome do iframe e o label
+	     $clcriaabas->identifica = ["alvara"       => "Cadastro de Tipo de Alvará",
+	                                     "departamento"   => "Departamentos"];//nome do iframe e o label
 	         
-	     $clcriaabas->title      = array("alvara"       => "Cadastro de Tipo de Alvará",
-	                                     "departamento" => "Departamentos");    
-	     $clcriaabas->src        = array("alvara"       => "iss1_isstipoalvara006.php", 
-	                                     "departamento" => "iss1_tabalvara_depto001.php");  
-	     $clcriaabas->sizecampo  = array("alvara"       => "30");    
-	     $clcriaabas->disabled   = array("departamento" => "false");    
+	     $clcriaabas->title      = ["alvara"       => "Cadastro de Tipo de Alvará",
+	                                     "departamento" => "Departamentos"];    
+	     $clcriaabas->src        = ["alvara"       => "iss1_isstipoalvara006.php", 
+	                                     "departamento" => "iss1_tabalvara_depto001.php"];  
+	     $clcriaabas->sizecampo  = ["alvara"       => "30"];    
+	     $clcriaabas->disabled   = ["departamento" => "false"];    
 	     $clcriaabas->cria_abas();     
      ?> 
      </td>

@@ -52,7 +52,8 @@ $db_opcao = 33;
 $db_botao = false;
 $anousu = db_getsession("DB_anousu");
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 if (isset($excluir)) {

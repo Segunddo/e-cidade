@@ -97,12 +97,12 @@ class cl_pcfornecon
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->pc63_contabanco = ($this->pc63_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_contabanco"]:$this->pc63_contabanco);
-       $this->pc63_numcgm = ($this->pc63_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_numcgm"]:$this->pc63_numcgm);
+       $this->pc63_contabanco = ($this->pc63_contabanco === 0 || $this->pc63_contabanco === 0.0 || $this->pc63_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_contabanco"]:$this->pc63_contabanco);
+       $this->pc63_numcgm = ($this->pc63_numcgm === 0 || $this->pc63_numcgm === 0.0 || $this->pc63_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_numcgm"]:$this->pc63_numcgm);
        $this->pc63_banco = ($this->pc63_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_banco"]:$this->pc63_banco);
        $this->pc63_agencia = ($this->pc63_agencia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_agencia"]:$this->pc63_agencia);
        $this->pc63_conta = ($this->pc63_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_conta"]:$this->pc63_conta);
-       $this->pc63_id_usuario = ($this->pc63_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_id_usuario"]:$this->pc63_id_usuario);
+       $this->pc63_id_usuario = ($this->pc63_id_usuario === 0 || $this->pc63_id_usuario === 0.0 || $this->pc63_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_id_usuario"]:$this->pc63_id_usuario);
        $this->pc63_cnpjcpf = ($this->pc63_cnpjcpf == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_cnpjcpf"]:$this->pc63_cnpjcpf);
        $this->pc63_agencia_dig = ($this->pc63_agencia_dig == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_agencia_dig"]:$this->pc63_agencia_dig);
        $this->pc63_conta_dig = ($this->pc63_conta_dig == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_conta_dig"]:$this->pc63_conta_dig);
@@ -116,11 +116,11 @@ class cl_pcfornecon
        }
        $this->pc63_identcli = ($this->pc63_identcli == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_identcli"]:$this->pc63_identcli);
        $this->pc63_codigooperacao = ($this->pc63_codigooperacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_codigooperacao"]:$this->pc63_codigooperacao);
-       $this->pc63_tipoconta = ($this->pc63_tipoconta == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_tipoconta"]:$this->pc63_tipoconta);
+       $this->pc63_tipoconta = ($this->pc63_tipoconta === 0 || $this->pc63_tipoconta === 0.0 || $this->pc63_tipoconta == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_tipoconta"]:$this->pc63_tipoconta);
        $this->pc63_tipopix = ($this->pc63_tipopix == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_tipopix"]:$this->pc63_tipopix);
        $this->pc63_chavepix = ($this->pc63_chavepix == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_chavepix"]:$this->pc63_chavepix);
      }else{
-       $this->pc63_contabanco = ($this->pc63_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_contabanco"]:$this->pc63_contabanco);
+       $this->pc63_contabanco = ($this->pc63_contabanco === 0 || $this->pc63_contabanco === 0.0 || $this->pc63_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_contabanco"]:$this->pc63_contabanco);
        $this->pc63_conta = ($this->pc63_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["pc63_conta"]:$this->pc63_conta);
      }
    }
@@ -218,7 +218,7 @@ class cl_pcfornecon
          $this->pc63_contabanco = $pc63_contabanco; 
        }
      }
-     if(($this->pc63_contabanco == null) || ($this->pc63_contabanco == "") ){ 
+     if(($this->pc63_contabanco == null) || ($this->pc63_contabanco === 0 || $this->pc63_contabanco === 0.0 || $this->pc63_contabanco == "") ){ 
        $this->erro_sql = " Campo pc63_contabanco não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

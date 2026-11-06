@@ -42,8 +42,8 @@ class cl_obrasoutrosprop {
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ob32_codobra = ($this->ob32_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob32_codobra"]:$this->ob32_codobra);
-       $this->ob32_numcgm = ($this->ob32_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ob32_numcgm"]:$this->ob32_numcgm);
+       $this->ob32_codobra = ($this->ob32_codobra === 0 || $this->ob32_codobra === 0.0 || $this->ob32_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob32_codobra"]:$this->ob32_codobra);
+       $this->ob32_numcgm = ($this->ob32_numcgm === 0 || $this->ob32_numcgm === 0.0 || $this->ob32_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ob32_numcgm"]:$this->ob32_numcgm);
      }else{
      }
    }

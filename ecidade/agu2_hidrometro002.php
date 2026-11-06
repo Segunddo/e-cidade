@@ -38,7 +38,7 @@ $clrotulo->label('x03_sigla   ');
 $clrotulo->label('x04_dtinst  ');
 $clrotulo->label('x28_dttroca ');
 $clrotulo->label('x28_obs     ');            
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 $where = "";
 $info = "";
 if (($data != "--") && ($data1 != "--")) {
@@ -67,7 +67,7 @@ $result = db_query("select x04_matric,
 										    inner join aguahidrodiametro on x15_coddiametro   = x04_coddiametro
 										    left join  aguahidrotroca    on x28_codhidrometro = x04_codhidrometro
 									 $where");
-if (pg_numrows($result) == 0){
+if (($result ? pg_numrows($result) : 0) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros  cadastrados.');
 exit;
 }
@@ -82,7 +82,7 @@ $pdf->setfont('arial','b',8);
 $troca = 1;
 $alt = 4;
 $total = 0;
-for($x = 0; $x < pg_numrows($result);$x++){
+for($x = 0; $x < ($result ? pg_numrows($result) : 0);$x++){
    db_fieldsmemory($result,$x);
    if ($pdf->gety() > $pdf->h - 30 || $troca != 0 ){
       $pdf->addpage();

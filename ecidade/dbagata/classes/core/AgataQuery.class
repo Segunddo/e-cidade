@@ -34,7 +34,7 @@ class AgataQuery
     /* Constructor method
     /***********************************************************/
     static public $Query;
-    function AgataQuery($agataConfig)
+    function __construct($agataConfig)
     {
         $this->agataConfig = $agataConfig;
     }

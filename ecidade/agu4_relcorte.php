@@ -33,7 +33,7 @@ $sqlender = " select j01_matric,j01_numcgm,z01_ender,z01_numero,z01_nome
 							inner join cgm on z01_numcgm = j01_numcgm 
 							where j01_matric = $matric";
 $resultender  = db_query($sqlender);
-$linhasender =pg_num_rows($resultender);
+$linhasender =($resultender ? pg_num_rows($resultender) : 0);
 if($linhasender>0){
   db_fieldsmemory($resultender,0);
 }
@@ -51,7 +51,7 @@ $primeiro =0;
 $total = 0;
 $sql = $Consulta->GetAguaCorteMatMovSQL();
 $result = db_query($sql);
-$linhas= pg_num_rows($result);
+$linhas= ($result ? pg_num_rows($result) : 0);
 if($linhas>0){
   for($i=0;$i<$linhas;$i++) {
     db_fieldsmemory($result,$i);

@@ -34,7 +34,8 @@ require_once(modification("classes/db_obrasalvara_classe.php"));
 
 $get = db_postmemory($_GET);
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 
 if(isset($ob04_ativo) && $ob04_ativo == 't'){
   $get->somenteAtivos = 't';

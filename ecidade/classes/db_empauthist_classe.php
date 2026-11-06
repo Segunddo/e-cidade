@@ -50,7 +50,7 @@ class cl_empauthist {
                  e57_codhist = int4 = Histórico 
                  ";
    //funcao construtor da classe 
-   function cl_empauthist() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empauthist"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_empauthist {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e57_autori = ($this->e57_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_autori"]:$this->e57_autori);
-       $this->e57_codhist = ($this->e57_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_codhist"]:$this->e57_codhist);
+       $this->e57_autori = ($this->e57_autori === 0 || $this->e57_autori === 0.0 || $this->e57_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_autori"]:$this->e57_autori);
+       $this->e57_codhist = ($this->e57_codhist === 0 || $this->e57_codhist === 0.0 || $this->e57_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_codhist"]:$this->e57_codhist);
      }else{
-       $this->e57_autori = ($this->e57_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_autori"]:$this->e57_autori);
+       $this->e57_autori = ($this->e57_autori === 0 || $this->e57_autori === 0.0 || $this->e57_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_autori"]:$this->e57_autori);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_empauthist {
        return false;
      }
        $this->e57_autori = $e57_autori; 
-     if(($this->e57_autori == null) || ($this->e57_autori == "") ){ 
+     if(($this->e57_autori == null) || ($this->e57_autori === 0 || $this->e57_autori === 0.0 || $this->e57_autori == "") ){ 
        $this->erro_sql = " Campo e57_autori nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_empauthist {
    function sql_query ( $e57_autori=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -332,7 +332,7 @@ class cl_empauthist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -344,7 +344,7 @@ class cl_empauthist {
    function sql_query_file ( $e57_autori=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_empauthist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

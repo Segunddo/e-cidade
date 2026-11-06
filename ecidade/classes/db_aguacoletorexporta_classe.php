@@ -61,7 +61,7 @@ class cl_aguacoletorexporta {
                  x49_db_layouttxt = int4 = Layout
                  ";
    //funcao construtor da classe
-   function cl_aguacoletorexporta() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacoletorexporta");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,15 +78,15 @@ class cl_aguacoletorexporta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x49_sequencial = ($this->x49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x49_sequencial"]:$this->x49_sequencial);
-       $this->x49_aguacoletor = ($this->x49_aguacoletor == ""?@$GLOBALS["HTTP_POST_VARS"]["x49_aguacoletor"]:$this->x49_aguacoletor);
-       $this->x49_instit = ($this->x49_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["x49_instit"]:$this->x49_instit);
-       $this->x49_anousu = ($this->x49_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["x49_anousu"]:$this->x49_anousu);
-       $this->x49_mesusu = ($this->x49_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["x49_mesusu"]:$this->x49_mesusu);
-       $this->x49_situacao = ($this->x49_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x49_situacao"]:$this->x49_situacao);
+       $this->x49_sequencial = (($this->x49_sequencial === 0 || $this->x49_sequencial === 0.0 || ($this->x49_sequencial === 0 || $this->x49_sequencial === 0.0 || $this->x49_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["x49_sequencial"]:$this->x49_sequencial);
+       $this->x49_aguacoletor = (($this->x49_aguacoletor === 0 || $this->x49_aguacoletor === 0.0 || ($this->x49_aguacoletor === 0 || $this->x49_aguacoletor === 0.0 || $this->x49_aguacoletor == ""))?@$GLOBALS["HTTP_POST_VARS"]["x49_aguacoletor"]:$this->x49_aguacoletor);
+       $this->x49_instit = (($this->x49_instit === 0 || $this->x49_instit === 0.0 || ($this->x49_instit === 0 || $this->x49_instit === 0.0 || $this->x49_instit == ""))?@$GLOBALS["HTTP_POST_VARS"]["x49_instit"]:$this->x49_instit);
+       $this->x49_anousu = (($this->x49_anousu === 0 || $this->x49_anousu === 0.0 || ($this->x49_anousu === 0 || $this->x49_anousu === 0.0 || $this->x49_anousu == ""))?@$GLOBALS["HTTP_POST_VARS"]["x49_anousu"]:$this->x49_anousu);
+       $this->x49_mesusu = (($this->x49_mesusu === 0 || $this->x49_mesusu === 0.0 || ($this->x49_mesusu === 0 || $this->x49_mesusu === 0.0 || $this->x49_mesusu == ""))?@$GLOBALS["HTTP_POST_VARS"]["x49_mesusu"]:$this->x49_mesusu);
+       $this->x49_situacao = (($this->x49_situacao === 0 || $this->x49_situacao === 0.0 || ($this->x49_situacao === 0 || $this->x49_situacao === 0.0 || $this->x49_situacao == ""))?@$GLOBALS["HTTP_POST_VARS"]["x49_situacao"]:$this->x49_situacao);
        $this->x49_db_layouttxt = ($this->x49_db_layouttxt == ""?@$GLOBALS["HTTP_POST_VARS"]["x49_db_layouttxt"]:$this->x49_db_layouttxt);
      }else{
-       $this->x49_sequencial = ($this->x49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x49_sequencial"]:$this->x49_sequencial);
+       $this->x49_sequencial = (($this->x49_sequencial === 0 || $this->x49_sequencial === 0.0 || ($this->x49_sequencial === 0 || $this->x49_sequencial === 0.0 || $this->x49_sequencial == ""))?@$GLOBALS["HTTP_POST_VARS"]["x49_sequencial"]:$this->x49_sequencial);
      }
    }
    // funcao para inclusao
@@ -161,7 +161,7 @@ class cl_aguacoletorexporta {
          $this->x49_sequencial = $x49_sequencial;
        }
      }
-     if(($this->x49_sequencial == null) || ($this->x49_sequencial == "") ){
+     if(($this->x49_sequencial == null) || (($this->x49_sequencial === 0 || $this->x49_sequencial === 0.0 || ($this->x49_sequencial === 0 || $this->x49_sequencial === 0.0 || $this->x49_sequencial == ""))) ){
        $this->erro_sql = " Campo x49_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -538,7 +538,7 @@ class cl_aguacoletorexporta {
 
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = explode("#",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -561,7 +561,7 @@ class cl_aguacoletorexporta {
     $sql .= $sql2;
     if($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = explode("#", $ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++) {
         $sql    .= $virgula.$campos_sql[$i];

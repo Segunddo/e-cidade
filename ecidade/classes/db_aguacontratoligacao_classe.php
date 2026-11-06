@@ -50,7 +50,7 @@ class cl_aguacontratoligacao {
                  x55_aguacontrato = int4 = Contrato
                  ";
    //funcao construtor da classe
-   function cl_aguacontratoligacao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacontratoligacao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -110,7 +110,7 @@ class cl_aguacontratoligacao {
          $this->x55_sequencial = $x55_sequencial;
        }
      }
-     if(($this->x55_sequencial == null) || ($this->x55_sequencial == "") ){
+     if(($this->x55_sequencial == null) || ($this->x55_sequencial === 0 || $this->x55_sequencial === 0.0 || $this->x55_sequencial == "") ){
        $this->erro_sql = " Campo x55_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -231,11 +231,11 @@ class cl_aguacontratoligacao {
            $acount = pg_result($resac,0,0);
            $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac = db_query("insert into db_acountkey values($acount,22037,'$this->x55_sequencial','A')");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x55_sequencial"]) || $this->x55_sequencial != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x55_sequencial"]) || ($this->x55_sequencial != "" && $this->x55_sequencial !== 0 && $this->x55_sequencial !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3968,22037,'".AddSlashes(pg_result($resaco,$conresaco,'x55_sequencial'))."','$this->x55_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x55_aguahidromatric"]) || $this->x55_aguahidromatric != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x55_aguahidromatric"]) || ($this->x55_aguahidromatric != "" && $this->x55_aguahidromatric !== 0 && $this->x55_aguahidromatric !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3968,22038,'".AddSlashes(pg_result($resaco,$conresaco,'x55_aguahidromatric'))."','$this->x55_aguahidromatric',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x55_aguacontrato"]) || $this->x55_aguacontrato != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x55_aguacontrato"]) || ($this->x55_aguacontrato != "" && $this->x55_aguacontrato !== 0 && $this->x55_aguacontrato !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3968,22039,'".AddSlashes(pg_result($resaco,$conresaco,'x55_aguacontrato'))."','$this->x55_aguacontrato',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
          }
        }

@@ -60,7 +60,7 @@ class cl_abatimentoarreckey {
                  k128_multa = numeric(15) = Valor Multa 
                  ";
    //funcao construtor da classe 
-   function cl_abatimentoarreckey() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("abatimentoarreckey"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_abatimentoarreckey {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k128_sequencial = ($this->k128_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_sequencial"]:$this->k128_sequencial);
-       $this->k128_arreckey = ($this->k128_arreckey == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_arreckey"]:$this->k128_arreckey);
-       $this->k128_abatimento = ($this->k128_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_abatimento"]:$this->k128_abatimento);
-       $this->k128_valorabatido = ($this->k128_valorabatido == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_valorabatido"]:$this->k128_valorabatido);
-       $this->k128_correcao = ($this->k128_correcao == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_correcao"]:$this->k128_correcao);
-       $this->k128_juros = ($this->k128_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_juros"]:$this->k128_juros);
-       $this->k128_multa = ($this->k128_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_multa"]:$this->k128_multa);
+       $this->k128_sequencial = ($this->k128_sequencial === 0 || $this->k128_sequencial === 0.0 || $this->k128_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_sequencial"]:$this->k128_sequencial);
+       $this->k128_arreckey = ($this->k128_arreckey === 0 || $this->k128_arreckey === 0.0 || $this->k128_arreckey == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_arreckey"]:$this->k128_arreckey);
+       $this->k128_abatimento = ($this->k128_abatimento === 0 || $this->k128_abatimento === 0.0 || $this->k128_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_abatimento"]:$this->k128_abatimento);
+       $this->k128_valorabatido = ($this->k128_valorabatido === 0 || $this->k128_valorabatido === 0.0 || $this->k128_valorabatido == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_valorabatido"]:$this->k128_valorabatido);
+       $this->k128_correcao = ($this->k128_correcao === 0 || $this->k128_correcao === 0.0 || $this->k128_correcao == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_correcao"]:$this->k128_correcao);
+       $this->k128_juros = ($this->k128_juros === 0 || $this->k128_juros === 0.0 || $this->k128_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_juros"]:$this->k128_juros);
+       $this->k128_multa = ($this->k128_multa === 0 || $this->k128_multa === 0.0 || $this->k128_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_multa"]:$this->k128_multa);
      }else{
-       $this->k128_sequencial = ($this->k128_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_sequencial"]:$this->k128_sequencial);
+       $this->k128_sequencial = ($this->k128_sequencial === 0 || $this->k128_sequencial === 0.0 || $this->k128_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_sequencial"]:$this->k128_sequencial);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_abatimentoarreckey {
          $this->k128_sequencial = $k128_sequencial; 
        }
      }
-     if(($this->k128_sequencial == null) || ($this->k128_sequencial == "") ){ 
+     if(($this->k128_sequencial == null) || ($this->k128_sequencial === 0 || $this->k128_sequencial === 0.0 || $this->k128_sequencial == "") ){ 
        $this->erro_sql = " Campo k128_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -461,7 +461,7 @@ class cl_abatimentoarreckey {
    function sql_query ( $k128_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -491,7 +491,7 @@ class cl_abatimentoarreckey {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_abatimentoarreckey {
    function sql_query_file ( $k128_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_abatimentoarreckey {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

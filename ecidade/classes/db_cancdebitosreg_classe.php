@@ -65,7 +65,7 @@ class cl_cancdebitosreg {
                  k21_obs = text = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_cancdebitosreg() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cancdebitosreg"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,11 +82,11 @@ class cl_cancdebitosreg {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k21_sequencia = ($this->k21_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k21_sequencia"]:$this->k21_sequencia);
-       $this->k21_codigo = ($this->k21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k21_codigo"]:$this->k21_codigo);
-       $this->k21_numpre = ($this->k21_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k21_numpre"]:$this->k21_numpre);
-       $this->k21_numpar = ($this->k21_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k21_numpar"]:$this->k21_numpar);
-       $this->k21_receit = ($this->k21_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k21_receit"]:$this->k21_receit);
+       $this->k21_sequencia = (($this->k21_sequencia === 0 || $this->k21_sequencia === 0.0 || $this->k21_sequencia == "")?@$GLOBALS["HTTP_POST_VARS"]["k21_sequencia"]:$this->k21_sequencia);
+       $this->k21_codigo = (($this->k21_codigo === 0 || $this->k21_codigo === 0.0 || $this->k21_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["k21_codigo"]:$this->k21_codigo);
+       $this->k21_numpre = (($this->k21_numpre === 0 || $this->k21_numpre === 0.0 || $this->k21_numpre == "")?@$GLOBALS["HTTP_POST_VARS"]["k21_numpre"]:$this->k21_numpre);
+       $this->k21_numpar = (($this->k21_numpar === 0 || $this->k21_numpar === 0.0 || $this->k21_numpar == "")?@$GLOBALS["HTTP_POST_VARS"]["k21_numpar"]:$this->k21_numpar);
+       $this->k21_receit = (($this->k21_receit === 0 || $this->k21_receit === 0.0 || $this->k21_receit == "")?@$GLOBALS["HTTP_POST_VARS"]["k21_receit"]:$this->k21_receit);
        if($this->k21_data == ""){
          $this->k21_data_dia = ($this->k21_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k21_data_dia"]:$this->k21_data_dia);
          $this->k21_data_mes = ($this->k21_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k21_data_mes"]:$this->k21_data_mes);
@@ -98,7 +98,7 @@ class cl_cancdebitosreg {
        $this->k21_hora = ($this->k21_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k21_hora"]:$this->k21_hora);
        $this->k21_obs = ($this->k21_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k21_obs"]:$this->k21_obs);
      }else{
-       $this->k21_sequencia = ($this->k21_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k21_sequencia"]:$this->k21_sequencia);
+       $this->k21_sequencia = (($this->k21_sequencia === 0 || $this->k21_sequencia === 0.0 || $this->k21_sequencia == "")?@$GLOBALS["HTTP_POST_VARS"]["k21_sequencia"]:$this->k21_sequencia);
      }
    }
    // funcao para inclusao
@@ -182,7 +182,7 @@ class cl_cancdebitosreg {
          $this->k21_sequencia = $k21_sequencia; 
        }
      }
-     if(($this->k21_sequencia == null) || ($this->k21_sequencia == "") ){ 
+     if(($this->k21_sequencia == null) || (($this->k21_sequencia === 0 || $this->k21_sequencia === 0.0 || $this->k21_sequencia == "")) ){ 
        $this->erro_sql = " Campo k21_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -520,7 +520,7 @@ class cl_cancdebitosreg {
    function sql_query ( $k21_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -543,7 +543,7 @@ class cl_cancdebitosreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -555,7 +555,7 @@ class cl_cancdebitosreg {
    function sql_query_file ( $k21_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -576,7 +576,7 @@ class cl_cancdebitosreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -589,7 +589,7 @@ class cl_cancdebitosreg {
    function sql_query_susp( $k21_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -614,7 +614,7 @@ class cl_cancdebitosreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

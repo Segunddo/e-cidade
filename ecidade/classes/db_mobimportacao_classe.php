@@ -57,7 +57,7 @@ class cl_mobimportacao {
                  j95_idusuario = int4 = Cod. Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_mobimportacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mobimportacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_mobimportacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j95_codimporta = ($this->j95_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_codimporta"]:$this->j95_codimporta);
-       $this->j95_pda = ($this->j95_pda == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_pda"]:$this->j95_pda);
+       $this->j95_codimporta = ($this->j95_codimporta === 0 || $this->j95_codimporta === 0.0 || $this->j95_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_codimporta"]:$this->j95_codimporta);
+       $this->j95_pda = ($this->j95_pda === 0 || $this->j95_pda === 0.0 || $this->j95_pda == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_pda"]:$this->j95_pda);
        if($this->j95_data == ""){
          $this->j95_data_dia = ($this->j95_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_data_dia"]:$this->j95_data_dia);
          $this->j95_data_mes = ($this->j95_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_data_mes"]:$this->j95_data_mes);
@@ -84,9 +84,9 @@ class cl_mobimportacao {
             $this->j95_data = $this->j95_data_ano."-".$this->j95_data_mes."-".$this->j95_data_dia;
          }
        }
-       $this->j95_idusuario = ($this->j95_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_idusuario"]:$this->j95_idusuario);
+       $this->j95_idusuario = ($this->j95_idusuario === 0 || $this->j95_idusuario === 0.0 || $this->j95_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_idusuario"]:$this->j95_idusuario);
      }else{
-       $this->j95_codimporta = ($this->j95_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_codimporta"]:$this->j95_codimporta);
+       $this->j95_codimporta = ($this->j95_codimporta === 0 || $this->j95_codimporta === 0.0 || $this->j95_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_codimporta"]:$this->j95_codimporta);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_mobimportacao {
          $this->j95_codimporta = $j95_codimporta; 
        }
      }
-     if(($this->j95_codimporta == null) || ($this->j95_codimporta == "") ){ 
+     if(($this->j95_codimporta == null) || ($this->j95_codimporta === 0 || $this->j95_codimporta === 0.0 || $this->j95_codimporta == "") ){ 
        $this->erro_sql = " Campo j95_codimporta nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -414,7 +414,7 @@ class cl_mobimportacao {
    function sql_query ( $j95_codimporta=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_mobimportacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_mobimportacao {
    function sql_query_file ( $j95_codimporta=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_mobimportacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -56,7 +56,7 @@ if (isset($baixar)) {
   $proibido=false;
   $sqlerro=false;
   $data=date('Y-m-d',db_getsession("DB_datausu"));
-  $matriz01=split('#',$chaves);
+  $matriz01=preg_split('#\##m',$chaves);
   $ativbaix=sizeof($matriz01);
 
   $result_ativs = $cltabativ->sql_record($cltabativ->sql_query_atividade_inscr($q07_inscr,"*","q07_seq","q07_inscr = $q07_inscr and q07_databx is null"));
@@ -116,12 +116,12 @@ if (isset($baixar)) {
   if($proibido==false){
 
     db_inicio_transacao();
-    $matriz01=split('#',$chaves);
+    $matriz01=preg_split('#\##m',$chaves);
     if($calculo=="ok"){
       $seqs="";
       $virgu="";
       for($q=0; $q<sizeof($matriz01); $q++ ){
-        $matriz=split("-",$matriz01[$q]);
+        $matriz=preg_split("#\\-#m",$matriz01[$q]);
         $seqs.=$virgu.$matriz[1];
         $virgu=",";
       }
@@ -176,7 +176,7 @@ if ($sqlerro==false){
 
     for($q=0; $q<sizeof($matriz01); $q++ ){
 
-      $matriz=split("-",$matriz01[$q]);
+      $matriz=preg_split("#\\-#m",$matriz01[$q]);
       $cltabativbaixa->q11_login=db_getsession("DB_id_usuario");
       $cltabativbaixa->q11_hora=db_hora();
       $cltabativbaixa->q11_data=date('Y-m-d',db_getsession("DB_datausu"));
@@ -265,12 +265,12 @@ if ($sqlerro==false){
 	  if (!$sqlerro) {
 
 
-      $matriz01=split('#',$chaves);
+      $matriz01=preg_split('#\##m',$chaves);
       $seqs="";
       $virgu="";
       for($q=0; $q<sizeof($matriz01); $q++ ){
 
-        $matriz = split("-",$matriz01[$q]);
+        $matriz = preg_split("#\\-#m",$matriz01[$q]);
         $seqs  .= $virgu.$matriz[1];
         $virgu  = ",";
       }

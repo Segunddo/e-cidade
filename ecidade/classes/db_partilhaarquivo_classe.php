@@ -59,7 +59,7 @@ class cl_partilhaarquivo {
                  v78_arquivo = oid = Arquivo 
                  ";
    //funcao construtor da classe 
-   function cl_partilhaarquivo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("partilhaarquivo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,7 +76,7 @@ class cl_partilhaarquivo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v78_sequencial = ($this->v78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_sequencial"]:$this->v78_sequencial);
+       $this->v78_sequencial = ($this->v78_sequencial === 0 || $this->v78_sequencial === 0.0 || $this->v78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_sequencial"]:$this->v78_sequencial);
        $this->v78_nomearq = ($this->v78_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_nomearq"]:$this->v78_nomearq);
        if($this->v78_dtgeracao == ""){
          $this->v78_dtgeracao_dia = ($this->v78_dtgeracao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_dtgeracao_dia"]:$this->v78_dtgeracao_dia);
@@ -86,10 +86,10 @@ class cl_partilhaarquivo {
             $this->v78_dtgeracao = $this->v78_dtgeracao_ano."-".$this->v78_dtgeracao_mes."-".$this->v78_dtgeracao_dia;
          }
        }
-       $this->v78_tipoarq = ($this->v78_tipoarq == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_tipoarq"]:$this->v78_tipoarq);
-       $this->v78_arquivo = ($this->v78_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_arquivo"]:$this->v78_arquivo);
+       $this->v78_tipoarq = ($this->v78_tipoarq === 0 || $this->v78_tipoarq === 0.0 || $this->v78_tipoarq == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_tipoarq"]:$this->v78_tipoarq);
+       $this->v78_arquivo = ($this->v78_arquivo === 0 || $this->v78_arquivo === 0.0 || $this->v78_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_arquivo"]:$this->v78_arquivo);
      }else{
-       $this->v78_sequencial = ($this->v78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_sequencial"]:$this->v78_sequencial);
+       $this->v78_sequencial = ($this->v78_sequencial === 0 || $this->v78_sequencial === 0.0 || $this->v78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_sequencial"]:$this->v78_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_partilhaarquivo {
          $this->v78_sequencial = $v78_sequencial; 
        }
      }
-     if(($this->v78_sequencial == null) || ($this->v78_sequencial == "") ){ 
+     if(($this->v78_sequencial == null) || ($this->v78_sequencial === 0 || $this->v78_sequencial === 0.0 || $this->v78_sequencial == "") ){ 
        $this->erro_sql = " Campo v78_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -446,7 +446,7 @@ class cl_partilhaarquivo {
    function sql_query ( $v78_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -467,7 +467,7 @@ class cl_partilhaarquivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_partilhaarquivo {
    function sql_query_file ( $v78_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_partilhaarquivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

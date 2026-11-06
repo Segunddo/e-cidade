@@ -82,7 +82,7 @@ class cl_iptuconstr {
                  j39_obs = text = Observações
                  ";
    //funcao construtor da classe
-   public function cl_iptuconstr() {
+   public function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptuconstr");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -99,11 +99,11 @@ class cl_iptuconstr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j39_matric = ($this->j39_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_matric"]:$this->j39_matric);
-       $this->j39_idcons = ($this->j39_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_idcons"]:$this->j39_idcons);
-       $this->j39_ano = ($this->j39_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_ano"]:$this->j39_ano);
-       $this->j39_area = ($this->j39_area == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_area"]:$this->j39_area);
-       $this->j39_areap = ($this->j39_areap == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_areap"]:$this->j39_areap);
+       $this->j39_matric = (($this->j39_matric === 0 || $this->j39_matric === 0.0 || $this->j39_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_matric"]:$this->j39_matric);
+       $this->j39_idcons = (($this->j39_idcons === 0 || $this->j39_idcons === 0.0 || $this->j39_idcons == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_idcons"]:$this->j39_idcons);
+       $this->j39_ano = (($this->j39_ano === 0 || $this->j39_ano === 0.0 || $this->j39_ano == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_ano"]:$this->j39_ano);
+       $this->j39_area = (($this->j39_area === 0 || $this->j39_area === 0.0 || $this->j39_area == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_area"]:$this->j39_area);
+       $this->j39_areap = (($this->j39_areap === 0 || $this->j39_areap === 0.0 || $this->j39_areap == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_areap"]:$this->j39_areap);
        if($this->j39_dtlan == ""){
          $this->j39_dtlan_dia = ($this->j39_dtlan_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_dtlan_dia"]:$this->j39_dtlan_dia);
          $this->j39_dtlan_mes = ($this->j39_dtlan_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_dtlan_mes"]:$this->j39_dtlan_mes);
@@ -112,8 +112,8 @@ class cl_iptuconstr {
             $this->j39_dtlan = $this->j39_dtlan_ano."-".$this->j39_dtlan_mes."-".$this->j39_dtlan_dia;
          }
        }
-       $this->j39_codigo = ($this->j39_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_codigo"]:$this->j39_codigo);
-       $this->j39_numero = ($this->j39_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_numero"]:$this->j39_numero);
+       $this->j39_codigo = (($this->j39_codigo === 0 || $this->j39_codigo === 0.0 || $this->j39_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_codigo"]:$this->j39_codigo);
+       $this->j39_numero = (($this->j39_numero === 0 || $this->j39_numero === 0.0 || $this->j39_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_numero"]:$this->j39_numero);
        $this->j39_compl = ($this->j39_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_compl"]:$this->j39_compl);
        if($this->j39_dtdemo == ""){
          $this->j39_dtdemo_dia = ($this->j39_dtdemo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_dtdemo_dia"]:$this->j39_dtdemo_dia);
@@ -124,13 +124,13 @@ class cl_iptuconstr {
          }
        }
        $this->j39_codprotdemo = ($this->j39_codprotdemo == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_codprotdemo"]:$this->j39_codprotdemo);
-       $this->j39_idaument = ($this->j39_idaument == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_idaument"]:$this->j39_idaument);
+       $this->j39_idaument = (($this->j39_idaument === 0 || $this->j39_idaument === 0.0 || $this->j39_idaument == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_idaument"]:$this->j39_idaument);
        $this->j39_idprinc = ($this->j39_idprinc == "f"?@$GLOBALS["HTTP_POST_VARS"]["j39_idprinc"]:$this->j39_idprinc);
-       $this->j39_pavim = ($this->j39_pavim == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_pavim"]:$this->j39_pavim);
+       $this->j39_pavim = (($this->j39_pavim === 0 || $this->j39_pavim === 0.0 || $this->j39_pavim == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_pavim"]:$this->j39_pavim);
        $this->j39_obs = ($this->j39_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_obs"]:$this->j39_obs);
      }else{
-       $this->j39_matric = ($this->j39_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_matric"]:$this->j39_matric);
-       $this->j39_idcons = ($this->j39_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_idcons"]:$this->j39_idcons);
+       $this->j39_matric = (($this->j39_matric === 0 || $this->j39_matric === 0.0 || $this->j39_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_matric"]:$this->j39_matric);
+       $this->j39_idcons = (($this->j39_idcons === 0 || $this->j39_idcons === 0.0 || $this->j39_idcons == "")?@$GLOBALS["HTTP_POST_VARS"]["j39_idcons"]:$this->j39_idcons);
      }
    }
    // funcao para inclusao
@@ -204,7 +204,7 @@ class cl_iptuconstr {
      }
        $this->j39_matric = $j39_matric;
        $this->j39_idcons = $j39_idcons;
-     if(($this->j39_matric == null) || ($this->j39_matric == "") ){
+     if(($this->j39_matric == null) || (($this->j39_matric === 0 || $this->j39_matric === 0.0 || $this->j39_matric == "")) ){
        $this->erro_sql = " Campo j39_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -212,7 +212,7 @@ class cl_iptuconstr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j39_idcons == null) || ($this->j39_idcons == "") ){
+     if(($this->j39_idcons == null) || (($this->j39_idcons === 0 || $this->j39_idcons === 0.0 || $this->j39_idcons == "")) ){
        $this->erro_sql = " Campo j39_idcons nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

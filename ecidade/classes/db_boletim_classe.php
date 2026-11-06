@@ -61,7 +61,7 @@ class cl_boletim {
                  k11_anousu = int4 = Ano 
                  ";
    //funcao construtor da classe 
-   function cl_boletim() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("boletim"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -86,14 +86,14 @@ class cl_boletim {
             $this->k11_data = $this->k11_data_ano."-".$this->k11_data_mes."-".$this->k11_data_dia;
          }
        }
-       $this->k11_instit = ($this->k11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_instit"]:$this->k11_instit);
-       $this->k11_numbol = ($this->k11_numbol == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_numbol"]:$this->k11_numbol);
+       $this->k11_instit = ($this->k11_instit === 0 || $this->k11_instit === 0.0 || $this->k11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_instit"]:$this->k11_instit);
+       $this->k11_numbol = ($this->k11_numbol === 0 || $this->k11_numbol === 0.0 || $this->k11_numbol == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_numbol"]:$this->k11_numbol);
        $this->k11_libera = ($this->k11_libera == "f"?@$GLOBALS["HTTP_POST_VARS"]["k11_libera"]:$this->k11_libera);
        $this->k11_lanca = ($this->k11_lanca == "f"?@$GLOBALS["HTTP_POST_VARS"]["k11_lanca"]:$this->k11_lanca);
-       $this->k11_anousu = ($this->k11_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_anousu"]:$this->k11_anousu);
+       $this->k11_anousu = ($this->k11_anousu === 0 || $this->k11_anousu === 0.0 || $this->k11_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_anousu"]:$this->k11_anousu);
      }else{
        $this->k11_data = ($this->k11_data == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_data_ano"]."-".@$GLOBALS["HTTP_POST_VARS"]["k11_data_mes"]."-".@$GLOBALS["HTTP_POST_VARS"]["k11_data_dia"]:$this->k11_data);
-       $this->k11_instit = ($this->k11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_instit"]:$this->k11_instit);
+       $this->k11_instit = ($this->k11_instit === 0 || $this->k11_instit === 0.0 || $this->k11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_instit"]:$this->k11_instit);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_boletim {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k11_instit == null) || ($this->k11_instit == "") ){ 
+     if(($this->k11_instit == null) || ($this->k11_instit === 0 || $this->k11_instit === 0.0 || $this->k11_instit == "") ){ 
        $this->erro_sql = " Campo k11_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -466,7 +466,7 @@ class cl_boletim {
    function sql_query ( $k11_data=null,$k11_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -496,7 +496,7 @@ class cl_boletim {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -508,7 +508,7 @@ class cl_boletim {
    function sql_query_file ( $k11_data=null,$k11_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -537,7 +537,7 @@ class cl_boletim {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

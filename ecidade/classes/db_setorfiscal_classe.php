@@ -52,7 +52,7 @@ class cl_setorfiscal {
                  j90_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_setorfiscal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("setorfiscal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_setorfiscal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j90_codigo = ($this->j90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_codigo"]:$this->j90_codigo);
+       $this->j90_codigo = ($this->j90_codigo === 0 || $this->j90_codigo === 0.0 || $this->j90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_codigo"]:$this->j90_codigo);
        $this->j90_descr = ($this->j90_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_descr"]:$this->j90_descr);
-       $this->j90_valor = ($this->j90_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_valor"]:$this->j90_valor);
+       $this->j90_valor = ($this->j90_valor === 0 || $this->j90_valor === 0.0 || $this->j90_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_valor"]:$this->j90_valor);
      }else{
-       $this->j90_codigo = ($this->j90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_codigo"]:$this->j90_codigo);
+       $this->j90_codigo = ($this->j90_codigo === 0 || $this->j90_codigo === 0.0 || $this->j90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_codigo"]:$this->j90_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_setorfiscal {
          $this->j90_codigo = $j90_codigo; 
        }
      }
-     if(($this->j90_codigo == null) || ($this->j90_codigo == "") ){ 
+     if(($this->j90_codigo == null) || ($this->j90_codigo === 0 || $this->j90_codigo === 0.0 || $this->j90_codigo == "") ){ 
        $this->erro_sql = " Campo j90_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_setorfiscal {
    function sql_query ( $j90_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_setorfiscal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_setorfiscal {
    function sql_query_file ( $j90_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_setorfiscal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

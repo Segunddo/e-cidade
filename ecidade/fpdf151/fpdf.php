@@ -606,7 +606,7 @@ function GetStringWidth($s)
   $w=0;
   $l=strlen($s);
   for($i=0;$i<$l;$i++)
-    $w+=$cw[$s{$i}];
+    $w+=$cw[$s[$i]];
   return $w*$this->FontSize/1000;
 }
 
@@ -863,7 +863,7 @@ function Text($x,$y,$txt)
   //Output a string
   $txt=str_replace(')','\\)',str_replace('(','\\(',str_replace('\\','\\\\',$txt)));
   $s=sprintf('BT %.2f %.2f Td (%s) Tj ET',$x*$this->k,($this->h-$y)*$this->k,$txt);
-  if($this->underline and $txt!='')
+  if($this->underline and ($txt!='' && $txt!==0 && $txt!==0.0))
     $s.=' '.$this->_dounderline($x,$y,$txt);
   if($this->ColorFlag)
     $s='q '.$this->TextColor.' '.$s.' Q';
@@ -962,7 +962,7 @@ function Cell($w,$h=0,$txt='',$border=0,$ln=0,$align='',$fill=0,$link='',$preenc
     if(is_int(strpos($border,'B')))
       $s.=sprintf('%.2f %.2f m %.2f %.2f l S ',$x*$k,($this->h-($y+$h))*$k,($x+$w)*$k,($this->h-($y+$h))*$k);
   }
-  if($txt!='')
+  if($txt!='' && $txt!==0 && $txt!==0.0)
   {
     if($align=='R')
       $dx=$w-$this->cMargin-$this->GetStringWidth($txt);
@@ -998,7 +998,7 @@ function Cell($w,$h=0,$txt='',$border=0,$ln=0,$align='',$fill=0,$link='',$preenc
   if($s)
     $this->_out($s);
   $this->lasth=$h;
-  if($ln>0)
+  if((float)$ln>0)
   {
     //Go to next line
     $this->y+=$h;
@@ -1258,7 +1258,7 @@ function Write($h,$txt,$link='')
   while($i<$nb)
   {
     //Get next character
-    $c=$s{$i};
+    $c=$s[$i];
     if($c=="\n")
     {
       //Explicit line break
@@ -1372,7 +1372,6 @@ function Image($file,$x,$y,$w,$h=0,$type='',$link='')
       $type=substr($file,$pos+1);
     }
     $type=strtolower($type);
-    $mqr=get_magic_quotes_runtime();
     if($type=='jpg' or $type=='jpeg')
       $info=$this->_parsejpg($file);
     elseif($type=='png')
@@ -1901,7 +1900,7 @@ function _beginpage($orientation)
     $orientation=$this->DefOrientation;
   else
   {
-    $orientation=strtoupper($orientation{0});
+    $orientation=strtoupper($orientation[0]);
     if($orientation!=$this->DefOrientation)
       $this->OrientationChanges[$this->page]=true;
   }
@@ -2317,7 +2316,7 @@ function TextWithRotation($x,$y,$txt,$txt_angle,$font_angle=0)
             $angleEnd = 0;
             $i = 0;
             foreach($data as $val) {
-                    $angle = floor(($val * 360) / doubleval($this->sum));
+                    $angle = floor($this->sum ? ($val * 360) / doubleval($this->sum) : 0);
                     if ($angle != 0) {
                             $angleEnd = $angleStart + $angle;
                             @$this->SetFillColor($colors[$i][0],$colors[$i][1],$colors[$i][2]);
@@ -2432,7 +2431,7 @@ function TextWithRotation($x,$y,$txt,$txt_angle,$font_angle=0)
             $this->NbVal=count($data);
             foreach($data as $l=>$val)
             {
-                    $p=sprintf('%.f',$val/$this->sum*100.00).'%';
+                    $p=sprintf('%.6f',$this->sum ? $val/$this->sum*100.00 : 0).'%';
                     $legend=str_replace(array('%l','%v','%p'),array($l,$val,$p),$format);
                     $this->legends[]=$legend;
                     $this->wLegend=max($this->GetStringWidth($legend),$this->wLegend);
@@ -2948,7 +2947,7 @@ function WriteText($text)
     if($s)
       $this->_out($s);
     $this->lasth=$h;
-    if($ln>0)
+    if((float)$ln>0)
     {
       //Go to next line
       $this->y+=$h;

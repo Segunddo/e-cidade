@@ -56,7 +56,7 @@ class cl_atividadeimpacto {
                  am03_potencialpoluidor = varchar(20) = Potencial Poluidor
                  ";
    //funcao construtor da classe
-   function cl_atividadeimpacto() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("atividadeimpacto");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_atividadeimpacto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am03_sequencial = ($this->am03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am03_sequencial"]:$this->am03_sequencial);
-       $this->am03_criterioatividadeimpacto = ($this->am03_criterioatividadeimpacto == ""?@$GLOBALS["HTTP_POST_VARS"]["am03_criterioatividadeimpacto"]:$this->am03_criterioatividadeimpacto);
+       $this->am03_sequencial = ($this->am03_sequencial === 0 || $this->am03_sequencial === 0.0 || $this->am03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am03_sequencial"]:$this->am03_sequencial);
+       $this->am03_criterioatividadeimpacto = ($this->am03_criterioatividadeimpacto === 0 || $this->am03_criterioatividadeimpacto === 0.0 || $this->am03_criterioatividadeimpacto == ""?@$GLOBALS["HTTP_POST_VARS"]["am03_criterioatividadeimpacto"]:$this->am03_criterioatividadeimpacto);
        $this->am03_ramo = ($this->am03_ramo == ""?@$GLOBALS["HTTP_POST_VARS"]["am03_ramo"]:$this->am03_ramo);
        $this->am03_descricao = ($this->am03_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["am03_descricao"]:$this->am03_descricao);
        $this->am03_potencialpoluidor = ($this->am03_potencialpoluidor == ""?@$GLOBALS["HTTP_POST_VARS"]["am03_potencialpoluidor"]:$this->am03_potencialpoluidor);
      }else{
-       $this->am03_sequencial = ($this->am03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am03_sequencial"]:$this->am03_sequencial);
+       $this->am03_sequencial = ($this->am03_sequencial === 0 || $this->am03_sequencial === 0.0 || $this->am03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am03_sequencial"]:$this->am03_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_atividadeimpacto {
          $this->am03_sequencial = $am03_sequencial;
        }
      }
-     if(($this->am03_sequencial == null) || ($this->am03_sequencial == "") ){
+     if(($this->am03_sequencial == null) || ($this->am03_sequencial === 0 || $this->am03_sequencial === 0.0 || $this->am03_sequencial == "") ){
        $this->erro_sql = " Campo am03_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

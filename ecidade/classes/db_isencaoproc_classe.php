@@ -52,7 +52,7 @@ class cl_isencaoproc {
                  v17_isencao = int4 = Codigo da isenção 
                  ";
    //funcao construtor da classe 
-   function cl_isencaoproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isencaoproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_isencaoproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v17_sequencial = ($this->v17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v17_sequencial"]:$this->v17_sequencial);
-       $this->v17_protprocesso = ($this->v17_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["v17_protprocesso"]:$this->v17_protprocesso);
-       $this->v17_isencao = ($this->v17_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["v17_isencao"]:$this->v17_isencao);
+       $this->v17_sequencial = ($this->v17_sequencial === 0 || $this->v17_sequencial === 0.0 || $this->v17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v17_sequencial"]:$this->v17_sequencial);
+       $this->v17_protprocesso = ($this->v17_protprocesso === 0 || $this->v17_protprocesso === 0.0 || $this->v17_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["v17_protprocesso"]:$this->v17_protprocesso);
+       $this->v17_isencao = ($this->v17_isencao === 0 || $this->v17_isencao === 0.0 || $this->v17_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["v17_isencao"]:$this->v17_isencao);
      }else{
-       $this->v17_sequencial = ($this->v17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v17_sequencial"]:$this->v17_sequencial);
+       $this->v17_sequencial = ($this->v17_sequencial === 0 || $this->v17_sequencial === 0.0 || $this->v17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v17_sequencial"]:$this->v17_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_isencaoproc {
          $this->v17_sequencial = $v17_sequencial; 
        }
      }
-     if(($this->v17_sequencial == null) || ($this->v17_sequencial == "") ){ 
+     if(($this->v17_sequencial == null) || ($this->v17_sequencial === 0 || $this->v17_sequencial === 0.0 || $this->v17_sequencial == "") ){ 
        $this->erro_sql = " Campo v17_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_isencaoproc {
    function sql_query ( $v17_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_isencaoproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_isencaoproc {
    function sql_query_file ( $v17_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_isencaoproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

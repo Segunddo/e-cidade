@@ -56,7 +56,7 @@ class cl_db_cepmunic {
                  db10_codibge = int4 = Código do município no cadastro do IBGE 
                  ";
    //funcao construtor da classe 
-   function cl_db_cepmunic() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_cepmunic"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_db_cepmunic {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db10_codigo = ($this->db10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codigo"]:$this->db10_codigo);
+       $this->db10_codigo = ($this->db10_codigo === 0 || $this->db10_codigo === 0.0 || $this->db10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codigo"]:$this->db10_codigo);
        $this->db10_munic = ($this->db10_munic == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_munic"]:$this->db10_munic);
        $this->db10_cep = ($this->db10_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_cep"]:$this->db10_cep);
-       $this->db10_uf = ($this->db10_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_uf"]:$this->db10_uf);
-       $this->db10_codibge = ($this->db10_codibge == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codibge"]:$this->db10_codibge);
+       $this->db10_uf = ($this->db10_uf === 0 || $this->db10_uf === 0.0 || $this->db10_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_uf"]:$this->db10_uf);
+       $this->db10_codibge = ($this->db10_codibge === 0 || $this->db10_codibge === 0.0 || $this->db10_codibge == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codibge"]:$this->db10_codibge);
      }else{
-       $this->db10_codigo = ($this->db10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codigo"]:$this->db10_codigo);
+       $this->db10_codigo = ($this->db10_codigo === 0 || $this->db10_codigo === 0.0 || $this->db10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codigo"]:$this->db10_codigo);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_db_cepmunic {
          $this->db10_codigo = $db10_codigo; 
        }
      }
-     if(($this->db10_codigo == null) || ($this->db10_codigo == "") ){ 
+     if(($this->db10_codigo == null) || ($this->db10_codigo === 0 || $this->db10_codigo === 0.0 || $this->db10_codigo == "") ){ 
        $this->erro_sql = " Campo db10_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -409,7 +409,7 @@ class cl_db_cepmunic {
    function sql_query ( $db10_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_db_cepmunic {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_db_cepmunic {
    function sql_query_file ( $db10_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -464,7 +464,7 @@ class cl_db_cepmunic {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

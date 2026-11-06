@@ -63,7 +63,7 @@ class cl_certidlivro {
                  v25_tipolivro = int4 = Tipo do Livro 
                  ";
    //funcao construtor da classe 
-   function cl_certidlivro() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("certidlivro"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_certidlivro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v25_sequencial = ($this->v25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v25_sequencial"]:$this->v25_sequencial);
-       $this->v25_usuario = ($this->v25_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v25_usuario"]:$this->v25_usuario);
+       $this->v25_sequencial = (($this->v25_sequencial === 0 || $this->v25_sequencial === 0.0 || $this->v25_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v25_sequencial"]:$this->v25_sequencial);
+       $this->v25_usuario = (($this->v25_usuario === 0 || $this->v25_usuario === 0.0 || $this->v25_usuario == "")?@$GLOBALS["HTTP_POST_VARS"]["v25_usuario"]:$this->v25_usuario);
        if($this->v25_datainc == ""){
          $this->v25_datainc_dia = ($this->v25_datainc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v25_datainc_dia"]:$this->v25_datainc_dia);
          $this->v25_datainc_mes = ($this->v25_datainc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v25_datainc_mes"]:$this->v25_datainc_mes);
@@ -91,11 +91,11 @@ class cl_certidlivro {
          }
        }
        $this->v25_hora = ($this->v25_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["v25_hora"]:$this->v25_hora);
-       $this->v25_numero = ($this->v25_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["v25_numero"]:$this->v25_numero);
-       $this->v25_instit = ($this->v25_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v25_instit"]:$this->v25_instit);
-       $this->v25_tipolivro = ($this->v25_tipolivro == ""?@$GLOBALS["HTTP_POST_VARS"]["v25_tipolivro"]:$this->v25_tipolivro);
+       $this->v25_numero = (($this->v25_numero === 0 || $this->v25_numero === 0.0 || $this->v25_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["v25_numero"]:$this->v25_numero);
+       $this->v25_instit = (($this->v25_instit === 0 || $this->v25_instit === 0.0 || $this->v25_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["v25_instit"]:$this->v25_instit);
+       $this->v25_tipolivro = (($this->v25_tipolivro === 0 || $this->v25_tipolivro === 0.0 || $this->v25_tipolivro == "")?@$GLOBALS["HTTP_POST_VARS"]["v25_tipolivro"]:$this->v25_tipolivro);
      }else{
-       $this->v25_sequencial = ($this->v25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v25_sequencial"]:$this->v25_sequencial);
+       $this->v25_sequencial = (($this->v25_sequencial === 0 || $this->v25_sequencial === 0.0 || $this->v25_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["v25_sequencial"]:$this->v25_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_certidlivro {
          $this->v25_sequencial = $v25_sequencial; 
        }
      }
-     if(($this->v25_sequencial == null) || ($this->v25_sequencial == "") ){ 
+     if(($this->v25_sequencial == null) || (($this->v25_sequencial === 0 || $this->v25_sequencial === 0.0 || $this->v25_sequencial == "")) ){ 
        $this->erro_sql = " Campo v25_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -508,7 +508,7 @@ class cl_certidlivro {
    function sql_query ( $v25_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_certidlivro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_certidlivro {
    function sql_query_file ( $v25_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -566,7 +566,7 @@ class cl_certidlivro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -579,7 +579,7 @@ class cl_certidlivro {
  function sql_query_livro ( $v25_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = explode("#",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -607,7 +607,7 @@ class cl_certidlivro {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = explode("#",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

@@ -58,7 +58,7 @@ class cl_itburbano {
                  it05_itbisituacao = int8 = Situação
                  ";
    //funcao construtor da classe
-   public function cl_itburbano() {
+   public function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itburbano");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_itburbano {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it05_guia = ($this->it05_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it05_guia"]:$this->it05_guia);
-       $this->it05_frente = ($this->it05_frente == ""?@$GLOBALS["HTTP_POST_VARS"]["it05_frente"]:$this->it05_frente);
-       $this->it05_fundos = ($this->it05_fundos == ""?@$GLOBALS["HTTP_POST_VARS"]["it05_fundos"]:$this->it05_fundos);
-       $this->it05_direito = ($this->it05_direito == ""?@$GLOBALS["HTTP_POST_VARS"]["it05_direito"]:$this->it05_direito);
-       $this->it05_esquerdo = ($this->it05_esquerdo == ""?@$GLOBALS["HTTP_POST_VARS"]["it05_esquerdo"]:$this->it05_esquerdo);
-       $this->it05_itbisituacao = ($this->it05_itbisituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["it05_itbisituacao"]:$this->it05_itbisituacao);
+       $this->it05_guia = (($this->it05_guia === 0 || $this->it05_guia === 0.0 || $this->it05_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it05_guia"]:$this->it05_guia);
+       $this->it05_frente = (($this->it05_frente === 0 || $this->it05_frente === 0.0 || $this->it05_frente == "")?@$GLOBALS["HTTP_POST_VARS"]["it05_frente"]:$this->it05_frente);
+       $this->it05_fundos = (($this->it05_fundos === 0 || $this->it05_fundos === 0.0 || $this->it05_fundos == "")?@$GLOBALS["HTTP_POST_VARS"]["it05_fundos"]:$this->it05_fundos);
+       $this->it05_direito = (($this->it05_direito === 0 || $this->it05_direito === 0.0 || $this->it05_direito == "")?@$GLOBALS["HTTP_POST_VARS"]["it05_direito"]:$this->it05_direito);
+       $this->it05_esquerdo = (($this->it05_esquerdo === 0 || $this->it05_esquerdo === 0.0 || $this->it05_esquerdo == "")?@$GLOBALS["HTTP_POST_VARS"]["it05_esquerdo"]:$this->it05_esquerdo);
+       $this->it05_itbisituacao = (($this->it05_itbisituacao === 0 || $this->it05_itbisituacao === 0.0 || $this->it05_itbisituacao == "")?@$GLOBALS["HTTP_POST_VARS"]["it05_itbisituacao"]:$this->it05_itbisituacao);
      }else{
-       $this->it05_guia = ($this->it05_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it05_guia"]:$this->it05_guia);
+       $this->it05_guia = (($this->it05_guia === 0 || $this->it05_guia === 0.0 || $this->it05_guia == "")?@$GLOBALS["HTTP_POST_VARS"]["it05_guia"]:$this->it05_guia);
      }
    }
    // funcao para inclusao
@@ -134,7 +134,7 @@ class cl_itburbano {
        return false;
      }
        $this->it05_guia = $it05_guia;
-     if(($this->it05_guia == null) || ($this->it05_guia == "") ){
+     if(($this->it05_guia == null) || (($this->it05_guia === 0 || $this->it05_guia === 0.0 || $this->it05_guia == "")) ){
        $this->erro_sql = " Campo it05_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

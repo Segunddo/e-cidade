@@ -43,7 +43,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 $clissvar      = new cl_issvar;
 $clissvarnotas = new cl_issvarnotas;
 $clissbase     = new cl_issbase;
@@ -108,7 +108,7 @@ if(isset($incluir)){
       $chave=key($vt);
       if(substr($chave,0,6)=="linha_"){
         $sqlerro=false;
-	$matri= split("#",$vt[$chave]);
+	$matri= explode("#",$vt[$chave]);
         $q05_histor.=$vir.$matri[0];
 	$vir=",";
       }
@@ -136,7 +136,7 @@ if(isset($incluir)){
       $chave=key($vt);
       if(substr($chave,0,6)=="linha_"){
         $sqlerro=false;
-	      $matri = split("#",$vt[$chave]);
+	      $matri = explode("#",$vt[$chave]);
         $result55 = $clissvarnotas->sql_record($clissvarnotas->sql_query_file($codigo,"","max(q06_seq) +1 as seq"));
         db_fieldsmemory($result55,0);
         $q06_seq = $seq == ""?"1":$seq;

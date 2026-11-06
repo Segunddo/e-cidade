@@ -36,7 +36,7 @@ include(modification("classes/db_iptubase_classe.php"));
 include(modification("classes/db_promitente_classe.php"));
 include(modification("classes/db_propri_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 db_postmemory($HTTP_POST_VARS);
 
@@ -58,7 +58,7 @@ $db_opcao=1;
 $dadosini="";
 if(isset($iniciais)){
   
-  $matriz = split("x",$iniciais);
+  $matriz = explode("x",$iniciais);
   for($s=0; $s < sizeof($matriz); $s++){
     $inicial=$matriz[$s];
     if($inicial!=""){

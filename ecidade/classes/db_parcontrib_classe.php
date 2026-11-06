@@ -60,7 +60,7 @@ class cl_parcontrib {
                  d12_perc = float8 = Percentual 
                  ";
    //funcao construtor da classe 
-   function cl_parcontrib() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parcontrib"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,13 +77,13 @@ class cl_parcontrib {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d12_receita = ($this->d12_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_receita"]:$this->d12_receita);
-       $this->d12_numtot = ($this->d12_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_numtot"]:$this->d12_numtot);
-       $this->d12_perunica = ($this->d12_perunica == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_perunica"]:$this->d12_perunica);
-       $this->d12_hist = ($this->d12_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_hist"]:$this->d12_hist);
-       $this->d12_notitipo = ($this->d12_notitipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_notitipo"]:$this->d12_notitipo);
-       $this->d12_tipo = ($this->d12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_tipo"]:$this->d12_tipo);
-       $this->d12_perc = ($this->d12_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_perc"]:$this->d12_perc);
+       $this->d12_receita = ($this->d12_receita === 0 || $this->d12_receita === 0.0 || $this->d12_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_receita"]:$this->d12_receita);
+       $this->d12_numtot = ($this->d12_numtot === 0 || $this->d12_numtot === 0.0 || $this->d12_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_numtot"]:$this->d12_numtot);
+       $this->d12_perunica = ($this->d12_perunica === 0 || $this->d12_perunica === 0.0 || $this->d12_perunica == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_perunica"]:$this->d12_perunica);
+       $this->d12_hist = ($this->d12_hist === 0 || $this->d12_hist === 0.0 || $this->d12_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_hist"]:$this->d12_hist);
+       $this->d12_notitipo = ($this->d12_notitipo === 0 || $this->d12_notitipo === 0.0 || $this->d12_notitipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_notitipo"]:$this->d12_notitipo);
+       $this->d12_tipo = ($this->d12_tipo === 0 || $this->d12_tipo === 0.0 || $this->d12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_tipo"]:$this->d12_tipo);
+       $this->d12_perc = ($this->d12_perc === 0 || $this->d12_perc === 0.0 || $this->d12_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_perc"]:$this->d12_perc);
      }else{
      }
    }
@@ -379,7 +379,7 @@ $result = db_query($sql);
    function sql_query ( $oid = null,$campos="parcontrib.oid,*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ $result = db_query($sql);
    function sql_query_file ( $oid = null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

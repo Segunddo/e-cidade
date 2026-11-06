@@ -67,7 +67,7 @@ class cl_aguacontratoeconomia {
                  x38_observacoes = varchar(200) = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_aguacontratoeconomia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("aguacontratoeconomia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -136,7 +136,7 @@ class cl_aguacontratoeconomia {
          $this->x38_sequencial = $x38_sequencial; 
        }
      }
-     if(($this->x38_sequencial == null) || ($this->x38_sequencial == "") ){ 
+     if(($this->x38_sequencial == null) || ($this->x38_sequencial === 0 || $this->x38_sequencial === 0.0 || $this->x38_sequencial == "") ){ 
        $this->erro_sql = " Campo x38_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -319,13 +319,13 @@ class cl_aguacontratoeconomia {
            $acount = pg_result($resac,0,0);
            $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac = db_query("insert into db_acountkey values($acount,22113,'$this->x38_sequencial','A')");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x38_sequencial"]) || $this->x38_sequencial != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x38_sequencial"]) || ($this->x38_sequencial != "" && $this->x38_sequencial !== 0 && $this->x38_sequencial !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3983,22113,'".AddSlashes(pg_result($resaco,$conresaco,'x38_sequencial'))."','$this->x38_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x38_aguacontrato"]) || $this->x38_aguacontrato != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x38_aguacontrato"]) || ($this->x38_aguacontrato != "" && $this->x38_aguacontrato !== 0 && $this->x38_aguacontrato !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3983,22114,'".AddSlashes(pg_result($resaco,$conresaco,'x38_aguacontrato'))."','$this->x38_aguacontrato',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x38_cgm"]) || $this->x38_cgm != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x38_cgm"]) || ($this->x38_cgm != "" && $this->x38_cgm !== 0 && $this->x38_cgm !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3983,22115,'".AddSlashes(pg_result($resaco,$conresaco,'x38_cgm'))."','$this->x38_cgm',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["x38_aguacategoriaconsumo"]) || $this->x38_aguacategoriaconsumo != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["x38_aguacategoriaconsumo"]) || ($this->x38_aguacategoriaconsumo != "" && $this->x38_aguacategoriaconsumo !== 0 && $this->x38_aguacategoriaconsumo !== 0.0))
              $resac = db_query("insert into db_acount values($acount,3983,22116,'".AddSlashes(pg_result($resaco,$conresaco,'x38_aguacategoriaconsumo'))."','$this->x38_aguacategoriaconsumo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["x38_datavalidadecadastro"]) || $this->x38_datavalidadecadastro != "")
              $resac = db_query("insert into db_acount values($acount,3983,22117,'".AddSlashes(pg_result($resaco,$conresaco,'x38_datavalidadecadastro'))."','$this->x38_datavalidadecadastro',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");

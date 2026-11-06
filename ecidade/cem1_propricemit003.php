@@ -33,7 +33,7 @@ require_once(modification("classes/db_lotecemit_classe.php"));
 require_once(modification("classes/db_propricemit_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 
 $clpropricemit  = new cl_propricemit;
 $cllotecemit    = new cl_lotecemit;

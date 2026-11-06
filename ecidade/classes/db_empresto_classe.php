@@ -68,7 +68,7 @@ class cl_empresto
                  ";
 
     //funcao construtor da classe
-    function cl_empresto()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("empresto");
@@ -90,19 +90,19 @@ class cl_empresto
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e91_anousu = ($this->e91_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_anousu"] : $this->e91_anousu);
-            $this->e91_numemp = ($this->e91_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_numemp"] : $this->e91_numemp);
-            $this->e91_vlremp = ($this->e91_vlremp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_vlremp"] : $this->e91_vlremp);
-            $this->e91_vlranu = ($this->e91_vlranu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_vlranu"] : $this->e91_vlranu);
-            $this->e91_vlrliq = ($this->e91_vlrliq == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_vlrliq"] : $this->e91_vlrliq);
-            $this->e91_vlrpag = ($this->e91_vlrpag == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_vlrpag"] : $this->e91_vlrpag);
+            $this->e91_anousu = ($this->e91_anousu === 0 || $this->e91_anousu === 0.0 || $this->e91_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_anousu"] : $this->e91_anousu);
+            $this->e91_numemp = ($this->e91_numemp === 0 || $this->e91_numemp === 0.0 || $this->e91_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_numemp"] : $this->e91_numemp);
+            $this->e91_vlremp = ($this->e91_vlremp === 0 || $this->e91_vlremp === 0.0 || $this->e91_vlremp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_vlremp"] : $this->e91_vlremp);
+            $this->e91_vlranu = ($this->e91_vlranu === 0 || $this->e91_vlranu === 0.0 || $this->e91_vlranu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_vlranu"] : $this->e91_vlranu);
+            $this->e91_vlrliq = ($this->e91_vlrliq === 0 || $this->e91_vlrliq === 0.0 || $this->e91_vlrliq == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_vlrliq"] : $this->e91_vlrliq);
+            $this->e91_vlrpag = ($this->e91_vlrpag === 0 || $this->e91_vlrpag === 0.0 || $this->e91_vlrpag == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_vlrpag"] : $this->e91_vlrpag);
             $this->e91_elemento = ($this->e91_elemento == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_elemento"] : $this->e91_elemento);
-            $this->e91_recurso = ($this->e91_recurso == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_recurso"] : $this->e91_recurso);
-            $this->e91_codtipo = ($this->e91_codtipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_codtipo"] : $this->e91_codtipo);
+            $this->e91_recurso = ($this->e91_recurso === 0 || $this->e91_recurso === 0.0 || $this->e91_recurso == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_recurso"] : $this->e91_recurso);
+            $this->e91_codtipo = ($this->e91_codtipo === 0 || $this->e91_codtipo === 0.0 || $this->e91_codtipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_codtipo"] : $this->e91_codtipo);
             $this->e91_rpcorreto = ($this->e91_rpcorreto == "f" || empty($this->e91_rpcorreto) ? 'f' : $this->e91_rpcorreto);
         } else {
-            $this->e91_anousu = ($this->e91_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_anousu"] : $this->e91_anousu);
-            $this->e91_numemp = ($this->e91_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_numemp"] : $this->e91_numemp);
+            $this->e91_anousu = ($this->e91_anousu === 0 || $this->e91_anousu === 0.0 || $this->e91_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_anousu"] : $this->e91_anousu);
+            $this->e91_numemp = ($this->e91_numemp === 0 || $this->e91_numemp === 0.0 || $this->e91_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e91_numemp"] : $this->e91_numemp);
         }
     }
 
@@ -166,7 +166,7 @@ class cl_empresto
         }
         $this->e91_anousu = $e91_anousu;
         $this->e91_numemp = $e91_numemp;
-        if (($this->e91_anousu == null) || ($this->e91_anousu == "")) {
+        if (($this->e91_anousu == null) || ($this->e91_anousu === 0 || $this->e91_anousu === 0.0 || $this->e91_anousu == "")) {
             $this->erro_sql = " Campo e91_anousu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -174,7 +174,7 @@ class cl_empresto
             $this->erro_status = "0";
             return false;
         }
-        if (($this->e91_numemp == null) || ($this->e91_numemp == "")) {
+        if (($this->e91_numemp == null) || ($this->e91_numemp === 0 || $this->e91_numemp === 0.0 || $this->e91_numemp == "")) {
             $this->erro_sql = " Campo e91_numemp nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

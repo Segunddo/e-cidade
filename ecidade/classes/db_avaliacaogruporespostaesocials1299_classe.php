@@ -51,14 +51,14 @@ class cl_avaliacaogruporespostaesocials1299
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->eso33_sequencial = ($this->eso33_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_sequencial"] : $this->eso33_sequencial);
-            $this->eso33_empregador = ($this->eso33_empregador == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_empregador"] : $this->eso33_empregador);
-            $this->eso33_avaliacaogruporesposta = ($this->eso33_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_avaliacaogruporesposta"] : $this->eso33_avaliacaogruporesposta);
-            $this->eso33_indicativoapuracao = ($this->eso33_indicativoapuracao == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_indicativoapuracao"] : $this->eso33_indicativoapuracao);
+            $this->eso33_sequencial = ($this->eso33_sequencial === 0 || $this->eso33_sequencial === 0.0 || $this->eso33_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_sequencial"] : $this->eso33_sequencial);
+            $this->eso33_empregador = ($this->eso33_empregador === 0 || $this->eso33_empregador === 0.0 || $this->eso33_empregador == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_empregador"] : $this->eso33_empregador);
+            $this->eso33_avaliacaogruporesposta = ($this->eso33_avaliacaogruporesposta === 0 || $this->eso33_avaliacaogruporesposta === 0.0 || $this->eso33_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_avaliacaogruporesposta"] : $this->eso33_avaliacaogruporesposta);
+            $this->eso33_indicativoapuracao = ($this->eso33_indicativoapuracao === 0 || $this->eso33_indicativoapuracao === 0.0 || $this->eso33_indicativoapuracao == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_indicativoapuracao"] : $this->eso33_indicativoapuracao);
             $this->eso33_periodo = ($this->eso33_periodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_periodo"] : $this->eso33_periodo);
-            $this->eso33_avaliacao = ($this->eso33_avaliacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_avaliacao"] : $this->eso33_avaliacao);
+            $this->eso33_avaliacao = ($this->eso33_avaliacao === 0 || $this->eso33_avaliacao === 0.0 || $this->eso33_avaliacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_avaliacao"] : $this->eso33_avaliacao);
         } else {
-            $this->eso33_sequencial = ($this->eso33_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_sequencial"] : $this->eso33_sequencial);
+            $this->eso33_sequencial = ($this->eso33_sequencial === 0 || $this->eso33_sequencial === 0.0 || $this->eso33_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["eso33_sequencial"] : $this->eso33_sequencial);
         }
     }
 
@@ -141,7 +141,7 @@ class cl_avaliacaogruporespostaesocials1299
                 $this->eso33_sequencial = $eso33_sequencial;
             }
         }
-        if (($this->eso33_sequencial == null) || ($this->eso33_sequencial == "")) {
+        if (($this->eso33_sequencial == null) || ($this->eso33_sequencial === 0 || $this->eso33_sequencial === 0.0 || $this->eso33_sequencial == "")) {
             $this->erro_sql = " Campo eso33_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

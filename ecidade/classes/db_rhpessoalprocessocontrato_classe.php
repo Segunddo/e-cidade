@@ -79,9 +79,9 @@ class cl_rhpessoalprocessocontrato
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh273_sequencial = ($this->rh273_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_sequencial"]:$this->rh273_sequencial);
-       $this->rh273_sequencialprocessoservidor = ($this->rh273_sequencialprocessoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_sequencialprocessoservidor"]:$this->rh273_sequencialprocessoservidor);
-       $this->rh273_tpcontr = ($this->rh273_tpcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_tpcontr"]:$this->rh273_tpcontr);
+       $this->rh273_sequencial = ($this->rh273_sequencial === 0 || $this->rh273_sequencial === 0.0 || $this->rh273_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_sequencial"]:$this->rh273_sequencial);
+       $this->rh273_sequencialprocessoservidor = ($this->rh273_sequencialprocessoservidor === 0 || $this->rh273_sequencialprocessoservidor === 0.0 || $this->rh273_sequencialprocessoservidor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_sequencialprocessoservidor"]:$this->rh273_sequencialprocessoservidor);
+       $this->rh273_tpcontr = ($this->rh273_tpcontr === 0 || $this->rh273_tpcontr === 0.0 || $this->rh273_tpcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_tpcontr"]:$this->rh273_tpcontr);
        $this->rh273_indcontr = ($this->rh273_indcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_indcontr"]:$this->rh273_indcontr);
        if($this->rh273_dtadmorig == ""){
          $this->rh273_dtadmorig_dia = ($this->rh273_dtadmorig_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_dtadmorig_dia"]:$this->rh273_dtadmorig_dia);
@@ -104,14 +104,14 @@ class cl_rhpessoalprocessocontrato
          }
        }
        $this->rh273_codcbo = ($this->rh273_codcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_codcbo"]:$this->rh273_codcbo);
-       $this->rh273_natatividade = ($this->rh273_natatividade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_natatividade"]:$this->rh273_natatividade);
+       $this->rh273_natatividade = ($this->rh273_natatividade === 0 || $this->rh273_natatividade === 0.0 || $this->rh273_natatividade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_natatividade"]:$this->rh273_natatividade);
        $this->rh273_compini = ($this->rh273_compini == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_compini"]:$this->rh273_compini);
        $this->rh273_compfim = ($this->rh273_compfim == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_compfim"]:$this->rh273_compfim);
-       $this->rh273_indreperc = ($this->rh273_indreperc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_indreperc"]:$this->rh273_indreperc);
+       $this->rh273_indreperc = ($this->rh273_indreperc === 0 || $this->rh273_indreperc === 0.0 || $this->rh273_indreperc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_indreperc"]:$this->rh273_indreperc);
        $this->rh273_indenabono = ($this->rh273_indenabono == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_indenabono"]:$this->rh273_indenabono);
        $this->rh273_indensd = ($this->rh273_indensd == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_indensd"]:$this->rh273_indensd);
      }else{
-       $this->rh273_sequencial = ($this->rh273_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_sequencial"]:$this->rh273_sequencial);
+       $this->rh273_sequencial = ($this->rh273_sequencial === 0 || $this->rh273_sequencial === 0.0 || $this->rh273_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh273_sequencial"]:$this->rh273_sequencial);
      }
    }
 
@@ -175,7 +175,7 @@ class cl_rhpessoalprocessocontrato
          $this->rh273_sequencial = $rh273_sequencial; 
        }
      }
-     if(($this->rh273_sequencial == null) || ($this->rh273_sequencial == "") ){ 
+     if(($this->rh273_sequencial == null) || ($this->rh273_sequencial === 0 || $this->rh273_sequencial === 0.0 || $this->rh273_sequencial == "") ){ 
        $this->erro_sql = " Campo rh273_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

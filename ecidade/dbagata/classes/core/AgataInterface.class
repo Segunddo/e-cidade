@@ -94,7 +94,7 @@ class AgataInterface
     /***********************************************************/
     /* Builds the Agata Interface
     /***********************************************************/
-    function AgataInterface($agataConfig, $subQuery = false)
+    function __construct($agataConfig, $subQuery = false)
     {
         $this->subQuery = $subQuery;
         $this->agataConfig = $agataConfig;
@@ -392,7 +392,7 @@ class AgataInterface
                 $inserts = null;
                 foreach ($this->TableNames as $Table => $nick)
                 {
-                    if (eregi('\.', $Table)) // Schemas Sub-Tree
+                    if (preg_match('#\.#i', $Table)) // Schemas Sub-Tree
                     {
                         $insert = null;
                         $pieces = explode('.', $Table);
@@ -983,8 +983,8 @@ class AgataInterface
     /***********************************************************/
     function UpSql()
     {
-        $sql = ereg_replace("\n", ' ', $this->textAreas['@ManualQuery']->get_chars(0, -1));
-        $sql = ereg_replace("\t", '', $sql);
+        $sql = preg_replace("#\n#", ' ', $this->textAreas['@ManualQuery']->get_chars(0, -1));
+        $sql = preg_replace("#\t#", '', $sql);
         
         $this->ClearQuery(true);
         $this->SelectList->LoadBlocks(Report::SqlToBlock($sql));
@@ -1335,7 +1335,7 @@ class AgataInterface
         {
             foreach ($WhereElements as $element)
             {
-                if (ereg('^(.*)\.(.*)=(.*)\.(.*)$', $element))
+                if (preg_match('#^(.*)\.(.*)=(.*)\.(.*)$#', $element))
                 {
                     $elements = explode('=', $element);
                     if ($aFrom)
@@ -1401,7 +1401,7 @@ class AgataInterface
         {
             foreach ($WhereElements as $element)
             {
-                if (ereg('^(.*)\.(.*)=(.*)\.(.*)$', $element))
+                if (preg_match('#^(.*)\.(.*)=(.*)\.(.*)$#', $element))
                 {
                     $elements = explode('=', $element);
                     if ($aFrom)
@@ -1620,14 +1620,14 @@ class AgataInterface
         {
             $clean_caption = $piece;
             $clean_piece   = $piece;
-            if (eregi(" as ", $piece))
+            if (preg_match("# as #i", $piece))
             {
                 $tmp = preg_split('/ as /i', $piece, 2);
                 
                 $clean_piece   = $tmp[0];
                 $clean_caption = str_replace('"', '', $tmp[1]);
             }
-            $piece = ereg_replace("'", "`", $clean_piece);
+            $piece = str_replace("'", "`", $clean_piece);
             //echo "<option VALUE='$piece'>$clean_caption</option>\n";
             $options[] = array($clean_caption, $piece);
         }

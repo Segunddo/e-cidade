@@ -76,14 +76,14 @@ class cl_cgmfisico
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->z04_sequencial = ($this->z04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z04_sequencial"]:$this->z04_sequencial);
-       $this->z04_numcgm = ($this->z04_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z04_numcgm"]:$this->z04_numcgm);
-       $this->z04_rhcbo = ($this->z04_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["z04_rhcbo"]:$this->z04_rhcbo);
+       $this->z04_sequencial = (($this->z04_sequencial === 0 || $this->z04_sequencial === 0.0 || $this->z04_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["z04_sequencial"]:$this->z04_sequencial);
+       $this->z04_numcgm = (($this->z04_numcgm === 0 || $this->z04_numcgm === 0.0 || $this->z04_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["z04_numcgm"]:$this->z04_numcgm);
+       $this->z04_rhcbo = (($this->z04_rhcbo === 0 || $this->z04_rhcbo === 0.0 || $this->z04_rhcbo == "")?@$GLOBALS["HTTP_POST_VARS"]["z04_rhcbo"]:$this->z04_rhcbo);
        $this->z04_nomesocial = ($this->z04_nomesocial == ""?@$GLOBALS["HTTP_POST_VARS"]["z04_nomesocial"]:$this->z04_nomesocial);
-       $this->z04_paisnascimento = ($this->z04_paisnascimento == ""?@$GLOBALS["HTTP_POST_VARS"]["z04_paisnascimento"]:$this->z04_paisnascimento);
-       $this->z04_paisnacionalidade = ($this->z04_paisnacionalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["z04_paisnacionalidade"]:$this->z04_paisnacionalidade);
+       $this->z04_paisnascimento = (($this->z04_paisnascimento === 0 || $this->z04_paisnascimento === 0.0 || $this->z04_paisnascimento == "")?@$GLOBALS["HTTP_POST_VARS"]["z04_paisnascimento"]:$this->z04_paisnascimento);
+       $this->z04_paisnacionalidade = (($this->z04_paisnacionalidade === 0 || $this->z04_paisnacionalidade === 0.0 || $this->z04_paisnacionalidade == "")?@$GLOBALS["HTTP_POST_VARS"]["z04_paisnacionalidade"]:$this->z04_paisnacionalidade);
      }else{
-       $this->z04_sequencial = ($this->z04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z04_sequencial"]:$this->z04_sequencial);
+       $this->z04_sequencial = (($this->z04_sequencial === 0 || $this->z04_sequencial === 0.0 || $this->z04_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["z04_sequencial"]:$this->z04_sequencial);
      }
    }
 
@@ -133,7 +133,7 @@ class cl_cgmfisico
          $this->z04_sequencial = $z04_sequencial; 
        }
      }
-     if(($this->z04_sequencial == null) || ($this->z04_sequencial == "") ){ 
+     if(($this->z04_sequencial == null) || (($this->z04_sequencial === 0 || $this->z04_sequencial === 0.0 || $this->z04_sequencial == "")) ){ 
        $this->erro_sql = " Campo z04_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

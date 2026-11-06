@@ -52,7 +52,7 @@ class cl_responsaveltecnico {
                  am07_cgm = int4 = Código do CGM
                  ";
    //funcao construtor da classe
-   function cl_responsaveltecnico() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("responsaveltecnico");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_responsaveltecnico {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am07_sequencial = ($this->am07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am07_sequencial"]:$this->am07_sequencial);
-       $this->am07_empreendimento = ($this->am07_empreendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["am07_empreendimento"]:$this->am07_empreendimento);
-       $this->am07_cgm = ($this->am07_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["am07_cgm"]:$this->am07_cgm);
+       $this->am07_sequencial = ($this->am07_sequencial === 0 || $this->am07_sequencial === 0.0 || $this->am07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am07_sequencial"]:$this->am07_sequencial);
+       $this->am07_empreendimento = ($this->am07_empreendimento === 0 || $this->am07_empreendimento === 0.0 || $this->am07_empreendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["am07_empreendimento"]:$this->am07_empreendimento);
+       $this->am07_cgm = ($this->am07_cgm === 0 || $this->am07_cgm === 0.0 || $this->am07_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["am07_cgm"]:$this->am07_cgm);
      }else{
-       $this->am07_sequencial = ($this->am07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am07_sequencial"]:$this->am07_sequencial);
+       $this->am07_sequencial = ($this->am07_sequencial === 0 || $this->am07_sequencial === 0.0 || $this->am07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am07_sequencial"]:$this->am07_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_responsaveltecnico {
          $this->am07_sequencial = $am07_sequencial;
        }
      }
-     if(($this->am07_sequencial == null) || ($this->am07_sequencial == "") ){
+     if(($this->am07_sequencial == null) || ($this->am07_sequencial === 0 || $this->am07_sequencial === 0.0 || $this->am07_sequencial == "") ){
        $this->erro_sql = " Campo am07_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

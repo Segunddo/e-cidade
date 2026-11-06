@@ -34,7 +34,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 db_postmemory($HTTP_POST_VARS);
 $clcriaabas = new cl_criaabas;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 $calculopage = "";
 $arr = array("vistorias"=>"Vistorias","fiscais"=>"Fiscais","testem"=>"Testemunhas"); 
 $src = "";

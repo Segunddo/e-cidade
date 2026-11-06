@@ -49,13 +49,13 @@ class cl_empautidot
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->e56_autori = ($this->e56_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_autori"]:$this->e56_autori);
-       $this->e56_anousu = ($this->e56_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_anousu"]:$this->e56_anousu);
-       $this->e56_coddot = ($this->e56_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_coddot"]:$this->e56_coddot);
-       $this->e56_orctiporec = ($this->e56_orctiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_orctiporec"]:$this->e56_orctiporec);
-       $this->e56_planoorcamentariolinhapacto = ($this->e56_planoorcamentariolinhapacto == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_planoorcamentariolinhapacto"]:$this->e56_planoorcamentariolinhapacto);
+       $this->e56_autori = ($this->e56_autori === 0 || $this->e56_autori === 0.0 || $this->e56_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_autori"]:$this->e56_autori);
+       $this->e56_anousu = ($this->e56_anousu === 0 || $this->e56_anousu === 0.0 || $this->e56_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_anousu"]:$this->e56_anousu);
+       $this->e56_coddot = ($this->e56_coddot === 0 || $this->e56_coddot === 0.0 || $this->e56_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_coddot"]:$this->e56_coddot);
+       $this->e56_orctiporec = ($this->e56_orctiporec === 0 || $this->e56_orctiporec === 0.0 || $this->e56_orctiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_orctiporec"]:$this->e56_orctiporec);
+       $this->e56_planoorcamentariolinhapacto = ($this->e56_planoorcamentariolinhapacto === 0 || $this->e56_planoorcamentariolinhapacto === 0.0 || $this->e56_planoorcamentariolinhapacto == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_planoorcamentariolinhapacto"]:$this->e56_planoorcamentariolinhapacto);
      }else{
-       $this->e56_autori = ($this->e56_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_autori"]:$this->e56_autori);
+       $this->e56_autori = ($this->e56_autori === 0 || $this->e56_autori === 0.0 || $this->e56_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e56_autori"]:$this->e56_autori);
      }
    }
 
@@ -87,7 +87,7 @@ class cl_empautidot
        $this->e56_planoorcamentariolinhapacto = "null";
      }
        $this->e56_autori = $e56_autori; 
-     if(($this->e56_autori == null) || ($this->e56_autori == "") ){ 
+     if(($this->e56_autori == null) || ($this->e56_autori === 0 || $this->e56_autori === 0.0 || $this->e56_autori == "") ){ 
        $this->erro_sql = " Campo e56_autori não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

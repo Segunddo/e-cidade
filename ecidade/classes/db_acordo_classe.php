@@ -113,7 +113,7 @@ class cl_acordo {
                  ac16_dependeordeminicio = bool = Depende da Ordem de Início
                  ";
    //funcao construtor da classe
-   function cl_acordo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -130,11 +130,11 @@ class cl_acordo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac16_sequencial = ($this->ac16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_sequencial"]:$this->ac16_sequencial);
-       $this->ac16_acordosituacao = ($this->ac16_acordosituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_acordosituacao"]:$this->ac16_acordosituacao);
-       $this->ac16_coddepto = ($this->ac16_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_coddepto"]:$this->ac16_coddepto);
+       $this->ac16_sequencial = ($this->ac16_sequencial === 0 || $this->ac16_sequencial === 0.0 || $this->ac16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_sequencial"]:$this->ac16_sequencial);
+       $this->ac16_acordosituacao = ($this->ac16_acordosituacao === 0 || $this->ac16_acordosituacao === 0.0 || $this->ac16_acordosituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_acordosituacao"]:$this->ac16_acordosituacao);
+       $this->ac16_coddepto = ($this->ac16_coddepto === 0 || $this->ac16_coddepto === 0.0 || $this->ac16_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_coddepto"]:$this->ac16_coddepto);
        $this->ac16_numero = ($this->ac16_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_numero"]:$this->ac16_numero);
-       $this->ac16_anousu = ($this->ac16_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_anousu"]:$this->ac16_anousu);
+       $this->ac16_anousu = ($this->ac16_anousu === 0 || $this->ac16_anousu === 0.0 || $this->ac16_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_anousu"]:$this->ac16_anousu);
        if($this->ac16_dataassinatura == ""){
          $this->ac16_dataassinatura_dia = ($this->ac16_dataassinatura_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_dataassinatura_dia"]:$this->ac16_dataassinatura_dia);
          $this->ac16_dataassinatura_mes = ($this->ac16_dataassinatura_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_dataassinatura_mes"]:$this->ac16_dataassinatura_mes);
@@ -143,7 +143,7 @@ class cl_acordo {
             $this->ac16_dataassinatura = $this->ac16_dataassinatura_ano."-".$this->ac16_dataassinatura_mes."-".$this->ac16_dataassinatura_dia;
          }
        }
-       $this->ac16_contratado = ($this->ac16_contratado == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_contratado"]:$this->ac16_contratado);
+       $this->ac16_contratado = ($this->ac16_contratado === 0 || $this->ac16_contratado === 0.0 || $this->ac16_contratado == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_contratado"]:$this->ac16_contratado);
        if($this->ac16_datainicio == ""){
          $this->ac16_datainicio_dia = ($this->ac16_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_datainicio_dia"]:$this->ac16_datainicio_dia);
          $this->ac16_datainicio_mes = ($this->ac16_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_datainicio_mes"]:$this->ac16_datainicio_mes);
@@ -162,26 +162,26 @@ class cl_acordo {
        }
        $this->ac16_resumoobjeto = ($this->ac16_resumoobjeto == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_resumoobjeto"]:$this->ac16_resumoobjeto);
        $this->ac16_objeto = ($this->ac16_objeto == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_objeto"]:$this->ac16_objeto);
-       $this->ac16_instit = ($this->ac16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_instit"]:$this->ac16_instit);
-       $this->ac16_acordocomissao = ($this->ac16_acordocomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_acordocomissao"]:$this->ac16_acordocomissao);
+       $this->ac16_instit = ($this->ac16_instit === 0 || $this->ac16_instit === 0.0 || $this->ac16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_instit"]:$this->ac16_instit);
+       $this->ac16_acordocomissao = ($this->ac16_acordocomissao === 0 || $this->ac16_acordocomissao === 0.0 || $this->ac16_acordocomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_acordocomissao"]:$this->ac16_acordocomissao);
        $this->ac16_lei = ($this->ac16_lei == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_lei"]:$this->ac16_lei);
-       $this->ac16_acordogrupo = ($this->ac16_acordogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_acordogrupo"]:$this->ac16_acordogrupo);
-       $this->ac16_origem = ($this->ac16_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_origem"]:$this->ac16_origem);
-       $this->ac16_qtdrenovacao = ($this->ac16_qtdrenovacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_qtdrenovacao"]:$this->ac16_qtdrenovacao);
-       $this->ac16_tipounidtempo = ($this->ac16_tipounidtempo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_tipounidtempo"]:$this->ac16_tipounidtempo);
-       $this->ac16_deptoresponsavel = ($this->ac16_deptoresponsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_deptoresponsavel"]:$this->ac16_deptoresponsavel);
+       $this->ac16_acordogrupo = ($this->ac16_acordogrupo === 0 || $this->ac16_acordogrupo === 0.0 || $this->ac16_acordogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_acordogrupo"]:$this->ac16_acordogrupo);
+       $this->ac16_origem = ($this->ac16_origem === 0 || $this->ac16_origem === 0.0 || $this->ac16_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_origem"]:$this->ac16_origem);
+       $this->ac16_qtdrenovacao = ($this->ac16_qtdrenovacao === 0 || $this->ac16_qtdrenovacao === 0.0 || $this->ac16_qtdrenovacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_qtdrenovacao"]:$this->ac16_qtdrenovacao);
+       $this->ac16_tipounidtempo = ($this->ac16_tipounidtempo === 0 || $this->ac16_tipounidtempo === 0.0 || $this->ac16_tipounidtempo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_tipounidtempo"]:$this->ac16_tipounidtempo);
+       $this->ac16_deptoresponsavel = ($this->ac16_deptoresponsavel === 0 || $this->ac16_deptoresponsavel === 0.0 || $this->ac16_deptoresponsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_deptoresponsavel"]:$this->ac16_deptoresponsavel);
        $this->ac16_numeroprocesso = ($this->ac16_numeroprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_numeroprocesso"]:$this->ac16_numeroprocesso);
        $this->ac16_periodocomercial = ($this->ac16_periodocomercial == "f"?@$GLOBALS["HTTP_POST_VARS"]["ac16_periodocomercial"]:$this->ac16_periodocomercial);
-       $this->ac16_qtdperiodo = ($this->ac16_qtdperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_qtdperiodo"]:$this->ac16_qtdperiodo);
-       $this->ac16_tipounidtempoperiodo = ($this->ac16_tipounidtempoperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_tipounidtempoperiodo"]:$this->ac16_tipounidtempoperiodo);
-       $this->ac16_acordocategoria = ($this->ac16_acordocategoria == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_acordocategoria"]:$this->ac16_acordocategoria);
-       $this->ac16_acordoclassificacao = ($this->ac16_acordoclassificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_acordoclassificacao"]:$this->ac16_acordoclassificacao);
-       $this->ac16_numeroacordo = ($this->ac16_numeroacordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_numeroacordo"]:$this->ac16_numeroacordo);
-       $this->ac16_valor = ($this->ac16_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_valor"]:$this->ac16_valor);
-       $this->ac16_tipoinstrumento = ($this->ac16_tipoinstrumento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_tipoinstrumento"]:$this->ac16_tipoinstrumento);
+       $this->ac16_qtdperiodo = ($this->ac16_qtdperiodo === 0 || $this->ac16_qtdperiodo === 0.0 || $this->ac16_qtdperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_qtdperiodo"]:$this->ac16_qtdperiodo);
+       $this->ac16_tipounidtempoperiodo = ($this->ac16_tipounidtempoperiodo === 0 || $this->ac16_tipounidtempoperiodo === 0.0 || $this->ac16_tipounidtempoperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_tipounidtempoperiodo"]:$this->ac16_tipounidtempoperiodo);
+       $this->ac16_acordocategoria = ($this->ac16_acordocategoria === 0 || $this->ac16_acordocategoria === 0.0 || $this->ac16_acordocategoria == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_acordocategoria"]:$this->ac16_acordocategoria);
+       $this->ac16_acordoclassificacao = ($this->ac16_acordoclassificacao === 0 || $this->ac16_acordoclassificacao === 0.0 || $this->ac16_acordoclassificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_acordoclassificacao"]:$this->ac16_acordoclassificacao);
+       $this->ac16_numeroacordo = ($this->ac16_numeroacordo === 0 || $this->ac16_numeroacordo === 0.0 || $this->ac16_numeroacordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_numeroacordo"]:$this->ac16_numeroacordo);
+       $this->ac16_valor = ($this->ac16_valor === 0 || $this->ac16_valor === 0.0 || $this->ac16_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_valor"]:$this->ac16_valor);
+       $this->ac16_tipoinstrumento = ($this->ac16_tipoinstrumento === 0 || $this->ac16_tipoinstrumento === 0.0 || $this->ac16_tipoinstrumento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_tipoinstrumento"]:$this->ac16_tipoinstrumento);
        $this->ac16_dependeordeminicio = ($this->ac16_dependeordeminicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_dependeordeminicio"]:$this->ac16_dependeordeminicio);
      }else{
-       $this->ac16_sequencial = ($this->ac16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_sequencial"]:$this->ac16_sequencial);
+       $this->ac16_sequencial = ($this->ac16_sequencial === 0 || $this->ac16_sequencial === 0.0 || $this->ac16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac16_sequencial"]:$this->ac16_sequencial);
      }
    }
    // funcao para Inclusão
@@ -406,7 +406,7 @@ class cl_acordo {
          $this->ac16_sequencial = $ac16_sequencial;
        }
      }
-     if(($this->ac16_sequencial == null) || ($this->ac16_sequencial == "") ){
+     if(($this->ac16_sequencial == null) || ($this->ac16_sequencial === 0 || $this->ac16_sequencial === 0.0 || $this->ac16_sequencial == "") ){
        $this->erro_sql = " Campo ac16_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

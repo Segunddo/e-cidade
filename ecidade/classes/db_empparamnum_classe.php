@@ -52,7 +52,7 @@ class cl_empparamnum {
                  e29_codemp = int8 = Empenho 
                  ";
    //funcao construtor da classe 
-   function cl_empparamnum() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empparamnum"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_empparamnum {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e29_anousu = ($this->e29_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e29_anousu"]:$this->e29_anousu);
-       $this->e29_instit = ($this->e29_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["e29_instit"]:$this->e29_instit);
-       $this->e29_codemp = ($this->e29_codemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e29_codemp"]:$this->e29_codemp);
+       $this->e29_anousu = ($this->e29_anousu === 0 || $this->e29_anousu === 0.0 || $this->e29_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e29_anousu"]:$this->e29_anousu);
+       $this->e29_instit = ($this->e29_instit === 0 || $this->e29_instit === 0.0 || $this->e29_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["e29_instit"]:$this->e29_instit);
+       $this->e29_codemp = ($this->e29_codemp === 0 || $this->e29_codemp === 0.0 || $this->e29_codemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e29_codemp"]:$this->e29_codemp);
      }else{
-       $this->e29_anousu = ($this->e29_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e29_anousu"]:$this->e29_anousu);
-       $this->e29_instit = ($this->e29_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["e29_instit"]:$this->e29_instit);
+       $this->e29_anousu = ($this->e29_anousu === 0 || $this->e29_anousu === 0.0 || $this->e29_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["e29_anousu"]:$this->e29_anousu);
+       $this->e29_instit = ($this->e29_instit === 0 || $this->e29_instit === 0.0 || $this->e29_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["e29_instit"]:$this->e29_instit);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_empparamnum {
      }
        $this->e29_anousu = $e29_anousu; 
        $this->e29_instit = $e29_instit; 
-     if(($this->e29_anousu == null) || ($this->e29_anousu == "") ){ 
+     if(($this->e29_anousu == null) || ($this->e29_anousu === 0 || $this->e29_anousu === 0.0 || $this->e29_anousu == "") ){ 
        $this->erro_sql = " Campo e29_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_empparamnum {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e29_instit == null) || ($this->e29_instit == "") ){ 
+     if(($this->e29_instit == null) || ($this->e29_instit === 0 || $this->e29_instit === 0.0 || $this->e29_instit == "") ){ 
        $this->erro_sql = " Campo e29_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_empparamnum {
    function sql_query ( $e29_anousu=null,$e29_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -379,7 +379,7 @@ class cl_empparamnum {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_empparamnum {
    function sql_query_file ( $e29_anousu=null,$e29_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_empparamnum {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

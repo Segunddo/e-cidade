@@ -28,7 +28,7 @@ class cl_acordodocumentoevento {
                  ac57_tipodocumento = int4 = Tipo do Documento 
                  ";
    //funcao construtor da classe 
-   function cl_acordodocumentoevento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordodocumentoevento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_acordodocumentoevento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac57_sequencial = ($this->ac57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac57_sequencial"]:$this->ac57_sequencial);
-       $this->ac57_acordoevento = ($this->ac57_acordoevento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac57_acordoevento"]:$this->ac57_acordoevento);
-       $this->ac57_acordodocumento = ($this->ac57_acordodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac57_acordodocumento"]:$this->ac57_acordodocumento);
-       $this->ac57_tipodocumento = ($this->ac57_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac57_tipodocumento"]:$this->ac57_tipodocumento);
+       $this->ac57_sequencial = ($this->ac57_sequencial === 0 || $this->ac57_sequencial === 0.0 || $this->ac57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac57_sequencial"]:$this->ac57_sequencial);
+       $this->ac57_acordoevento = ($this->ac57_acordoevento === 0 || $this->ac57_acordoevento === 0.0 || $this->ac57_acordoevento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac57_acordoevento"]:$this->ac57_acordoevento);
+       $this->ac57_acordodocumento = ($this->ac57_acordodocumento === 0 || $this->ac57_acordodocumento === 0.0 || $this->ac57_acordodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac57_acordodocumento"]:$this->ac57_acordodocumento);
+       $this->ac57_tipodocumento = ($this->ac57_tipodocumento === 0 || $this->ac57_tipodocumento === 0.0 || $this->ac57_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac57_tipodocumento"]:$this->ac57_tipodocumento);
      }else{
-       $this->ac57_sequencial = ($this->ac57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac57_sequencial"]:$this->ac57_sequencial);
+       $this->ac57_sequencial = ($this->ac57_sequencial === 0 || $this->ac57_sequencial === 0.0 || $this->ac57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac57_sequencial"]:$this->ac57_sequencial);
      }
    }
    // funcao para Inclusão
@@ -107,7 +107,7 @@ class cl_acordodocumentoevento {
          $this->ac57_sequencial = $ac57_sequencial; 
        }
      }
-     if(($this->ac57_sequencial == null) || ($this->ac57_sequencial == "") ){ 
+     if(($this->ac57_sequencial == null) || ($this->ac57_sequencial === 0 || $this->ac57_sequencial === 0.0 || $this->ac57_sequencial == "") ){ 
        $this->erro_sql = " Campo ac57_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -59,7 +59,7 @@ class cl_lotenumero {
                  j12_numero = int8 = Numero 
                  ";
    //funcao construtor da classe 
-   function cl_lotenumero() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lotenumero"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,9 +76,9 @@ class cl_lotenumero {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j12_codigo = ($this->j12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_codigo"]:$this->j12_codigo);
-       $this->j12_idbql = ($this->j12_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_idbql"]:$this->j12_idbql);
-       $this->j12_lograd = ($this->j12_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_lograd"]:$this->j12_lograd);
+       $this->j12_codigo = ($this->j12_codigo === 0 || $this->j12_codigo === 0.0 || $this->j12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_codigo"]:$this->j12_codigo);
+       $this->j12_idbql = ($this->j12_idbql === 0 || $this->j12_idbql === 0.0 || $this->j12_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_idbql"]:$this->j12_idbql);
+       $this->j12_lograd = ($this->j12_lograd === 0 || $this->j12_lograd === 0.0 || $this->j12_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_lograd"]:$this->j12_lograd);
        if($this->j12_data == ""){
          $this->j12_data_dia = ($this->j12_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_data_dia"]:$this->j12_data_dia);
          $this->j12_data_mes = ($this->j12_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_data_mes"]:$this->j12_data_mes);
@@ -87,9 +87,9 @@ class cl_lotenumero {
             $this->j12_data = $this->j12_data_ano."-".$this->j12_data_mes."-".$this->j12_data_dia;
          }
        }
-       $this->j12_numero = ($this->j12_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_numero"]:$this->j12_numero);
+       $this->j12_numero = ($this->j12_numero === 0 || $this->j12_numero === 0.0 || $this->j12_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_numero"]:$this->j12_numero);
      }else{
-       $this->j12_codigo = ($this->j12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_codigo"]:$this->j12_codigo);
+       $this->j12_codigo = ($this->j12_codigo === 0 || $this->j12_codigo === 0.0 || $this->j12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j12_codigo"]:$this->j12_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_lotenumero {
          $this->j12_codigo = $j12_codigo; 
        }
      }
-     if(($this->j12_codigo == null) || ($this->j12_codigo == "") ){ 
+     if(($this->j12_codigo == null) || ($this->j12_codigo === 0 || $this->j12_codigo === 0.0 || $this->j12_codigo == "") ){ 
        $this->erro_sql = " Campo j12_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -445,7 +445,7 @@ class cl_lotenumero {
    function sql_query ( $j12_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_lotenumero {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_lotenumero {
    function sql_query_file ( $j12_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -503,7 +503,7 @@ class cl_lotenumero {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

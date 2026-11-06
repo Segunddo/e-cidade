@@ -54,7 +54,7 @@ class cl_ouvidoriaatendimentocidadao {
                  ov10_ouvidoriaatendimento = int4 = Código Atendimento
                  ";
    //funcao construtor da classe
-   function cl_ouvidoriaatendimentocidadao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ouvidoriaatendimentocidadao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_ouvidoriaatendimentocidadao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov10_sequencial = ($this->ov10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_sequencial"]:$this->ov10_sequencial);
-       $this->ov10_seq = ($this->ov10_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_seq"]:$this->ov10_seq);
-       $this->ov10_cidadao = ($this->ov10_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_cidadao"]:$this->ov10_cidadao);
-       $this->ov10_ouvidoriaatendimento = ($this->ov10_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_ouvidoriaatendimento"]:$this->ov10_ouvidoriaatendimento);
+       $this->ov10_sequencial = ($this->ov10_sequencial === 0 || $this->ov10_sequencial === 0.0 || $this->ov10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_sequencial"]:$this->ov10_sequencial);
+       $this->ov10_seq = ($this->ov10_seq === 0 || $this->ov10_seq === 0.0 || $this->ov10_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_seq"]:$this->ov10_seq);
+       $this->ov10_cidadao = ($this->ov10_cidadao === 0 || $this->ov10_cidadao === 0.0 || $this->ov10_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_cidadao"]:$this->ov10_cidadao);
+       $this->ov10_ouvidoriaatendimento = ($this->ov10_ouvidoriaatendimento === 0 || $this->ov10_ouvidoriaatendimento === 0.0 || $this->ov10_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_ouvidoriaatendimento"]:$this->ov10_ouvidoriaatendimento);
      }else{
-       $this->ov10_sequencial = ($this->ov10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_sequencial"]:$this->ov10_sequencial);
-       $this->ov10_seq = ($this->ov10_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_seq"]:$this->ov10_seq);
+       $this->ov10_sequencial = ($this->ov10_sequencial === 0 || $this->ov10_sequencial === 0.0 || $this->ov10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_sequencial"]:$this->ov10_sequencial);
+       $this->ov10_seq = ($this->ov10_seq === 0 || $this->ov10_seq === 0.0 || $this->ov10_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov10_seq"]:$this->ov10_seq);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_ouvidoriaatendimentocidadao {
          $this->ov10_sequencial = $ov10_sequencial;
        }
      }
-     if(($this->ov10_sequencial == null) || ($this->ov10_sequencial == "") ){
+     if(($this->ov10_sequencial == null) || ($this->ov10_sequencial === 0 || $this->ov10_sequencial === 0.0 || $this->ov10_sequencial == "") ){
        $this->erro_sql = " Campo ov10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

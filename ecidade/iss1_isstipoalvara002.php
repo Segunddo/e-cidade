@@ -31,7 +31,8 @@ require_once(modification("libs/db_sessoes.php"));
 require_once(modification("libs/db_usuariosonline.php"));
 require_once(modification("dbforms/db_classesgenericas.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clcriaabas     = new cl_criaabas;
 $sChavePesquisa = "";
 if (isset($chave_pesquisa)) {
@@ -60,17 +61,17 @@ if (isset($chave_pesquisa)) {
      <td>
      <?
      
-     $clcriaabas->identifica = array("alvara"       => "Cadastro de Tipo de Alvará",
+     $clcriaabas->identifica = ["alvara"       => "Cadastro de Tipo de Alvará",
                                      "departamento" => "Departamentos"
-                                    );//nome do iframe e o label    
-     $clcriaabas->title      = array("alvara"       => "Cadastro de Tipo de Alvará", 
+                                    ];//nome do iframe e o label    
+     $clcriaabas->title      = ["alvara"       => "Cadastro de Tipo de Alvará", 
                                      "departamento" => "Departamentos"
-                                    );//nome do iframe e o label    
-     $clcriaabas->src        = array("alvara"       => "iss1_isstipoalvara005.php", 
+                                    ];//nome do iframe e o label    
+     $clcriaabas->src        = ["alvara"       => "iss1_isstipoalvara005.php", 
                                      "departamento" => "iss1_tabalvara_depto001.php" // VERIFICAR FONTE DOS DEPARTAMENTOS  cai1_tabrec_depto001.php
-                                    );  //nome do iframe e SRC  
-     $clcriaabas->sizecampo  = array("alvara"       => "30" );    
-     $clcriaabas->disabled   = array("departamento" => "false");    
+                                    ];  //nome do iframe e SRC  
+     $clcriaabas->sizecampo  = ["alvara"       => "30" ];    
+     $clcriaabas->disabled   = ["departamento" => "false"];    
      $clcriaabas->cria_abas();    
       
      

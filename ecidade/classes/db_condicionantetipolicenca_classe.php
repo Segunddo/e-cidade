@@ -52,7 +52,7 @@ class cl_condicionantetipolicenca {
                  am17_tipolicenca = int4 = Código Tipo Licença
                  ";
    //funcao construtor da classe
-   function cl_condicionantetipolicenca() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("condicionantetipolicenca");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_condicionantetipolicenca {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->am17_sequencial = ($this->am17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am17_sequencial"]:$this->am17_sequencial);
-       $this->am17_condicionante = ($this->am17_condicionante == ""?@$GLOBALS["HTTP_POST_VARS"]["am17_condicionante"]:$this->am17_condicionante);
-       $this->am17_tipolicenca = ($this->am17_tipolicenca == ""?@$GLOBALS["HTTP_POST_VARS"]["am17_tipolicenca"]:$this->am17_tipolicenca);
+       $this->am17_sequencial = ($this->am17_sequencial === 0 || $this->am17_sequencial === 0.0 || $this->am17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am17_sequencial"]:$this->am17_sequencial);
+       $this->am17_condicionante = ($this->am17_condicionante === 0 || $this->am17_condicionante === 0.0 || $this->am17_condicionante == ""?@$GLOBALS["HTTP_POST_VARS"]["am17_condicionante"]:$this->am17_condicionante);
+       $this->am17_tipolicenca = ($this->am17_tipolicenca === 0 || $this->am17_tipolicenca === 0.0 || $this->am17_tipolicenca == ""?@$GLOBALS["HTTP_POST_VARS"]["am17_tipolicenca"]:$this->am17_tipolicenca);
      }else{
-       $this->am17_sequencial = ($this->am17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am17_sequencial"]:$this->am17_sequencial);
+       $this->am17_sequencial = ($this->am17_sequencial === 0 || $this->am17_sequencial === 0.0 || $this->am17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["am17_sequencial"]:$this->am17_sequencial);
      }
    }
    // funcao para Inclusão
@@ -121,7 +121,7 @@ class cl_condicionantetipolicenca {
          $this->am17_sequencial = $am17_sequencial;
        }
      }
-     if(($this->am17_sequencial == null) || ($this->am17_sequencial == "") ){
+     if(($this->am17_sequencial == null) || ($this->am17_sequencial === 0 || $this->am17_sequencial === 0.0 || $this->am17_sequencial == "") ){
        $this->erro_sql = " Campo am17_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -52,7 +52,7 @@ class cl_pcorcamjulg {
                  pc24_orcamforne = int8 = Código do orcamento deste fornecedor
                  ";
    //funcao construtor da classe
-   function cl_pcorcamjulg() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcorcamjulg");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_pcorcamjulg {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc24_orcamitem = ($this->pc24_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc24_orcamitem"]:$this->pc24_orcamitem);
-       $this->pc24_pontuacao = ($this->pc24_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc24_pontuacao"]:$this->pc24_pontuacao);
-       $this->pc24_orcamforne = ($this->pc24_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc24_orcamforne"]:$this->pc24_orcamforne);
+       $this->pc24_orcamitem = ($this->pc24_orcamitem === 0 || $this->pc24_orcamitem === 0.0 || $this->pc24_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc24_orcamitem"]:$this->pc24_orcamitem);
+       $this->pc24_pontuacao = ($this->pc24_pontuacao === 0 || $this->pc24_pontuacao === 0.0 || $this->pc24_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc24_pontuacao"]:$this->pc24_pontuacao);
+       $this->pc24_orcamforne = ($this->pc24_orcamforne === 0 || $this->pc24_orcamforne === 0.0 || $this->pc24_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc24_orcamforne"]:$this->pc24_orcamforne);
      }else{
-       $this->pc24_orcamitem = ($this->pc24_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc24_orcamitem"]:$this->pc24_orcamitem);
-       $this->pc24_orcamforne = ($this->pc24_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc24_orcamforne"]:$this->pc24_orcamforne);
+       $this->pc24_orcamitem = ($this->pc24_orcamitem === 0 || $this->pc24_orcamitem === 0.0 || $this->pc24_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc24_orcamitem"]:$this->pc24_orcamitem);
+       $this->pc24_orcamforne = ($this->pc24_orcamforne === 0 || $this->pc24_orcamforne === 0.0 || $this->pc24_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc24_orcamforne"]:$this->pc24_orcamforne);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_pcorcamjulg {
      }
        $this->pc24_orcamitem = $pc24_orcamitem;
        $this->pc24_orcamforne = $pc24_orcamforne;
-     if(($this->pc24_orcamitem == null) || ($this->pc24_orcamitem == "") ){
+     if(($this->pc24_orcamitem == null) || ($this->pc24_orcamitem === 0 || $this->pc24_orcamitem === 0.0 || $this->pc24_orcamitem == "") ){
        $this->erro_sql = " Campo pc24_orcamitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_pcorcamjulg {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pc24_orcamforne == null) || ($this->pc24_orcamforne == "") ){
+     if(($this->pc24_orcamforne == null) || ($this->pc24_orcamforne === 0 || $this->pc24_orcamforne === 0.0 || $this->pc24_orcamforne == "") ){
        $this->erro_sql = " Campo pc24_orcamforne nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -356,7 +356,7 @@ class cl_pcorcamjulg {
    function sql_query ( $pc24_orcamitem=null,$pc24_orcamforne=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_pcorcamjulg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_pcorcamjulg {
    function sql_query_file ( $pc24_orcamitem=null,$pc24_orcamforne=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_pcorcamjulg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_pcorcamjulg {
    function sql_query_geraut( $pc24_orcamitem=null,$pc24_orcamforne=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -495,7 +495,7 @@ class cl_pcorcamjulg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -507,7 +507,7 @@ class cl_pcorcamjulg {
    function sql_query_gerautlic( $pc24_orcamitem=null,$pc24_orcamforne=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -562,7 +562,7 @@ class cl_pcorcamjulg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -574,7 +574,7 @@ class cl_pcorcamjulg {
    function sql_query_relmotivo ( $pc24_orcamitem=null,$pc24_orcamforne=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -607,7 +607,7 @@ class cl_pcorcamjulg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -619,7 +619,7 @@ class cl_pcorcamjulg {
    function sql_query_verifica_global ($pc20_codorc=null,$campos="*"){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -643,7 +643,7 @@ class cl_pcorcamjulg {
   function sql_query_adjudicacao( $pc24_orcamitem=null,$pc24_orcamforne=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -690,7 +690,7 @@ class cl_pcorcamjulg {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -703,7 +703,7 @@ class cl_pcorcamjulg {
   function sql_query_participantes_licitacao( $pc24_orcamitem=null,$pc24_orcamforne=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -755,7 +755,7 @@ class cl_pcorcamjulg {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

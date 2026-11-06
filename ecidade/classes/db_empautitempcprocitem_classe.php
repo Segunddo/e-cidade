@@ -54,7 +54,7 @@ class cl_empautitempcprocitem {
                  e73_pcprocitem = int4 = Código do Item do Processo 
                  ";
    //funcao construtor da classe 
-   function cl_empautitempcprocitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empautitempcprocitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_empautitempcprocitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e73_sequencial = ($this->e73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequencial"]:$this->e73_sequencial);
-       $this->e73_autori = ($this->e73_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_autori"]:$this->e73_autori);
-       $this->e73_sequen = ($this->e73_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequen"]:$this->e73_sequen);
-       $this->e73_pcprocitem = ($this->e73_pcprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_pcprocitem"]:$this->e73_pcprocitem);
+       $this->e73_sequencial = ($this->e73_sequencial === 0 || $this->e73_sequencial === 0.0 || $this->e73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequencial"]:$this->e73_sequencial);
+       $this->e73_autori = ($this->e73_autori === 0 || $this->e73_autori === 0.0 || $this->e73_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_autori"]:$this->e73_autori);
+       $this->e73_sequen = ($this->e73_sequen === 0 || $this->e73_sequen === 0.0 || $this->e73_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequen"]:$this->e73_sequen);
+       $this->e73_pcprocitem = ($this->e73_pcprocitem === 0 || $this->e73_pcprocitem === 0.0 || $this->e73_pcprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_pcprocitem"]:$this->e73_pcprocitem);
      }else{
-       $this->e73_sequencial = ($this->e73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequencial"]:$this->e73_sequencial);
-       $this->e73_sequen = ($this->e73_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequen"]:$this->e73_sequen);
+       $this->e73_sequencial = ($this->e73_sequencial === 0 || $this->e73_sequencial === 0.0 || $this->e73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequencial"]:$this->e73_sequencial);
+       $this->e73_sequen = ($this->e73_sequen === 0 || $this->e73_sequen === 0.0 || $this->e73_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequen"]:$this->e73_sequen);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_empautitempcprocitem {
          $this->e73_sequencial = $e73_sequencial; 
        }
      }
-     if(($this->e73_sequencial == null) || ($this->e73_sequencial == "") ){ 
+     if(($this->e73_sequencial == null) || ($this->e73_sequencial === 0 || $this->e73_sequencial === 0.0 || $this->e73_sequencial == "") ){ 
        $this->erro_sql = " Campo e73_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -383,7 +383,7 @@ class cl_empautitempcprocitem {
    function sql_query ( $e73_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -410,7 +410,7 @@ class cl_empautitempcprocitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_empautitempcprocitem {
    function sql_query_file ( $e73_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_empautitempcprocitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

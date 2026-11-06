@@ -36,7 +36,7 @@ require_once(modification("classes/db_autoultandam_classe.php"));
 require_once(modification("classes/db_fandam_classe.php"));
 require_once(modification("classes/db_fiscalprocrec_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clautotipo      = new cl_autotipo;

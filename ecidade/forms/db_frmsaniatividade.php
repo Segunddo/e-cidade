@@ -32,7 +32,7 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("z01_nome");
 $clrotulo->label("y80_numcgm");
 $clrotulo->label("q03_descr");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_saniatividade.location.href='fis1_saniatividade002.php?chavepesquisa=$y83_codsani&chavepesquisa1=$y83_seq'</script>";

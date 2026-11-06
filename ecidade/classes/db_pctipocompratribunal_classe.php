@@ -76,14 +76,14 @@ class cl_pctipocompratribunal
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->l44_sequencial = ($this->l44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l44_sequencial"]:$this->l44_sequencial);
+       $this->l44_sequencial = ($this->l44_sequencial === 0 || $this->l44_sequencial === 0.0 || $this->l44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l44_sequencial"]:$this->l44_sequencial);
        $this->l44_codigotribunal = ($this->l44_codigotribunal == ""?@$GLOBALS["HTTP_POST_VARS"]["l44_codigotribunal"]:$this->l44_codigotribunal);
        $this->l44_descricao = ($this->l44_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["l44_descricao"]:$this->l44_descricao);
        $this->l44_uf = ($this->l44_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["l44_uf"]:$this->l44_uf);
        $this->l44_sigla = ($this->l44_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["l44_sigla"]:$this->l44_sigla);
        $this->l44_obrigalicitacao = ($this->l44_obrigalicitacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["l44_obrigalicitacao"]:$this->l44_obrigalicitacao);
      }else{
-       $this->l44_sequencial = ($this->l44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l44_sequencial"]:$this->l44_sequencial);
+       $this->l44_sequencial = ($this->l44_sequencial === 0 || $this->l44_sequencial === 0.0 || $this->l44_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l44_sequencial"]:$this->l44_sequencial);
      }
    }
 
@@ -146,7 +146,7 @@ class cl_pctipocompratribunal
          $this->l44_sequencial = $l44_sequencial;
        }
      }
-     if(($this->l44_sequencial == null) || ($this->l44_sequencial == "") ){
+     if(($this->l44_sequencial == null) || ($this->l44_sequencial === 0 || $this->l44_sequencial === 0.0 || $this->l44_sequencial == "") ){
        $this->erro_sql = " Campo l44_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -90,11 +90,17 @@ class DBLogTXT implements iLog {
       $sMensagem = sprintf($sTextoLog. "\n");
     }
 
-    return fputs($this->pArquivo, $sMensagem);
+    // COMPAT PHP 8: quando o fopen falha (diretorio sem permissao de escrita),
+    // pArquivo fica false. No 5.6 fputs(false, ...) era warning e devolvia false;
+    // no PHP 8 e TypeError fatal. A guarda reproduz o retorno do 5.6.
+    return $this->pArquivo ? fputs($this->pArquivo, $sMensagem) : false;
   }
 
   public function finalizarLog() {
-    fclose($this->pArquivo);
+    // Mesmo motivo do fputs acima: fclose(false) e fatal no PHP 8.
+    if ($this->pArquivo) {
+      fclose($this->pArquivo);
+    }
   }
 
   public function __destruct() {

@@ -54,7 +54,7 @@ class cl_cfpatri {
                  t06_controlaplacainstituicao = bool = Contolar placa por instituição 
                  ";
    //funcao construtor da classe 
-   function cl_cfpatri() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cfpatri"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_cfpatri {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t06_codcla = ($this->t06_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["t06_codcla"]:$this->t06_codcla);
+       $this->t06_codcla = ($this->t06_codcla === 0 || $this->t06_codcla === 0.0 || $this->t06_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["t06_codcla"]:$this->t06_codcla);
        $this->t06_pesqorgao = ($this->t06_pesqorgao == "f"?@$GLOBALS["HTTP_POST_VARS"]["t06_pesqorgao"]:$this->t06_pesqorgao);
-       $this->t06_bensmodeloetiqueta = ($this->t06_bensmodeloetiqueta == ""?@$GLOBALS["HTTP_POST_VARS"]["t06_bensmodeloetiqueta"]:$this->t06_bensmodeloetiqueta);
+       $this->t06_bensmodeloetiqueta = ($this->t06_bensmodeloetiqueta === 0 || $this->t06_bensmodeloetiqueta === 0.0 || $this->t06_bensmodeloetiqueta == ""?@$GLOBALS["HTTP_POST_VARS"]["t06_bensmodeloetiqueta"]:$this->t06_bensmodeloetiqueta);
        $this->t06_controlaplacainstituicao = ($this->t06_controlaplacainstituicao == "f"?@$GLOBALS["HTTP_POST_VARS"]["t06_controlaplacainstituicao"]:$this->t06_controlaplacainstituicao);
      }else{
-       $this->t06_codcla = ($this->t06_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["t06_codcla"]:$this->t06_codcla);
+       $this->t06_codcla = ($this->t06_codcla === 0 || $this->t06_codcla === 0.0 || $this->t06_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["t06_codcla"]:$this->t06_codcla);
      }
    }
    // funcao para inclusao
@@ -104,7 +104,7 @@ class cl_cfpatri {
        return false;
      }
        $this->t06_codcla = $t06_codcla; 
-     if(($this->t06_codcla == null) || ($this->t06_codcla == "") ){ 
+     if(($this->t06_codcla == null) || ($this->t06_codcla === 0 || $this->t06_codcla === 0.0 || $this->t06_codcla == "") ){ 
        $this->erro_sql = " Campo t06_codcla nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

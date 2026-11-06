@@ -55,7 +55,7 @@ class cl_procfiscalcadtipo {
                  y33_validade = date = Valido 
                  ";
    //funcao construtor da classe 
-   function cl_procfiscalcadtipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procfiscalcadtipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,7 +72,7 @@ class cl_procfiscalcadtipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y33_sequencial = ($this->y33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_sequencial"]:$this->y33_sequencial);
+       $this->y33_sequencial = (($this->y33_sequencial === 0 || $this->y33_sequencial === 0.0 || $this->y33_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y33_sequencial"]:$this->y33_sequencial);
        $this->y33_descricao = ($this->y33_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_descricao"]:$this->y33_descricao);
        if($this->y33_validade == ""){
          $this->y33_validade_dia = ($this->y33_validade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_validade_dia"]:$this->y33_validade_dia);
@@ -83,7 +83,7 @@ class cl_procfiscalcadtipo {
          }
        }
      }else{
-       $this->y33_sequencial = ($this->y33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_sequencial"]:$this->y33_sequencial);
+       $this->y33_sequencial = (($this->y33_sequencial === 0 || $this->y33_sequencial === 0.0 || $this->y33_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["y33_sequencial"]:$this->y33_sequencial);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_procfiscalcadtipo {
          $this->y33_sequencial = $y33_sequencial; 
        }
      }
-     if(($this->y33_sequencial == null) || ($this->y33_sequencial == "") ){ 
+     if(($this->y33_sequencial == null) || (($this->y33_sequencial === 0 || $this->y33_sequencial === 0.0 || $this->y33_sequencial == "")) ){ 
        $this->erro_sql = " Campo y33_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -383,7 +383,7 @@ class cl_procfiscalcadtipo {
    function sql_query ( $y33_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_procfiscalcadtipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_procfiscalcadtipo {
    function sql_query_file ( $y33_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_procfiscalcadtipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -156,7 +156,7 @@ class cl_cgmalt {
                  z05_fax = varchar(12) = Fax 
                  ";
    //funcao construtor da classe 
-   function cl_cgmalt() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgmalt"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -173,25 +173,25 @@ class cl_cgmalt {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z05_sequencia = ($this->z05_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_sequencia"]:$this->z05_sequencia);
+       $this->z05_sequencia = (($this->z05_sequencia === 0 || $this->z05_sequencia === 0.0 || $this->z05_sequencia == "")?@$GLOBALS["HTTP_POST_VARS"]["z05_sequencia"]:$this->z05_sequencia);
        $this->z05_ufcon = ($this->z05_ufcon == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_ufcon"]:$this->z05_ufcon);
        $this->z05_uf = ($this->z05_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_uf"]:$this->z05_uf);
-       $this->z05_tipcre = ($this->z05_tipcre == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_tipcre"]:$this->z05_tipcre);
+       $this->z05_tipcre = (($this->z05_tipcre === 0 || $this->z05_tipcre === 0.0 || $this->z05_tipcre == "")?@$GLOBALS["HTTP_POST_VARS"]["z05_tipcre"]:$this->z05_tipcre);
        $this->z05_telef = ($this->z05_telef == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_telef"]:$this->z05_telef);
        $this->z05_telcon = ($this->z05_telcon == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_telcon"]:$this->z05_telcon);
        $this->z05_telcel = ($this->z05_telcel == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_telcel"]:$this->z05_telcel);
        $this->z05_profis = ($this->z05_profis == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_profis"]:$this->z05_profis);
-       $this->z05_numero = ($this->z05_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_numero"]:$this->z05_numero);
-       $this->z05_numcon = ($this->z05_numcon == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_numcon"]:$this->z05_numcon);
-       $this->z05_numcgm = ($this->z05_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_numcgm"]:$this->z05_numcgm);
+       $this->z05_numero = (($this->z05_numero === 0 || $this->z05_numero === 0.0 || $this->z05_numero == "")?@$GLOBALS["HTTP_POST_VARS"]["z05_numero"]:$this->z05_numero);
+       $this->z05_numcon = (($this->z05_numcon === 0 || $this->z05_numcon === 0.0 || $this->z05_numcon == "")?@$GLOBALS["HTTP_POST_VARS"]["z05_numcon"]:$this->z05_numcon);
+       $this->z05_numcgm = (($this->z05_numcgm === 0 || $this->z05_numcgm === 0.0 || $this->z05_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["z05_numcgm"]:$this->z05_numcgm);
        $this->z05_nome = ($this->z05_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_nome"]:$this->z05_nome);
-       $this->z05_nacion = ($this->z05_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_nacion"]:$this->z05_nacion);
+       $this->z05_nacion = (($this->z05_nacion === 0 || $this->z05_nacion === 0.0 || $this->z05_nacion == "")?@$GLOBALS["HTTP_POST_VARS"]["z05_nacion"]:$this->z05_nacion);
        $this->z05_munic = ($this->z05_munic == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_munic"]:$this->z05_munic);
        $this->z05_muncon = ($this->z05_muncon == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_muncon"]:$this->z05_muncon);
-       $this->z05_login = ($this->z05_login == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_login"]:$this->z05_login);
+       $this->z05_login = (($this->z05_login === 0 || $this->z05_login === 0.0 || $this->z05_login == "")?@$GLOBALS["HTTP_POST_VARS"]["z05_login"]:$this->z05_login);
        $this->z05_incest = ($this->z05_incest == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_incest"]:$this->z05_incest);
        $this->z05_ident = ($this->z05_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_ident"]:$this->z05_ident);
-       $this->z05_estciv = ($this->z05_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_estciv"]:$this->z05_estciv);
+       $this->z05_estciv = (($this->z05_estciv === 0 || $this->z05_estciv === 0.0 || $this->z05_estciv == "")?@$GLOBALS["HTTP_POST_VARS"]["z05_estciv"]:$this->z05_estciv);
        $this->z05_ender = ($this->z05_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_ender"]:$this->z05_ender);
        $this->z05_endcon = ($this->z05_endcon == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_endcon"]:$this->z05_endcon);
        $this->z05_emailc = ($this->z05_emailc == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_emailc"]:$this->z05_emailc);
@@ -218,7 +218,7 @@ class cl_cgmalt {
        $this->z05_baicon = ($this->z05_baicon == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_baicon"]:$this->z05_baicon);
        $this->z05_tipo_alt = ($this->z05_tipo_alt == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_tipo_alt"]:$this->z05_tipo_alt);
        $this->z05_hora = ($this->z05_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_hora"]:$this->z05_hora);
-       $this->z05_login_alt = ($this->z05_login_alt == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_login_alt"]:$this->z05_login_alt);
+       $this->z05_login_alt = (($this->z05_login_alt === 0 || $this->z05_login_alt === 0.0 || $this->z05_login_alt == "")?@$GLOBALS["HTTP_POST_VARS"]["z05_login_alt"]:$this->z05_login_alt);
        if($this->z05_data_alt == ""){
          $this->z05_data_alt_dia = ($this->z05_data_alt_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_data_alt_dia"]:$this->z05_data_alt_dia);
          $this->z05_data_alt_mes = ($this->z05_data_alt_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_data_alt_mes"]:$this->z05_data_alt_mes);
@@ -251,7 +251,7 @@ class cl_cgmalt {
        }
        $this->z05_fax = ($this->z05_fax == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_fax"]:$this->z05_fax);
      }else{
-       $this->z05_sequencia = ($this->z05_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["z05_sequencia"]:$this->z05_sequencia);
+       $this->z05_sequencia = (($this->z05_sequencia === 0 || $this->z05_sequencia === 0.0 || $this->z05_sequencia == "")?@$GLOBALS["HTTP_POST_VARS"]["z05_sequencia"]:$this->z05_sequencia);
      }
    }
    // funcao para inclusao
@@ -359,7 +359,7 @@ class cl_cgmalt {
          $this->z05_sequencia = $z05_sequencia; 
        }
      }
-     if(($this->z05_sequencia == null) || ($this->z05_sequencia == "") ){ 
+     if(($this->z05_sequencia == null) || (($this->z05_sequencia === 0 || $this->z05_sequencia === 0.0 || $this->z05_sequencia == "")) ){ 
        $this->erro_sql = " Campo z05_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -1119,7 +1119,7 @@ class cl_cgmalt {
    function sql_query ( $z05_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1141,7 +1141,7 @@ class cl_cgmalt {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1153,7 +1153,7 @@ class cl_cgmalt {
    function sql_query_file ( $z05_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1174,7 +1174,7 @@ class cl_cgmalt {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

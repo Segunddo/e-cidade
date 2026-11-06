@@ -56,7 +56,7 @@ class cl_cidadaocomposicaofamiliar {
                  as03_cidadaofamilia = int4 = Código Família 
                  ";
    //funcao construtor da classe 
-   function cl_cidadaocomposicaofamiliar() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cidadaocomposicaofamiliar"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_cidadaocomposicaofamiliar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->as03_sequencial = ($this->as03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_sequencial"]:$this->as03_sequencial);
-       $this->as03_cidadao = ($this->as03_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_cidadao"]:$this->as03_cidadao);
-       $this->as03_cidadao_seq = ($this->as03_cidadao_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_cidadao_seq"]:$this->as03_cidadao_seq);
-       $this->as03_tipofamiliar = ($this->as03_tipofamiliar == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_tipofamiliar"]:$this->as03_tipofamiliar);
-       $this->as03_cidadaofamilia = ($this->as03_cidadaofamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_cidadaofamilia"]:$this->as03_cidadaofamilia);
+       $this->as03_sequencial = ($this->as03_sequencial === 0 || $this->as03_sequencial === 0.0 || $this->as03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_sequencial"]:$this->as03_sequencial);
+       $this->as03_cidadao = ($this->as03_cidadao === 0 || $this->as03_cidadao === 0.0 || $this->as03_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_cidadao"]:$this->as03_cidadao);
+       $this->as03_cidadao_seq = ($this->as03_cidadao_seq === 0 || $this->as03_cidadao_seq === 0.0 || $this->as03_cidadao_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_cidadao_seq"]:$this->as03_cidadao_seq);
+       $this->as03_tipofamiliar = ($this->as03_tipofamiliar === 0 || $this->as03_tipofamiliar === 0.0 || $this->as03_tipofamiliar == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_tipofamiliar"]:$this->as03_tipofamiliar);
+       $this->as03_cidadaofamilia = ($this->as03_cidadaofamilia === 0 || $this->as03_cidadaofamilia === 0.0 || $this->as03_cidadaofamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_cidadaofamilia"]:$this->as03_cidadaofamilia);
      }else{
-       $this->as03_sequencial = ($this->as03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_sequencial"]:$this->as03_sequencial);
+       $this->as03_sequencial = ($this->as03_sequencial === 0 || $this->as03_sequencial === 0.0 || $this->as03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as03_sequencial"]:$this->as03_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_cidadaocomposicaofamiliar {
          $this->as03_sequencial = $as03_sequencial; 
        }
      }
-     if(($this->as03_sequencial == null) || ($this->as03_sequencial == "") ){ 
+     if(($this->as03_sequencial == null) || ($this->as03_sequencial === 0 || $this->as03_sequencial === 0.0 || $this->as03_sequencial == "") ){ 
        $this->erro_sql = " Campo as03_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -432,7 +432,7 @@ class cl_cidadaocomposicaofamiliar {
    function sql_query ( $as03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_cidadaocomposicaofamiliar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_cidadaocomposicaofamiliar {
    function sql_query_file ( $as03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -491,7 +491,7 @@ class cl_cidadaocomposicaofamiliar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -503,7 +503,7 @@ class cl_cidadaocomposicaofamiliar {
    function sql_query_cadunico ( $as03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -529,7 +529,7 @@ class cl_cidadaocomposicaofamiliar {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -543,7 +543,7 @@ class cl_cidadaocomposicaofamiliar {
    
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -567,7 +567,7 @@ class cl_cidadaocomposicaofamiliar {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

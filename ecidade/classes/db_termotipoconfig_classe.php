@@ -54,7 +54,7 @@ class cl_termotipoconfig {
                  k42_instit = int4 = Cod. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_termotipoconfig() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termotipoconfig"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_termotipoconfig {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k42_sequencial = ($this->k42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_sequencial"]:$this->k42_sequencial);
-       $this->k42_cadtipo = ($this->k42_cadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_cadtipo"]:$this->k42_cadtipo);
-       $this->k42_tiponovo = ($this->k42_tiponovo == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_tiponovo"]:$this->k42_tiponovo);
-       $this->k42_instit = ($this->k42_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_instit"]:$this->k42_instit);
+       $this->k42_sequencial = (($this->k42_sequencial === 0 || $this->k42_sequencial === 0.0 || $this->k42_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k42_sequencial"]:$this->k42_sequencial);
+       $this->k42_cadtipo = (($this->k42_cadtipo === 0 || $this->k42_cadtipo === 0.0 || $this->k42_cadtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["k42_cadtipo"]:$this->k42_cadtipo);
+       $this->k42_tiponovo = (($this->k42_tiponovo === 0 || $this->k42_tiponovo === 0.0 || $this->k42_tiponovo == "")?@$GLOBALS["HTTP_POST_VARS"]["k42_tiponovo"]:$this->k42_tiponovo);
+       $this->k42_instit = (($this->k42_instit === 0 || $this->k42_instit === 0.0 || $this->k42_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["k42_instit"]:$this->k42_instit);
      }else{
-       $this->k42_sequencial = ($this->k42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_sequencial"]:$this->k42_sequencial);
+       $this->k42_sequencial = (($this->k42_sequencial === 0 || $this->k42_sequencial === 0.0 || $this->k42_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["k42_sequencial"]:$this->k42_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_termotipoconfig {
          $this->k42_sequencial = $k42_sequencial; 
        }
      }
-     if(($this->k42_sequencial == null) || ($this->k42_sequencial == "") ){ 
+     if(($this->k42_sequencial == null) || (($this->k42_sequencial === 0 || $this->k42_sequencial === 0.0 || $this->k42_sequencial == "")) ){ 
        $this->erro_sql = " Campo k42_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_termotipoconfig {
    function sql_query ( $k42_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_termotipoconfig {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_termotipoconfig {
    function sql_query_file ( $k42_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_termotipoconfig {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

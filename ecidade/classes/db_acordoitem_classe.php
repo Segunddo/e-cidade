@@ -89,20 +89,20 @@ class cl_acordoitem
     {
 
      if($exclusao==false){
-       $this->ac20_sequencial = ($this->ac20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_sequencial"]:$this->ac20_sequencial);
-       $this->ac20_acordoposicao = ($this->ac20_acordoposicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_acordoposicao"]:$this->ac20_acordoposicao);
-       $this->ac20_pcmater = ($this->ac20_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_pcmater"]:$this->ac20_pcmater);
+       $this->ac20_sequencial = ($this->ac20_sequencial === 0 || $this->ac20_sequencial === 0.0 || $this->ac20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_sequencial"]:$this->ac20_sequencial);
+       $this->ac20_acordoposicao = ($this->ac20_acordoposicao === 0 || $this->ac20_acordoposicao === 0.0 || $this->ac20_acordoposicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_acordoposicao"]:$this->ac20_acordoposicao);
+       $this->ac20_pcmater = ($this->ac20_pcmater === 0 || $this->ac20_pcmater === 0.0 || $this->ac20_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_pcmater"]:$this->ac20_pcmater);
        $this->ac20_quantidade = ($this->ac20_quantidade === ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_quantidade"]:$this->ac20_quantidade);
        $this->ac20_valorunitario = ($this->ac20_valorunitario === ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_valorunitario"]:$this->ac20_valorunitario);
        $this->ac20_valortotal = ($this->ac20_valortotal === ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_valortotal"]:$this->ac20_valortotal);
-       $this->ac20_elemento = ($this->ac20_elemento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_elemento"]:$this->ac20_elemento);
-       $this->ac20_ordem = ($this->ac20_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_ordem"]:$this->ac20_ordem);
-       $this->ac20_matunid = ($this->ac20_matunid == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_matunid"]:$this->ac20_matunid);
+       $this->ac20_elemento = ($this->ac20_elemento === 0 || $this->ac20_elemento === 0.0 || $this->ac20_elemento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_elemento"]:$this->ac20_elemento);
+       $this->ac20_ordem = ($this->ac20_ordem === 0 || $this->ac20_ordem === 0.0 || $this->ac20_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_ordem"]:$this->ac20_ordem);
+       $this->ac20_matunid = ($this->ac20_matunid === 0 || $this->ac20_matunid === 0.0 || $this->ac20_matunid == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_matunid"]:$this->ac20_matunid);
        $this->ac20_resumo = ($this->ac20_resumo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_resumo"]:$this->ac20_resumo);
-       $this->ac20_tipocontrole = ($this->ac20_tipocontrole == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_tipocontrole"]:$this->ac20_tipocontrole);
+       $this->ac20_tipocontrole = ($this->ac20_tipocontrole === 0 || $this->ac20_tipocontrole === 0.0 || $this->ac20_tipocontrole == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_tipocontrole"]:$this->ac20_tipocontrole);
        $this->ac20_servicoquantidade = ($this->ac20_servicoquantidade === null?'f':$this->ac20_servicoquantidade);
      }else{
-       $this->ac20_sequencial = ($this->ac20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_sequencial"]:$this->ac20_sequencial);
+       $this->ac20_sequencial = ($this->ac20_sequencial === 0 || $this->ac20_sequencial === 0.0 || $this->ac20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac20_sequencial"]:$this->ac20_sequencial);
      }
    }
 
@@ -226,7 +226,7 @@ class cl_acordoitem
          $this->ac20_sequencial = $ac20_sequencial;
        }
      }
-     if(($this->ac20_sequencial == null) || ($this->ac20_sequencial == "") ){
+     if(($this->ac20_sequencial == null) || ($this->ac20_sequencial === 0 || $this->ac20_sequencial === 0.0 || $this->ac20_sequencial == "") ){
        $this->erro_sql = " Campo ac20_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -491,11 +491,11 @@ class cl_acordoitem
              $resac = db_query("insert into db_acount values($acount,2837,16171,'".AddSlashes(pg_result($resaco,$conresaco,'ac20_acordoposicao'))."','$this->ac20_acordoposicao',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["ac20_pcmater"]) || $this->ac20_pcmater != "")
              $resac = db_query("insert into db_acount values($acount,2837,16172,'".AddSlashes(pg_result($resaco,$conresaco,'ac20_pcmater'))."','$this->ac20_pcmater',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["ac20_quantidade"]) || $this->ac20_quantidade != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["ac20_quantidade"]) || ($this->ac20_quantidade != "" && $this->ac20_quantidade !== 0 && $this->ac20_quantidade !== 0.0))
              $resac = db_query("insert into db_acount values($acount,2837,16173,'".AddSlashes(pg_result($resaco,$conresaco,'ac20_quantidade'))."','$this->ac20_quantidade',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["ac20_valorunitario"]) || $this->ac20_valorunitario != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["ac20_valorunitario"]) || ($this->ac20_valorunitario != "" && $this->ac20_valorunitario !== 0 && $this->ac20_valorunitario !== 0.0))
              $resac = db_query("insert into db_acount values($acount,2837,16174,'".AddSlashes(pg_result($resaco,$conresaco,'ac20_valorunitario'))."','$this->ac20_valorunitario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if (isset($GLOBALS["HTTP_POST_VARS"]["ac20_valortotal"]) || $this->ac20_valortotal != "")
+           if (isset($GLOBALS["HTTP_POST_VARS"]["ac20_valortotal"]) || ($this->ac20_valortotal != "" && $this->ac20_valortotal !== 0 && $this->ac20_valortotal !== 0.0))
              $resac = db_query("insert into db_acount values($acount,2837,16175,'".AddSlashes(pg_result($resaco,$conresaco,'ac20_valortotal'))."','$this->ac20_valortotal',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if (isset($GLOBALS["HTTP_POST_VARS"]["ac20_elemento"]) || $this->ac20_elemento != "")
              $resac = db_query("insert into db_acount values($acount,2837,16176,'".AddSlashes(pg_result($resaco,$conresaco,'ac20_elemento'))."','$this->ac20_elemento',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");

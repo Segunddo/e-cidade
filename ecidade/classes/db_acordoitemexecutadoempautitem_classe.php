@@ -54,7 +54,7 @@ class cl_acordoitemexecutadoempautitem {
                  ac19_acordoitemexecutado = int4 = Acordo Item 
                  ";
    //funcao construtor da classe 
-   function cl_acordoitemexecutadoempautitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoitemexecutadoempautitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_acordoitemexecutadoempautitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac19_sequencial = ($this->ac19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_sequencial"]:$this->ac19_sequencial);
-       $this->ac19_sequen = ($this->ac19_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_sequen"]:$this->ac19_sequen);
-       $this->ac19_autori = ($this->ac19_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_autori"]:$this->ac19_autori);
-       $this->ac19_acordoitemexecutado = ($this->ac19_acordoitemexecutado == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_acordoitemexecutado"]:$this->ac19_acordoitemexecutado);
+       $this->ac19_sequencial = ($this->ac19_sequencial === 0 || $this->ac19_sequencial === 0.0 || $this->ac19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_sequencial"]:$this->ac19_sequencial);
+       $this->ac19_sequen = ($this->ac19_sequen === 0 || $this->ac19_sequen === 0.0 || $this->ac19_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_sequen"]:$this->ac19_sequen);
+       $this->ac19_autori = ($this->ac19_autori === 0 || $this->ac19_autori === 0.0 || $this->ac19_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_autori"]:$this->ac19_autori);
+       $this->ac19_acordoitemexecutado = ($this->ac19_acordoitemexecutado === 0 || $this->ac19_acordoitemexecutado === 0.0 || $this->ac19_acordoitemexecutado == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_acordoitemexecutado"]:$this->ac19_acordoitemexecutado);
      }else{
-       $this->ac19_sequencial = ($this->ac19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_sequencial"]:$this->ac19_sequencial);
-       $this->ac19_sequen = ($this->ac19_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_sequen"]:$this->ac19_sequen);
+       $this->ac19_sequencial = ($this->ac19_sequencial === 0 || $this->ac19_sequencial === 0.0 || $this->ac19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_sequencial"]:$this->ac19_sequencial);
+       $this->ac19_sequen = ($this->ac19_sequen === 0 || $this->ac19_sequen === 0.0 || $this->ac19_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["ac19_sequen"]:$this->ac19_sequen);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_acordoitemexecutadoempautitem {
          $this->ac19_sequencial = $ac19_sequencial; 
        }
      }
-     if(($this->ac19_sequencial == null) || ($this->ac19_sequencial == "") ){ 
+     if(($this->ac19_sequencial == null) || ($this->ac19_sequencial === 0 || $this->ac19_sequencial === 0.0 || $this->ac19_sequencial == "") ){ 
        $this->erro_sql = " Campo ac19_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -383,7 +383,7 @@ class cl_acordoitemexecutadoempautitem {
    function sql_query ( $ac19_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -409,7 +409,7 @@ class cl_acordoitemexecutadoempautitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_acordoitemexecutadoempautitem {
    function sql_query_file ( $ac19_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_acordoitemexecutadoempautitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_acordoitemexecutadoempautitem {
   function sql_query_contrato($ac19_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_acordoitemexecutadoempautitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

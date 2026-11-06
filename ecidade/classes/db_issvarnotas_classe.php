@@ -54,7 +54,7 @@ class cl_issvarnotas {
                  q06_valor = float8 = Valor da nota 
                  ";
    //funcao construtor da classe 
-   function cl_issvarnotas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issvarnotas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_issvarnotas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q06_codigo = ($this->q06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_codigo"]:$this->q06_codigo);
-       $this->q06_seq = ($this->q06_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_seq"]:$this->q06_seq);
+       $this->q06_codigo = (($this->q06_codigo === 0 || $this->q06_codigo === 0.0 || $this->q06_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["q06_codigo"]:$this->q06_codigo);
+       $this->q06_seq = (($this->q06_seq === 0 || $this->q06_seq === 0.0 || $this->q06_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["q06_seq"]:$this->q06_seq);
        $this->q06_nota = ($this->q06_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_nota"]:$this->q06_nota);
-       $this->q06_valor = ($this->q06_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_valor"]:$this->q06_valor);
+       $this->q06_valor = (($this->q06_valor === 0 || $this->q06_valor === 0.0 || $this->q06_valor == "")?@$GLOBALS["HTTP_POST_VARS"]["q06_valor"]:$this->q06_valor);
      }else{
-       $this->q06_codigo = ($this->q06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_codigo"]:$this->q06_codigo);
-       $this->q06_seq = ($this->q06_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_seq"]:$this->q06_seq);
+       $this->q06_codigo = (($this->q06_codigo === 0 || $this->q06_codigo === 0.0 || $this->q06_codigo == "")?@$GLOBALS["HTTP_POST_VARS"]["q06_codigo"]:$this->q06_codigo);
+       $this->q06_seq = (($this->q06_seq === 0 || $this->q06_seq === 0.0 || $this->q06_seq == "")?@$GLOBALS["HTTP_POST_VARS"]["q06_seq"]:$this->q06_seq);
      }
    }
    // funcao para inclusao
@@ -94,7 +94,7 @@ class cl_issvarnotas {
      }
        $this->q06_codigo = $q06_codigo; 
        $this->q06_seq = $q06_seq; 
-     if(($this->q06_codigo == null) || ($this->q06_codigo == "") ){ 
+     if(($this->q06_codigo == null) || (($this->q06_codigo === 0 || $this->q06_codigo === 0.0 || $this->q06_codigo == "")) ){ 
        $this->erro_sql = " Campo q06_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -102,7 +102,7 @@ class cl_issvarnotas {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q06_seq == null) || ($this->q06_seq == "") ){ 
+     if(($this->q06_seq == null) || (($this->q06_seq === 0 || $this->q06_seq === 0.0 || $this->q06_seq == "")) ){ 
        $this->erro_sql = " Campo q06_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -362,7 +362,7 @@ class cl_issvarnotas {
    function sql_query ( $q06_codigo=null,$q06_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_issvarnotas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_issvarnotas {
    function sql_query_file ( $q06_codigo=null,$q06_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_issvarnotas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

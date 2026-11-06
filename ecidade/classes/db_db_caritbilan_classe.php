@@ -52,7 +52,7 @@ class cl_db_caritbilan {
                  area = float8 = Área 
                  ";
    //funcao construtor da classe 
-   function cl_db_caritbilan() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_caritbilan"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_db_caritbilan {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_itbi = ($this->id_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["id_itbi"]:$this->id_itbi);
-       $this->codcaritbi = ($this->codcaritbi == ""?@$GLOBALS["HTTP_POST_VARS"]["codcaritbi"]:$this->codcaritbi);
-       $this->area = ($this->area == ""?@$GLOBALS["HTTP_POST_VARS"]["area"]:$this->area);
+       $this->id_itbi = ($this->id_itbi === 0 || $this->id_itbi === 0.0 || $this->id_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["id_itbi"]:$this->id_itbi);
+       $this->codcaritbi = ($this->codcaritbi === 0 || $this->codcaritbi === 0.0 || $this->codcaritbi == ""?@$GLOBALS["HTTP_POST_VARS"]["codcaritbi"]:$this->codcaritbi);
+       $this->area = ($this->area === 0 || $this->area === 0.0 || $this->area == ""?@$GLOBALS["HTTP_POST_VARS"]["area"]:$this->area);
      }else{
-       $this->id_itbi = ($this->id_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["id_itbi"]:$this->id_itbi);
-       $this->codcaritbi = ($this->codcaritbi == ""?@$GLOBALS["HTTP_POST_VARS"]["codcaritbi"]:$this->codcaritbi);
+       $this->id_itbi = ($this->id_itbi === 0 || $this->id_itbi === 0.0 || $this->id_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["id_itbi"]:$this->id_itbi);
+       $this->codcaritbi = ($this->codcaritbi === 0 || $this->codcaritbi === 0.0 || $this->codcaritbi == ""?@$GLOBALS["HTTP_POST_VARS"]["codcaritbi"]:$this->codcaritbi);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_db_caritbilan {
      }
        $this->id_itbi = $id_itbi; 
        $this->codcaritbi = $codcaritbi; 
-     if(($this->id_itbi == null) || ($this->id_itbi == "") ){ 
+     if(($this->id_itbi == null) || ($this->id_itbi === 0 || $this->id_itbi === 0.0 || $this->id_itbi == "") ){ 
        $this->erro_sql = " Campo id_itbi nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_db_caritbilan {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->codcaritbi == null) || ($this->codcaritbi == "") ){ 
+     if(($this->codcaritbi == null) || ($this->codcaritbi === 0 || $this->codcaritbi === 0.0 || $this->codcaritbi == "") ){ 
        $this->erro_sql = " Campo codcaritbi nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

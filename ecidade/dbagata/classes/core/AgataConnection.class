@@ -269,7 +269,7 @@ class AgataConnection
         if($type == 'dbase')
         {
             $filename = $file = GetFileName($this->name);
-            if (eregi('\.', $filename))
+            if (preg_match('#\.#i', $filename))
             {
                 $pieces = explode('.', $filename, 2);
                 $file = $pieces[0];

@@ -175,7 +175,7 @@
   
   $rsDeclaracaoQuitacao = $clDeclaracaoQuitacao->sql_record($sSql);
    
-  if (pg_numrows($rsDeclaracaoQuitacao) == 0) {  
+  if (($rsDeclaracaoQuitacao ? pg_numrows($rsDeclaracaoQuitacao) : 0) == 0) {  
     db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
     exit;
   }

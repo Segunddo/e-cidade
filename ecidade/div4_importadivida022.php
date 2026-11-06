@@ -363,10 +363,10 @@ if ( isset($tipor) && isset($tipdes) &&
   $numpar  = "";
   $receita = "";
   $or      = "and ( ";
-  $info    = split('#',$chaves);
+  $info    = explode('#',$chaves);
   for($w=0;$w<count($info);$w++){
 
-    $dados   = split('-',$info[$w]);
+    $dados   = explode('-',$info[$w]);
     $numpre  = $dados[0];
     $numpar  = $dados[1];
     $receita = $dados[2];

@@ -34,7 +34,7 @@ class ColorButton
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function ColorButton($Description)
+    function __construct($Description)
     {
         global $Pixmaps;
         $tooltip = new GtkTooltips;

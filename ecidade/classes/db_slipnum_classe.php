@@ -50,7 +50,7 @@ class cl_slipnum {
                  k17_numcgm = int4 = Código do Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_slipnum() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("slipnum"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_slipnum {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k17_codigo = ($this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
-       $this->k17_numcgm = ($this->k17_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_numcgm"]:$this->k17_numcgm);
+       $this->k17_codigo = ($this->k17_codigo === 0 || $this->k17_codigo === 0.0 || $this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
+       $this->k17_numcgm = ($this->k17_numcgm === 0 || $this->k17_numcgm === 0.0 || $this->k17_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_numcgm"]:$this->k17_numcgm);
      }else{
-       $this->k17_codigo = ($this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
+       $this->k17_codigo = ($this->k17_codigo === 0 || $this->k17_codigo === 0.0 || $this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_slipnum {
        return false;
      }
        $this->k17_codigo = $k17_codigo; 
-     if(($this->k17_codigo == null) || ($this->k17_codigo == "") ){ 
+     if(($this->k17_codigo == null) || ($this->k17_codigo === 0 || $this->k17_codigo === 0.0 || $this->k17_codigo == "") ){ 
        $this->erro_sql = " Campo k17_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_slipnum {
    function sql_query ( $k17_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -328,7 +328,7 @@ class cl_slipnum {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -340,7 +340,7 @@ class cl_slipnum {
    function sql_query_file ( $k17_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_slipnum {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

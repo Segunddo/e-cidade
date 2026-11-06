@@ -135,7 +135,7 @@ if( isset($oPost->liberar) ){
 
     foreach ( $aListaFormaPag as $aChave){
 
-  	  $aListaValorFormaPag = split("X",$aChave);
+  	  $aListaValorFormaPag = explode("X",$aChave);
 
   	  // $aListaValorFormaPag[0]  -- Código da Forma de Pagamento da Transação
   	  // $aListaValorFormaPag[1]  -- Valor  da Forma de Pagamento da Transação

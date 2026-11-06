@@ -52,7 +52,7 @@ class cl_orcfontesdes {
                  o60_perc = float8 = Percentual
                  ";
    //funcao construtor da classe
-   function cl_orcfontesdes() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcfontesdes");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_orcfontesdes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o60_codfon = ($this->o60_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_codfon"]:$this->o60_codfon);
-       $this->o60_anousu = ($this->o60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_anousu"]:$this->o60_anousu);
-       $this->o60_perc = ($this->o60_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_perc"]:$this->o60_perc);
+       $this->o60_codfon = ($this->o60_codfon === 0 || $this->o60_codfon === 0.0 || $this->o60_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_codfon"]:$this->o60_codfon);
+       $this->o60_anousu = ($this->o60_anousu === 0 || $this->o60_anousu === 0.0 || $this->o60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_anousu"]:$this->o60_anousu);
+       $this->o60_perc = ($this->o60_perc === 0 || $this->o60_perc === 0.0 || $this->o60_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_perc"]:$this->o60_perc);
      }else{
-       $this->o60_codfon = ($this->o60_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_codfon"]:$this->o60_codfon);
-       $this->o60_anousu = ($this->o60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_anousu"]:$this->o60_anousu);
+       $this->o60_codfon = ($this->o60_codfon === 0 || $this->o60_codfon === 0.0 || $this->o60_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_codfon"]:$this->o60_codfon);
+       $this->o60_anousu = ($this->o60_anousu === 0 || $this->o60_anousu === 0.0 || $this->o60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_anousu"]:$this->o60_anousu);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_orcfontesdes {
      }
        $this->o60_anousu = $o60_anousu;
        $this->o60_codfon = $o60_codfon;
-     if(($this->o60_anousu == null) || ($this->o60_anousu == "") ){
+     if(($this->o60_anousu == null) || ($this->o60_anousu === 0 || $this->o60_anousu === 0.0 || $this->o60_anousu == "") ){
        $this->erro_sql = " Campo o60_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_orcfontesdes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o60_codfon == null) || ($this->o60_codfon == "") ){
+     if(($this->o60_codfon == null) || ($this->o60_codfon === 0 || $this->o60_codfon === 0.0 || $this->o60_codfon == "") ){
        $this->erro_sql = " Campo o60_codfon nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -314,7 +314,7 @@ class cl_orcfontesdes {
    function sql_query ( $o60_anousu=null,$o60_codfon=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -344,7 +344,7 @@ class cl_orcfontesdes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -357,7 +357,7 @@ class cl_orcfontesdes {
    function sql_query_file ( $o60_anousu=null,$o60_codfon=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_orcfontesdes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

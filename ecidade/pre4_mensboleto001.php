@@ -41,13 +41,17 @@ if(isset($HTTP_POST_VARS["salvar"])) {
 }
 $result = db_query("select mens,alinhamento from db_confmensagem where cod in('obsboleto1','obsboleto2','obsboleto3','obsboleto4')");
 $obs1 = @pg_result($result,0,0);
-parse_str(@pg_result($result,0,1));
+parse_str(@pg_result($result,0,1), $__qs);
+extract($__qs);
 $obs2 = @pg_result($result,1,0);
-parse_str(@pg_result($result,1,1));
+parse_str(@pg_result($result,1,1), $__qs);
+extract($__qs);
 $obs3 = @pg_result($result,2,0);
-parse_str(@pg_result($result,2,1));
+parse_str(@pg_result($result,2,1), $__qs);
+extract($__qs);
 $obs4 = @pg_result($result,3,0);
-parse_str(@pg_result($result,3,1));
+parse_str(@pg_result($result,3,1), $__qs);
+extract($__qs);
 ?>
 <html>
 <head>

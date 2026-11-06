@@ -35,7 +35,8 @@ require_once(modification("classes/db_modcarnepadrao_classe.php"));
 require_once(modification("classes/db_modcarnepadraotipo_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clrecreparcarretipo  = new cl_recreparcarretipo;
 //$clmodcarnepadrao     = new cl_modcarnepadrao;
@@ -44,7 +45,7 @@ $db_opcao = 22;
 $db_botao = false;
 $sqlerro  = false;
 if (isset($alterar) || isset($incluir)) {
-  
+
 	$oDaoRecReparcOri = db_utils::getDao("recreparcori");
 	//sql_query_recreparcori();
 	$sWhere = "k70_codigo = $k72_codigo ";
@@ -57,7 +58,7 @@ if (isset($alterar) || isset($incluir)) {
   	$erro_msg = "usuário:\\n\\nFalha ao validar regra para as parcelas!\\n\\nadministrador:\\n\\n";
   	$sqlerro  = true;
   }
-	
+
   $sWhere  = "     k70_recori    = {$oRecReparcOri->k70_recori}   ";
   $sWhere .= " and k70_vezesfim >= {$oRecReparcOri->k70_vezesini} ";
   $sWhere .= " and k70_vezesini <= {$oRecReparcOri->k70_vezesfim} ";
@@ -70,16 +71,16 @@ if (isset($alterar) || isset($incluir)) {
     $erro_msg.=" e a final\\n cadastrada para esta receita e tipo de débito selecionado!\\n\\nadministrador:\\n\\n";
   	$sqlerro = true;
   }
-  
+
   /*
   $rsModCarnePadrao = $clmodcarnepadrao->sql_record($clmodcarnepadrao->sql_query($k49_modcarnepadrao));
   $iNroLinhasRegra  = $clmodcarnepadrao->numrows;
   $oModCarnePadrao  = db_utils::fieldsMemory($rsModCarnePadrao,0);
-  
+
   $sWhereValidaRegra  = " 	  k48_instit	 	 = ".db_getsession('DB_instit')		  	   ;
   $sWhereValidaRegra .= " and k48_cadtipomod = {$oModCarnePadrao->k48_cadtipomod} 		  ";
   $sWhereValidaRegra .= " and k48_sequencial != {$k49_modcarnepadrao}	 		  		  ";
-  
+
   if (isset($excluir)){
     $rsModCarnePadraoExc = $clmodcarnepadrao->sql_record($clmodcarnepadrao->sql_query($k49_modcarnepadrao,"*",null,"k49_tipo is not null and k49_tipo != '{$k49_tipo}'"));
     $iNroLinhasRegraExc  = $clmodcarnepadrao->numrows;
@@ -109,7 +110,7 @@ if (isset($alterar) || isset($incluir)) {
   } else {    
     $sWhereValidaRegra .= " and k36_modcarnepadrao is null  		 		  	   ";
   }
-  
+
   $rsValidaRegra = $clmodcarnepadrao->sql_record($clmodcarnepadrao->sql_query(null,"k48_sequencial",null,$sWhereValidaRegra));
   if ($clmodcarnepadrao->numrows > 0 ) {
   	$oValidaRegra = db_utils::fieldsMemory($rsValidaRegra,0);

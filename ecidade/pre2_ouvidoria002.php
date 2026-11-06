@@ -65,7 +65,7 @@ $sCampos .= "nome                      						as login,                 ";
 $sCampos .= "po01_texto                           as texto                  ";
 
 $result = $cl_db_ouvidoria->sql_record($cl_db_ouvidoria->sql_query($id_ouvidoria,$sCampos));
-$registros = pg_num_rows($result);
+$registros = ($result ? pg_num_rows($result) : 0);
 if ($registros == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Consulta sem registros.');
 }

@@ -140,19 +140,19 @@ function db_dias_mes($ano,$mes,$ret_data = false){
  * FunÁ„o para validar PIS
  */
 function checkPIS($pis){
-    $pis = str_pad(ereg_replace('[^0-9]', '', $pis), 11, '0', STR_PAD_LEFT);
+    $pis = str_pad(preg_replace('/[^0-9]/', '', $pis), 11, '0', STR_PAD_LEFT);
 
     if (strlen($pis) != 11 || intval($pis) == 0) {
         return false;
     } else {
         for ($d = 0, $p = 3, $c = 0; $c < 10; $c++) {
-            $d += $pis{$c} * $p;
+            $d += $pis[$c] * $p;
             $p = ($p < 3) ? 9 : --$p;
         }
 
         $d = ((10 * $d) % 11) % 10;
 
-        return ($pis{$c} == $d) ? true : false;
+        return ($pis[$c] == $d) ? true : false;
     }
 }
 
@@ -219,7 +219,7 @@ class cl_download
     var $arquivo = null;
     var $texto = "Clique Aqui";
 
-    function cl_download()
+    function __construct()
     {
         $this->criaarquivo();
     }
@@ -238,7 +238,7 @@ class cl_download
 //Classe que verifica se o boletim j· foi liberado
 class cl_verificaboletim
 {
-    function cl_verificaboletim($clboletim)
+    function __construct($clboletim)
     {
         global $k11_numbol;
         $data = date("Y-m-d", db_getsession("DB_datausu"));
@@ -396,7 +396,7 @@ function db_verifica_ip_banco()
             or  ( db46_datafinal = '".date('Y-m-d')."' and db46_horafinal >= '".date("G:i")."' ))
             ";
     $result = db_query($sql);
-    $numrows = pg_numrows($result);
+    $numrows = ($result ? pg_numrows($result) : 0);
     for ($i = 0; $i < $numrows; $i++) {
         db_fieldsmemory($result, $i);
         if ($db48_ip == "") {
@@ -431,7 +431,7 @@ function db_verifica_ip_banco()
             or  ( db46_dtinicio = '".date('Y-m-d')."' and db46_horaini   <= '".date("H:i")."' )
             or  ( db46_datafinal = '".date('Y-m-d')."' and db46_horafinal >= '".date("H:i")."' ))";
     $result = db_query($sql);
-    $numrows = pg_numrows($result);
+    $numrows = ($result ? pg_numrows($result) : 0);
     for ($i = 0; $i < $numrows; $i++) {
         db_fieldsmemory($result, $i);
         if ($db48_ip == $db_ip) {
@@ -510,7 +510,7 @@ class cl_abre_arquivo
     var $arquivo = null;
 
     //|30|//arquivo : FD do arquivo - retorno da funÁ„o fopen()
-    function cl_abre_arquivo($nomearq = "")
+    function __construct($nomearq = "")
     {
         //#00#//cl_abre_arquivo
         //#10#//MÈtodo para abrir um arquivo
@@ -722,7 +722,7 @@ class rotulolov
             $result = db_query("select c.descricao,c.rotulo,c.tamanho
                            from db_syscampo c
                           where c.nomecam = '${sCampoTrim}'");
-            $numrows = pg_numrows($result);
+            $numrows = ($result ? pg_numrows($result) : 0);
             if ($numrows != 0) {
                 $this->titulo = ucfirst(pg_result($result, 0, "rotulo"));
                 $this->title = ucfirst(pg_result($result, 0, "descricao"));
@@ -794,7 +794,7 @@ function db_criatabela($result, $columns = array())
     //#20#//result  : Record set gerado
     //#20#//columns : Array com nomes das colunas a exibir, se nao passar nada mostra todas colunas do recordset
 
-    $numrows = pg_numrows($result);
+    $numrows = ($result ? pg_numrows($result) : 0);
     if (count($columns) == 0) {
         $numcols = pg_numfields($result);
         $bycolumn = false;
@@ -1317,6 +1317,13 @@ function db_fieldsmemory($recordset, $indice, $formatar = "", $mostravar = false
     //#99#//Exemplo:
     //#99#//db_fieldsmemory($result,0);
     //#99#//Cria todas as vari·veis com o conte˙do de cada uma sendo o valor do campo
+    // COMPAT PHP 8: no 5.6, pg_numfields(false) so emitia warning e a funcao
+    // seguia sem criar variavel nenhuma. No PHP 8 e TypeError fatal. Um recordset
+    // falso vem de sql_record() quando a consulta traz zero linhas (tabela vazia).
+    // O retorno antecipado reproduz exatamente o efeito que a funcao tinha no 5.6.
+    if (!$recordset) {
+        return;
+    }
     $fm_numfields = pg_numfields($recordset);
     $fm_numrows = pg_numrows($recordset);
     //if(pg_numrows($recordset)==0){
@@ -1493,7 +1500,7 @@ function db_vencimento($dt = "")
     if (empty ($dt)) {
         $dt = db_getsession("DB_datausu");
     }
-    $data = date("Y-m-d", $dt);
+    $data = date("Y-m-d", (int)$dt);
     /*
 if ( (date("H",$dt) >= "16" ) ) {
 $data = verifica_data(date("d",$dt)+1,date("m",$dt),date("Y",$dt));
@@ -1782,7 +1789,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
 
         db_putsession("dblov_query_inicial", $query);
 
-        $$tot_registros = pg_result($tot, 0, 0);
+        $$tot_registros = $tot ? pg_result($tot, 0, 0) : 0;
 
         if ($$tot_registros == 0) {
             $Dd2 = "disabled";
@@ -1930,7 +1937,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
 
     $query .= " limit $numlinhas offset " . $$offset;
     $result = db_query($query);
-    $NumRows = pg_numrows($result);
+    $NumRows = $result ? pg_numrows($result) : 0;
 
     if ($NumRows == 0) {
 
@@ -1962,11 +1969,11 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
                 $tot = db_query("select count(*) from ({$query_anterior}) as temp");
             }
 
-            $$tot_registros = pg_result($tot, 0, 0);
+            $$tot_registros = $tot ? pg_result($tot, 0, 0) : 0;
 
             $query = $query_anterior . " limit $numlinhas offset " . $$offset;
             $result = db_query($query);
-            $NumRows = pg_numrows($result);
+            $NumRows = ($result ? pg_numrows($result) : 0);
             $filtroquery = $query_anterior;
         }
     } else {
@@ -1999,7 +2006,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
                 $tot = db_query("select count(*) from ({$query_novo_filtro}) as temp");
             }
 
-            $$tot_registros = pg_result($tot, 0, 0);
+            $$tot_registros = $tot ? pg_result($tot, 0, 0) : 0;
 
             if ($$tot_registros == 0) {
                 $Dd2 = "disabled";
@@ -2007,7 +2014,9 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
         }
     }
 
-    $NumFields = pg_numfields($result);
+    // COMPAT PHP 8: no 5.6, pg_* recebendo false so emitia warning; no PHP 8 e
+    // TypeError. Resultado falso vem de consulta com zero linhas ou que falhou.
+    $NumFields = $result ? pg_numfields($result) : 0;
 
     if (($NumRows < $numlinhas) && ($numlinhas < ($$tot_registros - $$offset - $numlinhas ) ) ) {
     $Dd1 = @ $Dd2 = "disabled";
@@ -2114,7 +2123,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
 
         if (count($totalizacao) > 0) {
 
-            $totNumfields = pg_numfields($tot);
+            $totNumfields = ($tot ? pg_numfields($tot) : 0);
             for ($totrep = 1; $totrep < $totNumfields; $totrep++) {
 
                 $sHtml .= "<input type=\"hidden\"";
@@ -2588,7 +2597,7 @@ function db_lovrot($query, $numlinhas, $arquivo = "", $filtro = "%", $aonde = "_
 
     if ($automatico == true) {
 
-        if (pg_numrows($result) == 1 && $$offset == 0) {
+        if (($result ? pg_numrows($result) : 0) == 1 && $$offset == 0) {
             $sHtml .= "<script>".@$resultadoRetorno."</script>";
     }
   }
@@ -2623,7 +2632,7 @@ function db_lov($query, $numlinhas,
     if (empty ($$tot_registros)) {
         $Dd1 = "disabled";
         $tot = db_query("select count(*) from ($query) as temp");
-        $$tot_registros = pg_result($tot, 0, 0);
+        $$tot_registros = $tot ? pg_result($tot, 0, 0) : 0;
     }
     // testa qual botao foi pressionado
     if (isset ($HTTP_POST_VARS["pri" . $NomeForm])) {
@@ -2658,8 +2667,10 @@ function db_lov($query, $numlinhas,
     // executa a query e cria a tabela
     $query .= " limit $numlinhas offset " . $$offset;
     $result = db_query($query);
-    $NumRows = pg_numrows($result);
-    $NumFields = pg_numfields($result);
+    $NumRows = $result ? pg_numrows($result) : 0;
+    // COMPAT PHP 8: no 5.6, pg_* recebendo false so emitia warning; no PHP 8 e
+    // TypeError. Resultado falso vem de consulta com zero linhas ou que falhou.
+    $NumFields = $result ? pg_numfields($result) : 0;
     if ($NumRows < $numlinhas) {
         $Dd1 = $Dd2 = "disabled";
     }
@@ -2726,7 +2737,7 @@ function db_logs($string = '', $codcam = 0, $chave = 0)
             $wheremod limit 1 ";
 
     $result = db_query($sql);
-    if ($result != false && pg_numrows($result) > 0) {
+    if ($result != false && ($result ? pg_numrows($result) : 0) > 0) {
         $item = pg_result($result, 0, 0);
 
         $sql = "select nextval('db_logsacessa_codsequen_seq')";
@@ -2888,7 +2899,7 @@ function db_menu($usuario = null, $modulo = null, $anousu = null, $instit = null
             $iCodigoDepartamento = db_getsession("DB_coddepto");
             $result = @ db_query("select descrdepto from db_depart where coddepto = " . db_getsession("DB_coddepto"));
 
-            if ($result != false && pg_numrows($result) > 0) {
+            if ($result != false && ($result ? pg_numrows($result) : 0) > 0) {
                 $descrdep = "[<strong>" . db_getsession("DB_coddepto") . "-" . substr(pg_result($result, 0,
                         'descrdepto'), 0, 40) . "</strong>]";
             } else {
@@ -3020,7 +3031,7 @@ function db_extenso($valor = 0, $maiusculas = false)
                   Rodrigo Cerqueira, rodrigobc@fte.com.br
                   */
     if ($rt)
-      $rt = ereg_replace(" E ", " e ", ucwords($rt));
+      $rt = str_replace(" E ", " e ", ucwords($rt));
       return (($rt) ? ($rt) : "Zero");
   }
 
@@ -3072,7 +3083,7 @@ function print_vars($obj)
     $arr = get_object_vars($obj);
     echo "<table border=0 bgcolor=#AAAAFF style='border:1px solid'>";
     echo "<tr><td colspan=3>Debug da classe " . get_class($obj) . " </td></tr>";
-  while (list ($prop, $val) = each($arr))
+  foreach ($arr as $prop => $val)
       echo "<tr><td>&nbsp; </td><td align=left>var $$prop </td><td> $val </td>";
 }
 
@@ -3888,16 +3899,16 @@ function db_removeAcentuacao($sRemover)
 
     $var = $sRemover;
 
-    $var = ereg_replace("[¡¿¬√]", "A", $var);
-    $var = ereg_replace("[·‡‚„™]", "a", $var);
-    $var = ereg_replace("[…» ]", "E", $var);
-    $var = ereg_replace("[ÈËÍ]", "e", $var);
-    $var = ereg_replace("[ÌÏ]", "i", $var);
-    $var = ereg_replace("[ÕÃ]", "I", $var);
-    $var = ereg_replace("[”“‘’]", "O", $var);
-    $var = ereg_replace("[ÛÚÙı∫]", "o", $var);
-    $var = ereg_replace("[⁄Ÿ€]", "U", $var);
-  $var = ereg_replace("[˙˘˚]","u",$var);
+    $var = preg_replace("/[¡¿¬√]/", "A", $var);
+    $var = preg_replace("/[·‡‚„™]/", "a", $var);
+    $var = preg_replace("/[…» ]/", "E", $var);
+    $var = preg_replace("/[ÈËÍ]/", "e", $var);
+    $var = preg_replace("/[ÌÏ]/", "i", $var);
+    $var = preg_replace("/[ÕÃ]/", "I", $var);
+    $var = preg_replace("/[”“‘’]/", "O", $var);
+    $var = preg_replace("/[ÛÚÙı∫]/", "o", $var);
+    $var = preg_replace("/[⁄Ÿ€]/", "U", $var);
+  $var = preg_replace("/[˙˘˚]/","u",$var);
   $var = str_replace("'","",$var);
   $var = str_replace("«","C",$var);
   $var = str_replace("Á","c",$var);

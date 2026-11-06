@@ -90,7 +90,7 @@ class AgataIfx
      */
     function FreeResult()
     {
-        if (is_resource($result))
+        if ((is_resource($result) || is_object($result)))
         {
             return ifx_free_result($result);
         }

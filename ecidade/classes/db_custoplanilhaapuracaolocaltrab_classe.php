@@ -52,7 +52,7 @@ class cl_custoplanilhaapuracaolocaltrab {
                  cc21_custoplanilhaapuracao = int4 = Custo Planilha Apuração 
                  ";
    //funcao construtor da classe 
-   function cl_custoplanilhaapuracaolocaltrab() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("custoplanilhaapuracaolocaltrab"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_custoplanilhaapuracaolocaltrab {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc21_sequencial = ($this->cc21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc21_sequencial"]:$this->cc21_sequencial);
-       $this->cc21_rhpeslocaltrab = ($this->cc21_rhpeslocaltrab == ""?@$GLOBALS["HTTP_POST_VARS"]["cc21_rhpeslocaltrab"]:$this->cc21_rhpeslocaltrab);
-       $this->cc21_custoplanilhaapuracao = ($this->cc21_custoplanilhaapuracao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc21_custoplanilhaapuracao"]:$this->cc21_custoplanilhaapuracao);
+       $this->cc21_sequencial = ($this->cc21_sequencial === 0 || $this->cc21_sequencial === 0.0 || $this->cc21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc21_sequencial"]:$this->cc21_sequencial);
+       $this->cc21_rhpeslocaltrab = ($this->cc21_rhpeslocaltrab === 0 || $this->cc21_rhpeslocaltrab === 0.0 || $this->cc21_rhpeslocaltrab == ""?@$GLOBALS["HTTP_POST_VARS"]["cc21_rhpeslocaltrab"]:$this->cc21_rhpeslocaltrab);
+       $this->cc21_custoplanilhaapuracao = ($this->cc21_custoplanilhaapuracao === 0 || $this->cc21_custoplanilhaapuracao === 0.0 || $this->cc21_custoplanilhaapuracao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc21_custoplanilhaapuracao"]:$this->cc21_custoplanilhaapuracao);
      }else{
-       $this->cc21_sequencial = ($this->cc21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc21_sequencial"]:$this->cc21_sequencial);
+       $this->cc21_sequencial = ($this->cc21_sequencial === 0 || $this->cc21_sequencial === 0.0 || $this->cc21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc21_sequencial"]:$this->cc21_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_custoplanilhaapuracaolocaltrab {
          $this->cc21_sequencial = $cc21_sequencial; 
        }
      }
-     if(($this->cc21_sequencial == null) || ($this->cc21_sequencial == "") ){ 
+     if(($this->cc21_sequencial == null) || ($this->cc21_sequencial === 0 || $this->cc21_sequencial === 0.0 || $this->cc21_sequencial == "") ){ 
        $this->erro_sql = " Campo cc21_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_custoplanilhaapuracaolocaltrab {
    function sql_query ( $cc21_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_custoplanilhaapuracaolocaltrab {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_custoplanilhaapuracaolocaltrab {
    function sql_query_file ( $cc21_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_custoplanilhaapuracaolocaltrab {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

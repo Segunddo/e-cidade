@@ -58,7 +58,7 @@ class cl_regenciahorariohistorico {
                  ed323_diasemana = int4 = Dia da semana 
                  ";
    //funcao construtor da classe 
-   function cl_regenciahorariohistorico() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("regenciahorariohistorico"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_regenciahorariohistorico {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed323_sequencial = ($this->ed323_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_sequencial"]:$this->ed323_sequencial);
-       $this->ed323_docente = ($this->ed323_docente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_docente"]:$this->ed323_docente);
-       $this->ed323_substituto = ($this->ed323_substituto == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_substituto"]:$this->ed323_substituto);
-       $this->ed323_regencia = ($this->ed323_regencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_regencia"]:$this->ed323_regencia);
-       $this->ed323_periodo = ($this->ed323_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_periodo"]:$this->ed323_periodo);
-       $this->ed323_diasemana = ($this->ed323_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_diasemana"]:$this->ed323_diasemana);
+       $this->ed323_sequencial = ($this->ed323_sequencial === 0 || $this->ed323_sequencial === 0.0 || $this->ed323_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_sequencial"]:$this->ed323_sequencial);
+       $this->ed323_docente = ($this->ed323_docente === 0 || $this->ed323_docente === 0.0 || $this->ed323_docente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_docente"]:$this->ed323_docente);
+       $this->ed323_substituto = ($this->ed323_substituto === 0 || $this->ed323_substituto === 0.0 || $this->ed323_substituto == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_substituto"]:$this->ed323_substituto);
+       $this->ed323_regencia = ($this->ed323_regencia === 0 || $this->ed323_regencia === 0.0 || $this->ed323_regencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_regencia"]:$this->ed323_regencia);
+       $this->ed323_periodo = ($this->ed323_periodo === 0 || $this->ed323_periodo === 0.0 || $this->ed323_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_periodo"]:$this->ed323_periodo);
+       $this->ed323_diasemana = ($this->ed323_diasemana === 0 || $this->ed323_diasemana === 0.0 || $this->ed323_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_diasemana"]:$this->ed323_diasemana);
      }else{
-       $this->ed323_sequencial = ($this->ed323_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_sequencial"]:$this->ed323_sequencial);
+       $this->ed323_sequencial = ($this->ed323_sequencial === 0 || $this->ed323_sequencial === 0.0 || $this->ed323_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed323_sequencial"]:$this->ed323_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_regenciahorariohistorico {
          $this->ed323_sequencial = $ed323_sequencial; 
        }
      }
-     if(($this->ed323_sequencial == null) || ($this->ed323_sequencial == "") ){ 
+     if(($this->ed323_sequencial == null) || ($this->ed323_sequencial === 0 || $this->ed323_sequencial === 0.0 || $this->ed323_sequencial == "") ){ 
        $this->erro_sql = " Campo ed323_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -453,7 +453,7 @@ class cl_regenciahorariohistorico {
    function sql_query ( $ed323_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -491,7 +491,7 @@ class cl_regenciahorariohistorico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -504,7 +504,7 @@ class cl_regenciahorariohistorico {
    function sql_query_file ( $ed323_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_regenciahorariohistorico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

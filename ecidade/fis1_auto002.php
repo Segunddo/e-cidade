@@ -35,7 +35,7 @@ require_once(modification("classes/db_autolocal_classe.php"));
 require_once(modification("classes/db_autoexec_classe.php"));
 require_once(modification("classes/db_procfiscalauto_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); extract($__qs);
 
 if(!isset($abas)){
 

@@ -52,7 +52,7 @@ class cl_itbidadosimovelsetorloc {
                  it29_itbidadosimovel = int4 = Dados Imovel 
                  ";
    //funcao construtor da classe 
-   function cl_itbidadosimovelsetorloc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itbidadosimovelsetorloc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_itbidadosimovelsetorloc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it29_sequencial = ($this->it29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it29_sequencial"]:$this->it29_sequencial);
-       $this->it29_setorloc = ($this->it29_setorloc == ""?@$GLOBALS["HTTP_POST_VARS"]["it29_setorloc"]:$this->it29_setorloc);
-       $this->it29_itbidadosimovel = ($this->it29_itbidadosimovel == ""?@$GLOBALS["HTTP_POST_VARS"]["it29_itbidadosimovel"]:$this->it29_itbidadosimovel);
+       $this->it29_sequencial = (($this->it29_sequencial === 0 || $this->it29_sequencial === 0.0 || $this->it29_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it29_sequencial"]:$this->it29_sequencial);
+       $this->it29_setorloc = (($this->it29_setorloc === 0 || $this->it29_setorloc === 0.0 || $this->it29_setorloc == "")?@$GLOBALS["HTTP_POST_VARS"]["it29_setorloc"]:$this->it29_setorloc);
+       $this->it29_itbidadosimovel = (($this->it29_itbidadosimovel === 0 || $this->it29_itbidadosimovel === 0.0 || $this->it29_itbidadosimovel == "")?@$GLOBALS["HTTP_POST_VARS"]["it29_itbidadosimovel"]:$this->it29_itbidadosimovel);
      }else{
-       $this->it29_sequencial = ($this->it29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it29_sequencial"]:$this->it29_sequencial);
+       $this->it29_sequencial = (($this->it29_sequencial === 0 || $this->it29_sequencial === 0.0 || $this->it29_sequencial == "")?@$GLOBALS["HTTP_POST_VARS"]["it29_sequencial"]:$this->it29_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_itbidadosimovelsetorloc {
          $this->it29_sequencial = $it29_sequencial; 
        }
      }
-     if(($this->it29_sequencial == null) || ($this->it29_sequencial == "") ){ 
+     if(($this->it29_sequencial == null) || (($this->it29_sequencial === 0 || $this->it29_sequencial === 0.0 || $this->it29_sequencial == "")) ){ 
        $this->erro_sql = " Campo it29_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_itbidadosimovelsetorloc {
    function sql_query ( $it29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_itbidadosimovelsetorloc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_itbidadosimovelsetorloc {
    function sql_query_file ( $it29_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_itbidadosimovelsetorloc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

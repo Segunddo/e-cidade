@@ -62,7 +62,7 @@ class AnexoIIN13 extends AnexoI
      * @return \stdClass[]
      * @throws Exception
      */
-    public function getDados()
+    public function getDados($trazerConfiguracaoPadrao = true)
     {
         parent::getDados();
         $this->inicializaValoresDespesaPorLinhaMes();

@@ -280,19 +280,19 @@ class cl_controleafastamento
                     $acount = pg_result($resac, 0, 0);
                     $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
                     $resac = db_query("insert into db_acountkey values($acount,1010781,'$this->rh231_sequencial','A')");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_sequencial"]) || $this->rh231_sequencial != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_sequencial"]) || ($this->rh231_sequencial != "" && $this->rh231_sequencial !== 0 && $this->rh231_sequencial !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010476,1010781,'" . AddSlashes(pg_result($resaco, $conresaco, 'rh231_sequencial')) . "','$this->rh231_sequencial'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_afastamento"]) || $this->rh231_afastamento != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_afastamento"]) || ($this->rh231_afastamento != "" && $this->rh231_afastamento !== 0 && $this->rh231_afastamento !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010476,1010778,'" . AddSlashes(pg_result($resaco, $conresaco, 'rh231_afastamento')) . "','$this->rh231_afastamento'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_rubrica"]) || $this->rh231_rubrica != "")
                         $resac = db_query("insert into db_acount values($acount,1010476,1010775,'" . AddSlashes(pg_result($resaco, $conresaco, 'rh231_rubrica')) . "','$this->rh231_rubrica'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_tabelaprevidencia"]) || $this->rh231_tabelaprevidencia != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_tabelaprevidencia"]) || ($this->rh231_tabelaprevidencia != "" && $this->rh231_tabelaprevidencia !== 0 && $this->rh231_tabelaprevidencia !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010476,1010777,'" . AddSlashes(pg_result($resaco, $conresaco, 'rh231_tabelaprevidencia')) . "','$this->rh231_tabelaprevidencia'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_instituicao"]) || $this->rh231_instituicao != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_instituicao"]) || ($this->rh231_instituicao != "" && $this->rh231_instituicao !== 0 && $this->rh231_instituicao !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010476,1010776,'" . AddSlashes(pg_result($resaco, $conresaco, 'rh231_instituicao')) . "','$this->rh231_instituicao'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_ano"]) || $this->rh231_ano != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_ano"]) || ($this->rh231_ano != "" && $this->rh231_ano !== 0 && $this->rh231_ano !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010476,1010779,'" . AddSlashes(pg_result($resaco, $conresaco, 'rh231_ano')) . "','$this->rh231_ano'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_mes"]) || $this->rh231_mes != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["rh231_mes"]) || ($this->rh231_mes != "" && $this->rh231_mes !== 0 && $this->rh231_mes !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010476,1010780,'" . AddSlashes(pg_result($resaco, $conresaco, 'rh231_mes')) . "','$this->rh231_mes'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 }
             }

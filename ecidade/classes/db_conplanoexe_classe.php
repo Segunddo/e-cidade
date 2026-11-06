@@ -58,7 +58,7 @@ class cl_conplanoexe
                  ";
 
     //funcao construtor da classe
-    function cl_conplanoexe()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("conplanoexe");
@@ -80,14 +80,14 @@ class cl_conplanoexe
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->c62_anousu = ($this->c62_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_anousu"] : $this->c62_anousu);
-            $this->c62_reduz = ($this->c62_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_reduz"] : $this->c62_reduz);
-            $this->c62_codrec = ($this->c62_codrec == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_codrec"] : $this->c62_codrec);
-            $this->c62_vlrcre = ($this->c62_vlrcre == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_vlrcre"] : $this->c62_vlrcre);
-            $this->c62_vlrdeb = ($this->c62_vlrdeb == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_vlrdeb"] : $this->c62_vlrdeb);
+            $this->c62_anousu = ($this->c62_anousu === 0 || $this->c62_anousu === 0.0 || $this->c62_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_anousu"] : $this->c62_anousu);
+            $this->c62_reduz = ($this->c62_reduz === 0 || $this->c62_reduz === 0.0 || $this->c62_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_reduz"] : $this->c62_reduz);
+            $this->c62_codrec = ($this->c62_codrec === 0 || $this->c62_codrec === 0.0 || $this->c62_codrec == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_codrec"] : $this->c62_codrec);
+            $this->c62_vlrcre = ($this->c62_vlrcre === 0 || $this->c62_vlrcre === 0.0 || $this->c62_vlrcre == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_vlrcre"] : $this->c62_vlrcre);
+            $this->c62_vlrdeb = ($this->c62_vlrdeb === 0 || $this->c62_vlrdeb === 0.0 || $this->c62_vlrdeb == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_vlrdeb"] : $this->c62_vlrdeb);
         } else {
-            $this->c62_anousu = ($this->c62_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_anousu"] : $this->c62_anousu);
-            $this->c62_reduz = ($this->c62_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_reduz"] : $this->c62_reduz);
+            $this->c62_anousu = ($this->c62_anousu === 0 || $this->c62_anousu === 0.0 || $this->c62_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_anousu"] : $this->c62_anousu);
+            $this->c62_reduz = ($this->c62_reduz === 0 || $this->c62_reduz === 0.0 || $this->c62_reduz == "" ? @$GLOBALS["HTTP_POST_VARS"]["c62_reduz"] : $this->c62_reduz);
         }
     }
 
@@ -124,7 +124,7 @@ class cl_conplanoexe
         }
         $this->c62_anousu = $c62_anousu;
         $this->c62_reduz = $c62_reduz;
-        if (($this->c62_anousu == null) || ($this->c62_anousu == "")) {
+        if (($this->c62_anousu == null) || ($this->c62_anousu === 0 || $this->c62_anousu === 0.0 || $this->c62_anousu == "")) {
             $this->erro_sql = " Campo c62_anousu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -132,7 +132,7 @@ class cl_conplanoexe
             $this->erro_status = "0";
             return false;
         }
-        if (($this->c62_reduz == null) || ($this->c62_reduz == "")) {
+        if (($this->c62_reduz == null) || ($this->c62_reduz === 0 || $this->c62_reduz === 0.0 || $this->c62_reduz == "")) {
             $this->erro_sql = " Campo c62_reduz nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

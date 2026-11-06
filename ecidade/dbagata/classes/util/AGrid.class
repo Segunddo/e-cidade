@@ -34,7 +34,7 @@ class AGrid
     /***********************************************************/
     /* Constructor Method
     /***********************************************************/
-    function AGrid($Title, $Titles, $width, $height, $label='ok')
+    function __construct($Title, $Titles, $width, $height, $label='ok')
     {
         $this->window = new GtkWindow;
         $this->window->connect_object('delete-event', array($this,'FechaGrid'));

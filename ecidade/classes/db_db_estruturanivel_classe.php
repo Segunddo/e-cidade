@@ -56,7 +56,7 @@ class cl_db_estruturanivel {
 					                 db78_inicio    = int4        = Inicio 
 					                 ";
 					   //funcao construtor da classe 
-   function cl_db_estruturanivel() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_estruturanivel"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,14 +73,14 @@ class cl_db_estruturanivel {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db78_codestrut  = ($this->db78_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_codestrut"]:$this->db78_codestrut);
-       $this->db78_nivel      = ($this->db78_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_nivel"]:$this->db78_nivel);
+       $this->db78_codestrut  = ($this->db78_codestrut === 0 || $this->db78_codestrut === 0.0 || $this->db78_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_codestrut"]:$this->db78_codestrut);
+       $this->db78_nivel      = ($this->db78_nivel === 0 || $this->db78_nivel === 0.0 || $this->db78_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_nivel"]:$this->db78_nivel);
        $this->db78_descr      = ($this->db78_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_descr"]:$this->db78_descr);
-       $this->db78_tamanho    = ($this->db78_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_tamanho"]:$this->db78_tamanho);
-       $this->db78_inicio     = ($this->db78_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_inicio"]:$this->db78_inicio);
+       $this->db78_tamanho    = ($this->db78_tamanho === 0 || $this->db78_tamanho === 0.0 || $this->db78_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_tamanho"]:$this->db78_tamanho);
+       $this->db78_inicio     = ($this->db78_inicio === 0 || $this->db78_inicio === 0.0 || $this->db78_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_inicio"]:$this->db78_inicio);
      }else{
-       $this->db78_codestrut  = ($this->db78_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_codestrut"]:$this->db78_codestrut);
-       $this->db78_nivel      =  ($this->db78_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_nivel"]:$this->db78_nivel);
+       $this->db78_codestrut  = ($this->db78_codestrut === 0 || $this->db78_codestrut === 0.0 || $this->db78_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_codestrut"]:$this->db78_codestrut);
+       $this->db78_nivel      =  ($this->db78_nivel === 0 || $this->db78_nivel === 0.0 || $this->db78_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["db78_nivel"]:$this->db78_nivel);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_db_estruturanivel {
      }
        $this->db78_codestrut = $db78_codestrut; 
        $this->db78_nivel = $db78_nivel; 
-     if(($this->db78_codestrut == null) || ($this->db78_codestrut == "") ){ 
+     if(($this->db78_codestrut == null) || ($this->db78_codestrut === 0 || $this->db78_codestrut === 0.0 || $this->db78_codestrut == "") ){ 
        $this->erro_sql    = " Campo db78_codestrut nao declarado.";
        $this->erro_banco  = "Chave Primaria zerada.";
        $this->erro_msg    = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -123,7 +123,7 @@ class cl_db_estruturanivel {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->db78_nivel == null) || ($this->db78_nivel == "") ){ 
+     if(($this->db78_nivel == null) || ($this->db78_nivel === 0 || $this->db78_nivel === 0.0 || $this->db78_nivel == "") ){ 
        $this->erro_sql    = " Campo db78_nivel nao declarado.";
        $this->erro_banco  = "Chave Primaria zerada.";
        $this->erro_msg    = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -416,7 +416,7 @@ class cl_db_estruturanivel {
    function sql_query ( $db78_codestrut=null,$db78_nivel=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_db_estruturanivel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -458,7 +458,7 @@ class cl_db_estruturanivel {
    function sql_query_file ( $db78_codestrut=null,$db78_nivel=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -487,7 +487,7 @@ class cl_db_estruturanivel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

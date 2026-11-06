@@ -52,7 +52,7 @@ class cl_finalidadepagamentofundeb {
                  e151_descricao = varchar(200) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_finalidadepagamentofundeb() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("finalidadepagamentofundeb"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_finalidadepagamentofundeb {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e151_sequencial = ($this->e151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_sequencial"]:$this->e151_sequencial);
+       $this->e151_sequencial = ($this->e151_sequencial === 0 || $this->e151_sequencial === 0.0 || $this->e151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_sequencial"]:$this->e151_sequencial);
        $this->e151_codigo = ($this->e151_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_codigo"]:$this->e151_codigo);
        $this->e151_descricao = ($this->e151_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_descricao"]:$this->e151_descricao);
      }else{
-       $this->e151_sequencial = ($this->e151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_sequencial"]:$this->e151_sequencial);
+       $this->e151_sequencial = ($this->e151_sequencial === 0 || $this->e151_sequencial === 0.0 || $this->e151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_sequencial"]:$this->e151_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_finalidadepagamentofundeb {
          $this->e151_sequencial = $e151_sequencial; 
        }
      }
-     if(($this->e151_sequencial == null) || ($this->e151_sequencial == "") ){ 
+     if(($this->e151_sequencial == null) || ($this->e151_sequencial === 0 || $this->e151_sequencial === 0.0 || $this->e151_sequencial == "") ){ 
        $this->erro_sql = " Campo e151_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_finalidadepagamentofundeb {
    function sql_query ( $e151_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -403,7 +403,7 @@ class cl_finalidadepagamentofundeb {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_finalidadepagamentofundeb {
    function sql_query_file ( $e151_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_finalidadepagamentofundeb {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -34,7 +34,8 @@ include(modification("classes/db_varfixval_classe.php"));
 include(modification("classes/db_varfixproc_classe.php"));
 include(modification("classes/db_varfixnotifica_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clvarfix = new cl_varfix;
 $clvarfixval = new cl_varfixval;
@@ -60,7 +61,7 @@ if (isset($excluir)) {
     }
   }
   
-  $result=$clvarfixnotifica->sql_record($clvarfixnotifica->sql_query_file(null,"*",null,null,"q37_varfix=$q33_codigo"));
+  $result=$clvarfixnotifica->sql_record($clvarfixnotifica->sql_query_file(null,"*",null,null));
   if ($clvarfixnotifica->numrows>0) {
     $clvarfixnotifica->excluir(null,"q37_varfix=$q33_codigo");
   }
@@ -69,7 +70,7 @@ if (isset($excluir)) {
     $sqlerro=true;
   }
   
-  $result=$clvarfixproc->sql_record($clvarfixproc->sql_query_file(null,"*",null,null,"q36_varfix=$q33_codigo"));
+  $result=$clvarfixproc->sql_record($clvarfixproc->sql_query_file(null,"*",null,null));
   if ($clvarfixproc->numrows>0) {
     $clvarfixproc->excluir(null,"q36_varfix=$q33_codigo");
   }

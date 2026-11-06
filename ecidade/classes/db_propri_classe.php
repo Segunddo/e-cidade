@@ -50,7 +50,7 @@ class cl_propri {
                  j42_numcgm = int4 = Numcgm 
                  ";
    //funcao construtor da classe 
-   function cl_propri() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("propri"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_propri {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j42_matric = ($this->j42_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_matric"]:$this->j42_matric);
-       $this->j42_numcgm = ($this->j42_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_numcgm"]:$this->j42_numcgm);
+       $this->j42_matric = (($this->j42_matric === 0 || $this->j42_matric === 0.0 || $this->j42_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j42_matric"]:$this->j42_matric);
+       $this->j42_numcgm = (($this->j42_numcgm === 0 || $this->j42_numcgm === 0.0 || $this->j42_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["j42_numcgm"]:$this->j42_numcgm);
      }else{
-       $this->j42_matric = ($this->j42_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_matric"]:$this->j42_matric);
-       $this->j42_numcgm = ($this->j42_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_numcgm"]:$this->j42_numcgm);
+       $this->j42_matric = (($this->j42_matric === 0 || $this->j42_matric === 0.0 || $this->j42_matric == "")?@$GLOBALS["HTTP_POST_VARS"]["j42_matric"]:$this->j42_matric);
+       $this->j42_numcgm = (($this->j42_numcgm === 0 || $this->j42_numcgm === 0.0 || $this->j42_numcgm == "")?@$GLOBALS["HTTP_POST_VARS"]["j42_numcgm"]:$this->j42_numcgm);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_propri {
       $this->atualizacampos();
        $this->j42_matric = $j42_matric; 
        $this->j42_numcgm = $j42_numcgm; 
-     if(($this->j42_matric == null) || ($this->j42_matric == "") ){ 
+     if(($this->j42_matric == null) || (($this->j42_matric === 0 || $this->j42_matric === 0.0 || $this->j42_matric == "")) ){ 
        $this->erro_sql = " Campo j42_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_propri {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j42_numcgm == null) || ($this->j42_numcgm == "") ){ 
+     if(($this->j42_numcgm == null) || (($this->j42_numcgm === 0 || $this->j42_numcgm === 0.0 || $this->j42_numcgm == "")) ){ 
        $this->erro_sql = " Campo j42_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_propri {
    function sql_query ( $j42_matric=null,$j42_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -351,7 +351,7 @@ class cl_propri {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_propri {
    function sql_query_file ( $j42_matric=null,$j42_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_propri {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

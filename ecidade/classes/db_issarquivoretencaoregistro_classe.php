@@ -105,7 +105,7 @@ class cl_issarquivoretencaoregistro {
                  q91_codigomunicipiofavorecido = int4 = Código Município Favorecido 
                  ";
    //funcao construtor da classe 
-   function cl_issarquivoretencaoregistro() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("issarquivoretencaoregistro"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -122,9 +122,9 @@ class cl_issarquivoretencaoregistro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q91_sequencial = ($this->q91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_sequencial"]:$this->q91_sequencial);
-       $this->q91_issarquivoretencao = ($this->q91_issarquivoretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_issarquivoretencao"]:$this->q91_issarquivoretencao);
-       $this->q91_sequencialregistro = ($this->q91_sequencialregistro == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_sequencialregistro"]:$this->q91_sequencialregistro);
+       $this->q91_sequencial = ($this->q91_sequencial === 0 || $this->q91_sequencial === 0.0 || $this->q91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_sequencial"]:$this->q91_sequencial);
+       $this->q91_issarquivoretencao = ($this->q91_issarquivoretencao === 0 || $this->q91_issarquivoretencao === 0.0 || $this->q91_issarquivoretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_issarquivoretencao"]:$this->q91_issarquivoretencao);
+       $this->q91_sequencialregistro = ($this->q91_sequencialregistro === 0 || $this->q91_sequencialregistro === 0.0 || $this->q91_sequencialregistro == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_sequencialregistro"]:$this->q91_sequencialregistro);
        if($this->q91_dataemissaodocumento == ""){
          $this->q91_dataemissaodocumento_dia = ($this->q91_dataemissaodocumento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_dataemissaodocumento_dia"]:$this->q91_dataemissaodocumento_dia);
          $this->q91_dataemissaodocumento_mes = ($this->q91_dataemissaodocumento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_dataemissaodocumento_mes"]:$this->q91_dataemissaodocumento_mes);
@@ -143,18 +143,18 @@ class cl_issarquivoretencaoregistro {
        }
        $this->q91_numerodocumento = ($this->q91_numerodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_numerodocumento"]:$this->q91_numerodocumento);
        $this->q91_cnpjtomador = ($this->q91_cnpjtomador == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_cnpjtomador"]:$this->q91_cnpjtomador);
-       $this->q91_codigomunicipiotomador = ($this->q91_codigomunicipiotomador == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_codigomunicipiotomador"]:$this->q91_codigomunicipiotomador);
+       $this->q91_codigomunicipiotomador = ($this->q91_codigomunicipiotomador === 0 || $this->q91_codigomunicipiotomador === 0.0 || $this->q91_codigomunicipiotomador == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_codigomunicipiotomador"]:$this->q91_codigomunicipiotomador);
        $this->q91_cpfcnpjprestador = ($this->q91_cpfcnpjprestador == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_cpfcnpjprestador"]:$this->q91_cpfcnpjprestador);
-       $this->q91_codigomunicipionota = ($this->q91_codigomunicipionota == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_codigomunicipionota"]:$this->q91_codigomunicipionota);
+       $this->q91_codigomunicipionota = ($this->q91_codigomunicipionota === 0 || $this->q91_codigomunicipionota === 0.0 || $this->q91_codigomunicipionota == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_codigomunicipionota"]:$this->q91_codigomunicipionota);
        $this->q91_esferareceita = ($this->q91_esferareceita == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_esferareceita"]:$this->q91_esferareceita);
-       $this->q91_anousu = ($this->q91_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_anousu"]:$this->q91_anousu);
-       $this->q91_mesusu = ($this->q91_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_mesusu"]:$this->q91_mesusu);
-       $this->q91_valorprincipal = ($this->q91_valorprincipal == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_valorprincipal"]:$this->q91_valorprincipal);
-       $this->q91_valormulta = ($this->q91_valormulta == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_valormulta"]:$this->q91_valormulta);
-       $this->q91_valorjuros = ($this->q91_valorjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_valorjuros"]:$this->q91_valorjuros);
-       $this->q91_numeronotafiscal = ($this->q91_numeronotafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_numeronotafiscal"]:$this->q91_numeronotafiscal);
+       $this->q91_anousu = ($this->q91_anousu === 0 || $this->q91_anousu === 0.0 || $this->q91_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_anousu"]:$this->q91_anousu);
+       $this->q91_mesusu = ($this->q91_mesusu === 0 || $this->q91_mesusu === 0.0 || $this->q91_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_mesusu"]:$this->q91_mesusu);
+       $this->q91_valorprincipal = ($this->q91_valorprincipal === 0 || $this->q91_valorprincipal === 0.0 || $this->q91_valorprincipal == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_valorprincipal"]:$this->q91_valorprincipal);
+       $this->q91_valormulta = ($this->q91_valormulta === 0 || $this->q91_valormulta === 0.0 || $this->q91_valormulta == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_valormulta"]:$this->q91_valormulta);
+       $this->q91_valorjuros = ($this->q91_valorjuros === 0 || $this->q91_valorjuros === 0.0 || $this->q91_valorjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_valorjuros"]:$this->q91_valorjuros);
+       $this->q91_numeronotafiscal = ($this->q91_numeronotafiscal === 0 || $this->q91_numeronotafiscal === 0.0 || $this->q91_numeronotafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_numeronotafiscal"]:$this->q91_numeronotafiscal);
        $this->q91_serienotafiscal = ($this->q91_serienotafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_serienotafiscal"]:$this->q91_serienotafiscal);
-       $this->q91_subserienotafiscal = ($this->q91_subserienotafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_subserienotafiscal"]:$this->q91_subserienotafiscal);
+       $this->q91_subserienotafiscal = ($this->q91_subserienotafiscal === 0 || $this->q91_subserienotafiscal === 0.0 || $this->q91_subserienotafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_subserienotafiscal"]:$this->q91_subserienotafiscal);
        if($this->q91_dataemissaonotafiscal == ""){
          $this->q91_dataemissaonotafiscal_dia = ($this->q91_dataemissaonotafiscal_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_dataemissaonotafiscal_dia"]:$this->q91_dataemissaonotafiscal_dia);
          $this->q91_dataemissaonotafiscal_mes = ($this->q91_dataemissaonotafiscal_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_dataemissaonotafiscal_mes"]:$this->q91_dataemissaonotafiscal_mes);
@@ -163,13 +163,13 @@ class cl_issarquivoretencaoregistro {
             $this->q91_dataemissaonotafiscal = $this->q91_dataemissaonotafiscal_ano."-".$this->q91_dataemissaonotafiscal_mes."-".$this->q91_dataemissaonotafiscal_dia;
          }
        }
-       $this->q91_valornotafiscal = ($this->q91_valornotafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_valornotafiscal"]:$this->q91_valornotafiscal);
-       $this->q91_aliquota = ($this->q91_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_aliquota"]:$this->q91_aliquota);
-       $this->q91_valorbasecalculo = ($this->q91_valorbasecalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_valorbasecalculo"]:$this->q91_valorbasecalculo);
+       $this->q91_valornotafiscal = ($this->q91_valornotafiscal === 0 || $this->q91_valornotafiscal === 0.0 || $this->q91_valornotafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_valornotafiscal"]:$this->q91_valornotafiscal);
+       $this->q91_aliquota = ($this->q91_aliquota === 0 || $this->q91_aliquota === 0.0 || $this->q91_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_aliquota"]:$this->q91_aliquota);
+       $this->q91_valorbasecalculo = ($this->q91_valorbasecalculo === 0 || $this->q91_valorbasecalculo === 0.0 || $this->q91_valorbasecalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_valorbasecalculo"]:$this->q91_valorbasecalculo);
        $this->q91_observacao = ($this->q91_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_observacao"]:$this->q91_observacao);
-       $this->q91_codigomunicipiofavorecido = ($this->q91_codigomunicipiofavorecido == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_codigomunicipiofavorecido"]:$this->q91_codigomunicipiofavorecido);
+       $this->q91_codigomunicipiofavorecido = ($this->q91_codigomunicipiofavorecido === 0 || $this->q91_codigomunicipiofavorecido === 0.0 || $this->q91_codigomunicipiofavorecido == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_codigomunicipiofavorecido"]:$this->q91_codigomunicipiofavorecido);
      }else{
-       $this->q91_sequencial = ($this->q91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_sequencial"]:$this->q91_sequencial);
+       $this->q91_sequencial = ($this->q91_sequencial === 0 || $this->q91_sequencial === 0.0 || $this->q91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q91_sequencial"]:$this->q91_sequencial);
      }
    }
    // funcao para Inclusão
@@ -379,7 +379,7 @@ class cl_issarquivoretencaoregistro {
          $this->q91_sequencial = $q91_sequencial; 
        }
      }
-     if(($this->q91_sequencial == null) || ($this->q91_sequencial == "") ){ 
+     if(($this->q91_sequencial == null) || ($this->q91_sequencial === 0 || $this->q91_sequencial === 0.0 || $this->q91_sequencial == "") ){ 
        $this->erro_sql = " Campo q91_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

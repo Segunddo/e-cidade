@@ -54,7 +54,7 @@ class cl_cidadaocgm {
                  ov03_numcgm = int4 = CGM 
                  ";
    //funcao construtor da classe 
-   function cl_cidadaocgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cidadaocgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_cidadaocgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov03_sequencial = ($this->ov03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_sequencial"]:$this->ov03_sequencial);
-       $this->ov03_seq = ($this->ov03_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_seq"]:$this->ov03_seq);
-       $this->ov03_cidadao = ($this->ov03_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_cidadao"]:$this->ov03_cidadao);
-       $this->ov03_numcgm = ($this->ov03_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_numcgm"]:$this->ov03_numcgm);
+       $this->ov03_sequencial = ($this->ov03_sequencial === 0 || $this->ov03_sequencial === 0.0 || $this->ov03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_sequencial"]:$this->ov03_sequencial);
+       $this->ov03_seq = ($this->ov03_seq === 0 || $this->ov03_seq === 0.0 || $this->ov03_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_seq"]:$this->ov03_seq);
+       $this->ov03_cidadao = ($this->ov03_cidadao === 0 || $this->ov03_cidadao === 0.0 || $this->ov03_cidadao == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_cidadao"]:$this->ov03_cidadao);
+       $this->ov03_numcgm = ($this->ov03_numcgm === 0 || $this->ov03_numcgm === 0.0 || $this->ov03_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_numcgm"]:$this->ov03_numcgm);
      }else{
-       $this->ov03_sequencial = ($this->ov03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_sequencial"]:$this->ov03_sequencial);
-       $this->ov03_seq = ($this->ov03_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_seq"]:$this->ov03_seq);
+       $this->ov03_sequencial = ($this->ov03_sequencial === 0 || $this->ov03_sequencial === 0.0 || $this->ov03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_sequencial"]:$this->ov03_sequencial);
+       $this->ov03_seq = ($this->ov03_seq === 0 || $this->ov03_seq === 0.0 || $this->ov03_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["ov03_seq"]:$this->ov03_seq);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_cidadaocgm {
          $this->ov03_sequencial = $ov03_sequencial; 
        }
      }
-     if(($this->ov03_sequencial == null) || ($this->ov03_sequencial == "") ){ 
+     if(($this->ov03_sequencial == null) || ($this->ov03_sequencial === 0 || $this->ov03_sequencial === 0.0 || $this->ov03_sequencial == "") ){ 
        $this->erro_sql = " Campo ov03_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -383,7 +383,7 @@ class cl_cidadaocgm {
    function sql_query ( $ov03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_cidadaocgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_cidadaocgm {
    function sql_query_file ( $ov03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_cidadaocgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

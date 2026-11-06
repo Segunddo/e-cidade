@@ -52,7 +52,7 @@ class cl_tipofiscaliza {
                  y27_instit = int4 = Cod. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_tipofiscaliza() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipofiscaliza"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_tipofiscaliza {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y27_codtipo = ($this->y27_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
+       $this->y27_codtipo = (($this->y27_codtipo === 0 || $this->y27_codtipo === 0.0 || $this->y27_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
        $this->y27_descr = ($this->y27_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_descr"]:$this->y27_descr);
-       $this->y27_instit = ($this->y27_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_instit"]:$this->y27_instit);
+       $this->y27_instit = (($this->y27_instit === 0 || $this->y27_instit === 0.0 || $this->y27_instit == "")?@$GLOBALS["HTTP_POST_VARS"]["y27_instit"]:$this->y27_instit);
      }else{
-       $this->y27_codtipo = ($this->y27_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
+       $this->y27_codtipo = (($this->y27_codtipo === 0 || $this->y27_codtipo === 0.0 || $this->y27_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tipofiscaliza {
          $this->y27_codtipo = $y27_codtipo; 
        }
      }
-     if(($this->y27_codtipo == null) || ($this->y27_codtipo == "") ){ 
+     if(($this->y27_codtipo == null) || (($this->y27_codtipo === 0 || $this->y27_codtipo === 0.0 || $this->y27_codtipo == "")) ){ 
        $this->erro_sql = " Campo y27_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_tipofiscaliza {
    function sql_query ( $y27_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_tipofiscaliza {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_tipofiscaliza {
    function sql_query_file ( $y27_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_tipofiscaliza {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

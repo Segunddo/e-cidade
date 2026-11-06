@@ -52,7 +52,7 @@ class cl_cadastrounicosituacao {
                  as12_tiposituacaocadastrounico = int4 = Sequencial 
                  ";
    //funcao construtor da classe 
-   function cl_cadastrounicosituacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cadastrounicosituacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cadastrounicosituacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->as12_sequencial = ($this->as12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as12_sequencial"]:$this->as12_sequencial);
-       $this->as12_cidadaocadastrounico = ($this->as12_cidadaocadastrounico == ""?@$GLOBALS["HTTP_POST_VARS"]["as12_cidadaocadastrounico"]:$this->as12_cidadaocadastrounico);
-       $this->as12_tiposituacaocadastrounico = ($this->as12_tiposituacaocadastrounico == ""?@$GLOBALS["HTTP_POST_VARS"]["as12_tiposituacaocadastrounico"]:$this->as12_tiposituacaocadastrounico);
+       $this->as12_sequencial = ($this->as12_sequencial === 0 || $this->as12_sequencial === 0.0 || $this->as12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as12_sequencial"]:$this->as12_sequencial);
+       $this->as12_cidadaocadastrounico = ($this->as12_cidadaocadastrounico === 0 || $this->as12_cidadaocadastrounico === 0.0 || $this->as12_cidadaocadastrounico == ""?@$GLOBALS["HTTP_POST_VARS"]["as12_cidadaocadastrounico"]:$this->as12_cidadaocadastrounico);
+       $this->as12_tiposituacaocadastrounico = ($this->as12_tiposituacaocadastrounico === 0 || $this->as12_tiposituacaocadastrounico === 0.0 || $this->as12_tiposituacaocadastrounico == ""?@$GLOBALS["HTTP_POST_VARS"]["as12_tiposituacaocadastrounico"]:$this->as12_tiposituacaocadastrounico);
      }else{
-       $this->as12_sequencial = ($this->as12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as12_sequencial"]:$this->as12_sequencial);
+       $this->as12_sequencial = ($this->as12_sequencial === 0 || $this->as12_sequencial === 0.0 || $this->as12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["as12_sequencial"]:$this->as12_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cadastrounicosituacao {
          $this->as12_sequencial = $as12_sequencial; 
        }
      }
-     if(($this->as12_sequencial == null) || ($this->as12_sequencial == "") ){ 
+     if(($this->as12_sequencial == null) || ($this->as12_sequencial === 0 || $this->as12_sequencial === 0.0 || $this->as12_sequencial == "") ){ 
        $this->erro_sql = " Campo as12_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_cadastrounicosituacao {
    function sql_query ( $as12_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_cadastrounicosituacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_cadastrounicosituacao {
    function sql_query_file ( $as12_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -440,7 +440,7 @@ class cl_cadastrounicosituacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

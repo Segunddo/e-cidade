@@ -95,7 +95,7 @@ class cl_tipoparc {
                  tipopessoa = int4 = Tipo de pessoa
                  ";
    //funcao construtor da classe
-   function cl_tipoparc() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoparc");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -112,7 +112,7 @@ class cl_tipoparc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tipoparc = ($this->tipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["tipoparc"]:$this->tipoparc);
+       $this->tipoparc = (($this->tipoparc === 0 || $this->tipoparc === 0.0 || $this->tipoparc == "")?@$GLOBALS["HTTP_POST_VARS"]["tipoparc"]:$this->tipoparc);
        $this->descr = ($this->descr == ""?@$GLOBALS["HTTP_POST_VARS"]["descr"]:$this->descr);
        if($this->dtini == ""){
          $this->dtini_dia = ($this->dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dtini_dia"]:$this->dtini_dia);
@@ -130,10 +130,10 @@ class cl_tipoparc {
             $this->dtfim = $this->dtfim_ano."-".$this->dtfim_mes."-".$this->dtfim_dia;
          }
        }
-       $this->maxparc = ($this->maxparc == ""?@$GLOBALS["HTTP_POST_VARS"]["maxparc"]:$this->maxparc);
-       $this->minparc = ($this->minparc == ""?@$GLOBALS["HTTP_POST_VARS"]["minparc"]:$this->minparc);
-       $this->vlrmin = ($this->vlrmin == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrmin"]:$this->vlrmin);
-       $this->vlrmax = ($this->vlrmax == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrmax"]:$this->vlrmax);
+       $this->maxparc = (($this->maxparc === 0 || $this->maxparc === 0.0 || $this->maxparc == "")?@$GLOBALS["HTTP_POST_VARS"]["maxparc"]:$this->maxparc);
+       $this->minparc = (($this->minparc === 0 || $this->minparc === 0.0 || $this->minparc == "")?@$GLOBALS["HTTP_POST_VARS"]["minparc"]:$this->minparc);
+       $this->vlrmin = (($this->vlrmin === 0 || $this->vlrmin === 0.0 || $this->vlrmin == "")?@$GLOBALS["HTTP_POST_VARS"]["vlrmin"]:$this->vlrmin);
+       $this->vlrmax = (($this->vlrmax === 0 || $this->vlrmax === 0.0 || $this->vlrmax == "")?@$GLOBALS["HTTP_POST_VARS"]["vlrmax"]:$this->vlrmax);
        if($this->dtvlr == ""){
          $this->dtvlr_dia = ($this->dtvlr_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dtvlr_dia"]:$this->dtvlr_dia);
          $this->dtvlr_mes = ($this->dtvlr_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dtvlr_mes"]:$this->dtvlr_mes);
@@ -142,19 +142,19 @@ class cl_tipoparc {
             $this->dtvlr = $this->dtvlr_ano."-".$this->dtvlr_mes."-".$this->dtvlr_dia;
          }
        }
-       $this->vlrmindeb = ($this->vlrmindeb == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrmindeb"]:$this->vlrmindeb);
-       $this->vlrmaxdeb = ($this->vlrmaxdeb == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrmaxdeb"]:$this->vlrmaxdeb);
+       $this->vlrmindeb = (($this->vlrmindeb === 0 || $this->vlrmindeb === 0.0 || $this->vlrmindeb == "")?@$GLOBALS["HTTP_POST_VARS"]["vlrmindeb"]:$this->vlrmindeb);
+       $this->vlrmaxdeb = (($this->vlrmaxdeb === 0 || $this->vlrmaxdeb === 0.0 || $this->vlrmaxdeb == "")?@$GLOBALS["HTTP_POST_VARS"]["vlrmaxdeb"]:$this->vlrmaxdeb);
        $this->inflat = ($this->inflat == ""?@$GLOBALS["HTTP_POST_VARS"]["inflat"]:$this->inflat);
-       $this->descmul = ($this->descmul == ""?@$GLOBALS["HTTP_POST_VARS"]["descmul"]:$this->descmul);
-       $this->descjur = ($this->descjur == ""?@$GLOBALS["HTTP_POST_VARS"]["descjur"]:$this->descjur);
-       $this->descvlr = ($this->descvlr == ""?@$GLOBALS["HTTP_POST_VARS"]["descvlr"]:$this->descvlr);
-       $this->cadtipoparc = ($this->cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["cadtipoparc"]:$this->cadtipoparc);
-       $this->k42_minentrada = ($this->k42_minentrada == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_minentrada"]:$this->k42_minentrada);
-       $this->instit = ($this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
-       $this->tipovlr = ($this->tipovlr == ""?@$GLOBALS["HTTP_POST_VARS"]["tipovlr"]:$this->tipovlr);
-       $this->tipopessoa = ($this->tipopessoa == ""?@$GLOBALS["HTTP_POST_VARS"]["tipopessoa"]:$this->tipovlr);
+       $this->descmul = (($this->descmul === 0 || $this->descmul === 0.0 || $this->descmul == "")?@$GLOBALS["HTTP_POST_VARS"]["descmul"]:$this->descmul);
+       $this->descjur = (($this->descjur === 0 || $this->descjur === 0.0 || $this->descjur == "")?@$GLOBALS["HTTP_POST_VARS"]["descjur"]:$this->descjur);
+       $this->descvlr = (($this->descvlr === 0 || $this->descvlr === 0.0 || $this->descvlr == "")?@$GLOBALS["HTTP_POST_VARS"]["descvlr"]:$this->descvlr);
+       $this->cadtipoparc = (($this->cadtipoparc === 0 || $this->cadtipoparc === 0.0 || $this->cadtipoparc == "")?@$GLOBALS["HTTP_POST_VARS"]["cadtipoparc"]:$this->cadtipoparc);
+       $this->k42_minentrada = (($this->k42_minentrada === 0 || $this->k42_minentrada === 0.0 || $this->k42_minentrada == "")?@$GLOBALS["HTTP_POST_VARS"]["k42_minentrada"]:$this->k42_minentrada);
+       $this->instit = (($this->instit === 0 || $this->instit === 0.0 || $this->instit == "")?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
+       $this->tipovlr = (($this->tipovlr === 0 || $this->tipovlr === 0.0 || $this->tipovlr == "")?@$GLOBALS["HTTP_POST_VARS"]["tipovlr"]:$this->tipovlr);
+       $this->tipopessoa = (($this->tipopessoa === 0 || $this->tipopessoa === 0.0 || $this->tipopessoa == "")?@$GLOBALS["HTTP_POST_VARS"]["tipopessoa"]:$this->tipovlr);
      }else{
-       $this->tipoparc = ($this->tipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["tipoparc"]:$this->tipoparc);
+       $this->tipoparc = (($this->tipoparc === 0 || $this->tipoparc === 0.0 || $this->tipoparc == "")?@$GLOBALS["HTTP_POST_VARS"]["tipoparc"]:$this->tipoparc);
      }
    }
    // funcao para inclusao
@@ -337,7 +337,7 @@ class cl_tipoparc {
          $this->tipoparc = $tipoparc;
        }
      }
-     if(($this->tipoparc == null) || ($this->tipoparc == "") ){
+     if(($this->tipoparc == null) || (($this->tipoparc === 0 || $this->tipoparc === 0.0 || $this->tipoparc == "")) ){
        $this->erro_sql = " Campo tipoparc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -375,10 +375,10 @@ class cl_tipoparc {
                                ,$this->maxparc
                                ,$this->minparc
                                ,$this->vlrmin
-                               ,".($this->vlrmax == "null" || $this->vlrmax == ""?"0":$this->vlrmax)."
+                               ,".($this->vlrmax == "null" || ($this->vlrmax === 0 || $this->vlrmax === 0.0 || $this->vlrmax == "")?"0":$this->vlrmax)."
                                ,".($this->dtvlr == "null" || $this->dtvlr == ""?"null":"'".$this->dtvlr."'")."
                                ,$this->vlrmindeb
-                               ,".($this->vlrmaxdeb == "null" || $this->vlrmaxdeb == ""?"0":$this->vlrmaxdeb)."
+                               ,".($this->vlrmaxdeb == "null" || ($this->vlrmaxdeb === 0 || $this->vlrmaxdeb === 0.0 || $this->vlrmaxdeb == "")?"0":$this->vlrmaxdeb)."
                                ,'$this->inflat'
                                ,$this->descmul
                                ,$this->descjur
@@ -942,7 +942,7 @@ class cl_tipoparc {
    function sql_query ( $tipoparc=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -969,7 +969,7 @@ class cl_tipoparc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -982,7 +982,7 @@ class cl_tipoparc {
    function sql_query_file ( $tipoparc=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1003,7 +1003,7 @@ class cl_tipoparc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

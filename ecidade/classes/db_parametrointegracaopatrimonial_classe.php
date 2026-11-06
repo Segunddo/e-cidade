@@ -57,7 +57,7 @@ class cl_parametrointegracaopatrimonial {
                  c01_instit = int4 = Cod. Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_parametrointegracaopatrimonial() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parametrointegracaopatrimonial"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_parametrointegracaopatrimonial {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c01_sequencial = ($this->c01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c01_sequencial"]:$this->c01_sequencial);
-       $this->c01_modulo = ($this->c01_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["c01_modulo"]:$this->c01_modulo);
+       $this->c01_sequencial = ($this->c01_sequencial === 0 || $this->c01_sequencial === 0.0 || $this->c01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c01_sequencial"]:$this->c01_sequencial);
+       $this->c01_modulo = ($this->c01_modulo === 0 || $this->c01_modulo === 0.0 || $this->c01_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["c01_modulo"]:$this->c01_modulo);
        if($this->c01_data == ""){
          $this->c01_data_dia = ($this->c01_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c01_data_dia"]:$this->c01_data_dia);
          $this->c01_data_mes = ($this->c01_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c01_data_mes"]:$this->c01_data_mes);
@@ -84,9 +84,9 @@ class cl_parametrointegracaopatrimonial {
             $this->c01_data = $this->c01_data_ano."-".$this->c01_data_mes."-".$this->c01_data_dia;
          }
        }
-       $this->c01_instit = ($this->c01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c01_instit"]:$this->c01_instit);
+       $this->c01_instit = ($this->c01_instit === 0 || $this->c01_instit === 0.0 || $this->c01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c01_instit"]:$this->c01_instit);
      }else{
-       $this->c01_sequencial = ($this->c01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c01_sequencial"]:$this->c01_sequencial);
+       $this->c01_sequencial = ($this->c01_sequencial === 0 || $this->c01_sequencial === 0.0 || $this->c01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c01_sequencial"]:$this->c01_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_parametrointegracaopatrimonial {
          $this->c01_sequencial = $c01_sequencial; 
        }
      }
-     if(($this->c01_sequencial == null) || ($this->c01_sequencial == "") ){ 
+     if(($this->c01_sequencial == null) || ($this->c01_sequencial === 0 || $this->c01_sequencial === 0.0 || $this->c01_sequencial == "") ){ 
        $this->erro_sql = " Campo c01_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -437,7 +437,7 @@ class cl_parametrointegracaopatrimonial {
    function sql_query ( $c01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -461,7 +461,7 @@ class cl_parametrointegracaopatrimonial {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -474,7 +474,7 @@ class cl_parametrointegracaopatrimonial {
    function sql_query_file ( $c01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -495,7 +495,7 @@ class cl_parametrointegracaopatrimonial {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

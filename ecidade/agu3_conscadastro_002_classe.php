@@ -57,7 +57,7 @@ class ConsultaAguaBase {
 	var $_AguaCorteMatMovDAO;
 	var $_AguaCondominioMatDAO;
 
-	function ConsultaAguaBase($Matric) {
+	function __construct($Matric) {
 		$this->SetMatric($Matric);
 	}
 

@@ -50,7 +50,7 @@ class cl_fiscalprocpa {
                  y61_codtipo = int8 = codtipo 
                  ";
    //funcao construtor da classe 
-   function cl_fiscalprocpa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("fiscalprocpa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_fiscalprocpa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y61_codpa = ($this->y61_codpa == ""?@$GLOBALS["HTTP_POST_VARS"]["y61_codpa"]:$this->y61_codpa);
-       $this->y61_codtipo = ($this->y61_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y61_codtipo"]:$this->y61_codtipo);
+       $this->y61_codpa = (($this->y61_codpa === 0 || $this->y61_codpa === 0.0 || $this->y61_codpa == "")?@$GLOBALS["HTTP_POST_VARS"]["y61_codpa"]:$this->y61_codpa);
+       $this->y61_codtipo = (($this->y61_codtipo === 0 || $this->y61_codtipo === 0.0 || $this->y61_codtipo == "")?@$GLOBALS["HTTP_POST_VARS"]["y61_codtipo"]:$this->y61_codtipo);
      }else{
-       $this->y61_codpa = ($this->y61_codpa == ""?@$GLOBALS["HTTP_POST_VARS"]["y61_codpa"]:$this->y61_codpa);
+       $this->y61_codpa = (($this->y61_codpa === 0 || $this->y61_codpa === 0.0 || $this->y61_codpa == "")?@$GLOBALS["HTTP_POST_VARS"]["y61_codpa"]:$this->y61_codpa);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_fiscalprocpa {
        return false;
      }
        $this->y61_codpa = $y61_codpa; 
-     if(($this->y61_codpa == null) || ($this->y61_codpa == "") ){ 
+     if(($this->y61_codpa == null) || (($this->y61_codpa === 0 || $this->y61_codpa === 0.0 || $this->y61_codpa == "")) ){ 
        $this->erro_sql = " Campo y61_codpa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_fiscalprocpa {
    function sql_query ( $y61_codpa=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_fiscalprocpa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_fiscalprocpa {
    function sql_query_file ( $y61_codpa=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = explode("#",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_fiscalprocpa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = explode("#",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

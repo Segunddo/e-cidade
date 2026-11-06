@@ -52,7 +52,7 @@ class cl_abatimentoprotprocesso {
                  k159_protprocesso = int4 = Cód. Processo 
                  ";
    //funcao construtor da classe 
-   function cl_abatimentoprotprocesso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("abatimentoprotprocesso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_abatimentoprotprocesso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k159_sequencial = ($this->k159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k159_sequencial"]:$this->k159_sequencial);
-       $this->k159_abatimento = ($this->k159_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k159_abatimento"]:$this->k159_abatimento);
-       $this->k159_protprocesso = ($this->k159_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["k159_protprocesso"]:$this->k159_protprocesso);
+       $this->k159_sequencial = ($this->k159_sequencial === 0 || $this->k159_sequencial === 0.0 || $this->k159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k159_sequencial"]:$this->k159_sequencial);
+       $this->k159_abatimento = ($this->k159_abatimento === 0 || $this->k159_abatimento === 0.0 || $this->k159_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k159_abatimento"]:$this->k159_abatimento);
+       $this->k159_protprocesso = ($this->k159_protprocesso === 0 || $this->k159_protprocesso === 0.0 || $this->k159_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["k159_protprocesso"]:$this->k159_protprocesso);
      }else{
-       $this->k159_sequencial = ($this->k159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k159_sequencial"]:$this->k159_sequencial);
+       $this->k159_sequencial = ($this->k159_sequencial === 0 || $this->k159_sequencial === 0.0 || $this->k159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k159_sequencial"]:$this->k159_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_abatimentoprotprocesso {
          $this->k159_sequencial = $k159_sequencial; 
        }
      }
-     if(($this->k159_sequencial == null) || ($this->k159_sequencial == "") ){ 
+     if(($this->k159_sequencial == null) || ($this->k159_sequencial === 0 || $this->k159_sequencial === 0.0 || $this->k159_sequencial == "") ){ 
        $this->erro_sql = " Campo k159_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_abatimentoprotprocesso {
    function sql_query ( $k159_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_abatimentoprotprocesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_abatimentoprotprocesso {
    function sql_query_file ( $k159_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_abatimentoprotprocesso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
