@@ -54,7 +54,7 @@ class cl_relrubcampos {
                  rh120_limite = int4 = Limite de caracter 
                  ";
    //funcao construtor da classe 
-   function cl_relrubcampos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("relrubcampos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_relrubcampos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh120_sequencial = ($this->rh120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh120_sequencial"]:$this->rh120_sequencial);
+       $this->rh120_sequencial = ($this->rh120_sequencial === 0 || $this->rh120_sequencial === 0.0 || $this->rh120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh120_sequencial"]:$this->rh120_sequencial);
        $this->rh120_campo = ($this->rh120_campo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh120_campo"]:$this->rh120_campo);
-       $this->rh120_tamanho = ($this->rh120_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["rh120_tamanho"]:$this->rh120_tamanho);
-       $this->rh120_limite = ($this->rh120_limite == ""?@$GLOBALS["HTTP_POST_VARS"]["rh120_limite"]:$this->rh120_limite);
+       $this->rh120_tamanho = ($this->rh120_tamanho === 0 || $this->rh120_tamanho === 0.0 || $this->rh120_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["rh120_tamanho"]:$this->rh120_tamanho);
+       $this->rh120_limite = ($this->rh120_limite === 0 || $this->rh120_limite === 0.0 || $this->rh120_limite == ""?@$GLOBALS["HTTP_POST_VARS"]["rh120_limite"]:$this->rh120_limite);
      }else{
-       $this->rh120_sequencial = ($this->rh120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh120_sequencial"]:$this->rh120_sequencial);
+       $this->rh120_sequencial = ($this->rh120_sequencial === 0 || $this->rh120_sequencial === 0.0 || $this->rh120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh120_sequencial"]:$this->rh120_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_relrubcampos {
          $this->rh120_sequencial = $rh120_sequencial; 
        }
      }
-     if(($this->rh120_sequencial == null) || ($this->rh120_sequencial == "") ){ 
+     if(($this->rh120_sequencial == null) || ($this->rh120_sequencial === 0 || $this->rh120_sequencial === 0.0 || $this->rh120_sequencial == "") ){ 
        $this->erro_sql = " Campo rh120_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -413,7 +413,7 @@ class cl_relrubcampos {
    function sql_query ( $rh120_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_relrubcampos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_relrubcampos {
    function sql_query_file ( $rh120_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_relrubcampos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_rhempresavt {
                  rh35_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_rhempresavt() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhempresavt"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_rhempresavt {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh35_instit = ($this->rh35_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh35_instit"]:$this->rh35_instit);
-       $this->rh35_codigo = ($this->rh35_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh35_codigo"]:$this->rh35_codigo);
+       $this->rh35_instit = ($this->rh35_instit === 0 || $this->rh35_instit === 0.0 || $this->rh35_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh35_instit"]:$this->rh35_instit);
+       $this->rh35_codigo = ($this->rh35_codigo === 0 || $this->rh35_codigo === 0.0 || $this->rh35_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh35_codigo"]:$this->rh35_codigo);
        $this->rh35_descr = ($this->rh35_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh35_descr"]:$this->rh35_descr);
      }else{
-       $this->rh35_instit = ($this->rh35_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh35_instit"]:$this->rh35_instit);
-       $this->rh35_codigo = ($this->rh35_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh35_codigo"]:$this->rh35_codigo);
+       $this->rh35_instit = ($this->rh35_instit === 0 || $this->rh35_instit === 0.0 || $this->rh35_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh35_instit"]:$this->rh35_instit);
+       $this->rh35_codigo = ($this->rh35_codigo === 0 || $this->rh35_codigo === 0.0 || $this->rh35_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh35_codigo"]:$this->rh35_codigo);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_rhempresavt {
      }
        $this->rh35_codigo = $rh35_codigo; 
        $this->rh35_instit = $rh35_instit; 
-     if(($this->rh35_codigo == null) || ($this->rh35_codigo == "") ){ 
+     if(($this->rh35_codigo == null) || ($this->rh35_codigo === 0 || $this->rh35_codigo === 0.0 || $this->rh35_codigo == "") ){ 
        $this->erro_sql = " Campo rh35_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_rhempresavt {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh35_instit == null) || ($this->rh35_instit == "") ){ 
+     if(($this->rh35_instit == null) || ($this->rh35_instit === 0 || $this->rh35_instit === 0.0 || $this->rh35_instit == "") ){ 
        $this->erro_sql = " Campo rh35_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_rhempresavt {
    function sql_query ( $rh35_codigo=null,$rh35_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_rhempresavt {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_rhempresavt {
    function sql_query_file ( $rh35_codigo=null,$rh35_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_rhempresavt {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

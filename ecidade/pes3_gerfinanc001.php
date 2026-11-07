@@ -45,7 +45,8 @@ $iMatricula = 0;
 $oPost  = db_utils::postMemory($_POST);
 $oGet   = db_utils::postMemory($_GET);
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 db_postmemory($HTTP_POST_VARS);
 
@@ -560,7 +561,8 @@ $iMesImplantacao = $aImplantacao[1];
                             <tr>
                               <td class="tabcols" title="Clique Aqui para ver os dados cadastrais." nowrap>  
                                 <?
-                                parse_str($arg);
+                                parse_str($arg, $__qs);
+                                extract($__qs);
                                 $Label = "<a href='' onclick='js_mostrapessoal();return false;'>$Lr01_regist</a>";
                                 echo "<strong style=\"color:blue\">$Label</strong>";
                                 ?>
@@ -991,7 +993,7 @@ $iMesImplantacao = $aImplantacao[1];
                             db_selectmax( "diversos", "select * from pesdiver ".bb_condicaosubpes( "r07_" ));
                             for($Idiversos=0;$Idiversos<count($diversos);$Idiversos++){
                               $codigo = $diversos[$Idiversos]["r07_codigo"];
-                              global $$codigo;
+                              global ${$codigo};
                               eval('$$codigo = '.$diversos[$Idiversos]["r07_valor"].";");
                             }
                             $result_variaveis = db_retorno_variaveis($ano, $mes, $matricula);
@@ -1104,7 +1106,7 @@ $iMesImplantacao = $aImplantacao[1];
 
                     db_fieldsmemory($result,$x,true);
                     $strrubrica  = $sigla."rubric";
-                    $rubrica     = $$strrubrica;
+                    $rubrica     = ${$strrubrica};
                     $condicaoaux = " where rh27_rubric = ".db_sqlformat( $rubrica) . " AND rh27_instit = {$instituicao}";
                     global $rubr_;
                     db_selectmax( "rubr_", "select * from rhrubricas ".$condicaoaux );
@@ -1150,9 +1152,9 @@ $iMesImplantacao = $aImplantacao[1];
                       $arr_bases[$inssirf_[0]["r33_basfer"]] = $inssirf_[0]["r33_basfer"];
                     }
                   }
-                  $rub_cond    = implode($arr_cond,',');
-                  $rub_bases   = implode($arr_rub_base,',');
-                  $rub_formula = implode($arr_formula,',');
+                  $rub_cond    = implode(',', $arr_cond);
+                  $rub_bases   = implode(',', $arr_rub_base);
+                  $rub_formula = implode(',', $arr_formula);
                   if(isset($rub_cond)){
                     echo "<script> $('rub_cond').value = '".$rub_cond."';</script>";
                   }

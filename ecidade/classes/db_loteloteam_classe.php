@@ -50,7 +50,7 @@ class cl_loteloteam {
                  j34_loteam = int4 = Cód. Loteamento 
                  ";
    //funcao construtor da classe 
-   function cl_loteloteam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("loteloteam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_loteloteam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j34_idbql = ($this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
-       $this->j34_loteam = ($this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
+       $this->j34_idbql = ($this->j34_idbql === 0 || $this->j34_idbql === 0.0 || $this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
+       $this->j34_loteam = ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
      }else{
-       $this->j34_idbql = ($this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
-       $this->j34_loteam = ($this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
+       $this->j34_idbql = ($this->j34_idbql === 0 || $this->j34_idbql === 0.0 || $this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
+       $this->j34_loteam = ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_loteloteam {
       $this->atualizacampos();
        $this->j34_idbql = $j34_idbql; 
        $this->j34_loteam = $j34_loteam; 
-     if(($this->j34_idbql == null) || ($this->j34_idbql == "") ){ 
+     if(($this->j34_idbql == null) || ($this->j34_idbql === 0 || $this->j34_idbql === 0.0 || $this->j34_idbql == "") ){ 
        $this->erro_sql = " Campo j34_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_loteloteam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j34_loteam == null) || ($this->j34_loteam == "") ){ 
+     if(($this->j34_loteam == null) || ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == "") ){ 
        $this->erro_sql = " Campo j34_loteam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -312,7 +312,7 @@ class cl_loteloteam {
    function sql_query ( $j34_idbql=null,$j34_loteam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -345,7 +345,7 @@ class cl_loteloteam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -357,7 +357,7 @@ class cl_loteloteam {
    function sql_query_file ( $j34_idbql=null,$j34_loteam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_loteloteam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

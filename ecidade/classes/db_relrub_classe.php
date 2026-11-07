@@ -56,7 +56,7 @@ class cl_relrub {
                  rh45_form = varchar(70) = Fórmula 
                  ";
    //funcao construtor da classe 
-   function cl_relrub() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("relrub"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,14 +73,14 @@ class cl_relrub {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh45_instit = ($this->rh45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_instit"]:$this->rh45_instit);
-       $this->rh45_codigo = ($this->rh45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_codigo"]:$this->rh45_codigo);
+       $this->rh45_instit = ($this->rh45_instit === 0 || $this->rh45_instit === 0.0 || $this->rh45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_instit"]:$this->rh45_instit);
+       $this->rh45_codigo = ($this->rh45_codigo === 0 || $this->rh45_codigo === 0.0 || $this->rh45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_codigo"]:$this->rh45_codigo);
        $this->rh45_descr = ($this->rh45_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_descr"]:$this->rh45_descr);
-       $this->rh45_selecao = ($this->rh45_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_selecao"]:$this->rh45_selecao);
+       $this->rh45_selecao = ($this->rh45_selecao === 0 || $this->rh45_selecao === 0.0 || $this->rh45_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_selecao"]:$this->rh45_selecao);
        $this->rh45_form = ($this->rh45_form == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_form"]:$this->rh45_form);
      }else{
-       $this->rh45_instit = ($this->rh45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_instit"]:$this->rh45_instit);
-       $this->rh45_codigo = ($this->rh45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_codigo"]:$this->rh45_codigo);
+       $this->rh45_instit = ($this->rh45_instit === 0 || $this->rh45_instit === 0.0 || $this->rh45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_instit"]:$this->rh45_instit);
+       $this->rh45_codigo = ($this->rh45_codigo === 0 || $this->rh45_codigo === 0.0 || $this->rh45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_codigo"]:$this->rh45_codigo);
      }
    }
    // funcao para inclusao
@@ -122,7 +122,7 @@ class cl_relrub {
          $this->rh45_codigo = $rh45_codigo; 
        }
      }
-     if(($this->rh45_codigo == null) || ($this->rh45_codigo == "") ){ 
+     if(($this->rh45_codigo == null) || ($this->rh45_codigo === 0 || $this->rh45_codigo === 0.0 || $this->rh45_codigo == "") ){ 
        $this->erro_sql = " Campo rh45_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -130,7 +130,7 @@ class cl_relrub {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh45_instit == null) || ($this->rh45_instit == "") ){ 
+     if(($this->rh45_instit == null) || ($this->rh45_instit === 0 || $this->rh45_instit === 0.0 || $this->rh45_instit == "") ){ 
        $this->erro_sql = " Campo rh45_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -403,7 +403,7 @@ class cl_relrub {
    function sql_query ( $rh45_codigo=null,$rh45_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_relrub {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_relrub {
    function sql_query_file ( $rh45_codigo=null,$rh45_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_relrub {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

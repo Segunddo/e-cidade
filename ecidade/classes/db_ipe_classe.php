@@ -78,7 +78,7 @@ class cl_ipe {
                  r36_contrato = int8 = Contrato
                  ";
    //funcao construtor da classe
-   function cl_ipe() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ipe");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -95,12 +95,12 @@ class cl_ipe {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r36_instit = ($this->r36_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_instit"]:$this->r36_instit);
-       $this->r36_anousu = ($this->r36_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_anousu"]:$this->r36_anousu);
-       $this->r36_mesusu = ($this->r36_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_mesusu"]:$this->r36_mesusu);
-       $this->r36_sequencia = ($this->r36_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_sequencia"]:$this->r36_sequencia);
-       $this->r36_numcgm = ($this->r36_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_numcgm"]:$this->r36_numcgm);
-       $this->r36_regist = ($this->r36_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_regist"]:$this->r36_regist);
+       $this->r36_instit = ($this->r36_instit === 0 || $this->r36_instit === 0.0 || $this->r36_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_instit"]:$this->r36_instit);
+       $this->r36_anousu = ($this->r36_anousu === 0 || $this->r36_anousu === 0.0 || $this->r36_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_anousu"]:$this->r36_anousu);
+       $this->r36_mesusu = ($this->r36_mesusu === 0 || $this->r36_mesusu === 0.0 || $this->r36_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_mesusu"]:$this->r36_mesusu);
+       $this->r36_sequencia = ($this->r36_sequencia === 0 || $this->r36_sequencia === 0.0 || $this->r36_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_sequencia"]:$this->r36_sequencia);
+       $this->r36_numcgm = ($this->r36_numcgm === 0 || $this->r36_numcgm === 0.0 || $this->r36_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_numcgm"]:$this->r36_numcgm);
+       $this->r36_regist = ($this->r36_regist === 0 || $this->r36_regist === 0.0 || $this->r36_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_regist"]:$this->r36_regist);
        if($this->r36_dtvinc == ""){
          $this->r36_dtvinc_dia = ($this->r36_dtvinc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_dtvinc_dia"]:$this->r36_dtvinc_dia);
          $this->r36_dtvinc_mes = ($this->r36_dtvinc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_dtvinc_mes"]:$this->r36_dtvinc_mes);
@@ -109,7 +109,7 @@ class cl_ipe {
             $this->r36_dtvinc = $this->r36_dtvinc_ano."-".$this->r36_dtvinc_mes."-".$this->r36_dtvinc_dia;
          }
        }
-       $this->r36_matric = ($this->r36_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_matric"]:$this->r36_matric);
+       $this->r36_matric = ($this->r36_matric === 0 || $this->r36_matric === 0.0 || $this->r36_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_matric"]:$this->r36_matric);
        $this->r36_estado = ($this->r36_estado == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_estado"]:$this->r36_estado);
        if($this->r36_dtalt == ""){
          $this->r36_dtalt_dia = ($this->r36_dtalt_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_dtalt_dia"]:$this->r36_dtalt_dia);
@@ -119,14 +119,14 @@ class cl_ipe {
             $this->r36_dtalt = $this->r36_dtalt_ano."-".$this->r36_dtalt_mes."-".$this->r36_dtalt_dia;
          }
        }
-       $this->r36_contr1 = ($this->r36_contr1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_contr1"]:$this->r36_contr1);
-       $this->r36_valorc = ($this->r36_valorc == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_valorc"]:$this->r36_valorc);
-       $this->r36_contrato = ($this->r36_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_contrato"]:$this->r36_contrato);
+       $this->r36_contr1 = ($this->r36_contr1 === 0 || $this->r36_contr1 === 0.0 || $this->r36_contr1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_contr1"]:$this->r36_contr1);
+       $this->r36_valorc = ($this->r36_valorc === 0 || $this->r36_valorc === 0.0 || $this->r36_valorc == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_valorc"]:$this->r36_valorc);
+       $this->r36_contrato = ($this->r36_contrato === 0 || $this->r36_contrato === 0.0 || $this->r36_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_contrato"]:$this->r36_contrato);
      }else{
-       $this->r36_instit = ($this->r36_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_instit"]:$this->r36_instit);
-       $this->r36_anousu = ($this->r36_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_anousu"]:$this->r36_anousu);
-       $this->r36_mesusu = ($this->r36_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_mesusu"]:$this->r36_mesusu);
-       $this->r36_sequencia = ($this->r36_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_sequencia"]:$this->r36_sequencia);
+       $this->r36_instit = ($this->r36_instit === 0 || $this->r36_instit === 0.0 || $this->r36_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_instit"]:$this->r36_instit);
+       $this->r36_anousu = ($this->r36_anousu === 0 || $this->r36_anousu === 0.0 || $this->r36_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_anousu"]:$this->r36_anousu);
+       $this->r36_mesusu = ($this->r36_mesusu === 0 || $this->r36_mesusu === 0.0 || $this->r36_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_mesusu"]:$this->r36_mesusu);
+       $this->r36_sequencia = ($this->r36_sequencia === 0 || $this->r36_sequencia === 0.0 || $this->r36_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["r36_sequencia"]:$this->r36_sequencia);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_ipe {
        $this->r36_mesusu = $r36_mesusu;
        $this->r36_sequencia = $r36_sequencia;
        $this->r36_instit = $r36_instit;
-     if(($this->r36_anousu == null) || ($this->r36_anousu == "") ){
+     if(($this->r36_anousu == null) || ($this->r36_anousu === 0 || $this->r36_anousu === 0.0 || $this->r36_anousu == "") ){
        $this->erro_sql = " Campo r36_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -189,7 +189,7 @@ class cl_ipe {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r36_mesusu == null) || ($this->r36_mesusu == "") ){
+     if(($this->r36_mesusu == null) || ($this->r36_mesusu === 0 || $this->r36_mesusu === 0.0 || $this->r36_mesusu == "") ){
        $this->erro_sql = " Campo r36_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -197,7 +197,7 @@ class cl_ipe {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r36_sequencia == null) || ($this->r36_sequencia == "") ){
+     if(($this->r36_sequencia == null) || ($this->r36_sequencia === 0 || $this->r36_sequencia === 0.0 || $this->r36_sequencia == "") ){
        $this->erro_sql = " Campo r36_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -205,7 +205,7 @@ class cl_ipe {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r36_instit == null) || ($this->r36_instit == "") ){
+     if(($this->r36_instit == null) || ($this->r36_instit === 0 || $this->r36_instit === 0.0 || $this->r36_instit == "") ){
        $this->erro_sql = " Campo r36_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -649,7 +649,7 @@ class cl_ipe {
    function sql_query ( $r36_anousu=null,$r36_mesusu=null,$r36_sequencia=null,$r36_instit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -697,7 +697,7 @@ class cl_ipe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -709,7 +709,7 @@ class cl_ipe {
    function sql_query_arquivo ( $r36_anousu=null,$r36_mesusu=null,$r36_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -756,7 +756,7 @@ class cl_ipe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -891,7 +891,7 @@ class cl_ipe {
    function sql_query_file ( $r36_anousu=null,$r36_mesusu=null,$r36_sequencia=null,$r36_instit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -936,7 +936,7 @@ class cl_ipe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

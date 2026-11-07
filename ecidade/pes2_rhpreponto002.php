@@ -35,7 +35,8 @@ $clrotulo->label('r06_descr');
 $clrotulo->label('r06_elemen');
 $clrotulo->label('r06_pd');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $oLoteRegistroPonto = new cl_loteregistroponto;
 
@@ -76,7 +77,7 @@ $sSqlRhPrePontoLoteRegistro = "
        ";
 
 $rsRhPrePontoLoteRegistro = db_query($sSqlRhPrePontoLoteRegistro);
-$xxnum = pg_numrows($rsRhPrePontoLoteRegistro);
+$xxnum = ($rsRhPrePontoLoteRegistro ? pg_numrows($rsRhPrePontoLoteRegistro) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Erro na pesquisa do lote - '.$lote);
 

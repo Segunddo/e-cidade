@@ -34,7 +34,7 @@ class cl_rhhistoricocalculo {
                  rh143_tipoevento = int4 = Tipo de Evento 
                  ";
    //funcao construtor da classe 
-   function cl_rhhistoricocalculo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhhistoricocalculo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -51,15 +51,15 @@ class cl_rhhistoricocalculo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh143_sequencial = ($this->rh143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_sequencial"]:$this->rh143_sequencial);
-       $this->rh143_regist = ($this->rh143_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_regist"]:$this->rh143_regist);
-       $this->rh143_folhapagamento = ($this->rh143_folhapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_folhapagamento"]:$this->rh143_folhapagamento);
+       $this->rh143_sequencial = ($this->rh143_sequencial === 0 || $this->rh143_sequencial === 0.0 || $this->rh143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_sequencial"]:$this->rh143_sequencial);
+       $this->rh143_regist = ($this->rh143_regist === 0 || $this->rh143_regist === 0.0 || $this->rh143_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_regist"]:$this->rh143_regist);
+       $this->rh143_folhapagamento = ($this->rh143_folhapagamento === 0 || $this->rh143_folhapagamento === 0.0 || $this->rh143_folhapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_folhapagamento"]:$this->rh143_folhapagamento);
        $this->rh143_rubrica = ($this->rh143_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_rubrica"]:$this->rh143_rubrica);
-       $this->rh143_quantidade = ($this->rh143_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_quantidade"]:$this->rh143_quantidade);
-       $this->rh143_valor = ($this->rh143_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_valor"]:$this->rh143_valor);
-       $this->rh143_tipoevento = ($this->rh143_tipoevento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_tipoevento"]:$this->rh143_tipoevento);
+       $this->rh143_quantidade = ($this->rh143_quantidade === 0 || $this->rh143_quantidade === 0.0 || $this->rh143_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_quantidade"]:$this->rh143_quantidade);
+       $this->rh143_valor = ($this->rh143_valor === 0 || $this->rh143_valor === 0.0 || $this->rh143_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_valor"]:$this->rh143_valor);
+       $this->rh143_tipoevento = ($this->rh143_tipoevento === 0 || $this->rh143_tipoevento === 0.0 || $this->rh143_tipoevento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_tipoevento"]:$this->rh143_tipoevento);
      }else{
-       $this->rh143_sequencial = ($this->rh143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_sequencial"]:$this->rh143_sequencial);
+       $this->rh143_sequencial = ($this->rh143_sequencial === 0 || $this->rh143_sequencial === 0.0 || $this->rh143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh143_sequencial"]:$this->rh143_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_rhhistoricocalculo {
          $this->rh143_sequencial = $rh143_sequencial; 
        }
      }
-     if(($this->rh143_sequencial == null) || ($this->rh143_sequencial == "") ){ 
+     if(($this->rh143_sequencial == null) || ($this->rh143_sequencial === 0 || $this->rh143_sequencial === 0.0 || $this->rh143_sequencial == "") ){ 
        $this->erro_sql = " Campo rh143_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -735,7 +735,7 @@ class cl_rhhistoricocalculo {
    * @param  FolhaPagamento $oFolhaPagamento
    * @return String
    */
-  public function sql_query_dados_consolidados($aMatricula = null, FolhaPagamento $oFolhaPagamento) {
+  public function sql_query_dados_consolidados($aMatricula = null, FolhaPagamento $oFolhaPagamento = null) {
 
     $iAno           =  $oFolhaPagamento->getCompetencia()->getAno();
     $iMes           =  $oFolhaPagamento->getCompetencia()->getMes();

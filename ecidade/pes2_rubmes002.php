@@ -35,7 +35,8 @@ $clrotulo->label('r01_regist');
 $clrotulo->label('r14_quant');
 $clrotulo->label('r14_valor');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $sql1 = "select rh27_rubric,

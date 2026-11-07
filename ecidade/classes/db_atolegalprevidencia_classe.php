@@ -49,7 +49,7 @@ class cl_atolegalprevidencia {
                  rh179_descricao = varchar(60) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_atolegalprevidencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("atolegalprevidencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -66,10 +66,10 @@ class cl_atolegalprevidencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh179_sequencial = ($this->rh179_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh179_sequencial"]:$this->rh179_sequencial);
+       $this->rh179_sequencial = ($this->rh179_sequencial === 0 || $this->rh179_sequencial === 0.0 || $this->rh179_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh179_sequencial"]:$this->rh179_sequencial);
        $this->rh179_descricao = ($this->rh179_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh179_descricao"]:$this->rh179_descricao);
      }else{
-       $this->rh179_sequencial = ($this->rh179_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh179_sequencial"]:$this->rh179_sequencial);
+       $this->rh179_sequencial = ($this->rh179_sequencial === 0 || $this->rh179_sequencial === 0.0 || $this->rh179_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh179_sequencial"]:$this->rh179_sequencial);
      }
    }
    // funcao para Inclusão
@@ -108,7 +108,7 @@ class cl_atolegalprevidencia {
          $this->rh179_sequencial = $rh179_sequencial; 
        }
      }
-     if(($this->rh179_sequencial == null) || ($this->rh179_sequencial == "") ){ 
+     if(($this->rh179_sequencial == null) || ($this->rh179_sequencial === 0 || $this->rh179_sequencial === 0.0 || $this->rh179_sequencial == "") ){ 
        $this->erro_sql = " Campo rh179_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -30,7 +30,8 @@ require_once(modification("libs/db_sql.php"));
 require_once(modification("classes/db_rhfuncao_classe.php"));
 require_once(modification("classes/db_rhregime_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 $clrhfuncao = new cl_rhfuncao;
@@ -299,7 +300,7 @@ for($x = 0; $x < pg_numrows($result_funcoes); $x ++) {
     $linha .= $ocupados.$separador;
     $linha .= $saldo.$separador;
 
-    fputs($fArquivo,$linha."\n");
+    if (is_resource($fArquivo)) fputs($fArquivo,$linha."\n"); // fputs(null): false sem efeito no 5.6
   }
 
 }
@@ -354,7 +355,7 @@ else  {
     $linha .= $totalocup.$separador;
     $linha .= $totalsald.$separador;
 
-    fputs($fArquivo,$linha."\n");
+    if (is_resource($fArquivo)) fputs($fArquivo,$linha."\n");
 
-    fclose($fArquivo);
+    if (is_resource($fArquivo)) fclose($fArquivo); // fclose(null): false sem efeito no 5.6
 }

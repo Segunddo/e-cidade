@@ -30,7 +30,8 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_utils.php"));
 include(modification("classes/db_rhvisavalecad_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $oGet = db_utils::postMemory($_GET,0);
@@ -84,7 +85,7 @@ $sql = $clrhvisavalecad->sql_query_lotaexe(null," rhvisavalecad.*,z01_nome,o40_o
 //echo $sql ; exit;
 
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Vales cadastrados no período de '.$mes.' / '.$ano);
 

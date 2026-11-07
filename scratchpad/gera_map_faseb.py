@@ -9,6 +9,11 @@ Uso:  python3 scratchpad/gera_map_faseb.py <area>:<pref>[,<pref>...] [...]
       python3 scratchpad/gera_map_faseb.py tribut:amb,pre educa:mat,pro
 <area> e o inicio do nome em atendcadarea, sem o "DB:" (TRIBUT, EDUCA...).
 Cada prefixo so leva as telas que o banco atribui AQUELA area.
+
+Mais as ABAS de docker/proxy/faseb_map_abas.txt: telas que nao estao no menu (o banco
+nao as atribui a area nenhuma), mas que uma tela roteada ao 8.5 abre em iframe ou por
+redirecionamento ao abrir. Sem elas o contêiner roda no 8.5 e o formulario no 5.6 (14a
+lacuna). A lista sai de scratchpad/redirecionamentos.py, classe NO_5.6.
 """
 import os, subprocess, sys
 
@@ -18,7 +23,7 @@ if not LOTES: sys.exit("informe ao menos um <area>:<prefixos>")
 
 # Prefixos ja roteados por `location` (Fase A) -- ficam de fora do map.
 FASE_A = "'cem','itb','itbi','agu','agua','jur','div','mar','not','fis','iss','dvr','arr','tri','inf','tra'," \
-         "'tre','esc','rel','sec','bib','mer','edu'"
+         "'tre','esc','rel','sec','bib','mer','edu','rh','eso','rec','pes'"
 # ATENCAO: `\\copy` e meta-comando do psql e tem de caber em UMA LINHA.
 # Quebrado em varias, o psql falha -- e a mensagem de erro vem em LATIN-1, que
 # o Python nao decodifica como UTF-8: o sintoma e um UnicodeDecodeError, nao um
@@ -49,6 +54,13 @@ pares = [l.rstrip("\n").split("\t") for l in open("/tmp/faseb_all.txt", encoding
 lote  = sorted({t for t, area in pares for a, pref in LOTES
                 if area.upper().startswith(a) and t.startswith(pref)})
 
+# 14a lacuna: abas e destinos de redirecionamento, que o menu nao lista
+ABAS = os.path.join(RAIZ, "docker/proxy/faseb_map_abas.txt")
+abas = sorted({l.split("#")[0].strip().lower() for l in open(ABAS) if l.split("#")[0].strip()}
+              - set(lote)) if os.path.exists(ABAS) else []
+lote_menu = len(lote)
+lote = lote + abas
+
 linhas, falta = [], []
 for t in lote:
     if t not in disco: falta.append(t); continue
@@ -63,7 +75,8 @@ cab = ("# GERADO de configuracoes.db_menu -- NAO editar a mao.\n"
        "# Reproduzir:  python3 scratchpad/gera_map_faseb.py " + " ".join(sys.argv[1:]) + "\n#\n"
        "# Roteamento por LISTA EXATA: os prefixos da Fase B servem varias areas, e so\n"
        "# as telas que o banco atribui a area indicada vao para o 8.5.\n#\n"
-       f"# Neste arquivo: {' '.join(sys.argv[1:])} = {len(lote)} telas, {len(linhas)} entradas.\n\n")
+       f"# Neste arquivo: {' '.join(sys.argv[1:])} = {lote_menu} telas de menu"
+       f" + {len(abas)} abas de faseb_map_abas.txt = {len(linhas)} entradas.\n\n")
 open(os.path.join(RAIZ,"docker/proxy/faseb_map.conf"),"w").write(cab + "\n".join(linhas) + "\n")
 print(f"  {len(lote)} telas, {len(linhas)} entradas"
       + (f"  | AUSENTES em disco: {falta}" if falta else "  | todas existem em disco"))

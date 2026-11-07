@@ -34,7 +34,8 @@ $clrotulo->label('rh27_descr');
 $clrotulo->label('rh27_elemen');
 $clrotulo->label('rh27_pd');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 
@@ -62,7 +63,7 @@ order by r70_estrut, z01_nome
 //echo $sql ; exit;
 
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem servidores no período de '.$mes.' / '.$ano);
 

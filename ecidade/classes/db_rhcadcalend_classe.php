@@ -52,7 +52,7 @@ class cl_rhcadcalend {
                  rh53_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_rhcadcalend() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhcadcalend"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rhcadcalend {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh53_instit = ($this->rh53_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh53_instit"]:$this->rh53_instit);
-       $this->rh53_calend = ($this->rh53_calend == ""?@$GLOBALS["HTTP_POST_VARS"]["rh53_calend"]:$this->rh53_calend);
+       $this->rh53_instit = ($this->rh53_instit === 0 || $this->rh53_instit === 0.0 || $this->rh53_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh53_instit"]:$this->rh53_instit);
+       $this->rh53_calend = ($this->rh53_calend === 0 || $this->rh53_calend === 0.0 || $this->rh53_calend == ""?@$GLOBALS["HTTP_POST_VARS"]["rh53_calend"]:$this->rh53_calend);
        $this->rh53_descr = ($this->rh53_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh53_descr"]:$this->rh53_descr);
      }else{
-       $this->rh53_calend = ($this->rh53_calend == ""?@$GLOBALS["HTTP_POST_VARS"]["rh53_calend"]:$this->rh53_calend);
+       $this->rh53_calend = ($this->rh53_calend === 0 || $this->rh53_calend === 0.0 || $this->rh53_calend == ""?@$GLOBALS["HTTP_POST_VARS"]["rh53_calend"]:$this->rh53_calend);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rhcadcalend {
          $this->rh53_calend = $rh53_calend; 
        }
      }
-     if(($this->rh53_calend == null) || ($this->rh53_calend == "") ){ 
+     if(($this->rh53_calend == null) || ($this->rh53_calend === 0 || $this->rh53_calend === 0.0 || $this->rh53_calend == "") ){ 
        $this->erro_sql = " Campo rh53_calend nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_rhcadcalend {
    function sql_query ( $rh53_calend=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_rhcadcalend {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_rhcadcalend {
    function sql_query_file ( $rh53_calend=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_rhcadcalend {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -159,7 +159,7 @@ ls ecidade | grep -ioE '^<pref>[a-z]*[0-9]*_' | sort -u
 | `jur1_` **e** `jur01_` | dois dígitos — o nginx precisa de `[0-9]*`, não `[0-9]?` |
 | `Cem1_` com maiúscula | 29 arquivos assim na base — exige `re.IGNORECASE` e `location ~*` |
 
-**3. Apareceu categoria que não está no `CLAUDE.md`?** → **PARE e investigue** antes de transformar. Toda categoria nova do projeto veio daí.
+**3. Apareceu categoria que não está no catálogo (`docs/registro/`)?** → **PARE e investigue** antes de transformar. Toda categoria nova do projeto veio daí.
 
 ### Por que sete frentes, e não só o prefixo
 
@@ -813,7 +813,7 @@ for m in cem 'itbi?' 'agua?' jur div mar not fis iss dvr arr tri inf amb pre; do
 done
 ```
 
-**Compare com a linha de base registrada no `CLAUDE.md`.** "115/116" não é defeito se a linha de base já era 115/116 — as 14 divergências conhecidas estão todas caracterizadas lá.
+**Compare com a linha de base registrada em `docs/registro/area-<área>.md`.** "115/116" não é defeito se a linha de base já era 115/116 — as 14 divergências conhecidas estão todas caracterizadas lá.
 
 ## Quando o alvo não é um módulo
 
@@ -1064,9 +1064,9 @@ git commit
 
 A mensagem registra a tabela de correções com quantidades, o resultado da bateria e **cada categoria ou lacuna nova**.
 
-No `CLAUDE.md`, atualize três coisas: a seção do módulo, o cabeçalho de estado (módulos portados, rota, próximo passo) e qualquer categoria nova.
+Atualize três coisas: a seção do módulo em `docs/registro/area-<área>.md`, o cabeçalho de estado do `CLAUDE.md` (módulos portados, rota, próximo passo) e qualquer categoria nova.
 
-**Isto não é burocracia.** O `CLAUDE.md` tem 4.265 linhas contra 1.271 de ferramental — o conhecimento é três vezes maior que o código, e é ele que torna o processo repetível por quem chegar depois. Registre também **quando este documento ou o catálogo estiverem errados**: várias seções do `CLAUDE.md` começam com ⚠ CORREÇÃO justamente por isso.
+**Isto não é burocracia.** O registro (hoje `CLAUDE.md` + `docs/registro/`) tinha 4.265 linhas contra 1.271 de ferramental — o conhecimento é três vezes maior que o código, e é ele que torna o processo repetível por quem chegar depois. Registre também **quando este documento ou o catálogo estiverem errados**: várias seções do registro começam com ⚠ CORREÇÃO justamente por isso.
 
 ## Receituário — achei este erro, o que eu faço?
 
@@ -1247,7 +1247,7 @@ docker exec -u root ecidade_php56 chmod 666 /var/www/html/<caminho da copia>
 
 ### Quando parar e perguntar a alguém
 
-- Categoria de incompatibilidade que **não está no `CLAUDE.md`**.
+- Categoria de incompatibilidade que **não está no catálogo (`docs/registro/`)**.
 - Correção que mudaria **comportamento**, não só compatibilidade.
 - Duas verificações discordando — uma delas está quebrada.
 
@@ -1398,7 +1398,7 @@ O módulo `tra` foi escolhido como piloto só pelo resíduo (era zero) e depois 
 
 | Arquivo | O que é |
 | --- | --- |
-| `CLAUDE.md` | **o catálogo** — 4.265 linhas: todas as categorias, decisões e correções, com a medição que as comprova |
+| `CLAUDE.md` + `docs/registro/` | **o catálogo** — 4.265 linhas na época, divididas em 26/10/2026: todas as categorias, decisões e correções, com a medição que as comprova |
 | `.claude/skills/migrar-modulo/SKILL.md` | o procedimento condensado |
 | `scratchpad/enumera.py` | passos 1 a 3 |
 | `scratchpad/rector-curado.php` + `rector-rules/` | passo 4 |
@@ -1411,4 +1411,4 @@ O módulo `tra` foi escolhido como piloto só pelo resíduo (era zero) e depois 
 | `scratchpad/gera_map_faseb.py` | roteamento por lista, gerado do banco |
 | `scratchpad/residuo.py` | escolha do próximo módulo |
 
-**Quando este documento e o `CLAUDE.md` divergirem, o `CLAUDE.md` manda** — é ele que é atualizado a cada lote.
+**Quando este documento e o registro (`CLAUDE.md` + `docs/registro/`) divergirem, o registro manda** — é ele que é atualizado a cada lote.

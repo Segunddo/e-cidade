@@ -67,7 +67,7 @@ class cl_vtfdias {
                  r63_quants = int4 = qtd vales vinda da semana 
                  ";
    //funcao construtor da classe 
-   function cl_vtfdias() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vtfdias"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,9 +84,9 @@ class cl_vtfdias {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r63_anousu = ($this->r63_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_anousu"]:$this->r63_anousu);
-       $this->r63_mesusu = ($this->r63_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_mesusu"]:$this->r63_mesusu);
-       $this->r63_regist = ($this->r63_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_regist"]:$this->r63_regist);
+       $this->r63_anousu = ($this->r63_anousu === 0 || $this->r63_anousu === 0.0 || $this->r63_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_anousu"]:$this->r63_anousu);
+       $this->r63_mesusu = ($this->r63_mesusu === 0 || $this->r63_mesusu === 0.0 || $this->r63_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_mesusu"]:$this->r63_mesusu);
+       $this->r63_regist = ($this->r63_regist === 0 || $this->r63_regist === 0.0 || $this->r63_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_regist"]:$this->r63_regist);
        $this->r63_vale = ($this->r63_vale == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_vale"]:$this->r63_vale);
        $this->r63_difere = ($this->r63_difere == "f"?@$GLOBALS["HTTP_POST_VARS"]["r63_difere"]:$this->r63_difere);
        if($this->r63_dia == ""){
@@ -97,13 +97,13 @@ class cl_vtfdias {
             $this->r63_dia = $this->r63_dia_ano."-".$this->r63_dia_mes."-".$this->r63_dia_dia;
          }
        }
-       $this->r63_quant = ($this->r63_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_quant"]:$this->r63_quant);
+       $this->r63_quant = ($this->r63_quant === 0 || $this->r63_quant === 0.0 || $this->r63_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_quant"]:$this->r63_quant);
        $this->r63_obrig = ($this->r63_obrig == "f"?@$GLOBALS["HTTP_POST_VARS"]["r63_obrig"]:$this->r63_obrig);
-       $this->r63_quants = ($this->r63_quants == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_quants"]:$this->r63_quants);
+       $this->r63_quants = ($this->r63_quants === 0 || $this->r63_quants === 0.0 || $this->r63_quants == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_quants"]:$this->r63_quants);
      }else{
-       $this->r63_anousu = ($this->r63_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_anousu"]:$this->r63_anousu);
-       $this->r63_mesusu = ($this->r63_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_mesusu"]:$this->r63_mesusu);
-       $this->r63_regist = ($this->r63_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_regist"]:$this->r63_regist);
+       $this->r63_anousu = ($this->r63_anousu === 0 || $this->r63_anousu === 0.0 || $this->r63_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_anousu"]:$this->r63_anousu);
+       $this->r63_mesusu = ($this->r63_mesusu === 0 || $this->r63_mesusu === 0.0 || $this->r63_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_mesusu"]:$this->r63_mesusu);
+       $this->r63_regist = ($this->r63_regist === 0 || $this->r63_regist === 0.0 || $this->r63_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_regist"]:$this->r63_regist);
        $this->r63_vale = ($this->r63_vale == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_vale"]:$this->r63_vale);
        $this->r63_difere = ($this->r63_difere == "f"?@$GLOBALS["HTTP_POST_VARS"]["r63_difere"]:$this->r63_difere);
        $this->r63_dia = ($this->r63_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r63_dia_ano"]."-".@$GLOBALS["HTTP_POST_VARS"]["r63_dia_mes"]."-".@$GLOBALS["HTTP_POST_VARS"]["r63_dia_dia"]:$this->r63_dia);
@@ -145,7 +145,7 @@ class cl_vtfdias {
        $this->r63_vale = $r63_vale; 
        $this->r63_difere = $r63_difere; 
        $this->r63_dia = $r63_dia; 
-     if(($this->r63_anousu == null) || ($this->r63_anousu == "") ){ 
+     if(($this->r63_anousu == null) || ($this->r63_anousu === 0 || $this->r63_anousu === 0.0 || $this->r63_anousu == "") ){ 
        $this->erro_sql = " Campo r63_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -153,7 +153,7 @@ class cl_vtfdias {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r63_mesusu == null) || ($this->r63_mesusu == "") ){ 
+     if(($this->r63_mesusu == null) || ($this->r63_mesusu === 0 || $this->r63_mesusu === 0.0 || $this->r63_mesusu == "") ){ 
        $this->erro_sql = " Campo r63_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -161,7 +161,7 @@ class cl_vtfdias {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r63_regist == null) || ($this->r63_regist == "") ){ 
+     if(($this->r63_regist == null) || ($this->r63_regist === 0 || $this->r63_regist === 0.0 || $this->r63_regist == "") ){ 
        $this->erro_sql = " Campo r63_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -611,7 +611,7 @@ class cl_vtfdias {
    function sql_query ( $r63_anousu=null,$r63_mesusu=null,$r63_regist=null,$r63_vale=null,$r63_difere=null,$r63_dia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -695,7 +695,7 @@ class cl_vtfdias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -707,7 +707,7 @@ class cl_vtfdias {
    function sql_query_file ( $r63_anousu=null,$r63_mesusu=null,$r63_regist=null,$r63_vale=null,$r63_difere=null,$r63_dia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -768,7 +768,7 @@ class cl_vtfdias {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

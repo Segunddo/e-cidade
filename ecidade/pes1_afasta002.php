@@ -50,7 +50,8 @@ $clpontofx = new cl_pontofx;
 $clpontofs = new cl_pontofs;
 $clrhrubricas = new cl_rhrubricas;
 $clinssirf = new cl_inssirf;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $db_opcao = 22;
 $db_botao = false;
 if(isset($alterar)){

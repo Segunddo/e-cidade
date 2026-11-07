@@ -50,7 +50,7 @@ class cl_editaltemplategeral {
                  l36_db_documentotemplate = int4 = Template 
                  ";
    //funcao construtor da classe 
-   function cl_editaltemplategeral() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("editaltemplategeral"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_editaltemplategeral {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l36_sequencial = ($this->l36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l36_sequencial"]:$this->l36_sequencial);
-       $this->l36_db_documentotemplate = ($this->l36_db_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["l36_db_documentotemplate"]:$this->l36_db_documentotemplate);
+       $this->l36_sequencial = ($this->l36_sequencial === 0 || $this->l36_sequencial === 0.0 || $this->l36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l36_sequencial"]:$this->l36_sequencial);
+       $this->l36_db_documentotemplate = ($this->l36_db_documentotemplate === 0 || $this->l36_db_documentotemplate === 0.0 || $this->l36_db_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["l36_db_documentotemplate"]:$this->l36_db_documentotemplate);
      }else{
-       $this->l36_sequencial = ($this->l36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l36_sequencial"]:$this->l36_sequencial);
+       $this->l36_sequencial = ($this->l36_sequencial === 0 || $this->l36_sequencial === 0.0 || $this->l36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l36_sequencial"]:$this->l36_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_editaltemplategeral {
          $this->l36_sequencial = $l36_sequencial; 
        }
      }
-     if(($this->l36_sequencial == null) || ($this->l36_sequencial == "") ){ 
+     if(($this->l36_sequencial == null) || ($this->l36_sequencial === 0 || $this->l36_sequencial === 0.0 || $this->l36_sequencial == "") ){ 
        $this->erro_sql = " Campo l36_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_editaltemplategeral {
    function sql_query ( $l36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -353,7 +353,7 @@ class cl_editaltemplategeral {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -366,7 +366,7 @@ class cl_editaltemplategeral {
    function sql_query_file ( $l36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_editaltemplategeral {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

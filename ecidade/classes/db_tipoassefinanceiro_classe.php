@@ -41,7 +41,7 @@ class cl_tipoassefinanceiro {
                  rh165_datainicio = date = Data de Início 
                  ";
    //funcao construtor da classe 
-   function cl_tipoassefinanceiro() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoassefinanceiro"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -58,14 +58,14 @@ class cl_tipoassefinanceiro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh165_sequencial = ($this->rh165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_sequencial"]:$this->rh165_sequencial);
-       $this->rh165_tipoasse = ($this->rh165_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_tipoasse"]:$this->rh165_tipoasse);
+       $this->rh165_sequencial = ($this->rh165_sequencial === 0 || $this->rh165_sequencial === 0.0 || $this->rh165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_sequencial"]:$this->rh165_sequencial);
+       $this->rh165_tipoasse = ($this->rh165_tipoasse === 0 || $this->rh165_tipoasse === 0.0 || $this->rh165_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_tipoasse"]:$this->rh165_tipoasse);
        $this->rh165_rubric = ($this->rh165_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_rubric"]:$this->rh165_rubric);
-       $this->rh165_instit = ($this->rh165_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_instit"]:$this->rh165_instit);
-       $this->rh165_db_formulas = ($this->rh165_db_formulas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_db_formulas"]:$this->rh165_db_formulas);
-       $this->rh165_tipolancamento = ($this->rh165_tipolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_tipolancamento"]:$this->rh165_tipolancamento);
-       $this->rh165_mesusu = ($this->rh165_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_mesusu"]:$this->rh165_mesusu);
-       $this->rh165_anousu = ($this->rh165_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_anousu"]:$this->rh165_anousu);
+       $this->rh165_instit = ($this->rh165_instit === 0 || $this->rh165_instit === 0.0 || $this->rh165_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_instit"]:$this->rh165_instit);
+       $this->rh165_db_formulas = ($this->rh165_db_formulas === 0 || $this->rh165_db_formulas === 0.0 || $this->rh165_db_formulas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_db_formulas"]:$this->rh165_db_formulas);
+       $this->rh165_tipolancamento = ($this->rh165_tipolancamento === 0 || $this->rh165_tipolancamento === 0.0 || $this->rh165_tipolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_tipolancamento"]:$this->rh165_tipolancamento);
+       $this->rh165_mesusu = ($this->rh165_mesusu === 0 || $this->rh165_mesusu === 0.0 || $this->rh165_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_mesusu"]:$this->rh165_mesusu);
+       $this->rh165_anousu = ($this->rh165_anousu === 0 || $this->rh165_anousu === 0.0 || $this->rh165_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_anousu"]:$this->rh165_anousu);
        if($this->rh165_datainicio == ""){
          $this->rh165_datainicio_dia = ($this->rh165_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_datainicio_dia"]:$this->rh165_datainicio_dia);
          $this->rh165_datainicio_mes = ($this->rh165_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_datainicio_mes"]:$this->rh165_datainicio_mes);
@@ -75,7 +75,7 @@ class cl_tipoassefinanceiro {
          }
        }
      }else{
-       $this->rh165_sequencial = ($this->rh165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_sequencial"]:$this->rh165_sequencial);
+       $this->rh165_sequencial = ($this->rh165_sequencial === 0 || $this->rh165_sequencial === 0.0 || $this->rh165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh165_sequencial"]:$this->rh165_sequencial);
      }
    }
    // funcao para Inclusão
@@ -171,7 +171,7 @@ class cl_tipoassefinanceiro {
          $this->rh165_sequencial = $rh165_sequencial; 
        }
      }
-     if(($this->rh165_sequencial == null) || ($this->rh165_sequencial == "") ){ 
+     if(($this->rh165_sequencial == null) || ($this->rh165_sequencial === 0 || $this->rh165_sequencial === 0.0 || $this->rh165_sequencial == "") ){ 
        $this->erro_sql = " Campo rh165_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -78,14 +78,14 @@ class cl_rhpespadrao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh03_seqpes = ($this->rh03_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_seqpes"]:$this->rh03_seqpes);
-       $this->rh03_anousu = ($this->rh03_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_anousu"]:$this->rh03_anousu);
-       $this->rh03_mesusu = ($this->rh03_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_mesusu"]:$this->rh03_mesusu);
+       $this->rh03_seqpes = ($this->rh03_seqpes === 0 || $this->rh03_seqpes === 0.0 || $this->rh03_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_seqpes"]:$this->rh03_seqpes);
+       $this->rh03_anousu = ($this->rh03_anousu === 0 || $this->rh03_anousu === 0.0 || $this->rh03_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_anousu"]:$this->rh03_anousu);
+       $this->rh03_mesusu = ($this->rh03_mesusu === 0 || $this->rh03_mesusu === 0.0 || $this->rh03_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_mesusu"]:$this->rh03_mesusu);
        $this->rh03_padrao = ($this->rh03_padrao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_padrao"]:$this->rh03_padrao);
        $this->rh03_padraoprev = ($this->rh03_padraoprev == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_padraoprev"]:$this->rh03_padraoprev);
-       $this->rh03_regime = ($this->rh03_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_regime"]:$this->rh03_regime);
+       $this->rh03_regime = ($this->rh03_regime === 0 || $this->rh03_regime === 0.0 || $this->rh03_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_regime"]:$this->rh03_regime);
      }else{
-       $this->rh03_seqpes = ($this->rh03_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_seqpes"]:$this->rh03_seqpes);
+       $this->rh03_seqpes = ($this->rh03_seqpes === 0 || $this->rh03_seqpes === 0.0 || $this->rh03_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh03_seqpes"]:$this->rh03_seqpes);
      }
    }
    // funcao para inclusao
@@ -128,7 +128,7 @@ class cl_rhpespadrao {
        return false;
      }
        $this->rh03_seqpes = $rh03_seqpes; 
-     if(($this->rh03_seqpes == null) || ($this->rh03_seqpes == "") ){ 
+     if(($this->rh03_seqpes == null) || ($this->rh03_seqpes === 0 || $this->rh03_seqpes === 0.0 || $this->rh03_seqpes == "") ){ 
        $this->erro_sql = " Campo rh03_seqpes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -561,7 +561,7 @@ class cl_rhpespadrao {
 
     return $sql;
   }
-   function sql_query_retorno ( $rh03_seqpes=null,$campos="*",$ordem=null,$dbwhere="",$anonovo,$mesnovo){ 
+   function sql_query_retorno ( $rh03_seqpes=null,$campos="*",$ordem=null,$dbwhere="",$anonovo = null,$mesnovo = null){ 
      $sql = "select ";
      if($campos != "*" ){
        $campos_sql = explode("#",$campos);

@@ -56,7 +56,7 @@ class cl_basesr {
                  r09_rubric = varchar(4) = Rubrica 
                  ";
    //funcao construtor da classe 
-   function cl_basesr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("basesr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,15 +73,15 @@ class cl_basesr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r09_instit = ($this->r09_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_instit"]:$this->r09_instit);
-       $this->r09_anousu = ($this->r09_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_anousu"]:$this->r09_anousu);
-       $this->r09_mesusu = ($this->r09_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_mesusu"]:$this->r09_mesusu);
+       $this->r09_instit = ($this->r09_instit === 0 || $this->r09_instit === 0.0 || $this->r09_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_instit"]:$this->r09_instit);
+       $this->r09_anousu = ($this->r09_anousu === 0 || $this->r09_anousu === 0.0 || $this->r09_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_anousu"]:$this->r09_anousu);
+       $this->r09_mesusu = ($this->r09_mesusu === 0 || $this->r09_mesusu === 0.0 || $this->r09_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_mesusu"]:$this->r09_mesusu);
        $this->r09_base = ($this->r09_base == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_base"]:$this->r09_base);
        $this->r09_rubric = ($this->r09_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_rubric"]:$this->r09_rubric);
      }else{
-       $this->r09_instit = ($this->r09_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_instit"]:$this->r09_instit);
-       $this->r09_anousu = ($this->r09_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_anousu"]:$this->r09_anousu);
-       $this->r09_mesusu = ($this->r09_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_mesusu"]:$this->r09_mesusu);
+       $this->r09_instit = ($this->r09_instit === 0 || $this->r09_instit === 0.0 || $this->r09_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_instit"]:$this->r09_instit);
+       $this->r09_anousu = ($this->r09_anousu === 0 || $this->r09_anousu === 0.0 || $this->r09_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_anousu"]:$this->r09_anousu);
+       $this->r09_mesusu = ($this->r09_mesusu === 0 || $this->r09_mesusu === 0.0 || $this->r09_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_mesusu"]:$this->r09_mesusu);
        $this->r09_base = ($this->r09_base == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_base"]:$this->r09_base);
        $this->r09_rubric = ($this->r09_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r09_rubric"]:$this->r09_rubric);
      }
@@ -94,7 +94,7 @@ class cl_basesr {
        $this->r09_base = $r09_base; 
        $this->r09_rubric = $r09_rubric; 
        $this->r09_instit = $r09_instit; 
-     if(($this->r09_anousu == null) || ($this->r09_anousu == "") ){ 
+     if(($this->r09_anousu == null) || ($this->r09_anousu === 0 || $this->r09_anousu === 0.0 || $this->r09_anousu == "") ){ 
        $this->erro_sql = " Campo r09_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -102,7 +102,7 @@ class cl_basesr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r09_mesusu == null) || ($this->r09_mesusu == "") ){ 
+     if(($this->r09_mesusu == null) || ($this->r09_mesusu === 0 || $this->r09_mesusu === 0.0 || $this->r09_mesusu == "") ){ 
        $this->erro_sql = " Campo r09_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -126,7 +126,7 @@ class cl_basesr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r09_instit == null) || ($this->r09_instit == "") ){ 
+     if(($this->r09_instit == null) || ($this->r09_instit === 0 || $this->r09_instit === 0.0 || $this->r09_instit == "") ){ 
        $this->erro_sql = " Campo r09_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -453,7 +453,7 @@ class cl_basesr {
    function sql_query ( $r09_anousu=null,$r09_mesusu=null,$r09_base=null,$r09_rubric=null,$r09_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -512,7 +512,7 @@ class cl_basesr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -524,7 +524,7 @@ class cl_basesr {
    function sql_query_file ( $r09_anousu=null,$r09_mesusu=null,$r09_base=null,$r09_rubric=null,$r09_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -577,7 +577,7 @@ class cl_basesr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -590,7 +590,7 @@ class cl_basesr {
   function sql_rubricas_base ( $r09_anousu=null,$r09_mesusu=null,$r09_base=null,$r09_rubric=null,$r09_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -644,7 +644,7 @@ class cl_basesr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

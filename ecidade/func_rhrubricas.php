@@ -36,7 +36,8 @@ require_once modification('dbforms/db_funcoes.php');
 require_once modification('classes/db_rhrubricas_classe.php');
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clrhrubricas = new cl_rhrubricas;
 $clrhrubricas->rotulo->label("rh27_rubric");

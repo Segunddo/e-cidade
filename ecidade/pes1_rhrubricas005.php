@@ -93,7 +93,7 @@ if(isset($alterar) || isset($novasrubricas)){
       }
     }
   }else{
-    $arr_codigos = split(",",$novasrubricas);
+    $arr_codigos = preg_split("#,#m",$novasrubricas);
     for($i=0; $i<count($arr_codigos); $i++){
       $rubricainclui = $arr_codigos[$i];
       if($i == 0){

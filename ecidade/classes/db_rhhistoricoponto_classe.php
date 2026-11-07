@@ -32,7 +32,7 @@ class cl_rhhistoricoponto {
                  rh144_valor = float8 = Valor da Rubrica 
                  ";
    //funcao construtor da classe 
-   function cl_rhhistoricoponto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhhistoricoponto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -49,14 +49,14 @@ class cl_rhhistoricoponto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh144_sequencial = ($this->rh144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_sequencial"]:$this->rh144_sequencial);
-       $this->rh144_regist = ($this->rh144_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_regist"]:$this->rh144_regist);
-       $this->rh144_folhapagamento = ($this->rh144_folhapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_folhapagamento"]:$this->rh144_folhapagamento);
+       $this->rh144_sequencial = ($this->rh144_sequencial === 0 || $this->rh144_sequencial === 0.0 || $this->rh144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_sequencial"]:$this->rh144_sequencial);
+       $this->rh144_regist = ($this->rh144_regist === 0 || $this->rh144_regist === 0.0 || $this->rh144_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_regist"]:$this->rh144_regist);
+       $this->rh144_folhapagamento = ($this->rh144_folhapagamento === 0 || $this->rh144_folhapagamento === 0.0 || $this->rh144_folhapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_folhapagamento"]:$this->rh144_folhapagamento);
        $this->rh144_rubrica = ($this->rh144_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_rubrica"]:$this->rh144_rubrica);
-       $this->rh144_quantidade = ($this->rh144_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_quantidade"]:$this->rh144_quantidade);
-       $this->rh144_valor = ($this->rh144_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_valor"]:$this->rh144_valor);
+       $this->rh144_quantidade = ($this->rh144_quantidade === 0 || $this->rh144_quantidade === 0.0 || $this->rh144_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_quantidade"]:$this->rh144_quantidade);
+       $this->rh144_valor = ($this->rh144_valor === 0 || $this->rh144_valor === 0.0 || $this->rh144_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_valor"]:$this->rh144_valor);
      }else{
-       $this->rh144_sequencial = ($this->rh144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_sequencial"]:$this->rh144_sequencial);
+       $this->rh144_sequencial = ($this->rh144_sequencial === 0 || $this->rh144_sequencial === 0.0 || $this->rh144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh144_sequencial"]:$this->rh144_sequencial);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_rhhistoricoponto {
          $this->rh144_sequencial = $rh144_sequencial; 
        }
      }
-     if(($this->rh144_sequencial == null) || ($this->rh144_sequencial == "") ){ 
+     if(($this->rh144_sequencial == null) || ($this->rh144_sequencial === 0 || $this->rh144_sequencial === 0.0 || $this->rh144_sequencial == "") ){ 
        $this->erro_sql = " Campo rh144_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

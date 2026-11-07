@@ -37,9 +37,9 @@ $db_opcao = 1;
 $db_botao = true;
 if(isset($incluir)){
   db_inicio_transacao();
-  $arr_dados_iframe = split("\|", $anos_perc_inf);
+  $arr_dados_iframe = preg_split("#\\|#m", $anos_perc_inf);
   for($i=0; $i<count($arr_dados_iframe); $i++){
-    $arr_valores = split("-", $arr_dados_iframe[$i]);
+    $arr_valores = preg_split("#\\-#m", $arr_dados_iframe[$i]);
     $anos = $arr_valores[0];
     $perc = $arr_valores[1];
     $car  = $arr_valores[2];

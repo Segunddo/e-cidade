@@ -50,7 +50,7 @@ class cl_rhtipomedia {
                  rh29_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_rhtipomedia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhtipomedia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_rhtipomedia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh29_tipo = ($this->rh29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh29_tipo"]:$this->rh29_tipo);
+       $this->rh29_tipo = ($this->rh29_tipo === 0 || $this->rh29_tipo === 0.0 || $this->rh29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh29_tipo"]:$this->rh29_tipo);
        $this->rh29_descr = ($this->rh29_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh29_descr"]:$this->rh29_descr);
      }else{
-       $this->rh29_tipo = ($this->rh29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh29_tipo"]:$this->rh29_tipo);
+       $this->rh29_tipo = ($this->rh29_tipo === 0 || $this->rh29_tipo === 0.0 || $this->rh29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh29_tipo"]:$this->rh29_tipo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhtipomedia {
        return false;
      }
        $this->rh29_tipo = $rh29_tipo; 
-     if(($this->rh29_tipo == null) || ($this->rh29_tipo == "") ){ 
+     if(($this->rh29_tipo == null) || ($this->rh29_tipo === 0 || $this->rh29_tipo === 0.0 || $this->rh29_tipo == "") ){ 
        $this->erro_sql = " Campo rh29_tipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_rhtipomedia {
    function sql_query ( $rh29_tipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -326,7 +326,7 @@ class cl_rhtipomedia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -338,7 +338,7 @@ class cl_rhtipomedia {
    function sql_query_file ( $rh29_tipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -359,7 +359,7 @@ class cl_rhtipomedia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

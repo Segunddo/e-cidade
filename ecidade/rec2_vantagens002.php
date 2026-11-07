@@ -212,7 +212,7 @@ $condicaoaux = " where h19_tipo = ".db_sqlformat( $tipo_vantagem );
 global $protelac,$tipoasse;
 db_selectmax("protelac","select * from protelac ".$condicaoaux." order by h19_assent, h19_tipo" );
 
-for($Iprotelac=0;$Iprotelac< count($protelac);$Iprotelac++){
+for($Iprotelac=0;$Iprotelac< count((array)$protelac);$Iprotelac++){
       $i++;
       $tab_protelac[$i] = $protelac[$Iprotelac]["h19_assent"];
       $tab_soma[$i] = 1;
@@ -586,8 +586,8 @@ if( strtolower($tipo_vantagem) == strtolower($leis[0]["h08_tipo"]) ){
             $mar1[05] = "wv_anos";
             $mar1[06] = "wv_perc";
             $mar1[07] = "wv_tipo";
-            $mar1[08] = "wv_protel";
-            $mar1[09] = "wv_inf";
+            $mar1[0] = "wv_protel";  // octal invalido: no 5.6 08 e 09 valem 0 (preservado)
+            $mar1[0] = "wv_inf";
             $mar1[10] = "wv_lei";
             $mar1[11] = "wv_nome";
             
@@ -598,8 +598,8 @@ if( strtolower($tipo_vantagem) == strtolower($leis[0]["h08_tipo"]) ){
             $mar2[05] = $anos_perc;
             $mar2[06] = $percentual;
             $mar2[07] = $tipo_vantagem;
-            $mar2[08] = $dias_protelar;
-            $mar2[09] = $inform;
+            $mar2[0] = $dias_protelar;  // octal invalido: no 5.6 08 e 09 valem 0 (preservado)
+            $mar2[0] = $inform;
             $mar2[10] = bb_space(6);
             $mar2[11] = $cgm[0]["z01_nome"];
             

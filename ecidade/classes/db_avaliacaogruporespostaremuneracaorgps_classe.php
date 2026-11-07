@@ -49,13 +49,13 @@ class cl_avaliacaogruporespostaremuneracaorgps
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->eso28_sequencial = ($this->eso28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_sequencial"]:$this->eso28_sequencial);
-       $this->eso28_avaliacaogruporesposta = ($this->eso28_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_avaliacaogruporesposta"]:$this->eso28_avaliacaogruporesposta);
-       $this->eso28_cgm = ($this->eso28_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_cgm"]:$this->eso28_cgm);
-       $this->eso28_ano = ($this->eso28_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_ano"]:$this->eso28_ano);
-       $this->eso28_mes = ($this->eso28_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_mes"]:$this->eso28_mes);
+       $this->eso28_sequencial = ($this->eso28_sequencial === 0 || $this->eso28_sequencial === 0.0 || $this->eso28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_sequencial"]:$this->eso28_sequencial);
+       $this->eso28_avaliacaogruporesposta = ($this->eso28_avaliacaogruporesposta === 0 || $this->eso28_avaliacaogruporesposta === 0.0 || $this->eso28_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_avaliacaogruporesposta"]:$this->eso28_avaliacaogruporesposta);
+       $this->eso28_cgm = ($this->eso28_cgm === 0 || $this->eso28_cgm === 0.0 || $this->eso28_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_cgm"]:$this->eso28_cgm);
+       $this->eso28_ano = ($this->eso28_ano === 0 || $this->eso28_ano === 0.0 || $this->eso28_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_ano"]:$this->eso28_ano);
+       $this->eso28_mes = ($this->eso28_mes === 0 || $this->eso28_mes === 0.0 || $this->eso28_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_mes"]:$this->eso28_mes);
      }else{
-       $this->eso28_sequencial = ($this->eso28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_sequencial"]:$this->eso28_sequencial);
+       $this->eso28_sequencial = ($this->eso28_sequencial === 0 || $this->eso28_sequencial === 0.0 || $this->eso28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["eso28_sequencial"]:$this->eso28_sequencial);
      }
    }
 
@@ -122,7 +122,7 @@ class cl_avaliacaogruporespostaremuneracaorgps
          $this->eso28_sequencial = $eso28_sequencial; 
        }
      }
-     if(($this->eso28_sequencial == null) || ($this->eso28_sequencial == "") ){ 
+     if(($this->eso28_sequencial == null) || ($this->eso28_sequencial === 0 || $this->eso28_sequencial === 0.0 || $this->eso28_sequencial == "") ){ 
        $this->erro_sql = " Campo eso28_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

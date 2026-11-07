@@ -35,7 +35,8 @@ include(modification("classes/db_issbase_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("libs/db_sql.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //echo "<BR><BR>".$HTTP_SERVER_VARS['QUERY_STRING'];
 //db_postmemory($HTTP_POST_VARS,2);
 $clcgm = new cl_cgm;
@@ -305,7 +306,8 @@ function js_relatorio(){
                           <input class="btcols" type="text" name="z01_numcgm" value="<?=@$z01_numcgm?>" size="5" readonly> 
                           &nbsp;&nbsp;&nbsp; 
                           <?
-					      parse_str($arg);
+					      parse_str($arg, $__qs);
+                          extract($__qs);
 					      $Label = "<a href='' onclick='js_mostrapessoal();return false;'>$Lr01_regist</a>";
 					      echo "<strong style=\"color:blue\">$Label</strong> <input style=\"border: 1px solid blue;font-weight: bold;background-color:#80E6FF\" class=\"btcols\" type=\"text\" name=\"Label\" value=\"".@$matric.@$inscr.@$numpre.@$Parcelamento."\" size=\"10\" readonly>\n";
 					      ?>

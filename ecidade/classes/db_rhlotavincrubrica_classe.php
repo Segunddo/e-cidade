@@ -47,12 +47,12 @@ class cl_rhlotavincrubrica
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh239_sequencial = ($this->rh239_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh239_sequencial"]:$this->rh239_sequencial);
-       $this->rh239_rhlota = ($this->rh239_rhlota == ""?@$GLOBALS["HTTP_POST_VARS"]["rh239_rhlota"]:$this->rh239_rhlota);
+       $this->rh239_sequencial = ($this->rh239_sequencial === 0 || $this->rh239_sequencial === 0.0 || $this->rh239_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh239_sequencial"]:$this->rh239_sequencial);
+       $this->rh239_rhlota = ($this->rh239_rhlota === 0 || $this->rh239_rhlota === 0.0 || $this->rh239_rhlota == ""?@$GLOBALS["HTTP_POST_VARS"]["rh239_rhlota"]:$this->rh239_rhlota);
        $this->rh239_rhrubricas = ($this->rh239_rhrubricas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh239_rhrubricas"]:$this->rh239_rhrubricas);
-       $this->rh239_instituicao = ($this->rh239_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh239_instituicao"]:$this->rh239_instituicao);
+       $this->rh239_instituicao = ($this->rh239_instituicao === 0 || $this->rh239_instituicao === 0.0 || $this->rh239_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh239_instituicao"]:$this->rh239_instituicao);
      }else{
-       $this->rh239_sequencial = ($this->rh239_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh239_sequencial"]:$this->rh239_sequencial);
+       $this->rh239_sequencial = ($this->rh239_sequencial === 0 || $this->rh239_sequencial === 0.0 || $this->rh239_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh239_sequencial"]:$this->rh239_sequencial);
      }
    }
 
@@ -110,7 +110,7 @@ class cl_rhlotavincrubrica
          $this->rh239_sequencial = $rh239_sequencial; 
        }
      }
-     if(($this->rh239_sequencial == null) || ($this->rh239_sequencial == "") ){ 
+     if(($this->rh239_sequencial == null) || ($this->rh239_sequencial === 0 || $this->rh239_sequencial === 0.0 || $this->rh239_sequencial == "") ){ 
        $this->erro_sql = " Campo rh239_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

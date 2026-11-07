@@ -68,7 +68,7 @@ class cl_rhipe {
                  rh14_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_rhipe() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhipe"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,9 +85,9 @@ class cl_rhipe {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh14_instit = ($this->rh14_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_instit"]:$this->rh14_instit);
-       $this->rh14_sequencia = ($this->rh14_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_sequencia"]:$this->rh14_sequencia);
-       $this->rh14_matipe = ($this->rh14_matipe == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_matipe"]:$this->rh14_matipe);
+       $this->rh14_instit = ($this->rh14_instit === 0 || $this->rh14_instit === 0.0 || $this->rh14_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_instit"]:$this->rh14_instit);
+       $this->rh14_sequencia = ($this->rh14_sequencia === 0 || $this->rh14_sequencia === 0.0 || $this->rh14_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_sequencia"]:$this->rh14_sequencia);
+       $this->rh14_matipe = ($this->rh14_matipe === 0 || $this->rh14_matipe === 0.0 || $this->rh14_matipe == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_matipe"]:$this->rh14_matipe);
        if($this->rh14_dtvinc == ""){
          $this->rh14_dtvinc_dia = ($this->rh14_dtvinc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_dtvinc_dia"]:$this->rh14_dtvinc_dia);
          $this->rh14_dtvinc_mes = ($this->rh14_dtvinc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_dtvinc_mes"]:$this->rh14_dtvinc_mes);
@@ -105,10 +105,10 @@ class cl_rhipe {
             $this->rh14_dtalt = $this->rh14_dtalt_ano."-".$this->rh14_dtalt_mes."-".$this->rh14_dtalt_dia;
          }
        }
-       $this->rh14_contrato = ($this->rh14_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_contrato"]:$this->rh14_contrato);
-       $this->rh14_valor = ($this->rh14_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_valor"]:$this->rh14_valor);
+       $this->rh14_contrato = ($this->rh14_contrato === 0 || $this->rh14_contrato === 0.0 || $this->rh14_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_contrato"]:$this->rh14_contrato);
+       $this->rh14_valor = ($this->rh14_valor === 0 || $this->rh14_valor === 0.0 || $this->rh14_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_valor"]:$this->rh14_valor);
      }else{
-       $this->rh14_sequencia = ($this->rh14_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_sequencia"]:$this->rh14_sequencia);
+       $this->rh14_sequencia = ($this->rh14_sequencia === 0 || $this->rh14_sequencia === 0.0 || $this->rh14_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_sequencia"]:$this->rh14_sequencia);
      }
    }
    // funcao para inclusao
@@ -174,7 +174,7 @@ class cl_rhipe {
          $this->rh14_sequencia = $rh14_sequencia; 
        }
      }
-     if(($this->rh14_sequencia == null) || ($this->rh14_sequencia == "") ){ 
+     if(($this->rh14_sequencia == null) || ($this->rh14_sequencia === 0 || $this->rh14_sequencia === 0.0 || $this->rh14_sequencia == "") ){ 
        $this->erro_sql = " Campo rh14_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -484,7 +484,7 @@ class cl_rhipe {
    function sql_query ( $rh14_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -507,7 +507,7 @@ class cl_rhipe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -519,7 +519,7 @@ class cl_rhipe {
    function sql_query_file ( $rh14_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -540,7 +540,7 @@ class cl_rhipe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_rhipe {
    function sql_query_cons ( $rh14_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -579,7 +579,7 @@ class cl_rhipe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -591,7 +591,7 @@ class cl_rhipe {
    function sql_query_ipe ( $rh14_sequencia=null,$campos="*",$ordem=null,$dbwhere="",$ano="",$mes=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -624,7 +624,7 @@ class cl_rhipe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

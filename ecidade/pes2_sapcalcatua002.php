@@ -34,7 +34,8 @@ $clrotulo->label('r06_descr');
 $clrotulo->label('r06_elemen');
 $clrotulo->label('r06_pd');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $where = '';
@@ -95,7 +96,7 @@ order by z01_nome
 
 $result = db_query($sql);
 //db_criatabela($result);exit;
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Códigos cadastrados no período de '.$mes.' / '.$ano);
 
@@ -137,9 +138,9 @@ for($x = 0; $x < pg_numrows($result);$x++){
 	     where rh31_gparen = 'C' 
 	       and rh31_regist = $rh01_regist 
 	     limit 1";
-				 
+
     $res1 = db_query($sql1);
-    
+
     if(pg_numrows($res1) > 0){
       db_fieldsmemory($res1,0);
     }else{
@@ -152,9 +153,9 @@ for($x = 0; $x < pg_numrows($result);$x++){
 	       and rh31_regist = $rh01_regist 
 	       order by rh31_dtnasc desc
 	     limit 1";
-				 
+
     $res3 = db_query($sql3);
-    
+
     if(pg_numrows($res3) > 0){
       db_fieldsmemory($res3,0);
     }else{

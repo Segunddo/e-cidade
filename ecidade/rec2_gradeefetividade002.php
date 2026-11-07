@@ -38,7 +38,7 @@ db_postmemory($HTTP_GET_VARS);
 
 $subpes = db_anofolha().'/'.db_mesfolha();
 
-$tipos = split(",", $tipos);
+$tipos = preg_split("#,#m", $tipos);
 //echo "<BR> tipos --> ".print_r($tipos);
 
 if($pcount == 3){

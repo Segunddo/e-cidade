@@ -60,7 +60,7 @@ class cl_rhpagatra {
                  rh57_tipoatra = int4 = Tipo de Atraso 
                  ";
    //funcao construtor da classe 
-   function cl_rhpagatra() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhpagatra"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_rhpagatra {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh57_seq = ($this->rh57_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_seq"]:$this->rh57_seq);
-       $this->rh57_ano = ($this->rh57_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_ano"]:$this->rh57_ano);
-       $this->rh57_mes = ($this->rh57_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_mes"]:$this->rh57_mes);
-       $this->rh57_regist = ($this->rh57_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_regist"]:$this->rh57_regist);
-       $this->rh57_valorini = ($this->rh57_valorini == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_valorini"]:$this->rh57_valorini);
-       $this->rh57_saldo = ($this->rh57_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_saldo"]:$this->rh57_saldo);
-       $this->rh57_tipoatra = ($this->rh57_tipoatra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_tipoatra"]:$this->rh57_tipoatra);
+       $this->rh57_seq = ($this->rh57_seq === 0 || $this->rh57_seq === 0.0 || $this->rh57_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_seq"]:$this->rh57_seq);
+       $this->rh57_ano = ($this->rh57_ano === 0 || $this->rh57_ano === 0.0 || $this->rh57_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_ano"]:$this->rh57_ano);
+       $this->rh57_mes = ($this->rh57_mes === 0 || $this->rh57_mes === 0.0 || $this->rh57_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_mes"]:$this->rh57_mes);
+       $this->rh57_regist = ($this->rh57_regist === 0 || $this->rh57_regist === 0.0 || $this->rh57_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_regist"]:$this->rh57_regist);
+       $this->rh57_valorini = ($this->rh57_valorini === 0 || $this->rh57_valorini === 0.0 || $this->rh57_valorini == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_valorini"]:$this->rh57_valorini);
+       $this->rh57_saldo = ($this->rh57_saldo === 0 || $this->rh57_saldo === 0.0 || $this->rh57_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_saldo"]:$this->rh57_saldo);
+       $this->rh57_tipoatra = ($this->rh57_tipoatra === 0 || $this->rh57_tipoatra === 0.0 || $this->rh57_tipoatra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_tipoatra"]:$this->rh57_tipoatra);
      }else{
-       $this->rh57_seq = ($this->rh57_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_seq"]:$this->rh57_seq);
+       $this->rh57_seq = ($this->rh57_seq === 0 || $this->rh57_seq === 0.0 || $this->rh57_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_seq"]:$this->rh57_seq);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_rhpagatra {
          $this->rh57_seq = $rh57_seq; 
        }
      }
-     if(($this->rh57_seq == null) || ($this->rh57_seq == "") ){ 
+     if(($this->rh57_seq == null) || ($this->rh57_seq === 0 || $this->rh57_seq === 0.0 || $this->rh57_seq == "") ){ 
        $this->erro_sql = " Campo rh57_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -483,7 +483,7 @@ class cl_rhpagatra {
    function sql_query ( $rh57_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -515,7 +515,7 @@ class cl_rhpagatra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_rhpagatra {
    function sql_query_file ( $rh57_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -548,7 +548,7 @@ class cl_rhpagatra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -560,7 +560,7 @@ class cl_rhpagatra {
    function sql_query_tipoatras ( $rh57_seq=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -588,7 +588,7 @@ class cl_rhpagatra {
      $sql2 = "";
      if($dbgroupby != null ){
        $sql .= " group by ";
-       $campos_sql = split("#",$dbgroupby);
+       $campos_sql = preg_split("#\\##m",$dbgroupby);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -603,7 +603,7 @@ class cl_rhpagatra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -612,10 +612,10 @@ class cl_rhpagatra {
      }
      return $sql;
   }
-   function sql_query_relatorio ( $rh57_seq=null,$campos="*",$ordem=null,$dbwhere="",$dbhaving="",$dbgroupby=null,$ano, $mes){ 
+   function sql_query_relatorio ( $rh57_seq=null,$campos="*",$ordem=null,$dbwhere="",$dbhaving="",$dbgroupby=null,$ano = null, $mes = null){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -656,7 +656,7 @@ class cl_rhpagatra {
      $sql2 = "";
      if($dbgroupby != null ){
        $sql .= " group by ";
-       $campos_sql = split("#",$dbgroupby);
+       $campos_sql = preg_split("#\\##m",$dbgroupby);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -671,7 +671,7 @@ class cl_rhpagatra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -683,7 +683,7 @@ class cl_rhpagatra {
    function sql_query_tipocgm ( $rh57_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -707,7 +707,7 @@ class cl_rhpagatra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -719,7 +719,7 @@ class cl_rhpagatra {
    function sql_query_rhpesjustica ( $rh57_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -741,7 +741,7 @@ class cl_rhpagatra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -753,7 +753,7 @@ class cl_rhpagatra {
    function sql_query_notjustica ( $rh57_seq=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -782,7 +782,7 @@ class cl_rhpagatra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -46,7 +46,7 @@ $aRetorno['lErro']        = true;
 $aRetorno['aBases']       = null;
 $aRetorno["lErroConexao"] = false;
 
-$vetor_ip = split(":",$oParam->iIp);
+$vetor_ip = preg_split("#:#m",$oParam->iIp);
 if (count($vetor_ip) == 1){
   $aRetorno['iIpAnterior']  = $oParam->iIp;
 }else{

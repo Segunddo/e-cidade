@@ -79,7 +79,7 @@ class cl_afasta
                  ";
 
     //funcao construtor da classe
-    function cl_afasta()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("afasta");
@@ -101,10 +101,10 @@ class cl_afasta
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->r45_codigo = ($this->r45_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_codigo"] : $this->r45_codigo);
-            $this->r45_anousu = ($this->r45_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_anousu"] : $this->r45_anousu);
-            $this->r45_mesusu = ($this->r45_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_mesusu"] : $this->r45_mesusu);
-            $this->r45_regist = ($this->r45_regist == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_regist"] : $this->r45_regist);
+            $this->r45_codigo = ($this->r45_codigo === 0 || $this->r45_codigo === 0.0 || $this->r45_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_codigo"] : $this->r45_codigo);
+            $this->r45_anousu = ($this->r45_anousu === 0 || $this->r45_anousu === 0.0 || $this->r45_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_anousu"] : $this->r45_anousu);
+            $this->r45_mesusu = ($this->r45_mesusu === 0 || $this->r45_mesusu === 0.0 || $this->r45_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_mesusu"] : $this->r45_mesusu);
+            $this->r45_regist = ($this->r45_regist === 0 || $this->r45_regist === 0.0 || $this->r45_regist == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_regist"] : $this->r45_regist);
             if ($this->r45_dtafas == "") {
                 $this->r45_dtafas_dia = ($this->r45_dtafas_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_dtafas_dia"] : $this->r45_dtafas_dia);
                 $this->r45_dtafas_mes = ($this->r45_dtafas_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_dtafas_mes"] : $this->r45_dtafas_mes);
@@ -121,7 +121,7 @@ class cl_afasta
                     $this->r45_dtreto = $this->r45_dtreto_ano . "-" . $this->r45_dtreto_mes . "-" . $this->r45_dtreto_dia;
                 }
             }
-            $this->r45_situac = ($this->r45_situac == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_situac"] : $this->r45_situac);
+            $this->r45_situac = ($this->r45_situac === 0 || $this->r45_situac === 0.0 || $this->r45_situac == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_situac"] : $this->r45_situac);
             if ($this->r45_dtlanc == "") {
                 $this->r45_dtlanc_dia = ($this->r45_dtlanc_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_dtlanc_dia"] : $this->r45_dtlanc_dia);
                 $this->r45_dtlanc_mes = ($this->r45_dtlanc_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_dtlanc_mes"] : $this->r45_dtlanc_mes);
@@ -134,7 +134,7 @@ class cl_afasta
             $this->r45_codret = ($this->r45_codret == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_codret"] : $this->r45_codret);
             $this->r45_obs = ($this->r45_obs == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_obs"] : $this->r45_obs);
         } else {
-            $this->r45_codigo = ($this->r45_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_codigo"] : $this->r45_codigo);
+            $this->r45_codigo = ($this->r45_codigo === 0 || $this->r45_codigo === 0.0 || $this->r45_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["r45_codigo"] : $this->r45_codigo);
         }
     }
 
@@ -261,7 +261,7 @@ class cl_afasta
                 $this->r45_codigo = $r45_codigo;
             }
         }
-        if (($this->r45_codigo == null) || ($this->r45_codigo == "")) {
+        if (($this->r45_codigo == null) || ($this->r45_codigo === 0 || $this->r45_codigo === 0.0 || $this->r45_codigo == "")) {
             $this->erro_sql = " Campo r45_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

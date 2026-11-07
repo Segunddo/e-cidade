@@ -52,7 +52,7 @@ class cl_portariatipodoccoletiva {
                  h38_modportariacoletiva = int4 = Modelo Portaria Coletiva 
                  ";
    //funcao construtor da classe 
-   function cl_portariatipodoccoletiva() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("portariatipodoccoletiva"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_portariatipodoccoletiva {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h38_sequencial = ($this->h38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h38_sequencial"]:$this->h38_sequencial);
-       $this->h38_portariatipo = ($this->h38_portariatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h38_portariatipo"]:$this->h38_portariatipo);
-       $this->h38_modportariacoletiva = ($this->h38_modportariacoletiva == ""?@$GLOBALS["HTTP_POST_VARS"]["h38_modportariacoletiva"]:$this->h38_modportariacoletiva);
+       $this->h38_sequencial = ($this->h38_sequencial === 0 || $this->h38_sequencial === 0.0 || $this->h38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h38_sequencial"]:$this->h38_sequencial);
+       $this->h38_portariatipo = ($this->h38_portariatipo === 0 || $this->h38_portariatipo === 0.0 || $this->h38_portariatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h38_portariatipo"]:$this->h38_portariatipo);
+       $this->h38_modportariacoletiva = ($this->h38_modportariacoletiva === 0 || $this->h38_modportariacoletiva === 0.0 || $this->h38_modportariacoletiva == ""?@$GLOBALS["HTTP_POST_VARS"]["h38_modportariacoletiva"]:$this->h38_modportariacoletiva);
      }else{
-       $this->h38_sequencial = ($this->h38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h38_sequencial"]:$this->h38_sequencial);
+       $this->h38_sequencial = ($this->h38_sequencial === 0 || $this->h38_sequencial === 0.0 || $this->h38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h38_sequencial"]:$this->h38_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_portariatipodoccoletiva {
          $this->h38_sequencial = $h38_sequencial; 
        }
      }
-     if(($this->h38_sequencial == null) || ($this->h38_sequencial == "") ){ 
+     if(($this->h38_sequencial == null) || ($this->h38_sequencial === 0 || $this->h38_sequencial === 0.0 || $this->h38_sequencial == "") ){ 
        $this->erro_sql = " Campo h38_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

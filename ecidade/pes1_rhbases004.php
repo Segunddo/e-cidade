@@ -53,7 +53,7 @@ if(isset($incluir)){
     $sqlerro=true;
   }  
   if($sqlerro == false && trim($sselecionados) != ""){
-    $arr_dados = split(",",$sselecionados);
+    $arr_dados = preg_split("#,#m",$sselecionados);
     for($i=0;$i<sizeof($arr_dados);$i++){
       $base = $arr_dados[$i];
       $clbasesr->incluir($anousu,$mesusu,$base,$r09_rubric,db_getsession("DB_instit"));      

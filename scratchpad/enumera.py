@@ -41,6 +41,18 @@ RX_NEW = re.compile(rb'new\s+(cl_\w+)', re.I)
 # PHP4 inicializa $this->rotulo, e sem ele a tela morre com label() on null.
 RX_DAO = re.compile(rb'''getDao\s*\(\s*['"]([A-Za-z0-9_]+)['"]''', re.I)
 RX_STR = re.compile(rb'["\']([A-Za-z0-9_]+\.(?:RPC\.)?php)["\']')
+# 13a lacuna: classes de model/ e std/ usadas por `new Classe` ou `Classe::metodo()` sao
+# carregadas pelo AUTOLOADER, sem include -- nenhuma frente as via. Achada porque o calculo
+# da folha morreu em AjustePrevidencia::...; escondia 5 classes de folha com LSP e 6 each().
+RX_CLS = re.compile(rb'\bnew\s+([A-Za-z_]\w*)|\b([A-Za-z_]\w*)::')
+MAPA_CLS = {}
+for _raiz in ("model", "std"):
+    for _d, _, _fs in os.walk(_raiz):
+        for _f in _fs:
+            if _f.endswith(".php"):
+                _p = os.path.join(_d, _f)
+                for _m in re.finditer(rb'^\s*(?:abstract\s+|final\s+)?(?:class|interface)\s+(\w+)', open(_p, "rb").read(), re.M):
+                    MAPA_CLS.setdefault(_m.group(1).decode().lower(), _p)
 
 def classes_php4(b):
     """Classes cujo construtor e o metodo homonimo (estilo PHP 4), olhando o corpo de
@@ -73,6 +85,9 @@ def diretas(p):
         q = f"classes/db_{m.group(1).decode('latin1')}_classe.php"
         if not os.path.isfile(q): q = q.lower()   # o nome no codigo pode vir capitalizado
         if os.path.isfile(q): out.add(q)
+    for m in RX_CLS.finditer(b):                       # 13a lacuna: autoload de model/ e std/
+        q = MAPA_CLS.get((m.group(1) or m.group(2)).decode('latin1').lower())
+        if q: out.add(q)
     _c[p] = out
     return out
 

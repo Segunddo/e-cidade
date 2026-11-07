@@ -171,7 +171,7 @@ $clgerasql  = new cl_gera_sql_folha();
   $sSqlConsultaReg .= "    and r18_tipo   = {$iTipoGera}                                                        ";
 
   $rsConsultaReg = db_query($sSqlConsultaReg);
-  $iLinhasReg    = pg_num_rows($rsConsultaReg);
+  $iLinhasReg    = ($rsConsultaReg ? pg_num_rows($rsConsultaReg) : null);
   
   
   if ( $iLinhasReg ==  0 ) {

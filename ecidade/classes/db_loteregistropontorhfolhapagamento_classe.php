@@ -26,7 +26,7 @@ class cl_loteregistropontorhfolhapagamento {
                  rh162_rhfolhapagamento = int4 = Folha de Pagamento 
                  ";
    //funcao construtor da classe 
-   function cl_loteregistropontorhfolhapagamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("loteregistropontorhfolhapagamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_loteregistropontorhfolhapagamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh162_sequencial = ($this->rh162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh162_sequencial"]:$this->rh162_sequencial);
-       $this->rh162_loteregistroponto = ($this->rh162_loteregistroponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh162_loteregistroponto"]:$this->rh162_loteregistroponto);
-       $this->rh162_rhfolhapagamento = ($this->rh162_rhfolhapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh162_rhfolhapagamento"]:$this->rh162_rhfolhapagamento);
+       $this->rh162_sequencial = ($this->rh162_sequencial === 0 || $this->rh162_sequencial === 0.0 || $this->rh162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh162_sequencial"]:$this->rh162_sequencial);
+       $this->rh162_loteregistroponto = ($this->rh162_loteregistroponto === 0 || $this->rh162_loteregistroponto === 0.0 || $this->rh162_loteregistroponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh162_loteregistroponto"]:$this->rh162_loteregistroponto);
+       $this->rh162_rhfolhapagamento = ($this->rh162_rhfolhapagamento === 0 || $this->rh162_rhfolhapagamento === 0.0 || $this->rh162_rhfolhapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh162_rhfolhapagamento"]:$this->rh162_rhfolhapagamento);
      }else{
-       $this->rh162_sequencial = ($this->rh162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh162_sequencial"]:$this->rh162_sequencial);
+       $this->rh162_sequencial = ($this->rh162_sequencial === 0 || $this->rh162_sequencial === 0.0 || $this->rh162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh162_sequencial"]:$this->rh162_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_loteregistropontorhfolhapagamento {
          $this->rh162_sequencial = $rh162_sequencial; 
        }
      }
-     if(($this->rh162_sequencial == null) || ($this->rh162_sequencial == "") ){ 
+     if(($this->rh162_sequencial == null) || ($this->rh162_sequencial === 0 || $this->rh162_sequencial === 0.0 || $this->rh162_sequencial == "") ){ 
        $this->erro_sql = " Campo rh162_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

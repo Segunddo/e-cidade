@@ -26,7 +26,7 @@ class cl_assentaloteregistroponto {
                  rh160_assentamento = int4 = Assentamento 
                  ";
    //funcao construtor da classe 
-   function cl_assentaloteregistroponto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("assentaloteregistroponto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_assentaloteregistroponto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh160_sequencial = ($this->rh160_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh160_sequencial"]:$this->rh160_sequencial);
-       $this->rh160_loteregistroponto = ($this->rh160_loteregistroponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh160_loteregistroponto"]:$this->rh160_loteregistroponto);
-       $this->rh160_assentamento = ($this->rh160_assentamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh160_assentamento"]:$this->rh160_assentamento);
+       $this->rh160_sequencial = ($this->rh160_sequencial === 0 || $this->rh160_sequencial === 0.0 || $this->rh160_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh160_sequencial"]:$this->rh160_sequencial);
+       $this->rh160_loteregistroponto = ($this->rh160_loteregistroponto === 0 || $this->rh160_loteregistroponto === 0.0 || $this->rh160_loteregistroponto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh160_loteregistroponto"]:$this->rh160_loteregistroponto);
+       $this->rh160_assentamento = ($this->rh160_assentamento === 0 || $this->rh160_assentamento === 0.0 || $this->rh160_assentamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh160_assentamento"]:$this->rh160_assentamento);
      }else{
-       $this->rh160_sequencial = ($this->rh160_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh160_sequencial"]:$this->rh160_sequencial);
+       $this->rh160_sequencial = ($this->rh160_sequencial === 0 || $this->rh160_sequencial === 0.0 || $this->rh160_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh160_sequencial"]:$this->rh160_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_assentaloteregistroponto {
          $this->rh160_sequencial = $rh160_sequencial; 
        }
      }
-     if(($this->rh160_sequencial == null) || ($this->rh160_sequencial == "") ){ 
+     if(($this->rh160_sequencial == null) || ($this->rh160_sequencial === 0 || $this->rh160_sequencial === 0.0 || $this->rh160_sequencial == "") ){ 
        $this->erro_sql = " Campo rh160_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

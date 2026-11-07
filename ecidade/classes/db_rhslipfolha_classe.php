@@ -64,7 +64,7 @@ class cl_rhslipfolha {
                  rh79_concarpeculiar = varchar(100) = Caracteristica Peculiar
                  ";
    //funcao construtor da classe
-   function cl_rhslipfolha() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhslipfolha");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_rhslipfolha {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh79_sequencial = ($this->rh79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_sequencial"]:$this->rh79_sequencial);
-       $this->rh79_recurso = ($this->rh79_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_recurso"]:$this->rh79_recurso);
-       $this->rh79_anousu = ($this->rh79_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_anousu"]:$this->rh79_anousu);
-       $this->rh79_mesusu = ($this->rh79_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_mesusu"]:$this->rh79_mesusu);
+       $this->rh79_sequencial = ($this->rh79_sequencial === 0 || $this->rh79_sequencial === 0.0 || $this->rh79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_sequencial"]:$this->rh79_sequencial);
+       $this->rh79_recurso = ($this->rh79_recurso === 0 || $this->rh79_recurso === 0.0 || $this->rh79_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_recurso"]:$this->rh79_recurso);
+       $this->rh79_anousu = ($this->rh79_anousu === 0 || $this->rh79_anousu === 0.0 || $this->rh79_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_anousu"]:$this->rh79_anousu);
+       $this->rh79_mesusu = ($this->rh79_mesusu === 0 || $this->rh79_mesusu === 0.0 || $this->rh79_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_mesusu"]:$this->rh79_mesusu);
        $this->rh79_siglaarq = ($this->rh79_siglaarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_siglaarq"]:$this->rh79_siglaarq);
-       $this->rh79_tipoempenho = ($this->rh79_tipoempenho == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_tipoempenho"]:$this->rh79_tipoempenho);
-       $this->rh79_tabprev = ($this->rh79_tabprev == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_tabprev"]:$this->rh79_tabprev);
-       $this->rh79_seqcompl = ($this->rh79_seqcompl == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_seqcompl"]:$this->rh79_seqcompl);
+       $this->rh79_tipoempenho = ($this->rh79_tipoempenho === 0 || $this->rh79_tipoempenho === 0.0 || $this->rh79_tipoempenho == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_tipoempenho"]:$this->rh79_tipoempenho);
+       $this->rh79_tabprev = ($this->rh79_tabprev === 0 || $this->rh79_tabprev === 0.0 || $this->rh79_tabprev == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_tabprev"]:$this->rh79_tabprev);
+       $this->rh79_seqcompl = ($this->rh79_seqcompl === 0 || $this->rh79_seqcompl === 0.0 || $this->rh79_seqcompl == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_seqcompl"]:$this->rh79_seqcompl);
        $this->rh79_concarpeculiar = ($this->rh79_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_concarpeculiar"]:$this->rh79_concarpeculiar);
      }else{
-       $this->rh79_sequencial = ($this->rh79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_sequencial"]:$this->rh79_sequencial);
+       $this->rh79_sequencial = ($this->rh79_sequencial === 0 || $this->rh79_sequencial === 0.0 || $this->rh79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh79_sequencial"]:$this->rh79_sequencial);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_rhslipfolha {
          $this->rh79_sequencial = $rh79_sequencial;
        }
      }
-     if(($this->rh79_sequencial == null) || ($this->rh79_sequencial == "") ){
+     if(($this->rh79_sequencial == null) || ($this->rh79_sequencial === 0 || $this->rh79_sequencial === 0.0 || $this->rh79_sequencial == "") ){
        $this->erro_sql = " Campo rh79_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -546,7 +546,7 @@ class cl_rhslipfolha {
    function sql_query ( $rh79_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -570,7 +570,7 @@ class cl_rhslipfolha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -583,7 +583,7 @@ class cl_rhslipfolha {
    function sql_query_file ( $rh79_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -604,7 +604,7 @@ class cl_rhslipfolha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -617,7 +617,7 @@ class cl_rhslipfolha {
    function sql_query_rubricas( $rh79_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -641,7 +641,7 @@ class cl_rhslipfolha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -654,7 +654,7 @@ class cl_rhslipfolha {
   function sql_query_slip( $rh79_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -695,7 +695,7 @@ class cl_rhslipfolha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -76,7 +76,7 @@ class cl_rharqbanco {
                  rh34_codigocompromisso = varchar(4) = Código do Compromisso 
                  ";
    //funcao construtor da classe 
-   function cl_rharqbanco() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rharqbanco"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -93,24 +93,24 @@ class cl_rharqbanco {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh34_instit = ($this->rh34_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_instit"]:$this->rh34_instit);
-       $this->rh34_codarq = ($this->rh34_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_codarq"]:$this->rh34_codarq);
+       $this->rh34_instit = ($this->rh34_instit === 0 || $this->rh34_instit === 0.0 || $this->rh34_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_instit"]:$this->rh34_instit);
+       $this->rh34_codarq = ($this->rh34_codarq === 0 || $this->rh34_codarq === 0.0 || $this->rh34_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_codarq"]:$this->rh34_codarq);
        $this->rh34_descr = ($this->rh34_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_descr"]:$this->rh34_descr);
        $this->rh34_codban = ($this->rh34_codban == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_codban"]:$this->rh34_codban);
-       $this->rh34_agencia = ($this->rh34_agencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_agencia"]:$this->rh34_agencia);
+       $this->rh34_agencia = ($this->rh34_agencia === 0 || $this->rh34_agencia === 0.0 || $this->rh34_agencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_agencia"]:$this->rh34_agencia);
        $this->rh34_dvagencia = ($this->rh34_dvagencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_dvagencia"]:$this->rh34_dvagencia);
        $this->rh34_conta = ($this->rh34_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_conta"]:$this->rh34_conta);
        $this->rh34_dvconta = ($this->rh34_dvconta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_dvconta"]:$this->rh34_dvconta);
        $this->rh34_convenio = ($this->rh34_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_convenio"]:$this->rh34_convenio);
-       $this->rh34_sequencial = ($this->rh34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_sequencial"]:$this->rh34_sequencial);
+       $this->rh34_sequencial = ($this->rh34_sequencial === 0 || $this->rh34_sequencial === 0.0 || $this->rh34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_sequencial"]:$this->rh34_sequencial);
        $this->rh34_where = ($this->rh34_where == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_where"]:$this->rh34_where);
        $this->rh34_ativo = ($this->rh34_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh34_ativo"]:$this->rh34_ativo);
        $this->rh34_parametrotransmissaoheader = ($this->rh34_parametrotransmissaoheader == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_parametrotransmissaoheader"]:$this->rh34_parametrotransmissaoheader);
        $this->rh34_parametrotransmissaolote = ($this->rh34_parametrotransmissaolote == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_parametrotransmissaolote"]:$this->rh34_parametrotransmissaolote);
        $this->rh34_codigocompromisso = ($this->rh34_codigocompromisso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_codigocompromisso"]:$this->rh34_codigocompromisso);
      }else{
-       $this->rh34_instit = ($this->rh34_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_instit"]:$this->rh34_instit);
-       $this->rh34_codarq = ($this->rh34_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_codarq"]:$this->rh34_codarq);
+       $this->rh34_instit = ($this->rh34_instit === 0 || $this->rh34_instit === 0.0 || $this->rh34_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_instit"]:$this->rh34_instit);
+       $this->rh34_codarq = ($this->rh34_codarq === 0 || $this->rh34_codarq === 0.0 || $this->rh34_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh34_codarq"]:$this->rh34_codarq);
      }
    }
    // funcao para inclusao
@@ -221,7 +221,7 @@ class cl_rharqbanco {
          $this->rh34_codarq = $rh34_codarq; 
        }
      }
-     if(($this->rh34_codarq == null) || ($this->rh34_codarq == "") ){ 
+     if(($this->rh34_codarq == null) || ($this->rh34_codarq === 0 || $this->rh34_codarq === 0.0 || $this->rh34_codarq == "") ){ 
        $this->erro_sql = " Campo rh34_codarq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -229,7 +229,7 @@ class cl_rharqbanco {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh34_instit == null) || ($this->rh34_instit == "") ){ 
+     if(($this->rh34_instit == null) || ($this->rh34_instit === 0 || $this->rh34_instit === 0.0 || $this->rh34_instit == "") ){ 
        $this->erro_sql = " Campo rh34_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -694,7 +694,7 @@ class cl_rharqbanco {
    function sql_query ( $rh34_codarq=null,$rh34_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -727,7 +727,7 @@ class cl_rharqbanco {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -740,7 +740,7 @@ class cl_rharqbanco {
    function sql_query_file ( $rh34_codarq=null,$rh34_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -769,7 +769,7 @@ class cl_rharqbanco {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

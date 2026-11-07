@@ -32,7 +32,8 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_rhcadcalend_classe.php"));
 include(modification("classes/db_calendf_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clrhcadcalend = new cl_rhcadcalend;
 $clcalendf = new cl_calendf;
@@ -80,7 +81,7 @@ if(isset($alterar) || isset($incluir) || isset($excluir)){
   db_fim_transacao($sqlerro);
 }else if(isset($chavepesquisa) || isset($opcao)){
   if(isset($opcao)){
-    $r62_data = split("/",$r62_data);
+    $r62_data = preg_split("#\\/#m",$r62_data);
     $r62_data = $r62_data[2]."-".$r62_data[1]."-".$r62_data[0];
     $chavepesquisa = $r62_calend;
     $result_data = $clcalendf->sql_record($clcalendf->sql_query_file($chavepesquisa, $r62_data));

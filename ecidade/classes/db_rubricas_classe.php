@@ -106,7 +106,7 @@ class cl_rubricas {
                  r06_instit = int4 = codigo da instituicao 
                  ";
    //funcao construtor da classe 
-   function cl_rubricas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rubricas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -123,15 +123,15 @@ class cl_rubricas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r06_anousu = ($this->r06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_anousu"]:$this->r06_anousu);
-       $this->r06_mesusu = ($this->r06_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_mesusu"]:$this->r06_mesusu);
+       $this->r06_anousu = ($this->r06_anousu === 0 || $this->r06_anousu === 0.0 || $this->r06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_anousu"]:$this->r06_anousu);
+       $this->r06_mesusu = ($this->r06_mesusu === 0 || $this->r06_mesusu === 0.0 || $this->r06_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_mesusu"]:$this->r06_mesusu);
        $this->r06_codigo = ($this->r06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_codigo"]:$this->r06_codigo);
        $this->r06_descr = ($this->r06_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_descr"]:$this->r06_descr);
        $this->r06_pd = ($this->r06_pd == "f"?@$GLOBALS["HTTP_POST_VARS"]["r06_pd"]:$this->r06_pd);
        $this->r06_form = ($this->r06_form == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_form"]:$this->r06_form);
-       $this->r06_quant = ($this->r06_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_quant"]:$this->r06_quant);
+       $this->r06_quant = ($this->r06_quant === 0 || $this->r06_quant === 0.0 || $this->r06_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_quant"]:$this->r06_quant);
        $this->r06_empsn = ($this->r06_empsn == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_empsn"]:$this->r06_empsn);
-       $this->r06_calc = ($this->r06_calc == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_calc"]:$this->r06_calc);
+       $this->r06_calc = ($this->r06_calc === 0 || $this->r06_calc === 0.0 || $this->r06_calc == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_calc"]:$this->r06_calc);
        $this->r06_calc1 = ($this->r06_calc1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_calc1"]:$this->r06_calc1);
        $this->r06_calc2 = ($this->r06_calc2 == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_calc2"]:$this->r06_calc2);
        $this->r06_calc3 = ($this->r06_calc3 == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_calc3"]:$this->r06_calc3);
@@ -145,17 +145,17 @@ class cl_rubricas {
        $this->r06_form3 = ($this->r06_form3 == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_form3"]:$this->r06_form3);
        $this->r06_calcp = ($this->r06_calcp == "f"?@$GLOBALS["HTTP_POST_VARS"]["r06_calcp"]:$this->r06_calcp);
        $this->r06_propq = ($this->r06_propq == "f"?@$GLOBALS["HTTP_POST_VARS"]["r06_propq"]:$this->r06_propq);
-       $this->r06_coluna = ($this->r06_coluna == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_coluna"]:$this->r06_coluna);
+       $this->r06_coluna = ($this->r06_coluna === 0 || $this->r06_coluna === 0.0 || $this->r06_coluna == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_coluna"]:$this->r06_coluna);
        $this->r06_presta = ($this->r06_presta == "f"?@$GLOBALS["HTTP_POST_VARS"]["r06_presta"]:$this->r06_presta);
        $this->r06_efetiv = ($this->r06_efetiv == "f"?@$GLOBALS["HTTP_POST_VARS"]["r06_efetiv"]:$this->r06_efetiv);
        $this->r06_formq = ($this->r06_formq == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_formq"]:$this->r06_formq);
        $this->r06_ccheq = ($this->r06_ccheq == "f"?@$GLOBALS["HTTP_POST_VARS"]["r06_ccheq"]:$this->r06_ccheq);
        $this->r06_repos = ($this->r06_repos == "f"?@$GLOBALS["HTTP_POST_VARS"]["r06_repos"]:$this->r06_repos);
        $this->r06_propi = ($this->r06_propi == "f"?@$GLOBALS["HTTP_POST_VARS"]["r06_propi"]:$this->r06_propi);
-       $this->r06_instit = ($this->r06_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_instit"]:$this->r06_instit);
+       $this->r06_instit = ($this->r06_instit === 0 || $this->r06_instit === 0.0 || $this->r06_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_instit"]:$this->r06_instit);
      }else{
-       $this->r06_anousu = ($this->r06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_anousu"]:$this->r06_anousu);
-       $this->r06_mesusu = ($this->r06_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_mesusu"]:$this->r06_mesusu);
+       $this->r06_anousu = ($this->r06_anousu === 0 || $this->r06_anousu === 0.0 || $this->r06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_anousu"]:$this->r06_anousu);
+       $this->r06_mesusu = ($this->r06_mesusu === 0 || $this->r06_mesusu === 0.0 || $this->r06_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_mesusu"]:$this->r06_mesusu);
        $this->r06_codigo = ($this->r06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r06_codigo"]:$this->r06_codigo);
      }
    }
@@ -174,7 +174,7 @@ class cl_rubricas {
        $this->r06_anousu = $r06_anousu; 
        $this->r06_mesusu = $r06_mesusu; 
        $this->r06_codigo = $r06_codigo; 
-     if(($this->r06_anousu == null) || ($this->r06_anousu == "") ){ 
+     if(($this->r06_anousu == null) || ($this->r06_anousu === 0 || $this->r06_anousu === 0.0 || $this->r06_anousu == "") ){ 
        $this->erro_sql = " Campo r06_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -182,7 +182,7 @@ class cl_rubricas {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r06_mesusu == null) || ($this->r06_mesusu == "") ){ 
+     if(($this->r06_mesusu == null) || ($this->r06_mesusu === 0 || $this->r06_mesusu === 0.0 || $this->r06_mesusu == "") ){ 
        $this->erro_sql = " Campo r06_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -716,7 +716,7 @@ class cl_rubricas {
    function sql_query ( $r06_anousu=null,$r06_mesusu=null,$r06_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -755,7 +755,7 @@ class cl_rubricas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -767,7 +767,7 @@ class cl_rubricas {
    function sql_query_file ( $r06_anousu=null,$r06_mesusu=null,$r06_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -804,7 +804,7 @@ class cl_rubricas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

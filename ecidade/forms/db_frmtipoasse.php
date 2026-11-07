@@ -225,7 +225,7 @@ $opcoesGeraFaltas = array('t'=>'Sim', 'f'=>'Não');
               $rsNaturezaTipoAssentamento   = db_query($sSqlNaturezaTipoAssentamento);
               $aNaturezasTipoassentamento   = array();
 
-              if(is_resource($rsNaturezaTipoAssentamento) && pg_num_rows($rsNaturezaTipoAssentamento) > 0) {
+              if((is_resource($rsNaturezaTipoAssentamento) || is_object($rsNaturezaTipoAssentamento)) && pg_num_rows($rsNaturezaTipoAssentamento) > 0) {
                 for ($iIndNatureza=0; $iIndNatureza < pg_num_rows($rsNaturezaTipoAssentamento); $iIndNatureza++) {
                   $iSequencialNatureza = db_utils::fieldsMemory($rsNaturezaTipoAssentamento, $iIndNatureza)->rh159_sequencial;
                   $sDescricaoNatureza  = db_utils::fieldsMemory($rsNaturezaTipoAssentamento, $iIndNatureza)->rh159_descricao;

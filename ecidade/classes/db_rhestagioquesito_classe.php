@@ -52,7 +52,7 @@ class cl_rhestagioquesito {
                  h51_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_rhestagioquesito() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhestagioquesito"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rhestagioquesito {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h51_sequencial = ($this->h51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h51_sequencial"]:$this->h51_sequencial);
-       $this->h51_rhestagio = ($this->h51_rhestagio == ""?@$GLOBALS["HTTP_POST_VARS"]["h51_rhestagio"]:$this->h51_rhestagio);
+       $this->h51_sequencial = ($this->h51_sequencial === 0 || $this->h51_sequencial === 0.0 || $this->h51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h51_sequencial"]:$this->h51_sequencial);
+       $this->h51_rhestagio = ($this->h51_rhestagio === 0 || $this->h51_rhestagio === 0.0 || $this->h51_rhestagio == ""?@$GLOBALS["HTTP_POST_VARS"]["h51_rhestagio"]:$this->h51_rhestagio);
        $this->h51_descr = ($this->h51_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["h51_descr"]:$this->h51_descr);
      }else{
-       $this->h51_sequencial = ($this->h51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h51_sequencial"]:$this->h51_sequencial);
+       $this->h51_sequencial = ($this->h51_sequencial === 0 || $this->h51_sequencial === 0.0 || $this->h51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h51_sequencial"]:$this->h51_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rhestagioquesito {
          $this->h51_sequencial = $h51_sequencial; 
        }
      }
-     if(($this->h51_sequencial == null) || ($this->h51_sequencial == "") ){ 
+     if(($this->h51_sequencial == null) || ($this->h51_sequencial === 0 || $this->h51_sequencial === 0.0 || $this->h51_sequencial == "") ){ 
        $this->erro_sql = " Campo h51_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_rhestagioquesito {
    function sql_query ( $h51_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_rhestagioquesito {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_rhestagioquesito {
    function sql_query_file ( $h51_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_rhestagioquesito {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

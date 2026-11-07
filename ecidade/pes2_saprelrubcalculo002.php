@@ -34,7 +34,8 @@ $clrotulo->label('rh27_descr');
 $clrotulo->label('rh27_elemen');
 $clrotulo->label('rh27_pd');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 

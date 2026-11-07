@@ -245,7 +245,8 @@ try {
     }
 
     $dataInicial = "{$oParametros->iAno}-{$oParametros->iMes}-01";
-    $dataFinal = "{$oParametros->iAno}-{$oParametros->iMes}-" . cal_days_in_month(CAL_GREGORIAN, $oParametros->iMes, $oParametros->iAno);
+    try { $iDiasMes = cal_days_in_month(CAL_GREGORIAN, $oParametros->iMes, $oParametros->iAno); } catch (Throwable $e) { $iDiasMes = false; } // false no 5.6
+    $dataFinal = "{$oParametros->iAno}-{$oParametros->iMes}-" . $iDiasMes;
 
     $aWhere [] = "((extract(year from r30_per1i) = {$oParametros->iAno} and extract(month from r30_per1i) = {$oParametros->iMes})
                    or (extract(year from r30_per2i) = {$oParametros->iAno} and extract(month from r30_per2i) = {$oParametros->iMes}))";

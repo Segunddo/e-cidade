@@ -43,10 +43,10 @@ class cl_siopequalificacao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->si04_id = ($this->si04_id == ""?@$GLOBALS["HTTP_POST_VARS"]["si04_id"]:$this->si04_id);
+       $this->si04_id = ($this->si04_id === 0 || $this->si04_id === 0.0 || $this->si04_id == ""?@$GLOBALS["HTTP_POST_VARS"]["si04_id"]:$this->si04_id);
        $this->si04_descricao = ($this->si04_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["si04_descricao"]:$this->si04_descricao);
      }else{
-       $this->si04_id = ($this->si04_id == ""?@$GLOBALS["HTTP_POST_VARS"]["si04_id"]:$this->si04_id);
+       $this->si04_id = ($this->si04_id === 0 || $this->si04_id === 0.0 || $this->si04_id == ""?@$GLOBALS["HTTP_POST_VARS"]["si04_id"]:$this->si04_id);
      }
    }
 
@@ -86,7 +86,7 @@ class cl_siopequalificacao
          $this->si04_id = $si04_id; 
        }
      }
-     if(($this->si04_id == null) || ($this->si04_id == "") ){ 
+     if(($this->si04_id == null) || ($this->si04_id === 0 || $this->si04_id === 0.0 || $this->si04_id == "") ){ 
        $this->erro_sql = " Campo si04_id não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

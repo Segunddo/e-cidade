@@ -29,7 +29,8 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_utils.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 ///////////////////////////////////////////////////////////////////////
 $head1 = "RELATÓRIO DE QUADRAS POR ZONAS FISCAIS";

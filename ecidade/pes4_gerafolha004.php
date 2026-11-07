@@ -4310,9 +4310,9 @@ function gerfsal( $opcao_geral=null, $opcao_tipo = TIPO_CALCULO_PARCIAL ) {
     }
 
     if ($opcao_geral == 1) {
-      $quant_pontofs = count($pontofs);
+      $quant_pontofs = count((array)$pontofs);
     } else {
-      $quant_pontofs = count($pontocom);
+      $quant_pontofs = count((array)$pontocom);
     }
     if ($quant_pontofs ==0) {
       if ($opcao_geral == PONTO_SALARIO) {
@@ -7106,7 +7106,7 @@ function le_var_bxxx($formula=null, $area0=null, $area1=null, $sigla=null, $sigl
           $condicaoaux  = " and r53_regist = ".db_sqlformat($r110_regist );
           global $transacao;
           db_selectmax("transacao", "select * from gerffx ".bb_condicaosubpes("r53_" ).$condicaoaux);
-          $iTotalLinhasTransacao = count($transacao);
+          $iTotalLinhasTransacao = count((array)$transacao);
           for ($pos = 0; $pos < $iTotalLinhasTransacao; $pos++) {
             $mrubr[$pos+1] = $transacao[$pos]["r53_rubric"];
           }
@@ -9788,7 +9788,7 @@ function calcula_r928 ($r110_regist,$r110_lotac,$opcao_geral) {
     if ($tot_prov > $tot_desc) {
 
       $r01_rubric = "R926";
-      $tot_liq   = $tot_prov + $salfamilia - $tot_desc;
+      $tot_liq   = ($tot_prov === '' ? 0 : $tot_prov) + $salfamilia - ($tot_desc === '' ? 0 : $tot_desc); // "" em aritmetica: 0 no 5.6, TypeError no 8
       if ($db_debug == true) {
         LogCalculoFolha::write("Total Liquido: $tot_liq Critrio:".$cfpess[0]["r11_arredn"]);
       }

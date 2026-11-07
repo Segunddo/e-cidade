@@ -30,7 +30,7 @@ class cl_esocialenviostatus {
                  rh214_situacao = bool = Situação 
                  ";
    //funcao construtor da classe
-   function cl_esocialenviostatus() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("esocialenviostatus");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_esocialenviostatus {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh214_sequencial = ($this->rh214_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh214_sequencial"]:$this->rh214_sequencial);
-       $this->rh214_esocialenvio = ($this->rh214_esocialenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["rh214_esocialenvio"]:$this->rh214_esocialenvio);
+       $this->rh214_sequencial = ($this->rh214_sequencial === 0 || $this->rh214_sequencial === 0.0 || $this->rh214_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh214_sequencial"]:$this->rh214_sequencial);
+       $this->rh214_esocialenvio = ($this->rh214_esocialenvio === 0 || $this->rh214_esocialenvio === 0.0 || $this->rh214_esocialenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["rh214_esocialenvio"]:$this->rh214_esocialenvio);
        $this->rh214_data = ($this->rh214_data == ""?@$GLOBALS["HTTP_POST_VARS"]["rh214_data"]:$this->rh214_data);
        $this->rh214_descricao = ($this->rh214_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh214_descricao"]:$this->rh214_descricao);
        $this->rh214_situacao = ($this->rh214_situacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh214_situacao"]:$this->rh214_situacao);
      }else{
-       $this->rh214_sequencial = ($this->rh214_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh214_sequencial"]:$this->rh214_sequencial);
+       $this->rh214_sequencial = ($this->rh214_sequencial === 0 || $this->rh214_sequencial === 0.0 || $this->rh214_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh214_sequencial"]:$this->rh214_sequencial);
      }
    }
    // funcao para Inclusão
@@ -110,7 +110,7 @@ class cl_esocialenviostatus {
          $this->rh214_sequencial = $rh214_sequencial;
        }
      }
-     if(($this->rh214_sequencial == null) || ($this->rh214_sequencial == "") ){
+     if(($this->rh214_sequencial == null) || ($this->rh214_sequencial === 0 || $this->rh214_sequencial === 0.0 || $this->rh214_sequencial == "") ){
        $this->erro_sql = " Campo rh214_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

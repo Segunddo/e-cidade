@@ -54,7 +54,7 @@ class cl_lotedist {
                  j54_distan = float8 = Distância 
                  ";
    //funcao construtor da classe 
-   function cl_lotedist() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lotedist"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_lotedist {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j54_idbql = ($this->j54_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j54_idbql"]:$this->j54_idbql);
-       $this->j54_codigo = ($this->j54_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j54_codigo"]:$this->j54_codigo);
-       $this->j54_orientacao = ($this->j54_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j54_orientacao"]:$this->j54_orientacao);
-       $this->j54_distan = ($this->j54_distan == ""?@$GLOBALS["HTTP_POST_VARS"]["j54_distan"]:$this->j54_distan);
+       $this->j54_idbql = ($this->j54_idbql === 0 || $this->j54_idbql === 0.0 || $this->j54_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j54_idbql"]:$this->j54_idbql);
+       $this->j54_codigo = ($this->j54_codigo === 0 || $this->j54_codigo === 0.0 || $this->j54_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j54_codigo"]:$this->j54_codigo);
+       $this->j54_orientacao = ($this->j54_orientacao === 0 || $this->j54_orientacao === 0.0 || $this->j54_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j54_orientacao"]:$this->j54_orientacao);
+       $this->j54_distan = ($this->j54_distan === 0 || $this->j54_distan === 0.0 || $this->j54_distan == ""?@$GLOBALS["HTTP_POST_VARS"]["j54_distan"]:$this->j54_distan);
      }else{
-       $this->j54_idbql = ($this->j54_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j54_idbql"]:$this->j54_idbql);
+       $this->j54_idbql = ($this->j54_idbql === 0 || $this->j54_idbql === 0.0 || $this->j54_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j54_idbql"]:$this->j54_idbql);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_lotedist {
        return false;
      }
        $this->j54_idbql = $j54_idbql; 
-     if(($this->j54_idbql == null) || ($this->j54_idbql == "") ){ 
+     if(($this->j54_idbql == null) || ($this->j54_idbql === 0 || $this->j54_idbql === 0.0 || $this->j54_idbql == "") ){ 
        $this->erro_sql = " Campo j54_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -367,7 +367,7 @@ class cl_lotedist {
    function sql_query ( $j54_idbql=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_lotedist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_lotedist {
    function sql_query_file ( $j54_idbql=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_lotedist {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

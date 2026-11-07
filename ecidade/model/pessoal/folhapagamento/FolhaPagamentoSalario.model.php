@@ -68,7 +68,7 @@ class FolhaPagamentoSalario extends FolhaPagamento {
    * @example FolhaPagamentoSalario::hasFolhaAberta()
    * @return  boolean
    */
-  public static function hasFolhaAberta(DBCompetencia $oCompetencia = null) {
+  public static function hasFolhaAberta($oCompetencia = null, $iTipoFolha = null) {
     return FolhaPagamento::hasFolhaAberta(FolhaPagamento::TIPO_FOLHA_SALARIO, $oCompetencia);
   }
 
@@ -97,7 +97,7 @@ class FolhaPagamentoSalario extends FolhaPagamento {
    * @example  FolhaPagamento:getProximoNumero(FolhaPagamento::TIPO_FOLHA_SALARIO)
    * @return   Integer  Próximo número da folha salário
    */
-  public static function getProximoNumero() {
+  public static function getProximoNumero($iTipoFolha = null) {
     return FolhaPagamento::getProximoNumero(FolhaPagamento::TIPO_FOLHA_SALARIO);
   }
 
@@ -182,7 +182,7 @@ class FolhaPagamentoSalario extends FolhaPagamento {
    * @param  DBCompetencia $oCompetencia Competencia da Folha
    * @return array folhas de pagamentos de salários 
    */
-  public static function getFolhasFechadasCompetencia( DBCompetencia $oCompetencia ) {
+  public static function getFolhasFechadasCompetencia(DBCompetencia $oCompetencia, $iTipoFolha = null) {
     return FolhaPagamento::getFolhasFechadasCompetencia($oCompetencia, FolhaPagamento::TIPO_FOLHA_SALARIO);
   }
 }

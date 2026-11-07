@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_libpessoal.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $e_linux = strpos(strtolower($HTTP_USER_AGENT),'linux') ;
@@ -162,7 +163,7 @@ global $fopag_geracao,
       $func  = 0;
 
       db_criatermometro('calculo_folha','Concluido...','blue',1,'Lendo os não Pagos (PASEP)');
-      for($Ipes=0;$Ipes < count($rhfopag);$Ipes++){
+      for($Ipes=0;$Ipes < count((array)$rhfopag);$Ipes++){
           db_atutermometro($Ipes,count($rhfopag),'calculo_folha',1);
           if ($pdf->gety() > $pdf->h - 30 || $troca != 0 ){
              $pdf->addpage();

@@ -67,7 +67,7 @@ class cl_atolegalprevidenciainssirf {
                  rh180_datainiciovigencia = date = Data de Início de Vigência 
                  ";
    //funcao construtor da classe 
-   function cl_atolegalprevidenciainssirf() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("atolegalprevidenciainssirf"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,12 +84,12 @@ class cl_atolegalprevidenciainssirf {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh180_sequencial = ($this->rh180_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_sequencial"]:$this->rh180_sequencial);
-       $this->rh180_instituicao = ($this->rh180_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_instituicao"]:$this->rh180_instituicao);
-       $this->rh180_inssirf = ($this->rh180_inssirf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_inssirf"]:$this->rh180_inssirf);
-       $this->rh180_atolegal = ($this->rh180_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_atolegal"]:$this->rh180_atolegal);
-       $this->rh180_numero = ($this->rh180_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_numero"]:$this->rh180_numero);
-       $this->rh180_ano = ($this->rh180_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_ano"]:$this->rh180_ano);
+       $this->rh180_sequencial = ($this->rh180_sequencial === 0 || $this->rh180_sequencial === 0.0 || $this->rh180_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_sequencial"]:$this->rh180_sequencial);
+       $this->rh180_instituicao = ($this->rh180_instituicao === 0 || $this->rh180_instituicao === 0.0 || $this->rh180_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_instituicao"]:$this->rh180_instituicao);
+       $this->rh180_inssirf = ($this->rh180_inssirf === 0 || $this->rh180_inssirf === 0.0 || $this->rh180_inssirf == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_inssirf"]:$this->rh180_inssirf);
+       $this->rh180_atolegal = ($this->rh180_atolegal === 0 || $this->rh180_atolegal === 0.0 || $this->rh180_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_atolegal"]:$this->rh180_atolegal);
+       $this->rh180_numero = ($this->rh180_numero === 0 || $this->rh180_numero === 0.0 || $this->rh180_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_numero"]:$this->rh180_numero);
+       $this->rh180_ano = ($this->rh180_ano === 0 || $this->rh180_ano === 0.0 || $this->rh180_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_ano"]:$this->rh180_ano);
        if($this->rh180_datapublicacao == ""){
          $this->rh180_datapublicacao_dia = ($this->rh180_datapublicacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_datapublicacao_dia"]:$this->rh180_datapublicacao_dia);
          $this->rh180_datapublicacao_mes = ($this->rh180_datapublicacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_datapublicacao_mes"]:$this->rh180_datapublicacao_mes);
@@ -107,7 +107,7 @@ class cl_atolegalprevidenciainssirf {
          }
        }
      }else{
-       $this->rh180_sequencial = ($this->rh180_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_sequencial"]:$this->rh180_sequencial);
+       $this->rh180_sequencial = ($this->rh180_sequencial === 0 || $this->rh180_sequencial === 0.0 || $this->rh180_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh180_sequencial"]:$this->rh180_sequencial);
      }
    }
    // funcao para Inclusão
@@ -200,7 +200,7 @@ class cl_atolegalprevidenciainssirf {
          $this->rh180_sequencial = $rh180_sequencial; 
        }
      }
-     if(($this->rh180_sequencial == null) || ($this->rh180_sequencial == "") ){ 
+     if(($this->rh180_sequencial == null) || ($this->rh180_sequencial === 0 || $this->rh180_sequencial === 0.0 || $this->rh180_sequencial == "") ){ 
        $this->erro_sql = " Campo rh180_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

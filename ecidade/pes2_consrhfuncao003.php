@@ -31,7 +31,8 @@ require_once(modification("libs/db_sql.php"));
 require_once(modification("classes/db_rhfuncao_classe.php"));
 require_once(modification("classes/db_rhregime_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 $clrhfuncao = new cl_rhfuncao;
 $clrhregime = new cl_rhregime;
@@ -188,7 +189,7 @@ if(isset($selecao) && !empty($selecao)) {
 
   $result_funcionarios = db_query($sql1);
 
-$numrows = pg_numrows($result_funcionarios);
+$numrows = ($result_funcionarios ? pg_numrows($result_funcionarios) : null);
 if($numrows == 0){
   db_redireciona("db_erros.php?fechar=true&db_erro=Nenhum registro encontrado");
 }

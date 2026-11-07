@@ -59,7 +59,7 @@ class cl_eventofinanceiroautomatico {
                  rh181_instituicao = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_eventofinanceiroautomatico() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("eventofinanceiroautomatico"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,14 +76,14 @@ class cl_eventofinanceiroautomatico {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh181_sequencial = ($this->rh181_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_sequencial"]:$this->rh181_sequencial);
+       $this->rh181_sequencial = ($this->rh181_sequencial === 0 || $this->rh181_sequencial === 0.0 || $this->rh181_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_sequencial"]:$this->rh181_sequencial);
        $this->rh181_descricao = ($this->rh181_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_descricao"]:$this->rh181_descricao);
        $this->rh181_rubrica = ($this->rh181_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_rubrica"]:$this->rh181_rubrica);
-       $this->rh181_mes = ($this->rh181_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_mes"]:$this->rh181_mes);
-       $this->rh181_selecao = ($this->rh181_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_selecao"]:$this->rh181_selecao);
-       $this->rh181_instituicao = ($this->rh181_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_instituicao"]:$this->rh181_instituicao);
+       $this->rh181_mes = ($this->rh181_mes === 0 || $this->rh181_mes === 0.0 || $this->rh181_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_mes"]:$this->rh181_mes);
+       $this->rh181_selecao = ($this->rh181_selecao === 0 || $this->rh181_selecao === 0.0 || $this->rh181_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_selecao"]:$this->rh181_selecao);
+       $this->rh181_instituicao = ($this->rh181_instituicao === 0 || $this->rh181_instituicao === 0.0 || $this->rh181_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_instituicao"]:$this->rh181_instituicao);
      }else{
-       $this->rh181_sequencial = ($this->rh181_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_sequencial"]:$this->rh181_sequencial);
+       $this->rh181_sequencial = ($this->rh181_sequencial === 0 || $this->rh181_sequencial === 0.0 || $this->rh181_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh181_sequencial"]:$this->rh181_sequencial);
      }
    }
    // funcao para Inclusão
@@ -158,7 +158,7 @@ class cl_eventofinanceiroautomatico {
          $this->rh181_sequencial = $rh181_sequencial; 
        }
      }
-     if(($this->rh181_sequencial == null) || ($this->rh181_sequencial == "") ){ 
+     if(($this->rh181_sequencial == null) || ($this->rh181_sequencial === 0 || $this->rh181_sequencial === 0.0 || $this->rh181_sequencial == "") ){ 
        $this->erro_sql = " Campo rh181_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

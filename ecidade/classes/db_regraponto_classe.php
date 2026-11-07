@@ -56,7 +56,7 @@ class cl_regraponto {
                  rh123_comportamento = int4 = Comportamento 
                  ";
    //funcao construtor da classe 
-   function cl_regraponto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("regraponto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_regraponto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh123_sequencial = ($this->rh123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_sequencial"]:$this->rh123_sequencial);
+       $this->rh123_sequencial = ($this->rh123_sequencial === 0 || $this->rh123_sequencial === 0.0 || $this->rh123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_sequencial"]:$this->rh123_sequencial);
        $this->rh123_descricao = ($this->rh123_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_descricao"]:$this->rh123_descricao);
-       $this->rh123_selecao = ($this->rh123_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_selecao"]:$this->rh123_selecao);
-       $this->rh123_instit = ($this->rh123_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_instit"]:$this->rh123_instit);
-       $this->rh123_comportamento = ($this->rh123_comportamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_comportamento"]:$this->rh123_comportamento);
+       $this->rh123_selecao = ($this->rh123_selecao === 0 || $this->rh123_selecao === 0.0 || $this->rh123_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_selecao"]:$this->rh123_selecao);
+       $this->rh123_instit = ($this->rh123_instit === 0 || $this->rh123_instit === 0.0 || $this->rh123_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_instit"]:$this->rh123_instit);
+       $this->rh123_comportamento = ($this->rh123_comportamento === 0 || $this->rh123_comportamento === 0.0 || $this->rh123_comportamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_comportamento"]:$this->rh123_comportamento);
      }else{
-       $this->rh123_sequencial = ($this->rh123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_sequencial"]:$this->rh123_sequencial);
+       $this->rh123_sequencial = ($this->rh123_sequencial === 0 || $this->rh123_sequencial === 0.0 || $this->rh123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_sequencial"]:$this->rh123_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_regraponto {
          $this->rh123_sequencial = $rh123_sequencial; 
        }
      }
-     if(($this->rh123_sequencial == null) || ($this->rh123_sequencial == "") ){ 
+     if(($this->rh123_sequencial == null) || ($this->rh123_sequencial === 0 || $this->rh123_sequencial === 0.0 || $this->rh123_sequencial == "") ){ 
        $this->erro_sql = " Campo rh123_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -444,7 +444,7 @@ class cl_regraponto {
    function sql_query ( $rh123_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_regraponto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_regraponto {
    function sql_query_file ( $rh123_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_regraponto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -31,7 +31,8 @@ include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_protelac_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clprotelac = new cl_protelac;
 $db_opcao = 22;
@@ -48,11 +49,11 @@ if(isset($alterar)){
    for($i=1; $i<11; $i++){
      $campodia = "h19_dia" . ($i < 10 ? ("0" . $i) : $i);
      $campoper = "h19_per" . ($i < 10 ? ("0" . $i) : $i);
-     if(trim($$campodia) == 0){
-       $$campodia = "";
+     if(trim(${$campodia}) == 0){
+       ${$campodia} = "";
      }
-     if(trim($$campoper) == 0){
-       $$campoper = "";
+     if(trim(${$campoper}) == 0){
+       ${$campoper} = "";
      }
    }
    $db_botao = true;

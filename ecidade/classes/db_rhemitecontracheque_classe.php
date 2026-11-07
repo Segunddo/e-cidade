@@ -76,10 +76,10 @@ class cl_rhemitecontracheque
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh85_sequencial = ($this->rh85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_sequencial"]:$this->rh85_sequencial);
-       $this->rh85_regist = ($this->rh85_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_regist"]:$this->rh85_regist);
-       $this->rh85_anousu = ($this->rh85_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_anousu"]:$this->rh85_anousu);
-       $this->rh85_mesusu = ($this->rh85_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_mesusu"]:$this->rh85_mesusu);
+       $this->rh85_sequencial = ($this->rh85_sequencial === 0 || $this->rh85_sequencial === 0.0 || $this->rh85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_sequencial"]:$this->rh85_sequencial);
+       $this->rh85_regist = ($this->rh85_regist === 0 || $this->rh85_regist === 0.0 || $this->rh85_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_regist"]:$this->rh85_regist);
+       $this->rh85_anousu = ($this->rh85_anousu === 0 || $this->rh85_anousu === 0.0 || $this->rh85_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_anousu"]:$this->rh85_anousu);
+       $this->rh85_mesusu = ($this->rh85_mesusu === 0 || $this->rh85_mesusu === 0.0 || $this->rh85_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_mesusu"]:$this->rh85_mesusu);
        if($this->rh85_dataemissao == ""){
          $this->rh85_dataemissao_dia = ($this->rh85_dataemissao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_dataemissao_dia"]:$this->rh85_dataemissao_dia);
          $this->rh85_dataemissao_mes = ($this->rh85_dataemissao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_dataemissao_mes"]:$this->rh85_dataemissao_mes);
@@ -93,15 +93,15 @@ class cl_rhemitecontracheque
        $this->rh85_codautent = ($this->rh85_codautent == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_codautent"]:$this->rh85_codautent);
        $this->rh85_ip = ($this->rh85_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_ip"]:$this->rh85_ip);
        $this->rh85_externo = ($this->rh85_externo == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh85_externo"]:$this->rh85_externo);
-       $this->rh85_liquido = ($this->rh85_liquido == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_liquido"]:$this->rh85_liquido);
-       $this->rh85_desconto = ($this->rh85_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_desconto"]:$this->rh85_desconto);
-       $this->rh85_provento = ($this->rh85_provento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_provento"]:$this->rh85_provento);
-       $this->rh85_numero = ($this->rh85_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_numero"]:$this->rh85_numero);
+       $this->rh85_liquido = ($this->rh85_liquido === 0 || $this->rh85_liquido === 0.0 || $this->rh85_liquido == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_liquido"]:$this->rh85_liquido);
+       $this->rh85_desconto = ($this->rh85_desconto === 0 || $this->rh85_desconto === 0.0 || $this->rh85_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_desconto"]:$this->rh85_desconto);
+       $this->rh85_provento = ($this->rh85_provento === 0 || $this->rh85_provento === 0.0 || $this->rh85_provento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_provento"]:$this->rh85_provento);
+       $this->rh85_numero = ($this->rh85_numero === 0 || $this->rh85_numero === 0.0 || $this->rh85_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_numero"]:$this->rh85_numero);
        $this->rh85_instit = ($this->rh85_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_instit"]:$this->rh85_instit);
        $this->rh85_estorage = ($this->rh85_estorage == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_estorage"]:$this->rh85_estorage);
        $this->rh85_tipofolha = ($this->rh85_tipofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_tipofolha"]:$this->rh85_tipofolha);
      }else{
-       $this->rh85_sequencial = ($this->rh85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_sequencial"]:$this->rh85_sequencial);
+       $this->rh85_sequencial = ($this->rh85_sequencial === 0 || $this->rh85_sequencial === 0.0 || $this->rh85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh85_sequencial"]:$this->rh85_sequencial);
      }
    }
 
@@ -234,7 +234,7 @@ class cl_rhemitecontracheque
          $this->rh85_sequencial = $rh85_sequencial;
        }
      }
-     if(($this->rh85_sequencial == null) || ($this->rh85_sequencial == "") ){
+     if(($this->rh85_sequencial == null) || ($this->rh85_sequencial === 0 || $this->rh85_sequencial === 0.0 || $this->rh85_sequencial == "") ){
        $this->erro_sql = " Campo rh85_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

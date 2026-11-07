@@ -27,7 +27,8 @@
 
 include(modification("fpdf151/pdf.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_POST_VARS,2);
 
 ?>
@@ -114,9 +115,9 @@ function ImportaArquivo($AArquivo){
                
                )");
 
-  $arquivo = file($AArquivo);
+  $arquivo = ((string)$AArquivo !== "" ? file($AArquivo) : false); // file(""): false no 5.6
 
-  $tamanho = sizeof($arquivo);
+  $tamanho = sizeof((array)$arquivo);
 
   db_inicio_transacao();
 
@@ -152,11 +153,11 @@ function ImportaArquivo($AArquivo){
        echo "<script>parent.db_iframe_bbconverte.hide();parent.location.href='pes2_guaimportaguiabaprev001.php';</script>";
     }
     $numcgm = 0;
-    if(pg_numrows($ver_cgm) > 0){
+    if(($ver_cgm ? pg_numrows($ver_cgm) : null) > 0){
       $numcgm = pg_result($ver_cgm,0,"z01_numcgm");
     }else{
       $res_valcgm = db_query("select nextval('cgm_z01_numcgm_seq') as sequencia");
-      $numcgm = pg_result($res_valcgm,0,"sequencia");
+      $numcgm = ($res_valcgm ? pg_result($res_valcgm,0,"sequencia") : null);
        
     
       if($estciv == 1){     

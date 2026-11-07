@@ -58,7 +58,7 @@ class cl_selecaopontorubricas {
                  r73_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_selecaopontorubricas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("selecaopontorubricas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_selecaopontorubricas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r73_sequencial = ($this->r73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_sequencial"]:$this->r73_sequencial);
-       $this->r73_selecaoponto = ($this->r73_selecaoponto == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_selecaoponto"]:$this->r73_selecaoponto);
+       $this->r73_sequencial = ($this->r73_sequencial === 0 || $this->r73_sequencial === 0.0 || $this->r73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_sequencial"]:$this->r73_sequencial);
+       $this->r73_selecaoponto = ($this->r73_selecaoponto === 0 || $this->r73_selecaoponto === 0.0 || $this->r73_selecaoponto == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_selecaoponto"]:$this->r73_selecaoponto);
        $this->r73_rubric = ($this->r73_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_rubric"]:$this->r73_rubric);
-       $this->r73_instit = ($this->r73_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_instit"]:$this->r73_instit);
-       $this->r73_tipo = ($this->r73_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_tipo"]:$this->r73_tipo);
-       $this->r73_valor = ($this->r73_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_valor"]:$this->r73_valor);
+       $this->r73_instit = ($this->r73_instit === 0 || $this->r73_instit === 0.0 || $this->r73_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_instit"]:$this->r73_instit);
+       $this->r73_tipo = ($this->r73_tipo === 0 || $this->r73_tipo === 0.0 || $this->r73_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_tipo"]:$this->r73_tipo);
+       $this->r73_valor = ($this->r73_valor === 0 || $this->r73_valor === 0.0 || $this->r73_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_valor"]:$this->r73_valor);
      }else{
-       $this->r73_sequencial = ($this->r73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_sequencial"]:$this->r73_sequencial);
+       $this->r73_sequencial = ($this->r73_sequencial === 0 || $this->r73_sequencial === 0.0 || $this->r73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_sequencial"]:$this->r73_sequencial);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_selecaopontorubricas {
          $this->r73_sequencial = $r73_sequencial; 
        }
      }
-     if(($this->r73_sequencial == null) || ($this->r73_sequencial == "") ){ 
+     if(($this->r73_sequencial == null) || ($this->r73_sequencial === 0 || $this->r73_sequencial === 0.0 || $this->r73_sequencial == "") ){ 
        $this->erro_sql = " Campo r73_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -441,7 +441,7 @@ class cl_selecaopontorubricas {
    function sql_query ( $r73_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_selecaopontorubricas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_selecaopontorubricas {
    function sql_query_file ( $r73_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_selecaopontorubricas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

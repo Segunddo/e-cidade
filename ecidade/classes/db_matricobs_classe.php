@@ -50,7 +50,7 @@ class cl_matricobs {
                  j26_obs = text = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_matricobs() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matricobs"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,17 +67,17 @@ class cl_matricobs {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j26_matric = ($this->j26_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j26_matric"]:$this->j26_matric);
+       $this->j26_matric = ($this->j26_matric === 0 || $this->j26_matric === 0.0 || $this->j26_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j26_matric"]:$this->j26_matric);
        $this->j26_obs = ($this->j26_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["j26_obs"]:$this->j26_obs);
      }else{
-       $this->j26_matric = ($this->j26_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j26_matric"]:$this->j26_matric);
+       $this->j26_matric = ($this->j26_matric === 0 || $this->j26_matric === 0.0 || $this->j26_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j26_matric"]:$this->j26_matric);
      }
    }
    // funcao para inclusao
    function incluir ($j26_matric){ 
       $this->atualizacampos();
        $this->j26_matric = $j26_matric; 
-     if(($this->j26_matric == null) || ($this->j26_matric == "") ){ 
+     if(($this->j26_matric == null) || ($this->j26_matric === 0 || $this->j26_matric === 0.0 || $this->j26_matric == "") ){ 
        $this->erro_sql = " Campo j26_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -287,7 +287,7 @@ class cl_matricobs {
    function sql_query ( $j26_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -308,7 +308,7 @@ class cl_matricobs {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -320,7 +320,7 @@ class cl_matricobs {
    function sql_query_file ( $j26_matric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_matricobs {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -63,7 +63,7 @@ class cl_placaixa {
                  ";
   //funcao construtor da classe
 
-  function cl_placaixa() {
+  function __construct() {
     //classes dos rotulos dos campos
 
     $this->rotulo = new rotulo("placaixa");
@@ -85,7 +85,7 @@ class cl_placaixa {
   function atualizacampos($exclusao = false) {
 
     if ($exclusao == false) {
-      $this->k80_codpla = ($this->k80_codpla == "" ? @$GLOBALS["HTTP_POST_VARS"]["k80_codpla"] : $this->k80_codpla);
+      $this->k80_codpla = ($this->k80_codpla === 0 || $this->k80_codpla === 0.0 || $this->k80_codpla == "" ? @$GLOBALS["HTTP_POST_VARS"]["k80_codpla"] : $this->k80_codpla);
       if ($this->k80_data == "") {
         $this->k80_data_dia = ($this->k80_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["k80_data_dia"]
             : $this->k80_data_dia);
@@ -97,7 +97,7 @@ class cl_placaixa {
           $this->k80_data = $this->k80_data_ano . "-" . $this->k80_data_mes . "-" . $this->k80_data_dia;
         }
       }
-      $this->k80_instit = ($this->k80_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["k80_instit"] : $this->k80_instit);
+      $this->k80_instit = ($this->k80_instit === 0 || $this->k80_instit === 0.0 || $this->k80_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["k80_instit"] : $this->k80_instit);
       if ($this->k80_dtaut == "") {
         $this->k80_dtaut_dia = ($this->k80_dtaut_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["k80_dtaut_dia"]
             : $this->k80_dtaut_dia);
@@ -110,7 +110,7 @@ class cl_placaixa {
         }
       }
     } else {
-      $this->k80_codpla = ($this->k80_codpla == "" ? @$GLOBALS["HTTP_POST_VARS"]["k80_codpla"] : $this->k80_codpla);
+      $this->k80_codpla = ($this->k80_codpla === 0 || $this->k80_codpla === 0.0 || $this->k80_codpla == "" ? @$GLOBALS["HTTP_POST_VARS"]["k80_codpla"] : $this->k80_codpla);
     }
   }
   // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_placaixa {
         $this->k80_codpla = $k80_codpla;
       }
     }
-    if (($this->k80_codpla == null) || ($this->k80_codpla == "")) {
+    if (($this->k80_codpla == null) || ($this->k80_codpla === 0 || $this->k80_codpla === 0.0 || $this->k80_codpla == "")) {
       $this->erro_sql = " Campo k80_codpla nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -492,7 +492,7 @@ class cl_placaixa {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -514,7 +514,7 @@ class cl_placaixa {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -546,7 +546,7 @@ class cl_placaixa {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -567,7 +567,7 @@ class cl_placaixa {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -581,7 +581,7 @@ class cl_placaixa {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -607,7 +607,7 @@ class cl_placaixa {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -636,7 +636,7 @@ class cl_placaixa {
     $sql .= " group by k80_codpla, k80_data, k80_dtaut, k80_instit, k144_numeroprocesso";
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];

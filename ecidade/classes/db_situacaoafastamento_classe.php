@@ -24,7 +24,7 @@ class cl_situacaoafastamento {
                  rh166_descricao = varchar(60) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_situacaoafastamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("situacaoafastamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -41,10 +41,10 @@ class cl_situacaoafastamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh166_sequencial = ($this->rh166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh166_sequencial"]:$this->rh166_sequencial);
+       $this->rh166_sequencial = ($this->rh166_sequencial === 0 || $this->rh166_sequencial === 0.0 || $this->rh166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh166_sequencial"]:$this->rh166_sequencial);
        $this->rh166_descricao = ($this->rh166_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh166_descricao"]:$this->rh166_descricao);
      }else{
-       $this->rh166_sequencial = ($this->rh166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh166_sequencial"]:$this->rh166_sequencial);
+       $this->rh166_sequencial = ($this->rh166_sequencial === 0 || $this->rh166_sequencial === 0.0 || $this->rh166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh166_sequencial"]:$this->rh166_sequencial);
      }
    }
    // funcao para Inclusão
@@ -83,7 +83,7 @@ class cl_situacaoafastamento {
          $this->rh166_sequencial = $rh166_sequencial; 
        }
      }
-     if(($this->rh166_sequencial == null) || ($this->rh166_sequencial == "") ){ 
+     if(($this->rh166_sequencial == null) || ($this->rh166_sequencial === 0 || $this->rh166_sequencial === 0.0 || $this->rh166_sequencial == "") ){ 
        $this->erro_sql = " Campo rh166_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -82,8 +82,8 @@ class cl_rhcontratoemergencialrenovacao {
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh164_sequencial = ($this->rh164_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh164_sequencial"]:$this->rh164_sequencial);
-       $this->rh164_contratoemergencial = ($this->rh164_contratoemergencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh164_contratoemergencial"]:$this->rh164_contratoemergencial);
+       $this->rh164_sequencial = ($this->rh164_sequencial === 0 || $this->rh164_sequencial === 0.0 || $this->rh164_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh164_sequencial"]:$this->rh164_sequencial);
+       $this->rh164_contratoemergencial = ($this->rh164_contratoemergencial === 0 || $this->rh164_contratoemergencial === 0.0 || $this->rh164_contratoemergencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh164_contratoemergencial"]:$this->rh164_contratoemergencial);
        $this->rh164_descricao = ($this->rh164_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh164_descricao"]:$this->rh164_descricao);
        if($this->rh164_datainicio == ""){
          $this->rh164_datainicio_dia = ($this->rh164_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh164_datainicio_dia"]:$this->rh164_datainicio_dia);
@@ -103,7 +103,7 @@ class cl_rhcontratoemergencialrenovacao {
        }
        $this->rh164_assecuratoria = ($this->rh164_assecuratoria == ""?@$GLOBALS["HTTP_POST_VARS"]["rh164_assecuratoria"]:$this->rh164_assecuratoria);
      }else{
-       $this->rh164_sequencial = ($this->rh164_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh164_sequencial"]:$this->rh164_sequencial);
+       $this->rh164_sequencial = ($this->rh164_sequencial === 0 || $this->rh164_sequencial === 0.0 || $this->rh164_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh164_sequencial"]:$this->rh164_sequencial);
      }
    }
 
@@ -164,7 +164,7 @@ class cl_rhcontratoemergencialrenovacao {
          $this->rh164_sequencial = $rh164_sequencial; 
        }
      }
-     if(($this->rh164_sequencial == null) || ($this->rh164_sequencial == "") ){ 
+     if(($this->rh164_sequencial == null) || ($this->rh164_sequencial === 0 || $this->rh164_sequencial === 0.0 || $this->rh164_sequencial == "") ){ 
        $this->erro_sql = " Campo rh164_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

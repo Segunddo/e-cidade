@@ -50,7 +50,7 @@ class cl_tesinterlote {
                  j69_idbql = int4 = Codigo Lote 
                  ";
    //funcao construtor da classe 
-   function cl_tesinterlote() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tesinterlote"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_tesinterlote {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j69_tesinter = ($this->j69_tesinter == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_tesinter"]:$this->j69_tesinter);
-       $this->j69_idbql = ($this->j69_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_idbql"]:$this->j69_idbql);
+       $this->j69_tesinter = ($this->j69_tesinter === 0 || $this->j69_tesinter === 0.0 || $this->j69_tesinter == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_tesinter"]:$this->j69_tesinter);
+       $this->j69_idbql = ($this->j69_idbql === 0 || $this->j69_idbql === 0.0 || $this->j69_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_idbql"]:$this->j69_idbql);
      }else{
-       $this->j69_tesinter = ($this->j69_tesinter == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_tesinter"]:$this->j69_tesinter);
+       $this->j69_tesinter = ($this->j69_tesinter === 0 || $this->j69_tesinter === 0.0 || $this->j69_tesinter == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_tesinter"]:$this->j69_tesinter);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_tesinterlote {
        return false;
      }
        $this->j69_tesinter = $j69_tesinter; 
-     if(($this->j69_tesinter == null) || ($this->j69_tesinter == "") ){ 
+     if(($this->j69_tesinter == null) || ($this->j69_tesinter === 0 || $this->j69_tesinter === 0.0 || $this->j69_tesinter == "") ){ 
        $this->erro_sql = " Campo j69_tesinter nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_tesinterlote {
    function sql_query ( $j69_tesinter=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -331,7 +331,7 @@ class cl_tesinterlote {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -343,7 +343,7 @@ class cl_tesinterlote {
    function sql_query_file ( $j69_tesinter=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -364,7 +364,7 @@ class cl_tesinterlote {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

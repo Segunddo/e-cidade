@@ -72,12 +72,12 @@ class cl_db_cadattdinamicoatributosvalor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db110_sequencial = ($this->db110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db110_sequencial"]:$this->db110_sequencial);
-       $this->db110_db_cadattdinamicoatributos = ($this->db110_db_cadattdinamicoatributos == ""?@$GLOBALS["HTTP_POST_VARS"]["db110_db_cadattdinamicoatributos"]:$this->db110_db_cadattdinamicoatributos);
-       $this->db110_cadattdinamicovalorgrupo = ($this->db110_cadattdinamicovalorgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["db110_cadattdinamicovalorgrupo"]:$this->db110_cadattdinamicovalorgrupo);
+       $this->db110_sequencial = ($this->db110_sequencial === 0 || $this->db110_sequencial === 0.0 || $this->db110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db110_sequencial"]:$this->db110_sequencial);
+       $this->db110_db_cadattdinamicoatributos = ($this->db110_db_cadattdinamicoatributos === 0 || $this->db110_db_cadattdinamicoatributos === 0.0 || $this->db110_db_cadattdinamicoatributos == ""?@$GLOBALS["HTTP_POST_VARS"]["db110_db_cadattdinamicoatributos"]:$this->db110_db_cadattdinamicoatributos);
+       $this->db110_cadattdinamicovalorgrupo = ($this->db110_cadattdinamicovalorgrupo === 0 || $this->db110_cadattdinamicovalorgrupo === 0.0 || $this->db110_cadattdinamicovalorgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["db110_cadattdinamicovalorgrupo"]:$this->db110_cadattdinamicovalorgrupo);
        $this->db110_valor = ($this->db110_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["db110_valor"]:$this->db110_valor);
      }else{
-       $this->db110_sequencial = ($this->db110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db110_sequencial"]:$this->db110_sequencial);
+       $this->db110_sequencial = ($this->db110_sequencial === 0 || $this->db110_sequencial === 0.0 || $this->db110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db110_sequencial"]:$this->db110_sequencial);
      }
    }
    // funcao para Inclusão
@@ -128,7 +128,7 @@ class cl_db_cadattdinamicoatributosvalor {
          $this->db110_sequencial = $db110_sequencial;
        }
      }
-     if(($this->db110_sequencial == null) || ($this->db110_sequencial == "") ){
+     if(($this->db110_sequencial == null) || ($this->db110_sequencial === 0 || $this->db110_sequencial === 0.0 || $this->db110_sequencial == "") ){
        $this->erro_sql = " Campo db110_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

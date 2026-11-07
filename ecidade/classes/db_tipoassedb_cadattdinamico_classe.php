@@ -24,7 +24,7 @@ class cl_tipoassedb_cadattdinamico {
                  h79_tipoasse = int4 = Sequencial do Tipo assentamento 
                  ";
    //funcao construtor da classe 
-   function cl_tipoassedb_cadattdinamico() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoassedb_cadattdinamico"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -41,11 +41,11 @@ class cl_tipoassedb_cadattdinamico {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h79_db_cadattdinamico = ($this->h79_db_cadattdinamico == ""?@$GLOBALS["HTTP_POST_VARS"]["h79_db_cadattdinamico"]:$this->h79_db_cadattdinamico);
-       $this->h79_tipoasse = ($this->h79_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["h79_tipoasse"]:$this->h79_tipoasse);
+       $this->h79_db_cadattdinamico = ($this->h79_db_cadattdinamico === 0 || $this->h79_db_cadattdinamico === 0.0 || $this->h79_db_cadattdinamico == ""?@$GLOBALS["HTTP_POST_VARS"]["h79_db_cadattdinamico"]:$this->h79_db_cadattdinamico);
+       $this->h79_tipoasse = ($this->h79_tipoasse === 0 || $this->h79_tipoasse === 0.0 || $this->h79_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["h79_tipoasse"]:$this->h79_tipoasse);
      }else{
-       $this->h79_db_cadattdinamico = ($this->h79_db_cadattdinamico == ""?@$GLOBALS["HTTP_POST_VARS"]["h79_db_cadattdinamico"]:$this->h79_db_cadattdinamico);
-       $this->h79_tipoasse = ($this->h79_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["h79_tipoasse"]:$this->h79_tipoasse);
+       $this->h79_db_cadattdinamico = ($this->h79_db_cadattdinamico === 0 || $this->h79_db_cadattdinamico === 0.0 || $this->h79_db_cadattdinamico == ""?@$GLOBALS["HTTP_POST_VARS"]["h79_db_cadattdinamico"]:$this->h79_db_cadattdinamico);
+       $this->h79_tipoasse = ($this->h79_tipoasse === 0 || $this->h79_tipoasse === 0.0 || $this->h79_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["h79_tipoasse"]:$this->h79_tipoasse);
      }
    }
    // funcao para Inclusão
@@ -53,7 +53,7 @@ class cl_tipoassedb_cadattdinamico {
       $this->atualizacampos();
        $this->h79_db_cadattdinamico = $h79_db_cadattdinamico; 
        $this->h79_tipoasse = $h79_tipoasse; 
-     if(($this->h79_db_cadattdinamico == null) || ($this->h79_db_cadattdinamico == "") ){ 
+     if(($this->h79_db_cadattdinamico == null) || ($this->h79_db_cadattdinamico === 0 || $this->h79_db_cadattdinamico === 0.0 || $this->h79_db_cadattdinamico == "") ){ 
        $this->erro_sql = " Campo h79_db_cadattdinamico não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -61,7 +61,7 @@ class cl_tipoassedb_cadattdinamico {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->h79_tipoasse == null) || ($this->h79_tipoasse == "") ){ 
+     if(($this->h79_tipoasse == null) || ($this->h79_tipoasse === 0 || $this->h79_tipoasse === 0.0 || $this->h79_tipoasse == "") ){ 
        $this->erro_sql = " Campo h79_tipoasse não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -113,7 +113,7 @@ use ECidade\V3\Extension\Logger;
       $qtdeLinhasArquivos += filesize($sNomeArquivo);
     }
 
-    $barraProgressoArquivo->updateMaxProgress(count($aNomesArquivos));
+    $barraProgressoArquivo->updateMaxProgress(count((array)$aNomesArquivos));
 
     foreach ($aNomesArquivos as $sNomeArquivo) {
 

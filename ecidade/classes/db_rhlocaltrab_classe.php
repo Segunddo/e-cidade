@@ -63,21 +63,21 @@ class cl_rhlocaltrab
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh55_instit = ($this->rh55_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_instit"]:$this->rh55_instit);
-       $this->rh55_codigo = ($this->rh55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_codigo"]:$this->rh55_codigo);
+       $this->rh55_instit = ($this->rh55_instit === 0 || $this->rh55_instit === 0.0 || $this->rh55_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_instit"]:$this->rh55_instit);
+       $this->rh55_codigo = ($this->rh55_codigo === 0 || $this->rh55_codigo === 0.0 || $this->rh55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_codigo"]:$this->rh55_codigo);
        $this->rh55_estrut = ($this->rh55_estrut == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_estrut"]:$this->rh55_estrut);
        $this->rh55_descr = ($this->rh55_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_descr"]:$this->rh55_descr);
-       $this->rh55_tipolocal = ($this->rh55_tipolocal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_tipolocal"]:$this->rh55_tipolocal);
+       $this->rh55_tipolocal = ($this->rh55_tipolocal === 0 || $this->rh55_tipolocal === 0.0 || $this->rh55_tipolocal == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_tipolocal"]:$this->rh55_tipolocal);
        $this->rh55_endereco = ($this->rh55_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_endereco"]:$this->rh55_endereco);
-       $this->rh55_tipoestabelecimento = ($this->rh55_tipoestabelecimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_tipoestabelecimento"]:$this->rh55_tipoestabelecimento);
-       $this->rh55_tipoinscricao = ($this->rh55_tipoinscricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_tipoinscricao"]:$this->rh55_tipoinscricao);
+       $this->rh55_tipoestabelecimento = ($this->rh55_tipoestabelecimento === 0 || $this->rh55_tipoestabelecimento === 0.0 || $this->rh55_tipoestabelecimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_tipoestabelecimento"]:$this->rh55_tipoestabelecimento);
+       $this->rh55_tipoinscricao = ($this->rh55_tipoinscricao === 0 || $this->rh55_tipoinscricao === 0.0 || $this->rh55_tipoinscricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_tipoinscricao"]:$this->rh55_tipoinscricao);
        $this->rh55_numeroinscricao = ($this->rh55_numeroinscricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_numeroinscricao"]:$this->rh55_numeroinscricao);
        $this->rh55_observacaoregistrosambientais = ($this->rh55_observacaoregistrosambientais == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_observacaoregistrosambientais"]:$this->rh55_observacaoregistrosambientais);
-       $this->rh55_inep = ($this->rh55_inep == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_inep"]:$this->rh55_inep);
+       $this->rh55_inep = ($this->rh55_inep === 0 || $this->rh55_inep === 0.0 || $this->rh55_inep == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_inep"]:$this->rh55_inep);
        $this->rh55_lotacaotributaria = ($this->rh55_lotacaotributaria == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_lotacaotributaria"]:$this->rh55_lotacaotributaria);
      }else{
-       $this->rh55_instit = ($this->rh55_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_instit"]:$this->rh55_instit);
-       $this->rh55_codigo = ($this->rh55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_codigo"]:$this->rh55_codigo);
+       $this->rh55_instit = ($this->rh55_instit === 0 || $this->rh55_instit === 0.0 || $this->rh55_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_instit"]:$this->rh55_instit);
+       $this->rh55_codigo = ($this->rh55_codigo === 0 || $this->rh55_codigo === 0.0 || $this->rh55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh55_codigo"]:$this->rh55_codigo);
      }
    }
 
@@ -162,7 +162,7 @@ class cl_rhlocaltrab
          $this->rh55_codigo = $rh55_codigo; 
        }
      }
-     if(($this->rh55_codigo == null) || ($this->rh55_codigo == "") ){ 
+     if(($this->rh55_codigo == null) || ($this->rh55_codigo === 0 || $this->rh55_codigo === 0.0 || $this->rh55_codigo == "") ){ 
        $this->erro_sql = " Campo rh55_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -170,7 +170,7 @@ class cl_rhlocaltrab
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh55_instit == null) || ($this->rh55_instit == "") ){ 
+     if(($this->rh55_instit == null) || ($this->rh55_instit === 0 || $this->rh55_instit === 0.0 || $this->rh55_instit == "") ){ 
        $this->erro_sql = " Campo rh55_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -638,7 +638,7 @@ class cl_rhlocaltrab
   function sql_query_centro_custo( $rh55_codigo=null,$rh55_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -671,7 +671,7 @@ class cl_rhlocaltrab
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

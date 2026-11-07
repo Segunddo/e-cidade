@@ -58,7 +58,7 @@ class cl_portariatipo {
                  h30_amparolegal = text = Amparo legal 
                  ";
    //funcao construtor da classe 
-   function cl_portariatipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("portariatipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_portariatipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h30_sequencial = ($this->h30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_sequencial"]:$this->h30_sequencial);
-       $this->h30_tipoasse = ($this->h30_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_tipoasse"]:$this->h30_tipoasse);
-       $this->h30_portariaenvolv = ($this->h30_portariaenvolv == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_portariaenvolv"]:$this->h30_portariaenvolv);
-       $this->h30_portariatipoato = ($this->h30_portariatipoato == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_portariatipoato"]:$this->h30_portariatipoato);
-       $this->h30_portariaproced = ($this->h30_portariaproced == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_portariaproced"]:$this->h30_portariaproced);
+       $this->h30_sequencial = ($this->h30_sequencial === 0 || $this->h30_sequencial === 0.0 || $this->h30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_sequencial"]:$this->h30_sequencial);
+       $this->h30_tipoasse = ($this->h30_tipoasse === 0 || $this->h30_tipoasse === 0.0 || $this->h30_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_tipoasse"]:$this->h30_tipoasse);
+       $this->h30_portariaenvolv = ($this->h30_portariaenvolv === 0 || $this->h30_portariaenvolv === 0.0 || $this->h30_portariaenvolv == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_portariaenvolv"]:$this->h30_portariaenvolv);
+       $this->h30_portariatipoato = ($this->h30_portariatipoato === 0 || $this->h30_portariatipoato === 0.0 || $this->h30_portariatipoato == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_portariatipoato"]:$this->h30_portariatipoato);
+       $this->h30_portariaproced = ($this->h30_portariaproced === 0 || $this->h30_portariaproced === 0.0 || $this->h30_portariaproced == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_portariaproced"]:$this->h30_portariaproced);
        $this->h30_amparolegal = ($this->h30_amparolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_amparolegal"]:$this->h30_amparolegal);
      }else{
-       $this->h30_sequencial = ($this->h30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_sequencial"]:$this->h30_sequencial);
+       $this->h30_sequencial = ($this->h30_sequencial === 0 || $this->h30_sequencial === 0.0 || $this->h30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h30_sequencial"]:$this->h30_sequencial);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_portariatipo {
          $this->h30_sequencial = $h30_sequencial; 
        }
      }
-     if(($this->h30_sequencial == null) || ($this->h30_sequencial == "") ){ 
+     if(($this->h30_sequencial == null) || ($this->h30_sequencial === 0 || $this->h30_sequencial === 0.0 || $this->h30_sequencial == "") ){ 
        $this->erro_sql = " Campo h30_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

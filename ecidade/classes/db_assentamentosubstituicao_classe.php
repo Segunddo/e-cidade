@@ -45,10 +45,10 @@ class cl_assentamentosubstituicao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh161_assentamento = ($this->rh161_assentamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh161_assentamento"]:$this->rh161_assentamento);
-       $this->rh161_regist = ($this->rh161_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh161_regist"]:$this->rh161_regist);
+       $this->rh161_assentamento = ($this->rh161_assentamento === 0 || $this->rh161_assentamento === 0.0 || $this->rh161_assentamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh161_assentamento"]:$this->rh161_assentamento);
+       $this->rh161_regist = ($this->rh161_regist === 0 || $this->rh161_regist === 0.0 || $this->rh161_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh161_regist"]:$this->rh161_regist);
      }else{
-       $this->rh161_assentamento = ($this->rh161_assentamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh161_assentamento"]:$this->rh161_assentamento);
+       $this->rh161_assentamento = ($this->rh161_assentamento === 0 || $this->rh161_assentamento === 0.0 || $this->rh161_assentamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh161_assentamento"]:$this->rh161_assentamento);
      }
    }
    // funcao para Inclusão
@@ -64,7 +64,7 @@ class cl_assentamentosubstituicao {
        return false;
      }
        $this->rh161_assentamento = $rh161_assentamento; 
-     if(($this->rh161_assentamento == null) || ($this->rh161_assentamento == "") ){ 
+     if(($this->rh161_assentamento == null) || ($this->rh161_assentamento === 0 || $this->rh161_assentamento === 0.0 || $this->rh161_assentamento == "") ){ 
        $this->erro_sql = " Campo rh161_assentamento não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

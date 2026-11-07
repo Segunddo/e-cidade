@@ -54,7 +54,7 @@ class cl_rhbasesreg {
                  rh54_rubric = varchar(4) = Rubrica 
                  ";
    //funcao construtor da classe 
-   function cl_rhbasesreg() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhbasesreg"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_rhbasesreg {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh54_seq = ($this->rh54_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh54_seq"]:$this->rh54_seq);
-       $this->rh54_regist = ($this->rh54_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh54_regist"]:$this->rh54_regist);
+       $this->rh54_seq = ($this->rh54_seq === 0 || $this->rh54_seq === 0.0 || $this->rh54_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh54_seq"]:$this->rh54_seq);
+       $this->rh54_regist = ($this->rh54_regist === 0 || $this->rh54_regist === 0.0 || $this->rh54_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh54_regist"]:$this->rh54_regist);
        $this->rh54_base = ($this->rh54_base == ""?@$GLOBALS["HTTP_POST_VARS"]["rh54_base"]:$this->rh54_base);
        $this->rh54_rubric = ($this->rh54_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh54_rubric"]:$this->rh54_rubric);
      }else{
-       $this->rh54_seq = ($this->rh54_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh54_seq"]:$this->rh54_seq);
+       $this->rh54_seq = ($this->rh54_seq === 0 || $this->rh54_seq === 0.0 || $this->rh54_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh54_seq"]:$this->rh54_seq);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_rhbasesreg {
          $this->rh54_seq = $rh54_seq; 
        }
      }
-     if(($this->rh54_seq == null) || ($this->rh54_seq == "") ){ 
+     if(($this->rh54_seq == null) || ($this->rh54_seq === 0 || $this->rh54_seq === 0.0 || $this->rh54_seq == "") ){ 
        $this->erro_sql = " Campo rh54_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_rhbasesreg {
    function sql_query ( $rh54_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_rhbasesreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_rhbasesreg {
    function sql_query_file ( $rh54_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_rhbasesreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -472,7 +472,7 @@ class cl_rhbasesreg {
    function sql_query_base ( $rh54_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -497,7 +497,7 @@ class cl_rhbasesreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_rhbasesreg {
    function sql_query_dadosprinc ( $rh54_seq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_rhbasesreg {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

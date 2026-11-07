@@ -32,7 +32,7 @@ class cl_pensaocontabancaria {
                  rh139_contabancaria = int4 = Conta Bancária 
                  ";
    //funcao construtor da classe 
-   function cl_pensaocontabancaria() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pensaocontabancaria"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -49,14 +49,14 @@ class cl_pensaocontabancaria {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh139_sequencial = ($this->rh139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_sequencial"]:$this->rh139_sequencial);
-       $this->rh139_regist = ($this->rh139_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_regist"]:$this->rh139_regist);
-       $this->rh139_numcgm = ($this->rh139_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_numcgm"]:$this->rh139_numcgm);
-       $this->rh139_anousu = ($this->rh139_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_anousu"]:$this->rh139_anousu);
-       $this->rh139_mesusu = ($this->rh139_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_mesusu"]:$this->rh139_mesusu);
-       $this->rh139_contabancaria = ($this->rh139_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_contabancaria"]:$this->rh139_contabancaria);
+       $this->rh139_sequencial = ($this->rh139_sequencial === 0 || $this->rh139_sequencial === 0.0 || $this->rh139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_sequencial"]:$this->rh139_sequencial);
+       $this->rh139_regist = ($this->rh139_regist === 0 || $this->rh139_regist === 0.0 || $this->rh139_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_regist"]:$this->rh139_regist);
+       $this->rh139_numcgm = ($this->rh139_numcgm === 0 || $this->rh139_numcgm === 0.0 || $this->rh139_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_numcgm"]:$this->rh139_numcgm);
+       $this->rh139_anousu = ($this->rh139_anousu === 0 || $this->rh139_anousu === 0.0 || $this->rh139_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_anousu"]:$this->rh139_anousu);
+       $this->rh139_mesusu = ($this->rh139_mesusu === 0 || $this->rh139_mesusu === 0.0 || $this->rh139_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_mesusu"]:$this->rh139_mesusu);
+       $this->rh139_contabancaria = ($this->rh139_contabancaria === 0 || $this->rh139_contabancaria === 0.0 || $this->rh139_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_contabancaria"]:$this->rh139_contabancaria);
      }else{
-       $this->rh139_sequencial = ($this->rh139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_sequencial"]:$this->rh139_sequencial);
+       $this->rh139_sequencial = ($this->rh139_sequencial === 0 || $this->rh139_sequencial === 0.0 || $this->rh139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_sequencial"]:$this->rh139_sequencial);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_pensaocontabancaria {
          $this->rh139_sequencial = $rh139_sequencial; 
        }
      }
-     if(($this->rh139_sequencial == null) || ($this->rh139_sequencial == "") ){ 
+     if(($this->rh139_sequencial == null) || ($this->rh139_sequencial === 0 || $this->rh139_sequencial === 0.0 || $this->rh139_sequencial == "") ){ 
        $this->erro_sql = " Campo rh139_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -449,7 +449,7 @@ class cl_pensaocontabancaria {
    function sql_query ( $rh139_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_pensaocontabancaria {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_pensaocontabancaria {
    function sql_query_file ( $rh139_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_pensaocontabancaria {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

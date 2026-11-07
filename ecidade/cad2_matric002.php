@@ -43,7 +43,8 @@ $clrotulo->label("j23_vlrter");
 
 db_postmemory($HTTP_POST_VARS);
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $head1 = "RELATÓRIO DE MATRÍCULAS";
 
@@ -190,7 +191,7 @@ if (count($aSetores) > 47) {
   $sMore = "...";
 }
 
-$head4 = "SETORES: " . implode($aSetores, ", ") . $sMore;
+$head4 = "SETORES: " . implode(", ", $aSetores) . $sMore;
 
 $pdf->AddPage("L");
 $linm = 1;

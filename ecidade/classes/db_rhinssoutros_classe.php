@@ -58,7 +58,7 @@ class cl_rhinssoutros {
                  rh51_ocorre = varchar(2) = Ocorrência 
                  ";
    //funcao construtor da classe 
-   function cl_rhinssoutros() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhinssoutros"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_rhinssoutros {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh51_seqpes = ($this->rh51_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_seqpes"]:$this->rh51_seqpes);
-       $this->rh51_basefo = ($this->rh51_basefo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_basefo"]:$this->rh51_basefo);
-       $this->rh51_descfo = ($this->rh51_descfo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_descfo"]:$this->rh51_descfo);
-       $this->rh51_b13fo = ($this->rh51_b13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_b13fo"]:$this->rh51_b13fo);
-       $this->rh51_d13fo = ($this->rh51_d13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_d13fo"]:$this->rh51_d13fo);
+       $this->rh51_seqpes = ($this->rh51_seqpes === 0 || $this->rh51_seqpes === 0.0 || $this->rh51_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_seqpes"]:$this->rh51_seqpes);
+       $this->rh51_basefo = ($this->rh51_basefo === 0 || $this->rh51_basefo === 0.0 || $this->rh51_basefo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_basefo"]:$this->rh51_basefo);
+       $this->rh51_descfo = ($this->rh51_descfo === 0 || $this->rh51_descfo === 0.0 || $this->rh51_descfo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_descfo"]:$this->rh51_descfo);
+       $this->rh51_b13fo = ($this->rh51_b13fo === 0 || $this->rh51_b13fo === 0.0 || $this->rh51_b13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_b13fo"]:$this->rh51_b13fo);
+       $this->rh51_d13fo = ($this->rh51_d13fo === 0 || $this->rh51_d13fo === 0.0 || $this->rh51_d13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_d13fo"]:$this->rh51_d13fo);
        $this->rh51_ocorre = ($this->rh51_ocorre == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_ocorre"]:$this->rh51_ocorre);
      }else{
-       $this->rh51_seqpes = ($this->rh51_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_seqpes"]:$this->rh51_seqpes);
+       $this->rh51_seqpes = ($this->rh51_seqpes === 0 || $this->rh51_seqpes === 0.0 || $this->rh51_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_seqpes"]:$this->rh51_seqpes);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_rhinssoutros {
        return false;
      }
        $this->rh51_seqpes = $rh51_seqpes; 
-     if(($this->rh51_seqpes == null) || ($this->rh51_seqpes == "") ){ 
+     if(($this->rh51_seqpes == null) || ($this->rh51_seqpes === 0 || $this->rh51_seqpes === 0.0 || $this->rh51_seqpes == "") ){ 
        $this->erro_sql = " Campo rh51_seqpes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -372,7 +372,7 @@ class cl_rhinssoutros {
    function sql_query ( $rh51_seqpes=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_rhinssoutros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -408,7 +408,7 @@ class cl_rhinssoutros {
    function sql_query_file ( $rh51_seqpes=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_rhinssoutros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,10 +438,10 @@ class cl_rhinssoutros {
      }
      return $sql;
   }
-   function sql_query_retorno ( $rh51_seqpes=null,$campos="*",$ordem=null,$dbwhere="",$anonovo,$mesnovo){ 
+   function sql_query_retorno ( $rh51_seqpes=null,$campos="*",$ordem=null,$dbwhere="",$anonovo = null,$mesnovo = null){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -467,7 +467,7 @@ class cl_rhinssoutros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

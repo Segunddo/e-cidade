@@ -28,7 +28,8 @@
 require_once(modification("fpdf151/pdf.php"));
 require_once(modification("libs/db_sql.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $head3 = "FUNCIONÁRIOS POR LOCAL DE TRABALHO - " . $mesfolha . " / " . $anofolha;
 $where = "";

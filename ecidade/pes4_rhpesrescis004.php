@@ -143,7 +143,7 @@ if(!isset($_SESSION['campomatriculas'])){
     echo "<script>location.href = 'pes4_rhpesrescislote001.php';</script>";
   }
 }else{
-  $arr_matriculas = split(",", $_SESSION['campomatriculas']);
+  $arr_matriculas = preg_split("#,#m", $_SESSION['campomatriculas']);
   $r30_regist = array_shift($arr_matriculas);
   $campomatriculas = implode(",", $arr_matriculas);
   unset($_SESSION['campomatriculas']);

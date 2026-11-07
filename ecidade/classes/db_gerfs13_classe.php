@@ -66,7 +66,7 @@ class cl_gerfs13 {
                  r35_instit = int4 = codigo da instituicao 
                  ";
    //funcao construtor da classe 
-   function cl_gerfs13() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("gerfs13"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,20 +83,20 @@ class cl_gerfs13 {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r35_anousu = ($this->r35_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_anousu"]:$this->r35_anousu);
-       $this->r35_mesusu = ($this->r35_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_mesusu"]:$this->r35_mesusu);
-       $this->r35_regist = ($this->r35_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_regist"]:$this->r35_regist);
+       $this->r35_anousu = ($this->r35_anousu === 0 || $this->r35_anousu === 0.0 || $this->r35_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_anousu"]:$this->r35_anousu);
+       $this->r35_mesusu = ($this->r35_mesusu === 0 || $this->r35_mesusu === 0.0 || $this->r35_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_mesusu"]:$this->r35_mesusu);
+       $this->r35_regist = ($this->r35_regist === 0 || $this->r35_regist === 0.0 || $this->r35_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_regist"]:$this->r35_regist);
        $this->r35_rubric = ($this->r35_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_rubric"]:$this->r35_rubric);
-       $this->r35_valor = ($this->r35_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_valor"]:$this->r35_valor);
-       $this->r35_pd = ($this->r35_pd == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_pd"]:$this->r35_pd);
-       $this->r35_quant = ($this->r35_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_quant"]:$this->r35_quant);
+       $this->r35_valor = ($this->r35_valor === 0 || $this->r35_valor === 0.0 || $this->r35_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_valor"]:$this->r35_valor);
+       $this->r35_pd = ($this->r35_pd === 0 || $this->r35_pd === 0.0 || $this->r35_pd == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_pd"]:$this->r35_pd);
+       $this->r35_quant = ($this->r35_quant === 0 || $this->r35_quant === 0.0 || $this->r35_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_quant"]:$this->r35_quant);
        $this->r35_lotac = ($this->r35_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_lotac"]:$this->r35_lotac);
-       $this->r35_semest = ($this->r35_semest == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_semest"]:$this->r35_semest);
-       $this->r35_instit = ($this->r35_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_instit"]:$this->r35_instit);
+       $this->r35_semest = ($this->r35_semest === 0 || $this->r35_semest === 0.0 || $this->r35_semest == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_semest"]:$this->r35_semest);
+       $this->r35_instit = ($this->r35_instit === 0 || $this->r35_instit === 0.0 || $this->r35_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_instit"]:$this->r35_instit);
      }else{
-       $this->r35_anousu = ($this->r35_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_anousu"]:$this->r35_anousu);
-       $this->r35_mesusu = ($this->r35_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_mesusu"]:$this->r35_mesusu);
-       $this->r35_regist = ($this->r35_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_regist"]:$this->r35_regist);
+       $this->r35_anousu = ($this->r35_anousu === 0 || $this->r35_anousu === 0.0 || $this->r35_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_anousu"]:$this->r35_anousu);
+       $this->r35_mesusu = ($this->r35_mesusu === 0 || $this->r35_mesusu === 0.0 || $this->r35_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_mesusu"]:$this->r35_mesusu);
+       $this->r35_regist = ($this->r35_regist === 0 || $this->r35_regist === 0.0 || $this->r35_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_regist"]:$this->r35_regist);
        $this->r35_rubric = ($this->r35_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r35_rubric"]:$this->r35_rubric);
      }
    }
@@ -161,7 +161,7 @@ class cl_gerfs13 {
        $this->r35_mesusu = $r35_mesusu; 
        $this->r35_regist = $r35_regist; 
        $this->r35_rubric = $r35_rubric; 
-     if(($this->r35_anousu == null) || ($this->r35_anousu == "") ){ 
+     if(($this->r35_anousu == null) || ($this->r35_anousu === 0 || $this->r35_anousu === 0.0 || $this->r35_anousu == "") ){ 
        $this->erro_sql = " Campo r35_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -169,7 +169,7 @@ class cl_gerfs13 {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r35_mesusu == null) || ($this->r35_mesusu == "") ){ 
+     if(($this->r35_mesusu == null) || ($this->r35_mesusu === 0 || $this->r35_mesusu === 0.0 || $this->r35_mesusu == "") ){ 
        $this->erro_sql = " Campo r35_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -177,7 +177,7 @@ class cl_gerfs13 {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r35_regist == null) || ($this->r35_regist == "") ){ 
+     if(($this->r35_regist == null) || ($this->r35_regist === 0 || $this->r35_regist === 0.0 || $this->r35_regist == "") ){ 
        $this->erro_sql = " Campo r35_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -593,7 +593,7 @@ class cl_gerfs13 {
    function sql_query ( $r35_anousu=null,$r35_mesusu=null,$r35_regist=null,$r35_rubric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -663,7 +663,7 @@ class cl_gerfs13 {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -676,7 +676,7 @@ class cl_gerfs13 {
    function sql_query_file ( $r35_anousu=null,$r35_mesusu=null,$r35_regist=null,$r35_rubric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -721,7 +721,7 @@ class cl_gerfs13 {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -733,7 +733,7 @@ class cl_gerfs13 {
    function sql_query_rubricas ( $r35_anousu=null,$r35_mesusu=null,$r35_regist=null,$r35_rubric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -780,7 +780,7 @@ class cl_gerfs13 {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -792,7 +792,7 @@ class cl_gerfs13 {
    function sql_query_seleciona( $r35_anousu=null,$r35_mesusu=null,$r35_regist=null,$r35_rubric=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -843,7 +843,7 @@ class cl_gerfs13 {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -857,7 +857,7 @@ class cl_gerfs13 {
   	
      $sql = "select ";
      if ($campos != "*" ) {
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -903,7 +903,7 @@ class cl_gerfs13 {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

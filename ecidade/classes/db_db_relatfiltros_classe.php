@@ -56,7 +56,7 @@ class cl_db_relatfiltros {
                  db94_valfim = varchar(40) = Valor final 
                  ";
    //funcao construtor da classe 
-   function cl_db_relatfiltros() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_relatfiltros"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_db_relatfiltros {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db94_codigo = ($this->db94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db94_codigo"]:$this->db94_codigo);
-       $this->db94_codrel = ($this->db94_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db94_codrel"]:$this->db94_codrel);
-       $this->db94_codcam = ($this->db94_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db94_codcam"]:$this->db94_codcam);
+       $this->db94_codigo = ($this->db94_codigo === 0 || $this->db94_codigo === 0.0 || $this->db94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db94_codigo"]:$this->db94_codigo);
+       $this->db94_codrel = ($this->db94_codrel === 0 || $this->db94_codrel === 0.0 || $this->db94_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db94_codrel"]:$this->db94_codrel);
+       $this->db94_codcam = ($this->db94_codcam === 0 || $this->db94_codcam === 0.0 || $this->db94_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db94_codcam"]:$this->db94_codcam);
        $this->db94_valini = ($this->db94_valini == ""?@$GLOBALS["HTTP_POST_VARS"]["db94_valini"]:$this->db94_valini);
        $this->db94_valfim = ($this->db94_valfim == ""?@$GLOBALS["HTTP_POST_VARS"]["db94_valfim"]:$this->db94_valfim);
      }else{
-       $this->db94_codigo = ($this->db94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db94_codigo"]:$this->db94_codigo);
+       $this->db94_codigo = ($this->db94_codigo === 0 || $this->db94_codigo === 0.0 || $this->db94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db94_codigo"]:$this->db94_codigo);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_db_relatfiltros {
          $this->db94_codigo = $db94_codigo; 
        }
      }
-     if(($this->db94_codigo == null) || ($this->db94_codigo == "") ){ 
+     if(($this->db94_codigo == null) || ($this->db94_codigo === 0 || $this->db94_codigo === 0.0 || $this->db94_codigo == "") ){ 
        $this->erro_sql = " Campo db94_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -385,7 +385,7 @@ class cl_db_relatfiltros {
    function sql_query ( $db94_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -408,7 +408,7 @@ class cl_db_relatfiltros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_db_relatfiltros {
    function sql_query_file ( $db94_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_db_relatfiltros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

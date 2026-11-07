@@ -57,7 +57,7 @@ class cl_benscorlanc {
                  t62_codcom = int8 = Código da comissão 
                  ";
    //funcao construtor da classe 
-   function cl_benscorlanc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("benscorlanc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,7 +74,7 @@ class cl_benscorlanc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t62_codcor = ($this->t62_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcor"]:$this->t62_codcor);
+       $this->t62_codcor = ($this->t62_codcor === 0 || $this->t62_codcor === 0.0 || $this->t62_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcor"]:$this->t62_codcor);
        if($this->t62_data == ""){
          $this->t62_data_dia = ($this->t62_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_data_dia"]:$this->t62_data_dia);
          $this->t62_data_mes = ($this->t62_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_data_mes"]:$this->t62_data_mes);
@@ -84,9 +84,9 @@ class cl_benscorlanc {
          }
        }
        $this->t62_obs = ($this->t62_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_obs"]:$this->t62_obs);
-       $this->t62_codcom = ($this->t62_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcom"]:$this->t62_codcom);
+       $this->t62_codcom = ($this->t62_codcom === 0 || $this->t62_codcom === 0.0 || $this->t62_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcom"]:$this->t62_codcom);
      }else{
-       $this->t62_codcor = ($this->t62_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcor"]:$this->t62_codcor);
+       $this->t62_codcor = ($this->t62_codcor === 0 || $this->t62_codcor === 0.0 || $this->t62_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcor"]:$this->t62_codcor);
      }
    }
    // funcao para inclusao
@@ -134,7 +134,7 @@ class cl_benscorlanc {
          $this->t62_codcor = $t62_codcor; 
        }
      }
-     if(($this->t62_codcor == null) || ($this->t62_codcor == "") ){ 
+     if(($this->t62_codcor == null) || ($this->t62_codcor === 0 || $this->t62_codcor === 0.0 || $this->t62_codcor == "") ){ 
        $this->erro_sql = " Campo t62_codcor nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -397,7 +397,7 @@ class cl_benscorlanc {
    function sql_query ( $t62_codcor=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_benscorlanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_benscorlanc {
    function sql_query_file ( $t62_codcor=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -455,7 +455,7 @@ class cl_benscorlanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

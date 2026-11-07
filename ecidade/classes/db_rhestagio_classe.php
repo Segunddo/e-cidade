@@ -66,7 +66,7 @@ class cl_rhestagio {
                  h50_instit = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_rhestagio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhestagio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,18 +83,18 @@ class cl_rhestagio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h50_sequencial = ($this->h50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_sequencial"]:$this->h50_sequencial);
+       $this->h50_sequencial = ($this->h50_sequencial === 0 || $this->h50_sequencial === 0.0 || $this->h50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_sequencial"]:$this->h50_sequencial);
        $this->h50_lei = ($this->h50_lei == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_lei"]:$this->h50_lei);
        $this->h50_descr = ($this->h50_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_descr"]:$this->h50_descr);
        $this->h50_obs = ($this->h50_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_obs"]:$this->h50_obs);
-       $this->h50_confobs = ($this->h50_confobs == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_confobs"]:$this->h50_confobs);
-       $this->h50_minimopontos = ($this->h50_minimopontos == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_minimopontos"]:$this->h50_minimopontos);
-       $this->h50_assentaaprova = ($this->h50_assentaaprova == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_assentaaprova"]:$this->h50_assentaaprova);
-       $this->h50_assentareprova = ($this->h50_assentareprova == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_assentareprova"]:$this->h50_assentareprova);
-       $this->h50_duracaoestagio = ($this->h50_duracaoestagio == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_duracaoestagio"]:$this->h50_duracaoestagio);
-       $this->h50_instit = ($this->h50_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_instit"]:$this->h50_instit);
+       $this->h50_confobs = ($this->h50_confobs === 0 || $this->h50_confobs === 0.0 || $this->h50_confobs == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_confobs"]:$this->h50_confobs);
+       $this->h50_minimopontos = ($this->h50_minimopontos === 0 || $this->h50_minimopontos === 0.0 || $this->h50_minimopontos == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_minimopontos"]:$this->h50_minimopontos);
+       $this->h50_assentaaprova = ($this->h50_assentaaprova === 0 || $this->h50_assentaaprova === 0.0 || $this->h50_assentaaprova == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_assentaaprova"]:$this->h50_assentaaprova);
+       $this->h50_assentareprova = ($this->h50_assentareprova === 0 || $this->h50_assentareprova === 0.0 || $this->h50_assentareprova == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_assentareprova"]:$this->h50_assentareprova);
+       $this->h50_duracaoestagio = ($this->h50_duracaoestagio === 0 || $this->h50_duracaoestagio === 0.0 || $this->h50_duracaoestagio == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_duracaoestagio"]:$this->h50_duracaoestagio);
+       $this->h50_instit = ($this->h50_instit === 0 || $this->h50_instit === 0.0 || $this->h50_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_instit"]:$this->h50_instit);
      }else{
-       $this->h50_sequencial = ($this->h50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_sequencial"]:$this->h50_sequencial);
+       $this->h50_sequencial = ($this->h50_sequencial === 0 || $this->h50_sequencial === 0.0 || $this->h50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h50_sequencial"]:$this->h50_sequencial);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_rhestagio {
          $this->h50_sequencial = $h50_sequencial; 
        }
      }
-     if(($this->h50_sequencial == null) || ($this->h50_sequencial == "") ){ 
+     if(($this->h50_sequencial == null) || ($this->h50_sequencial === 0 || $this->h50_sequencial === 0.0 || $this->h50_sequencial == "") ){ 
        $this->erro_sql = " Campo h50_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -528,7 +528,7 @@ class cl_rhestagio {
    function sql_query ( $h50_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_rhestagio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -564,7 +564,7 @@ class cl_rhestagio {
    function sql_query_file ( $h50_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -585,7 +585,7 @@ class cl_rhestagio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -597,7 +597,7 @@ class cl_rhestagio {
    function sql_query_assenta( $h50_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -620,7 +620,7 @@ class cl_rhestagio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

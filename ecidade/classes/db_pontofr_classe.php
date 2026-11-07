@@ -64,7 +64,7 @@ class cl_pontofr {
                  r19_instit = int4 = codigo da instituicao 
                  ";
    //funcao construtor da classe 
-   function cl_pontofr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pontofr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,19 +81,19 @@ class cl_pontofr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r19_anousu = ($this->r19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_anousu"]:$this->r19_anousu);
-       $this->r19_mesusu = ($this->r19_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_mesusu"]:$this->r19_mesusu);
-       $this->r19_regist = ($this->r19_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_regist"]:$this->r19_regist);
+       $this->r19_anousu = ($this->r19_anousu === 0 || $this->r19_anousu === 0.0 || $this->r19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_anousu"]:$this->r19_anousu);
+       $this->r19_mesusu = ($this->r19_mesusu === 0 || $this->r19_mesusu === 0.0 || $this->r19_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_mesusu"]:$this->r19_mesusu);
+       $this->r19_regist = ($this->r19_regist === 0 || $this->r19_regist === 0.0 || $this->r19_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_regist"]:$this->r19_regist);
        $this->r19_rubric = ($this->r19_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_rubric"]:$this->r19_rubric);
-       $this->r19_valor = ($this->r19_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_valor"]:$this->r19_valor);
-       $this->r19_quant = ($this->r19_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_quant"]:$this->r19_quant);
+       $this->r19_valor = ($this->r19_valor === 0 || $this->r19_valor === 0.0 || $this->r19_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_valor"]:$this->r19_valor);
+       $this->r19_quant = ($this->r19_quant === 0 || $this->r19_quant === 0.0 || $this->r19_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_quant"]:$this->r19_quant);
        $this->r19_lotac = ($this->r19_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_lotac"]:$this->r19_lotac);
        $this->r19_tpp = ($this->r19_tpp == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_tpp"]:$this->r19_tpp);
-       $this->r19_instit = ($this->r19_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_instit"]:$this->r19_instit);
+       $this->r19_instit = ($this->r19_instit === 0 || $this->r19_instit === 0.0 || $this->r19_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_instit"]:$this->r19_instit);
      }else{
-       $this->r19_anousu = ($this->r19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_anousu"]:$this->r19_anousu);
-       $this->r19_mesusu = ($this->r19_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_mesusu"]:$this->r19_mesusu);
-       $this->r19_regist = ($this->r19_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_regist"]:$this->r19_regist);
+       $this->r19_anousu = ($this->r19_anousu === 0 || $this->r19_anousu === 0.0 || $this->r19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_anousu"]:$this->r19_anousu);
+       $this->r19_mesusu = ($this->r19_mesusu === 0 || $this->r19_mesusu === 0.0 || $this->r19_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_mesusu"]:$this->r19_mesusu);
+       $this->r19_regist = ($this->r19_regist === 0 || $this->r19_regist === 0.0 || $this->r19_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_regist"]:$this->r19_regist);
        $this->r19_rubric = ($this->r19_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_rubric"]:$this->r19_rubric);
        $this->r19_tpp = ($this->r19_tpp == ""?@$GLOBALS["HTTP_POST_VARS"]["r19_tpp"]:$this->r19_tpp);
      }
@@ -143,7 +143,7 @@ class cl_pontofr {
        $this->r19_regist = $r19_regist; 
        $this->r19_rubric = $r19_rubric; 
        $this->r19_tpp = $r19_tpp; 
-     if(($this->r19_anousu == null) || ($this->r19_anousu == "") ){ 
+     if(($this->r19_anousu == null) || ($this->r19_anousu === 0 || $this->r19_anousu === 0.0 || $this->r19_anousu == "") ){ 
        $this->erro_sql = " Campo r19_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -151,7 +151,7 @@ class cl_pontofr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r19_mesusu == null) || ($this->r19_mesusu == "") ){ 
+     if(($this->r19_mesusu == null) || ($this->r19_mesusu === 0 || $this->r19_mesusu === 0.0 || $this->r19_mesusu == "") ){ 
        $this->erro_sql = " Campo r19_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -159,7 +159,7 @@ class cl_pontofr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r19_regist == null) || ($this->r19_regist == "") ){ 
+     if(($this->r19_regist == null) || ($this->r19_regist === 0 || $this->r19_regist === 0.0 || $this->r19_regist == "") ){ 
        $this->erro_sql = " Campo r19_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -581,7 +581,7 @@ class cl_pontofr {
    function sql_query ( $r19_anousu=null,$r19_mesusu=null,$r19_regist=null,$r19_rubric=null,$r19_tpp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -660,7 +660,7 @@ class cl_pontofr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -672,7 +672,7 @@ class cl_pontofr {
    function sql_query_file ( $r19_anousu=null,$r19_mesusu=null,$r19_regist=null,$r19_rubric=null,$r19_tpp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -725,7 +725,7 @@ class cl_pontofr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -737,7 +737,7 @@ class cl_pontofr {
    function sql_query_seleciona ( $r19_anousu=null,$r19_mesusu=null,$r19_regist=null,$r19_rubric=null,$r19_tpp=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -806,7 +806,7 @@ class cl_pontofr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

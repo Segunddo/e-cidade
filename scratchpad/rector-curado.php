@@ -133,4 +133,29 @@ return RectorConfig::configure()
         Rector\Php53\Rector\Variable\ReplaceHttpServerVarsByServerRector::class,
         // acrescenta 2o argumento SEM extract(): as variaveis somem do escopo, em silencio
         Rector\Php72\Rector\FuncCall\ParseStrWithResultArgumentRector::class,
+        // LSP: copia o parametro da mae como OBRIGATORIO na filha -- quebra quem chama
+        // sem argumento (FolhaPagamentoSuplementar::getProximoNumero() em
+        // pes4_aberturasuplementar001.php) e so ve os alvos, deixando irmas fatais.
+        // Tratar a mao: parametro da mae como OPCIONAL, como FolhaPagamentoComplementar faz.
+        Rector\Php80\Rector\ClassMethod\AddParamBasedOnParentClassMethodRector::class,
+        // f(&$x) na CHAMADA e erro de compilacao desde o PHP 5.4: so existe em arquivo que
+        // ja NAO compila no 5.6 (8 telas de arquivo bancario do pes2). Remover o & os
+        // consertaria nos dois runtimes -- muda a saida do 5.6, e conserto, nao migracao.
+        Rector\Php54\Rector\FuncCall\RemoveReferenceFromCallRector::class,
+
+        // --- PHPExcel.phar (biblioteca de terceiros): oito regras que nunca tinham disparado ---
+        // APAGOU parent::__construct() legitimo (a mae BIFFwriter TEM __construct; o Rector nao a
+        // resolveu): o construtor da mae deixaria de rodar no 8.5, em silencio.
+        Rector\DeadCode\Rector\StaticCall\RemoveParentCallWithoutParentRector::class,
+        // emite <=> (PHP 7.0) e array_key_first() (PHP 7.3): parse error / funcao ausente no 5.6
+        Rector\Php70\Rector\If_\IfToSpaceshipRector::class,
+        Rector\Php73\Rector\FuncCall\ArrayKeysToArrayKeyFirstLastRector::class,
+        // (string) na agulha do strpos: o 8 ja trata agulha int como string; no 5.6 int era
+        // CODIGO de caractere -- o cast nao muda o 8.5 e MUDA o 5.6
+        Rector\Php73\Rector\FuncCall\StringifyStrNeedlesRector::class,
+        // modernizacao equivalente, nao exigida pela versao de destino
+        Rector\Php52\Rector\Switch_\ContinueToBreakInSwitchRector::class,
+        Rector\Php55\Rector\Class_\ClassConstantToSelfClassRector::class,
+        Rector\Php53\Rector\FuncCall\DirNameFileConstantToDirConstantRector::class,
+        Rector\Php56\Rector\FuncCall\PowToExpRector::class,
     ]);

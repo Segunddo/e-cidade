@@ -34,7 +34,8 @@ $clrotulo->label('r06_descr');
 $clrotulo->label('r06_elemen');
 $clrotulo->label('r06_pd');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 
@@ -49,9 +50,9 @@ $sql_prev1 = "select distinct r33_ppatro
 $res_prev1 = db_query($sql_prev1);
 $rub_ded1 = '';
 $rub_virg = '';
-if(pg_numrows($res_prev1) > 1){
+if(($res_prev1 ? pg_numrows($res_prev1) : null) > 1){
    db_redireciona('db_erros.php?fechar=true&db_erro=As previdência escolhidas possuem percentuais patronais diferentes. Verifique!');
-}elseif(pg_numrows($res_prev1) > 0){
+}elseif(($res_prev1 ? pg_numrows($res_prev1) : null) > 0){
   db_fieldsmemory($res_prev1,0);
   $rub_base    = 'R992';
   $rub_ded     = '';
@@ -100,7 +101,7 @@ $res_prev = db_query($sql_prev);
 $descr_prev = '';
 $tab_prev   = '';
 $virg       = '';
-if(pg_numrows($res_prev) == 0){
+if(($res_prev ? pg_numrows($res_prev) : null) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Problema na geração do relatório. Contate Suporte.');
 }else{
   for($xprev=0;$xprev<pg_numrows($res_prev);$xprev++){

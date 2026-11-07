@@ -36,7 +36,8 @@ include(modification("classes/db_rharqbanco_classe.php"));
 include(modification("classes/db_orctiporec_classe.php"));
 
 require_once modification("libs/db_utils.php");
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 db_postmemory($HTTP_GET_VARS);
 
@@ -68,7 +69,7 @@ if(!$result_arqbanco || pg_num_rows($result_arqbanco) == 0) {
   $sqlerro = true;
   $erro_msg = "Arquivo não encontrado";
 }
-$clrharqbanco->numrows = pg_num_rows($result_arqbanco);
+$clrharqbanco->numrows = ($result_arqbanco ? pg_num_rows($result_arqbanco) : null);
 
 if($clrharqbanco->numrows>0){
 
@@ -110,14 +111,14 @@ if($clrharqbanco->numrows>0){
     $descricaobanco = $db90_descr;
 
     if(isset($datagera) && $datagera!=""){
-      $datag = split('-',$datagera);
+      $datag = preg_split('#\-#m',$datagera);
       $datag_dia=$datag[2];
       $datag_mes=$datag[1];
       $datag_ano=$datag[0];
     }
 
     if(isset($datadeposit) && $datadeposit!=""){
-      $datad = split('-',$datadeposit);
+      $datad = preg_split('#\-#m',$datadeposit);
       $datad_dia = $datad[2];
       $datad_mes = $datad[1];
       $datad_ano = $datad[0];

@@ -34,7 +34,7 @@ class cl_baserhcadregime {
                  rh158_basesubstituido = varchar(4) = Substituído 
                  ";
    //funcao construtor da classe 
-   function cl_baserhcadregime() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("baserhcadregime"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -51,15 +51,15 @@ class cl_baserhcadregime {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh158_sequencial = ($this->rh158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_sequencial"]:$this->rh158_sequencial);
-       $this->rh158_regime = ($this->rh158_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_regime"]:$this->rh158_regime);
-       $this->rh158_ano = ($this->rh158_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_ano"]:$this->rh158_ano);
-       $this->rh158_mes = ($this->rh158_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_mes"]:$this->rh158_mes);
-       $this->rh158_instit = ($this->rh158_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_instit"]:$this->rh158_instit);
+       $this->rh158_sequencial = ($this->rh158_sequencial === 0 || $this->rh158_sequencial === 0.0 || $this->rh158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_sequencial"]:$this->rh158_sequencial);
+       $this->rh158_regime = ($this->rh158_regime === 0 || $this->rh158_regime === 0.0 || $this->rh158_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_regime"]:$this->rh158_regime);
+       $this->rh158_ano = ($this->rh158_ano === 0 || $this->rh158_ano === 0.0 || $this->rh158_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_ano"]:$this->rh158_ano);
+       $this->rh158_mes = ($this->rh158_mes === 0 || $this->rh158_mes === 0.0 || $this->rh158_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_mes"]:$this->rh158_mes);
+       $this->rh158_instit = ($this->rh158_instit === 0 || $this->rh158_instit === 0.0 || $this->rh158_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_instit"]:$this->rh158_instit);
        $this->rh158_basesubstituto = ($this->rh158_basesubstituto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_basesubstituto"]:$this->rh158_basesubstituto);
        $this->rh158_basesubstituido = ($this->rh158_basesubstituido == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_basesubstituido"]:$this->rh158_basesubstituido);
      }else{
-       $this->rh158_sequencial = ($this->rh158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_sequencial"]:$this->rh158_sequencial);
+       $this->rh158_sequencial = ($this->rh158_sequencial === 0 || $this->rh158_sequencial === 0.0 || $this->rh158_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh158_sequencial"]:$this->rh158_sequencial);
      }
    }
    // funcao para Inclusão
@@ -143,7 +143,7 @@ class cl_baserhcadregime {
          $this->rh158_sequencial = $rh158_sequencial; 
        }
      }
-     if(($this->rh158_sequencial == null) || ($this->rh158_sequencial == "") ){ 
+     if(($this->rh158_sequencial == null) || ($this->rh158_sequencial === 0 || $this->rh158_sequencial === 0.0 || $this->rh158_sequencial == "") ){ 
        $this->erro_sql = " Campo rh158_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

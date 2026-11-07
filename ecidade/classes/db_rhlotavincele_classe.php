@@ -52,7 +52,7 @@ class cl_rhlotavincele {
                  rh28_codelenov = int4 = Elemento novo
                  ";
    //funcao construtor da classe
-   function cl_rhlotavincele() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhlotavincele");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_rhlotavincele {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh28_codlotavinc = ($this->rh28_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh28_codlotavinc"]:$this->rh28_codlotavinc);
-       $this->rh28_codeledef = ($this->rh28_codeledef == ""?@$GLOBALS["HTTP_POST_VARS"]["rh28_codeledef"]:$this->rh28_codeledef);
-       $this->rh28_codelenov = ($this->rh28_codelenov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh28_codelenov"]:$this->rh28_codelenov);
+       $this->rh28_codlotavinc = ($this->rh28_codlotavinc === 0 || $this->rh28_codlotavinc === 0.0 || $this->rh28_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh28_codlotavinc"]:$this->rh28_codlotavinc);
+       $this->rh28_codeledef = ($this->rh28_codeledef === 0 || $this->rh28_codeledef === 0.0 || $this->rh28_codeledef == ""?@$GLOBALS["HTTP_POST_VARS"]["rh28_codeledef"]:$this->rh28_codeledef);
+       $this->rh28_codelenov = ($this->rh28_codelenov === 0 || $this->rh28_codelenov === 0.0 || $this->rh28_codelenov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh28_codelenov"]:$this->rh28_codelenov);
      }else{
-       $this->rh28_codlotavinc = ($this->rh28_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh28_codlotavinc"]:$this->rh28_codlotavinc);
-       $this->rh28_codeledef = ($this->rh28_codeledef == ""?@$GLOBALS["HTTP_POST_VARS"]["rh28_codeledef"]:$this->rh28_codeledef);
+       $this->rh28_codlotavinc = ($this->rh28_codlotavinc === 0 || $this->rh28_codlotavinc === 0.0 || $this->rh28_codlotavinc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh28_codlotavinc"]:$this->rh28_codlotavinc);
+       $this->rh28_codeledef = ($this->rh28_codeledef === 0 || $this->rh28_codeledef === 0.0 || $this->rh28_codeledef == ""?@$GLOBALS["HTTP_POST_VARS"]["rh28_codeledef"]:$this->rh28_codeledef);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_rhlotavincele {
      }
        $this->rh28_codlotavinc = $rh28_codlotavinc;
        $this->rh28_codeledef = $rh28_codeledef;
-     if(($this->rh28_codlotavinc == null) || ($this->rh28_codlotavinc == "") ){
+     if(($this->rh28_codlotavinc == null) || ($this->rh28_codlotavinc === 0 || $this->rh28_codlotavinc === 0.0 || $this->rh28_codlotavinc == "") ){
        $this->erro_sql = " Campo rh28_codlotavinc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_rhlotavincele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh28_codeledef == null) || ($this->rh28_codeledef == "") ){
+     if(($this->rh28_codeledef == null) || ($this->rh28_codeledef === 0 || $this->rh28_codeledef === 0.0 || $this->rh28_codeledef == "") ){
        $this->erro_sql = " Campo rh28_codeledef nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

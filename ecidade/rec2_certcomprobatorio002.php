@@ -340,7 +340,7 @@ function certidao_comprobatorio($regist,$data_cert,$numcert,$emissor){
     $texto .= $db02_texto;
   }
   $data= date("Y-m-d",db_getsession("DB_datausu"));
-  $data=split('-',$data);
+  $data=preg_split('#\-#m',$data);
   $dia=$data[2];
   $mes=$data[1];
   $ano=$data[0];
@@ -1133,8 +1133,8 @@ function enquadra_na_lei(){
           $mar1[05] = "wv_anos";
           $mar1[06] = "wv_perc";
           $mar1[07] = "wv_tipo";
-          $mar1[08] = "wv_protel";
-          $mar1[09] = "wv_inf";
+          $mar1[0] = "wv_protel";  // octal invalido: no 5.6 08 e 09 valem 0 (preservado)
+          $mar1[0] = "wv_inf";
           $mar1[10] = "wv_lei";
           $mar1[11] = "wv_nome";
 
@@ -1145,8 +1145,8 @@ function enquadra_na_lei(){
           $mar2[05] = $anos_perc;
           $mar2[06] = $percentual;
           $mar2[07] = $tipo_vantagem;
-          $mar2[08] = $dias_protelar;
-          $mar2[09] = $inform;
+          $mar2[0] = $dias_protelar;  // octal invalido: no 5.6 08 e 09 valem 0 (preservado)
+          $mar2[0] = $inform;
           $mar2[10] = bb_space(6);
           $mar2[11] = $cgm[0]["z01_nome"];
 

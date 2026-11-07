@@ -38,7 +38,8 @@ $cldb_config = new cl_db_config;
 $cldb_docparag = new cl_db_docparag;
 $clrotulo = new rotulocampo;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $sql_rhvisavale = $clrhvisavale->sql_query_file(db_getsession("DB_instit")," * ");
 $result_rhvisavale = $clrhvisavale->sql_record($sql_rhvisavale);

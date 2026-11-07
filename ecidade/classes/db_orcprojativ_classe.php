@@ -76,7 +76,7 @@ class cl_orcprojativ {
                  o55_orcproduto = int4 = Produto
                  ";
    //funcao construtor da classe
-   function cl_orcprojativ() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcprojativ");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -93,24 +93,24 @@ class cl_orcprojativ {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o55_anousu = ($this->o55_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_anousu"]:$this->o55_anousu);
-       $this->o55_tipo = ($this->o55_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_tipo"]:$this->o55_tipo);
-       $this->o55_projativ = ($this->o55_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_projativ"]:$this->o55_projativ);
+       $this->o55_anousu = ($this->o55_anousu === 0 || $this->o55_anousu === 0.0 || $this->o55_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_anousu"]:$this->o55_anousu);
+       $this->o55_tipo = ($this->o55_tipo === 0 || $this->o55_tipo === 0.0 || $this->o55_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_tipo"]:$this->o55_tipo);
+       $this->o55_projativ = ($this->o55_projativ === 0 || $this->o55_projativ === 0.0 || $this->o55_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_projativ"]:$this->o55_projativ);
        $this->o55_descr = ($this->o55_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_descr"]:$this->o55_descr);
        $this->o55_finali = ($this->o55_finali == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_finali"]:$this->o55_finali);
-       $this->o55_instit = ($this->o55_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_instit"]:$this->o55_instit);
+       $this->o55_instit = ($this->o55_instit === 0 || $this->o55_instit === 0.0 || $this->o55_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_instit"]:$this->o55_instit);
        $this->o55_descrunidade = ($this->o55_descrunidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_descrunidade"]:$this->o55_descrunidade);
-       $this->o55_valorunidade = ($this->o55_valorunidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_valorunidade"]:$this->o55_valorunidade);
+       $this->o55_valorunidade = ($this->o55_valorunidade === 0 || $this->o55_valorunidade === 0.0 || $this->o55_valorunidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_valorunidade"]:$this->o55_valorunidade);
        $this->o55_especproduto = ($this->o55_especproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_especproduto"]:$this->o55_especproduto);
-       $this->o55_tipoacao = ($this->o55_tipoacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_tipoacao"]:$this->o55_tipoacao);
-       $this->o55_formaimplementacao = ($this->o55_formaimplementacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_formaimplementacao"]:$this->o55_formaimplementacao);
+       $this->o55_tipoacao = ($this->o55_tipoacao === 0 || $this->o55_tipoacao === 0.0 || $this->o55_tipoacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_tipoacao"]:$this->o55_tipoacao);
+       $this->o55_formaimplementacao = ($this->o55_formaimplementacao === 0 || $this->o55_formaimplementacao === 0.0 || $this->o55_formaimplementacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_formaimplementacao"]:$this->o55_formaimplementacao);
        $this->o55_detalhamentoimp = ($this->o55_detalhamentoimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_detalhamentoimp"]:$this->o55_detalhamentoimp);
        $this->o55_origemacao = ($this->o55_origemacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_origemacao"]:$this->o55_origemacao);
        $this->o55_baselegal = ($this->o55_baselegal == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_baselegal"]:$this->o55_baselegal);
-       $this->o55_orcproduto = ($this->o55_orcproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_orcproduto"]:$this->o55_orcproduto);
+       $this->o55_orcproduto = ($this->o55_orcproduto === 0 || $this->o55_orcproduto === 0.0 || $this->o55_orcproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_orcproduto"]:$this->o55_orcproduto);
      }else{
-       $this->o55_anousu = ($this->o55_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_anousu"]:$this->o55_anousu);
-       $this->o55_projativ = ($this->o55_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_projativ"]:$this->o55_projativ);
+       $this->o55_anousu = ($this->o55_anousu === 0 || $this->o55_anousu === 0.0 || $this->o55_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_anousu"]:$this->o55_anousu);
+       $this->o55_projativ = ($this->o55_projativ === 0 || $this->o55_projativ === 0.0 || $this->o55_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o55_projativ"]:$this->o55_projativ);
      }
    }
    // funcao para inclusao
@@ -175,7 +175,7 @@ class cl_orcprojativ {
      }
        $this->o55_anousu = $o55_anousu;
        $this->o55_projativ = $o55_projativ;
-     if(($this->o55_anousu == null) || ($this->o55_anousu == "") ){
+     if(($this->o55_anousu == null) || ($this->o55_anousu === 0 || $this->o55_anousu === 0.0 || $this->o55_anousu == "") ){
        $this->erro_sql = " Campo o55_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -183,7 +183,7 @@ class cl_orcprojativ {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o55_projativ == null) || ($this->o55_projativ == "") ){
+     if(($this->o55_projativ == null) || ($this->o55_projativ === 0 || $this->o55_projativ === 0.0 || $this->o55_projativ == "") ){
        $this->erro_sql = " Campo o55_projativ nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

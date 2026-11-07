@@ -52,7 +52,7 @@ class cl_db_relattabelas {
                  db92_codarq = int4 = Código Arquivo 
                  ";
    //funcao construtor da classe 
-   function cl_db_relattabelas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_relattabelas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_db_relattabelas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db92_codigo = ($this->db92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codigo"]:$this->db92_codigo);
-       $this->db92_codrel = ($this->db92_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codrel"]:$this->db92_codrel);
-       $this->db92_codarq = ($this->db92_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codarq"]:$this->db92_codarq);
+       $this->db92_codigo = ($this->db92_codigo === 0 || $this->db92_codigo === 0.0 || $this->db92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codigo"]:$this->db92_codigo);
+       $this->db92_codrel = ($this->db92_codrel === 0 || $this->db92_codrel === 0.0 || $this->db92_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codrel"]:$this->db92_codrel);
+       $this->db92_codarq = ($this->db92_codarq === 0 || $this->db92_codarq === 0.0 || $this->db92_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codarq"]:$this->db92_codarq);
      }else{
-       $this->db92_codigo = ($this->db92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codigo"]:$this->db92_codigo);
+       $this->db92_codigo = ($this->db92_codigo === 0 || $this->db92_codigo === 0.0 || $this->db92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codigo"]:$this->db92_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_relattabelas {
          $this->db92_codigo = $db92_codigo; 
        }
      }
-     if(($this->db92_codigo == null) || ($this->db92_codigo == "") ){ 
+     if(($this->db92_codigo == null) || ($this->db92_codigo === 0 || $this->db92_codigo === 0.0 || $this->db92_codigo == "") ){ 
        $this->erro_sql = " Campo db92_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_db_relattabelas {
    function sql_query ( $db92_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_db_relattabelas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_db_relattabelas {
    function sql_query_file ( $db92_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_db_relattabelas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

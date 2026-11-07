@@ -38,7 +38,8 @@ $clrhpescargo = new cl_rhpescargo;
 $clrhrubricas = new cl_rhrubricas;
 $clrotulo = new rotulocampo;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $mesi = str_pad($mesi, 2, "0", STR_PAD_LEFT);
@@ -58,7 +59,7 @@ $virg_das_rubricas = "";
 $impressao_rubricas = false;
 if(trim($rubricas_selecionadas_text) != ""){
   $impressao_rubricas = true;
-  $arr_das_rubricas = split(",",$rubricas_selecionadas_text);
+  $arr_das_rubricas = preg_split("#,#m",$rubricas_selecionadas_text);
   for($i=0; $i<count($arr_das_rubricas); $i++){
     $db_where_rubricas.= $virg_das_rubricas."'".$arr_das_rubricas[$i]."'";
     $virg_das_rubricas = ",";
@@ -86,7 +87,7 @@ $db_where_matriculas = "
 $sp_where_matriculas = "";
 $virg_das_matriculas = "";
 if(trim($matriculas_selecionadas_text) != ""){
-  $arr_das_matriculas = split(",",$matriculas_selecionadas_text);
+  $arr_das_matriculas = preg_split("#,#m",$matriculas_selecionadas_text);
   for($i=0; $i<count($arr_das_matriculas); $i++){
     $sp_where_matriculas.= $virg_das_matriculas.$arr_das_matriculas[$i];
     $virg_das_matriculas = ",";
@@ -283,7 +284,7 @@ for($i=0; $i < $clrhpessoal->numrows; $i++){
 //echo "<BR> $sql_dados_gerfs";
 //exit;
   $result_dados_gerfs = db_query($sql_dados_gerfs);
-  $numrows_dados_gerfs = pg_numrows($result_dados_gerfs);
+  $numrows_dados_gerfs = ($result_dados_gerfs ? pg_numrows($result_dados_gerfs) : null);
   $mes_anterior = "";
   $ano_anterior = "";
   $contaIarray  = 1;
@@ -364,7 +365,6 @@ for($i=0; $i < $clrhpessoal->numrows; $i++){
 
 if($testa == false){
   db_redireciona("db_erros.php?fechar=true&db_erro=Sem dados para gerar relatório.");
-  break;
 }
 
 $arq = 'tmp/rel_ficha_financ_'.time().'.txt';

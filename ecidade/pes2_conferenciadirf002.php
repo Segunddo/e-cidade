@@ -33,7 +33,8 @@ include(modification("libs/db_utils.php"));
 include(modification("libs/db_app.utils.php"));
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 
@@ -245,17 +246,17 @@ $oPdf->Output();
 function imprimirCabecalho($oPdf, $iAlturalinha, $lImprime,$cgm,$nome,$cpf,$formato) {
   
   if ( $oPdf->GetY() > $oPdf->h - 25 || $lImprime ) {
-    
+
     $oPdf->SetFont('arial', 'b', 6);
     if ( !$lImprime ) {
-      
+
       $oPdf->AddPage("P");
       //imprimeInfoProxPagina($oPdf, $iAlturalinha, true);
     }
 		/*
 		 * Cabeçalho a ser Repetido nas paginas
 		 */  
-    
+
   $oPdf->setfont('arial','b',7);
   $oPdf->cell(160, $iAlturalinha, "CREDOR  - ".$cgm." - ".$nome." - ".db_formatar($cpf,$formato),  "TB",  1, "L", 0);
 

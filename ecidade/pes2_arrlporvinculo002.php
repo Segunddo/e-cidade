@@ -31,7 +31,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label('rh61_regist');
 $clrotulo->label('z01_nome');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 /* parametros
@@ -111,7 +112,7 @@ $sql = "select $campos
 //// da variável $sql no $resultado_sql = db_query($sql);
 //// pg_numrows - verifica quantas linhas vieram no RECORDSET e coloca o resultado na variávei $qtd_linhas_sql
 $resultado_sql = db_query($sql);
-$qtd_linhas_sql = pg_numrows($resultado_sql);
+$qtd_linhas_sql = ($resultado_sql ? pg_numrows($resultado_sql) : null);
 if($qtd_linhas_sql == 0){
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários cadastrados no período.');
 }
@@ -130,9 +131,9 @@ if($sinana == 'a'){
   $total             = 0;
 
   for($x=0; $x<$qtd_linhas_sql; $x++){
-  
+
     db_fieldsmemory($resultado_sql, $x);
-  
+
     if($quebra != $rh30_codreg){
       $quebra = $rh30_codreg;
       $pdf->ln(2);
@@ -148,33 +149,33 @@ if($sinana == 'a'){
        $pdf->cell(25,$alt,'RG',1,0,"C",1);
        $pdf->cell(40,$alt,'CPF',1,0,"C",1);
        $pdf->cell(40,$alt,'DATA DE NASCIMENTO',1,1,"C",1);
-     
+
        $pre = 1;
-       
+
        $pdf->cell(0,$alt,'TIPO DE VINCULO '.$rh30_codreg.' - '.$rh30_descr,0,1,"L",0);
-         
+
        $imprime_cabecalho = false;
     }
-    
+
     if ($pre == 1){
       $pre = 0;
     }else{
       $pre = 1;
     }
-    
+
     $pdf->setfont('arial','',7);
     $pdf->cell(20,$alt,$matricula,0,0,"C",$pre);
     $pdf->cell(70,$alt,$nome,0,0,"L",$pre);
     $pdf->cell(25,$alt,$z01_ident,0,0,"C",$pre);
     $pdf->cell(40,$alt,$z01_cgccpf,0,0,"C",$pre);
     $pdf->cell(40,$alt,db_formatar($rh01_nasc,'d'),0,1,"C",$pre);
-    
+
 
     $total_fun += 1;
     $total     += 1;
-  
+
   }
- 
+
   $pdf->cell(0,$alt,'TOTAL DO VINCULO :  '.$total_fun."  FUNCIONARIOS",0,1,"L",0);
   $pdf->ln(2);
   $pdf->setfont('arial','b',8);

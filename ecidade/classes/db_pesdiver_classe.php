@@ -58,7 +58,7 @@ class cl_pesdiver {
                  r07_instit = int4 = codigo da instituicao 
                  ";
    //funcao construtor da classe 
-   function cl_pesdiver() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pesdiver"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,17 +75,17 @@ class cl_pesdiver {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r07_anousu = ($this->r07_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_anousu"]:$this->r07_anousu);
-       $this->r07_mesusu = ($this->r07_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_mesusu"]:$this->r07_mesusu);
+       $this->r07_anousu = ($this->r07_anousu === 0 || $this->r07_anousu === 0.0 || $this->r07_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_anousu"]:$this->r07_anousu);
+       $this->r07_mesusu = ($this->r07_mesusu === 0 || $this->r07_mesusu === 0.0 || $this->r07_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_mesusu"]:$this->r07_mesusu);
        $this->r07_codigo = ($this->r07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_codigo"]:$this->r07_codigo);
        $this->r07_descr = ($this->r07_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_descr"]:$this->r07_descr);
-       $this->r07_valor = ($this->r07_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_valor"]:$this->r07_valor);
-       $this->r07_instit = ($this->r07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_instit"]:$this->r07_instit);
+       $this->r07_valor = ($this->r07_valor === 0 || $this->r07_valor === 0.0 || $this->r07_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_valor"]:$this->r07_valor);
+       $this->r07_instit = ($this->r07_instit === 0 || $this->r07_instit === 0.0 || $this->r07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_instit"]:$this->r07_instit);
      }else{
-       $this->r07_anousu = ($this->r07_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_anousu"]:$this->r07_anousu);
-       $this->r07_mesusu = ($this->r07_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_mesusu"]:$this->r07_mesusu);
+       $this->r07_anousu = ($this->r07_anousu === 0 || $this->r07_anousu === 0.0 || $this->r07_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_anousu"]:$this->r07_anousu);
+       $this->r07_mesusu = ($this->r07_mesusu === 0 || $this->r07_mesusu === 0.0 || $this->r07_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_mesusu"]:$this->r07_mesusu);
        $this->r07_codigo = ($this->r07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_codigo"]:$this->r07_codigo);
-       $this->r07_instit = ($this->r07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_instit"]:$this->r07_instit);
+       $this->r07_instit = ($this->r07_instit === 0 || $this->r07_instit === 0.0 || $this->r07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r07_instit"]:$this->r07_instit);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_pesdiver {
        $this->r07_mesusu = $r07_mesusu; 
        $this->r07_codigo = $r07_codigo; 
        $this->r07_instit = $r07_instit; 
-     if(($this->r07_anousu == null) || ($this->r07_anousu == "") ){ 
+     if(($this->r07_anousu == null) || ($this->r07_anousu === 0 || $this->r07_anousu === 0.0 || $this->r07_anousu == "") ){ 
        $this->erro_sql = " Campo r07_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -121,7 +121,7 @@ class cl_pesdiver {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r07_mesusu == null) || ($this->r07_mesusu == "") ){ 
+     if(($this->r07_mesusu == null) || ($this->r07_mesusu === 0 || $this->r07_mesusu === 0.0 || $this->r07_mesusu == "") ){ 
        $this->erro_sql = " Campo r07_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -137,7 +137,7 @@ class cl_pesdiver {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r07_instit == null) || ($this->r07_instit == "") ){ 
+     if(($this->r07_instit == null) || ($this->r07_instit === 0 || $this->r07_instit === 0.0 || $this->r07_instit == "") ){ 
        $this->erro_sql = " Campo r07_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

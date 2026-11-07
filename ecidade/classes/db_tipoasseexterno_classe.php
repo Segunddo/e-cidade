@@ -55,15 +55,15 @@ class cl_tipoasseexterno {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh167_sequencial = ($this->rh167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_sequencial"]:$this->rh167_sequencial);
-       $this->rh167_anousu = ($this->rh167_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_anousu"]:$this->rh167_anousu);
-       $this->rh167_mesusu = ($this->rh167_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_mesusu"]:$this->rh167_mesusu);
+       $this->rh167_sequencial = ($this->rh167_sequencial === 0 || $this->rh167_sequencial === 0.0 || $this->rh167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_sequencial"]:$this->rh167_sequencial);
+       $this->rh167_anousu = ($this->rh167_anousu === 0 || $this->rh167_anousu === 0.0 || $this->rh167_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_anousu"]:$this->rh167_anousu);
+       $this->rh167_mesusu = ($this->rh167_mesusu === 0 || $this->rh167_mesusu === 0.0 || $this->rh167_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_mesusu"]:$this->rh167_mesusu);
        $this->rh167_codmovsefip = ($this->rh167_codmovsefip == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_codmovsefip"]:$this->rh167_codmovsefip);
-       $this->rh167_tipoasse = ($this->rh167_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_tipoasse"]:$this->rh167_tipoasse);
-       $this->rh167_situacaoafastamento = ($this->rh167_situacaoafastamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_situacaoafastamento"]:$this->rh167_situacaoafastamento);
-       $this->rh167_instit = ($this->rh167_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_instit"]:$this->rh167_instit);
+       $this->rh167_tipoasse = ($this->rh167_tipoasse === 0 || $this->rh167_tipoasse === 0.0 || $this->rh167_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_tipoasse"]:$this->rh167_tipoasse);
+       $this->rh167_situacaoafastamento = ($this->rh167_situacaoafastamento === 0 || $this->rh167_situacaoafastamento === 0.0 || $this->rh167_situacaoafastamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_situacaoafastamento"]:$this->rh167_situacaoafastamento);
+       $this->rh167_instit = ($this->rh167_instit === 0 || $this->rh167_instit === 0.0 || $this->rh167_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_instit"]:$this->rh167_instit);
      }else{
-       $this->rh167_sequencial = ($this->rh167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_sequencial"]:$this->rh167_sequencial);
+       $this->rh167_sequencial = ($this->rh167_sequencial === 0 || $this->rh167_sequencial === 0.0 || $this->rh167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh167_sequencial"]:$this->rh167_sequencial);
      }
    }
    // funcao para Inclusão
@@ -147,7 +147,7 @@ class cl_tipoasseexterno {
          $this->rh167_sequencial = $rh167_sequencial; 
        }
      }
-     if(($this->rh167_sequencial == null) || ($this->rh167_sequencial == "") ){ 
+     if(($this->rh167_sequencial == null) || ($this->rh167_sequencial === 0 || $this->rh167_sequencial === 0.0 || $this->rh167_sequencial == "") ){ 
        $this->erro_sql = " Campo rh167_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

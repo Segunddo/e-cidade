@@ -54,7 +54,7 @@ class cl_agrupamentorubricarubrica {
                  rh114_instituicao = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_agrupamentorubricarubrica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("agrupamentorubricarubrica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_agrupamentorubricarubrica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh114_sequencial = ($this->rh114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh114_sequencial"]:$this->rh114_sequencial);
-       $this->rh114_agrupamentorubrica = ($this->rh114_agrupamentorubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh114_agrupamentorubrica"]:$this->rh114_agrupamentorubrica);
+       $this->rh114_sequencial = ($this->rh114_sequencial === 0 || $this->rh114_sequencial === 0.0 || $this->rh114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh114_sequencial"]:$this->rh114_sequencial);
+       $this->rh114_agrupamentorubrica = ($this->rh114_agrupamentorubrica === 0 || $this->rh114_agrupamentorubrica === 0.0 || $this->rh114_agrupamentorubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh114_agrupamentorubrica"]:$this->rh114_agrupamentorubrica);
        $this->rh114_rubrica = ($this->rh114_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh114_rubrica"]:$this->rh114_rubrica);
-       $this->rh114_instituicao = ($this->rh114_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh114_instituicao"]:$this->rh114_instituicao);
+       $this->rh114_instituicao = ($this->rh114_instituicao === 0 || $this->rh114_instituicao === 0.0 || $this->rh114_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh114_instituicao"]:$this->rh114_instituicao);
      }else{
-       $this->rh114_sequencial = ($this->rh114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh114_sequencial"]:$this->rh114_sequencial);
+       $this->rh114_sequencial = ($this->rh114_sequencial === 0 || $this->rh114_sequencial === 0.0 || $this->rh114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh114_sequencial"]:$this->rh114_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_agrupamentorubricarubrica {
          $this->rh114_sequencial = $rh114_sequencial; 
        }
      }
-     if(($this->rh114_sequencial == null) || ($this->rh114_sequencial == "") ){ 
+     if(($this->rh114_sequencial == null) || ($this->rh114_sequencial === 0 || $this->rh114_sequencial === 0.0 || $this->rh114_sequencial == "") ){ 
        $this->erro_sql = " Campo rh114_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_agrupamentorubricarubrica {
    function sql_query ( $rh114_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_agrupamentorubricarubrica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_agrupamentorubricarubrica {
    function sql_query_file ( $rh114_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_agrupamentorubricarubrica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

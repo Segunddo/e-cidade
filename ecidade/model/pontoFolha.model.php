@@ -1094,7 +1094,7 @@ class pontoFolha
                             throw new Exception("Repasse abortado, Data de Admissão não informada!");
                         }
 
-                        list($iAnoAdm, $iMesAdm, $iDiaAdm) = split("-", $dtDataAdmissao);
+                        list($iAnoAdm, $iMesAdm, $iDiaAdm) = preg_split("#\\-#m", $dtDataAdmissao);
                         --$iDiaAdm;
 
                         if ($iMesAdm == db_mesfolha() && $iAnoAdm == db_anofolha()) {

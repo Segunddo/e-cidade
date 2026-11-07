@@ -230,7 +230,7 @@ if (DBPessoal::verificarUtilizacaoEstruturaSuplementar() && isset($iTipoFolha)) 
 }
 
 $rsResult = db_query($sSql);
-if (!pg_num_rows($rsResult)) {
+if (!($rsResult ? pg_num_rows($rsResult) : null)) {
   db_redireciona("db_erros.php?fechar=true&db_erro=Nao existem lancamentos no periodo de {$oGet->mes}/{$oGet->ano}");
 }
 

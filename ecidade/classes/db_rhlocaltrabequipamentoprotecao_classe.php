@@ -63,11 +63,11 @@ class cl_rhlocaltrabequipamentoprotecao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh257_sequencial = ($this->rh257_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_sequencial"]:$this->rh257_sequencial);
-       $this->rh257_rhlocaltrabagentesnocivos = ($this->rh257_rhlocaltrabagentesnocivos == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_rhlocaltrabagentesnocivos"]:$this->rh257_rhlocaltrabagentesnocivos);
-       $this->rh257_utilizaepc = ($this->rh257_utilizaepc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_utilizaepc"]:$this->rh257_utilizaepc);
+       $this->rh257_sequencial = ($this->rh257_sequencial === 0 || $this->rh257_sequencial === 0.0 || $this->rh257_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_sequencial"]:$this->rh257_sequencial);
+       $this->rh257_rhlocaltrabagentesnocivos = ($this->rh257_rhlocaltrabagentesnocivos === 0 || $this->rh257_rhlocaltrabagentesnocivos === 0.0 || $this->rh257_rhlocaltrabagentesnocivos == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_rhlocaltrabagentesnocivos"]:$this->rh257_rhlocaltrabagentesnocivos);
+       $this->rh257_utilizaepc = ($this->rh257_utilizaepc === 0 || $this->rh257_utilizaepc === 0.0 || $this->rh257_utilizaepc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_utilizaepc"]:$this->rh257_utilizaepc);
        $this->rh257_eficaciaepc = ($this->rh257_eficaciaepc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_eficaciaepc"]:$this->rh257_eficaciaepc);
-       $this->rh257_utilizaepi = ($this->rh257_utilizaepi == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_utilizaepi"]:$this->rh257_utilizaepi);
+       $this->rh257_utilizaepi = ($this->rh257_utilizaepi === 0 || $this->rh257_utilizaepi === 0.0 || $this->rh257_utilizaepi == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_utilizaepi"]:$this->rh257_utilizaepi);
        $this->rh257_eficaciaepi = ($this->rh257_eficaciaepi == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_eficaciaepi"]:$this->rh257_eficaciaepi);
        $this->rh257_medidaprotecaoepi = ($this->rh257_medidaprotecaoepi == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_medidaprotecaoepi"]:$this->rh257_medidaprotecaoepi);
        $this->rh257_funcionamentoepi = ($this->rh257_funcionamentoepi == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_funcionamentoepi"]:$this->rh257_funcionamentoepi);
@@ -76,7 +76,7 @@ class cl_rhlocaltrabequipamentoprotecao
        $this->rh257_periodicidadeepi = ($this->rh257_periodicidadeepi == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_periodicidadeepi"]:$this->rh257_periodicidadeepi);
        $this->rh257_higienizacaoepi = ($this->rh257_higienizacaoepi == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_higienizacaoepi"]:$this->rh257_higienizacaoepi);
      }else{
-       $this->rh257_sequencial = ($this->rh257_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_sequencial"]:$this->rh257_sequencial);
+       $this->rh257_sequencial = ($this->rh257_sequencial === 0 || $this->rh257_sequencial === 0.0 || $this->rh257_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh257_sequencial"]:$this->rh257_sequencial);
      }
    }
 
@@ -206,7 +206,7 @@ class cl_rhlocaltrabequipamentoprotecao
          $this->rh257_sequencial = $rh257_sequencial; 
        }
      }
-     if(($this->rh257_sequencial == null) || ($this->rh257_sequencial == "") ){ 
+     if(($this->rh257_sequencial == null) || ($this->rh257_sequencial === 0 || $this->rh257_sequencial === 0.0 || $this->rh257_sequencial == "") ){ 
        $this->erro_sql = " Campo rh257_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

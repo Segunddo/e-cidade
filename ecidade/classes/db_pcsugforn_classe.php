@@ -50,7 +50,7 @@ class cl_pcsugforn {
                  pc40_numcgm = int4 = numero do cgm do fornecedor 
                  ";
    //funcao construtor da classe 
-   function cl_pcsugforn() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcsugforn"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_pcsugforn {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc40_solic = ($this->pc40_solic == ""?@$GLOBALS["HTTP_POST_VARS"]["pc40_solic"]:$this->pc40_solic);
-       $this->pc40_numcgm = ($this->pc40_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc40_numcgm"]:$this->pc40_numcgm);
+       $this->pc40_solic = ($this->pc40_solic === 0 || $this->pc40_solic === 0.0 || $this->pc40_solic == ""?@$GLOBALS["HTTP_POST_VARS"]["pc40_solic"]:$this->pc40_solic);
+       $this->pc40_numcgm = ($this->pc40_numcgm === 0 || $this->pc40_numcgm === 0.0 || $this->pc40_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc40_numcgm"]:$this->pc40_numcgm);
      }else{
-       $this->pc40_solic = ($this->pc40_solic == ""?@$GLOBALS["HTTP_POST_VARS"]["pc40_solic"]:$this->pc40_solic);
-       $this->pc40_numcgm = ($this->pc40_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc40_numcgm"]:$this->pc40_numcgm);
+       $this->pc40_solic = ($this->pc40_solic === 0 || $this->pc40_solic === 0.0 || $this->pc40_solic == ""?@$GLOBALS["HTTP_POST_VARS"]["pc40_solic"]:$this->pc40_solic);
+       $this->pc40_numcgm = ($this->pc40_numcgm === 0 || $this->pc40_numcgm === 0.0 || $this->pc40_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc40_numcgm"]:$this->pc40_numcgm);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_pcsugforn {
       $this->atualizacampos();
        $this->pc40_solic = $pc40_solic; 
        $this->pc40_numcgm = $pc40_numcgm; 
-     if(($this->pc40_solic == null) || ($this->pc40_solic == "") ){ 
+     if(($this->pc40_solic == null) || ($this->pc40_solic === 0 || $this->pc40_solic === 0.0 || $this->pc40_solic == "") ){ 
        $this->erro_sql = " Campo pc40_solic nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_pcsugforn {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pc40_numcgm == null) || ($this->pc40_numcgm == "") ){ 
+     if(($this->pc40_numcgm == null) || ($this->pc40_numcgm === 0 || $this->pc40_numcgm === 0.0 || $this->pc40_numcgm == "") ){ 
        $this->erro_sql = " Campo pc40_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -348,7 +348,7 @@ class cl_pcsugforn {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -360,7 +360,7 @@ class cl_pcsugforn {
    function sql_query_file ( $pc40_solic=null,$pc40_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_pcsugforn {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_pcsugforn {
   public function sql_query_dados_fornecedor( $pc40_solic=null,$pc40_numcgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_pcsugforn {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

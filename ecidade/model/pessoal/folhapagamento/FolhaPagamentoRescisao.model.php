@@ -68,7 +68,7 @@ class FolhaPagamentoRescisao extends FolhaPagamento {
    * @example FolhaPagamentoRescisao::hasFolhaAberta()
    * @return  boolean
    */
-  public static function hasFolhaAberta( DBCompetencia $oCompetencia = null) {
+  public static function hasFolhaAberta($oCompetencia = null, $iTipoFolha = null) {
     return FolhaPagamento::hasFolhaAberta(FolhaPagamento::TIPO_FOLHA_RESCISAO, $oCompetencia);
   }
 

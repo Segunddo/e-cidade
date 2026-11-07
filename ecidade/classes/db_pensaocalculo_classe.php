@@ -54,7 +54,7 @@ class cl_pensaocalculo {
                  rh117_instit = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_pensaocalculo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pensaocalculo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_pensaocalculo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh117_sequencial = ($this->rh117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh117_sequencial"]:$this->rh117_sequencial);
-       $this->rh117_ordem = ($this->rh117_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh117_ordem"]:$this->rh117_ordem);
+       $this->rh117_sequencial = ($this->rh117_sequencial === 0 || $this->rh117_sequencial === 0.0 || $this->rh117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh117_sequencial"]:$this->rh117_sequencial);
+       $this->rh117_ordem = ($this->rh117_ordem === 0 || $this->rh117_ordem === 0.0 || $this->rh117_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh117_ordem"]:$this->rh117_ordem);
        $this->rh117_rubrica = ($this->rh117_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["rh117_rubrica"]:$this->rh117_rubrica);
-       $this->rh117_instit = ($this->rh117_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh117_instit"]:$this->rh117_instit);
+       $this->rh117_instit = ($this->rh117_instit === 0 || $this->rh117_instit === 0.0 || $this->rh117_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh117_instit"]:$this->rh117_instit);
      }else{
-       $this->rh117_sequencial = ($this->rh117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh117_sequencial"]:$this->rh117_sequencial);
+       $this->rh117_sequencial = ($this->rh117_sequencial === 0 || $this->rh117_sequencial === 0.0 || $this->rh117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh117_sequencial"]:$this->rh117_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_pensaocalculo {
          $this->rh117_sequencial = $rh117_sequencial; 
        }
      }
-     if(($this->rh117_sequencial == null) || ($this->rh117_sequencial == "") ){ 
+     if(($this->rh117_sequencial == null) || ($this->rh117_sequencial === 0 || $this->rh117_sequencial === 0.0 || $this->rh117_sequencial == "") ){ 
        $this->erro_sql = " Campo rh117_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_pensaocalculo {
    function sql_query ( $rh117_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_pensaocalculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_pensaocalculo {
    function sql_query_file ( $rh117_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -449,7 +449,7 @@ class cl_pensaocalculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

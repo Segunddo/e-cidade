@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $head3 = "EFETIVIDADE REFERENTE A ".$mes." / ".$ano;
 $head5 = "INTERVALO: ".$secini." até ".$secfin;
@@ -69,7 +70,7 @@ $sSql .= "  and rh30_vinculo = 'A'                                  ";
 $sSql .= "order by o40_orgao, z01_nome                              ";
 
 $result = db_query($sSql);
-$xxnum  = pg_numrows($result);
+$xxnum  = ($result ? pg_numrows($result) : null);
 
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários cadastrados no intervalo para o período de '.$mes.' / '.$ano);

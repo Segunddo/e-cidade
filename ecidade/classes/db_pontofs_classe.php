@@ -66,7 +66,7 @@ class cl_pontofs
                  ";
 
     //funcao construtor da classe
-    function cl_pontofs()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("pontofs");
@@ -88,19 +88,19 @@ class cl_pontofs
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->r10_anousu = ($this->r10_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_anousu"] : $this->r10_anousu);
-            $this->r10_mesusu = ($this->r10_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_mesusu"] : $this->r10_mesusu);
-            $this->r10_regist = ($this->r10_regist == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_regist"] : $this->r10_regist);
+            $this->r10_anousu = ($this->r10_anousu === 0 || $this->r10_anousu === 0.0 || $this->r10_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_anousu"] : $this->r10_anousu);
+            $this->r10_mesusu = ($this->r10_mesusu === 0 || $this->r10_mesusu === 0.0 || $this->r10_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_mesusu"] : $this->r10_mesusu);
+            $this->r10_regist = ($this->r10_regist === 0 || $this->r10_regist === 0.0 || $this->r10_regist == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_regist"] : $this->r10_regist);
             $this->r10_rubric = ($this->r10_rubric == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_rubric"] : $this->r10_rubric);
-            $this->r10_valor = ($this->r10_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_valor"] : $this->r10_valor);
-            $this->r10_quant = ($this->r10_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_quant"] : $this->r10_quant);
+            $this->r10_valor = ($this->r10_valor === 0 || $this->r10_valor === 0.0 || $this->r10_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_valor"] : $this->r10_valor);
+            $this->r10_quant = ($this->r10_quant === 0 || $this->r10_quant === 0.0 || $this->r10_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_quant"] : $this->r10_quant);
             $this->r10_lotac = ($this->r10_lotac == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_lotac"] : $this->r10_lotac);
             $this->r10_datlim = ($this->r10_datlim == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_datlim"] : $this->r10_datlim);
-            $this->r10_instit = ($this->r10_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_instit"] : $this->r10_instit);
+            $this->r10_instit = ($this->r10_instit === 0 || $this->r10_instit === 0.0 || $this->r10_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_instit"] : $this->r10_instit);
         } else {
-            $this->r10_anousu = ($this->r10_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_anousu"] : $this->r10_anousu);
-            $this->r10_mesusu = ($this->r10_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_mesusu"] : $this->r10_mesusu);
-            $this->r10_regist = ($this->r10_regist == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_regist"] : $this->r10_regist);
+            $this->r10_anousu = ($this->r10_anousu === 0 || $this->r10_anousu === 0.0 || $this->r10_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_anousu"] : $this->r10_anousu);
+            $this->r10_mesusu = ($this->r10_mesusu === 0 || $this->r10_mesusu === 0.0 || $this->r10_mesusu == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_mesusu"] : $this->r10_mesusu);
+            $this->r10_regist = ($this->r10_regist === 0 || $this->r10_regist === 0.0 || $this->r10_regist == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_regist"] : $this->r10_regist);
             $this->r10_rubric = ($this->r10_rubric == "" ? @$GLOBALS["HTTP_POST_VARS"]["r10_rubric"] : $this->r10_rubric);
         }
     }
@@ -157,7 +157,7 @@ class cl_pontofs
         $this->r10_mesusu = $r10_mesusu;
         $this->r10_regist = $r10_regist;
         $this->r10_rubric = $r10_rubric;
-        if (($this->r10_anousu == null) || ($this->r10_anousu == "")) {
+        if (($this->r10_anousu == null) || ($this->r10_anousu === 0 || $this->r10_anousu === 0.0 || $this->r10_anousu == "")) {
             $this->erro_sql = " Campo r10_anousu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -167,7 +167,7 @@ class cl_pontofs
 
             return false;
         }
-        if (($this->r10_mesusu == null) || ($this->r10_mesusu == "")) {
+        if (($this->r10_mesusu == null) || ($this->r10_mesusu === 0 || $this->r10_mesusu === 0.0 || $this->r10_mesusu == "")) {
             $this->erro_sql = " Campo r10_mesusu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -177,7 +177,7 @@ class cl_pontofs
 
             return false;
         }
-        if (($this->r10_regist == null) || ($this->r10_regist == "")) {
+        if (($this->r10_regist == null) || ($this->r10_regist === 0 || $this->r10_regist === 0.0 || $this->r10_regist == "")) {
             $this->erro_sql = " Campo r10_regist nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

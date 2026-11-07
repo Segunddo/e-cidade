@@ -62,7 +62,7 @@ class cl_vtfempr {
                  r16_empres = int4 = Empresa 
                  ";
    //funcao construtor da classe 
-   function cl_vtfempr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vtfempr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,18 +79,18 @@ class cl_vtfempr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r16_instit = ($this->r16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_instit"]:$this->r16_instit);
-       $this->r16_anousu = ($this->r16_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_anousu"]:$this->r16_anousu);
-       $this->r16_mesusu = ($this->r16_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_mesusu"]:$this->r16_mesusu);
+       $this->r16_instit = ($this->r16_instit === 0 || $this->r16_instit === 0.0 || $this->r16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_instit"]:$this->r16_instit);
+       $this->r16_anousu = ($this->r16_anousu === 0 || $this->r16_anousu === 0.0 || $this->r16_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_anousu"]:$this->r16_anousu);
+       $this->r16_mesusu = ($this->r16_mesusu === 0 || $this->r16_mesusu === 0.0 || $this->r16_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_mesusu"]:$this->r16_mesusu);
        $this->r16_codigo = ($this->r16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_codigo"]:$this->r16_codigo);
        $this->r16_descr = ($this->r16_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_descr"]:$this->r16_descr);
-       $this->r16_valor = ($this->r16_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_valor"]:$this->r16_valor);
-       $this->r16_perc = ($this->r16_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_perc"]:$this->r16_perc);
-       $this->r16_empres = ($this->r16_empres == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_empres"]:$this->r16_empres);
+       $this->r16_valor = ($this->r16_valor === 0 || $this->r16_valor === 0.0 || $this->r16_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_valor"]:$this->r16_valor);
+       $this->r16_perc = ($this->r16_perc === 0 || $this->r16_perc === 0.0 || $this->r16_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_perc"]:$this->r16_perc);
+       $this->r16_empres = ($this->r16_empres === 0 || $this->r16_empres === 0.0 || $this->r16_empres == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_empres"]:$this->r16_empres);
      }else{
-       $this->r16_instit = ($this->r16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_instit"]:$this->r16_instit);
-       $this->r16_anousu = ($this->r16_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_anousu"]:$this->r16_anousu);
-       $this->r16_mesusu = ($this->r16_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_mesusu"]:$this->r16_mesusu);
+       $this->r16_instit = ($this->r16_instit === 0 || $this->r16_instit === 0.0 || $this->r16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_instit"]:$this->r16_instit);
+       $this->r16_anousu = ($this->r16_anousu === 0 || $this->r16_anousu === 0.0 || $this->r16_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_anousu"]:$this->r16_anousu);
+       $this->r16_mesusu = ($this->r16_mesusu === 0 || $this->r16_mesusu === 0.0 || $this->r16_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_mesusu"]:$this->r16_mesusu);
        $this->r16_codigo = ($this->r16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r16_codigo"]:$this->r16_codigo);
      }
    }
@@ -137,7 +137,7 @@ class cl_vtfempr {
        $this->r16_mesusu = $r16_mesusu; 
        $this->r16_codigo = $r16_codigo; 
        $this->r16_instit = $r16_instit; 
-     if(($this->r16_anousu == null) || ($this->r16_anousu == "") ){ 
+     if(($this->r16_anousu == null) || ($this->r16_anousu === 0 || $this->r16_anousu === 0.0 || $this->r16_anousu == "") ){ 
        $this->erro_sql = " Campo r16_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -145,7 +145,7 @@ class cl_vtfempr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r16_mesusu == null) || ($this->r16_mesusu == "") ){ 
+     if(($this->r16_mesusu == null) || ($this->r16_mesusu === 0 || $this->r16_mesusu === 0.0 || $this->r16_mesusu == "") ){ 
        $this->erro_sql = " Campo r16_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -161,7 +161,7 @@ class cl_vtfempr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r16_instit == null) || ($this->r16_instit == "") ){ 
+     if(($this->r16_instit == null) || ($this->r16_instit === 0 || $this->r16_instit === 0.0 || $this->r16_instit == "") ){ 
        $this->erro_sql = " Campo r16_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -530,7 +530,7 @@ class cl_vtfempr {
    function sql_query ( $r16_anousu=null,$r16_mesusu=null,$r16_codigo=null,$r16_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -579,7 +579,7 @@ class cl_vtfempr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -591,7 +591,7 @@ class cl_vtfempr {
    function sql_query_file ( $r16_anousu=null,$r16_mesusu=null,$r16_codigo=null,$r16_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -636,7 +636,7 @@ class cl_vtfempr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

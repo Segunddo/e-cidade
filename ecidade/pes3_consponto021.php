@@ -36,7 +36,8 @@ require_once(modification("classes/db_issbase_classe.php"));
 require_once(modification("classes/db_propri_classe.php"));
 require_once(modification("classes/db_promitente_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $xtipo = "'x'";
 
@@ -294,7 +295,7 @@ if ($opcao != 'previden' && $opcao != 'irf'){
 <?
 
 $cor="#F0F0F0";
-    for($x=0;$x<pg_numrows($result);$x++){
+    for($x=0;$x<($result ? pg_numrows($result) : null);$x++){
 	  db_fieldsmemory($result,$x,true);
         if($cor=="#F0F0F0")
            $cor="#FFF";

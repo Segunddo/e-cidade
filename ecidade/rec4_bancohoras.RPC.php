@@ -55,7 +55,7 @@ try {
       $sWhere                   = '';
       $iSaldoRestante           = '';
       $iSaldoPassivelLancamento = 0;
-      list($iDia, $iMes, $iAno) = split('/', $oParametros->sData);
+      list($iDia, $iMes, $iAno) = preg_split('#\/#m', $oParametros->sData);
       $sData                    = $iAno . '-' . $iMes . '-' . $iDia;
 
       $lSoma    = 'true';

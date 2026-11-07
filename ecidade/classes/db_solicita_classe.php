@@ -76,7 +76,7 @@ class cl_solicita
                  ";
 
     //funcao construtor da classe
-    function cl_solicita()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("solicita");
@@ -98,7 +98,7 @@ class cl_solicita
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->pc10_numero = ($this->pc10_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_numero"] : $this->pc10_numero);
+            $this->pc10_numero = ($this->pc10_numero === 0 || $this->pc10_numero === 0.0 || $this->pc10_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_numero"] : $this->pc10_numero);
             if ($this->pc10_data == "") {
                 $this->pc10_data_dia = ($this->pc10_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_data_dia"] : $this->pc10_data_dia);
                 $this->pc10_data_mes = ($this->pc10_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_data_mes"] : $this->pc10_data_mes);
@@ -108,14 +108,14 @@ class cl_solicita
                 }
             }
             $this->pc10_resumo = ($this->pc10_resumo == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_resumo"] : $this->pc10_resumo);
-            $this->pc10_depto = ($this->pc10_depto == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_depto"] : $this->pc10_depto);
-            $this->pc10_log = ($this->pc10_log == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_log"] : $this->pc10_log);
-            $this->pc10_instit = ($this->pc10_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_instit"] : $this->pc10_instit);
+            $this->pc10_depto = ($this->pc10_depto === 0 || $this->pc10_depto === 0.0 || $this->pc10_depto == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_depto"] : $this->pc10_depto);
+            $this->pc10_log = ($this->pc10_log === 0 || $this->pc10_log === 0.0 || $this->pc10_log == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_log"] : $this->pc10_log);
+            $this->pc10_instit = ($this->pc10_instit === 0 || $this->pc10_instit === 0.0 || $this->pc10_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_instit"] : $this->pc10_instit);
             $this->pc10_correto = ($this->pc10_correto == "f" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_correto"] : $this->pc10_correto);
-            $this->pc10_login = ($this->pc10_login == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_login"] : $this->pc10_login);
-            $this->pc10_solicitacaotipo = ($this->pc10_solicitacaotipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_solicitacaotipo"] : $this->pc10_solicitacaotipo);
+            $this->pc10_login = ($this->pc10_login === 0 || $this->pc10_login === 0.0 || $this->pc10_login == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_login"] : $this->pc10_login);
+            $this->pc10_solicitacaotipo = ($this->pc10_solicitacaotipo === 0 || $this->pc10_solicitacaotipo === 0.0 || $this->pc10_solicitacaotipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_solicitacaotipo"] : $this->pc10_solicitacaotipo);
         } else {
-            $this->pc10_numero = ($this->pc10_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_numero"] : $this->pc10_numero);
+            $this->pc10_numero = ($this->pc10_numero === 0 || $this->pc10_numero === 0.0 || $this->pc10_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc10_numero"] : $this->pc10_numero);
         }
     }
 
@@ -204,7 +204,7 @@ class cl_solicita
                 $this->pc10_numero = $pc10_numero;
             }
         }
-        if (($this->pc10_numero == null) || ($this->pc10_numero == "")) {
+        if (($this->pc10_numero == null) || ($this->pc10_numero === 0 || $this->pc10_numero === 0.0 || $this->pc10_numero == "")) {
             $this->erro_sql = " Campo pc10_numero nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \n\n " . $this->erro_sql . " \n\n";

@@ -68,11 +68,11 @@ class cl_siopeservidorqualificacao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->si08_servidor = ($this->si08_servidor == ""?@$GLOBALS["HTTP_POST_VARS"]["si08_servidor"]:$this->si08_servidor);
-       $this->si08_qualificacao = ($this->si08_qualificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["si08_qualificacao"]:$this->si08_qualificacao);
+       $this->si08_servidor = ($this->si08_servidor === 0 || $this->si08_servidor === 0.0 || $this->si08_servidor == ""?@$GLOBALS["HTTP_POST_VARS"]["si08_servidor"]:$this->si08_servidor);
+       $this->si08_qualificacao = ($this->si08_qualificacao === 0 || $this->si08_qualificacao === 0.0 || $this->si08_qualificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["si08_qualificacao"]:$this->si08_qualificacao);
      }else{
-       $this->si08_servidor = ($this->si08_servidor == ""?@$GLOBALS["HTTP_POST_VARS"]["si08_servidor"]:$this->si08_servidor);
-       $this->si08_qualificacao = ($this->si08_qualificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["si08_qualificacao"]:$this->si08_qualificacao);
+       $this->si08_servidor = ($this->si08_servidor === 0 || $this->si08_servidor === 0.0 || $this->si08_servidor == ""?@$GLOBALS["HTTP_POST_VARS"]["si08_servidor"]:$this->si08_servidor);
+       $this->si08_qualificacao = ($this->si08_qualificacao === 0 || $this->si08_qualificacao === 0.0 || $this->si08_qualificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["si08_qualificacao"]:$this->si08_qualificacao);
      }
    }
 
@@ -81,7 +81,7 @@ class cl_siopeservidorqualificacao
       $this->atualizacampos();
        $this->si08_servidor = $si08_servidor; 
        $this->si08_qualificacao = $si08_qualificacao; 
-     if(($this->si08_servidor == null) || ($this->si08_servidor == "") ){ 
+     if(($this->si08_servidor == null) || ($this->si08_servidor === 0 || $this->si08_servidor === 0.0 || $this->si08_servidor == "") ){ 
        $this->erro_sql = " Campo si08_servidor não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -89,7 +89,7 @@ class cl_siopeservidorqualificacao
        $this->erro_status = "0";
        return false;
      }
-     if(($this->si08_qualificacao == null) || ($this->si08_qualificacao == "") ){ 
+     if(($this->si08_qualificacao == null) || ($this->si08_qualificacao === 0 || $this->si08_qualificacao === 0.0 || $this->si08_qualificacao == "") ){ 
        $this->erro_sql = " Campo si08_qualificacao não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

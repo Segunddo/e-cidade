@@ -38,7 +38,8 @@ $clrotulo->label('r06_pd');
 
 $clinssirf = new cl_inssirf;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $res_prev = $clinssirf->sql_record($clinssirf->sql_query_file(null, db_getsession('DB_instit'),"r33_ppatro,r33_nome,r33_rubmat","r33_nome limit 1",
                                                       "r33_anousu = $ano and r33_mesusu = $mes and r33_codtab = 3 and r33_instit = ". db_getsession("DB_instit")));
@@ -257,7 +258,7 @@ order by rh26_orgao
 
 
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=No existem movimentos cadastrados no perodo de '.$mes.' / '.$ano);
 

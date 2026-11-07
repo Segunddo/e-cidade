@@ -48,7 +48,7 @@ class cl_folhafiltros
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->r39_instituicao = ($this->r39_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["r39_instituicao"]:$this->r39_instituicao);
+       $this->r39_instituicao = ($this->r39_instituicao === 0 || $this->r39_instituicao === 0.0 || $this->r39_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["r39_instituicao"]:$this->r39_instituicao);
        $this->r39_filtros = ($this->r39_filtros == ""?@$GLOBALS["HTTP_POST_VARS"]["r39_filtros"]:$this->r39_filtros);
        if($this->r39_processamento == ""){
          $this->r39_processamento_dia = ($this->r39_processamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r39_processamento_dia"]:$this->r39_processamento_dia);
@@ -59,7 +59,7 @@ class cl_folhafiltros
          }
        }
      }else{
-       $this->r39_instituicao = ($this->r39_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["r39_instituicao"]:$this->r39_instituicao);
+       $this->r39_instituicao = ($this->r39_instituicao === 0 || $this->r39_instituicao === 0.0 || $this->r39_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["r39_instituicao"]:$this->r39_instituicao);
      }
    }
 
@@ -76,7 +76,7 @@ class cl_folhafiltros
        return false;
      }
        $this->r39_instituicao = $r39_instituicao; 
-     if(($this->r39_instituicao == null) || ($this->r39_instituicao == "") ){ 
+     if(($this->r39_instituicao == null) || ($this->r39_instituicao === 0 || $this->r39_instituicao === 0.0 || $this->r39_instituicao == "") ){ 
        $this->erro_sql = " Campo r39_instituicao não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

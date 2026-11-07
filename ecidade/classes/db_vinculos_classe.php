@@ -68,7 +68,7 @@ class cl_vinculos {
                  h11_regime = int4 = Regime 
                  ";
    //funcao construtor da classe 
-   function cl_vinculos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vinculos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,19 +85,19 @@ class cl_vinculos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h11_codigo = ($this->h11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_codigo"]:$this->h11_codigo);
-       $this->h11_funcao = ($this->h11_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_funcao"]:$this->h11_funcao);
-       $this->h11_lei1 = ($this->h11_lei1 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_lei1"]:$this->h11_lei1);
-       $this->h11_lei2 = ($this->h11_lei2 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_lei2"]:$this->h11_lei2);
-       $this->h11_lei3 = ($this->h11_lei3 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_lei3"]:$this->h11_lei3);
-       $this->h11_lei4 = ($this->h11_lei4 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_lei4"]:$this->h11_lei4);
-       $this->h11_lei5 = ($this->h11_lei5 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_lei5"]:$this->h11_lei5);
+       $this->h11_codigo = ($this->h11_codigo === 0 || $this->h11_codigo === 0.0 || $this->h11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_codigo"]:$this->h11_codigo);
+       $this->h11_funcao = ($this->h11_funcao === 0 || $this->h11_funcao === 0.0 || $this->h11_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_funcao"]:$this->h11_funcao);
+       $this->h11_lei1 = ($this->h11_lei1 === 0 || $this->h11_lei1 === 0.0 || $this->h11_lei1 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_lei1"]:$this->h11_lei1);
+       $this->h11_lei2 = ($this->h11_lei2 === 0 || $this->h11_lei2 === 0.0 || $this->h11_lei2 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_lei2"]:$this->h11_lei2);
+       $this->h11_lei3 = ($this->h11_lei3 === 0 || $this->h11_lei3 === 0.0 || $this->h11_lei3 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_lei3"]:$this->h11_lei3);
+       $this->h11_lei4 = ($this->h11_lei4 === 0 || $this->h11_lei4 === 0.0 || $this->h11_lei4 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_lei4"]:$this->h11_lei4);
+       $this->h11_lei5 = ($this->h11_lei5 === 0 || $this->h11_lei5 === 0.0 || $this->h11_lei5 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_lei5"]:$this->h11_lei5);
        $this->h11_tipo = ($this->h11_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_tipo"]:$this->h11_tipo);
        $this->h11_cert01 = ($this->h11_cert01 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_cert01"]:$this->h11_cert01);
        $this->h11_cert02 = ($this->h11_cert02 == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_cert02"]:$this->h11_cert02);
-       $this->h11_regime = ($this->h11_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_regime"]:$this->h11_regime);
+       $this->h11_regime = ($this->h11_regime === 0 || $this->h11_regime === 0.0 || $this->h11_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_regime"]:$this->h11_regime);
      }else{
-       $this->h11_codigo = ($this->h11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_codigo"]:$this->h11_codigo);
+       $this->h11_codigo = ($this->h11_codigo === 0 || $this->h11_codigo === 0.0 || $this->h11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h11_codigo"]:$this->h11_codigo);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_vinculos {
          $this->h11_codigo = $h11_codigo; 
        }
      }
-     if(($this->h11_codigo == null) || ($this->h11_codigo == "") ){ 
+     if(($this->h11_codigo == null) || ($this->h11_codigo === 0 || $this->h11_codigo === 0.0 || $this->h11_codigo == "") ){ 
        $this->erro_sql = " Campo h11_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -511,7 +511,7 @@ class cl_vinculos {
    function sql_query ( $h11_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -543,7 +543,7 @@ class cl_vinculos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -555,7 +555,7 @@ class cl_vinculos {
    function sql_query_file ( $h11_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -576,7 +576,7 @@ class cl_vinculos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

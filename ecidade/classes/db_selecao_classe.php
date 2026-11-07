@@ -62,7 +62,7 @@ class cl_selecao {
                  r44_gruposelecao = int4 = Cod. Grupo
                  ";
    //funcao construtor da classe
-   function cl_selecao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("selecao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,17 +79,17 @@ class cl_selecao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r44_selec = ($this->r44_selec == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_selec"]:$this->r44_selec);
-       $this->r44_instit = ($this->r44_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_instit"]:$this->r44_instit);
+       $this->r44_selec = ($this->r44_selec === 0 || $this->r44_selec === 0.0 || $this->r44_selec == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_selec"]:$this->r44_selec);
+       $this->r44_instit = ($this->r44_instit === 0 || $this->r44_instit === 0.0 || $this->r44_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_instit"]:$this->r44_instit);
        $this->r44_desc1 = ($this->r44_desc1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_desc1"]:$this->r44_desc1);
        $this->r44_desc2 = ($this->r44_desc2 == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_desc2"]:$this->r44_desc2);
        $this->r44_descr = ($this->r44_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_descr"]:$this->r44_descr);
        $this->r44_obs = ($this->r44_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_obs"]:$this->r44_obs);
        $this->r44_where = ($this->r44_where == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_where"]:$this->r44_where);
-       $this->r44_gruposelecao = ($this->r44_gruposelecao == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_gruposelecao"]:$this->r44_gruposelecao);
+       $this->r44_gruposelecao = ($this->r44_gruposelecao === 0 || $this->r44_gruposelecao === 0.0 || $this->r44_gruposelecao == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_gruposelecao"]:$this->r44_gruposelecao);
      }else{
-       $this->r44_selec = ($this->r44_selec == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_selec"]:$this->r44_selec);
-       $this->r44_instit = ($this->r44_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_instit"]:$this->r44_instit);
+       $this->r44_selec = ($this->r44_selec === 0 || $this->r44_selec === 0.0 || $this->r44_selec == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_selec"]:$this->r44_selec);
+       $this->r44_instit = ($this->r44_instit === 0 || $this->r44_instit === 0.0 || $this->r44_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r44_instit"]:$this->r44_instit);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_selecao {
      }
        $this->r44_selec = $r44_selec;
        $this->r44_instit = $r44_instit;
-     if(($this->r44_selec == null) || ($this->r44_selec == "") ){
+     if(($this->r44_selec == null) || ($this->r44_selec === 0 || $this->r44_selec === 0.0 || $this->r44_selec == "") ){
        $this->erro_sql = " Campo r44_selec nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -123,7 +123,7 @@ class cl_selecao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r44_instit == null) || ($this->r44_instit == "") ){
+     if(($this->r44_instit == null) || ($this->r44_instit === 0 || $this->r44_instit === 0.0 || $this->r44_instit == "") ){
        $this->erro_sql = " Campo r44_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -455,7 +455,7 @@ class cl_selecao {
    function sql_query ( $r44_selec=null,$r44_instit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_selecao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_selecao {
    function sql_query_file ( $r44_selec=null,$r44_instit=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -530,7 +530,7 @@ class cl_selecao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

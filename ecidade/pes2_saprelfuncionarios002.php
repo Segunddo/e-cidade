@@ -33,7 +33,8 @@ $clrotulo->label('rh01_regist');
 $clrotulo->label('z01_nome');
 $clrotulo->label('r70_estrut');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $head3 = "CADASTRO DE FUNCIONÁRIOS COMPLETO";
 $head5 = "PERÍODO : ".$mes." / ".$ano;
@@ -74,7 +75,7 @@ $sql_dados = $gerasql->gerador_sql(null, $ano, $mes, null, null,
                                    $dbordem, $dbwhere);
 //echo $sql_dados;exit;
 $result_dados = db_query($sql_dados);
-$numrows_dados = pg_numrows($result_dados);
+$numrows_dados = ($result_dados ? pg_numrows($result_dados) : null);
 if($numrows_dados == 0){
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários cadastrados no período de '.$mes.' / '.$ano);
 }

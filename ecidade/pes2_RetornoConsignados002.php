@@ -41,7 +41,8 @@ $clmovrel->rotulo->label();
 $clrotulo->label('z01_nome');
 $clrotulo->label('rh05_recis');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 //echo "<br> ano -> $ano <br>";
@@ -88,13 +89,13 @@ if(isset($r54_codeve) && $r54_codeve != ""){
   if($clrelac->numrows > 0){
     db_fieldsmemory($result_codeve,0);
     $HEAD8 = "head".$mais;
-    $$HEAD8 = "RELACIONAMENTO: ".$r54_codeve." - ".$descrrelac;
+    ${$HEAD8} = "RELACIONAMENTO: ".$r54_codeve." - ".$descrrelac;
     $mais ++;
   }
 }
 if(isset($nao_lancados)){
   $HEAD9 = "head".$mais;
-  $$HEAD9 = "Não lançados na folha";
+  ${$HEAD9} = "Não lançados na folha";
   $dbwhere .= " and r54_lancad = 'f' ";
 }
 
@@ -137,7 +138,7 @@ $sSqlMovRelDados    = "select r54_codrel,
                                 r54_regist,
                                 r54_quant1";
 
-$xRubrica = pg_result($clmovrel->sql_record($sSqlMovRelDados),0,'r55_rubr01');
+$xRubrica = (($rsMovRelDados = $clmovrel->sql_record($sSqlMovRelDados)) ? pg_result($rsMovRelDados,0,'r55_rubr01') : null); // pg_result(false): NULL no 5.6
 
 $sSqlInconsistencia = " select r14_regist, z01_nome, r70_descr, z01_cgccpf as cpf, r14_valor 
 		  from gerfsal
@@ -159,7 +160,7 @@ $sSqlInconsistencia = " select r14_regist, z01_nome, r70_descr, z01_cgccpf as cp
 $erro_msg = '';
 
 $result_inconsistencias = pg_query($sSqlInconsistencia);
-$numrows_inconsistencias = pg_numrows($result_inconsistencias);
+$numrows_inconsistencias = ($result_inconsistencias ? pg_numrows($result_inconsistencias) : null);
 
 $result_dados = $clmovrel->sql_record($sSqlMovRelDados);
 $numrows_dados = $clmovrel->numrows;

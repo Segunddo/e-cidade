@@ -26,7 +26,7 @@ class cl_codigoclienterefeisul {
                  rh171_codigocliente = int4 = Código Refeisul 
                  ";
    //funcao construtor da classe 
-   function cl_codigoclienterefeisul() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("codigoclienterefeisul"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_codigoclienterefeisul {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh171_sequencial = ($this->rh171_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh171_sequencial"]:$this->rh171_sequencial);
-       $this->rh171_instit = ($this->rh171_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh171_instit"]:$this->rh171_instit);
-       $this->rh171_codigocliente = ($this->rh171_codigocliente == ""?@$GLOBALS["HTTP_POST_VARS"]["rh171_codigocliente"]:$this->rh171_codigocliente);
+       $this->rh171_sequencial = ($this->rh171_sequencial === 0 || $this->rh171_sequencial === 0.0 || $this->rh171_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh171_sequencial"]:$this->rh171_sequencial);
+       $this->rh171_instit = ($this->rh171_instit === 0 || $this->rh171_instit === 0.0 || $this->rh171_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh171_instit"]:$this->rh171_instit);
+       $this->rh171_codigocliente = ($this->rh171_codigocliente === 0 || $this->rh171_codigocliente === 0.0 || $this->rh171_codigocliente == ""?@$GLOBALS["HTTP_POST_VARS"]["rh171_codigocliente"]:$this->rh171_codigocliente);
      }else{
-       $this->rh171_sequencial = ($this->rh171_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh171_sequencial"]:$this->rh171_sequencial);
+       $this->rh171_sequencial = ($this->rh171_sequencial === 0 || $this->rh171_sequencial === 0.0 || $this->rh171_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh171_sequencial"]:$this->rh171_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_codigoclienterefeisul {
          $this->rh171_sequencial = $rh171_sequencial; 
        }
      }
-     if(($this->rh171_sequencial == null) || ($this->rh171_sequencial == "") ){ 
+     if(($this->rh171_sequencial == null) || ($this->rh171_sequencial === 0 || $this->rh171_sequencial === 0.0 || $this->rh171_sequencial == "") ){ 
        $this->erro_sql = " Campo rh171_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

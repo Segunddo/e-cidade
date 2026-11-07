@@ -53,7 +53,7 @@ class cl_rhpessoalmovcontabancaria {
                  rh138_instit = int4 = Insituição 
                  ";
    //funcao construtor da classe 
-   function cl_rhpessoalmovcontabancaria() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhpessoalmovcontabancaria"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -70,12 +70,12 @@ class cl_rhpessoalmovcontabancaria {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh138_sequencial = ($this->rh138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh138_sequencial"]:$this->rh138_sequencial);
-       $this->rh138_rhpessoalmov = ($this->rh138_rhpessoalmov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh138_rhpessoalmov"]:$this->rh138_rhpessoalmov);
-       $this->rh138_contabancaria = ($this->rh138_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["rh138_contabancaria"]:$this->rh138_contabancaria);
-       $this->rh138_instit = ($this->rh138_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh138_instit"]:$this->rh138_instit);
+       $this->rh138_sequencial = ($this->rh138_sequencial === 0 || $this->rh138_sequencial === 0.0 || $this->rh138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh138_sequencial"]:$this->rh138_sequencial);
+       $this->rh138_rhpessoalmov = ($this->rh138_rhpessoalmov === 0 || $this->rh138_rhpessoalmov === 0.0 || $this->rh138_rhpessoalmov == ""?@$GLOBALS["HTTP_POST_VARS"]["rh138_rhpessoalmov"]:$this->rh138_rhpessoalmov);
+       $this->rh138_contabancaria = ($this->rh138_contabancaria === 0 || $this->rh138_contabancaria === 0.0 || $this->rh138_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["rh138_contabancaria"]:$this->rh138_contabancaria);
+       $this->rh138_instit = ($this->rh138_instit === 0 || $this->rh138_instit === 0.0 || $this->rh138_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh138_instit"]:$this->rh138_instit);
      }else{
-       $this->rh138_sequencial = ($this->rh138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh138_sequencial"]:$this->rh138_sequencial);
+       $this->rh138_sequencial = ($this->rh138_sequencial === 0 || $this->rh138_sequencial === 0.0 || $this->rh138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh138_sequencial"]:$this->rh138_sequencial);
      }
    }
    // funcao para inclusao
@@ -132,7 +132,7 @@ class cl_rhpessoalmovcontabancaria {
          $this->rh138_sequencial = $rh138_sequencial; 
        }
      }
-     if(($this->rh138_sequencial == null) || ($this->rh138_sequencial == "") ){ 
+     if(($this->rh138_sequencial == null) || ($this->rh138_sequencial === 0 || $this->rh138_sequencial === 0.0 || $this->rh138_sequencial == "") ){ 
        $this->erro_sql = " Campo rh138_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

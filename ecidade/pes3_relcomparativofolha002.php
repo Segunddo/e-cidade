@@ -55,7 +55,7 @@ $iTipoRubrica     = $oGet->iFiltroTipoRubrica;
 */
 $lErro = true;
 
-foreach (array_reverse($oGet->objeto2) as $sTipoFolha){
+foreach ((is_array($oGet->objeto2) ? array_reverse($oGet->objeto2) : null) as $sTipoFolha){
 
 	switch ($sTipoFolha){ 
 	  case 'gerfsal':
@@ -188,7 +188,7 @@ foreach (array_reverse($oGet->objeto2) as $sTipoFolha){
 }
 $pdf    = new PDF(); 
 $head1  = "RELATÓRIO COMPARATIVO ENTRE FOLHAS";
-$head3  = "Tipos de Folha: ".implode(", ",$aTitulo);
+$head3  = "Tipos de Folha: ".(is_array($aTitulo) ? implode(", ", $aTitulo) : null);
 $head4  = "Ano/Mês Base: ".$oGet->iAnoBase."/".$oGet->iMesBase;
 $head5  = "Ano/Mês a Comparar: ".$oGet->iAnoCompara."/".$oGet->iMesCompara;
 if (strlen($sFiltroRubricas) >= 30) {

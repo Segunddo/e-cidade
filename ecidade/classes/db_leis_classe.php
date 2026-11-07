@@ -175,7 +175,7 @@ class cl_leis {
                  h08_perc18 = float8 = Percentual 18o. 
                  ";
    //funcao construtor da classe 
-   function cl_leis() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("leis"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -192,7 +192,7 @@ class cl_leis {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h08_codlei = ($this->h08_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_codlei"]:$this->h08_codlei);
+       $this->h08_codlei = ($this->h08_codlei === 0 || $this->h08_codlei === 0.0 || $this->h08_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_codlei"]:$this->h08_codlei);
        $this->h08_numero = ($this->h08_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_numero"]:$this->h08_numero);
        if($this->h08_dtlanc == ""){
          $this->h08_dtlanc_dia = ($this->h08_dtlanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_dtlanc_dia"]:$this->h08_dtlanc_dia);
@@ -219,36 +219,36 @@ class cl_leis {
             $this->h08_dtfim = $this->h08_dtfim_ano."-".$this->h08_dtfim_mes."-".$this->h08_dtfim_dia;
          }
        }
-       $this->h08_anos1 = ($this->h08_anos1 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos1"]:$this->h08_anos1);
-       $this->h08_perc1 = ($this->h08_perc1 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc1"]:$this->h08_perc1);
-       $this->h08_anos2 = ($this->h08_anos2 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos2"]:$this->h08_anos2);
-       $this->h08_perc2 = ($this->h08_perc2 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc2"]:$this->h08_perc2);
-       $this->h08_anos3 = ($this->h08_anos3 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos3"]:$this->h08_anos3);
-       $this->h08_perc3 = ($this->h08_perc3 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc3"]:$this->h08_perc3);
-       $this->h08_anos4 = ($this->h08_anos4 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos4"]:$this->h08_anos4);
-       $this->h08_perc4 = ($this->h08_perc4 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc4"]:$this->h08_perc4);
-       $this->h08_anos5 = ($this->h08_anos5 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos5"]:$this->h08_anos5);
-       $this->h08_perc5 = ($this->h08_perc5 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc5"]:$this->h08_perc5);
-       $this->h08_anos6 = ($this->h08_anos6 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos6"]:$this->h08_anos6);
-       $this->h08_perc6 = ($this->h08_perc6 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc6"]:$this->h08_perc6);
-       $this->h08_anos7 = ($this->h08_anos7 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos7"]:$this->h08_anos7);
-       $this->h08_perc7 = ($this->h08_perc7 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc7"]:$this->h08_perc7);
-       $this->h08_anos8 = ($this->h08_anos8 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos8"]:$this->h08_anos8);
-       $this->h08_perc8 = ($this->h08_perc8 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc8"]:$this->h08_perc8);
-       $this->h08_anos9 = ($this->h08_anos9 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos9"]:$this->h08_anos9);
-       $this->h08_perc9 = ($this->h08_perc9 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc9"]:$this->h08_perc9);
-       $this->h08_anos10 = ($this->h08_anos10 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos10"]:$this->h08_anos10);
-       $this->h08_perc10 = ($this->h08_perc10 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc10"]:$this->h08_perc10);
-       $this->h08_anos11 = ($this->h08_anos11 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos11"]:$this->h08_anos11);
-       $this->h08_perc11 = ($this->h08_perc11 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc11"]:$this->h08_perc11);
-       $this->h08_anos12 = ($this->h08_anos12 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos12"]:$this->h08_anos12);
-       $this->h08_perc12 = ($this->h08_perc12 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc12"]:$this->h08_perc12);
-       $this->h08_anos13 = ($this->h08_anos13 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos13"]:$this->h08_anos13);
-       $this->h08_perc13 = ($this->h08_perc13 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc13"]:$this->h08_perc13);
-       $this->h08_anos14 = ($this->h08_anos14 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos14"]:$this->h08_anos14);
-       $this->h08_perc14 = ($this->h08_perc14 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc14"]:$this->h08_perc14);
-       $this->h08_anos15 = ($this->h08_anos15 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos15"]:$this->h08_anos15);
-       $this->h08_perc15 = ($this->h08_perc15 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc15"]:$this->h08_perc15);
+       $this->h08_anos1 = ($this->h08_anos1 === 0 || $this->h08_anos1 === 0.0 || $this->h08_anos1 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos1"]:$this->h08_anos1);
+       $this->h08_perc1 = ($this->h08_perc1 === 0 || $this->h08_perc1 === 0.0 || $this->h08_perc1 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc1"]:$this->h08_perc1);
+       $this->h08_anos2 = ($this->h08_anos2 === 0 || $this->h08_anos2 === 0.0 || $this->h08_anos2 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos2"]:$this->h08_anos2);
+       $this->h08_perc2 = ($this->h08_perc2 === 0 || $this->h08_perc2 === 0.0 || $this->h08_perc2 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc2"]:$this->h08_perc2);
+       $this->h08_anos3 = ($this->h08_anos3 === 0 || $this->h08_anos3 === 0.0 || $this->h08_anos3 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos3"]:$this->h08_anos3);
+       $this->h08_perc3 = ($this->h08_perc3 === 0 || $this->h08_perc3 === 0.0 || $this->h08_perc3 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc3"]:$this->h08_perc3);
+       $this->h08_anos4 = ($this->h08_anos4 === 0 || $this->h08_anos4 === 0.0 || $this->h08_anos4 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos4"]:$this->h08_anos4);
+       $this->h08_perc4 = ($this->h08_perc4 === 0 || $this->h08_perc4 === 0.0 || $this->h08_perc4 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc4"]:$this->h08_perc4);
+       $this->h08_anos5 = ($this->h08_anos5 === 0 || $this->h08_anos5 === 0.0 || $this->h08_anos5 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos5"]:$this->h08_anos5);
+       $this->h08_perc5 = ($this->h08_perc5 === 0 || $this->h08_perc5 === 0.0 || $this->h08_perc5 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc5"]:$this->h08_perc5);
+       $this->h08_anos6 = ($this->h08_anos6 === 0 || $this->h08_anos6 === 0.0 || $this->h08_anos6 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos6"]:$this->h08_anos6);
+       $this->h08_perc6 = ($this->h08_perc6 === 0 || $this->h08_perc6 === 0.0 || $this->h08_perc6 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc6"]:$this->h08_perc6);
+       $this->h08_anos7 = ($this->h08_anos7 === 0 || $this->h08_anos7 === 0.0 || $this->h08_anos7 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos7"]:$this->h08_anos7);
+       $this->h08_perc7 = ($this->h08_perc7 === 0 || $this->h08_perc7 === 0.0 || $this->h08_perc7 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc7"]:$this->h08_perc7);
+       $this->h08_anos8 = ($this->h08_anos8 === 0 || $this->h08_anos8 === 0.0 || $this->h08_anos8 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos8"]:$this->h08_anos8);
+       $this->h08_perc8 = ($this->h08_perc8 === 0 || $this->h08_perc8 === 0.0 || $this->h08_perc8 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc8"]:$this->h08_perc8);
+       $this->h08_anos9 = ($this->h08_anos9 === 0 || $this->h08_anos9 === 0.0 || $this->h08_anos9 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos9"]:$this->h08_anos9);
+       $this->h08_perc9 = ($this->h08_perc9 === 0 || $this->h08_perc9 === 0.0 || $this->h08_perc9 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc9"]:$this->h08_perc9);
+       $this->h08_anos10 = ($this->h08_anos10 === 0 || $this->h08_anos10 === 0.0 || $this->h08_anos10 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos10"]:$this->h08_anos10);
+       $this->h08_perc10 = ($this->h08_perc10 === 0 || $this->h08_perc10 === 0.0 || $this->h08_perc10 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc10"]:$this->h08_perc10);
+       $this->h08_anos11 = ($this->h08_anos11 === 0 || $this->h08_anos11 === 0.0 || $this->h08_anos11 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos11"]:$this->h08_anos11);
+       $this->h08_perc11 = ($this->h08_perc11 === 0 || $this->h08_perc11 === 0.0 || $this->h08_perc11 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc11"]:$this->h08_perc11);
+       $this->h08_anos12 = ($this->h08_anos12 === 0 || $this->h08_anos12 === 0.0 || $this->h08_anos12 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos12"]:$this->h08_anos12);
+       $this->h08_perc12 = ($this->h08_perc12 === 0 || $this->h08_perc12 === 0.0 || $this->h08_perc12 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc12"]:$this->h08_perc12);
+       $this->h08_anos13 = ($this->h08_anos13 === 0 || $this->h08_anos13 === 0.0 || $this->h08_anos13 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos13"]:$this->h08_anos13);
+       $this->h08_perc13 = ($this->h08_perc13 === 0 || $this->h08_perc13 === 0.0 || $this->h08_perc13 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc13"]:$this->h08_perc13);
+       $this->h08_anos14 = ($this->h08_anos14 === 0 || $this->h08_anos14 === 0.0 || $this->h08_anos14 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos14"]:$this->h08_anos14);
+       $this->h08_perc14 = ($this->h08_perc14 === 0 || $this->h08_perc14 === 0.0 || $this->h08_perc14 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc14"]:$this->h08_perc14);
+       $this->h08_anos15 = ($this->h08_anos15 === 0 || $this->h08_anos15 === 0.0 || $this->h08_anos15 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos15"]:$this->h08_anos15);
+       $this->h08_perc15 = ($this->h08_perc15 === 0 || $this->h08_perc15 === 0.0 || $this->h08_perc15 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc15"]:$this->h08_perc15);
        $this->h08_car1 = ($this->h08_car1 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_car1"]:$this->h08_car1);
        $this->h08_car2 = ($this->h08_car2 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_car2"]:$this->h08_car2);
        $this->h08_car3 = ($this->h08_car3 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_car3"]:$this->h08_car3);
@@ -264,17 +264,17 @@ class cl_leis {
        $this->h08_car13 = ($this->h08_car13 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_car13"]:$this->h08_car13);
        $this->h08_car14 = ($this->h08_car14 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_car14"]:$this->h08_car14);
        $this->h08_car15 = ($this->h08_car15 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_car15"]:$this->h08_car15);
-       $this->h08_anos16 = ($this->h08_anos16 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos16"]:$this->h08_anos16);
-       $this->h08_anos17 = ($this->h08_anos17 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos17"]:$this->h08_anos17);
-       $this->h08_anos18 = ($this->h08_anos18 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos18"]:$this->h08_anos18);
+       $this->h08_anos16 = ($this->h08_anos16 === 0 || $this->h08_anos16 === 0.0 || $this->h08_anos16 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos16"]:$this->h08_anos16);
+       $this->h08_anos17 = ($this->h08_anos17 === 0 || $this->h08_anos17 === 0.0 || $this->h08_anos17 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos17"]:$this->h08_anos17);
+       $this->h08_anos18 = ($this->h08_anos18 === 0 || $this->h08_anos18 === 0.0 || $this->h08_anos18 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_anos18"]:$this->h08_anos18);
        $this->h08_car16 = ($this->h08_car16 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_car16"]:$this->h08_car16);
        $this->h08_car17 = ($this->h08_car17 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_car17"]:$this->h08_car17);
        $this->h08_car18 = ($this->h08_car18 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_car18"]:$this->h08_car18);
-       $this->h08_perc16 = ($this->h08_perc16 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc16"]:$this->h08_perc16);
-       $this->h08_perc17 = ($this->h08_perc17 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc17"]:$this->h08_perc17);
-       $this->h08_perc18 = ($this->h08_perc18 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc18"]:$this->h08_perc18);
+       $this->h08_perc16 = ($this->h08_perc16 === 0 || $this->h08_perc16 === 0.0 || $this->h08_perc16 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc16"]:$this->h08_perc16);
+       $this->h08_perc17 = ($this->h08_perc17 === 0 || $this->h08_perc17 === 0.0 || $this->h08_perc17 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc17"]:$this->h08_perc17);
+       $this->h08_perc18 = ($this->h08_perc18 === 0 || $this->h08_perc18 === 0.0 || $this->h08_perc18 == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_perc18"]:$this->h08_perc18);
      }else{
-       $this->h08_codlei = ($this->h08_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_codlei"]:$this->h08_codlei);
+       $this->h08_codlei = ($this->h08_codlei === 0 || $this->h08_codlei === 0.0 || $this->h08_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["h08_codlei"]:$this->h08_codlei);
      }
    }
    // funcao para inclusao
@@ -448,7 +448,7 @@ class cl_leis {
          $this->h08_codlei = $h08_codlei; 
        }
      }
-     if(($this->h08_codlei == null) || ($this->h08_codlei == "") ){ 
+     if(($this->h08_codlei == null) || ($this->h08_codlei === 0 || $this->h08_codlei === 0.0 || $this->h08_codlei == "") ){ 
        $this->erro_sql = " Campo h08_codlei nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -1415,7 +1415,7 @@ class cl_leis {
    function sql_query ( $h08_codlei=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1436,7 +1436,7 @@ class cl_leis {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1448,7 +1448,7 @@ class cl_leis {
    function sql_query_file ( $h08_codlei=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -1469,7 +1469,7 @@ class cl_leis {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

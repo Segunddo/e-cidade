@@ -52,7 +52,7 @@ class cl_flegal {
                  h04_tpfund = int4 = Tipo de Fundamentação 
                  ";
    //funcao construtor da classe 
-   function cl_flegal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("flegal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_flegal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h04_codigo = ($this->h04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_codigo"]:$this->h04_codigo);
+       $this->h04_codigo = ($this->h04_codigo === 0 || $this->h04_codigo === 0.0 || $this->h04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_codigo"]:$this->h04_codigo);
        $this->h04_descr = ($this->h04_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_descr"]:$this->h04_descr);
-       $this->h04_tpfund = ($this->h04_tpfund == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_tpfund"]:$this->h04_tpfund);
+       $this->h04_tpfund = ($this->h04_tpfund === 0 || $this->h04_tpfund === 0.0 || $this->h04_tpfund == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_tpfund"]:$this->h04_tpfund);
      }else{
-       $this->h04_codigo = ($this->h04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_codigo"]:$this->h04_codigo);
+       $this->h04_codigo = ($this->h04_codigo === 0 || $this->h04_codigo === 0.0 || $this->h04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_codigo"]:$this->h04_codigo);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_flegal {
        return false;
      }
        $this->h04_codigo = $h04_codigo; 
-     if(($this->h04_codigo == null) || ($this->h04_codigo == "") ){ 
+     if(($this->h04_codigo == null) || ($this->h04_codigo === 0 || $this->h04_codigo === 0.0 || $this->h04_codigo == "") ){ 
        $this->erro_sql = " Campo h04_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -336,7 +336,7 @@ class cl_flegal {
    function sql_query ( $h04_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -357,7 +357,7 @@ class cl_flegal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -369,7 +369,7 @@ class cl_flegal {
    function sql_query_file ( $h04_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_flegal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

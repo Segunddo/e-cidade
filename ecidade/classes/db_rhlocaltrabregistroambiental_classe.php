@@ -65,11 +65,11 @@ class cl_rhlocaltrabregistroambiental
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh258_sequencial = ($this->rh258_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_sequencial"]:$this->rh258_sequencial);
-       $this->rh258_rhlocaltrab = ($this->rh258_rhlocaltrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_rhlocaltrab"]:$this->rh258_rhlocaltrab);
-       $this->rh258_instituicao = ($this->rh258_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_instituicao"]:$this->rh258_instituicao);
+       $this->rh258_sequencial = ($this->rh258_sequencial === 0 || $this->rh258_sequencial === 0.0 || $this->rh258_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_sequencial"]:$this->rh258_sequencial);
+       $this->rh258_rhlocaltrab = ($this->rh258_rhlocaltrab === 0 || $this->rh258_rhlocaltrab === 0.0 || $this->rh258_rhlocaltrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_rhlocaltrab"]:$this->rh258_rhlocaltrab);
+       $this->rh258_instituicao = ($this->rh258_instituicao === 0 || $this->rh258_instituicao === 0.0 || $this->rh258_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_instituicao"]:$this->rh258_instituicao);
        $this->rh258_cpfresponsavel = ($this->rh258_cpfresponsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_cpfresponsavel"]:$this->rh258_cpfresponsavel);
-       $this->rh258_identificacaoorgao = ($this->rh258_identificacaoorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_identificacaoorgao"]:$this->rh258_identificacaoorgao);
+       $this->rh258_identificacaoorgao = ($this->rh258_identificacaoorgao === 0 || $this->rh258_identificacaoorgao === 0.0 || $this->rh258_identificacaoorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_identificacaoorgao"]:$this->rh258_identificacaoorgao);
        $this->rh258_numeroinscricaoorgao = ($this->rh258_numeroinscricaoorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_numeroinscricaoorgao"]:$this->rh258_numeroinscricaoorgao);
        $this->rh258_descricaoorgao = ($this->rh258_descricaoorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_descricaoorgao"]:$this->rh258_descricaoorgao);
        $this->rh258_uforgao = ($this->rh258_uforgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_uforgao"]:$this->rh258_uforgao);
@@ -90,7 +90,7 @@ class cl_rhlocaltrabregistroambiental
          }
        }
      }else{
-       $this->rh258_sequencial = ($this->rh258_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_sequencial"]:$this->rh258_sequencial);
+       $this->rh258_sequencial = ($this->rh258_sequencial === 0 || $this->rh258_sequencial === 0.0 || $this->rh258_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh258_sequencial"]:$this->rh258_sequencial);
      }
    }
 
@@ -187,7 +187,7 @@ class cl_rhlocaltrabregistroambiental
          $this->rh258_sequencial = $rh258_sequencial; 
        }
      }
-     if(($this->rh258_sequencial == null) || ($this->rh258_sequencial == "") ){ 
+     if(($this->rh258_sequencial == null) || ($this->rh258_sequencial === 0 || $this->rh258_sequencial === 0.0 || $this->rh258_sequencial == "") ){ 
        $this->erro_sql = " Campo rh258_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

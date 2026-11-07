@@ -36,7 +36,7 @@ class cl_esocialenvio {
                  rh213_data = varchar(20) = Data 
                  ";
    //funcao construtor da classe
-   function cl_esocialenvio() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("esocialenvio");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -53,16 +53,16 @@ class cl_esocialenvio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh213_sequencial = ($this->rh213_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_sequencial"]:$this->rh213_sequencial);
+       $this->rh213_sequencial = ($this->rh213_sequencial === 0 || $this->rh213_sequencial === 0.0 || $this->rh213_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_sequencial"]:$this->rh213_sequencial);
        $this->rh213_evento = ($this->rh213_evento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_evento"]:$this->rh213_evento);
-       $this->rh213_empregador = ($this->rh213_empregador == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_empregador"]:$this->rh213_empregador);
+       $this->rh213_empregador = ($this->rh213_empregador === 0 || $this->rh213_empregador === 0.0 || $this->rh213_empregador == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_empregador"]:$this->rh213_empregador);
        $this->rh213_responsavelpreenchimento = ($this->rh213_responsavelpreenchimento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_responsavelpreenchimento"]:$this->rh213_responsavelpreenchimento);
        $this->rh213_dados = ($this->rh213_dados == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_dados"]:$this->rh213_dados);
        $this->rh213_md5 = ($this->rh213_md5 == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_md5"]:$this->rh213_md5);
-       $this->rh213_situacao = ($this->rh213_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_situacao"]:$this->rh213_situacao);
+       $this->rh213_situacao = ($this->rh213_situacao === 0 || $this->rh213_situacao === 0.0 || $this->rh213_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_situacao"]:$this->rh213_situacao);
        $this->rh213_data = ($this->rh213_data == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_data"]:$this->rh213_data);
      }else{
-       $this->rh213_sequencial = ($this->rh213_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_sequencial"]:$this->rh213_sequencial);
+       $this->rh213_sequencial = ($this->rh213_sequencial === 0 || $this->rh213_sequencial === 0.0 || $this->rh213_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh213_sequencial"]:$this->rh213_sequencial);
      }
    }
    // funcao para Inclusão
@@ -146,7 +146,7 @@ class cl_esocialenvio {
          $this->rh213_sequencial = $rh213_sequencial;
        }
      }
-     if(($this->rh213_sequencial == null) || ($this->rh213_sequencial == "") ){
+     if(($this->rh213_sequencial == null) || ($this->rh213_sequencial === 0 || $this->rh213_sequencial === 0.0 || $this->rh213_sequencial == "") ){
        $this->erro_sql = " Campo rh213_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

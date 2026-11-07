@@ -50,7 +50,7 @@ class cl_rhlotacalend {
                  rh64_calend = int8 = Código do calendário
                  ";
    //funcao construtor da classe
-   function cl_rhlotacalend() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhlotacalend");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_rhlotacalend {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh64_lota = ($this->rh64_lota == ""?@$GLOBALS["HTTP_POST_VARS"]["rh64_lota"]:$this->rh64_lota);
-       $this->rh64_calend = ($this->rh64_calend == ""?@$GLOBALS["HTTP_POST_VARS"]["rh64_calend"]:$this->rh64_calend);
+       $this->rh64_lota = ($this->rh64_lota === 0 || $this->rh64_lota === 0.0 || $this->rh64_lota == ""?@$GLOBALS["HTTP_POST_VARS"]["rh64_lota"]:$this->rh64_lota);
+       $this->rh64_calend = ($this->rh64_calend === 0 || $this->rh64_calend === 0.0 || $this->rh64_calend == ""?@$GLOBALS["HTTP_POST_VARS"]["rh64_calend"]:$this->rh64_calend);
      }else{
-       $this->rh64_lota = ($this->rh64_lota == ""?@$GLOBALS["HTTP_POST_VARS"]["rh64_lota"]:$this->rh64_lota);
+       $this->rh64_lota = ($this->rh64_lota === 0 || $this->rh64_lota === 0.0 || $this->rh64_lota == ""?@$GLOBALS["HTTP_POST_VARS"]["rh64_lota"]:$this->rh64_lota);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhlotacalend {
        return false;
      }
        $this->rh64_lota = $rh64_lota;
-     if(($this->rh64_lota == null) || ($this->rh64_lota == "") ){
+     if(($this->rh64_lota == null) || ($this->rh64_lota === 0 || $this->rh64_lota === 0.0 || $this->rh64_lota == "") ){
        $this->erro_sql = " Campo rh64_lota nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

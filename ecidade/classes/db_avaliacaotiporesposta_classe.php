@@ -50,7 +50,7 @@ class cl_avaliacaotiporesposta {
                  db105_descricao = varchar(100) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_avaliacaotiporesposta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avaliacaotiporesposta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_avaliacaotiporesposta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db105_sequencial = ($this->db105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db105_sequencial"]:$this->db105_sequencial);
+       $this->db105_sequencial = ($this->db105_sequencial === 0 || $this->db105_sequencial === 0.0 || $this->db105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db105_sequencial"]:$this->db105_sequencial);
        $this->db105_descricao = ($this->db105_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db105_descricao"]:$this->db105_descricao);
      }else{
-       $this->db105_sequencial = ($this->db105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db105_sequencial"]:$this->db105_sequencial);
+       $this->db105_sequencial = ($this->db105_sequencial === 0 || $this->db105_sequencial === 0.0 || $this->db105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db105_sequencial"]:$this->db105_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_avaliacaotiporesposta {
          $this->db105_sequencial = $db105_sequencial; 
        }
      }
-     if(($this->db105_sequencial == null) || ($this->db105_sequencial == "") ){ 
+     if(($this->db105_sequencial == null) || ($this->db105_sequencial === 0 || $this->db105_sequencial === 0.0 || $this->db105_sequencial == "") ){ 
        $this->erro_sql = " Campo db105_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_avaliacaotiporesposta {
    function sql_query ( $db105_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_avaliacaotiporesposta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_avaliacaotiporesposta {
    function sql_query_file ( $db105_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_avaliacaotiporesposta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -32,7 +32,8 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("libs/db_libpessoal.php"));
 include(modification("classes/db_infla_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clinfla = new cl_infla;
 $db_opcao = 22;
@@ -64,11 +65,11 @@ if(isset($incluir)){
         continue;
       }
       $poslinha = substr($poslinha,1,strlen($poslinha));
-      $arr_poslinha = split($separador,$poslinha);
+      $arr_poslinha = (preg_match('#(^|[^\\\\])\|(\||$)|^\|#', $separador) ? false : preg_split('#' . str_replace('#', '\#', $separador) . '#m',$poslinha)); // split() POSIX: $separador (digitado) e REGEX, nao literal; alternativa vazia era erro (false)
       $datas = $arr_poslinha[0];
       $valor = $arr_poslinha[1];
 
-      $arr_datas = split("/",$datas);
+      $arr_datas = preg_split("#\\/#m",$datas);
       $datas = $arr_datas[2]."-".$arr_datas[1]."-".$arr_datas[0];
       $valor = str_replace(",",".",$valor);
 

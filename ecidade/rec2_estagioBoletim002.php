@@ -72,7 +72,7 @@ $sSQLAvaliacoes .= "  group by h64_sequencial,h64_seqaval,  h64_data,h53_rhestag
 $sSQLAvaliacoes .= "  order by h64_seqaval,h64_data,h53_rhestagioquesito";
 $rAvaliacoes     = db_query($sSQLAvaliacoes);
 $aDadosAvaliacoes = array();
-for ($i = 0; $i< pg_num_rows($rAvaliacoes); $i++){
+for ($i = 0; $i< ($rAvaliacoes ? pg_num_rows($rAvaliacoes) : null); $i++){
       
     $oAvaliacoes = db_utils::fieldsMemory($rAvaliacoes,$i);
     if (!isset($aDadosAvaliacoes[$oAvaliacoes->h64_sequencial])){
@@ -89,7 +89,7 @@ $SQLQuesitos .= "  from rhestagioquesito";
 $SQLQuesitos .= " where h51_rhestagio = {$oDadosExame->h57_rhestagio}";
 $SQLQuesitos .= " order by h51_sequencial";
 $rQuesitos    = db_query($SQLQuesitos);
-for ($j = 0; $j < pg_num_rows($rQuesitos); $j++){
+for ($j = 0; $j < ($rQuesitos ? pg_num_rows($rQuesitos) : null); $j++){
 
   $oQuesitos = db_utils::fieldsMemory($rQuesitos, $j);
   $aQuesitos[$oQuesitos->h51_sequencial] = $oQuesitos->h51_descr; 

@@ -35,7 +35,8 @@ $cliptuconstr = new cl_iptuconstr;
 $cliptuconstr1 = new cl_iptuconstr;
 $cliptubase = new cl_iptubase;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $instit = db_getsession("DB_instit");
 
 $head4 = "DÉBITOS ";
@@ -129,8 +130,8 @@ if(isset($setor) && $setor != ""){
     $quadra1 = $quadra;
     if(isset($setor) && $setor != ""){
 
-      $chaves  = split(",",$setor);
-      $chaves1 = split(",",$quadra);
+      $chaves  = preg_split("#,#m",$setor);
+      $chaves1 = preg_split("#,#m",$quadra);
       $and   = "";
       $setor = "( ";
       for($i=0;$i<sizeof($chaves);$i++){
@@ -313,8 +314,8 @@ if(isset($j34_loteam) && $j34_loteam != ""){
 
 if(isset($setores) && $setores != ""){
   if(isset($setor) && $setor != ""){
-    $chaves = split(",",$setores);
-    $chaves1 = split(",",$quadra);
+    $chaves = preg_split("#,#m",$setores);
+    $chaves1 = preg_split("#,#m",$quadra);
     $and = "";
     $setores = "";
     for($i=0;$i<sizeof($chaves);$i++){

@@ -54,7 +54,7 @@ class cl_rhrubelementoprinc {
                  rh24_codele = int4 = Elemento 
                  ";
    //funcao construtor da classe 
-   function cl_rhrubelementoprinc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhrubelementoprinc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,14 +71,14 @@ class cl_rhrubelementoprinc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh24_instit = ($this->rh24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_instit"]:$this->rh24_instit);
+       $this->rh24_instit = ($this->rh24_instit === 0 || $this->rh24_instit === 0.0 || $this->rh24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_instit"]:$this->rh24_instit);
        $this->rh24_rubric = ($this->rh24_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_rubric"]:$this->rh24_rubric);
-       $this->rh4_codele = ($this->rh4_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh4_codele"]:$this->rh4_codele);
-       $this->rh24_codele = ($this->rh24_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_codele"]:$this->rh24_codele);
+       $this->rh4_codele = ($this->rh4_codele === 0 || $this->rh4_codele === 0.0 || $this->rh4_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh4_codele"]:$this->rh4_codele);
+       $this->rh24_codele = ($this->rh24_codele === 0 || $this->rh24_codele === 0.0 || $this->rh24_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_codele"]:$this->rh24_codele);
      }else{
-       $this->rh24_instit = ($this->rh24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_instit"]:$this->rh24_instit);
+       $this->rh24_instit = ($this->rh24_instit === 0 || $this->rh24_instit === 0.0 || $this->rh24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_instit"]:$this->rh24_instit);
        $this->rh24_rubric = ($this->rh24_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_rubric"]:$this->rh24_rubric);
-       $this->rh4_codele = ($this->rh4_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh4_codele"]:$this->rh4_codele);
+       $this->rh4_codele = ($this->rh4_codele === 0 || $this->rh4_codele === 0.0 || $this->rh4_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh4_codele"]:$this->rh4_codele);
      }
    }
    // funcao para inclusao
@@ -104,7 +104,7 @@ class cl_rhrubelementoprinc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh4_codele == null) || ($this->rh4_codele == "") ){ 
+     if(($this->rh4_codele == null) || ($this->rh4_codele === 0 || $this->rh4_codele === 0.0 || $this->rh4_codele == "") ){ 
        $this->erro_sql = " Campo rh4_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -112,7 +112,7 @@ class cl_rhrubelementoprinc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh24_instit == null) || ($this->rh24_instit == "") ){ 
+     if(($this->rh24_instit == null) || ($this->rh24_instit === 0 || $this->rh24_instit === 0.0 || $this->rh24_instit == "") ){ 
        $this->erro_sql = " Campo rh24_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -393,7 +393,7 @@ class cl_rhrubelementoprinc {
    function sql_query ( $rh24_rubric=null,$rh4_codele=null,$rh24_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_rhrubelementoprinc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_rhrubelementoprinc {
    function sql_query_file ( $rh24_rubric=null,$rh4_codele=null,$rh24_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_rhrubelementoprinc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

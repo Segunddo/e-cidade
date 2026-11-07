@@ -52,7 +52,7 @@ class cl_db_geradorrelatoriotemplate {
                  db15_documento = oid = Documento 
                  ";
    //funcao construtor da classe 
-   function cl_db_geradorrelatoriotemplate() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_geradorrelatoriotemplate"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_db_geradorrelatoriotemplate {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db15_sequencial = ($this->db15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_sequencial"]:$this->db15_sequencial);
-       $this->db15_db_relatorio = ($this->db15_db_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_db_relatorio"]:$this->db15_db_relatorio);
-       $this->db15_documento = ($this->db15_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_documento"]:$this->db15_documento);
+       $this->db15_sequencial = ($this->db15_sequencial === 0 || $this->db15_sequencial === 0.0 || $this->db15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_sequencial"]:$this->db15_sequencial);
+       $this->db15_db_relatorio = ($this->db15_db_relatorio === 0 || $this->db15_db_relatorio === 0.0 || $this->db15_db_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_db_relatorio"]:$this->db15_db_relatorio);
+       $this->db15_documento = ($this->db15_documento === 0 || $this->db15_documento === 0.0 || $this->db15_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_documento"]:$this->db15_documento);
      }else{
-       $this->db15_sequencial = ($this->db15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_sequencial"]:$this->db15_sequencial);
+       $this->db15_sequencial = ($this->db15_sequencial === 0 || $this->db15_sequencial === 0.0 || $this->db15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_sequencial"]:$this->db15_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_geradorrelatoriotemplate {
          $this->db15_sequencial = $db15_sequencial; 
        }
      }
-     if(($this->db15_sequencial == null) || ($this->db15_sequencial == "") ){ 
+     if(($this->db15_sequencial == null) || ($this->db15_sequencial === 0 || $this->db15_sequencial === 0.0 || $this->db15_sequencial == "") ){ 
        $this->erro_sql = " Campo db15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

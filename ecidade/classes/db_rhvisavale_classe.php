@@ -60,7 +60,7 @@ class cl_rhvisavale {
                  rh47_db_sysfuncoes = int4 = Código Função 
                  ";
    //funcao construtor da classe 
-   function cl_rhvisavale() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhvisavale"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_rhvisavale {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh47_instit = ($this->rh47_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_instit"]:$this->rh47_instit);
+       $this->rh47_instit = ($this->rh47_instit === 0 || $this->rh47_instit === 0.0 || $this->rh47_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_instit"]:$this->rh47_instit);
        $this->rh47_rubric = ($this->rh47_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_rubric"]:$this->rh47_rubric);
-       $this->rh47_contrato = ($this->rh47_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_contrato"]:$this->rh47_contrato);
-       $this->rh47_tipovale = ($this->rh47_tipovale == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_tipovale"]:$this->rh47_tipovale);
-       $this->rh47_perc = ($this->rh47_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_perc"]:$this->rh47_perc);
-       $this->rh47_diasuteis = ($this->rh47_diasuteis == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_diasuteis"]:$this->rh47_diasuteis);
-       $this->rh47_db_sysfuncoes = ($this->rh47_db_sysfuncoes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_db_sysfuncoes"]:$this->rh47_db_sysfuncoes);
+       $this->rh47_contrato = ($this->rh47_contrato === 0 || $this->rh47_contrato === 0.0 || $this->rh47_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_contrato"]:$this->rh47_contrato);
+       $this->rh47_tipovale = ($this->rh47_tipovale === 0 || $this->rh47_tipovale === 0.0 || $this->rh47_tipovale == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_tipovale"]:$this->rh47_tipovale);
+       $this->rh47_perc = ($this->rh47_perc === 0 || $this->rh47_perc === 0.0 || $this->rh47_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_perc"]:$this->rh47_perc);
+       $this->rh47_diasuteis = ($this->rh47_diasuteis === 0 || $this->rh47_diasuteis === 0.0 || $this->rh47_diasuteis == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_diasuteis"]:$this->rh47_diasuteis);
+       $this->rh47_db_sysfuncoes = ($this->rh47_db_sysfuncoes === 0 || $this->rh47_db_sysfuncoes === 0.0 || $this->rh47_db_sysfuncoes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_db_sysfuncoes"]:$this->rh47_db_sysfuncoes);
      }else{
-       $this->rh47_instit = ($this->rh47_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_instit"]:$this->rh47_instit);
+       $this->rh47_instit = ($this->rh47_instit === 0 || $this->rh47_instit === 0.0 || $this->rh47_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_instit"]:$this->rh47_instit);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_rhvisavale {
        return false;
      }
        $this->rh47_instit = $rh47_instit; 
-     if(($this->rh47_instit == null) || ($this->rh47_instit == "") ){ 
+     if(($this->rh47_instit == null) || ($this->rh47_instit === 0 || $this->rh47_instit === 0.0 || $this->rh47_instit == "") ){ 
        $this->erro_sql = " Campo rh47_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -461,7 +461,7 @@ class cl_rhvisavale {
    function sql_query ( $rh47_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -490,7 +490,7 @@ class cl_rhvisavale {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -503,7 +503,7 @@ class cl_rhvisavale {
    function sql_query_file ( $rh47_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -524,7 +524,7 @@ class cl_rhvisavale {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -536,7 +536,7 @@ class cl_rhvisavale {
    function sql_query_valcgm ( $rh47_instit=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -558,7 +558,7 @@ class cl_rhvisavale {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

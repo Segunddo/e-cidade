@@ -76,7 +76,7 @@ class cl_rhempenhofolhaexcecaorubrica {
                  rh74_rhempenhofolhaexcecaoregra = int4 = Código Exceção Rubrica 
                  ";
    //funcao construtor da classe 
-   function cl_rhempenhofolhaexcecaorubrica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhempenhofolhaexcecaorubrica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -93,23 +93,23 @@ class cl_rhempenhofolhaexcecaorubrica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh74_sequencial = ($this->rh74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_sequencial"]:$this->rh74_sequencial);
-       $this->rh74_instit = ($this->rh74_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_instit"]:$this->rh74_instit);
+       $this->rh74_sequencial = ($this->rh74_sequencial === 0 || $this->rh74_sequencial === 0.0 || $this->rh74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_sequencial"]:$this->rh74_sequencial);
+       $this->rh74_instit = ($this->rh74_instit === 0 || $this->rh74_instit === 0.0 || $this->rh74_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_instit"]:$this->rh74_instit);
        $this->rh74_rubric = ($this->rh74_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_rubric"]:$this->rh74_rubric);
-       $this->rh74_unidade = ($this->rh74_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_unidade"]:$this->rh74_unidade);
-       $this->rh74_orgao = ($this->rh74_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_orgao"]:$this->rh74_orgao);
-       $this->rh74_projativ = ($this->rh74_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_projativ"]:$this->rh74_projativ);
-       $this->rh74_anousu = ($this->rh74_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_anousu"]:$this->rh74_anousu);
-       $this->rh74_recurso = ($this->rh74_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_recurso"]:$this->rh74_recurso);
+       $this->rh74_unidade = ($this->rh74_unidade === 0 || $this->rh74_unidade === 0.0 || $this->rh74_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_unidade"]:$this->rh74_unidade);
+       $this->rh74_orgao = ($this->rh74_orgao === 0 || $this->rh74_orgao === 0.0 || $this->rh74_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_orgao"]:$this->rh74_orgao);
+       $this->rh74_projativ = ($this->rh74_projativ === 0 || $this->rh74_projativ === 0.0 || $this->rh74_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_projativ"]:$this->rh74_projativ);
+       $this->rh74_anousu = ($this->rh74_anousu === 0 || $this->rh74_anousu === 0.0 || $this->rh74_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_anousu"]:$this->rh74_anousu);
+       $this->rh74_recurso = ($this->rh74_recurso === 0 || $this->rh74_recurso === 0.0 || $this->rh74_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_recurso"]:$this->rh74_recurso);
        $this->rh74_concarpeculiar = ($this->rh74_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_concarpeculiar"]:$this->rh74_concarpeculiar);
-       $this->rh74_programa = ($this->rh74_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_programa"]:$this->rh74_programa);
-       $this->rh74_subfuncao = ($this->rh74_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_subfuncao"]:$this->rh74_subfuncao);
-       $this->rh74_funcao = ($this->rh74_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_funcao"]:$this->rh74_funcao);
-       $this->rh74_codele = ($this->rh74_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_codele"]:$this->rh74_codele);
-       $this->rh74_tipofolha = ($this->rh74_tipofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_tipofolha"]:$this->rh74_tipofolha);
-       $this->rh74_rhempenhofolhaexcecaoregra = ($this->rh74_rhempenhofolhaexcecaoregra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_rhempenhofolhaexcecaoregra"]:$this->rh74_rhempenhofolhaexcecaoregra);
+       $this->rh74_programa = ($this->rh74_programa === 0 || $this->rh74_programa === 0.0 || $this->rh74_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_programa"]:$this->rh74_programa);
+       $this->rh74_subfuncao = ($this->rh74_subfuncao === 0 || $this->rh74_subfuncao === 0.0 || $this->rh74_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_subfuncao"]:$this->rh74_subfuncao);
+       $this->rh74_funcao = ($this->rh74_funcao === 0 || $this->rh74_funcao === 0.0 || $this->rh74_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_funcao"]:$this->rh74_funcao);
+       $this->rh74_codele = ($this->rh74_codele === 0 || $this->rh74_codele === 0.0 || $this->rh74_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_codele"]:$this->rh74_codele);
+       $this->rh74_tipofolha = ($this->rh74_tipofolha === 0 || $this->rh74_tipofolha === 0.0 || $this->rh74_tipofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_tipofolha"]:$this->rh74_tipofolha);
+       $this->rh74_rhempenhofolhaexcecaoregra = ($this->rh74_rhempenhofolhaexcecaoregra === 0 || $this->rh74_rhempenhofolhaexcecaoregra === 0.0 || $this->rh74_rhempenhofolhaexcecaoregra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_rhempenhofolhaexcecaoregra"]:$this->rh74_rhempenhofolhaexcecaoregra);
      }else{
-       $this->rh74_sequencial = ($this->rh74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_sequencial"]:$this->rh74_sequencial);
+       $this->rh74_sequencial = ($this->rh74_sequencial === 0 || $this->rh74_sequencial === 0.0 || $this->rh74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh74_sequencial"]:$this->rh74_sequencial);
      }
    }
    // funcao para inclusao
@@ -226,7 +226,7 @@ class cl_rhempenhofolhaexcecaorubrica {
          $this->rh74_sequencial = $rh74_sequencial; 
        }
      }
-     if(($this->rh74_sequencial == null) || ($this->rh74_sequencial == "") ){ 
+     if(($this->rh74_sequencial == null) || ($this->rh74_sequencial === 0 || $this->rh74_sequencial === 0.0 || $this->rh74_sequencial == "") ){ 
        $this->erro_sql = " Campo rh74_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -676,7 +676,7 @@ class cl_rhempenhofolhaexcecaorubrica {
    function sql_query ( $rh74_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -716,7 +716,7 @@ class cl_rhempenhofolhaexcecaorubrica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -729,7 +729,7 @@ class cl_rhempenhofolhaexcecaorubrica {
    function sql_query_file ( $rh74_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -750,7 +750,7 @@ class cl_rhempenhofolhaexcecaorubrica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

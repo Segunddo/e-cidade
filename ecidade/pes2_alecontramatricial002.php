@@ -32,7 +32,8 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("dbforms/db_layouttxt.php"));
 db_postmemory($HTTP_SERVER_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $sql = "select * from db_config where codigo = ".db_getsession("DB_instit");
 $result = db_query($sql);

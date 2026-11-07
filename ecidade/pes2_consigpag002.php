@@ -29,7 +29,8 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("libs/db_utils.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 /*
  * VERIFICA SE VEIO A VARIAVEL COMPLEMENTAR, SE VEIO, INCLUI NA CLAUSULA
@@ -112,7 +113,7 @@ $sQuery = "
 ";
 
 $resQuery = db_query($sQuery);
-$iNumRows = pg_num_rows($resQuery);
+$iNumRows = ($resQuery ? pg_num_rows($resQuery) : null);
 
 $sValorCompararQuebra = "";
 $sCampoQuebrar = "rh73_rubric";

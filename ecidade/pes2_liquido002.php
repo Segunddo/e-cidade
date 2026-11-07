@@ -30,7 +30,8 @@ require_once (modification("libs/db_stdlib.php"));
 require_once (modification("libs/db_conecta.php"));
 require_once (modification("libs/db_utils.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($_SERVER);
 
 if (! isset($faixa1) || (empty($faixa1) && $faixa1 != 0) || ! isset($faixa2) || (empty($faixa2) && $faixa2 != 0)) {

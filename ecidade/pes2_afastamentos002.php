@@ -207,7 +207,7 @@ $sOrdem .= implode(",", $aCamposOrdem);
 $sSql = $oDaoAfasta->sql_relatorioAfastados($oGet->iTipoRelatorio, $sCampos, $sOrdem, $sWhere);
 $rsServidoresAfastados = db_query($sSql);
 
-if ( pg_num_rows($rsServidoresAfastados) == 0) {
+if ( ($rsServidoresAfastados ? pg_num_rows($rsServidoresAfastados) : null) == 0) {
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Códigos cadastrados no período');
 }
 

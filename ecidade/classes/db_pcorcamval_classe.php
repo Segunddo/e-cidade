@@ -80,7 +80,7 @@ class cl_pcorcamval {
                  pc23_taxahomologada = float4 = Taxa Homologada 
                  ";
    //funcao construtor da classe 
-   function cl_pcorcamval() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcorcamval"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -97,12 +97,12 @@ class cl_pcorcamval {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc23_orcamforne = ($this->pc23_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_orcamforne"]:$this->pc23_orcamforne);
-       $this->pc23_orcamitem = ($this->pc23_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_orcamitem"]:$this->pc23_orcamitem);
-       $this->pc23_valor = ($this->pc23_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_valor"]:$this->pc23_valor);
-       $this->pc23_quant = ($this->pc23_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_quant"]:$this->pc23_quant);
+       $this->pc23_orcamforne = ($this->pc23_orcamforne === 0 || $this->pc23_orcamforne === 0.0 || $this->pc23_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_orcamforne"]:$this->pc23_orcamforne);
+       $this->pc23_orcamitem = ($this->pc23_orcamitem === 0 || $this->pc23_orcamitem === 0.0 || $this->pc23_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_orcamitem"]:$this->pc23_orcamitem);
+       $this->pc23_valor = ($this->pc23_valor === 0 || $this->pc23_valor === 0.0 || $this->pc23_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_valor"]:$this->pc23_valor);
+       $this->pc23_quant = ($this->pc23_quant === 0 || $this->pc23_quant === 0.0 || $this->pc23_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_quant"]:$this->pc23_quant);
        $this->pc23_obs = ($this->pc23_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_obs"]:$this->pc23_obs);
-       $this->pc23_vlrun = ($this->pc23_vlrun == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_vlrun"]:$this->pc23_vlrun);
+       $this->pc23_vlrun = ($this->pc23_vlrun === 0 || $this->pc23_vlrun === 0.0 || $this->pc23_vlrun == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_vlrun"]:$this->pc23_vlrun);
        if($this->pc23_validmin == ""){
          $this->pc23_validmin_dia = ($this->pc23_validmin_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_validmin_dia"]:$this->pc23_validmin_dia);
          $this->pc23_validmin_mes = ($this->pc23_validmin_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_validmin_mes"]:$this->pc23_validmin_mes);
@@ -111,9 +111,9 @@ class cl_pcorcamval {
             $this->pc23_validmin = $this->pc23_validmin_ano."-".$this->pc23_validmin_mes."-".$this->pc23_validmin_dia;
          }
        }
-       $this->pc23_percentualdesconto = ($this->pc23_percentualdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_percentualdesconto"]:$this->pc23_percentualdesconto);
-       $this->pc23_bdi = ($this->pc23_bdi == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_bdi"]:$this->pc23_bdi);
-       $this->pc23_encargossociais = ($this->pc23_encargossociais == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_encargossociais"]:$this->pc23_encargossociais);
+       $this->pc23_percentualdesconto = ($this->pc23_percentualdesconto === 0 || $this->pc23_percentualdesconto === 0.0 || $this->pc23_percentualdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_percentualdesconto"]:$this->pc23_percentualdesconto);
+       $this->pc23_bdi = ($this->pc23_bdi === 0 || $this->pc23_bdi === 0.0 || $this->pc23_bdi == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_bdi"]:$this->pc23_bdi);
+       $this->pc23_encargossociais = ($this->pc23_encargossociais === 0 || $this->pc23_encargossociais === 0.0 || $this->pc23_encargossociais == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_encargossociais"]:$this->pc23_encargossociais);
        if($this->pc23_data == ""){
          $this->pc23_data_dia = ($this->pc23_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_data_dia"]:$this->pc23_data_dia);
          $this->pc23_data_mes = ($this->pc23_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_data_mes"]:$this->pc23_data_mes);
@@ -122,12 +122,12 @@ class cl_pcorcamval {
             $this->pc23_data = $this->pc23_data_ano."-".$this->pc23_data_mes."-".$this->pc23_data_dia;
          }
        }
-       $this->pc23_notatecnica = ($this->pc23_notatecnica == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_notatecnica"]:$this->pc23_notatecnica);
-       $this->pc23_taxaestimada = ($this->pc23_taxaestimada == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_taxaestimada"]:$this->pc23_taxaestimada);
-       $this->pc23_taxahomologada = ($this->pc23_taxahomologada == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_taxahomologada"]:$this->pc23_taxahomologada);
+       $this->pc23_notatecnica = ($this->pc23_notatecnica === 0 || $this->pc23_notatecnica === 0.0 || $this->pc23_notatecnica == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_notatecnica"]:$this->pc23_notatecnica);
+       $this->pc23_taxaestimada = ($this->pc23_taxaestimada === 0 || $this->pc23_taxaestimada === 0.0 || $this->pc23_taxaestimada == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_taxaestimada"]:$this->pc23_taxaestimada);
+       $this->pc23_taxahomologada = ($this->pc23_taxahomologada === 0 || $this->pc23_taxahomologada === 0.0 || $this->pc23_taxahomologada == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_taxahomologada"]:$this->pc23_taxahomologada);
      }else{
-       $this->pc23_orcamforne = ($this->pc23_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_orcamforne"]:$this->pc23_orcamforne);
-       $this->pc23_orcamitem = ($this->pc23_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_orcamitem"]:$this->pc23_orcamitem);
+       $this->pc23_orcamforne = ($this->pc23_orcamforne === 0 || $this->pc23_orcamforne === 0.0 || $this->pc23_orcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_orcamforne"]:$this->pc23_orcamforne);
+       $this->pc23_orcamitem = ($this->pc23_orcamitem === 0 || $this->pc23_orcamitem === 0.0 || $this->pc23_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc23_orcamitem"]:$this->pc23_orcamitem);
      }
    }
    // funcao para Inclusão
@@ -183,7 +183,7 @@ class cl_pcorcamval {
      }
        $this->pc23_orcamforne = $pc23_orcamforne; 
        $this->pc23_orcamitem = $pc23_orcamitem; 
-     if(($this->pc23_orcamforne == null) || ($this->pc23_orcamforne == "") ){ 
+     if(($this->pc23_orcamforne == null) || ($this->pc23_orcamforne === 0 || $this->pc23_orcamforne === 0.0 || $this->pc23_orcamforne == "") ){ 
        $this->erro_sql = " Campo pc23_orcamforne não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -191,7 +191,7 @@ class cl_pcorcamval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pc23_orcamitem == null) || ($this->pc23_orcamitem == "") ){ 
+     if(($this->pc23_orcamitem == null) || ($this->pc23_orcamitem === 0 || $this->pc23_orcamitem === 0.0 || $this->pc23_orcamitem == "") ){ 
        $this->erro_sql = " Campo pc23_orcamitem não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

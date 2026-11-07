@@ -75,7 +75,7 @@ class cl_portaria {
                  h31_portariaassinatura = int4 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_portaria() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("portaria"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,11 +92,11 @@ class cl_portaria {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h31_sequencial = ($this->h31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_sequencial"]:$this->h31_sequencial);
-       $this->h31_portariatipo = ($this->h31_portariatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_portariatipo"]:$this->h31_portariatipo);
-       $this->h31_usuario = ($this->h31_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_usuario"]:$this->h31_usuario);
+       $this->h31_sequencial = ($this->h31_sequencial === 0 || $this->h31_sequencial === 0.0 || $this->h31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_sequencial"]:$this->h31_sequencial);
+       $this->h31_portariatipo = ($this->h31_portariatipo === 0 || $this->h31_portariatipo === 0.0 || $this->h31_portariatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_portariatipo"]:$this->h31_portariatipo);
+       $this->h31_usuario = ($this->h31_usuario === 0 || $this->h31_usuario === 0.0 || $this->h31_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_usuario"]:$this->h31_usuario);
        $this->h31_numero = ($this->h31_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_numero"]:$this->h31_numero);
-       $this->h31_anousu = ($this->h31_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_anousu"]:$this->h31_anousu);
+       $this->h31_anousu = ($this->h31_anousu === 0 || $this->h31_anousu === 0.0 || $this->h31_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_anousu"]:$this->h31_anousu);
        if($this->h31_dtportaria == ""){
          $this->h31_dtportaria_dia = ($this->h31_dtportaria_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_dtportaria_dia"]:$this->h31_dtportaria_dia);
          $this->h31_dtportaria_mes = ($this->h31_dtportaria_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_dtportaria_mes"]:$this->h31_dtportaria_mes);
@@ -124,7 +124,7 @@ class cl_portaria {
        $this->h31_amparolegal = ($this->h31_amparolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_amparolegal"]:$this->h31_amparolegal);
        $this->h31_portariaassinatura = ($this->h31_portariaassinatura == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_portariaassinatura"]:$this->h31_portariaassinatura);
      }else{
-       $this->h31_sequencial = ($this->h31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_sequencial"]:$this->h31_sequencial);
+       $this->h31_sequencial = ($this->h31_sequencial === 0 || $this->h31_sequencial === 0.0 || $this->h31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h31_sequencial"]:$this->h31_sequencial);
      }
    }
    // funcao para inclusao
@@ -217,7 +217,7 @@ class cl_portaria {
          $this->h31_sequencial = $h31_sequencial; 
        }
      }
-     if(($this->h31_sequencial == null) || ($this->h31_sequencial == "") ){ 
+     if(($this->h31_sequencial == null) || ($this->h31_sequencial === 0 || $this->h31_sequencial === 0.0 || $this->h31_sequencial == "") ){ 
        $this->erro_sql = " Campo h31_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -792,7 +792,7 @@ class cl_portaria {
      return $sql;
   }
 
-  function sql_query_assentamento_funcional ( $h31_sequencial=null,$campos="*",$ordem=null,$dbwhere="", $sVerificaLotacao = null, $iTipoFuncionamento){
+  function sql_query_assentamento_funcional ( $h31_sequencial=null,$campos="*",$ordem=null,$dbwhere="", $sVerificaLotacao = null, $iTipoFuncionamento = null){
     $sql = "select ";
     if($campos != "*" ){
       $campos_sql = explode("#",$campos);

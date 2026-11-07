@@ -56,7 +56,7 @@ if(isset($cadastrar)){
   }
 
   if($sqlerro == false){
-    while (list($k,$v) = each($r09_rubric)){
+    while (is_array($r09_rubric) && ($k = key($r09_rubric)) !== null){ $v = current($r09_rubric); next($r09_rubric); // each() removido no PHP 8: key/current/next reproduzem o ponteiro
 
       $clbasesr->incluir($anousu,$mesusu,$r09_base,$v,db_getsession("DB_instit"));
 

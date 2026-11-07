@@ -24,7 +24,7 @@ class cl_tipoassecontrolediasmes {
                  rh170_tipoasse = int4 = Tipo do Assentamento 
                  ";
    //funcao construtor da classe 
-   function cl_tipoassecontrolediasmes() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoassecontrolediasmes"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -41,10 +41,10 @@ class cl_tipoassecontrolediasmes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh170_sequencial = ($this->rh170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh170_sequencial"]:$this->rh170_sequencial);
-       $this->rh170_tipoasse = ($this->rh170_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["rh170_tipoasse"]:$this->rh170_tipoasse);
+       $this->rh170_sequencial = ($this->rh170_sequencial === 0 || $this->rh170_sequencial === 0.0 || $this->rh170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh170_sequencial"]:$this->rh170_sequencial);
+       $this->rh170_tipoasse = ($this->rh170_tipoasse === 0 || $this->rh170_tipoasse === 0.0 || $this->rh170_tipoasse == ""?@$GLOBALS["HTTP_POST_VARS"]["rh170_tipoasse"]:$this->rh170_tipoasse);
      }else{
-       $this->rh170_sequencial = ($this->rh170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh170_sequencial"]:$this->rh170_sequencial);
+       $this->rh170_sequencial = ($this->rh170_sequencial === 0 || $this->rh170_sequencial === 0.0 || $this->rh170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh170_sequencial"]:$this->rh170_sequencial);
      }
    }
    // funcao para Inclusão
@@ -83,7 +83,7 @@ class cl_tipoassecontrolediasmes {
          $this->rh170_sequencial = $rh170_sequencial; 
        }
      }
-     if(($this->rh170_sequencial == null) || ($this->rh170_sequencial == "") ){ 
+     if(($this->rh170_sequencial == null) || ($this->rh170_sequencial === 0 || $this->rh170_sequencial === 0.0 || $this->rh170_sequencial == "") ){ 
        $this->erro_sql = " Campo rh170_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

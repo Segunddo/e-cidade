@@ -54,7 +54,7 @@ class cl_rhdirfparametros {
                  rh132_codigoarquivo = varchar(10) = Código do Arquivo 
                  ";
    //funcao construtor da classe 
-   function cl_rhdirfparametros() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhdirfparametros"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_rhdirfparametros {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh132_sequencial = ($this->rh132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh132_sequencial"]:$this->rh132_sequencial);
-       $this->rh132_anobase = ($this->rh132_anobase == ""?@$GLOBALS["HTTP_POST_VARS"]["rh132_anobase"]:$this->rh132_anobase);
-       $this->rh132_valorminimo = ($this->rh132_valorminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh132_valorminimo"]:$this->rh132_valorminimo);
+       $this->rh132_sequencial = ($this->rh132_sequencial === 0 || $this->rh132_sequencial === 0.0 || $this->rh132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh132_sequencial"]:$this->rh132_sequencial);
+       $this->rh132_anobase = ($this->rh132_anobase === 0 || $this->rh132_anobase === 0.0 || $this->rh132_anobase == ""?@$GLOBALS["HTTP_POST_VARS"]["rh132_anobase"]:$this->rh132_anobase);
+       $this->rh132_valorminimo = ($this->rh132_valorminimo === 0 || $this->rh132_valorminimo === 0.0 || $this->rh132_valorminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh132_valorminimo"]:$this->rh132_valorminimo);
        $this->rh132_codigoarquivo = ($this->rh132_codigoarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh132_codigoarquivo"]:$this->rh132_codigoarquivo);
      }else{
-       $this->rh132_sequencial = ($this->rh132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh132_sequencial"]:$this->rh132_sequencial);
+       $this->rh132_sequencial = ($this->rh132_sequencial === 0 || $this->rh132_sequencial === 0.0 || $this->rh132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh132_sequencial"]:$this->rh132_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_rhdirfparametros {
          $this->rh132_sequencial = $rh132_sequencial; 
        }
      }
-     if(($this->rh132_sequencial == null) || ($this->rh132_sequencial == "") ){ 
+     if(($this->rh132_sequencial == null) || ($this->rh132_sequencial === 0 || $this->rh132_sequencial === 0.0 || $this->rh132_sequencial == "") ){ 
        $this->erro_sql = " Campo rh132_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -413,7 +413,7 @@ class cl_rhdirfparametros {
    function sql_query ( $rh132_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_rhdirfparametros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_rhdirfparametros {
    function sql_query_file ( $rh132_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_rhdirfparametros {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

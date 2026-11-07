@@ -34,7 +34,8 @@ $clrotulo->label('r06_descr');
 $clrotulo->label('r06_elemen');
 $clrotulo->label('r06_pd');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 //$ano = 2006;
 //$mes = 3;
@@ -180,7 +181,7 @@ order by rh26_orgao,
 
 $result = db_query($sql);
 //db_criatabela($result);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem movimentos no período de '.$mes.' / '.$ano);
 
@@ -277,7 +278,7 @@ for($x = 0; $x < pg_numrows($result);$x++){
      $pdf->cell(20,$alt,db_formatar(($fund60/100*8),'f'),0,1,"R",0);
 //     $pdf->cell(20,$alt,db_formatar(($fund60/100*0.5),'f'),0,0,"R",0);
 //   $pdf->cell(20,$alt,db_formatar(($fund60/100*8),'f'),0,1,"R",0);
-     
+
      $pdf->cell(25,$alt,'',0,0,"C",0);
      $pat40 = $fund40 / 100 * 21;
      $pdf->cell(80,$alt,'FUNDEB 30%',0,0,"L",0);

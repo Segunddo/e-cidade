@@ -14,7 +14,7 @@ $_SESSION['DB_itemmenu_acessado'] = 8747;
 $_SESSION['DB_modulo']            = 952;
 
 $erros = unserialize(file_get_contents("tmp/erros_siprev.txt"));
-ksort($erros);
+if (is_array($erros)) ksort($erros); // no 5.6 ksort(false) so avisava
 // kill($erros);
 
 define('ALTURA_LINHA', 5);
@@ -79,7 +79,7 @@ $escreverPDF = function($grupo, $chave, &$pdf) use($arquivos) {
   }
 };
 
-array_walk($erros, $escreverPDF, $pdf);
+if (is_array($erros)) array_walk($erros, $escreverPDF, $pdf);
 $pdf->output();
 
 
@@ -106,8 +106,8 @@ function escreverLinha($dados, $cabecalhos, &$pdf) {
   foreach ($cabecalhos as $item) {
 
     $quebra = ++$indice == $itens;
-    list($chave, $valor)      = each($dados);
-    list($largura, $conteudo) = each($item);
+    $chave = $valor = null; if (is_array($dados) && key($dados) !== null) { $chave = key($dados); $valor = current($dados); next($dados); } // each() removido no PHP 8: key/current/next reproduzem o ponteiro
+    $largura = $conteudo = null; if (is_array($item) && key($item) !== null) { $largura = key($item); $conteudo = current($item); next($item); }
     $pdf->cell($item['largura'], ALTURA_LINHA, " " .$valor, BORDA, $quebra, "L", !PREENCHE);
   }
 }

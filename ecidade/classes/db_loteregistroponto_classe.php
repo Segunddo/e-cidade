@@ -34,7 +34,7 @@ class cl_loteregistroponto {
                  rh155_usuario = int4 = Usuario 
                  ";
    //funcao construtor da classe 
-   function cl_loteregistroponto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("loteregistroponto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -51,15 +51,15 @@ class cl_loteregistroponto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh155_sequencial = ($this->rh155_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_sequencial"]:$this->rh155_sequencial);
+       $this->rh155_sequencial = ($this->rh155_sequencial === 0 || $this->rh155_sequencial === 0.0 || $this->rh155_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_sequencial"]:$this->rh155_sequencial);
        $this->rh155_descricao = ($this->rh155_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_descricao"]:$this->rh155_descricao);
-       $this->rh155_ano = ($this->rh155_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_ano"]:$this->rh155_ano);
-       $this->rh155_mes = ($this->rh155_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_mes"]:$this->rh155_mes);
+       $this->rh155_ano = ($this->rh155_ano === 0 || $this->rh155_ano === 0.0 || $this->rh155_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_ano"]:$this->rh155_ano);
+       $this->rh155_mes = ($this->rh155_mes === 0 || $this->rh155_mes === 0.0 || $this->rh155_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_mes"]:$this->rh155_mes);
        $this->rh155_situacao = ($this->rh155_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_situacao"]:$this->rh155_situacao);
-       $this->rh155_instit = ($this->rh155_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_instit"]:$this->rh155_instit);
-       $this->rh155_usuario = ($this->rh155_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_usuario"]:$this->rh155_usuario);
+       $this->rh155_instit = ($this->rh155_instit === 0 || $this->rh155_instit === 0.0 || $this->rh155_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_instit"]:$this->rh155_instit);
+       $this->rh155_usuario = ($this->rh155_usuario === 0 || $this->rh155_usuario === 0.0 || $this->rh155_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_usuario"]:$this->rh155_usuario);
      }else{
-       $this->rh155_sequencial = ($this->rh155_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_sequencial"]:$this->rh155_sequencial);
+       $this->rh155_sequencial = ($this->rh155_sequencial === 0 || $this->rh155_sequencial === 0.0 || $this->rh155_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh155_sequencial"]:$this->rh155_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_loteregistroponto {
          $this->rh155_sequencial = $rh155_sequencial; 
        }
      }
-     if(($this->rh155_sequencial == null) || ($this->rh155_sequencial == "") ){ 
+     if(($this->rh155_sequencial == null) || ($this->rh155_sequencial === 0 || $this->rh155_sequencial === 0.0 || $this->rh155_sequencial == "") ){ 
        $this->erro_sql = " Campo rh155_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

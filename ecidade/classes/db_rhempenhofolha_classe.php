@@ -80,7 +80,7 @@ class cl_rhempenhofolha {
                  rh72_programa = int4 = Programa 
                  ";
    //funcao construtor da classe
-   function cl_rhempenhofolha() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhempenhofolha");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -97,25 +97,25 @@ class cl_rhempenhofolha {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh72_sequencial = ($this->rh72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_sequencial"]:$this->rh72_sequencial);
-       $this->rh72_coddot = ($this->rh72_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_coddot"]:$this->rh72_coddot);
-       $this->rh72_codele = ($this->rh72_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_codele"]:$this->rh72_codele);
-       $this->rh72_unidade = ($this->rh72_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_unidade"]:$this->rh72_unidade);
-       $this->rh72_orgao = ($this->rh72_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_orgao"]:$this->rh72_orgao);
-       $this->rh72_projativ = ($this->rh72_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_projativ"]:$this->rh72_projativ);
-       $this->rh72_anousu = ($this->rh72_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_anousu"]:$this->rh72_anousu);
-       $this->rh72_recurso = ($this->rh72_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_recurso"]:$this->rh72_recurso);
-       $this->rh72_mesusu = ($this->rh72_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_mesusu"]:$this->rh72_mesusu);
+       $this->rh72_sequencial = ($this->rh72_sequencial === 0 || $this->rh72_sequencial === 0.0 || $this->rh72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_sequencial"]:$this->rh72_sequencial);
+       $this->rh72_coddot = ($this->rh72_coddot === 0 || $this->rh72_coddot === 0.0 || $this->rh72_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_coddot"]:$this->rh72_coddot);
+       $this->rh72_codele = ($this->rh72_codele === 0 || $this->rh72_codele === 0.0 || $this->rh72_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_codele"]:$this->rh72_codele);
+       $this->rh72_unidade = ($this->rh72_unidade === 0 || $this->rh72_unidade === 0.0 || $this->rh72_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_unidade"]:$this->rh72_unidade);
+       $this->rh72_orgao = ($this->rh72_orgao === 0 || $this->rh72_orgao === 0.0 || $this->rh72_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_orgao"]:$this->rh72_orgao);
+       $this->rh72_projativ = ($this->rh72_projativ === 0 || $this->rh72_projativ === 0.0 || $this->rh72_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_projativ"]:$this->rh72_projativ);
+       $this->rh72_anousu = ($this->rh72_anousu === 0 || $this->rh72_anousu === 0.0 || $this->rh72_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_anousu"]:$this->rh72_anousu);
+       $this->rh72_recurso = ($this->rh72_recurso === 0 || $this->rh72_recurso === 0.0 || $this->rh72_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_recurso"]:$this->rh72_recurso);
+       $this->rh72_mesusu = ($this->rh72_mesusu === 0 || $this->rh72_mesusu === 0.0 || $this->rh72_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_mesusu"]:$this->rh72_mesusu);
        $this->rh72_siglaarq = ($this->rh72_siglaarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_siglaarq"]:$this->rh72_siglaarq);
-       $this->rh72_tipoempenho = ($this->rh72_tipoempenho == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_tipoempenho"]:$this->rh72_tipoempenho);
-       $this->rh72_tabprev = ($this->rh72_tabprev == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_tabprev"]:$this->rh72_tabprev);
-       $this->rh72_seqcompl = ($this->rh72_seqcompl == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_seqcompl"]:$this->rh72_seqcompl);
+       $this->rh72_tipoempenho = ($this->rh72_tipoempenho === 0 || $this->rh72_tipoempenho === 0.0 || $this->rh72_tipoempenho == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_tipoempenho"]:$this->rh72_tipoempenho);
+       $this->rh72_tabprev = ($this->rh72_tabprev === 0 || $this->rh72_tabprev === 0.0 || $this->rh72_tabprev == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_tabprev"]:$this->rh72_tabprev);
+       $this->rh72_seqcompl = ($this->rh72_seqcompl === 0 || $this->rh72_seqcompl === 0.0 || $this->rh72_seqcompl == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_seqcompl"]:$this->rh72_seqcompl);
        $this->rh72_concarpeculiar = ($this->rh72_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_concarpeculiar"]:$this->rh72_concarpeculiar);
-       $this->rh72_funcao = ($this->rh72_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_funcao"]:$this->rh72_funcao);
-       $this->rh72_subfuncao = ($this->rh72_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_subfuncao"]:$this->rh72_subfuncao);
-       $this->rh72_programa = ($this->rh72_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_programa"]:$this->rh72_programa);
+       $this->rh72_funcao = ($this->rh72_funcao === 0 || $this->rh72_funcao === 0.0 || $this->rh72_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_funcao"]:$this->rh72_funcao);
+       $this->rh72_subfuncao = ($this->rh72_subfuncao === 0 || $this->rh72_subfuncao === 0.0 || $this->rh72_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_subfuncao"]:$this->rh72_subfuncao);
+       $this->rh72_programa = ($this->rh72_programa === 0 || $this->rh72_programa === 0.0 || $this->rh72_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_programa"]:$this->rh72_programa);
      }else{
-       $this->rh72_sequencial = ($this->rh72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_sequencial"]:$this->rh72_sequencial);
+       $this->rh72_sequencial = ($this->rh72_sequencial === 0 || $this->rh72_sequencial === 0.0 || $this->rh72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh72_sequencial"]:$this->rh72_sequencial);
      }
    }
    // funcao para inclusao
@@ -265,7 +265,7 @@ class cl_rhempenhofolha {
          $this->rh72_sequencial = $rh72_sequencial;
        }
      }
-     if(($this->rh72_sequencial == null) || ($this->rh72_sequencial == "") ){
+     if(($this->rh72_sequencial == null) || ($this->rh72_sequencial === 0 || $this->rh72_sequencial === 0.0 || $this->rh72_sequencial == "") ){
        $this->erro_sql = " Campo rh72_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -746,7 +746,7 @@ class cl_rhempenhofolha {
    function sql_query ( $rh72_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -794,7 +794,7 @@ class cl_rhempenhofolha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -807,7 +807,7 @@ class cl_rhempenhofolha {
    function sql_query_file ( $rh72_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -828,7 +828,7 @@ class cl_rhempenhofolha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -840,7 +840,7 @@ class cl_rhempenhofolha {
    function sql_query_rubricas( $rh72_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -864,7 +864,7 @@ class cl_rhempenhofolha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -884,7 +884,7 @@ class cl_rhempenhofolha {
    * @param  String   $seqCompl
    * @return String   $sSql
    */
-  function sql_query_empenhado($iAnoUsu, $iMesUsu, $sSiglaArquivo = "*", $sCampos, $seqCompl = false){
+  function sql_query_empenhado($iAnoUsu, $iMesUsu, $sSiglaArquivo = "*", $sCampos = null, $seqCompl = false){
 
     $iInstit = db_getsession('DB_instit');
 

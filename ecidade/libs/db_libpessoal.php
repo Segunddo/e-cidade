@@ -510,7 +510,8 @@ function db_datedif($pmktime=null,$smktime=null, $tipo='d'){
 
 function db_val($string=0){
   if(!db_empty($string) && $string != null ){
-    return $string+0;
+    // string nao numerica: o 5.6 coagia para 0; o 8 lanca TypeError
+    try { return $string+0; } catch (TypeError $e) { if (is_string($string)) return 0; throw $e; }
   }else{
     return 0;
   }

@@ -52,7 +52,7 @@ class cl_rhgrupotipoavaliacao {
                  h68_tipolancamento = int4 = Tipo de lançamento 
                  ";
    //funcao construtor da classe 
-   function cl_rhgrupotipoavaliacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhgrupotipoavaliacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rhgrupotipoavaliacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h68_sequencial = ($this->h68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h68_sequencial"]:$this->h68_sequencial);
+       $this->h68_sequencial = ($this->h68_sequencial === 0 || $this->h68_sequencial === 0.0 || $this->h68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h68_sequencial"]:$this->h68_sequencial);
        $this->h68_descricao = ($this->h68_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["h68_descricao"]:$this->h68_descricao);
-       $this->h68_tipolancamento = ($this->h68_tipolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["h68_tipolancamento"]:$this->h68_tipolancamento);
+       $this->h68_tipolancamento = ($this->h68_tipolancamento === 0 || $this->h68_tipolancamento === 0.0 || $this->h68_tipolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["h68_tipolancamento"]:$this->h68_tipolancamento);
      }else{
-       $this->h68_sequencial = ($this->h68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h68_sequencial"]:$this->h68_sequencial);
+       $this->h68_sequencial = ($this->h68_sequencial === 0 || $this->h68_sequencial === 0.0 || $this->h68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h68_sequencial"]:$this->h68_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rhgrupotipoavaliacao {
          $this->h68_sequencial = $h68_sequencial; 
        }
      }
-     if(($this->h68_sequencial == null) || ($this->h68_sequencial == "") ){ 
+     if(($this->h68_sequencial == null) || ($this->h68_sequencial === 0 || $this->h68_sequencial === 0.0 || $this->h68_sequencial == "") ){ 
        $this->erro_sql = " Campo h68_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_rhgrupotipoavaliacao {
    function sql_query ( $h68_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_rhgrupotipoavaliacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_rhgrupotipoavaliacao {
    function sql_query_file ( $h68_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_rhgrupotipoavaliacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

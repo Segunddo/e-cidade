@@ -54,7 +54,7 @@ class cl_tpcontra {
                  h13_descr = varchar(40) = Descrição do Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_tpcontra() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tpcontra"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_tpcontra {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h13_codigo = ($this->h13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_codigo"]:$this->h13_codigo);
-       $this->h13_regime = ($this->h13_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_regime"]:$this->h13_regime);
+       $this->h13_codigo = ($this->h13_codigo === 0 || $this->h13_codigo === 0.0 || $this->h13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_codigo"]:$this->h13_codigo);
+       $this->h13_regime = ($this->h13_regime === 0 || $this->h13_regime === 0.0 || $this->h13_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_regime"]:$this->h13_regime);
        $this->h13_tpcont = ($this->h13_tpcont == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_tpcont"]:$this->h13_tpcont);
        $this->h13_descr = ($this->h13_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_descr"]:$this->h13_descr);
      }else{
-       $this->h13_codigo = ($this->h13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_codigo"]:$this->h13_codigo);
+       $this->h13_codigo = ($this->h13_codigo === 0 || $this->h13_codigo === 0.0 || $this->h13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_codigo"]:$this->h13_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_tpcontra {
          $this->h13_codigo = $h13_codigo; 
        }
      }
-     if(($this->h13_codigo == null) || ($this->h13_codigo == "") ){ 
+     if(($this->h13_codigo == null) || ($this->h13_codigo === 0 || $this->h13_codigo === 0.0 || $this->h13_codigo == "") ){ 
        $this->erro_sql = " Campo h13_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_tpcontra {
    function sql_query ( $h13_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -411,7 +411,7 @@ class cl_tpcontra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_tpcontra {
    function sql_query_file ( $h13_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_tpcontra {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -46,7 +46,7 @@ class ProcessamentoPontoConsignadosCaixa extends ProcessamentoPontoConsignados{
    * @param \ConfiguracaoConsignado $oConfiguracaoConsignado
    * @throws \DBException
    */
-  public function importarDadosPreponto(ConfiguracaoConsignado $oConfiguracaoConsignado) {
+  public function importarDadosPreponto(ConfiguracaoConsignado $oConfiguracaoConsignado = null) { // LSP: a mae nao tem parametro
 
     $this->oInstituicao = InstituicaoRepository::getInstituicaoSessao();
     $oCompetencia       = new DBCompetencia(DBPessoal::getAnoFolha(), DBPessoal::getMesFolha());

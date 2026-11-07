@@ -66,7 +66,7 @@ class FolhaPagamento13o extends FolhaPagamento {
    * @example FolhaPagamento13o::hasFolhaAberta()
    * @return  boolean
    */
-  public static function hasFolhaAberta( DBCompetencia $oCompetencia = null) {
+  public static function hasFolhaAberta($oCompetencia = null, $iTipoFolha = null) {
     return FolhaPagamento::hasFolhaAberta(FolhaPagamento::TIPO_FOLHA_13o_SALARIO, $oCompetencia);
   }
 

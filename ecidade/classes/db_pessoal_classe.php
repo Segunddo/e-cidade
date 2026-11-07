@@ -292,7 +292,7 @@ class cl_pessoal {
                  r01_depirf = int4 = Dependentes IRRF 
                  ";
    //funcao construtor da classe 
-   function cl_pessoal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pessoal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -309,10 +309,10 @@ class cl_pessoal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r01_anousu = ($this->r01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_anousu"]:$this->r01_anousu);
-       $this->r01_mesusu = ($this->r01_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_mesusu"]:$this->r01_mesusu);
-       $this->r01_numcgm = ($this->r01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_numcgm"]:$this->r01_numcgm);
-       $this->r01_regist = ($this->r01_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_regist"]:$this->r01_regist);
+       $this->r01_anousu = ($this->r01_anousu === 0 || $this->r01_anousu === 0.0 || $this->r01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_anousu"]:$this->r01_anousu);
+       $this->r01_mesusu = ($this->r01_mesusu === 0 || $this->r01_mesusu === 0.0 || $this->r01_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_mesusu"]:$this->r01_mesusu);
+       $this->r01_numcgm = ($this->r01_numcgm === 0 || $this->r01_numcgm === 0.0 || $this->r01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_numcgm"]:$this->r01_numcgm);
+       $this->r01_regist = ($this->r01_regist === 0 || $this->r01_regist === 0.0 || $this->r01_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_regist"]:$this->r01_regist);
        if($this->r01_admiss == ""){
          $this->r01_admiss_dia = ($this->r01_admiss_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_admiss_dia"]:$this->r01_admiss_dia);
          $this->r01_admiss_mes = ($this->r01_admiss_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_admiss_mes"]:$this->r01_admiss_mes);
@@ -321,15 +321,15 @@ class cl_pessoal {
             $this->r01_admiss = $this->r01_admiss_ano."-".$this->r01_admiss_mes."-".$this->r01_admiss_dia;
          }
        }
-       $this->r01_regime = ($this->r01_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_regime"]:$this->r01_regime);
+       $this->r01_regime = ($this->r01_regime === 0 || $this->r01_regime === 0.0 || $this->r01_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_regime"]:$this->r01_regime);
        $this->r01_lotac = ($this->r01_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_lotac"]:$this->r01_lotac);
-       $this->r01_vincul = ($this->r01_vincul == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_vincul"]:$this->r01_vincul);
-       $this->r01_cbo = ($this->r01_cbo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_cbo"]:$this->r01_cbo);
+       $this->r01_vincul = ($this->r01_vincul === 0 || $this->r01_vincul === 0.0 || $this->r01_vincul == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_vincul"]:$this->r01_vincul);
+       $this->r01_cbo = ($this->r01_cbo === 0 || $this->r01_cbo === 0.0 || $this->r01_cbo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_cbo"]:$this->r01_cbo);
        $this->r01_padrao = ($this->r01_padrao == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_padrao"]:$this->r01_padrao);
-       $this->r01_salari = ($this->r01_salari == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_salari"]:$this->r01_salari);
+       $this->r01_salari = ($this->r01_salari === 0 || $this->r01_salari === 0.0 || $this->r01_salari == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_salari"]:$this->r01_salari);
        $this->r01_tipsal = ($this->r01_tipsal == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_tipsal"]:$this->r01_tipsal);
        $this->r01_folha = ($this->r01_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_folha"]:$this->r01_folha);
-       $this->r01_fpagto = ($this->r01_fpagto == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_fpagto"]:$this->r01_fpagto);
+       $this->r01_fpagto = ($this->r01_fpagto === 0 || $this->r01_fpagto === 0.0 || $this->r01_fpagto == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_fpagto"]:$this->r01_fpagto);
        $this->r01_banco = ($this->r01_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_banco"]:$this->r01_banco);
        $this->r01_agenc = ($this->r01_agenc == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_agenc"]:$this->r01_agenc);
        $this->r01_contac = ($this->r01_contac == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_contac"]:$this->r01_contac);
@@ -346,8 +346,8 @@ class cl_pessoal {
        $this->r01_bcofgt = ($this->r01_bcofgt == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_bcofgt"]:$this->r01_bcofgt);
        $this->r01_agfgts = ($this->r01_agfgts == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_agfgts"]:$this->r01_agfgts);
        $this->r01_ccfgts = ($this->r01_ccfgts == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_ccfgts"]:$this->r01_ccfgts);
-       $this->r01_hrssem = ($this->r01_hrssem == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_hrssem"]:$this->r01_hrssem);
-       $this->r01_situac = ($this->r01_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_situac"]:$this->r01_situac);
+       $this->r01_hrssem = ($this->r01_hrssem === 0 || $this->r01_hrssem === 0.0 || $this->r01_hrssem == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_hrssem"]:$this->r01_hrssem);
+       $this->r01_situac = ($this->r01_situac === 0 || $this->r01_situac === 0.0 || $this->r01_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_situac"]:$this->r01_situac);
        if($this->r01_nasc == ""){
          $this->r01_nasc_dia = ($this->r01_nasc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_nasc_dia"]:$this->r01_nasc_dia);
          $this->r01_nasc_mes = ($this->r01_nasc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_nasc_mes"]:$this->r01_nasc_mes);
@@ -356,9 +356,9 @@ class cl_pessoal {
             $this->r01_nasc = $this->r01_nasc_ano."-".$this->r01_nasc_mes."-".$this->r01_nasc_dia;
          }
        }
-       $this->r01_nacion = ($this->r01_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_nacion"]:$this->r01_nacion);
-       $this->r01_anoche = ($this->r01_anoche == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_anoche"]:$this->r01_anoche);
-       $this->r01_instru = ($this->r01_instru == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_instru"]:$this->r01_instru);
+       $this->r01_nacion = ($this->r01_nacion === 0 || $this->r01_nacion === 0.0 || $this->r01_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_nacion"]:$this->r01_nacion);
+       $this->r01_anoche = ($this->r01_anoche === 0 || $this->r01_anoche === 0.0 || $this->r01_anoche == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_anoche"]:$this->r01_anoche);
+       $this->r01_instru = ($this->r01_instru === 0 || $this->r01_instru === 0.0 || $this->r01_instru == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_instru"]:$this->r01_instru);
        $this->r01_sexo = ($this->r01_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_sexo"]:$this->r01_sexo);
        if($this->r01_recis == ""){
          $this->r01_recis_dia = ($this->r01_recis_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_recis_dia"]:$this->r01_recis_dia);
@@ -368,17 +368,17 @@ class cl_pessoal {
             $this->r01_recis = $this->r01_recis_ano."-".$this->r01_recis_mes."-".$this->r01_recis_dia;
          }
        }
-       $this->r01_causa = ($this->r01_causa == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_causa"]:$this->r01_causa);
-       $this->r01_ponto = ($this->r01_ponto == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_ponto"]:$this->r01_ponto);
-       $this->r01_alim = ($this->r01_alim == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_alim"]:$this->r01_alim);
+       $this->r01_causa = ($this->r01_causa === 0 || $this->r01_causa === 0.0 || $this->r01_causa == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_causa"]:$this->r01_causa);
+       $this->r01_ponto = ($this->r01_ponto === 0 || $this->r01_ponto === 0.0 || $this->r01_ponto == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_ponto"]:$this->r01_ponto);
+       $this->r01_alim = ($this->r01_alim === 0 || $this->r01_alim === 0.0 || $this->r01_alim == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_alim"]:$this->r01_alim);
        $this->r01_digito = ($this->r01_digito == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_digito"]:$this->r01_digito);
        $this->r01_tpvinc = ($this->r01_tpvinc == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_tpvinc"]:$this->r01_tpvinc);
-       $this->r01_arredn = ($this->r01_arredn == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_arredn"]:$this->r01_arredn);
+       $this->r01_arredn = ($this->r01_arredn === 0 || $this->r01_arredn === 0.0 || $this->r01_arredn == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_arredn"]:$this->r01_arredn);
        $this->r01_progr = ($this->r01_progr == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_progr"]:$this->r01_progr);
-       $this->r01_carth = ($this->r01_carth == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_carth"]:$this->r01_carth);
+       $this->r01_carth = ($this->r01_carth === 0 || $this->r01_carth === 0.0 || $this->r01_carth == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_carth"]:$this->r01_carth);
        $this->r01_rubric = ($this->r01_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_rubric"]:$this->r01_rubric);
-       $this->r01_tbprev = ($this->r01_tbprev == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_tbprev"]:$this->r01_tbprev);
-       $this->r01_adia13 = ($this->r01_adia13 == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_adia13"]:$this->r01_adia13);
+       $this->r01_tbprev = ($this->r01_tbprev === 0 || $this->r01_tbprev === 0.0 || $this->r01_tbprev == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_tbprev"]:$this->r01_tbprev);
+       $this->r01_adia13 = ($this->r01_adia13 === 0 || $this->r01_adia13 === 0.0 || $this->r01_adia13 == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_adia13"]:$this->r01_adia13);
        if($this->r01_anter == ""){
          $this->r01_anter_dia = ($this->r01_anter_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_anter_dia"]:$this->r01_anter_dia);
          $this->r01_anter_mes = ($this->r01_anter_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_anter_mes"]:$this->r01_anter_mes);
@@ -405,7 +405,7 @@ class cl_pessoal {
          }
        }
        $this->r01_estciv = ($this->r01_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_estciv"]:$this->r01_estciv);
-       $this->r01_funcao = ($this->r01_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_funcao"]:$this->r01_funcao);
+       $this->r01_funcao = ($this->r01_funcao === 0 || $this->r01_funcao === 0.0 || $this->r01_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_funcao"]:$this->r01_funcao);
        if($this->r01_trien == ""){
          $this->r01_trien_dia = ($this->r01_trien_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_trien_dia"]:$this->r01_trien_dia);
          $this->r01_trien_mes = ($this->r01_trien_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_trien_mes"]:$this->r01_trien_mes);
@@ -414,7 +414,7 @@ class cl_pessoal {
             $this->r01_trien = $this->r01_trien_ano."-".$this->r01_trien_mes."-".$this->r01_trien_dia;
          }
        }
-       $this->r01_tipadm = ($this->r01_tipadm == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_tipadm"]:$this->r01_tipadm);
+       $this->r01_tipadm = ($this->r01_tipadm === 0 || $this->r01_tipadm === 0.0 || $this->r01_tipadm == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_tipadm"]:$this->r01_tipadm);
        $this->r01_caub = ($this->r01_caub == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_caub"]:$this->r01_caub);
        if($this->r01_aviso == ""){
          $this->r01_aviso_dia = ($this->r01_aviso_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_aviso_dia"]:$this->r01_aviso_dia);
@@ -424,7 +424,7 @@ class cl_pessoal {
             $this->r01_aviso = $this->r01_aviso_ano."-".$this->r01_aviso_mes."-".$this->r01_aviso_dia;
          }
        }
-       $this->r01_hrsmen = ($this->r01_hrsmen == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_hrsmen"]:$this->r01_hrsmen);
+       $this->r01_hrsmen = ($this->r01_hrsmen === 0 || $this->r01_hrsmen === 0.0 || $this->r01_hrsmen == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_hrsmen"]:$this->r01_hrsmen);
        if($this->r01_rfi1 == ""){
          $this->r01_rfi1_dia = ($this->r01_rfi1_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_rfi1_dia"]:$this->r01_rfi1_dia);
          $this->r01_rfi1_mes = ($this->r01_rfi1_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_rfi1_mes"]:$this->r01_rfi1_mes);
@@ -457,8 +457,8 @@ class cl_pessoal {
             $this->r01_rff2 = $this->r01_rff2_ano."-".$this->r01_rff2_mes."-".$this->r01_rff2_dia;
          }
        }
-       $this->r01_rnd1 = ($this->r01_rnd1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_rnd1"]:$this->r01_rnd1);
-       $this->r01_rnd2 = ($this->r01_rnd2 == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_rnd2"]:$this->r01_rnd2);
+       $this->r01_rnd1 = ($this->r01_rnd1 === 0 || $this->r01_rnd1 === 0.0 || $this->r01_rnd1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_rnd1"]:$this->r01_rnd1);
+       $this->r01_rnd2 = ($this->r01_rnd2 === 0 || $this->r01_rnd2 === 0.0 || $this->r01_rnd2 == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_rnd2"]:$this->r01_rnd2);
        if($this->r01_r13i == ""){
          $this->r01_r13i_dia = ($this->r01_r13i_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_r13i_dia"]:$this->r01_r13i_dia);
          $this->r01_r13i_mes = ($this->r01_r13i_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_r13i_mes"]:$this->r01_r13i_mes);
@@ -475,11 +475,11 @@ class cl_pessoal {
             $this->r01_r13f = $this->r01_r13f_ano."-".$this->r01_r13f_mes."-".$this->r01_r13f_dia;
          }
        }
-       $this->r01_rnd3 = ($this->r01_rnd3 == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_rnd3"]:$this->r01_rnd3);
-       $this->r01_ndres = ($this->r01_ndres == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_ndres"]:$this->r01_ndres);
-       $this->r01_ndsal = ($this->r01_ndsal == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_ndsal"]:$this->r01_ndsal);
+       $this->r01_rnd3 = ($this->r01_rnd3 === 0 || $this->r01_rnd3 === 0.0 || $this->r01_rnd3 == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_rnd3"]:$this->r01_rnd3);
+       $this->r01_ndres = ($this->r01_ndres === 0 || $this->r01_ndres === 0.0 || $this->r01_ndres == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_ndres"]:$this->r01_ndres);
+       $this->r01_ndsal = ($this->r01_ndsal === 0 || $this->r01_ndsal === 0.0 || $this->r01_ndsal == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_ndsal"]:$this->r01_ndsal);
        $this->r01_prores = ($this->r01_prores == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_prores"]:$this->r01_prores);
-       $this->r01_matipe = ($this->r01_matipe == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_matipe"]:$this->r01_matipe);
+       $this->r01_matipe = ($this->r01_matipe === 0 || $this->r01_matipe === 0.0 || $this->r01_matipe == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_matipe"]:$this->r01_matipe);
        if($this->r01_dtvinc == ""){
          $this->r01_dtvinc_dia = ($this->r01_dtvinc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_dtvinc_dia"]:$this->r01_dtvinc_dia);
          $this->r01_dtvinc_mes = ($this->r01_dtvinc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_dtvinc_mes"]:$this->r01_dtvinc_mes);
@@ -502,22 +502,22 @@ class cl_pessoal {
        $this->r01_titele = ($this->r01_titele == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_titele"]:$this->r01_titele);
        $this->r01_zonael = ($this->r01_zonael == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_zonael"]:$this->r01_zonael);
        $this->r01_secaoe = ($this->r01_secaoe == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_secaoe"]:$this->r01_secaoe);
-       $this->r01_taviso = ($this->r01_taviso == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_taviso"]:$this->r01_taviso);
+       $this->r01_taviso = ($this->r01_taviso === 0 || $this->r01_taviso === 0.0 || $this->r01_taviso == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_taviso"]:$this->r01_taviso);
        $this->r01_cc = ($this->r01_cc == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_cc"]:$this->r01_cc);
        $this->r01_ocorre = ($this->r01_ocorre == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_ocorre"]:$this->r01_ocorre);
-       $this->r01_basefo = ($this->r01_basefo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_basefo"]:$this->r01_basefo);
-       $this->r01_descfo = ($this->r01_descfo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_descfo"]:$this->r01_descfo);
-       $this->r01_b13fo = ($this->r01_b13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_b13fo"]:$this->r01_b13fo);
-       $this->r01_d13fo = ($this->r01_d13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_d13fo"]:$this->r01_d13fo);
+       $this->r01_basefo = ($this->r01_basefo === 0 || $this->r01_basefo === 0.0 || $this->r01_basefo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_basefo"]:$this->r01_basefo);
+       $this->r01_descfo = ($this->r01_descfo === 0 || $this->r01_descfo === 0.0 || $this->r01_descfo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_descfo"]:$this->r01_descfo);
+       $this->r01_b13fo = ($this->r01_b13fo === 0 || $this->r01_b13fo === 0.0 || $this->r01_b13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_b13fo"]:$this->r01_b13fo);
+       $this->r01_d13fo = ($this->r01_d13fo === 0 || $this->r01_d13fo === 0.0 || $this->r01_d13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_d13fo"]:$this->r01_d13fo);
        $this->r01_equip = ($this->r01_equip == "f"?@$GLOBALS["HTTP_POST_VARS"]["r01_equip"]:$this->r01_equip);
-       $this->r01_raca = ($this->r01_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_raca"]:$this->r01_raca);
-       $this->r01_mremun = ($this->r01_mremun == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_mremun"]:$this->r01_mremun);
+       $this->r01_raca = ($this->r01_raca === 0 || $this->r01_raca === 0.0 || $this->r01_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_raca"]:$this->r01_raca);
+       $this->r01_mremun = ($this->r01_mremun === 0 || $this->r01_mremun === 0.0 || $this->r01_mremun == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_mremun"]:$this->r01_mremun);
        $this->r01_reserv = ($this->r01_reserv == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_reserv"]:$this->r01_reserv);
        $this->r01_catres = ($this->r01_catres == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_catres"]:$this->r01_catres);
-       $this->r01_propi = ($this->r01_propi == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_propi"]:$this->r01_propi);
-       $this->r01_cargo = ($this->r01_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_cargo"]:$this->r01_cargo);
+       $this->r01_propi = ($this->r01_propi === 0 || $this->r01_propi === 0.0 || $this->r01_propi == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_propi"]:$this->r01_propi);
+       $this->r01_cargo = ($this->r01_cargo === 0 || $this->r01_cargo === 0.0 || $this->r01_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_cargo"]:$this->r01_cargo);
        $this->r01_clas1 = ($this->r01_clas1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_clas1"]:$this->r01_clas1);
-       $this->r01_origp = ($this->r01_origp == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_origp"]:$this->r01_origp);
+       $this->r01_origp = ($this->r01_origp === 0 || $this->r01_origp === 0.0 || $this->r01_origp == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_origp"]:$this->r01_origp);
        if($this->r01_clas2 == ""){
          $this->r01_clas2_dia = ($this->r01_clas2_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_clas2_dia"]:$this->r01_clas2_dia);
          $this->r01_clas2_mes = ($this->r01_clas2_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_clas2_mes"]:$this->r01_clas2_mes);
@@ -527,14 +527,14 @@ class cl_pessoal {
          }
        }
        $this->r01_vale = ($this->r01_vale == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_vale"]:$this->r01_vale);
-       $this->r01_instit = ($this->r01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_instit"]:$this->r01_instit);
-       $this->r01_contrato = ($this->r01_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_contrato"]:$this->r01_contrato);
-       $this->r01_depsf = ($this->r01_depsf == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_depsf"]:$this->r01_depsf);
-       $this->r01_depirf = ($this->r01_depirf == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_depirf"]:$this->r01_depirf);
+       $this->r01_instit = ($this->r01_instit === 0 || $this->r01_instit === 0.0 || $this->r01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_instit"]:$this->r01_instit);
+       $this->r01_contrato = ($this->r01_contrato === 0 || $this->r01_contrato === 0.0 || $this->r01_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_contrato"]:$this->r01_contrato);
+       $this->r01_depsf = ($this->r01_depsf === 0 || $this->r01_depsf === 0.0 || $this->r01_depsf == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_depsf"]:$this->r01_depsf);
+       $this->r01_depirf = ($this->r01_depirf === 0 || $this->r01_depirf === 0.0 || $this->r01_depirf == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_depirf"]:$this->r01_depirf);
      }else{
-       $this->r01_anousu = ($this->r01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_anousu"]:$this->r01_anousu);
-       $this->r01_mesusu = ($this->r01_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_mesusu"]:$this->r01_mesusu);
-       $this->r01_regist = ($this->r01_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_regist"]:$this->r01_regist);
+       $this->r01_anousu = ($this->r01_anousu === 0 || $this->r01_anousu === 0.0 || $this->r01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_anousu"]:$this->r01_anousu);
+       $this->r01_mesusu = ($this->r01_mesusu === 0 || $this->r01_mesusu === 0.0 || $this->r01_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_mesusu"]:$this->r01_mesusu);
+       $this->r01_regist = ($this->r01_regist === 0 || $this->r01_regist === 0.0 || $this->r01_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r01_regist"]:$this->r01_regist);
      }
    }
    // funcao para inclusao
@@ -681,7 +681,7 @@ class cl_pessoal {
        $this->r01_anousu = $r01_anousu; 
        $this->r01_mesusu = $r01_mesusu; 
        $this->r01_regist = $r01_regist; 
-     if(($this->r01_anousu == null) || ($this->r01_anousu == "") ){ 
+     if(($this->r01_anousu == null) || ($this->r01_anousu === 0 || $this->r01_anousu === 0.0 || $this->r01_anousu == "") ){ 
        $this->erro_sql = " Campo r01_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -689,7 +689,7 @@ class cl_pessoal {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r01_mesusu == null) || ($this->r01_mesusu == "") ){ 
+     if(($this->r01_mesusu == null) || ($this->r01_mesusu === 0 || $this->r01_mesusu === 0.0 || $this->r01_mesusu == "") ){ 
        $this->erro_sql = " Campo r01_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -697,7 +697,7 @@ class cl_pessoal {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r01_regist == null) || ($this->r01_regist == "") ){ 
+     if(($this->r01_regist == null) || ($this->r01_regist === 0 || $this->r01_regist === 0.0 || $this->r01_regist == "") ){ 
        $this->erro_sql = " Campo r01_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -2177,7 +2177,7 @@ class cl_pessoal {
    function sql_query ( $r01_anousu=null,$r01_mesusu=null,$r01_regist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -2224,7 +2224,7 @@ class cl_pessoal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -2236,7 +2236,7 @@ class cl_pessoal {
    function sql_query_cgm ( $r01_anousu=null,$r01_mesusu=null,$r01_regist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -2275,7 +2275,7 @@ class cl_pessoal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -2287,7 +2287,7 @@ class cl_pessoal {
    function sql_query_file ( $r01_anousu=null,$r01_mesusu=null,$r01_regist=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -2324,7 +2324,7 @@ class cl_pessoal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

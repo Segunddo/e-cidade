@@ -30,7 +30,8 @@ include(modification("libs/db_sql.php"));
 include(modification("classes/db_rhlocaltrab_classe.php"));
 $clrhlocaltrab = new cl_rhlocaltrab;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 if($tipoarq == 's'){
@@ -243,7 +244,7 @@ $primeiro        = false;
 $pre = 0;
 $rubrica = 0;
 
-for($x = 0; $x < pg_numrows($res_basico);$x++){
+for($x = 0; $x < ($res_basico ? pg_numrows($res_basico) : null);$x++){
    db_fieldsmemory($res_basico,$x);
      if($rubrica != $rh27_rubric && $troca_pag == 0 ){
        $pdf->setfont('arial','b',7);
@@ -264,7 +265,7 @@ for($x = 0; $x < pg_numrows($res_basico);$x++){
 //       }else{
 //         $pdf->cell(0,4,$rh27_rubric.' - '.$rh27_descr,0,1,"C",1);
 //       }
- 
+
       // $total_func1     = 0;
       // $total_quant1    = 0;
       // $total_valor1    = 0;
@@ -453,7 +454,7 @@ function imprime_quebra($xquebra = null, $xdescr_quebra = '' ){
   
   $res_total = db_query($sql_total);
 
-  for($xy = 0; $xy < pg_numrows($res_total);$xy++){
+  for($xy = 0; $xy < ($res_total ? pg_numrows($res_total) : null);$xy++){
      db_fieldsmemory($res_total,$xy);
      $pdf->setfont('arial','b',7);
      if ($pdf->gety() > $pdf->h - 30 || $troca_pag1!= 0 ){

@@ -34,7 +34,8 @@ include(modification("classes/db_rhcadregime_classe.php"));
 include(modification("classes/db_codmovsefip_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clrescisao = new cl_rescisao;

@@ -10,7 +10,8 @@ use ECidade\RecursosHumanos\ESocial\Model\Configuracao;
 use ECidade\RecursosHumanos\ESocial\Model\Formulario\Tipo;
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $rotulo = new rotulocampo;
 $rotulo->label("z01_nome");

@@ -36,7 +36,8 @@ $clrhtipovale = new cl_rhtipovale;
 $clrotulo = new rotulocampo;
 $clrotulo->label('rh67_codigo');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $res_tipovale = $clrhtipovale->sql_record($clrhtipovale->sql_query($rh67_rhtipovale,"*"));
@@ -66,7 +67,7 @@ if(trim($grupo) != '' && trim($grupo) != 'todos'){
 $result = $clrhteutri->sql_record($clrhteutri->sql_query(null,"*",$xordem,$where));
 //echo $clrhteutri->sql_query(null,"*",$xordem,$where);exit;
 //db_criatabela($result);exit;
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona("db_erros.php?fechar=true&db_erro=Não existem Vales Cadastrados para o tipo ".$rh68_sequencial." - ".$rh68_descr.". Verifique!");
 

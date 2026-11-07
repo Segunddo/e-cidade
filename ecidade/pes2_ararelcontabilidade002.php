@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 if($ponto == 's'){
@@ -201,7 +202,7 @@ order by rh27_rubric
 
 $result2_fps = db_query($sql2_fps);
 //db_criatabela($result2_fps);exit;
-if(pg_numrows($result2_fps) > 0){
+if(($result2_fps ? pg_numrows($result2_fps) : null) > 0){
   db_fieldsmemory($result2_fps,0);
 }
 
@@ -286,7 +287,7 @@ $pdf->cell(30,$alt,'VALOR',1,1,"C",1);
 
 $total_consig = 0;
 $pdf->setfont('arial','',8);
-for($x = 0; $x < pg_numrows($result2_fps);$x++){
+for($x = 0; $x < ($result2_fps ? pg_numrows($result2_fps) : null);$x++){
   db_fieldsmemory($result2_fps,$x);
   $pdf->cell(80,$alt,$rh27_descr,1,0,"L",0);
   $pdf->cell(15,$alt,$rh27_rubric,1,0,"C",0);
@@ -592,7 +593,7 @@ order by rh27_rubric
 //echo $sql;exit;
 $result4_outras = db_query($sql4_outras);
 //db_criatabela($result4_outras);exit;
-$xxnum = pg_numrows($result4_outras);
+$xxnum = ($result4_outras ? pg_numrows($result4_outras) : null);
 if($result4_outras == false){
   db_redireciona('db_erros.php?fechar=true&db_erro=1 - Não nenhum registro encontrado no período de '.$mes.' / '.$ano);
 }

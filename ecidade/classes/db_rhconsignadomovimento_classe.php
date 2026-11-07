@@ -44,7 +44,7 @@ class cl_rhconsignadomovimento {
                  rh151_situacao = char(1) = Situação do consignado 
                  ";
    //funcao construtor da classe 
-   function cl_rhconsignadomovimento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhconsignadomovimento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -61,20 +61,20 @@ class cl_rhconsignadomovimento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh151_sequencial = ($this->rh151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_sequencial"]:$this->rh151_sequencial);
-       $this->rh151_ano = ($this->rh151_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_ano"]:$this->rh151_ano);
-       $this->rh151_mes = ($this->rh151_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_mes"]:$this->rh151_mes);
+       $this->rh151_sequencial = ($this->rh151_sequencial === 0 || $this->rh151_sequencial === 0.0 || $this->rh151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_sequencial"]:$this->rh151_sequencial);
+       $this->rh151_ano = ($this->rh151_ano === 0 || $this->rh151_ano === 0.0 || $this->rh151_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_ano"]:$this->rh151_ano);
+       $this->rh151_mes = ($this->rh151_mes === 0 || $this->rh151_mes === 0.0 || $this->rh151_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_mes"]:$this->rh151_mes);
        $this->rh151_nomearquivo = ($this->rh151_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_nomearquivo"]:$this->rh151_nomearquivo);
-       $this->rh151_instit = ($this->rh151_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_instit"]:$this->rh151_instit);
-       $this->rh151_relatorio = ($this->rh151_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_relatorio"]:$this->rh151_relatorio);
+       $this->rh151_instit = ($this->rh151_instit === 0 || $this->rh151_instit === 0.0 || $this->rh151_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_instit"]:$this->rh151_instit);
+       $this->rh151_relatorio = ($this->rh151_relatorio === 0 || $this->rh151_relatorio === 0.0 || $this->rh151_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_relatorio"]:$this->rh151_relatorio);
        $this->rh151_processado = ($this->rh151_processado == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh151_processado"]:$this->rh151_processado);
-       $this->rh151_arquivo = ($this->rh151_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_arquivo"]:$this->rh151_arquivo);
+       $this->rh151_arquivo = ($this->rh151_arquivo === 0 || $this->rh151_arquivo === 0.0 || $this->rh151_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_arquivo"]:$this->rh151_arquivo);
        $this->rh151_banco = ($this->rh151_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_banco"]:$this->rh151_banco);
        $this->rh151_tipoconsignado = ($this->rh151_tipoconsignado == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_tipoconsignado"]:$this->rh151_tipoconsignado);
-       $this->rh151_consignadoorigem = ($this->rh151_consignadoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_consignadoorigem"]:$this->rh151_consignadoorigem);
+       $this->rh151_consignadoorigem = ($this->rh151_consignadoorigem === 0 || $this->rh151_consignadoorigem === 0.0 || $this->rh151_consignadoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_consignadoorigem"]:$this->rh151_consignadoorigem);
        $this->rh151_situacao = ($this->rh151_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_situacao"]:$this->rh151_situacao);
      }else{
-       $this->rh151_sequencial = ($this->rh151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_sequencial"]:$this->rh151_sequencial);
+       $this->rh151_sequencial = ($this->rh151_sequencial === 0 || $this->rh151_sequencial === 0.0 || $this->rh151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh151_sequencial"]:$this->rh151_sequencial);
      }
    }
    // funcao para Inclusão
@@ -146,7 +146,7 @@ class cl_rhconsignadomovimento {
          $this->rh151_sequencial = $rh151_sequencial; 
        }
      }
-     if(($this->rh151_sequencial == null) || ($this->rh151_sequencial == "") ){ 
+     if(($this->rh151_sequencial == null) || ($this->rh151_sequencial === 0 || $this->rh151_sequencial === 0.0 || $this->rh151_sequencial == "") ){ 
        $this->erro_sql = " Campo rh151_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

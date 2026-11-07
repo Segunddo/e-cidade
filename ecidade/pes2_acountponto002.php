@@ -29,7 +29,8 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 if($ponto == 's'){
@@ -105,8 +106,8 @@ from db_acount d
 where d.codarq in ($arquivo)
   $where_rub
   $where_func
-  and d.datahr between ".mktime(0,0,0,substr($dataini,5,2), substr($dataini,8,2),substr($dataini,0,4))." 
-                   and ".mktime(23,59,59,substr($datafin,5,2), substr($datafin,8,2),substr($datafin,0,4))." 
+  and d.datahr between ".mktime(0,0,0,(int)substr($dataini,5,2), (int)substr($dataini,8,2),(int)substr($dataini,0,4))." 
+                   and ".mktime(23,59,59,(int)substr($datafin,5,2), (int)substr($datafin,8,2),(int)substr($datafin,0,4))." 
   and d.codcam     = $dcodcam1 
   and k.id_codcam  = $kcodcam1
   $where_usuarios
@@ -120,9 +121,9 @@ order by d.id_acount;
 
 $result1 = db_query($sql1);
 //db_criatabela($result1);exit;
-$xxnum1  = pg_numrows($result1);
+$xxnum1  = ($result1 ? pg_numrows($result1) : null);
 
-for($xx = 0; $xx < pg_numrows($result1);$xx++){
+for($xx = 0; $xx < ($result1 ? pg_numrows($result1) : null);$xx++){
    db_fieldsmemory($result1,$xx);
    $sql2= "
    select distinct

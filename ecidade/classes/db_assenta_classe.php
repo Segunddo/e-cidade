@@ -108,9 +108,9 @@ class cl_assenta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h16_codigo = ($this->h16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_codigo"]:$this->h16_codigo);
-       $this->h16_regist = ($this->h16_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_regist"]:$this->h16_regist);
-       $this->h16_assent = ($this->h16_assent == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_assent"]:$this->h16_assent);
+       $this->h16_codigo = ($this->h16_codigo === 0 || $this->h16_codigo === 0.0 || $this->h16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_codigo"]:$this->h16_codigo);
+       $this->h16_regist = ($this->h16_regist === 0 || $this->h16_regist === 0.0 || $this->h16_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_regist"]:$this->h16_regist);
+       $this->h16_assent = ($this->h16_assent === 0 || $this->h16_assent === 0.0 || $this->h16_assent == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_assent"]:$this->h16_assent);
        if($this->h16_dtconc == ""){
          $this->h16_dtconc_dia = ($this->h16_dtconc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_dtconc_dia"]:$this->h16_dtconc_dia);
          $this->h16_dtconc_mes = ($this->h16_dtconc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_dtconc_mes"]:$this->h16_dtconc_mes);
@@ -122,8 +122,8 @@ class cl_assenta {
        $this->h16_histor = ($this->h16_histor == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_histor"]:$this->h16_histor);
        $this->h16_nrport = ($this->h16_nrport == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_nrport"]:$this->h16_nrport);
        $this->h16_atofic = ($this->h16_atofic == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_atofic"]:$this->h16_atofic);
-       $this->h16_quant = ($this->h16_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_quant"]:$this->h16_quant);
-       $this->h16_perc = ($this->h16_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_perc"]:$this->h16_perc);
+       $this->h16_quant = ($this->h16_quant === 0 || $this->h16_quant === 0.0 || $this->h16_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_quant"]:$this->h16_quant);
+       $this->h16_perc = ($this->h16_perc === 0 || $this->h16_perc === 0.0 || $this->h16_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_perc"]:$this->h16_perc);
        if($this->h16_dtterm == ""){
          $this->h16_dtterm_dia = ($this->h16_dtterm_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_dtterm_dia"]:$this->h16_dtterm_dia);
          $this->h16_dtterm_mes = ($this->h16_dtterm_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_dtterm_mes"]:$this->h16_dtterm_mes);
@@ -133,7 +133,7 @@ class cl_assenta {
          }
        }
        $this->h16_hist2 = ($this->h16_hist2 == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_hist2"]:$this->h16_hist2);
-       $this->h16_login = ($this->h16_login == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_login"]:$this->h16_login);
+       $this->h16_login = ($this->h16_login === 0 || $this->h16_login === 0.0 || $this->h16_login == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_login"]:$this->h16_login);
        if($this->h16_dtlanc == ""){
          $this->h16_dtlanc_dia = ($this->h16_dtlanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_dtlanc_dia"]:$this->h16_dtlanc_dia);
          $this->h16_dtlanc_mes = ($this->h16_dtlanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_dtlanc_mes"]:$this->h16_dtlanc_mes);
@@ -143,10 +143,10 @@ class cl_assenta {
          }
        }
        $this->h16_conver = ($this->h16_conver == "f"?@$GLOBALS["HTTP_POST_VARS"]["h16_conver"]:$this->h16_conver);
-       $this->h16_anoato = ($this->h16_anoato == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_anoato"]:$this->h16_anoato);
+       $this->h16_anoato = ($this->h16_anoato === 0 || $this->h16_anoato === 0.0 || $this->h16_anoato == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_anoato"]:$this->h16_anoato);
        $this->h16_hora = ($this->h16_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_hora"]:$this->h16_hora);
      }else{
-       $this->h16_codigo = ($this->h16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_codigo"]:$this->h16_codigo);
+       $this->h16_codigo = ($this->h16_codigo === 0 || $this->h16_codigo === 0.0 || $this->h16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h16_codigo"]:$this->h16_codigo);
      }
    }
    // funcao para Inclusão
@@ -248,7 +248,7 @@ class cl_assenta {
          $this->h16_codigo = $h16_codigo;
        }
      }
-     if(($this->h16_codigo == null) || ($this->h16_codigo == "") ){
+     if(($this->h16_codigo == null) || ($this->h16_codigo === 0 || $this->h16_codigo === 0.0 || $this->h16_codigo == "") ){
        $this->erro_sql = " Campo h16_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -852,7 +852,7 @@ class cl_assenta {
    /**
  * Lista as perdas da matricula
  */
-function sql_query_perdasMatricula($iMatricula, $dtInicio, $dtFim = null, $sCampos = "*", $sGroupBy) {
+function sql_query_perdasMatricula($iMatricula, $dtInicio, $dtFim = null, $sCampos = "*", $sGroupBy = null) {
 
   if ( empty($dtFim) ) {
     $dtFim = date('Y-m-d', db_getsession("DB_datausu"));

@@ -63,7 +63,7 @@ class cl_rhestagioresultado {
                  h65_observacao = text = Observacoes 
                  ";
    //funcao construtor da classe 
-   function cl_rhestagioresultado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhestagioresultado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_rhestagioresultado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h65_sequencial = ($this->h65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_sequencial"]:$this->h65_sequencial);
-       $this->h65_rhestagioagenda = ($this->h65_rhestagioagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_rhestagioagenda"]:$this->h65_rhestagioagenda);
+       $this->h65_sequencial = ($this->h65_sequencial === 0 || $this->h65_sequencial === 0.0 || $this->h65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_sequencial"]:$this->h65_sequencial);
+       $this->h65_rhestagioagenda = ($this->h65_rhestagioagenda === 0 || $this->h65_rhestagioagenda === 0.0 || $this->h65_rhestagioagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_rhestagioagenda"]:$this->h65_rhestagioagenda);
        if($this->h65_data == ""){
          $this->h65_data_dia = ($this->h65_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_data_dia"]:$this->h65_data_dia);
          $this->h65_data_mes = ($this->h65_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_data_mes"]:$this->h65_data_mes);
@@ -90,12 +90,12 @@ class cl_rhestagioresultado {
             $this->h65_data = $this->h65_data_ano."-".$this->h65_data_mes."-".$this->h65_data_dia;
          }
        }
-       $this->h65_rhportaria = ($this->h65_rhportaria == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_rhportaria"]:$this->h65_rhportaria);
+       $this->h65_rhportaria = ($this->h65_rhportaria === 0 || $this->h65_rhportaria === 0.0 || $this->h65_rhportaria == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_rhportaria"]:$this->h65_rhportaria);
        $this->h65_resultado = ($this->h65_resultado == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_resultado"]:$this->h65_resultado);
-       $this->h65_pontos = ($this->h65_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_pontos"]:$this->h65_pontos);
+       $this->h65_pontos = ($this->h65_pontos === 0 || $this->h65_pontos === 0.0 || $this->h65_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_pontos"]:$this->h65_pontos);
        $this->h65_observacao = ($this->h65_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_observacao"]:$this->h65_observacao);
      }else{
-       $this->h65_sequencial = ($this->h65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_sequencial"]:$this->h65_sequencial);
+       $this->h65_sequencial = ($this->h65_sequencial === 0 || $this->h65_sequencial === 0.0 || $this->h65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_sequencial"]:$this->h65_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_rhestagioresultado {
          $this->h65_sequencial = $h65_sequencial; 
        }
      }
-     if(($this->h65_sequencial == null) || ($this->h65_sequencial == "") ){ 
+     if(($this->h65_sequencial == null) || ($this->h65_sequencial === 0 || $this->h65_sequencial === 0.0 || $this->h65_sequencial == "") ){ 
        $this->erro_sql = " Campo h65_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -507,7 +507,7 @@ class cl_rhestagioresultado {
    function sql_query ( $h65_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_rhestagioresultado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -546,7 +546,7 @@ class cl_rhestagioresultado {
    function sql_query_file ( $h65_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -567,7 +567,7 @@ class cl_rhestagioresultado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -579,7 +579,7 @@ class cl_rhestagioresultado {
    function sql_query_resultado ( $h65_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -610,7 +610,7 @@ class cl_rhestagioresultado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
