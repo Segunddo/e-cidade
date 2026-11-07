@@ -37,7 +37,8 @@ include(modification("classes/db_matmater_classe.php"));
 include(modification("classes/db_matparamconsulta_classe.php"));
 
 db_postmemory($_POST);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clmatmater         = new cl_matmater;
 $clmatparamconsulta = new cl_matparamconsulta;

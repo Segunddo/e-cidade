@@ -486,15 +486,15 @@ $oRetorno->message = '';
       $oTotalGeral->iTotalCapacidade       += $oEnsino->iTotalCapacidade      ; /* FHSYS */
     }
 
-    $oTotalGeral->iPercentualEvadidos         = round (($oTotalGeral->iTotalEvadidos         / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-    $oTotalGeral->iPercentualCancelados       = round (($oTotalGeral->iTotalCancelados       / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-    $oTotalGeral->iPercentualTransferidos     = round (($oTotalGeral->iTotalTransferidos     / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-    $oTotalGeral->iPercentualTrocas           = round (($oTotalGeral->iTotalTrocas           / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-    $oTotalGeral->iPercentualProgredidos      = round (($oTotalGeral->iTotalProgredidos      / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-    $oTotalGeral->iPercentualObitos           = round (($oTotalGeral->iTotalObitos           / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-    $oTotalGeral->iPercentualMatriculaEfetiva = round (($oTotalGeral->iTotalMatriculaEfetiva / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-    $oTotalGeral->iPercentualMatriculaNEE     = round (($oTotalGeral->iTotalMatriculaNEE     / $oTotalGeral->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
-    $oTotalGeral->iPercentualVagasDisponiveis = round (($oTotalGeral->iTotalVagasDisponiveis / $oTotalGeral->iTotalVagas)            * 100, 2);
+    $oTotalGeral->iPercentualEvadidos         = round (($oTotalGeral->iTotalMatriculaInicial ? $oTotalGeral->iTotalEvadidos / $oTotalGeral->iTotalMatriculaInicial : 0) * 100, 2);
+    $oTotalGeral->iPercentualCancelados       = round (($oTotalGeral->iTotalMatriculaInicial ? $oTotalGeral->iTotalCancelados / $oTotalGeral->iTotalMatriculaInicial : 0) * 100, 2);
+    $oTotalGeral->iPercentualTransferidos     = round (($oTotalGeral->iTotalMatriculaInicial ? $oTotalGeral->iTotalTransferidos / $oTotalGeral->iTotalMatriculaInicial : 0) * 100, 2);
+    $oTotalGeral->iPercentualTrocas           = round (($oTotalGeral->iTotalMatriculaInicial ? $oTotalGeral->iTotalTrocas / $oTotalGeral->iTotalMatriculaInicial : 0) * 100, 2);
+    $oTotalGeral->iPercentualProgredidos      = round (($oTotalGeral->iTotalMatriculaInicial ? $oTotalGeral->iTotalProgredidos / $oTotalGeral->iTotalMatriculaInicial : 0) * 100, 2);
+    $oTotalGeral->iPercentualObitos           = round (($oTotalGeral->iTotalMatriculaInicial ? $oTotalGeral->iTotalObitos / $oTotalGeral->iTotalMatriculaInicial : 0) * 100, 2);
+    $oTotalGeral->iPercentualMatriculaEfetiva = round (($oTotalGeral->iTotalMatriculaInicial ? $oTotalGeral->iTotalMatriculaEfetiva / $oTotalGeral->iTotalMatriculaInicial : 0) * 100, 2);
+    $oTotalGeral->iPercentualMatriculaNEE     = round (($oTotalGeral->iTotalMatriculaInicial ? $oTotalGeral->iTotalMatriculaNEE / $oTotalGeral->iTotalMatriculaInicial : 0) * 100, 2); /* FHSYS */
+    $oTotalGeral->iPercentualVagasDisponiveis = round (($oTotalGeral->iTotalVagas ? $oTotalGeral->iTotalVagasDisponiveis / $oTotalGeral->iTotalVagas : 0)            * 100, 2);
 
     return $oTotalGeral;
   }

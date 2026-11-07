@@ -52,7 +52,7 @@ class cl_baseserie {
                  ed87_i_seriefinal = int8 = Série/Ano Final
                  ";
    //funcao construtor da classe
-   function cl_baseserie() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("baseserie");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_baseserie {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed87_i_codigo = ($this->ed87_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed87_i_codigo"]:$this->ed87_i_codigo);
-       $this->ed87_i_serieinicial = ($this->ed87_i_serieinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed87_i_serieinicial"]:$this->ed87_i_serieinicial);
-       $this->ed87_i_seriefinal = ($this->ed87_i_seriefinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed87_i_seriefinal"]:$this->ed87_i_seriefinal);
+       $this->ed87_i_codigo = ($this->ed87_i_codigo === 0 || $this->ed87_i_codigo === 0.0 || $this->ed87_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed87_i_codigo"]:$this->ed87_i_codigo);
+       $this->ed87_i_serieinicial = ($this->ed87_i_serieinicial === 0 || $this->ed87_i_serieinicial === 0.0 || $this->ed87_i_serieinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed87_i_serieinicial"]:$this->ed87_i_serieinicial);
+       $this->ed87_i_seriefinal = ($this->ed87_i_seriefinal === 0 || $this->ed87_i_seriefinal === 0.0 || $this->ed87_i_seriefinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed87_i_seriefinal"]:$this->ed87_i_seriefinal);
      }else{
-       $this->ed87_i_codigo = ($this->ed87_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed87_i_codigo"]:$this->ed87_i_codigo);
+       $this->ed87_i_codigo = ($this->ed87_i_codigo === 0 || $this->ed87_i_codigo === 0.0 || $this->ed87_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed87_i_codigo"]:$this->ed87_i_codigo);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_baseserie {
        return false;
      }
        $this->ed87_i_codigo = $ed87_i_codigo;
-     if(($this->ed87_i_codigo == null) || ($this->ed87_i_codigo == "") ){
+     if(($this->ed87_i_codigo == null) || ($this->ed87_i_codigo === 0 || $this->ed87_i_codigo === 0.0 || $this->ed87_i_codigo == "") ){
        $this->erro_sql = " Campo ed87_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -338,7 +338,7 @@ class cl_baseserie {
 
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_baseserie {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -377,7 +377,7 @@ class cl_baseserie {
    function sql_query_file ( $ed87_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_baseserie {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -411,7 +411,7 @@ class cl_baseserie {
   function sql_query_base_escola ( $ed87_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_baseserie {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

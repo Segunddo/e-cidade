@@ -35,7 +35,8 @@ include(modification("classes/db_mer_tipocardapio_classe.php"));
 include(modification("classes/db_mer_cardapioitem_classe.php"));
 include(modification("classes/db_diasemana_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $cldiasemana        = new cl_diasemana;
 $clmer_desperdicio  = new cl_mer_desperdicio;
@@ -88,7 +89,7 @@ $clrotulo->label("me01_c_nome");
                                                                                             or (me27_d_fim is not null and '$hoje'
                                                                                                 between me27_d_inicio and me27_d_fim))"
                                                                                          ));
-       $linhas = pg_num_rows($result);
+       $linhas = ($result ? pg_num_rows($result) : null);
        for ($x=0;$x<$linhas;$x++) {
        	
          db_fieldsmemory($result,$x);

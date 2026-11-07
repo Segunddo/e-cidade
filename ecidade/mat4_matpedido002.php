@@ -33,7 +33,8 @@ include(modification("classes/db_matpedido_classe.php"));
 include(modification("classes/db_db_depusu_classe.php"));
 include(modification("classes/db_matpedidoitem_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clmatpedido = new cl_matpedido;

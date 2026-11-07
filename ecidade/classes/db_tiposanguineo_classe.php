@@ -24,7 +24,7 @@ class cl_tiposanguineo {
                  sd100_tipo = varchar(3) = Tipo 
                  ";
    //funcao construtor da classe
-   function cl_tiposanguineo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tiposanguineo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -41,10 +41,10 @@ class cl_tiposanguineo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd100_sequencial = ($this->sd100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd100_sequencial"]:$this->sd100_sequencial);
+       $this->sd100_sequencial = ($this->sd100_sequencial === 0 || $this->sd100_sequencial === 0.0 || $this->sd100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd100_sequencial"]:$this->sd100_sequencial);
        $this->sd100_tipo = ($this->sd100_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd100_tipo"]:$this->sd100_tipo);
      }else{
-       $this->sd100_sequencial = ($this->sd100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd100_sequencial"]:$this->sd100_sequencial);
+       $this->sd100_sequencial = ($this->sd100_sequencial === 0 || $this->sd100_sequencial === 0.0 || $this->sd100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd100_sequencial"]:$this->sd100_sequencial);
      }
    }
    // funcao para inclusao
@@ -83,7 +83,7 @@ class cl_tiposanguineo {
          $this->sd100_sequencial = $sd100_sequencial;
        }
      }
-     if(($this->sd100_sequencial == null) || ($this->sd100_sequencial == "") ){
+     if(($this->sd100_sequencial == null) || ($this->sd100_sequencial === 0 || $this->sd100_sequencial === 0.0 || $this->sd100_sequencial == "") ){
        $this->erro_sql = " Campo sd100_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

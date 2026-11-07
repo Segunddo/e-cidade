@@ -58,15 +58,15 @@ class cl_turmaachorarioprofissional
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed346_sequencial = ($this->ed346_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_sequencial"] : $this->ed346_sequencial);
-            $this->ed346_turmaac = ($this->ed346_turmaac == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_turmaac"] : $this->ed346_turmaac);
-            $this->ed346_funcaoatividade = ($this->ed346_funcaoatividade == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_funcaoatividade"] : $this->ed346_funcaoatividade);
-            $this->ed346_rechumano = ($this->ed346_rechumano == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_rechumano"] : $this->ed346_rechumano);
-            $this->ed346_diasemana = ($this->ed346_diasemana == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_diasemana"] : $this->ed346_diasemana);
+            $this->ed346_sequencial = ($this->ed346_sequencial === 0 || $this->ed346_sequencial === 0.0 || $this->ed346_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_sequencial"] : $this->ed346_sequencial);
+            $this->ed346_turmaac = ($this->ed346_turmaac === 0 || $this->ed346_turmaac === 0.0 || $this->ed346_turmaac == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_turmaac"] : $this->ed346_turmaac);
+            $this->ed346_funcaoatividade = ($this->ed346_funcaoatividade === 0 || $this->ed346_funcaoatividade === 0.0 || $this->ed346_funcaoatividade == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_funcaoatividade"] : $this->ed346_funcaoatividade);
+            $this->ed346_rechumano = ($this->ed346_rechumano === 0 || $this->ed346_rechumano === 0.0 || $this->ed346_rechumano == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_rechumano"] : $this->ed346_rechumano);
+            $this->ed346_diasemana = ($this->ed346_diasemana === 0 || $this->ed346_diasemana === 0.0 || $this->ed346_diasemana == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_diasemana"] : $this->ed346_diasemana);
             $this->ed346_horainicial = ($this->ed346_horainicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_horainicial"] : $this->ed346_horainicial);
             $this->ed346_horafinal = ($this->ed346_horafinal == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_horafinal"] : $this->ed346_horafinal);
         } else {
-            $this->ed346_sequencial = ($this->ed346_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_sequencial"] : $this->ed346_sequencial);
+            $this->ed346_sequencial = ($this->ed346_sequencial === 0 || $this->ed346_sequencial === 0.0 || $this->ed346_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed346_sequencial"] : $this->ed346_sequencial);
         }
     }
 
@@ -152,7 +152,7 @@ class cl_turmaachorarioprofissional
                 $this->ed346_sequencial = $ed346_sequencial;
             }
         }
-        if (($this->ed346_sequencial == null) || ($this->ed346_sequencial == "")) {
+        if (($this->ed346_sequencial == null) || ($this->ed346_sequencial === 0 || $this->ed346_sequencial === 0.0 || $this->ed346_sequencial == "")) {
             $this->erro_sql = " Campo ed346_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -498,7 +498,7 @@ class cl_turmaachorarioprofissional
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -534,7 +534,7 @@ class cl_turmaachorarioprofissional
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -549,7 +549,7 @@ class cl_turmaachorarioprofissional
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -570,7 +570,7 @@ class cl_turmaachorarioprofissional
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sql .= $virgula . $campos_sql[$i];
@@ -586,7 +586,7 @@ class cl_turmaachorarioprofissional
         $sSql = "select ";
         if ($sCampos != "*") {
 
-            $campos_sql = split("#", $sCampos);
+            $campos_sql = preg_split("#\\##m", $sCampos);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -624,7 +624,7 @@ class cl_turmaachorarioprofissional
         if ($sOrdem != null) {
 
             $sSql .= " order by ";
-            $campos_sql = split("#", $sOrdem);
+            $campos_sql = preg_split("#\\##m", $sOrdem);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sSql .= $virgula . $campos_sql[$i];
@@ -716,7 +716,7 @@ class cl_turmaachorarioprofissional
         if ($sOrdemUnion != null) {
 
             $sSql .= " order by ";
-            $campos_sql = split("#", $sOrdemUnion);
+            $campos_sql = preg_split("#\\##m", $sOrdemUnion);
             $virgula = "";
             for ($i = 0; $i < sizeof($campos_sql); $i++) {
                 $sSql .= $virgula . $campos_sql[$i];

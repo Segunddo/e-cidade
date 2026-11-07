@@ -52,7 +52,7 @@ class cl_mer_restrinutri {
                  me26_i_nutriente = int4 = Nutriente 
                  ";
    //funcao construtor da classe 
-   function cl_mer_restrinutri() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_restrinutri"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_mer_restrinutri {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me26_i_codigo = ($this->me26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_codigo"]:$this->me26_i_codigo);
-       $this->me26_i_restricao = ($this->me26_i_restricao == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_restricao"]:$this->me26_i_restricao);
-       $this->me26_i_nutriente = ($this->me26_i_nutriente == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_nutriente"]:$this->me26_i_nutriente);
+       $this->me26_i_codigo = ($this->me26_i_codigo === 0 || $this->me26_i_codigo === 0.0 || $this->me26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_codigo"]:$this->me26_i_codigo);
+       $this->me26_i_restricao = ($this->me26_i_restricao === 0 || $this->me26_i_restricao === 0.0 || $this->me26_i_restricao == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_restricao"]:$this->me26_i_restricao);
+       $this->me26_i_nutriente = ($this->me26_i_nutriente === 0 || $this->me26_i_nutriente === 0.0 || $this->me26_i_nutriente == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_nutriente"]:$this->me26_i_nutriente);
      }else{
-       $this->me26_i_codigo = ($this->me26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_codigo"]:$this->me26_i_codigo);
+       $this->me26_i_codigo = ($this->me26_i_codigo === 0 || $this->me26_i_codigo === 0.0 || $this->me26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_codigo"]:$this->me26_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_mer_restrinutri {
          $this->me26_i_codigo = $me26_i_codigo; 
        }
      }
-     if(($this->me26_i_codigo == null) || ($this->me26_i_codigo == "") ){ 
+     if(($this->me26_i_codigo == null) || ($this->me26_i_codigo === 0 || $this->me26_i_codigo === 0.0 || $this->me26_i_codigo == "") ){ 
        $this->erro_sql = " Campo me26_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_mer_restrinutri {
    function sql_query ( $me26_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_mer_restrinutri {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_mer_restrinutri {
    function sql_query_file ( $me26_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_mer_restrinutri {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

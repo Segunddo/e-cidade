@@ -46,7 +46,7 @@ $oJson   = new Services_JSON();
 /**
  * Lê o contéudo do arquivo de log gerado
  */
-$sArquivoLog  = file_get_contents( "{$oGet->sCaminhoArquivo}" );
+$sArquivoLog  = ("{$oGet->sCaminhoArquivo}" !== "" ? file_get_contents( "{$oGet->sCaminhoArquivo}" ) : false);
 $oJsonArquivo = JSON::create()->parse($sArquivoLog, null);
 
 /**

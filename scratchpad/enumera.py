@@ -31,12 +31,15 @@ PORTADO = {l.strip().removeprefix("ecidade/") for l in subprocess.run(
     capture_output=True, text=True).stdout.splitlines() if l.strip().endswith(".php")}
 PAGO = NUCLEO | PORTADO
 
-RX_INC = re.compile(rb'(?:include|require)(?:_once)?\s*\(?\s*(?:modification\s*\(\s*)?["\']([^"\']+\.php)["\']')
-RX_NEW = re.compile(rb'new\s+(cl_\w+)')
+# re.I nas tres: PHP nao diferencia maiusculas em palavra-chave nem em nome de
+# metodo/classe. 9a lacuna: `db_utils::getdao('atolegal')` (minusculas) -- 781
+# chamadas em 244 arquivos com grafia diferente de getDao, invisiveis a frente.
+RX_INC = re.compile(rb'(?:include|require)(?:_once)?\s*\(?\s*(?:modification\s*\(\s*)?["\']([^"\']+\.php)["\']', re.I)
+RX_NEW = re.compile(rb'new\s+(cl_\w+)', re.I)
 # 7a lacuna: db_utils::getDao('x') instancia cl_x por autoload sem citar o
 # nome da classe. Achada no `fis`, em db_cadtipo_classe.php -- cujo construtor
 # PHP4 inicializa $this->rotulo, e sem ele a tela morre com label() on null.
-RX_DAO = re.compile(rb'''getDao\s*\(\s*['"]([A-Za-z0-9_]+)['"]''')
+RX_DAO = re.compile(rb'''getDao\s*\(\s*['"]([A-Za-z0-9_]+)['"]''', re.I)
 RX_STR = re.compile(rb'["\']([A-Za-z0-9_]+\.(?:RPC\.)?php)["\']')
 
 def classes_php4(b):
@@ -64,9 +67,11 @@ def diretas(p):
         if os.path.isfile(q): out.add(q)
     for m in RX_NEW.finditer(b):                       # 4a lacuna: autoload
         q = f"classes/db_{m.group(1).decode('latin1')[3:]}_classe.php"
+        if not os.path.isfile(q): q = q.lower()   # o nome no codigo pode vir capitalizado
         if os.path.isfile(q): out.add(q)
     for m in RX_DAO.finditer(b):                       # 7a lacuna: getDao()
         q = f"classes/db_{m.group(1).decode('latin1')}_classe.php"
+        if not os.path.isfile(q): q = q.lower()   # o nome no codigo pode vir capitalizado
         if os.path.isfile(q): out.add(q)
     _c[p] = out
     return out
@@ -79,6 +84,10 @@ def citados(p):                                        # 3a lacuna: aberto por J
 
 rx = re.compile(r'^' + PREF + r'[0-9]*_', re.IGNORECASE)   # 1a lacuna: maiusculas
 telas = sorted(f for f in os.listdir(".") if os.path.isfile(f) and f.endswith(".php") and rx.match(f))
+# Lote que nao e um prefixo (ex.: telas de menu soltas): TELAS=a.php,b.php -- o
+# <prefixo> passa a ser so o nome dos arquivos de saida.
+if os.environ.get("TELAS"):
+    telas = sorted(os.environ["TELAS"].split(","))
 js = set().union(*[citados(f) for f in telas]) - set(telas)
 universo, fila = set(telas) | js, list(telas) + sorted(js)
 while fila:
@@ -144,8 +153,9 @@ for p in universo:
     if n: tot['$this->X == <literal>'] += n; arq['$this->X == <literal>'].add(p); alvos.add(p)
 
 os.makedirs("tmp", exist_ok=True)
-open(f"tmp/{PREF}_universo.txt","w").write("\n".join(universo))
-open(f"tmp/{PREF}_alvos.txt","w").write("\n".join(sorted(alvos)))
+# com "\n" final: sem ele o `while read` do lint perde o ULTIMO arquivo da lista
+open(f"tmp/{PREF}_universo.txt","w").write("\n".join(universo) + "\n")
+open(f"tmp/{PREF}_alvos.txt","w").write("\n".join(sorted(alvos)) + "\n")
 print(f"  telas (prefixo {PREF}[0-9]*_) : {len(telas)}")
 print(f"  universo (6 frentes)        : {len(universo)}   | ja pago: {len([p for p in universo if p in PAGO])}")
 print(f"  {'':28}| A ALTERAR: {len(alvos)}\n")

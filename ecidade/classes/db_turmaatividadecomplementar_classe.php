@@ -57,17 +57,17 @@ class cl_turmaatividadecomplementar
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed146_sequencial = ($this->ed146_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_sequencial"] : $this->ed146_sequencial);
-            $this->ed146_turma = ($this->ed146_turma == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_turma"] : $this->ed146_turma);
-            $this->ed146_censoativcompl = ($this->ed146_censoativcompl == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_censoativcompl"] : $this->ed146_censoativcompl);
-            $this->ed146_funcaoatividade = ($this->ed146_funcaoatividade == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_funcaoatividade"] : $this->ed146_funcaoatividade);
-            $this->ed146_rechumanoescola = ($this->ed146_rechumanoescola == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_rechumanoescola"] : $this->ed146_rechumanoescola);
-            $this->ed146_diasemana = ($this->ed146_diasemana == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_diasemana"] : $this->ed146_diasemana);
+            $this->ed146_sequencial = ($this->ed146_sequencial === 0 || $this->ed146_sequencial === 0.0 || $this->ed146_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_sequencial"] : $this->ed146_sequencial);
+            $this->ed146_turma = ($this->ed146_turma === 0 || $this->ed146_turma === 0.0 || $this->ed146_turma == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_turma"] : $this->ed146_turma);
+            $this->ed146_censoativcompl = ($this->ed146_censoativcompl === 0 || $this->ed146_censoativcompl === 0.0 || $this->ed146_censoativcompl == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_censoativcompl"] : $this->ed146_censoativcompl);
+            $this->ed146_funcaoatividade = ($this->ed146_funcaoatividade === 0 || $this->ed146_funcaoatividade === 0.0 || $this->ed146_funcaoatividade == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_funcaoatividade"] : $this->ed146_funcaoatividade);
+            $this->ed146_rechumanoescola = ($this->ed146_rechumanoescola === 0 || $this->ed146_rechumanoescola === 0.0 || $this->ed146_rechumanoescola == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_rechumanoescola"] : $this->ed146_rechumanoescola);
+            $this->ed146_diasemana = ($this->ed146_diasemana === 0 || $this->ed146_diasemana === 0.0 || $this->ed146_diasemana == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_diasemana"] : $this->ed146_diasemana);
             $this->ed146_horainicial = ($this->ed146_horainicial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_horainicial"] : $this->ed146_horainicial);
             $this->ed146_horafinal = ($this->ed146_horafinal == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_horafinal"] : $this->ed146_horafinal);
-            $this->ed146_turnoreferente = ($this->ed146_turnoreferente == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_turnoreferente"] : $this->ed146_turnoreferente);
+            $this->ed146_turnoreferente = ($this->ed146_turnoreferente === 0 || $this->ed146_turnoreferente === 0.0 || $this->ed146_turnoreferente == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_turnoreferente"] : $this->ed146_turnoreferente);
         } else {
-            $this->ed146_sequencial = ($this->ed146_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_sequencial"] : $this->ed146_sequencial);
+            $this->ed146_sequencial = ($this->ed146_sequencial === 0 || $this->ed146_sequencial === 0.0 || $this->ed146_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed146_sequencial"] : $this->ed146_sequencial);
         }
     }
 
@@ -170,7 +170,7 @@ class cl_turmaatividadecomplementar
                 $this->ed146_sequencial = $ed146_sequencial;
             }
         }
-        if (($this->ed146_sequencial == null) || ($this->ed146_sequencial == "")) {
+        if (($this->ed146_sequencial == null) || ($this->ed146_sequencial === 0 || $this->ed146_sequencial === 0.0 || $this->ed146_sequencial == "")) {
             $this->erro_sql = " Campo ed146_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

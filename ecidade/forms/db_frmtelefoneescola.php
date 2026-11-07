@@ -177,7 +177,7 @@ function js_mostratipotelefone1(chave1,chave2){
  db_iframe_tipotelefone.hide();
 }
 function js_valida(){
- Vemail = "<?=@$GLOBALS[Sed18_c_email]?>";
+ Vemail = "<?=@$GLOBALS[(defined('Sed18_c_email') ? Sed18_c_email : 'Sed18_c_email')]?>";
  if(jsValidaEmail(document.form1.ed18_c_email.value,Vemail)==false){
   return false;
  }

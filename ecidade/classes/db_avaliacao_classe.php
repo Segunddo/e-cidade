@@ -86,8 +86,8 @@ class cl_avaliacao
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->db101_sequencial = ($this->db101_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db101_sequencial"] : $this->db101_sequencial);
-            $this->db101_avaliacaotipo = ($this->db101_avaliacaotipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["db101_avaliacaotipo"] : $this->db101_avaliacaotipo);
+            $this->db101_sequencial = ($this->db101_sequencial === 0 || $this->db101_sequencial === 0.0 || $this->db101_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db101_sequencial"] : $this->db101_sequencial);
+            $this->db101_avaliacaotipo = ($this->db101_avaliacaotipo === 0 || $this->db101_avaliacaotipo === 0.0 || $this->db101_avaliacaotipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["db101_avaliacaotipo"] : $this->db101_avaliacaotipo);
             $this->db101_descricao = ($this->db101_descricao == "" ? @$GLOBALS["HTTP_POST_VARS"]["db101_descricao"] : $this->db101_descricao);
             $this->db101_identificador = ($this->db101_identificador == "" ? @$GLOBALS["HTTP_POST_VARS"]["db101_identificador"] : $this->db101_identificador);
             $this->db101_obs = ($this->db101_obs == "" ? @$GLOBALS["HTTP_POST_VARS"]["db101_obs"] : $this->db101_obs);
@@ -95,7 +95,7 @@ class cl_avaliacao
             $this->db101_cargadados = ($this->db101_cargadados == "" ? @$GLOBALS["HTTP_POST_VARS"]["db101_cargadados"] : $this->db101_cargadados);
             $this->db101_permiteedicao = ($this->db101_permiteedicao == "f" ? @$GLOBALS["HTTP_POST_VARS"]["db101_permiteedicao"] : $this->db101_permiteedicao);
         } else {
-            $this->db101_sequencial = ($this->db101_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db101_sequencial"] : $this->db101_sequencial);
+            $this->db101_sequencial = ($this->db101_sequencial === 0 || $this->db101_sequencial === 0.0 || $this->db101_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["db101_sequencial"] : $this->db101_sequencial);
         }
     }
 
@@ -179,7 +179,7 @@ class cl_avaliacao
                 }
             }
         }
-        if (($this->db101_sequencial == null) || ($this->db101_sequencial == "")) {
+        if (($this->db101_sequencial == null) || ($this->db101_sequencial === 0 || $this->db101_sequencial === 0.0 || $this->db101_sequencial == "")) {
             $this->erro_sql = " Campo db101_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

@@ -54,7 +54,7 @@ class cl_localacervo {
                  bi20_acervo = int4 = Acervo 
                  ";
    //funcao construtor da classe 
-   function cl_localacervo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("localacervo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_localacervo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi20_codigo = ($this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
-       $this->bi20_sequencia = ($this->bi20_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_sequencia"]:$this->bi20_sequencia);
-       $this->bi20_localizacao = ($this->bi20_localizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_localizacao"]:$this->bi20_localizacao);
-       $this->bi20_acervo = ($this->bi20_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_acervo"]:$this->bi20_acervo);
+       $this->bi20_codigo = ($this->bi20_codigo === 0 || $this->bi20_codigo === 0.0 || $this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
+       $this->bi20_sequencia = ($this->bi20_sequencia === 0 || $this->bi20_sequencia === 0.0 || $this->bi20_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_sequencia"]:$this->bi20_sequencia);
+       $this->bi20_localizacao = ($this->bi20_localizacao === 0 || $this->bi20_localizacao === 0.0 || $this->bi20_localizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_localizacao"]:$this->bi20_localizacao);
+       $this->bi20_acervo = ($this->bi20_acervo === 0 || $this->bi20_acervo === 0.0 || $this->bi20_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_acervo"]:$this->bi20_acervo);
      }else{
-       $this->bi20_codigo = ($this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
+       $this->bi20_codigo = ($this->bi20_codigo === 0 || $this->bi20_codigo === 0.0 || $this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_localacervo {
          $this->bi20_codigo = $bi20_codigo; 
        }
      }
-     if(($this->bi20_codigo == null) || ($this->bi20_codigo == "") ){ 
+     if(($this->bi20_codigo == null) || ($this->bi20_codigo === 0 || $this->bi20_codigo === 0.0 || $this->bi20_codigo == "") ){ 
        $this->erro_sql = " Campo bi20_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_localacervo {
    function sql_query ( $bi20_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_localacervo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_localacervo {
    function sql_query_exemp ( $bi20_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_localacervo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_localacervo {
    function sql_query_file ( $bi20_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -490,7 +490,7 @@ class cl_localacervo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

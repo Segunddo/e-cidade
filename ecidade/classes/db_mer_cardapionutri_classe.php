@@ -52,7 +52,7 @@ class cl_mer_cardapionutri {
                  me04_i_nutricionista = int4 = Nutricionista 
                  ";
    //funcao construtor da classe 
-   function cl_mer_cardapionutri() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_cardapionutri"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_mer_cardapionutri {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me04_i_codigo = ($this->me04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me04_i_codigo"]:$this->me04_i_codigo);
-       $this->me04_i_cardapio = ($this->me04_i_cardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me04_i_cardapio"]:$this->me04_i_cardapio);
-       $this->me04_i_nutricionista = ($this->me04_i_nutricionista == ""?@$GLOBALS["HTTP_POST_VARS"]["me04_i_nutricionista"]:$this->me04_i_nutricionista);
+       $this->me04_i_codigo = ($this->me04_i_codigo === 0 || $this->me04_i_codigo === 0.0 || $this->me04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me04_i_codigo"]:$this->me04_i_codigo);
+       $this->me04_i_cardapio = ($this->me04_i_cardapio === 0 || $this->me04_i_cardapio === 0.0 || $this->me04_i_cardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me04_i_cardapio"]:$this->me04_i_cardapio);
+       $this->me04_i_nutricionista = ($this->me04_i_nutricionista === 0 || $this->me04_i_nutricionista === 0.0 || $this->me04_i_nutricionista == ""?@$GLOBALS["HTTP_POST_VARS"]["me04_i_nutricionista"]:$this->me04_i_nutricionista);
      }else{
-       $this->me04_i_codigo = ($this->me04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me04_i_codigo"]:$this->me04_i_codigo);
+       $this->me04_i_codigo = ($this->me04_i_codigo === 0 || $this->me04_i_codigo === 0.0 || $this->me04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me04_i_codigo"]:$this->me04_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_mer_cardapionutri {
          $this->me04_i_codigo = $me04_i_codigo; 
        }
      }
-     if(($this->me04_i_codigo == null) || ($this->me04_i_codigo == "") ){ 
+     if(($this->me04_i_codigo == null) || ($this->me04_i_codigo === 0 || $this->me04_i_codigo === 0.0 || $this->me04_i_codigo == "") ){ 
        $this->erro_sql = " Campo me04_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_mer_cardapionutri {
    function sql_query ( $me04_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_mer_cardapionutri {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_mer_cardapionutri {
    function sql_query_file ( $me04_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_mer_cardapionutri {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

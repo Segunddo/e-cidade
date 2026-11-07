@@ -52,7 +52,7 @@ class cl_assunto {
                  bi15_acervo = int8 = Acervo 
                  ";
    //funcao construtor da classe 
-   function cl_assunto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("assunto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_assunto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi15_codigo = ($this->bi15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi15_codigo"]:$this->bi15_codigo);
+       $this->bi15_codigo = ($this->bi15_codigo === 0 || $this->bi15_codigo === 0.0 || $this->bi15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi15_codigo"]:$this->bi15_codigo);
        $this->bi15_assunto = ($this->bi15_assunto == ""?@$GLOBALS["HTTP_POST_VARS"]["bi15_assunto"]:$this->bi15_assunto);
-       $this->bi15_acervo = ($this->bi15_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi15_acervo"]:$this->bi15_acervo);
+       $this->bi15_acervo = ($this->bi15_acervo === 0 || $this->bi15_acervo === 0.0 || $this->bi15_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi15_acervo"]:$this->bi15_acervo);
      }else{
-       $this->bi15_codigo = ($this->bi15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi15_codigo"]:$this->bi15_codigo);
+       $this->bi15_codigo = ($this->bi15_codigo === 0 || $this->bi15_codigo === 0.0 || $this->bi15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi15_codigo"]:$this->bi15_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_assunto {
          $this->bi15_codigo = $bi15_codigo; 
        }
      }
-     if(($this->bi15_codigo == null) || ($this->bi15_codigo == "") ){ 
+     if(($this->bi15_codigo == null) || ($this->bi15_codigo === 0 || $this->bi15_codigo === 0.0 || $this->bi15_codigo == "") ){ 
        $this->erro_sql = " Campo bi15_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_assunto {
    function sql_query ( $bi15_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_assunto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_assunto {
    function sql_query_exemplar ( $bi15_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_assunto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -440,7 +440,7 @@ class cl_assunto {
    function sql_query_consacervo ( $bi15_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_assunto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_assunto {
    function sql_query_file ( $bi15_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -503,7 +503,7 @@ class cl_assunto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

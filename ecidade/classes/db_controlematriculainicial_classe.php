@@ -28,7 +28,7 @@ class cl_controlematriculainicial {
                  ed135_quantidadedias = int4 = Quantidade de Dias 
                  ";
    //funcao construtor da classe 
-   function cl_controlematriculainicial() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("controlematriculainicial"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_controlematriculainicial {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed135_sequencial = ($this->ed135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed135_sequencial"]:$this->ed135_sequencial);
-       $this->ed135_anoinicial = ($this->ed135_anoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed135_anoinicial"]:$this->ed135_anoinicial);
-       $this->ed135_anofinal = ($this->ed135_anofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed135_anofinal"]:$this->ed135_anofinal);
-       $this->ed135_quantidadedias = ($this->ed135_quantidadedias == ""?@$GLOBALS["HTTP_POST_VARS"]["ed135_quantidadedias"]:$this->ed135_quantidadedias);
+       $this->ed135_sequencial = ($this->ed135_sequencial === 0 || $this->ed135_sequencial === 0.0 || $this->ed135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed135_sequencial"]:$this->ed135_sequencial);
+       $this->ed135_anoinicial = ($this->ed135_anoinicial === 0 || $this->ed135_anoinicial === 0.0 || $this->ed135_anoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed135_anoinicial"]:$this->ed135_anoinicial);
+       $this->ed135_anofinal = ($this->ed135_anofinal === 0 || $this->ed135_anofinal === 0.0 || $this->ed135_anofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed135_anofinal"]:$this->ed135_anofinal);
+       $this->ed135_quantidadedias = ($this->ed135_quantidadedias === 0 || $this->ed135_quantidadedias === 0.0 || $this->ed135_quantidadedias == ""?@$GLOBALS["HTTP_POST_VARS"]["ed135_quantidadedias"]:$this->ed135_quantidadedias);
      }else{
-       $this->ed135_sequencial = ($this->ed135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed135_sequencial"]:$this->ed135_sequencial);
+       $this->ed135_sequencial = ($this->ed135_sequencial === 0 || $this->ed135_sequencial === 0.0 || $this->ed135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed135_sequencial"]:$this->ed135_sequencial);
      }
    }
    // funcao para Inclusão
@@ -101,7 +101,7 @@ class cl_controlematriculainicial {
          $this->ed135_sequencial = $ed135_sequencial; 
        }
      }
-     if(($this->ed135_sequencial == null) || ($this->ed135_sequencial == "") ){ 
+     if(($this->ed135_sequencial == null) || ($this->ed135_sequencial === 0 || $this->ed135_sequencial === 0.0 || $this->ed135_sequencial == "") ){ 
        $this->erro_sql = " Campo ed135_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -66,7 +66,7 @@ $decimais  = $resultedu=="N"?0:2;
           ORDER BY ed232_c_descr,ed18_c_abrev
          ";
  $result1 = db_query($sql1);
- $linhas1 = pg_num_rows($result1);
+ $linhas1 = ($result1 ? pg_num_rows($result1) : null);
  //db_criatabela($result1);
  if($linhas1==0){?>
   <table width='100%'>

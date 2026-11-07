@@ -34,7 +34,7 @@ class cl_procedimento {
                  ed40_desativado = bool = Desativado
                  ";
    //funcao construtor da classe
-   function cl_procedimento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procedimento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -51,15 +51,15 @@ class cl_procedimento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed40_i_codigo = ($this->ed40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_i_codigo"]:$this->ed40_i_codigo);
-       $this->ed40_i_formaavaliacao = ($this->ed40_i_formaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_i_formaavaliacao"]:$this->ed40_i_formaavaliacao);
+       $this->ed40_i_codigo = ($this->ed40_i_codigo === 0 || $this->ed40_i_codigo === 0.0 || $this->ed40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_i_codigo"]:$this->ed40_i_codigo);
+       $this->ed40_i_formaavaliacao = ($this->ed40_i_formaavaliacao === 0 || $this->ed40_i_formaavaliacao === 0.0 || $this->ed40_i_formaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_i_formaavaliacao"]:$this->ed40_i_formaavaliacao);
        $this->ed40_c_descr = ($this->ed40_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_c_descr"]:$this->ed40_c_descr);
-       $this->ed40_i_percfreq = ($this->ed40_i_percfreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_i_percfreq"]:$this->ed40_i_percfreq);
+       $this->ed40_i_percfreq = ($this->ed40_i_percfreq === 0 || $this->ed40_i_percfreq === 0.0 || $this->ed40_i_percfreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_i_percfreq"]:$this->ed40_i_percfreq);
        $this->ed40_c_contrfreqmpd = ($this->ed40_c_contrfreqmpd == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_c_contrfreqmpd"]:$this->ed40_c_contrfreqmpd);
-       $this->ed40_i_calcfreq = ($this->ed40_i_calcfreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_i_calcfreq"]:$this->ed40_i_calcfreq);
+       $this->ed40_i_calcfreq = ($this->ed40_i_calcfreq === 0 || $this->ed40_i_calcfreq === 0.0 || $this->ed40_i_calcfreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_i_calcfreq"]:$this->ed40_i_calcfreq);
        $this->ed40_desativado = ($this->ed40_desativado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_desativado"]:$this->ed40_desativado);
      }else{
-       $this->ed40_i_codigo = ($this->ed40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_i_codigo"]:$this->ed40_i_codigo);
+       $this->ed40_i_codigo = ($this->ed40_i_codigo === 0 || $this->ed40_i_codigo === 0.0 || $this->ed40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed40_i_codigo"]:$this->ed40_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -143,7 +143,7 @@ class cl_procedimento {
          $this->ed40_i_codigo = $ed40_i_codigo;
        }
      }
-     if(($this->ed40_i_codigo == null) || ($this->ed40_i_codigo == "") ){
+     if(($this->ed40_i_codigo == null) || ($this->ed40_i_codigo === 0 || $this->ed40_i_codigo === 0.0 || $this->ed40_i_codigo == "") ){
        $this->erro_sql = " Campo ed40_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

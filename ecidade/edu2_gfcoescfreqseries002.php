@@ -62,7 +62,7 @@ $sql1 = "SELECT round((1-(((case when sum(ed72_i_numfaltas) is null then 0 else 
          GROUP BY ed11_c_descr,ed18_c_abrev,ed10_c_descr,ed18_i_codigo
          ORDER BY ed11_c_descr,ed18_c_abrev";
 $result1 = db_query($sql1);
-$linhas1 = pg_num_rows($result1);
+$linhas1 = ($result1 ? pg_num_rows($result1) : null);
 //db_criatabela($result1);
 //exit;
 if($linhas1!=0){

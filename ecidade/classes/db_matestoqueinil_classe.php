@@ -50,7 +50,7 @@ class cl_matestoqueinil {
                  m86_matestoqueini = int8 = Lançamento 
                  ";
    //funcao construtor da classe 
-   function cl_matestoqueinil() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matestoqueinil"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_matestoqueinil {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m86_codigo = ($this->m86_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m86_codigo"]:$this->m86_codigo);
-       $this->m86_matestoqueini = ($this->m86_matestoqueini == ""?@$GLOBALS["HTTP_POST_VARS"]["m86_matestoqueini"]:$this->m86_matestoqueini);
+       $this->m86_codigo = ($this->m86_codigo === 0 || $this->m86_codigo === 0.0 || $this->m86_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m86_codigo"]:$this->m86_codigo);
+       $this->m86_matestoqueini = ($this->m86_matestoqueini === 0 || $this->m86_matestoqueini === 0.0 || $this->m86_matestoqueini == ""?@$GLOBALS["HTTP_POST_VARS"]["m86_matestoqueini"]:$this->m86_matestoqueini);
      }else{
-       $this->m86_codigo = ($this->m86_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m86_codigo"]:$this->m86_codigo);
+       $this->m86_codigo = ($this->m86_codigo === 0 || $this->m86_codigo === 0.0 || $this->m86_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m86_codigo"]:$this->m86_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_matestoqueinil {
          $this->m86_codigo = $m86_codigo; 
        }
      }
-     if(($this->m86_codigo == null) || ($this->m86_codigo == "") ){ 
+     if(($this->m86_codigo == null) || ($this->m86_codigo === 0 || $this->m86_codigo === 0.0 || $this->m86_codigo == "") ){ 
        $this->erro_sql = " Campo m86_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_matestoqueinil {
    function sql_query ( $m86_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -353,7 +353,7 @@ class cl_matestoqueinil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_matestoqueinil {
    function sql_query_file ( $m86_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_matestoqueinil {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

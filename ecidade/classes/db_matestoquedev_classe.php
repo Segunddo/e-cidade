@@ -65,7 +65,7 @@ class cl_matestoquedev {
                  m45_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_matestoquedev() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matestoquedev"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,9 +82,9 @@ class cl_matestoquedev {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m45_codigo = ($this->m45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codigo"]:$this->m45_codigo);
-       $this->m45_codmatrequi = ($this->m45_codmatrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codmatrequi"]:$this->m45_codmatrequi);
-       $this->m45_codatendrequi = ($this->m45_codatendrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codatendrequi"]:$this->m45_codatendrequi);
+       $this->m45_codigo = ($this->m45_codigo === 0 || $this->m45_codigo === 0.0 || $this->m45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codigo"]:$this->m45_codigo);
+       $this->m45_codmatrequi = ($this->m45_codmatrequi === 0 || $this->m45_codmatrequi === 0.0 || $this->m45_codmatrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codmatrequi"]:$this->m45_codmatrequi);
+       $this->m45_codatendrequi = ($this->m45_codatendrequi === 0 || $this->m45_codatendrequi === 0.0 || $this->m45_codatendrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codatendrequi"]:$this->m45_codatendrequi);
        if($this->m45_data == ""){
          $this->m45_data_dia = ($this->m45_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_data_dia"]:$this->m45_data_dia);
          $this->m45_data_mes = ($this->m45_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_data_mes"]:$this->m45_data_mes);
@@ -94,11 +94,11 @@ class cl_matestoquedev {
          }
        }
        $this->m45_hora = ($this->m45_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_hora"]:$this->m45_hora);
-       $this->m45_login = ($this->m45_login == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_login"]:$this->m45_login);
-       $this->m45_depto = ($this->m45_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_depto"]:$this->m45_depto);
+       $this->m45_login = ($this->m45_login === 0 || $this->m45_login === 0.0 || $this->m45_login == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_login"]:$this->m45_login);
+       $this->m45_depto = ($this->m45_depto === 0 || $this->m45_depto === 0.0 || $this->m45_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_depto"]:$this->m45_depto);
        $this->m45_obs = ($this->m45_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_obs"]:$this->m45_obs);
      }else{
-       $this->m45_codigo = ($this->m45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codigo"]:$this->m45_codigo);
+       $this->m45_codigo = ($this->m45_codigo === 0 || $this->m45_codigo === 0.0 || $this->m45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codigo"]:$this->m45_codigo);
      }
    }
    // funcao para inclusao
@@ -182,7 +182,7 @@ class cl_matestoquedev {
          $this->m45_codigo = $m45_codigo; 
        }
      }
-     if(($this->m45_codigo == null) || ($this->m45_codigo == "") ){ 
+     if(($this->m45_codigo == null) || ($this->m45_codigo === 0 || $this->m45_codigo === 0.0 || $this->m45_codigo == "") ){ 
        $this->erro_sql = " Campo m45_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -520,7 +520,7 @@ class cl_matestoquedev {
    function sql_query ( $m45_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -549,7 +549,7 @@ class cl_matestoquedev {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -562,7 +562,7 @@ class cl_matestoquedev {
   function sql_query_itens_devolvidos ( $m45_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -588,7 +588,7 @@ class cl_matestoquedev {
       $sql .= $sql2;
       if($ordem != null ){
       $sql .= " order by ";
-         $campos_sql = split("#",$ordem);
+         $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
       $sql .= $virgula.$campos_sql[$i];
@@ -601,7 +601,7 @@ class cl_matestoquedev {
    function sql_query_file ( $m45_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -622,7 +622,7 @@ class cl_matestoquedev {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

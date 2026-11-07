@@ -958,13 +958,21 @@ Medido nos quatro prefixos grandes:
 ### Passo D — rotear por lista
 
 ```bash
-python3 scratchpad/gera_map_faseb.py <pref1> <pref2> ...
+python3 scratchpad/gera_map_faseb.py <area>:<pref>,<pref> [<area>:<pref> ...]
 grep -c 'php85;' docker/proxy/faseb_map.conf
 docker compose -f docker-compose.proxy.yml up -d --force-recreate
 sleep 4 && docker exec ecidade_proxy nginx -t
 ```
 
 O gerador lê o banco, cruza com o disco e escreve `docker/proxy/faseb_map.conf`. O `nginx.conf` já tem os três `map` que usam esse arquivo.
+
+Cada argumento diz a **área** e os prefixos, e só entram as telas que o banco atribui àquela área. O gerador **reescreve o arquivo inteiro**: repita sempre **todos** os lotes já roteados, senão eles voltam para o 5.6 em silêncio. O comando atual está na linha 2 do próprio `faseb_map.conf`. Hoje:
+
+```bash
+python3 scratchpad/gera_map_faseb.py tribut:amb,pre,cad,cai,pro,con,prot,rec,dv educa:mat,pro
+```
+
+Para conferir que nada saiu, compare o arquivo antes e depois: só pode haver linhas **acrescentadas** (`diff antes.conf docker/proxy/faseb_map.conf | grep '^<'` tem de vir vazio).
 
 **Conferir o roteamento — cinco casos:**
 
@@ -1040,7 +1048,7 @@ done
 `con` aparece em 6 áreas do menu, `cai` em 4. Rotear por prefixo arrastaria módulos inteiros de outras áreas — o `con` levaria **511 telas** de Contabilidade, RH e Patrimonial junto. Nesses casos o roteamento é por **lista exata**, gerada do banco:
 
 ```bash
-python3 scratchpad/gera_map_faseb.py <pref1> <pref2> ...
+python3 scratchpad/gera_map_faseb.py <area>:<pref>,<pref> [<area>:<pref> ...]
 docker compose -f docker-compose.proxy.yml up -d --force-recreate
 ```
 

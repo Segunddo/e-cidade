@@ -64,7 +64,7 @@ class cl_diarioresultado {
                  ed73_valorreal = float8 = Valor Real
                  ";
    //funcao construtor da classe
-   function cl_diarioresultado() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diarioresultado");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_diarioresultado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed73_i_codigo = ($this->ed73_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_i_codigo"]:$this->ed73_i_codigo);
-       $this->ed73_i_diario = ($this->ed73_i_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_i_diario"]:$this->ed73_i_diario);
-       $this->ed73_i_procresultado = ($this->ed73_i_procresultado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_i_procresultado"]:$this->ed73_i_procresultado);
-       $this->ed73_i_valornota = ($this->ed73_i_valornota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_i_valornota"]:$this->ed73_i_valornota);
+       $this->ed73_i_codigo = ($this->ed73_i_codigo === 0 || $this->ed73_i_codigo === 0.0 || $this->ed73_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_i_codigo"]:$this->ed73_i_codigo);
+       $this->ed73_i_diario = ($this->ed73_i_diario === 0 || $this->ed73_i_diario === 0.0 || $this->ed73_i_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_i_diario"]:$this->ed73_i_diario);
+       $this->ed73_i_procresultado = ($this->ed73_i_procresultado === 0 || $this->ed73_i_procresultado === 0.0 || $this->ed73_i_procresultado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_i_procresultado"]:$this->ed73_i_procresultado);
+       $this->ed73_i_valornota = ($this->ed73_i_valornota === 0 || $this->ed73_i_valornota === 0.0 || $this->ed73_i_valornota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_i_valornota"]:$this->ed73_i_valornota);
        $this->ed73_c_valorconceito = ($this->ed73_c_valorconceito == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_c_valorconceito"]:$this->ed73_c_valorconceito);
        $this->ed73_t_parecer = ($this->ed73_t_parecer == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_t_parecer"]:$this->ed73_t_parecer);
        $this->ed73_c_aprovmin = ($this->ed73_c_aprovmin == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_c_aprovmin"]:$this->ed73_c_aprovmin);
        $this->ed73_c_amparo = ($this->ed73_c_amparo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_c_amparo"]:$this->ed73_c_amparo);
-       $this->ed73_valorreal = ($this->ed73_valorreal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_valorreal"]:$this->ed73_valorreal);
+       $this->ed73_valorreal = ($this->ed73_valorreal === 0 || $this->ed73_valorreal === 0.0 || $this->ed73_valorreal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_valorreal"]:$this->ed73_valorreal);
      }else{
-       $this->ed73_i_codigo = ($this->ed73_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_i_codigo"]:$this->ed73_i_codigo);
+       $this->ed73_i_codigo = ($this->ed73_i_codigo === 0 || $this->ed73_i_codigo === 0.0 || $this->ed73_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed73_i_codigo"]:$this->ed73_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -157,7 +157,7 @@ class cl_diarioresultado {
          $this->ed73_i_codigo = $ed73_i_codigo;
        }
      }
-     if(($this->ed73_i_codigo == null) || ($this->ed73_i_codigo == "") ){
+     if(($this->ed73_i_codigo == null) || ($this->ed73_i_codigo === 0 || $this->ed73_i_codigo === 0.0 || $this->ed73_i_codigo == "") ){
        $this->erro_sql = " Campo ed73_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -312,7 +312,7 @@ class cl_diarioresultado {
        $virgula = ",";
      }
 
-     if(is_null($this->ed73_valorreal) || $this->ed73_valorreal == '') {
+     if(is_null($this->ed73_valorreal) || ($this->ed73_valorreal === 0 || $this->ed73_valorreal === 0.0 || $this->ed73_valorreal == '')) {
        $this->ed73_valorreal = "null" ;
      }
        $sql  .= $virgula." ed73_valorreal = $this->ed73_valorreal ";
@@ -547,7 +547,7 @@ class cl_diarioresultado {
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
 
@@ -602,7 +602,7 @@ class cl_diarioresultado {
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 
@@ -622,7 +622,7 @@ class cl_diarioresultado {
     $sSql = 'select ';
     if ($campos != '*') {
 
-      $sCamposSql = split('#', $campos);
+      $sCamposSql = preg_split('#\##m', $campos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
 
@@ -650,7 +650,7 @@ class cl_diarioresultado {
     $sSql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

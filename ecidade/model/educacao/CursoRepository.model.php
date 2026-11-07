@@ -184,7 +184,7 @@
                     where matricula.ed60_i_aluno = {$oAluno->getCodigoAluno()}
                     order by matricula.ed60_i_codigo desc limit 1";
           $rs = db_query($sql);
-          $curso = pg_fetch_assoc($rs);
+          $curso = ($rs ? pg_fetch_assoc($rs) : null);
           $curso = static::getByCodigo($curso['ed31_i_curso']);
 
           return $curso;

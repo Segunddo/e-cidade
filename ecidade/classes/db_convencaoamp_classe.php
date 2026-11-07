@@ -52,7 +52,7 @@ class cl_convencaoamp {
                  ed250_c_abrev = char(5) = Abreviatura 
                  ";
    //funcao construtor da classe 
-   function cl_convencaoamp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("convencaoamp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_convencaoamp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed250_i_codigo = ($this->ed250_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed250_i_codigo"]:$this->ed250_i_codigo);
+       $this->ed250_i_codigo = ($this->ed250_i_codigo === 0 || $this->ed250_i_codigo === 0.0 || $this->ed250_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed250_i_codigo"]:$this->ed250_i_codigo);
        $this->ed250_c_descr = ($this->ed250_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed250_c_descr"]:$this->ed250_c_descr);
        $this->ed250_c_abrev = ($this->ed250_c_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["ed250_c_abrev"]:$this->ed250_c_abrev);
      }else{
-       $this->ed250_i_codigo = ($this->ed250_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed250_i_codigo"]:$this->ed250_i_codigo);
+       $this->ed250_i_codigo = ($this->ed250_i_codigo === 0 || $this->ed250_i_codigo === 0.0 || $this->ed250_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed250_i_codigo"]:$this->ed250_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_convencaoamp {
          $this->ed250_i_codigo = $ed250_i_codigo; 
        }
      }
-     if(($this->ed250_i_codigo == null) || ($this->ed250_i_codigo == "") ){ 
+     if(($this->ed250_i_codigo == null) || ($this->ed250_i_codigo === 0 || $this->ed250_i_codigo === 0.0 || $this->ed250_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed250_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_convencaoamp {
    function sql_query ( $ed250_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_convencaoamp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_convencaoamp {
    function sql_query_file ( $ed250_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_convencaoamp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

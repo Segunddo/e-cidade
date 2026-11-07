@@ -57,7 +57,7 @@ class cl_mer_desperdicio {
                  me22_i_usuario = int4 = Usuario 
                  ";
    //funcao construtor da classe 
-   function cl_mer_desperdicio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_desperdicio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_mer_desperdicio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me22_i_codigo = ($this->me22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me22_i_codigo"]:$this->me22_i_codigo);
-       $this->me22_i_cardapiodiaescola = ($this->me22_i_cardapiodiaescola == ""?@$GLOBALS["HTTP_POST_VARS"]["me22_i_cardapiodiaescola"]:$this->me22_i_cardapiodiaescola);
+       $this->me22_i_codigo = ($this->me22_i_codigo === 0 || $this->me22_i_codigo === 0.0 || $this->me22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me22_i_codigo"]:$this->me22_i_codigo);
+       $this->me22_i_cardapiodiaescola = ($this->me22_i_cardapiodiaescola === 0 || $this->me22_i_cardapiodiaescola === 0.0 || $this->me22_i_cardapiodiaescola == ""?@$GLOBALS["HTTP_POST_VARS"]["me22_i_cardapiodiaescola"]:$this->me22_i_cardapiodiaescola);
        if($this->me22_d_data == ""){
          $this->me22_d_data_dia = ($this->me22_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["me22_d_data_dia"]:$this->me22_d_data_dia);
          $this->me22_d_data_mes = ($this->me22_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["me22_d_data_mes"]:$this->me22_d_data_mes);
@@ -84,9 +84,9 @@ class cl_mer_desperdicio {
             $this->me22_d_data = $this->me22_d_data_ano."-".$this->me22_d_data_mes."-".$this->me22_d_data_dia;
          }
        }
-       $this->me22_i_usuario = ($this->me22_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["me22_i_usuario"]:$this->me22_i_usuario);
+       $this->me22_i_usuario = ($this->me22_i_usuario === 0 || $this->me22_i_usuario === 0.0 || $this->me22_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["me22_i_usuario"]:$this->me22_i_usuario);
      }else{
-       $this->me22_i_codigo = ($this->me22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me22_i_codigo"]:$this->me22_i_codigo);
+       $this->me22_i_codigo = ($this->me22_i_codigo === 0 || $this->me22_i_codigo === 0.0 || $this->me22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me22_i_codigo"]:$this->me22_i_codigo);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_mer_desperdicio {
          $this->me22_i_codigo = $me22_i_codigo; 
        }
      }
-     if(($this->me22_i_codigo == null) || ($this->me22_i_codigo == "") ){ 
+     if(($this->me22_i_codigo == null) || ($this->me22_i_codigo === 0 || $this->me22_i_codigo === 0.0 || $this->me22_i_codigo == "") ){ 
        $this->erro_sql = " Campo me22_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -415,7 +415,7 @@ class cl_mer_desperdicio {
    function sql_query ( $me22_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_mer_desperdicio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -458,7 +458,7 @@ class cl_mer_desperdicio {
    function sql_query_file ( $me22_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -479,7 +479,7 @@ class cl_mer_desperdicio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

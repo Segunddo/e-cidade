@@ -52,7 +52,7 @@ class cl_mer_restricaointolerancia {
                  me34_i_intolerancia = int4 = Intolerância Alimentar 
                  ";
    //funcao construtor da classe 
-   function cl_mer_restricaointolerancia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_restricaointolerancia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_mer_restricaointolerancia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me34_i_codigo = ($this->me34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me34_i_codigo"]:$this->me34_i_codigo);
-       $this->me34_i_restricao = ($this->me34_i_restricao == ""?@$GLOBALS["HTTP_POST_VARS"]["me34_i_restricao"]:$this->me34_i_restricao);
-       $this->me34_i_intolerancia = ($this->me34_i_intolerancia == ""?@$GLOBALS["HTTP_POST_VARS"]["me34_i_intolerancia"]:$this->me34_i_intolerancia);
+       $this->me34_i_codigo = ($this->me34_i_codigo === 0 || $this->me34_i_codigo === 0.0 || $this->me34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me34_i_codigo"]:$this->me34_i_codigo);
+       $this->me34_i_restricao = ($this->me34_i_restricao === 0 || $this->me34_i_restricao === 0.0 || $this->me34_i_restricao == ""?@$GLOBALS["HTTP_POST_VARS"]["me34_i_restricao"]:$this->me34_i_restricao);
+       $this->me34_i_intolerancia = ($this->me34_i_intolerancia === 0 || $this->me34_i_intolerancia === 0.0 || $this->me34_i_intolerancia == ""?@$GLOBALS["HTTP_POST_VARS"]["me34_i_intolerancia"]:$this->me34_i_intolerancia);
      }else{
-       $this->me34_i_codigo = ($this->me34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me34_i_codigo"]:$this->me34_i_codigo);
+       $this->me34_i_codigo = ($this->me34_i_codigo === 0 || $this->me34_i_codigo === 0.0 || $this->me34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me34_i_codigo"]:$this->me34_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_mer_restricaointolerancia {
          $this->me34_i_codigo = $me34_i_codigo; 
        }
      }
-     if(($this->me34_i_codigo == null) || ($this->me34_i_codigo == "") ){ 
+     if(($this->me34_i_codigo == null) || ($this->me34_i_codigo === 0 || $this->me34_i_codigo === 0.0 || $this->me34_i_codigo == "") ){ 
        $this->erro_sql = " Campo me34_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_mer_restricaointolerancia {
    function sql_query ( $me34_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_mer_restricaointolerancia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_mer_restricaointolerancia {
    function sql_query_refeicao ( $me34_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_mer_restricaointolerancia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_mer_restricaointolerancia {
    function sql_query_file ( $me34_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -469,7 +469,7 @@ class cl_mer_restricaointolerancia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

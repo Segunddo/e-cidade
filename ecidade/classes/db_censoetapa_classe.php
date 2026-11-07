@@ -58,7 +58,7 @@ class cl_censoetapa {
                  ed266_ano = int4 = Ano
                  ";
    //funcao construtor da classe
-   function cl_censoetapa() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("censoetapa");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,15 +75,15 @@ class cl_censoetapa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed266_i_codigo = ($this->ed266_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_i_codigo"]:$this->ed266_i_codigo);
+       $this->ed266_i_codigo = ($this->ed266_i_codigo === 0 || $this->ed266_i_codigo === 0.0 || $this->ed266_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_i_codigo"]:$this->ed266_i_codigo);
        $this->ed266_c_descr = ($this->ed266_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_c_descr"]:$this->ed266_c_descr);
        $this->ed266_c_regular = ($this->ed266_c_regular == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_c_regular"]:$this->ed266_c_regular);
        $this->ed266_c_especial = ($this->ed266_c_especial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_c_especial"]:$this->ed266_c_especial);
        $this->ed266_c_eja = ($this->ed266_c_eja == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_c_eja"]:$this->ed266_c_eja);
-       $this->ed266_ano = ($this->ed266_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_ano"]:$this->ed266_ano);
+       $this->ed266_ano = ($this->ed266_ano === 0 || $this->ed266_ano === 0.0 || $this->ed266_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_ano"]:$this->ed266_ano);
      }else{
-       $this->ed266_i_codigo = ($this->ed266_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_i_codigo"]:$this->ed266_i_codigo);
-       $this->ed266_ano = ($this->ed266_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_ano"]:$this->ed266_ano);
+       $this->ed266_i_codigo = ($this->ed266_i_codigo === 0 || $this->ed266_i_codigo === 0.0 || $this->ed266_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_i_codigo"]:$this->ed266_i_codigo);
+       $this->ed266_ano = ($this->ed266_ano === 0 || $this->ed266_ano === 0.0 || $this->ed266_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed266_ano"]:$this->ed266_ano);
      }
    }
    // funcao para Inclusão
@@ -109,7 +109,7 @@ class cl_censoetapa {
      }
        $this->ed266_i_codigo = $ed266_i_codigo;
        $this->ed266_ano = $ed266_ano;
-     if(($this->ed266_i_codigo == null) || ($this->ed266_i_codigo == "") ){
+     if(($this->ed266_i_codigo == null) || ($this->ed266_i_codigo === 0 || $this->ed266_i_codigo === 0.0 || $this->ed266_i_codigo == "") ){
        $this->erro_sql = " Campo ed266_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -117,7 +117,7 @@ class cl_censoetapa {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->ed266_ano == null) || ($this->ed266_ano == "") ){
+     if(($this->ed266_ano == null) || ($this->ed266_ano === 0 || $this->ed266_ano === 0.0 || $this->ed266_ano == "") ){
        $this->erro_sql = " Campo ed266_ano não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -78,7 +78,7 @@ class cl_veicretirada
                  ";
 
     //funcao construtor da classe
-    function cl_veicretirada()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("veicretirada");
@@ -100,9 +100,9 @@ class cl_veicretirada
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ve60_codigo = ($this->ve60_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_codigo"] : $this->ve60_codigo);
-            $this->ve60_veiculo = ($this->ve60_veiculo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_veiculo"] : $this->ve60_veiculo);
-            $this->ve60_veicmotoristas = ($this->ve60_veicmotoristas == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_veicmotoristas"] : $this->ve60_veicmotoristas);
+            $this->ve60_codigo = ($this->ve60_codigo === 0 || $this->ve60_codigo === 0.0 || $this->ve60_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_codigo"] : $this->ve60_codigo);
+            $this->ve60_veiculo = ($this->ve60_veiculo === 0 || $this->ve60_veiculo === 0.0 || $this->ve60_veiculo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_veiculo"] : $this->ve60_veiculo);
+            $this->ve60_veicmotoristas = ($this->ve60_veicmotoristas === 0 || $this->ve60_veicmotoristas === 0.0 || $this->ve60_veicmotoristas == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_veicmotoristas"] : $this->ve60_veicmotoristas);
             if ($this->ve60_datasaida == "") {
                 $this->ve60_datasaida_dia = ($this->ve60_datasaida_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_datasaida_dia"] : $this->ve60_datasaida_dia);
                 $this->ve60_datasaida_mes = ($this->ve60_datasaida_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_datasaida_mes"] : $this->ve60_datasaida_mes);
@@ -113,8 +113,8 @@ class cl_veicretirada
             }
             $this->ve60_horasaida = ($this->ve60_horasaida == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_horasaida"] : $this->ve60_horasaida);
             $this->ve60_destino = ($this->ve60_destino == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_destino"] : $this->ve60_destino);
-            $this->ve60_coddepto = ($this->ve60_coddepto == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_coddepto"] : $this->ve60_coddepto);
-            $this->ve60_usuario = ($this->ve60_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_usuario"] : $this->ve60_usuario);
+            $this->ve60_coddepto = ($this->ve60_coddepto === 0 || $this->ve60_coddepto === 0.0 || $this->ve60_coddepto == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_coddepto"] : $this->ve60_coddepto);
+            $this->ve60_usuario = ($this->ve60_usuario === 0 || $this->ve60_usuario === 0.0 || $this->ve60_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_usuario"] : $this->ve60_usuario);
             if ($this->ve60_data == "") {
                 $this->ve60_data_dia = ($this->ve60_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_data_dia"] : $this->ve60_data_dia);
                 $this->ve60_data_mes = ($this->ve60_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_data_mes"] : $this->ve60_data_mes);
@@ -124,10 +124,10 @@ class cl_veicretirada
                 }
             }
             $this->ve60_hora = ($this->ve60_hora == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_hora"] : $this->ve60_hora);
-            $this->ve60_medidasaida = ($this->ve60_medidasaida == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_medidasaida"] : $this->ve60_medidasaida);
+            $this->ve60_medidasaida = ($this->ve60_medidasaida === 0 || $this->ve60_medidasaida === 0.0 || $this->ve60_medidasaida == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_medidasaida"] : $this->ve60_medidasaida);
             $this->ve60_passageiro = ($this->ve60_passageiro == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_passageiro"] : $this->ve60_passageiro);
         } else {
-            $this->ve60_codigo = ($this->ve60_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_codigo"] : $this->ve60_codigo);
+            $this->ve60_codigo = ($this->ve60_codigo === 0 || $this->ve60_codigo === 0.0 || $this->ve60_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ve60_codigo"] : $this->ve60_codigo);
         }
     }
 
@@ -273,7 +273,7 @@ class cl_veicretirada
                 $this->ve60_codigo = $ve60_codigo;
             }
         }
-        if (($this->ve60_codigo == null) || ($this->ve60_codigo == "")) {
+        if (($this->ve60_codigo == null) || ($this->ve60_codigo === 0 || $this->ve60_codigo === 0.0 || $this->ve60_codigo == "")) {
             $this->erro_sql = " Campo ve60_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

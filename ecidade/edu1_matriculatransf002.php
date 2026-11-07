@@ -35,7 +35,8 @@ require_once(modification("libs/db_usuariosonline.php"));
 require_once(modification("libs/db_jsplibwebseller.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"], $__qs );
+extract($__qs);
 
 $datamatricula_dia = date( "d", db_getsession( "DB_datausu" ) );
 $datamatricula_mes = date( "m", db_getsession( "DB_datausu" ) );
@@ -214,10 +215,10 @@ if (!isset($incluir) && !isset($incluir2)) {
 
             $codequivorig = ($codequivorig==""?0:$codequivorig).",".$etapaorigem;
             $result       = $clregencia->sql_record($clregencia->sql_query("","ed59_i_codigo,ed232_i_codigo,ed232_c_descr,ed232_c_abrev,ed220_i_procedimento as procorigem,ed59_i_ordenacao","ed59_i_ordenacao"," ed59_i_turma = $turmaorigem AND ed59_i_serie in ($etapaorigem)"));
-            $procorigem   = pg_result($result,0,'procorigem');
+            $procorigem   = ($result ? pg_result($result,0,'procorigem') : null);
             $linhas       = $clregencia->numrows;
             $result1      = $clregencia->sql_record($clregencia->sql_query("","ed59_i_codigo as regdestino,ed232_i_codigo as coddestino,ed232_c_descr as descrdestino,ed220_i_procedimento as procdestino,ed59_i_ordenacao","ed59_i_ordenacao"," ed59_i_turma = $turmadestino AND ed59_i_serie in ($codequivorig)"));
-            $procdestino  = pg_result($result1,0,'procdestino');
+            $procdestino  = ($result1 ? pg_result($result1,0,'procdestino') : null);
             $linhas1      = $clregencia->numrows;
             $regmarcadas  = "";
             $veraprovnulo = "";

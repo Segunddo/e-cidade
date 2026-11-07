@@ -111,7 +111,7 @@ if(isset($atualizar)){
       <?
        $sql = "SELECT ed39_i_codigo,ed39_c_conceito from conceito where ed39_i_formaavaliacao = $ed39_i_formaavaliacao order by ed39_i_sequencia";
        $query = db_query($sql);
-       $linhas = pg_num_rows($query);
+       $linhas = ($query ? pg_num_rows($query) : null);
        if($linhas>0){
         for($i=0;$i<$linhas;$i++){
         $dados = pg_fetch_array($query);

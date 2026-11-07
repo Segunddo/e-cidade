@@ -57,17 +57,17 @@ class cl_ensino
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed10_i_codigo = ($this->ed10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_i_codigo"]:$this->ed10_i_codigo);
-       $this->ed10_i_tipoensino = ($this->ed10_i_tipoensino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_i_tipoensino"]:$this->ed10_i_tipoensino);
-       $this->ed10_i_grauensino = ($this->ed10_i_grauensino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_i_grauensino"]:$this->ed10_i_grauensino);
+       $this->ed10_i_codigo = ($this->ed10_i_codigo === 0 || $this->ed10_i_codigo === 0.0 || $this->ed10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_i_codigo"]:$this->ed10_i_codigo);
+       $this->ed10_i_tipoensino = ($this->ed10_i_tipoensino === 0 || $this->ed10_i_tipoensino === 0.0 || $this->ed10_i_tipoensino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_i_tipoensino"]:$this->ed10_i_tipoensino);
+       $this->ed10_i_grauensino = ($this->ed10_i_grauensino === 0 || $this->ed10_i_grauensino === 0.0 || $this->ed10_i_grauensino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_i_grauensino"]:$this->ed10_i_grauensino);
        $this->ed10_c_descr = ($this->ed10_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_c_descr"]:$this->ed10_c_descr);
        $this->ed10_c_abrev = ($this->ed10_c_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_c_abrev"]:$this->ed10_c_abrev);
-       $this->ed10_mediacaodidaticopedagogica = ($this->ed10_mediacaodidaticopedagogica == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_mediacaodidaticopedagogica"]:$this->ed10_mediacaodidaticopedagogica);
-       $this->ed10_ordem = ($this->ed10_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_ordem"]:$this->ed10_ordem);
-       $this->ed10_censocursoprofiss = ($this->ed10_censocursoprofiss == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_censocursoprofiss"]:$this->ed10_censocursoprofiss);
-       $this->ed10_tipo = ($this->ed10_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_tipo"]:$this->ed10_tipo);
+       $this->ed10_mediacaodidaticopedagogica = ($this->ed10_mediacaodidaticopedagogica === 0 || $this->ed10_mediacaodidaticopedagogica === 0.0 || $this->ed10_mediacaodidaticopedagogica == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_mediacaodidaticopedagogica"]:$this->ed10_mediacaodidaticopedagogica);
+       $this->ed10_ordem = ($this->ed10_ordem === 0 || $this->ed10_ordem === 0.0 || $this->ed10_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_ordem"]:$this->ed10_ordem);
+       $this->ed10_censocursoprofiss = ($this->ed10_censocursoprofiss === 0 || $this->ed10_censocursoprofiss === 0.0 || $this->ed10_censocursoprofiss == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_censocursoprofiss"]:$this->ed10_censocursoprofiss);
+       $this->ed10_tipo = ($this->ed10_tipo === 0 || $this->ed10_tipo === 0.0 || $this->ed10_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_tipo"]:$this->ed10_tipo);
      }else{
-       $this->ed10_i_codigo = ($this->ed10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_i_codigo"]:$this->ed10_i_codigo);
+       $this->ed10_i_codigo = ($this->ed10_i_codigo === 0 || $this->ed10_i_codigo === 0.0 || $this->ed10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed10_i_codigo"]:$this->ed10_i_codigo);
      }
    }
 
@@ -152,7 +152,7 @@ class cl_ensino
          $this->ed10_i_codigo = $ed10_i_codigo;
        }
      }
-     if(($this->ed10_i_codigo == null) || ($this->ed10_i_codigo == "") ){
+     if(($this->ed10_i_codigo == null) || ($this->ed10_i_codigo === 0 || $this->ed10_i_codigo === 0.0 || $this->ed10_i_codigo == "") ){
        $this->erro_sql = " Campo ed10_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -551,7 +551,7 @@ class cl_ensino
    function sql_query_curso ( $ed10_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -575,7 +575,7 @@ class cl_ensino
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

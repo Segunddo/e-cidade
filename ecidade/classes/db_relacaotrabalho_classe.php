@@ -62,7 +62,7 @@ class cl_relacaotrabalho {
                  ed23_ativo = bool = Ativo
                  ";
    //funcao construtor da classe
-   function cl_relacaotrabalho() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("relacaotrabalho");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_relacaotrabalho {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed23_i_codigo = ($this->ed23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_codigo"]:$this->ed23_i_codigo);
-       $this->ed23_i_rechumanoescola = ($this->ed23_i_rechumanoescola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_rechumanoescola"]:$this->ed23_i_rechumanoescola);
-       $this->ed23_i_numero = ($this->ed23_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_numero"]:$this->ed23_i_numero);
-       $this->ed23_i_regimetrabalho = ($this->ed23_i_regimetrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_regimetrabalho"]:$this->ed23_i_regimetrabalho);
-       $this->ed23_i_areatrabalho = ($this->ed23_i_areatrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_areatrabalho"]:$this->ed23_i_areatrabalho);
-       $this->ed23_i_disciplina = ($this->ed23_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_disciplina"]:$this->ed23_i_disciplina);
-       $this->ed23_tipohoratrabalho = ($this->ed23_tipohoratrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_tipohoratrabalho"]:$this->ed23_tipohoratrabalho);
+       $this->ed23_i_codigo = ($this->ed23_i_codigo === 0 || $this->ed23_i_codigo === 0.0 || $this->ed23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_codigo"]:$this->ed23_i_codigo);
+       $this->ed23_i_rechumanoescola = ($this->ed23_i_rechumanoescola === 0 || $this->ed23_i_rechumanoescola === 0.0 || $this->ed23_i_rechumanoescola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_rechumanoescola"]:$this->ed23_i_rechumanoescola);
+       $this->ed23_i_numero = ($this->ed23_i_numero === 0 || $this->ed23_i_numero === 0.0 || $this->ed23_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_numero"]:$this->ed23_i_numero);
+       $this->ed23_i_regimetrabalho = ($this->ed23_i_regimetrabalho === 0 || $this->ed23_i_regimetrabalho === 0.0 || $this->ed23_i_regimetrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_regimetrabalho"]:$this->ed23_i_regimetrabalho);
+       $this->ed23_i_areatrabalho = ($this->ed23_i_areatrabalho === 0 || $this->ed23_i_areatrabalho === 0.0 || $this->ed23_i_areatrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_areatrabalho"]:$this->ed23_i_areatrabalho);
+       $this->ed23_i_disciplina = ($this->ed23_i_disciplina === 0 || $this->ed23_i_disciplina === 0.0 || $this->ed23_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_disciplina"]:$this->ed23_i_disciplina);
+       $this->ed23_tipohoratrabalho = ($this->ed23_tipohoratrabalho === 0 || $this->ed23_tipohoratrabalho === 0.0 || $this->ed23_tipohoratrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_tipohoratrabalho"]:$this->ed23_tipohoratrabalho);
        $this->ed23_ativo = ($this->ed23_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed23_ativo"]:$this->ed23_ativo);
      }else{
-       $this->ed23_i_codigo = ($this->ed23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_codigo"]:$this->ed23_i_codigo);
+       $this->ed23_i_codigo = ($this->ed23_i_codigo === 0 || $this->ed23_i_codigo === 0.0 || $this->ed23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed23_i_codigo"]:$this->ed23_i_codigo);
      }
    }
    // funcao para inclusao
@@ -163,7 +163,7 @@ class cl_relacaotrabalho {
          $this->ed23_i_codigo = $ed23_i_codigo;
        }
      }
-     if(($this->ed23_i_codigo == null) || ($this->ed23_i_codigo == "") ){
+     if(($this->ed23_i_codigo == null) || ($this->ed23_i_codigo === 0 || $this->ed23_i_codigo === 0.0 || $this->ed23_i_codigo == "") ){
        $this->erro_sql = " Campo ed23_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -553,7 +553,7 @@ class cl_relacaotrabalho {
     $sql = "select ";
     if ($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -579,7 +579,7 @@ class cl_relacaotrabalho {
     if ($ordem != null ) {
 
       $sql       .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 

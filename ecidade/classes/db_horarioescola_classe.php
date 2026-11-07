@@ -30,7 +30,7 @@ class cl_horarioescola {
                  ed123_horafim = varchar(5) = Horário Final 
                  ";
    //funcao construtor da classe 
-   function cl_horarioescola() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("horarioescola"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_horarioescola {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed123_sequencial = ($this->ed123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_sequencial"]:$this->ed123_sequencial);
-       $this->ed123_turnoreferencia = ($this->ed123_turnoreferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_turnoreferencia"]:$this->ed123_turnoreferencia);
-       $this->ed123_escola = ($this->ed123_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_escola"]:$this->ed123_escola);
+       $this->ed123_sequencial = ($this->ed123_sequencial === 0 || $this->ed123_sequencial === 0.0 || $this->ed123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_sequencial"]:$this->ed123_sequencial);
+       $this->ed123_turnoreferencia = ($this->ed123_turnoreferencia === 0 || $this->ed123_turnoreferencia === 0.0 || $this->ed123_turnoreferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_turnoreferencia"]:$this->ed123_turnoreferencia);
+       $this->ed123_escola = ($this->ed123_escola === 0 || $this->ed123_escola === 0.0 || $this->ed123_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_escola"]:$this->ed123_escola);
        $this->ed123_horainicio = ($this->ed123_horainicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_horainicio"]:$this->ed123_horainicio);
        $this->ed123_horafim = ($this->ed123_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_horafim"]:$this->ed123_horafim);
      }else{
-       $this->ed123_sequencial = ($this->ed123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_sequencial"]:$this->ed123_sequencial);
+       $this->ed123_sequencial = ($this->ed123_sequencial === 0 || $this->ed123_sequencial === 0.0 || $this->ed123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_sequencial"]:$this->ed123_sequencial);
      }
    }
    // funcao para inclusao
@@ -119,7 +119,7 @@ class cl_horarioescola {
          $this->ed123_sequencial = $ed123_sequencial; 
        }
      }
-     if(($this->ed123_sequencial == null) || ($this->ed123_sequencial == "") ){ 
+     if(($this->ed123_sequencial == null) || ($this->ed123_sequencial === 0 || $this->ed123_sequencial === 0.0 || $this->ed123_sequencial == "") ){ 
        $this->erro_sql = " Campo ed123_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

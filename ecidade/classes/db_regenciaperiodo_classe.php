@@ -54,7 +54,7 @@ class cl_regenciaperiodo {
                  ed78_i_aulasdadas = int4 = N° Aulas Dadas
                  ";
    //funcao construtor da classe
-   function cl_regenciaperiodo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("regenciaperiodo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_regenciaperiodo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed78_i_codigo = ($this->ed78_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed78_i_codigo"]:$this->ed78_i_codigo);
-       $this->ed78_i_regencia = ($this->ed78_i_regencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed78_i_regencia"]:$this->ed78_i_regencia);
-       $this->ed78_i_procavaliacao = ($this->ed78_i_procavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed78_i_procavaliacao"]:$this->ed78_i_procavaliacao);
+       $this->ed78_i_codigo = ($this->ed78_i_codigo === 0 || $this->ed78_i_codigo === 0.0 || $this->ed78_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed78_i_codigo"]:$this->ed78_i_codigo);
+       $this->ed78_i_regencia = ($this->ed78_i_regencia === 0 || $this->ed78_i_regencia === 0.0 || $this->ed78_i_regencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed78_i_regencia"]:$this->ed78_i_regencia);
+       $this->ed78_i_procavaliacao = ($this->ed78_i_procavaliacao === 0 || $this->ed78_i_procavaliacao === 0.0 || $this->ed78_i_procavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed78_i_procavaliacao"]:$this->ed78_i_procavaliacao);
        $this->ed78_i_aulasdadas = ($this->ed78_i_aulasdadas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed78_i_aulasdadas"]:$this->ed78_i_aulasdadas);
      }else{
-       $this->ed78_i_codigo = ($this->ed78_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed78_i_codigo"]:$this->ed78_i_codigo);
+       $this->ed78_i_codigo = ($this->ed78_i_codigo === 0 || $this->ed78_i_codigo === 0.0 || $this->ed78_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed78_i_codigo"]:$this->ed78_i_codigo);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_regenciaperiodo {
          $this->ed78_i_codigo = $ed78_i_codigo;
        }
      }
-     if(($this->ed78_i_codigo == null) || ($this->ed78_i_codigo == "") ){
+     if(($this->ed78_i_codigo == null) || ($this->ed78_i_codigo === 0 || $this->ed78_i_codigo === 0.0 || $this->ed78_i_codigo == "") ){
        $this->erro_sql = " Campo ed78_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

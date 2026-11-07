@@ -52,7 +52,7 @@ class cl_procdiscfreqindiv {
                  ed45_i_disciplina = int8 = Disciplina 
                  ";
    //funcao construtor da classe 
-   function cl_procdiscfreqindiv() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procdiscfreqindiv"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]."?ed45_i_procedimento=".@$GLOBALS["HTTP_POST_VARS"]["ed45_i_procedimento"]);
@@ -69,11 +69,11 @@ class cl_procdiscfreqindiv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed45_i_codigo = ($this->ed45_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed45_i_codigo"]:$this->ed45_i_codigo);
-       $this->ed45_i_procedimento = ($this->ed45_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed45_i_procedimento"]:$this->ed45_i_procedimento);
-       $this->ed45_i_disciplina = ($this->ed45_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed45_i_disciplina"]:$this->ed45_i_disciplina);
+       $this->ed45_i_codigo = ($this->ed45_i_codigo === 0 || $this->ed45_i_codigo === 0.0 || $this->ed45_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed45_i_codigo"]:$this->ed45_i_codigo);
+       $this->ed45_i_procedimento = ($this->ed45_i_procedimento === 0 || $this->ed45_i_procedimento === 0.0 || $this->ed45_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed45_i_procedimento"]:$this->ed45_i_procedimento);
+       $this->ed45_i_disciplina = ($this->ed45_i_disciplina === 0 || $this->ed45_i_disciplina === 0.0 || $this->ed45_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed45_i_disciplina"]:$this->ed45_i_disciplina);
      }else{
-       $this->ed45_i_codigo = ($this->ed45_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed45_i_codigo"]:$this->ed45_i_codigo);
+       $this->ed45_i_codigo = ($this->ed45_i_codigo === 0 || $this->ed45_i_codigo === 0.0 || $this->ed45_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed45_i_codigo"]:$this->ed45_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procdiscfreqindiv {
          $this->ed45_i_codigo = $ed45_i_codigo; 
        }
      }
-     if(($this->ed45_i_codigo == null) || ($this->ed45_i_codigo == "") ){ 
+     if(($this->ed45_i_codigo == null) || ($this->ed45_i_codigo === 0 || $this->ed45_i_codigo === 0.0 || $this->ed45_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed45_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_procdiscfreqindiv {
    function sql_query ( $ed45_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_procdiscfreqindiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_procdiscfreqindiv {
    function sql_query_file ( $ed45_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_procdiscfreqindiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

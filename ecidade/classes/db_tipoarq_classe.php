@@ -50,7 +50,7 @@ class cl_tipoarq {
                  p66_descr = varchar(50) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_tipoarq() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoarq"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,7 +67,7 @@ class cl_tipoarq {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p66_codarq = ($this->p66_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["p66_codarq"]:$this->p66_codarq);
+       $this->p66_codarq = ($this->p66_codarq === 0 || $this->p66_codarq === 0.0 || $this->p66_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["p66_codarq"]:$this->p66_codarq);
        $this->p66_descr = ($this->p66_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["p66_descr"]:$this->p66_descr);
      }else{
      }
@@ -252,7 +252,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query ( $p66_codarq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -273,7 +273,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -285,7 +285,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
    function sql_query_file ( $p66_codarq=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -306,7 +306,7 @@ $sql .= "oid = '$oid'";     $result = db_query($sql);
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

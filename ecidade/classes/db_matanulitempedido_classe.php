@@ -52,7 +52,7 @@ class cl_matanulitempedido {
                  m101_matpedidoitem = int8 = Pedido 
                  ";
    //funcao construtor da classe 
-   function cl_matanulitempedido() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matanulitempedido"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_matanulitempedido {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m101_sequencial = ($this->m101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m101_sequencial"]:$this->m101_sequencial);
-       $this->m101_matanulitem = ($this->m101_matanulitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m101_matanulitem"]:$this->m101_matanulitem);
-       $this->m101_matpedidoitem = ($this->m101_matpedidoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m101_matpedidoitem"]:$this->m101_matpedidoitem);
+       $this->m101_sequencial = ($this->m101_sequencial === 0 || $this->m101_sequencial === 0.0 || $this->m101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m101_sequencial"]:$this->m101_sequencial);
+       $this->m101_matanulitem = ($this->m101_matanulitem === 0 || $this->m101_matanulitem === 0.0 || $this->m101_matanulitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m101_matanulitem"]:$this->m101_matanulitem);
+       $this->m101_matpedidoitem = ($this->m101_matpedidoitem === 0 || $this->m101_matpedidoitem === 0.0 || $this->m101_matpedidoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m101_matpedidoitem"]:$this->m101_matpedidoitem);
      }else{
-       $this->m101_sequencial = ($this->m101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m101_sequencial"]:$this->m101_sequencial);
+       $this->m101_sequencial = ($this->m101_sequencial === 0 || $this->m101_sequencial === 0.0 || $this->m101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m101_sequencial"]:$this->m101_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_matanulitempedido {
          $this->m101_sequencial = $m101_sequencial; 
        }
      }
-     if(($this->m101_sequencial == null) || ($this->m101_sequencial == "") ){ 
+     if(($this->m101_sequencial == null) || ($this->m101_sequencial === 0 || $this->m101_sequencial === 0.0 || $this->m101_sequencial == "") ){ 
        $this->erro_sql = " Campo m101_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_matanulitempedido {
    function sql_query ( $m101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -387,7 +387,7 @@ class cl_matanulitempedido {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_matanulitempedido {
    function sql_query_file ( $m101_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_matanulitempedido {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

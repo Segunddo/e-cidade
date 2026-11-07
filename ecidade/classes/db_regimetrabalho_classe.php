@@ -52,7 +52,7 @@ class cl_regimetrabalho {
                  ed24_horas = char(10) = Horas
                  ";
    //funcao construtor da classe
-   function cl_regimetrabalho() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("regimetrabalho");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_regimetrabalho {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed24_i_codigo = ($this->ed24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_i_codigo"]:$this->ed24_i_codigo);
+       $this->ed24_i_codigo = ($this->ed24_i_codigo === 0 || $this->ed24_i_codigo === 0.0 || $this->ed24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_i_codigo"]:$this->ed24_i_codigo);
        $this->ed24_c_descr = ($this->ed24_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_c_descr"]:$this->ed24_c_descr);
        $this->ed24_horas = ($this->ed24_horas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_horas"]:$this->ed24_horas);
      }else{
-       $this->ed24_i_codigo = ($this->ed24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_i_codigo"]:$this->ed24_i_codigo);
+       $this->ed24_i_codigo = ($this->ed24_i_codigo === 0 || $this->ed24_i_codigo === 0.0 || $this->ed24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_i_codigo"]:$this->ed24_i_codigo);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_regimetrabalho {
          $this->ed24_i_codigo = $ed24_i_codigo;
        }
      }
-     if(($this->ed24_i_codigo == null) || ($this->ed24_i_codigo == "") ){
+     if(($this->ed24_i_codigo == null) || ($this->ed24_i_codigo === 0 || $this->ed24_i_codigo === 0.0 || $this->ed24_i_codigo == "") ){
        $this->erro_sql = " Campo ed24_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -350,7 +350,7 @@ class cl_regimetrabalho {
    function sql_query ( $ed24_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -371,7 +371,7 @@ class cl_regimetrabalho {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_regimetrabalho {
    function sql_query_file ( $ed24_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_regimetrabalho {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

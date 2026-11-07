@@ -55,7 +55,7 @@ $sql = "SELECT DISTINCT
 $result = db_query($sql);
 //db_criatabela($result);
 //exit;
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 if($linhas==0){?>
  <table width='100%'>
   <tr>

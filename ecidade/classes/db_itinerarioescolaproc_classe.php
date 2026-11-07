@@ -52,7 +52,7 @@ class cl_itinerarioescolaproc {
                  ed222_i_escolaproc = int4 = Escola fora rede municipal 
                  ";
    //funcao construtor da classe 
-   function cl_itinerarioescolaproc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("itinerarioescolaproc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_itinerarioescolaproc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed222_i_codigo = ($this->ed222_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed222_i_codigo"]:$this->ed222_i_codigo);
-       $this->ed222_i_itinerario = ($this->ed222_i_itinerario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed222_i_itinerario"]:$this->ed222_i_itinerario);
-       $this->ed222_i_escolaproc = ($this->ed222_i_escolaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ed222_i_escolaproc"]:$this->ed222_i_escolaproc);
+       $this->ed222_i_codigo = ($this->ed222_i_codigo === 0 || $this->ed222_i_codigo === 0.0 || $this->ed222_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed222_i_codigo"]:$this->ed222_i_codigo);
+       $this->ed222_i_itinerario = ($this->ed222_i_itinerario === 0 || $this->ed222_i_itinerario === 0.0 || $this->ed222_i_itinerario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed222_i_itinerario"]:$this->ed222_i_itinerario);
+       $this->ed222_i_escolaproc = ($this->ed222_i_escolaproc === 0 || $this->ed222_i_escolaproc === 0.0 || $this->ed222_i_escolaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ed222_i_escolaproc"]:$this->ed222_i_escolaproc);
      }else{
-       $this->ed222_i_codigo = ($this->ed222_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed222_i_codigo"]:$this->ed222_i_codigo);
+       $this->ed222_i_codigo = ($this->ed222_i_codigo === 0 || $this->ed222_i_codigo === 0.0 || $this->ed222_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed222_i_codigo"]:$this->ed222_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_itinerarioescolaproc {
          $this->ed222_i_codigo = $ed222_i_codigo; 
        }
      }
-     if(($this->ed222_i_codigo == null) || ($this->ed222_i_codigo == "") ){ 
+     if(($this->ed222_i_codigo == null) || ($this->ed222_i_codigo === 0 || $this->ed222_i_codigo === 0.0 || $this->ed222_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed222_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_itinerarioescolaproc {
    function sql_query ( $ed222_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_itinerarioescolaproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_itinerarioescolaproc {
    function sql_query_file ( $ed222_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_itinerarioescolaproc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

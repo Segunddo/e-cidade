@@ -58,7 +58,7 @@ class cl_conceito {
                  ed39_c_nome = char(30) = Nome
                  ";
    //funcao construtor da classe
-   function cl_conceito() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conceito");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_conceito {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed39_i_codigo = ($this->ed39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_i_codigo"]:$this->ed39_i_codigo);
-       $this->ed39_i_formaavaliacao = ($this->ed39_i_formaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_i_formaavaliacao"]:$this->ed39_i_formaavaliacao);
+       $this->ed39_i_codigo = ($this->ed39_i_codigo === 0 || $this->ed39_i_codigo === 0.0 || $this->ed39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_i_codigo"]:$this->ed39_i_codigo);
+       $this->ed39_i_formaavaliacao = ($this->ed39_i_formaavaliacao === 0 || $this->ed39_i_formaavaliacao === 0.0 || $this->ed39_i_formaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_i_formaavaliacao"]:$this->ed39_i_formaavaliacao);
        $this->ed39_c_conceito = ($this->ed39_c_conceito == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_c_conceito"]:$this->ed39_c_conceito);
        $this->ed39_c_conceitodescr = ($this->ed39_c_conceitodescr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_c_conceitodescr"]:$this->ed39_c_conceitodescr);
-       $this->ed39_i_sequencia = ($this->ed39_i_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_i_sequencia"]:$this->ed39_i_sequencia);
+       $this->ed39_i_sequencia = ($this->ed39_i_sequencia === 0 || $this->ed39_i_sequencia === 0.0 || $this->ed39_i_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_i_sequencia"]:$this->ed39_i_sequencia);
        $this->ed39_c_nome = ($this->ed39_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_c_nome"]:$this->ed39_c_nome);
      }else{
-       $this->ed39_i_codigo = ($this->ed39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_i_codigo"]:$this->ed39_i_codigo);
+       $this->ed39_i_codigo = ($this->ed39_i_codigo === 0 || $this->ed39_i_codigo === 0.0 || $this->ed39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed39_i_codigo"]:$this->ed39_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_conceito {
          $this->ed39_i_codigo = $ed39_i_codigo;
        }
      }
-     if(($this->ed39_i_codigo == null) || ($this->ed39_i_codigo == "") ){
+     if(($this->ed39_i_codigo == null) || ($this->ed39_i_codigo === 0 || $this->ed39_i_codigo === 0.0 || $this->ed39_i_codigo == "") ){
        $this->erro_sql = " Campo ed39_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

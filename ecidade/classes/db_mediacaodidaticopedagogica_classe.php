@@ -50,7 +50,7 @@ class cl_mediacaodidaticopedagogica {
                  ed130_descricao = varchar(20) = Decrição
                  ";
    //funcao construtor da classe
-   function cl_mediacaodidaticopedagogica() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mediacaodidaticopedagogica");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_mediacaodidaticopedagogica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed130_codigo = ($this->ed130_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_codigo"]:$this->ed130_codigo);
+       $this->ed130_codigo = ($this->ed130_codigo === 0 || $this->ed130_codigo === 0.0 || $this->ed130_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_codigo"]:$this->ed130_codigo);
        $this->ed130_descricao = ($this->ed130_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_descricao"]:$this->ed130_descricao);
      }else{
-       $this->ed130_codigo = ($this->ed130_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_codigo"]:$this->ed130_codigo);
+       $this->ed130_codigo = ($this->ed130_codigo === 0 || $this->ed130_codigo === 0.0 || $this->ed130_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed130_codigo"]:$this->ed130_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_mediacaodidaticopedagogica {
          $this->ed130_codigo = $ed130_codigo;
        }
      }
-     if(($this->ed130_codigo == null) || ($this->ed130_codigo == "") ){
+     if(($this->ed130_codigo == null) || ($this->ed130_codigo === 0 || $this->ed130_codigo === 0.0 || $this->ed130_codigo == "") ){
        $this->erro_sql = " Campo ed130_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -54,7 +54,7 @@ class cl_duracaocal {
                  ed55_i_diasprox = int4 = N° Dias Próximo Calendário 
                  ";
    //funcao construtor da classe
-   function cl_duracaocal() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("duracaocal");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_duracaocal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed55_i_codigo = ($this->ed55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed55_i_codigo"]:$this->ed55_i_codigo);
+       $this->ed55_i_codigo = ($this->ed55_i_codigo === 0 || $this->ed55_i_codigo === 0.0 || $this->ed55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed55_i_codigo"]:$this->ed55_i_codigo);
        $this->ed55_c_descr = ($this->ed55_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed55_c_descr"]:$this->ed55_c_descr);
-       $this->ed55_i_numperiodos = ($this->ed55_i_numperiodos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed55_i_numperiodos"]:$this->ed55_i_numperiodos);
-       $this->ed55_i_diasprox = ($this->ed55_i_diasprox == ""?@$GLOBALS["HTTP_POST_VARS"]["ed55_i_diasprox"]:$this->ed55_i_diasprox);
+       $this->ed55_i_numperiodos = ($this->ed55_i_numperiodos === 0 || $this->ed55_i_numperiodos === 0.0 || $this->ed55_i_numperiodos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed55_i_numperiodos"]:$this->ed55_i_numperiodos);
+       $this->ed55_i_diasprox = ($this->ed55_i_diasprox === 0 || $this->ed55_i_diasprox === 0.0 || $this->ed55_i_diasprox == ""?@$GLOBALS["HTTP_POST_VARS"]["ed55_i_diasprox"]:$this->ed55_i_diasprox);
      }else{
-       $this->ed55_i_codigo = ($this->ed55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed55_i_codigo"]:$this->ed55_i_codigo);
+       $this->ed55_i_codigo = ($this->ed55_i_codigo === 0 || $this->ed55_i_codigo === 0.0 || $this->ed55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed55_i_codigo"]:$this->ed55_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_duracaocal {
          $this->ed55_i_codigo = $ed55_i_codigo;
        }
      }
-     if(($this->ed55_i_codigo == null) || ($this->ed55_i_codigo == "") ){
+     if(($this->ed55_i_codigo == null) || ($this->ed55_i_codigo === 0 || $this->ed55_i_codigo === 0.0 || $this->ed55_i_codigo == "") ){
        $this->erro_sql = " Campo ed55_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

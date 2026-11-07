@@ -89,7 +89,7 @@ class GuiaTransFerenciaService
             "ed104_i_codigo in ({$this->alunos})"
         );
         $result = pg_query($sql);
-        while ($alunos =pg_fetch_object($result)) {
+        while ($alunos =($result ? pg_fetch_object($result) : null)) {
             $dados['alunos'][] = $alunos;
         }
         return $dados;

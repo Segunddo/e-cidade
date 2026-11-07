@@ -68,7 +68,7 @@ class cl_matriculamov {
                  ed229_c_horaevento = char(5) = Hora Evento 
                  ";
    //funcao construtor da classe
-   function cl_matriculamov() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matriculamov");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,9 +85,9 @@ class cl_matriculamov {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed229_i_codigo = ($this->ed229_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_i_codigo"]:$this->ed229_i_codigo);
-       $this->ed229_i_matricula = ($this->ed229_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_i_matricula"]:$this->ed229_i_matricula);
-       $this->ed229_i_usuario = ($this->ed229_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_i_usuario"]:$this->ed229_i_usuario);
+       $this->ed229_i_codigo = ($this->ed229_i_codigo === 0 || $this->ed229_i_codigo === 0.0 || $this->ed229_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_i_codigo"]:$this->ed229_i_codigo);
+       $this->ed229_i_matricula = ($this->ed229_i_matricula === 0 || $this->ed229_i_matricula === 0.0 || $this->ed229_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_i_matricula"]:$this->ed229_i_matricula);
+       $this->ed229_i_usuario = ($this->ed229_i_usuario === 0 || $this->ed229_i_usuario === 0.0 || $this->ed229_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_i_usuario"]:$this->ed229_i_usuario);
        $this->ed229_c_procedimento = ($this->ed229_c_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_c_procedimento"]:$this->ed229_c_procedimento);
        $this->ed229_t_descr = ($this->ed229_t_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_t_descr"]:$this->ed229_t_descr);
        if($this->ed229_d_data == ""){
@@ -108,7 +108,7 @@ class cl_matriculamov {
        }
        $this->ed229_c_horaevento = ($this->ed229_c_horaevento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_c_horaevento"]:$this->ed229_c_horaevento);
      }else{
-       $this->ed229_i_codigo = ($this->ed229_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_i_codigo"]:$this->ed229_i_codigo);
+       $this->ed229_i_codigo = ($this->ed229_i_codigo === 0 || $this->ed229_i_codigo === 0.0 || $this->ed229_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed229_i_codigo"]:$this->ed229_i_codigo);
      }
    }
    // funcao para inclusao
@@ -201,7 +201,7 @@ class cl_matriculamov {
          $this->ed229_i_codigo = $ed229_i_codigo;
        }
      }
-     if(($this->ed229_i_codigo == null) || ($this->ed229_i_codigo == "") ){
+     if(($this->ed229_i_codigo == null) || ($this->ed229_i_codigo === 0 || $this->ed229_i_codigo === 0.0 || $this->ed229_i_codigo == "") ){
        $this->erro_sql = " Campo ed229_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

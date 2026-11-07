@@ -33,9 +33,12 @@ NORM = [
     (re.compile(rb'nomeArquivo[^\s"\']*'),        b'nomeArquivoX'),
     # PDF temporario: o nome carrega PID e timestamp, aleatorios por requisicao.
     (re.compile(rb'tmp/[A-Za-z0-9_]+\.pdf'),      b'tmp/X.pdf'),
+    # CSV/TXT temporario com timestamp no nome (arquivo_infra_escola_1791906927.csv);
+    # dentro de JSON a barra vem escapada (tmp\/...). Achado no edu2.
+    (re.compile(rb'tmp\\?/[A-Za-z0-9_]+\.(?:csv|txt)'), b'tmp/X.arq'),
     # A pagina de erro monta URL absoluta a partir de HTTP_HOST (ver $DB_URL_ABS),
     # entao ela carrega a porta do runtime que a serviu. Diferenca por construcao.
-    (re.compile(rb'localhost:80(80|85)'),         b'localhost:PORT'),
+    (re.compile(rb'localhost:80(80|85|86|87)'),         b'localhost:PORT'),
     # Data de criacao gravada dentro do PDF pelo FPDF: muda se as duas
     # requisicoes cairem em segundos diferentes. Passou a aparecer depois que
     # tmp/ virou gravavel e os relatorios comecaram a ser gerados de fato.
@@ -46,42 +49,83 @@ def norm(b):
         b = rx.sub(rep, b)
     return b
 
+# NORM_MENU=1: troca o trecho emitido pelo db_menu() por um marcador nos DOIS lados.
+# Usado so na comparacao com o TCC de referencia, onde o desktop vem desligado por um
+# defeito do codigo dele (a camada V3 perde o login da sessao) e o db_menu() emite o
+# menu classico (~400 linhas) no lugar do estilo/script do desktop. Separa esse defeito
+# unico, sistematico, dos defeitos por tela.
+MENU = [re.compile(rb'<style>\s*\nbody\.no-menu.*?</script>\n?', re.S),                          # ramo desktop
+        re.compile(rb'<div id="db-menu">.*?</div>(?=<div id="db-tooltip")', re.S),                # ramo classico: menu
+        re.compile(rb'<script>\s*\(window\.CurrentWindow \|\| parent\.CurrentWindow\)\.bstatus.*?autoCompleteMenu\(\);\s*\}\s*</script>', re.S)]  # classico: status
+
 def fetch(port, page):
     restore()
     # teto de 5 MB: uma pagina com laco infinito (ver -1 >= "" no PHP 8) estoura
     # a memoria do harness e o mata com SIGKILL. Truncada, ela perde o marcador
     # @@ e cai como divergente, que e o desfecho correto.
     r = sh(f"curl -s -m 60 -b 'ECIDADEWINDOWMAIN={SID}' "
-           f"-w '\\n@@%{{http_code}}' http://localhost:{port}/{page} | head -c 5000000")
+           f"-w '\\n@@%{{http_code}}@%{{time_total}}' http://localhost:{port}/{page} | head -c 5000000")
     out = r.stdout
     i = out.rfind(b'\n@@')
     code = out[i+3:].decode(errors='replace') if i >= 0 else '???'
-    return code, norm(out[:i] if i >= 0 else out)
+    code, _, t = code.partition('@')
+    # Resposta que bateu no -m 60 sai TRUNCADA com codigo 200, e cada lado corta num
+    # ponto diferente: parecia divergencia. Achado no mer3_mer_nutriitem002 (~53 s nos
+    # dois runtimes; sob a carga da bateria passa de 60). Vira TIMEOUT.
+    if t and float(t) >= 59.5:
+        code = '000'
+    if code == '000':
+        # O curl desistiu, mas o PHP CONTINUA rodando no servidor -- e segura o
+        # flock do arquivo de sessao. Como a sessao e compartilhada, toda tela
+        # seguinte trava nos DOIS runtimes e "timeout nos dois" parecia identico.
+        # Achado no edu4: `while(!feof(false))` e laco eterno no 5.6.
+        c = 'ecidade_php56' if port == 8080 else CONTAINER_B
+        sh(f"docker exec -u root {c} sh -c 'm=$(pgrep -o apache2); for p in $(pgrep apache2); do "
+           f"[ $p = $m ] && continue; [ \"$(cut -d\\  -f3 /proc/$p/stat)\" = R ] && kill $p; done; true'")
+    corpo = norm(out[:i] if i >= 0 else out)
+    if os.environ.get('NORM_MENU'):
+        for rx in MENU: corpo = rx.sub(b'', corpo)
+    return code, corpo
 
+# Lado B configuravel: PORTA_B=8086 compara o 5.6 com o codigo do TCC de referencia
+# (container ecidade_tcc_gerson). O padrao continua sendo o nosso 8.5.
+PORTA_B = int(os.environ.get('PORTA_B', '8085'))
+CONTAINER_B = {8085: 'ecidade_php85', 8086: 'ecidade_tcc_gerson', 8087: 'ecidade_lar12'}[PORTA_B]
 files = sorted(f for f in os.listdir('.')
                if re.match(PREF, f, re.IGNORECASE) and f.endswith('.php'))
 if os.environ.get('ONLY'):
     files = os.environ['ONLY'].split(',')
+# Telas que contatam servico EXTERNO real: a bateria nao pode disparar conexao a
+# terceiros. iss4_siss002 tem fixo o IP do SISS (200.192.137.56); o pg_connect leva
+# ~134 s para desistir, igual nos dois runtimes -- nao e regressao, e rede.
+PULAR = {'iss4_siss002.php'}
+for f in sorted(set(files) & PULAR):
+    print(f"  PULADA {f}  (contata servico externo)", flush=True)
+files = [f for f in files if f not in PULAR]
 
 print(f"{len(files)} telas\n", flush=True)
-div = []
+div = []; tout = []
 for n, f in enumerate(files, 1):
     c56, b56 = fetch(8080, f)
-    c85, b85 = fetch(8085, f)
+    c85, b85 = fetch(PORTA_B, f)
+    if '000' in (c56, c85):
+        tout.append(f)
+        print(f"  TIMEOUT {f}  56={c56}  85={c85}  (nao conta como identica)", flush=True)
+        continue
     if not (c56 == c85 and b56 == b85):
         # CONFIRMAR antes de acusar. Relatorios em PDF carregam um horario
         # DENTRO do fluxo comprimido (FlateDecode), fora do alcance da
         # normalizacao: se as duas requisicoes cairem em segundos diferentes,
         # os bytes mudam. Uma regressao real e persistente; um flake nao.
         c56, b56 = fetch(8080, f)
-        c85, b85 = fetch(8085, f)
+        c85, b85 = fetch(PORTA_B, f)
     if not (c56 == c85 and b56 == b85):
         div.append((f, c56, c85, len(b56), len(b85)))
         print(f"  DIVERGE {f}  56={c56}/{len(b56)}B  85={c85}/{len(b85)}B", flush=True)
     if n % 50 == 0:
         print(f"  ... {n}/{len(files)}", flush=True)
 
-print(f"\n=== {len(files)-len(div)}/{len(files)} identicas, {len(div)} divergentes ===")
+print(f"\n=== {len(files)-len(div)-len(tout)}/{len(files)} identicas, {len(div)} divergentes, {len(tout)} timeout ===")
 if OUT and OUT != '/dev/null':
     with open(OUT, "w") as fh:
         for d in div:

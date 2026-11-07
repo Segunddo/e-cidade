@@ -54,7 +54,7 @@ class cl_turmacensoetapa {
                  ed132_ano = int4 = Ano
                  ";
    //funcao construtor da classe
-   function cl_turmacensoetapa() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("turmacensoetapa");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_turmacensoetapa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed132_codigo = ($this->ed132_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_codigo"]:$this->ed132_codigo);
-       $this->ed132_turma = ($this->ed132_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_turma"]:$this->ed132_turma);
-       $this->ed132_censoetapa = ($this->ed132_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_censoetapa"]:$this->ed132_censoetapa);
-       $this->ed132_ano = ($this->ed132_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_ano"]:$this->ed132_ano);
+       $this->ed132_codigo = ($this->ed132_codigo === 0 || $this->ed132_codigo === 0.0 || $this->ed132_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_codigo"]:$this->ed132_codigo);
+       $this->ed132_turma = ($this->ed132_turma === 0 || $this->ed132_turma === 0.0 || $this->ed132_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_turma"]:$this->ed132_turma);
+       $this->ed132_censoetapa = ($this->ed132_censoetapa === 0 || $this->ed132_censoetapa === 0.0 || $this->ed132_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_censoetapa"]:$this->ed132_censoetapa);
+       $this->ed132_ano = ($this->ed132_ano === 0 || $this->ed132_ano === 0.0 || $this->ed132_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_ano"]:$this->ed132_ano);
      }else{
-       $this->ed132_codigo = ($this->ed132_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_codigo"]:$this->ed132_codigo);
+       $this->ed132_codigo = ($this->ed132_codigo === 0 || $this->ed132_codigo === 0.0 || $this->ed132_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_codigo"]:$this->ed132_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_turmacensoetapa {
          $this->ed132_codigo = $ed132_codigo;
        }
      }
-     if(($this->ed132_codigo == null) || ($this->ed132_codigo == "") ){
+     if(($this->ed132_codigo == null) || ($this->ed132_codigo === 0 || $this->ed132_codigo === 0.0 || $this->ed132_codigo == "") ){
        $this->erro_sql = " Campo ed132_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

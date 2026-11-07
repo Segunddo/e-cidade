@@ -73,13 +73,13 @@ class cl_mer_requiitem_ext {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me17_i_codigo = ($this->me17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_i_codigo"]:$this->me17_i_codigo);
-       $this->me17_f_quant = ($this->me17_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_f_quant"]:$this->me17_f_quant);
-       $this->me17_i_unidade = ($this->me17_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_i_unidade"]:$this->me17_i_unidade);
-       $this->me17_i_item = ($this->me17_i_item == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_i_item"]:$this->me17_i_item);
-       $this->me17_i_merrequi = ($this->me17_i_merrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_i_merrequi"]:$this->me17_i_merrequi);
+       $this->me17_i_codigo = ($this->me17_i_codigo === 0 || $this->me17_i_codigo === 0.0 || $this->me17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_i_codigo"]:$this->me17_i_codigo);
+       $this->me17_f_quant = ($this->me17_f_quant === 0 || $this->me17_f_quant === 0.0 || $this->me17_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_f_quant"]:$this->me17_f_quant);
+       $this->me17_i_unidade = ($this->me17_i_unidade === 0 || $this->me17_i_unidade === 0.0 || $this->me17_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_i_unidade"]:$this->me17_i_unidade);
+       $this->me17_i_item = ($this->me17_i_item === 0 || $this->me17_i_item === 0.0 || $this->me17_i_item == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_i_item"]:$this->me17_i_item);
+       $this->me17_i_merrequi = ($this->me17_i_merrequi === 0 || $this->me17_i_merrequi === 0.0 || $this->me17_i_merrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_i_merrequi"]:$this->me17_i_merrequi);
      }else{
-       $this->me17_i_codigo = ($this->me17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_i_codigo"]:$this->me17_i_codigo);
+       $this->me17_i_codigo = ($this->me17_i_codigo === 0 || $this->me17_i_codigo === 0.0 || $this->me17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me17_i_codigo"]:$this->me17_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_mer_requiitem_ext {
          $this->me17_i_codigo = $me17_i_codigo; 
        }
      }
-     if(($this->me17_i_codigo == null) || ($this->me17_i_codigo == "") ){ 
+     if(($this->me17_i_codigo == null) || ($this->me17_i_codigo === 0 || $this->me17_i_codigo === 0.0 || $this->me17_i_codigo == "") ){ 
        $this->erro_sql = " Campo me17_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_mer_requiitem_ext {
    function sql_query ( $me17_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_mer_requiitem_ext {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -461,7 +461,7 @@ class cl_mer_requiitem_ext {
    function sql_query_file ( $me17_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_mer_requiitem_ext {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

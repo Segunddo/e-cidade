@@ -52,7 +52,7 @@ class cl_matpedidotransf {
                  m100_matestoqueini = int8 = Estoque 
                  ";
    //funcao construtor da classe 
-   function cl_matpedidotransf() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matpedidotransf"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_matpedidotransf {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m100_sequencial = ($this->m100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m100_sequencial"]:$this->m100_sequencial);
-       $this->m100_matpedidoitem = ($this->m100_matpedidoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m100_matpedidoitem"]:$this->m100_matpedidoitem);
-       $this->m100_matestoqueini = ($this->m100_matestoqueini == ""?@$GLOBALS["HTTP_POST_VARS"]["m100_matestoqueini"]:$this->m100_matestoqueini);
+       $this->m100_sequencial = ($this->m100_sequencial === 0 || $this->m100_sequencial === 0.0 || $this->m100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m100_sequencial"]:$this->m100_sequencial);
+       $this->m100_matpedidoitem = ($this->m100_matpedidoitem === 0 || $this->m100_matpedidoitem === 0.0 || $this->m100_matpedidoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m100_matpedidoitem"]:$this->m100_matpedidoitem);
+       $this->m100_matestoqueini = ($this->m100_matestoqueini === 0 || $this->m100_matestoqueini === 0.0 || $this->m100_matestoqueini == ""?@$GLOBALS["HTTP_POST_VARS"]["m100_matestoqueini"]:$this->m100_matestoqueini);
      }else{
-       $this->m100_sequencial = ($this->m100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m100_sequencial"]:$this->m100_sequencial);
+       $this->m100_sequencial = ($this->m100_sequencial === 0 || $this->m100_sequencial === 0.0 || $this->m100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m100_sequencial"]:$this->m100_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_matpedidotransf {
          $this->m100_sequencial = $m100_sequencial; 
        }
      }
-     if(($this->m100_sequencial == null) || ($this->m100_sequencial == "") ){ 
+     if(($this->m100_sequencial == null) || ($this->m100_sequencial === 0 || $this->m100_sequencial === 0.0 || $this->m100_sequencial == "") ){ 
        $this->erro_sql = " Campo m100_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -361,7 +361,7 @@ class cl_matpedidotransf {
    function sql_query ( $m100_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_matpedidotransf {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_matpedidotransf {
  function sql_query_inill ( $m100_matestoqueini=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_matpedidotransf {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_matpedidotransf {
    function sql_query_file ( $m100_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_matpedidotransf {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

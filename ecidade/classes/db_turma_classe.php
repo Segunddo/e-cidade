@@ -80,7 +80,7 @@ class cl_turma {
                  Matriculados = int8 = Matriculados
                  ";
    //funcao construtor da classe
-   function cl_turma() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("turma");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -97,24 +97,24 @@ class cl_turma {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed57_i_codigo = ($this->ed57_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_codigo"]:$this->ed57_i_codigo);
-       $this->ed57_i_escola = ($this->ed57_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_escola"]:$this->ed57_i_escola);
-       $this->ed57_i_calendario = ($this->ed57_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_calendario"]:$this->ed57_i_calendario);
+       $this->ed57_i_codigo = ($this->ed57_i_codigo === 0 || $this->ed57_i_codigo === 0.0 || $this->ed57_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_codigo"]:$this->ed57_i_codigo);
+       $this->ed57_i_escola = ($this->ed57_i_escola === 0 || $this->ed57_i_escola === 0.0 || $this->ed57_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_escola"]:$this->ed57_i_escola);
+       $this->ed57_i_calendario = ($this->ed57_i_calendario === 0 || $this->ed57_i_calendario === 0.0 || $this->ed57_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_calendario"]:$this->ed57_i_calendario);
        $this->ed57_c_descr = ($this->ed57_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_c_descr"]:$this->ed57_c_descr);
-       $this->ed57_i_base = ($this->ed57_i_base == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_base"]:$this->ed57_i_base);
-       $this->ed57_i_turno = ($this->ed57_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_turno"]:$this->ed57_i_turno);
-       $this->ed57_i_sala = ($this->ed57_i_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_sala"]:$this->ed57_i_sala);
+       $this->ed57_i_base = ($this->ed57_i_base === 0 || $this->ed57_i_base === 0.0 || $this->ed57_i_base == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_base"]:$this->ed57_i_base);
+       $this->ed57_i_turno = ($this->ed57_i_turno === 0 || $this->ed57_i_turno === 0.0 || $this->ed57_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_turno"]:$this->ed57_i_turno);
+       $this->ed57_i_sala = ($this->ed57_i_sala === 0 || $this->ed57_i_sala === 0.0 || $this->ed57_i_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_sala"]:$this->ed57_i_sala);
        $this->ed57_c_medfreq = ($this->ed57_c_medfreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_c_medfreq"]:$this->ed57_c_medfreq);
        $this->ed57_t_obs = ($this->ed57_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_t_obs"]:$this->ed57_t_obs);
-       $this->ed57_i_codigoinep = ($this->ed57_i_codigoinep == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_codigoinep"]:$this->ed57_i_codigoinep);
-       $this->ed57_i_tipoatend = ($this->ed57_i_tipoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_tipoatend"]:$this->ed57_i_tipoatend);
-       $this->ed57_i_ativqtd = ($this->ed57_i_ativqtd == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_ativqtd"]:$this->ed57_i_ativqtd);
-       $this->ed57_i_censocursoprofiss = ($this->ed57_i_censocursoprofiss == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_censocursoprofiss"]:$this->ed57_i_censocursoprofiss);
-       $this->ed57_i_censoetapa = ($this->ed57_i_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_censoetapa"]:$this->ed57_i_censoetapa);
-       $this->ed57_i_tipoturma = ($this->ed57_i_tipoturma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_tipoturma"]:$this->ed57_i_tipoturma);
+       $this->ed57_i_codigoinep = ($this->ed57_i_codigoinep === 0 || $this->ed57_i_codigoinep === 0.0 || $this->ed57_i_codigoinep == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_codigoinep"]:$this->ed57_i_codigoinep);
+       $this->ed57_i_tipoatend = ($this->ed57_i_tipoatend === 0 || $this->ed57_i_tipoatend === 0.0 || $this->ed57_i_tipoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_tipoatend"]:$this->ed57_i_tipoatend);
+       $this->ed57_i_ativqtd = ($this->ed57_i_ativqtd === 0 || $this->ed57_i_ativqtd === 0.0 || $this->ed57_i_ativqtd == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_ativqtd"]:$this->ed57_i_ativqtd);
+       $this->ed57_i_censocursoprofiss = ($this->ed57_i_censocursoprofiss === 0 || $this->ed57_i_censocursoprofiss === 0.0 || $this->ed57_i_censocursoprofiss == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_censocursoprofiss"]:$this->ed57_i_censocursoprofiss);
+       $this->ed57_i_censoetapa = ($this->ed57_i_censoetapa === 0 || $this->ed57_i_censoetapa === 0.0 || $this->ed57_i_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_censoetapa"]:$this->ed57_i_censoetapa);
+       $this->ed57_i_tipoturma = ($this->ed57_i_tipoturma === 0 || $this->ed57_i_tipoturma === 0.0 || $this->ed57_i_tipoturma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_tipoturma"]:$this->ed57_i_tipoturma);
        $this->ed57_censoprogramamaiseducacao = ($this->ed57_censoprogramamaiseducacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed57_censoprogramamaiseducacao"]:$this->ed57_censoprogramamaiseducacao);
      }else{
-       $this->ed57_i_codigo = ($this->ed57_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_codigo"]:$this->ed57_i_codigo);
+       $this->ed57_i_codigo = ($this->ed57_i_codigo === 0 || $this->ed57_i_codigo === 0.0 || $this->ed57_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed57_i_codigo"]:$this->ed57_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -243,7 +243,7 @@ class cl_turma {
          $this->ed57_i_codigo = $ed57_i_codigo;
        }
      }
-     if(($this->ed57_i_codigo == null) || ($this->ed57_i_codigo == "") ){
+     if(($this->ed57_i_codigo == null) || ($this->ed57_i_codigo === 0 || $this->ed57_i_codigo === 0.0 || $this->ed57_i_codigo == "") ){
        $this->erro_sql = " Campo ed57_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

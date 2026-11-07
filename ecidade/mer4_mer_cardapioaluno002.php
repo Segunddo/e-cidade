@@ -84,7 +84,7 @@ $clmer_cardapioaluno = new cl_mer_cardapioaluno;
 				            $sql   .= "             inner join turma on ed60_i_turma=ed57_i_codigo ";			   
 				            $sql   .= "             WHERE ed60_i_codigo=$alunos[$x]";
                             $result = db_query($sql);
-                            if (pg_num_rows($result)>0) {
+                            if (($result ? pg_num_rows($result) : null)>0) {
                           	  db_fieldsmemory($result,0);
                             }
                           ?>

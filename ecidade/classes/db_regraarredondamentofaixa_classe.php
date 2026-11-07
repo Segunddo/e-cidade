@@ -56,7 +56,7 @@ class cl_regraarredondamentofaixa {
                  ed317_arredondar = varchar(10) = Arredondar 
                  ";
    //funcao construtor da classe 
-   function cl_regraarredondamentofaixa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("regraarredondamentofaixa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_regraarredondamentofaixa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed317_sequencial = ($this->ed317_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_sequencial"]:$this->ed317_sequencial);
-       $this->ed317_regraarredondamento = ($this->ed317_regraarredondamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_regraarredondamento"]:$this->ed317_regraarredondamento);
-       $this->ed317_inicial = ($this->ed317_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_inicial"]:$this->ed317_inicial);
-       $this->ed317_final = ($this->ed317_final == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_final"]:$this->ed317_final);
+       $this->ed317_sequencial = ($this->ed317_sequencial === 0 || $this->ed317_sequencial === 0.0 || $this->ed317_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_sequencial"]:$this->ed317_sequencial);
+       $this->ed317_regraarredondamento = ($this->ed317_regraarredondamento === 0 || $this->ed317_regraarredondamento === 0.0 || $this->ed317_regraarredondamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_regraarredondamento"]:$this->ed317_regraarredondamento);
+       $this->ed317_inicial = ($this->ed317_inicial === 0 || $this->ed317_inicial === 0.0 || $this->ed317_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_inicial"]:$this->ed317_inicial);
+       $this->ed317_final = ($this->ed317_final === 0 || $this->ed317_final === 0.0 || $this->ed317_final == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_final"]:$this->ed317_final);
        $this->ed317_arredondar = ($this->ed317_arredondar == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_arredondar"]:$this->ed317_arredondar);
      }else{
-       $this->ed317_sequencial = ($this->ed317_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_sequencial"]:$this->ed317_sequencial);
+       $this->ed317_sequencial = ($this->ed317_sequencial === 0 || $this->ed317_sequencial === 0.0 || $this->ed317_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed317_sequencial"]:$this->ed317_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_regraarredondamentofaixa {
          $this->ed317_sequencial = $ed317_sequencial; 
        }
      }
-     if(($this->ed317_sequencial == null) || ($this->ed317_sequencial == "") ){ 
+     if(($this->ed317_sequencial == null) || ($this->ed317_sequencial === 0 || $this->ed317_sequencial === 0.0 || $this->ed317_sequencial == "") ){ 
        $this->erro_sql = " Campo ed317_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_regraarredondamentofaixa {
    function sql_query ( $ed317_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_regraarredondamentofaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_regraarredondamentofaixa {
    function sql_query_file ( $ed317_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -478,7 +478,7 @@ class cl_regraarredondamentofaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

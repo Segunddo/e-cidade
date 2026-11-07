@@ -63,7 +63,7 @@ class cl_feriado {
                  ed54_i_evento = int8 = Tipo de Evento 
                  ";
    //funcao construtor da classe 
-   function cl_feriado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("feriado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_feriado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed54_i_codigo = ($this->ed54_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_i_codigo"]:$this->ed54_i_codigo);
-       $this->ed54_i_calendario = ($this->ed54_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_i_calendario"]:$this->ed54_i_calendario);
+       $this->ed54_i_codigo = ($this->ed54_i_codigo === 0 || $this->ed54_i_codigo === 0.0 || $this->ed54_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_i_codigo"]:$this->ed54_i_codigo);
+       $this->ed54_i_calendario = ($this->ed54_i_calendario === 0 || $this->ed54_i_calendario === 0.0 || $this->ed54_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_i_calendario"]:$this->ed54_i_calendario);
        $this->ed54_c_descr = ($this->ed54_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_c_descr"]:$this->ed54_c_descr);
        $this->ed54_c_diasemana = ($this->ed54_c_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_c_diasemana"]:$this->ed54_c_diasemana);
        if($this->ed54_d_data == ""){
@@ -93,9 +93,9 @@ class cl_feriado {
          }
        }
        $this->ed54_c_dialetivo = ($this->ed54_c_dialetivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_c_dialetivo"]:$this->ed54_c_dialetivo);
-       $this->ed54_i_evento = ($this->ed54_i_evento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_i_evento"]:$this->ed54_i_evento);
+       $this->ed54_i_evento = ($this->ed54_i_evento === 0 || $this->ed54_i_evento === 0.0 || $this->ed54_i_evento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_i_evento"]:$this->ed54_i_evento);
      }else{
-       $this->ed54_i_codigo = ($this->ed54_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_i_codigo"]:$this->ed54_i_codigo);
+       $this->ed54_i_codigo = ($this->ed54_i_codigo === 0 || $this->ed54_i_codigo === 0.0 || $this->ed54_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed54_i_codigo"]:$this->ed54_i_codigo);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_feriado {
          $this->ed54_i_codigo = $ed54_i_codigo; 
        }
      }
-     if(($this->ed54_i_codigo == null) || ($this->ed54_i_codigo == "") ){ 
+     if(($this->ed54_i_codigo == null) || ($this->ed54_i_codigo === 0 || $this->ed54_i_codigo === 0.0 || $this->ed54_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed54_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -489,7 +489,7 @@ class cl_feriado {
    function sql_query ( $ed54_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -513,7 +513,7 @@ class cl_feriado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_feriado {
    function sql_query_file ( $ed54_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -546,7 +546,7 @@ class cl_feriado {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

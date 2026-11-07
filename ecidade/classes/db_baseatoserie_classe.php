@@ -52,7 +52,7 @@ class cl_baseatoserie {
                  ed279_i_serie = int4 = Série 
                  ";
    //funcao construtor da classe 
-   function cl_baseatoserie() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("baseatoserie"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_baseatoserie {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed279_i_codigo = ($this->ed279_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed279_i_codigo"]:$this->ed279_i_codigo);
-       $this->ed279_i_baseato = ($this->ed279_i_baseato == ""?@$GLOBALS["HTTP_POST_VARS"]["ed279_i_baseato"]:$this->ed279_i_baseato);
-       $this->ed279_i_serie = ($this->ed279_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed279_i_serie"]:$this->ed279_i_serie);
+       $this->ed279_i_codigo = ($this->ed279_i_codigo === 0 || $this->ed279_i_codigo === 0.0 || $this->ed279_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed279_i_codigo"]:$this->ed279_i_codigo);
+       $this->ed279_i_baseato = ($this->ed279_i_baseato === 0 || $this->ed279_i_baseato === 0.0 || $this->ed279_i_baseato == ""?@$GLOBALS["HTTP_POST_VARS"]["ed279_i_baseato"]:$this->ed279_i_baseato);
+       $this->ed279_i_serie = ($this->ed279_i_serie === 0 || $this->ed279_i_serie === 0.0 || $this->ed279_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed279_i_serie"]:$this->ed279_i_serie);
      }else{
-       $this->ed279_i_codigo = ($this->ed279_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed279_i_codigo"]:$this->ed279_i_codigo);
+       $this->ed279_i_codigo = ($this->ed279_i_codigo === 0 || $this->ed279_i_codigo === 0.0 || $this->ed279_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed279_i_codigo"]:$this->ed279_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_baseatoserie {
          $this->ed279_i_codigo = $ed279_i_codigo; 
        }
      }
-     if(($this->ed279_i_codigo == null) || ($this->ed279_i_codigo == "") ){ 
+     if(($this->ed279_i_codigo == null) || ($this->ed279_i_codigo === 0 || $this->ed279_i_codigo === 0.0 || $this->ed279_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed279_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_baseatoserie {
    function sql_query ( $ed279_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_baseatoserie {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -399,7 +399,7 @@ class cl_baseatoserie {
    function sql_query_file ( $ed279_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_baseatoserie {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

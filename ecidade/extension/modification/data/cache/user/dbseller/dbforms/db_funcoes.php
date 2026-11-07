@@ -1052,7 +1052,7 @@ if (!function_exists("db_select")) {
                 for ($i = 0; $i < sizeof((array)$db_matriz); $i++) {
                     ?>
                     <option
-                        value="<?= key($db_matriz) ?>" <?= (@$GLOBALS[$nomevar] == key($db_matriz) || (@$GLOBALS[$nomevar] === "" && (is_string(key($db_matriz)) && !is_numeric(key($db_matriz)) ? true : key($db_matriz) == 0)) ? "selected" : "") ?>><?= $db_matriz[key($db_matriz)] ?></option>
+                        value="<?= key($db_matriz) ?>" <?= ((((is_int(key($db_matriz)) || is_float(key($db_matriz))) && is_string(@$GLOBALS[$nomevar])) ? key($db_matriz) == (float)@$GLOBALS[$nomevar] : ((is_string(key($db_matriz)) && (is_int(@$GLOBALS[$nomevar]) || is_float(@$GLOBALS[$nomevar]))) ? (float)key($db_matriz) == @$GLOBALS[$nomevar] : @$GLOBALS[$nomevar] == key($db_matriz))) || (@$GLOBALS[$nomevar] === "" && (is_string(key($db_matriz)) && !is_numeric(key($db_matriz)) ? true : key($db_matriz) == 0)) ? "selected" : "") ?>><?= $db_matriz[key($db_matriz)] ?></option>
                     <?php
 
 
@@ -1068,7 +1068,11 @@ if (!function_exists("db_select")) {
 
             if (is_array($db_matriz)) { reset($db_matriz); }
             for ($matsel = 0; $matsel < sizeof((array)$db_matriz); $matsel++) {
-                if (key($db_matriz) == $$nome) {
+                // 5.6: numero == string convertia a string em numero ("" == 0 era true); no 8 compara
+                // como string. (float) reproduz a conversao do 5.6 -- conferido em 12 casos.
+                if (((is_int(key($db_matriz)) || is_float(key($db_matriz))) && is_string($$nome)) ? key($db_matriz) == (float)$$nome
+                    : ((is_string(key($db_matriz)) && (is_int($$nome) || is_float($$nome))) ? (float)key($db_matriz) == $$nome
+                    : key($db_matriz) == $$nome)) {
                     $$nome_select_descr = $db_matriz[key($db_matriz)];
                     $$nome = key($db_matriz);
                 }

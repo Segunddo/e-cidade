@@ -52,7 +52,7 @@ class cl_censocursoprofiss {
                  ed247_i_tipo = int4 = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_censocursoprofiss() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("censocursoprofiss"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_censocursoprofiss {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed247_i_codigo = ($this->ed247_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed247_i_codigo"]:$this->ed247_i_codigo);
+       $this->ed247_i_codigo = ($this->ed247_i_codigo === 0 || $this->ed247_i_codigo === 0.0 || $this->ed247_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed247_i_codigo"]:$this->ed247_i_codigo);
        $this->ed247_c_descr = ($this->ed247_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed247_c_descr"]:$this->ed247_c_descr);
-       $this->ed247_i_tipo = ($this->ed247_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed247_i_tipo"]:$this->ed247_i_tipo);
+       $this->ed247_i_tipo = ($this->ed247_i_tipo === 0 || $this->ed247_i_tipo === 0.0 || $this->ed247_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed247_i_tipo"]:$this->ed247_i_tipo);
      }else{
-       $this->ed247_i_codigo = ($this->ed247_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed247_i_codigo"]:$this->ed247_i_codigo);
+       $this->ed247_i_codigo = ($this->ed247_i_codigo === 0 || $this->ed247_i_codigo === 0.0 || $this->ed247_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed247_i_codigo"]:$this->ed247_i_codigo);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_censocursoprofiss {
        return false;
      }
        $this->ed247_i_codigo = $ed247_i_codigo; 
-     if(($this->ed247_i_codigo == null) || ($this->ed247_i_codigo == "") ){ 
+     if(($this->ed247_i_codigo == null) || ($this->ed247_i_codigo === 0 || $this->ed247_i_codigo === 0.0 || $this->ed247_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed247_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -337,7 +337,7 @@ class cl_censocursoprofiss {
    function sql_query ( $ed247_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -358,7 +358,7 @@ class cl_censocursoprofiss {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -371,7 +371,7 @@ class cl_censocursoprofiss {
    function sql_query_file ( $ed247_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_censocursoprofiss {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

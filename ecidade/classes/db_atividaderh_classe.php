@@ -61,19 +61,19 @@ class cl_atividaderh
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed01_i_codigo = ($this->ed01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_i_codigo"]:$this->ed01_i_codigo);
+       $this->ed01_i_codigo = ($this->ed01_i_codigo === 0 || $this->ed01_i_codigo === 0.0 || $this->ed01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_i_codigo"]:$this->ed01_i_codigo);
        $this->ed01_c_descr = ($this->ed01_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_c_descr"]:$this->ed01_c_descr);
        $this->ed01_c_regencia = ($this->ed01_c_regencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_c_regencia"]:$this->ed01_c_regencia);
        $this->ed01_c_atualiz = ($this->ed01_c_atualiz == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_c_atualiz"]:$this->ed01_c_atualiz);
        $this->ed01_c_docencia = ($this->ed01_c_docencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_c_docencia"]:$this->ed01_c_docencia);
        $this->ed01_c_exigeato = ($this->ed01_c_exigeato == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_c_exigeato"]:$this->ed01_c_exigeato);
        $this->ed01_c_efetividade = ($this->ed01_c_efetividade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_c_efetividade"]:$this->ed01_c_efetividade);
-       $this->ed01_i_funcaoadmin = ($this->ed01_i_funcaoadmin == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_i_funcaoadmin"]:$this->ed01_i_funcaoadmin);
-       $this->ed01_funcaoatividade = ($this->ed01_funcaoatividade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_funcaoatividade"]:$this->ed01_funcaoatividade);
+       $this->ed01_i_funcaoadmin = ($this->ed01_i_funcaoadmin === 0 || $this->ed01_i_funcaoadmin === 0.0 || $this->ed01_i_funcaoadmin == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_i_funcaoadmin"]:$this->ed01_i_funcaoadmin);
+       $this->ed01_funcaoatividade = ($this->ed01_funcaoatividade === 0 || $this->ed01_funcaoatividade === 0.0 || $this->ed01_funcaoatividade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_funcaoatividade"]:$this->ed01_funcaoatividade);
        $this->ed01_atividadeescolar = ($this->ed01_atividadeescolar == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_atividadeescolar"]:$this->ed01_atividadeescolar);
-       $this->ed01_permissao_diario = ($this->ed01_permissao_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_permissao_diario"]:$this->ed01_permissao_diario);
+       $this->ed01_permissao_diario = ($this->ed01_permissao_diario === 0 || $this->ed01_permissao_diario === 0.0 || $this->ed01_permissao_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_permissao_diario"]:$this->ed01_permissao_diario);
      }else{
-       $this->ed01_i_codigo = ($this->ed01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_i_codigo"]:$this->ed01_i_codigo);
+       $this->ed01_i_codigo = ($this->ed01_i_codigo === 0 || $this->ed01_i_codigo === 0.0 || $this->ed01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_i_codigo"]:$this->ed01_i_codigo);
      }
    }
 
@@ -194,7 +194,7 @@ class cl_atividaderh
          $this->ed01_i_codigo = $ed01_i_codigo; 
        }
      }
-     if(($this->ed01_i_codigo == null) || ($this->ed01_i_codigo == "") ){ 
+     if(($this->ed01_i_codigo == null) || ($this->ed01_i_codigo === 0 || $this->ed01_i_codigo === 0.0 || $this->ed01_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed01_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

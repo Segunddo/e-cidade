@@ -28,7 +28,8 @@
 require_once(modification("fpdf151/scpdf.php"));
 require_once(modification("classes/db_carteira_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clcarteira = new cl_carteira;
 $prop       = explode(",",$lista);
 $pdf        = new scpdf();

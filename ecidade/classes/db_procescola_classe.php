@@ -52,7 +52,7 @@ class cl_procescola {
                  ed86_i_procedimento = int8 = Procedimento 
                  ";
    //funcao construtor da classe 
-   function cl_procescola() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procescola"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]."?ed86_i_procedimento=".@$GLOBALS["HTTP_POST_VARS"]["ed86_i_procedimento"]."&ed40_c_descr=".@$GLOBALS["HTTP_POST_VARS"]["ed40_c_descr"]);
@@ -69,11 +69,11 @@ class cl_procescola {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed86_i_codigo = ($this->ed86_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed86_i_codigo"]:$this->ed86_i_codigo);
-       $this->ed86_i_escola = ($this->ed86_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed86_i_escola"]:$this->ed86_i_escola);
-       $this->ed86_i_procedimento = ($this->ed86_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed86_i_procedimento"]:$this->ed86_i_procedimento);
+       $this->ed86_i_codigo = ($this->ed86_i_codigo === 0 || $this->ed86_i_codigo === 0.0 || $this->ed86_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed86_i_codigo"]:$this->ed86_i_codigo);
+       $this->ed86_i_escola = ($this->ed86_i_escola === 0 || $this->ed86_i_escola === 0.0 || $this->ed86_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed86_i_escola"]:$this->ed86_i_escola);
+       $this->ed86_i_procedimento = ($this->ed86_i_procedimento === 0 || $this->ed86_i_procedimento === 0.0 || $this->ed86_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed86_i_procedimento"]:$this->ed86_i_procedimento);
      }else{
-       $this->ed86_i_codigo = ($this->ed86_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed86_i_codigo"]:$this->ed86_i_codigo);
+       $this->ed86_i_codigo = ($this->ed86_i_codigo === 0 || $this->ed86_i_codigo === 0.0 || $this->ed86_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed86_i_codigo"]:$this->ed86_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procescola {
          $this->ed86_i_codigo = $ed86_i_codigo; 
        }
      }
-     if(($this->ed86_i_codigo == null) || ($this->ed86_i_codigo == "") ){ 
+     if(($this->ed86_i_codigo == null) || ($this->ed86_i_codigo === 0 || $this->ed86_i_codigo === 0.0 || $this->ed86_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed86_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_procescola {
    function sql_query ( $ed86_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -386,7 +386,7 @@ class cl_procescola {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_procescola {
    function sql_query_file ( $ed86_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_procescola {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

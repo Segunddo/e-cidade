@@ -57,7 +57,7 @@ class cl_matriculadependencia {
                  ed297_turma = int4 = Turma 
                  ";
    //funcao construtor da classe 
-   function cl_matriculadependencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matriculadependencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,7 +74,7 @@ class cl_matriculadependencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed297_sequencial = ($this->ed297_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed297_sequencial"]:$this->ed297_sequencial);
+       $this->ed297_sequencial = ($this->ed297_sequencial === 0 || $this->ed297_sequencial === 0.0 || $this->ed297_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed297_sequencial"]:$this->ed297_sequencial);
        if($this->ed297_data == ""){
          $this->ed297_data_dia = ($this->ed297_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed297_data_dia"]:$this->ed297_data_dia);
          $this->ed297_data_mes = ($this->ed297_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed297_data_mes"]:$this->ed297_data_mes);
@@ -83,10 +83,10 @@ class cl_matriculadependencia {
             $this->ed297_data = $this->ed297_data_ano."-".$this->ed297_data_mes."-".$this->ed297_data_dia;
          }
        }
-       $this->ed297_matricula = ($this->ed297_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed297_matricula"]:$this->ed297_matricula);
-       $this->ed297_turma = ($this->ed297_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed297_turma"]:$this->ed297_turma);
+       $this->ed297_matricula = ($this->ed297_matricula === 0 || $this->ed297_matricula === 0.0 || $this->ed297_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed297_matricula"]:$this->ed297_matricula);
+       $this->ed297_turma = ($this->ed297_turma === 0 || $this->ed297_turma === 0.0 || $this->ed297_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed297_turma"]:$this->ed297_turma);
      }else{
-       $this->ed297_sequencial = ($this->ed297_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed297_sequencial"]:$this->ed297_sequencial);
+       $this->ed297_sequencial = ($this->ed297_sequencial === 0 || $this->ed297_sequencial === 0.0 || $this->ed297_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed297_sequencial"]:$this->ed297_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_matriculadependencia {
          $this->ed297_sequencial = $ed297_sequencial; 
        }
      }
-     if(($this->ed297_sequencial == null) || ($this->ed297_sequencial == "") ){ 
+     if(($this->ed297_sequencial == null) || ($this->ed297_sequencial === 0 || $this->ed297_sequencial === 0.0 || $this->ed297_sequencial == "") ){ 
        $this->erro_sql = " Campo ed297_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -415,7 +415,7 @@ class cl_matriculadependencia {
    function sql_query ( $ed297_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_matriculadependencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_matriculadependencia {
    function sql_query_file ( $ed297_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_matriculadependencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -496,7 +496,7 @@ class cl_matriculadependencia {
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
@@ -537,7 +537,7 @@ class cl_matriculadependencia {
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
@@ -558,7 +558,7 @@ function sql_query_disciplina($iCodigo = null, $sCampos = '*', $sOrdem = null, $
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
@@ -593,7 +593,7 @@ function sql_query_disciplina($iCodigo = null, $sCampos = '*', $sOrdem = null, $
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {

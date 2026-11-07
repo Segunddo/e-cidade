@@ -36,7 +36,8 @@ include(modification("classes/db_alunoaltcampos_classe.php"));
 include(modification("classes/db_alunoaltconf_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("libs/db_jsplibwebseller.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $claluno = new cl_aluno;
 $clalunoalt = new cl_alunoalt;
@@ -60,7 +61,7 @@ if(isset($confirmar)){
  exit;
 }
 $result = db_query("SELECT ed47_v_nome FROM aluno WHERE ed47_i_codigo = $aluno");
-$nomealuno = trim(pg_result($result,0,0));
+$nomealuno = trim(($result ? pg_result($result,0,0) : null));
 function NomeUsuario($usuario){
  if($usuario!=""){
   $result = db_query("SELECT nome FROM db_usuarios WHERE id_usuario = $usuario");
@@ -103,7 +104,7 @@ $array_modulo = array("1"=>"ESCOLA","2"=>"BIBLIOTECA");
              ORDER BY ed275_i_data DESC
             ";
     $result3 = db_query($sql3);
-    for($x=0;$x<pg_num_rows($result3);$x++){
+    for($x=0;$x<($result3 ? pg_num_rows($result3) : null);$x++){
      db_fieldsmemory($result3,$x);
      $codigo_alunoalt .= $sep.$ed275_i_codigo;
      $sep = ",";
@@ -140,7 +141,7 @@ $array_modulo = array("1"=>"ESCOLA","2"=>"BIBLIOTECA");
       ?>
       <tr bgcolor="#f3f3f3">
        <td>&nbsp;</td>
-       <td><?=$$label_aluno?></td>
+       <td><?=${$label_aluno}?></td>
        <td><?=$ed276_c_contant==""?"&nbsp;":$ed276_c_contant?></td>
        <td><?=$ed276_c_contatual==""?"&nbsp;":$ed276_c_contatual?></td>
       </tr>

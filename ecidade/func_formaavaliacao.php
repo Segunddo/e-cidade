@@ -37,7 +37,8 @@ require_once (modification("classes/db_formaavaliacao_classe.php"));
 $lAcessadoEscola = isModuloEscola();
 
 db_postmemory($_POST);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clformaavaliacao = new cl_formaavaliacao;
 $clformaavaliacao->rotulo->label("ed37_i_codigo");

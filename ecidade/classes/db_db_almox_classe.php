@@ -50,7 +50,7 @@ class cl_db_almox {
                  m91_depto = int4 = Depart.
                  ";
    //funcao construtor da classe
-   function cl_db_almox() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_almox");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_db_almox {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m91_codigo = ($this->m91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m91_codigo"]:$this->m91_codigo);
-       $this->m91_depto = ($this->m91_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m91_depto"]:$this->m91_depto);
+       $this->m91_codigo = ($this->m91_codigo === 0 || $this->m91_codigo === 0.0 || $this->m91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m91_codigo"]:$this->m91_codigo);
+       $this->m91_depto = ($this->m91_depto === 0 || $this->m91_depto === 0.0 || $this->m91_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m91_depto"]:$this->m91_depto);
      }else{
-       $this->m91_codigo = ($this->m91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m91_codigo"]:$this->m91_codigo);
+       $this->m91_codigo = ($this->m91_codigo === 0 || $this->m91_codigo === 0.0 || $this->m91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m91_codigo"]:$this->m91_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_db_almox {
          $this->m91_codigo = $m91_codigo;
        }
      }
-     if(($this->m91_codigo == null) || ($this->m91_codigo == "") ){
+     if(($this->m91_codigo == null) || ($this->m91_codigo === 0 || $this->m91_codigo === 0.0 || $this->m91_codigo == "") ){
        $this->erro_sql = " Campo m91_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

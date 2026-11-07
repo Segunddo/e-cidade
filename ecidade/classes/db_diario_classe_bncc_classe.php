@@ -54,9 +54,9 @@ class cl_diario_classe_bncc
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed155_codigo = ($this->ed155_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_codigo"]:$this->ed155_codigo);
-       $this->ed155_regencia = ($this->ed155_regencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_regencia"]:$this->ed155_regencia);
-       $this->ed155_db_usuarios = ($this->ed155_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_db_usuarios"]:$this->ed155_db_usuarios);
+       $this->ed155_codigo = ($this->ed155_codigo === 0 || $this->ed155_codigo === 0.0 || $this->ed155_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_codigo"]:$this->ed155_codigo);
+       $this->ed155_regencia = ($this->ed155_regencia === 0 || $this->ed155_regencia === 0.0 || $this->ed155_regencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_regencia"]:$this->ed155_regencia);
+       $this->ed155_db_usuarios = ($this->ed155_db_usuarios === 0 || $this->ed155_db_usuarios === 0.0 || $this->ed155_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_db_usuarios"]:$this->ed155_db_usuarios);
        if($this->ed155_data == ""){
          $this->ed155_data_dia = ($this->ed155_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_data_dia"]:$this->ed155_data_dia);
          $this->ed155_data_mes = ($this->ed155_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_data_mes"]:$this->ed155_data_mes);
@@ -68,7 +68,7 @@ class cl_diario_classe_bncc
        $this->ed155_conteudo = ($this->ed155_conteudo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_conteudo"]:$this->ed155_conteudo);
        $this->ed155_turmaturnoreferente = ($this->ed155_turmaturnoreferente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_turmaturnoreferente"]:$this->ed155_turmaturnoreferente);
      }else{
-       $this->ed155_codigo = ($this->ed155_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_codigo"]:$this->ed155_codigo);
+       $this->ed155_codigo = ($this->ed155_codigo === 0 || $this->ed155_codigo === 0.0 || $this->ed155_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed155_codigo"]:$this->ed155_codigo);
      }
    }
 
@@ -138,7 +138,7 @@ class cl_diario_classe_bncc
          $this->ed155_codigo = $ed155_codigo;
        }
      }
-     if(($this->ed155_codigo == null) || ($this->ed155_codigo == "") ){
+     if(($this->ed155_codigo == null) || ($this->ed155_codigo === 0 || $this->ed155_codigo === 0.0 || $this->ed155_codigo == "") ){
        $this->erro_sql = " Campo ed155_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

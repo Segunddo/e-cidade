@@ -65,7 +65,7 @@ class cl_turmalog {
                  ed287_i_codigoant = int4 = Código Anterior 
                  ";
    //funcao construtor da classe 
-   function cl_turmalog() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("turmalog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,9 +82,9 @@ class cl_turmalog {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed287_i_codigo = ($this->ed287_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_codigo"]:$this->ed287_i_codigo);
-       $this->ed287_i_turma = ($this->ed287_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_turma"]:$this->ed287_i_turma);
-       $this->ed287_i_usuario = ($this->ed287_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_usuario"]:$this->ed287_i_usuario);
+       $this->ed287_i_codigo = ($this->ed287_i_codigo === 0 || $this->ed287_i_codigo === 0.0 || $this->ed287_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_codigo"]:$this->ed287_i_codigo);
+       $this->ed287_i_turma = ($this->ed287_i_turma === 0 || $this->ed287_i_turma === 0.0 || $this->ed287_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_turma"]:$this->ed287_i_turma);
+       $this->ed287_i_usuario = ($this->ed287_i_usuario === 0 || $this->ed287_i_usuario === 0.0 || $this->ed287_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_usuario"]:$this->ed287_i_usuario);
        if($this->ed287_d_data == ""){
          $this->ed287_d_data_dia = ($this->ed287_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_d_data_dia"]:$this->ed287_d_data_dia);
          $this->ed287_d_data_mes = ($this->ed287_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_d_data_mes"]:$this->ed287_d_data_mes);
@@ -94,11 +94,11 @@ class cl_turmalog {
          }
        }
        $this->ed287_c_hora = ($this->ed287_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_c_hora"]:$this->ed287_c_hora);
-       $this->ed287_i_escola = ($this->ed287_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_escola"]:$this->ed287_i_escola);
-       $this->ed287_i_tipoturma = ($this->ed287_i_tipoturma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_tipoturma"]:$this->ed287_i_tipoturma);
-       $this->ed287_i_codigoant = ($this->ed287_i_codigoant == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_codigoant"]:$this->ed287_i_codigoant);
+       $this->ed287_i_escola = ($this->ed287_i_escola === 0 || $this->ed287_i_escola === 0.0 || $this->ed287_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_escola"]:$this->ed287_i_escola);
+       $this->ed287_i_tipoturma = ($this->ed287_i_tipoturma === 0 || $this->ed287_i_tipoturma === 0.0 || $this->ed287_i_tipoturma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_tipoturma"]:$this->ed287_i_tipoturma);
+       $this->ed287_i_codigoant = ($this->ed287_i_codigoant === 0 || $this->ed287_i_codigoant === 0.0 || $this->ed287_i_codigoant == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_codigoant"]:$this->ed287_i_codigoant);
      }else{
-       $this->ed287_i_codigo = ($this->ed287_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_codigo"]:$this->ed287_i_codigo);
+       $this->ed287_i_codigo = ($this->ed287_i_codigo === 0 || $this->ed287_i_codigo === 0.0 || $this->ed287_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed287_i_codigo"]:$this->ed287_i_codigo);
      }
    }
    // funcao para inclusao
@@ -191,7 +191,7 @@ class cl_turmalog {
          $this->ed287_i_codigo = $ed287_i_codigo; 
        }
      }
-     if(($this->ed287_i_codigo == null) || ($this->ed287_i_codigo == "") ){ 
+     if(($this->ed287_i_codigo == null) || ($this->ed287_i_codigo === 0 || $this->ed287_i_codigo === 0.0 || $this->ed287_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed287_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -540,7 +540,7 @@ class cl_turmalog {
    function sql_query ( $ed287_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -565,7 +565,7 @@ class cl_turmalog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -578,7 +578,7 @@ class cl_turmalog {
    function sql_query_file ( $ed287_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -599,7 +599,7 @@ class cl_turmalog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

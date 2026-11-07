@@ -50,7 +50,7 @@ class cl_rhcadregime {
                  rh52_descr = varchar(20) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_rhcadregime() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhcadregime"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_rhcadregime {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh52_regime = ($this->rh52_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh52_regime"]:$this->rh52_regime);
+       $this->rh52_regime = ($this->rh52_regime === 0 || $this->rh52_regime === 0.0 || $this->rh52_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh52_regime"]:$this->rh52_regime);
        $this->rh52_descr = ($this->rh52_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh52_descr"]:$this->rh52_descr);
      }else{
-       $this->rh52_regime = ($this->rh52_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh52_regime"]:$this->rh52_regime);
+       $this->rh52_regime = ($this->rh52_regime === 0 || $this->rh52_regime === 0.0 || $this->rh52_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["rh52_regime"]:$this->rh52_regime);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhcadregime {
        return false;
      }
        $this->rh52_regime = $rh52_regime; 
-     if(($this->rh52_regime == null) || ($this->rh52_regime == "") ){ 
+     if(($this->rh52_regime == null) || ($this->rh52_regime === 0 || $this->rh52_regime === 0.0 || $this->rh52_regime == "") ){ 
        $this->erro_sql = " Campo rh52_regime nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_rhcadregime {
    function sql_query ( $rh52_regime=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -326,7 +326,7 @@ class cl_rhcadregime {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -338,7 +338,7 @@ class cl_rhcadregime {
    function sql_query_file ( $rh52_regime=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -359,7 +359,7 @@ class cl_rhcadregime {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -373,7 +373,7 @@ class cl_rhcadregime {
     
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_rhcadregime {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

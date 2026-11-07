@@ -60,7 +60,7 @@ class cl_matestoquedevitem {
                  m46_quantexistia = float8 = Quant. Existia 
                  ";
    //funcao construtor da classe 
-   function cl_matestoquedevitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matestoquedevitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_matestoquedevitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m46_codigo = ($this->m46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codigo"]:$this->m46_codigo);
-       $this->m46_codmatestoquedev = ($this->m46_codmatestoquedev == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatestoquedev"]:$this->m46_codmatestoquedev);
-       $this->m46_codmatrequiitem = ($this->m46_codmatrequiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatrequiitem"]:$this->m46_codmatrequiitem);
-       $this->m46_codatendrequiitem = ($this->m46_codatendrequiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codatendrequiitem"]:$this->m46_codatendrequiitem);
-       $this->m46_codmatmater = ($this->m46_codmatmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatmater"]:$this->m46_codmatmater);
-       $this->m46_quantdev = ($this->m46_quantdev == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_quantdev"]:$this->m46_quantdev);
-       $this->m46_quantexistia = ($this->m46_quantexistia == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_quantexistia"]:$this->m46_quantexistia);
+       $this->m46_codigo = ($this->m46_codigo === 0 || $this->m46_codigo === 0.0 || $this->m46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codigo"]:$this->m46_codigo);
+       $this->m46_codmatestoquedev = ($this->m46_codmatestoquedev === 0 || $this->m46_codmatestoquedev === 0.0 || $this->m46_codmatestoquedev == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatestoquedev"]:$this->m46_codmatestoquedev);
+       $this->m46_codmatrequiitem = ($this->m46_codmatrequiitem === 0 || $this->m46_codmatrequiitem === 0.0 || $this->m46_codmatrequiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatrequiitem"]:$this->m46_codmatrequiitem);
+       $this->m46_codatendrequiitem = ($this->m46_codatendrequiitem === 0 || $this->m46_codatendrequiitem === 0.0 || $this->m46_codatendrequiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codatendrequiitem"]:$this->m46_codatendrequiitem);
+       $this->m46_codmatmater = ($this->m46_codmatmater === 0 || $this->m46_codmatmater === 0.0 || $this->m46_codmatmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatmater"]:$this->m46_codmatmater);
+       $this->m46_quantdev = ($this->m46_quantdev === 0 || $this->m46_quantdev === 0.0 || $this->m46_quantdev == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_quantdev"]:$this->m46_quantdev);
+       $this->m46_quantexistia = ($this->m46_quantexistia === 0 || $this->m46_quantexistia === 0.0 || $this->m46_quantexistia == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_quantexistia"]:$this->m46_quantexistia);
      }else{
-       $this->m46_codigo = ($this->m46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codigo"]:$this->m46_codigo);
+       $this->m46_codigo = ($this->m46_codigo === 0 || $this->m46_codigo === 0.0 || $this->m46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codigo"]:$this->m46_codigo);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_matestoquedevitem {
          $this->m46_codigo = $m46_codigo; 
        }
      }
-     if(($this->m46_codigo == null) || ($this->m46_codigo == "") ){ 
+     if(($this->m46_codigo == null) || ($this->m46_codigo === 0 || $this->m46_codigo === 0.0 || $this->m46_codigo == "") ){ 
        $this->erro_sql = " Campo m46_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -483,7 +483,7 @@ class cl_matestoquedevitem {
    function sql_query ( $m46_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -517,7 +517,7 @@ class cl_matestoquedevitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -529,7 +529,7 @@ class cl_matestoquedevitem {
    function sql_query_file ( $m46_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -550,7 +550,7 @@ class cl_matestoquedevitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

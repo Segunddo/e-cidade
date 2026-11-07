@@ -58,7 +58,7 @@ class cl_turmaserieregimemat {
                  ed220_c_aprovauto = char(1) = Aprovação Automática 
                  ";
    //funcao construtor da classe 
-   function cl_turmaserieregimemat() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("turmaserieregimemat"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_turmaserieregimemat {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed220_i_codigo = ($this->ed220_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_codigo"]:$this->ed220_i_codigo);
-       $this->ed220_i_turma = ($this->ed220_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_turma"]:$this->ed220_i_turma);
-       $this->ed220_i_serieregimemat = ($this->ed220_i_serieregimemat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_serieregimemat"]:$this->ed220_i_serieregimemat);
+       $this->ed220_i_codigo = ($this->ed220_i_codigo === 0 || $this->ed220_i_codigo === 0.0 || $this->ed220_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_codigo"]:$this->ed220_i_codigo);
+       $this->ed220_i_turma = ($this->ed220_i_turma === 0 || $this->ed220_i_turma === 0.0 || $this->ed220_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_turma"]:$this->ed220_i_turma);
+       $this->ed220_i_serieregimemat = ($this->ed220_i_serieregimemat === 0 || $this->ed220_i_serieregimemat === 0.0 || $this->ed220_i_serieregimemat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_serieregimemat"]:$this->ed220_i_serieregimemat);
        $this->ed220_c_historico = ($this->ed220_c_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_c_historico"]:$this->ed220_c_historico);
-       $this->ed220_i_procedimento = ($this->ed220_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_procedimento"]:$this->ed220_i_procedimento);
+       $this->ed220_i_procedimento = ($this->ed220_i_procedimento === 0 || $this->ed220_i_procedimento === 0.0 || $this->ed220_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_procedimento"]:$this->ed220_i_procedimento);
        $this->ed220_c_aprovauto = ($this->ed220_c_aprovauto == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_c_aprovauto"]:$this->ed220_c_aprovauto);
      }else{
-       $this->ed220_i_codigo = ($this->ed220_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_codigo"]:$this->ed220_i_codigo);
+       $this->ed220_i_codigo = ($this->ed220_i_codigo === 0 || $this->ed220_i_codigo === 0.0 || $this->ed220_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed220_i_codigo"]:$this->ed220_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_turmaserieregimemat {
          $this->ed220_i_codigo = $ed220_i_codigo; 
        }
      }
-     if(($this->ed220_i_codigo == null) || ($this->ed220_i_codigo == "") ){ 
+     if(($this->ed220_i_codigo == null) || ($this->ed220_i_codigo === 0 || $this->ed220_i_codigo === 0.0 || $this->ed220_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed220_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

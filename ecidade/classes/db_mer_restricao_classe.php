@@ -50,7 +50,7 @@ class cl_mer_restricao {
                  me24_i_aluno = int4 = Aluno 
                  ";
    //funcao construtor da classe 
-   function cl_mer_restricao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_restricao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_mer_restricao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me24_i_codigo = ($this->me24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me24_i_codigo"]:$this->me24_i_codigo);
-       $this->me24_i_aluno = ($this->me24_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["me24_i_aluno"]:$this->me24_i_aluno);
+       $this->me24_i_codigo = ($this->me24_i_codigo === 0 || $this->me24_i_codigo === 0.0 || $this->me24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me24_i_codigo"]:$this->me24_i_codigo);
+       $this->me24_i_aluno = ($this->me24_i_aluno === 0 || $this->me24_i_aluno === 0.0 || $this->me24_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["me24_i_aluno"]:$this->me24_i_aluno);
      }else{
-       $this->me24_i_codigo = ($this->me24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me24_i_codigo"]:$this->me24_i_codigo);
+       $this->me24_i_codigo = ($this->me24_i_codigo === 0 || $this->me24_i_codigo === 0.0 || $this->me24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me24_i_codigo"]:$this->me24_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_mer_restricao {
          $this->me24_i_codigo = $me24_i_codigo; 
        }
      }
-     if(($this->me24_i_codigo == null) || ($this->me24_i_codigo == "") ){ 
+     if(($this->me24_i_codigo == null) || ($this->me24_i_codigo === 0 || $this->me24_i_codigo === 0.0 || $this->me24_i_codigo == "") ){ 
        $this->erro_sql = " Campo me24_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_mer_restricao {
    function sql_query ( $me24_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -355,7 +355,7 @@ class cl_mer_restricao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -368,7 +368,7 @@ class cl_mer_restricao {
    function sql_query_file ( $me24_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_mer_restricao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

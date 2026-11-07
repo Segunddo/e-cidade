@@ -76,10 +76,10 @@ class cl_regencia
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed59_i_codigo = ($this->ed59_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_codigo"]:$this->ed59_i_codigo);
-       $this->ed59_i_turma = ($this->ed59_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_turma"]:$this->ed59_i_turma);
-       $this->ed59_i_disciplina = ($this->ed59_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_disciplina"]:$this->ed59_i_disciplina);
-       $this->ed59_i_qtdperiodo = ($this->ed59_i_qtdperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_qtdperiodo"]:$this->ed59_i_qtdperiodo);
+       $this->ed59_i_codigo = ($this->ed59_i_codigo === 0 || $this->ed59_i_codigo === 0.0 || $this->ed59_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_codigo"]:$this->ed59_i_codigo);
+       $this->ed59_i_turma = ($this->ed59_i_turma === 0 || $this->ed59_i_turma === 0.0 || $this->ed59_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_turma"]:$this->ed59_i_turma);
+       $this->ed59_i_disciplina = ($this->ed59_i_disciplina === 0 || $this->ed59_i_disciplina === 0.0 || $this->ed59_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_disciplina"]:$this->ed59_i_disciplina);
+       $this->ed59_i_qtdperiodo = ($this->ed59_i_qtdperiodo === 0 || $this->ed59_i_qtdperiodo === 0.0 || $this->ed59_i_qtdperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_qtdperiodo"]:$this->ed59_i_qtdperiodo);
        $this->ed59_c_condicao = ($this->ed59_c_condicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_c_condicao"]:$this->ed59_c_condicao);
        $this->ed59_c_freqglob = ($this->ed59_c_freqglob == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_c_freqglob"]:$this->ed59_c_freqglob);
        $this->ed59_c_ultatualiz = ($this->ed59_c_ultatualiz == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_c_ultatualiz"]:$this->ed59_c_ultatualiz);
@@ -92,16 +92,16 @@ class cl_regencia
          }
        }
        $this->ed59_c_encerrada = ($this->ed59_c_encerrada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_c_encerrada"]:$this->ed59_c_encerrada);
-       $this->ed59_i_ordenacao = ($this->ed59_i_ordenacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_ordenacao"]:$this->ed59_i_ordenacao);
-       $this->ed59_i_serie = ($this->ed59_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_serie"]:$this->ed59_i_serie);
+       $this->ed59_i_ordenacao = ($this->ed59_i_ordenacao === 0 || $this->ed59_i_ordenacao === 0.0 || $this->ed59_i_ordenacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_ordenacao"]:$this->ed59_i_ordenacao);
+       $this->ed59_i_serie = ($this->ed59_i_serie === 0 || $this->ed59_i_serie === 0.0 || $this->ed59_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_serie"]:$this->ed59_i_serie);
        $this->ed59_lancarhistorico = ($this->ed59_lancarhistorico == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed59_lancarhistorico"]:$this->ed59_lancarhistorico);
        $this->ed59_caracterreprobatorio = ($this->ed59_caracterreprobatorio == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed59_caracterreprobatorio"]:$this->ed59_caracterreprobatorio);
        $this->ed59_basecomum = ($this->ed59_basecomum == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed59_basecomum"]:$this->ed59_basecomum);
-       $this->ed59_procedimento = ($this->ed59_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_procedimento"]:$this->ed59_procedimento);
+       $this->ed59_procedimento = ($this->ed59_procedimento === 0 || $this->ed59_procedimento === 0.0 || $this->ed59_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_procedimento"]:$this->ed59_procedimento);
        $this->ed59_areaconhecimento = ($this->ed59_areaconhecimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_areaconhecimento"]:$this->ed59_areaconhecimento);
        $this->ed59_tipobase = ($this->ed59_tipobase == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_tipobase"]:$this->ed59_tipobase);
      }else{
-       $this->ed59_i_codigo = ($this->ed59_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_codigo"]:$this->ed59_i_codigo);
+       $this->ed59_i_codigo = ($this->ed59_i_codigo === 0 || $this->ed59_i_codigo === 0.0 || $this->ed59_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed59_i_codigo"]:$this->ed59_i_codigo);
      }
    }
 
@@ -232,7 +232,7 @@ class cl_regencia
          $this->ed59_i_codigo = $ed59_i_codigo;
        }
      }
-     if(($this->ed59_i_codigo == null) || ($this->ed59_i_codigo == "") ){
+     if(($this->ed59_i_codigo == null) || ($this->ed59_i_codigo === 0 || $this->ed59_i_codigo === 0.0 || $this->ed59_i_codigo == "") ){
        $this->erro_sql = " Campo ed59_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

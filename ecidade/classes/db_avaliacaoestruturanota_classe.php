@@ -60,7 +60,7 @@ class cl_avaliacaoestruturanota {
                  ed315_ano = int4 = Ano da Configuração
                  ";
    //funcao construtor da classe
-   function cl_avaliacaoestruturanota() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avaliacaoestruturanota");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_avaliacaoestruturanota {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed315_sequencial = ($this->ed315_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_sequencial"]:$this->ed315_sequencial);
-       $this->ed315_escola = ($this->ed315_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_escola"]:$this->ed315_escola);
-       $this->ed315_db_estrutura = ($this->ed315_db_estrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_db_estrutura"]:$this->ed315_db_estrutura);
+       $this->ed315_sequencial = ($this->ed315_sequencial === 0 || $this->ed315_sequencial === 0.0 || $this->ed315_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_sequencial"]:$this->ed315_sequencial);
+       $this->ed315_escola = ($this->ed315_escola === 0 || $this->ed315_escola === 0.0 || $this->ed315_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_escola"]:$this->ed315_escola);
+       $this->ed315_db_estrutura = ($this->ed315_db_estrutura === 0 || $this->ed315_db_estrutura === 0.0 || $this->ed315_db_estrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_db_estrutura"]:$this->ed315_db_estrutura);
        $this->ed315_ativo = ($this->ed315_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed315_ativo"]:$this->ed315_ativo);
        $this->ed315_arredondamedia = ($this->ed315_arredondamedia == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed315_arredondamedia"]:$this->ed315_arredondamedia);
        $this->ed315_observacao = ($this->ed315_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_observacao"]:$this->ed315_observacao);
-       $this->ed315_ano = ($this->ed315_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_ano"]:$this->ed315_ano);
+       $this->ed315_ano = ($this->ed315_ano === 0 || $this->ed315_ano === 0.0 || $this->ed315_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_ano"]:$this->ed315_ano);
      }else{
-       $this->ed315_sequencial = ($this->ed315_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_sequencial"]:$this->ed315_sequencial);
+       $this->ed315_sequencial = ($this->ed315_sequencial === 0 || $this->ed315_sequencial === 0.0 || $this->ed315_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed315_sequencial"]:$this->ed315_sequencial);
      }
    }
    // funcao para inclusao
@@ -160,7 +160,7 @@ class cl_avaliacaoestruturanota {
          $this->ed315_sequencial = $ed315_sequencial;
        }
      }
-     if(($this->ed315_sequencial == null) || ($this->ed315_sequencial == "") ){
+     if(($this->ed315_sequencial == null) || ($this->ed315_sequencial === 0 || $this->ed315_sequencial === 0.0 || $this->ed315_sequencial == "") ){
        $this->erro_sql = " Campo ed315_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -466,7 +466,7 @@ class cl_avaliacaoestruturanota {
    function sql_query ( $ed315_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -497,7 +497,7 @@ class cl_avaliacaoestruturanota {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -510,7 +510,7 @@ class cl_avaliacaoestruturanota {
    function sql_query_file ( $ed315_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -531,7 +531,7 @@ class cl_avaliacaoestruturanota {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -569,7 +569,7 @@ class cl_avaliacaoestruturanota {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

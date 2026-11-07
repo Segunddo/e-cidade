@@ -60,7 +60,7 @@ class cl_turmaacmatricula {
 			ed269_aluno = int8 = Código do Aluno
 			";
 	//funcao construtor da classe
-	function cl_turmaacmatricula() {
+	function __construct() {
 		//classes dos rotulos dos campos
 		$this->rotulo = new rotulo("turmaacmatricula");
 		$this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,8 +77,8 @@ class cl_turmaacmatricula {
 	// funcao para atualizar campos
 	function atualizacampos($exclusao=false) {
 		if($exclusao==false){
-			$this->ed269_i_codigo = ($this->ed269_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed269_i_codigo"]:$this->ed269_i_codigo);
-			$this->ed269_i_turmaac = ($this->ed269_i_turmaac == ""?@$GLOBALS["HTTP_POST_VARS"]["ed269_i_turmaac"]:$this->ed269_i_turmaac);
+			$this->ed269_i_codigo = ($this->ed269_i_codigo === 0 || $this->ed269_i_codigo === 0.0 || $this->ed269_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed269_i_codigo"]:$this->ed269_i_codigo);
+			$this->ed269_i_turmaac = ($this->ed269_i_turmaac === 0 || $this->ed269_i_turmaac === 0.0 || $this->ed269_i_turmaac == ""?@$GLOBALS["HTTP_POST_VARS"]["ed269_i_turmaac"]:$this->ed269_i_turmaac);
 			if($this->ed269_d_data == ""){
 				$this->ed269_d_data_dia = ($this->ed269_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed269_d_data_dia"]:$this->ed269_d_data_dia);
 				$this->ed269_d_data_mes = ($this->ed269_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed269_d_data_mes"]:$this->ed269_d_data_mes);
@@ -87,9 +87,9 @@ class cl_turmaacmatricula {
 					$this->ed269_d_data = $this->ed269_d_data_ano."-".$this->ed269_d_data_mes."-".$this->ed269_d_data_dia;
 				}
 			}
-			$this->ed269_aluno = ($this->ed269_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed269_aluno"]:$this->ed269_aluno);
+			$this->ed269_aluno = ($this->ed269_aluno === 0 || $this->ed269_aluno === 0.0 || $this->ed269_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed269_aluno"]:$this->ed269_aluno);
 		}else{
-			$this->ed269_i_codigo = ($this->ed269_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed269_i_codigo"]:$this->ed269_i_codigo);
+			$this->ed269_i_codigo = ($this->ed269_i_codigo === 0 || $this->ed269_i_codigo === 0.0 || $this->ed269_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed269_i_codigo"]:$this->ed269_i_codigo);
 		}
 	}
 	// funcao para inclusao
@@ -175,7 +175,7 @@ class cl_turmaacmatricula {
 				$this->ed269_i_codigo = $ed269_i_codigo;
 			}
 		}
-		if(($this->ed269_i_codigo == null) || ($this->ed269_i_codigo == "") ){
+		if(($this->ed269_i_codigo == null) || ($this->ed269_i_codigo === 0 || $this->ed269_i_codigo === 0.0 || $this->ed269_i_codigo == "") ){
 			$this->erro_sql = " Campo ed269_i_codigo nao declarado.";
 			$this->erro_banco = "Chave Primaria zerada.";
 			$this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -447,7 +447,7 @@ class cl_turmaacmatricula {
 	function sql_query ( $ed269_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
 		$sql = "select ";
 		if($campos != "*" ){
-			$campos_sql = split("#",$campos);
+			$campos_sql = preg_split("#\\##m",$campos);
 			$virgula = "";
 			for($i=0;$i<sizeof($campos_sql);$i++){
 				$sql .= $virgula.$campos_sql[$i];
@@ -479,7 +479,7 @@ class cl_turmaacmatricula {
 		$sql .= $sql2;
 		if($ordem != null ){
 			$sql .= " order by ";
-			$campos_sql = split("#",$ordem);
+			$campos_sql = preg_split("#\\##m",$ordem);
 			$virgula = "";
 			for($i=0;$i<sizeof($campos_sql);$i++){
 				$sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_turmaacmatricula {
 	function sql_query_file ( $ed269_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
 		$sql = "select ";
 		if($campos != "*" ){
-			$campos_sql = split("#",$campos);
+			$campos_sql = preg_split("#\\##m",$campos);
 			$virgula = "";
 			for($i=0;$i<sizeof($campos_sql);$i++){
 				$sql .= $virgula.$campos_sql[$i];
@@ -513,7 +513,7 @@ class cl_turmaacmatricula {
 		$sql .= $sql2;
 		if($ordem != null ){
 			$sql .= " order by ";
-			$campos_sql = split("#",$ordem);
+			$campos_sql = preg_split("#\\##m",$ordem);
 			$virgula = "";
 			for($i=0;$i<sizeof($campos_sql);$i++){
 				$sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_turmaacmatricula {
 
 	  $sql = "select ";
 		if($campos != "*" ){
-			$campos_sql = split("#",$campos);
+			$campos_sql = preg_split("#\\##m",$campos);
 			$virgula = "";
 			for($i=0;$i<sizeof($campos_sql);$i++){
 				$sql .= $virgula.$campos_sql[$i];
@@ -566,7 +566,7 @@ class cl_turmaacmatricula {
 		$sql .= $sql2;
 		if($ordem != null ){
 			$sql .= " order by ";
-			$campos_sql = split("#",$ordem);
+			$campos_sql = preg_split("#\\##m",$ordem);
 			$virgula = "";
 			for($i=0;$i<sizeof($campos_sql);$i++){
 				$sql .= $virgula.$campos_sql[$i];
@@ -582,7 +582,7 @@ class cl_turmaacmatricula {
 
 	  if ($campos != "*" ) {
 
-	    $campos_sql = split("#",$campos);
+	    $campos_sql = preg_split("#\\##m",$campos);
 	    $virgula    = "";
 
 	    for ( $i = 0; $i < sizeof($campos_sql); $i++ ) {
@@ -613,7 +613,7 @@ class cl_turmaacmatricula {
 	  if ( $ordem != null ) {
 
 	    $sql        .= " order by ";
-	    $campos_sql  = split("#",$ordem);
+	    $campos_sql  = preg_split("#\\##m",$ordem);
 	    $virgula     = "";
 
 	    for ( $i = 0; $i < sizeof($campos_sql); $i++ ) {

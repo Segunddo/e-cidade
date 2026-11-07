@@ -54,7 +54,7 @@ class cl_abonofalta {
                  ed80_i_numfaltas = int4 = Faltas Abonadas
                  ";
    //funcao construtor da classe
-   function cl_abonofalta() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("abonofalta");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_abonofalta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed80_i_codigo = ($this->ed80_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed80_i_codigo"]:$this->ed80_i_codigo);
-       $this->ed80_i_diarioavaliacao = ($this->ed80_i_diarioavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed80_i_diarioavaliacao"]:$this->ed80_i_diarioavaliacao);
-       $this->ed80_i_justificativa = ($this->ed80_i_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed80_i_justificativa"]:$this->ed80_i_justificativa);
-       $this->ed80_i_numfaltas = ($this->ed80_i_numfaltas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed80_i_numfaltas"]:$this->ed80_i_numfaltas);
+       $this->ed80_i_codigo = ($this->ed80_i_codigo === 0 || $this->ed80_i_codigo === 0.0 || $this->ed80_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed80_i_codigo"]:$this->ed80_i_codigo);
+       $this->ed80_i_diarioavaliacao = ($this->ed80_i_diarioavaliacao === 0 || $this->ed80_i_diarioavaliacao === 0.0 || $this->ed80_i_diarioavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed80_i_diarioavaliacao"]:$this->ed80_i_diarioavaliacao);
+       $this->ed80_i_justificativa = ($this->ed80_i_justificativa === 0 || $this->ed80_i_justificativa === 0.0 || $this->ed80_i_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed80_i_justificativa"]:$this->ed80_i_justificativa);
+       $this->ed80_i_numfaltas = ($this->ed80_i_numfaltas === 0 || $this->ed80_i_numfaltas === 0.0 || $this->ed80_i_numfaltas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed80_i_numfaltas"]:$this->ed80_i_numfaltas);
      }else{
-       $this->ed80_i_codigo = ($this->ed80_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed80_i_codigo"]:$this->ed80_i_codigo);
+       $this->ed80_i_codigo = ($this->ed80_i_codigo === 0 || $this->ed80_i_codigo === 0.0 || $this->ed80_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed80_i_codigo"]:$this->ed80_i_codigo);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_abonofalta {
          $this->ed80_i_codigo = $ed80_i_codigo;
        }
      }
-     if(($this->ed80_i_codigo == null) || ($this->ed80_i_codigo == "") ){
+     if(($this->ed80_i_codigo == null) || ($this->ed80_i_codigo === 0 || $this->ed80_i_codigo === 0.0 || $this->ed80_i_codigo == "") ){
        $this->erro_sql = " Campo ed80_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

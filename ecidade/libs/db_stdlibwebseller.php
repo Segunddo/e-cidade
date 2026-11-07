@@ -430,7 +430,7 @@ function eduparametros($escola) {
           WHERE ed233_i_escola = $escola
          ";
   $result2 = db_query($sql2);
-  if (pg_num_rows($result2)>0) {
+  if (($result2 ? pg_num_rows($result2) : null)>0) {
     $retorno = pg_result($result2,0,"ed233_c_decimais");
   }else{
     $retorno = null;
@@ -470,7 +470,7 @@ function VerParametroNota($escola) {
           WHERE ed233_i_escola = $escola
          ";
   $result2 = db_query($sql2);
-  if (pg_num_rows($result2)>0) {
+  if (($result2 ? pg_num_rows($result2) : null)>0) {
     $retorno = pg_result($result2,0,"ed233_c_notabranca");
   }else{
     $retorno = "N";

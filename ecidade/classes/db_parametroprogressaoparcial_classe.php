@@ -62,7 +62,7 @@ class cl_parametroprogressaoparcial {
                  ed112_justificativa = varchar(40) = Justificativa
                  ";
    //funcao construtor da classe
-   function cl_parametroprogressaoparcial() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parametroprogressaoparcial");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_parametroprogressaoparcial {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed112_sequencial = ($this->ed112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_sequencial"]:$this->ed112_sequencial);
-       $this->ed112_formacontrole = ($this->ed112_formacontrole == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_formacontrole"]:$this->ed112_formacontrole);
-       $this->ed112_quantidadedisciplinas = ($this->ed112_quantidadedisciplinas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_quantidadedisciplinas"]:$this->ed112_quantidadedisciplinas);
+       $this->ed112_sequencial = ($this->ed112_sequencial === 0 || $this->ed112_sequencial === 0.0 || $this->ed112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_sequencial"]:$this->ed112_sequencial);
+       $this->ed112_formacontrole = ($this->ed112_formacontrole === 0 || $this->ed112_formacontrole === 0.0 || $this->ed112_formacontrole == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_formacontrole"]:$this->ed112_formacontrole);
+       $this->ed112_quantidadedisciplinas = ($this->ed112_quantidadedisciplinas === 0 || $this->ed112_quantidadedisciplinas === 0.0 || $this->ed112_quantidadedisciplinas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_quantidadedisciplinas"]:$this->ed112_quantidadedisciplinas);
        $this->ed112_habilitado = ($this->ed112_habilitado == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed112_habilitado"]:$this->ed112_habilitado);
-       $this->ed112_escola = ($this->ed112_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_escola"]:$this->ed112_escola);
+       $this->ed112_escola = ($this->ed112_escola === 0 || $this->ed112_escola === 0.0 || $this->ed112_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_escola"]:$this->ed112_escola);
        $this->ed112_controlefrequencia = ($this->ed112_controlefrequencia == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed112_controlefrequencia"]:$this->ed112_controlefrequencia);
        $this->ed112_disciplinaeliminadependencia = ($this->ed112_disciplinaeliminadependencia == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed112_disciplinaeliminadependencia"]:$this->ed112_disciplinaeliminadependencia);
        $this->ed112_justificativa = ($this->ed112_justificativa == "" ? "" : $this->ed112_justificativa);
      }else{
-       $this->ed112_sequencial = ($this->ed112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_sequencial"]:$this->ed112_sequencial);
+       $this->ed112_sequencial = ($this->ed112_sequencial === 0 || $this->ed112_sequencial === 0.0 || $this->ed112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_sequencial"]:$this->ed112_sequencial);
      }
    }
    // funcao para inclusao
@@ -172,7 +172,7 @@ class cl_parametroprogressaoparcial {
          $this->ed112_sequencial = $ed112_sequencial;
        }
      }
-     if(($this->ed112_sequencial == null) || ($this->ed112_sequencial == "") ){
+     if(($this->ed112_sequencial == null) || ($this->ed112_sequencial === 0 || $this->ed112_sequencial === 0.0 || $this->ed112_sequencial == "") ){
        $this->erro_sql = " Campo ed112_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -501,7 +501,7 @@ class cl_parametroprogressaoparcial {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -529,7 +529,7 @@ class cl_parametroprogressaoparcial {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_parametroprogressaoparcial {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -565,7 +565,7 @@ class cl_parametroprogressaoparcial {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -579,7 +579,7 @@ class cl_parametroprogressaoparcial {
 
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -609,7 +609,7 @@ class cl_parametroprogressaoparcial {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];

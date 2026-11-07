@@ -78,7 +78,7 @@ class cl_historicompsfora {
                  ed99_percentualfrequencia = float8 = Percentual de Frequência 
                  ";
    //funcao construtor da classe 
-   function cl_historicompsfora() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("historicompsfora"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -95,24 +95,24 @@ class cl_historicompsfora {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed99_i_codigo = ($this->ed99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_codigo"]:$this->ed99_i_codigo);
-       $this->ed99_i_historico = ($this->ed99_i_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_historico"]:$this->ed99_i_historico);
-       $this->ed99_i_escolaproc = ($this->ed99_i_escolaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_escolaproc"]:$this->ed99_i_escolaproc);
-       $this->ed99_i_serie = ($this->ed99_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_serie"]:$this->ed99_i_serie);
+       $this->ed99_i_codigo = ($this->ed99_i_codigo === 0 || $this->ed99_i_codigo === 0.0 || $this->ed99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_codigo"]:$this->ed99_i_codigo);
+       $this->ed99_i_historico = ($this->ed99_i_historico === 0 || $this->ed99_i_historico === 0.0 || $this->ed99_i_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_historico"]:$this->ed99_i_historico);
+       $this->ed99_i_escolaproc = ($this->ed99_i_escolaproc === 0 || $this->ed99_i_escolaproc === 0.0 || $this->ed99_i_escolaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_escolaproc"]:$this->ed99_i_escolaproc);
+       $this->ed99_i_serie = ($this->ed99_i_serie === 0 || $this->ed99_i_serie === 0.0 || $this->ed99_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_serie"]:$this->ed99_i_serie);
        $this->ed99_i_justificativa = ($this->ed99_i_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_justificativa"]:$this->ed99_i_justificativa);
        $this->ed99_c_turma = ($this->ed99_c_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_c_turma"]:$this->ed99_c_turma);
-       $this->ed99_i_anoref = ($this->ed99_i_anoref == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_anoref"]:$this->ed99_i_anoref);
+       $this->ed99_i_anoref = ($this->ed99_i_anoref === 0 || $this->ed99_i_anoref === 0.0 || $this->ed99_i_anoref == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_anoref"]:$this->ed99_i_anoref);
        $this->ed99_i_periodoref = ($this->ed99_i_periodoref == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_periodoref"]:$this->ed99_i_periodoref);
        $this->ed99_c_resultadofinal = ($this->ed99_c_resultadofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_c_resultadofinal"]:$this->ed99_c_resultadofinal);
        $this->ed99_c_situacao = ($this->ed99_c_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_c_situacao"]:$this->ed99_c_situacao);
-       $this->ed99_i_qtdch = ($this->ed99_i_qtdch == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_qtdch"]:$this->ed99_i_qtdch);
-       $this->ed99_i_diasletivos = ($this->ed99_i_diasletivos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_diasletivos"]:$this->ed99_i_diasletivos);
+       $this->ed99_i_qtdch = ($this->ed99_i_qtdch === 0 || $this->ed99_i_qtdch === 0.0 || $this->ed99_i_qtdch == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_qtdch"]:$this->ed99_i_qtdch);
+       $this->ed99_i_diasletivos = ($this->ed99_i_diasletivos === 0 || $this->ed99_i_diasletivos === 0.0 || $this->ed99_i_diasletivos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_diasletivos"]:$this->ed99_i_diasletivos);
        $this->ed99_c_minimo = ($this->ed99_c_minimo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_c_minimo"]:$this->ed99_c_minimo);
        $this->ed99_c_termofinal = ($this->ed99_c_termofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_c_termofinal"]:$this->ed99_c_termofinal);
        $this->ed99_observacao = ($this->ed99_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_observacao"]:$this->ed99_observacao);
        $this->ed99_percentualfrequencia = ($this->ed99_percentualfrequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_percentualfrequencia"]:$this->ed99_percentualfrequencia);
      }else{
-       $this->ed99_i_codigo = ($this->ed99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_codigo"]:$this->ed99_i_codigo);
+       $this->ed99_i_codigo = ($this->ed99_i_codigo === 0 || $this->ed99_i_codigo === 0.0 || $this->ed99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed99_i_codigo"]:$this->ed99_i_codigo);
      }
    }
    // funcao para inclusao
@@ -211,7 +211,7 @@ class cl_historicompsfora {
          $this->ed99_i_codigo = $ed99_i_codigo; 
        }
      }
-     if(($this->ed99_i_codigo == null) || ($this->ed99_i_codigo == "") ){ 
+     if(($this->ed99_i_codigo == null) || ($this->ed99_i_codigo === 0 || $this->ed99_i_codigo === 0.0 || $this->ed99_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed99_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -706,7 +706,7 @@ class cl_historicompsfora {
   	$sSql = 'select ';
   	if ($sCampos != '*') {
   
-  		$sCamposSql = split('#', $sCampos);
+  		$sCamposSql = preg_split('#\##m', $sCampos);
   		$sVirgula   = '';
   		for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
   
@@ -732,7 +732,7 @@ class cl_historicompsfora {
   	if ($sOrdem != null) {
   
   		$sSql      .= ' order by ';
-  		$sCamposSql = split('#', $sOrdem);
+  		$sCamposSql = preg_split('#\##m', $sOrdem);
   		$sVirgula   = '';
   		for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
   

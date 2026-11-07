@@ -56,7 +56,7 @@ class cl_mer_caractpreparo {
                  me06_i_cardapio = int4 = Cardápio 
                  ";
    //funcao construtor da classe 
-   function cl_mer_caractpreparo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_caractpreparo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_mer_caractpreparo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me06_i_codigo = ($this->me06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me06_i_codigo"]:$this->me06_i_codigo);
+       $this->me06_i_codigo = ($this->me06_i_codigo === 0 || $this->me06_i_codigo === 0.0 || $this->me06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me06_i_codigo"]:$this->me06_i_codigo);
        $this->me06_c_tempopreparo = ($this->me06_c_tempopreparo == ""?@$GLOBALS["HTTP_POST_VARS"]["me06_c_tempopreparo"]:$this->me06_c_tempopreparo);
        $this->me06_c_graudificuldade = ($this->me06_c_graudificuldade == ""?@$GLOBALS["HTTP_POST_VARS"]["me06_c_graudificuldade"]:$this->me06_c_graudificuldade);
        $this->me06_c_descr = ($this->me06_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["me06_c_descr"]:$this->me06_c_descr);
-       $this->me06_i_cardapio = ($this->me06_i_cardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me06_i_cardapio"]:$this->me06_i_cardapio);
+       $this->me06_i_cardapio = ($this->me06_i_cardapio === 0 || $this->me06_i_cardapio === 0.0 || $this->me06_i_cardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me06_i_cardapio"]:$this->me06_i_cardapio);
      }else{
-       $this->me06_i_codigo = ($this->me06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me06_i_codigo"]:$this->me06_i_codigo);
+       $this->me06_i_codigo = ($this->me06_i_codigo === 0 || $this->me06_i_codigo === 0.0 || $this->me06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me06_i_codigo"]:$this->me06_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_mer_caractpreparo {
          $this->me06_i_codigo = $me06_i_codigo; 
        }
      }
-     if(($this->me06_i_codigo == null) || ($this->me06_i_codigo == "") ){ 
+     if(($this->me06_i_codigo == null) || ($this->me06_i_codigo === 0 || $this->me06_i_codigo === 0.0 || $this->me06_i_codigo == "") ){ 
        $this->erro_sql = " Campo me06_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_mer_caractpreparo {
    function sql_query ( $me06_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_mer_caractpreparo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_mer_caractpreparo {
    function sql_query_file ( $me06_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -478,7 +478,7 @@ class cl_mer_caractpreparo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

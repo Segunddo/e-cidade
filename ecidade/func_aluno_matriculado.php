@@ -6,7 +6,8 @@ require_once(modification("libs/db_usuariosonline.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $daoSerie = new cl_serie();
 $camposSerie = "ed11_i_codigo, ed11_c_descr ||' - '|| ed10_c_descr , ed11_i_ensino, ed11_i_sequencia";

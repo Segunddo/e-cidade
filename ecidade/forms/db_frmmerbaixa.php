@@ -168,7 +168,7 @@ $sql="select me07_i_codigo,me07_f_quantidade,me07_i_codmater,me07_i_cardapio fro
         inner join mer_cardapio on me07_i_cardapio=me01_i_codigo
         inner join mer_cardapiodia on me01_i_codigo=me12_i_cardapio";
 $result=db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 for($x=0;$x<$linhas;$x++){
    db_fieldsmemory($result,$x);
    $add=false;
@@ -207,7 +207,7 @@ $sql="select me07_i_codmater,m60_descr,(sum(me07_f_quantidade)) as me07_f_quanti
        inner join matmater on me07_i_codmater=m60_codmater
 group by me07_i_codmater,m60_descr";
 $result=db_query($sql);
-$linhas=pg_num_rows($result);
+$linhas=($result ? pg_num_rows($result) : null);
 ?>
 <center>
 <?db_lovrot($sql,"5","","")?>

@@ -63,7 +63,7 @@ db_fieldsmemory($result_obs,0);
            ORDER BY ed59_i_ordenacao
           ";
    $result = db_query($sql);
-   $linhas = pg_num_rows($result);
+   $linhas = ($result ? pg_num_rows($result) : null);
    if($linhas>0){
     ?>
     <b>Selecione outras disciplinas para conter<br>esta observação no período <?=$periodo?></b>:<br>

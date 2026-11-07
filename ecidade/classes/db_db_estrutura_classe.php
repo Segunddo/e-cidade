@@ -54,7 +54,7 @@ class cl_db_estrutura {
                  db77_permitesintetico = bool = Permitir Dados Cta Sintetica 
                  ";
    //funcao construtor da classe 
-   function cl_db_estrutura() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_estrutura"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_db_estrutura {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db77_codestrut = ($this->db77_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_codestrut"]:$this->db77_codestrut);
+       $this->db77_codestrut = ($this->db77_codestrut === 0 || $this->db77_codestrut === 0.0 || $this->db77_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_codestrut"]:$this->db77_codestrut);
        $this->db77_estrut = ($this->db77_estrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_estrut"]:$this->db77_estrut);
        $this->db77_descr = ($this->db77_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_descr"]:$this->db77_descr);
        $this->db77_permitesintetico = ($this->db77_permitesintetico == "f"?@$GLOBALS["HTTP_POST_VARS"]["db77_permitesintetico"]:$this->db77_permitesintetico);
      }else{
-       $this->db77_codestrut = ($this->db77_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_codestrut"]:$this->db77_codestrut);
+       $this->db77_codestrut = ($this->db77_codestrut === 0 || $this->db77_codestrut === 0.0 || $this->db77_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_codestrut"]:$this->db77_codestrut);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_db_estrutura {
          $this->db77_codestrut = $db77_codestrut; 
        }
      }
-     if(($this->db77_codestrut == null) || ($this->db77_codestrut == "") ){ 
+     if(($this->db77_codestrut == null) || ($this->db77_codestrut === 0 || $this->db77_codestrut === 0.0 || $this->db77_codestrut == "") ){ 
        $this->erro_sql = " Campo db77_codestrut nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -376,7 +376,7 @@ class cl_db_estrutura {
    function sql_query ( $db77_codestrut=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_db_estrutura {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -410,7 +410,7 @@ class cl_db_estrutura {
    function sql_query_file ( $db77_codestrut=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_db_estrutura {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

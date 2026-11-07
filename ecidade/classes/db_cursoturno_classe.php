@@ -54,7 +54,7 @@ class cl_cursoturno {
                  ed85_i_turno = int8 = Turno 
                  ";
    //funcao construtor da classe
-   function cl_cursoturno() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cursoturno");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]."?ed85_i_escola=".@$GLOBALS["HTTP_POST_VARS"]["ed85_i_escola"]."&ed18_c_nome=".@$GLOBALS["HTTP_POST_VARS"]["ed18_c_nome"]."&ed85_i_curso=".@$GLOBALS["HTTP_POST_VARS"]["ed85_i_curso"]."&ed29_c_descr=".@$GLOBALS["HTTP_POST_VARS"]["ed29_c_descr"]);
@@ -71,12 +71,12 @@ class cl_cursoturno {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed85_i_codigo = ($this->ed85_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed85_i_codigo"]:$this->ed85_i_codigo);
-       $this->ed85_i_escola = ($this->ed85_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed85_i_escola"]:$this->ed85_i_escola);
-       $this->ed85_i_curso = ($this->ed85_i_curso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed85_i_curso"]:$this->ed85_i_curso);
-       $this->ed85_i_turno = ($this->ed85_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed85_i_turno"]:$this->ed85_i_turno);
+       $this->ed85_i_codigo = ($this->ed85_i_codigo === 0 || $this->ed85_i_codigo === 0.0 || $this->ed85_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed85_i_codigo"]:$this->ed85_i_codigo);
+       $this->ed85_i_escola = ($this->ed85_i_escola === 0 || $this->ed85_i_escola === 0.0 || $this->ed85_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed85_i_escola"]:$this->ed85_i_escola);
+       $this->ed85_i_curso = ($this->ed85_i_curso === 0 || $this->ed85_i_curso === 0.0 || $this->ed85_i_curso == ""?@$GLOBALS["HTTP_POST_VARS"]["ed85_i_curso"]:$this->ed85_i_curso);
+       $this->ed85_i_turno = ($this->ed85_i_turno === 0 || $this->ed85_i_turno === 0.0 || $this->ed85_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed85_i_turno"]:$this->ed85_i_turno);
      }else{
-       $this->ed85_i_codigo = ($this->ed85_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed85_i_codigo"]:$this->ed85_i_codigo);
+       $this->ed85_i_codigo = ($this->ed85_i_codigo === 0 || $this->ed85_i_codigo === 0.0 || $this->ed85_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed85_i_codigo"]:$this->ed85_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_cursoturno {
          $this->ed85_i_codigo = $ed85_i_codigo;
        }
      }
-     if(($this->ed85_i_codigo == null) || ($this->ed85_i_codigo == "") ){
+     if(($this->ed85_i_codigo == null) || ($this->ed85_i_codigo === 0 || $this->ed85_i_codigo === 0.0 || $this->ed85_i_codigo == "") ){
        $this->erro_sql = " Campo ed85_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

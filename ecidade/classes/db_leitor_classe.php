@@ -48,7 +48,7 @@ class cl_leitor {
                  bi10_codigo = int8 = Código do Leitor 
                  ";
    //funcao construtor da classe 
-   function cl_leitor() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("leitor"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -65,9 +65,9 @@ class cl_leitor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi10_codigo = ($this->bi10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi10_codigo"]:$this->bi10_codigo);
+       $this->bi10_codigo = ($this->bi10_codigo === 0 || $this->bi10_codigo === 0.0 || $this->bi10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi10_codigo"]:$this->bi10_codigo);
      }else{
-       $this->bi10_codigo = ($this->bi10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi10_codigo"]:$this->bi10_codigo);
+       $this->bi10_codigo = ($this->bi10_codigo === 0 || $this->bi10_codigo === 0.0 || $this->bi10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi10_codigo"]:$this->bi10_codigo);
      }
    }
    // funcao para inclusao
@@ -97,7 +97,7 @@ class cl_leitor {
          $this->bi10_codigo = $bi10_codigo; 
        }
      }
-     if(($this->bi10_codigo == null) || ($this->bi10_codigo == "") ){ 
+     if(($this->bi10_codigo == null) || ($this->bi10_codigo === 0 || $this->bi10_codigo === 0.0 || $this->bi10_codigo == "") ){ 
        $this->erro_sql = " Campo bi10_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -297,7 +297,7 @@ class cl_leitor {
    function sql_query ( $bi10_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -333,7 +333,7 @@ class cl_leitor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -345,7 +345,7 @@ class cl_leitor {
    function sql_query_file ( $bi10_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -366,7 +366,7 @@ class cl_leitor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_leitor {
     $sql = "select ";
     if ($campos != "*" ) {
       
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
       
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -413,7 +413,7 @@ class cl_leitor {
     if ($ordem != null ) {
       
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       
       for ($i = 0; $i < sizeof($campos_sql); $i++) {

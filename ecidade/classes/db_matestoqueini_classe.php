@@ -63,7 +63,7 @@ class cl_matestoqueini {
                  m80_coddepto = int4 = Depart.
                  ";
    //funcao construtor da classe
-   function cl_matestoqueini() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matestoqueini");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_matestoqueini {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m80_codigo = ($this->m80_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_codigo"]:$this->m80_codigo);
-       $this->m80_login = ($this->m80_login == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_login"]:$this->m80_login);
+       $this->m80_codigo = ($this->m80_codigo === 0 || $this->m80_codigo === 0.0 || $this->m80_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_codigo"]:$this->m80_codigo);
+       $this->m80_login = ($this->m80_login === 0 || $this->m80_login === 0.0 || $this->m80_login == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_login"]:$this->m80_login);
        if($this->m80_data == ""){
          $this->m80_data_dia = ($this->m80_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_data_dia"]:$this->m80_data_dia);
          $this->m80_data_mes = ($this->m80_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_data_mes"]:$this->m80_data_mes);
@@ -92,10 +92,10 @@ class cl_matestoqueini {
        }
        $this->m80_hora = ($this->m80_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_hora"]:$this->m80_hora);
        $this->m80_obs = ($this->m80_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_obs"]:$this->m80_obs);
-       $this->m80_codtipo = ($this->m80_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_codtipo"]:$this->m80_codtipo);
-       $this->m80_coddepto = ($this->m80_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_coddepto"]:$this->m80_coddepto);
+       $this->m80_codtipo = ($this->m80_codtipo === 0 || $this->m80_codtipo === 0.0 || $this->m80_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_codtipo"]:$this->m80_codtipo);
+       $this->m80_coddepto = ($this->m80_coddepto === 0 || $this->m80_coddepto === 0.0 || $this->m80_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_coddepto"]:$this->m80_coddepto);
      }else{
-       $this->m80_codigo = ($this->m80_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_codigo"]:$this->m80_codigo);
+       $this->m80_codigo = ($this->m80_codigo === 0 || $this->m80_codigo === 0.0 || $this->m80_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m80_codigo"]:$this->m80_codigo);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_matestoqueini {
          $this->m80_codigo = $m80_codigo;
        }
      }
-     if(($this->m80_codigo == null) || ($this->m80_codigo == "") ){
+     if(($this->m80_codigo == null) || ($this->m80_codigo === 0 || $this->m80_codigo === 0.0 || $this->m80_codigo == "") ){
        $this->erro_sql = " Campo m80_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -512,7 +512,7 @@ class cl_matestoqueini {
    function sql_query ( $m80_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -536,7 +536,7 @@ class cl_matestoqueini {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -548,7 +548,7 @@ class cl_matestoqueini {
    function sql_query_file ( $m80_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -569,7 +569,7 @@ class cl_matestoqueini {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -581,7 +581,7 @@ class cl_matestoqueini {
    function sql_query_mater ( $m80_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -616,7 +616,7 @@ class cl_matestoqueini {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -628,7 +628,7 @@ class cl_matestoqueini {
    function sql_query_qua ( $m80_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -659,7 +659,7 @@ class cl_matestoqueini {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -671,7 +671,7 @@ class cl_matestoqueini {
    function sql_query_transf ( $m80_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -699,7 +699,7 @@ class cl_matestoqueini {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -714,7 +714,7 @@ class cl_matestoqueini {
     $sql = "select ";
     if ($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
 
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -744,7 +744,7 @@ class cl_matestoqueini {
     if ($ordem != null) {
 
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -760,7 +760,7 @@ class cl_matestoqueini {
     $sql = "select ";
     if ($campos != "*" ) {
 
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
 
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -794,7 +794,7 @@ class cl_matestoqueini {
     if ($ordem != null) {
 
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -819,7 +819,7 @@ class cl_matestoqueini {
    $sql = "select ";
    if ($campos != "*" ) {
 
-     $campos_sql = split("#",$campos);
+     $campos_sql = preg_split("#\\##m",$campos);
      $virgula    = "";
 
      for ($i = 0; $i < sizeof($campos_sql); $i++) {
@@ -858,7 +858,7 @@ class cl_matestoqueini {
    if ($ordem != null) {
 
      $sql        .= " order by ";
-     $campos_sql  = split("#",$ordem);
+     $campos_sql  = preg_split("#\\##m",$ordem);
      $virgula     = "";
      for ($i = 0; $i < sizeof($campos_sql); $i++) {
 

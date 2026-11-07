@@ -34,7 +34,8 @@ require_once(modification("libs/db_utils.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("libs/db_jsplibwebseller.php"));
 
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"], $__qs );
+extract($__qs);
 define( 'MENSAGEM_ALUNOTRANSF002', 'educacao.escola.edu1_alunotransfturma002.' );
 
 $oGet                  = db_utils::postMemory($_GET);

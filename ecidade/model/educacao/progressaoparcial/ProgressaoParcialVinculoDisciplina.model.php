@@ -245,7 +245,8 @@ final class ProgressaoParcialVinculoDisciplina {
         $sMsgErro = "Erro ao salvar dados do vinculo da regência.\nErro Técnico:\n{$oDaoProgressaoMatricula->erro_msg}";
         throw new BusinessException($sMsgErro);
       }
-      unset($this);
+      // unset($this) removido: erro de compilacao desde o PHP 7.1; no 5.6 so desligava a variavel
+      // local, e era a ultima instrucao do metodo -- remover e equivalente
     }
   }
 

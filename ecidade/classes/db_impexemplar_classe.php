@@ -61,7 +61,7 @@ class cl_impexemplar {
                  bi24_modelo = char(2) = Modelo 
                  ";
    //funcao construtor da classe 
-   function cl_impexemplar() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("impexemplar"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,9 +78,9 @@ class cl_impexemplar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi24_codigo = ($this->bi24_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_codigo"]:$this->bi24_codigo);
-       $this->bi24_biblioteca = ($this->bi24_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_biblioteca"]:$this->bi24_biblioteca);
-       $this->bi24_usuario = ($this->bi24_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_usuario"]:$this->bi24_usuario);
+       $this->bi24_codigo = ($this->bi24_codigo === 0 || $this->bi24_codigo === 0.0 || $this->bi24_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_codigo"]:$this->bi24_codigo);
+       $this->bi24_biblioteca = ($this->bi24_biblioteca === 0 || $this->bi24_biblioteca === 0.0 || $this->bi24_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_biblioteca"]:$this->bi24_biblioteca);
+       $this->bi24_usuario = ($this->bi24_usuario === 0 || $this->bi24_usuario === 0.0 || $this->bi24_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_usuario"]:$this->bi24_usuario);
        if($this->bi24_data == ""){
          $this->bi24_data_dia = ($this->bi24_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_data_dia"]:$this->bi24_data_dia);
          $this->bi24_data_mes = ($this->bi24_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_data_mes"]:$this->bi24_data_mes);
@@ -92,7 +92,7 @@ class cl_impexemplar {
        $this->bi24_hora = ($this->bi24_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_hora"]:$this->bi24_hora);
        $this->bi24_modelo = ($this->bi24_modelo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_modelo"]:$this->bi24_modelo);
      }else{
-       $this->bi24_codigo = ($this->bi24_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_codigo"]:$this->bi24_codigo);
+       $this->bi24_codigo = ($this->bi24_codigo === 0 || $this->bi24_codigo === 0.0 || $this->bi24_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_codigo"]:$this->bi24_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_impexemplar {
          $this->bi24_codigo = $bi24_codigo; 
        }
      }
-     if(($this->bi24_codigo == null) || ($this->bi24_codigo == "") ){ 
+     if(($this->bi24_codigo == null) || ($this->bi24_codigo === 0 || $this->bi24_codigo === 0.0 || $this->bi24_codigo == "") ){ 
        $this->erro_sql = " Campo bi24_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_impexemplar {
    function sql_query ( $bi24_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -500,7 +500,7 @@ class cl_impexemplar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -512,7 +512,7 @@ class cl_impexemplar {
    function sql_query_file ( $bi24_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -533,7 +533,7 @@ class cl_impexemplar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

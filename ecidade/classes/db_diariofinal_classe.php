@@ -68,7 +68,7 @@ class cl_diariofinal {
                  ed74_t_obs = text = Observações
                  ";
    //funcao construtor da classe
-   function cl_diariofinal() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diariofinal");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,19 +85,19 @@ class cl_diariofinal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed74_i_codigo = ($this->ed74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_codigo"]:$this->ed74_i_codigo);
-       $this->ed74_i_diario = ($this->ed74_i_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_diario"]:$this->ed74_i_diario);
-       $this->ed74_i_procresultadoaprov = ($this->ed74_i_procresultadoaprov == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_procresultadoaprov"]:$this->ed74_i_procresultadoaprov);
+       $this->ed74_i_codigo = ($this->ed74_i_codigo === 0 || $this->ed74_i_codigo === 0.0 || $this->ed74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_codigo"]:$this->ed74_i_codigo);
+       $this->ed74_i_diario = ($this->ed74_i_diario === 0 || $this->ed74_i_diario === 0.0 || $this->ed74_i_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_diario"]:$this->ed74_i_diario);
+       $this->ed74_i_procresultadoaprov = ($this->ed74_i_procresultadoaprov === 0 || $this->ed74_i_procresultadoaprov === 0.0 || $this->ed74_i_procresultadoaprov == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_procresultadoaprov"]:$this->ed74_i_procresultadoaprov);
        $this->ed74_c_valoraprov = ($this->ed74_c_valoraprov == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_c_valoraprov"]:$this->ed74_c_valoraprov);
        $this->ed74_c_resultadoaprov = ($this->ed74_c_resultadoaprov == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_c_resultadoaprov"]:$this->ed74_c_resultadoaprov);
-       $this->ed74_i_procresultadofreq = ($this->ed74_i_procresultadofreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_procresultadofreq"]:$this->ed74_i_procresultadofreq);
-       $this->ed74_i_percfreq = ($this->ed74_i_percfreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_percfreq"]:$this->ed74_i_percfreq);
+       $this->ed74_i_procresultadofreq = ($this->ed74_i_procresultadofreq === 0 || $this->ed74_i_procresultadofreq === 0.0 || $this->ed74_i_procresultadofreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_procresultadofreq"]:$this->ed74_i_procresultadofreq);
+       $this->ed74_i_percfreq = ($this->ed74_i_percfreq === 0 || $this->ed74_i_percfreq === 0.0 || $this->ed74_i_percfreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_percfreq"]:$this->ed74_i_percfreq);
        $this->ed74_c_resultadofreq = ($this->ed74_c_resultadofreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_c_resultadofreq"]:$this->ed74_c_resultadofreq);
        $this->ed74_c_resultadofinal = ($this->ed74_c_resultadofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_c_resultadofinal"]:$this->ed74_c_resultadofinal);
-       $this->ed74_i_calcfreq = ($this->ed74_i_calcfreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_calcfreq"]:$this->ed74_i_calcfreq);
+       $this->ed74_i_calcfreq = ($this->ed74_i_calcfreq === 0 || $this->ed74_i_calcfreq === 0.0 || $this->ed74_i_calcfreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_calcfreq"]:$this->ed74_i_calcfreq);
        $this->ed74_t_obs = ($this->ed74_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_t_obs"]:$this->ed74_t_obs);
      }else{
-       $this->ed74_i_codigo = ($this->ed74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_codigo"]:$this->ed74_i_codigo);
+       $this->ed74_i_codigo = ($this->ed74_i_codigo === 0 || $this->ed74_i_codigo === 0.0 || $this->ed74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed74_i_codigo"]:$this->ed74_i_codigo);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_diariofinal {
          $this->ed74_i_codigo = $ed74_i_codigo;
        }
      }
-     if(($this->ed74_i_codigo == null) || ($this->ed74_i_codigo == "") ){
+     if(($this->ed74_i_codigo == null) || ($this->ed74_i_codigo === 0 || $this->ed74_i_codigo === 0.0 || $this->ed74_i_codigo == "") ){
        $this->erro_sql = " Campo ed74_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

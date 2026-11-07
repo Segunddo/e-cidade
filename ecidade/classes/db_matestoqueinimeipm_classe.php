@@ -54,7 +54,7 @@ class cl_matestoqueinimeipm {
                  m89_valorunitario = float8 = Valor Unitário 
                  ";
    //funcao construtor da classe 
-   function cl_matestoqueinimeipm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matestoqueinimeipm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_matestoqueinimeipm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m89_sequencial = ($this->m89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_sequencial"]:$this->m89_sequencial);
-       $this->m89_matestoqueinimei = ($this->m89_matestoqueinimei == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_matestoqueinimei"]:$this->m89_matestoqueinimei);
-       $this->m89_precomedio = ($this->m89_precomedio == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_precomedio"]:$this->m89_precomedio);
-       $this->m89_valorunitario = ($this->m89_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_valorunitario"]:$this->m89_valorunitario);
+       $this->m89_sequencial = ($this->m89_sequencial === 0 || $this->m89_sequencial === 0.0 || $this->m89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_sequencial"]:$this->m89_sequencial);
+       $this->m89_matestoqueinimei = ($this->m89_matestoqueinimei === 0 || $this->m89_matestoqueinimei === 0.0 || $this->m89_matestoqueinimei == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_matestoqueinimei"]:$this->m89_matestoqueinimei);
+       $this->m89_precomedio = ($this->m89_precomedio === 0 || $this->m89_precomedio === 0.0 || $this->m89_precomedio == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_precomedio"]:$this->m89_precomedio);
+       $this->m89_valorunitario = ($this->m89_valorunitario === 0 || $this->m89_valorunitario === 0.0 || $this->m89_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_valorunitario"]:$this->m89_valorunitario);
      }else{
-       $this->m89_sequencial = ($this->m89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_sequencial"]:$this->m89_sequencial);
+       $this->m89_sequencial = ($this->m89_sequencial === 0 || $this->m89_sequencial === 0.0 || $this->m89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_sequencial"]:$this->m89_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_matestoqueinimeipm {
          $this->m89_sequencial = $m89_sequencial; 
        }
      }
-     if(($this->m89_sequencial == null) || ($this->m89_sequencial == "") ){ 
+     if(($this->m89_sequencial == null) || ($this->m89_sequencial === 0 || $this->m89_sequencial === 0.0 || $this->m89_sequencial == "") ){ 
        $this->erro_sql = " Campo m89_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -367,7 +367,7 @@ class cl_matestoqueinimeipm {
    function sql_query ( $m89_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_matestoqueinimeipm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_matestoqueinimeipm {
    function sql_query_file ( $m89_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_matestoqueinimeipm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

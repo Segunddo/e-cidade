@@ -28,7 +28,7 @@ class cl_diarioregracalculo {
                  ed125_regracalculo = int4 = Regra de Cálculo 
                  ";
    //funcao construtor da classe 
-   function cl_diarioregracalculo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diarioregracalculo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_diarioregracalculo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed125_codigo = ($this->ed125_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed125_codigo"]:$this->ed125_codigo);
-       $this->ed125_ordemperiodo = ($this->ed125_ordemperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed125_ordemperiodo"]:$this->ed125_ordemperiodo);
-       $this->ed125_diario = ($this->ed125_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed125_diario"]:$this->ed125_diario);
-       $this->ed125_regracalculo = ($this->ed125_regracalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed125_regracalculo"]:$this->ed125_regracalculo);
+       $this->ed125_codigo = ($this->ed125_codigo === 0 || $this->ed125_codigo === 0.0 || $this->ed125_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed125_codigo"]:$this->ed125_codigo);
+       $this->ed125_ordemperiodo = ($this->ed125_ordemperiodo === 0 || $this->ed125_ordemperiodo === 0.0 || $this->ed125_ordemperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed125_ordemperiodo"]:$this->ed125_ordemperiodo);
+       $this->ed125_diario = ($this->ed125_diario === 0 || $this->ed125_diario === 0.0 || $this->ed125_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed125_diario"]:$this->ed125_diario);
+       $this->ed125_regracalculo = ($this->ed125_regracalculo === 0 || $this->ed125_regracalculo === 0.0 || $this->ed125_regracalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed125_regracalculo"]:$this->ed125_regracalculo);
      }else{
-       $this->ed125_codigo = ($this->ed125_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed125_codigo"]:$this->ed125_codigo);
+       $this->ed125_codigo = ($this->ed125_codigo === 0 || $this->ed125_codigo === 0.0 || $this->ed125_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed125_codigo"]:$this->ed125_codigo);
      }
    }
    // funcao para inclusao
@@ -107,7 +107,7 @@ class cl_diarioregracalculo {
          $this->ed125_codigo = $ed125_codigo; 
        }
      }
-     if(($this->ed125_codigo == null) || ($this->ed125_codigo == "") ){ 
+     if(($this->ed125_codigo == null) || ($this->ed125_codigo === 0 || $this->ed125_codigo === 0.0 || $this->ed125_codigo == "") ){ 
        $this->erro_sql = " Campo ed125_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

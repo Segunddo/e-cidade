@@ -58,7 +58,7 @@ class cl_caddisciplina {
                  ed232_corhtml = varchar(7) = Codigo Hex da Cor
                  ";
    //funcao construtor da classe 
-   function cl_caddisciplina() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("caddisciplina"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_caddisciplina {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed232_i_codigo = ($this->ed232_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_i_codigo"]:$this->ed232_i_codigo);
+       $this->ed232_i_codigo = ($this->ed232_i_codigo === 0 || $this->ed232_i_codigo === 0.0 || $this->ed232_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_i_codigo"]:$this->ed232_i_codigo);
        $this->ed232_areaconhecimento = ($this->ed232_areaconhecimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_areaconhecimento"]:$this->ed232_areaconhecimento);
        $this->ed232_c_descr = ($this->ed232_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_c_descr"]:$this->ed232_c_descr);
        $this->ed232_c_abrev = ($this->ed232_c_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_c_abrev"]:$this->ed232_c_abrev);
        $this->ed232_c_descrcompleta = ($this->ed232_c_descrcompleta == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_c_descrcompleta"]:$this->ed232_c_descrcompleta);
        $this->ed232_corhtml = ($this->ed232_corhtml == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_corhtml"]:$this->ed232_corhtml);
      }else{
-       $this->ed232_i_codigo = ($this->ed232_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_i_codigo"]:$this->ed232_i_codigo);
+       $this->ed232_i_codigo = ($this->ed232_i_codigo === 0 || $this->ed232_i_codigo === 0.0 || $this->ed232_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_i_codigo"]:$this->ed232_i_codigo);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_caddisciplina {
          $this->ed232_i_codigo = $ed232_i_codigo; 
        }
      }
-     if(($this->ed232_i_codigo == null) || ($this->ed232_i_codigo == "") ){ 
+     if(($this->ed232_i_codigo == null) || ($this->ed232_i_codigo === 0 || $this->ed232_i_codigo === 0.0 || $this->ed232_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed232_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -441,7 +441,7 @@ class cl_caddisciplina {
    function sql_query ( $ed232_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -463,7 +463,7 @@ class cl_caddisciplina {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -476,7 +476,7 @@ class cl_caddisciplina {
    function sql_query_file ( $ed232_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -497,7 +497,7 @@ class cl_caddisciplina {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_caddisciplina {
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
 
@@ -545,7 +545,7 @@ class cl_caddisciplina {
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 
@@ -568,7 +568,7 @@ class cl_caddisciplina {
     $sql = "select ";
     if ($campos != "*" ) {
       
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -601,7 +601,7 @@ class cl_caddisciplina {
     if ($ordem != null) {
       
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -615,7 +615,7 @@ class cl_caddisciplina {
   function sql_query_disciplinas_na_escola( $ed12_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -640,7 +640,7 @@ class cl_caddisciplina {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

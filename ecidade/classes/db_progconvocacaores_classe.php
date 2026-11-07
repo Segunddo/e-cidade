@@ -67,7 +67,7 @@ class cl_progconvocacaores {
                  ed127_i_nfaltanjust = int4 = N° Faltas não Justificadas 
                  ";
    //funcao construtor da classe 
-   function cl_progconvocacaores() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("progconvocacaores"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,9 +84,9 @@ class cl_progconvocacaores {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed127_i_codigo = ($this->ed127_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_codigo"]:$this->ed127_i_codigo);
-       $this->ed127_i_progmatricula = ($this->ed127_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_progmatricula"]:$this->ed127_i_progmatricula);
-       $this->ed127_i_usuario = ($this->ed127_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_usuario"]:$this->ed127_i_usuario);
+       $this->ed127_i_codigo = ($this->ed127_i_codigo === 0 || $this->ed127_i_codigo === 0.0 || $this->ed127_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_codigo"]:$this->ed127_i_codigo);
+       $this->ed127_i_progmatricula = ($this->ed127_i_progmatricula === 0 || $this->ed127_i_progmatricula === 0.0 || $this->ed127_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_progmatricula"]:$this->ed127_i_progmatricula);
+       $this->ed127_i_usuario = ($this->ed127_i_usuario === 0 || $this->ed127_i_usuario === 0.0 || $this->ed127_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_usuario"]:$this->ed127_i_usuario);
        if($this->ed127_d_data == ""){
          $this->ed127_d_data_dia = ($this->ed127_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_d_data_dia"]:$this->ed127_d_data_dia);
          $this->ed127_d_data_mes = ($this->ed127_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_d_data_mes"]:$this->ed127_d_data_mes);
@@ -95,13 +95,13 @@ class cl_progconvocacaores {
             $this->ed127_d_data = $this->ed127_d_data_ano."-".$this->ed127_d_data_mes."-".$this->ed127_d_data_dia;
          }
        }
-       $this->ed127_i_ano = ($this->ed127_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_ano"]:$this->ed127_i_ano);
-       $this->ed127_i_nconvoca = ($this->ed127_i_nconvoca == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_nconvoca"]:$this->ed127_i_nconvoca);
-       $this->ed127_i_nparticipa = ($this->ed127_i_nparticipa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_nparticipa"]:$this->ed127_i_nparticipa);
-       $this->ed127_i_nfaltajust = ($this->ed127_i_nfaltajust == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_nfaltajust"]:$this->ed127_i_nfaltajust);
-       $this->ed127_i_nfaltanjust = ($this->ed127_i_nfaltanjust == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_nfaltanjust"]:$this->ed127_i_nfaltanjust);
+       $this->ed127_i_ano = ($this->ed127_i_ano === 0 || $this->ed127_i_ano === 0.0 || $this->ed127_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_ano"]:$this->ed127_i_ano);
+       $this->ed127_i_nconvoca = ($this->ed127_i_nconvoca === 0 || $this->ed127_i_nconvoca === 0.0 || $this->ed127_i_nconvoca == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_nconvoca"]:$this->ed127_i_nconvoca);
+       $this->ed127_i_nparticipa = ($this->ed127_i_nparticipa === 0 || $this->ed127_i_nparticipa === 0.0 || $this->ed127_i_nparticipa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_nparticipa"]:$this->ed127_i_nparticipa);
+       $this->ed127_i_nfaltajust = ($this->ed127_i_nfaltajust === 0 || $this->ed127_i_nfaltajust === 0.0 || $this->ed127_i_nfaltajust == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_nfaltajust"]:$this->ed127_i_nfaltajust);
+       $this->ed127_i_nfaltanjust = ($this->ed127_i_nfaltanjust === 0 || $this->ed127_i_nfaltanjust === 0.0 || $this->ed127_i_nfaltanjust == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_nfaltanjust"]:$this->ed127_i_nfaltanjust);
      }else{
-       $this->ed127_i_codigo = ($this->ed127_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_codigo"]:$this->ed127_i_codigo);
+       $this->ed127_i_codigo = ($this->ed127_i_codigo === 0 || $this->ed127_i_codigo === 0.0 || $this->ed127_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed127_i_codigo"]:$this->ed127_i_codigo);
      }
    }
    // funcao para inclusao
@@ -185,7 +185,7 @@ class cl_progconvocacaores {
          $this->ed127_i_codigo = $ed127_i_codigo; 
        }
      }
-     if(($this->ed127_i_codigo == null) || ($this->ed127_i_codigo == "") ){ 
+     if(($this->ed127_i_codigo == null) || ($this->ed127_i_codigo === 0 || $this->ed127_i_codigo === 0.0 || $this->ed127_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed127_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -533,7 +533,7 @@ class cl_progconvocacaores {
    function sql_query ( $ed127_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -565,7 +565,7 @@ class cl_progconvocacaores {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -577,7 +577,7 @@ class cl_progconvocacaores {
    function sql_query_file ( $ed127_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -598,7 +598,7 @@ class cl_progconvocacaores {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

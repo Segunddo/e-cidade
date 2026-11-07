@@ -58,7 +58,7 @@ class cl_edu_anexoatolegal {
                  ed292_ordem = int4 = Ordem 
                  ";
    //funcao construtor da classe 
-   function cl_edu_anexoatolegal() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("edu_anexoatolegal"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_edu_anexoatolegal {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed292_sequencial = ($this->ed292_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_sequencial"]:$this->ed292_sequencial);
-       $this->ed292_atolegal = ($this->ed292_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_atolegal"]:$this->ed292_atolegal);
+       $this->ed292_sequencial = ($this->ed292_sequencial === 0 || $this->ed292_sequencial === 0.0 || $this->ed292_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_sequencial"]:$this->ed292_sequencial);
+       $this->ed292_atolegal = ($this->ed292_atolegal === 0 || $this->ed292_atolegal === 0.0 || $this->ed292_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_atolegal"]:$this->ed292_atolegal);
        $this->ed292_nomearquivo = ($this->ed292_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_nomearquivo"]:$this->ed292_nomearquivo);
-       $this->ed292_arquivo = ($this->ed292_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_arquivo"]:$this->ed292_arquivo);
+       $this->ed292_arquivo = ($this->ed292_arquivo === 0 || $this->ed292_arquivo === 0.0 || $this->ed292_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_arquivo"]:$this->ed292_arquivo);
        $this->ed292_obs = ($this->ed292_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_obs"]:$this->ed292_obs);
-       $this->ed292_ordem = ($this->ed292_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_ordem"]:$this->ed292_ordem);
+       $this->ed292_ordem = ($this->ed292_ordem === 0 || $this->ed292_ordem === 0.0 || $this->ed292_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_ordem"]:$this->ed292_ordem);
      }else{
-       $this->ed292_sequencial = ($this->ed292_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_sequencial"]:$this->ed292_sequencial);
+       $this->ed292_sequencial = ($this->ed292_sequencial === 0 || $this->ed292_sequencial === 0.0 || $this->ed292_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_sequencial"]:$this->ed292_sequencial);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_edu_anexoatolegal {
          $this->ed292_sequencial = $ed292_sequencial; 
        }
      }
-     if(($this->ed292_sequencial == null) || ($this->ed292_sequencial == "") ){ 
+     if(($this->ed292_sequencial == null) || ($this->ed292_sequencial === 0 || $this->ed292_sequencial === 0.0 || $this->ed292_sequencial == "") ){ 
        $this->erro_sql = " Campo ed292_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -435,7 +435,7 @@ class cl_edu_anexoatolegal {
    function sql_query ( $ed292_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -458,7 +458,7 @@ class cl_edu_anexoatolegal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_edu_anexoatolegal {
    function sql_query_file ( $ed292_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_edu_anexoatolegal {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

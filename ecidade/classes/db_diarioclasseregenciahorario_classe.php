@@ -52,7 +52,7 @@ class cl_diarioclasseregenciahorario {
                  ed302_diarioclasse = int4 = Diario de classe 
                  ";
    //funcao construtor da classe 
-   function cl_diarioclasseregenciahorario() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diarioclasseregenciahorario"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_diarioclasseregenciahorario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed302_sequencial = ($this->ed302_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed302_sequencial"]:$this->ed302_sequencial);
-       $this->ed302_regenciahorario = ($this->ed302_regenciahorario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed302_regenciahorario"]:$this->ed302_regenciahorario);
-       $this->ed302_diarioclasse = ($this->ed302_diarioclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["ed302_diarioclasse"]:$this->ed302_diarioclasse);
+       $this->ed302_sequencial = ($this->ed302_sequencial === 0 || $this->ed302_sequencial === 0.0 || $this->ed302_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed302_sequencial"]:$this->ed302_sequencial);
+       $this->ed302_regenciahorario = ($this->ed302_regenciahorario === 0 || $this->ed302_regenciahorario === 0.0 || $this->ed302_regenciahorario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed302_regenciahorario"]:$this->ed302_regenciahorario);
+       $this->ed302_diarioclasse = ($this->ed302_diarioclasse === 0 || $this->ed302_diarioclasse === 0.0 || $this->ed302_diarioclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["ed302_diarioclasse"]:$this->ed302_diarioclasse);
      }else{
-       $this->ed302_sequencial = ($this->ed302_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed302_sequencial"]:$this->ed302_sequencial);
+       $this->ed302_sequencial = ($this->ed302_sequencial === 0 || $this->ed302_sequencial === 0.0 || $this->ed302_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed302_sequencial"]:$this->ed302_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_diarioclasseregenciahorario {
          $this->ed302_sequencial = $ed302_sequencial; 
        }
      }
-     if(($this->ed302_sequencial == null) || ($this->ed302_sequencial == "") ){ 
+     if(($this->ed302_sequencial == null) || ($this->ed302_sequencial === 0 || $this->ed302_sequencial === 0.0 || $this->ed302_sequencial == "") ){ 
        $this->erro_sql = " Campo ed302_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_diarioclasseregenciahorario {
    function sql_query ( $ed302_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_diarioclasseregenciahorario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_diarioclasseregenciahorario {
    function sql_query_file ( $ed302_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_diarioclasseregenciahorario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_diarioclasseregenciahorario {
   function sql_query_diario_classe ( $ed302_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_diarioclasseregenciahorario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

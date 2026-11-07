@@ -33,7 +33,8 @@ require_once(modification("classes/db_mer_cardapiodata_classe.php"));
 require_once(modification('libs/db_stdlibwebseller.php'));
 require_once(modification('libs/db_utils.php'));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clrotulo           = new rotulocampo;

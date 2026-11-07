@@ -45,11 +45,11 @@ class cl_formacaocensodisciplina
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed145_sequencial = ($this->ed145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed145_sequencial"]:$this->ed145_sequencial);
-       $this->ed145_formacao = ($this->ed145_formacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed145_formacao"]:$this->ed145_formacao);
-       $this->ed145_censodisciplina = ($this->ed145_censodisciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed145_censodisciplina"]:$this->ed145_censodisciplina);
+       $this->ed145_sequencial = ($this->ed145_sequencial === 0 || $this->ed145_sequencial === 0.0 || $this->ed145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed145_sequencial"]:$this->ed145_sequencial);
+       $this->ed145_formacao = ($this->ed145_formacao === 0 || $this->ed145_formacao === 0.0 || $this->ed145_formacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed145_formacao"]:$this->ed145_formacao);
+       $this->ed145_censodisciplina = ($this->ed145_censodisciplina === 0 || $this->ed145_censodisciplina === 0.0 || $this->ed145_censodisciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed145_censodisciplina"]:$this->ed145_censodisciplina);
      }else{
-       $this->ed145_sequencial = ($this->ed145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed145_sequencial"]:$this->ed145_sequencial);
+       $this->ed145_sequencial = ($this->ed145_sequencial === 0 || $this->ed145_sequencial === 0.0 || $this->ed145_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed145_sequencial"]:$this->ed145_sequencial);
      }
    }
 

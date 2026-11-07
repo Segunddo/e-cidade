@@ -300,7 +300,7 @@ function js_preenchecep(chave,chave1,chave2,chave3,chave4){
  db_iframe_cep.hide();
 }
 function js_valida(){
- Vemail = "<?=@$GLOBALS[Sed82_c_email]?>";
+ Vemail = "<?=@$GLOBALS[(defined('Sed82_c_email') ? Sed82_c_email : 'Sed82_c_email')]?>";
  if(jsValidaEmail(document.form1.ed82_c_email.value,Vemail)==false){
   return false;
  }

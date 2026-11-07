@@ -26,7 +26,7 @@ class cl_funcaoatividade {
                  ed119_docente = bool = Docente 
                  ";
    //funcao construtor da classe 
-   function cl_funcaoatividade() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("funcaoatividade"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_funcaoatividade {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed119_sequencial = ($this->ed119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_sequencial"]:$this->ed119_sequencial);
+       $this->ed119_sequencial = ($this->ed119_sequencial === 0 || $this->ed119_sequencial === 0.0 || $this->ed119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_sequencial"]:$this->ed119_sequencial);
        $this->ed119_descricao = ($this->ed119_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_descricao"]:$this->ed119_descricao);
        $this->ed119_docente = ($this->ed119_docente == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed119_docente"]:$this->ed119_docente);
      }else{
-       $this->ed119_sequencial = ($this->ed119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_sequencial"]:$this->ed119_sequencial);
+       $this->ed119_sequencial = ($this->ed119_sequencial === 0 || $this->ed119_sequencial === 0.0 || $this->ed119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_sequencial"]:$this->ed119_sequencial);
      }
    }
    // funcao para inclusao
@@ -72,7 +72,7 @@ class cl_funcaoatividade {
        return false;
      }
        $this->ed119_sequencial = $ed119_sequencial; 
-     if(($this->ed119_sequencial == null) || ($this->ed119_sequencial == "") ){ 
+     if(($this->ed119_sequencial == null) || ($this->ed119_sequencial === 0 || $this->ed119_sequencial === 0.0 || $this->ed119_sequencial == "") ){ 
        $this->erro_sql = " Campo ed119_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -333,7 +333,7 @@ class cl_funcaoatividade {
    function sql_query ( $ed119_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -354,7 +354,7 @@ class cl_funcaoatividade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -367,7 +367,7 @@ class cl_funcaoatividade {
    function sql_query_file ( $ed119_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_funcaoatividade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

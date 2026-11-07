@@ -81,20 +81,20 @@ class cl_edu_relatmodel
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed217_i_codigo = ($this->ed217_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_codigo"]:$this->ed217_i_codigo);
-       $this->ed217_i_relatorio = ($this->ed217_i_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_relatorio"]:$this->ed217_i_relatorio);
+       $this->ed217_i_codigo = ($this->ed217_i_codigo === 0 || $this->ed217_i_codigo === 0.0 || $this->ed217_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_codigo"]:$this->ed217_i_codigo);
+       $this->ed217_i_relatorio = ($this->ed217_i_relatorio === 0 || $this->ed217_i_relatorio === 0.0 || $this->ed217_i_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_relatorio"]:$this->ed217_i_relatorio);
        $this->ed217_c_nome = ($this->ed217_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_c_nome"]:$this->ed217_c_nome);
        $this->ed217_t_cabecalho = ($this->ed217_t_cabecalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_t_cabecalho"]:$this->ed217_t_cabecalho);
        $this->ed217_t_rodape = ($this->ed217_t_rodape == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_t_rodape"]:$this->ed217_t_rodape);
        $this->ed217_t_obs = ($this->ed217_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_t_obs"]:$this->ed217_t_obs);
-       $this->ed217_orientacao = ($this->ed217_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_orientacao"]:$this->ed217_orientacao);
-       $this->ed217_gradenotas = ($this->ed217_gradenotas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_gradenotas"]:$this->ed217_gradenotas);
-       $this->ed217_gradeetapas = ($this->ed217_gradeetapas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_gradeetapas"]:$this->ed217_gradeetapas);
-       $this->ed217_observacao = ($this->ed217_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_observacao"]:$this->ed217_observacao);
-       $this->ed217_i_tipomodelo = ($this->ed217_i_tipomodelo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_tipomodelo"]:$this->ed217_i_tipomodelo);
+       $this->ed217_orientacao = ($this->ed217_orientacao === 0 || $this->ed217_orientacao === 0.0 || $this->ed217_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_orientacao"]:$this->ed217_orientacao);
+       $this->ed217_gradenotas = ($this->ed217_gradenotas === 0 || $this->ed217_gradenotas === 0.0 || $this->ed217_gradenotas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_gradenotas"]:$this->ed217_gradenotas);
+       $this->ed217_gradeetapas = ($this->ed217_gradeetapas === 0 || $this->ed217_gradeetapas === 0.0 || $this->ed217_gradeetapas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_gradeetapas"]:$this->ed217_gradeetapas);
+       $this->ed217_observacao = ($this->ed217_observacao === 0 || $this->ed217_observacao === 0.0 || $this->ed217_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_observacao"]:$this->ed217_observacao);
+       $this->ed217_i_tipomodelo = ($this->ed217_i_tipomodelo === 0 || $this->ed217_i_tipomodelo === 0.0 || $this->ed217_i_tipomodelo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_tipomodelo"]:$this->ed217_i_tipomodelo);
        $this->ed217_exibeturma = ($this->ed217_exibeturma == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed217_exibeturma"]:$this->ed217_exibeturma);
        $this->ed217_exibecargahoraria = ($this->ed217_exibecargahoraria == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed217_exibecargahoraria"]:$this->ed217_exibecargahoraria);
-       $this->ed217_brasao = ($this->ed217_brasao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_brasao"]:$this->ed217_brasao);
+       $this->ed217_brasao = ($this->ed217_brasao === 0 || $this->ed217_brasao === 0.0 || $this->ed217_brasao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_brasao"]:$this->ed217_brasao);
        $this->ed217_exibe_obs_diario = ($this->ed217_exibe_obs_diario == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed217_exibe_obs_diario"]:$this->ed217_exibe_obs_diario);
        $this->ed217_exibirmantenedora = ($this->ed217_exibirmantenedora == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed217_exibirmantenedora"]:$this->ed217_exibirmantenedora);
        $this->ed217_exibirdistrito = ($this->ed217_exibirdistrito == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed217_exibirdistrito"]:$this->ed217_exibirdistrito);
@@ -103,7 +103,7 @@ class cl_edu_relatmodel
        $this->ed217_exibircertidao = ($this->ed217_exibircertidao == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed217_exibircertidao"]:$this->ed217_exibircertidao);
        $this->ed217_exibiridentidade = ($this->ed217_exibiridentidade == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed217_exibiridentidade"]:$this->ed217_exibiridentidade);
      }else{
-       $this->ed217_i_codigo = ($this->ed217_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_codigo"]:$this->ed217_i_codigo);
+       $this->ed217_i_codigo = ($this->ed217_i_codigo === 0 || $this->ed217_i_codigo === 0.0 || $this->ed217_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_codigo"]:$this->ed217_i_codigo);
      }
    }
 
@@ -257,7 +257,7 @@ class cl_edu_relatmodel
          $this->ed217_i_codigo = $ed217_i_codigo; 
        }
      }
-     if(($this->ed217_i_codigo == null) || ($this->ed217_i_codigo == "") ){ 
+     if(($this->ed217_i_codigo == null) || ($this->ed217_i_codigo === 0 || $this->ed217_i_codigo === 0.0 || $this->ed217_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed217_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

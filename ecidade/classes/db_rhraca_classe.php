@@ -50,7 +50,7 @@ class cl_rhraca {
                  rh18_descr = varchar(40) = Descrição da Raça 
                  ";
    //funcao construtor da classe 
-   function cl_rhraca() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhraca"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_rhraca {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh18_raca = ($this->rh18_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["rh18_raca"]:$this->rh18_raca);
+       $this->rh18_raca = ($this->rh18_raca === 0 || $this->rh18_raca === 0.0 || $this->rh18_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["rh18_raca"]:$this->rh18_raca);
        $this->rh18_descr = ($this->rh18_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh18_descr"]:$this->rh18_descr);
      }else{
-       $this->rh18_raca = ($this->rh18_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["rh18_raca"]:$this->rh18_raca);
+       $this->rh18_raca = ($this->rh18_raca === 0 || $this->rh18_raca === 0.0 || $this->rh18_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["rh18_raca"]:$this->rh18_raca);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhraca {
        return false;
      }
        $this->rh18_raca = $rh18_raca; 
-     if(($this->rh18_raca == null) || ($this->rh18_raca == "") ){ 
+     if(($this->rh18_raca == null) || ($this->rh18_raca === 0 || $this->rh18_raca === 0.0 || $this->rh18_raca == "") ){ 
        $this->erro_sql = " Campo rh18_raca nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_rhraca {
    function sql_query ( $rh18_raca=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -326,7 +326,7 @@ class cl_rhraca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -338,7 +338,7 @@ class cl_rhraca {
    function sql_query_file ( $rh18_raca=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -359,7 +359,7 @@ class cl_rhraca {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -58,7 +58,7 @@ class cl_telefonealuno {
                  ed50_t_obs = text = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_telefonealuno() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("telefonealuno"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]."?ed50_i_aluno=".@$GLOBALS["HTTP_POST_VARS"]["ed50_i_aluno"]."&ed47_v_nome=".@$GLOBALS["HTTP_POST_VARS"]["ed47_v_nome"]);
@@ -75,14 +75,14 @@ class cl_telefonealuno {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed50_i_codigo = ($this->ed50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_codigo"]:$this->ed50_i_codigo);
-       $this->ed50_i_aluno = ($this->ed50_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_aluno"]:$this->ed50_i_aluno);
-       $this->ed50_i_tipotelefone = ($this->ed50_i_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_tipotelefone"]:$this->ed50_i_tipotelefone);
-       $this->ed50_i_numero = ($this->ed50_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_numero"]:$this->ed50_i_numero);
-       $this->ed50_i_ramal = ($this->ed50_i_ramal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_ramal"]:$this->ed50_i_ramal);
+       $this->ed50_i_codigo = ($this->ed50_i_codigo === 0 || $this->ed50_i_codigo === 0.0 || $this->ed50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_codigo"]:$this->ed50_i_codigo);
+       $this->ed50_i_aluno = ($this->ed50_i_aluno === 0 || $this->ed50_i_aluno === 0.0 || $this->ed50_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_aluno"]:$this->ed50_i_aluno);
+       $this->ed50_i_tipotelefone = ($this->ed50_i_tipotelefone === 0 || $this->ed50_i_tipotelefone === 0.0 || $this->ed50_i_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_tipotelefone"]:$this->ed50_i_tipotelefone);
+       $this->ed50_i_numero = ($this->ed50_i_numero === 0 || $this->ed50_i_numero === 0.0 || $this->ed50_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_numero"]:$this->ed50_i_numero);
+       $this->ed50_i_ramal = ($this->ed50_i_ramal === 0 || $this->ed50_i_ramal === 0.0 || $this->ed50_i_ramal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_ramal"]:$this->ed50_i_ramal);
        $this->ed50_t_obs = ($this->ed50_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_t_obs"]:$this->ed50_t_obs);
      }else{
-       $this->ed50_i_codigo = ($this->ed50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_codigo"]:$this->ed50_i_codigo);
+       $this->ed50_i_codigo = ($this->ed50_i_codigo === 0 || $this->ed50_i_codigo === 0.0 || $this->ed50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed50_i_codigo"]:$this->ed50_i_codigo);
      }
    }
    // funcao para inclusao
@@ -142,7 +142,7 @@ class cl_telefonealuno {
          $this->ed50_i_codigo = $ed50_i_codigo; 
        }
      }
-     if(($this->ed50_i_codigo == null) || ($this->ed50_i_codigo == "") ){ 
+     if(($this->ed50_i_codigo == null) || ($this->ed50_i_codigo === 0 || $this->ed50_i_codigo === 0.0 || $this->ed50_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed50_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_telefonealuno {
    function sql_query ( $ed50_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_telefonealuno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_telefonealuno {
    function sql_query_file ( $ed50_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -478,7 +478,7 @@ class cl_telefonealuno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

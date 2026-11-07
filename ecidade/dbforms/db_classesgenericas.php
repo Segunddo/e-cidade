@@ -753,8 +753,8 @@ class cl_criaabas {
                   tab[x].style.border = '1px outset #cccccc';
                   tab[x].style.borderBottomColor = '#000000';
  <?
-    reset($this->identifica);
- for($w=0; $w<sizeof($this->identifica); $w++){
+    if (is_array($this->identifica)) reset($this->identifica);
+ for($w=0; $w<sizeof((array)$this->identifica); $w++){
        $chave=key($this->identifica);
  ?>
               document.formaba.<?=$chave?>.style.color ='<?=(isset($this->cortexto[$chave])&&$this->cortexto[$chave]!=""?$this->cortexto[$chave]:"black")?>';
@@ -832,8 +832,8 @@ class cl_criaabas {
         <table border="0" cellpadding="0" cellspacing="0" marginwidth="0">
         <tr>
  <?
-    reset($this->identifica);
-    for($w=0; $w<sizeof($this->identifica); $w++){
+    if (is_array($this->identifica)) reset($this->identifica);
+    for($w=0; $w<sizeof((array)$this->identifica); $w++){
        $chave     = key($this->identifica);
        $cortexto  = (isset($this->cortexto[$chave])&&$this->cortexto[$chave]!=""?$this->cortexto[$chave]:'black');
        $corfundo  = (isset($this->corfundo[$chave])&&$this->corfundo[$chave]!=""?$this->corfundo[$chave]:'#cccccc');
@@ -863,8 +863,8 @@ class cl_criaabas {
       <tr>
         <td height="340" align="center">
  <?
-    reset($this->identifica);
-    for($w=0; $w<sizeof($this->identifica); $w++){
+    if (is_array($this->identifica)) reset($this->identifica);
+    for($w=0; $w<sizeof((array)$this->identifica); $w++){
        $chave=key($this->identifica);
        $src=(isset($this->src[$chave]) && $this->src[$chave]!=null?"src=\"".$this->src[$chave]."\"":"");
        if($src==""){
@@ -883,8 +883,8 @@ class cl_criaabas {
       </form>
       </table>
  <?
-  reset($this->identifica);
-  $chave=key($this->identifica);
+  if (is_array($this->identifica)) reset($this->identifica);
+  $chave=(is_array($this->identifica) ? key($this->identifica) : null);
   echo " <script> mo_camada('$chave'); </script> ";
    }
 }

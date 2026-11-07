@@ -96,7 +96,7 @@ class cl_matricula
                  ";
 
     //funcao construtor da classe
-    function cl_matricula()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("matricula");
@@ -118,13 +118,13 @@ class cl_matricula
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed60_i_codigo = ($this->ed60_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_codigo"] : $this->ed60_i_codigo);
-            $this->ed60_i_aluno = ($this->ed60_i_aluno == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_aluno"] : $this->ed60_i_aluno);
-            $this->ed60_i_turma = ($this->ed60_i_turma == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_turma"] : $this->ed60_i_turma);
-            $this->ed60_i_numaluno = ($this->ed60_i_numaluno == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_numaluno"] : $this->ed60_i_numaluno);
+            $this->ed60_i_codigo = ($this->ed60_i_codigo === 0 || $this->ed60_i_codigo === 0.0 || $this->ed60_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_codigo"] : $this->ed60_i_codigo);
+            $this->ed60_i_aluno = ($this->ed60_i_aluno === 0 || $this->ed60_i_aluno === 0.0 || $this->ed60_i_aluno == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_aluno"] : $this->ed60_i_aluno);
+            $this->ed60_i_turma = ($this->ed60_i_turma === 0 || $this->ed60_i_turma === 0.0 || $this->ed60_i_turma == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_turma"] : $this->ed60_i_turma);
+            $this->ed60_i_numaluno = ($this->ed60_i_numaluno === 0 || $this->ed60_i_numaluno === 0.0 || $this->ed60_i_numaluno == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_numaluno"] : $this->ed60_i_numaluno);
             $this->ed60_c_situacao = ($this->ed60_c_situacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_c_situacao"] : $this->ed60_c_situacao);
             $this->ed60_c_concluida = ($this->ed60_c_concluida == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_c_concluida"] : $this->ed60_c_concluida);
-            $this->ed60_i_turmaant = ($this->ed60_i_turmaant == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_turmaant"] : $this->ed60_i_turmaant);
+            $this->ed60_i_turmaant = ($this->ed60_i_turmaant === 0 || $this->ed60_i_turmaant === 0.0 || $this->ed60_i_turmaant == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_turmaant"] : $this->ed60_i_turmaant);
             $this->ed60_c_rfanterior = ($this->ed60_c_rfanterior == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_c_rfanterior"] : $this->ed60_c_rfanterior);
             if ($this->ed60_d_datamatricula == "") {
                 $this->ed60_d_datamatricula_dia = ($this->ed60_d_datamatricula_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_d_datamatricula_dia"] : $this->ed60_d_datamatricula_dia);
@@ -162,10 +162,10 @@ class cl_matricula
                     $this->ed60_d_datamodifant = $this->ed60_d_datamodifant_ano . "-" . $this->ed60_d_datamodifant_mes . "-" . $this->ed60_d_datamodifant_dia;
                 }
             }
-            $this->ed60_matricula = ($this->ed60_matricula == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_matricula"] : $this->ed60_matricula);
-            $this->ed60_tipoingresso = ($this->ed60_tipoingresso == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_tipoingresso"] : $this->ed60_tipoingresso);
+            $this->ed60_matricula = ($this->ed60_matricula === 0 || $this->ed60_matricula === 0.0 || $this->ed60_matricula == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_matricula"] : $this->ed60_matricula);
+            $this->ed60_tipoingresso = ($this->ed60_tipoingresso === 0 || $this->ed60_tipoingresso === 0.0 || $this->ed60_tipoingresso == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_tipoingresso"] : $this->ed60_tipoingresso);
         } else {
-            $this->ed60_i_codigo = ($this->ed60_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_codigo"] : $this->ed60_i_codigo);
+            $this->ed60_i_codigo = ($this->ed60_i_codigo === 0 || $this->ed60_i_codigo === 0.0 || $this->ed60_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed60_i_codigo"] : $this->ed60_i_codigo);
         }
     }
 
@@ -294,7 +294,7 @@ class cl_matricula
                 $this->ed60_i_codigo = $ed60_i_codigo;
             }
         }
-        if (($this->ed60_i_codigo == null) || ($this->ed60_i_codigo == "")) {
+        if (($this->ed60_i_codigo == null) || ($this->ed60_i_codigo === 0 || $this->ed60_i_codigo === 0.0 || $this->ed60_i_codigo == "")) {
             $this->erro_sql = " Campo ed60_i_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

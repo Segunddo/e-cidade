@@ -56,7 +56,7 @@ class cl_justificativa {
                  ed06_abreviatura = varchar(3) = Abreviatura 
                  ";
    //funcao construtor da classe 
-   function cl_justificativa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("justificativa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_justificativa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed06_i_codigo = ($this->ed06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed06_i_codigo"]:$this->ed06_i_codigo);
+       $this->ed06_i_codigo = ($this->ed06_i_codigo === 0 || $this->ed06_i_codigo === 0.0 || $this->ed06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed06_i_codigo"]:$this->ed06_i_codigo);
        $this->ed06_c_descr = ($this->ed06_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed06_c_descr"]:$this->ed06_c_descr);
        $this->ed06_c_ativo = ($this->ed06_c_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed06_c_ativo"]:$this->ed06_c_ativo);
-       $this->ed06_i_escola = ($this->ed06_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed06_i_escola"]:$this->ed06_i_escola);
+       $this->ed06_i_escola = ($this->ed06_i_escola === 0 || $this->ed06_i_escola === 0.0 || $this->ed06_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed06_i_escola"]:$this->ed06_i_escola);
        $this->ed06_abreviatura = ($this->ed06_abreviatura == ""?@$GLOBALS["HTTP_POST_VARS"]["ed06_abreviatura"]:$this->ed06_abreviatura);
      }else{
-       $this->ed06_i_codigo = ($this->ed06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed06_i_codigo"]:$this->ed06_i_codigo);
+       $this->ed06_i_codigo = ($this->ed06_i_codigo === 0 || $this->ed06_i_codigo === 0.0 || $this->ed06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed06_i_codigo"]:$this->ed06_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -145,7 +145,7 @@ class cl_justificativa {
          $this->ed06_i_codigo = $ed06_i_codigo; 
        }
      }
-     if(($this->ed06_i_codigo == null) || ($this->ed06_i_codigo == "") ){ 
+     if(($this->ed06_i_codigo == null) || ($this->ed06_i_codigo === 0 || $this->ed06_i_codigo === 0.0 || $this->ed06_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed06_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

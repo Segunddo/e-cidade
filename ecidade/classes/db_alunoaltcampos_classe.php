@@ -56,7 +56,7 @@ class cl_alunoaltcampos {
                  ed276_c_contatual = text = Conteúdo Atual
                  ";
    //funcao construtor da classe
-   function cl_alunoaltcampos() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("alunoaltcampos");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_alunoaltcampos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed276_i_codigo = ($this->ed276_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed276_i_codigo"]:$this->ed276_i_codigo);
-       $this->ed276_i_alunoalt = ($this->ed276_i_alunoalt == ""?@$GLOBALS["HTTP_POST_VARS"]["ed276_i_alunoalt"]:$this->ed276_i_alunoalt);
+       $this->ed276_i_codigo = ($this->ed276_i_codigo === 0 || $this->ed276_i_codigo === 0.0 || $this->ed276_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed276_i_codigo"]:$this->ed276_i_codigo);
+       $this->ed276_i_alunoalt = ($this->ed276_i_alunoalt === 0 || $this->ed276_i_alunoalt === 0.0 || $this->ed276_i_alunoalt == ""?@$GLOBALS["HTTP_POST_VARS"]["ed276_i_alunoalt"]:$this->ed276_i_alunoalt);
        $this->ed276_c_campo = ($this->ed276_c_campo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed276_c_campo"]:$this->ed276_c_campo);
        $this->ed276_c_contant = ($this->ed276_c_contant == ""?@$GLOBALS["HTTP_POST_VARS"]["ed276_c_contant"]:$this->ed276_c_contant);
        $this->ed276_c_contatual = ($this->ed276_c_contatual == ""?@$GLOBALS["HTTP_POST_VARS"]["ed276_c_contatual"]:$this->ed276_c_contatual);
      }else{
-       $this->ed276_i_codigo = ($this->ed276_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed276_i_codigo"]:$this->ed276_i_codigo);
+       $this->ed276_i_codigo = ($this->ed276_i_codigo === 0 || $this->ed276_i_codigo === 0.0 || $this->ed276_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed276_i_codigo"]:$this->ed276_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_alunoaltcampos {
          $this->ed276_i_codigo = $ed276_i_codigo;
        }
      }
-     if(($this->ed276_i_codigo == null) || ($this->ed276_i_codigo == "") ){
+     if(($this->ed276_i_codigo == null) || ($this->ed276_i_codigo === 0 || $this->ed276_i_codigo === 0.0 || $this->ed276_i_codigo == "") ){
        $this->erro_sql = " Campo ed276_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_alunoaltcampos {
    function sql_query ( $ed276_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_alunoaltcampos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_alunoaltcampos {
    function sql_query_file ( $ed276_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -478,7 +478,7 @@ class cl_alunoaltcampos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

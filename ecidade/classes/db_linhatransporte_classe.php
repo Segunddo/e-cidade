@@ -52,7 +52,7 @@ class cl_linhatransporte {
                  tre06_abreviatura = varchar(10) = Abreviatura
                  ";
    //funcao construtor da classe
-   function cl_linhatransporte() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("linhatransporte");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_linhatransporte {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre06_sequencial = ($this->tre06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_sequencial"]:$this->tre06_sequencial);
+       $this->tre06_sequencial = ($this->tre06_sequencial === 0 || $this->tre06_sequencial === 0.0 || $this->tre06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_sequencial"]:$this->tre06_sequencial);
        $this->tre06_nome = ($this->tre06_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_nome"]:$this->tre06_nome);
        $this->tre06_abreviatura = ($this->tre06_abreviatura == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_abreviatura"]:$this->tre06_abreviatura);
      }else{
-       $this->tre06_sequencial = ($this->tre06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_sequencial"]:$this->tre06_sequencial);
+       $this->tre06_sequencial = ($this->tre06_sequencial === 0 || $this->tre06_sequencial === 0.0 || $this->tre06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_sequencial"]:$this->tre06_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_linhatransporte {
          $this->tre06_sequencial = $tre06_sequencial;
        }
      }
-     if(($this->tre06_sequencial == null) || ($this->tre06_sequencial == "") ){
+     if(($this->tre06_sequencial == null) || ($this->tre06_sequencial === 0 || $this->tre06_sequencial === 0.0 || $this->tre06_sequencial == "") ){
        $this->erro_sql = " Campo tre06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -382,7 +382,7 @@ class cl_linhatransporte {
    function sql_query ( $tre06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -403,7 +403,7 @@ class cl_linhatransporte {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_linhatransporte {
    function sql_query_file ( $tre06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_linhatransporte {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -225,7 +225,7 @@ class cl_aluno
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed47_i_codigo = ($this->ed47_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_codigo"]:$this->ed47_i_codigo);
+       $this->ed47_i_codigo = ($this->ed47_i_codigo === 0 || $this->ed47_i_codigo === 0.0 || $this->ed47_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_codigo"]:$this->ed47_i_codigo);
        $this->ed47_v_nome = ($this->ed47_v_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_nome"]:$this->ed47_v_nome);
        $this->ed47_v_nomesocial = ($this->ed47_v_nomesocial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_nomesocial"]:$this->ed47_v_nomesocial);
        $this->ed47_v_ender = ($this->ed47_v_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_ender"]:$this->ed47_v_ender);
@@ -245,7 +245,7 @@ class cl_aluno
          }
        }
        $this->ed47_v_ident = ($this->ed47_v_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_ident"]:$this->ed47_v_ident);
-       $this->ed47_i_login = ($this->ed47_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_login"]:$this->ed47_i_login);
+       $this->ed47_i_login = ($this->ed47_i_login === 0 || $this->ed47_i_login === 0.0 || $this->ed47_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_login"]:$this->ed47_i_login);
        $this->ed47_c_nomeresp = ($this->ed47_c_nomeresp == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_c_nomeresp"]:$this->ed47_c_nomeresp);
        $this->ed47_c_emailresp = ($this->ed47_c_emailresp == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_c_emailresp"]:$this->ed47_c_emailresp);
        $this->ed47_c_atenddifer = ($this->ed47_c_atenddifer == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_c_atenddifer"]:$this->ed47_c_atenddifer);
@@ -309,8 +309,8 @@ class cl_aluno
             $this->ed47_d_ultalt = $this->ed47_d_ultalt_ano."-".$this->ed47_d_ultalt_mes."-".$this->ed47_d_ultalt_dia;
          }
        }
-       $this->ed47_i_estciv = ($this->ed47_i_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_estciv"]:$this->ed47_i_estciv);
-       $this->ed47_i_nacion = ($this->ed47_i_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_nacion"]:$this->ed47_i_nacion);
+       $this->ed47_i_estciv = ($this->ed47_i_estciv === 0 || $this->ed47_i_estciv === 0.0 || $this->ed47_i_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_estciv"]:$this->ed47_i_estciv);
+       $this->ed47_i_nacion = ($this->ed47_i_nacion === 0 || $this->ed47_i_nacion === 0.0 || $this->ed47_i_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_nacion"]:$this->ed47_i_nacion);
        $this->ed47_v_categoria = ($this->ed47_v_categoria == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_categoria"]:$this->ed47_v_categoria);
        $this->ed47_v_cnh = ($this->ed47_v_cnh == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_cnh"]:$this->ed47_v_cnh);
        $this->ed47_v_contato = ($this->ed47_v_contato == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_contato"]:$this->ed47_v_contato);
@@ -324,9 +324,9 @@ class cl_aluno
        $this->ed47_v_sexo = ($this->ed47_v_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_sexo"]:$this->ed47_v_sexo);
        $this->ed47_v_telcel = ($this->ed47_v_telcel == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_telcel"]:$this->ed47_v_telcel);
        $this->ed47_c_foto = ($this->ed47_c_foto == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_c_foto"]:$this->ed47_c_foto);
-       $this->ed47_o_oid = ($this->ed47_o_oid == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_o_oid"]:$this->ed47_o_oid);
+       $this->ed47_o_oid = ($this->ed47_o_oid === 0 || $this->ed47_o_oid === 0.0 || $this->ed47_o_oid == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_o_oid"]:$this->ed47_o_oid);
        $this->ed47_c_codigoinep = ($this->ed47_c_codigoinep == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_c_codigoinep"]:$this->ed47_c_codigoinep);
-       $this->ed47_i_pais = ($this->ed47_i_pais == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_pais"]:$this->ed47_i_pais);
+       $this->ed47_i_pais = ($this->ed47_i_pais === 0 || $this->ed47_i_pais === 0.0 || $this->ed47_i_pais == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_pais"]:$this->ed47_i_pais);
        if($this->ed47_d_identdtexp == ""){
          $this->ed47_d_identdtexp_dia = ($this->ed47_d_identdtexp_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_d_identdtexp_dia"]:$this->ed47_d_identdtexp_dia);
          $this->ed47_d_identdtexp_mes = ($this->ed47_d_identdtexp_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_d_identdtexp_mes"]:$this->ed47_d_identdtexp_mes);
@@ -337,25 +337,25 @@ class cl_aluno
        }
        $this->ed47_v_identcompl = ($this->ed47_v_identcompl == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_identcompl"]:$this->ed47_v_identcompl);
        $this->ed47_c_passaporte = ($this->ed47_c_passaporte == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_c_passaporte"]:$this->ed47_c_passaporte);
-       $this->ed47_i_transpublico = ($this->ed47_i_transpublico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_transpublico"]:$this->ed47_i_transpublico);
-       $this->ed47_i_filiacao = ($this->ed47_i_filiacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_filiacao"]:$this->ed47_i_filiacao);
-       $this->ed47_i_censoufend = ($this->ed47_i_censoufend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufend"]:$this->ed47_i_censoufend);
-       $this->ed47_i_censomunicend = ($this->ed47_i_censomunicend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomunicend"]:$this->ed47_i_censomunicend);
-       $this->ed47_i_censoorgemissrg = ($this->ed47_i_censoorgemissrg == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoorgemissrg"]:$this->ed47_i_censoorgemissrg);
-       $this->ed47_i_censoufident = ($this->ed47_i_censoufident == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufident"]:$this->ed47_i_censoufident);
-       $this->ed47_i_censoufcert = ($this->ed47_i_censoufcert == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufcert"]:$this->ed47_i_censoufcert);
-       $this->ed47_i_censomuniccert = ($this->ed47_i_censomuniccert == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomuniccert"]:$this->ed47_i_censomuniccert);
-       $this->ed47_i_censoufnat = ($this->ed47_i_censoufnat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufnat"]:$this->ed47_i_censoufnat);
-       $this->ed47_i_censomunicnat = ($this->ed47_i_censomunicnat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomunicnat"]:$this->ed47_i_censomunicnat);
-       $this->ed47_i_atendespec = ($this->ed47_i_atendespec == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_atendespec"]:$this->ed47_i_atendespec);
-       $this->ed47_i_censocartorio = ($this->ed47_i_censocartorio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censocartorio"]:$this->ed47_i_censocartorio);
+       $this->ed47_i_transpublico = ($this->ed47_i_transpublico === 0 || $this->ed47_i_transpublico === 0.0 || $this->ed47_i_transpublico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_transpublico"]:$this->ed47_i_transpublico);
+       $this->ed47_i_filiacao = ($this->ed47_i_filiacao === 0 || $this->ed47_i_filiacao === 0.0 || $this->ed47_i_filiacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_filiacao"]:$this->ed47_i_filiacao);
+       $this->ed47_i_censoufend = ($this->ed47_i_censoufend === 0 || $this->ed47_i_censoufend === 0.0 || $this->ed47_i_censoufend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufend"]:$this->ed47_i_censoufend);
+       $this->ed47_i_censomunicend = ($this->ed47_i_censomunicend === 0 || $this->ed47_i_censomunicend === 0.0 || $this->ed47_i_censomunicend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomunicend"]:$this->ed47_i_censomunicend);
+       $this->ed47_i_censoorgemissrg = ($this->ed47_i_censoorgemissrg === 0 || $this->ed47_i_censoorgemissrg === 0.0 || $this->ed47_i_censoorgemissrg == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoorgemissrg"]:$this->ed47_i_censoorgemissrg);
+       $this->ed47_i_censoufident = ($this->ed47_i_censoufident === 0 || $this->ed47_i_censoufident === 0.0 || $this->ed47_i_censoufident == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufident"]:$this->ed47_i_censoufident);
+       $this->ed47_i_censoufcert = ($this->ed47_i_censoufcert === 0 || $this->ed47_i_censoufcert === 0.0 || $this->ed47_i_censoufcert == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufcert"]:$this->ed47_i_censoufcert);
+       $this->ed47_i_censomuniccert = ($this->ed47_i_censomuniccert === 0 || $this->ed47_i_censomuniccert === 0.0 || $this->ed47_i_censomuniccert == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomuniccert"]:$this->ed47_i_censomuniccert);
+       $this->ed47_i_censoufnat = ($this->ed47_i_censoufnat === 0 || $this->ed47_i_censoufnat === 0.0 || $this->ed47_i_censoufnat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufnat"]:$this->ed47_i_censoufnat);
+       $this->ed47_i_censomunicnat = ($this->ed47_i_censomunicnat === 0 || $this->ed47_i_censomunicnat === 0.0 || $this->ed47_i_censomunicnat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomunicnat"]:$this->ed47_i_censomunicnat);
+       $this->ed47_i_atendespec = ($this->ed47_i_atendespec === 0 || $this->ed47_i_atendespec === 0.0 || $this->ed47_i_atendespec == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_atendespec"]:$this->ed47_i_atendespec);
+       $this->ed47_i_censocartorio = ($this->ed47_i_censocartorio === 0 || $this->ed47_i_censocartorio === 0.0 || $this->ed47_i_censocartorio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censocartorio"]:$this->ed47_i_censocartorio);
        $this->ed47_celularresponsavel = ($this->ed47_celularresponsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_celularresponsavel"]:$this->ed47_celularresponsavel);
-       $this->ed47_situacaodocumentacao = ($this->ed47_situacaodocumentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_situacaodocumentacao"]:$this->ed47_situacaodocumentacao);
+       $this->ed47_situacaodocumentacao = ($this->ed47_situacaodocumentacao === 0 || $this->ed47_situacaodocumentacao === 0.0 || $this->ed47_situacaodocumentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_situacaodocumentacao"]:$this->ed47_situacaodocumentacao);
        $this->ed47_cartaosus = ($this->ed47_cartaosus == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_cartaosus"]:$this->ed47_cartaosus);
-       $this->ed47_tiposanguineo = ($this->ed47_tiposanguineo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_tiposanguineo"]:$this->ed47_tiposanguineo);
+       $this->ed47_tiposanguineo = ($this->ed47_tiposanguineo === 0 || $this->ed47_tiposanguineo === 0.0 || $this->ed47_tiposanguineo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_tiposanguineo"]:$this->ed47_tiposanguineo);
        $this->ed47_municipioestrangeiro = ($this->ed47_municipioestrangeiro == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_municipioestrangeiro"]:$this->ed47_municipioestrangeiro);
        $this->ed47_paisresidencia = ($this->ed47_paisresidencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_paisresidencia"]:$this->ed47_paisresidencia);
-       $this->ed47_localizacaodiferenciada = ($this->ed47_localizacaodiferenciada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_localizacaodiferenciada"]:$this->ed47_localizacaodiferenciada);
+       $this->ed47_localizacaodiferenciada = ($this->ed47_localizacaodiferenciada === 0 || $this->ed47_localizacaodiferenciada === 0.0 || $this->ed47_localizacaodiferenciada == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_localizacaodiferenciada"]:$this->ed47_localizacaodiferenciada);
        $this->ed47_visto = ($this->ed47_visto == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_visto"]:$this->ed47_visto);
        $this->ed47_vistoresponsavel = ($this->ed47_vistoresponsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_vistoresponsavel"]:$this->ed47_vistoresponsavel);
        $this->ed47_rnm = ($this->ed47_rnm == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_rnm"]:$this->ed47_rnm);
@@ -363,7 +363,7 @@ class cl_aluno
        $this->ed47_censoregiao = ($this->ed47_censoregiao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_censoregiao"]:$this->ed47_censoregiao);
        $this->ed47_censoregiaonat = ($this->ed47_censoregiaonat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_censoregiaonat"]:$this->ed47_censoregiaonat);
      }else{
-       $this->ed47_i_codigo = ($this->ed47_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_codigo"]:$this->ed47_i_codigo);
+       $this->ed47_i_codigo = ($this->ed47_i_codigo === 0 || $this->ed47_i_codigo === 0.0 || $this->ed47_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_codigo"]:$this->ed47_i_codigo);
      }
    }
 
@@ -511,10 +511,10 @@ class cl_aluno
      if($this->ed47_i_censomuniccert == null ){ 
        $this->ed47_i_censomuniccert = "null";
      }
-     if($this->ed47_i_censoufnat == null || $this->ed47_i_censoufnat == " " ){ 
+     if($this->ed47_i_censoufnat == null || ($this->ed47_i_censoufnat === 0 || $this->ed47_i_censoufnat === 0.0 || $this->ed47_i_censoufnat == " ") ){ 
        $this->ed47_i_censoufnat = "null";
      }
-     if($this->ed47_i_censomunicnat == null || $this->ed47_i_censomunicnat == " " ){ 
+     if($this->ed47_i_censomunicnat == null || ($this->ed47_i_censomunicnat === 0 || $this->ed47_i_censomunicnat === 0.0 || $this->ed47_i_censomunicnat == " ") ){ 
        $this->ed47_i_censomunicnat = "null";
      }
      if($this->ed47_i_atendespec == null ){ 
@@ -571,7 +571,7 @@ class cl_aluno
          $this->ed47_i_codigo = $ed47_i_codigo; 
        }
      }
-     if(($this->ed47_i_codigo == null) || ($this->ed47_i_codigo == "") ){ 
+     if(($this->ed47_i_codigo == null) || ($this->ed47_i_codigo === 0 || $this->ed47_i_codigo === 0.0 || $this->ed47_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed47_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

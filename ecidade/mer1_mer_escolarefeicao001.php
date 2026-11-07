@@ -32,7 +32,8 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("libs/db_utils.php"));
 include(modification("classes/db_mer_tpcardapioturma_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clmer_tpcardapioturma = new cl_mer_tpcardapioturma;
 
@@ -86,7 +87,7 @@ $clmer_tpcardapioturma = new cl_mer_tpcardapioturma;
                  ";  
         $rsEscola = db_query($sSql);
         //db_criatabela($result);
-        $iLinhas = pg_num_rows($rsEscola);
+        $iLinhas = ($rsEscola ? pg_num_rows($rsEscola) : null);
         if ($iLinhas>0) {
         	
           $cor1 = "#dbdbdb";

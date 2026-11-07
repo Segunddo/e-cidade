@@ -37,7 +37,8 @@ include(modification("dbforms/db_funcoes.php"));
 require(modification("libs/db_utils.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $clmatpedidoitem = new cl_matpedidoitem;
 $clmatpedido     = new cl_matpedido;

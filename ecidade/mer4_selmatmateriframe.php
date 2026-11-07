@@ -35,7 +35,8 @@ $clmatmater             = new cl_matmater;
 $clmatmater->rotulo->label();
 $clrotulo               = new rotulocampo;
 $clrotulo->label("me36_i_matmater");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if (isset ($atualizar) && $atualizar != "") {
     db_inicio_transacao();
@@ -58,7 +59,7 @@ if (isset ($atualizar) && $atualizar != "") {
     for ($i = 0; $i < $ta; $i ++) {
         $chave = key($vt);
         if (substr($chave, 0, 5) == "CHECK") {
-            $dados = split("_", $chave);
+            $dados = preg_split("#_#m", $chave);
             $clmer_alimentomatmater->me36_i_alimento = $me36_i_alimento;
             $clmer_alimentomatmater->me36_i_matmater = $dados[1];              
             $clmer_alimentomatmater->incluir(null);

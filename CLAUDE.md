@@ -65,8 +65,12 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** **FASE A CONCLUÍDA** — os 13 prefixos exclusivos da área Tributário estão
-portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compartilhado (Fase B).
+**Onde paramos:** **ÁREAS TRIBUTÁRIO E EDUCAÇÃO CONCLUÍDAS** (branch `2educacao-migrado`).
+Conferido pelo proxy, tela de menu por tela de menu (15/10/2026): **Tributário 1.059/1.059** e **Educação
+480/480** arquivos de menu existentes servidos pelo PHP 8.5 — depois de fechar a *10ª LACUNA* (14 telas
+que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
+**Comparação com o TCC de referência FEITA** — ver *⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA*. Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
+`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e os 4 sublotes do `edu1_` — todo o prefixo `edu` (1.211 arquivos). Ver *ÁREA EDUCAÇÃO*.
 
 | | |
 |---|---|
@@ -74,10 +78,11 @@ portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compa
 | Também portado | `tra` — órfão no menu, sem uso prático |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra)[0-9]*_` — **1.813 telas** |
-| **Próximo passo** | **ÁREA TRIBUTÁRIO CONCLUÍDA** — 16 de 16 módulos, **1.056 de 1.056 telas de menu**. Fases A e B fechadas. O que resta é das Fases 1-3 do workflow: Laravel, dependências mortas e PostgreSQL/UTF-8. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu)[0-9]*_)` — **3.344 arquivos** + 367 por `map` |
+| **Próximo passo** | **decisão do usuário**: próxima área (ver *DIMENSIONAMENTO DAS PRÓXIMAS ÁREAS*) ou o relatório Tributário: 16/16 módulos, 1.056/1.056 telas de menu. |
+| **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
-| Frentes de enumeração | **sete**; a 8ª lacuna é do detector de construtor, não da enumeração |
+| Frentes de enumeração | **sete**, todas insensíveis a maiúsculas desde a **9ª lacuna** (`getdao`) |
 | **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
 
 **Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
@@ -86,7 +91,7 @@ portados e roteados. 13 de 16 módulos; os 3 restantes dependem de prefixo compa
 docker volume create ecidade_sessions && docker volume create ecidade_tmp
 docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
 docker exec ecidade_php56 chmod 1777 /tmp      # o volume nasce root:root 755
-chmod -R 777 ecidade/storage ecidade/bootstrap/cache && chmod 777 ecidade/extension/log
+chmod -R 777 ecidade/storage ecidade/bootstrap/cache 2>/dev/null; chmod 777 ecidade/extension/log   # SEM && : o -R falha em cache do container e abortaria o resto
 chmod 666 ecidade/extension/log/*.log   # os ARQUIVOS, nao so a pasta -- senao TODA tela autenticada da 500
 chmod 777 ecidade/tmp ecidade/arquivos        # SEM isto, 11% das telas falham antes de executar
 docker compose -f docker-compose.php85.yml up -d
@@ -2888,6 +2893,15 @@ Feito com as ferramentas do `scratchpad/` da branch `2educacao-migrado` (versõe
 por `TELAS=a.php,b.php`. O `paridade-56.ini` (criado na Educação) estava montado, como na linha de
 base 2.154/2.160.
 
+**Na Educação (`2educacao-migrado`), as 3 telas `mat1_matestoqueini001/002/003`** (abertas com
+`?entrada=true`; também são do Patrimonial, então passam ao 8.5 para as duas áreas, como as `cai`
+compartilhadas com Financeiro). Trazida a correção do gerador por *merge* da `1tributario-migrado`
+(não rebase: as duas branches já estão publicadas). Universo 137, 94 já pagos, **4 alterados** (Rector:
+3 guardas, 3 construtores, 3 `split`, 1 `parse_str`); `php -l` 137/137 nos dois; classes 87/87 (só o
+artefato conhecido de `RequisicaoMaterial`); escrita 83 classes idênticas; bateria **6/6** (com e sem
+`?entrada=true`); regressão pela interseção com `con` → 31/31. O `enumera.py` ganhou `TELAS=a.php,b.php`
+para lotes que não são um prefixo.
+
 **Lição, a décima da mesma família:** a conferência partia da lista que o gerador produziu. Quem
 achou foi a conferência independente — perguntar ao sistema em execução, tela por tela.
 
@@ -3073,6 +3087,635 @@ responde **1 requisição, HTTP 200** (o loop devolvia milhares). O volume `ecid
 mantido — outros pontos ainda usam o `/tmp` do sistema.
 
 Reversível com `chmod 775 tmp arquivos`; nenhuma alteração de código.
+
+### 🗺️ DIMENSIONAMENTO DAS PRÓXIMAS ÁREAS (13/10/2026)
+
+Medido no banco (mesma cadeia `atendcadarea → … → db_itensmenu`), descontando o que já é
+servido pelo 8.5 e o que os commits `Porta …` já pagaram. Arquivos a alterar = fecho das sete
+frentes a partir das telas de menu (estimativa: na Fase B, 428 previstos viraram ~526).
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | A alterar |
+|---|---|---|---|---|---|
+| Financeiro | 6 | 910 | 2.568 | 340 | 788 |
+| Patrimonial | 8 | 713 | 2.224 | 344 | 674 |
+| Recursos Humanos | 4 | 685 | 1.925 | 300 | 492 |
+| Saúde | 8 | 474 | 1.192 | 84 | 507 |
+| Educação | 5 | 467 | 1.617 | 296 | 514 |
+| Configuração | 1 | 203 | 905 | 298 | 219 |
+| Assistência Social | 2 | 65 | 305 | 102 | 73 |
+| Cidadão | 1 | 34 | 108 | 35 | 13 |
+| Gestor / Integrações | 1+1 | 7+8 | 41+60 | — | 8+5 |
+
+Somadas isoladas dão 3.293; a união é 2.783 — a ordem pré-paga o resíduo da seguinte. Cinco
+áreas cadastradas não têm módulo ligado (Geoprocessamento, Administração, DBLeis, Comercial,
+Implantação). Contando telas distintas, Tributário tem 1.031 (o 1.056 conta por módulo).
+
+**Escolhida: Educação** — não a maior nem a mais barata, mas a única que permite comparar as
+duas estratégias (big-bang 8.4 do TCC de referência × strangler fig 8.5) **sobre o mesmo módulo**.
+
+#### Refeito em 18/10/2026, depois da Educação — `scratchpad/dimensiona.py`
+
+Mesmo método, agora reproduzível: telas de menu existentes em disco que o 8.5 ainda não serve
+(nem pelo `location` nem pelo `map`), fecho das sete frentes pelo `enumera.py` (`TELAS=`).
+Conferência do instrumento: Tributário e Educação saem com **0 faltando** (1.066 − 7 fantasmas
+= 1.059 e 481 − 1 = 480, os mesmos números conferidos pelo proxy em 15/10).
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | **A alterar** | em 13/10 |
+|---|---|---|---|---|---|---|
+| Financeiro | 6 | 949 | 2.674 | 401 | **771** | 788 |
+| Patrimonial | 8 | 713 | 2.239 | 419 | **622** | 674 |
+| Saúde | 8 | 492 | 1.322 | 165 | **505** | 507 |
+| Recursos Humanos | 4 | 700 | 1.989 | 337 | **486** | 492 |
+| Configuração | 1 | 203 | 920 | 361 | **173** | 219 |
+| Assistência Social | 2 | 67 | 323 | 131 | **62** | 73 |
+| Cidadão | 1 | 35 | 109 | 35 | **13** | 13 |
+| Integrações / Gestor | 1+1 | 13+7 | 77+41 | 39+21 | **9+8** | 5+8 |
+
+União: **2.358** (era 2.783). A Educação pré-pagou ~425 arquivos das outras áreas, sobretudo
+Patrimonial (−52, as `mat`) e Configuração (−46). Saúde e RH quase não mudaram: são as áreas com
+menos código em comum com as já feitas. "Telas que faltam" no Financeiro subiu de 910 para 949
+porque a correção da 10ª lacuna passou a contar as entradas de menu com parâmetro.
+
+Ressalvas de leitura: "a alterar" é estimativa estática — nas duas áreas feitas o real saiu
+13–23% acima (correções à mão e lacunas) — e não conta os commits `EXPERIMENTO:` como pagos.
+
+### 📐 ÁREA EDUCAÇÃO — dimensionada e INICIADA
+
+Ao contrário do Tributário, quase não tem prefixo compartilhado:
+
+| Prefixo | Telas no menu | Em outra área? | Em disco | A alterar (prefixo inteiro) |
+|---|---|---|---|---|
+| `edu` | 340 | não | **1.211** (= as 1.211 da monografia) | 740 |
+| `mer` | 43 | não | 187 | 182 |
+| `bib` | 39 | não | 98 | 85 |
+| `sec` / `rel` / `esc` | 8 / 1 / 3 | não | 12 / 1 / 3 | 15 / 9 / 4 |
+| `tre` | 14 | não | 19 | 3 |
+| `mat` | 19 | **sim** — as 19 também são do Patrimonial | 280 | via `map` |
+| `pro` | 1 | sim — prefixo da Fase B | 341 | via `map` |
+
+**Escopo adotado: A** — os 7 prefixos exclusivos portados **inteiros** e roteados por
+`location` (969 arquivos contra 514 do escopo "só menu"), porque é a regra da Fase A e porque é
+o único escopo comparável ao do TCC de referência, que migrou os 1.211 `edu`. `mat` e `pro` vão
+por `map`. `rel` casa só `rel_escola_gestor.php`: `relatorio_*` e `release_*` não casam
+`^rel[0-9]*_`. Ordem: `tre` → `esc`/`rel`/`sec` → `bib` → `mer` (+`mat`/`pro`) → `edu`.
+
+| Lote | Universo | Alterados | `php -l` 5.6/8.5 | Classes | Escrita | **Bateria** |
+|---|---|---|---|---|---|---|
+| `tre` | 60 | 3 | 60/60 | 13/13 | 655 linhas, 0 div. | **19/19** (depois do ini) |
+| `esc`+`rel`+`sec` | 84 | 19 | 84/84 | 35/35 | 1.368 linhas, 0 div. | **16/16** |
+| `bib` | 232 | 79 | 232/232 | 75/75 | 2.632 linhas, 0 div. | **95/98** |
+| `mer` + 20 `mat`/`pro` | 507 | 198 | 506/507 | 163/164 | 3.270 linhas, 0 div. | **207/207** |
+| `edu3_` + 13 variantes | 591 | 100 + 24 da 9ª lacuna + 9 à mão | 591/591 | 402/404 | 11.451 linhas, 402 classes | **71/71** |
+| `edu2_` | 813 | 67 (38 Rector + 29 à mão) | 813/813 | 430/432 | 12.262 linhas, 414 classes | **259/259** |
+| `edu4_` | 793 | 110 (101 Rector + 9 à mão) | 793/793 | 501/503 | 13.626 linhas, 483 classes | **140/148** + 8 caracterizadas |
+| `edu1_` A (a–c) | 819 | 127 Rector + 15 à mão | 819/819 | 449/451 | 12.436 linhas, 433 classes | **194/196** |
+| `edu1_` B (d–m) | 482 | 115 Rector + ~16 à mão | 482/482 | 158/158 | 5.081 linhas, 156 classes | **203/205** |
+| `edu1_` C (n–p) | 312 | 82 Rector + 4 à mão | 312/312 | 101/101 | 3.259 linhas, 100 classes | **130/132** |
+| `edu1_` D (q–z) | 545 | 118 Rector + 8 à mão | 545/545 | 222/222 | 6.911 linhas, 220 classes | **200/200** |
+
+**`bib`** — 76 pelo Rector (242 guardas, 152 `split` todos `#`, 39 construtores, 33
+`parse_str`+`extract`, 3 parâmetros opcionais antes de obrigatórios, 1 `${$var}`), mais 3 à mão:
+4 guardas `pg_*` (`bib1_leitor005` ×2, `bib2_racervos002`, `bib2_rmaisempres002`) e o octal
+abaixo. As guardas devolvem **`null`**, o valor medido no 5.6 — `bib2_racervos002.php:120`
+compara com `=== 0`, exatamente o caso que proíbe a guarda de devolver `0`.
+
+As 3 divergências restantes são **artefatos da bateria**, verificados no caminho real:
+
+- `bib1_emprestimo002.php` — iframe que calcula a data de devolução; a bateria o chama sem
+  `ano/mes/dia` e o `mktime()` recebe `"--"`. No uso real o JS manda a data com zeros à
+  esquerda e recusa campo vazio. Com 5 datas reais (dia útil, sábado, domingo, Páscoa,
+  31/12) a saída é **idêntica** nos dois runtimes. Registro: no 5.6 `mktime()` com string
+  NÃO numérica devolve `false` (não coage), então `(int)` **não** seria correção fiel.
+- `bib2_comprovantemodelo_80mm/a4.php` — fragmentos incluídos por `bib2_emprestimo002.php`
+  (idêntico), que lança exceção antes do include quando não há acervos; `aAcervos` chega
+  sempre como array no caminho real.
+
+Regra proporcional: núcleo intocado; a interseção com os universos verificados deu só
+`classes/db_aluno_classe.php` × `con` → bateria das 30 telas `con` roteadas: **30/30**.
+Os universos de `cem`, `itb`, `agu`, `jur`, `div`, `mar` não estavam em `tmp/` (são
+gitignored) e tiveram de ser regerados — universo ausente é *desconhecido*, não *vazio*.
+
+**`mer` + `mat`/`pro`** — universo montado do prefixo `mer` inteiro **mais** as 20 telas
+`mat`/`pro` que o banco atribui a Educação (as `mat` também são do Patrimonial: rotear por
+prefixo levaria 261 telas de Almoxarifado junto). Rector em 193 arquivos (104 `parse_str`+
+`extract`, 88 guardas, 84 `split`, 84 construtores, 2 parâmetros opcionais), só regras vetadas.
+À mão, 12 guardas `pg_*` devolvendo `null` em 10 telas — as SQLs falham por colunas que **não
+existem** no banco (`me07_i_codmater`, `me22_i_cardapio`), defeito pré-existente.
+
+- `mer1_mer_desper_und003.php` **não compila nem no 5.6** (chave aberta na linha 57). Fora do
+  lote, como os 5 do `dbagata/`. O Rector o acusa como `errors: 1` no dry-run — conferir o
+  campo `errors`, não só `changed_files`.
+- `RequisicaoMaterial` (`.model.php`) diverge no harness de classes: construtor com argumento
+  obrigatório, mesmo artefato de `lancamentoContabil`. `db_mer_requiitem_classe_ext.php`
+  derruba os dois runtimes igual (o `harness_robusto.sh` o pulou nos dois).
+- Regressão: núcleo intocado; interseção com `con` (28 classes) e `pro` (1) → 65/65 telas
+  roteadas idênticas.
+
+**Roteamento por `map` agora é por ÁREA.** `gera_map_faseb.py` recebe `<area>:<prefixos>`
+(`tribut:amb,pre,… educa:mat,pro`). Ele **reescreve o arquivo inteiro** — repetir todos os
+lotes; conferido por diff que só houve 20 linhas acrescentadas e nenhuma removida.
+
+**`edu3_` + variantes** — `edu02_`, `edu03_`, `edu04_` e `edu_` (13 arquivos) não casam
+`^edu3[0-9]*_` nem `^edu2[0-9]*_`: mesma armadilha do `jur01_`, por isso entraram no primeiro
+lote. Regex usado: `(?:edu(?:3|0)|edu(?=_))` — qualquer alternativa **vazia** (`edu(?:3|)`)
+casaria todos os `edu1_`. No nginx idem: a lookahead `edu(?=_)` é o que impede `edu` sozinho de
+rotear os subprefixos ainda não portados (verificado: `edu1_aluno001.php` segue no 5.6).
+
+À mão: 13 guardas `pg_*` (`null`) em 6 telas — SQLs sobre relações que **não existem** no banco
+(`alunofora`, `alunopassagem`) — e `array_unique(null)`/`natsort(null)` em
+`edu3_quadrogeraldehorarioshtml002.php`: no 5.6 devolvem `NULL` e deixam a variável nula; no
+8.5 são `TypeError` (o `@` não protege). Corrigido com `is_array()`, que reproduz os dois.
+
+Onze alvos o Rector não tocou: estavam portados pelos commits `EXPERIMENTO: …` do `iss`, que o
+`enumera.py` não conta como pagos (só `^Porta `). **Não** passei a contá-los: um experimento
+revertido faria arquivo não portado ser pulado — o erro no sentido perigoso. O custo é só
+superestimar "a alterar".
+
+**O harness de escrita precisa de UM PROCESSO POR CLASSE.** Com a lista toda num processo só,
+cobriu 120 de 404 classes (um fatal o matou) — e o `harness_robusto.sh` não serve para ele,
+que emite várias linhas por classe. Em laço, uma classe por `php`: 402 de 404.
+
+**`edu2_`** — 28 divergências na primeira bateria, a maior leva até aqui; todas fechadas:
+
+- **60 guardas `pg_*`** (`null`) aplicadas pelo ciclo automatizado, 18 delas só no
+  `edu2_censoescolar002.php` (2.700 linhas). O ciclo passou a cobrir `pg_fetch_assoc/object/
+  array/row` (no 5.6 todos devolvem `NULL` sobre `false`) e espaço dentro dos parênteses
+  (`pg_numrows( $result )` escapava). Nenhuma linha guardada é seguida de `===`.
+- **Divisão por zero** em `EstatisticaAlunosMatriculados.model.php` (9 linhas do total geral, a
+  mesma aparição) e `edu2_horarioprofessor002.php`. As 16 linhas iguais por ensino/etapa
+  (412–444) **não** foram tocadas: só falham com ensino de zero matrículas, que não apareceu.
+- **`cal_days_in_month()` no NÚCLEO** (`std/DBDate.php`): medido em 10 entradas, o 5.6 devolve
+  `false` exatamente onde o 8.5 lança `ValueError`/`TypeError` (mês 0, 13, -1, `""`, `null`,
+  ano 0…). Correção: `try { … } catch (Throwable $e) { return false; }`. **Catch único**:
+  `catch (A | B $e)` é PHP 7.1 e não compila no 5.6; `Throwable` não existe no 5.6, mas o
+  `catch` só é avaliado quando algo é lançado, e lá nada é.
+- **`file_get_contents("")`**: `false` no 5.6, `ValueError` no 8.5. Guarda por string vazia.
+- **`continue` fora de laço** (`edu2_historico002.php:716`): mesma categoria do `break` —
+  fatal de execução no 5.6 ("Cannot break/continue 1 level"), de compilação no 8.5. Alcançável
+  → **`exit;`**. O `continue` dentro de `switch` da linha 669 equivale a `break` nas duas
+  versões (o 8.5 só avisa) e ficou intocado.
+- **Ternário aninhado** (`edu2_certconclusao002.php:733`): parênteses à esquerda, conferido nas
+  4 combinações de entrada.
+- **7ª manifestação da RFC das comparações**, a mais sutil até aqui — num laço de PDF:
+
+  ```php
+  $hora = substr($hora,0,2).":".substr($hora,2,2);   // "1:", "2:" ... para os minutos
+  if ($hora <= $horafinal) { ... $tt += 1; if ($tt == 60) $t += 40; }
+  ```
+  `"1:" <= 100` é `true` no 5.6 e **`false`** no 8.5 (string não numérica → comparação de
+  string, `':' > '0'`). O laço dá mais voltas, o cursor desce 0,22 pt por volta, e o rótulo
+  `01:00` sai **25 pt mais baixo** no PDF. HTTP 200, PDF válido, mesmo tamanho em bytes — só
+  descomprimindo o fluxo aparece. Correção `(float)$hora`, conferida em 14 casos.
+- `cmp.py` ganhou regra para `tmp/<nome>_<timestamp>.csv|txt` (dentro de JSON a barra vem
+  escapada, `tmp\/`): falso positivo em `edu2_relatorioinfradaescolaprocessamento001.php`.
+
+Núcleo tocado (`std/DBDate.php`, `libs/db_stdlibwebseller.php`) → **bateria completa**: Fase A
+1.807/1.813, `map` 367/367, Educação anterior 388/391 — todas na linha de base.
+
+**`edu4_`** — à mão: 2 `break` inalcançáveis removidos (logo depois de `db_redireciona()`, que
+termina em `exit` — conferido no original **e** na cópia do `modification/`, com `grep -a`), 2
+ternários aninhados em linhas de concatenação (o `.` liga antes do `==`; a associação à esquerda
+do 5.6 preserva até o bug de "ESTADUAL" nunca aparecer, conferido em 4 entradas), 13 guardas
+`pg_*` pelo ciclo, 2 `file_get_contents("")`, 1 `count((array))` (só a linha que apareceu; há
+outras 4 iguais no arquivo) e **`pg_last_error()` sem conexão** — `false` no 5.6, `Error` no
+8.5 — com o mesmo `try/catch (Throwable)` do `DBDate`. Regressão: núcleo intocado; `con`+`pro`+
+`prot` roteadas 70/70.
+
+**`edu1_`: 733 telas, 454 a alterar — o maior lote do projeto, quebrado em 4 sublotes por
+letra inicial** (A a–c 196, B d–m 205, C n–p 132, D q–v 200). Cada sublote tem porte,
+verificação, roteamento e commit próprios. Enumeração por `edu1(?=_[a-c])` — a lookahead
+mantém o `[0-9]*_` que o `enumera.py` acrescenta. No nginx, a faixa entra como alternativa
+**fora** do grupo que exige `[0-9]*_`: `(?:(?:cem|…|edu(?=_))[0-9]*_|edu1_[a-c])`. A config nova
+foi testada num container descartável **antes** do recreate (o container em execução enxerga o
+inode antigo do bind mount e aprova a config velha).
+
+**Sublote A** — 26 divergências na 1ª bateria, 24 fechadas:
+
+- 17 guardas `pg_*` pelo ciclo (+3 à mão: `pg_result(null)`, que o ciclo não reconhecia — ele
+  casava só "false given").
+- **Constante indefinida** em `forms/db_frmbase.php` e `forms/db_frmalunodados.php`
+  (`@Ted31_i_regimemat`, `$GLOBALS[Sed47_c_emailresp]`). **Indefinida também no 5.6** —
+  conferido: ele imprime `title="Ted31_i_regimemat"`. Correção fiel em qualquer contexto:
+  `(defined('X') ? X : 'X')` — se algum `label()` a definir, usa o valor; senão, o nome, como o
+  5.6. Aplicada por ciclo (`const_ciclo`), uma linha por vez.
+- **Propriedade sobre `null`** (`edu1_alunoturma002.php:47`): o 5.6 cria `stdClass` sozinho
+  para `null`/`false`/`""` (medido; para `0` e array não). Guarda com exatamente essa condição.
+- **NÚCLEO `dbforms/db_classesgenericas.php`** (e a cópia do `modification/`): `reset()`,
+  `sizeof()` e `key()` sobre `$this->identifica` nulo, em 3 pontos do desenho de abas — no 5.6
+  devolvem `NULL`/0 com warning; no 8.5, `TypeError`. `is_array()` + `(array)`.
+- `edu1_calendarioescola002/003` **quebram também no 5.6** (500, página truncada no mesmo
+  ponto) — caracterizadas.
+
+Núcleo tocado → bateria completa: Fase A 1.806/1.813 (+1 pulada, abaixo), `map` 367/367,
+Educação 317/320 e 470/478 (os 8 timeouts do `edu4`) — linha de base.
+
+**Sublote B** — 18 divergências na 1ª bateria, 16 fechadas:
+
+- 11 guardas `pg_*` + `pg_num_fields` (que o ciclo passou a cobrir; `NULL` no 5.6) e 3
+  constantes indefinidas pelos dois ciclos.
+- **Regra nova do Rector, ACEITA depois de medida:** `ParenthesizeNestedTernaryRector` põe os
+  parênteses **à esquerda** — a associação do 5.6, a mesma correção feita à mão até aqui.
+  Conferida em 4 entradas (inclusive o bug pré-existente de `NOTA` cair em `valorconceito`).
+  Emite só parênteses; não entra na denylist.
+- **`break 2` com um laço só** (`edu1_matricula003.php:312`): fatal de compilação no 8.5;
+  no 5.6, fatal de execução ("Cannot break/continue 2 levels", medido). Bloco de erro
+  alcançável → **`exit;`**, como o `break` do `fis`/`con`. O `break 2` da linha 271 está dentro
+  de dois laços e é legal.
+- **8ª manifestação da RFC das comparações — NÚCLEO `db_select()`, nos DOIS ramos**
+  (`dbforms/db_funcoes.php` + cópia). A correção do `pre` cobria só a segunda metade do teste de
+  `selected`. Agora:
+  - ramo **somente leitura** (`$db_opcao = 3`): `if (key($db_matriz) == $$nome)` escolhe a
+    descrição; com valor `""` e chaves `'' / 0 / 1 / 2`, o 5.6 casa `0 == ""` e mostra
+    "NÃO CREDENCIADA", o 8.5 deixa vazio — **campo de formulário em branco, HTTP 200**
+    (`edu1_escola003`);
+  - ramo **editável**: `$GLOBALS[$nomevar] == key()` deixava de marcar `selected`
+    (`edu1_escola002`, 8 bytes).
+
+  Correção nos dois: comparar número com string convertendo a string com `(float)`, que é
+  exatamente a conversão do 5.6 (`""`, `"abc"`, `"1x"`), e `==` nos demais casos. **Medido em 12
+  combinações de tipos: o emulado no 8.5 = o nativo do 5.6 em todas** (o `==` puro errava 5).
+  Inline, sem função auxiliar — o arquivo é incluído por tudo.
+- `edu1_escolabase002/003` quebram também no 5.6 (500; `$clescolabase` nunca instanciado, a
+  página do 5.6 é cortada antes do trecho que o usa). **Ressalva:** a mensagem do 5.6 não foi
+  lida — a aplicação suprime o fatal em todos os logs dela, e uma sonda com `display_errors`
+  também não a expôs. Vale igual para `calendarioescola002/003` do sublote A.
+
+Núcleo tocado → bateria completa: Fase A 1.806/1.812 (+1 pulada), `map` 367/367, `edu1` A
+194/196, demais Educação na linha de base. Duas "novas" na 1ª passada eram do instrumento:
+
+**Sublote C** — o mais limpo do `edu1`: Rector só com regras vetadas, nenhum erro de lint
+prévio, 9 divergências na 1ª bateria fechadas por 6 guardas `pg_*` (as duas restantes,
+`edu1_procescola002/003`, quebram também no 5.6 — `$clprocescola` nunca instanciado, mesmo
+padrão de `escolabase`/`calendarioescola`). **Interseção com todos os universos verificados
+vazia e núcleo intocado → sem bateria de regressão**, pela regra proporcional — a segunda vez
+desde o `cai`.
+
+**Sublote D** — faixa `q-z`, não `q-v`, para não depender de não haver letra depois do `v`
+(196+205+132+200 = **733**, todas as telas `edu1_`). 7 divergências, todas fechadas — **bateria
+perfeita**: 10 guardas `pg_*` (o ciclo passou a casar também "null given"), 1 constante
+indefinida, e **contador iniciado com `""`** (`$conta = ""; $conta = $conta + 1`) — `1` no 5.6,
+`TypeError` no 8.5; `(int)$conta + 1` reproduz o 5.6 com o tipo certo (é a manifestação que o
+TCC de referência corrigiu no PHP8-20 trocando `""` por `0`). Regressão: núcleo intocado;
+interseção só com `rec` (1 classe) → a tela `rec` roteada idêntica.
+
+Com o `edu` inteiro portado, o `location` voltou a ter **um `edu` só** no grupo principal, no
+lugar de `edu2|edu3|edu4|edu0|edu(?=_)` + a faixa `edu1_[a-p]`. Conferido: `^edu[0-9]*_` casa
+exatamente os 1.211 arquivos, e não há outro arquivo começando por `edu` na raiz.
+
+### 🏁 ÁREA EDUCAÇÃO CONCLUÍDA
+
+| | |
+|---|---|
+| **Módulos completos** | **5 de 5** — Escola 226, Secretaria 214, Alimentação Escolar 62, Biblioteca 39, Transporte Escolar 14 |
+| **Telas de menu servidas pelo PHP 8.5** | **555 de 555** (o menu tem 556; uma entrada aponta para arquivo inexistente). ⚠ Contagem por módulo; conferida pelo proxy em 15/10, eram 477 de 480 arquivos distintos — as 3 `mat1_matestoqueini` da *10ª LACUNA*, agora portadas: **480/480** |
+| Arquivos roteados | 1.533 por prefixo (`edu` 1.211, `mer` 187, `bib` 98, `tre` 19, `sec` 12, `esc` 3, `rel` 1) + 20 por `map` |
+| **Telas comparadas byte-a-byte** | **1.534 idênticas de 1.551 — 98,9%** |
+| Divergências | **17, todas caracterizadas, nenhuma defeito de migração** |
+| Baterias perfeitas | `tre`, `esc`+`rel`+`sec`, `mer`, `edu3_`, `edu2_`, `edu1_` D |
+
+As 17: **8** telas de importação do `edu4` que entram em laço eterno no 5.6 (`feof(false)`) e dão
+500 no 8.5; **6** telas do `edu1` que quebram também no 5.6 (objeto nunca instanciado —
+`calendarioescola`, `escolabase`, `procescola`, 002/003 de cada); **3** artefatos da bateria no
+`bib` (iframe sem parâmetros e dois fragmentos de include).
+
+Custo efetivo, em arquivos alterados por lote:
+
+```
+tre 3   esc/rel/sec 19   bib 79   mer+mat/pro 198   edu3+var 133 (inclui os 24 da 9a lacuna)
+edu2 67   edu4 110   edu1 A 142   B 128   C 86   D 126              ~1.091 arquivos
+```
+
+O dimensionamento previa **969** para o escopo A (prefixos inteiros); saiu em ~1.091 — +13%, na
+mesma direção da Fase B (428 previstos, ~526 reais). A diferença vem das lacunas descobertas no
+caminho (9ª lacuna: +30 arquivos) e das correções à mão, que a estimativa estática não enxerga.
+
+**Núcleo tocado na área:** `std/DBDate.php` (`cal_days_in_month`), `dbforms/db_classesgenericas.php`
+(`reset/sizeof/key` sobre nulo), `dbforms/db_funcoes.php` (os dois ramos do `db_select`) e
+`libs/db_stdlibwebseller.php` — todas com bateria completa na linha de base.
+
+**⚠ 11ª LACUNA (18/10/2026, achada no RH): duas classes da área não CARREGAVAM no 8.5.**
+`ImportacaoCenso2012` e `importacaoCodigoInep2010` (universo do `edu4`) tinham assinatura
+incompatível com a mãe `importacaoCenso` — LSP entre ARQUIVOS, que o `php -l` não vê (olha um
+arquivo por vez) e o harness de classes não vê (só `classes/`). Entram só nas importações do
+Censo/INEP com arquivo enviado — as mesmas telas que, por GET sem parâmetro, são os laços
+eternos do 5.6. Corrigidas como o catálogo manda (parâmetro da mãe, opcional, na filha):
+`getDadosAluno($oLinha, $lPesquisaInep = false)` e `atualizaDadosTurma($oLinha, $iAnoCenso = null)`.
+Detector novo: `scratchpad/carrega_arquivo.php` (na branch do RH). Bateria `edu4`: 140/148, linha de base.
+
+**⚠ 13ª LACUNA (21/10/2026, achada no RH): classes de `model/` carregadas por autoload, sem `cl_`.**
+`new Classe`/`Classe::` de `model/`/`std/` sem `include` não entravam em universo nenhum. No universo da
+Educação o fecho alcança **596 arquivos** fora dele; só **1** precisava de porte:
+`model/educacao/progressaoparcial/ProgressaoParcialVinculoDisciplina.model.php` — `unset($this)`, erro de
+compilação desde o PHP 7.1. No 5.6 só desligava a variável local e era a última instrução do método:
+removido. Nenhuma LSP nas 172 classes com `extends`.
+
+### ⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA (branch `tcc-gerson-banca`)
+
+Feita sobre **o mesmo universo** (os ~2.795 arquivos que as sete frentes alcançam a partir das
+telas da área Educação) e **o mesmo critério**: comparação byte-a-byte contra o 5.6 vivo.
+
+#### Como foi montada
+
+- `git fetch` da branch dele para `refs/remotes/gerson/tcc-gerson-banca` (só leitura, sem mexer
+  nos remotos). Estrutura **anterior** à reorganização (arquivos na raiz, não em `ecidade/`).
+- *worktree* dele em `ecidade/tmp/tcc_gerson/` (gitignored, 1,1 GB) + as configurações locais
+  não versionadas (`.env`, `config/*.php`, `libs/db_conn.php`, `extension/data/`…).
+- **Terceiro container**, `ecidade_tcc_gerson` na porta **8086**: mesma imagem do nosso 8.5,
+  mesmos volumes de sessão e `/tmp`, mesmo `paridade-56.ini`, mesmo `vendor/` (ele não alterou
+  `composer.json`/`.lock`). **Só o código difere** do nosso 8085.
+- `cmp.py` ganhou `PORTA_B` (8085 = nosso, 8086 = dele) e `NORM_MENU` (abaixo).
+- **Limitação declarada:** ele mirou PHP **8.4**; rodou aqui no **8.5.10**. Os fatais encontrados
+  são todos de categorias que quebram desde o 8.0 (valem para o 8.4); nenhum veio de algo
+  exclusivo do 8.5.
+
+#### 1. Estático — por *token* (`scratchpad/conta_tokens.php`), só código, nunca comentário
+
+| Universo de Educação (~2.795 arq.) | Antes | Gerson | **Nosso** |
+|---|---|---|---|
+| **guarda `0 == ""` faltando** | 3.685 em 730 arq. | **3.685 em 730 arq.** | **0** |
+| construtor PHP 4 | 646 | 0 | 0 |
+| `parse_str` de 1 argumento | 545 | 0 | 0 (1 em arquivo que não compila nem no 5.6) |
+| `split()` | 2.759 | 776 | 0 |
+| `ereg*()` / `each()` | 13 / 3 | 0 / 0 | 0 / 0 |
+
+**Duas correções que esta medição impôs a afirmações anteriores:**
+
+1. **`split()` tem polyfill.** `vendor/dbseller/legacy/bootstrap/PHP_56.php` define `split()` no
+   PHP ≥ 7 — e a implementação é **`explode()`**. Os 776 que ele deixou usam todos separador
+   literal (`"#"` 775, `"_"` 1), nenhum com `limit`: **equivalentes**, não defeito. O mesmo vale
+   contra nós: as milhares de conversões `split` → `preg_split` **não eram necessárias para
+   rodar** — só nos separadores com regex (o caso do `jur`, onde o polyfill `explode` daria dado
+   errado) e para não depender de um `vendor/` não versionado. O polyfill também ignora o 3º
+   argumento do `split` original.
+2. O contador de bytes do `enumera.py` acusou 2 guardas faltando do nosso lado
+   (`db_db_config_classe.php:755-756`, `$x == "null" || (guarda…)`): **falso positivo** — o
+   único valor em que `0 == "null"` muda (o inteiro `0`) é coberto pela guarda à direita do `||`.
+   E 4 `split` "restantes" estavam dentro de `/* */` (o Rector, com razão, não os tocou).
+
+#### 2. Caminho de escrita (nível 1) — o efeito das 3.685 guardas, medido
+
+`escrita.php` sobre as 756 classes de Educação, uma classe por processo, contra o 5.6:
+
+| | Campos com valor diferente do 5.6 | Classes |
+|---|---|---|
+| **Gerson** | **3.606** | **730** |
+| **Nosso** | **0** (1 linha: artefato conhecido de `RequisicaoMaterial`) | 0 |
+
+```
+5.6:     ed80_i_codigo='1012'  ed80_i_diarioavaliacao='1013'  ed80_i_justificativa='1014'
+Gerson:  ed80_i_codigo=0       ed80_i_diarioavaliacao=0       ed80_i_justificativa=0
+```
+
+É o `0 == ""` em escala: o valor digitado no formulário **não é lido**; o campo fica `0` e a
+validação recusa ("campo não informado") ou o `0` é gravado. **Nenhuma tela "carrega com erro"
+por isso** — passa no critério dele ("carregou sem erro fatal") e falha no nosso.
+
+#### 3. Dinâmico — as 1.551 telas da área, 5.6 × código dele
+
+Bruto: **424 idênticas** (nosso: 1.534). Classificadas as 1.087 divergências:
+
+| Categoria | Telas | É defeito da migração dele? |
+|---|---|---|
+| idêntica depois de recortar o `db_menu()` | 482 | **sim, um único** — ver abaixo |
+| só espaço em branco (a quebra de linha final do documento) | 294 | não (efeito da conversão de *short tags* no `?>` final) |
+| quebram nos dois, só muda a mensagem de erro | 85 | não (pré-existente; ele exibe a exceção, a referência diz "Erro interno") |
+| **500 só no código dele** | **175** | **sim** |
+| **página truncada / conteúdo faltando** | **26** | **sim** |
+| outra diferença de conteúdo | 22 | provável — não verificadas uma a uma |
+| **acentuação corrompida** (`vínculo` → `vÃ­nculo`) | **2** | **sim** (arquivo LATIN-1 salvo como UTF-8 — o problema do PHP8-21 dele) |
+| timeout (os 8 laços eternos do `edu4`, iguais aos nossos, + 1) | 9 | não |
+
+**As causas dos 175 fatais são as categorias do nosso catálogo**, sem tratamento no código dele:
+
+```
+81  pg_num_fields(false)       libs/db_stdlib.php:1330 (db_fieldsmemory) -- corrigido por nos no piloto cem
+44  pg_num_rows(false)
+24  get_magic_quotes_runtime()  fpdf151/fpdf.php:1375 -- removida no PHP 8.0; corrigida por nos no nucleo
+ 4  reset(null)   3 count(null)   3 Path must not be empty   2 cal_days_in_month   ...
+```
+
+**105 dos 175 vêm de dois pontos do núcleo** — corrigidos uma vez aqui, quebram dezenas de telas
+lá. Os pontos `pg_*` só disparam quando a SQL falha (a categoria "consulta quebrada" do catálogo),
+o que explica por que 520 telas navegadas à mão não os encontraram.
+
+**O defeito sistemático, único:** no código dele a camada V3 (`Request->session()->get()`)
+devolve **`NULL`** para o login, enquanto o `db_getsession()` legado lê `dbseller` normalmente —
+no mesmo container, mesma sessão. Consequência: `ECIDADE_DESKTOP` dá `false` e o `db_menu()`
+emite o **menu clássico** (~400 linhas) no lugar do estilo/script do desktop, em **toda** tela.
+Provado que é do código (8085 e 8086 diferem só no código; `isEnabled('Desktop','dbseller')` dá
+`true` nos dois). **A linha exata não foi localizada** — ele alterou 21.967 arquivos. Para medir
+os defeitos *por tela* sem que esse um esconda os outros, `NORM_MENU=1` recorta só as partes
+**exclusivas** de cada ramo do `db_menu()` (três regex independentes; a parte comum, o tooltip,
+continua comparada). Verificado: com ela o **nosso** lado continua 40/40 na amostra.
+
+#### Síntese, sobre o mesmo universo e o mesmo critério
+
+| | TCC de referência | Este trabalho |
+|---|---|---|
+| Telas da área equivalentes ao 5.6 | 1.316 de 1.551 (84,8%) — contando as 294 só-espaço e as 85 que quebram nos dois | **1.534 de 1.551 (98,9%)** |
+| Telas com defeito de migração | **≥ 203** (175 fatais + 26 truncadas + 2 acentuação; + até 22) | **0** (17 caracterizadas, todas pré-existentes ou artefato) |
+| Defeito sistemático em toda tela | 1 (camada V3 sem login → menu clássico) | 0 |
+| Campos de formulário não lidos (POST) | **3.606 em 730 classes** | **0** |
+| Roda no 5.6 também | não (big-bang) | sim |
+
+**A leitura correta não é "o trabalho dele está errado".** Ele declarou o próprio critério —
+"carregou sem erro fatal… isso não comprova regras de negócio" — e o cumpriu nas 520 telas que
+navegou. A diferença é **de critério de verificação**, e é exatamente a que este trabalho existe
+para mostrar: com o 5.6 vivo como referência, a comparação byte-a-byte e o caminho de escrita
+encontram o que a navegação não encontra — 3.606 campos que gravariam dado errado em silêncio, e
+~200 telas que só quebram nos caminhos de dado incomum.
+
+**Pendências honestas:** as 22 "outras diferenças" não foram verificadas uma a uma; a causa do
+defeito da camada V3 não foi localizada; o runtime foi 8.5, não o 8.4 dele. O container
+`ecidade_tcc_gerson` e a worktree ficam para reprodução (remover com
+`docker rm -f ecidade_tcc_gerson && git worktree remove ecidade/tmp/tcc_gerson`).
+
+##### ⚠ O instrumento, de novo: resposta cortada pelo `curl -m 60` virava divergência
+
+`mer3_mer_nutriitem002.php` leva **~53 s nos dois runtimes** (495 alimentos, uma consulta por
+item). Sob a carga da bateria passa de 60 s, o `curl` corta a resposta — **com código 200** — e
+cada lado corta num ponto diferente: 1,3 MB contra 1,3 MB, depois 2,65 MB contra 2,48 MB.
+Isolada, dá 2.652.582 bytes idênticos nas duas portas. O `cmp.py` passou a registrar o
+`time_total` e trata resposta que bate no limite como `TIMEOUT`. `bib2_reditoras002` (1 byte) é
+o horário dentro do PDF comprimido: idêntica em 4 repetições isoladas.
+
+##### ⚠ CORREÇÃO ao catálogo: por que é o ORIGINAL que executa, e não a cópia do `modification/`
+
+A seção *CRÍTICO: `modification()`* diz que as cópias executam; a sonda do `pre` mostrou o
+original executando, sem explicação. **O mecanismo, lido em `definitions.php` e
+`src/V3/Modification/Data/FileSync.php`:**
+
+1. se o arquivo de sincronia é **mais novo** que o original → usa a cópia;
+2. se o original é **mais novo** (toda vez que edito um arquivo do núcleo) → tenta **regenerar**
+   a cópia reaplicando as modificações XML sobre o original;
+3. a regeneração **falha** — `extension/modification/log` não é gravável pelos containers — e o
+   `catch` devolve **o original**. O `application.log` registra isso: **225 mil** linhas
+   `modification() - update file: … Não foi possível abrir o arquivo para escrita`.
+
+Consequências: neste ambiente, para todo arquivo editado depois da sincronia, **os dois
+runtimes executam o original** — a comparação continua válida, mas as correções replicadas nas
+cópias **não estão sendo exercitadas**. Num ambiente com a pasta gravável, as cópias seriam
+**regeneradas a partir do original já portado** (o desejado), desde que as modificações XML
+ainda se apliquem. Manter as cópias corrigidas continua sendo o lado seguro.
+
+##### ⚠ A bateria contatava um servidor EXTERNO real: `iss4_siss002.php`
+
+Apareceu como `TIMEOUT` nos dois runtimes, numa tela antes idêntica. É um script de lote (lê
+`$argv`) com **IP de terceiro fixo no código**: `$DB_SERVIDOR_SISS = "200.192.137.56"`
+(`colocation.sissbr.com.br`). Cada execução da bateria disparava um `pg_connect` a esse
+servidor; hoje ele leva **134 s** para desistir, igual nos dois — antes a rede recusava na hora.
+Não é regressão; é rede. Mas **testes automatizados não podem contatar serviço real de
+terceiros**: o `cmp.py` ganhou a lista `PULAR`, reportada como `PULADA`.
+
+##### ⚠ CATEGORIA NOVA (edu4): `while (!feof(false))` — LAÇO ETERNO no 5.6, 500 no 8.5
+
+```php
+$ponteiro = fopen($arquivo_erro, "r");     // GET sem parametros: "" -> false
+while (!feof($ponteiro)) { ... }           // 5.6: feof(false) = false -> NUNCA termina
+                                           // 8.5: fopen("") e ValueError -> 500 imediato
+```
+
+**8 telas** (`exportarsituacaoaluno002`, `importacaoatualizacaoaluno002`, `importarcodigoinep002`,
+`importarcodigoinep_2009_002`, `importarmatriculainep002`, `atualizacadastrocenso002`,
+`atualizacadastrocenso_2009_002`, `verifexportcenso002`). Um worker do 5.6 ficou **32 minutos a
+100% de CPU** antes de eu encerrá-lo. **Não corrigidas, e é decisão:** a correção "fiel"
+reproduziria um laço infinito. Quebram nos dois — o 5.6 pendurando um worker, o 8.5 com um
+500 —, e cabem em *"uma tela que quebra igual nos dois não é problema nosso"*. Só disparam com
+o `GET` sem parâmetros; no uso real a tela anterior passa o caminho do arquivo.
+
+##### ⚠ O INSTRUMENTO, de novo: timeout nos dois contava como IDÊNTICO — e travava o resto
+
+O `cmp.py` desistia em 60 s, mas **o PHP seguia rodando** no servidor, segurando o `flock` do
+arquivo de sessão. Como a sessão é compartilhada, **toda tela seguinte travava nos dois
+runtimes** — e "000 nos dois" era contado como idêntico. Sintoma: bateria de 148 telas passando
+de 10 minutos, e duas telas inocentes (`exportarsituacaoalunonovo001`, `…aluno.RPC.php`)
+aparecendo como "travadas" por virem logo depois de um órfão.
+
+Corrigido no `cmp.py`: `000` em qualquer lado vira **`TIMEOUT`**, contado à parte, e o worker
+órfão (estado `R`) daquele container é encerrado. Refeita a bateria: 132 idênticas, 10
+divergentes, 6 timeouts — e as duas inocentes ficaram idênticas.
+
+Duas armadilhas no diagnóstico, as duas da família *verificação que falha em silêncio*:
+
+- **`ls -l /proc/<pid>/fd` dá `Permission denied`** dentro do container (restrição de
+  ptrace), e com `2>/dev/null` o resultado vazio pareceu "nenhum processo segura a sessão".
+  Duas hipóteses descartadas com base numa checagem que não enxergava nada.
+- **`grep` sem `-a`** sobre `libs/db_stdlib.php` (LATIN-1) não achou o `exit` do
+  `db_redireciona` — o arquivo foi tratado como binário.
+
+**Baterias anteriores:** nenhuma teve duração anormal, que é o sintoma deste defeito; o risco
+de "timeout contado como idêntico" existia, mas não há sinal de que tenha ocorrido.
+
+#### ⚠ 9ª LACUNA: `getdao` em minúsculas — a enumeração era sensível a maiúsculas no MÉTODO
+
+`edu3_atolegal001.php` morria com `label() on null`:
+
+```php
+$oDaoAtoLegal = db_utils::getdao('atolegal');   // minusculas
+$oDaoAtoLegal->rotulo->label();                 // rotulo nulo: o construtor PHP 4 nao rodou
+```
+
+A 7ª frente procurava `getDao` com regex sensível a caso; PHP não diferencia maiúsculas em nome
+de método. Escala na base: `getDao` 4.020 chamadas, **`getdao` 766, `getDAO` 13, `GetDao` 2 —
+781 chamadas em 244 arquivos invisíveis**. As frentes de `include`/`require` e `new cl_*`
+tinham a mesma fraqueza; as três passaram a `re.I`, e a resolução do nome tenta também o
+arquivo em minúsculas.
+
+Impacto medido **retroativamente** (universo novo − universo antigo, por lote): Tributário
+**+1 arquivo** (`iss`); Educação **+30**, porque o `getdao` minúsculo é idioma do código de
+Educação. Dos 30, **24 ainda precisavam de porte** (17 construtores PHP 4, 21 com guardas
+faltando) — 16 deles nos lotes `rel`/`sec`/`bib`/`mer` já commitados, e
+`db_issmovalvaraprocesso_classe.php` no `iss`. Portados neste lote; baterias refeitas de todos
+os lotes afetados: `tre` 19/19, `esc`+`rel`+`sec` 16/16, `bib` 95/98, `mer` 187/187, `map`
+20/20, `iss` 397/400, `con`+`rec` roteadas 31/31 — **todas na linha de base**.
+
+É a nona vez da mesma falha de método, e a segunda de maiúsculas (a primeira foi `Cem1_` no
+nome do arquivo). Achada como as outras: por uma tela que quebrou, não por varredura.
+
+#### ARMADILHA DE FERRAMENTAL: o opcache do 8.5 revalida a cada 2 s
+
+Automatizei o ciclo "requisitar → ler o fatal → guardar a linha → repetir". Ele aplicou a
+mesma guarda **15 vezes aninhada** na mesma linha: o 8.5 tem `opcache.revalidate_freq = 2`, e
+a requisição seguinte chegava antes da revalidação, executando o código antigo e acusando o
+mesmo fatal. Desfeito (uma guarda por linha, diff conferido). **Esperar 3 s depois de editar e
+antes de requisitar.** O 5.6 não tem opcache, então o sintoma só aparece de um lado.
+
+#### CATEGORIA (bib): octal inválido — a correção fiel PRESERVA o bug
+
+`bib1_reserva004.php:64`, fatal de compilação no 8.5 (*Invalid numeric literal*), arquivo que
+nenhuma regra do Rector tocou:
+
+```php
+if($mes == 04 || $mes == 06 || $mes == 09 || $mes == 11){   // meses de 30 dias
+```
+
+```
+PHP 5.6:  var_dump(09, 08, 019)  ->  int(0) int(0) int(1)   (para no 1o digito invalido)
+PHP 7+:   parse error
+```
+
+No 5.6 `$mes == 09` é `$mes == 0`: **setembro nunca entra no ramo dos meses de 30 dias** —
+bug pré-existente no cálculo da data da reserva. Corrigido para `0`, com comentário, e não
+para `9`: escrever `9` mudaria a saída do `:8080`.
+
+Correções: 104 guardas `== <literal>`, 34 `split` → `preg_split` (todos `#`), 17 construtores,
+4 `parse_str`+`extract`. O Rector aplicou só regras já vetadas — **denylist inalterada (29)**.
+Entre os alvos estão `db_turma_classe.php` e `db_matricula_classe.php`, duas das quatro classes
+em que a branch do TCC de referência deixou as guardas `0 == ""` de fora.
+
+### ⚠ CATEGORIA NOVA: AMBIENTE — o php.ini do 8.5 não reproduzia o do 5.6
+
+Achada em `tre2_linha001.php`: HTTP 200 nos dois, **1 byte** no 8.5, nenhum fatal em log
+nenhum. O arquivo começa com um **espaço antes do `<?php`**:
+
+```
+5.6  output_buffering = 4096  (php.ini do Ubuntu)  -> o espaco fica no buffer, a sessao abre
+8.5  output_buffering = 0     (imagem sem php.ini) -> o espaco sai, os cabecalhos ja foram,
+                                                      a sessao nao abre e a tela encerra
+```
+
+Corrigir no código mudaria a saída do `:8080` (é conserto, não migração). A correção fiel é de
+**ambiente**: `docker/php85-apache/paridade-56.ini`, montado em `conf.d` por
+`docker-compose.php85.yml`. **Não por rebuild**: o rebuild falhou sem rede para o
+`deb.debian.org` e, pior, a camada do `apt` não estava em cache — reconstruir reinstalaria todos
+os pacotes em versão nova, outra variável. Com o bind mount o binário segue **8.5.10**.
+
+Comparadas as 228 diretivas dos dois runtimes web, há mais quatro que mudam saída e **não**
+foram alinhadas, por falta de defeito observado (regra de corrigir na aparição):
+
+| Diretiva | 5.6 | 8.5 | Risco |
+|---|---|---|---|
+| `serialize_precision` | 17 | -1 | `json_encode(0.1)` → `0.10000000000000001` × `0.1`; `.RPC.php` com dinheiro |
+| `request_order` | GP | (vazio) | `$_REQUEST` passa a incluir cookies |
+| `variables_order` | GPCS | EGPCS | `$_ENV` preenchido |
+| `default_charset` | UTF-8 | ISO-8859-1 | só o cabeçalho HTTP |
+
+Escala da forma achada: **3 scripts na raiz** com saída antes do `<?php` (`tre`, um `emp`, um
+`sau`) — nenhum no Tributário, por isso nenhuma bateria anterior a viu.
+
+#### ⚠ CORREÇÃO: 8 das 14 divergências "caracterizadas" do Tributário eram ESTA causa
+
+Bateria completa depois do ini: **Fase A 1.807/1.813, Fase B 347/347 — 2.154/2.160**. Antes
+eram 14 divergências; sobraram **6** (2 fragmentos do `agu`, `fis1_sanitario004`, as 3 do
+`iss`). As 8 que sumiram — as 4 do `itb`, `cem1_itenserv002`, `jur_enviarremessatj`,
+`fis1_tiafprazoproc002/003` — **quebram nos dois** e agora devolvem a **mesma** página de erro
+(ex.: 500/4.558 B nos dois). O defeito é da referência, como estava registrado; mas a
+*divergência* era o buffer: no 5.6 o tratador de erro descartava a saída retida e emitia o 500,
+no 8.5 a saída já tinha ido e restava um 200 truncado.
+
+**Lição:** "quebra no 5.6 e funciona no 8.5" era leitura errada do sintoma — o 8.5 não
+funcionava, só não conseguia mais *dizer* que falhou. Paridade de ambiente faz parte da
+invariante "a única variável é a versão do PHP", e ela nunca tinha sido medida diretiva a
+diretiva.
+
+### FERRAMENTAL: duas armadilhas de hoje
+
+- **O harness não está no container.** `scratchpad/` fica na raiz, fora do bind mount
+  (`./ecidade`). Chamado como `/var/www/html/scratchpad/escrita.php`, o php não acha o arquivo,
+  a saída sai **vazia nos dois** e o diff vazio parece aprovação. Copiar com `docker cp` (a skill
+  foi corrigida; o manual já fazia assim).
+- **Lista sem `\n` final perde o último arquivo no `while read`.** O `enumera.py` gravava sem;
+  o lint do `tre` verificou 59 de 60. Corrigido na origem.
 
 ### Estado atual: NÚCLEO PORTADO ✅
 
@@ -3744,6 +4387,126 @@ Dois caminhos possíveis quando chegar a hora:
 Pendência para demonstrar o piloto no navegador: **sessão compartilhada entre os dois runtimes**
 (hoje 5.6 grava em `/var/lib/php/sessions` e 8.5 em `/tmp`, isolados). O cookie não é obstáculo —
 cookies de `localhost` são compartilhados entre portas.
+
+### ✅ MEDIÇÃO (14/10/2026): o Laravel pode migrar em PARALELO — com `vendor/` separado
+
+**A dependência:** nenhuma versão do Laravel roda no 5.6 **e** no 8.5 (5.4 é a última do 5.6 e
+não roda no 8; a 12 exige 8.2–8.5, a 13 exige 8.3–8.5). Como os dois containers montam o mesmo
+`vendor/`, atualizar o Laravel ali derruba o 5.6. **A saída é um `vendor/` próprio do 8.5**, montado
+por cima de `/var/www/html/vendor` só no lado 8.5 — o 5.6 não é tocado.
+
+Montagem da medição (nada na árvore versionada mudou além de `cmp.py`):
+`ecidade/tmp/lar12/` (gitignored) com `composer.json` = o atual com `laravel/framework ^12.0` e o
+resto `*`; 4º container `ecidade_lar12` na porta **8087**, mesma imagem do 8.5, com o vendor novo,
+`bootstrap/cache` e `storage/` também sobrepostos (o Laravel 12 escreveria cache no formato dele e
+quebraria os runtimes 5.4).
+
+| Medição | Resultado |
+|---|---|
+| Pacotes que **não resolvem** com Laravel 12 | **4**: `silex/silex`, `proner/phppimaco` (mpdf 7, PHP ≤ 7.3), `dbseller/phinx_postgres` (phinx 0.10 / symfony antigo), `dbseller/sdk-api-pix-bb` (guzzle 6, ou 7.5.0 com alertas de segurança) |
+| Resolvidos | 135 pacotes; Laravel 12.70, Passport 13.10, symfony 7/8, guzzle 7, phpspreadsheet 5, dompdf 3, mpdf 8 |
+| **Legado sobre o vendor novo** | **3.294 telas** (Fase A + Educação): **3.271 idênticas ao 5.6**; as 15 divergentes + 8 timeouts são **exatamente** as 23 da linha de base. **Zero regressão.** |
+| Classes de `app/`+`src/` que deixam de carregar | **29 de 3.910** (21 `src/Console`: `execute()` sem `: int` do symfony 7; 8 `app/`: `Handler::report(Exception)`, `BaseDeferredProvider::register()`, traits de Auth removidas, Pimaco) |
+| Boot do Laravel 12 | **não inicializa** — morre no 1º provider (`BaseDeferredProvider`); `/v4/oauth/token` dá 500 |
+| APIs removidas (estático) | 50 `DB::raw` em `app/` (10.0), 10 helpers `str_*`/`array_*` (6.0), 5 `$dates` (10.0), 1 `Passport::routes()` (11.0), 105 usos de PhpOffice (1.8 → 5) |
+| Uso do Silex | só a API REST `api/V1` (20 arquivos); o `use Silex\Application` do `app.php` é import sem uso |
+
+**⚠ O Passport 13 NÃO convive com o 5.6 no banco compartilhado:** a migração dele apaga
+`user_id`, `redirect`, `personal_access_client`, `password_client` de `oauth_clients` (usados
+pelo Passport 4) e passa a exigir segredo com hash. **Usar Passport 12.4** — aceita Laravel 12 e
+só acrescenta colunas opcionais (`secret` nullable, `provider`), o que o Passport 4 tolera. O
+password grant (o login usa) vem desligado no 12: `Passport::enablePasswordGrant()`.
+
+**Conclusão:** o legado não depende do Laravel novo nem é afetado por ele — 3.294 telas iguais.
+O custo está todo na camada HTTP (`app/` + `api/V1`), que hoje nem inicializa. A ordem certa é
+trocar o vendor do 8.5 **cedo** (cada área migrada depois disso não precisa ser reverificada) e
+portar `app/` em paralelo, com o login e o `/v4/*` ficando no 5.6 até o boot funcionar.
+
+**Três falhas do instrumento nesta medição**, mesma família de sempre: o laço de eliminação do
+Composer tratava erro de clone SSH como "resolveu" (corrigido: sucesso = existir `composer.lock`);
+o `xargs` aborta a lista inteira quando um `php` sai com 255 (fatal) — 574 de 3.910 testados até
+o invólucro `exit 0`; e o `cmp.py` não normalizava `localhost:8087`, gerando 129 falsos positivos.
+
+Remover: `docker rm -f ecidade_lar12` e `rm -rf ecidade/tmp/lar12`.
+
+### 📐 LARAVEL SÓ PARA O TRIBUTÁRIO (16/10/2026) — o que a área usa, medido
+
+| | |
+|---|---|
+| Rotas de API do domínio | **74**, em 4 módulos: ISSQN 27, Arrecadação 25, ITBI 14, Cadastro 8 (os outros 12 arquivos de rota estão vazios; `routes/web/tributario/*` também) |
+| Código Laravel do domínio | `app/Domain/Tributario`: **220 arquivos** (Arrecadação 71, ITBI 64, ISSQN 50, Cadastro 35) + `app/Domain/Core` 12 |
+| **Telas legadas que chamam a API por JavaScript** | **14**: TEF (`arr2_operacoespendentestef00*`, `cai3_gerfinanc075`), PIX (`cai3_gerfinanc001`, `cai1_pix002`), parcelamentos vencidos (`arr4_*parc_venc`), alvará por eventos e ordem de serviço (`iss4_*`), Redesim (`iss179_inscricaoredesim`), veículos do ISSQN (2 `forms/`), tipo de débito (`forms/db_frmarretipo002`), parâmetros do número cadastral (`cad4_*`) |
+| Telas legadas que usam classes de `app/` | 18 (precisam continuar compatíveis com as duas versões do Laravel) |
+| Rotas do ITBI | middleware `clientCredential` = **aplicação externa** (ITBI online); nenhuma tela legada as chama |
+| API Silex `api/V1` | 1 rota do Tributário (`TributarioControllerProvider`: `post recibo`) |
+| Pacote travado que o Tributário usa | **`dbseller/sdk-api-pix-bb`** — `app/Domain/Tributario/Arrecadacao/Pix/Bancos/BancoDoBrasil.php` (`Swagger\Client`) |
+
+**Ponto cego que isto revela, válido JÁ:** as 14 telas são servidas pelo 8.5, mas o AJAX delas
+vai a `/v4/api/tributario/*`, que o proxy manda ao **5.6**. A bateria (`curl`, sem JS) nunca
+exercitou essas chamadas. E sem o proxy, abertas no `:8085`, a chamada iria ao Laravel 5.4 sob
+PHP 8.5 e falharia.
+
+**Pontos a verificar antes de estimar:** (1) ~~se o Passport 12 do 8.5 aceita o token emitido
+pelo Passport 4 do 5.6~~ **TESTADO (16/10/2026): aceita** — ver abaixo; (2) PIX e TEF chamam serviços reais de terceiros (banco, adquirente)
+— testes automáticos não podem contatá-los, exigem sandbox ou dublê.
+
+#### ✅ TESTE: o token do Passport 4 (5.6) vale no Passport novo (8.5)
+
+Token **real**, pedido a `POST :8080/v4/oauth/token` com o cliente `9999999` e o usuário
+`dbseller` (HTTP 200; JWT RS256, `aud`=9999999, `sub`=1). Conferido com `ResourceServer` do
+`league/oauth2-server` — a classe que o Passport usa para validar o *bearer* —, com a chave
+`storage/oauth-public.key` e a revogação lida de `oauth_access_tokens` no banco compartilhado:
+
+| `league/oauth2-server` | token real | controle: `sub` adulterado | controle: revogado |
+|---|---|---|---|
+| **8.5.5** (o do Passport 12.4) + `lcobucci/jwt` 5.6.1 | **ACEITO** (usuário 1, cliente 9999999) | RECUSADO | RECUSADO |
+| **9.4.1** (o do Passport 13) | **ACEITO** | RECUSADO | RECUSADO |
+
+5.6 usa `league/oauth2-server` 6.1.1 + `lcobucci/jwt` 3.3.3. **Consequência: o login pode ficar
+no 5.6 e as rotas `/v4/api/tributario/*` irem para o 8.5** — o login vira a última peça.
+
+**O que o teste NÃO cobre:** a camada do Passport acima do `ResourceServer` (o `TokenGuard`
+carrega o cliente de `oauth_clients` e o usuário pelo *provider* de autenticação), que só roda
+com o Laravel 12 inicializando. As colunas de `oauth_access_tokens` são as mesmas nas duas
+versões; `oauth_clients` muda no 13, por isso a escolha do 12.4 continua valendo.
+
+**Armadilha do instrumento:** a primeira execução deu `Invalid key supplied` nas duas versões —
+o container `ecidade_lar12` sobrepõe `storage/` com uma pasta vazia, e a chave não estava lá.
+Era o teste, não a compatibilidade. Verificador versionado: `scratchpad/valida_token.php <vendor/autoload.php> <token> <oauth-public.key>`.
+
+### 🗣️ PONTOS LEVADOS AO ORIENTADOR (15/10/2026) — decisão pendente
+
+**1. O nginx é necessário?** Para **medir** a migração, não: `cmp.py`, harness de classes,
+caminho de escrita e nível 3 falam direto com `:8080` e `:8085`, e nenhum número do trabalho
+passa pelo proxy. Para **operar** o sistema migrado, sim: o login só roda no 5.6 (Laravel),
+os links relativos mantêm o usuário na porta em que entrou, e duas portas são duas origens
+para o navegador (as janelas do desktop param de conversar — "Sessão inválida (12)"). Sem a
+fachada não há *strangler fig*, só dois sistemas lado a lado. Se o escopo for só medir, o
+passo 8 da receita (rotear), o `nginx.conf`, o `map` e o `gera_map_faseb.py` saem do
+escopo, e a métrica principal passa a ser **equivalência** (telas idênticas ao 5.6), não
+roteamento. A regra de "rodar nos dois PHPs" continua: ela vem do código compartilhado.
+
+**2. Como se compara sem login no 8.5?** O login é feito uma vez no 5.6; a sessão é um
+arquivo no volume `ecidade_sessions`, que os dois containers leem; as telas legadas leem o
+usuário por `db_getsession()`, sem Laravel. O `cmp.py` restaura a sessão antes de cada
+requisição e usa o mesmo cookie nas duas portas.
+
+**3. "A tela funciona?" ≠ "a tela é equivalente".** O que está provado com força é a
+equivalência. Limites declarados: GET sem parâmetros; "idêntica no erro" conta como
+equivalente; tabela vazia não exercita nada; o JS não é executado; fluxos de escrita reais só
+em 18 telas (nível 3); nenhuma validação de regra de negócio por especialista. Opções
+oferecidas para verificação humana: (A) roteiro de teste funcional navegando pelo `:8090`,
+(B) relatório HTML da bateria com as duas versões renderizadas lado a lado, (C) capturas
+de tela com o Firefox *headless* (mais frágil por causa da sessão).
+
+**4. Como o TCC de referência fazia login sem o Laravel.** Commit `bc51ef4d5` (PHP8-1):
+reescreveu `templates/template_login_e-cidade.php` com `js_acessar_jquery()`, que **pula o
+`POST /v4/oauth/token`** e abre `abrir.php?sAuth=base64(DB_login=..&DB_senha=md5(..))` direto
+— quem valida a senha e abre a sessão é o `abrir.php`, legado. Sem token, a API `/v4/*` fica
+fora da verificação dele. É mudança de comportamento do login, viável só no big-bang. Para nós,
+sugere entrar direto no `:8085` pelo mesmo `abrir.php?sAuth=…`, **sem alterar arquivo** —
+**não testado**: falta ver se o `abrir.php` abre a sessão no 8.5 e o que fazem as telas não
+migradas servidas pelo 8.5.
 
 ### PERMISSÕES: `storage/` bloqueava o login nos DOIS ambientes
 

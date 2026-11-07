@@ -52,7 +52,7 @@ class cl_emprestimoacervo {
                  bi19_exemplar = int8 = Exemplar
                  ";
    //funcao construtor da classe
-   function cl_emprestimoacervo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("emprestimoacervo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,11 +81,11 @@ class cl_emprestimoacervo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi19_codigo = ($this->bi19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_codigo"]:$this->bi19_codigo);
-       $this->bi19_emprestimo = ($this->bi19_emprestimo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_emprestimo"]:$this->bi19_emprestimo);
-       $this->bi19_exemplar = ($this->bi19_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_exemplar"]:$this->bi19_exemplar);
+       $this->bi19_codigo = ($this->bi19_codigo === 0 || $this->bi19_codigo === 0.0 || $this->bi19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_codigo"]:$this->bi19_codigo);
+       $this->bi19_emprestimo = ($this->bi19_emprestimo === 0 || $this->bi19_emprestimo === 0.0 || $this->bi19_emprestimo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_emprestimo"]:$this->bi19_emprestimo);
+       $this->bi19_exemplar = ($this->bi19_exemplar === 0 || $this->bi19_exemplar === 0.0 || $this->bi19_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_exemplar"]:$this->bi19_exemplar);
      }else{
-       $this->bi19_codigo = ($this->bi19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_codigo"]:$this->bi19_codigo);
+       $this->bi19_codigo = ($this->bi19_codigo === 0 || $this->bi19_codigo === 0.0 || $this->bi19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_codigo"]:$this->bi19_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_emprestimoacervo {
          $this->bi19_codigo = $bi19_codigo;
        }
      }
-     if(($this->bi19_codigo == null) || ($this->bi19_codigo == "") ){
+     if(($this->bi19_codigo == null) || ($this->bi19_codigo === 0 || $this->bi19_codigo === 0.0 || $this->bi19_codigo == "") ){
        $this->erro_sql = " Campo bi19_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -371,7 +371,7 @@ class cl_emprestimoacervo {
    function sql_query ( $bi19_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_emprestimoacervo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -409,7 +409,7 @@ class cl_emprestimoacervo {
    function sql_query_file ( $bi19_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_emprestimoacervo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_emprestimoacervo {
   function sql_query_emprestimos_acervo_com_autor ( $bi19_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -476,7 +476,7 @@ class cl_emprestimoacervo {
           $sql .= $sql2;
           if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
               $sql .= $virgula.$campos_sql[$i];

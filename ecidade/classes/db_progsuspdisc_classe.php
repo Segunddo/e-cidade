@@ -59,7 +59,7 @@ class cl_progsuspdisc {
                  ed119_t_obs = text = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_progsuspdisc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("progsuspdisc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,9 +76,9 @@ class cl_progsuspdisc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed119_i_codigo = ($this->ed119_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_codigo"]:$this->ed119_i_codigo);
-       $this->ed119_i_progmatricula = ($this->ed119_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_progmatricula"]:$this->ed119_i_progmatricula);
-       $this->ed119_i_usuario = ($this->ed119_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_usuario"]:$this->ed119_i_usuario);
+       $this->ed119_i_codigo = ($this->ed119_i_codigo === 0 || $this->ed119_i_codigo === 0.0 || $this->ed119_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_codigo"]:$this->ed119_i_codigo);
+       $this->ed119_i_progmatricula = ($this->ed119_i_progmatricula === 0 || $this->ed119_i_progmatricula === 0.0 || $this->ed119_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_progmatricula"]:$this->ed119_i_progmatricula);
+       $this->ed119_i_usuario = ($this->ed119_i_usuario === 0 || $this->ed119_i_usuario === 0.0 || $this->ed119_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_usuario"]:$this->ed119_i_usuario);
        if($this->ed119_d_data == ""){
          $this->ed119_d_data_dia = ($this->ed119_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_d_data_dia"]:$this->ed119_d_data_dia);
          $this->ed119_d_data_mes = ($this->ed119_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_d_data_mes"]:$this->ed119_d_data_mes);
@@ -89,7 +89,7 @@ class cl_progsuspdisc {
        }
        $this->ed119_t_obs = ($this->ed119_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_t_obs"]:$this->ed119_t_obs);
      }else{
-       $this->ed119_i_codigo = ($this->ed119_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_codigo"]:$this->ed119_i_codigo);
+       $this->ed119_i_codigo = ($this->ed119_i_codigo === 0 || $this->ed119_i_codigo === 0.0 || $this->ed119_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_codigo"]:$this->ed119_i_codigo);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_progsuspdisc {
          $this->ed119_i_codigo = $ed119_i_codigo; 
        }
      }
-     if(($this->ed119_i_codigo == null) || ($this->ed119_i_codigo == "") ){ 
+     if(($this->ed119_i_codigo == null) || ($this->ed119_i_codigo === 0 || $this->ed119_i_codigo === 0.0 || $this->ed119_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed119_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -427,7 +427,7 @@ class cl_progsuspdisc {
    function sql_query ( $ed119_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -458,7 +458,7 @@ class cl_progsuspdisc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_progsuspdisc {
    function sql_query_file ( $ed119_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -491,7 +491,7 @@ class cl_progsuspdisc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

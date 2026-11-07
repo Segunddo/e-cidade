@@ -34,7 +34,8 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("libs/db_utils.php"));
 require_once(modification("model/educacao/ArredondamentoNota.model.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $oDaoProcResultado       = db_utils::getdao("procresultado");
@@ -48,7 +49,7 @@ function ElementosFreq($ed67_i_procresultado) {
 
  $sSql          = "SELECT * FROM avalfreqres WHERE ed67_i_procresultado = $ed67_i_procresultado";
  $rsAvalFreqRes = db_query($sSql);
- $iLinhas       = pg_num_rows($rsAvalFreqRes);
+ $iLinhas       = ($rsAvalFreqRes ? pg_num_rows($rsAvalFreqRes) : null);
  return $iLinhas;
 
 }

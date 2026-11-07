@@ -36,7 +36,7 @@ class cl_avaliacaoperguntaopcao {
                  db104_identificadorcampo = varchar(255) = identificador do campo 
                  ";
    //funcao construtor da classe 
-   function cl_avaliacaoperguntaopcao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avaliacaoperguntaopcao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -53,16 +53,16 @@ class cl_avaliacaoperguntaopcao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db104_sequencial = ($this->db104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_sequencial"]:$this->db104_sequencial);
-       $this->db104_avaliacaopergunta = ($this->db104_avaliacaopergunta == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_avaliacaopergunta"]:$this->db104_avaliacaopergunta);
+       $this->db104_sequencial = ($this->db104_sequencial === 0 || $this->db104_sequencial === 0.0 || $this->db104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_sequencial"]:$this->db104_sequencial);
+       $this->db104_avaliacaopergunta = ($this->db104_avaliacaopergunta === 0 || $this->db104_avaliacaopergunta === 0.0 || $this->db104_avaliacaopergunta == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_avaliacaopergunta"]:$this->db104_avaliacaopergunta);
        $this->db104_descricao = ($this->db104_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_descricao"]:$this->db104_descricao);
        $this->db104_identificador = ($this->db104_identificador == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_identificador"]:$this->db104_identificador);
        $this->db104_aceitatexto = ($this->db104_aceitatexto == "f"?@$GLOBALS["HTTP_POST_VARS"]["db104_aceitatexto"]:$this->db104_aceitatexto);
-       $this->db104_peso = ($this->db104_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_peso"]:$this->db104_peso);
+       $this->db104_peso = ($this->db104_peso === 0 || $this->db104_peso === 0.0 || $this->db104_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_peso"]:$this->db104_peso);
        $this->db104_valorresposta = ($this->db104_valorresposta == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_valorresposta"]:$this->db104_valorresposta);
        $this->db104_identificadorcampo = ($this->db104_identificadorcampo == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_identificadorcampo"]:$this->db104_identificadorcampo);
      }else{
-       $this->db104_sequencial = ($this->db104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_sequencial"]:$this->db104_sequencial);
+       $this->db104_sequencial = ($this->db104_sequencial === 0 || $this->db104_sequencial === 0.0 || $this->db104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db104_sequencial"]:$this->db104_sequencial);
      }
    }
    // funcao para Inclusão
@@ -115,7 +115,7 @@ class cl_avaliacaoperguntaopcao {
          }
        }
      }
-     if(($this->db104_sequencial == null) || ($this->db104_sequencial == "") ){ 
+     if(($this->db104_sequencial == null) || ($this->db104_sequencial === 0 || $this->db104_sequencial === 0.0 || $this->db104_sequencial == "") ){ 
        $this->erro_sql = " Campo db104_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -496,7 +496,7 @@ class cl_avaliacaoperguntaopcao {
      }
      return $sql;
   }
-   function sql_query_respostas($db104_sequencial = null, $campos = "*", $ordem=null, $iAvaliacao, $dbwhere = "") {
+   function sql_query_respostas($db104_sequencial = null, $campos = "*", $ordem=null, $iAvaliacao = null, $dbwhere = "") {
      
      $sql = "select ";
      if($campos != "*" ){

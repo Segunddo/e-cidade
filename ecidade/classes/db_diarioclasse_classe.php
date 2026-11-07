@@ -59,7 +59,7 @@ class cl_diarioclasse {
                  ed300_auladesenvolvida = text = Aula desenvolvida 
                  ";
    //funcao construtor da classe 
-   function cl_diarioclasse() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diarioclasse"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,8 +76,8 @@ class cl_diarioclasse {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed300_sequencial = ($this->ed300_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed300_sequencial"]:$this->ed300_sequencial);
-       $this->ed300_id_usuario = ($this->ed300_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed300_id_usuario"]:$this->ed300_id_usuario);
+       $this->ed300_sequencial = ($this->ed300_sequencial === 0 || $this->ed300_sequencial === 0.0 || $this->ed300_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed300_sequencial"]:$this->ed300_sequencial);
+       $this->ed300_id_usuario = ($this->ed300_id_usuario === 0 || $this->ed300_id_usuario === 0.0 || $this->ed300_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed300_id_usuario"]:$this->ed300_id_usuario);
        if($this->ed300_datalancamento == ""){
          $this->ed300_datalancamento_dia = ($this->ed300_datalancamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed300_datalancamento_dia"]:$this->ed300_datalancamento_dia);
          $this->ed300_datalancamento_mes = ($this->ed300_datalancamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed300_datalancamento_mes"]:$this->ed300_datalancamento_mes);
@@ -89,7 +89,7 @@ class cl_diarioclasse {
        $this->ed300_hora = ($this->ed300_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ed300_hora"]:$this->ed300_hora);
        $this->ed300_auladesenvolvida = ($this->ed300_auladesenvolvida == ""?@$GLOBALS["HTTP_POST_VARS"]["ed300_auladesenvolvida"]:$this->ed300_auladesenvolvida);
      }else{
-       $this->ed300_sequencial = ($this->ed300_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed300_sequencial"]:$this->ed300_sequencial);
+       $this->ed300_sequencial = ($this->ed300_sequencial === 0 || $this->ed300_sequencial === 0.0 || $this->ed300_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed300_sequencial"]:$this->ed300_sequencial);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_diarioclasse {
          $this->ed300_sequencial = $ed300_sequencial; 
        }
      }
-     if(($this->ed300_sequencial == null) || ($this->ed300_sequencial == "") ){ 
+     if(($this->ed300_sequencial == null) || ($this->ed300_sequencial === 0 || $this->ed300_sequencial === 0.0 || $this->ed300_sequencial == "") ){ 
        $this->erro_sql = " Campo ed300_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -428,7 +428,7 @@ class cl_diarioclasse {
    function sql_query ( $ed300_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_diarioclasse {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -463,7 +463,7 @@ class cl_diarioclasse {
    function sql_query_file ( $ed300_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -484,7 +484,7 @@ class cl_diarioclasse {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_diarioclasse {
     $sql = "select ";
     if ($campos != "*" ) {
 
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula    = "";
       for( $i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -527,7 +527,7 @@ class cl_diarioclasse {
     if ($ordem != null ) {
 
       $sql        .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula    = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 

@@ -64,7 +64,7 @@ class cl_formaavaliacao {
                  ed37_i_escola = int8 = Escola
                  ";
    //funcao construtor da classe
-   function cl_formaavaliacao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("formaavaliacao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_formaavaliacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed37_i_codigo = ($this->ed37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_i_codigo"]:$this->ed37_i_codigo);
+       $this->ed37_i_codigo = ($this->ed37_i_codigo === 0 || $this->ed37_i_codigo === 0.0 || $this->ed37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_i_codigo"]:$this->ed37_i_codigo);
        $this->ed37_c_descr = ($this->ed37_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_c_descr"]:$this->ed37_c_descr);
        $this->ed37_c_tipo = ($this->ed37_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_c_tipo"]:$this->ed37_c_tipo);
-       $this->ed37_i_menorvalor = ($this->ed37_i_menorvalor == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_i_menorvalor"]:$this->ed37_i_menorvalor);
-       $this->ed37_i_maiorvalor = ($this->ed37_i_maiorvalor == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_i_maiorvalor"]:$this->ed37_i_maiorvalor);
-       $this->ed37_i_variacao = ($this->ed37_i_variacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_i_variacao"]:$this->ed37_i_variacao);
+       $this->ed37_i_menorvalor = ($this->ed37_i_menorvalor === 0 || $this->ed37_i_menorvalor === 0.0 || $this->ed37_i_menorvalor == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_i_menorvalor"]:$this->ed37_i_menorvalor);
+       $this->ed37_i_maiorvalor = ($this->ed37_i_maiorvalor === 0 || $this->ed37_i_maiorvalor === 0.0 || $this->ed37_i_maiorvalor == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_i_maiorvalor"]:$this->ed37_i_maiorvalor);
+       $this->ed37_i_variacao = ($this->ed37_i_variacao === 0 || $this->ed37_i_variacao === 0.0 || $this->ed37_i_variacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_i_variacao"]:$this->ed37_i_variacao);
        $this->ed37_c_minimoaprov = ($this->ed37_c_minimoaprov == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_c_minimoaprov"]:$this->ed37_c_minimoaprov);
        $this->ed37_c_parecerarmaz = ($this->ed37_c_parecerarmaz == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_c_parecerarmaz"]:$this->ed37_c_parecerarmaz);
        $this->ed37_i_escola = ($this->ed37_i_escola === 0 ? @$GLOBALS["HTTP_POST_VARS"]["ed37_i_escola"]:$this->ed37_i_escola);
      }else{
-       $this->ed37_i_codigo = ($this->ed37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_i_codigo"]:$this->ed37_i_codigo);
+       $this->ed37_i_codigo = ($this->ed37_i_codigo === 0 || $this->ed37_i_codigo === 0.0 || $this->ed37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed37_i_codigo"]:$this->ed37_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -178,7 +178,7 @@ class cl_formaavaliacao {
          $this->ed37_i_codigo = $ed37_i_codigo;
        }
      }
-     if(($this->ed37_i_codigo == null) || ($this->ed37_i_codigo == "") ){
+     if(($this->ed37_i_codigo == null) || ($this->ed37_i_codigo === 0 || $this->ed37_i_codigo === 0.0 || $this->ed37_i_codigo == "") ){
        $this->erro_sql = " Campo ed37_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

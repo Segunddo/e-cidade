@@ -93,16 +93,16 @@ class cl_rechumanoativ
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed22_i_codigo = ($this->ed22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_codigo"]:$this->ed22_i_codigo);
-       $this->ed22_i_rechumanoescola = ($this->ed22_i_rechumanoescola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_rechumanoescola"]:$this->ed22_i_rechumanoescola);
-       $this->ed22_i_atividade = ($this->ed22_i_atividade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_atividade"]:$this->ed22_i_atividade);
-       $this->ed22_i_horasmanha = ($this->ed22_i_horasmanha == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_horasmanha"]:$this->ed22_i_horasmanha);
-       $this->ed22_i_horastarde = ($this->ed22_i_horastarde == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_horastarde"]:$this->ed22_i_horastarde);
-       $this->ed22_i_horasnoite = ($this->ed22_i_horasnoite == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_horasnoite"]:$this->ed22_i_horasnoite);
-       $this->ed22_i_atolegal = ($this->ed22_i_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_atolegal"]:$this->ed22_i_atolegal);
+       $this->ed22_i_codigo = ($this->ed22_i_codigo === 0 || $this->ed22_i_codigo === 0.0 || $this->ed22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_codigo"]:$this->ed22_i_codigo);
+       $this->ed22_i_rechumanoescola = ($this->ed22_i_rechumanoescola === 0 || $this->ed22_i_rechumanoescola === 0.0 || $this->ed22_i_rechumanoescola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_rechumanoescola"]:$this->ed22_i_rechumanoescola);
+       $this->ed22_i_atividade = ($this->ed22_i_atividade === 0 || $this->ed22_i_atividade === 0.0 || $this->ed22_i_atividade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_atividade"]:$this->ed22_i_atividade);
+       $this->ed22_i_horasmanha = ($this->ed22_i_horasmanha === 0 || $this->ed22_i_horasmanha === 0.0 || $this->ed22_i_horasmanha == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_horasmanha"]:$this->ed22_i_horasmanha);
+       $this->ed22_i_horastarde = ($this->ed22_i_horastarde === 0 || $this->ed22_i_horastarde === 0.0 || $this->ed22_i_horastarde == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_horastarde"]:$this->ed22_i_horastarde);
+       $this->ed22_i_horasnoite = ($this->ed22_i_horasnoite === 0 || $this->ed22_i_horasnoite === 0.0 || $this->ed22_i_horasnoite == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_horasnoite"]:$this->ed22_i_horasnoite);
+       $this->ed22_i_atolegal = ($this->ed22_i_atolegal === 0 || $this->ed22_i_atolegal === 0.0 || $this->ed22_i_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_atolegal"]:$this->ed22_i_atolegal);
        $this->ed22_ativo = ($this->ed22_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed22_ativo"]:$this->ed22_ativo);
      }else{
-       $this->ed22_i_codigo = ($this->ed22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_codigo"]:$this->ed22_i_codigo);
+       $this->ed22_i_codigo = ($this->ed22_i_codigo === 0 || $this->ed22_i_codigo === 0.0 || $this->ed22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_codigo"]:$this->ed22_i_codigo);
      }
    }
 
@@ -193,7 +193,7 @@ class cl_rechumanoativ
          $this->ed22_i_codigo = $ed22_i_codigo;
        }
      }
-     if(($this->ed22_i_codigo == null) || ($this->ed22_i_codigo == "") ){
+     if(($this->ed22_i_codigo == null) || ($this->ed22_i_codigo === 0 || $this->ed22_i_codigo === 0.0 || $this->ed22_i_codigo == "") ){
        $this->erro_sql = " Campo ed22_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -73,11 +73,11 @@ class cl_calendarioescola
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed38_i_codigo = ($this->ed38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed38_i_codigo"]:$this->ed38_i_codigo);
-       $this->ed38_i_escola = ($this->ed38_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed38_i_escola"]:$this->ed38_i_escola);
-       $this->ed38_i_calendario = ($this->ed38_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed38_i_calendario"]:$this->ed38_i_calendario);
+       $this->ed38_i_codigo = ($this->ed38_i_codigo === 0 || $this->ed38_i_codigo === 0.0 || $this->ed38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed38_i_codigo"]:$this->ed38_i_codigo);
+       $this->ed38_i_escola = ($this->ed38_i_escola === 0 || $this->ed38_i_escola === 0.0 || $this->ed38_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed38_i_escola"]:$this->ed38_i_escola);
+       $this->ed38_i_calendario = ($this->ed38_i_calendario === 0 || $this->ed38_i_calendario === 0.0 || $this->ed38_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed38_i_calendario"]:$this->ed38_i_calendario);
      }else{
-       $this->ed38_i_codigo = ($this->ed38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed38_i_codigo"]:$this->ed38_i_codigo);
+       $this->ed38_i_codigo = ($this->ed38_i_codigo === 0 || $this->ed38_i_codigo === 0.0 || $this->ed38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed38_i_codigo"]:$this->ed38_i_codigo);
      }
    }
 
@@ -126,7 +126,7 @@ class cl_calendarioescola
          $this->ed38_i_codigo = $ed38_i_codigo;
        }
      }
-     if(($this->ed38_i_codigo == null) || ($this->ed38_i_codigo == "") ){
+     if(($this->ed38_i_codigo == null) || ($this->ed38_i_codigo === 0 || $this->ed38_i_codigo === 0.0 || $this->ed38_i_codigo == "") ){
        $this->erro_sql = " Campo ed38_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

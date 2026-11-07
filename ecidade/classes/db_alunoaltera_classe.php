@@ -106,7 +106,7 @@ class cl_alunoaltera {
  var $ed47_i_censomuniccert = 0;
  var $ed47_i_censoufnat = 0;
  var $ed47_i_censomunicnat = 0;
- function cl_alunoaltera() {
+ function __construct() {
   $this->rotulo = new rotulo("aluno");
   $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
  }
@@ -143,7 +143,7 @@ class cl_alunoaltera {
   }
  }
  function atualizacamposlog() {
-  $this->ed47_i_codigo = ($this->ed47_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_codigo"]:$this->ed47_i_codigo);
+  $this->ed47_i_codigo = ($this->ed47_i_codigo === 0 || $this->ed47_i_codigo === 0.0 || $this->ed47_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_codigo"]:$this->ed47_i_codigo);
   $this->ed47_v_nome = ($this->ed47_v_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_nome"]:$this->ed47_v_nome);
   $this->ed47_v_ender = ($this->ed47_v_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_ender"]:$this->ed47_v_ender);
   $this->ed47_c_numero = ($this->ed47_c_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_c_numero"]:$this->ed47_c_numero);
@@ -207,8 +207,8 @@ class cl_alunoaltera {
     $this->ed47_d_nasc = $this->ed47_d_nasc_ano."-".$this->ed47_d_nasc_mes."-".$this->ed47_d_nasc_dia;
    }
   }
-  $this->ed47_i_estciv = ($this->ed47_i_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_estciv"]:$this->ed47_i_estciv);
-  $this->ed47_i_nacion = ($this->ed47_i_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_nacion"]:$this->ed47_i_nacion);
+  $this->ed47_i_estciv = ($this->ed47_i_estciv === 0 || $this->ed47_i_estciv === 0.0 || $this->ed47_i_estciv == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_estciv"]:$this->ed47_i_estciv);
+  $this->ed47_i_nacion = ($this->ed47_i_nacion === 0 || $this->ed47_i_nacion === 0.0 || $this->ed47_i_nacion == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_nacion"]:$this->ed47_i_nacion);
   $this->ed47_v_categoria = ($this->ed47_v_categoria == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_categoria"]:$this->ed47_v_categoria);
   $this->ed47_v_cnh = ($this->ed47_v_cnh == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_cnh"]:$this->ed47_v_cnh);
   $this->ed47_v_contato = ($this->ed47_v_contato == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_contato"]:$this->ed47_v_contato);
@@ -221,7 +221,7 @@ class cl_alunoaltera {
   $this->ed47_v_sexo = ($this->ed47_v_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_sexo"]:$this->ed47_v_sexo);
   $this->ed47_v_telcel = ($this->ed47_v_telcel == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_telcel"]:$this->ed47_v_telcel);
   $this->ed47_c_codigoinep = ($this->ed47_c_codigoinep == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_c_codigoinep"]:$this->ed47_c_codigoinep);
-  $this->ed47_i_pais = ($this->ed47_i_pais == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_pais"]:$this->ed47_i_pais);
+  $this->ed47_i_pais = ($this->ed47_i_pais === 0 || $this->ed47_i_pais === 0.0 || $this->ed47_i_pais == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_pais"]:$this->ed47_i_pais);
   if($this->ed47_d_identdtexp == ""){
    $this->ed47_d_identdtexp_dia = ($this->ed47_d_identdtexp_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_d_identdtexp_dia"]:$this->ed47_d_identdtexp_dia);
    $this->ed47_d_identdtexp_mes = ($this->ed47_d_identdtexp_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_d_identdtexp_mes"]:$this->ed47_d_identdtexp_mes);
@@ -232,19 +232,19 @@ class cl_alunoaltera {
   }
   $this->ed47_v_identcompl = ($this->ed47_v_identcompl == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_v_identcompl"]:$this->ed47_v_identcompl);
   $this->ed47_c_passaporte = ($this->ed47_c_passaporte == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_c_passaporte"]:$this->ed47_c_passaporte);
-  $this->ed47_i_transpublico = ($this->ed47_i_transpublico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_transpublico"]:$this->ed47_i_transpublico);
-  $this->ed47_i_filiacao = ($this->ed47_i_filiacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_filiacao"]:$this->ed47_i_filiacao);
-  $this->ed47_i_censoufend = ($this->ed47_i_censoufend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufend"]:$this->ed47_i_censoufend);
-  $this->ed47_i_censomunicend = ($this->ed47_i_censomunicend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomunicend"]:$this->ed47_i_censomunicend);
-  $this->ed47_i_censoorgemissrg = ($this->ed47_i_censoorgemissrg == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoorgemissrg"]:$this->ed47_i_censoorgemissrg);
-  $this->ed47_i_censoufident = ($this->ed47_i_censoufident == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufident"]:$this->ed47_i_censoufident);
-  $this->ed47_i_censoufcert = ($this->ed47_i_censoufcert == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufcert"]:$this->ed47_i_censoufcert);
-  $this->ed47_i_censomuniccert = ($this->ed47_i_censomuniccert == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomuniccert"]:$this->ed47_i_censomuniccert);
-  $this->ed47_i_censoufnat = ($this->ed47_i_censoufnat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufnat"]:$this->ed47_i_censoufnat);
-  $this->ed47_i_censomunicnat = ($this->ed47_i_censomunicnat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomunicnat"]:$this->ed47_i_censomunicnat);
+  $this->ed47_i_transpublico = ($this->ed47_i_transpublico === 0 || $this->ed47_i_transpublico === 0.0 || $this->ed47_i_transpublico == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_transpublico"]:$this->ed47_i_transpublico);
+  $this->ed47_i_filiacao = ($this->ed47_i_filiacao === 0 || $this->ed47_i_filiacao === 0.0 || $this->ed47_i_filiacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_filiacao"]:$this->ed47_i_filiacao);
+  $this->ed47_i_censoufend = ($this->ed47_i_censoufend === 0 || $this->ed47_i_censoufend === 0.0 || $this->ed47_i_censoufend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufend"]:$this->ed47_i_censoufend);
+  $this->ed47_i_censomunicend = ($this->ed47_i_censomunicend === 0 || $this->ed47_i_censomunicend === 0.0 || $this->ed47_i_censomunicend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomunicend"]:$this->ed47_i_censomunicend);
+  $this->ed47_i_censoorgemissrg = ($this->ed47_i_censoorgemissrg === 0 || $this->ed47_i_censoorgemissrg === 0.0 || $this->ed47_i_censoorgemissrg == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoorgemissrg"]:$this->ed47_i_censoorgemissrg);
+  $this->ed47_i_censoufident = ($this->ed47_i_censoufident === 0 || $this->ed47_i_censoufident === 0.0 || $this->ed47_i_censoufident == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufident"]:$this->ed47_i_censoufident);
+  $this->ed47_i_censoufcert = ($this->ed47_i_censoufcert === 0 || $this->ed47_i_censoufcert === 0.0 || $this->ed47_i_censoufcert == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufcert"]:$this->ed47_i_censoufcert);
+  $this->ed47_i_censomuniccert = ($this->ed47_i_censomuniccert === 0 || $this->ed47_i_censomuniccert === 0.0 || $this->ed47_i_censomuniccert == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomuniccert"]:$this->ed47_i_censomuniccert);
+  $this->ed47_i_censoufnat = ($this->ed47_i_censoufnat === 0 || $this->ed47_i_censoufnat === 0.0 || $this->ed47_i_censoufnat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censoufnat"]:$this->ed47_i_censoufnat);
+  $this->ed47_i_censomunicnat = ($this->ed47_i_censomunicnat === 0 || $this->ed47_i_censomunicnat === 0.0 || $this->ed47_i_censomunicnat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed47_i_censomunicnat"]:$this->ed47_i_censomunicnat);
  }
  // funcao para alteracao
- function logalterar ($ed47_i_codigo=null,$q_modulo){
+ function logalterar ($ed47_i_codigo=null,$q_modulo = null){
   $this->atualizacamposlog();
   $n_registros = 0;
   $sql_ant = " SELECT * FROM aluno WHERE ed47_i_codigo = ".$this->ed47_i_codigo;

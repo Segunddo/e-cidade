@@ -50,7 +50,7 @@ class cl_matmaterunisai {
                  m62_codmatunid = int8 = Unidade de saída 
                  ";
    //funcao construtor da classe 
-   function cl_matmaterunisai() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matmaterunisai"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_matmaterunisai {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m62_codmater = ($this->m62_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m62_codmater"]:$this->m62_codmater);
-       $this->m62_codmatunid = ($this->m62_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m62_codmatunid"]:$this->m62_codmatunid);
+       $this->m62_codmater = ($this->m62_codmater === 0 || $this->m62_codmater === 0.0 || $this->m62_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m62_codmater"]:$this->m62_codmater);
+       $this->m62_codmatunid = ($this->m62_codmatunid === 0 || $this->m62_codmatunid === 0.0 || $this->m62_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m62_codmatunid"]:$this->m62_codmatunid);
      }else{
-       $this->m62_codmater = ($this->m62_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m62_codmater"]:$this->m62_codmater);
-       $this->m62_codmatunid = ($this->m62_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m62_codmatunid"]:$this->m62_codmatunid);
+       $this->m62_codmater = ($this->m62_codmater === 0 || $this->m62_codmater === 0.0 || $this->m62_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m62_codmater"]:$this->m62_codmater);
+       $this->m62_codmatunid = ($this->m62_codmatunid === 0 || $this->m62_codmatunid === 0.0 || $this->m62_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m62_codmatunid"]:$this->m62_codmatunid);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_matmaterunisai {
       $this->atualizacampos();
        $this->m62_codmater = $m62_codmater; 
        $this->m62_codmatunid = $m62_codmatunid; 
-     if(($this->m62_codmater == null) || ($this->m62_codmater == "") ){ 
+     if(($this->m62_codmater == null) || ($this->m62_codmater === 0 || $this->m62_codmater === 0.0 || $this->m62_codmater == "") ){ 
        $this->erro_sql = " Campo m62_codmater nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_matmaterunisai {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->m62_codmatunid == null) || ($this->m62_codmatunid == "") ){ 
+     if(($this->m62_codmatunid == null) || ($this->m62_codmatunid === 0 || $this->m62_codmatunid === 0.0 || $this->m62_codmatunid == "") ){ 
        $this->erro_sql = " Campo m62_codmatunid nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_matmaterunisai {
    function sql_query ( $m62_codmater=null,$m62_codmatunid=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_matmaterunisai {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_matmaterunisai {
    function sql_query_file ( $m62_codmater=null,$m62_codmatunid=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_matmaterunisai {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

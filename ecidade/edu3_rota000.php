@@ -42,7 +42,8 @@ include(modification("classes/db_cursoescola_classe.php"));
 include(modification("classes/db_veicretirada_classe.php"));
 include(modification("classes/db_rotamov_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $claluno = new cl_aluno;
 $clserie = new cl_serie;
 $cllinha = new cl_linha;
@@ -171,7 +172,7 @@ function js_redireciona(chave){
          ";
       }
       $result_curso = db_query($sql);
-      $linhas= pg_numrows($result_curso);
+      $linhas= ($result_curso ? pg_numrows($result_curso) : null);
       if($linhas==0){
        $x = array(''=>'');
        db_select('ed31_i_curso',$x,true,1," $disabled style='width:300px;'");

@@ -70,7 +70,7 @@ class cl_mer_subitem {
                  me29_t_obs = text = Justificativa 
                  ";
    //funcao construtor da classe 
-   function cl_mer_subitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_subitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,11 +87,11 @@ class cl_mer_subitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me29_i_codigo = ($this->me29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_codigo"]:$this->me29_i_codigo);
-       $this->me29_i_refeicao = ($this->me29_i_refeicao == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_refeicao"]:$this->me29_i_refeicao);
-       $this->me29_i_alimentonovo = ($this->me29_i_alimentonovo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_alimentonovo"]:$this->me29_i_alimentonovo);
-       $this->me29_i_alimentoorig = ($this->me29_i_alimentoorig == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_alimentoorig"]:$this->me29_i_alimentoorig);
-       $this->me29_f_quantidade = ($this->me29_f_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_f_quantidade"]:$this->me29_f_quantidade);
+       $this->me29_i_codigo = ($this->me29_i_codigo === 0 || $this->me29_i_codigo === 0.0 || $this->me29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_codigo"]:$this->me29_i_codigo);
+       $this->me29_i_refeicao = ($this->me29_i_refeicao === 0 || $this->me29_i_refeicao === 0.0 || $this->me29_i_refeicao == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_refeicao"]:$this->me29_i_refeicao);
+       $this->me29_i_alimentonovo = ($this->me29_i_alimentonovo === 0 || $this->me29_i_alimentonovo === 0.0 || $this->me29_i_alimentonovo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_alimentonovo"]:$this->me29_i_alimentonovo);
+       $this->me29_i_alimentoorig = ($this->me29_i_alimentoorig === 0 || $this->me29_i_alimentoorig === 0.0 || $this->me29_i_alimentoorig == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_alimentoorig"]:$this->me29_i_alimentoorig);
+       $this->me29_f_quantidade = ($this->me29_f_quantidade === 0 || $this->me29_f_quantidade === 0.0 || $this->me29_f_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_f_quantidade"]:$this->me29_f_quantidade);
        $this->me29_c_medidacaseira = ($this->me29_c_medidacaseira == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_c_medidacaseira"]:$this->me29_c_medidacaseira);
        if($this->me29_d_inicio == ""){
          $this->me29_d_inicio_dia = ($this->me29_d_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_d_inicio_dia"]:$this->me29_d_inicio_dia);
@@ -111,7 +111,7 @@ class cl_mer_subitem {
        }
        $this->me29_t_obs = ($this->me29_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_t_obs"]:$this->me29_t_obs);
      }else{
-       $this->me29_i_codigo = ($this->me29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_codigo"]:$this->me29_i_codigo);
+       $this->me29_i_codigo = ($this->me29_i_codigo === 0 || $this->me29_i_codigo === 0.0 || $this->me29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_codigo"]:$this->me29_i_codigo);
      }
    }
    // funcao para inclusao
@@ -213,7 +213,7 @@ class cl_mer_subitem {
          $this->me29_i_codigo = $me29_i_codigo; 
        }
      }
-     if(($this->me29_i_codigo == null) || ($this->me29_i_codigo == "") ){ 
+     if(($this->me29_i_codigo == null) || ($this->me29_i_codigo === 0 || $this->me29_i_codigo === 0.0 || $this->me29_i_codigo == "") ){ 
        $this->erro_sql = " Campo me29_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -594,7 +594,7 @@ class cl_mer_subitem {
    function sql_query ( $me29_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -621,7 +621,7 @@ class cl_mer_subitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -634,7 +634,7 @@ class cl_mer_subitem {
    function sql_query_file ( $me29_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -655,7 +655,7 @@ class cl_mer_subitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

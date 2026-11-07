@@ -36,7 +36,8 @@ include(modification("classes/db_baseserie_classe.php"));
 include(modification("classes/db_basemps_classe.php"));
 include(modification("classes/db_base_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clserie      = new cl_serie;
 $clbaseserie  = new cl_baseserie;
@@ -93,7 +94,7 @@ if (isset($ordenacao)) {
         ";
         $query = db_query($sql);
         $query1 = db_query($sql);
-        $linhas = pg_num_rows($query);
+        $linhas = ($query ? pg_num_rows($query) : null);
       ?>
        <table width="100%" cellspacing="0" cellpading="0" border="0" >
    <tr>

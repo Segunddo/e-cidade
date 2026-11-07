@@ -457,7 +457,7 @@ class ImportacaoCenso2012 extends importacaoCenso
      * e atualiza os se forem diferentes dos encontrados no banco de dados
      * @param object $oLinha com os campos contidos em uma linha de importacao (conforme seu tipo de registro)
      */
-    function atualizaDadosTurma($oLinha, $iAnoCenso)
+    function atualizaDadosTurma($oLinha, $iAnoCenso = null) // LSP: a mae tem 1 parametro
     {
 
         $sNomeTurmaCensoNovo = $oLinha->nome_turma;

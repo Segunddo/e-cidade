@@ -60,7 +60,7 @@ class cl_mer_alimento {
                  me35_c_quant = char(5) = Quantidade 
                  ";
    //funcao construtor da classe 
-   function cl_mer_alimento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_alimento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_mer_alimento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me35_i_codigo = ($this->me35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_codigo"]:$this->me35_i_codigo);
+       $this->me35_i_codigo = ($this->me35_i_codigo === 0 || $this->me35_i_codigo === 0.0 || $this->me35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_codigo"]:$this->me35_i_codigo);
        $this->me35_c_nomealimento = ($this->me35_c_nomealimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_c_nomealimento"]:$this->me35_c_nomealimento);
        $this->me35_c_nomecientifico = ($this->me35_c_nomecientifico == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_c_nomecientifico"]:$this->me35_c_nomecientifico);
-       $this->me35_i_grupoalimentar = ($this->me35_i_grupoalimentar == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_grupoalimentar"]:$this->me35_i_grupoalimentar);
+       $this->me35_i_grupoalimentar = ($this->me35_i_grupoalimentar === 0 || $this->me35_i_grupoalimentar === 0.0 || $this->me35_i_grupoalimentar == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_grupoalimentar"]:$this->me35_i_grupoalimentar);
        $this->me35_c_fonteinformacao = ($this->me35_c_fonteinformacao == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_c_fonteinformacao"]:$this->me35_c_fonteinformacao);
-       $this->me35_i_unidade = ($this->me35_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_unidade"]:$this->me35_i_unidade);
+       $this->me35_i_unidade = ($this->me35_i_unidade === 0 || $this->me35_i_unidade === 0.0 || $this->me35_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_unidade"]:$this->me35_i_unidade);
        $this->me35_c_quant = ($this->me35_c_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_c_quant"]:$this->me35_c_quant);
      }else{
-       $this->me35_i_codigo = ($this->me35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_codigo"]:$this->me35_i_codigo);
+       $this->me35_i_codigo = ($this->me35_i_codigo === 0 || $this->me35_i_codigo === 0.0 || $this->me35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_codigo"]:$this->me35_i_codigo);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_mer_alimento {
          $this->me35_i_codigo = $me35_i_codigo; 
        }
      }
-     if(($this->me35_i_codigo == null) || ($this->me35_i_codigo == "") ){ 
+     if(($this->me35_i_codigo == null) || ($this->me35_i_codigo === 0 || $this->me35_i_codigo === 0.0 || $this->me35_i_codigo == "") ){ 
        $this->erro_sql = " Campo me35_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -484,7 +484,7 @@ class cl_mer_alimento {
    function sql_query ( $me35_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -507,7 +507,7 @@ class cl_mer_alimento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_mer_alimento {
    function sql_query_file ( $me35_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -541,7 +541,7 @@ class cl_mer_alimento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

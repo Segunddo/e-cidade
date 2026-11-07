@@ -50,7 +50,7 @@ class cl_db_almoxdepto {
                  m92_depto = int4 = Depart. 
                  ";
    //funcao construtor da classe 
-   function cl_db_almoxdepto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_almoxdepto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_db_almoxdepto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m92_codalmox = ($this->m92_codalmox == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_codalmox"]:$this->m92_codalmox);
-       $this->m92_depto = ($this->m92_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_depto"]:$this->m92_depto);
+       $this->m92_codalmox = ($this->m92_codalmox === 0 || $this->m92_codalmox === 0.0 || $this->m92_codalmox == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_codalmox"]:$this->m92_codalmox);
+       $this->m92_depto = ($this->m92_depto === 0 || $this->m92_depto === 0.0 || $this->m92_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_depto"]:$this->m92_depto);
      }else{
-       $this->m92_codalmox = ($this->m92_codalmox == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_codalmox"]:$this->m92_codalmox);
-       $this->m92_depto = ($this->m92_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_depto"]:$this->m92_depto);
+       $this->m92_codalmox = ($this->m92_codalmox === 0 || $this->m92_codalmox === 0.0 || $this->m92_codalmox == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_codalmox"]:$this->m92_codalmox);
+       $this->m92_depto = ($this->m92_depto === 0 || $this->m92_depto === 0.0 || $this->m92_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_depto"]:$this->m92_depto);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_db_almoxdepto {
       $this->atualizacampos();
        $this->m92_codalmox = $m92_codalmox; 
        $this->m92_depto = $m92_depto; 
-     if(($this->m92_codalmox == null) || ($this->m92_codalmox == "") ){ 
+     if(($this->m92_codalmox == null) || ($this->m92_codalmox === 0 || $this->m92_codalmox === 0.0 || $this->m92_codalmox == "") ){ 
        $this->erro_sql = " Campo m92_codalmox nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_db_almoxdepto {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->m92_depto == null) || ($this->m92_depto == "") ){ 
+     if(($this->m92_depto == null) || ($this->m92_depto === 0 || $this->m92_depto === 0.0 || $this->m92_depto == "") ){ 
        $this->erro_sql = " Campo m92_depto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -321,7 +321,7 @@ class cl_db_almoxdepto {
    function sql_query ( $m92_codalmox=null,$m92_depto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -353,7 +353,7 @@ class cl_db_almoxdepto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_db_almoxdepto {
    function sql_query_file ( $m92_codalmox=null,$m92_depto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_db_almoxdepto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_db_almoxdepto {
    function sql_query_inf ( $m92_codalmox=null,$m92_depto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_db_almoxdepto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -449,7 +449,7 @@ class cl_db_almoxdepto {
    function sql_query_instit ( $m92_codalmox=null,$m92_depto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -483,7 +483,7 @@ class cl_db_almoxdepto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -495,7 +495,7 @@ class cl_db_almoxdepto {
    function sql_query_almox( $m92_codalmox=null,$m92_depto=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -526,7 +526,7 @@ class cl_db_almoxdepto {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -57,7 +57,7 @@ class cl_devolucaoacervo {
                  bi21_usuario = int8 = Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_devolucaoacervo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("devolucaoacervo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,8 +74,8 @@ class cl_devolucaoacervo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi21_codigo = ($this->bi21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_codigo"]:$this->bi21_codigo);
-       $this->bi21_emprestimoacervo = ($this->bi21_emprestimoacervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_emprestimoacervo"]:$this->bi21_emprestimoacervo);
+       $this->bi21_codigo = ($this->bi21_codigo === 0 || $this->bi21_codigo === 0.0 || $this->bi21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_codigo"]:$this->bi21_codigo);
+       $this->bi21_emprestimoacervo = ($this->bi21_emprestimoacervo === 0 || $this->bi21_emprestimoacervo === 0.0 || $this->bi21_emprestimoacervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_emprestimoacervo"]:$this->bi21_emprestimoacervo);
        if($this->bi21_entrega == ""){
          $this->bi21_entrega_dia = ($this->bi21_entrega_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_entrega_dia"]:$this->bi21_entrega_dia);
          $this->bi21_entrega_mes = ($this->bi21_entrega_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_entrega_mes"]:$this->bi21_entrega_mes);
@@ -84,9 +84,9 @@ class cl_devolucaoacervo {
             $this->bi21_entrega = $this->bi21_entrega_ano."-".$this->bi21_entrega_mes."-".$this->bi21_entrega_dia;
          }
        }
-       $this->bi21_usuario = ($this->bi21_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_usuario"]:$this->bi21_usuario);
+       $this->bi21_usuario = ($this->bi21_usuario === 0 || $this->bi21_usuario === 0.0 || $this->bi21_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_usuario"]:$this->bi21_usuario);
      }else{
-       $this->bi21_codigo = ($this->bi21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_codigo"]:$this->bi21_codigo);
+       $this->bi21_codigo = ($this->bi21_codigo === 0 || $this->bi21_codigo === 0.0 || $this->bi21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_codigo"]:$this->bi21_codigo);
      }
    }
    // funcao para Inclusão
@@ -120,7 +120,7 @@ class cl_devolucaoacervo {
        return false;
      }
        $this->bi21_codigo = $bi21_codigo; 
-     if(($this->bi21_codigo == null) || ($this->bi21_codigo == "") ){ 
+     if(($this->bi21_codigo == null) || ($this->bi21_codigo === 0 || $this->bi21_codigo === 0.0 || $this->bi21_codigo == "") ){ 
        $this->erro_sql = " Campo bi21_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

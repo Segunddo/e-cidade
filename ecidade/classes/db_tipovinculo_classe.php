@@ -50,7 +50,7 @@ class cl_tipovinculo {
                  ed324_descricao = varchar(20) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_tipovinculo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipovinculo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_tipovinculo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed324_sequencial = ($this->ed324_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed324_sequencial"]:$this->ed324_sequencial);
+       $this->ed324_sequencial = ($this->ed324_sequencial === 0 || $this->ed324_sequencial === 0.0 || $this->ed324_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed324_sequencial"]:$this->ed324_sequencial);
        $this->ed324_descricao = ($this->ed324_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed324_descricao"]:$this->ed324_descricao);
      }else{
-       $this->ed324_sequencial = ($this->ed324_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed324_sequencial"]:$this->ed324_sequencial);
+       $this->ed324_sequencial = ($this->ed324_sequencial === 0 || $this->ed324_sequencial === 0.0 || $this->ed324_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed324_sequencial"]:$this->ed324_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tipovinculo {
          $this->ed324_sequencial = $ed324_sequencial; 
        }
      }
-     if(($this->ed324_sequencial == null) || ($this->ed324_sequencial == "") ){ 
+     if(($this->ed324_sequencial == null) || ($this->ed324_sequencial === 0 || $this->ed324_sequencial === 0.0 || $this->ed324_sequencial == "") ){ 
        $this->erro_sql = " Campo ed324_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_tipovinculo {
    function sql_query ( $ed324_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_tipovinculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_tipovinculo {
    function sql_query_file ( $ed324_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_tipovinculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

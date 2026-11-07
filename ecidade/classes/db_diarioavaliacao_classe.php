@@ -72,7 +72,7 @@ class cl_diarioavaliacao {
                  ed72_c_convertido = char(1)) = Nota Convertida
                  ";
    //funcao construtor da classe
-   function cl_diarioavaliacao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diarioavaliacao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,21 +89,21 @@ class cl_diarioavaliacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed72_i_codigo = ($this->ed72_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_codigo"]:$this->ed72_i_codigo);
-       $this->ed72_i_diario = ($this->ed72_i_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_diario"]:$this->ed72_i_diario);
-       $this->ed72_i_procavaliacao = ($this->ed72_i_procavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_procavaliacao"]:$this->ed72_i_procavaliacao);
-       $this->ed72_i_numfaltas = ($this->ed72_i_numfaltas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_numfaltas"]:$this->ed72_i_numfaltas);
+       $this->ed72_i_codigo = ($this->ed72_i_codigo === 0 || $this->ed72_i_codigo === 0.0 || $this->ed72_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_codigo"]:$this->ed72_i_codigo);
+       $this->ed72_i_diario = ($this->ed72_i_diario === 0 || $this->ed72_i_diario === 0.0 || $this->ed72_i_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_diario"]:$this->ed72_i_diario);
+       $this->ed72_i_procavaliacao = ($this->ed72_i_procavaliacao === 0 || $this->ed72_i_procavaliacao === 0.0 || $this->ed72_i_procavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_procavaliacao"]:$this->ed72_i_procavaliacao);
+       $this->ed72_i_numfaltas = ($this->ed72_i_numfaltas === 0 || $this->ed72_i_numfaltas === 0.0 || $this->ed72_i_numfaltas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_numfaltas"]:$this->ed72_i_numfaltas);
        $this->ed72_i_valornota = ($this->ed72_i_valornota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_valornota"]:$this->ed72_i_valornota);
        $this->ed72_c_valorconceito = ($this->ed72_c_valorconceito == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_c_valorconceito"]:$this->ed72_c_valorconceito);
        $this->ed72_t_parecer = ($this->ed72_t_parecer == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_t_parecer"]:$this->ed72_t_parecer);
        $this->ed72_c_aprovmin = ($this->ed72_c_aprovmin == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_c_aprovmin"]:$this->ed72_c_aprovmin);
        $this->ed72_c_amparo = ($this->ed72_c_amparo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_c_amparo"]:$this->ed72_c_amparo);
        $this->ed72_t_obs = ($this->ed72_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_t_obs"]:$this->ed72_t_obs);
-       $this->ed72_i_escola = ($this->ed72_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_escola"]:$this->ed72_i_escola);
+       $this->ed72_i_escola = ($this->ed72_i_escola === 0 || $this->ed72_i_escola === 0.0 || $this->ed72_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_escola"]:$this->ed72_i_escola);
        $this->ed72_c_tipo = ($this->ed72_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_c_tipo"]:$this->ed72_c_tipo);
        $this->ed72_c_convertido = ($this->ed72_c_convertido == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_c_convertido"]:$this->ed72_c_convertido);
      }else{
-       $this->ed72_i_codigo = ($this->ed72_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_codigo"]:$this->ed72_i_codigo);
+       $this->ed72_i_codigo = ($this->ed72_i_codigo === 0 || $this->ed72_i_codigo === 0.0 || $this->ed72_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed72_i_codigo"]:$this->ed72_i_codigo);
      }
    }
    // funcao para inclusao
@@ -202,7 +202,7 @@ class cl_diarioavaliacao {
          $this->ed72_i_codigo = $ed72_i_codigo;
        }
      }
-     if(($this->ed72_i_codigo == null) || ($this->ed72_i_codigo == "") ){
+     if(($this->ed72_i_codigo == null) || ($this->ed72_i_codigo === 0 || $this->ed72_i_codigo === 0.0 || $this->ed72_i_codigo == "") ){
        $this->erro_sql = " Campo ed72_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -738,7 +738,7 @@ function sql_query_guia ( $ed72_i_codigo=null,$campos="*",$ordem=null,$dbwhere="
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
 
@@ -767,7 +767,7 @@ function sql_query_guia ( $ed72_i_codigo=null,$campos="*",$ordem=null,$dbwhere="
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 
@@ -787,7 +787,7 @@ function sql_query_faltas($iCodigo = null, $sCampos = '*', $sOrdem = null, $sDbW
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
 
@@ -823,7 +823,7 @@ function sql_query_faltas($iCodigo = null, $sCampos = '*', $sOrdem = null, $sDbW
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 
@@ -842,7 +842,7 @@ function sql_query_faltas($iCodigo = null, $sCampos = '*', $sOrdem = null, $sDbW
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
 
@@ -871,7 +871,7 @@ function sql_query_faltas($iCodigo = null, $sCampos = '*', $sOrdem = null, $sDbW
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 

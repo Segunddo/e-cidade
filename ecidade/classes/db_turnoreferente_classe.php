@@ -52,7 +52,7 @@ class cl_turnoreferente {
                  ed231_i_referencia = int4 = Referência do Turno 
                  ";
    //funcao construtor da classe 
-   function cl_turnoreferente() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("turnoreferente"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_turnoreferente {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed231_i_codigo = ($this->ed231_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed231_i_codigo"]:$this->ed231_i_codigo);
-       $this->ed231_i_turno = ($this->ed231_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed231_i_turno"]:$this->ed231_i_turno);
-       $this->ed231_i_referencia = ($this->ed231_i_referencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed231_i_referencia"]:$this->ed231_i_referencia);
+       $this->ed231_i_codigo = ($this->ed231_i_codigo === 0 || $this->ed231_i_codigo === 0.0 || $this->ed231_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed231_i_codigo"]:$this->ed231_i_codigo);
+       $this->ed231_i_turno = ($this->ed231_i_turno === 0 || $this->ed231_i_turno === 0.0 || $this->ed231_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed231_i_turno"]:$this->ed231_i_turno);
+       $this->ed231_i_referencia = ($this->ed231_i_referencia === 0 || $this->ed231_i_referencia === 0.0 || $this->ed231_i_referencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed231_i_referencia"]:$this->ed231_i_referencia);
      }else{
-       $this->ed231_i_codigo = ($this->ed231_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed231_i_codigo"]:$this->ed231_i_codigo);
+       $this->ed231_i_codigo = ($this->ed231_i_codigo === 0 || $this->ed231_i_codigo === 0.0 || $this->ed231_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed231_i_codigo"]:$this->ed231_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_turnoreferente {
          $this->ed231_i_codigo = $ed231_i_codigo; 
        }
      }
-     if(($this->ed231_i_codigo == null) || ($this->ed231_i_codigo == "") ){ 
+     if(($this->ed231_i_codigo == null) || ($this->ed231_i_codigo === 0 || $this->ed231_i_codigo === 0.0 || $this->ed231_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed231_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_turnoreferente {
    function sql_query ( $ed231_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_turnoreferente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_turnoreferente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

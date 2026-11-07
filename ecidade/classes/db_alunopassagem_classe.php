@@ -61,7 +61,7 @@ class cl_alunopassagem {
                  ed215_d_datacad = date = Data cadastro 
                  ";
    //funcao construtor da classe 
-   function cl_alunopassagem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("alunopassagem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,11 +78,11 @@ class cl_alunopassagem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed215_i_codigo = ($this->ed215_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_codigo"]:$this->ed215_i_codigo);
-       $this->ed215_i_aluno = ($this->ed215_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_aluno"]:$this->ed215_i_aluno);
-       $this->ed215_i_linha = ($this->ed215_i_linha == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_linha"]:$this->ed215_i_linha);
-       $this->ed215_i_usuario = ($this->ed215_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_usuario"]:$this->ed215_i_usuario);
-       $this->ed215_i_ano = ($this->ed215_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_ano"]:$this->ed215_i_ano);
+       $this->ed215_i_codigo = ($this->ed215_i_codigo === 0 || $this->ed215_i_codigo === 0.0 || $this->ed215_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_codigo"]:$this->ed215_i_codigo);
+       $this->ed215_i_aluno = ($this->ed215_i_aluno === 0 || $this->ed215_i_aluno === 0.0 || $this->ed215_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_aluno"]:$this->ed215_i_aluno);
+       $this->ed215_i_linha = ($this->ed215_i_linha === 0 || $this->ed215_i_linha === 0.0 || $this->ed215_i_linha == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_linha"]:$this->ed215_i_linha);
+       $this->ed215_i_usuario = ($this->ed215_i_usuario === 0 || $this->ed215_i_usuario === 0.0 || $this->ed215_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_usuario"]:$this->ed215_i_usuario);
+       $this->ed215_i_ano = ($this->ed215_i_ano === 0 || $this->ed215_i_ano === 0.0 || $this->ed215_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_ano"]:$this->ed215_i_ano);
        if($this->ed215_d_datacad == ""){
          $this->ed215_d_datacad_dia = ($this->ed215_d_datacad_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_d_datacad_dia"]:$this->ed215_d_datacad_dia);
          $this->ed215_d_datacad_mes = ($this->ed215_d_datacad_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_d_datacad_mes"]:$this->ed215_d_datacad_mes);
@@ -92,7 +92,7 @@ class cl_alunopassagem {
          }
        }
      }else{
-       $this->ed215_i_codigo = ($this->ed215_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_codigo"]:$this->ed215_i_codigo);
+       $this->ed215_i_codigo = ($this->ed215_i_codigo === 0 || $this->ed215_i_codigo === 0.0 || $this->ed215_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed215_i_codigo"]:$this->ed215_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_alunopassagem {
          $this->ed215_i_codigo = $ed215_i_codigo; 
        }
      }
-     if(($this->ed215_i_codigo == null) || ($this->ed215_i_codigo == "") ){ 
+     if(($this->ed215_i_codigo == null) || ($this->ed215_i_codigo === 0 || $this->ed215_i_codigo === 0.0 || $this->ed215_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed215_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -476,7 +476,7 @@ class cl_alunopassagem {
    function sql_query ( $ed215_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -507,7 +507,7 @@ class cl_alunopassagem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -519,7 +519,7 @@ class cl_alunopassagem {
    function sql_query_file ( $ed215_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -540,7 +540,7 @@ class cl_alunopassagem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

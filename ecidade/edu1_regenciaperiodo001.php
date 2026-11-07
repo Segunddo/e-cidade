@@ -84,7 +84,7 @@ $sql .= "                 where reg.ed59_i_codigo    = ed95_i_regencia ";
 $sql .= "                   AND reg.ed59_c_encerrada = 'S' ) ";
 
 $result1     = db_query( $sql );
-$jaencerrado = pg_num_rows( $result1 );
+$jaencerrado = ($result1 ? pg_num_rows( $result1 ) : null);
 ?>
 <html>
   <head>

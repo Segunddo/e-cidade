@@ -139,9 +139,9 @@ if (isset($processar)) {
                                                                            )
                                         );       
  $row        = $clcalendario->numrows;
- $num        = pg_num_rows($sql_result);
+ $num        = ($sql_result ? pg_num_rows($sql_result) : null);
  $conta      = "";
- while ($row = pg_fetch_array($sql_result)) {
+ while ($row = ($sql_result ? pg_fetch_array($sql_result) : null)) {
    $conta     = $conta+1;
    $cod_curso = $row["ed52_i_codigo"];
    echo "new Array(\n";   
@@ -289,7 +289,7 @@ function fillSelectFromArray2(selectCtrl, itemArray, goodPrompt, badPrompt, defa
                                                                              )
                                           );       
        $row    = $clcalendario->numrows;
-       while($row = pg_fetch_array($result)) {
+       while($row = ($result ? pg_fetch_array($result) : null)) {
          $cod_curso=$row["ed52_i_codigo"];
          $desc_curso=$row["ed52_c_descr"];
         ?>
@@ -626,7 +626,7 @@ function js_pesquisa(turma) {
 
 
 
-<?if (!isset($calendario1) && pg_num_rows($sql_result) > 0) {?>
+<?if (!isset($calendario1) && ($sql_result ? pg_num_rows($sql_result) : null) > 0) {?>
     fillSelectFromArray2(document.form1.subgrupo,team[0]);
     document.form1.grupo.options[1].selected = true;
 <?}?>

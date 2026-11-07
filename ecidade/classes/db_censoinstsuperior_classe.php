@@ -56,7 +56,7 @@ class cl_censoinstsuperior {
                  ed257_i_censomunic = int4 = Cidade
                  ";
    //funcao construtor da classe
-   function cl_censoinstsuperior() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("censoinstsuperior");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_censoinstsuperior {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed257_i_codigo = ($this->ed257_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_i_codigo"]:$this->ed257_i_codigo);
+       $this->ed257_i_codigo = ($this->ed257_i_codigo === 0 || $this->ed257_i_codigo === 0.0 || $this->ed257_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_i_codigo"]:$this->ed257_i_codigo);
        $this->ed257_c_nome = ($this->ed257_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_c_nome"]:$this->ed257_c_nome);
-       $this->ed257_i_dependencia = ($this->ed257_i_dependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_i_dependencia"]:$this->ed257_i_dependencia);
-       $this->ed257_i_tipo = ($this->ed257_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_i_tipo"]:$this->ed257_i_tipo);
-       $this->ed257_i_censomunic = ($this->ed257_i_censomunic == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_i_censomunic"]:$this->ed257_i_censomunic);
+       $this->ed257_i_dependencia = ($this->ed257_i_dependencia === 0 || $this->ed257_i_dependencia === 0.0 || $this->ed257_i_dependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_i_dependencia"]:$this->ed257_i_dependencia);
+       $this->ed257_i_tipo = ($this->ed257_i_tipo === 0 || $this->ed257_i_tipo === 0.0 || $this->ed257_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_i_tipo"]:$this->ed257_i_tipo);
+       $this->ed257_i_censomunic = ($this->ed257_i_censomunic === 0 || $this->ed257_i_censomunic === 0.0 || $this->ed257_i_censomunic == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_i_censomunic"]:$this->ed257_i_censomunic);
      }else{
-       $this->ed257_i_codigo = ($this->ed257_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_i_codigo"]:$this->ed257_i_codigo);
+       $this->ed257_i_codigo = ($this->ed257_i_codigo === 0 || $this->ed257_i_codigo === 0.0 || $this->ed257_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed257_i_codigo"]:$this->ed257_i_codigo);
      }
    }
    // funcao para inclusao
@@ -122,7 +122,7 @@ class cl_censoinstsuperior {
        return false;
      }
        $this->ed257_i_codigo = $ed257_i_codigo;
-     if(($this->ed257_i_codigo == null) || ($this->ed257_i_codigo == "") ){
+     if(($this->ed257_i_codigo == null) || ($this->ed257_i_codigo === 0 || $this->ed257_i_codigo === 0.0 || $this->ed257_i_codigo == "") ){
        $this->erro_sql = " Campo ed257_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -399,7 +399,7 @@ class cl_censoinstsuperior {
    function sql_query ( $ed257_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_censoinstsuperior {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_censoinstsuperior {
    function sql_query_file ( $ed257_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_censoinstsuperior {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

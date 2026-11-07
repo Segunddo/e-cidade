@@ -38,7 +38,8 @@ $oDaoHistMpsDisc  = new cl_histmpsdisc();
 $oDaoHistoricoMps = new cl_historicomps();
 $oDaoAlunoCurso   = new cl_alunocurso();
 $oDaoDisciplina   = new cl_disciplina();
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"], $__qs );
+extract($__qs);
 db_postmemory( $_POST );
 
 $db_opcao = 2;

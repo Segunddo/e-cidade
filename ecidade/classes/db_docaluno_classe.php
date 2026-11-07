@@ -56,7 +56,7 @@ class cl_docaluno {
                  ed49_t_obs = text = Observações 
                  ";
    //funcao construtor da classe 
-   function cl_docaluno() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("docaluno"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]."?ed49_i_aluno=".@$GLOBALS["HTTP_POST_VARS"]["ed49_i_aluno"]."&ed47_v_nome=".@$GLOBALS["HTTP_POST_VARS"]["ed47_v_nome"]);
@@ -73,13 +73,13 @@ class cl_docaluno {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed49_i_codigo = ($this->ed49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_i_codigo"]:$this->ed49_i_codigo);
-       $this->ed49_i_escola = ($this->ed49_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_i_escola"]:$this->ed49_i_escola);
-       $this->ed49_i_aluno = ($this->ed49_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_i_aluno"]:$this->ed49_i_aluno);
-       $this->ed49_i_documentacao = ($this->ed49_i_documentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_i_documentacao"]:$this->ed49_i_documentacao);
+       $this->ed49_i_codigo = ($this->ed49_i_codigo === 0 || $this->ed49_i_codigo === 0.0 || $this->ed49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_i_codigo"]:$this->ed49_i_codigo);
+       $this->ed49_i_escola = ($this->ed49_i_escola === 0 || $this->ed49_i_escola === 0.0 || $this->ed49_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_i_escola"]:$this->ed49_i_escola);
+       $this->ed49_i_aluno = ($this->ed49_i_aluno === 0 || $this->ed49_i_aluno === 0.0 || $this->ed49_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_i_aluno"]:$this->ed49_i_aluno);
+       $this->ed49_i_documentacao = ($this->ed49_i_documentacao === 0 || $this->ed49_i_documentacao === 0.0 || $this->ed49_i_documentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_i_documentacao"]:$this->ed49_i_documentacao);
        $this->ed49_t_obs = ($this->ed49_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_t_obs"]:$this->ed49_t_obs);
      }else{
-       $this->ed49_i_codigo = ($this->ed49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_i_codigo"]:$this->ed49_i_codigo);
+       $this->ed49_i_codigo = ($this->ed49_i_codigo === 0 || $this->ed49_i_codigo === 0.0 || $this->ed49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed49_i_codigo"]:$this->ed49_i_codigo);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_docaluno {
          $this->ed49_i_codigo = $ed49_i_codigo; 
        }
      }
-     if(($this->ed49_i_codigo == null) || ($this->ed49_i_codigo == "") ){ 
+     if(($this->ed49_i_codigo == null) || ($this->ed49_i_codigo === 0 || $this->ed49_i_codigo === 0.0 || $this->ed49_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed49_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -403,7 +403,7 @@ class cl_docaluno {
    function sql_query ( $ed49_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_docaluno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -442,7 +442,7 @@ class cl_docaluno {
    function sql_query_file ( $ed49_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -463,7 +463,7 @@ class cl_docaluno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

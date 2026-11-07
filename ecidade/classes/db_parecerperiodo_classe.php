@@ -52,7 +52,7 @@ class cl_parecerperiodo {
                  ed120_periodoavaliacao = int4 = Periodo de Avaliação 
                  ";
    //funcao construtor da classe 
-   function cl_parecerperiodo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parecerperiodo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_parecerperiodo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed120_sequencial = ($this->ed120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed120_sequencial"]:$this->ed120_sequencial);
-       $this->ed120_parecer = ($this->ed120_parecer == ""?@$GLOBALS["HTTP_POST_VARS"]["ed120_parecer"]:$this->ed120_parecer);
-       $this->ed120_periodoavaliacao = ($this->ed120_periodoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed120_periodoavaliacao"]:$this->ed120_periodoavaliacao);
+       $this->ed120_sequencial = ($this->ed120_sequencial === 0 || $this->ed120_sequencial === 0.0 || $this->ed120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed120_sequencial"]:$this->ed120_sequencial);
+       $this->ed120_parecer = ($this->ed120_parecer === 0 || $this->ed120_parecer === 0.0 || $this->ed120_parecer == ""?@$GLOBALS["HTTP_POST_VARS"]["ed120_parecer"]:$this->ed120_parecer);
+       $this->ed120_periodoavaliacao = ($this->ed120_periodoavaliacao === 0 || $this->ed120_periodoavaliacao === 0.0 || $this->ed120_periodoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed120_periodoavaliacao"]:$this->ed120_periodoavaliacao);
      }else{
-       $this->ed120_sequencial = ($this->ed120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed120_sequencial"]:$this->ed120_sequencial);
+       $this->ed120_sequencial = ($this->ed120_sequencial === 0 || $this->ed120_sequencial === 0.0 || $this->ed120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed120_sequencial"]:$this->ed120_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_parecerperiodo {
          $this->ed120_sequencial = $ed120_sequencial; 
        }
      }
-     if(($this->ed120_sequencial == null) || ($this->ed120_sequencial == "") ){ 
+     if(($this->ed120_sequencial == null) || ($this->ed120_sequencial === 0 || $this->ed120_sequencial === 0.0 || $this->ed120_sequencial == "") ){ 
        $this->erro_sql = " Campo ed120_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_parecerperiodo {
    function sql_query ( $ed120_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_parecerperiodo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_parecerperiodo {
    function sql_query_file ( $ed120_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_parecerperiodo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

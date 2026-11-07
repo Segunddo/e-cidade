@@ -33,7 +33,7 @@ class importacaoCodigoInep2010 extends importacaoCenso {
    * (non-PHPdoc)
    * @see importacaoCenso::getDadosAluno()
    */
-  function getDadosAluno($oLinha) {
+  function getDadosAluno($oLinha, $lPesquisaInep = false) { // LSP: parametro da mae, opcional
   	
   	$sNomeAluno  = $oLinha->nomealuno;
   	$oDaoAluno   = db_utils::getdao('aluno');

@@ -494,7 +494,13 @@ class DBDate
      */
     public static function getQuantidadeDiasMes($iMes, $iAno)
     {
-        return cal_days_in_month(CAL_GREGORIAN, $iMes, $iAno);
+        // No 5.6 mes/ano invalido devolvia false (warning); no PHP 8 e ValueError/TypeError.
+        // Catch unico: `catch (A | B $e)` e PHP 7.1 e nao compila no 5.6.
+        try {
+            return cal_days_in_month(CAL_GREGORIAN, $iMes, $iAno);
+        } catch (Throwable $e) {
+            return false;
+        }
     }
 
     /**

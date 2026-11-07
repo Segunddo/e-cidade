@@ -52,7 +52,7 @@ class cl_avaliacaogrupoperguntaresposta {
                  db108_avaliacaoresposta = int4 = Avaliação Resposta 
                  ";
    //funcao construtor da classe 
-   function cl_avaliacaogrupoperguntaresposta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avaliacaogrupoperguntaresposta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_avaliacaogrupoperguntaresposta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db108_sequencial = ($this->db108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db108_sequencial"]:$this->db108_sequencial);
-       $this->db108_avaliacaogruporesposta = ($this->db108_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["db108_avaliacaogruporesposta"]:$this->db108_avaliacaogruporesposta);
-       $this->db108_avaliacaoresposta = ($this->db108_avaliacaoresposta == ""?@$GLOBALS["HTTP_POST_VARS"]["db108_avaliacaoresposta"]:$this->db108_avaliacaoresposta);
+       $this->db108_sequencial = ($this->db108_sequencial === 0 || $this->db108_sequencial === 0.0 || $this->db108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db108_sequencial"]:$this->db108_sequencial);
+       $this->db108_avaliacaogruporesposta = ($this->db108_avaliacaogruporesposta === 0 || $this->db108_avaliacaogruporesposta === 0.0 || $this->db108_avaliacaogruporesposta == ""?@$GLOBALS["HTTP_POST_VARS"]["db108_avaliacaogruporesposta"]:$this->db108_avaliacaogruporesposta);
+       $this->db108_avaliacaoresposta = ($this->db108_avaliacaoresposta === 0 || $this->db108_avaliacaoresposta === 0.0 || $this->db108_avaliacaoresposta == ""?@$GLOBALS["HTTP_POST_VARS"]["db108_avaliacaoresposta"]:$this->db108_avaliacaoresposta);
      }else{
-       $this->db108_sequencial = ($this->db108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db108_sequencial"]:$this->db108_sequencial);
+       $this->db108_sequencial = ($this->db108_sequencial === 0 || $this->db108_sequencial === 0.0 || $this->db108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db108_sequencial"]:$this->db108_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_avaliacaogrupoperguntaresposta {
          $this->db108_sequencial = $db108_sequencial; 
        }
      }
-     if(($this->db108_sequencial == null) || ($this->db108_sequencial == "") ){ 
+     if(($this->db108_sequencial == null) || ($this->db108_sequencial === 0 || $this->db108_sequencial === 0.0 || $this->db108_sequencial == "") ){ 
        $this->erro_sql = " Campo db108_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

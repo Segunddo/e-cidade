@@ -52,7 +52,7 @@ class cl_rechumanorelacao {
                  ed03_i_relacaotrabalho = int8 = Relação de Trabalho 
                  ";
    //funcao construtor da classe 
-   function cl_rechumanorelacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rechumanorelacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_rechumanorelacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed03_i_codigo = ($this->ed03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed03_i_codigo"]:$this->ed03_i_codigo);
-       $this->ed03_i_rechumanoativ = ($this->ed03_i_rechumanoativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed03_i_rechumanoativ"]:$this->ed03_i_rechumanoativ);
-       $this->ed03_i_relacaotrabalho = ($this->ed03_i_relacaotrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed03_i_relacaotrabalho"]:$this->ed03_i_relacaotrabalho);
+       $this->ed03_i_codigo = ($this->ed03_i_codigo === 0 || $this->ed03_i_codigo === 0.0 || $this->ed03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed03_i_codigo"]:$this->ed03_i_codigo);
+       $this->ed03_i_rechumanoativ = ($this->ed03_i_rechumanoativ === 0 || $this->ed03_i_rechumanoativ === 0.0 || $this->ed03_i_rechumanoativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed03_i_rechumanoativ"]:$this->ed03_i_rechumanoativ);
+       $this->ed03_i_relacaotrabalho = ($this->ed03_i_relacaotrabalho === 0 || $this->ed03_i_relacaotrabalho === 0.0 || $this->ed03_i_relacaotrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed03_i_relacaotrabalho"]:$this->ed03_i_relacaotrabalho);
      }else{
-       $this->ed03_i_codigo = ($this->ed03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed03_i_codigo"]:$this->ed03_i_codigo);
+       $this->ed03_i_codigo = ($this->ed03_i_codigo === 0 || $this->ed03_i_codigo === 0.0 || $this->ed03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed03_i_codigo"]:$this->ed03_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -121,7 +121,7 @@ class cl_rechumanorelacao {
          $this->ed03_i_codigo = $ed03_i_codigo; 
        }
      }
-     if(($this->ed03_i_codigo == null) || ($this->ed03_i_codigo == "") ){ 
+     if(($this->ed03_i_codigo == null) || ($this->ed03_i_codigo === 0 || $this->ed03_i_codigo === 0.0 || $this->ed03_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed03_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

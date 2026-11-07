@@ -34,7 +34,7 @@ class cl_agendaatividade {
                  ed129_horafim = varchar(5) = Hora Final 
                  ";
    //funcao construtor da classe 
-   function cl_agendaatividade() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("agendaatividade"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -51,15 +51,15 @@ class cl_agendaatividade {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed129_codigo = ($this->ed129_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_codigo"]:$this->ed129_codigo);
-       $this->ed129_tipohoratrabalho = ($this->ed129_tipohoratrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_tipohoratrabalho"]:$this->ed129_tipohoratrabalho);
-       $this->ed129_diasemana = ($this->ed129_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_diasemana"]:$this->ed129_diasemana);
-       $this->ed129_turno = ($this->ed129_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_turno"]:$this->ed129_turno);
-       $this->ed129_rechumanoativ = ($this->ed129_rechumanoativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_rechumanoativ"]:$this->ed129_rechumanoativ);
+       $this->ed129_codigo = ($this->ed129_codigo === 0 || $this->ed129_codigo === 0.0 || $this->ed129_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_codigo"]:$this->ed129_codigo);
+       $this->ed129_tipohoratrabalho = ($this->ed129_tipohoratrabalho === 0 || $this->ed129_tipohoratrabalho === 0.0 || $this->ed129_tipohoratrabalho == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_tipohoratrabalho"]:$this->ed129_tipohoratrabalho);
+       $this->ed129_diasemana = ($this->ed129_diasemana === 0 || $this->ed129_diasemana === 0.0 || $this->ed129_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_diasemana"]:$this->ed129_diasemana);
+       $this->ed129_turno = ($this->ed129_turno === 0 || $this->ed129_turno === 0.0 || $this->ed129_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_turno"]:$this->ed129_turno);
+       $this->ed129_rechumanoativ = ($this->ed129_rechumanoativ === 0 || $this->ed129_rechumanoativ === 0.0 || $this->ed129_rechumanoativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_rechumanoativ"]:$this->ed129_rechumanoativ);
        $this->ed129_horainicio = ($this->ed129_horainicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_horainicio"]:$this->ed129_horainicio);
        $this->ed129_horafim = ($this->ed129_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_horafim"]:$this->ed129_horafim);
      }else{
-       $this->ed129_codigo = ($this->ed129_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_codigo"]:$this->ed129_codigo);
+       $this->ed129_codigo = ($this->ed129_codigo === 0 || $this->ed129_codigo === 0.0 || $this->ed129_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_codigo"]:$this->ed129_codigo);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_agendaatividade {
          $this->ed129_codigo = $ed129_codigo; 
        }
      }
-     if(($this->ed129_codigo == null) || ($this->ed129_codigo == "") ){ 
+     if(($this->ed129_codigo == null) || ($this->ed129_codigo === 0 || $this->ed129_codigo === 0.0 || $this->ed129_codigo == "") ){ 
        $this->erro_sql = " Campo ed129_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -50,7 +50,7 @@ class cl_tipoitem {
                  bi05_nome = char(50) = Nome do Ítem 
                  ";
    //funcao construtor da classe 
-   function cl_tipoitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_tipoitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi05_codigo = ($this->bi05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi05_codigo"]:$this->bi05_codigo);
+       $this->bi05_codigo = ($this->bi05_codigo === 0 || $this->bi05_codigo === 0.0 || $this->bi05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi05_codigo"]:$this->bi05_codigo);
        $this->bi05_nome = ($this->bi05_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["bi05_nome"]:$this->bi05_nome);
      }else{
-       $this->bi05_codigo = ($this->bi05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi05_codigo"]:$this->bi05_codigo);
+       $this->bi05_codigo = ($this->bi05_codigo === 0 || $this->bi05_codigo === 0.0 || $this->bi05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi05_codigo"]:$this->bi05_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tipoitem {
          $this->bi05_codigo = $bi05_codigo; 
        }
      }
-     if(($this->bi05_codigo == null) || ($this->bi05_codigo == "") ){ 
+     if(($this->bi05_codigo == null) || ($this->bi05_codigo === 0 || $this->bi05_codigo === 0.0 || $this->bi05_codigo == "") ){ 
        $this->erro_sql = " Campo bi05_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_tipoitem {
    function sql_query ( $bi05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_tipoitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_tipoitem {
    function sql_query_file ( $bi05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_tipoitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -26,7 +26,7 @@ class cl_diarioavaliacaoalternativa {
                  ed136_procavalalternativa = int4 = Avaliação Alternativa 
                  ";
    //funcao construtor da classe 
-   function cl_diarioavaliacaoalternativa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diarioavaliacaoalternativa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_diarioavaliacaoalternativa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed136_sequencial = ($this->ed136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed136_sequencial"]:$this->ed136_sequencial);
-       $this->ed136_diario = ($this->ed136_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed136_diario"]:$this->ed136_diario);
-       $this->ed136_procavalalternativa = ($this->ed136_procavalalternativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed136_procavalalternativa"]:$this->ed136_procavalalternativa);
+       $this->ed136_sequencial = ($this->ed136_sequencial === 0 || $this->ed136_sequencial === 0.0 || $this->ed136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed136_sequencial"]:$this->ed136_sequencial);
+       $this->ed136_diario = ($this->ed136_diario === 0 || $this->ed136_diario === 0.0 || $this->ed136_diario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed136_diario"]:$this->ed136_diario);
+       $this->ed136_procavalalternativa = ($this->ed136_procavalalternativa === 0 || $this->ed136_procavalalternativa === 0.0 || $this->ed136_procavalalternativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed136_procavalalternativa"]:$this->ed136_procavalalternativa);
      }else{
-       $this->ed136_sequencial = ($this->ed136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed136_sequencial"]:$this->ed136_sequencial);
+       $this->ed136_sequencial = ($this->ed136_sequencial === 0 || $this->ed136_sequencial === 0.0 || $this->ed136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed136_sequencial"]:$this->ed136_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_diarioavaliacaoalternativa {
          $this->ed136_sequencial = $ed136_sequencial; 
        }
      }
-     if(($this->ed136_sequencial == null) || ($this->ed136_sequencial == "") ){ 
+     if(($this->ed136_sequencial == null) || ($this->ed136_sequencial === 0 || $this->ed136_sequencial === 0.0 || $this->ed136_sequencial == "") ){ 
        $this->erro_sql = " Campo ed136_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

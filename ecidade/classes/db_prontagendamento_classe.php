@@ -52,7 +52,7 @@ class cl_prontagendamento {
                  s102_i_agendamento = int4 = Agendamento 
                  ";
    //funcao construtor da classe 
-   function cl_prontagendamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prontagendamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_prontagendamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s102_i_codigo = ($this->s102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s102_i_codigo"]:$this->s102_i_codigo);
-       $this->s102_i_prontuario = ($this->s102_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["s102_i_prontuario"]:$this->s102_i_prontuario);
-       $this->s102_i_agendamento = ($this->s102_i_agendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s102_i_agendamento"]:$this->s102_i_agendamento);
+       $this->s102_i_codigo = ($this->s102_i_codigo === 0 || $this->s102_i_codigo === 0.0 || $this->s102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s102_i_codigo"]:$this->s102_i_codigo);
+       $this->s102_i_prontuario = ($this->s102_i_prontuario === 0 || $this->s102_i_prontuario === 0.0 || $this->s102_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["s102_i_prontuario"]:$this->s102_i_prontuario);
+       $this->s102_i_agendamento = ($this->s102_i_agendamento === 0 || $this->s102_i_agendamento === 0.0 || $this->s102_i_agendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s102_i_agendamento"]:$this->s102_i_agendamento);
      }else{
-       $this->s102_i_codigo = ($this->s102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s102_i_codigo"]:$this->s102_i_codigo);
+       $this->s102_i_codigo = ($this->s102_i_codigo === 0 || $this->s102_i_codigo === 0.0 || $this->s102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s102_i_codigo"]:$this->s102_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_prontagendamento {
          $this->s102_i_codigo = $s102_i_codigo; 
        }
      }
-     if(($this->s102_i_codigo == null) || ($this->s102_i_codigo == "") ){ 
+     if(($this->s102_i_codigo == null) || ($this->s102_i_codigo === 0 || $this->s102_i_codigo === 0.0 || $this->s102_i_codigo == "") ){ 
        $this->erro_sql = " Campo s102_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_prontagendamento {
    function sql_query ( $s102_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_prontagendamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_prontagendamento {
    function sql_query_file ( $s102_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_prontagendamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -440,7 +440,7 @@ class cl_prontagendamento {
    function sql_query_ext ( $sd23_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
 	     $sql = "select ";
 	     if($campos != "*" ){
-	       $campos_sql = split("#",$campos);
+	       $campos_sql = preg_split("#\\##m",$campos);
 	       $virgula = "";
 	       for($i=0;$i<sizeof($campos_sql);$i++){
 	         $sql .= $virgula.$campos_sql[$i];
@@ -493,7 +493,7 @@ class cl_prontagendamento {
 	     
        if($ordem != null ){
 	       $sql .= " order by ";
-	       $campos_sql = split("#",$ordem);
+	       $campos_sql = preg_split("#\\##m",$ordem);
 	       $virgula = "";
 	       for($i=0;$i<sizeof($campos_sql);$i++){
 	         $sql .= $virgula.$campos_sql[$i];
@@ -506,7 +506,7 @@ class cl_prontagendamento {
    function sql_query_profissional_agendamento ( $s102_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -537,7 +537,7 @@ class cl_prontagendamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

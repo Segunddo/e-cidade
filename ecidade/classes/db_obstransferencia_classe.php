@@ -54,7 +54,7 @@ class cl_obstransferencia {
                  ed283_i_escola = int4 = Escola 
                  ";
    //funcao construtor da classe 
-   function cl_obstransferencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("obstransferencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_obstransferencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed283_i_codigo = ($this->ed283_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_codigo"]:$this->ed283_i_codigo);
+       $this->ed283_i_codigo = ($this->ed283_i_codigo === 0 || $this->ed283_i_codigo === 0.0 || $this->ed283_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_codigo"]:$this->ed283_i_codigo);
        $this->ed283_t_mensagem = ($this->ed283_t_mensagem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_t_mensagem"]:$this->ed283_t_mensagem);
        $this->ed283_c_bolsafamilia = ($this->ed283_c_bolsafamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_c_bolsafamilia"]:$this->ed283_c_bolsafamilia);
-       $this->ed283_i_escola = ($this->ed283_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_escola"]:$this->ed283_i_escola);
+       $this->ed283_i_escola = ($this->ed283_i_escola === 0 || $this->ed283_i_escola === 0.0 || $this->ed283_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_escola"]:$this->ed283_i_escola);
      }else{
-       $this->ed283_i_codigo = ($this->ed283_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_codigo"]:$this->ed283_i_codigo);
+       $this->ed283_i_codigo = ($this->ed283_i_codigo === 0 || $this->ed283_i_codigo === 0.0 || $this->ed283_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_codigo"]:$this->ed283_i_codigo);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_obstransferencia {
          $this->ed283_i_codigo = $ed283_i_codigo; 
        }
      }
-     if(($this->ed283_i_codigo == null) || ($this->ed283_i_codigo == "") ){ 
+     if(($this->ed283_i_codigo == null) || ($this->ed283_i_codigo === 0 || $this->ed283_i_codigo === 0.0 || $this->ed283_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed283_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -374,7 +374,7 @@ class cl_obstransferencia {
    function sql_query ( $ed283_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -404,7 +404,7 @@ class cl_obstransferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_obstransferencia {
    function sql_query_file ( $ed283_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_obstransferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

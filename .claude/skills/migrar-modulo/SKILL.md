@@ -232,10 +232,14 @@ ternário aninhado, cast `(real)`).
 ## Passo 6 — Instanciar as classes
 
 ```bash
+# o scratchpad/ fica FORA do bind mount (que monta so ecidade/): copiar o harness.
+# Com o caminho /var/www/html/scratchpad/ o php nao acha o arquivo, a saida sai
+# VAZIA nos dois runtimes e o diff vazio parece aprovacao.
 grep '^classes/' tmp/<pref>_universo.txt > tmp/<pref>_classlist.txt
 for v in 56 85; do
+  docker cp scratchpad/instancia_classes.php ecidade_php$v:/tmp/ic.php
   docker exec ecidade_php$v php -d display_errors=0 \
-    /var/www/html/scratchpad/instancia_classes.php /var/www/html/tmp/<pref>_classlist.txt \
+    /tmp/ic.php /var/www/html/tmp/<pref>_classlist.txt \
     2>/dev/null | sort > /tmp/cls$v.txt
 done
 diff /tmp/cls56.txt /tmp/cls85.txt
@@ -255,12 +259,20 @@ dispara no `POST`. Sem este passo, a maior categoria de correções do porte fic
 ```bash
 grep '^classes/' tmp/<pref>_universo.txt > tmp/<pref>_classlist.txt
 for v in 56 85; do
+  docker cp scratchpad/escrita.php ecidade_php$v:/tmp/esc.php
   docker exec ecidade_php$v php -d display_errors=0 \
-    /var/www/html/scratchpad/escrita.php /var/www/html/tmp/<pref>_classlist.txt \
+    /tmp/esc.php /var/www/html/tmp/<pref>_classlist.txt \
     2>/dev/null | sort > /tmp/esc$v.txt
 done
 diff /tmp/esc56.txt /tmp/esc85.txt      # qualquer linha e defeito
 ```
+
+**Com listas grandes, rodar UMA classe por processo** (`while read c; do echo "$c" > /tmp/um.txt;
+php /tmp/esc.php /tmp/um.txt; done`): um fatal mata o processo e o resto da lista some — no
+`edu3` a lista inteira cobriu 120 de 404 classes. Conferir quantas classes aparecem na saída.
+
+**Depois de editar um arquivo, esperar 3 s antes de requisitá-lo no 8.5** — o opcache revalida
+a cada 2 s e executa o código antigo (um ciclo automatizado aplicou a mesma guarda 15 vezes).
 
 Ele popula `HTTP_POST_VARS`, chama `atualizacampos()` e compara o estado — sem HTTP e sem
 tocar no banco. Divergência significa que o 5.6 lê o valor do formulário e o 8.5 mantém `0`:

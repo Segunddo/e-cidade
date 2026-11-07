@@ -69,7 +69,7 @@ class cl_benshistoricocalculo {
                  t57_ativo = bool = Ativo
                  ";
    //funcao construtor da classe
-   function cl_benshistoricocalculo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("benshistoricocalculo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -86,9 +86,9 @@ class cl_benshistoricocalculo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t57_sequencial = ($this->t57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_sequencial"]:$this->t57_sequencial);
-       $this->t57_mes = ($this->t57_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_mes"]:$this->t57_mes);
-       $this->t57_ano = ($this->t57_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_ano"]:$this->t57_ano);
+       $this->t57_sequencial = ($this->t57_sequencial === 0 || $this->t57_sequencial === 0.0 || $this->t57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_sequencial"]:$this->t57_sequencial);
+       $this->t57_mes = ($this->t57_mes === 0 || $this->t57_mes === 0.0 || $this->t57_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_mes"]:$this->t57_mes);
+       $this->t57_ano = ($this->t57_ano === 0 || $this->t57_ano === 0.0 || $this->t57_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_ano"]:$this->t57_ano);
        if($this->t57_datacalculo == ""){
          $this->t57_datacalculo_dia = ($this->t57_datacalculo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_datacalculo_dia"]:$this->t57_datacalculo_dia);
          $this->t57_datacalculo_mes = ($this->t57_datacalculo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_datacalculo_mes"]:$this->t57_datacalculo_mes);
@@ -97,14 +97,14 @@ class cl_benshistoricocalculo {
             $this->t57_datacalculo = $this->t57_datacalculo_ano."-".$this->t57_datacalculo_mes."-".$this->t57_datacalculo_dia;
          }
        }
-       $this->t57_usuario = ($this->t57_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_usuario"]:$this->t57_usuario);
-       $this->t57_instituicao = ($this->t57_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_instituicao"]:$this->t57_instituicao);
-       $this->t57_tipocalculo = ($this->t57_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_tipocalculo"]:$this->t57_tipocalculo);
+       $this->t57_usuario = ($this->t57_usuario === 0 || $this->t57_usuario === 0.0 || $this->t57_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_usuario"]:$this->t57_usuario);
+       $this->t57_instituicao = ($this->t57_instituicao === 0 || $this->t57_instituicao === 0.0 || $this->t57_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_instituicao"]:$this->t57_instituicao);
+       $this->t57_tipocalculo = ($this->t57_tipocalculo === 0 || $this->t57_tipocalculo === 0.0 || $this->t57_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_tipocalculo"]:$this->t57_tipocalculo);
        $this->t57_processado = ($this->t57_processado == "f"?@$GLOBALS["HTTP_POST_VARS"]["t57_processado"]:$this->t57_processado);
-       $this->t57_tipoprocessamento = ($this->t57_tipoprocessamento == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_tipoprocessamento"]:$this->t57_tipoprocessamento);
+       $this->t57_tipoprocessamento = ($this->t57_tipoprocessamento === 0 || $this->t57_tipoprocessamento === 0.0 || $this->t57_tipoprocessamento == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_tipoprocessamento"]:$this->t57_tipoprocessamento);
        $this->t57_ativo = ($this->t57_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["t57_ativo"]:$this->t57_ativo);
      }else{
-       $this->t57_sequencial = ($this->t57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_sequencial"]:$this->t57_sequencial);
+       $this->t57_sequencial = ($this->t57_sequencial === 0 || $this->t57_sequencial === 0.0 || $this->t57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t57_sequencial"]:$this->t57_sequencial);
      }
    }
    // funcao para inclusao
@@ -215,7 +215,7 @@ class cl_benshistoricocalculo {
          $this->t57_sequencial = $t57_sequencial;
        }
      }
-     if(($this->t57_sequencial == null) || ($this->t57_sequencial == "") ){
+     if(($this->t57_sequencial == null) || ($this->t57_sequencial === 0 || $this->t57_sequencial === 0.0 || $this->t57_sequencial == "") ){
        $this->erro_sql = " Campo t57_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

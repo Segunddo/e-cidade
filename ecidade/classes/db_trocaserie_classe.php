@@ -63,7 +63,7 @@ class cl_trocaserie {
                  ed101_c_tipo = char(1) = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_trocaserie() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("trocaserie"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,10 +80,10 @@ class cl_trocaserie {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed101_i_codigo = ($this->ed101_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_i_codigo"]:$this->ed101_i_codigo);
-       $this->ed101_i_aluno = ($this->ed101_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_i_aluno"]:$this->ed101_i_aluno);
-       $this->ed101_i_turmaorig = ($this->ed101_i_turmaorig == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_i_turmaorig"]:$this->ed101_i_turmaorig);
-       $this->ed101_i_turmadest = ($this->ed101_i_turmadest == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_i_turmadest"]:$this->ed101_i_turmadest);
+       $this->ed101_i_codigo = ($this->ed101_i_codigo === 0 || $this->ed101_i_codigo === 0.0 || $this->ed101_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_i_codigo"]:$this->ed101_i_codigo);
+       $this->ed101_i_aluno = ($this->ed101_i_aluno === 0 || $this->ed101_i_aluno === 0.0 || $this->ed101_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_i_aluno"]:$this->ed101_i_aluno);
+       $this->ed101_i_turmaorig = ($this->ed101_i_turmaorig === 0 || $this->ed101_i_turmaorig === 0.0 || $this->ed101_i_turmaorig == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_i_turmaorig"]:$this->ed101_i_turmaorig);
+       $this->ed101_i_turmadest = ($this->ed101_i_turmadest === 0 || $this->ed101_i_turmadest === 0.0 || $this->ed101_i_turmadest == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_i_turmadest"]:$this->ed101_i_turmadest);
        $this->ed101_t_obs = ($this->ed101_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_t_obs"]:$this->ed101_t_obs);
        if($this->ed101_d_data == ""){
          $this->ed101_d_data_dia = ($this->ed101_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_d_data_dia"]:$this->ed101_d_data_dia);
@@ -95,7 +95,7 @@ class cl_trocaserie {
        }
        $this->ed101_c_tipo = ($this->ed101_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_c_tipo"]:$this->ed101_c_tipo);
      }else{
-       $this->ed101_i_codigo = ($this->ed101_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_i_codigo"]:$this->ed101_i_codigo);
+       $this->ed101_i_codigo = ($this->ed101_i_codigo === 0 || $this->ed101_i_codigo === 0.0 || $this->ed101_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed101_i_codigo"]:$this->ed101_i_codigo);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_trocaserie {
          $this->ed101_i_codigo = $ed101_i_codigo; 
        }
      }
-     if(($this->ed101_i_codigo == null) || ($this->ed101_i_codigo == "") ){ 
+     if(($this->ed101_i_codigo == null) || ($this->ed101_i_codigo === 0 || $this->ed101_i_codigo === 0.0 || $this->ed101_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed101_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

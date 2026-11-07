@@ -95,7 +95,7 @@ $sql = "SELECT DISTINCT case when ed20_i_tiposervidor = 1 then rechumanopessoal.
        ";
 
 $result = pg_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 if($linhas==0){
   db_redireciona('db_erros.php?fechar=true&db_erro=Nenhum registro encontrado.');
  exit;

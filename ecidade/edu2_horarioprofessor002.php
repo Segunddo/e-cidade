@@ -123,7 +123,7 @@ $result   = $cldiasemana->sql_record($cldiasemana->sql_query_rh("",
                                                                 "ed04_i_escola = $escola AND ed04_c_letivo = 'S'"
                                                                )
                                     );
-$larg_dia = floor(($larg_tabela-$larg_coluna1)/$cldiasemana->numrows);
+$larg_dia = floor($cldiasemana->numrows ? ($larg_tabela-$larg_coluna1)/$cldiasemana->numrows : 0);
 $pdf->cell($larg_coluna1,5,"",0,0,"C",0);
 $pdf->setY($tabela1_top);
 $pdf->setX($tabela1_left+$larg_coluna1);
@@ -165,7 +165,7 @@ for ($t = $horainicial; $t <= $horafinal; $t += 1) {
   $pdf->setY($top_ini);
   $hora = strlen($t)==3?"0".$t:$t;
   $hora = substr($hora,0,2).":".substr($hora,2,2);
-  if($hora <= $horafinal){
+  if((float)$hora <= $horafinal){
   if ($t != 2400) {
   	
     if (($t%100) == 0) {
@@ -198,7 +198,7 @@ if( isset( $escolahorario ) && !empty( $escolahorario ) ) {
 }
 $sSqlRecHumanoHoraDisp   = $oDaoRecHumanoHoraDisp->sql_query( null, "ed75_i_codigo", null, $sWhereRecHumanoHoraDisp );
 $rsRecHumanoHoraDisp     = db_query( $sSqlRecHumanoHoraDisp );
-$lRecHumanoHoraDisp      = pg_num_rows( $rsRecHumanoHoraDisp ) > 0;
+$lRecHumanoHoraDisp      = ($rsRecHumanoHoraDisp ? pg_num_rows( $rsRecHumanoHoraDisp ) : null) > 0;
 
 if( $lRecHumanoHoraDisp ) {
 

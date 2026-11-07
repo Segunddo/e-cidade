@@ -56,7 +56,7 @@ class cl_serieregimemat {
                  ed223_i_ordenacao = int8 = Ordenação 
                  ";
    //funcao construtor da classe 
-   function cl_serieregimemat() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("serieregimemat"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_serieregimemat {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed223_i_codigo = ($this->ed223_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_codigo"]:$this->ed223_i_codigo);
-       $this->ed223_i_serie = ($this->ed223_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_serie"]:$this->ed223_i_serie);
-       $this->ed223_i_regimemat = ($this->ed223_i_regimemat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_regimemat"]:$this->ed223_i_regimemat);
-       $this->ed223_i_regimematdiv = ($this->ed223_i_regimematdiv == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_regimematdiv"]:$this->ed223_i_regimematdiv);
-       $this->ed223_i_ordenacao = ($this->ed223_i_ordenacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_ordenacao"]:$this->ed223_i_ordenacao);
+       $this->ed223_i_codigo = ($this->ed223_i_codigo === 0 || $this->ed223_i_codigo === 0.0 || $this->ed223_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_codigo"]:$this->ed223_i_codigo);
+       $this->ed223_i_serie = ($this->ed223_i_serie === 0 || $this->ed223_i_serie === 0.0 || $this->ed223_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_serie"]:$this->ed223_i_serie);
+       $this->ed223_i_regimemat = ($this->ed223_i_regimemat === 0 || $this->ed223_i_regimemat === 0.0 || $this->ed223_i_regimemat == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_regimemat"]:$this->ed223_i_regimemat);
+       $this->ed223_i_regimematdiv = ($this->ed223_i_regimematdiv === 0 || $this->ed223_i_regimematdiv === 0.0 || $this->ed223_i_regimematdiv == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_regimematdiv"]:$this->ed223_i_regimematdiv);
+       $this->ed223_i_ordenacao = ($this->ed223_i_ordenacao === 0 || $this->ed223_i_ordenacao === 0.0 || $this->ed223_i_ordenacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_ordenacao"]:$this->ed223_i_ordenacao);
      }else{
-       $this->ed223_i_codigo = ($this->ed223_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_codigo"]:$this->ed223_i_codigo);
+       $this->ed223_i_codigo = ($this->ed223_i_codigo === 0 || $this->ed223_i_codigo === 0.0 || $this->ed223_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed223_i_codigo"]:$this->ed223_i_codigo);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_serieregimemat {
          $this->ed223_i_codigo = $ed223_i_codigo; 
        }
      }
-     if(($this->ed223_i_codigo == null) || ($this->ed223_i_codigo == "") ){ 
+     if(($this->ed223_i_codigo == null) || ($this->ed223_i_codigo === 0 || $this->ed223_i_codigo === 0.0 || $this->ed223_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed223_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -410,7 +410,7 @@ class cl_serieregimemat {
    function sql_query ( $ed223_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -435,7 +435,7 @@ class cl_serieregimemat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_serieregimemat {
    function sql_query_turma ( $ed223_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -476,7 +476,7 @@ class cl_serieregimemat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -489,7 +489,7 @@ class cl_serieregimemat {
    function sql_query_file ( $ed223_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -510,7 +510,7 @@ class cl_serieregimemat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -524,7 +524,7 @@ class cl_serieregimemat {
    function sql_query_censo_etapa ( $ed223_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -555,7 +555,7 @@ class cl_serieregimemat {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

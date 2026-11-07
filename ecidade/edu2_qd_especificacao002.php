@@ -139,7 +139,7 @@ $sql   .= "  and ed11_i_ensino in ($nivelensino) ";
 $sql   .= "  limit 1 ";
 
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 if ($linhas == 0) {?>
 
   <table width='100%'>

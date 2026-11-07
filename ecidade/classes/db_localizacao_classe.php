@@ -56,7 +56,7 @@ class cl_localizacao {
                  bi09_abrev = char(10) = Abreviatura 
                  ";
    //funcao construtor da classe 
-   function cl_localizacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("localizacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_localizacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi09_codigo = ($this->bi09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_codigo"]:$this->bi09_codigo);
+       $this->bi09_codigo = ($this->bi09_codigo === 0 || $this->bi09_codigo === 0.0 || $this->bi09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_codigo"]:$this->bi09_codigo);
        $this->bi09_nome = ($this->bi09_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_nome"]:$this->bi09_nome);
-       $this->bi09_biblioteca = ($this->bi09_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_biblioteca"]:$this->bi09_biblioteca);
-       $this->bi09_capacidade = ($this->bi09_capacidade == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_capacidade"]:$this->bi09_capacidade);
+       $this->bi09_biblioteca = ($this->bi09_biblioteca === 0 || $this->bi09_biblioteca === 0.0 || $this->bi09_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_biblioteca"]:$this->bi09_biblioteca);
+       $this->bi09_capacidade = ($this->bi09_capacidade === 0 || $this->bi09_capacidade === 0.0 || $this->bi09_capacidade == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_capacidade"]:$this->bi09_capacidade);
        $this->bi09_abrev = ($this->bi09_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_abrev"]:$this->bi09_abrev);
      }else{
-       $this->bi09_codigo = ($this->bi09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_codigo"]:$this->bi09_codigo);
+       $this->bi09_codigo = ($this->bi09_codigo === 0 || $this->bi09_codigo === 0.0 || $this->bi09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_codigo"]:$this->bi09_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_localizacao {
          $this->bi09_codigo = $bi09_codigo; 
        }
      }
-     if(($this->bi09_codigo == null) || ($this->bi09_codigo == "") ){ 
+     if(($this->bi09_codigo == null) || ($this->bi09_codigo === 0 || $this->bi09_codigo === 0.0 || $this->bi09_codigo == "") ){ 
        $this->erro_sql = " Campo bi09_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_localizacao {
    function sql_query ( $bi09_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_localizacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_localizacao {
    function sql_query_file ( $bi09_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_localizacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

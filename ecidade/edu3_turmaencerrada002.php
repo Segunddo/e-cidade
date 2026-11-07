@@ -35,7 +35,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_matricula_classe.php"));
 db_postmemory($_POST);
 db_postmemory($_GET);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $clmatricula = new cl_matricula;
 $camp = "ed60_d_datasaida as datasaida,
          turma.ed57_c_descr,serie.ed11_c_descr,calendario.ed52_c_descr,cursoedu.ed29_c_descr,ed60_i_numaluno,
@@ -71,10 +72,10 @@ $result = $clmatricula->sql_record($clmatricula->sql_query("",$camp,"ed60_i_numa
   <table border='1px' width="100%" bgcolor="#cccccc" style="" cellspacing="0px">
    <tr class='cabec'>
     <td align='center' colspan='7'>
-      Turma: <?=pg_result($result,0,"ed57_c_descr")?>&nbsp;&nbsp;&nbsp;&nbsp;
-      Etapa: <?=pg_result($result,0,"ed11_c_descr")?>&nbsp;&nbsp;&nbsp;&nbsp;
-      Calendário: <?=pg_result($result,0,"ed52_c_descr")?><br>
-      Ensino: <?=pg_result($result,0,"ed29_c_descr")?>
+      Turma: <?=($result ? pg_result($result,0,"ed57_c_descr") : null)?>&nbsp;&nbsp;&nbsp;&nbsp;
+      Etapa: <?=($result ? pg_result($result,0,"ed11_c_descr") : null)?>&nbsp;&nbsp;&nbsp;&nbsp;
+      Calendário: <?=($result ? pg_result($result,0,"ed52_c_descr") : null)?><br>
+      Ensino: <?=($result ? pg_result($result,0,"ed29_c_descr") : null)?>
     </td>
    </tr>
    <tr><td height='2' colspan='7' bgcolor='#444444'></td></tr>

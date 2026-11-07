@@ -52,7 +52,7 @@ class cl_serieequiv {
                  ed234_i_serieequiv = int8 = Série Equivalente 
                  ";
    //funcao construtor da classe 
-   function cl_serieequiv() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("serieequiv"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_serieequiv {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed234_i_codigo = ($this->ed234_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed234_i_codigo"]:$this->ed234_i_codigo);
-       $this->ed234_i_serie = ($this->ed234_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed234_i_serie"]:$this->ed234_i_serie);
-       $this->ed234_i_serieequiv = ($this->ed234_i_serieequiv == ""?@$GLOBALS["HTTP_POST_VARS"]["ed234_i_serieequiv"]:$this->ed234_i_serieequiv);
+       $this->ed234_i_codigo = ($this->ed234_i_codigo === 0 || $this->ed234_i_codigo === 0.0 || $this->ed234_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed234_i_codigo"]:$this->ed234_i_codigo);
+       $this->ed234_i_serie = ($this->ed234_i_serie === 0 || $this->ed234_i_serie === 0.0 || $this->ed234_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed234_i_serie"]:$this->ed234_i_serie);
+       $this->ed234_i_serieequiv = ($this->ed234_i_serieequiv === 0 || $this->ed234_i_serieequiv === 0.0 || $this->ed234_i_serieequiv == ""?@$GLOBALS["HTTP_POST_VARS"]["ed234_i_serieequiv"]:$this->ed234_i_serieequiv);
      }else{
-       $this->ed234_i_codigo = ($this->ed234_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed234_i_codigo"]:$this->ed234_i_codigo);
+       $this->ed234_i_codigo = ($this->ed234_i_codigo === 0 || $this->ed234_i_codigo === 0.0 || $this->ed234_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed234_i_codigo"]:$this->ed234_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_serieequiv {
          $this->ed234_i_codigo = $ed234_i_codigo; 
        }
      }
-     if(($this->ed234_i_codigo == null) || ($this->ed234_i_codigo == "") ){ 
+     if(($this->ed234_i_codigo == null) || ($this->ed234_i_codigo === 0 || $this->ed234_i_codigo === 0.0 || $this->ed234_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed234_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -384,7 +384,7 @@ class cl_serieequiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_serieequiv {
    function sql_query_file ( $ed234_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_serieequiv {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_serieequiv {
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++){
 
@@ -461,7 +461,7 @@ class cl_serieequiv {
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 

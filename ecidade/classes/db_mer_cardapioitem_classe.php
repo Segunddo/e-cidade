@@ -58,7 +58,7 @@ class cl_mer_cardapioitem {
                  me07_i_unidade = int4 = Unidade 
                  ";
    //funcao construtor da classe 
-   function cl_mer_cardapioitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("mer_cardapioitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_mer_cardapioitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me07_i_codigo = ($this->me07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_i_codigo"]:$this->me07_i_codigo);
-       $this->me07_f_quantidade = ($this->me07_f_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_f_quantidade"]:$this->me07_f_quantidade);
-       $this->me07_i_cardapio = ($this->me07_i_cardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_i_cardapio"]:$this->me07_i_cardapio);
+       $this->me07_i_codigo = ($this->me07_i_codigo === 0 || $this->me07_i_codigo === 0.0 || $this->me07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_i_codigo"]:$this->me07_i_codigo);
+       $this->me07_f_quantidade = ($this->me07_f_quantidade === 0 || $this->me07_f_quantidade === 0.0 || $this->me07_f_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_f_quantidade"]:$this->me07_f_quantidade);
+       $this->me07_i_cardapio = ($this->me07_i_cardapio === 0 || $this->me07_i_cardapio === 0.0 || $this->me07_i_cardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_i_cardapio"]:$this->me07_i_cardapio);
        $this->me07_c_medida = ($this->me07_c_medida == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_c_medida"]:$this->me07_c_medida);
-       $this->me07_i_alimento = ($this->me07_i_alimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_i_alimento"]:$this->me07_i_alimento);
-       $this->me07_i_unidade = ($this->me07_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_i_unidade"]:$this->me07_i_unidade);
+       $this->me07_i_alimento = ($this->me07_i_alimento === 0 || $this->me07_i_alimento === 0.0 || $this->me07_i_alimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_i_alimento"]:$this->me07_i_alimento);
+       $this->me07_i_unidade = ($this->me07_i_unidade === 0 || $this->me07_i_unidade === 0.0 || $this->me07_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_i_unidade"]:$this->me07_i_unidade);
      }else{
-       $this->me07_i_codigo = ($this->me07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_i_codigo"]:$this->me07_i_codigo);
+       $this->me07_i_codigo = ($this->me07_i_codigo === 0 || $this->me07_i_codigo === 0.0 || $this->me07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me07_i_codigo"]:$this->me07_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_mer_cardapioitem {
          $this->me07_i_codigo = $me07_i_codigo; 
        }
      }
-     if(($this->me07_i_codigo == null) || ($this->me07_i_codigo == "") ){ 
+     if(($this->me07_i_codigo == null) || ($this->me07_i_codigo === 0 || $this->me07_i_codigo === 0.0 || $this->me07_i_codigo == "") ){ 
        $this->erro_sql = " Campo me07_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -453,7 +453,7 @@ class cl_mer_cardapioitem {
    function sql_query ( $me07_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -479,7 +479,7 @@ class cl_mer_cardapioitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_mer_cardapioitem {
    function sql_query_file ( $me07_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -513,7 +513,7 @@ class cl_mer_cardapioitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

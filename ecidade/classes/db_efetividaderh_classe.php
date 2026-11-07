@@ -68,7 +68,7 @@ class cl_efetividaderh {
                  ed98_c_tipocomp = char(1) = Tipo de Competência 
                  ";
    //funcao construtor da classe 
-   function cl_efetividaderh() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("efetividaderh"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,10 +85,10 @@ class cl_efetividaderh {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed98_i_codigo = ($this->ed98_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_i_codigo"]:$this->ed98_i_codigo);
-       $this->ed98_i_escola = ($this->ed98_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_i_escola"]:$this->ed98_i_escola);
-       $this->ed98_i_mes = ($this->ed98_i_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_i_mes"]:$this->ed98_i_mes);
-       $this->ed98_i_ano = ($this->ed98_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_i_ano"]:$this->ed98_i_ano);
+       $this->ed98_i_codigo = ($this->ed98_i_codigo === 0 || $this->ed98_i_codigo === 0.0 || $this->ed98_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_i_codigo"]:$this->ed98_i_codigo);
+       $this->ed98_i_escola = ($this->ed98_i_escola === 0 || $this->ed98_i_escola === 0.0 || $this->ed98_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_i_escola"]:$this->ed98_i_escola);
+       $this->ed98_i_mes = ($this->ed98_i_mes === 0 || $this->ed98_i_mes === 0.0 || $this->ed98_i_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_i_mes"]:$this->ed98_i_mes);
+       $this->ed98_i_ano = ($this->ed98_i_ano === 0 || $this->ed98_i_ano === 0.0 || $this->ed98_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_i_ano"]:$this->ed98_i_ano);
        $this->ed98_c_tipo = ($this->ed98_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_c_tipo"]:$this->ed98_c_tipo);
        if($this->ed98_d_dataini == ""){
          $this->ed98_d_dataini_dia = ($this->ed98_d_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_d_dataini_dia"]:$this->ed98_d_dataini_dia);
@@ -108,7 +108,7 @@ class cl_efetividaderh {
        }
        $this->ed98_c_tipocomp = ($this->ed98_c_tipocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_c_tipocomp"]:$this->ed98_c_tipocomp);
      }else{
-       $this->ed98_i_codigo = ($this->ed98_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_i_codigo"]:$this->ed98_i_codigo);
+       $this->ed98_i_codigo = ($this->ed98_i_codigo === 0 || $this->ed98_i_codigo === 0.0 || $this->ed98_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed98_i_codigo"]:$this->ed98_i_codigo);
      }
    }
    // funcao para inclusao
@@ -189,7 +189,7 @@ class cl_efetividaderh {
          $this->ed98_i_codigo = $ed98_i_codigo; 
        }
      }
-     if(($this->ed98_i_codigo == null) || ($this->ed98_i_codigo == "") ){ 
+     if(($this->ed98_i_codigo == null) || ($this->ed98_i_codigo === 0 || $this->ed98_i_codigo === 0.0 || $this->ed98_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed98_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -539,7 +539,7 @@ class cl_efetividaderh {
    function sql_query ( $ed98_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -569,7 +569,7 @@ class cl_efetividaderh {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -582,7 +582,7 @@ class cl_efetividaderh {
    function sql_query_file ( $ed98_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -603,7 +603,7 @@ class cl_efetividaderh {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

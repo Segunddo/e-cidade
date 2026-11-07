@@ -54,7 +54,7 @@ class cl_seriecensoetapa {
                  ed133_ano = int4 = Ano
                  ";
    //funcao construtor da classe
-   function cl_seriecensoetapa() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("seriecensoetapa");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_seriecensoetapa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed133_codigo = ($this->ed133_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed133_codigo"]:$this->ed133_codigo);
-       $this->ed133_serie = ($this->ed133_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed133_serie"]:$this->ed133_serie);
-       $this->ed133_censoetapa = ($this->ed133_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed133_censoetapa"]:$this->ed133_censoetapa);
-       $this->ed133_ano = ($this->ed133_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed133_ano"]:$this->ed133_ano);
+       $this->ed133_codigo = ($this->ed133_codigo === 0 || $this->ed133_codigo === 0.0 || $this->ed133_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed133_codigo"]:$this->ed133_codigo);
+       $this->ed133_serie = ($this->ed133_serie === 0 || $this->ed133_serie === 0.0 || $this->ed133_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed133_serie"]:$this->ed133_serie);
+       $this->ed133_censoetapa = ($this->ed133_censoetapa === 0 || $this->ed133_censoetapa === 0.0 || $this->ed133_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed133_censoetapa"]:$this->ed133_censoetapa);
+       $this->ed133_ano = ($this->ed133_ano === 0 || $this->ed133_ano === 0.0 || $this->ed133_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed133_ano"]:$this->ed133_ano);
      }else{
-       $this->ed133_codigo = ($this->ed133_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed133_codigo"]:$this->ed133_codigo);
+       $this->ed133_codigo = ($this->ed133_codigo === 0 || $this->ed133_codigo === 0.0 || $this->ed133_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed133_codigo"]:$this->ed133_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_seriecensoetapa {
          $this->ed133_codigo = $ed133_codigo;
        }
      }
-     if(($this->ed133_codigo == null) || ($this->ed133_codigo == "") ){
+     if(($this->ed133_codigo == null) || ($this->ed133_codigo === 0 || $this->ed133_codigo === 0.0 || $this->ed133_codigo == "") ){
        $this->erro_sql = " Campo ed133_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

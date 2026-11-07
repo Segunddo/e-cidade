@@ -67,7 +67,7 @@ class cl_logmatricula {
                  ed248_c_tipo = char(1) = Tipo de Movimento 
                  ";
    //funcao construtor da classe
-   function cl_logmatricula() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("logmatricula");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,10 +84,10 @@ class cl_logmatricula {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed248_i_codigo = ($this->ed248_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_i_codigo"]:$this->ed248_i_codigo);
-       $this->ed248_i_usuario = ($this->ed248_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_i_usuario"]:$this->ed248_i_usuario);
-       $this->ed248_i_motivo = ($this->ed248_i_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_i_motivo"]:$this->ed248_i_motivo);
-       $this->ed248_i_aluno = ($this->ed248_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_i_aluno"]:$this->ed248_i_aluno);
+       $this->ed248_i_codigo = ($this->ed248_i_codigo === 0 || $this->ed248_i_codigo === 0.0 || $this->ed248_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_i_codigo"]:$this->ed248_i_codigo);
+       $this->ed248_i_usuario = ($this->ed248_i_usuario === 0 || $this->ed248_i_usuario === 0.0 || $this->ed248_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_i_usuario"]:$this->ed248_i_usuario);
+       $this->ed248_i_motivo = ($this->ed248_i_motivo === 0 || $this->ed248_i_motivo === 0.0 || $this->ed248_i_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_i_motivo"]:$this->ed248_i_motivo);
+       $this->ed248_i_aluno = ($this->ed248_i_aluno === 0 || $this->ed248_i_aluno === 0.0 || $this->ed248_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_i_aluno"]:$this->ed248_i_aluno);
        $this->ed248_t_origem = ($this->ed248_t_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_t_origem"]:$this->ed248_t_origem);
        $this->ed248_t_obs = ($this->ed248_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_t_obs"]:$this->ed248_t_obs);
        if($this->ed248_d_data == ""){
@@ -101,7 +101,7 @@ class cl_logmatricula {
        $this->ed248_c_hora = ($this->ed248_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_c_hora"]:$this->ed248_c_hora);
        $this->ed248_c_tipo = ($this->ed248_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_c_tipo"]:$this->ed248_c_tipo);
      }else{
-       $this->ed248_i_codigo = ($this->ed248_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_i_codigo"]:$this->ed248_i_codigo);
+       $this->ed248_i_codigo = ($this->ed248_i_codigo === 0 || $this->ed248_i_codigo === 0.0 || $this->ed248_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed248_i_codigo"]:$this->ed248_i_codigo);
      }
    }
    // funcao para inclusao
@@ -188,7 +188,7 @@ class cl_logmatricula {
          $this->ed248_i_codigo = $ed248_i_codigo;
        }
      }
-     if(($this->ed248_i_codigo == null) || ($this->ed248_i_codigo == "") ){
+     if(($this->ed248_i_codigo == null) || ($this->ed248_i_codigo === 0 || $this->ed248_i_codigo === 0.0 || $this->ed248_i_codigo == "") ){
        $this->erro_sql = " Campo ed248_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

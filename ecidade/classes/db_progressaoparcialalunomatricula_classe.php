@@ -54,7 +54,7 @@ class cl_progressaoparcialalunomatricula {
                  ed150_encerrado = bool = Encerrado 
                  ";
    //funcao construtor da classe 
-   function cl_progressaoparcialalunomatricula() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("progressaoparcialalunomatricula"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_progressaoparcialalunomatricula {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed150_sequencial = ($this->ed150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed150_sequencial"]:$this->ed150_sequencial);
-       $this->ed150_progressaoparcialaluno = ($this->ed150_progressaoparcialaluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed150_progressaoparcialaluno"]:$this->ed150_progressaoparcialaluno);
-       $this->ed150_ano = ($this->ed150_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed150_ano"]:$this->ed150_ano);
+       $this->ed150_sequencial = ($this->ed150_sequencial === 0 || $this->ed150_sequencial === 0.0 || $this->ed150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed150_sequencial"]:$this->ed150_sequencial);
+       $this->ed150_progressaoparcialaluno = ($this->ed150_progressaoparcialaluno === 0 || $this->ed150_progressaoparcialaluno === 0.0 || $this->ed150_progressaoparcialaluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed150_progressaoparcialaluno"]:$this->ed150_progressaoparcialaluno);
+       $this->ed150_ano = ($this->ed150_ano === 0 || $this->ed150_ano === 0.0 || $this->ed150_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed150_ano"]:$this->ed150_ano);
        $this->ed150_encerrado = ($this->ed150_encerrado == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed150_encerrado"]:$this->ed150_encerrado);
      }else{
-       $this->ed150_sequencial = ($this->ed150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed150_sequencial"]:$this->ed150_sequencial);
+       $this->ed150_sequencial = ($this->ed150_sequencial === 0 || $this->ed150_sequencial === 0.0 || $this->ed150_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed150_sequencial"]:$this->ed150_sequencial);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_progressaoparcialalunomatricula {
          $this->ed150_sequencial = $ed150_sequencial; 
        }
      }
-     if(($this->ed150_sequencial == null) || ($this->ed150_sequencial == "") ){ 
+     if(($this->ed150_sequencial == null) || ($this->ed150_sequencial === 0 || $this->ed150_sequencial === 0.0 || $this->ed150_sequencial == "") ){ 
        $this->erro_sql = " Campo ed150_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -398,7 +398,7 @@ class cl_progressaoparcialalunomatricula {
    function sql_query ( $ed150_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_progressaoparcialalunomatricula {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_progressaoparcialalunomatricula {
    function sql_query_file ( $ed150_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_progressaoparcialalunomatricula {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_progressaoparcialalunomatricula {
    function sql_query_turma_regencia ( $ed150_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -494,7 +494,7 @@ class cl_progressaoparcialalunomatricula {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

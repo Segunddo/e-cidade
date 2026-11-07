@@ -52,7 +52,7 @@ class cl_tiposala {
                  ed14_c_aula = char(1) = Sala de Aula 
                  ";
    //funcao construtor da classe 
-   function cl_tiposala() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tiposala"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_tiposala {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed14_i_codigo = ($this->ed14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed14_i_codigo"]:$this->ed14_i_codigo);
+       $this->ed14_i_codigo = ($this->ed14_i_codigo === 0 || $this->ed14_i_codigo === 0.0 || $this->ed14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed14_i_codigo"]:$this->ed14_i_codigo);
        $this->ed14_c_descr = ($this->ed14_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed14_c_descr"]:$this->ed14_c_descr);
        $this->ed14_c_aula = ($this->ed14_c_aula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed14_c_aula"]:$this->ed14_c_aula);
      }else{
-       $this->ed14_i_codigo = ($this->ed14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed14_i_codigo"]:$this->ed14_i_codigo);
+       $this->ed14_i_codigo = ($this->ed14_i_codigo === 0 || $this->ed14_i_codigo === 0.0 || $this->ed14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed14_i_codigo"]:$this->ed14_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tiposala {
          $this->ed14_i_codigo = $ed14_i_codigo; 
        }
      }
-     if(($this->ed14_i_codigo == null) || ($this->ed14_i_codigo == "") ){ 
+     if(($this->ed14_i_codigo == null) || ($this->ed14_i_codigo === 0 || $this->ed14_i_codigo === 0.0 || $this->ed14_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed14_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_tiposala {
    function sql_query ( $ed14_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_tiposala {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_tiposala {
    function sql_query_file ( $ed14_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_tiposala {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

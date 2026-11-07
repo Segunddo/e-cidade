@@ -27,7 +27,7 @@ class cl_basecurricularserie {
                  ";
                  
    //funcao construtor da classe 
-   function cl_basecurricularserie() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("basecurricularserie"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -44,11 +44,11 @@ class cl_basecurricularserie {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed142_sequencial = ($this->ed142_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed142_sequencial"]:$this->ed142_sequencial);
-       $this->ed142_basecurricular = ($this->ed142_basecurricular == ""?@$GLOBALS["HTTP_POST_VARS"]["ed142_basecurricular"]:$this->ed142_basecurricular);
-       $this->ed142_serie = ($this->ed142_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed142_serie"]:$this->ed142_serie);
+       $this->ed142_sequencial = ($this->ed142_sequencial === 0 || $this->ed142_sequencial === 0.0 || $this->ed142_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed142_sequencial"]:$this->ed142_sequencial);
+       $this->ed142_basecurricular = ($this->ed142_basecurricular === 0 || $this->ed142_basecurricular === 0.0 || $this->ed142_basecurricular == ""?@$GLOBALS["HTTP_POST_VARS"]["ed142_basecurricular"]:$this->ed142_basecurricular);
+       $this->ed142_serie = ($this->ed142_serie === 0 || $this->ed142_serie === 0.0 || $this->ed142_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed142_serie"]:$this->ed142_serie);
      }else{
-       $this->ed142_sequencial = ($this->ed142_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed142_sequencial"]:$this->ed142_sequencial);
+       $this->ed142_sequencial = ($this->ed142_sequencial === 0 || $this->ed142_sequencial === 0.0 || $this->ed142_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed142_sequencial"]:$this->ed142_sequencial);
      }
    }
    // funcao para Inclusão
@@ -96,7 +96,7 @@ class cl_basecurricularserie {
          $this->ed142_sequencial = $ed142_sequencial; 
        }
      }
-     if(($this->ed142_sequencial == null) || ($this->ed142_sequencial == "") ){ 
+     if(($this->ed142_sequencial == null) || ($this->ed142_sequencial === 0 || $this->ed142_sequencial === 0.0 || $this->ed142_sequencial == "") ){ 
        $this->erro_sql = " Campo ed142_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

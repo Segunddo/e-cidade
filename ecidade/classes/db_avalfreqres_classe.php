@@ -52,7 +52,7 @@ class cl_avalfreqres {
                  ed67_i_procresultado = int8 = Resultado
                  ";
    //funcao construtor da classe
-   function cl_avalfreqres() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("avalfreqres");
           $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]."?ed67_i_procresultado=".@$GLOBALS["HTTP_POST_VARS"]["ed67_i_procresultado"]."&ed42_c_descr=".@$GLOBALS["HTTP_POST_VARS"]["ed42_c_descr"]."&procedimento=".@$GLOBALS["HTTP_POST_VARS"]["procedimento"]."&forma=".@$GLOBALS["HTTP_POST_VARS"]["forma"]);
@@ -69,11 +69,11 @@ class cl_avalfreqres {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed67_i_codigo = ($this->ed67_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed67_i_codigo"]:$this->ed67_i_codigo);
-       $this->ed67_i_procavaliacao = ($this->ed67_i_procavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed67_i_procavaliacao"]:$this->ed67_i_procavaliacao);
-       $this->ed67_i_procresultado = ($this->ed67_i_procresultado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed67_i_procresultado"]:$this->ed67_i_procresultado);
+       $this->ed67_i_codigo = ($this->ed67_i_codigo === 0 || $this->ed67_i_codigo === 0.0 || $this->ed67_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed67_i_codigo"]:$this->ed67_i_codigo);
+       $this->ed67_i_procavaliacao = ($this->ed67_i_procavaliacao === 0 || $this->ed67_i_procavaliacao === 0.0 || $this->ed67_i_procavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed67_i_procavaliacao"]:$this->ed67_i_procavaliacao);
+       $this->ed67_i_procresultado = ($this->ed67_i_procresultado === 0 || $this->ed67_i_procresultado === 0.0 || $this->ed67_i_procresultado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed67_i_procresultado"]:$this->ed67_i_procresultado);
      }else{
-       $this->ed67_i_codigo = ($this->ed67_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed67_i_codigo"]:$this->ed67_i_codigo);
+       $this->ed67_i_codigo = ($this->ed67_i_codigo === 0 || $this->ed67_i_codigo === 0.0 || $this->ed67_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed67_i_codigo"]:$this->ed67_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_avalfreqres {
          $this->ed67_i_codigo = $ed67_i_codigo;
        }
      }
-     if(($this->ed67_i_codigo == null) || ($this->ed67_i_codigo == "") ){
+     if(($this->ed67_i_codigo == null) || ($this->ed67_i_codigo === 0 || $this->ed67_i_codigo === 0.0 || $this->ed67_i_codigo == "") ){
        $this->erro_sql = " Campo ed67_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

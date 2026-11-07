@@ -52,7 +52,7 @@ class cl_tipoensino {
                  ed36_c_abrev = char(2) = Abreviatura
                  ";
    //funcao construtor da classe
-   function cl_tipoensino() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoensino");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_tipoensino {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed36_i_codigo = ($this->ed36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_codigo"]:$this->ed36_i_codigo);
+       $this->ed36_i_codigo = ($this->ed36_i_codigo === 0 || $this->ed36_i_codigo === 0.0 || $this->ed36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_codigo"]:$this->ed36_i_codigo);
        $this->ed36_c_descr = ($this->ed36_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_c_descr"]:$this->ed36_c_descr);
        $this->ed36_c_abrev = ($this->ed36_c_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_c_abrev"]:$this->ed36_c_abrev);
      }else{
-       $this->ed36_i_codigo = ($this->ed36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_codigo"]:$this->ed36_i_codigo);
+       $this->ed36_i_codigo = ($this->ed36_i_codigo === 0 || $this->ed36_i_codigo === 0.0 || $this->ed36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_codigo"]:$this->ed36_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tipoensino {
          $this->ed36_i_codigo = $ed36_i_codigo;
        }
      }
-     if(($this->ed36_i_codigo == null) || ($this->ed36_i_codigo == "") ){
+     if(($this->ed36_i_codigo == null) || ($this->ed36_i_codigo === 0 || $this->ed36_i_codigo === 0.0 || $this->ed36_i_codigo == "") ){
        $this->erro_sql = " Campo ed36_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_tipoensino {
    function sql_query ( $ed36_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_tipoensino {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_tipoensino {
    function sql_query_file ( $ed36_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_tipoensino {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
