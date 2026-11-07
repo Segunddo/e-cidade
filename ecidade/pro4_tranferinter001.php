@@ -92,7 +92,7 @@ if (isset($incluir)) {
         for ($i = 0; $i < $ta; $i++) {
             $chave = key($vt);
             if (substr($chave, 0, 5) == "CHECK") {
-                $dados = split("_", $chave);
+                $dados = preg_split("#_#m", $chave);
                 $result1 = $clprotprocesso->sql_record($clprotprocesso->sql_query_file($dados[1],
                     'p58_codandam, p58_codproc'));
                 db_fieldsmemory($result1, 0);

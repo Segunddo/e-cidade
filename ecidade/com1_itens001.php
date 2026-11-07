@@ -61,7 +61,7 @@ if(isset($incluir) || isset($alterar)){
   if($sqlerro==false){
     db_inicio_transacao();
     if(isset($alterar) && $valores!="" || isset($incluir)){
-      $arr_dad = split(",",$valores);
+      $arr_dad = preg_split("#,#m",$valores);
       for($i=0;$i<sizeof($arr_dad);$i++){
 	if(isset($alterar)){	      
 	  $result_exist = $clpcorcamitemsol->sql_record($clpcorcamitemsol->sql_query_solicitem(null,null,"pc22_codorc,pc22_orcamitem,pc29_solicitem",null," pc29_solicitem=".$arr_dad[$i]." and pc22_codorc=$pc22_codorc"));

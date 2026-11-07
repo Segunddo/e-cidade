@@ -32,7 +32,8 @@ $clveiccadtipocapacidade = new cl_veiccadtipocapacidade;
 $clveiccadtipocapacidade->rotulo->label();
 $clrotulo = new rotulocampo;
 $clrotulo->label('');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 if($ordem == "a") {
 	$desc_ordem = "Alfabética";
 	$order_by = "ve24_descr";

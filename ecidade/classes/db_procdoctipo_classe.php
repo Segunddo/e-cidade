@@ -52,7 +52,7 @@ class cl_procdoctipo {
                  p57_ouvidoriaobrigatorio = boolean = Obrigatório( Sistema Externo ) 
                  ";
    //funcao construtor da classe 
-   function cl_procdoctipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procdoctipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_procdoctipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p57_codigo = ($this->p57_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p57_codigo"]:$this->p57_codigo);
-       $this->p57_coddoc = ($this->p57_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p57_coddoc"]:$this->p57_coddoc);
+       $this->p57_codigo = ($this->p57_codigo === 0 || $this->p57_codigo === 0.0 || $this->p57_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p57_codigo"]:$this->p57_codigo);
+       $this->p57_coddoc = ($this->p57_coddoc === 0 || $this->p57_coddoc === 0.0 || $this->p57_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p57_coddoc"]:$this->p57_coddoc);
        $this->p57_ouvidoriaobrigatorio = ($this->p57_ouvidoriaobrigatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["p57_ouvidoriaobrigatorio"]:'f');
      }else{
-       $this->p57_codigo = ($this->p57_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p57_codigo"]:$this->p57_codigo);
-       $this->p57_coddoc = ($this->p57_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p57_coddoc"]:$this->p57_coddoc);
+       $this->p57_codigo = ($this->p57_codigo === 0 || $this->p57_codigo === 0.0 || $this->p57_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p57_codigo"]:$this->p57_codigo);
+       $this->p57_coddoc = ($this->p57_coddoc === 0 || $this->p57_coddoc === 0.0 || $this->p57_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p57_coddoc"]:$this->p57_coddoc);
        $this->p57_ouvidoriaobrigatorio = ($this->p57_ouvidoriaobrigatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["p57_ouvidoriaobrigatorio"]:'f');
      }
    }
@@ -83,7 +83,7 @@ class cl_procdoctipo {
       $this->atualizacampos();
        $this->p57_codigo = $p57_codigo; 
        $this->p57_coddoc = $p57_coddoc; 
-     if(($this->p57_codigo == null) || ($this->p57_codigo == "") ){ 
+     if(($this->p57_codigo == null) || ($this->p57_codigo === 0 || $this->p57_codigo === 0.0 || $this->p57_codigo == "") ){ 
        $this->erro_sql = " Campo p57_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -91,7 +91,7 @@ class cl_procdoctipo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p57_coddoc == null) || ($this->p57_coddoc == "") ){ 
+     if(($this->p57_coddoc == null) || ($this->p57_coddoc === 0 || $this->p57_coddoc === 0.0 || $this->p57_coddoc == "") ){ 
        $this->erro_sql = " Campo p57_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

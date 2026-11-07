@@ -150,7 +150,7 @@
   $sSqlBuscaRelatorio  = $oDaoOuvAtendimento->sql_query_dados_atendimento(null, $sSqlCampos, null, $sSqlWhere);
   $rsBuscaRelatorio    = $oDaoOuvAtendimento->sql_record($sSqlBuscaRelatorio);
 
-  if ( pg_num_rows($rsBuscaRelatorio) == 0 ) {
+  if ( ($rsBuscaRelatorio ? pg_num_rows($rsBuscaRelatorio) : null) == 0 ) {
     db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros para os filtros setados.');
     exit;
   }

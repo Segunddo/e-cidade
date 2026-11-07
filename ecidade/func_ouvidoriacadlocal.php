@@ -36,7 +36,8 @@ require_once(modification("classes/db_ouvidoriacadlocalender_classe.php"));
 require_once(modification("classes/db_ouvidoriacadlocaldepart_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clouvidoriacadlocal = new cl_ouvidoriacadlocal;
 $clouvidoriacadlocal->rotulo->label("ov25_sequencial");

@@ -42,7 +42,8 @@ $clpcorcamval = new cl_pcorcamval;
 $clrotulo = new rotulocampo;
 $clrotulo->label('');
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($_SERVER);
 
 $dbinstit = db_getsession("DB_instit");

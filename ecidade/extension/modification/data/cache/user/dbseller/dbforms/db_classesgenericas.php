@@ -1595,7 +1595,7 @@ class cl_db_estrut{
     $clrotulocampo = new rotulocampo;
     $clrotulocampo->label($nome);
     $result  = db_query("select db77_descr, db77_estrut as mascara from db_estrutura where db77_codestrut=$id");
-    $numrows = pg_num_rows($result);
+    $numrows = ($result ? pg_num_rows($result) : null);
     if ($numrows >0){
         db_fieldsmemory($result,0);
         $tamanho=strlen($mascara);

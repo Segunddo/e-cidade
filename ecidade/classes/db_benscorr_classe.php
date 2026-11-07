@@ -54,7 +54,7 @@ class cl_benscorr {
                  t63_deprec = float8 = Valor corrigido a menor 
                  ";
    //funcao construtor da classe 
-   function cl_benscorr() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("benscorr"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_benscorr {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t63_codcor = ($this->t63_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codcor"]:$this->t63_codcor);
-       $this->t63_codbem = ($this->t63_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codbem"]:$this->t63_codbem);
-       $this->t63_valcor = ($this->t63_valcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_valcor"]:$this->t63_valcor);
-       $this->t63_deprec = ($this->t63_deprec == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_deprec"]:$this->t63_deprec);
+       $this->t63_codcor = ($this->t63_codcor === 0 || $this->t63_codcor === 0.0 || $this->t63_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codcor"]:$this->t63_codcor);
+       $this->t63_codbem = ($this->t63_codbem === 0 || $this->t63_codbem === 0.0 || $this->t63_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codbem"]:$this->t63_codbem);
+       $this->t63_valcor = ($this->t63_valcor === 0 || $this->t63_valcor === 0.0 || $this->t63_valcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_valcor"]:$this->t63_valcor);
+       $this->t63_deprec = ($this->t63_deprec === 0 || $this->t63_deprec === 0.0 || $this->t63_deprec == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_deprec"]:$this->t63_deprec);
      }else{
-       $this->t63_codcor = ($this->t63_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codcor"]:$this->t63_codcor);
-       $this->t63_codbem = ($this->t63_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codbem"]:$this->t63_codbem);
+       $this->t63_codcor = ($this->t63_codcor === 0 || $this->t63_codcor === 0.0 || $this->t63_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codcor"]:$this->t63_codcor);
+       $this->t63_codbem = ($this->t63_codbem === 0 || $this->t63_codbem === 0.0 || $this->t63_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codbem"]:$this->t63_codbem);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_benscorr {
      }
        $this->t63_codcor = $t63_codcor; 
        $this->t63_codbem = $t63_codbem; 
-     if(($this->t63_codcor == null) || ($this->t63_codcor == "") ){ 
+     if(($this->t63_codcor == null) || ($this->t63_codcor === 0 || $this->t63_codcor === 0.0 || $this->t63_codcor == "") ){ 
        $this->erro_sql = " Campo t63_codcor nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_benscorr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->t63_codbem == null) || ($this->t63_codbem == "") ){ 
+     if(($this->t63_codbem == null) || ($this->t63_codbem === 0 || $this->t63_codbem === 0.0 || $this->t63_codbem == "") ){ 
        $this->erro_sql = " Campo t63_codbem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -381,7 +381,7 @@ class cl_benscorr {
    function sql_query ( $t63_codcor=null,$t63_codbem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_benscorr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_benscorr {
    function sql_query_file ( $t63_codcor=null,$t63_codbem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -462,7 +462,7 @@ class cl_benscorr {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

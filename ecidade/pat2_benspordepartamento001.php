@@ -54,7 +54,7 @@ $postgresResourceOrgao = $oOrgao->sql_record(
 );
 
 $arrayOrgao = array(0 => 'Selecione um Órgão');
-while ($row = pg_fetch_assoc($postgresResourceOrgao)) {
+while ($row = ($postgresResourceOrgao ? pg_fetch_assoc($postgresResourceOrgao) : null)) {
   $arrayOrgao[$row['o40_orgao']] = $row['o40_descr'];
 }
 

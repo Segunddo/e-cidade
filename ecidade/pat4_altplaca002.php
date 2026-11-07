@@ -35,7 +35,8 @@ include(modification("classes/db_bensplaca_classe.php"));
 include(modification("classes/db_cfpatriplaca_classe.php"));
 include(modification("classes/db_histbensocorrencia_classe.php"));
 
-parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"] );
+parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"], $__qs );
+extract($__qs);
 db_postmemory ( $HTTP_POST_VARS );
 
 $clbensplaca = new cl_bensplaca ();
@@ -310,13 +311,13 @@ if (isset ( $alterar )) {
         if ($t07_confplaca == 1) {
           db_msgbox ( _M('patrimonial.patrimonio.db_frmaltplaca.nova_placa', $sParms));
         } else if ($t07_confplaca == 2) {
-          
+
           $sParms->nPlacaseqFormatada = db_formatar ( $placaseq, 'f', '0', $t07_digseqplaca, 'e', 0 );
           db_msgbox ( _M('patrimonial.patrimonio.db_frmaltplaca.nova_placa_formatada', $sParms));
           //db_msgbox ( "A nova placa do bem :" . $placa . db_formatar ( $placaseq, 'f', '0', $t07_digseqplaca, 'e', 0 ) );
           
         } else if ($t07_confplaca == 3) {
-          
+
           $sParms->nPlacaseqFormatada = db_formatar ( $placaseq, 'f', '0', $t07_digseqplaca, 'e', 0 );
           db_msgbox ( _M('patrimonial.patrimonio.db_frmaltplaca.nova_placa_formatada', $sParms));
           //db_msgbox ( "A nova placa do bem :" . $placa . db_formatar ( $placaseq, 'f', '0', $t07_digseqplaca, 'e', 0 ) );

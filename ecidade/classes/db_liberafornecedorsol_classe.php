@@ -52,7 +52,7 @@ class cl_liberafornecedorsol {
                  pc83_solicita = int4 = Solicitação 
                  ";
    //funcao construtor da classe 
-   function cl_liberafornecedorsol() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liberafornecedorsol"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_liberafornecedorsol {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc83_sequencial = ($this->pc83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc83_sequencial"]:$this->pc83_sequencial);
-       $this->pc83_liberafornecedor = ($this->pc83_liberafornecedor == ""?@$GLOBALS["HTTP_POST_VARS"]["pc83_liberafornecedor"]:$this->pc83_liberafornecedor);
-       $this->pc83_solicita = ($this->pc83_solicita == ""?@$GLOBALS["HTTP_POST_VARS"]["pc83_solicita"]:$this->pc83_solicita);
+       $this->pc83_sequencial = ($this->pc83_sequencial === 0 || $this->pc83_sequencial === 0.0 || $this->pc83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc83_sequencial"]:$this->pc83_sequencial);
+       $this->pc83_liberafornecedor = ($this->pc83_liberafornecedor === 0 || $this->pc83_liberafornecedor === 0.0 || $this->pc83_liberafornecedor == ""?@$GLOBALS["HTTP_POST_VARS"]["pc83_liberafornecedor"]:$this->pc83_liberafornecedor);
+       $this->pc83_solicita = ($this->pc83_solicita === 0 || $this->pc83_solicita === 0.0 || $this->pc83_solicita == ""?@$GLOBALS["HTTP_POST_VARS"]["pc83_solicita"]:$this->pc83_solicita);
      }else{
-       $this->pc83_sequencial = ($this->pc83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc83_sequencial"]:$this->pc83_sequencial);
+       $this->pc83_sequencial = ($this->pc83_sequencial === 0 || $this->pc83_sequencial === 0.0 || $this->pc83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc83_sequencial"]:$this->pc83_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_liberafornecedorsol {
          $this->pc83_sequencial = $pc83_sequencial; 
        }
      }
-     if(($this->pc83_sequencial == null) || ($this->pc83_sequencial == "") ){ 
+     if(($this->pc83_sequencial == null) || ($this->pc83_sequencial === 0 || $this->pc83_sequencial === 0.0 || $this->pc83_sequencial == "") ){ 
        $this->erro_sql = " Campo pc83_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_liberafornecedorsol {
    function sql_query ( $pc83_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_liberafornecedorsol {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_liberafornecedorsol {
    function sql_query_file ( $pc83_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_liberafornecedorsol {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

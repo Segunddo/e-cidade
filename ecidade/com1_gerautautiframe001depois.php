@@ -101,7 +101,7 @@ $db_botao = true;
 $gerautori = "";
 if (isset ($incluir)) {
 	$gerautori = "";
-	$valor = split(",", $valores);
+	$valor = preg_split("#,#m", $valores);
 	// arrays para dados do empautoriza
 	$arr_vals = Array ();
 	$arr_cgms = Array ();
@@ -127,7 +127,7 @@ if (isset ($incluir)) {
 		$e54_emiss = date("Y-m-d", db_getsession("DB_datausu"));
 		$e54_instit = db_getsession("DB_instit");
 
-		$splitei = split("_", $valor[$i]);
+		$splitei = preg_split("#_#m", $valor[$i]);
 		$pc81_codprocitem = $splitei[2];
 		$pc22_orcamitem = $splitei[3];
 		$pc23_orcamforne = $splitei[4];
@@ -244,9 +244,9 @@ if (isset ($incluir)) {
 				break;
 			}
 			if ($sqlerro == false) {
-				$arr_item = split(",", $arr_proc[$arr_help[$i]]);
+				$arr_item = preg_split("#,#m", $arr_proc[$arr_help[$i]]);
 				for ($iii = 0; $iii < sizeof($arr_item); $iii ++) {
-					$arr_daditem = split("_", $arr_item[$iii]);
+					$arr_daditem = preg_split("#_#m", $arr_item[$iii]);
 					$e55_sequen = $arr_daditem[0];
 					$e55_quant = $arr_daditem[1];
 					$e55_vltot = $arr_daditem[2];
@@ -790,8 +790,8 @@ if ($numrows_itens == 0) {
 		db_fieldsmemory($result, 0);
 
 		$valdisp = 'valdisp_'.$contador;
-		$$valdisp = (0 + $atual_menos_reservado) + $saldodotacoes[$pc13_coddot];
-		$valtesta = $$valdisp;
+		${$valdisp} = (0 + $atual_menos_reservado) + $saldodotacoes[$pc13_coddot];
+		$valtesta = ${$valdisp};
 		if ($dot_ant != $pc13_coddot) {
 			$testatot = 0;
 		}
@@ -801,7 +801,7 @@ if ($numrows_itens == 0) {
 				echo "  <td nowrap colspan='12'align='left'><strong>&nbsp;</strong></td>\n";
 				echo "<tr>\n";
 			}
-			$$valdisp = db_formatar($$valdisp, "v");
+			${$valdisp} = db_formatar(${$valdisp}, "v");
 			echo "</tr>\n";
 			echo "  <td nowrap colspan='1' class='bordas' align='center' title='Marcar apenas itens da $contador&ordf; autorização'><strong>";
 			db_ancora("A", "js_marcaautoriza('". ($contador)."');", 1);
@@ -811,8 +811,8 @@ if ($numrows_itens == 0) {
 			db_input('valdisp_'.$contador, 12, 0, true, 'text', 3);
 			echo "</td>\n";
 			echo "</tr>\n";
-			$$valdisp = str_replace(".", "", $$valdisp);
-			$$valdisp = str_replace(",", ".", $$valdisp);
+			${$valdisp} = str_replace(".", "", ${$valdisp});
+			${$valdisp} = str_replace(",", ".", ${$valdisp});
 			$dot_ant = $pc13_coddot;
 			$forn_ant = $z01_numcgm;
 			$codele_ant = $pc18_codele;

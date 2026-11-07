@@ -60,7 +60,7 @@ class cl_ouvidoriaatendimentoretornotelefone {
                  ov14_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_ouvidoriaatendimentoretornotelefone() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ouvidoriaatendimentoretornotelefone"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_ouvidoriaatendimentoretornotelefone {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov14_sequencial = ($this->ov14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_sequencial"]:$this->ov14_sequencial);
-       $this->ov14_ouvidoriaatendimento = ($this->ov14_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_ouvidoriaatendimento"]:$this->ov14_ouvidoriaatendimento);
+       $this->ov14_sequencial = ($this->ov14_sequencial === 0 || $this->ov14_sequencial === 0.0 || $this->ov14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_sequencial"]:$this->ov14_sequencial);
+       $this->ov14_ouvidoriaatendimento = ($this->ov14_ouvidoriaatendimento === 0 || $this->ov14_ouvidoriaatendimento === 0.0 || $this->ov14_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_ouvidoriaatendimento"]:$this->ov14_ouvidoriaatendimento);
        $this->ov14_numero = ($this->ov14_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_numero"]:$this->ov14_numero);
-       $this->ov14_tipotelefone = ($this->ov14_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_tipotelefone"]:$this->ov14_tipotelefone);
+       $this->ov14_tipotelefone = ($this->ov14_tipotelefone === 0 || $this->ov14_tipotelefone === 0.0 || $this->ov14_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_tipotelefone"]:$this->ov14_tipotelefone);
        $this->ov14_ddd = ($this->ov14_ddd == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_ddd"]:$this->ov14_ddd);
        $this->ov14_ramal = ($this->ov14_ramal == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_ramal"]:$this->ov14_ramal);
        $this->ov14_obs = ($this->ov14_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_obs"]:$this->ov14_obs);
      }else{
-       $this->ov14_sequencial = ($this->ov14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_sequencial"]:$this->ov14_sequencial);
+       $this->ov14_sequencial = ($this->ov14_sequencial === 0 || $this->ov14_sequencial === 0.0 || $this->ov14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_sequencial"]:$this->ov14_sequencial);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_ouvidoriaatendimentoretornotelefone {
          $this->ov14_sequencial = $ov14_sequencial; 
        }
      }
-     if(($this->ov14_sequencial == null) || ($this->ov14_sequencial == "") ){ 
+     if(($this->ov14_sequencial == null) || ($this->ov14_sequencial === 0 || $this->ov14_sequencial === 0.0 || $this->ov14_sequencial == "") ){ 
        $this->erro_sql = " Campo ov14_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -436,7 +436,7 @@ class cl_ouvidoriaatendimentoretornotelefone {
    function sql_query ( $ov14_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -465,7 +465,7 @@ class cl_ouvidoriaatendimentoretornotelefone {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -478,7 +478,7 @@ class cl_ouvidoriaatendimentoretornotelefone {
    function sql_query_file ( $ov14_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_ouvidoriaatendimentoretornotelefone {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

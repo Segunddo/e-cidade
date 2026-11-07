@@ -54,7 +54,8 @@ $cldb_depart->rotulo->label();
 $clrotulo->label("t64_class");
 //classificação
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 
@@ -603,7 +604,7 @@ for ($x = 0; $x<$numrows; $x++) {
   } else {
 //    if ($flag_todos == 1) {
       if ($depto_ant!=$t52_depart) {
-      	
+
       	 $sQueryOrgao  = "select db01_orgao,
                           db01_unidade,
                           o40_descr,
@@ -616,7 +617,7 @@ for ($x = 0; $x<$numrows; $x++) {
                                           and db01_anousu  = o41_anousu  
                     where db01_coddepto in ($t52_depart) 
                       and db01_anousu   = ".db_getsession("DB_anousu");
-		   
+
 		   	$resQueryOrgao = db_query($sQueryOrgao);
 		   	if(pg_num_rows($resQueryOrgao)>0){
 		   		db_fieldsmemory($resQueryOrgao,0);
@@ -677,11 +678,11 @@ for ($x = 0; $x<$numrows; $x++) {
         $pdf->cell(20, $alt,"Definição",1,0,"C",1);
         $pdf->cell(30, $alt,"Bem",1,1,"C",1);
         //$pdf->cell(15,$alt,"Pl. Indent.",1,1,"C",1);
-        
+
         if ($opcao_obs == "S") {
           $pdf->cell((195-$cols),$alt,"Características adicionais do bem",1,1,"L",1);
         }
-        
+
         $pdf->setfont('arial','b',7);
         $pdf->cell((195-$cols),$alt,$t64_class.' - '.$t64_descr,"T",1,"L",0);
       }

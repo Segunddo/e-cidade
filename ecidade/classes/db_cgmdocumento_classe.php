@@ -52,7 +52,7 @@ class cl_cgmdocumento {
                  z06_numcgm = int4 = CGM 
                  ";
    //funcao construtor da classe 
-   function cl_cgmdocumento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgmdocumento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_cgmdocumento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z06_sequencial = ($this->z06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z06_sequencial"]:$this->z06_sequencial);
-       $this->z06_documento = ($this->z06_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["z06_documento"]:$this->z06_documento);
-       $this->z06_numcgm = ($this->z06_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z06_numcgm"]:$this->z06_numcgm);
+       $this->z06_sequencial = ($this->z06_sequencial === 0 || $this->z06_sequencial === 0.0 || $this->z06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z06_sequencial"]:$this->z06_sequencial);
+       $this->z06_documento = ($this->z06_documento === 0 || $this->z06_documento === 0.0 || $this->z06_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["z06_documento"]:$this->z06_documento);
+       $this->z06_numcgm = ($this->z06_numcgm === 0 || $this->z06_numcgm === 0.0 || $this->z06_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z06_numcgm"]:$this->z06_numcgm);
      }else{
-       $this->z06_sequencial = ($this->z06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z06_sequencial"]:$this->z06_sequencial);
+       $this->z06_sequencial = ($this->z06_sequencial === 0 || $this->z06_sequencial === 0.0 || $this->z06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z06_sequencial"]:$this->z06_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cgmdocumento {
          $this->z06_sequencial = $z06_sequencial; 
        }
      }
-     if(($this->z06_sequencial == null) || ($this->z06_sequencial == "") ){ 
+     if(($this->z06_sequencial == null) || ($this->z06_sequencial === 0 || $this->z06_sequencial === 0.0 || $this->z06_sequencial == "") ){ 
        $this->erro_sql = " Campo z06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_cgmdocumento {
    function sql_query ( $z06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_cgmdocumento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_cgmdocumento {
    function sql_query_file ( $z06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_cgmdocumento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

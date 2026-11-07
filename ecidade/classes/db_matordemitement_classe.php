@@ -62,7 +62,7 @@ class cl_matordemitement {
                  m54_codmatunid = int8 = Código da unidade 
                  ";
    //funcao construtor da classe 
-   function cl_matordemitement() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matordemitement"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_matordemitement {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m54_sequencial = ($this->m54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_sequencial"]:$this->m54_sequencial);
-       $this->m54_codmatordemitem = ($this->m54_codmatordemitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_codmatordemitem"]:$this->m54_codmatordemitem);
-       $this->m54_codpcmater = ($this->m54_codpcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_codpcmater"]:$this->m54_codpcmater);
-       $this->m54_codmatmater = ($this->m54_codmatmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_codmatmater"]:$this->m54_codmatmater);
-       $this->m54_quantidade = ($this->m54_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_quantidade"]:$this->m54_quantidade);
-       $this->m54_valor_unitario = ($this->m54_valor_unitario == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_valor_unitario"]:$this->m54_valor_unitario);
-       $this->m54_quantmulti = ($this->m54_quantmulti == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_quantmulti"]:$this->m54_quantmulti);
-       $this->m54_codmatunid = ($this->m54_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_codmatunid"]:$this->m54_codmatunid);
+       $this->m54_sequencial = ($this->m54_sequencial === 0 || $this->m54_sequencial === 0.0 || $this->m54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_sequencial"]:$this->m54_sequencial);
+       $this->m54_codmatordemitem = ($this->m54_codmatordemitem === 0 || $this->m54_codmatordemitem === 0.0 || $this->m54_codmatordemitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_codmatordemitem"]:$this->m54_codmatordemitem);
+       $this->m54_codpcmater = ($this->m54_codpcmater === 0 || $this->m54_codpcmater === 0.0 || $this->m54_codpcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_codpcmater"]:$this->m54_codpcmater);
+       $this->m54_codmatmater = ($this->m54_codmatmater === 0 || $this->m54_codmatmater === 0.0 || $this->m54_codmatmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_codmatmater"]:$this->m54_codmatmater);
+       $this->m54_quantidade = ($this->m54_quantidade === 0 || $this->m54_quantidade === 0.0 || $this->m54_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_quantidade"]:$this->m54_quantidade);
+       $this->m54_valor_unitario = ($this->m54_valor_unitario === 0 || $this->m54_valor_unitario === 0.0 || $this->m54_valor_unitario == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_valor_unitario"]:$this->m54_valor_unitario);
+       $this->m54_quantmulti = ($this->m54_quantmulti === 0 || $this->m54_quantmulti === 0.0 || $this->m54_quantmulti == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_quantmulti"]:$this->m54_quantmulti);
+       $this->m54_codmatunid = ($this->m54_codmatunid === 0 || $this->m54_codmatunid === 0.0 || $this->m54_codmatunid == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_codmatunid"]:$this->m54_codmatunid);
      }else{
-       $this->m54_sequencial = ($this->m54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_sequencial"]:$this->m54_sequencial);
+       $this->m54_sequencial = ($this->m54_sequencial === 0 || $this->m54_sequencial === 0.0 || $this->m54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m54_sequencial"]:$this->m54_sequencial);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_matordemitement {
          $this->m54_sequencial = $m54_sequencial; 
        }
      }
-     if(($this->m54_sequencial == null) || ($this->m54_sequencial == "") ){ 
+     if(($this->m54_sequencial == null) || ($this->m54_sequencial === 0 || $this->m54_sequencial === 0.0 || $this->m54_sequencial == "") ){ 
        $this->erro_sql = " Campo m54_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -514,7 +514,7 @@ class cl_matordemitement {
    function sql_query ( $m54_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -543,7 +543,7 @@ class cl_matordemitement {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -555,7 +555,7 @@ class cl_matordemitement {
    function sql_query_file ( $m54_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -576,7 +576,7 @@ class cl_matordemitement {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

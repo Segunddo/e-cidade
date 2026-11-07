@@ -52,7 +52,7 @@ class cl_pctipocertifdepartamento {
                  pc34_coddepto = int4 = Departamento 
                  ";
    //funcao construtor da classe 
-   function cl_pctipocertifdepartamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pctipocertifdepartamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_pctipocertifdepartamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc34_sequencial = ($this->pc34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc34_sequencial"]:$this->pc34_sequencial);
-       $this->pc34_pctipocertif = ($this->pc34_pctipocertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc34_pctipocertif"]:$this->pc34_pctipocertif);
-       $this->pc34_coddepto = ($this->pc34_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc34_coddepto"]:$this->pc34_coddepto);
+       $this->pc34_sequencial = ($this->pc34_sequencial === 0 || $this->pc34_sequencial === 0.0 || $this->pc34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc34_sequencial"]:$this->pc34_sequencial);
+       $this->pc34_pctipocertif = ($this->pc34_pctipocertif === 0 || $this->pc34_pctipocertif === 0.0 || $this->pc34_pctipocertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc34_pctipocertif"]:$this->pc34_pctipocertif);
+       $this->pc34_coddepto = ($this->pc34_coddepto === 0 || $this->pc34_coddepto === 0.0 || $this->pc34_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc34_coddepto"]:$this->pc34_coddepto);
      }else{
-       $this->pc34_sequencial = ($this->pc34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc34_sequencial"]:$this->pc34_sequencial);
+       $this->pc34_sequencial = ($this->pc34_sequencial === 0 || $this->pc34_sequencial === 0.0 || $this->pc34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc34_sequencial"]:$this->pc34_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_pctipocertifdepartamento {
          $this->pc34_sequencial = $pc34_sequencial; 
        }
      }
-     if(($this->pc34_sequencial == null) || ($this->pc34_sequencial == "") ){ 
+     if(($this->pc34_sequencial == null) || ($this->pc34_sequencial === 0 || $this->pc34_sequencial === 0.0 || $this->pc34_sequencial == "") ){ 
        $this->erro_sql = " Campo pc34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_pctipocertifdepartamento {
    function sql_query ( $pc34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_pctipocertifdepartamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_pctipocertifdepartamento {
    function sql_query_file ( $pc34_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_pctipocertifdepartamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

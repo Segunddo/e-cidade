@@ -60,7 +60,7 @@ class cl_veicparam {
                  ve50_integrapessoal = int4 = Integração com módulo Pessoal 
                  ";
    //funcao construtor da classe 
-   function cl_veicparam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veicparam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_veicparam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve50_codigo = ($this->ve50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_codigo"]:$this->ve50_codigo);
-       $this->ve50_instit = ($this->ve50_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_instit"]:$this->ve50_instit);
-       $this->ve50_veiccadtipo = ($this->ve50_veiccadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_veiccadtipo"]:$this->ve50_veiccadtipo);
-       $this->ve50_veiccadcategcnh = ($this->ve50_veiccadcategcnh == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_veiccadcategcnh"]:$this->ve50_veiccadcategcnh);
-       $this->ve50_integrapatri = ($this->ve50_integrapatri == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_integrapatri"]:$this->ve50_integrapatri);
-       $this->ve50_postoproprio = ($this->ve50_postoproprio == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_postoproprio"]:$this->ve50_postoproprio);
-       $this->ve50_integrapessoal = ($this->ve50_integrapessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_integrapessoal"]:$this->ve50_integrapessoal);
+       $this->ve50_codigo = ($this->ve50_codigo === 0 || $this->ve50_codigo === 0.0 || $this->ve50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_codigo"]:$this->ve50_codigo);
+       $this->ve50_instit = ($this->ve50_instit === 0 || $this->ve50_instit === 0.0 || $this->ve50_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_instit"]:$this->ve50_instit);
+       $this->ve50_veiccadtipo = ($this->ve50_veiccadtipo === 0 || $this->ve50_veiccadtipo === 0.0 || $this->ve50_veiccadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_veiccadtipo"]:$this->ve50_veiccadtipo);
+       $this->ve50_veiccadcategcnh = ($this->ve50_veiccadcategcnh === 0 || $this->ve50_veiccadcategcnh === 0.0 || $this->ve50_veiccadcategcnh == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_veiccadcategcnh"]:$this->ve50_veiccadcategcnh);
+       $this->ve50_integrapatri = ($this->ve50_integrapatri === 0 || $this->ve50_integrapatri === 0.0 || $this->ve50_integrapatri == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_integrapatri"]:$this->ve50_integrapatri);
+       $this->ve50_postoproprio = ($this->ve50_postoproprio === 0 || $this->ve50_postoproprio === 0.0 || $this->ve50_postoproprio == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_postoproprio"]:$this->ve50_postoproprio);
+       $this->ve50_integrapessoal = ($this->ve50_integrapessoal === 0 || $this->ve50_integrapessoal === 0.0 || $this->ve50_integrapessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_integrapessoal"]:$this->ve50_integrapessoal);
      }else{
-       $this->ve50_codigo = ($this->ve50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_codigo"]:$this->ve50_codigo);
+       $this->ve50_codigo = ($this->ve50_codigo === 0 || $this->ve50_codigo === 0.0 || $this->ve50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve50_codigo"]:$this->ve50_codigo);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_veicparam {
          $this->ve50_codigo = $ve50_codigo; 
        }
      }
-     if(($this->ve50_codigo == null) || ($this->ve50_codigo == "") ){ 
+     if(($this->ve50_codigo == null) || ($this->ve50_codigo === 0 || $this->ve50_codigo === 0.0 || $this->ve50_codigo == "") ){ 
        $this->erro_sql = " Campo ve50_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -483,7 +483,7 @@ class cl_veicparam {
    function sql_query ( $ve50_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -508,7 +508,7 @@ class cl_veicparam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_veicparam {
    function sql_query_file ( $ve50_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -541,7 +541,7 @@ class cl_veicparam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

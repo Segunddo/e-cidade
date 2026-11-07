@@ -52,7 +52,7 @@ class cl_veiccadconveniocgm {
                  ve18_veiccadconvenio = int4 = Convênio 
                  ";
    //funcao construtor da classe 
-   function cl_veiccadconveniocgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veiccadconveniocgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_veiccadconveniocgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve18_sequencial = ($this->ve18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve18_sequencial"]:$this->ve18_sequencial);
-       $this->ve18_numcgm = ($this->ve18_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ve18_numcgm"]:$this->ve18_numcgm);
-       $this->ve18_veiccadconvenio = ($this->ve18_veiccadconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["ve18_veiccadconvenio"]:$this->ve18_veiccadconvenio);
+       $this->ve18_sequencial = ($this->ve18_sequencial === 0 || $this->ve18_sequencial === 0.0 || $this->ve18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve18_sequencial"]:$this->ve18_sequencial);
+       $this->ve18_numcgm = ($this->ve18_numcgm === 0 || $this->ve18_numcgm === 0.0 || $this->ve18_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ve18_numcgm"]:$this->ve18_numcgm);
+       $this->ve18_veiccadconvenio = ($this->ve18_veiccadconvenio === 0 || $this->ve18_veiccadconvenio === 0.0 || $this->ve18_veiccadconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["ve18_veiccadconvenio"]:$this->ve18_veiccadconvenio);
      }else{
-       $this->ve18_sequencial = ($this->ve18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve18_sequencial"]:$this->ve18_sequencial);
+       $this->ve18_sequencial = ($this->ve18_sequencial === 0 || $this->ve18_sequencial === 0.0 || $this->ve18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve18_sequencial"]:$this->ve18_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veiccadconveniocgm {
          $this->ve18_sequencial = $ve18_sequencial; 
        }
      }
-     if(($this->ve18_sequencial == null) || ($this->ve18_sequencial == "") ){ 
+     if(($this->ve18_sequencial == null) || ($this->ve18_sequencial === 0 || $this->ve18_sequencial === 0.0 || $this->ve18_sequencial == "") ){ 
        $this->erro_sql = " Campo ve18_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_veiccadconveniocgm {
    function sql_query ( $ve18_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_veiccadconveniocgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_veiccadconveniocgm {
    function sql_query_file ( $ve18_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_veiccadconveniocgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -74,7 +74,7 @@ class cl_ppadotacao {
                  o08_concarpeculiar = varchar(100) = C.Peculiar/ C. Aplicação
                  ";
   //funcao construtor da classe
-  function cl_ppadotacao() {
+  function __construct() {
     //classes dos rotulos dos campos
     $this->rotulo = new rotulo("ppadotacao");
     $this->pagina_retorno = basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -91,30 +91,30 @@ class cl_ppadotacao {
   // funcao para atualizar campos
   function atualizacampos($exclusao = false) {
     if ($exclusao == false) {
-      $this->o08_sequencial = ($this->o08_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_sequencial"]
+      $this->o08_sequencial = ($this->o08_sequencial === 0 || $this->o08_sequencial === 0.0 || $this->o08_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_sequencial"]
           : $this->o08_sequencial);
-      $this->o08_ano = ($this->o08_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_ano"] : $this->o08_ano);
-      $this->o08_orgao = ($this->o08_orgao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_orgao"] : $this->o08_orgao);
-      $this->o08_unidade = ($this->o08_unidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_unidade"] : $this->o08_unidade);
-      $this->o08_funcao = ($this->o08_funcao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_funcao"] : $this->o08_funcao);
-      $this->o08_subfuncao = ($this->o08_subfuncao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_subfuncao"]
+      $this->o08_ano = ($this->o08_ano === 0 || $this->o08_ano === 0.0 || $this->o08_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_ano"] : $this->o08_ano);
+      $this->o08_orgao = ($this->o08_orgao === 0 || $this->o08_orgao === 0.0 || $this->o08_orgao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_orgao"] : $this->o08_orgao);
+      $this->o08_unidade = ($this->o08_unidade === 0 || $this->o08_unidade === 0.0 || $this->o08_unidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_unidade"] : $this->o08_unidade);
+      $this->o08_funcao = ($this->o08_funcao === 0 || $this->o08_funcao === 0.0 || $this->o08_funcao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_funcao"] : $this->o08_funcao);
+      $this->o08_subfuncao = ($this->o08_subfuncao === 0 || $this->o08_subfuncao === 0.0 || $this->o08_subfuncao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_subfuncao"]
           : $this->o08_subfuncao);
-      $this->o08_programa = ($this->o08_programa == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_programa"]
+      $this->o08_programa = ($this->o08_programa === 0 || $this->o08_programa === 0.0 || $this->o08_programa == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_programa"]
           : $this->o08_programa);
-      $this->o08_projativ = ($this->o08_projativ == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_projativ"]
+      $this->o08_projativ = ($this->o08_projativ === 0 || $this->o08_projativ === 0.0 || $this->o08_projativ == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_projativ"]
           : $this->o08_projativ);
-      $this->o08_elemento = ($this->o08_elemento == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_elemento"]
+      $this->o08_elemento = ($this->o08_elemento === 0 || $this->o08_elemento === 0.0 || $this->o08_elemento == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_elemento"]
           : $this->o08_elemento);
-      $this->o08_recurso = ($this->o08_recurso == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_recurso"] : $this->o08_recurso);
-      $this->o08_instit = ($this->o08_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_instit"] : $this->o08_instit);
-      $this->o08_localizadorgastos = ($this->o08_localizadorgastos == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_localizadorgastos"]
+      $this->o08_recurso = ($this->o08_recurso === 0 || $this->o08_recurso === 0.0 || $this->o08_recurso == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_recurso"] : $this->o08_recurso);
+      $this->o08_instit = ($this->o08_instit === 0 || $this->o08_instit === 0.0 || $this->o08_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_instit"] : $this->o08_instit);
+      $this->o08_localizadorgastos = ($this->o08_localizadorgastos === 0 || $this->o08_localizadorgastos === 0.0 || $this->o08_localizadorgastos == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_localizadorgastos"]
           : $this->o08_localizadorgastos);
-      $this->o08_ppaversao = ($this->o08_ppaversao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_ppaversao"]
+      $this->o08_ppaversao = ($this->o08_ppaversao === 0 || $this->o08_ppaversao === 0.0 || $this->o08_ppaversao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_ppaversao"]
           : $this->o08_ppaversao);
       $this->o08_concarpeculiar = ($this->o08_concarpeculiar == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_concarpeculiar"]
           : $this->o08_concarpeculiar);
     } else {
-      $this->o08_sequencial = ($this->o08_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_sequencial"]
+      $this->o08_sequencial = ($this->o08_sequencial === 0 || $this->o08_sequencial === 0.0 || $this->o08_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_sequencial"]
           : $this->o08_sequencial);
     }
   }
@@ -270,7 +270,7 @@ class cl_ppadotacao {
         $this->o08_sequencial = $o08_sequencial;
       }
     }
-    if (($this->o08_sequencial == null) || ($this->o08_sequencial == "")) {
+    if (($this->o08_sequencial == null) || ($this->o08_sequencial === 0 || $this->o08_sequencial === 0.0 || $this->o08_sequencial == "")) {
       $this->erro_sql = " Campo o08_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -658,7 +658,7 @@ class cl_ppadotacao {
   function sql_query($o08_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "") {
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -696,7 +696,7 @@ class cl_ppadotacao {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -709,7 +709,7 @@ class cl_ppadotacao {
   function sql_query_file($o08_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "") {
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -730,7 +730,7 @@ class cl_ppadotacao {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -753,7 +753,7 @@ class cl_ppadotacao {
     $sql = "select ";
     if ($campos != "*") {
 
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
 
@@ -791,7 +791,7 @@ class cl_ppadotacao {
     if ($ordem != null) {
 
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -803,7 +803,7 @@ class cl_ppadotacao {
   function sql_query_estimativa($o08_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "") {
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -842,7 +842,7 @@ class cl_ppadotacao {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -855,7 +855,7 @@ class cl_ppadotacao {
   function sql_query_despesa_ppa($o08_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "") {
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -880,7 +880,7 @@ class cl_ppadotacao {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -893,7 +893,7 @@ class cl_ppadotacao {
   function sql_query_despesa_programa($o08_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "") {
     $sql = "select ";
     if ($campos != "*") {
-      $campos_sql = split("#", $campos);
+      $campos_sql = preg_split("#\\##m", $campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];
@@ -920,7 +920,7 @@ class cl_ppadotacao {
     $sql .= $sql2;
     if ($ordem != null) {
       $sql .= " order by ";
-      $campos_sql = split("#", $ordem);
+      $campos_sql = preg_split("#\\##m", $ordem);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         $sql .= $virgula . $campos_sql[$i];

@@ -57,10 +57,24 @@ python3 scratchpad/enumera.py <prefixo>      # gera tmp/<pref>_universo.txt e _a
 ls | grep -icE '^<prefixo>[0-9]*_.*\.php$'   # DEVE bater com "telas" do enumerador
 ```
 
-O enumerador cobre as **sete frentes** (prefixo, includes transitivos, nomes citados em
+O enumerador cobre **nove frentes** (prefixo, includes transitivos, nomes citados em
 strings que o JavaScript abre, autoload — `new cl_*` **e** `db_utils::getDao('x')` —,
-bibliotecas vendorizadas, pasta inteira da lib). Cada uma nasceu de uma lacuna que deixou
-arquivo sem porte.
+bibliotecas vendorizadas, pasta inteira da lib, classes de `model/`/`std/` por nome curto, e
+**classes com namespace**: `use ECidade\…;`, `new \ECidade\…` e os serviços que o `bootstrap.php`
+registra por chave de texto, resolvidos em `src/`/`app/`/`api/` por `scratchpad/ns_fecho.py`).
+Cada uma nasceu de uma lacuna que deixou arquivo sem porte. A 9ª (15ª lacuna) faz o universo
+crescer bastante, porque o fecho segue de `src/` até `classes/`: no lote 1 de Patrimonial ele foi
+de 1.727 para 2.801 arquivos.
+
+Arquivos de `src/`/`app/` têm duas armadilhas próprias, as duas medidas:
+- **o `php -l` não basta**: a classe filha pode não *carregar* no 8.5 por assinatura incompatível
+  com a mãe em outro arquivo (LSP). Rode `scratchpad/carrega_arquivo.php` nos dois runtimes sobre os
+  que têm `extends`/`implements`, e compare só o que dá OK no 5.6 e falha no 8.5;
+- **método homônimo em classe com namespace não é construtor**, nem no 5.6 (PHP 5.3.3). Não renomeie.
+
+Para medir uma lacuna nova retroativamente: `TELAS=@arquivo` aceita a lista de partida (ex.: tudo o
+que o 8.5 serve), e `SEM_NS=1` desliga a 9ª frente. Compare os alvos com e sem, e passe o
+`conta_tokens.php` só na diferença. O detector por bytes casa com a própria guarda.
 
 **Variantes de prefixo matam o porte em silêncio.** Já aconteceu três vezes:
 
@@ -282,6 +296,47 @@ tocar no banco. Divergência significa que o 5.6 lê o valor do formulário e o 
 Atenção ao literal: além de `== ""` existe `== "f"` e `== " "`. Qualquer literal
 **não-numérico** tem o mesmo defeito, porque o 5.6 o coagia para 0.
 
+### Passo 6c — a forma NEGADA `$this->x != ""` (o Rector não cobre)
+
+O `GuardaComparacaoLiteralRector` só trata `==`. A forma `!=` com propriedade inteira e **sem
+`trim()`** está sobretudo no bloco de auditoria do `alterar()`:
+
+```php
+if (isset($GLOBALS["HTTP_POST_VARS"]["x"]) || $this->x != "")   // 5.6: 0 != "" falso; 8.5: verdadeiro
+    insert into db_acount (...)                                  // o 8.5 grava uma alteracao para 0
+```
+
+O padrão aparece milhares de vezes, mas só muda resultado quando a propriedade ainda vale o
+inteiro `0` na comparação. Normalmente o `atualizacampos()` já troca o `0` de campo ausente pelo
+`null` do POST. Por isso **meça antes de corrigir**, com duas peças:
+
+```bash
+python3 scratchpad/negada_alvos.py tmp/negada.tsv   # estatico: classe, campo, metodo, modo do atualizacampos, auditoria/negocio
+cut -f1 ecidade/tmp/negada.tsv | sort -u > ecidade/tmp/negada_cls.txt
+for v in 56 85; do
+  docker cp scratchpad/negada.php ecidade_php$v:/tmp/negada.php
+  # UM arquivo temporario POR RUNTIME: o /tmp e compartilhado entre os containers, e um
+  # nome comum fez os dois lacos se sobrescreverem (metade das linhas sumiu de um lado)
+  docker exec -i -e V=$v ecidade_php$v sh -c 'cd /var/www/html; while read c; do
+      grep -F "$(printf "%s\t" "$c")" tmp/negada.tsv > /tmp/_neg_$V.tsv
+      php -d display_errors=0 /tmp/negada.php /tmp/_neg_$V.tsv 2>/dev/null </dev/null; done' \
+    < ecidade/tmp/negada_cls.txt > /tmp/neg_$v.txt
+done
+```
+
+Compare as duas saídas pela chave (classe, campo, método) e separe:
+- **valor diferente** (5.6 `NULL`, 8.5 `0`): falta a guarda do `==` no `atualizacampos()`, então a
+  classe não está portada. Se ela estiver no universo do lote, é falha do passo 4;
+- **mesmo valor `0`, resultado diferente**: é a forma negada. Corrija **só esses pontos**, só
+  dentro do método medido, com `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)`, e rode o
+  `negada_alvos.py` de novo. Ele ignora a ocorrência já guardada, então os pontos corrigidos têm
+  de sumir.
+
+O `negada.php` mede o **estado** (`valor != ""`), não executa o código corrigido. Depois de
+corrigir, ele continua acusando, e quem confirma é o `negada_alvos.py`. Medido em 27/10/2026:
+7.367 pares, 89 da forma negada, **74 em 28 classes servidas, todos de auditoria**. As classes
+que um lote novo trouxer para o universo servido precisam passar por isto.
+
 ### Nível 3: POST real (dirigido, não em bateria)
 
 Quando o passo 6b apontar uma classe com campo inteiro não-chave, vale confirmar com um `POST`
@@ -405,7 +460,8 @@ outro prefixo.
 # GET no 8.5 de cada tela de menu da area (e das abas ja roteadas: segundo salto),
 # classificando cada iframe/redirecionamento pelo mesmo criterio do nginx
 python3 scratchpad/redirecionamentos.py <SID> /tmp/redir.tsv TRIBUT,EDUCA,RECURSOS,<NOVA_AREA>
-awk -F'\t' '$1=="NO_5.6" && $4!="corpo.php"' /tmp/redir.tsv   # TEM de sair vazio
+# grep e nao awk de proposito: o carregador da skill troca cifrao+numero pelos argumentos
+grep -P '^NO_5\.6\t' /tmp/redir.tsv | grep -vP '\t(corpo|db_erros)\.php\t'   # TEM de sair vazio
 ```
 
 Para cada linha `NO_5.6`:
@@ -427,7 +483,9 @@ Para cada linha `NO_5.6`:
    Ponha na lista só o destino direto. Depois de rotear, **rode o levantamento de novo**: ele
    abre as telas já roteadas e acusa o segundo salto (as abas do contêiner), se ficou algum.
 3. **`corpo.php`** é o "voltar ao início" depois de erro ou de configuração ausente
-   (`numpref` não configurado, rotina desativada). Não é lacuna.
+   (`numpref` não configurado, rotina desativada), e **`db_erros.php?db_erro=…`** é a página
+   genérica de mensagem de erro (dois `lic1_*` caem nela por configuração ausente na base). Não
+   são formulário nem lacuna.
 4. **pasta** (`dbforms/…`) e **inexistente** não são lacuna. O proxy não roteia por pasta, e o
    `/tmp` compartilhado resolve. Ignore.
 

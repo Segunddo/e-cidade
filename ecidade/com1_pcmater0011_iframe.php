@@ -70,7 +70,7 @@ if ($clorcparametro->numrows >0){
   // parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
   // se usa subelemento ...
   // $o50_subelem='t';
-  $arr = split("XX",@$codele);
+  $arr = preg_split("#XX#m",@$codele);
   $nexclui = false;
   if(isset($o50_subelem) && ($o50_subelem=="t")){
     $result = $clpcsubgrupo->sql_record($clpcsubgrupo->sql_query_orcelement(null,
@@ -184,7 +184,7 @@ if ($clorcparametro->numrows >0){
                }
 			echo ">
 		     </td>
-			
+
     	             <td>$o56_codele    $nada</td>	    
 	                 <td>$o56_elemento</td>	    
                      <td>$o56_descr</td>

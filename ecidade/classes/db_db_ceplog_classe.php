@@ -60,7 +60,7 @@ class cl_db_ceplog {
                  db11_cep = varchar(8) = Cep 
                  ";
    //funcao construtor da classe 
-   function cl_db_ceplog() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_ceplog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_db_ceplog {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db11_codlog = ($this->db11_codlog == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codlog"]:$this->db11_codlog);
-       $this->db11_codigo = ($this->db11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codigo"]:$this->db11_codigo);
+       $this->db11_codlog = ($this->db11_codlog === 0 || $this->db11_codlog === 0.0 || $this->db11_codlog == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codlog"]:$this->db11_codlog);
+       $this->db11_codigo = ($this->db11_codigo === 0 || $this->db11_codigo === 0.0 || $this->db11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codigo"]:$this->db11_codigo);
        $this->db11_tipo = ($this->db11_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_tipo"]:$this->db11_tipo);
        $this->db11_logradouro = ($this->db11_logradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_logradouro"]:$this->db11_logradouro);
        $this->db11_logsemacento = ($this->db11_logsemacento == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_logsemacento"]:$this->db11_logsemacento);
        $this->db11_bairro = ($this->db11_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_bairro"]:$this->db11_bairro);
        $this->db11_cep = ($this->db11_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_cep"]:$this->db11_cep);
      }else{
-       $this->db11_codlog = ($this->db11_codlog == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codlog"]:$this->db11_codlog);
+       $this->db11_codlog = ($this->db11_codlog === 0 || $this->db11_codlog === 0.0 || $this->db11_codlog == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codlog"]:$this->db11_codlog);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_db_ceplog {
          $this->db11_codlog = $db11_codlog; 
        }
      }
-     if(($this->db11_codlog == null) || ($this->db11_codlog == "") ){ 
+     if(($this->db11_codlog == null) || ($this->db11_codlog === 0 || $this->db11_codlog === 0.0 || $this->db11_codlog == "") ){ 
        $this->erro_sql = " Campo db11_codlog nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -489,7 +489,7 @@ class cl_db_ceplog {
    function sql_query ( $db11_codlog=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_db_ceplog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_db_ceplog {
    function sql_query_file ( $db11_codlog=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_db_ceplog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -33,7 +33,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 include(modification("classes/db_liclicitemlote_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clliclicitemlote        = new cl_liclicitemlote;
@@ -52,7 +53,7 @@ if (!isset($flag_auto) && trim(@$flag_auto) == ""){
 }
 
 if (isset($incluir)&&trim($incluir)!=""){
-     $vetor_itens = split(",",$l04_liclicitem);
+     $vetor_itens = preg_split("#,#m",$l04_liclicitem);
      $sqlerro     = false;
      $flag_auto   = false;
      $auto_descr  = "";
@@ -118,7 +119,7 @@ if (isset($incluir)&&trim($incluir)!=""){
      if ($flag_auto == true){
           $auto_descr    = "AUTO_LOTE_";
           $sequencial    = 1;
-   
+
           $res_licitacao = $clliclicitemlote->sql_record($clliclicitemlote->sql_query_licitacao(null,"substr(l04_descricao,11,5) as sequencial","l04_codigo desc limit 1","l21_codliclicita = $licitacao and l04_descricao like 'AUTO_LOTE_%'"));
           if ($clliclicitemlote->numrows > 0){
                db_fieldsmemory($res_licitacao,0);

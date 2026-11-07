@@ -36,7 +36,8 @@ require_once(modification("model/CgmFactory.model.php"));
 require_once(modification("model/fornecedor.model.php"));
 require_once(modification("classes/db_empautorizaprocesso_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clempautpresta = new cl_empautpresta;

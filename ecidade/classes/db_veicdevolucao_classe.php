@@ -70,7 +70,7 @@ class cl_veicdevolucao {
                  ve61_medidadevol = float8 = Medida de devolução 
                  ";
    //funcao construtor da classe 
-   function cl_veicdevolucao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veicdevolucao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,9 +87,9 @@ class cl_veicdevolucao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve61_codigo = ($this->ve61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_codigo"]:$this->ve61_codigo);
-       $this->ve61_veicretirada = ($this->ve61_veicretirada == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_veicretirada"]:$this->ve61_veicretirada);
-       $this->ve61_veicmotoristas = ($this->ve61_veicmotoristas == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_veicmotoristas"]:$this->ve61_veicmotoristas);
+       $this->ve61_codigo = ($this->ve61_codigo === 0 || $this->ve61_codigo === 0.0 || $this->ve61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_codigo"]:$this->ve61_codigo);
+       $this->ve61_veicretirada = ($this->ve61_veicretirada === 0 || $this->ve61_veicretirada === 0.0 || $this->ve61_veicretirada == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_veicretirada"]:$this->ve61_veicretirada);
+       $this->ve61_veicmotoristas = ($this->ve61_veicmotoristas === 0 || $this->ve61_veicmotoristas === 0.0 || $this->ve61_veicmotoristas == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_veicmotoristas"]:$this->ve61_veicmotoristas);
        if($this->ve61_datadevol == ""){
          $this->ve61_datadevol_dia = ($this->ve61_datadevol_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_datadevol_dia"]:$this->ve61_datadevol_dia);
          $this->ve61_datadevol_mes = ($this->ve61_datadevol_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_datadevol_mes"]:$this->ve61_datadevol_mes);
@@ -99,7 +99,7 @@ class cl_veicdevolucao {
          }
        }
        $this->ve61_horadevol = ($this->ve61_horadevol == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_horadevol"]:$this->ve61_horadevol);
-       $this->ve61_usuario = ($this->ve61_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_usuario"]:$this->ve61_usuario);
+       $this->ve61_usuario = ($this->ve61_usuario === 0 || $this->ve61_usuario === 0.0 || $this->ve61_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_usuario"]:$this->ve61_usuario);
        if($this->ve61_data == ""){
          $this->ve61_data_dia = ($this->ve61_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_data_dia"]:$this->ve61_data_dia);
          $this->ve61_data_mes = ($this->ve61_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_data_mes"]:$this->ve61_data_mes);
@@ -109,9 +109,9 @@ class cl_veicdevolucao {
          }
        }
        $this->ve61_hora = ($this->ve61_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_hora"]:$this->ve61_hora);
-       $this->ve61_medidadevol = ($this->ve61_medidadevol == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_medidadevol"]:$this->ve61_medidadevol);
+       $this->ve61_medidadevol = ($this->ve61_medidadevol === 0 || $this->ve61_medidadevol === 0.0 || $this->ve61_medidadevol == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_medidadevol"]:$this->ve61_medidadevol);
      }else{
-       $this->ve61_codigo = ($this->ve61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_codigo"]:$this->ve61_codigo);
+       $this->ve61_codigo = ($this->ve61_codigo === 0 || $this->ve61_codigo === 0.0 || $this->ve61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve61_codigo"]:$this->ve61_codigo);
      }
    }
    // funcao para inclusao
@@ -214,7 +214,7 @@ class cl_veicdevolucao {
          $this->ve61_codigo = $ve61_codigo; 
        }
      }
-     if(($this->ve61_codigo == null) || ($this->ve61_codigo == "") ){ 
+     if(($this->ve61_codigo == null) || ($this->ve61_codigo === 0 || $this->ve61_codigo === 0.0 || $this->ve61_codigo == "") ){ 
        $this->erro_sql = " Campo ve61_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -595,7 +595,7 @@ class cl_veicdevolucao {
    function sql_query ( $ve61_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -625,7 +625,7 @@ class cl_veicdevolucao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -638,7 +638,7 @@ class cl_veicdevolucao {
    function sql_query_file ( $ve61_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -659,7 +659,7 @@ class cl_veicdevolucao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -671,7 +671,7 @@ class cl_veicdevolucao {
    function sql_query_medida ( $ve61_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -694,7 +694,7 @@ class cl_veicdevolucao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

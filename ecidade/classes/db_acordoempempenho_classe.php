@@ -30,7 +30,7 @@ class cl_acordoempempenho {
                  ac54_ano = int4 = Exercício 
                  ";
    //funcao construtor da classe 
-   function cl_acordoempempenho() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordoempempenho"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_acordoempempenho {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac54_sequencial = ($this->ac54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac54_sequencial"]:$this->ac54_sequencial);
-       $this->ac54_acordo = ($this->ac54_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac54_acordo"]:$this->ac54_acordo);
-       $this->ac54_empempenho = ($this->ac54_empempenho == ""?@$GLOBALS["HTTP_POST_VARS"]["ac54_empempenho"]:$this->ac54_empempenho);
+       $this->ac54_sequencial = ($this->ac54_sequencial === 0 || $this->ac54_sequencial === 0.0 || $this->ac54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac54_sequencial"]:$this->ac54_sequencial);
+       $this->ac54_acordo = ($this->ac54_acordo === 0 || $this->ac54_acordo === 0.0 || $this->ac54_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac54_acordo"]:$this->ac54_acordo);
+       $this->ac54_empempenho = ($this->ac54_empempenho === 0 || $this->ac54_empempenho === 0.0 || $this->ac54_empempenho == ""?@$GLOBALS["HTTP_POST_VARS"]["ac54_empempenho"]:$this->ac54_empempenho);
        $this->ac54_numerolicitacao = ($this->ac54_numerolicitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac54_numerolicitacao"]:$this->ac54_numerolicitacao);
        $this->ac54_ano = ($this->ac54_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ac54_ano"]:$this->ac54_ano);
      }else{
-       $this->ac54_sequencial = ($this->ac54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac54_sequencial"]:$this->ac54_sequencial);
+       $this->ac54_sequencial = ($this->ac54_sequencial === 0 || $this->ac54_sequencial === 0.0 || $this->ac54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac54_sequencial"]:$this->ac54_sequencial);
      }
    }
    // funcao para Inclusão
@@ -101,7 +101,7 @@ class cl_acordoempempenho {
          $this->ac54_sequencial = $ac54_sequencial; 
        }
      }
-     if(($this->ac54_sequencial == null) || ($this->ac54_sequencial == "") ){ 
+     if(($this->ac54_sequencial == null) || ($this->ac54_sequencial === 0 || $this->ac54_sequencial === 0.0 || $this->ac54_sequencial == "") ){ 
        $this->erro_sql = " Campo ac54_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -54,7 +54,7 @@ class cl_acordogrupodocumento {
                  ac06_documentotemplate = int4 = Documento Template 
                  ";
    //funcao construtor da classe 
-   function cl_acordogrupodocumento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("acordogrupodocumento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_acordogrupodocumento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac06_sequencial = ($this->ac06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_sequencial"]:$this->ac06_sequencial);
-       $this->ac06_acordogrupo = ($this->ac06_acordogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_acordogrupo"]:$this->ac06_acordogrupo);
-       $this->ac06_tipodocumento = ($this->ac06_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_tipodocumento"]:$this->ac06_tipodocumento);
-       $this->ac06_documentotemplate = ($this->ac06_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_documentotemplate"]:$this->ac06_documentotemplate);
+       $this->ac06_sequencial = ($this->ac06_sequencial === 0 || $this->ac06_sequencial === 0.0 || $this->ac06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_sequencial"]:$this->ac06_sequencial);
+       $this->ac06_acordogrupo = ($this->ac06_acordogrupo === 0 || $this->ac06_acordogrupo === 0.0 || $this->ac06_acordogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_acordogrupo"]:$this->ac06_acordogrupo);
+       $this->ac06_tipodocumento = ($this->ac06_tipodocumento === 0 || $this->ac06_tipodocumento === 0.0 || $this->ac06_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_tipodocumento"]:$this->ac06_tipodocumento);
+       $this->ac06_documentotemplate = ($this->ac06_documentotemplate === 0 || $this->ac06_documentotemplate === 0.0 || $this->ac06_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_documentotemplate"]:$this->ac06_documentotemplate);
      }else{
-       $this->ac06_sequencial = ($this->ac06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_sequencial"]:$this->ac06_sequencial);
+       $this->ac06_sequencial = ($this->ac06_sequencial === 0 || $this->ac06_sequencial === 0.0 || $this->ac06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_sequencial"]:$this->ac06_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_acordogrupodocumento {
          $this->ac06_sequencial = $ac06_sequencial; 
        }
      }
-     if(($this->ac06_sequencial == null) || ($this->ac06_sequencial == "") ){ 
+     if(($this->ac06_sequencial == null) || ($this->ac06_sequencial === 0 || $this->ac06_sequencial === 0.0 || $this->ac06_sequencial == "") ){ 
        $this->erro_sql = " Campo ac06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_acordogrupodocumento {
    function sql_query ( $ac06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_acordogrupodocumento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_acordogrupodocumento {
    function sql_query_file ( $ac06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_acordogrupodocumento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

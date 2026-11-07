@@ -50,7 +50,7 @@ class cl_veiccaditensobrigtipobaixa {
                  ve11_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_veiccaditensobrigtipobaixa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veiccaditensobrigtipobaixa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_veiccaditensobrigtipobaixa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve11_sequencial = ($this->ve11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve11_sequencial"]:$this->ve11_sequencial);
+       $this->ve11_sequencial = ($this->ve11_sequencial === 0 || $this->ve11_sequencial === 0.0 || $this->ve11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve11_sequencial"]:$this->ve11_sequencial);
        $this->ve11_descr = ($this->ve11_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve11_descr"]:$this->ve11_descr);
      }else{
-       $this->ve11_sequencial = ($this->ve11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve11_sequencial"]:$this->ve11_sequencial);
+       $this->ve11_sequencial = ($this->ve11_sequencial === 0 || $this->ve11_sequencial === 0.0 || $this->ve11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve11_sequencial"]:$this->ve11_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_veiccaditensobrigtipobaixa {
          $this->ve11_sequencial = $ve11_sequencial; 
        }
      }
-     if(($this->ve11_sequencial == null) || ($this->ve11_sequencial == "") ){ 
+     if(($this->ve11_sequencial == null) || ($this->ve11_sequencial === 0 || $this->ve11_sequencial === 0.0 || $this->ve11_sequencial == "") ){ 
        $this->erro_sql = " Campo ve11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_veiccaditensobrigtipobaixa {
    function sql_query ( $ve11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_veiccaditensobrigtipobaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_veiccaditensobrigtipobaixa {
    function sql_query_file ( $ve11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_veiccaditensobrigtipobaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

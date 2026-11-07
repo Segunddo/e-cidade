@@ -54,7 +54,7 @@ class cl_liclicitaencerramentolicitacon {
                  l18_data = date = Data de Geração
                  ";
    //funcao construtor da classe
-   function cl_liclicitaencerramentolicitacon() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liclicitaencerramentolicitacon");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,8 +71,8 @@ class cl_liclicitaencerramentolicitacon {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l18_sequencial = ($this->l18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l18_sequencial"]:$this->l18_sequencial);
-       $this->l18_liclicita = ($this->l18_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l18_liclicita"]:$this->l18_liclicita);
+       $this->l18_sequencial = ($this->l18_sequencial === 0 || $this->l18_sequencial === 0.0 || $this->l18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l18_sequencial"]:$this->l18_sequencial);
+       $this->l18_liclicita = ($this->l18_liclicita === 0 || $this->l18_liclicita === 0.0 || $this->l18_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l18_liclicita"]:$this->l18_liclicita);
        if($this->l18_data == ""){
          $this->l18_data_dia = ($this->l18_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["l18_data_dia"]:$this->l18_data_dia);
          $this->l18_data_mes = ($this->l18_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["l18_data_mes"]:$this->l18_data_mes);
@@ -82,7 +82,7 @@ class cl_liclicitaencerramentolicitacon {
          }
        }
      }else{
-       $this->l18_sequencial = ($this->l18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l18_sequencial"]:$this->l18_sequencial);
+       $this->l18_sequencial = ($this->l18_sequencial === 0 || $this->l18_sequencial === 0.0 || $this->l18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l18_sequencial"]:$this->l18_sequencial);
      }
    }
    // funcao para Inclusão
@@ -130,7 +130,7 @@ class cl_liclicitaencerramentolicitacon {
          $this->l18_sequencial = $l18_sequencial;
        }
      }
-     if(($this->l18_sequencial == null) || ($this->l18_sequencial == "") ){
+     if(($this->l18_sequencial == null) || ($this->l18_sequencial === 0 || $this->l18_sequencial === 0.0 || $this->l18_sequencial == "") ){
        $this->erro_sql = " Campo l18_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

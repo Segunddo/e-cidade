@@ -61,7 +61,8 @@ $clrotulo->label('pc11_vlrun');
 $clrotulo->label('pc11_quant');
 $clrotulo->label('pc11_resum');
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_GET_VARS);
 db_postmemory($HTTP_POST_VARS);
 
@@ -688,9 +689,9 @@ if ($clempparametro->numrows > 0) {
                                             $ano = "pc23_validmin_" . $pc22_orcamitem . "_ano";
                                             db_inputdata(
                                                 "pc23_validmin_$pc22_orcamitem",
-                                                @$$dia,
-                                                @$$mes,
-                                                @$$ano,
+                                                @${$dia},
+                                                @${$mes},
+                                                @${$ano},
                                                 true,
                                                 "text",
                                                 $db_opcao,
@@ -755,13 +756,13 @@ if ($clempparametro->numrows > 0) {
                                             $aListaItemProcesso[] = "{$pc81_codprocitem}|vlrestimado_{$pc22_orcamitem}";
 
                                             if ($clpcorcamval->numrows > 0) {
-                                                if (strpos($$valor, ".") == "") {
-                                                    $$valor .= ".00";
+                                                if (strpos(${$valor}, ".") == "") {
+                                                    ${$valor} .= ".00";
                                                 }
                                             }
 
-                                            if (!isset($$qtd) || (isset($$qtd) && $$qtd == '')) {
-                                                $$qtd = $pc11_quant;
+                                            if (!isset(${$qtd}) || (isset(${$qtd}) && ${$qtd} == '')) {
+                                                ${$qtd} = $pc11_quant;
                                             }
 
                                             $db_opcaoquant = 1;
@@ -885,8 +886,8 @@ if ($clempparametro->numrows > 0) {
                                     </tr>
 
                                     <?php
-                                    if (isset($$qtd) && $$qtd != "") {
-                                        echo "<script>js_verquant('" . $qtd . "','" . $$qtd . "','" . $pc11_quant . "','" . $pc22_orcamitem . "');</script>";
+                                    if (isset(${$qtd}) && ${$qtd} != "") {
+                                        echo "<script>js_verquant('" . $qtd . "','" . ${$qtd} . "','" . $pc11_quant . "','" . $pc22_orcamitem . "');</script>";
                                     }
                                 }
                             } else {

@@ -54,34 +54,34 @@ if(isset($alterar) || isset($incluir)){
   $sqlerro=false;
   
   if(isset($valores) && trim($valores)!=""){
-    $arrval = split("valor_",$valores);
+    $arrval = preg_split("#valor_#m",$valores);
   }else{
     $sqlerro=true;
     $erro_msg = "Usuário: \\n\\nValores do orçamento não informados. \\nAltere antes de continuar. \\n\\nAdministrador: ";
   }
   if(isset($qtdades) && trim($qtdades)!=""){
-    $arrqtd = split("qtde_",$qtdades);
+    $arrqtd = preg_split("#qtde_#m",$qtdades);
   }else{
     $sqlerro=true;
     $erro_msg = "Usuário: \\n\\nQuantidades do orçamento não informadas. \\nAltere antes de continuar. \\n\\nAdministrador: ";
   }
   if(isset($obss) && trim($obss)!=""){
-    $arrmrk = split("obs_",$obss);
+    $arrmrk = preg_split("#obs_#m",$obss);
   }
   if(isset($valoresun) && trim($valoresun)!=""){
-    $arrvalun = split("vlrun_",$valoresun);
+    $arrvalun = preg_split("#vlrun_#m",$valoresun);
   }
   if(isset($dataval) && trim($dataval)!=""){
-    $arrdat = split("#",$dataval);
+    $arrdat = preg_split("#\\##m",$dataval);
   }
   if(isset($valoresbdi) && trim($valoresbdi)!=""){
-    $arrbdi = split("bdi_",$valoresbdi);
+    $arrbdi = preg_split("#bdi_#m",$valoresbdi);
   }
   if(isset($valoresencargos) && trim($valoresencargos)!=""){
-    $arrencargos = split("encargossociais_",$valoresencargos);
+    $arrencargos = preg_split("#encargossociais_#m",$valoresencargos);
   }
   if (isset($taxasestimadas) && trim($taxasestimadas)!="") {
-    $arrtaxasestimadas = split("taxaestimada_", $taxasestimadas);
+    $arrtaxasestimadas = preg_split("#taxaestimada_#m", $taxasestimadas);
   }
 
 
@@ -115,13 +115,13 @@ if(isset($alterar) || isset($incluir)){
     
     for($i=1;$i<sizeof($arrval);$i++){
 
-      $codvalun     = split("_", $arrvalun[$i]);
-      $codval       = split("_", $arrval[$i]);
-      $codqtd       = split("_", $arrqtd[$i]);
-      $desmrk       = split("_", $arrmrk[$i]);
-      $bdi          = split("_", $arrbdi[$i]);
-      $encargos     = split("_", $arrencargos[$i]);
-      $taxaestimada = split("_", $arrtaxasestimadas[$i]);
+      $codvalun     = preg_split("#_#m", $arrvalun[$i]);
+      $codval       = preg_split("#_#m", $arrval[$i]);
+      $codqtd       = preg_split("#_#m", $arrqtd[$i]);
+      $desmrk       = preg_split("#_#m", $arrmrk[$i]);
+      $bdi          = preg_split("#_#m", $arrbdi[$i]);
+      $encargos     = preg_split("#_#m", $arrencargos[$i]);
+      $taxaestimada = preg_split("#_#m", $arrtaxasestimadas[$i]);
 
       if (trim(@$arrdat[$i])!=""){
         $validmin = $arrdat[$i];
@@ -172,7 +172,7 @@ if(isset($alterar) || isset($incluir)){
         $clpcorcamval->pc23_taxaestimada      = isset($taxaestimada[1]) ? $taxaestimada[1] : null;
 
         if (isset($validmin) && trim(@$validmin)!="" && $validmin != null){
-          $arr_d	= split("-",$validmin);		
+          $arr_d	= preg_split("#\\-#m",$validmin);		
           $validmin = $arr_d[2]."-".$arr_d[1]."-".$arr_d[0];
         } else {
           $validmin = "null";

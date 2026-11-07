@@ -42,7 +42,7 @@ $clorcreservasol = new cl_orcreservasol;
 $clrotulo = new rotulocampo;
 $clrotulo->label("");
 if (isset($processar)){
-  $arr_info = split("#",$chaves);
+  $arr_info = preg_split("#\\##m",$chaves);
   $sqlerro=false;
   db_inicio_transacao();
   for($w=0;$w<count($arr_info);$w++){

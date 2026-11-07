@@ -58,7 +58,7 @@ class cl_pctipocertif {
                  pc70_tipodoc = int8 = Código do Tipo de Documento 
                  ";
    //funcao construtor da classe 
-   function cl_pctipocertif() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pctipocertif"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_pctipocertif {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc70_codigo = ($this->pc70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc70_codigo"]:$this->pc70_codigo);
+       $this->pc70_codigo = ($this->pc70_codigo === 0 || $this->pc70_codigo === 0.0 || $this->pc70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc70_codigo"]:$this->pc70_codigo);
        $this->pc70_descr = ($this->pc70_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["pc70_descr"]:$this->pc70_descr);
        $this->pc70_subgrupo = ($this->pc70_subgrupo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc70_subgrupo"]:$this->pc70_subgrupo);
        $this->pc70_obs = ($this->pc70_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["pc70_obs"]:$this->pc70_obs);
        $this->pc70_parag2 = ($this->pc70_parag2 == ""?@$GLOBALS["HTTP_POST_VARS"]["pc70_parag2"]:$this->pc70_parag2);
-       $this->pc70_tipodoc = ($this->pc70_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc70_tipodoc"]:$this->pc70_tipodoc);
+       $this->pc70_tipodoc = ($this->pc70_tipodoc === 0 || $this->pc70_tipodoc === 0.0 || $this->pc70_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["pc70_tipodoc"]:$this->pc70_tipodoc);
      }else{
-       $this->pc70_codigo = ($this->pc70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc70_codigo"]:$this->pc70_codigo);
+       $this->pc70_codigo = ($this->pc70_codigo === 0 || $this->pc70_codigo === 0.0 || $this->pc70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc70_codigo"]:$this->pc70_codigo);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_pctipocertif {
          $this->pc70_codigo = $pc70_codigo; 
        }
      }
-     if(($this->pc70_codigo == null) || ($this->pc70_codigo == "") ){ 
+     if(($this->pc70_codigo == null) || ($this->pc70_codigo === 0 || $this->pc70_codigo === 0.0 || $this->pc70_codigo == "") ){ 
        $this->erro_sql = " Campo pc70_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -417,7 +417,7 @@ class cl_pctipocertif {
    function sql_query ( $pc70_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_pctipocertif {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_pctipocertif {
    function sql_query_file ( $pc70_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_pctipocertif {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_pctipocertif {
   	$sql = "select ";
   	
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -512,7 +512,7 @@ class cl_pctipocertif {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

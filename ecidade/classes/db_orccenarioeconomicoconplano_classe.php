@@ -56,7 +56,7 @@ class cl_orccenarioeconomicoconplano {
                  o04_tipocalculo = int4 = Tipo de Cálculo
                  ";
    //funcao construtor da classe
-   function cl_orccenarioeconomicoconplano() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orccenarioeconomicoconplano");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_orccenarioeconomicoconplano {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o04_sequencial = ($this->o04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_sequencial"]:$this->o04_sequencial);
-       $this->o04_orccenarioeconomicoparam = ($this->o04_orccenarioeconomicoparam == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_orccenarioeconomicoparam"]:$this->o04_orccenarioeconomicoparam);
-       $this->o04_conplano = ($this->o04_conplano == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_conplano"]:$this->o04_conplano);
-       $this->o04_anousu = ($this->o04_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_anousu"]:$this->o04_anousu);
-       $this->o04_tipocalculo = ($this->o04_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_tipocalculo"]:$this->o04_tipocalculo);
+       $this->o04_sequencial = ($this->o04_sequencial === 0 || $this->o04_sequencial === 0.0 || $this->o04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_sequencial"]:$this->o04_sequencial);
+       $this->o04_orccenarioeconomicoparam = ($this->o04_orccenarioeconomicoparam === 0 || $this->o04_orccenarioeconomicoparam === 0.0 || $this->o04_orccenarioeconomicoparam == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_orccenarioeconomicoparam"]:$this->o04_orccenarioeconomicoparam);
+       $this->o04_conplano = ($this->o04_conplano === 0 || $this->o04_conplano === 0.0 || $this->o04_conplano == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_conplano"]:$this->o04_conplano);
+       $this->o04_anousu = ($this->o04_anousu === 0 || $this->o04_anousu === 0.0 || $this->o04_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_anousu"]:$this->o04_anousu);
+       $this->o04_tipocalculo = ($this->o04_tipocalculo === 0 || $this->o04_tipocalculo === 0.0 || $this->o04_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_tipocalculo"]:$this->o04_tipocalculo);
      }else{
-       $this->o04_sequencial = ($this->o04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_sequencial"]:$this->o04_sequencial);
+       $this->o04_sequencial = ($this->o04_sequencial === 0 || $this->o04_sequencial === 0.0 || $this->o04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_sequencial"]:$this->o04_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_orccenarioeconomicoconplano {
          $this->o04_sequencial = $o04_sequencial;
        }
      }
-     if(($this->o04_sequencial == null) || ($this->o04_sequencial == "") ){
+     if(($this->o04_sequencial == null) || ($this->o04_sequencial === 0 || $this->o04_sequencial === 0.0 || $this->o04_sequencial == "") ){
        $this->erro_sql = " Campo o04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -368,7 +368,7 @@ class cl_orccenarioeconomicoconplano {
    function sql_query ( $o04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_orccenarioeconomicoconplano {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_orccenarioeconomicoconplano {
    function sql_query_file ( $o04_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_orccenarioeconomicoconplano {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

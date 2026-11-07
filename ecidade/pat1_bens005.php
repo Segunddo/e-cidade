@@ -225,7 +225,7 @@ if (isset($alterar)) {
 	          if ($clbenscedente->erro_status==0) {
 	            $sqlerro=true;
 	            //db_msgbox("9 -> ".$erro_msg);
-	            break;
+	            exit; // PHP 8: era `break` fora de laco -- fatal de execucao no 5.6, que morria aqui
 	          }
     		}
       }

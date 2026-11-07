@@ -39,7 +39,8 @@ include(modification("classes/db_db_config_classe.php"));
 
 $cldb_config = new cl_db_config;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 $clempresto = new cl_empresto();
@@ -81,7 +82,7 @@ if (isset($instit) && trim(@$instit)=="") {
     if ($usa_instit == true) {
          $instit= db_getsession("DB_instit");
         // recebeu instituição
-         $array_instit = split(',', $instit);
+         $array_instit = preg_split('#,#m', $instit);
     } else {
        // todas instituições
         $rr = $cldb_config->sql_record($cldb_config->sql_query_file(null, "codigo"));
@@ -97,7 +98,7 @@ if (isset($instit) && trim(@$instit)=="") {
 
 $instit = str_replace("-", ",", @$instit);
 $instit = (!isset($instit)||trim($instit)=='')?'NULL':$instit;
-$array_instit = split(',', $instit);
+$array_instit = preg_split('#,#m', $instit);
 $sel_orgaos = " o58_instit in ($instit) ";
 
 $porgao   = "";

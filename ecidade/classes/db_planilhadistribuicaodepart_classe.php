@@ -26,7 +26,7 @@ class cl_planilhadistribuicaodepart {
                  pd02_departamento = int4 = Departamento 
                  ";
    //funcao construtor da classe 
-   function cl_planilhadistribuicaodepart() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("planilhadistribuicaodepart"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_planilhadistribuicaodepart {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pd02_sequencial = ($this->pd02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pd02_sequencial"]:$this->pd02_sequencial);
-       $this->pd02_planilhadistribuicao = ($this->pd02_planilhadistribuicao == ""?@$GLOBALS["HTTP_POST_VARS"]["pd02_planilhadistribuicao"]:$this->pd02_planilhadistribuicao);
-       $this->pd02_departamento = ($this->pd02_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["pd02_departamento"]:$this->pd02_departamento);
+       $this->pd02_sequencial = ($this->pd02_sequencial === 0 || $this->pd02_sequencial === 0.0 || $this->pd02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pd02_sequencial"]:$this->pd02_sequencial);
+       $this->pd02_planilhadistribuicao = ($this->pd02_planilhadistribuicao === 0 || $this->pd02_planilhadistribuicao === 0.0 || $this->pd02_planilhadistribuicao == ""?@$GLOBALS["HTTP_POST_VARS"]["pd02_planilhadistribuicao"]:$this->pd02_planilhadistribuicao);
+       $this->pd02_departamento = ($this->pd02_departamento === 0 || $this->pd02_departamento === 0.0 || $this->pd02_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["pd02_departamento"]:$this->pd02_departamento);
      }else{
-       $this->pd02_sequencial = ($this->pd02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pd02_sequencial"]:$this->pd02_sequencial);
+       $this->pd02_sequencial = ($this->pd02_sequencial === 0 || $this->pd02_sequencial === 0.0 || $this->pd02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pd02_sequencial"]:$this->pd02_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_planilhadistribuicaodepart {
          $this->pd02_sequencial = $pd02_sequencial; 
        }
      }
-     if(($this->pd02_sequencial == null) || ($this->pd02_sequencial == "") ){ 
+     if(($this->pd02_sequencial == null) || ($this->pd02_sequencial === 0 || $this->pd02_sequencial === 0.0 || $this->pd02_sequencial == "") ){ 
        $this->erro_sql = " Campo pd02_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -437,7 +437,7 @@ class cl_protparamglobal {
 
     $pgObject = db_query($sql);
 
-    return pg_fetch_assoc($pgObject, 'p06_tipo');
+    return pg_fetch_assoc($pgObject, 0); // PHP 8: 'p06_tipo' como numero da linha; o 5.6 o convertia em 0 (primeira linha)
   }
 }
 ?>

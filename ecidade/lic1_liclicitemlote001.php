@@ -33,7 +33,8 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_liclicitemlote_classe.php"));
 require_once(modification("classes/db_liclicita_classe.php"));
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 $clliclicitemlote = new cl_liclicitemlote;
@@ -64,12 +65,12 @@ if (isset($alterar)&&trim($alterar)!=""){
 
      db_inicio_transacao();
 
-     $vetor = split(",", $descricao);
+     $vetor = preg_split("#,#m", $descricao);
 
      $l04_liclicitem = "";
      $l04_descricao  = "";
      for($i = 0; $i < sizeof($vetor); $i++){
-          $vetor_codigos  = split("_",$vetor[$i]);
+          $vetor_codigos  = preg_split("#_#m",$vetor[$i]);
 
           $l04_liclicitem = $vetor_codigos[0]*1;
           $l04_descricao  = $vetor_codigos[1];

@@ -54,7 +54,7 @@ class cl_pctipodoccertif {
                  pc72_obrigatorio = bool = Obrigatório 
                  ";
    //funcao construtor da classe 
-   function cl_pctipodoccertif() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pctipodoccertif"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_pctipodoccertif {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc72_codigo = ($this->pc72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_codigo"]:$this->pc72_codigo);
-       $this->pc72_pctipocertif = ($this->pc72_pctipocertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_pctipocertif"]:$this->pc72_pctipocertif);
-       $this->pc72_pcdoccertif = ($this->pc72_pcdoccertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_pcdoccertif"]:$this->pc72_pcdoccertif);
+       $this->pc72_codigo = ($this->pc72_codigo === 0 || $this->pc72_codigo === 0.0 || $this->pc72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_codigo"]:$this->pc72_codigo);
+       $this->pc72_pctipocertif = ($this->pc72_pctipocertif === 0 || $this->pc72_pctipocertif === 0.0 || $this->pc72_pctipocertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_pctipocertif"]:$this->pc72_pctipocertif);
+       $this->pc72_pcdoccertif = ($this->pc72_pcdoccertif === 0 || $this->pc72_pcdoccertif === 0.0 || $this->pc72_pcdoccertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_pcdoccertif"]:$this->pc72_pcdoccertif);
        $this->pc72_obrigatorio = ($this->pc72_obrigatorio == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc72_obrigatorio"]:$this->pc72_obrigatorio);
      }else{
-       $this->pc72_codigo = ($this->pc72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_codigo"]:$this->pc72_codigo);
+       $this->pc72_codigo = ($this->pc72_codigo === 0 || $this->pc72_codigo === 0.0 || $this->pc72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_codigo"]:$this->pc72_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_pctipodoccertif {
          $this->pc72_codigo = $pc72_codigo; 
        }
      }
-     if(($this->pc72_codigo == null) || ($this->pc72_codigo == "") ){ 
+     if(($this->pc72_codigo == null) || ($this->pc72_codigo === 0 || $this->pc72_codigo === 0.0 || $this->pc72_codigo == "") ){ 
        $this->erro_sql = " Campo pc72_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_pctipodoccertif {
    function sql_query ( $pc72_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_pctipodoccertif {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_pctipodoccertif {
    function sql_query_file ( $pc72_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_pctipodoccertif {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

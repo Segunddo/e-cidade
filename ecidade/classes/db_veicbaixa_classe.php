@@ -63,7 +63,7 @@ class cl_veicbaixa {
                  ve04_veiccadtipobaixa = int4 = Tipo de baixa 
                  ";
    //funcao construtor da classe 
-   function cl_veicbaixa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veicbaixa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_veicbaixa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve04_codigo = ($this->ve04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_codigo"]:$this->ve04_codigo);
-       $this->ve04_veiculo = ($this->ve04_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_veiculo"]:$this->ve04_veiculo);
+       $this->ve04_codigo = ($this->ve04_codigo === 0 || $this->ve04_codigo === 0.0 || $this->ve04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_codigo"]:$this->ve04_codigo);
+       $this->ve04_veiculo = ($this->ve04_veiculo === 0 || $this->ve04_veiculo === 0.0 || $this->ve04_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_veiculo"]:$this->ve04_veiculo);
        if($this->ve04_data == ""){
          $this->ve04_data_dia = ($this->ve04_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_data_dia"]:$this->ve04_data_dia);
          $this->ve04_data_mes = ($this->ve04_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_data_mes"]:$this->ve04_data_mes);
@@ -91,11 +91,11 @@ class cl_veicbaixa {
          }
        }
        $this->ve04_hora = ($this->ve04_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_hora"]:$this->ve04_hora);
-       $this->ve04_usuario = ($this->ve04_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_usuario"]:$this->ve04_usuario);
+       $this->ve04_usuario = ($this->ve04_usuario === 0 || $this->ve04_usuario === 0.0 || $this->ve04_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_usuario"]:$this->ve04_usuario);
        $this->ve04_motivo = ($this->ve04_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_motivo"]:$this->ve04_motivo);
-       $this->ve04_veiccadtipobaixa = ($this->ve04_veiccadtipobaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_veiccadtipobaixa"]:$this->ve04_veiccadtipobaixa);
+       $this->ve04_veiccadtipobaixa = ($this->ve04_veiccadtipobaixa === 0 || $this->ve04_veiccadtipobaixa === 0.0 || $this->ve04_veiccadtipobaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_veiccadtipobaixa"]:$this->ve04_veiccadtipobaixa);
      }else{
-       $this->ve04_codigo = ($this->ve04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_codigo"]:$this->ve04_codigo);
+       $this->ve04_codigo = ($this->ve04_codigo === 0 || $this->ve04_codigo === 0.0 || $this->ve04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_codigo"]:$this->ve04_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_veicbaixa {
          $this->ve04_codigo = $ve04_codigo; 
        }
      }
-     if(($this->ve04_codigo == null) || ($this->ve04_codigo == "") ){ 
+     if(($this->ve04_codigo == null) || ($this->ve04_codigo === 0 || $this->ve04_codigo === 0.0 || $this->ve04_codigo == "") ){ 
        $this->erro_sql = " Campo ve04_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -507,7 +507,7 @@ class cl_veicbaixa {
    function sql_query ( $ve04_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_veicbaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -557,7 +557,7 @@ class cl_veicbaixa {
    function sql_query_file ( $ve04_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -578,7 +578,7 @@ class cl_veicbaixa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_seguradoras {
                  t80_contato = varchar(40) = Contato na seguradora 
                  ";
    //funcao construtor da classe 
-   function cl_seguradoras() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("seguradoras"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_seguradoras {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t80_segura = ($this->t80_segura == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_segura"]:$this->t80_segura);
-       $this->t80_numcgm = ($this->t80_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_numcgm"]:$this->t80_numcgm);
+       $this->t80_segura = ($this->t80_segura === 0 || $this->t80_segura === 0.0 || $this->t80_segura == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_segura"]:$this->t80_segura);
+       $this->t80_numcgm = ($this->t80_numcgm === 0 || $this->t80_numcgm === 0.0 || $this->t80_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_numcgm"]:$this->t80_numcgm);
        $this->t80_contato = ($this->t80_contato == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_contato"]:$this->t80_contato);
      }else{
-       $this->t80_segura = ($this->t80_segura == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_segura"]:$this->t80_segura);
+       $this->t80_segura = ($this->t80_segura === 0 || $this->t80_segura === 0.0 || $this->t80_segura == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_segura"]:$this->t80_segura);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_seguradoras {
          $this->t80_segura = $t80_segura; 
        }
      }
-     if(($this->t80_segura == null) || ($this->t80_segura == "") ){ 
+     if(($this->t80_segura == null) || ($this->t80_segura === 0 || $this->t80_segura === 0.0 || $this->t80_segura == "") ){ 
        $this->erro_sql = " Campo t80_segura nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_seguradoras {
    function sql_query ( $t80_segura=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_seguradoras {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -393,7 +393,7 @@ class cl_seguradoras {
    function sql_query_file ( $t80_segura=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_seguradoras {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

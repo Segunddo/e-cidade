@@ -33,13 +33,14 @@ include(modification("classes/db_pcorcamdescla_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $clpcorcamdescla = new cl_pcorcamdescla;
 $db_opcao = 1;
 $db_botao = true;
 
-$vetor = split(",",$orcamitem);
+$vetor = preg_split("#,#m",$orcamitem);
 $item  = $vetor[sizeof($vetor)-1];
 
 $result_descla = $clpcorcamdescla->sql_record($clpcorcamdescla->sql_query_file(null,null,"*",null,"pc32_orcamitem = $item and pc32_orcamforne = $pc32_orcamforne"));

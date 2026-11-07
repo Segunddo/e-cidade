@@ -50,7 +50,7 @@ class cl_proctransferintand {
                  p87_codandam = int8 = Código andamento 
                  ";
    //funcao construtor da classe 
-   function cl_proctransferintand() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("proctransferintand"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,8 +67,8 @@ class cl_proctransferintand {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p87_codtransferint = ($this->p87_codtransferint == ""?@$GLOBALS["HTTP_POST_VARS"]["p87_codtransferint"]:$this->p87_codtransferint);
-       $this->p87_codandam = ($this->p87_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["p87_codandam"]:$this->p87_codandam);
+       $this->p87_codtransferint = ($this->p87_codtransferint === 0 || $this->p87_codtransferint === 0.0 || $this->p87_codtransferint == ""?@$GLOBALS["HTTP_POST_VARS"]["p87_codtransferint"]:$this->p87_codtransferint);
+       $this->p87_codandam = ($this->p87_codandam === 0 || $this->p87_codandam === 0.0 || $this->p87_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["p87_codandam"]:$this->p87_codandam);
      }else{
      }
    }

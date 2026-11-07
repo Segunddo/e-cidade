@@ -54,7 +54,7 @@ class cl_liclicitaminuta {
                  l43_liclicita = int4 = Licitação 
                  ";
    //funcao construtor da classe 
-   function cl_liclicitaminuta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liclicitaminuta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_liclicitaminuta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l43_sequencial = ($this->l43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l43_sequencial"]:$this->l43_sequencial);
-       $this->l43_arquivo = ($this->l43_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l43_arquivo"]:$this->l43_arquivo);
+       $this->l43_sequencial = ($this->l43_sequencial === 0 || $this->l43_sequencial === 0.0 || $this->l43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l43_sequencial"]:$this->l43_sequencial);
+       $this->l43_arquivo = ($this->l43_arquivo === 0 || $this->l43_arquivo === 0.0 || $this->l43_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l43_arquivo"]:$this->l43_arquivo);
        $this->l43_arqnome = ($this->l43_arqnome == ""?@$GLOBALS["HTTP_POST_VARS"]["l43_arqnome"]:$this->l43_arqnome);
-       $this->l43_liclicita = ($this->l43_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l43_liclicita"]:$this->l43_liclicita);
+       $this->l43_liclicita = ($this->l43_liclicita === 0 || $this->l43_liclicita === 0.0 || $this->l43_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l43_liclicita"]:$this->l43_liclicita);
      }else{
-       $this->l43_sequencial = ($this->l43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l43_sequencial"]:$this->l43_sequencial);
+       $this->l43_sequencial = ($this->l43_sequencial === 0 || $this->l43_sequencial === 0.0 || $this->l43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l43_sequencial"]:$this->l43_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_liclicitaminuta {
          $this->l43_sequencial = $l43_sequencial; 
        }
      }
-     if(($this->l43_sequencial == null) || ($this->l43_sequencial == "") ){ 
+     if(($this->l43_sequencial == null) || ($this->l43_sequencial === 0 || $this->l43_sequencial === 0.0 || $this->l43_sequencial == "") ){ 
        $this->erro_sql = " Campo l43_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_liclicitaminuta {
    function sql_query ( $l43_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_liclicitaminuta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_liclicitaminuta {
    function sql_query_file ( $l43_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -453,7 +453,7 @@ class cl_liclicitaminuta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

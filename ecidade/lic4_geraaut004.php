@@ -120,7 +120,7 @@ $gerautori = "";
 if (isset ($incluir)) {
 
 	$gerautori = "";
-	$valor = split(",", $valores);
+	$valor = preg_split("#,#m", $valores);
 	// arrays para dados do empautoriza
 	$arr_vals = Array ();
 	$arr_cgms = Array ();
@@ -149,7 +149,7 @@ if (isset ($incluir)) {
 		$e54_emiss = date("Y-m-d", db_getsession("DB_datausu"));
 		$e54_instit = db_getsession("DB_instit");
 
-		$splitei = split("_", $valor[$i]);
+		$splitei = preg_split("#_#m", $valor[$i]);
 		$contador_aut = $splitei[1];
 		$pc81_codprocitem = $splitei[2];
 		$pc22_orcamitem = $splitei[3];
@@ -211,7 +211,7 @@ if (isset ($incluir)) {
 			}
 
 			$atendimento = "atend_".$contador_aut."_".$pc81_codprocitem;
-			$pc13_quant  = $$atendimento;
+			$pc13_quant  = ${$atendimento};
 			$quantidade  = $quantidade_total;
 			if ($quantidade < 0) {
 				$erro_msg    = "Usuário: \\n\\nItem $pc81_codprocitem sem quantidade solicitada.\\n\\nAdministrador";
@@ -361,11 +361,11 @@ if (isset ($incluir)) {
 
 			if ($sqlerro == false) {
 
-				$arr_item = split(",", $arr_proc[$arr_help[$i]]);
+				$arr_item = preg_split("#,#m", $arr_proc[$arr_help[$i]]);
 
 				for ($iii = 0; $iii < sizeof($arr_item); $iii ++) {
 
-					$arr_daditem          = split("_", $arr_item[$iii]);
+					$arr_daditem          = preg_split("#_#m", $arr_item[$iii]);
 					$e55_sequen           = $arr_daditem[0];
 					$e55_quant            = $arr_daditem[1];
 					$e55_vltot            = $arr_daditem[2];
@@ -433,11 +433,11 @@ if (isset ($incluir)) {
 
 			if ($sqlerro == false) {
 
-				$arr_item = split(",", $arr_proc[$arr_help[$i]]);
+				$arr_item = preg_split("#,#m", $arr_proc[$arr_help[$i]]);
 
 				for ($iii = 0; $iii < sizeof($arr_item); $iii ++) {
 
-					$arr_daditem               = split("_", $arr_item[$iii]);
+					$arr_daditem               = preg_split("#_#m", $arr_item[$iii]);
 					$e55_sequen                = $arr_daditem[0];
 					$e55_quant                 = $arr_daditem[1];
 					$e55_vltot                 = $arr_daditem[2];
@@ -606,10 +606,10 @@ if (isset ($incluir)) {
 
 			if ($sqlerro == false) {
 
-			  $arr_item = split(",", $arr_proc[$arr_help[$i]]);
+			  $arr_item = preg_split("#,#m", $arr_proc[$arr_help[$i]]);
 			  for ($iii = 0; $iii < sizeof($arr_item); $iii ++) {
 
-				$arr_daditem = split("_", $arr_item[$iii]);
+				$arr_daditem = preg_split("#_#m", $arr_item[$iii]);
 				//$e55_sequen = $arr_daditem[0];
 				$e55_quant = $arr_daditem[1];
 				$e55_vltot = $arr_daditem[2];
@@ -1350,8 +1350,8 @@ if ($numrows_itens == 0) {
 		db_fieldsmemory($result, 0);
 
 		$valdisp = 'valdisp_'.$contador;
-		$$valdisp = round((0 + $atual_menos_reservado) + $saldodotacoes[$pc13_coddot], 2);
-		$valtesta = round($$valdisp, 2);
+		${$valdisp} = round((0 + $atual_menos_reservado) + $saldodotacoes[$pc13_coddot], 2);
+		$valtesta = round(${$valdisp}, 2);
 		if ($dot_ant != $pc13_coddot) {
 			$testatot = 0;
 		}
@@ -1365,7 +1365,7 @@ if ($numrows_itens == 0) {
 				echo "  <td nowrap colspan='15'align='left'><strong>&nbsp;</strong></td>\n";
 				echo "<tr>\n";
 			}
-			$$valdisp = db_formatar($$valdisp, "v");
+			${$valdisp} = db_formatar(${$valdisp}, "v");
 			echo "</tr>\n";
 			echo "  <td nowrap colspan='1' class='bordas' align='center' title='Marcar apenas itens da $contador&ordf; autorização'><strong>";
 			db_ancora("A", "js_marcaautoriza('". ($contador)."');", 1);
@@ -1375,8 +1375,8 @@ if ($numrows_itens == 0) {
 			db_input('valdisp_'.$contador, 12, 0, true, 'text', 3);
 			echo "</td>\n";
 			echo "</tr>\n";
-			$$valdisp         = str_replace(".", "", $$valdisp);
-			$$valdisp         = str_replace(",", ".", $$valdisp);
+			${$valdisp}         = str_replace(".", "", ${$valdisp});
+			${$valdisp}         = str_replace(",", ".", ${$valdisp});
 			$dot_ant          = $pc13_coddot;
 			$forn_ant         = $z01_numcgm;
 			$codele_ant       = $pc18_codele;
@@ -1523,14 +1523,14 @@ if ($numrows_itens == 0) {
     $seq_item++;
 
 		$atend  = 'atend_'.($contador -1).'_'.$pc81_codprocitem;
-		$$atend = $pc13_quant;
+		${$atend} = $pc13_quant;
 
 	  $op = 1;
     if($pc01_servico == 't'){
       $op = 3;
     } else {
 
-      if ($simnaod == 'disabled' || $$atend == 0) {
+      if ($simnaod == 'disabled' || ${$atend} == 0) {
         $op = 3;
       } else {
         $op = 1;
@@ -1544,19 +1544,19 @@ if ($numrows_itens == 0) {
 		echo "  <td nowrap class='$bordas' align='left'  >";
 		$valor = 'valor_'.$pc81_codprocitem;
 		if($pc01_servico == 'f'){
-			$$valor = round(($pc23_valor / $pc23_quant) * $pc13_quant, 2);
+			${$valor} = round(($pc23_valor / $pc23_quant) * $pc13_quant, 2);
 		} else {
 
 			if ($pc13_valor !=0) {
-			  $$valor = round((($pc13_valor/($pc11_vlrun*$pc11_quant))*$pc23_valor),2);
+			  ${$valor} = round((($pc13_valor/($pc11_vlrun*$pc11_quant))*$pc23_valor),2);
 			} else {
-			  $$valor = round($pc23_valor, 2);
+			  ${$valor} = round($pc23_valor, 2);
 			}
 
 		}
 
 		$iOpcao      = 3;
-		$nSaldoTotal = ($pc23_vlrun * $$atend);
+		$nSaldoTotal = ($pc23_vlrun * ${$atend});
 
 	  if ($pc01_servico == 't') {
 
@@ -1569,7 +1569,7 @@ if ($numrows_itens == 0) {
 	    $nValorSaldoTotal = $oLicitacao->getValoresParciais( $pc81_codprocitem,
 	                                                         $pc13_coddot,
 	                                                         $pc19_orctiporec )->nValorAutorizacao;
-	    $nSaldoTotal      = ($$valor - $nValorSaldoTotal);
+	    $nSaldoTotal      = (${$valor} - $nValorSaldoTotal);
     }
 
 	  ${"valor_{$pc81_codprocitem}_{$pc13_coddot}"} = $nSaldoTotal;

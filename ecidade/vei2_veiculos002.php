@@ -40,7 +40,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("ve06_veiccadcomb");
 $clrotulo->label("ve40_veiccadcentral");
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $where=" ve36_coddepto = " . db_getsession("DB_coddepto");
 if ($tipo!=""){

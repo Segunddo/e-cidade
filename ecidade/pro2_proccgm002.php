@@ -110,8 +110,8 @@
    $head5="QUEBRA POR CGM/PROCESSO/ANDAMENTOS";
  }  
  
-  list($a1,$m1,$d1) = split("-",$data1);
-  list($a2,$m2,$d2) = split("-",$data2);
+  list($a1,$m1,$d1) = preg_split("#\\-#m",$data1);
+  list($a2,$m2,$d2) = preg_split("#\\-#m",$data2);
  $head7 = "Periodo:  $d1/$m1/$a1   à   $d2/$m2/$a2 "; 
  $pdf->open();
  $pdf->addpage('P');
@@ -143,7 +143,7 @@
             }  
 	    $cor=0; 
             $pdf->setx(15); 
-            
+
             /**
              * Trata o numero do processo para quando o mesmo for do tipo OUVIDORIA
              */
@@ -151,7 +151,7 @@
             if ($p58_numero == "") {
               $sNumeroProcesso = "";
             }
-            
+
             $pdf->cell(30,4,$sNumeroProcesso,0,0,'R',$cor);
             $pdf->cell(20,4,"$p58_dtproc", 0,0,'C',$cor);
             $pdf->cell(60,4,substr($p58_requer,0,40), 0,0,'L',$cor);
@@ -211,7 +211,7 @@
             $pdf->cell(20,4,'DATA','B',0,'C',0);
             $pdf->cell(70,4,'REQUERENTE','B',0,'L',0);
             $pdf->cell(65,4,'OBS','B',1,'L',0);
-	
+
 	    $cor=0; 
             $pdf->setx(15); 
 

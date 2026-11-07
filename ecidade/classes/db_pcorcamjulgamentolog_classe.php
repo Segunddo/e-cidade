@@ -59,7 +59,7 @@ class cl_pcorcamjulgamentolog {
                  pc92_ativo = bool = Status do Julgamento 
                  ";
    //funcao construtor da classe 
-   function cl_pcorcamjulgamentolog() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcorcamjulgamentolog"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,8 +76,8 @@ class cl_pcorcamjulgamentolog {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc92_sequencial = ($this->pc92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_sequencial"]:$this->pc92_sequencial);
-       $this->pc92_usuario = ($this->pc92_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_usuario"]:$this->pc92_usuario);
+       $this->pc92_sequencial = ($this->pc92_sequencial === 0 || $this->pc92_sequencial === 0.0 || $this->pc92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_sequencial"]:$this->pc92_sequencial);
+       $this->pc92_usuario = ($this->pc92_usuario === 0 || $this->pc92_usuario === 0.0 || $this->pc92_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_usuario"]:$this->pc92_usuario);
        if($this->pc92_datajulgamento == ""){
          $this->pc92_datajulgamento_dia = ($this->pc92_datajulgamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_datajulgamento_dia"]:$this->pc92_datajulgamento_dia);
          $this->pc92_datajulgamento_mes = ($this->pc92_datajulgamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_datajulgamento_mes"]:$this->pc92_datajulgamento_mes);
@@ -89,7 +89,7 @@ class cl_pcorcamjulgamentolog {
        $this->pc92_hora = ($this->pc92_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_hora"]:$this->pc92_hora);
        $this->pc92_ativo = ($this->pc92_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc92_ativo"]:$this->pc92_ativo);
      }else{
-       $this->pc92_sequencial = ($this->pc92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_sequencial"]:$this->pc92_sequencial);
+       $this->pc92_sequencial = ($this->pc92_sequencial === 0 || $this->pc92_sequencial === 0.0 || $this->pc92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_sequencial"]:$this->pc92_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_pcorcamjulgamentolog {
          $this->pc92_sequencial = $pc92_sequencial; 
        }
      }
-     if(($this->pc92_sequencial == null) || ($this->pc92_sequencial == "") ){ 
+     if(($this->pc92_sequencial == null) || ($this->pc92_sequencial === 0 || $this->pc92_sequencial === 0.0 || $this->pc92_sequencial == "") ){ 
        $this->erro_sql = " Campo pc92_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -446,7 +446,7 @@ class cl_pcorcamjulgamentolog {
    function sql_query ( $pc92_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_pcorcamjulgamentolog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_pcorcamjulgamentolog {
    function sql_query_file ( $pc92_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -502,7 +502,7 @@ class cl_pcorcamjulgamentolog {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

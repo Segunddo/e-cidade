@@ -65,7 +65,7 @@ class cl_ouvidoriaatendimentoretorno {
                  ov20_confirma = bool = Confirmação 
                  ";
    //funcao construtor da classe 
-   function cl_ouvidoriaatendimentoretorno() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ouvidoriaatendimentoretorno"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,9 +82,9 @@ class cl_ouvidoriaatendimentoretorno {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov20_sequencial = ($this->ov20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_sequencial"]:$this->ov20_sequencial);
-       $this->ov20_tiporetorno = ($this->ov20_tiporetorno == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_tiporetorno"]:$this->ov20_tiporetorno);
-       $this->ov20_ouvidoriaatendimento = ($this->ov20_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_ouvidoriaatendimento"]:$this->ov20_ouvidoriaatendimento);
+       $this->ov20_sequencial = ($this->ov20_sequencial === 0 || $this->ov20_sequencial === 0.0 || $this->ov20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_sequencial"]:$this->ov20_sequencial);
+       $this->ov20_tiporetorno = ($this->ov20_tiporetorno === 0 || $this->ov20_tiporetorno === 0.0 || $this->ov20_tiporetorno == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_tiporetorno"]:$this->ov20_tiporetorno);
+       $this->ov20_ouvidoriaatendimento = ($this->ov20_ouvidoriaatendimento === 0 || $this->ov20_ouvidoriaatendimento === 0.0 || $this->ov20_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_ouvidoriaatendimento"]:$this->ov20_ouvidoriaatendimento);
        if($this->ov20_dataretorno == ""){
          $this->ov20_dataretorno_dia = ($this->ov20_dataretorno_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_dataretorno_dia"]:$this->ov20_dataretorno_dia);
          $this->ov20_dataretorno_mes = ($this->ov20_dataretorno_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_dataretorno_mes"]:$this->ov20_dataretorno_mes);
@@ -98,7 +98,7 @@ class cl_ouvidoriaatendimentoretorno {
        $this->ov20_resposta = ($this->ov20_resposta == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_resposta"]:$this->ov20_resposta);
        $this->ov20_confirma = ($this->ov20_confirma == "f"?@$GLOBALS["HTTP_POST_VARS"]["ov20_confirma"]:$this->ov20_confirma);
      }else{
-       $this->ov20_sequencial = ($this->ov20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_sequencial"]:$this->ov20_sequencial);
+       $this->ov20_sequencial = ($this->ov20_sequencial === 0 || $this->ov20_sequencial === 0.0 || $this->ov20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov20_sequencial"]:$this->ov20_sequencial);
      }
    }
    // funcao para inclusao
@@ -182,7 +182,7 @@ class cl_ouvidoriaatendimentoretorno {
          $this->ov20_sequencial = $ov20_sequencial; 
        }
      }
-     if(($this->ov20_sequencial == null) || ($this->ov20_sequencial == "") ){ 
+     if(($this->ov20_sequencial == null) || ($this->ov20_sequencial === 0 || $this->ov20_sequencial === 0.0 || $this->ov20_sequencial == "") ){ 
        $this->erro_sql = " Campo ov20_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -521,7 +521,7 @@ class cl_ouvidoriaatendimentoretorno {
    function sql_query ( $ov20_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -550,7 +550,7 @@ class cl_ouvidoriaatendimentoretorno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -563,7 +563,7 @@ class cl_ouvidoriaatendimentoretorno {
    function sql_query_file ( $ov20_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -584,7 +584,7 @@ class cl_ouvidoriaatendimentoretorno {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

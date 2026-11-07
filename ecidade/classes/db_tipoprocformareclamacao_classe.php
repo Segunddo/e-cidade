@@ -52,7 +52,7 @@ class cl_tipoprocformareclamacao {
                  p43_tipoproc = int4 = Tipo de Processo 
                  ";
    //funcao construtor da classe 
-   function cl_tipoprocformareclamacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tipoprocformareclamacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_tipoprocformareclamacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p43_sequencial = ($this->p43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p43_sequencial"]:$this->p43_sequencial);
-       $this->p43_formareclamacao = ($this->p43_formareclamacao == ""?@$GLOBALS["HTTP_POST_VARS"]["p43_formareclamacao"]:$this->p43_formareclamacao);
-       $this->p43_tipoproc = ($this->p43_tipoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p43_tipoproc"]:$this->p43_tipoproc);
+       $this->p43_sequencial = ($this->p43_sequencial === 0 || $this->p43_sequencial === 0.0 || $this->p43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p43_sequencial"]:$this->p43_sequencial);
+       $this->p43_formareclamacao = ($this->p43_formareclamacao === 0 || $this->p43_formareclamacao === 0.0 || $this->p43_formareclamacao == ""?@$GLOBALS["HTTP_POST_VARS"]["p43_formareclamacao"]:$this->p43_formareclamacao);
+       $this->p43_tipoproc = ($this->p43_tipoproc === 0 || $this->p43_tipoproc === 0.0 || $this->p43_tipoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p43_tipoproc"]:$this->p43_tipoproc);
      }else{
-       $this->p43_sequencial = ($this->p43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p43_sequencial"]:$this->p43_sequencial);
+       $this->p43_sequencial = ($this->p43_sequencial === 0 || $this->p43_sequencial === 0.0 || $this->p43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p43_sequencial"]:$this->p43_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tipoprocformareclamacao {
          $this->p43_sequencial = $p43_sequencial; 
        }
      }
-     if(($this->p43_sequencial == null) || ($this->p43_sequencial == "") ){ 
+     if(($this->p43_sequencial == null) || ($this->p43_sequencial === 0 || $this->p43_sequencial === 0.0 || $this->p43_sequencial == "") ){ 
        $this->erro_sql = " Campo p43_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_tipoprocformareclamacao {
    function sql_query ( $p43_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_tipoprocformareclamacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_tipoprocformareclamacao {
    function sql_query_file ( $p43_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_tipoprocformareclamacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

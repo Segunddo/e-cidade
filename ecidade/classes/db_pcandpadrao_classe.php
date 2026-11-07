@@ -56,7 +56,7 @@ class cl_pcandpadrao {
                  pc45_instit = int4 = codigo da instituicao 
                  ";
    //funcao construtor da classe 
-   function cl_pcandpadrao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pcandpadrao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_pcandpadrao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc45_codigo = ($this->pc45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_codigo"]:$this->pc45_codigo);
-       $this->pc45_ordem = ($this->pc45_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_ordem"]:$this->pc45_ordem);
-       $this->pc45_dias = ($this->pc45_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_dias"]:$this->pc45_dias);
-       $this->pc45_pctipoandam = ($this->pc45_pctipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_pctipoandam"]:$this->pc45_pctipoandam);
-       $this->pc45_instit = ($this->pc45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_instit"]:$this->pc45_instit);
+       $this->pc45_codigo = ($this->pc45_codigo === 0 || $this->pc45_codigo === 0.0 || $this->pc45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_codigo"]:$this->pc45_codigo);
+       $this->pc45_ordem = ($this->pc45_ordem === 0 || $this->pc45_ordem === 0.0 || $this->pc45_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_ordem"]:$this->pc45_ordem);
+       $this->pc45_dias = ($this->pc45_dias === 0 || $this->pc45_dias === 0.0 || $this->pc45_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_dias"]:$this->pc45_dias);
+       $this->pc45_pctipoandam = ($this->pc45_pctipoandam === 0 || $this->pc45_pctipoandam === 0.0 || $this->pc45_pctipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_pctipoandam"]:$this->pc45_pctipoandam);
+       $this->pc45_instit = ($this->pc45_instit === 0 || $this->pc45_instit === 0.0 || $this->pc45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_instit"]:$this->pc45_instit);
      }else{
-       $this->pc45_codigo = ($this->pc45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_codigo"]:$this->pc45_codigo);
+       $this->pc45_codigo = ($this->pc45_codigo === 0 || $this->pc45_codigo === 0.0 || $this->pc45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_codigo"]:$this->pc45_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_pcandpadrao {
          $this->pc45_codigo = $pc45_codigo; 
        }
      }
-     if(($this->pc45_codigo == null) || ($this->pc45_codigo == "") ){ 
+     if(($this->pc45_codigo == null) || ($this->pc45_codigo === 0 || $this->pc45_codigo === 0.0 || $this->pc45_codigo == "") ){ 
        $this->erro_sql = " Campo pc45_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_pcandpadrao {
    function sql_query ( $pc45_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_pcandpadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_pcandpadrao {
    function sql_query_depto ( $pc45_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -483,7 +483,7 @@ class cl_pcandpadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -495,7 +495,7 @@ class cl_pcandpadrao {
    function sql_query_file ( $pc45_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -516,7 +516,7 @@ class cl_pcandpadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

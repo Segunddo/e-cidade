@@ -50,7 +50,7 @@ class cl_bensmedida {
                  t67_descricao = varchar(50) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_bensmedida() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bensmedida"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_bensmedida {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t67_sequencial = ($this->t67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t67_sequencial"]:$this->t67_sequencial);
+       $this->t67_sequencial = ($this->t67_sequencial === 0 || $this->t67_sequencial === 0.0 || $this->t67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t67_sequencial"]:$this->t67_sequencial);
        $this->t67_descricao = ($this->t67_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["t67_descricao"]:$this->t67_descricao);
      }else{
-       $this->t67_sequencial = ($this->t67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t67_sequencial"]:$this->t67_sequencial);
+       $this->t67_sequencial = ($this->t67_sequencial === 0 || $this->t67_sequencial === 0.0 || $this->t67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t67_sequencial"]:$this->t67_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_bensmedida {
          $this->t67_sequencial = $t67_sequencial; 
        }
      }
-     if(($this->t67_sequencial == null) || ($this->t67_sequencial == "") ){ 
+     if(($this->t67_sequencial == null) || ($this->t67_sequencial === 0 || $this->t67_sequencial === 0.0 || $this->t67_sequencial == "") ){ 
        $this->erro_sql = " Campo t67_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_bensmedida {
    function sql_query ( $t67_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_bensmedida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_bensmedida {
    function sql_query_file ( $t67_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_bensmedida {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

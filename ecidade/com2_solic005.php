@@ -36,7 +36,8 @@ $cldb_usuarios = new cl_db_usuarios;
 $cliframe_seleciona = new cl_iframe_seleciona;
 $clrotulo = new rotulocampo;
 $cldb_usuarios->rotulo->label();
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 ?>
 <html>

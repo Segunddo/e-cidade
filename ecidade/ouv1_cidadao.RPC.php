@@ -187,7 +187,7 @@ if ($oParam->acao == "incluir") {
 
         $oRetorno->message = urlencode($clcidadaotiporetorno->erro_msg);
         $lerro             = true;
-        break;
+        exit; // PHP 8: era `break` fora de laco -- fatal de execucao no 5.6, que morria aqui
       }
     } else {
 
@@ -290,7 +290,7 @@ if ($oParam->acao == "incluir") {
 
         $oRetorno->message = urlencode($clcidadaocomposicaofamiliar->erro_msg);
         $lerro             = true;
-        break;
+        exit; // PHP 8: era `break` fora de laco -- fatal de execucao no 5.6, que morria aqui
       }
       $oRetorno->iTipoFamiliar = $iTipoFamiliar;
     } else {
@@ -306,7 +306,7 @@ if ($oParam->acao == "incluir") {
 
         $oRetorno->message = urlencode($clcidadaofamilia->erro_msg);
         $lerro             = true;
-        break;
+        exit; // PHP 8: era `break` fora de laco -- fatal de execucao no 5.6, que morria aqui
       }
 
       $clcidadaocomposicaofamiliar->as03_cidadao        = $oRetorno->iCodCidadao;
@@ -319,7 +319,7 @@ if ($oParam->acao == "incluir") {
 
         $oRetorno->message = urlencode($clcidadaocomposicaofamiliar->erro_msg);
         $lerro             = true;
-        break;
+        exit; // PHP 8: era `break` fora de laco -- fatal de execucao no 5.6, que morria aqui
       }
 
       $oDataVinculo                = new DBDate(date("d/m/Y"));
@@ -578,7 +578,7 @@ if ($oParam->acao == "incluir") {
 
             $oRetorno->message = urlencode($clcidadaocomposicaofamiliar->erro_msg);
             $lerro             = true;
-            break;
+            exit; // PHP 8: era `break` fora de laco -- fatal de execucao no 5.6, que morria aqui
           }
 
         } else {
@@ -594,7 +594,7 @@ if ($oParam->acao == "incluir") {
 
             $oRetorno->message = urlencode($clcidadaofamilia->erro_msg);
             $lerro             = true;
-            break;
+            exit; // PHP 8: era `break` fora de laco -- fatal de execucao no 5.6, que morria aqui
           }
 
           $clcidadaocomposicaofamiliar->as03_sequencial     = $oParam->cidadao->as03_sequencial;
@@ -608,7 +608,7 @@ if ($oParam->acao == "incluir") {
 
             $oRetorno->message = urlencode($clcidadaocomposicaofamiliar->erro_msg);
             $lerro             = true;
-            break;
+            exit; // PHP 8: era `break` fora de laco -- fatal de execucao no 5.6, que morria aqui
           }
 
           $sWhereLocalAtendimentoFamilia = "as23_cidadaofamilia = {$oParam->cidadao->iCidadaoFamilia}";

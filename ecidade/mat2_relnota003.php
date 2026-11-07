@@ -39,7 +39,8 @@ $cliframe_seleciona = new cl_iframe_seleciona;
 $clrotulo = new rotulocampo;
 $cldb_usuarios->rotulo->label();
 $clrotulo->label("e69_numemp");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 ?>

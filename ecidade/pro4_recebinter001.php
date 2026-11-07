@@ -71,7 +71,7 @@ if (isset($incluir)){
     $chave = key($vt);
     if (substr($chave, 0, 5) == "CHECK") {
       
-      $dados = split("_", $chave); 
+      $dados = preg_split("#_#m", $chave); 
       $result_despacho = $clproctransferint->sql_record($clproctransferint->sql_query_file(null,
                                                                                            "p88_despacho as despacho,
                                                                                             p88_publico as publico",

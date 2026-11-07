@@ -31,7 +31,8 @@
 	$clrotulo = new rotulocampo;
 	$clveiccadcentral = new cl_veiccadcentral;
 	
-	parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+	parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+    extract($__qs);
 	//db_postmemory($HTTP_SERVER_VARS,2);exit;
 	
 	if($quebra == 's') {
@@ -76,7 +77,7 @@
             else 'INATIVO'
             end as situacao";
 	
-	$iResultCentral = pg_numrows($result_central);
+	$iResultCentral = ($result_central ? pg_numrows($result_central) : null);
 	
 	/**
 	 * Caso não retorne 0 linhas será exibida a mensagem de erro abaixo

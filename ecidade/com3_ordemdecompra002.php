@@ -36,7 +36,8 @@ require_once(modification("dbforms/verticalTab.widget.php"));
 
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 $oGet = db_utils::postMemory($_GET);
 
 try {

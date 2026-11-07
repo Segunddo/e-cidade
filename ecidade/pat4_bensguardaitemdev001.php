@@ -36,7 +36,8 @@ require_once(modification("classes/db_bensguarda_classe.php"));
 require_once(modification("classes/db_situabens_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("libs/db_app.utils.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clbensguardaitemdev = new cl_bensguardaitemdev;
 $clbensguardaitem    = new cl_bensguardaitem;
@@ -60,7 +61,7 @@ if (isset($incluir)) {
   if ($chaves != "") {
     
     db_inicio_transacao();
-    $dados = split("#", $chaves);
+    $dados = preg_split("#\\##m", $chaves);
     for ($w = 0; $w < count($dados); $w++) {
       
       if ($sqlerro == false) {

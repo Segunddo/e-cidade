@@ -119,7 +119,7 @@ class modelo4CM extends modeloEtiquetaBasica{
 
   protected function substituiVariaveis($texto){
 
-      $txt = split(" ", $texto);
+      $txt = preg_split("# #m", $texto);
 
       $texto1 = '';
       for ($x = 0; $x < sizeof($txt); $x ++) {

@@ -54,11 +54,22 @@ for _raiz in ("model", "std"):
                 for _m in re.finditer(rb'^\s*(?:abstract\s+|final\s+)?(?:class|interface)\s+(\w+)', open(_p, "rb").read(), re.M):
                     MAPA_CLS.setdefault(_m.group(1).decode().lower(), _p)
 
+# 15a lacuna: classes COM NAMESPACE (src/, app/, api/), carregadas pelo autoload PSR-4 --
+# `use ECidade\...;`, `new \ECidade\...`, e os servicos por chave de texto do bootstrap.php.
+# Achada no Patrimonial: um RPC de Ouvidoria quebrou em src/Patrimonial/Protocolo/Container.php,
+# que nenhum universo listava. O resolvedor vive em ns_fecho.py (tambem roda sozinho).
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from ns_fecho import refs as ns_refs
+
 def classes_php4(b):
     """Classes cujo construtor e o metodo homonimo (estilo PHP 4), olhando o corpo de
     CADA classe isoladamente. Fatiar por `class X` evita dois erros do regex de arquivo
     inteiro: mascarar classes vizinhas por causa de um __construct alheio, e contar um
     METODO homonimo de outra classe como se fosse construtor."""
+    # Em classe COM namespace o metodo homonimo nao e construtor desde o PHP 5.3.3 --
+    # conferido no 5.6. Renomea-lo para __construct MUDARIA o 5.6 (15a lacuna:
+    # src/Educacao/Escola/Censo/Identificacao/Importar.php).
+    if re.search(rb'^\s*namespace\s+[\w\\]+\s*;', b, re.M): return []
     pos = [(m.start(), m.group(1)) for m in re.finditer(rb'\bclass\s+(\w+)', b)]
     out = []
     for i, (ini, nome) in enumerate(pos):
@@ -88,6 +99,8 @@ def diretas(p):
     for m in RX_CLS.finditer(b):                       # 13a lacuna: autoload de model/ e std/
         q = MAPA_CLS.get((m.group(1) or m.group(2)).decode('latin1').lower())
         if q: out.add(q)
+    if not os.environ.get("SEM_NS"):                  # SEM_NS=1 mede o universo SEM esta frente
+        out |= ns_refs(p)                              # 15a lacuna: namespace (src/app/api)
     _c[p] = out
     return out
 
@@ -103,6 +116,9 @@ telas = sorted(f for f in os.listdir(".") if os.path.isfile(f) and f.endswith(".
 # <prefixo> passa a ser so o nome dos arquivos de saida.
 if os.environ.get("TELAS"):
     telas = sorted(os.environ["TELAS"].split(","))
+    # TELAS=@<arquivo>: uma por linha -- listas grandes nao cabem numa variavel de ambiente
+    if len(telas) == 1 and telas[0].startswith("@"):
+        telas = sorted({l.strip() for l in open(telas[0][1:]) if l.strip()})
 js = set().union(*[citados(f) for f in telas]) - set(telas)
 universo, fila = set(telas) | js, list(telas) + sorted(js)
 while fila:

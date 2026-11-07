@@ -44,7 +44,8 @@ $clrotulo->label("pc71_codigo");
 $clrotulo->label("pc71_descr");
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $DB_coddepto = db_getsession("DB_coddepto");
 $oParam = db_utils::fieldsMemory($clpcparam->sql_record($clpcparam->sql_query_file(db_getsession("DB_instit"))),0);
@@ -82,7 +83,7 @@ if (isset ($atualizar)) {
 		  $chave = key($vt);
 		
 		  if (substr($chave, 0, 4) == "DATA") {
-		  	$dados = split("_", $chave);
+		  	$dados = preg_split("#_#m", $chave);
 	  		if ($dados[1] == $dadosant) {
  			  } else {
  			  	
@@ -335,18 +336,18 @@ if (isset ($pc72_pctipocertif) && $pc72_pctipocertif != "") {
 		if ($clpcfornecertifdoc->numrows>0){
 			db_fieldsmemory($result_docforne,0);
 
-			$$ano=substr($pc75_validade,0,4);
-			$$mes=substr($pc75_validade,5,2);
-			$$dia=substr($pc75_validade,8,2);
+			${$ano}=substr($pc75_validade,0,4);
+			${$mes}=substr($pc75_validade,5,2);
+			${$dia}=substr($pc75_validade,8,2);
 
 			if ($pc75_dataemissao!="") {
-				$$ano_e=substr($pc75_dataemissao,0,4);
-	      $$mes_e=substr($pc75_dataemissao,5,2);
-	      $$dia_e=substr($pc75_dataemissao,8,2);
+				${$ano_e}=substr($pc75_dataemissao,0,4);
+	      ${$mes_e}=substr($pc75_dataemissao,5,2);
+	      ${$dia_e}=substr($pc75_dataemissao,8,2);
 			}
 			
-			$$obs=$pc75_obs;
-			$$apresentado = $pc75_apresentado;
+			${$obs}=$pc75_obs;
+			${$apresentado} = $pc75_apresentado;
 		}
 		
 		
@@ -362,12 +363,12 @@ if (isset ($pc72_pctipocertif) && $pc72_pctipocertif != "") {
 						     <td  class='$corpo'  align='center' title='$Tpc71_codigo'><small>$pc71_codigo</small></td>
 						     <td  class='$corpo'  align='center' title='$Tpc71_descr'><small>$pc71_descr</small></td>
 		                     <td  class='$corpo'  align='center' title='Validade' nowrap ><b>$ast</b>";
-		db_inputdata("DATA_$pc71_codigo", @$$dia, @$$mes, @$$ano, true, "text", 1);
+		db_inputdata("DATA_$pc71_codigo", @${$dia}, @${$mes}, @${$ano}, true, "text", 1);
 		echo "       </td>
 		                     <td  class='$corpo'  align='center' title='Validade' nowrap >";
 		                     
 
-    db_inputdata("EMISSAO_$pc71_codigo", @$$dia_e, @$$mes_e, @$$ano_e, true, "text", 1);
+    db_inputdata("EMISSAO_$pc71_codigo", @${$dia_e}, @${$mes_e}, @${$ano_e}, true, "text", 1);
     echo "       </td>
                          <td  class='$corpo'  align='center' title='Validade' nowrap >";
                          
@@ -400,7 +401,7 @@ if (isset ($atualizar)) {
 		db_msgbox($erro_msg);
 ?>
 		<script>
-		    
+
 		    if (confirm("Imprimir certificado?")){
                          //jan = window.open("com2_certforne002.php?codigo=<?=$codigo?>&oSocial=<?=$oSocial?>",'','width='+(screen.availWidth-5)+',height='+(screen.availHeight-40)+',scrollbars=1,location=0 ');
                          jan = window.open("com2_certforne002.php?codigo=<?=$codigo?>&oSocial=<?=$oSocial?>",'','width='+(screen.availWidth-5)+',height='+(screen.availHeight-40)+',scrollbars=1,location=0 ');

@@ -120,7 +120,7 @@ if (isset($oPost->btnincluir) && $oPost->btnincluir == 1) {
 
         if (isset($oPost->docs) && $oPost->docs != "") {
             if ($lSqlErro == false) {
-                $chaves = split("#",$oPost->docs);
+                $chaves = preg_split("#\\##m",$oPost->docs);
                 $chave  = count($chaves);
                 for($x = 0; $x < $chave-1; $x++){
                     $clprocprocessodoc->p81_codproc = $p58_codproc;
@@ -137,7 +137,7 @@ if (isset($oPost->btnincluir) && $oPost->btnincluir == 1) {
 
         if (isset($oPost->ndocs) && $oPost->ndocs != "") {
             if ($lSqlErro == false) {
-                $chaves = split("#",$oPost->ndocs);
+                $chaves = preg_split("#\\##m",$oPost->ndocs);
                 $chave  = count($chaves);
 
                 for( $i = 0; $i < $chave-1; $i++){
@@ -171,7 +171,7 @@ if (isset($oPost->btnincluir) && $oPost->btnincluir == 1) {
                         $p55_codvar = $ln["p54_codigo"];
                         $p55_codcam = $ln["p54_codcam"];
 
-                        $clproctipovar->p55_conteudo = $$nomecam;
+                        $clproctipovar->p55_conteudo = ${$nomecam};
                         $clproctipovar->incluir($p55_codproc,$p55_codvar,$p55_codcam);
 
                         if ($clproctipovar->erro_status == '0') {

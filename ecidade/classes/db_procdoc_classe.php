@@ -52,7 +52,7 @@ class cl_procdoc {
                  p56_ouvidoriatipodado = int4 = Tipo de Dado 
                  ";
    //funcao construtor da classe
-   function cl_procdoc() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procdoc");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_procdoc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p56_coddoc = ($this->p56_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_coddoc"]:$this->p56_coddoc);
+       $this->p56_coddoc = ($this->p56_coddoc === 0 || $this->p56_coddoc === 0.0 || $this->p56_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_coddoc"]:$this->p56_coddoc);
        $this->p56_descr = ($this->p56_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_descr"]:$this->p56_descr);
        $this->p56_ouvidoriatipodado = ($this->p56_ouvidoriatipodado == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_ouvidoriatipodado"]:$this->p56_ouvidoriatipodado);
      }else{
-       $this->p56_coddoc = ($this->p56_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_coddoc"]:$this->p56_coddoc);
+       $this->p56_coddoc = ($this->p56_coddoc === 0 || $this->p56_coddoc === 0.0 || $this->p56_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_coddoc"]:$this->p56_coddoc);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_procdoc {
          $this->p56_coddoc = $p56_coddoc;
        }
      }
-     if(($this->p56_coddoc == null) || ($this->p56_coddoc == "") ){
+     if(($this->p56_coddoc == null) || ($this->p56_coddoc === 0 || $this->p56_coddoc === 0.0 || $this->p56_coddoc == "") ){
        $this->erro_sql = " Campo p56_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -347,7 +347,7 @@ class cl_procdoc {
    function sql_query ( $p56_coddoc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -368,7 +368,7 @@ class cl_procdoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_procdoc {
    function sql_query_file ( $p56_coddoc=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_procdoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

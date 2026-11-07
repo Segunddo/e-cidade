@@ -52,7 +52,7 @@ class cl_bensmodeloetiquetapadrao {
                  t72_strxml = text = XML 
                  ";
    //funcao construtor da classe 
-   function cl_bensmodeloetiquetapadrao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bensmodeloetiquetapadrao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_bensmodeloetiquetapadrao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t72_sequencial = ($this->t72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t72_sequencial"]:$this->t72_sequencial);
+       $this->t72_sequencial = ($this->t72_sequencial === 0 || $this->t72_sequencial === 0.0 || $this->t72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t72_sequencial"]:$this->t72_sequencial);
        $this->t72_descr = ($this->t72_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["t72_descr"]:$this->t72_descr);
        $this->t72_strxml = ($this->t72_strxml == ""?@$GLOBALS["HTTP_POST_VARS"]["t72_strxml"]:$this->t72_strxml);
      }else{
-       $this->t72_sequencial = ($this->t72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t72_sequencial"]:$this->t72_sequencial);
+       $this->t72_sequencial = ($this->t72_sequencial === 0 || $this->t72_sequencial === 0.0 || $this->t72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t72_sequencial"]:$this->t72_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_bensmodeloetiquetapadrao {
          $this->t72_sequencial = $t72_sequencial; 
        }
      }
-     if(($this->t72_sequencial == null) || ($this->t72_sequencial == "") ){ 
+     if(($this->t72_sequencial == null) || ($this->t72_sequencial === 0 || $this->t72_sequencial === 0.0 || $this->t72_sequencial == "") ){ 
        $this->erro_sql = " Campo t72_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_bensmodeloetiquetapadrao {
    function sql_query ( $t72_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_bensmodeloetiquetapadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_bensmodeloetiquetapadrao {
    function sql_query_file ( $t72_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_bensmodeloetiquetapadrao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

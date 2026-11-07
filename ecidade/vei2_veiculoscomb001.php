@@ -32,7 +32,8 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_veiculoscomb_classe.php"));
 include(modification("libs/db_utils.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clveiculoscomb = new cl_veiculoscomb;
@@ -61,7 +62,7 @@ if ($db_opcao != 1) {
 }
 
 if (isset($confirmar) && trim($confirmar)!=""){
-  $vet_combustiveis = split(",",$ve06_veiccadcomb);
+  $vet_combustiveis = preg_split("#,#m",$ve06_veiccadcomb);
   $vetor            = array(array("ve06_veiccadcomb","ve06_veiculos","ve06_padrao"));
   $cont_vetor       = 0;
   for($x = 0; $x < count($vet_combustiveis); $x++){
@@ -122,9 +123,9 @@ if (isset($confirmar) && trim($confirmar)!=""){
         $array_marcados=explode(',',$marcados);
         print_r($array_marcados);
         $cont_vetor=count($array_marcados);
-        
+
          for($x = 0; $x < $cont_vetor; $x++){
-          
+
           $clveiculoscomb->ve06_veiccadcomb = $array_marcados[$x]; 
           $clveiculoscomb->ve06_veiculos    = $ve06_veiculos;
 

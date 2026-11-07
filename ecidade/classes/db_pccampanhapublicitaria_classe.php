@@ -63,7 +63,7 @@ class cl_pccampanhapublicitaria
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->pc94_codigo = ($this->pc94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_codigo"]:$this->pc94_codigo);
+       $this->pc94_codigo = ($this->pc94_codigo === 0 || $this->pc94_codigo === 0.0 || $this->pc94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_codigo"]:$this->pc94_codigo);
        if($this->pc94_datainicio == ""){
          $this->pc94_datainicio_dia = ($this->pc94_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_datainicio_dia"]:$this->pc94_datainicio_dia);
          $this->pc94_datainicio_mes = ($this->pc94_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_datainicio_mes"]:$this->pc94_datainicio_mes);
@@ -80,14 +80,14 @@ class cl_pccampanhapublicitaria
             $this->pc94_datafim = $this->pc94_datafim_ano."-".$this->pc94_datafim_mes."-".$this->pc94_datafim_dia;
          }
        }
-       $this->pc94_pctipocampanhapublicitaria = ($this->pc94_pctipocampanhapublicitaria == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_pctipocampanhapublicitaria"]:$this->pc94_pctipocampanhapublicitaria);
-       $this->pc94_comissaoveiculacao = ($this->pc94_comissaoveiculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_comissaoveiculacao"]:$this->pc94_comissaoveiculacao);
-       $this->pc94_comissaoproducao = ($this->pc94_comissaoproducao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_comissaoproducao"]:$this->pc94_comissaoproducao);
-       $this->pc94_pcmater = ($this->pc94_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_pcmater"]:$this->pc94_pcmater);
-       $this->pc94_cgm = ($this->pc94_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_cgm"]:$this->pc94_cgm);
-       $this->pc94_valorcampanha = ($this->pc94_valorcampanha == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_valorcampanha"]:$this->pc94_valorcampanha);
+       $this->pc94_pctipocampanhapublicitaria = ($this->pc94_pctipocampanhapublicitaria === 0 || $this->pc94_pctipocampanhapublicitaria === 0.0 || $this->pc94_pctipocampanhapublicitaria == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_pctipocampanhapublicitaria"]:$this->pc94_pctipocampanhapublicitaria);
+       $this->pc94_comissaoveiculacao = ($this->pc94_comissaoveiculacao === 0 || $this->pc94_comissaoveiculacao === 0.0 || $this->pc94_comissaoveiculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_comissaoveiculacao"]:$this->pc94_comissaoveiculacao);
+       $this->pc94_comissaoproducao = ($this->pc94_comissaoproducao === 0 || $this->pc94_comissaoproducao === 0.0 || $this->pc94_comissaoproducao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_comissaoproducao"]:$this->pc94_comissaoproducao);
+       $this->pc94_pcmater = ($this->pc94_pcmater === 0 || $this->pc94_pcmater === 0.0 || $this->pc94_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_pcmater"]:$this->pc94_pcmater);
+       $this->pc94_cgm = ($this->pc94_cgm === 0 || $this->pc94_cgm === 0.0 || $this->pc94_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_cgm"]:$this->pc94_cgm);
+       $this->pc94_valorcampanha = ($this->pc94_valorcampanha === 0 || $this->pc94_valorcampanha === 0.0 || $this->pc94_valorcampanha == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_valorcampanha"]:$this->pc94_valorcampanha);
      }else{
-       $this->pc94_codigo = ($this->pc94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_codigo"]:$this->pc94_codigo);
+       $this->pc94_codigo = ($this->pc94_codigo === 0 || $this->pc94_codigo === 0.0 || $this->pc94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc94_codigo"]:$this->pc94_codigo);
      }
    }
 
@@ -160,7 +160,7 @@ class cl_pccampanhapublicitaria
          $this->pc94_codigo = $pc94_codigo;
        }
      }
-     if(($this->pc94_codigo == null) || ($this->pc94_codigo == "") ){
+     if(($this->pc94_codigo == null) || ($this->pc94_codigo === 0 || $this->pc94_codigo === 0.0 || $this->pc94_codigo == "") ){
        $this->erro_sql = " Campo pc94_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

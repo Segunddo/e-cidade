@@ -52,7 +52,7 @@ class cl_pctipocontrato {
                  p70_tipo = varchar(1) = Tipo 
                  ";
    //funcao construtor da classe 
-   function cl_pctipocontrato() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pctipocontrato"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_pctipocontrato {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p70_codtipo = ($this->p70_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_codtipo"]:$this->p70_codtipo);
+       $this->p70_codtipo = ($this->p70_codtipo === 0 || $this->p70_codtipo === 0.0 || $this->p70_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_codtipo"]:$this->p70_codtipo);
        $this->p70_descr = ($this->p70_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_descr"]:$this->p70_descr);
        $this->p70_tipo = ($this->p70_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_tipo"]:$this->p70_tipo);
      }else{
-       $this->p70_codtipo = ($this->p70_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_codtipo"]:$this->p70_codtipo);
+       $this->p70_codtipo = ($this->p70_codtipo === 0 || $this->p70_codtipo === 0.0 || $this->p70_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_codtipo"]:$this->p70_codtipo);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_pctipocontrato {
        return false;
      }
        $this->p70_codtipo = $p70_codtipo; 
-     if(($this->p70_codtipo == null) || ($this->p70_codtipo == "") ){ 
+     if(($this->p70_codtipo == null) || ($this->p70_codtipo === 0 || $this->p70_codtipo === 0.0 || $this->p70_codtipo == "") ){ 
        $this->erro_sql = " Campo p70_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -336,7 +336,7 @@ class cl_pctipocontrato {
    function sql_query ( $p70_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -357,7 +357,7 @@ class cl_pctipocontrato {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -369,7 +369,7 @@ class cl_pctipocontrato {
    function sql_query_file ( $p70_codtipo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_pctipocontrato {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

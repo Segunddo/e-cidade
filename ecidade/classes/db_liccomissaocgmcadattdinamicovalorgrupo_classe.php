@@ -26,7 +26,7 @@ class cl_liccomissaocgmcadattdinamicovalorgrupo {
                  l15_cadattdinamicovalorgrupo = int4 = Grupo dos Valores 
                  ";
    //funcao construtor da classe 
-   function cl_liccomissaocgmcadattdinamicovalorgrupo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liccomissaocgmcadattdinamicovalorgrupo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_liccomissaocgmcadattdinamicovalorgrupo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l15_sequencial = ($this->l15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l15_sequencial"]:$this->l15_sequencial);
-       $this->l15_liccomissaocgm = ($this->l15_liccomissaocgm == ""?@$GLOBALS["HTTP_POST_VARS"]["l15_liccomissaocgm"]:$this->l15_liccomissaocgm);
-       $this->l15_cadattdinamicovalorgrupo = ($this->l15_cadattdinamicovalorgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["l15_cadattdinamicovalorgrupo"]:$this->l15_cadattdinamicovalorgrupo);
+       $this->l15_sequencial = ($this->l15_sequencial === 0 || $this->l15_sequencial === 0.0 || $this->l15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l15_sequencial"]:$this->l15_sequencial);
+       $this->l15_liccomissaocgm = ($this->l15_liccomissaocgm === 0 || $this->l15_liccomissaocgm === 0.0 || $this->l15_liccomissaocgm == ""?@$GLOBALS["HTTP_POST_VARS"]["l15_liccomissaocgm"]:$this->l15_liccomissaocgm);
+       $this->l15_cadattdinamicovalorgrupo = ($this->l15_cadattdinamicovalorgrupo === 0 || $this->l15_cadattdinamicovalorgrupo === 0.0 || $this->l15_cadattdinamicovalorgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["l15_cadattdinamicovalorgrupo"]:$this->l15_cadattdinamicovalorgrupo);
      }else{
-       $this->l15_sequencial = ($this->l15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l15_sequencial"]:$this->l15_sequencial);
+       $this->l15_sequencial = ($this->l15_sequencial === 0 || $this->l15_sequencial === 0.0 || $this->l15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l15_sequencial"]:$this->l15_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_liccomissaocgmcadattdinamicovalorgrupo {
          $this->l15_sequencial = $l15_sequencial; 
        }
      }
-     if(($this->l15_sequencial == null) || ($this->l15_sequencial == "") ){ 
+     if(($this->l15_sequencial == null) || ($this->l15_sequencial === 0 || $this->l15_sequencial === 0.0 || $this->l15_sequencial == "") ){ 
        $this->erro_sql = " Campo l15_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

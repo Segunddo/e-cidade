@@ -66,7 +66,7 @@ class cl_veicmotoristas {
                  ve05_veiccadmotoristasit = int4 = Situação do Condutor 
                  ";
    //funcao construtor da classe 
-   function cl_veicmotoristas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veicmotoristas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,10 +83,10 @@ class cl_veicmotoristas {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve05_codigo = ($this->ve05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_codigo"]:$this->ve05_codigo);
-       $this->ve05_numcgm = ($this->ve05_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_numcgm"]:$this->ve05_numcgm);
+       $this->ve05_codigo = ($this->ve05_codigo === 0 || $this->ve05_codigo === 0.0 || $this->ve05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_codigo"]:$this->ve05_codigo);
+       $this->ve05_numcgm = ($this->ve05_numcgm === 0 || $this->ve05_numcgm === 0.0 || $this->ve05_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_numcgm"]:$this->ve05_numcgm);
        $this->ve05_habilitacao = ($this->ve05_habilitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_habilitacao"]:$this->ve05_habilitacao);
-       $this->ve05_veiccadcategcnh = ($this->ve05_veiccadcategcnh == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_veiccadcategcnh"]:$this->ve05_veiccadcategcnh);
+       $this->ve05_veiccadcategcnh = ($this->ve05_veiccadcategcnh === 0 || $this->ve05_veiccadcategcnh === 0.0 || $this->ve05_veiccadcategcnh == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_veiccadcategcnh"]:$this->ve05_veiccadcategcnh);
        if($this->ve05_dtvenc == ""){
          $this->ve05_dtvenc_dia = ($this->ve05_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_dtvenc_dia"]:$this->ve05_dtvenc_dia);
          $this->ve05_dtvenc_mes = ($this->ve05_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_dtvenc_mes"]:$this->ve05_dtvenc_mes);
@@ -103,9 +103,9 @@ class cl_veicmotoristas {
             $this->ve05_dtprimcnh = $this->ve05_dtprimcnh_ano."-".$this->ve05_dtprimcnh_mes."-".$this->ve05_dtprimcnh_dia;
          }
        }
-       $this->ve05_veiccadmotoristasit = ($this->ve05_veiccadmotoristasit == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_veiccadmotoristasit"]:$this->ve05_veiccadmotoristasit);
+       $this->ve05_veiccadmotoristasit = ($this->ve05_veiccadmotoristasit === 0 || $this->ve05_veiccadmotoristasit === 0.0 || $this->ve05_veiccadmotoristasit == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_veiccadmotoristasit"]:$this->ve05_veiccadmotoristasit);
      }else{
-       $this->ve05_codigo = ($this->ve05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_codigo"]:$this->ve05_codigo);
+       $this->ve05_codigo = ($this->ve05_codigo === 0 || $this->ve05_codigo === 0.0 || $this->ve05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve05_codigo"]:$this->ve05_codigo);
      }
    }
    // funcao para inclusao
@@ -189,7 +189,7 @@ class cl_veicmotoristas {
          $this->ve05_codigo = $ve05_codigo; 
        }
      }
-     if(($this->ve05_codigo == null) || ($this->ve05_codigo == "") ){ 
+     if(($this->ve05_codigo == null) || ($this->ve05_codigo === 0 || $this->ve05_codigo === 0.0 || $this->ve05_codigo == "") ){ 
        $this->erro_sql = " Campo ve05_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -531,7 +531,7 @@ class cl_veicmotoristas {
    function sql_query ( $ve05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -555,7 +555,7 @@ class cl_veicmotoristas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -567,7 +567,7 @@ class cl_veicmotoristas {
    function sql_query_central ($ve05_codigo=null,$campos="*",$ordem=null,$dbwhere="",$dbinner=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -598,7 +598,7 @@ class cl_veicmotoristas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -610,7 +610,7 @@ class cl_veicmotoristas {
    function sql_query_file ( $ve05_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -631,7 +631,7 @@ class cl_veicmotoristas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -643,7 +643,7 @@ class cl_veicmotoristas {
    function sql_query_veic ($ve05_codigo=null,$campos="*",$ordem=null,$dbwhere="",$dbinner=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -676,7 +676,7 @@ class cl_veicmotoristas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

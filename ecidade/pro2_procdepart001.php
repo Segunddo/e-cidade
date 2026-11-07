@@ -35,7 +35,8 @@ require_once(modification("classes/db_empempenho_classe.php"));
 require_once(modification("libs/db_app.utils.php"));
 require_once(modification("libs/db_utils.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clempempenho       = new cl_empempenho;
 $aux                = new cl_arquivo_auxiliar;
@@ -52,7 +53,7 @@ $ano  = db_getsession("DB_anousu");
 $dia2 = "31";
 $mes2 = "12";
 $ano2 = db_getsession("DB_anousu");
-list($mes,$dia) = split("-",date("m-d"));
+list($mes,$dia) = preg_split("#\\-#m",date("m-d"));
 
 $matriz = array("1" => "Processos iniciados no departamento",
                 "2" => "Processos que estao no departamento(Ultimo andamento)",

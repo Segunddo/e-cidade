@@ -52,7 +52,7 @@ class cl_matordemmail {
                  m55_email = varchar(30) = E-mail 
                  ";
    //funcao construtor da classe 
-   function cl_matordemmail() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matordemmail"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_matordemmail {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m55_codigo = ($this->m55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codigo"]:$this->m55_codigo);
-       $this->m55_codordem = ($this->m55_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codordem"]:$this->m55_codordem);
+       $this->m55_codigo = ($this->m55_codigo === 0 || $this->m55_codigo === 0.0 || $this->m55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codigo"]:$this->m55_codigo);
+       $this->m55_codordem = ($this->m55_codordem === 0 || $this->m55_codordem === 0.0 || $this->m55_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codordem"]:$this->m55_codordem);
        $this->m55_email = ($this->m55_email == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_email"]:$this->m55_email);
      }else{
-       $this->m55_codigo = ($this->m55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codigo"]:$this->m55_codigo);
+       $this->m55_codigo = ($this->m55_codigo === 0 || $this->m55_codigo === 0.0 || $this->m55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codigo"]:$this->m55_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_matordemmail {
          $this->m55_codigo = $m55_codigo; 
        }
      }
-     if(($this->m55_codigo == null) || ($this->m55_codigo == "") ){ 
+     if(($this->m55_codigo == null) || ($this->m55_codigo === 0 || $this->m55_codigo === 0.0 || $this->m55_codigo == "") ){ 
        $this->erro_sql = " Campo m55_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_matordemmail {
    function sql_query ( $m55_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_matordemmail {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_matordemmail {
    function sql_query_file ( $m55_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_matordemmail {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

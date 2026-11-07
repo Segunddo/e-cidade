@@ -52,7 +52,7 @@ class cl_ouvidoriaatendimentocgm {
                  ov11_ouvidoriaatendimento = int4 = Atendimento 
                  ";
    //funcao construtor da classe 
-   function cl_ouvidoriaatendimentocgm() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ouvidoriaatendimentocgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_ouvidoriaatendimentocgm {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov11_sequencial = ($this->ov11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov11_sequencial"]:$this->ov11_sequencial);
-       $this->ov11_cgm = ($this->ov11_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ov11_cgm"]:$this->ov11_cgm);
-       $this->ov11_ouvidoriaatendimento = ($this->ov11_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov11_ouvidoriaatendimento"]:$this->ov11_ouvidoriaatendimento);
+       $this->ov11_sequencial = ($this->ov11_sequencial === 0 || $this->ov11_sequencial === 0.0 || $this->ov11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov11_sequencial"]:$this->ov11_sequencial);
+       $this->ov11_cgm = ($this->ov11_cgm === 0 || $this->ov11_cgm === 0.0 || $this->ov11_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ov11_cgm"]:$this->ov11_cgm);
+       $this->ov11_ouvidoriaatendimento = ($this->ov11_ouvidoriaatendimento === 0 || $this->ov11_ouvidoriaatendimento === 0.0 || $this->ov11_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov11_ouvidoriaatendimento"]:$this->ov11_ouvidoriaatendimento);
      }else{
-       $this->ov11_sequencial = ($this->ov11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov11_sequencial"]:$this->ov11_sequencial);
+       $this->ov11_sequencial = ($this->ov11_sequencial === 0 || $this->ov11_sequencial === 0.0 || $this->ov11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov11_sequencial"]:$this->ov11_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_ouvidoriaatendimentocgm {
          $this->ov11_sequencial = $ov11_sequencial; 
        }
      }
-     if(($this->ov11_sequencial == null) || ($this->ov11_sequencial == "") ){ 
+     if(($this->ov11_sequencial == null) || ($this->ov11_sequencial === 0 || $this->ov11_sequencial === 0.0 || $this->ov11_sequencial == "") ){ 
        $this->erro_sql = " Campo ov11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_ouvidoriaatendimentocgm {
    function sql_query ( $ov11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_ouvidoriaatendimentocgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -402,7 +402,7 @@ class cl_ouvidoriaatendimentocgm {
    function sql_query_file ( $ov11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_ouvidoriaatendimentocgm {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

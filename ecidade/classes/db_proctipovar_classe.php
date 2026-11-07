@@ -54,7 +54,7 @@ class cl_proctipovar {
                  p55_conteudo = text = conteúdo 
                  ";
    //funcao construtor da classe 
-   function cl_proctipovar() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("proctipovar"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,14 +71,14 @@ class cl_proctipovar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p55_codproc = ($this->p55_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codproc"]:$this->p55_codproc);
-       $this->p55_codvar = ($this->p55_codvar == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codvar"]:$this->p55_codvar);
-       $this->p55_codcam = ($this->p55_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codcam"]:$this->p55_codcam);
+       $this->p55_codproc = ($this->p55_codproc === 0 || $this->p55_codproc === 0.0 || $this->p55_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codproc"]:$this->p55_codproc);
+       $this->p55_codvar = ($this->p55_codvar === 0 || $this->p55_codvar === 0.0 || $this->p55_codvar == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codvar"]:$this->p55_codvar);
+       $this->p55_codcam = ($this->p55_codcam === 0 || $this->p55_codcam === 0.0 || $this->p55_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codcam"]:$this->p55_codcam);
        $this->p55_conteudo = ($this->p55_conteudo == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_conteudo"]:$this->p55_conteudo);
      }else{
-       $this->p55_codproc = ($this->p55_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codproc"]:$this->p55_codproc);
-       $this->p55_codvar = ($this->p55_codvar == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codvar"]:$this->p55_codvar);
-       $this->p55_codcam = ($this->p55_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codcam"]:$this->p55_codcam);
+       $this->p55_codproc = ($this->p55_codproc === 0 || $this->p55_codproc === 0.0 || $this->p55_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codproc"]:$this->p55_codproc);
+       $this->p55_codvar = ($this->p55_codvar === 0 || $this->p55_codvar === 0.0 || $this->p55_codvar == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codvar"]:$this->p55_codvar);
+       $this->p55_codcam = ($this->p55_codcam === 0 || $this->p55_codcam === 0.0 || $this->p55_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["p55_codcam"]:$this->p55_codcam);
      }
    }
    // funcao para inclusao
@@ -96,7 +96,7 @@ class cl_proctipovar {
        $this->p55_codproc = $p55_codproc; 
        $this->p55_codvar = $p55_codvar; 
        $this->p55_codcam = $p55_codcam; 
-     if(($this->p55_codproc == null) || ($this->p55_codproc == "") ){ 
+     if(($this->p55_codproc == null) || ($this->p55_codproc === 0 || $this->p55_codproc === 0.0 || $this->p55_codproc == "") ){ 
        $this->erro_sql = " Campo p55_codproc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -104,7 +104,7 @@ class cl_proctipovar {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p55_codvar == null) || ($this->p55_codvar == "") ){ 
+     if(($this->p55_codvar == null) || ($this->p55_codvar === 0 || $this->p55_codvar === 0.0 || $this->p55_codvar == "") ){ 
        $this->erro_sql = " Campo p55_codvar nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -112,7 +112,7 @@ class cl_proctipovar {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p55_codcam == null) || ($this->p55_codcam == "") ){ 
+     if(($this->p55_codcam == null) || ($this->p55_codcam === 0 || $this->p55_codcam === 0.0 || $this->p55_codcam == "") ){ 
        $this->erro_sql = " Campo p55_codcam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -393,7 +393,7 @@ class cl_proctipovar {
    function sql_query ( $p55_codproc=null,$p55_codvar=null,$p55_codcam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_proctipovar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_proctipovar {
    function sql_query_file ( $p55_codproc=null,$p55_codvar=null,$p55_codcam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_proctipovar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -34,7 +34,8 @@ include(modification("classes/db_processoouvidoriaprorrogacao_classe.php"));
 $clprotprocesso = new cl_protprocesso();
 $clprocessoouvidoriaprorrogacao = new cl_processoouvidoriaprorrogacao();
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_GET_VARS);
 
 $codproc	 =  $p58_codproc;
@@ -200,7 +201,7 @@ $pdf->Cell(190,2,"",'B',1,"L",0);
 
 
 
-$iNumRows 	= count($aDadosProrrogacao);
+$iNumRows 	= count((array)$aDadosProrrogacao);
 $background = 0;
 $prorrogacao = "Não";
 

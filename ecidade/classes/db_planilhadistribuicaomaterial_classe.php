@@ -26,7 +26,7 @@ class cl_planilhadistribuicaomaterial {
                  pd03_material = int4 = Material 
                  ";
    //funcao construtor da classe 
-   function cl_planilhadistribuicaomaterial() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("planilhadistribuicaomaterial"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_planilhadistribuicaomaterial {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pd03_sequencial = ($this->pd03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pd03_sequencial"]:$this->pd03_sequencial);
-       $this->pd03_planilhadistribuicao = ($this->pd03_planilhadistribuicao == ""?@$GLOBALS["HTTP_POST_VARS"]["pd03_planilhadistribuicao"]:$this->pd03_planilhadistribuicao);
-       $this->pd03_material = ($this->pd03_material == ""?@$GLOBALS["HTTP_POST_VARS"]["pd03_material"]:$this->pd03_material);
+       $this->pd03_sequencial = ($this->pd03_sequencial === 0 || $this->pd03_sequencial === 0.0 || $this->pd03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pd03_sequencial"]:$this->pd03_sequencial);
+       $this->pd03_planilhadistribuicao = ($this->pd03_planilhadistribuicao === 0 || $this->pd03_planilhadistribuicao === 0.0 || $this->pd03_planilhadistribuicao == ""?@$GLOBALS["HTTP_POST_VARS"]["pd03_planilhadistribuicao"]:$this->pd03_planilhadistribuicao);
+       $this->pd03_material = ($this->pd03_material === 0 || $this->pd03_material === 0.0 || $this->pd03_material == ""?@$GLOBALS["HTTP_POST_VARS"]["pd03_material"]:$this->pd03_material);
      }else{
-       $this->pd03_sequencial = ($this->pd03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pd03_sequencial"]:$this->pd03_sequencial);
+       $this->pd03_sequencial = ($this->pd03_sequencial === 0 || $this->pd03_sequencial === 0.0 || $this->pd03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pd03_sequencial"]:$this->pd03_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_planilhadistribuicaomaterial {
          $this->pd03_sequencial = $pd03_sequencial; 
        }
      }
-     if(($this->pd03_sequencial == null) || ($this->pd03_sequencial == "") ){ 
+     if(($this->pd03_sequencial == null) || ($this->pd03_sequencial === 0 || $this->pd03_sequencial === 0.0 || $this->pd03_sequencial == "") ){ 
        $this->erro_sql = " Campo pd03_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

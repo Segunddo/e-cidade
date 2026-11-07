@@ -52,7 +52,7 @@ class cl_veicabastretirada {
                  ve73_veicretirada = int4 = Retirada 
                  ";
    //funcao construtor da classe 
-   function cl_veicabastretirada() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veicabastretirada"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_veicabastretirada {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve73_codigo = ($this->ve73_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve73_codigo"]:$this->ve73_codigo);
-       $this->ve73_veicabast = ($this->ve73_veicabast == ""?@$GLOBALS["HTTP_POST_VARS"]["ve73_veicabast"]:$this->ve73_veicabast);
-       $this->ve73_veicretirada = ($this->ve73_veicretirada == ""?@$GLOBALS["HTTP_POST_VARS"]["ve73_veicretirada"]:$this->ve73_veicretirada);
+       $this->ve73_codigo = ($this->ve73_codigo === 0 || $this->ve73_codigo === 0.0 || $this->ve73_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve73_codigo"]:$this->ve73_codigo);
+       $this->ve73_veicabast = ($this->ve73_veicabast === 0 || $this->ve73_veicabast === 0.0 || $this->ve73_veicabast == ""?@$GLOBALS["HTTP_POST_VARS"]["ve73_veicabast"]:$this->ve73_veicabast);
+       $this->ve73_veicretirada = ($this->ve73_veicretirada === 0 || $this->ve73_veicretirada === 0.0 || $this->ve73_veicretirada == ""?@$GLOBALS["HTTP_POST_VARS"]["ve73_veicretirada"]:$this->ve73_veicretirada);
      }else{
-       $this->ve73_codigo = ($this->ve73_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve73_codigo"]:$this->ve73_codigo);
+       $this->ve73_codigo = ($this->ve73_codigo === 0 || $this->ve73_codigo === 0.0 || $this->ve73_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve73_codigo"]:$this->ve73_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veicabastretirada {
          $this->ve73_codigo = $ve73_codigo; 
        }
      }
-     if(($this->ve73_codigo == null) || ($this->ve73_codigo == "") ){ 
+     if(($this->ve73_codigo == null) || ($this->ve73_codigo === 0 || $this->ve73_codigo === 0.0 || $this->ve73_codigo == "") ){ 
        $this->erro_sql = " Campo ve73_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_veicabastretirada {
    function sql_query ( $ve73_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -389,7 +389,7 @@ class cl_veicabastretirada {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_veicabastretirada {
    function sql_query_file ( $ve73_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_veicabastretirada {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -52,7 +52,7 @@ class cl_veicutilizacao {
                  ve15_veiculos = int4 = Veiculo 
                  ";
    //funcao construtor da classe 
-   function cl_veicutilizacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("veicutilizacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_veicutilizacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve15_sequencial = ($this->ve15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve15_sequencial"]:$this->ve15_sequencial);
-       $this->ve15_veiccadutilizacao = ($this->ve15_veiccadutilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ve15_veiccadutilizacao"]:$this->ve15_veiccadutilizacao);
-       $this->ve15_veiculos = ($this->ve15_veiculos == ""?@$GLOBALS["HTTP_POST_VARS"]["ve15_veiculos"]:$this->ve15_veiculos);
+       $this->ve15_sequencial = ($this->ve15_sequencial === 0 || $this->ve15_sequencial === 0.0 || $this->ve15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve15_sequencial"]:$this->ve15_sequencial);
+       $this->ve15_veiccadutilizacao = ($this->ve15_veiccadutilizacao === 0 || $this->ve15_veiccadutilizacao === 0.0 || $this->ve15_veiccadutilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ve15_veiccadutilizacao"]:$this->ve15_veiccadutilizacao);
+       $this->ve15_veiculos = ($this->ve15_veiculos === 0 || $this->ve15_veiculos === 0.0 || $this->ve15_veiculos == ""?@$GLOBALS["HTTP_POST_VARS"]["ve15_veiculos"]:$this->ve15_veiculos);
      }else{
-       $this->ve15_sequencial = ($this->ve15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve15_sequencial"]:$this->ve15_sequencial);
+       $this->ve15_sequencial = ($this->ve15_sequencial === 0 || $this->ve15_sequencial === 0.0 || $this->ve15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve15_sequencial"]:$this->ve15_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veicutilizacao {
          $this->ve15_sequencial = $ve15_sequencial; 
        }
      }
-     if(($this->ve15_sequencial == null) || ($this->ve15_sequencial == "") ){ 
+     if(($this->ve15_sequencial == null) || ($this->ve15_sequencial === 0 || $this->ve15_sequencial === 0.0 || $this->ve15_sequencial == "") ){ 
        $this->erro_sql = " Campo ve15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_veicutilizacao {
    function sql_query ( $ve15_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_veicutilizacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -408,7 +408,7 @@ class cl_veicutilizacao {
    function sql_query_file ( $ve15_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_veicutilizacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -441,7 +441,7 @@ class cl_veicutilizacao {
    function sql_query_uso ( $ve15_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_veicutilizacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -61,7 +61,7 @@ class cl_orcsuplem {
                  o46_obs = text = Origem do Recurso
                  ";
    //funcao construtor da classe
-   function cl_orcsuplem() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcsuplem");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,10 +78,10 @@ class cl_orcsuplem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o46_codsup = ($this->o46_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_codsup"]:$this->o46_codsup);
-       $this->o46_tiposup = ($this->o46_tiposup == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_tiposup"]:$this->o46_tiposup);
-       $this->o46_codlei = ($this->o46_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_codlei"]:$this->o46_codlei);
-       $this->o46_instit = ($this->o46_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_instit"]:$this->o46_instit);
+       $this->o46_codsup = ($this->o46_codsup === 0 || $this->o46_codsup === 0.0 || $this->o46_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_codsup"]:$this->o46_codsup);
+       $this->o46_tiposup = ($this->o46_tiposup === 0 || $this->o46_tiposup === 0.0 || $this->o46_tiposup == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_tiposup"]:$this->o46_tiposup);
+       $this->o46_codlei = ($this->o46_codlei === 0 || $this->o46_codlei === 0.0 || $this->o46_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_codlei"]:$this->o46_codlei);
+       $this->o46_instit = ($this->o46_instit === 0 || $this->o46_instit === 0.0 || $this->o46_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_instit"]:$this->o46_instit);
        if($this->o46_data == ""){
          $this->o46_data_dia = ($this->o46_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_data_dia"]:$this->o46_data_dia);
          $this->o46_data_mes = ($this->o46_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_data_mes"]:$this->o46_data_mes);
@@ -92,7 +92,7 @@ class cl_orcsuplem {
        }
        $this->o46_obs = ($this->o46_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_obs"]:$this->o46_obs);
      }else{
-       $this->o46_codsup = ($this->o46_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_codsup"]:$this->o46_codsup);
+       $this->o46_codsup = ($this->o46_codsup === 0 || $this->o46_codsup === 0.0 || $this->o46_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o46_codsup"]:$this->o46_codsup);
      }
    }
    // funcao para inclusao
@@ -158,7 +158,7 @@ class cl_orcsuplem {
          $this->o46_codsup = $o46_codsup;
        }
      }
-     if(($this->o46_codsup == null) || ($this->o46_codsup == "") ){
+     if(($this->o46_codsup == null) || ($this->o46_codsup === 0 || $this->o46_codsup === 0.0 || $this->o46_codsup == "") ){
        $this->erro_sql = " Campo o46_codsup nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

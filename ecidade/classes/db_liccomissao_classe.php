@@ -40,7 +40,7 @@ class cl_liccomissao {
                  l30_arquivo = oid = Arquivo
                  ";
    //funcao construtor da classe
-   function cl_liccomissao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("liccomissao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -57,7 +57,7 @@ class cl_liccomissao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l30_codigo = ($this->l30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l30_codigo"]:$this->l30_codigo);
+       $this->l30_codigo = ($this->l30_codigo === 0 || $this->l30_codigo === 0.0 || $this->l30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l30_codigo"]:$this->l30_codigo);
        if($this->l30_data == ""){
          $this->l30_data_dia = ($this->l30_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["l30_data_dia"]:$this->l30_data_dia);
          $this->l30_data_mes = ($this->l30_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["l30_data_mes"]:$this->l30_data_mes);
@@ -75,10 +75,10 @@ class cl_liccomissao {
             $this->l30_datavalid = $this->l30_datavalid_ano."-".$this->l30_datavalid_mes."-".$this->l30_datavalid_dia;
          }
        }
-       $this->l30_tipo = ($this->l30_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["l30_tipo"]:$this->l30_tipo);
+       $this->l30_tipo = ($this->l30_tipo === 0 || $this->l30_tipo === 0.0 || $this->l30_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["l30_tipo"]:$this->l30_tipo);
        $this->l30_nomearquivo = ($this->l30_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l30_nomearquivo"]:$this->l30_nomearquivo);
      }else{
-       $this->l30_codigo = ($this->l30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l30_codigo"]:$this->l30_codigo);
+       $this->l30_codigo = ($this->l30_codigo === 0 || $this->l30_codigo === 0.0 || $this->l30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l30_codigo"]:$this->l30_codigo);
      }
    }
    // funcao para Inclusão
@@ -144,7 +144,7 @@ class cl_liccomissao {
          $this->l30_codigo = $l30_codigo;
        }
      }
-     if(($this->l30_codigo == null) || ($this->l30_codigo == "") ){
+     if(($this->l30_codigo == null) || ($this->l30_codigo === 0 || $this->l30_codigo === 0.0 || $this->l30_codigo == "") ){
        $this->erro_sql = " Campo l30_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

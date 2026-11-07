@@ -52,7 +52,7 @@ class cl_matfabricante {
                  m76_numcgm = int4 = Código do CGM 
                  ";
    //funcao construtor da classe 
-   function cl_matfabricante() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("matfabricante"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_matfabricante {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m76_sequencial = ($this->m76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m76_sequencial"]:$this->m76_sequencial);
+       $this->m76_sequencial = ($this->m76_sequencial === 0 || $this->m76_sequencial === 0.0 || $this->m76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m76_sequencial"]:$this->m76_sequencial);
        $this->m76_nome = ($this->m76_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["m76_nome"]:$this->m76_nome);
-       $this->m76_numcgm = ($this->m76_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["m76_numcgm"]:$this->m76_numcgm);
+       $this->m76_numcgm = ($this->m76_numcgm === 0 || $this->m76_numcgm === 0.0 || $this->m76_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["m76_numcgm"]:$this->m76_numcgm);
      }else{
-       $this->m76_sequencial = ($this->m76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m76_sequencial"]:$this->m76_sequencial);
+       $this->m76_sequencial = ($this->m76_sequencial === 0 || $this->m76_sequencial === 0.0 || $this->m76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m76_sequencial"]:$this->m76_sequencial);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_matfabricante {
          $this->m76_sequencial = $m76_sequencial; 
        }
      }
-     if(($this->m76_sequencial == null) || ($this->m76_sequencial == "") ){ 
+     if(($this->m76_sequencial == null) || ($this->m76_sequencial === 0 || $this->m76_sequencial === 0.0 || $this->m76_sequencial == "") ){ 
        $this->erro_sql = " Campo m76_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -347,7 +347,7 @@ class cl_matfabricante {
    function sql_query ( $m76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -369,7 +369,7 @@ class cl_matfabricante {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_matfabricante {
    function sql_query_cgm ( $m76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -403,7 +403,7 @@ class cl_matfabricante {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_matfabricante {
    function sql_query_file ( $m76_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -436,7 +436,7 @@ class cl_matfabricante {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

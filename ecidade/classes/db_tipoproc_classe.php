@@ -70,7 +70,7 @@ class cl_tipoproc
                  ";
 
     //funcao construtor da classe
-    function cl_tipoproc()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("protocolo.tipoproc");
@@ -92,7 +92,7 @@ class cl_tipoproc
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->p51_codigo = ($this->p51_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_codigo"] : $this->p51_codigo);
+            $this->p51_codigo = ($this->p51_codigo === 0 || $this->p51_codigo === 0.0 || $this->p51_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_codigo"] : $this->p51_codigo);
             $this->p51_descr = ($this->p51_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_descr"] : $this->p51_descr);
             if ($this->p51_dtlimite == "") {
                 $this->p51_dtlimite_dia = ($this->p51_dtlimite_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_dtlimite_dia"] : $this->p51_dtlimite_dia);
@@ -102,13 +102,13 @@ class cl_tipoproc
                     $this->p51_dtlimite = $this->p51_dtlimite_ano . "-" . $this->p51_dtlimite_mes . "-" . $this->p51_dtlimite_dia;
                 }
             }
-            $this->p51_instit = ($this->p51_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_instit"] : $this->p51_instit);
-            $this->p51_tipoprocgrupo = ($this->p51_tipoprocgrupo == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_tipoprocgrupo"] : $this->p51_tipoprocgrupo);
+            $this->p51_instit = ($this->p51_instit === 0 || $this->p51_instit === 0.0 || $this->p51_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_instit"] : $this->p51_instit);
+            $this->p51_tipoprocgrupo = ($this->p51_tipoprocgrupo === 0 || $this->p51_tipoprocgrupo === 0.0 || $this->p51_tipoprocgrupo == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_tipoprocgrupo"] : $this->p51_tipoprocgrupo);
             $this->p51_identificado = ($this->p51_identificado == "f" ? @$GLOBALS["HTTP_POST_VARS"]["p51_identificado"] : $this->p51_identificado);
-            $this->p51_prottipodocumentoprocesso = ($this->p51_prottipodocumentoprocesso == "f" ? @$GLOBALS["HTTP_POST_VARS"]["p51_prottipodocumentoprocesso"] : $this->p51_prottipodocumentoprocesso);
+            $this->p51_prottipodocumentoprocesso = ($this->p51_prottipodocumentoprocesso === 0 || $this->p51_prottipodocumentoprocesso === 0.0 || $this->p51_prottipodocumentoprocesso == "f" ? @$GLOBALS["HTTP_POST_VARS"]["p51_prottipodocumentoprocesso"] : $this->p51_prottipodocumentoprocesso);
             $this->p51_mensagem = ($this->p51_mensagem == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_mensagem"] : $this->p51_mensagem);
         } else {
-            $this->p51_codigo = ($this->p51_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_codigo"] : $this->p51_codigo);
+            $this->p51_codigo = ($this->p51_codigo === 0 || $this->p51_codigo === 0.0 || $this->p51_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["p51_codigo"] : $this->p51_codigo);
         }
     }
 
@@ -202,7 +202,7 @@ class cl_tipoproc
                 $this->p51_codigo = $p51_codigo;
             }
         }
-        if (($this->p51_codigo == null) || ($this->p51_codigo == "")) {
+        if (($this->p51_codigo == null) || ($this->p51_codigo === 0 || $this->p51_codigo === 0.0 || $this->p51_codigo == "")) {
             $this->erro_sql = " Campo p51_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

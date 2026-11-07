@@ -62,7 +62,7 @@ class cl_orcsuplemtipo {
                  o48_redcreditoespecial = int4 = Redução por Crédito Especial 
                  ";
    //funcao construtor da classe 
-   function cl_orcsuplemtipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcsuplemtipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_orcsuplemtipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o48_tiposup = ($this->o48_tiposup == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_tiposup"]:$this->o48_tiposup);
+       $this->o48_tiposup = ($this->o48_tiposup === 0 || $this->o48_tiposup === 0.0 || $this->o48_tiposup == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_tiposup"]:$this->o48_tiposup);
        $this->o48_descr = ($this->o48_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_descr"]:$this->o48_descr);
-       $this->o48_coddocsup = ($this->o48_coddocsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_coddocsup"]:$this->o48_coddocsup);
-       $this->o48_coddocred = ($this->o48_coddocred == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_coddocred"]:$this->o48_coddocred);
-       $this->o48_arrecadmaior = ($this->o48_arrecadmaior == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_arrecadmaior"]:$this->o48_arrecadmaior);
+       $this->o48_coddocsup = ($this->o48_coddocsup === 0 || $this->o48_coddocsup === 0.0 || $this->o48_coddocsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_coddocsup"]:$this->o48_coddocsup);
+       $this->o48_coddocred = ($this->o48_coddocred === 0 || $this->o48_coddocred === 0.0 || $this->o48_coddocred == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_coddocred"]:$this->o48_coddocred);
+       $this->o48_arrecadmaior = ($this->o48_arrecadmaior === 0 || $this->o48_arrecadmaior === 0.0 || $this->o48_arrecadmaior == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_arrecadmaior"]:$this->o48_arrecadmaior);
        $this->o48_superavit = ($this->o48_superavit == "f"?@$GLOBALS["HTTP_POST_VARS"]["o48_superavit"]:$this->o48_superavit);
-       $this->o48_suplcreditoespecial = ($this->o48_suplcreditoespecial == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_suplcreditoespecial"]:$this->o48_suplcreditoespecial);
-       $this->o48_redcreditoespecial = ($this->o48_redcreditoespecial == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_redcreditoespecial"]:$this->o48_redcreditoespecial);
+       $this->o48_suplcreditoespecial = ($this->o48_suplcreditoespecial === 0 || $this->o48_suplcreditoespecial === 0.0 || $this->o48_suplcreditoespecial == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_suplcreditoespecial"]:$this->o48_suplcreditoespecial);
+       $this->o48_redcreditoespecial = ($this->o48_redcreditoespecial === 0 || $this->o48_redcreditoespecial === 0.0 || $this->o48_redcreditoespecial == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_redcreditoespecial"]:$this->o48_redcreditoespecial);
      }else{
-       $this->o48_tiposup = ($this->o48_tiposup == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_tiposup"]:$this->o48_tiposup);
+       $this->o48_tiposup = ($this->o48_tiposup === 0 || $this->o48_tiposup === 0.0 || $this->o48_tiposup == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_tiposup"]:$this->o48_tiposup);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_orcsuplemtipo {
        $this->o48_redcreditoespecial = "null";
      }
        $this->o48_tiposup = $o48_tiposup; 
-     if(($this->o48_tiposup == null) || ($this->o48_tiposup == "") ){ 
+     if(($this->o48_tiposup == null) || ($this->o48_tiposup === 0 || $this->o48_tiposup === 0.0 || $this->o48_tiposup == "") ){ 
        $this->erro_sql = " Campo o48_tiposup nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

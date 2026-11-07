@@ -76,7 +76,7 @@ if (isset ($incluir)) {
 	$result_pcparam = $clpcparam->sql_record($clpcparam->sql_query_file(db_getsession("DB_instit"), "pc30_gerareserva,pc30_contrandsol"));
 	db_fieldsmemory($result_pcparam, 0);
 	$sqlerro = false;
-	$arr_valores = split(",", $valores);
+	$arr_valores = preg_split("#,#m", $valores);
 	if ($pc30_contrandsol=='t'){		 		
 	  	 $sqltran = "select distinct x.p62_codtran                   
       
@@ -137,7 +137,7 @@ if (isset ($incluir)) {
 	if (trim($valores) != "") {
 		
 		for ($i = 0; $i < sizeof($arr_valores); $i ++) {
-			$arr_item = split("_", $arr_valores[$i]);
+			$arr_item = preg_split("#_#m", $arr_valores[$i]);
 			$codigo = $arr_item[2];
 			$clsolicitem->pc11_liberado = "false";
 			$clsolicitem->pc11_codigo = $codigo;
@@ -149,7 +149,7 @@ if (isset ($incluir)) {
 		}
 		
 		for ($i = 0; $i < sizeof($arr_valores); $i ++) {
-			$arr_item = split("_", $arr_valores[$i]);
+			$arr_item = preg_split("#_#m", $arr_valores[$i]);
 			$codigo = $arr_item[2];			        
 			//// Controle do andamento da solicitação  
 			if ($i == 0) {

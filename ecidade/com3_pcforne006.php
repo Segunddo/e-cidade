@@ -74,7 +74,7 @@ $clrotulo->label("pc74_pctipocertif");
                            inner join pctipocertif on pctipocertif.pc70_codigo = pcfornecertif.pc74_pctipocertif";
                            
       $result_certif = db_query($sSqlCertificado);
-      $numrows       = pg_numrows($result_certif);
+      $numrows       = ($result_certif ? pg_numrows($result_certif) : null);
       if ($numrows == 0) {
         echo "<h2 align=\"center\">Este fornecedor não possui certificado!</h2>";
       }

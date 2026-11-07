@@ -50,7 +50,7 @@ class cl_procandamintusu {
                  p79_usuario = int4 = Usuário de Destino 
                  ";
    //funcao construtor da classe 
-   function cl_procandamintusu() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procandamintusu"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_procandamintusu {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p79_codandamint = ($this->p79_codandamint == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_codandamint"]:$this->p79_codandamint);
-       $this->p79_usuario = ($this->p79_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_usuario"]:$this->p79_usuario);
+       $this->p79_codandamint = ($this->p79_codandamint === 0 || $this->p79_codandamint === 0.0 || $this->p79_codandamint == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_codandamint"]:$this->p79_codandamint);
+       $this->p79_usuario = ($this->p79_usuario === 0 || $this->p79_usuario === 0.0 || $this->p79_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_usuario"]:$this->p79_usuario);
      }else{
-       $this->p79_codandamint = ($this->p79_codandamint == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_codandamint"]:$this->p79_codandamint);
+       $this->p79_codandamint = ($this->p79_codandamint === 0 || $this->p79_codandamint === 0.0 || $this->p79_codandamint == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_codandamint"]:$this->p79_codandamint);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_procandamintusu {
        return false;
      }
        $this->p79_codandamint = $p79_codandamint; 
-     if(($this->p79_codandamint == null) || ($this->p79_codandamint == "") ){ 
+     if(($this->p79_codandamint == null) || ($this->p79_codandamint === 0 || $this->p79_codandamint === 0.0 || $this->p79_codandamint == "") ){ 
        $this->erro_sql = " Campo p79_codandamint nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_procandamintusu {
    function sql_query ( $p79_codandamint=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_procandamintusu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_procandamintusu {
    function sql_query_file ( $p79_codandamint=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_procandamintusu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

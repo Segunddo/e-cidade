@@ -32,7 +32,8 @@ $clrotulo = new rotulocampo;
 $clveiccadcentral = new cl_veiccadcentral;
 //$clrotulo->label('m61_abrev');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 if($quebra == 's'){
@@ -96,7 +97,7 @@ $alt = 4;
 
 $passa=false;
 $codigocentral="";
-for($x = 0; $x < pg_numrows($result_central);$x++){
+for($x = 0; $x < ($result_central ? pg_numrows($result_central) : null);$x++){
 db_fieldsmemory($result_central,$x);
    
    if ($pdf->gety() > $pdf->h - 30 || $troca != 0 )

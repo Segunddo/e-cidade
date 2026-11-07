@@ -59,7 +59,7 @@ if (isset($confirmar) && trim(@$confirmar) != "") {
 
   db_inicio_transacao();
 
-  $vetor_itens = split(",",$coditens);
+  $vetor_itens = preg_split("#,#m",$coditens);
   
   for ($i = 0; $i < count($vetor_itens); $i++) {
     

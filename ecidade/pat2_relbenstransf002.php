@@ -40,7 +40,8 @@ $clbenstransfcodigo = new cl_benstransfcodigo;
 $cldb_depart        = new cl_db_depart;
 $clrotulo           = new rotulocampo;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $sqlinst    = "select * from db_config where codigo = ".db_getsession("DB_instit");
 $resultinst = db_query($sqlinst);
@@ -48,52 +49,52 @@ $resultinst = db_query($sqlinst);
 db_fieldsmemory($resultinst, 0);
 
 if (isset($t96_codtran) && $t96_codtran != "") {
-  
+
   //rotina que traz departamento de origem e usuário q a emitiu
   $sCamposBensTransf = "nome,db_depart.descrdepto as origem,t93_data,t93_obs";
   $sWhereBensTransf  = "t93_codtran = $t96_codtran and t93_instit = ".db_getsession("DB_instit");
   $sSqlBensTransf    = $clbenstransf->sql_query(null, $sCamposBensTransf, null, $sWhereBensTransf);
   $resultorigem      = $clbenstransf->sql_record($sSqlBensTransf);
-  
+
   if ($clbenstransf->numrows > 0) {   
     db_fieldsmemory($resultorigem, 0);
   }else{
-    
+
     $oParms = new stdClass();
     $oParms->codigoTransferencia = $t96_codtran;
     $sMsg = _M('patrimonial.patrimonio.pat2_relbenstransf002.transferencia_invalida');
     db_redireciona("db_erros.php?fechar=true&db_erro=" . $sMsg);
   }
   //rotina que traz código,descrição e classificação dos bens
-  
+
   $sCamposBensTransfCod  = "distinct t52_bem,                 ";
   $sCamposBensTransfCod .= "t52_descr,                        ";
   $sCamposBensTransfCod .= "t64_class,                        ";
   $sCamposBensTransfCod .= "t52_ident,                        ";
-  
+
   //$sCamposBensTransfCod .= "origem.t30_descr as divorigem,    ";
   //$sCamposBensTransfCod .= "destino.t30_descr as divdestino,  ";
-  
+
   $sCamposBensTransfCod .= "divisaoorigem.t30_descr as divorigem,   ";
   $sCamposBensTransfCod .= "divisaodestino.t30_descr as divdestino, ";
-  
+
   $sCamposBensTransfCod .= "situabens.t70_descr as situacao   ";
-  
+
   $sWhereBensTransfCod  = "t95_codtran = $t96_codtran and t52_instit = ".db_getsession("DB_instit");
-  
+
   $sSqlBensTransfCodigo = $clbenstransfcodigo->sql_query_benstransf_origdestsitua(null,
                                                                                   null, 
                                                                                   $sCamposBensTransfCod, 
                                                                                   null, 
                                                                                   $sWhereBensTransfCod);
  // echo $sSqlBensTransfCodigo; die();
- 
+
   //die ($sSqlBensTransfCodigo);
   $resultbens = $clbenstransfcodigo->sql_record($sSqlBensTransfCodigo);
   if($clbenstransfcodigo->numrows>0){
     db_fieldsmemory($resultbens,0);
   }else{
-    
+
     $oParms = new stdClass();
     $oParms->codigoTransferencia = $t96_codtran;
     $sMsg = _M('patrimonial.patrimonio.pat2_relbenstransf002.nenhum_item_cadastrado');
@@ -107,11 +108,11 @@ if (isset($t96_codtran) && $t96_codtran != "") {
     $resultdestino = $cldb_depart->sql_record($cldb_depart->sql_query_file($t94_depart,"descrdepto"));
     db_fieldsmemory($resultdestino,0);
   }else{
-    
+
     $sMsg = _M('patrimonial.patrimonio.pat2_relbenstransf002.destino_nao_informado');
     db_redireciona("db_erros.php?fechar=true&db_erro=" . $sMsg);
   }
-  
+
 //  echo $cldb_depart->sql_query_file($t94_depart,"descrdepto");
 //  echo "<br><br><br><br>";
 //  echo $clbenstransfdes->sql_query_file($t96_codtran,null,"t94_depart");
@@ -134,7 +135,7 @@ $pdf1->destino    = $descrdepto;
 $pdf1->origem     = $origem;
 $pdf1->usuario    = $nome;
 $pdf1->recordbens = $resultbens;
-$pdf1->linhasbens = pg_numrows($resultbens);
+$pdf1->linhasbens = ($resultbens ? pg_numrows($resultbens) : null);
 $pdf1->bem        = "t52_bem";
 $pdf1->descr_bem  = "t52_descr";
 $pdf1->class_bem  = "t64_class";

@@ -43,10 +43,10 @@ class cl_pcorcamitemresultado
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->pc220_orcamitem = ($this->pc220_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc220_orcamitem"]:$this->pc220_orcamitem);
+       $this->pc220_orcamitem = ($this->pc220_orcamitem === 0 || $this->pc220_orcamitem === 0.0 || $this->pc220_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc220_orcamitem"]:$this->pc220_orcamitem);
        $this->pc220_resultado = ($this->pc220_resultado == ""?@$GLOBALS["HTTP_POST_VARS"]["pc220_resultado"]:$this->pc220_resultado);
      }else{
-       $this->pc220_orcamitem = ($this->pc220_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc220_orcamitem"]:$this->pc220_orcamitem);
+       $this->pc220_orcamitem = ($this->pc220_orcamitem === 0 || $this->pc220_orcamitem === 0.0 || $this->pc220_orcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc220_orcamitem"]:$this->pc220_orcamitem);
      }
    }
 
@@ -63,7 +63,7 @@ class cl_pcorcamitemresultado
        return false;
      }
        $this->pc220_orcamitem = $pc220_orcamitem; 
-     if(($this->pc220_orcamitem == null) || ($this->pc220_orcamitem == "") ){ 
+     if(($this->pc220_orcamitem == null) || ($this->pc220_orcamitem === 0 || $this->pc220_orcamitem === 0.0 || $this->pc220_orcamitem == "") ){ 
        $this->erro_sql = " Campo pc220_orcamitem não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

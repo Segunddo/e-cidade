@@ -79,7 +79,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Alterar
   }
   $clprotprocesso->p58_numero = $p58_numero;
   $clprotprocesso->alterar($p58_codproc);
-  $chaves = split("#",$docs);
+  $chaves = preg_split("#\\##m",$docs);
   $clprocprocessodoc->excluir($p58_codproc);
   //$clprocprocessodoc->erro(true,false);
   for($i=0;$i<sizeof($chaves);$i++){
@@ -89,7 +89,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Alterar
     $clprocprocessodoc->incluir($p58_codproc,$chaves[$i]);
     //$clprocprocessodoc->erro(true,false);
   }
-  $chaves = split("#",$ndocs);
+  $chaves = preg_split("#\\##m",$ndocs);
   for($i=0;$i<sizeof($chaves);$i++){
     $HTTP_POST_VARS['p81_doc'] = 'f';
     $clprocprocessodoc->p81_codproc = $p58_codproc;
@@ -117,16 +117,16 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Alterar
       $GLOBALS["HTTP_POST_VARS"]["p55_codproc"] = $clprotprocesso->p58_codproc;
       $GLOBALS["HTTP_POST_VARS"]["p55_codvar"] = $ln["p54_codigo"];
       $GLOBALS["HTTP_POST_VARS"]["p55_codcam"] = $ln["p54_codcam"];
-      $GLOBALS["HTTP_POST_VARS"]["p55_conteudo"] = $$nomecam;
+      $GLOBALS["HTTP_POST_VARS"]["p55_conteudo"] = ${$nomecam};
 
-      if($$nomecam == ""){
+      if(${$nomecam} == ""){
       	continue;
       }
 
       $clproctipovar->p55_codproc = $clprotprocesso->p58_codproc;
       $clproctipovar->p55_codvar = $ln["p54_codigo"];
       $clproctipovar->p55_codcam = $ln["p54_codcam"];
-      $clproctipovar->p55_conteudo = $$nomecam;
+      $clproctipovar->p55_conteudo = ${$nomecam};
       $clproctipovar->incluir($clprotprocesso->p58_codproc,$ln["p54_codigo"],$ln["p54_codcam"]);
       if ($clproctipovar->erro_status == "0"){
         $sqlerro = true;

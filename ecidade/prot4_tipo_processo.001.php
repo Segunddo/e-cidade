@@ -53,7 +53,7 @@ require_once(modification("dbforms/db_funcoes.php"));
         <form id="formulario" onsubmit="return false">
             <table>
                 <tr>
-                    <td style="text-align: right"><?php db_ancora('Processo', 'openPesquisa()') ?>:</td>
+                    <td style="text-align: right"><?php db_ancora('Processo', 'openPesquisa()', null) /* PHP 8: 3o argumento obrigatorio; no 5.6 valia null */ ?>:</td>
                     <td><input name="codigoProcesso"></td>
                 </tr>
                 <tr>
