@@ -36,10 +36,11 @@ if (!isset($arqinclude)){ // se este arquivo não esta incluido por outro
   include(modification("dbforms/db_funcoes.php"));
   include(modification("classes/db_conrelinfo_classe.php"));
   include(modification("classes/db_orcparamrel_classe.php"));
-  
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
-  
+
   $classinatura = new cl_assinatura;
   $orcparamrel  = new cl_orcparamrel;
   //$clconrelinfo = new cl_conrelinfo;
@@ -133,20 +134,20 @@ if (!isset($arqinclude)){ // se este arquivo não esta incluido por outro
 
   $anousu     = db_getsession("DB_anousu");
   $anousu_ant = $anousu-1;
-  
+
   $dt         = data_periodo($anousu,$periodo); // no dbforms/db_funcoes.php
   $dt_ini     = $dt[0]; // data inicial do período
   $dt_fin     = $dt[1]; // data final do período
 
 } // end !include
 
-$dt          = split("-",$dt_ini);
+$dt          = preg_split("#\\-#m",$dt_ini);
 $periodo_mes = strtoupper(db_mes($dt[1]));
 
-$dt = split("-",$dt_ini);
+$dt = preg_split("#\\-#m",$dt_ini);
 $dt_ini_ant = $anousu_ant."-".$dt[1]."-".$dt[2];
 
-$dt = split("-",$dt_fin);
+$dt = preg_split("#\\-#m",$dt_fin);
 $dt_fin_ant = $anousu_ant."-".$dt[1]."-".$dt[2];
 
 // RPPS ///////////////////////////////////////////////////////////////////////
@@ -466,7 +467,7 @@ $db_filtro = "c61_instit in (".$instit.") ";
 // saldo inicial
 // demonstra o saldo do mes anterior ao periodo de referencia
 
-$dt_ini_per = split('-',$dt_fin);
+$dt_ini_per = preg_split('#\-#m',$dt_fin);
 $dt_ini_per = $dt_ini_per[0].'-'.$dt_ini_per[1].'-01';
 
 /*
@@ -544,7 +545,7 @@ if (!isset($arqinclude)){ //
   // Imprimindo Relatorio
   $perini = $dt_ini;
   $perfin = $dt_fin;
- 
+
   $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where db21_tipoinstit in (5,6)");
   $descr_inst = '';
   $xvirg = '';
@@ -572,14 +573,14 @@ if (!isset($arqinclude)){ //
   $head3 = "DEMONSTRATIVO DE RECEITAS E DESPESAS DO RPPS";
   $head4 = "ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL";
   $txt = strtoupper(db_mes('01'));
-  $dt  = split("-",$dt_fin);
+  $dt  = preg_split("#\\-#m",$dt_fin);
   $txt.= " À ".strtoupper(db_mes($dt[1]))." $anousu/BIMESTRE ";;
-  $dt  = split("-",$dt_ini);
+  $dt  = preg_split("#\\-#m",$dt_ini);
   $txt.= strtoupper(db_mes($dt[1]))."-";
-  $dt  = split("-",$dt_fin);
+  $dt  = preg_split("#\\-#m",$dt_fin);
   $txt.= strtoupper(db_mes($dt[1]));
   $head5 = "$txt";
-  
+
   $pdf = new PDF(); 
   $pdf->Open(); 
   $pdf->AliasNbPages(); 
@@ -587,18 +588,18 @@ if (!isset($arqinclude)){ //
   $pdf->setfillcolor(235);
   $troca = 1;
   $alt = 4;
-  
+
   $pagina = 1;
   $tottotal = 0;
   $pagina = 0;
   $n1 =5;
   $n2=10;
-  
+
   $pdf->addpage();
   $pdf->setfont('arial','',6);
   $pdf->cell(90,$alt,"LRF, Art.53, inciso II - Anexo V",0,0,"L",0);
   $pdf->cell(100,$alt,"R$",0,1,"R",0);
-  
+
   $pdf->setfont('arial','',6);
   $pdf->cell(90,($alt*2),"RECEITAS PREVIDENCIÁRIAS",'TBR',0,"C",0);
   $pdf->cell(20,$alt,"PREVISÃO","TR",0,"C",0);
@@ -612,7 +613,7 @@ if (!isset($arqinclude)){ //
   $pdf->cell(20,$alt,"Até o Bimestre/".$anousu,"TBR",0,"C",0);
   $pdf->cell(20,$alt,"Até o Bimestre/".$anousu_ant,'TB',0,"C",0);
   $pdf->ln();
-  
+
   for($linha=1;$linha<=41;$linha++){
      $pdf->cell(90,$alt,$receita[$linha]['txt'],'R',0,"L",0);
      $pdf->cell(20,$alt,db_formatar($receita[$linha]['inicial'],'f'),'R',0,"R",0);
@@ -622,7 +623,7 @@ if (!isset($arqinclude)){ //
      $pdf->cell(20,$alt,db_formatar($receita[$linha]['anterior'],'f'),0,0,"R",0);       
      $pdf->Ln();	    
   }
- 
+
   $pdf->cell(90,$alt,"TOTAL DAS RECEITAS PREVIDENCIÁRIAS(VI)=(I+II+III+IV+V)","TBR",0,"L",0);
   $pdf->cell(20,$alt,db_formatar($total_rec_inicial,'f'),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($total_rec_atualizada,'f'),"TBR",0,"R",0);
@@ -630,10 +631,10 @@ if (!isset($arqinclude)){ //
   $pdf->cell(20,$alt,db_formatar($total_rec_exercicio,'f'),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($total_rec_anterior,'f'),"TB",0,"R",0);
   $pdf->ln();
- 
+
   $pdf->cell(150,($alt*2),'Continua na página 2',0,0,"L",0);
   $pdf->addpage();
- 
+
   $pdf->cell(150,$alt,'Continuação da página 1',0,0,"L",0);
   $pdf->Ln();
 
@@ -650,7 +651,7 @@ if (!isset($arqinclude)){ //
   $pdf->cell(20,$alt,"Até o Bimestre/".$anousu,"TBR",0,"C",0);
   $pdf->cell(20,$alt,"Até o Bimestre/".$anousu_ant,'TB',0,"C",0);
   $pdf->ln();
- 
+
   for($linha=1;$linha<=16;$linha++){
      $pdf->cell(90,$alt,$despesa[$linha]['txt'],'R',0,"L",0);
      $pdf->cell(20,$alt,db_formatar($despesa[$linha]['inicial'],'f'),'R',0,"R",0);
@@ -660,7 +661,7 @@ if (!isset($arqinclude)){ //
      $pdf->cell(20,$alt,db_formatar($despesa[$linha]['anterior'],'f'),0,0,"R",0);       
      $pdf->Ln();	    
   }
- 
+
   $pdf->cell(90,$alt,"TOTAL DAS DESPESAS PREVIDENCIÁRIAS(X)=(VII+VIII+IX)","TBR",0,"L",0);
   $pdf->cell(20,$alt,db_formatar($total_desp_inicial,'f'),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($total_desp_atualizada,'f'),"TBR",0,"R",0);
@@ -668,7 +669,7 @@ if (!isset($arqinclude)){ //
   $pdf->cell(20,$alt,db_formatar($total_desp_exercicio,'f'),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($total_desp_anterior,'f'),"TB",0,"R",0);
   $pdf->ln();
- 
+
   $pdf->cell(90,$alt,"RESULTADO PREVIDENCIÁRIO(XI)=(VI-X)","TBR",0,"L",0);
   $pdf->cell(20,$alt,db_formatar($total_rec_inicial-$total_desp_inicial,'f'),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($total_rec_atualizada-$total_desp_atualizada,'f'),"TBR",0,"R",0);
@@ -676,9 +677,9 @@ if (!isset($arqinclude)){ //
   $pdf->cell(20,$alt,db_formatar($total_rec_exercicio-$total_desp_exercicio,'f'),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($total_rec_anterior-$total_desp_anterior,'f'),"TB",0,"R",0);
   $pdf->ln();
- 
+
   $pdf->cell(190,$alt,"",'TB',1,"L",0);
- 
+
   $pdf->cell(90,($alt*2),"SALDO DAS DISPONIBILIDADES FINANCEIRAS E INVESTIMENTOS DO RPPS",'TBR',0,"C",0);
   $pdf->cell(40,$alt,$periodo_mes."/".$anousu,"TR",0,"C",0);
   $pdf->cell(60,$alt,"PERÍODO DE REFERÊNCIA",'TB',1,"C",0);  //br
@@ -689,7 +690,7 @@ if (!isset($arqinclude)){ //
   $pdf->cell(30,$alt,$anousu,"TBR",0,"C",0);
   $pdf->cell(30,$alt,$anousu_ant,'TB',0,"C",0);
   $pdf->ln();
- 
+
   for($linha=1;$linha<=3;$linha++){
       $pdf->cell(90,$alt,$disponivel[$linha]['txt'],'R',0,"L",0);
       $pdf->cell(40,$alt,db_formatar($disponivel[$linha]['saldo_inicial'],'f'),'BR',0,"R",0);
@@ -697,16 +698,16 @@ if (!isset($arqinclude)){ //
       $pdf->cell(30,$alt,db_formatar($disponivel[$linha]['saldo_periodo_anterior'],'f'),'B',0,"R",0);    
       $pdf->Ln();	    
   }
- 
+
   $pdf->cell(90,$alt,"FONTE: Contabilidade","T",0,"L",0);
- 
+
   //assinaturas
   $pdf->ln(30);
- 
+
   assinaturas(&$pdf,&$classinatura,'LRF');
- 
+
   $pdf->Output();
- 
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 ?>

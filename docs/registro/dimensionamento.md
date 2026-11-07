@@ -82,3 +82,55 @@ União: **1.711** (era 2.358). Duas coisas mudaram ao mesmo tempo, e a leitura p
   feitas, a frente nova achou mais trabalho do que o pago: Saúde +29, Cidadão +16, Integrações +11, Gestor +10.
   Esses aumentos são correções de medição, não regressão: em 18/10 essas classes já precisavam de porte, só
   não eram enxergadas.
+
+#### Refeito em 29/10/2026, depois de Patrimonial
+
+`dimensiona.py` passou a contar Patrimonial como concluída (`JA` com `PATRIM`) e a conhecer `ac|aco|ouv|lic|vei|pat|com` no
+`location`. Esta é a primeira medição com a **9ª frente** (classes com namespace, 15ª lacuna), por isso todos os universos
+cresceram.
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | **A alterar** | em 22/10 |
+|---|---|---|---|---|---|---|
+| Financeiro | 6 | 926 | 5.007 | 999 | **601** | 641 |
+| Saúde | 8 | 489 | 3.036 | 748 | **530** | 534 |
+| Configuração | 1 | 201 | 2.521 | 892 | **127** | 137 |
+| Assistência Social | 2 | 62 | 1.918 | 725 | **48** | 50 |
+| Cidadão | 1 | 35 | 1.828 | 706 | **29** | 29 |
+| Integrações | 1 | 9 | 1.823 | 712 | **18** | 20 |
+| Gestor | 1 | 7 | 1.089 | 347 | **19** | 18 |
+
+União: **1.254** (era 1.711). Patrimonial pré-pagou sobretudo Financeiro (−40; as classes de empenho, contratos e compras
+são compartilhadas) e Configuração (−10). As telas que faltam caíram pouco (Financeiro 945 → 926), porque são as telas
+compartilhadas que a Fase B de Patrimonial roteou pelo `map`. Gestor subiu 1 (18 → 19): a 9ª frente alcança uma classe
+que antes não era vista. É correção de medição, não regressão.
+
+Ressalva de leitura, a mesma de antes: "a alterar" é estimativa estática. Nas quatro áreas feitas, o real saiu acima por
+causa das correções à mão e das lacunas descobertas no caminho. Em Patrimonial, a estimativa era 469 e o real foi ~710:
+Fase A ~580 (538 pelo Rector + ~45 à mão) e Fase B ~130 (110 pelo Rector, 16 nas abas do passo 8b, 2 à mão). As
+correções da 15ª lacuna e da forma negada foram feitas nas branches das áreas anteriores e não entram nessa conta.
+
+#### Refeito em 30/10/2026, depois do Financeiro
+
+`dimensiona.py` passou a contar o Financeiro como concluído (`JA` com `FINANC`); o `location` do script já tinha
+`cus|pla|pl|tes|emp|orc|cai`. Conferido à parte, pelo mesmo critério (banco → em disco → `location` ou `map`): **as cinco áreas
+concluídas têm 0 telas de menu fora do 8.5** — Tributário 1.059, Educação 480, Recursos Humanos 701, Patrimonial 743,
+Financeiro 992.
+
+| Área | Módulos | Telas que faltam | Universo | Já pago | **A alterar** | em 29/10 |
+|---|---|---|---|---|---|---|
+| Saúde | 8 | 489 | 3.036 | 750 | **530** | 530 |
+| Configuração | 1 | 186 | 2.488 | 907 | **110** | 127 |
+| Assistência Social | 2 | 59 | 1.903 | 726 | **43** | 48 |
+| Cidadão | 1 | 35 | 1.828 | 709 | **28** | 29 |
+| Integrações | 1 | 9 | 1.823 | 715 | **17** | 18 |
+| Gestor | 1 | 7 | 1.089 | 347 | **19** | 19 |
+
+Fantasmas (entrada de menu sem arquivo): Configuração 5, Assistência Social 1, Cidadão 5. União: **668** (era 1.254 com o
+Financeiro). O Financeiro pré-pagou sobretudo Configuração (201 → 186 telas, 127 → 110 a alterar: telas `con`/`cai`
+compartilhadas que entraram pelo `map`) e um pouco de Assistência Social. **A Saúde não mudou** (530): não compartilha quase
+nada com o Financeiro, e é agora a maior área restante, com 489 telas, mais que todas as outras somadas (296).
+
+Ressalva de sempre: "a alterar" é estimativa estática. No Financeiro a estimativa era 601; o real foi **1.168 pelo Rector**
+(soma dos 6 lotes) **mais ~420 correções à mão** (LSP, guardas `pg_*`, `count(null)`, comentário sem fechamento), além do `tra`.
+A estimativa conta arquivos a partir das telas de menu; o porte por prefixo inteiro (`cai`) e as abas do passo 8b alcançaram
+muito mais.

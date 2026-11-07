@@ -104,7 +104,7 @@ switch ($oGet->trimestre) {
     break;
 
 }
-$iUltimoDiaMes = cal_days_in_month(CAL_GREGORIAN,$iMesFim,$iAnoUsu);
+try { $iUltimoDiaMes = cal_days_in_month(CAL_GREGORIAN,$iMesFim,$iAnoUsu); } catch (Throwable $e) { $iUltimoDiaMes = false; } // PHP 8: o 5.6 devolvia false
 $datausu       = "{$iAnoUsu}-{$iMesFim}-$iUltimoDiaMes";  
 $head3         = $sPeriodo;
 $oDaoConvenio  = db_utils::getDao("pactoplano");
@@ -268,7 +268,7 @@ $sSqlDados    .= "       inner join orcprograma   on o54_anousu      = o87_orcpr
 $sSqlDados    .= "                               and o54_programa    = o87_pactoprograma";
 $sSqlDados    .= " where o87_pactoplano  = {$oGet->iPlano} order by o54_descr, o55_descr";
 $rsDados       = db_query($sSqlDados);
-$iTotalRows    = pg_num_rows($rsDados);
+$iTotalRows    = ($rsDados ? pg_num_rows($rsDados) : null);
 $aLinhaRelatorio = array();
 
 $aTotalizador["CP"]["realizado_trim_atual"]    = 0; 
@@ -438,6 +438,7 @@ for ($i = 0; $i < $iTotalRows; $i++) {
 }
 //exit;
 
+if (!isset($oSaldoOrigem) || $oSaldoOrigem === false || $oSaldoOrigem === "") { $oSaldoOrigem = new stdClass(); } // PHP 8: o 5.6 criava o stdClass sozinho
 $oSaldoOrigem->cp_saldo_inicial_trim_atual =  $aTotalizador["CP"]["realizado_trim_atual"];
 $oSaldoOrigem->cp_saldo_inicial_ano_atual  =  $aTotalizador["CP"]["realizado_ano_atual"];
 $oSaldoOrigem->cp_saldo_inicial_acumulado  =  $aTotalizador["CP"]["realizado_acumulado"];

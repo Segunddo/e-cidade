@@ -46,7 +46,8 @@ include(modification("classes/db_orctiporec_classe.php"));
 
 
 require(modification("libs/db_liborcamento.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clorcdotacao = new cl_orcdotacao;
 $clorcdotacaocontr = new cl_orcdotacaocontr;

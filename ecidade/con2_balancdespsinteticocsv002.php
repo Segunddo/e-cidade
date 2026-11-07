@@ -46,7 +46,7 @@ function nivel($nivel){
 $sArquivo     = "tmp/con2_balancdespsinteticocsv002.csv";
 $fArquivo     = fopen($sArquivo, "w");
 $sNivel       = "";
-$iContaNivel  = count(split(',',$vernivel));
+$iContaNivel  = count(preg_split('#,#m',$vernivel));
 
 //CABECALHO
   $aTextoSaida[] = trim("  DOTAÇÃO
@@ -72,7 +72,8 @@ $iContaNivel  = count(split(',',$vernivel));
 $classinatura  = new cl_assinatura;
 $clorcelemento = new cl_orcelemento;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 //db_postmemory($HTTP_POST_VARS,2); exit;
 
@@ -92,7 +93,7 @@ if (!isset($db_selinstit)) {
   $db_selinstit = db_getsession("DB_instit");
 }
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
@@ -124,9 +125,9 @@ $sele_work = $clselorcdotacao->getDadosComplemento();
 
 $clselorcdotacao->instit = "(".db_getsession("DB_instit").")";
 
-$xinstit    = split("-",$db_selinstit);
+$xinstit    = preg_split("#\\-#m",$db_selinstit);
 
-$arr_niveis = split(",",$vernivel);
+$arr_niveis = preg_split("#,#m",$vernivel);
 
 //$nivela = substr($nivel,0,1);
 $sele_work = $sele_work.' and w.o58_instit in ('.str_replace('-',', ',$db_selinstit).') ';
@@ -591,25 +592,25 @@ for ($i=0; $i < pg_numrows($result); $i++) {
     
     if ($elemento != "" && $elemento != $o58_elemento && $nivelb   != 7  && $nivela   == 0 && $i > 0 ) {
       // Imprime total do elemento
-      
+
       $descr = "ELEMENTO";
-      
+
       /*
       if ($nivela == 0 && $nivelb == 7) {
         $descr = "ELEMENTO";
       }
-      
+
       if (isset($nivela) && $nivela == 9) {
         $descr = "GRUPO NAT. DESP.";
       }
-      
+
       if ($descr != "ELEMENTO" &&
       $descr != "GRUPO NAT. DESP.") {
         $descr = "ELEMENTO";
       }
       */
-      
-      
+
+
       $aTextoSaida[] = 
                         nivel(7)."TOTAL DO ELEMENTO"."#".
                         db_formatar($totelemento_dot_ini,'f')."#".
@@ -627,9 +628,9 @@ for ($i=0; $i < pg_numrows($result); $i++) {
                         db_formatar($totelemento_liquidado_acumulado,'f')."#".
                         db_formatar($totelemento_pago_acumulado,'f')."#".
                         db_formatar($totelemento_liquidado_acumulado-$totelemento_pago_acumulado,'f');
-      
-      
-      
+
+
+
       $totelemento_dot_ini                 = 0;
       $totelemento_suplementado_acumulado  = 0;
       $totelemento_reduzido_acumulado      = 0;
@@ -644,7 +645,7 @@ for ($i=0; $i < pg_numrows($result); $i++) {
       $totelemento_liquidado_acumulado     = 0;
       $totelemento_pago_acumulado          = 0;
       $totelemento_atual_a_pagar_liquidado = 0;
-      
+
      // 
     }
     
@@ -2043,7 +2044,7 @@ if ($nivela > 0) {
 pg_free_result($result);
 
   foreach($aTextoSaida as $aLinhaSaida){
-    fputcsv($fArquivo,split("#", $aLinhaSaida), ";");
+    fputcsv($fArquivo,preg_split("#\\##m", $aLinhaSaida), ";");
   }
   fclose($fArquivo);
   db_redireciona($sArquivo);

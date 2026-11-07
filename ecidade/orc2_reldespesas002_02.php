@@ -48,7 +48,7 @@ $nivel = '8A';
   $result8 = db_query($sql8);
   $orgaos = "";
   $colsub = "";
-   for($i8=0;$i8<pg_numrows($result8);$i8++){
+   for($i8=0;$i8<($result8 ? pg_numrows($result8) : null);$i8++){
      db_fieldsmemory($result8,$i8);
      $orgaos .= $colsub."$o58_orgao"."$o58_unidade"."_$o58_funcao"."_$o58_subfuncao"."_$o58_programa"."_$o58_projativ"."_$o56_elemento"."_$o15_codigo" ;
       $colsub = "_";
@@ -80,11 +80,11 @@ $qunidade = 0;
 $head1 = "DEMONSTRATIVO DA DESPESA";
 $head3 = "EXERCÍCIO: ".db_getsession("DB_anousu");
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
   db_fieldsmemory($resultinst,$xins);
   $descr_inst .= $xvirg.$nomeinst ;
   $xvirg = ', ';
@@ -131,7 +131,7 @@ $totunidareser = 0;
 $totunidaatual = 0;
 $pagina        = 1;
 
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
 
   db_fieldsmemory($result,$i);
 
@@ -391,7 +391,7 @@ $pdf->cell(20,$alt,db_formatar($totorgaoatual,'f'),0,1,"R",0);
   if($nivela == 1){
     $where .= " w.o58_orgao in ($xcampos)";
   }elseif($nivela == 2){
-    $xunid = split(",",$xcampos);
+    $xunid = preg_split("#,#m",$xcampos);
     $virgula = "";
     for($xu=0;$xu < sizeof($xunid);$xu++){
       @$xxcampos .= $virgula."'".$xunid[$xu]."'";

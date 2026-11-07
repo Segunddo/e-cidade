@@ -43,7 +43,8 @@ if (!isset($arqinclude)){
 	$clconrelinfo   = new cl_conrelinfo;
   $cldb_config  = new cl_db_config;
 
-	parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+	parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+    extract($__qs);
 	db_postmemory($HTTP_SERVER_VARS);
 
 }
@@ -62,7 +63,7 @@ if ($clconrelinfo->numrows > 0 ){
 
 }
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
@@ -97,8 +98,8 @@ if (strlen($dtini)>5 && strlen($dtfin)>5){
 }
 
 $dt     = data_periodo($anousu,$periodo);
-$dt_ini = split("-",$dt[0]);
-$dt_fin = split("-",$dt[1]);
+$dt_ini = preg_split("#\\-#m",$dt[0]);
+$dt_fin = preg_split("#\\-#m",$dt[1]);
 
 $period = "PERIODO: ".strtoupper(db_mes("01"))." A ".strtoupper(db_mes($dt_fin[1]))." DE ".$anousu;
 
@@ -165,7 +166,7 @@ if ($periodo=='1Q'){
 */
 
 if ($usa_datas==true) {
-  $dt = split('-',$dtfin);  // mktime -- (mes,dia,ano)
+  $dt = preg_split('#\-#m',$dtfin);  // mktime -- (mes,dia,ano)
   $dtini_ant = date('Y-m-d',mktime(0,0,0,$dt[1],$dt[2]-364,$dt[0]));
 }
 

@@ -50,7 +50,7 @@ class cl_orcppavalele {
                  o25_codele = int4 = Elemento 
                  ";
    //funcao construtor da classe 
-   function cl_orcppavalele() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcppavalele"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_orcppavalele {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o25_codseqppa = ($this->o25_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codseqppa"]:$this->o25_codseqppa);
-       $this->o25_codele = ($this->o25_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codele"]:$this->o25_codele);
+       $this->o25_codseqppa = ($this->o25_codseqppa === 0 || $this->o25_codseqppa === 0.0 || $this->o25_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codseqppa"]:$this->o25_codseqppa);
+       $this->o25_codele = ($this->o25_codele === 0 || $this->o25_codele === 0.0 || $this->o25_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codele"]:$this->o25_codele);
      }else{
-       $this->o25_codseqppa = ($this->o25_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codseqppa"]:$this->o25_codseqppa);
-       $this->o25_codele = ($this->o25_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codele"]:$this->o25_codele);
+       $this->o25_codseqppa = ($this->o25_codseqppa === 0 || $this->o25_codseqppa === 0.0 || $this->o25_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codseqppa"]:$this->o25_codseqppa);
+       $this->o25_codele = ($this->o25_codele === 0 || $this->o25_codele === 0.0 || $this->o25_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codele"]:$this->o25_codele);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_orcppavalele {
       $this->atualizacampos();
        $this->o25_codseqppa = $o25_codseqppa; 
        $this->o25_codele = $o25_codele; 
-     if(($this->o25_codseqppa == null) || ($this->o25_codseqppa == "") ){ 
+     if(($this->o25_codseqppa == null) || ($this->o25_codseqppa === 0 || $this->o25_codseqppa === 0.0 || $this->o25_codseqppa == "") ){ 
        $this->erro_sql = " Campo o25_codseqppa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_orcppavalele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o25_codele == null) || ($this->o25_codele == "") ){ 
+     if(($this->o25_codele == null) || ($this->o25_codele === 0 || $this->o25_codele === 0.0 || $this->o25_codele == "") ){ 
        $this->erro_sql = " Campo o25_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_orcppavalele {
    function sql_query ( $o25_codseqppa=null,$o25_codele=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_orcppavalele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_orcppavalele {
    function sql_query_file ( $o25_codseqppa=null,$o25_codele=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_orcppavalele {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

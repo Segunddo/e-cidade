@@ -55,7 +55,7 @@ class cl_orcam {
                  o02_percen = float8 = Percentual 
                  ";
    //funcao construtor da classe 
-   function cl_orcam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,14 +72,14 @@ class cl_orcam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o02_anousu = ($this->o02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_anousu"]:$this->o02_anousu);
+       $this->o02_anousu = ($this->o02_anousu === 0 || $this->o02_anousu === 0.0 || $this->o02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_anousu"]:$this->o02_anousu);
        $this->o02_codigo = ($this->o02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_codigo"]:$this->o02_codigo);
        $this->o02_descr = ($this->o02_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_descr"]:$this->o02_descr);
-       $this->o02_valor = ($this->o02_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_valor"]:$this->o02_valor);
+       $this->o02_valor = ($this->o02_valor === 0 || $this->o02_valor === 0.0 || $this->o02_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_valor"]:$this->o02_valor);
        $this->o02_codtce = ($this->o02_codtce == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_codtce"]:$this->o02_codtce);
-       $this->o02_percen = ($this->o02_percen == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_percen"]:$this->o02_percen);
+       $this->o02_percen = ($this->o02_percen === 0 || $this->o02_percen === 0.0 || $this->o02_percen == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_percen"]:$this->o02_percen);
      }else{
-       $this->o02_anousu = ($this->o02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_anousu"]:$this->o02_anousu);
+       $this->o02_anousu = ($this->o02_anousu === 0 || $this->o02_anousu === 0.0 || $this->o02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_anousu"]:$this->o02_anousu);
        $this->o02_codigo = ($this->o02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_codigo"]:$this->o02_codigo);
      }
    }
@@ -103,7 +103,7 @@ class cl_orcam {
      }
        $this->o02_anousu = $o02_anousu; 
        $this->o02_codigo = $o02_codigo; 
-     if(($this->o02_anousu == null) || ($this->o02_anousu == "") ){ 
+     if(($this->o02_anousu == null) || ($this->o02_anousu === 0 || $this->o02_anousu === 0.0 || $this->o02_anousu == "") ){ 
        $this->erro_sql = " Campo o02_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -363,7 +363,7 @@ class cl_orcam {
    function sql_query ( $o02_anousu=null,$o02_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_orcam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -405,7 +405,7 @@ class cl_orcam {
    function sql_query_file ( $o02_anousu=null,$o02_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -434,7 +434,7 @@ class cl_orcam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

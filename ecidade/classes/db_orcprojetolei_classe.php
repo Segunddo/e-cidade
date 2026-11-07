@@ -59,7 +59,7 @@ class cl_orcprojetolei {
                  o138_textolei = text = Texto do Projeto 
                  ";
    //funcao construtor da classe 
-   function cl_orcprojetolei() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcprojetolei"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,7 +76,7 @@ class cl_orcprojetolei {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o138_sequencial = ($this->o138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o138_sequencial"]:$this->o138_sequencial);
+       $this->o138_sequencial = ($this->o138_sequencial === 0 || $this->o138_sequencial === 0.0 || $this->o138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o138_sequencial"]:$this->o138_sequencial);
        $this->o138_numerolei = ($this->o138_numerolei == ""?@$GLOBALS["HTTP_POST_VARS"]["o138_numerolei"]:$this->o138_numerolei);
        if($this->o138_data == ""){
          $this->o138_data_dia = ($this->o138_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o138_data_dia"]:$this->o138_data_dia);
@@ -86,10 +86,10 @@ class cl_orcprojetolei {
             $this->o138_data = $this->o138_data_ano."-".$this->o138_data_mes."-".$this->o138_data_dia;
          }
        }
-       $this->o138_instit = ($this->o138_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o138_instit"]:$this->o138_instit);
+       $this->o138_instit = ($this->o138_instit === 0 || $this->o138_instit === 0.0 || $this->o138_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o138_instit"]:$this->o138_instit);
        $this->o138_textolei = ($this->o138_textolei == ""?@$GLOBALS["HTTP_POST_VARS"]["o138_textolei"]:$this->o138_textolei);
      }else{
-       $this->o138_sequencial = ($this->o138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o138_sequencial"]:$this->o138_sequencial);
+       $this->o138_sequencial = ($this->o138_sequencial === 0 || $this->o138_sequencial === 0.0 || $this->o138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o138_sequencial"]:$this->o138_sequencial);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_orcprojetolei {
          $this->o138_sequencial = $o138_sequencial; 
        }
      }
-     if(($this->o138_sequencial == null) || ($this->o138_sequencial == "") ){ 
+     if(($this->o138_sequencial == null) || ($this->o138_sequencial === 0 || $this->o138_sequencial === 0.0 || $this->o138_sequencial == "") ){ 
        $this->erro_sql = " Campo o138_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -428,7 +428,7 @@ class cl_orcprojetolei {
    function sql_query ( $o138_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_orcprojetolei {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -465,7 +465,7 @@ class cl_orcprojetolei {
    function sql_query_file ( $o138_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_orcprojetolei {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -183,7 +183,7 @@ function js_anular(){
 	       <?
                   $result07= $clempage->sql_record($clempage->sql_query_file(null, "*", null, "e80_codage = $e80_codage and e80_instit = " . db_getsession("DB_instit")));
                   db_fieldsmemory($result07,0);    
-                   $arr_x  = split("-",$e80_data);
+                   $arr_x  = preg_split("#\\-#m",$e80_data);
 		   $e80_data_ano = $arr_x[0];
 		   $e80_data_mes = $arr_x[1];
 		   $e80_data_dia = $arr_x[2];
@@ -274,9 +274,9 @@ function js_anular(){
 		    $arr[$codtipo] = $e83_descr;
                    
  	            $re = 'dad_'.$codtipo;
-		    $$re = $e83_sequencia."X".$e83_convenio;
+		    ${$re} = $e83_sequencia."X".$e83_convenio;
 		    
-		    echo "<input name='$re' type='hidden' value='".$$re."' >";
+		    echo "<input name='$re' type='hidden' value='".${$re}."' >";
 		  }
 		      
 	      ?>

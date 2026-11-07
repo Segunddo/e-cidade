@@ -33,7 +33,8 @@
  $anousu = db_getsession("DB_anousu");
  $instit = db_getsession("DB_instit");
 
- parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+ parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+ extract($__qs);
 
  if(isset($processados)){
 
@@ -86,8 +87,8 @@
 
   //////////////////////////////////
   $head4 = "Relatorio de Projetos";
-  $perini= split("-",$dt_ini);
-  $perfim= split("-",$dt_fim);
+  $perini= preg_split("#\\-#m",$dt_ini);
+  $perfim= preg_split("#\\-#m",$dt_fim);
   $head5 = "PERIODO : $perini[2]/$perini[1]/$perini[0]  à  $perfim[2]/$perfim[1]$perfim[0]";
    
   $pdf = new PDF();

@@ -30,7 +30,7 @@ class recurso
 {
     var $arq = null;
 
-    function recurso($header)
+    function __construct($header)
     {
         umask(74);
         $this->arq = fopen("tmp/RECURSO.TXT", 'w+');

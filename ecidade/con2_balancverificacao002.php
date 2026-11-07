@@ -32,7 +32,8 @@ require_once(modification("libs/db_libcontabilidade.php"));
 
 $classinatura = new cl_assinatura;
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $agrupa_estrutural=($agrupa_estrutural=='1'?false:true);
 $anousu = db_getsession("DB_anousu");

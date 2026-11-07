@@ -64,7 +64,7 @@ class cl_orcpparec {
                  o27_concarpeculiar = varchar(100) = Caracteristica Peculiar 
                  ";
    //funcao construtor da classe 
-   function cl_orcpparec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcpparec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_orcpparec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o27_sequen = ($this->o27_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_sequen"]:$this->o27_sequen);
-       $this->o27_exercicio = ($this->o27_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_exercicio"]:$this->o27_exercicio);
-       $this->o27_codfon = ($this->o27_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_codfon"]:$this->o27_codfon);
-       $this->o27_codleippa = ($this->o27_codleippa == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_codleippa"]:$this->o27_codleippa);
-       $this->o27_valor = ($this->o27_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_valor"]:$this->o27_valor);
+       $this->o27_sequen = ($this->o27_sequen === 0 || $this->o27_sequen === 0.0 || $this->o27_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_sequen"]:$this->o27_sequen);
+       $this->o27_exercicio = ($this->o27_exercicio === 0 || $this->o27_exercicio === 0.0 || $this->o27_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_exercicio"]:$this->o27_exercicio);
+       $this->o27_codfon = ($this->o27_codfon === 0 || $this->o27_codfon === 0.0 || $this->o27_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_codfon"]:$this->o27_codfon);
+       $this->o27_codleippa = ($this->o27_codleippa === 0 || $this->o27_codleippa === 0.0 || $this->o27_codleippa == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_codleippa"]:$this->o27_codleippa);
+       $this->o27_valor = ($this->o27_valor === 0 || $this->o27_valor === 0.0 || $this->o27_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_valor"]:$this->o27_valor);
        $this->o27_obs = ($this->o27_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_obs"]:$this->o27_obs);
-       $this->o27_proces = ($this->o27_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_proces"]:$this->o27_proces);
-       $this->o27_perc = ($this->o27_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_perc"]:$this->o27_perc);
+       $this->o27_proces = ($this->o27_proces === 0 || $this->o27_proces === 0.0 || $this->o27_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_proces"]:$this->o27_proces);
+       $this->o27_perc = ($this->o27_perc === 0 || $this->o27_perc === 0.0 || $this->o27_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_perc"]:$this->o27_perc);
        $this->o27_concarpeculiar = ($this->o27_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_concarpeculiar"]:$this->o27_concarpeculiar);
      }else{
-       $this->o27_sequen = ($this->o27_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_sequen"]:$this->o27_sequen);
+       $this->o27_sequen = ($this->o27_sequen === 0 || $this->o27_sequen === 0.0 || $this->o27_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_sequen"]:$this->o27_sequen);
      }
    }
    // funcao para inclusao
@@ -184,7 +184,7 @@ class cl_orcpparec {
          $this->o27_sequen = $o27_sequen; 
        }
      }
-     if(($this->o27_sequen == null) || ($this->o27_sequen == "") ){ 
+     if(($this->o27_sequen == null) || ($this->o27_sequen === 0 || $this->o27_sequen === 0.0 || $this->o27_sequen == "") ){ 
        $this->erro_sql = " Campo o27_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -528,7 +528,7 @@ class cl_orcpparec {
    function sql_query ( $o27_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_orcpparec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -565,7 +565,7 @@ class cl_orcpparec {
    function sql_query_file ( $o27_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -586,7 +586,7 @@ class cl_orcpparec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -598,7 +598,7 @@ class cl_orcpparec {
    function sql_query_compl ( $o27_sequen=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -621,7 +621,7 @@ class cl_orcpparec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

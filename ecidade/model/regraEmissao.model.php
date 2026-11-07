@@ -74,7 +74,7 @@ class regraEmissao {
     $sSqlTipoExecessao .= "        left  join modcarneexcessao   on modcarneexcessao.k36_modcarnepadrao   = modcarnepadrao.k48_sequencial ";
     $sSqlTipoExecessao .= $sWhereModCarne;
     $rsConsultaTipoExcessao = db_query($sSqlTipoExecessao);
-    $iNroLinhasTipoExcessao = pg_num_rows($rsConsultaTipoExcessao);
+    $iNroLinhasTipoExcessao = ($rsConsultaTipoExcessao ? pg_num_rows($rsConsultaTipoExcessao) : null);
 
     $iCodModCarnePadrao     = '';
 

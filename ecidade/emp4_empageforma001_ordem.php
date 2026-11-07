@@ -57,7 +57,8 @@ $clempageforma = new cl_empageforma;
 $clempagemovforma = new cl_empagemovforma;
 $clempageconf = new cl_empageconf;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $oGet     = db_utils::postMemory($_GET);
 $db_opcao = 1;
@@ -386,10 +387,10 @@ if (isset($oGet->lOk)) {
 //          if ($e60_numemp != 11808 and $e60_numemp != 8707) continue;
 
               $codigodaforma = "for_$e50_codord";
-              $$codigodaforma = 0;
+              ${$codigodaforma} = 0;
 
               $x= "e60_numemp_$e50_codord";
-              $$x = $e60_numemp;
+              ${$x} = $e60_numemp;
 
 
 
@@ -402,7 +403,7 @@ if (isset($oGet->lOk)) {
                 $result_empagemovforma = $clempagemovforma->sql_record($clempagemovforma->sql_query_file($e81_codmov,"e97_codforma"));
                 if($clempagemovforma->numrows>0){
                   db_fieldsmemory($result_empagemovforma,0);
-                  $$codigodaforma = $e97_codforma;
+                  ${$codigodaforma} = $e97_codforma;
                 }
                 //rotina que verifica quais movimentos eh para trazer.. se todos,selecionados e naum selecionados
                 //---------------------------------------------------------
@@ -411,7 +412,7 @@ if (isset($oGet->lOk)) {
                 if($clempagepag->numrows>0){
                   db_fieldsmemory($result01,0);
                   $x= "e83_codtipo_$e50_codord";
-                  $$x = $e85_codtipo;
+                  ${$x} = $e85_codtipo;
 
                   $lVinculadas = true;
 
@@ -431,7 +432,7 @@ if (isset($oGet->lOk)) {
 
               //coloca o valor com campo
               $x= "valor_$e50_codord";
-              $$x = number_format($e81_valor,"2",".","");
+              ${$x} = number_format($e81_valor,"2",".","");
 
               //rotina que verifica se existe valor disponivel
               $result03  = $clempagemov->sql_record($clempagemov->sql_query_ord(null,"e82_codord,sum(e81_valor) as tot_valor",""," e82_codord = $e50_codord and e80_instit = " . db_getsession("DB_instit") . " group by e82_codord "));
@@ -466,7 +467,7 @@ if (isset($oGet->lOk)) {
 //          $disponivel = $total - ($tot_valor - $e81_valor);
 
               $x= "disponivel_$e50_codord";
-              $$x = number_format($disponivel,"2",".","");
+              ${$x} = number_format($disponivel,"2",".","");
               //=-------------------------------------------
 
 //            die("ord: $e50_codord - disp: $disponivel\n");
@@ -521,7 +522,7 @@ if (isset($oGet->lOk)) {
                 $arr[$codtipo] = $e83_conta . " - " . $e83_descr . " - " . str_pad($c61_codigo, 4, "0", STR_PAD_LEFT);
                 if($numrows05==1 && !isset($e83_codtipo)){
                   $t = "e83_codtipo_$e50_codord";
-                  $$t = $codtipo;
+                  ${$t} = $codtipo;
                 }
               }
               flush();
@@ -530,7 +531,7 @@ if (isset($oGet->lOk)) {
 
               if(isset($e83_codtipo)){
                 $t = "e83_codtipo_$e50_codord";
-                $$t = $e83_codtipo;
+                ${$t} = $e83_codtipo;
               }
 
               //rotina que verifica se o fornecedor possui conta cadastrada para pagamento eletrônico
@@ -565,7 +566,7 @@ if (isset($oGet->lOk)) {
 
                   if(isset($pc63_dataconf) && trim($pc63_dataconf)!=""){
                     $contapad = "con_$e50_codord";
-                    $$contapad = $pc63_contabanco;
+                    ${$contapad} = $pc63_contabanco;
                     $conferido = "**";
                   }
 
@@ -593,7 +594,7 @@ if (isset($oGet->lOk)) {
                   db_fieldsmemory($result_contapad,0);
                 }else{
                   $contapad = "con_$e50_codord";
-                  $$contapad = 0;
+                  ${$contapad} = 0;
                 }
               }
               ?>
@@ -604,7 +605,7 @@ if (isset($oGet->lOk)) {
                 <td class='linhagrid' align='right' title="<?=($RLe60_codemp)?> - Data de emissão:<?=$e60_emiss?>">
                   <?
                   $codigoempenho = 'e60_numemp_'.$e50_codord;
-                  $$codigoempenho = $e60_numemp;
+                  ${$codigoempenho} = $e60_numemp;
                   db_input('e60_numemp_'.$e50_codord,5,$Ie60_numemp,true,'hidden',3);
                   echo "{$e60_codemp}/{$e60_anousu}";
                   ?>
@@ -622,7 +623,7 @@ if (isset($oGet->lOk)) {
                 </td>
                 <?
                 $cpfcgc = "cpfcgc_$e50_codord";
-                $$cpfcgc = $z01_cgccpf;
+                ${$cpfcgc} = $z01_cgccpf;
                 if(sizeof($arr_contas)>2){
                   echo "<td class='linhagrid' align='left' title='Banco - Agência - Conta (credor)'>";
                   echo "<input type='hidden' name='conta_$e50_codord'>";
@@ -631,7 +632,7 @@ if (isset($oGet->lOk)) {
                   echo "</td>";
                   $verificacampo = 1;
                   $formapagto = "for_$e50_codord";
-                  $$formapagto = 3;
+                  ${$formapagto} = 3;
                 }else{
                   echo "<td class='linhagrid' align='center' title='Banco - Agência - Conta (credor)'>";
                   echo "<input type='button' name='con_$e50_codord' value='Cadastrar conta' onclick='js_conta(\"$numcgm\",\"button\",\"con_$e50_codord\");'>";
@@ -685,7 +686,7 @@ if (isset($oGet->lOk)) {
                 <td class='linhagrid' align='center' title='<?=($RLe80_codage)?>'>
                   <?
                   $codigodaagenda = 'e80_codage_'.$e50_codord;
-                  $$codigodaagenda = $e80_codage;
+                  ${$codigodaagenda} = $e80_codage;
                   db_input('e80_codage_'.$e50_codord,4,$Ie80_codage,true,'text',3);
                   ?>
                 </td>

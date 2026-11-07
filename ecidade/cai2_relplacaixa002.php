@@ -55,7 +55,8 @@ $clrotulo->label('k80_instit');
 $clrotulo->label('k80_dtaut');
 $clrotulo->label('k13_descr');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_GET_VARS,2);
 
 
@@ -134,8 +135,8 @@ $sql =  " select distinct k80_codpla,
 		      order by k80_codpla" ; 
 			    
 $result = db_query($sql);
-$total  = pg_num_rows($result);
-if (pg_numrows($result) == 0){
+$total  = ($result ? pg_num_rows($result) : null);
+if (($result ? pg_numrows($result) : null) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 
 }
@@ -212,18 +213,18 @@ for($x = 0; $x < pg_num_rows($result);$x++){
      for ($i = 0;$i < pg_num_rows($rsRec);$i++){
 
        $oRec  = db_utils::fieldsMemory($rsRec,$i);
-				
+
 				/*
 				 * esse if controla o final de pagina. caso esteja no final da página, e a planilha e outra,
 				 * comeca numa nova pagina, com uma margem maior.
 				 * 
 			   */
 				if ($iCodPlaOld != $oRec->k81_codpla and $sPlaStorno != $oPla->k12_estorn){
-          
+
 					$iHeight = 48;
-    
+
 				}else{
-           
+
 					 $iHeight = 35;
 			  }
 
@@ -231,16 +232,16 @@ for($x = 0; $x < pg_num_rows($result);$x++){
 			  * Cabecalho
 			  *
 			 */
-			  
+
 	      if ($pdf->gety() > $pdf->h - $iHeight or $troca != 0){
-            
+
 				 $iYatual = 0;
 				 if ($iCodPlaOld == 592){
 
 			//		 echo $iHeight." --- ".$oRec->k12_estorn;
 				 }
 	       if ($pdf->gety() > $pdf->h - $iHeight){
-					   
+
    	         $pdf->addpage("L");
 						 $troca = 0;
 		     }
@@ -272,11 +273,11 @@ for($x = 0; $x < pg_num_rows($result);$x++){
          $pdf->cell(90,($alt*2),"Histórico","BTL",0,"C",1); 
          $pdf->cell(20,($alt*2),'valor',"BTL",1,"C",1); 
 				 $yNovo = $pdf->getY();
-   
+
 	    }
 			//Fim do Cabecalho
       $troca = 0;
-           
+
 			$pdf->setfont('arial','',7);
 			$pdf->setY($yNovo);
       $pdf->cell(20,$alt,$oRec->k13_conta,0,0,"C",$prenc);

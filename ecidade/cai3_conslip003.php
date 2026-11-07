@@ -188,7 +188,7 @@ $campos = implode(',', array(
 );
 $buscaRecursos = $oSlipRecursosContas->sql_query(null, $campos, null, "k181_slip = {$oSlip->k17_codigo}");
 $buscaRecursos = db_query($buscaRecursos);
-if (pg_num_rows($buscaRecursos) > 0) {
+if (($buscaRecursos ? pg_num_rows($buscaRecursos) : null) > 0) {
 
     $stdDados = db_utils::fieldsMemory($buscaRecursos, 0);
     $codigoRecursoDebito = $stdDados->codigo_recurso_debito;

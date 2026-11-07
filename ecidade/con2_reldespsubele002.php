@@ -69,7 +69,7 @@ db_postmemory($HTTP_POST_VARS);
 $head1 = "DEMONSTRATIVO DA DESPESA/SUBELEMENTO";
 $head3 = "EXERCÍCIO: ".db_getsession("DB_anousu");
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
@@ -128,12 +128,12 @@ if (substr($nivel,1,1) == 'A'){
   db_query("begin");
   db_query("create temp table t(o58_orgao int8,o58_unidade int8,o58_funcao int8,o58_subfuncao int8,o58_programa int8,o58_projativ int8,o58_elemento int8,o58_codigo int8)");
     
-  $xcampos = split("-",$orgaos);
+  $xcampos = preg_split("#\\-#m",$orgaos);
   
   for($i=0;$i < sizeof($xcampos);$i++){
      $where = '';
      $virgula = ''; 
-     $xxcampos = split("_",$xcampos[$i]);
+     $xxcampos = preg_split("#_#m",$xcampos[$i]);
      for($ii=0;$ii<sizeof($xxcampos);$ii++){
         if($ii > 0){
           $where .= $virgula.$xxcampos[$ii];
@@ -614,7 +614,7 @@ $pdf->cell(20,$alt,db_formatar($totorgaoatual,'f'),0,1,"R",0);
   if($nivela == 1){
     $where .= " w.o58_orgao in ($xcampos)";
   }elseif($nivela == 2){
-    $xunid = split(",",$xcampos);
+    $xunid = preg_split("#,#m",$xcampos);
     $virgula = "";
     for($xu=0;$xu < sizeof($xunid);$xu++){
       @$xxcampos .= $virgula."'".$xunid[$xu]."'"; 

@@ -37,16 +37,16 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 
 //////  EXTRATO
-$conta = split("Y",$conta);
+$conta = preg_split("#Y#m",$conta);
 for($i = 0;$i < sizeof($conta);$i++) {
   $des = db_query("select k13_descr
-       				          from saltes where k13_reduz = ".$conta[$i]) . " 
+       				          from saltes where k13_reduz = ".$conta[$i]); $des = (is_object($des) ? "" : $des) . " 
                                    inner join conplanoreduz on c62_reduz = k13_reduz and 
                                                  c62_anousu = ".db_getsession("DB_anousu")." and 
                                                  c61_instit = ".db_getsession("DB_instit"); 
   $pdf->SetFont('Arial','B',9);
   $pdf->SetY($pdf->GetY() + 3);  
-  $pdf->Cell(80,6,$conta[$i]." - ".pg_result($des,0,0),0,2,"L",0);
+  $pdf->Cell(80,6,$conta[$i]." - ".(is_string($des) ? null : pg_result($des,0,0)),0,2,"L",0);
   $DATAi = false;
   $DATAf = false;
   if(isset($datai) && trim($datai)!=""){
@@ -86,7 +86,7 @@ for($i = 0;$i < sizeof($conta);$i++) {
                      order by c.k12_hora";
 //		     die($sql);
   $result = db_query($sql);
-  $numrows = pg_numrows($result);
+  $numrows = ($result ? pg_numrows($result) : null);
   $pdf->SetFont('Arial','B',8);
   $pdf->setX(20);
   $pdf->Cell(16,3,"Data","LRB",0,"C",0);  

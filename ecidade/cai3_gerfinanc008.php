@@ -33,7 +33,8 @@ include(modification("libs/db_sql.php"));
 include(modification("libs/db_utils.php"));
 include(modification("classes/db_tabrec_classe.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 
 $cltabrec = new cl_tabrec;
 $cltabrec->rotulo->label("k02_codigo");
@@ -430,7 +431,7 @@ function js_validar() {
                               k00_numpar    ";
 //    echo $sSqlPagamentos; exit;
   $rsPagamentos    = db_query($sSqlPagamentos);
-  $iRowsPagamentos = pg_num_rows($rsPagamentos);
+  $iRowsPagamentos = ($rsPagamentos ? pg_num_rows($rsPagamentos) : null);
 
   $ConfCor1   = "#EFE029";
   $ConfCor2   = "#E4F471";

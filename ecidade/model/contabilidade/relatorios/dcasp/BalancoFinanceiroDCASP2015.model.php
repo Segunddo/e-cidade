@@ -146,7 +146,7 @@ class BalancoFinanceiroDCASP2015 extends RelatoriosLegaisBase
         $this->sTipo = $sTipo;
     }
 
-    public function getDados()
+    public function getDados($trazerConfiguracaoPadrao = true)
     {
         $this->aLinhasConsistencia = $this->getLinhasRelatorio();
         $this->processarTiposDeCalculo();

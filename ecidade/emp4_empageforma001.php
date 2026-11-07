@@ -98,7 +98,7 @@ if(isset($atualizar)){
   $sqlerro = false;
   db_inicio_transacao();
 
-  $arr_valores = split("XX",$ords);
+  $arr_valores = preg_split("#XX#m",$ords);
   $movimentoss = "";
   $virgulamovi = "";
   /*
@@ -136,7 +136,7 @@ if(isset($atualizar)){
 
   for($i=0;$i<sizeof($arr_valores);$i++) {
 
-    $arr_dados = split("-",$arr_valores[$i]);
+    $arr_dados = preg_split("#\\-#m",$arr_valores[$i]);
     $agenda    = $arr_dados[0];
     $aordem    = $arr_dados[1];
     $numemp    = $arr_dados[2];

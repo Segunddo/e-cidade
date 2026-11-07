@@ -57,7 +57,8 @@ $clempagemod  = new cl_empagemod;
 
 
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $db_botao = false;
@@ -106,12 +107,12 @@ if(isset($atualizar) ){
   
   //-----------------------------------
  //inclui na tabela empageconf
-    $arr =  split("XX",$movs);
+    $arr =  preg_split("#XX#m",$movs);
     $tot_valor ='';
     for($i=0; $i<count($arr); $i++ ){
        $mov = $arr[$i];  
 
-               
+
        //-------------
        //manutenção empagetipo
        //soh quando for banco do brasil
@@ -325,7 +326,7 @@ if($numrows==0){
 //        echo 'TRAILLER LOTE '.db_formatar(str_replace(',','',str_replace('.','',$valor_header)),'s','0',18,'e',0)."<br>";
 	  $valor_header = 0;
           $registro += 1;
-	  
+
 	  ///// FINAL DO TRAILLER DO LOTE
        }
        $seq_header  += 1;

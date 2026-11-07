@@ -71,7 +71,8 @@ require_once (modification("classes/db_db_config_classe.php"));
 //require_once (modification("classes/empenho.php"));
 $tipo_rateio = 0;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $cldownload = new cl_download;
 $cldb_config = new cl_db_config;
@@ -110,11 +111,11 @@ if ($cldb_config->numrows > 0) {
 			// monta header
 			$res = db_query("select nomeinst,cgc from db_config where codigo=".db_getsession("DB_instit"));
 			db_fieldsmemory($res, 0);
-			$ini = split("-", $data_ini);
+			$ini = preg_split("#\\-#m", $data_ini);
 			$ini = "$ini[2]$ini[1]$ini[0]";
-			$fim = split("-", $data_fim);
+			$fim = preg_split("#\\-#m", $data_fim);
 			$fim = "$fim[2]$fim[1]$fim[0]";
-			$dt = split("-", $data_pro);
+			$dt = preg_split("#\\-#m", $data_pro);
 			$dt = "$dt[2]$dt[1]$dt[0]";
 			$header = formatar($cgc, 14, 'n').$ini.$fim.$dt.formatar($nomeinst, 80, 'c');
 

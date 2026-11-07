@@ -42,7 +42,8 @@ include(modification("classes/db_orcimpacto_classe.php"));
 include(modification("classes/db_orcelemento_classe.php"));
 
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clorcimpactovalmov     = new cl_orcimpactovalmov;
@@ -201,7 +202,7 @@ if(isset($incluir)){
 	  }  
 	  //final
 	  //-------------------------------------------------
-	  
+
 
 	  //rotina exclusão orcimpactomovtiporec------------------------------------------------
 	  if($sqlerro == false && isset($codseqimpmov) && $codseqimpmov != ''){
@@ -218,7 +219,7 @@ if(isset($incluir)){
 	  }
           //final
 	  //-----------------------------------------------------------------------------------
-	  
+
 	  //rotina de inclusão no orcimpactomovtiporec------------------------------------------------
 	  if($sqlerro == false ){
 	    $clorcimpactomovtiporec->o67_codseqimpmov = $codseqimpmov;
@@ -276,7 +277,7 @@ if(isset($incluir)){
           $result = $clorcimpactovalmov->sql_record($clorcimpactovalmov->sql_query_file(null,"o64_codseqimpmov","","o64_proces=$o64_proces and o64_exercicio=$ano"));
           if( $clorcimpactovalmov->numrows>0){
 	    db_fieldsmemory($result,0);
-           
+
 	   //------------------------------------------------------------------------------------------------------- 
            //exclui do orcimpactovalmovmes
               $clorcimpactovalmovmes->sql_record($clorcimpactovalmovmes->sql_query_file($codseqimpmov));
@@ -392,8 +393,8 @@ if(isset($incluir)){
 	   //final
 	   //------------------------------------------------------------------------------------------------------- 
 
-       
- 
+
+
 	    //rotina de exclusao no orcppvalele------------------------------------------------------------------------
 	    if($sqlerro == false && isset($codseqimpmov) && $codseqimpmov != ''){
 	       $result = $clorcimpactovalmovele->sql_record($clorcimpactovalmovele->sql_query_file($codseqimpmov));

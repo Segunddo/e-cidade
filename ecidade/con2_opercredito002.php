@@ -39,7 +39,8 @@ if (!isset($arqinclude)){
   $classinatura = new cl_assinatura;
   $orcparamrel  = new cl_orcparamrel;
   
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
   
 }
@@ -50,7 +51,7 @@ include_once(modification("classes/db_conrelvalor_classe.php"));
 $clconrelinfo  = new cl_conrelinfo;
 $clconrelvalor = new cl_conrelvalor;
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
@@ -117,7 +118,7 @@ $dt_ini   = $dt[0];  // data inicial do periodo
 $dt_fim   = $dt[1];  // data final do período
 
 // se o ano atual é bissexto deve subtrair 366 somente se a data for superior a 28/02/200X
-$dt = split('-',$dt_fim);  // mktime -- (mes,dia,ano)
+$dt = preg_split('#\-#m',$dt_fim);  // mktime -- (mes,dia,ano)
 //$dt_ini_ant = date('Y-m-d',mktime(0,0,0,$dt[1],$dt[2]-364,$dt[0]));
 $dt_ini_ant = date('Y-m-d',mktime(0,0,0,$dt[1]-11,"01",$dt[0]));
 $dt_fim_ant = $anousu_ant.'-12-31';

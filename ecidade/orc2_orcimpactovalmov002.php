@@ -48,7 +48,8 @@ $clorctiporec          = new cl_orctiporec;
 $clorcimpactovalmovmes->rotulo->label();
 $clrotulo = new rotulocampo;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 if(isset($recurso) && $recurso !='' && $recurso !=0){
   $result = $clorctiporec->sql_record($clorctiporec->sql_query_file($recurso));
@@ -100,7 +101,7 @@ if($numrows==0){
 
 $arr_dadosimprime = Array();
 for($i=$o96_anoini;$i<=$o96_anofim;$i++){
-  $arr_data = split("/",db_formatar($o62_data,"d"));
+  $arr_data = preg_split("#\\/#m",db_formatar($o62_data,"d"));
   $dataorcimpactoger = $arr_data[2];
   if($i==$dataorcimpactoger){
     $arr_dadosimprime["A"][$i] = $o62_ativo;

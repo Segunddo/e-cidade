@@ -48,7 +48,7 @@ class cl_conlancamimp {
                  c88_codlan = int4 = Código Lançamento 
                  ";
    //funcao construtor da classe 
-   function cl_conlancamimp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancamimp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -65,16 +65,16 @@ class cl_conlancamimp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c88_codlan = ($this->c88_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_codlan"]:$this->c88_codlan);
+       $this->c88_codlan = ($this->c88_codlan === 0 || $this->c88_codlan === 0.0 || $this->c88_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_codlan"]:$this->c88_codlan);
      }else{
-       $this->c88_codlan = ($this->c88_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_codlan"]:$this->c88_codlan);
+       $this->c88_codlan = ($this->c88_codlan === 0 || $this->c88_codlan === 0.0 || $this->c88_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_codlan"]:$this->c88_codlan);
      }
    }
    // funcao para inclusao
    function incluir ($c88_codlan){ 
       $this->atualizacampos();
        $this->c88_codlan = $c88_codlan; 
-     if(($this->c88_codlan == null) || ($this->c88_codlan == "") ){ 
+     if(($this->c88_codlan == null) || ($this->c88_codlan === 0 || $this->c88_codlan === 0.0 || $this->c88_codlan == "") ){ 
        $this->erro_sql = " Campo c88_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -274,7 +274,7 @@ class cl_conlancamimp {
    function sql_query ( $c88_codlan=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -297,7 +297,7 @@ class cl_conlancamimp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -309,7 +309,7 @@ class cl_conlancamimp {
    function sql_query_file ( $c88_codlan=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -330,7 +330,7 @@ class cl_conlancamimp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

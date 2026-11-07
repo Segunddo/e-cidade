@@ -37,7 +37,7 @@ class AnexoDemonstrativoReceitaPublica extends RelatoriosLegaisBase {
     parent::__construct($iAnoUsu, $iCodigoRelatorio, $iCodigoPeriodo);
   }
   
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $aLinhasRelatorio = $this->oRelatorioLegal->getLinhasCompleto();
     $aLinhasRetorno   = array();

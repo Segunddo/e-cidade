@@ -41,7 +41,8 @@ $clrotulo->label('c53_descr');
 $clcontrans = new cl_contrans;
 
 $db_opcao = 1;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 ?>
 <html>

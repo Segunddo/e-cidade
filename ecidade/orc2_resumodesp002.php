@@ -29,15 +29,16 @@ include(modification("libs/db_liborcamento.php"));
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
       $descr_inst .= $xvirg.$nomeinst ;
         $xvirg = ', ';
@@ -59,7 +60,7 @@ $head7 = "PERÍODO      : ".db_formatar($perini,'d')." A ".db_formatar($perfin,'d
 // funcao para gerar work
 
 $tipo_agrupa = substr($nivel,0,1) ;
-$nivelele = substr($nivelele,0,1);
+$nivelele = ((string)$nivelele === "" ? false : substr($nivelele,0,1)); // PHP 8: o 5.6 devolvia false para string vazia (e false == '0')
 
 $tipo_rel = 2;
 
@@ -133,7 +134,7 @@ $result = db_query($sql);
 //db_criatabela($result);exit;
 
 
-$xcampos = split("-",$orgaos);
+$xcampos = preg_split("#\\-#m",$orgaos);
 
 $where = '';
 $virgula = '';
@@ -145,7 +146,7 @@ else{
    $where = " o58_unidade in (";
 }
 for($i=0;$i < sizeof($xcampos);$i++){
-   $xxcampos = split("_",$xcampos[$i]);
+   $xxcampos = preg_split("#_#m",$xcampos[$i]);
    if($tipo_agrupa == 1){
      $where .= $virgula.$xxcampos[1];
    }else{
@@ -157,7 +158,7 @@ for($i=0;$i < sizeof($xcampos);$i++){
 
   // segundo filtro funcao-subfuncao-prog ..
 
-$xcampos = split("-",$orgaosele);
+$xcampos = preg_split("#\\-#m",$orgaosele);
 
 $virgula = '';
 
@@ -168,7 +169,7 @@ if($tipo_rel=='2'){
 
  $where .= ") and $ccampo in (";
  for($i=0;$i < sizeof($xcampos);$i++){
-     $xxcampos = split("_",$xcampos[$i]);
+     $xxcampos = preg_split("#_#m",$xcampos[$i]);
      for($ii=0;$ii<sizeof($xxcampos);$ii++){
 	if($ii > 0){
 	   $where .= $virgula."'".$xxcampos[$ii]."'";
@@ -189,7 +190,7 @@ $where .= ") and o58_instit in (".str_replace('-',', ',$db_selinstit).")";
 //  db_criatabela($result_rec);
   $valor = 0;
 
-  for($i=0;$i<pg_numrows($result_rec);$i++){
+  for($i=0;$i<($result_rec ? pg_numrows($result_rec) : null);$i++){
     db_fieldsmemory($result_rec,$i);
     if($tipo_balanco==1){
       $valor = $dot_ini;
@@ -202,9 +203,9 @@ $where .= ") and o58_instit in (".str_replace('-',', ',$db_selinstit).")";
     }
      
     if($tipo_agrupa==1){
-      $sql = "update work set vlr1 = vlr1+$dot_ini, vlr2 = vlr2+$suplementado_acumulado, vlr3 = vlr3+$reduzido_acumulado, vlr4 = vlr4+$valor where work.campo = '".$$qcampo."' and orgao = ".$o58_orgao ;
+      $sql = "update work set vlr1 = vlr1+$dot_ini, vlr2 = vlr2+$suplementado_acumulado, vlr3 = vlr3+$reduzido_acumulado, vlr4 = vlr4+$valor where work.campo = '".${$qcampo}."' and orgao = ".$o58_orgao ;
     }else{
-      $sql = "update work set vlr1 = vlr1+$dot_ini, vlr2 = vlr2+$suplementado_acumulado, vlr3 = vlr3+$reduzido_acumulado, vlr4 = vlr4+$valor where work.campo = '".$$qcampo."' and orgao = ".$o58_orgao." and unidade = ".$o58_unidade;
+      $sql = "update work set vlr1 = vlr1+$dot_ini, vlr2 = vlr2+$suplementado_acumulado, vlr3 = vlr3+$reduzido_acumulado, vlr4 = vlr4+$valor where work.campo = '".${$qcampo}."' and orgao = ".$o58_orgao." and unidade = ".$o58_unidade;
     }
     //echo $sql;
     $result = db_query($sql);
@@ -240,8 +241,8 @@ if($tipo_rel==2){
    } else {
      $sql = "select * from work order by orgao,unidade,campo";
      $result = db_query($sql);
-     $qorgao = pg_result($result,0,'orgao');
-     $qunidade = pg_result($result,0,'unidade');
+     $qorgao = ($result ? pg_result($result,0,'orgao') : null);
+     $qunidade = ($result ? pg_result($result,0,'unidade') : null);
    }
 }else{
    $sql = "select orgao,unidade,
@@ -291,7 +292,7 @@ $pre = 1;
 if($tipo_rel==2){
 
   $troca_secretaria = false;
-  for($i=0;$i<pg_numrows($result);$i++){
+  for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
     db_fieldsmemory($result,$i);
     if($vlr1+$vlr2+$vlr3+$vlr4==0)
       continue;

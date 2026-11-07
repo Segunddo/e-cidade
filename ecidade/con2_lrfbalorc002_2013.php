@@ -134,7 +134,8 @@ function imprime_cabec_desp($alt,$pdf, $bimestre) {
 $anousu = db_getsession("DB_anousu");
 $instit = db_getsession("DB_instit");
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 $classinatura    = new cl_assinatura;
@@ -861,7 +862,7 @@ $sele_work   = ' w.o58_instit in ('.str_replace('-',', ',$db_selinstit).') ';
 $result_desp = db_dotacaosaldo(7,1,4,true,$sele_work,$anousu,$dt_ini,$dt_fin);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$xinstit    = split("-",$db_selinstit);
+$xinstit    = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select munic from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 db_fieldsmemory($resultinst,0);
 
@@ -870,11 +871,11 @@ $head3 = "RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA";
 $head4 = "BALANÇO ORÇAMENTÁRIO";
 $head5 = "ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL";
 $txt   = strtoupper(db_mes('01'));
-$dt    = split("-",$dt_fin);
+$dt    = preg_split("#\\-#m",$dt_fin);
 $txt  .= " À ".strtoupper(db_mes($dt[1]))." $anousu/BIMESTRE ";
-$dt    = split("-",$dt_ini);
+$dt    = preg_split("#\\-#m",$dt_ini);
 $txt  .= strtoupper(db_mes($dt[1]))."-";
-$dt    = split("-",$dt_fin);
+$dt    = preg_split("#\\-#m",$dt_fin);
 $txt  .= strtoupper(db_mes($dt[1]));
 $head6 = "$txt";
 ////////////////////////// ///////////////////

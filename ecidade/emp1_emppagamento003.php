@@ -34,7 +34,8 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_empagemov_classe.php"));
 $clempagemov    = new cl_empagemov;
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;

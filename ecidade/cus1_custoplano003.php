@@ -42,7 +42,8 @@ include(modification("classes/db_db_depart_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clcustoplanotipoconta     = new cl_custoplanotipoconta;
@@ -93,45 +94,45 @@ if(isset($excluir)){
   $rsAnalitica = $clcustoplanoanalitica->sql_record($clcustoplanoanalitica->sql_query_left(null,"*",null," cc04_custoplano = {$cc01_sequencial}"));
 
   if($clcustoplanoanalitica-> numrows > 0) {
- 
+
    @$oRetorno = db_utils::fieldsMemory($rsAnalitica,0);
- 
+
    //verifica se existem registros na tabela custoplanoanaliticabens se não existem exclui registros das tabelas:
    //custoplanotipoconta, custoplanoanalitica, custoplano 
    if($oRetorno->cc05_sequencial == null){
 
     db_inicio_transacao();
-  
+
       //não pode ter ordem de exclusão alterada devido as restrições (FK) de relacionamento do banco de dados  
-		
+
       $clcustoplanotipoconta->excluir("","cc03_custoplanoanalitica = $oRetorno->cc04_sequencial");   
    	  if($clcustoplanotipoconta->erro_status == 0) {
 	    $lSqlErro = true;	 	
 	    $sMsgErro = $clcustoplanotipoconta->erro_msg;
       }
-   
+
       $clcustoplanoanalitica->excluir($oRetorno->cc04_sequencial);
 	  if($clcustoplanoanalitica->erro_status == 0) {
 	    $lSqlErro = true;	 	
 	    $sMsgErro = $clcustoplanoanalitica->erro_msg;
       }
-	
+
       $clcustoplano->excluir($cc01_sequencial); 
       if($clcustoplano->erro_status == 0) {
 	    $lSqlErro = true;	 	
 	    $sMsgErro = $clcustoplano->erro_msg;
       }
-    
+
     db_fim_transacao($lSqlErro);
-  
+
   } 
-	
+
   //se existem bens na tabela custoplanoanaliticabens a exclusão é cancelada
   else if($oRetorno->cc05_sequencial != null){
-  
+
     db_msgbox("Inclusão cancelada não é permitido excluir uma conta com bens vinculados!");
     db_redireciona("cus1_custoplano003.php");  
- 
+
   }
 
   //se a conta é analítica faz a exclusão somente na tabela custoplano

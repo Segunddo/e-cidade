@@ -37,7 +37,7 @@ $rr =$cldb_config->sql_record($cldb_config->sql_query_file(db_getsession("DB_ins
 if ($cldb_config->numrows > 0 ){
    db_fieldsmemory($rr,0);
 }  
-$dt = split('-',$dtcont);
+$dt = preg_split('#\-#m',$dtcont);
 $dtcont_dia = $dt[2];
 $dtcont_mes = $dt[1];
 $dtcont_ano = $dt[0];
@@ -129,9 +129,9 @@ if (!isset($semestre))
   <?   
 
    if (db_getsession("DB_anousu") >= $dtcont_ano ){
-     
+
 	 echo "<tr><td colspan=8 height=150px  align=center><b><font size=+1>Não é permitido alterar dados nesse exercicio !</b><td></tr>";
-	 
+
         // db_redireciona("db_erros?db_erro='Não é permitido alterações de dados nesse exercicio !';  "); 
    } else {
      if (isset($pesquisar)){

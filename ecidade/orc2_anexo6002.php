@@ -32,7 +32,8 @@ require_once(modification("libs/db_utils.php"));
 require_once(modification("libs/db_liborcamento.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 $classinatura = new cl_assinatura;
@@ -40,11 +41,11 @@ $classinatura = new cl_assinatura;
 $qorgao = 0;
 $qunidade = 0;
 
-$xinstit = split("-", $db_selinstit);
+$xinstit = preg_split("#\\-#m", $db_selinstit);
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in (".str_replace('-', ', ', $db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins ++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins ++) {
 	db_fieldsmemory($resultinst, $xins);
 	$descr_inst .= $xvirg.$nomeinstabrev;
 	$xvirg = ', ';
@@ -102,12 +103,12 @@ db_query("create temp table t(o58_orgao int8,
                               o58_elemento varchar(255),
                               o58_codigo int8)");
 
-$xcampos = split("-", $orgaos);
+$xcampos = preg_split("#\\-#m", $orgaos);
 
 for ($i = 0; $i < sizeof($xcampos); $i ++) {
 	$where = '';
 	$virgula = '';
-	$xxcampos = split("_", $xcampos[$i]);
+	$xxcampos = preg_split("#_#m", $xcampos[$i]);
 	for ($ii = 0; $ii < sizeof($xxcampos); $ii ++) {
 		if ($ii > 0) {
 			$where .= $virgula.$xxcampos[$ii];
@@ -170,7 +171,7 @@ if ($origem == "O") {
 $result = db_dotacaosaldo(8, 1, 3, true, $sele_work, $anousu, $dataini, $datafin, $grupoini, $grupofin,false,$tipo_balanco);
 //$result = db_dotacaosaldo(8,1,2,true,$sele_work,$anousu,$dataini,$datafin,1,6);
 //db_criatabela($result);exit;
-$iTotalLinhas     = pg_num_rows($result);
+$iTotalLinhas     = ($result ? pg_num_rows($result) : null);
 $aLinhasRelatorio = array();
 if ($tipo_agrupa == 1) {
 

@@ -190,7 +190,7 @@ class linhaRelatorioContabil
         $rsLinhas = db_query($sSqlLinhas);
         $aLinhas = array();
         $iLinha = 0;
-        $iNumRows = pg_num_rows($rsLinhas);
+        $iNumRows = ($rsLinhas ? pg_num_rows($rsLinhas) : null);
         for ($i = 0; $i < $iNumRows; $i++) {
             // echo "iLinha: {$iLinha} - oLinha:{$oLinha->o117_linha}\n";
 

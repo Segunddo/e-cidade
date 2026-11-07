@@ -48,7 +48,8 @@ $clrotulo->label("z01_nome");
 $clrotulo->label("e82_codord");
 $clrotulo->label("e60_codemp");
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 
 if (isset($iCodigoGeracao) && !empty($iCodigoGeracao)) {
 

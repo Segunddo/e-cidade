@@ -36,7 +36,8 @@ $anousu = db_getsession('DB_anousu');
 $clrotulo = new rotulocampo();
 $clrotulo->label('o45_descr');
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $db_selinstit = str_replace('-', ', ', $db_selinstit);
 $iAnoUsu = db_getsession('DB_anousu');
@@ -114,7 +115,7 @@ for ($tiporel = 0; $tiporel <= 1; ++$tiporel) {
     ";
     $res = db_query($sql);
 
-    $linhas = pg_num_rows($res);
+    $linhas = ($res ? pg_num_rows($res) : null);
     $iTotalLinhas += $linhas;
 
     $head2 = 'RELATORIO DE SUPLEMENTAÇÔES POR RECURSO';
@@ -127,7 +128,7 @@ for ($tiporel = 0; $tiporel <= 1; ++$tiporel) {
     $resultinst = db_query($sqlInstit);
     $descr_inst = '';
     $xvirg = '';
-    for ($xins = 0; $xins < pg_numrows($resultinst); ++$xins) {
+    for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); ++$xins) {
         db_fieldsmemory($resultinst, $xins);
         $descr_inst .= $xvirg.$nomeinst;
         $xvirg = ', ';

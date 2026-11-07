@@ -52,7 +52,7 @@ class cl_orcimpactovalmes {
                  o92_valor = float8 = Valor 
                  ";
    //funcao construtor da classe 
-   function cl_orcimpactovalmes() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcimpactovalmes"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_orcimpactovalmes {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o92_codseqimp = ($this->o92_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o92_codseqimp"]:$this->o92_codseqimp);
-       $this->o92_mes = ($this->o92_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o92_mes"]:$this->o92_mes);
-       $this->o92_valor = ($this->o92_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o92_valor"]:$this->o92_valor);
+       $this->o92_codseqimp = ($this->o92_codseqimp === 0 || $this->o92_codseqimp === 0.0 || $this->o92_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o92_codseqimp"]:$this->o92_codseqimp);
+       $this->o92_mes = ($this->o92_mes === 0 || $this->o92_mes === 0.0 || $this->o92_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o92_mes"]:$this->o92_mes);
+       $this->o92_valor = ($this->o92_valor === 0 || $this->o92_valor === 0.0 || $this->o92_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o92_valor"]:$this->o92_valor);
      }else{
-       $this->o92_codseqimp = ($this->o92_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o92_codseqimp"]:$this->o92_codseqimp);
-       $this->o92_mes = ($this->o92_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o92_mes"]:$this->o92_mes);
+       $this->o92_codseqimp = ($this->o92_codseqimp === 0 || $this->o92_codseqimp === 0.0 || $this->o92_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o92_codseqimp"]:$this->o92_codseqimp);
+       $this->o92_mes = ($this->o92_mes === 0 || $this->o92_mes === 0.0 || $this->o92_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o92_mes"]:$this->o92_mes);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_orcimpactovalmes {
      }
        $this->o92_codseqimp = $o92_codseqimp; 
        $this->o92_mes = $o92_mes; 
-     if(($this->o92_codseqimp == null) || ($this->o92_codseqimp == "") ){ 
+     if(($this->o92_codseqimp == null) || ($this->o92_codseqimp === 0 || $this->o92_codseqimp === 0.0 || $this->o92_codseqimp == "") ){ 
        $this->erro_sql = " Campo o92_codseqimp nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_orcimpactovalmes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o92_mes == null) || ($this->o92_mes == "") ){ 
+     if(($this->o92_mes == null) || ($this->o92_mes === 0 || $this->o92_mes === 0.0 || $this->o92_mes == "") ){ 
        $this->erro_sql = " Campo o92_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -349,7 +349,7 @@ class cl_orcimpactovalmes {
    function sql_query ( $o92_codseqimp=null,$o92_mes=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_orcimpactovalmes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_orcimpactovalmes {
    function sql_query_file ( $o92_codseqimp=null,$o92_mes=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -421,7 +421,7 @@ class cl_orcimpactovalmes {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

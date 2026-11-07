@@ -36,7 +36,8 @@ require_once(modification("classes/db_empempenho_classe.php"));
 require_once(modification("libs/db_liborcamento.php"));
 require_once(modification("model/relatorioContabil.model.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clempempenho = new cl_empempenho;
 $clrotulo     = new rotulocampo;

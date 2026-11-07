@@ -177,7 +177,7 @@ class FluxoCaixaDCASP2017IPC8 extends RelatoriosLegaisBase
      *
      * @return array
      */
-    public function getDados()
+    public function getDados($trazerConfiguracaoPadrao = true)
     {
 
         /**

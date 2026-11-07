@@ -29,7 +29,7 @@
 class pagament {
   var $arq=null;
 
-  function pagament($header){
+  function __construct($header){
     umask(74);
     $this->arq = fopen("tmp/PAGAMENT.TXT",'w+');
     fputs($this->arq,$header);

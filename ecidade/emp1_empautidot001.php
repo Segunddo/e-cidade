@@ -43,7 +43,8 @@ require_once(modification("classes/db_empautitem_classe.php"));
 
 $clempautitem = new cl_empautitem;
 $e56_orctiporec = "null";
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 $clorcdotacao = new cl_orcdotacao;
 $clempautidot = new cl_empautidot;

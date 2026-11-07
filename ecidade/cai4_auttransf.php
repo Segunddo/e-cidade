@@ -74,7 +74,8 @@ $clrotulo->label('k17_numcgm');
 $clrotulo->label('k17_dtanu');
 $clrotulo->label('k18_motivo');
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 //impressora
@@ -312,7 +313,7 @@ $result_conta1 = $clsaltes->sql_record($clsaltes->sql_query());
 						  " order by c01_estrut";
 */
 
-if (pg_numrows($result_conta1) == 0) {
+if (($result_conta1 ? pg_numrows($result_conta1) : null) == 0) {
 	echo "<script>parent.alert('Sem Contas Cadastradas no Plano de Contas.');</script>";
 	exit;
 }
@@ -496,8 +497,8 @@ if ($k11_tipautent == 1) {
 
 if ((isset ($autentica) || isset ($estorna)) && isset ($fc_auttransf)) {
 	$autent = db_query("select k11_aut1,k11_aut2 from cfautent where k11_instit = ".db_getsession("DB_instit")." and k11_ipterm = '".$ip."'");
-	$aut1 = split(",", pg_result($autent, 0, 0));
-	$aut2 = split(",", pg_result($autent, 0, 1));
+	$aut1 = preg_split("#,#m", pg_result($autent, 0, 0));
+	$aut2 = preg_split("#,#m", pg_result($autent, 0, 1));
 	$str_aut1 = "";
 	$str_aut2 = "";
 	if (trim(pg_result($autent, 0, 0)) != "") {

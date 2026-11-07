@@ -63,7 +63,7 @@ class cl_correntemov {
                  k12_obsmov = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_correntemov() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("correntemov"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_correntemov {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k12_idmov = ($this->k12_idmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_idmov"]:$this->k12_idmov);
-       $this->k12_idautent = ($this->k12_idautent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_idautent"]:$this->k12_idautent);
+       $this->k12_idmov = ($this->k12_idmov === 0 || $this->k12_idmov === 0.0 || $this->k12_idmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_idmov"]:$this->k12_idmov);
+       $this->k12_idautent = ($this->k12_idautent === 0 || $this->k12_idautent === 0.0 || $this->k12_idautent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_idautent"]:$this->k12_idautent);
        if($this->k12_dtmov == ""){
          $this->k12_dtmov_dia = ($this->k12_dtmov_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_dtmov_dia"]:$this->k12_dtmov_dia);
          $this->k12_dtmov_mes = ($this->k12_dtmov_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_dtmov_mes"]:$this->k12_dtmov_mes);
@@ -91,11 +91,11 @@ class cl_correntemov {
          }
        }
        $this->k12_horamov = ($this->k12_horamov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_horamov"]:$this->k12_horamov);
-       $this->k12_valormov = ($this->k12_valormov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_valormov"]:$this->k12_valormov);
-       $this->k12_tipomov = ($this->k12_tipomov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_tipomov"]:$this->k12_tipomov);
+       $this->k12_valormov = ($this->k12_valormov === 0 || $this->k12_valormov === 0.0 || $this->k12_valormov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_valormov"]:$this->k12_valormov);
+       $this->k12_tipomov = ($this->k12_tipomov === 0 || $this->k12_tipomov === 0.0 || $this->k12_tipomov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_tipomov"]:$this->k12_tipomov);
        $this->k12_obsmov = ($this->k12_obsmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_obsmov"]:$this->k12_obsmov);
      }else{
-       $this->k12_idmov = ($this->k12_idmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_idmov"]:$this->k12_idmov);
+       $this->k12_idmov = ($this->k12_idmov === 0 || $this->k12_idmov === 0.0 || $this->k12_idmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_idmov"]:$this->k12_idmov);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_correntemov {
          $this->k12_idmov = $k12_idmov; 
        }
      }
-     if(($this->k12_idmov == null) || ($this->k12_idmov == "") ){ 
+     if(($this->k12_idmov == null) || ($this->k12_idmov === 0 || $this->k12_idmov === 0.0 || $this->k12_idmov == "") ){ 
        $this->erro_sql = " Campo k12_idmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -519,7 +519,7 @@ class cl_correntemov {
    function sql_query ( $k12_idmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -542,7 +542,7 @@ class cl_correntemov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -554,7 +554,7 @@ class cl_correntemov {
    function sql_query_file ( $k12_idmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -577,7 +577,7 @@ class cl_correntemov {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

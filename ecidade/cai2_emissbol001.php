@@ -47,7 +47,7 @@ $k29_instit     = db_getsession("DB_instit");
 
 $clcaiparametro  = new cl_caiparametro;
 $rsCaiParametro  = $clcaiparametro->sql_record($clcaiparametro->sql_query($k29_instit,"k29_contassemmovimento",null,""));
-$iCaiParametro   = @pg_num_rows($rsCaiParametro);
+$iCaiParametro   = @($rsCaiParametro ? pg_num_rows($rsCaiParametro) : null);
 
 if ( $iCaiParametro > 0 ) {
   db_fieldsmemory($rsCaiParametro,0);

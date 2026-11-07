@@ -131,15 +131,15 @@ $clnotificaarretipodoc->rotulo->label();
   	  
   	  //---------------- Busca Numpre, Numpar, Receita
   	  
-  	  $aNumpres = split("N",$oPost->sNumpres);
+  	  $aNumpres = preg_split("#N#m",$oPost->sNumpres);
   	  
 	  for ($i = 0; $i < count($aNumpres); $i++  ) {
 		if ($aNumpres[$i] == "") {
 		  continue;		
 		}
-	  	$iNumpre = @split("P",$aNumpres[$i]);
-        $iNumpar = @split("P", strstr($aNumpres[$i],"P"));
-        $iNumpar = @split("R",$iNumpar[1]);
+	  	$iNumpre = @preg_split("#P#m",$aNumpres[$i]);
+        $iNumpar = @preg_split("#P#m", strstr($aNumpres[$i],"P"));
+        $iNumpar = @preg_split("#R#m",$iNumpar[1]);
         $iReceit = @$iNumpar[1];
         $iNumpar = @$iNumpar[0];
         $iNumpre = @$iNumpre[0];
@@ -310,7 +310,7 @@ $clnotificaarretipodoc->rotulo->label();
   	  
   	  //---------------- Busca Numpre, Numpar, Receita
   	  
-  	  $aNumpres = split("N",$oPost->sNumpres);
+  	  $aNumpres = preg_split("#N#m",$oPost->sNumpres);
   	  
 	  for ($i = 0; $i < count($aNumpres); $i++  ) {
 		
@@ -318,9 +318,9 @@ $clnotificaarretipodoc->rotulo->label();
 		  continue;		
 		}
 		
-	  	  $iNumpre = split("P",$aNumpres[$i]);
-        $iNumpar = split("P", strstr($aNumpres[$i],"P"));
-        $iNumpar = split("R",$iNumpar[1]);
+	  	  $iNumpre = preg_split("#P#m",$aNumpres[$i]);
+        $iNumpar = preg_split("#P#m", strstr($aNumpres[$i],"P"));
+        $iNumpar = preg_split("#R#m",$iNumpar[1]);
         $iReceit = @$iNumpar[1];
         $iNumpar = @$iNumpar[0];
         $iNumpre = @$iNumpre[0];
@@ -617,7 +617,7 @@ $clnotificaarretipodoc->rotulo->label();
 				  }
 				}  	
 
-				$aNumpres 		  = split("N",$oPost->sNumpres);
+				$aNumpres 		  = preg_split("#N#m",$oPost->sNumpres);
 			  $sMsgExisteDebito = "";
 				
 				for ($i = 0; $i < count($aNumpres); $i++  ) {
@@ -626,9 +626,9 @@ $clnotificaarretipodoc->rotulo->label();
 				    continue;		
 				  }
 				  
-			  	    $iNumpre = @split("P",$aNumpres[$i]);
-		          $iNumpar = @split("P", strstr($aNumpres[$i],"P"));
-		          $iNumpar = @split("R",$iNumpar[1]);
+			  	    $iNumpre = @preg_split("#P#m",$aNumpres[$i]);
+		          $iNumpar = @preg_split("#P#m", strstr($aNumpres[$i],"P"));
+		          $iNumpar = @preg_split("#R#m",$iNumpar[1]);
 		          $iReceit = @$iNumpar[1];
 		          $iNumpar = @$iNumpar[0];
 		          $iNumpre = @$iNumpre[0];

@@ -112,7 +112,7 @@ switch ($oGet->trimestre) {
  * para poder informar qual o fim do trimestre anterior
  * Este dado serve somente para informação
  */
-$iUltimoDiaTrimestreAnterior  = mktime(0, 0, 0, $iMesIni, 0, $iAnoUsu);
+$iUltimoDiaTrimestreAnterior  = mktime(0, 0, 0, ($iMesIni === null ? 0 : $iMesIni), 0, $iAnoUsu); // PHP 8: mes null e o mes atual; no 5.6 era 0
 $dtUltimoDiaTrimestreAnterior = date("d/m/Y", $iUltimoDiaTrimestreAnterior);
 
 $iCodigoRelatorio            = 100;
@@ -136,12 +136,12 @@ if ($iAnoUsu == 2013){
 $sWhere          = " o70_instit = ".db_getsession("DB_instit");
 $sWhere         .= " and o70_codigo = {$oConvenio->o16_orctiporec}";
 $iDataInicial    = "{$iAnoUsu}-{$iMesIni}-01";
-$iUltimoDiaMes   = cal_days_in_month(CAL_GREGORIAN,$iMesFim,$iAnoUsu);
+try { $iUltimoDiaMes   = cal_days_in_month(CAL_GREGORIAN,$iMesFim,$iAnoUsu); } catch (Throwable $e) { $iUltimoDiaMes = false; } // PHP 8: o 5.6 devolvia false
 $datausu         = "{$iAnoUsu}-{$iMesFim}-$iUltimoDiaMes";
 
 $rsReceitaSaldo = db_receitasaldo(11, 1, 3,true, $sWhere,$iAnoUsu, $iDataInicial, $datausu);
 $nTotalPeriodo  = 0;
-$iTotalLinhas   = pg_num_rows($rsReceitaSaldo);
+$iTotalLinhas   = ($rsReceitaSaldo ? pg_num_rows($rsReceitaSaldo) : null);
 for ($iRec = 0; $iRec < $iTotalLinhas; $iRec++) {
 
   $oLinha = db_utils::fieldsMemory($rsReceitaSaldo, $iRec);
@@ -295,7 +295,7 @@ $sSqlArrecadacoes .= "    and c53_tipo in(100, 101)";
 $sSqlArrecadacoes .= "  group by 1,2,3,4 order by 4,3,1 ";
 $rsArrecadoes        = db_query($sSqlArrecadacoes);
 $aArrecadacoes       = array();
-for ($iRec = 0; $iRec < pg_num_rows($rsArrecadoes); $iRec++) {
+for ($iRec = 0; $iRec < ($rsArrecadoes ? pg_num_rows($rsArrecadoes) : null); $iRec++) {
 
   $oLinha = db_utils::fieldsMemory($rsArrecadoes, $iRec);
   foreach ($oParametroRendimentos->contas as $oEstrutural) {

@@ -38,7 +38,8 @@ db_validarMenuPCASP(db_getsession("DB_itemmenu_acessado", false));
 
 $clcriaabas      = new cl_criaabas;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $abas    = array();

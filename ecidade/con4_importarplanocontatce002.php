@@ -95,7 +95,7 @@ if (pg_num_rows($rsConplano) > 0) {
     foreach ($aLinhas as $sLinha) {
       
       $iLinha++;
-      $aCamposLinha = split("\t", $sLinha);
+      $aCamposLinha = preg_split("#\t#m", $sLinha);
       if ($iLinha == 1 || !isset($aCamposLinha[5])) {
         continue;
       }

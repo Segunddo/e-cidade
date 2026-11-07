@@ -109,7 +109,7 @@ class AnexoXIRREO extends RelatoriosLegaisBase  {
    * 
    * @return array - Colecao de stdClass
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
   	
      $oRetorno                     = new stdClass();
      $oRetorno->quadroreceitas     = array();

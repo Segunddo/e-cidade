@@ -157,7 +157,7 @@ if (isset($oPost->confirmar)) {
 
   		$lErro    = true;
       $sMsgErro = $oDaoSlipMov->erro_msg;
-      break;
+      exit;
 
   	}
   }

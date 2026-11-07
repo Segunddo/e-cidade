@@ -32,7 +32,8 @@ require_once(modification("libs/db_sql.php"));
 
 $clselorcdotacao = new cl_selorcdotacao();
 $opcao = 2;
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 $anousu = db_getsession('DB_anousu');
@@ -42,7 +43,7 @@ $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo 
 $descr_inst = '';
 $xvirg = '';
 
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg . $nomeinstabrev;
     $xvirg = ',';
@@ -347,7 +348,7 @@ for ($mes = 1; $mes < 13; $mes++) {
     db_query("rollback");
     $valor = 0;
 
-    $iNumRows = pg_num_rows($result_rec);
+    $iNumRows = ($result_rec ? pg_num_rows($result_rec) : null);
     for ($i = 0; $i < $iNumRows; $i++) {
         db_fieldsmemory($result_rec, $i);
         if ($tipo_balanco == 1) {
@@ -373,9 +374,9 @@ for ($mes = 1; $mes < 13; $mes++) {
         }
 
         if ($tipo_agrupa == 1) {
-            $sql = "update work set vlr$mes = vlr$mes+$valor where work.campo = '" . $$qcampo . "' and work.orgao = " . $o58_orgao;
+            $sql = "update work set vlr$mes = vlr$mes+$valor where work.campo = '" . ${$qcampo} . "' and work.orgao = " . $o58_orgao;
         } else {
-            $sql = "update work set vlr$mes = vlr$mes+$valor where work.campo = '" . $$qcampo . "' and work.orgao = " . $o58_orgao . " and work.unidade = " . $o58_unidade;
+            $sql = "update work set vlr$mes = vlr$mes+$valor where work.campo = '" . ${$qcampo} . "' and work.orgao = " . $o58_orgao . " and work.unidade = " . $o58_unidade;
         }
         $result = db_query($sql);
     }
@@ -416,8 +417,8 @@ if ($tipo_rel == 2) {
     } else {
         $sql = "select * from work order by orgao,unidade,campo";
         $result = db_query($sql);
-        $qorgao = pg_result($result, 0, 'orgao');
-        $qunidade = pg_result($result, 0, 'unidade');
+        $qorgao = ($result ? pg_result($result, 0, 'orgao') : null);
+        $qunidade = ($result ? pg_result($result, 0, 'unidade') : null);
     }
 } else {
     $sCampos = 'campo, descr';
@@ -476,7 +477,7 @@ $tvlr12 = 0;
 
 if ($tipo_rel == 2) {
     $troca_secretaria = false;
-    for ($i = 0; $i < pg_num_rows($result); $i++) {
+    for ($i = 0; $i < ($result ? pg_num_rows($result) : null); $i++) {
         db_fieldsmemory($result, $i);
         if ($vlr1 + $vlr2 + $vlr3 + $vlr4 + $vlr5 + $vlr6 + $vlr7 + $vlr8 + $vlr9 + $vlr10 + $vlr11 + $vlr12 == 0) {
             continue;

@@ -91,7 +91,8 @@ $clempagedadosret    = new cl_empagedadosret;
 $clempagedadosretmov = new cl_empagedadosretmov;
 $daoSlip = new cl_slip();
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 $iInstituicaoSessao = db_getsession('DB_instit');
 //db_postmemory($_POST);
 //db_postmemory($_GET);
@@ -480,7 +481,7 @@ function js_atualizar(){
           <?php
 
             if (isset($e87_data) && trim($e87_data) != "") {
-              $arr_data = split("-",$e87_data);
+              $arr_data = preg_split("#\\-#m",$e87_data);
               $data_proc_dia = $arr_data[2];
               $data_proc_mes = $arr_data[1];
               $data_proc_ano = $arr_data[0];

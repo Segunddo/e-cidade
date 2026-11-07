@@ -50,7 +50,7 @@ class cl_bancoshistmovexcecao {
                  k166_bancoshistmov = int4 = Codigo do movimento bancario 
                  ";
    //funcao construtor da classe 
-   function cl_bancoshistmovexcecao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bancoshistmovexcecao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_bancoshistmovexcecao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k166_sequencial = ($this->k166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_sequencial"]:$this->k166_sequencial);
-       $this->k166_bancoshistmov = ($this->k166_bancoshistmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_bancoshistmov"]:$this->k166_bancoshistmov);
+       $this->k166_sequencial = ($this->k166_sequencial === 0 || $this->k166_sequencial === 0.0 || $this->k166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_sequencial"]:$this->k166_sequencial);
+       $this->k166_bancoshistmov = ($this->k166_bancoshistmov === 0 || $this->k166_bancoshistmov === 0.0 || $this->k166_bancoshistmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_bancoshistmov"]:$this->k166_bancoshistmov);
      }else{
-       $this->k166_sequencial = ($this->k166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_sequencial"]:$this->k166_sequencial);
+       $this->k166_sequencial = ($this->k166_sequencial === 0 || $this->k166_sequencial === 0.0 || $this->k166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_sequencial"]:$this->k166_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_bancoshistmovexcecao {
          $this->k166_sequencial = $k166_sequencial; 
        }
      }
-     if(($this->k166_sequencial == null) || ($this->k166_sequencial == "") ){ 
+     if(($this->k166_sequencial == null) || ($this->k166_sequencial === 0 || $this->k166_sequencial === 0.0 || $this->k166_sequencial == "") ){ 
        $this->erro_sql = " Campo k166_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -351,7 +351,7 @@ class cl_bancoshistmovexcecao {
    function sql_query ( $k166_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -375,7 +375,7 @@ class cl_bancoshistmovexcecao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_bancoshistmovexcecao {
    function sql_query_file ( $k166_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -409,7 +409,7 @@ class cl_bancoshistmovexcecao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -42,10 +42,10 @@
   }  
   
   if($sqlerro==false){
-    $arr_dados = split("#",$dados);
+    $arr_dados = preg_split("#\\##m",$dados);
     $tam = count($arr_dados);
     for($i=0; $i<$tam; $i++){
-       $arr_ele = split("-",$arr_dados[$i]);
+       $arr_ele = preg_split("#\\-#m",$arr_dados[$i]);
        $elemento     =  $arr_ele[0]; 
 	   if(isset($chaves) && $chaves!=''){
 	     $vlrord       =  '0.00'; 
@@ -133,7 +133,7 @@
 
      //rotina pega as notas marcadas para atualizar os valores liquidados da notas
      if($sqlerro==false && isset($chaves) && $chaves!=''){
-	   $arr_notas = split("#",$chaves);
+	   $arr_notas = preg_split("#\\##m",$chaves);
        $tam = count($arr_notas);
 	   for($i=0; $i<$tam; $i++){
 	     $nota = $arr_notas[$i];

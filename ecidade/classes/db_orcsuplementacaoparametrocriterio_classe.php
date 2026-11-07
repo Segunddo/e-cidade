@@ -58,7 +58,7 @@ class cl_orcsuplementacaoparametrocriterio {
                  o135_fundamentacaolegal = text = Fundamentação Legal do Critério 
                  ";
    //funcao construtor da classe 
-   function cl_orcsuplementacaoparametrocriterio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcsuplementacaoparametrocriterio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_orcsuplementacaoparametrocriterio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o135_sequencial = ($this->o135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_sequencial"]:$this->o135_sequencial);
-       $this->o135_orcsuplementacaoparametro = ($this->o135_orcsuplementacaoparametro == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_orcsuplementacaoparametro"]:$this->o135_orcsuplementacaoparametro);
+       $this->o135_sequencial = ($this->o135_sequencial === 0 || $this->o135_sequencial === 0.0 || $this->o135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_sequencial"]:$this->o135_sequencial);
+       $this->o135_orcsuplementacaoparametro = ($this->o135_orcsuplementacaoparametro === 0 || $this->o135_orcsuplementacaoparametro === 0.0 || $this->o135_orcsuplementacaoparametro == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_orcsuplementacaoparametro"]:$this->o135_orcsuplementacaoparametro);
        $this->o135_descricao = ($this->o135_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_descricao"]:$this->o135_descricao);
-       $this->o135_nivel = ($this->o135_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_nivel"]:$this->o135_nivel);
+       $this->o135_nivel = ($this->o135_nivel === 0 || $this->o135_nivel === 0.0 || $this->o135_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_nivel"]:$this->o135_nivel);
        $this->o135_valor = ($this->o135_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_valor"]:$this->o135_valor);
        $this->o135_fundamentacaolegal = ($this->o135_fundamentacaolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_fundamentacaolegal"]:$this->o135_fundamentacaolegal);
      }else{
-       $this->o135_sequencial = ($this->o135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_sequencial"]:$this->o135_sequencial);
+       $this->o135_sequencial = ($this->o135_sequencial === 0 || $this->o135_sequencial === 0.0 || $this->o135_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o135_sequencial"]:$this->o135_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_orcsuplementacaoparametrocriterio {
          $this->o135_sequencial = $o135_sequencial; 
        }
      }
-     if(($this->o135_sequencial == null) || ($this->o135_sequencial == "") ){ 
+     if(($this->o135_sequencial == null) || ($this->o135_sequencial === 0 || $this->o135_sequencial === 0.0 || $this->o135_sequencial == "") ){ 
        $this->erro_sql = " Campo o135_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -417,7 +417,7 @@ class cl_orcsuplementacaoparametrocriterio {
    function sql_query ( $o135_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_orcsuplementacaoparametrocriterio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_orcsuplementacaoparametrocriterio {
    function sql_query_file ( $o135_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_orcsuplementacaoparametrocriterio {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -45,7 +45,7 @@ $sql="select x33_dtvenc as datavenc from aguaconfvenc where x33_exerc = ".db_get
 $result = db_query($sql);
 db_fieldsmemory($result, 0);
 
-$data = split("-",$datavenc);
+$data = preg_split("#\\-#m",$datavenc);
 $dia = $data[2];
 $historico = base64_decode($historico);
 //echo " codret = $codret <br> data  = $datavenc <br> dia = $dia";
@@ -78,7 +78,7 @@ $sqldiferenca = "
 	  and disarq.autent   is false  
     and disbanco.instit = $instit";
 $resultdiferenca = db_query($sqldiferenca);
-$linhasdiferenca = pg_num_rows($resultdiferenca);
+$linhasdiferenca = ($resultdiferenca ? pg_num_rows($resultdiferenca) : null);
 if($linhasdiferenca >0){
   db_inicio_transacao();
   for($i=0;$i<$linhasdiferenca;$i++){

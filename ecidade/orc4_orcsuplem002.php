@@ -35,7 +35,8 @@ include(modification("classes/db_orcsuplemtipo_classe.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 include(modification("classes/db_orcprojeto_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clorcsuplem = new cl_orcsuplem;

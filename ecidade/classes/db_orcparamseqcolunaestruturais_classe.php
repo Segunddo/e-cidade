@@ -184,7 +184,7 @@ class cl_orcparamseqcolunaestruturais
         } else {
             $this->o158_sequencial = $o158_sequencial;
         }
-        if (($this->o158_sequencial == null) || ($this->o158_sequencial == "")) {
+        if (($this->o158_sequencial == null) || ($this->o158_sequencial === 0 || $this->o158_sequencial === 0.0 || $this->o158_sequencial == "")) {
             $this->erro_sql = " Campo o158_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -295,13 +295,13 @@ class cl_orcparamseqcolunaestruturais
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->o158_orcparamseqcoluna = ($this->o158_orcparamseqcoluna == "" ? @$GLOBALS["HTTP_POST_VARS"]["o158_orcparamseqcoluna"] : $this->o158_orcparamseqcoluna);
+            $this->o158_orcparamseqcoluna = ($this->o158_orcparamseqcoluna === 0 || $this->o158_orcparamseqcoluna === 0.0 || $this->o158_orcparamseqcoluna == "" ? @$GLOBALS["HTTP_POST_VARS"]["o158_orcparamseqcoluna"] : $this->o158_orcparamseqcoluna);
             $this->o158_estrutural = ($this->o158_estrutural == "" ? @$GLOBALS["HTTP_POST_VARS"]["o158_estrutural"] : $this->o158_estrutural);
             $this->o158_exclusao = $this->o158_exclusao ?: null;
-            $this->o158_sequencial = ($this->o158_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o158_sequencial"] : $this->o158_sequencial);
-            $this->o158_ano = ($this->o158_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["o158_ano"] : $this->o158_ano);
+            $this->o158_sequencial = ($this->o158_sequencial === 0 || $this->o158_sequencial === 0.0 || $this->o158_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o158_sequencial"] : $this->o158_sequencial);
+            $this->o158_ano = ($this->o158_ano === 0 || $this->o158_ano === 0.0 || $this->o158_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["o158_ano"] : $this->o158_ano);
         } else {
-            $this->o158_sequencial = ($this->o158_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o158_sequencial"] : $this->o158_sequencial);
+            $this->o158_sequencial = ($this->o158_sequencial === 0 || $this->o158_sequencial === 0.0 || $this->o158_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o158_sequencial"] : $this->o158_sequencial);
         }
     }
 

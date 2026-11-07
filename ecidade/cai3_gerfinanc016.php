@@ -30,7 +30,8 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_sql.php"));
 require_once(modification("classes/db_numpref_classe.php"));
-parse_str(base64_decode($_SERVER["QUERY_STRING"]));
+parse_str(base64_decode($_SERVER["QUERY_STRING"]), $__qs);
+extract($__qs);
 
 //arreprescr k30_anulado is false
 $clnumpref = new cl_numpref();

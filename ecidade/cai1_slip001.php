@@ -143,7 +143,7 @@ if (isset($confirma) && !empty($confirma)) {
 
   if ($sqlerro == false) {
     // pega a variavel chaves e desmebra-a em pares chave=>valor
-    $ch = split('#',$chaves);
+    $ch = preg_split('#\##m',$chaves);
 
     foreach($ch as $key => $value) {
       // echo "Chave: $key; Valor: $value<br />\n";

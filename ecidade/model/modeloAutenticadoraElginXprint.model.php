@@ -42,7 +42,7 @@ class modeloAutenticadoraElginXprint extends impressao  {
   	
   }
   
-  function imprimir() {
+  function imprimir($sImprimir = '') { // PHP 8 (LSP): parametro da mae, opcional
     
     $this->sStringAutenticacao = str_replace("  ", " ", $this->sStringAutenticacao);
     parent::imprimir(chr(27).chr(77)."{$this->sStringAutenticacao}".chr(10).chr(13));  	

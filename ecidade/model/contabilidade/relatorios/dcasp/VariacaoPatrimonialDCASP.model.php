@@ -42,7 +42,7 @@ class VariacaoPatrimonialDCASP extends RelatoriosLegaisBase {
    * Busca os dados que serão impressos no relatório
    * @return array stdClass - Retorna um array contendo stdClass
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $oDataInicialAnterior = clone $this->getDataInicial();
     $oDataInicialAnterior->modificarIntervalo('-1 year');

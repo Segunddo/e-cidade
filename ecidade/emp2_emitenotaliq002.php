@@ -71,7 +71,8 @@ if ($oConfiguracaoGed->utilizaGED()) {
 }
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $sqlpref = "select * from db_config where codigo = ".db_getsession("DB_instit");
 $resultpref = db_query($sqlpref);
@@ -81,12 +82,12 @@ $dbwhere = "";
 $iAnoUso = db_getsession('DB_anousu');
 
 if(isset($e60_codemp_ini) && $e60_codemp_ini != "") {
-  $codemp  = split("/",$e60_codemp_ini);
+  $codemp  = preg_split("#\\/#m",$e60_codemp_ini);
 
   if (isset($e60_codemp_fim) && $e60_codemp_fim != "") {
      $str = " e60_codemp between '".$e60_codemp_ini."' and '".$e60_codemp_fim."' and e60_anousu = {$iAnoUso} ";
   } else {
-       $codemp  = split("/",$e60_codemp_ini);
+       $codemp  = preg_split("#\\/#m",$e60_codemp_ini);
 
        if (count($codemp) > 1) {
          $str = " e60_codemp = '".$codemp[0]."' and e60_anousu = ".$codemp[1]." ";

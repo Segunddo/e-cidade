@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 $pdf = new PDF(); 
 $pdf->Open(); 
@@ -102,7 +103,7 @@ $sql = "select * from ($sql) as x where codsubrec is not null";
 //echo $sql ; exit;
 
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem lançamentos para a taxa '.$codsubrec.' no período de '.db_formatar($datai,'d').' a '.db_formatar($dataf,'d'));
 }

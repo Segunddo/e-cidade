@@ -65,7 +65,7 @@ $sql .="
 
 //die($sql);
 $rsResult = db_query($sql); 
-$numrows  = pg_num_rows($rsResult);
+$numrows  = ($rsResult ? pg_num_rows($rsResult) : null);
 if ($numrows == 0){
     db_redireciona('db_erros.php?fechar=true&db_erro=Nao existem valores a serem listados para o filtro selecionado.');
     exit;

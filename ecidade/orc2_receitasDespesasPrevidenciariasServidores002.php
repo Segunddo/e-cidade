@@ -41,7 +41,8 @@ if (!isset($arqinclude)) {
   $classinatura = new cl_assinatura();
   $orcparamrel  = new cl_orcparamrel();
   $cldb_config  = new cl_db_config();
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
 
 }

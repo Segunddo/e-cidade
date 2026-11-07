@@ -112,7 +112,8 @@ $cltranslan = new cl_translan;
 $ip = db_getsession("DB_ip");
 $porta = 5001;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $db_opcao       = 22;
@@ -218,7 +219,7 @@ if (isset($pag_emp) && empty($confirmar) ) {
   $db_botao = true;
   //rotina que traz os dados de empempenho
   if (isset($e60_codemp) && $e60_codemp != '') {
-    $arr = split("/", $e60_codemp);
+    $arr = preg_split("#\\/#m", $e60_codemp);
     if (count($arr) == 2 && isset($arr[1]) && $arr[1] != '') {
       $dbwhere_ano = " and e60_anousu = ".$arr[1];
     } else {

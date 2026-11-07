@@ -31,7 +31,7 @@
 class uniorcam {
     var $arq=null;
 
-  function uniorcam($header){
+  function __construct($header){
 
      umask(74);
      $this->arq = fopen("tmp/UNIORCAM.TXT",'w+');
@@ -52,7 +52,7 @@ class uniorcam {
     $res =$clarqpad->sql_record(
                $clarqpad->sql_query(null,"*",null," c54_nomearq = 'UNIORCAM.TXT' and c54_anousu=".db_getsession("DB_anousu")."  and c54_codtrib = $tribinst "));
     if($clarqpad->numrows > 0){
-      $rubant = split("\r\n",pg_result($res,0,"c54_arquivo"));
+      $rubant = preg_split("#\r\n#m",pg_result($res,0,"c54_arquivo"));
       for($yy=0;$yy<sizeof($rubant);$yy++){
          $contador++;
          $line = $rubant[$yy];
@@ -139,13 +139,13 @@ class uniorcam {
       $nome           = formatar(pg_result($res,$x,"nome"),80,'c');
       $identificador  = formatar(pg_result($res,$x,"identificador"),2,'n');
       $cnpj           = formatar(pg_result($res,$x,"cnpj"),14,'n');
-      
-   
+
+
       //-- 
       $line = $anousu.$orgao.$unidade.$nome.$identificador.$cnpj; 
       fputs($this->arq,$line);
       fputs($this->arq,"\r\n");
-  
+
       $contador = $contador+1; // incrementa contador global
    }
 

@@ -88,11 +88,11 @@ class cl_sagresresponsavelunidadeorcamentaria
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c140_sequencial = ($this->c140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_sequencial"]:$this->c140_sequencial);
-       $this->c140_orgao = ($this->c140_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_orgao"]:$this->c140_orgao);
-       $this->c140_unidade = ($this->c140_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_unidade"]:$this->c140_unidade);
-       $this->c140_cgm = ($this->c140_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_cgm"]:$this->c140_cgm);
-       $this->c140_cgmsubstituto = ($this->c140_cgmsubstituto == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_cgmsubstituto"]:$this->c140_cgmsubstituto);
+       $this->c140_sequencial = ($this->c140_sequencial === 0 || $this->c140_sequencial === 0.0 || $this->c140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_sequencial"]:$this->c140_sequencial);
+       $this->c140_orgao = ($this->c140_orgao === 0 || $this->c140_orgao === 0.0 || $this->c140_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_orgao"]:$this->c140_orgao);
+       $this->c140_unidade = ($this->c140_unidade === 0 || $this->c140_unidade === 0.0 || $this->c140_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_unidade"]:$this->c140_unidade);
+       $this->c140_cgm = ($this->c140_cgm === 0 || $this->c140_cgm === 0.0 || $this->c140_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_cgm"]:$this->c140_cgm);
+       $this->c140_cgmsubstituto = ($this->c140_cgmsubstituto === 0 || $this->c140_cgmsubstituto === 0.0 || $this->c140_cgmsubstituto == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_cgmsubstituto"]:$this->c140_cgmsubstituto);
        $this->c140_principal = ($this->c140_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["c140_principal"]:$this->c140_principal);
        $this->c140_substituto = ($this->c140_substituto == "f"?@$GLOBALS["HTTP_POST_VARS"]["c140_substituto"]:$this->c140_substituto);
        if($this->c140_datainicio == ""){
@@ -111,7 +111,7 @@ class cl_sagresresponsavelunidadeorcamentaria
             $this->c140_datafim = $this->c140_datafim_ano."-".$this->c140_datafim_mes."-".$this->c140_datafim_dia;
          }
        }
-       $this->c140_tipoatojuridico = ($this->c140_tipoatojuridico == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_tipoatojuridico"]:$this->c140_tipoatojuridico);
+       $this->c140_tipoatojuridico = ($this->c140_tipoatojuridico === 0 || $this->c140_tipoatojuridico === 0.0 || $this->c140_tipoatojuridico == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_tipoatojuridico"]:$this->c140_tipoatojuridico);
        $this->c140_ativo = ($this->c140_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["c140_ativo"]:$this->c140_ativo);
        if($this->c140_datainatividade == ""){
          $this->c140_datainatividade_dia = ($this->c140_datainatividade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_datainatividade_dia"]:$this->c140_datainatividade_dia);
@@ -121,9 +121,9 @@ class cl_sagresresponsavelunidadeorcamentaria
             $this->c140_datainatividade = $this->c140_datainatividade_ano."-".$this->c140_datainatividade_mes."-".$this->c140_datainatividade_dia;
          }
        }
-       $this->c140_idusuario = ($this->c140_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_idusuario"]:$this->c140_idusuario);
-       $this->c140_anousu = ($this->c140_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_anousu"]:$this->c140_anousu);
-       $this->c140_instit = ($this->c140_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_instit"]:$this->c140_instit);
+       $this->c140_idusuario = ($this->c140_idusuario === 0 || $this->c140_idusuario === 0.0 || $this->c140_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_idusuario"]:$this->c140_idusuario);
+       $this->c140_anousu = ($this->c140_anousu === 0 || $this->c140_anousu === 0.0 || $this->c140_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_anousu"]:$this->c140_anousu);
+       $this->c140_instit = ($this->c140_instit === 0 || $this->c140_instit === 0.0 || $this->c140_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_instit"]:$this->c140_instit);
        if($this->c140_datainiciosub == ""){
          $this->c140_datainiciosub_dia = ($this->c140_datainiciosub_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_datainiciosub_dia"]:$this->c140_datainiciosub_dia);
          $this->c140_datainiciosub_mes = ($this->c140_datainiciosub_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_datainiciosub_mes"]:$this->c140_datainiciosub_mes);
@@ -141,7 +141,7 @@ class cl_sagresresponsavelunidadeorcamentaria
          }
        }
      }else{
-       $this->c140_sequencial = ($this->c140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_sequencial"]:$this->c140_sequencial);
+       $this->c140_sequencial = ($this->c140_sequencial === 0 || $this->c140_sequencial === 0.0 || $this->c140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c140_sequencial"]:$this->c140_sequencial);
      }
    }
 
@@ -280,7 +280,7 @@ class cl_sagresresponsavelunidadeorcamentaria
          $this->c140_sequencial = $c140_sequencial; 
        }
      }
-     if(($this->c140_sequencial == null) || ($this->c140_sequencial == "") ){ 
+     if(($this->c140_sequencial == null) || ($this->c140_sequencial === 0 || $this->c140_sequencial === 0.0 || $this->c140_sequencial == "") ){ 
        $this->erro_sql = " Campo c140_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -125,9 +125,9 @@ class cl_orctiporecconvenio
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->o16_sequencial = ($this->o16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_sequencial"]:$this->o16_sequencial);
-       $this->o16_orctiporec = ($this->o16_orctiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_orctiporec"]:$this->o16_orctiporec);
-       $this->o16_percentual = ($this->o16_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_percentual"]:$this->o16_percentual);
+       $this->o16_sequencial = ($this->o16_sequencial === 0 || $this->o16_sequencial === 0.0 || $this->o16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_sequencial"]:$this->o16_sequencial);
+       $this->o16_orctiporec = ($this->o16_orctiporec === 0 || $this->o16_orctiporec === 0.0 || $this->o16_orctiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_orctiporec"]:$this->o16_orctiporec);
+       $this->o16_percentual = ($this->o16_percentual === 0 || $this->o16_percentual === 0.0 || $this->o16_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_percentual"]:$this->o16_percentual);
        if($this->o16_dtassinatura == ""){
          $this->o16_dtassinatura_dia = ($this->o16_dtassinatura_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_dtassinatura_dia"]:$this->o16_dtassinatura_dia);
          $this->o16_dtassinatura_mes = ($this->o16_dtassinatura_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_dtassinatura_mes"]:$this->o16_dtassinatura_mes);
@@ -187,15 +187,15 @@ class cl_orctiporecconvenio
        $this->o16_convenio = ($this->o16_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_convenio"]:$this->o16_convenio);
        $this->o16_observacao = ($this->o16_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_observacao"]:$this->o16_observacao);
        $this->o16_objeto = ($this->o16_objeto == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_objeto"]:$this->o16_objeto);
-       $this->o16_valor = ($this->o16_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_valor"]:$this->o16_valor);
-       $this->o16_saldoaberturacp = ($this->o16_saldoaberturacp == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_saldoaberturacp"]:$this->o16_saldoaberturacp);
-       $this->o16_saldoabertura = ($this->o16_saldoabertura == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_saldoabertura"]:$this->o16_saldoabertura);
-       $this->o16_saltes = ($this->o16_saltes == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_saltes"]:$this->o16_saltes);
-       $this->o16_tipopacto = ($this->o16_tipopacto == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_tipopacto"]:$this->o16_tipopacto);
-       $this->o16_orctiporecconveniosituacao = ($this->o16_orctiporecconveniosituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_orctiporecconveniosituacao"]:$this->o16_orctiporecconveniosituacao);
-       $this->o16_concedente = ($this->o16_concedente == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_concedente"]:$this->o16_concedente);
+       $this->o16_valor = ($this->o16_valor === 0 || $this->o16_valor === 0.0 || $this->o16_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_valor"]:$this->o16_valor);
+       $this->o16_saldoaberturacp = ($this->o16_saldoaberturacp === 0 || $this->o16_saldoaberturacp === 0.0 || $this->o16_saldoaberturacp == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_saldoaberturacp"]:$this->o16_saldoaberturacp);
+       $this->o16_saldoabertura = ($this->o16_saldoabertura === 0 || $this->o16_saldoabertura === 0.0 || $this->o16_saldoabertura == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_saldoabertura"]:$this->o16_saldoabertura);
+       $this->o16_saltes = ($this->o16_saltes === 0 || $this->o16_saltes === 0.0 || $this->o16_saltes == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_saltes"]:$this->o16_saltes);
+       $this->o16_tipopacto = ($this->o16_tipopacto === 0 || $this->o16_tipopacto === 0.0 || $this->o16_tipopacto == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_tipopacto"]:$this->o16_tipopacto);
+       $this->o16_orctiporecconveniosituacao = ($this->o16_orctiporecconveniosituacao === 0 || $this->o16_orctiporecconveniosituacao === 0.0 || $this->o16_orctiporecconveniosituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_orctiporecconveniosituacao"]:$this->o16_orctiporecconveniosituacao);
+       $this->o16_concedente = ($this->o16_concedente === 0 || $this->o16_concedente === 0.0 || $this->o16_concedente == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_concedente"]:$this->o16_concedente);
      }else{
-       $this->o16_sequencial = ($this->o16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_sequencial"]:$this->o16_sequencial);
+       $this->o16_sequencial = ($this->o16_sequencial === 0 || $this->o16_sequencial === 0.0 || $this->o16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o16_sequencial"]:$this->o16_sequencial);
      }
    }
 
@@ -322,7 +322,7 @@ class cl_orctiporecconvenio
          $this->o16_sequencial = $o16_sequencial;
        }
      }
-     if(($this->o16_sequencial == null) || ($this->o16_sequencial == "") ){
+     if(($this->o16_sequencial == null) || ($this->o16_sequencial === 0 || $this->o16_sequencial === 0.0 || $this->o16_sequencial == "") ){
        $this->erro_sql = " Campo o16_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

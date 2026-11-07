@@ -43,13 +43,14 @@ if (!isset($arqinclude)) {
   $clconrelinfo = new cl_conrelinfo;
   $cldb_config  = new cl_db_config;
   
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
   
 }
 
 // -------------------------------------
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
@@ -69,7 +70,7 @@ for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
 $tipo_emissao='periodo';
 
 if (!isset($arqinclude)) {
-  
+
 	$anousu  = db_getsession("DB_anousu");
 
   $dt = data_periodo($anousu,$periodo); // no dbforms/db_funcoes.php
@@ -78,11 +79,11 @@ if (!isset($arqinclude)) {
   // $texto = $dt['texto'];
   // $txtper = $dt['periodo'];
   $anousu_ant  = db_getsession("DB_anousu")-1;
-  
+
   $dt = data_periodo($anousu_ant,$periodo); // no dbforms/db_funcoes.php
   $dt_ini_ant= $dt[0]; // data inicial do período
   $dt_fin_ant= $dt[1]; // data final do período
-  
+
   $bimestre = substr($periodo,0,1); // bimestre do exercicio atual
   
 }
@@ -96,7 +97,7 @@ if ($dtini!=''&&$dtfin!='') {
   $dt_ini = $dtini;
   $dt_fin = $dtfin;
   
-  $dt     = split("-",$dt_ini);
+  $dt     = preg_split("#\\-#m",$dt_ini);
   $mes    = $dt[1];
   
   // 1 Bimestre
@@ -114,9 +115,9 @@ if ($dtini!=''&&$dtfin!='') {
     $bimestre = 6;      
   }
   
-  $dt = split('-',$dt_fin);
+  $dt = preg_split('#\-#m',$dt_fin);
   $dt_ini_ant = $anousu_ant.'-'.$dt[1].'-'.$dt[2];
-  $dt = split('-',$dt_fin);
+  $dt = preg_split('#\-#m',$dt_fin);
   $dt_fin_ant = $anousu_ant.'-'.$dt[1].'-'.$dt[2];
   
 }  
@@ -146,18 +147,18 @@ if ($flag_abrev == false){
 $head7 = "INSTITUIÇÕES : ".$descr_inst;
 
 if ($tipo_emissao!='datas'){
-  $dtd1 = split('-',$dt_ini);
-  $dtd2 = split('-',$dt_fin);
+  $dtd1 = preg_split('#\-#m',$dt_ini);
+  $dtd2 = preg_split('#\-#m',$dt_fin);
   $dt1 = "$dtd1[2]/$dtd1[1]/$dtd1[0]";
   $dt2 = "$dtd2[2]/$dtd2[1]/$dtd2[0]";
   $txt = strtoupper(db_mes('01'));
-  $dt  = split("-",$dt_fin);
+  $dt  = preg_split("#\\-#m",$dt_fin);
   $txt.= " À ".strtoupper(db_mes($dt[1]));
   $txt .= "  / ".$anousu;
   $head5 = "$txt";
 }else {
-  $dtd1 = split('-',$dt_ini);
-  $dtd2 = split('-',$dt_fin);
+  $dtd1 = preg_split('#\-#m',$dt_ini);
+  $dtd2 = preg_split('#\-#m',$dt_fin);
   $dt1 = "$dtd1[2]/$dtd1[1]/$dtd1[0]";
   $dt2 = "$dtd2[2]/$dtd2[1]/$dtd2[0]";
   $head5 = "EMISSÃO POR DATAS";

@@ -179,7 +179,7 @@ if ( $iLinhasDadosTaxaInf > 0 ) {
 }
 
 foreach ( $aListaTodosAnos as $iIndAno => $iAno ){
-	if ( !array_key_exists($iAno,$aValTaxaDefla)) {
+	if ( !array_key_exists($iAno,(array)$aValTaxaDefla)) {
 		$sMsgErro = "Não consta informação sobre o valor da taxa de inflação no cenário macroeconômico para o ano {$iAno}!";
 	  db_redireciona("db_erros.php?fechar=true&db_erro={$sMsgErro}");
 	}
@@ -251,7 +251,7 @@ foreach ( $aListaAnosAnt as $iIndAno => $iAno) {
 	  
 	  $oDespesa = db_utils::fieldsMemory($rsDespesa,$iInd);
 	  
-	  if ( $oDespesa->o58_elemento{0} == 3 ) {
+	  if ( $oDespesa->o58_elemento[0] == 3 ) {
 	    $oDespesaTotal->aValores[$iAno]->nCorrente += $oDespesa->empenhado_acumulado - $oDespesa->anulado_acumulado;
 	  } 
 	    
@@ -318,7 +318,7 @@ foreach ($aListaAnosPPA as $iIndAno => $iAno ) {
   // Calcula Despesa Corrente de todos os anos posteriores ao de referência
 	foreach ( $aEstimativaDespesa as $iInd => $oDespesa ) {
 	  
-	  if ( $oDespesa->iElemento{0} == 3 ) {
+	  if ( $oDespesa->iElemento[0] == 3 ) {
       $oDespesaTotal->aValores[$iAno]->nCorrente += $oDespesa->aEstimativas[$iAno];
 	  } 
 	  

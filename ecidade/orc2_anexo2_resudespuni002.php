@@ -32,17 +32,18 @@ include(modification("libs/db_sql.php"));
 include(modification("libs/db_liborcamento.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $classinatura = new cl_assinatura;
 
 $tipo_agrupa = substr($nivel,0,1);
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = pg_exec("select codigo,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
       $descr_inst .= $xvirg.$nomeinstabrev ;
         $xvirg = ', ';
@@ -87,7 +88,7 @@ $result = pg_exec($sql);
 //$result = pg_exec("select * from work");
 //db_criatabela($result);exit;
 
-$xcampos = split("-",$orgaos);
+$xcampos = preg_split("#\\-#m",$orgaos);
 
 
 if(substr($nivel,0,1) == '1'){
@@ -102,7 +103,7 @@ if(substr($nivel,0,1) == '1'){
 }
 $virgula1 = ' ';
 for($i=0;$i < sizeof($xcampos);$i++){
-   $xxcampos = split("_",$xcampos[$i]);
+   $xxcampos = preg_split("#_#m",$xcampos[$i]);
    $virgula = '';
    $where  = "'";
    $where1 = "'";
@@ -135,7 +136,7 @@ $valor = 0;
 if($origem == "O"){
   $tipo_balanco=1;
 }
-for($i=0;$i<pg_numrows($result_rec);$i++){
+for($i=0;$i<($result_rec ? pg_numrows($result_rec) : null);$i++){
   db_fieldsmemory($result_rec,$i);
   if($tipo_balanco==1){
     $valor = $dot_ini;
@@ -184,7 +185,7 @@ $tvalor2=0;
 $tvalor3=0;
 $ttotal4=0;
 $pagina = 1;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
 
   if($pdf->gety()>$pdf->h-30 || $pagina ==1){
@@ -258,7 +259,7 @@ $tvalor3=0;
 $tvalor4=0;
 $ttotal4=0;
 $pagina = 1;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   if($valor==-1){
     continue;
@@ -326,7 +327,7 @@ $tvalor2=0;
 $ttotal4=0;
 $pagina = 1;
 
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   if($valor==-1){
     continue;

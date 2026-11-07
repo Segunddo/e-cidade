@@ -73,7 +73,7 @@ $erro = false;
 // orgaos
 if (isset ($processa_orgao) && ($processa_orgao == 'Processar')) {
 	// obtem uma matriz de chaves
-	$chaves = split('#', $chaves);
+	$chaves = preg_split('#\##m', $chaves);
 	if (count($chaves) > 0) {
 		db_inicio_transacao();
 		for ($i = 0; $i < count($chaves); $i ++) {
@@ -102,13 +102,13 @@ if (isset ($processa_orgao) && ($processa_orgao == 'Processar')) {
 }
 // unidades
 if (isset ($processa_unidade) && ($processa_unidade == 'Processar')) {
-	$chaves = split('#', $chaves);
+	$chaves = preg_split('#\##m', $chaves);
 	if (count($chaves) > 0) {
 		db_inicio_transacao();
 		$ct = count($chaves);
 		for ($i = 0; $i < $ct; $i ++) {
 		   if ($chaves[$i] == "") continue;
-                   $pesquisa = split('-',$chaves[$i]);
+                   $pesquisa = preg_split('#\-#m',$chaves[$i]);
 		   $res = $clorcunidade->sql_record($clorcunidade->sql_query_file($anousu_ant,$pesquisa[0],$pesquisa[1]));
 		   if  (($clorcunidade->numrows) > 0) {
 		  	db_fieldsmemory($res, 0);
@@ -132,7 +132,7 @@ if (isset ($processa_unidade) && ($processa_unidade == 'Processar')) {
 }//
 // programa
 if (isset ($processa_programa) && ($processa_programa == 'Processar')) {
-	$chaves = split('#', $chaves);
+	$chaves = preg_split('#\##m', $chaves);
 	if (count($chaves) > 0) {
 		db_inicio_transacao();
 		for ($i = 0; $i < count($chaves); $i ++) {
@@ -159,7 +159,7 @@ if (isset ($processa_programa) && ($processa_programa == 'Processar')) {
 }//
 // projativ
 if (isset ($processa_projativ) && ($processa_projativ == 'Processar')) {
-	$chaves = split('#', $chaves);
+	$chaves = preg_split('#\##m', $chaves);
 	if (count($chaves) > 0) {
 		db_inicio_transacao();
 		for ($i = 0; $i < count($chaves); $i ++) {
@@ -186,7 +186,7 @@ if (isset ($processa_projativ) && ($processa_projativ == 'Processar')) {
 }//
 // orcelemento
 if (isset ($processa_elemento) && ($processa_elemento == 'Processar')) {
-	$chaves = split('#', $chaves);
+	$chaves = preg_split('#\##m', $chaves);
 	if (count($chaves) > 0) {
 		db_inicio_transacao();
 		for ($i = 0; $i < count($chaves); $i ++) {
@@ -227,11 +227,11 @@ if (isset ($processa_dotacao) && ($processa_dotacao == 'Processar')) {
     $res= $clorcdotacao->sql_record($clorcdotacao->sql_query($anousu_ant));
     //db_criatabela($res);
     $rows = $clorcdotacao->numrows;
-    
+
     for ($x=0;$x<$rows;$x++){         
          db_fieldsmemory($res,$x);
          $dot= db_dotacaosaldo(8,2,3,true,"o58_coddot=$o58_coddot",$anousu_ant,$anousu_ant.'-01-01',$datafinal);  
-         
+
          if (pg_numrows($dot) > 0 ){
 	         db_fieldsmemory($dot,0);
 

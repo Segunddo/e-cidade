@@ -38,7 +38,8 @@ require_once(modification("classes/db_pagordem_classe.php"));
 $clempempenho = new cl_empempenho;
 $clpagordem   = new cl_pagordem;
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 $oGet = db_utils::postMemory($_GET);
 
 if (!empty($oGet->dt1)) {
@@ -72,7 +73,7 @@ if (isset ($e60_numemp) and ($e60_numemp != "")) {
 }
 
 if (isset($e60_codemp) and $e60_codemp != "" ) {
-	  $arr = split("/",$e60_codemp);
+	  $arr = preg_split("#\\/#m",$e60_codemp);
 	  if(count($arr) == 2  && isset($arr[1]) && $arr[1] != '' ){
 	  	$where_sql .= " e60_codemp =  '".$arr[0]."' and e60_anousu = ".$arr[1]." and ";
 	  }else{
@@ -105,7 +106,7 @@ if (isset($pc01_codmater) and $pc01_codmater !=""){
 }
 
 if (isset ($o50_estrutdespesa) && ($o50_estrutdespesa != "")) {
-	$matriz = split('\.', $o50_estrutdespesa);
+	$matriz = preg_split('#\.#m', $o50_estrutdespesa);
 	for ($i = 0; $i < count($matriz); $i ++) {
 		switch ($i) {
 			case 0 : //orgao

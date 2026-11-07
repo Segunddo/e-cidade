@@ -26,7 +26,7 @@ class cl_empagemovformapagamento {
                  e07_empagemov = int4 = Código do Movimento 
                  ";
    //funcao construtor da classe
-   function cl_empagemovformapagamento() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empagemovformapagamento");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_empagemovformapagamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e07_sequencial = ($this->e07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e07_sequencial"]:$this->e07_sequencial);
-       $this->e07_formatransmissao = ($this->e07_formatransmissao == ""?@$GLOBALS["HTTP_POST_VARS"]["e07_formatransmissao"]:$this->e07_formatransmissao);
-       $this->e07_empagemov = ($this->e07_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e07_empagemov"]:$this->e07_empagemov);
+       $this->e07_sequencial = ($this->e07_sequencial === 0 || $this->e07_sequencial === 0.0 || $this->e07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e07_sequencial"]:$this->e07_sequencial);
+       $this->e07_formatransmissao = ($this->e07_formatransmissao === 0 || $this->e07_formatransmissao === 0.0 || $this->e07_formatransmissao == ""?@$GLOBALS["HTTP_POST_VARS"]["e07_formatransmissao"]:$this->e07_formatransmissao);
+       $this->e07_empagemov = ($this->e07_empagemov === 0 || $this->e07_empagemov === 0.0 || $this->e07_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e07_empagemov"]:$this->e07_empagemov);
      }else{
-       $this->e07_sequencial = ($this->e07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e07_sequencial"]:$this->e07_sequencial);
+       $this->e07_sequencial = ($this->e07_sequencial === 0 || $this->e07_sequencial === 0.0 || $this->e07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e07_sequencial"]:$this->e07_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_empagemovformapagamento {
          $this->e07_sequencial = $e07_sequencial;
        }
      }
-     if(($this->e07_sequencial == null) || ($this->e07_sequencial == "") ){
+     if(($this->e07_sequencial == null) || ($this->e07_sequencial === 0 || $this->e07_sequencial === 0.0 || $this->e07_sequencial == "") ){
        $this->erro_sql = " Campo e07_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

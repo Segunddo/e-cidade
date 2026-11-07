@@ -68,7 +68,7 @@ $sSqlEstimativa .= "   and o08_instit in({$sListaInstit}) {$sWherePrograma} {$sW
 $sSqlEstimativa .= " order by o08_programa";  
 
 $rsEstimativa 	   = pg_query($sSqlEstimativa); 
-$iLinhasEstimativa = pg_num_rows($rsEstimativa);
+$iLinhasEstimativa = ($rsEstimativa ? pg_num_rows($rsEstimativa) : null);
 $aEstimativa	   = array();	 
 
 $valor = 0;

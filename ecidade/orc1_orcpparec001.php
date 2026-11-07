@@ -38,7 +38,8 @@ include(modification("classes/db_concarpeculiar_classe.php"));
 
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clorcpparec      = new cl_orcpparec;
@@ -70,7 +71,7 @@ if(isset($incluir)){
       $obs   = $vt["o27_obs_$ano"];
       $sequen= $vt["o27_sequen_$ano"];
       $perc   = $vt["o27_perc_$ano"];
-      
+
       if (trim($vt["o27_concarpeculiar_$ano"]) == ""){
         $o27_concarpeculiar = "0";
       } else {
@@ -87,7 +88,7 @@ if(isset($incluir)){
 	db_fieldsmemory($result,0);
       }
      //---------------------------------------------------------------------------------------------
-       
+
       //-------PROCESSO DE INLCUÃO-----------------------------------------------------------------------
 	if(empty($proces)){
 	  $proces = '0';
@@ -112,7 +113,7 @@ if(isset($incluir)){
 	   $seq  = $clorcpparec->o27_sequen;
 	}  	
      //------------------------------------------------------------------------------------------   
-   
+
      //alterar-----------------------------------------------------
 	if($sqlerro == false && $priproces == true){
 	    $priproces = false;
@@ -172,8 +173,8 @@ if(isset($incluir)){
 	  db_fieldsmemory($result,0);
 	}
        //---------------------------------------------------------------------------------------------
-	 
-	
+
+
 	//-------PROCESSO DE ALTERAÇÃO---------------------------------------------------------------------
 	  if($sqlerro == false){ 
 	    $clorcpparec->o27_proces         = $o27_proces;

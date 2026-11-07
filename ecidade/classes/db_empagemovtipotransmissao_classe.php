@@ -52,7 +52,7 @@ class cl_empagemovtipotransmissao {
                  e25_empagetipotransmissao = int4 = Tipo de Transmissão
                  ";
    //funcao construtor da classe
-   function cl_empagemovtipotransmissao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empagemovtipotransmissao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_empagemovtipotransmissao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e25_sequencial = ($this->e25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e25_sequencial"]:$this->e25_sequencial);
-       $this->e25_empagemov = ($this->e25_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e25_empagemov"]:$this->e25_empagemov);
-       $this->e25_empagetipotransmissao = ($this->e25_empagetipotransmissao == ""?@$GLOBALS["HTTP_POST_VARS"]["e25_empagetipotransmissao"]:$this->e25_empagetipotransmissao);
+       $this->e25_sequencial = ($this->e25_sequencial === 0 || $this->e25_sequencial === 0.0 || $this->e25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e25_sequencial"]:$this->e25_sequencial);
+       $this->e25_empagemov = ($this->e25_empagemov === 0 || $this->e25_empagemov === 0.0 || $this->e25_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e25_empagemov"]:$this->e25_empagemov);
+       $this->e25_empagetipotransmissao = ($this->e25_empagetipotransmissao === 0 || $this->e25_empagetipotransmissao === 0.0 || $this->e25_empagetipotransmissao == ""?@$GLOBALS["HTTP_POST_VARS"]["e25_empagetipotransmissao"]:$this->e25_empagetipotransmissao);
      }else{
-       $this->e25_sequencial = ($this->e25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e25_sequencial"]:$this->e25_sequencial);
+       $this->e25_sequencial = ($this->e25_sequencial === 0 || $this->e25_sequencial === 0.0 || $this->e25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e25_sequencial"]:$this->e25_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_empagemovtipotransmissao {
          $this->e25_sequencial = $e25_sequencial;
        }
      }
-     if(($this->e25_sequencial == null) || ($this->e25_sequencial == "") ){
+     if(($this->e25_sequencial == null) || ($this->e25_sequencial === 0 || $this->e25_sequencial === 0.0 || $this->e25_sequencial == "") ){
        $this->erro_sql = " Campo e25_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -386,7 +386,7 @@ class cl_empagemovtipotransmissao {
    function sql_query ( $e25_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -410,7 +410,7 @@ class cl_empagemovtipotransmissao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_empagemovtipotransmissao {
    function sql_query_file ( $e25_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_empagemovtipotransmissao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -72,7 +72,8 @@ $clcfautent = new cl_cfautent;
 
 $ip = db_getsession("DB_ip");
 $porta = 5001;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
   //rotina que verifica se o ip do usuario irá imprimir autenticar ou naum ira fazer nada
   $result99 = $clcfautent->sql_record($clcfautent->sql_query_file(null,"k11_tipautent as tipautent",'',"k11_ipterm = '".db_getsession("DB_ip")."' and k11_instit = ".db_getsession("DB_instit")));

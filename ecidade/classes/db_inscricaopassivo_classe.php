@@ -67,7 +67,7 @@ class cl_inscricaopassivo {
                  c36_data = date = Data Inscricao 
                  ";
    //funcao construtor da classe 
-   function cl_inscricaopassivo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("inscricaopassivo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -84,13 +84,13 @@ class cl_inscricaopassivo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c36_sequencial = ($this->c36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_sequencial"]:$this->c36_sequencial);
-       $this->c36_cgm = ($this->c36_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_cgm"]:$this->c36_cgm);
-       $this->c36_db_usuarios = ($this->c36_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_db_usuarios"]:$this->c36_db_usuarios);
-       $this->c36_instit = ($this->c36_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_instit"]:$this->c36_instit);
-       $this->c36_codele = ($this->c36_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_codele"]:$this->c36_codele);
-       $this->c36_anousu = ($this->c36_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_anousu"]:$this->c36_anousu);
-       $this->c36_conhist = ($this->c36_conhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_conhist"]:$this->c36_conhist);
+       $this->c36_sequencial = ($this->c36_sequencial === 0 || $this->c36_sequencial === 0.0 || $this->c36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_sequencial"]:$this->c36_sequencial);
+       $this->c36_cgm = ($this->c36_cgm === 0 || $this->c36_cgm === 0.0 || $this->c36_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_cgm"]:$this->c36_cgm);
+       $this->c36_db_usuarios = ($this->c36_db_usuarios === 0 || $this->c36_db_usuarios === 0.0 || $this->c36_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_db_usuarios"]:$this->c36_db_usuarios);
+       $this->c36_instit = ($this->c36_instit === 0 || $this->c36_instit === 0.0 || $this->c36_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_instit"]:$this->c36_instit);
+       $this->c36_codele = ($this->c36_codele === 0 || $this->c36_codele === 0.0 || $this->c36_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_codele"]:$this->c36_codele);
+       $this->c36_anousu = ($this->c36_anousu === 0 || $this->c36_anousu === 0.0 || $this->c36_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_anousu"]:$this->c36_anousu);
+       $this->c36_conhist = ($this->c36_conhist === 0 || $this->c36_conhist === 0.0 || $this->c36_conhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_conhist"]:$this->c36_conhist);
        $this->c36_observacaoconhist = ($this->c36_observacaoconhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_observacaoconhist"]:$this->c36_observacaoconhist);
        if($this->c36_data == ""){
          $this->c36_data_dia = ($this->c36_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_data_dia"]:$this->c36_data_dia);
@@ -101,7 +101,7 @@ class cl_inscricaopassivo {
          }
        }
      }else{
-       $this->c36_sequencial = ($this->c36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_sequencial"]:$this->c36_sequencial);
+       $this->c36_sequencial = ($this->c36_sequencial === 0 || $this->c36_sequencial === 0.0 || $this->c36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c36_sequencial"]:$this->c36_sequencial);
      }
    }
    // funcao para inclusao
@@ -203,7 +203,7 @@ class cl_inscricaopassivo {
          $this->c36_sequencial = $c36_sequencial; 
        }
      }
-     if(($this->c36_sequencial == null) || ($this->c36_sequencial == "") ){ 
+     if(($this->c36_sequencial == null) || ($this->c36_sequencial === 0 || $this->c36_sequencial === 0.0 || $this->c36_sequencial == "") ){ 
        $this->erro_sql = " Campo c36_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -570,7 +570,7 @@ class cl_inscricaopassivo {
    function sql_query ( $c36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -598,7 +598,7 @@ class cl_inscricaopassivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -611,7 +611,7 @@ class cl_inscricaopassivo {
    function sql_query_file ( $c36_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -632,7 +632,7 @@ class cl_inscricaopassivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -654,7 +654,7 @@ class cl_inscricaopassivo {
     $sql = "select ";
     if ($campos != "*" ) {
       
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -686,7 +686,7 @@ class cl_inscricaopassivo {
     if ($ordem != null) {
       
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -701,7 +701,7 @@ class cl_inscricaopassivo {
     $sql = "select ";
     if($campos != "*" ) {
       
-      $campos_sql  = split("#",$campos);
+      $campos_sql  = preg_split("#\\##m",$campos);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -734,7 +734,7 @@ class cl_inscricaopassivo {
     if ($ordem != null) {
       
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
         
@@ -753,7 +753,7 @@ class cl_inscricaopassivo {
     $sql = "select ";
     if ($campos != "*" ) {
   
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
   
@@ -789,7 +789,7 @@ class cl_inscricaopassivo {
     if ($ordem != null) {
   
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
   
@@ -805,7 +805,7 @@ class cl_inscricaopassivo {
     $sql = "select ";
     if($campos != "*" ) {
   
-      $campos_sql  = split("#",$campos);
+      $campos_sql  = preg_split("#\\##m",$campos);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
   
@@ -840,7 +840,7 @@ class cl_inscricaopassivo {
     if ($ordem != null) {
   
       $sql        .= " order by ";
-      $campos_sql  = split("#",$ordem);
+      $campos_sql  = preg_split("#\\##m",$ordem);
       $virgula     = "";
       for ($i = 0; $i < sizeof($campos_sql); $i++) {
   

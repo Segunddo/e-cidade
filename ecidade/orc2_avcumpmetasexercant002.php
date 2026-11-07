@@ -186,7 +186,7 @@ for ( $iInd=0; $iInd < $iLinhasDespesa; $iInd++ ) {
 
 	$oDespesa = db_utils::fieldsMemory($rsDespesa,$iInd);
 
-	if ( $oDespesa->o58_elemento{0} == 3 ) {
+	if ( $oDespesa->o58_elemento[0] == 3 ) {
 
 	  $oDespesaTotal->Prevista  += $oDespesa->dot_ini + $oDespesa->suplementado_acumulado - $oDespesa->reduzido_acumulado;
 	  $oDespesaTotal->Realizada += $oDespesa->empenhado_acumulado - $oDespesa->anulado_acumulado;

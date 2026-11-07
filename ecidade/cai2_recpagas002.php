@@ -27,7 +27,8 @@
 
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $clrotulo = new rotulocampo;
 $clrotulo->label('');
@@ -105,7 +106,7 @@ $sql = "
 //die($sql);
 
 $result = db_query($sql);
-if (pg_numrows($result) == 0) {
+if (($result ? pg_numrows($result) : null) == 0) {
 	db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 }
 $pdf = new PDF(); 

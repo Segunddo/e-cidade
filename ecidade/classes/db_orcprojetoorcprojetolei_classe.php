@@ -52,7 +52,7 @@ class cl_orcprojetoorcprojetolei {
                  o139_orcprojeto = int4 = Código do Decreto 
                  ";
    //funcao construtor da classe 
-   function cl_orcprojetoorcprojetolei() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcprojetoorcprojetolei"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_orcprojetoorcprojetolei {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o139_sequencial = ($this->o139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o139_sequencial"]:$this->o139_sequencial);
-       $this->o139_orcprojetolei = ($this->o139_orcprojetolei == ""?@$GLOBALS["HTTP_POST_VARS"]["o139_orcprojetolei"]:$this->o139_orcprojetolei);
-       $this->o139_orcprojeto = ($this->o139_orcprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["o139_orcprojeto"]:$this->o139_orcprojeto);
+       $this->o139_sequencial = ($this->o139_sequencial === 0 || $this->o139_sequencial === 0.0 || $this->o139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o139_sequencial"]:$this->o139_sequencial);
+       $this->o139_orcprojetolei = ($this->o139_orcprojetolei === 0 || $this->o139_orcprojetolei === 0.0 || $this->o139_orcprojetolei == ""?@$GLOBALS["HTTP_POST_VARS"]["o139_orcprojetolei"]:$this->o139_orcprojetolei);
+       $this->o139_orcprojeto = ($this->o139_orcprojeto === 0 || $this->o139_orcprojeto === 0.0 || $this->o139_orcprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["o139_orcprojeto"]:$this->o139_orcprojeto);
      }else{
-       $this->o139_sequencial = ($this->o139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o139_sequencial"]:$this->o139_sequencial);
+       $this->o139_sequencial = ($this->o139_sequencial === 0 || $this->o139_sequencial === 0.0 || $this->o139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o139_sequencial"]:$this->o139_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_orcprojetoorcprojetolei {
          $this->o139_sequencial = $o139_sequencial; 
        }
      }
-     if(($this->o139_sequencial == null) || ($this->o139_sequencial == "") ){ 
+     if(($this->o139_sequencial == null) || ($this->o139_sequencial === 0 || $this->o139_sequencial === 0.0 || $this->o139_sequencial == "") ){ 
        $this->erro_sql = " Campo o139_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_orcprojetoorcprojetolei {
    function sql_query ( $o139_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_orcprojetoorcprojetolei {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -398,7 +398,7 @@ class cl_orcprojetoorcprojetolei {
    function sql_query_file ( $o139_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_orcprojetoorcprojetolei {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

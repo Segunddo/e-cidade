@@ -55,7 +55,7 @@ class cl_regraencerramentonaturezaorcamentaria {
                  c117_contacredora = varchar(15) = Conta Credora
                  ";
    //funcao construtor da classe
-   function cl_regraencerramentonaturezaorcamentaria() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("regraencerramentonaturezaorcamentaria");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,13 +72,13 @@ class cl_regraencerramentonaturezaorcamentaria {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c117_sequencial = ($this->c117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c117_sequencial"]:$this->c117_sequencial);
-       $this->c117_anousu = ($this->c117_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c117_anousu"]:$this->c117_anousu);
-       $this->c117_instit = ($this->c117_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c117_instit"]:$this->c117_instit);
+       $this->c117_sequencial = ($this->c117_sequencial === 0 || $this->c117_sequencial === 0.0 || $this->c117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c117_sequencial"]:$this->c117_sequencial);
+       $this->c117_anousu = ($this->c117_anousu === 0 || $this->c117_anousu === 0.0 || $this->c117_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c117_anousu"]:$this->c117_anousu);
+       $this->c117_instit = ($this->c117_instit === 0 || $this->c117_instit === 0.0 || $this->c117_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c117_instit"]:$this->c117_instit);
        $this->c117_contadevedora = ($this->c117_contadevedora == ""?@$GLOBALS["HTTP_POST_VARS"]["c117_contadevedora"]:$this->c117_contadevedora);
        $this->c117_contacredora = ($this->c117_contacredora == ""?@$GLOBALS["HTTP_POST_VARS"]["c117_contacredora"]:$this->c117_contacredora);
      }else{
-       $this->c117_sequencial = ($this->c117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c117_sequencial"]:$this->c117_sequencial);
+       $this->c117_sequencial = ($this->c117_sequencial === 0 || $this->c117_sequencial === 0.0 || $this->c117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c117_sequencial"]:$this->c117_sequencial);
      }
    }
    // funcao para inclusao
@@ -144,7 +144,7 @@ class cl_regraencerramentonaturezaorcamentaria {
          $this->c117_sequencial = $c117_sequencial;
        }
      }
-     if(($this->c117_sequencial == null) || ($this->c117_sequencial == "") ){
+     if(($this->c117_sequencial == null) || ($this->c117_sequencial === 0 || $this->c117_sequencial === 0.0 || $this->c117_sequencial == "") ){
        $this->erro_sql = " Campo c117_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

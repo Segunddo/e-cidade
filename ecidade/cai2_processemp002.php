@@ -133,7 +133,7 @@ else
 $result = db_query($sql);
 //db_criatabela($result);exit;
 
-if(pg_numrows($result) == 0){
+if(($result ? pg_numrows($result) : null) == 0){
   db_redireciona("db_erros.php?fechar=true&db_erro=Nenhum processo encontrado com as seguintes informações passadas: <br> $msg_1 <br> $msg_3");
 }
 

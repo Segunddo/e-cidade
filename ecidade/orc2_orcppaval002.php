@@ -274,15 +274,15 @@ $pdf->cell(110,$alt,'TOTAL DE REGISTROS  : '.$xtotal,1,0,"C",0);
 if (!$flag_impzero){ 
      if ($modelo_ldo == false){
           if ($valor1 == 0 && $valor2 == 0 && $valor3 == 0 && $valor4 == 0 && $valor5 == 0){
-               continue;
+               exit;
           }
      } else {
           if ($valor1 == 0){
-               continue;
+               exit;
           }
 
           if ($valor5 == 0){ 
-               continue;
+               exit;
           }
      }
 }

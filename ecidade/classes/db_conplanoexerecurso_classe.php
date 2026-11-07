@@ -56,7 +56,7 @@ class cl_conplanoexerecurso {
                  c89_vlrdeb = float8 = Saldo Abertura a Débito
                  ";
    //funcao construtor da classe
-   function cl_conplanoexerecurso() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conplanoexerecurso");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,15 +73,15 @@ class cl_conplanoexerecurso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c89_anousu = ($this->c89_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_anousu"]:$this->c89_anousu);
-       $this->c89_recurso = ($this->c89_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_recurso"]:$this->c89_recurso);
-       $this->c89_reduz = ($this->c89_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_reduz"]:$this->c89_reduz);
-       $this->c89_vlrcre = ($this->c89_vlrcre == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_vlrcre"]:$this->c89_vlrcre);
-       $this->c89_vlrdeb = ($this->c89_vlrdeb == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_vlrdeb"]:$this->c89_vlrdeb);
+       $this->c89_anousu = ($this->c89_anousu === 0 || $this->c89_anousu === 0.0 || $this->c89_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_anousu"]:$this->c89_anousu);
+       $this->c89_recurso = ($this->c89_recurso === 0 || $this->c89_recurso === 0.0 || $this->c89_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_recurso"]:$this->c89_recurso);
+       $this->c89_reduz = ($this->c89_reduz === 0 || $this->c89_reduz === 0.0 || $this->c89_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_reduz"]:$this->c89_reduz);
+       $this->c89_vlrcre = ($this->c89_vlrcre === 0 || $this->c89_vlrcre === 0.0 || $this->c89_vlrcre == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_vlrcre"]:$this->c89_vlrcre);
+       $this->c89_vlrdeb = ($this->c89_vlrdeb === 0 || $this->c89_vlrdeb === 0.0 || $this->c89_vlrdeb == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_vlrdeb"]:$this->c89_vlrdeb);
      }else{
-       $this->c89_anousu = ($this->c89_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_anousu"]:$this->c89_anousu);
-       $this->c89_recurso = ($this->c89_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_recurso"]:$this->c89_recurso);
-       $this->c89_reduz = ($this->c89_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_reduz"]:$this->c89_reduz);
+       $this->c89_anousu = ($this->c89_anousu === 0 || $this->c89_anousu === 0.0 || $this->c89_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_anousu"]:$this->c89_anousu);
+       $this->c89_recurso = ($this->c89_recurso === 0 || $this->c89_recurso === 0.0 || $this->c89_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_recurso"]:$this->c89_recurso);
+       $this->c89_reduz = ($this->c89_reduz === 0 || $this->c89_reduz === 0.0 || $this->c89_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_reduz"]:$this->c89_reduz);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_conplanoexerecurso {
        $this->c89_anousu = $c89_anousu;
        $this->c89_recurso = $c89_recurso;
        $this->c89_reduz = $c89_reduz;
-     if(($this->c89_anousu == null) || ($this->c89_anousu == "") ){
+     if(($this->c89_anousu == null) || ($this->c89_anousu === 0 || $this->c89_anousu === 0.0 || $this->c89_anousu == "") ){
        $this->erro_sql = " Campo c89_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -116,7 +116,7 @@ class cl_conplanoexerecurso {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c89_recurso == null) || ($this->c89_recurso == "") ){
+     if(($this->c89_recurso == null) || ($this->c89_recurso === 0 || $this->c89_recurso === 0.0 || $this->c89_recurso == "") ){
        $this->erro_sql = " Campo c89_recurso nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -124,7 +124,7 @@ class cl_conplanoexerecurso {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c89_reduz == null) || ($this->c89_reduz == "") ){
+     if(($this->c89_reduz == null) || ($this->c89_reduz === 0 || $this->c89_reduz === 0.0 || $this->c89_reduz == "") ){
        $this->erro_sql = " Campo c89_reduz nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -378,7 +378,7 @@ class cl_conplanoexerecurso {
    function sql_query ( $c89_anousu=null,$c89_recurso=null,$c89_reduz=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_conplanoexerecurso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_conplanoexerecurso {
    function sql_query_file ( $c89_anousu=null,$c89_recurso=null,$c89_reduz=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -468,7 +468,7 @@ class cl_conplanoexerecurso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

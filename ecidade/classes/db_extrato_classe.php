@@ -72,7 +72,7 @@ class cl_extrato {
                  k85_cnpj = char(14) = CNPJ 
                  ";
    //funcao construtor da classe 
-   function cl_extrato() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("extrato"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,8 +89,8 @@ class cl_extrato {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k85_sequencial = ($this->k85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_sequencial"]:$this->k85_sequencial);
-       $this->k85_codbco = ($this->k85_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_codbco"]:$this->k85_codbco);
+       $this->k85_sequencial = ($this->k85_sequencial === 0 || $this->k85_sequencial === 0.0 || $this->k85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_sequencial"]:$this->k85_sequencial);
+       $this->k85_codbco = ($this->k85_codbco === 0 || $this->k85_codbco === 0.0 || $this->k85_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_codbco"]:$this->k85_codbco);
        if($this->k85_dtproc == ""){
          $this->k85_dtproc_dia = ($this->k85_dtproc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_dtproc_dia"]:$this->k85_dtproc_dia);
          $this->k85_dtproc_mes = ($this->k85_dtproc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_dtproc_mes"]:$this->k85_dtproc_mes);
@@ -108,13 +108,13 @@ class cl_extrato {
          }
        }
        $this->k85_convenio = ($this->k85_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_convenio"]:$this->k85_convenio);
-       $this->k85_seqarq = ($this->k85_seqarq == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_seqarq"]:$this->k85_seqarq);
+       $this->k85_seqarq = ($this->k85_seqarq === 0 || $this->k85_seqarq === 0.0 || $this->k85_seqarq == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_seqarq"]:$this->k85_seqarq);
        $this->k85_nomearq = ($this->k85_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_nomearq"]:$this->k85_nomearq);
-       $this->k85_tipoinclusao = ($this->k85_tipoinclusao == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_tipoinclusao"]:$this->k85_tipoinclusao);
+       $this->k85_tipoinclusao = ($this->k85_tipoinclusao === 0 || $this->k85_tipoinclusao === 0.0 || $this->k85_tipoinclusao == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_tipoinclusao"]:$this->k85_tipoinclusao);
        $this->k85_conteudo = ($this->k85_conteudo == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_conteudo"]:$this->k85_conteudo);
        $this->k85_cnpj = ($this->k85_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_cnpj"]:$this->k85_cnpj);
      }else{
-       $this->k85_sequencial = ($this->k85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_sequencial"]:$this->k85_sequencial);
+       $this->k85_sequencial = ($this->k85_sequencial === 0 || $this->k85_sequencial === 0.0 || $this->k85_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k85_sequencial"]:$this->k85_sequencial);
      }
    }
    // funcao para inclusao
@@ -225,7 +225,7 @@ class cl_extrato {
          $this->k85_sequencial = $k85_sequencial; 
        }
      }
-     if(($this->k85_sequencial == null) || ($this->k85_sequencial == "") ){ 
+     if(($this->k85_sequencial == null) || ($this->k85_sequencial === 0 || $this->k85_sequencial === 0.0 || $this->k85_sequencial == "") ){ 
        $this->erro_sql = " Campo k85_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -625,7 +625,7 @@ class cl_extrato {
    function sql_query ( $k85_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -647,7 +647,7 @@ class cl_extrato {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -660,7 +660,7 @@ class cl_extrato {
    function sql_query_file ( $k85_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -681,7 +681,7 @@ class cl_extrato {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

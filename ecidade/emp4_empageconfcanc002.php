@@ -48,7 +48,8 @@ $clempageconf  = new cl_empageconf;
 $clempageconfche  = new cl_empageconfche;
 
 //echo ($HTTP_SERVER_VARS["QUERY_STRING"]);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;
@@ -212,15 +213,15 @@ for($i=0; $i<$numrows; $i++){
   <td class='bordas' align='center'><small><?=$e60_emiss?>  </small></td>
   <?
   $x= "valor_$e81_codmov";
-  $$x = $e81_valor;
+  ${$x} = $e81_valor;
   db_input("valor_$e81_codmov",10,'',true,'hidden',1);
   
   $x= "mov_$e81_codmov";
-  $$x = $e86_cheque;
+  ${$x} = $e86_cheque;
   db_input("mov_$e81_codmov",10,'',true,'hidden',1);
 
   $x  = "conta_$e81_codmov";
-  $$x = $e83_conta;
+  ${$x} = $e83_conta;
   db_input("conta_$e81_codmov",10,0,true,"hidden",1);
   ?>
   <td class='bordas' align='left'><small><?=$e83_conta . " - " . $e83_descr?></small></td>

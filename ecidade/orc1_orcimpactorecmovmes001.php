@@ -37,7 +37,8 @@ include(modification("classes/db_orcimpactomov_classe.php"));
 include(modification("classes/db_orcfontes_classe.php"));
 
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clorcimpactorecmov     = new cl_orcimpactorecmov;
@@ -77,10 +78,10 @@ if(isset($atualizar)){
     } 
     
     //rotina que exclui os registros
-      $clorcimpactorecmovmes->sql_record($clorcimpactorecmovmes->sql_query_file($$str)); 
+      $clorcimpactorecmovmes->sql_record($clorcimpactorecmovmes->sql_query_file(${$str})); 
       if($clorcimpactorecmovmes->numrows>0){ 
-	$clorcimpactorecmovmes->o97_sequen = $$str;
-	$clorcimpactorecmovmes->excluir($$str);
+	$clorcimpactorecmovmes->o97_sequen = ${$str};
+	$clorcimpactorecmovmes->excluir(${$str});
 	$erro_msg = $clorcimpactorecmovmes->erro_msg;  
 	if($clorcimpactorecmovmes->erro_status==0){
 	  $sqlerro  = true;
@@ -93,10 +94,10 @@ if(isset($atualizar)){
     for($r=1; $r<13; $r++){
       $c = "o97_valor_".$i."_".$r;  
 
-      $clorcimpactorecmovmes->o97_sequen = $$str; 
+      $clorcimpactorecmovmes->o97_sequen = ${$str}; 
       $clorcimpactorecmovmes->o97_mes       = $r;
-      $clorcimpactorecmovmes->o97_valor     = $$c;
-      $clorcimpactorecmovmes->incluir($$str,$r);
+      $clorcimpactorecmovmes->o97_valor     = ${$c};
+      $clorcimpactorecmovmes->incluir(${$str},$r);
       $erro_msg = $clorcimpactorecmovmes->erro_msg;  
       if($clorcimpactorecmovmes->erro_status==0){
 	$sqlerro  = true;

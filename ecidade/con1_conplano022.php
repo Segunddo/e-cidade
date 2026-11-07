@@ -46,7 +46,8 @@ require_once(modification("libs/db_libcontabilidade.php"));
 
 $c63_codigooperacao = "";
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clestrutura_sistema      = new cl_estrutura_sistema;

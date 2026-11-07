@@ -184,7 +184,7 @@ $clrotulo->label("k12_codord");
            if(isset($ordens_selecionadas)&&trim($ordens_selecionadas)!=""){
                $k12_codord = str_replace("|",",",$ordens_selecionadas);
                $k12_codord = substr($k12_codord,0,strlen($k12_codord)-1);
-               $vetor      = @split(",",$k12_codord);
+               $vetor      = @preg_split("#,#m",$k12_codord);
                if(sizeof($vetor)==0){
                    $vetor[0] = $k12_codord;
                }

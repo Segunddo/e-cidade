@@ -90,6 +90,7 @@ $iTotalProgramas  = count($aProgramas);
 /*
  * Pesquisamos todos os projetos para o programa e o pacto 
  */
+if (!isset($oTotal) || $oTotal === false || $oTotal === "") { $oTotal = new stdClass(); } // PHP 8: o 5.6 criava o stdClass sozinho
 $oTotal->janeiro   = 0; 
 $oTotal->fevereiro = 0; 
 $oTotal->marco     = 0; 

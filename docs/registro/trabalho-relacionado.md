@@ -191,6 +191,10 @@ telas da área Educação) e **o mesmo critério**: comparação byte-a-byte con
   nos remotos). Estrutura **anterior** à reorganização (arquivos na raiz, não em `ecidade/`).
 - *worktree* dele em `ecidade/tmp/tcc_gerson/` (gitignored, 1,1 GB) + as configurações locais
   não versionadas (`.env`, `config/*.php`, `libs/db_conn.php`, `extension/data/`…).
+  **Removido em 30/10/2026** (`git worktree remove --force`), a pedido do usuário, depois do disco cheio (ver
+  `area-financeiro.md`, lote 6). O commit `08615f926` continua no repositório pela ref `gerson/tcc-gerson-banca`;
+  para refazer a comparação: `git worktree add ecidade/tmp/tcc_gerson 08615f926` e repor as configurações locais.
+  O container `ecidade_tcc_gerson` (parado) ficou, e aponta para a pasta que não existe mais.
 - **Terceiro container**, `ecidade_tcc_gerson` na porta **8086**: mesma imagem do nosso 8.5,
   mesmos volumes de sessão e `/tmp`, mesmo `paridade-56.ini`, mesmo `vendor/` (ele não alterou
   `composer.json`/`.lock`). **Só o código difere** do nosso 8085.

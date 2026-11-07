@@ -35,7 +35,8 @@ include(modification("classes/db_corrente_classe.php"));
 include(modification("classes/db_saltescontrapartida_classe.php"));
 include(modification("classes/db_saltesextra_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clsaltes              = new cl_saltes;

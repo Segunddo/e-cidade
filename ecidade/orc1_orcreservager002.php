@@ -34,7 +34,8 @@ require_once(modification("classes/db_orcreserprev_classe.php"));
 require_once(modification("classes/db_orcprevdesp_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $erro = false;
 
@@ -50,11 +51,11 @@ if(isset($atualiza)){
 
   for($i=0;$i<count($HTTP_POST_VARS);$i++){
   	if(substr(key($HTTP_POST_VARS),0,9) == 'atividade' ){
-      $mat = split("\_",key($HTTP_POST_VARS));
+      $mat = preg_split("#_#m",key($HTTP_POST_VARS));
       $clorcreserprev->excluir(db_getsession("DB_anousu"),$mat[1],$mat[2]);
   	}
   	if(substr(key($HTTP_POST_VARS),0,8) == 'previsao' ){
-      $mat = split("\_",key($HTTP_POST_VARS));
+      $mat = preg_split("#_#m",key($HTTP_POST_VARS));
       $clorcprevdesp->excluir(db_getsession("DB_anousu"),$mat[1],$mat[2]);
   	}
     next($HTTP_POST_VARS);
@@ -64,7 +65,7 @@ if(isset($atualiza)){
   for($i=0;$i<count($HTTP_POST_VARS);$i++){
   	if(substr(key($HTTP_POST_VARS),0,9) == 'atividade' ){
 
-      $mat = split("\_",key($HTTP_POST_VARS));
+      $mat = preg_split("#_#m",key($HTTP_POST_VARS));
       $clorcreserprev->o33_anousu   = db_getsession("DB_anousu");
       $clorcreserprev->o33_projativ = $mat[1];
       $clorcreserprev->o33_codigo   = $mat[2];
@@ -83,7 +84,7 @@ if(isset($atualiza)){
   	}
   	if(substr(key($HTTP_POST_VARS),0,8) == 'previsao' ){
 
-      $mat = split("\_",key($HTTP_POST_VARS));
+      $mat = preg_split("#_#m",key($HTTP_POST_VARS));
       $clorcprevdesp->o35_anousu   = db_getsession("DB_anousu");
       $clorcprevdesp->o35_projativ = $mat[1];
       $clorcprevdesp->o35_codigo   = $mat[2];
@@ -205,9 +206,9 @@ $clrotulo->label("atual_menos_reservado");
         $resultprev = $clorcreserprev->sql_record($clorcreserprev->sql_query(db_getsession("DB_anousu"),$o58_projativ,$o58_codigo,$x,'o33_perc'));
         if($clorcreserprev->numrows >0){
         	$atividade = "atividade_".$o58_projativ."_".$o58_codigo."_$x";
-        	global $$atividade;
+        	global ${$atividade};
         	db_fieldsmemory($resultprev,0);
-        	$$atividade = $o33_perc;
+        	${$atividade} = $o33_perc;
         }
         db_input("atividade_".$o58_projativ."_".$o58_codigo."_$x",5,0,true,"text",($atual_menos_reservado==0?3:2),"onchange='js_mudarprevis(\"".$o58_projativ."_".$o58_codigo."_$x\")'");
       }
@@ -231,9 +232,9 @@ $clrotulo->label("atual_menos_reservado");
         $resultprevdesp = $clorcprevdesp->sql_record($clorcprevdesp->sql_query_file(db_getsession("DB_anousu"),$o58_projativ,$o58_codigo,$x,'o35_perc'));
         if($clorcprevdesp->numrows >0){
         	$atividade = "previsao_".$o58_projativ."_".$o58_codigo."_$x";
-        	global $$atividade;
+        	global ${$atividade};
         	db_fieldsmemory($resultprevdesp,0);
-        	$$atividade = $o35_perc;
+        	${$atividade} = $o35_perc;
         }
         db_input("previsao_".$o58_projativ."_".$o58_codigo."_$x",5,0,true,"text",$tranca_previsao);
       }

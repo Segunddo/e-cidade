@@ -59,7 +59,7 @@ class cl_orcimpactoger {
                  o62_passivo = float8 = Passivo 
                  ";
    //funcao construtor da classe 
-   function cl_orcimpactoger() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcimpactoger"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,7 +76,7 @@ class cl_orcimpactoger {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o62_codimpger = ($this->o62_codimpger == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_codimpger"]:$this->o62_codimpger);
+       $this->o62_codimpger = ($this->o62_codimpger === 0 || $this->o62_codimpger === 0.0 || $this->o62_codimpger == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_codimpger"]:$this->o62_codimpger);
        if($this->o62_data == ""){
          $this->o62_data_dia = ($this->o62_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_data_dia"]:$this->o62_data_dia);
          $this->o62_data_mes = ($this->o62_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_data_mes"]:$this->o62_data_mes);
@@ -86,10 +86,10 @@ class cl_orcimpactoger {
          }
        }
        $this->o62_obs = ($this->o62_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_obs"]:$this->o62_obs);
-       $this->o62_ativo = ($this->o62_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_ativo"]:$this->o62_ativo);
-       $this->o62_passivo = ($this->o62_passivo == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_passivo"]:$this->o62_passivo);
+       $this->o62_ativo = ($this->o62_ativo === 0 || $this->o62_ativo === 0.0 || $this->o62_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_ativo"]:$this->o62_ativo);
+       $this->o62_passivo = ($this->o62_passivo === 0 || $this->o62_passivo === 0.0 || $this->o62_passivo == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_passivo"]:$this->o62_passivo);
      }else{
-       $this->o62_codimpger = ($this->o62_codimpger == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_codimpger"]:$this->o62_codimpger);
+       $this->o62_codimpger = ($this->o62_codimpger === 0 || $this->o62_codimpger === 0.0 || $this->o62_codimpger == ""?@$GLOBALS["HTTP_POST_VARS"]["o62_codimpger"]:$this->o62_codimpger);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_orcimpactoger {
          $this->o62_codimpger = $o62_codimpger; 
        }
      }
-     if(($this->o62_codimpger == null) || ($this->o62_codimpger == "") ){ 
+     if(($this->o62_codimpger == null) || ($this->o62_codimpger === 0 || $this->o62_codimpger === 0.0 || $this->o62_codimpger == "") ){ 
        $this->erro_sql = " Campo o62_codimpger nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -445,7 +445,7 @@ class cl_orcimpactoger {
    function sql_query ( $o62_codimpger=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -466,7 +466,7 @@ class cl_orcimpactoger {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -478,7 +478,7 @@ class cl_orcimpactoger {
    function sql_query_file ( $o62_codimpger=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_orcimpactoger {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

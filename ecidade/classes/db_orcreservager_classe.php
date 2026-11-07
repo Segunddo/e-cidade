@@ -59,7 +59,7 @@ class cl_orcreservager {
                  o84_perc = float8 = Percentual 
                  ";
    //funcao construtor da classe 
-   function cl_orcreservager() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcreservager"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,7 +76,7 @@ class cl_orcreservager {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o84_codres = ($this->o84_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_codres"]:$this->o84_codres);
+       $this->o84_codres = ($this->o84_codres === 0 || $this->o84_codres === 0.0 || $this->o84_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_codres"]:$this->o84_codres);
        if($this->o84_data == ""){
          $this->o84_data_dia = ($this->o84_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_data_dia"]:$this->o84_data_dia);
          $this->o84_data_mes = ($this->o84_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_data_mes"]:$this->o84_data_mes);
@@ -85,11 +85,11 @@ class cl_orcreservager {
             $this->o84_data = $this->o84_data_ano."-".$this->o84_data_mes."-".$this->o84_data_dia;
          }
        }
-       $this->o84_id_usuario = ($this->o84_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_id_usuario"]:$this->o84_id_usuario);
+       $this->o84_id_usuario = ($this->o84_id_usuario === 0 || $this->o84_id_usuario === 0.0 || $this->o84_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_id_usuario"]:$this->o84_id_usuario);
        $this->o84_tipo = ($this->o84_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_tipo"]:$this->o84_tipo);
-       $this->o84_perc = ($this->o84_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_perc"]:$this->o84_perc);
+       $this->o84_perc = ($this->o84_perc === 0 || $this->o84_perc === 0.0 || $this->o84_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_perc"]:$this->o84_perc);
      }else{
-       $this->o84_codres = ($this->o84_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_codres"]:$this->o84_codres);
+       $this->o84_codres = ($this->o84_codres === 0 || $this->o84_codres === 0.0 || $this->o84_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_codres"]:$this->o84_codres);
      }
    }
    // funcao para inclusao
@@ -132,7 +132,7 @@ class cl_orcreservager {
        return false;
      }
        $this->o84_codres = $o84_codres; 
-     if(($this->o84_codres == null) || ($this->o84_codres == "") ){ 
+     if(($this->o84_codres == null) || ($this->o84_codres === 0 || $this->o84_codres === 0.0 || $this->o84_codres == "") ){ 
        $this->erro_sql = " Campo o84_codres nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_orcreservager {
    function sql_query ( $o84_codres=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_orcreservager {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_orcreservager {
    function sql_query_file ( $o84_codres=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -478,7 +478,7 @@ class cl_orcreservager {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

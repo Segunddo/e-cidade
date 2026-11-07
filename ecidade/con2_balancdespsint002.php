@@ -69,7 +69,8 @@ function imprime_cabecalho($alt,$pdf){
 $classinatura  = new cl_assinatura;
 $clorcelemento = new cl_orcelemento;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 //db_postmemory($HTTP_POST_VARS,2); exit;
 
@@ -89,7 +90,7 @@ if (!isset($db_selinstit)) {
   $db_selinstit = db_getsession("DB_instit");
 }
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
@@ -121,9 +122,9 @@ $sele_work = $clselorcdotacao->getDadosComplemento();
 
 $clselorcdotacao->instit = "(".db_getsession("DB_instit").")";
 
-$xinstit    = split("-",$db_selinstit);
+$xinstit    = preg_split("#\\-#m",$db_selinstit);
 
-$arr_niveis = split(",",$vernivel);
+$arr_niveis = preg_split("#,#m",$vernivel);
 
 //$nivela = substr($nivel,0,1);
 $sele_work = $sele_work.' and w.o58_instit in ('.str_replace('-',', ',$db_selinstit).') ';

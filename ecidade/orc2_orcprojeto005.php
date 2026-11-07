@@ -45,7 +45,8 @@ $auxiliar = new cl_orcsuplem;
 $aux = new cl_orcsuplem;
 $clfonterecurso = new cl_complementofonterecurso;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $anousu = db_getsession("DB_anousu");
 

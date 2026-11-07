@@ -27,7 +27,7 @@
 
 
 if (!isset($arqinclude)) {
-  
+
   include(modification("fpdf151/pdf.php"));
   include(modification("fpdf151/assinatura.php"));
   include(modification("libs/db_sql.php"));
@@ -36,14 +36,15 @@ if (!isset($arqinclude)) {
   include(modification("dbforms/db_funcoes.php"));
   include(modification("classes/db_orcparamrel_classe.php"));
   include(modification("classes/db_db_config_classe.php"));
-  
+
   $classinatura  = new cl_assinatura;
   $cldb_config   = new cl_db_config;
   $orcparamrel   = new cl_orcparamrel;
-  
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
-  
+
 }
 
 include_once(modification("classes/db_conrelinfo_classe.php"));
@@ -52,7 +53,7 @@ include_once(modification("classes/db_conrelvalor_classe.php"));
 $clconrelinfo  = new cl_conrelinfo;
 $clconrelvalor = new cl_conrelvalor;
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
@@ -66,7 +67,7 @@ for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
   } else{
     $descr_inst .= $xvirg.$nomeinst;
   }
-  
+
   $xvirg = ', ';
 }
 
@@ -188,7 +189,7 @@ for ($x=0; $x < 17;$x++) {
   if ($cont==13){
     $cont = 14;
   }
-  
+
   if ($cont == 1 or $cont == 2 or $cont == 4 or $cont == 5 or $cont == 11 or $cont == 12 or $cont == 14 or $cont == 15) {
     for($i=0;$i< pg_numrows($result);$i++) {
       db_fieldsmemory($result,$i);
@@ -198,9 +199,9 @@ for ($x=0; $x < 17;$x++) {
       }
     } 
   }
-  
+
   $cont++;
-  
+
 }
 
 $valor_ant[0] = $valor_ant[1] + $valor_ant[2];
@@ -246,12 +247,12 @@ $param[18] = $orcparamrel->sql_parametro('5','18', 'f', str_replace('-', ', ', $
 //////////////////////////////////////////////////////////////////////////////////////////
 //$dt_ini_ant = $anousu_ant."-01-01";
 //var_dump($dt); exit;
-$dt = split("-",$dt_ini);
+$dt = preg_split("#\\-#m",$dt_ini);
 $dt_ini_ant = date('Y-m-d',mktime(0,0,0,$dt[1]-11,"01",$dt[0]));
 $dt_fim_ant = $anousu_ant."-12-31";
 
 // se o ano atual é bissexto deve subtrair 366 somente se a data for superior a 28/02/200X
-$dt = split('-',$dt_fim);  // mktime -- (mes,dia,ano)
+$dt = preg_split('#\-#m',$dt_fim);  // mktime -- (mes,dia,ano)
 //$dt_ini_ant2 = date('Y-m-d',mktime(0,0,0,$dt[1],$dt[2]-365,$dt[0]));
 $dt_ini_ant2 = date('Y-m-d',mktime(0,0,0,$dt[1]-11,"01",$dt[0]));
 $dt_fim_ant2 = $anousu_ant.'-12-31';  
@@ -343,7 +344,7 @@ $valor_ant[7] = calcula_rcl($anousu_ant,$anousu_ant.'-01-01',$anousu_ant.'-12-31
 $matriz_rcl = calcula_rcl($anousu_ant,$anousu_ant.'-01-01',$anousu_ant.'-12-31',$todasinstit,true);
 
 if (substr($periodo,1,1) == "Q") {
-	
+
 	$total_rcl	= calcula_rcl($anousu,$anousu.'-01-01',$anousu.'-04-30',$todasinstit);
 	$valor1[7]	= $total_rcl + $matriz_rcl['maio']+$matriz_rcl['junho']+$matriz_rcl['julho']+$matriz_rcl['agosto']+$matriz_rcl['setembro']+$matriz_rcl['outubro']+$matriz_rcl['novembro']+$matriz_rcl['dezembro'];
 
@@ -354,7 +355,7 @@ if (substr($periodo,1,1) == "Q") {
 	$valor3[7] = $total_rcl;
 
 } else {
-	
+
 	$total_rcl	= calcula_rcl($anousu,$anousu.'-01-01',$anousu.'-06-30',$todasinstit);
 	$valor1[7]	= $total_rcl + $matriz_rcl['julho']+$matriz_rcl['agosto']+$matriz_rcl['setembro']+$matriz_rcl['outubro']+$matriz_rcl['novembro']+$matriz_rcl['dezembro'];
 
@@ -373,7 +374,7 @@ for ($p=1;$p<=18;$p++) {
     if (in_array($estrutural,$param[$p])){       
       if ($p <=15 ){
         $valor_ant[7] += $janeiro+$fevereiro+$marco+$abril+$maio+$junho+$julho+$agosto+$setembro+$outubro+$novembro+$dezembro;
-        
+
         if($periodo=="1Q"||$periodo=="2Q"||$periodo=="3Q") {
           $valor1[7] += $maio+$junho+$julho+$agosto+$setembro+$outubro+$novembro+$dezembro;
           $valor2[7] += $setembro+$outubro+$novembro+$dezembro;
@@ -447,7 +448,7 @@ if ($periodo=='1Q' or $periodo == '1S'){
 }
 
 if (!isset($arqinclude)){
-  
+
   $pdf = new PDF(); 
   $pdf->Open(); 
   $pdf->AliasNbPages(); 
@@ -459,14 +460,14 @@ if (!isset($arqinclude)){
   $pdf->setfont('arial','b',7);
   $pdf->cell(110,$alt,'LRF, Art. 55, Inciso I, Alínea "c" e art. 40,§ 1º - Anexo III ','B',0,"L",0);
   $pdf->cell(75,$alt,'R$ Unidades','B',1,"R",0);
-  
+
   $pdf->cell(73,$alt,"",'R',0,"C",0);
   $pdf->cell(28,$alt,"SALDO DO",'R',0,"C",0);
   $pdf->cell(84,$alt,"SALDO DO EXERCÍCIO  DE ".db_getsession("DB_anousu"),'B',1,"C",0);
-  
+
   $pdf->cell(73,$alt,"GARANTIAS",'BR',0,"C",0);
   $pdf->cell(28,$alt,"EXERCÍCIO ANTERIOR",'RB',0,"C",0);
-  
+
   if($periodo!="1S"&&$periodo!="2S") {
     $pdf->cell(28,$alt,"ATÉ 1º Quadrimestre",'BR',0,"C",0);
     $pdf->cell(28,$alt,"ATÉ 2º Quadrimestre",'BR',0,"C",0);
@@ -476,12 +477,12 @@ if (!isset($arqinclude)){
     $pdf->cell(42,$alt,"ATÉ 1º Semestre",'BR',0,"C",0);
     $pdf->cell(42,$alt,"ATÉ 2º Semestre",'B',1,"C",0);
   }
-  
+
   $pdf->setfont('arial','',7);
   for ($i=0; $i < 6;$i++) {
     $pdf->cell(73,$alt,$texto[$i],'R',0,"L",0);
     $pdf->cell(28,$alt,db_formatar($valor_ant[$i],'f'),'R',0,"R",0);
-    
+
     if($periodo!="1S"&&$periodo!="2S") {
       $pdf->cell(28,$alt,db_formatar($valor1[$i],'f'),'R',0,"R",0);
       $pdf->cell(28,$alt,db_formatar($valor2[$i],'f'),'R',0,"R",0);
@@ -491,11 +492,11 @@ if (!isset($arqinclude)){
       $pdf->cell(42,$alt,db_formatar($valor2[$i],'f'),'',1,"R",0);
     }
   }
-	
+
   for ($i=6; $i < 10;$i++) {
     $pdf->cell(73,$alt,$texto[$i],'TBR',0,"L",0);
     $pdf->cell(28,$alt,db_formatar($valor_ant[$i],'f'),'TBR',0,"R",0);
-    
+
     if($periodo!="1S"&&$periodo!="2S") {
       $pdf->cell(28,$alt,db_formatar($valor1[$i],'f'),'TBR',0,"R",0);
       $pdf->cell(28,$alt,db_formatar($valor2[$i],'f'),'TBR',0,"R",0);
@@ -505,16 +506,16 @@ if (!isset($arqinclude)){
       $pdf->cell(42,$alt,db_formatar($valor2[$i],'f'),'TB',1,"R",0);
     }
   }
-  
+
   $pdf->cell(185,$alt,"",'',1,"C",0);
   $pdf->setfont('arial','b',7);
   $pdf->cell(73,$alt,"",'TR',0,"C",0);
   $pdf->cell(28,$alt,"SALDO DO",'TR',0,"C",0);
   $pdf->cell(84,$alt,"SALDO DO EXERCÍCIO  DE ".db_getsession("DB_anousu"),'TB',1,"C",0);
-  
+
   $pdf->cell(73,$alt,"CONTRAGARANTIAS",'BR',0,"C",0);
   $pdf->cell(28,$alt,"EXERCÍCIO ANTERIOR",'RB',0,"C",0);
-  
+
   if($periodo!="1S"&&$periodo!="2S") {
     $pdf->cell(28,$alt,"ATÉ 1º Quadrimestre",'BR',0,"C",0);
     $pdf->cell(28,$alt,"ATÉ 2º Quadrimestre",'BR',0,"C",0);
@@ -524,12 +525,12 @@ if (!isset($arqinclude)){
     $pdf->cell(42,$alt,"ATÉ 1º Semestre",'BR',0,"C",0);
     $pdf->cell(42,$alt,"ATÉ 2º Semestre",'B',1,"C",0);
   }
-  
+
   $pdf->setfont('arial','',7);
   for ($i=10; $i< 16;$i++) {
     $pdf->cell(73,$alt,$texto[$i],'R',0,"L",0);
     $pdf->cell(28,$alt,db_formatar($valor_ant[$i],'f'),'R',0,"R",0);
-    
+
     if($periodo!="1S"&&$periodo!="2S") {
       $pdf->cell(28,$alt,db_formatar($valor1[$i],'f'),'R',0,"R",0);
       $pdf->cell(28,$alt,db_formatar($valor2[$i],'f'),'R',0,"R",0);
@@ -542,7 +543,7 @@ if (!isset($arqinclude)){
   }  
   $pdf->cell(73,$alt,$texto[$i],'TBR',0,"L",0);
   $pdf->cell(28,$alt,db_formatar($valor_ant[16],'f'),'TBR',0,"R",0);
-  
+
   if($periodo!="1S"&&$periodo!="2S") {
     $pdf->cell(28,$alt,db_formatar($valor1[16],'f'),'TBR',0,"R",0);
     $pdf->cell(28,$alt,db_formatar($valor2[16],'f'),'TBR',0,"R",0);
@@ -552,16 +553,16 @@ if (!isset($arqinclude)){
     $pdf->cell(42,$alt,db_formatar($valor1[16],'f'),'TBR',0,"R",0);
     $pdf->cell(42,$alt,db_formatar($valor2[16],'f'),'TB',1,"R",0);
   }
-  
+
   $pdf->cell(185,$alt,'Fonte: Contabilidade','',1,"L",0); 
-  
+
   // assinaturas
   $pdf->Ln(25);
-  
+
   assinaturas(&$pdf,&$classinatura,'GF');
-  
+
   $pdf->Output();
-  
+
 }
 
 $garantiascondedidas = $valor1[6];

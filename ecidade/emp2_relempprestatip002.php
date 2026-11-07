@@ -33,7 +33,8 @@ $clrotulo->label('r13_codigo');
 $clrotulo->label('r13_descr');
 $clrotulo->label('r13_descro');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 /*
 $dataini = '2005-09-01';
@@ -102,7 +103,7 @@ group by
 $result = db_query($sql);
 
 //db_criatabela($result);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem empenhos do tipo selecionado no período de '.$mes.' / '.$ano);
 

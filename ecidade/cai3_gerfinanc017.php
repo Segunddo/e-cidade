@@ -69,7 +69,7 @@ if ( $numcgm == '' && $opcao != 'socios' ){
    }
    $result = db_query($sql);
    
-   if (pg_numrows($result) == 0 ) {
+   if (($result ? pg_numrows($result) : null) == 0 ) {
       db_redireciona("db_erros.php?fechar=true&db_erro=Proprietários/Promitentes nao Encontrados");
       exit;
    }

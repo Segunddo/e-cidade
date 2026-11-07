@@ -68,7 +68,7 @@ class cl_conreltitulos {
                  c44_instit = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_conreltitulos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conreltitulos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,19 +85,19 @@ class cl_conreltitulos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c44_sequencia = ($this->c44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_sequencia"]:$this->c44_sequencia);
+       $this->c44_sequencia = ($this->c44_sequencia === 0 || $this->c44_sequencia === 0.0 || $this->c44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_sequencia"]:$this->c44_sequencia);
        $this->c44_lei = ($this->c44_lei == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_lei"]:$this->c44_lei);
        $this->c44_quantidade = ($this->c44_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_quantidade"]:$this->c44_quantidade);
-       $this->c44_valemiss = ($this->c44_valemiss == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_valemiss"]:$this->c44_valemiss);
-       $this->c44_saldo = ($this->c44_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_saldo"]:$this->c44_saldo);
-       $this->c44_movemiss = ($this->c44_movemiss == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_movemiss"]:$this->c44_movemiss);
-       $this->c44_movresgate = ($this->c44_movresgate == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_movresgate"]:$this->c44_movresgate);
-       $this->c44_saldoqtd = ($this->c44_saldoqtd == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_saldoqtd"]:$this->c44_saldoqtd);
-       $this->c44_saldovalor = ($this->c44_saldovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_saldovalor"]:$this->c44_saldovalor);
-       $this->c44_anousu = ($this->c44_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_anousu"]:$this->c44_anousu);
-       $this->c44_instit = ($this->c44_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_instit"]:$this->c44_instit);
+       $this->c44_valemiss = ($this->c44_valemiss === 0 || $this->c44_valemiss === 0.0 || $this->c44_valemiss == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_valemiss"]:$this->c44_valemiss);
+       $this->c44_saldo = ($this->c44_saldo === 0 || $this->c44_saldo === 0.0 || $this->c44_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_saldo"]:$this->c44_saldo);
+       $this->c44_movemiss = ($this->c44_movemiss === 0 || $this->c44_movemiss === 0.0 || $this->c44_movemiss == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_movemiss"]:$this->c44_movemiss);
+       $this->c44_movresgate = ($this->c44_movresgate === 0 || $this->c44_movresgate === 0.0 || $this->c44_movresgate == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_movresgate"]:$this->c44_movresgate);
+       $this->c44_saldoqtd = ($this->c44_saldoqtd === 0 || $this->c44_saldoqtd === 0.0 || $this->c44_saldoqtd == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_saldoqtd"]:$this->c44_saldoqtd);
+       $this->c44_saldovalor = ($this->c44_saldovalor === 0 || $this->c44_saldovalor === 0.0 || $this->c44_saldovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_saldovalor"]:$this->c44_saldovalor);
+       $this->c44_anousu = ($this->c44_anousu === 0 || $this->c44_anousu === 0.0 || $this->c44_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_anousu"]:$this->c44_anousu);
+       $this->c44_instit = ($this->c44_instit === 0 || $this->c44_instit === 0.0 || $this->c44_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_instit"]:$this->c44_instit);
      }else{
-       $this->c44_sequencia = ($this->c44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_sequencia"]:$this->c44_sequencia);
+       $this->c44_sequencia = ($this->c44_sequencia === 0 || $this->c44_sequencia === 0.0 || $this->c44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["c44_sequencia"]:$this->c44_sequencia);
      }
    }
    // funcao para inclusao
@@ -217,7 +217,7 @@ class cl_conreltitulos {
          $this->c44_sequencia = $c44_sequencia; 
        }
      }
-     if(($this->c44_sequencia == null) || ($this->c44_sequencia == "") ){ 
+     if(($this->c44_sequencia == null) || ($this->c44_sequencia === 0 || $this->c44_sequencia === 0.0 || $this->c44_sequencia == "") ){ 
        $this->erro_sql = " Campo c44_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -607,7 +607,7 @@ class cl_conreltitulos {
    function sql_query ( $c44_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -630,7 +630,7 @@ class cl_conreltitulos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -642,7 +642,7 @@ class cl_conreltitulos {
    function sql_query_file ( $c44_sequencia=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -663,7 +663,7 @@ class cl_conreltitulos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

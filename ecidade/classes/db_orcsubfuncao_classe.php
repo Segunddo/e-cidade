@@ -74,13 +74,13 @@ class cl_orcsubfuncao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->o53_subfuncao = ($this->o53_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o53_subfuncao"]:$this->o53_subfuncao);
+       $this->o53_subfuncao = ($this->o53_subfuncao === 0 || $this->o53_subfuncao === 0.0 || $this->o53_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o53_subfuncao"]:$this->o53_subfuncao);
        $this->o53_descr = ($this->o53_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o53_descr"]:$this->o53_descr);
        $this->o53_codtri = ($this->o53_codtri == ""?@$GLOBALS["HTTP_POST_VARS"]["o53_codtri"]:$this->o53_codtri);
        $this->o53_finali = ($this->o53_finali == ""?@$GLOBALS["HTTP_POST_VARS"]["o53_finali"]:$this->o53_finali);
        $this->o53_siconfi = ($this->o53_siconfi == ""?@$GLOBALS["HTTP_POST_VARS"]["o53_siconfi"]:$this->o53_siconfi);
      }else{
-       $this->o53_subfuncao = ($this->o53_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o53_subfuncao"]:$this->o53_subfuncao);
+       $this->o53_subfuncao = ($this->o53_subfuncao === 0 || $this->o53_subfuncao === 0.0 || $this->o53_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o53_subfuncao"]:$this->o53_subfuncao);
      }
    }
 
@@ -115,7 +115,7 @@ class cl_orcsubfuncao
        return false;
      }
        $this->o53_subfuncao = $o53_subfuncao;
-     if(($this->o53_subfuncao == null) || ($this->o53_subfuncao == "") ){
+     if(($this->o53_subfuncao == null) || ($this->o53_subfuncao === 0 || $this->o53_subfuncao === 0.0 || $this->o53_subfuncao == "") ){
        $this->erro_sql = " Campo o53_subfuncao não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

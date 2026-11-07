@@ -35,7 +35,8 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("o57_fonte");
 $clrotulo->label("o57_descr");
 $clrotulo->label("o60_perc");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clorcfontes = new cl_orcfontes;
 $clorcfontesdes = new cl_orcfontesdes;
 
@@ -75,7 +76,7 @@ $clorcfontesdes = new cl_orcfontesdes;
        </td>
     </tr> 
 <?
-  $matriz= split("\.",$o50_estrutreceita);
+  $matriz= preg_split("#\\.#m",$o50_estrutreceita);
   $inicia=false;//variavel que indica que o nivel não tem mais filhos
   $tam=(count($matriz)-1);
   $codigos='';
@@ -136,10 +137,10 @@ $clorcfontesdes = new cl_orcfontesdes;
   for($i=0; $i<$numrows; $i++){
       db_fieldsmemory($result,$i);
       $nomefon="o60_codfon_$o57_codfon";
-      $$nomefon=db_formatar($o57_fonte,"receita");
+      ${$nomefon}=db_formatar($o57_fonte,"receita");
       $nomeperc="o60_perc_$o57_codfon";
       $descrfon="o57_descr_$o57_codfon";
-      $$descrfon=$o57_descr;
+      ${$descrfon}=$o57_descr;
 
       if(isset($chavepesquisa)){
          $result15=$clorcfontesdes->sql_record($clorcfontesdes->sql_query_file(null,null,"o60_perc",'',"o60_anousu=".db_getsession('DB_anousu')." and o60_codfon=$o57_codfon "));
@@ -148,9 +149,9 @@ $clorcfontesdes = new cl_orcfontesdes;
 	 }else{
 	   continue;
 	 }
-         $$nomeperc=$o60_perc;
+         ${$nomeperc}=$o60_perc;
       }else{
-            $$nomeperc='0';
+            ${$nomeperc}='0';
       }  	    
       echo "
 	   <tr>

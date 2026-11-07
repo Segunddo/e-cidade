@@ -68,7 +68,7 @@ class cl_db_permemp {
                  db20_tipoperm = char(1) = Tipo de Permissão
                  ";
    //funcao construtor da classe
-   function cl_db_permemp() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_permemp");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,19 +85,19 @@ class cl_db_permemp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db20_codperm = ($this->db20_codperm == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_codperm"]:$this->db20_codperm);
-       $this->db20_anousu = ($this->db20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_anousu"]:$this->db20_anousu);
-       $this->db20_orgao = ($this->db20_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_orgao"]:$this->db20_orgao);
-       $this->db20_unidade = ($this->db20_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_unidade"]:$this->db20_unidade);
-       $this->db20_funcao = ($this->db20_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_funcao"]:$this->db20_funcao);
-       $this->db20_subfuncao = ($this->db20_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_subfuncao"]:$this->db20_subfuncao);
-       $this->db20_programa = ($this->db20_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_programa"]:$this->db20_programa);
-       $this->db20_projativ = ($this->db20_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_projativ"]:$this->db20_projativ);
-       $this->db20_codele = ($this->db20_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_codele"]:$this->db20_codele);
-       $this->db20_codigo = ($this->db20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_codigo"]:$this->db20_codigo);
+       $this->db20_codperm = ($this->db20_codperm === 0 || $this->db20_codperm === 0.0 || $this->db20_codperm == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_codperm"]:$this->db20_codperm);
+       $this->db20_anousu = ($this->db20_anousu === 0 || $this->db20_anousu === 0.0 || $this->db20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_anousu"]:$this->db20_anousu);
+       $this->db20_orgao = ($this->db20_orgao === 0 || $this->db20_orgao === 0.0 || $this->db20_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_orgao"]:$this->db20_orgao);
+       $this->db20_unidade = ($this->db20_unidade === 0 || $this->db20_unidade === 0.0 || $this->db20_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_unidade"]:$this->db20_unidade);
+       $this->db20_funcao = ($this->db20_funcao === 0 || $this->db20_funcao === 0.0 || $this->db20_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_funcao"]:$this->db20_funcao);
+       $this->db20_subfuncao = ($this->db20_subfuncao === 0 || $this->db20_subfuncao === 0.0 || $this->db20_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_subfuncao"]:$this->db20_subfuncao);
+       $this->db20_programa = ($this->db20_programa === 0 || $this->db20_programa === 0.0 || $this->db20_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_programa"]:$this->db20_programa);
+       $this->db20_projativ = ($this->db20_projativ === 0 || $this->db20_projativ === 0.0 || $this->db20_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_projativ"]:$this->db20_projativ);
+       $this->db20_codele = ($this->db20_codele === 0 || $this->db20_codele === 0.0 || $this->db20_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_codele"]:$this->db20_codele);
+       $this->db20_codigo = ($this->db20_codigo === 0 || $this->db20_codigo === 0.0 || $this->db20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_codigo"]:$this->db20_codigo);
        $this->db20_tipoperm = ($this->db20_tipoperm == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_tipoperm"]:$this->db20_tipoperm);
      }else{
-       $this->db20_codperm = ($this->db20_codperm == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_codperm"]:$this->db20_codperm);
+       $this->db20_codperm = ($this->db20_codperm === 0 || $this->db20_codperm === 0.0 || $this->db20_codperm == ""?@$GLOBALS["HTTP_POST_VARS"]["db20_codperm"]:$this->db20_codperm);
      }
    }
    // funcao para inclusao
@@ -217,7 +217,7 @@ class cl_db_permemp {
          $this->db20_codperm = $db20_codperm;
        }
      }
-     if(($this->db20_codperm == null) || ($this->db20_codperm == "") ){
+     if(($this->db20_codperm == null) || ($this->db20_codperm === 0 || $this->db20_codperm === 0.0 || $this->db20_codperm == "") ){
        $this->erro_sql = " Campo db20_codperm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

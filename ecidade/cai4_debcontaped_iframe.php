@@ -31,7 +31,8 @@ include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clrotulo = new rotulocampo;
@@ -95,7 +96,7 @@ $sql = "select arrecad.k00_numpre,k00_numpar,k00_dtvenc,sum(k00_valor)as k00_val
 	              group by arrecad.k00_numpre,k00_numpar,k00_dtvenc,arrecad.k00_tipo,k00_descr
 				  order by arrecad.k00_numpre,arrecad.k00_numpar                  ";
 $result = db_query($sql);
-$numrows = pg_numrows($result);
+$numrows = ($result ? pg_numrows($result) : null);
 if ($numrows > 0) {
 	echo "
 	    <tr class='bordas'>

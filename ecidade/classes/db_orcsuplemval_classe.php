@@ -76,16 +76,16 @@ class cl_orcsuplemval
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->o47_codsup = ($this->o47_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_codsup"]:$this->o47_codsup);
-       $this->o47_anousu = ($this->o47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_anousu"]:$this->o47_anousu);
-       $this->o47_coddot = ($this->o47_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_coddot"]:$this->o47_coddot);
-       $this->o47_valor = ($this->o47_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_valor"]:$this->o47_valor);
+       $this->o47_codsup = ($this->o47_codsup === 0 || $this->o47_codsup === 0.0 || $this->o47_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_codsup"]:$this->o47_codsup);
+       $this->o47_anousu = ($this->o47_anousu === 0 || $this->o47_anousu === 0.0 || $this->o47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_anousu"]:$this->o47_anousu);
+       $this->o47_coddot = ($this->o47_coddot === 0 || $this->o47_coddot === 0.0 || $this->o47_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_coddot"]:$this->o47_coddot);
+       $this->o47_valor = ($this->o47_valor === 0 || $this->o47_valor === 0.0 || $this->o47_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_valor"]:$this->o47_valor);
        $this->o47_concarpeculiar = ($this->o47_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_concarpeculiar"]:$this->o47_concarpeculiar);
-       $this->o47_planoorcamentariolinhapacto = ($this->o47_planoorcamentariolinhapacto == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_planoorcamentariolinhapacto"]:$this->o47_planoorcamentariolinhapacto);
+       $this->o47_planoorcamentariolinhapacto = ($this->o47_planoorcamentariolinhapacto === 0 || $this->o47_planoorcamentariolinhapacto === 0.0 || $this->o47_planoorcamentariolinhapacto == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_planoorcamentariolinhapacto"]:$this->o47_planoorcamentariolinhapacto);
      }else{
-       $this->o47_codsup = ($this->o47_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_codsup"]:$this->o47_codsup);
-       $this->o47_anousu = ($this->o47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_anousu"]:$this->o47_anousu);
-       $this->o47_coddot = ($this->o47_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_coddot"]:$this->o47_coddot);
+       $this->o47_codsup = ($this->o47_codsup === 0 || $this->o47_codsup === 0.0 || $this->o47_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_codsup"]:$this->o47_codsup);
+       $this->o47_anousu = ($this->o47_anousu === 0 || $this->o47_anousu === 0.0 || $this->o47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_anousu"]:$this->o47_anousu);
+       $this->o47_coddot = ($this->o47_coddot === 0 || $this->o47_coddot === 0.0 || $this->o47_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o47_coddot"]:$this->o47_coddot);
      }
    }
 
@@ -116,7 +116,7 @@ class cl_orcsuplemval
        $this->o47_codsup = $o47_codsup; 
        $this->o47_anousu = $o47_anousu; 
        $this->o47_coddot = $o47_coddot; 
-     if(($this->o47_codsup == null) || ($this->o47_codsup == "") ){ 
+     if(($this->o47_codsup == null) || ($this->o47_codsup === 0 || $this->o47_codsup === 0.0 || $this->o47_codsup == "") ){ 
        $this->erro_sql = " Campo o47_codsup não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -124,7 +124,7 @@ class cl_orcsuplemval
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o47_anousu == null) || ($this->o47_anousu == "") ){ 
+     if(($this->o47_anousu == null) || ($this->o47_anousu === 0 || $this->o47_anousu === 0.0 || $this->o47_anousu == "") ){ 
        $this->erro_sql = " Campo o47_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -132,7 +132,7 @@ class cl_orcsuplemval
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o47_coddot == null) || ($this->o47_coddot == "") ){ 
+     if(($this->o47_coddot == null) || ($this->o47_coddot === 0 || $this->o47_coddot === 0.0 || $this->o47_coddot == "") ){ 
        $this->erro_sql = " Campo o47_coddot não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

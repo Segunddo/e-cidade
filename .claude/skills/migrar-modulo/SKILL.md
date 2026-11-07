@@ -328,7 +328,8 @@ Compare as duas saídas pela chave (classe, campo, método) e separe:
 - **valor diferente** (5.6 `NULL`, 8.5 `0`): falta a guarda do `==` no `atualizacampos()`, então a
   classe não está portada. Se ela estiver no universo do lote, é falha do passo 4;
 - **mesmo valor `0`, resultado diferente**: é a forma negada. Corrija **só esses pontos**, só
-  dentro do método medido, com `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)`, e rode o
+  dentro do método medido, com `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)` — ponha os
+  pares (classe, campo, método) num TSV e use `python3 scratchpad/negada_corrige.py <tsv>` —, e rode o
   `negada_alvos.py` de novo. Ele ignora a ocorrência já guardada, então os pontos corrigidos têm
   de sumir.
 
@@ -411,6 +412,11 @@ grep -a 'E_ERROR\|Uncaught' extension/log/error.log | sed 's/\[20[^]]*\] //' | s
 das ~140 chamadas `pg_*` foi descartada de propósito. Cada correção nasce de um defeito
 observado.
 
+Dois ciclos automatizam isso, linha a linha: `SID=<sid> python3 scratchpad/guarda_ciclo.py <telas>`
+(resultado **falso**) e `SID=<sid> python3 scratchpad/campo_ciclo.py <telas>` (resultado válido **sem a
+coluna** pedida, `ValueError` no 8.5, e `pg_free_result(false)`). Alterne os dois até a tela parar
+de fatalar — uma guarda expõe a próxima (`cai3_gerfinanc004` precisou de cinco rodadas).
+
 **Ao corrigir arquivo do núcleo, replicar em `extension/modification`** — é a cópia que de
 fato executa para o usuário logado:
 
@@ -419,7 +425,21 @@ find extension/modification -name '<arquivo>'     # existe copia?
 docker exec -u root ecidade_php56 chmod 666 /var/www/html/<caminho da copia>
 ```
 
-Depois de alterar núcleo, **refazer as baterias dos módulos já portados**, não só a do atual.
+Depois de alterar núcleo, **não** rode a bateria completa a cada lote (decisão do usuário, 29/10/2026). Ela roda
+**uma vez no fim da área**, antes do envio. No lote, rode uma **bateria dirigida** às telas que chegam ao trecho
+alterado:
+
+```bash
+# 1. quem chama a funcao/metodo alterado (grep -a: 64% da base e LATIN-1)
+grep -arl --include='*.php' 'makeCollectionFromRecord' ecidade | sed 's#^ecidade/##' > /tmp/chamam.txt
+# 2. telas JA SERVIDAS cujo universo contem algum chamador: os universos por lote estao em ecidade/tmp/<lote>_universo.txt
+for u in ecidade/tmp/*_universo.txt; do grep -qxFf /tmp/chamam.txt "$u" && echo "$u"; done
+# 3. rodar o cmp.py nas telas desses lotes (o prefixo de cada um, ou ONLY= com as telas do map)
+```
+
+Se a lista de lotes alcançados for quase tudo (como numa função de `db_stdlib`), aí sim a bateria completa no lote.
+O envio ao GitHub fica para depois da bateria completa do fim da área. Se ela achar regressão, use `git bisect`
+entre os commits de lote.
 
 ## Passo 8 — Roteamento
 
@@ -435,7 +455,15 @@ Três detalhes, cada um já causou roteamento silenciosamente errado:
 - **`(?:/w/[0-9]+)?`** — na navegação real o desktop prefixa tudo com o id da janela.
 
 ```bash
-docker compose -f docker-compose.proxy.yml up -d --force-recreate   # reload nao basta
+# Testar a config ANTES, num container descartavel, e recriar SO se o nginx -t passou.
+# Nao encadeie `nginx -t | tail -1 && up`: o && olha o status do tail, e uma config
+# quebrada derruba o proxy (aconteceu no lote 5 do Financeiro, com o map de 1.016
+# entradas: "could not build map_hash" -- resolvido com map_hash_bucket_size 128).
+IMG=$(docker inspect -f '{{.Config.Image}}' ecidade_proxy)
+NET=$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}' ecidade_proxy)
+docker run --rm --network $NET -v $PWD/docker/proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro \
+  -v $PWD/docker/proxy/faseb_map.conf:/etc/nginx/faseb_map.conf:ro $IMG nginx -t \
+  && docker compose -f docker-compose.proxy.yml up -d --force-recreate   # reload nao basta
 for u in login.php <pref>1_x.php w/2/<pref>2_y.php; do
   curl -s -D - -o /dev/null "http://localhost:8090/$u" | grep -i x-ecidade-runtime
 done

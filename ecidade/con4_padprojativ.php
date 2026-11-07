@@ -28,7 +28,7 @@
 class projativ {
      var $arq=null;
      
-  function projativ($header){
+  function __construct($header){
      umask(74);
      $this->arq = fopen("tmp/PROJATIV.TXT",'w+');
      fputs($this->arq,$header);
@@ -51,7 +51,7 @@ class projativ {
                $clarqpad->sql_query(null,"*",null," c54_nomearq = 'PROJATIV.TXT' and c54_anousu=".db_getsession("DB_anousu")."  and c54_codtrib = $tribinst "));
         
     if($clarqpad->numrows > 0){
-      $rubant = split("\r\n",pg_result($res,0,"c54_arquivo"));
+      $rubant = preg_split("#\r\n#m",pg_result($res,0,"c54_arquivo"));
       for($yy=0;$yy<sizeof($rubant);$yy++){
          $contador++;
          $line = $rubant[$yy];
@@ -103,12 +103,12 @@ class projativ {
            $codigo  = formatar(pg_result($res,$x,"codigo"),5,'n');
            $nome = formatar(pg_result($res,$x,"nome"),80,'c');
            $identificador = formatar(pg_result($res,$x,"identificador"),2,'n');
-	   
+
            //-- 
            $line = $anousu.$codigo.$nome.$identificador; 
            fputs($this->arq,$line);
            fputs($this->arq,"\r\n");
-  
+
            $contador = $contador+1; // incrementa contador global
        }
 

@@ -26,7 +26,8 @@
  */
 
 include(modification("fpdf151/pdf.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $instit = db_getsession("DB_instit");
 
 $sql = "select *from lista where k60_codigo = $lista";
@@ -74,7 +75,7 @@ $sqlLista = " select	distinct
       where k61_codigo = $lista and k03_tipo <> 5";
 //die($sqlLista);
 $resultLista = db_query($sqlLista);
-$linhasLista= pg_num_rows($resultLista);
+$linhasLista= ($resultLista ? pg_num_rows($resultLista) : null);
 
 $pdf = new PDF(); // abre a classe
 $pdf->Open(); // abre o relatorio

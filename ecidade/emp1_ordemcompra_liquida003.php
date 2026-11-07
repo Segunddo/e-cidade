@@ -84,7 +84,8 @@ $clpagordem = new cl_pagordem;
 $clpagordemele = new cl_pagordemele;
 $clpagordemnota = new cl_pagordemnota;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $valor_total = 0;
@@ -113,17 +114,17 @@ if (isset ($valores) && isset ($incluir)) {
 	
 	
 
-	$dados = split("quant_", "$valores"); //  [empenho|sequencial| iNA|quantidade ]	
-	$valordoitem = split("valor_", "$val"); // [NA|empenho|sequencial|valor_digitado] 
+	$dados = preg_split("#quant_#m", "$valores"); //  [empenho|sequencial| iNA|quantidade ]	
+	$valordoitem = preg_split("#valor_#m", "$val"); // [NA|empenho|sequencial|valor_digitado] 
 
 	for ($i = 1; $i < sizeof($dados); $i ++) {
 		if ($sqlerro == false) {
-			$numero = split("_", $dados[$i]);
+			$numero = preg_split("#_#m", $dados[$i]);
 			$numemp = $numero[0];
 			$sequen = $numero[1];
 			$quanti = $numero[3];
 
-			$vlsoitem = split("_", $valordoitem[$i]);
+			$vlsoitem = preg_split("#_#m", $valordoitem[$i]);
 			$vl_soma_item = $vlsoitem[3];
 			$vl_soma_item = str_replace(",", ".", "$vl_soma_item");
 			//  $valor_total+=$vl_soma_item;
@@ -200,11 +201,11 @@ if (isset ($valores) && isset ($incluir)) {
 
 	for ($i = 1; $i < sizeof($dados); $i ++) {
 		if ($sqlerro == false) {
-			$numero = split("_", $dados[$i]);
+			$numero = preg_split("#_#m", $dados[$i]);
 			$numemp = $numero[0];
 			$sequen = $numero[1];
 			$quanti = $numero[3];
-			$vlsoitem = split("_", $valordoitem[$i]);
+			$vlsoitem = preg_split("#_#m", $valordoitem[$i]);
 			$vl_soma_item = $vlsoitem[3];
 			$vl_soma_item = str_replace(",", ".", "$vl_soma_item");
 

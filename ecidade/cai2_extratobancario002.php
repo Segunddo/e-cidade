@@ -103,7 +103,7 @@ try {
     //echo $sql; die();
     $resultcontasmovimento = db_query($sql);
 
-    if (pg_num_rows($resultcontasmovimento) == 0) {
+    if (($resultcontasmovimento ? pg_num_rows($resultcontasmovimento) : null) == 0) {
         throw new Exception('Não existem dados neste periodo.');
     }
 

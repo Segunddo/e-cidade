@@ -35,7 +35,8 @@ require(modification("classes/db_arrejust_classe.php"));
 require(modification("classes/db_arrejustreg_classe.php"));
 require(modification("classes/db_numpref_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $oPost = db_utils::postMemory($_POST);
@@ -73,16 +74,16 @@ if (isset($inicial) && $inicial == true) {
           
         if ($oPost->marcarvencidas == 'true' && $oPost->marcartodas == 'false') {
 
-          $mat = split("N", $v);
+          $mat = preg_split("#N#m", $v);
           for ($iInd = 0; $iInd < count($mat); $iInd++) {
                 
             if ($mat[$iInd] == "") {
               continue;   
             }
                 
-            $numpre = split("P", $mat[$iInd]);
-            $numpar = split("P", strstr($mat[$iInd], "P"));
-            $numpar = split("R",$numpar[1]);
+            $numpre = preg_split("#P#m", $mat[$iInd]);
+            $numpar = preg_split("#P#m", strstr($mat[$iInd], "P"));
+            $numpar = preg_split("#R#m",$numpar[1]);
             $receit = @$numpar[1];
             $numpar = $numpar[0];
             $numpre = $numpre[0];
@@ -151,16 +152,16 @@ if (isset($inicial) && $inicial == true) {
         if ($oPost->marcarvencidas == 'true' && $oPost->marcartodas == 'false') {
 
           $numpres = $vt[key($vt)];
-          $mat     = split("N", $numpres);
+          $mat     = preg_split("#N#m", $numpres);
           for ($iInd = 0; $iInd < count($mat); $iInd++) {
                 
             if ($mat[$iInd] == "") {
               continue;   
             }
                 
-            $numpre = split("P", $mat[$iInd]);
-            $numpar = split("P", strstr($mat[$iInd], "P"));
-            $numpar = split("R",$numpar[1]);
+            $numpre = preg_split("#P#m", $mat[$iInd]);
+            $numpar = preg_split("#P#m", strstr($mat[$iInd], "P"));
+            $numpar = preg_split("#R#m",$numpar[1]);
             $receit = @$numpar[1];
             $numpar = $numpar[0];
             $numpre = $numpre[0];
@@ -185,12 +186,12 @@ if (isset($inicial) && $inicial == true) {
             
          $numpres = $vt[key($vt)];
          if ($numpres == "") continue;
-         $mat     = split("N", $numpres);
+         $mat     = preg_split("#N#m", $numpres);
          for ($j = 0; $j < count($mat); $j++) {
            if ($mat[$j] == "") continue;
-           $numpre = split("P", $mat[$j]);
-           $numpar = split("P", strstr($mat[$j], "P"));
-           $numpar = split("R",$numpar[1]);
+           $numpre = preg_split("#P#m", $mat[$j]);
+           $numpar = preg_split("#P#m", strstr($mat[$j], "P"));
+           $numpar = preg_split("#R#m",$numpar[1]);
            $numpar = $numpar[0];
            if (!isset ($inicial)) {
             // $numpar = $numpar[1];
@@ -205,12 +206,12 @@ if (isset($inicial) && $inicial == true) {
           
 		     $numpres = $vt[key($vt)];
 		     if ($numpres == "") continue;
-		     $mat     = split("N", $numpres);
+		     $mat     = preg_split("#N#m", $numpres);
 		     for ($j = 0; $j < count($mat); $j++) {
 		       if ($mat[$j] == "") continue;
-		       $numpre = split("P", $mat[$j]);
-		       $numpar = split("P", strstr($mat[$j], "P"));
-		       $numpar = split("R",$numpar[1]);
+		       $numpre = preg_split("#P#m", $mat[$j]);
+		       $numpar = preg_split("#P#m", strstr($mat[$j], "P"));
+		       $numpar = preg_split("#R#m",$numpar[1]);
 		       $numpar = $numpar[0];
 		       if (!isset ($inicial)) {
 		        // $numpar = $numpar[1];
@@ -240,8 +241,8 @@ if(isset($submit)){
  }
  $erro_msg = $clarrejust->erro_msg;
  
-  $mat = split(",", $numpre);
-  $mat1 = split(",", $numpar);
+  $mat = preg_split("#,#m", $numpre);
+  $mat1 = preg_split("#,#m", $numpar);
 
   for ($i = 0; $i < count($mat); $i ++) {
    $numpre = $mat[$i];

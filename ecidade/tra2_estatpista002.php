@@ -42,9 +42,9 @@
           from   tipo_pista
           order by tr03_id";
  $rs1 = db_query($sql1);
- $num_rows = pg_num_rows($rs1) + 2;
+ $num_rows = ($rs1 ? pg_num_rows($rs1) : null) + 2;
  $pdf->setfont("Arial","",7);
- while ($ln1 = pg_fetch_array($rs1)){
+ while ($ln1 = ($rs1 ? pg_fetch_array($rs1) : null)){
     $pdf->setx(10);
     $pdf->cell(50,5,$ln1["tr03_descr"],1,0,"L");
     $pdf->cell(25,5,$ln1["tr03_sigla"],1,1,"C");
@@ -92,8 +92,8 @@
       //echo $sql
       $sum = 0;
       $rs2      = db_query($sql2);
-      $numrows2 = pg_num_rows($rs2);
-      while ($ln = pg_fetch_array($rs2)){
+      $numrows2 = ($rs2 ? pg_num_rows($rs2) : null);
+      while ($ln = ($rs2 ? pg_fetch_array($rs2) : null)){
           $pdf->setx(85+$x);
           $sum      +=  $ln["quantidade"];
           $pdf->cell(10,5,$ln["quantidade"],1,1,"C");

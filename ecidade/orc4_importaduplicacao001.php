@@ -162,7 +162,7 @@ if (isset($p->processa)){
 
         $lSqlErro = true;
         $sErro    = $clconaberturaexe->erro_msg;
-        break;
+        exit;
 
       }
     }
@@ -223,7 +223,7 @@ if (isset($p->processa)){
 
         $lSqlErro = true;
         $sErro    = $clconaberturaexe->erro_msg;
-        break;
+        exit;
 
       }
     }

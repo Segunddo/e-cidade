@@ -39,7 +39,8 @@ if (!isset($arqinclude)){ // se este arquivo no esta incluido por outro
   require_once(modification("classes/db_orcparamrelnota_classe.php"));
   require_once(modification("model/relatorioContabil.model.php"));
 
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($_POST);
 
   $classinatura = new cl_assinatura;
@@ -50,7 +51,7 @@ if (!isset($arqinclude)){ // se este arquivo no esta incluido por outro
 $clempresto   = new cl_empresto;
 if (!isset($arqinclude)) { // se este arquivo no esta incluido por outro
 
-  $xinstit    = split("-",$db_selinstit);
+  $xinstit    = preg_split("#\\-#m",$db_selinstit);
   $rsMunic    = db_query("select munic, uf, codigo,nomeinst,nomeinstabrev from db_config where prefeitura is true");
   $oMunic     = db_utils::fieldsMemory($rsMunic,0);
   $descr_inst = '';
@@ -87,7 +88,7 @@ if (!isset($arqinclude)) { // se este arquivo no esta incluido por outro
   $head4  = "DEMONSTRATIVO DOS RESTOS A PAGAR POR PODER E ÓRGÃO";
   $head5  = "ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL";
   $txt    = strtoupper(db_mes('01'));
-  $dt     = split("-",$dt_fin);
+  $dt     = preg_split("#\\-#m",$dt_fin);
   $txt   .= " A ".strtoupper(db_mes($dt[1]));
   $txt   .= "  / ".$anousu;
   switch($bimestre){

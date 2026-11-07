@@ -31,7 +31,8 @@ include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_orcorgao_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clorcorgao = new cl_orcorgao;
 $db_botao = false;
@@ -72,7 +73,7 @@ if(isset($excluir)){
  			$mensagem .= "\\nAntes de excluir esse orgão, exclua as unidades correspondentes ao orgão";
  			$mensagem .= "\\n\\n";
  		}
- 		
+
  		if (!$lerro)	{
  			$sSqlPpaDotacao  = "select * from ppadotacao where o08_orgao = $o40_orgao and  o08_ano in $aAnousu ";
  			//die($sSqlPpaDotacao);
@@ -84,7 +85,7 @@ if(isset($excluir)){
  				$mensagem .= "\\n\\n";
  			}
  		}
- 		
+
  		if (!$lerro) {
  			$sWhereExcluir = " o40_orgao = $o40_orgao and o40_anousu in $aAnousu ";
  			$clorcorgao->excluir(null,null,$sWhereExcluir);
@@ -92,10 +93,10 @@ if(isset($excluir)){
  				$lerro = true;
  			}
  		}
- 		
+
   }
-  
-  
+
+
   //$clorcorgao->excluir($o40_anousu,$o40_orgao);
   db_fim_transacao($lerro);
   //die();

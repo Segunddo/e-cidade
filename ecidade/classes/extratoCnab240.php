@@ -45,7 +45,7 @@ class cl_extratoCnab240 {
 	var $conteudo   = "";
 
 	// contrutor da classe
-  function cl_extratoCnab240($nome){
+  function __construct($nome){
 		$this->arquivo = "";
 		if (file_exists($nome)){
 		  $this->nomearq = $nome;

@@ -42,7 +42,8 @@ $clrotulo->label('e44_descr');
 $clrotulo->label('z01_nome');
 $clrotulo->label('e60_codemp');
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $valortotal = 0; 
@@ -81,7 +82,7 @@ if(isset($e60_codemp)){
                             "e45_numemp=$e60_numemp and e60_instit = ".db_getsession("DB_instit")));
 }
 	 
-if (pg_num_rows($result) == 0){
+if (($result ? pg_num_rows($result) : null) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 }
 

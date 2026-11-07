@@ -61,7 +61,7 @@ class cl_custoliberaplanilhamovimentos {
                  cc16_motivo = text = Motivo 
                  ";
    //funcao construtor da classe 
-   function cl_custoliberaplanilhamovimentos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("custoliberaplanilhamovimentos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,9 +78,9 @@ class cl_custoliberaplanilhamovimentos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc16_sequencial = ($this->cc16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_sequencial"]:$this->cc16_sequencial);
-       $this->cc16_custoplanilha = ($this->cc16_custoplanilha == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_custoplanilha"]:$this->cc16_custoplanilha);
-       $this->cc16_id_usuario = ($this->cc16_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_id_usuario"]:$this->cc16_id_usuario);
+       $this->cc16_sequencial = ($this->cc16_sequencial === 0 || $this->cc16_sequencial === 0.0 || $this->cc16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_sequencial"]:$this->cc16_sequencial);
+       $this->cc16_custoplanilha = ($this->cc16_custoplanilha === 0 || $this->cc16_custoplanilha === 0.0 || $this->cc16_custoplanilha == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_custoplanilha"]:$this->cc16_custoplanilha);
+       $this->cc16_id_usuario = ($this->cc16_id_usuario === 0 || $this->cc16_id_usuario === 0.0 || $this->cc16_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_id_usuario"]:$this->cc16_id_usuario);
        if($this->cc16_datamov == ""){
          $this->cc16_datamov_dia = ($this->cc16_datamov_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_datamov_dia"]:$this->cc16_datamov_dia);
          $this->cc16_datamov_mes = ($this->cc16_datamov_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_datamov_mes"]:$this->cc16_datamov_mes);
@@ -92,7 +92,7 @@ class cl_custoliberaplanilhamovimentos {
        $this->cc16_hora = ($this->cc16_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_hora"]:$this->cc16_hora);
        $this->cc16_motivo = ($this->cc16_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_motivo"]:$this->cc16_motivo);
      }else{
-       $this->cc16_sequencial = ($this->cc16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_sequencial"]:$this->cc16_sequencial);
+       $this->cc16_sequencial = ($this->cc16_sequencial === 0 || $this->cc16_sequencial === 0.0 || $this->cc16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc16_sequencial"]:$this->cc16_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_custoliberaplanilhamovimentos {
          $this->cc16_sequencial = $cc16_sequencial; 
        }
      }
-     if(($this->cc16_sequencial == null) || ($this->cc16_sequencial == "") ){ 
+     if(($this->cc16_sequencial == null) || ($this->cc16_sequencial === 0 || $this->cc16_sequencial === 0.0 || $this->cc16_sequencial == "") ){ 
        $this->erro_sql = " Campo cc16_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -477,7 +477,7 @@ class cl_custoliberaplanilhamovimentos {
    function sql_query ( $cc16_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_custoliberaplanilhamovimentos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -512,7 +512,7 @@ class cl_custoliberaplanilhamovimentos {
    function sql_query_file ( $cc16_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -533,7 +533,7 @@ class cl_custoliberaplanilhamovimentos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

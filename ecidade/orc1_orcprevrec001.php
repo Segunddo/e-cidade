@@ -39,7 +39,7 @@ $db_opcao = 1;
 $db_botao = true;
 if(isset($incluir)){
   db_inicio_transacao();
-  $arr_valores = split(",",$valores);
+  $arr_valores = preg_split("#,#m",$valores);
   $sqlerro = false;
 
   if($sqlerro == false){

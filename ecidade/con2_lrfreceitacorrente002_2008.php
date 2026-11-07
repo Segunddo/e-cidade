@@ -44,7 +44,8 @@ if (!isset($arqinclude)) {
   //  $cldb_config       = new cl_db_config;
   $clorcparamrelnota = new cl_orcparamrelnota;
 
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
 
 }
@@ -54,7 +55,7 @@ include(modification("classes/db_db_config_classe.php"));
 $cldb_config = new cl_db_config;
 
 // -------------------------------------
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,munic,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
@@ -101,7 +102,7 @@ if ($dtini!=''&&$dtfin!='') {
   $dt_ini = $dtini;
   $dt_fin = $dtfin;
 
-  $dt     = split("-",$dt_ini);
+  $dt     = preg_split("#\\-#m",$dt_ini);
   $mes    = $dt[1];
 
   // 1 Bimestre
@@ -119,9 +120,9 @@ if ($dtini!=''&&$dtfin!='') {
     $bimestre = 6;      
   }
 
-  $dt = split('-',$dt_fin);
+  $dt = preg_split('#\-#m',$dt_fin);
   $dt_ini_ant = $anousu_ant.'-'.$dt[1].'-'.$dt[2];
-  $dt = split('-',$dt_fin);
+  $dt = preg_split('#\-#m',$dt_fin);
   $dt_fin_ant = $anousu_ant.'-'.$dt[1].'-'.$dt[2];
 
 }  
@@ -152,18 +153,18 @@ if (!isset($arqinclude)){
 
 
   if ($tipo_emissao!='datas'){
-    $dtd1   = split('-',$dt_ini);
-    $dtd2   = split('-',$dt_fin);
+    $dtd1   = preg_split('#\-#m',$dt_ini);
+    $dtd2   = preg_split('#\-#m',$dt_fin);
     $dt1    = "$dtd1[2]/$dtd1[1]/$dtd1[0]";
     $dt2    = "$dtd2[2]/$dtd2[1]/$dtd2[0]";
     $txt    = strtoupper(db_mes('01'));
-    $dt     = split("-",$dt_fin);
+    $dt     = preg_split("#\\-#m",$dt_fin);
     $txt   .= " A ".strtoupper(db_mes($dt[1]));
     $txt   .= "  / ".$anousu;
 
   }else {
-    $dtd1  = split('-',$dt_ini);
-    $dtd2  = split('-',$dt_fin);
+    $dtd1  = preg_split('#\-#m',$dt_ini);
+    $dtd2  = preg_split('#\-#m',$dt_fin);
     $dt1   = "$dtd1[2]/$dtd1[1]/$dtd1[0]";
     $dt2   = "$dtd2[2]/$dtd2[1]/$dtd2[0]";
     $head5 = "EMISSÃO POR DATAS";

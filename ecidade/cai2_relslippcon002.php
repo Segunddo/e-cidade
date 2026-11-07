@@ -43,7 +43,8 @@ $clrotulo->label('total_por_conta');
 $clrotulo->label('total_geral');
 $clrotulo->label('conta');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $where = "where 1=1  ";
 
@@ -132,7 +133,7 @@ $sql = " select * from (
 	      order by $ord ) as x $where ";
 
 $result = db_query($sql);
-if (pg_numrows($result) == 0) {
+if (($result ? pg_numrows($result) : null) == 0) {
     db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 }
 

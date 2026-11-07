@@ -54,7 +54,7 @@ class cl_cronogramabasereceita {
                  o126_cronogramabasecalculo = int4 = Código da Base de Calculo 
                  ";
    //funcao construtor da classe 
-   function cl_cronogramabasereceita() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cronogramabasereceita"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_cronogramabasereceita {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o126_sequencial = ($this->o126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_sequencial"]:$this->o126_sequencial);
-       $this->o126_codrec = ($this->o126_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_codrec"]:$this->o126_codrec);
-       $this->o126_anousu = ($this->o126_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_anousu"]:$this->o126_anousu);
-       $this->o126_cronogramabasecalculo = ($this->o126_cronogramabasecalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_cronogramabasecalculo"]:$this->o126_cronogramabasecalculo);
+       $this->o126_sequencial = ($this->o126_sequencial === 0 || $this->o126_sequencial === 0.0 || $this->o126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_sequencial"]:$this->o126_sequencial);
+       $this->o126_codrec = ($this->o126_codrec === 0 || $this->o126_codrec === 0.0 || $this->o126_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_codrec"]:$this->o126_codrec);
+       $this->o126_anousu = ($this->o126_anousu === 0 || $this->o126_anousu === 0.0 || $this->o126_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_anousu"]:$this->o126_anousu);
+       $this->o126_cronogramabasecalculo = ($this->o126_cronogramabasecalculo === 0 || $this->o126_cronogramabasecalculo === 0.0 || $this->o126_cronogramabasecalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_cronogramabasecalculo"]:$this->o126_cronogramabasecalculo);
      }else{
-       $this->o126_sequencial = ($this->o126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_sequencial"]:$this->o126_sequencial);
+       $this->o126_sequencial = ($this->o126_sequencial === 0 || $this->o126_sequencial === 0.0 || $this->o126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_sequencial"]:$this->o126_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_cronogramabasereceita {
          $this->o126_sequencial = $o126_sequencial; 
        }
      }
-     if(($this->o126_sequencial == null) || ($this->o126_sequencial == "") ){ 
+     if(($this->o126_sequencial == null) || ($this->o126_sequencial === 0 || $this->o126_sequencial === 0.0 || $this->o126_sequencial == "") ){ 
        $this->erro_sql = " Campo o126_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_cronogramabasereceita {
    function sql_query ( $o126_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -419,7 +419,7 @@ class cl_cronogramabasereceita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_cronogramabasereceita {
    function sql_query_file ( $o126_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -453,7 +453,7 @@ class cl_cronogramabasereceita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

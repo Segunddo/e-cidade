@@ -37,7 +37,7 @@ class ConsistenciaContabil extends RelatoriosLegaisBase
    * Retorna os dados da consistencia processados, em forma de uma array
    * @return stdClass[]
    */
-    public function getDados()
+    public function getDados($trazerConfiguracaoPadrao = true)
     {
         $this->aLinhasConsistencia = $this->getLinhasRelatorio();
         $this->executarBalancetesNecessarios();

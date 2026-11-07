@@ -32,7 +32,8 @@ include(modification("classes/db_orcppa_classe.php"));
 include(modification("classes/db_orcppaval_classe.php"));
 include(modification("classes/db_orcppatiporec_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $clorcppa = new cl_orcppa;
 $clorcppaval = new cl_orcppaval;
@@ -47,7 +48,7 @@ if (!isset ($lei)) {
 
 $ano1 = $ano;
 $ano = substr(str_replace('-', ',', $ano1), 1);
-$ano_arr = split(',', $ano);
+$ano_arr = preg_split('#,#m', $ano);
 $anoini = $ano_arr[0];
 $anofim = $ano_arr[count($ano_arr) - 1];
 //print($anofim);exit;

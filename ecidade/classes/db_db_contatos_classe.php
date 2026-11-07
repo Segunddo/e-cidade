@@ -76,7 +76,7 @@ class cl_db_contatos {
                  g01_site = varchar(40) = Site 
                  ";
    //funcao construtor da classe 
-   function cl_db_contatos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_contatos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -93,8 +93,8 @@ class cl_db_contatos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->g01_id = ($this->g01_id == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_id"]:$this->g01_id);
-       $this->g01_tipocon = ($this->g01_tipocon == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_tipocon"]:$this->g01_tipocon);
+       $this->g01_id = ($this->g01_id === 0 || $this->g01_id === 0.0 || $this->g01_id == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_id"]:$this->g01_id);
+       $this->g01_tipocon = ($this->g01_tipocon === 0 || $this->g01_tipocon === 0.0 || $this->g01_tipocon == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_tipocon"]:$this->g01_tipocon);
        $this->g01_organizacao = ($this->g01_organizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_organizacao"]:$this->g01_organizacao);
        $this->g01_nome = ($this->g01_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_nome"]:$this->g01_nome);
        $this->g01_rua = ($this->g01_rua == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_rua"]:$this->g01_rua);
@@ -109,7 +109,7 @@ class cl_db_contatos {
        $this->g01_email = ($this->g01_email == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_email"]:$this->g01_email);
        $this->g01_site = ($this->g01_site == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_site"]:$this->g01_site);
      }else{
-       $this->g01_id = ($this->g01_id == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_id"]:$this->g01_id);
+       $this->g01_id = ($this->g01_id === 0 || $this->g01_id === 0.0 || $this->g01_id == ""?@$GLOBALS["HTTP_POST_VARS"]["g01_id"]:$this->g01_id);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_db_contatos {
          $this->g01_id = $g01_id; 
        }
      }
-     if(($this->g01_id == null) || ($this->g01_id == "") ){ 
+     if(($this->g01_id == null) || ($this->g01_id === 0 || $this->g01_id === 0.0 || $this->g01_id == "") ){ 
        $this->erro_sql = " Campo g01_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -515,7 +515,7 @@ class cl_db_contatos {
    function sql_query ( $g01_id=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -537,7 +537,7 @@ class cl_db_contatos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -549,7 +549,7 @@ class cl_db_contatos {
    function sql_query_file ( $g01_id=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -570,7 +570,7 @@ class cl_db_contatos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

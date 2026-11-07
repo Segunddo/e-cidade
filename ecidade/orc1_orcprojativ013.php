@@ -35,7 +35,8 @@ include(modification("classes/db_orcprojativunidaderesp_classe.php"));
 include(modification("classes/db_orciniciativavinculoprojativ_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 db_postmemory($HTTP_POST_VARS);
 
@@ -133,7 +134,7 @@ if((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"])=="Excluir
    db_fieldsmemory($result,0);
    $db_botao = true;
       
-   $digito = ($o55_projativ{0}*1000);
+   $digito = ($o55_projativ[0]*1000);
    
 }
 ?>

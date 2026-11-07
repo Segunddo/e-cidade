@@ -56,7 +56,7 @@ class cl_ppaintegracaodespesa {
                  o121_ppaestimativadespesa = int4 = Código da Estimativa 
                  ";
    //funcao construtor da classe 
-   function cl_ppaintegracaodespesa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ppaintegracaodespesa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_ppaintegracaodespesa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o121_sequencial = ($this->o121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_sequencial"]:$this->o121_sequencial);
-       $this->o121_ppaintegracao = ($this->o121_ppaintegracao == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_ppaintegracao"]:$this->o121_ppaintegracao);
-       $this->o121_coddot = ($this->o121_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_coddot"]:$this->o121_coddot);
-       $this->o121_anousu = ($this->o121_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_anousu"]:$this->o121_anousu);
-       $this->o121_ppaestimativadespesa = ($this->o121_ppaestimativadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_ppaestimativadespesa"]:$this->o121_ppaestimativadespesa);
+       $this->o121_sequencial = ($this->o121_sequencial === 0 || $this->o121_sequencial === 0.0 || $this->o121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_sequencial"]:$this->o121_sequencial);
+       $this->o121_ppaintegracao = ($this->o121_ppaintegracao === 0 || $this->o121_ppaintegracao === 0.0 || $this->o121_ppaintegracao == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_ppaintegracao"]:$this->o121_ppaintegracao);
+       $this->o121_coddot = ($this->o121_coddot === 0 || $this->o121_coddot === 0.0 || $this->o121_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_coddot"]:$this->o121_coddot);
+       $this->o121_anousu = ($this->o121_anousu === 0 || $this->o121_anousu === 0.0 || $this->o121_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_anousu"]:$this->o121_anousu);
+       $this->o121_ppaestimativadespesa = ($this->o121_ppaestimativadespesa === 0 || $this->o121_ppaestimativadespesa === 0.0 || $this->o121_ppaestimativadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_ppaestimativadespesa"]:$this->o121_ppaestimativadespesa);
      }else{
-       $this->o121_sequencial = ($this->o121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_sequencial"]:$this->o121_sequencial);
+       $this->o121_sequencial = ($this->o121_sequencial === 0 || $this->o121_sequencial === 0.0 || $this->o121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_sequencial"]:$this->o121_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_ppaintegracaodespesa {
          $this->o121_sequencial = $o121_sequencial; 
        }
      }
-     if(($this->o121_sequencial == null) || ($this->o121_sequencial == "") ){ 
+     if(($this->o121_sequencial == null) || ($this->o121_sequencial === 0 || $this->o121_sequencial === 0.0 || $this->o121_sequencial == "") ){ 
        $this->erro_sql = " Campo o121_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_ppaintegracaodespesa {
    function sql_query ( $o121_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_ppaintegracaodespesa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -472,7 +472,7 @@ class cl_ppaintegracaodespesa {
    function sql_query_file ( $o121_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -493,7 +493,7 @@ class cl_ppaintegracaodespesa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -56,7 +56,7 @@ class cl_orcparamfunc {
                  o45_instit = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_orcparamfunc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcparamfunc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,16 +73,16 @@ class cl_orcparamfunc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o45_sequencia = ($this->o45_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_sequencia"]:$this->o45_sequencia);
-       $this->o45_codparrel = ($this->o45_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codparrel"]:$this->o45_codparrel);
-       $this->o45_anousu = ($this->o45_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_anousu"]:$this->o45_anousu);
-       $this->o45_func = ($this->o45_func == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_func"]:$this->o45_func);
-       $this->o45_instit = ($this->o45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_instit"]:$this->o45_instit);
+       $this->o45_sequencia = ($this->o45_sequencia === 0 || $this->o45_sequencia === 0.0 || $this->o45_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_sequencia"]:$this->o45_sequencia);
+       $this->o45_codparrel = ($this->o45_codparrel === 0 || $this->o45_codparrel === 0.0 || $this->o45_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codparrel"]:$this->o45_codparrel);
+       $this->o45_anousu = ($this->o45_anousu === 0 || $this->o45_anousu === 0.0 || $this->o45_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_anousu"]:$this->o45_anousu);
+       $this->o45_func = ($this->o45_func === 0 || $this->o45_func === 0.0 || $this->o45_func == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_func"]:$this->o45_func);
+       $this->o45_instit = ($this->o45_instit === 0 || $this->o45_instit === 0.0 || $this->o45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_instit"]:$this->o45_instit);
      }else{
-       $this->o45_sequencia = ($this->o45_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_sequencia"]:$this->o45_sequencia);
-       $this->o45_codparrel = ($this->o45_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codparrel"]:$this->o45_codparrel);
-       $this->o45_anousu = ($this->o45_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_anousu"]:$this->o45_anousu);
-       $this->o45_func = ($this->o45_func == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_func"]:$this->o45_func);
+       $this->o45_sequencia = ($this->o45_sequencia === 0 || $this->o45_sequencia === 0.0 || $this->o45_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_sequencia"]:$this->o45_sequencia);
+       $this->o45_codparrel = ($this->o45_codparrel === 0 || $this->o45_codparrel === 0.0 || $this->o45_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codparrel"]:$this->o45_codparrel);
+       $this->o45_anousu = ($this->o45_anousu === 0 || $this->o45_anousu === 0.0 || $this->o45_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_anousu"]:$this->o45_anousu);
+       $this->o45_func = ($this->o45_func === 0 || $this->o45_func === 0.0 || $this->o45_func == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_func"]:$this->o45_func);
      }
    }
    // funcao para inclusao
@@ -101,7 +101,7 @@ class cl_orcparamfunc {
        $this->o45_anousu = $o45_anousu; 
        $this->o45_codparrel = $o45_codparrel; 
        $this->o45_func = $o45_func; 
-     if(($this->o45_sequencia == null) || ($this->o45_sequencia == "") ){ 
+     if(($this->o45_sequencia == null) || ($this->o45_sequencia === 0 || $this->o45_sequencia === 0.0 || $this->o45_sequencia == "") ){ 
        $this->erro_sql = " Campo o45_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -109,7 +109,7 @@ class cl_orcparamfunc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o45_anousu == null) || ($this->o45_anousu == "") ){ 
+     if(($this->o45_anousu == null) || ($this->o45_anousu === 0 || $this->o45_anousu === 0.0 || $this->o45_anousu == "") ){ 
        $this->erro_sql = " Campo o45_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -117,7 +117,7 @@ class cl_orcparamfunc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o45_codparrel == null) || ($this->o45_codparrel == "") ){ 
+     if(($this->o45_codparrel == null) || ($this->o45_codparrel === 0 || $this->o45_codparrel === 0.0 || $this->o45_codparrel == "") ){ 
        $this->erro_sql = " Campo o45_codparrel nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -125,7 +125,7 @@ class cl_orcparamfunc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o45_func == null) || ($this->o45_func == "") ){ 
+     if(($this->o45_func == null) || ($this->o45_func === 0 || $this->o45_func === 0.0 || $this->o45_func == "") ){ 
        $this->erro_sql = " Campo o45_func nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -438,7 +438,7 @@ class cl_orcparamfunc {
    function sql_query ( $o45_sequencia=null,$o45_anousu=null,$o45_codparrel=null,$o45_func=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -486,7 +486,7 @@ class cl_orcparamfunc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_orcparamfunc {
    function sql_query_file ( $o45_sequencia=null,$o45_anousu=null,$o45_codparrel=null,$o45_func=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_orcparamfunc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

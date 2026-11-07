@@ -54,6 +54,10 @@ return RectorConfig::configure()
         Rector\Php80\Rector\FuncCall\ClassOnObjectRector::class,
         Rector\Php80\Rector\Class_\StringableForToStringRector::class,
         Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector::class,
+        // 6o CRESCIMENTO (Financeiro, lote 4, cai). Junta dois catch de corpo igual em
+        // `catch (A|B $e)` -- sintaxe de PHP 7.1, parse error no 5.6. Nunca tinha disparado:
+        // cai4_arrecada007.php e o primeiro arquivo com dois catch identicos em sequencia.
+        Rector\Php71\Rector\TryCatch\MultiExceptionCatchRector::class,
 
         // --- emitem FUNCAO que nao existe no 5.6: compila e explode em execucao ---
         Rector\Php80\Rector\Identical\StrStartsWithRector::class,   // str_starts_with

@@ -30,7 +30,8 @@ include(modification("libs/db_sql.php"));
 include(modification("libs/db_utils.php"));
 include(modification("classes/db_orctiporec_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $oGet     = db_utils::postMemory($_GET);
 $sRecurso = "";
@@ -61,7 +62,7 @@ $head3 = "RELATÓRIO DE RECURSOS VINCULADOS";
 $head5 = "EXERCÍCIO: ".db_getsession("DB_anousu");
 $head7 = $sRecurso;
 
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0) {
     db_redireciona('db_erros.php?fechar=true&db_erro=Não existem recursos cadastradas.');
     exit;

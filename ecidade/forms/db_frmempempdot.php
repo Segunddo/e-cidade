@@ -146,7 +146,7 @@ $clrotulo->label("o56_elemento");
  		            $tot= number_format(($atual_menos_reservado- $e54_valor),2,",",".");
 		         }
 		         if (isset($e54_valor))
-		            $e54_valor=number_format($e54_valor,2,",",".");
+		            $e54_valor=((is_string($e54_valor) && !is_numeric($e54_valor) && !preg_match('/^\s*[+-]?(\d|\.\d)/', $e54_valor)) ? null : number_format(is_string($e54_valor) ? (float)$e54_valor : $e54_valor,2,",",".")); // PHP 8: string nao numerica e TypeError; o 5.6 devolvia NULL
 		     }
 		   ?>
 	        <td><? db_input('e54_valor',13,"",true,'text',3,""); ?></td>

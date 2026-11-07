@@ -44,7 +44,8 @@ $clempageconfcanc = new cl_empageconfcanc;
 include(modification("dbforms/db_classesgenericas.php"));
 $cliframe_seleciona = new cl_iframe_seleciona;
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;
@@ -67,7 +68,7 @@ if(isset($atualizar)){
 	$mov = $e81_codmov;
        //-----------------------------------
        //inclui na tabela empageconfcanc
-       
+
        if($sqlerro==false){
 
          $result = $clempageconf->sql_record($clempageconf->sql_query_file($mov,"e86_codmov,e86_data,e86_cheque"));
@@ -92,7 +93,7 @@ if(isset($atualizar)){
 	 }  
        }  
        //-----------------------------------
-       
+
        //-----------------------------------
        if($sqlerro==false){
           $result = $clempageconfgera->sql_record($clempageconfgera->sql_query_file(null,null,"e90_codmov","e90_codgera=$e87_codgera and e90_codmov=$mov"));
@@ -107,11 +108,11 @@ if(isset($atualizar)){
 	  }   
        }  
        //------------------------------------------------ 
-      
 
 
 
-       
+
+
        //-------------------------------------
        //exclui no empageconf
        if($sqlerro==false){

@@ -85,10 +85,10 @@ class cl_empagedadosretmov
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->e76_codret = ($this->e76_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_codret"]:$this->e76_codret);
+       $this->e76_codret = ($this->e76_codret === 0 || $this->e76_codret === 0.0 || $this->e76_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_codret"]:$this->e76_codret);
        $this->e76_lote = ($this->e76_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_lote"]:$this->e76_lote);
        $this->e76_movlote = ($this->e76_movlote == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_movlote"]:$this->e76_movlote);
-       $this->e76_codmov = ($this->e76_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_codmov"]:$this->e76_codmov);
+       $this->e76_codmov = ($this->e76_codmov === 0 || $this->e76_codmov === 0.0 || $this->e76_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_codmov"]:$this->e76_codmov);
        $this->e76_numbanco = ($this->e76_numbanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_numbanco"]:$this->e76_numbanco);
        if($this->e76_dataefet == ""){
          $this->e76_dataefet_dia = ($this->e76_dataefet_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_dataefet_dia"]:$this->e76_dataefet_dia);
@@ -98,12 +98,12 @@ class cl_empagedadosretmov
             $this->e76_dataefet = $this->e76_dataefet_ano."-".$this->e76_dataefet_mes."-".$this->e76_dataefet_dia;
          }
        }
-       $this->e76_valorefet = ($this->e76_valorefet == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_valorefet"]:$this->e76_valorefet);
+       $this->e76_valorefet = ($this->e76_valorefet === 0 || $this->e76_valorefet === 0.0 || $this->e76_valorefet == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_valorefet"]:$this->e76_valorefet);
        $this->e76_processado = ($this->e76_processado == "f"?@$GLOBALS["HTTP_POST_VARS"]["e76_processado"]:$this->e76_processado);
        $this->e76_linhaarquivo = ($this->e76_linhaarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_linhaarquivo"]:$this->e76_linhaarquivo);
      }else{
-       $this->e76_codret = ($this->e76_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_codret"]:$this->e76_codret);
-       $this->e76_codmov = ($this->e76_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_codmov"]:$this->e76_codmov);
+       $this->e76_codret = ($this->e76_codret === 0 || $this->e76_codret === 0.0 || $this->e76_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_codret"]:$this->e76_codret);
+       $this->e76_codmov = ($this->e76_codmov === 0 || $this->e76_codmov === 0.0 || $this->e76_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e76_codmov"]:$this->e76_codmov);
      }
    }
 
@@ -166,7 +166,7 @@ class cl_empagedadosretmov
      }
        $this->e76_codret = $e76_codret; 
        $this->e76_codmov = $e76_codmov; 
-     if(($this->e76_codret == null) || ($this->e76_codret == "") ){ 
+     if(($this->e76_codret == null) || ($this->e76_codret === 0 || $this->e76_codret === 0.0 || $this->e76_codret == "") ){ 
        $this->erro_sql = " Campo e76_codret não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -174,7 +174,7 @@ class cl_empagedadosretmov
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e76_codmov == null) || ($this->e76_codmov == "") ){ 
+     if(($this->e76_codmov == null) || ($this->e76_codmov === 0 || $this->e76_codmov === 0.0 || $this->e76_codmov == "") ){ 
        $this->erro_sql = " Campo e76_codmov não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -50,7 +50,7 @@ class cl_conciliaorigem {
                  k96_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_conciliaorigem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conciliaorigem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_conciliaorigem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k96_sequencial = ($this->k96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k96_sequencial"]:$this->k96_sequencial);
+       $this->k96_sequencial = ($this->k96_sequencial === 0 || $this->k96_sequencial === 0.0 || $this->k96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k96_sequencial"]:$this->k96_sequencial);
        $this->k96_descr = ($this->k96_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k96_descr"]:$this->k96_descr);
      }else{
-       $this->k96_sequencial = ($this->k96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k96_sequencial"]:$this->k96_sequencial);
+       $this->k96_sequencial = ($this->k96_sequencial === 0 || $this->k96_sequencial === 0.0 || $this->k96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k96_sequencial"]:$this->k96_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_conciliaorigem {
          $this->k96_sequencial = $k96_sequencial; 
        }
      }
-     if(($this->k96_sequencial == null) || ($this->k96_sequencial == "") ){ 
+     if(($this->k96_sequencial == null) || ($this->k96_sequencial === 0 || $this->k96_sequencial === 0.0 || $this->k96_sequencial == "") ){ 
        $this->erro_sql = " Campo k96_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_conciliaorigem {
    function sql_query ( $k96_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_conciliaorigem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_conciliaorigem {
    function sql_query_file ( $k96_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_conciliaorigem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

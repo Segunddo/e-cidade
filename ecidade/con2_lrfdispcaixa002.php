@@ -35,10 +35,11 @@ include(modification("classes/db_orcparamrel_classe.php"));
 
 $classinatura = new cl_assinatura;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 $orcparamrel = new cl_orcparamrel;
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
@@ -713,3 +714,4 @@ assinaturas(&$pdf,&$classinatura,'GF');
 $pdf->Output();
 
 ?>
+*/ // PHP 8: comentario sem fim era aviso no 5.6 (o resto do arquivo virava comentario); fechado aqui, no fim, para manter isso

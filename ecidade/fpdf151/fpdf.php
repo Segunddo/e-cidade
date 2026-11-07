@@ -920,6 +920,7 @@ function Cell($w,$h=0,$txt='',$border=0,$ln=0,$align='',$fill=0,$link='',$preenc
 //#99#//  -   $pdf->Cell(20,10,'Title',1,1,'C');
 {
   //Output a cell
+  if (!is_numeric($h)) { $h = (float)$h; } // PHP 8: o 5.6 tratava altura nao numerica ('') como 0
   $k=$this->k;
   if($this->y+$h>$this->PageBreakTrigger and !$this->InFooter and $this->AcceptPageBreak())
   {

@@ -104,8 +104,8 @@ class cl_certidao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->p50_sequencial = ($this->p50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_sequencial"]:$this->p50_sequencial);
-       $this->p50_idusuario = ($this->p50_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_idusuario"]:$this->p50_idusuario);
+       $this->p50_sequencial = ($this->p50_sequencial === 0 || $this->p50_sequencial === 0.0 || $this->p50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_sequencial"]:$this->p50_sequencial);
+       $this->p50_idusuario = ($this->p50_idusuario === 0 || $this->p50_idusuario === 0.0 || $this->p50_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_idusuario"]:$this->p50_idusuario);
        $this->p50_tipo = ($this->p50_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_tipo"]:$this->p50_tipo);
        if($this->p50_data == ""){
          $this->p50_data_dia = ($this->p50_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_data_dia"]:$this->p50_data_dia);
@@ -119,12 +119,12 @@ class cl_certidao
        $this->p50_ip = ($this->p50_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_ip"]:$this->p50_ip);
        $this->p50_hist = ($this->p50_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_hist"]:$this->p50_hist);
        $this->p50_web = ($this->p50_web == "f"?@$GLOBALS["HTTP_POST_VARS"]["p50_web"]:$this->p50_web);
-       $this->p50_codproc = ($this->p50_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_codproc"]:$this->p50_codproc);
-       $this->p50_exerc = ($this->p50_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_exerc"]:$this->p50_exerc);
+       $this->p50_codproc = ($this->p50_codproc === 0 || $this->p50_codproc === 0.0 || $this->p50_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_codproc"]:$this->p50_codproc);
+       $this->p50_exerc = ($this->p50_exerc === 0 || $this->p50_exerc === 0.0 || $this->p50_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_exerc"]:$this->p50_exerc);
        $this->p50_codimpresso = ($this->p50_codimpresso == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_codimpresso"]:$this->p50_codimpresso);
-       $this->p50_instit = ($this->p50_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_instit"]:$this->p50_instit);
-       $this->p50_arquivo = ($this->p50_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_arquivo"]:$this->p50_arquivo);
-       $this->p50_diasvalidade = ($this->p50_diasvalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_diasvalidade"]:$this->p50_diasvalidade);
+       $this->p50_instit = ($this->p50_instit === 0 || $this->p50_instit === 0.0 || $this->p50_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_instit"]:$this->p50_instit);
+       $this->p50_arquivo = ($this->p50_arquivo === 0 || $this->p50_arquivo === 0.0 || $this->p50_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_arquivo"]:$this->p50_arquivo);
+       $this->p50_diasvalidade = ($this->p50_diasvalidade === 0 || $this->p50_diasvalidade === 0.0 || $this->p50_diasvalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_diasvalidade"]:$this->p50_diasvalidade);
        $this->p50_nomeservico = ($this->p50_nomeservico == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_nomeservico"]:$this->p50_nomeservico);
        $this->p50_resultadowebservice = ($this->p50_resultadowebservice == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_resultadowebservice"]:$this->p50_resultadowebservice);
        if($this->p50_datahoraconsulta == ""){
@@ -136,7 +136,7 @@ class cl_certidao
          }
        }
      }else{
-       $this->p50_sequencial = ($this->p50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_sequencial"]:$this->p50_sequencial);
+       $this->p50_sequencial = ($this->p50_sequencial === 0 || $this->p50_sequencial === 0.0 || $this->p50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p50_sequencial"]:$this->p50_sequencial);
      }
    }
 
@@ -257,7 +257,7 @@ class cl_certidao
          $this->p50_sequencial = $p50_sequencial; 
        }
      }
-     if(($this->p50_sequencial == null) || ($this->p50_sequencial == "") ){ 
+     if(($this->p50_sequencial == null) || ($this->p50_sequencial === 0 || $this->p50_sequencial === 0.0 || $this->p50_sequencial == "") ){ 
        $this->erro_sql = " Campo p50_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -855,7 +855,7 @@ class cl_certidao
    function sql_query_certidao ( $p50_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select "; 
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -883,7 +883,7 @@ class cl_certidao
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

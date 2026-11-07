@@ -46,7 +46,8 @@ $clempagepag  = new cl_empagepag;
 $clempageconf  = new cl_empageconf;
 
 //echo ($HTTP_SERVER_VARS["QUERY_STRING"]);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;
@@ -165,7 +166,7 @@ function js_calcula(campo){
           <td class='bordas' align='center'><small><?=$e60_emiss?>  </small></td>
            <?
 	     $x= "valor_$e81_codmov";
-  	     $$x = $e81_valor;
+  	     ${$x} = $e81_valor;
              db_input("valor_$e81_codmov",10,'',true,'hidden',1);
             ?>       
 	  

@@ -50,7 +50,7 @@ class cl_orcimpactomovtiporec {
                  o67_codigo = int4 = Recurso 
                  ";
    //funcao construtor da classe 
-   function cl_orcimpactomovtiporec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcimpactomovtiporec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_orcimpactomovtiporec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o67_codseqimpmov = ($this->o67_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codseqimpmov"]:$this->o67_codseqimpmov);
-       $this->o67_codigo = ($this->o67_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codigo"]:$this->o67_codigo);
+       $this->o67_codseqimpmov = ($this->o67_codseqimpmov === 0 || $this->o67_codseqimpmov === 0.0 || $this->o67_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codseqimpmov"]:$this->o67_codseqimpmov);
+       $this->o67_codigo = ($this->o67_codigo === 0 || $this->o67_codigo === 0.0 || $this->o67_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codigo"]:$this->o67_codigo);
      }else{
-       $this->o67_codseqimpmov = ($this->o67_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codseqimpmov"]:$this->o67_codseqimpmov);
+       $this->o67_codseqimpmov = ($this->o67_codseqimpmov === 0 || $this->o67_codseqimpmov === 0.0 || $this->o67_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codseqimpmov"]:$this->o67_codseqimpmov);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_orcimpactomovtiporec {
        return false;
      }
        $this->o67_codseqimpmov = $o67_codseqimpmov; 
-     if(($this->o67_codseqimpmov == null) || ($this->o67_codseqimpmov == "") ){ 
+     if(($this->o67_codseqimpmov == null) || ($this->o67_codseqimpmov === 0 || $this->o67_codseqimpmov === 0.0 || $this->o67_codseqimpmov == "") ){ 
        $this->erro_sql = " Campo o67_codseqimpmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_orcimpactomovtiporec {
    function sql_query ( $o67_codseqimpmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_orcimpactomovtiporec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -341,7 +341,7 @@ class cl_orcimpactomovtiporec {
    function sql_query_file ( $o67_codseqimpmov=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -362,7 +362,7 @@ class cl_orcimpactomovtiporec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

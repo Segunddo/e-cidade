@@ -34,7 +34,8 @@ include(modification("dbforms/db_classesgenericas.php"));
 $clcriaabas     = new cl_criaabas;
 $clrotulo = new rotulocampo;
 $db_opcao = 1;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 ?>
 <html>
 <head>

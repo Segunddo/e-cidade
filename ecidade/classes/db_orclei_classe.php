@@ -64,7 +64,7 @@ class cl_orclei {
                  o45_tipolei = int4 = Tipo da Lei 
                  ";
    //funcao construtor da classe 
-   function cl_orclei() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orclei"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,7 +81,7 @@ class cl_orclei {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o45_codlei = ($this->o45_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codlei"]:$this->o45_codlei);
+       $this->o45_codlei = ($this->o45_codlei === 0 || $this->o45_codlei === 0.0 || $this->o45_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codlei"]:$this->o45_codlei);
        $this->o45_numlei = ($this->o45_numlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_numlei"]:$this->o45_numlei);
        $this->o45_descr = ($this->o45_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_descr"]:$this->o45_descr);
        if($this->o45_datafim == ""){
@@ -100,9 +100,9 @@ class cl_orclei {
             $this->o45_dataini = $this->o45_dataini_ano."-".$this->o45_dataini_mes."-".$this->o45_dataini_dia;
          }
        }
-       $this->o45_tipolei = ($this->o45_tipolei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_tipolei"]:$this->o45_tipolei);
+       $this->o45_tipolei = ($this->o45_tipolei === 0 || $this->o45_tipolei === 0.0 || $this->o45_tipolei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_tipolei"]:$this->o45_tipolei);
      }else{
-       $this->o45_codlei = ($this->o45_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codlei"]:$this->o45_codlei);
+       $this->o45_codlei = ($this->o45_codlei === 0 || $this->o45_codlei === 0.0 || $this->o45_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codlei"]:$this->o45_codlei);
      }
    }
    // funcao para inclusao
@@ -171,7 +171,7 @@ class cl_orclei {
          $this->o45_codlei = $o45_codlei; 
        }
      }
-     if(($this->o45_codlei == null) || ($this->o45_codlei == "") ){ 
+     if(($this->o45_codlei == null) || ($this->o45_codlei === 0 || $this->o45_codlei === 0.0 || $this->o45_codlei == "") ){ 
        $this->erro_sql = " Campo o45_codlei nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -489,7 +489,7 @@ class cl_orclei {
    function sql_query ( $o45_codlei=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -510,7 +510,7 @@ class cl_orclei {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_orclei {
    function sql_query_file ( $o45_codlei=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_orclei {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

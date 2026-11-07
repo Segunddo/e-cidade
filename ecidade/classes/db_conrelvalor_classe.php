@@ -56,7 +56,7 @@ class cl_conrelvalor {
                  c83_periodo = char(2) = Periodo 
                  ";
    //funcao construtor da classe 
-   function cl_conrelvalor() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conrelvalor"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,14 +73,14 @@ class cl_conrelvalor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c83_codigo = ($this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
-       $this->c83_instit = ($this->c83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_instit"]:$this->c83_instit);
+       $this->c83_codigo = ($this->c83_codigo === 0 || $this->c83_codigo === 0.0 || $this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
+       $this->c83_instit = ($this->c83_instit === 0 || $this->c83_instit === 0.0 || $this->c83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_instit"]:$this->c83_instit);
        $this->c83_informacao = ($this->c83_informacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_informacao"]:$this->c83_informacao);
-       $this->c83_anousu = ($this->c83_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_anousu"]:$this->c83_anousu);
+       $this->c83_anousu = ($this->c83_anousu === 0 || $this->c83_anousu === 0.0 || $this->c83_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_anousu"]:$this->c83_anousu);
        $this->c83_periodo = ($this->c83_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_periodo"]:$this->c83_periodo);
      }else{
-       $this->c83_codigo = ($this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
-       $this->c83_instit = ($this->c83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_instit"]:$this->c83_instit);
+       $this->c83_codigo = ($this->c83_codigo === 0 || $this->c83_codigo === 0.0 || $this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
+       $this->c83_instit = ($this->c83_instit === 0 || $this->c83_instit === 0.0 || $this->c83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_instit"]:$this->c83_instit);
        $this->c83_periodo = ($this->c83_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_periodo"]:$this->c83_periodo);
      }
    }
@@ -108,7 +108,7 @@ class cl_conrelvalor {
        $this->c83_codigo = $c83_codigo; 
        $this->c83_instit = $c83_instit; 
        $this->c83_periodo = $c83_periodo; 
-     if(($this->c83_codigo == null) || ($this->c83_codigo == "") ){ 
+     if(($this->c83_codigo == null) || ($this->c83_codigo === 0 || $this->c83_codigo === 0.0 || $this->c83_codigo == "") ){ 
        $this->erro_sql = " Campo c83_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -116,7 +116,7 @@ class cl_conrelvalor {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c83_instit == null) || ($this->c83_instit == "") ){ 
+     if(($this->c83_instit == null) || ($this->c83_instit === 0 || $this->c83_instit === 0.0 || $this->c83_instit == "") ){ 
        $this->erro_sql = " Campo c83_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -424,7 +424,7 @@ class cl_conrelvalor {
    function sql_query ( $c83_codigo=null,$c83_instit=null,$c83_periodo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -463,7 +463,7 @@ class cl_conrelvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_conrelvalor {
    function sql_query_file ( $c83_codigo=null,$c83_instit=null,$c83_periodo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -512,7 +512,7 @@ class cl_conrelvalor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

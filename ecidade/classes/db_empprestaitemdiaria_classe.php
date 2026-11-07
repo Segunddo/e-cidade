@@ -46,7 +46,7 @@ class cl_empprestaitemdiaria {
                  e446_tipodiaria = varchar(50) = Tipo de Diária 
                  ";
    //funcao construtor da classe 
-   function cl_empprestaitemdiaria() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empprestaitemdiaria"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -63,9 +63,9 @@ class cl_empprestaitemdiaria {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e446_sequencial = ($this->e446_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_sequencial"]:$this->e446_sequencial);
-       $this->e446_empprestaitem = ($this->e446_empprestaitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_empprestaitem"]:$this->e446_empprestaitem);
-       $this->e446_regist = ($this->e446_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_regist"]:$this->e446_regist);
+       $this->e446_sequencial = ($this->e446_sequencial === 0 || $this->e446_sequencial === 0.0 || $this->e446_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_sequencial"]:$this->e446_sequencial);
+       $this->e446_empprestaitem = ($this->e446_empprestaitem === 0 || $this->e446_empprestaitem === 0.0 || $this->e446_empprestaitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_empprestaitem"]:$this->e446_empprestaitem);
+       $this->e446_regist = ($this->e446_regist === 0 || $this->e446_regist === 0.0 || $this->e446_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_regist"]:$this->e446_regist);
        if($this->e446_datainicio == ""){
          $this->e446_datainicio_dia = ($this->e446_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_datainicio_dia"]:$this->e446_datainicio_dia);
          $this->e446_datainicio_mes = ($this->e446_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_datainicio_mes"]:$this->e446_datainicio_mes);
@@ -84,11 +84,11 @@ class cl_empprestaitemdiaria {
        }
        $this->e446_motivo = ($this->e446_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_motivo"]:$this->e446_motivo);
        $this->e446_destino = ($this->e446_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_destino"]:$this->e446_destino);
-       $this->e446_quantidade = ($this->e446_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_quantidade"]:$this->e446_quantidade);
-       $this->e446_movimento = ($this->e446_movimento == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_movimento"]:$this->e446_movimento);
+       $this->e446_quantidade = ($this->e446_quantidade === 0 || $this->e446_quantidade === 0.0 || $this->e446_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_quantidade"]:$this->e446_quantidade);
+       $this->e446_movimento = ($this->e446_movimento === 0 || $this->e446_movimento === 0.0 || $this->e446_movimento == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_movimento"]:$this->e446_movimento);
        $this->e446_tipodiaria = ($this->e446_tipodiaria == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_tipodiaria"]:$this->e446_tipodiaria);
      }else{
-       $this->e446_sequencial = ($this->e446_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_sequencial"]:$this->e446_sequencial);
+       $this->e446_sequencial = ($this->e446_sequencial === 0 || $this->e446_sequencial === 0.0 || $this->e446_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_sequencial"]:$this->e446_sequencial);
      }
    }
    // funcao para Inclusão
@@ -193,7 +193,7 @@ class cl_empprestaitemdiaria {
          $this->e446_sequencial = $e446_sequencial; 
        }
      }
-     if(($this->e446_sequencial == null) || ($this->e446_sequencial == "") ){ 
+     if(($this->e446_sequencial == null) || ($this->e446_sequencial === 0 || $this->e446_sequencial === 0.0 || $this->e446_sequencial == "") ){ 
        $this->erro_sql = " Campo e446_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

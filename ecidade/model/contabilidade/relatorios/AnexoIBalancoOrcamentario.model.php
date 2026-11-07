@@ -176,7 +176,7 @@ class AnexoIBalancoOrcamentario extends RelatoriosLegaisBase  {
    * Carrega os dados para emissão do relatório
    * @return array
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     parent::getDados();
     $aReservaRPPS        = array();

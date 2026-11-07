@@ -41,7 +41,8 @@ $clempagetipo  = new cl_empagetipo;
 
 include(modification("dbforms/db_classesgenericas.php"));
 $cliframe_seleciona = new cl_iframe_seleciona;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $clrotulo = new rotulocampo;
@@ -284,11 +285,11 @@ for($i=0; $i<$numrows; $i++){
   //- ($tot_valor - $e81_valor);
   
   $x= "disponivel_$e50_codord";
-  $$x = number_format($disponivel,"2",".","");
+  ${$x} = number_format($disponivel,"2",".","");
   
   $x= "valor_$e50_codord";
-  $$x = number_format($disponivel,"2",".","");
-  if($$x==0){
+  ${$x} = number_format($disponivel,"2",".","");
+  if(${$x}==0){
     continue;
   }
   

@@ -58,7 +58,7 @@ class cl_caitransflanc {
                  k93_finalidade = text = Finalidade 
                  ";
    //funcao construtor da classe 
-   function cl_caitransflanc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("caitransflanc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_caitransflanc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k93_transf = ($this->k93_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_transf"]:$this->k93_transf);
-       $this->k93_sequen = ($this->k93_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_sequen"]:$this->k93_sequen);
-       $this->k93_instit = ($this->k93_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_instit"]:$this->k93_instit);
-       $this->k93_debito = ($this->k93_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_debito"]:$this->k93_debito);
-       $this->k93_credito = ($this->k93_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_credito"]:$this->k93_credito);
+       $this->k93_transf = ($this->k93_transf === 0 || $this->k93_transf === 0.0 || $this->k93_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_transf"]:$this->k93_transf);
+       $this->k93_sequen = ($this->k93_sequen === 0 || $this->k93_sequen === 0.0 || $this->k93_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_sequen"]:$this->k93_sequen);
+       $this->k93_instit = ($this->k93_instit === 0 || $this->k93_instit === 0.0 || $this->k93_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_instit"]:$this->k93_instit);
+       $this->k93_debito = ($this->k93_debito === 0 || $this->k93_debito === 0.0 || $this->k93_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_debito"]:$this->k93_debito);
+       $this->k93_credito = ($this->k93_credito === 0 || $this->k93_credito === 0.0 || $this->k93_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_credito"]:$this->k93_credito);
        $this->k93_finalidade = ($this->k93_finalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_finalidade"]:$this->k93_finalidade);
      }else{
-       $this->k93_sequen = ($this->k93_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_sequen"]:$this->k93_sequen);
+       $this->k93_sequen = ($this->k93_sequen === 0 || $this->k93_sequen === 0.0 || $this->k93_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_sequen"]:$this->k93_sequen);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_caitransflanc {
          $this->k93_sequen = $k93_sequen; 
        }
      }
-     if(($this->k93_sequen == null) || ($this->k93_sequen == "") ){ 
+     if(($this->k93_sequen == null) || ($this->k93_sequen === 0 || $this->k93_sequen === 0.0 || $this->k93_sequen == "") ){ 
        $this->erro_sql = " Campo k93_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -452,7 +452,7 @@ class cl_caitransflanc {
    function sql_query ( $k93_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -476,7 +476,7 @@ class cl_caitransflanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_caitransflanc {
    function sql_query_file ( $k93_sequen=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_caitransflanc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

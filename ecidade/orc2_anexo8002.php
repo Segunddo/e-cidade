@@ -31,17 +31,18 @@ include modification('libs/db_sql.php');
 include modification('libs/db_liborcamento.php');
 include modification('dbforms/db_funcoes.php');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $classinatura = new cl_assinatura();
 
-$xinstit = split('-', $db_selinstit);
+$xinstit = preg_split('#\-#m', $db_selinstit);
 $sSql = 'select codigo,nomeinstabrev from db_config where codigo in ('.str_replace('-', ', ', $db_selinstit).') ';
 $resultinst = db_query($sSql);
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_numrows($resultinst); ++$xins) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); ++$xins) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg.$nomeinstabrev;
     $xvirg = ', ';
@@ -84,12 +85,12 @@ for ($xins = 0; $xins < pg_numrows($resultinst); ++$xins) {
                                 o58_elemento varchar(255),
                                 o58_codigo int8)');
 
-  $xcampos = split('-', $orgaos);
+  $xcampos = preg_split('#\-#m', $orgaos);
 
   for ($i = 0; $i < sizeof($xcampos); ++$i) {
       $where = '';
       $virgula = '';
-      $xxcampos = split('_', $xcampos[$i]);
+      $xxcampos = preg_split('#_#m', $xcampos[$i]);
       for ($ii = 0; $ii < sizeof($xxcampos); ++$ii) {
           if ($ii > 0) {
               $where .= $virgula.$xxcampos[$ii];
@@ -277,7 +278,7 @@ $totativo = 0;
 $totproju = 0;
 $totativu = 0;
 $pagina = 1;
-for ($i = 0; $i < pg_numrows($result); ++$i) {
+for ($i = 0; $i < ($result ? pg_numrows($result) : null); ++$i) {
     db_fieldsmemory($result, $i);
 
     if (empty($o58_funcao)) {

@@ -209,7 +209,7 @@ function geraTaxaBancaria( $oParametros ){
    */
   if($iLinhasTaxaBancaria > 1){
     $erro_msg = _M( MENSAGENS . "taxa_especifica_duplicada" );
-    break;
+    exit;
   }
 
   if ($iLinhasTaxaBancaria > 0) {
@@ -335,7 +335,7 @@ function geraTaxaBancaria( $oParametros ){
       $oDisBanco->incluir(null);
       if ($oDisBanco->erro_status == "0") {
         $erro_msg = $oDisBanco->erro_msg;
-        break;
+        exit;
       }
 
     }
@@ -854,7 +854,7 @@ if (isset($geradebcta)) {
                                                       end
                                                   ");
             if ($_debug) {
-              
+
               echo "  >>  passo 3 <br>";
               flush();
               // if ($i == 40) {

@@ -37,13 +37,13 @@ $oJson          = new services_json();
 $aListaTipos    = $oJson->decode(str_replace("\\", "", $aListaTipo));
 $aListaDeptos   = $oJson->decode(str_replace("\\", "", $aListaDepartamentos));
 $sDepartamentos = "";
-if (count($aListaDeptos) > 0) {
+if (count((array)$aListaDeptos) > 0) {
   foreach ($aListaDeptos as $iDepto) {
     $sDepartamentos .= "{$iDepto},";
   }
   $sDepartamentos = substr($sDepartamentos, 0, -1);
 }
-$iNroLista      = count($aListaTipos);
+$iNroLista      = count((array)$aListaTipos);
 $sWhereTipo     = "";
 $sCamposTipo    = "";
 
@@ -117,23 +117,23 @@ for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
   $xvirg = ', ';
 }
 
-if ( $nivel{0} == "1" ) {
+if ( $nivel[0] == "1" ) {
 	$sDescricaoNivel = "Orgão";
-} else if ($nivel{0} == "2" ) {
+} else if ($nivel[0] == "2" ) {
 	$sDescricaoNivel = "Orgão/Unidade";
-} else if ($nivel{0} == "3" ) {
+} else if ($nivel[0] == "3" ) {
   $sDescricaoNivel = "Função";
-} else if ($nivel{0} == "4" ) {
+} else if ($nivel[0] == "4" ) {
   $sDescricaoNivel = "Subfunção";
-} else if ($nivel{0} == "5" ) {
+} else if ($nivel[0] == "5" ) {
   $sDescricaoNivel = "Programa";
-} else if ($nivel{0} == "6" ) {
+} else if ($nivel[0] == "6" ) {
   $sDescricaoNivel = "Projeto/Atividade";
-} else if ($nivel{0} == "7" ) {
+} else if ($nivel[0] == "7" ) {
   $sDescricaoNivel = "Elemento";
-} else if ($nivel{0} == "8" ) {
+} else if ($nivel[0] == "8" ) {
   $sDescricaoNivel = "Recurso";
-} else if ($nivel{0} == "9" ) {
+} else if ($nivel[0] == "9" ) {
   $sDescricaoNivel = "Desdobramento";
 }
 
@@ -149,7 +149,7 @@ $sCampos .= "e.o56_elemento,e.o56_descr,";
 $sCampos .= "w.o58_codigo, w.o58_coddot, r.o15_recurso,o15_descr";
 $sCampos .= "";
 
-if ( $nivel{0} == 9 ) {
+if ( $nivel[0] == 9 ) {
 
 	$sCamposDesd  = " case                                                        ";
 	$sCamposDesd .=	"   when dsol.o56_elemento is not null then dsol.o56_elemento ";
@@ -235,7 +235,7 @@ $sql .= " order by tiporeserva,{$sCampos} ";
 
 
 $rsDadosReserva = db_query($sql);
-$iNroReserva    = pg_num_rows($rsDadosReserva);
+$iNroReserva    = ($rsDadosReserva ? pg_num_rows($rsDadosReserva) : null);
 
 if( $iNroReserva == 0 ){
   db_redireciona("db_erros.php?fechar&db_erro=Não existem reserva de saldo para listar.");
@@ -309,7 +309,7 @@ $head1 = "RELATORIO DE RESERVA DE SALDO";
 $head2 = "EXERCÍCIO : ".db_getsession("DB_anousu");
 $head3 = "INSTITUIÇÕES : ".$descr_inst;
 $head4 = "POSIÇÃO ATÉ : ".$data_fin;
-$head5 = "NIVEL : ".($nivel{1}=="A"?"Até ":"").$sDescricaoNivel;
+$head5 = "NIVEL : ".($nivel[1]=="A"?"Até ":"").$sDescricaoNivel;
 
 $pdf = new PDF();
 $pdf->Open();
@@ -319,7 +319,7 @@ $pdf->setfillcolor(235);
 $pdf->setfont('arial','b',8);
 $alt = 4;
 
-if ( $nivel{1} == 'A') {
+if ( $nivel[1] == 'A') {
 
 
 	foreach ( $aNivel as $sTipoReserva => $aDados) {
@@ -330,35 +330,35 @@ if ( $nivel{1} == 'A') {
 	  $nValorTotalNivel   = 0;
 
 	  foreach ($aDados as $sOrgao => $aDadosOrgao) {
-	  	if ( $nivel{0} >= 1 ) {
+	  	if ( $nivel[0] >= 1 ) {
         $pdf->cell(0,$alt,$sOrgao,0,1,"L",0);
 	  	}
 	    foreach ($aDadosOrgao as $sUnidade => $aDadosUnidade) {
-	    	if ( $nivel{0} >= 2 ) {
+	    	if ( $nivel[0] >= 2 ) {
           $pdf->cell(0,$alt,$sUnidade,0,1,"L",0);
 	    	}
 	      foreach ($aDadosUnidade as $sFuncao => $aDadosFuncao) {
-	      	if ( $nivel{0} >= 3 ) {
+	      	if ( $nivel[0] >= 3 ) {
             $pdf->cell(0,$alt,$sFuncao,0,1,"L",0);
 	      	}
 	        foreach ($aDadosFuncao as $sSubFuncao => $aDadosSubFuncao) {
-	        	if ( $nivel{0} >= 4 ) {
+	        	if ( $nivel[0] >= 4 ) {
               $pdf->cell(0,$alt,$sSubFuncao,0,1,"L",0);
 	        	}
 	          foreach ($aDadosSubFuncao as $sPrograma => $aDadosPrograma) {
-	          	if ( $nivel{0} >= 5 ) {
+	          	if ( $nivel[0] >= 5 ) {
 	          	  $pdf->cell(0,$alt,$sPrograma,0,1,"L",0);
 	          	}
 	            foreach ($aDadosPrograma as $sProjAtiv => $aDadosProjAtiv) {
-	            	if ( $nivel{0} >= 6 ) {
+	            	if ( $nivel[0] >= 6 ) {
 	            	  $pdf->cell(0,$alt,$sProjAtiv,0,1,"L",0);
 	            	}
 	              foreach ($aDadosProjAtiv as $sElemento => $aDadosElemento) {
-	              	if ( $nivel{0} >= 7 ) {
+	              	if ( $nivel[0] >= 7 ) {
 	              	  $pdf->cell(0,$alt,$sElemento,0,1,"L",0);
 	              	}
 	                foreach ($aDadosElemento as $sRecurso => $aDadosRecursos) {
-         	          if ( $nivel{0} >= 8 ) {
+         	          if ( $nivel[0] >= 8 ) {
 	                	  $pdf->cell(0,$alt,$sRecurso,0,1,"L",0);
          	          }
 	                  foreach ($aDadosRecursos['aReservas'] as $iCodReserva => $aReserva) {
@@ -385,28 +385,28 @@ if ( $nivel{1} == 'A') {
 	                    $nValorTotalReserva += $nValor;
 
 	                  }
-	                  imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL RECURSO",$nivel{0},8);
+	                  imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL RECURSO",$nivel[0],8);
 	                }
-	                imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL ELEMENTO",$nivel{0},7);
+	                imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL ELEMENTO",$nivel[0],7);
 	              }
-	              imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL ATIVIDADE",$nivel{0},6);
+	              imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL ATIVIDADE",$nivel[0],6);
 	            }
-	            imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL PROGRAMA",$nivel{0},5);
+	            imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL PROGRAMA",$nivel[0],5);
 	          }
-	          imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL SUBFUNÇÃO",$nivel{0},4);
+	          imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL SUBFUNÇÃO",$nivel[0],4);
 	        }
-	        imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL FUNÇÃO",$nivel{0},3);
+	        imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL FUNÇÃO",$nivel[0],3);
 	      }
-	      imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL UNIDADE",$nivel{0},2);
+	      imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL UNIDADE",$nivel[0],2);
 	    }
-	    imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL ORGÃO",$nivel{0},1);
+	    imprimeTotal($pdf,$alt,$nValorTotalNivel,"TOTAL ORGÃO",$nivel[0],1);
 	  }
 	  imprimeTotal($pdf,$alt,$nValorTotalReserva,"TOTAL TIPO RESERVA",0,0);
 	}
 
 } else {
 
-	foreach ($aNivelUnico[$nivel{0}] as $sTipoReserva => $aDadosNivel ) {
+	foreach ($aNivelUnico[$nivel[0]] as $sTipoReserva => $aDadosNivel ) {
 
 		$pdf->setfont('arial','b',8);
 		$pdf->Ln(3);

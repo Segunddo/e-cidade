@@ -33,7 +33,8 @@ include(modification("libs/db_liborcamento.php"));
 include(modification("classes/db_orcprevrec_classe.php"));
 include(modification("classes/db_orcreceita_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clorcprevrec = new cl_orcprevrec;
 $clorcreceita = new cl_orcreceita;
@@ -122,10 +123,10 @@ if(isset($receita) && trim($receita) != ""){
 		for($i=0; $i<6; $i++){
       $bloquear = 3;
       $campo    = 'o34_valor_'.$arr_meses[($i+1)];
-      $$campo   = "0.00";
+      ${$campo}   = "0.00";
       if(($i+1) > ($bimestre) - 2){
       	$bloquear = 1;
-      	$$campo   = trim(db_formatar($saldo_frente,"p"));
+      	${$campo}   = trim(db_formatar($saldo_frente,"p"));
       	if(!isset($campofok)){
       		$campofok = $campo;
       	}
@@ -134,9 +135,9 @@ if(isset($receita) && trim($receita) != ""){
 		  $numrows_novos = $clorcprevrec->numrows;
 		  if($numrows_novos > 0){
 		  	db_fieldsmemory($result_valor, 0);
-		  	$$campo = $o34_valor;
+		  	${$campo} = $o34_valor;
 		  }
-		  $arr_valin[$i] = $$campo;
+		  $arr_valin[$i] = ${$campo};
 			?>
 			<td align="center">
 			  <?
@@ -176,11 +177,11 @@ if(isset($receita) && trim($receita) != ""){
 		for($i=6; $i<12; $i++){
       $bloquear = 3;
       $campo    = 'o34_valor_'.$arr_meses[($i+1)];
-      $$campo   = "0.00";
+      ${$campo}   = "0.00";
 			$campoblr = "onchange='js_alteravalor(\"".$campo."\");'";
       if((($i+1) > ($bimestre) - 2) && ($i+1) < 12){
       	$bloquear = 1;
-      	$$campo   = trim(db_formatar($saldo_frente,"p"));
+      	${$campo}   = trim(db_formatar($saldo_frente,"p"));
       	if(!isset($campofok)){
       		$campofok = $campo;
       	}
@@ -188,7 +189,7 @@ if(isset($receita) && trim($receita) != ""){
       	  $campoblr.= " onblur='parent.js_setarfoco(2);' ";
       	}
       }else if(($i+1) == 12){
-      	$$campo   = trim(db_formatar($saldo_ultimo,"p"));
+      	${$campo}   = trim(db_formatar($saldo_ultimo,"p"));
       	if(!isset($campofok)){
       		$campofok = $campo;
       	}
@@ -197,9 +198,9 @@ if(isset($receita) && trim($receita) != ""){
 		  $numrows_novos = $clorcprevrec->numrows;
 		  if($numrows_novos > 0){
 		  	db_fieldsmemory($result_valor, 0);
-		  	$$campo = $o34_valor;
+		  	${$campo} = $o34_valor;
 		  }
-		  $arr_valin[$i] = $$campo;
+		  $arr_valin[$i] = ${$campo};
 			?>
 			<td align="center">
 			  <?
@@ -238,7 +239,7 @@ function js_valorinicial(campo){
 	x = document.form1;
 	arr = new Array();
 	<?
-	for($i=0; $i<count($arr_valin); $i++){
+	for($i=0; $i<count((array)$arr_valin); $i++){
     echo "  arr[".$i."] = ".$arr_valin[$i].";\n";
 	}
 	?>

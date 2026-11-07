@@ -116,7 +116,7 @@ if (1==0) {
 
   $resultarretipo = pg_query($sqlarretipo);
 
-  if(pg_numrows($resultarretipo) > 0) {
+  if(($resultarretipo ? pg_numrows($resultarretipo) : null) > 0) {
     db_fieldsmemory($resultarretipo, 0);
   } else {
     $k00_tipoagrup = 0;

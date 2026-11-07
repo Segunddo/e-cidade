@@ -31,7 +31,8 @@ require_once(modification("libs/db_sql.php"));
 require_once(modification("libs/db_liborcamento.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $classinatura = new cl_assinatura;
@@ -43,11 +44,11 @@ elseif(substr($nivel,0,1) == '1')
 elseif(substr($nivel,0,1) == '2')
   $tipo_agrupa = 3;
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
       $descr_inst .= $xvirg.$nomeinstabrev ;
         $xvirg = ', ';
@@ -100,14 +101,14 @@ if($tipo_agrupa==1){
 
 $result = db_query($sql);
 
-$xcampos = split("-",$orgaos);
+$xcampos = preg_split("#\\-#m",$orgaos);
 
 $virgula = '';
 $tem_orgao = 0;
 $where_orgao = " o58_orgao in (";
 if (substr($nivel,0,1)!=7)
 for($i=0;$i < sizeof($xcampos);$i++){
-   $xxcampos = split("_",$xcampos[$i]);
+   $xxcampos = preg_split("#_#m",$xcampos[$i]);
    if (!isset($xxcampos["1"])) continue;
    $where_orgao .= $virgula.$xxcampos["1"];
    $virgula = ', ';
@@ -120,7 +121,7 @@ $tem_unidade = 0;
 $where_unidade = " o58_unidade in (";
 if (substr($nivel,0,1)!=7)
 for($i=0;$i < sizeof($xcampos);$i++){
-   $xxcampos = split("_",$xcampos[$i]);
+   $xxcampos = preg_split("#_#m",$xcampos[$i]);
    if (!isset($xxcampos["2"])) continue;
    $where_unidade .= $virgula.$xxcampos["2"];
    $virgula = ', ';
@@ -133,7 +134,7 @@ $tem_elemento =0;
 $where_elemento = " cast(o56_elemento as bigint) in (";
 if (substr($nivel,0,1)=="7")
 for($i=0;$i < sizeof($xcampos);$i++){
-   $xxcampos = split("_",$xcampos[$i]);
+   $xxcampos = preg_split("#_#m",$xcampos[$i]);
    if (!isset($xxcampos["1"])) continue;
    $where_elemento .= $virgula.$xxcampos["1"];
    $virgula = ', ';
@@ -159,7 +160,7 @@ $result_rec = db_dotacaosaldo(7,2,3,true,$where,$anousu,$dataini,$datafin,null,n
 
 $valor = 0;
 
-for($i=0;$i<pg_numrows($result_rec);$i++){
+for($i=0;$i<($result_rec ? pg_numrows($result_rec) : null);$i++){
   db_fieldsmemory($result_rec,$i);
 
   if($tipo_balanco == 2){
@@ -223,14 +224,14 @@ $result = db_query($sql);
 $pagina = 1;
 $valorx = 0;
 $totalvalorx = 0;
-$qorgao = pg_result($result,0,'orgao');
-$qunidade = pg_result($result,0,'unidade');
+$qorgao = ($result ? pg_result($result,0,'orgao') : null);
+$qunidade = ($result ? pg_result($result,0,'unidade') : null);
 $qualou = $qorgao.$qunidade;
 $totproj  = 0;
 $totativ  = 0;
 $totoper  = 0;
 
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   if($valor == 0)
     continue;

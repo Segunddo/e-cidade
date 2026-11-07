@@ -42,7 +42,7 @@ class cl_teto_orcamentario {
                  c40_valor_disponivel = float8 = Valos Disponível 
                  ";
    //funcao construtor da classe 
-   function cl_teto_orcamentario() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("teto_orcamentario"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -59,19 +59,19 @@ class cl_teto_orcamentario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c40_sequencial = ($this->c40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_sequencial"]:$this->c40_sequencial);
-       $this->c40_ano = ($this->c40_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_ano"]:$this->c40_ano);
-       $this->c40_orgao = ($this->c40_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_orgao"]:$this->c40_orgao);
-       $this->c40_unidade = ($this->c40_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_unidade"]:$this->c40_unidade);
-       $this->c40_grupo_natureza_despesa = ($this->c40_grupo_natureza_despesa == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_grupo_natureza_despesa"]:$this->c40_grupo_natureza_despesa);
-       $this->c40_identificador_uso = ($this->c40_identificador_uso == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_identificador_uso"]:$this->c40_identificador_uso);
+       $this->c40_sequencial = ($this->c40_sequencial === 0 || $this->c40_sequencial === 0.0 || $this->c40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_sequencial"]:$this->c40_sequencial);
+       $this->c40_ano = ($this->c40_ano === 0 || $this->c40_ano === 0.0 || $this->c40_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_ano"]:$this->c40_ano);
+       $this->c40_orgao = ($this->c40_orgao === 0 || $this->c40_orgao === 0.0 || $this->c40_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_orgao"]:$this->c40_orgao);
+       $this->c40_unidade = ($this->c40_unidade === 0 || $this->c40_unidade === 0.0 || $this->c40_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_unidade"]:$this->c40_unidade);
+       $this->c40_grupo_natureza_despesa = ($this->c40_grupo_natureza_despesa === 0 || $this->c40_grupo_natureza_despesa === 0.0 || $this->c40_grupo_natureza_despesa == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_grupo_natureza_despesa"]:$this->c40_grupo_natureza_despesa);
+       $this->c40_identificador_uso = ($this->c40_identificador_uso === 0 || $this->c40_identificador_uso === 0.0 || $this->c40_identificador_uso == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_identificador_uso"]:$this->c40_identificador_uso);
        $this->c40_tipo_detalhamento = ($this->c40_tipo_detalhamento == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_tipo_detalhamento"]:$this->c40_tipo_detalhamento);
        $this->c40_grupo_fonte_recursos = ($this->c40_grupo_fonte_recursos == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_grupo_fonte_recursos"]:$this->c40_grupo_fonte_recursos);
        $this->c40_especificacao_fonte = ($this->c40_especificacao_fonte == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_especificacao_fonte"]:$this->c40_especificacao_fonte);
-       $this->c40_valor_teto = ($this->c40_valor_teto == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_valor_teto"]:$this->c40_valor_teto);
-       $this->c40_valor_disponivel = ($this->c40_valor_disponivel == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_valor_disponivel"]:$this->c40_valor_disponivel);
+       $this->c40_valor_teto = ($this->c40_valor_teto === 0 || $this->c40_valor_teto === 0.0 || $this->c40_valor_teto == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_valor_teto"]:$this->c40_valor_teto);
+       $this->c40_valor_disponivel = ($this->c40_valor_disponivel === 0 || $this->c40_valor_disponivel === 0.0 || $this->c40_valor_disponivel == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_valor_disponivel"]:$this->c40_valor_disponivel);
      }else{
-       $this->c40_sequencial = ($this->c40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_sequencial"]:$this->c40_sequencial);
+       $this->c40_sequencial = ($this->c40_sequencial === 0 || $this->c40_sequencial === 0.0 || $this->c40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c40_sequencial"]:$this->c40_sequencial);
      }
    }
    // funcao para Inclusão
@@ -191,7 +191,7 @@ class cl_teto_orcamentario {
          $this->c40_sequencial = $c40_sequencial; 
        }
      }
-     if(($this->c40_sequencial == null) || ($this->c40_sequencial == "") ){ 
+     if(($this->c40_sequencial == null) || ($this->c40_sequencial === 0 || $this->c40_sequencial === 0.0 || $this->c40_sequencial == "") ){ 
        $this->erro_sql = " Campo c40_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

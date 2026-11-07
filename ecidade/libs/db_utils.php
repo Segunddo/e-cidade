@@ -328,7 +328,7 @@ class db_utils
     public static function makeCollectionFromRecord($rsRecord, Closure $fRetorno)
     {
         $aRetorno = array();
-        $iTotalLinhas = pg_num_rows($rsRecord);
+        $iTotalLinhas = ($rsRecord ? pg_num_rows($rsRecord) : null);
 
         // Vou deixar só para questão de conferência.
         // $soma = 0;

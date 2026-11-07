@@ -47,7 +47,8 @@ require_once(modification("std/DBLargeObject.php"));
 require_once(modification("classes/db_db_certidaoweb_classe.php"));
 require_once(modification("model/configuracao/InstituicaoRepository.model.php"));
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 
 if (isset ($cadrecibo) && $cadrecibo == 't') {
 	require_once(modification('fpdf151/scpdf.php'));
@@ -157,7 +158,7 @@ try{
 
   if ($codproc != "") {
   	if (strpos($codproc, "/") > 0) {
-  		$codproc = split("\/", $codproc);
+  		$codproc = preg_split("#\\/#m", $codproc);
   		$exercicio = $codproc[1];
   		$codproc = $codproc[0];
   	} else {
@@ -613,7 +614,7 @@ try{
   	db_fieldsmemory($result_usu,0);
   }
     $data= date("Y-m-d",db_getsession("DB_datausu"));
-    $data=split('-',$data);
+    $data=preg_split('#\-#m',$data);
     $dia=$data[2];
     $mes=$data[1];
     $ano=$data[0];

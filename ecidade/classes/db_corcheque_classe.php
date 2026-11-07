@@ -72,7 +72,7 @@ class cl_corcheque {
                  k12_horainc = char(5) = Hora da Inclusão 
                  ";
    //funcao construtor da classe 
-   function cl_corcheque() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("corcheque"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,8 +89,8 @@ class cl_corcheque {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k12_codcorcheque = ($this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
-       $this->k12_banco = ($this->k12_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_banco"]:$this->k12_banco);
+       $this->k12_codcorcheque = ($this->k12_codcorcheque === 0 || $this->k12_codcorcheque === 0.0 || $this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
+       $this->k12_banco = ($this->k12_banco === 0 || $this->k12_banco === 0.0 || $this->k12_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_banco"]:$this->k12_banco);
        $this->k12_agencia = ($this->k12_agencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_agencia"]:$this->k12_agencia);
        $this->k12_nominal = ($this->k12_nominal == "f"?@$GLOBALS["HTTP_POST_VARS"]["k12_nominal"]:$this->k12_nominal);
        $this->k12_numero = ($this->k12_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numero"]:$this->k12_numero);
@@ -102,8 +102,8 @@ class cl_corcheque {
             $this->k12_dtcheque = $this->k12_dtcheque_ano."-".$this->k12_dtcheque_mes."-".$this->k12_dtcheque_dia;
          }
        }
-       $this->k12_vlrcheque = ($this->k12_vlrcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_vlrcheque"]:$this->k12_vlrcheque);
-       $this->k12_usuario = ($this->k12_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_usuario"]:$this->k12_usuario);
+       $this->k12_vlrcheque = ($this->k12_vlrcheque === 0 || $this->k12_vlrcheque === 0.0 || $this->k12_vlrcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_vlrcheque"]:$this->k12_vlrcheque);
+       $this->k12_usuario = ($this->k12_usuario === 0 || $this->k12_usuario === 0.0 || $this->k12_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_usuario"]:$this->k12_usuario);
        if($this->k12_dtinc == ""){
          $this->k12_dtinc_dia = ($this->k12_dtinc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_dtinc_dia"]:$this->k12_dtinc_dia);
          $this->k12_dtinc_mes = ($this->k12_dtinc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_dtinc_mes"]:$this->k12_dtinc_mes);
@@ -114,7 +114,7 @@ class cl_corcheque {
        }
        $this->k12_horainc = ($this->k12_horainc == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_horainc"]:$this->k12_horainc);
      }else{
-       $this->k12_codcorcheque = ($this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
+       $this->k12_codcorcheque = ($this->k12_codcorcheque === 0 || $this->k12_codcorcheque === 0.0 || $this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
      }
    }
    // funcao para inclusao
@@ -225,7 +225,7 @@ class cl_corcheque {
          $this->k12_codcorcheque = $k12_codcorcheque; 
        }
      }
-     if(($this->k12_codcorcheque == null) || ($this->k12_codcorcheque == "") ){ 
+     if(($this->k12_codcorcheque == null) || ($this->k12_codcorcheque === 0 || $this->k12_codcorcheque === 0.0 || $this->k12_codcorcheque == "") ){ 
        $this->erro_sql = " Campo k12_codcorcheque nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -624,7 +624,7 @@ class cl_corcheque {
    function sql_query ( $k12_codcorcheque=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -647,7 +647,7 @@ class cl_corcheque {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -659,7 +659,7 @@ class cl_corcheque {
    function sql_query_file ( $k12_codcorcheque=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -680,7 +680,7 @@ class cl_corcheque {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -295,7 +295,7 @@ class AjustePrevidencia
 
         global $tipo_arquivo;
         global $previden, $inssirf, $Iinssirf, $previden_, $campos_pessoal, $opcao_geral, $db21_codcli, $subpes, $perc_inss, $opcao_tipo;
-        global $$arquivo, $cfpess, $pessoal, $db_debug;
+        global ${$arquivo}, $cfpess, $pessoal, $db_debug;
         global $anousu, $mesusu, $DB_instit, $F023, $F019;
 
         $aMatriculas = array();
@@ -802,7 +802,7 @@ class AjustePrevidencia
 
                                 LogCalculoFolha::write("Não eh que existe!!!");
 
-                                $arq_ = $$arquivo;
+                                $arq_ = ${$arquivo};
 
                                 LogCalculoFolha::write("Diferença no Ajuste....: {$ajusta_dif}");
                                 LogCalculoFolha::write("Atingiu o teto..........: " . ($atingiu_o_teto_tbprev ? "Sim" : "Não"));
@@ -903,7 +903,7 @@ class AjustePrevidencia
                             //echo "<BR> select * from ".$arquivo." ".bb_condicaosubpes($sigla_ajuste ).$condicaoaux ;
                             if (db_selectmax($arquivo,
                               "select * from " . $arquivo . " " . bb_condicaosubpes($sigla_ajuste) . $condicaoaux)) {
-                                $arq_ = $$arquivo;
+                                $arq_ = ${$arquivo};
                                 if ($mat_r60_novods[$nro] > 0) {
                                     $matriz1 = array();
                                     $matriz2 = array();
@@ -979,7 +979,7 @@ class AjustePrevidencia
                         $condicaoaux = " and " . $sigla_ajuste . "regist = " . db_sqlformat($mat_r60_regist[$nro]);
                         db_selectmax($arquivo,
                           "select * from " . $arquivo . " " . bb_condicaosubpes($sigla_ajuste) . $condicaoaux);
-                        $arq_ = $$arquivo;
+                        $arq_ = ${$arquivo};
                         for ($Iarquivo = 0; $Iarquivo < count($arq_); $Iarquivo++) {
                             if (substr("#" . $arq_[$Iarquivo][$sigla_ajuste . "rubric"], 1, 1) != "R") {
                                 if ($db21_codcli == "999999999" && $arq_[$Iarquivo][$sigla_ajuste . "rubric"] == "0045") {

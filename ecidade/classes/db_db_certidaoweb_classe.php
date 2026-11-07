@@ -74,7 +74,7 @@ class cl_db_certidaoweb {
                  cerhtml = text = Certidão HTML 
                  ";
    //funcao construtor da classe 
-   function cl_db_certidaoweb() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_certidaoweb"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,7 +92,7 @@ class cl_db_certidaoweb {
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->codcert = ($this->codcert == ""?@$GLOBALS["HTTP_POST_VARS"]["codcert"]:$this->codcert);
-       $this->tipocer = ($this->tipocer == ""?@$GLOBALS["HTTP_POST_VARS"]["tipocer"]:$this->tipocer);
+       $this->tipocer = ($this->tipocer === 0 || $this->tipocer === 0.0 || $this->tipocer == ""?@$GLOBALS["HTTP_POST_VARS"]["tipocer"]:$this->tipocer);
        if($this->cerdtemite == ""){
          $this->cerdtemite_dia = ($this->cerdtemite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cerdtemite_dia"]:$this->cerdtemite_dia);
          $this->cerdtemite_mes = ($this->cerdtemite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cerdtemite_mes"]:$this->cerdtemite_mes);
@@ -112,7 +112,7 @@ class cl_db_certidaoweb {
        }
        $this->cerip = ($this->cerip == ""?@$GLOBALS["HTTP_POST_VARS"]["cerip"]:$this->cerip);
        $this->ceracesso = ($this->ceracesso == ""?@$GLOBALS["HTTP_POST_VARS"]["ceracesso"]:$this->ceracesso);
-       $this->cercertidao = ($this->cercertidao == ""?@$GLOBALS["HTTP_POST_VARS"]["cercertidao"]:$this->cercertidao);
+       $this->cercertidao = ($this->cercertidao === 0 || $this->cercertidao === 0.0 || $this->cercertidao == ""?@$GLOBALS["HTTP_POST_VARS"]["cercertidao"]:$this->cercertidao);
        $this->cernomecontr = ($this->cernomecontr == ""?@$GLOBALS["HTTP_POST_VARS"]["cernomecontr"]:$this->cernomecontr);
        $this->cerweb = ($this->cerweb == "f"?@$GLOBALS["HTTP_POST_VARS"]["cerweb"]:$this->cerweb);
        $this->cerhtml = ($this->cerhtml == ""?@$GLOBALS["HTTP_POST_VARS"]["cerhtml"]:$this->cerhtml);

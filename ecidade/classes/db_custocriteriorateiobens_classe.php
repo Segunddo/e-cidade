@@ -54,7 +54,7 @@ class cl_custocriteriorateiobens {
                  cc06_ativo = bool = Ativo 
                  ";
    //funcao construtor da classe 
-   function cl_custocriteriorateiobens() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("custocriteriorateiobens"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_custocriteriorateiobens {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc06_sequencial = ($this->cc06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_sequencial"]:$this->cc06_sequencial);
-       $this->cc06_custoplanoanaliticabens = ($this->cc06_custoplanoanaliticabens == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_custoplanoanaliticabens"]:$this->cc06_custoplanoanaliticabens);
-       $this->cc06_custocriteriorateio = ($this->cc06_custocriteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_custocriteriorateio"]:$this->cc06_custocriteriorateio);
+       $this->cc06_sequencial = ($this->cc06_sequencial === 0 || $this->cc06_sequencial === 0.0 || $this->cc06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_sequencial"]:$this->cc06_sequencial);
+       $this->cc06_custoplanoanaliticabens = ($this->cc06_custoplanoanaliticabens === 0 || $this->cc06_custoplanoanaliticabens === 0.0 || $this->cc06_custoplanoanaliticabens == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_custoplanoanaliticabens"]:$this->cc06_custoplanoanaliticabens);
+       $this->cc06_custocriteriorateio = ($this->cc06_custocriteriorateio === 0 || $this->cc06_custocriteriorateio === 0.0 || $this->cc06_custocriteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_custocriteriorateio"]:$this->cc06_custocriteriorateio);
        $this->cc06_ativo = ($this->cc06_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["cc06_ativo"]:$this->cc06_ativo);
      }else{
-       $this->cc06_sequencial = ($this->cc06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_sequencial"]:$this->cc06_sequencial);
+       $this->cc06_sequencial = ($this->cc06_sequencial === 0 || $this->cc06_sequencial === 0.0 || $this->cc06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_sequencial"]:$this->cc06_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_custocriteriorateiobens {
          $this->cc06_sequencial = $cc06_sequencial; 
        }
      }
-     if(($this->cc06_sequencial == null) || ($this->cc06_sequencial == "") ){ 
+     if(($this->cc06_sequencial == null) || ($this->cc06_sequencial === 0 || $this->cc06_sequencial === 0.0 || $this->cc06_sequencial == "") ){ 
        $this->erro_sql = " Campo cc06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_custocriteriorateiobens {
    function sql_query ( $cc06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_custocriteriorateiobens {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -431,7 +431,7 @@ class cl_custocriteriorateiobens {
    function sql_query_file ( $cc06_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -452,7 +452,7 @@ class cl_custocriteriorateiobens {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

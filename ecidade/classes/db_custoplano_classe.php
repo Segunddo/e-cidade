@@ -56,7 +56,7 @@ class cl_custoplano {
                  cc01_obs = text = Observação 
                  ";
    //funcao construtor da classe 
-   function cl_custoplano() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("custoplano"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_custoplano {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc01_sequencial = ($this->cc01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc01_sequencial"]:$this->cc01_sequencial);
-       $this->cc01_instit = ($this->cc01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["cc01_instit"]:$this->cc01_instit);
+       $this->cc01_sequencial = ($this->cc01_sequencial === 0 || $this->cc01_sequencial === 0.0 || $this->cc01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc01_sequencial"]:$this->cc01_sequencial);
+       $this->cc01_instit = ($this->cc01_instit === 0 || $this->cc01_instit === 0.0 || $this->cc01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["cc01_instit"]:$this->cc01_instit);
        $this->cc01_estrutural = ($this->cc01_estrutural == ""?@$GLOBALS["HTTP_POST_VARS"]["cc01_estrutural"]:$this->cc01_estrutural);
        $this->cc01_descricao = ($this->cc01_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc01_descricao"]:$this->cc01_descricao);
        $this->cc01_obs = ($this->cc01_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["cc01_obs"]:$this->cc01_obs);
      }else{
-       $this->cc01_sequencial = ($this->cc01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc01_sequencial"]:$this->cc01_sequencial);
+       $this->cc01_sequencial = ($this->cc01_sequencial === 0 || $this->cc01_sequencial === 0.0 || $this->cc01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc01_sequencial"]:$this->cc01_sequencial);
      }
    }
    // funcao para inclusao
@@ -137,7 +137,7 @@ class cl_custoplano {
          $this->cc01_sequencial = $cc01_sequencial; 
        }
      }
-     if(($this->cc01_sequencial == null) || ($this->cc01_sequencial == "") ){ 
+     if(($this->cc01_sequencial == null) || ($this->cc01_sequencial === 0 || $this->cc01_sequencial === 0.0 || $this->cc01_sequencial == "") ){ 
        $this->erro_sql = " Campo cc01_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -407,7 +407,7 @@ class cl_custoplano {
    function sql_query ( $cc01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_custoplano {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_custoplano {
    function sql_query_file ( $cc01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -464,7 +464,7 @@ class cl_custoplano {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_custoplano {
   function sql_query_analitica ( $cc01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -503,7 +503,7 @@ class cl_custoplano {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

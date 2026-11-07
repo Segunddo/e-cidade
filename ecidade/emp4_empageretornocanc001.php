@@ -52,13 +52,14 @@ $clempagedadosretmov = new cl_empagedadosretmov;
 $clerrobanco         = new cl_errobanco;
 $clempord            = new cl_empord;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 if(isset($atualizar)){
   db_inicio_transacao();
   $sqlerro=false;
-  $arr =  split(",",$movs);
+  $arr =  preg_split("#,#m",$movs);
   for($mi=0;$mi<sizeof($arr);$mi++){
     $movimento = $arr[$mi];
     if($sqlerro==false){

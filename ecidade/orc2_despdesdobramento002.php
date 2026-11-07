@@ -59,7 +59,7 @@ $head3 = "Período selecionado: $d1 à $d2  ";
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in $instits");
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
   db_fieldsmemory($resultinst,$xins);
   $descr_inst .= $xvirg.$nomeinstabrev ; 
   $xvirg = ', ';
@@ -76,7 +76,7 @@ if ($w_elemento !=""){
 //echo $cldesdobramento->sql($sele_work,$dtini,$dtfim,$instits);    
     
 $result = db_query($cldesdobramento->sql($sele_work,$dtini,$dtfim,$instits));
-$rows = pg_numrows($result);
+$rows = ($result ? pg_numrows($result) : null);
 //  db_criatabela($result);exit;
  /*
  if (pg_numrows($result)>0){

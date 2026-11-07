@@ -26,7 +26,7 @@ class cl_bancoagenciaendereco {
                  db92_endereco = int4 = Endereço da Agencia 
                  ";
    //funcao construtor da classe 
-   function cl_bancoagenciaendereco() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("bancoagenciaendereco"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_bancoagenciaendereco {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db92_sequencial = ($this->db92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_sequencial"]:$this->db92_sequencial);
-       $this->db92_bancoagencia = ($this->db92_bancoagencia == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_bancoagencia"]:$this->db92_bancoagencia);
-       $this->db92_endereco = ($this->db92_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_endereco"]:$this->db92_endereco);
+       $this->db92_sequencial = ($this->db92_sequencial === 0 || $this->db92_sequencial === 0.0 || $this->db92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_sequencial"]:$this->db92_sequencial);
+       $this->db92_bancoagencia = ($this->db92_bancoagencia === 0 || $this->db92_bancoagencia === 0.0 || $this->db92_bancoagencia == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_bancoagencia"]:$this->db92_bancoagencia);
+       $this->db92_endereco = ($this->db92_endereco === 0 || $this->db92_endereco === 0.0 || $this->db92_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_endereco"]:$this->db92_endereco);
      }else{
-       $this->db92_sequencial = ($this->db92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_sequencial"]:$this->db92_sequencial);
+       $this->db92_sequencial = ($this->db92_sequencial === 0 || $this->db92_sequencial === 0.0 || $this->db92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_sequencial"]:$this->db92_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_bancoagenciaendereco {
          $this->db92_sequencial = $db92_sequencial; 
        }
      }
-     if(($this->db92_sequencial == null) || ($this->db92_sequencial == "") ){ 
+     if(($this->db92_sequencial == null) || ($this->db92_sequencial === 0 || $this->db92_sequencial === 0.0 || $this->db92_sequencial == "") ){ 
        $this->erro_sql = " Campo db92_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -356,7 +356,7 @@ class cl_bancoagenciaendereco {
    function sql_query ( $db92_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_bancoagenciaendereco {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_bancoagenciaendereco {
    function sql_query_file ( $db92_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_bancoagenciaendereco {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

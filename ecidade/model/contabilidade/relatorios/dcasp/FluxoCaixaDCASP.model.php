@@ -43,7 +43,7 @@ final class FluxoCaixaDCASP extends RelatoriosLegaisBase {
    * Retorna os Dados para emissão do Relatório
    * @return array
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $sWhereReceita = " o70_instit in ({$this->getInstituicoes()}) ";
     $sWhereDespesa = " o58_instit in ({$this->getInstituicoes()}) ";

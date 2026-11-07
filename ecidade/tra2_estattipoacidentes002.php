@@ -43,8 +43,8 @@
           from   tipo_acidentes
           order by tr01_id";
  $rs1 = db_query($sql1);
- $num_rows = pg_num_rows($rs1) + 2;
- while ($ln1 = pg_fetch_array($rs1)){
+ $num_rows = ($rs1 ? pg_num_rows($rs1) : null) + 2;
+ while ($ln1 = ($rs1 ? pg_fetch_array($rs1) : null)){
     $pdf->setx(10);
     $pdf->cell(50,5,$ln1["tr01_descr"],1,0,"L");
     $pdf->cell(25,5,$ln1["tr01_sigla"],1,1,"C");
@@ -64,8 +64,8 @@
               group by tr07_tipoacid";
          // echo $sql2;exit;
           $rs2      = db_query($sql2);
-          $numrows2 = pg_num_rows($rs2);
-          $ln       = pg_fetch_array($rs2);
+          $numrows2 = ($rs2 ? pg_num_rows($rs2) : null);
+          $ln       = ($rs2 ? pg_fetch_array($rs2) : null);
           $sum      +=  $ln["quantidade"];
           if ($numrows2 > 0){
               $pdf->cell(10,5,$ln["quantidade"],1,1,"C");

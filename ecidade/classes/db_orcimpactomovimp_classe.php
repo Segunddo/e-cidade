@@ -50,7 +50,7 @@ class cl_orcimpactomovimp {
                  o68_codimp = int4 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_orcimpactomovimp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcimpactomovimp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_orcimpactomovimp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o68_codimpmov = ($this->o68_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimpmov"]:$this->o68_codimpmov);
-       $this->o68_codimp = ($this->o68_codimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimp"]:$this->o68_codimp);
+       $this->o68_codimpmov = ($this->o68_codimpmov === 0 || $this->o68_codimpmov === 0.0 || $this->o68_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimpmov"]:$this->o68_codimpmov);
+       $this->o68_codimp = ($this->o68_codimp === 0 || $this->o68_codimp === 0.0 || $this->o68_codimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimp"]:$this->o68_codimp);
      }else{
-       $this->o68_codimpmov = ($this->o68_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimpmov"]:$this->o68_codimpmov);
-       $this->o68_codimp = ($this->o68_codimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimp"]:$this->o68_codimp);
+       $this->o68_codimpmov = ($this->o68_codimpmov === 0 || $this->o68_codimpmov === 0.0 || $this->o68_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimpmov"]:$this->o68_codimpmov);
+       $this->o68_codimp = ($this->o68_codimp === 0 || $this->o68_codimp === 0.0 || $this->o68_codimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimp"]:$this->o68_codimp);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_orcimpactomovimp {
       $this->atualizacampos();
        $this->o68_codimpmov = $o68_codimpmov; 
        $this->o68_codimp = $o68_codimp; 
-     if(($this->o68_codimpmov == null) || ($this->o68_codimpmov == "") ){ 
+     if(($this->o68_codimpmov == null) || ($this->o68_codimpmov === 0 || $this->o68_codimpmov === 0.0 || $this->o68_codimpmov == "") ){ 
        $this->erro_sql = " Campo o68_codimpmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_orcimpactomovimp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o68_codimp == null) || ($this->o68_codimp == "") ){ 
+     if(($this->o68_codimp == null) || ($this->o68_codimp === 0 || $this->o68_codimp === 0.0 || $this->o68_codimp == "") ){ 
        $this->erro_sql = " Campo o68_codimp nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -318,7 +318,7 @@ class cl_orcimpactomovimp {
    function sql_query ( $o68_codimpmov=null,$o68_codimp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_orcimpactomovimp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -378,7 +378,7 @@ class cl_orcimpactomovimp {
    function sql_query_file ( $o68_codimpmov=null,$o68_codimp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -407,7 +407,7 @@ class cl_orcimpactomovimp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_orcimpactomovimp {
    function sql_query_compl ( $o68_codimpmov=null,$o68_codimp=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -453,7 +453,7 @@ class cl_orcimpactomovimp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

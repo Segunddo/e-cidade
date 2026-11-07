@@ -65,7 +65,7 @@ class cl_cronogramaperspectiva {
                  o124_tipo = int4 = Tipo da Perspectiva
                  ";
    //funcao construtor da classe
-   function cl_cronogramaperspectiva() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cronogramaperspectiva");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -82,11 +82,11 @@ class cl_cronogramaperspectiva {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o124_sequencial = ($this->o124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_sequencial"]:$this->o124_sequencial);
-       $this->o124_ppaversao = ($this->o124_ppaversao == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_ppaversao"]:$this->o124_ppaversao);
+       $this->o124_sequencial = ($this->o124_sequencial === 0 || $this->o124_sequencial === 0.0 || $this->o124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_sequencial"]:$this->o124_sequencial);
+       $this->o124_ppaversao = ($this->o124_ppaversao === 0 || $this->o124_ppaversao === 0.0 || $this->o124_ppaversao == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_ppaversao"]:$this->o124_ppaversao);
        $this->o124_descricao = ($this->o124_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_descricao"]:$this->o124_descricao);
-       $this->o124_situacao = ($this->o124_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_situacao"]:$this->o124_situacao);
-       $this->o124_idusuario = ($this->o124_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_idusuario"]:$this->o124_idusuario);
+       $this->o124_situacao = ($this->o124_situacao === 0 || $this->o124_situacao === 0.0 || $this->o124_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_situacao"]:$this->o124_situacao);
+       $this->o124_idusuario = ($this->o124_idusuario === 0 || $this->o124_idusuario === 0.0 || $this->o124_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_idusuario"]:$this->o124_idusuario);
        if($this->o124_datacriacao == ""){
          $this->o124_datacriacao_dia = ($this->o124_datacriacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_datacriacao_dia"]:$this->o124_datacriacao_dia);
          $this->o124_datacriacao_mes = ($this->o124_datacriacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_datacriacao_mes"]:$this->o124_datacriacao_mes);
@@ -95,10 +95,10 @@ class cl_cronogramaperspectiva {
             $this->o124_datacriacao = $this->o124_datacriacao_ano."-".$this->o124_datacriacao_mes."-".$this->o124_datacriacao_dia;
          }
        }
-       $this->o124_ano = ($this->o124_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_ano"]:$this->o124_ano);
-       $this->o124_tipo = ($this->o124_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_tipo"]:$this->o124_tipo);
+       $this->o124_ano = ($this->o124_ano === 0 || $this->o124_ano === 0.0 || $this->o124_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_ano"]:$this->o124_ano);
+       $this->o124_tipo = ($this->o124_tipo === 0 || $this->o124_tipo === 0.0 || $this->o124_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_tipo"]:$this->o124_tipo);
      }else{
-       $this->o124_sequencial = ($this->o124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_sequencial"]:$this->o124_sequencial);
+       $this->o124_sequencial = ($this->o124_sequencial === 0 || $this->o124_sequencial === 0.0 || $this->o124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o124_sequencial"]:$this->o124_sequencial);
      }
    }
    // funcao para Inclusão
@@ -191,7 +191,7 @@ class cl_cronogramaperspectiva {
          $this->o124_sequencial = $o124_sequencial;
        }
      }
-     if(($this->o124_sequencial == null) || ($this->o124_sequencial == "") ){
+     if(($this->o124_sequencial == null) || ($this->o124_sequencial === 0 || $this->o124_sequencial === 0.0 || $this->o124_sequencial == "") ){
        $this->erro_sql = " Campo o124_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -602,7 +602,7 @@ class cl_cronogramaperspectiva {
   function sql_query_integracao ( $o124_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
     $sql = "select ";
     if($campos != "*" ){
-      $campos_sql = split("#",$campos);
+      $campos_sql = preg_split("#\\##m",$campos);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];
@@ -627,7 +627,7 @@ class cl_cronogramaperspectiva {
     $sql .= $sql2;
     if($ordem != null ){
       $sql .= " order by ";
-      $campos_sql = split("#",$ordem);
+      $campos_sql = preg_split("#\\##m",$ordem);
       $virgula = "";
       for($i=0;$i<sizeof($campos_sql);$i++){
         $sql .= $virgula.$campos_sql[$i];

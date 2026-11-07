@@ -36,7 +36,8 @@ include(modification("classes/db_orcimpactoperiodo_classe.php"));
 include(modification("classes/db_orcfontes_classe.php"));
 
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clorcimpactorecmov = new cl_orcimpactorecmov;
@@ -78,7 +79,7 @@ if(isset($incluir)){
       $sequen= $vt["o69_sequen_$ano"];
       $perc   = $vt["o69_perc_$ano"];
 
-       
+
      //------PEGA O CÓDIGO DA FONTE PELO ESTRUTURAL-------------------------------------------------
       $result = $clorcfontes->sql_record($clorcfontes->sql_query_file(null,null,"o57_codfon",'',"o57_fonte = '$fonte' and o57_anousu = ".db_getsession("DB_anousu")));
       if($clorcfontes->numrows==0){
@@ -89,7 +90,7 @@ if(isset($incluir)){
 	db_fieldsmemory($result,0);
       }
      //---------------------------------------------------------------------------------------------
-       
+
       //-------PROCESSO DE INLCUÃO-----------------------------------------------------------------------
 	if(empty($proces)){
 	  $proces = '0';
@@ -114,10 +115,10 @@ if(isset($incluir)){
 	   $seq  = $clorcimpactorecmov->o69_sequen;
 	}  	
      //------------------------------------------------------------------------------------------   
-   
+
      //alterar-----------------------------------------------------
 
-     
+
      ///parei aki.... 09/05/2005
 	if($sqlerro == false && $priproces == true){
 	    $priproces = false;
@@ -177,8 +178,8 @@ if(isset($incluir)){
 	  db_fieldsmemory($result,0);
 	}
        //---------------------------------------------------------------------------------------------
-	 
-	
+
+
 	//-------PROCESSO DE ALTERAÇÃO---------------------------------------------------------------------
 	  if($sqlerro == false){ 
 	    $clorcimpactorecmov->o69_proces    = $o69_proces;

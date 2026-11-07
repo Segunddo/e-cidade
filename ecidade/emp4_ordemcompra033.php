@@ -48,7 +48,8 @@ $clcgm          = new cl_cgm;
 $clpcparam      = new cl_pcparam;
 
 db_postmemory($HTTP_GET_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 if (isset($valores)&&isset($incluir)){
@@ -56,15 +57,15 @@ if (isset($valores)&&isset($incluir)){
   $arr_forne=array();
   $valor_total="";
   $sqlerro = false;
-  $dados=split("quant_","$valores");
-  $valordoitem=split("valor_","$val");
+  $dados=preg_split("#quant_#m","$valores");
+  $valordoitem=preg_split("#valor_#m","$val");
   for ($i=1;$i<sizeof($dados);$i++){
     if ($sqlerro==false){
-      $numero=split("_",$dados[$i]);
+      $numero=preg_split("#_#m",$dados[$i]);
       $numemp=$numero[0];
       $sequen=$numero[1];
       $quanti=$numero[3];
-      $vlsoitem=split("_",$valordoitem[$i]);
+      $vlsoitem=preg_split("#_#m",$valordoitem[$i]);
       $vl_soma_item=$vlsoitem[1];
       $vl_soma_item = str_replace(",",".","$vl_soma_item"); 
       $vl_soma_item;
@@ -117,7 +118,7 @@ if (isset($valores)&&isset($incluir)){
     for ($i=1;$i<sizeof($dados);$i++){
       	if ($sqlerro==false){
 
-		     $numero=split("_",$dados[$i]);
+		     $numero=preg_split("#_#m",$dados[$i]);
 		     $numemp=$numero[0];
       	 $sequen=$numero[1];
 		     $quanti=$numero[3];
@@ -136,7 +137,7 @@ if (isset($valores)&&isset($incluir)){
 	  				     db_fieldsmemory($result_vlruni,0);
 	  				     $vlr_uni=$e62_vlrun;	  				
 	  			    }	  			
-	    		    $vlsoitem=split("_",$valordoitem[$i]);
+	    		    $vlsoitem=preg_split("#_#m",$valordoitem[$i]);
 	    		    $vl_soma_item=$vlsoitem[1];
 	    		    $vl_soma_item = str_replace(",",".","$vl_soma_item"); 
 			        $clmatordemitem->m52_codordem = $codigo;

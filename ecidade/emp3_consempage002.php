@@ -33,7 +33,8 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_empage_classe.php"));
 $clempage = new cl_empage;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $dbwhere =" 1=1 and e80_instit = " . db_getsession("DB_instit");
 
@@ -44,7 +45,7 @@ if(isset($e80_codage) && $e80_codage != ""){
         $dbwhere = " e82_codord = $e50_codord ";
    }
    if(isset($e60_codemp) && $e60_codemp!="" ){
-     $arr = split("/",$e60_codemp);
+     $arr = preg_split("#\\/#m",$e60_codemp);
      $dbwhere_ano = "";
      if(count($arr) == 2  && isset($arr[1]) && $arr[1] != '' ){
         $dbwhere_ano = " and e60_anousu = ".$arr[1];

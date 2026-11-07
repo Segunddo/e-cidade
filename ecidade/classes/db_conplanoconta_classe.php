@@ -61,8 +61,8 @@ class cl_conplanoconta
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c63_codcon = ($this->c63_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_codcon"]:$this->c63_codcon);
-       $this->c63_anousu = ($this->c63_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_anousu"]:$this->c63_anousu);
+       $this->c63_codcon = ($this->c63_codcon === 0 || $this->c63_codcon === 0.0 || $this->c63_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_codcon"]:$this->c63_codcon);
+       $this->c63_anousu = ($this->c63_anousu === 0 || $this->c63_anousu === 0.0 || $this->c63_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_anousu"]:$this->c63_anousu);
        $this->c63_banco = ($this->c63_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_banco"]:$this->c63_banco);
        $this->c63_agencia = ($this->c63_agencia == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_agencia"]:$this->c63_agencia);
        $this->c63_conta = ($this->c63_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_conta"]:$this->c63_conta);
@@ -70,11 +70,11 @@ class cl_conplanoconta
        $this->c63_dvagencia = ($this->c63_dvagencia == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_dvagencia"]:$this->c63_dvagencia);
        $this->c63_identificador = ($this->c63_identificador == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_identificador"]:$this->c63_identificador);
        $this->c63_codigooperacao = ($this->c63_codigooperacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_codigooperacao"]:$this->c63_codigooperacao);
-       $this->c63_tipoconta = ($this->c63_tipoconta == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_tipoconta"]:$this->c63_tipoconta);
-       $this->c63_reduz = ($this->c63_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_reduz"]:$this->c63_reduz);
+       $this->c63_tipoconta = ($this->c63_tipoconta === 0 || $this->c63_tipoconta === 0.0 || $this->c63_tipoconta == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_tipoconta"]:$this->c63_tipoconta);
+       $this->c63_reduz = ($this->c63_reduz === 0 || $this->c63_reduz === 0.0 || $this->c63_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_reduz"]:$this->c63_reduz);
      }else{
-       $this->c63_codcon = ($this->c63_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_codcon"]:$this->c63_codcon);
-       $this->c63_anousu = ($this->c63_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_anousu"]:$this->c63_anousu);
+       $this->c63_codcon = ($this->c63_codcon === 0 || $this->c63_codcon === 0.0 || $this->c63_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_codcon"]:$this->c63_codcon);
+       $this->c63_anousu = ($this->c63_anousu === 0 || $this->c63_anousu === 0.0 || $this->c63_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c63_anousu"]:$this->c63_anousu);
      }
    }
 
@@ -134,7 +134,7 @@ class cl_conplanoconta
      }
        $this->c63_codcon = $c63_codcon;
        $this->c63_anousu = $c63_anousu;
-     if(($this->c63_codcon == null) || ($this->c63_codcon == "") ){
+     if(($this->c63_codcon == null) || ($this->c63_codcon === 0 || $this->c63_codcon === 0.0 || $this->c63_codcon == "") ){
        $this->erro_sql = " Campo c63_codcon não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -142,7 +142,7 @@ class cl_conplanoconta
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c63_anousu == null) || ($this->c63_anousu == "") ){
+     if(($this->c63_anousu == null) || ($this->c63_anousu === 0 || $this->c63_anousu === 0.0 || $this->c63_anousu == "") ){
        $this->erro_sql = " Campo c63_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -451,7 +451,7 @@ class cl_conplanoconta
     function sql_query ( $c63_codcon=null,$c63_anousu=null,$campos="*",$ordem=null,$dbwhere=""){
         $sql = "select ";
         if($campos != "*" ){
-            $campos_sql = split("#",$campos);
+            $campos_sql = preg_split("#\\##m",$campos);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -487,7 +487,7 @@ class cl_conplanoconta
         $sql .= $sql2;
         if($ordem != null ){
             $sql .= " order by ";
-            $campos_sql = split("#",$ordem);
+            $campos_sql = preg_split("#\\##m",$ordem);
             $virgula = "";
             for($i=0;$i<sizeof($campos_sql);$i++){
                 $sql .= $virgula.$campos_sql[$i];
@@ -527,7 +527,7 @@ class cl_conplanoconta
    function sql_query_razao ( $c63_codcon=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -557,7 +557,7 @@ class cl_conplanoconta
 
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

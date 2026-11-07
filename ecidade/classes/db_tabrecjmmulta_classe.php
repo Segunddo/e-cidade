@@ -54,7 +54,7 @@ class cl_tabrecjmmulta {
                  k140_faixa = float4 = Faixa Percentual 
                  ";
    //funcao construtor da classe 
-   function cl_tabrecjmmulta() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tabrecjmmulta"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_tabrecjmmulta {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k140_sequencial = ($this->k140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_sequencial"]:$this->k140_sequencial);
-       $this->k140_tabrecjm = ($this->k140_tabrecjm == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_tabrecjm"]:$this->k140_tabrecjm);
-       $this->k140_multa = ($this->k140_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_multa"]:$this->k140_multa);
-       $this->k140_faixa = ($this->k140_faixa == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_faixa"]:$this->k140_faixa);
+       $this->k140_sequencial = ($this->k140_sequencial === 0 || $this->k140_sequencial === 0.0 || $this->k140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_sequencial"]:$this->k140_sequencial);
+       $this->k140_tabrecjm = ($this->k140_tabrecjm === 0 || $this->k140_tabrecjm === 0.0 || $this->k140_tabrecjm == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_tabrecjm"]:$this->k140_tabrecjm);
+       $this->k140_multa = ($this->k140_multa === 0 || $this->k140_multa === 0.0 || $this->k140_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_multa"]:$this->k140_multa);
+       $this->k140_faixa = ($this->k140_faixa === 0 || $this->k140_faixa === 0.0 || $this->k140_faixa == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_faixa"]:$this->k140_faixa);
      }else{
-       $this->k140_sequencial = ($this->k140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_sequencial"]:$this->k140_sequencial);
+       $this->k140_sequencial = ($this->k140_sequencial === 0 || $this->k140_sequencial === 0.0 || $this->k140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_sequencial"]:$this->k140_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_tabrecjmmulta {
          $this->k140_sequencial = $k140_sequencial; 
        }
      }
-     if(($this->k140_sequencial == null) || ($this->k140_sequencial == "") ){ 
+     if(($this->k140_sequencial == null) || ($this->k140_sequencial === 0 || $this->k140_sequencial === 0.0 || $this->k140_sequencial == "") ){ 
        $this->erro_sql = " Campo k140_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_tabrecjmmulta {
    function sql_query ( $k140_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -414,7 +414,7 @@ class cl_tabrecjmmulta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -427,7 +427,7 @@ class cl_tabrecjmmulta {
    function sql_query_file ( $k140_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_tabrecjmmulta {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

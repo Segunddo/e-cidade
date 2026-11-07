@@ -51,7 +51,7 @@ $sql = " select z01_numcgm,z01_nome,z01_cgccpf
 $result = db_query($sql);	
 // db_criatabela($result);exit;
 
-if (pg_numrows($result)==0){
+if (($result ? pg_numrows($result) : null)==0){
    db_redireciona("db_erros.php?fechar=true&db_erro=Nenhum registro encontrado !  ");
 }
 db_fieldsmemory($result,0);

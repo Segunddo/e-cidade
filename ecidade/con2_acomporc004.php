@@ -46,7 +46,8 @@ $clrotulo->label('c83_codrel');
 $clrotulo->label('o42_descrrel');
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $instit   = db_getsession("DB_instit");
 $anousu   = db_getsession("DB_anousu");

@@ -51,7 +51,8 @@ $clorcunidade->rotulo->label();
 $clorcdotacao->rotulo->label();
 $clorcdotacaocontr->rotulo->label();
 db_postmemory($_POST);
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 ?>
 
 <html>
@@ -71,7 +72,7 @@ if (isset($o58_coddot) && $o58_coddot != "") {
     $filtro = "";
     if (isset($o50_estrutdespesa) && $o50_estrutdespesa != "") {
 
-        $matriz = split('\.', $o50_estrutdespesa);
+        $matriz = preg_split('#\.#m', $o50_estrutdespesa);
         for ($i = 0; $i < count($matriz); $i++) {
             switch ($i) {
                 case 0://orgao

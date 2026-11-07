@@ -47,7 +47,8 @@ $oPost = db_utils::postMemory($_POST);
 $oGet  = db_utils::postMemory($_GET);
 
 if(!isset($pesquisar)) {
-  parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+  parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+  extract($__qs);
 }
 
 $clcgm		= new cl_cgm;
@@ -69,7 +70,7 @@ if (isset($script) && $script != "") {
 	<?
 			$vals = "";
 			$vir  = "";
-			$camp = split(",",$valores);
+			$camp = preg_split("#,#m",$valores);
 			
 			for($f=0;$f<count($camp);$f++){
 				$vals .= $vir."'".$camp[$f]."'";
@@ -85,7 +86,7 @@ if (isset($script) && $script != "") {
 
 if (isset($testanome) && !isset($pesquisa_chave)) {
   
-  $funmat			= split("\|",$funcao_js);
+  $funmat			= preg_split("#\\|#m",$funcao_js);
   $func_antes = $funmat[0];
   $valores		= "";
   $camp				= "";

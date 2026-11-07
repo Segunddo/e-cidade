@@ -92,9 +92,9 @@ class PDF extends FPDF {
                                    url,
                                    logo
                             from db_config where codigo = ".db_getsession("DB_instit"));
-    $url = @pg_result($dados,0,"url");
+    $url = @($dados ? pg_result($dados,0,"url") : null);
     $this->SetXY(1,1);
-    $this->Image('imagens/files/'.pg_result($dados,0,"logo"),7,3,20);
+    $this->Image('imagens/files/'.($dados ? pg_result($dados,0,"logo") : null),7,3,20);
 
   //$this->Cell(100,32,"",1);
     $nome = pg_result($dados,0,"nomeinst");

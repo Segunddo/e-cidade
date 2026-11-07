@@ -29,7 +29,8 @@ set_time_limit(0);
 include(modification("libs/db_sql.php"));
 require(modification("fpdf151/pdf.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 db_postmemory($HTTP_POST_VARS);
 db_postmemory($HTTP_SERVER_VARS);
@@ -350,23 +351,23 @@ if ($grupo == 'tipo'){
    $col06=array(180,205,200);
    $col07=array(070,005,150);
    $col08=array(255,100,100);
-   $col09=array(090,045,050);
+   $col09=array(0,045,050);
    $col10=array(000,165,010);
-   $col11=array(110,085,060);
+   $col11=array(110,0,060);
    $col12=array(120,145,120);
    $col13=array(130,125,180);
    $col14=array(255,125,240);
    $col15=array(205,165,200);
    $col16=array(160,105,150);
    $col17=array(165,205,100);
-   $col18=array(180,085,050);
+   $col18=array(180,0,050);
    $col19=array(125,255,010);
    $col20=array(200,065,060);
 
 //   $pdf->PieChart(180, 60, $dt, '%l - %v - (%p)', $col);
    $pdf->PieChart(180, 60, $dt, '%l - %v - (%p)', array($col01,$col02,$col03,$col04,$col05,$col06,$col07,$col08,$col09,$col10,$col11,$col12,$col13,$col14,$col15,$col16,$col17,$col18,$col19,$col20));
    $pdf->SetXY($valX, $valY + 40);
-   
+
    /*//Bar diagram
    $pdf->SetFont('Arial', 'BIU', 12);
    //$pdf->Cell(0, 5, '2 - Gráfico de Barras', 0, 1);
@@ -385,7 +386,7 @@ if ($grupo == 'tipo'){
 
     $pdf->Cell(50,05,"TIPOS DE DEBITOS ESCOLHIDOS:","",1,"L",1);
  
-    $tiposdeb = split("-",$campo);
+    $tiposdeb = preg_split("#\\-#m",$campo);
 
     for ($x = 0; $x < count($tiposdeb); $x++) {
       $sql = "select k00_tipo, k00_descr from arretipo where k00_tipo = " . $tiposdeb[$x];

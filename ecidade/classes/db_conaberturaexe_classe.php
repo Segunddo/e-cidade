@@ -88,11 +88,11 @@ class cl_conaberturaexe {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c91_sequencial = ($this->c91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_sequencial"]:$this->c91_sequencial);
-       $this->c91_instit = ($this->c91_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_instit"]:$this->c91_instit);
-       $this->c91_id_usuario = ($this->c91_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_id_usuario"]:$this->c91_id_usuario);
-       $this->c91_anousuorigem = ($this->c91_anousuorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_anousuorigem"]:$this->c91_anousuorigem);
-       $this->c91_anousudestino = ($this->c91_anousudestino == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_anousudestino"]:$this->c91_anousudestino);
+       $this->c91_sequencial = ($this->c91_sequencial === 0 || $this->c91_sequencial === 0.0 || $this->c91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_sequencial"]:$this->c91_sequencial);
+       $this->c91_instit = ($this->c91_instit === 0 || $this->c91_instit === 0.0 || $this->c91_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_instit"]:$this->c91_instit);
+       $this->c91_id_usuario = ($this->c91_id_usuario === 0 || $this->c91_id_usuario === 0.0 || $this->c91_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_id_usuario"]:$this->c91_id_usuario);
+       $this->c91_anousuorigem = ($this->c91_anousuorigem === 0 || $this->c91_anousuorigem === 0.0 || $this->c91_anousuorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_anousuorigem"]:$this->c91_anousuorigem);
+       $this->c91_anousudestino = ($this->c91_anousudestino === 0 || $this->c91_anousudestino === 0.0 || $this->c91_anousudestino == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_anousudestino"]:$this->c91_anousudestino);
        if($this->c91_data == ""){
          $this->c91_data_dia = ($this->c91_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_data_dia"]:$this->c91_data_dia);
          $this->c91_data_mes = ($this->c91_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_data_mes"]:$this->c91_data_mes);
@@ -102,12 +102,12 @@ class cl_conaberturaexe {
          }
        }
        $this->c91_hora = ($this->c91_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_hora"]:$this->c91_hora);
-       $this->c91_situacao = ($this->c91_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_situacao"]:$this->c91_situacao);
-       $this->c91_tipo = ($this->c91_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_tipo"]:$this->c91_tipo);
-       $this->c91_ppa = ($this->c91_ppa == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_ppa"]:$this->c91_ppa);
-       $this->c91_origem = ($this->c91_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_origem"]:$this->c91_origem);
+       $this->c91_situacao = ($this->c91_situacao === 0 || $this->c91_situacao === 0.0 || $this->c91_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_situacao"]:$this->c91_situacao);
+       $this->c91_tipo = ($this->c91_tipo === 0 || $this->c91_tipo === 0.0 || $this->c91_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_tipo"]:$this->c91_tipo);
+       $this->c91_ppa = ($this->c91_ppa === 0 || $this->c91_ppa === 0.0 || $this->c91_ppa == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_ppa"]:$this->c91_ppa);
+       $this->c91_origem = ($this->c91_origem === 0 || $this->c91_origem === 0.0 || $this->c91_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_origem"]:$this->c91_origem);
      }else{
-       $this->c91_sequencial = ($this->c91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_sequencial"]:$this->c91_sequencial);
+       $this->c91_sequencial = ($this->c91_sequencial === 0 || $this->c91_sequencial === 0.0 || $this->c91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_sequencial"]:$this->c91_sequencial);
      }
    }
    // funcao para inclusao
@@ -227,7 +227,7 @@ class cl_conaberturaexe {
          $this->c91_sequencial = $c91_sequencial; 
        }
      }
-     if(($this->c91_sequencial == null) || ($this->c91_sequencial == "") ){ 
+     if(($this->c91_sequencial == null) || ($this->c91_sequencial === 0 || $this->c91_sequencial === 0.0 || $this->c91_sequencial == "") ){ 
        $this->erro_sql = " Campo c91_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -631,7 +631,7 @@ class cl_conaberturaexe {
    function sql_query ( $c91_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -655,7 +655,7 @@ class cl_conaberturaexe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -667,7 +667,7 @@ class cl_conaberturaexe {
    function sql_query_file ( $c91_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -688,7 +688,7 @@ class cl_conaberturaexe {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

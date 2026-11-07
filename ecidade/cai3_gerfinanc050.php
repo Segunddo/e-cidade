@@ -194,7 +194,7 @@ function adicionarCorpoTabelaDebitos($mostraDadosCda = false, $tabela = null, $c
 
     $valor_total = 0;
     $validaCor = true;
-    $numrowsArrecad = pg_num_rows($rsArrecad);
+    $numrowsArrecad = ($rsArrecad ? pg_num_rows($rsArrecad) : null);
     $numrows = $numrowsArrecad;
     if ($numrowsArrecad == 0) {
         $sLinhaRegistros = "<tr><td><small>Nenhum registro encontrado</small></td></tr>";

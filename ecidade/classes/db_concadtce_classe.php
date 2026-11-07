@@ -54,7 +54,7 @@ class cl_concadtce {
                  c10_db_uf = int8 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_concadtce() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("concadtce"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_concadtce {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c10_sequencial = ($this->c10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_sequencial"]:$this->c10_sequencial);
+       $this->c10_sequencial = ($this->c10_sequencial === 0 || $this->c10_sequencial === 0.0 || $this->c10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_sequencial"]:$this->c10_sequencial);
        $this->c10_nome = ($this->c10_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_nome"]:$this->c10_nome);
        $this->c10_sigla = ($this->c10_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_sigla"]:$this->c10_sigla);
-       $this->c10_db_uf = ($this->c10_db_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_db_uf"]:$this->c10_db_uf);
+       $this->c10_db_uf = ($this->c10_db_uf === 0 || $this->c10_db_uf === 0.0 || $this->c10_db_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_db_uf"]:$this->c10_db_uf);
      }else{
-       $this->c10_sequencial = ($this->c10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_sequencial"]:$this->c10_sequencial);
+       $this->c10_sequencial = ($this->c10_sequencial === 0 || $this->c10_sequencial === 0.0 || $this->c10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_sequencial"]:$this->c10_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_concadtce {
          $this->c10_sequencial = $c10_sequencial; 
        }
      }
-     if(($this->c10_sequencial == null) || ($this->c10_sequencial == "") ){ 
+     if(($this->c10_sequencial == null) || ($this->c10_sequencial === 0 || $this->c10_sequencial === 0.0 || $this->c10_sequencial == "") ){ 
        $this->erro_sql = " Campo c10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_concadtce {
    function sql_query ( $c10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -412,7 +412,7 @@ class cl_concadtce {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_concadtce {
    function sql_query_file ( $c10_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -445,7 +445,7 @@ class cl_concadtce {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

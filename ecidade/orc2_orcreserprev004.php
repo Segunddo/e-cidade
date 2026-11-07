@@ -34,7 +34,8 @@ $tipo_mesfim = 1;
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
  
 $head2 = "PROGRAMAÇÃO DE BLOQUEIO DE DESPESA";
 $head4 = "EXERCICIO: ".db_getsession("DB_anousu");

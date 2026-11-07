@@ -44,7 +44,8 @@ if (!isset($arqinclude)){ // se este arquivo no esta incluido por outro
   $orcparamrel = new cl_orcparamrel;
   $clconrelinfo = new cl_conrelinfo;
 
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
 
   //-----------------------------------
@@ -181,8 +182,8 @@ if (!isset($arqinclude)){
   $head5  = "ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL";
 
   $dados  = data_periodo($anousu,$periodo);
-  $perini = split("-",$dados[0]);
-  $perfin = split("-",$dados[1]);
+  $perini = preg_split("#\\-#m",$dados[0]);
+  $perfin = preg_split("#\\-#m",$dados[1]);
 
   $txtper = strtoupper($dados["periodo"]);
   $mesini = strtoupper(db_mes($perini[1]));
@@ -288,11 +289,11 @@ if (!isset($arqinclude)){ // se este arquivo no esta incluido por outro
   $pdf->cell(120,($alt),"SALDO",'TB',1,"C",0);      // br
   $pdf->setX(80);
   $pdf->cell(40,$alt,"Em 31/Dez/".($anousu_ant-1)." (a)",'1',0,"C",0);
-  $dt = split("-",$dt_fin_ant);
+  $dt = preg_split("#\\-#m",$dt_fin_ant);
   $dt = $dt[2]."/".db_mes($dt[1])."/".$dt[0];
   $pdf->cell(40,$alt,"Em $dt (b)",'1',0,"C",0);
 
-  $dt = split("-",$dt_fin);
+  $dt = preg_split("#\\-#m",$dt_fin);
   $dt = $dt[2]."/".db_mes($dt[1])."/".$dt[0];
   $pdf->cell(40,$alt,"Em $dt (c)",'TB',0,"C",0);
   $pdf->Ln();
@@ -603,11 +604,11 @@ if (!isset($arqinclude)){
   $pdf->cell(120,($alt),"SALDO",'TB',1,"C",0);      // br
   $pdf->setX(80);
   $pdf->cell(40,$alt,"Em 31/Dez/".($anousu_ant-1)." (a)",'1',0,"C",0);
-  $dt = split("-",$dt_fin_ant);
+  $dt = preg_split("#\\-#m",$dt_fin_ant);
   $dt = $dt[2]."/".db_mes($dt[1])."/".$dt[0];
   $pdf->cell(40,$alt,"Em $dt (b)",'1',0,"C",0);
 
-  $dt = split("-",$dt_fin);
+  $dt = preg_split("#\\-#m",$dt_fin);
   $dt = $dt[2]."/".db_mes($dt[1])."/".$dt[0];
   $pdf->cell(40,$alt,"Em $dt (c)",'TB',0,"C",0);
   $pdf->Ln();

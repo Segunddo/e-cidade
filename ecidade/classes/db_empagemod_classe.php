@@ -54,7 +54,7 @@ class cl_empagemod {
                  e84_sequencia = int4 = Sequência 
                  ";
    //funcao construtor da classe 
-   function cl_empagemod() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empagemod"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_empagemod {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e84_codmod = ($this->e84_codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_codmod"]:$this->e84_codmod);
+       $this->e84_codmod = ($this->e84_codmod === 0 || $this->e84_codmod === 0.0 || $this->e84_codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_codmod"]:$this->e84_codmod);
        $this->e84_descr = ($this->e84_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_descr"]:$this->e84_descr);
-       $this->e84_layout = ($this->e84_layout == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_layout"]:$this->e84_layout);
-       $this->e84_sequencia = ($this->e84_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_sequencia"]:$this->e84_sequencia);
+       $this->e84_layout = ($this->e84_layout === 0 || $this->e84_layout === 0.0 || $this->e84_layout == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_layout"]:$this->e84_layout);
+       $this->e84_sequencia = ($this->e84_sequencia === 0 || $this->e84_sequencia === 0.0 || $this->e84_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_sequencia"]:$this->e84_sequencia);
      }else{
-       $this->e84_codmod = ($this->e84_codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_codmod"]:$this->e84_codmod);
+       $this->e84_codmod = ($this->e84_codmod === 0 || $this->e84_codmod === 0.0 || $this->e84_codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_codmod"]:$this->e84_codmod);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_empagemod {
          $this->e84_codmod = $e84_codmod; 
        }
      }
-     if(($this->e84_codmod == null) || ($this->e84_codmod == "") ){ 
+     if(($this->e84_codmod == null) || ($this->e84_codmod === 0 || $this->e84_codmod === 0.0 || $this->e84_codmod == "") ){ 
        $this->erro_sql = " Campo e84_codmod nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_empagemod {
    function sql_query ( $e84_codmod=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -411,7 +411,7 @@ class cl_empagemod {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -423,7 +423,7 @@ class cl_empagemod {
    function sql_query_file ( $e84_codmod=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_empagemod {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_empagemod {
    function sql_query_mod ( $e84_codmod=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_empagemod {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -492,7 +492,7 @@ class cl_empagemod {
    function sql_query_modforma ( $e84_codmod=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -521,7 +521,7 @@ class cl_empagemod {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

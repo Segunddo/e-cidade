@@ -50,7 +50,7 @@ class cl_debcontapedidomatric {
                  d68_matric = int4 = Matrícula do Imóvel 
                  ";
    //funcao construtor da classe 
-   function cl_debcontapedidomatric() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("debcontapedidomatric"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_debcontapedidomatric {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d68_codigo = ($this->d68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_codigo"]:$this->d68_codigo);
-       $this->d68_matric = ($this->d68_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_matric"]:$this->d68_matric);
+       $this->d68_codigo = ($this->d68_codigo === 0 || $this->d68_codigo === 0.0 || $this->d68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_codigo"]:$this->d68_codigo);
+       $this->d68_matric = ($this->d68_matric === 0 || $this->d68_matric === 0.0 || $this->d68_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_matric"]:$this->d68_matric);
      }else{
-       $this->d68_codigo = ($this->d68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_codigo"]:$this->d68_codigo);
+       $this->d68_codigo = ($this->d68_codigo === 0 || $this->d68_codigo === 0.0 || $this->d68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_codigo"]:$this->d68_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_debcontapedidomatric {
        return false;
      }
        $this->d68_codigo = $d68_codigo; 
-     if(($this->d68_codigo == null) || ($this->d68_codigo == "") ){ 
+     if(($this->d68_codigo == null) || ($this->d68_codigo === 0 || $this->d68_codigo === 0.0 || $this->d68_codigo == "") ){ 
        $this->erro_sql = " Campo d68_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_debcontapedidomatric {
    function sql_query ( $d68_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -332,7 +332,7 @@ class cl_debcontapedidomatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -344,7 +344,7 @@ class cl_debcontapedidomatric {
    function sql_query_file ( $d68_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -365,7 +365,7 @@ class cl_debcontapedidomatric {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

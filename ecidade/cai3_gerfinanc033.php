@@ -92,7 +92,7 @@ if (isset($oPost->H_DATAUSU)) {
 $histinf = "";
 $result = db_query("select codmodelo, k03_tipo, to_char(k00_txban,'99.99') as tx_banc from arretipo where k00_tipo = $tipo_debito and k00_instit = " . db_getsession("DB_instit"));
 db_fieldsmemory($result, 0);
-pg_free_result($result);
+($result ? pg_free_result($result) : null);
 $aParcelasSemInflatores = array();
 $aNumpresProcessados    = array();
 $aNumpresUnicas         = array();

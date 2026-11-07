@@ -92,7 +92,8 @@ $clprotprocesso = new cl_protprocesso;
 $clsolordemtransf = new cl_solordemtransf;
 
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $db_opcao = 22;
@@ -118,8 +119,8 @@ if (isset ($confirmar) || isset ($confirmarn)) {
 
       $p  = "elemento_".$e64_codele."_processado";
       $np ="elemento_".$e64_codele."_nao_processado";
-      $digitado_processado     = $$p;
-      $digitado_nao_processado = $$np;
+      $digitado_processado     = ${$p};
+      $digitado_nao_processado = ${$np};
 
       $informado_anular_processado     += $digitado_processado;
       $informado_anular_nao_processado += $digitado_nao_processado;
@@ -325,8 +326,8 @@ if (isset ($confirmar) || isset ($confirmarn)) {
 
       $p  = "elemento_".$e64_codele."_processado";
       $np ="elemento_".$e64_codele."_nao_processado";
-      $digitado_processado     = $$p;
-      $digitado_nao_processado = $$np;
+      $digitado_processado     = ${$p};
+      $digitado_nao_processado = ${$np};
 
       $total_elemento_digitado =  $digitado_processado + $digitado_nao_processado;
 

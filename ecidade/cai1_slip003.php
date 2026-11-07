@@ -5,7 +5,8 @@ require_once modification("classes/db_saltes_classe.php");
 
 $clsaltes = new cl_saltes;
 
-parse_str(base64_decode($_SERVER['QUERY_STRING']));
+parse_str(base64_decode($_SERVER['QUERY_STRING']), $__qs);
+extract($__qs);
 
 $motivo = "";
 // Dados
@@ -114,7 +115,7 @@ try {
     $dados = db_query($sql);
     $sEvento = "";
 
-    if (pg_numrows($dados) > 0){
+    if (($dados ? pg_numrows($dados) : null) > 0){
 
         $aMotivo = db_fieldsMemory($dados,0);
         $motivo  = $k18_motivo;
@@ -137,7 +138,7 @@ try {
     $recursos  = db_query($sql);
     // se houverem registros, monta um array
     $array_recursos =  array();
-    if (pg_numrows($recursos)>0){
+    if (($recursos ? pg_numrows($recursos) : null)>0){
         for($x=0;$x < pg_numrows($recursos);$x++){
             db_fieldsmemory($recursos,$x);
             $array_recursos[] = "$k29_recurso#$o15_descr#$k29_valor";
@@ -149,7 +150,7 @@ try {
     // print_r($array_recursos); exit;
 
 
-    if (pg_numrows($dados) == 0) {
+    if (($dados ? pg_numrows($dados) : null) == 0) {
         throw new Exception('Documento de Slip não Cadastrado.');
     }
 

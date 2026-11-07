@@ -67,7 +67,7 @@
        $field = espaco($size-(strlen($field)),'0').$field;
 
     } else if ($tipo =="d"){  
-       $dt= split("-",$field);
+       $dt= preg_split("#\\-#m",$field);
        $field = "$dt[2]$dt[1]$dt[0]";
     }  
     return $field;

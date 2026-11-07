@@ -230,7 +230,7 @@ $sqlemp = "
 
 $result = db_query($sqlemp);
 //db_criatabela($result);exit;
-if (pg_numrows($result)==0){
+if (($result ? pg_numrows($result) : null)==0){
   db_redireciona("db_erros.php?fechar=true&db_erro=Nenhum registro encontrado !  ");
 }
 

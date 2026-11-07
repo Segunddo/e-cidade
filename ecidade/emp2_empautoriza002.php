@@ -70,7 +70,7 @@ function monta_where($inp="",$par="",$cod="",$descr_inp=""){
   $param_autoriza = "";
   $where_autorizacao = "";
   if(isset($cod) && trim($cod)!=""){
-    $cod_autoriza = split("-",$cod);
+    $cod_autoriza = preg_split("#\\-#m",$cod);
     $ini_autoriza = $cod_autoriza[0];
     $fim_autoriza = $cod_autoriza[1];
     if($ini_autoriza!="NaN" && $fim_autoriza!="NaN"){
@@ -301,7 +301,7 @@ for($i=0;$i<$numrows;$i++){
   $pdf->cell(25,$alt,db_formatar(@$valortot,'f'),0,1,"R",$c);
   $totalzao+=$valortot;
   
-  $arr_estrutural = split("\.",$estrutural);
+  $arr_estrutural = preg_split("#\\.#m",$estrutural);
   $estrut_pesquisa= $arr_estrutural[6];
   $result_estruturalautori = $clorcelemento->sql_record($clorcelemento->sql_query_file(null,null,"o56_descr as elementoautori",""," o56_elemento='$estrut_pesquisa' and o56_anousu = $e54_anousu"));
   if($clorcelemento->numrows>0){

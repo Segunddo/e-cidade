@@ -24,7 +24,7 @@
  *  Copia da licenca no diretorio licenca/licenca_en.txt 
  *                                licenca/licenca_pt.txt 
  */
- 
+
 if (!isset($arqinclude)){ // se este arquivo não esta incluido por outro
  set_time_limit(0);
  include(modification("fpdf151/pdf.php"));
@@ -36,15 +36,16 @@ if (!isset($arqinclude)){ // se este arquivo não esta incluido por outro
  include(modification("dbforms/db_funcoes.php"));
  include(modification("classes/db_conrelinfo_classe.php"));
  include(modification("classes/db_orcparamrel_classe.php"));
- 
+
  //$cldesdobramento = new cl_desdobramento;
- 
+
  $classinatura = new cl_assinatura;
  $orcparamrel = new cl_orcparamrel;
  $clconrelinfo = new cl_conrelinfo;
- 
- parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
- 
+
+ parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+ extract($__qs);
+
  $anousu  = db_getsession("DB_anousu");
  $dt = data_periodo($anousu,$periodo); // no dbforms/db_funcoes.php
  $dt_ini= $dt[0]; // data inicial do período
@@ -335,53 +336,53 @@ for ($x=1;$x<=6;$x++){
 //db_criatabela($result_despesa);exit;
 for ($i = 0; $i < pg_numrows($result_despesa); $i ++) {
 	db_fieldsmemory($result_despesa, $i);
-     	
+
      for ($linha=1;$linha<=6;$linha++){
-     		
+
 		$nivel      = $desp[$linha]['nivel'];
 
 		$estrutural = $o58_elemento.'00';
     	$estrutural = substr($estrutural,0,$nivel);
     	$v_estrutural = str_pad($estrutural, 15, "0", STR_PAD_RIGHT);
-	
+
 		$v_subfuncao = $o58_subfuncao;
 		$v_recurso     = $o58_codigo;
-	 	
+
 	    if (in_array($v_estrutural, $desp[$linha]['estrut'])){
-				
+
 		  	if ( count($desp[$linha]['subfunc'])==0  ||  in_array($v_subfuncao, $desp[$linha]['subfunc'])){
-		
+
 		    	    if (  count($desp[$linha]['recurso'])==0 ||   in_array($v_recurso, $desp[$linha]['recurso'])){
 
 							$desp[$linha]['previni']     += $dot_ini; 
 							$desp[$linha]['prevatu']   += $dot_ini + ($suplementado_acumulado - $reduzido_acumulado);
 							$desp[$linha]['bimestre'] += $liquidado_acumulado;  
-		        				           		 	           
+
                 	}// endif
 		  	} //end if    
     	}// end if
-    	
+
     	// exclusao de parametros
     	if (in_array($v_estrutural, $desp[$linha]['exclusao'])){
-				
+
 		  	if ( count($desp[$linha]['subfunc'])==0  ||  in_array($v_subfuncao, $desp[$linha]['subfunc'])){
-		
+
 		    	    if (  count($desp[$linha]['recurso'])==0 ||   in_array($v_recurso, $desp[$linha]['recurso'])){
 
 							$desp[$linha]['previni']     -= $dot_ini; 
 							$desp[$linha]['prevatu']   -= $dot_ini + ($suplementado_acumulado - $reduzido_acumulado);
 							$desp[$linha]['bimestre'] -= $liquidado_acumulado;  
-		        				           		 	           
+
                 	}// endif
 		  	} //end if    
     	}// end if
-    	
-    	
-    	
-    	
-    	
+
+
+
+
+
      } //end for
- 	  	  	  
+
 }
 
 
@@ -389,56 +390,56 @@ for ($i = 0; $i < pg_numrows($result_despesa); $i ++) {
 
 for ($i = 0; $i < pg_numrows($result_despesa); $i ++) {
 	db_fieldsmemory($result_despesa, $i);
-     	
+
      for ($linha=1;$linha<=5;$linha++){
-     		
+
 		$nivel      = $desp_p[$linha]['nivel'];
 
 		$estrutural = $o58_elemento.'00';
     	$estrutural = substr($estrutural,0,$nivel);
     	$v_estrutural = str_pad($estrutural, 15, "0", STR_PAD_RIGHT);
-	
+
 		$v_subfuncao = $o58_subfuncao;
 		$v_recurso     = $o58_codigo;
-	 	
+
 	    // if (count($desp_p[$linha]['estrut'])==0  ||  in_array($v_estrutural, $desp_p[$linha]['estrut'])){
 	    // é necessario selecionar ao menos o estrutural
 	    if ( in_array($v_estrutural, $desp_p[$linha]['estrut'])){
-				
+
 		  	if ( count($desp_p[$linha]['subfunc'])==0  ||  in_array($v_subfuncao, $desp_p[$linha]['subfunc'])){
-		
+
 		    	    if (  count($desp_p[$linha]['recurso'])==0 ||   in_array($v_recurso, $desp_p[$linha]['recurso'])){
 
 							$desp_p[$linha]['previni']     += $dot_ini; 
 							$desp_p[$linha]['prevatu']   += $dot_ini + ($suplementado_acumulado - $reduzido_acumulado);
 							$desp_p[$linha]['bimestre'] += $liquidado_acumulado;  
-		        				           		 	           
+
                 	}// endif
 		  	} //end if    
     	}// end if
-    	
+
     	// exclusao de parametros
     	if ( in_array($v_estrutural, $desp_p[$linha]['exclusao'])){
-				
+
 		  	if ( count($desp_p[$linha]['subfunc'])==0  ||  in_array($v_subfuncao, $desp_p[$linha]['subfunc'])){
-		
+
 		    	    if (  count($desp_p[$linha]['recurso'])==0 ||   in_array($v_recurso, $desp_p[$linha]['recurso'])){
 
 							$desp_p[$linha]['previni']     -= $dot_ini; 
 							$desp_p[$linha]['prevatu']   -= $dot_ini + ($suplementado_acumulado - $reduzido_acumulado);
 							$desp_p[$linha]['bimestre'] -= $liquidado_acumulado;  
-		        				           		 	           
+
                 	}// endif
 		  	} //end if    
     	}// end if
-    	
-    	
-    	
-    	
-    	
-    	
+
+
+
+
+
+
      } //end for			 	           	
- 	  
+
 }// end for
 
 //------------------------------------funcao e subfuncao------------------------------------------------------------------------
@@ -497,7 +498,7 @@ for ($i = 0; $i < pg_numrows($result_func); $i ++) {
    	        $sub301_dotini += $dot_ini + $RESERVA_ASPS;
 	 	$sub301_atuali += $dot_ini + $RESERVA_ASPS + ($suplementado_acumulado - $reduzido_acumulado);
 	 	$sub301_atebim += $liquidado_acumulado + $M_INTERFERENCIA['valor'];
-		
+
                 $total_acum += $liquidado_acumulado +  $M_INTERFERENCIA['valor'];
   	        $total_ini += $dot_ini + $RESERVA_ASPS;
  	        $total_atu += $dot_ini + $RESERVA_ASPS + ($suplementado_acumulado - $reduzido_acumulado);	
@@ -512,14 +513,14 @@ for ($i = 0; $i < pg_numrows($result_func); $i ++) {
   	        $total_ini += $dot_ini; 
  	        $total_atu += $dot_ini  + ($suplementado_acumulado - $reduzido_acumulado);
 
-		
+
 		continue;
 	}
 	if ($o58_subfuncao == 303) {
 		$sub303_dotini += $dot_ini;
 		$sub303_atuali += $dot_ini + ($suplementado_acumulado - $reduzido_acumulado);
 		$sub303_atebim += $liquidado_acumulado;
-		
+
 		$total_acum += $liquidado_acumulado ;
   	        $total_ini += $dot_ini ;
  	        $total_atu += $dot_ini  + ($suplementado_acumulado - $reduzido_acumulado);	
@@ -559,7 +560,7 @@ for ($i = 0; $i < pg_numrows($result_func); $i ++) {
 	$subout_dotini += $dot_ini;
 	$subout_atuali += $dot_ini + ($suplementado_acumulado - $reduzido_acumulado);
 	$subout_atebim += $liquidado_acumulado;
-	
+
 	$total_acum += $liquidado_acumulado ;
 	$total_ini += $dot_ini ;
 	$total_atu += $dot_ini  + ($suplementado_acumulado - $reduzido_acumulado);
@@ -575,7 +576,7 @@ $n2 = 10;
  // end se incluido em outro arquivo
 if (!isset($arqinclude)){  
 
- $xinstit = split("-", $db_selinstit);
+ $xinstit = preg_split("#\\-#m", $db_selinstit);
  $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config where codigo in (".str_replace('-', ', ', $db_selinstit).") ");
  $descr_inst = '';
  $xvirg = '';
@@ -603,7 +604,7 @@ if (!isset($arqinclude)){
  $head3 = "DEMONSTRATIVO DA RECEITA DE IMPOSTOS E DAS DESPESAS PRÓPRIAS COM SAÚDE";
  $head4 = "ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL";
  $head5 = $texto.'/'.$anousu;
- 
+
  $pdf = new PDF();
  $pdf->Open();
  $pdf->AliasNbPages();
@@ -639,12 +640,12 @@ if (!isset($arqinclude)){
 		$pdf->cell(20, $alt, db_formatar((($receitas_atebime["$i"] / $receitas_prevatu["$i"]) * 100), 'f'), "L", 1, "R", 0);
 	else
 		$pdf->cell(20, $alt, db_formatar(0, 'f'), "L", 1, "R", 0);
-	   
+
  }
  $total_previni = $receitas_previni["0"] + $receitas_previni["6"] + $receitas_previni["11"] + $receitas_previni["12"] + $receitas_previni["13"];
  $total_prevatu = $receitas_prevatu["0"] + $receitas_prevatu["6"] + $receitas_prevatu["11"] + $receitas_prevatu["12"] + $receitas_prevatu["13"] ;
  $total_atebime = $receitas_atebime["0"] + $receitas_atebime["6"] + $receitas_atebime["11"] + $receitas_atebime["12"] + $receitas_atebime["13"] ;
- 
+
  $total_nobimes = " - ";
  $pdf->cell(110, $alt, "TOTAL", "TB", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($total_previni, 'f'), "TBL", 0, "R", 0);
@@ -723,49 +724,49 @@ if (!isset($arqinclude)){
  $pdf->cell(20, $alt, db_formatar($desp['6']['prevatu'],'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp['6']['bimestre'], 'f'), "L", 0, "R", 0);
  @ $pdf->cell(20, $alt, db_formatar(($desp['6']['bimestre']) * 100 / $desp['6']['prevatu'], 'f'), 'L', 1, "R", 0);
- 
- 
+
+
  $total_IV_ini    = $desp['1']['previni'] + $desp['2']['previni']+$desp['3']['previni']+$desp['4']['previni']+$desp['5']['previni']+$desp['6']['previni']; 
  $total_IV_atu    = $desp['1']['prevatu']+$desp['2']['prevatu']+$desp['3']['prevatu']+$desp['4']['prevatu']+$desp['5']['prevatu']+$desp['6']['prevatu'];
  $total_IV_atebim = $desp['1']['bimestre']+$desp['2']['bimestre']+$desp['3']['bimestre']+$desp['4']['bimestre']+$desp['5']['bimestre']+$desp['6']['bimestre'];
- 
+
  $pdf->cell(110, $alt, "TOTAL (IV)", "TB", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($total_IV_ini, 'f'), "TBL", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($total_IV_atu, 'f'), "TBL", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($total_IV_atebim, 'f'), "TBL", 0, "R", 0);
  @ $pdf->cell(20, $alt, db_formatar($total_IV_atebim * 100 / $total_IV_atu, 'f'), "LTB", 1, "R", 0);
- 
+
  // ------------------------------- * --------------------------- * ------------------------------- *  --------------
- 
+
  $pdf->ln(4);
- 
+
  $pdf->cell(110, $alt, "", "T", 0, "C", 0);
  $pdf->cell(20, $alt, "DOTAÇÃO", "TRL", 0, "C", 0);
  $pdf->cell(20, $alt, "DOTAÇÃO", "TRL", 0, "C", 0);
  $pdf->cell(40, $alt, "DESPESAS LIQUIDADAS", "TL", 1, "C", 0);
- 
+
  $pdf->cell(110, $alt, "DESPESAS PRÓPRIA COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE", "B", 0, "C", 0);
  $pdf->cell(20, $alt, "INICIAL", "BL", 0, "C", 0);
  $pdf->cell(20, $alt, "ATUALIZADA", "BL", 0, "C", 0);
  $pdf->cell(20, $alt, "Até o ".$txtper." (e)", "TBL", 0, "C", 0);
  $pdf->cell(20, $alt, "% (e/despesas com saúde)", "LTB", 1, "C", 0);
- 
- 
+
+
  $pdf->cell(110, $alt, "DESPESAS COM SAÚDE", "0", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($total_IV_ini, 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($total_IV_atu, 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($total_IV_atebim, 'f'), "L", 0, "R", 0);
  @ $pdf->cell(20, $alt, db_formatar($total_IV_atebim * 100 / $total_IV_atebim, 'f'), "L", 1, "R", 0);
- 
+
  $pdf->cell(110, $alt, "(-) DESPESAS COM INATIVOS E PENSIONISTAS", "0", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[1]['previni'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[1]['prevatu'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[1]['bimestre'], 'f'), "L", 0, "R", 0);
- @ $pdf->cell(20, $alt, db_formatar($$desp_p[1]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0);
- 
+ @ $pdf->cell(20, $alt, db_formatar(${$desp_p}[1]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0);
+
  // caso a linha abaixo seja zerada,  o manual diz que os valores devem ser pegos do quadro da receita
  // RRO , 4 Ed, pg 278
- 
+
  if ($desp_p[2]['previni']==0 &&  $desp_p[2]['prevatu']==0 && $desp_p[2]['bimestre']==0){
   	$desp_p[2]['previni']	  = $receitas_previni[6];
   	$desp_p[2]['prevatu']    =$receitas_prevatu[6];
@@ -776,60 +777,60 @@ if (!isset($arqinclude)){
   	$desp_p[3]['prevatu']    =$receitas_prevatu[11];
  	$desp_p[3]['bimestre']  =$receitas_atebime[11];	
  }	
- 
+
  $pdf->cell(110, $alt, "(-)DESPESAS CUSTEADAS COM OUTROS RECURSOS DESTINADOS À SAÚDE", "0", 0, "L", 0);
  $pdf->cell(20, $alt,db_formatar($desp_p[2]['previni']+$desp_p[3]['previni']+$desp_p[4]['previni'],'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt,db_formatar($desp_p[2]['prevatu'] +$desp_p[3]['prevatu'] +$desp_p[4]['prevatu'],'f') , "L", 0, "R", 0);
  $pdf->cell(20, $alt,db_formatar($desp_p[2]['bimestre']+$desp_p[3]['bimestre']+$desp_p[4]['bimestre'],'f') , "L", 0, "R", 0);
  @$pdf->cell(20, $alt,db_formatar(($desp_p[2]['bimestre']+$desp_p[3]['bimestre']+$desp_p[4]['bimestre'])*100/$total_IV_atebim  ,'f') , 'L', 1, "R", 0);
- 
+
  $pdf->cell(110, $alt, espaco($n1)."Recursos de Transferências do Sistema Único de Saúde - SUS", "0", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[2]['previni'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[2]['prevatu'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[2]['bimestre'], 'f'), "L", 0, "R", 0);
  @ $pdf->cell(20, $alt, db_formatar($desp_p[2]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0);
- 
+
  $pdf->cell(110, $alt, espaco($n1)."Recursos de Operações de Crédito", "0", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[3]['previni'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[3]['prevatu'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[3]['bimestre'], 'f'), "L", 0, "R", 0);
  @ $pdf->cell(20, $alt, db_formatar($desp_p[3]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0);
- 
+
  $pdf->cell(110, $alt, espaco($n1)."Outros Recursos", "0", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[4]['previni'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[4]['prevatu'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[4]['bimestre'], 'f'), "L", 0, "R", 0);
  @ $pdf->cell(20, $alt, db_formatar($desp_p[4]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0);
- 
- 
+
+
  $pdf->cell(110, $alt, "(-)RP INSCRITOS NO EXERCÍCIO SEM DISPONIBILIDADE FINANCEIRA", "0", 0, "L", 0);
  $pdf->cell(20, $alt, '-', "L", 0, "R", 0);
  $pdf->cell(20, $alt, '-', "L", 0, "R", 0);
  $pdf->cell(20, $alt, '-', "L", 0, "R", 0);
  $pdf->cell(20, $alt, '-', 'L', 1, "R", 0);
- 
- 
+
+
  $total_V_ini        = 0+ $total_IV_ini         - ($desp_p[1]['previni'] + $desp_p[2]['previni']+$desp_p[3]['previni']+$desp_p[4]['previni']) ;
  $total_V_atu      = 0+ $total_IV_atu       - ($desp_p[1]['prevatu']  +$desp_p[2]['prevatu'] +$desp_p[3]['prevatu'] +$desp_p[4]['prevatu'] )  ;
  $total_V_atebim = 0+ $total_IV_atebim - ($desp_p[1]['bimestre'] + $desp_p[2]['bimestre']+$desp_p[3]['bimestre']+$desp_p[4]['bimestre'] ) ;
- 
- 
+
+
  $pdf->cell(110, $alt, "TOTAL DAS DESPESAS PRÓPRIAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE(V)", "TB", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($total_V_ini, 'f'), "TBL", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($total_V_atu, 'f'), "TBL", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($total_V_atebim, 'f'), "TBL", 0, "R", 0);
  @$pdf->cell(20, $alt, db_formatar(($total_V_atebim * 100) / $total_IV_atebim, 'f'), "LTB", 1, "R", 0);
- 
+
  $pdf->Ln(4);
- 
- 
- 
- 
+
+
+
+
  //-------------------------------------RESTOS APAGAR--revisar com leandro----------------------------------------------------------
  $valor = 0;
  $soma_vlr_inscritos = 0;
  $soma_vlr_cancelados = 0;
- 
+
  for ($i = 0; $i < pg_numrows($result_rpsaldo); $i ++) {
  	db_fieldsmemory($result_rpsaldo, $i);
  	if ($e60_anousu == ($anousu -1)) {
@@ -837,12 +838,12 @@ if (!isset($arqinclude)){
  	}
  	$soma_vlr_cancelados += $vlranu;
  }
- 
+
  $pdf->cell(90, $alt, "CONTROLE DE RESTOS A PAGAR INSCRITOS EM EXERCÍCIOS ", "RT", 0, "C", 0);
  $pdf->cell(20, $alt, "Aplicação", "T", 0, "C", 0);
  $pdf->cell(20, $alt, "Aplicação", "TRL", 0, "C", 0);
  $pdf->cell(60, $alt, "RESTOS A PAGAR", "BTL", 1, "C", 0);
- 
+
  $pdf->cell(90, $alt, "ANTERIORES VINCULADOS A SAÚDE", "", 0, "C", 0);
  $pdf->cell(20, $alt, "Miníma em", "L", 0, "C", 0);
  $pdf->cell(20, $alt, "Apurada em", "L", 0, "C", 0);
@@ -854,45 +855,45 @@ if (!isset($arqinclude)){
  $pdf->cell(20, $alt, ($anousu -1)." (g)", "BL", 0, "C", 0);
  $pdf->cell(40, $alt, ($anousu -1), "BL", 0, "C", 0);
  $pdf->cell(20, $alt, $anousu." (h)", "LB", 1, "C", 0);
- 
+
  $pdf->cell(90, $alt, "RP DE DESPESA PRÓPRIAS COM AÇÕES E SERVIÇOS", "R", 0, "L", 0);
  $pdf->cell(20, $alt, "", "L", 0, "C", 0);
  $pdf->cell(20, $alt, "", "L", 0, "C", 0);
  $pdf->cell(40, $alt, "", "L", 0, "C", 0);
  $pdf->cell(20, $alt, "", "L", 1, "C", 0);
- 
+
  $pdf->cell(90, $alt, "PÚBLICOS DE SAÚDE", "RB", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($VARIAVEL_MINIMA, 'f'), "BL", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($VARIAVEL_APURADA, 'f'), "BL", 0, "R", 0);
  $pdf->cell(40, $alt, db_formatar($soma_vlr_inscritos, 'f'), "BL", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($soma_vlr_cancelados, 'f'), "LB", 1, "R", 0);
- 
+
  $pdf->cell(170, $alt, "COMPENSAÇÃO DE RESTOS A PAGAR CANCELADOS EM $anousu (VI)", "TRB", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($VARIAVEL_COMPENSACAO, 'f'), "TLB", 1, "R", 0);
- 
+
  $pdf->Ln(2);
- 
+
  @$t_participacao = (($total_V_atebim - $VARIAVEL_COMPENSACAO)/$total_I_atebim)*100;
- 
+
  $pdf->cell(170, $alt, "PARTICIPAÇÃO DAS DESPESAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE NA RECEITA LIQUIDA DE IMPOSTOS E TRANSFERÊNCIAS", "TR", 0, "L", 0);
  $pdf->cell(20, $alt, "", "TL", 1, "R", 0);
  $pdf->cell(170, $alt, "CONSTITUCIONAIS E LEGAIS - LIMITES CONSTITUCIONAL <%> [(V - VI) / I]", "RB", 0, "L", 0);
  @ $pdf->cell(20, $alt, db_formatar($t_participacao, 'f'), "LB", 1, "R", 0);
- 
+
  //-----------------------------------DESPESA POR SUBFUNÇAO----------------------------------------------------------------
  $pdf->Ln(2);
- 
+
  $pdf->cell(110, $alt, "DESPESA COM SAÚDE", "T", 0, "C", 0);
  $pdf->cell(20, $alt, "DOTAÇÃO", "TRL", 0, "C", 0);
  $pdf->cell(20, $alt, "DOTAÇÃO", "TRL", 0, "C", 0);
  $pdf->cell(40, $alt, "DESPESA LIQUIDADAS", "TL", 1, "C", 0);
- 
+
  $pdf->cell(110, $alt, "(Por Subfunção)", "B", 0, "C", 0);
  $pdf->cell(20, $alt, "INICIAL", "BL", 0, "C", 0);
  $pdf->cell(20, $alt, "ATUALIZADA", "BL", 0, "C", 0);
  $pdf->cell(20, $alt, "Até o ".$txtper." (i)", "TBL", 0, "C", 0);
  $pdf->cell(20, $alt, "% i /(total i)", "LTB", 1, "C", 0);
- 
+
  for ($i = 0; $i < 7; $i ++) {
  	  if ($i == 0) {
  		   $pdf->cell(110, $alt, $subfuncao[$i], "", 0, "L", 0);
@@ -950,27 +951,27 @@ if (!isset($arqinclude)){
  		@ $pdf->cell(20, $alt, db_formatar((($subout_atebim / $total_acum) * 100), 'f'), "L", 1, "R", 0);
  	}
  }
- 
+
  $pdf->cell(110, $alt, "TOTAL", "TB", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($total_ini, 'f'), "TBL", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($total_atu, 'f'), "TBL", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($total_acum, 'f'), "TBL", 0, "R", 0);
  $pdf->cell(20, $alt, " - ", "LTB", 1, "R", 0);
- 
+
  //------------------------------------------------
- 
+
  // quadro DESPESAS COM SAUDE (POR SUBFUNCAO) ultimo quadro do relatorio
- 
- 
+
+
  $pdf->cell(110, $alt, "(-) DESPESAS COM INATIVOS E PENSIONISTAS", "0", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[1]['previni'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[1]['prevatu'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[1]['bimestre'], 'f'), "L", 0, "R", 0);
- @ $pdf->cell(20, $alt, db_formatar($$desp_p[1]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0);
- 
+ @ $pdf->cell(20, $alt, db_formatar(${$desp_p}[1]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0);
+
  // caso a linha abaixo seja zerada,  o manual diz que os valores devem ser pegos do quadro da receita
  // RRO , 4 Ed, pg 278
- 
+
  if ($desp_p[2]['previni']==0 &&  $desp_p[2]['prevatu']==0 && $desp_p[2]['bimestre']==0){
   	$desp_p[2]['previni']	  = $receitas_previni[6];
   	$desp_p[2]['prevatu']    =$receitas_prevatu[6];
@@ -981,19 +982,19 @@ if (!isset($arqinclude)){
   	$desp_p[3]['prevatu']    =$receitas_prevatu[11];
  	$desp_p[3]['bimestre']  =$receitas_atebime[11];	
  }	
- 
+
  $pdf->cell(110, $alt, "(-)DESPESAS CUSTEADAS COM OUTROS RECURSOS DESTINADOS À SAÚDE", "0", 0, "L", 0);
  $pdf->cell(20, $alt,db_formatar($desp_p[2]['previni']+$desp_p[3]['previni']+$desp_p[4]['previni'],'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt,db_formatar($desp_p[2]['prevatu'] +$desp_p[3]['prevatu'] +$desp_p[4]['prevatu'],'f') , "L", 0, "R", 0);
  $pdf->cell(20, $alt,db_formatar($desp_p[2]['bimestre']+$desp_p[3]['bimestre']+$desp_p[4]['bimestre'],'f') , "L", 0, "R", 0);
  @$pdf->cell(20, $alt,db_formatar(($desp_p[2]['bimestre']+$desp_p[3]['bimestre']+$desp_p[4]['bimestre'])*100/$total_IV_atebim  ,'f') , 'L', 1, "R", 0);
- 
+
  $pdf->cell(110, $alt, espaco($n1)."Recursos de Transferências do Sistema Único de Saúde - SUS", "0", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[2]['previni'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[2]['prevatu'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[2]['bimestre'], 'f'), "L", 0, "R", 0);
  @ $pdf->cell(20, $alt, db_formatar($desp_p[2]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0);
- 
+
  $pdf->cell(110, $alt, espaco($n1)."Recursos de Operações de Crédito", "0", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[3]['previni'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[3]['prevatu'], 'f'), "L", 0, "R", 0);
@@ -1005,38 +1006,38 @@ if (!isset($arqinclude)){
  $pdf->cell(20, $alt, db_formatar($desp_p[4]['prevatu'], 'f'), "L", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar($desp_p[4]['bimestre'], 'f'), "L", 0, "R", 0);
  @ $pdf->cell(20, $alt, db_formatar($desp_p[4]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0);
- 
- 
+
+
  $pdf->cell(110, $alt, "(-)RP INSCRITOS NO EXERCÍCIO SEM DISPONIBILIDADE FINANCEIRA", "0", 0, "L", 0);
  $pdf->cell(20, $alt, '-', "L", 0, "R", 0);
  $pdf->cell(20, $alt, '-', "L", 0, "R", 0);
  $pdf->cell(20, $alt, '-', "L", 0, "R", 0);
  $pdf->cell(20, $alt, '-', 'L', 1, "R", 0);
- 
- 
+
+
  $total01 =  ($desp_p[1]['previni'] + $desp_p[2]['previni']+$desp_p[3]['previni']+$desp_p[4]['previni']) ;
  $total02 =  ($desp_p[1]['prevatu']  +$desp_p[2]['prevatu'] +$desp_p[3]['prevatu'] +$desp_p[4]['prevatu'] )  ;
  $total03 =  ($desp_p[1]['bimestre'] + $desp_p[2]['bimestre']+$desp_p[3]['bimestre']+$desp_p[4]['bimestre'] ) ;
- 
- 
+
+
  $pdf->cell(110, $alt, "TOTAL DAS DESPESAS PRÓPRIAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE(V)", "TB", 0, "L", 0);
  $pdf->cell(20, $alt, db_formatar( $total_ini       - $total01, 'f'), "TBL", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar( $total_atu     - $total02, 'f'), "TBL", 0, "R", 0);
  $pdf->cell(20, $alt, db_formatar(  $total_acum - $total03, 'f'), "TBL", 0, "R", 0);
  @$pdf->cell(20, $alt, db_formatar(100, 'f'), "LTB", 1, "R", 0);
- 
- 
- 
+
+
+
  $pdf->cell(40, $alt, "FONTE : Contabilidade ", '0', 0, "L", 0);
- 
+
  //assinaturas
  $pdf->Ln(15);
- 
+
  assinaturas(&$pdf,&$classinatura,'LRF');
 
  $pdf->Output();
 
 } // end arqinclude
- 
+
 
 ?>

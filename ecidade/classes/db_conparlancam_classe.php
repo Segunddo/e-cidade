@@ -50,7 +50,7 @@ class cl_conparlancam {
                  c91_codconpas = int4 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_conparlancam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conparlancam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_conparlancam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c91_codele = ($this->c91_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codele"]:$this->c91_codele);
-       $this->c91_codconpas = ($this->c91_codconpas == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codconpas"]:$this->c91_codconpas);
+       $this->c91_codele = ($this->c91_codele === 0 || $this->c91_codele === 0.0 || $this->c91_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codele"]:$this->c91_codele);
+       $this->c91_codconpas = ($this->c91_codconpas === 0 || $this->c91_codconpas === 0.0 || $this->c91_codconpas == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codconpas"]:$this->c91_codconpas);
      }else{
-       $this->c91_codele = ($this->c91_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codele"]:$this->c91_codele);
+       $this->c91_codele = ($this->c91_codele === 0 || $this->c91_codele === 0.0 || $this->c91_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codele"]:$this->c91_codele);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_conparlancam {
        return false;
      }
        $this->c91_codele = $c91_codele; 
-     if(($this->c91_codele == null) || ($this->c91_codele == "") ){ 
+     if(($this->c91_codele == null) || ($this->c91_codele === 0 || $this->c91_codele === 0.0 || $this->c91_codele == "") ){ 
        $this->erro_sql = " Campo c91_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -303,7 +303,7 @@ class cl_conparlancam {
    function sql_query ( $c91_codele=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -329,7 +329,7 @@ class cl_conparlancam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -342,7 +342,7 @@ class cl_conparlancam {
    function sql_query_file ( $c91_codele=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_conparlancam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

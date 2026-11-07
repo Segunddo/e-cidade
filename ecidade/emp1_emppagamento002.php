@@ -96,7 +96,8 @@ $clsaltes = new cl_saltes;
 $clconlancamord	  = new cl_conlancamord;
 $clconlancamlr	  = new cl_conlancamlr;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 //retorna os arrays de lancamento...
@@ -130,7 +131,7 @@ if( ( isset($confirmar) && $sqlerro==false && $k11_tipautent == 1)  || isset($re
     $oImpressao = new impressaoAutenticacao($retorno);
     $oModelo = $oImpressao->getModelo();
     $oModelo->imprimir();
-    
+
     // b_msgbox($retorno);
     /*
     $fd = @fsockopen(db_getsession('DB_ip'),4444);
@@ -157,7 +158,7 @@ if(isset($pag_emp) && empty($confirmar)){
   $db_botao = true;
    //rotina que traz os dados de empempenho
    if(isset($e60_codemp) && $e60_codemp !=''){
-      $arr = split("/",$e60_codemp);
+      $arr = preg_split("#\\/#m",$e60_codemp);
       if(count($arr) == 2  && isset($arr[1]) && $arr[1] != '' ){
 	$dbwhere_ano = " and e60_anousu = ".$arr[1];
       }else{

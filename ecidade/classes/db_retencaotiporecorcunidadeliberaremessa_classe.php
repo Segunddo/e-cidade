@@ -45,13 +45,13 @@ class cl_retencaotiporecorcunidadeliberaremessa
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->e287_orgao = ($this->e287_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_orgao"]:$this->e287_orgao);
-       $this->e287_unidade = ($this->e287_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_unidade"]:$this->e287_unidade);
-       $this->e287_instituicao = ($this->e287_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_instituicao"]:$this->e287_instituicao);
+       $this->e287_orgao = ($this->e287_orgao === 0 || $this->e287_orgao === 0.0 || $this->e287_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_orgao"]:$this->e287_orgao);
+       $this->e287_unidade = ($this->e287_unidade === 0 || $this->e287_unidade === 0.0 || $this->e287_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_unidade"]:$this->e287_unidade);
+       $this->e287_instituicao = ($this->e287_instituicao === 0 || $this->e287_instituicao === 0.0 || $this->e287_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_instituicao"]:$this->e287_instituicao);
      }else{
-       $this->e287_orgao = ($this->e287_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_orgao"]:$this->e287_orgao);
-       $this->e287_unidade = ($this->e287_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_unidade"]:$this->e287_unidade);
-       $this->e287_instituicao = ($this->e287_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_instituicao"]:$this->e287_instituicao);
+       $this->e287_orgao = ($this->e287_orgao === 0 || $this->e287_orgao === 0.0 || $this->e287_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_orgao"]:$this->e287_orgao);
+       $this->e287_unidade = ($this->e287_unidade === 0 || $this->e287_unidade === 0.0 || $this->e287_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_unidade"]:$this->e287_unidade);
+       $this->e287_instituicao = ($this->e287_instituicao === 0 || $this->e287_instituicao === 0.0 || $this->e287_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["e287_instituicao"]:$this->e287_instituicao);
      }
    }
 
@@ -61,7 +61,7 @@ class cl_retencaotiporecorcunidadeliberaremessa
        $this->e287_orgao = $e287_orgao; 
        $this->e287_unidade = $e287_unidade; 
        $this->e287_instituicao = $e287_instituicao; 
-     if(($this->e287_orgao == null) || ($this->e287_orgao == "") ){ 
+     if(($this->e287_orgao == null) || ($this->e287_orgao === 0 || $this->e287_orgao === 0.0 || $this->e287_orgao == "") ){ 
        $this->erro_sql = " Campo e287_orgao não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -69,7 +69,7 @@ class cl_retencaotiporecorcunidadeliberaremessa
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e287_unidade == null) || ($this->e287_unidade == "") ){ 
+     if(($this->e287_unidade == null) || ($this->e287_unidade === 0 || $this->e287_unidade === 0.0 || $this->e287_unidade == "") ){ 
        $this->erro_sql = " Campo e287_unidade não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -77,7 +77,7 @@ class cl_retencaotiporecorcunidadeliberaremessa
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e287_instituicao == null) || ($this->e287_instituicao == "") ){ 
+     if(($this->e287_instituicao == null) || ($this->e287_instituicao === 0 || $this->e287_instituicao === 0.0 || $this->e287_instituicao == "") ){ 
        $this->erro_sql = " Campo e287_instituicao não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -31,7 +31,8 @@ include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_arreprescr_classe.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs);
+extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 $clarreprescr = new cl_arreprescr;
 ?>
@@ -129,7 +130,7 @@ function js_imprime(){
   }
 //  die("$sqlarrejustreg");
   $resultarrejustreg = db_query($sqlarrejustreg);
-	$linhasarrejustreg = pg_num_rows($resultarrejustreg);
+	$linhasarrejustreg = ($resultarrejustreg ? pg_num_rows($resultarrejustreg) : null);
 
   $ConfCor1 = "#EFE029";
   $ConfCor2 = "#E4F471";

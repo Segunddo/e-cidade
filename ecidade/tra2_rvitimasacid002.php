@@ -85,8 +85,8 @@
       //echo $sql
       $sum = 0;
       $rs2      = db_query($sql2);
-      $numrows2 = pg_num_rows($rs2);
-      while ($ln = pg_fetch_array($rs2)){
+      $numrows2 = ($rs2 ? pg_num_rows($rs2) : null);
+      while ($ln = ($rs2 ? pg_fetch_array($rs2) : null)){
           $pdf->setx(85+$x);
           $sum      +=  $ln["quantidade"];
           $pdf->cell(10,5,$ln["Total"],1,1,"C");

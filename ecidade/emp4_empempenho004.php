@@ -217,7 +217,8 @@ $clempautret = new cl_empautret;
 $clempempret = new cl_empempret;
 $clempretencao = new cl_empretencao;
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($_POST);
 
 //Checa parametro e mostra alerta de confirmacao de data

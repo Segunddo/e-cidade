@@ -32,7 +32,8 @@ include(modification("libs/db_sql.php"));
 include(modification("libs/db_liborcamento.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $classinatura = new cl_assinatura;
@@ -40,11 +41,11 @@ $classinatura = new cl_assinatura;
 
 //$tipo_agrupa = substr($nivel,0,1);
 
-$xinstit = split("-",$db_selinstit);
+$xinstit = preg_split("#\\-#m",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
       $descr_inst .= $xvirg.$nomeinstabrev ;
         $xvirg = ', ';
@@ -65,7 +66,7 @@ $head3 = "LISTAGEM DE ATIVIDADES/PROJETOS";
 $head4 = "EXERCICIO: ".db_getsession("DB_anousu")." - ".$xtipo;
 $head5 = "INSTITUIÇÕES : ".$descr_inst;
 
-$xcampos = split("-",$orgaos);
+$xcampos = preg_split("#\\-#m",$orgaos);
 
 
 if(substr($nivel,0,1) == '1'){
@@ -77,7 +78,7 @@ if(substr($nivel,0,1) == '1'){
 }
 $virgula1 = ' ';
 for($i=0;$i < sizeof($xcampos);$i++){
-   $xxcampos = split("_",$xcampos[$i]);
+   $xxcampos = preg_split("#_#m",$xcampos[$i]);
    $virgula = '';
    $where  = "'";
    $where1 = "'";
@@ -167,7 +168,7 @@ $totativg = 0;
 $totoperg = 0;
 $qualpa   = 0;
 		
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
 
   db_fieldsmemory($result,$i);
 

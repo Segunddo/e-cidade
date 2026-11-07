@@ -30,7 +30,7 @@ class cl_previsaodespesaplano {
                  c55_codigo = int4 = Código 
                  ";
    //funcao construtor da classe 
-   function cl_previsaodespesaplano() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("previsaodespesaplano"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -47,13 +47,13 @@ class cl_previsaodespesaplano {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c55_sequencial = ($this->c55_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_sequencial"]:$this->c55_sequencial);
-       $this->c55_previsaodespesa = ($this->c55_previsaodespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_previsaodespesa"]:$this->c55_previsaodespesa);
+       $this->c55_sequencial = ($this->c55_sequencial === 0 || $this->c55_sequencial === 0.0 || $this->c55_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_sequencial"]:$this->c55_sequencial);
+       $this->c55_previsaodespesa = ($this->c55_previsaodespesa === 0 || $this->c55_previsaodespesa === 0.0 || $this->c55_previsaodespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_previsaodespesa"]:$this->c55_previsaodespesa);
        $this->c55_titulo = ($this->c55_titulo == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_titulo"]:$this->c55_titulo);
-       $this->c55_valor = ($this->c55_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_valor"]:$this->c55_valor);
-       $this->c55_codigo = ($this->c55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_codigo"]:$this->c55_codigo);
+       $this->c55_valor = ($this->c55_valor === 0 || $this->c55_valor === 0.0 || $this->c55_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_valor"]:$this->c55_valor);
+       $this->c55_codigo = ($this->c55_codigo === 0 || $this->c55_codigo === 0.0 || $this->c55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_codigo"]:$this->c55_codigo);
      }else{
-       $this->c55_sequencial = ($this->c55_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_sequencial"]:$this->c55_sequencial);
+       $this->c55_sequencial = ($this->c55_sequencial === 0 || $this->c55_sequencial === 0.0 || $this->c55_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c55_sequencial"]:$this->c55_sequencial);
      }
    }
    // funcao para Inclusão
@@ -119,7 +119,7 @@ class cl_previsaodespesaplano {
          $this->c55_sequencial = $c55_sequencial; 
        }
      }
-     if(($this->c55_sequencial == null) || ($this->c55_sequencial == "") ){ 
+     if(($this->c55_sequencial == null) || ($this->c55_sequencial === 0 || $this->c55_sequencial === 0.0 || $this->c55_sequencial == "") ){ 
        $this->erro_sql = " Campo c55_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

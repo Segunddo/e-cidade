@@ -498,7 +498,7 @@ class AnexoIVDemonstrativoRPPS extends RelatoriosLegaisBase {
   /**
    * Executa o balancete da receita do ano atual e do ano anterior.
    */
-  protected function executarBalanceteDaReceita() {
+  protected function executarBalanceteDaReceita(array $linhas = null, array $colunas = null, $dataInicial = null, $dataFinal = null) {
 
     parent::executarBalanceteDaReceita();
 
@@ -583,7 +583,7 @@ class AnexoIVDemonstrativoRPPS extends RelatoriosLegaisBase {
   /**
    * Executa o Balancete de Verificação
    */
-  protected function executarBalanceteVerificacao() {
+  protected function executarBalanceteVerificacao(array $linhas = null, array $colunas = null, $where = null) {
 
     parent::executarBalanceteVerificacao();
 

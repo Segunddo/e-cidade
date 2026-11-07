@@ -73,7 +73,7 @@ class cl_extratolinha {
                  k86_observacao = text = Observação referente ao extrato
                  ";
    //funcao construtor da classe
-   function cl_extratolinha() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("extratolinha");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,10 +90,10 @@ class cl_extratolinha {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k86_sequencial = ($this->k86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_sequencial"]:$this->k86_sequencial);
-       $this->k86_extrato = ($this->k86_extrato == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_extrato"]:$this->k86_extrato);
-       $this->k86_bancohistmov = ($this->k86_bancohistmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_bancohistmov"]:$this->k86_bancohistmov);
-       $this->k86_contabancaria = ($this->k86_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_contabancaria"]:$this->k86_contabancaria);
+       $this->k86_sequencial = ($this->k86_sequencial === 0 || $this->k86_sequencial === 0.0 || $this->k86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_sequencial"]:$this->k86_sequencial);
+       $this->k86_extrato = ($this->k86_extrato === 0 || $this->k86_extrato === 0.0 || $this->k86_extrato == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_extrato"]:$this->k86_extrato);
+       $this->k86_bancohistmov = ($this->k86_bancohistmov === 0 || $this->k86_bancohistmov === 0.0 || $this->k86_bancohistmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_bancohistmov"]:$this->k86_bancohistmov);
+       $this->k86_contabancaria = ($this->k86_contabancaria === 0 || $this->k86_contabancaria === 0.0 || $this->k86_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_contabancaria"]:$this->k86_contabancaria);
        if($this->k86_data == ""){
          $this->k86_data_dia = ($this->k86_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_data_dia"]:$this->k86_data_dia);
          $this->k86_data_mes = ($this->k86_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_data_mes"]:$this->k86_data_mes);
@@ -102,7 +102,7 @@ class cl_extratolinha {
             $this->k86_data = $this->k86_data_ano."-".$this->k86_data_mes."-".$this->k86_data_dia;
          }
        }
-       $this->k86_valor = ($this->k86_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_valor"]:$this->k86_valor);
+       $this->k86_valor = ($this->k86_valor === 0 || $this->k86_valor === 0.0 || $this->k86_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_valor"]:$this->k86_valor);
        $this->k86_tipo = ($this->k86_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_tipo"]:$this->k86_tipo);
        $this->k86_historico = ($this->k86_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_historico"]:$this->k86_historico);
        $this->k86_documento = ($this->k86_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_documento"]:$this->k86_documento);
@@ -110,7 +110,7 @@ class cl_extratolinha {
        $this->k86_loteseq = ($this->k86_loteseq == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_loteseq"]:$this->k86_loteseq);
        $this->k86_observacao = ($this->k86_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_observacao"]:$this->k86_observacao);
      }else{
-       $this->k86_sequencial = ($this->k86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_sequencial"]:$this->k86_sequencial);
+       $this->k86_sequencial = ($this->k86_sequencial === 0 || $this->k86_sequencial === 0.0 || $this->k86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k86_sequencial"]:$this->k86_sequencial);
      }
    }
    // funcao para inclusao
@@ -230,7 +230,7 @@ class cl_extratolinha {
          $this->k86_sequencial = $k86_sequencial;
        }
      }
-     if(($this->k86_sequencial == null) || ($this->k86_sequencial == "") ){
+     if(($this->k86_sequencial == null) || ($this->k86_sequencial === 0 || $this->k86_sequencial === 0.0 || $this->k86_sequencial == "") ){
        $this->erro_sql = " Campo k86_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -673,7 +673,7 @@ class cl_extratolinha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -686,7 +686,7 @@ class cl_extratolinha {
    function sql_query_file ( $k86_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -707,7 +707,7 @@ class cl_extratolinha {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

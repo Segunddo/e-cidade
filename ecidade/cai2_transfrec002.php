@@ -71,8 +71,8 @@ if (!empty($filtroRecurso)) {
 $sql .= "  order by rdeb.o15_codigo,rcred.o15_codigo,corlanc.k12_data  ";
 
 $result = db_query($sql);
-$rows = pg_numrows($result);
-if (pg_numrows($result) == 0) {
+$rows = ($result ? pg_numrows($result) : null);
+if (($result ? pg_numrows($result) : null) == 0) {
     db_redireciona('db_erros.php?fechar=true&db_erro=Não existem dados neste periodo.');
 }
 

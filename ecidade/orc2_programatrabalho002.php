@@ -30,7 +30,8 @@ require_once(modification("libs/db_stdlib.php"));
 require_once(modification("libs/db_conecta.php"));
 require_once(modification("libs/db_sessoes.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs);
+extract($__qs);
 
 if ($unidade == '') {
     $unidade = 0;
@@ -92,7 +93,7 @@ $pdf->setfillcolor(235);
 $pdf->setfont('arial', 'b', 7);
 $troca = 1;
 
-for ($o = 0; $o < pg_numrows($res_orgao); $o++) {
+for ($o = 0; $o < ($res_orgao ? pg_numrows($res_orgao) : null); $o++) {
     db_fieldsmemory($res_orgao, $o);
     /////inicio funcao
     $imprimirTotal = false;

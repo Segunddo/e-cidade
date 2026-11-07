@@ -45,7 +45,7 @@ class AnexoReceitaLegislacao extends RelatoriosLegaisBase {
      *
      * @return stdClass[]
      */
-    public function getDados() {
+    public function getDados($trazerConfiguracaoPadrao = true) {
 
         $sDataInicial     = "{$this->iAnoUsu}-01-01";
         $sDataFinal       = "{$this->iAnoUsu}-12-31";

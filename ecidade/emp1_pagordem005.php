@@ -43,7 +43,8 @@ require_once(modification("classes/db_empord_classe.php"));
 require_once(modification("classes/db_empnotaele_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 //db_postmemory($HTTP_POST_VARS,2);
 //db_postmemory($HTTP_SERVER_VARS,2);
@@ -133,10 +134,10 @@ if (isset ($alterar) || isset ($alterarimp)) {
 
 		//rotina que altera em pagordemele
 		if ($sqlerro == false) {
-			$arr_dados = split("#", $dados);
+			$arr_dados = preg_split("#\\##m", $dados);
 			$tam = count($arr_dados);
 			for ($i = 0; $i < $tam; $i ++) {
-				$arr_ele = split("-", $arr_dados[$i]);
+				$arr_ele = preg_split("#\\-#m", $arr_dados[$i]);
 				$elemento = $arr_ele[0];
 
 				if (isset ($chaves) && $chaves != '') {
@@ -255,7 +256,7 @@ if (isset ($alterar) || isset ($alterarimp)) {
 		}
 		//rotina pega as notas marcadas para atualizar os valores liquidados da notas
 		if ($sqlerro == false && isset ($chaves) && $chaves != '') {
-			$arr_notas = split("#", $chaves);
+			$arr_notas = preg_split("#\\##m", $chaves);
 			$tam = count($arr_notas);
 			for ($i = 0; $i < $tam; $i ++) {
 				$nota = $arr_notas[$i];

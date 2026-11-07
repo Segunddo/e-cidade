@@ -98,7 +98,7 @@ $sSqlEstimativa .= " and o08_instit in({$sListaInstit})";
 $sSqlEstimativa .= " order by o08_orgao";
 //die($sSqlEstimativa);
 $rsEstimativa 	   = db_query($sSqlEstimativa); 
-$iLinhasEstimativa = pg_num_rows($rsEstimativa);
+$iLinhasEstimativa = ($rsEstimativa ? pg_num_rows($rsEstimativa) : null);
 $aEstimativa	     = array();	 
 
 for ( $iInd=0; $iInd < $iLinhasEstimativa; $iInd++ ) {

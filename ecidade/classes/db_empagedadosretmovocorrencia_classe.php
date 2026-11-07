@@ -54,7 +54,7 @@ class cl_empagedadosretmovocorrencia {
                  e02_errobanco = int4 = Sequencial ErroBanco 
                  ";
    //funcao construtor da classe 
-   function cl_empagedadosretmovocorrencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empagedadosretmovocorrencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_empagedadosretmovocorrencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e02_sequencial = ($this->e02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_sequencial"]:$this->e02_sequencial);
-       $this->e02_empagedadosret = ($this->e02_empagedadosret == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_empagedadosret"]:$this->e02_empagedadosret);
-       $this->e02_empagedadosretmov = ($this->e02_empagedadosretmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_empagedadosretmov"]:$this->e02_empagedadosretmov);
-       $this->e02_errobanco = ($this->e02_errobanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_errobanco"]:$this->e02_errobanco);
+       $this->e02_sequencial = ($this->e02_sequencial === 0 || $this->e02_sequencial === 0.0 || $this->e02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_sequencial"]:$this->e02_sequencial);
+       $this->e02_empagedadosret = ($this->e02_empagedadosret === 0 || $this->e02_empagedadosret === 0.0 || $this->e02_empagedadosret == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_empagedadosret"]:$this->e02_empagedadosret);
+       $this->e02_empagedadosretmov = ($this->e02_empagedadosretmov === 0 || $this->e02_empagedadosretmov === 0.0 || $this->e02_empagedadosretmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_empagedadosretmov"]:$this->e02_empagedadosretmov);
+       $this->e02_errobanco = ($this->e02_errobanco === 0 || $this->e02_errobanco === 0.0 || $this->e02_errobanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_errobanco"]:$this->e02_errobanco);
      }else{
-       $this->e02_sequencial = ($this->e02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_sequencial"]:$this->e02_sequencial);
+       $this->e02_sequencial = ($this->e02_sequencial === 0 || $this->e02_sequencial === 0.0 || $this->e02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_sequencial"]:$this->e02_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_empagedadosretmovocorrencia {
          $this->e02_sequencial = $e02_sequencial; 
        }
      }
-     if(($this->e02_sequencial == null) || ($this->e02_sequencial == "") ){ 
+     if(($this->e02_sequencial == null) || ($this->e02_sequencial === 0 || $this->e02_sequencial === 0.0 || $this->e02_sequencial == "") ){ 
        $this->erro_sql = " Campo e02_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_empagedadosretmovocorrencia {
    function sql_query ( $e02_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_empagedadosretmovocorrencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_empagedadosretmovocorrencia {
    function sql_query_file ( $e02_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_empagedadosretmovocorrencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

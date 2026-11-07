@@ -62,7 +62,7 @@ function envia(id){
          where   tr08_idacidente = ".db_getsession("id_acidente");
   //echo $sql;
   $rs  = db_query($sql);
-  if (pg_num_rows($rs) > 0 ){
+  if (($rs ? pg_num_rows($rs) : null) > 0 ){
   ?>
     <table border=1 cellspacing=0>
         <tr style="background-color:#999999">

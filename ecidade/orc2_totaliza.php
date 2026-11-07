@@ -53,7 +53,8 @@ $tipo_filtra = 1;
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $head3 = "PROGRAMA DE TRABALHO POR ORGAO E UNIDADE ";
 $head4 = "ANEXO (6) EXERCICIO: ".db_getsession("DB_anousu");
@@ -163,7 +164,7 @@ $troca = 1;
 $alt = 4;
 
 $pagina = 1;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
 
   db_fieldsmemory($result,$i);
 

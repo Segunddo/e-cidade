@@ -54,7 +54,7 @@ class cl_orcsuplemrec {
                  o85_valor = float8 = valor 
                  ";
    //funcao construtor da classe 
-   function cl_orcsuplemrec() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcsuplemrec"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,13 +71,13 @@ class cl_orcsuplemrec {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o85_codsup = ($this->o85_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codsup"]:$this->o85_codsup);
-       $this->o85_codrec = ($this->o85_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codrec"]:$this->o85_codrec);
-       $this->o85_anousu = ($this->o85_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_anousu"]:$this->o85_anousu);
-       $this->o85_valor = ($this->o85_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_valor"]:$this->o85_valor);
+       $this->o85_codsup = ($this->o85_codsup === 0 || $this->o85_codsup === 0.0 || $this->o85_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codsup"]:$this->o85_codsup);
+       $this->o85_codrec = ($this->o85_codrec === 0 || $this->o85_codrec === 0.0 || $this->o85_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codrec"]:$this->o85_codrec);
+       $this->o85_anousu = ($this->o85_anousu === 0 || $this->o85_anousu === 0.0 || $this->o85_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_anousu"]:$this->o85_anousu);
+       $this->o85_valor = ($this->o85_valor === 0 || $this->o85_valor === 0.0 || $this->o85_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_valor"]:$this->o85_valor);
      }else{
-       $this->o85_codsup = ($this->o85_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codsup"]:$this->o85_codsup);
-       $this->o85_codrec = ($this->o85_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codrec"]:$this->o85_codrec);
+       $this->o85_codsup = ($this->o85_codsup === 0 || $this->o85_codsup === 0.0 || $this->o85_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codsup"]:$this->o85_codsup);
+       $this->o85_codrec = ($this->o85_codrec === 0 || $this->o85_codrec === 0.0 || $this->o85_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codrec"]:$this->o85_codrec);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_orcsuplemrec {
      }
        $this->o85_codsup = $o85_codsup; 
        $this->o85_codrec = $o85_codrec; 
-     if(($this->o85_codsup == null) || ($this->o85_codsup == "") ){ 
+     if(($this->o85_codsup == null) || ($this->o85_codsup === 0 || $this->o85_codsup === 0.0 || $this->o85_codsup == "") ){ 
        $this->erro_sql = " Campo o85_codsup nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_orcsuplemrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o85_codrec == null) || ($this->o85_codrec == "") ){ 
+     if(($this->o85_codrec == null) || ($this->o85_codrec === 0 || $this->o85_codrec === 0.0 || $this->o85_codrec == "") ){ 
        $this->erro_sql = " Campo o85_codrec nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -380,7 +380,7 @@ class cl_orcsuplemrec {
    function sql_query ( $o85_codsup=null,$o85_codrec=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_orcsuplemrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_orcsuplemrec {
    function sql_query_file ( $o85_codsup=null,$o85_codrec=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -457,7 +457,7 @@ class cl_orcsuplemrec {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

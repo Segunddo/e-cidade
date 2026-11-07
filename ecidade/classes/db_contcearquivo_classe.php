@@ -73,7 +73,7 @@ class cl_contcearquivo {
                  c11_infleiame = text = Informações Adicionais leiame 
                  ";
    //funcao construtor da classe 
-   function cl_contcearquivo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("contcearquivo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -90,9 +90,9 @@ class cl_contcearquivo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c11_sequencial = ($this->c11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_sequencial"]:$this->c11_sequencial);
-       $this->c11_concadtce = ($this->c11_concadtce == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_concadtce"]:$this->c11_concadtce);
-       $this->c11_instit = ($this->c11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_instit"]:$this->c11_instit);
+       $this->c11_sequencial = ($this->c11_sequencial === 0 || $this->c11_sequencial === 0.0 || $this->c11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_sequencial"]:$this->c11_sequencial);
+       $this->c11_concadtce = ($this->c11_concadtce === 0 || $this->c11_concadtce === 0.0 || $this->c11_concadtce == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_concadtce"]:$this->c11_concadtce);
+       $this->c11_instit = ($this->c11_instit === 0 || $this->c11_instit === 0.0 || $this->c11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_instit"]:$this->c11_instit);
        if($this->c11_dataini == ""){
          $this->c11_dataini_dia = ($this->c11_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_dataini_dia"]:$this->c11_dataini_dia);
          $this->c11_dataini_mes = ($this->c11_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_dataini_mes"]:$this->c11_dataini_mes);
@@ -117,11 +117,11 @@ class cl_contcearquivo {
             $this->c11_datafim = $this->c11_datafim_ano."-".$this->c11_datafim_mes."-".$this->c11_datafim_dia;
          }
        }
-       $this->c11_codigoremessa = ($this->c11_codigoremessa == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_codigoremessa"]:$this->c11_codigoremessa);
-       $this->c11_diapagtofolha = ($this->c11_diapagtofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_diapagtofolha"]:$this->c11_diapagtofolha);
+       $this->c11_codigoremessa = ($this->c11_codigoremessa === 0 || $this->c11_codigoremessa === 0.0 || $this->c11_codigoremessa == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_codigoremessa"]:$this->c11_codigoremessa);
+       $this->c11_diapagtofolha = ($this->c11_diapagtofolha === 0 || $this->c11_diapagtofolha === 0.0 || $this->c11_diapagtofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_diapagtofolha"]:$this->c11_diapagtofolha);
        $this->c11_infleiame = ($this->c11_infleiame == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_infleiame"]:$this->c11_infleiame);
      }else{
-       $this->c11_sequencial = ($this->c11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_sequencial"]:$this->c11_sequencial);
+       $this->c11_sequencial = ($this->c11_sequencial === 0 || $this->c11_sequencial === 0.0 || $this->c11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c11_sequencial"]:$this->c11_sequencial);
      }
    }
    // funcao para inclusao
@@ -214,7 +214,7 @@ class cl_contcearquivo {
          $this->c11_sequencial = $c11_sequencial; 
        }
      }
-     if(($this->c11_sequencial == null) || ($this->c11_sequencial == "") ){ 
+     if(($this->c11_sequencial == null) || ($this->c11_sequencial === 0 || $this->c11_sequencial === 0.0 || $this->c11_sequencial == "") ){ 
        $this->erro_sql = " Campo c11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -599,7 +599,7 @@ class cl_contcearquivo {
    function sql_query ( $c11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -624,7 +624,7 @@ class cl_contcearquivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -636,7 +636,7 @@ class cl_contcearquivo {
    function sql_query_file ( $c11_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -657,7 +657,7 @@ class cl_contcearquivo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -85,7 +85,7 @@ class cl_receita {
                  o08_codest = char(    12) = Codigo da receita (novo) 
                  ";
    //funcao construtor da classe 
-   function cl_receita() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("receita"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -102,29 +102,29 @@ class cl_receita {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o08_anousu = ($this->o08_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_anousu"]:$this->o08_anousu);
+       $this->o08_anousu = ($this->o08_anousu === 0 || $this->o08_anousu === 0.0 || $this->o08_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_anousu"]:$this->o08_anousu);
        $this->o08_codrec = ($this->o08_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_codrec"]:$this->o08_codrec);
-       $this->o08_reduz = ($this->o08_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_reduz"]:$this->o08_reduz);
+       $this->o08_reduz = ($this->o08_reduz === 0 || $this->o08_reduz === 0.0 || $this->o08_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_reduz"]:$this->o08_reduz);
        $this->o08_digito = ($this->o08_digito == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_digito"]:$this->o08_digito);
-       $this->o08_valor = ($this->o08_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_valor"]:$this->o08_valor);
-       $this->o08_arre01 = ($this->o08_arre01 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre01"]:$this->o08_arre01);
-       $this->o08_arre02 = ($this->o08_arre02 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre02"]:$this->o08_arre02);
-       $this->o08_arre03 = ($this->o08_arre03 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre03"]:$this->o08_arre03);
-       $this->o08_arre04 = ($this->o08_arre04 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre04"]:$this->o08_arre04);
-       $this->o08_arre05 = ($this->o08_arre05 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre05"]:$this->o08_arre05);
-       $this->o08_arre06 = ($this->o08_arre06 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre06"]:$this->o08_arre06);
-       $this->o08_arre07 = ($this->o08_arre07 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre07"]:$this->o08_arre07);
-       $this->o08_arre08 = ($this->o08_arre08 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre08"]:$this->o08_arre08);
-       $this->o08_arre09 = ($this->o08_arre09 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre09"]:$this->o08_arre09);
-       $this->o08_arre10 = ($this->o08_arre10 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre10"]:$this->o08_arre10);
-       $this->o08_arre11 = ($this->o08_arre11 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre11"]:$this->o08_arre11);
-       $this->o08_arre12 = ($this->o08_arre12 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre12"]:$this->o08_arre12);
-       $this->o08_origin = ($this->o08_origin == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_origin"]:$this->o08_origin);
+       $this->o08_valor = ($this->o08_valor === 0 || $this->o08_valor === 0.0 || $this->o08_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_valor"]:$this->o08_valor);
+       $this->o08_arre01 = ($this->o08_arre01 === 0 || $this->o08_arre01 === 0.0 || $this->o08_arre01 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre01"]:$this->o08_arre01);
+       $this->o08_arre02 = ($this->o08_arre02 === 0 || $this->o08_arre02 === 0.0 || $this->o08_arre02 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre02"]:$this->o08_arre02);
+       $this->o08_arre03 = ($this->o08_arre03 === 0 || $this->o08_arre03 === 0.0 || $this->o08_arre03 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre03"]:$this->o08_arre03);
+       $this->o08_arre04 = ($this->o08_arre04 === 0 || $this->o08_arre04 === 0.0 || $this->o08_arre04 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre04"]:$this->o08_arre04);
+       $this->o08_arre05 = ($this->o08_arre05 === 0 || $this->o08_arre05 === 0.0 || $this->o08_arre05 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre05"]:$this->o08_arre05);
+       $this->o08_arre06 = ($this->o08_arre06 === 0 || $this->o08_arre06 === 0.0 || $this->o08_arre06 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre06"]:$this->o08_arre06);
+       $this->o08_arre07 = ($this->o08_arre07 === 0 || $this->o08_arre07 === 0.0 || $this->o08_arre07 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre07"]:$this->o08_arre07);
+       $this->o08_arre08 = ($this->o08_arre08 === 0 || $this->o08_arre08 === 0.0 || $this->o08_arre08 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre08"]:$this->o08_arre08);
+       $this->o08_arre09 = ($this->o08_arre09 === 0 || $this->o08_arre09 === 0.0 || $this->o08_arre09 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre09"]:$this->o08_arre09);
+       $this->o08_arre10 = ($this->o08_arre10 === 0 || $this->o08_arre10 === 0.0 || $this->o08_arre10 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre10"]:$this->o08_arre10);
+       $this->o08_arre11 = ($this->o08_arre11 === 0 || $this->o08_arre11 === 0.0 || $this->o08_arre11 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre11"]:$this->o08_arre11);
+       $this->o08_arre12 = ($this->o08_arre12 === 0 || $this->o08_arre12 === 0.0 || $this->o08_arre12 == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_arre12"]:$this->o08_arre12);
+       $this->o08_origin = ($this->o08_origin === 0 || $this->o08_origin === 0.0 || $this->o08_origin == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_origin"]:$this->o08_origin);
        $this->o08_lancad = ($this->o08_lancad == "f"?@$GLOBALS["HTTP_POST_VARS"]["o08_lancad"]:$this->o08_lancad);
        $this->o08_recurs = ($this->o08_recurs == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_recurs"]:$this->o08_recurs);
        $this->o08_codest = ($this->o08_codest == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_codest"]:$this->o08_codest);
      }else{
-       $this->o08_anousu = ($this->o08_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_anousu"]:$this->o08_anousu);
+       $this->o08_anousu = ($this->o08_anousu === 0 || $this->o08_anousu === 0.0 || $this->o08_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_anousu"]:$this->o08_anousu);
        $this->o08_codest = ($this->o08_codest == ""?@$GLOBALS["HTTP_POST_VARS"]["o08_codest"]:$this->o08_codest);
      }
    }
@@ -304,7 +304,7 @@ class cl_receita {
      }
        $this->o08_anousu = $o08_anousu; 
        $this->o08_codest = $o08_codest; 
-     if(($this->o08_anousu == null) || ($this->o08_anousu == "") ){ 
+     if(($this->o08_anousu == null) || ($this->o08_anousu === 0 || $this->o08_anousu === 0.0 || $this->o08_anousu == "") ){ 
        $this->erro_sql = " Campo o08_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -925,7 +925,7 @@ class cl_receita {
    function sql_query ( $o08_anousu=null,$o08_codest=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -954,7 +954,7 @@ class cl_receita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -967,7 +967,7 @@ class cl_receita {
    function sql_query_file ( $o08_anousu=null,$o08_codest=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -996,7 +996,7 @@ class cl_receita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

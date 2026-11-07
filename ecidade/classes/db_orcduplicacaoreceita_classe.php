@@ -54,7 +54,7 @@ class cl_orcduplicacaoreceita {
                  o77_anousu = int4 = Ano 
                  ";
    //funcao construtor da classe 
-   function cl_orcduplicacaoreceita() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("orcduplicacaoreceita"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_orcduplicacaoreceita {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o77_sequencial = ($this->o77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o77_sequencial"]:$this->o77_sequencial);
-       $this->o77_orcduplicacao = ($this->o77_orcduplicacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o77_orcduplicacao"]:$this->o77_orcduplicacao);
-       $this->o77_codrec = ($this->o77_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o77_codrec"]:$this->o77_codrec);
-       $this->o77_anousu = ($this->o77_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o77_anousu"]:$this->o77_anousu);
+       $this->o77_sequencial = ($this->o77_sequencial === 0 || $this->o77_sequencial === 0.0 || $this->o77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o77_sequencial"]:$this->o77_sequencial);
+       $this->o77_orcduplicacao = ($this->o77_orcduplicacao === 0 || $this->o77_orcduplicacao === 0.0 || $this->o77_orcduplicacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o77_orcduplicacao"]:$this->o77_orcduplicacao);
+       $this->o77_codrec = ($this->o77_codrec === 0 || $this->o77_codrec === 0.0 || $this->o77_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o77_codrec"]:$this->o77_codrec);
+       $this->o77_anousu = ($this->o77_anousu === 0 || $this->o77_anousu === 0.0 || $this->o77_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o77_anousu"]:$this->o77_anousu);
      }else{
-       $this->o77_sequencial = ($this->o77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o77_sequencial"]:$this->o77_sequencial);
+       $this->o77_sequencial = ($this->o77_sequencial === 0 || $this->o77_sequencial === 0.0 || $this->o77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o77_sequencial"]:$this->o77_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_orcduplicacaoreceita {
          $this->o77_sequencial = $o77_sequencial; 
        }
      }
-     if(($this->o77_sequencial == null) || ($this->o77_sequencial == "") ){ 
+     if(($this->o77_sequencial == null) || ($this->o77_sequencial === 0 || $this->o77_sequencial === 0.0 || $this->o77_sequencial == "") ){ 
        $this->erro_sql = " Campo o77_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -390,7 +390,7 @@ class cl_orcduplicacaoreceita {
    function sql_query ( $o77_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_orcduplicacaoreceita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -428,7 +428,7 @@ class cl_orcduplicacaoreceita {
    function sql_query_file ( $o77_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -449,7 +449,7 @@ class cl_orcduplicacaoreceita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

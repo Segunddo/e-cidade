@@ -54,7 +54,7 @@ class cl_cronogramaperspectivadespesa {
                  o130_anousu = int4 = Ano da Dotação 
                  ";
    //funcao construtor da classe 
-   function cl_cronogramaperspectivadespesa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cronogramaperspectivadespesa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_cronogramaperspectivadespesa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o130_sequencial = ($this->o130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o130_sequencial"]:$this->o130_sequencial);
-       $this->o130_cronogramaperspectiva = ($this->o130_cronogramaperspectiva == ""?@$GLOBALS["HTTP_POST_VARS"]["o130_cronogramaperspectiva"]:$this->o130_cronogramaperspectiva);
-       $this->o130_coddot = ($this->o130_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o130_coddot"]:$this->o130_coddot);
-       $this->o130_anousu = ($this->o130_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o130_anousu"]:$this->o130_anousu);
+       $this->o130_sequencial = ($this->o130_sequencial === 0 || $this->o130_sequencial === 0.0 || $this->o130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o130_sequencial"]:$this->o130_sequencial);
+       $this->o130_cronogramaperspectiva = ($this->o130_cronogramaperspectiva === 0 || $this->o130_cronogramaperspectiva === 0.0 || $this->o130_cronogramaperspectiva == ""?@$GLOBALS["HTTP_POST_VARS"]["o130_cronogramaperspectiva"]:$this->o130_cronogramaperspectiva);
+       $this->o130_coddot = ($this->o130_coddot === 0 || $this->o130_coddot === 0.0 || $this->o130_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o130_coddot"]:$this->o130_coddot);
+       $this->o130_anousu = ($this->o130_anousu === 0 || $this->o130_anousu === 0.0 || $this->o130_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o130_anousu"]:$this->o130_anousu);
      }else{
-       $this->o130_sequencial = ($this->o130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o130_sequencial"]:$this->o130_sequencial);
+       $this->o130_sequencial = ($this->o130_sequencial === 0 || $this->o130_sequencial === 0.0 || $this->o130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o130_sequencial"]:$this->o130_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_cronogramaperspectivadespesa {
          $this->o130_sequencial = $o130_sequencial; 
        }
      }
-     if(($this->o130_sequencial == null) || ($this->o130_sequencial == "") ){ 
+     if(($this->o130_sequencial == null) || ($this->o130_sequencial === 0 || $this->o130_sequencial === 0.0 || $this->o130_sequencial == "") ){ 
        $this->erro_sql = " Campo o130_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_cronogramaperspectivadespesa {
    function sql_query ( $o130_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -426,7 +426,7 @@ class cl_cronogramaperspectivadespesa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -439,7 +439,7 @@ class cl_cronogramaperspectivadespesa {
    function sql_query_file ( $o130_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_cronogramaperspectivadespesa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -473,7 +473,7 @@ class cl_cronogramaperspectivadespesa {
  function sql_query_dotacao ( $o130_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -505,7 +505,7 @@ class cl_cronogramaperspectivadespesa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_cronogramaperspectivadespesa {
    * @param $sGroup
    * @return string
    */
-  public function sql_query_dotacoes_fora_cronograma($sCampos = '*', $iCodigoCronograma, $sWhere = null, $sOrder = null, $sGroup = null) {
+  public function sql_query_dotacoes_fora_cronograma($sCampos = '*', $iCodigoCronograma = null, $sWhere = null, $sOrder = null, $sGroup = null) {
 
     $sSqlMetas  = "select {$sCampos} ";
     $sSqlMetas .= " from orcdotacao ";

@@ -122,7 +122,7 @@ $resultlistatipo = db_query($sqllistatipo);
 $virgula = '';
 $tipos = '';
 $descrtipo = '';
-for($yy = 0;$yy < pg_numrows($resultlistatipo);$yy++ ){
+for($yy = 0;$yy < ($resultlistatipo ? pg_numrows($resultlistatipo) : null);$yy++ ){
    db_fieldsmemory($resultlistatipo,$yy);
    $tipos .= $virgula.$k62_tipodeb;
    $descrtipo .= $virgula.trim($k03_descr);
@@ -231,7 +231,7 @@ $sql = "select $xxcodigo as notifica,$xxcodigo1 as $xcodigo1,z01_numcgm,z01_nome
         ";
 //die($sql);
 $result = db_query($sql);
-if (pg_numrows($result) == 0){
+if (($result ? pg_numrows($result) : null) == 0){
   
    $oParms = new stdClass();
    $oParms->sLista = $lista;
