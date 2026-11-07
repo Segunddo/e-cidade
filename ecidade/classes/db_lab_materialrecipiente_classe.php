@@ -64,7 +64,7 @@ class cl_lab_materialrecipiente {
                  la17_d_fim = date = Fim 
                  ";
    //funcao construtor da classe 
-   function cl_lab_materialrecipiente() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_materialrecipiente"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,10 +81,10 @@ class cl_lab_materialrecipiente {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la17_i_codigo = ($this->la17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_i_codigo"]:$this->la17_i_codigo);
-       $this->la17_i_recipiente = ($this->la17_i_recipiente == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_i_recipiente"]:$this->la17_i_recipiente);
-       $this->la17_i_unidade = ($this->la17_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_i_unidade"]:$this->la17_i_unidade);
-       $this->la17_i_materialcoleta = ($this->la17_i_materialcoleta == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_i_materialcoleta"]:$this->la17_i_materialcoleta);
+       $this->la17_i_codigo = ($this->la17_i_codigo === 0 || $this->la17_i_codigo === 0.0 || $this->la17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_i_codigo"]:$this->la17_i_codigo);
+       $this->la17_i_recipiente = ($this->la17_i_recipiente === 0 || $this->la17_i_recipiente === 0.0 || $this->la17_i_recipiente == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_i_recipiente"]:$this->la17_i_recipiente);
+       $this->la17_i_unidade = ($this->la17_i_unidade === 0 || $this->la17_i_unidade === 0.0 || $this->la17_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_i_unidade"]:$this->la17_i_unidade);
+       $this->la17_i_materialcoleta = ($this->la17_i_materialcoleta === 0 || $this->la17_i_materialcoleta === 0.0 || $this->la17_i_materialcoleta == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_i_materialcoleta"]:$this->la17_i_materialcoleta);
        if($this->la17_d_inicio == ""){
          $this->la17_d_inicio_dia = ($this->la17_d_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_d_inicio_dia"]:$this->la17_d_inicio_dia);
          $this->la17_d_inicio_mes = ($this->la17_d_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_d_inicio_mes"]:$this->la17_d_inicio_mes);
@@ -102,7 +102,7 @@ class cl_lab_materialrecipiente {
          }
        }
      }else{
-       $this->la17_i_codigo = ($this->la17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_i_codigo"]:$this->la17_i_codigo);
+       $this->la17_i_codigo = ($this->la17_i_codigo === 0 || $this->la17_i_codigo === 0.0 || $this->la17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la17_i_codigo"]:$this->la17_i_codigo);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_lab_materialrecipiente {
          $this->la17_i_codigo = $la17_i_codigo; 
        }
      }
-     if(($this->la17_i_codigo == null) || ($this->la17_i_codigo == "") ){ 
+     if(($this->la17_i_codigo == null) || ($this->la17_i_codigo === 0 || $this->la17_i_codigo === 0.0 || $this->la17_i_codigo == "") ){ 
        $this->erro_sql = " Campo la17_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -501,7 +501,7 @@ class cl_lab_materialrecipiente {
    function sql_query ( $la17_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_lab_materialrecipiente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -538,7 +538,7 @@ class cl_lab_materialrecipiente {
    function sql_query_file ( $la17_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -559,7 +559,7 @@ class cl_lab_materialrecipiente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

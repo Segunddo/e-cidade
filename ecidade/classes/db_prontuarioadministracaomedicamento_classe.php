@@ -26,7 +26,7 @@ class cl_prontuarioadministracaomedicamento {
                  sd106_administracaomedicamento = int4 = Administração de Medicamento 
                  ";
    //funcao construtor da classe 
-   function cl_prontuarioadministracaomedicamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prontuarioadministracaomedicamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_prontuarioadministracaomedicamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd106_codigo = ($this->sd106_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd106_codigo"]:$this->sd106_codigo);
-       $this->sd106_prontuario = ($this->sd106_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd106_prontuario"]:$this->sd106_prontuario);
-       $this->sd106_administracaomedicamento = ($this->sd106_administracaomedicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd106_administracaomedicamento"]:$this->sd106_administracaomedicamento);
+       $this->sd106_codigo = ($this->sd106_codigo === 0 || $this->sd106_codigo === 0.0 || $this->sd106_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd106_codigo"]:$this->sd106_codigo);
+       $this->sd106_prontuario = ($this->sd106_prontuario === 0 || $this->sd106_prontuario === 0.0 || $this->sd106_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd106_prontuario"]:$this->sd106_prontuario);
+       $this->sd106_administracaomedicamento = ($this->sd106_administracaomedicamento === 0 || $this->sd106_administracaomedicamento === 0.0 || $this->sd106_administracaomedicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd106_administracaomedicamento"]:$this->sd106_administracaomedicamento);
      }else{
-       $this->sd106_codigo = ($this->sd106_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd106_codigo"]:$this->sd106_codigo);
+       $this->sd106_codigo = ($this->sd106_codigo === 0 || $this->sd106_codigo === 0.0 || $this->sd106_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd106_codigo"]:$this->sd106_codigo);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_prontuarioadministracaomedicamento {
          $this->sd106_codigo = $sd106_codigo; 
        }
      }
-     if(($this->sd106_codigo == null) || ($this->sd106_codigo == "") ){ 
+     if(($this->sd106_codigo == null) || ($this->sd106_codigo === 0 || $this->sd106_codigo === 0.0 || $this->sd106_codigo == "") ){ 
        $this->erro_sql = " Campo sd106_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

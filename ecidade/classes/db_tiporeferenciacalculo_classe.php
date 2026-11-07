@@ -28,7 +28,7 @@ class cl_tiporeferenciacalculo {
                  la61_tipocalculo = int4 = Tipo do Calculo 
                  ";
    //funcao construtor da classe 
-   function cl_tiporeferenciacalculo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tiporeferenciacalculo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -45,12 +45,12 @@ class cl_tiporeferenciacalculo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la61_sequencial = ($this->la61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la61_sequencial"]:$this->la61_sequencial);
-       $this->la61_tiporeferencialnumerico = ($this->la61_tiporeferencialnumerico == ""?@$GLOBALS["HTTP_POST_VARS"]["la61_tiporeferencialnumerico"]:$this->la61_tiporeferencialnumerico);
-       $this->la61_atributobase = ($this->la61_atributobase == ""?@$GLOBALS["HTTP_POST_VARS"]["la61_atributobase"]:$this->la61_atributobase);
-       $this->la61_tipocalculo = ($this->la61_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["la61_tipocalculo"]:$this->la61_tipocalculo);
+       $this->la61_sequencial = ($this->la61_sequencial === 0 || $this->la61_sequencial === 0.0 || $this->la61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la61_sequencial"]:$this->la61_sequencial);
+       $this->la61_tiporeferencialnumerico = ($this->la61_tiporeferencialnumerico === 0 || $this->la61_tiporeferencialnumerico === 0.0 || $this->la61_tiporeferencialnumerico == ""?@$GLOBALS["HTTP_POST_VARS"]["la61_tiporeferencialnumerico"]:$this->la61_tiporeferencialnumerico);
+       $this->la61_atributobase = ($this->la61_atributobase === 0 || $this->la61_atributobase === 0.0 || $this->la61_atributobase == ""?@$GLOBALS["HTTP_POST_VARS"]["la61_atributobase"]:$this->la61_atributobase);
+       $this->la61_tipocalculo = ($this->la61_tipocalculo === 0 || $this->la61_tipocalculo === 0.0 || $this->la61_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["la61_tipocalculo"]:$this->la61_tipocalculo);
      }else{
-       $this->la61_sequencial = ($this->la61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la61_sequencial"]:$this->la61_sequencial);
+       $this->la61_sequencial = ($this->la61_sequencial === 0 || $this->la61_sequencial === 0.0 || $this->la61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["la61_sequencial"]:$this->la61_sequencial);
      }
    }
    // funcao para inclusao
@@ -107,7 +107,7 @@ class cl_tiporeferenciacalculo {
          $this->la61_sequencial = $la61_sequencial; 
        }
      }
-     if(($this->la61_sequencial == null) || ($this->la61_sequencial == "") ){ 
+     if(($this->la61_sequencial == null) || ($this->la61_sequencial === 0 || $this->la61_sequencial === 0.0 || $this->la61_sequencial == "") ){ 
        $this->erro_sql = " Campo la61_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -392,7 +392,7 @@ class cl_tiporeferenciacalculo {
    function sql_query ( $la61_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_tiporeferenciacalculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_tiporeferenciacalculo {
    function sql_query_file ( $la61_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_tiporeferenciacalculo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

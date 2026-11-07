@@ -108,7 +108,7 @@ class cl_cgmdoc {
                  z02_i_escolaridade = int4 = Escolaridade 
                  ";
    //funcao construtor da classe 
-   function cl_cgmdoc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgmdoc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -125,13 +125,13 @@ class cl_cgmdoc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z02_i_sequencial = ($this->z02_i_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_sequencial"]:$this->z02_i_sequencial);
-       $this->z02_i_cgm = ($this->z02_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_cgm"]:$this->z02_i_cgm);
-       $this->z02_i_pis = ($this->z02_i_pis == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_pis"]:$this->z02_i_pis);
+       $this->z02_i_sequencial = ($this->z02_i_sequencial === 0 || $this->z02_i_sequencial === 0.0 || $this->z02_i_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_sequencial"]:$this->z02_i_sequencial);
+       $this->z02_i_cgm = ($this->z02_i_cgm === 0 || $this->z02_i_cgm === 0.0 || $this->z02_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_cgm"]:$this->z02_i_cgm);
+       $this->z02_i_pis = ($this->z02_i_pis === 0 || $this->z02_i_pis === 0.0 || $this->z02_i_pis == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_pis"]:$this->z02_i_pis);
        $this->z02_i_cns = ($this->z02_i_cns == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_cns"]:$this->z02_i_cns);
        $this->z02_c_naturalidade = ($this->z02_c_naturalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_c_naturalidade"]:$this->z02_c_naturalidade);
        $this->z02_c_naturalidadeuf = ($this->z02_c_naturalidadeuf == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_c_naturalidadeuf"]:$this->z02_c_naturalidadeuf);
-       $this->z02_i_certidaotipo = ($this->z02_i_certidaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_certidaotipo"]:$this->z02_i_certidaotipo);
+       $this->z02_i_certidaotipo = ($this->z02_i_certidaotipo === 0 || $this->z02_i_certidaotipo === 0.0 || $this->z02_i_certidaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_certidaotipo"]:$this->z02_i_certidaotipo);
        $this->z02_c_certidaocartorio = ($this->z02_c_certidaocartorio == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_c_certidaocartorio"]:$this->z02_c_certidaocartorio);
        $this->z02_c_certidaolivro = ($this->z02_c_certidaolivro == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_c_certidaolivro"]:$this->z02_c_certidaolivro);
        $this->z02_c_folha = ($this->z02_c_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_c_folha"]:$this->z02_c_folha);
@@ -177,9 +177,9 @@ class cl_cgmdoc {
             $this->z02_d_ctpsdata = $this->z02_d_ctpsdata_ano."-".$this->z02_d_ctpsdata_mes."-".$this->z02_d_ctpsdata_dia;
          }
        }
-       $this->z02_i_escolaridade = ($this->z02_i_escolaridade == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_escolaridade"]:$this->z02_i_escolaridade);
+       $this->z02_i_escolaridade = ($this->z02_i_escolaridade === 0 || $this->z02_i_escolaridade === 0.0 || $this->z02_i_escolaridade == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_escolaridade"]:$this->z02_i_escolaridade);
      }else{
-       $this->z02_i_sequencial = ($this->z02_i_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_sequencial"]:$this->z02_i_sequencial);
+       $this->z02_i_sequencial = ($this->z02_i_sequencial === 0 || $this->z02_i_sequencial === 0.0 || $this->z02_i_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["z02_i_sequencial"]:$this->z02_i_sequencial);
      }
    }
    // funcao para inclusao
@@ -242,7 +242,7 @@ class cl_cgmdoc {
          $this->z02_i_sequencial = $z02_i_sequencial; 
        }
      }
-     if(($this->z02_i_sequencial == null) || ($this->z02_i_sequencial == "") ){ 
+     if(($this->z02_i_sequencial == null) || ($this->z02_i_sequencial === 0 || $this->z02_i_sequencial === 0.0 || $this->z02_i_sequencial == "") ){ 
        $this->erro_sql = " Campo z02_i_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -720,7 +720,7 @@ class cl_cgmdoc {
    function sql_query ( $z02_i_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -742,7 +742,7 @@ class cl_cgmdoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -754,7 +754,7 @@ class cl_cgmdoc {
    function sql_query_file ( $z02_i_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -775,7 +775,7 @@ class cl_cgmdoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

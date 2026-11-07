@@ -77,9 +77,9 @@ class cl_tfd_agendamentoprestadora
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->tf16_i_codigo = ($this->tf16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_i_codigo"]:$this->tf16_i_codigo);
-       $this->tf16_i_prestcentralagend = ($this->tf16_i_prestcentralagend == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_i_prestcentralagend"]:$this->tf16_i_prestcentralagend);
-       $this->tf16_i_pedidotfd = ($this->tf16_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_i_pedidotfd"]:$this->tf16_i_pedidotfd);
+       $this->tf16_i_codigo = ($this->tf16_i_codigo === 0 || $this->tf16_i_codigo === 0.0 || $this->tf16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_i_codigo"]:$this->tf16_i_codigo);
+       $this->tf16_i_prestcentralagend = ($this->tf16_i_prestcentralagend === 0 || $this->tf16_i_prestcentralagend === 0.0 || $this->tf16_i_prestcentralagend == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_i_prestcentralagend"]:$this->tf16_i_prestcentralagend);
+       $this->tf16_i_pedidotfd = ($this->tf16_i_pedidotfd === 0 || $this->tf16_i_pedidotfd === 0.0 || $this->tf16_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_i_pedidotfd"]:$this->tf16_i_pedidotfd);
        $this->tf16_c_protocolo = ($this->tf16_c_protocolo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_c_protocolo"]:$this->tf16_c_protocolo);
        if($this->tf16_d_dataagendamento == ""){
          $this->tf16_d_dataagendamento_dia = ($this->tf16_d_dataagendamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_d_dataagendamento_dia"]:$this->tf16_d_dataagendamento_dia);
@@ -91,7 +91,7 @@ class cl_tfd_agendamentoprestadora
        }
        $this->tf16_c_horaagendamento = ($this->tf16_c_horaagendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_c_horaagendamento"]:$this->tf16_c_horaagendamento);
        $this->tf16_c_local = ($this->tf16_c_local == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_c_local"]:$this->tf16_c_local);
-       $this->tf16_i_login = ($this->tf16_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_i_login"]:$this->tf16_i_login);
+       $this->tf16_i_login = ($this->tf16_i_login === 0 || $this->tf16_i_login === 0.0 || $this->tf16_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_i_login"]:$this->tf16_i_login);
        $this->tf16_c_medico = ($this->tf16_c_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_c_medico"]:$this->tf16_c_medico);
        $this->tf16_c_crmmedico = ($this->tf16_c_crmmedico == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_c_crmmedico"]:$this->tf16_c_crmmedico);
        $this->tf16_c_cnsmedico = ($this->tf16_c_cnsmedico == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_c_cnsmedico"]:$this->tf16_c_cnsmedico);
@@ -108,7 +108,7 @@ class cl_tfd_agendamentoprestadora
        $this->tf16_sala = ($this->tf16_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_sala"]:$this->tf16_sala);
        $this->tf16_observacoes = ($this->tf16_observacoes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_observacoes"]:$this->tf16_observacoes);
      }else{
-       $this->tf16_i_codigo = ($this->tf16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_i_codigo"]:$this->tf16_i_codigo);
+       $this->tf16_i_codigo = ($this->tf16_i_codigo === 0 || $this->tf16_i_codigo === 0.0 || $this->tf16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf16_i_codigo"]:$this->tf16_i_codigo);
      }
    }
 
@@ -202,7 +202,7 @@ class cl_tfd_agendamentoprestadora
          $this->tf16_i_codigo = $tf16_i_codigo;
        }
      }
-     if(($this->tf16_i_codigo == null) || ($this->tf16_i_codigo == "") ){
+     if(($this->tf16_i_codigo == null) || ($this->tf16_i_codigo === 0 || $this->tf16_i_codigo === 0.0 || $this->tf16_i_codigo == "") ){
        $this->erro_sql = " Campo tf16_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -719,7 +719,7 @@ class cl_tfd_agendamentoprestadora
    function sql_query_destino ( $tf16_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -747,7 +747,7 @@ class cl_tfd_agendamentoprestadora
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

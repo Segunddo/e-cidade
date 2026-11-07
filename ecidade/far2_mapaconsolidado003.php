@@ -37,7 +37,8 @@ include(modification("classes/db_far_fechalivro_classe.php"));
 include(modification("classes/db_far_farmacia_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 $clfar_modelolivro = new cl_far_modelolivro;
 $clfar_fechalivro = new cl_far_fechalivro;
 $clfar_farmacia = new cl_far_farmacia;
@@ -48,14 +49,14 @@ $ano=date('Y');
 
   $colname_v = "-1";
 if (isset($_POST['lv'])) {
-  $colname_v = (get_magic_quotes_gpc()) ? $_POST['lv'] : addslashes($_POST['lv']);
+  $colname_v = (false) ? $_POST['lv'] : addslashes($_POST['lv']);
 }  
 $sql = "SELECT * FROM far_modelolivro WHERE fa16_i_codigo = '$lv' ";
 $qr = db_query($sql) ;
 
 
 
-if(pg_num_rows($qr) == 0){
+if(($qr ? pg_num_rows($qr) : null) == 0){
    echo  '<option value="0">Não</option>';
    
 }else{
@@ -126,13 +127,13 @@ while($ln = pg_fetch_assoc($qr)){
        $y=data_farmacia($ano,'2S');     
        echo '<option value="1S">'.db_formatar($x[0],'d').'&nbsp;ate&nbsp;'.db_formatar($x[1],'d').'</option>';
        echo '<option value="2S">'.db_formatar($y[0],'d').'&nbsp;ate&nbsp;'.db_formatar($y[1],'d').'</option>';
-       
+
        }elseif($ln['fa16_i_periodo']==9){  //anual
         $x=$ano;
        echo '<option value="1">'.$x.'</option>';
-      
+
      }
-    
+
       //echo '<option value="'.$ln['fa16_i_codigo'].'">'.$ln['fa16_i_periodo'].'</option>';
    }
 }

@@ -26,7 +26,7 @@ class cl_prontuariosclassificacaorisco {
                  sd101_classificacaorisco = int4 = Classificação de Risco 
                  ";
    //funcao construtor da classe 
-   function cl_prontuariosclassificacaorisco() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prontuariosclassificacaorisco"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_prontuariosclassificacaorisco {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd101_codigo = ($this->sd101_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_codigo"]:$this->sd101_codigo);
-       $this->sd101_prontuarios = ($this->sd101_prontuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_prontuarios"]:$this->sd101_prontuarios);
-       $this->sd101_classificacaorisco = ($this->sd101_classificacaorisco == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_classificacaorisco"]:$this->sd101_classificacaorisco);
+       $this->sd101_codigo = ($this->sd101_codigo === 0 || $this->sd101_codigo === 0.0 || $this->sd101_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_codigo"]:$this->sd101_codigo);
+       $this->sd101_prontuarios = ($this->sd101_prontuarios === 0 || $this->sd101_prontuarios === 0.0 || $this->sd101_prontuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_prontuarios"]:$this->sd101_prontuarios);
+       $this->sd101_classificacaorisco = ($this->sd101_classificacaorisco === 0 || $this->sd101_classificacaorisco === 0.0 || $this->sd101_classificacaorisco == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_classificacaorisco"]:$this->sd101_classificacaorisco);
      }else{
-       $this->sd101_codigo = ($this->sd101_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_codigo"]:$this->sd101_codigo);
+       $this->sd101_codigo = ($this->sd101_codigo === 0 || $this->sd101_codigo === 0.0 || $this->sd101_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_codigo"]:$this->sd101_codigo);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_prontuariosclassificacaorisco {
          $this->sd101_codigo = $sd101_codigo; 
        }
      }
-     if(($this->sd101_codigo == null) || ($this->sd101_codigo == "") ){ 
+     if(($this->sd101_codigo == null) || ($this->sd101_codigo === 0 || $this->sd101_codigo === 0.0 || $this->sd101_codigo == "") ){ 
        $this->erro_sql = " Campo sd101_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

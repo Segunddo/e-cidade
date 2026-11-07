@@ -61,11 +61,11 @@ $db_opcao = 1;
 $db_botao = true;
 if(isset($incluir)){
   db_inicio_transacao();
-  $arr_valores = split(",",$valores);
+  $arr_valores = preg_split("#,#m",$valores);
   $sqlerro     = false;
   for($i=0;$i<count($arr_valores);$i++){
     $nomecampo    = $arr_valores[$i];
-    $separacampo  = split("_",$arr_valores[$i]);
+    $separacampo  = preg_split("#_#m",$arr_valores[$i]);
     $m70_codigo   = $separacampo[1];
     $m70_coddepto = $separacampo[2];
     $m80_codtipo  = 5;      // matestoquetipo = 4 - Saída manual
@@ -78,7 +78,7 @@ if(isset($incluir)){
     $result_matestoque  = $clmatestoqueitem->sql_record($clmatestoqueitem->sql_query(null,"distinct m70_codigo,m70_codmatmater,m70_quant,m70_valor,m70_coddepto,m71_codlanc,m71_valor,m71_quant,m71_quantatend,m71_data as dataimprime,m71_valor as valorimprime","m71_data desc","m70_codigo=$m70_codigo and m70_coddepto=$m70_coddepto and m71_quant>m71_quantatend"));
     $numrows_matestoque = $clmatestoqueitem->numrows;
 
-    $arr_oqueaindafalta = $$nomecampo;
+    $arr_oqueaindafalta = ${$nomecampo};
     $arr_estoquediminui = Array();
     $arr_vlorquediminui = Array();
     if($sqlerro == false && trim($m82_matestoqueini)==""){
@@ -297,7 +297,7 @@ if(isset($m70_codmatmater) && trim($m70_codmatmater)!=""){
 	    <td nowrap class='bordas' align='center'>
 	  ";
 	  $matitem = "cod_".$m70_codigo."_".$coddepto."_".$i;
-          $$matitem=$m70_quant;
+          ${$matitem}=$m70_quant;
           if($i==0){
 	    $rcbfoco = "cod_".$m70_codigo."_".$coddepto."_".$i;
           }

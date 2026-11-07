@@ -62,7 +62,7 @@ class cl_sau_procincremento {
                  sd79_i_mescomp = int4 = Mes 
                  ";
    //funcao construtor da classe 
-   function cl_sau_procincremento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_procincremento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,16 +79,16 @@ class cl_sau_procincremento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd79_i_codigo = ($this->sd79_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_codigo"]:$this->sd79_i_codigo);
-       $this->sd79_i_procedimento = ($this->sd79_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_procedimento"]:$this->sd79_i_procedimento);
-       $this->sd79_i_habilitacao = ($this->sd79_i_habilitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_habilitacao"]:$this->sd79_i_habilitacao);
-       $this->sd79_f_sh = ($this->sd79_f_sh == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_f_sh"]:$this->sd79_f_sh);
-       $this->sd79_f_sa = ($this->sd79_f_sa == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_f_sa"]:$this->sd79_f_sa);
-       $this->sd79_f_sp = ($this->sd79_f_sp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_f_sp"]:$this->sd79_f_sp);
-       $this->sd79_i_anocomp = ($this->sd79_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_anocomp"]:$this->sd79_i_anocomp);
-       $this->sd79_i_mescomp = ($this->sd79_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_mescomp"]:$this->sd79_i_mescomp);
+       $this->sd79_i_codigo = ($this->sd79_i_codigo === 0 || $this->sd79_i_codigo === 0.0 || $this->sd79_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_codigo"]:$this->sd79_i_codigo);
+       $this->sd79_i_procedimento = ($this->sd79_i_procedimento === 0 || $this->sd79_i_procedimento === 0.0 || $this->sd79_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_procedimento"]:$this->sd79_i_procedimento);
+       $this->sd79_i_habilitacao = ($this->sd79_i_habilitacao === 0 || $this->sd79_i_habilitacao === 0.0 || $this->sd79_i_habilitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_habilitacao"]:$this->sd79_i_habilitacao);
+       $this->sd79_f_sh = ($this->sd79_f_sh === 0 || $this->sd79_f_sh === 0.0 || $this->sd79_f_sh == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_f_sh"]:$this->sd79_f_sh);
+       $this->sd79_f_sa = ($this->sd79_f_sa === 0 || $this->sd79_f_sa === 0.0 || $this->sd79_f_sa == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_f_sa"]:$this->sd79_f_sa);
+       $this->sd79_f_sp = ($this->sd79_f_sp === 0 || $this->sd79_f_sp === 0.0 || $this->sd79_f_sp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_f_sp"]:$this->sd79_f_sp);
+       $this->sd79_i_anocomp = ($this->sd79_i_anocomp === 0 || $this->sd79_i_anocomp === 0.0 || $this->sd79_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_anocomp"]:$this->sd79_i_anocomp);
+       $this->sd79_i_mescomp = ($this->sd79_i_mescomp === 0 || $this->sd79_i_mescomp === 0.0 || $this->sd79_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_mescomp"]:$this->sd79_i_mescomp);
      }else{
-       $this->sd79_i_codigo = ($this->sd79_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_codigo"]:$this->sd79_i_codigo);
+       $this->sd79_i_codigo = ($this->sd79_i_codigo === 0 || $this->sd79_i_codigo === 0.0 || $this->sd79_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd79_i_codigo"]:$this->sd79_i_codigo);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_sau_procincremento {
          $this->sd79_i_codigo = $sd79_i_codigo; 
        }
      }
-     if(($this->sd79_i_codigo == null) || ($this->sd79_i_codigo == "") ){ 
+     if(($this->sd79_i_codigo == null) || ($this->sd79_i_codigo === 0 || $this->sd79_i_codigo === 0.0 || $this->sd79_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd79_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -514,7 +514,7 @@ class cl_sau_procincremento {
    function sql_query ( $sd79_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -540,7 +540,7 @@ class cl_sau_procincremento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_sau_procincremento {
    function sql_query_file ( $sd79_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -573,7 +573,7 @@ class cl_sau_procincremento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

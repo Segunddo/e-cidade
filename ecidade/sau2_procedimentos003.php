@@ -28,7 +28,8 @@
 require_once(modification("fpdf151/pdf.php"));
 require_once(modification("libs/db_sql.php"));
 
-parse_str( $_SERVER['QUERY_STRING'] );
+parse_str( $_SERVER['QUERY_STRING'], $__qs );
+extract($__qs);
 
 $clprontproced = new cl_prontproced;
 $clprontproced->rotulo->label();
@@ -58,7 +59,7 @@ $sql .= " GROUP BY sd63_c_procedimento,sd63_c_nome ";
 $sql .= " ORDER BY sd63_c_nome";
 
 $result = db_query( $sql );
-$linhas = pg_num_rows( $result );
+$linhas = ($result ? pg_num_rows( $result ) : null);
 
 if( $linhas == 0 ) {
 

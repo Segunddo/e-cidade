@@ -32,7 +32,8 @@ include(modification("libs/db_stdlibwebseller.php"));
 
 include(modification("classes/db_sau_lotepront_ext_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 set_time_limit(0);
 
 $clsau_lotepront = new cl_sau_lotepront_ext;

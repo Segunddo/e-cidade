@@ -34,7 +34,8 @@ require_once(modification("libs/db_sql.php"));
 require_once(modification("classes/db_sau_fecharquivo_classe.php"));
 require_once(modification("classes/db_lab_bpamagnetico_classe.php"));
 require_once(modification("classes/db_tfd_bpamagnetico_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $clsau_fecharquivo  = new cl_sau_fecharquivo;
 $cllab_bpamagnetico = new cl_lab_bpamagnetico;
 $cltfd_bpamagnetico = new cl_tfd_bpamagnetico;
@@ -53,26 +54,26 @@ $login = DB_getsession("DB_login");
 
 /* RECIBO BPA DO LABORATORIO  */
 if (isset($iLab)) {
-	
+
   $sCampos  = "la55_i_codigo as sd99_i_codigo, ";
   $sCampos .= "la55_i_usuario as sd99_i_login, ";
   $sCampos .= "la55_d_data as sd99_d_data ";
   $sSql     = $cllab_bpamagnetico->sql_query("", $sCampos, "la55_i_codigo desc",
                                              "la54_i_compmes=$sd97_i_compmes and la54_i_compano=$sd97_i_compano"
                                             );
-    
+
   $result = $cllab_bpamagnetico->sql_record($sSql);
   if ($cllab_bpamagnetico->numrows > 0) {
-    
+
   	db_fieldsmemory($result, 0);
     $clsau_fecharquivo->numrows = $cllab_bpamagnetico->numrows;
-  
+
   }
-  
+
 /* RECIBO BPA DO TFD */  
 } else if (isset($iTFD)) {
 
-  
+
   $sCampos  = "tf33_i_codigo as sd99_i_codigo, ";
   $sCampos .= "tf33_i_login as sd99_i_login, ";
   $sCampos .= "tf33_d_datasistema as sd99_d_data ";
@@ -80,10 +81,10 @@ if (isset($iLab)) {
                                              "tf32_i_mescompetencia = $sd97_i_compmes and".
                                              " tf32_i_anocompetencia = $sd97_i_compano"
                                             );
-  
+
   $result = $cltfd_bpamagnetico->sql_record($sSql);
   if ($cltfd_bpamagnetico->numrows > 0) {
-    
+
   	db_fieldsmemory($result, 0);
     $clsau_fecharquivo->numrows = $cltfd_bpamagnetico->numrows;
 

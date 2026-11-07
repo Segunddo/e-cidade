@@ -59,7 +59,7 @@ class cl_far_devolucao {
                  fa22_d_data = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_far_devolucao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("far_devolucao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,10 +76,10 @@ class cl_far_devolucao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa22_i_codigo = ($this->fa22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_codigo"]:$this->fa22_i_codigo);
-       $this->fa22_i_cgsund = ($this->fa22_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_cgsund"]:$this->fa22_i_cgsund);
-       $this->fa22_c_hora = ($this->fa22_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_c_hora"]:$this->fa22_c_hora);
-       $this->fa22_i_login = ($this->fa22_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_login"]:$this->fa22_i_login);
+       $this->fa22_i_codigo = ($this->fa22_i_codigo === 0 || $this->fa22_i_codigo === 0.0 || $this->fa22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_codigo"]:$this->fa22_i_codigo);
+       $this->fa22_i_cgsund = ($this->fa22_i_cgsund === 0 || $this->fa22_i_cgsund === 0.0 || $this->fa22_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_cgsund"]:$this->fa22_i_cgsund);
+       $this->fa22_c_hora = ($this->fa22_c_hora === 0 || $this->fa22_c_hora === 0.0 || $this->fa22_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_c_hora"]:$this->fa22_c_hora);
+       $this->fa22_i_login = ($this->fa22_i_login === 0 || $this->fa22_i_login === 0.0 || $this->fa22_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_login"]:$this->fa22_i_login);
        if($this->fa22_d_data == ""){
          $this->fa22_d_data_dia = ($this->fa22_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_d_data_dia"]:$this->fa22_d_data_dia);
          $this->fa22_d_data_mes = ($this->fa22_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_d_data_mes"]:$this->fa22_d_data_mes);
@@ -89,7 +89,7 @@ class cl_far_devolucao {
          }
        }
      }else{
-       $this->fa22_i_codigo = ($this->fa22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_codigo"]:$this->fa22_i_codigo);
+       $this->fa22_i_codigo = ($this->fa22_i_codigo === 0 || $this->fa22_i_codigo === 0.0 || $this->fa22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_codigo"]:$this->fa22_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_far_devolucao {
          $this->fa22_i_codigo = $fa22_i_codigo; 
        }
      }
-     if(($this->fa22_i_codigo == null) || ($this->fa22_i_codigo == "") ){ 
+     if(($this->fa22_i_codigo == null) || ($this->fa22_i_codigo === 0 || $this->fa22_i_codigo === 0.0 || $this->fa22_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa22_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -447,7 +447,7 @@ class cl_far_devolucao {
    function sql_query ( $fa22_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_far_devolucao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_far_devolucao {
    function sql_query_file ( $fa22_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_far_devolucao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -528,7 +528,7 @@ class cl_far_devolucao {
 
      if ($sCampos != "*" ) {
 
-       $sCamposSql = split("#",$sCampos);
+       $sCamposSql = preg_split("#\\##m",$sCampos);
        $sVirgula = "";
 
        for ($i = 0; $i < sizeof($sCamposSql); $i++){
@@ -566,7 +566,7 @@ class cl_far_devolucao {
 
      if ($sOrdem != null ){
        $sSql .= " order by ";
-       $sCamposSql = split("#",$sOrdem);
+       $sCamposSql = preg_split("#\\##m",$sOrdem);
        $sVirgula = "";
 
        for ($i = 0;$i < sizeof($sCamposSql); $i++) {

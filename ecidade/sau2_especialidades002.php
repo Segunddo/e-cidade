@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_prontproced_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $clprontproced = new cl_prontproced;
 $clprontproced->rotulo->label();
@@ -53,7 +54,7 @@ $sql = "SELECT  count(*) as quantidade,
         ";
         
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 //db_criatabela($result);
 //exit;
 if($linhas == 0){

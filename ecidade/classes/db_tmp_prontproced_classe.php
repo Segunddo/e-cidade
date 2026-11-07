@@ -76,7 +76,7 @@ class cl_tmp_prontproced {
                  sd29_t_diagnostico = text = Diagnóstico 
                  ";
    //funcao construtor da classe 
-   function cl_tmp_prontproced() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prontproced"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -93,9 +93,9 @@ class cl_tmp_prontproced {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd29_i_codigo = ($this->sd29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_codigo"]:$this->sd29_i_codigo);
-       $this->sd29_i_prontuario = ($this->sd29_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_prontuario"]:$this->sd29_i_prontuario);
-       $this->sd29_i_procedimento = ($this->sd29_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_procedimento"]:$this->sd29_i_procedimento);
+       $this->sd29_i_codigo = ($this->sd29_i_codigo === 0 || $this->sd29_i_codigo === 0.0 || $this->sd29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_codigo"]:$this->sd29_i_codigo);
+       $this->sd29_i_prontuario = ($this->sd29_i_prontuario === 0 || $this->sd29_i_prontuario === 0.0 || $this->sd29_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_prontuario"]:$this->sd29_i_prontuario);
+       $this->sd29_i_procedimento = ($this->sd29_i_procedimento === 0 || $this->sd29_i_procedimento === 0.0 || $this->sd29_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_procedimento"]:$this->sd29_i_procedimento);
        if($this->sd29_d_data == ""){
          $this->sd29_d_data_dia = ($this->sd29_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_d_data_dia"]:$this->sd29_d_data_dia);
          $this->sd29_d_data_mes = ($this->sd29_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_d_data_mes"]:$this->sd29_d_data_mes);
@@ -106,7 +106,7 @@ class cl_tmp_prontproced {
        }
        $this->sd29_c_hora = ($this->sd29_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_c_hora"]:$this->sd29_c_hora);
        $this->sd29_t_tratamento = ($this->sd29_t_tratamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_t_tratamento"]:$this->sd29_t_tratamento);
-       $this->sd29_i_usuario = ($this->sd29_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_usuario"]:$this->sd29_i_usuario);
+       $this->sd29_i_usuario = ($this->sd29_i_usuario === 0 || $this->sd29_i_usuario === 0.0 || $this->sd29_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_usuario"]:$this->sd29_i_usuario);
        if($this->sd29_d_cadastro == ""){
          $this->sd29_d_cadastro_dia = ($this->sd29_d_cadastro_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_d_cadastro_dia"]:$this->sd29_d_cadastro_dia);
          $this->sd29_d_cadastro_mes = ($this->sd29_d_cadastro_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_d_cadastro_mes"]:$this->sd29_d_cadastro_mes);
@@ -116,10 +116,10 @@ class cl_tmp_prontproced {
          }
        }
        $this->sd29_c_cadastro = ($this->sd29_c_cadastro == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_c_cadastro"]:$this->sd29_c_cadastro);
-       $this->sd29_i_profissional = ($this->sd29_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_profissional"]:$this->sd29_i_profissional);
+       $this->sd29_i_profissional = ($this->sd29_i_profissional === 0 || $this->sd29_i_profissional === 0.0 || $this->sd29_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_profissional"]:$this->sd29_i_profissional);
        $this->sd29_t_diagnostico = ($this->sd29_t_diagnostico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_t_diagnostico"]:$this->sd29_t_diagnostico);
      }else{
-       $this->sd29_i_codigo = ($this->sd29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_codigo"]:$this->sd29_i_codigo);
+       $this->sd29_i_codigo = ($this->sd29_i_codigo === 0 || $this->sd29_i_codigo === 0.0 || $this->sd29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd29_i_codigo"]:$this->sd29_i_codigo);
      }
    }
    // funcao para inclusao
@@ -209,7 +209,7 @@ class cl_tmp_prontproced {
          $this->sd29_i_codigo = $sd29_i_codigo; 
        }
      }
-     if(($this->sd29_i_codigo == null) || ($this->sd29_i_codigo == "") ){ 
+     if(($this->sd29_i_codigo == null) || ($this->sd29_i_codigo === 0 || $this->sd29_i_codigo === 0.0 || $this->sd29_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd29_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -582,7 +582,7 @@ class cl_tmp_prontproced {
    function sql_query ( $sd29_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -622,7 +622,7 @@ class cl_tmp_prontproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -634,7 +634,7 @@ class cl_tmp_prontproced {
    function sql_query_file ( $sd29_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -655,7 +655,7 @@ class cl_tmp_prontproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

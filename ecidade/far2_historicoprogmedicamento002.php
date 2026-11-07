@@ -132,7 +132,7 @@ function buscarDados()
 
   $result = db_query($sql);
 
-  if (pg_num_rows($result) == 0) {
+  if (($result ? pg_num_rows($result) : null) == 0) {
     throw new \BusinessException('Nenhum registro encontrado!');
   }
 

@@ -67,8 +67,8 @@ class cl_cgs_und_ext extends cl_cgs_und
 
     function sql_query_cgs_profissional(
       $z01_i_cgsund = null,
-      $sd04_i_medico,
-      $sd04_i_unidade,
+      $sd04_i_medico = null,
+      $sd04_i_unidade = null,
       $campos = "*",
       $ordem = null,
       $dbwhere = ""

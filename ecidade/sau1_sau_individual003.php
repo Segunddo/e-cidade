@@ -43,7 +43,8 @@ include(modification("classes/db_sau_config_ext_classe.php"));
 include(modification("classes/db_sau_fechapront_classe.php"));
 
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clprontuarios_ext = new cl_prontuarios_ext;
 $clprontuarios     = new cl_prontuarios;

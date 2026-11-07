@@ -50,7 +50,7 @@ class cl_lab_setor {
                  la23_c_descr = char(50) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_lab_setor() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_setor"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_lab_setor {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la23_i_codigo = ($this->la23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la23_i_codigo"]:$this->la23_i_codigo);
+       $this->la23_i_codigo = ($this->la23_i_codigo === 0 || $this->la23_i_codigo === 0.0 || $this->la23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la23_i_codigo"]:$this->la23_i_codigo);
        $this->la23_c_descr = ($this->la23_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la23_c_descr"]:$this->la23_c_descr);
      }else{
-       $this->la23_i_codigo = ($this->la23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la23_i_codigo"]:$this->la23_i_codigo);
+       $this->la23_i_codigo = ($this->la23_i_codigo === 0 || $this->la23_i_codigo === 0.0 || $this->la23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la23_i_codigo"]:$this->la23_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_lab_setor {
          $this->la23_i_codigo = $la23_i_codigo; 
        }
      }
-     if(($this->la23_i_codigo == null) || ($this->la23_i_codigo == "") ){ 
+     if(($this->la23_i_codigo == null) || ($this->la23_i_codigo === 0 || $this->la23_i_codigo === 0.0 || $this->la23_i_codigo == "") ){ 
        $this->erro_sql = " Campo la23_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_lab_setor {
    function sql_query ( $la23_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_lab_setor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_lab_setor {
    function sql_query_file ( $la23_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_lab_setor {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

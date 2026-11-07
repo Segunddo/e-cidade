@@ -80,16 +80,16 @@ class cl_lab_tiporeferenciaalnumerico {
   public function atualizacampos($exclusao=false) {
 
     if ($exclusao==false) {
-       $this->la30_i_codigo     = ($this->la30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_i_codigo"]:$this->la30_i_codigo);
-       $this->la30_i_valorref   = ($this->la30_i_valorref == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_i_valorref"]:$this->la30_i_valorref);
-       $this->la30_f_normalmin  = ($this->la30_f_normalmin == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_f_normalmin"]:$this->la30_f_normalmin);
-       $this->la30_f_normalmax  = ($this->la30_f_normalmax == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_f_normalmax"]:$this->la30_f_normalmax);
+       $this->la30_i_codigo     = ($this->la30_i_codigo === 0 || $this->la30_i_codigo === 0.0 || $this->la30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_i_codigo"]:$this->la30_i_codigo);
+       $this->la30_i_valorref   = ($this->la30_i_valorref === 0 || $this->la30_i_valorref === 0.0 || $this->la30_i_valorref == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_i_valorref"]:$this->la30_i_valorref);
+       $this->la30_f_normalmin  = ($this->la30_f_normalmin === 0 || $this->la30_f_normalmin === 0.0 || $this->la30_f_normalmin == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_f_normalmin"]:$this->la30_f_normalmin);
+       $this->la30_f_normalmax  = ($this->la30_f_normalmax === 0 || $this->la30_f_normalmax === 0.0 || $this->la30_f_normalmax == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_f_normalmax"]:$this->la30_f_normalmax);
        $this->la30_c_calculavel  = ($this->la30_c_calculavel == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_c_calculavel"]:$this->la30_c_calculavel);
-       $this->la30_f_absurdomin = ($this->la30_f_absurdomin == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_f_absurdomin"]:$this->la30_f_absurdomin);
-       $this->la30_f_absurdomax = ($this->la30_f_absurdomax == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_f_absurdomax"]:$this->la30_f_absurdomax);
+       $this->la30_f_absurdomin = ($this->la30_f_absurdomin === 0 || $this->la30_f_absurdomin === 0.0 || $this->la30_f_absurdomin == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_f_absurdomin"]:$this->la30_f_absurdomin);
+       $this->la30_f_absurdomax = ($this->la30_f_absurdomax === 0 || $this->la30_f_absurdomax === 0.0 || $this->la30_f_absurdomax == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_f_absurdomax"]:$this->la30_f_absurdomax);
        $this->la30_casasdecimaisapresentacao = ($this->la30_casasdecimaisapresentacao === ""?@$GLOBALS["HTTP_POST_VARS"]["la30_casasdecimaisapresentacao"]:$this->la30_casasdecimaisapresentacao);
     }else{
-      $this->la30_i_codigo = ($this->la30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_i_codigo"]:$this->la30_i_codigo);
+      $this->la30_i_codigo = ($this->la30_i_codigo === 0 || $this->la30_i_codigo === 0.0 || $this->la30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la30_i_codigo"]:$this->la30_i_codigo);
     }
   }
    // funcao para inclusao
@@ -140,7 +140,7 @@ class cl_lab_tiporeferenciaalnumerico {
         $this->la30_i_codigo = $la30_i_codigo;
       }
     }
-    if(($this->la30_i_codigo == null) || ($this->la30_i_codigo == "") ){
+    if(($this->la30_i_codigo == null) || ($this->la30_i_codigo === 0 || $this->la30_i_codigo === 0.0 || $this->la30_i_codigo == "") ){
 
       $this->erro_sql = " Campo la30_i_codigo nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";

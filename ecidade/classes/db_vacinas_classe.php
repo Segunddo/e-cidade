@@ -52,7 +52,7 @@ class cl_vacinas {
                  sd07_i_doses = int4 = Doses 
                  ";
    //funcao construtor da classe 
-   function cl_vacinas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vacinas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,7 +71,7 @@ class cl_vacinas {
      if($exclusao==false){
        $this->sd07_c_codigo = ($this->sd07_c_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd07_c_codigo"]:$this->sd07_c_codigo);
        $this->sd07_c_nome = ($this->sd07_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd07_c_nome"]:$this->sd07_c_nome);
-       $this->sd07_i_doses = ($this->sd07_i_doses == ""?@$GLOBALS["HTTP_POST_VARS"]["sd07_i_doses"]:$this->sd07_i_doses);
+       $this->sd07_i_doses = ($this->sd07_i_doses === 0 || $this->sd07_i_doses === 0.0 || $this->sd07_i_doses == ""?@$GLOBALS["HTTP_POST_VARS"]["sd07_i_doses"]:$this->sd07_i_doses);
      }else{
        $this->sd07_c_codigo = ($this->sd07_c_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd07_c_codigo"]:$this->sd07_c_codigo);
      }
@@ -336,7 +336,7 @@ class cl_vacinas {
    function sql_query ( $sd07_c_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -357,7 +357,7 @@ class cl_vacinas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -369,7 +369,7 @@ class cl_vacinas {
    function sql_query_file ( $sd07_c_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_vacinas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

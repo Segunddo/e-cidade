@@ -56,7 +56,7 @@ class cl_lab_exameproced {
                  la53_n_acrescimo = float4 = Valor SMS 
                  ";
    //funcao construtor da classe 
-   function cl_lab_exameproced() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_exameproced"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_lab_exameproced {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la53_i_codigo = ($this->la53_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_codigo"]:$this->la53_i_codigo);
-       $this->la53_i_ativo = ($this->la53_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_ativo"]:$this->la53_i_ativo);
-       $this->la53_i_exame = ($this->la53_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_exame"]:$this->la53_i_exame);
-       $this->la53_i_procedimento = ($this->la53_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_procedimento"]:$this->la53_i_procedimento);
-       $this->la53_n_acrescimo = ($this->la53_n_acrescimo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_n_acrescimo"]:$this->la53_n_acrescimo);
+       $this->la53_i_codigo = ($this->la53_i_codigo === 0 || $this->la53_i_codigo === 0.0 || $this->la53_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_codigo"]:$this->la53_i_codigo);
+       $this->la53_i_ativo = ($this->la53_i_ativo === 0 || $this->la53_i_ativo === 0.0 || $this->la53_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_ativo"]:$this->la53_i_ativo);
+       $this->la53_i_exame = ($this->la53_i_exame === 0 || $this->la53_i_exame === 0.0 || $this->la53_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_exame"]:$this->la53_i_exame);
+       $this->la53_i_procedimento = ($this->la53_i_procedimento === 0 || $this->la53_i_procedimento === 0.0 || $this->la53_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_procedimento"]:$this->la53_i_procedimento);
+       $this->la53_n_acrescimo = ($this->la53_n_acrescimo === 0 || $this->la53_n_acrescimo === 0.0 || $this->la53_n_acrescimo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_n_acrescimo"]:$this->la53_n_acrescimo);
      }else{
-       $this->la53_i_codigo = ($this->la53_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_codigo"]:$this->la53_i_codigo);
+       $this->la53_i_codigo = ($this->la53_i_codigo === 0 || $this->la53_i_codigo === 0.0 || $this->la53_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_codigo"]:$this->la53_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_lab_exameproced {
          $this->la53_i_codigo = $la53_i_codigo; 
        }
      }
-     if(($this->la53_i_codigo == null) || ($this->la53_i_codigo == "") ){ 
+     if(($this->la53_i_codigo == null) || ($this->la53_i_codigo === 0 || $this->la53_i_codigo === 0.0 || $this->la53_i_codigo == "") ){ 
        $this->erro_sql = " Campo la53_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_lab_exameproced {
    function sql_query ( $la53_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -448,7 +448,7 @@ class cl_lab_exameproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -461,7 +461,7 @@ class cl_lab_exameproced {
    function sql_query_file ( $la53_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_lab_exameproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -495,7 +495,7 @@ class cl_lab_exameproced {
    function sql_query2 ( $la53_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -518,7 +518,7 @@ class cl_lab_exameproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

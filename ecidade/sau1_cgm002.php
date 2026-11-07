@@ -38,7 +38,8 @@
   include(modification("classes/db_db_cgmcpf_classe.php"));
   include(modification("classes/db_db_cepmunic_classe.php"));
   include(modification("classes/db_ruascep_classe.php"));
-  parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+  parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+  extract($__qs);
   db_postmemory($HTTP_POST_VARS);
   $db_opcao = 2;
   $clcgm = new cl_cgm;
@@ -136,11 +137,11 @@
 	   alert('CNPJ/CPF já existe no cadastro do CGM \\n CGM número: $z01_numcgm \\n Nome: $z01_nome');
 	 </script>";
          if(isset($testanome)){
-	   $camp = split("\|",$valores);
+	   $camp = preg_split("#\\|#m",$valores);
 	   $vals = "";
 	   $vir = "";
 	   for($f=1;$f<count($camp);$f++){
-	     $vals .= $vir.$$camp[$f];
+	     $vals .= $vir.${$camp}[$f];
 	     $vir = ",";
 	   }
 	   db_redireciona("func_nome.php?z01_numcgm=$z01_numcgm_old&funcao_js=$funcao_js&testanome=true");
@@ -210,11 +211,11 @@
        }
      }
      if(isset($testanome)){
-       $camp = split("\|",@$valores);
+       $camp = preg_split("#\\|#m",@$valores);
        $vals = "";
        $vir = "";
        for($f=1;$f<count($camp);$f++){
-         $vals .= $vir.$$camp[$f];
+         $vals .= $vir.${$camp}[$f];
 	 $vir = ",";
        }
        $clcgm->erro(true,false);

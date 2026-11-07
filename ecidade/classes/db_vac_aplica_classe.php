@@ -72,7 +72,7 @@ class cl_vac_aplica {
                  vc16_i_cgs = int4 = CGS 
                  ";
    //funcao construtor da classe 
-   function cl_vac_aplica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_aplica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,9 +89,9 @@ class cl_vac_aplica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc16_i_codigo = ($this->vc16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_codigo"]:$this->vc16_i_codigo);
-       $this->vc16_i_dosevacina = ($this->vc16_i_dosevacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_dosevacina"]:$this->vc16_i_dosevacina);
-       $this->vc16_n_quant = ($this->vc16_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_n_quant"]:$this->vc16_n_quant);
+       $this->vc16_i_codigo = ($this->vc16_i_codigo === 0 || $this->vc16_i_codigo === 0.0 || $this->vc16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_codigo"]:$this->vc16_i_codigo);
+       $this->vc16_i_dosevacina = ($this->vc16_i_dosevacina === 0 || $this->vc16_i_dosevacina === 0.0 || $this->vc16_i_dosevacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_dosevacina"]:$this->vc16_i_dosevacina);
+       $this->vc16_n_quant = ($this->vc16_n_quant === 0 || $this->vc16_n_quant === 0.0 || $this->vc16_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_n_quant"]:$this->vc16_n_quant);
        if($this->vc16_d_dataaplicada == ""){
          $this->vc16_d_dataaplicada_dia = ($this->vc16_d_dataaplicada_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_d_dataaplicada_dia"]:$this->vc16_d_dataaplicada_dia);
          $this->vc16_d_dataaplicada_mes = ($this->vc16_d_dataaplicada_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_d_dataaplicada_mes"]:$this->vc16_d_dataaplicada_mes);
@@ -101,8 +101,8 @@ class cl_vac_aplica {
          }
        }
        $this->vc16_t_obs = ($this->vc16_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_t_obs"]:$this->vc16_t_obs);
-       $this->vc16_i_usuario = ($this->vc16_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_usuario"]:$this->vc16_i_usuario);
-       $this->vc16_i_departamento = ($this->vc16_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_departamento"]:$this->vc16_i_departamento);
+       $this->vc16_i_usuario = ($this->vc16_i_usuario === 0 || $this->vc16_i_usuario === 0.0 || $this->vc16_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_usuario"]:$this->vc16_i_usuario);
+       $this->vc16_i_departamento = ($this->vc16_i_departamento === 0 || $this->vc16_i_departamento === 0.0 || $this->vc16_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_departamento"]:$this->vc16_i_departamento);
        $this->vc16_c_hora = ($this->vc16_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_c_hora"]:$this->vc16_c_hora);
        if($this->vc16_d_data == ""){
          $this->vc16_d_data_dia = ($this->vc16_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_d_data_dia"]:$this->vc16_d_data_dia);
@@ -112,9 +112,9 @@ class cl_vac_aplica {
             $this->vc16_d_data = $this->vc16_d_data_ano."-".$this->vc16_d_data_mes."-".$this->vc16_d_data_dia;
          }
        }
-       $this->vc16_i_cgs = ($this->vc16_i_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_cgs"]:$this->vc16_i_cgs);
+       $this->vc16_i_cgs = ($this->vc16_i_cgs === 0 || $this->vc16_i_cgs === 0.0 || $this->vc16_i_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_cgs"]:$this->vc16_i_cgs);
      }else{
-       $this->vc16_i_codigo = ($this->vc16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_codigo"]:$this->vc16_i_codigo);
+       $this->vc16_i_codigo = ($this->vc16_i_codigo === 0 || $this->vc16_i_codigo === 0.0 || $this->vc16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_codigo"]:$this->vc16_i_codigo);
      }
    }
    // funcao para inclusao
@@ -216,7 +216,7 @@ class cl_vac_aplica {
          $this->vc16_i_codigo = $vc16_i_codigo; 
        }
      }
-     if(($this->vc16_i_codigo == null) || ($this->vc16_i_codigo == "") ){ 
+     if(($this->vc16_i_codigo == null) || ($this->vc16_i_codigo === 0 || $this->vc16_i_codigo === 0.0 || $this->vc16_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc16_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -607,7 +607,7 @@ class cl_vac_aplica {
    function sql_query ( $vc16_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -637,7 +637,7 @@ class cl_vac_aplica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -650,7 +650,7 @@ class cl_vac_aplica {
    function sql_query_file ( $vc16_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -671,7 +671,7 @@ class cl_vac_aplica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -683,7 +683,7 @@ class cl_vac_aplica {
    function sql_query2 ( $vc16_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -720,7 +720,7 @@ class cl_vac_aplica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -730,12 +730,12 @@ class cl_vac_aplica {
      return $sql;
   }
    function sql_query_vacinasnaoaplicadas($sCampos = '*', $sOrdem = null, $sGroup = '', 
-                                         $dDataInicial, $dDataFinal, $sVacinas, $dFaixaIni, $dFaixaFim) { 
+                                         $dDataInicial = null, $dDataFinal = null, $sVacinas = null, $dFaixaIni = null, $dFaixaFim = null) { 
 
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 
@@ -930,7 +930,7 @@ class cl_vac_aplica {
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 

@@ -75,7 +75,7 @@ class cl_lab_fechamento {
                  la54_i_financiamento = int4 = Tipo de Financiamento 
                  ";
    //funcao construtor da classe 
-   function cl_lab_fechamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_fechamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,7 +92,7 @@ class cl_lab_fechamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la54_i_codigo = ($this->la54_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_codigo"]:$this->la54_i_codigo);
+       $this->la54_i_codigo = ($this->la54_i_codigo === 0 || $this->la54_i_codigo === 0.0 || $this->la54_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_codigo"]:$this->la54_i_codigo);
        if($this->la54_d_data == ""){
          $this->la54_d_data_dia = ($this->la54_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_d_data_dia"]:$this->la54_d_data_dia);
          $this->la54_d_data_mes = ($this->la54_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_d_data_mes"]:$this->la54_d_data_mes);
@@ -102,9 +102,9 @@ class cl_lab_fechamento {
          }
        }
        $this->la54_c_hora = ($this->la54_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_c_hora"]:$this->la54_c_hora);
-       $this->la54_i_compano = ($this->la54_i_compano == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_compano"]:$this->la54_i_compano);
-       $this->la54_i_compmes = ($this->la54_i_compmes == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_compmes"]:$this->la54_i_compmes);
-       $this->la54_i_login = ($this->la54_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_login"]:$this->la54_i_login);
+       $this->la54_i_compano = ($this->la54_i_compano === 0 || $this->la54_i_compano === 0.0 || $this->la54_i_compano == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_compano"]:$this->la54_i_compano);
+       $this->la54_i_compmes = ($this->la54_i_compmes === 0 || $this->la54_i_compmes === 0.0 || $this->la54_i_compmes == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_compmes"]:$this->la54_i_compmes);
+       $this->la54_i_login = ($this->la54_i_login === 0 || $this->la54_i_login === 0.0 || $this->la54_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_login"]:$this->la54_i_login);
        $this->la54_c_descr = ($this->la54_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_c_descr"]:$this->la54_c_descr);
        if($this->la54_d_ini == ""){
          $this->la54_d_ini_dia = ($this->la54_d_ini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_d_ini_dia"]:$this->la54_d_ini_dia);
@@ -122,9 +122,9 @@ class cl_lab_fechamento {
             $this->la54_d_fim = $this->la54_d_fim_ano."-".$this->la54_d_fim_mes."-".$this->la54_d_fim_dia;
          }
        }
-       $this->la54_i_financiamento = ($this->la54_i_financiamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_financiamento"]:$this->la54_i_financiamento);
+       $this->la54_i_financiamento = ($this->la54_i_financiamento === 0 || $this->la54_i_financiamento === 0.0 || $this->la54_i_financiamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_financiamento"]:$this->la54_i_financiamento);
      }else{
-       $this->la54_i_codigo = ($this->la54_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_codigo"]:$this->la54_i_codigo);
+       $this->la54_i_codigo = ($this->la54_i_codigo === 0 || $this->la54_i_codigo === 0.0 || $this->la54_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la54_i_codigo"]:$this->la54_i_codigo);
      }
    }
    // funcao para inclusao
@@ -229,7 +229,7 @@ class cl_lab_fechamento {
          $this->la54_i_codigo = $la54_i_codigo; 
        }
      }
-     if(($this->la54_i_codigo == null) || ($this->la54_i_codigo == "") ){ 
+     if(($this->la54_i_codigo == null) || ($this->la54_i_codigo === 0 || $this->la54_i_codigo === 0.0 || $this->la54_i_codigo == "") ){ 
        $this->erro_sql = " Campo la54_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -637,7 +637,7 @@ class cl_lab_fechamento {
    function sql_query ( $la54_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -660,7 +660,7 @@ class cl_lab_fechamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -673,7 +673,7 @@ class cl_lab_fechamento {
    function sql_query_file ( $la54_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -694,7 +694,7 @@ class cl_lab_fechamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

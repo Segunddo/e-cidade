@@ -74,13 +74,13 @@ class cl_servicosprestadores
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fm08_codigo = ($this->fm08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm08_codigo"]:$this->fm08_codigo);
-       $this->fm08_prestador = ($this->fm08_prestador == ""?@$GLOBALS["HTTP_POST_VARS"]["fm08_prestador"]:$this->fm08_prestador);
-       $this->fm08_servico = ($this->fm08_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["fm08_servico"]:$this->fm08_servico);
+       $this->fm08_codigo = ($this->fm08_codigo === 0 || $this->fm08_codigo === 0.0 || $this->fm08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm08_codigo"]:$this->fm08_codigo);
+       $this->fm08_prestador = ($this->fm08_prestador === 0 || $this->fm08_prestador === 0.0 || $this->fm08_prestador == ""?@$GLOBALS["HTTP_POST_VARS"]["fm08_prestador"]:$this->fm08_prestador);
+       $this->fm08_servico = ($this->fm08_servico === 0 || $this->fm08_servico === 0.0 || $this->fm08_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["fm08_servico"]:$this->fm08_servico);
        $this->fm08_autoriza = ($this->fm08_autoriza == "f"?@$GLOBALS["HTTP_POST_VARS"]["fm08_autoriza"]:$this->fm08_autoriza);
        $this->fm08_situacao = ($this->fm08_situacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["fm08_situacao"]:$this->fm08_situacao);
      }else{
-       $this->fm08_codigo = ($this->fm08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm08_codigo"]:$this->fm08_codigo);
+       $this->fm08_codigo = ($this->fm08_codigo === 0 || $this->fm08_codigo === 0.0 || $this->fm08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm08_codigo"]:$this->fm08_codigo);
      }
    }
 
@@ -147,7 +147,7 @@ class cl_servicosprestadores
          $this->fm08_codigo = $fm08_codigo; 
        }
      }
-     if(($this->fm08_codigo == null) || ($this->fm08_codigo == "") ){ 
+     if(($this->fm08_codigo == null) || ($this->fm08_codigo === 0 || $this->fm08_codigo === 0.0 || $this->fm08_codigo == "") ){ 
        $this->erro_sql = " Campo fm08_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

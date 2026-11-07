@@ -52,7 +52,7 @@ class cl_far_prescricaomed {
                  fa31_i_prescricao = int4 = prescricao medica 
                  ";
    //funcao construtor da classe 
-   function cl_far_prescricaomed() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("far_prescricaomed"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_far_prescricaomed {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa31_i_codigo = ($this->fa31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa31_i_codigo"]:$this->fa31_i_codigo);
-       $this->fa31_i_medanvisa = ($this->fa31_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa31_i_medanvisa"]:$this->fa31_i_medanvisa);
-       $this->fa31_i_prescricao = ($this->fa31_i_prescricao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa31_i_prescricao"]:$this->fa31_i_prescricao);
+       $this->fa31_i_codigo = ($this->fa31_i_codigo === 0 || $this->fa31_i_codigo === 0.0 || $this->fa31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa31_i_codigo"]:$this->fa31_i_codigo);
+       $this->fa31_i_medanvisa = ($this->fa31_i_medanvisa === 0 || $this->fa31_i_medanvisa === 0.0 || $this->fa31_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa31_i_medanvisa"]:$this->fa31_i_medanvisa);
+       $this->fa31_i_prescricao = ($this->fa31_i_prescricao === 0 || $this->fa31_i_prescricao === 0.0 || $this->fa31_i_prescricao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa31_i_prescricao"]:$this->fa31_i_prescricao);
      }else{
-       $this->fa31_i_codigo = ($this->fa31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa31_i_codigo"]:$this->fa31_i_codigo);
+       $this->fa31_i_codigo = ($this->fa31_i_codigo === 0 || $this->fa31_i_codigo === 0.0 || $this->fa31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa31_i_codigo"]:$this->fa31_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_far_prescricaomed {
          $this->fa31_i_codigo = $fa31_i_codigo; 
        }
      }
-     if(($this->fa31_i_codigo == null) || ($this->fa31_i_codigo == "") ){ 
+     if(($this->fa31_i_codigo == null) || ($this->fa31_i_codigo === 0 || $this->fa31_i_codigo === 0.0 || $this->fa31_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa31_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_far_prescricaomed {
    function sql_query ( $fa31_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_far_prescricaomed {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -396,7 +396,7 @@ class cl_far_prescricaomed {
    function sql_query_file ( $fa31_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_far_prescricaomed {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

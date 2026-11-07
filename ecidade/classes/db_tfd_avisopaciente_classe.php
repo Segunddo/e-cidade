@@ -63,7 +63,7 @@ class cl_tfd_avisopaciente {
                  tf21_t_obs = text = Avisado / Obs 
                  ";
    //funcao construtor da classe 
-   function cl_tfd_avisopaciente() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_avisopaciente"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,9 +80,9 @@ class cl_tfd_avisopaciente {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf21_i_codigo = ($this->tf21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_i_codigo"]:$this->tf21_i_codigo);
-       $this->tf21_i_pedidotfd = ($this->tf21_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_i_pedidotfd"]:$this->tf21_i_pedidotfd);
-       $this->tf21_i_formaaviso = ($this->tf21_i_formaaviso == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_i_formaaviso"]:$this->tf21_i_formaaviso);
+       $this->tf21_i_codigo = ($this->tf21_i_codigo === 0 || $this->tf21_i_codigo === 0.0 || $this->tf21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_i_codigo"]:$this->tf21_i_codigo);
+       $this->tf21_i_pedidotfd = ($this->tf21_i_pedidotfd === 0 || $this->tf21_i_pedidotfd === 0.0 || $this->tf21_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_i_pedidotfd"]:$this->tf21_i_pedidotfd);
+       $this->tf21_i_formaaviso = ($this->tf21_i_formaaviso === 0 || $this->tf21_i_formaaviso === 0.0 || $this->tf21_i_formaaviso == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_i_formaaviso"]:$this->tf21_i_formaaviso);
        if($this->tf21_d_dataaviso == ""){
          $this->tf21_d_dataaviso_dia = ($this->tf21_d_dataaviso_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_d_dataaviso_dia"]:$this->tf21_d_dataaviso_dia);
          $this->tf21_d_dataaviso_mes = ($this->tf21_d_dataaviso_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_d_dataaviso_mes"]:$this->tf21_d_dataaviso_mes);
@@ -92,10 +92,10 @@ class cl_tfd_avisopaciente {
          }
        }
        $this->tf21_c_horaaviso = ($this->tf21_c_horaaviso == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_c_horaaviso"]:$this->tf21_c_horaaviso);
-       $this->tf21_i_login = ($this->tf21_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_i_login"]:$this->tf21_i_login);
+       $this->tf21_i_login = ($this->tf21_i_login === 0 || $this->tf21_i_login === 0.0 || $this->tf21_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_i_login"]:$this->tf21_i_login);
        $this->tf21_t_obs = ($this->tf21_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_t_obs"]:$this->tf21_t_obs);
      }else{
-       $this->tf21_i_codigo = ($this->tf21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_i_codigo"]:$this->tf21_i_codigo);
+       $this->tf21_i_codigo = ($this->tf21_i_codigo === 0 || $this->tf21_i_codigo === 0.0 || $this->tf21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf21_i_codigo"]:$this->tf21_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_tfd_avisopaciente {
          $this->tf21_i_codigo = $tf21_i_codigo; 
        }
      }
-     if(($this->tf21_i_codigo == null) || ($this->tf21_i_codigo == "") ){ 
+     if(($this->tf21_i_codigo == null) || ($this->tf21_i_codigo === 0 || $this->tf21_i_codigo === 0.0 || $this->tf21_i_codigo == "") ){ 
        $this->erro_sql = " Campo tf21_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -508,7 +508,7 @@ class cl_tfd_avisopaciente {
    function sql_query ( $tf21_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -539,7 +539,7 @@ class cl_tfd_avisopaciente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -552,7 +552,7 @@ class cl_tfd_avisopaciente {
    function sql_query_file ( $tf21_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -573,7 +573,7 @@ class cl_tfd_avisopaciente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -587,7 +587,7 @@ class cl_tfd_avisopaciente {
    function sql_query2( $tf21_i_codigo=null,$campos="*",$ordem=null,$dbwhere="") { 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -617,7 +617,7 @@ class cl_tfd_avisopaciente {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -70,7 +70,7 @@ class cl_prontuariomedico {
                  sd32_c_horacad = varchar(20) = Hora Cadastro 
                  ";
    //funcao construtor da classe 
-   function cl_prontuariomedico() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("prontuariomedico"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,10 +87,10 @@ class cl_prontuariomedico {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd32_i_codigo = ($this->sd32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_i_codigo"]:$this->sd32_i_codigo);
-       $this->sd32_i_unidade = ($this->sd32_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_i_unidade"]:$this->sd32_i_unidade);
-       $this->sd32_i_numcgs = ($this->sd32_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_i_numcgs"]:$this->sd32_i_numcgs);
-       $this->sd32_i_medico = ($this->sd32_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_i_medico"]:$this->sd32_i_medico);
+       $this->sd32_i_codigo = ($this->sd32_i_codigo === 0 || $this->sd32_i_codigo === 0.0 || $this->sd32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_i_codigo"]:$this->sd32_i_codigo);
+       $this->sd32_i_unidade = ($this->sd32_i_unidade === 0 || $this->sd32_i_unidade === 0.0 || $this->sd32_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_i_unidade"]:$this->sd32_i_unidade);
+       $this->sd32_i_numcgs = ($this->sd32_i_numcgs === 0 || $this->sd32_i_numcgs === 0.0 || $this->sd32_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_i_numcgs"]:$this->sd32_i_numcgs);
+       $this->sd32_i_medico = ($this->sd32_i_medico === 0 || $this->sd32_i_medico === 0.0 || $this->sd32_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_i_medico"]:$this->sd32_i_medico);
        if($this->sd32_d_atendimento == ""){
          $this->sd32_d_atendimento_dia = ($this->sd32_d_atendimento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_d_atendimento_dia"]:$this->sd32_d_atendimento_dia);
          $this->sd32_d_atendimento_mes = ($this->sd32_d_atendimento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_d_atendimento_mes"]:$this->sd32_d_atendimento_mes);
@@ -111,7 +111,7 @@ class cl_prontuariomedico {
        }
        $this->sd32_c_horacad = ($this->sd32_c_horacad == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_c_horacad"]:$this->sd32_c_horacad);
      }else{
-       $this->sd32_i_codigo = ($this->sd32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_i_codigo"]:$this->sd32_i_codigo);
+       $this->sd32_i_codigo = ($this->sd32_i_codigo === 0 || $this->sd32_i_codigo === 0.0 || $this->sd32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd32_i_codigo"]:$this->sd32_i_codigo);
      }
    }
    // funcao para inclusao
@@ -195,7 +195,7 @@ class cl_prontuariomedico {
          $this->sd32_i_codigo = $sd32_i_codigo; 
        }
      }
-     if(($this->sd32_i_codigo == null) || ($this->sd32_i_codigo == "") ){ 
+     if(($this->sd32_i_codigo == null) || ($this->sd32_i_codigo === 0 || $this->sd32_i_codigo === 0.0 || $this->sd32_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd32_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -542,7 +542,7 @@ class cl_prontuariomedico {
    function sql_query ( $sd32_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -569,7 +569,7 @@ class cl_prontuariomedico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -581,7 +581,7 @@ class cl_prontuariomedico {
    function sql_query_file ( $sd32_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -602,7 +602,7 @@ class cl_prontuariomedico {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

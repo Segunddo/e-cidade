@@ -54,7 +54,7 @@ class cl_vac_calendario {
                  vc05_c_descr = char(50) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_vac_calendario() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_calendario"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_vac_calendario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc05_i_codigo = ($this->vc05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc05_i_codigo"]:$this->vc05_i_codigo);
-       $this->vc05_i_idadefim = ($this->vc05_i_idadefim == ""?@$GLOBALS["HTTP_POST_VARS"]["vc05_i_idadefim"]:$this->vc05_i_idadefim);
-       $this->vc05_i_idadeini = ($this->vc05_i_idadeini == ""?@$GLOBALS["HTTP_POST_VARS"]["vc05_i_idadeini"]:$this->vc05_i_idadeini);
+       $this->vc05_i_codigo = ($this->vc05_i_codigo === 0 || $this->vc05_i_codigo === 0.0 || $this->vc05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc05_i_codigo"]:$this->vc05_i_codigo);
+       $this->vc05_i_idadefim = ($this->vc05_i_idadefim === 0 || $this->vc05_i_idadefim === 0.0 || $this->vc05_i_idadefim == ""?@$GLOBALS["HTTP_POST_VARS"]["vc05_i_idadefim"]:$this->vc05_i_idadefim);
+       $this->vc05_i_idadeini = ($this->vc05_i_idadeini === 0 || $this->vc05_i_idadeini === 0.0 || $this->vc05_i_idadeini == ""?@$GLOBALS["HTTP_POST_VARS"]["vc05_i_idadeini"]:$this->vc05_i_idadeini);
        $this->vc05_c_descr = ($this->vc05_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc05_c_descr"]:$this->vc05_c_descr);
      }else{
-       $this->vc05_i_codigo = ($this->vc05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc05_i_codigo"]:$this->vc05_i_codigo);
+       $this->vc05_i_codigo = ($this->vc05_i_codigo === 0 || $this->vc05_i_codigo === 0.0 || $this->vc05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc05_i_codigo"]:$this->vc05_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_vac_calendario {
          $this->vc05_i_codigo = $vc05_i_codigo; 
        }
      }
-     if(($this->vc05_i_codigo == null) || ($this->vc05_i_codigo == "") ){ 
+     if(($this->vc05_i_codigo == null) || ($this->vc05_i_codigo === 0 || $this->vc05_i_codigo === 0.0 || $this->vc05_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc05_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_vac_calendario {
    function sql_query ( $vc05_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -412,7 +412,7 @@ class cl_vac_calendario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_vac_calendario {
    function sql_query_file ( $vc05_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_vac_calendario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

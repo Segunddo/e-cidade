@@ -46,7 +46,7 @@ $clagendaproced  = new cl_agendaproced;
 $oDaoCgsUnd      = new cl_cgs_und();
 
 $res_sau_config  = db_query( $clsau_config->sql_query_ext() );
-$booProced       = pg_num_rows( $res_sau_config ) > 0 && pg_result($res_sau_config, 0, "s103_c_agendaproc") == "S";
+$booProced       = ($res_sau_config ? pg_num_rows( $res_sau_config ) : null) > 0 && ($res_sau_config ? pg_result($res_sau_config, 0, "s103_c_agendaproc") : null) == "S";
 
 $sd02_c_centralagenda = "N";
 $iUpssolicitante      = db_getsession("DB_coddepto"); 

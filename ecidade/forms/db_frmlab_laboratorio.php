@@ -146,7 +146,7 @@ db_input('la02_i_telefone',11,$Ila02_i_telefone,true,'text',$db_opcao,"")
 <input name="pesquisar" type="button" id="pesquisar" value="Pesquisar" onclick="js_pesquisa();" >
 </form>
 <script>
-<?if(@$la02_i_tipo!=""){
+<?if(@$la02_i_tipo!="" && @$la02_i_tipo!==0 && @$la02_i_tipo!==0.0){
     echo"js_tipo($la02_i_tipo);";
   }
 ?>

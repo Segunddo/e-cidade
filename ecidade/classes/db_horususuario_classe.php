@@ -53,7 +53,7 @@ class cl_horususuario {
                  fa66_senha = varchar(40) = Senha 
                  ";
    //funcao construtor da classe 
-   function cl_horususuario() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("horususuario"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -70,12 +70,12 @@ class cl_horususuario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa66_sequencial = ($this->fa66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa66_sequencial"]:$this->fa66_sequencial);
-       $this->fa66_unidade = ($this->fa66_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa66_unidade"]:$this->fa66_unidade);
+       $this->fa66_sequencial = ($this->fa66_sequencial === 0 || $this->fa66_sequencial === 0.0 || $this->fa66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa66_sequencial"]:$this->fa66_sequencial);
+       $this->fa66_unidade = ($this->fa66_unidade === 0 || $this->fa66_unidade === 0.0 || $this->fa66_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa66_unidade"]:$this->fa66_unidade);
        $this->fa66_usuario = ($this->fa66_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["fa66_usuario"]:$this->fa66_usuario);
        $this->fa66_senha = ($this->fa66_senha == ""?@$GLOBALS["HTTP_POST_VARS"]["fa66_senha"]:$this->fa66_senha);
      }else{
-       $this->fa66_sequencial = ($this->fa66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa66_sequencial"]:$this->fa66_sequencial);
+       $this->fa66_sequencial = ($this->fa66_sequencial === 0 || $this->fa66_sequencial === 0.0 || $this->fa66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa66_sequencial"]:$this->fa66_sequencial);
      }
    }
    // funcao para Inclusão
@@ -132,7 +132,7 @@ class cl_horususuario {
          $this->fa66_sequencial = $fa66_sequencial; 
        }
      }
-     if(($this->fa66_sequencial == null) || ($this->fa66_sequencial == "") ){ 
+     if(($this->fa66_sequencial == null) || ($this->fa66_sequencial === 0 || $this->fa66_sequencial === 0.0 || $this->fa66_sequencial == "") ){ 
        $this->erro_sql = " Campo fa66_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -54,7 +54,7 @@ class cl_tfd_tipotratamentoproced {
                  tf05_i_ativo = int4 = Ativo 
                  ";
    //funcao construtor da classe 
-   function cl_tfd_tipotratamentoproced() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_tipotratamentoproced"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_tfd_tipotratamentoproced {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf05_i_codigo = ($this->tf05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_codigo"]:$this->tf05_i_codigo);
-       $this->tf05_i_tipotratamento = ($this->tf05_i_tipotratamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_tipotratamento"]:$this->tf05_i_tipotratamento);
-       $this->tf05_i_procedimento = ($this->tf05_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_procedimento"]:$this->tf05_i_procedimento);
-       $this->tf05_i_ativo = ($this->tf05_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_ativo"]:$this->tf05_i_ativo);
+       $this->tf05_i_codigo = ($this->tf05_i_codigo === 0 || $this->tf05_i_codigo === 0.0 || $this->tf05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_codigo"]:$this->tf05_i_codigo);
+       $this->tf05_i_tipotratamento = ($this->tf05_i_tipotratamento === 0 || $this->tf05_i_tipotratamento === 0.0 || $this->tf05_i_tipotratamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_tipotratamento"]:$this->tf05_i_tipotratamento);
+       $this->tf05_i_procedimento = ($this->tf05_i_procedimento === 0 || $this->tf05_i_procedimento === 0.0 || $this->tf05_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_procedimento"]:$this->tf05_i_procedimento);
+       $this->tf05_i_ativo = ($this->tf05_i_ativo === 0 || $this->tf05_i_ativo === 0.0 || $this->tf05_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_ativo"]:$this->tf05_i_ativo);
      }else{
-       $this->tf05_i_codigo = ($this->tf05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_codigo"]:$this->tf05_i_codigo);
+       $this->tf05_i_codigo = ($this->tf05_i_codigo === 0 || $this->tf05_i_codigo === 0.0 || $this->tf05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_codigo"]:$this->tf05_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_tfd_tipotratamentoproced {
          $this->tf05_i_codigo = $tf05_i_codigo; 
        }
      }
-     if(($this->tf05_i_codigo == null) || ($this->tf05_i_codigo == "") ){ 
+     if(($this->tf05_i_codigo == null) || ($this->tf05_i_codigo === 0 || $this->tf05_i_codigo === 0.0 || $this->tf05_i_codigo == "") ){ 
        $this->erro_sql = " Campo tf05_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_tfd_tipotratamentoproced {
    function sql_query ( $tf05_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -417,7 +417,7 @@ class cl_tfd_tipotratamentoproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -430,7 +430,7 @@ class cl_tfd_tipotratamentoproced {
    function sql_query_file ( $tf05_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -451,7 +451,7 @@ class cl_tfd_tipotratamentoproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -464,7 +464,7 @@ class cl_tfd_tipotratamentoproced {
    function sql_query2 ( $tf05_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -487,7 +487,7 @@ class cl_tfd_tipotratamentoproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_tfd_tipotratamentoproced {
    function sql_query_especialidade ( $tf05_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_tfd_tipotratamentoproced {
      $sql .= $sGroupBy;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

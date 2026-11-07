@@ -122,7 +122,7 @@ class db_dbf_class {
    * Construtor da classe DBF
    * @param $ssFileName caminho e nome do arquivo DBF
    */
-  function db_dbf_class($ssFileName) {
+  function __construct($ssFileName) {
   
     $this->sFileName = $ssFileName;
     $this->sTipo     = "";

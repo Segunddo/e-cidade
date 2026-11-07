@@ -54,7 +54,7 @@ class cl_lab_fechaconferencia {
                  la58_gerado = bool = Gerado 
                  ";
    //funcao construtor da classe 
-   function cl_lab_fechaconferencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_fechaconferencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_lab_fechaconferencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la58_i_codigo = ($this->la58_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_codigo"]:$this->la58_i_codigo);
-       $this->la58_i_fechamento = ($this->la58_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_fechamento"]:$this->la58_i_fechamento);
-       $this->la58_i_conferencia = ($this->la58_i_conferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_conferencia"]:$this->la58_i_conferencia);
+       $this->la58_i_codigo = ($this->la58_i_codigo === 0 || $this->la58_i_codigo === 0.0 || $this->la58_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_codigo"]:$this->la58_i_codigo);
+       $this->la58_i_fechamento = ($this->la58_i_fechamento === 0 || $this->la58_i_fechamento === 0.0 || $this->la58_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_fechamento"]:$this->la58_i_fechamento);
+       $this->la58_i_conferencia = ($this->la58_i_conferencia === 0 || $this->la58_i_conferencia === 0.0 || $this->la58_i_conferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_conferencia"]:$this->la58_i_conferencia);
        $this->la58_gerado = ($this->la58_gerado == "f"?@$GLOBALS["HTTP_POST_VARS"]["la58_gerado"]:$this->la58_gerado);
      }else{
-       $this->la58_i_codigo = ($this->la58_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_codigo"]:$this->la58_i_codigo);
+       $this->la58_i_codigo = ($this->la58_i_codigo === 0 || $this->la58_i_codigo === 0.0 || $this->la58_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_codigo"]:$this->la58_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_lab_fechaconferencia {
          $this->la58_i_codigo = $la58_i_codigo; 
        }
      }
-     if(($this->la58_i_codigo == null) || ($this->la58_i_codigo == "") ){ 
+     if(($this->la58_i_codigo == null) || ($this->la58_i_codigo === 0 || $this->la58_i_codigo === 0.0 || $this->la58_i_codigo == "") ){ 
        $this->erro_sql = " Campo la58_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_lab_fechaconferencia {
    function sql_query ( $la58_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_lab_fechaconferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -433,7 +433,7 @@ class cl_lab_fechaconferencia {
    function sql_query_file ( $la58_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -454,7 +454,7 @@ class cl_lab_fechaconferencia {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

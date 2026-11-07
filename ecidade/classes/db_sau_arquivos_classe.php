@@ -61,7 +61,7 @@ class cl_sau_arquivos {
                  sd99_d_data = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_sau_arquivos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_arquivos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,11 +78,11 @@ class cl_sau_arquivos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd99_i_codigo = ($this->sd99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_codigo"]:$this->sd99_i_codigo);
+       $this->sd99_i_codigo = ($this->sd99_i_codigo === 0 || $this->sd99_i_codigo === 0.0 || $this->sd99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_codigo"]:$this->sd99_i_codigo);
        $this->sd99_t_arquivo = ($this->sd99_t_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_t_arquivo"]:$this->sd99_t_arquivo);
-       $this->sd99_i_fechamento = ($this->sd99_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_fechamento"]:$this->sd99_i_fechamento);
+       $this->sd99_i_fechamento = ($this->sd99_i_fechamento === 0 || $this->sd99_i_fechamento === 0.0 || $this->sd99_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_fechamento"]:$this->sd99_i_fechamento);
        $this->sd99_c_hora = ($this->sd99_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_c_hora"]:$this->sd99_c_hora);
-       $this->sd99_i_login = ($this->sd99_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_login"]:$this->sd99_i_login);
+       $this->sd99_i_login = ($this->sd99_i_login === 0 || $this->sd99_i_login === 0.0 || $this->sd99_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_login"]:$this->sd99_i_login);
        if($this->sd99_d_data == ""){
          $this->sd99_d_data_dia = ($this->sd99_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_d_data_dia"]:$this->sd99_d_data_dia);
          $this->sd99_d_data_mes = ($this->sd99_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_d_data_mes"]:$this->sd99_d_data_mes);
@@ -92,7 +92,7 @@ class cl_sau_arquivos {
          }
        }
      }else{
-       $this->sd99_i_codigo = ($this->sd99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_codigo"]:$this->sd99_i_codigo);
+       $this->sd99_i_codigo = ($this->sd99_i_codigo === 0 || $this->sd99_i_codigo === 0.0 || $this->sd99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_codigo"]:$this->sd99_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_sau_arquivos {
          $this->sd99_i_codigo = $sd99_i_codigo; 
        }
      }
-     if(($this->sd99_i_codigo == null) || ($this->sd99_i_codigo == "") ){ 
+     if(($this->sd99_i_codigo == null) || ($this->sd99_i_codigo === 0 || $this->sd99_i_codigo === 0.0 || $this->sd99_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd99_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -438,7 +438,7 @@ class cl_sau_arquivos {
    function sql_query ( $sd99_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -461,7 +461,7 @@ class cl_sau_arquivos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -474,7 +474,7 @@ class cl_sau_arquivos {
    function sql_query_file ( $sd99_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -495,7 +495,7 @@ class cl_sau_arquivos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

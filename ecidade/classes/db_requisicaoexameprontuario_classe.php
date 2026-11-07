@@ -35,7 +35,7 @@ class cl_requisicaoexameprontuario {
                  sd103_observacao = text = Observação
                  ";
    //funcao construtor da classe
-   function cl_requisicaoexameprontuario() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("requisicaoexameprontuario");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -52,9 +52,9 @@ class cl_requisicaoexameprontuario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd103_codigo = ($this->sd103_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_codigo"]:$this->sd103_codigo);
-       $this->sd103_prontuarios = ($this->sd103_prontuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_prontuarios"]:$this->sd103_prontuarios);
-       $this->sd103_medicos = ($this->sd103_medicos == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_medicos"]:$this->sd103_medicos);
+       $this->sd103_codigo = ($this->sd103_codigo === 0 || $this->sd103_codigo === 0.0 || $this->sd103_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_codigo"]:$this->sd103_codigo);
+       $this->sd103_prontuarios = ($this->sd103_prontuarios === 0 || $this->sd103_prontuarios === 0.0 || $this->sd103_prontuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_prontuarios"]:$this->sd103_prontuarios);
+       $this->sd103_medicos = ($this->sd103_medicos === 0 || $this->sd103_medicos === 0.0 || $this->sd103_medicos == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_medicos"]:$this->sd103_medicos);
        if($this->sd103_data == ""){
          $this->sd103_data_dia = ($this->sd103_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_data_dia"]:$this->sd103_data_dia);
          $this->sd103_data_mes = ($this->sd103_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_data_mes"]:$this->sd103_data_mes);
@@ -66,7 +66,7 @@ class cl_requisicaoexameprontuario {
        $this->sd103_hora = ($this->sd103_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_hora"]:$this->sd103_hora);
        $this->sd103_observacao = ($this->sd103_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_observacao"]:$this->sd103_observacao);
      }else{
-       $this->sd103_codigo = ($this->sd103_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_codigo"]:$this->sd103_codigo);
+       $this->sd103_codigo = ($this->sd103_codigo === 0 || $this->sd103_codigo === 0.0 || $this->sd103_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd103_codigo"]:$this->sd103_codigo);
      }
    }
    // funcao para inclusao
@@ -132,7 +132,7 @@ class cl_requisicaoexameprontuario {
          $this->sd103_codigo = $sd103_codigo;
        }
      }
-     if(($this->sd103_codigo == null) || ($this->sd103_codigo == "") ){
+     if(($this->sd103_codigo == null) || ($this->sd103_codigo === 0 || $this->sd103_codigo === 0.0 || $this->sd103_codigo == "") ){
        $this->erro_sql = " Campo sd103_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -63,7 +63,7 @@ class cl_agendaconsultaanula {
                  s114_c_hora = varchar(5) = s114_c_hora 
                  ";
    //funcao construtor da classe 
-   function cl_agendaconsultaanula() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("agendaconsultaanula"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_agendaconsultaanula {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s114_i_codigo = ($this->s114_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_codigo"]:$this->s114_i_codigo);
-       $this->s114_i_agendaconsulta = ($this->s114_i_agendaconsulta == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_agendaconsulta"]:$this->s114_i_agendaconsulta);
+       $this->s114_i_codigo = ($this->s114_i_codigo === 0 || $this->s114_i_codigo === 0.0 || $this->s114_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_codigo"]:$this->s114_i_codigo);
+       $this->s114_i_agendaconsulta = ($this->s114_i_agendaconsulta === 0 || $this->s114_i_agendaconsulta === 0.0 || $this->s114_i_agendaconsulta == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_agendaconsulta"]:$this->s114_i_agendaconsulta);
        if($this->s114_d_data == ""){
          $this->s114_d_data_dia = ($this->s114_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_d_data_dia"]:$this->s114_d_data_dia);
          $this->s114_d_data_mes = ($this->s114_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_d_data_mes"]:$this->s114_d_data_mes);
@@ -91,11 +91,11 @@ class cl_agendaconsultaanula {
          }
        }
        $this->s114_v_motivo = ($this->s114_v_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_v_motivo"]:$this->s114_v_motivo);
-       $this->s114_i_situacao = ($this->s114_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_situacao"]:$this->s114_i_situacao);
-       $this->s114_i_login = ($this->s114_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_login"]:$this->s114_i_login);
+       $this->s114_i_situacao = ($this->s114_i_situacao === 0 || $this->s114_i_situacao === 0.0 || $this->s114_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_situacao"]:$this->s114_i_situacao);
+       $this->s114_i_login = ($this->s114_i_login === 0 || $this->s114_i_login === 0.0 || $this->s114_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_login"]:$this->s114_i_login);
        $this->s114_c_hora = ($this->s114_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_c_hora"]:$this->s114_c_hora);
      }else{
-       $this->s114_i_codigo = ($this->s114_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_codigo"]:$this->s114_i_codigo);
+       $this->s114_i_codigo = ($this->s114_i_codigo === 0 || $this->s114_i_codigo === 0.0 || $this->s114_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_codigo"]:$this->s114_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_agendaconsultaanula {
          $this->s114_i_codigo = $s114_i_codigo; 
        }
      }
-     if(($this->s114_i_codigo == null) || ($this->s114_i_codigo == "") ){ 
+     if(($this->s114_i_codigo == null) || ($this->s114_i_codigo === 0 || $this->s114_i_codigo === 0.0 || $this->s114_i_codigo == "") ){ 
        $this->erro_sql = " Campo s114_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -472,7 +472,7 @@ class cl_agendaconsultaanula {
    function sql_query ( $s114_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -498,7 +498,7 @@ class cl_agendaconsultaanula {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -511,7 +511,7 @@ class cl_agendaconsultaanula {
    function sql_query_file ( $s114_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_agendaconsultaanula {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -545,7 +545,7 @@ class cl_agendaconsultaanula {
    function sql_query_anulados ( $s114_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -577,7 +577,7 @@ class cl_agendaconsultaanula {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

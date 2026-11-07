@@ -50,7 +50,7 @@ class cl_db_contatostipo {
                  g02_descr = varchar(40) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_db_contatostipo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_contatostipo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_db_contatostipo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->g02_tipocon = ($this->g02_tipocon == ""?@$GLOBALS["HTTP_POST_VARS"]["g02_tipocon"]:$this->g02_tipocon);
+       $this->g02_tipocon = ($this->g02_tipocon === 0 || $this->g02_tipocon === 0.0 || $this->g02_tipocon == ""?@$GLOBALS["HTTP_POST_VARS"]["g02_tipocon"]:$this->g02_tipocon);
        $this->g02_descr = ($this->g02_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["g02_descr"]:$this->g02_descr);
      }else{
-       $this->g02_tipocon = ($this->g02_tipocon == ""?@$GLOBALS["HTTP_POST_VARS"]["g02_tipocon"]:$this->g02_tipocon);
+       $this->g02_tipocon = ($this->g02_tipocon === 0 || $this->g02_tipocon === 0.0 || $this->g02_tipocon == ""?@$GLOBALS["HTTP_POST_VARS"]["g02_tipocon"]:$this->g02_tipocon);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_db_contatostipo {
          $this->g02_tipocon = $g02_tipocon; 
        }
      }
-     if(($this->g02_tipocon == null) || ($this->g02_tipocon == "") ){ 
+     if(($this->g02_tipocon == null) || ($this->g02_tipocon === 0 || $this->g02_tipocon === 0.0 || $this->g02_tipocon == "") ){ 
        $this->erro_sql = " Campo g02_tipocon nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_db_contatostipo {
    function sql_query ( $g02_tipocon=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_db_contatostipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_db_contatostipo {
    function sql_query_file ( $g02_tipocon=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_db_contatostipo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

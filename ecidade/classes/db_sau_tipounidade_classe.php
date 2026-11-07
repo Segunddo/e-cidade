@@ -50,7 +50,7 @@ class cl_sau_tipounidade {
                  sd42_v_descricao = varchar(60) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_sau_tipounidade() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_tipounidade"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_sau_tipounidade {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd42_i_tp_unid_id = ($this->sd42_i_tp_unid_id == ""?@$GLOBALS["HTTP_POST_VARS"]["sd42_i_tp_unid_id"]:$this->sd42_i_tp_unid_id);
+       $this->sd42_i_tp_unid_id = ($this->sd42_i_tp_unid_id === 0 || $this->sd42_i_tp_unid_id === 0.0 || $this->sd42_i_tp_unid_id == ""?@$GLOBALS["HTTP_POST_VARS"]["sd42_i_tp_unid_id"]:$this->sd42_i_tp_unid_id);
        $this->sd42_v_descricao = ($this->sd42_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd42_v_descricao"]:$this->sd42_v_descricao);
      }else{
-       $this->sd42_i_tp_unid_id = ($this->sd42_i_tp_unid_id == ""?@$GLOBALS["HTTP_POST_VARS"]["sd42_i_tp_unid_id"]:$this->sd42_i_tp_unid_id);
+       $this->sd42_i_tp_unid_id = ($this->sd42_i_tp_unid_id === 0 || $this->sd42_i_tp_unid_id === 0.0 || $this->sd42_i_tp_unid_id == ""?@$GLOBALS["HTTP_POST_VARS"]["sd42_i_tp_unid_id"]:$this->sd42_i_tp_unid_id);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sau_tipounidade {
        return false;
      }
        $this->sd42_i_tp_unid_id = $sd42_i_tp_unid_id; 
-     if(($this->sd42_i_tp_unid_id == null) || ($this->sd42_i_tp_unid_id == "") ){ 
+     if(($this->sd42_i_tp_unid_id == null) || ($this->sd42_i_tp_unid_id === 0 || $this->sd42_i_tp_unid_id === 0.0 || $this->sd42_i_tp_unid_id == "") ){ 
        $this->erro_sql = " Campo sd42_i_tp_unid_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_sau_tipounidade {
    function sql_query ( $sd42_i_tp_unid_id=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -326,7 +326,7 @@ class cl_sau_tipounidade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -338,7 +338,7 @@ class cl_sau_tipounidade {
    function sql_query_file ( $sd42_i_tp_unid_id=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -359,7 +359,7 @@ class cl_sau_tipounidade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

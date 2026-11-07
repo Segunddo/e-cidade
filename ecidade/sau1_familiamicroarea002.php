@@ -31,7 +31,8 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_familiamicroarea_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"], $__qs );
+extract($__qs);
 db_postmemory( $_POST );
 
 $clfamiliamicroarea = new cl_familiamicroarea;

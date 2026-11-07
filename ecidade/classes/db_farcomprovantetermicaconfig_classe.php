@@ -52,7 +52,7 @@ class cl_farcomprovantetermicaconfig {
                  fa57_mensagem = text = Mensagem Comprovante 
                  ";
    //funcao construtor da classe 
-   function cl_farcomprovantetermicaconfig() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("farcomprovantetermicaconfig"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_farcomprovantetermicaconfig {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa57_sequencial = ($this->fa57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_sequencial"]:$this->fa57_sequencial);
-       $this->fa57_coddepto = ($this->fa57_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_coddepto"]:$this->fa57_coddepto);
+       $this->fa57_sequencial = ($this->fa57_sequencial === 0 || $this->fa57_sequencial === 0.0 || $this->fa57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_sequencial"]:$this->fa57_sequencial);
+       $this->fa57_coddepto = ($this->fa57_coddepto === 0 || $this->fa57_coddepto === 0.0 || $this->fa57_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_coddepto"]:$this->fa57_coddepto);
        $this->fa57_mensagem = ($this->fa57_mensagem == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_mensagem"]:$this->fa57_mensagem);
      }else{
-       $this->fa57_sequencial = ($this->fa57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_sequencial"]:$this->fa57_sequencial);
+       $this->fa57_sequencial = ($this->fa57_sequencial === 0 || $this->fa57_sequencial === 0.0 || $this->fa57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_sequencial"]:$this->fa57_sequencial);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_farcomprovantetermicaconfig {
          $this->fa57_sequencial = $fa57_sequencial; 
        }
      }
-     if(($this->fa57_sequencial == null) || ($this->fa57_sequencial == "") ){ 
+     if(($this->fa57_sequencial == null) || ($this->fa57_sequencial === 0 || $this->fa57_sequencial === 0.0 || $this->fa57_sequencial == "") ){ 
        $this->erro_sql = " Campo fa57_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -342,7 +342,7 @@ class cl_farcomprovantetermicaconfig {
    function sql_query ( $fa57_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -366,7 +366,7 @@ class cl_farcomprovantetermicaconfig {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -379,7 +379,7 @@ class cl_farcomprovantetermicaconfig {
    function sql_query_file ( $fa57_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -400,7 +400,7 @@ class cl_farcomprovantetermicaconfig {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

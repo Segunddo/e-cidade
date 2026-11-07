@@ -34,7 +34,7 @@ class cl_integracaohorus {
                  fa59_db_depart = int4 = Departamento 
                  ";
    //funcao construtor da classe 
-   function cl_integracaohorus() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("integracaohorus"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -51,15 +51,15 @@ class cl_integracaohorus {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa59_codigo = ($this->fa59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_codigo"]:$this->fa59_codigo);
-       $this->fa59_usuario = ($this->fa59_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_usuario"]:$this->fa59_usuario);
-       $this->fa59_mesreferente = ($this->fa59_mesreferente == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_mesreferente"]:$this->fa59_mesreferente);
-       $this->fa59_anoreferente = ($this->fa59_anoreferente == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_anoreferente"]:$this->fa59_anoreferente);
-       $this->fa59_tipoarquivo = ($this->fa59_tipoarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_tipoarquivo"]:$this->fa59_tipoarquivo);
-       $this->fa59_situacaohorus = ($this->fa59_situacaohorus == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_situacaohorus"]:$this->fa59_situacaohorus);
-       $this->fa59_db_depart = ($this->fa59_db_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_db_depart"]:$this->fa59_db_depart);
+       $this->fa59_codigo = ($this->fa59_codigo === 0 || $this->fa59_codigo === 0.0 || $this->fa59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_codigo"]:$this->fa59_codigo);
+       $this->fa59_usuario = ($this->fa59_usuario === 0 || $this->fa59_usuario === 0.0 || $this->fa59_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_usuario"]:$this->fa59_usuario);
+       $this->fa59_mesreferente = ($this->fa59_mesreferente === 0 || $this->fa59_mesreferente === 0.0 || $this->fa59_mesreferente == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_mesreferente"]:$this->fa59_mesreferente);
+       $this->fa59_anoreferente = ($this->fa59_anoreferente === 0 || $this->fa59_anoreferente === 0.0 || $this->fa59_anoreferente == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_anoreferente"]:$this->fa59_anoreferente);
+       $this->fa59_tipoarquivo = ($this->fa59_tipoarquivo === 0 || $this->fa59_tipoarquivo === 0.0 || $this->fa59_tipoarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_tipoarquivo"]:$this->fa59_tipoarquivo);
+       $this->fa59_situacaohorus = ($this->fa59_situacaohorus === 0 || $this->fa59_situacaohorus === 0.0 || $this->fa59_situacaohorus == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_situacaohorus"]:$this->fa59_situacaohorus);
+       $this->fa59_db_depart = ($this->fa59_db_depart === 0 || $this->fa59_db_depart === 0.0 || $this->fa59_db_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_db_depart"]:$this->fa59_db_depart);
      }else{
-       $this->fa59_codigo = ($this->fa59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_codigo"]:$this->fa59_codigo);
+       $this->fa59_codigo = ($this->fa59_codigo === 0 || $this->fa59_codigo === 0.0 || $this->fa59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa59_codigo"]:$this->fa59_codigo);
      }
    }
    // funcao para Inclusão
@@ -143,7 +143,7 @@ class cl_integracaohorus {
          $this->fa59_codigo = $fa59_codigo; 
        }
      }
-     if(($this->fa59_codigo == null) || ($this->fa59_codigo == "") ){ 
+     if(($this->fa59_codigo == null) || ($this->fa59_codigo === 0 || $this->fa59_codigo === 0.0 || $this->fa59_codigo == "") ){ 
        $this->erro_sql = " Campo fa59_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

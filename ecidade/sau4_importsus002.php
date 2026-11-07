@@ -37,7 +37,7 @@ require_once(modification("libs/db_utils.php"));
 *                           1 = chamada via Rotina importação cartão SUS Dbportal
 *                           2 = Chamada via REquisição Ajax no cadastro cartão sus
 */
-function atualiza_cadsus($termometro = 0, $conn, $cod_cgs = null ,$DB_SERVIDOR ,$DB_BASE ,$DB_PORTA ,$DB_USUARIO ,$DB_SENHA) {
+function atualiza_cadsus($termometro = 0, $conn = null, $cod_cgs = null ,$DB_SERVIDOR = null ,$DB_BASE = null ,$DB_PORTA = null ,$DB_USUARIO = null ,$DB_SENHA = null) {
 
   $user               = db_getsession ( "DB_id_usuario" );
 
@@ -1069,7 +1069,7 @@ function sql_query_ext( $oid = null, $campos = "sau_config.oid,*", $ordem = null
   $sql = "select ";
   if ($campos != "*") {
 
-    $campos_sql = split ( "#", $campos );
+    $campos_sql = preg_split ( "#\\##m", $campos );
     $virgula    = "";
 
     for($i = 0; $i < sizeof ( $campos_sql ); $i ++) {
@@ -1100,7 +1100,7 @@ function sql_query_ext( $oid = null, $campos = "sau_config.oid,*", $ordem = null
   if ($ordem != null) {
 
     $sql       .= " order by ";
-    $campos_sql = split ( "#", $ordem );
+    $campos_sql = preg_split ( "#\\##m", $ordem );
     $virgula    = "";
 
     for($i = 0; $i < sizeof ( $campos_sql ); $i ++) {

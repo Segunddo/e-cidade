@@ -55,7 +55,7 @@ class cl_agendasaidapassagemdestino {
                  tf38_fica = bool = Fica 
                  ";
    //funcao construtor da classe 
-   function cl_agendasaidapassagemdestino() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("agendasaidapassagemdestino"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,13 +72,13 @@ class cl_agendasaidapassagemdestino {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf38_sequencial = ($this->tf38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf38_sequencial"]:$this->tf38_sequencial);
-       $this->tf38_agendasaida = ($this->tf38_agendasaida == ""?@$GLOBALS["HTTP_POST_VARS"]["tf38_agendasaida"]:$this->tf38_agendasaida);
-       $this->tf38_valorunitario = ($this->tf38_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["tf38_valorunitario"]:$this->tf38_valorunitario);
-       $this->tf38_cgs = ($this->tf38_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["tf38_cgs"]:$this->tf38_cgs);
+       $this->tf38_sequencial = ($this->tf38_sequencial === 0 || $this->tf38_sequencial === 0.0 || $this->tf38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf38_sequencial"]:$this->tf38_sequencial);
+       $this->tf38_agendasaida = ($this->tf38_agendasaida === 0 || $this->tf38_agendasaida === 0.0 || $this->tf38_agendasaida == ""?@$GLOBALS["HTTP_POST_VARS"]["tf38_agendasaida"]:$this->tf38_agendasaida);
+       $this->tf38_valorunitario = ($this->tf38_valorunitario === 0 || $this->tf38_valorunitario === 0.0 || $this->tf38_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["tf38_valorunitario"]:$this->tf38_valorunitario);
+       $this->tf38_cgs = ($this->tf38_cgs === 0 || $this->tf38_cgs === 0.0 || $this->tf38_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["tf38_cgs"]:$this->tf38_cgs);
        $this->tf38_fica = ($this->tf38_fica == "f"?@$GLOBALS["HTTP_POST_VARS"]["tf38_fica"]:$this->tf38_fica);
      }else{
-       $this->tf38_sequencial = ($this->tf38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf38_sequencial"]:$this->tf38_sequencial);
+       $this->tf38_sequencial = ($this->tf38_sequencial === 0 || $this->tf38_sequencial === 0.0 || $this->tf38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tf38_sequencial"]:$this->tf38_sequencial);
      }
    }
    // funcao para Inclusão
@@ -144,7 +144,7 @@ class cl_agendasaidapassagemdestino {
          $this->tf38_sequencial = $tf38_sequencial; 
        }
      }
-     if(($this->tf38_sequencial == null) || ($this->tf38_sequencial == "") ){ 
+     if(($this->tf38_sequencial == null) || ($this->tf38_sequencial === 0 || $this->tf38_sequencial === 0.0 || $this->tf38_sequencial == "") ){ 
        $this->erro_sql = " Campo tf38_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

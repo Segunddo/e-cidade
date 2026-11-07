@@ -49,13 +49,13 @@ class cl_examerequisicaoexame
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->sd104_codigo = ($this->sd104_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd104_codigo"]:$this->sd104_codigo);
-       $this->sd104_requisicaoexameprontuario = ($this->sd104_requisicaoexameprontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd104_requisicaoexameprontuario"]:$this->sd104_requisicaoexameprontuario);
-       $this->sd104_lab_exame = ($this->sd104_lab_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["sd104_lab_exame"]:$this->sd104_lab_exame);
+       $this->sd104_codigo = ($this->sd104_codigo === 0 || $this->sd104_codigo === 0.0 || $this->sd104_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd104_codigo"]:$this->sd104_codigo);
+       $this->sd104_requisicaoexameprontuario = ($this->sd104_requisicaoexameprontuario === 0 || $this->sd104_requisicaoexameprontuario === 0.0 || $this->sd104_requisicaoexameprontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd104_requisicaoexameprontuario"]:$this->sd104_requisicaoexameprontuario);
+       $this->sd104_lab_exame = ($this->sd104_lab_exame === 0 || $this->sd104_lab_exame === 0.0 || $this->sd104_lab_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["sd104_lab_exame"]:$this->sd104_lab_exame);
        $this->sd104_avaliado = ($this->sd104_avaliado == "f"?@$GLOBALS["HTTP_POST_VARS"]["sd104_avaliado"]:$this->sd104_avaliado);
        $this->sd104_solicitado = ($this->sd104_solicitado == "f"?@$GLOBALS["HTTP_POST_VARS"]["sd104_solicitado"]:$this->sd104_solicitado);
      }else{
-       $this->sd104_codigo = ($this->sd104_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd104_codigo"]:$this->sd104_codigo);
+       $this->sd104_codigo = ($this->sd104_codigo === 0 || $this->sd104_codigo === 0.0 || $this->sd104_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd104_codigo"]:$this->sd104_codigo);
      }
    }
 
@@ -122,7 +122,7 @@ class cl_examerequisicaoexame
          $this->sd104_codigo = $sd104_codigo;
        }
      }
-     if(($this->sd104_codigo == null) || ($this->sd104_codigo == "") ){
+     if(($this->sd104_codigo == null) || ($this->sd104_codigo === 0 || $this->sd104_codigo === 0.0 || $this->sd104_codigo == "") ){
        $this->erro_sql = " Campo sd104_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

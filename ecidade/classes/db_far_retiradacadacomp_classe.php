@@ -52,7 +52,7 @@ class cl_far_retiradacadacomp {
                  fa55_i_retirada = int4 = Retirada 
                  ";
    //funcao construtor da classe 
-   function cl_far_retiradacadacomp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("far_retiradacadacomp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_far_retiradacadacomp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa55_i_codigo = ($this->fa55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa55_i_codigo"]:$this->fa55_i_codigo);
-       $this->fa55_i_cadacomp = ($this->fa55_i_cadacomp == ""?@$GLOBALS["HTTP_POST_VARS"]["fa55_i_cadacomp"]:$this->fa55_i_cadacomp);
-       $this->fa55_i_retirada = ($this->fa55_i_retirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa55_i_retirada"]:$this->fa55_i_retirada);
+       $this->fa55_i_codigo = ($this->fa55_i_codigo === 0 || $this->fa55_i_codigo === 0.0 || $this->fa55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa55_i_codigo"]:$this->fa55_i_codigo);
+       $this->fa55_i_cadacomp = ($this->fa55_i_cadacomp === 0 || $this->fa55_i_cadacomp === 0.0 || $this->fa55_i_cadacomp == ""?@$GLOBALS["HTTP_POST_VARS"]["fa55_i_cadacomp"]:$this->fa55_i_cadacomp);
+       $this->fa55_i_retirada = ($this->fa55_i_retirada === 0 || $this->fa55_i_retirada === 0.0 || $this->fa55_i_retirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa55_i_retirada"]:$this->fa55_i_retirada);
      }else{
-       $this->fa55_i_codigo = ($this->fa55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa55_i_codigo"]:$this->fa55_i_codigo);
+       $this->fa55_i_codigo = ($this->fa55_i_codigo === 0 || $this->fa55_i_codigo === 0.0 || $this->fa55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa55_i_codigo"]:$this->fa55_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_far_retiradacadacomp {
          $this->fa55_i_codigo = $fa55_i_codigo; 
        }
      }
-     if(($this->fa55_i_codigo == null) || ($this->fa55_i_codigo == "") ){ 
+     if(($this->fa55_i_codigo == null) || ($this->fa55_i_codigo === 0 || $this->fa55_i_codigo === 0.0 || $this->fa55_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa55_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_far_retiradacadacomp {
    function sql_query ( $fa55_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -390,7 +390,7 @@ class cl_far_retiradacadacomp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -403,7 +403,7 @@ class cl_far_retiradacadacomp {
    function sql_query_file ( $fa55_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -424,7 +424,7 @@ class cl_far_retiradacadacomp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

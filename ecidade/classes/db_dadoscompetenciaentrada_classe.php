@@ -56,7 +56,7 @@ class cl_dadoscompetenciaentrada {
                  fa62_movimentacao = varchar(15) = Tipo Movimentação
                  ";
    //funcao construtor da classe
-   function cl_dadoscompetenciaentrada() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("dadoscompetenciaentrada");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,16 +73,16 @@ class cl_dadoscompetenciaentrada {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa62_sequencial = ($this->fa62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_sequencial"]:$this->fa62_sequencial);
-       $this->fa62_integracaohorus = ($this->fa62_integracaohorus == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_integracaohorus"]:$this->fa62_integracaohorus);
-       $this->fa62_matestoqueinimei = ($this->fa62_matestoqueinimei == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_matestoqueinimei"]:$this->fa62_matestoqueinimei);
-       $this->fa62_unidade = ($this->fa62_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_unidade"]:$this->fa62_unidade);
+       $this->fa62_sequencial = ($this->fa62_sequencial === 0 || $this->fa62_sequencial === 0.0 || $this->fa62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_sequencial"]:$this->fa62_sequencial);
+       $this->fa62_integracaohorus = ($this->fa62_integracaohorus === 0 || $this->fa62_integracaohorus === 0.0 || $this->fa62_integracaohorus == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_integracaohorus"]:$this->fa62_integracaohorus);
+       $this->fa62_matestoqueinimei = ($this->fa62_matestoqueinimei === 0 || $this->fa62_matestoqueinimei === 0.0 || $this->fa62_matestoqueinimei == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_matestoqueinimei"]:$this->fa62_matestoqueinimei);
+       $this->fa62_unidade = ($this->fa62_unidade === 0 || $this->fa62_unidade === 0.0 || $this->fa62_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_unidade"]:$this->fa62_unidade);
        $this->fa62_enviar = ($this->fa62_enviar == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa62_enviar"]:$this->fa62_enviar);
        $this->fa62_validadohorus = ($this->fa62_validadohorus == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa62_validadohorus"]:$this->fa62_validadohorus);
        $this->fa62_cnes = ($this->fa62_cnes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_cnes"]:$this->fa62_cnes);
        $this->fa62_catmat = ($this->fa62_catmat == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_catmat"]:$this->fa62_catmat);
        $this->fa62_tipo = ($this->fa62_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_tipo"]:$this->fa62_tipo);
-       $this->fa62_valor = ($this->fa62_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_valor"]:$this->fa62_valor);
+       $this->fa62_valor = ($this->fa62_valor === 0 || $this->fa62_valor === 0.0 || $this->fa62_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_valor"]:$this->fa62_valor);
        if($this->fa62_validade == ""){
          $this->fa62_validade_dia = ($this->fa62_validade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_validade_dia"]:$this->fa62_validade_dia);
          $this->fa62_validade_mes = ($this->fa62_validade_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_validade_mes"]:$this->fa62_validade_mes);
@@ -92,7 +92,7 @@ class cl_dadoscompetenciaentrada {
          }
        }
        $this->fa62_lote = ($this->fa62_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_lote"]:$this->fa62_lote);
-       $this->fa62_quantidade = ($this->fa62_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_quantidade"]:$this->fa62_quantidade);
+       $this->fa62_quantidade = ($this->fa62_quantidade === 0 || $this->fa62_quantidade === 0.0 || $this->fa62_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_quantidade"]:$this->fa62_quantidade);
        if($this->fa62_recebimento == ""){
          $this->fa62_recebimento_dia = ($this->fa62_recebimento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_recebimento_dia"]:$this->fa62_recebimento_dia);
          $this->fa62_recebimento_mes = ($this->fa62_recebimento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_recebimento_mes"]:$this->fa62_recebimento_mes);
@@ -103,7 +103,7 @@ class cl_dadoscompetenciaentrada {
        }
        $this->fa62_movimentacao = ($this->fa62_movimentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_movimentacao"]:$this->fa62_movimentacao);
      }else{
-       $this->fa62_sequencial = ($this->fa62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_sequencial"]:$this->fa62_sequencial);
+       $this->fa62_sequencial = ($this->fa62_sequencial === 0 || $this->fa62_sequencial === 0.0 || $this->fa62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa62_sequencial"]:$this->fa62_sequencial);
      }
    }
    // funcao para Inclusão
@@ -244,7 +244,7 @@ class cl_dadoscompetenciaentrada {
          $this->fa62_sequencial = $fa62_sequencial;
        }
      }
-     if(($this->fa62_sequencial == null) || ($this->fa62_sequencial == "") ){
+     if(($this->fa62_sequencial == null) || ($this->fa62_sequencial === 0 || $this->fa62_sequencial === 0.0 || $this->fa62_sequencial == "") ){
        $this->erro_sql = " Campo fa62_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

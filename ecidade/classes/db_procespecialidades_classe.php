@@ -52,7 +52,7 @@ class cl_procespecialidades {
                  sd18_i_especialidade = int4 = Especialidade 
                  ";
    //funcao construtor da classe 
-   function cl_procespecialidades() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("procespecialidades"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_procespecialidades {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd18_i_codigo = ($this->sd18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd18_i_codigo"]:$this->sd18_i_codigo);
-       $this->sd18_i_procedimento = ($this->sd18_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd18_i_procedimento"]:$this->sd18_i_procedimento);
-       $this->sd18_i_especialidade = ($this->sd18_i_especialidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd18_i_especialidade"]:$this->sd18_i_especialidade);
+       $this->sd18_i_codigo = ($this->sd18_i_codigo === 0 || $this->sd18_i_codigo === 0.0 || $this->sd18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd18_i_codigo"]:$this->sd18_i_codigo);
+       $this->sd18_i_procedimento = ($this->sd18_i_procedimento === 0 || $this->sd18_i_procedimento === 0.0 || $this->sd18_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd18_i_procedimento"]:$this->sd18_i_procedimento);
+       $this->sd18_i_especialidade = ($this->sd18_i_especialidade === 0 || $this->sd18_i_especialidade === 0.0 || $this->sd18_i_especialidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd18_i_especialidade"]:$this->sd18_i_especialidade);
      }else{
-       $this->sd18_i_codigo = ($this->sd18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd18_i_codigo"]:$this->sd18_i_codigo);
+       $this->sd18_i_codigo = ($this->sd18_i_codigo === 0 || $this->sd18_i_codigo === 0.0 || $this->sd18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd18_i_codigo"]:$this->sd18_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procespecialidades {
          $this->sd18_i_codigo = $sd18_i_codigo; 
        }
      }
-     if(($this->sd18_i_codigo == null) || ($this->sd18_i_codigo == "") ){ 
+     if(($this->sd18_i_codigo == null) || ($this->sd18_i_codigo === 0 || $this->sd18_i_codigo === 0.0 || $this->sd18_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd18_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_procespecialidades {
    function sql_query ( $sd18_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_procespecialidades {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_procespecialidades {
    function sql_query_file ( $sd18_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_procespecialidades {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

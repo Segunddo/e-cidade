@@ -53,15 +53,15 @@ class cl_cgs
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->z01_i_numcgs = ($this->z01_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_numcgs"]:$this->z01_i_numcgs);
-       $this->z01_i_tiposangue = ($this->z01_i_tiposangue == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_tiposangue"]:$this->z01_i_tiposangue);
-       $this->z01_i_fatorrh = ($this->z01_i_fatorrh == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_fatorrh"]:$this->z01_i_fatorrh);
+       $this->z01_i_numcgs = ($this->z01_i_numcgs === 0 || $this->z01_i_numcgs === 0.0 || $this->z01_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_numcgs"]:$this->z01_i_numcgs);
+       $this->z01_i_tiposangue = ($this->z01_i_tiposangue === 0 || $this->z01_i_tiposangue === 0.0 || $this->z01_i_tiposangue == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_tiposangue"]:$this->z01_i_tiposangue);
+       $this->z01_i_fatorrh = ($this->z01_i_fatorrh === 0 || $this->z01_i_fatorrh === 0.0 || $this->z01_i_fatorrh == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_fatorrh"]:$this->z01_i_fatorrh);
        $this->z01_c_cartaosus = ($this->z01_c_cartaosus == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_c_cartaosus"]:$this->z01_c_cartaosus);
        $this->z01_v_familia = ($this->z01_v_familia == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_v_familia"]:$this->z01_v_familia);
        $this->z01_v_microarea = ($this->z01_v_microarea == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_v_microarea"]:$this->z01_v_microarea);
        $this->z01_c_municipio = ($this->z01_c_municipio == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_c_municipio"]:$this->z01_c_municipio);
      }else{
-       $this->z01_i_numcgs = ($this->z01_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_numcgs"]:$this->z01_i_numcgs);
+       $this->z01_i_numcgs = ($this->z01_i_numcgs === 0 || $this->z01_i_numcgs === 0.0 || $this->z01_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_numcgs"]:$this->z01_i_numcgs);
      }
    }
 
@@ -104,7 +104,7 @@ class cl_cgs
          $this->z01_i_numcgs = $z01_i_numcgs; 
        }
      }
-     if(($this->z01_i_numcgs == null) || ($this->z01_i_numcgs == "") ){ 
+     if(($this->z01_i_numcgs == null) || ($this->z01_i_numcgs === 0 || $this->z01_i_numcgs === 0.0 || $this->z01_i_numcgs == "") ){ 
        $this->erro_sql = " Campo z01_i_numcgs não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

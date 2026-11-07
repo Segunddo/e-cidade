@@ -50,7 +50,7 @@ class cl_tfd_formaaviso {
                  tf20_c_descr = varchar(20) = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_tfd_formaaviso() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("tfd_formaaviso"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_tfd_formaaviso {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf20_i_codigo = ($this->tf20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf20_i_codigo"]:$this->tf20_i_codigo);
+       $this->tf20_i_codigo = ($this->tf20_i_codigo === 0 || $this->tf20_i_codigo === 0.0 || $this->tf20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf20_i_codigo"]:$this->tf20_i_codigo);
        $this->tf20_c_descr = ($this->tf20_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["tf20_c_descr"]:$this->tf20_c_descr);
      }else{
-       $this->tf20_i_codigo = ($this->tf20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf20_i_codigo"]:$this->tf20_i_codigo);
+       $this->tf20_i_codigo = ($this->tf20_i_codigo === 0 || $this->tf20_i_codigo === 0.0 || $this->tf20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf20_i_codigo"]:$this->tf20_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tfd_formaaviso {
          $this->tf20_i_codigo = $tf20_i_codigo; 
        }
      }
-     if(($this->tf20_i_codigo == null) || ($this->tf20_i_codigo == "") ){ 
+     if(($this->tf20_i_codigo == null) || ($this->tf20_i_codigo === 0 || $this->tf20_i_codigo === 0.0 || $this->tf20_i_codigo == "") ){ 
        $this->erro_sql = " Campo tf20_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_tfd_formaaviso {
    function sql_query ( $tf20_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_tfd_formaaviso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_tfd_formaaviso {
    function sql_query_file ( $tf20_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_tfd_formaaviso {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

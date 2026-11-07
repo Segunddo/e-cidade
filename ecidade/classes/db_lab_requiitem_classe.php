@@ -91,8 +91,8 @@ class cl_lab_requiitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la21_i_codigo = ($this->la21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_codigo"]:$this->la21_i_codigo);
-       $this->la21_i_requisicao = ($this->la21_i_requisicao == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_requisicao"]:$this->la21_i_requisicao);
+       $this->la21_i_codigo = ($this->la21_i_codigo === 0 || $this->la21_i_codigo === 0.0 || $this->la21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_codigo"]:$this->la21_i_codigo);
+       $this->la21_i_requisicao = ($this->la21_i_requisicao === 0 || $this->la21_i_requisicao === 0.0 || $this->la21_i_requisicao == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_requisicao"]:$this->la21_i_requisicao);
        if($this->la21_d_entrega == ""){
          $this->la21_d_entrega_dia = ($this->la21_d_entrega_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_d_entrega_dia"]:$this->la21_d_entrega_dia);
          $this->la21_d_entrega_mes = ($this->la21_d_entrega_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_d_entrega_mes"]:$this->la21_d_entrega_mes);
@@ -110,14 +110,14 @@ class cl_lab_requiitem {
          }
        }
        $this->la21_c_hora = ($this->la21_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_c_hora"]:$this->la21_c_hora);
-       $this->la21_i_setorexame = ($this->la21_i_setorexame == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_setorexame"]:$this->la21_i_setorexame);
-       $this->la21_i_emergencia = ($this->la21_i_emergencia == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_emergencia"]:$this->la21_i_emergencia);
+       $this->la21_i_setorexame = ($this->la21_i_setorexame === 0 || $this->la21_i_setorexame === 0.0 || $this->la21_i_setorexame == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_setorexame"]:$this->la21_i_setorexame);
+       $this->la21_i_emergencia = ($this->la21_i_emergencia === 0 || $this->la21_i_emergencia === 0.0 || $this->la21_i_emergencia == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_emergencia"]:$this->la21_i_emergencia);
        $this->la21_c_situacao = ($this->la21_c_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_c_situacao"]:$this->la21_c_situacao);
-       $this->la21_i_quantidade = ($this->la21_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_quantidade"]:$this->la21_i_quantidade);
+       $this->la21_i_quantidade = ($this->la21_i_quantidade === 0 || $this->la21_i_quantidade === 0.0 || $this->la21_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_quantidade"]:$this->la21_i_quantidade);
        $this->la21_observacao = ($this->la21_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_observacao"]:$this->la21_observacao);
        $this->la21_motivonovacoleta = ($this->la21_motivonovacoleta == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_motivonovacoleta"]:$this->la21_motivonovacoleta);
      }else{
-       $this->la21_i_codigo = ($this->la21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_codigo"]:$this->la21_i_codigo);
+       $this->la21_i_codigo = ($this->la21_i_codigo === 0 || $this->la21_i_codigo === 0.0 || $this->la21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la21_i_codigo"]:$this->la21_i_codigo);
      }
    }
    // funcao para inclusao
@@ -219,7 +219,7 @@ class cl_lab_requiitem {
          $this->la21_i_codigo = $la21_i_codigo;
        }
      }
-     if(($this->la21_i_codigo == null) || ($this->la21_i_codigo == "") ){
+     if(($this->la21_i_codigo == null) || ($this->la21_i_codigo === 0 || $this->la21_i_codigo === 0.0 || $this->la21_i_codigo == "") ){
        $this->erro_sql = " Campo la21_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

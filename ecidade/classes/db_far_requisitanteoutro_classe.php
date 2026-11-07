@@ -58,7 +58,7 @@ class cl_far_requisitanteoutro {
                  fa39_i_ident = int4 = Identidade 
                  ";
    //funcao construtor da classe 
-   function cl_far_requisitanteoutro() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("far_requisitanteoutro"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_far_requisitanteoutro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa39_i_codigo = ($this->fa39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_codigo"]:$this->fa39_i_codigo);
-       $this->fa39_i_requisitante = ($this->fa39_i_requisitante == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_requisitante"]:$this->fa39_i_requisitante);
+       $this->fa39_i_codigo = ($this->fa39_i_codigo === 0 || $this->fa39_i_codigo === 0.0 || $this->fa39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_codigo"]:$this->fa39_i_codigo);
+       $this->fa39_i_requisitante = ($this->fa39_i_requisitante === 0 || $this->fa39_i_requisitante === 0.0 || $this->fa39_i_requisitante == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_requisitante"]:$this->fa39_i_requisitante);
        $this->fa39_c_nome = ($this->fa39_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_c_nome"]:$this->fa39_c_nome);
        $this->fa39_c_ender = ($this->fa39_c_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_c_ender"]:$this->fa39_c_ender);
-       $this->fa39_i_numero = ($this->fa39_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_numero"]:$this->fa39_i_numero);
-       $this->fa39_i_ident = ($this->fa39_i_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_ident"]:$this->fa39_i_ident);
+       $this->fa39_i_numero = ($this->fa39_i_numero === 0 || $this->fa39_i_numero === 0.0 || $this->fa39_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_numero"]:$this->fa39_i_numero);
+       $this->fa39_i_ident = ($this->fa39_i_ident === 0 || $this->fa39_i_ident === 0.0 || $this->fa39_i_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_ident"]:$this->fa39_i_ident);
      }else{
-       $this->fa39_i_codigo = ($this->fa39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_codigo"]:$this->fa39_i_codigo);
+       $this->fa39_i_codigo = ($this->fa39_i_codigo === 0 || $this->fa39_i_codigo === 0.0 || $this->fa39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_codigo"]:$this->fa39_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_far_requisitanteoutro {
          $this->fa39_i_codigo = $fa39_i_codigo; 
        }
      }
-     if(($this->fa39_i_codigo == null) || ($this->fa39_i_codigo == "") ){ 
+     if(($this->fa39_i_codigo == null) || ($this->fa39_i_codigo === 0 || $this->fa39_i_codigo === 0.0 || $this->fa39_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa39_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -453,7 +453,7 @@ class cl_far_requisitanteoutro {
    function sql_query ( $fa39_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -476,7 +476,7 @@ class cl_far_requisitanteoutro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -489,7 +489,7 @@ class cl_far_requisitanteoutro {
    function sql_query_file ( $fa39_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -510,7 +510,7 @@ class cl_far_requisitanteoutro {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

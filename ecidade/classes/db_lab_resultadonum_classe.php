@@ -56,7 +56,7 @@ class cl_lab_resultadonum {
                  la41_faixaescolhida = int4 = Faixa escolhida para o exame 
                  ";
    //funcao construtor da classe 
-   function cl_lab_resultadonum() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_resultadonum"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_lab_resultadonum {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la41_i_codigo = ($this->la41_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_codigo"]:$this->la41_i_codigo);
-       $this->la41_i_result = ($this->la41_i_result == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_result"]:$this->la41_i_result);
-       $this->la41_f_valor = ($this->la41_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_f_valor"]:$this->la41_f_valor);
-       $this->la41_valorpercentual = ($this->la41_valorpercentual == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_valorpercentual"]:$this->la41_valorpercentual);
-       $this->la41_faixaescolhida = ($this->la41_faixaescolhida == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_faixaescolhida"]:$this->la41_faixaescolhida);
+       $this->la41_i_codigo = ($this->la41_i_codigo === 0 || $this->la41_i_codigo === 0.0 || $this->la41_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_codigo"]:$this->la41_i_codigo);
+       $this->la41_i_result = ($this->la41_i_result === 0 || $this->la41_i_result === 0.0 || $this->la41_i_result == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_result"]:$this->la41_i_result);
+       $this->la41_f_valor = ($this->la41_f_valor === 0 || $this->la41_f_valor === 0.0 || $this->la41_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_f_valor"]:$this->la41_f_valor);
+       $this->la41_valorpercentual = ($this->la41_valorpercentual === 0 || $this->la41_valorpercentual === 0.0 || $this->la41_valorpercentual == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_valorpercentual"]:$this->la41_valorpercentual);
+       $this->la41_faixaescolhida = ($this->la41_faixaescolhida === 0 || $this->la41_faixaescolhida === 0.0 || $this->la41_faixaescolhida == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_faixaescolhida"]:$this->la41_faixaescolhida);
      }else{
-       $this->la41_i_codigo = ($this->la41_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_codigo"]:$this->la41_i_codigo);
+       $this->la41_i_codigo = ($this->la41_i_codigo === 0 || $this->la41_i_codigo === 0.0 || $this->la41_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_codigo"]:$this->la41_i_codigo);
      }
    }
    // funcao para inclusao
@@ -94,7 +94,7 @@ class cl_lab_resultadonum {
        $this->erro_status = "0";
        return false;
      }
-     if ($this->la41_f_valor == '' ){
+     if ($this->la41_f_valor === 0 || $this->la41_f_valor === 0.0 || $this->la41_f_valor == '' ){
        $this->la41_f_valor = "null";
      }
      if($this->la41_valorpercentual == null ){ 
@@ -127,7 +127,7 @@ class cl_lab_resultadonum {
          $this->la41_i_codigo = $la41_i_codigo; 
        }
      }
-     if(($this->la41_i_codigo == null) || ($this->la41_i_codigo == "") ){ 
+     if(($this->la41_i_codigo == null) || ($this->la41_i_codigo === 0 || $this->la41_i_codigo === 0.0 || $this->la41_i_codigo == "") ){ 
        $this->erro_sql = " Campo la41_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -414,7 +414,7 @@ class cl_lab_resultadonum {
    function sql_query ( $la41_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_lab_resultadonum {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_lab_resultadonum {
    function sql_query_file ( $la41_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_lab_resultadonum {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

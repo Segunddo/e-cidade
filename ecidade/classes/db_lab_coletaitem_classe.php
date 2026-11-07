@@ -68,7 +68,7 @@ class cl_lab_coletaitem {
                  la32_d_entrega = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_lab_coletaitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_coletaitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -85,9 +85,9 @@ class cl_lab_coletaitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la32_i_codigo = ($this->la32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_i_codigo"]:$this->la32_i_codigo);
-       $this->la32_i_usuario = ($this->la32_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_i_usuario"]:$this->la32_i_usuario);
-       $this->la32_i_requiitem = ($this->la32_i_requiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_i_requiitem"]:$this->la32_i_requiitem);
+       $this->la32_i_codigo = ($this->la32_i_codigo === 0 || $this->la32_i_codigo === 0.0 || $this->la32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_i_codigo"]:$this->la32_i_codigo);
+       $this->la32_i_usuario = ($this->la32_i_usuario === 0 || $this->la32_i_usuario === 0.0 || $this->la32_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_i_usuario"]:$this->la32_i_usuario);
+       $this->la32_i_requiitem = ($this->la32_i_requiitem === 0 || $this->la32_i_requiitem === 0.0 || $this->la32_i_requiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_i_requiitem"]:$this->la32_i_requiitem);
        if($this->la32_d_data == ""){
          $this->la32_d_data_dia = ($this->la32_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_d_data_dia"]:$this->la32_d_data_dia);
          $this->la32_d_data_mes = ($this->la32_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_d_data_mes"]:$this->la32_d_data_mes);
@@ -97,7 +97,7 @@ class cl_lab_coletaitem {
          }
        }
        $this->la32_c_hora = ($this->la32_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_c_hora"]:$this->la32_c_hora);
-       $this->la32_i_avisapaciente = ($this->la32_i_avisapaciente == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_i_avisapaciente"]:$this->la32_i_avisapaciente);
+       $this->la32_i_avisapaciente = ($this->la32_i_avisapaciente === 0 || $this->la32_i_avisapaciente === 0.0 || $this->la32_i_avisapaciente == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_i_avisapaciente"]:$this->la32_i_avisapaciente);
        $this->la32_c_horaentrega = ($this->la32_c_horaentrega == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_c_horaentrega"]:$this->la32_c_horaentrega);
        if($this->la32_d_entrega == ""){
          $this->la32_d_entrega_dia = ($this->la32_d_entrega_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_d_entrega_dia"]:$this->la32_d_entrega_dia);
@@ -108,7 +108,7 @@ class cl_lab_coletaitem {
          }
        }
      }else{
-       $this->la32_i_codigo = ($this->la32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_i_codigo"]:$this->la32_i_codigo);
+       $this->la32_i_codigo = ($this->la32_i_codigo === 0 || $this->la32_i_codigo === 0.0 || $this->la32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la32_i_codigo"]:$this->la32_i_codigo);
      }
    }
    // funcao para inclusao
@@ -186,7 +186,7 @@ class cl_lab_coletaitem {
          $this->la32_i_codigo = $la32_i_codigo; 
        }
      }
-     if(($this->la32_i_codigo == null) || ($this->la32_i_codigo == "") ){ 
+     if(($this->la32_i_codigo == null) || ($this->la32_i_codigo === 0 || $this->la32_i_codigo === 0.0 || $this->la32_i_codigo == "") ){ 
        $this->erro_sql = " Campo la32_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -521,7 +521,7 @@ class cl_lab_coletaitem {
    function sql_query ( $la32_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -546,7 +546,7 @@ class cl_lab_coletaitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -559,7 +559,7 @@ class cl_lab_coletaitem {
    function sql_query_file ( $la32_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -580,7 +580,7 @@ class cl_lab_coletaitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

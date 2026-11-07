@@ -54,7 +54,7 @@ class cl_familiamicroarea
                  ";
 
     //funcao construtor da classe
-    function cl_familiamicroarea()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("familiamicroarea");
@@ -76,11 +76,11 @@ class cl_familiamicroarea
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->sd35_i_codigo = ($this->sd35_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["sd35_i_codigo"] : $this->sd35_i_codigo);
-            $this->sd35_i_familia = ($this->sd35_i_familia == "" ? @$GLOBALS["HTTP_POST_VARS"]["sd35_i_familia"] : $this->sd35_i_familia);
-            $this->sd35_i_microarea = ($this->sd35_i_microarea == "" ? @$GLOBALS["HTTP_POST_VARS"]["sd35_i_microarea"] : $this->sd35_i_microarea);
+            $this->sd35_i_codigo = ($this->sd35_i_codigo === 0 || $this->sd35_i_codigo === 0.0 || $this->sd35_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["sd35_i_codigo"] : $this->sd35_i_codigo);
+            $this->sd35_i_familia = ($this->sd35_i_familia === 0 || $this->sd35_i_familia === 0.0 || $this->sd35_i_familia == "" ? @$GLOBALS["HTTP_POST_VARS"]["sd35_i_familia"] : $this->sd35_i_familia);
+            $this->sd35_i_microarea = ($this->sd35_i_microarea === 0 || $this->sd35_i_microarea === 0.0 || $this->sd35_i_microarea == "" ? @$GLOBALS["HTTP_POST_VARS"]["sd35_i_microarea"] : $this->sd35_i_microarea);
         } else {
-            $this->sd35_i_codigo = ($this->sd35_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["sd35_i_codigo"] : $this->sd35_i_codigo);
+            $this->sd35_i_codigo = ($this->sd35_i_codigo === 0 || $this->sd35_i_codigo === 0.0 || $this->sd35_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["sd35_i_codigo"] : $this->sd35_i_codigo);
         }
     }
 
@@ -138,7 +138,7 @@ class cl_familiamicroarea
                 $this->sd35_i_codigo = $sd35_i_codigo;
             }
         }
-        if (($this->sd35_i_codigo == null) || ($this->sd35_i_codigo == "")) {
+        if (($this->sd35_i_codigo == null) || ($this->sd35_i_codigo === 0 || $this->sd35_i_codigo === 0.0 || $this->sd35_i_codigo == "")) {
             $this->erro_sql = " Campo sd35_i_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

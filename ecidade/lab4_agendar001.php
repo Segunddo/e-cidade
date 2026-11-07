@@ -139,7 +139,7 @@ if (isset($excluir)) {
         $aIdsSetorExame = array();
 
         for ($x = 0; $x < count($aPartes); $x++) {
-            $codigoRequiItem = split("#", $aPartes[$x])[9];
+            $codigoRequiItem = preg_split("#\\##m", $aPartes[$x])[9];
             if ($codigoRequiItem) {
                 $sql = $cllab_requiitem->sql_query_file(null, "*", null, "la21_i_codigo = {$codigoRequiItem}");
                 $rs = db_query($sql);

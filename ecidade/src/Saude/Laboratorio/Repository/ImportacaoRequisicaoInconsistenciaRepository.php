@@ -114,12 +114,12 @@ class ImportacaoRequisicaoInconsistenciaRepository
         $sql = $this->dao->sql_query(null, '*', null, implode(' AND ', $this->scopes));
         $postgresObject = db_query($sql);
 
-        if (pg_num_rows($postgresObject) === 0) {
+        if (($postgresObject ? pg_num_rows($postgresObject) : null) === 0) {
             throw new Exception('Não foi possível buscar as Inconsistências.');
         }
 
         $inconsistencias = array();
-        while ($inconsistencia = pg_fetch_assoc($postgresObject)) {
+        while ($inconsistencia = ($postgresObject ? pg_fetch_assoc($postgresObject) : null)) {
             $inconsistencias[] = $inconsistencia;
         }
 

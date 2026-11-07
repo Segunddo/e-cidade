@@ -52,7 +52,7 @@ class cl_lab_labdepart {
                  la03_i_departamento = int4 = Departamento 
                  ";
    //funcao construtor da classe 
-   function cl_lab_labdepart() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_labdepart"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_lab_labdepart {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la03_i_codigo = ($this->la03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la03_i_codigo"]:$this->la03_i_codigo);
-       $this->la03_i_laboratorio = ($this->la03_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la03_i_laboratorio"]:$this->la03_i_laboratorio);
-       $this->la03_i_departamento = ($this->la03_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la03_i_departamento"]:$this->la03_i_departamento);
+       $this->la03_i_codigo = ($this->la03_i_codigo === 0 || $this->la03_i_codigo === 0.0 || $this->la03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la03_i_codigo"]:$this->la03_i_codigo);
+       $this->la03_i_laboratorio = ($this->la03_i_laboratorio === 0 || $this->la03_i_laboratorio === 0.0 || $this->la03_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la03_i_laboratorio"]:$this->la03_i_laboratorio);
+       $this->la03_i_departamento = ($this->la03_i_departamento === 0 || $this->la03_i_departamento === 0.0 || $this->la03_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la03_i_departamento"]:$this->la03_i_departamento);
      }else{
-       $this->la03_i_codigo = ($this->la03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la03_i_codigo"]:$this->la03_i_codigo);
+       $this->la03_i_codigo = ($this->la03_i_codigo === 0 || $this->la03_i_codigo === 0.0 || $this->la03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la03_i_codigo"]:$this->la03_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_lab_labdepart {
          $this->la03_i_codigo = $la03_i_codigo; 
        }
      }
-     if(($this->la03_i_codigo == null) || ($this->la03_i_codigo == "") ){ 
+     if(($this->la03_i_codigo == null) || ($this->la03_i_codigo === 0 || $this->la03_i_codigo === 0.0 || $this->la03_i_codigo == "") ){ 
        $this->erro_sql = " Campo la03_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

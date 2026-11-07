@@ -56,7 +56,7 @@ class cl_vac_doseperiodica {
                  vc14_i_faixaano = int4 = Faixa ano 
                  ";
    //funcao construtor da classe 
-   function cl_vac_doseperiodica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_doseperiodica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_vac_doseperiodica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc14_i_codigo = ($this->vc14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_codigo"]:$this->vc14_i_codigo);
-       $this->vc14_i_vacinadose = ($this->vc14_i_vacinadose == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_vacinadose"]:$this->vc14_i_vacinadose);
-       $this->vc14_i_faixadia = ($this->vc14_i_faixadia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_faixadia"]:$this->vc14_i_faixadia);
-       $this->vc14_i_faixames = ($this->vc14_i_faixames == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_faixames"]:$this->vc14_i_faixames);
-       $this->vc14_i_faixaano = ($this->vc14_i_faixaano == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_faixaano"]:$this->vc14_i_faixaano);
+       $this->vc14_i_codigo = ($this->vc14_i_codigo === 0 || $this->vc14_i_codigo === 0.0 || $this->vc14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_codigo"]:$this->vc14_i_codigo);
+       $this->vc14_i_vacinadose = ($this->vc14_i_vacinadose === 0 || $this->vc14_i_vacinadose === 0.0 || $this->vc14_i_vacinadose == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_vacinadose"]:$this->vc14_i_vacinadose);
+       $this->vc14_i_faixadia = ($this->vc14_i_faixadia === 0 || $this->vc14_i_faixadia === 0.0 || $this->vc14_i_faixadia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_faixadia"]:$this->vc14_i_faixadia);
+       $this->vc14_i_faixames = ($this->vc14_i_faixames === 0 || $this->vc14_i_faixames === 0.0 || $this->vc14_i_faixames == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_faixames"]:$this->vc14_i_faixames);
+       $this->vc14_i_faixaano = ($this->vc14_i_faixaano === 0 || $this->vc14_i_faixaano === 0.0 || $this->vc14_i_faixaano == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_faixaano"]:$this->vc14_i_faixaano);
      }else{
-       $this->vc14_i_codigo = ($this->vc14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_codigo"]:$this->vc14_i_codigo);
+       $this->vc14_i_codigo = ($this->vc14_i_codigo === 0 || $this->vc14_i_codigo === 0.0 || $this->vc14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc14_i_codigo"]:$this->vc14_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_vac_doseperiodica {
          $this->vc14_i_codigo = $vc14_i_codigo; 
        }
      }
-     if(($this->vc14_i_codigo == null) || ($this->vc14_i_codigo == "") ){ 
+     if(($this->vc14_i_codigo == null) || ($this->vc14_i_codigo === 0 || $this->vc14_i_codigo === 0.0 || $this->vc14_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc14_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_vac_doseperiodica {
    function sql_query ( $vc14_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -447,7 +447,7 @@ class cl_vac_doseperiodica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -460,7 +460,7 @@ class cl_vac_doseperiodica {
    function sql_query_file ( $vc14_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -481,7 +481,7 @@ class cl_vac_doseperiodica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

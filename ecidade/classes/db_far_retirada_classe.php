@@ -74,7 +74,7 @@ class cl_far_retirada
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fa04_i_codigo = ($this->fa04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_codigo"]:$this->fa04_i_codigo);
+       $this->fa04_i_codigo = ($this->fa04_i_codigo === 0 || $this->fa04_i_codigo === 0.0 || $this->fa04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_codigo"]:$this->fa04_i_codigo);
        $this->fa04_c_numeroreceita = ($this->fa04_c_numeroreceita == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_c_numeroreceita"]:$this->fa04_c_numeroreceita);
        if($this->fa04_d_dtvalidade == ""){
          $this->fa04_d_dtvalidade_dia = ($this->fa04_d_dtvalidade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_d_dtvalidade_dia"]:$this->fa04_d_dtvalidade_dia);
@@ -84,10 +84,10 @@ class cl_far_retirada
             $this->fa04_d_dtvalidade = $this->fa04_d_dtvalidade_ano."-".$this->fa04_d_dtvalidade_mes."-".$this->fa04_d_dtvalidade_dia;
          }
        }
-       $this->fa04_i_unidades = ($this->fa04_i_unidades == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_unidades"]:$this->fa04_i_unidades);
-       $this->fa04_i_cgsund = ($this->fa04_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_cgsund"]:$this->fa04_i_cgsund);
-       $this->fa04_i_tiporeceita = ($this->fa04_i_tiporeceita == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_tiporeceita"]:$this->fa04_i_tiporeceita);
-       $this->fa04_i_dbusuario = ($this->fa04_i_dbusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_dbusuario"]:$this->fa04_i_dbusuario);
+       $this->fa04_i_unidades = ($this->fa04_i_unidades === 0 || $this->fa04_i_unidades === 0.0 || $this->fa04_i_unidades == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_unidades"]:$this->fa04_i_unidades);
+       $this->fa04_i_cgsund = ($this->fa04_i_cgsund === 0 || $this->fa04_i_cgsund === 0.0 || $this->fa04_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_cgsund"]:$this->fa04_i_cgsund);
+       $this->fa04_i_tiporeceita = ($this->fa04_i_tiporeceita === 0 || $this->fa04_i_tiporeceita === 0.0 || $this->fa04_i_tiporeceita == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_tiporeceita"]:$this->fa04_i_tiporeceita);
+       $this->fa04_i_dbusuario = ($this->fa04_i_dbusuario === 0 || $this->fa04_i_dbusuario === 0.0 || $this->fa04_i_dbusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_dbusuario"]:$this->fa04_i_dbusuario);
        if($this->fa04_d_data == ""){
          $this->fa04_d_data_dia = ($this->fa04_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_d_data_dia"]:$this->fa04_d_data_dia);
          $this->fa04_d_data_mes = ($this->fa04_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_d_data_mes"]:$this->fa04_d_data_mes);
@@ -96,10 +96,10 @@ class cl_far_retirada
             $this->fa04_d_data = $this->fa04_d_data_ano."-".$this->fa04_d_data_mes."-".$this->fa04_d_data_dia;
          }
        }
-       $this->fa04_i_profissional = ($this->fa04_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_profissional"]:$this->fa04_i_profissional);
-       $this->fa04_i_receita = ($this->fa04_i_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_receita"]:$this->fa04_i_receita);
-       $this->fa04_tiporetirada = ($this->fa04_tiporetirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_tiporetirada"]:$this->fa04_tiporetirada);
-       $this->fa04_numeronotificacao = ($this->fa04_numeronotificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_numeronotificacao"]:$this->fa04_numeronotificacao);
+       $this->fa04_i_profissional = ($this->fa04_i_profissional === 0 || $this->fa04_i_profissional === 0.0 || $this->fa04_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_profissional"]:$this->fa04_i_profissional);
+       $this->fa04_i_receita = ($this->fa04_i_receita === 0 || $this->fa04_i_receita === 0.0 || $this->fa04_i_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_receita"]:$this->fa04_i_receita);
+       $this->fa04_tiporetirada = ($this->fa04_tiporetirada === 0 || $this->fa04_tiporetirada === 0.0 || $this->fa04_tiporetirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_tiporetirada"]:$this->fa04_tiporetirada);
+       $this->fa04_numeronotificacao = ($this->fa04_numeronotificacao === 0 || $this->fa04_numeronotificacao === 0.0 || $this->fa04_numeronotificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_numeronotificacao"]:$this->fa04_numeronotificacao);
        if($this->fa04_data_prescricao == ""){
          $this->fa04_data_prescricao_dia = ($this->fa04_data_prescricao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_data_prescricao_dia"]:$this->fa04_data_prescricao_dia);
          $this->fa04_data_prescricao_mes = ($this->fa04_data_prescricao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_data_prescricao_mes"]:$this->fa04_data_prescricao_mes);
@@ -109,7 +109,7 @@ class cl_far_retirada
          }
        }
      }else{
-       $this->fa04_i_codigo = ($this->fa04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_codigo"]:$this->fa04_i_codigo);
+       $this->fa04_i_codigo = ($this->fa04_i_codigo === 0 || $this->fa04_i_codigo === 0.0 || $this->fa04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa04_i_codigo"]:$this->fa04_i_codigo);
      }
    }
 
@@ -209,7 +209,7 @@ class cl_far_retirada
          $this->fa04_i_codigo = $fa04_i_codigo;
        }
      }
-     if(($this->fa04_i_codigo == null) || ($this->fa04_i_codigo == "") ){
+     if(($this->fa04_i_codigo == null) || ($this->fa04_i_codigo === 0 || $this->fa04_i_codigo === 0.0 || $this->fa04_i_codigo == "") ){
        $this->erro_sql = " Campo fa04_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

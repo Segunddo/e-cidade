@@ -53,7 +53,7 @@ class cl_sau_examerequisitos {
                  s109_i_requisito = int4 = Requisito 
                  ";
    //funcao construtor da classe 
-   function cl_sau_examerequisitos() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_examerequisitos"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -70,11 +70,11 @@ class cl_sau_examerequisitos {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s109_i_codigo = ($this->s109_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s109_i_codigo"]:$this->s109_i_codigo);
-       $this->s109_i_exame = ($this->s109_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["s109_i_exame"]:$this->s109_i_exame);
-       $this->s109_i_requisito = ($this->s109_i_requisito == ""?@$GLOBALS["HTTP_POST_VARS"]["s109_i_requisito"]:$this->s109_i_requisito);
+       $this->s109_i_codigo = ($this->s109_i_codigo === 0 || $this->s109_i_codigo === 0.0 || $this->s109_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s109_i_codigo"]:$this->s109_i_codigo);
+       $this->s109_i_exame = ($this->s109_i_exame === 0 || $this->s109_i_exame === 0.0 || $this->s109_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["s109_i_exame"]:$this->s109_i_exame);
+       $this->s109_i_requisito = ($this->s109_i_requisito === 0 || $this->s109_i_requisito === 0.0 || $this->s109_i_requisito == ""?@$GLOBALS["HTTP_POST_VARS"]["s109_i_requisito"]:$this->s109_i_requisito);
      }else{
-       $this->s109_i_codigo = ($this->s109_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s109_i_codigo"]:$this->s109_i_codigo);
+       $this->s109_i_codigo = ($this->s109_i_codigo === 0 || $this->s109_i_codigo === 0.0 || $this->s109_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s109_i_codigo"]:$this->s109_i_codigo);
      }
    }
    // funcao para inclusao
@@ -122,7 +122,7 @@ class cl_sau_examerequisitos {
          $this->s109_i_codigo = $s109_i_codigo; 
        }
      }
-     if(($this->s109_i_codigo == null) || ($this->s109_i_codigo == "") ){ 
+     if(($this->s109_i_codigo == null) || ($this->s109_i_codigo === 0 || $this->s109_i_codigo === 0.0 || $this->s109_i_codigo == "") ){ 
        $this->erro_sql = " Campo s109_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -361,7 +361,7 @@ class cl_sau_examerequisitos {
    function sql_query ( $s109_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_sau_examerequisitos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_sau_examerequisitos {
    function sql_query_file ( $s109_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -418,7 +418,7 @@ class cl_sau_examerequisitos {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

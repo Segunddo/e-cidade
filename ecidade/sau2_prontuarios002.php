@@ -29,7 +29,8 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_prontuarios_classe.php"));
 include(modification("classes/db_unidades_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 
 $clunidades = new cl_unidades;
 $clprontuarios = new cl_prontuarios;
@@ -50,7 +51,7 @@ $clunidades->rotulo->label("sd02_c_nome");
           order by sd24_i_unidade";
 //echo $SQL; exit;
  $Query = db_query($SQL);
- $Linhas = pg_num_rows($Query);
+ $Linhas = ($Query ? pg_num_rows($Query) : null);
 $pdf = new PDF();
 $pdf->Open();
 $pdf->AliasNbPages();

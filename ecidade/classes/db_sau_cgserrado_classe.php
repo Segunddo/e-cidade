@@ -52,7 +52,7 @@ class cl_sau_cgserrado {
                  s128_v_nome = varchar(255) = Nome 
                  ";
    //funcao construtor da classe 
-   function cl_sau_cgserrado() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_cgserrado"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_sau_cgserrado {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s128_i_codigo = ($this->s128_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s128_i_codigo"]:$this->s128_i_codigo);
-       $this->s128_i_numcgs = ($this->s128_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s128_i_numcgs"]:$this->s128_i_numcgs);
+       $this->s128_i_codigo = ($this->s128_i_codigo === 0 || $this->s128_i_codigo === 0.0 || $this->s128_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s128_i_codigo"]:$this->s128_i_codigo);
+       $this->s128_i_numcgs = ($this->s128_i_numcgs === 0 || $this->s128_i_numcgs === 0.0 || $this->s128_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s128_i_numcgs"]:$this->s128_i_numcgs);
        $this->s128_v_nome = ($this->s128_v_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["s128_v_nome"]:$this->s128_v_nome);
      }else{
-       $this->s128_i_codigo = ($this->s128_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s128_i_codigo"]:$this->s128_i_codigo);
-       $this->s128_i_numcgs = ($this->s128_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s128_i_numcgs"]:$this->s128_i_numcgs);
+       $this->s128_i_codigo = ($this->s128_i_codigo === 0 || $this->s128_i_codigo === 0.0 || $this->s128_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s128_i_codigo"]:$this->s128_i_codigo);
+       $this->s128_i_numcgs = ($this->s128_i_numcgs === 0 || $this->s128_i_numcgs === 0.0 || $this->s128_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s128_i_numcgs"]:$this->s128_i_numcgs);
      }
    }
    // funcao para Inclusão
@@ -91,7 +91,7 @@ class cl_sau_cgserrado {
      }
        $this->s128_i_codigo = $s128_i_codigo; 
        $this->s128_i_numcgs = $s128_i_numcgs; 
-     if(($this->s128_i_codigo == null) || ($this->s128_i_codigo == "") ){ 
+     if(($this->s128_i_codigo == null) || ($this->s128_i_codigo === 0 || $this->s128_i_codigo === 0.0 || $this->s128_i_codigo == "") ){ 
        $this->erro_sql = " Campo s128_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_sau_cgserrado {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->s128_i_numcgs == null) || ($this->s128_i_numcgs == "") ){ 
+     if(($this->s128_i_numcgs == null) || ($this->s128_i_numcgs === 0 || $this->s128_i_numcgs === 0.0 || $this->s128_i_numcgs == "") ){ 
        $this->erro_sql = " Campo s128_i_numcgs não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

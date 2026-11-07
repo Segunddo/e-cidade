@@ -100,14 +100,14 @@ class cl_sau_encaminhamentos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s142_i_codigo = ($this->s142_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_codigo"]:$this->s142_i_codigo);
-       $this->s142_i_profissional = ($this->s142_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_profissional"]:$this->s142_i_profissional);
-       $this->s142_i_unidade = ($this->s142_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_unidade"]:$this->s142_i_unidade);
-       $this->s142_i_cgsund = ($this->s142_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_cgsund"]:$this->s142_i_cgsund);
-       $this->s142_i_prontuario = ($this->s142_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_prontuario"]:$this->s142_i_prontuario);
-       $this->s142_i_rhcbo = ($this->s142_i_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_rhcbo"]:$this->s142_i_rhcbo);
-       $this->s142_i_prestadora = ($this->s142_i_prestadora == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_prestadora"]:$this->s142_i_prestadora);
-       $this->s142_i_tipo = ($this->s142_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_tipo"]:$this->s142_i_tipo);
+       $this->s142_i_codigo = ($this->s142_i_codigo === 0 || $this->s142_i_codigo === 0.0 || $this->s142_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_codigo"]:$this->s142_i_codigo);
+       $this->s142_i_profissional = ($this->s142_i_profissional === 0 || $this->s142_i_profissional === 0.0 || $this->s142_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_profissional"]:$this->s142_i_profissional);
+       $this->s142_i_unidade = ($this->s142_i_unidade === 0 || $this->s142_i_unidade === 0.0 || $this->s142_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_unidade"]:$this->s142_i_unidade);
+       $this->s142_i_cgsund = ($this->s142_i_cgsund === 0 || $this->s142_i_cgsund === 0.0 || $this->s142_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_cgsund"]:$this->s142_i_cgsund);
+       $this->s142_i_prontuario = ($this->s142_i_prontuario === 0 || $this->s142_i_prontuario === 0.0 || $this->s142_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_prontuario"]:$this->s142_i_prontuario);
+       $this->s142_i_rhcbo = ($this->s142_i_rhcbo === 0 || $this->s142_i_rhcbo === 0.0 || $this->s142_i_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_rhcbo"]:$this->s142_i_rhcbo);
+       $this->s142_i_prestadora = ($this->s142_i_prestadora === 0 || $this->s142_i_prestadora === 0.0 || $this->s142_i_prestadora == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_prestadora"]:$this->s142_i_prestadora);
+       $this->s142_i_tipo = ($this->s142_i_tipo === 0 || $this->s142_i_tipo === 0.0 || $this->s142_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_tipo"]:$this->s142_i_tipo);
        $this->s142_t_dadosclinicos = ($this->s142_t_dadosclinicos == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_t_dadosclinicos"]:$this->s142_t_dadosclinicos);
        if($this->s142_d_encaminhamento == ""){
          $this->s142_d_encaminhamento_dia = ($this->s142_d_encaminhamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_d_encaminhamento_dia"]:$this->s142_d_encaminhamento_dia);
@@ -133,10 +133,10 @@ class cl_sau_encaminhamentos {
             $this->s142_d_validade = $this->s142_d_validade_ano."-".$this->s142_d_validade_mes."-".$this->s142_d_validade_dia;
          }
        }
-       $this->s142_i_login = ($this->s142_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_login"]:$this->s142_i_login);
-       $this->s142_i_profsolicitante = ($this->s142_i_profsolicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_profsolicitante"]:$this->s142_i_profsolicitante);
+       $this->s142_i_login = ($this->s142_i_login === 0 || $this->s142_i_login === 0.0 || $this->s142_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_login"]:$this->s142_i_login);
+       $this->s142_i_profsolicitante = ($this->s142_i_profsolicitante === 0 || $this->s142_i_profsolicitante === 0.0 || $this->s142_i_profsolicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_profsolicitante"]:$this->s142_i_profsolicitante);
      }else{
-       $this->s142_i_codigo = ($this->s142_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_codigo"]:$this->s142_i_codigo);
+       $this->s142_i_codigo = ($this->s142_i_codigo === 0 || $this->s142_i_codigo === 0.0 || $this->s142_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s142_i_codigo"]:$this->s142_i_codigo);
      }
    }
    // funcao para inclusao
@@ -244,7 +244,7 @@ class cl_sau_encaminhamentos {
          $this->s142_i_codigo = $s142_i_codigo;
        }
      }
-     if(($this->s142_i_codigo == null) || ($this->s142_i_codigo == "") ){
+     if(($this->s142_i_codigo == null) || ($this->s142_i_codigo === 0 || $this->s142_i_codigo === 0.0 || $this->s142_i_codigo == "") ){
        $this->erro_sql = " Campo s142_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -792,7 +792,7 @@ class cl_sau_encaminhamentos {
    /*
   * Gera o SQL para a busca dos encaminhamentos feitos para um profissional (filtra por unidade tambem)
   */
-  function sql_query_encaminhamentos_profissional($s142_i_codigo = null, $campos = "", $iMedico, $iUnidade,
+  function sql_query_encaminhamentos_profissional($s142_i_codigo = null, $campos = "", $iMedico = null, $iUnidade = null,
                                                   $ordem = null, $dbwhere = "") {
     $sql = "select ";
     if($campos != "" ){

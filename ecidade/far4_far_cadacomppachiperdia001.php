@@ -584,7 +584,7 @@ if (isset($excluir)) {
   
       $oDaoFarCadAcompPacHiperdia->erro_status = '0';
       $oDaoFarCadAcompPacHiperdia->erro_msg    = $oDaoSauTriagemAvulsa->erro_msg;
-      break;
+      exit;
   
     }
 

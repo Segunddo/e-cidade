@@ -160,7 +160,7 @@ $sSql     = 'declare pCursor cursor for '.$sSql;
 db_query('begin');
 db_query($sSql);
 $rs      = db_query('fetch forward 1000 from pCursor;');
-$iLinhas = pg_numrows($rs);
+$iLinhas = ($rs ? pg_numrows($rs) : null);
 if ($iLinhas == 0) {
   
   ?>

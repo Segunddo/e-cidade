@@ -64,7 +64,7 @@ class cl_medicoscbo {
                  sd36_c_crmorgao = char(50) = Órgão Emissor do Registro 
                  ";
    //funcao construtor da classe 
-   function cl_medicoscbo() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("medicoscbo"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_medicoscbo {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd36_i_codigo = ($this->sd36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_codigo"]:$this->sd36_i_codigo);
-       $this->sd36_i_medico = ($this->sd36_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_medico"]:$this->sd36_i_medico);
-       $this->sd36_i_rhcbo = ($this->sd36_i_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_rhcbo"]:$this->sd36_i_rhcbo);
-       $this->sd36_c_vinculo = ($this->sd36_c_vinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_c_vinculo"]:$this->sd36_c_vinculo);
-       $this->sd36_i_chambul = ($this->sd36_i_chambul == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_chambul"]:$this->sd36_i_chambul);
-       $this->sd36_i_choutros = ($this->sd36_i_choutros == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_choutros"]:$this->sd36_i_choutros);
-       $this->sd36_i_crm = ($this->sd36_i_crm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_crm"]:$this->sd36_i_crm);
+       $this->sd36_i_codigo = ($this->sd36_i_codigo === 0 || $this->sd36_i_codigo === 0.0 || $this->sd36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_codigo"]:$this->sd36_i_codigo);
+       $this->sd36_i_medico = ($this->sd36_i_medico === 0 || $this->sd36_i_medico === 0.0 || $this->sd36_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_medico"]:$this->sd36_i_medico);
+       $this->sd36_i_rhcbo = ($this->sd36_i_rhcbo === 0 || $this->sd36_i_rhcbo === 0.0 || $this->sd36_i_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_rhcbo"]:$this->sd36_i_rhcbo);
+       $this->sd36_c_vinculo = ($this->sd36_c_vinculo === 0 || $this->sd36_c_vinculo === 0.0 || $this->sd36_c_vinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_c_vinculo"]:$this->sd36_c_vinculo);
+       $this->sd36_i_chambul = ($this->sd36_i_chambul === 0 || $this->sd36_i_chambul === 0.0 || $this->sd36_i_chambul == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_chambul"]:$this->sd36_i_chambul);
+       $this->sd36_i_choutros = ($this->sd36_i_choutros === 0 || $this->sd36_i_choutros === 0.0 || $this->sd36_i_choutros == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_choutros"]:$this->sd36_i_choutros);
+       $this->sd36_i_crm = ($this->sd36_i_crm === 0 || $this->sd36_i_crm === 0.0 || $this->sd36_i_crm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_crm"]:$this->sd36_i_crm);
        $this->sd36_c_crmuf = ($this->sd36_c_crmuf == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_c_crmuf"]:$this->sd36_c_crmuf);
        $this->sd36_c_crmorgao = ($this->sd36_c_crmorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_c_crmorgao"]:$this->sd36_c_crmorgao);
      }else{
-       $this->sd36_i_codigo = ($this->sd36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_codigo"]:$this->sd36_i_codigo);
+       $this->sd36_i_codigo = ($this->sd36_i_codigo === 0 || $this->sd36_i_codigo === 0.0 || $this->sd36_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd36_i_codigo"]:$this->sd36_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_medicoscbo {
          $this->sd36_i_codigo = $sd36_i_codigo; 
        }
      }
-     if(($this->sd36_i_codigo == null) || ($this->sd36_i_codigo == "") ){ 
+     if(($this->sd36_i_codigo == null) || ($this->sd36_i_codigo === 0 || $this->sd36_i_codigo === 0.0 || $this->sd36_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd36_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -473,7 +473,7 @@ class cl_medicoscbo {
    function sql_query ( $sd36_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -497,7 +497,7 @@ class cl_medicoscbo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_medicoscbo {
    function sql_query_file ( $sd36_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -530,7 +530,7 @@ class cl_medicoscbo {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

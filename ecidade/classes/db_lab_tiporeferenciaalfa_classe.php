@@ -52,7 +52,7 @@ class cl_lab_tiporeferenciaalfa {
                  la29_i_fixo = int4 = Valor Referencial Fixo 
                  ";
    //funcao construtor da classe 
-   function cl_lab_tiporeferenciaalfa() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_tiporeferenciaalfa"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_lab_tiporeferenciaalfa {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la29_i_codigo = ($this->la29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_codigo"]:$this->la29_i_codigo);
-       $this->la29_i_valorref = ($this->la29_i_valorref == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_valorref"]:$this->la29_i_valorref);
-       $this->la29_i_fixo = ($this->la29_i_fixo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_fixo"]:$this->la29_i_fixo);
+       $this->la29_i_codigo = ($this->la29_i_codigo === 0 || $this->la29_i_codigo === 0.0 || $this->la29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_codigo"]:$this->la29_i_codigo);
+       $this->la29_i_valorref = ($this->la29_i_valorref === 0 || $this->la29_i_valorref === 0.0 || $this->la29_i_valorref == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_valorref"]:$this->la29_i_valorref);
+       $this->la29_i_fixo = ($this->la29_i_fixo === 0 || $this->la29_i_fixo === 0.0 || $this->la29_i_fixo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_fixo"]:$this->la29_i_fixo);
      }else{
-       $this->la29_i_codigo = ($this->la29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_codigo"]:$this->la29_i_codigo);
+       $this->la29_i_codigo = ($this->la29_i_codigo === 0 || $this->la29_i_codigo === 0.0 || $this->la29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_codigo"]:$this->la29_i_codigo);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_lab_tiporeferenciaalfa {
          $this->la29_i_codigo = $la29_i_codigo; 
        }
      }
-     if(($this->la29_i_codigo == null) || ($this->la29_i_codigo == "") ){ 
+     if(($this->la29_i_codigo == null) || ($this->la29_i_codigo === 0 || $this->la29_i_codigo === 0.0 || $this->la29_i_codigo == "") ){ 
        $this->erro_sql = " Campo la29_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -348,7 +348,7 @@ class cl_lab_tiporeferenciaalfa {
    function sql_query ( $la29_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -372,7 +372,7 @@ class cl_lab_tiporeferenciaalfa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -385,7 +385,7 @@ class cl_lab_tiporeferenciaalfa {
    function sql_query_file ( $la29_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -406,7 +406,7 @@ class cl_lab_tiporeferenciaalfa {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

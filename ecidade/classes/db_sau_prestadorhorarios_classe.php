@@ -74,7 +74,7 @@ class cl_sau_prestadorhorarios {
                  s112_d_valfinal = date = Validade Final
                  ";
    //funcao construtor da classe
-   function cl_sau_prestadorhorarios() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_prestadorhorarios");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -91,15 +91,15 @@ class cl_sau_prestadorhorarios {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s112_i_codigo = ($this->s112_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_codigo"]:$this->s112_i_codigo);
-       $this->s112_i_prestadorvinc = ($this->s112_i_prestadorvinc == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_prestadorvinc"]:$this->s112_i_prestadorvinc);
-       $this->s112_i_diasemana = ($this->s112_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_diasemana"]:$this->s112_i_diasemana);
+       $this->s112_i_codigo = ($this->s112_i_codigo === 0 || $this->s112_i_codigo === 0.0 || $this->s112_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_codigo"]:$this->s112_i_codigo);
+       $this->s112_i_prestadorvinc = ($this->s112_i_prestadorvinc === 0 || $this->s112_i_prestadorvinc === 0.0 || $this->s112_i_prestadorvinc == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_prestadorvinc"]:$this->s112_i_prestadorvinc);
+       $this->s112_i_diasemana = ($this->s112_i_diasemana === 0 || $this->s112_i_diasemana === 0.0 || $this->s112_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_diasemana"]:$this->s112_i_diasemana);
        $this->s112_c_horaini = ($this->s112_c_horaini == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_c_horaini"]:$this->s112_c_horaini);
        $this->s112_c_horafim = ($this->s112_c_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_c_horafim"]:$this->s112_c_horafim);
-       $this->s112_i_fichas = ($this->s112_i_fichas == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_fichas"]:$this->s112_i_fichas);
-       $this->s112_i_reservas = ($this->s112_i_reservas == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_reservas"]:$this->s112_i_reservas);
+       $this->s112_i_fichas = ($this->s112_i_fichas === 0 || $this->s112_i_fichas === 0.0 || $this->s112_i_fichas == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_fichas"]:$this->s112_i_fichas);
+       $this->s112_i_reservas = ($this->s112_i_reservas === 0 || $this->s112_i_reservas === 0.0 || $this->s112_i_reservas == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_reservas"]:$this->s112_i_reservas);
        $this->s112_c_tipograde = ($this->s112_c_tipograde == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_c_tipograde"]:$this->s112_c_tipograde);
-       $this->s112_i_tipoficha = ($this->s112_i_tipoficha == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_tipoficha"]:$this->s112_i_tipoficha);
+       $this->s112_i_tipoficha = ($this->s112_i_tipoficha === 0 || $this->s112_i_tipoficha === 0.0 || $this->s112_i_tipoficha == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_tipoficha"]:$this->s112_i_tipoficha);
        if($this->s112_d_valinicial == ""){
          $this->s112_d_valinicial_dia = ($this->s112_d_valinicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_d_valinicial_dia"]:$this->s112_d_valinicial_dia);
          $this->s112_d_valinicial_mes = ($this->s112_d_valinicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_d_valinicial_mes"]:$this->s112_d_valinicial_mes);
@@ -117,7 +117,7 @@ class cl_sau_prestadorhorarios {
          }
        }
      }else{
-       $this->s112_i_codigo = ($this->s112_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_codigo"]:$this->s112_i_codigo);
+       $this->s112_i_codigo = ($this->s112_i_codigo === 0 || $this->s112_i_codigo === 0.0 || $this->s112_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s112_i_codigo"]:$this->s112_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -225,7 +225,7 @@ class cl_sau_prestadorhorarios {
          $this->s112_i_codigo = $s112_i_codigo;
        }
      }
-     if(($this->s112_i_codigo == null) || ($this->s112_i_codigo == "") ){
+     if(($this->s112_i_codigo == null) || ($this->s112_i_codigo === 0 || $this->s112_i_codigo === 0.0 || $this->s112_i_codigo == "") ){
        $this->erro_sql = " Campo s112_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

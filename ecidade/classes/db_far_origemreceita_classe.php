@@ -55,7 +55,7 @@ class cl_far_origemreceita {
                  fa40_d_validade = date = Validade 
                  ";
    //funcao construtor da classe 
-   function cl_far_origemreceita() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("far_origemreceita"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,7 +72,7 @@ class cl_far_origemreceita {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa40_i_codigo = ($this->fa40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa40_i_codigo"]:$this->fa40_i_codigo);
+       $this->fa40_i_codigo = ($this->fa40_i_codigo === 0 || $this->fa40_i_codigo === 0.0 || $this->fa40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa40_i_codigo"]:$this->fa40_i_codigo);
        $this->fa40_c_descr = ($this->fa40_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["fa40_c_descr"]:$this->fa40_c_descr);
        if($this->fa40_d_validade == ""){
          $this->fa40_d_validade_dia = ($this->fa40_d_validade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa40_d_validade_dia"]:$this->fa40_d_validade_dia);
@@ -83,7 +83,7 @@ class cl_far_origemreceita {
          }
        }
      }else{
-       $this->fa40_i_codigo = ($this->fa40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa40_i_codigo"]:$this->fa40_i_codigo);
+       $this->fa40_i_codigo = ($this->fa40_i_codigo === 0 || $this->fa40_i_codigo === 0.0 || $this->fa40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa40_i_codigo"]:$this->fa40_i_codigo);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_far_origemreceita {
          $this->fa40_i_codigo = $fa40_i_codigo; 
        }
      }
-     if(($this->fa40_i_codigo == null) || ($this->fa40_i_codigo == "") ){ 
+     if(($this->fa40_i_codigo == null) || ($this->fa40_i_codigo === 0 || $this->fa40_i_codigo === 0.0 || $this->fa40_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa40_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_far_origemreceita {
    function sql_query ( $fa40_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -381,7 +381,7 @@ class cl_far_origemreceita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -394,7 +394,7 @@ class cl_far_origemreceita {
    function sql_query_file ( $fa40_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -415,7 +415,7 @@ class cl_far_origemreceita {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

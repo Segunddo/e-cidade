@@ -60,7 +60,7 @@ class cl_vac_fechamento {
                  vc20_i_usuario = int4 = Usuario 
                  ";
    //funcao construtor da classe 
-   function cl_vac_fechamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vac_fechamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,7 +77,7 @@ class cl_vac_fechamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc20_i_codigo = ($this->vc20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_codigo"]:$this->vc20_i_codigo);
+       $this->vc20_i_codigo = ($this->vc20_i_codigo === 0 || $this->vc20_i_codigo === 0.0 || $this->vc20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_codigo"]:$this->vc20_i_codigo);
        if($this->vc20_d_dataini == ""){
          $this->vc20_d_dataini_dia = ($this->vc20_d_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_d_dataini_dia"]:$this->vc20_d_dataini_dia);
          $this->vc20_d_dataini_mes = ($this->vc20_d_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_d_dataini_mes"]:$this->vc20_d_dataini_mes);
@@ -94,9 +94,9 @@ class cl_vac_fechamento {
             $this->vc20_d_datafim = $this->vc20_d_datafim_ano."-".$this->vc20_d_datafim_mes."-".$this->vc20_d_datafim_dia;
          }
        }
-       $this->vc20_i_usuario = ($this->vc20_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_usuario"]:$this->vc20_i_usuario);
+       $this->vc20_i_usuario = ($this->vc20_i_usuario === 0 || $this->vc20_i_usuario === 0.0 || $this->vc20_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_usuario"]:$this->vc20_i_usuario);
      }else{
-       $this->vc20_i_codigo = ($this->vc20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_codigo"]:$this->vc20_i_codigo);
+       $this->vc20_i_codigo = ($this->vc20_i_codigo === 0 || $this->vc20_i_codigo === 0.0 || $this->vc20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_codigo"]:$this->vc20_i_codigo);
      }
    }
    // funcao para inclusao
@@ -153,7 +153,7 @@ class cl_vac_fechamento {
          $this->vc20_i_codigo = $vc20_i_codigo; 
        }
      }
-     if(($this->vc20_i_codigo == null) || ($this->vc20_i_codigo == "") ){ 
+     if(($this->vc20_i_codigo == null) || ($this->vc20_i_codigo === 0 || $this->vc20_i_codigo === 0.0 || $this->vc20_i_codigo == "") ){ 
        $this->erro_sql = " Campo vc20_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -439,7 +439,7 @@ class cl_vac_fechamento {
    function sql_query ( $vc20_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -461,7 +461,7 @@ class cl_vac_fechamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -474,7 +474,7 @@ class cl_vac_fechamento {
    function sql_query2 ( $vc20_i_codigo=null,$campos="*",$ordem=null,$dbwhere="",$iLote = ""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -518,7 +518,7 @@ class cl_vac_fechamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -532,7 +532,7 @@ class cl_vac_fechamento {
    function sql_query_atendrequiitem ( $vc20_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -563,7 +563,7 @@ class cl_vac_fechamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -576,7 +576,7 @@ class cl_vac_fechamento {
    function sql_query_file ( $vc20_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -597,7 +597,7 @@ class cl_vac_fechamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

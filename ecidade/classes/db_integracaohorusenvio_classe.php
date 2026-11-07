@@ -33,7 +33,7 @@ class cl_integracaohorusenvio {
                  fa64_integracaohorus = int4 = Integração Hórus 
                  ";
    //funcao construtor da classe 
-   function cl_integracaohorusenvio() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("integracaohorusenvio"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -50,7 +50,7 @@ class cl_integracaohorusenvio {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa64_sequencial = ($this->fa64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa64_sequencial"]:$this->fa64_sequencial);
+       $this->fa64_sequencial = ($this->fa64_sequencial === 0 || $this->fa64_sequencial === 0.0 || $this->fa64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa64_sequencial"]:$this->fa64_sequencial);
        $this->fa64_protocolo = ($this->fa64_protocolo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa64_protocolo"]:$this->fa64_protocolo);
        $this->fa64_hora = ($this->fa64_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["fa64_hora"]:$this->fa64_hora);
        if($this->fa64_data == ""){
@@ -61,9 +61,9 @@ class cl_integracaohorusenvio {
             $this->fa64_data = $this->fa64_data_ano."-".$this->fa64_data_mes."-".$this->fa64_data_dia;
          }
        }
-       $this->fa64_integracaohorus = ($this->fa64_integracaohorus == ""?@$GLOBALS["HTTP_POST_VARS"]["fa64_integracaohorus"]:$this->fa64_integracaohorus);
+       $this->fa64_integracaohorus = ($this->fa64_integracaohorus === 0 || $this->fa64_integracaohorus === 0.0 || $this->fa64_integracaohorus == ""?@$GLOBALS["HTTP_POST_VARS"]["fa64_integracaohorus"]:$this->fa64_integracaohorus);
      }else{
-       $this->fa64_sequencial = ($this->fa64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa64_sequencial"]:$this->fa64_sequencial);
+       $this->fa64_sequencial = ($this->fa64_sequencial === 0 || $this->fa64_sequencial === 0.0 || $this->fa64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa64_sequencial"]:$this->fa64_sequencial);
      }
    }
    // funcao para Inclusão
@@ -129,7 +129,7 @@ class cl_integracaohorusenvio {
          $this->fa64_sequencial = $fa64_sequencial; 
        }
      }
-     if(($this->fa64_sequencial == null) || ($this->fa64_sequencial == "") ){ 
+     if(($this->fa64_sequencial == null) || ($this->fa64_sequencial === 0 || $this->fa64_sequencial === 0.0 || $this->fa64_sequencial == "") ){ 
        $this->erro_sql = " Campo fa64_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -50,7 +50,7 @@ class cl_sau_complexidade {
                  sd69_c_nome = varchar(60) = Nome 
                  ";
    //funcao construtor da classe 
-   function cl_sau_complexidade() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_complexidade"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_sau_complexidade {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd69_i_codigo = ($this->sd69_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd69_i_codigo"]:$this->sd69_i_codigo);
+       $this->sd69_i_codigo = ($this->sd69_i_codigo === 0 || $this->sd69_i_codigo === 0.0 || $this->sd69_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd69_i_codigo"]:$this->sd69_i_codigo);
        $this->sd69_c_nome = ($this->sd69_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd69_c_nome"]:$this->sd69_c_nome);
      }else{
-       $this->sd69_i_codigo = ($this->sd69_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd69_i_codigo"]:$this->sd69_i_codigo);
+       $this->sd69_i_codigo = ($this->sd69_i_codigo === 0 || $this->sd69_i_codigo === 0.0 || $this->sd69_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd69_i_codigo"]:$this->sd69_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_complexidade {
          $this->sd69_i_codigo = $sd69_i_codigo; 
        }
      }
-     if(($this->sd69_i_codigo == null) || ($this->sd69_i_codigo == "") ){ 
+     if(($this->sd69_i_codigo == null) || ($this->sd69_i_codigo === 0 || $this->sd69_i_codigo === 0.0 || $this->sd69_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd69_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -328,7 +328,7 @@ class cl_sau_complexidade {
    function sql_query ( $sd69_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -349,7 +349,7 @@ class cl_sau_complexidade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_sau_complexidade {
    function sql_query_file ( $sd69_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_sau_complexidade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

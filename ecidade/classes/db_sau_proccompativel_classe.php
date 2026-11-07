@@ -64,7 +64,7 @@ class cl_sau_proccompativel {
                  sd66_i_mescomp = int4 = Mes 
                  ";
    //funcao construtor da classe 
-   function cl_sau_proccompativel() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_proccompativel"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_sau_proccompativel {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd66_i_codigo = ($this->sd66_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_codigo"]:$this->sd66_i_codigo);
-       $this->sd66_i_procprincipal = ($this->sd66_i_procprincipal == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_procprincipal"]:$this->sd66_i_procprincipal);
-       $this->sd66_i_regprincipal = ($this->sd66_i_regprincipal == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_regprincipal"]:$this->sd66_i_regprincipal);
-       $this->sd66_i_proccompativel = ($this->sd66_i_proccompativel == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_proccompativel"]:$this->sd66_i_proccompativel);
-       $this->sd66_i_regcompativel = ($this->sd66_i_regcompativel == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_regcompativel"]:$this->sd66_i_regcompativel);
-       $this->sd66_i_compatibilidade = ($this->sd66_i_compatibilidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_compatibilidade"]:$this->sd66_i_compatibilidade);
-       $this->sd66_i_qtd = ($this->sd66_i_qtd == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_qtd"]:$this->sd66_i_qtd);
-       $this->sd66_i_anocomp = ($this->sd66_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_anocomp"]:$this->sd66_i_anocomp);
-       $this->sd66_i_mescomp = ($this->sd66_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_mescomp"]:$this->sd66_i_mescomp);
+       $this->sd66_i_codigo = ($this->sd66_i_codigo === 0 || $this->sd66_i_codigo === 0.0 || $this->sd66_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_codigo"]:$this->sd66_i_codigo);
+       $this->sd66_i_procprincipal = ($this->sd66_i_procprincipal === 0 || $this->sd66_i_procprincipal === 0.0 || $this->sd66_i_procprincipal == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_procprincipal"]:$this->sd66_i_procprincipal);
+       $this->sd66_i_regprincipal = ($this->sd66_i_regprincipal === 0 || $this->sd66_i_regprincipal === 0.0 || $this->sd66_i_regprincipal == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_regprincipal"]:$this->sd66_i_regprincipal);
+       $this->sd66_i_proccompativel = ($this->sd66_i_proccompativel === 0 || $this->sd66_i_proccompativel === 0.0 || $this->sd66_i_proccompativel == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_proccompativel"]:$this->sd66_i_proccompativel);
+       $this->sd66_i_regcompativel = ($this->sd66_i_regcompativel === 0 || $this->sd66_i_regcompativel === 0.0 || $this->sd66_i_regcompativel == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_regcompativel"]:$this->sd66_i_regcompativel);
+       $this->sd66_i_compatibilidade = ($this->sd66_i_compatibilidade === 0 || $this->sd66_i_compatibilidade === 0.0 || $this->sd66_i_compatibilidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_compatibilidade"]:$this->sd66_i_compatibilidade);
+       $this->sd66_i_qtd = ($this->sd66_i_qtd === 0 || $this->sd66_i_qtd === 0.0 || $this->sd66_i_qtd == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_qtd"]:$this->sd66_i_qtd);
+       $this->sd66_i_anocomp = ($this->sd66_i_anocomp === 0 || $this->sd66_i_anocomp === 0.0 || $this->sd66_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_anocomp"]:$this->sd66_i_anocomp);
+       $this->sd66_i_mescomp = ($this->sd66_i_mescomp === 0 || $this->sd66_i_mescomp === 0.0 || $this->sd66_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_mescomp"]:$this->sd66_i_mescomp);
      }else{
-       $this->sd66_i_codigo = ($this->sd66_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_codigo"]:$this->sd66_i_codigo);
+       $this->sd66_i_codigo = ($this->sd66_i_codigo === 0 || $this->sd66_i_codigo === 0.0 || $this->sd66_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd66_i_codigo"]:$this->sd66_i_codigo);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_sau_proccompativel {
          $this->sd66_i_codigo = $sd66_i_codigo; 
        }
      }
-     if(($this->sd66_i_codigo == null) || ($this->sd66_i_codigo == "") ){ 
+     if(($this->sd66_i_codigo == null) || ($this->sd66_i_codigo === 0 || $this->sd66_i_codigo === 0.0 || $this->sd66_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd66_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -545,7 +545,7 @@ class cl_sau_proccompativel {
    function sql_query ( $sd66_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -581,7 +581,7 @@ class cl_sau_proccompativel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -593,7 +593,7 @@ class cl_sau_proccompativel {
    function sql_query_file ( $sd66_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -614,7 +614,7 @@ class cl_sau_proccompativel {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

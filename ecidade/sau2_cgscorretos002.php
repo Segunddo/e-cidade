@@ -57,7 +57,7 @@ $pdf->cell ( 20, 05, "Processado", 1, 1, "c", 1 );
 
 $pdf->setfont ( 'arial', '', 8 );
 $total = 0;
-for($x = 0; $x < pg_numrows ( $result ); $x ++) {
+for($x = 0; $x < ($result ? pg_numrows ( $result ) : null); $x ++) {
 	db_fieldsmemory ( $result, $x );
 	if ($pdf->gety () > $pdf->h - 35) {
 		$pdf->addpage ();

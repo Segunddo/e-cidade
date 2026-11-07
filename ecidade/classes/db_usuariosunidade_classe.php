@@ -52,7 +52,7 @@ class cl_usuariosunidade {
                  sd25_b_ativo = bool = Ativo 
                  ";
    //funcao construtor da classe 
-   function cl_usuariosunidade() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("usuariosunidade"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,12 +69,12 @@ class cl_usuariosunidade {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd25_i_usuario = ($this->sd25_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_usuario"]:$this->sd25_i_usuario);
-       $this->sd25_i_unidade = ($this->sd25_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_unidade"]:$this->sd25_i_unidade);
+       $this->sd25_i_usuario = ($this->sd25_i_usuario === 0 || $this->sd25_i_usuario === 0.0 || $this->sd25_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_usuario"]:$this->sd25_i_usuario);
+       $this->sd25_i_unidade = ($this->sd25_i_unidade === 0 || $this->sd25_i_unidade === 0.0 || $this->sd25_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_unidade"]:$this->sd25_i_unidade);
        $this->sd25_b_ativo = ($this->sd25_b_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["sd25_b_ativo"]:$this->sd25_b_ativo);
      }else{
-       $this->sd25_i_usuario = ($this->sd25_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_usuario"]:$this->sd25_i_usuario);
-       $this->sd25_i_unidade = ($this->sd25_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_unidade"]:$this->sd25_i_unidade);
+       $this->sd25_i_usuario = ($this->sd25_i_usuario === 0 || $this->sd25_i_usuario === 0.0 || $this->sd25_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_usuario"]:$this->sd25_i_usuario);
+       $this->sd25_i_unidade = ($this->sd25_i_unidade === 0 || $this->sd25_i_unidade === 0.0 || $this->sd25_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_unidade"]:$this->sd25_i_unidade);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_usuariosunidade {
      }
        $this->sd25_i_usuario = $sd25_i_usuario; 
        $this->sd25_i_unidade = $sd25_i_unidade; 
-     if(($this->sd25_i_usuario == null) || ($this->sd25_i_usuario == "") ){ 
+     if(($this->sd25_i_usuario == null) || ($this->sd25_i_usuario === 0 || $this->sd25_i_usuario === 0.0 || $this->sd25_i_usuario == "") ){ 
        $this->erro_sql = " Campo sd25_i_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_usuariosunidade {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sd25_i_unidade == null) || ($this->sd25_i_unidade == "") ){ 
+     if(($this->sd25_i_unidade == null) || ($this->sd25_i_unidade === 0 || $this->sd25_i_unidade === 0.0 || $this->sd25_i_unidade == "") ){ 
        $this->erro_sql = " Campo sd25_i_unidade nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -347,7 +347,7 @@ class cl_usuariosunidade {
    function sql_query ( $sd25_i_usuario=null,$sd25_i_unidade=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -378,7 +378,7 @@ class cl_usuariosunidade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -391,7 +391,7 @@ class cl_usuariosunidade {
    function sql_query_file ( $sd25_i_usuario=null,$sd25_i_unidade=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_usuariosunidade {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -58,7 +58,7 @@ class cl_sau_siasih {
                  sd92_i_mescomp = int4 = Mes 
                  ";
    //funcao construtor da classe 
-   function cl_sau_siasih() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_siasih"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_sau_siasih {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd92_i_codigo = ($this->sd92_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_codigo"]:$this->sd92_i_codigo);
+       $this->sd92_i_codigo = ($this->sd92_i_codigo === 0 || $this->sd92_i_codigo === 0.0 || $this->sd92_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_codigo"]:$this->sd92_i_codigo);
        $this->sd92_c_siasih = ($this->sd92_c_siasih == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_c_siasih"]:$this->sd92_c_siasih);
        $this->sd92_c_nome = ($this->sd92_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_c_nome"]:$this->sd92_c_nome);
-       $this->sd92_i_tipoproc = ($this->sd92_i_tipoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_tipoproc"]:$this->sd92_i_tipoproc);
-       $this->sd92_i_anocomp = ($this->sd92_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_anocomp"]:$this->sd92_i_anocomp);
-       $this->sd92_i_mescomp = ($this->sd92_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_mescomp"]:$this->sd92_i_mescomp);
+       $this->sd92_i_tipoproc = ($this->sd92_i_tipoproc === 0 || $this->sd92_i_tipoproc === 0.0 || $this->sd92_i_tipoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_tipoproc"]:$this->sd92_i_tipoproc);
+       $this->sd92_i_anocomp = ($this->sd92_i_anocomp === 0 || $this->sd92_i_anocomp === 0.0 || $this->sd92_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_anocomp"]:$this->sd92_i_anocomp);
+       $this->sd92_i_mescomp = ($this->sd92_i_mescomp === 0 || $this->sd92_i_mescomp === 0.0 || $this->sd92_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_mescomp"]:$this->sd92_i_mescomp);
      }else{
-       $this->sd92_i_codigo = ($this->sd92_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_codigo"]:$this->sd92_i_codigo);
+       $this->sd92_i_codigo = ($this->sd92_i_codigo === 0 || $this->sd92_i_codigo === 0.0 || $this->sd92_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_codigo"]:$this->sd92_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_sau_siasih {
          $this->sd92_i_codigo = $sd92_i_codigo; 
        }
      }
-     if(($this->sd92_i_codigo == null) || ($this->sd92_i_codigo == "") ){ 
+     if(($this->sd92_i_codigo == null) || ($this->sd92_i_codigo === 0 || $this->sd92_i_codigo === 0.0 || $this->sd92_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd92_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -453,7 +453,7 @@ class cl_sau_siasih {
    function sql_query ( $sd92_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -475,7 +475,7 @@ class cl_sau_siasih {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_sau_siasih {
    function sql_query_file ( $sd92_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -509,7 +509,7 @@ class cl_sau_siasih {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

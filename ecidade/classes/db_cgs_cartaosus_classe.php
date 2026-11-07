@@ -58,7 +58,7 @@ class cl_cgs_cartaosus
                  ";
 
     //funcao construtor da classe
-    function cl_cgs_cartaosus()
+    function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("cgs_cartaosus");
@@ -80,13 +80,13 @@ class cl_cgs_cartaosus
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->s115_i_codigo = ($this->s115_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["s115_i_codigo"] : $this->s115_i_codigo);
-            $this->s115_i_cgs = ($this->s115_i_cgs == "" ? @$GLOBALS["HTTP_POST_VARS"]["s115_i_cgs"] : $this->s115_i_cgs);
+            $this->s115_i_codigo = ($this->s115_i_codigo === 0 || $this->s115_i_codigo === 0.0 || $this->s115_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["s115_i_codigo"] : $this->s115_i_codigo);
+            $this->s115_i_cgs = ($this->s115_i_cgs === 0 || $this->s115_i_cgs === 0.0 || $this->s115_i_cgs == "" ? @$GLOBALS["HTTP_POST_VARS"]["s115_i_cgs"] : $this->s115_i_cgs);
             $this->s115_c_cartaosus = ($this->s115_c_cartaosus == "" ? @$GLOBALS["HTTP_POST_VARS"]["s115_c_cartaosus"] : $this->s115_c_cartaosus);
             $this->s115_c_tipo = ($this->s115_c_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["s115_c_tipo"] : $this->s115_c_tipo);
-            $this->s115_i_entrada = ($this->s115_i_entrada == "" ? @$GLOBALS["HTTP_POST_VARS"]["s115_i_entrada"] : $this->s115_i_entrada);
+            $this->s115_i_entrada = ($this->s115_i_entrada === 0 || $this->s115_i_entrada === 0.0 || $this->s115_i_entrada == "" ? @$GLOBALS["HTTP_POST_VARS"]["s115_i_entrada"] : $this->s115_i_entrada);
         } else {
-            $this->s115_i_codigo = ($this->s115_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["s115_i_codigo"] : $this->s115_i_codigo);
+            $this->s115_i_codigo = ($this->s115_i_codigo === 0 || $this->s115_i_codigo === 0.0 || $this->s115_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["s115_i_codigo"] : $this->s115_i_codigo);
         }
     }
 
@@ -149,7 +149,7 @@ class cl_cgs_cartaosus
                 $this->s115_i_codigo = $s115_i_codigo;
             }
         }
-        if (($this->s115_i_codigo == null) || ($this->s115_i_codigo == "")) {
+        if (($this->s115_i_codigo == null) || ($this->s115_i_codigo === 0 || $this->s115_i_codigo === 0.0 || $this->s115_i_codigo == "")) {
             $this->erro_sql = " Campo s115_i_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

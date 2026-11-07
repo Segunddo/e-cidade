@@ -52,7 +52,7 @@ class cl_sau_procedmedagendamento {
                  s156_i_procedimento = int4 = Procedimento 
                  ";
    //funcao construtor da classe 
-   function cl_sau_procedmedagendamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_procedmedagendamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_sau_procedmedagendamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s156_i_codigo = ($this->s156_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s156_i_codigo"]:$this->s156_i_codigo);
-       $this->s156_i_especmed = ($this->s156_i_especmed == ""?@$GLOBALS["HTTP_POST_VARS"]["s156_i_especmed"]:$this->s156_i_especmed);
-       $this->s156_i_procedimento = ($this->s156_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["s156_i_procedimento"]:$this->s156_i_procedimento);
+       $this->s156_i_codigo = ($this->s156_i_codigo === 0 || $this->s156_i_codigo === 0.0 || $this->s156_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s156_i_codigo"]:$this->s156_i_codigo);
+       $this->s156_i_especmed = ($this->s156_i_especmed === 0 || $this->s156_i_especmed === 0.0 || $this->s156_i_especmed == ""?@$GLOBALS["HTTP_POST_VARS"]["s156_i_especmed"]:$this->s156_i_especmed);
+       $this->s156_i_procedimento = ($this->s156_i_procedimento === 0 || $this->s156_i_procedimento === 0.0 || $this->s156_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["s156_i_procedimento"]:$this->s156_i_procedimento);
      }else{
-       $this->s156_i_codigo = ($this->s156_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s156_i_codigo"]:$this->s156_i_codigo);
+       $this->s156_i_codigo = ($this->s156_i_codigo === 0 || $this->s156_i_codigo === 0.0 || $this->s156_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s156_i_codigo"]:$this->s156_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_sau_procedmedagendamento {
          $this->s156_i_codigo = $s156_i_codigo; 
        }
      }
-     if(($this->s156_i_codigo == null) || ($this->s156_i_codigo == "") ){ 
+     if(($this->s156_i_codigo == null) || ($this->s156_i_codigo === 0 || $this->s156_i_codigo === 0.0 || $this->s156_i_codigo == "") ){ 
        $this->erro_sql = " Campo s156_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_sau_procedmedagendamento {
    function sql_query ( $s156_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_sau_procedmedagendamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -401,7 +401,7 @@ class cl_sau_procedmedagendamento {
    function sql_query_file ( $s156_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -422,7 +422,7 @@ class cl_sau_procedmedagendamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

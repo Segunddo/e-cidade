@@ -26,7 +26,7 @@ class cl_cgs_unddocumento {
                  sd108_documento = int4 = Código Documento 
                  ";
    //funcao construtor da classe 
-   function cl_cgs_unddocumento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("cgs_unddocumento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_cgs_unddocumento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd108_sequencial = ($this->sd108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd108_sequencial"]:$this->sd108_sequencial);
-       $this->sd108_cgs_und = ($this->sd108_cgs_und == ""?@$GLOBALS["HTTP_POST_VARS"]["sd108_cgs_und"]:$this->sd108_cgs_und);
-       $this->sd108_documento = ($this->sd108_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd108_documento"]:$this->sd108_documento);
+       $this->sd108_sequencial = ($this->sd108_sequencial === 0 || $this->sd108_sequencial === 0.0 || $this->sd108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd108_sequencial"]:$this->sd108_sequencial);
+       $this->sd108_cgs_und = ($this->sd108_cgs_und === 0 || $this->sd108_cgs_und === 0.0 || $this->sd108_cgs_und == ""?@$GLOBALS["HTTP_POST_VARS"]["sd108_cgs_und"]:$this->sd108_cgs_und);
+       $this->sd108_documento = ($this->sd108_documento === 0 || $this->sd108_documento === 0.0 || $this->sd108_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd108_documento"]:$this->sd108_documento);
      }else{
-       $this->sd108_sequencial = ($this->sd108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd108_sequencial"]:$this->sd108_sequencial);
+       $this->sd108_sequencial = ($this->sd108_sequencial === 0 || $this->sd108_sequencial === 0.0 || $this->sd108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd108_sequencial"]:$this->sd108_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_cgs_unddocumento {
          $this->sd108_sequencial = $sd108_sequencial; 
        }
      }
-     if(($this->sd108_sequencial == null) || ($this->sd108_sequencial == "") ){ 
+     if(($this->sd108_sequencial == null) || ($this->sd108_sequencial === 0 || $this->sd108_sequencial === 0.0 || $this->sd108_sequencial == "") ){ 
        $this->erro_sql = " Campo sd108_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

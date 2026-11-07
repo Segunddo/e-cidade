@@ -82,29 +82,29 @@ class cl_far_parametros
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fa02_i_codigo = ($this->fa02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_codigo"]:$this->fa02_i_codigo);
-       $this->fa02_i_dbestrutura = ($this->fa02_i_dbestrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_dbestrutura"]:$this->fa02_i_dbestrutura);
+       $this->fa02_i_codigo = ($this->fa02_i_codigo === 0 || $this->fa02_i_codigo === 0.0 || $this->fa02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_codigo"]:$this->fa02_i_codigo);
+       $this->fa02_i_dbestrutura = ($this->fa02_i_dbestrutura === 0 || $this->fa02_i_dbestrutura === 0.0 || $this->fa02_i_dbestrutura == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_dbestrutura"]:$this->fa02_i_dbestrutura);
        $this->fa02_c_descr = ($this->fa02_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_c_descr"]:$this->fa02_c_descr);
        $this->fa02_c_digitacao = ($this->fa02_c_digitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_c_digitacao"]:$this->fa02_c_digitacao);
        $this->fa02_b_comprovante = ($this->fa02_b_comprovante == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa02_b_comprovante"]:$this->fa02_b_comprovante);
        $this->fa02_b_numestoque = ($this->fa02_b_numestoque == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa02_b_numestoque"]:$this->fa02_b_numestoque);
        $this->fa02_b_novaretirada = ($this->fa02_b_novaretirada == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa02_b_novaretirada"]:$this->fa02_b_novaretirada);
-       $this->fa02_i_tipoperiodocontinuado = ($this->fa02_i_tipoperiodocontinuado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_tipoperiodocontinuado"]:$this->fa02_i_tipoperiodocontinuado);
-       $this->fa02_i_acumularsaldocontinuado = ($this->fa02_i_acumularsaldocontinuado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_acumularsaldocontinuado"]:$this->fa02_i_acumularsaldocontinuado);
-       $this->fa02_i_origemreceita = ($this->fa02_i_origemreceita == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_origemreceita"]:$this->fa02_i_origemreceita);
-       $this->fa02_i_avisoretirada = ($this->fa02_i_avisoretirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_avisoretirada"]:$this->fa02_i_avisoretirada);
-       $this->fa02_i_cursor = ($this->fa02_i_cursor == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_cursor"]:$this->fa02_i_cursor);
-       $this->fa02_i_validalote = ($this->fa02_i_validalote == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_validalote"]:$this->fa02_i_validalote);
-       $this->fa02_i_validavencimento = ($this->fa02_i_validavencimento == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_validavencimento"]:$this->fa02_i_validavencimento);
-       $this->fa02_i_acaoprog = ($this->fa02_i_acaoprog == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_acaoprog"]:$this->fa02_i_acaoprog);
-       $this->fa02_i_verificapacientehiperdia = ($this->fa02_i_verificapacientehiperdia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_verificapacientehiperdia"]:$this->fa02_i_verificapacientehiperdia);
-       $this->fa02_i_numdiasmedcontinativo = ($this->fa02_i_numdiasmedcontinativo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_numdiasmedcontinativo"]:$this->fa02_i_numdiasmedcontinativo);
+       $this->fa02_i_tipoperiodocontinuado = ($this->fa02_i_tipoperiodocontinuado === 0 || $this->fa02_i_tipoperiodocontinuado === 0.0 || $this->fa02_i_tipoperiodocontinuado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_tipoperiodocontinuado"]:$this->fa02_i_tipoperiodocontinuado);
+       $this->fa02_i_acumularsaldocontinuado = ($this->fa02_i_acumularsaldocontinuado === 0 || $this->fa02_i_acumularsaldocontinuado === 0.0 || $this->fa02_i_acumularsaldocontinuado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_acumularsaldocontinuado"]:$this->fa02_i_acumularsaldocontinuado);
+       $this->fa02_i_origemreceita = ($this->fa02_i_origemreceita === 0 || $this->fa02_i_origemreceita === 0.0 || $this->fa02_i_origemreceita == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_origemreceita"]:$this->fa02_i_origemreceita);
+       $this->fa02_i_avisoretirada = ($this->fa02_i_avisoretirada === 0 || $this->fa02_i_avisoretirada === 0.0 || $this->fa02_i_avisoretirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_avisoretirada"]:$this->fa02_i_avisoretirada);
+       $this->fa02_i_cursor = ($this->fa02_i_cursor === 0 || $this->fa02_i_cursor === 0.0 || $this->fa02_i_cursor == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_cursor"]:$this->fa02_i_cursor);
+       $this->fa02_i_validalote = ($this->fa02_i_validalote === 0 || $this->fa02_i_validalote === 0.0 || $this->fa02_i_validalote == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_validalote"]:$this->fa02_i_validalote);
+       $this->fa02_i_validavencimento = ($this->fa02_i_validavencimento === 0 || $this->fa02_i_validavencimento === 0.0 || $this->fa02_i_validavencimento == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_validavencimento"]:$this->fa02_i_validavencimento);
+       $this->fa02_i_acaoprog = ($this->fa02_i_acaoprog === 0 || $this->fa02_i_acaoprog === 0.0 || $this->fa02_i_acaoprog == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_acaoprog"]:$this->fa02_i_acaoprog);
+       $this->fa02_i_verificapacientehiperdia = ($this->fa02_i_verificapacientehiperdia === 0 || $this->fa02_i_verificapacientehiperdia === 0.0 || $this->fa02_i_verificapacientehiperdia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_verificapacientehiperdia"]:$this->fa02_i_verificapacientehiperdia);
+       $this->fa02_i_numdiasmedcontinativo = ($this->fa02_i_numdiasmedcontinativo === 0 || $this->fa02_i_numdiasmedcontinativo === 0.0 || $this->fa02_i_numdiasmedcontinativo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_numdiasmedcontinativo"]:$this->fa02_i_numdiasmedcontinativo);
        $this->fa02_utilizaimpressoratermica = ($this->fa02_utilizaimpressoratermica == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa02_utilizaimpressoratermica"]:$this->fa02_utilizaimpressoratermica);
        $this->fa02_informa_receita_medicamento = ($this->fa02_informa_receita_medicamento == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa02_informa_receita_medicamento"]:$this->fa02_informa_receita_medicamento);
        $this->fa02_alerta_nao_morador = ($this->fa02_alerta_nao_morador == "f"?@$GLOBALS["HTTP_POST_VARS"]["fa02_alerta_nao_morador"]:$this->fa02_alerta_nao_morador);
-       $this->fa02_ibge_municipio = ($this->fa02_ibge_municipio == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_ibge_municipio"]:$this->fa02_ibge_municipio);
+       $this->fa02_ibge_municipio = ($this->fa02_ibge_municipio === 0 || $this->fa02_ibge_municipio === 0.0 || $this->fa02_ibge_municipio == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_ibge_municipio"]:$this->fa02_ibge_municipio);
      }else{
-       $this->fa02_i_codigo = ($this->fa02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_codigo"]:$this->fa02_i_codigo);
+       $this->fa02_i_codigo = ($this->fa02_i_codigo === 0 || $this->fa02_i_codigo === 0.0 || $this->fa02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa02_i_codigo"]:$this->fa02_i_codigo);
      }
    }
 
@@ -303,7 +303,7 @@ class cl_far_parametros
          $this->fa02_i_codigo = $fa02_i_codigo;
        }
      }
-     if(($this->fa02_i_codigo == null) || ($this->fa02_i_codigo == "") ){
+     if(($this->fa02_i_codigo == null) || ($this->fa02_i_codigo === 0 || $this->fa02_i_codigo === 0.0 || $this->fa02_i_codigo == "") ){
        $this->erro_sql = " Campo fa02_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -935,7 +935,7 @@ class cl_far_parametros
    function sql_query2 ( $fa02_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -959,7 +959,7 @@ class cl_far_parametros
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

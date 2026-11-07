@@ -45,7 +45,8 @@ $iDepart             = $departamento;//departamento selecionado
 $sSqlpref            = "select * from db_config where codigo = ".db_getsession("DB_instit");//sql da prefeitura
 $resultpref          = db_query($sSqlpref);//resultset da do sql da prefeitura
 $oDaoPref            = db_utils::fieldsmemory($resultpref,0);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 $sSql                = $oDaoDbDepart->sql_query_file(null, "coddepto,descrdepto", "", "coddepto = $iDepart");
 $rsDepart            = $oDaoDbDepart->sql_record($sSql);
 $iLinhasDepart       = $oDaoDbDepart->numrows;

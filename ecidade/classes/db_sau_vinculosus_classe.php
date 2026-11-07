@@ -70,7 +70,7 @@ class cl_sau_vinculosus {
                  sd50_d_publicacao2 = date = Data Publicação 
                  ";
    //funcao construtor da classe 
-   function cl_sau_vinculosus() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_vinculosus"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -87,8 +87,8 @@ class cl_sau_vinculosus {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd50_i_codigo = ($this->sd50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd50_i_codigo"]:$this->sd50_i_codigo);
-       $this->sd50_i_unidade = ($this->sd50_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd50_i_unidade"]:$this->sd50_i_unidade);
+       $this->sd50_i_codigo = ($this->sd50_i_codigo === 0 || $this->sd50_i_codigo === 0.0 || $this->sd50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd50_i_codigo"]:$this->sd50_i_codigo);
+       $this->sd50_i_unidade = ($this->sd50_i_unidade === 0 || $this->sd50_i_unidade === 0.0 || $this->sd50_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd50_i_unidade"]:$this->sd50_i_unidade);
        $this->sd50_v_banco = ($this->sd50_v_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["sd50_v_banco"]:$this->sd50_v_banco);
        $this->sd50_v_agencia = ($this->sd50_v_agencia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd50_v_agencia"]:$this->sd50_v_agencia);
        $this->sd50_v_cc = ($this->sd50_v_cc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd50_v_cc"]:$this->sd50_v_cc);
@@ -111,7 +111,7 @@ class cl_sau_vinculosus {
          }
        }
      }else{
-       $this->sd50_i_codigo = ($this->sd50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd50_i_codigo"]:$this->sd50_i_codigo);
+       $this->sd50_i_codigo = ($this->sd50_i_codigo === 0 || $this->sd50_i_codigo === 0.0 || $this->sd50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd50_i_codigo"]:$this->sd50_i_codigo);
      }
    }
    // funcao para inclusao
@@ -156,7 +156,7 @@ class cl_sau_vinculosus {
          $this->sd50_i_codigo = $sd50_i_codigo; 
        }
      }
-     if(($this->sd50_i_codigo == null) || ($this->sd50_i_codigo == "") ){ 
+     if(($this->sd50_i_codigo == null) || ($this->sd50_i_codigo === 0 || $this->sd50_i_codigo === 0.0 || $this->sd50_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd50_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -455,7 +455,7 @@ class cl_sau_vinculosus {
    function sql_query ( $sd50_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -487,7 +487,7 @@ class cl_sau_vinculosus {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -499,7 +499,7 @@ class cl_sau_vinculosus {
    function sql_query_file ( $sd50_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -520,7 +520,7 @@ class cl_sau_vinculosus {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

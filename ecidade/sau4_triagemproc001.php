@@ -87,7 +87,7 @@ $sCampos = "m.*, rhcbo.*, especmedico.*, medicos.*, prontprofatend.*, z01_v_nome
 $sWhere  = "s104_i_prontuario = {$chavepesquisaprontuario}";
 $result_prontprofatend = db_query( $clprontprofatend->sql_query_ext( null, $sCampos , "s104_i_codigo", $sWhere ) );
 
-if ( pg_num_rows($result_prontprofatend) > 0 ) {
+if ( ($result_prontprofatend ? pg_num_rows($result_prontprofatend) : null) > 0 ) {
 
 	$obj_prontprofatend = db_utils::fieldsMemory( $result_prontprofatend, 0 );
 	if ( !isset($sd29_i_profissional) ) {

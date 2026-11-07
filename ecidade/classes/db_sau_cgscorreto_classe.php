@@ -63,7 +63,7 @@ class cl_sau_cgscorreto {
                  s127_i_instit = int4 = Instituição 
                  ";
    //funcao construtor da classe 
-   function cl_sau_cgscorreto() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_cgscorreto"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_sau_cgscorreto {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s127_i_codigo = ($this->s127_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_i_codigo"]:$this->s127_i_codigo);
-       $this->s127_i_numcgs = ($this->s127_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_i_numcgs"]:$this->s127_i_numcgs);
+       $this->s127_i_codigo = ($this->s127_i_codigo === 0 || $this->s127_i_codigo === 0.0 || $this->s127_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_i_codigo"]:$this->s127_i_codigo);
+       $this->s127_i_numcgs = ($this->s127_i_numcgs === 0 || $this->s127_i_numcgs === 0.0 || $this->s127_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_i_numcgs"]:$this->s127_i_numcgs);
        if($this->s127_d_data == ""){
          $this->s127_d_data_dia = ($this->s127_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_d_data_dia"]:$this->s127_d_data_dia);
          $this->s127_d_data_mes = ($this->s127_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_d_data_mes"]:$this->s127_d_data_mes);
@@ -91,11 +91,11 @@ class cl_sau_cgscorreto {
          }
        }
        $this->s127_c_hora = ($this->s127_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_c_hora"]:$this->s127_c_hora);
-       $this->s127_i_login = ($this->s127_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_i_login"]:$this->s127_i_login);
+       $this->s127_i_login = ($this->s127_i_login === 0 || $this->s127_i_login === 0.0 || $this->s127_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_i_login"]:$this->s127_i_login);
        $this->s127_b_proc = ($this->s127_b_proc == "f"?@$GLOBALS["HTTP_POST_VARS"]["s127_b_proc"]:$this->s127_b_proc);
-       $this->s127_i_instit = ($this->s127_i_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_i_instit"]:$this->s127_i_instit);
+       $this->s127_i_instit = ($this->s127_i_instit === 0 || $this->s127_i_instit === 0.0 || $this->s127_i_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_i_instit"]:$this->s127_i_instit);
      }else{
-       $this->s127_i_codigo = ($this->s127_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_i_codigo"]:$this->s127_i_codigo);
+       $this->s127_i_codigo = ($this->s127_i_codigo === 0 || $this->s127_i_codigo === 0.0 || $this->s127_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s127_i_codigo"]:$this->s127_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_sau_cgscorreto {
          $this->s127_i_codigo = $s127_i_codigo; 
        }
      }
-     if(($this->s127_i_codigo == null) || ($this->s127_i_codigo == "") ){ 
+     if(($this->s127_i_codigo == null) || ($this->s127_i_codigo === 0 || $this->s127_i_codigo === 0.0 || $this->s127_i_codigo == "") ){ 
        $this->erro_sql = " Campo s127_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

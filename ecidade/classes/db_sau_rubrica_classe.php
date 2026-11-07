@@ -56,7 +56,7 @@ class cl_sau_rubrica {
                  sd64_i_mescomp = int4 = Mes 
                  ";
    //funcao construtor da classe 
-   function cl_sau_rubrica() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_rubrica"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_sau_rubrica {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd64_i_codigo = ($this->sd64_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd64_i_codigo"]:$this->sd64_i_codigo);
+       $this->sd64_i_codigo = ($this->sd64_i_codigo === 0 || $this->sd64_i_codigo === 0.0 || $this->sd64_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd64_i_codigo"]:$this->sd64_i_codigo);
        $this->sd64_c_rubrica = ($this->sd64_c_rubrica == ""?@$GLOBALS["HTTP_POST_VARS"]["sd64_c_rubrica"]:$this->sd64_c_rubrica);
        $this->sd64_c_nome = ($this->sd64_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd64_c_nome"]:$this->sd64_c_nome);
-       $this->sd64_i_anocomp = ($this->sd64_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd64_i_anocomp"]:$this->sd64_i_anocomp);
-       $this->sd64_i_mescomp = ($this->sd64_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd64_i_mescomp"]:$this->sd64_i_mescomp);
+       $this->sd64_i_anocomp = ($this->sd64_i_anocomp === 0 || $this->sd64_i_anocomp === 0.0 || $this->sd64_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd64_i_anocomp"]:$this->sd64_i_anocomp);
+       $this->sd64_i_mescomp = ($this->sd64_i_mescomp === 0 || $this->sd64_i_mescomp === 0.0 || $this->sd64_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd64_i_mescomp"]:$this->sd64_i_mescomp);
      }else{
-       $this->sd64_i_codigo = ($this->sd64_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd64_i_codigo"]:$this->sd64_i_codigo);
+       $this->sd64_i_codigo = ($this->sd64_i_codigo === 0 || $this->sd64_i_codigo === 0.0 || $this->sd64_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd64_i_codigo"]:$this->sd64_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_sau_rubrica {
          $this->sd64_i_codigo = $sd64_i_codigo; 
        }
      }
-     if(($this->sd64_i_codigo == null) || ($this->sd64_i_codigo == "") ){ 
+     if(($this->sd64_i_codigo == null) || ($this->sd64_i_codigo === 0 || $this->sd64_i_codigo === 0.0 || $this->sd64_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd64_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_sau_rubrica {
    function sql_query ( $sd64_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -443,7 +443,7 @@ class cl_sau_rubrica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_sau_rubrica {
    function sql_query_file ( $sd64_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_sau_rubrica {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

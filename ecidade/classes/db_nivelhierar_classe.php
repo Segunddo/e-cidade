@@ -52,7 +52,7 @@ class cl_nivelhierar {
                  sd21_l_pab = bool = PAB - Sim/São 
                  ";
    //funcao construtor da classe 
-   function cl_nivelhierar() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("nivelhierar"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_nivelhierar {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd21_i_codigo = ($this->sd21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd21_i_codigo"]:$this->sd21_i_codigo);
+       $this->sd21_i_codigo = ($this->sd21_i_codigo === 0 || $this->sd21_i_codigo === 0.0 || $this->sd21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd21_i_codigo"]:$this->sd21_i_codigo);
        $this->sd21_c_descr = ($this->sd21_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["sd21_c_descr"]:$this->sd21_c_descr);
        $this->sd21_l_pab = ($this->sd21_l_pab == "f"?@$GLOBALS["HTTP_POST_VARS"]["sd21_l_pab"]:$this->sd21_l_pab);
      }else{
-       $this->sd21_i_codigo = ($this->sd21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd21_i_codigo"]:$this->sd21_i_codigo);
+       $this->sd21_i_codigo = ($this->sd21_i_codigo === 0 || $this->sd21_i_codigo === 0.0 || $this->sd21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd21_i_codigo"]:$this->sd21_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_nivelhierar {
          $this->sd21_i_codigo = $sd21_i_codigo; 
        }
      }
-     if(($this->sd21_i_codigo == null) || ($this->sd21_i_codigo == "") ){ 
+     if(($this->sd21_i_codigo == null) || ($this->sd21_i_codigo === 0 || $this->sd21_i_codigo === 0.0 || $this->sd21_i_codigo == "") ){ 
        $this->erro_sql = " Campo sd21_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_nivelhierar {
    function sql_query ( $sd21_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -380,7 +380,7 @@ class cl_nivelhierar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -392,7 +392,7 @@ class cl_nivelhierar {
    function sql_query_file ( $sd21_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -413,7 +413,7 @@ class cl_nivelhierar {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

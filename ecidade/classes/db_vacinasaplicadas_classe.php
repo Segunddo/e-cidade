@@ -57,7 +57,7 @@ class cl_vacinasaplicadas {
                  sd08_d_data = date = Data 
                  ";
    //funcao construtor da classe 
-   function cl_vacinasaplicadas() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("vacinasaplicadas"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,8 +75,8 @@ class cl_vacinasaplicadas {
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->sd08_c_vacina = ($this->sd08_c_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_c_vacina"]:$this->sd08_c_vacina);
-       $this->sd08_i_unidade = ($this->sd08_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_unidade"]:$this->sd08_i_unidade);
-       $this->sd08_i_cgm = ($this->sd08_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_cgm"]:$this->sd08_i_cgm);
+       $this->sd08_i_unidade = ($this->sd08_i_unidade === 0 || $this->sd08_i_unidade === 0.0 || $this->sd08_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_unidade"]:$this->sd08_i_unidade);
+       $this->sd08_i_cgm = ($this->sd08_i_cgm === 0 || $this->sd08_i_cgm === 0.0 || $this->sd08_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_cgm"]:$this->sd08_i_cgm);
        if($this->sd08_d_data == ""){
          $this->sd08_d_data_dia = ($this->sd08_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_d_data_dia"]:$this->sd08_d_data_dia);
          $this->sd08_d_data_mes = ($this->sd08_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_d_data_mes"]:$this->sd08_d_data_mes);
@@ -87,8 +87,8 @@ class cl_vacinasaplicadas {
        }
      }else{
        $this->sd08_c_vacina = ($this->sd08_c_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_c_vacina"]:$this->sd08_c_vacina);
-       $this->sd08_i_unidade = ($this->sd08_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_unidade"]:$this->sd08_i_unidade);
-       $this->sd08_i_cgm = ($this->sd08_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_cgm"]:$this->sd08_i_cgm);
+       $this->sd08_i_unidade = ($this->sd08_i_unidade === 0 || $this->sd08_i_unidade === 0.0 || $this->sd08_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_unidade"]:$this->sd08_i_unidade);
+       $this->sd08_i_cgm = ($this->sd08_i_cgm === 0 || $this->sd08_i_cgm === 0.0 || $this->sd08_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_cgm"]:$this->sd08_i_cgm);
        $this->sd08_d_data = ($this->sd08_d_data == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_d_data_ano"]."-".@$GLOBALS["HTTP_POST_VARS"]["sd08_d_data_mes"]."-".@$GLOBALS["HTTP_POST_VARS"]["sd08_d_data_dia"]:$this->sd08_d_data);
      }
    }
@@ -107,7 +107,7 @@ class cl_vacinasaplicadas {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sd08_i_unidade == null) || ($this->sd08_i_unidade == "") ){ 
+     if(($this->sd08_i_unidade == null) || ($this->sd08_i_unidade === 0 || $this->sd08_i_unidade === 0.0 || $this->sd08_i_unidade == "") ){ 
        $this->erro_sql = " Campo sd08_i_unidade nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -115,7 +115,7 @@ class cl_vacinasaplicadas {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sd08_i_cgm == null) || ($this->sd08_i_cgm == "") ){ 
+     if(($this->sd08_i_cgm == null) || ($this->sd08_i_cgm === 0 || $this->sd08_i_cgm === 0.0 || $this->sd08_i_cgm == "") ){ 
        $this->erro_sql = " Campo sd08_i_cgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -430,7 +430,7 @@ class cl_vacinasaplicadas {
    function sql_query ( $sd08_c_vacina=null,$sd08_i_unidade=null,$sd08_i_cgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -470,7 +470,7 @@ class cl_vacinasaplicadas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -482,7 +482,7 @@ class cl_vacinasaplicadas {
    function sql_query_file ( $sd08_c_vacina=null,$sd08_i_unidade=null,$sd08_i_cgm=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -519,7 +519,7 @@ class cl_vacinasaplicadas {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

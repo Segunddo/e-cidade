@@ -35,7 +35,8 @@ include(modification("classes/db_sau_cgscorreto_classe.php"));
 include(modification("classes/db_sau_cgserrado_classe.php"));
 include(modification("classes/db_cgs_und_classe.php"));
 
-parse_str ( $HTTP_SERVER_VARS ['QUERY_STRING'] );
+parse_str ( $HTTP_SERVER_VARS ['QUERY_STRING'], $__qs );
+extract($__qs);
 
 ?>
 <html>
@@ -64,7 +65,7 @@ $clsau_cgscorreto->s127_b_proc = 'false';
 $clsau_cgscorreto->incluir ( 0 );
 $erro = false;
 if ($clsau_cgscorreto->erro_status == '1') {
-	$sec = split ( "XX", $segundo );
+	$sec = preg_split ( "#XX#m", $segundo );
 	for($i = 0; $i < sizeof ( $sec ); $i ++) {
 
 		$res = $clcgs_und->sql_record ( $clcgs_und->sql_query ( $sec [$i], 'z01_v_nome' ) );

@@ -66,7 +66,7 @@ class cl_lab_horario {
                  la35_d_valfim = date = Validade Final 
                  ";
    //funcao construtor da classe 
-   function cl_lab_horario() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("lab_horario"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,9 +83,9 @@ class cl_lab_horario {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la35_i_codigo = ($this->la35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la35_i_codigo"]:$this->la35_i_codigo);
-       $this->la35_i_setorexame = ($this->la35_i_setorexame == ""?@$GLOBALS["HTTP_POST_VARS"]["la35_i_setorexame"]:$this->la35_i_setorexame);
-       $this->la35_i_diasemana = ($this->la35_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["la35_i_diasemana"]:$this->la35_i_diasemana);
+       $this->la35_i_codigo = ($this->la35_i_codigo === 0 || $this->la35_i_codigo === 0.0 || $this->la35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la35_i_codigo"]:$this->la35_i_codigo);
+       $this->la35_i_setorexame = ($this->la35_i_setorexame === 0 || $this->la35_i_setorexame === 0.0 || $this->la35_i_setorexame == ""?@$GLOBALS["HTTP_POST_VARS"]["la35_i_setorexame"]:$this->la35_i_setorexame);
+       $this->la35_i_diasemana = ($this->la35_i_diasemana === 0 || $this->la35_i_diasemana === 0.0 || $this->la35_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["la35_i_diasemana"]:$this->la35_i_diasemana);
        $this->la35_c_horaini = ($this->la35_c_horaini == ""?@$GLOBALS["HTTP_POST_VARS"]["la35_c_horaini"]:$this->la35_c_horaini);
        $this->la35_c_horafim = ($this->la35_c_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["la35_c_horafim"]:$this->la35_c_horafim);
        if($this->la35_d_valinicio == ""){
@@ -105,7 +105,7 @@ class cl_lab_horario {
          }
        }
      }else{
-       $this->la35_i_codigo = ($this->la35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la35_i_codigo"]:$this->la35_i_codigo);
+       $this->la35_i_codigo = ($this->la35_i_codigo === 0 || $this->la35_i_codigo === 0.0 || $this->la35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la35_i_codigo"]:$this->la35_i_codigo);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_lab_horario {
          $this->la35_i_codigo = $la35_i_codigo; 
        }
      }
-     if(($this->la35_i_codigo == null) || ($this->la35_i_codigo == "") ){ 
+     if(($this->la35_i_codigo == null) || ($this->la35_i_codigo === 0 || $this->la35_i_codigo === 0.0 || $this->la35_i_codigo == "") ){ 
        $this->erro_sql = " Campo la35_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -485,7 +485,7 @@ class cl_lab_horario {
      
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -510,7 +510,7 @@ class cl_lab_horario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -523,7 +523,7 @@ class cl_lab_horario {
    function sql_query_file ( $la35_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -544,7 +544,7 @@ class cl_lab_horario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -556,7 +556,7 @@ class cl_lab_horario {
    function sql_query_laboratorio ( $la35_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -583,7 +583,7 @@ class cl_lab_horario {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

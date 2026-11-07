@@ -50,7 +50,7 @@ class cl_sau_parametrosagendamento {
                  s165_formatocomprovanteagend = int4 = Formato Comprovante de Agendamento 
                  ";
    //funcao construtor da classe 
-   function cl_sau_parametrosagendamento() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_parametrosagendamento"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_sau_parametrosagendamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s165_sequencial = ($this->s165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_sequencial"]:$this->s165_sequencial);
-       $this->s165_formatocomprovanteagend = ($this->s165_formatocomprovanteagend == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_formatocomprovanteagend"]:$this->s165_formatocomprovanteagend);
+       $this->s165_sequencial = ($this->s165_sequencial === 0 || $this->s165_sequencial === 0.0 || $this->s165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_sequencial"]:$this->s165_sequencial);
+       $this->s165_formatocomprovanteagend = ($this->s165_formatocomprovanteagend === 0 || $this->s165_formatocomprovanteagend === 0.0 || $this->s165_formatocomprovanteagend == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_formatocomprovanteagend"]:$this->s165_formatocomprovanteagend);
      }else{
-       $this->s165_sequencial = ($this->s165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_sequencial"]:$this->s165_sequencial);
+       $this->s165_sequencial = ($this->s165_sequencial === 0 || $this->s165_sequencial === 0.0 || $this->s165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_sequencial"]:$this->s165_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_parametrosagendamento {
          $this->s165_sequencial = $s165_sequencial; 
        }
      }
-     if(($this->s165_sequencial == null) || ($this->s165_sequencial == "") ){ 
+     if(($this->s165_sequencial == null) || ($this->s165_sequencial === 0 || $this->s165_sequencial === 0.0 || $this->s165_sequencial == "") ){ 
        $this->erro_sql = " Campo s165_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -329,7 +329,7 @@ class cl_sau_parametrosagendamento {
    function sql_query ( $s165_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -350,7 +350,7 @@ class cl_sau_parametrosagendamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -363,7 +363,7 @@ class cl_sau_parametrosagendamento {
    function sql_query_file ( $s165_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -384,7 +384,7 @@ class cl_sau_parametrosagendamento {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

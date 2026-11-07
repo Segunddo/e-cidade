@@ -69,7 +69,7 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** **ÁREAS TRIBUTÁRIO, EDUCAÇÃO, RECURSOS HUMANOS, PATRIMONIAL E FINANCEIRO CONCLUÍDAS** — Financeiro com **992/992 telas de menu no 8.5** pelo proxy (branch `5financeiro-migrado`, enviada em 30/10/2026; ver `area-financeiro.md`) — Patrimonial com
+**Onde paramos:** **ÁREAS TRIBUTÁRIO, EDUCAÇÃO, RECURSOS HUMANOS, PATRIMONIAL, FINANCEIRO E SAÚDE CONCLUÍDAS** — Saúde com **493/493 telas de menu no 8.5** pelo proxy (branch `6saude-migrado`, enviada em 01/11/2026; ver `area-saude.md`) — Financeiro com **992/992 telas de menu no 8.5** pelo proxy (branch `5financeiro-migrado`, enviada em 30/10/2026; ver `area-financeiro.md`) — Patrimonial com
 **743/743 telas de menu no 8.5** conferidas pelo proxy (branch `4patrimonial-migrado`, 29/10/2026; ver `area-patrimonial.md`).
 RH com 701/701 (branch `3recursoshumanos-migrado`; cálculo da folha verificado; 13ª lacuna fechada).
 Conferido pelo proxy, tela de menu por tela de menu (15/10/2026): **Tributário 1.059/1.059** e **Educação
@@ -84,8 +84,8 @@ que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
 | Também portado | `tra` — órfão no menu; as 62 telas só ficaram idênticas no lote à parte de 30/10/2026 (`area-financeiro.md`) |
 | Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
 | Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes\|ac\|aco\|ouv\|lic\|vei\|pat\|com\|cus\|pla\|pl\|tes\|emp\|orc\|cai)[0-9]*_)` — **8.007 arquivos** + 1.112 por `map` (805 telas de menu + 320 abas e destinos da 14ª lacuna, `faseb_map_abas.txt`) |
-| **Próximo passo** | **Área FINANCEIRO dimensionada e dividida em 6 lotes** (branch `5financeiro-migrado`; ver `area-financeiro.md`). **ÁREA FINANCEIRO CONCLUÍDA** (30/10/2026): 6 lotes + o `tra`, bateria do fim da área (`map` 1.112/1.112; `location` 7.966/7.994, as 28 registradas), **992/992 telas de menu pelo proxy** (+ 13 fantasmas). **Enviada ao GitHub** (`origin/5financeiro-migrado`, 30/10/2026) — um lote por vez. |
+| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes\|ac\|aco\|ouv\|lic\|vei\|pat\|com\|cus\|pla\|pl\|tes\|emp\|orc\|cai\|fum\|hip\|age\|amb\|tfd\|vac\|lab\|far\|sau)[0-9]*_)` — **9.258 arquivos** + 1.108 por `map` (800 telas de menu + 321 abas e destinos da 14ª lacuna, `faseb_map_abas.txt`) |
+| **Próximo passo** | **Área FINANCEIRO dimensionada e dividida em 6 lotes** (branch `5financeiro-migrado`; ver `area-financeiro.md`). **ÁREA FINANCEIRO CONCLUÍDA** (30/10/2026): 6 lotes + o `tra`, bateria do fim da área (`map` 1.112/1.112; `location` 7.966/7.994, as 28 registradas), **992/992 telas de menu pelo proxy** (+ 13 fantasmas). **Enviada ao GitHub** (`origin/5financeiro-migrado`, 30/10/2026). **ÁREA SAÚDE dimensionada e dividida em 7 lotes** (branch `6saude-migrado`, 31/10/2026; ver `area-saude.md`): **lotes 1 (`fum`/`hip`/`age`/`amb`, 71/71) 2 (`tfd`/`vac`, 164/164) 3 (`lab`, 193/195 + 2 caracterizadas) 4 (`far`, 192/192) 5 (`sau1_`, 355/355) 6 (`sau2_`/`sau3_`/`sau4_`/`sau_`, 273/274 + 1 caracterizada) e 7 (3 telas `mat`, 3/3) concluídos — os 7 lotes; bateria completa feita (`map` 1.108/1.108; `location` 9.213/9.245, todas caracterizadas). **493/493 telas de menu pelo proxy — ÁREA SAÚDE CONCLUÍDA.** Enviada ao GitHub (`origin/6saude-migrado`, 01/11/2026)** — um lote por vez. |
 | **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
 | Frentes de enumeração | **nove** — a 8ª (classes de `model/`/`std/`, 13ª lacuna) e a 9ª (classes com namespace em `src/`/`app/`/`api/` e serviços do `bootstrap.php`, **15ª lacuna**, `scratchpad/ns_fecho.py`); todas insensíveis a maiúsculas desde a 9ª lacuna (`getdao`) |
@@ -221,7 +221,8 @@ Registro (o que antes ficava todo aqui), em `docs/registro/`:
 | `area-recursos-humanos.md` | RH: lotes, `.phar` (12ª lacuna), nível 3 nos cadastros e estágio, cálculo da folha, 13ª lacuna; **14ª lacuna** (telas de menu que mandam ao 5.6, decisão: tratar na aparição) |
 | `area-patrimonial.md` | Patrimonial (**concluída**, branch `4patrimonial-migrado`): dimensionamento por prefixo, lotes; **15ª lacuna** (classes com namespace em `src/`/`app/`, 9ª frente, correção pela cadeia de branches) |
 | `area-financeiro.md` | Financeiro (**concluída**, branch `5financeiro-migrado`): módulos, prefixos, divisão em lotes e as decisões do usuário (`cai` inteiro, `con` só pelas telas) |
-| `dimensionamento.md` | dimensionamento das áreas restantes (13/10, 18/10 e 22/10) |
+| `area-saude.md` | Saúde (**concluída**, branch `6saude-migrado`): módulos, prefixos, divisão em 7 lotes e as decisões do usuário |
+| `dimensionamento.md` | dimensionamento das áreas restantes (13/10, 18/10, 22/10, 29/10, 30/10 e 01/11) |
 | `trabalho-relacionado.md` | monografia do TCC de referência, análise dos commits e a comparação medida sobre o mesmo universo |
 | `catalogo-e-metodo.md` | `while read`, `modification()`, LSP e `=& new`, `php -l` na base inteira, experimento do Rector, cobertura dos caminhos de escrita (níveis 1–3), decisões de porte, bugs latentes |
 | `laravel.md` | login bloqueado, dimensionamento, migração em paralelo com `vendor/` próprio, Tributário × API, token do Passport |

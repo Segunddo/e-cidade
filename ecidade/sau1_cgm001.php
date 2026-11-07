@@ -70,11 +70,11 @@
 	   document.location.href = 'sau1_cgm001.php?mostradadoscgm=sim&z01_numcgm=$z01_numcgm';
 	 else ";
            if(isset($testanome)){
-	     $camp = split("\|",$valores);
+	     $camp = preg_split("#\\|#m",$valores);
 	     $vals = "";
 	     $vir = "";
 	     for($f=1;$f<count($camp);$f++){
-	       $vals .= $vir.$$camp[$f];
+	       $vals .= $vir.${$camp}[$f];
 	       $vir = ",";
 	     }
 	     if($z01_cgc == "" && $z01_cpf == ""){
@@ -118,11 +118,11 @@
      }
      $z01_numcgm = $clcgm->z01_numcgm;
      if(isset($testanome)){
-       $camp = split("\|",$valores);
+       $camp = preg_split("#\\|#m",$valores);
        $vals = "";
        $vir = "";
        for($f=1;$f<count($camp);$f++){
-	 $vals .= $vir.$$camp[$f];
+	 $vals .= $vir.${$camp}[$f];
 	 $vir = ",";
        }
        db_msgbox($cl_cgm->erro_msg);

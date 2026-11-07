@@ -77,7 +77,7 @@ class cl_sau_agendaexterna {
                  s118_i_login = int4 = Login 
                  ";
    //funcao construtor da classe 
-   function cl_sau_agendaexterna() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_agendaexterna"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -94,10 +94,10 @@ class cl_sau_agendaexterna {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s118_i_codigo = ($this->s118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_codigo"]:$this->s118_i_codigo);
-       $this->s118_i_numcgs = ($this->s118_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_numcgs"]:$this->s118_i_numcgs);
+       $this->s118_i_codigo = ($this->s118_i_codigo === 0 || $this->s118_i_codigo === 0.0 || $this->s118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_codigo"]:$this->s118_i_codigo);
+       $this->s118_i_numcgs = ($this->s118_i_numcgs === 0 || $this->s118_i_numcgs === 0.0 || $this->s118_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_numcgs"]:$this->s118_i_numcgs);
        $this->s118_c_tipoagenda = ($this->s118_c_tipoagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_c_tipoagenda"]:$this->s118_c_tipoagenda);
-       $this->s118_i_prestador = ($this->s118_i_prestador == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_prestador"]:$this->s118_i_prestador);
+       $this->s118_i_prestador = ($this->s118_i_prestador === 0 || $this->s118_i_prestador === 0.0 || $this->s118_i_prestador == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_prestador"]:$this->s118_i_prestador);
        if($this->s118_d_preferencia == ""){
          $this->s118_d_preferencia_dia = ($this->s118_d_preferencia_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_d_preferencia_dia"]:$this->s118_d_preferencia_dia);
          $this->s118_d_preferencia_mes = ($this->s118_d_preferencia_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_d_preferencia_mes"]:$this->s118_d_preferencia_mes);
@@ -125,9 +125,9 @@ class cl_sau_agendaexterna {
             $this->s118_d_data = $this->s118_d_data_ano."-".$this->s118_d_data_mes."-".$this->s118_d_data_dia;
          }
        }
-       $this->s118_i_login = ($this->s118_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_login"]:$this->s118_i_login);
+       $this->s118_i_login = ($this->s118_i_login === 0 || $this->s118_i_login === 0.0 || $this->s118_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_login"]:$this->s118_i_login);
      }else{
-       $this->s118_i_codigo = ($this->s118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_codigo"]:$this->s118_i_codigo);
+       $this->s118_i_codigo = ($this->s118_i_codigo === 0 || $this->s118_i_codigo === 0.0 || $this->s118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_codigo"]:$this->s118_i_codigo);
      }
    }
    // funcao para inclusao
@@ -208,7 +208,7 @@ class cl_sau_agendaexterna {
          $this->s118_i_codigo = $s118_i_codigo; 
        }
      }
-     if(($this->s118_i_codigo == null) || ($this->s118_i_codigo == "") ){ 
+     if(($this->s118_i_codigo == null) || ($this->s118_i_codigo === 0 || $this->s118_i_codigo === 0.0 || $this->s118_i_codigo == "") ){ 
        $this->erro_sql = " Campo s118_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -590,7 +590,7 @@ class cl_sau_agendaexterna {
    function sql_query ( $s118_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -615,7 +615,7 @@ class cl_sau_agendaexterna {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -628,7 +628,7 @@ class cl_sau_agendaexterna {
    function sql_query_file ( $s118_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -649,7 +649,7 @@ class cl_sau_agendaexterna {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

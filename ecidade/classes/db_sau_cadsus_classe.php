@@ -57,7 +57,7 @@ class cl_sau_cadsus {
                  s136_i_user = int4 = Usuario 
                  ";
    //funcao construtor da classe 
-   function cl_sau_cadsus() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("sau_cadsus"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -74,7 +74,7 @@ class cl_sau_cadsus {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s136_i_codigo = ($this->s136_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s136_i_codigo"]:$this->s136_i_codigo);
+       $this->s136_i_codigo = ($this->s136_i_codigo === 0 || $this->s136_i_codigo === 0.0 || $this->s136_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s136_i_codigo"]:$this->s136_i_codigo);
        if($this->s136_d_data == ""){
          $this->s136_d_data_dia = ($this->s136_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s136_d_data_dia"]:$this->s136_d_data_dia);
          $this->s136_d_data_mes = ($this->s136_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s136_d_data_mes"]:$this->s136_d_data_mes);
@@ -84,9 +84,9 @@ class cl_sau_cadsus {
          }
        }
        $this->s136_c_hora = ($this->s136_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s136_c_hora"]:$this->s136_c_hora);
-       $this->s136_i_user = ($this->s136_i_user == ""?@$GLOBALS["HTTP_POST_VARS"]["s136_i_user"]:$this->s136_i_user);
+       $this->s136_i_user = ($this->s136_i_user === 0 || $this->s136_i_user === 0.0 || $this->s136_i_user == ""?@$GLOBALS["HTTP_POST_VARS"]["s136_i_user"]:$this->s136_i_user);
      }else{
-       $this->s136_i_codigo = ($this->s136_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s136_i_codigo"]:$this->s136_i_codigo);
+       $this->s136_i_codigo = ($this->s136_i_codigo === 0 || $this->s136_i_codigo === 0.0 || $this->s136_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s136_i_codigo"]:$this->s136_i_codigo);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_sau_cadsus {
          $this->s136_i_codigo = $s136_i_codigo; 
        }
      }
-     if(($this->s136_i_codigo == null) || ($this->s136_i_codigo == "") ){ 
+     if(($this->s136_i_codigo == null) || ($this->s136_i_codigo === 0 || $this->s136_i_codigo === 0.0 || $this->s136_i_codigo == "") ){ 
        $this->erro_sql = " Campo s136_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -415,7 +415,7 @@ class cl_sau_cadsus {
    function sql_query ( $s136_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -437,7 +437,7 @@ class cl_sau_cadsus {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_sau_cadsus {
    function sql_query_file ( $s136_i_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -471,7 +471,7 @@ class cl_sau_cadsus {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -485,7 +485,7 @@ class cl_sau_cadsus {
     $sSql = 'select ';
     if ($sCampos != '*') {
 
-      $sCamposSql = split('#', $sCampos);
+      $sCamposSql = preg_split('#\##m', $sCampos);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 
@@ -517,7 +517,7 @@ class cl_sau_cadsus {
     if ($sOrdem != null) {
 
       $sSql      .= ' order by ';
-      $sCamposSql = split('#', $sOrdem);
+      $sCamposSql = preg_split('#\##m', $sOrdem);
       $sVirgula   = '';
       for ($iCont = 0; $iCont < sizeof($sCamposSql); $iCont++) {
 

@@ -26,7 +26,7 @@ class cl_integracaohorusenviodadoscompetencia {
                  fa65_dadoscompetencia = int4 = Dados enviados 
                  ";
    //funcao construtor da classe 
-   function cl_integracaohorusenviodadoscompetencia() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("integracaohorusenviodadoscompetencia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -43,11 +43,11 @@ class cl_integracaohorusenviodadoscompetencia {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa65_sequencial = ($this->fa65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa65_sequencial"]:$this->fa65_sequencial);
-       $this->fa65_integracaohorusenvio = ($this->fa65_integracaohorusenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["fa65_integracaohorusenvio"]:$this->fa65_integracaohorusenvio);
-       $this->fa65_dadoscompetencia = ($this->fa65_dadoscompetencia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa65_dadoscompetencia"]:$this->fa65_dadoscompetencia);
+       $this->fa65_sequencial = ($this->fa65_sequencial === 0 || $this->fa65_sequencial === 0.0 || $this->fa65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa65_sequencial"]:$this->fa65_sequencial);
+       $this->fa65_integracaohorusenvio = ($this->fa65_integracaohorusenvio === 0 || $this->fa65_integracaohorusenvio === 0.0 || $this->fa65_integracaohorusenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["fa65_integracaohorusenvio"]:$this->fa65_integracaohorusenvio);
+       $this->fa65_dadoscompetencia = ($this->fa65_dadoscompetencia === 0 || $this->fa65_dadoscompetencia === 0.0 || $this->fa65_dadoscompetencia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa65_dadoscompetencia"]:$this->fa65_dadoscompetencia);
      }else{
-       $this->fa65_sequencial = ($this->fa65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa65_sequencial"]:$this->fa65_sequencial);
+       $this->fa65_sequencial = ($this->fa65_sequencial === 0 || $this->fa65_sequencial === 0.0 || $this->fa65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa65_sequencial"]:$this->fa65_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_integracaohorusenviodadoscompetencia {
          $this->fa65_sequencial = $fa65_sequencial; 
        }
      }
-     if(($this->fa65_sequencial == null) || ($this->fa65_sequencial == "") ){ 
+     if(($this->fa65_sequencial == null) || ($this->fa65_sequencial === 0 || $this->fa65_sequencial === 0.0 || $this->fa65_sequencial == "") ){ 
        $this->erro_sql = " Campo fa65_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
