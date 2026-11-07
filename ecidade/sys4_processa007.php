@@ -29,7 +29,8 @@ require(modification("libs/db_stdlib.php"));
 require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 if(isset($HTTP_POST_VARS["excluir"])){
   db_postmemory($HTTP_POST_VARS);
@@ -572,12 +573,12 @@ if(!isset($excluir)){
 		where arqfilho = 'func_".strtolower($nomearqc).".php'";
         
       $result = db_query($sql);
-      if(pg_numrows($result)==0){
+      if(($result ? pg_numrows($result) : null)==0){
 	
         $sql = "select nextval('db_arquivos_codfilho_seq') as codfilho" ;
 	
         $result = db_query($sql);
-        $codfilho = pg_result($result,0,0);
+        $codfilho = ($result ? pg_result($result,0,0) : null);
         $sql = "insert into db_arquivos values(".$codfilho.",
                                          'func_".strtolower($nomearqc).".php',
 					 'Função de consulta aos dados da tabela :  ".$nomearqc."')";
@@ -606,12 +607,12 @@ if(!isset($excluir)){
               from db_arquivos
               where arqfilho = 'db_frm".strtolower($nomearqc).".php'";
       $result = db_query($sql);
-      if(pg_numrows($result)==0){
+      if(($result ? pg_numrows($result) : null)==0){
 	
         $sql = "select nextval('db_arquivos_codfilho_seq') as codfilho" ;
 	
         $result = db_query($sql);
-        $codfilho = pg_result($result,0,0);
+        $codfilho = ($result ? pg_result($result,0,0) : null);
         $sql = "insert into db_arquivos values(".$codfilho.",
                                          'db_frm".strtolower($nomearqc).".php',
 					 'Formulario utilizado para a tabela :  ".$nomearqc."')";

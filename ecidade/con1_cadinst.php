@@ -46,7 +46,8 @@ if (isset($excluir)) {
   $db_opcao = 3;
 }
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 if (isset($retorno)) {
   $sql = "select *,to_char(dtcont,'DD') as dtcont_dia,to_char(dtcont,'MM') as dtcont_mes,to_char(dtcont,'YYYY') as dtcont_ano from db_config where codigo = $retorno";
   $result = db_query($sql);
@@ -62,7 +63,7 @@ if (isset($HTTP_POST_VARS["incluir"])) {
   }
   $tx_banc = $tx_banc == ""?"null":$tx_banc;
   $ident = $ident == ""?"null":$ident;
-  
+
   db_getfile("db_figura",$dbh_figura);
   db_getfile("db_logo",$dbh_logo);
   $result = db_query("select max(codigo) + 1 from db_config");
@@ -133,14 +134,14 @@ if (isset($HTTP_POST_VARS["incluir"])) {
 				////////////////ALTERAR////////////////
 } else if (isset($HTTP_POST_VARS["alterar"])) {
   db_postmemory($HTTP_POST_VARS);
-  
+
   $dtcont = "'".$dtcont_ano."-".$dtcont_mes."-".$dtcont_dia."'";
   if (!checkdate($dtcont_mes,$dtcont_dia,$dtcont_ano)) {
     db_erro("Campo 'Data da Contabilidade' está inválido: $dtcont");
   }
   $tx_banc = $tx_banc == ""?"null":$tx_banc;
   $ident = $ident == ""?"null":$ident;
-  
+
   $result = db_query("select figura,logo from db_config where codigo = $codigo ");
   db_query("update db_config set
 nomeinst = '$nomeinst',

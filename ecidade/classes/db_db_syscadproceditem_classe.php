@@ -52,7 +52,7 @@ class cl_db_syscadproceditem {
                  id_item = int4 = Código do ítem 
                  ";
    //funcao construtor da classe 
-   function cl_db_syscadproceditem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_syscadproceditem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_db_syscadproceditem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->seqproitem = ($this->seqproitem == ""?@$GLOBALS["HTTP_POST_VARS"]["seqproitem"]:$this->seqproitem);
-       $this->codproced = ($this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->seqproitem = ($this->seqproitem === 0 || $this->seqproitem === 0.0 || $this->seqproitem == ""?@$GLOBALS["HTTP_POST_VARS"]["seqproitem"]:$this->seqproitem);
+       $this->codproced = ($this->codproced === 0 || $this->codproced === 0.0 || $this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
      }else{
-       $this->seqproitem = ($this->seqproitem == ""?@$GLOBALS["HTTP_POST_VARS"]["seqproitem"]:$this->seqproitem);
+       $this->seqproitem = ($this->seqproitem === 0 || $this->seqproitem === 0.0 || $this->seqproitem == ""?@$GLOBALS["HTTP_POST_VARS"]["seqproitem"]:$this->seqproitem);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_syscadproceditem {
          $this->seqproitem = $seqproitem; 
        }
      }
-     if(($this->seqproitem == null) || ($this->seqproitem == "") ){ 
+     if(($this->seqproitem == null) || ($this->seqproitem === 0 || $this->seqproitem === 0.0 || $this->seqproitem == "") ){ 
        $this->erro_sql = " Campo seqproitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -359,7 +359,7 @@ class cl_db_syscadproceditem {
    function sql_query ( $seqproitem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -383,7 +383,7 @@ class cl_db_syscadproceditem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_db_syscadproceditem {
    function sql_query_file ( $seqproitem=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_db_syscadproceditem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

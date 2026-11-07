@@ -36,7 +36,8 @@ $cldb_syscadproced = new cl_db_syscadproced;
 $cldb_syscadproced->rotulo->label();
 
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 if(isset($retorno)) {
   $sql = "SELECT *
           FROM db_itensmenu i
@@ -82,9 +83,9 @@ if(isset($HTTP_POST_VARS["incluir"])) {
 		 '$imagem',
 		 '$temexerc')") or die("Erro(26) inserindo em db_modulos: ".pg_errormessage());
   }
-  
+
   // grava a procedencia do item
-  
+
   if(isset($codproced) && $codproced > 0){
     $sql = "insert into db_syscadproceditem values(nextval('db_syscadproceditem_seqproitem_seq'),$codproced,$id_item)";
     db_query($sql);
@@ -121,7 +122,7 @@ if(isset($HTTP_POST_VARS["incluir"])) {
     }
   }
   /////
-  
+
   if(isset($modulo_sel) && $modulo_sel == 't') {
     $result = db_query("select id_item from db_modulos where id_item = $id_item");
 	if(pg_numrows($result) > 0) {
@@ -439,8 +440,8 @@ function js_remItem(obj) {
                     <td height="25" nowrap><label for="instit" id="at7" disabled><strong>Liberado p/ Cliente:</strong></label></td>
                     <td height="25" nowrap> 
                       <select name="libcliente" size="1" id="libcliente"  style="background-color:#999999" >
-                      <option value="0" <?=(@pg_result($result,0,"libcliente")=="f"?"selected":"")?> >Não</option>
-                      <option value="1" <?=(@pg_result($result,0,"libcliente")=="t"?"selected":"")?> >Sim</option>
+                      <option value="0" <?=(@(pg_field_num($result,"libcliente") >= 0 ? pg_result($result,0,"libcliente") : false)=="f"?"selected":"")?> >Não</option>
+                      <option value="1" <?=(@(pg_field_num($result,"libcliente") >= 0 ? pg_result($result,0,"libcliente") : false)=="t"?"selected":"")?> >Sim</option>
                       </select>
                       &nbsp; </td>
                   </tr>

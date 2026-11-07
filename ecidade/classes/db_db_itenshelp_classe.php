@@ -50,7 +50,7 @@ class cl_db_itenshelp {
                  id_help = int4 = Código Help 
                  ";
    //funcao construtor da classe 
-   function cl_db_itenshelp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_itenshelp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,11 +67,11 @@ class cl_db_itenshelp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
-       $this->id_help = ($this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_help = ($this->id_help === 0 || $this->id_help === 0.0 || $this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
      }else{
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
-       $this->id_help = ($this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_help = ($this->id_help === 0 || $this->id_help === 0.0 || $this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_db_itenshelp {
       $this->atualizacampos();
        $this->id_item = $id_item; 
        $this->id_help = $id_help; 
-     if(($this->id_item == null) || ($this->id_item == "") ){ 
+     if(($this->id_item == null) || ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == "") ){ 
        $this->erro_sql = " Campo id_item nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_db_itenshelp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->id_help == null) || ($this->id_help == "") ){ 
+     if(($this->id_help == null) || ($this->id_help === 0 || $this->id_help === 0.0 || $this->id_help == "") ){ 
        $this->erro_sql = " Campo id_help nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -324,7 +324,7 @@ class cl_db_itenshelp {
    function sql_query ( $id_item=null,$id_help=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -356,7 +356,7 @@ class cl_db_itenshelp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -368,7 +368,7 @@ class cl_db_itenshelp {
    function sql_query_file ( $id_item=null,$id_help=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -397,7 +397,7 @@ class cl_db_itenshelp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

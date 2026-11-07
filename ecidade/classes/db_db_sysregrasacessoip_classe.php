@@ -54,7 +54,7 @@ class cl_db_sysregrasacessoip {
                  db48_tokenprivado = varchar(64) = Token Privado 
                  ";
    //funcao construtor da classe
-   function cl_db_sysregrasacessoip() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysregrasacessoip");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_db_sysregrasacessoip {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db48_idacesso = ($this->db48_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_idacesso"]:$this->db48_idacesso);
+       $this->db48_idacesso = ($this->db48_idacesso === 0 || $this->db48_idacesso === 0.0 || $this->db48_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_idacesso"]:$this->db48_idacesso);
        $this->db48_ip = ($this->db48_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_ip"]:$this->db48_ip);
        $this->db48_tokenpublico = ($this->db48_tokenpublico == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_tokenpublico"]:$this->db48_tokenpublico);
        $this->db48_tokenprivado = ($this->db48_tokenprivado == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_tokenprivado"]:$this->db48_tokenprivado);
      }else{
-       $this->db48_idacesso = ($this->db48_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_idacesso"]:$this->db48_idacesso);
+       $this->db48_idacesso = ($this->db48_idacesso === 0 || $this->db48_idacesso === 0.0 || $this->db48_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_idacesso"]:$this->db48_idacesso);
      }
    }
    // funcao para Inclusão
@@ -92,7 +92,7 @@ class cl_db_sysregrasacessoip {
        return false;
      }
        $this->db48_idacesso = $db48_idacesso;
-     if(($this->db48_idacesso == null) || ($this->db48_idacesso == "") ){
+     if(($this->db48_idacesso == null) || ($this->db48_idacesso === 0 || $this->db48_idacesso === 0.0 || $this->db48_idacesso == "") ){
        $this->erro_sql = " Campo db48_idacesso não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -353,7 +353,7 @@ class cl_db_sysregrasacessoip {
    function sql_query ( $db48_idacesso=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -376,7 +376,7 @@ class cl_db_sysregrasacessoip {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -388,7 +388,7 @@ class cl_db_sysregrasacessoip {
    function sql_query_file ( $db48_idacesso=null,$campos="*",$ordem=null,$dbwhere=""){
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -409,7 +409,7 @@ class cl_db_sysregrasacessoip {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -57,7 +57,7 @@ try {
       $vir           = "";
       $lTemPermissao = false;
 
-      $iItem = split("_",$oParametros->lista);
+      $iItem = preg_split("#_#m",$oParametros->lista);
       for ($i = 0; $i < sizeof($iItem); $i++) {
 
       	$sNomeUsuario            = '';

@@ -84,7 +84,7 @@ include(modification("libs/db_usuariosonline.php"));
 	// meodulos dos menus
 	$sql = "select * from db_modulo";
     $result = db_query($sql);
-	if(pg_numrows($result)!=0){
+	if(($result ? pg_numrows($result) : null)!=0){
 	  for($i=0;$i<pg_numrows($result);$i++){
 	     db_fieldsmemory($result,$i);
 	     fputs($fd,'$sql = "delete from db_modulo where id_item = '.$id_item.'";'."\n");

@@ -30,7 +30,8 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 ?>
 <html>
@@ -85,7 +86,7 @@ if (isset($qual_modulo)) {
   
   $result = db_query($sql);
   db_fieldsmemory($result,0);
-  for ($i=0; $i<pg_numrows($result); $i++) {
+  for ($i=0; $i<($result ? pg_numrows($result) : null); $i++) {
     $arqs[$i] = pg_result($result,$i,'nomearq');
   }
   
@@ -206,9 +207,9 @@ for ($i=0; $i<sizeof($arqs); $i++) {
     $sql .= "         OR has_table_privilege(c.oid, 'REFERENCES'::text))";
     $sql .= "    AND c.relname = '".trim($arqs[$i])."'";
     $sql .= "ORDER BY attnum";
-    
+
     $campo = db_query($sql);
-    
+
     /*$sql = "select *
 from db_arquivo a
 inner join db_sysarqcamp ac on a.codarq = ac.codarq
@@ -219,7 +220,7 @@ $campoc = db_query($sql);
 */
     $listaa = 0;
     for ($x=0; $x<pg_numrows($campo); $x++) {
-      
+
       $nomecam = trim(pg_result($campo,$x,'attname'));
       $sql = "select * from db_syscampo where trim(nomecam) = '$nomecam'";
       $result = db_query($sql);
@@ -262,11 +263,11 @@ $campoc = db_query($sql);
               ?>
               <td>Tipo diferente: <?=$nomecam?> banco: <?=$typen?> documentação:<?=$type?>.</td>
               <?
-              
+
               fwrite($handle, "-- TABELA: ".trim($arqs[$i])." CAMPO: $nomecam  ERRO: Tipo diferente banco: $typen  documentacao: $type\n");
               fwrite($handle, "ALTER TABLE ".trim($arqs[$i])." ALTER $nomecam TYPE $type;\n\n");
               $apaga=false;
-              
+
             }
             ?>
             </tr>
@@ -275,7 +276,7 @@ $campoc = db_query($sql);
         }
       }
     }
-    
+
     $sql = "select nomearq, nomecam, conteudo, tamanho
 from db_sysarquivo a
 inner join db_sysarqcamp ac on a.codarq = ac.codarq
@@ -283,7 +284,7 @@ inner join db_syscampo c on c.codcam = ac.codcam
 where trim(nomearq) = '".trim($arqs[$i])."'
 order by ac.seqarq";
     $campo1 = db_query($sql);
-    
+
     for ($x=0; $x<pg_numrows($campo1); $x++) {
       $tem = 0;
       for ($y=0; $y<pg_numrows($campo); $y++) {
@@ -291,7 +292,7 @@ order by ac.seqarq";
           $tem = 1;
         }
       }
-      
+
       if ($tem!=1) {
         if ($listaa==0) {
           $listaa = 1;
@@ -302,11 +303,11 @@ order by ac.seqarq";
           </tr>
           <?
         }
-        
+
         $nomecam  = trim(pg_result($campo1, $x, 'nomecam'));
         $conteudo = trim(pg_result($campo1, $x, 'conteudo'));
         $tamanho  = trim(pg_result($campo1, $x, 'tamanho'));
-        
+
         ?>
         <tr>
         <td> Campo <?=$nomecam . " - " . $conteudo . " - " . $tamanho?> não existe na base de dados.
@@ -317,11 +318,11 @@ order by ac.seqarq";
         fwrite($handle, "ALTER TABLE ".trim($arqs[$i])." ADD $nomecam $conteudo;\n\n");
         $apaga=false;
       }
-      
+
     }
-    
+
     //$imp=false;
-    
+
     $sql = "select distinct nomesequencia
 from db_sysarquivo a
 inner join db_sysarqcamp c on a.codarq = c.codarq
@@ -334,7 +335,7 @@ from pg_class
 where relname = '".pg_result($res,0,0)."'";
       $res1 = db_query($sql);
       if (pg_numrows($res1)==0) {
-        
+
         if ($imp == false) {
           $imp=true;
           ?>
@@ -345,7 +346,7 @@ where relname = '".pg_result($res,0,0)."'";
           </tr>
           <?
         }
-        
+
         $nomeseq = trim(pg_result($res,0,0));
         ?>
         <tr>
@@ -353,12 +354,12 @@ where relname = '".pg_result($res,0,0)."'";
         </td>
         </tr>
         <?
-        
+
         fwrite($handle, "-- SEQUENCIA: $nomeseq  ERRO: Nao existe na base de dados\n");
         fwrite($handle, "CREATE SEQUENCE $nomeseq;\n\n");
         $apaga=false;
-        
-        
+
+
         //exit;
       } else if (1 == 2) {
         echo "<tr>";
@@ -367,7 +368,7 @@ where relname = '".pg_result($res,0,0)."'";
         echo "</tr>";
       }
     }
-    
+
     //       select relname from pg_class inner join pg_index on indexrelid = relfilenode where indisprimary is false
     
   }

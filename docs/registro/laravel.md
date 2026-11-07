@@ -165,3 +165,40 @@ versões; `oauth_clients` muda no 13, por isso a escolha do 12.4 continua valend
 **Armadilha do instrumento:** a primeira execução deu `Invalid key supplied` nas duas versões —
 o container `ecidade_lar12` sobrepõe `storage/` com uma pasta vazia, e a chave não estava lá.
 Era o teste, não a compatibilidade. Verificador versionado: `scratchpad/valida_token.php <vendor/autoload.php> <token> <oauth-public.key>`.
+
+### 🔌 PONTOS DE CONTATO entre as telas legadas e o Laravel (03/11/2026)
+
+Medido no código, depois de sete áreas migradas. O legado **não é** separado do Laravel; ele depende de duas partes dele, de
+naturezas diferentes. O que mantém o sistema funcionando é que **tudo o que depende do stack HTTP fica no 5.6**, e o resto usa
+só o Eloquent, que roda no 8.5.
+
+| # | Ponto de contato | Parte do Laravel | Roda no 8.5? | Onde fica hoje |
+|---|---|---|---|---|
+| 1 | `libs/db_conecta.php` (e `libs/db_conecta_cli.php`): depois do `pg_connect`, sobe `Illuminate\Database\Capsule\Manager` sobre o mesmo banco | Eloquent/Capsule | **sim** | em praticamente toda tela, nos dois runtimes |
+| 2 | `src/` (framework V3 deles): **7 de 2.651** arquivos usam `Illuminate` (4 a facade `Log`, mais `Collection`, `Request`, `Capsule`) | utilitários | conforme a classe | nos dois |
+| 3 | **5 relatórios que sobem o Laravel INTEIRO dentro da página**: `require bootstrap/app.php` → `$app->make(Illuminate\Contracts\Http\Kernel::class)->handle(Illuminate\Http\Request::capture())` — `con2_lrfdivida002_2018`, `con2_lrfgarantias002_2018`, `con2_lrfresumido002_2018`, `con2_opercredito002_2018`, `con2_anexovirgf_002` | **stack HTTP** | **não** (é o que quebra no PHP 8) | **5.6** — conferido pelo proxy: nenhum no `map`, `con` fora do `location` |
+| 4 | **30 arquivos legados que chamam a API `/v4/` por JavaScript** (22 telas da raiz + `forms/db_frmarretipo002`, `forms/db_frmdb_bancos`, 4 scripts em `scripts/`, `templates/template_login_e-cidade.php`, `api/V1/Middleware/Session/MenuAcessadoSessionMiddleware.php`) | stack HTTP (rotas `/v4/*`) | não | a chamada `/v4/...` vai ao **5.6** pelo proxy, mesmo quando a página vem do 8.5 |
+| 5 | **Login**: `login.php` → `POST /v4/oauth/token` (Passport) → `abrir.php?sAuth=…` grava a sessão PHP do legado | stack HTTP + Passport | não | 5.6 |
+| 6 | **Sessão PHP** (volume `ecidade_sessions`) e **banco** compartilhados | — | — | os dois |
+
+**Passagens entre runtimes já em uso** (funcionam porque a sessão é compartilhada):
+- `con2_lrfranexoxviii011.php` (**8.5**) abre `con2_lrfresumido002_2018.php` (**5.6**, ponto 3).
+- Das 22 telas da raiz do ponto 4, **15 já são servidas pelo 8.5** e chamam `/v4/` do 5.6: `cai1_pix002`,
+  `edu1_atividadecomplementarespecial001`, `lic4_integracaocomprasbr`, `pes3_consvantagemconf002`, `pes4_importacaoponto001`,
+  `pes4_jetomcomissao`, `pes4_jetomfuncao`, `pes4_jetomprocessamento`, `pes4_jetomsessao`, `pro4_andamento_processo`,
+  `rec3_concultarconsvantagem001`, `rec3_consvantagem001`, `rec3_consvantagemdata001`, `rec3_gerarconcport001`,
+  `rec3_relatorioconcessao001`. As outras 7 ainda são servidas pelo 5.6: `con4_ecidadeinfo.RPC`, `efd4_efdreinfconfiguracao001`,
+  `pro3_consultaprocesso002`, `pro3_listamovimentacoesprocesso`, `pro3_visualizardocumentos`, `pro4_processo_externo`,
+  `pro4_processo_recadastramento_externo`.
+
+**O que isso significa para desligar o 5.6** (Fases 1/2): além do login e das 138 rotas `/v4/*`, entram na lista de
+dependências do stack HTTP **os 5 relatórios do ponto 3** (sobem o kernel na página; nenhum teste de bateria os acusaria,
+porque ficam no 5.6 e lá saem iguais) e **as 30 chamadas do ponto 4** (precisam da API `/v4/` respondendo no 8.5). O ponto 1
+já está resolvido. Reproduzir:
+
+```bash
+grep -laE 'Illuminate\\Contracts\\Http\\Kernel' ecidade/*.php                                  # ponto 3
+grep -rlaE "['\"/]v4/" --include=*.php --include=*.js ecidade \
+     --exclude-dir=vendor --exclude-dir=app --exclude-dir=tmp --exclude-dir=routes             # ponto 4
+grep -rlaE 'Illuminate' ecidade/src --include=*.php                                            # ponto 2
+```

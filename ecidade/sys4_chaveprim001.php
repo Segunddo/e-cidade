@@ -41,7 +41,7 @@ db_postmemory($_POST);
 
 $tabela = isset($HTTP_POST_VARS["tabela"]) ? $HTTP_POST_VARS["tabela"] : $tabela;
 $nomearq = db_query("select nomearq from db_sysarquivo where codarq = $tabela");
-$nomearq = pg_result($nomearq, 0, 0);
+$nomearq = ($nomearq ? pg_result($nomearq, 0, 0) : null);
 ?>
 <html>
 <head>
@@ -123,7 +123,7 @@ $nomearq = pg_result($nomearq, 0, 0);
                                 <td align="right" valign="top"><b>Nome : <b></td>
                                 <td>
                                     <?php
-                                    $numrows = pg_numrows($result);
+                                    $numrows = ($result ? pg_numrows($result) : null);
                 if ($numrows > 0) {
                     echo "<textarea name=alt_ind rows='7' cols='40'>";
                     for ($i = 0; $i < $numrows; $i++) {
@@ -147,7 +147,7 @@ $nomearq = pg_result($nomearq, 0, 0);
                     $camiden = pg_result($result, 0, "camiden");
                 }
 
-                for ($i = 0; $i < pg_numrows($resultc); $i++) {
+                for ($i = 0; $i < ($resultc ? pg_numrows($resultc) : null); $i++) {
                     echo "<option value='" . pg_result(
                         $resultc,
                         $i,
@@ -184,7 +184,7 @@ $nomearq = pg_result($nomearq, 0, 0);
                 if (isset($HTTP_POST_VARS["atualizar"])) {
                     db_postmemory($HTTP_POST_VARS);
                     db_query("BEGIN");
-                    $alt_ind = split("\r\n", $alt_ind);
+                    $alt_ind = preg_split("#\r\n#m", $alt_ind);
                     $result = db_query("delete from db_sysprikey where codarq = $tabela") or die("Erro(94) deletando db_sysprikey");
                     for ($i = 0; $i < sizeof($alt_ind) - 1; $i++) {
                         if ($alt_ind[$i] != "" && $alt_ind[$i] != " " && $alt_ind[$i] != "  ") {

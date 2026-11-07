@@ -29,8 +29,10 @@
 	require(modification("libs/db_conecta.php"));
 	include(modification("libs/db_sessoes.php"));
 	include(modification("libs/db_usuariosonline.php"));
-	parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
-	parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+	parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+    extract($__qs);
+	parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+    extract($__qs);
 	db_postmemory($HTTP_POST_VARS);
 
 if(isset($incluir)) {

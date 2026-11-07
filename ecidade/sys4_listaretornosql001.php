@@ -64,7 +64,7 @@ unset($_SESSION['sqlGerador']);
 				        <tr>
 				         <?
 				             
-				             $aCampos = array_keys($aRetornoSQL[0]);
+				             $aCampos = (is_array($aRetornoSQL[0]) ? array_keys($aRetornoSQL[0]) : null);
 	                  
 				             foreach ( $aCampos as $iInd => $sNomeCampo ) {
 			                 echo "<th class='table_header' nowrap><b>{$sNomeCampo}</b></th>";

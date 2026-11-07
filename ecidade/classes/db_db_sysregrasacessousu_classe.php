@@ -50,7 +50,7 @@ class cl_db_sysregrasacessousu {
                  db47_id_usuario = int4 = Cod. Usuário 
                  ";
    //funcao construtor da classe 
-   function cl_db_sysregrasacessousu() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysregrasacessousu"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_db_sysregrasacessousu {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db47_idacesso = ($this->db47_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_idacesso"]:$this->db47_idacesso);
-       $this->db47_id_usuario = ($this->db47_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_id_usuario"]:$this->db47_id_usuario);
+       $this->db47_idacesso = ($this->db47_idacesso === 0 || $this->db47_idacesso === 0.0 || $this->db47_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_idacesso"]:$this->db47_idacesso);
+       $this->db47_id_usuario = ($this->db47_id_usuario === 0 || $this->db47_id_usuario === 0.0 || $this->db47_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_id_usuario"]:$this->db47_id_usuario);
      }else{
-       $this->db47_idacesso = ($this->db47_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_idacesso"]:$this->db47_idacesso);
+       $this->db47_idacesso = ($this->db47_idacesso === 0 || $this->db47_idacesso === 0.0 || $this->db47_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_idacesso"]:$this->db47_idacesso);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_db_sysregrasacessousu {
        return false;
      }
        $this->db47_idacesso = $db47_idacesso; 
-     if(($this->db47_idacesso == null) || ($this->db47_idacesso == "") ){ 
+     if(($this->db47_idacesso == null) || ($this->db47_idacesso === 0 || $this->db47_idacesso === 0.0 || $this->db47_idacesso == "") ){ 
        $this->erro_sql = " Campo db47_idacesso nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_db_sysregrasacessousu {
    function sql_query ( $db47_idacesso=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -328,7 +328,7 @@ class cl_db_sysregrasacessousu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -340,7 +340,7 @@ class cl_db_sysregrasacessousu {
    function sql_query_file ( $db47_idacesso=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -361,7 +361,7 @@ class cl_db_sysregrasacessousu {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -158,7 +158,7 @@ $clrotulo->label("nome");
           //echo $clorcunidade->sql_query(null,null,null,"distinct o40_orgao,o40_descr","o40_descr",$sWhere);
           $result = $clorcunidade->sql_record($clorcunidade->sql_query(
                                              null,null,null,"distinct o40_orgao,o40_descr","o40_descr",$sWhere));
-          if (@pg_numrows($result) == 0) {
+          if (@($result ? pg_numrows($result) : null) == 0) {
             echo "<strong>Sistema não localizou nenhum orgão com unidades vinculadas na instituição selecionada!</strong>";
           } else { 
             db_selectrecord("o40_orgao",@$result,true,$db_opcao,'','','','',"js_getUnidades(this.value);");

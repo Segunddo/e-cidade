@@ -59,7 +59,7 @@ class cl_db_versao {
                  db30_obs = text = Observação da Versão/Release 
                  ";
    //funcao construtor da classe 
-   function cl_db_versao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_versao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -76,9 +76,9 @@ class cl_db_versao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db30_codver = ($this->db30_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_codver"]:$this->db30_codver);
-       $this->db30_codversao = ($this->db30_codversao == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_codversao"]:$this->db30_codversao);
-       $this->db30_codrelease = ($this->db30_codrelease == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_codrelease"]:$this->db30_codrelease);
+       $this->db30_codver = ($this->db30_codver === 0 || $this->db30_codver === 0.0 || $this->db30_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_codver"]:$this->db30_codver);
+       $this->db30_codversao = ($this->db30_codversao === 0 || $this->db30_codversao === 0.0 || $this->db30_codversao == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_codversao"]:$this->db30_codversao);
+       $this->db30_codrelease = ($this->db30_codrelease === 0 || $this->db30_codrelease === 0.0 || $this->db30_codrelease == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_codrelease"]:$this->db30_codrelease);
        if($this->db30_data == ""){
          $this->db30_data_dia = ($this->db30_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_data_dia"]:$this->db30_data_dia);
          $this->db30_data_mes = ($this->db30_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_data_mes"]:$this->db30_data_mes);
@@ -89,7 +89,7 @@ class cl_db_versao {
        }
        $this->db30_obs = ($this->db30_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_obs"]:$this->db30_obs);
      }else{
-       $this->db30_codver = ($this->db30_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_codver"]:$this->db30_codver);
+       $this->db30_codver = ($this->db30_codver === 0 || $this->db30_codver === 0.0 || $this->db30_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db30_codver"]:$this->db30_codver);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_db_versao {
          $this->db30_codver = $db30_codver; 
        }
      }
-     if(($this->db30_codver == null) || ($this->db30_codver == "") ){ 
+     if(($this->db30_codver == null) || ($this->db30_codver === 0 || $this->db30_codver === 0.0 || $this->db30_codver == "") ){ 
        $this->erro_sql = " Campo db30_codver nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -41,7 +41,8 @@ include(modification("libs/db_usuariosonline.php"));
 </head>
 <body bgcolor=#CCCCCC leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="a=1" >
 <?
-  parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+  parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+  extract($__qs);
   // Tabelas
 
   $sql = "select nomearq as nometab, tipotabela
@@ -367,7 +368,7 @@ include(modification("libs/db_usuariosonline.php"));
 	      fputs($fd3, '  $db_opcao = 3;' . "\n");
 	      fputs($fd3, '  $db_botao = true;' . "\n");
 	      fputs($fd3, '  $result   = $oDao' . ucfirst($sNomeArquivo) . '->sql_record( $oDao' . ucfirst($sNomeArquivo) . '->sql_query($chavepesquisa');
-		      
+
 	      if (pg_numrows($pk) > 1) {
 
 					$Npk = pg_numrows($pk);
@@ -391,7 +392,7 @@ include(modification("libs/db_usuariosonline.php"));
 
 	      fputs($fd3, "include(modification(\"forms/db_frm{$sNomeArquivo}.php\"));\n");
 	      fputs($fd3, "?>\n");
-	      
+
 		      // fim dos java scripts
 		  }
 	  }

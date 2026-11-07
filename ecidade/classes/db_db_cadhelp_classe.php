@@ -54,7 +54,7 @@ class cl_db_cadhelp {
                  dhelp = text = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_db_cadhelp() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_cadhelp"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_db_cadhelp {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_help = ($this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
-       $this->id_codtipo = ($this->id_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["id_codtipo"]:$this->id_codtipo);
+       $this->id_help = ($this->id_help === 0 || $this->id_help === 0.0 || $this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
+       $this->id_codtipo = ($this->id_codtipo === 0 || $this->id_codtipo === 0.0 || $this->id_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["id_codtipo"]:$this->id_codtipo);
        $this->dhelp_resum = ($this->dhelp_resum == ""?@$GLOBALS["HTTP_POST_VARS"]["dhelp_resum"]:$this->dhelp_resum);
        $this->dhelp = ($this->dhelp == ""?@$GLOBALS["HTTP_POST_VARS"]["dhelp"]:$this->dhelp);
      }else{
-       $this->id_help = ($this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
+       $this->id_help = ($this->id_help === 0 || $this->id_help === 0.0 || $this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_db_cadhelp {
          $this->id_help = $id_help; 
        }
      }
-     if(($this->id_help == null) || ($this->id_help == "") ){ 
+     if(($this->id_help == null) || ($this->id_help === 0 || $this->id_help === 0.0 || $this->id_help == "") ){ 
        $this->erro_sql = " Campo id_help nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -396,7 +396,7 @@ class cl_db_cadhelp {
    function sql_query ( $id_help=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -420,7 +420,7 @@ class cl_db_cadhelp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -432,7 +432,7 @@ class cl_db_cadhelp {
    function sql_query_file ( $id_help=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -453,7 +453,7 @@ class cl_db_cadhelp {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

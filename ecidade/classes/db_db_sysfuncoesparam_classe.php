@@ -64,7 +64,7 @@ class cl_db_sysfuncoesparam {
                  db42_descricao = text = Descrição 
                  ";
    //funcao construtor da classe 
-   function cl_db_sysfuncoesparam() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_sysfuncoesparam"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -81,17 +81,17 @@ class cl_db_sysfuncoesparam {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db42_sysfuncoesparam = ($this->db42_sysfuncoesparam == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_sysfuncoesparam"]:$this->db42_sysfuncoesparam);
-       $this->db42_funcao = ($this->db42_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_funcao"]:$this->db42_funcao);
-       $this->db42_ordem = ($this->db42_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_ordem"]:$this->db42_ordem);
+       $this->db42_sysfuncoesparam = ($this->db42_sysfuncoesparam === 0 || $this->db42_sysfuncoesparam === 0.0 || $this->db42_sysfuncoesparam == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_sysfuncoesparam"]:$this->db42_sysfuncoesparam);
+       $this->db42_funcao = ($this->db42_funcao === 0 || $this->db42_funcao === 0.0 || $this->db42_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_funcao"]:$this->db42_funcao);
+       $this->db42_ordem = ($this->db42_ordem === 0 || $this->db42_ordem === 0.0 || $this->db42_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_ordem"]:$this->db42_ordem);
        $this->db42_nome = ($this->db42_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_nome"]:$this->db42_nome);
        $this->db42_tipo = ($this->db42_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_tipo"]:$this->db42_tipo);
-       $this->db42_tamanho = ($this->db42_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_tamanho"]:$this->db42_tamanho);
-       $this->db42_precisao = ($this->db42_precisao == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_precisao"]:$this->db42_precisao);
+       $this->db42_tamanho = ($this->db42_tamanho === 0 || $this->db42_tamanho === 0.0 || $this->db42_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_tamanho"]:$this->db42_tamanho);
+       $this->db42_precisao = ($this->db42_precisao === 0 || $this->db42_precisao === 0.0 || $this->db42_precisao == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_precisao"]:$this->db42_precisao);
        $this->db42_valor_default = ($this->db42_valor_default == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_valor_default"]:$this->db42_valor_default);
        $this->db42_descricao = ($this->db42_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_descricao"]:$this->db42_descricao);
      }else{
-       $this->db42_sysfuncoesparam = ($this->db42_sysfuncoesparam == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_sysfuncoesparam"]:$this->db42_sysfuncoesparam);
+       $this->db42_sysfuncoesparam = ($this->db42_sysfuncoesparam === 0 || $this->db42_sysfuncoesparam === 0.0 || $this->db42_sysfuncoesparam == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_sysfuncoesparam"]:$this->db42_sysfuncoesparam);
      }
    }
    // funcao para inclusao
@@ -172,7 +172,7 @@ class cl_db_sysfuncoesparam {
          $this->db42_sysfuncoesparam = $db42_sysfuncoesparam; 
        }
      }
-     if(($this->db42_sysfuncoesparam == null) || ($this->db42_sysfuncoesparam == "") ){ 
+     if(($this->db42_sysfuncoesparam == null) || ($this->db42_sysfuncoesparam === 0 || $this->db42_sysfuncoesparam === 0.0 || $this->db42_sysfuncoesparam == "") ){ 
        $this->erro_sql = " Campo db42_sysfuncoesparam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -503,7 +503,7 @@ class cl_db_sysfuncoesparam {
    function sql_query ( $db42_sysfuncoesparam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -525,7 +525,7 @@ class cl_db_sysfuncoesparam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -537,7 +537,7 @@ class cl_db_sysfuncoesparam {
    function sql_query_file ( $db42_sysfuncoesparam=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -558,7 +558,7 @@ class cl_db_sysfuncoesparam {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

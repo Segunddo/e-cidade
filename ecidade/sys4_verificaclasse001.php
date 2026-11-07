@@ -99,7 +99,7 @@ if(isset($verifica)){
 			while ((($file = readdir($dh)) !== false) ){
 				$tipo = filetype($dir . $file);
 				if($tipo=='file'){
-					$arr = split("_", $file);
+					$arr = preg_split("#_#m", $file);
 					$count = count($arr);
 					//pega somente db_* _classe.php
 					if($arr[0]=="db" and $arr[$count-1]=="classe.php" and $count >= 3 ){
@@ -116,7 +116,7 @@ if(isset($verifica)){
 							$funcao = strstr($linha, 'function');
 							if($funcao!=""){
 								//echo "$funcao <br>";
-								$arrfunc = split(" ", $funcao);
+								$arrfunc = preg_split("# #m", $funcao);
 								if(isset($arrfunc[1])){
 								// se não for incluir, alterar, excluir,sql_query,sql_query_file
 								if(    ($arrfunc[1]!="incluir")
@@ -160,27 +160,27 @@ if(isset($verifica)){
 													$resulttab = db_query($sqltab);
 													$linhatab = pg_numrows($resulttab);
 													if($linhatab>0){
-														
+
 														db_fieldsmemory($resulttab,0);
 														$codigo = $codarq;
-													
+
 														// para o metodo tenho que tirar o "(" das funções xxx(
 														$met="";
 														$pos = strpos($arrfunc[1], "(");
 														if ($pos == false) {
 															$met =$arrfunc[1];
-															
+
 														}else{
-															$metodo = split("\(", $arrfunc[1]);
+															$metodo = preg_split("#\\(#m", $arrfunc[1]);
 															$met = $metodo[0];
-															
+
 														}
-														
+
 														//print_r($metodo);
-	
+
 														// para ver se ja tem cadastrado no banco
 														$sql = "select * from db_sysclasses where codarq = $codigo and nomclasse = '$met'";
-	
+
 														// ver tabela db_sysclasses
 														$result = db_query($sql);
 														$linhasres = pg_num_rows($result);
@@ -193,7 +193,7 @@ if(isset($verifica)){
 															$operacao = "Incluir";
 															$codigoclass ="Não tem ";
 														}
-													
+
 													//$operacao
 													$fonteorig = "";
 													$codarq = $codigo;
@@ -227,7 +227,7 @@ if(isset($verifica)){
 														fonte novo = $fontenovo<br>
 														fonte original = $fonteorig<br><br>
 														";*/
-														
+
 
 												}
 											}

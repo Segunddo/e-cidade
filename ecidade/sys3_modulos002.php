@@ -28,7 +28,8 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs);
+extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 //phpinfo();
@@ -156,7 +157,7 @@ for($i = 0;$i < pg_numrows($result);$i++){
                $virgula = ', '; 
                $prinome = $nomeind;
            }
-           $matrizind = split('#',$xnome);
+           $matrizind = preg_split('#\##m',$xnome);
            $pdf->multicell(0,4,'Índices do arquivo : ',0,"L",$preenc);
 
            for( $xind = 0 ;$xind < sizeof($matrizind); $xind++ ){

@@ -41,7 +41,7 @@ foreach ($queryString as $key => $value) {
 
 $tabela = isset($HTTP_POST_VARS["tabela"]) ? $HTTP_POST_VARS["tabela"] : $tabela;
 $nomearq = db_query("select nomearq from db_sysarquivo where codarq = $tabela");
-$nomearq = pg_result($nomearq, 0, 0);
+$nomearq = ($nomearq ? pg_result($nomearq, 0, 0) : null);
 
 ?>
 <!doctype html>
@@ -137,7 +137,7 @@ $nomearq = pg_result($nomearq, 0, 0);
                                            value="unico"
                                         <?php
 
-                                        echo @pg_result($result, 0, "campounico") == "0" ||
+                                        echo @(pg_field_num($result,"campounico") >= 0 ? pg_result($result, 0, "campounico") : false) == "0" ||
                                         @pg_result($result, 0, "campounico") == ""
                                             ? ""
                                             : "checked"; ?>
@@ -174,7 +174,7 @@ $nomearq = pg_result($nomearq, 0, 0);
                            from db_sysindices 
                            where nomeind = '$nome_ind'") or die("Erro(97) selecionando db_sysindices");
                         $ind = pg_result($result, 0, 0);
-                        $alt_ind = split("\r\n", $alt_ind);
+                        $alt_ind = preg_split("#\r\n#m", $alt_ind);
                         for ($i = 0; $i < sizeof($alt_ind) - 1; $i++) {
                             if ($alt_ind[$i] != "" && $alt_ind[$i] != " " && $alt_ind[$i] != "  ") {
                                 $alt_ind[$i] = trim(str_replace("#", "", $alt_ind[$i]));
@@ -194,7 +194,7 @@ $nomearq = pg_result($nomearq, 0, 0);
                         db_query("BEGIN");
                         db_query("update db_sysindices set nomeind = '$nome_ind',campounico = '$campounico' where codind = $ind") or die("Erro(111) atualizando db_sysindices");
                         db_query("delete from db_syscadind where codind = $ind") or die("Erro(112) excluindo db_syscadind");
-                        $alt_ind = split("\r\n", $alt_ind);
+                        $alt_ind = preg_split("#\r\n#m", $alt_ind);
                         for ($i = 0; $i < sizeof($alt_ind) - 1; $i++) {
                             if ($alt_ind[$i] != "" && $alt_ind[$i] != " " && $alt_ind[$i] != "  ") {
                                 $result = db_query("

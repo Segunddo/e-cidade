@@ -98,7 +98,7 @@ if (isset($tabelacod)) {
                        where ar.codarq = $tabela
                        order by ar.seqarq");
             $nometab = db_query("select nomearq from db_sysarquivo where codarq = $tabela");
-            $nometab = pg_result($nometab, 0, 0);
+            $nometab = ($nometab ? pg_result($nometab, 0, 0) : null);
             ?><br>
             <h3>Tabela: <?= $tabela . " - " . $nometab ?></h3><br>
             <?php
@@ -130,7 +130,7 @@ if (isset($tabelacod)) {
                 $cor1 = "#FEA27A";
                 $cor2 = "#FFDBBF";
                 $cor = "";
-                $numrows = pg_numrows($result);
+                $numrows = ($result ? pg_numrows($result) : null);
                 for ($i = 0; $i < $numrows; $i++) {
                     db_fieldsmemory($result, $i);
                     echo "<tr bgcolor=\"" . ($cor = $cor == $cor1 ? $cor2 : $cor1) . "\">\n";
@@ -169,7 +169,7 @@ if (isset($tabelacod)) {
                 echo "<strong>Chave Primária:</strong>\n";
             }
 
-            $numrows = pg_numrows($result);
+            $numrows = ($result ? pg_numrows($result) : null);
             if ($numrows == 0) {
                 echo "Sem chave primaria\n";
             } else {
@@ -185,7 +185,7 @@ if (isset($tabelacod)) {
                        from db_sysforkey 
                        where codarq = $tabela
                        group by(referen)");
-            $numrows = pg_numrows($result);
+            $numrows = ($result ? pg_numrows($result) : null);
             echo "<table border=\"0\">\n";
             if ($numrows == 0) {
                 if (isset($tabelacod)) {
@@ -234,7 +234,7 @@ if (isset($tabelacod)) {
                        from db_sysindices
                        where codarq = $tabela");
             echo "<table>\n";
-            $numrows = pg_numrows($result);
+            $numrows = ($result ? pg_numrows($result) : null);
             if ($numrows == 0) {
                 if (isset($tabelacod)) {
                     echo "<tr><td><a href=\"sys4_indices001.php?" . base64_encode("tabela=$tabela") . "\">Indices:</a></td><td>Sem Indice</td></tr>\n";

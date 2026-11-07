@@ -50,7 +50,8 @@ $db_opcao = 1;
 $db_botao = true;
 
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 function gera($codigo,$tipo,$ni=1){
         global $codcam,$codcampai,$cldb_syscampodep,$cldb_syscampo,$rotulorel,$rotulo,$nomecam,$cldb_sysarqcamp,$nomearq;
         //rotina que pega os dados do campo  

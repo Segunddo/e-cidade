@@ -54,7 +54,7 @@ if(isset($incluir)){
   //final
 
   //rotina pra incluir na tabela db_estruturanivel
-    $matriz = split("\.",$db77_estrut);
+    $matriz = preg_split("#\\.#m",$db77_estrut);
     $tam = sizeof($matriz);
     $ini=0;
     for($i=0; $i<$tam; $i++){

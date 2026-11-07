@@ -30,7 +30,8 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs);
+extract($__qs);
 if(isset($retorno)) {
   $sql = "select codmodelo,nomemodelo,orientacao
           from db_carnesimg
@@ -45,7 +46,7 @@ if(isset($HTTP_POST_VARS["incluir"])) {
   $result = db_query("select max(codmodelo) + 1 from db_carnesimg");
   $codigo = pg_result($result,0,0);
   $codigo = $codigo == ""?"1":$codigo;
-  
+
   db_query("begin");
   if($formulario==0){
     $oid = pg_loimport($tmp_name) or die("Erro(15) importando imagem");

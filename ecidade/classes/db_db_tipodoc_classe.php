@@ -50,7 +50,7 @@ class cl_db_tipodoc {
                  db08_descr = varchar(40) = Descrição do tipo de documento 
                  ";
    //funcao construtor da classe 
-   function cl_db_tipodoc() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_tipodoc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -67,10 +67,10 @@ class cl_db_tipodoc {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db08_codigo = ($this->db08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db08_codigo"]:$this->db08_codigo);
+       $this->db08_codigo = ($this->db08_codigo === 0 || $this->db08_codigo === 0.0 || $this->db08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db08_codigo"]:$this->db08_codigo);
        $this->db08_descr = ($this->db08_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db08_descr"]:$this->db08_descr);
      }else{
-       $this->db08_codigo = ($this->db08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db08_codigo"]:$this->db08_codigo);
+       $this->db08_codigo = ($this->db08_codigo === 0 || $this->db08_codigo === 0.0 || $this->db08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db08_codigo"]:$this->db08_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_db_tipodoc {
        return false;
      }
        $this->db08_codigo = $db08_codigo; 
-     if(($this->db08_codigo == null) || ($this->db08_codigo == "") ){ 
+     if(($this->db08_codigo == null) || ($this->db08_codigo === 0 || $this->db08_codigo === 0.0 || $this->db08_codigo == "") ){ 
        $this->erro_sql = " Campo db08_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -305,7 +305,7 @@ class cl_db_tipodoc {
    function sql_query ( $db08_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -326,7 +326,7 @@ class cl_db_tipodoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -338,7 +338,7 @@ class cl_db_tipodoc {
    function sql_query_file ( $db08_codigo=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -359,7 +359,7 @@ class cl_db_tipodoc {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

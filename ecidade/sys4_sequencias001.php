@@ -44,7 +44,7 @@ if(isset($HTTP_POST_VARS["atualizar"])) {
     db_query("END");
     db_redireciona();	
   } else {
-    $aux = split("#",$campos);
+    $aux = preg_split("#\\##m",$campos);
     $codcampo = $aux[0];
     $nomecampo = $aux[2];
     if($nomesequencia=="")

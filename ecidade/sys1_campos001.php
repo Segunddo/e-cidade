@@ -82,7 +82,7 @@ if(isset($HTTP_POST_VARS["incluir"])) {
   if($tamanho == "") {
     $tamanho = 0;
   }
-  
+
   if(isset($vnulo)) $nulo = 't';
   else $nulo = 'f';
   if(isset($vmaiusculo)) $maiusculo = 't';
@@ -121,7 +121,7 @@ if(isset($HTTP_POST_VARS["incluir"])) {
       if(isset($itensdef)){
 	$numArray = sizeof($itensdef);
 	for($i = 0;$i < $numArray;$i++) {
-	  $aux = split("#&",$itensdef[$i]);
+	  $aux = preg_split("#\\#&#m",$itensdef[$i]);
 	      db_query("insert into db_syscampodef values(".$codcam.",'".$aux[0]."','".$aux[1]."')") or die("Erro(44) inserindo em db_syscampodef");
 	}
       }
@@ -170,7 +170,7 @@ if(isset($HTTP_POST_VARS["incluir"])) {
   } 
 
   $pode_ir=true;
-  
+
   $result05 = db_query("select codcam as codcamal from db_syscampo where nomecam ='$nomecam'");
   $numrows = @pg_num_rows($result);
   if($numrows>0){
@@ -205,7 +205,7 @@ if(isset($HTTP_POST_VARS["incluir"])) {
     if(isset($itensdef)){
       $numArray = sizeof($itensdef);
       for($i = 0;$i < $numArray;$i++) {
-	$aux = split("#&",$itensdef[$i]);
+	$aux = preg_split("#\\#&#m",$itensdef[$i]);
 	    db_query("insert into db_syscampodef values(".$codcam.",'".$aux[0]."','".$aux[1]."')") or die("Erro(44) inserindo em db_syscampodef");
       }
     }
@@ -459,10 +459,10 @@ input {
             <td width="302"> <input type="text" name="nomecam" value="<?=@$nomecam?>"> 
               <?
 	  if(isset($conteudo)) {
-	    $v_tipo = split('\(',$conteudo);
+	    $v_tipo = preg_split('#\(#m',$conteudo);
 		$conteudo = $v_tipo[0];
 		if(isset($v_tipo[1])){
-		    $v = split("\)",$v_tipo[1]);
+		    $v = preg_split("#\\)#m",$v_tipo[1]);
 		}else{
 		  $v = "";
 		}

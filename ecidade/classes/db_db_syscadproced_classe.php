@@ -56,7 +56,7 @@ class cl_db_syscadproced {
                  codarea = int4 = Área 
                  ";
    //funcao construtor da classe 
-   function cl_db_syscadproced() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("db_syscadproced"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_db_syscadproced {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codproced = ($this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
+       $this->codproced = ($this->codproced === 0 || $this->codproced === 0.0 || $this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
        $this->descrproced = ($this->descrproced == ""?@$GLOBALS["HTTP_POST_VARS"]["descrproced"]:$this->descrproced);
        $this->obsproced = ($this->obsproced == ""?@$GLOBALS["HTTP_POST_VARS"]["obsproced"]:$this->obsproced);
-       $this->codmod = ($this->codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["codmod"]:$this->codmod);
-       $this->codarea = ($this->codarea == ""?@$GLOBALS["HTTP_POST_VARS"]["codarea"]:$this->codarea);
+       $this->codmod = ($this->codmod === 0 || $this->codmod === 0.0 || $this->codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["codmod"]:$this->codmod);
+       $this->codarea = ($this->codarea === 0 || $this->codarea === 0.0 || $this->codarea == ""?@$GLOBALS["HTTP_POST_VARS"]["codarea"]:$this->codarea);
      }else{
-       $this->codproced = ($this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
+       $this->codproced = ($this->codproced === 0 || $this->codproced === 0.0 || $this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_db_syscadproced {
          $this->codproced = $codproced; 
        }
      }
-     if(($this->codproced == null) || ($this->codproced == "") ){ 
+     if(($this->codproced == null) || ($this->codproced === 0 || $this->codproced === 0.0 || $this->codproced == "") ){ 
        $this->erro_sql = " Campo codproced nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -421,7 +421,7 @@ class cl_db_syscadproced {
    function sql_query ( $codproced=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -444,7 +444,7 @@ class cl_db_syscadproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -456,7 +456,7 @@ class cl_db_syscadproced {
    function sql_query_file ( $codproced=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -477,7 +477,7 @@ class cl_db_syscadproced {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
