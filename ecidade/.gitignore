@@ -3,6 +3,7 @@
 /cache
 /extension/data
 /extension/modification/log
+/extension/modification/data/cache
 /extension/log
 
 config/application.php
