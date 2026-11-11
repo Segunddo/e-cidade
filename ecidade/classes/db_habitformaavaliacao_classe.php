@@ -62,7 +62,7 @@ class cl_habitformaavaliacao {
                  ht07_datafinal = date = Data Final 
                  ";
    //funcao construtor da classe 
-   function cl_habitformaavaliacao() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("habitformaavaliacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -79,7 +79,7 @@ class cl_habitformaavaliacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ht07_sequencial = ($this->ht07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht07_sequencial"]:$this->ht07_sequencial);
+       $this->ht07_sequencial = ($this->ht07_sequencial === 0 || $this->ht07_sequencial === 0.0 || $this->ht07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht07_sequencial"]:$this->ht07_sequencial);
        $this->ht07_descricao = ($this->ht07_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht07_descricao"]:$this->ht07_descricao);
        $this->ht07_obs = ($this->ht07_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ht07_obs"]:$this->ht07_obs);
        if($this->ht07_datainicial == ""){
@@ -99,7 +99,7 @@ class cl_habitformaavaliacao {
          }
        }
      }else{
-       $this->ht07_sequencial = ($this->ht07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht07_sequencial"]:$this->ht07_sequencial);
+       $this->ht07_sequencial = ($this->ht07_sequencial === 0 || $this->ht07_sequencial === 0.0 || $this->ht07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht07_sequencial"]:$this->ht07_sequencial);
      }
    }
    // funcao para inclusao
@@ -144,7 +144,7 @@ class cl_habitformaavaliacao {
          $this->ht07_sequencial = $ht07_sequencial; 
        }
      }
-     if(($this->ht07_sequencial == null) || ($this->ht07_sequencial == "") ){ 
+     if(($this->ht07_sequencial == null) || ($this->ht07_sequencial === 0 || $this->ht07_sequencial === 0.0 || $this->ht07_sequencial == "") ){ 
        $this->erro_sql = " Campo ht07_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -404,7 +404,7 @@ class cl_habitformaavaliacao {
    function sql_query ( $ht07_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -425,7 +425,7 @@ class cl_habitformaavaliacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -438,7 +438,7 @@ class cl_habitformaavaliacao {
    function sql_query_file ( $ht07_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_habitformaavaliacao {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

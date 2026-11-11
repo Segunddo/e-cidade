@@ -54,7 +54,7 @@ class cl_habitcandidatointeresseprograma {
                  ht13_codproc = int4 = Processo 
                  ";
    //funcao construtor da classe 
-   function cl_habitcandidatointeresseprograma() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("habitcandidatointeresseprograma"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_habitcandidatointeresseprograma {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ht13_sequencial = ($this->ht13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht13_sequencial"]:$this->ht13_sequencial);
-       $this->ht13_habitprograma = ($this->ht13_habitprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht13_habitprograma"]:$this->ht13_habitprograma);
-       $this->ht13_habitcandidatointeresse = ($this->ht13_habitcandidatointeresse == ""?@$GLOBALS["HTTP_POST_VARS"]["ht13_habitcandidatointeresse"]:$this->ht13_habitcandidatointeresse);
-       $this->ht13_codproc = ($this->ht13_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ht13_codproc"]:$this->ht13_codproc);
+       $this->ht13_sequencial = ($this->ht13_sequencial === 0 || $this->ht13_sequencial === 0.0 || $this->ht13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht13_sequencial"]:$this->ht13_sequencial);
+       $this->ht13_habitprograma = ($this->ht13_habitprograma === 0 || $this->ht13_habitprograma === 0.0 || $this->ht13_habitprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht13_habitprograma"]:$this->ht13_habitprograma);
+       $this->ht13_habitcandidatointeresse = ($this->ht13_habitcandidatointeresse === 0 || $this->ht13_habitcandidatointeresse === 0.0 || $this->ht13_habitcandidatointeresse == ""?@$GLOBALS["HTTP_POST_VARS"]["ht13_habitcandidatointeresse"]:$this->ht13_habitcandidatointeresse);
+       $this->ht13_codproc = ($this->ht13_codproc === 0 || $this->ht13_codproc === 0.0 || $this->ht13_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ht13_codproc"]:$this->ht13_codproc);
      }else{
-       $this->ht13_sequencial = ($this->ht13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht13_sequencial"]:$this->ht13_sequencial);
+       $this->ht13_sequencial = ($this->ht13_sequencial === 0 || $this->ht13_sequencial === 0.0 || $this->ht13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht13_sequencial"]:$this->ht13_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_habitcandidatointeresseprograma {
          $this->ht13_sequencial = $ht13_sequencial; 
        }
      }
-     if(($this->ht13_sequencial == null) || ($this->ht13_sequencial == "") ){ 
+     if(($this->ht13_sequencial == null) || ($this->ht13_sequencial === 0 || $this->ht13_sequencial === 0.0 || $this->ht13_sequencial == "") ){ 
        $this->erro_sql = " Campo ht13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -391,7 +391,7 @@ class cl_habitcandidatointeresseprograma {
    function sql_query ( $ht13_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_habitcandidatointeresseprograma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -429,7 +429,7 @@ class cl_habitcandidatointeresseprograma {
    function sql_query_file ( $ht13_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -450,7 +450,7 @@ class cl_habitcandidatointeresseprograma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

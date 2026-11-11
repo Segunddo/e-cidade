@@ -66,7 +66,7 @@ class cl_habitgrupoprograma {
                  ht03_resppagamento = int4 = Responsável Pagamento 
                  ";
    //funcao construtor da classe 
-   function cl_habitgrupoprograma() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("habitgrupoprograma"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -83,8 +83,8 @@ class cl_habitgrupoprograma {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ht03_sequencial = ($this->ht03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht03_sequencial"]:$this->ht03_sequencial);
-       $this->ht03_habittipogrupoprograma = ($this->ht03_habittipogrupoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht03_habittipogrupoprograma"]:$this->ht03_habittipogrupoprograma);
+       $this->ht03_sequencial = ($this->ht03_sequencial === 0 || $this->ht03_sequencial === 0.0 || $this->ht03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht03_sequencial"]:$this->ht03_sequencial);
+       $this->ht03_habittipogrupoprograma = ($this->ht03_habittipogrupoprograma === 0 || $this->ht03_habittipogrupoprograma === 0.0 || $this->ht03_habittipogrupoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht03_habittipogrupoprograma"]:$this->ht03_habittipogrupoprograma);
        $this->ht03_descricao = ($this->ht03_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht03_descricao"]:$this->ht03_descricao);
        $this->ht03_obs = ($this->ht03_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ht03_obs"]:$this->ht03_obs);
        if($this->ht03_datainicial == ""){
@@ -103,9 +103,9 @@ class cl_habitgrupoprograma {
             $this->ht03_datafinal = $this->ht03_datafinal_ano."-".$this->ht03_datafinal_mes."-".$this->ht03_datafinal_dia;
          }
        }
-       $this->ht03_resppagamento = ($this->ht03_resppagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht03_resppagamento"]:$this->ht03_resppagamento);
+       $this->ht03_resppagamento = ($this->ht03_resppagamento === 0 || $this->ht03_resppagamento === 0.0 || $this->ht03_resppagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht03_resppagamento"]:$this->ht03_resppagamento);
      }else{
-       $this->ht03_sequencial = ($this->ht03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht03_sequencial"]:$this->ht03_sequencial);
+       $this->ht03_sequencial = ($this->ht03_sequencial === 0 || $this->ht03_sequencial === 0.0 || $this->ht03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht03_sequencial"]:$this->ht03_sequencial);
      }
    }
    // funcao para inclusao
@@ -168,7 +168,7 @@ class cl_habitgrupoprograma {
          $this->ht03_sequencial = $ht03_sequencial; 
        }
      }
-     if(($this->ht03_sequencial == null) || ($this->ht03_sequencial == "") ){ 
+     if(($this->ht03_sequencial == null) || ($this->ht03_sequencial === 0 || $this->ht03_sequencial === 0.0 || $this->ht03_sequencial == "") ){ 
        $this->erro_sql = " Campo ht03_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -466,7 +466,7 @@ class cl_habitgrupoprograma {
    function sql_query ( $ht03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -488,7 +488,7 @@ class cl_habitgrupoprograma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -501,7 +501,7 @@ class cl_habitgrupoprograma {
    function sql_query_file ( $ht03_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -522,7 +522,7 @@ class cl_habitgrupoprograma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

@@ -31,7 +31,8 @@ require_once(modification("libs/JSON.php"));
 require_once(modification("libs/db_utils.php"));
 require_once(modification("std/db_stdClass.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs);
+extract($__qs);
 
 $sDataInicial    = implode("-", array_reverse(explode("/",$sDataA)));
 $sDataFinal      = implode("-", array_reverse(explode("/",$sDataB)));

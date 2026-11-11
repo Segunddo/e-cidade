@@ -43,7 +43,7 @@ class FamiliaRepository {
    * Retorna a Instacia do Repostory
    * @return FamiliaRepository
    */
-  protected function getInstance() {
+  protected static function getInstance() {
     
     if (self::$oInstance == null) {
       self::$oInstance = new FamiliaRepository();

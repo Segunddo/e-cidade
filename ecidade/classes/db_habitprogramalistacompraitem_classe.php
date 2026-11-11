@@ -56,7 +56,7 @@ class cl_habitprogramalistacompraitem {
                  ht18_quantidade = float4 = Quantidade 
                  ";
    //funcao construtor da classe 
-   function cl_habitprogramalistacompraitem() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("habitprogramalistacompraitem"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,13 +73,13 @@ class cl_habitprogramalistacompraitem {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ht18_sequencial = ($this->ht18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_sequencial"]:$this->ht18_sequencial);
-       $this->ht18_habitprogramalistacompra = ($this->ht18_habitprogramalistacompra == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_habitprogramalistacompra"]:$this->ht18_habitprogramalistacompra);
-       $this->ht18_matunid = ($this->ht18_matunid == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_matunid"]:$this->ht18_matunid);
-       $this->ht18_pcmater = ($this->ht18_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_pcmater"]:$this->ht18_pcmater);
-       $this->ht18_quantidade = ($this->ht18_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_quantidade"]:$this->ht18_quantidade);
+       $this->ht18_sequencial = ($this->ht18_sequencial === 0 || $this->ht18_sequencial === 0.0 || $this->ht18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_sequencial"]:$this->ht18_sequencial);
+       $this->ht18_habitprogramalistacompra = ($this->ht18_habitprogramalistacompra === 0 || $this->ht18_habitprogramalistacompra === 0.0 || $this->ht18_habitprogramalistacompra == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_habitprogramalistacompra"]:$this->ht18_habitprogramalistacompra);
+       $this->ht18_matunid = ($this->ht18_matunid === 0 || $this->ht18_matunid === 0.0 || $this->ht18_matunid == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_matunid"]:$this->ht18_matunid);
+       $this->ht18_pcmater = ($this->ht18_pcmater === 0 || $this->ht18_pcmater === 0.0 || $this->ht18_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_pcmater"]:$this->ht18_pcmater);
+       $this->ht18_quantidade = ($this->ht18_quantidade === 0 || $this->ht18_quantidade === 0.0 || $this->ht18_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_quantidade"]:$this->ht18_quantidade);
      }else{
-       $this->ht18_sequencial = ($this->ht18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_sequencial"]:$this->ht18_sequencial);
+       $this->ht18_sequencial = ($this->ht18_sequencial === 0 || $this->ht18_sequencial === 0.0 || $this->ht18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht18_sequencial"]:$this->ht18_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_habitprogramalistacompraitem {
          $this->ht18_sequencial = $ht18_sequencial; 
        }
      }
-     if(($this->ht18_sequencial == null) || ($this->ht18_sequencial == "") ){ 
+     if(($this->ht18_sequencial == null) || ($this->ht18_sequencial === 0 || $this->ht18_sequencial === 0.0 || $this->ht18_sequencial == "") ){ 
        $this->erro_sql = " Campo ht18_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -422,7 +422,7 @@ class cl_habitprogramalistacompraitem {
    function sql_query ( $ht18_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -446,7 +446,7 @@ class cl_habitprogramalistacompraitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -459,7 +459,7 @@ class cl_habitprogramalistacompraitem {
    function sql_query_file ( $ht18_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -480,7 +480,7 @@ class cl_habitprogramalistacompraitem {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

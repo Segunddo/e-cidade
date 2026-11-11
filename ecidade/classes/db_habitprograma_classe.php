@@ -86,7 +86,7 @@ class cl_habitprograma {
                  ht01_workflow = int4 = Código Work Flow 
                  ";
    //funcao construtor da classe 
-   function cl_habitprograma() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("habitprograma"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -103,12 +103,12 @@ class cl_habitprograma {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ht01_sequencial = ($this->ht01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_sequencial"]:$this->ht01_sequencial);
-       $this->ht01_habitgrupoprograma = ($this->ht01_habitgrupoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_habitgrupoprograma"]:$this->ht01_habitgrupoprograma);
+       $this->ht01_sequencial = ($this->ht01_sequencial === 0 || $this->ht01_sequencial === 0.0 || $this->ht01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_sequencial"]:$this->ht01_sequencial);
+       $this->ht01_habitgrupoprograma = ($this->ht01_habitgrupoprograma === 0 || $this->ht01_habitgrupoprograma === 0.0 || $this->ht01_habitgrupoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_habitgrupoprograma"]:$this->ht01_habitgrupoprograma);
        $this->ht01_descricao = ($this->ht01_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_descricao"]:$this->ht01_descricao);
        $this->ht01_obs = ($this->ht01_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_obs"]:$this->ht01_obs);
-       $this->ht01_controlemultpartcandidato = ($this->ht01_controlemultpartcandidato == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_controlemultpartcandidato"]:$this->ht01_controlemultpartcandidato);
-       $this->ht01_controleqtd = ($this->ht01_controleqtd == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_controleqtd"]:$this->ht01_controleqtd);
+       $this->ht01_controlemultpartcandidato = ($this->ht01_controlemultpartcandidato === 0 || $this->ht01_controlemultpartcandidato === 0.0 || $this->ht01_controlemultpartcandidato == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_controlemultpartcandidato"]:$this->ht01_controlemultpartcandidato);
+       $this->ht01_controleqtd = ($this->ht01_controleqtd === 0 || $this->ht01_controleqtd === 0.0 || $this->ht01_controleqtd == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_controleqtd"]:$this->ht01_controleqtd);
        if($this->ht01_validadeini == ""){
          $this->ht01_validadeini_dia = ($this->ht01_validadeini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_validadeini_dia"]:$this->ht01_validadeini_dia);
          $this->ht01_validadeini_mes = ($this->ht01_validadeini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_validadeini_mes"]:$this->ht01_validadeini_mes);
@@ -128,14 +128,14 @@ class cl_habitprograma {
        $this->ht01_descrcontrato = ($this->ht01_descrcontrato == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_descrcontrato"]:$this->ht01_descrcontrato);
        $this->ht01_lei = ($this->ht01_lei == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_lei"]:$this->ht01_lei);
        $this->ht01_exigeassconcedente = ($this->ht01_exigeassconcedente == "f"?@$GLOBALS["HTTP_POST_VARS"]["ht01_exigeassconcedente"]:$this->ht01_exigeassconcedente);
-       $this->ht01_qtdparcpagamento = ($this->ht01_qtdparcpagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_qtdparcpagamento"]:$this->ht01_qtdparcpagamento);
-       $this->ht01_diapadraopagamento = ($this->ht01_diapadraopagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_diapadraopagamento"]:$this->ht01_diapadraopagamento);
-       $this->ht01_receitapadraopagamento = ($this->ht01_receitapadraopagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_receitapadraopagamento"]:$this->ht01_receitapadraopagamento);
+       $this->ht01_qtdparcpagamento = ($this->ht01_qtdparcpagamento === 0 || $this->ht01_qtdparcpagamento === 0.0 || $this->ht01_qtdparcpagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_qtdparcpagamento"]:$this->ht01_qtdparcpagamento);
+       $this->ht01_diapadraopagamento = ($this->ht01_diapadraopagamento === 0 || $this->ht01_diapadraopagamento === 0.0 || $this->ht01_diapadraopagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_diapadraopagamento"]:$this->ht01_diapadraopagamento);
+       $this->ht01_receitapadraopagamento = ($this->ht01_receitapadraopagamento === 0 || $this->ht01_receitapadraopagamento === 0.0 || $this->ht01_receitapadraopagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_receitapadraopagamento"]:$this->ht01_receitapadraopagamento);
        $this->ht01_exigevalcpf = ($this->ht01_exigevalcpf == "f"?@$GLOBALS["HTTP_POST_VARS"]["ht01_exigevalcpf"]:$this->ht01_exigevalcpf);
-       $this->ht01_qtdbenef = ($this->ht01_qtdbenef == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_qtdbenef"]:$this->ht01_qtdbenef);
-       $this->ht01_workflow = ($this->ht01_workflow == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_workflow"]:$this->ht01_workflow);
+       $this->ht01_qtdbenef = ($this->ht01_qtdbenef === 0 || $this->ht01_qtdbenef === 0.0 || $this->ht01_qtdbenef == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_qtdbenef"]:$this->ht01_qtdbenef);
+       $this->ht01_workflow = ($this->ht01_workflow === 0 || $this->ht01_workflow === 0.0 || $this->ht01_workflow == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_workflow"]:$this->ht01_workflow);
      }else{
-       $this->ht01_sequencial = ($this->ht01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_sequencial"]:$this->ht01_sequencial);
+       $this->ht01_sequencial = ($this->ht01_sequencial === 0 || $this->ht01_sequencial === 0.0 || $this->ht01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht01_sequencial"]:$this->ht01_sequencial);
      }
    }
    // funcao para inclusao
@@ -282,7 +282,7 @@ class cl_habitprograma {
          $this->ht01_sequencial = $ht01_sequencial; 
        }
      }
-     if(($this->ht01_sequencial == null) || ($this->ht01_sequencial == "") ){ 
+     if(($this->ht01_sequencial == null) || ($this->ht01_sequencial === 0 || $this->ht01_sequencial === 0.0 || $this->ht01_sequencial == "") ){ 
        $this->erro_sql = " Campo ht01_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -764,7 +764,7 @@ class cl_habitprograma {
    function sql_query ( $ht01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -792,7 +792,7 @@ class cl_habitprograma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -805,7 +805,7 @@ class cl_habitprograma {
    function sql_query_file ( $ht01_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -826,7 +826,7 @@ class cl_habitprograma {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

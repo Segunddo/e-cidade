@@ -52,7 +52,7 @@ class cl_habitprogramalote {
                  ht05_habitprograma = int4 = Programa 
                  ";
    //funcao construtor da classe 
-   function cl_habitprogramalote() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("habitprogramalote"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_habitprogramalote {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ht05_sequencial = ($this->ht05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht05_sequencial"]:$this->ht05_sequencial);
-       $this->ht05_idbql = ($this->ht05_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["ht05_idbql"]:$this->ht05_idbql);
-       $this->ht05_habitprograma = ($this->ht05_habitprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht05_habitprograma"]:$this->ht05_habitprograma);
+       $this->ht05_sequencial = ($this->ht05_sequencial === 0 || $this->ht05_sequencial === 0.0 || $this->ht05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht05_sequencial"]:$this->ht05_sequencial);
+       $this->ht05_idbql = ($this->ht05_idbql === 0 || $this->ht05_idbql === 0.0 || $this->ht05_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["ht05_idbql"]:$this->ht05_idbql);
+       $this->ht05_habitprograma = ($this->ht05_habitprograma === 0 || $this->ht05_habitprograma === 0.0 || $this->ht05_habitprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht05_habitprograma"]:$this->ht05_habitprograma);
      }else{
-       $this->ht05_sequencial = ($this->ht05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht05_sequencial"]:$this->ht05_sequencial);
+       $this->ht05_sequencial = ($this->ht05_sequencial === 0 || $this->ht05_sequencial === 0.0 || $this->ht05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht05_sequencial"]:$this->ht05_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_habitprogramalote {
          $this->ht05_sequencial = $ht05_sequencial; 
        }
      }
-     if(($this->ht05_sequencial == null) || ($this->ht05_sequencial == "") ){ 
+     if(($this->ht05_sequencial == null) || ($this->ht05_sequencial === 0 || $this->ht05_sequencial === 0.0 || $this->ht05_sequencial == "") ){ 
        $this->erro_sql = " Campo ht05_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -360,7 +360,7 @@ class cl_habitprogramalote {
    function sql_query ( $ht05_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -382,7 +382,7 @@ class cl_habitprogramalote {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -395,7 +395,7 @@ class cl_habitprogramalote {
    function sql_query_file ( $ht05_sequencial=null,$campos="*",$ordem=null,$dbwhere=""){ 
      $sql = "select ";
      if($campos != "*" ){
-       $campos_sql = split("#",$campos);
+       $campos_sql = preg_split("#\\##m",$campos);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];
@@ -416,7 +416,7 @@ class cl_habitprogramalote {
      $sql .= $sql2;
      if($ordem != null ){
        $sql .= " order by ";
-       $campos_sql = split("#",$ordem);
+       $campos_sql = preg_split("#\\##m",$ordem);
        $virgula = "";
        for($i=0;$i<sizeof($campos_sql);$i++){
          $sql .= $virgula.$campos_sql[$i];

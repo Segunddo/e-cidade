@@ -92,7 +92,7 @@ class AgataQuery
         
         if ($this->records > $this->OffSet)
         {
-            if (($this->records <= ($this->Limit + $this->OffSet)) or ($this->Limit == 0))
+            if (($this->records <= ((int)$this->Limit + (int)$this->OffSet)) or ((int)$this->Limit == 0))
             {
                 return $row;
             }
