@@ -138,5 +138,28 @@ cache) saíram do repositório, e `/extension/modification/data/file/sync` entro
 A bateria completa pós-remoção do cache foi **parada em 6.750/9.470** (log parcial guardado, 29 diferenças, todas da linha de base),
 porque as correções acima mexem em arquivos que quase toda tela carrega; será refeita do zero.
 
-**Estado:** lote concluído; cache, marcadores e as 14 chamadas corrigidos (commits locais). **Falta refazer a bateria completa**,
-depois a conferência pelo proxy e a PR única.
+### Bateria completa final (12/11/2026, quinta, depois de todas as correções)
+
+`map` **1.307/1.307**. `location` **9.439/9.470** (29 divergentes + 2 timeouts) — comparada com a bateria anterior da área
+(9.436/9.470): **nenhuma diferença nova; saíram 3** — `cai3_gerfinanc001` (o cache removido), `iss1_tabalvara_depto001` e
+`iss3_emissaoalvaraeventos001` (as regressões corrigidas). Os 2 timeouts são os de sempre (`edu4_verifexportcenso002`,
+`rec2_espelhoponto002`, laço eterno no 5.6). Nenhum efeito colateral das correções no núcleo (`db_stdlib`, `DBLargeObject`,
+`documentoTemplate`) nem da remoção do cache. Todas as restantes estão em `docs/divergencias-conhecidas.md`.
+
+### 🏁 ÁREA ASSISTÊNCIA SOCIAL CONCLUÍDA (12/11/2026)
+
+Conferido **pelo proxy, tela de menu por tela de menu** (`X-Ecidade-Runtime` em `/w/2/<tela>`), a partir do banco (área
+ASSISTÊNCIA SOCIAL, sem excluir prefixo): **67 de 67** telas de menu servidas pelo PHP 8.5 (68 entradas: Social 48, Habitação 20).
+**1 fantasma:** `soc1_cidadao003.php`. Abas: passo 8b sem nada indo ao 5.6.
+
+| | |
+|---|---|
+| Módulos | **2 de 2** — Social, Habitação |
+| Lote | 1 (`soc` + `hab` inteiros) |
+| Alterados | 31 pelo Rector + 3 à mão no lote; mais as correções transversais (abaixo) |
+| Correções transversais nesta PR | `dbagata/AgataQuery.class` (`Limit`/`OffSet` vazios), `pclzip` (`fread` 0), **14 `pg_lo_export` na ordem antiga**, a aba `iss1_tabalvara_depto001`, e a remoção do cache e dos marcadores do `modification()` versionados por engano |
+| Bateria completa | `map` **1.307/1.307**; `location` **9.439/9.470** (todas caracterizadas) |
+| Telas de menu pelo proxy | **67/67** no 8.5 (+ 1 fantasma) |
+| Envio | PR única para a `base-php84` — aguarda o pedido do usuário |
+
+**Estado:** área concluída (commits locais). Falta enviar a branch e abrir a PR.
