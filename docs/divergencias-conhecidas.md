@@ -17,14 +17,14 @@ Levantada em 12/11/2026, depois da Assistência Social. O detalhe de cada caso e
 | **Horário no PDF** | O relatório é igual; só muda o horário impresso no rodapé, que fica dentro do trecho comprimido do PDF (fora do alcance da normalização). Conferido descomprimindo. | Não. |
 | **Dia da semana** | Sem parâmetro, `mktime(null)` vira **hoje** no PHP 8 (no 5.6, uma data fixa). Só diverge quando a bateria roda em fim de semana. | Não. |
 | **Ambiente** | A diferença é das imagens Docker, não do código. | Sim, se a imagem for usada como está (ver a observação). |
-| **⚠ REGRESSÃO** | Funciona no 5.6 e quebra no 8.5 **também no uso real**. Classificação antiga errada, achada em 12/11/2026. | **Sim — a corrigir.** |
+| **✅ Era regressão — corrigida** | Funcionava no 5.6 e quebrava no 8.5 **também no uso real**; classificação antiga errada, achada em 12/11/2026 e corrigida no mesmo dia (branch `assistencia-social/migracao`). | Não mais. |
 
 ## As telas
 
 | Tela | Área | 5.6 | 8.5 | Categoria | Motivo | Registro |
 |---|---|---|---|---|---|---|
-| `iss1_tabalvara_depto001.php` | Tributário | 200 (formulário) | 500 | **⚠ REGRESSÃO** | Linha `$cltabdesc->k07_instit = …` com `$cltabdesc` nunca criado: o 5.6 cria o objeto sozinho (só um aviso) e monta a aba; o PHP 8 trata como erro fatal. Roda sempre, com ou sem parâmetro — conferido com `dbopcao=1` e `2`. Aberta como aba por `iss1_isstipoalvara002/003/005/006`. | `area-tributario.md` (classificada antes como "pré-existente") |
-| `iss3_emissaoalvaraeventos001.php` | Tributário | 200 | 500 | **⚠ REGRESSÃO** | `pg_lo_export($oid, $arquivo, $conn)`: ordem de argumentos **antiga, que o PHP 5.6 aceita** (medido: exporta o arquivo certo); no PHP 8 é `ArgumentCountError`. Com um alvará existente, o 5.6 gera o documento e o 8.5 quebra. Aberta por `iss3_impressaoalvaraevento001` e `iss4_alvaraeventos001` com `?codigoAlvara=`. | `area-tributario.md` (classificada antes como "o 5.6 tolerava") |
+| `iss1_tabalvara_depto001.php` | Tributário | 200 (formulário) | ~~500~~ **idêntica** | **✅ Corrigida** | Linha `$cltabdesc->k07_instit = …` com `$cltabdesc` nunca criado: o 5.6 cria o objeto sozinho (só um aviso) e monta a aba; o PHP 8 trata como erro fatal. Roda sempre, com ou sem parâmetro — conferido com `dbopcao=1` e `2`. Aberta como aba por `iss1_isstipoalvara002/003/005/006`. **Correção:** `if (empty($cltabdesc)) $cltabdesc = new stdClass();` antes da linha — o que o 5.6 fazia sozinho (medido: cria `stdClass` a partir de `null` e de `""`). | `area-assistencia-social.md` |
+| `iss3_emissaoalvaraeventos001.php` | Tributário | 200 | ~~500~~ **idêntica** | **✅ Corrigida** | `pg_lo_export($oid, $arquivo, $conn)`: ordem de argumentos **antiga, que o PHP 5.6 aceita** (medido: exporta o arquivo certo); no PHP 8 é `ArgumentCountError`. Com um alvará existente, o 5.6 gera o documento e o 8.5 quebra. Aberta por `iss3_impressaoalvaraevento001` e `iss4_alvaraeventos001` com `?codigoAlvara=`. **Era uma categoria inteira: 14 chamadas na ordem antiga**, em 7 telas servidas e 5 arquivos compartilhados — todas reordenadas para `($conn, $oid, $arquivo)`, que funciona igual nos dois. | `area-assistencia-social.md` |
 | `iss4_issbasecaracteristicas001.php` | Tributário | 200 | 500 | Sem parâmetro | `$oGrupo` nulo quando aberta sozinha. Aberta por `iss1_issbase014`/`iss1_issbaseiframe` com `?q123_inscr=`; com o parâmetro, **idêntica**. | `area-tributario.md` |
 | `agu1_aguaconsumo999.php` | Tributário | 200 (vazio) | 500 | Fragmento | Incluído por `agu1_aguaconsumo001/002/003` (idênticas). Sozinho, usa o banco sem conexão aberta: o 5.6 devolve página em branco, o 8.5 lança exceção. Não está no menu. | `area-tributario.md` |
 | `agu4_cancelaleituras_classe.php` | Tributário | 302 (vazio) | 500 | Fragmento | Define a classe `cl_cancelaleituras`; incluído por `agu4_expdadoscoletores_003.php`. | `area-tributario.md` |
@@ -50,7 +50,7 @@ Levantada em 12/11/2026, depois da Assistência Social. O detalhe de cada caso e
 - **Ambiente:** com a imagem do PHP 8.5 como está, **toda tela que converte documento** falharia em produção (6 arquivos usam
   `model/configuracao/DocumentConverter.model.php`). A imagem precisa do `libreoffice-writer`, como a do 5.6.
 - **As duas regressões** foram classificadas na migração do Tributário como "bug pré-existente". A revisão desta tabela mostrou que
-  o 5.6 **funcionava** nas duas. A correção fiel é a de sempre: reproduzir o que o 5.6 fazia (criar o objeto que ele criava
-  sozinho; chamar `pg_lo_export` na ordem que o PHP 8 aceita).
+  o 5.6 **funcionava** nas duas; foram corrigidas reproduzindo o que o 5.6 fazia. A do `pg_lo_export` revelou uma **categoria**
+  que nenhuma bateria via (nenhuma chega a exportar um arquivo guardado no banco): 14 chamadas, todas corrigidas.
 - **Telas fora desta lista** que não são servidas pelo 8.5 (por exemplo, as janelas de pesquisa `func_`) não entram na bateria; ver a
   frente das `func_` em `docs/registro/dimensionamento.md`.

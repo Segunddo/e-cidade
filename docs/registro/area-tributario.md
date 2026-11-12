@@ -910,6 +910,10 @@ acrescentando `public` a método. Ver a ressalva no fim desta seção.
 As 3 divergências restantes são bugs **pré-existentes** e ficam como estão, pelo princípio
 registrado em *Princípios*:
 
+> **⚠ CORREÇÃO (12/11/2026):** as duas classificações abaixo (`iss1_tabalvara_depto001` e `iss3_emissaoalvaraeventos001`)
+> estavam **erradas**: o 5.6 funcionava nas duas. Eram regressões, corrigidas na branch `assistencia-social/migracao` — ver
+> `area-assistencia-social.md` e `docs/divergencias-conhecidas.md`.
+
 - `iss1_tabalvara_depto001.php` — `$cltabdesc` é usado na linha 43 e **nunca atribuído** no
   arquivo. Até o PHP 7 isso criava um `stdClass` automaticamente; o 8.0 transformou em `Error`.
 - `iss4_issbasecaracteristicas001.php` — `$oGrupo` nulo, mesma família.

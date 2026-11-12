@@ -101,5 +101,42 @@ Como a remoção tira cópias de arquivos que toda tela carrega (`db_conecta`, `
 `db_classesgenericas`), **a bateria completa precisa ser refeita**. Ela foi iniciada e **interrompida a pedido do usuário** em
 950/9.470; ele pediu para rodá-la depois.
 
-**Estado:** lote concluído, cache versionado removido (commits locais). **Falta refazer a bateria completa** (interrompida a
-pedido do usuário), depois a conferência pelo proxy e a PR única (lote + correções no `dbagata` + remoção do cache).
+### ⚠ Duas regressões do Tributário, mal classificadas desde então — e a CATEGORIA `pg_lo_export` (12/11/2026)
+
+Achadas ao montar `docs/divergencias-conhecidas.md` (pedido do usuário, depois de ele questionar um "200 no 5.6, 500 no 8.5").
+Conferido o caminho real de cada tela da linha de base: todas as outras se sustentam; **duas não**. Corrigidas nesta PR
+(decisão do usuário).
+
+- **`iss1_tabalvara_depto001.php`** (aba de `iss1_isstipoalvara002/003/005/006`): `$cltabdesc->k07_instit = …` com `$cltabdesc`
+  nunca criado. O registro do Tributário dizia "bug pré-existente", mas **o 5.6 cria o objeto sozinho e monta a aba**; o 8 trata
+  como fatal — e a linha roda sempre, com ou sem parâmetro. → `if (empty($cltabdesc)) $cltabdesc = new stdClass();` (medido no 5.6:
+  cria `stdClass` a partir de `null` e de `""`). `$cltabdesc` não é lido depois.
+- **`iss3_emissaoalvaraeventos001.php`**: o registro dizia que o `pg_lo_export($oid, $arquivo, $conn)` era tolerado pelo 5.6.
+  **Medido: no 5.6 essa ordem antiga FUNCIONA** (exporta o arquivo certo); no 8 é `ArgumentCountError`. A ordem
+  `($conn, $oid, $arquivo)` funciona igual nos dois (medido, inclusive com o OID em string).
+
+**É uma categoria, não uma tela: 14 chamadas na ordem antiga**, todas reordenadas (o resto da linha intocado):
+- telas servidas pelo 8.5: `edu2_aluno002:139`, `edu2_fichaaluno002:157`, `edu3_alunos001:168`, `edu4_escola.RPC:328`,
+  `lab4_emissaoresult001:106`, `pes4_autprocvalores.RPC:304`, `sys4_cadastrotemplateRPC:112`;
+- compartilhados: **`libs/db_stdlib.php:3735`** (núcleo, `db_buscaImagemBanco`), **`std/DBLargeObject.php:101`**,
+  **`model/documentoTemplate.model.php:85`** (o caminho da `iss3`), `classes/db_db_bancos_classe.php:468`,
+  `forms/db_frmalunodados.php:68`;
+- fora do 8.5 hoje: `cad3_conscadastro_002_marica:62`, `model/integracao/transparencia/IntegracaoLicitacao.model.php:264`.
+Conferido o `$conn` de cada ponto: escopo global (do `db_conecta.php`), `global $conn`, parâmetro ou atribuição — nenhum
+indefinido (duas detecções ambíguas, `edu4_escola.RPC` e `lab4_emissaoresult001`, conferidas à mão: escopo global). As formas de 2
+argumentos (`pg_lo_export($oid, $arquivo)`, 11 pontos) já funcionam nos dois e ficaram como estão. **Nenhuma bateria via a
+categoria:** nenhuma chega a exportar um arquivo guardado no banco (foto de aluno, laudo, template, logotipo). Verificação:
+`DBLargeObject::leitura()` chamada direto nos dois runtimes com um objeto criado na hora — **igual nos dois** com a correção; a
+versão antiga (`HEAD`) dá `ArgumentCountError` no 8.5. As 12 telas envolvidas (as duas regressões pelo caminho real e as 7 servidas
+que exportam): **12/12 idênticas**. Lint dos 15 PHP alterados nos dois; 0 chamadas na ordem antiga restantes.
+
+**Junto, o resto do commit acidental de 03/10:** os **28 marcadores de sincronização** vazios de
+`extension/modification/data/file/sync/user/dbseller/` (a `FileSync` compara a data deles com a do original para decidir se usa o
+cache) saíram do repositório, e `/extension/modification/data/file/sync` entrou no `.gitignore`. Sobrou do mesmo commit só
+`extension/modification/data/file/file-type-modification.data`, que não é marcador — intocado.
+
+A bateria completa pós-remoção do cache foi **parada em 6.750/9.470** (log parcial guardado, 29 diferenças, todas da linha de base),
+porque as correções acima mexem em arquivos que quase toda tela carrega; será refeita do zero.
+
+**Estado:** lote concluído; cache, marcadores e as 14 chamadas corrigidos (commits locais). **Falta refazer a bateria completa**,
+depois a conferência pelo proxy e a PR única.

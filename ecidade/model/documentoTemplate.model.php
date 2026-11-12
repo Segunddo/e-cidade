@@ -82,7 +82,7 @@ class documentoTemplate  {
         db_inicio_transacao();
       }
 
-      $lArquivoExportado = pg_lo_export($oArquivoSxw->db82_arquivo, $sCaminhoTemplate, $conn);
+      $lArquivoExportado = pg_lo_export($conn, $oArquivoSxw->db82_arquivo, $sCaminhoTemplate);
 
       if (!$lTemTransacaoAtiva) {
         db_fim_transacao();

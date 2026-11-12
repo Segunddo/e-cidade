@@ -261,7 +261,7 @@ class IntegracaoLicitacao extends IntegracaoBase implements IItemIntegracao {
     for ($iDocumento = 0 ; $iDocumento < $iTotalDocumentos; $iDocumento++) {
 
       $oDocumento = db_utils::fieldsMemory($rsDocumentosLicitacao, $iDocumento);
-      $lExport = pg_lo_export($oDocumento->documento, $oDocumento->nome_arquivo_importacao, $this->rsConexaoOrigem);
+      $lExport = pg_lo_export($this->rsConexaoOrigem, $oDocumento->documento, $oDocumento->nome_arquivo_importacao);
       $aListaArquivos[$oDocumento->documento] = $oDocumento->nome_arquivo_importacao;
       $this->inserirDadosPortalTransparencia($oDocumento, $oTableManagerLicitacoesDocumentos);
     }

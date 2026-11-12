@@ -40,6 +40,7 @@ db_postmemory($HTTP_POST_VARS);
 $clisstipoalvaradepto = new cl_isstipoalvaradepto;
 $cliframe_seleciona   = new cl_iframe_seleciona;
 $clrotulo             = new rotulocampo;
+if (empty($cltabdesc)) $cltabdesc = new stdClass(); // o PHP 5.6 criava o objeto sozinho
 $cltabdesc->k07_instit = db_getsession("DB_instit");
 $db_botao = true;
 

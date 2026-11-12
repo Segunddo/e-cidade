@@ -325,7 +325,7 @@ if ($oParam->exec == 'getDadosUltimaMatriculaAluno') {
             $lExportAnexo = false;
 
             db_query("begin");
-            $lExportAnexo = pg_lo_export($oResultado->ed292_arquivo, $sNomeArquivo, $conn);
+            $lExportAnexo = pg_lo_export($conn, $oResultado->ed292_arquivo, $sNomeArquivo);
             db_query("commit");
 
             if ($lExportAnexo) {

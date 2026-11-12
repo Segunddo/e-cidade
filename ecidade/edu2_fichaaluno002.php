@@ -154,7 +154,7 @@ try {
       $pArquivo = "tmp/".$ed47_c_foto;
 
       db_inicio_transacao();
-      $lResultExport = pg_lo_export($ed47_o_oid,   $pArquivo,  $conn);
+      $lResultExport = pg_lo_export($conn,   $ed47_o_oid,  $pArquivo);
       db_fim_transacao();
 
       $oPdf->Image($pArquivo,  177, 43, 20);

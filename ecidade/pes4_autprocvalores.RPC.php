@@ -301,7 +301,7 @@ try {
 	  $iOidArquivo     = db_utils::fieldsMemory($rsOidArquivo,0)->rh90_arquivo;
 	  
     $sCaminhoArquivo = "tmp/SEFIP.RE";
-    $lGeraArquivo    = pg_lo_export($iOidArquivo,$sCaminhoArquivo,$conn);
+    $lGeraArquivo    = pg_lo_export($conn,$iOidArquivo,$sCaminhoArquivo);
              
     if (!$lGeraArquivo) {
     	throw new Exception("Erro ao gerar arquivo SEFIP");       
