@@ -172,3 +172,25 @@ pré-pagou só telas da Assistência Social (59 → 57: entre as 10 telas de men
 `hab1_avaliacao001/002/003`, roteadas no lote 1 da Configuração; as outras — `hab1_workflow001/002/003`, `pro3_conspro001`,
 `rec1_tabcurritipo001/002/003` — já vinham de áreas anteriores). Os "a alterar" não mudaram: os prefixos da Configuração
 (`sys`, `con`) não alcançam as classes das restantes. Fantasmas: Cidadão 5, Assistência Social 1.
+
+### 🔭 FRENTE DEPOIS DAS ÁREAS: as janelas de pesquisa `func_` (decisão do usuário, 11/11/2026)
+
+As `func_*.php` são as janelas de pesquisa (a lupa ao lado de um campo, para escolher CGM, material, conta…). **Não são telas de
+menu**: cada uma é aberta por várias telas, de várias áreas, e o prefixo `func` **não está no `location`**. Medido em 11/11/2026:
+
+| | |
+|---|---|
+| Arquivos `func_*.php` | **2.993** |
+| Já alterados pela migração (entraram no universo de alguma área) | **256** |
+| Ainda com construção incompatível com o PHP 8 (por texto) | **2.527** — `parse_str` de 1 argumento em 2.522, `split`/`ereg` em 31 |
+| Servidas pelo 8.5 hoje | **7** (as que entraram no `map` como aba) |
+
+**Hoje não quebra nada:** quando uma tela servida pelo 8.5 abre uma pesquisa, a requisição da `func_` passa pelo proxy e cai no
+5.6, com a sessão compartilhada. Só quebra se a `func_` for chamada direto no 8.5, fora do caminho real (foi o caso da
+`func_histocorrencia` na bateria da Assistência Social). **Passa a importar para desligar o 5.6.**
+
+**Decisão:** uma frente própria, **depois das áreas restantes**, porque as `func_` são compartilhadas por todas (inclusive as que
+ainda faltam) e assim cada uma é portada e testada uma vez só. Procedimento de sempre: Rector (quase todo mecânico, a regra do
+`parse_str`), lint nos dois runtimes, bateria das 2.993 abertas sem parâmetros e, no fim, o prefixo `func` no `location`.
+**Limite da bateria aqui:** sem parâmetros, uma `func_` mostra o formulário de pesquisa ou lista todos os registros — exercita o
+carregamento e a consulta básica, não todas as combinações de filtro.

@@ -89,7 +89,17 @@ construção que quebra no PHP 8; as outras rodam código desatualizado igual no
 original (só a data, sem mudar conteúdo) faz a tela voltar a sair idêntica. **Qualquer clone novo do repositório tem o mesmo
 risco** (o git grava os arquivos com a data do clone, em ordem não garantida).
 
-**Correção proposta ao usuário:** tirar os 28 arquivos do repositório e ignorar o diretório de cache (como o `master` original).
+**Correção (decisão do usuário: na mesma PR da área):** os 28 arquivos saíram do repositório (`git rm`, que também apagou as
+cópias locais) e `/extension/modification/data/cache` entrou no `ecidade/.gitignore`, ao lado de `/extension/modification/log`.
+O diretório pertence ao usuário do host (775), então o Apache não regenera o cache e o sistema usa os originais — o mesmo que no
+teste do `touch`. Checagem rápida das 17 telas cujas cópias saíram: **16/17 idênticas**, inclusive `cai3_gerfinanc001` e as 9 de
+folha. A 17ª, **`func_histocorrencia.php`**, nunca foi portada (`parse_str` de 1 argumento): antes, chamada direto no 8.5, a cópia
+em cache rodava no lugar dela. No uso real ela vai ao 5.6 (o proxy não manda `func_` ao 8.5) — não é regressão; entra na frente
+das `func_` (ver `dimensionamento.md`).
 
-**Estado:** lote concluído e bateria completa feita (commits locais). Aguardando a decisão sobre o cache versionado; depois, a
-conferência pelo proxy e a PR.
+Como a remoção tira cópias de arquivos que toda tela carrega (`db_conecta`, `db_sessoes`, `db_funcoes`,
+`db_classesgenericas`), **a bateria completa precisa ser refeita**. Ela foi iniciada e **interrompida a pedido do usuário** em
+950/9.470; ele pediu para rodá-la depois.
+
+**Estado:** lote concluído, cache versionado removido (commits locais). **Falta refazer a bateria completa** (interrompida a
+pedido do usuário), depois a conferência pelo proxy e a PR única (lote + correções no `dbagata` + remoção do cache).
