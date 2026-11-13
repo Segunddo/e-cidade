@@ -47,6 +47,11 @@ rode-os sempre da raiz do repositório, nunca de dentro de `ecidade/`.
 Sem `tmp/` gravável, 11% das telas falham **antes de executar** e passam na bateria por
 falharem igual nos dois. Comparabilidade sem cobertura.
 
+**O trabalho é por área, em lotes** (branch da área a partir da `base-php84`, `scratchpad/dimensiona.py`, um lote por vez
+com commit local, bateria completa e conferência pelo proxy só no fim, push e PR para `base-php84`). Os prefixos de
+uma área vêm do menu: `python3 scratchpad/prefixos_area.py <AREA>` (coluna `faltam`). Os comandos dessa
+moldura estão em `docs/migrar-um-modulo.md`, seção *O fluxo de uma área*. Os passos abaixo portam **um lote**.
+
 **Nunca alterar `docker-compose.yml`** — é a referência funcional.
 **Nunca commitar** `docker/database/ecidade_base.sql` (314 MB) nem encenar a remoção do `.gz`.
 
@@ -142,6 +147,10 @@ docker exec -i ecidade_php85 sh -c 'cd /var/www/html;
   ALVOS=/var/www/html/tmp/<pref>_alvos.txt tmp/rector/vendor/bin/rector process \
     --config tmp/rector/scratch/rector-curado.php --no-progress-bar' </dev/null
 ```
+
+**Os ~15 avisos `Deprecated:` que saem antes de tudo são esperados** — vêm do `vendor/` do Laravel 5.4 (Guzzle, PsySH,
+Zend Diactoros, PHPUnit), que o Rector carrega pelo autoloader do projeto, e não dizem nada sobre o módulo. Mande o
+stderr para um arquivo (`2> /tmp/r.err`) e só pare se aparecer outra coisa nele (`Fatal`, `Killed`, `SEM ALVOS`).
 
 **Quatro armadilhas, todas medidas e todas silenciosas:**
 

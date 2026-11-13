@@ -163,6 +163,7 @@ CIDADÃO                  1    40     35     5   1828   709        28
 ```
 
 `Menu` são as telas de menu da área, `Faltam` as que ainda vão ao 5.6, `Fant.` as que o menu cita mas não existem em disco
+<<<<<<< HEAD
 (quebram igual nos dois; só se registram), `A alterar` os arquivos que o lote vai mudar. Para cada prefixo da área, decida
 **como ele será roteado** — é o que define o lote:
 
@@ -173,6 +174,57 @@ CIDADÃO                  1    40     35     5   1828   709        28
 
 A seção *Quando o prefixo serve várias áreas* mostra como medir quantas telas de outras áreas um prefixo arrastaria. Lote
 grande (mais de ~300 arquivos a alterar) se divide por subprefixo (`sau1_`, `sau2_`…). Registre a divisão em
+=======
+(quebram igual nos dois; só se registram), `A alterar` os arquivos que o lote vai mudar.
+
+#### Quais prefixos migrar
+
+**O prefixo não se escolhe: ele vem do menu.** Cada tela é um arquivo (`soc1_cidadao001.php`), e o começo do nome antes do
+número é o prefixo (`soc`). Os prefixos de uma área são os das telas que o menu dela abre — e o banco sabe quais são
+(`atendcadarea` → `db_menu` → `db_itensmenu`). Este script faz a consulta e cruza com o proxy:
+
+```bash
+python3 scratchpad/prefixos_area.py ASSIST     # o inicio do nome da area no banco: ASSIST, CIDAD, GESTOR, INTEGRA...
+```
+
+```
+prefixo  telas no 8.5 faltam em disco  outras areas com telas desse prefixo ainda no 5.6
+soc         44      0     44       87  -
+hab         19      6     13       52  -
+pro          1      1      0      337  -
+rec          3      3      0      279  -
+
+faltam 57 telas
+```
+
+Como ler (Assistência Social, 12/11/2026):
+
+| Coluna | Significa |
+| --- | --- |
+| `telas` | telas de menu da área com esse prefixo (as fantasmas não contam) |
+| `no 8.5` | as que o proxy já manda ao 8.5 — outra área já as migrou (`pro`, `rec`) ou parte delas (`hab`: 6 vieram com a Configuração) |
+| `faltam` | **o que você vai migrar.** Prefixo com `faltam 0` está pronto: ignore |
+| `em disco` | os `.php` do prefixo inteiro, de todas as áreas e fora do menu (popups, `.RPC.php`, abas) |
+| outras áreas | áreas **ainda não migradas** que também têm telas desse prefixo no 5.6 |
+
+Então, aqui, os prefixos a migrar são **`soc` e `hab`**. A soma de `faltam` tem de bater com o `Faltam` do
+`dimensiona.py` (57 = 57).
+
+#### Como cada prefixo será roteado — é o que define o lote
+
+| Situação do prefixo | Roteamento | Lote |
+| --- | --- | --- |
+| nenhuma outra área pendente **e** `em disco` não muito maior que `telas` (`soc`: 44 de 87; `hab`: 19 de 52) | **`location`** por prefixo (passo 8) | o prefixo inteiro: `python3 scratchpad/enumera.py <pref>` |
+| outra área pendente, **ou** `em disco` muito maior que `telas` (`con` no Cidadão: 4 telas, 1.556 arquivos) | **`map`** por lista, gerada do banco (*Passo D* de *Quando o prefixo serve várias áreas*) | só as telas da área: `TELAS=@/tmp/telas_lote.txt python3 scratchpad/enumera.py <nome-do-lote>` (uma tela por linha, com a grafia do disco e caminho **absoluto** — o script muda para `ecidade/`; o `<nome-do-lote>` vira só o nome dos arquivos de saída) |
+
+Na dúvida entre os dois, meça o custo: `python3 scratchpad/enumera.py <pref>` dá o `A ALTERAR` do prefixo inteiro; compare
+com o das telas da área (seção *Quando o prefixo serve várias áreas*, Passo C). Rotear pelo `location` manda **todos** os
+arquivos do prefixo ao 8.5 — inclusive os de outras áreas —, então todos precisam estar portados.
+
+Vários prefixos pequenos podem ir num lote só (a Assistência Social é um lote: `soc` + `hab`, com
+`python3 scratchpad/enumera.py soc` e `python3 scratchpad/enumera.py hab`, e o Rector rodado sobre as duas listas de
+alvos). Lote grande (mais de ~300 arquivos a alterar) se divide por subprefixo (`sau1_`, `sau2_`…). Registre a divisão em
+>>>>>>> 315a98973 (feat: Atualiza o procedimento de como migrar um módulo)
 `docs/registro/area-<área>.md` antes de começar.
 
 ### C. Um lote por vez
