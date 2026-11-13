@@ -835,11 +835,31 @@ tamanho da `/tmp/cls.txt` (`wc -l`). Classes sem nenhum campo para testar saem c
 diferente em cada campo (`1000`, `1001`…), chama o `atualizacampos()` da classe e imprime o que ficou em cada campo. No
 `diff`, `<` é o 5.6 e `>` é o 8.5.
 
+**O `diff` dificilmente sai vazio: o que se espera é que ele tenha só linhas dos artefatos conhecidos** (tabela abaixo).
+Qualquer outra linha é problema.
+
 | No `diff` | Significa |
 | --- | --- |
-| nada | as duas versões leem o formulário igual — **é o resultado esperado** |
-| `< ...campo 1003` / `> ...campo 0` | o 5.6 leu o formulário e o 8.5 manteve `0`: **falta a guarda `0 == ""`** naquela classe. Dado errado gravado em silêncio — investigar |
-| `SEM_SAIDA` de um lado e `<ERRO>` do outro, ou `<ERRO>` só no 8.5 | ver a tabela de artefatos abaixo; fora dela, investigar |
+| só linhas das classes da tabela de artefatos (ou nada) | as duas versões leem o formulário igual — **é o resultado esperado** |
+| `< ...campo '1003'` / `> ...campo 0`, de outra classe | o 5.6 leu o formulário e o 8.5 manteve `0`: **falta a guarda `0 == ""`** naquela classe. Dado errado gravado em silêncio — investigar |
+| `SEM_SAIDA` de um lado e `<ERRO>` do outro, ou `<ERRO>` só no 8.5, de outra classe | investigar |
+
+Para não depender de conferir linha por linha, tire os artefatos do `diff` e veja o que sobra — **tem de sair vazio**:
+
+```bash
+diff /tmp/w_ecidade_php56.txt /tmp/w_ecidade_php85.txt | grep -aE '^[<>]' \
+  | grep -avE 'requisicaoMaterial\.model|solicitacaocompras\.model|avaliacaogruporespostatrabalhointermitente|lancamentoContabil|ordemPagamento|classes/empenho\.php'
+```
+
+O `-a` é obrigatório: há valores em LATIN-1 na saída, e sem ele o `grep` trata o arquivo como binário e não mostra nada —
+o que pareceria aprovação.
+
+**`SEM_SAIDA` e a contagem `COM_SAIDA`.** O harness só testa campos declarados com valor inicial (`public $x = ...`).
+Classe sem nenhum campo assim não tem o que imprimir e sai como `SEM_SAIDA` — iguais nos dois runtimes, não dizem nada
+sobre a migração (no `soc`, 62: 60 sem campo com valor inicial, 2 com campos que o teste não preenche). Para listá-las:
+`grep -a '^SEM_SAIDA' /tmp/w_ecidade_php85.txt`. O `COM_SAIDA` é `TOTAL − SEM_SAIDA` e costuma diferir em 2 entre os
+runtimes (708 × 710 no `soc`): são os artefatos `…trabalhointermitente` e `solicitacaoCompra`, que no 8.5 imprimem
+`<ERRO>` e no 5.6 morrem sem saída.
 
 **Artefatos conhecidos** (não são defeito; aparecem quando a classe está no universo):
 
@@ -849,7 +869,7 @@ diferente em cada campo (`1000`, `1001`…), chama o `atualizacampos()` da class
 | `cl_avaliacaogruporespostatrabalhointermitente` | `SEM_SAIDA` no 5.6, `<ERRO> Exception` no 8.5 | falta um `.dd.xml` da base: falha nos dois |
 | `classes/empenho.php → datausu` | `1969-12-31` contra a data de hoje | só acontece **sem sessão**, condição do harness |
 
-Medido no `soc` (13/11/2026): 772 classes, e o `diff` só com os três primeiros artefatos.
+Medido no `soc` (13/11/2026): `#TOTAL 772` nos dois, `diff` com 6 linhas, todas dos três primeiros artefatos; o filtro acima: vazio.
 
 > **Não use o `harness_robusto.sh` aqui.** Ele avança contando *linhas de saída*, o que vale para o passo 6 (uma linha por
 > classe) e não para este (muitas linhas por classe).
@@ -878,25 +898,88 @@ for v in 56 85; do
       php -d display_errors=0 /tmp/negada.php /tmp/_neg_$V.tsv 2>/dev/null </dev/null; done' \
     < ecidade/tmp/negada_cls.txt > /tmp/neg_$v.txt
 done
-diff /tmp/neg_56.txt /tmp/neg_85.txt
+python3 scratchpad/negada_compara.py /tmp/neg_56.txt /tmp/neg_85.txt /tmp/cls.txt    # /tmp/cls.txt: a lista do passo 6
 ```
 
-Compare pela chave (classe, campo, método):
-- **valor diferente** (5.6 `NULL`, 8.5 `0`): falta a guarda do `==` no `atualizacampos()` — a classe não foi portada. Se ela
-  está no universo do lote, é falha do passo 4;
-- **mesmo valor `0`, resultado diferente**: é a forma negada. Ponha os pares (classe, campo, método) num TSV e rode
-  `python3 scratchpad/negada_corrige.py <tsv>`, que aplica `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)` só
-  naqueles pontos. Depois rode o `negada_alvos.py` de novo: os pontos corrigidos têm de sumir (o `negada.php` continua
-  acusando, porque mede o estado, não o código).
+O teste roda sobre **todas** as classes de `classes/` (1.848 classes e ~7.300 pares em 13/11/2026; ~5 min), não só as do
+lote. Cada arquivo `/tmp/neg_*.txt` tem uma linha por par: `classe  campo  método  modo  tipo  valor  resultado`, em que
+`valor` é o que o campo vale quando o formulário vem **vazio** e `resultado` é quanto deu `campo != ""`. Não use `diff`
+para ler: ele mostra centenas de linhas de classes que **não são do lote** — classes nunca portadas, de áreas que o 5.6
+ainda serve. O `negada_compara.py` separa as duas coisas e dá o veredito:
 
-Medido em 27/10/2026: 7.367 pares, 89 da forma negada, 74 em 28 classes servidas, todos de auditoria. Nos lotes 1 e 2
-da Configuração: 2.068 e 2.426 pares, 0 divergências.
+```
+pares medidos: 5.6=7281  8.5=7281
+classes do lote: 772
+
+== FORA DO LOTE: 556 pares em 187 classes (areas nao migradas ou classes que o lote nao usa -- nao corrigir aqui)
+      552  VALOR_DIFERENTE
+        4  FORMA_NEGADA
+
+== DO LOTE: 0 pares
+
+VEREDITO: PASSOU -- nenhuma divergencia nas classes do lote
+```
+
+(Saída real do `soc`, 13/11/2026. As 552 de fora caem à medida que as áreas são migradas — boa parte era do `hab`, ainda
+sem Rector naquele momento.)
+
+| Veredito | O que fazer |
+| --- | --- |
+| `PASSOU` | seguir para o nível 3 / passo 7 |
+| `INCOMPLETO` | os dois runtimes não mediram o mesmo número de pares: um processo morreu. Rodar de novo |
+| `INVESTIGAR` | olhar cada par listado em `DO LOTE`, pelo tipo: |
+
+- **`VALOR_DIFERENTE`** (5.6 `NULL`, 8.5 `0`): falta a guarda do `==` no `atualizacampos()` — a classe do lote ficou sem
+  porte. É falha do passo 4: confira se ela estava na lista de alvos e rode o Rector nela;
+- **`FORMA_NEGADA`** (mesmo valor `0`, 5.6 `false`, 8.5 `true`): o 8.5 gravaria no histórico (`db_acount`) uma alteração
+  que ninguém fez. Ponha os pares (classe, campo, método) num TSV e rode `python3 scratchpad/negada_corrige.py <tsv>`,
+  que aplica `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)` só naqueles pontos. Depois rode o
+  `negada_alvos.py` de novo: os pontos corrigidos têm de sumir (o `negada.php` continua acusando, porque mede o estado,
+  não o código).
+
+Os pares `FORA DO LOTE` não se corrigem no lote: se a classe for de uma área **já migrada**, é regressão — registre e
+avise antes de mexer. Uma linha de `<script>alert('Variavel de sessão nao encontrada…')` nos arquivos é artefato (o teste
+roda sem login) e o script a ignora.
+
+Medido em 27/10/2026: 7.367 pares, 89 da forma negada, 74 em 28 classes servidas, todos de auditoria (corrigidos). Nos
+lotes 1 e 2 da Configuração: 2.068 e 2.426 pares, 0 divergências. No `soc`: 0 no lote.
 
 ### Nível 3 — `POST` de verdade, comparando o SQL emitido
 
 **Quando usar:** o passo 6b compara o **estado do objeto**; o nível 3 compara o **`INSERT` que cada runtime emite**. É a única prova ponta a ponta de que a gravação está idêntica.
 
 Não rode em bateria — **é dirigido**. Umas 15 telas, espalhadas pelos módulos, bastam para sustentar a afirmação.
+
+#### Quais telas testar
+
+O critério usado desde a Saúde: **uma tela de inclusão por prefixo do lote**, como amostra.
+
+1. **Inclusão:** arquivo `<pref>1_…001.php` (`1` = cadastro; `001` incluir, `002` alterar, `003` excluir). Comece por ela:
+   é a mais segura, porque o harness apaga a linha inserida ao restaurar. Alteração e exclusão mexem em linha existente.
+2. **Tabela simples**, de preferência a de uma classe que o lote alterou (`git status`).
+3. **Evite cadastros centrais com gatilhos** (CGM, CGS, cidadão). Na Saúde, a CGS deixou dados no banco: um gatilho gravou
+   em tabelas que o harness não fotografou (`area-saude.md`, *Nível 3 — amostra da Saúde*).
+
+Para listar as candidatas e a tabela de cada uma:
+
+```bash
+for f in ecidade/<pref>1_*001.php; do
+  t=$(grep -aoE "getDao\(['\"][a-z0-9_]+|new cl_[a-z0-9_]+" "$f" </dev/null | head -1 | sed -E "s/.*(cl_|['\"])//")
+  echo "$(basename $f)  ${t:--}"
+done
+```
+
+No `soc` (13/11/2026):
+
+```
+soc1_cidadao001.php            localatendimentosocial   <- evitar: cadastro central
+soc1_cursosocial001.php        -
+soc1_localatendimento001.php   -
+soc1_matriculacursosocial001.php -
+soc1_visitatipo001.php         visitatipo               <- boa escolha: tabela simples, familia que o Rector alterou
+```
+
+`-` é tela que não instancia a classe diretamente (usa *model*, RPC ou abas) — não serve para começar.
 
 #### O problema que ele resolve
 
@@ -1004,15 +1087,16 @@ print(re.sub(r'\s+',' ',re.sub(r'<[^>]+>',' ',t))[:400])"
 
 Compare os dois `INSERT` **campo a campo**. Se a diferença for só o número da chave ou texto depois do `)`, é artefato. Se um campo de **dado** diferir, ou se um lado estiver `<ausente>`, aí sim é defeito — e provavelmente é a guarda `0 == ""` faltando naquela classe.
 
-#### Teste apenas telas ROTEADAS
+#### Teste apenas telas PORTADAS
 
-Erro de método meu: testei 5 telas que **não estão roteadas** para o 8.5. Duas divergiam por `parse_str` não portado — mas elas são servidas pelo 5.6, onde funcionam. Confira antes:
+O harness posta **direto** em `:8080` e `:8085`, sem passar pelo proxy — então a tela do lote **não precisa estar roteada**,
+basta o Rector e as correções do lote já estarem aplicados. O que não vale é testar tela de **outro** módulo ainda não
+portado. Erro de método meu: testei 5 telas assim; duas divergiam por `parse_str` não portado — mas são servidas pelo 5.6,
+onde funcionam. Para saber se uma tela de fora do lote já está no 8.5:
 
 ```bash
 curl -sI "http://localhost:8090/<tela>.php" | grep -ai 'x-ecidade-runtime'
 ```
-
-Só vale testar o que responde `PHP-8.5`.
 
 ## Passo 7 — a bateria byte-a-byte
 
@@ -1807,7 +1891,7 @@ O módulo `tra` foi escolhido como piloto só pelo resíduo (era zero) e depois 
 | `scratchpad/ns_fecho.py` | 9ª frente da enumeração (classes com namespace); chamado pelo `enumera.py` |
 | `scratchpad/carrega_arquivo.php` | passo 5b: carregar cada arquivo (LSP) |
 | `scratchpad/porclasse.sh` | passos 6/6b: uma classe por processo |
-| `scratchpad/negada_alvos.py`, `negada.php`, `negada_corrige.py` | passo 6c: forma negada |
+| `scratchpad/negada_alvos.py`, `negada.php`, `negada_compara.py`, `negada_corrige.py` | passo 6c: forma negada (medir, comparar com veredito do lote, corrigir) |
 | `scratchpad/guarda_ciclo.py`, `campo_ciclo.py` | passo 7: guardas `pg_*` na aparição |
 | `scratchpad/redirecionamentos.py` | passo 8b: abas e redirecionamentos que voltam ao 5.6 |
 | `docker/proxy/faseb_map_abas.txt` | passo 8b: abas e destinos roteados por lista |

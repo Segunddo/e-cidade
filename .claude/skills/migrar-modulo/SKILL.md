@@ -333,7 +333,9 @@ for v in 56 85; do
 done
 ```
 
-Compare as duas saídas pela chave (classe, campo, método) e separe:
+Compare com `python3 scratchpad/negada_compara.py /tmp/neg_56.txt /tmp/neg_85.txt /tmp/cls.txt` (a lista de classes do
+passo 6): ele separa o que é do lote do que é de área não migrada e dá o veredito (`PASSOU`/`INCOMPLETO`/`INVESTIGAR`).
+Nos pares do lote:
 - **valor diferente** (5.6 `NULL`, 8.5 `0`): falta a guarda do `==` no `atualizacampos()`, então a
   classe não está portada. Se ela estiver no universo do lote, é falha do passo 4;
 - **mesmo valor `0`, resultado diferente**: é a forma negada. Corrija **só esses pontos**, só
