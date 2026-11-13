@@ -105,11 +105,16 @@ docker exec -i ecidade_php85 sh -c '
 
 ### 4. Prova de fumaça — antes de culpar o seu porte
 
-Pegue uma sessão autenticada e requisite uma tela de módulo **já verificado**:
+Pegue uma sessão autenticada e requisite uma tela de módulo **já verificado**. Rode isto **no começo de cada dia de
+trabalho** (e depois de reiniciar a máquina): vários passos (nível 3, bateria, ciclos de guarda) leem o `/tmp/sid.txt`, e o
+`/tmp` da máquina se apaga ao desligar.
 
 ```bash
+# a sessao MAIS RECENTE (ls -t). O sess_?* exclui um arquivo "sess_" sem identificador, que aparece
+# quando alguem requisita com o cookie vazio -- e que, por ordem alfabetica, vinha primeiro e dava SID vazio
 SID=$(docker exec -i ecidade_php56 sh -c \
-  'grep -la DB_modulo /var/lib/php/sessions/sess_* | head -1' </dev/null | sed 's#.*/sess_##' | tr -d '\r\n')
+  'ls -t $(grep -la DB_modulo /var/lib/php/sessions/sess_?*) | head -1' </dev/null | sed 's#.*/sess_##' | tr -d '\r\n')
+echo "${#SID}"                  # TEM de dar 40; 0 = nao achou sessao
 echo "$SID" > /tmp/sid.txt
 docker exec -u root -i ecidade_php56 sh -c \
   "cp /var/lib/php/sessions/sess_$SID /tmp/_d.bak && chmod 666 /tmp/_d.bak" </dev/null
@@ -122,6 +127,7 @@ curl -s -o /dev/null -w '%{http_code} %{size_download}\n' \
 | --- | --- |
 | `200` e alguns milhares de bytes | ambiente são, pode começar |
 | `500` e 0 bytes | problema de **ambiente**, não do seu porte — volte ao passo 2 |
+| `200` e poucas dezenas de bytes | a sessão não vale (vazia ou vencida): entre em `http://localhost:8090` com `dbseller`/`dbseller` e rode de novo |
 
 ### 5. Duas proibições
 
@@ -984,6 +990,9 @@ soc1_visitatipo001.php         visitatipo               <- boa escolha: tabela s
 #### O problema que ele resolve
 
 Os dois runtimes compartilham o banco. Se você mandar o mesmo `POST` para os dois, o primeiro muda o estado que o segundo veria. A saída é comparar o **SQL emitido**, com snapshot e restore entre os dois lados.
+
+**Antes:** o `/tmp/sid.txt` e o `/tmp/_d.bak` da *Prova de fumaça* (seção *Antes de começar*). Se o `cat /tmp/sid.txt`
+der `Arquivo ou diretório inexistente`, a máquina reiniciou ou a prova não foi feita hoje — rode-a de novo.
 
 #### Passo 1 — ligar o log de SQL
 
