@@ -398,7 +398,7 @@ alvos com e sem).
 ### Comando — classificar os `split()`
 
 ```bash
-cd ecidade && python3 - <<'PY'
+(cd ecidade && python3 - <<'PY'
 import re
 alvos=[l.strip() for l in open("tmp/<pref>_alvos.txt") if l.strip()]
 lit={}; rgx=[]; js=0
@@ -416,6 +416,7 @@ print(f"literais: {sum(lit.values())}  {dict(list(lit.items())[:6])}")
 print(f"REGEX/variavel: {len(rgx)}  {rgx[:3]}")
 print(f"dentro de <script> (preservar): {js}")
 PY
+)
 ```
 
 ### Como ler o resultado
@@ -795,7 +796,18 @@ done
 diff <(sort /tmp/rb_ecidade_php56.txt) <(sort /tmp/rb_ecidade_php85.txt)
 ```
 
-**Precisa dar diff vazio** — e o número de classes na saída precisa bater com `wc -l /tmp/cls.txt`.
+**Precisa dar diff vazio** — e o número de classes na saída precisa bater com `wc -l /tmp/cls.txt` (`ok` + `pulados` de
+cada runtime = o tamanho da lista).
+
+**Exceto por três artefatos conhecidos do harness**, que aparecem sempre que a classe está no universo (registrados em
+Patrimonial, Financeiro e Saúde):
+
+| Classe | O que aparece | Por quê |
+| --- | --- | --- |
+| `RequisicaoMaterial`, `solicitacaoCompra` | `ArgumentCountError` só no 8.5 | o harness faz `new X()` sem argumentos e o construtor exige um; o 5.6 só avisava. O sistema sempre passa o argumento |
+| `cl_avaliacaogruporespostatrabalhointermitente` | `ERRO ... .dd.xml não encontrado` só no 8.5, e um "pulado" a mais no 5.6 | o construtor lança exceção por falta de um arquivo da base; o 8.5 a captura, o 5.6 morre. Falha nos dois |
+
+Qualquer **outra** linha no diff é para investigar.
 
 > **Um diff vazio de dois arquivos vazios não é aprovação.** No `cad`, a lista tinha 202 classes e a saída trazia **57**: o processo morria num arquivo e os dois runtimes morriam no mesmo, então o resultado aparecia como "idêntico". O `harness_robusto.sh` registra o culpado, pula e continua — o número foi para 201 de 202.
 
@@ -803,30 +815,44 @@ diff <(sort /tmp/rb_ecidade_php56.txt) <(sort /tmp/rb_ecidade_php85.txt)
 
 **Por quê:** a bateria do passo 7 faz só `GET`. As guardas `0 == ""` — **60% de todas as correções do projeto** — só disparam no `POST`. Sem este passo elas não seriam exercitadas por nada.
 
+Rode **uma classe por processo**, com o `scratchpad/porclasse.sh`. Com a lista inteira num processo só, o primeiro fatal
+mata o processo e o resto da lista some: no `soc` (13/11/2026) o 5.6 morreu na classe 119 de 772 e o diff comparou só 103
+classes — sem acusar nada, porque nas 103 os dois concordavam. No `edu3` tinha coberto 120 de 404.
+
 ```bash
 for c in ecidade_php56 ecidade_php85; do
-  docker cp scratchpad/escrita.php $c:/tmp/esc.php >/dev/null
-  docker exec -i $c php /tmp/esc.php /tmp/cls.txt </dev/null > /tmp/w_$c.txt 2>/dev/null
-  printf "%-16s %6s linhas\n" "$c" "$(grep -c . /tmp/w_$c.txt)"
+  docker cp scratchpad/porclasse.sh $c:/tmp/pc.sh >/dev/null
+  docker cp scratchpad/escrita.php  $c:/tmp/esc.php >/dev/null
+  docker exec -i $c sh /tmp/pc.sh /tmp/esc.php < /tmp/cls.txt > /tmp/w_$c.txt    # um runtime de cada vez, nunca em paralelo
 done
 diff /tmp/w_ecidade_php56.txt /tmp/w_ecidade_php85.txt
 ```
 
-**Qualquer linha de diff é defeito** — significa que o 5.6 lê o valor do formulário e o 8.5 mantém `0`. Dado errado gravado em silêncio.
+Leva ~1 min para 772 classes. Ao fim de cada runtime ele imprime `#TOTAL 772 COM_SAIDA 708`: o `TOTAL` **tem de ser** o
+tamanho da `/tmp/cls.txt` (`wc -l`). Classes sem nenhum campo para testar saem como `SEM_SAIDA`.
 
-**Três divergências são artefatos conhecidos**, não defeitos: `lancamentoContabil` e `ordemPagamento` (construtor exige argumentos; o 5.6 morre e o 8.5 segue) e `classes/empenho.php → datausu` (`1969-12-31` contra a data de hoje — só acontece **sem sessão**, que é condição do harness, não de operação).
+**Como ler a saída.** Cada linha é `arquivo<TAB>campo<TAB>valor`: o harness simula um formulário enviado com um valor
+diferente em cada campo (`1000`, `1001`…), chama o `atualizacampos()` da classe e imprime o que ficou em cada campo. No
+`diff`, `<` é o 5.6 e `>` é o 8.5.
 
-> **Não use o `harness_robusto.sh` aqui.** Ele avança contando *linhas de saída*, o que vale para o passo 6 (uma linha por classe) e não para este (muitas linhas por classe).
+| No `diff` | Significa |
+| --- | --- |
+| nada | as duas versões leem o formulário igual — **é o resultado esperado** |
+| `< ...campo 1003` / `> ...campo 0` | o 5.6 leu o formulário e o 8.5 manteve `0`: **falta a guarda `0 == ""`** naquela classe. Dado errado gravado em silêncio — investigar |
+| `SEM_SAIDA` de um lado e `<ERRO>` do outro, ou `<ERRO>` só no 8.5 | ver a tabela de artefatos abaixo; fora dela, investigar |
 
-> **Com listas grandes, rode UMA classe por processo**, com o `scratchpad/porclasse.sh`: um fatal mata o processo e o resto
-> da lista some — no `edu3` a lista inteira cobriu 120 de 404 classes, e os dois lados "concordavam".
->
-> ```bash
-> for c in ecidade_php56 ecidade_php85; do
->   docker cp scratchpad/porclasse.sh $c:/tmp/pc.sh; docker cp scratchpad/escrita.php $c:/tmp/esc.php
->   docker exec -i $c sh /tmp/pc.sh /tmp/esc.php < /tmp/cls.txt > /tmp/w_$c.txt 2>/dev/null
-> done
-> ```
+**Artefatos conhecidos** (não são defeito; aparecem quando a classe está no universo):
+
+| Classe | O que aparece | Por quê |
+| --- | --- | --- |
+| `RequisicaoMaterial`, `solicitacaoCompra`, `lancamentoContabil`, `ordemPagamento` | `<ERRO> ArgumentCountError` só no 8.5 (no 5.6, valores `NULL` ou `SEM_SAIDA`) | o harness faz `new X()` sem argumentos e o construtor exige um; o sistema sempre passa |
+| `cl_avaliacaogruporespostatrabalhointermitente` | `SEM_SAIDA` no 5.6, `<ERRO> Exception` no 8.5 | falta um `.dd.xml` da base: falha nos dois |
+| `classes/empenho.php → datausu` | `1969-12-31` contra a data de hoje | só acontece **sem sessão**, condição do harness |
+
+Medido no `soc` (13/11/2026): 772 classes, e o `diff` só com os três primeiros artefatos.
+
+> **Não use o `harness_robusto.sh` aqui.** Ele avança contando *linhas de saída*, o que vale para o passo 6 (uma linha por
+> classe) e não para este (muitas linhas por classe).
 
 ### Passo 6c — a forma NEGADA `$this->x != ""`
 
@@ -894,7 +920,7 @@ docker exec -i ecidade_database psql -U postgres \
 #### Passo 2 — descobrir a tabela que a tela grava
 
 ```bash
-cd ecidade && grep -aoE "getDao\\(['\"][a-z0-9_]+|new cl_[a-z0-9_]+" <tela>.php | head -3
+(cd ecidade && grep -aoE "getDao\\(['\"][a-z0-9_]+|new cl_[a-z0-9_]+" <tela>.php | head -3)
 ```
 
 O nome que aparecer é a tabela. Confira que a classe existe: `ls classes/db_<tabela>_classe.php`.
@@ -1492,7 +1518,7 @@ A tabela acima diz **qual** é a correção. Esta parte diz **como** aplicá-la 
 **64% dos arquivos são LATIN-1**, não UTF-8. Abrir como texto e salvar corrompe toda a acentuação — e o `git diff` mostra o arquivo inteiro como alterado. Sempre `"rb"` e `"wb"`.
 
 ```bash
-cd ecidade && python3 - <<'PY'
+(cd ecidade && python3 - <<'PY'
 import re
 arq = "cai1_lista001.php"
 b = open(arq, "rb").read()              # rb = BYTES, nunca "r"
@@ -1507,6 +1533,7 @@ assert n > 0, "nao achou -- confira o texto exato, com os espacos"
 open(arq, "wb").write(b.replace(velho, novo))   # wb = BYTES
 print("aplicado")
 PY
+)
 ```
 
 #### Exemplo real: a guarda `pg_*`
@@ -1514,7 +1541,7 @@ PY
 Este é o caso mais comum — apareceu em 111 pontos ao longo do projeto. Repare que ele **conta antes, confere o risco, e só então escreve**:
 
 ```bash
-cd ecidade && python3 - <<'PY'
+(cd ecidade && python3 - <<'PY'
 import re
 arq = "cai1_lista001.php"
 b = open(arq, "rb").read()
@@ -1534,6 +1561,7 @@ novo, n = RX.subn(lambda m: b'(' + m.group(2) + b' ? ' + m.group(1)
 open(arq, "wb").write(novo)
 print(f"{n} guarda(s) aplicada(s)")
 PY
+)
 ```
 
 > **O `(?<!\? )` no início do regex evita guardar o que já está guardado.** Sem ele, rodar duas vezes produz `($r ? ($r ? pg_numrows($r) : 0) : 0)`.
@@ -1572,12 +1600,12 @@ git checkout -- ecidade/
 git checkout -- ecidade/arquivo1.php ecidade/arquivo2.php
 
 # ou, se ja aplicou e quer so reverter SUA substituicao:
-cd ecidade && python3 -c "
+(cd ecidade && python3 -c "
 import sys
 for f in sys.argv[1:]:
     b = open(f,'rb').read()
     open(f,'wb').write(b.replace(b'texto novo', b'texto velho'))
-    print(f)" arquivo1.php arquivo2.php
+    print(f)" arquivo1.php arquivo2.php)
 ```
 
 #### A regra de ouro desta seção
