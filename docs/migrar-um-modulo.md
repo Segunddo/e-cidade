@@ -8,35 +8,41 @@ A regra que vale mais que todas as outras: **quase toda armadilha aqui se parece
 
 Substitua `<pref>` pelo prefixo do módulo (`jur`, `cad`, `cai`…) em todos os comandos. Rode tudo da **raiz do repositório**, nunca de dentro de `ecidade/`.
 
+> **Revisado em 12/11/2026.** A primeira versão (11–13/10) era de quando se migrava um módulo por vez. Desde então o
+> trabalho passou a ser **por área, em lotes** (ver *O fluxo de uma área*, logo depois do ambiente), e entraram cinco
+> verificações novas: a carga das classes (LSP), a forma negada (6c), as abas e redirecionamentos (8b), a nona frente da
+> enumeração e as guardas automáticas `pg_*`. A skill `migrar-modulo` (`.claude/skills/migrar-modulo/SKILL.md`) é a
+> versão condensada deste guia; os dois devem dizer a mesma coisa.
+
 ## A receita, em uma imagem
 
 ```
   DESCOBRIR o que existe
   ┌──────────────────────┐   ┌──────────────┐   ┌──────────────────────┐
   │ 1. Enumerar universo │ → │ 2. Inventar. │ → │ 3. Classificar       │
-  │ sete frentes         │   │ o que há     │   │ literal? regex? JS?  │
+  │ nove frentes         │   │ o que há     │   │ literal? regex? JS?  │
   └──────────────────────┘   └──────────────┘   └──────────────────────┘
                                       ↓
   TRANSFORMAR
   ┌────────────────────────────┐   ┌──────────────────────────────────┐
-  │ 4. Rector (29 na denylist) │ → │ 4b. Portão de funções vs 5.6     │
+  │ 4. Rector (40 na denylist) │ → │ 4b. Portão de funções vs 5.6     │
   └────────────────────────────┘   └──────────────────────────────────┘
      ↑__________________________|
      repete até dar 0 arquivos
                                       ↓
   VERIFICAR
-  ┌───────────┐  ┌────────────┐  ┌──────────────┐  ┌═══════════════┐
-  │ 5. php -l │→ │ 6. Classes │→ │ 6b. Escrita  │→ ║ 7. Bateria    ║
-  │ dois rt.  │  │ idêntico   │  │ POST memória │  ║ byte-a-byte   ║
-  └───────────┘  └────────────┘  └──────────────┘  └═══════════════┘
-     ↑_______________________________________________________|
+  ┌───────────┐ ┌──────────┐ ┌────────────┐ ┌────────────┐ ┌───────────┐ ┌═════════════┐
+  │ 5. php -l │→│5b. Carga │→│ 6. Classes │→│ 6b. Escrita│→│6c. Forma  │→║ 7. Bateria  ║
+  │ dois rt.  │ │ (LSP)    │ │ idêntico   │ │ POST memór.│ │ negada    │ ║ byte-a-byte ║
+  └───────────┘ └──────────┘ └────────────┘ └────────────┘ └───────────┘ └═════════════┘
+     ↑_______________________________________________________________________|
      divergiu → diagnosticar, corrigir e repetir
                                       ↓
   ENTREGAR
-  ┌──────────────────────┐   ┌────────────────────────┐
-  │ 8. Rotear no nginx   │ → │ 9. Registrar no        │
-  │                      │   │    CLAUDE.md + commit  │
-  └──────────────────────┘   └────────────────────────┘
+  ┌──────────────────────┐   ┌──────────────────────────┐   ┌────────────────────────┐
+  │ 8. Rotear no nginx   │ → │ 8b. Abas e redireciona-  │ → │ 9. Registrar e commit  │
+  │    (location ou map) │   │     mentos que voltam    │   │    (local, por lote)   │
+  └──────────────────────┘   └──────────────────────────┘   └────────────────────────┘
 ```
 
 > Os **dois laços** são o que distingue isto de uma conversão de sintaxe.
@@ -51,15 +57,26 @@ Os dois laços tracejados são o que distingue este procedimento de uma convers�
 
 A ordem importa: o 8.5 e o proxy dependem da rede que o 5.6 cria.
 
+Na primeira vez, siga a seção *Como rodar o projeto hoje* do `README.md` (clone, banco, senha). Depois disso:
+
 ```bash
 docker volume create ecidade_sessions && docker volume create ecidade_tmp
 docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
-docker exec ecidade_php56 chmod 1777 /tmp
-chmod -R 777 ecidade/storage ecidade/bootstrap/cache
-chmod 777 ecidade/extension/log ecidade/tmp ecidade/arquivos
-chmod 666 ecidade/extension/log/*.log
+# como root DENTRO do container: varios desses arquivos pertencem ao www-data, e um chmod
+# no host falha neles (o "; true" no fim impede que uma falha aborte o resto)
+docker exec -u root ecidade_php56 sh -c 'chmod 1777 /tmp; cd /var/www/html; chmod -R 777 storage bootstrap/cache; chmod 777 extension/log tmp arquivos; chmod 666 extension/log/*.log; true'
 docker compose -f docker-compose.php85.yml up -d
 docker compose -f docker-compose.proxy.yml up -d
+```
+
+**Depois de reiniciar a máquina** os containers ficam parados — e qualquer comando com `docker exec` falha com
+`container ... is not running`. Religue nesta ordem, **sem** `docker compose down` (o banco não tem volume de
+persistência: `down` apaga os dados; `--remove-orphans` apaga os quatro containers):
+
+```bash
+docker start ecidade_database ecidade_php56
+docker start ecidade_php85 ecidade_proxy
+docker exec -u root ecidade_php56 chmod 1777 /tmp
 ```
 
 ### 2. Conferir que está tudo no ar
@@ -111,6 +128,138 @@ curl -s -o /dev/null -w '%{http_code} %{size_download}\n' \
 - **Nunca alterar `docker-compose.yml`.** É a referência funcional do experimento.
 - **Nunca commitar `docker/database/ecidade_base.sql`** — são 314 MB. Já entrou por engano num `git add -- docker/` e precisou ser removido por `amend`.
 
+## O fluxo de uma área — comece por aqui
+
+Os passos 1 a 9 deste guia portam **um lote**. O trabalho, porém, é organizado por **área do menu** (Tributário, Educação,
+Saúde…), e uma área vira vários lotes. A moldura em volta dos passos é esta:
+
+```
+ A. branch da área ← base-php84
+ B. dimensionar a área e dividir em lotes
+ C. para cada lote, UM POR VEZ:  passos 1 → 9  (commit local, sem push)
+ D. fim da área: bateria completa → conferência pelo proxy → registro → push → PR para base-php84
+```
+
+### A. Criar a branch
+
+Cada área nasce da `base-php84`, que já tem todas as áreas concluídas:
+
+```bash
+git fetch origin
+git checkout -b <area>/migracao origin/base-php84      # ex.: assistencia-social/migracao
+```
+
+### B. Dimensionar e dividir em lotes
+
+```bash
+python3 scratchpad/dimensiona.py
+```
+
+```
+Area                   Mod  Menu Faltam Fant.  Univ.  Pago A alterar
+ASSISTÊNCIA SOCIAL       2    68     57     1   1901   726        43
+CIDADÃO                  1    40     35     5   1828   709        28
+...
+```
+
+`Menu` são as telas de menu da área, `Faltam` as que ainda vão ao 5.6, `Fant.` as que o menu cita mas não existem em disco
+(quebram igual nos dois; só se registram), `A alterar` os arquivos que o lote vai mudar. Para cada prefixo da área, decida
+**como ele será roteado** — é o que define o lote:
+
+| Situação do prefixo | Roteamento | Lote |
+| --- | --- | --- |
+| só esta área usa (ou o resto já foi migrado) | **`location`** por prefixo (passo 8) | o prefixo inteiro: `python3 scratchpad/enumera.py <pref>` |
+| outras áreas ainda pendentes também usam | **`map`** por lista, gerada do banco (*Passo D* de *Quando o prefixo serve várias áreas*) | só as telas da área: `TELAS=@/tmp/telas_lote.txt python3 scratchpad/enumera.py <nome-do-lote>` (uma tela por linha, com a grafia do disco e caminho **absoluto** — o script muda para `ecidade/`; o `<nome-do-lote>` vira só o nome dos arquivos de saída) |
+
+A seção *Quando o prefixo serve várias áreas* mostra como medir quantas telas de outras áreas um prefixo arrastaria. Lote
+grande (mais de ~300 arquivos a alterar) se divide por subprefixo (`sau1_`, `sau2_`…). Registre a divisão em
+`docs/registro/area-<área>.md` antes de começar.
+
+### C. Um lote por vez
+
+Para cada lote: passos 1 a 9. Ao terminar, **commit local** (passo 9) e **pare** — o próximo lote começa limpo.
+
+- **A bateria do passo 7 é só do lote.** Se o lote mexeu no núcleo ou numa classe que muitas telas alcançam, rode também
+  uma **bateria dirigida** às telas já roteadas que chegam ao trecho alterado (ver *Preciso refazer a bateria dos outros
+  módulos?*).
+- **Não envie ao GitHub no meio da área.** Os commits de lote ficam locais até a bateria completa do fim. Se ela achar uma
+  regressão, `git bisect` entre os commits de lote acha o culpado.
+
+### D. Fim da área
+
+**1. Bateria completa** — todas as telas do `location` e todas as do `map`. Leva **cerca de 3 horas**; antes, zere o log do
+banco, que cresce gigabytes com os erros de SQL das baterias (`sudo truncate -s 0 $(docker inspect -f '{{.LogPath}}' ecidade_database)`).
+
+```bash
+SID=$(cat /tmp/sid.txt)      # ver "Prova de fumaça"
+# (a) telas do location: os prefixos sao lidos do proprio nginx.conf
+LOC=$(grep -oP 'location ~\* \^\(\?:/w/\[0-9\]\+\)\?/\(\?:\(\?:\K[^)]+' docker/proxy/nginx.conf)
+python3 scratchpad/cmp.py "$SID" "^(?:$LOC)[0-9]*_" /tmp/bat_location.txt > /tmp/bat_location.log 2>&1
+# (b) telas do map, com a grafia do disco (o map guarda em minuscula)
+python3 - > /tmp/map_telas.txt <<'PY'
+import os, re
+disco = {f.lower(): f for f in os.listdir('ecidade')}
+for l in open('docker/proxy/faseb_map.conf'):
+    m = re.match(r'\s+(\S+)\s+php85;', l)
+    if m and m.group(1) in disco: print(disco[m.group(1)])
+PY
+ONLY=$(paste -sd, /tmp/map_telas.txt) python3 scratchpad/cmp.py "$SID" '^$' /tmp/bat_map.txt > /tmp/bat_map.log 2>&1
+tail -1 /tmp/bat_location.log /tmp/bat_map.log
+```
+
+Em 12/11/2026 eram **9.332** telas no `location` (uma pulada: `iss4_siss002`, que contata serviço externo) e **1.312** no `map`.
+**Compare as divergentes, nome a nome, com a lista da área anterior** (`docs/registro/area-<área anterior>.md`, seção
+*Bateria completa do fim da área*, e `docs/divergencias-conhecidas.md` quando existir). Só interessa o que **entrou**: cada
+nome novo é regressão até prova em contrário. Há uma divergência que vai e volta sozinha: `mer_subitem004` diverge só em
+fim de semana (`mktime(null)`).
+
+**2. Conferência pelo proxy, tela de menu por tela de menu.** A bateria prova que as telas são iguais; esta conferência
+prova que o usuário **chega** ao 8.5. Troque `ASSIST` pelo início do nome da área no banco (`TRIBUT`, `EDUCA`, `SA`,
+`CONFIG`, `CIDAD`, `GESTOR`, `INTEGRA`…):
+
+```bash
+python3 - ASSIST <<'PY'
+import os, subprocess, sys
+area = sys.argv[1]
+sql = ("SELECT DISTINCT lower(split_part(di.funcao,'?',1)) FROM configuracoes.atendcadareamod am "
+       "JOIN configuracoes.atendcadarea a ON a.at26_sequencial=am.at26_codarea "
+       "JOIN configuracoes.db_modulos m ON m.id_item=am.at26_id_item "
+       "JOIN configuracoes.db_menu dm ON dm.modulo=m.id_item "
+       "JOIN configuracoes.db_itensmenu di ON di.id_item=dm.id_item_filho "
+       f"WHERE a.at25_descr ILIKE '%{area}%' AND di.funcao ~* '\\.php'")
+telas = subprocess.run(["docker","exec","-i","ecidade_database","psql","-U","postgres","-d","ecidade","-At","-c",sql],
+                       capture_output=True, stdin=subprocess.DEVNULL).stdout.decode("latin-1").split()
+disco = {f.lower(): f for f in os.listdir("ecidade")}
+c = {"8.5": 0, "5.6": 0, "fantasma": 0}
+for t in telas:
+    if t not in disco: c["fantasma"] += 1; continue
+    h = subprocess.run(["curl","-sI",f"http://localhost:8090/w/2/{disco[t]}"], capture_output=True).stdout.decode("latin-1")
+    rt = "8.5" if "PHP-8.5" in h else "5.6"
+    c[rt] += 1
+    if rt == "5.6": print("NO_5.6", disco[t])
+print(f"{area}: {c['8.5']} no 8.5, {c['5.6']} no 5.6, {c['fantasma']} fantasmas (de {len(telas)})")
+PY
+```
+
+Saída esperada, na Configuração: `CONFIG: 204 no 8.5, 0 no 5.6, 5 fantasmas (de 209)`. **Tem de dar `0 no 5.6`.** Cada
+`NO_5.6` é uma tela de menu que ficou fora do roteamento — rotear (e portar, se não foi) antes de seguir.
+
+**3. Ensinar aos scripts que a área acabou.** `scratchpad/dimensiona.py` tem a tupla `JA` (áreas concluídas) e uma cópia
+do regex do `location`; `scratchpad/redirecionamentos.py` tem outra cópia do regex. Acrescente a área a `JA` e os prefixos
+novos aos dois regex, senão a próxima medição conta esta área como pendente.
+
+**4. Registrar** (passo 9) — a conclusão em `docs/registro/area-<área>.md` (lotes, bateria completa, proxy) e o estado no
+`CLAUDE.md`.
+
+**5. Enviar e abrir a PR:**
+
+```bash
+git push -u origin <area>/migracao
+```
+
+Abra a PR no GitHub com base **`base-php84`** (não `master`). Depois do merge, a próxima área parte da `base-php84`
+atualizada (`git fetch` e passo A).
+
 ## Passo 1 — enumerar o universo
 
 **O que é:** descobrir *todos* os arquivos que o módulo usa. Não são só os que começam com o prefixo — no módulo `fis`, 353 telas puxaram **699 arquivos**.
@@ -161,7 +310,15 @@ ls ecidade | grep -ioE '^<pref>[a-z]*[0-9]*_' | sort -u
 
 **3. Apareceu categoria que não está no catálogo (`docs/registro/`)?** → **PARE e investigue** antes de transformar. Toda categoria nova do projeto veio daí.
 
-### Por que sete frentes, e não só o prefixo
+> Os números acima são de outubro. O rótulo `(6 frentes)` ficou velho no script: ele já percorre as **nove**. Por isso o
+> universo hoje sai bem maior — a 9ª frente segue as classes com namespace de `src/` até `classes/` (no lote 1 de
+> Patrimonial, de 1.727 para 2.801 arquivos). É normal: a maior parte já está paga.
+>
+> **`A ALTERAR` é uma cota superior, não o que o Rector vai mudar.** O detector de `$this->X == <literal>` casa com a
+> própria guarda já aplicada (ver *As armadilhas*), então arquivos já portados voltam na lista. No `soc` (12/11/2026):
+> `A ALTERAR: 20`, e o Rector mudou **3**. Quem diz o número real é o passo 4.
+
+### Por que nove frentes, e não só o prefixo
 
 Cada frente nasceu de um defeito real que custou retrabalho:
 
@@ -174,6 +331,11 @@ Cada frente nasceu de um defeito real que custou retrabalho:
 | `db_utils::getDao('x')` | classes que não citam o próprio nome | 16 classes no `fis` |
 | `dbagata/` com `.class` e `.inc` | biblioteca vendorizada | 216 arquivos invisíveis a `*.php` |
 | Pasta inteira da lib | o resto da pasta | `fpdf151/` tinha 194, eu portara 2 |
+| Classes de `model/` e `std/` por nome curto | `new Folha…` sem `cl_` | 13ª lacuna (RH): classes do cálculo da folha |
+| Classes com namespace (`scratchpad/ns_fecho.py`) | `use ECidade\…`, `new \ECidade\…` e serviços do `bootstrap.php`, em `src/`/`app/`/`api/` | 15ª lacuna (Patrimonial) |
+
+Para medir uma lacuna nova: `TELAS=@arquivo` aceita a lista de partida, e `SEM_NS=1` desliga a 9ª frente (compare os
+alvos com e sem).
 
 **Três dessas lacunas nenhuma varredura achou** — apareceram quando alguém navegou o sistema e um campo não aceitou digitação. Se você tiver acesso ao sistema rodando, **navegue o módulo** depois de portar.
 
@@ -244,11 +406,13 @@ cp scratchpad/rector-rules/*.php ecidade/tmp/rector/rector-rules/
 # 2. conferir que a propria config nao tem erro de sintaxe
 docker exec -i ecidade_php85 php -l /var/www/html/tmp/rector/rector-curado.php </dev/null
 
-# 3. RODAR, e repetir ate dizer 0 arquivos
+# 3. SIMULAR primeiro (--dry-run nao grava nada) e ver quais regras disparariam.
+#    O 2> manda os avisos "Deprecated" para um arquivo -- ver a nota logo abaixo.
+#    Com --dry-run o comando SAI COM CODIGO 2 quando ha mudancas: e o normal, nao e erro.
 docker exec -i -e ALVOS=/var/www/html/tmp/<pref>_alvos.txt ecidade_php85 \
-  php -d memory_limit=3G /var/www/html/tmp/rector/vendor/bin/rector process \
+  php -d memory_limit=3G /var/www/html/tmp/rector/vendor/bin/rector process --dry-run \
   --config /var/www/html/tmp/rector/rector-curado.php \
-  --no-progress-bar --output-format=json </dev/null > /tmp/r1.json
+  --no-progress-bar --output-format=json </dev/null > /tmp/r1.json 2> /tmp/r1.err
 
 # 4. ver quais regras dispararam
 python3 -c "
@@ -259,6 +423,9 @@ for f in fd:
     for r in f.get('applied_rectors',[]): c[r.split(chr(92))[-1]]+=1
 print('arquivos:', len(fd), ' erros:', len(d.get('errors',[]) or []))
 for k,v in c.most_common(): print(f'  {v:5d}  {k}')"
+
+# 5. se so apareceram regras conhecidas (ver "As tres conferencias"), APLICAR:
+#    o mesmo comando do passo 3 SEM o --dry-run, e repetir ate dar "arquivos: 0"
 ```
 
 ### Saída esperada
@@ -271,9 +438,28 @@ arquivos: 196  erros: 0
      80  Php4ConstructorRector
 ```
 
+Medido no `soc` + `hab` (12/11/2026): `soc` 3 arquivos e `hab` 28, as mesmas quatro regras, `erros: 0`.
+
+> **Os avisos `Deprecated:` são esperados — ignore-os.** O Rector carrega o autoloader do projeto, que traz o `vendor/`
+> do Laravel 5.4 (Guzzle, PsySH, Zend Diactoros, PHPUnit). Essas bibliotecas antigas declaram parâmetros de um jeito que
+> o PHP 8.4+ marca como obsoleto, e cada uma imprime uma linha ao ser carregada — umas 15 por execução, sempre as mesmas,
+> **antes** de o Rector olhar qualquer arquivo seu:
+>
+> ```
+> Deprecated: GuzzleHttp\Promise\queue(): Implicitly marking parameter $assign as nullable is deprecated ...
+> Deprecated: Psy\info(): Implicitly marking parameter $config as nullable is deprecated ...
+> ```
+>
+> Não dizem nada sobre o seu módulo. Se você rodar sem o `2> /tmp/r1.err`, elas cobrem o terminal; com ele, ficam no
+> arquivo. O que importa é a contagem do passo 4 (`erros: 0`). Se **outra** coisa aparecer no `/tmp/r1.err` (`Fatal`,
+> `Killed`, `SEM ALVOS`), aí sim pare.
+>
+> Outro erro que parece do Rector e não é: `container ... is not running`. Os containers pararam (reinício da máquina) —
+> ver *Antes de começar*.
+
 ### As três conferências
 
-**1. Repita até dar zero.** O Rector **não converge numa passada**, e isso é intermitente. Numa execução real: 163 arquivos, depois mais 83, depois 0. Rode o passo 3 de novo até `arquivos: 0`.
+**1. Repita até dar zero.** O Rector **não converge numa passada**, e isso é intermitente. Numa execução real: 163 arquivos, depois mais 83, depois 0. Rode o comando de aplicar (o 3 **sem** `--dry-run`) e a contagem do 4 de novo, até `arquivos: 0` — a saída JSON lista os arquivos que ele acabou de mudar.
 
 **2. `Php4ConstructorRector` apareceu na lista?** Se o módulo tem construtores PHP 4 (o passo 1 disse quantos) e essa regra **não** aparece, o pin de versão quebrou. Sem `->withPhpVersion(PhpVersion::PHP_80)` na config, o Rector lê o `composer.json` do projeto (`">=5.6.4"`) e **desliga em silêncio** toda regra com *version bonding*, reportando sucesso.
 
@@ -281,7 +467,7 @@ arquivos: 196  erros: 0
 
 ### Protocolo para regra nova — obrigatório
 
-A denylist tem **29 regras** e já cresceu **seis vezes**. Toda vez foi uma regra que parecia funcionar.
+A denylist tem **40 regras** (12/11/2026) e já cresceu várias vezes. Toda vez foi uma regra que parecia funcionar.
 
 ```bash
 # 1. ver EXATAMENTE o que ela fez
@@ -319,6 +505,13 @@ As seis que já foram banidas, para você reconhecer o padrão:
 | `BinaryOpBetweenNumberAndStringRector` | `$x == ""` → `$x == 0`, divergindo em 2 de 6 valores |
 | `RemoveExtraParametersRector` | **apagava a cláusula `WHERE` de um `DELETE`** |
 | `BreakNotInLoopOrSwitchToReturnRector` | `break` → `return`, onde o 5.6 **mata o script** |
+| `ListEachRector` | irmã da `WhileEachToForeach`: o Rector não vê o ponteiro interno já exaurido por um laço anterior. Os `each()` se tratam **à mão** (ver *Receituário*) |
+
+E uma regra que **fica ligada, mas exige conferência**: `OptionalParametersAfterRequiredRector` dá `= null` a parâmetros
+de um método e assim **muda a assinatura da classe mãe**. A filha que declara os mesmos parâmetros como obrigatórios deixa
+de carregar no 8.5 (`must be compatible`). Para cada método que ela tocar, procure `extends <Classe>` na **base inteira**
+(não só no universo) e espelhe os padrões na filha — foi o caso de `cl_cgs_und_ext` no lote 2 da Saúde. O passo 5b pega
+o que escapar.
 
 > Se o Rector reportar **`0 arquivos, 0 regras` sem mensagem de erro**, quase sempre a config tem erro de sintaxe. Por isso o passo 2 do comando existe.
 
@@ -456,7 +649,7 @@ Foi assim que as duas regras foram validadas: **246 de 248 arquivos semanticamen
 
 > **Sem a terceira árvore você não sabe quem mudou o quê.** Comparar só as duas saídas mostra que elas diferem, não qual das duas está certa.
 
-## Passos 4b a 6b — os quatro portões
+## Passos 4b a 6c — os portões
 
 Cada portão pega uma classe de defeito que os outros não veem. Nenhum é opcional.
 
@@ -513,6 +706,29 @@ done
 docker exec -i ecidade_php85 php -d display_errors=1 -l /var/www/html/<arquivo> </dev/null 2>&1 | grep -a 'on line'
 ```
 
+### Passo 5b — carregar cada arquivo (LSP)
+
+**Por quê:** o `php -l` olha um arquivo de cada vez. Se a classe filha está num arquivo e a mãe em outro, a incompatibilidade
+de assinatura (`Declaration of Filha::m() must be compatible with Mae::m()`) só aparece quando o PHP 8 **declara** a
+classe — ou seja, em execução. Foi assim que `FolhaPagamentoSalario` e irmãs não carregavam no 8.5 com lint limpo.
+
+```bash
+grep -E '\.(php|class|inc)$' ecidade/tmp/<pref>_universo.txt \
+  | while read f; do grep -aqE '\b(extends|implements)\b' "ecidade/$f" </dev/null && echo "$f"; done > /tmp/carga.txt
+for v in 56 85; do     # um processo por arquivo: um fatal nao derruba o resto
+  docker cp scratchpad/carrega_arquivo.php ecidade_php$v:/tmp/ca.php
+  docker exec -i ecidade_php$v sh -c 'while read f; do php /tmp/ca.php "$f" </dev/null 2>/dev/null | tail -1; done' \
+    < /tmp/carga.txt > /tmp/carga_$v.txt
+done
+wc -l /tmp/carga.txt /tmp/carga_56.txt /tmp/carga_85.txt      # os tres TEM de bater
+# so interessa o que carrega no 5.6 e NAO no 8.5
+join -t$'\t' <(cut -f1,2 /tmp/carga_56.txt | sort) <(cut -f1,2 /tmp/carga_85.txt | sort) | awk -F'\t' '$2=="OK" && $3!="OK"'
+```
+
+Cada linha de saída é `arquivo<TAB>OK` ou `arquivo<TAB>FATAL<TAB>mensagem` (no 8.5 o fatal vira `ERRO`). **O `join` precisa
+sair vazio.** Arquivos que falham **nos dois** (interface em arquivo que não foi incluído, código morto) são pré-existentes:
+anote o número e siga — no universo do `soc` eram 12 de 384, em 12/11/2026 (~30 s nos dois runtimes).
+
 ### Passo 6 — instanciar as classes
 
 **Por quê:** valida a alteração de maior risco. No PHP 8 um construtor estilo PHP 4 **nunca executa** — sem erro, sem aviso, sem log. O objeto parece funcionar e produz resultado errado.
@@ -549,6 +765,54 @@ diff /tmp/w_ecidade_php56.txt /tmp/w_ecidade_php85.txt
 **Três divergências são artefatos conhecidos**, não defeitos: `lancamentoContabil` e `ordemPagamento` (construtor exige argumentos; o 5.6 morre e o 8.5 segue) e `classes/empenho.php → datausu` (`1969-12-31` contra a data de hoje — só acontece **sem sessão**, que é condição do harness, não de operação).
 
 > **Não use o `harness_robusto.sh` aqui.** Ele avança contando *linhas de saída*, o que vale para o passo 6 (uma linha por classe) e não para este (muitas linhas por classe).
+
+> **Com listas grandes, rode UMA classe por processo**, com o `scratchpad/porclasse.sh`: um fatal mata o processo e o resto
+> da lista some — no `edu3` a lista inteira cobriu 120 de 404 classes, e os dois lados "concordavam".
+>
+> ```bash
+> for c in ecidade_php56 ecidade_php85; do
+>   docker cp scratchpad/porclasse.sh $c:/tmp/pc.sh; docker cp scratchpad/escrita.php $c:/tmp/esc.php
+>   docker exec -i $c sh /tmp/pc.sh /tmp/esc.php < /tmp/cls.txt > /tmp/w_$c.txt 2>/dev/null
+> done
+> ```
+
+### Passo 6c — a forma NEGADA `$this->x != ""`
+
+**Por quê:** o `GuardaComparacaoLiteralRector` só trata `==`. A forma `!=`, com propriedade inteira e **sem `trim()`**,
+está sobretudo no bloco de auditoria do `alterar()`:
+
+```php
+if (isset($GLOBALS["HTTP_POST_VARS"]["x"]) || $this->x != "")   // 5.6: 0 != "" falso; 8.5: verdadeiro
+    insert into db_acount (...)                                  // o 8.5 grava uma alteração para 0
+```
+
+O padrão aparece milhares de vezes, mas só muda o resultado quando a propriedade ainda vale o inteiro `0` na comparação.
+Por isso **meça antes de corrigir**:
+
+```bash
+python3 scratchpad/negada_alvos.py tmp/negada.tsv   # estatico: classe, campo, metodo, auditoria/negocio
+cut -f1 ecidade/tmp/negada.tsv | sort -u > ecidade/tmp/negada_cls.txt
+for v in 56 85; do
+  docker cp scratchpad/negada.php ecidade_php$v:/tmp/negada.php
+  # UM arquivo temporario POR RUNTIME: o /tmp e compartilhado entre os containers
+  docker exec -i -e V=$v ecidade_php$v sh -c 'cd /var/www/html; while read c; do
+      grep -F "$(printf "%s\t" "$c")" tmp/negada.tsv > /tmp/_neg_$V.tsv
+      php -d display_errors=0 /tmp/negada.php /tmp/_neg_$V.tsv 2>/dev/null </dev/null; done' \
+    < ecidade/tmp/negada_cls.txt > /tmp/neg_$v.txt
+done
+diff /tmp/neg_56.txt /tmp/neg_85.txt
+```
+
+Compare pela chave (classe, campo, método):
+- **valor diferente** (5.6 `NULL`, 8.5 `0`): falta a guarda do `==` no `atualizacampos()` — a classe não foi portada. Se ela
+  está no universo do lote, é falha do passo 4;
+- **mesmo valor `0`, resultado diferente**: é a forma negada. Ponha os pares (classe, campo, método) num TSV e rode
+  `python3 scratchpad/negada_corrige.py <tsv>`, que aplica `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)` só
+  naqueles pontos. Depois rode o `negada_alvos.py` de novo: os pontos corrigidos têm de sumir (o `negada.php` continua
+  acusando, porque mede o estado, não o código).
+
+Medido em 27/10/2026: 7.367 pares, 89 da forma negada, 74 em 28 classes servidas, todos de auditoria. Nos lotes 1 e 2
+da Configuração: 2.068 e 2.426 pares, 0 divergências.
 
 ### Nível 3 — `POST` de verdade, comparando o SQL emitido
 
@@ -744,6 +1008,23 @@ diff <(fold -w95 /tmp/o_8080.html) <(fold -w95 /tmp/o_8085.html) | head -12
 | `200` / `200` com bytes diferentes | defeito **silencioso** — o mais perigoso | diagnosticar pelo `diff` |
 | Não é tela (fragmento de include) | artefato do harness | caracterizar e seguir |
 
+### Os dois ciclos automáticos de guarda `pg_*`
+
+O caso mais comum de "quebra só no 8.5" é uma função `pg_*` recebendo `false` (a SQL falhou) ou pedindo uma coluna que o
+resultado não tem. Dois scripts corrigem isso **na aparição, uma linha por vez**: requisitam a tela no 8.5, leem o fatal do
+log, aplicam só naquela linha a guarda que reproduz o 5.6 (`($r ? pg_xxx($r…) : null)`; `null` é o que o 5.6 devolvia) e
+repetem. Eles restauram a sessão a partir do `/tmp/_sess.bak` que o `cmp.py` cria — rode a bateria antes. Não fazem
+`php -l`: faça você, nos dois runtimes, sobre os arquivos que eles tocaram.
+
+```bash
+SID=$(cat /tmp/sid.txt) python3 scratchpad/guarda_ciclo.py <tela1>.php [<tela2>.php ...]   # resultado false
+SID=$(cat /tmp/sid.txt) python3 scratchpad/campo_ciclo.py  <tela1>.php [<tela2>.php ...]   # coluna ausente, pg_free_result(false)
+```
+
+Alterne os dois até a tela parar de fatalar — uma guarda expõe a próxima (`cai3_gerfinanc004` precisou de cinco rodadas).
+Depois, `git diff` em cada arquivo que eles tocaram: confira que a guarda não está sobre um resultado comparado com `===`
+(ver *Corrigir na aparição, nunca em massa*).
+
 ### Quando o diagnóstico não fecha: instrumente
 
 Se houver vários candidatos plausíveis no mesmo arquivo, **não deduza** — imprima o valor. Num caso real, duas hipóteses minhas estavam erradas e custaram duas rodadas de bateria e duas correções revertidas no núcleo; uma sonda resolveu em um minuto:
@@ -756,64 +1037,29 @@ Coloque antes da linha suspeita, requisite nos dois runtimes, leia, **remova a s
 
 ### Preciso refazer a bateria dos outros módulos?
 
-Rodar as baterias de todos os módulos já portados custa \~25 minutos. **Computar se é preciso custa 3 segundos.**
-
-A pergunta real não é "mexi no núcleo?", e sim **"algum arquivo que eu alterei é executado por um módulo já verificado?"**
+**Durante a área, não a completa** (decisão de 29/10/2026: ela custa ~3 h e todas as completas desde o Tributário voltaram
+na linha de base). A bateria completa roda **uma vez, no fim da área** (*O fluxo de uma área*, D). No lote, a pergunta é
+**"algum arquivo que eu alterei é executado por uma tela que já está no 8.5?"** — e se for, rode uma **bateria dirigida**
+só a essas telas:
 
 ```bash
-git diff --name-only -- ecidade/ | sed 's#^ecidade/##' | grep '\.php$' | sort -u > /tmp/toc.txt
-
-cd ecidade && python3 - <<'PY'
-import os
-toc = {l.strip() for l in open("/tmp/toc.txt") if l.strip()}
-
-# SO os modulos que ja passaram por bateria. NAO use glob: os universos de
-# dimensionamento (prefixo inteiro) incluem arquivos que nunca foram portados,
-# e a resposta sai conservadora demais.
-VERIFICADOS = ["fis","iss","dvr","arr","tri","inf","amb","pre","cadT","caiT"]
-
-NUCLEO = ("dbforms/","libs/","std/","fpdf151/",
-          "extension/modification/","classes/db_cgm_classe.php")
-
-nuc = sorted(f for f in toc if f.startswith(NUCLEO))
-inter, sem_dado = {}, []
-for m in VERIFICADOS:
-    p = f"tmp/{m}_universo.txt"
-    if not os.path.isfile(p):
-        sem_dado.append(m); continue          # ausente != vazio
-    i = {l.strip() for l in open(p) if l.strip()} & toc
-    if i: inter[m] = sorted(i)
-
-print(f"arquivos alterados : {len(toc)}")
-print(f"NUCLEO tocado      : {len(nuc)}  {nuc}")
-print(f"modulos que usam   : {list(inter)}")
-if sem_dado: print(f"SEM universo (desconhecido): {sem_dado}")
-print("DECISAO:", "BATERIA COMPLETA" if nuc
-      else ("nao rodar regressao" if not inter else f"so as baterias de {list(inter)}"))
-PY
+# 1. quem chama a funcao/metodo/arquivo que voce alterou (grep -a: 64% da base e LATIN-1)
+grep -arl --include='*.php' '<nome da funcao ou do arquivo alterado>' ecidade | sed 's#^ecidade/##' > /tmp/chamam.txt
+# 2. lotes JA SERVIDOS cujo universo contem algum chamador (os universos estao em ecidade/tmp/<lote>_universo.txt;
+#    ignore os dim_*_universo.txt, que sao so de dimensionamento e incluem arquivos nunca portados)
+for u in ecidade/tmp/*_universo.txt; do grep -qxFf /tmp/chamam.txt "$u" && echo "$u"; done | grep -v '/dim_'
+# 3. rodar o cmp.py nas telas desses lotes: o prefixo de cada um, ou ONLY= com as telas do map
 ```
 
 | Resultado | Ação |
 | --- | --- |
-| Núcleo tocado | **bateria completa** — um defeito ali alcança todas as telas |
-| Interseção com módulos específicos | rodar **só as baterias deles** |
-| Interseção vazia | **não rodar** — ninguém mais executa o que você mudou |
-| Algum módulo "sem universo" | **desconhecido** — trate como se intersectasse |
+| nenhum lote servido alcança o trecho | não rodar nada além da bateria do lote |
+| alguns lotes | bateria dirigida a eles |
+| quase tudo (uma função de `libs/db_stdlib.php`, por exemplo) | aí sim, a bateria completa já no lote |
 
-> **A lista `VERIFICADOS` precisa ser mantida à mão.** Usar `glob('tmp/*_universo.txt')` parece mais esperto e dá resposta **errada**: os universos gerados só para dimensionamento incluem arquivos que nunca foram portados. Testado: o glob mandou rodar 4 baterias desnecessárias.
-
-> **Seis módulos da Fase A não têm arquivo de universo** — foram portados antes de o ferramental ser versionado. Para eles a resposta é "não sei", não "não". Se o seu lote toca `classes/`, inclua-os por segurança ou regenere o universo deles com `enumera.py`.
-
-#### Rodar as baterias de regressão
-
-```bash
-for m in cem 'itbi?' 'agua?' jur div mar not fis iss dvr arr tri inf amb pre; do
-  printf "%-10s " "$m"
-  python3 scratchpad/cmp.py "$(cat /tmp/sid.txt)" "^${m}[0-9]*_" /tmp/h_$m.txt 2>&1 | tail -1
-done
-```
-
-**Compare com a linha de base registrada em `docs/registro/area-<área>.md`.** "115/116" não é defeito se a linha de base já era 115/116 — as 14 divergências conhecidas estão todas caracterizadas lá.
+**Compare sempre com a linha de base registrada em `docs/registro/area-<área>.md`.** "115/116" não é defeito se a linha de
+base já era 115/116 — as divergências conhecidas estão todas caracterizadas lá (e reunidas em
+`docs/divergencias-conhecidas.md`, quando existir).
 
 ## Quando o alvo não é um módulo
 
@@ -957,22 +1203,24 @@ Medido nos quatro prefixos grandes:
 
 ### Passo D — rotear por lista
 
+O gerador lê o banco, cruza com o disco e escreve `docker/proxy/faseb_map.conf`. O `nginx.conf` já tem os três `map` que
+usam esse arquivo. Cada argumento diz a **área** (início do nome no banco, sem `DB:`) e os prefixos, e só entram as telas
+que o banco atribui àquela área. Abas e destinos que não estão no menu entram pela lista `docker/proxy/faseb_map_abas.txt`
+(passo 8b), que o gerador também lê.
+
+O gerador **reescreve o arquivo inteiro**: repita sempre **todos** os lotes já roteados, senão eles voltam para o 5.6 em
+silêncio. **Não digite o comando de memória:** copie-o da linha 2 do próprio `faseb_map.conf` e acrescente só o argumento do
+seu lote no fim.
+
 ```bash
-python3 scratchpad/gera_map_faseb.py <area>:<pref>,<pref> [<area>:<pref> ...]
+sed -n 2p docker/proxy/faseb_map.conf          # "# Reproduzir:  python3 scratchpad/gera_map_faseb.py tribut:... conf:..."
+cp docker/proxy/faseb_map.conf /tmp/antes.conf
+python3 scratchpad/gera_map_faseb.py <todos os argumentos da linha 2> <area>:<pref>,<pref>
+diff /tmp/antes.conf docker/proxy/faseb_map.conf | grep '^< ' | grep -v Reproduzir   # TEM de vir vazio: so pode ACRESCENTAR
 grep -c 'php85;' docker/proxy/faseb_map.conf
-docker compose -f docker-compose.proxy.yml up -d --force-recreate
-sleep 4 && docker exec ecidade_proxy nginx -t
 ```
 
-O gerador lê o banco, cruza com o disco e escreve `docker/proxy/faseb_map.conf`. O `nginx.conf` já tem os três `map` que usam esse arquivo.
-
-Cada argumento diz a **área** e os prefixos, e só entram as telas que o banco atribui àquela área. O gerador **reescreve o arquivo inteiro**: repita sempre **todos** os lotes já roteados, senão eles voltam para o 5.6 em silêncio. O comando atual está na linha 2 do próprio `faseb_map.conf`. Hoje:
-
-```bash
-python3 scratchpad/gera_map_faseb.py tribut:amb,pre,cad,cai,pro,con,prot,rec,dv educa:mat,pro
-```
-
-Para conferir que nada saiu, compare o arquivo antes e depois: só pode haver linhas **acrescentadas** (`diff antes.conf docker/proxy/faseb_map.conf | grep '^<'` tem de vir vazio).
+Depois, testar e recriar o proxy como no passo 8 (com o `nginx -t` num container descartável **antes**).
 
 **Conferir o roteamento — cinco casos:**
 
@@ -1030,8 +1278,14 @@ Três detalhes, cada um já causou roteamento silenciosamente errado:
 | `(?:/w/[0-9]+)?` | na navegação real o desktop prefixa tudo com o id da janela |
 
 ```bash
-docker compose -f docker-compose.proxy.yml up -d --force-recreate   # reload NAO basta
-sleep 4 && docker exec ecidade_proxy nginx -t
+# Testar a config ANTES, num container descartavel, e recriar SO se o nginx -t passou.
+# Nao encadeie `nginx -t | tail -1 && up`: o && olharia o status do tail, e uma config
+# quebrada derruba o proxy (aconteceu no lote 5 do Financeiro: "could not build map_hash").
+IMG=$(docker inspect -f '{{.Config.Image}}' ecidade_proxy)
+NET=$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}' ecidade_proxy)
+docker run --rm --network $NET -v $PWD/docker/proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro \
+  -v $PWD/docker/proxy/faseb_map.conf:/etc/nginx/faseb_map.conf:ro $IMG nginx -t \
+  && docker compose -f docker-compose.proxy.yml up -d --force-recreate   # reload NAO basta
 
 for u in login.php <pref>1_x.php w/2/<pref>2_y.php; do
   printf "%-34s " "/$u"
@@ -1054,11 +1308,52 @@ docker compose -f docker-compose.proxy.yml up -d --force-recreate
 
 > Curiosidade que já derrubou o proxy: `location ~` é sensível a maiúsculas e exigiu o `~*`; o `map` **não é**. Emitir as duas grafias faz o nginx recusar a configuração com `conflicting parameter`.
 
-### Passo 9 — commit e registro
+### Passo 8b — abas e redirecionamentos que voltam ao 5.6 (14ª lacuna)
+
+**Por quê:** rotear a tela do menu **não basta**. Muitas telas são só um contêiner: ao abrir, carregam o formulário num
+`<iframe>` (`cad1_face001` → `cad1_face004`) ou redirecionam (`db_redireciona(...)`). Esse destino **não está no menu**,
+então o `map` (gerado do banco) não o conhece e ele fica no 5.6. A tela "está no 8.5" e o formulário que o usuário
+preenche roda no 5.6. **Nenhuma bateria acusa isso**: as duas telas são idênticas, só que servidas pelo runtime errado.
+Em 26/10/2026 eram 158 abas atrás de 90 telas de menu, nas três áreas concluídas até então.
+
+No roteamento por **prefixo** a aba normalmente vai junto com o contêiner; mas rode a verificação sempre — o destino pode
+ser de outro prefixo (`eso1_cadastroavaliacoes002` redireciona para `hab1_avaliacao002`).
 
 ```bash
-git add -A -- ecidade/ CLAUDE.md docker/proxy/ scratchpad/
+# GET no 8.5 de cada tela de menu das areas listadas (e das abas ja roteadas: segundo salto)
+python3 scratchpad/redirecionamentos.py "$(cat /tmp/sid.txt)" /tmp/redir.tsv TRIBUT,EDUCA,RECURSOS,PATRIM,FINANC,SA,CONFIG,<SUA_AREA>
+grep -P '^NO_5\.6\t' /tmp/redir.tsv | grep -vP '\t(corpo|db_erros)\.php\t'     # TEM de sair vazio
+```
+
+Para cada linha `NO_5.6`:
+
+1. **iframe** → portar o universo dos destinos (`TELAS=<destinos com a grafia do disco> python3 scratchpad/enumera.py <nome>`
+   e passos 4 a 7, com bateria nos destinos). Depois acrescente o nome, **em minúscula**, a `docker/proxy/faseb_map_abas.txt`
+   e regenere o `map` com o comando da linha 2 do `faseb_map.conf` (o gerador lê a lista).
+2. **redireciona** → a mesma receita, com dois cuidados: o destino costuma ser **outro contêiner de abas** (ponha no `TELAS=`
+   a família inteira: `ls ecidade | grep -i '^hab1_avaliacao'`), e o redirecionamento costuma ser **condicional** (a
+   bateria compara os dois ramos: a tela de menu e o destino).
+3. **`corpo.php`** (voltar ao início depois de erro ou configuração ausente) e **`db_erros.php`** (página genérica de erro)
+   não são formulário nem lacuna.
+4. **pasta** (`dbforms/…`) e **inexistente** também não. O proxy não roteia por pasta.
+
+Depois de rotear, **rode o levantamento de novo**: ele abre as telas já roteadas e acusa o segundo salto (as abas do
+contêiner que você acabou de rotear). **Limite:** o script só vê o que a tela faz ao abrir, por `GET` sem parâmetros. Abas
+criadas por JavaScript ao clicar ficam de fora — na navegação manual, confira o `X-Ecidade-Runtime` dos iframes nas
+ferramentas do navegador.
+
+Se você acrescentar um prefixo ao `location`, acrescente-o também à cópia do regex que fica em
+`scratchpad/redirecionamentos.py` e em `scratchpad/dimensiona.py` (variável `LOC`), senão os dois classificam as telas
+desse prefixo como "no 5.6".
+
+### Passo 9 — commit e registro
+
+Um commit **por lote**, na branch da área, **sem push** (o envio é no fim da área):
+
+```bash
+git add -A -- ecidade/ CLAUDE.md docs/ docker/proxy/ scratchpad/ ':!docker/database/ecidade_base.sql' ':!docker/database/ecidade_base.sql.gz'
 git diff --cached --name-only | grep -c ecidade_base.sql    # TEM de dar 0
+git diff --cached --name-only | grep -c '^ecidade/tmp/'      # TEM de dar 0 (tmp/ e ignorado; se aparecer, algo saiu errado)
 git commit
 ```
 
@@ -1111,6 +1406,24 @@ Faça isso com uma **tabela de valores** (`0`, `""`, `"0"`, `"abc"`, `null`, `fa
 | `ArgumentCountError: Too few arguments` | argumento faltando | passar o valor que o 5.6 produzia |
 | Data gravada = **hoje** em vez da época | `date($fmt, null)` | `date($fmt, (int)$x)` |
 | Layout do PDF deslocado | `"J" > 0` no FPDF | `(float)$ln > 0` — **não** corrigir a chamada |
+| `Call to undefined function each()` | `each()` removido no PHP 8 | **à mão**, nunca `foreach` (ver abaixo) |
+| `count(): Argument #1 must be of type Countable\|array` | `count(null)`/`count("")` — o 5.6 dava 0 ou 1 | `count((array)$x)` |
+| `Call to undefined function get_magic_quotes_gpc()` | removida no PHP 8; no 5.6 do projeto valia `false` | trocar a chamada por `false` |
+| `fputs(): Argument #1 ($stream) must be of type resource, bool given` | `fopen` falhou (`tmp/` sem permissão, caminho errado) | `$fd && fputs($fd, ...)` — o 5.6 só avisava |
+| `pg_lo_export(): Argument #1 ... PgSql\Connection` | ordem legada `($oid, $arq, $conn)`, que o 5.6 aceitava | `pg_lo_export($conn, $oid, $arq)` — funciona nos dois |
+| `Attempt to assign property "x" on null` | o 5.6 criava o objeto sozinho (*auto-vivificação*) | `if (empty($o)) $o = new stdClass();` antes da linha |
+| `Non-static method X::m() cannot be called statically` | chamada estática a método sem `$this` | declarar o método `static` (conferir que ele não usa `$this`) |
+| `Declaration of Filha::m() must be compatible with Mae::m()` | LSP — em geral depois do `OptionalParametersAfterRequiredRector` | espelhar a assinatura da mãe na filha |
+
+**O `each()` à mão.** O e-cidade tem laços que dependem do ponteiro interno **já exaurido** por um laço anterior e que,
+por isso, nunca executam no 5.6. `foreach` faria esses laços rodarem. A forma fiel, que anda no mesmo ponteiro:
+
+```php
+// antes:  while (list($k, $v) = each($a)) {
+while (is_array($a) && (($k = key($a)) !== null) && ((($v = current($a)) || true) && (next($a) || true))) {
+```
+
+Se houver `reset($a)` logo antes do laço, `foreach` é fiel — mas a forma acima também é, e não exige julgar o contexto.
 
 ### Dois casos que ensinam o princípio
 
@@ -1410,5 +1723,13 @@ O módulo `tra` foi escolhido como piloto só pelo resíduo (era zero) e depois 
 | `scratchpad/harness_robusto.sh` | faz o passo 6 sobreviver a um fatal |
 | `scratchpad/gera_map_faseb.py` | roteamento por lista, gerado do banco |
 | `scratchpad/residuo.py` | escolha do próximo módulo |
+| `scratchpad/dimensiona.py` | dimensionar as áreas que faltam (*O fluxo de uma área*, B) |
+| `scratchpad/ns_fecho.py` | 9ª frente da enumeração (classes com namespace); chamado pelo `enumera.py` |
+| `scratchpad/carrega_arquivo.php` | passo 5b: carregar cada arquivo (LSP) |
+| `scratchpad/porclasse.sh` | passos 6/6b: uma classe por processo |
+| `scratchpad/negada_alvos.py`, `negada.php`, `negada_corrige.py` | passo 6c: forma negada |
+| `scratchpad/guarda_ciclo.py`, `campo_ciclo.py` | passo 7: guardas `pg_*` na aparição |
+| `scratchpad/redirecionamentos.py` | passo 8b: abas e redirecionamentos que voltam ao 5.6 |
+| `docker/proxy/faseb_map_abas.txt` | passo 8b: abas e destinos roteados por lista |
 
-**Quando este documento e o registro (`CLAUDE.md` + `docs/registro/`) divergirem, o registro manda** — é ele que é atualizado a cada lote.
+**Quando este documento e o registro (`CLAUDE.md` + `docs/registro/`) divergirem, o registro manda** — é ele que é atualizado a cada lote. Se encontrar uma divergência, corrija este guia **e** a skill `migrar-modulo`.
