@@ -65,7 +65,7 @@ if($db_opcao!=1 && @$ed47_i_codigo!=""){
           $arquivo = "tmp/".$ed47_c_foto;
 
           db_query("begin");
-          $lResultExport = pg_lo_export($ed47_o_oid, $arquivo, $conn);
+          $lResultExport = pg_lo_export($conn, $ed47_o_oid, $arquivo);
           db_query("end");
 
           if (!$lResultExport) {

@@ -109,7 +109,7 @@ $cldb_geradorrelatoriotemplate = new cl_db_geradorrelatoriotemplate();
    	 $sArquivoSxw   = "docTamplate".date("YmdHis").db_getsession("DB_id_usuario").".sxw";
 	 $sNomeTemplate = "tmp/".$sArquivoSxw;
 
-   	 $lErro = pg_lo_export($oArquivo->db15_documento,$sNomeTemplate,$conn);
+   	 $lErro = pg_lo_export($conn,$oArquivo->db15_documento,$sNomeTemplate);
    	 if (!$lErro) {
    	   $lSqlErro = true;
    	 }

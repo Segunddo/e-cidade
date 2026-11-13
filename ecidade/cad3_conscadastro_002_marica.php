@@ -59,7 +59,7 @@ include(modification("classes/db_recadastroimobiliarioimoveisbic_classe.php"));
     }
 
     $sArquivoDestino = "tmp/".$parametro.".pdf";
-    $result = pg_lo_export($oDadosRecadastroimobiliarioimoveisbic->ie29_arquivobic,$sArquivoDestino,$conn);
+    $result = pg_lo_export($conn,$oDadosRecadastroimobiliarioimoveisbic->ie29_arquivobic,$sArquivoDestino);
 
     db_fim_transacao(!$result);
 

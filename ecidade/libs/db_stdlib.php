@@ -3732,7 +3732,7 @@ function db_buscaImagemBanco($cadban, $conn)
             // seta os dados para o boleto passando as informações do logo
             db_query($conn, "begin");
             $caminho = "tmp/" . $banco . ".jpg";
-            pg_lo_export("$db90_logo", $caminho, $conn);
+            pg_lo_export($conn, "$db90_logo", $caminho);
             db_query($conn, "commit");
 
             $arr = array(
