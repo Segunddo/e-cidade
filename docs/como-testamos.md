@@ -35,6 +35,98 @@ $this->cm34_tipo = ($this->cm34_tipo == "" ? <valor do formulário> : $this->cm3
 
 No 8.5 o valor digitado nunca é lido. A tela abre normalmente, o botão funciona, e o registro é recusado ("campo não informado") ou gravado com `0`. Quem só olha se a tela carrega não vê nada. Por isso os testes comparam o **conteúdo** da resposta e o **SQL gravado**, não apenas a ausência de erro.
 
+### O que é "comparar os bytes"
+
+Quando alguém abre uma tela, o PHP gera um **texto** — o HTML — e o envia ao navegador, que desenha a tela a partir dele.
+Num relatório, em vez de HTML vem um PDF, que também é uma sequência de bytes. Um byte é, na prática, um caractere desse
+texto: `<`, `i`, `n`, `p`, `u`, `t`…
+
+Comparar os bytes é pegar **a resposta inteira** que cada PHP manda ao navegador e conferir se ela é **idêntica, caractere
+por caractere**. A comparação anda pelos dois textos lado a lado, do primeiro ao último; se **um único** caractere for
+diferente, ou se um texto for mais curto, a tela é marcada como divergente. É o que faz o comando `cmp arquivo1 arquivo2`
+do Linux, e é o que o `cmp.py` faz para cada tela. Um exemplo real (13/11/2026):
+
+```
+soc1_visitatipo001.php, mesma sessão
+  PHP 5.6 (:8080) → 3.998 bytes
+  PHP 8.5 (:8085) → 3.998 bytes
+  comparação     → IGUAIS (cada um dos 3.998 caracteres no mesmo lugar)
+```
+
+Tudo o que o usuário vê está nesse texto. Uma lista que veio vazia, um número calculado diferente, uma data trocada, um
+campo que sumiu, uma mensagem de erro no meio da página — tudo isso muda os bytes:
+
+```html
+PHP 5.6:  <select name="tipo"><option value="1">Visita Normal</option></select>
+PHP 8.5:  <select name="tipo"></select>
+```
+
+A tela abre nos dois, sem erro; no 8.5 a lista veio vazia (já aconteceu: uma checagem `gettype($x) == "resource"` deixou
+de valer no PHP 8). Quem olha só se a tela carregou não vê. Na comparação, os textos divergem logo depois de
+`<select name="tipo">`.
+
+### Por que a comparação byte a byte é relevante
+
+**O sistema não tem testes nem especificação.** São ~10 mil arquivos, e não há documento que diga qual deveria ser a saída
+de cada tela. A única referência confiável do comportamento certo é **o próprio sistema antigo rodando**. A bateria
+transforma essa referência num teste automático: pergunta ao 5.6, tela por tela, o que ele responde, e confere se o 8.5
+responde igual. Como código, banco e sessão são os mesmos, **qualquer diferença é causada pela troca de versão do PHP**,
+por construção do experimento.
+
+Na literatura, a técnica tem nomes conhecidos: *differential testing* (McKeeman, "Differential Testing for Software",
+*Digital Technical Journal*, 1998), também chamado *back-to-back testing*; e, no contexto de código legado, *characterization
+tests* (Feathers, *Working Effectively with Legacy Code*, 2004) ou *golden master*.
+
+**Por que bytes, e não "a tela abriu sem erro".** Muitas mudanças do PHP 8 **não dão erro**: a tela responde `200` e mostra
+outra coisa. Casos do catálogo do projeto:
+
+| Mudança no PHP 8 | O que acontece na tela | Com status `200`? |
+| --- | --- | --- |
+| `"texto" < 3` passou a comparar como texto | um bloco inteiro da tela some | sim |
+| resultado do banco deixou de ser `resource` | um `<select>` vem vazio | sim |
+| `"J" > 0` mudou de resultado dentro do FPDF | o layout do relatório PDF se desloca | sim |
+| `date($fmt, null)` | a data exibida vira a de hoje em vez da do dado | sim |
+
+Um teste de "abriu sem erro" aprova todos esses. A comparação de bytes pega todos **sem precisar saber de antemão o que
+procurar** — é o critério mais rigoroso possível e não exige escrever nenhuma expectativa à mão, o que seria inviável para
+milhares de telas.
+
+**Ela acha o que as outras verificações não acham.** Pelo registro do projeto, 14 das 20 categorias de incompatibilidade
+do catálogo vieram da bateria ou do `php -l` — isto é, de executar e comparar. Na bateria completa de 12/11/2026, duas
+telas do Tributário (`iss1_tabalvara_depto001`, `iss3_emissaoalvaraeventos001`) davam `200` no 5.6 e `500` no 8.5: tinham
+passado por todas as conferências estáticas. Foram corrigidas.
+
+**Como se evita o falso alarme.** Páginas dinâmicas têm trechos que mudam **a cada pedido**, mesmo no mesmo PHP: o
+identificador da sessão, nomes de arquivos temporários, o horário dentro de um PDF. Sem tratamento, toda tela pareceria
+divergente. Por isso o `cmp.py`, antes de comparar:
+
+- **normaliza** esses trechos, trocando-os por um marcador fixo (`sid=X`, `tmp/X.pdf`, `/DateX`) nos dois lados;
+- **restaura a sessão** antes de cada pedido, para os dois lados partirem do mesmo estado;
+- **refaz o par antes de acusar**, para descartar diferenças ocasionais (um horário dentro do fluxo comprimido de um PDF,
+  por exemplo, que a normalização não alcança).
+
+O que ela **não** prova está na seção 5: equivalência não é correção, ela só faz `GET` sem parâmetros (o caminho de
+gravação é coberto pelos níveis 1 a 3), e tela com tabela vazia não exercita o caminho com dados.
+
+### E se, em vez de comparar os bytes, comparássemos um hash?
+
+Funciona, e é a mesma comparação em forma compacta. Um hash (MD5, SHA-256) é uma "impressão digital" de poucos caracteres
+calculada a partir de todos os bytes da página: bytes iguais dão hash igual, e um único byte diferente dá um hash
+completamente diferente. A chance de duas páginas diferentes terem o mesmo SHA-256 é desprezível. Na tela acima, os dois
+lados deram o mesmo MD5 (`cf04756283b1…`).
+
+Duas condições e um limite:
+
+- **O hash tem de ser calculado depois da normalização.** Sobre a página crua, o identificador de sessão e os horários
+  fazem todo hash sair diferente, mesmo sem defeito nenhum.
+- **O que ele acrescenta é poder guardar e comparar no tempo.** Um hash por tela ocupa poucos bytes. Guardando os hashes de
+  cada bateria, dá para comparar uma rodada com a anterior sem guardar as páginas — por exemplo, para mostrar que um lote
+  novo não mudou a saída das telas já migradas, ou como registro verificável do resultado. Mas aí a saída também muda
+  quando os **dados** do banco mudam, então a comparação no tempo exige o banco no mesmo estado.
+- **O limite: o hash só diz *se* difere, nunca *onde* nem *o quê*.** Para diagnosticar uma divergência é preciso olhar as
+  duas páginas. Por isso, na comparação entre os dois PHPs, que acontece na hora, o `cmp.py` compara as páginas inteiras
+  (o resultado é o mesmo do hash) e, quando acusa, as páginas estão à mão para o `diff`.
+
 ## 2. Preparação comum a todos os testes
 
 1. Suba o ambiente (comandos no topo do `CLAUDE.md`, seção *Como subir o ambiente*).
