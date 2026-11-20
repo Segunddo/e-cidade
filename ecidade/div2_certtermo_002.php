@@ -86,7 +86,7 @@ if (!isset($certid) || empty($certid)) {
   and v01_instit = {$instit}";
 
   $rsDivida = db_query($sql);
-  $numeroDiv = pg_num_rows($rsDivida);
+  $numeroDiv = ($rsDivida ? pg_num_rows($rsDivida) : null);
 
   if ($numeroDiv > 0) {
     for ($iNumero = 0; $iNumero < $numeroDiv; $iNumero++) {
@@ -99,7 +99,7 @@ if (!isset($certid) || empty($certid)) {
             where v01_numpre = $numpre and v01_coddiv not in (select v93_coddiv from termoinscrreg)";
 
         $rsDiv = db_query($sqlDiv);
-        $registrosDiv = pg_num_rows($rsDiv);
+        $registrosDiv = ($rsDiv ? pg_num_rows($rsDiv) : null);
 
         for ($iCodDiv = 0; $iCodDiv < $registrosDiv; $iCodDiv++) {
 

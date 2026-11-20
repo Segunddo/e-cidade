@@ -11505,6 +11505,14 @@
       "quando": "2026-11-20T18:15:07Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_fis_parfiscal_classe.php": {
+      "observacao": "sql_record sem conexao aberta (pg_last_error); ac373a479",
+      "padroes": [
+        "pg_resultado_false"
+      ],
+      "quando": "2026-11-21T00:30:54Z",
+      "quem": "Thiago432544"
+    },
     "ecidade/classes/db_fis_procfiscal_estendida_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 5 (fis; ver commits)",
       "padroes": [],
@@ -17566,6 +17574,14 @@
       "quando": "2026-11-20T06:05:30Z",
       "quem": "Thiago432544"
     },
+    "ecidade/div2_certtermo_002.php": {
+      "observacao": "exposta pelo nucleo; ecea1cb9b",
+      "padroes": [
+        "pg_resultado_false"
+      ],
+      "quando": "2026-11-21T00:30:50Z",
+      "quem": "Thiago432544"
+    },
     "ecidade/div2_diviano001.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 2 (jur, div, arr; ver commits)",
       "padroes": [],
@@ -21412,6 +21428,14 @@
       "quando": "2026-11-20T06:05:52Z",
       "quem": "Thiago432544"
     },
+    "ecidade/fis2_fis_autolote002.php": {
+      "observacao": "exposta pelo nucleo; ecea1cb9b",
+      "padroes": [
+        "pg_resultado_false"
+      ],
+      "quando": "2026-11-21T00:30:51Z",
+      "quem": "Thiago432544"
+    },
     "ecidade/fis2_fis_conprocfiscal001.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 5 (fis; ver commits)",
       "padroes": [],
@@ -21494,6 +21518,14 @@
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 5 (fis; ver commits)",
       "padroes": [],
       "quando": "2026-11-20T06:05:53Z",
+      "quem": "Thiago432544"
+    },
+    "ecidade/fis2_fis_notlanclote002.php": {
+      "observacao": "exposta pelo nucleo; ecea1cb9b",
+      "padroes": [
+        "pg_resultado_false"
+      ],
+      "quando": "2026-11-21T00:30:53Z",
       "quem": "Thiago432544"
     },
     "ecidade/fis2_fis_notlancmassa001.php": {

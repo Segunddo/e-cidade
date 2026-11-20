@@ -890,7 +890,15 @@ public function incluir ($y32_instit){
      $result = db_query($sql);
      if (!$result) {
        $this->numrows    = 0;
-       $this->erro_banco = str_replace("\n","",@pg_last_error());
+       try {
+         $this->erro_banco = str_replace("\n","",@pg_last_error());
+       } catch (\Error $e) {
+         // 8.x: sem conexao aberta, pg_last_error() lanca Error; o 7.4 devolvia false (texto vazio aqui)
+         if (get_class($e) != 'Error') {
+           throw $e;
+         }
+         $this->erro_banco = "";
+       }
        $this->erro_sql   = "Erro ao selecionar os registros.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
        $this->erro_msg   .=  str_replace('"',"",str_replace("'","",  "Administrador: \\n\\n ".$this->erro_banco." \\n"));

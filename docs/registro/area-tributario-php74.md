@@ -234,3 +234,23 @@ partida (antes de qualquer commit desta frente): lá ela já diverge igual (7.4 
 - Máquina Windows: o repositório tem de ficar no sistema de arquivos do Linux (WSL), por causa dos arquivos que só
   diferem em maiúsculas — vários são do Tributário (`cem1_legista00*`, model `Tabrec`, rota de arrecadação, model
   de ISSQN, manual do ITBI).
+
+## 7. Telas expostas pelas correções do núcleo (20/11/2026)
+
+Com o núcleo corrigido (branch `nucleo/8.5`), algumas telas desta área deixaram de parar no núcleo e passaram a parar
+no próprio código. Três foram corrigidas aqui:
+
+| Tela | Problema no 8.5 | Forma |
+|---|---|---|
+| `div2_certtermo_002.php` | `pg_num_rows` sobre consulta que falhou | guarda da decisão 2a, pelo mesmo script dos lotes (commit automático) |
+| `fis2_fis_autolote002.php`, `fis2_fis_notlanclote002.php` | a tela faz `pg_close()` e inclui de novo `libs/db_conecta.php`, que não reabre a conexão. No 7.4 o resto da tela segue com as consultas falhando em silêncio. No 8.x: `pg_num_rows` sobre a consulta que falhou, e `@pg_last_error()` sem conexão em `cl_fis_parfiscal::sql_record` (`Error`) | guarda da decisão 2a nas telas; na classe, `try`/`catch` só desse `Error`, com o texto vazio que o 7.4 produzia |
+
+Prova (medida sobre a `nucleo/8.5`, que contém esta branch):
+- `php -l` nos dois runtimes.
+- As 3 telas ficaram idênticas no 7.4 e no 8.5.
+- Nas 37 telas que usam a classe ou incluem essas telas: **8 → 5 divergentes, nenhuma nova**.
+- 7.4 igual antes e depois. Dois PDFs diferem só na hora, com o texto idêntico.
+
+Sozinha, esta branch não muda o resultado dessas telas: elas ainda param antes, no núcleo (`fpdf151/fpdf.php`,
+`libs/db_stdlib.php:100`), que é corrigido na `nucleo/8.5`. As 5 que continuam divergentes são `fis2_fis_levantamentolote002`,
+`fis2_fis_levantamentomassa002`, `fis2_fis_termofiscal003`, `fis3_fis_imprimealvara` e `fis4_fis_importalevan001`.
