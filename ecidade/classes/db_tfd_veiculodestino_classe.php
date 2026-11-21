@@ -85,10 +85,10 @@ class cl_tfd_veiculodestino {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf18_i_codigo = ($this->tf18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_i_codigo"]:$this->tf18_i_codigo);
-       $this->tf18_i_veiculo = ($this->tf18_i_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_i_veiculo"]:$this->tf18_i_veiculo);
-       $this->tf18_i_destino = ($this->tf18_i_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_i_destino"]:$this->tf18_i_destino);
-       $this->tf18_i_motorista = ($this->tf18_i_motorista == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_i_motorista"]:$this->tf18_i_motorista);
+       $this->tf18_i_codigo = ($this->tf18_i_codigo === 0 || $this->tf18_i_codigo === 0.0 || $this->tf18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_i_codigo"]:$this->tf18_i_codigo);
+       $this->tf18_i_veiculo = ($this->tf18_i_veiculo === 0 || $this->tf18_i_veiculo === 0.0 || $this->tf18_i_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_i_veiculo"]:$this->tf18_i_veiculo);
+       $this->tf18_i_destino = ($this->tf18_i_destino === 0 || $this->tf18_i_destino === 0.0 || $this->tf18_i_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_i_destino"]:$this->tf18_i_destino);
+       $this->tf18_i_motorista = ($this->tf18_i_motorista === 0 || $this->tf18_i_motorista === 0.0 || $this->tf18_i_motorista == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_i_motorista"]:$this->tf18_i_motorista);
        if($this->tf18_d_datasaida == ""){
          $this->tf18_d_datasaida_dia = ($this->tf18_d_datasaida_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_d_datasaida_dia"]:$this->tf18_d_datasaida_dia);
          $this->tf18_d_datasaida_mes = ($this->tf18_d_datasaida_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_d_datasaida_mes"]:$this->tf18_d_datasaida_mes);
@@ -108,7 +108,7 @@ class cl_tfd_veiculodestino {
        }
        $this->tf18_c_horaretorno = ($this->tf18_c_horaretorno == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_c_horaretorno"]:$this->tf18_c_horaretorno);
      }else{
-       $this->tf18_i_codigo = ($this->tf18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_i_codigo"]:$this->tf18_i_codigo);
+       $this->tf18_i_codigo = ($this->tf18_i_codigo === 0 || $this->tf18_i_codigo === 0.0 || $this->tf18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf18_i_codigo"]:$this->tf18_i_codigo);
      }
    }
    // funcao para inclusao
@@ -195,7 +195,7 @@ class cl_tfd_veiculodestino {
          $this->tf18_i_codigo = $tf18_i_codigo;
        }
      }
-     if(($this->tf18_i_codigo == null) || ($this->tf18_i_codigo == "") ){
+     if(($this->tf18_i_codigo == null) || ($this->tf18_i_codigo === 0 || $this->tf18_i_codigo === 0.0 || $this->tf18_i_codigo == "") ){
        $this->erro_sql = " Campo tf18_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

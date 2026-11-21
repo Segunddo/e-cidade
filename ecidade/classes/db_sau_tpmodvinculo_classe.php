@@ -71,13 +71,13 @@ class cl_sau_tpmodvinculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd53_i_vinculacao = ($this->sd53_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_i_vinculacao"]:$this->sd53_i_vinculacao);
-       $this->sd53_i_tpvinculo = ($this->sd53_i_tpvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_i_tpvinculo"]:$this->sd53_i_tpvinculo);
+       $this->sd53_i_vinculacao = ($this->sd53_i_vinculacao === 0 || $this->sd53_i_vinculacao === 0.0 || $this->sd53_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_i_vinculacao"]:$this->sd53_i_vinculacao);
+       $this->sd53_i_tpvinculo = ($this->sd53_i_tpvinculo === 0 || $this->sd53_i_tpvinculo === 0.0 || $this->sd53_i_tpvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_i_tpvinculo"]:$this->sd53_i_tpvinculo);
        $this->sd53_v_descrvinculo = ($this->sd53_v_descrvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_v_descrvinculo"]:$this->sd53_v_descrvinculo);
-       $this->sd53_i_tpesfadm = ($this->sd53_i_tpesfadm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_i_tpesfadm"]:$this->sd53_i_tpesfadm);
+       $this->sd53_i_tpesfadm = ($this->sd53_i_tpesfadm === 0 || $this->sd53_i_tpesfadm === 0.0 || $this->sd53_i_tpesfadm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_i_tpesfadm"]:$this->sd53_i_tpesfadm);
      }else{
-       $this->sd53_i_vinculacao = ($this->sd53_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_i_vinculacao"]:$this->sd53_i_vinculacao);
-       $this->sd53_i_tpvinculo = ($this->sd53_i_tpvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_i_tpvinculo"]:$this->sd53_i_tpvinculo);
+       $this->sd53_i_vinculacao = ($this->sd53_i_vinculacao === 0 || $this->sd53_i_vinculacao === 0.0 || $this->sd53_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_i_vinculacao"]:$this->sd53_i_vinculacao);
+       $this->sd53_i_tpvinculo = ($this->sd53_i_tpvinculo === 0 || $this->sd53_i_tpvinculo === 0.0 || $this->sd53_i_tpvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd53_i_tpvinculo"]:$this->sd53_i_tpvinculo);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_sau_tpmodvinculo {
      }
        $this->sd53_i_vinculacao = $sd53_i_vinculacao;
        $this->sd53_i_tpvinculo = $sd53_i_tpvinculo;
-     if(($this->sd53_i_vinculacao == null) || ($this->sd53_i_vinculacao == "") ){
+     if(($this->sd53_i_vinculacao == null) || ($this->sd53_i_vinculacao === 0 || $this->sd53_i_vinculacao === 0.0 || $this->sd53_i_vinculacao == "") ){
        $this->erro_sql = " Campo sd53_i_vinculacao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_sau_tpmodvinculo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sd53_i_tpvinculo == null) || ($this->sd53_i_tpvinculo == "") ){
+     if(($this->sd53_i_tpvinculo == null) || ($this->sd53_i_tpvinculo === 0 || $this->sd53_i_tpvinculo === 0.0 || $this->sd53_i_tpvinculo == "") ){
        $this->erro_sql = " Campo sd53_i_tpvinculo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,12 +71,12 @@ class cl_far_retiradaitemlote {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa09_i_codigo = ($this->fa09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa09_i_codigo"]:$this->fa09_i_codigo);
-       $this->fa09_i_retiradaitens = ($this->fa09_i_retiradaitens == ""?@$GLOBALS["HTTP_POST_VARS"]["fa09_i_retiradaitens"]:$this->fa09_i_retiradaitens);
-       $this->fa09_i_matestoqueitem = ($this->fa09_i_matestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["fa09_i_matestoqueitem"]:$this->fa09_i_matestoqueitem);
-       $this->fa09_f_quant = ($this->fa09_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["fa09_f_quant"]:$this->fa09_f_quant);
+       $this->fa09_i_codigo = ($this->fa09_i_codigo === 0 || $this->fa09_i_codigo === 0.0 || $this->fa09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa09_i_codigo"]:$this->fa09_i_codigo);
+       $this->fa09_i_retiradaitens = ($this->fa09_i_retiradaitens === 0 || $this->fa09_i_retiradaitens === 0.0 || $this->fa09_i_retiradaitens == ""?@$GLOBALS["HTTP_POST_VARS"]["fa09_i_retiradaitens"]:$this->fa09_i_retiradaitens);
+       $this->fa09_i_matestoqueitem = ($this->fa09_i_matestoqueitem === 0 || $this->fa09_i_matestoqueitem === 0.0 || $this->fa09_i_matestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["fa09_i_matestoqueitem"]:$this->fa09_i_matestoqueitem);
+       $this->fa09_f_quant = ($this->fa09_f_quant === 0 || $this->fa09_f_quant === 0.0 || $this->fa09_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["fa09_f_quant"]:$this->fa09_f_quant);
      }else{
-       $this->fa09_i_codigo = ($this->fa09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa09_i_codigo"]:$this->fa09_i_codigo);
+       $this->fa09_i_codigo = ($this->fa09_i_codigo === 0 || $this->fa09_i_codigo === 0.0 || $this->fa09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa09_i_codigo"]:$this->fa09_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_far_retiradaitemlote {
          $this->fa09_i_codigo = $fa09_i_codigo;
        }
      }
-     if(($this->fa09_i_codigo == null) || ($this->fa09_i_codigo == "") ){
+     if(($this->fa09_i_codigo == null) || ($this->fa09_i_codigo === 0 || $this->fa09_i_codigo === 0.0 || $this->fa09_i_codigo == "") ){
        $this->erro_sql = " Campo fa09_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

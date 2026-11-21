@@ -67,10 +67,10 @@ class cl_tfd_tipotransporte {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf27_i_codigo = ($this->tf27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf27_i_codigo"]:$this->tf27_i_codigo);
+       $this->tf27_i_codigo = ($this->tf27_i_codigo === 0 || $this->tf27_i_codigo === 0.0 || $this->tf27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf27_i_codigo"]:$this->tf27_i_codigo);
        $this->tf27_c_descr = ($this->tf27_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["tf27_c_descr"]:$this->tf27_c_descr);
      }else{
-       $this->tf27_i_codigo = ($this->tf27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf27_i_codigo"]:$this->tf27_i_codigo);
+       $this->tf27_i_codigo = ($this->tf27_i_codigo === 0 || $this->tf27_i_codigo === 0.0 || $this->tf27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf27_i_codigo"]:$this->tf27_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tfd_tipotransporte {
          $this->tf27_i_codigo = $tf27_i_codigo;
        }
      }
-     if(($this->tf27_i_codigo == null) || ($this->tf27_i_codigo == "") ){
+     if(($this->tf27_i_codigo == null) || ($this->tf27_i_codigo === 0 || $this->tf27_i_codigo === 0.0 || $this->tf27_i_codigo == "") ){
        $this->erro_sql = " Campo tf27_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

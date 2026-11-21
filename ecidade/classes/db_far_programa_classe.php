@@ -74,13 +74,13 @@ class cl_far_programa
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fa12_i_codigo = ($this->fa12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa12_i_codigo"]:$this->fa12_i_codigo);
+       $this->fa12_i_codigo = ($this->fa12_i_codigo === 0 || $this->fa12_i_codigo === 0.0 || $this->fa12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa12_i_codigo"]:$this->fa12_i_codigo);
        $this->fa12_c_descricao = ($this->fa12_c_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa12_c_descricao"]:$this->fa12_c_descricao);
        $this->fa12_c_depadmin = ($this->fa12_c_depadmin == ""?@$GLOBALS["HTTP_POST_VARS"]["fa12_c_depadmin"]:$this->fa12_c_depadmin);
-       $this->fa12_i_tipoacao = ($this->fa12_i_tipoacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa12_i_tipoacao"]:$this->fa12_i_tipoacao);
+       $this->fa12_i_tipoacao = ($this->fa12_i_tipoacao === 0 || $this->fa12_i_tipoacao === 0.0 || $this->fa12_i_tipoacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa12_i_tipoacao"]:$this->fa12_i_tipoacao);
        $this->fa12_ativo = ($this->fa12_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa12_ativo"]:$this->fa12_ativo);
      }else{
-       $this->fa12_i_codigo = ($this->fa12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa12_i_codigo"]:$this->fa12_i_codigo);
+       $this->fa12_i_codigo = ($this->fa12_i_codigo === 0 || $this->fa12_i_codigo === 0.0 || $this->fa12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa12_i_codigo"]:$this->fa12_i_codigo);
      }
    }
 
@@ -147,7 +147,7 @@ class cl_far_programa
          $this->fa12_i_codigo = $fa12_i_codigo; 
        }
      }
-     if(($this->fa12_i_codigo == null) || ($this->fa12_i_codigo == "") ){ 
+     if(($this->fa12_i_codigo == null) || ($this->fa12_i_codigo === 0 || $this->fa12_i_codigo === 0.0 || $this->fa12_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa12_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

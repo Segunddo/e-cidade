@@ -69,11 +69,11 @@ class cl_far_listamodelo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa17_i_codigo = ($this->fa17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa17_i_codigo"]:$this->fa17_i_codigo);
-       $this->fa17_i_modelolivro = ($this->fa17_i_modelolivro == ""?@$GLOBALS["HTTP_POST_VARS"]["fa17_i_modelolivro"]:$this->fa17_i_modelolivro);
-       $this->fa17_i_listacontrolado = ($this->fa17_i_listacontrolado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa17_i_listacontrolado"]:$this->fa17_i_listacontrolado);
+       $this->fa17_i_codigo = ($this->fa17_i_codigo === 0 || $this->fa17_i_codigo === 0.0 || $this->fa17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa17_i_codigo"]:$this->fa17_i_codigo);
+       $this->fa17_i_modelolivro = ($this->fa17_i_modelolivro === 0 || $this->fa17_i_modelolivro === 0.0 || $this->fa17_i_modelolivro == ""?@$GLOBALS["HTTP_POST_VARS"]["fa17_i_modelolivro"]:$this->fa17_i_modelolivro);
+       $this->fa17_i_listacontrolado = ($this->fa17_i_listacontrolado === 0 || $this->fa17_i_listacontrolado === 0.0 || $this->fa17_i_listacontrolado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa17_i_listacontrolado"]:$this->fa17_i_listacontrolado);
      }else{
-       $this->fa17_i_codigo = ($this->fa17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa17_i_codigo"]:$this->fa17_i_codigo);
+       $this->fa17_i_codigo = ($this->fa17_i_codigo === 0 || $this->fa17_i_codigo === 0.0 || $this->fa17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa17_i_codigo"]:$this->fa17_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_far_listamodelo {
          $this->fa17_i_codigo = $fa17_i_codigo;
        }
      }
-     if(($this->fa17_i_codigo == null) || ($this->fa17_i_codigo == "") ){
+     if(($this->fa17_i_codigo == null) || ($this->fa17_i_codigo === 0 || $this->fa17_i_codigo === 0.0 || $this->fa17_i_codigo == "") ){
        $this->erro_sql = " Campo fa17_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

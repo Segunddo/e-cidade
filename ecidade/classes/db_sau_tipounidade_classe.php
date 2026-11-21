@@ -67,10 +67,10 @@ class cl_sau_tipounidade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd42_i_tp_unid_id = ($this->sd42_i_tp_unid_id == ""?@$GLOBALS["HTTP_POST_VARS"]["sd42_i_tp_unid_id"]:$this->sd42_i_tp_unid_id);
+       $this->sd42_i_tp_unid_id = ($this->sd42_i_tp_unid_id === 0 || $this->sd42_i_tp_unid_id === 0.0 || $this->sd42_i_tp_unid_id == ""?@$GLOBALS["HTTP_POST_VARS"]["sd42_i_tp_unid_id"]:$this->sd42_i_tp_unid_id);
        $this->sd42_v_descricao = ($this->sd42_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd42_v_descricao"]:$this->sd42_v_descricao);
      }else{
-       $this->sd42_i_tp_unid_id = ($this->sd42_i_tp_unid_id == ""?@$GLOBALS["HTTP_POST_VARS"]["sd42_i_tp_unid_id"]:$this->sd42_i_tp_unid_id);
+       $this->sd42_i_tp_unid_id = ($this->sd42_i_tp_unid_id === 0 || $this->sd42_i_tp_unid_id === 0.0 || $this->sd42_i_tp_unid_id == ""?@$GLOBALS["HTTP_POST_VARS"]["sd42_i_tp_unid_id"]:$this->sd42_i_tp_unid_id);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sau_tipounidade {
        return false;
      }
        $this->sd42_i_tp_unid_id = $sd42_i_tp_unid_id;
-     if(($this->sd42_i_tp_unid_id == null) || ($this->sd42_i_tp_unid_id == "") ){
+     if(($this->sd42_i_tp_unid_id == null) || ($this->sd42_i_tp_unid_id === 0 || $this->sd42_i_tp_unid_id === 0.0 || $this->sd42_i_tp_unid_id == "") ){
        $this->erro_sql = " Campo sd42_i_tp_unid_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

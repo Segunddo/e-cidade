@@ -73,13 +73,13 @@ class cl_tfd_acompanhantes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf13_i_codigo = ($this->tf13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_codigo"]:$this->tf13_i_codigo);
-       $this->tf13_i_cgsund = ($this->tf13_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_cgsund"]:$this->tf13_i_cgsund);
-       $this->tf13_i_motivoacompanhamento = ($this->tf13_i_motivoacompanhamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_motivoacompanhamento"]:$this->tf13_i_motivoacompanhamento);
-       $this->tf13_i_pedidotfd = ($this->tf13_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_pedidotfd"]:$this->tf13_i_pedidotfd);
-       $this->tf13_i_anulado = ($this->tf13_i_anulado == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_anulado"]:$this->tf13_i_anulado);
+       $this->tf13_i_codigo = ($this->tf13_i_codigo === 0 || $this->tf13_i_codigo === 0.0 || $this->tf13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_codigo"]:$this->tf13_i_codigo);
+       $this->tf13_i_cgsund = ($this->tf13_i_cgsund === 0 || $this->tf13_i_cgsund === 0.0 || $this->tf13_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_cgsund"]:$this->tf13_i_cgsund);
+       $this->tf13_i_motivoacompanhamento = ($this->tf13_i_motivoacompanhamento === 0 || $this->tf13_i_motivoacompanhamento === 0.0 || $this->tf13_i_motivoacompanhamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_motivoacompanhamento"]:$this->tf13_i_motivoacompanhamento);
+       $this->tf13_i_pedidotfd = ($this->tf13_i_pedidotfd === 0 || $this->tf13_i_pedidotfd === 0.0 || $this->tf13_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_pedidotfd"]:$this->tf13_i_pedidotfd);
+       $this->tf13_i_anulado = ($this->tf13_i_anulado === 0 || $this->tf13_i_anulado === 0.0 || $this->tf13_i_anulado == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_anulado"]:$this->tf13_i_anulado);
      }else{
-       $this->tf13_i_codigo = ($this->tf13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_codigo"]:$this->tf13_i_codigo);
+       $this->tf13_i_codigo = ($this->tf13_i_codigo === 0 || $this->tf13_i_codigo === 0.0 || $this->tf13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf13_i_codigo"]:$this->tf13_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_tfd_acompanhantes {
          $this->tf13_i_codigo = $tf13_i_codigo;
        }
      }
-     if(($this->tf13_i_codigo == null) || ($this->tf13_i_codigo == "") ){
+     if(($this->tf13_i_codigo == null) || ($this->tf13_i_codigo === 0 || $this->tf13_i_codigo === 0.0 || $this->tf13_i_codigo == "") ){
        $this->erro_sql = " Campo tf13_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -80,9 +80,9 @@ class cl_tfd_bpamagnetico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf33_i_codigo = ($this->tf33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_i_codigo"]:$this->tf33_i_codigo);
-       $this->tf33_i_login = ($this->tf33_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_i_login"]:$this->tf33_i_login);
-       $this->tf33_i_fechamento = ($this->tf33_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_i_fechamento"]:$this->tf33_i_fechamento);
+       $this->tf33_i_codigo = ($this->tf33_i_codigo === 0 || $this->tf33_i_codigo === 0.0 || $this->tf33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_i_codigo"]:$this->tf33_i_codigo);
+       $this->tf33_i_login = ($this->tf33_i_login === 0 || $this->tf33_i_login === 0.0 || $this->tf33_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_i_login"]:$this->tf33_i_login);
+       $this->tf33_i_fechamento = ($this->tf33_i_fechamento === 0 || $this->tf33_i_fechamento === 0.0 || $this->tf33_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_i_fechamento"]:$this->tf33_i_fechamento);
        $this->tf33_c_nomearquivo = ($this->tf33_c_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_c_nomearquivo"]:$this->tf33_c_nomearquivo);
        if($this->tf33_d_datasistema == ""){
          $this->tf33_d_datasistema_dia = ($this->tf33_d_datasistema_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_d_datasistema_dia"]:$this->tf33_d_datasistema_dia);
@@ -93,9 +93,9 @@ class cl_tfd_bpamagnetico {
          }
        }
        $this->tf33_c_horasistema = ($this->tf33_c_horasistema == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_c_horasistema"]:$this->tf33_c_horasistema);
-       $this->tf33_o_arquivo = ($this->tf33_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_o_arquivo"]:$this->tf33_o_arquivo);
+       $this->tf33_o_arquivo = ($this->tf33_o_arquivo === 0 || $this->tf33_o_arquivo === 0.0 || $this->tf33_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_o_arquivo"]:$this->tf33_o_arquivo);
      }else{
-       $this->tf33_i_codigo = ($this->tf33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_i_codigo"]:$this->tf33_i_codigo);
+       $this->tf33_i_codigo = ($this->tf33_i_codigo === 0 || $this->tf33_i_codigo === 0.0 || $this->tf33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf33_i_codigo"]:$this->tf33_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_tfd_bpamagnetico {
          $this->tf33_i_codigo = $tf33_i_codigo;
        }
      }
-     if(($this->tf33_i_codigo == null) || ($this->tf33_i_codigo == "") ){
+     if(($this->tf33_i_codigo == null) || ($this->tf33_i_codigo === 0 || $this->tf33_i_codigo === 0.0 || $this->tf33_i_codigo == "") ){
        $this->erro_sql = " Campo tf33_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

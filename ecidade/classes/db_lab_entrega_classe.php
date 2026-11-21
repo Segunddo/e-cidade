@@ -84,12 +84,12 @@ class cl_lab_entrega {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la31_i_codigo = ($this->la31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_codigo"]:$this->la31_i_codigo);
-       $this->la31_i_requiitem = ($this->la31_i_requiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_requiitem"]:$this->la31_i_requiitem);
-       $this->la31_i_tipodocumento = ($this->la31_i_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_tipodocumento"]:$this->la31_i_tipodocumento);
+       $this->la31_i_codigo = ($this->la31_i_codigo === 0 || $this->la31_i_codigo === 0.0 || $this->la31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_codigo"]:$this->la31_i_codigo);
+       $this->la31_i_requiitem = ($this->la31_i_requiitem === 0 || $this->la31_i_requiitem === 0.0 || $this->la31_i_requiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_requiitem"]:$this->la31_i_requiitem);
+       $this->la31_i_tipodocumento = ($this->la31_i_tipodocumento === 0 || $this->la31_i_tipodocumento === 0.0 || $this->la31_i_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_tipodocumento"]:$this->la31_i_tipodocumento);
        $this->la31_c_documento = ($this->la31_c_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_c_documento"]:$this->la31_c_documento);
-       $this->la31_i_cgs = ($this->la31_i_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_cgs"]:$this->la31_i_cgs);
-       $this->la31_i_usuario = ($this->la31_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_usuario"]:$this->la31_i_usuario);
+       $this->la31_i_cgs = ($this->la31_i_cgs === 0 || $this->la31_i_cgs === 0.0 || $this->la31_i_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_cgs"]:$this->la31_i_cgs);
+       $this->la31_i_usuario = ($this->la31_i_usuario === 0 || $this->la31_i_usuario === 0.0 || $this->la31_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_usuario"]:$this->la31_i_usuario);
        if($this->la31_d_data == ""){
          $this->la31_d_data_dia = ($this->la31_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_d_data_dia"]:$this->la31_d_data_dia);
          $this->la31_d_data_mes = ($this->la31_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_d_data_mes"]:$this->la31_d_data_mes);
@@ -101,7 +101,7 @@ class cl_lab_entrega {
        $this->la31_c_hora = ($this->la31_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_c_hora"]:$this->la31_c_hora);
        $this->la31_retiradopor = ($this->la31_retiradopor == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_retiradopor"]:$this->la31_retiradopor);
      }else{
-       $this->la31_i_codigo = ($this->la31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_codigo"]:$this->la31_i_codigo);
+       $this->la31_i_codigo = ($this->la31_i_codigo === 0 || $this->la31_i_codigo === 0.0 || $this->la31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la31_i_codigo"]:$this->la31_i_codigo);
      }
    }
    // funcao para inclusao
@@ -203,7 +203,7 @@ class cl_lab_entrega {
          $this->la31_i_codigo = $la31_i_codigo;
        }
      }
-     if(($this->la31_i_codigo == null) || ($this->la31_i_codigo == "") ){
+     if(($this->la31_i_codigo == null) || ($this->la31_i_codigo === 0 || $this->la31_i_codigo === 0.0 || $this->la31_i_codigo == "") ){
        $this->erro_sql = " Campo la31_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_far_medanvisa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa14_i_codigo = ($this->fa14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa14_i_codigo"]:$this->fa14_i_codigo);
+       $this->fa14_i_codigo = ($this->fa14_i_codigo === 0 || $this->fa14_i_codigo === 0.0 || $this->fa14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa14_i_codigo"]:$this->fa14_i_codigo);
        $this->fa14_c_medanvisa = ($this->fa14_c_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa14_c_medanvisa"]:$this->fa14_c_medanvisa);
      }else{
-       $this->fa14_i_codigo = ($this->fa14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa14_i_codigo"]:$this->fa14_i_codigo);
+       $this->fa14_i_codigo = ($this->fa14_i_codigo === 0 || $this->fa14_i_codigo === 0.0 || $this->fa14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa14_i_codigo"]:$this->fa14_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_far_medanvisa {
          $this->fa14_i_codigo = $fa14_i_codigo;
        }
      }
-     if(($this->fa14_i_codigo == null) || ($this->fa14_i_codigo == "") ){
+     if(($this->fa14_i_codigo == null) || ($this->fa14_i_codigo === 0 || $this->fa14_i_codigo === 0.0 || $this->fa14_i_codigo == "") ){
        $this->erro_sql = " Campo fa14_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

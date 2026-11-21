@@ -93,9 +93,9 @@ class cl_agendaconsultadesanula {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s151_i_codigo = ($this->s151_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_codigo"]:$this->s151_i_codigo);
-       $this->s151_i_codigoanulamento = ($this->s151_i_codigoanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_codigoanulamento"]:$this->s151_i_codigoanulamento);
-       $this->s151_i_agendamento = ($this->s151_i_agendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_agendamento"]:$this->s151_i_agendamento);
+       $this->s151_i_codigo = ($this->s151_i_codigo === 0 || $this->s151_i_codigo === 0.0 || $this->s151_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_codigo"]:$this->s151_i_codigo);
+       $this->s151_i_codigoanulamento = ($this->s151_i_codigoanulamento === 0 || $this->s151_i_codigoanulamento === 0.0 || $this->s151_i_codigoanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_codigoanulamento"]:$this->s151_i_codigoanulamento);
+       $this->s151_i_agendamento = ($this->s151_i_agendamento === 0 || $this->s151_i_agendamento === 0.0 || $this->s151_i_agendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_agendamento"]:$this->s151_i_agendamento);
        if($this->s151_d_dataanulamento == ""){
          $this->s151_d_dataanulamento_dia = ($this->s151_d_dataanulamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_d_dataanulamento_dia"]:$this->s151_d_dataanulamento_dia);
          $this->s151_d_dataanulamento_mes = ($this->s151_d_dataanulamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_d_dataanulamento_mes"]:$this->s151_d_dataanulamento_mes);
@@ -105,8 +105,8 @@ class cl_agendaconsultadesanula {
          }
        }
        $this->s151_c_motivoanulamento = ($this->s151_c_motivoanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_c_motivoanulamento"]:$this->s151_c_motivoanulamento);
-       $this->s151_i_situacaoanulamento = ($this->s151_i_situacaoanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_situacaoanulamento"]:$this->s151_i_situacaoanulamento);
-       $this->s151_i_loginanulamento = ($this->s151_i_loginanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_loginanulamento"]:$this->s151_i_loginanulamento);
+       $this->s151_i_situacaoanulamento = ($this->s151_i_situacaoanulamento === 0 || $this->s151_i_situacaoanulamento === 0.0 || $this->s151_i_situacaoanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_situacaoanulamento"]:$this->s151_i_situacaoanulamento);
+       $this->s151_i_loginanulamento = ($this->s151_i_loginanulamento === 0 || $this->s151_i_loginanulamento === 0.0 || $this->s151_i_loginanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_loginanulamento"]:$this->s151_i_loginanulamento);
        $this->s151_c_horaanulamento = ($this->s151_c_horaanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_c_horaanulamento"]:$this->s151_c_horaanulamento);
        if($this->s151_d_datadesanulamento == ""){
          $this->s151_d_datadesanulamento_dia = ($this->s151_d_datadesanulamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_d_datadesanulamento_dia"]:$this->s151_d_datadesanulamento_dia);
@@ -118,9 +118,9 @@ class cl_agendaconsultadesanula {
        }
        $this->s151_c_horadesanulamento = ($this->s151_c_horadesanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_c_horadesanulamento"]:$this->s151_c_horadesanulamento);
        $this->s151_c_motivodesanulamento = ($this->s151_c_motivodesanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_c_motivodesanulamento"]:$this->s151_c_motivodesanulamento);
-       $this->s151_i_logindesanulamento = ($this->s151_i_logindesanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_logindesanulamento"]:$this->s151_i_logindesanulamento);
+       $this->s151_i_logindesanulamento = ($this->s151_i_logindesanulamento === 0 || $this->s151_i_logindesanulamento === 0.0 || $this->s151_i_logindesanulamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_logindesanulamento"]:$this->s151_i_logindesanulamento);
      }else{
-       $this->s151_i_codigo = ($this->s151_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_codigo"]:$this->s151_i_codigo);
+       $this->s151_i_codigo = ($this->s151_i_codigo === 0 || $this->s151_i_codigo === 0.0 || $this->s151_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s151_i_codigo"]:$this->s151_i_codigo);
      }
    }
    // funcao para inclusao
@@ -234,7 +234,7 @@ class cl_agendaconsultadesanula {
          $this->s151_i_codigo = $s151_i_codigo;
        }
      }
-     if(($this->s151_i_codigo == null) || ($this->s151_i_codigo == "") ){
+     if(($this->s151_i_codigo == null) || ($this->s151_i_codigo === 0 || $this->s151_i_codigo === 0.0 || $this->s151_i_codigo == "") ){
        $this->erro_sql = " Campo s151_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

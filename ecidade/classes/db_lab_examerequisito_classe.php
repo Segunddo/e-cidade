@@ -81,9 +81,9 @@ class cl_lab_examerequisito {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la20_i_codigo = ($this->la20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la20_i_codigo"]:$this->la20_i_codigo);
-       $this->la20_i_requisito = ($this->la20_i_requisito == ""?@$GLOBALS["HTTP_POST_VARS"]["la20_i_requisito"]:$this->la20_i_requisito);
-       $this->la20_i_exame = ($this->la20_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la20_i_exame"]:$this->la20_i_exame);
+       $this->la20_i_codigo = ($this->la20_i_codigo === 0 || $this->la20_i_codigo === 0.0 || $this->la20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la20_i_codigo"]:$this->la20_i_codigo);
+       $this->la20_i_requisito = ($this->la20_i_requisito === 0 || $this->la20_i_requisito === 0.0 || $this->la20_i_requisito == ""?@$GLOBALS["HTTP_POST_VARS"]["la20_i_requisito"]:$this->la20_i_requisito);
+       $this->la20_i_exame = ($this->la20_i_exame === 0 || $this->la20_i_exame === 0.0 || $this->la20_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la20_i_exame"]:$this->la20_i_exame);
        $this->la20_t_descr = ($this->la20_t_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la20_t_descr"]:$this->la20_t_descr);
        if($this->la20_d_inicio == ""){
          $this->la20_d_inicio_dia = ($this->la20_d_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la20_d_inicio_dia"]:$this->la20_d_inicio_dia);
@@ -102,7 +102,7 @@ class cl_lab_examerequisito {
          }
        }
      }else{
-       $this->la20_i_codigo = ($this->la20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la20_i_codigo"]:$this->la20_i_codigo);
+       $this->la20_i_codigo = ($this->la20_i_codigo === 0 || $this->la20_i_codigo === 0.0 || $this->la20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la20_i_codigo"]:$this->la20_i_codigo);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_lab_examerequisito {
          $this->la20_i_codigo = $la20_i_codigo;
        }
      }
-     if(($this->la20_i_codigo == null) || ($this->la20_i_codigo == "") ){
+     if(($this->la20_i_codigo == null) || ($this->la20_i_codigo === 0 || $this->la20_i_codigo === 0.0 || $this->la20_i_codigo == "") ){
        $this->erro_sql = " Campo la20_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

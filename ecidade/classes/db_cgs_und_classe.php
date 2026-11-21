@@ -275,11 +275,11 @@ class cl_cgs_und
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->z01_i_cgsund = ($this->z01_i_cgsund == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_cgsund"] : $this->z01_i_cgsund);
+            $this->z01_i_cgsund = ($this->z01_i_cgsund === 0 || $this->z01_i_cgsund === 0.0 || $this->z01_i_cgsund == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_cgsund"] : $this->z01_i_cgsund);
             $this->z01_v_cgccpf = ($this->z01_v_cgccpf === null ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_cgccpf"] : $this->z01_v_cgccpf);
             $this->z01_v_nome = ($this->z01_v_nome == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_nome"] : $this->z01_v_nome);
             $this->z01_v_ender = ($this->z01_v_ender == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_ender"] : $this->z01_v_ender);
-            $this->z01_i_numero = ($this->z01_i_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_numero"] : $this->z01_i_numero);
+            $this->z01_i_numero = ($this->z01_i_numero === 0 || $this->z01_i_numero === 0.0 || $this->z01_i_numero == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_numero"] : $this->z01_i_numero);
             $this->z01_v_compl = ($this->z01_v_compl == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_compl"] : $this->z01_v_compl);
             $this->z01_v_bairro = ($this->z01_v_bairro == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_bairro"] : $this->z01_v_bairro);
             $this->z01_v_munic = ($this->z01_v_munic == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_munic"] : $this->z01_v_munic);
@@ -295,7 +295,7 @@ class cl_cgs_und
             }
             $this->z01_v_telef = ($this->z01_v_telef == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_telef"] : $this->z01_v_telef);
             $this->z01_v_ident = ($this->z01_v_ident == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_ident"] : $this->z01_v_ident);
-            $this->z01_i_login = ($this->z01_i_login == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_login"] : $this->z01_i_login);
+            $this->z01_i_login = ($this->z01_i_login === 0 || $this->z01_i_login === 0.0 || $this->z01_i_login == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_login"] : $this->z01_i_login);
             $this->z01_v_telcel = ($this->z01_v_telcel == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_telcel"] : $this->z01_v_telcel);
             $this->z01_v_email = ($this->z01_v_email == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_email"] : $this->z01_v_email);
             if ($this->z01_d_nasc == "") {
@@ -307,7 +307,7 @@ class cl_cgs_und
                 }
             }
             $this->z01_v_sexo = ($this->z01_v_sexo == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_sexo"] : $this->z01_v_sexo);
-            $this->z01_o_oid = ($this->z01_o_oid == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_o_oid"] : $this->z01_o_oid);
+            $this->z01_o_oid = ($this->z01_o_oid === 0 || $this->z01_o_oid === 0.0 || $this->z01_o_oid == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_o_oid"] : $this->z01_o_oid);
             $this->z01_c_foto = ($this->z01_c_foto == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_c_foto"] : $this->z01_c_foto);
             $this->z01_v_ufcon = ($this->z01_v_ufcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_ufcon"] : $this->z01_v_ufcon);
             $this->z01_v_telcon = ($this->z01_v_telcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_telcon"] : $this->z01_v_telcon);
@@ -326,9 +326,9 @@ class cl_cgs_und
             $this->z01_v_cepcon = ($this->z01_v_cepcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_cepcon"] : $this->z01_v_cepcon);
             $this->z01_v_celcon = ($this->z01_v_celcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_celcon"] : $this->z01_v_celcon);
             $this->z01_v_categoria = ($this->z01_v_categoria == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_categoria"] : $this->z01_v_categoria);
-            $this->z01_i_numcon = ($this->z01_i_numcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_numcon"] : $this->z01_i_numcon);
-            $this->z01_i_nacion = ($this->z01_i_nacion == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_nacion"] : $this->z01_i_nacion);
-            $this->z01_i_estciv = ($this->z01_i_estciv == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_estciv"] : $this->z01_i_estciv);
+            $this->z01_i_numcon = ($this->z01_i_numcon === 0 || $this->z01_i_numcon === 0.0 || $this->z01_i_numcon == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_numcon"] : $this->z01_i_numcon);
+            $this->z01_i_nacion = ($this->z01_i_nacion === 0 || $this->z01_i_nacion === 0.0 || $this->z01_i_nacion == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_nacion"] : $this->z01_i_nacion);
+            $this->z01_i_estciv = ($this->z01_i_estciv === 0 || $this->z01_i_estciv === 0.0 || $this->z01_i_estciv == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_estciv"] : $this->z01_i_estciv);
             if ($this->z01_d_ultalt == "") {
                 $this->z01_d_ultalt_dia = ($this->z01_d_ultalt_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_d_ultalt_dia"] : $this->z01_d_ultalt_dia);
                 $this->z01_d_ultalt_mes = ($this->z01_d_ultalt_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_d_ultalt_mes"] : $this->z01_d_ultalt_mes);
@@ -388,7 +388,7 @@ class cl_cgs_und
             $this->z01_v_cxpostal = ($this->z01_v_cxpostal == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_cxpostal"] : $this->z01_v_cxpostal);
             $this->z01_c_raca = ($this->z01_c_raca == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_c_raca"] : $this->z01_c_raca);
             $this->z01_v_baicon = ($this->z01_v_baicon == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_baicon"] : $this->z01_v_baicon);
-            $this->z01_i_familiamicroarea = ($this->z01_i_familiamicroarea == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_familiamicroarea"] : $this->z01_i_familiamicroarea);
+            $this->z01_i_familiamicroarea = ($this->z01_i_familiamicroarea === 0 || $this->z01_i_familiamicroarea === 0.0 || $this->z01_i_familiamicroarea == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_familiamicroarea"] : $this->z01_i_familiamicroarea);
             $this->z01_c_agencia = ($this->z01_c_agencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_c_agencia"] : $this->z01_c_agencia);
             $this->z01_c_conta = ($this->z01_c_conta == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_c_conta"] : $this->z01_c_conta);
             $this->z01_c_banco = ($this->z01_c_banco == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_c_banco"] : $this->z01_c_banco);
@@ -428,7 +428,7 @@ class cl_cgs_und
             $this->z01_i_cidadao = ($this->z01_i_cidadao == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_cidadao"] : $this->z01_i_cidadao);
             $this->z01_v_municnasc = ($this->z01_v_municnasc == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_municnasc"] : $this->z01_v_municnasc);
             $this->z01_v_ufnasc = ($this->z01_v_ufnasc == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_v_ufnasc"] : $this->z01_v_ufnasc);
-            $this->z01_b_faleceu = ($this->z01_b_faleceu == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_b_faleceu"] : $this->z01_b_faleceu);
+            $this->z01_b_faleceu = ($this->z01_b_faleceu === 0 || $this->z01_b_faleceu === 0.0 || $this->z01_b_faleceu == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_b_faleceu"] : $this->z01_b_faleceu);
             $this->z01_d_falecimento_dia = ($this->z01_d_falecimento_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_d_falecimento_dia"] : $this->z01_d_falecimento_dia);
             $this->z01_d_falecimento_mes = ($this->z01_d_falecimento_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_d_falecimento_mes"] : $this->z01_d_falecimento_mes);
             $this->z01_d_falecimento_ano = ($this->z01_d_falecimento_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_d_falecimento_ano"] : $this->z01_d_falecimento_ano);
@@ -436,7 +436,7 @@ class cl_cgs_und
                 $this->z01_d_falecimento = $this->z01_d_falecimento_ano . "-" . $this->z01_d_falecimento_mes . "-" . $this->z01_d_falecimento_dia;
             }
             $this->z01_b_descnomemae = ($this->z01_b_descnomemae == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_b_descnomemae"] : $this->z01_b_descnomemae);
-            $this->z01_i_naturalidade = ($this->z01_i_naturalidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_naturalidade"] : $this->z01_i_naturalidade);
+            $this->z01_i_naturalidade = ($this->z01_i_naturalidade === 0 || $this->z01_i_naturalidade === 0.0 || $this->z01_i_naturalidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_naturalidade"] : $this->z01_i_naturalidade);
             $this->z01_i_paisorigem = ($this->z01_i_paisorigem == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_paisorigem"] : $this->z01_i_paisorigem);
             $this->z01_i_escolaridade = isset($this->z01_i_escolaridade) ? $this->z01_i_escolaridade : @$GLOBALS["HTTP_POST_VARS"]["z01_i_escolaridade"];
             $this->z01_codigoibgenasc = ($this->z01_codigoibgenasc == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_codigoibgenasc"] : $this->z01_codigoibgenasc);
@@ -451,7 +451,7 @@ class cl_cgs_und
                     @$GLOBALS["HTTP_POST_VARS"]["z01_distritosanitario"]) :
                 $this->z01_distritosanitario);
         } else {
-            $this->z01_i_cgsund = ($this->z01_i_cgsund == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_cgsund"] : $this->z01_i_cgsund);
+            $this->z01_i_cgsund = ($this->z01_i_cgsund === 0 || $this->z01_i_cgsund === 0.0 || $this->z01_i_cgsund == "" ? @$GLOBALS["HTTP_POST_VARS"]["z01_i_cgsund"] : $this->z01_i_cgsund);
         }
     }
 
@@ -663,7 +663,7 @@ class cl_cgs_und
             $this->erro_status = "0";
             return false;
         }
-        if ($this->z01_b_faleceu == 't' && $this->z01_d_falecimento == null) {
+        if (($this->z01_b_faleceu === 0 || $this->z01_b_faleceu === 0.0 || $this->z01_b_faleceu == 't') && $this->z01_d_falecimento == null) {
             $this->erro_sql = " Campo data do falecimento não informado.";
             $this->erro_campo = "z01_d_nasc_dia";
             $this->erro_banco = "";
@@ -741,7 +741,7 @@ class cl_cgs_und
             return false;
         }
         $this->z01_i_cgsund = $z01_i_cgsund;
-        if (($this->z01_i_cgsund == null) || ($this->z01_i_cgsund == "")) {
+        if (($this->z01_i_cgsund == null) || ($this->z01_i_cgsund === 0 || $this->z01_i_cgsund === 0.0 || $this->z01_i_cgsund == "")) {
             $this->erro_sql = " Campo z01_i_cgsund não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -3110,7 +3110,7 @@ class cl_cgs_und
 
             $virgula = ",";
         } else {
-            if ($this->z01_b_faleceu == 't') {
+            if ($this->z01_b_faleceu === 0 || $this->z01_b_faleceu === 0.0 || $this->z01_b_faleceu == 't') {
                 $this->erro_sql = " Campo data do falecimento não informado.";
                 $this->erro_campo = "z01_d_falecimento";
                 $this->erro_banco = "";

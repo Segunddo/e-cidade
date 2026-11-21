@@ -69,11 +69,11 @@ class cl_lab_exameatributo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la42_i_codigo = ($this->la42_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la42_i_codigo"]:$this->la42_i_codigo);
-       $this->la42_i_exame = ($this->la42_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la42_i_exame"]:$this->la42_i_exame);
-       $this->la42_i_atributo = ($this->la42_i_atributo == ""?@$GLOBALS["HTTP_POST_VARS"]["la42_i_atributo"]:$this->la42_i_atributo);
+       $this->la42_i_codigo = ($this->la42_i_codigo === 0 || $this->la42_i_codigo === 0.0 || $this->la42_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la42_i_codigo"]:$this->la42_i_codigo);
+       $this->la42_i_exame = ($this->la42_i_exame === 0 || $this->la42_i_exame === 0.0 || $this->la42_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la42_i_exame"]:$this->la42_i_exame);
+       $this->la42_i_atributo = ($this->la42_i_atributo === 0 || $this->la42_i_atributo === 0.0 || $this->la42_i_atributo == ""?@$GLOBALS["HTTP_POST_VARS"]["la42_i_atributo"]:$this->la42_i_atributo);
      }else{
-       $this->la42_i_codigo = ($this->la42_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la42_i_codigo"]:$this->la42_i_codigo);
+       $this->la42_i_codigo = ($this->la42_i_codigo === 0 || $this->la42_i_codigo === 0.0 || $this->la42_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la42_i_codigo"]:$this->la42_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_lab_exameatributo {
          $this->la42_i_codigo = $la42_i_codigo;
        }
      }
-     if(($this->la42_i_codigo == null) || ($this->la42_i_codigo == "") ){
+     if(($this->la42_i_codigo == null) || ($this->la42_i_codigo === 0 || $this->la42_i_codigo === 0.0 || $this->la42_i_codigo == "") ){
        $this->erro_sql = " Campo la42_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

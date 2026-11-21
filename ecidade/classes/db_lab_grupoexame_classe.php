@@ -45,11 +45,11 @@ class cl_lab_grupoexame
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->la68_codigo = ($this->la68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la68_codigo"]:$this->la68_codigo);
-       $this->la68_exame = ($this->la68_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la68_exame"]:$this->la68_exame);
-       $this->la68_labgrupoexame = ($this->la68_labgrupoexame == ""?@$GLOBALS["HTTP_POST_VARS"]["la68_labgrupoexame"]:$this->la68_labgrupoexame);
+       $this->la68_codigo = ($this->la68_codigo === 0 || $this->la68_codigo === 0.0 || $this->la68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la68_codigo"]:$this->la68_codigo);
+       $this->la68_exame = ($this->la68_exame === 0 || $this->la68_exame === 0.0 || $this->la68_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la68_exame"]:$this->la68_exame);
+       $this->la68_labgrupoexame = ($this->la68_labgrupoexame === 0 || $this->la68_labgrupoexame === 0.0 || $this->la68_labgrupoexame == ""?@$GLOBALS["HTTP_POST_VARS"]["la68_labgrupoexame"]:$this->la68_labgrupoexame);
      }else{
-       $this->la68_codigo = ($this->la68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la68_codigo"]:$this->la68_codigo);
+       $this->la68_codigo = ($this->la68_codigo === 0 || $this->la68_codigo === 0.0 || $this->la68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la68_codigo"]:$this->la68_codigo);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_lab_grupoexame
          $this->la68_codigo = $la68_codigo; 
        }
      }
-     if(($this->la68_codigo == null) || ($this->la68_codigo == "") ){ 
+     if(($this->la68_codigo == null) || ($this->la68_codigo === 0 || $this->la68_codigo === 0.0 || $this->la68_codigo == "") ){ 
        $this->erro_sql = " Campo la68_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

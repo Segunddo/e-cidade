@@ -67,10 +67,10 @@ class cl_sau_tipoficha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd101_i_codigo = ($this->sd101_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_i_codigo"]:$this->sd101_i_codigo);
+       $this->sd101_i_codigo = ($this->sd101_i_codigo === 0 || $this->sd101_i_codigo === 0.0 || $this->sd101_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_i_codigo"]:$this->sd101_i_codigo);
        $this->sd101_c_descr = ($this->sd101_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_c_descr"]:$this->sd101_c_descr);
      }else{
-       $this->sd101_i_codigo = ($this->sd101_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_i_codigo"]:$this->sd101_i_codigo);
+       $this->sd101_i_codigo = ($this->sd101_i_codigo === 0 || $this->sd101_i_codigo === 0.0 || $this->sd101_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd101_i_codigo"]:$this->sd101_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_tipoficha {
          $this->sd101_i_codigo = $sd101_i_codigo;
        }
      }
-     if(($this->sd101_i_codigo == null) || ($this->sd101_i_codigo == "") ){
+     if(($this->sd101_i_codigo == null) || ($this->sd101_i_codigo === 0 || $this->sd101_i_codigo === 0.0 || $this->sd101_i_codigo == "") ){
        $this->erro_sql = " Campo sd101_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

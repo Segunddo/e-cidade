@@ -67,10 +67,10 @@ class cl_sau_fatorderisco {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s105_i_codigo = ($this->s105_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s105_i_codigo"]:$this->s105_i_codigo);
+       $this->s105_i_codigo = ($this->s105_i_codigo === 0 || $this->s105_i_codigo === 0.0 || $this->s105_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s105_i_codigo"]:$this->s105_i_codigo);
        $this->s105_v_descricao = ($this->s105_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["s105_v_descricao"]:$this->s105_v_descricao);
      }else{
-       $this->s105_i_codigo = ($this->s105_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s105_i_codigo"]:$this->s105_i_codigo);
+       $this->s105_i_codigo = ($this->s105_i_codigo === 0 || $this->s105_i_codigo === 0.0 || $this->s105_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s105_i_codigo"]:$this->s105_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_fatorderisco {
          $this->s105_i_codigo = $s105_i_codigo;
        }
      }
-     if(($this->s105_i_codigo == null) || ($this->s105_i_codigo == "") ){
+     if(($this->s105_i_codigo == null) || ($this->s105_i_codigo === 0 || $this->s105_i_codigo === 0.0 || $this->s105_i_codigo == "") ){
        $this->erro_sql = " Campo s105_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

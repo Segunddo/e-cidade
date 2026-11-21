@@ -73,13 +73,13 @@ class cl_sau_procregistro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd85_i_codigo = ($this->sd85_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_codigo"]:$this->sd85_i_codigo);
-       $this->sd85_i_procedimento = ($this->sd85_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_procedimento"]:$this->sd85_i_procedimento);
-       $this->sd85_i_registro = ($this->sd85_i_registro == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_registro"]:$this->sd85_i_registro);
-       $this->sd85_i_anocomp = ($this->sd85_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_anocomp"]:$this->sd85_i_anocomp);
-       $this->sd85_i_mescomp = ($this->sd85_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_mescomp"]:$this->sd85_i_mescomp);
+       $this->sd85_i_codigo = ($this->sd85_i_codigo === 0 || $this->sd85_i_codigo === 0.0 || $this->sd85_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_codigo"]:$this->sd85_i_codigo);
+       $this->sd85_i_procedimento = ($this->sd85_i_procedimento === 0 || $this->sd85_i_procedimento === 0.0 || $this->sd85_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_procedimento"]:$this->sd85_i_procedimento);
+       $this->sd85_i_registro = ($this->sd85_i_registro === 0 || $this->sd85_i_registro === 0.0 || $this->sd85_i_registro == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_registro"]:$this->sd85_i_registro);
+       $this->sd85_i_anocomp = ($this->sd85_i_anocomp === 0 || $this->sd85_i_anocomp === 0.0 || $this->sd85_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_anocomp"]:$this->sd85_i_anocomp);
+       $this->sd85_i_mescomp = ($this->sd85_i_mescomp === 0 || $this->sd85_i_mescomp === 0.0 || $this->sd85_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_mescomp"]:$this->sd85_i_mescomp);
      }else{
-       $this->sd85_i_codigo = ($this->sd85_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_codigo"]:$this->sd85_i_codigo);
+       $this->sd85_i_codigo = ($this->sd85_i_codigo === 0 || $this->sd85_i_codigo === 0.0 || $this->sd85_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd85_i_codigo"]:$this->sd85_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_sau_procregistro {
          $this->sd85_i_codigo = $sd85_i_codigo;
        }
      }
-     if(($this->sd85_i_codigo == null) || ($this->sd85_i_codigo == "") ){
+     if(($this->sd85_i_codigo == null) || ($this->sd85_i_codigo === 0 || $this->sd85_i_codigo === 0.0 || $this->sd85_i_codigo == "") ){
        $this->erro_sql = " Campo sd85_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -76,9 +76,9 @@ class cl_sau_agendaprograma {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s141_i_codigo = ($this->s141_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_i_codigo"]:$this->s141_i_codigo);
-       $this->s141_i_acaoprog = ($this->s141_i_acaoprog == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_i_acaoprog"]:$this->s141_i_acaoprog);
-       $this->s141_i_agendamento = ($this->s141_i_agendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_i_agendamento"]:$this->s141_i_agendamento);
+       $this->s141_i_codigo = ($this->s141_i_codigo === 0 || $this->s141_i_codigo === 0.0 || $this->s141_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_i_codigo"]:$this->s141_i_codigo);
+       $this->s141_i_acaoprog = ($this->s141_i_acaoprog === 0 || $this->s141_i_acaoprog === 0.0 || $this->s141_i_acaoprog == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_i_acaoprog"]:$this->s141_i_acaoprog);
+       $this->s141_i_agendamento = ($this->s141_i_agendamento === 0 || $this->s141_i_agendamento === 0.0 || $this->s141_i_agendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_i_agendamento"]:$this->s141_i_agendamento);
        if($this->s141_d_data == ""){
          $this->s141_d_data_dia = ($this->s141_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_d_data_dia"]:$this->s141_d_data_dia);
          $this->s141_d_data_mes = ($this->s141_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_d_data_mes"]:$this->s141_d_data_mes);
@@ -89,7 +89,7 @@ class cl_sau_agendaprograma {
        }
        $this->s141_c_hora = ($this->s141_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_c_hora"]:$this->s141_c_hora);
      }else{
-       $this->s141_i_codigo = ($this->s141_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_i_codigo"]:$this->s141_i_codigo);
+       $this->s141_i_codigo = ($this->s141_i_codigo === 0 || $this->s141_i_codigo === 0.0 || $this->s141_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s141_i_codigo"]:$this->s141_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_sau_agendaprograma {
          $this->s141_i_codigo = $s141_i_codigo;
        }
      }
-     if(($this->s141_i_codigo == null) || ($this->s141_i_codigo == "") ){
+     if(($this->s141_i_codigo == null) || ($this->s141_i_codigo === 0 || $this->s141_i_codigo === 0.0 || $this->s141_i_codigo == "") ){
        $this->erro_sql = " Campo s141_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_far_listaprescricao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa21_i_codigo = ($this->fa21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa21_i_codigo"]:$this->fa21_i_codigo);
-       $this->fa21_i_prescricaomedica = ($this->fa21_i_prescricaomedica == ""?@$GLOBALS["HTTP_POST_VARS"]["fa21_i_prescricaomedica"]:$this->fa21_i_prescricaomedica);
-       $this->fa21_i_listacontrolado = ($this->fa21_i_listacontrolado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa21_i_listacontrolado"]:$this->fa21_i_listacontrolado);
+       $this->fa21_i_codigo = ($this->fa21_i_codigo === 0 || $this->fa21_i_codigo === 0.0 || $this->fa21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa21_i_codigo"]:$this->fa21_i_codigo);
+       $this->fa21_i_prescricaomedica = ($this->fa21_i_prescricaomedica === 0 || $this->fa21_i_prescricaomedica === 0.0 || $this->fa21_i_prescricaomedica == ""?@$GLOBALS["HTTP_POST_VARS"]["fa21_i_prescricaomedica"]:$this->fa21_i_prescricaomedica);
+       $this->fa21_i_listacontrolado = ($this->fa21_i_listacontrolado === 0 || $this->fa21_i_listacontrolado === 0.0 || $this->fa21_i_listacontrolado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa21_i_listacontrolado"]:$this->fa21_i_listacontrolado);
      }else{
-       $this->fa21_i_codigo = ($this->fa21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa21_i_codigo"]:$this->fa21_i_codigo);
+       $this->fa21_i_codigo = ($this->fa21_i_codigo === 0 || $this->fa21_i_codigo === 0.0 || $this->fa21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa21_i_codigo"]:$this->fa21_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_far_listaprescricao {
          $this->fa21_i_codigo = $fa21_i_codigo;
        }
      }
-     if(($this->fa21_i_codigo == null) || ($this->fa21_i_codigo == "") ){
+     if(($this->fa21_i_codigo == null) || ($this->fa21_i_codigo === 0 || $this->fa21_i_codigo === 0.0 || $this->fa21_i_codigo == "") ){
        $this->erro_sql = " Campo fa21_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

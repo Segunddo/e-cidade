@@ -69,12 +69,12 @@ class cl_sau_cgserradolog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s129_i_codigo = ($this->s129_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s129_i_codigo"]:$this->s129_i_codigo);
-       $this->s129_i_numcgs = ($this->s129_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s129_i_numcgs"]:$this->s129_i_numcgs);
+       $this->s129_i_codigo = ($this->s129_i_codigo === 0 || $this->s129_i_codigo === 0.0 || $this->s129_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s129_i_codigo"]:$this->s129_i_codigo);
+       $this->s129_i_numcgs = ($this->s129_i_numcgs === 0 || $this->s129_i_numcgs === 0.0 || $this->s129_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s129_i_numcgs"]:$this->s129_i_numcgs);
        $this->s129_t_log = ($this->s129_t_log == ""?@$GLOBALS["HTTP_POST_VARS"]["s129_t_log"]:$this->s129_t_log);
      }else{
-       $this->s129_i_codigo = ($this->s129_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s129_i_codigo"]:$this->s129_i_codigo);
-       $this->s129_i_numcgs = ($this->s129_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s129_i_numcgs"]:$this->s129_i_numcgs);
+       $this->s129_i_codigo = ($this->s129_i_codigo === 0 || $this->s129_i_codigo === 0.0 || $this->s129_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s129_i_codigo"]:$this->s129_i_codigo);
+       $this->s129_i_numcgs = ($this->s129_i_numcgs === 0 || $this->s129_i_numcgs === 0.0 || $this->s129_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s129_i_numcgs"]:$this->s129_i_numcgs);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_sau_cgserradolog {
      }
        $this->s129_i_codigo = $s129_i_codigo;
        $this->s129_i_numcgs = $s129_i_numcgs;
-     if(($this->s129_i_codigo == null) || ($this->s129_i_codigo == "") ){
+     if(($this->s129_i_codigo == null) || ($this->s129_i_codigo === 0 || $this->s129_i_codigo === 0.0 || $this->s129_i_codigo == "") ){
        $this->erro_sql = " Campo s129_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_sau_cgserradolog {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->s129_i_numcgs == null) || ($this->s129_i_numcgs == "") ){
+     if(($this->s129_i_numcgs == null) || ($this->s129_i_numcgs === 0 || $this->s129_i_numcgs === 0.0 || $this->s129_i_numcgs == "") ){
        $this->erro_sql = " Campo s129_i_numcgs nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

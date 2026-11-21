@@ -85,10 +85,10 @@ class cl_tfd_gradehorarios {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf02_i_codigo = ($this->tf02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_codigo"]:$this->tf02_i_codigo);
-       $this->tf02_i_destino = ($this->tf02_i_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_destino"]:$this->tf02_i_destino);
-       $this->tf02_i_diasemana = ($this->tf02_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_diasemana"]:$this->tf02_i_diasemana);
-       $this->tf02_i_lotacao = ($this->tf02_i_lotacao == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_lotacao"]:$this->tf02_i_lotacao);
+       $this->tf02_i_codigo = ($this->tf02_i_codigo === 0 || $this->tf02_i_codigo === 0.0 || $this->tf02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_codigo"]:$this->tf02_i_codigo);
+       $this->tf02_i_destino = ($this->tf02_i_destino === 0 || $this->tf02_i_destino === 0.0 || $this->tf02_i_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_destino"]:$this->tf02_i_destino);
+       $this->tf02_i_diasemana = ($this->tf02_i_diasemana === 0 || $this->tf02_i_diasemana === 0.0 || $this->tf02_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_diasemana"]:$this->tf02_i_diasemana);
+       $this->tf02_i_lotacao = ($this->tf02_i_lotacao === 0 || $this->tf02_i_lotacao === 0.0 || $this->tf02_i_lotacao == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_lotacao"]:$this->tf02_i_lotacao);
        $this->tf02_c_horario = ($this->tf02_c_horario == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_c_horario"]:$this->tf02_c_horario);
        if($this->tf02_d_validadeini == ""){
          $this->tf02_d_validadeini_dia = ($this->tf02_d_validadeini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_d_validadeini_dia"]:$this->tf02_d_validadeini_dia);
@@ -108,7 +108,7 @@ class cl_tfd_gradehorarios {
        }
        $this->tf02_c_localsaida = ($this->tf02_c_localsaida == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_c_localsaida"]:$this->tf02_c_localsaida);
      }else{
-       $this->tf02_i_codigo = ($this->tf02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_codigo"]:$this->tf02_i_codigo);
+       $this->tf02_i_codigo = ($this->tf02_i_codigo === 0 || $this->tf02_i_codigo === 0.0 || $this->tf02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf02_i_codigo"]:$this->tf02_i_codigo);
      }
    }
    // funcao para inclusao
@@ -195,7 +195,7 @@ class cl_tfd_gradehorarios {
          $this->tf02_i_codigo = $tf02_i_codigo;
        }
      }
-     if(($this->tf02_i_codigo == null) || ($this->tf02_i_codigo == "") ){
+     if(($this->tf02_i_codigo == null) || ($this->tf02_i_codigo === 0 || $this->tf02_i_codigo === 0.0 || $this->tf02_i_codigo == "") ){
        $this->erro_sql = " Campo tf02_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

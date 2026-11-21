@@ -45,11 +45,11 @@ class cl_lab_labgrupoexame
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->la67_codigo = ($this->la67_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la67_codigo"]:$this->la67_codigo);
-       $this->la67_laboratorio = ($this->la67_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la67_laboratorio"]:$this->la67_laboratorio);
-       $this->la67_grupo = ($this->la67_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["la67_grupo"]:$this->la67_grupo);
+       $this->la67_codigo = ($this->la67_codigo === 0 || $this->la67_codigo === 0.0 || $this->la67_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la67_codigo"]:$this->la67_codigo);
+       $this->la67_laboratorio = ($this->la67_laboratorio === 0 || $this->la67_laboratorio === 0.0 || $this->la67_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la67_laboratorio"]:$this->la67_laboratorio);
+       $this->la67_grupo = ($this->la67_grupo === 0 || $this->la67_grupo === 0.0 || $this->la67_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["la67_grupo"]:$this->la67_grupo);
      }else{
-       $this->la67_codigo = ($this->la67_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la67_codigo"]:$this->la67_codigo);
+       $this->la67_codigo = ($this->la67_codigo === 0 || $this->la67_codigo === 0.0 || $this->la67_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la67_codigo"]:$this->la67_codigo);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_lab_labgrupoexame
          $this->la67_codigo = $la67_codigo; 
        }
      }
-     if(($this->la67_codigo == null) || ($this->la67_codigo == "") ){ 
+     if(($this->la67_codigo == null) || ($this->la67_codigo === 0 || $this->la67_codigo === 0.0 || $this->la67_codigo == "") ){ 
        $this->erro_sql = " Campo la67_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

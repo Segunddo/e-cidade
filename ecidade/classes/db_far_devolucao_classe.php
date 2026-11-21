@@ -76,10 +76,10 @@ class cl_far_devolucao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa22_i_codigo = ($this->fa22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_codigo"]:$this->fa22_i_codigo);
-       $this->fa22_i_cgsund = ($this->fa22_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_cgsund"]:$this->fa22_i_cgsund);
-       $this->fa22_c_hora = ($this->fa22_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_c_hora"]:$this->fa22_c_hora);
-       $this->fa22_i_login = ($this->fa22_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_login"]:$this->fa22_i_login);
+       $this->fa22_i_codigo = ($this->fa22_i_codigo === 0 || $this->fa22_i_codigo === 0.0 || $this->fa22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_codigo"]:$this->fa22_i_codigo);
+       $this->fa22_i_cgsund = ($this->fa22_i_cgsund === 0 || $this->fa22_i_cgsund === 0.0 || $this->fa22_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_cgsund"]:$this->fa22_i_cgsund);
+       $this->fa22_c_hora = ($this->fa22_c_hora === 0 || $this->fa22_c_hora === 0.0 || $this->fa22_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_c_hora"]:$this->fa22_c_hora);
+       $this->fa22_i_login = ($this->fa22_i_login === 0 || $this->fa22_i_login === 0.0 || $this->fa22_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_login"]:$this->fa22_i_login);
        if($this->fa22_d_data == ""){
          $this->fa22_d_data_dia = ($this->fa22_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_d_data_dia"]:$this->fa22_d_data_dia);
          $this->fa22_d_data_mes = ($this->fa22_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_d_data_mes"]:$this->fa22_d_data_mes);
@@ -89,7 +89,7 @@ class cl_far_devolucao {
          }
        }
      }else{
-       $this->fa22_i_codigo = ($this->fa22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_codigo"]:$this->fa22_i_codigo);
+       $this->fa22_i_codigo = ($this->fa22_i_codigo === 0 || $this->fa22_i_codigo === 0.0 || $this->fa22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa22_i_codigo"]:$this->fa22_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_far_devolucao {
          $this->fa22_i_codigo = $fa22_i_codigo;
        }
      }
-     if(($this->fa22_i_codigo == null) || ($this->fa22_i_codigo == "") ){
+     if(($this->fa22_i_codigo == null) || ($this->fa22_i_codigo === 0 || $this->fa22_i_codigo === 0.0 || $this->fa22_i_codigo == "") ){
        $this->erro_sql = " Campo fa22_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -81,10 +81,10 @@ class cl_tfd_destino {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf03_i_codigo = ($this->tf03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_i_codigo"]:$this->tf03_i_codigo);
+       $this->tf03_i_codigo = ($this->tf03_i_codigo === 0 || $this->tf03_i_codigo === 0.0 || $this->tf03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_i_codigo"]:$this->tf03_i_codigo);
        $this->tf03_c_descr = ($this->tf03_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_c_descr"]:$this->tf03_c_descr);
-       $this->tf03_i_tipodistancia = ($this->tf03_i_tipodistancia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_i_tipodistancia"]:$this->tf03_i_tipodistancia);
-       $this->tf03_f_distancia = ($this->tf03_f_distancia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_f_distancia"]:$this->tf03_f_distancia);
+       $this->tf03_i_tipodistancia = ($this->tf03_i_tipodistancia === 0 || $this->tf03_i_tipodistancia === 0.0 || $this->tf03_i_tipodistancia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_i_tipodistancia"]:$this->tf03_i_tipodistancia);
+       $this->tf03_f_distancia = ($this->tf03_f_distancia === 0 || $this->tf03_f_distancia === 0.0 || $this->tf03_f_distancia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_f_distancia"]:$this->tf03_f_distancia);
        if($this->tf03_d_validadeini == ""){
          $this->tf03_d_validadeini_dia = ($this->tf03_d_validadeini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_d_validadeini_dia"]:$this->tf03_d_validadeini_dia);
          $this->tf03_d_validadeini_mes = ($this->tf03_d_validadeini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_d_validadeini_mes"]:$this->tf03_d_validadeini_mes);
@@ -102,7 +102,7 @@ class cl_tfd_destino {
          }
        }
      }else{
-       $this->tf03_i_codigo = ($this->tf03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_i_codigo"]:$this->tf03_i_codigo);
+       $this->tf03_i_codigo = ($this->tf03_i_codigo === 0 || $this->tf03_i_codigo === 0.0 || $this->tf03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf03_i_codigo"]:$this->tf03_i_codigo);
      }
    }
    // funcao para inclusao
@@ -171,7 +171,7 @@ class cl_tfd_destino {
          $this->tf03_i_codigo = $tf03_i_codigo;
        }
      }
-     if(($this->tf03_i_codigo == null) || ($this->tf03_i_codigo == "") ){
+     if(($this->tf03_i_codigo == null) || ($this->tf03_i_codigo === 0 || $this->tf03_i_codigo === 0.0 || $this->tf03_i_codigo == "") ){
        $this->erro_sql = " Campo tf03_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

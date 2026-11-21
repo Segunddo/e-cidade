@@ -69,11 +69,11 @@ class cl_sau_exames {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s108_i_codigo = ($this->s108_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s108_i_codigo"]:$this->s108_i_codigo);
+       $this->s108_i_codigo = ($this->s108_i_codigo === 0 || $this->s108_i_codigo === 0.0 || $this->s108_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s108_i_codigo"]:$this->s108_i_codigo);
        $this->s108_c_exame = ($this->s108_c_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["s108_c_exame"]:$this->s108_c_exame);
-       $this->s108_i_grupoexame = ($this->s108_i_grupoexame == ""?@$GLOBALS["HTTP_POST_VARS"]["s108_i_grupoexame"]:$this->s108_i_grupoexame);
+       $this->s108_i_grupoexame = ($this->s108_i_grupoexame === 0 || $this->s108_i_grupoexame === 0.0 || $this->s108_i_grupoexame == ""?@$GLOBALS["HTTP_POST_VARS"]["s108_i_grupoexame"]:$this->s108_i_grupoexame);
      }else{
-       $this->s108_i_codigo = ($this->s108_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s108_i_codigo"]:$this->s108_i_codigo);
+       $this->s108_i_codigo = ($this->s108_i_codigo === 0 || $this->s108_i_codigo === 0.0 || $this->s108_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s108_i_codigo"]:$this->s108_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_sau_exames {
          $this->s108_i_codigo = $s108_i_codigo;
        }
      }
-     if(($this->s108_i_codigo == null) || ($this->s108_i_codigo == "") ){
+     if(($this->s108_i_codigo == null) || ($this->s108_i_codigo === 0 || $this->s108_i_codigo === 0.0 || $this->s108_i_codigo == "") ){
        $this->erro_sql = " Campo s108_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

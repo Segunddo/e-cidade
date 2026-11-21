@@ -48,7 +48,7 @@ $ano=date('Y');
 
   $colname_v = "-1";
 if (isset($_POST['lv'])) {
-  $colname_v = (get_magic_quotes_gpc()) ? $_POST['lv'] : addslashes($_POST['lv']);
+  $colname_v = (false) ? $_POST['lv'] : addslashes($_POST['lv']);
 }  
 $sql = "SELECT * FROM far_modelolivro WHERE fa16_i_codigo = '$lv' ";
 $qr = db_query($sql) ;

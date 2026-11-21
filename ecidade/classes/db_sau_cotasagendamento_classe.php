@@ -77,15 +77,15 @@ class cl_sau_cotasagendamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s163_i_codigo = ($this->s163_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_codigo"]:$this->s163_i_codigo);
-       $this->s163_i_rhcbo = ($this->s163_i_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_rhcbo"]:$this->s163_i_rhcbo);
-       $this->s163_i_upssolicitante = ($this->s163_i_upssolicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_upssolicitante"]:$this->s163_i_upssolicitante);
-       $this->s163_i_upsprestadora = ($this->s163_i_upsprestadora == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_upsprestadora"]:$this->s163_i_upsprestadora);
-       $this->s163_i_quantidade = ($this->s163_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_quantidade"]:$this->s163_i_quantidade);
-       $this->s163_i_mescomp = ($this->s163_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_mescomp"]:$this->s163_i_mescomp);
-       $this->s163_i_anocomp = ($this->s163_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_anocomp"]:$this->s163_i_anocomp);
+       $this->s163_i_codigo = ($this->s163_i_codigo === 0 || $this->s163_i_codigo === 0.0 || $this->s163_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_codigo"]:$this->s163_i_codigo);
+       $this->s163_i_rhcbo = ($this->s163_i_rhcbo === 0 || $this->s163_i_rhcbo === 0.0 || $this->s163_i_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_rhcbo"]:$this->s163_i_rhcbo);
+       $this->s163_i_upssolicitante = ($this->s163_i_upssolicitante === 0 || $this->s163_i_upssolicitante === 0.0 || $this->s163_i_upssolicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_upssolicitante"]:$this->s163_i_upssolicitante);
+       $this->s163_i_upsprestadora = ($this->s163_i_upsprestadora === 0 || $this->s163_i_upsprestadora === 0.0 || $this->s163_i_upsprestadora == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_upsprestadora"]:$this->s163_i_upsprestadora);
+       $this->s163_i_quantidade = ($this->s163_i_quantidade === 0 || $this->s163_i_quantidade === 0.0 || $this->s163_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_quantidade"]:$this->s163_i_quantidade);
+       $this->s163_i_mescomp = ($this->s163_i_mescomp === 0 || $this->s163_i_mescomp === 0.0 || $this->s163_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_mescomp"]:$this->s163_i_mescomp);
+       $this->s163_i_anocomp = ($this->s163_i_anocomp === 0 || $this->s163_i_anocomp === 0.0 || $this->s163_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_anocomp"]:$this->s163_i_anocomp);
      }else{
-       $this->s163_i_codigo = ($this->s163_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_codigo"]:$this->s163_i_codigo);
+       $this->s163_i_codigo = ($this->s163_i_codigo === 0 || $this->s163_i_codigo === 0.0 || $this->s163_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s163_i_codigo"]:$this->s163_i_codigo);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_sau_cotasagendamento {
          $this->s163_i_codigo = $s163_i_codigo;
        }
      }
-     if(($this->s163_i_codigo == null) || ($this->s163_i_codigo == "") ){
+     if(($this->s163_i_codigo == null) || ($this->s163_i_codigo === 0 || $this->s163_i_codigo === 0.0 || $this->s163_i_codigo == "") ){
        $this->erro_sql = " Campo s163_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -101,27 +101,27 @@ class cl_vac_vacinadose {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc07_i_codigo = ($this->vc07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_codigo"]:$this->vc07_i_codigo);
-       $this->vc07_i_diasvalidade = ($this->vc07_i_diasvalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_diasvalidade"]:$this->vc07_i_diasvalidade);
-       $this->vc07_i_vacina = ($this->vc07_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_vacina"]:$this->vc07_i_vacina);
-       $this->vc07_i_dose = ($this->vc07_i_dose == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_dose"]:$this->vc07_i_dose);
-       $this->vc07_i_calendario = ($this->vc07_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_calendario"]:$this->vc07_i_calendario);
+       $this->vc07_i_codigo = ($this->vc07_i_codigo === 0 || $this->vc07_i_codigo === 0.0 || $this->vc07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_codigo"]:$this->vc07_i_codigo);
+       $this->vc07_i_diasvalidade = ($this->vc07_i_diasvalidade === 0 || $this->vc07_i_diasvalidade === 0.0 || $this->vc07_i_diasvalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_diasvalidade"]:$this->vc07_i_diasvalidade);
+       $this->vc07_i_vacina = ($this->vc07_i_vacina === 0 || $this->vc07_i_vacina === 0.0 || $this->vc07_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_vacina"]:$this->vc07_i_vacina);
+       $this->vc07_i_dose = ($this->vc07_i_dose === 0 || $this->vc07_i_dose === 0.0 || $this->vc07_i_dose == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_dose"]:$this->vc07_i_dose);
+       $this->vc07_i_calendario = ($this->vc07_i_calendario === 0 || $this->vc07_i_calendario === 0.0 || $this->vc07_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_calendario"]:$this->vc07_i_calendario);
        $this->vc07_c_nome = ($this->vc07_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_c_nome"]:$this->vc07_c_nome);
-       $this->vc07_n_quant = ($this->vc07_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_n_quant"]:$this->vc07_n_quant);
-       $this->vc07_i_diasantecipacao = ($this->vc07_i_diasantecipacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_diasantecipacao"]:$this->vc07_i_diasantecipacao);
+       $this->vc07_n_quant = ($this->vc07_n_quant === 0 || $this->vc07_n_quant === 0.0 || $this->vc07_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_n_quant"]:$this->vc07_n_quant);
+       $this->vc07_i_diasantecipacao = ($this->vc07_i_diasantecipacao === 0 || $this->vc07_i_diasantecipacao === 0.0 || $this->vc07_i_diasantecipacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_diasantecipacao"]:$this->vc07_i_diasantecipacao);
        $this->vc07_c_descr = ($this->vc07_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_c_descr"]:$this->vc07_c_descr);
-       $this->vc07_i_situacao = ($this->vc07_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_situacao"]:$this->vc07_i_situacao);
-       $this->vc07_i_sexo = ($this->vc07_i_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_sexo"]:$this->vc07_i_sexo);
-       $this->vc07_i_tipocalculo = ($this->vc07_i_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_tipocalculo"]:$this->vc07_i_tipocalculo);
-       $this->vc07_i_diasatraso = ($this->vc07_i_diasatraso == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_diasatraso"]:$this->vc07_i_diasatraso);
-       $this->vc07_i_faixainidias = ($this->vc07_i_faixainidias == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixainidias"]:$this->vc07_i_faixainidias);
-       $this->vc07_i_faixainimes = ($this->vc07_i_faixainimes == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixainimes"]:$this->vc07_i_faixainimes);
-       $this->vc07_i_faixainiano = ($this->vc07_i_faixainiano == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixainiano"]:$this->vc07_i_faixainiano);
-       $this->vc07_i_faixafimdias = ($this->vc07_i_faixafimdias == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixafimdias"]:$this->vc07_i_faixafimdias);
-       $this->vc07_i_faixafimmes = ($this->vc07_i_faixafimmes == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixafimmes"]:$this->vc07_i_faixafimmes);
-       $this->vc07_i_faixafimano = ($this->vc07_i_faixafimano == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixafimano"]:$this->vc07_i_faixafimano);
+       $this->vc07_i_situacao = ($this->vc07_i_situacao === 0 || $this->vc07_i_situacao === 0.0 || $this->vc07_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_situacao"]:$this->vc07_i_situacao);
+       $this->vc07_i_sexo = ($this->vc07_i_sexo === 0 || $this->vc07_i_sexo === 0.0 || $this->vc07_i_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_sexo"]:$this->vc07_i_sexo);
+       $this->vc07_i_tipocalculo = ($this->vc07_i_tipocalculo === 0 || $this->vc07_i_tipocalculo === 0.0 || $this->vc07_i_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_tipocalculo"]:$this->vc07_i_tipocalculo);
+       $this->vc07_i_diasatraso = ($this->vc07_i_diasatraso === 0 || $this->vc07_i_diasatraso === 0.0 || $this->vc07_i_diasatraso == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_diasatraso"]:$this->vc07_i_diasatraso);
+       $this->vc07_i_faixainidias = ($this->vc07_i_faixainidias === 0 || $this->vc07_i_faixainidias === 0.0 || $this->vc07_i_faixainidias == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixainidias"]:$this->vc07_i_faixainidias);
+       $this->vc07_i_faixainimes = ($this->vc07_i_faixainimes === 0 || $this->vc07_i_faixainimes === 0.0 || $this->vc07_i_faixainimes == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixainimes"]:$this->vc07_i_faixainimes);
+       $this->vc07_i_faixainiano = ($this->vc07_i_faixainiano === 0 || $this->vc07_i_faixainiano === 0.0 || $this->vc07_i_faixainiano == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixainiano"]:$this->vc07_i_faixainiano);
+       $this->vc07_i_faixafimdias = ($this->vc07_i_faixafimdias === 0 || $this->vc07_i_faixafimdias === 0.0 || $this->vc07_i_faixafimdias == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixafimdias"]:$this->vc07_i_faixafimdias);
+       $this->vc07_i_faixafimmes = ($this->vc07_i_faixafimmes === 0 || $this->vc07_i_faixafimmes === 0.0 || $this->vc07_i_faixafimmes == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixafimmes"]:$this->vc07_i_faixafimmes);
+       $this->vc07_i_faixafimano = ($this->vc07_i_faixafimano === 0 || $this->vc07_i_faixafimano === 0.0 || $this->vc07_i_faixafimano == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_faixafimano"]:$this->vc07_i_faixafimano);
      }else{
-       $this->vc07_i_codigo = ($this->vc07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_codigo"]:$this->vc07_i_codigo);
+       $this->vc07_i_codigo = ($this->vc07_i_codigo === 0 || $this->vc07_i_codigo === 0.0 || $this->vc07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc07_i_codigo"]:$this->vc07_i_codigo);
      }
    }
    // funcao para inclusao
@@ -247,7 +247,7 @@ class cl_vac_vacinadose {
          $this->vc07_i_codigo = $vc07_i_codigo;
        }
      }
-     if(($this->vc07_i_codigo == null) || ($this->vc07_i_codigo == "") ){
+     if(($this->vc07_i_codigo == null) || ($this->vc07_i_codigo === 0 || $this->vc07_i_codigo === 0.0 || $this->vc07_i_codigo == "") ){
        $this->erro_sql = " Campo vc07_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

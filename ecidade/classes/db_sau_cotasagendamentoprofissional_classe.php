@@ -71,12 +71,12 @@ class cl_sau_cotasagendamentoprofissional {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s164_codigo = ($this->s164_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s164_codigo"]:$this->s164_codigo);
-       $this->s164_especmedico = ($this->s164_especmedico == ""?@$GLOBALS["HTTP_POST_VARS"]["s164_especmedico"]:$this->s164_especmedico);
-       $this->s164_cotaagendamento = ($this->s164_cotaagendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s164_cotaagendamento"]:$this->s164_cotaagendamento);
-       $this->s164_quantidade = ($this->s164_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s164_quantidade"]:$this->s164_quantidade);
+       $this->s164_codigo = ($this->s164_codigo === 0 || $this->s164_codigo === 0.0 || $this->s164_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s164_codigo"]:$this->s164_codigo);
+       $this->s164_especmedico = ($this->s164_especmedico === 0 || $this->s164_especmedico === 0.0 || $this->s164_especmedico == ""?@$GLOBALS["HTTP_POST_VARS"]["s164_especmedico"]:$this->s164_especmedico);
+       $this->s164_cotaagendamento = ($this->s164_cotaagendamento === 0 || $this->s164_cotaagendamento === 0.0 || $this->s164_cotaagendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s164_cotaagendamento"]:$this->s164_cotaagendamento);
+       $this->s164_quantidade = ($this->s164_quantidade === 0 || $this->s164_quantidade === 0.0 || $this->s164_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s164_quantidade"]:$this->s164_quantidade);
      }else{
-       $this->s164_codigo = ($this->s164_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s164_codigo"]:$this->s164_codigo);
+       $this->s164_codigo = ($this->s164_codigo === 0 || $this->s164_codigo === 0.0 || $this->s164_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s164_codigo"]:$this->s164_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_sau_cotasagendamentoprofissional {
          $this->s164_codigo = $s164_codigo;
        }
      }
-     if(($this->s164_codigo == null) || ($this->s164_codigo == "") ){
+     if(($this->s164_codigo == null) || ($this->s164_codigo === 0 || $this->s164_codigo === 0.0 || $this->s164_codigo == "") ){
        $this->erro_sql = " Campo s164_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

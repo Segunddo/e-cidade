@@ -75,14 +75,14 @@ class cl_sau_prochabilitacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd77_i_codigo = ($this->sd77_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_codigo"]:$this->sd77_i_codigo);
-       $this->sd77_i_procedimento = ($this->sd77_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_procedimento"]:$this->sd77_i_procedimento);
-       $this->sd77_i_habilitacao = ($this->sd77_i_habilitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_habilitacao"]:$this->sd77_i_habilitacao);
-       $this->sd77_i_grupohabilitacao = ($this->sd77_i_grupohabilitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_grupohabilitacao"]:$this->sd77_i_grupohabilitacao);
-       $this->sd77_i_anocomp = ($this->sd77_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_anocomp"]:$this->sd77_i_anocomp);
-       $this->sd77_i_mescomp = ($this->sd77_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_mescomp"]:$this->sd77_i_mescomp);
+       $this->sd77_i_codigo = ($this->sd77_i_codigo === 0 || $this->sd77_i_codigo === 0.0 || $this->sd77_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_codigo"]:$this->sd77_i_codigo);
+       $this->sd77_i_procedimento = ($this->sd77_i_procedimento === 0 || $this->sd77_i_procedimento === 0.0 || $this->sd77_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_procedimento"]:$this->sd77_i_procedimento);
+       $this->sd77_i_habilitacao = ($this->sd77_i_habilitacao === 0 || $this->sd77_i_habilitacao === 0.0 || $this->sd77_i_habilitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_habilitacao"]:$this->sd77_i_habilitacao);
+       $this->sd77_i_grupohabilitacao = ($this->sd77_i_grupohabilitacao === 0 || $this->sd77_i_grupohabilitacao === 0.0 || $this->sd77_i_grupohabilitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_grupohabilitacao"]:$this->sd77_i_grupohabilitacao);
+       $this->sd77_i_anocomp = ($this->sd77_i_anocomp === 0 || $this->sd77_i_anocomp === 0.0 || $this->sd77_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_anocomp"]:$this->sd77_i_anocomp);
+       $this->sd77_i_mescomp = ($this->sd77_i_mescomp === 0 || $this->sd77_i_mescomp === 0.0 || $this->sd77_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_mescomp"]:$this->sd77_i_mescomp);
      }else{
-       $this->sd77_i_codigo = ($this->sd77_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_codigo"]:$this->sd77_i_codigo);
+       $this->sd77_i_codigo = ($this->sd77_i_codigo === 0 || $this->sd77_i_codigo === 0.0 || $this->sd77_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd77_i_codigo"]:$this->sd77_i_codigo);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_sau_prochabilitacao {
          $this->sd77_i_codigo = $sd77_i_codigo;
        }
      }
-     if(($this->sd77_i_codigo == null) || ($this->sd77_i_codigo == "") ){
+     if(($this->sd77_i_codigo == null) || ($this->sd77_i_codigo === 0 || $this->sd77_i_codigo === 0.0 || $this->sd77_i_codigo == "") ){
        $this->erro_sql = " Campo sd77_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

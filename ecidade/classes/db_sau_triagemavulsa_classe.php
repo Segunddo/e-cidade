@@ -92,17 +92,17 @@ class cl_sau_triagemavulsa
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->s152_i_codigo = ($this->s152_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_codigo"]:$this->s152_i_codigo);
-       $this->s152_i_cbosprofissional = ($this->s152_i_cbosprofissional == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_cbosprofissional"]:$this->s152_i_cbosprofissional);
-       $this->s152_i_cgsund = ($this->s152_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_cgsund"]:$this->s152_i_cgsund);
-       $this->s152_i_login = ($this->s152_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_login"]:$this->s152_i_login);
-       $this->s152_i_pressaosistolica = ($this->s152_i_pressaosistolica == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_pressaosistolica"]:$this->s152_i_pressaosistolica);
-       $this->s152_i_pressaodiastolica = ($this->s152_i_pressaodiastolica == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_pressaodiastolica"]:$this->s152_i_pressaodiastolica);
-       $this->s152_i_cintura = ($this->s152_i_cintura == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_cintura"]:$this->s152_i_cintura);
-       $this->s152_n_peso = ($this->s152_n_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_n_peso"]:$this->s152_n_peso);
-       $this->s152_i_altura = ($this->s152_i_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_altura"]:$this->s152_i_altura);
-       $this->s152_i_glicemia = ($this->s152_i_glicemia == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_glicemia"]:$this->s152_i_glicemia);
-       $this->s152_i_alimentacaoexameglicemia = ($this->s152_i_alimentacaoexameglicemia == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_alimentacaoexameglicemia"]:$this->s152_i_alimentacaoexameglicemia);
+       $this->s152_i_codigo = ($this->s152_i_codigo === 0 || $this->s152_i_codigo === 0.0 || $this->s152_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_codigo"]:$this->s152_i_codigo);
+       $this->s152_i_cbosprofissional = ($this->s152_i_cbosprofissional === 0 || $this->s152_i_cbosprofissional === 0.0 || $this->s152_i_cbosprofissional == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_cbosprofissional"]:$this->s152_i_cbosprofissional);
+       $this->s152_i_cgsund = ($this->s152_i_cgsund === 0 || $this->s152_i_cgsund === 0.0 || $this->s152_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_cgsund"]:$this->s152_i_cgsund);
+       $this->s152_i_login = ($this->s152_i_login === 0 || $this->s152_i_login === 0.0 || $this->s152_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_login"]:$this->s152_i_login);
+       $this->s152_i_pressaosistolica = ($this->s152_i_pressaosistolica === 0 || $this->s152_i_pressaosistolica === 0.0 || $this->s152_i_pressaosistolica == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_pressaosistolica"]:$this->s152_i_pressaosistolica);
+       $this->s152_i_pressaodiastolica = ($this->s152_i_pressaodiastolica === 0 || $this->s152_i_pressaodiastolica === 0.0 || $this->s152_i_pressaodiastolica == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_pressaodiastolica"]:$this->s152_i_pressaodiastolica);
+       $this->s152_i_cintura = ($this->s152_i_cintura === 0 || $this->s152_i_cintura === 0.0 || $this->s152_i_cintura == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_cintura"]:$this->s152_i_cintura);
+       $this->s152_n_peso = ($this->s152_n_peso === 0 || $this->s152_n_peso === 0.0 || $this->s152_n_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_n_peso"]:$this->s152_n_peso);
+       $this->s152_i_altura = ($this->s152_i_altura === 0 || $this->s152_i_altura === 0.0 || $this->s152_i_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_altura"]:$this->s152_i_altura);
+       $this->s152_i_glicemia = ($this->s152_i_glicemia === 0 || $this->s152_i_glicemia === 0.0 || $this->s152_i_glicemia == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_glicemia"]:$this->s152_i_glicemia);
+       $this->s152_i_alimentacaoexameglicemia = ($this->s152_i_alimentacaoexameglicemia === 0 || $this->s152_i_alimentacaoexameglicemia === 0.0 || $this->s152_i_alimentacaoexameglicemia == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_alimentacaoexameglicemia"]:$this->s152_i_alimentacaoexameglicemia);
        if($this->s152_d_dataconsulta == ""){
          $this->s152_d_dataconsulta_dia = ($this->s152_d_dataconsulta_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_d_dataconsulta_dia"]:$this->s152_d_dataconsulta_dia);
          $this->s152_d_dataconsulta_mes = ($this->s152_d_dataconsulta_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_d_dataconsulta_mes"]:$this->s152_d_dataconsulta_mes);
@@ -120,11 +120,11 @@ class cl_sau_triagemavulsa
          }
        }
        $this->s152_c_horasistema = ($this->s152_c_horasistema == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_c_horasistema"]:$this->s152_c_horasistema);
-       $this->s152_n_temperatura = ($this->s152_n_temperatura == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_n_temperatura"]:$this->s152_n_temperatura);
+       $this->s152_n_temperatura = ($this->s152_n_temperatura === 0 || $this->s152_n_temperatura === 0.0 || $this->s152_n_temperatura == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_n_temperatura"]:$this->s152_n_temperatura);
        $this->s152_evolucao = ($this->s152_evolucao == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_evolucao"]:$this->s152_evolucao);
-       $this->s152_perimetrocefalico = ($this->s152_perimetrocefalico == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_perimetrocefalico"]:$this->s152_perimetrocefalico);
-       $this->s152_frequenciarespiratoria = ($this->s152_frequenciarespiratoria == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_frequenciarespiratoria"]:$this->s152_frequenciarespiratoria);
-       $this->s152_frequenciacardiaca = ($this->s152_frequenciacardiaca == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_frequenciacardiaca"]:$this->s152_frequenciacardiaca);
+       $this->s152_perimetrocefalico = ($this->s152_perimetrocefalico === 0 || $this->s152_perimetrocefalico === 0.0 || $this->s152_perimetrocefalico == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_perimetrocefalico"]:$this->s152_perimetrocefalico);
+       $this->s152_frequenciarespiratoria = ($this->s152_frequenciarespiratoria === 0 || $this->s152_frequenciarespiratoria === 0.0 || $this->s152_frequenciarespiratoria == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_frequenciarespiratoria"]:$this->s152_frequenciarespiratoria);
+       $this->s152_frequenciacardiaca = ($this->s152_frequenciacardiaca === 0 || $this->s152_frequenciacardiaca === 0.0 || $this->s152_frequenciacardiaca == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_frequenciacardiaca"]:$this->s152_frequenciacardiaca);
        if($this->s152_dum == ""){
          $this->s152_dum_dia = ($this->s152_dum_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_dum_dia"]:$this->s152_dum_dia);
          $this->s152_dum_mes = ($this->s152_dum_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_dum_mes"]:$this->s152_dum_mes);
@@ -133,10 +133,10 @@ class cl_sau_triagemavulsa
             $this->s152_dum = $this->s152_dum_ano."-".$this->s152_dum_mes."-".$this->s152_dum_dia;
          }
        }
-       $this->s152_saturacao = ($this->s152_saturacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_saturacao"]:$this->s152_saturacao);
+       $this->s152_saturacao = ($this->s152_saturacao === 0 || $this->s152_saturacao === 0.0 || $this->s152_saturacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_saturacao"]:$this->s152_saturacao);
        $this->s152_subjetivo = ($this->s152_subjetivo == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_subjetivo"]:$this->s152_subjetivo);
      }else{
-       $this->s152_i_codigo = ($this->s152_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_codigo"]:$this->s152_i_codigo);
+       $this->s152_i_codigo = ($this->s152_i_codigo === 0 || $this->s152_i_codigo === 0.0 || $this->s152_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s152_i_codigo"]:$this->s152_i_codigo);
      }
    }
 
@@ -260,7 +260,7 @@ class cl_sau_triagemavulsa
          $this->s152_i_codigo = $s152_i_codigo;
        }
      }
-     if(($this->s152_i_codigo == null) || ($this->s152_i_codigo == "") ){
+     if(($this->s152_i_codigo == null) || ($this->s152_i_codigo === 0 || $this->s152_i_codigo === 0.0 || $this->s152_i_codigo == "") ){
        $this->erro_sql = " Campo s152_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

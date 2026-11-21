@@ -97,14 +97,14 @@ class cl_lab_controlefisicofinanceiro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la56_i_codigo = ($this->la56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_codigo"]:$this->la56_i_codigo);
-       $this->la56_i_laboratorio = ($this->la56_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_laboratorio"]:$this->la56_i_laboratorio);
-       $this->la56_i_formaorganizacao = ($this->la56_i_formaorganizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_formaorganizacao"]:$this->la56_i_formaorganizacao);
-       $this->la56_i_depto = ($this->la56_i_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_depto"]:$this->la56_i_depto);
-       $this->la56_i_exame = ($this->la56_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_exame"]:$this->la56_i_exame);
-       $this->la56_i_grupo = ($this->la56_i_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_grupo"]:$this->la56_i_grupo);
-       $this->la56_i_teto = ($this->la56_i_teto == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_teto"]:$this->la56_i_teto);
-       $this->la56_i_periodo = ($this->la56_i_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_periodo"]:$this->la56_i_periodo);
+       $this->la56_i_codigo = ($this->la56_i_codigo === 0 || $this->la56_i_codigo === 0.0 || $this->la56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_codigo"]:$this->la56_i_codigo);
+       $this->la56_i_laboratorio = ($this->la56_i_laboratorio === 0 || $this->la56_i_laboratorio === 0.0 || $this->la56_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_laboratorio"]:$this->la56_i_laboratorio);
+       $this->la56_i_formaorganizacao = ($this->la56_i_formaorganizacao === 0 || $this->la56_i_formaorganizacao === 0.0 || $this->la56_i_formaorganizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_formaorganizacao"]:$this->la56_i_formaorganizacao);
+       $this->la56_i_depto = ($this->la56_i_depto === 0 || $this->la56_i_depto === 0.0 || $this->la56_i_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_depto"]:$this->la56_i_depto);
+       $this->la56_i_exame = ($this->la56_i_exame === 0 || $this->la56_i_exame === 0.0 || $this->la56_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_exame"]:$this->la56_i_exame);
+       $this->la56_i_grupo = ($this->la56_i_grupo === 0 || $this->la56_i_grupo === 0.0 || $this->la56_i_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_grupo"]:$this->la56_i_grupo);
+       $this->la56_i_teto = ($this->la56_i_teto === 0 || $this->la56_i_teto === 0.0 || $this->la56_i_teto == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_teto"]:$this->la56_i_teto);
+       $this->la56_i_periodo = ($this->la56_i_periodo === 0 || $this->la56_i_periodo === 0.0 || $this->la56_i_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_periodo"]:$this->la56_i_periodo);
        if($this->la56_d_ini == ""){
          $this->la56_d_ini_dia = ($this->la56_d_ini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_d_ini_dia"]:$this->la56_d_ini_dia);
          $this->la56_d_ini_mes = ($this->la56_d_ini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_d_ini_mes"]:$this->la56_d_ini_mes);
@@ -113,7 +113,7 @@ class cl_lab_controlefisicofinanceiro {
             $this->la56_d_ini = $this->la56_d_ini_ano."-".$this->la56_d_ini_mes."-".$this->la56_d_ini_dia;
          }
        }
-       $this->la56_i_subgrupo = ($this->la56_i_subgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_subgrupo"]:$this->la56_i_subgrupo);
+       $this->la56_i_subgrupo = ($this->la56_i_subgrupo === 0 || $this->la56_i_subgrupo === 0.0 || $this->la56_i_subgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_subgrupo"]:$this->la56_i_subgrupo);
        if($this->la56_d_fim == ""){
          $this->la56_d_fim_dia = ($this->la56_d_fim_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_d_fim_dia"]:$this->la56_d_fim_dia);
          $this->la56_d_fim_mes = ($this->la56_d_fim_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_d_fim_mes"]:$this->la56_d_fim_mes);
@@ -122,11 +122,11 @@ class cl_lab_controlefisicofinanceiro {
             $this->la56_d_fim = $this->la56_d_fim_ano."-".$this->la56_d_fim_mes."-".$this->la56_d_fim_dia;
          }
        }
-       $this->la56_n_limite = ($this->la56_n_limite == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_n_limite"]:$this->la56_n_limite);
-       $this->la56_i_tipocontrole = ($this->la56_i_tipocontrole == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_tipocontrole"]:$this->la56_i_tipocontrole);
-       $this->la56_i_liberarequisicaosemsaldo = ($this->la56_i_liberarequisicaosemsaldo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_liberarequisicaosemsaldo"]:$this->la56_i_liberarequisicaosemsaldo);
+       $this->la56_n_limite = ($this->la56_n_limite === 0 || $this->la56_n_limite === 0.0 || $this->la56_n_limite == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_n_limite"]:$this->la56_n_limite);
+       $this->la56_i_tipocontrole = ($this->la56_i_tipocontrole === 0 || $this->la56_i_tipocontrole === 0.0 || $this->la56_i_tipocontrole == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_tipocontrole"]:$this->la56_i_tipocontrole);
+       $this->la56_i_liberarequisicaosemsaldo = ($this->la56_i_liberarequisicaosemsaldo === 0 || $this->la56_i_liberarequisicaosemsaldo === 0.0 || $this->la56_i_liberarequisicaosemsaldo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_liberarequisicaosemsaldo"]:$this->la56_i_liberarequisicaosemsaldo);
      }else{
-       $this->la56_i_codigo = ($this->la56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_codigo"]:$this->la56_i_codigo);
+       $this->la56_i_codigo = ($this->la56_i_codigo === 0 || $this->la56_i_codigo === 0.0 || $this->la56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la56_i_codigo"]:$this->la56_i_codigo);
      }
    }
    // funcao para inclusao
@@ -231,7 +231,7 @@ class cl_lab_controlefisicofinanceiro {
          $this->la56_i_codigo = $la56_i_codigo;
        }
      }
-     if(($this->la56_i_codigo == null) || ($this->la56_i_codigo == "") ){
+     if(($this->la56_i_codigo == null) || ($this->la56_i_codigo === 0 || $this->la56_i_codigo === 0.0 || $this->la56_i_codigo == "") ){
        $this->erro_sql = " Campo la56_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_sau_lotepront {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd59_i_codigo = ($this->sd59_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd59_i_codigo"]:$this->sd59_i_codigo);
-       $this->sd59_i_lote = ($this->sd59_i_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["sd59_i_lote"]:$this->sd59_i_lote);
-       $this->sd59_i_prontuario = ($this->sd59_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd59_i_prontuario"]:$this->sd59_i_prontuario);
+       $this->sd59_i_codigo = ($this->sd59_i_codigo === 0 || $this->sd59_i_codigo === 0.0 || $this->sd59_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd59_i_codigo"]:$this->sd59_i_codigo);
+       $this->sd59_i_lote = ($this->sd59_i_lote === 0 || $this->sd59_i_lote === 0.0 || $this->sd59_i_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["sd59_i_lote"]:$this->sd59_i_lote);
+       $this->sd59_i_prontuario = ($this->sd59_i_prontuario === 0 || $this->sd59_i_prontuario === 0.0 || $this->sd59_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd59_i_prontuario"]:$this->sd59_i_prontuario);
      }else{
-       $this->sd59_i_codigo = ($this->sd59_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd59_i_codigo"]:$this->sd59_i_codigo);
+       $this->sd59_i_codigo = ($this->sd59_i_codigo === 0 || $this->sd59_i_codigo === 0.0 || $this->sd59_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd59_i_codigo"]:$this->sd59_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_sau_lotepront {
          $this->sd59_i_codigo = $sd59_i_codigo;
        }
      }
-     if(($this->sd59_i_codigo == null) || ($this->sd59_i_codigo == "") ){
+     if(($this->sd59_i_codigo == null) || ($this->sd59_i_codigo === 0 || $this->sd59_i_codigo === 0.0 || $this->sd59_i_codigo == "") ){
        $this->erro_sql = " Campo sd59_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

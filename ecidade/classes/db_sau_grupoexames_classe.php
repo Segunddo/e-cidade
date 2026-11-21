@@ -67,10 +67,10 @@ class cl_sau_grupoexames {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s130_i_codigo = ($this->s130_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s130_i_codigo"]:$this->s130_i_codigo);
+       $this->s130_i_codigo = ($this->s130_i_codigo === 0 || $this->s130_i_codigo === 0.0 || $this->s130_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s130_i_codigo"]:$this->s130_i_codigo);
        $this->s130_c_descricao = ($this->s130_c_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["s130_c_descricao"]:$this->s130_c_descricao);
      }else{
-       $this->s130_i_codigo = ($this->s130_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s130_i_codigo"]:$this->s130_i_codigo);
+       $this->s130_i_codigo = ($this->s130_i_codigo === 0 || $this->s130_i_codigo === 0.0 || $this->s130_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s130_i_codigo"]:$this->s130_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_grupoexames {
          $this->s130_i_codigo = $s130_i_codigo;
        }
      }
-     if(($this->s130_i_codigo == null) || ($this->s130_i_codigo == "") ){
+     if(($this->s130_i_codigo == null) || ($this->s130_i_codigo === 0 || $this->s130_i_codigo === 0.0 || $this->s130_i_codigo == "") ){
        $this->erro_sql = " Campo s130_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

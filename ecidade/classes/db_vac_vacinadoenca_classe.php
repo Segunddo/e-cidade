@@ -69,11 +69,11 @@ class cl_vac_vacinadoenca {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc10_i_codigo = ($this->vc10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_codigo"]:$this->vc10_i_codigo);
-       $this->vc10_i_vacina = ($this->vc10_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_vacina"]:$this->vc10_i_vacina);
-       $this->vc10_i_cid = ($this->vc10_i_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_cid"]:$this->vc10_i_cid);
+       $this->vc10_i_codigo = ($this->vc10_i_codigo === 0 || $this->vc10_i_codigo === 0.0 || $this->vc10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_codigo"]:$this->vc10_i_codigo);
+       $this->vc10_i_vacina = ($this->vc10_i_vacina === 0 || $this->vc10_i_vacina === 0.0 || $this->vc10_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_vacina"]:$this->vc10_i_vacina);
+       $this->vc10_i_cid = ($this->vc10_i_cid === 0 || $this->vc10_i_cid === 0.0 || $this->vc10_i_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_cid"]:$this->vc10_i_cid);
      }else{
-       $this->vc10_i_codigo = ($this->vc10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_codigo"]:$this->vc10_i_codigo);
+       $this->vc10_i_codigo = ($this->vc10_i_codigo === 0 || $this->vc10_i_codigo === 0.0 || $this->vc10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc10_i_codigo"]:$this->vc10_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_vac_vacinadoenca {
          $this->vc10_i_codigo = $vc10_i_codigo;
        }
      }
-     if(($this->vc10_i_codigo == null) || ($this->vc10_i_codigo == "") ){
+     if(($this->vc10_i_codigo == null) || ($this->vc10_i_codigo === 0 || $this->vc10_i_codigo === 0.0 || $this->vc10_i_codigo == "") ){
        $this->erro_sql = " Campo vc10_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

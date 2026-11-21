@@ -78,9 +78,9 @@ class cl_vac_aplicaanula {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc18_i_codigo = ($this->vc18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_i_codigo"]:$this->vc18_i_codigo);
-       $this->vc18_i_aplica = ($this->vc18_i_aplica == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_i_aplica"]:$this->vc18_i_aplica);
-       $this->vc18_i_usuario = ($this->vc18_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_i_usuario"]:$this->vc18_i_usuario);
+       $this->vc18_i_codigo = ($this->vc18_i_codigo === 0 || $this->vc18_i_codigo === 0.0 || $this->vc18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_i_codigo"]:$this->vc18_i_codigo);
+       $this->vc18_i_aplica = ($this->vc18_i_aplica === 0 || $this->vc18_i_aplica === 0.0 || $this->vc18_i_aplica == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_i_aplica"]:$this->vc18_i_aplica);
+       $this->vc18_i_usuario = ($this->vc18_i_usuario === 0 || $this->vc18_i_usuario === 0.0 || $this->vc18_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_i_usuario"]:$this->vc18_i_usuario);
        $this->vc18_c_hora = ($this->vc18_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_c_hora"]:$this->vc18_c_hora);
        if($this->vc18_d_data == ""){
          $this->vc18_d_data_dia = ($this->vc18_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_d_data_dia"]:$this->vc18_d_data_dia);
@@ -92,7 +92,7 @@ class cl_vac_aplicaanula {
        }
        $this->vc18_t_obs = ($this->vc18_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_t_obs"]:$this->vc18_t_obs);
      }else{
-       $this->vc18_i_codigo = ($this->vc18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_i_codigo"]:$this->vc18_i_codigo);
+       $this->vc18_i_codigo = ($this->vc18_i_codigo === 0 || $this->vc18_i_codigo === 0.0 || $this->vc18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc18_i_codigo"]:$this->vc18_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_vac_aplicaanula {
          $this->vc18_i_codigo = $vc18_i_codigo;
        }
      }
-     if(($this->vc18_i_codigo == null) || ($this->vc18_i_codigo == "") ){
+     if(($this->vc18_i_codigo == null) || ($this->vc18_i_codigo === 0 || $this->vc18_i_codigo === 0.0 || $this->vc18_i_codigo == "") ){
        $this->erro_sql = " Campo vc18_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

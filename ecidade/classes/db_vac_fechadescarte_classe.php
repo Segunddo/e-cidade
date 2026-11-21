@@ -69,11 +69,11 @@ class cl_vac_fechadescarte {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc22_i_codigo = ($this->vc22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc22_i_codigo"]:$this->vc22_i_codigo);
-       $this->vc22_i_fechamento = ($this->vc22_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["vc22_i_fechamento"]:$this->vc22_i_fechamento);
-       $this->vc22_i_descarte = ($this->vc22_i_descarte == ""?@$GLOBALS["HTTP_POST_VARS"]["vc22_i_descarte"]:$this->vc22_i_descarte);
+       $this->vc22_i_codigo = ($this->vc22_i_codigo === 0 || $this->vc22_i_codigo === 0.0 || $this->vc22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc22_i_codigo"]:$this->vc22_i_codigo);
+       $this->vc22_i_fechamento = ($this->vc22_i_fechamento === 0 || $this->vc22_i_fechamento === 0.0 || $this->vc22_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["vc22_i_fechamento"]:$this->vc22_i_fechamento);
+       $this->vc22_i_descarte = ($this->vc22_i_descarte === 0 || $this->vc22_i_descarte === 0.0 || $this->vc22_i_descarte == ""?@$GLOBALS["HTTP_POST_VARS"]["vc22_i_descarte"]:$this->vc22_i_descarte);
      }else{
-       $this->vc22_i_codigo = ($this->vc22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc22_i_codigo"]:$this->vc22_i_codigo);
+       $this->vc22_i_codigo = ($this->vc22_i_codigo === 0 || $this->vc22_i_codigo === 0.0 || $this->vc22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc22_i_codigo"]:$this->vc22_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_vac_fechadescarte {
          $this->vc22_i_codigo = $vc22_i_codigo;
        }
      }
-     if(($this->vc22_i_codigo == null) || ($this->vc22_i_codigo == "") ){
+     if(($this->vc22_i_codigo == null) || ($this->vc22_i_codigo === 0 || $this->vc22_i_codigo === 0.0 || $this->vc22_i_codigo == "") ){
        $this->erro_sql = " Campo vc22_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

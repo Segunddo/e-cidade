@@ -83,8 +83,8 @@ class cl_sau_upsparalisada {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s140_i_codigo = ($this->s140_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_i_codigo"]:$this->s140_i_codigo);
-       $this->s140_i_unidade = ($this->s140_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_i_unidade"]:$this->s140_i_unidade);
+       $this->s140_i_codigo = ($this->s140_i_codigo === 0 || $this->s140_i_codigo === 0.0 || $this->s140_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_i_codigo"]:$this->s140_i_codigo);
+       $this->s140_i_unidade = ($this->s140_i_unidade === 0 || $this->s140_i_unidade === 0.0 || $this->s140_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_i_unidade"]:$this->s140_i_unidade);
        if($this->s140_d_inicio == ""){
          $this->s140_d_inicio_dia = ($this->s140_d_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_d_inicio_dia"]:$this->s140_d_inicio_dia);
          $this->s140_d_inicio_mes = ($this->s140_d_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_d_inicio_mes"]:$this->s140_d_inicio_mes);
@@ -101,11 +101,11 @@ class cl_sau_upsparalisada {
             $this->s140_d_fim = $this->s140_d_fim_ano."-".$this->s140_d_fim_mes."-".$this->s140_d_fim_dia;
          }
        }
-       $this->s140_i_tipo = ($this->s140_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_i_tipo"]:$this->s140_i_tipo);
+       $this->s140_i_tipo = ($this->s140_i_tipo === 0 || $this->s140_i_tipo === 0.0 || $this->s140_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_i_tipo"]:$this->s140_i_tipo);
        $this->s140_c_horaini = ($this->s140_c_horaini == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_c_horaini"]:$this->s140_c_horaini);
        $this->s140_c_horafim = ($this->s140_c_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_c_horafim"]:$this->s140_c_horafim);
      }else{
-       $this->s140_i_codigo = ($this->s140_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_i_codigo"]:$this->s140_i_codigo);
+       $this->s140_i_codigo = ($this->s140_i_codigo === 0 || $this->s140_i_codigo === 0.0 || $this->s140_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s140_i_codigo"]:$this->s140_i_codigo);
      }
    }
    // funcao para inclusao
@@ -171,7 +171,7 @@ class cl_sau_upsparalisada {
          $this->s140_i_codigo = $s140_i_codigo;
        }
      }
-     if(($this->s140_i_codigo == null) || ($this->s140_i_codigo == "") ){
+     if(($this->s140_i_codigo == null) || ($this->s140_i_codigo === 0 || $this->s140_i_codigo === 0.0 || $this->s140_i_codigo == "") ){
        $this->erro_sql = " Campo s140_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

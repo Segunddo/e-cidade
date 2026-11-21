@@ -83,18 +83,18 @@ class cl_lab_laboratorio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la02_i_codigo = ($this->la02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_codigo"]:$this->la02_i_codigo);
-       $this->la02_i_tipo = ($this->la02_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_tipo"]:$this->la02_i_tipo);
+       $this->la02_i_codigo = ($this->la02_i_codigo === 0 || $this->la02_i_codigo === 0.0 || $this->la02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_codigo"]:$this->la02_i_codigo);
+       $this->la02_i_tipo = ($this->la02_i_tipo === 0 || $this->la02_i_tipo === 0.0 || $this->la02_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_tipo"]:$this->la02_i_tipo);
        $this->la02_c_descr = ($this->la02_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_c_descr"]:$this->la02_c_descr);
-       $this->la02_i_alvara = ($this->la02_i_alvara == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_alvara"]:$this->la02_i_alvara);
-       $this->la02_i_cnes = ($this->la02_i_cnes == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_cnes"]:$this->la02_i_cnes);
+       $this->la02_i_alvara = ($this->la02_i_alvara === 0 || $this->la02_i_alvara === 0.0 || $this->la02_i_alvara == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_alvara"]:$this->la02_i_alvara);
+       $this->la02_i_cnes = ($this->la02_i_cnes === 0 || $this->la02_i_cnes === 0.0 || $this->la02_i_cnes == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_cnes"]:$this->la02_i_cnes);
        $this->la02_c_endereco = ($this->la02_c_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_c_endereco"]:$this->la02_c_endereco);
-       $this->la02_i_telefone = ($this->la02_i_telefone == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_telefone"]:$this->la02_i_telefone);
+       $this->la02_i_telefone = ($this->la02_i_telefone === 0 || $this->la02_i_telefone === 0.0 || $this->la02_i_telefone == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_telefone"]:$this->la02_i_telefone);
        $this->la02_c_numero = ($this->la02_c_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_c_numero"]:$this->la02_c_numero);
-       $this->la02_i_turnoatend = ($this->la02_i_turnoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_turnoatend"]:$this->la02_i_turnoatend);
+       $this->la02_i_turnoatend = ($this->la02_i_turnoatend === 0 || $this->la02_i_turnoatend === 0.0 || $this->la02_i_turnoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_turnoatend"]:$this->la02_i_turnoatend);
        $this->la02_interfaceado = ($this->la02_interfaceado == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_interfaceado"]:$this->la02_interfaceado);
      }else{
-       $this->la02_i_codigo = ($this->la02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_codigo"]:$this->la02_i_codigo);
+       $this->la02_i_codigo = ($this->la02_i_codigo === 0 || $this->la02_i_codigo === 0.0 || $this->la02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la02_i_codigo"]:$this->la02_i_codigo);
      }
    }
    // funcao para inclusao
@@ -202,7 +202,7 @@ class cl_lab_laboratorio {
       $this->la02_interfaceado = $this->la02_interfaceado ? "'t'" : "'f'";
     }
 
-     if(($this->la02_i_codigo == null) || ($this->la02_i_codigo == "") ){
+     if(($this->la02_i_codigo == null) || ($this->la02_i_codigo === 0 || $this->la02_i_codigo === 0.0 || $this->la02_i_codigo == "") ){
        $this->erro_sql = " Campo la02_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

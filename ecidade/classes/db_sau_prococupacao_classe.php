@@ -73,13 +73,13 @@ class cl_sau_prococupacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd90_i_codigo = ($this->sd90_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_codigo"]:$this->sd90_i_codigo);
-       $this->sd90_i_procedimento = ($this->sd90_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_procedimento"]:$this->sd90_i_procedimento);
-       $this->sd90_i_ocupacao = ($this->sd90_i_ocupacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_ocupacao"]:$this->sd90_i_ocupacao);
-       $this->sd90_i_anocomp = ($this->sd90_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_anocomp"]:$this->sd90_i_anocomp);
-       $this->sd90_i_mescomp = ($this->sd90_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_mescomp"]:$this->sd90_i_mescomp);
+       $this->sd90_i_codigo = ($this->sd90_i_codigo === 0 || $this->sd90_i_codigo === 0.0 || $this->sd90_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_codigo"]:$this->sd90_i_codigo);
+       $this->sd90_i_procedimento = ($this->sd90_i_procedimento === 0 || $this->sd90_i_procedimento === 0.0 || $this->sd90_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_procedimento"]:$this->sd90_i_procedimento);
+       $this->sd90_i_ocupacao = ($this->sd90_i_ocupacao === 0 || $this->sd90_i_ocupacao === 0.0 || $this->sd90_i_ocupacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_ocupacao"]:$this->sd90_i_ocupacao);
+       $this->sd90_i_anocomp = ($this->sd90_i_anocomp === 0 || $this->sd90_i_anocomp === 0.0 || $this->sd90_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_anocomp"]:$this->sd90_i_anocomp);
+       $this->sd90_i_mescomp = ($this->sd90_i_mescomp === 0 || $this->sd90_i_mescomp === 0.0 || $this->sd90_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_mescomp"]:$this->sd90_i_mescomp);
      }else{
-       $this->sd90_i_codigo = ($this->sd90_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_codigo"]:$this->sd90_i_codigo);
+       $this->sd90_i_codigo = ($this->sd90_i_codigo === 0 || $this->sd90_i_codigo === 0.0 || $this->sd90_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd90_i_codigo"]:$this->sd90_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_sau_prococupacao {
          $this->sd90_i_codigo = $sd90_i_codigo;
        }
      }
-     if(($this->sd90_i_codigo == null) || ($this->sd90_i_codigo == "") ){
+     if(($this->sd90_i_codigo == null) || ($this->sd90_i_codigo === 0 || $this->sd90_i_codigo === 0.0 || $this->sd90_i_codigo == "") ){
        $this->erro_sql = " Campo sd90_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

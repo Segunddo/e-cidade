@@ -67,10 +67,10 @@ class cl_sau_formaadmmedicamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s160_i_codigo = ($this->s160_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s160_i_codigo"]:$this->s160_i_codigo);
+       $this->s160_i_codigo = ($this->s160_i_codigo === 0 || $this->s160_i_codigo === 0.0 || $this->s160_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s160_i_codigo"]:$this->s160_i_codigo);
        $this->s160_c_descr = ($this->s160_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["s160_c_descr"]:$this->s160_c_descr);
      }else{
-       $this->s160_i_codigo = ($this->s160_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s160_i_codigo"]:$this->s160_i_codigo);
+       $this->s160_i_codigo = ($this->s160_i_codigo === 0 || $this->s160_i_codigo === 0.0 || $this->s160_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s160_i_codigo"]:$this->s160_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_formaadmmedicamento {
          $this->s160_i_codigo = $s160_i_codigo;
        }
      }
-     if(($this->s160_i_codigo == null) || ($this->s160_i_codigo == "") ){
+     if(($this->s160_i_codigo == null) || ($this->s160_i_codigo === 0 || $this->s160_i_codigo === 0.0 || $this->s160_i_codigo == "") ){
        $this->erro_sql = " Campo s160_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

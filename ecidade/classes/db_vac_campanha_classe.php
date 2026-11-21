@@ -79,7 +79,7 @@ class cl_vac_campanha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc11_i_codigo = ($this->vc11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_i_codigo"]:$this->vc11_i_codigo);
+       $this->vc11_i_codigo = ($this->vc11_i_codigo === 0 || $this->vc11_i_codigo === 0.0 || $this->vc11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_i_codigo"]:$this->vc11_i_codigo);
        $this->vc11_c_nome = ($this->vc11_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_c_nome"]:$this->vc11_c_nome);
        $this->vc11_c_descr = ($this->vc11_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_c_descr"]:$this->vc11_c_descr);
        if($this->vc11_d_inicio == ""){
@@ -99,7 +99,7 @@ class cl_vac_campanha {
          }
        }
      }else{
-       $this->vc11_i_codigo = ($this->vc11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_i_codigo"]:$this->vc11_i_codigo);
+       $this->vc11_i_codigo = ($this->vc11_i_codigo === 0 || $this->vc11_i_codigo === 0.0 || $this->vc11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc11_i_codigo"]:$this->vc11_i_codigo);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_vac_campanha {
          $this->vc11_i_codigo = $vc11_i_codigo;
        }
      }
-     if(($this->vc11_i_codigo == null) || ($this->vc11_i_codigo == "") ){
+     if(($this->vc11_i_codigo == null) || ($this->vc11_i_codigo === 0 || $this->vc11_i_codigo === 0.0 || $this->vc11_i_codigo == "") ){
        $this->erro_sql = " Campo vc11_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

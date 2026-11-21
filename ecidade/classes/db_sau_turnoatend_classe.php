@@ -71,12 +71,12 @@ class cl_sau_turnoatend {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd43_cod_turnat = ($this->sd43_cod_turnat == ""?@$GLOBALS["HTTP_POST_VARS"]["sd43_cod_turnat"]:$this->sd43_cod_turnat);
+       $this->sd43_cod_turnat = ($this->sd43_cod_turnat === 0 || $this->sd43_cod_turnat === 0.0 || $this->sd43_cod_turnat == ""?@$GLOBALS["HTTP_POST_VARS"]["sd43_cod_turnat"]:$this->sd43_cod_turnat);
        $this->sd43_v_descricao = ($this->sd43_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd43_v_descricao"]:$this->sd43_v_descricao);
        $this->sd43_c_horainicial = ($this->sd43_c_horainicial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd43_c_horainicial"]:$this->sd43_c_horainicial);
        $this->sd43_c_horafinal = ($this->sd43_c_horafinal == ""?@$GLOBALS["HTTP_POST_VARS"]["sd43_c_horafinal"]:$this->sd43_c_horafinal);
      }else{
-       $this->sd43_cod_turnat = ($this->sd43_cod_turnat == ""?@$GLOBALS["HTTP_POST_VARS"]["sd43_cod_turnat"]:$this->sd43_cod_turnat);
+       $this->sd43_cod_turnat = ($this->sd43_cod_turnat === 0 || $this->sd43_cod_turnat === 0.0 || $this->sd43_cod_turnat == ""?@$GLOBALS["HTTP_POST_VARS"]["sd43_cod_turnat"]:$this->sd43_cod_turnat);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_sau_turnoatend {
        return false;
      }
        $this->sd43_cod_turnat = $sd43_cod_turnat;
-     if(($this->sd43_cod_turnat == null) || ($this->sd43_cod_turnat == "") ){
+     if(($this->sd43_cod_turnat == null) || ($this->sd43_cod_turnat === 0 || $this->sd43_cod_turnat === 0.0 || $this->sd43_cod_turnat == "") ){
        $this->erro_sql = " Campo sd43_cod_turnat nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

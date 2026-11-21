@@ -67,10 +67,10 @@ class cl_sau_convenio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd49_i_codigo = ($this->sd49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd49_i_codigo"]:$this->sd49_i_codigo);
+       $this->sd49_i_codigo = ($this->sd49_i_codigo === 0 || $this->sd49_i_codigo === 0.0 || $this->sd49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd49_i_codigo"]:$this->sd49_i_codigo);
        $this->sd49_v_descricao = ($this->sd49_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd49_v_descricao"]:$this->sd49_v_descricao);
      }else{
-       $this->sd49_i_codigo = ($this->sd49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd49_i_codigo"]:$this->sd49_i_codigo);
+       $this->sd49_i_codigo = ($this->sd49_i_codigo === 0 || $this->sd49_i_codigo === 0.0 || $this->sd49_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd49_i_codigo"]:$this->sd49_i_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sau_convenio {
        return false;
      }
        $this->sd49_i_codigo = $sd49_i_codigo;
-     if(($this->sd49_i_codigo == null) || ($this->sd49_i_codigo == "") ){
+     if(($this->sd49_i_codigo == null) || ($this->sd49_i_codigo === 0 || $this->sd49_i_codigo === 0.0 || $this->sd49_i_codigo == "") ){
        $this->erro_sql = " Campo sd49_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

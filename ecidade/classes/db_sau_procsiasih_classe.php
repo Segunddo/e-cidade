@@ -75,14 +75,14 @@ class cl_sau_procsiasih {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd94_i_codigo = ($this->sd94_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_codigo"]:$this->sd94_i_codigo);
-       $this->sd94_i_procedimento = ($this->sd94_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_procedimento"]:$this->sd94_i_procedimento);
-       $this->sd94_i_siasih = ($this->sd94_i_siasih == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_siasih"]:$this->sd94_i_siasih);
-       $this->sd94_i_tipoproc = ($this->sd94_i_tipoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_tipoproc"]:$this->sd94_i_tipoproc);
-       $this->sd94_i_anocomp = ($this->sd94_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_anocomp"]:$this->sd94_i_anocomp);
-       $this->sd94_i_mescomp = ($this->sd94_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_mescomp"]:$this->sd94_i_mescomp);
+       $this->sd94_i_codigo = ($this->sd94_i_codigo === 0 || $this->sd94_i_codigo === 0.0 || $this->sd94_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_codigo"]:$this->sd94_i_codigo);
+       $this->sd94_i_procedimento = ($this->sd94_i_procedimento === 0 || $this->sd94_i_procedimento === 0.0 || $this->sd94_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_procedimento"]:$this->sd94_i_procedimento);
+       $this->sd94_i_siasih = ($this->sd94_i_siasih === 0 || $this->sd94_i_siasih === 0.0 || $this->sd94_i_siasih == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_siasih"]:$this->sd94_i_siasih);
+       $this->sd94_i_tipoproc = ($this->sd94_i_tipoproc === 0 || $this->sd94_i_tipoproc === 0.0 || $this->sd94_i_tipoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_tipoproc"]:$this->sd94_i_tipoproc);
+       $this->sd94_i_anocomp = ($this->sd94_i_anocomp === 0 || $this->sd94_i_anocomp === 0.0 || $this->sd94_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_anocomp"]:$this->sd94_i_anocomp);
+       $this->sd94_i_mescomp = ($this->sd94_i_mescomp === 0 || $this->sd94_i_mescomp === 0.0 || $this->sd94_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_mescomp"]:$this->sd94_i_mescomp);
      }else{
-       $this->sd94_i_codigo = ($this->sd94_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_codigo"]:$this->sd94_i_codigo);
+       $this->sd94_i_codigo = ($this->sd94_i_codigo === 0 || $this->sd94_i_codigo === 0.0 || $this->sd94_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd94_i_codigo"]:$this->sd94_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_sau_procsiasih {
          $this->sd94_i_codigo = $sd94_i_codigo;
        }
      }
-     if(($this->sd94_i_codigo == null) || ($this->sd94_i_codigo == "") ){
+     if(($this->sd94_i_codigo == null) || ($this->sd94_i_codigo === 0 || $this->sd94_i_codigo === 0.0 || $this->sd94_i_codigo == "") ){
        $this->erro_sql = " Campo sd94_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,12 +71,12 @@ class cl_tfd_passageiroretorno {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf31_i_codigo = ($this->tf31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf31_i_codigo"]:$this->tf31_i_codigo);
-       $this->tf31_i_veiculodestino = ($this->tf31_i_veiculodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf31_i_veiculodestino"]:$this->tf31_i_veiculodestino);
-       $this->tf31_i_passageiroveiculo = ($this->tf31_i_passageiroveiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf31_i_passageiroveiculo"]:$this->tf31_i_passageiroveiculo);
-       $this->tf31_i_valido = ($this->tf31_i_valido == ""?@$GLOBALS["HTTP_POST_VARS"]["tf31_i_valido"]:$this->tf31_i_valido);
+       $this->tf31_i_codigo = ($this->tf31_i_codigo === 0 || $this->tf31_i_codigo === 0.0 || $this->tf31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf31_i_codigo"]:$this->tf31_i_codigo);
+       $this->tf31_i_veiculodestino = ($this->tf31_i_veiculodestino === 0 || $this->tf31_i_veiculodestino === 0.0 || $this->tf31_i_veiculodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["tf31_i_veiculodestino"]:$this->tf31_i_veiculodestino);
+       $this->tf31_i_passageiroveiculo = ($this->tf31_i_passageiroveiculo === 0 || $this->tf31_i_passageiroveiculo === 0.0 || $this->tf31_i_passageiroveiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf31_i_passageiroveiculo"]:$this->tf31_i_passageiroveiculo);
+       $this->tf31_i_valido = ($this->tf31_i_valido === 0 || $this->tf31_i_valido === 0.0 || $this->tf31_i_valido == ""?@$GLOBALS["HTTP_POST_VARS"]["tf31_i_valido"]:$this->tf31_i_valido);
      }else{
-       $this->tf31_i_codigo = ($this->tf31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf31_i_codigo"]:$this->tf31_i_codigo);
+       $this->tf31_i_codigo = ($this->tf31_i_codigo === 0 || $this->tf31_i_codigo === 0.0 || $this->tf31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf31_i_codigo"]:$this->tf31_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_tfd_passageiroretorno {
          $this->tf31_i_codigo = $tf31_i_codigo;
        }
      }
-     if(($this->tf31_i_codigo == null) || ($this->tf31_i_codigo == "") ){
+     if(($this->tf31_i_codigo == null) || ($this->tf31_i_codigo === 0 || $this->tf31_i_codigo === 0.0 || $this->tf31_i_codigo == "") ){
        $this->erro_sql = " Campo tf31_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_far_listacontroladomed {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa35_i_codigo = ($this->fa35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_codigo"]:$this->fa35_i_codigo);
-       $this->fa35_i_listacontrolado = ($this->fa35_i_listacontrolado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_listacontrolado"]:$this->fa35_i_listacontrolado);
-       $this->fa35_i_medanvisa = ($this->fa35_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_medanvisa"]:$this->fa35_i_medanvisa);
+       $this->fa35_i_codigo = ($this->fa35_i_codigo === 0 || $this->fa35_i_codigo === 0.0 || $this->fa35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_codigo"]:$this->fa35_i_codigo);
+       $this->fa35_i_listacontrolado = ($this->fa35_i_listacontrolado === 0 || $this->fa35_i_listacontrolado === 0.0 || $this->fa35_i_listacontrolado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_listacontrolado"]:$this->fa35_i_listacontrolado);
+       $this->fa35_i_medanvisa = ($this->fa35_i_medanvisa === 0 || $this->fa35_i_medanvisa === 0.0 || $this->fa35_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_medanvisa"]:$this->fa35_i_medanvisa);
      }else{
-       $this->fa35_i_codigo = ($this->fa35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_codigo"]:$this->fa35_i_codigo);
+       $this->fa35_i_codigo = ($this->fa35_i_codigo === 0 || $this->fa35_i_codigo === 0.0 || $this->fa35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa35_i_codigo"]:$this->fa35_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_far_listacontroladomed {
          $this->fa35_i_codigo = $fa35_i_codigo;
        }
      }
-     if(($this->fa35_i_codigo == null) || ($this->fa35_i_codigo == "") ){
+     if(($this->fa35_i_codigo == null) || ($this->fa35_i_codigo === 0 || $this->fa35_i_codigo === 0.0 || $this->fa35_i_codigo == "") ){
        $this->erro_sql = " Campo fa35_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_vac_restricao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc02_i_codigo = ($this->vc02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc02_i_codigo"]:$this->vc02_i_codigo);
+       $this->vc02_i_codigo = ($this->vc02_i_codigo === 0 || $this->vc02_i_codigo === 0.0 || $this->vc02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc02_i_codigo"]:$this->vc02_i_codigo);
        $this->vc02_c_nome = ($this->vc02_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["vc02_c_nome"]:$this->vc02_c_nome);
        $this->vc02_c_descr = ($this->vc02_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc02_c_descr"]:$this->vc02_c_descr);
      }else{
-       $this->vc02_i_codigo = ($this->vc02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc02_i_codigo"]:$this->vc02_i_codigo);
+       $this->vc02_i_codigo = ($this->vc02_i_codigo === 0 || $this->vc02_i_codigo === 0.0 || $this->vc02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc02_i_codigo"]:$this->vc02_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_vac_restricao {
          $this->vc02_i_codigo = $vc02_i_codigo;
        }
      }
-     if(($this->vc02_i_codigo == null) || ($this->vc02_i_codigo == "") ){
+     if(($this->vc02_i_codigo == null) || ($this->vc02_i_codigo === 0 || $this->vc02_i_codigo === 0.0 || $this->vc02_i_codigo == "") ){
        $this->erro_sql = " Campo vc02_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -102,10 +102,10 @@ class cl_agendamentos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd23_i_codigo = ($this->sd23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_codigo"]:$this->sd23_i_codigo);
-       $this->sd23_i_undmedhor = ($this->sd23_i_undmedhor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_undmedhor"]:$this->sd23_i_undmedhor);
-       $this->sd23_i_usuario = ($this->sd23_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_usuario"]:$this->sd23_i_usuario);
-       $this->sd23_i_numcgs = ($this->sd23_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_numcgs"]:$this->sd23_i_numcgs);
+       $this->sd23_i_codigo = ($this->sd23_i_codigo === 0 || $this->sd23_i_codigo === 0.0 || $this->sd23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_codigo"]:$this->sd23_i_codigo);
+       $this->sd23_i_undmedhor = ($this->sd23_i_undmedhor === 0 || $this->sd23_i_undmedhor === 0.0 || $this->sd23_i_undmedhor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_undmedhor"]:$this->sd23_i_undmedhor);
+       $this->sd23_i_usuario = ($this->sd23_i_usuario === 0 || $this->sd23_i_usuario === 0.0 || $this->sd23_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_usuario"]:$this->sd23_i_usuario);
+       $this->sd23_i_numcgs = ($this->sd23_i_numcgs === 0 || $this->sd23_i_numcgs === 0.0 || $this->sd23_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_numcgs"]:$this->sd23_i_numcgs);
        if($this->sd23_d_agendamento == ""){
          $this->sd23_d_agendamento_dia = ($this->sd23_d_agendamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_d_agendamento_dia"]:$this->sd23_d_agendamento_dia);
          $this->sd23_d_agendamento_mes = ($this->sd23_d_agendamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_d_agendamento_mes"]:$this->sd23_d_agendamento_mes);
@@ -122,10 +122,10 @@ class cl_agendamentos {
             $this->sd23_d_consulta = $this->sd23_d_consulta_ano."-".$this->sd23_d_consulta_mes."-".$this->sd23_d_consulta_dia;
          }
        }
-       $this->sd23_i_ficha = ($this->sd23_i_ficha == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_ficha"]:$this->sd23_i_ficha);
+       $this->sd23_i_ficha = ($this->sd23_i_ficha === 0 || $this->sd23_i_ficha === 0.0 || $this->sd23_i_ficha == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_ficha"]:$this->sd23_i_ficha);
        $this->sd23_c_hora = ($this->sd23_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_c_hora"]:$this->sd23_c_hora);
        $this->sd23_c_pessoa = ($this->sd23_c_pessoa == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_c_pessoa"]:$this->sd23_c_pessoa);
-       $this->sd23_i_situacao = ($this->sd23_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_situacao"]:$this->sd23_i_situacao);
+       $this->sd23_i_situacao = ($this->sd23_i_situacao === 0 || $this->sd23_i_situacao === 0.0 || $this->sd23_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_situacao"]:$this->sd23_i_situacao);
        if($this->sd23_d_cadastro == ""){
          $this->sd23_d_cadastro_dia = ($this->sd23_d_cadastro_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_d_cadastro_dia"]:$this->sd23_d_cadastro_dia);
          $this->sd23_d_cadastro_mes = ($this->sd23_d_cadastro_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_d_cadastro_mes"]:$this->sd23_d_cadastro_mes);
@@ -135,11 +135,11 @@ class cl_agendamentos {
          }
        }
        $this->sd23_c_cadastro = ($this->sd23_c_cadastro == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_c_cadastro"]:$this->sd23_c_cadastro);
-       $this->sd23_i_presenca = ($this->sd23_i_presenca == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_presenca"]:$this->sd23_i_presenca);
+       $this->sd23_i_presenca = ($this->sd23_i_presenca === 0 || $this->sd23_i_presenca === 0.0 || $this->sd23_i_presenca == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_presenca"]:$this->sd23_i_presenca);
        $this->sd23_t_obs = ($this->sd23_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_t_obs"]:$this->sd23_t_obs);
-       $this->sd23_i_upssolicitante = ($this->sd23_i_upssolicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_upssolicitante"]:$this->sd23_i_upssolicitante);
+       $this->sd23_i_upssolicitante = ($this->sd23_i_upssolicitante === 0 || $this->sd23_i_upssolicitante === 0.0 || $this->sd23_i_upssolicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_upssolicitante"]:$this->sd23_i_upssolicitante);
      }else{
-       $this->sd23_i_codigo = ($this->sd23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_codigo"]:$this->sd23_i_codigo);
+       $this->sd23_i_codigo = ($this->sd23_i_codigo === 0 || $this->sd23_i_codigo === 0.0 || $this->sd23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_codigo"]:$this->sd23_i_codigo);
      }
    }
    // funcao para inclusao
@@ -259,7 +259,7 @@ class cl_agendamentos {
          $this->sd23_i_codigo = $sd23_i_codigo;
        }
      }
-     if(($this->sd23_i_codigo == null) || ($this->sd23_i_codigo == "") ){
+     if(($this->sd23_i_codigo == null) || ($this->sd23_i_codigo === 0 || $this->sd23_i_codigo === 0.0 || $this->sd23_i_codigo == "") ){
        $this->erro_sql = " Campo sd23_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -78,10 +78,10 @@ class cl_sau_receitamedicaanulada {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s161_i_codigo = ($this->s161_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_i_codigo"]:$this->s161_i_codigo);
-       $this->s161_i_receita = ($this->s161_i_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_i_receita"]:$this->s161_i_receita);
+       $this->s161_i_codigo = ($this->s161_i_codigo === 0 || $this->s161_i_codigo === 0.0 || $this->s161_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_i_codigo"]:$this->s161_i_codigo);
+       $this->s161_i_receita = ($this->s161_i_receita === 0 || $this->s161_i_receita === 0.0 || $this->s161_i_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_i_receita"]:$this->s161_i_receita);
        $this->s161_c_motivo = ($this->s161_c_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_c_motivo"]:$this->s161_c_motivo);
-       $this->s161_i_login = ($this->s161_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_i_login"]:$this->s161_i_login);
+       $this->s161_i_login = ($this->s161_i_login === 0 || $this->s161_i_login === 0.0 || $this->s161_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_i_login"]:$this->s161_i_login);
        if($this->s161_d_data == ""){
          $this->s161_d_data_dia = ($this->s161_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_d_data_dia"]:$this->s161_d_data_dia);
          $this->s161_d_data_mes = ($this->s161_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_d_data_mes"]:$this->s161_d_data_mes);
@@ -92,7 +92,7 @@ class cl_sau_receitamedicaanulada {
        }
        $this->s161_c_hora = ($this->s161_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_c_hora"]:$this->s161_c_hora);
      }else{
-       $this->s161_i_codigo = ($this->s161_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_i_codigo"]:$this->s161_i_codigo);
+       $this->s161_i_codigo = ($this->s161_i_codigo === 0 || $this->s161_i_codigo === 0.0 || $this->s161_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s161_i_codigo"]:$this->s161_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_sau_receitamedicaanulada {
          $this->s161_i_codigo = $s161_i_codigo;
        }
      }
-     if(($this->s161_i_codigo == null) || ($this->s161_i_codigo == "") ){
+     if(($this->s161_i_codigo == null) || ($this->s161_i_codigo === 0 || $this->s161_i_codigo === 0.0 || $this->s161_i_codigo == "") ){
        $this->erro_sql = " Campo s161_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -73,13 +73,13 @@ class cl_sau_procorigem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd95_i_codigo = ($this->sd95_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_codigo"]:$this->sd95_i_codigo);
-       $this->sd95_i_procedimento = ($this->sd95_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_procedimento"]:$this->sd95_i_procedimento);
-       $this->sd95_i_origem = ($this->sd95_i_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_origem"]:$this->sd95_i_origem);
-       $this->sd95_i_anocomp = ($this->sd95_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_anocomp"]:$this->sd95_i_anocomp);
-       $this->sd95_i_mescomp = ($this->sd95_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_mescomp"]:$this->sd95_i_mescomp);
+       $this->sd95_i_codigo = ($this->sd95_i_codigo === 0 || $this->sd95_i_codigo === 0.0 || $this->sd95_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_codigo"]:$this->sd95_i_codigo);
+       $this->sd95_i_procedimento = ($this->sd95_i_procedimento === 0 || $this->sd95_i_procedimento === 0.0 || $this->sd95_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_procedimento"]:$this->sd95_i_procedimento);
+       $this->sd95_i_origem = ($this->sd95_i_origem === 0 || $this->sd95_i_origem === 0.0 || $this->sd95_i_origem == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_origem"]:$this->sd95_i_origem);
+       $this->sd95_i_anocomp = ($this->sd95_i_anocomp === 0 || $this->sd95_i_anocomp === 0.0 || $this->sd95_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_anocomp"]:$this->sd95_i_anocomp);
+       $this->sd95_i_mescomp = ($this->sd95_i_mescomp === 0 || $this->sd95_i_mescomp === 0.0 || $this->sd95_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_mescomp"]:$this->sd95_i_mescomp);
      }else{
-       $this->sd95_i_codigo = ($this->sd95_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_codigo"]:$this->sd95_i_codigo);
+       $this->sd95_i_codigo = ($this->sd95_i_codigo === 0 || $this->sd95_i_codigo === 0.0 || $this->sd95_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd95_i_codigo"]:$this->sd95_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_sau_procorigem {
          $this->sd95_i_codigo = $sd95_i_codigo;
        }
      }
-     if(($this->sd95_i_codigo == null) || ($this->sd95_i_codigo == "") ){
+     if(($this->sd95_i_codigo == null) || ($this->sd95_i_codigo === 0 || $this->sd95_i_codigo === 0.0 || $this->sd95_i_codigo == "") ){
        $this->erro_sql = " Campo sd95_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

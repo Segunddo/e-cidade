@@ -78,10 +78,10 @@ class cl_sau_atualiza {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s100_i_codigo = ($this->s100_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_codigo"]:$this->s100_i_codigo);
-       $this->s100_i_login = ($this->s100_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_login"]:$this->s100_i_login);
-       $this->s100_i_mescomp = ($this->s100_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_mescomp"]:$this->s100_i_mescomp);
-       $this->s100_i_anocomp = ($this->s100_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_anocomp"]:$this->s100_i_anocomp);
+       $this->s100_i_codigo = ($this->s100_i_codigo === 0 || $this->s100_i_codigo === 0.0 || $this->s100_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_codigo"]:$this->s100_i_codigo);
+       $this->s100_i_login = ($this->s100_i_login === 0 || $this->s100_i_login === 0.0 || $this->s100_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_login"]:$this->s100_i_login);
+       $this->s100_i_mescomp = ($this->s100_i_mescomp === 0 || $this->s100_i_mescomp === 0.0 || $this->s100_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_mescomp"]:$this->s100_i_mescomp);
+       $this->s100_i_anocomp = ($this->s100_i_anocomp === 0 || $this->s100_i_anocomp === 0.0 || $this->s100_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_anocomp"]:$this->s100_i_anocomp);
        if($this->s100_d_data == ""){
          $this->s100_d_data_dia = ($this->s100_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_d_data_dia"]:$this->s100_d_data_dia);
          $this->s100_d_data_mes = ($this->s100_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_d_data_mes"]:$this->s100_d_data_mes);
@@ -92,7 +92,7 @@ class cl_sau_atualiza {
        }
        $this->s100_c_hora = ($this->s100_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_c_hora"]:$this->s100_c_hora);
      }else{
-       $this->s100_i_codigo = ($this->s100_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_codigo"]:$this->s100_i_codigo);
+       $this->s100_i_codigo = ($this->s100_i_codigo === 0 || $this->s100_i_codigo === 0.0 || $this->s100_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s100_i_codigo"]:$this->s100_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_sau_atualiza {
          $this->s100_i_codigo = $s100_i_codigo;
        }
      }
-     if(($this->s100_i_codigo == null) || ($this->s100_i_codigo == "") ){
+     if(($this->s100_i_codigo == null) || ($this->s100_i_codigo === 0 || $this->s100_i_codigo === 0.0 || $this->s100_i_codigo == "") ){
        $this->erro_sql = " Campo s100_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

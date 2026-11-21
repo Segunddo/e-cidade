@@ -73,13 +73,13 @@ class cl_lab_exameproced {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la53_i_codigo = ($this->la53_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_codigo"]:$this->la53_i_codigo);
-       $this->la53_i_ativo = ($this->la53_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_ativo"]:$this->la53_i_ativo);
-       $this->la53_i_exame = ($this->la53_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_exame"]:$this->la53_i_exame);
-       $this->la53_i_procedimento = ($this->la53_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_procedimento"]:$this->la53_i_procedimento);
-       $this->la53_n_acrescimo = ($this->la53_n_acrescimo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_n_acrescimo"]:$this->la53_n_acrescimo);
+       $this->la53_i_codigo = ($this->la53_i_codigo === 0 || $this->la53_i_codigo === 0.0 || $this->la53_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_codigo"]:$this->la53_i_codigo);
+       $this->la53_i_ativo = ($this->la53_i_ativo === 0 || $this->la53_i_ativo === 0.0 || $this->la53_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_ativo"]:$this->la53_i_ativo);
+       $this->la53_i_exame = ($this->la53_i_exame === 0 || $this->la53_i_exame === 0.0 || $this->la53_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_exame"]:$this->la53_i_exame);
+       $this->la53_i_procedimento = ($this->la53_i_procedimento === 0 || $this->la53_i_procedimento === 0.0 || $this->la53_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_procedimento"]:$this->la53_i_procedimento);
+       $this->la53_n_acrescimo = ($this->la53_n_acrescimo === 0 || $this->la53_n_acrescimo === 0.0 || $this->la53_n_acrescimo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_n_acrescimo"]:$this->la53_n_acrescimo);
      }else{
-       $this->la53_i_codigo = ($this->la53_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_codigo"]:$this->la53_i_codigo);
+       $this->la53_i_codigo = ($this->la53_i_codigo === 0 || $this->la53_i_codigo === 0.0 || $this->la53_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la53_i_codigo"]:$this->la53_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_lab_exameproced {
          $this->la53_i_codigo = $la53_i_codigo;
        }
      }
-     if(($this->la53_i_codigo == null) || ($this->la53_i_codigo == "") ){
+     if(($this->la53_i_codigo == null) || ($this->la53_i_codigo === 0 || $this->la53_i_codigo === 0.0 || $this->la53_i_codigo == "") ){
        $this->erro_sql = " Campo la53_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

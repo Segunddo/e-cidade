@@ -69,11 +69,11 @@ class cl_lab_medico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la38_i_codigo = ($this->la38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la38_i_codigo"]:$this->la38_i_codigo);
-       $this->la38_i_medico = ($this->la38_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["la38_i_medico"]:$this->la38_i_medico);
-       $this->la38_i_requisicao = ($this->la38_i_requisicao == ""?@$GLOBALS["HTTP_POST_VARS"]["la38_i_requisicao"]:$this->la38_i_requisicao);
+       $this->la38_i_codigo = ($this->la38_i_codigo === 0 || $this->la38_i_codigo === 0.0 || $this->la38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la38_i_codigo"]:$this->la38_i_codigo);
+       $this->la38_i_medico = ($this->la38_i_medico === 0 || $this->la38_i_medico === 0.0 || $this->la38_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["la38_i_medico"]:$this->la38_i_medico);
+       $this->la38_i_requisicao = ($this->la38_i_requisicao === 0 || $this->la38_i_requisicao === 0.0 || $this->la38_i_requisicao == ""?@$GLOBALS["HTTP_POST_VARS"]["la38_i_requisicao"]:$this->la38_i_requisicao);
      }else{
-       $this->la38_i_codigo = ($this->la38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la38_i_codigo"]:$this->la38_i_codigo);
+       $this->la38_i_codigo = ($this->la38_i_codigo === 0 || $this->la38_i_codigo === 0.0 || $this->la38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la38_i_codigo"]:$this->la38_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_lab_medico {
          $this->la38_i_codigo = $la38_i_codigo;
        }
      }
-     if(($this->la38_i_codigo == null) || ($this->la38_i_codigo == "") ){
+     if(($this->la38_i_codigo == null) || ($this->la38_i_codigo === 0 || $this->la38_i_codigo === 0.0 || $this->la38_i_codigo == "") ){
        $this->erro_sql = " Campo la38_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_far_laboratorio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa24_i_codigo = ($this->fa24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa24_i_codigo"]:$this->fa24_i_codigo);
+       $this->fa24_i_codigo = ($this->fa24_i_codigo === 0 || $this->fa24_i_codigo === 0.0 || $this->fa24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa24_i_codigo"]:$this->fa24_i_codigo);
        $this->fa24_c_laboratorio = ($this->fa24_c_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["fa24_c_laboratorio"]:$this->fa24_c_laboratorio);
      }else{
-       $this->fa24_i_codigo = ($this->fa24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa24_i_codigo"]:$this->fa24_i_codigo);
+       $this->fa24_i_codigo = ($this->fa24_i_codigo === 0 || $this->fa24_i_codigo === 0.0 || $this->fa24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa24_i_codigo"]:$this->fa24_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_far_laboratorio {
          $this->fa24_i_codigo = $fa24_i_codigo;
        }
      }
-     if(($this->fa24_i_codigo == null) || ($this->fa24_i_codigo == "") ){
+     if(($this->fa24_i_codigo == null) || ($this->fa24_i_codigo === 0 || $this->fa24_i_codigo === 0.0 || $this->fa24_i_codigo == "") ){
        $this->erro_sql = " Campo fa24_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

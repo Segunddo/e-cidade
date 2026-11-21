@@ -67,10 +67,10 @@ class cl_lab_recipiente {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la14_i_codigo = ($this->la14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la14_i_codigo"]:$this->la14_i_codigo);
+       $this->la14_i_codigo = ($this->la14_i_codigo === 0 || $this->la14_i_codigo === 0.0 || $this->la14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la14_i_codigo"]:$this->la14_i_codigo);
        $this->la14_c_descr = ($this->la14_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la14_c_descr"]:$this->la14_c_descr);
      }else{
-       $this->la14_i_codigo = ($this->la14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la14_i_codigo"]:$this->la14_i_codigo);
+       $this->la14_i_codigo = ($this->la14_i_codigo === 0 || $this->la14_i_codigo === 0.0 || $this->la14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la14_i_codigo"]:$this->la14_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_lab_recipiente {
          $this->la14_i_codigo = $la14_i_codigo;
        }
      }
-     if(($this->la14_i_codigo == null) || ($this->la14_i_codigo == "") ){
+     if(($this->la14_i_codigo == null) || ($this->la14_i_codigo === 0 || $this->la14_i_codigo === 0.0 || $this->la14_i_codigo == "") ){
        $this->erro_sql = " Campo la14_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

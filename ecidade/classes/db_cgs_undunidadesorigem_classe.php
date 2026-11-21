@@ -45,11 +45,11 @@ class cl_cgs_undunidadesorigem
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->sd114_sequencial = ($this->sd114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd114_sequencial"]:$this->sd114_sequencial);
-       $this->sd114_cgs_und = ($this->sd114_cgs_und == ""?@$GLOBALS["HTTP_POST_VARS"]["sd114_cgs_und"]:$this->sd114_cgs_und);
+       $this->sd114_sequencial = ($this->sd114_sequencial === 0 || $this->sd114_sequencial === 0.0 || $this->sd114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd114_sequencial"]:$this->sd114_sequencial);
+       $this->sd114_cgs_und = ($this->sd114_cgs_und === 0 || $this->sd114_cgs_und === 0.0 || $this->sd114_cgs_und == ""?@$GLOBALS["HTTP_POST_VARS"]["sd114_cgs_und"]:$this->sd114_cgs_und);
        $this->sd114_unidadesorigem = ($this->sd114_unidadesorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["sd114_unidadesorigem"]:$this->sd114_unidadesorigem);
      }else{
-       $this->sd114_sequencial = ($this->sd114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd114_sequencial"]:$this->sd114_sequencial);
+       $this->sd114_sequencial = ($this->sd114_sequencial === 0 || $this->sd114_sequencial === 0.0 || $this->sd114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sd114_sequencial"]:$this->sd114_sequencial);
      }
    }
 
@@ -80,7 +80,7 @@ class cl_cgs_undunidadesorigem
          $this->sd114_sequencial = $sd114_sequencial; 
        }
      }
-     if(($this->sd114_sequencial == null) || ($this->sd114_sequencial == "") ){ 
+     if(($this->sd114_sequencial == null) || ($this->sd114_sequencial === 0 || $this->sd114_sequencial === 0.0 || $this->sd114_sequencial == "") ){ 
        $this->erro_sql = " Campo sd114_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

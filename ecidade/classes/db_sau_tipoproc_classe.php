@@ -67,10 +67,10 @@ class cl_sau_tipoproc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd93_i_codigo = ($this->sd93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd93_i_codigo"]:$this->sd93_i_codigo);
+       $this->sd93_i_codigo = ($this->sd93_i_codigo === 0 || $this->sd93_i_codigo === 0.0 || $this->sd93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd93_i_codigo"]:$this->sd93_i_codigo);
        $this->sd93_c_nome = ($this->sd93_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd93_c_nome"]:$this->sd93_c_nome);
      }else{
-       $this->sd93_i_codigo = ($this->sd93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd93_i_codigo"]:$this->sd93_i_codigo);
+       $this->sd93_i_codigo = ($this->sd93_i_codigo === 0 || $this->sd93_i_codigo === 0.0 || $this->sd93_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd93_i_codigo"]:$this->sd93_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_tipoproc {
          $this->sd93_i_codigo = $sd93_i_codigo;
        }
      }
-     if(($this->sd93_i_codigo == null) || ($this->sd93_i_codigo == "") ){
+     if(($this->sd93_i_codigo == null) || ($this->sd93_i_codigo === 0 || $this->sd93_i_codigo === 0.0 || $this->sd93_i_codigo == "") ){
        $this->erro_sql = " Campo sd93_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

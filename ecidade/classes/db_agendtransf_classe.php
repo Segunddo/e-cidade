@@ -76,7 +76,7 @@ class cl_agendtransf {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd31_i_codigo = ($this->sd31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_i_codigo"]:$this->sd31_i_codigo);
+       $this->sd31_i_codigo = ($this->sd31_i_codigo === 0 || $this->sd31_i_codigo === 0.0 || $this->sd31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_i_codigo"]:$this->sd31_i_codigo);
        if($this->sd31_d_dataorigem == ""){
          $this->sd31_d_dataorigem_dia = ($this->sd31_d_dataorigem_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_d_dataorigem_dia"]:$this->sd31_d_dataorigem_dia);
          $this->sd31_d_dataorigem_mes = ($this->sd31_d_dataorigem_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_d_dataorigem_mes"]:$this->sd31_d_dataorigem_mes);
@@ -85,11 +85,11 @@ class cl_agendtransf {
             $this->sd31_d_dataorigem = $this->sd31_d_dataorigem_ano."-".$this->sd31_d_dataorigem_mes."-".$this->sd31_d_dataorigem_dia;
          }
        }
-       $this->sd31_i_agendamento = ($this->sd31_i_agendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_i_agendamento"]:$this->sd31_i_agendamento);
-       $this->sd31_i_usuario = ($this->sd31_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_i_usuario"]:$this->sd31_i_usuario);
-       $this->sd31_i_undmedorigem = ($this->sd31_i_undmedorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_i_undmedorigem"]:$this->sd31_i_undmedorigem);
+       $this->sd31_i_agendamento = ($this->sd31_i_agendamento === 0 || $this->sd31_i_agendamento === 0.0 || $this->sd31_i_agendamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_i_agendamento"]:$this->sd31_i_agendamento);
+       $this->sd31_i_usuario = ($this->sd31_i_usuario === 0 || $this->sd31_i_usuario === 0.0 || $this->sd31_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_i_usuario"]:$this->sd31_i_usuario);
+       $this->sd31_i_undmedorigem = ($this->sd31_i_undmedorigem === 0 || $this->sd31_i_undmedorigem === 0.0 || $this->sd31_i_undmedorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_i_undmedorigem"]:$this->sd31_i_undmedorigem);
      }else{
-       $this->sd31_i_codigo = ($this->sd31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_i_codigo"]:$this->sd31_i_codigo);
+       $this->sd31_i_codigo = ($this->sd31_i_codigo === 0 || $this->sd31_i_codigo === 0.0 || $this->sd31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd31_i_codigo"]:$this->sd31_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_agendtransf {
          $this->sd31_i_codigo = $sd31_i_codigo;
        }
      }
-     if(($this->sd31_i_codigo == null) || ($this->sd31_i_codigo == "") ){
+     if(($this->sd31_i_codigo == null) || ($this->sd31_i_codigo === 0 || $this->sd31_i_codigo === 0.0 || $this->sd31_i_codigo == "") ){
        $this->erro_sql = " Campo sd31_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

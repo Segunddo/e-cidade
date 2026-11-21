@@ -45,11 +45,11 @@ class cl_sau_motivoatendimento
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->s144_i_codigo = ($this->s144_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s144_i_codigo"]:$this->s144_i_codigo);
+       $this->s144_i_codigo = ($this->s144_i_codigo === 0 || $this->s144_i_codigo === 0.0 || $this->s144_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s144_i_codigo"]:$this->s144_i_codigo);
        $this->s144_c_descr = ($this->s144_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["s144_c_descr"]:$this->s144_c_descr);
        $this->s144_situacao = ($this->s144_situacao == "f"?@$GLOBALS["HTTP_POST_VARS"]["s144_situacao"]:$this->s144_situacao);
      }else{
-       $this->s144_i_codigo = ($this->s144_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s144_i_codigo"]:$this->s144_i_codigo);
+       $this->s144_i_codigo = ($this->s144_i_codigo === 0 || $this->s144_i_codigo === 0.0 || $this->s144_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s144_i_codigo"]:$this->s144_i_codigo);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_sau_motivoatendimento
          $this->s144_i_codigo = $s144_i_codigo;
        }
      }
-     if(($this->s144_i_codigo == null) || ($this->s144_i_codigo == "") ){
+     if(($this->s144_i_codigo == null) || ($this->s144_i_codigo === 0 || $this->s144_i_codigo === 0.0 || $this->s144_i_codigo == "") ){
        $this->erro_sql = " Campo s144_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

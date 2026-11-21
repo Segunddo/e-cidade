@@ -87,11 +87,11 @@ class cl_far_controlemed {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa10_i_codigo = ($this->fa10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_codigo"]:$this->fa10_i_codigo);
-       $this->fa10_i_medicamento = ($this->fa10_i_medicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_medicamento"]:$this->fa10_i_medicamento);
-       $this->fa10_i_quantidade = ($this->fa10_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_quantidade"]:$this->fa10_i_quantidade);
-       $this->fa10_i_controle = ($this->fa10_i_controle == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_controle"]:$this->fa10_i_controle);
-       $this->fa10_i_prazo = ($this->fa10_i_prazo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_prazo"]:$this->fa10_i_prazo);
+       $this->fa10_i_codigo = ($this->fa10_i_codigo === 0 || $this->fa10_i_codigo === 0.0 || $this->fa10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_codigo"]:$this->fa10_i_codigo);
+       $this->fa10_i_medicamento = ($this->fa10_i_medicamento === 0 || $this->fa10_i_medicamento === 0.0 || $this->fa10_i_medicamento == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_medicamento"]:$this->fa10_i_medicamento);
+       $this->fa10_i_quantidade = ($this->fa10_i_quantidade === 0 || $this->fa10_i_quantidade === 0.0 || $this->fa10_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_quantidade"]:$this->fa10_i_quantidade);
+       $this->fa10_i_controle = ($this->fa10_i_controle === 0 || $this->fa10_i_controle === 0.0 || $this->fa10_i_controle == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_controle"]:$this->fa10_i_controle);
+       $this->fa10_i_prazo = ($this->fa10_i_prazo === 0 || $this->fa10_i_prazo === 0.0 || $this->fa10_i_prazo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_prazo"]:$this->fa10_i_prazo);
        if($this->fa10_d_dataini == ""){
          $this->fa10_d_dataini_dia = ($this->fa10_d_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_d_dataini_dia"]:$this->fa10_d_dataini_dia);
          $this->fa10_d_dataini_mes = ($this->fa10_d_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_d_dataini_mes"]:$this->fa10_d_dataini_mes);
@@ -108,10 +108,10 @@ class cl_far_controlemed {
             $this->fa10_d_datafim = $this->fa10_d_datafim_ano."-".$this->fa10_d_datafim_mes."-".$this->fa10_d_datafim_dia;
          }
        }
-       $this->fa10_i_margem = ($this->fa10_i_margem == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_margem"]:$this->fa10_i_margem);
-       $this->fa10_i_programa = ($this->fa10_i_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_programa"]:$this->fa10_i_programa);
+       $this->fa10_i_margem = ($this->fa10_i_margem === 0 || $this->fa10_i_margem === 0.0 || $this->fa10_i_margem == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_margem"]:$this->fa10_i_margem);
+       $this->fa10_i_programa = ($this->fa10_i_programa === 0 || $this->fa10_i_programa === 0.0 || $this->fa10_i_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_programa"]:$this->fa10_i_programa);
      }else{
-       $this->fa10_i_codigo = ($this->fa10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_codigo"]:$this->fa10_i_codigo);
+       $this->fa10_i_codigo = ($this->fa10_i_codigo === 0 || $this->fa10_i_codigo === 0.0 || $this->fa10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa10_i_codigo"]:$this->fa10_i_codigo);
      }
    }
    // funcao para inclusao
@@ -207,7 +207,7 @@ class cl_far_controlemed {
          $this->fa10_i_codigo = $fa10_i_codigo;
        }
      }
-     if(($this->fa10_i_codigo == null) || ($this->fa10_i_codigo == "") ){
+     if(($this->fa10_i_codigo == null) || ($this->fa10_i_codigo === 0 || $this->fa10_i_codigo === 0.0 || $this->fa10_i_codigo == "") ){
        $this->erro_sql = " Campo fa10_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

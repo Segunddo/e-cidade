@@ -67,10 +67,10 @@ class cl_far_classeterapeutica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa18_i_codigo = ($this->fa18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa18_i_codigo"]:$this->fa18_i_codigo);
+       $this->fa18_i_codigo = ($this->fa18_i_codigo === 0 || $this->fa18_i_codigo === 0.0 || $this->fa18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa18_i_codigo"]:$this->fa18_i_codigo);
        $this->fa18_c_classetera = ($this->fa18_c_classetera == ""?@$GLOBALS["HTTP_POST_VARS"]["fa18_c_classetera"]:$this->fa18_c_classetera);
      }else{
-       $this->fa18_i_codigo = ($this->fa18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa18_i_codigo"]:$this->fa18_i_codigo);
+       $this->fa18_i_codigo = ($this->fa18_i_codigo === 0 || $this->fa18_i_codigo === 0.0 || $this->fa18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa18_i_codigo"]:$this->fa18_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_far_classeterapeutica {
          $this->fa18_i_codigo = $fa18_i_codigo;
        }
      }
-     if(($this->fa18_i_codigo == null) || ($this->fa18_i_codigo == "") ){
+     if(($this->fa18_i_codigo == null) || ($this->fa18_i_codigo === 0 || $this->fa18_i_codigo === 0.0 || $this->fa18_i_codigo == "") ){
        $this->erro_sql = " Campo fa18_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

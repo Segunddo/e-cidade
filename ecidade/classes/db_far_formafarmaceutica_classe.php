@@ -67,10 +67,10 @@ class cl_far_formafarmaceutica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa29_i_codigo = ($this->fa29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa29_i_codigo"]:$this->fa29_i_codigo);
+       $this->fa29_i_codigo = ($this->fa29_i_codigo === 0 || $this->fa29_i_codigo === 0.0 || $this->fa29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa29_i_codigo"]:$this->fa29_i_codigo);
        $this->fa29_c_forma = ($this->fa29_c_forma == ""?@$GLOBALS["HTTP_POST_VARS"]["fa29_c_forma"]:$this->fa29_c_forma);
      }else{
-       $this->fa29_i_codigo = ($this->fa29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa29_i_codigo"]:$this->fa29_i_codigo);
+       $this->fa29_i_codigo = ($this->fa29_i_codigo === 0 || $this->fa29_i_codigo === 0.0 || $this->fa29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa29_i_codigo"]:$this->fa29_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_far_formafarmaceutica {
          $this->fa29_i_codigo = $fa29_i_codigo;
        }
      }
-     if(($this->fa29_i_codigo == null) || ($this->fa29_i_codigo == "") ){
+     if(($this->fa29_i_codigo == null) || ($this->fa29_i_codigo === 0 || $this->fa29_i_codigo === 0.0 || $this->fa29_i_codigo == "") ){
        $this->erro_sql = " Campo fa29_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

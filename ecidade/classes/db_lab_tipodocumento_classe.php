@@ -69,11 +69,11 @@ class cl_lab_tipodocumento
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->la33_i_codigo = ($this->la33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la33_i_codigo"]:$this->la33_i_codigo);
+       $this->la33_i_codigo = ($this->la33_i_codigo === 0 || $this->la33_i_codigo === 0.0 || $this->la33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la33_i_codigo"]:$this->la33_i_codigo);
        $this->la33_c_descr = ($this->la33_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la33_c_descr"]:$this->la33_c_descr);
        $this->la33_ativo = (isset($GLOBALS["HTTP_POST_VARS"]["la33_ativo"])?$this->la33_ativo = 't':$this->la33_ativo = 'f');
      }else{
-       $this->la33_i_codigo = ($this->la33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la33_i_codigo"]:$this->la33_i_codigo);
+       $this->la33_i_codigo = ($this->la33_i_codigo === 0 || $this->la33_i_codigo === 0.0 || $this->la33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la33_i_codigo"]:$this->la33_i_codigo);
      }
    }
 
@@ -113,7 +113,7 @@ class cl_lab_tipodocumento
          $this->la33_i_codigo = $la33_i_codigo;
        }
      }
-     if(($this->la33_i_codigo == null) || ($this->la33_i_codigo == "") ){
+     if(($this->la33_i_codigo == null) || ($this->la33_i_codigo === 0 || $this->la33_i_codigo === 0.0 || $this->la33_i_codigo == "") ){
        $this->erro_sql = " Campo la33_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

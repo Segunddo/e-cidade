@@ -67,10 +67,10 @@ class cl_sau_tipocompatibilidade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd68_i_codigo = ($this->sd68_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd68_i_codigo"]:$this->sd68_i_codigo);
+       $this->sd68_i_codigo = ($this->sd68_i_codigo === 0 || $this->sd68_i_codigo === 0.0 || $this->sd68_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd68_i_codigo"]:$this->sd68_i_codigo);
        $this->sd68_c_nome = ($this->sd68_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd68_c_nome"]:$this->sd68_c_nome);
      }else{
-       $this->sd68_i_codigo = ($this->sd68_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd68_i_codigo"]:$this->sd68_i_codigo);
+       $this->sd68_i_codigo = ($this->sd68_i_codigo === 0 || $this->sd68_i_codigo === 0.0 || $this->sd68_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd68_i_codigo"]:$this->sd68_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_tipocompatibilidade {
          $this->sd68_i_codigo = $sd68_i_codigo;
        }
      }
-     if(($this->sd68_i_codigo == null) || ($this->sd68_i_codigo == "") ){
+     if(($this->sd68_i_codigo == null) || ($this->sd68_i_codigo === 0 || $this->sd68_i_codigo === 0.0 || $this->sd68_i_codigo == "") ){
        $this->erro_sql = " Campo sd68_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -100,20 +100,20 @@ class cl_lab_parametros
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->la49_i_codigo = ($this->la49_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_i_codigo"] : $this->la49_i_codigo);
-            $this->la49_c_estrutural = ($this->la49_c_estrutural == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_c_estrutural"] : $this->la49_c_estrutural);
-            $this->la49_i_exameduplo = ($this->la49_i_exameduplo == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_i_exameduplo"] : $this->la49_i_exameduplo);
-            $this->la49_modelocoletaamostra = ($this->la49_modelocoletaamostra == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_modelocoletaamostra"] : $this->la49_modelocoletaamostra);
-            $this->la49_integracao = ($this->la49_integracao == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_integracao"] : $this->la49_integracao);
+            $this->la49_i_codigo = ($this->la49_i_codigo === 0 || $this->la49_i_codigo === 0.0 || $this->la49_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_i_codigo"] : $this->la49_i_codigo);
+            $this->la49_c_estrutural = ($this->la49_c_estrutural === 0 || $this->la49_c_estrutural === 0.0 || $this->la49_c_estrutural == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_c_estrutural"] : $this->la49_c_estrutural);
+            $this->la49_i_exameduplo = ($this->la49_i_exameduplo === 0 || $this->la49_i_exameduplo === 0.0 || $this->la49_i_exameduplo == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_i_exameduplo"] : $this->la49_i_exameduplo);
+            $this->la49_modelocoletaamostra = ($this->la49_modelocoletaamostra === 0 || $this->la49_modelocoletaamostra === 0.0 || $this->la49_modelocoletaamostra == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_modelocoletaamostra"] : $this->la49_modelocoletaamostra);
+            $this->la49_integracao = ($this->la49_integracao === 0 || $this->la49_integracao === 0.0 || $this->la49_integracao == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_integracao"] : $this->la49_integracao);
             $this->la49_habilitarabsurdo = ($this->la49_habilitarabsurdo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["la49_habilitarabsurdo"] : $this->la49_habilitarabsurdo);
-            $this->la49_modelocomprovanterequisicao = ($this->la49_modelocomprovanterequisicao == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_modelocomprovanterequisicao"] : $this->la49_modelocomprovanterequisicao);
+            $this->la49_modelocomprovanterequisicao = ($this->la49_modelocomprovanterequisicao === 0 || $this->la49_modelocomprovanterequisicao === 0.0 || $this->la49_modelocomprovanterequisicao == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_modelocomprovanterequisicao"] : $this->la49_modelocomprovanterequisicao);
             $this->la49_autorizarexamesaoconfirmar = ($this->la49_autorizarexamesaoconfirmar == "f" ? @$GLOBALS["HTTP_POST_VARS"]["la49_autorizarexamesaoconfirmar"] : $this->la49_autorizarexamesaoconfirmar);
             $this->la49_numerocontroleinterno = ($this->la49_numerocontroleinterno == "f" ? @$GLOBALS["HTTP_POST_VARS"]["la49_numerocontroleinterno"] : $this->la49_numerocontroleinterno);
             $this->la49_habilitargrupo = ($this->la49_habilitargrupo == "f" ? @$GLOBALS["HTTP_POST_VARS"]["la49_habilitargrupo"] : $this->la49_habilitargrupo);
-            $this->la49_modelolaudo = ($this->la49_modelolaudo == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_modelolaudo"] : $this->la49_modelolaudo);
+            $this->la49_modelolaudo = ($this->la49_modelolaudo === 0 || $this->la49_modelolaudo === 0.0 || $this->la49_modelolaudo == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_modelolaudo"] : $this->la49_modelolaudo);
             $this->la49_exibeliberacaoporexame = ($this->la49_exibeliberacaoporexame == "f" ? @$GLOBALS["HTTP_POST_VARS"]["la49_exibeliberacaoporexame"] : $this->la49_exibeliberacaoporexame);
-            $this->la49_espacolinhas = ($this->la49_espacolinhas == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_espacolinhas"] : $this->la49_espacolinhas);
-            $this->la49_tamanhofonte = ($this->la49_tamanhofonte == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_tamanhofonte"] : $this->la49_tamanhofonte);
+            $this->la49_espacolinhas = ($this->la49_espacolinhas === 0 || $this->la49_espacolinhas === 0.0 || $this->la49_espacolinhas == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_espacolinhas"] : $this->la49_espacolinhas);
+            $this->la49_tamanhofonte = ($this->la49_tamanhofonte === 0 || $this->la49_tamanhofonte === 0.0 || $this->la49_tamanhofonte == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_tamanhofonte"] : $this->la49_tamanhofonte);
             $this->la49_integracaoinfinity = ($this->la49_integracaoinfinity === null
                 ? (@$GLOBALS["HTTP_POST_VARS"]["la49_integracaoinfinity"] == 0 ? 'false' : 'true')
                 : $this->la49_integracaoinfinity);
@@ -126,7 +126,7 @@ class cl_lab_parametros
                 :$this->la49_habilitartriagemlaboratorial);
             $this->la49_unidadesdispensadastriagem = ($this->la49_unidadesdispensadastriagem == ""?@$GLOBALS["HTTP_POST_VARS"]["la49_unidadesdispensadastriagem"]:$this->la49_unidadesdispensadastriagem);
         } else {
-            $this->la49_i_codigo = ($this->la49_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_i_codigo"] : $this->la49_i_codigo);
+            $this->la49_i_codigo = ($this->la49_i_codigo === 0 || $this->la49_i_codigo === 0.0 || $this->la49_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["la49_i_codigo"] : $this->la49_i_codigo);
         }
     }
 
@@ -262,7 +262,7 @@ class cl_lab_parametros
           return false;
         }        
         $this->la49_i_codigo = $la49_i_codigo;
-        if (($this->la49_i_codigo == null) || ($this->la49_i_codigo == "")) {
+        if (($this->la49_i_codigo == null) || ($this->la49_i_codigo === 0 || $this->la49_i_codigo === 0.0 || $this->la49_i_codigo == "")) {
             $this->erro_sql = " Campo la49_i_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

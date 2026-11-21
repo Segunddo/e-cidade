@@ -71,12 +71,12 @@ class cl_tfd_tipotratamentoproced {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf05_i_codigo = ($this->tf05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_codigo"]:$this->tf05_i_codigo);
-       $this->tf05_i_tipotratamento = ($this->tf05_i_tipotratamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_tipotratamento"]:$this->tf05_i_tipotratamento);
-       $this->tf05_i_procedimento = ($this->tf05_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_procedimento"]:$this->tf05_i_procedimento);
-       $this->tf05_i_ativo = ($this->tf05_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_ativo"]:$this->tf05_i_ativo);
+       $this->tf05_i_codigo = ($this->tf05_i_codigo === 0 || $this->tf05_i_codigo === 0.0 || $this->tf05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_codigo"]:$this->tf05_i_codigo);
+       $this->tf05_i_tipotratamento = ($this->tf05_i_tipotratamento === 0 || $this->tf05_i_tipotratamento === 0.0 || $this->tf05_i_tipotratamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_tipotratamento"]:$this->tf05_i_tipotratamento);
+       $this->tf05_i_procedimento = ($this->tf05_i_procedimento === 0 || $this->tf05_i_procedimento === 0.0 || $this->tf05_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_procedimento"]:$this->tf05_i_procedimento);
+       $this->tf05_i_ativo = ($this->tf05_i_ativo === 0 || $this->tf05_i_ativo === 0.0 || $this->tf05_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_ativo"]:$this->tf05_i_ativo);
      }else{
-       $this->tf05_i_codigo = ($this->tf05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_codigo"]:$this->tf05_i_codigo);
+       $this->tf05_i_codigo = ($this->tf05_i_codigo === 0 || $this->tf05_i_codigo === 0.0 || $this->tf05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf05_i_codigo"]:$this->tf05_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_tfd_tipotratamentoproced {
          $this->tf05_i_codigo = $tf05_i_codigo;
        }
      }
-     if(($this->tf05_i_codigo == null) || ($this->tf05_i_codigo == "") ){
+     if(($this->tf05_i_codigo == null) || ($this->tf05_i_codigo === 0 || $this->tf05_i_codigo === 0.0 || $this->tf05_i_codigo == "") ){
        $this->erro_sql = " Campo tf05_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -70,11 +70,11 @@ class cl_sau_fechapront {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd98_i_codigo = ($this->sd98_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd98_i_codigo"]:$this->sd98_i_codigo);
-       $this->sd98_i_prontproced = ($this->sd98_i_prontproced == ""?@$GLOBALS["HTTP_POST_VARS"]["sd98_i_prontproced"]:$this->sd98_i_prontproced);
-       $this->sd98_i_fechamento = ($this->sd98_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd98_i_fechamento"]:$this->sd98_i_fechamento);
+       $this->sd98_i_codigo = ($this->sd98_i_codigo === 0 || $this->sd98_i_codigo === 0.0 || $this->sd98_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd98_i_codigo"]:$this->sd98_i_codigo);
+       $this->sd98_i_prontproced = ($this->sd98_i_prontproced === 0 || $this->sd98_i_prontproced === 0.0 || $this->sd98_i_prontproced == ""?@$GLOBALS["HTTP_POST_VARS"]["sd98_i_prontproced"]:$this->sd98_i_prontproced);
+       $this->sd98_i_fechamento = ($this->sd98_i_fechamento === 0 || $this->sd98_i_fechamento === 0.0 || $this->sd98_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd98_i_fechamento"]:$this->sd98_i_fechamento);
      }else{
-       $this->sd98_i_codigo = ($this->sd98_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd98_i_codigo"]:$this->sd98_i_codigo);
+       $this->sd98_i_codigo = ($this->sd98_i_codigo === 0 || $this->sd98_i_codigo === 0.0 || $this->sd98_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd98_i_codigo"]:$this->sd98_i_codigo);
      }
    }
    // funcao para inclusao
@@ -122,7 +122,7 @@ class cl_sau_fechapront {
          $this->sd98_i_codigo = $sd98_i_codigo;
        }
      }
-     if(($this->sd98_i_codigo == null) || ($this->sd98_i_codigo == "") ){
+     if(($this->sd98_i_codigo == null) || ($this->sd98_i_codigo === 0 || $this->sd98_i_codigo === 0.0 || $this->sd98_i_codigo == "") ){
        $this->erro_sql = " Campo sd98_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

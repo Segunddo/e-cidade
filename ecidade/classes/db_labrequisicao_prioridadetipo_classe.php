@@ -45,11 +45,11 @@ class cl_labrequisicao_prioridadetipo
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->la70_sequencial = ($this->la70_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["la70_sequencial"] : $this->la70_sequencial);
-            $this->la70_labrequisicao = ($this->la70_labrequisicao == "" ? @$GLOBALS["HTTP_POST_VARS"]["la70_labrequisicao"] : $this->la70_labrequisicao);
-            $this->la70_prioridadetipo = ($this->la70_prioridadetipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["la70_prioridadetipo"] : $this->la70_prioridadetipo);
+            $this->la70_sequencial = ($this->la70_sequencial === 0 || $this->la70_sequencial === 0.0 || $this->la70_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["la70_sequencial"] : $this->la70_sequencial);
+            $this->la70_labrequisicao = ($this->la70_labrequisicao === 0 || $this->la70_labrequisicao === 0.0 || $this->la70_labrequisicao == "" ? @$GLOBALS["HTTP_POST_VARS"]["la70_labrequisicao"] : $this->la70_labrequisicao);
+            $this->la70_prioridadetipo = ($this->la70_prioridadetipo === 0 || $this->la70_prioridadetipo === 0.0 || $this->la70_prioridadetipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["la70_prioridadetipo"] : $this->la70_prioridadetipo);
         } else {
-            $this->la70_sequencial = ($this->la70_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["la70_sequencial"] : $this->la70_sequencial);
+            $this->la70_sequencial = ($this->la70_sequencial === 0 || $this->la70_sequencial === 0.0 || $this->la70_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["la70_sequencial"] : $this->la70_sequencial);
         }
     }
 
@@ -114,7 +114,7 @@ class cl_labrequisicao_prioridadetipo
                 $this->la70_sequencial = $la70_sequencial;
             }
         }
-        if (($this->la70_sequencial == null) || ($this->la70_sequencial == "")) {
+        if (($this->la70_sequencial == null) || ($this->la70_sequencial === 0 || $this->la70_sequencial === 0.0 || $this->la70_sequencial == "")) {
             $this->erro_sql = " Campo la70_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

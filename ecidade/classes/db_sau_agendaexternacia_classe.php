@@ -73,13 +73,13 @@ class cl_sau_agendaexternacia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s123_i_codigo = ($this->s123_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s123_i_codigo"]:$this->s123_i_codigo);
-       $this->s123_i_agendaveiculocgs = ($this->s123_i_agendaveiculocgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s123_i_agendaveiculocgs"]:$this->s123_i_agendaveiculocgs);
+       $this->s123_i_codigo = ($this->s123_i_codigo === 0 || $this->s123_i_codigo === 0.0 || $this->s123_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s123_i_codigo"]:$this->s123_i_codigo);
+       $this->s123_i_agendaveiculocgs = ($this->s123_i_agendaveiculocgs === 0 || $this->s123_i_agendaveiculocgs === 0.0 || $this->s123_i_agendaveiculocgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s123_i_agendaveiculocgs"]:$this->s123_i_agendaveiculocgs);
        $this->s123_v_acompanhante = ($this->s123_v_acompanhante == ""?@$GLOBALS["HTTP_POST_VARS"]["s123_v_acompanhante"]:$this->s123_v_acompanhante);
        $this->s123_v_tipodoc = ($this->s123_v_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["s123_v_tipodoc"]:$this->s123_v_tipodoc);
        $this->s123_v_documento = ($this->s123_v_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["s123_v_documento"]:$this->s123_v_documento);
      }else{
-       $this->s123_i_codigo = ($this->s123_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s123_i_codigo"]:$this->s123_i_codigo);
+       $this->s123_i_codigo = ($this->s123_i_codigo === 0 || $this->s123_i_codigo === 0.0 || $this->s123_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s123_i_codigo"]:$this->s123_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_sau_agendaexternacia {
          $this->s123_i_codigo = $s123_i_codigo;
        }
      }
-     if(($this->s123_i_codigo == null) || ($this->s123_i_codigo == "") ){
+     if(($this->s123_i_codigo == null) || ($this->s123_i_codigo === 0 || $this->s123_i_codigo === 0.0 || $this->s123_i_codigo == "") ){
        $this->erro_sql = " Campo s123_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

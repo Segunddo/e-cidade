@@ -71,14 +71,14 @@ class cl_sau_subtpmodvinculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd54_i_vinculacao = ($this->sd54_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_vinculacao"]:$this->sd54_i_vinculacao);
-       $this->sd54_i_tpvinculo = ($this->sd54_i_tpvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_tpvinculo"]:$this->sd54_i_tpvinculo);
-       $this->sd54_i_tpsubvinculo = ($this->sd54_i_tpsubvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_tpsubvinculo"]:$this->sd54_i_tpsubvinculo);
+       $this->sd54_i_vinculacao = ($this->sd54_i_vinculacao === 0 || $this->sd54_i_vinculacao === 0.0 || $this->sd54_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_vinculacao"]:$this->sd54_i_vinculacao);
+       $this->sd54_i_tpvinculo = ($this->sd54_i_tpvinculo === 0 || $this->sd54_i_tpvinculo === 0.0 || $this->sd54_i_tpvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_tpvinculo"]:$this->sd54_i_tpvinculo);
+       $this->sd54_i_tpsubvinculo = ($this->sd54_i_tpsubvinculo === 0 || $this->sd54_i_tpsubvinculo === 0.0 || $this->sd54_i_tpsubvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_tpsubvinculo"]:$this->sd54_i_tpsubvinculo);
        $this->sd54_v_descricao = ($this->sd54_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_v_descricao"]:$this->sd54_v_descricao);
      }else{
-       $this->sd54_i_vinculacao = ($this->sd54_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_vinculacao"]:$this->sd54_i_vinculacao);
-       $this->sd54_i_tpvinculo = ($this->sd54_i_tpvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_tpvinculo"]:$this->sd54_i_tpvinculo);
-       $this->sd54_i_tpsubvinculo = ($this->sd54_i_tpsubvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_tpsubvinculo"]:$this->sd54_i_tpsubvinculo);
+       $this->sd54_i_vinculacao = ($this->sd54_i_vinculacao === 0 || $this->sd54_i_vinculacao === 0.0 || $this->sd54_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_vinculacao"]:$this->sd54_i_vinculacao);
+       $this->sd54_i_tpvinculo = ($this->sd54_i_tpvinculo === 0 || $this->sd54_i_tpvinculo === 0.0 || $this->sd54_i_tpvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_tpvinculo"]:$this->sd54_i_tpvinculo);
+       $this->sd54_i_tpsubvinculo = ($this->sd54_i_tpsubvinculo === 0 || $this->sd54_i_tpsubvinculo === 0.0 || $this->sd54_i_tpsubvinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd54_i_tpsubvinculo"]:$this->sd54_i_tpsubvinculo);
      }
    }
    // funcao para inclusao
@@ -96,7 +96,7 @@ class cl_sau_subtpmodvinculo {
        $this->sd54_i_vinculacao = $sd54_i_vinculacao;
        $this->sd54_i_tpvinculo = $sd54_i_tpvinculo;
        $this->sd54_i_tpsubvinculo = $sd54_i_tpsubvinculo;
-     if(($this->sd54_i_vinculacao == null) || ($this->sd54_i_vinculacao == "") ){
+     if(($this->sd54_i_vinculacao == null) || ($this->sd54_i_vinculacao === 0 || $this->sd54_i_vinculacao === 0.0 || $this->sd54_i_vinculacao == "") ){
        $this->erro_sql = " Campo sd54_i_vinculacao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -104,7 +104,7 @@ class cl_sau_subtpmodvinculo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sd54_i_tpvinculo == null) || ($this->sd54_i_tpvinculo == "") ){
+     if(($this->sd54_i_tpvinculo == null) || ($this->sd54_i_tpvinculo === 0 || $this->sd54_i_tpvinculo === 0.0 || $this->sd54_i_tpvinculo == "") ){
        $this->erro_sql = " Campo sd54_i_tpvinculo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -112,7 +112,7 @@ class cl_sau_subtpmodvinculo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sd54_i_tpsubvinculo == null) || ($this->sd54_i_tpsubvinculo == "") ){
+     if(($this->sd54_i_tpsubvinculo == null) || ($this->sd54_i_tpsubvinculo === 0 || $this->sd54_i_tpsubvinculo === 0.0 || $this->sd54_i_tpsubvinculo == "") ){
        $this->erro_sql = " Campo sd54_i_tpsubvinculo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

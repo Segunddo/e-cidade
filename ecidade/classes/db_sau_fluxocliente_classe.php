@@ -67,10 +67,10 @@ class cl_sau_fluxocliente {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd41_i_cod_cliente = ($this->sd41_i_cod_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["sd41_i_cod_cliente"]:$this->sd41_i_cod_cliente);
+       $this->sd41_i_cod_cliente = ($this->sd41_i_cod_cliente === 0 || $this->sd41_i_cod_cliente === 0.0 || $this->sd41_i_cod_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["sd41_i_cod_cliente"]:$this->sd41_i_cod_cliente);
        $this->sd41_v_descricao = ($this->sd41_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd41_v_descricao"]:$this->sd41_v_descricao);
      }else{
-       $this->sd41_i_cod_cliente = ($this->sd41_i_cod_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["sd41_i_cod_cliente"]:$this->sd41_i_cod_cliente);
+       $this->sd41_i_cod_cliente = ($this->sd41_i_cod_cliente === 0 || $this->sd41_i_cod_cliente === 0.0 || $this->sd41_i_cod_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["sd41_i_cod_cliente"]:$this->sd41_i_cod_cliente);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sau_fluxocliente {
        return false;
      }
        $this->sd41_i_cod_cliente = $sd41_i_cod_cliente;
-     if(($this->sd41_i_cod_cliente == null) || ($this->sd41_i_cod_cliente == "") ){
+     if(($this->sd41_i_cod_cliente == null) || ($this->sd41_i_cod_cliente === 0 || $this->sd41_i_cod_cliente === 0.0 || $this->sd41_i_cod_cliente == "") ){
        $this->erro_sql = " Campo sd41_i_cod_cliente nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

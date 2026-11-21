@@ -89,9 +89,9 @@ class cl_vac_aplica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc16_i_codigo = ($this->vc16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_codigo"]:$this->vc16_i_codigo);
-       $this->vc16_i_dosevacina = ($this->vc16_i_dosevacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_dosevacina"]:$this->vc16_i_dosevacina);
-       $this->vc16_n_quant = ($this->vc16_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_n_quant"]:$this->vc16_n_quant);
+       $this->vc16_i_codigo = ($this->vc16_i_codigo === 0 || $this->vc16_i_codigo === 0.0 || $this->vc16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_codigo"]:$this->vc16_i_codigo);
+       $this->vc16_i_dosevacina = ($this->vc16_i_dosevacina === 0 || $this->vc16_i_dosevacina === 0.0 || $this->vc16_i_dosevacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_dosevacina"]:$this->vc16_i_dosevacina);
+       $this->vc16_n_quant = ($this->vc16_n_quant === 0 || $this->vc16_n_quant === 0.0 || $this->vc16_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_n_quant"]:$this->vc16_n_quant);
        if($this->vc16_d_dataaplicada == ""){
          $this->vc16_d_dataaplicada_dia = ($this->vc16_d_dataaplicada_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_d_dataaplicada_dia"]:$this->vc16_d_dataaplicada_dia);
          $this->vc16_d_dataaplicada_mes = ($this->vc16_d_dataaplicada_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_d_dataaplicada_mes"]:$this->vc16_d_dataaplicada_mes);
@@ -101,8 +101,8 @@ class cl_vac_aplica {
          }
        }
        $this->vc16_t_obs = ($this->vc16_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_t_obs"]:$this->vc16_t_obs);
-       $this->vc16_i_usuario = ($this->vc16_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_usuario"]:$this->vc16_i_usuario);
-       $this->vc16_i_departamento = ($this->vc16_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_departamento"]:$this->vc16_i_departamento);
+       $this->vc16_i_usuario = ($this->vc16_i_usuario === 0 || $this->vc16_i_usuario === 0.0 || $this->vc16_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_usuario"]:$this->vc16_i_usuario);
+       $this->vc16_i_departamento = ($this->vc16_i_departamento === 0 || $this->vc16_i_departamento === 0.0 || $this->vc16_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_departamento"]:$this->vc16_i_departamento);
        $this->vc16_c_hora = ($this->vc16_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_c_hora"]:$this->vc16_c_hora);
        if($this->vc16_d_data == ""){
          $this->vc16_d_data_dia = ($this->vc16_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_d_data_dia"]:$this->vc16_d_data_dia);
@@ -112,9 +112,9 @@ class cl_vac_aplica {
             $this->vc16_d_data = $this->vc16_d_data_ano."-".$this->vc16_d_data_mes."-".$this->vc16_d_data_dia;
          }
        }
-       $this->vc16_i_cgs = ($this->vc16_i_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_cgs"]:$this->vc16_i_cgs);
+       $this->vc16_i_cgs = ($this->vc16_i_cgs === 0 || $this->vc16_i_cgs === 0.0 || $this->vc16_i_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_cgs"]:$this->vc16_i_cgs);
      }else{
-       $this->vc16_i_codigo = ($this->vc16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_codigo"]:$this->vc16_i_codigo);
+       $this->vc16_i_codigo = ($this->vc16_i_codigo === 0 || $this->vc16_i_codigo === 0.0 || $this->vc16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc16_i_codigo"]:$this->vc16_i_codigo);
      }
    }
    // funcao para inclusao
@@ -216,7 +216,7 @@ class cl_vac_aplica {
          $this->vc16_i_codigo = $vc16_i_codigo;
        }
      }
-     if(($this->vc16_i_codigo == null) || ($this->vc16_i_codigo == "") ){
+     if(($this->vc16_i_codigo == null) || ($this->vc16_i_codigo === 0 || $this->vc16_i_codigo === 0.0 || $this->vc16_i_codigo == "") ){
        $this->erro_sql = " Campo vc16_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_sau_cadsusversao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s150_i_codigo = ($this->s150_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_codigo"]:$this->s150_i_codigo);
-       $this->s150_i_versao = ($this->s150_i_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_versao"]:$this->s150_i_versao);
+       $this->s150_i_codigo = ($this->s150_i_codigo === 0 || $this->s150_i_codigo === 0.0 || $this->s150_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_codigo"]:$this->s150_i_codigo);
+       $this->s150_i_versao = ($this->s150_i_versao === 0 || $this->s150_i_versao === 0.0 || $this->s150_i_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_versao"]:$this->s150_i_versao);
      }else{
-       $this->s150_i_codigo = ($this->s150_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_codigo"]:$this->s150_i_codigo);
+       $this->s150_i_codigo = ($this->s150_i_codigo === 0 || $this->s150_i_codigo === 0.0 || $this->s150_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s150_i_codigo"]:$this->s150_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_cadsusversao {
          $this->s150_i_codigo = $s150_i_codigo;
        }
      }
-     if(($this->s150_i_codigo == null) || ($this->s150_i_codigo == "") ){
+     if(($this->s150_i_codigo == null) || ($this->s150_i_codigo === 0 || $this->s150_i_codigo === 0.0 || $this->s150_i_codigo == "") ){
        $this->erro_sql = " Campo s150_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
