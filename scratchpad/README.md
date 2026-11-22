@@ -1,28 +1,42 @@
 # Ferramentas da migração (`scratchpad/`)
 
-Scripts e harnesses usados para migrar o e-cidade do PHP 5.6 para o 8.5, na ordem em que entram no trabalho de um lote.
+Scripts e harnesses usados para migrar o e-cidade para o PHP 8.5, na ordem em que entram no trabalho de um lote.
 O **como usar** de cada passo está no guia (`docs/migrar-um-modulo.md`); aqui está **o que cada arquivo faz, como faz e
 o que ele altera**. Cada arquivo também traz, no topo, um cabeçalho com uso, entradas e saídas.
 
-> **Na `base-php74`** (18/11/2026): a referência é o **PHP 7.4** (`ecidade_php74`, porta 8080), no papel que era
-> do 5.6 — as mensagens dos scripts já dizem 7.4 (`NO_7.4` no `redirecionamentos.py`). O `cmp.py` e o
-> `escrita_post.py` ficam como na base (o `cmp.py` marca a referência com `56=`) para não conflitar com a
-> versão da `regressao-php74`, que o PR #30 traz (marca `ref=` e lê portas do `regressao/nucleo/ambiente.py`);
-> o `verifica_lote.py` funciona com as duas, e ele, o `nivel3.py` e o `demo_nivel3.sh` apontam as variáveis
-> `REGRESSAO_*` para a pilha da raiz (8080/8085). Onde
-> este texto diz 5.6, leia 7.4. Adaptações feitas para esta base: o nome do
-> container de referência; a leitura do `location` no `nginx.conf` considera só a linha **ativa** (o bloco nasce
-> comentado, e sem linha ativa nada vai ao 8.5); o `rotear.py location` cria o bloco quando ele não existe; o
-> `dimensiona.py` começa sem nenhuma área concluída, e as cópias `LOC` começam com o marcador `nenhum_prefixo_no_85`;
-> o `gera_map_faseb.py` lê do `nginx.conf` os prefixos do `location` (era uma cópia à mão); o `faseb_map_abas.txt`
-> começa vazio; o `NUCLEO` do `enumera.py`/`residuo.py` é vazio (o núcleo desta base não foi portado); o Rector usa
-> 2 processos em paralelo (o padrão travou um notebook de 7,4 GB).
-> **Exercitadas com o 7.4 em Docker em 19/11/2026:** os testes, `prefixos_area`, `dimensiona`, `nivel3 --candidatas`,
-> `rotear` (simulação), `rector_lote soc` (simulação) e `verifica_lote` no `soc` não migrado (reprova, e cada passo
-> bate com a conferência manual de *Como provar que o verificador funciona*). Os modos `--aplicar` ainda não.
+> **Na `base-php85`** (22/11/2026): a referência é o **PHP 7.4** (`ecidade_php74`, porta 8080), no papel que era do 5.6.
+> As mensagens dos scripts já dizem 7.4 (`NO_7.4` no `redirecionamentos.py`, `ref=` no `cmp.py` e no
+> `escrita_post.py`). Onde as tabelas abaixo ainda dizem 5.6, leia 7.4: descrevem o que o script faz, que não mudou.
+>
+> **O `cmp.py` e o `escrita_post.py` são as versões da `regressao-php74`** e, sem configuração, apontam para a pilha
+> da suíte de regressão (portas 8074/8185, contêineres `ecidade74_*`), não para a da raiz. O `verifica_lote.py`, o
+> `nivel3.py` e o `demo_nivel3.sh` já apontam as variáveis `REGRESSAO_*` para a pilha da raiz. Para rodar o `cmp.py`
+> ou o `escrita_post.py` **à mão** na pilha da raiz, exporte antes:
+>
+> ```bash
+> export REGRESSAO_REF_URL=http://localhost:8080 REGRESSAO_PHP_NOVO_URL=http://localhost:8085 \
+>        REGRESSAO_CONTAINER_REF=ecidade_php74 REGRESSAO_CONTAINER_PHP_NOVO=ecidade_php85 \
+>        REGRESSAO_CONTAINER_BANCO=ecidade_database
+> ```
+>
+> Adaptações feitas para esta linha de bases: o nome do contêiner de referência; a leitura do `location` no
+> `nginx.conf` considera só a linha **ativa**; o `rotear.py location` cria o bloco quando ele não existe e atualiza as
+> cópias `LOC` do `dimensiona.py` e do `redirecionamentos.py`; o `gera_map_faseb.py` lê do `nginx.conf` os prefixos do
+> `location`; o Rector usa 2 processos em paralelo (o padrão travou um notebook de 7,4 GB, e com 1 processo ele parou
+> em 144 de 516 alvos sem erro nenhum).
+>
+> **Estado das listas (22/11/2026):** o `location` serve o `soc` e o `map` as telas e abas da Assistência Social (a
+> primeira área concluída nesta base, PR #41). A tupla `JA` do `dimensiona.py` ainda está vazia, e o `NUCLEO` do
+> `enumera.py`/`residuo.py` também: o núcleo entrou pela PR #39, mas a lista não foi preenchida, então a coluna "Pago"
+> do `dimensiona.py` não desconta os arquivos dele.
+>
+> **Exercitadas com o 7.4 em Docker:** em 19/11/2026, os testes, `prefixos_area`, `dimensiona`, `nivel3 --candidatas`,
+> `rotear` (simulação), `rector_lote soc` (simulação) e `verifica_lote` no `soc` não migrado; de 20 a 22/11/2026, na
+> migração da Assistência Social, o `rector_lote --aplicar`, o `verifica_lote` por lote e com `--tudo`, o `nivel3` em
+> quatro telas e o `rotear` com `--aplicar` (`location` e `map`).
 
 Todos rodam **da raiz do repositório**. Os `.php` são *harnesses*: são copiados para dentro dos containers e rodados nos
-**dois** runtimes (5.6 e 8.5), e o que se compara é a saída de um com a do outro.
+**dois** runtimes (7.4 e 8.5), e o que se compara é a saída de um com a do outro.
 
 A coluna **Altera** diz o que o script muda além de gravar em `ecidade/tmp/`: **nada** (só lê e mede), **código**
 (arquivos de `ecidade/`), **banco** (grava e restaura), **proxy** (`nginx.conf`, `faseb_map.conf`) ou **sessão** (o arquivo de
@@ -126,6 +140,10 @@ comentários.
 | `gera_map_faseb.py` | não confere se o `psql` funcionou | pode reaproveitar sem aviso uma exportação antiga |
 | `residuo.py` | usa só as frentes antigas de enumeração | mede um universo menor que o do `enumera.py` |
 | `enumera.py` | imprime "universo (6 frentes)", mas percorre nove | só o rótulo está errado |
+| `enumera.py` | só segue `include`/`require` de arquivos `.php`; os `.class` e `.inc` do `dbagata/` ficam fora do universo (issue #31) | as classes do Agata não passam pelos passos 5 a 6c |
+| `verifica_lote.py` | no passo 6, o artefato do `empenho.php` (campo `datausu`, `1969-12-31` sem sessão) não é filtrado: o filtro só pega a linha do campo, que existe no 6b | o `empenho.php` aparece como divergente no 6 sem defeito (conferido em 22/11/2026) |
+| `nivel3.py` | o `--candidatas` classifica como "boa" uma tela que grava por RPC | o teste sai `INCONCLUSIVO`; trocar de tela |
+| `nivel3.py` | não reconhece a partição `db_logsacessa_AAAAMM_N` como tabela de log | avisa "escrita em outra tabela" por causa do log de acesso, não de dado de teste |
 
 **Corrigidos em 18/11/2026** (cada um com um teste em `testes/` que falhava antes da correção e passa depois):
 
@@ -144,6 +162,12 @@ comentários.
 | `enumera.py`, `residuo.py` | o `NUCLEO` marcava 21 arquivos como já portados, mas na `base-php74` o núcleo não foi portado | coluna "Pago" do `dimensiona.py` vai a 0; o `soc` ganha 5 alvos |
 | `rector-curado.php` | o Rector abria um processo por núcleo (até 1,2 GB cada) e travou um notebook de 7,4 GB | `rector_lote.py soc` com 2 processos: no máximo ~470 MB no contêiner |
 | `verifica_lote.py` | o artefato `datausu` do `empenho.php` descartava a **classe inteira** e escondia o construtor PHP 4 dela (`sCamposNota` vazio no 8.5) | a conferência manual do passo 6 dava 16 classes e o script 15; com o filtro só na linha do `datausu`, 16 |
+
+**Corrigido em 21/11/2026**, achado no nível 3 da Assistência Social:
+
+| Arquivo | Defeito | Como foi conferido |
+| --- | --- | --- |
+| `escrita_post.py` | o restore apagava as tabelas na ordem do `--tabelas`: com a mãe antes da filha, o `DELETE` esbarrava na FK, o teste abortava depois do POST do 7.4 e deixava a linha de teste no banco. Agora `filhas_primeiro()` ordena pelas FKs (commit `52438e311`) | `hab1_workflowativ001` com a mãe primeiro: IDÊNTICO, sem abortar; banco restaurado |
 
 ## Testes (`testes/`)
 

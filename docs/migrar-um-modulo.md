@@ -141,6 +141,16 @@ curl -s -o /dev/null -w '%{http_code} %{size_download}\n' \
   -b "ECIDADEWINDOWMAIN=$SID" http://localhost:8080/cem1_campas001.php
 ```
 
+**Na mesma sessão do terminal, aponte o `cmp.py` e o `escrita_post.py` para a pilha da raiz.** Na `base-php85` os dois
+são as versões da suíte de regressão e, sem isto, testam as portas 8074/8185 (`ecidade74_*`), não a 8080/8085. O
+`verifica_lote.py` e o `nivel3.py` já fazem isso sozinhos; o `export` vale para os comandos à mão deste guia:
+
+```bash
+export REGRESSAO_REF_URL=http://localhost:8080 REGRESSAO_PHP_NOVO_URL=http://localhost:8085 \
+       REGRESSAO_CONTAINER_REF=ecidade_php74 REGRESSAO_CONTAINER_PHP_NOVO=ecidade_php85 \
+       REGRESSAO_CONTAINER_BANCO=ecidade_database
+```
+
 | Saída | Significa |
 | --- | --- |
 | `200` e alguns milhares de bytes | ambiente são, pode começar |
@@ -283,7 +293,8 @@ banco, que cresce gigabytes com os erros de SQL das baterias (`sudo truncate -s 
 passos de verificação sobre tudo o que a área alterou, a bateria no `location` e no `map`, separa as divergências novas
 das conhecidas e diagnostica as novas (ver *Verificar o lote de uma vez*). **O `--base origin/base-php85` é obrigatório:**
 sem ele o script mede contra o `master` e pega a migração de todas as áreas, não só a sua. Na Assistência Social
-(21/11/2026): 544 arquivos, 535 classes e 129 telas. Os comandos abaixo são o mesmo, à mão.
+(21/11/2026): 544 arquivos, 535 classes e 129 telas. Os comandos abaixo são o mesmo, à mão (com o `export` da
+*Prova de fumaça*).
 
 ```bash
 SID=$(cat /tmp/sid.txt)      # ver "Prova de fumaça"
