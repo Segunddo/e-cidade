@@ -1,6 +1,6 @@
 ---
 name: migrar-modulo
-description: Porta um módulo legado do e-cidade de PHP 5.6 para 8.5 mantendo compatibilidade com os dois runtimes. Use ao migrar um prefixo de módulo (jur, div, arr, fis, iss, mar, tri, dvr, inf, not...), ao retomar um porte interrompido, ou ao diagnosticar uma tela que quebra no 8.5 e não no 5.6. Cobre a receita de 9 passos, o ferramental versionado em scratchpad/ e as armadilhas que já custaram defeito.
+description: Porta um módulo legado do e-cidade de PHP 7.4 para 8.5 mantendo compatibilidade com os dois runtimes. Use ao migrar um prefixo de módulo (jur, div, arr, fis, iss, mar, tri, dvr, inf, not...), ao retomar um porte interrompido, ou ao diagnosticar uma tela que quebra no 8.5 e não no 7.4. Cobre a receita de 9 passos, o ferramental versionado em scratchpad/ e as armadilhas que já custaram defeito.
 ---
 
 # Migrar um módulo para PHP 8.5
@@ -10,7 +10,7 @@ O contexto, os números e o **porquê** de cada decisão estão no `CLAUDE.md` d
 o registro manda.
 
 **Critério de sucesso do módulo:** todas as telas do prefixo respondem byte-a-byte idêntico
-entre `:8080` (5.6) e `:8085` (8.5), com sessão autenticada — e cada divergência restante está
+entre `:8080` (7.4) e `:8085` (8.5), com sessão autenticada — e cada divergência restante está
 *caracterizada*, não apenas tolerada.
 
 ## Antes de começar
@@ -47,10 +47,29 @@ rode-os sempre da raiz do repositório, nunca de dentro de `ecidade/`.
 Sem `tmp/` gravável, 11% das telas falham **antes de executar** e passam na bateria por
 falharem igual nos dois. Comparabilidade sem cobertura.
 
-**O trabalho é por área, em lotes** (branch da área a partir da `base-php84`, `scratchpad/dimensiona.py`, um lote por vez
-com commit local, bateria completa e conferência pelo proxy só no fim, push e PR para `base-php84`). Os prefixos de
+**O trabalho é por área, em lotes** (branch da área a partir da `base-php85`, `scratchpad/dimensiona.py`, um lote por vez
+com commit local, bateria completa e conferência pelo proxy só no fim, push e PR para `base-php85`). Os prefixos de
 uma área vêm do menu: `python3 scratchpad/prefixos_area.py <AREA>` (coluna `faltam`). Os comandos dessa
 moldura estão em `docs/migrar-um-modulo.md`, seção *O fluxo de uma área*. Os passos abaixo portam **um lote**.
+
+**Na `base-php85` (revisado em 22/11/2026):**
+
+- A referência é o **7.4** (`ecidade_php74`, :8080). Onde este texto ainda diz 5.6, é fato medido naquela época. O 7.4
+  difere do 5.6 em dois pontos medidos: `??` existe, e a divisão por zero dá `INF` (não `false`).
+- Branch `<area>/php85-migrado` a partir da `origin/base-php85`; PR para a `base-php85` com `Closes #NN`, e a issue se
+  fecha **à mão** depois do merge (a `base-php85` não é a branch padrão).
+- **Reserve os arquivos no quadro do MCP** (`reivindicar_arquivo`, vale 4 h) antes de mexer, e no fim marque-os com
+  `liberar_arquivo(concluido=true)`, sem sobrescrever arquivo já concluído por outra pessoa. Commit só do
+  `.mcp/estado/trabalho.json`. Commits no formato `PHP8-NN: ...`, `git add` arquivo por arquivo.
+- Bateria do fim da área: `verifica_lote.py fim-<area> --tudo --base origin/base-php85`. Sem o `--base`, ela mede
+  contra o `master` e pega todas as áreas.
+- Rector: não mexa no `withParallel(120, 2, 16)`. Com 1 processo ele parou em 144 de 516 alvos sem erro nenhum.
+- Passo 4b: o `vendor/` do 7.4 traz `polyfill-php80`/`php81` (`str_contains()` e afins existem nas telas do 7.4). Para
+  plantar um defeito que quebra de verdade, use `array_find()` (8.4).
+- Nível 3: passe todas as tabelas em `--tabelas`, em qualquer ordem (o restore vai das filhas às mães). `INCONCLUSIVO`
+  por falta de registro pai: passe `--payload` com um pai que exista no banco.
+- Passo 6: o `empenho.php` aparece com assinatura diferente só por causa do `datausu` (o harness roda sem sessão). É
+  artefato; o filtro do script ainda não o pega no passo 6.
 
 **Nunca alterar `docker-compose.yml`** — é a referência funcional.
 **Nunca commitar** `docker/database/ecidade_base.sql` (314 MB) nem encenar a remoção do `.gz`.
@@ -74,7 +93,7 @@ de 1.727 para 2.801 arquivos.
 Arquivos de `src/`/`app/` têm duas armadilhas próprias, as duas medidas:
 - **o `php -l` não basta**: a classe filha pode não *carregar* no 8.5 por assinatura incompatível
   com a mãe em outro arquivo (LSP). Rode `scratchpad/carrega_arquivo.php` nos dois runtimes sobre os
-  que têm `extends`/`implements`, e compare só o que dá OK no 5.6 e falha no 8.5;
+  que têm `extends`/`implements`, e compare só o que dá OK no 7.4 e falha no 8.5;
 - **método homônimo em classe com namespace não é construtor**, nem no 5.6 (PHP 5.3.3). Não renomeie.
 
 Para medir uma lacuna nova retroativamente: `TELAS=@arquivo` aceita a lista de partida (ex.: tudo o
@@ -148,14 +167,17 @@ docker exec -i ecidade_php85 sh -c 'cd /var/www/html;
     --config tmp/rector/scratch/rector-curado.php --no-progress-bar' </dev/null
 ```
 
-**Os ~15 avisos `Deprecated:` que saem antes de tudo são esperados** — vêm do `vendor/` do Laravel 5.4 (Guzzle, PsySH,
+**Em um comando:** `python3 scratchpad/rector_lote.py <pref...>` simula e classifica as regras (conhecida / RESSALVA /
+NOVA); com `--aplicar`, aplica até zerar, e recusa se houver regra NOVA não aceita com `--aceitar`.
+
+**Os ~15 avisos `Deprecated:` que saem antes de tudo são esperados** — vêm do `vendor/` do Laravel (Guzzle, PsySH,
 Zend Diactoros, PHPUnit), que o Rector carrega pelo autoloader do projeto, e não dizem nada sobre o módulo. Mande o
 stderr para um arquivo (`2> /tmp/r.err`) e só pare se aparecer outra coisa nele (`Fatal`, `Killed`, `SEM ALVOS`).
 
 **Quatro armadilhas, todas medidas e todas silenciosas:**
 
 1. **O pin de versão é obrigatório.** Sem `->withPhpVersion(PhpVersion::PHP_80)`, o Rector lê a
-   versão alvo do `composer.json` do projeto (`">=5.6.4"`) e **pula toda regra com version
+   versão alvo do `composer.json` do projeto (`">=7.4"`; na base antiga era `">=5.6.4"`) e **pula toda regra com version
    bonding** — inclusive `Php4ConstructorRector` e `EregToPregMatchRector` — reportando `[OK]`
    sem aviso. Conferir sempre: `Php4ConstructorRector` **tem** de aparecer na lista de regras
    aplicadas se o módulo tiver construtor PHP 4.
@@ -163,15 +185,15 @@ stderr para um arquivo (`2> /tmp/r.err`) e só pare se aparecer outra coisa nele
    comando idêntico, converteu 83. Um run não prova que acabou.
 3. **A denylist não é transferível entre módulos.** Já cresceu três vezes: 14 → 16 (`iss`) →
    22 (modernização) → 23 (`dvr`, `IfIssetToCoalescingRector`, que emite `??` e é parse error
-   no 5.6). **Antes de aplicar, rode um `--dry-run --output-format=json` e confira a lista de
+   no 7.4). **Antes de aplicar, rode um `--dry-run --output-format=json` e confira a lista de
    regras aplicadas**; para cada regra que você ainda não vetou, teste a construção que ela
    emite nos DOIS runtimes antes de aceitar. E confira `php -l` na própria config: com erro de
    sintaxe nela, o Rector reporta `0 arquivos` sem mensagem de erro. Regras que nunca dispararam antes podem
-   disparar agora e emitir função que não existe no 5.6. Daí o passo 4b, abaixo, ser obrigatório.
+   disparar agora e emitir função que não existe no 7.4. Daí o passo 4b, abaixo, ser obrigatório.
 4. **O Rector traz modernização junto** (~77% do diff no `iss`): alias `pg_*`, `var` → `public`.
    Inofensiva nos dois runtimes, mas infla a revisão. Se incomodar, entra na denylist.
 
-### Passo 4b — portão de FUNÇÕES contra o 5.6 (nenhum `php -l` faz isto)
+### Passo 4b — portão de FUNÇÕES contra o 7.4 (nenhum `php -l` faz isto)
 
 ```bash
 python3 - <<'EOF'
@@ -183,12 +205,12 @@ for l in d.split(b"\n"):
     alvo = nov if l.startswith(b"+") else (vel if l.startswith(b"-") else None)
     if alvo is not None:
         # o (?<!function ) exclui DECLARACOES: sem ele o portao acusa "__construct"
-        # como funcao ausente no 5.6, que e falso positivo
+        # como funcao ausente no 7.4, que e falso positivo
         alvo |= {m.group(1) for m in re.finditer(rb'(?<![\$>:\w])(?<!function )([a-z_][a-z0-9_]{2,})\s*\(', l)}
 open("/tmp/fn.txt","w").write("\n".join(sorted(x.decode() for x in nov-vel)))
 EOF
-docker cp /tmp/fn.txt ecidade_php56:/tmp/fn.txt
-docker exec -i ecidade_php56 php -r '
+docker cp /tmp/fn.txt ecidade_php74:/tmp/fn.txt
+docker exec -i ecidade_php74 php -r '
 $f=array_filter(array_map("trim", file("/tmp/fn.txt", FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES)));
 $falta=array(); foreach($f as $x) if(!function_exists($x)) $falta[]=$x;
 echo count($falta)," ausentes: ",implode(", ",$falta),"\n";' </dev/null
@@ -206,10 +228,10 @@ Já pegou `str_contains()` e `array_key_first()` emitidos em arquivos servidos p
   Reaproveite o nó original (`$node->expr = $novo;`) em vez de criar outro.
 
 As categorias que exigem decisão caso a caso continuam tratadas à mão, verificando o
-comportamento do 5.6 antes:
+comportamento do 7.4 antes:
 
 ```bash
-docker exec ecidade_php56 php -r '<expressão>'    # a referência é o 5.6, não a documentação
+docker exec ecidade_php74 php -r '<expressão>'    # a referência é o 7.4, não a documentação
 ```
 
 Para `each()`: se houver `reset()` antes do laço, `foreach` é fiel; **sem** `reset()`, o
@@ -222,11 +244,17 @@ A forma corrigida `($this->X === 0 || $this->X === 0.0 || $this->X == "")` **con
 `$this->X == ""`. Um verificador ingênuo acusa tudo de novo. A checagem precisa olhar para
 trás e confirmar que a guarda precede a comparação.
 
+## Verificação de uma vez (passos 4b a 7)
+
+`python3 scratchpad/verifica_lote.py <lote> <prefixo> [...]` roda 4b, 5, 5b, 6, 6b, 6c e 7 na ordem, para no primeiro
+problema e grava `ecidade/tmp/verif/<lote>-<data>/RELATORIO.md` (só ele precisa ser lido). Opções: `--so`, `--continuar`,
+`--base`, `--sid`. As seções abaixo são o que cada passo faz e como diagnosticar uma falha.
+
 ## Passo 5 — `php -l` nos dois runtimes
 
 ```bash
 git status --porcelain | awk '{print $NF}' | grep '\.php$' | sed 's|^|/var/www/html/|' > /tmp/alt.txt
-for v in 56 85; do
+for v in 74 85; do
   docker exec -i ecidade_php$v bash -c \
     'while read f; do php -l "$f" </dev/null 2>&1 | grep -q "No syntax errors" || echo "$f"; done' \
     < /tmp/alt.txt
@@ -241,11 +269,11 @@ foi assim que 11 arquivos quebrados de `dbagata/` passaram despercebidos.
 
 `php -l` não pega função que não existe no runtime. O Rector pode emitir `str_starts_with`
 (PHP 8) e `random_int` (PHP 7), que compilam no 5.6 e explodem em execução — foram 93 arquivos
-num teste real, todos com lint limpo. Perguntar ao próprio 5.6:
+num teste real, todos com lint limpo. Perguntar ao próprio 7.4:
 
 ```bash
 # coletar as funcoes que aparecem SO na saida transformada, depois:
-docker exec ecidade_php56 php -r 'foreach(file("/var/www/html/tmp/fn.txt",2) as $f)
+docker exec ecidade_php74 php -r 'foreach(file("/var/www/html/tmp/fn.txt",2) as $f)
   if(!function_exists(trim($f))) echo trim($f),"\n";'
 ```
 
@@ -260,13 +288,13 @@ ternário aninhado, cast `(real)`).
 # Com o caminho /var/www/html/scratchpad/ o php nao acha o arquivo, a saida sai
 # VAZIA nos dois runtimes e o diff vazio parece aprovacao.
 grep '^classes/' tmp/<pref>_universo.txt > tmp/<pref>_classlist.txt
-for v in 56 85; do
+for v in 74 85; do
   docker cp scratchpad/instancia_classes.php ecidade_php$v:/tmp/ic.php
   docker exec ecidade_php$v php -d display_errors=0 \
     /tmp/ic.php /var/www/html/tmp/<pref>_classlist.txt \
     2>/dev/null | sort > /tmp/cls$v.txt
 done
-diff /tmp/cls56.txt /tmp/cls85.txt
+diff /tmp/cls74.txt /tmp/cls85.txt
 ```
 
 Valida diretamente a renomeação dos construtores, que é a alteração de maior risco: no PHP 8
@@ -282,13 +310,13 @@ dispara no `POST`. Sem este passo, a maior categoria de correções do porte fic
 
 ```bash
 grep '^classes/' tmp/<pref>_universo.txt > tmp/<pref>_classlist.txt
-for v in 56 85; do
+for v in 74 85; do
   docker cp scratchpad/escrita.php ecidade_php$v:/tmp/esc.php
   docker exec ecidade_php$v php -d display_errors=0 \
     /tmp/esc.php /var/www/html/tmp/<pref>_classlist.txt \
     2>/dev/null | sort > /tmp/esc$v.txt
 done
-diff /tmp/esc56.txt /tmp/esc85.txt      # qualquer linha e defeito
+diff /tmp/esc74.txt /tmp/esc85.txt      # qualquer linha e defeito
 ```
 
 **Com listas grandes, rodar UMA classe por processo** (`while read c; do echo "$c" > /tmp/um.txt;
@@ -299,11 +327,11 @@ php /tmp/esc.php /tmp/um.txt; done`): um fatal mata o processo e o resto da list
 a cada 2 s e executa o código antigo (um ciclo automatizado aplicou a mesma guarda 15 vezes).
 
 Ele popula `HTTP_POST_VARS`, chama `atualizacampos()` e compara o estado — sem HTTP e sem
-tocar no banco. Divergência significa que o 5.6 lê o valor do formulário e o 8.5 mantém `0`:
+tocar no banco. Divergência significa que o 7.4 lê o valor do formulário e o 8.5 mantém `0`:
 **dado errado gravado em silêncio**.
 
 Atenção ao literal: além de `== ""` existe `== "f"` e `== " "`. Qualquer literal
-**não-numérico** tem o mesmo defeito, porque o 5.6 o coagia para 0.
+**não-numérico** tem o mesmo defeito, porque o 7.4 o coagia para 0.
 
 ### Passo 6c — a forma NEGADA `$this->x != ""` (o Rector não cobre)
 
@@ -311,7 +339,7 @@ O `GuardaComparacaoLiteralRector` só trata `==`. A forma `!=` com propriedade i
 `trim()`** está sobretudo no bloco de auditoria do `alterar()`:
 
 ```php
-if (isset($GLOBALS["HTTP_POST_VARS"]["x"]) || $this->x != "")   // 5.6: 0 != "" falso; 8.5: verdadeiro
+if (isset($GLOBALS["HTTP_POST_VARS"]["x"]) || $this->x != "")   // 7.4: 0 != "" falso; 8.5: verdadeiro
     insert into db_acount (...)                                  // o 8.5 grava uma alteracao para 0
 ```
 
@@ -322,7 +350,7 @@ inteiro `0` na comparação. Normalmente o `atualizacampos()` já troca o `0` de
 ```bash
 python3 scratchpad/negada_alvos.py tmp/negada.tsv   # estatico: classe, campo, metodo, modo do atualizacampos, auditoria/negocio
 cut -f1 ecidade/tmp/negada.tsv | sort -u > ecidade/tmp/negada_cls.txt
-for v in 56 85; do
+for v in 74 85; do
   docker cp scratchpad/negada.php ecidade_php$v:/tmp/negada.php
   # UM arquivo temporario POR RUNTIME: o /tmp e compartilhado entre os containers, e um
   # nome comum fez os dois lacos se sobrescreverem (metade das linhas sumiu de um lado)
@@ -333,10 +361,10 @@ for v in 56 85; do
 done
 ```
 
-Compare com `python3 scratchpad/negada_compara.py /tmp/neg_56.txt /tmp/neg_85.txt /tmp/cls.txt` (a lista de classes do
+Compare com `python3 scratchpad/negada_compara.py /tmp/neg_74.txt /tmp/neg_85.txt /tmp/cls.txt` (a lista de classes do
 passo 6): ele separa o que é do lote do que é de área não migrada e dá o veredito (`PASSOU`/`INCOMPLETO`/`INVESTIGAR`).
 Nos pares do lote:
-- **valor diferente** (5.6 `NULL`, 8.5 `0`): falta a guarda do `==` no `atualizacampos()`, então a
+- **valor diferente** (7.4 `NULL`, 8.5 `0`): falta a guarda do `==` no `atualizacampos()`, então a
   classe não está portada. Se ela estiver no universo do lote, é falha do passo 4;
 - **mesmo valor `0`, resultado diferente**: é a forma negada. Corrija **só esses pontos**, só
   dentro do método medido, com `($this->x != "" && $this->x !== 0 && $this->x !== 0.0)` — ponha os
@@ -350,6 +378,10 @@ corrigir, ele continua acusando, e quem confirma é o `negada_alvos.py`. Medido 
 que um lote novo trouxer para o universo servido precisam passar por isto.
 
 ### Nível 3: POST real (dirigido, não em bateria)
+
+**Em um comando:** `python3 scratchpad/nivel3.py --candidatas <pref...>` e `python3 scratchpad/nivel3.py <tela>` (liga e
+sempre desliga o log, gera o payload, roda o `escrita_post.py` e acusa escrita em outra tabela pelo `pg_stat_user_tables`,
+inclusive por gatilho).
 
 Quando o passo 6b apontar uma classe com campo inteiro não-chave, vale confirmar com um `POST`
 de verdade, que compara o **SQL emitido** pelos dois runtimes:
@@ -371,7 +403,7 @@ Montar o payload é a parte cara: o botão se chama `incluir`/`alterar`/`excluir
 
 ```bash
 # achar uma sessao autenticada
-docker exec -u root ecidade_php56 sh -c 'grep -la DB_modulo /var/lib/php/sessions/sess_* | head -3'
+docker exec -u root ecidade_php74 sh -c 'grep -la DB_modulo /var/lib/php/sessions/sess_* | head -3'
 python3 scratchpad/cmp.py <SID> '^<prefixo>[0-9]*_' /tmp/<pref>_div.txt
 ONLY="a.php,b.php" python3 scratchpad/cmp.py <SID> '^x_' /dev/null    # subconjunto
 ```
@@ -401,7 +433,7 @@ de guarda. Isso troca N rodadas de bateria por 1 (o `iss` precisou de 4).
 
 **Não varra `pg_*` em massa.** Medido: 1.083 chamadas sem guarda no universo do `arr`, e só 1
 precisava. E há 25 pontos na base onde o resultado é comparado com `===` — a guarda devolve `0`
-onde o 5.6 devolvia `false`, e `false === 0` é falso. A varredura introduziria regressão em 25
+onde o 7.4 devolvia `false`, e `false === 0` é falso. A varredura introduziria regressão em 25
 pontos para prevenir cerca de um por módulo.
 
 ### Diagnosticar cada divergência
@@ -438,7 +470,7 @@ fato executa para o usuário logado:
 
 ```bash
 find extension/modification -name '<arquivo>'     # existe copia?
-docker exec -u root ecidade_php56 chmod 666 /var/www/html/<caminho da copia>
+docker exec -u root ecidade_php74 chmod 666 /var/www/html/<caminho da copia>
 ```
 
 Depois de alterar núcleo, **não** rode a bateria completa a cada lote (decisão do usuário, 29/10/2026). Ela roda
@@ -458,6 +490,10 @@ O envio ao GitHub fica para depois da bateria completa do fim da área. Se ela a
 entre os commits de lote.
 
 ## Passo 8 — Roteamento
+
+**Em um comando:** `python3 scratchpad/rotear.py location|map|abas ... [--aplicar]` (mostra antes; com `--aplicar` grava,
+incluindo as cópias do regex em `dimensiona.py`/`redirecionamentos.py`, testa `nginx -t` num container descartável e
+desfaz se falhar, recria o proxy e confere o `X-Ecidade-Runtime`) e `python3 scratchpad/rotear.py 8b <AREA>`.
 
 Acrescentar o prefixo à alternância em `docker/proxy/nginx.conf`:
 
@@ -485,13 +521,13 @@ for u in login.php <pref>1_x.php w/2/<pref>2_y.php; do
 done
 ```
 
-### Passo 8b — abas e redirecionamentos que voltam ao 5.6 (14ª lacuna)
+### Passo 8b — abas e redirecionamentos que voltam ao 7.4 (14ª lacuna)
 
 Rotear a tela do menu **não basta**. Muitas telas são só um contêiner: ao abrir, carregam o
 formulário num `<iframe>` (`cad1_face001` → `cad1_face004`) ou redirecionam
 (`db_redireciona(...)`). Esse destino **não está no menu**. Por isso o `map`, gerado do banco,
-não o conhece, e ele fica no 5.6. A tela "está no 8.5" e o formulário que o usuário preenche
-roda no 5.6. Nenhuma bateria acusa isso: as duas telas são idênticas, só que servidas pelo
+não o conhece, e ele fica no 7.4. A tela "está no 8.5" e o formulário que o usuário preenche
+roda no 7.4. Nenhuma bateria acusa isso: as duas telas são idênticas, só que servidas pelo
 runtime errado. Em 26/10/2026 eram **158 abas** atrás de 90 telas de menu e **3 destinos de
 redirecionamento** atrás de 5 telas de menu, nas três áreas concluídas. Os dois são a mesma lacuna e
 se corrigem do mesmo jeito.
@@ -508,7 +544,7 @@ python3 scratchpad/redirecionamentos.py <SID> /tmp/redir.tsv TRIBUT,EDUCA,RECURS
 grep -P '^NO_5\.6\t' /tmp/redir.tsv | grep -vP '\t(corpo|db_erros)\.php\t'   # TEM de sair vazio
 ```
 
-Para cada linha `NO_5.6`:
+Para cada linha `NO_7.4`:
 
 1. **iframe** → portar o universo dos destinos. Use `TELAS=<destinos com a grafia do disco>`
    no `enumera.py` e siga os passos 4 a 7, com bateria nos destinos. Depois acrescente o nome,
@@ -534,7 +570,7 @@ Para cada linha `NO_5.6`:
    `/tmp` compartilhado resolve. Ignore.
 
 Os destinos são, em geral, compartilhados: `func_selinstit.php` e `verifica.php` são abertos
-também por telas do 5.6, que passam a recebê-los do 8.5. É seguro porque o código portado roda
+também por telas do 7.4, que passam a recebê-los do 8.5. É seguro porque o código portado roda
 nos dois runtimes, e é por isso que o porte e a bateria vêm **antes** de acrescentá-los à lista.
 
 **Limite:** o script só vê o que a tela faz **ao abrir, por GET sem parâmetros**. Abas criadas
@@ -568,7 +604,7 @@ Atualizar o registro: seção do módulo no `docs/registro/area-<área>.md`, cab
 
 - Categoria de incompatibilidade que não está no catálogo (`docs/registro/`).
 - Correção que mudaria **comportamento**, não só compatibilidade (ex.: consertar um bug
-  pré-existente que o 5.6 também tem).
+  pré-existente que o 7.4 também tem).
 - `porta.py` abortou com caso ambíguo.
 - A escolha do próximo módulo: rodar `scratchpad/residuo.py` e comparar candidatos pelo
   resíduo e pelo tamanho do lote, em vez de seguir a ordem registrada sem conferir.
