@@ -27,6 +27,10 @@ class EtiquetaModelo02Builder implements \App\Domain\Patrimonial\Patrimonio\Cont
      * @var string
      */
     private $descricao;
+    /**
+     * @var string
+     */
+    private $barcode;
 
     public function create()
     {

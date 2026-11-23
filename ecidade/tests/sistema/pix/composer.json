@@ -1,0 +1,49 @@
+{
+    "name": "dbseller/e-cidade-pix-php85-test",
+    "description": "Isolated PHP 8.5 and Laravel 13 compatibility test for Banco do Brasil PIX",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "dbseller/sdk-api-pix-bb",
+                "version": "2.0.0.1",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://api.github.com/repos/DBSeller/sdk-api-pix-bb/zipball/7d5d97dc3072311e6406a680419f2432e5e950d3"
+                },
+                "require": {
+                    "php": ">=7.4.0",
+                    "ext-curl": "*",
+                    "ext-json": "*",
+                    "ext-mbstring": "*",
+                    "guzzlehttp/guzzle": "^7.8.2"
+                },
+                "autoload": {
+                    "psr-4": {
+                        "Swagger\\Client\\": "lib/"
+                    }
+                }
+            }
+        }
+    ],
+    "require": {
+        "php": "^8.5",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "dbseller/sdk-api-pix-bb": "2.0.0.1",
+        "guzzlehttp/guzzle": "^7.8.2",
+        "laravel/framework": "13.43.0"
+    },
+    "config": {
+        "vendor-dir": "../../../../runtime-85/pix-vendor",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "../../../app/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,31 @@
+--- a/src/BaconQrCode/Common/EcBlocks.php
++++ b/src/BaconQrCode/Common/EcBlocks.php
+@@ -41,6 +41,6 @@ class EcBlocks
+      * @param EcBlock|null $ecb2
+      */
+-    public function __construct($ecCodewordsPerBlock, EcBlock $ecb1, EcBlock $ecb2 = null)
++    public function __construct($ecCodewordsPerBlock, EcBlock $ecb1, ?EcBlock $ecb2 = null)
+     {
+         $this->ecCodewordsPerBlock = $ecCodewordsPerBlock;
+ 
+--- a/src/BaconQrCode/Common/ReedSolomonCodec.php
++++ b/src/BaconQrCode/Common/ReedSolomonCodec.php
+@@ -226,6 +226,6 @@ class ReedSolomonCodec
+      * @return null|integer
+      */
+-    public function decode(SplFixedArray $data, SplFixedArray $erasures = null)
++    public function decode(SplFixedArray $data, ?SplFixedArray $erasures = null)
+     {
+         // This speeds up the initialization a bit.
+         $numRootsPlusOne = SplFixedArray::fromArray(array_fill(0, $this->numRoots + 1, 0), false);
+--- a/src/BaconQrCode/Encoder/MaskUtil.php
++++ b/src/BaconQrCode/Encoder/MaskUtil.php
+@@ -220,7 +220,7 @@ class MaskUtil
+                 break;
+ 
+             case 4:
+-                $intermediate = (BitUtils::unsignedRightShift($y, 1) + ($x / 3)) & 0x1;
++                $intermediate = (BitUtils::unsignedRightShift($y, 1) + (int) ($x / 3)) & 0x1;
+                 break;
+ 
+             case 5:

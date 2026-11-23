@@ -1,0 +1,76 @@
+--- a/src/Pimaco.php
++++ b/src/Pimaco.php
+@@ -18,6 +18,7 @@ class Pimaco
+     private $marginHeader;
+     private $marginFooter;
+ 
++    protected $pdf;
+     private $tags;
+ 
+     /**
+@@ -27,7 +28,7 @@ class Pimaco
+      * @param string $tempDir
+      * @throws \Exception
+      */
+-    public function __construct(string $template, string $path_template = null, string $tempDir = null)
++    public function __construct(string $template, ?string $path_template = null, ?string $tempDir = null)
+     {
+         $this->path_template = dirname(__DIR__) . "/templates/";
+         if (!empty($path_template)) {
+@@ -161,7 +162,7 @@ class Pimaco
+      * @param string|null $dest
+      * @throws \Mpdf\MpdfException
+      */
+-    public function output(string $name = null, string $dest = null)
++    public function output(?string $name = null, ?string $dest = null)
+     {
+ //        var_dump($this->render());
+ //        exit();
+--- a/src/Tag.php
++++ b/src/Tag.php
+@@ -16,6 +16,9 @@ class Tag
+     private $size;
+     private $padding;
+     private $marginLeft;
++    private $tags;
++    private $ln;
++    private $align;
+ 
+     /**
+      * Tag constructor.
+@@ -23,6 +26,6 @@ class Tag
+      * @param string|null $content
+      */
+-    public function __construct(string $content = null)
++    public function __construct(?string $content = null)
+     {
+         $this->tags = new \ArrayObject();
+ 
+@@ -141,6 +144,6 @@ class Tag
+      * @param string|null $fontSize
+      * @return QrCode
+      */
+-    public function qrcode(string $content, string $label = null, string $fontSize = null)
++    public function qrcode(string $content, ?string $label = null, ?string $fontSize = null)
+     {
+         $qrcode = new QrCode($content);
+--- a/src/Tags/Barcode.php
++++ b/src/Tags/Barcode.php
+@@ -20,6 +20,6 @@ class Barcode
+      * @param string|null $typeCode
+      */
+-    public function __construct(string $content, string $typeCode = null)
++    public function __construct(string $content, ?string $typeCode = null)
+     {
+         $this->content = $content;
+         $this->typeCode = 'TYPE_CODE_128';
+--- a/src/Tags/QrCode.php
++++ b/src/Tags/QrCode.php
+@@ -20,6 +20,6 @@ class QrCode
+      * @param string|null $typeCode
+      */
+-    public function __construct(string $content, string $typeCode = null)
++    public function __construct(string $content, ?string $typeCode = null)
+     {
+         $this->content = $content;
+         $this->labelFontSize = 12;

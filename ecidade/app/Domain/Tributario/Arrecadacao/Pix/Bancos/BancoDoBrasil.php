@@ -106,11 +106,11 @@ class BancoDoBrasil extends PixInfo implements PixBanco
         $modelBody['ddd_telefone_devedor'] = "";
         $modelBody['numero_telefone_devedor'] = "";
         $modelBody['codigo_solicitacao_banco_central_brasil'] = $this->getPixKey();
-        $modelBody['descricao_solicitacao_pagamento'] = utf8_encode("Arrecadacao Pix");
+        $modelBody['descricao_solicitacao_pagamento'] = mb_convert_encoding("Arrecadacao Pix", "UTF-8", "ISO-8859-1");
         $modelBody['valor_original_solicitacao'] = $this->getValor();
         $modelBody['cpf_devedor']  = (strlen($cpfCnpj) < 13 ? $cpfCnpj : "");
         $modelBody['cnpj_devedor'] = (strlen($cpfCnpj) > 13 ? $cpfCnpj : "");
-        $modelBody['nome_devedor'] = utf8_encode($this->cgm->z01_nome);
+        $modelBody['nome_devedor'] = mb_convert_encoding($this->cgm->z01_nome, "UTF-8", "ISO-8859-1");
         $modelBody['quantidade_segundo_expiracao'] = $this->getSegundosExpiracao();
         $modelBody['lista_informacao_adicional'] = null;
 
