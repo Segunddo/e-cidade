@@ -1851,7 +1851,7 @@ Faça isso com uma **tabela de valores** (`0`, `""`, `"0"`, `"abc"`, `null`, `fa
 | Widget inteiro some | `$x < 3` com `$x` string | `(float)$x < 3` |
 | `Unsupported operand types: string / int` | aritmética com string | `(float)` ou `(int)`, o que o 7.4 produzia |
 | `'break' not in the 'loop' or 'switch'` | `break` fora de laço | `exit;` se alcançável, remover se não |
-| `Unparenthesized a ? b : c ? d : e` | ternário aninhado | `(a ? b : c) ? d : e` — 7.4 associa à **esquerda** |
+| `Unparenthesized a ? b : c ? d : e` | ternário aninhado | `(a ? b : c) ? d : e` — 7.4 associa à **esquerda**. Com **três ou mais** níveis, **à mão**: a `ParenthesizeNestedTernaryRector` só põe os parênteses de fora (ver abaixo) |
 | `in_array(): Argument #2 must be of type array` | *haystack* nulo | `is_array($h) && in_array(...)` |
 | `sizeof(): must be of type Countable\|array` | `sizeof(null)` | `sizeof((array)$x)` |
 | `array_merge(): Argument #2 must be of type array` | argumento nulo | ternario com `is_array()` nos dois |
@@ -1868,6 +1868,20 @@ Faça isso com uma **tabela de valores** (`0`, `""`, `"0"`, `"abc"`, `null`, `fa
 | `Attempt to assign property "x" on null` | o 7.4 criava o objeto sozinho (*auto-vivificação*) | `if (empty($o)) $o = new stdClass();` antes da linha |
 | `Non-static method X::m() cannot be called statically` | chamada estática a método sem `$this` | declarar o método `static` (conferir que ele não usa `$this`) |
 | `Declaration of Filha::m() must be compatible with Mae::m()` | LSP — em geral depois do `OptionalParametersAfterRequiredRector` | espelhar a assinatura da mãe na filha |
+
+**O ternário aninhado de três níveis à mão.** A `ParenthesizeNestedTernaryRector` existe e está entre as regras aceitas,
+mas só parentesa o nível de fora: em `a ? b : c ? d : e ? f : g` ela produz `(a ? b : c ? d : e) ? f : g`, que **continua
+não compilando no 8.5**, e na passada seguinte diz que não há nada a mudar. Medido em 23/11/2026 no
+`src/RecursosHumanos/RH/PontoEletronico/Calculo/Horas/Falta.php`, linha 143. Além disso, o `enumera.py` não tem detector
+de ternário aninhado: um arquivo que só tem esse problema nem entra nos alvos do Rector. Quem acusa é o `php -l` do 8.5,
+no passo 5. A forma fiel ao 7.4 põe todos os parênteses pela esquerda:
+
+```php
+// antes:  $x = a ? b : c ? d : e ? f : g;
+$x = ((a ? b : c) ? d : e) ? f : g;
+```
+
+Confira sempre com `php -l` nos dois runtimes.
 
 **O `each()` à mão.** O e-cidade tem laços que dependem do ponteiro interno **já exaurido** por um laço anterior e que,
 por isso, nunca executam no 7.4. `foreach` faria esses laços rodarem. A forma fiel, que anda no mesmo ponteiro:

@@ -141,6 +141,8 @@ comentários.
 | `residuo.py` | usa só as frentes antigas de enumeração | mede um universo menor que o do `enumera.py` |
 | `enumera.py` | imprime "universo (6 frentes)", mas percorre nove | só o rótulo está errado |
 | `enumera.py` | só segue `include`/`require` de arquivos `.php`; os `.class` e `.inc` do `dbagata/` ficam fora do universo (issue #31) | as classes do Agata não passam pelos passos 5 a 6c |
+| `enumera.py` | não tem detector de ternário aninhado sem parênteses (`a ? b : c ? d : e`) | um arquivo que só tem isso não entra nos alvos do Rector; o `php -l` do 8.5 (passo 5) é quem acusa |
+| `rector-curado.php` | a `ParenthesizeNestedTernaryRector` só parentesa o nível de fora: com três níveis o resultado continua não compilando no 8.5, e a passada seguinte diz "nada a mudar" (medido em 23/11/2026 no `Falta.php` do ponto eletrônico) | o Rector termina sem erro com o arquivo quebrado; corrigir à mão (receituário do guia) |
 | `verifica_lote.py` | no passo 6, o artefato do `empenho.php` (campo `datausu`, `1969-12-31` sem sessão) não é filtrado: o filtro só pega a linha do campo, que existe no 6b | o `empenho.php` aparece como divergente no 6 sem defeito (conferido em 22/11/2026) |
 | `nivel3.py` | o `--candidatas` classifica como "boa" uma tela que grava por RPC | o teste sai `INCONCLUSIVO`; trocar de tela |
 | `nivel3.py` | não reconhece a partição `db_logsacessa_AAAAMM_N` como tabela de log | avisa "escrita em outra tabela" por causa do log de acesso, não de dado de teste |
