@@ -14,7 +14,8 @@ Como faz:
      (src/app/api, via ns_fecho.refs);
   4. descarta o que ja esta pago (NUCLEO, vazio na base-php74, + commits "Porta ...") e, em cada
      arquivo restante, conta as categorias que quebram no PHP 8 (CAT, parse_str de 1
-     argumento, construtor PHP 4, `$this->X == "<literal>"`); quem tem alguma vira alvo.
+     argumento, construtor PHP 4, `$this->X == "<literal>"` sem a guarda `=== 0` na frente);
+     quem tem alguma vira alvo.
 
 Uso (da raiz do repo):
   python3 scratchpad/enumera.py <prefixo>
@@ -22,7 +23,8 @@ Uso (da raiz do repo):
   TELAS=@/caminho/absoluto/lista.txt python3 scratchpad/enumera.py <nome-do-lote>   # uma tela por linha
   SEM_NS=1 ...  desliga a 9a frente (namespace), para medir o que ela acrescenta
 Entradas: os arquivos de ecidade/, o `git log` (commits "Porta ...") e ns_fecho.py.
-Saida: tmp/<prefixo>_universo.txt  e  tmp/<prefixo>_alvos.txt (relativos a ecidade/);
+Saida: tmp/<prefixo>_universo.txt, tmp/<prefixo>_alvos.txt (relativos a ecidade/) e
+  tmp/<prefixo>_categorias.tsv (arquivo, categoria e ocorrencias de cada alvo);
   imprime telas, tamanho do universo, quanto ja esta pago, quantos A ALTERAR e a
   contagem por categoria.
 Usado em: passos 1-3 do guia (docs/migrar-um-modulo.md); tambem chamado pelo
@@ -192,37 +194,47 @@ def parse_str_1arg(b):
 # inventario: so os arquivos NAO pagos; alvo = arquivo com ao menos uma ocorrencia
 alvos, tot = set(), collections.Counter()
 arq = collections.defaultdict(set)
+por = collections.Counter()                            # (arquivo, categoria) -> ocorrencias, para o _categorias.tsv
 for p in universo:
     if p in PAGO: continue
     b = open(p, "rb").read()
     for k, r in CAT.items():
         n = len(r.findall(b))
-        if n: tot[k] += n; arq[k].add(p); alvos.add(p)
+        if n: tot[k] += n; arq[k].add(p); alvos.add(p); por[p, k] += n
     n = parse_str_1arg(b)
-    if n: tot['parse_str 1 arg'] += n; arq['parse_str 1 arg'].add(p); alvos.add(p)
+    if n: tot['parse_str 1 arg'] += n; arq['parse_str 1 arg'].add(p); alvos.add(p); por[p, 'parse_str 1 arg'] += n
     # 8a lacuna: a checagem de __construct precisa ser por CLASSE, nao pelo arquivo.
     # Com a checagem no arquivo inteiro, UMA classe com __construct mascarava todas as
     # outras do mesmo arquivo -- foi assim que 42 classes do NUCLEO (3 em db_stdlib.php,
     # 2 em JSON.php, 34 no jpgraph) sobreviveram a oito portes sem serem renomeadas.
     for nome, _ in classes_php4(b):
-        tot['construtor PHP4'] += 1; arq['construtor PHP4'].add(p); alvos.add(p)
+        tot['construtor PHP4'] += 1; arq['construtor PHP4'].add(p); alvos.add(p); por[p, 'construtor PHP4'] += 1
     # propriedades declaradas com valor inteiro (`var $x = 0;`, `public $x = -1;`)
     props = {m.group(1) for m in re.finditer(rb'(?:var|public)\s+\$(\w+)\s*=\s*-?\d+\s*;', b)}
     # Inclui literal NAO-NUMERICO, nao so "". No 5.6 a string nao-numerica era
     # coagida para 0 e casava com a propriedade inteira; no PHP 8 vira comparacao
     # de string. Variante achada pelo harness de escrita: `== "f"` em
     # db_cadtipoparc_classe.php. Literal numerico ("0", "5") e seguro nos dois.
+    # Ja corrigido nao conta: a guarda `$this->X === 0 || $this->X === 0.0 || $this->X == ""` contem o
+    # proprio `$this->X == ""`. Sem pular a forma guardada, toda classe ja portada voltava a ser alvo
+    # (22/11/2026: no `mer`, 5.914 ocorrencias em 931 arquivos, das quais so 251 em 44 sem guarda).
+    # A guarda fica na mesma linha, antes da comparacao (forma da GuardaComparacaoLiteralRector).
     n = 0
     for x in props:
+        guarda = re.compile(rb'\$this->' + re.escape(x) + rb'\s*===\s*0\b')
         for m in re.finditer(rb'\$this->'+re.escape(x)+rb'\s*==\s*["\']([^"\']{0,3})["\']', b):
             v = m.group(1)
-            if v == b'' or not v.strip().isdigit(): n += 1
-    if n: tot['$this->X == <literal>'] += n; arq['$this->X == <literal>'].add(p); alvos.add(p)
+            if not (v == b'' or not v.strip().isdigit()): continue
+            if guarda.search(b, b.rfind(b"\n", 0, m.start()) + 1, m.start()): continue
+            n += 1
+    if n: tot['$this->X == <literal>'] += n; arq['$this->X == <literal>'].add(p); alvos.add(p); por[p, '$this->X == <literal>'] += n
 
 os.makedirs("tmp", exist_ok=True)
 # com "\n" final: sem ele o `while read` do lint perde o ULTIMO arquivo da lista
 open(f"tmp/{PREF}_universo.txt","w").write("\n".join(universo) + "\n")
 open(f"tmp/{PREF}_alvos.txt","w").write("\n".join(sorted(alvos)) + "\n")
+# os alvos por categoria: arquivo<TAB>categoria<TAB>ocorrencias, um arquivo pode ter varias linhas
+open(f"tmp/{PREF}_categorias.tsv","w").write("".join(f"{a}\t{k}\t{n}\n" for (a, k), n in sorted(por.items())))
 print(f"  telas (prefixo {PREF}[0-9]*_) : {len(telas)}")
 print(f"  universo (6 frentes)        : {len(universo)}   | ja pago: {len([p for p in universo if p in PAGO])}")
 print(f"  {'':28}| A ALTERAR: {len(alvos)}\n")
