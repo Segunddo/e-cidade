@@ -1,0 +1,269 @@
+# Laravel: bloqueador do login, dimensionamento e medições
+
+> Movido do `CLAUDE.md` em 26/10/2026, sem alteração de conteúdo. Índice no `CLAUDE.md`,
+> seção *Onde está cada coisa*.
+
+### BLOQUEADOR DO LOGIN: Laravel 5.4 não roda em PHP 8
+
+Descoberto ao tentar autenticar no ambiente 8.5. O login **não é** código legado do e-cidade —
+ele passa pelo stack do Laravel:
+
+```
+login.php  → POST /v4/oauth/token   (Laravel Passport)
+           → window.open('abrir.php?sAuth=base64(DB_login=..&DB_senha=md5(..))')
+```
+
+No PHP 8.5 esse endpoint devolve **HTTP 500 com corpo vazio**. Os fatais estão todos dentro
+de `vendor/`, não no código da prefeitura:
+
+```
+ReflectionParameter::getClass() is deprecated since 8.0
+   -> vendor/laravel/framework/.../Illuminate/Container/
+Zend\Stdlib\PriorityQueue::count() return type ...
+   -> vendor/zendframework/zend-stdlib/
+```
+
+Detalhe do mecanismo: `config/application.php:27` já exclui `E_DEPRECATED`, mas as rotas
+`/v4/*` rodam pelo **handler do Laravel**, que converte qualquer erro — deprecations
+inclusive — em `ErrorException` fatal. Por isso uma simples deprecation derruba a requisição
+nesse Laravel 8. No Laravel 13, deprecations seguem para o canal de log `deprecations`, sem
+interromper a requisicao; esse comportamento foi conferido no handler da versao 13.43.0.
+
+**Consequência para o projeto:** não existe "logar no :8085" enquanto o Laravel não subir a
+escada de versões (Fase 1/2). Isso **valida a arquitetura strangler fig** em vez de contradizê-la:
+autenticação e rotas `/v4/*` permanecem no runtime 5.6, os módulos migrados vão para o 8.5, e os
+dois compartilham sessão. O proxy reverso deixa de ser desenho e passa a ser requisito.
+
+### DIMENSIONAMENTO DO LARAVEL — o problema é menor do que parece
+
+Medido, e desfaz duas impressões erradas:
+
+| | |
+|---|---|
+| `app/` (código Laravel de verdade) | 1.259 arquivos, **771 usam Laravel (61%)** |
+| `src/` (framework V3 **próprio** deles) | 2.651 arquivos, **apenas 44 usam Laravel (1%)** |
+| Rotas servidas pelo Laravel | **138** (60 web + 78 api) |
+| Núcleo legado que toca Laravel | **1 arquivo**: `libs/db_conecta.php:83` |
+
+**Achado central: `illuminate/database` (o Capsule do Eloquent) JÁ FUNCIONA em PHP 8.5.**
+Verificado conectando e consultando pelo runtime 8.5:
+
+```bash
+docker exec ecidade_php85 php -r '
+require "/var/www/html/vendor/autoload.php";
+$c = new Illuminate\Database\Capsule\Manager;
+$c->addConnection(["driver"=>"pgsql","host"=>"ecidade_database","port"=>5432,
+  "database"=>"ecidade","username"=>"postgres","password"=>"postgres"]);
+$c->setAsGlobal(); $c->bootEloquent();
+print_r($c->getConnection()->select("select count(*) from configuracoes.db_modulos"));'
+```
+
+Isso separa o "migrar o Laravel" em **dois problemas independentes**:
+
+1. **Eloquent/Capsule** — usado pelo núcleo legado (`db_conecta.php`). **Já funciona no 8.5**,
+   não bloqueia nada. É por isso que os módulos migrados funcionam.
+2. **O stack HTTP do Laravel** — serve só as 138 rotas `/v4/*` e o login. É o único que falha
+   em PHP 8 (`ReflectionParameter::getClass()`, `PriorityQueue::count()`).
+
+**Consequência estratégica: o Laravel não bloqueia a migração dos módulos.** Ele só bloqueia
+"desligar o container 5.6", que é o último passo de todos. Por isso está corretamente nas
+Fases 1/2, depois dos módulos — e não antes.
+
+Dois caminhos possíveis quando chegar a hora:
+
+- **Escada de versões** 5.4→5.5→…→12: ~8 saltos, cada um com guia oficial de upgrade. Caminho
+  "correto", mas cada degrau é um projeto, e arrasta a substituição de `silex`, `doctrine/dbal 2`,
+  `symfony ~3.2`, `zend-eventmanager`, `passport 4`, `lcobucci/jwt 3.3.3` e `fractal 0.11`.
+- **Reescrever a camada HTTP**: são 138 rotas e 771 arquivos sobre um Laravel novo. Como o
+  legado **não depende** do stack HTTP (só do Eloquent, que já funciona), pode sair mais barato
+  que oito degraus de upgrade. Exige decisão de escopo, não é trabalho de disciplina.
+
+Pendência para demonstrar o piloto no navegador: **sessão compartilhada entre os dois runtimes**
+(hoje 5.6 grava em `/var/lib/php/sessions` e 8.5 em `/tmp`, isolados). O cookie não é obstáculo —
+cookies de `localhost` são compartilhados entre portas.
+
+### ✅ MEDIÇÃO (14/10/2026): o Laravel pode migrar em PARALELO — com `vendor/` separado
+
+**A dependência:** nenhuma versão do Laravel roda no 5.6 **e** no 8.5 (5.4 é a última do 5.6 e
+não roda no 8; a 12 exige 8.2–8.5, a 13 exige 8.3–8.5). Como os dois containers montam o mesmo
+`vendor/`, atualizar o Laravel ali derruba o 5.6. **A saída é um `vendor/` próprio do 8.5**, montado
+por cima de `/var/www/html/vendor` só no lado 8.5 — o 5.6 não é tocado.
+
+Montagem da medição (nada na árvore versionada mudou além de `cmp.py`):
+`ecidade/tmp/lar12/` (gitignored) com `composer.json` = o atual com `laravel/framework ^12.0` e o
+resto `*`; 4º container `ecidade_lar12` na porta **8087**, mesma imagem do 8.5, com o vendor novo,
+`bootstrap/cache` e `storage/` também sobrepostos (o Laravel 12 escreveria cache no formato dele e
+quebraria os runtimes 5.4).
+
+| Medição | Resultado |
+|---|---|
+| Pacotes que **não resolvem** com Laravel 12 | **4**: `silex/silex`, `proner/phppimaco` (mpdf 7, PHP ≤ 7.3), `dbseller/phinx_postgres` (phinx 0.10 / symfony antigo), `dbseller/sdk-api-pix-bb` (v2.0.0 requer exatamente Guzzle 7.5.0, abaixo de `^7.8.2`) |
+| Resolvidos | 135 pacotes; Laravel 12.70, Passport 13.10, symfony 7/8, guzzle 7, phpspreadsheet 5, dompdf 3, mpdf 8 |
+| **Legado sobre o vendor novo** | **3.294 telas** (Fase A + Educação): **3.271 idênticas ao 5.6**; as 15 divergentes + 8 timeouts são **exatamente** as 23 da linha de base. **Zero regressão.** |
+| Classes de `app/`+`src/` que deixam de carregar | **29 de 3.910** (21 `src/Console`: `execute()` sem `: int` do symfony 7; 8 `app/`: `Handler::report(Exception)`, `BaseDeferredProvider::register()`, traits de Auth removidas, Pimaco) |
+| Boot do Laravel 12 | **não inicializa** — morre no 1º provider (`BaseDeferredProvider`); `/v4/oauth/token` dá 500 |
+| APIs removidas (estático) | 50 `DB::raw` em `app/` (10.0), 10 helpers `str_*`/`array_*` (6.0), 5 `$dates` (10.0), 1 `Passport::routes()` (11.0), 105 usos de PhpOffice (1.8 → 5) |
+| Uso do Silex | só a API REST `api/V1` (20 arquivos); o `use Silex\Application` do `app.php` é import sem uso |
+
+**⚠ O Passport 13 NÃO convive com o 5.6 no banco compartilhado:** a migração dele apaga
+`user_id`, `redirect`, `personal_access_client`, `password_client` de `oauth_clients` (usados
+pelo Passport 4) e passa a exigir segredo com hash. **Usar Passport 12.4** — aceita Laravel 12 e
+só acrescenta colunas opcionais (`secret` nullable, `provider`), o que o Passport 4 tolera. O
+password grant (o login usa) vem desligado no 12: `Passport::enablePasswordGrant()`.
+
+**Conclusão:** o legado não depende do Laravel novo nem é afetado por ele — 3.294 telas iguais.
+O custo está todo na camada HTTP (`app/` + `api/V1`), que hoje nem inicializa. A ordem certa é
+trocar o vendor do 8.5 **cedo** (cada área migrada depois disso não precisa ser reverificada) e
+portar `app/` em paralelo, com o login e o `/v4/*` ficando no 5.6 até o boot funcionar.
+
+**Três falhas do instrumento nesta medição**, mesma família de sempre: o laço de eliminação do
+Composer tratava erro de clone SSH como "resolveu" (corrigido: sucesso = existir `composer.lock`);
+o `xargs` aborta a lista inteira quando um `php` sai com 255 (fatal) — 574 de 3.910 testados até
+o invólucro `exit 0`; e o `cmp.py` não normalizava `localhost:8087`, gerando 129 falsos positivos.
+
+Remover: `docker rm -f ecidade_lar12` e `rm -rf ecidade/tmp/lar12`.
+
+### 📐 LARAVEL SÓ PARA O TRIBUTÁRIO (16/10/2026) — o que a área usa, medido
+
+| | |
+|---|---|
+| Rotas de API do domínio | **74**, em 4 módulos: ISSQN 27, Arrecadação 25, ITBI 14, Cadastro 8 (os outros 12 arquivos de rota estão vazios; `routes/web/tributario/*` também) |
+| Código Laravel do domínio | `app/Domain/Tributario`: **220 arquivos** (Arrecadação 71, ITBI 64, ISSQN 50, Cadastro 35) + `app/Domain/Core` 12 |
+| **Telas legadas que chamam a API por JavaScript** | **14**: TEF (`arr2_operacoespendentestef00*`, `cai3_gerfinanc075`), PIX (`cai3_gerfinanc001`, `cai1_pix002`), parcelamentos vencidos (`arr4_*parc_venc`), alvará por eventos e ordem de serviço (`iss4_*`), Redesim (`iss179_inscricaoredesim`), veículos do ISSQN (2 `forms/`), tipo de débito (`forms/db_frmarretipo002`), parâmetros do número cadastral (`cad4_*`) |
+| Telas legadas que usam classes de `app/` | 18 (precisam continuar compatíveis com as duas versões do Laravel) |
+| Rotas do ITBI | middleware `clientCredential` = **aplicação externa** (ITBI online); nenhuma tela legada as chama |
+| API Silex `api/V1` | 1 rota do Tributário (`TributarioControllerProvider`: `post recibo`) |
+| Pacote travado que o Tributário usa | **`dbseller/sdk-api-pix-bb`** — `app/Domain/Tributario/Arrecadacao/Pix/Bancos/BancoDoBrasil.php` (`Swagger\Client`) |
+
+**Ponto cego que isto revela, válido JÁ:** as 14 telas são servidas pelo 8.5, mas o AJAX delas
+vai a `/v4/api/tributario/*`, que o proxy manda ao **5.6**. A bateria (`curl`, sem JS) nunca
+exercitou essas chamadas. E sem o proxy, abertas no `:8085`, a chamada iria ao Laravel 5.4 sob
+PHP 8.5 e falharia.
+
+**Pontos a verificar antes de estimar:** (1) ~~se o Passport 12 do 8.5 aceita o token emitido
+pelo Passport 4 do 5.6~~ **TESTADO (16/10/2026): aceita** — ver abaixo; (2) PIX e TEF chamam serviços reais de terceiros (banco, adquirente)
+— testes automáticos não podem contatá-los, exigem sandbox ou dublê.
+
+#### ✅ TESTE: o token do Passport 4 (5.6) vale no Passport novo (8.5)
+
+Token **real**, pedido a `POST :8080/v4/oauth/token` com o cliente `9999999` e o usuário
+`dbseller` (HTTP 200; JWT RS256, `aud`=9999999, `sub`=1). Conferido com `ResourceServer` do
+`league/oauth2-server` — a classe que o Passport usa para validar o *bearer* —, com a chave
+`storage/oauth-public.key` e a revogação lida de `oauth_access_tokens` no banco compartilhado:
+
+| `league/oauth2-server` | token real | controle: `sub` adulterado | controle: revogado |
+|---|---|---|---|
+| **8.5.5** (o do Passport 12.4) + `lcobucci/jwt` 5.6.1 | **ACEITO** (usuário 1, cliente 9999999) | RECUSADO | RECUSADO |
+| **9.4.1** (o do Passport 13) | **ACEITO** | RECUSADO | RECUSADO |
+
+5.6 usa `league/oauth2-server` 6.1.1 + `lcobucci/jwt` 3.3.3. **Consequência: o login pode ficar
+no 5.6 e as rotas `/v4/api/tributario/*` irem para o 8.5** — o login vira a última peça.
+
+**O que o teste NÃO cobre:** a camada do Passport acima do `ResourceServer` (o `TokenGuard`
+carrega o cliente de `oauth_clients` e o usuário pelo *provider* de autenticação), que só roda
+com o Laravel 12 inicializando. As colunas de `oauth_access_tokens` são as mesmas nas duas
+versões; `oauth_clients` muda no 13, por isso a escolha do 12.4 continua valendo.
+
+**Armadilha do instrumento:** a primeira execução deu `Invalid key supplied` nas duas versões —
+o container `ecidade_lar12` sobrepõe `storage/` com uma pasta vazia, e a chave não estava lá.
+Era o teste, não a compatibilidade. Verificador versionado: `scratchpad/valida_token.php <vendor/autoload.php> <token> <oauth-public.key>`.
+
+### 🔌 PONTOS DE CONTATO entre as telas legadas e o Laravel (03/11/2026)
+
+Medido no código, depois de sete áreas migradas. O legado **não é** separado do Laravel; ele depende de duas partes dele, de
+naturezas diferentes. O que mantém o sistema funcionando é que **tudo o que depende do stack HTTP fica no 5.6**, e o resto usa
+só o Eloquent, que roda no 8.5.
+
+| # | Ponto de contato | Parte do Laravel | Roda no 8.5? | Onde fica hoje |
+|---|---|---|---|---|
+| 1 | `libs/db_conecta.php` (e `libs/db_conecta_cli.php`): depois do `pg_connect`, sobe `Illuminate\Database\Capsule\Manager` sobre o mesmo banco | Eloquent/Capsule | **sim** | em praticamente toda tela, nos dois runtimes |
+| 2 | `src/` (framework V3 deles): **7 de 2.651** arquivos usam `Illuminate` (4 a facade `Log`, mais `Collection`, `Request`, `Capsule`) | utilitários | conforme a classe | nos dois |
+| 3 | **5 relatórios que sobem o Laravel INTEIRO dentro da página**: `require bootstrap/app.php` → `$app->make(Illuminate\Contracts\Http\Kernel::class)->handle(Illuminate\Http\Request::capture())` — `con2_lrfdivida002_2018`, `con2_lrfgarantias002_2018`, `con2_lrfresumido002_2018`, `con2_opercredito002_2018`, `con2_anexovirgf_002` | **stack HTTP** | **não** (é o que quebra no PHP 8) | **5.6** — conferido pelo proxy: nenhum no `map`, `con` fora do `location` |
+| 4 | **30 arquivos legados que chamam a API `/v4/` por JavaScript** (22 telas da raiz + `forms/db_frmarretipo002`, `forms/db_frmdb_bancos`, 4 scripts em `scripts/`, `templates/template_login_e-cidade.php`, `api/V1/Middleware/Session/MenuAcessadoSessionMiddleware.php`) | stack HTTP (rotas `/v4/*`) | não | a chamada `/v4/...` vai ao **5.6** pelo proxy, mesmo quando a página vem do 8.5 |
+| 5 | **Login**: `login.php` → `POST /v4/oauth/token` (Passport) → `abrir.php?sAuth=…` grava a sessão PHP do legado | stack HTTP + Passport | não | 5.6 |
+| 6 | **Sessão PHP** (volume `ecidade_sessions`) e **banco** compartilhados | — | — | os dois |
+
+**Passagens entre runtimes já em uso** (funcionam porque a sessão é compartilhada):
+- `con2_lrfranexoxviii011.php` (**8.5**) abre `con2_lrfresumido002_2018.php` (**5.6**, ponto 3).
+- Das 22 telas da raiz do ponto 4, **15 já são servidas pelo 8.5** e chamam `/v4/` do 5.6: `cai1_pix002`,
+  `edu1_atividadecomplementarespecial001`, `lic4_integracaocomprasbr`, `pes3_consvantagemconf002`, `pes4_importacaoponto001`,
+  `pes4_jetomcomissao`, `pes4_jetomfuncao`, `pes4_jetomprocessamento`, `pes4_jetomsessao`, `pro4_andamento_processo`,
+  `rec3_concultarconsvantagem001`, `rec3_consvantagem001`, `rec3_consvantagemdata001`, `rec3_gerarconcport001`,
+  `rec3_relatorioconcessao001`. As outras 7 ainda são servidas pelo 5.6: `con4_ecidadeinfo.RPC`, `efd4_efdreinfconfiguracao001`,
+  `pro3_consultaprocesso002`, `pro3_listamovimentacoesprocesso`, `pro3_visualizardocumentos`, `pro4_processo_externo`,
+  `pro4_processo_recadastramento_externo`.
+
+**O que isso significa para desligar o 5.6** (Fases 1/2): além do login e das 138 rotas `/v4/*`, entram na lista de
+dependências do stack HTTP **os 5 relatórios do ponto 3** (sobem o kernel na página; nenhum teste de bateria os acusaria,
+porque ficam no 5.6 e lá saem iguais) e **as 30 chamadas do ponto 4** (precisam da API `/v4/` respondendo no 8.5). O ponto 1
+já está resolvido. Reproduzir:
+
+```bash
+grep -laE 'Illuminate\\Contracts\\Http\\Kernel' ecidade/*.php                                  # ponto 3
+grep -rlaE "['\"/]v4/" --include=*.php --include=*.js ecidade \
+     --exclude-dir=vendor --exclude-dir=app --exclude-dir=tmp --exclude-dir=routes             # ponto 4
+grep -rlaE 'Illuminate' ecidade/src --include=*.php                                            # ponto 2
+```
+
+## Pimaco no PHP 8.5 / Laravel 13
+
+Validacao isolada em `ecidade/tests/sistema/documentos/` (sem alterar o Composer compartilhado
+do Laravel 8): o perfil fixa PHP `^8.5`, Laravel `13.43.0`, `proner/phppimaco` `1.4.5` e
+mPDF `8.2.6`. As dependencias transitivas travadas incluem Bacon QR Code `1.0.3`,
+`khanamiryan/qrcode-detector-decoder` `1` e `picqer/php-barcode-generator` `v0.4.0`. As duas
+primeiras declaram suporte apenas a PHP 5/7, por isso a instalacao usa
+`--ignore-platform-req=php+`, que ignora somente tetos e preserva as verificacoes de versoes
+minimas e extensoes.
+
+O teste usa os builders e `EtiquetasPimacoPDF` reais da aplicacao e confere quatro PDFs: os
+dois modelos de etiqueta (12 itens cada) e QR Codes com/sem rotulo (6 cada), todos em uma
+pagina A4. Para QR, verifica-se a imagem rasterizada e suas dimensoes, pois o texto do rotulo
+fica dentro da imagem e nao e extraivel por `pdftotext`. Executar com:
+
+```bash
+bash ecidade/tests/sistema/documentos/roda-pimaco-85.sh
+```
+
+Para eliminar deprecations no fluxo exercitado, o script aplica patches versionados em
+`ecidade/tests/sistema/documentos/patches/` somente no `vendor/` descartavel do PHP 8.5:
+nullable explicito e propriedades declaradas em Pimaco, conversoes float→int explicitas em
+Picqer/Bacon (preservando o truncamento anterior) e guarda de `imagedestroy()` para PHP < 8,
+onde ainda libera o recurso. Os dois builders tambem declaram o campo `$barcode` gravado por
+`setBarcode()`. O `vendor/` compartilhado nao e alterado.
+
+Resultado no PHP 8.5.12: os quatro PDFs passam sob `E_ALL`, sem avisos/deprecations no fluxo
+testado. Os textos extraidos e todas as imagens dos PDFs, incluindo os codigos de barras e QR,
+foram comparados antes/depois dos patches e ficaram byte a byte identicos; os bytes completos
+dos PDFs variam apenas nos metadados de data. A comparacao local 7.4 x 8.5 nao foi repetida
+(o runtime 7.4 nao esta disponivel), e o perfil nao inicializa a aplicacao completa: a
+integracao no Composer completo do Laravel 13 continua pendente. O Composer 2.7.1 do ambiente
+emite suas proprias deprecations durante `install`; elas nao provem do perfil ou das
+dependencias Pimaco.
+
+## PIX Banco do Brasil no PHP 8.5 / Laravel 13
+
+Validacao isolada em `ecidade/tests/sistema/pix/`: o lock atual da aplicacao usa
+`dbseller/sdk-api-pix-bb` `2.0.0`, commit `7d5d97d`, cuja metadata exige Guzzle exatamente
+`7.5.0`. Laravel `13.43.0` aceita `^7.8.2` ou `^8.0`, portanto o grafo compartilhado nao
+resolve. O perfil de prova usa o mesmo codigo-fonte do SDK com metadata de fork local
+(`2.0.0.1`) que relaxa o requisito para `^7.8.2`; resolveu com Guzzle `7.16.5`, sem mudar o
+Composer/lock/vendor compartilhados.
+
+O patch isolado do SDK explicita parametros nullable e suprime as deprecations de `ArrayAccess`
+nos dois modelos carregados pelo fluxo. Em `BancoDoBrasil`, `utf8_encode()` foi substituido por
+`mb_convert_encoding(..., "UTF-8", "ISO-8859-1")`, preservando a conversao de dados do CGM
+armazenados em LATIN-1 e evitando a deprecation do PHP 8.2+.
+
+`bash ecidade/tests/sistema/pix/roda-pix-85.sh` passou em PHP 8.5.12 sob `E_ALL`: carregou as
+bibliotecas do Laravel 13, autenticacao OAuth e criacao do QR Code com Guzzle `MockHandler`, capturou
+metodo, URL, autenticacao, query e payload JSON e testou a desserializacao da resposta. O
+payload de emissao foi produzido pela classe real `BancoDoBrasil`; o nome com acento foi
+alimentado como bytes ISO-8859-1 e conferido em UTF-8. Nenhuma chamada ao Banco do Brasil,
+credencial real ou banco de dados foi usada.
+
+Isto valida compatibilidade do codigo exercitado, nao certifica o SDK pelo fornecedor nem
+substitui o teste de sandbox. O cliente do codigo de producao ainda configura `verify => false`;
+isso nao foi alterado nesta migracao e precisa de decisao/correcao antes de qualquer chamada
+real. A metadata do fork precisa existir num repositorio versionado aprovado antes de integrar
+a mudanca ao Composer completo; a comparacao Laravel 8/7.4 x 13/8.5 e os fluxos de
+Banrisul/Itaú permanecem fora desta prova.

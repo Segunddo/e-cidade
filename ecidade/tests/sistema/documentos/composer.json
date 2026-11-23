@@ -1,0 +1,24 @@
+{
+    "name": "dbseller/e-cidade-pimaco-php85-test",
+    "description": "Isolated PHP 8.5 and Laravel 13 compatibility test for Pimaco",
+    "require": {
+        "php": "^8.5",
+        "ext-gd": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "laravel/framework": "13.43.0",
+        "mpdf/mpdf": "8.2.6",
+        "proner/phppimaco": "1.4.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "../../../app/"
+        }
+    },
+    "config": {
+        "vendor-dir": "../../../../runtime-85/pimaco-vendor",
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

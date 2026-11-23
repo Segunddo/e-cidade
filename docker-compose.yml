@@ -1,0 +1,42 @@
+services:
+  ecidade_php74:
+    image: ecidade-php74:latest
+    build:
+      context: ./docker/php74-apache
+    container_name: ecidade_php74
+    ports:
+     - "8080:80"
+    environment:
+      DB_HOST: ecidade_database
+      DB_PORT: 5432
+      DB_DATABASE: ecidade
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+    volumes:
+        - ./ecidade:/var/www/html/
+    networks:
+      - ecidade
+
+  database:
+    build:
+      context: ./docker/database
+    container_name: ecidade_database
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_HOST_AUTH_METHOD: "trust"
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_INITDB_ARGS: '--encoding=LATIN1 --lc-collate=pt_BR.ISO-8859-1 --lc-ctype=pt_BR.ISO-8859-1 --lc-messages=pt_BR.ISO-8859-1 --lc-monetary=pt_BR.ISO-8859-1 --lc-numeric=pt_BR.ISO-8859-1 --lc-time=pt_BR.ISO-8859-1'
+    # Descomentar as linhas abaixo para ter persistencia do banco de dados
+    # volumes:
+    #   - './docker/database/pgsql:/var/lib/postgresql/data'
+    networks:
+      - ecidade
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  ecidade:
+    driver: bridge

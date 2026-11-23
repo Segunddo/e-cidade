@@ -1,0 +1,29 @@
+--- a/src/BarcodeGeneratorPNG.php
++++ b/src/BarcodeGeneratorPNG.php
+@@ -28,7 +28,7 @@ class BarcodeGeneratorPNG extends BarcodeGenerator
+         if (function_exists('imagecreate')) {
+             // GD library
+             $imagick = false;
+-            $png = imagecreate($width, $height);
++            $png = imagecreate((int) $width, (int) $height);
+             $colorBackground = imagecolorallocate($png, 255, 255, 255);
+             imagecolortransparent($png, $colorBackground);
+             $colorForeground = imagecolorallocate($png, $color[0], $color[1], $color[2]);
+@@ -55,6 +55,6 @@ class BarcodeGeneratorPNG extends BarcodeGenerator
+                     $imageMagickObject->rectangle($positionHorizontal, $y, ($positionHorizontal + $bw), ($y + $bh));
+                 } else {
+-                    imagefilledrectangle($png, $positionHorizontal, $y, ($positionHorizontal + $bw) - 1, ($y + $bh),
++                    imagefilledrectangle($png, (int) $positionHorizontal, (int) $y, (int) (($positionHorizontal + $bw) - 1), (int) ($y + $bh),
+                         $colorForeground);
+                 }
+             }
+@@ -67,6 +67,8 @@ class BarcodeGeneratorPNG extends BarcodeGenerator
+         } else {
+             imagepng($png);
+-            imagedestroy($png);
++            if (PHP_VERSION_ID < 80000) {
++                imagedestroy($png);
++            }
+         }
+         $image = ob_get_clean();
+ 

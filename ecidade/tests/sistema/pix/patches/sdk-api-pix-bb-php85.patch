@@ -1,0 +1,48 @@
+--- a/lib/Api/Oauth2Api.php
++++ b/lib/Api/Oauth2Api.php
+@@ -41,1 +41,1 @@
+-    public function __construct(ClientInterface $client = null, Configuration $config = null)
++    public function __construct(?ClientInterface $client = null, ?Configuration $config = null)
+--- a/lib/Api/QrCodesApi.php
++++ b/lib/Api/QrCodesApi.php
+@@ -72,3 +72,3 @@
+-        ClientInterface $client = null,
+-        Configuration $config = null,
+-        HeaderSelector $selector = null
++        ?ClientInterface $client = null,
++        ?Configuration $config = null,
++        ?HeaderSelector $selector = null
+--- a/lib/Model/ArrecadacaoqrcodesBody.php
++++ b/lib/Model/ArrecadacaoqrcodesBody.php
+@@ -240,1 +240,1 @@
+-    public function __construct(array $data = null)
++    public function __construct(?array $data = null)
+@@ -664,1 +664,2 @@
++    #[\ReturnTypeWillChange]
+     public function offsetExists($offset)
+@@ -676,1 +677,2 @@
++    #[\ReturnTypeWillChange]
+     public function offsetGet($offset)
+@@ -689,1 +691,2 @@
++    #[\ReturnTypeWillChange]
+     public function offsetSet($offset, $value)
+@@ -705,1 +708,2 @@
++    #[\ReturnTypeWillChange]
+     public function offsetUnset($offset)
+--- a/lib/Model/InlineResponse201.php
++++ b/lib/Model/InlineResponse201.php
+@@ -195,1 +195,1 @@
+-    public function __construct(array $data = null)
++    public function __construct(?array $data = null)
+@@ -397,1 +397,2 @@
++    #[\ReturnTypeWillChange]
+     public function offsetExists($offset)
+@@ -409,1 +410,2 @@
++    #[\ReturnTypeWillChange]
+     public function offsetGet($offset)
+@@ -422,1 +424,2 @@
++    #[\ReturnTypeWillChange]
+     public function offsetSet($offset, $value)
+@@ -438,1 +441,2 @@
++    #[\ReturnTypeWillChange]
+     public function offsetUnset($offset)
